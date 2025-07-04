@@ -5,7 +5,7 @@ from src.a09_pack_logic.test._util.a09_str import (
     event_int_str,
     face_name_str,
 )
-from src.a18_etl_toolbox.tran_path import (
+from src.a18_etl_toolbox.a18_path import (
     create_stance0001_path,
     create_stances_believer_dir_path,
     create_stances_dir_path,

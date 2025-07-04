@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     BELIEF_AGENDA_FULL_LISTING_FILENAME,
     BELIEF_FILENAME,
     BELIEF_OTE1_AGG_CSV_FILENAME,
@@ -12,7 +12,6 @@ from src.a12_hub_toolbox.hub_path import (
     CELLNODE_FILENAME,
     EVENT_ALL_PACK_FILENAME,
     EVENT_EXPRESSED_PACK_FILENAME,
-    belief_agenda_list_report_path,
     create_atoms_dir_path,
     create_belief_believers_dir_path,
     create_belief_dir_path,
@@ -103,23 +102,6 @@ def test_create_belief_ote1_json_path_ReturnsObj():
     a23_path = create_path(beliefs_dir, a23_str)
     expected_a23_te_path = create_path(a23_path, BELIEF_OTE1_AGG_JSON_FILENAME)
     assert gen_a23_te_csv_path == expected_a23_te_path
-
-
-def test_belief_agenda_list_report_path_ReturnsObj():
-    # ESTABLISH
-    belief_mstr_dir = get_module_temp_dir()
-    a23_str = "amy23"
-
-    # WHEN
-    gen_a23_full_report_path = belief_agenda_list_report_path(belief_mstr_dir, a23_str)
-
-    # THEN
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    a23_path = create_path(beliefs_dir, a23_str)
-    expected_a23_agenda_full_path = create_path(
-        a23_path, BELIEF_AGENDA_FULL_LISTING_FILENAME
-    )
-    assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
 def test_create_belief_believers_dir_path_ReturnsObj():

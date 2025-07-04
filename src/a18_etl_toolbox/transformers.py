@@ -34,7 +34,7 @@ from src.a08_believer_atom_logic.atom_config import get_believer_dimens
 from src.a09_pack_logic.delta import get_minimal_believerdelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a11_bud_logic.bud import TranBook
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,

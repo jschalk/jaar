@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.a17_idea_logic.test._util.a17_str import world_name_str
-from src.a21_lobby_logic.lobby_path import (
+from src.a21_lobby_logic.a21_path import (
     create_belief_mstr_dir_path,
     create_lobby_dir_path,
     create_world_dir_path,

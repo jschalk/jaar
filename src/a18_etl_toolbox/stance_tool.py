@@ -13,7 +13,7 @@ from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
-from src.a18_etl_toolbox.tran_path import STANCE0001_FILENAME, create_stance0001_path
+from src.a18_etl_toolbox.a18_path import STANCE0001_FILENAME, create_stance0001_path
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 
 

@@ -18,6 +18,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     unknown_str_str,
 )
 from src.a17_idea_logic.idea_csv_tool import create_init_stance_idea_csv_strs
+from src.a18_etl_toolbox.a18_path import create_stance0001_path
 from src.a18_etl_toolbox.stance_tool import (
     add_pidgin_rows_to_stance_csv_strs,
     add_to_br00042_csv,
@@ -27,7 +28,6 @@ from src.a18_etl_toolbox.stance_tool import (
     collect_stance_csv_strs,
     create_stance0001_file,
 )
-from src.a18_etl_toolbox.tran_path import create_stance0001_path
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_voice_tables,

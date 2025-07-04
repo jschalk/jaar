@@ -9,7 +9,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     person_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a12_hub_toolbox.hub_path import create_believer_event_dir_path
+from src.a12_hub_toolbox.a12_path import create_believer_event_dir_path
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

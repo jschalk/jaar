@@ -221,7 +221,6 @@ def validate_labelterm(
         raise ValidateLabelTermException(
             f"'{x_labelterm}' needs to be a LabelTerm. Cannot contain knot: '{x_knot}'"
         )
-
     return x_labelterm
 
 

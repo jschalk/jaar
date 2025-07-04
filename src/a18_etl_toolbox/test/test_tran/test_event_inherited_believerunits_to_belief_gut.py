@@ -4,7 +4,7 @@ from src.a06_believer_logic.believer import (
     believerunit_shop,
     get_from_json as believerunit_get_from_json,
 )
-from src.a12_hub_toolbox.hub_path import create_believer_event_dir_path, create_gut_path
+from src.a12_hub_toolbox.a12_path import create_believer_event_dir_path, create_gut_path
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

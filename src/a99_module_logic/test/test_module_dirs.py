@@ -20,6 +20,7 @@ from src.a99_module_logic.module_eval import (
     get_module_descs,
     get_module_str_functions,
     get_python_files_with_flag,
+    get_top_level_functions,
 )
 
 
@@ -390,12 +391,23 @@ def test_Modules_path_FunctionStructureAndFormat():
     # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}
+    modules_path_funcs = {}
+    filtered_modules_path_funcs = {}
+    filterout_path_funcs = {
+        "create_path",
+        "create_directory_path",
+        "ropeterm_valid_dir_path",
+    }
     for module_desc, module_dir in get_module_descs().items():
         filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})
+        filtered_path_funcs = set()
+        path_func_set = set()
+        modules_path_funcs[module_desc] = path_func_set
+        filtered_modules_path_funcs[module_desc] = filtered_path_funcs
         for filenames in filenames_set:
             file_dir = create_path(module_dir, filenames[0])
             file_path = create_path(file_dir, filenames[1])
-            file_functions = get_function_names_from_file(file_path)
+            file_functions = get_top_level_functions(file_path)
             for function_name in file_functions:
                 x_count += 1
                 if str(function_name).endswith("_path"):
@@ -403,16 +415,33 @@ def test_Modules_path_FunctionStructureAndFormat():
                     #     f"Function #{x_count}: Path function {function_name} in {file_path}"
                     # )
                     path_functions[function_name] = file_path
+                    path_func_set.add(function_name)
+                    if (
+                        not str(function_name).endswith("config_path")
+                        and not function_name in filterout_path_funcs
+                    ):
+                        filtered_path_funcs.add(function_name)
 
     print(f"Total path functions found: {len(path_functions)}")
     for function_name, file_path in path_functions.items():
         func_docstring = get_docstring(file_path, function_name)
-        if not func_docstring:
-            print(f"docstring for {function_name} is None")
-        else:
-            print(
-                f"docstring for {function_name}: \t{func_docstring.replace("\n", "")}"
-            )
-        assert func_docstring is not None
+        # if not func_docstring:
+        #     print(f"docstring for {function_name} is None")
+        # else:
+        #     print(
+        #         f"docstring for {function_name}: \t{func_docstring.replace("\n", "")}"
+        #     )
+        assert func_docstring is not None, function_name
 
-    print(f"Path functions: {path_functions.keys()=}")
+    # print(f"Path functions: {path_functions.keys()=}")
+    # for module_desc, path_funcs in modules_path_funcs.items():
+    #     print(f"{module_desc=} {path_funcs=}")
+
+    for module_desc, module_dir in get_module_descs().items():
+        if len(filtered_modules_path_funcs.get(module_desc)) > 0:
+            path_func_filename = f"a{module_desc[1:3]}_path.py"
+            path_func_library = create_path(module_dir, path_func_filename)
+            path_funcs = filtered_modules_path_funcs.get(module_desc)
+            for path_func in path_funcs:
+                print(f"{path_func_library} {path_func=}")
+            assert os_path_exists(path_func_library)

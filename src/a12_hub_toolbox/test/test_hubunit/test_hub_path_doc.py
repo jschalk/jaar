@@ -6,8 +6,7 @@ from src.a09_pack_logic.test._util.a09_str import (
     bud_time_str,
     event_int_str,
 )
-from src.a12_hub_toolbox.hub_path import (
-    belief_agenda_list_report_path,
+from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
     create_belief_believers_dir_path,
     create_belief_dir_path,
@@ -72,16 +71,6 @@ def test_create_belief_ote1_json_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_belief_ote1_json_path) == doc_str
-
-
-def test_belief_agenda_list_report_path_HasDocString():
-    # ESTABLISH
-    doc_str = belief_agenda_list_report_path(
-        "belief_mstr_dir", belief_label=belief_label_str()
-    )
-    doc_str = f"Returns path: {doc_str}"
-    # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(belief_agenda_list_report_path) == doc_str
 
 
 def test_create_belief_believers_dir_path_HasDocString():

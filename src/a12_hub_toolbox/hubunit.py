@@ -53,13 +53,13 @@ from src.a09_pack_logic.pack import (
     init_pack_id,
     packunit_shop,
 )
-from src.a12_hub_toolbox.basis_believers import get_default_job
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
     create_keeps_dir_path,
     create_packs_dir_path,
     treasury_filename,
 )
+from src.a12_hub_toolbox.basis_believers import get_default_job
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     open_gut_file,
@@ -342,7 +342,7 @@ class HubUnit:
             raise _keep_ropeMissingException(
                 f"HubUnit '{self.believer_name}' cannot save to keep_path because it does not have keep_rope."
             )
-        return get_keep_rope_path(self, self.keep_rope)
+        return create_keep_rope_path(self, self.keep_rope)
 
     def create_keep_path_if_missing(self):
         set_dir(self.keep_path())
@@ -518,7 +518,7 @@ def hubunit_shop(
     return x_hubunit
 
 
-def get_keep_rope_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
+def create_keep_rope_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
     """Returns path: belief_label/planroot/keep_rope_dirs."""
     keep_root = "planroot"
     x_rope = rebuild_rope(x_rope, x_hubunit.belief_label, keep_root)

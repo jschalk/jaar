@@ -7,7 +7,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_five_config,
 )
 from src.a07_timeline_logic.timeline import timelineunit_shop
-from src.a12_hub_toolbox.hub_path import create_belief_json_path
+from src.a12_hub_toolbox.a12_path import create_belief_json_path
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a15_belief_logic.belief import beliefunit_shop
 from src.a18_etl_toolbox.test._util.a18_env import (

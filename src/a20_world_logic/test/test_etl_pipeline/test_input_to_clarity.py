@@ -15,7 +15,7 @@ from src.a11_bud_logic.test._util.a11_str import (
     quota_str,
     tran_time_str,
 )
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
     create_belief_ote1_csv_path,
     create_bud_person_mandate_ledger_path as bud_mandate,

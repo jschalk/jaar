@@ -46,15 +46,6 @@ def create_belief_ote1_json_path(belief_mstr_dir: str, belief_label: LabelTerm):
     return create_path(belief_path, "belief_ote1_agg.json")
 
 
-def belief_agenda_list_report_path(
-    belief_mstr_dir: str, belief_label: LabelTerm
-) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\agenda_full_listing.csv"""
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    belief_path = create_path(beliefs_dir, belief_label)
-    return create_path(belief_path, "agenda_full_listing.csv")
-
-
 def create_belief_believers_dir_path(
     belief_mstr_dir: str, belief_label: LabelTerm
 ) -> str:

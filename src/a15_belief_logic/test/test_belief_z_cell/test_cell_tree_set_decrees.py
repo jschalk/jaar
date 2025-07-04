@@ -1,6 +1,6 @@
 from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
 from src.a11_bud_logic.cell import cellunit_shop
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_believerevent_path,
     create_cell_dir_path as cell_dir,
 )

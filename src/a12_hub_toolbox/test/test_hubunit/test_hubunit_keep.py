@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
-from src.a12_hub_toolbox.hub_path import treasury_filename
+from src.a12_hub_toolbox.a12_path import treasury_filename
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (

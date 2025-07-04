@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a21_lobby_logic.lobby_path import (
+from src.a21_lobby_logic.a21_path import (
     LobbyID,
     create_belief_mstr_dir_path,
     create_lobby_dir_path,
