@@ -219,36 +219,72 @@ VALUES
         assert gen_csv == expected_csv
 
 
-# def test_add_to_br00044_csv_ReturnsObj():
-#     # ESTABLISH
+def test_add_to_br00045_csv_ReturnsObj():
+    # ESTABLISH database with pidgin data
+    # - [`br00045`](ideas/br00045.md): event_int, face_name, otx_rope, inx_rope, otx_knot, inx_knot, unknown_str
+    bob_str = "Bob"
+    sue_str = "Sue"
+    bob_otx_knot = ";"
+    bob_inx_knot = "/"
+    sue_otx_knot = "?"
+    sue_inx_knot = "."
+    sue_clean_otx = "?casa?clean?"
+    sue_clean_inx = ".casa.limpia."
+    bob_clean_otx = ";casa;very clean;"
+    bob_clean_inx = "/casa/very limpia/"
+    sue_unknown_str = "Unknown3"
+    bob_unknown_str = "UNKNOWN4"
+    event1 = 1
+    event7 = 7
 
-#     csv_delimiter = ","
-#     x_ideas = create_init_stance_idea_csv_strs()
-#     bob_str = "Bob"
-#     event7 = 7
-#     bob_otx_knot = ";"
-#     bob_inx_knot = "/"
-#     bob_unknown_str = "UNKNOWN"
-#     bob7_pidginunit = pidginunit_shop(
-#         bob_str, event7, bob_otx_knot, bob_inx_knot, bob_unknown_str
-#     )
-#     clean_otx = "clean"
-#     clean_inx = "limpia"
-#     bob7_pidginunit.set_otx2inx("LabelTerm", clean_otx, clean_inx)
-#     csv_header = x_ideas.get("br00044")
-#     print(f"{csv_header=}")
+    # Create database with manually entered pidgin data in the validated tables
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        pidrope_dimen = pidgin_rope_str()
+        pidrope_s_vld_tablename = prime_tbl(pidrope_dimen, "s", "vld")
+        insert_pidrope_sqlstr = f"""
+INSERT INTO {pidrope_s_vld_tablename}
+({event_int_str()}, {face_name_str()}, {otx_rope_str()}, {inx_rope_str()})
+VALUES
+  ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
+, ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
+;
+"""
+        cursor.execute(insert_pidrope_sqlstr)
 
-#     # WHEN
-#     x_csv = add_to_br00044_csv(csv_header, bob7_pidginunit, csv_delimiter)
+        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
+        insert_pidcore_sqlstr = f"""
+INSERT INTO {pidcore_s_vld_tablename}
+({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+VALUES
+  ('{sue_str}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
+, ('{bob_str}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')
+;
+"""
+        cursor.execute(insert_pidcore_sqlstr)
 
-#     # THEN
-#     bob_row = f"{bob_str},{event7},{clean_otx},{bob_otx_knot},{clean_inx},{bob_inx_knot},{bob_unknown_str}\n"
-#     assert x_csv == f"{csv_header}{bob_row}"
+        csv_delimiter = ","
+        x_ideas = create_init_stance_idea_csv_strs()
+        header_only_csv = x_ideas.get("br00045")
+        print(f"{header_only_csv=}")
+        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_rope_str()},{inx_rope_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
+        assert header_only_csv == expected_header_only_csv
+
+        # WHEN
+        gen_csv = add_to_br00045_csv(header_only_csv, cursor, csv_delimiter)
+
+        # THEN
+        sue_row = f",{sue_str},{sue_clean_otx},{sue_clean_inx},{sue_otx_knot},{sue_inx_knot},{sue_unknown_str}\n"
+        bob_row = f",{bob_str},{bob_clean_otx},{bob_clean_inx},{bob_otx_knot},{bob_inx_knot},{bob_unknown_str}\n"
+        expected_csv = f"{header_only_csv}{bob_row}{sue_row}"
+        print(f"     {gen_csv=}")
+        print(f"{expected_csv=}")
+        assert gen_csv == expected_csv
 
 
 # def test_add_to_br00045_csv_ReturnsObj():
 #     # ESTABLISH
-#     # - [`br00045`](ideas/br00045.md): event_int, face_name, otx_rope, inx_rope, otx_knot, inx_knot, unknown_str
 
 #     csv_delimiter = ","
 #     x_ideas = create_init_stance_idea_csv_strs()
