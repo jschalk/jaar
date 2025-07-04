@@ -283,7 +283,6 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
         "clean_str",
         "clear_fund_give_take",
         "clear_status",
-        "config_file_dir",
         "contains_knot",
         "cook_rope",
         "cook_str",

@@ -135,11 +135,9 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     unknown_str_str,
 )
 from src.a17_idea_logic.idea_config import (
-    config_file_dir,
     get_allowed_curds,
     get_default_sorted_list,
     get_idea_config_dict,
-    get_idea_config_filename,
     get_idea_dimen_ref,
     get_idea_elements_sort_order,
     get_idea_format_filename,
@@ -148,6 +146,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_sqlite_types,
     get_idearef_from_file,
     get_quick_ideas_column_ref,
+    idea_config_path,
     idea_format_00013_planunit_v0_0_0,
     idea_format_00020_believer_person_membership_v0_0_0,
     idea_format_00021_believer_personunit_v0_0_0,
@@ -515,14 +514,10 @@ def test_get_allowed_curds_ReturnsObj():
     }
 
 
-def test_get_idea_config_filename_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_idea_config_filename() == "idea_config.json"
-
-
-def test_config_file_dir_ReturnsObj_Idea() -> str:
+def test_idea_config_path_ReturnsObj_Idea() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    assert config_file_dir() == create_path(src_dir, "a17_idea_logic")
+    module_dir = create_path(src_dir, "a17_idea_logic")
+    assert idea_config_path() == create_path(module_dir, "idea_config.json")
 
 
 def test_get_idea_config_dict_ReturnsObj():
@@ -835,7 +830,7 @@ def set_idea_config_json(dimen: str, build_order: int):
     dimen_dict = x_idea_config.get(dimen)
     dimen_dict[build_order_str()] = build_order
     x_idea_config[dimen] = dimen_dict
-    save_json(config_file_dir(), get_idea_config_filename(), x_idea_config)
+    save_json(idea_config_path(), None, x_idea_config)
 
 
 def test_get_idea_config_dict_ReturnsObj_build_order():
