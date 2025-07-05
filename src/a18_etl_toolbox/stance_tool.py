@@ -144,7 +144,7 @@ ORDER BY
 
 def add_pidgin_rows_to_stance_csv_strs(
     cursor: sqlite3_Cursor, belief_csv_strs: dict[str, str], csv_delimiter: str
-) -> str:
+):
     br00042_csv = belief_csv_strs.get("br00042")
     br00043_csv = belief_csv_strs.get("br00043")
     br00044_csv = belief_csv_strs.get("br00044")
