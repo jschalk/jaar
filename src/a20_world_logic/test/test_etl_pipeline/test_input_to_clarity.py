@@ -18,7 +18,6 @@ from src.a11_bud_logic.test._util.a11_str import (
 from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
     create_belief_ote1_csv_path,
-    create_bud_person_mandate_ledger_path as bud_mandate,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
     create_gut_path,
@@ -26,6 +25,9 @@ from src.a12_hub_toolbox.a12_path import (
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file
 from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str
+from src.a15_belief_logic.a15_path import (
+    create_bud_person_mandate_ledger_path as bud_mandate,
+)
 from src.a15_belief_logic.test._util.a15_str import (
     cumulative_minute_str,
     hour_label_str,
