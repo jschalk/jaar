@@ -16,11 +16,10 @@ from src.a17_idea_logic.idea_csv_tool import (
     add_believerunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
-from src.a17_idea_logic.idea_db_tool import (  # add_pidginunits_to_stance_csv_strs,
-    get_sheet_names,
-)
+from src.a17_idea_logic.idea_db_tool import get_sheet_names
 from src.a18_etl_toolbox.a18_path import create_stance0001_path
 from src.a18_etl_toolbox.stance_tool import (
+    add_pidgin_rows_to_stance_csv_strs,
     collect_stance_csv_strs,
     create_stance0001_file,
 )
@@ -175,7 +174,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
 #     print(f"{csv_strs.keys()=}")
 
 #     # WHEN
-#     csv_strs = add_pidginunits_to_stance_csv_strs(csv_strs, db_path)
+#     csv_strs = add_pidgin_rows_to_stance_csv_strs(csv_strs, db_path)
 
 #     # THEN csv_strs have added rows
 #     expected_stance_csv_strs = create_init_stance_idea_csv_strs()

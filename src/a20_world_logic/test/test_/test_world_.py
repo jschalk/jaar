@@ -216,4 +216,5 @@ def test_WorldUnit_get_db_path_ReturnsObj(env_dir_setup_cleanup):
     # WHEN
     a23_db_path = a23_world.get_db_path()
 
+    # THEN
     assert a23_db_path == create_path(a23_world._world_dir, "world.db")

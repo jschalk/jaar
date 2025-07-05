@@ -13,7 +13,7 @@ from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
-from src.a18_etl_toolbox.a18_path import STANCE0001_FILENAME, create_stance0001_path
+from src.a18_etl_toolbox.a18_path import create_stance0001_path
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 
 
@@ -189,7 +189,7 @@ def create_stance0001_file(
         csv_str = replace_csv_column_from_string(csv_str, "face_name", world_name)
         csv_str = delete_column_from_csv_string(csv_str, "event_int")
         with_face_name_csvs[csv_key] = csv_str
-    csv_dict_to_excel(with_face_name_csvs, output_dir, STANCE0001_FILENAME)
+    csv_dict_to_excel(with_face_name_csvs, output_dir, "stance0001.xlsx")
 
     # Hard to test function to prettify the excel file
     if prettify_excel_bool:

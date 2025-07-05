@@ -10,6 +10,7 @@ from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
 from src.a11_bud_logic.bud import TimeLinePoint
 from src.a15_belief_logic.belief import BeliefUnit
 from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
+from src.a18_etl_toolbox.a18_path import create_world_db_path
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     add_belief_timeline_to_guts,
@@ -70,8 +71,7 @@ class WorldUnit:
 
     def get_db_path(self) -> str:
         "Returns path: world_dir/world.db"
-
-        return create_path(self._world_dir, "world.db")
+        return create_world_db_path(self._world_dir)
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
         self._events[event_int] = face_name
