@@ -17,14 +17,12 @@ from src.a11_bud_logic.test._util.a11_str import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
-    create_belief_ote1_csv_path,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
     create_gut_path,
     create_job_path,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file
-from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str
 from src.a15_belief_logic.a15_path import (
     create_bud_person_mandate_ledger_path as bud_mandate,
 )
@@ -34,8 +32,10 @@ from src.a15_belief_logic.test._util.a15_str import (
 )
 from src.a16_pidgin_logic.test._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.a18_etl_toolbox.a18_path import create_belief_ote1_csv_path
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_event_time_agg_str,
+    belief_ote1_agg_str,
     belief_person_nets_str,
     events_brick_agg_str,
     events_brick_valid_str,

@@ -12,10 +12,10 @@ from src.a11_bud_logic.test._util.a11_str import (
     celldepth_str,
     quota_str,
 )
-from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str
 from src.a16_pidgin_logic.test._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.test._util.a18_str import (
+    belief_ote1_agg_str,
     events_brick_agg_str,
     events_brick_valid_str,
 )

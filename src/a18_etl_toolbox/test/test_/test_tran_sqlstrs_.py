@@ -26,7 +26,7 @@ from src.a11_bud_logic.test._util.a11_str import (
     bud_time_str,
     tran_time_str,
 )
-from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str, job_str
+from src.a12_hub_toolbox.test._util.a12_str import job_str
 from src.a15_belief_logic.test._util.a15_str import (
     belief_budunit_str,
     belief_paybook_str,
@@ -55,6 +55,7 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_event_time_agg_str,
+    belief_ote1_agg_str,
     belief_person_nets_str,
     believer_net_amount_str,
 )

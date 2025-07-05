@@ -36,8 +36,6 @@ from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_s
 from src.a11_bud_logic.bud import TranBook
 from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
-    create_belief_ote1_csv_path,
-    create_belief_ote1_json_path,
     create_believer_event_dir_path,
     create_believerevent_path,
     create_event_all_pack_path,
@@ -81,6 +79,10 @@ from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     get_default_sorted_list,
     split_excel_into_dirs,
+)
+from src.a18_etl_toolbox.a18_path import (
+    create_belief_ote1_csv_path,
+    create_belief_ote1_json_path,
 )
 from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
 from src.a18_etl_toolbox.db_obj_believer_tool import insert_job_obj

@@ -9,7 +9,6 @@ from src.a06_believer_logic.believer import believerunit_shop
 from src.a12_hub_toolbox.a12_path import (
     create_belief_believers_dir_path,
     create_belief_json_path,
-    create_belief_ote1_json_path,
     create_believerevent_path,
 )
 from src.a15_belief_logic.a15_path import (
@@ -19,6 +18,7 @@ from src.a15_belief_logic.belief import (
     beliefunit_shop,
     get_from_dict as beliefunit_get_from_dict,
 )
+from src.a18_etl_toolbox.a18_path import create_belief_ote1_json_path
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,

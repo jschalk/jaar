@@ -9,8 +9,6 @@ from src.a09_pack_logic.test._util.a09_str import (
 )
 from src.a12_hub_toolbox.a12_path import (
     BELIEF_FILENAME,
-    BELIEF_OTE1_AGG_CSV_FILENAME,
-    BELIEF_OTE1_AGG_JSON_FILENAME,
     BELIEVEREVENT_FILENAME,
     BELIEVERPOINT_FILENAME,
     BUDUNIT_FILENAME,
@@ -22,8 +20,6 @@ from src.a12_hub_toolbox.a12_path import (
     create_belief_believers_dir_path,
     create_belief_dir_path,
     create_belief_json_path,
-    create_belief_ote1_csv_path,
-    create_belief_ote1_json_path,
     create_believer_dir_path,
     create_believer_event_dir_path,
     create_believerevent_path,
@@ -77,36 +73,6 @@ def test_create_belief_json_path_ReturnsObj():
     a23_path = create_path(beliefs_dir, a23_str)
     expected_a23_json_path = create_path(a23_path, BELIEF_FILENAME)
     assert gen_a23_json_path == expected_a23_json_path
-
-
-def test_create_belief_ote1_csv_path_ReturnsObj():
-    # ESTABLISH
-    x_belief_mstr_dir = get_module_temp_dir()
-    a23_str = "amy23"
-
-    # WHEN
-    gen_a23_te_csv_path = create_belief_ote1_csv_path(x_belief_mstr_dir, a23_str)
-
-    # THEN
-    beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
-    a23_path = create_path(beliefs_dir, a23_str)
-    expected_a23_te_path = create_path(a23_path, BELIEF_OTE1_AGG_CSV_FILENAME)
-    assert gen_a23_te_csv_path == expected_a23_te_path
-
-
-def test_create_belief_ote1_json_path_ReturnsObj():
-    # ESTABLISH
-    x_belief_mstr_dir = get_module_temp_dir()
-    a23_str = "amy23"
-
-    # WHEN
-    gen_a23_te_csv_path = create_belief_ote1_json_path(x_belief_mstr_dir, a23_str)
-
-    # THEN
-    beliefs_dir = create_path(x_belief_mstr_dir, "beliefs")
-    a23_path = create_path(beliefs_dir, a23_str)
-    expected_a23_te_path = create_path(a23_path, BELIEF_OTE1_AGG_JSON_FILENAME)
-    assert gen_a23_te_csv_path == expected_a23_te_path
 
 
 def test_create_belief_believers_dir_path_ReturnsObj():
@@ -567,26 +533,6 @@ def test_create_belief_json_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_belief_json_path) == doc_str
-
-
-def test_create_belief_ote1_csv_path_HasDocString():
-    # ESTABLISH
-    doc_str = create_belief_ote1_csv_path(
-        "belief_mstr_dir", belief_label=belief_label_str()
-    )
-    doc_str = f"Returns path: {doc_str}"
-    # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_belief_ote1_csv_path) == doc_str
-
-
-def test_create_belief_ote1_json_path_HasDocString():
-    # ESTABLISH
-    doc_str = create_belief_ote1_json_path(
-        "belief_mstr_dir", belief_label=belief_label_str()
-    )
-    doc_str = f"Returns path: {doc_str}"
-    # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_belief_ote1_json_path) == doc_str
 
 
 def test_create_belief_believers_dir_path_HasDocString():
