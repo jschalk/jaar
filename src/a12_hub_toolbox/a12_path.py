@@ -4,7 +4,6 @@ from src.a01_term_logic.term import BelieverName, LabelTerm
 BELIEF_FILENAME = "belief.json"
 BELIEF_OTE1_AGG_CSV_FILENAME = "belief_ote1_agg.csv"
 BELIEF_OTE1_AGG_JSON_FILENAME = "belief_ote1_agg.json"
-BELIEF_AGENDA_FULL_LISTING_FILENAME = "agenda_full_listing.csv"
 BUDUNIT_FILENAME = "budunit.json"
 BUD_MANDATE_FILENAME = "bud_person_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"

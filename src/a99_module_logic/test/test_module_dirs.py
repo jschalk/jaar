@@ -452,18 +452,38 @@ def test_Modules_path_FunctionStructureAndFormat():
             assert os_path_exists(pytest_path_func_path)
             test_path_func_names = set(get_top_level_functions(pytest_path_func_path))
             # print(f"{module_desc} {test_path_func_names=}")
-            check_if_test_ReturnsObj_pytest_exists(
+            check_if_test_ReturnsObj_pytests_exist(
+                path_funcs, module_desc, test_path_func_names
+            )
+            check_if_test_HasDocString_pytests_exist(
                 path_funcs, module_desc, test_path_func_names
             )
 
 
-def check_if_test_ReturnsObj_pytest_exists(
+def check_if_test_ReturnsObj_pytests_exist(
+    path_funcs: set, module_desc: str, test_path_func_names: set[str]
+):
+    for path_func in path_funcs:
+        pytest_for_func_exists = False
+        # print(f"{module_desc} {path_func}")
+        expected_test_func = f"test_{path_func}_ReturnsObj"
+        for test_path_func_name in test_path_func_names:
+            if test_path_func_name.startswith(expected_test_func):
+                pytest_for_func_exists = True
+            # print(
+            #     f"{pytest_for_func_exists} {module_desc} {path_func} {test_path_func_name}"
+            # )
+        assert pytest_for_func_exists, f"missing {expected_test_func=}"
+        # print(f"{module_desc} {test_func_exists} {path_func}")
+
+
+def check_if_test_HasDocString_pytests_exist(
     path_funcs: set, module_desc: str, test_path_func_names: set[str]
 ):
     for path_func in path_funcs:
         pytest_for_func_exists = False
         print(f"{module_desc} {path_func}")
-        expected_test_func = f"test_{path_func}_ReturnsObj"
+        expected_test_func = f"test_{path_func}_HasDocString"
         for test_path_func_name in test_path_func_names:
             if test_path_func_name.startswith(expected_test_func):
                 pytest_for_func_exists = True
