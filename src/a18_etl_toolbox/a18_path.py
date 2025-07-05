@@ -4,6 +4,12 @@ from src.a01_term_logic.term import BelieverName, LabelTerm
 STANCE0001_FILENAME = "stance0001.xlsx"
 BELIEF_OTE1_AGG_CSV_FILENAME = "belief_ote1_agg.csv"
 BELIEF_OTE1_AGG_JSON_FILENAME = "belief_ote1_agg.json"
+LAST_RUN_METRICS_JSON_FILENAME = "last_run_metrics.json"
+
+
+def create_last_run_metrics_path(belief_mstr_dir: str):
+    """Returns path: belief_mstr_dir\\last_run_metrics.json"""
+    return create_path(belief_mstr_dir, LAST_RUN_METRICS_JSON_FILENAME)
 
 
 def create_belief_ote1_csv_path(belief_mstr_dir: str, belief_label: LabelTerm):

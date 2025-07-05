@@ -6,9 +6,11 @@ from src.a09_pack_logic.test._util.a09_str import believer_name_str
 from src.a18_etl_toolbox.a18_path import (
     BELIEF_OTE1_AGG_CSV_FILENAME,
     BELIEF_OTE1_AGG_JSON_FILENAME,
+    LAST_RUN_METRICS_JSON_FILENAME,
     STANCE0001_FILENAME,
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
+    create_last_run_metrics_path,
     create_stance0001_path,
     create_stances_believer_dir_path,
     create_stances_dir_path,
@@ -19,9 +21,24 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 )
 
 
-def test_hub_path_constants_are_values():
+def test_a18_path_constants_are_values():
     # ESTABLISH / WHEN / THEN
+    assert BELIEF_OTE1_AGG_CSV_FILENAME == "belief_ote1_agg.csv"
+    assert BELIEF_OTE1_AGG_JSON_FILENAME == "belief_ote1_agg.json"
+    assert LAST_RUN_METRICS_JSON_FILENAME == "last_run_metrics.json"
     assert STANCE0001_FILENAME == "stance0001.xlsx"
+
+
+def test_create_last_run_metrics_path_ReturnsObj():
+    # ESTABLISH
+    x_belief_mstr_dir = get_module_temp_dir()
+
+    # WHEN
+    gen_last_run_metrics_path = create_last_run_metrics_path(x_belief_mstr_dir)
+
+    # THEN
+    expected_path = create_path(x_belief_mstr_dir, LAST_RUN_METRICS_JSON_FILENAME)
+    assert gen_last_run_metrics_path == expected_path
 
 
 def test_create_stances_dir_path_ReturnsObj():
@@ -63,6 +80,14 @@ def test_create_stance0001_path_ReturnsObj():
 
 
 LINUX_OS = platform_system() == "Linux"
+
+
+def test_create_last_run_metrics_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_last_run_metrics_path("belief_mstr_dir")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_last_run_metrics_path) == doc_str
 
 
 def test_create_stances_dir_path_HasDocString():
