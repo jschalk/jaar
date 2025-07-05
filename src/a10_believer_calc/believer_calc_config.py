@@ -2,19 +2,15 @@ from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
 
 
-def get_believer_calc_config_filename() -> str:
-    return "believer_calc_config.json"
-
-
-def config_believer_calc_file_path() -> str:
+def believer_calc_config_path() -> str:
     """src/believer_calc_module/believer_calc_config.json"""
     src_dir = create_path(os_getcwd(), "src")
-    config_file_dir = create_path(src_dir, "a10_believer_calc")
-    return create_path(config_file_dir, get_believer_calc_config_filename())
+    module_dir = create_path(src_dir, "a10_believer_calc")
+    return create_path(module_dir, "believer_calc_config.json")
 
 
 def get_believer_calc_config_dict() -> dict[str, dict]:
-    return open_json(config_believer_calc_file_path())
+    return open_json(believer_calc_config_path())
 
 
 def get_believer_calc_dimen_args(dimen: str) -> set:

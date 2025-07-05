@@ -6,7 +6,7 @@ from src.a11_bud_logic.test._util.a11_str import (
     believer_name_str,
     bud_time_str,
 )
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
 )

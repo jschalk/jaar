@@ -376,28 +376,18 @@ def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario1_Inclu
     assert gen_select_clause == example_str
 
 
-def get_example_test_database11_path() -> str:
+def get_example_test_database11_path_literal() -> str:
     """get_module_temp_dir/test_database11.db"""
     return create_path(get_module_temp_dir(), "test_database11.db")
-
-
-def get_example_test_database7_path() -> str:
-    """get_module_temp_dir/test_database7.db"""
-    return create_path(get_module_temp_dir(), "test_database7.db")
 
 
 def get_example_test_tablename() -> str:
     return "test_table"
 
 
-def get_example_test_csv_path() -> str:
-    """get_module_temp_dir/test_data.csv"""
-    return create_path(get_module_temp_dir(), "test_data.csv")
-
-
 def save_test_csv_file():
     set_dir(get_module_temp_dir())
-    test_csv_filepath = get_example_test_csv_path()
+    test_csv_filepath = create_path(get_module_temp_dir(), "test_data.csv")
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write("id,name,age,email\n")
         csv_file.write("1,John Doe,30,john@example.com\n")
@@ -417,7 +407,7 @@ def test_insert_csv_ChangesDBState(env_dir_setup_cleanup):
     test_tablename = get_example_test_tablename()
     csv_path = save_test_csv_file()
     print(f"{csv_path=}")
-    with sqlite3_connect(get_example_test_database11_path()) as conn:
+    with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         cursor.execute(get_create_test_table_sqlstr())
 
@@ -442,7 +432,7 @@ def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
     # ESTABLISH
     test_tablename = get_example_test_tablename()
     csv_path = save_test_csv_file()
-    with sqlite3_connect(get_example_test_database11_path()) as conn:
+    with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         cursor.execute(get_create_test_table_sqlstr())
 
@@ -467,14 +457,16 @@ def test_insert_csv_ChangesNotCommitted(
     # ESTABLISH
     test_tablename = get_example_test_tablename()
     csv_path = save_test_csv_file()
-    with sqlite3_connect(get_example_test_database11_path()) as conn:
+    with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         cursor.execute(get_create_test_table_sqlstr())
 
         insert_csv(csv_path, cursor, test_tablename)
 
     # reopen the connection to verify persistence
-    with sqlite3_connect(get_example_test_database7_path()) as conn2:
+
+    test_database7_path = create_path(get_module_temp_dir(), "test_database7.db")
+    with sqlite3_connect(test_database7_path) as conn2:
         cursor2 = conn2.cursor()
         cursor2.execute(get_create_test_table_sqlstr())
 
@@ -500,7 +492,7 @@ def test_create_table_from_csv_ChangesDBState(env_dir_setup_cleanup):
     }
     new_table = "new_test_table"
     test_csv_filepath = save_test_csv_file()
-    with sqlite3_connect(get_example_test_database11_path()) as conn:
+    with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         assert not db_table_exists(cursor, new_table)
 
@@ -528,7 +520,7 @@ def test_create_table_from_csv_DoesNotEmptyTable(
     test_csv_filepath = save_test_csv_file()
     test_table = get_example_test_tablename()
     set_dir(get_module_temp_dir())
-    with sqlite3_connect(get_example_test_database11_path()) as conn:
+    with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         cursor.execute(get_create_test_table_sqlstr())
 

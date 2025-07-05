@@ -22,7 +22,7 @@ from src.a11_bud_logic.test._util.example_factunits import (
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_believer_event_dir_path,
     create_believerevent_path,
     create_believerpoint_path,

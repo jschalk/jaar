@@ -572,18 +572,16 @@ def believertimelinepoint_shop(
     return BelieverTimelinePoint(x_believerunit, time_range_root_rope, x_min=x_min)
 
 
-def config_file_dir() -> str:
+def timeline_config_path() -> str:
+    "Returns path: a07_timeline_logic/default_timeline_config.json"
+
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a07_timeline_logic")
-
-
-def get_default_timeline_config_filename() -> str:
-    return "default_timeline_config.json"
+    module_dir = create_path(src_dir, "a07_timeline_logic")
+    return create_path(module_dir, "default_timeline_config.json")
 
 
 def get_default_timeline_config_dict() -> dict:
-    x_filename = get_default_timeline_config_filename()
-    return open_json(config_file_dir(), x_filename)
+    return open_json(timeline_config_path())
 
 
 @dataclass

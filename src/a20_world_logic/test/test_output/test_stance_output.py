@@ -10,10 +10,7 @@ from src.a06_believer_logic.test._util.a06_str import (
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
-from src.a18_etl_toolbox.tran_path import (
-    create_stance0001_path,
-    create_stances_dir_path,
-)
+from src.a18_etl_toolbox.a18_path import create_stance0001_path, create_stances_dir_path
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,

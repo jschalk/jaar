@@ -3,17 +3,15 @@ from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
 
 
-def get_belief_config_filename() -> str:
-    return "belief_config.json"
-
-
-def config_file_dir() -> str:
+def belief_config_path() -> str:
+    "Returns Path: a15_belief_logic/belief_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a15_belief_logic")
+    module_dir = create_path(src_dir, "a15_belief_logic")
+    return create_path(module_dir, "belief_config.json")
 
 
 def get_belief_config_dict() -> dict:
-    return open_json(config_file_dir(), get_belief_config_filename())
+    return open_json(belief_config_path())
 
 
 def get_belief_dimens() -> set[str]:

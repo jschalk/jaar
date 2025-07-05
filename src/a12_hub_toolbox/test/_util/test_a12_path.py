@@ -1,6 +1,13 @@
+from inspect import getdoc as inspect_getdoc
+from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a12_hub_toolbox.hub_path import (
-    BELIEF_AGENDA_FULL_LISTING_FILENAME,
+from src.a09_pack_logic.test._util.a09_str import (
+    belief_label_str,
+    believer_name_str,
+    bud_time_str,
+    event_int_str,
+)
+from src.a12_hub_toolbox.a12_path import (
     BELIEF_FILENAME,
     BELIEF_OTE1_AGG_CSV_FILENAME,
     BELIEF_OTE1_AGG_JSON_FILENAME,
@@ -12,7 +19,6 @@ from src.a12_hub_toolbox.hub_path import (
     CELLNODE_FILENAME,
     EVENT_ALL_PACK_FILENAME,
     EVENT_EXPRESSED_PACK_FILENAME,
-    belief_agenda_list_report_path,
     create_atoms_dir_path,
     create_belief_believers_dir_path,
     create_belief_dir_path,
@@ -103,23 +109,6 @@ def test_create_belief_ote1_json_path_ReturnsObj():
     a23_path = create_path(beliefs_dir, a23_str)
     expected_a23_te_path = create_path(a23_path, BELIEF_OTE1_AGG_JSON_FILENAME)
     assert gen_a23_te_csv_path == expected_a23_te_path
-
-
-def test_belief_agenda_list_report_path_ReturnsObj():
-    # ESTABLISH
-    belief_mstr_dir = get_module_temp_dir()
-    a23_str = "amy23"
-
-    # WHEN
-    gen_a23_full_report_path = belief_agenda_list_report_path(belief_mstr_dir, a23_str)
-
-    # THEN
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    a23_path = create_path(beliefs_dir, a23_str)
-    expected_a23_agenda_full_path = create_path(
-        a23_path, BELIEF_AGENDA_FULL_LISTING_FILENAME
-    )
-    assert gen_a23_full_report_path == expected_a23_agenda_full_path
 
 
 def test_create_belief_believers_dir_path_ReturnsObj():
@@ -582,3 +571,297 @@ def test_create_job_path_ReturnsObj():
     # believer_filename = "believer.json"
     # expected_a23_e3_believer_path = create_path(a23_bob_e3_dir, believer_filename)
     assert gen_a23_e3_believer_path == expected_a23_bob_job_json_path
+
+
+LINUX_OS = platform_system() == "Linux"
+
+
+def test_create_belief_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_dir_path("belief_mstr_dir", belief_label_str())
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_dir_path) == doc_str
+
+
+def test_create_belief_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_json_path(
+        "belief_mstr_dir", belief_label=belief_label_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_json_path) == doc_str
+
+
+def test_create_belief_ote1_csv_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_ote1_csv_path(
+        "belief_mstr_dir", belief_label=belief_label_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_ote1_csv_path) == doc_str
+
+
+def test_create_belief_ote1_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_ote1_json_path(
+        "belief_mstr_dir", belief_label=belief_label_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_ote1_json_path) == doc_str
+
+
+def test_create_belief_believers_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_believers_dir_path(
+        "belief_mstr_dir", belief_label=belief_label_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_believers_dir_path) == doc_str
+
+
+def test_create_believer_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_believer_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_believer_dir_path) == doc_str
+
+
+def test_create_keeps_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_keeps_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_keeps_dir_path) == doc_str
+
+
+def test_create_atoms_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_atoms_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_atoms_dir_path) == doc_str
+
+
+def test_create_packs_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_packs_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_packs_dir_path) == doc_str
+
+
+def test_create_buds_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_buds_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_buds_dir_path) == doc_str
+
+
+def test_create_bud_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_bud_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_bud_dir_path) == doc_str
+
+
+def test_create_cell_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_cell_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+        bud_ancestors=["ledger_believer1", "ledger_believer2", "ledger_believer3"],
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_cell_dir_path) == doc_str
+
+
+def test_create_cell_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_cell_json_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+        bud_ancestors=["ledger_believer1", "ledger_believer2", "ledger_believer3"],
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_cell_json_path) == doc_str
+
+
+def test_create_cell_person_mandate_ledger_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_cell_person_mandate_ledger_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+        bud_ancestors=["ledger_believer1", "ledger_believer2", "ledger_believer3"],
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_cell_person_mandate_ledger_path) == doc_str
+
+
+def test_create_budunit_json_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_budunit_json_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_budunit_json_path) == doc_str
+
+
+def test_create_bud_person_mandate_ledger_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_bud_person_mandate_ledger_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_bud_person_mandate_ledger_path) == doc_str
+
+
+def test_create_believerpoint_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_believerpoint_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        bud_time=bud_time_str(),
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_believerpoint_path) == doc_str
+
+
+def test_create_believer_event_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_believer_event_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        event_int=event_int_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_believer_event_dir_path) == doc_str
+
+
+def test_create_believerevent_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_believerevent_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        event_int=event_int_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_believerevent_path) == doc_str
+
+
+def test_create_event_all_pack_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_event_all_pack_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        event_int=event_int_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_event_all_pack_path) == doc_str
+
+
+def test_create_event_expressed_pack_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_event_expressed_pack_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        event_int=event_int_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_event_expressed_pack_path) == doc_str
+
+
+def test_create_gut_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_gut_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    print(f"{doc_str=}")
+    print(f"{inspect_getdoc(create_gut_path)=}")
+    print(inspect_getdoc(create_gut_path))
+    assert LINUX_OS or inspect_getdoc(create_gut_path) == doc_str
+
+
+def test_create_job_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_job_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_job_path) == doc_str

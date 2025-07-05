@@ -4,7 +4,6 @@ from src.a01_term_logic.term import BelieverName, LabelTerm
 BELIEF_FILENAME = "belief.json"
 BELIEF_OTE1_AGG_CSV_FILENAME = "belief_ote1_agg.csv"
 BELIEF_OTE1_AGG_JSON_FILENAME = "belief_ote1_agg.json"
-BELIEF_AGENDA_FULL_LISTING_FILENAME = "agenda_full_listing.csv"
 BUDUNIT_FILENAME = "budunit.json"
 BUD_MANDATE_FILENAME = "bud_person_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"
@@ -44,15 +43,6 @@ def create_belief_ote1_json_path(belief_mstr_dir: str, belief_label: LabelTerm):
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_path = create_path(beliefs_dir, belief_label)
     return create_path(belief_path, "belief_ote1_agg.json")
-
-
-def belief_agenda_list_report_path(
-    belief_mstr_dir: str, belief_label: LabelTerm
-) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\agenda_full_listing.csv"""
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    belief_path = create_path(beliefs_dir, belief_label)
-    return create_path(belief_path, "agenda_full_listing.csv")
 
 
 def create_belief_believers_dir_path(

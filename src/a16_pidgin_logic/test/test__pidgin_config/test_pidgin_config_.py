@@ -9,15 +9,14 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
     normal_specs_str,
 )
 from src.a16_pidgin_logic.pidgin_config import (
-    config_file_dir,
     default_unknown_str,
     default_unknown_str_if_None,
     get_pidgin_args_dimen_mapping,
     get_pidgin_config_dict,
-    get_pidgin_config_filename,
     get_pidgin_dimens,
     get_pidgin_filename,
     get_quick_pidgens_column_ref,
+    pidgin_config_path,
 )
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
@@ -42,19 +41,15 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 
 
-def test_get_pidgin_config_filename_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_pidgin_config_filename() == "pidgin_config.json"
-
-
 def test_get_pidgin_filename_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_pidgin_filename() == "pidgin.json"
 
 
-def test_config_file_dir_ReturnsObj_Pidgin() -> str:
+def test_pidgin_config_path_ReturnsObj_Pidgin() -> str:
     src_dir = create_path(os_getcwd(), "src")
-    assert config_file_dir() == create_path(src_dir, "a16_pidgin_logic")
+    module_dir = create_path(src_dir, "a16_pidgin_logic")
+    assert pidgin_config_path() == create_path(module_dir, "pidgin_config.json")
 
 
 def test_get_pidgin_config_dict_ReturnsObj():

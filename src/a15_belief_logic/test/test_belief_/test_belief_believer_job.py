@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import set_dir
 from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
-from src.a12_hub_toolbox.hub_path import create_believer_dir_path
+from src.a12_hub_toolbox.a12_path import create_believer_dir_path
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,

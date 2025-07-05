@@ -91,6 +91,18 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
     return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
 
 
+def get_top_level_functions(file_path) -> list[str]:
+    with open(file_path, "r") as f:
+        tree = ast_parse(f.read(), filename=file_path)
+
+    functions = []
+    for node in tree.body:
+        if isinstance(node, ast_FunctionDef):
+            functions.append(node.name)
+
+    return functions
+
+
 def get_module_descs() -> dict[str, str]:
     src_dir = "src"
     module_descs = get_level1_dirs(src_dir)

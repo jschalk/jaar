@@ -183,7 +183,7 @@ def rename_dir(src, dst):
     os_rename(src=src, dst=dst)
 
 
-def get_directory_path(x_list: list[str] = None) -> str:
+def create_directory_path(x_list: list[str] = None) -> str:
     """Create directory path from a list of strs."""
     x_list = [] if x_list is None else x_list
     x_str = ""

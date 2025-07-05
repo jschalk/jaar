@@ -68,6 +68,8 @@ class WorldUnit:
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
     def get_db_path(self) -> str:
+        "Returns path: world_dir/world.db"
+
         return create_path(self._world_dir, "world.db")
 
     def set_event(self, event_int: EventInt, face_name: FaceName):

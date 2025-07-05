@@ -12,7 +12,7 @@ from src.a06_believer_logic.test._util.a06_str import (
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_believer_event_dir_path as believer_event_dir,
     create_event_all_pack_path as all_pack_path,
 )

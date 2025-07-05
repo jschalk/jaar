@@ -6,7 +6,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a06_believer_logic.believer import believerunit_shop
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_belief_believers_dir_path,
     create_belief_json_path,
     create_belief_ote1_json_path,

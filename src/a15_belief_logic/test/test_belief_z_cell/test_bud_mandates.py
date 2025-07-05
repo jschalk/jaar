@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_json, save_json
 from src.a11_bud_logic.bud import tranbook_shop
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
     create_bud_person_mandate_ledger_path as bud_mandate_path,
     create_cell_person_mandate_ledger_path as cell_mandate_path,

@@ -3,17 +3,16 @@ from src.a00_data_toolbox.db_toolbox import get_sorted_intersection_list
 from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename, open_json
 
 
-def get_idea_config_filename() -> str:
-    return "idea_config.json"
-
-
-def config_file_dir() -> str:
+def idea_config_path() -> str:
+    "Returns path: a17_idea_logic/idea_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a17_idea_logic")
+    module_dir = create_path(src_dir, "a17_idea_logic")
+    return create_path(module_dir, "idea_config.json")
 
 
 def get_idea_config_dict() -> dict:
-    return open_json(config_file_dir(), get_idea_config_filename())
+    "Returns path: a17_idea_logic/idea_config.json"
+    return open_json(idea_config_path())
 
 
 def get_allowed_curds() -> set[str]:

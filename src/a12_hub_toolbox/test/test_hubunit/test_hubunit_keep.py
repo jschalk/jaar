@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
-from src.a12_hub_toolbox.hub_path import treasury_filename
+from src.a12_hub_toolbox.a12_path import treasury_filename
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
@@ -182,18 +182,18 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
     x_file_str = "Texas Dallas ElPaso"
     db_file = treasury_filename()
     save_file(
-        sue_hubunit.keep_dir(),
+        sue_hubunit.keep_path(),
         filename=db_file,
         file_str=x_file_str,
         replace=True,
     )
     assert os_path_exists(sue_hubunit.treasury_db_path())
-    assert open_file(sue_hubunit.keep_dir(), filename=db_file) == x_file_str
+    assert open_file(sue_hubunit.keep_path(), filename=db_file) == x_file_str
 
     # WHEN
     sue_hubunit.create_treasury_db_file()
     # THEN
-    assert open_file(sue_hubunit.keep_dir(), filename=db_file) == x_file_str
+    assert open_file(sue_hubunit.keep_path(), filename=db_file) == x_file_str
 
 
 def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):

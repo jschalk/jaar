@@ -7,17 +7,15 @@ class CRUD_command(str):
     pass
 
 
-def get_atom_config_filename() -> str:
-    return "atom_config.json"
-
-
-def config_file_dir() -> str:
+def atom_config_path() -> str:
+    "Returns Path: a08_believer_atom_logic/atom_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a08_believer_atom_logic")
+    module_dir = create_path(src_dir, "a08_believer_atom_logic")
+    return create_path(module_dir, "atom_config.json")
 
 
 def get_atom_config_dict() -> dict:
-    return open_json(config_file_dir(), get_atom_config_filename())
+    return open_json(atom_config_path())
 
 
 def get_atom_config_jkeys(x_dimen: str) -> dict:
@@ -225,7 +223,7 @@ def get_normalized_believer_table_build() -> dict[str : dict[str, any]]:
 
 
 def save_atom_config_file(atom_config_dict):
-    save_json(config_file_dir(), get_atom_config_filename(), atom_config_dict)
+    save_json(atom_config_path(), None, atom_config_dict)
 
 
 def get_believer_dimens() -> set:

@@ -4,13 +4,11 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_json
 from src.a08_believer_atom_logic.atom_config import get_all_believer_dimen_delete_keys
 
 
-def config_file_dir() -> str:
+def pidgin_config_path() -> str:
+    "Returns path: a16_pidgin_logic/pidgin_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a16_pidgin_logic")
-
-
-def get_pidgin_config_filename() -> str:
-    return "pidgin_config.json"
+    module_dir = create_path(src_dir, "a16_pidgin_logic")
+    return create_path(module_dir, "pidgin_config.json")
 
 
 def get_pidgin_filename() -> str:
@@ -18,7 +16,7 @@ def get_pidgin_filename() -> str:
 
 
 def get_pidgin_config_dict() -> dict:
-    return open_json(config_file_dir(), get_pidgin_config_filename())
+    return open_json(pidgin_config_path())
 
 
 def get_pidgin_dimens() -> set[str]:

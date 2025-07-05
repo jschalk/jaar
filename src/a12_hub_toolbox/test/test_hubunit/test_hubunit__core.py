@@ -12,8 +12,8 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
 )
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
-from src.a12_hub_toolbox.hub_path import create_believer_dir_path
-from src.a12_hub_toolbox.hubunit import HubUnit, get_keep_path, hubunit_shop
+from src.a12_hub_toolbox.a12_path import create_believer_dir_path
+from src.a12_hub_toolbox.hubunit import HubUnit, create_keep_rope_path, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
@@ -47,10 +47,10 @@ def test_HubUnit_RaisesError_keep_rope_DoesNotExist():
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_hubunit.keep_dir()
+        bob_hubunit.keep_path()
     assert (
         str(excinfo.value)
-        == f"HubUnit '{bob_str}' cannot save to keep_dir because it does not have keep_rope."
+        == f"HubUnit '{bob_str}' cannot save to keep_path because it does not have keep_rope."
     )
 
 
@@ -112,9 +112,9 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     sue_hubunit = hubunit_shop(belief_mstr_dir, amy23_str, sue_str, texas_rope)
 
     # THEN
-    x_dutys_path = create_path(sue_hubunit.keep_dir(), "dutys")
-    x_visions_path = create_path(sue_hubunit.keep_dir(), "visions")
-    x_grades_path = create_path(sue_hubunit.keep_dir(), "grades")
+    x_dutys_path = create_path(sue_hubunit.keep_path(), "dutys")
+    x_visions_path = create_path(sue_hubunit.keep_path(), "visions")
+    x_grades_path = create_path(sue_hubunit.keep_path(), "grades")
 
     assert sue_hubunit.belief_mstr_dir == belief_mstr_dir
     assert sue_hubunit.belief_label == amy23_str
@@ -126,7 +126,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.penny == filter_penny()
     x_hubunit = hubunit_shop(belief_mstr_dir, amy23_str, sue_str)
     assert sue_hubunit.keep_rope == texas_rope
-    assert sue_hubunit.keep_dir() == get_keep_path(x_hubunit, texas_rope)
+    assert sue_hubunit.keep_path() == create_keep_rope_path(x_hubunit, texas_rope)
     bob_str = "Bob"
     assert sue_hubunit.dutys_dir() == x_dutys_path
     assert sue_hubunit.visions_dir() == x_visions_path
@@ -141,7 +141,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.vision_path(bob_str) == x_vision_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
     treasury_filename = "treasury.db"
-    x_treasury_file_path = create_path(sue_hubunit.keep_dir(), treasury_filename)
+    x_treasury_file_path = create_path(sue_hubunit.keep_path(), treasury_filename)
     assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 
@@ -159,7 +159,7 @@ def test_hubunit_shop_RaisesErrorIf_believer_name_Contains_knot():
     )
 
 
-def test_get_keep_path_ReturnsObj():
+def test_create_keep_rope_path_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
@@ -177,10 +177,10 @@ def test_get_keep_path_ReturnsObj():
     kern_rope = create_rope_from_labels([peru_str, texas_str, elpaso_str, kern_str])
 
     # WHEN
-    texas_path = get_keep_path(sue_hubunit, texas_rope)
-    dallas_path = get_keep_path(sue_hubunit, dallas_rope)
-    elpaso_path = get_keep_path(sue_hubunit, elpaso_rope)
-    kern_path = get_keep_path(sue_hubunit, kern_rope)
+    texas_path = create_keep_rope_path(sue_hubunit, texas_rope)
+    dallas_path = create_keep_rope_path(sue_hubunit, dallas_rope)
+    elpaso_path = create_keep_rope_path(sue_hubunit, elpaso_rope)
+    kern_path = create_keep_rope_path(sue_hubunit, kern_rope)
 
     # THEN
     planroot_dir = create_path(sue_hubunit._keeps_dir, peru_str)
@@ -195,6 +195,6 @@ def test_get_keep_path_ReturnsObj():
     diff_root_texas_rope = create_rope_from_labels([peru_str, texas_str])
     diff_root_dallas_rope = create_rope_from_labels([peru_str, texas_str, dallas_str])
     diff_root_elpaso_rope = create_rope_from_labels([peru_str, texas_str, elpaso_str])
-    assert texas_path == get_keep_path(sue_hubunit, diff_root_texas_rope)
-    assert dallas_path == get_keep_path(sue_hubunit, diff_root_dallas_rope)
-    assert elpaso_path == get_keep_path(sue_hubunit, diff_root_elpaso_rope)
+    assert texas_path == create_keep_rope_path(sue_hubunit, diff_root_texas_rope)
+    assert dallas_path == create_keep_rope_path(sue_hubunit, diff_root_dallas_rope)
+    assert elpaso_path == create_keep_rope_path(sue_hubunit, diff_root_elpaso_rope)

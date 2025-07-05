@@ -1,5 +1,8 @@
+from inspect import getdoc as inspect_getdoc
+from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a21_lobby_logic.lobby_path import (
+from src.a17_idea_logic.test._util.a17_str import world_name_str
+from src.a21_lobby_logic.a21_path import (
     LobbyID,
     create_belief_mstr_dir_path,
     create_lobby_dir_path,
@@ -70,3 +73,34 @@ def test_create_belief_mstr_dir_path_ReturnsObj():
     m23_dir = create_path(worlds_dir, m23_str)
     expected_m23_path = create_path(m23_dir, "belief_mstr_dir")
     assert gen_m23_dir_path == expected_m23_path
+
+
+LINUX_OS = platform_system() == "Linux"
+
+
+def test_create_lobby_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_lobby_dir_path(lobby_mstr_dir_str(), lobby_id_str())
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_lobby_dir_path) == doc_str
+
+
+def test_create_world_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_world_dir_path(
+        lobby_mstr_dir_str(), lobby_id_str(), world_name_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_world_dir_path) == doc_str
+
+
+def test_create_belief_mstr_dir_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_mstr_dir_path(
+        lobby_mstr_dir_str(), lobby_id_str(), world_name_str()
+    )
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_mstr_dir_path) == doc_str

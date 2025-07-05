@@ -6,7 +6,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a06_believer_logic.believer import believerunit_shop
-from src.a12_hub_toolbox.hub_path import create_belief_json_path, create_job_path
+from src.a12_hub_toolbox.a12_path import create_belief_json_path, create_job_path
 from src.a12_hub_toolbox.hub_tool import save_job_file
 from src.a12_hub_toolbox.test._util.a12_str import job_str
 from src.a15_belief_logic.belief import beliefunit_shop

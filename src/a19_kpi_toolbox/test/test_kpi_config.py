@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a18_etl_toolbox.tran_path import create_stances_dir_path
+from src.a18_etl_toolbox.a18_path import create_stances_dir_path
 from src.a19_kpi_toolbox.kpi_mstr import (
     create_populate_kpi001_table,
     get_all_kpi_functions,

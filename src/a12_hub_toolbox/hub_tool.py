@@ -18,7 +18,7 @@ from src.a06_believer_logic.believer import (
 )
 from src.a11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
 from src.a11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
-from src.a12_hub_toolbox.hub_path import (
+from src.a12_hub_toolbox.a12_path import (
     CELLNODE_FILENAME,
     create_belief_believers_dir_path,
     create_believerevent_path,
