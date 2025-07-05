@@ -157,7 +157,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         # self.calc_belief_bud_person_mandate_net_ledgers()
 
         # WHEN
-        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
@@ -333,7 +333,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         # self.calc_belief_bud_person_mandate_net_ledgers()
 
         # WHEN
-        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
@@ -407,7 +407,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateBeliefT
         assert not db_table_exists(cursor, belief_person_nets_str())
 
         # WHEN
-        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
         assert get_row_count(cursor, belief_person_nets_str()) == 1
@@ -441,7 +441,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoBeliefIde
         assert os_path_exists(a23_ote1_csv_path) is False
 
         # WHEN
-        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
     # THEN
     assert os_path_exists(a23_ote1_csv_path)
@@ -469,7 +469,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario4_DeletesPrevious
         cursor = db_conn.cursor()
 
         # WHEN
-        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
     # THEN
     assert os_path_exists(testing2_path)
@@ -553,7 +553,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert count_dirs_files(fay_world.worlds_dir) == 5
 
         # WHEN
-        fay_world.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+        fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
         assert os_path_exists(wrong_a23_belief_dir) is False

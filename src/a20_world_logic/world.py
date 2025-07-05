@@ -112,7 +112,7 @@ class WorldUnit:
     def sheets_input_to_clarity_mstr(self):
         with sqlite3_connect(self.get_db_path()) as db_conn:
             cursor = db_conn.cursor()
-            self.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+            self.sheets_input_to_clarity_with_cursor(cursor)
             db_conn.commit()
         db_conn.close()
 
@@ -120,15 +120,11 @@ class WorldUnit:
         update_event_int_in_excel_files(self._input_dir, 1)
         self.sheets_input_to_clarity_mstr()
 
-    def sheets_input_to_clarity_with_cursor(
-        self,
-        db_conn: sqlite3_Connection,
-        cursor: sqlite3_Cursor,
-    ):
+    def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
         delete_dir(self._belief_mstr_dir)
         set_dir(self._belief_mstr_dir)
         # collect excel file data into central location
-        etl_input_dfs_to_brick_raw_tables(db_conn, self._input_dir)
+        etl_input_dfs_to_brick_raw_tables(cursor, self._input_dir)
         # brick raw to sound raw, check by event_ints
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
         etl_brick_agg_tables_to_events_brick_agg_table(cursor)
