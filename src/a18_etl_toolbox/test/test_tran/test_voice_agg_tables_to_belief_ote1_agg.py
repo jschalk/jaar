@@ -6,8 +6,8 @@ from src.a11_bud_logic.test._util.a11_str import (
     believer_name_str,
     bud_time_str,
 )
-from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str
 from src.a15_belief_logic.test._util.a15_str import belief_budunit_str
+from src.a18_etl_toolbox.test._util.a18_str import belief_ote1_agg_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import (
     create_sound_and_voice_tables,

@@ -17,23 +17,28 @@ from src.a11_bud_logic.test._util.a11_str import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
-    create_belief_ote1_csv_path,
-    create_bud_person_mandate_ledger_path as bud_mandate,
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
     create_gut_path,
     create_job_path,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file
-from src.a12_hub_toolbox.test._util.a12_str import belief_ote1_agg_str
+from src.a15_belief_logic.a15_path import (
+    create_bud_person_mandate_ledger_path as bud_mandate,
+)
 from src.a15_belief_logic.test._util.a15_str import (
     cumulative_minute_str,
     hour_label_str,
 )
 from src.a16_pidgin_logic.test._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.a18_etl_toolbox.a18_path import (
+    create_belief_ote1_csv_path,
+    create_last_run_metrics_path,
+)
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_event_time_agg_str,
+    belief_ote1_agg_str,
     belief_person_nets_str,
     events_brick_agg_str,
     events_brick_valid_str,
@@ -106,6 +111,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
     blrpern_job = create_prime_tablename("blrpern", "job", None)
+    last_run_metrics_path = create_last_run_metrics_path(mstr_dir)
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -142,6 +148,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, blrpern_job)
         assert not db_table_exists(cursor, belief_person_nets_str())
         assert not db_table_exists(cursor, belief_kpi001_person_nets_str())
+        assert not os_path_exists(last_run_metrics_path)
 
         # # create believerunits
         # self.believer_tables_to_event_believer_csvs(cursor)
@@ -205,6 +212,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         # assert get_row_count(cursor, belief_event_time_agg_str()) == 0
         # assert get_row_count(cursor, belief_ote1_agg_tablename) == 0
         assert get_row_count(cursor, belief_kpi001_person_nets_str()) == 0
+        assert os_path_exists(last_run_metrics_path)
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayRows(
@@ -554,7 +562,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
         assert os_path_exists(sue37_mandate_path)
-        assert count_dirs_files(fay_world.worlds_dir) == 41
+        assert count_dirs_files(fay_world.worlds_dir) == 42
 
 
 def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(

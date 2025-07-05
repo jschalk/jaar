@@ -425,7 +425,7 @@ class BeliefUnit:
 def _get_ote1_max_past_event_int(
     believer_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
 ) -> EventInt:
-    """Using the belief_ote1_agg grab most recent event int before a given bud_time"""
+    """Using the grab most recent ote1 event int before a given bud_time"""
     ote1_believer_dict = ote1_dict.get(believer_name)
     if not ote1_believer_dict:
         return None

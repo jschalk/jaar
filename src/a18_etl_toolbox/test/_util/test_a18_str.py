@@ -1,5 +1,6 @@
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_event_time_agg_str,
+    belief_ote1_agg_str,
     belief_person_nets_str,
     believer_net_amount_str,
     brick_agg_str,
@@ -16,6 +17,7 @@ from src.a18_etl_toolbox.test._util.a18_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert belief_ote1_agg_str() == "belief_ote1_agg"
     assert brick_agg_str() == "brick_agg"
     assert brick_raw_str() == "brick_raw"
     assert brick_valid_str() == "brick_valid"

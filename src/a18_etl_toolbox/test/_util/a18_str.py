@@ -6,6 +6,10 @@ def belief_event_time_agg_str() -> Literal["belief_event_time_agg"]:
     return "belief_event_time_agg"
 
 
+def belief_ote1_agg_str() -> Literal["belief_ote1_agg"]:
+    return "belief_ote1_agg"
+
+
 def belief_person_nets_str() -> Literal["belief_person_nets"]:
     """Table name for the account net amounts."""
     return "belief_person_nets"

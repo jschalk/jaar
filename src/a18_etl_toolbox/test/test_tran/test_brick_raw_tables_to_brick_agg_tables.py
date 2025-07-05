@@ -234,7 +234,25 @@ ORDER BY {event_int_str()}, {cumulative_minute_str()};"""
         assert rows[1] == row1
 
 
-def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_OneTable():
+def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
+    # ESTABLISH
+    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+    agg_br00003_columns = [
+        event_int_str(),
+        face_name_str(),
+        belief_label_str(),
+        cumulative_minute_str(),
+        hour_label_str(),
+    ]
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
+
+        # WHEN
+        assert get_max_brick_agg_event_int(cursor) == 1
+
+
+def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
     # ESTABLISH
     a23_str = "amy23"
     sue_str = "Sue"
@@ -283,7 +301,7 @@ VALUES
         assert max_event_int == event9
 
 
-def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_MultipleTable():
+def test_get_max_brick_events_event_int_ReturnsObj_Scenario2_MultipleTable():
     # ESTABLISH
     event1 = 1
     event3 = 3

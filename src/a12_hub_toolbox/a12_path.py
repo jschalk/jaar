@@ -2,10 +2,7 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.term import BelieverName, LabelTerm
 
 BELIEF_FILENAME = "belief.json"
-BELIEF_OTE1_AGG_CSV_FILENAME = "belief_ote1_agg.csv"
-BELIEF_OTE1_AGG_JSON_FILENAME = "belief_ote1_agg.json"
 BUDUNIT_FILENAME = "budunit.json"
-BUD_MANDATE_FILENAME = "bud_person_mandate_ledger.json"
 CELLNODE_FILENAME = "cell.json"
 CELL_MANDATE_FILENAME = "cell_person_mandate_ledger.json"
 BELIEVERPOINT_FILENAME = "believerpoint.json"
@@ -29,20 +26,6 @@ def create_belief_json_path(belief_mstr_dir: str, belief_label: LabelTerm) -> st
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     belief_path = create_path(beliefs_dir, belief_label)
     return create_path(belief_path, "belief.json")
-
-
-def create_belief_ote1_csv_path(belief_mstr_dir: str, belief_label: LabelTerm):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\belief_ote1_agg.csv"""
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    belief_path = create_path(beliefs_dir, belief_label)
-    return create_path(belief_path, "belief_ote1_agg.csv")
-
-
-def create_belief_ote1_json_path(belief_mstr_dir: str, belief_label: LabelTerm):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\belief_ote1_agg.json"""
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    belief_path = create_path(beliefs_dir, belief_label)
-    return create_path(belief_path, "belief_ote1_agg.json")
 
 
 def create_belief_believers_dir_path(
@@ -131,19 +114,6 @@ def create_budunit_json_path(
         belief_mstr_dir, belief_label, believer_name, bud_time
     )
     return create_path(timepoint_dir, "budunit.json")
-
-
-def create_bud_person_mandate_ledger_path(
-    belief_mstr_dir: str,
-    belief_label: LabelTerm,
-    believer_name: BelieverName,
-    bud_time: int,
-) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\bud_person_mandate_ledger.json"""
-    timepoint_dir = create_bud_dir_path(
-        belief_mstr_dir, belief_label, believer_name, bud_time
-    )
-    return create_path(timepoint_dir, "bud_person_mandate_ledger.json")
 
 
 def create_believerpoint_path(

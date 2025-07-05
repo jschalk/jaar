@@ -348,7 +348,7 @@ class HubUnit:
         set_dir(self.keep_path())
 
     def treasury_db_path(self) -> str:
-        "Returns path: keep_path/treasury.db" ""
+        "Returns path: keep_path/treasury.db"
 
         return create_path(self.keep_path(), treasury_filename())
 
