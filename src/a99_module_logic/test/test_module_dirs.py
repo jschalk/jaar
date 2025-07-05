@@ -397,6 +397,7 @@ def test_Modules_path_FunctionStructureAndFormat():
         "create_path",
         "create_directory_path",
         "ropeterm_valid_dir_path",
+        "create_keep_rope_path",
     }
     for module_desc, module_dir in get_module_descs().items():
         filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})
@@ -442,6 +443,32 @@ def test_Modules_path_FunctionStructureAndFormat():
             path_func_filename = f"a{module_desc[1:3]}_path.py"
             path_func_library = create_path(module_dir, path_func_filename)
             path_funcs = filtered_modules_path_funcs.get(module_desc)
-            for path_func in path_funcs:
-                print(f"{path_func_library} {path_func=}")
             assert os_path_exists(path_func_library)
+
+            test_dir = create_path(module_dir, "test")
+            util_dir = create_path(test_dir, "_util")
+            pytest_path_func_filename = f"test_{path_func_filename}"
+            pytest_path_func_path = create_path(util_dir, pytest_path_func_filename)
+            assert os_path_exists(pytest_path_func_path)
+            test_path_func_names = set(get_top_level_functions(pytest_path_func_path))
+            # print(f"{module_desc} {test_path_func_names=}")
+            check_if_test_ReturnsObj_pytest_exists(
+                path_funcs, module_desc, test_path_func_names
+            )
+
+
+def check_if_test_ReturnsObj_pytest_exists(
+    path_funcs: set, module_desc: str, test_path_func_names: set[str]
+):
+    for path_func in path_funcs:
+        pytest_for_func_exists = False
+        print(f"{module_desc} {path_func}")
+        expected_test_func = f"test_{path_func}_ReturnsObj"
+        for test_path_func_name in test_path_func_names:
+            if test_path_func_name.startswith(expected_test_func):
+                pytest_for_func_exists = True
+            # print(
+            #     f"{pytest_for_func_exists} {module_desc} {path_func} {test_path_func_name}"
+            # )
+        assert pytest_for_func_exists, f"missing {expected_test_func=}"
+        # print(f"{module_desc} {test_func_exists} {path_func}")
