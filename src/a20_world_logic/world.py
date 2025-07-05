@@ -13,6 +13,7 @@ from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     add_belief_timeline_to_guts,
+    create_last_run_metrics_json,
     etl_belief_guts_to_belief_jobs,
     etl_belief_job_jsons_to_job_tables,
     etl_belief_json_person_nets_to_belief_person_nets_table,
@@ -157,6 +158,7 @@ class WorldUnit:
             cursor, self._belief_mstr_dir
         )
         populate_kpi_bundle(cursor)
+        create_last_run_metrics_json(cursor, self._belief_mstr_dir)
 
         # # create all belief_job and mandate reports
         # self.calc_belief_bud_person_mandate_net_ledgers()

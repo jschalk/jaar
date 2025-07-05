@@ -83,6 +83,7 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a18_etl_toolbox.a18_path import (
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
+    create_last_run_metrics_path,
 )
 from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
 from src.a18_etl_toolbox.db_obj_believer_tool import insert_job_obj
@@ -932,3 +933,10 @@ def etl_belief_json_person_nets_to_belief_person_nets_table(
         x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
         x_beliefunit.set_all_tranbook()
         insert_tranunit_persons_net(cursor, x_beliefunit._all_tranbook)
+
+
+def create_last_run_metrics_json(cursor: sqlite3_Cursor, belief_mstr_dir: str):
+    max_brick_agg_event_int = get_max_brick_agg_event_int(cursor)
+    last_run_metrics_path = create_last_run_metrics_path(belief_mstr_dir)
+    last_run_metrics_dict = {"max_brick_agg_event_int": max_brick_agg_event_int}
+    save_json(last_run_metrics_path, None, last_run_metrics_dict)
