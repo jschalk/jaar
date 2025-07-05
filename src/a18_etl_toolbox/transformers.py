@@ -161,6 +161,18 @@ def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
             cursor.execute(insert_sqlstr)
 
 
+def get_max_brick_agg_event_int(cursor: sqlite3_Cursor) -> int:
+    agg_tables = get_db_tables(cursor, "brick_agg")
+    brick_aggs_max_event_int = 0
+    for agg_table in agg_tables:
+        if agg_table.startswith("br") and agg_table.endswith("brick_agg"):
+            sqlstr = f"SELECT MAX(event_int) FROM {agg_table}"
+            table_max_event_int = cursor.execute(sqlstr).fetchone()[0]
+            if table_max_event_int > brick_aggs_max_event_int:
+                brick_aggs_max_event_int = table_max_event_int
+    return brick_aggs_max_event_int
+
+
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
     existing_excel_idea_filepaths = []
     for idea_number in sorted(get_idea_numbers()):

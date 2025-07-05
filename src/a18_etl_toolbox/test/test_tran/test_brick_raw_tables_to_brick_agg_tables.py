@@ -16,7 +16,11 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     brick_raw_str,
     error_message_str,
 )
-from src.a18_etl_toolbox.transformers import etl_brick_raw_tables_to_brick_agg_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_sound_and_voice_tables
+from src.a18_etl_toolbox.transformers import (
+    etl_brick_raw_tables_to_brick_agg_tables,
+    get_max_brick_agg_event_int,
+)
 
 
 def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_GroupByWorks():
@@ -228,3 +232,84 @@ ORDER BY {event_int_str()}, {cumulative_minute_str()};"""
         print(f"   {row0=}")
         assert rows[0] == row0
         assert rows[1] == row1
+
+
+def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_OneTable():
+    # ESTABLISH
+    a23_str = "amy23"
+    sue_str = "Sue"
+    yao_str = "Yao"
+    event1 = 1
+    event3 = 3
+    event9 = 9
+    minute_360 = 360
+    minute_420 = 420
+    hour6am = "6am"
+    hour7am = "7am"
+    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+    agg_br00003_columns = [
+        event_int_str(),
+        face_name_str(),
+        belief_label_str(),
+        cumulative_minute_str(),
+        hour_label_str(),
+    ]
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
+        insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
+  {event_int_str()}
+, {face_name_str()}
+, {belief_label_str()}
+, {cumulative_minute_str()}
+, {hour_label_str()}
+)"""
+        values_clause = f"""
+VALUES     
+  ('{event1}', '{sue_str}', '{a23_str}', '{minute_360}', '{hour6am}')
+, ('{event1}', '{sue_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event3}', '{yao_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+, ('{event9}', '{yao_str}', '{a23_str}', '{minute_420}', '{hour7am}')
+;
+"""
+        insert_sqlstr = f"{insert_into_clause} {values_clause}"
+        cursor.execute(insert_sqlstr)
+
+        # WHEN
+        max_event_int = get_max_brick_agg_event_int(cursor)
+
+        # THEN
+        assert max_event_int
+        assert max_event_int == event9
+
+
+def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_MultipleTable():
+    # ESTABLISH
+    event1 = 1
+    event3 = 3
+    event9 = 9
+    with sqlite3_connect(":memory:") as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+        agg_br00003_columns = [event_int_str()]
+        create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
+        agg_br00003_insert_sqlstr = f"""
+INSERT INTO {agg_br00003_tablename} ({event_int_str()})
+VALUES ('{event1}'), ('{event1}'), ('{event9}');"""
+        cursor.execute(agg_br00003_insert_sqlstr)
+
+        agg_br00044_tablename = f"br00044_{brick_agg_str()}"
+        agg_br00044_columns = [event_int_str()]
+        create_idea_sorted_table(cursor, agg_br00044_tablename, agg_br00044_columns)
+        agg_br00044_insert_sqlstr = f"""
+INSERT INTO {agg_br00044_tablename} ({event_int_str()})
+VALUES ('{event3}');"""
+        cursor.execute(agg_br00044_insert_sqlstr)
+
+        # WHEN
+        max_event_int = get_max_brick_agg_event_int(cursor)
+
+        # THEN
+        assert max_event_int
+        assert max_event_int == event9
