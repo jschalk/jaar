@@ -69,7 +69,7 @@ class WorldUnit:
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
-    def get_db_path(self) -> str:
+    def get_world_db_path(self) -> str:
         "Returns path: world_dir/world.db"
         return create_world_db_path(self._world_dir)
 
@@ -110,7 +110,7 @@ class WorldUnit:
         etl_create_bud_mandate_ledgers(mstr_dir)
 
     def sheets_input_to_clarity_mstr(self):
-        with sqlite3_connect(self.get_db_path()) as db_conn:
+        with sqlite3_connect(self.get_world_db_path()) as db_conn:
             cursor = db_conn.cursor()
             self.sheets_input_to_clarity_with_cursor(cursor)
             db_conn.commit()
@@ -171,7 +171,7 @@ class WorldUnit:
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
-        create_kpi_csvs(self.get_db_path(), self.output_dir)
+        create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
     def get_dict(self) -> dict:
         return {

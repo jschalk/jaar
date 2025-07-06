@@ -69,7 +69,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
     upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
-    fay_db_path = fay_world.get_db_path()
+    fay_db_path = fay_world.get_world_db_path()
     assert not os_path_exists(fay_db_path)
 
     # WHEN

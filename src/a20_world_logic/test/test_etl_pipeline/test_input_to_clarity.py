@@ -43,7 +43,7 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     events_brick_agg_str,
     events_brick_valid_str,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
+from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_person_nets_str
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
@@ -83,34 +83,34 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
     events_brick_valid_tablename = events_brick_valid_str()
-    pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
-    pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
-    pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
-    pidcore_sound_raw = create_prime_tablename("pidcore", "s", "raw")
-    pidcore_sound_agg = create_prime_tablename("pidcore", "s", "agg")
-    pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
-    beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
-    beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-    beliefunit_sound_vld = create_prime_tablename("beliefunit", "s", "vld")
-    blrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
-    blrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
-    blrunit_sound_put_vld = create_prime_tablename("believerunit", "s", "vld", "put")
-    blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
-    blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
-    blrpern_sound_put_vld = create_prime_tablename("blrpern", "s", "vld", "put")
-    beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
-    beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-    blrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
-    blrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
-    blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
-    blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
+    pidname_sound_raw = prime_tbl("pidname", "s", "raw")
+    pidname_sound_agg = prime_tbl("pidname", "s", "agg")
+    pidname_sound_vld = prime_tbl("pidname", "s", "vld")
+    pidcore_sound_raw = prime_tbl("pidcore", "s", "raw")
+    pidcore_sound_agg = prime_tbl("pidcore", "s", "agg")
+    pidcore_sound_vld = prime_tbl("pidcore", "s", "vld")
+    beliefunit_sound_raw = prime_tbl("beliefunit", "s", "raw")
+    beliefunit_sound_agg = prime_tbl("beliefunit", "s", "agg")
+    beliefunit_sound_vld = prime_tbl("beliefunit", "s", "vld")
+    blrunit_sound_put_raw = prime_tbl("believerunit", "s", "raw", "put")
+    blrunit_sound_put_agg = prime_tbl("believerunit", "s", "agg", "put")
+    blrunit_sound_put_vld = prime_tbl("believerunit", "s", "vld", "put")
+    blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
+    blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
+    blrpern_sound_put_vld = prime_tbl("blrpern", "s", "vld", "put")
+    beliefunit_voice_raw = prime_tbl("beliefunit", "v", "raw")
+    beliefunit_voice_agg = prime_tbl("beliefunit", "v", "agg")
+    blrunit_voice_put_raw = prime_tbl("believerunit", "v", "raw", "put")
+    blrunit_voice_put_agg = prime_tbl("believerunit", "v", "agg", "put")
+    blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
+    blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
     mstr_dir = fay_world._belief_mstr_dir
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
     a23_e1_expressed_pack_path = expressed_path(mstr_dir, a23_str, sue_inx, e3)
     a23_sue_gut_path = create_gut_path(mstr_dir, a23_str, sue_inx)
     a23_sue_job_path = create_job_path(mstr_dir, a23_str, sue_inx)
-    blrpern_job = create_prime_tablename("blrpern", "job", None)
+    blrpern_job = prime_tbl("blrpern", "job", None)
     last_run_metrics_path = create_last_run_metrics_path(mstr_dir)
 
     with sqlite3_connect(":memory:") as db_conn:
@@ -266,24 +266,24 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
     events_brick_valid_tablename = events_brick_valid_str()
-    pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
-    pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
-    pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
-    pidcore_sound_raw = create_prime_tablename("pidcore", "s", "raw")
-    pidcore_sound_agg = create_prime_tablename("pidcore", "s", "agg")
-    pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
-    beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
-    beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-    blrunit_sound_put_raw = create_prime_tablename("believerunit", "s", "raw", "put")
-    blrunit_sound_put_agg = create_prime_tablename("believerunit", "s", "agg", "put")
-    blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
-    blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
-    beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
-    beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-    blrunit_voice_put_raw = create_prime_tablename("believerunit", "v", "raw", "put")
-    blrunit_voice_put_agg = create_prime_tablename("believerunit", "v", "agg", "put")
-    blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
-    blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
+    pidname_sound_raw = prime_tbl("pidname", "s", "raw")
+    pidname_sound_agg = prime_tbl("pidname", "s", "agg")
+    pidname_sound_vld = prime_tbl("pidname", "s", "vld")
+    pidcore_sound_raw = prime_tbl("pidcore", "s", "raw")
+    pidcore_sound_agg = prime_tbl("pidcore", "s", "agg")
+    pidcore_sound_vld = prime_tbl("pidcore", "s", "vld")
+    beliefunit_sound_raw = prime_tbl("beliefunit", "s", "raw")
+    beliefunit_sound_agg = prime_tbl("beliefunit", "s", "agg")
+    blrunit_sound_put_raw = prime_tbl("believerunit", "s", "raw", "put")
+    blrunit_sound_put_agg = prime_tbl("believerunit", "s", "agg", "put")
+    blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
+    blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
+    beliefunit_voice_raw = prime_tbl("beliefunit", "v", "raw")
+    beliefunit_voice_agg = prime_tbl("beliefunit", "v", "agg")
+    blrunit_voice_put_raw = prime_tbl("believerunit", "v", "raw", "put")
+    blrunit_voice_put_agg = prime_tbl("believerunit", "v", "agg", "put")
+    blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
+    blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
     mstr_dir = fay_world._belief_mstr_dir
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
@@ -610,7 +610,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00001_1df = DataFrame([br1row0], columns=br00001_columns)
     br00001_ex0_str = "example0_br00001"
     upsert_sheet(input_file_path, br00001_ex0_str, br00001_1df)
-    fay_db_path = fay_world.get_db_path()
+    fay_db_path = fay_world.get_world_db_path()
     assert not os_path_exists(fay_db_path)
 
     # WHEN
@@ -623,32 +623,24 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
         events_brick_valid_tablename = events_brick_valid_str()
-        pidname_sound_raw = create_prime_tablename("pidname", "s", "raw")
-        pidname_sound_agg = create_prime_tablename("pidname", "s", "agg")
-        pidname_sound_vld = create_prime_tablename("pidname", "s", "vld")
-        pidcore_sound_raw = create_prime_tablename("pidcore", "s", "raw")
-        pidcore_sound_agg = create_prime_tablename("pidcore", "s", "agg")
-        pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
-        beliefunit_sound_raw = create_prime_tablename("beliefunit", "s", "raw")
-        beliefunit_sound_agg = create_prime_tablename("beliefunit", "s", "agg")
-        blrunit_sound_put_raw = create_prime_tablename(
-            "believerunit", "s", "raw", "put"
-        )
-        blrunit_sound_put_agg = create_prime_tablename(
-            "believerunit", "s", "agg", "put"
-        )
-        blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
-        blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
-        beliefunit_voice_raw = create_prime_tablename("beliefunit", "v", "raw")
-        beliefunit_voice_agg = create_prime_tablename("beliefunit", "v", "agg")
-        blrunit_voice_put_raw = create_prime_tablename(
-            "believerunit", "v", "raw", "put"
-        )
-        blrunit_voice_put_agg = create_prime_tablename(
-            "believerunit", "v", "agg", "put"
-        )
-        blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
-        blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
+        pidname_sound_raw = prime_tbl("pidname", "s", "raw")
+        pidname_sound_agg = prime_tbl("pidname", "s", "agg")
+        pidname_sound_vld = prime_tbl("pidname", "s", "vld")
+        pidcore_sound_raw = prime_tbl("pidcore", "s", "raw")
+        pidcore_sound_agg = prime_tbl("pidcore", "s", "agg")
+        pidcore_sound_vld = prime_tbl("pidcore", "s", "vld")
+        beliefunit_sound_raw = prime_tbl("beliefunit", "s", "raw")
+        beliefunit_sound_agg = prime_tbl("beliefunit", "s", "agg")
+        blrunit_sound_put_raw = prime_tbl("believerunit", "s", "raw", "put")
+        blrunit_sound_put_agg = prime_tbl("believerunit", "s", "agg", "put")
+        blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
+        blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
+        beliefunit_voice_raw = prime_tbl("beliefunit", "v", "raw")
+        beliefunit_voice_agg = prime_tbl("beliefunit", "v", "agg")
+        blrunit_voice_put_raw = prime_tbl("believerunit", "v", "raw", "put")
+        blrunit_voice_put_agg = prime_tbl("believerunit", "v", "agg", "put")
+        blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
+        blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
 
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
