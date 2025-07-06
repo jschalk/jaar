@@ -2,6 +2,11 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.term import BelieverName, LabelTerm
 
 
+def create_belief_mstr_path(world_dir: str):
+    """Returns path: world_dir\\belief_mstr"""
+    return create_path(world_dir, "belief_mstr")
+
+
 def create_belief_ote1_csv_path(belief_mstr_dir: str, belief_label: LabelTerm):
     """Returns path: belief_mstr_dir\\beliefs\\belief_label\\belief_ote1_agg.csv"""
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")

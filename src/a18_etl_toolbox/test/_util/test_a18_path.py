@@ -4,6 +4,7 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a04_reason_logic.test._util.a04_str import belief_label_str
 from src.a09_pack_logic.test._util.a09_str import believer_name_str
 from src.a18_etl_toolbox.a18_path import (
+    create_belief_mstr_path,
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
     create_last_run_metrics_path,
@@ -31,6 +32,26 @@ def test_a18_path_constants_are_values():
     assert LAST_RUN_METRICS_JSON_FILENAME == "last_run_metrics.json"
     assert STANCE0001_FILENAME == "stance0001.xlsx"
     assert WORLD_DB_FILENAME == "world.db"
+
+
+def test_create_belief_mstr_path_ReturnsObj():
+    # ESTABLISH
+    x_world_dir = get_module_temp_dir()
+
+    # WHEN
+    gen_last_run_metrics_path = create_belief_mstr_path(x_world_dir)
+
+    # THEN
+    expected_path = create_path(x_world_dir, "belief_mstr")
+    assert gen_last_run_metrics_path == expected_path
+
+
+def test_create_belief_mstr_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_belief_mstr_path(world_dir="world_dir")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_belief_mstr_path) == doc_str
 
 
 def test_create_last_run_metrics_path_ReturnsObj():

@@ -10,7 +10,7 @@ from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
 from src.a11_bud_logic.bud import TimeLinePoint
 from src.a15_belief_logic.belief import BeliefUnit
 from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
-from src.a18_etl_toolbox.a18_path import create_world_db_path
+from src.a18_etl_toolbox.a18_path import create_belief_mstr_path, create_world_db_path
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     add_belief_timeline_to_guts,
@@ -89,7 +89,7 @@ class WorldUnit:
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_name)
         self._brick_dir = create_path(self._world_dir, "brick")
-        self._belief_mstr_dir = create_path(self._world_dir, "belief_mstr")
+        self._belief_mstr_dir = create_belief_mstr_path(self._world_dir)
         set_dir(self._world_dir)
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
