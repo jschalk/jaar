@@ -209,11 +209,12 @@ def test_WorldUnit_get_event_ReturnsObj(env_dir_setup_cleanup):
     assert x_world.get_event(e5_event_int) == e5_face_name
 
 
-def test_WorldUnit_get_db_path_ReturnsObj(env_dir_setup_cleanup):
+def test_WorldUnit_get_world_db_path_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     a23_world = worldunit_shop("amy23", worlds_dir())
 
     # WHEN
-    a23_db_path = a23_world.get_db_path()
+    a23_db_path = a23_world.get_world_db_path()
 
+    # THEN
     assert a23_db_path == create_path(a23_world._world_dir, "world.db")

@@ -141,8 +141,9 @@ def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
         cursor.execute(create_table_sqlstr)
 
         for idx, row in df.iterrows():
+            row_dict = row.to_dict()
             nonconvertible_columns = get_nonconvertible_columns(
-                row.to_dict(), idea_sqlite_types
+                row_dict, idea_sqlite_types
             )
             error_message = None
             if nonconvertible_columns:

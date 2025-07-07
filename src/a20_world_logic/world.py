@@ -10,6 +10,7 @@ from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
 from src.a11_bud_logic.bud import TimeLinePoint
 from src.a15_belief_logic.belief import BeliefUnit
 from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
+from src.a18_etl_toolbox.a18_path import create_belief_mstr_path, create_world_db_path
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
     add_belief_timeline_to_guts,
@@ -68,10 +69,9 @@ class WorldUnit:
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
-    def get_db_path(self) -> str:
+    def get_world_db_path(self) -> str:
         "Returns path: world_dir/world.db"
-
-        return create_path(self._world_dir, "world.db")
+        return create_world_db_path(self._world_dir)
 
     def set_event(self, event_int: EventInt, face_name: FaceName):
         self._events[event_int] = face_name
@@ -89,7 +89,7 @@ class WorldUnit:
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_name)
         self._brick_dir = create_path(self._world_dir, "brick")
-        self._belief_mstr_dir = create_path(self._world_dir, "belief_mstr")
+        self._belief_mstr_dir = create_belief_mstr_path(self._world_dir)
         set_dir(self._world_dir)
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
@@ -110,9 +110,9 @@ class WorldUnit:
         etl_create_bud_mandate_ledgers(mstr_dir)
 
     def sheets_input_to_clarity_mstr(self):
-        with sqlite3_connect(self.get_db_path()) as db_conn:
+        with sqlite3_connect(self.get_world_db_path()) as db_conn:
             cursor = db_conn.cursor()
-            self.sheets_input_to_clarity_with_cursor(db_conn, cursor)
+            self.sheets_input_to_clarity_with_cursor(cursor)
             db_conn.commit()
         db_conn.close()
 
@@ -120,15 +120,11 @@ class WorldUnit:
         update_event_int_in_excel_files(self._input_dir, 1)
         self.sheets_input_to_clarity_mstr()
 
-    def sheets_input_to_clarity_with_cursor(
-        self,
-        db_conn: sqlite3_Connection,
-        cursor: sqlite3_Cursor,
-    ):
+    def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
         delete_dir(self._belief_mstr_dir)
         set_dir(self._belief_mstr_dir)
         # collect excel file data into central location
-        etl_input_dfs_to_brick_raw_tables(db_conn, self._input_dir)
+        etl_input_dfs_to_brick_raw_tables(cursor, self._input_dir)
         # brick raw to sound raw, check by event_ints
         etl_brick_raw_tables_to_brick_agg_tables(cursor)
         etl_brick_agg_tables_to_events_brick_agg_table(cursor)
@@ -170,12 +166,12 @@ class WorldUnit:
         # it should be the database because that's the end of the core pipeline so it should
         # be the source of truth.
         create_stance0001_file(
-            self._belief_mstr_dir, self.output_dir, self.world_name, prettify_excel_bool
+            self._world_dir, self.output_dir, self.world_name, prettify_excel_bool
         )
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
-        create_kpi_csvs(self.get_db_path(), self.output_dir)
+        create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
     def get_dict(self) -> dict:
         return {

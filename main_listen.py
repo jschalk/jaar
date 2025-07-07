@@ -53,5 +53,5 @@ if __name__ == "__main__":
     x_worldunit.create_stances()
     x_worldunit.create_kpi_csvs()
     output_db_dir = create_path(output_directory, "db")
-    export_sqlite_tables_to_csv(x_worldunit.get_db_path(), output_db_dir)
+    export_sqlite_tables_to_csv(x_worldunit.get_world_db_path(), output_db_dir)
     print(f"after  output_dir file/dir count= {count_dirs_files(output_directory)}")

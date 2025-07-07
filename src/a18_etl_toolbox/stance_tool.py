@@ -1,5 +1,5 @@
 from os.path import exists as os_path_exists
-from sqlite3 import Cursor as sqlite3_Cursor
+from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
 from src.a00_data_toolbox.csv_toolbox import (
     delete_column_from_csv_string,
     replace_csv_column_from_string,
@@ -13,8 +13,15 @@ from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
-from src.a18_etl_toolbox.a18_path import STANCE0001_FILENAME, create_stance0001_path
-from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
+from src.a18_etl_toolbox.a18_path import (
+    create_belief_mstr_path,
+    create_stance0001_path,
+    create_world_db_path,
+)
+from src.a18_etl_toolbox.tran_sqlstrs import (
+    create_prime_tablename as prime_tbl,
+    create_sound_and_voice_tables,
+)
 
 
 # TODO #842
@@ -52,7 +59,6 @@ ORDER BY
 def add_to_br00043_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
     pidname_s_vld_tablename = prime_tbl("PIDNAME", "s", "vld")
     pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
-
     select_sqlstr = f"""
 SELECT
   "" event_int
@@ -159,7 +165,8 @@ def add_pidgin_rows_to_stance_csv_strs(
     belief_csv_strs["br00045"] = br00045_csv
 
 
-def collect_stance_csv_strs(belief_mstr_dir: str) -> dict[str, str]:
+def collect_stance_csv_strs(world_dir: str) -> dict[str, str]:
+    belief_mstr_dir = create_belief_mstr_path(world_dir)
     x_csv_strs = create_init_stance_idea_csv_strs()
     beliefs_dir = create_path(belief_mstr_dir, "beliefs")
     for belief_label in get_level1_dirs(beliefs_dir):
@@ -174,22 +181,30 @@ def collect_stance_csv_strs(belief_mstr_dir: str) -> dict[str, str]:
             if os_path_exists(gut_believer_path):
                 gut_believer = open_believer_file(gut_believer_path)
                 add_believerunit_to_stance_csv_strs(gut_believer, x_csv_strs, ",")
+    world_db_path = create_world_db_path(world_dir)
+    with sqlite3_connect(world_db_path) as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        add_pidgin_rows_to_stance_csv_strs(cursor, x_csv_strs, ",")
+    db_conn.close()
+
     return x_csv_strs
 
 
 def create_stance0001_file(
-    belief_mstr_dir: str,
+    world_dir: str,
     output_dir: str,
     world_name: str,
     prettify_excel_bool: bool = True,
 ):
-    stance_csv_strs = collect_stance_csv_strs(belief_mstr_dir)
+    stance_csv_strs = collect_stance_csv_strs(world_dir)
     with_face_name_csvs = {}
     for csv_key, csv_str in stance_csv_strs.items():
         csv_str = replace_csv_column_from_string(csv_str, "face_name", world_name)
         csv_str = delete_column_from_csv_string(csv_str, "event_int")
         with_face_name_csvs[csv_key] = csv_str
-    csv_dict_to_excel(with_face_name_csvs, output_dir, STANCE0001_FILENAME)
+
+    csv_dict_to_excel(with_face_name_csvs, output_dir, "stance0001.xlsx")
 
     # Hard to test function to prettify the excel file
     if prettify_excel_bool:
