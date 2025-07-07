@@ -166,7 +166,7 @@ class WorldUnit:
         # it should be the database because that's the end of the core pipeline so it should
         # be the source of truth.
         create_stance0001_file(
-            self._belief_mstr_dir, self.output_dir, self.world_name, prettify_excel_bool
+            self._world_dir, self.output_dir, self.world_name, prettify_excel_bool
         )
         create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
 
