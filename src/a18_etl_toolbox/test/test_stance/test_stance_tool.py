@@ -104,6 +104,90 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH database with pidgin data
+    yao_str = "Yao"
+    bob_otx = "Bob"
+    bob_inx = "Bobby"
+    sue_otx = "Sue"
+    sue_inx = "Suzy"
+    event1 = 1
+    event7 = 7
+    slash_str = "/"
+    colon_str = ":"
+    sue_unknown_str = "SueUnknown"
+    bob_unknown_str = "BobUnknown"
+    world_dir = get_module_temp_dir()
+    output_dir = create_path(get_module_temp_dir(), "output")
+    world_db_path = create_world_db_path(world_dir)
+    print(f"{world_db_path=}")
+    set_dir(world_dir)
+
+    with sqlite3_connect(world_db_path) as db_conn:
+        cursor = db_conn.cursor()
+        create_sound_and_voice_tables(cursor)
+        pidname_dimen = pidgin_name_str()
+        pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
+        print(f"{pidname_s_vld_tablename=}")
+        insert_pidname_sqlstr = f"""INSERT INTO {pidname_s_vld_tablename}
+        ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+        VALUES
+          ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
+        , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
+        ;
+        """
+        cursor.execute(insert_pidname_sqlstr)
+
+        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
+        insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename}
+        ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+        VALUES
+          ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
+        , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
+        ;
+        """
+        cursor.execute(insert_pidcore_sqlstr)
+    db_conn.close()
+
+    # WHEN
+    gen_stance_csv_strs = collect_stance_csv_strs(world_dir)
+
+    # THEN
+    assert gen_stance_csv_strs
+    generated_stance_csv_keys = set(gen_stance_csv_strs.keys())
+    print(f"{generated_stance_csv_keys=}")
+    stance_csv_strs = create_init_stance_idea_csv_strs()
+    assert generated_stance_csv_keys == set(stance_csv_strs.keys())
+    br00042_str = "br00042"
+    br00043_str = "br00043"
+    br00044_str = "br00044"
+    br00045_str = "br00045"
+    br00042_csv = gen_stance_csv_strs.get(br00042_str)
+    br00043_csv = gen_stance_csv_strs.get(br00043_str)
+    br00044_csv = gen_stance_csv_strs.get(br00044_str)
+    br00045_csv = gen_stance_csv_strs.get(br00045_str)
+
+    expected_br00042_csv = (
+        "event_int,face_name,otx_title,inx_title,otx_knot,inx_knot,unknown_str\n"
+    )
+    expected_br00043_csv = f"""event_int,face_name,otx_name,inx_name,otx_knot,inx_knot,unknown_str
+,{bob_otx},{bob_otx},{bob_inx},{slash_str},{colon_str},{bob_unknown_str}
+,{sue_otx},{sue_otx},{sue_inx},{slash_str},{colon_str},{sue_unknown_str}
+"""
+    expected_br00044_csv = (
+        "event_int,face_name,otx_label,inx_label,otx_knot,inx_knot,unknown_str\n"
+    )
+    expected_br00045_csv = (
+        "event_int,face_name,otx_rope,inx_rope,otx_knot,inx_knot,unknown_str\n"
+    )
+    assert br00042_csv == expected_br00042_csv
+    assert br00043_csv == expected_br00043_csv
+    assert br00044_csv == expected_br00044_csv
+    assert br00045_csv == expected_br00045_csv
+
+
 def test_create_stance0001_file_CreatesFile_Scenario0_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
