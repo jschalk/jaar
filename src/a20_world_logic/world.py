@@ -1,4 +1,5 @@
 from dataclasses import dataclass
+from os.path import exists as os_path_exists
 from sqlite3 import (
     Connection as sqlite3_Connection,
     Cursor as sqlite3_Cursor,
@@ -43,6 +44,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_voice_agg_to_event_believer_csvs,
     etl_voice_raw_tables_to_belief_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
+    get_max_brick_agg_event_int,
 )
 from src.a19_kpi_toolbox.kpi_mstr import (
     create_calendar_markdown_files,
@@ -94,12 +96,6 @@ class WorldUnit:
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
 
-    def input_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
-        etl_input_dfs_to_brick_raw_tables(conn, self._input_dir)
-
-    def event_pack_json_to_event_inherited_believerunits(self):
-        etl_event_pack_json_to_event_inherited_believerunits(self._belief_mstr_dir)
-
     def calc_belief_bud_person_mandate_net_ledgers(self):
         mstr_dir = self._belief_mstr_dir
         etl_create_buds_root_cells(mstr_dir)
@@ -115,9 +111,17 @@ class WorldUnit:
             self.sheets_input_to_clarity_with_cursor(cursor)
             db_conn.commit()
         db_conn.close()
+        delete_dir(self._input_dir)
 
     def stance_sheets_to_clarity_mstr(self):
-        update_event_int_in_excel_files(self._input_dir, 1)
+        max_brick_agg_event_int = 0
+        if os_path_exists(self.get_world_db_path()):
+            with sqlite3_connect(self.get_world_db_path()) as db_conn0:
+                cursor0 = db_conn0.cursor()
+                max_brick_agg_event_int = get_max_brick_agg_event_int(cursor0)
+            db_conn0.close()
+        next_event_int = max_brick_agg_event_int + 1
+        update_event_int_in_excel_files(self._input_dir, next_event_int)
         self.sheets_input_to_clarity_mstr()
 
     def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
