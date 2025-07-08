@@ -94,12 +94,6 @@ class WorldUnit:
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
 
-    def input_dfs_to_brick_raw_tables(self, conn: sqlite3_Connection):
-        etl_input_dfs_to_brick_raw_tables(conn, self._input_dir)
-
-    def event_pack_json_to_event_inherited_believerunits(self):
-        etl_event_pack_json_to_event_inherited_believerunits(self._belief_mstr_dir)
-
     def calc_belief_bud_person_mandate_net_ledgers(self):
         mstr_dir = self._belief_mstr_dir
         etl_create_buds_root_cells(mstr_dir)
