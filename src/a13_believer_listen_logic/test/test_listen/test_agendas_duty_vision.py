@@ -86,7 +86,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Believer(
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     yao_dakota_hubunit.save_vision_believer(zia_vision)
 
-    # zia_file_path = create_path(visions_dir, zia_str}.json")
+    # zia_file_path = create_path(visions_path, zia_str}.json")
     # print(f"{os_path_exists(zia_file_path)=}")
     new_yao_vision = create_listen_basis(yao_duty)
     assert len(new_yao_vision.get_agenda_dict()) == 0

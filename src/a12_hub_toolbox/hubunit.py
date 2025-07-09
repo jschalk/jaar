@@ -55,6 +55,9 @@ from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
     create_keeps_dir_path,
     create_packs_dir_path,
+    get_keep_dutys_path,
+    get_keep_grades_path,
+    get_keep_visions_path,
     treasury_filename,
 )
 from src.a12_hub_toolbox.basis_believers import get_default_job
@@ -81,18 +84,6 @@ class get_keep_ropesException(Exception):
 
 class _keep_ropeMissingException(Exception):
     pass
-
-
-def get_keep_dutys_dir(x_keep_path: str) -> str:
-    return create_path(x_keep_path, "dutys")
-
-
-def get_keep_visions_dir(x_keep_path: str) -> str:
-    return create_path(x_keep_path, "visions")
-
-
-def get_keep_grades_dir(x_keep_path: str) -> str:
-    return create_path(x_keep_path, "grades")
 
 
 @dataclass
@@ -351,42 +342,42 @@ class HubUnit:
         return create_path(self.keep_path(), treasury_filename())
 
     def duty_path(self, believer_name: BelieverName) -> str:
-        "Returns path: dutys_dir/believer_name"
+        "Returns path: dutys_path/believer_name"
 
-        return create_path(self.dutys_dir(), get_json_filename(believer_name))
+        return create_path(self.dutys_path(), get_json_filename(believer_name))
 
     def vision_path(self, believer_name: BelieverName) -> str:
-        "Returns path: visions_dir/believer_name.json"
+        "Returns path: visions_path/believer_name.json"
 
-        return create_path(self.visions_dir(), get_json_filename(believer_name))
+        return create_path(self.visions_path(), get_json_filename(believer_name))
 
     def grade_path(self, believer_name: BelieverName) -> str:
-        "Returns path: grades_dir/believer_name.json"
+        "Returns path: grades_path/believer_name.json"
 
-        return create_path(self.grades_dir(), get_json_filename(believer_name))
+        return create_path(self.grades_path(), get_json_filename(believer_name))
 
-    def dutys_dir(self) -> str:
-        return get_keep_dutys_dir(self.keep_path())
+    def dutys_path(self) -> str:
+        return get_keep_dutys_path(self.keep_path())
 
-    def visions_dir(self) -> str:
-        return get_keep_visions_dir(self.keep_path())
+    def visions_path(self) -> str:
+        return get_keep_visions_path(self.keep_path())
 
-    def grades_dir(self) -> str:
-        return get_keep_grades_dir(self.keep_path())
+    def grades_path(self) -> str:
+        return get_keep_grades_path(self.keep_path())
 
-    def get_visions_dir_filenames_list(self) -> list[str]:
+    def get_visions_path_filenames_list(self) -> list[str]:
         try:
-            return list(get_dir_file_strs(self.visions_dir(), True).keys())
+            return list(get_dir_file_strs(self.visions_path(), True).keys())
         except Exception:
             return []
 
     def save_duty_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
-        save_file(self.dutys_dir(), x_filename, x_believer.get_json())
+        save_file(self.dutys_path(), x_filename, x_believer.get_json())
 
     def save_vision_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
-        save_file(self.visions_dir(), x_filename, x_believer.get_json())
+        save_file(self.visions_path(), x_filename, x_believer.get_json())
 
     def initialize_job_file(self, gut: BelieverUnit) -> None:
         save_job_file(self.belief_mstr_dir, get_default_job(gut))
@@ -400,13 +391,13 @@ class HubUnit:
     def get_duty_believer(self, believer_name: BelieverName) -> BelieverUnit:
         if self.duty_file_exists(believer_name) is False:
             return None
-        file_content = open_file(self.dutys_dir(), get_json_filename(believer_name))
+        file_content = open_file(self.dutys_path(), get_json_filename(believer_name))
         return believerunit_get_from_json(file_content)
 
     def get_vision_believer(self, believer_name: BelieverName) -> BelieverUnit:
         if self.vision_file_exists(believer_name) is False:
             return None
-        file_content = open_file(self.visions_dir(), get_json_filename(believer_name))
+        file_content = open_file(self.visions_path(), get_json_filename(believer_name))
         return believerunit_get_from_json(file_content)
 
     def delete_duty_file(self, believer_name: BelieverName) -> None:

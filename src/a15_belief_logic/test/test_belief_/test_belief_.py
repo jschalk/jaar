@@ -490,12 +490,12 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
     yao_filename = get_json_filename(yao_str)
     sue_dallas_hubunit = hubunit_shop(x_belief_mstr_dir, a23_str, sue_str, dallas_rope)
     yao_dallas_hubunit = hubunit_shop(x_belief_mstr_dir, a23_str, yao_str, dallas_rope)
-    sue_dutys_dir = sue_dallas_hubunit.dutys_dir()
-    yao_dutys_dir = yao_dallas_hubunit.dutys_dir()
-    sue_dallas_sue_duty_file_path = create_path(sue_dutys_dir, sue_filename)
-    sue_dallas_yao_duty_file_path = create_path(sue_dutys_dir, yao_filename)
-    yao_dallas_sue_duty_file_path = create_path(yao_dutys_dir, sue_filename)
-    yao_dallas_yao_duty_file_path = create_path(yao_dutys_dir, yao_filename)
+    sue_dutys_path = sue_dallas_hubunit.dutys_path()
+    yao_dutys_path = yao_dallas_hubunit.dutys_path()
+    sue_dallas_sue_duty_file_path = create_path(sue_dutys_path, sue_filename)
+    sue_dallas_yao_duty_file_path = create_path(sue_dutys_path, yao_filename)
+    yao_dallas_sue_duty_file_path = create_path(yao_dutys_path, sue_filename)
+    yao_dallas_yao_duty_file_path = create_path(yao_dutys_path, yao_filename)
     assert os_path_exists(sue_dallas_sue_duty_file_path) is False
     assert os_path_exists(sue_dallas_yao_duty_file_path) is False
     assert os_path_exists(yao_dallas_sue_duty_file_path) is False

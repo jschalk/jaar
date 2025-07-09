@@ -36,6 +36,9 @@ from src.a12_hub_toolbox.a12_path import (
     create_job_path,
     create_keeps_dir_path,
     create_packs_dir_path,
+    get_keep_dutys_path,
+    get_keep_grades_path,
+    get_keep_visions_path,
     treasury_filename,
 )
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
@@ -123,6 +126,42 @@ def test_create_keeps_dir_path_ReturnsObj():
     sue_dir = create_path(believers_dir, sue_str)
     expected_keeps_dir = create_path(sue_dir, "keeps")
     assert keeps_dir == expected_keeps_dir
+
+
+def test_get_keep_dutys_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_keep_dir = get_module_temp_dir()
+
+    # WHEN
+    gen_keep_dutys_path = get_keep_dutys_path(x_keep_dir)
+
+    # THEN
+    expected_keep_dutys_path = create_path(x_keep_dir, "dutys")
+    assert gen_keep_dutys_path == expected_keep_dutys_path
+
+
+def test_get_keep_grades_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_keep_dir = get_module_temp_dir()
+
+    # WHEN
+    gen_keep_dutys_path = get_keep_grades_path(x_keep_dir)
+
+    # THEN
+    expected_keep_dutys_path = create_path(x_keep_dir, "grades")
+    assert gen_keep_dutys_path == expected_keep_dutys_path
+
+
+def test_get_keep_visions_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_keep_dir = get_module_temp_dir()
+
+    # WHEN
+    gen_keep_dutys_path = get_keep_visions_path(x_keep_dir)
+
+    # THEN
+    expected_keep_dutys_path = create_path(x_keep_dir, "visions")
+    assert gen_keep_dutys_path == expected_keep_dutys_path
 
 
 def test_create_atoms_dir_path_ReturnsObj():
@@ -567,6 +606,50 @@ def test_create_keeps_dir_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_keeps_dir_path) == doc_str
+
+
+def test_get_keep_dutys_path_HasDocString() -> None:
+    # ESTABLISH
+    keeps_dir = create_keeps_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    keep_path = create_path(keeps_dir, "keep_rope_dirs")
+    doc_str = get_keep_dutys_path(x_keep_path=keep_path)
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(get_keep_dutys_path) == doc_str
+
+
+def test_get_keep_grades_path_HasDocString() -> None:
+    # ESTABLISH
+    keeps_dir = create_keeps_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    keep_path = create_path(keeps_dir, "keep_rope_dirs")
+    doc_str = get_keep_grades_path(x_keep_path=keep_path)
+    doc_str = f"Returns path: {doc_str}"
+    print(f"                             {doc_str=}")
+    print(f"{inspect_getdoc(get_keep_grades_path)=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(get_keep_grades_path) == doc_str
+
+
+def test_get_keep_visions_path_HasDocString() -> None:
+    # ESTABLISH
+    keeps_dir = create_keeps_dir_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+    )
+    keep_path = create_path(keeps_dir, "keep_rope_dirs")
+    doc_str = get_keep_visions_path(x_keep_path=keep_path)
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(get_keep_visions_path) == doc_str
 
 
 def test_create_atoms_dir_path_HasDocString():

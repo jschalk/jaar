@@ -254,3 +254,18 @@ def create_job_path(
     believer_dir = create_path(believers_dir, believer_name)
     job_dir = create_path(believer_dir, "job")
     return create_path(job_dir, f"{believer_name}.json")
+
+
+def get_keep_dutys_path(x_keep_path: str) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\dutys"""
+    return create_path(x_keep_path, "dutys")
+
+
+def get_keep_visions_path(x_keep_path: str) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\visions"""
+    return create_path(x_keep_path, "visions")
+
+
+def get_keep_grades_path(x_keep_path: str) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\grades"""
+    return create_path(x_keep_path, "grades")

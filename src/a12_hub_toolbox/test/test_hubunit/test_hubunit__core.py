@@ -128,15 +128,15 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.keep_rope == texas_rope
     assert sue_hubunit.keep_path() == create_keep_rope_path(x_hubunit, texas_rope)
     bob_str = "Bob"
-    assert sue_hubunit.dutys_dir() == x_dutys_path
-    assert sue_hubunit.visions_dir() == x_visions_path
-    assert sue_hubunit.grades_dir() == x_grades_path
-    sue_dutys_dir = sue_hubunit.dutys_dir()
-    sue_visions_dir = sue_hubunit.visions_dir()
-    sue_grades_dir = sue_hubunit.grades_dir()
-    x_duty_path = create_path(sue_dutys_dir, f"{bob_str}.json")
-    x_vision_path = create_path(sue_visions_dir, f"{bob_str}.json")
-    x_grade_path = create_path(sue_grades_dir, f"{bob_str}.json")
+    assert sue_hubunit.dutys_path() == x_dutys_path
+    assert sue_hubunit.visions_path() == x_visions_path
+    assert sue_hubunit.grades_path() == x_grades_path
+    sue_dutys_path = sue_hubunit.dutys_path()
+    sue_visions_path = sue_hubunit.visions_path()
+    sue_grades_path = sue_hubunit.grades_path()
+    x_duty_path = create_path(sue_dutys_path, f"{bob_str}.json")
+    x_vision_path = create_path(sue_visions_path, f"{bob_str}.json")
+    x_grade_path = create_path(sue_grades_path, f"{bob_str}.json")
     assert sue_hubunit.duty_path(bob_str) == x_duty_path
     assert sue_hubunit.vision_path(bob_str) == x_vision_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
