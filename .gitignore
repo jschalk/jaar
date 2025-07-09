@@ -135,9 +135,6 @@ dmypy.json
 cython_debug/
 
 # local testing
-main_cli_app2.py
-src/keep/examples/keeps/ex4/
-src/keep/examples/keeps/ex6/
-sql_workspace/*
+*.xlsx#
 src/a20_world_logic/test/test_z_examples/output
 src/a20_world_logic/test/test_z_examples/worlds
