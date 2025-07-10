@@ -60,7 +60,7 @@ from src.a12_hub_toolbox.hub_tool import (
     open_job_file,
     save_gut_file,
 )
-from src.a12_hub_toolbox.keep_tool import create_treasury_db_file
+from src.a12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_believer
 
 
 class SavePackFileException(Exception):
@@ -361,17 +361,6 @@ class HubUnit:
         except Exception:
             return []
 
-    def save_duty_believer(self, x_believer: BelieverUnit) -> None:
-        dutys_path = create_keep_duty_path(
-            belief_mstr_dir=self.belief_mstr_dir,
-            believer_name=self.believer_name,
-            belief_label=self.belief_label,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
-            duty_believer=x_believer.believer_name,
-        )
-        save_json(dutys_path, None, x_believer.get_dict())
-
     def save_vision_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
         save_file(self.visions_path(), x_filename, x_believer.get_json())
@@ -461,7 +450,14 @@ class HubUnit:
         gut = open_gut_file(self.belief_mstr_dir, self.belief_label, self.believer_name)
         for x_keep_rope in self.get_keep_ropes():
             self.keep_rope = x_keep_rope
-            self.save_duty_believer(gut)
+            save_duty_believer(
+                belief_mstr_dir=self.belief_mstr_dir,
+                believer_name=self.believer_name,
+                belief_label=self.belief_label,
+                keep_rope=self.keep_rope,
+                knot=self.knot,
+                duty_believer=gut,
+            )
         self.keep_rope = None
 
     def create_gut_treasury_db_files(self):

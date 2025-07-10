@@ -1,12 +1,17 @@
-from os.path import exists as os_path_exists
+from os.path import exists as os_path_exist, exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a01_term_logic.rope import create_rope
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
+from src.a06_believer_logic.test._util.example_believers import (
+    get_believerunit_with_4_levels,
+)
 from src.a12_hub_toolbox.a12_path import create_keep_rope_path
 from src.a12_hub_toolbox.keep_tool import (
+    create_keep_duty_path,
     create_keep_path_dir_if_missing,
     create_treasury_db_file,
     create_treasury_db_path,
+    save_duty_believer,
     treasury_db_file_exists,
 )
 from src.a12_hub_toolbox.test._util.a12_env import (
@@ -152,3 +157,44 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
 
     # THEN
     assert open_file(treasury_db_path) == x_file_str
+
+
+def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    nation_str = "nation"
+    nation_rope = create_rope(root_label(), nation_str)
+    usa_str = "USA"
+    usa_rope = create_rope(nation_rope, usa_str)
+    texas_str = "Texas"
+    texas_rope = create_rope(usa_rope, texas_str)
+    a23_str = "amy23"
+    belief_mstr_dir = get_module_temp_dir()
+    bob_str = "Bob"
+    bob_believer = get_believerunit_with_4_levels()
+    bob_believer.set_believer_name(bob_str)
+    keep_duty_path = create_keep_duty_path(
+        belief_mstr_dir=belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=a23_str,
+        keep_rope=texas_rope,
+        knot=None,
+        duty_believer=bob_str,
+    )
+    # TODO replace os_path_exists with duty_file_exists function
+    # assert duty_file_exists(bob_str) is False
+    assert os_path_exists(keep_duty_path) is False
+
+    # WHEN
+    save_duty_believer(
+        belief_mstr_dir=belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=a23_str,
+        keep_rope=texas_rope,
+        knot=None,
+        duty_believer=bob_believer,
+    )
+
+    # THEN
+    # assert duty_file_exists(bob_str)
+    assert os_path_exists(keep_duty_path)
