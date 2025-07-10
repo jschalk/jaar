@@ -8,7 +8,11 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
 )
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
-from src.a12_hub_toolbox.a12_path import create_believer_dir_path, create_keep_rope_path
+from src.a12_hub_toolbox.a12_path import (
+    create_believer_dir_path,
+    create_keep_rope_path,
+    create_treasury_db_path,
+)
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
@@ -123,9 +127,6 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.duty_path(bob_str) == x_duty_path
     assert sue_hubunit.vision_path(bob_str) == x_vision_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
-    treasury_filename = "treasury.db"
-    x_treasury_file_path = create_path(keep_path, treasury_filename)
-    assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 
 def test_hubunit_shop_RaisesErrorIf_believer_name_Contains_knot():

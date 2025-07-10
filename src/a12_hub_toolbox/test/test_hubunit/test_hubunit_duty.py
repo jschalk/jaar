@@ -4,6 +4,7 @@ from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_believer_logic.test._util.example_believers import (
     get_believerunit_with_4_levels,
 )
+from src.a12_hub_toolbox.a12_path import create_treasury_db_path
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
@@ -202,7 +203,13 @@ def test_HubUnit_delete_treasury_db_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     texas_hubunit = get_texas_hubunit()
     texas_hubunit.create_treasury_db_file()
-    treasury_db_path = texas_hubunit.treasury_db_path()
+    treasury_db_path = create_treasury_db_path(
+        belief_mstr_dir=texas_hubunit.belief_mstr_dir,
+        believer_name=texas_hubunit.believer_name,
+        belief_label=texas_hubunit.belief_label,
+        keep_rope=texas_hubunit.keep_rope,
+        knot=texas_hubunit.knot,
+    )
     print(f"before  {os_path_exists(treasury_db_path)=}")
     assert texas_hubunit.treasury_db_file_exists()
 

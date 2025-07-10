@@ -4,7 +4,11 @@ from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
-from src.a12_hub_toolbox.a12_path import create_keep_rope_path, treasury_filename
+from src.a12_hub_toolbox.a12_path import (
+    create_keep_rope_path,
+    create_treasury_db_path,
+    treasury_filename,
+)
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
@@ -158,13 +162,20 @@ def test_HubUnit_create_treasury_db_file_CorrectlyCreatesDatabase(
     texas_str = "Texas"
     texas_rope = sue_gut_believer.make_l1_rope(texas_str)
     sue_hubunit.keep_rope = texas_rope
-    assert os_path_exists(sue_hubunit.treasury_db_path()) is False
+    treasury_db_path = create_treasury_db_path(
+        belief_mstr_dir=sue_hubunit.belief_mstr_dir,
+        believer_name=sue_hubunit.believer_name,
+        belief_label=sue_hubunit.belief_label,
+        keep_rope=sue_hubunit.keep_rope,
+        knot=sue_hubunit.knot,
+    )
+    assert os_path_exists(treasury_db_path) is False
 
     # WHEN
     sue_hubunit.create_treasury_db_file()
 
     # THEN
-    assert os_path_exists(sue_hubunit.treasury_db_path())
+    assert os_path_exists(treasury_db_path)
 
 
 def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
@@ -176,9 +187,16 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
     belief_mstr_dir = env_dir()
     texas_rope = get_texas_rope()
     sue_hubunit = hubunit_shop(belief_mstr_dir, a23_str, sue_str, texas_rope)
-    delete_dir(sue_hubunit.treasury_db_path())  # clear out any treasury.db file
+    treasury_db_path = create_treasury_db_path(
+        belief_mstr_dir=sue_hubunit.belief_mstr_dir,
+        believer_name=sue_hubunit.believer_name,
+        belief_label=sue_hubunit.belief_label,
+        keep_rope=sue_hubunit.keep_rope,
+        knot=sue_hubunit.knot,
+    )
+    delete_dir(treasury_db_path)  # clear out any treasury.db file
     sue_hubunit.create_treasury_db_file()
-    assert os_path_exists(sue_hubunit.treasury_db_path())
+    assert os_path_exists(treasury_db_path)
 
     # ESTABLISH
     keep_path = create_keep_rope_path(
@@ -186,13 +204,8 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
     )
     x_file_str = "Texas Dallas ElPaso"
     db_file = treasury_filename()
-    save_file(
-        keep_path,
-        filename=db_file,
-        file_str=x_file_str,
-        replace=True,
-    )
-    assert os_path_exists(sue_hubunit.treasury_db_path())
+    save_file(keep_path, filename=db_file, file_str=x_file_str, replace=True)
+    assert os_path_exists(treasury_db_path)
     assert open_file(keep_path, filename=db_file) == x_file_str
 
     # WHEN
@@ -248,16 +261,30 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
 
     dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_rope)
     elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_rope)
-    print(f"{dallas_hubunit.treasury_db_path()=}")
-    print(f"{elpaso_hubunit.treasury_db_path()=}")
-    assert os_path_exists(dallas_hubunit.treasury_db_path()) is False
-    assert os_path_exists(elpaso_hubunit.treasury_db_path()) is False
+    dallas_treasury_db_path = create_treasury_db_path(
+        belief_mstr_dir=dallas_hubunit.belief_mstr_dir,
+        believer_name=dallas_hubunit.believer_name,
+        belief_label=dallas_hubunit.belief_label,
+        keep_rope=dallas_hubunit.keep_rope,
+        knot=dallas_hubunit.knot,
+    )
+    elpaso_treasury_db_path = create_treasury_db_path(
+        belief_mstr_dir=elpaso_hubunit.belief_mstr_dir,
+        believer_name=elpaso_hubunit.believer_name,
+        belief_label=elpaso_hubunit.belief_label,
+        keep_rope=elpaso_hubunit.keep_rope,
+        knot=elpaso_hubunit.knot,
+    )
+    print(f"{dallas_treasury_db_path=}")
+    print(f"{elpaso_treasury_db_path=}")
+    assert os_path_exists(dallas_treasury_db_path) is False
+    assert os_path_exists(elpaso_treasury_db_path) is False
     assert sue_hubunit.keep_rope is None
 
     # WHEN
     sue_hubunit.create_gut_treasury_db_files()
 
     # THEN
-    assert os_path_exists(dallas_hubunit.treasury_db_path())
-    assert os_path_exists(elpaso_hubunit.treasury_db_path())
+    assert os_path_exists(dallas_treasury_db_path)
+    assert os_path_exists(elpaso_treasury_db_path)
     assert sue_hubunit.keep_rope is None

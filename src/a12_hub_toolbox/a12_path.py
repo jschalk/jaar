@@ -85,7 +85,7 @@ def create_keep_rope_path(
     return create_path(keeps_dir, keep_sub_path)
 
 
-def get_keep_dutys_path(
+def create_keep_dutys_path(
     belief_mstr_dir: str,
     believer_name: BelieverName,
     belief_label: BeliefLabel,
@@ -99,7 +99,7 @@ def get_keep_dutys_path(
     return create_path(x_keep_path, "dutys")
 
 
-def get_keep_visions_path(
+def create_keep_visions_path(
     belief_mstr_dir: str,
     believer_name: BelieverName,
     belief_label: BeliefLabel,
@@ -113,7 +113,7 @@ def get_keep_visions_path(
     return create_path(x_keep_path, "visions")
 
 
-def get_keep_grades_path(
+def create_keep_grades_path(
     belief_mstr_dir: str,
     believer_name: BelieverName,
     belief_label: BeliefLabel,
@@ -125,6 +125,24 @@ def get_keep_grades_path(
         belief_mstr_dir, believer_name, belief_label, keep_rope, knot
     )
     return create_path(x_keep_path, "grades")
+
+
+def create_treasury_db_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+) -> str:
+    "Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\treasury.db"
+    keep_path = create_keep_rope_path(
+        belief_mstr_dir=belief_mstr_dir,
+        believer_name=believer_name,
+        belief_label=belief_label,
+        keep_rope=keep_rope,
+        knot=knot,
+    )
+    return create_path(keep_path, treasury_filename())
 
 
 def create_atoms_dir_path(

@@ -46,13 +46,12 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
-    create_keep_rope_path,
+    create_keep_dutys_path,
+    create_keep_visions_path,
+    create_keep_grades_path,
     create_keeps_dir_path,
     create_packs_dir_path,
-    get_keep_dutys_path,
-    get_keep_grades_path,
-    get_keep_visions_path,
-    treasury_filename,
+    create_treasury_db_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
@@ -313,17 +312,6 @@ class HubUnit:
         return gut_believer
 
     # keep management
-    def treasury_db_path(self) -> str:
-        "Returns path: keep_path/treasury.db"
-        keep_path = create_keep_rope_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-        return create_path(keep_path, treasury_filename())
-
     def duty_path(self, believer_name: BelieverName) -> str:
         "Returns path: dutys_path/believer_name"
 
@@ -340,7 +328,7 @@ class HubUnit:
         return create_path(self.grades_path(), get_json_filename(believer_name))
 
     def dutys_path(self) -> str:
-        return get_keep_dutys_path(
+        return create_keep_dutys_path(
             belief_mstr_dir=self.belief_mstr_dir,
             believer_name=self.believer_name,
             belief_label=self.belief_label,
@@ -349,7 +337,7 @@ class HubUnit:
         )
 
     def visions_path(self) -> str:
-        return get_keep_visions_path(
+        return create_keep_visions_path(
             belief_mstr_dir=self.belief_mstr_dir,
             believer_name=self.believer_name,
             belief_label=self.belief_label,
@@ -358,7 +346,7 @@ class HubUnit:
         )
 
     def grades_path(self) -> str:
-        return get_keep_grades_path(
+        return create_keep_grades_path(
             belief_mstr_dir=self.belief_mstr_dir,
             believer_name=self.believer_name,
             belief_label=self.belief_label,
@@ -405,7 +393,14 @@ class HubUnit:
         delete_dir(self.vision_path(believer_name))
 
     def delete_treasury_db_file(self) -> None:
-        delete_dir(self.treasury_db_path())
+        treasury_db_path = create_treasury_db_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
+        delete_dir(treasury_db_path)
 
     def get_perspective_believer(self, speaker: BelieverUnit) -> BelieverUnit:
         # get copy of believer without any metrics
@@ -469,12 +464,25 @@ class HubUnit:
             keep_rope=self.keep_rope,
             knot=self.knot,
         )
-        db_path = self.treasury_db_path()
-        conn = sqlite3_connect(db_path)
+        treasury_db_path = create_treasury_db_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
+        conn = sqlite3_connect(treasury_db_path)
         conn.close()
 
     def treasury_db_file_exists(self) -> bool:
-        return os_path_exists(self.treasury_db_path())
+        treasury_db_path = create_treasury_db_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
+        return os_path_exists(treasury_db_path)
 
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():
