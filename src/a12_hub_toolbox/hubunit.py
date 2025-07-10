@@ -11,6 +11,7 @@ from src.a00_data_toolbox.file_toolbox import (
     get_max_file_number,
     open_file,
     save_file,
+    save_json,
 )
 from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
@@ -45,6 +46,7 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
+    create_keep_duty_path,
     create_keep_dutys_path,
     create_keep_grades_path,
     create_keep_visions_path,
@@ -360,8 +362,15 @@ class HubUnit:
             return []
 
     def save_duty_believer(self, x_believer: BelieverUnit) -> None:
-        x_filename = get_json_filename(x_believer.believer_name)
-        save_file(self.dutys_path(), x_filename, x_believer.get_json())
+        dutys_path = create_keep_duty_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+            duty_believer=x_believer.believer_name,
+        )
+        save_json(dutys_path, None, x_believer.get_dict())
 
     def save_vision_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)

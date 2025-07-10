@@ -1,4 +1,8 @@
-from src.a00_data_toolbox.file_toolbox import create_directory_path, create_path
+from src.a00_data_toolbox.file_toolbox import (
+    create_directory_path,
+    create_path,
+    get_json_filename,
+)
 from src.a01_term_logic.rope import get_all_rope_labels, rebuild_rope
 from src.a01_term_logic.term import BeliefLabel, BelieverName, LabelTerm
 
@@ -97,6 +101,21 @@ def create_keep_dutys_path(
         belief_mstr_dir, believer_name, belief_label, keep_rope, knot
     )
     return create_path(x_keep_path, "dutys")
+
+
+def create_keep_duty_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+    duty_believer: BelieverName,
+) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\dutys\\duty_believer.json"""
+    x_dutys_path = create_keep_dutys_path(
+        belief_mstr_dir, believer_name, belief_label, keep_rope, knot
+    )
+    return create_path(x_dutys_path, get_json_filename(duty_believer))
 
 
 def create_keep_visions_path(

@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from pytest import raises as pytest_raises
-from src.a00_data_toolbox.file_toolbox import create_path
+from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.a01_term_logic.rope import create_rope, create_rope_from_labels
 from src.a09_pack_logic.test._util.a09_str import (
     belief_label_str,
@@ -36,6 +36,7 @@ from src.a12_hub_toolbox.a12_path import (
     create_event_expressed_pack_path,
     create_gut_path,
     create_job_path,
+    create_keep_duty_path,
     create_keep_dutys_path,
     create_keep_grades_path,
     create_keep_rope_path,
@@ -274,6 +275,34 @@ def test_create_keep_dutys_path_ReturnsObj() -> None:
     )
     expected_keep_dutys_path = create_path(keep_casa_path, "dutys")
     assert gen_keep_dutys_path == expected_keep_dutys_path
+
+
+def test_create_keep_duty_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_belief_mstr_dir = get_module_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
+    bob_str = "Bob"
+
+    # WHEN
+    gen_keep_duty_path = create_keep_duty_path(
+        belief_mstr_dir=x_belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+        duty_believer=bob_str,
+    )
+
+    # THEN
+    keep_dutys_path = create_keep_dutys_path(
+        x_belief_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    bob_filename = get_json_filename(bob_str)
+    expected_keep_duty_path = create_path(keep_dutys_path, bob_filename)
+    assert gen_keep_duty_path == expected_keep_duty_path
 
 
 def test_create_keep_grades_path_ReturnsObj() -> None:
@@ -824,6 +853,23 @@ def test_create_keep_dutys_path_HasDocString() -> None:
     print(f"{expected_doc_str=}")
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_keep_dutys_path) == expected_doc_str
+
+
+def test_create_keep_duty_path_HasDocString() -> None:
+    # ESTABLISH
+    duty_believer_str = "duty_believer"
+    expected_doc_str = create_keep_duty_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        keep_rope="planroot;level1;leveln",
+        knot=None,
+        duty_believer=duty_believer_str,
+    )
+    expected_doc_str = f"Returns path: {expected_doc_str}"
+    print(f"{expected_doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_keep_duty_path) == expected_doc_str
 
 
 def test_create_keep_grades_path_HasDocString() -> None:
