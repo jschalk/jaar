@@ -12,7 +12,6 @@ from src.a00_data_toolbox.file_toolbox import (
     get_max_file_number,
     open_file,
     save_file,
-    set_dir,
 )
 from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
@@ -47,7 +46,6 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
-    create_keep_path_dir_if_missing,
     create_keep_rope_path,
     create_keeps_dir_path,
     create_packs_dir_path,
@@ -61,9 +59,8 @@ from src.a12_hub_toolbox.hub_tool import (
     open_gut_file,
     open_job_file,
     save_gut_file,
-    save_job_file,
 )
-from src.a13_believer_listen_logic.basis_believers import get_default_job
+from src.a12_hub_toolbox.keep_tool import create_keep_path_dir_if_missing
 
 
 class SavePackFileException(Exception):

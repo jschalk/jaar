@@ -4,10 +4,6 @@ from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_believer_logic.test._util.example_believers import (
     get_believerunit_with_4_levels,
 )
-from src.a12_hub_toolbox.a12_path import (
-    create_keep_path_dir_if_missing,
-    create_keep_rope_path,
-)
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
