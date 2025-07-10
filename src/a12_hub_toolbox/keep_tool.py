@@ -85,5 +85,4 @@ def save_duty_believer(
         knot=knot,
         duty_believer=duty_believer.believer_name,
     )
-    print(f"{duty_path=}")
     save_json(duty_path, None, duty_believer.get_dict())
