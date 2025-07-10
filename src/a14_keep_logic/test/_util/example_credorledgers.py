@@ -2,11 +2,8 @@ from src.a01_term_logic.term import BelieverName, PersonName
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger
-from src.a14_keep_logic.test._util.a14_env import (
-    get_module_temp_dir,
-    get_texas_rope,
-    temp_belief_label,
-)
+from src.a14_keep_logic.test._util.a14_env import get_module_temp_dir, temp_belief_label
+from src.a14_keep_logic.test._util.example_keep_believers import get_texas_rope
 
 
 def example_yao_hubunit() -> HubUnit:

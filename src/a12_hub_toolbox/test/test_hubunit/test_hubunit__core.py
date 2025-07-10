@@ -8,7 +8,11 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
 )
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
-from src.a12_hub_toolbox.a12_path import create_believer_dir_path, create_keep_rope_path
+from src.a12_hub_toolbox.a12_path import (
+    create_believer_dir_path,
+    create_keep_rope_path,
+    create_treasury_db_path,
+)
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
@@ -34,18 +38,6 @@ def test_HubUnit_Exists():
     assert not x_hubunit._keeps_dir
     assert not x_hubunit._atoms_dir
     assert not x_hubunit._packs_dir
-
-
-def test_HubUnit_RaisesError_keep_rope_DoesNotExist():
-    # ESTABLISH
-    bob_str = "Bob"
-    bob_hubunit = HubUnit(bob_str)
-
-    # WHEN / THEN
-    with pytest_raises(Exception) as excinfo:
-        bob_hubunit.keep_path()
-    assertion_fail_str = f"HubUnit '{bob_str}' cannot save to keep_path because it does not have keep_rope."
-    assert str(excinfo.value) == assertion_fail_str
 
 
 def test_hubunit_shop_ReturnsObj():
@@ -106,9 +98,12 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     sue_hubunit = hubunit_shop(belief_mstr_dir, amy23_str, sue_str, texas_rope)
 
     # THEN
-    x_dutys_path = create_path(sue_hubunit.keep_path(), "dutys")
-    x_visions_path = create_path(sue_hubunit.keep_path(), "visions")
-    x_grades_path = create_path(sue_hubunit.keep_path(), "grades")
+    keep_path = create_keep_rope_path(
+        belief_mstr_dir, sue_str, amy23_str, texas_rope, None
+    )
+    x_dutys_path = create_path(keep_path, "dutys")
+    x_visions_path = create_path(keep_path, "visions")
+    x_grades_path = create_path(keep_path, "grades")
 
     assert sue_hubunit.belief_mstr_dir == belief_mstr_dir
     assert sue_hubunit.belief_label == amy23_str
@@ -119,13 +114,6 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.respect_bit == default_RespectBit_if_None()
     assert sue_hubunit.penny == filter_penny()
     assert sue_hubunit.keep_rope == texas_rope
-    assert sue_hubunit.keep_path() == create_keep_rope_path(
-        belief_mstr_dir,
-        believer_name=sue_str,
-        belief_label=amy23_str,
-        keep_rope=texas_rope,
-        knot=None,
-    )
     bob_str = "Bob"
     assert sue_hubunit.dutys_path() == x_dutys_path
     assert sue_hubunit.visions_path() == x_visions_path
@@ -139,9 +127,6 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.duty_path(bob_str) == x_duty_path
     assert sue_hubunit.vision_path(bob_str) == x_vision_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
-    treasury_filename = "treasury.db"
-    x_treasury_file_path = create_path(sue_hubunit.keep_path(), treasury_filename)
-    assert sue_hubunit.treasury_db_path() == x_treasury_file_path
 
 
 def test_hubunit_shop_RaisesErrorIf_believer_name_Contains_knot():

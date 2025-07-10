@@ -1,7 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
@@ -12,7 +11,7 @@ from src.a00_data_toolbox.file_toolbox import (
     get_max_file_number,
     open_file,
     save_file,
-    set_dir,
+    save_json,
 )
 from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
@@ -47,22 +46,21 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
-    create_keep_rope_path,
+    create_keep_duty_path,
+    create_keep_dutys_path,
+    create_keep_grades_path,
+    create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
-    get_keep_dutys_path,
-    get_keep_grades_path,
-    get_keep_visions_path,
-    treasury_filename,
+    create_treasury_db_path,
 )
-from src.a12_hub_toolbox.basis_believers import get_default_job
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     open_gut_file,
     open_job_file,
     save_gut_file,
-    save_job_file,
 )
+from src.a12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_believer
 
 
 class SavePackFileException(Exception):
@@ -74,10 +72,6 @@ class PackFileMissingException(Exception):
 
 
 class get_keep_ropesException(Exception):
-    pass
-
-
-class _keep_ropeMissingException(Exception):
     pass
 
 
@@ -319,29 +313,6 @@ class HubUnit:
         return gut_believer
 
     # keep management
-    def keep_path(self) -> str:
-        """Returns path: belief_label/planroot/keep_rope_dirs."""
-
-        if self.keep_rope is None:
-            raise _keep_ropeMissingException(
-                f"HubUnit '{self.believer_name}' cannot save to keep_path because it does not have keep_rope."
-            )
-        return create_keep_rope_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-
-    def create_keep_path_if_missing(self):
-        set_dir(self.keep_path())
-
-    def treasury_db_path(self) -> str:
-        "Returns path: keep_path/treasury.db"
-
-        return create_path(self.keep_path(), treasury_filename())
-
     def duty_path(self, believer_name: BelieverName) -> str:
         "Returns path: dutys_path/believer_name"
 
@@ -358,13 +329,31 @@ class HubUnit:
         return create_path(self.grades_path(), get_json_filename(believer_name))
 
     def dutys_path(self) -> str:
-        return get_keep_dutys_path(self.keep_path())
+        return create_keep_dutys_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
 
     def visions_path(self) -> str:
-        return get_keep_visions_path(self.keep_path())
+        return create_keep_visions_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
 
     def grades_path(self) -> str:
-        return get_keep_grades_path(self.keep_path())
+        return create_keep_grades_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
 
     def get_visions_path_filenames_list(self) -> list[str]:
         try:
@@ -372,16 +361,9 @@ class HubUnit:
         except Exception:
             return []
 
-    def save_duty_believer(self, x_believer: BelieverUnit) -> None:
-        x_filename = get_json_filename(x_believer.believer_name)
-        save_file(self.dutys_path(), x_filename, x_believer.get_json())
-
     def save_vision_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
         save_file(self.visions_path(), x_filename, x_believer.get_json())
-
-    def initialize_job_file(self, gut: BelieverUnit) -> None:
-        save_job_file(self.belief_mstr_dir, get_default_job(gut))
 
     def duty_file_exists(self, believer_name: BelieverName) -> bool:
         return os_path_exists(self.duty_path(believer_name))
@@ -408,7 +390,14 @@ class HubUnit:
         delete_dir(self.vision_path(believer_name))
 
     def delete_treasury_db_file(self) -> None:
-        delete_dir(self.treasury_db_path())
+        treasury_db_path = create_treasury_db_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
+        delete_dir(treasury_db_path)
 
     def get_perspective_believer(self, speaker: BelieverUnit) -> BelieverUnit:
         # get copy of believer without any metrics
@@ -461,22 +450,25 @@ class HubUnit:
         gut = open_gut_file(self.belief_mstr_dir, self.belief_label, self.believer_name)
         for x_keep_rope in self.get_keep_ropes():
             self.keep_rope = x_keep_rope
-            self.save_duty_believer(gut)
+            save_duty_believer(
+                belief_mstr_dir=self.belief_mstr_dir,
+                believer_name=self.believer_name,
+                belief_label=self.belief_label,
+                keep_rope=self.keep_rope,
+                knot=self.knot,
+                duty_believer=gut,
+            )
         self.keep_rope = None
-
-    def create_treasury_db_file(self) -> None:
-        self.create_keep_path_if_missing()
-        db_path = self.treasury_db_path()
-        conn = sqlite3_connect(db_path)
-        conn.close()
-
-    def treasury_db_file_exists(self) -> bool:
-        return os_path_exists(self.treasury_db_path())
 
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():
-            self.keep_rope = x_keep_rope
-            self.create_treasury_db_file()
+            create_treasury_db_file(
+                self.belief_mstr_dir,
+                self.believer_name,
+                self.belief_label,
+                x_keep_rope,
+                self.knot,
+            )
         self.keep_rope = None
 
 

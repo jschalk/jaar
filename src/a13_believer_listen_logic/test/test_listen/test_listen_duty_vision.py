@@ -8,6 +8,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_gut_file,
 )
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.keep_tool import save_duty_believer
 from src.a13_believer_listen_logic.listen import (
     create_vision_file_from_duty_file,
     listen_to_believer_visions,
@@ -362,7 +363,15 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
+
     assert sue_texas_hubunit.vision_file_exists(yao_str) is False
 
     # WHEN

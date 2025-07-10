@@ -5,12 +5,12 @@ from src.a01_term_logic.term import BelieverName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_believer_logic.believer import BelieverUnit, PersonUnit
-from src.a12_hub_toolbox.basis_believers import (
+from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
+from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.a13_believer_listen_logic.basis_believers import (
     create_empty_believer_from_believer,
     create_listen_basis,
 )
-from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
-from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 
 
 class Missing_debtor_respectException(Exception):

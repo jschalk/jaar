@@ -17,7 +17,6 @@ from src.a01_term_logic.term import (
     BelieverName,
     EventInt,
     PersonName,
-    RopeTerm,
     default_knot_if_None,
 )
 from src.a02_finance_logic.finance_config import (
@@ -48,7 +47,6 @@ from src.a11_bud_logic.bud import (
 )
 from src.a11_bud_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.a12_path import create_belief_json_path, create_cell_dir_path
-from src.a12_hub_toolbox.basis_believers import create_listen_basis, get_default_job
 from src.a12_hub_toolbox.hub_tool import (
     cellunit_save_to_dir,
     gut_file_exists,
@@ -57,12 +55,11 @@ from src.a12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_believer
+from src.a13_believer_listen_logic.basis_believers import create_listen_basis
 from src.a13_believer_listen_logic.listen import (
-    create_vision_file_from_duty_file,
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
-    listen_to_speaker_agenda,
 )
 
 
@@ -121,7 +118,7 @@ class BeliefUnit:
         set_dir(x_path=self._believers_dir)
         set_dir(x_path=self._packs_dir)
 
-    def _get_believer_dir(self, believer_name):
+    def _get_believer_dir(self, believer_name) -> str:
         return create_path(self._believers_dir, believer_name)
 
     def _get_believer_folder_names(self) -> set:
@@ -135,57 +132,22 @@ class BeliefUnit:
         x_gut = open_gut_file(self.belief_mstr_dir, self.belief_label, believer_name)
         x_gut.settle_believer()
         for healer_name, healer_dict in x_gut._healers_dict.items():
-            healer_hubunit = hubunit_shop(
-                self.belief_mstr_dir,
-                self.belief_label,
-                healer_name,
-                keep_rope=None,
-                # "duty_vision",
-                knot=self.knot,
-                respect_bit=self.respect_bit,
-            )
             for keep_rope in healer_dict.keys():
-                self._set_believer_duty(healer_hubunit, keep_rope, x_gut)
-
-    def _set_believer_duty(
-        self,
-        healer_hubunit: HubUnit,
-        keep_rope: RopeTerm,
-        gut_believer: BelieverUnit,
-    ) -> None:
-        healer_hubunit.keep_rope = keep_rope
-        healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_believer(gut_believer)
-
-    def generate_healers_authored_job(
-        self, believer_name: BelieverName, x_gut: BelieverUnit
-    ) -> BelieverUnit:
-        x_job = get_default_job(x_gut)
-        for healer_name, healer_dict in x_gut._healers_dict.items():
-            healer_hubunit = hubunit_shop(
-                belief_mstr_dir=self.belief_mstr_dir,
-                belief_label=self.belief_label,
-                believer_name=healer_name,
-                keep_rope=None,
-                knot=self.knot,
-                respect_bit=self.respect_bit,
-            )
-            healer_hubunit.create_gut_treasury_db_files()
-            for keep_rope in healer_dict.keys():
-                keep_hubunit = hubunit_shop(
-                    belief_mstr_dir=self.belief_mstr_dir,
+                create_treasury_db_file(
+                    self.belief_mstr_dir,
+                    believer_name=believer_name,
                     belief_label=self.belief_label,
-                    believer_name=healer_name,
                     keep_rope=keep_rope,
-                    # "duty_vision",
                     knot=self.knot,
-                    respect_bit=self.respect_bit,
                 )
-                keep_hubunit.save_duty_believer(x_gut)
-                create_vision_file_from_duty_file(keep_hubunit, believer_name)
-                x_vision = keep_hubunit.get_vision_believer(believer_name)
-                x_job = listen_to_speaker_agenda(x_job, x_vision)
-        return x_job
+                save_duty_believer(
+                    belief_mstr_dir=self.belief_mstr_dir,
+                    believer_name=healer_name,
+                    belief_label=self.belief_label,
+                    keep_rope=keep_rope,
+                    knot=None,
+                    duty_believer=x_gut,
+                )
 
     # job believer management
     def create_empty_believer_from_belief(
@@ -216,8 +178,6 @@ class BeliefUnit:
         x_job = open_job_file(self.belief_mstr_dir, self.belief_label, believer_name)
         x_job.settle_believer()
         # # if believerunit has healers create job from healers.
-        # if len(x_gut._healers_dict) > 0:
-        #     return self.generate_healers_authored_job(believer_name, x_gut)
         # create believerunit from debtors roll
         return listen_to_debtors_roll_jobs_into_job(
             self.belief_mstr_dir, self.belief_label, believer_name

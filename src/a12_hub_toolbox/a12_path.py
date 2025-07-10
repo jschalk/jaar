@@ -1,4 +1,8 @@
-from src.a00_data_toolbox.file_toolbox import create_directory_path, create_path
+from src.a00_data_toolbox.file_toolbox import (
+    create_directory_path,
+    create_path,
+    get_json_filename,
+)
 from src.a01_term_logic.rope import get_all_rope_labels, rebuild_rope
 from src.a01_term_logic.term import BeliefLabel, BelieverName, LabelTerm
 
@@ -60,38 +64,104 @@ def create_keeps_dir_path(
     return create_path(believer_dir, "keeps")
 
 
+class _keep_ropeMissingException(Exception):
+    pass
+
+
 def create_keep_rope_path(
-    mstr_dir: str,
+    belief_mstr_dir: str,
     believer_name: BelieverName,
     belief_label: BeliefLabel,
     keep_rope: LabelTerm,
     knot: str,
 ) -> str:
     """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\planroot\\level1_label"""
+    if keep_rope is None:
+        raise _keep_ropeMissingException(
+            f"'{believer_name}' cannot save to keep_path because it does not have keep_rope."
+        )
+
     keep_root = "planroot"
     keep_rope = rebuild_rope(keep_rope, belief_label, keep_root)
     x_list = get_all_rope_labels(keep_rope, knot)
     keep_sub_path = create_directory_path(x_list=[*x_list])
-    keeps_dir = create_keeps_dir_path(mstr_dir, belief_label, believer_name)
+    keeps_dir = create_keeps_dir_path(belief_mstr_dir, belief_label, believer_name)
     return create_path(keeps_dir, keep_sub_path)
 
 
-# TODO relace "keeps\\keep_rope_dirs\\" with "keeps\\planroot\\level1_label\\"
-def get_keep_dutys_path(x_keep_path: str) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\dutys"""
+def create_keep_dutys_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\dutys"""
+    x_keep_path = create_keep_rope_path(
+        belief_mstr_dir, believer_name, belief_label, keep_rope, knot
+    )
     return create_path(x_keep_path, "dutys")
 
 
-# TODO relace "keeps\\keep_rope_dirs\\" with "keeps\\planroot\\level1_label\\"
-def get_keep_visions_path(x_keep_path: str) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\visions"""
+def create_keep_duty_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+    duty_believer: BelieverName,
+) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\dutys\\duty_believer.json"""
+    x_dutys_path = create_keep_dutys_path(
+        belief_mstr_dir, believer_name, belief_label, keep_rope, knot
+    )
+    return create_path(x_dutys_path, get_json_filename(duty_believer))
+
+
+def create_keep_visions_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\visions"""
+    x_keep_path = create_keep_rope_path(
+        belief_mstr_dir, believer_name, belief_label, keep_rope, knot
+    )
     return create_path(x_keep_path, "visions")
 
 
-# TODO relace "keeps\\keep_rope_dirs\\" with "keeps\\planroot\\level1_label\\"
-def get_keep_grades_path(x_keep_path: str) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\grades"""
+def create_keep_grades_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+) -> str:
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\grades"""
+    x_keep_path = create_keep_rope_path(
+        belief_mstr_dir, believer_name, belief_label, keep_rope, knot
+    )
     return create_path(x_keep_path, "grades")
+
+
+def create_treasury_db_path(
+    belief_mstr_dir: str,
+    believer_name: BelieverName,
+    belief_label: BeliefLabel,
+    keep_rope: LabelTerm,
+    knot: str,
+) -> str:
+    "Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\level1\\treasury.db"
+    keep_path = create_keep_rope_path(
+        belief_mstr_dir=belief_mstr_dir,
+        believer_name=believer_name,
+        belief_label=belief_label,
+        keep_rope=keep_rope,
+        knot=knot,
+    )
+    return create_path(keep_path, treasury_filename())
 
 
 def create_atoms_dir_path(

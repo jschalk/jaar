@@ -1,5 +1,6 @@
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
+from src.a12_hub_toolbox.keep_tool import save_duty_believer
 from src.a13_believer_listen_logic.listen import (
     create_listen_basis,
     listen_to_agendas_duty_vision,
@@ -43,7 +44,14 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
     yao_duty.set_person_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
 
     zia_vision = get_example_zia_speaker()
     sue_texas_hubunit.save_vision_believer(zia_vision)
@@ -75,7 +83,14 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     yao_duty.add_personunit(zia_str, yao_person_cred_points, yao_person_debt_points)
     yao_duty.set_person_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
 
     zia_vision = get_example_zia_speaker()
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
@@ -106,7 +121,15 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
     yao_duty = get_example_yao_speaker()
     yao_duty.add_fact(eat_rope(), full_rope())
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
+
     print(f"{sue_texas_hubunit.duty_path(yao_duty)=}")
     assert yao_duty.get_fact(eat_rope()).fstate == full_rope()
 
@@ -136,7 +159,14 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromBelieversSpeakerDi
     yao_duty.del_fact(eat_rope())
     assert yao_duty.get_fact(eat_rope()) is None
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
 
     zia_vision = get_example_zia_speaker()
     zia_vision.add_fact(eat_rope(), eat_rope())
@@ -173,7 +203,14 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
     yao_duty.add_fact(eat_rope(), full_rope())
     assert yao_duty.get_fact(eat_rope()).fstate == full_rope()
     sue_texas_hubunit = get_texas_hubunit()
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
 
     zia_vision = get_example_zia_speaker()
     zia_vision.add_fact(eat_rope(), hungry_rope())
@@ -213,7 +250,14 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfstateedFromBelieversSpeakerDi
     yao_duty = get_example_yao_speaker()
     yao_duty.del_fact(eat_rope())
     assert yao_duty.get_fact(eat_rope()) is None
-    sue_texas_hubunit.save_duty_believer(yao_duty)
+    save_duty_believer(
+        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        believer_name=sue_texas_hubunit.believer_name,
+        belief_label=sue_texas_hubunit.belief_label,
+        keep_rope=sue_texas_hubunit.keep_rope,
+        knot=None,
+        duty_believer=yao_duty,
+    )
 
     new_yao_vision1 = create_listen_basis(yao_duty)
     assert new_yao_vision1.get_fact(eat_rope()) is None

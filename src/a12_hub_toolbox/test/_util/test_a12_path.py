@@ -1,6 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
-from src.a00_data_toolbox.file_toolbox import create_path
+from pytest import raises as pytest_raises
+from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.a01_term_logic.rope import create_rope, create_rope_from_labels
 from src.a09_pack_logic.test._util.a09_str import (
     belief_label_str,
@@ -35,12 +36,14 @@ from src.a12_hub_toolbox.a12_path import (
     create_event_expressed_pack_path,
     create_gut_path,
     create_job_path,
+    create_keep_duty_path,
+    create_keep_dutys_path,
+    create_keep_grades_path,
     create_keep_rope_path,
+    create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
-    get_keep_dutys_path,
-    get_keep_grades_path,
-    get_keep_visions_path,
+    create_treasury_db_path,
     treasury_filename,
 )
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
@@ -236,39 +239,144 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
     )
 
 
-def test_get_keep_dutys_path_ReturnsObj() -> None:
+def test_create_keep_rope_path_RaisesError_Scenarion2_keep_rope_DoesNotExist():
     # ESTABLISH
-    x_keep_dir = get_module_temp_dir()
+    bob_str = "Bob"
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        create_keep_rope_path("dir", bob_str, "amy23", None, None)
+    assertion_fail_str = (
+        f"'{bob_str}' cannot save to keep_path because it does not have keep_rope."
+    )
+    assert str(excinfo.value) == assertion_fail_str
+
+
+def test_create_keep_dutys_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_belief_mstr_dir = get_module_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
 
     # WHEN
-    gen_keep_dutys_path = get_keep_dutys_path(x_keep_dir)
+    gen_keep_dutys_path = create_keep_dutys_path(
+        belief_mstr_dir=x_belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+    )
 
     # THEN
-    expected_keep_dutys_path = create_path(x_keep_dir, "dutys")
+    keep_casa_path = create_keep_rope_path(
+        x_belief_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    expected_keep_dutys_path = create_path(keep_casa_path, "dutys")
     assert gen_keep_dutys_path == expected_keep_dutys_path
 
 
-def test_get_keep_grades_path_ReturnsObj() -> None:
+def test_create_keep_duty_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_keep_dir = get_module_temp_dir()
+    x_belief_mstr_dir = get_module_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
+    bob_str = "Bob"
 
     # WHEN
-    gen_keep_dutys_path = get_keep_grades_path(x_keep_dir)
+    gen_keep_duty_path = create_keep_duty_path(
+        belief_mstr_dir=x_belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+        duty_believer=bob_str,
+    )
 
     # THEN
-    expected_keep_dutys_path = create_path(x_keep_dir, "grades")
+    keep_dutys_path = create_keep_dutys_path(
+        x_belief_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    bob_filename = get_json_filename(bob_str)
+    expected_keep_duty_path = create_path(keep_dutys_path, bob_filename)
+    assert gen_keep_duty_path == expected_keep_duty_path
+
+
+def test_create_keep_grades_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_belief_mstr_dir = get_module_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
+
+    # WHEN
+    gen_keep_dutys_path = create_keep_grades_path(
+        belief_mstr_dir=x_belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+    )
+
+    # THEN
+    keep_casa_path = create_keep_rope_path(
+        x_belief_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    expected_keep_dutys_path = create_path(keep_casa_path, "grades")
     assert gen_keep_dutys_path == expected_keep_dutys_path
 
 
-def test_get_keep_visions_path_ReturnsObj() -> None:
+def test_create_keep_visions_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_keep_dir = get_module_temp_dir()
+    x_belief_mstr_dir = get_module_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
 
     # WHEN
-    gen_keep_dutys_path = get_keep_visions_path(x_keep_dir)
+    gen_keep_dutys_path = create_keep_visions_path(
+        belief_mstr_dir=x_belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+    )
 
     # THEN
-    expected_keep_dutys_path = create_path(x_keep_dir, "visions")
+    keep_casa_path = create_keep_rope_path(
+        x_belief_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    expected_keep_dutys_path = create_path(keep_casa_path, "visions")
+    assert gen_keep_dutys_path == expected_keep_dutys_path
+
+
+def test_create_treasury_db_path_ReturnsObj() -> None:
+    # ESTABLISH
+    x_belief_mstr_dir = get_module_temp_dir()
+    amy23_str = "amy23"
+    sue_str = "Sue"
+    casa_str = "casa"
+    casa_rope = create_rope(amy23_str, casa_str)
+
+    # WHEN
+    gen_keep_dutys_path = create_treasury_db_path(
+        belief_mstr_dir=x_belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=amy23_str,
+        keep_rope=casa_rope,
+        knot=None,
+    )
+
+    # THEN
+    keep_casa_path = create_keep_rope_path(
+        x_belief_mstr_dir, sue_str, amy23_str, casa_rope, None
+    )
+    expected_keep_dutys_path = create_path(keep_casa_path, "treasury.db")
     assert gen_keep_dutys_path == expected_keep_dutys_path
 
 
@@ -721,7 +829,7 @@ def test_create_keep_rope_path_HasDocString() -> None:
     level1_label_str = "level1_label"
     level1_rope = create_rope("planroot", level1_label_str)
     doc_str = create_keep_rope_path(
-        mstr_dir="belief_mstr_dir",
+        belief_mstr_dir="belief_mstr_dir",
         believer_name=believer_name_str(),
         belief_label=belief_label_str(),
         keep_rope=level1_rope,
@@ -732,48 +840,82 @@ def test_create_keep_rope_path_HasDocString() -> None:
     assert LINUX_OS or inspect_getdoc(create_keep_rope_path) == doc_str
 
 
-def test_get_keep_dutys_path_HasDocString() -> None:
+def test_create_keep_dutys_path_HasDocString() -> None:
     # ESTABLISH
-    keeps_dir = create_keeps_dir_path(
+    expected_doc_str = create_keep_dutys_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
+        keep_rope="planroot;level1;leveln",
+        knot=None,
     )
-    keep_path = create_path(keeps_dir, "keep_rope_dirs")
-    doc_str = get_keep_dutys_path(x_keep_path=keep_path)
-    doc_str = f"Returns path: {doc_str}"
+    expected_doc_str = f"Returns path: {expected_doc_str}"
+    print(f"{expected_doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(get_keep_dutys_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_keep_dutys_path) == expected_doc_str
 
 
-def test_get_keep_grades_path_HasDocString() -> None:
+def test_create_keep_duty_path_HasDocString() -> None:
     # ESTABLISH
-    keeps_dir = create_keeps_dir_path(
+    duty_believer_str = "duty_believer"
+    expected_doc_str = create_keep_duty_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
+        keep_rope="planroot;level1;leveln",
+        knot=None,
+        duty_believer=duty_believer_str,
     )
-    keep_path = create_path(keeps_dir, "keep_rope_dirs")
-    doc_str = get_keep_grades_path(x_keep_path=keep_path)
+    expected_doc_str = f"Returns path: {expected_doc_str}"
+    print(f"{expected_doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_keep_duty_path) == expected_doc_str
+
+
+def test_create_keep_grades_path_HasDocString() -> None:
+    # ESTABLISH
+    doc_str = create_keep_grades_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        keep_rope="planroot;level1;leveln",
+        knot=None,
+    )
     doc_str = f"Returns path: {doc_str}"
     print(f"                             {doc_str=}")
-    print(f"{inspect_getdoc(get_keep_grades_path)=}")
+    print(f"{inspect_getdoc(create_keep_grades_path)=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(get_keep_grades_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_keep_grades_path) == doc_str
 
 
-def test_get_keep_visions_path_HasDocString() -> None:
+def test_create_keep_visions_path_HasDocString() -> None:
     # ESTABLISH
-    keeps_dir = create_keeps_dir_path(
+    doc_str = create_keep_visions_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
+        keep_rope="planroot;level1;leveln",
+        knot=None,
     )
-    keep_path = create_path(keeps_dir, "keep_rope_dirs")
-    doc_str = get_keep_visions_path(x_keep_path=keep_path)
     doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(get_keep_visions_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_keep_visions_path) == doc_str
+
+
+def test_create_treasury_db_path_HasDocString() -> None:
+    # ESTABLISH
+    doc_str = create_treasury_db_path(
+        belief_mstr_dir="belief_mstr_dir",
+        belief_label=belief_label_str(),
+        believer_name=believer_name_str(),
+        keep_rope="planroot;level1;leveln",
+        knot=None,
+    )
+    doc_str = f"Returns path: {doc_str}"
+    print(f"{doc_str=}")
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_treasury_db_path) == doc_str
 
 
 def test_create_atoms_dir_path_HasDocString():

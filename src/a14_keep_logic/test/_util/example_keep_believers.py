@@ -1,3 +1,4 @@
+from src.a01_term_logic.rope import RopeTerm, create_rope_from_labels
 from src.a06_believer_logic.believer import (
     BeliefLabel,
     BelieverUnit,
@@ -5,6 +6,10 @@ from src.a06_believer_logic.believer import (
     planunit_shop,
 )
 from src.a14_keep_logic.test._util.a14_env import temp_belief_label
+
+
+def temp_believer_name():
+    return "ex_believer04"
 
 
 def get_1label_believer() -> BelieverUnit:
@@ -108,3 +113,10 @@ def get_7labelJRoot_believer() -> BelieverUnit:
     x_believer.set_plan(planunit_shop("F"), c_rope)
     x_believer.settle_believer()
     return x_believer
+
+
+def get_texas_rope() -> RopeTerm:
+    naton_str = "nation"
+    usa_str = "usa"
+    texas_str = "texas"
+    return create_rope_from_labels([naton_str, usa_str, texas_str])

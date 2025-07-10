@@ -2,11 +2,6 @@ from src.a01_term_logic.term import BelieverName
 from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
 
 
-def _is_empty_believer(x_believer: BelieverUnit) -> bool:
-    empty_believer = create_empty_believer_from_believer(x_believer)
-    return x_believer.get_dict() == empty_believer.get_dict()
-
-
 def create_empty_believer_from_believer(
     ref_believer: BelieverUnit, x_believer_name: BelieverName = None
 ) -> BelieverUnit:
