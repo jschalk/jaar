@@ -47,7 +47,11 @@ from src.a11_bud_logic.bud import (
     tranbook_shop,
 )
 from src.a11_bud_logic.cell import cellunit_shop
-from src.a12_hub_toolbox.a12_path import create_belief_json_path, create_cell_dir_path
+from src.a12_hub_toolbox.a12_path import (
+    create_belief_json_path,
+    create_cell_dir_path,
+    create_keep_rope_path,
+)
 from src.a12_hub_toolbox.hub_tool import (
     cellunit_save_to_dir,
     gut_file_exists,
@@ -119,7 +123,7 @@ class BeliefUnit:
         set_dir(x_path=self._believers_dir)
         set_dir(x_path=self._packs_dir)
 
-    def _get_believer_dir(self, believer_name):
+    def _get_believer_dir(self, believer_name) -> str:
         return create_path(self._believers_dir, believer_name)
 
     def _get_believer_folder_names(self) -> set:
@@ -143,17 +147,17 @@ class BeliefUnit:
                 respect_bit=self.respect_bit,
             )
             for keep_rope in healer_dict.keys():
-                self._set_believer_duty(healer_hubunit, keep_rope, x_gut)
+                keep_dir = create_keep_rope_path(
+                    self.belief_mstr_dir,
+                    believer_name=believer_name,
+                    belief_label=self.belief_label,
+                    keep_rope=keep_rope,
+                    knot=self.knot,
+                )
 
-    def _set_believer_duty(
-        self,
-        healer_hubunit: HubUnit,
-        keep_rope: RopeTerm,
-        gut_believer: BelieverUnit,
-    ) -> None:
-        healer_hubunit.keep_rope = keep_rope
-        healer_hubunit.create_treasury_db_file()
-        healer_hubunit.save_duty_believer(gut_believer)
+                healer_hubunit.keep_rope = keep_rope
+                healer_hubunit.create_treasury_db_file()
+                healer_hubunit.save_duty_believer(x_gut)
 
     # job believer management
     def create_empty_believer_from_belief(
