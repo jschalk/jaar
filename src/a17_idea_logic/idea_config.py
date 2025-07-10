@@ -580,10 +580,6 @@ def idea_format_00059_delete_believerunit_v0_0_0() -> str:
     return "idea_format_00059_delete_believerunit_v0_0_0"
 
 
-def idea_format_00050_delete_believer_person_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_believer_person_membership_v0_0_0"
-
-
 def idea_format_00113_person_map1_v0_0_0() -> str:
     return "idea_format_00113_person_map1_v0_0_0"
 

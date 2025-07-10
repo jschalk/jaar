@@ -336,7 +336,6 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
         "green_str",
         "hungry_rope",
         "hungry_str",
-        "idea_format_00050_delete_believer_person_membership_v0_0_0",
         "is_empty",
         "is_valid",
         "joc_str",
