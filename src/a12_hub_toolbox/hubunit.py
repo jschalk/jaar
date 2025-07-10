@@ -474,16 +474,6 @@ class HubUnit:
         conn = sqlite3_connect(treasury_db_path)
         conn.close()
 
-    def treasury_db_file_exists(self) -> bool:
-        treasury_db_path = create_treasury_db_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-        return os_path_exists(treasury_db_path)
-
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():
             self.keep_rope = x_keep_rope

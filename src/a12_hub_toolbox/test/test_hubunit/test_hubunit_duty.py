@@ -6,6 +6,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 from src.a12_hub_toolbox.a12_path import create_treasury_db_path
 from src.a12_hub_toolbox.hubunit import hubunit_shop
+from src.a12_hub_toolbox.keep_tool import treasury_db_file_exists
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
@@ -211,10 +212,24 @@ def test_HubUnit_delete_treasury_db_file_DeletesFile(env_dir_setup_cleanup):
         knot=texas_hubunit.knot,
     )
     print(f"before  {os_path_exists(treasury_db_path)=}")
-    assert texas_hubunit.treasury_db_file_exists()
+    t0_exists = treasury_db_file_exists(
+        belief_mstr_dir=texas_hubunit.belief_mstr_dir,
+        believer_name=texas_hubunit.believer_name,
+        belief_label=texas_hubunit.belief_label,
+        keep_rope=texas_hubunit.keep_rope,
+        knot=texas_hubunit.knot,
+    )
+    assert t0_exists
 
     # WHEN
     texas_hubunit.delete_treasury_db_file()
 
     # THEN
-    assert texas_hubunit.treasury_db_file_exists() is False
+    t1_exists = treasury_db_file_exists(
+        belief_mstr_dir=texas_hubunit.belief_mstr_dir,
+        believer_name=texas_hubunit.believer_name,
+        belief_label=texas_hubunit.belief_label,
+        keep_rope=texas_hubunit.keep_rope,
+        knot=texas_hubunit.knot,
+    )
+    assert t1_exists is False

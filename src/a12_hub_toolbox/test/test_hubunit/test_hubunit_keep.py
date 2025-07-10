@@ -215,25 +215,6 @@ def test_HubUnit_create_treasury_db_DoesNotOverWriteDBIfExists(
     assert open_file(keep_path, filename=db_file) == x_file_str
 
 
-def test_HubUnit_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    a23_str = "amy23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(env_dir(), a23_str, sue_str)
-    texas_str = "Texas"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
-    sue_hubunit.keep_rope = texas_rope
-    assert sue_hubunit.treasury_db_file_exists() is False
-
-    # WHEN
-    sue_hubunit.create_treasury_db_file()
-
-    # THEN
-    assert sue_hubunit.treasury_db_file_exists()
-
-
 def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     env_dir_setup_cleanup, graphics_bool
 ):
