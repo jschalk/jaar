@@ -414,7 +414,7 @@ def test_insert_csv_ChangesDBState(env_dir_setup_cleanup):
         # WHEN Call the function to insert data from the CSV file into the database
         insert_csv(csv_path, conn, test_tablename)
 
-        # THEN Verify the data was inserted correctly
+        # THEN Verify the data was inserted
         cursor.execute(f"SELECT * FROM {test_tablename}")
         rows = cursor.fetchall()
         expected_data = [
@@ -439,7 +439,7 @@ def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
         # WHEN
         insert_csv(csv_path, cursor, test_tablename)
 
-        # THEN Verify the data was inserted correctly
+        # THEN Verify the data was inserted
         cursor.execute(f"SELECT * FROM {test_tablename}")
         rows = cursor.fetchall()
         expected_data = [
@@ -499,7 +499,7 @@ def test_create_table_from_csv_ChangesDBState(env_dir_setup_cleanup):
         # WHEN
         create_table_from_csv(test_csv_filepath, conn, new_table, column_types)
 
-        # THEN Verify the table was created correctly
+        # THEN Verify the table was created
         cursor.execute(f"PRAGMA table_info({new_table})")
         columns = cursor.fetchall()
         expected_columns = [

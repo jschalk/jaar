@@ -17,7 +17,7 @@ def open_csv_with_types(csv_path, column_types):
 
     :param csv_path: Path to the CSV file.
     :param column_types: Dictionary mapping column names to data types.
-    :return: List of tuples with correctly typed values.
+    :return: List of tuples with typed values.
     """
     with open(csv_path, newline="", encoding="utf-8") as csv_file:
         reader = csv_reader(csv_file)

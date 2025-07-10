@@ -397,7 +397,6 @@ def test_Modules_path_FunctionStructureAndFormat():
         "create_path",
         "create_directory_path",
         "ropeterm_valid_dir_path",
-        "create_keep_rope_path",
     }
     for module_desc, module_dir in get_module_descs().items():
         filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})

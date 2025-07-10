@@ -4,7 +4,6 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import (
-    create_directory_path,
     create_path,
     delete_dir,
     get_dir_file_strs,
@@ -15,15 +14,10 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.a01_term_logic.rope import (
-    get_all_rope_labels,
-    rebuild_rope,
-    validate_labelterm,
-)
+from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
     BeliefLabel,
     BelieverName,
-    LabelTerm,
     RopeTerm,
     default_knot_if_None,
 )
@@ -53,6 +47,7 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
+    create_keep_rope_path,
     create_keeps_dir_path,
     create_packs_dir_path,
     get_keep_dutys_path,
@@ -331,7 +326,13 @@ class HubUnit:
             raise _keep_ropeMissingException(
                 f"HubUnit '{self.believer_name}' cannot save to keep_path because it does not have keep_rope."
             )
-        return create_keep_rope_path(self, self.keep_rope)
+        return create_keep_rope_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
 
     def create_keep_path_if_missing(self):
         set_dir(self.keep_path())
@@ -505,12 +506,3 @@ def hubunit_shop(
     )
     x_hubunit.set_dir_attrs()
     return x_hubunit
-
-
-def create_keep_rope_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
-    """Returns path: belief_label/planroot/keep_rope_dirs."""
-    keep_root = "planroot"
-    x_rope = rebuild_rope(x_rope, x_hubunit.belief_label, keep_root)
-    x_list = get_all_rope_labels(x_rope, x_hubunit.knot)
-    keep_sub_path = create_directory_path(x_list=[*x_list])
-    return create_path(x_hubunit._keeps_dir, keep_sub_path)
