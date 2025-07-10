@@ -47,6 +47,7 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
+    create_keep_path_dir_if_missing,
     create_keep_rope_path,
     create_keeps_dir_path,
     create_packs_dir_path,
@@ -315,16 +316,6 @@ class HubUnit:
         return gut_believer
 
     # keep management
-    def create_keep_path_if_missing(self):
-        keep_path = create_keep_rope_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-        set_dir(keep_path)
-
     def treasury_db_path(self) -> str:
         "Returns path: keep_path/treasury.db"
         keep_path = create_keep_rope_path(
@@ -474,7 +465,13 @@ class HubUnit:
         self.keep_rope = None
 
     def create_treasury_db_file(self) -> None:
-        self.create_keep_path_if_missing()
+        create_keep_path_dir_if_missing(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
         db_path = self.treasury_db_path()
         conn = sqlite3_connect(db_path)
         conn.close()
