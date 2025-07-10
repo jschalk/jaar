@@ -4,7 +4,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
-from src.a12_hub_toolbox.basis_believers import (
+from src.a13_believer_listen_logic.basis_believers import (
     create_empty_believer_from_believer,
     create_listen_basis,
     get_default_job,

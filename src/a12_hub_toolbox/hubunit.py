@@ -55,7 +55,6 @@ from src.a12_hub_toolbox.a12_path import (
     get_keep_visions_path,
     treasury_filename,
 )
-from src.a12_hub_toolbox.basis_believers import get_default_job
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     open_gut_file,
@@ -63,6 +62,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
+from src.a13_believer_listen_logic.basis_believers import get_default_job
 
 
 class SavePackFileException(Exception):
@@ -397,9 +397,6 @@ class HubUnit:
     def save_vision_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
         save_file(self.visions_path(), x_filename, x_believer.get_json())
-
-    def initialize_job_file(self, gut: BelieverUnit) -> None:
-        save_job_file(self.belief_mstr_dir, get_default_job(gut))
 
     def duty_file_exists(self, believer_name: BelieverName) -> bool:
         return os_path_exists(self.duty_path(believer_name))
