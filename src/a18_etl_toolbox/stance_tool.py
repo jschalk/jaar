@@ -24,7 +24,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 
-# TODO #842
 def add_to_br00042_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
     pidtitl_s_vld_tablename = prime_tbl("PIDTITL", "s", "vld")
     pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
