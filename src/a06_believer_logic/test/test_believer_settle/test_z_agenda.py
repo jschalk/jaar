@@ -386,7 +386,7 @@ def test_believerunit_get_from_json_CorrectlyLoadsTaskFromJSON():
     assert len(yao_believer.get_agenda_dict()) > 0
 
 
-def test_BelieverUnit_set_fact_Isue116Resolved_correctlySetsChoreAsTrue():
+def test_BelieverUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     # ESTABLISH
     yao_believer = believerunit_v002()
     print(f"{yao_believer.get_reason_rcontexts()=}")

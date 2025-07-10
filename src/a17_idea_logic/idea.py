@@ -2,13 +2,11 @@ from csv import reader as csv_reader
 from dataclasses import dataclass
 from pandas import DataFrame
 from src.a00_data_toolbox.dict_toolbox import (
-    add_headers_to_csv,
     create_l2nested_csv_dict,
     extract_csv_headers,
     get_csv_column1_column2_metrics,
     get_positional_dict,
 )
-from src.a00_data_toolbox.file_toolbox import open_file
 from src.a01_term_logic.term import BeliefLabel, BelieverName
 from src.a06_believer_logic.believer import BelieverUnit
 from src.a07_timeline_logic.timeline import timelineunit_shop
@@ -18,9 +16,6 @@ from src.a09_pack_logic.delta import (
     believerdelta_shop,
     get_dimens_cruds_believerdelta,
 )
-from src.a09_pack_logic.pack import packunit_shop
-from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a15_belief_logic.belief import BeliefUnit, beliefunit_shop
 from src.a17_idea_logic.idea_config import (
     get_idea_format_headers,
@@ -199,36 +194,6 @@ def make_believerdelta(x_csv: str) -> BelieverDelta:
         for x_believeratom in x_atomrow.get_believeratoms():
             x_believerdelta.set_believeratom(x_believeratom)
     return x_believerdelta
-
-
-def _load_individual_idea_csv(
-    complete_csv: str,
-    belief_mstr_dir: str,
-    x_belief_label: BeliefLabel,
-    x_believer_name: BelieverName,
-):
-    x_hubunit = hubunit_shop(belief_mstr_dir, x_belief_label, x_believer_name)
-    x_hubunit.initialize_pack_gut_files()
-    x_believerdelta = make_believerdelta(complete_csv)
-    # x_believerdelta = get_minimal_believerdelta(x_believerdelta, x_gut)
-    x_packunit = packunit_shop(x_believer_name, x_belief_label)
-    x_packunit.set_believerdelta(x_believerdelta)
-    x_hubunit.save_pack_file(x_packunit)
-    x_hubunit._create_gut_from_packs()
-
-
-def load_idea_csv(belief_mstr_dir: str, x_dir: str, x_filename: str):
-    x_csv = open_file(x_dir, x_filename)
-    headers_list, headerless_csv = extract_csv_headers(x_csv)
-    nested_csv = belief_label_believer_name_nested_csv_dict(
-        headerless_csv, delimiter=","
-    )
-    for x_belief_label, belief_dict in nested_csv.items():
-        for x_believer_name, believer_csv in belief_dict.items():
-            complete_csv = add_headers_to_csv(headers_list, believer_csv)
-            _load_individual_idea_csv(
-                complete_csv, belief_mstr_dir, x_belief_label, x_believer_name
-            )
 
 
 def get_csv_belief_label_believer_name_metrics(

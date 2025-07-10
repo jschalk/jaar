@@ -4,7 +4,6 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import (
-    create_directory_path,
     create_path,
     delete_dir,
     get_dir_file_strs,
@@ -15,15 +14,10 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.a01_term_logic.rope import (
-    get_all_rope_labels,
-    rebuild_rope,
-    validate_labelterm,
-)
+from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
     BeliefLabel,
     BelieverName,
-    LabelTerm,
     RopeTerm,
     default_knot_if_None,
 )
@@ -53,8 +47,12 @@ from src.a09_pack_logic.pack import (
 )
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
+    create_keep_rope_path,
     create_keeps_dir_path,
     create_packs_dir_path,
+    get_keep_dutys_path,
+    get_keep_grades_path,
+    get_keep_visions_path,
     treasury_filename,
 )
 from src.a12_hub_toolbox.basis_believers import get_default_job
@@ -81,18 +79,6 @@ class get_keep_ropesException(Exception):
 
 class _keep_ropeMissingException(Exception):
     pass
-
-
-def get_keep_dutys_dir(x_keep_path: str) -> str:
-    return create_path(x_keep_path, "dutys")
-
-
-def get_keep_visions_dir(x_keep_path: str) -> str:
-    return create_path(x_keep_path, "visions")
-
-
-def get_keep_grades_dir(x_keep_path: str) -> str:
-    return create_path(x_keep_path, "grades")
 
 
 @dataclass
@@ -340,7 +326,13 @@ class HubUnit:
             raise _keep_ropeMissingException(
                 f"HubUnit '{self.believer_name}' cannot save to keep_path because it does not have keep_rope."
             )
-        return create_keep_rope_path(self, self.keep_rope)
+        return create_keep_rope_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
 
     def create_keep_path_if_missing(self):
         set_dir(self.keep_path())
@@ -351,42 +343,42 @@ class HubUnit:
         return create_path(self.keep_path(), treasury_filename())
 
     def duty_path(self, believer_name: BelieverName) -> str:
-        "Returns path: dutys_dir/believer_name"
+        "Returns path: dutys_path/believer_name"
 
-        return create_path(self.dutys_dir(), get_json_filename(believer_name))
+        return create_path(self.dutys_path(), get_json_filename(believer_name))
 
     def vision_path(self, believer_name: BelieverName) -> str:
-        "Returns path: visions_dir/believer_name.json"
+        "Returns path: visions_path/believer_name.json"
 
-        return create_path(self.visions_dir(), get_json_filename(believer_name))
+        return create_path(self.visions_path(), get_json_filename(believer_name))
 
     def grade_path(self, believer_name: BelieverName) -> str:
-        "Returns path: grades_dir/believer_name.json"
+        "Returns path: grades_path/believer_name.json"
 
-        return create_path(self.grades_dir(), get_json_filename(believer_name))
+        return create_path(self.grades_path(), get_json_filename(believer_name))
 
-    def dutys_dir(self) -> str:
-        return get_keep_dutys_dir(self.keep_path())
+    def dutys_path(self) -> str:
+        return get_keep_dutys_path(self.keep_path())
 
-    def visions_dir(self) -> str:
-        return get_keep_visions_dir(self.keep_path())
+    def visions_path(self) -> str:
+        return get_keep_visions_path(self.keep_path())
 
-    def grades_dir(self) -> str:
-        return get_keep_grades_dir(self.keep_path())
+    def grades_path(self) -> str:
+        return get_keep_grades_path(self.keep_path())
 
-    def get_visions_dir_filenames_list(self) -> list[str]:
+    def get_visions_path_filenames_list(self) -> list[str]:
         try:
-            return list(get_dir_file_strs(self.visions_dir(), True).keys())
+            return list(get_dir_file_strs(self.visions_path(), True).keys())
         except Exception:
             return []
 
     def save_duty_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
-        save_file(self.dutys_dir(), x_filename, x_believer.get_json())
+        save_file(self.dutys_path(), x_filename, x_believer.get_json())
 
     def save_vision_believer(self, x_believer: BelieverUnit) -> None:
         x_filename = get_json_filename(x_believer.believer_name)
-        save_file(self.visions_dir(), x_filename, x_believer.get_json())
+        save_file(self.visions_path(), x_filename, x_believer.get_json())
 
     def initialize_job_file(self, gut: BelieverUnit) -> None:
         save_job_file(self.belief_mstr_dir, get_default_job(gut))
@@ -400,13 +392,13 @@ class HubUnit:
     def get_duty_believer(self, believer_name: BelieverName) -> BelieverUnit:
         if self.duty_file_exists(believer_name) is False:
             return None
-        file_content = open_file(self.dutys_dir(), get_json_filename(believer_name))
+        file_content = open_file(self.dutys_path(), get_json_filename(believer_name))
         return believerunit_get_from_json(file_content)
 
     def get_vision_believer(self, believer_name: BelieverName) -> BelieverUnit:
         if self.vision_file_exists(believer_name) is False:
             return None
-        file_content = open_file(self.visions_dir(), get_json_filename(believer_name))
+        file_content = open_file(self.visions_path(), get_json_filename(believer_name))
         return believerunit_get_from_json(file_content)
 
     def delete_duty_file(self, believer_name: BelieverName) -> None:
@@ -514,12 +506,3 @@ def hubunit_shop(
     )
     x_hubunit.set_dir_attrs()
     return x_hubunit
-
-
-def create_keep_rope_path(x_hubunit: HubUnit, x_rope: LabelTerm) -> str:
-    """Returns path: belief_label/planroot/keep_rope_dirs."""
-    keep_root = "planroot"
-    x_rope = rebuild_rope(x_rope, x_hubunit.belief_label, keep_root)
-    x_list = get_all_rope_labels(x_rope, x_hubunit.knot)
-    keep_sub_path = create_directory_path(x_list=[*x_list])
-    return create_path(x_hubunit._keeps_dir, keep_sub_path)

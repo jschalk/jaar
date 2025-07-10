@@ -20,7 +20,7 @@ def test_BelieverUnit_get_tree_metrics_exists():
     assert zia_believer_tree_metrics.awardlinks_metrics is not None
 
 
-def test_BelieverUnit_get_tree_metrics_get_plan_uid_max_correctlyGetsMaxPlanUID():
+def test_BelieverUnit_get_tree_metrics_get_plan_uid_max_GetsMaxPlanUID():
     # ESTABLISH
     yao_believer = believerunit_v001()
 

@@ -217,6 +217,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
         assert get_max_brick_agg_event_int(cursor1) == event5 + 1
         select_sqlstr = f"SELECT * FROM {events_brick_agg_str()}"
         cursor1.execute(select_sqlstr)
-        print(cursor1.fetchall())
+        rows = cursor1.fetchall()
+        assert len(rows) == 2
     db_conn1.close()
     assert not os_path_exists(input_file_path)

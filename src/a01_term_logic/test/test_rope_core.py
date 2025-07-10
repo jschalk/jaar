@@ -147,7 +147,7 @@ def test_rope_create_rope_ReturnsObj_Scenario5():
     assert create_rope(roses_rope, None) == roses_rope
 
 
-def test_rope_is_sub_rope_correctlyReturnsBool():
+def test_rope_is_sub_rope_ReturnsObj_Scenario0_WhenNone_default_knot_if_None():
     # WHEN
     casa_str = "casa"
     casa_rope = f"{root_rope()}{default_knot_if_None()}{casa_str}"
@@ -162,6 +162,31 @@ def test_rope_is_sub_rope_correctlyReturnsBool():
     assert is_sub_rope(cleaning_rope, cleaning_rope)
     assert is_sub_rope(laundrys_rope, cleaning_rope)
     assert is_sub_rope(cleaning_rope, laundrys_rope) is False
+
+
+def test_rope_is_sub_rope_ReturnsObj_Scenario1_WhenNone_default_knot_if_None():
+    # WHEN
+    casa_str = "casa"
+    slash_str = "/"
+    casa_rope = f"{root_rope()}{slash_str}{casa_str}"
+    cleaning_str = "cleaning"
+    slash_cleaning_rope = f"{casa_rope}{slash_str}{cleaning_str}"
+    default_cleaning_rope = f"{casa_rope}{default_knot_if_None()}{cleaning_str}"
+    laundrys_str = "laundrys"
+    slash_laundrys_rope = f"{slash_cleaning_rope}{slash_str}{laundrys_str}"
+    default_laundrys_rope = f"{default_cleaning_rope}{slash_str}{laundrys_str}"
+    print(f"{slash_cleaning_rope=}")
+    print(f"{slash_laundrys_rope=}")
+    print(f"{default_cleaning_rope=}")
+    print(f"{default_laundrys_rope=}")
+
+    # WHEN / THEN
+    assert is_sub_rope(slash_cleaning_rope, slash_cleaning_rope)
+    assert is_sub_rope(slash_laundrys_rope, slash_cleaning_rope)
+    assert is_sub_rope(slash_cleaning_rope, slash_laundrys_rope) is False
+    assert is_sub_rope(slash_cleaning_rope, default_cleaning_rope) is False
+    assert is_sub_rope(slash_laundrys_rope, default_cleaning_rope) is False
+    assert is_sub_rope(slash_cleaning_rope, default_laundrys_rope) is False
 
 
 def test_rope_rebuild_rope_ReturnsCorrectRopeTerm():

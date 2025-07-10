@@ -80,7 +80,7 @@ def test_create_idea_table_from_csv_ChangesDBState(
     # WHEN
     create_idea_table_from_csv(test_csv_filepath, conn, new_table)
 
-    # THEN Verify the table was created correctly
+    # THEN Verify the table was created
     cursor = conn.cursor()
     cursor.execute(f"PRAGMA table_info({new_table})")
     columns = cursor.fetchall()
@@ -124,7 +124,7 @@ def test_insert_idea_csv_ChangesDBState_add_to_empty_table(
     insert_idea_csv(test_csv_filepath, conn, br_tablename)
 
     # THEN
-    # Verify the data was inserted correctly
+    # Verify the data was inserted
     cursor.execute(f"SELECT * FROM {br_tablename}")
     rows = cursor.fetchall()
     expected_data = [

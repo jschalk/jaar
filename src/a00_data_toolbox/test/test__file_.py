@@ -260,7 +260,7 @@ def test_save_file_DoesNotRequireSeperateFilename(env_dir_setup_cleanup):
     assert os_path_exist(swim_file_path)
 
 
-def test_get_dir_file_strs_correctlyGrabsFileData(env_dir_setup_cleanup):
+def test_get_dir_file_strs_GrabsFileData(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"
@@ -500,13 +500,13 @@ def test_is_path_valid_ReturnsObj():
 
 def test_can_usser_edit_paths_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    """I am not able to test this correctly. For now make sure it runs."""
+    """I am not able to test. For now make sure it runs."""
     assert can_usser_edit_paths()
 
 
 def test_is_path_existent_or_creatable_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    """I am not able to test this correctly. For now make sure it runs."""
+    """I am not able to test. For now make sure it runs."""
     assert is_path_existent_or_creatable("run")
     assert (
         platform_system() == "Windows"
@@ -517,7 +517,7 @@ def test_is_path_existent_or_creatable_ReturnsObj():
 
 def test_is_path_probably_creatable_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    """I am not able to test this correctly. For now make sure it runs."""
+    """I am not able to test. For now make sure it runs."""
     assert is_path_probably_creatable("run")
     assert is_path_probably_creatable("run/trail?") is False
     assert is_path_probably_creatable("run///trail") is False
@@ -525,7 +525,7 @@ def test_is_path_probably_creatable_ReturnsObj():
 
 def test_is_path_existent_or_probably_creatable_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    """I am not able to test this correctly. For now make sure it runs."""
+    """I am not able to test. For now make sure it runs."""
     assert is_path_existent_or_probably_creatable("run")
     assert is_path_existent_or_probably_creatable("run/trail?") is False
     assert is_path_existent_or_probably_creatable("run///trail") is False
