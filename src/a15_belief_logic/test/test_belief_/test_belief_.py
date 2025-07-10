@@ -11,7 +11,11 @@ from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a11_bud_logic.bud import tranbook_shop
-from src.a12_hub_toolbox.a12_path import create_believer_dir_path, create_path
+from src.a12_hub_toolbox.a12_path import (
+    create_believer_dir_path,
+    create_path,
+    get_keep_dutys_path,
+)
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,
@@ -488,10 +492,10 @@ def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
     save_gut_file(x_belief_mstr_dir, yao_gut_believer)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
-    sue_dallas_hubunit = hubunit_shop(x_belief_mstr_dir, a23_str, sue_str, dallas_rope)
-    yao_dallas_hubunit = hubunit_shop(x_belief_mstr_dir, a23_str, yao_str, dallas_rope)
-    sue_dutys_path = sue_dallas_hubunit.dutys_path()
-    yao_dutys_path = yao_dallas_hubunit.dutys_path()
+
+    mstr_dir = x_belief_mstr_dir
+    sue_dutys_path = get_keep_dutys_path(mstr_dir, sue_str, a23_str, dallas_rope, None)
+    yao_dutys_path = get_keep_dutys_path(mstr_dir, yao_str, a23_str, dallas_rope, None)
     sue_dallas_sue_duty_file_path = create_path(sue_dutys_path, sue_filename)
     sue_dallas_yao_duty_file_path = create_path(sue_dutys_path, yao_filename)
     yao_dallas_sue_duty_file_path = create_path(yao_dutys_path, sue_filename)
