@@ -358,13 +358,31 @@ class HubUnit:
         return create_path(self.grades_path(), get_json_filename(believer_name))
 
     def dutys_path(self) -> str:
-        return get_keep_dutys_path(self.keep_path())
+        return get_keep_dutys_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
 
     def visions_path(self) -> str:
-        return get_keep_visions_path(self.keep_path())
+        return get_keep_visions_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
 
     def grades_path(self) -> str:
-        return get_keep_grades_path(self.keep_path())
+        return get_keep_grades_path(
+            belief_mstr_dir=self.belief_mstr_dir,
+            believer_name=self.believer_name,
+            belief_label=self.belief_label,
+            keep_rope=self.keep_rope,
+            knot=self.knot,
+        )
 
     def get_visions_path_filenames_list(self) -> list[str]:
         try:
