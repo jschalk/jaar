@@ -61,6 +61,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_job_file,
 )
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.keep_tool import create_treasury_db_file
 from src.a13_believer_listen_logic.basis_believers import create_listen_basis
 from src.a13_believer_listen_logic.listen import (
     listen_to_agendas_create_init_job_from_guts,
@@ -147,16 +148,14 @@ class BeliefUnit:
                 respect_bit=self.respect_bit,
             )
             for keep_rope in healer_dict.keys():
-                keep_dir = create_keep_rope_path(
+                create_treasury_db_file(
                     self.belief_mstr_dir,
                     believer_name=believer_name,
                     belief_label=self.belief_label,
                     keep_rope=keep_rope,
                     knot=self.knot,
                 )
-
                 healer_hubunit.keep_rope = keep_rope
-                healer_hubunit.create_treasury_db_file()
                 healer_hubunit.save_duty_believer(x_gut)
 
     # job believer management

@@ -1,7 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
-from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
@@ -47,8 +46,8 @@ from src.a09_pack_logic.pack import (
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
     create_keep_dutys_path,
-    create_keep_visions_path,
     create_keep_grades_path,
+    create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
     create_treasury_db_path,
@@ -59,7 +58,7 @@ from src.a12_hub_toolbox.hub_tool import (
     open_job_file,
     save_gut_file,
 )
-from src.a12_hub_toolbox.keep_tool import create_keep_path_dir_if_missing
+from src.a12_hub_toolbox.keep_tool import create_treasury_db_file
 
 
 class SavePackFileException(Exception):
@@ -456,28 +455,15 @@ class HubUnit:
             self.save_duty_believer(gut)
         self.keep_rope = None
 
-    def create_treasury_db_file(self) -> None:
-        create_keep_path_dir_if_missing(
-            belief_mstr_dir=self.belief_mstr_dir,
-            believer_name=self.believer_name,
-            belief_label=self.belief_label,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
-        )
-        treasury_db_path = create_treasury_db_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-        conn = sqlite3_connect(treasury_db_path)
-        conn.close()
-
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():
-            self.keep_rope = x_keep_rope
-            self.create_treasury_db_file()
+            create_treasury_db_file(
+                self.belief_mstr_dir,
+                self.believer_name,
+                self.belief_label,
+                x_keep_rope,
+                self.knot,
+            )
         self.keep_rope = None
 
 
