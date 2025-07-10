@@ -739,8 +739,9 @@ def test_get_keep_dutys_path_HasDocString() -> None:
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
     )
-    keep_path = create_path(keeps_dir, "keep_rope_dirs")
-    doc_str = get_keep_dutys_path(x_keep_path=keep_path)
+    planroot_path = create_path(keeps_dir, "planroot")
+    level1_path = create_path(planroot_path, "level1_label")
+    doc_str = get_keep_dutys_path(x_keep_path=level1_path)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(get_keep_dutys_path) == doc_str
@@ -753,8 +754,9 @@ def test_get_keep_grades_path_HasDocString() -> None:
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
     )
-    keep_path = create_path(keeps_dir, "keep_rope_dirs")
-    doc_str = get_keep_grades_path(x_keep_path=keep_path)
+    planroot_path = create_path(keeps_dir, "planroot")
+    level1_path = create_path(planroot_path, "level1_label")
+    doc_str = get_keep_grades_path(x_keep_path=level1_path)
     doc_str = f"Returns path: {doc_str}"
     print(f"                             {doc_str=}")
     print(f"{inspect_getdoc(get_keep_grades_path)=}")
@@ -764,12 +766,14 @@ def test_get_keep_grades_path_HasDocString() -> None:
 
 def test_get_keep_visions_path_HasDocString() -> None:
     # ESTABLISH
+    # ESTABLISH
     keeps_dir = create_keeps_dir_path(
         belief_mstr_dir="belief_mstr_dir",
         belief_label=belief_label_str(),
         believer_name=believer_name_str(),
     )
-    keep_path = create_path(keeps_dir, "keep_rope_dirs")
+    planroot_path = create_path(keeps_dir, "planroot")
+    keep_path = create_path(planroot_path, "level1_label")
     doc_str = get_keep_visions_path(x_keep_path=keep_path)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

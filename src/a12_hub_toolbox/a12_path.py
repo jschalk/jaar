@@ -76,21 +76,18 @@ def create_keep_rope_path(
     return create_path(keeps_dir, keep_sub_path)
 
 
-# TODO relace "keeps\\keep_rope_dirs\\" with "keeps\\planroot\\level1_label\\"
 def get_keep_dutys_path(x_keep_path: str) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\dutys"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\planroot\\level1_label\\dutys"""
     return create_path(x_keep_path, "dutys")
 
 
-# TODO relace "keeps\\keep_rope_dirs\\" with "keeps\\planroot\\level1_label\\"
 def get_keep_visions_path(x_keep_path: str) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\visions"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\planroot\\level1_label\\visions"""
     return create_path(x_keep_path, "visions")
 
 
-# TODO relace "keeps\\keep_rope_dirs\\" with "keeps\\planroot\\level1_label\\"
 def get_keep_grades_path(x_keep_path: str) -> str:
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\keep_rope_dirs\\grades"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\planroot\\level1_label\\grades"""
     return create_path(x_keep_path, "grades")
 
 
