@@ -1,5 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
+from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.rope import create_rope, create_rope_from_labels
 from src.a09_pack_logic.test._util.a09_str import (
@@ -234,6 +235,19 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
         keep_rope=diff_root_elpaso_rope,
         knot=None,
     )
+
+
+def test_create_keep_rope_path_RaisesError_Scenarion2_keep_rope_DoesNotExist():
+    # ESTABLISH
+    bob_str = "Bob"
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        create_keep_rope_path("dir", bob_str, "amy23", None, None)
+    assertion_fail_str = (
+        f"'{bob_str}' cannot save to keep_path because it does not have keep_rope."
+    )
+    assert str(excinfo.value) == assertion_fail_str
 
 
 def test_get_keep_dutys_path_ReturnsObj() -> None:

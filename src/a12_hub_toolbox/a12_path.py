@@ -60,6 +60,10 @@ def create_keeps_dir_path(
     return create_path(believer_dir, "keeps")
 
 
+class _keep_ropeMissingException(Exception):
+    pass
+
+
 def create_keep_rope_path(
     belief_mstr_dir: str,
     believer_name: BelieverName,
@@ -68,6 +72,11 @@ def create_keep_rope_path(
     knot: str,
 ) -> str:
     """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\keeps\\planroot\\level1_label"""
+    if keep_rope is None:
+        raise _keep_ropeMissingException(
+            f"'{believer_name}' cannot save to keep_path because it does not have keep_rope."
+        )
+
     keep_root = "planroot"
     keep_rope = rebuild_rope(keep_rope, belief_label, keep_root)
     x_list = get_all_rope_labels(keep_rope, knot)

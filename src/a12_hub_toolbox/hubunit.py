@@ -77,10 +77,6 @@ class get_keep_ropesException(Exception):
     pass
 
 
-class _keep_ropeMissingException(Exception):
-    pass
-
-
 @dataclass
 class HubUnit:
     believer_name: BelieverName = None
@@ -319,28 +315,26 @@ class HubUnit:
         return gut_believer
 
     # keep management
-    def keep_path(self) -> str:
-        """Returns path: belief_label/planroot/keep_rope_dirs."""
-
-        if self.keep_rope is None:
-            raise _keep_ropeMissingException(
-                f"HubUnit '{self.believer_name}' cannot save to keep_path because it does not have keep_rope."
-            )
-        return create_keep_rope_path(
+    def create_keep_path_if_missing(self):
+        keep_path = create_keep_rope_path(
             self.belief_mstr_dir,
             self.believer_name,
             self.belief_label,
             self.keep_rope,
             self.knot,
         )
-
-    def create_keep_path_if_missing(self):
-        set_dir(self.keep_path())
+        set_dir(keep_path)
 
     def treasury_db_path(self) -> str:
         "Returns path: keep_path/treasury.db"
-
-        return create_path(self.keep_path(), treasury_filename())
+        keep_path = create_keep_rope_path(
+            self.belief_mstr_dir,
+            self.believer_name,
+            self.belief_label,
+            self.keep_rope,
+            self.knot,
+        )
+        return create_path(keep_path, treasury_filename())
 
     def duty_path(self, believer_name: BelieverName) -> str:
         "Returns path: dutys_path/believer_name"
