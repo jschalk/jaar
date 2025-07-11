@@ -370,16 +370,6 @@ class HubUnit:
         file_content = open_file(self.visions_path(), get_json_filename(believer_name))
         return believerunit_get_from_json(file_content)
 
-    def delete_treasury_db_file(self) -> None:
-        treasury_db_path = create_treasury_db_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-        delete_dir(treasury_db_path)
-
     def get_perspective_believer(self, speaker: BelieverUnit) -> BelieverUnit:
         # get copy of believer without any metrics
         perspective_believer = believerunit_get_from_json(speaker.get_json())

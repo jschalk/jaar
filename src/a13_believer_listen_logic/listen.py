@@ -7,6 +7,7 @@ from src.a05_plan_logic.plan import PlanUnit
 from src.a06_believer_logic.believer import BelieverUnit, PersonUnit
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.keep_tool import get_duty_believer
 from src.a13_believer_listen_logic.basis_believers import (
     create_empty_believer_from_believer,
     create_listen_basis,
@@ -216,7 +217,14 @@ def listen_to_agendas_duty_vision(
     listener_id = listener_vision.believer_name
     for x_personunit in get_ordered_debtors_roll(listener_vision):
         if x_personunit.person_name == listener_id:
-            listener_duty = healer_hubunit.get_duty_believer(listener_id)
+            listener_duty = get_duty_believer(
+                belief_mstr_dir=healer_hubunit.belief_mstr_dir,
+                believer_name=healer_hubunit.believer_name,
+                belief_label=healer_hubunit.belief_label,
+                keep_rope=healer_hubunit.keep_rope,
+                knot=healer_hubunit.knot,
+                duty_believer_name=listener_id,
+            )
             listen_to_speaker_agenda(listener_vision, listener_duty)
         else:
             speaker_id = x_personunit.person_name
@@ -230,7 +238,14 @@ def listen_to_agendas_duty_vision(
 
 
 def listen_to_facts_duty_vision(new_vision: BelieverUnit, healer_hubunit: HubUnit):
-    duty = healer_hubunit.get_duty_believer(new_vision.believer_name)
+    duty = get_duty_believer(
+        belief_mstr_dir=healer_hubunit.belief_mstr_dir,
+        believer_name=healer_hubunit.believer_name,
+        belief_label=healer_hubunit.belief_label,
+        keep_rope=healer_hubunit.keep_rope,
+        knot=healer_hubunit.knot,
+        duty_believer_name=new_vision.believer_name,
+    )
     migrate_all_facts(duty, new_vision)
     for x_personunit in get_ordered_debtors_roll(new_vision):
         if x_personunit.person_name != new_vision.believer_name:
@@ -266,7 +281,14 @@ def listen_to_debtors_roll_jobs_into_job(
 def listen_to_debtors_roll_duty_vision(
     healer_hubunit: HubUnit, listener_id: BelieverName
 ) -> BelieverUnit:
-    duty = healer_hubunit.get_duty_believer(listener_id)
+    duty = get_duty_believer(
+        belief_mstr_dir=healer_hubunit.belief_mstr_dir,
+        believer_name=healer_hubunit.believer_name,
+        belief_label=healer_hubunit.belief_label,
+        keep_rope=healer_hubunit.keep_rope,
+        knot=healer_hubunit.knot,
+        duty_believer_name=listener_id,
+    )
     new_duty = create_listen_basis(duty)
     if duty.debtor_respect is None:
         return new_duty
