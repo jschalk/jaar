@@ -364,20 +364,6 @@ class HubUnit:
     def vision_file_exists(self, believer_name: BelieverName) -> bool:
         return os_path_exists(self.vision_path(believer_name))
 
-    def get_duty_believer(self, believer_name: BelieverName) -> BelieverUnit:
-        if self.duty_file_exists(believer_name) is False:
-            return None
-        keep_duty_path = create_keep_duty_path(
-            belief_mstr_dir=self.belief_mstr_dir,
-            believer_name=self.believer_name,
-            belief_label=self.belief_label,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
-            duty_believer=believer_name,
-        )
-        file_content = open_file(keep_duty_path)
-        return believerunit_get_from_json(file_content)
-
     def get_vision_believer(self, believer_name: BelieverName) -> BelieverUnit:
         if self.vision_file_exists(believer_name) is False:
             return None
