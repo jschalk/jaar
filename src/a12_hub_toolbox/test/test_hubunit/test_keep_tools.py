@@ -11,6 +11,7 @@ from src.a12_hub_toolbox.keep_tool import (
     create_keep_path_dir_if_missing,
     create_treasury_db_file,
     create_treasury_db_path,
+    get_duty_believer,
     save_duty_believer,
     treasury_db_file_exists,
 )
@@ -198,3 +199,40 @@ def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
     # THEN
     # assert duty_file_exists(bob_str)
     assert os_path_exists(keep_duty_path)
+
+
+def test_get_duty_believer_PopensFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    sue_str = "Sue"
+    nation_str = "nation"
+    nation_rope = create_rope(root_label(), nation_str)
+    usa_str = "USA"
+    usa_rope = create_rope(nation_rope, usa_str)
+    texas_str = "Texas"
+    texas_rope = create_rope(usa_rope, texas_str)
+    a23_str = "amy23"
+    belief_mstr_dir = get_module_temp_dir()
+    bob_str = "Bob"
+    bob_believer = get_believerunit_with_4_levels()
+    bob_believer.set_believer_name(bob_str)
+    save_duty_believer(
+        belief_mstr_dir=belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=a23_str,
+        keep_rope=texas_rope,
+        knot=None,
+        duty_believer=bob_believer,
+    )
+
+    # WHEN
+    gen_bob_duty = get_duty_believer(
+        belief_mstr_dir=belief_mstr_dir,
+        believer_name=sue_str,
+        belief_label=a23_str,
+        keep_rope=texas_rope,
+        knot=None,
+        duty_believer_name=bob_str,
+    )
+
+    # THEN
+    assert gen_bob_duty.get_dict() == bob_believer.get_dict()

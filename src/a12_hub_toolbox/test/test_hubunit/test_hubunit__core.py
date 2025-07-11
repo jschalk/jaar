@@ -101,7 +101,6 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     keep_path = create_keep_rope_path(
         belief_mstr_dir, sue_str, amy23_str, texas_rope, None
     )
-    x_dutys_path = create_path(keep_path, "dutys")
     x_visions_path = create_path(keep_path, "visions")
     x_grades_path = create_path(keep_path, "grades")
 
@@ -115,7 +114,6 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.penny == filter_penny()
     assert sue_hubunit.keep_rope == texas_rope
     bob_str = "Bob"
-    assert sue_hubunit.dutys_path() == x_dutys_path
     assert sue_hubunit.visions_path() == x_visions_path
     assert sue_hubunit.grades_path() == x_grades_path
     sue_visions_path = sue_hubunit.visions_path()
