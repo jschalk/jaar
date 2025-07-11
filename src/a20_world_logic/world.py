@@ -107,7 +107,6 @@ class WorldUnit:
             self.sheets_input_to_clarity_with_cursor(cursor)
             db_conn.commit()
         db_conn.close()
-        delete_dir(self._input_dir)
 
     def stance_sheets_to_clarity_mstr(self):
         max_brick_agg_event_int = 0
@@ -119,6 +118,7 @@ class WorldUnit:
         next_event_int = max_brick_agg_event_int + 1
         update_event_int_in_excel_files(self._input_dir, next_event_int)
         self.sheets_input_to_clarity_mstr()
+        delete_dir(self._input_dir)
 
     def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
         delete_dir(self._belief_mstr_dir)

@@ -1,3 +1,4 @@
+from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import (
     count_dirs_files,
     create_path,
@@ -9,12 +10,12 @@ from src.a20_world_logic.test._util.a20_env import env_dir_setup_cleanup
 from src.a20_world_logic.world import worldunit_shop
 
 
-def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, big_volume):
+def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_tests):
     """Find examples in a example directory and run them through the pipeline."""
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
-    if not big_volume:
+    if not run_big_tests:
         return
     examples_dir = "src/a20_world_logic/test/test_z_examples"
     example_names = set(get_level1_dirs(examples_dir))
@@ -40,6 +41,7 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, big_volume
             output_dir=output_dir,
         )
         assert count_dirs_files(output_dir) == 0
+        print(f"before WHEN {os_path_exists(input_dir)=}")
 
         # WHEN
         example_worldunit.sheets_input_to_clarity_mstr()
@@ -47,5 +49,7 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, big_volume
         example_worldunit.create_kpi_csvs()
 
         # THEN
+        print(f"after WHEN {os_path_exists(input_dir)=}")
         # print(f"{count_dirs_files(output_dir)=}")
         assert count_dirs_files(output_dir) > 0
+        assert count_dirs_files(input_dir) > 0

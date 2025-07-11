@@ -186,10 +186,10 @@ def test_make_believerdelta_Arg_idea_format_00013_planunit_v0_0_0():
 
 
 def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0_Scenario_believerunit_v001(
-    big_volume,
+    run_big_tests,
 ):
     # sourcery skip: no-conditionals-in-tests
-    if big_volume:
+    if run_big_tests:
         # ESTABLISH / WHEN
         x_idea_name = idea_format_00013_planunit_v0_0_0()
 
