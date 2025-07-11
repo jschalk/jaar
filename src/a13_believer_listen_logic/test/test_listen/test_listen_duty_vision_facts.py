@@ -46,7 +46,6 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
 
     zia_vision = get_example_zia_speaker()
     sue_texas_hubunit.save_vision_believer(zia_vision)
-    print(f"         {sue_texas_hubunit.vision_path(zia_str)=}")
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_missing_fact_rcontexts().get(eat_rope()) is None
