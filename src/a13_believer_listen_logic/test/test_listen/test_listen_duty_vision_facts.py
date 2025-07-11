@@ -6,26 +6,17 @@ from src.a13_believer_listen_logic.listen import (
     listen_to_agendas_duty_vision,
     listen_to_facts_duty_vision,
 )
-from src.a13_believer_listen_logic.test._util.a13_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir as env_dir,
-)
+from src.a13_believer_listen_logic.test._util.a13_env import env_dir_setup_cleanup
 from src.a13_believer_listen_logic.test._util.example_listen import (
     casa_rope,
-    casa_str,
     clean_rope,
     clean_str,
-    cook_rope,
-    cook_str,
     eat_rope,
-    eat_str,
     full_rope,
-    full_str,
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
     hungry_rope,
-    hungry_str,
 )
 from src.a13_believer_listen_logic.test._util.example_listen_hub import (
     get_texas_hubunit,
@@ -130,7 +121,6 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
         duty_believer=yao_duty,
     )
 
-    print(f"{sue_texas_hubunit.duty_path(yao_duty)=}")
     assert yao_duty.get_fact(eat_rope()).fstate == full_rope()
 
     old_yao_vision = get_example_yao_speaker()

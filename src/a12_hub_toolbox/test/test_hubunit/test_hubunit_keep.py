@@ -5,6 +5,7 @@ from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
 from src.a12_hub_toolbox.a12_path import (
+    create_keep_duty_path,
     create_keep_rope_path,
     create_treasury_db_path,
     treasury_filename,
@@ -116,9 +117,10 @@ def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(env_dir(), a23_str, sue_str)
+    mstr_dir = env_dir()
+    sue_hubunit = hubunit_shop(mstr_dir, a23_str, sue_str, None)
+    save_gut_file(mstr_dir, sue_hubunit.default_gut_believer())
+    sue_gut_believer = open_gut_file(mstr_dir, a23_str, sue_str)
     sue_gut_believer.add_personunit(sue_str)
     bob_str = "Bob"
     sue_gut_believer.add_personunit(bob_str)
@@ -135,19 +137,33 @@ def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
     sue_gut_believer.set_plan(elpaso_plan, texas_rope)
     display_plantree(sue_gut_believer, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_believer)
-    sue_dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_rope)
-    sue_elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_rope)
-    assert os_path_exists(sue_dallas_hubunit.duty_path(sue_str)) is False
-    assert os_path_exists(sue_elpaso_hubunit.duty_path(sue_str)) is False
-    assert sue_hubunit.keep_rope is None
+    sue_dallas_duty_path = create_keep_duty_path(
+        belief_mstr_dir=mstr_dir,
+        believer_name=sue_str,
+        belief_label=a23_str,
+        keep_rope=dallas_rope,
+        knot=None,
+        duty_believer=sue_str,
+    )
+    sue_elpaso_duty_path = create_keep_duty_path(
+        belief_mstr_dir=mstr_dir,
+        believer_name=sue_str,
+        belief_label=a23_str,
+        keep_rope=elpaso_rope,
+        knot=None,
+        duty_believer=sue_str,
+    )
+    assert os_path_exists(sue_dallas_duty_path) is False
+    assert os_path_exists(sue_elpaso_duty_path) is False
+    assert not sue_hubunit.keep_rope
 
     # WHEN
     sue_hubunit.save_all_gut_dutys()
 
     # THEN
-    assert os_path_exists(sue_dallas_hubunit.duty_path(sue_str))
-    assert os_path_exists(sue_elpaso_hubunit.duty_path(sue_str))
-    assert sue_hubunit.keep_rope is None
+    assert os_path_exists(sue_dallas_duty_path)
+    assert os_path_exists(sue_elpaso_duty_path)
+    assert not sue_hubunit.keep_rope
 
 
 def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(

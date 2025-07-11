@@ -4,7 +4,7 @@ from src.a05_plan_logic.plan import get_default_belief_label as root_label
 from src.a06_believer_logic.test._util.example_believers import (
     get_believerunit_with_4_levels,
 )
-from src.a12_hub_toolbox.a12_path import create_treasury_db_path
+from src.a12_hub_toolbox.a12_path import create_keep_duty_path, create_treasury_db_path
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a12_hub_toolbox.keep_tool import (
     create_treasury_db_file,
@@ -89,8 +89,15 @@ def test_HubUnit_delete_duty_file_DeletesBelieverFile(env_dir_setup_cleanup):
         knot=None,
         duty_believer=sue_believer,
     )
-    print(f"{texas_hubunit.duty_path(sue_str)=}")
-    duty_path = texas_hubunit.duty_path(sue_str)
+    sue_keep_duty_path = create_keep_duty_path(
+        belief_mstr_dir=texas_hubunit.belief_mstr_dir,
+        believer_name=texas_hubunit.believer_name,
+        belief_label=texas_hubunit.belief_label,
+        keep_rope=texas_rope,
+        knot=None,
+        duty_believer=sue_believer,
+    )
+    print(f"{sue_keep_duty_path=}")
     assert texas_hubunit.duty_file_exists(sue_str)
 
     # WHEN
