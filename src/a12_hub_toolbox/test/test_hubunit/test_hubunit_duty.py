@@ -21,32 +21,6 @@ from src.a12_hub_toolbox.test._util.example_hub_atoms import (
 )
 
 
-def test_HubUnit_duty_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
-    # ESTABLISH
-    sue_str = "Sue"
-    nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
-    usa_str = "USA"
-    usa_rope = create_rope(nation_rope, usa_str)
-    texas_str = "Texas"
-    texas_rope = create_rope(usa_rope, texas_str)
-    a23_str = "amy23"
-    belief_mstr_dir = env_dir()
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, texas_rope)
-    bob_str = "Bob"
-    bob_believer = get_believerunit_with_4_levels()
-    bob_believer.set_believer_name(bob_str)
-    assert sue_hubunit.duty_file_exists(bob_str) is False
-
-    # WHEN
-    save_duty_believer(
-        belief_mstr_dir, sue_str, a23_str, texas_rope, None, bob_believer
-    )
-
-    # THEN
-    assert sue_hubunit.duty_file_exists(bob_str)
-
-
 def test_HubUnit_save_vision_believer_CorrectlySavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"

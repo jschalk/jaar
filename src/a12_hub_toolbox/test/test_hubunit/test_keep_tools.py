@@ -182,8 +182,6 @@ def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
         knot=None,
         duty_believer=bob_str,
     )
-    # TODO replace os_path_exists with duty_file_exists function
-    # assert duty_file_exists(bob_str) is False
     assert os_path_exists(keep_duty_path) is False
 
     # WHEN
@@ -197,7 +195,6 @@ def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
     )
 
     # THEN
-    # assert duty_file_exists(bob_str)
     assert os_path_exists(keep_duty_path)
 
 
