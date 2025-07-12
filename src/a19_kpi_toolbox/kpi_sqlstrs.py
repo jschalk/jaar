@@ -17,3 +17,7 @@ LEFT JOIN believer_planunit_job ON
 GROUP BY belief_person_nets.belief_label, belief_person_nets.believer_name
 ;
 """
+
+
+def get_belief_kpi002_person_tasks_sqlstr() -> str:
+    return ""
