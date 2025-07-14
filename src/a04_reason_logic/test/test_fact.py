@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import create_rope, get_default_axiom_label as root_label
+from src.a01_term_logic.rope import create_rope, get_default_central_label as root_label
 from src.a04_reason_logic.reason_plan import (
     FactCore,
     FactUnit,

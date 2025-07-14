@@ -1,8 +1,8 @@
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
-    AxiomLabel,
     BeliefLabel,
     BelieverName,
+    CentralLabel,
     EporTerm,
     EventInt,
     FaceName,
@@ -159,17 +159,17 @@ def test_LabelTerm_is_label_ReturnsObj_Scenario1():
     assert x_labelterm.is_label(slash_str) is False
 
 
-def test_AxiomLabel_Exists():
+def test_CentralLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_axiom = AxiomLabel(empty_str)
+    x_central = CentralLabel(empty_str)
     # THEN
-    assert x_axiom == empty_str
+    assert x_central == empty_str
     doc_str = (
         f"A string representation of a tree root node. Node cannot contain {knot_str()}"
     )
-    assert inspect_getdoc(x_axiom) == doc_str
+    assert inspect_getdoc(x_central) == doc_str
 
 
 def test_RopeTerm_exists():
@@ -215,5 +215,5 @@ def test_BeliefLabel_Exists():
     x_belief = BeliefLabel(empty_str)
     # THEN
     assert x_belief == empty_str
-    doc_str = f"An AxiomLabel for a Belief Belief. Cannot contain {knot_str()}"
+    doc_str = f"An CentralLabel for a Belief Belief. Cannot contain {knot_str()}"
     assert inspect_getdoc(x_belief) == doc_str

@@ -18,23 +18,23 @@ class LabelTerm(str):
         return self.find(default_knot_if_None(knot)) == -1
 
 
-class AxiomLabel(LabelTerm):
+class CentralLabel(LabelTerm):
     """A string representation of a tree root node. Node cannot contain knot"""
 
     pass
 
 
-class BeliefLabel(AxiomLabel):  # Created to help track the object class relations
-    """An AxiomLabel for a Belief Belief. Cannot contain knot"""
+class BeliefLabel(CentralLabel):  # Created to help track the object class relations
+    """An CentralLabel for a Belief Belief. Cannot contain knot"""
 
     pass
 
 
-class NameTerm(str):
+class NameTerm(LabelTerm):
     """All Name string classes should inherit from this class"""
 
     def is_name(self, knot: str = None) -> bool:
-        return len(self) > 0 and self.contains_knot(knot)
+        return self.is_label(knot)
 
     def contains_knot(self, knot: str = None) -> bool:
         return self.find(default_knot_if_None(knot)) == -1
