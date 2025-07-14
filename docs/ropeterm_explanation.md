@@ -65,9 +65,30 @@ vs
 4. ;USA;Texas;Paris;
 
 # Belief Definition: 
-- **BeliefLabel**: The CentralLabel of all RopeTerms connected to a BeliefUnits 
+- **BeliefLabel**: The CentralLabel of all RopeTerms connected to a BeliefUnit. Every BeliefUnit starts with a Label. Everything the BeliefUnit is is centralized by that Label. 
 
-Why 
+A way I could be if believe in Football:
+1. ;Football;Places that love football;Midwest;
+2. ;Football;Places that love football;The South;
+3. ;Football;Places that love football;The South;Texas;
+4. ;Football;Places that love football;;
+5. ;Football;Places that do not love football;France;
+6. ;Football;Places that do not love football;Berlin;
+7. ;Football;Interesting things;i formation;
+8. ;Football;Non Interesting things;metaethics philoophy;
+9. ;Football;Non Interesting things;baking;
+10. ;Football;Things I like to do;tell players to play at my favorite team;
+11. ;Football;Things I like to do;tell stories about Quetin Demps;
+12. ;Football;my favorite;tell players to play there;
+
+
+If I believe in Kindness:
+1. ;kindess;at park;listen to person;
+2. ;kindess;at park;give money to person;
+3. ;kindess;at park;say hi to people;
+4. ;kindess;at park;pick up trash;
+5. ;kindess;at park;supervise kids;
+
 
 - **BeliefUnit**: A BeliefUnit is built around the  
 
@@ -77,7 +98,9 @@ How a Belief is defined and made powerful enough to share.
     * Shared concept of time
     * Believers' Plans of Action
 
+Every Belief starts with a central belief but that's not enough. Levinas asserts that moral community can only exist when time is a single community standard. This is intuitive for most people but it is important to explicitly state it. 
 
+Once there is a shared system of time it is possible to create shared financial system: a agreed ledger of who has paid who what and how much money each has. 
 
 
 
