@@ -342,8 +342,8 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
     amos_str = "Amos"
     amos_believer = believerunit_shop(amos_str)
     cali_str = "Cali"
-    amos_believer.add_personunit(amos_str)
-    amos_believer.add_personunit(cali_str)
+    amos_believer.add_partnerunit(amos_str)
+    amos_believer.add_partnerunit(cali_str)
 
     casa_str = "casa"
     basket_str = "laundry basket status"

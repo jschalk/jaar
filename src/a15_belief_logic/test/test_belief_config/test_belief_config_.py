@@ -4,8 +4,8 @@ from src.a02_finance_logic.test._util.a02_str import knot_str
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     fund_iota_str,
+    partner_name_str,
     penny_str,
-    person_name_str,
     respect_bit_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import (
@@ -233,7 +233,7 @@ def test_get_belief_args_set_ReturnsObj():
     assert belief_args_set == mapping_args_set
     assert len(belief_args_set) == 24
     expected_belief_args_set = {
-        person_name_str(),
+        partner_name_str(),
         amount_str(),
         knot_str(),
         c400_number_str(),

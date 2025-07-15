@@ -74,12 +74,12 @@ def get_idea_elements_sort_order() -> list[str]:
         "believer_name_ERASE",
         "believer_name_ERASE_otx",
         "believer_name_ERASE_inx",
-        "person_name",
-        "person_name_otx",
-        "person_name_inx",
-        "person_name_ERASE",
-        "person_name_ERASE_otx",
-        "person_name_ERASE_inx",
+        "partner_name",
+        "partner_name_otx",
+        "partner_name_inx",
+        "partner_name_ERASE",
+        "partner_name_ERASE_otx",
+        "partner_name_ERASE_inx",
         "group_title",
         "group_title_otx",
         "group_title_inx",
@@ -142,8 +142,8 @@ def get_idea_elements_sort_order() -> list[str]:
         "gogo_want",
         "stop_want",
         "rplan_active_requisite",
-        "person_cred_points",
-        "person_debt_points",
+        "partner_cred_points",
+        "partner_debt_points",
         "group_cred_points",
         "group_debt_points",
         "credor_respect",
@@ -197,21 +197,21 @@ def get_idea_elements_sort_order() -> list[str]:
         "_fund_agenda_take",
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
-        "_inallocable_person_debt_points",
+        "_inallocable_partner_debt_points",
         "_gogo_calc",
         "_stop_calc",
         "_level",
         "_range_evaluated",
         "_descendant_task_count",
         "_healerlink_ratio",
-        "_all_person_cred",
+        "_all_partner_cred",
         "_keeps_justified",
         "_offtrack_fund",
         "_rplan_active_value",
-        "_irrational_person_debt_points",
+        "_irrational_partner_debt_points",
         "_sum_healerlink_share",
         "_keeps_buildable",
-        "_all_person_debt",
+        "_all_partner_debt",
         "_tree_traverse_count",
         "funds",
         "fund_rank",
@@ -248,12 +248,12 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "believer_name_ERASE": "TEXT",
         "believer_name_ERASE_otx": "TEXT",
         "believer_name_ERASE_inx": "TEXT",
-        "person_name": "TEXT",
-        "person_name_otx": "TEXT",
-        "person_name_inx": "TEXT",
-        "person_name_ERASE": "TEXT",
-        "person_name_ERASE_otx": "TEXT",
-        "person_name_ERASE_inx": "TEXT",
+        "partner_name": "TEXT",
+        "partner_name_otx": "TEXT",
+        "partner_name_inx": "TEXT",
+        "partner_name_ERASE": "TEXT",
+        "partner_name_ERASE_otx": "TEXT",
+        "partner_name_ERASE_inx": "TEXT",
         "group_title": "TEXT",
         "group_title_otx": "TEXT",
         "group_title_inx": "TEXT",
@@ -317,8 +317,8 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "gogo_want": "REAL",
         "stop_want": "REAL",
         "rplan_active_requisite": "INTEGER",
-        "person_cred_points": "REAL",
-        "person_debt_points": "REAL",
+        "partner_cred_points": "REAL",
+        "partner_debt_points": "REAL",
         "group_cred_points": "REAL",
         "group_debt_points": "REAL",
         "credor_respect": "REAL",
@@ -387,11 +387,11 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_fund_take": "REAL",
         "_gogo_calc": "REAL",
         "_stop_calc": "REAL",
-        "_all_person_cred": "INTEGER",
-        "_all_person_debt": "INTEGER",
+        "_all_partner_cred": "INTEGER",
+        "_all_partner_debt": "INTEGER",
         "_rplan_active_value": "INTEGER",
-        "_inallocable_person_debt_points": "REAL",
-        "_irrational_person_debt_points": "REAL",
+        "_inallocable_partner_debt_points": "REAL",
+        "_irrational_partner_debt_points": "REAL",
         "_status": "INTEGER",
         "_chore": "INTEGER",
         "_believer_name_labor": "INTEGER",
@@ -448,8 +448,8 @@ def idea_format_00006_belief_timeoffi_v0_0_0() -> str:
     return "idea_format_00006_belief_timeoffi_v0_0_0"
 
 
-def idea_format_00011_person_v0_0_0() -> str:
-    return "idea_format_00011_person_v0_0_0"
+def idea_format_00011_partner_v0_0_0() -> str:
+    return "idea_format_00011_partner_v0_0_0"
 
 
 def idea_format_00012_membership_v0_0_0() -> str:
@@ -464,8 +464,8 @@ def idea_format_00019_planunit_v0_0_0() -> str:
     return "idea_format_00019_planunit_v0_0_0"
 
 
-# def idea_format_00020_believer_person_membership_v0_0_0()-> str: return "idea_format_00020_believer_person_membership_v0_0_0"
-# def idea_format_00021_believer_personunit_v0_0_0()-> str: return "idea_format_00021_believer_personunit_v0_0_0"
+# def idea_format_00020_believer_partner_membership_v0_0_0()-> str: return "idea_format_00020_believer_partner_membership_v0_0_0"
+# def idea_format_00021_believer_partnerunit_v0_0_0()-> str: return "idea_format_00021_believer_partnerunit_v0_0_0"
 # def idea_format_00022_believer_plan_awardlink_v0_0_0()-> str: return "idea_format_00022_believer_plan_awardlink_v0_0_0"
 # def idea_format_00023_believer_plan_factunit_v0_0_0()-> str: return "idea_format_00023_believer_plan_factunit_v0_0_0"
 # def idea_format_00024_believer_plan_laborlink_v0_0_0()-> str: return "idea_format_00024_believer_plan_laborlink_v0_0_0"
@@ -476,12 +476,12 @@ def idea_format_00019_planunit_v0_0_0() -> str:
 # def idea_format_00029_believerunit_v0_0_0()-> str: return "idea_format_00029_believerunit_v0_0_0"
 
 
-def idea_format_00020_believer_person_membership_v0_0_0() -> str:
-    return "idea_format_00020_believer_person_membership_v0_0_0"
+def idea_format_00020_believer_partner_membership_v0_0_0() -> str:
+    return "idea_format_00020_believer_partner_membership_v0_0_0"
 
 
-def idea_format_00021_believer_personunit_v0_0_0() -> str:
-    return "idea_format_00021_believer_personunit_v0_0_0"
+def idea_format_00021_believer_partnerunit_v0_0_0() -> str:
+    return "idea_format_00021_believer_partnerunit_v0_0_0"
 
 
 def idea_format_00022_believer_plan_awardlink_v0_0_0() -> str:
@@ -540,12 +540,12 @@ def idea_format_00045_pidgin_rope_v0_0_0() -> str:
     return "idea_format_00045_pidgin_rope_v0_0_0"
 
 
-def idea_format_00050_delete_believer_person_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_believer_person_membership_v0_0_0"
+def idea_format_00050_delete_believer_partner_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_believer_partner_membership_v0_0_0"
 
 
-def idea_format_00051_delete_believer_personunit_v0_0_0() -> str:
-    return "idea_format_00051_delete_believer_personunit_v0_0_0"
+def idea_format_00051_delete_believer_partnerunit_v0_0_0() -> str:
+    return "idea_format_00051_delete_believer_partnerunit_v0_0_0"
 
 
 def idea_format_00052_delete_believer_plan_awardlink_v0_0_0() -> str:
@@ -580,8 +580,8 @@ def idea_format_00059_delete_believerunit_v0_0_0() -> str:
     return "idea_format_00059_delete_believerunit_v0_0_0"
 
 
-def idea_format_00113_person_map1_v0_0_0() -> str:
-    return "idea_format_00113_person_map1_v0_0_0"
+def idea_format_00113_partner_map1_v0_0_0() -> str:
+    return "idea_format_00113_partner_map1_v0_0_0"
 
 
 def idea_format_00115_group_map1_v0_0_0() -> str:
@@ -605,12 +605,12 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00004_belief_timeline_month_v0_0_0(),
         idea_format_00005_belief_timeline_weekday_v0_0_0(),
         idea_format_00006_belief_timeoffi_v0_0_0(),
-        idea_format_00011_person_v0_0_0(),
+        idea_format_00011_partner_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
         idea_format_00013_planunit_v0_0_0(),
         idea_format_00019_planunit_v0_0_0(),
-        idea_format_00020_believer_person_membership_v0_0_0(),
-        idea_format_00021_believer_personunit_v0_0_0(),
+        idea_format_00020_believer_partner_membership_v0_0_0(),
+        idea_format_00021_believer_partnerunit_v0_0_0(),
         idea_format_00022_believer_plan_awardlink_v0_0_0(),
         idea_format_00023_believer_plan_factunit_v0_0_0(),
         idea_format_00024_believer_plan_laborlink_v0_0_0(),
@@ -624,8 +624,8 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00043_pidgin_name_v0_0_0(),
         idea_format_00044_pidgin_label_v0_0_0(),
         idea_format_00045_pidgin_rope_v0_0_0(),
-        idea_format_00050_delete_believer_person_membership_v0_0_0(),
-        idea_format_00051_delete_believer_personunit_v0_0_0(),
+        idea_format_00050_delete_believer_partner_membership_v0_0_0(),
+        idea_format_00051_delete_believer_partnerunit_v0_0_0(),
         idea_format_00052_delete_believer_plan_awardlink_v0_0_0(),
         idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
         idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
@@ -634,7 +634,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
         idea_format_00058_delete_believer_planunit_v0_0_0(),
         idea_format_00059_delete_believerunit_v0_0_0(),
-        idea_format_00113_person_map1_v0_0_0(),
+        idea_format_00113_partner_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
         idea_format_00116_label_map1_v0_0_0(),
         idea_format_00117_rope_map1_v0_0_0(),
@@ -697,17 +697,17 @@ def get_idea_format_headers() -> dict[str, list[str]]:
     return {
         "belief_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_beliefunit_v0_0_0(),
         "belief_label,believer_name,bud_time,quota,celldepth": idea_format_00001_belief_budunit_v0_0_0(),
-        "belief_label,believer_name,person_name,tran_time,amount": idea_format_00002_belief_paybook_v0_0_0(),
+        "belief_label,believer_name,partner_name,tran_time,amount": idea_format_00002_belief_paybook_v0_0_0(),
         "belief_label,cumulative_minute,hour_label": idea_format_00003_belief_timeline_hour_v0_0_0(),
         "belief_label,cumulative_day,month_label": idea_format_00004_belief_timeline_month_v0_0_0(),
         "belief_label,weekday_order,weekday_label": idea_format_00005_belief_timeline_weekday_v0_0_0(),
         "belief_label,offi_time": idea_format_00006_belief_timeoffi_v0_0_0(),
-        "belief_label,believer_name,person_name": idea_format_00011_person_v0_0_0(),
-        "belief_label,believer_name,person_name,group_title": idea_format_00012_membership_v0_0_0(),
+        "belief_label,believer_name,partner_name": idea_format_00011_partner_v0_0_0(),
+        "belief_label,believer_name,partner_name,group_title": idea_format_00012_membership_v0_0_0(),
         "belief_label,believer_name,plan_rope,mass,task": idea_format_00013_planunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_planunit_v0_0_0(),
-        "belief_label,believer_name,person_name,group_title,group_cred_points,group_debt_points": idea_format_00020_believer_person_membership_v0_0_0(),
-        "belief_label,believer_name,person_name,person_cred_points,person_debt_points": idea_format_00021_believer_personunit_v0_0_0(),
+        "belief_label,believer_name,partner_name,group_title,group_cred_points,group_debt_points": idea_format_00020_believer_partner_membership_v0_0_0(),
+        "belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points": idea_format_00021_believer_partnerunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force": idea_format_00022_believer_plan_awardlink_v0_0_0(),
         "belief_label,believer_name,plan_rope,fcontext,fstate,fopen,fnigh": idea_format_00023_believer_plan_factunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,labor_title": idea_format_00024_believer_plan_laborlink_v0_0_0(),
@@ -721,8 +721,8 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
         "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
         "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_pidgin_rope_v0_0_0(),
-        "belief_label,believer_name,person_name,group_title_ERASE": idea_format_00050_delete_believer_person_membership_v0_0_0(),
-        "belief_label,believer_name,person_name_ERASE": idea_format_00051_delete_believer_personunit_v0_0_0(),
+        "belief_label,believer_name,partner_name,group_title_ERASE": idea_format_00050_delete_believer_partner_membership_v0_0_0(),
+        "belief_label,believer_name,partner_name_ERASE": idea_format_00051_delete_believer_partnerunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_believer_plan_awardlink_v0_0_0(),
         "belief_label,believer_name,plan_rope,fcontext_ERASE": idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,labor_title_ERASE": idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
@@ -731,10 +731,10 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "belief_label,believer_name,plan_rope,rcontext_ERASE": idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
         "belief_label,believer_name,plan_rope_ERASE": idea_format_00058_delete_believer_planunit_v0_0_0(),
         "belief_label,believer_name_ERASE": idea_format_00059_delete_believerunit_v0_0_0(),
-        "belief_label,believer_name,person_name,otx_name,inx_name": idea_format_00113_person_map1_v0_0_0(),
-        "belief_label,believer_name,person_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
-        "belief_label,believer_name,person_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
-        "belief_label,believer_name,person_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_name,inx_name": idea_format_00113_partner_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
     }
 
 
@@ -755,8 +755,8 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 def get_idea_dimen_ref() -> dict[str, set[str]]:
     """dictionary with key=dimen and value=set of all idea_numbers with that dimen's data"""
     return {
-        "believer_person_membership": {"br00012", "br00020", "br00050"},
-        "believer_personunit": {
+        "believer_partner_membership": {"br00012", "br00020", "br00050"},
+        "believer_partnerunit": {
             "br00002",
             "br00011",
             "br00012",

@@ -9,7 +9,7 @@ from src.a01_term_logic.term import BeliefLabel, BelieverName, LabelTerm
 BELIEF_FILENAME = "belief.json"
 BUDUNIT_FILENAME = "budunit.json"
 CELLNODE_FILENAME = "cell.json"
-CELL_MANDATE_FILENAME = "cell_person_mandate_ledger.json"
+CELL_MANDATE_FILENAME = "cell_partner_mandate_ledger.json"
 BELIEVERPOINT_FILENAME = "believerpoint.json"
 BELIEVEREVENT_FILENAME = "believer.json"
 EVENT_ALL_PACK_FILENAME = "all_pack.json"
@@ -266,18 +266,18 @@ def create_cell_json_path(
     return create_path(cell_dir, "cell.json")
 
 
-def create_cell_person_mandate_ledger_path(
+def create_cell_partner_mandate_ledger_path(
     belief_mstr_dir: str,
     belief_label: LabelTerm,
     believer_name: BelieverName,
     bud_time: int,
     bud_ancestors: list[BelieverName] = None,
 ):
-    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\ledger_believer1\\ledger_believer2\\ledger_believer3\\cell_person_mandate_ledger.json"""
+    """Returns path: belief_mstr_dir\\beliefs\\belief_label\\believers\\believer_name\\buds\n\\bud_time\\ledger_believer1\\ledger_believer2\\ledger_believer3\\cell_partner_mandate_ledger.json"""
     cell_dir = create_cell_dir_path(
         belief_mstr_dir, belief_label, believer_name, bud_time, bud_ancestors
     )
-    return create_path(cell_dir, "cell_person_mandate_ledger.json")
+    return create_path(cell_dir, "cell_partner_mandate_ledger.json")
 
 
 def create_believer_event_dir_path(

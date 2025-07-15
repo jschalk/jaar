@@ -3,10 +3,10 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,
-    believer_personunit_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    believer_partnerunit_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_belief_logic.belief_config import get_belief_dimens
@@ -153,7 +153,7 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         blrpern_v_raw_put_tablename = prime_tbl(
-            believer_personunit_str(), "v", "raw", "put"
+            believer_partnerunit_str(), "v", "raw", "put"
         )
         print(f"{get_table_columns(cursor, blrpern_v_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_v_raw_put_tablename} (
@@ -161,9 +161,9 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
 , {face_name_str()}_inx
 , {belief_label_str()}_inx
 , {believer_name_str()}_inx
-, {person_name_str()}_inx
-, {person_cred_points_str()}
-, {person_debt_points_str()}
+, {partner_name_str()}_inx
+, {partner_cred_points_str()}
+, {partner_debt_points_str()}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -176,7 +176,7 @@ VALUES
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 5
         blrpern_v_agg_put_tablename = prime_tbl(
-            believer_personunit_str(), "v", "agg", "put"
+            believer_partnerunit_str(), "v", "agg", "put"
         )
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 0
 
@@ -191,9 +191,9 @@ VALUES
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {person_name_str()}
-, {person_cred_points_str()}
-, {person_debt_points_str()}
+, {partner_name_str()}
+, {partner_cred_points_str()}
+, {partner_debt_points_str()}
 FROM {blrpern_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -227,7 +227,7 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         blrpern_v_raw_put_tablename = prime_tbl(
-            believer_personunit_str(), "v", "raw", "put"
+            believer_partnerunit_str(), "v", "raw", "put"
         )
         print(f"{get_table_columns(cursor, blrpern_v_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_v_raw_put_tablename} (
@@ -235,9 +235,9 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
 , {face_name_str()}_inx
 , {belief_label_str()}_inx
 , {believer_name_str()}_inx
-, {person_name_str()}_inx
-, {person_cred_points_str()}
-, {person_debt_points_str()}
+, {partner_name_str()}_inx
+, {partner_cred_points_str()}
+, {partner_debt_points_str()}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -250,7 +250,7 @@ VALUES
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 5
         blrpern_v_agg_put_tablename = prime_tbl(
-            believer_personunit_str(), "v", "agg", "put"
+            believer_partnerunit_str(), "v", "agg", "put"
         )
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 0
 
@@ -263,9 +263,9 @@ VALUES
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {person_name_str()}
-, {person_cred_points_str()}
-, {person_debt_points_str()}
+, {partner_name_str()}
+, {partner_cred_points_str()}
+, {partner_debt_points_str()}
 FROM {blrpern_v_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)

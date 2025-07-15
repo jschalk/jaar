@@ -139,7 +139,7 @@ def _add_paybook_to_br00002_csv(
     event_int: int = None,
 ) -> str:
     for believer_name, tranunit in x_belief.paybook.tranunits.items():
-        for person_name, time_dict in tranunit.items():
+        for partner_name, time_dict in tranunit.items():
             for tran_time, amount in time_dict.items():
                 belief_label = x_belief.belief_label
                 x_row = [
@@ -147,7 +147,7 @@ def _add_paybook_to_br00002_csv(
                     if_none_str(event_int),
                     belief_label,
                     believer_name,
-                    person_name,
+                    partner_name,
                     str(tran_time),
                     str(amount),
                 ]
@@ -223,14 +223,14 @@ def add_believer_to_br00020_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for personunit in x_believer.persons.values():
-        for membership in personunit._memberships.values():
+    for partnerunit in x_believer.partners.values():
+        for membership in partnerunit._memberships.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_believer.belief_label,
                 x_believer.believer_name,
-                personunit.person_name,
+                partnerunit.partner_name,
                 membership.group_title,
                 if_none_str(membership.group_cred_points),
                 if_none_str(membership.group_debt_points),
@@ -247,15 +247,15 @@ def add_believer_to_br00021_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for personunit in x_believer.persons.values():
+    for partnerunit in x_believer.partners.values():
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_believer.belief_label,
             x_believer.believer_name,
-            personunit.person_name,
-            if_none_str(personunit.person_cred_points),
-            if_none_str(personunit.person_debt_points),
+            partnerunit.partner_name,
+            if_none_str(partnerunit.partner_cred_points),
+            if_none_str(partnerunit.partner_debt_points),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -501,13 +501,13 @@ def add_pack_to_br00020_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_person_membership":
+        if believeratom.dimen == "believer_partner_membership":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.believer_name,
-                believeratom.jkeys.get("person_name"),
+                believeratom.jkeys.get("partner_name"),
                 believeratom.jkeys.get("group_title"),
                 if_none_str(believeratom.jvalues.get("group_cred_points")),
                 if_none_str(believeratom.jvalues.get("group_debt_points")),
@@ -521,15 +521,15 @@ def add_pack_to_br00021_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_personunit":
+        if believeratom.dimen == "believer_partnerunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.believer_name,
-                believeratom.jkeys.get("person_name"),
-                if_none_str(believeratom.jvalues.get("person_cred_points")),
-                if_none_str(believeratom.jvalues.get("person_debt_points")),
+                believeratom.jkeys.get("partner_name"),
+                if_none_str(believeratom.jvalues.get("partner_cred_points")),
+                if_none_str(believeratom.jvalues.get("partner_debt_points")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -739,8 +739,3 @@ def add_packunit_to_stance_csv_strs(
     belief_csv_strs["br00027"] = br00027_csv
     belief_csv_strs["br00028"] = br00028_csv
     belief_csv_strs["br00029"] = br00029_csv
-
-
-# TODO #834
-# def add_pidginunits_to_stance_csv_strs():
-#     pass

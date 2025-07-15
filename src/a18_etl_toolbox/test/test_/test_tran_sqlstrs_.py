@@ -6,8 +6,8 @@ from src.a00_data_toolbox.db_toolbox import (
     required_columns_exist,
 )
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -56,14 +56,14 @@ from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_catego
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_event_time_agg_str,
     belief_ote1_agg_str,
-    belief_person_nets_str,
+    belief_partner_nets_str,
     believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     CREATE_BELIEF_EVENT_TIME_AGG_SQLSTR,
     CREATE_BELIEF_OTE1_AGG_SQLSTR,
-    CREATE_BELIEF_PERSON_NETS_SQLSTR,
+    CREATE_BELIEF_PARTNER_NETS_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
     INSERT_BELIEF_EVENT_TIME_AGG_SQLSTR,
     INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR,
@@ -85,8 +85,8 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
     blrunit_dimen = believerunit_str()
-    blrpern_dimen = believer_personunit_str()
-    blrmemb_dimen = believer_person_membership_str()
+    blrpern_dimen = believer_partnerunit_str()
+    blrmemb_dimen = believer_partner_membership_str()
     blrgrou_dimen = believer_groupunit_str()
     blrplan_dimen = believer_planunit_str()
     blrawar_dimen = believer_plan_awardlink_str()
@@ -175,7 +175,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert blrpern_job_table == f"{blrpern_dimen}_job"
     assert blrgrou_job_table == f"{blrgrou_dimen}_job"
-    assert x_blrpern_raw == "believer_personunit_raw"
+    assert x_blrpern_raw == "believer_partnerunit_raw"
 
 
 def test_create_all_idea_tables_CreatesBeliefRawTables():
@@ -424,12 +424,12 @@ ORDER BY {belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_ti
     assert INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_CREATE_BELIEF_PERSON_NETS_SQLSTR_Exists():
+def test_CREATE_BELIEF_PARTNER_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
     sqlite_types[believer_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
-        tablename=belief_person_nets_str(),
+        tablename=belief_partner_nets_str(),
         columns_list=[
             belief_label_str(),
             believer_name_str(),
@@ -439,4 +439,4 @@ def test_CREATE_BELIEF_PERSON_NETS_SQLSTR_Exists():
     )
 
     # WHEN / THEN
-    assert CREATE_BELIEF_PERSON_NETS_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_BELIEF_PARTNER_NETS_SQLSTR == expected_create_table_sqlstr

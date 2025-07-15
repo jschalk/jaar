@@ -9,8 +9,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     _tree_traverse_count_str,
     ancestors_str,
     attributes_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -27,10 +27,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     last_pack_id_str,
     mandate_str,
     max_tree_traverse_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_pool_str,
     penny_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_pool_str,
     respect_bit_str,
     tally_str,
     timeline_str,
@@ -51,14 +51,14 @@ def test_str_functions_ReturnsObj():
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"
     assert tally_str() == "tally"
-    assert person_pool_str() == "person_pool"
-    assert person_cred_points_str() == "person_cred_points"
+    assert partner_pool_str() == "partner_pool"
+    assert partner_cred_points_str() == "partner_cred_points"
     assert credor_respect_str() == "credor_respect"
-    assert person_debt_points_str() == "person_debt_points"
+    assert partner_debt_points_str() == "partner_debt_points"
     assert debtor_respect_str() == "debtor_respect"
     assert believerunit_str() == "believerunit"
-    assert believer_person_membership_str() == "believer_person_membership"
-    assert believer_personunit_str() == "believer_personunit"
+    assert believer_partner_membership_str() == "believer_partner_membership"
+    assert believer_partnerunit_str() == "believer_partnerunit"
     assert believer_planunit_str() == "believer_planunit"
     assert believer_plan_awardlink_str() == "believer_plan_awardlink"
     assert believer_plan_reasonunit_str() == "believer_plan_reasonunit"

@@ -14,7 +14,7 @@ from src.a18_etl_toolbox.transformers import (
     create_last_run_metrics_json,
     etl_belief_guts_to_belief_jobs,
     etl_belief_job_jsons_to_job_tables,
-    etl_belief_json_person_nets_to_belief_person_nets_table,
+    etl_belief_json_partner_nets_to_belief_partner_nets_table,
     etl_belief_ote1_agg_csvs_to_jsons,
     etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs,
     etl_brick_agg_tables_to_brick_valid_tables,
@@ -92,7 +92,7 @@ class WorldUnit:
         set_dir(self._brick_dir)
         set_dir(self._belief_mstr_dir)
 
-    def calc_belief_bud_person_mandate_net_ledgers(self):
+    def calc_belief_bud_partner_mandate_net_ledgers(self):
         mstr_dir = self._belief_mstr_dir
         etl_create_buds_root_cells(mstr_dir)
         etl_create_belief_cell_trees(mstr_dir)
@@ -107,7 +107,6 @@ class WorldUnit:
             self.sheets_input_to_clarity_with_cursor(cursor)
             db_conn.commit()
         db_conn.close()
-        delete_dir(self._input_dir)
 
     def stance_sheets_to_clarity_mstr(self):
         max_brick_agg_event_int = 0
@@ -119,6 +118,7 @@ class WorldUnit:
         next_event_int = max_brick_agg_event_int + 1
         update_event_int_in_excel_files(self._input_dir, next_event_int)
         self.sheets_input_to_clarity_mstr()
+        delete_dir(self._input_dir)
 
     def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
         delete_dir(self._belief_mstr_dir)
@@ -148,16 +148,16 @@ class WorldUnit:
         etl_voice_raw_tables_to_belief_ote1_agg(cursor)
         etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs(cursor, self._belief_mstr_dir)
         etl_belief_ote1_agg_csvs_to_jsons(self._belief_mstr_dir)
-        self.calc_belief_bud_person_mandate_net_ledgers()
+        self.calc_belief_bud_partner_mandate_net_ledgers()
         etl_belief_job_jsons_to_job_tables(cursor, self._belief_mstr_dir)
-        etl_belief_json_person_nets_to_belief_person_nets_table(
+        etl_belief_json_partner_nets_to_belief_partner_nets_table(
             cursor, self._belief_mstr_dir
         )
         populate_kpi_bundle(cursor)
         create_last_run_metrics_json(cursor, self._belief_mstr_dir)
 
         # # create all belief_job and mandate reports
-        # self.calc_belief_bud_person_mandate_net_ledgers()
+        # self.calc_belief_bud_partner_mandate_net_ledgers()
 
         # if store_tracing_files:
 

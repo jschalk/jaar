@@ -4,7 +4,7 @@ from src.a06_believer_logic.believer_graphics import (
     display_plantree,
     fund_graph0,
     get_believer_agenda_plotly_fig,
-    get_believer_persons_plotly_fig,
+    get_believer_partners_plotly_fig,
 )
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001_with_large_agenda,
@@ -45,26 +45,26 @@ def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
     display_plantree(a_believer, mode="Chore", graphics_bool=graphics_bool)
 
 
-def test_get_believer_persons_plotly_fig_DisplaysCorrectInfo(graphics_bool):
+def test_get_believer_partners_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     luca_believer = believerunit_shop()
     luca_believer.set_credor_respect(500)
     luca_believer.set_debtor_respect(400)
     yao_str = "Yao"
-    yao_person_cred_points = 66
-    yao_person_debt_points = 77
-    luca_believer.add_personunit(
-        yao_str, yao_person_cred_points, yao_person_debt_points
+    yao_partner_cred_points = 66
+    yao_partner_debt_points = 77
+    luca_believer.add_partnerunit(
+        yao_str, yao_partner_cred_points, yao_partner_debt_points
     )
     sue_str = "Sue"
-    sue_person_cred_points = 434
-    sue_person_debt_points = 323
-    luca_believer.add_personunit(
-        sue_str, sue_person_cred_points, sue_person_debt_points
+    sue_partner_cred_points = 434
+    sue_partner_debt_points = 323
+    luca_believer.add_partnerunit(
+        sue_str, sue_partner_cred_points, sue_partner_debt_points
     )
 
     # WHEN
-    x_fig = get_believer_persons_plotly_fig(luca_believer)
+    x_fig = get_believer_partners_plotly_fig(luca_believer)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

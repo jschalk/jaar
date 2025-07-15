@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope_from_labels
 from src.a03_group_logic.group import awardlink_shop
-from src.a03_group_logic.person import personunit_shop
+from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v001
@@ -156,25 +156,25 @@ def test_BelieverUnit_3AdvocatesNoplanunit_shop():
     zia_str = "Zia"
 
     zia_believerunit = believerunit_shop("Zia")
-    yao_personunit = personunit_shop(person_name=yao_str)
-    sue_personunit = personunit_shop(person_name=sue_str)
-    zia_personunit = personunit_shop(person_name=zia_str)
+    yao_partnerunit = partnerunit_shop(partner_name=yao_str)
+    sue_partnerunit = partnerunit_shop(partner_name=sue_str)
+    zia_partnerunit = partnerunit_shop(partner_name=zia_str)
     # print(f"{yao=}")
-    zia_believerunit.set_personunit(yao_personunit)
-    zia_believerunit.set_personunit(sue_personunit)
-    zia_believerunit.set_personunit(zia_personunit)
+    zia_believerunit.set_partnerunit(yao_partnerunit)
+    zia_believerunit.set_partnerunit(sue_partnerunit)
+    zia_believerunit.set_partnerunit(zia_partnerunit)
     zia_believerunit.planroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
     zia_believerunit.planroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
     zia_believerunit.planroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
 
     # WHEN
     assert zia_believerunit.get_awardlinks_metrics() is not None
-    persons_metrics = zia_believerunit.get_awardlinks_metrics()
+    partners_metrics = zia_believerunit.get_awardlinks_metrics()
 
     # THEN
-    yao_awardlink = persons_metrics[yao_str]
-    sue_awardlink = persons_metrics[sue_str]
-    zia_awardlink = persons_metrics[zia_str]
+    yao_awardlink = partners_metrics[yao_str]
+    sue_awardlink = partners_metrics[sue_str]
+    zia_awardlink = partners_metrics[zia_str]
     assert yao_awardlink.awardee_title is not None
     assert sue_awardlink.awardee_title is not None
     assert zia_awardlink.awardee_title is not None

@@ -8,37 +8,37 @@ def test_RiverGrade_Exists():
     x_rivergrade = RiverGrade()
 
     # THEN
-    #: Healer gut get_person._person_debt_points (SELECT tax_due_amount FROM person WHERE person_name = bob_str)
+    #: Healer gut get_partner._partner_debt_points (SELECT tax_due_amount FROM partner WHERE partner_name = bob_str)
     assert x_rivergrade.hubunit is None
-    assert x_rivergrade.person_name is None
+    assert x_rivergrade.partner_name is None
     assert x_rivergrade.number is None
-    #: Healer gut get_person._person_debt_points (SELECT tax_due_amount FROM person WHERE person_name = bob_str)
+    #: Healer gut get_partner._partner_debt_points (SELECT tax_due_amount FROM partner WHERE partner_name = bob_str)
     assert x_rivergrade.tax_bill_amount is None
-    #: Healer gut get_person._person_cred_points (SELECT grant_amount FROM person WHERE person_name = bob_str)
+    #: Healer gut get_partner._partner_cred_points (SELECT grant_amount FROM partner WHERE partner_name = bob_str)
     assert x_rivergrade.grant_amount is None
-    #: SELECT COUNT(*) FROM person WHERE tax_due_amount > (SELECT tax_due_amount FROM person WHERE person_name = bob_str)
+    #: SELECT COUNT(*) FROM partner WHERE tax_due_amount > (SELECT tax_due_amount FROM partner WHERE partner_name = bob_str)
     assert x_rivergrade.debtor_rank_num is None
-    #: SELECT COUNT(*) FROM person WHERE grant_amount > (SELECT tax_due_amount FROM person WHERE person_name = bob_str)
+    #: SELECT COUNT(*) FROM partner WHERE grant_amount > (SELECT tax_due_amount FROM partner WHERE partner_name = bob_str)
     assert x_rivergrade.credor_rank_num is None
-    #: SELECT amount_paid FROM tax_ledger WHERE person_name = bob_str
+    #: SELECT amount_paid FROM tax_ledger WHERE partner_name = bob_str
     assert x_rivergrade.tax_paid_amount is None
     #: bool (if tax_due_amount == tax_paid_amount)
     assert x_rivergrade.tax_paid_bool is None
-    #: SELECT COUNT(*) FROM person WHERE tax_paid_amount > (SELECT tax_paid_amount FROM person WHERE person_name = bob_str)
+    #: SELECT COUNT(*) FROM partner WHERE tax_paid_amount > (SELECT tax_paid_amount FROM partner WHERE partner_name = bob_str)
     assert x_rivergrade.tax_paid_rank_num is None
-    #: tax_paid_rank_num / (SELECT COUNT(*) FROM person WHERE tax_paid_amount>0)
+    #: tax_paid_rank_num / (SELECT COUNT(*) FROM partner WHERE tax_paid_amount>0)
     assert x_rivergrade.tax_paid_rank_percent is None
-    #: SELECT COUNT(*) FROM person WHERE tax_due_amount > 0
+    #: SELECT COUNT(*) FROM partner WHERE tax_due_amount > 0
     assert x_rivergrade.debtor_count is None
-    #: SELECT COUNT(*) FROM person WHERE grant_amount > 0
+    #: SELECT COUNT(*) FROM partner WHERE grant_amount > 0
     assert x_rivergrade.credor_count is None
-    #: debtor_rank_num / SELECT COUNT(*) FROM person WHERE tax_due_amount > 0
+    #: debtor_rank_num / SELECT COUNT(*) FROM partner WHERE tax_due_amount > 0
     assert x_rivergrade.debtor_rank_percent is None
-    #: credor_rank_num / SELECT COUNT(*) FROM person WHERE grant_amount > 0
+    #: credor_rank_num / SELECT COUNT(*) FROM partner WHERE grant_amount > 0
     assert x_rivergrade.credor_rank_percent is None
-    # SELECT COUNT(*) FROM rewards WHERE dst_person_name = bob_str
+    # SELECT COUNT(*) FROM rewards WHERE dst_partner_name = bob_str
     assert x_rivergrade.rewards_count is None
-    # SELECT SUM(money_amount) FROM rewards WHERE dst_person_name = bob_str
+    # SELECT SUM(money_amount) FROM rewards WHERE dst_partner_name = bob_str
     assert x_rivergrade.rewards_magnitude is None
 
 
@@ -57,7 +57,7 @@ def test_rivergrade_shop_ReturnsObjWithArg():
 
     # THEN
     assert x_rivergrade.hubunit == yao_hubunit
-    assert x_rivergrade.person_name == bob_str
+    assert x_rivergrade.partner_name == bob_str
     assert x_rivergrade.number == ten_int
     assert x_rivergrade.tax_bill_amount is None
     assert x_rivergrade.grant_amount is None

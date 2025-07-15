@@ -76,10 +76,10 @@ def _set_belief_dict_blfpayy(
     for blfpayy_row in cursor.fetchall():
         row_belief_label = blfpayy_row[0]
         row_believer_name = blfpayy_row[1]
-        row_person_name = blfpayy_row[2]
+        row_partner_name = blfpayy_row[2]
         row_tran_time = blfpayy_row[3]
         row_amount = blfpayy_row[4]
-        keylist = [row_believer_name, row_person_name, row_tran_time]
+        keylist = [row_believer_name, row_partner_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
     paybook_dict = {"belief_label": x_belief_label, "tranunits": tranunits_dict}
     belief_dict["paybook"] = paybook_dict

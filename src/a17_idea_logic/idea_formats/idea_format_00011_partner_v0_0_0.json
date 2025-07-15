@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "person_name": {
+        "partner_name": {
             "otx_key": true
         },
         "event_int": {
@@ -12,21 +12,14 @@
         "belief_label": {
             "otx_key": true
         },
-        "inx_name": {
-            "otx_key": false
-        },
-        "otx_name": {
-            "otx_key": true
-        },
         "believer_name": {
             "otx_key": true
         }
     },
-    "idea_number": "br00113",
+    "idea_number": "br00011",
     "dimens": [
-        "pidgin_name",
-        "believer_personunit",
         "beliefunit",
-        "believerunit"
+        "believerunit",
+        "believer_partnerunit"
     ]
 }

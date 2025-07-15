@@ -6,8 +6,8 @@ from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -28,7 +28,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    person_name_str,
+    partner_name_str,
     plan_rope_str,
     rplan_active_requisite_str,
     stop_want_str,
@@ -122,7 +122,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnitSimpleAttrs():
     assert after_sue_believerunit.penny != before_sue_believerunit.penny
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_person():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_partner():
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     sue_str = "Sue"
@@ -130,12 +130,12 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_person
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
 
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     x_believeratom = believeratom_shop(dimen, DELETE_str())
-    x_believeratom.set_jkey(person_name_str(), zia_str)
+    x_believeratom.set_jkey(partner_name_str(), zia_str)
     sue_believerdelta.set_believeratom(x_believeratom)
 
     # WHEN
@@ -146,11 +146,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_person
     # THEN
     print(f"{sue_believerdelta.believeratoms=}")
     assert after_sue_believerunit != before_sue_believerunit
-    assert after_sue_believerunit.person_exists(yao_str)
-    assert after_sue_believerunit.person_exists(zia_str) is False
+    assert after_sue_believerunit.partner_exists(yao_str)
+    assert after_sue_believerunit.partner_exists(zia_str) is False
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_person():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_partner():
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     sue_str = "Sue"
@@ -158,18 +158,18 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_person
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_believerunit.add_personunit(yao_str)
-    assert before_sue_believerunit.person_exists(yao_str)
-    assert before_sue_believerunit.person_exists(zia_str) is False
+    before_sue_believerunit.add_partnerunit(yao_str)
+    assert before_sue_believerunit.partner_exists(yao_str)
+    assert before_sue_believerunit.partner_exists(zia_str) is False
 
     # WHEN
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     x_believeratom = believeratom_shop(dimen, INSERT_str())
-    x_believeratom.set_jkey(person_name_str(), zia_str)
-    x_person_cred_points = 55
-    x_person_debt_points = 66
-    x_believeratom.set_jvalue("person_cred_points", x_person_cred_points)
-    x_believeratom.set_jvalue("person_debt_points", x_person_debt_points)
+    x_believeratom.set_jkey(partner_name_str(), zia_str)
+    x_partner_cred_points = 55
+    x_partner_debt_points = 66
+    x_believeratom.set_jvalue("partner_cred_points", x_partner_cred_points)
+    x_believeratom.set_jvalue("partner_debt_points", x_partner_debt_points)
     sue_believerdelta.set_believeratom(x_believeratom)
     print(f"{sue_believerdelta.believeratoms.keys()=}")
     after_sue_believerunit = sue_believerdelta.get_edited_believer(
@@ -177,30 +177,30 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_person
     )
 
     # THEN
-    yao_personunit = after_sue_believerunit.get_person(yao_str)
-    zia_personunit = after_sue_believerunit.get_person(zia_str)
-    assert yao_personunit is not None
-    assert zia_personunit is not None
-    assert zia_personunit.person_cred_points == x_person_cred_points
-    assert zia_personunit.person_debt_points == x_person_debt_points
+    yao_partnerunit = after_sue_believerunit.get_partner(yao_str)
+    zia_partnerunit = after_sue_believerunit.get_partner(zia_str)
+    assert yao_partnerunit is not None
+    assert zia_partnerunit is not None
+    assert zia_partnerunit.partner_cred_points == x_partner_cred_points
+    assert zia_partnerunit.partner_debt_points == x_partner_debt_points
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_person():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_partner():
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     sue_str = "Sue"
 
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
-    before_sue_believerunit.add_personunit(yao_str)
-    assert before_sue_believerunit.get_person(yao_str).person_cred_points == 1
+    before_sue_believerunit.add_partnerunit(yao_str)
+    assert before_sue_believerunit.get_partner(yao_str).partner_cred_points == 1
 
     # WHEN
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     x_believeratom = believeratom_shop(dimen, UPDATE_str())
-    x_believeratom.set_jkey(person_name_str(), yao_str)
-    yao_person_cred_points = 55
-    x_believeratom.set_jvalue("person_cred_points", yao_person_cred_points)
+    x_believeratom.set_jkey(partner_name_str(), yao_str)
+    yao_partner_cred_points = 55
+    x_believeratom.set_jvalue("partner_cred_points", yao_partner_cred_points)
     sue_believerdelta.set_believeratom(x_believeratom)
     print(f"{sue_believerdelta.believeratoms.keys()=}")
     after_sue_believerunit = sue_believerdelta.get_edited_believer(
@@ -208,8 +208,8 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_person
     )
 
     # THEN
-    yao_person = after_sue_believerunit.get_person(yao_str)
-    assert yao_person.person_cred_points == yao_person_cred_points
+    yao_partner = after_sue_believerunit.get_partner(yao_str)
+    assert yao_partner.partner_cred_points == yao_partner_cred_points
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_membership():
@@ -219,33 +219,37 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_member
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
-    before_sue_believerunit.add_personunit(bob_str)
-    yao_personunit = before_sue_believerunit.get_person(yao_str)
-    zia_personunit = before_sue_believerunit.get_person(zia_str)
-    bob_personunit = before_sue_believerunit.get_person(bob_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
+    before_sue_believerunit.add_partnerunit(bob_str)
+    yao_partnerunit = before_sue_believerunit.get_partner(yao_str)
+    zia_partnerunit = before_sue_believerunit.get_partner(zia_str)
+    bob_partnerunit = before_sue_believerunit.get_partner(bob_str)
     run_str = ";runners"
-    yao_personunit.add_membership(run_str)
-    zia_personunit.add_membership(run_str)
+    yao_partnerunit.add_membership(run_str)
+    zia_partnerunit.add_membership(run_str)
     fly_str = ";flyers"
-    yao_personunit.add_membership(fly_str)
-    zia_personunit.add_membership(fly_str)
-    bob_personunit.add_membership(fly_str)
+    yao_partnerunit.add_membership(fly_str)
+    zia_partnerunit.add_membership(fly_str)
+    bob_partnerunit.add_membership(fly_str)
     before_group_titles_dict = (
-        before_sue_believerunit.get_personunit_group_titles_dict()
+        before_sue_believerunit.get_partnerunit_group_titles_dict()
     )
     assert len(before_group_titles_dict.get(run_str)) == 2
     assert len(before_group_titles_dict.get(fly_str)) == 3
 
     # WHEN
-    yao_believeratom = believeratom_shop(believer_person_membership_str(), DELETE_str())
+    yao_believeratom = believeratom_shop(
+        believer_partner_membership_str(), DELETE_str()
+    )
     yao_believeratom.set_jkey(group_title_str(), run_str)
-    yao_believeratom.set_jkey(person_name_str(), yao_str)
+    yao_believeratom.set_jkey(partner_name_str(), yao_str)
     # print(f"{yao_believeratom=}")
-    zia_believeratom = believeratom_shop(believer_person_membership_str(), DELETE_str())
+    zia_believeratom = believeratom_shop(
+        believer_partner_membership_str(), DELETE_str()
+    )
     zia_believeratom.set_jkey(group_title_str(), fly_str)
-    zia_believeratom.set_jkey(person_name_str(), zia_str)
+    zia_believeratom.set_jkey(partner_name_str(), zia_str)
     # print(f"{zia_believeratom=}")
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.set_believeratom(yao_believeratom)
@@ -255,7 +259,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_member
     )
 
     # THEN
-    after_group_titles_dict = after_sue_believerunit.get_personunit_group_titles_dict()
+    after_group_titles_dict = after_sue_believerunit.get_partnerunit_group_titles_dict()
     assert len(after_group_titles_dict.get(run_str)) == 1
     assert len(after_group_titles_dict.get(fly_str)) == 2
 
@@ -267,19 +271,21 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_member
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
-    before_sue_believerunit.add_personunit(bob_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
+    before_sue_believerunit.add_partnerunit(bob_str)
     run_str = ";runners"
-    zia_personunit = before_sue_believerunit.get_person(zia_str)
-    zia_personunit.add_membership(run_str)
-    before_group_titles = before_sue_believerunit.get_personunit_group_titles_dict()
+    zia_partnerunit = before_sue_believerunit.get_partner(zia_str)
+    zia_partnerunit.add_membership(run_str)
+    before_group_titles = before_sue_believerunit.get_partnerunit_group_titles_dict()
     assert len(before_group_titles.get(run_str)) == 1
 
     # WHEN
-    yao_believeratom = believeratom_shop(believer_person_membership_str(), INSERT_str())
+    yao_believeratom = believeratom_shop(
+        believer_partner_membership_str(), INSERT_str()
+    )
     yao_believeratom.set_jkey(group_title_str(), run_str)
-    yao_believeratom.set_jkey(person_name_str(), yao_str)
+    yao_believeratom.set_jkey(partner_name_str(), yao_str)
     yao_run_group_cred_points = 17
     yao_believeratom.set_jvalue("group_cred_points", yao_run_group_cred_points)
     print(f"{yao_believeratom=}")
@@ -290,10 +296,10 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_member
     )
 
     # THEN
-    after_group_titles = after_sue_believerunit.get_personunit_group_titles_dict()
+    after_group_titles = after_sue_believerunit.get_partnerunit_group_titles_dict()
     assert len(after_group_titles.get(run_str)) == 2
-    after_yao_personunit = after_sue_believerunit.get_person(yao_str)
-    after_yao_run_membership = after_yao_personunit.get_membership(run_str)
+    after_yao_partnerunit = after_sue_believerunit.get_partner(yao_str)
+    after_yao_run_membership = after_yao_partnerunit.get_membership(run_str)
     assert after_yao_run_membership is not None
     assert after_yao_run_membership.group_cred_points == yao_run_group_cred_points
 
@@ -303,19 +309,21 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_member
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_yao_personunit = before_sue_believerunit.get_person(yao_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_yao_partnerunit = before_sue_believerunit.get_partner(yao_str)
     run_str = ";runners"
     old_yao_run_group_cred_points = 3
-    before_yao_personunit.add_membership(run_str, old_yao_run_group_cred_points)
-    yao_run_membership = before_yao_personunit.get_membership(run_str)
+    before_yao_partnerunit.add_membership(run_str, old_yao_run_group_cred_points)
+    yao_run_membership = before_yao_partnerunit.get_membership(run_str)
     assert yao_run_membership.group_cred_points == old_yao_run_group_cred_points
     assert yao_run_membership.group_debt_points == 1
 
     # WHEN
-    yao_believeratom = believeratom_shop(believer_person_membership_str(), UPDATE_str())
+    yao_believeratom = believeratom_shop(
+        believer_partner_membership_str(), UPDATE_str()
+    )
     yao_believeratom.set_jkey(group_title_str(), run_str)
-    yao_believeratom.set_jkey(person_name_str(), yao_str)
+    yao_believeratom.set_jkey(partner_name_str(), yao_str)
     new_yao_run_group_cred_points = 7
     new_yao_run_group_debt_points = 11
     yao_believeratom.set_jvalue(group_cred_points_str(), new_yao_run_group_cred_points)
@@ -327,8 +335,8 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_member
     )
 
     # THEN
-    after_yao_personunit = after_sue_believerunit.get_person(yao_str)
-    after_yao_run_membership = after_yao_personunit.get_membership(run_str)
+    after_yao_partnerunit = after_sue_believerunit.get_partner(yao_str)
+    after_yao_run_membership = after_yao_partnerunit.get_membership(run_str)
     assert after_yao_run_membership.group_cred_points == new_yao_run_group_cred_points
     assert after_yao_run_membership.group_debt_points == new_yao_run_group_debt_points
 
@@ -470,19 +478,19 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_a
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
-    before_sue_believerunit.add_personunit(bob_str)
-    yao_personunit = before_sue_believerunit.get_person(yao_str)
-    zia_personunit = before_sue_believerunit.get_person(zia_str)
-    bob_personunit = before_sue_believerunit.get_person(bob_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
+    before_sue_believerunit.add_partnerunit(bob_str)
+    yao_partnerunit = before_sue_believerunit.get_partner(yao_str)
+    zia_partnerunit = before_sue_believerunit.get_partner(zia_str)
+    bob_partnerunit = before_sue_believerunit.get_partner(bob_str)
     run_str = ";runners"
-    yao_personunit.add_membership(run_str)
-    zia_personunit.add_membership(run_str)
+    yao_partnerunit.add_membership(run_str)
+    zia_partnerunit.add_membership(run_str)
     fly_str = ";flyers"
-    yao_personunit.add_membership(fly_str)
-    zia_personunit.add_membership(fly_str)
-    bob_personunit.add_membership(fly_str)
+    yao_partnerunit.add_membership(fly_str)
+    zia_partnerunit.add_membership(fly_str)
+    bob_partnerunit.add_membership(fly_str)
 
     sports_str = "sports"
     sports_rope = before_sue_believerunit.make_l1_rope(sports_str)
@@ -523,11 +531,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_a
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
-    yao_personunit = before_sue_believerunit.get_person(yao_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
+    yao_partnerunit = before_sue_believerunit.get_partner(yao_str)
     run_str = ";runners"
-    yao_personunit.add_membership(run_str)
+    yao_partnerunit.add_membership(run_str)
 
     sports_str = "sports"
     sports_rope = before_sue_believerunit.make_l1_rope(sports_str)
@@ -569,11 +577,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_a
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
     run_str = ";runners"
-    yao_personunit = before_sue_believerunit.get_person(yao_str)
-    yao_personunit.add_membership(run_str)
+    yao_partnerunit = before_sue_believerunit.get_partner(yao_str)
+    yao_partnerunit.add_membership(run_str)
     sports_str = "sports"
     sports_rope = before_sue_believerunit.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1036,7 +1044,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_l
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
     yao_str = "Yao"
-    before_sue_au.add_personunit(yao_str)
+    before_sue_au.add_partnerunit(yao_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1066,7 +1074,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_l
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
     yao_str = "Yao"
-    before_sue_au.add_personunit(yao_str)
+    before_sue_au.add_partnerunit(yao_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1098,7 +1106,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_h
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
     yao_str = "Yao"
-    before_sue_au.add_personunit(yao_str)
+    before_sue_au.add_partnerunit(yao_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1128,7 +1136,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_h
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
     yao_str = "Yao"
-    before_sue_au.add_personunit(yao_str)
+    before_sue_au.add_partnerunit(yao_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1161,26 +1169,26 @@ def test_BelieverDelta_get_believerdelta_example1_ContainsBelieverAtoms():
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_believerunit.add_personunit(yao_str)
-    before_sue_believerunit.add_personunit(zia_str)
-    before_sue_believerunit.add_personunit(bob_str)
-    yao_personunit = before_sue_believerunit.get_person(yao_str)
-    zia_personunit = before_sue_believerunit.get_person(zia_str)
-    bob_personunit = before_sue_believerunit.get_person(bob_str)
+    before_sue_believerunit.add_partnerunit(yao_str)
+    before_sue_believerunit.add_partnerunit(zia_str)
+    before_sue_believerunit.add_partnerunit(bob_str)
+    yao_partnerunit = before_sue_believerunit.get_partner(yao_str)
+    zia_partnerunit = before_sue_believerunit.get_partner(zia_str)
+    bob_partnerunit = before_sue_believerunit.get_partner(bob_str)
     run_str = ";runners"
-    yao_personunit.add_membership(run_str)
-    zia_personunit.add_membership(run_str)
+    yao_partnerunit.add_membership(run_str)
+    zia_partnerunit.add_membership(run_str)
     fly_str = ";flyers"
-    yao_personunit.add_membership(fly_str)
-    bob_personunit.add_membership(fly_str)
+    yao_partnerunit.add_membership(fly_str)
+    bob_partnerunit.add_membership(fly_str)
     assert before_sue_believerunit.tally != 55
     assert before_sue_believerunit.max_tree_traverse != 66
     assert before_sue_believerunit.credor_respect != 77
     assert before_sue_believerunit.debtor_respect != 88
-    assert before_sue_believerunit.person_exists(yao_str)
-    assert before_sue_believerunit.person_exists(zia_str)
-    assert yao_personunit.get_membership(fly_str) is not None
-    assert bob_personunit.get_membership(fly_str) is not None
+    assert before_sue_believerunit.partner_exists(yao_str)
+    assert before_sue_believerunit.partner_exists(zia_str)
+    assert yao_partnerunit.get_membership(fly_str) is not None
+    assert bob_partnerunit.get_membership(fly_str) is not None
 
     # WHEN
     ex1_believerdelta = get_believerdelta_example1()
@@ -1193,5 +1201,5 @@ def test_BelieverDelta_get_believerdelta_example1_ContainsBelieverAtoms():
     assert after_sue_believerunit.max_tree_traverse == 66
     assert after_sue_believerunit.credor_respect == 77
     assert after_sue_believerunit.debtor_respect == 88
-    assert after_sue_believerunit.person_exists(yao_str)
-    assert after_sue_believerunit.person_exists(zia_str) is False
+    assert after_sue_believerunit.partner_exists(yao_str)
+    assert after_sue_believerunit.partner_exists(zia_str) is False

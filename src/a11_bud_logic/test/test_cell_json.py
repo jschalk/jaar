@@ -215,7 +215,7 @@ def test_CellUnit_get_json_ReturnsObj():
     bob_sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     bob_sue_believer = believerunit_shop(bob_sue_bud_believer)
-    bob_sue_believer.add_personunit(sue_str)
+    bob_sue_believer.add_partnerunit(sue_str)
     x_cellunit = cellunit_shop(
         bob_sue_bud_believer,
         bob_sue_ancestors,
@@ -233,7 +233,7 @@ def test_CellUnit_get_json_ReturnsObj():
     x_cell_json = x_cellunit.get_json()
 
     # THEN
-    assert len(x_cell_json) == 1251
+    assert len(x_cell_json) == 1255
 
 
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
@@ -266,7 +266,7 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
     bob_sue_found_factunits = {dirty_fact.fcontext: dirty_fact}
     bob_sue_boss_factunits = {sky_blue_fact.fcontext: sky_blue_fact}
     bob_sue_believer = believerunit_shop(bob_sue_bud_believer)
-    bob_sue_believer.add_personunit(sue_str)
+    bob_sue_believer.add_partnerunit(sue_str)
     bob_sue_cellunit = cellunit_shop(
         bob_sue_bud_believer,
         bob_sue_ancestors,

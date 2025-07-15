@@ -10,8 +10,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     addin_str,
     awardee_title_str,
     begin_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -33,8 +33,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     morph_str,
     numor_str,
     parent_rope_str,
-    person_debt_points_str,
-    person_name_str,
+    partner_debt_points_str,
+    partner_name_str,
     plan_label_str,
     plan_rope_str,
     rcontext_str,
@@ -105,16 +105,16 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believerunit():
     }
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_personunit():
+def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_partnerunit():
     # ESTABLISH
     zia_str = "Zia"
-    zia_person_debt_points = 51
+    zia_partner_debt_points = 51
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_personunit(zia_str)
+    sue_believer.add_partnerunit(zia_str)
 
-    zia_atom = believeratom_shop(believer_personunit_str(), INSERT_str())
-    zia_atom.set_arg(person_name_str(), zia_str)
-    zia_atom.set_arg(person_debt_points_str(), zia_person_debt_points)
+    zia_atom = believeratom_shop(believer_partnerunit_str(), INSERT_str())
+    zia_atom.set_arg(partner_name_str(), zia_str)
+    zia_atom.set_arg(partner_debt_points_str(), zia_partner_debt_points)
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, zia_atom)
@@ -124,20 +124,20 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_personunit():
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    assert zia_jvalues == {person_debt_points_str(): 51}
+    assert zia_jvalues == {partner_debt_points_str(): 51}
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_person_membership():
+def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_partner_membership():
     # ESTABLISH
     zia_str = "Zia"
     run_str = ";run"
     zia_run_group_debt_points = 76
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_personunit(zia_str)
-    sue_believer.get_person(zia_str).add_membership(run_str)
+    sue_believer.add_partnerunit(zia_str)
+    sue_believer.get_partner(zia_str).add_membership(run_str)
 
-    zia_atom = believeratom_shop(believer_person_membership_str(), INSERT_str())
-    zia_atom.set_arg(person_name_str(), zia_str)
+    zia_atom = believeratom_shop(believer_partner_membership_str(), INSERT_str())
+    zia_atom.set_arg(partner_name_str(), zia_str)
     zia_atom.set_arg(group_title_str(), run_str)
     zia_atom.set_arg(group_debt_points_str(), zia_run_group_debt_points)
 

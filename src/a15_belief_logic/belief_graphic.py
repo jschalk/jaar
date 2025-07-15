@@ -116,7 +116,7 @@ def add_river_col(fig, num_dict: dict, money_amt, x0, y0, c_len):
     row_len = row_y1 - row_y0
     num_sum = sum(num_dict.values())
     ratio_dict = {
-        person_name: personx / num_sum for person_name, personx in num_dict.items()
+        partner_name: partnerx / num_sum for partner_name, partnerx in num_dict.items()
     }
     for grantee in num_dict:
         new_y1 = row_y0 + row_len * ratio_dict.get(grantee)

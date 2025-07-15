@@ -1,8 +1,8 @@
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
-    AxiomLabel,
     BeliefLabel,
     BelieverName,
+    CentralLabel,
     EporTerm,
     EventInt,
     FaceName,
@@ -11,7 +11,7 @@ from src.a01_term_logic.term import (
     KnotTerm,
     LabelTerm,
     NameTerm,
-    PersonName,
+    PartnerName,
     RopeTerm,
     TitleTerm,
     default_knot_if_None,
@@ -99,17 +99,17 @@ def test_BelieverName_exists():
     assert inspect_getdoc(bob_BelieverName_str) == doc_str
 
 
-def test_PersonName_exists():
+def test_PartnerName_exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_PersonName = PersonName(bob_str)
+    bob_PartnerName = PartnerName(bob_str)
     # THEN
-    assert bob_PersonName == bob_str
+    assert bob_PartnerName == bob_str
     doc_str = (
-        "Every PersonName object is BelieverName, must follow BelieverName format."
+        "Every PartnerName object is BelieverName, must follow BelieverName format."
     )
-    assert inspect_getdoc(bob_PersonName) == doc_str
+    assert inspect_getdoc(bob_PartnerName) == doc_str
 
 
 def test_TitleTerm_exists():
@@ -119,7 +119,7 @@ def test_TitleTerm_exists():
     bob_nameterm = TitleTerm(bob_str)
     # THEN
     assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise it's a single member group of an PersonName."""
+    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise it's a single member group of an PartnerName."""
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 
@@ -159,17 +159,17 @@ def test_LabelTerm_is_label_ReturnsObj_Scenario1():
     assert x_labelterm.is_label(slash_str) is False
 
 
-def test_AxiomLabel_Exists():
+def test_CentralLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_axiom = AxiomLabel(empty_str)
+    x_central = CentralLabel(empty_str)
     # THEN
-    assert x_axiom == empty_str
+    assert x_central == empty_str
     doc_str = (
         f"A string representation of a tree root node. Node cannot contain {knot_str()}"
     )
-    assert inspect_getdoc(x_axiom) == doc_str
+    assert inspect_getdoc(x_central) == doc_str
 
 
 def test_RopeTerm_exists():
@@ -215,5 +215,5 @@ def test_BeliefLabel_Exists():
     x_belief = BeliefLabel(empty_str)
     # THEN
     assert x_belief == empty_str
-    doc_str = f"An AxiomLabel for a Belief Belief. Cannot contain {knot_str()}"
+    doc_str = f"An CentralLabel for a Belief Belief. Cannot contain {knot_str()}"
     assert inspect_getdoc(x_belief) == doc_str

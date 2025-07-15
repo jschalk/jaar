@@ -10,9 +10,9 @@ def belief_ote1_agg_str() -> Literal["belief_ote1_agg"]:
     return "belief_ote1_agg"
 
 
-def belief_person_nets_str() -> Literal["belief_person_nets"]:
+def belief_partner_nets_str() -> Literal["belief_partner_nets"]:
     """Table name for the account net amounts."""
-    return "belief_person_nets"
+    return "belief_partner_nets"
 
 
 def believer_net_amount_str() -> Literal["believer_net_amount"]:

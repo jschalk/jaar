@@ -103,14 +103,14 @@ def test_PidginUnit_set_titleterm_SetsAttr_Scenario0():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    person_name_titlemap = zia_pidginunit.get_titlemap()
-    assert person_name_titlemap.otx2inx_exists(sue_otx, sue_inx) is False
+    partner_name_titlemap = zia_pidginunit.get_titlemap()
+    assert partner_name_titlemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_titleterm(sue_otx, sue_inx)
 
     # THEN
-    assert person_name_titlemap.otx2inx_exists(sue_otx, sue_inx)
+    assert partner_name_titlemap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_titleterm_exists_ReturnsObj():

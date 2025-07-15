@@ -117,7 +117,7 @@ def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenari
         beliefpay_v_agg_tablename = create_prime_tablename("blfpayy", "v", "agg")
         beliefunit_insert_sqlstr = f"INSERT INTO {beliefunit_v_agg_tablename} (belief_label) VALUES ('{a23_str}');"
         cursor.execute(beliefunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {beliefpay_v_agg_tablename} (belief_label, believer_name, person_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {beliefpay_v_agg_tablename} (belief_label, believer_name, partner_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
@@ -155,7 +155,7 @@ def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenari
         beliefpay_v_agg_tablename = create_prime_tablename("blfpayy", "v", "agg")
         beliefunit_insert_sqlstr = f"INSERT INTO {beliefunit_v_agg_tablename} (belief_label) VALUES ('{a23_str}');"
         cursor.execute(beliefunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {beliefpay_v_agg_tablename} (belief_label, believer_name, person_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {beliefpay_v_agg_tablename} (belief_label, believer_name, partner_name, tran_time, amount)
 VALUES
   ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {a23_bob_sue_tp55_amount})
 , ('{a45_str}', '{bob_str}', '{sue_str}', {tp55}, {a45_bob_sue_tp55_amount})
@@ -421,7 +421,7 @@ def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scena
         beliefpay_v_agg_tablename = create_prime_tablename("blfpayy", "v", "agg")
         beliefunit_insert_sqlstr = f"INSERT INTO {beliefunit_v_agg_tablename} (belief_label) VALUES ('{a23_str}');"
         cursor.execute(beliefunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {beliefpay_v_agg_tablename} (belief_label, believer_name, person_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {beliefpay_v_agg_tablename} (belief_label, believer_name, partner_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """

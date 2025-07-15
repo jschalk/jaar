@@ -9,8 +9,8 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -67,10 +67,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 BELIEVER_PRIME_TABLENAMES = {
-    f"{believer_person_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
-    f"{believer_person_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
-    f"{believer_personunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
-    f"{believer_personunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
+    f"{believer_partner_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
+    f"{believer_partner_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
+    f"{believer_partnerunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
+    f"{believer_partnerunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
     f"{believer_plan_awardlink_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
     f"{believer_plan_awardlink_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
     f"{believer_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
@@ -87,10 +87,10 @@ BELIEVER_PRIME_TABLENAMES = {
     f"{believer_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
     f"{believerunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
     f"{believerunit_str()}_sound_put_raw": "BLRUNIT_PUT_RAW",
-    f"{believer_person_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
-    f"{believer_person_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
-    f"{believer_personunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
-    f"{believer_personunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
+    f"{believer_partner_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
+    f"{believer_partner_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
+    f"{believer_partnerunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
+    f"{believer_partnerunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
     f"{believer_plan_awardlink_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
     f"{believer_plan_awardlink_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
     f"{believer_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
@@ -946,7 +946,7 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # ESTABLISH
     default_knot = "|"
     default_unknown_str = "unknown2"
-    blrpern_s_agg_tablename = prime_tbl(believer_personunit_str(), "s", "agg")
+    blrpern_s_agg_tablename = prime_tbl(believer_partnerunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(

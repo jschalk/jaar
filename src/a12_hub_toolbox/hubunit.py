@@ -47,7 +47,6 @@ from src.a09_pack_logic.pack import (
 from src.a12_hub_toolbox.a12_path import (
     create_atoms_dir_path,
     create_keep_duty_path,
-    create_keep_dutys_path,
     create_keep_grades_path,
     create_keep_visions_path,
     create_keeps_dir_path,
@@ -313,11 +312,6 @@ class HubUnit:
         return gut_believer
 
     # keep management
-    def duty_path(self, believer_name: BelieverName) -> str:
-        "Returns path: dutys_path/believer_name"
-
-        return create_path(self.dutys_path(), get_json_filename(believer_name))
-
     def vision_path(self, believer_name: BelieverName) -> str:
         "Returns path: visions_path/believer_name.json"
 
@@ -327,15 +321,6 @@ class HubUnit:
         "Returns path: grades_path/believer_name.json"
 
         return create_path(self.grades_path(), get_json_filename(believer_name))
-
-    def dutys_path(self) -> str:
-        return create_keep_dutys_path(
-            belief_mstr_dir=self.belief_mstr_dir,
-            believer_name=self.believer_name,
-            belief_label=self.belief_label,
-            keep_rope=self.keep_rope,
-            knot=self.knot,
-        )
 
     def visions_path(self) -> str:
         return create_keep_visions_path(
@@ -365,39 +350,14 @@ class HubUnit:
         x_filename = get_json_filename(x_believer.believer_name)
         save_file(self.visions_path(), x_filename, x_believer.get_json())
 
-    def duty_file_exists(self, believer_name: BelieverName) -> bool:
-        return os_path_exists(self.duty_path(believer_name))
-
     def vision_file_exists(self, believer_name: BelieverName) -> bool:
         return os_path_exists(self.vision_path(believer_name))
-
-    def get_duty_believer(self, believer_name: BelieverName) -> BelieverUnit:
-        if self.duty_file_exists(believer_name) is False:
-            return None
-        file_content = open_file(self.dutys_path(), get_json_filename(believer_name))
-        return believerunit_get_from_json(file_content)
 
     def get_vision_believer(self, believer_name: BelieverName) -> BelieverUnit:
         if self.vision_file_exists(believer_name) is False:
             return None
         file_content = open_file(self.visions_path(), get_json_filename(believer_name))
         return believerunit_get_from_json(file_content)
-
-    def delete_duty_file(self, believer_name: BelieverName) -> None:
-        delete_dir(self.duty_path(believer_name))
-
-    def delete_vision_file(self, believer_name: BelieverName) -> None:
-        delete_dir(self.vision_path(believer_name))
-
-    def delete_treasury_db_file(self) -> None:
-        treasury_db_path = create_treasury_db_path(
-            self.belief_mstr_dir,
-            self.believer_name,
-            self.belief_label,
-            self.keep_rope,
-            self.knot,
-        )
-        delete_dir(treasury_db_path)
 
     def get_perspective_believer(self, speaker: BelieverUnit) -> BelieverUnit:
         # get copy of believer without any metrics

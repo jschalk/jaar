@@ -265,30 +265,30 @@ def test_allot_scale_v01():
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(x_ledger, scale_number, grain_unit)
+    alloted_partners = allot_scale(x_ledger, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 16.5
-    assert alloted_persons.get("obj2") == 33.5
-    assert alloted_persons.get("obj3") == 50.0
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 16.5
+    assert alloted_partners.get("obj2") == 33.5
+    assert alloted_partners.get("obj3") == 50.0
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v02():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1.0,
         "obj2": 2.0,
         "obj3": 3.0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 100
     grain_unit = 0.3
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        allot_scale(persons, scale_number, grain_unit)
+        allot_scale(partners, scale_number, grain_unit)
     assert (
         str(excinfo.value)
         == f"The scale number '{scale_number}' must be a multiple of the grain unit '{grain_unit}'."
@@ -297,51 +297,51 @@ def test_allot_scale_v02():
 
 def test_allot_scale_v03():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1.0,
         "obj2": 2.0,
         "obj3": 3.0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 100.5
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 17
-    assert alloted_persons.get("obj2") == 33.5
-    assert alloted_persons.get("obj3") == 50.0
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 17
+    assert alloted_partners.get("obj2") == 33.5
+    assert alloted_partners.get("obj3") == 50.0
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v04():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1.0,
         "obj2": 2.0,
         "obj3": 3.0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 101
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 17
-    assert alloted_persons.get("obj2") == 33.5
-    assert alloted_persons.get("obj3") == 50.5
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 17
+    assert alloted_partners.get("obj2") == 33.5
+    assert alloted_partners.get("obj3") == 50.5
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v05():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1.0,
         "obj2": 2.0,
         "obj3": 3.0,
@@ -350,28 +350,28 @@ def test_allot_scale_v05():
         "obj6": 99.0,
         "obj7": 41.0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 101
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0.5
-    assert alloted_persons.get("obj2") == 1
-    assert alloted_persons.get("obj3") == 2
-    assert alloted_persons.get("obj4") == 4.5
-    assert alloted_persons.get("obj5") == 8
-    assert alloted_persons.get("obj6") == 60
-    assert alloted_persons.get("obj7") == 25
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0.5
+    assert alloted_partners.get("obj2") == 1
+    assert alloted_partners.get("obj3") == 2
+    assert alloted_partners.get("obj4") == 4.5
+    assert alloted_partners.get("obj5") == 8
+    assert alloted_partners.get("obj6") == 60
+    assert alloted_partners.get("obj7") == 25
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v06():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1.0,
         "obj2": 2.0,
         "obj3": 3.0,
@@ -380,28 +380,28 @@ def test_allot_scale_v06():
         "obj6": 99.0,
         "obj7": 100000000.0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 101
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0
-    assert alloted_persons.get("obj2") == 0
-    assert alloted_persons.get("obj3") == 0
-    assert alloted_persons.get("obj4") == 0
-    assert alloted_persons.get("obj5") == 0
-    assert alloted_persons.get("obj6") == 0
-    assert alloted_persons.get("obj7") == 101
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0
+    assert alloted_partners.get("obj2") == 0
+    assert alloted_partners.get("obj3") == 0
+    assert alloted_partners.get("obj4") == 0
+    assert alloted_partners.get("obj5") == 0
+    assert alloted_partners.get("obj6") == 0
+    assert alloted_partners.get("obj7") == 101
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v07():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1.0,
         "obj2": 2.0,
         "obj3": 3.0,
@@ -410,28 +410,28 @@ def test_allot_scale_v07():
         "obj6": 99.0,
         "obj7": 100000000.0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 1
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0
-    assert alloted_persons.get("obj2") == 0
-    assert alloted_persons.get("obj3") == 0
-    assert alloted_persons.get("obj4") == 0
-    assert alloted_persons.get("obj5") == 0
-    assert alloted_persons.get("obj6") == 0
-    assert alloted_persons.get("obj7") == 1
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0
+    assert alloted_partners.get("obj2") == 0
+    assert alloted_partners.get("obj3") == 0
+    assert alloted_partners.get("obj4") == 0
+    assert alloted_partners.get("obj5") == 0
+    assert alloted_partners.get("obj6") == 0
+    assert alloted_partners.get("obj7") == 1
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v08():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 0,
         "obj2": 0,
         "obj3": 0,
@@ -439,36 +439,36 @@ def test_allot_scale_v08():
         "obj5": 0,
         "obj6": 0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 1
     grain_unit = 0.5
 
     # WHEN / THEN
     # with pytest_raises(Exception) as excinfo:
-    #     allot_scale(persons, scale_number, grain_unit)
+    #     allot_scale(partners, scale_number, grain_unit)
     # assert (
     #     str(excinfo.value)
     #     == f"If the summation of ledger values is zero the scale_number '{scale_number}' needs to be zero."
     # )
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0
-    assert alloted_persons.get("obj2") == 0
-    assert alloted_persons.get("obj3") == 0
-    assert alloted_persons.get("obj4") == 0
-    assert alloted_persons.get("obj5") == 0
-    assert alloted_persons.get("obj6") == 0
-    assert sum(alloted_persons.values()) == 0
-    assert sum(alloted_persons.values()) != scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0
+    assert alloted_partners.get("obj2") == 0
+    assert alloted_partners.get("obj3") == 0
+    assert alloted_partners.get("obj4") == 0
+    assert alloted_partners.get("obj5") == 0
+    assert alloted_partners.get("obj6") == 0
+    assert sum(alloted_partners.values()) == 0
+    assert sum(alloted_partners.values()) != scale_number
 
 
 def test_allot_scale_v09():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 0,
         "obj2": 0,
         "obj3": 0,
@@ -476,27 +476,27 @@ def test_allot_scale_v09():
         "obj5": 0,
         "obj6": 0,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 0
     grain_unit = 0.5
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0
-    assert alloted_persons.get("obj2") == 0
-    assert alloted_persons.get("obj3") == 0
-    assert alloted_persons.get("obj4") == 0
-    assert alloted_persons.get("obj5") == 0
-    assert alloted_persons.get("obj6") == 0
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0
+    assert alloted_partners.get("obj2") == 0
+    assert alloted_partners.get("obj3") == 0
+    assert alloted_partners.get("obj4") == 0
+    assert alloted_partners.get("obj5") == 0
+    assert alloted_partners.get("obj6") == 0
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v10():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 0,
         "obj2": 0,
         "obj3": 0,
@@ -505,43 +505,43 @@ def test_allot_scale_v10():
         "obj6": 55,
         "obj7": 55,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 6
     grain_unit = 3
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0
-    assert alloted_persons.get("obj2") == 0
-    assert alloted_persons.get("obj3") == 0
-    assert alloted_persons.get("obj4") == 0
-    assert alloted_persons.get("obj5") == 0
-    assert alloted_persons.get("obj6") == 3
-    assert alloted_persons.get("obj7") == 3
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0
+    assert alloted_partners.get("obj2") == 0
+    assert alloted_partners.get("obj3") == 0
+    assert alloted_partners.get("obj4") == 0
+    assert alloted_partners.get("obj5") == 0
+    assert alloted_partners.get("obj6") == 3
+    assert alloted_partners.get("obj7") == 3
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_allot_scale_v11():
     # ESTABLISH
-    persons = {}
-    print(f"{persons=}")
+    partners = {}
+    print(f"{partners=}")
     scale_number = 6
     grain_unit = 3
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons == {}
+    print(alloted_partners)
+    assert alloted_partners == {}
 
 
 def test_allot_scale_v12():
     # ESTABLISH
-    persons = {
+    partners = {
         "obj1": 1,
         "obj2": 0,
         "obj3": 0,
@@ -550,23 +550,23 @@ def test_allot_scale_v12():
         "obj6": 55,
         "obj7": 55,
     }
-    print(f"{persons=}")
+    print(f"{partners=}")
     scale_number = 6
     grain_unit = 3
 
     # WHEN
-    alloted_persons = allot_scale(persons, scale_number, grain_unit)
+    alloted_partners = allot_scale(partners, scale_number, grain_unit)
 
     # THEN
-    print(alloted_persons)
-    assert alloted_persons.get("obj1") == 0
-    assert alloted_persons.get("obj2") == 0
-    assert alloted_persons.get("obj3") == 0
-    assert alloted_persons.get("obj4") == 0
-    assert alloted_persons.get("obj5") == 0
-    assert alloted_persons.get("obj6") == 3
-    assert alloted_persons.get("obj7") == 3
-    assert sum(alloted_persons.values()) == scale_number
+    print(alloted_partners)
+    assert alloted_partners.get("obj1") == 0
+    assert alloted_partners.get("obj2") == 0
+    assert alloted_partners.get("obj3") == 0
+    assert alloted_partners.get("obj4") == 0
+    assert alloted_partners.get("obj5") == 0
+    assert alloted_partners.get("obj6") == 3
+    assert alloted_partners.get("obj7") == 3
+    assert sum(alloted_partners.values()) == scale_number
 
 
 def test_get_missing_scale_list_RaisesErrorIfWhileLoopFails_Scenario0():

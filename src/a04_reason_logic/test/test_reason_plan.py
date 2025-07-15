@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import (
     create_rope,
     default_knot_if_None,
-    get_default_axiom_label as root_label,
+    get_default_central_label as root_label,
 )
 from src.a04_reason_logic.reason_plan import (
     ReasonCore,

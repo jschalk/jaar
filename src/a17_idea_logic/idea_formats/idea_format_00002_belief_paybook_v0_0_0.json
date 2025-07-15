@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "person_name": {
+        "partner_name": {
             "otx_key": true
         },
         "amount": {
@@ -26,7 +26,7 @@
     "dimens": [
         "beliefunit",
         "belief_paybook",
-        "believer_personunit",
+        "believer_partnerunit",
         "believerunit"
     ]
 }

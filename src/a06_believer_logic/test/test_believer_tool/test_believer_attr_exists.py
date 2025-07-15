@@ -4,8 +4,8 @@ from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     believer_attr_exists,
-    believer_person_membership_exists,
-    believer_personunit_exists,
+    believer_partner_membership_exists,
+    believer_partnerunit_exists,
     believer_plan_awardlink_exists,
     believer_plan_factunit_exists,
     believer_plan_healerlink_exists,
@@ -17,8 +17,8 @@ from src.a06_believer_logic.believer_tool import (
 )
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -31,7 +31,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    person_name_str,
+    partner_name_str,
     plan_rope_str,
     pstate_str,
     rcontext_str,
@@ -44,50 +44,50 @@ def test_believerunit_exists_ReturnsObj():
     assert believerunit_exists(believerunit_shop("Sue"))
 
 
-def test_believer_personunit_exists_ReturnsObj():
+def test_believer_partnerunit_exists_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {person_name_str(): yao_str}
+    jkeys = {partner_name_str(): yao_str}
 
     # WHEN / THEN
-    assert not believer_personunit_exists(None, {})
-    assert not believer_personunit_exists(sue_believer, jkeys)
+    assert not believer_partnerunit_exists(None, {})
+    assert not believer_partnerunit_exists(sue_believer, jkeys)
 
     # WHEN
-    sue_believer.add_personunit(yao_str)
+    sue_believer.add_partnerunit(yao_str)
 
     # THEN
-    assert believer_personunit_exists(sue_believer, jkeys)
+    assert believer_partnerunit_exists(sue_believer, jkeys)
 
 
-def test_believer_person_membership_exists_ReturnsObj():
+def test_believer_partner_membership_exists_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {person_name_str(): yao_str, group_title_str(): swim_str}
+    jkeys = {partner_name_str(): yao_str, group_title_str(): swim_str}
 
     # WHEN / THEN
-    assert not believer_person_membership_exists(None, {})
-    assert not believer_person_membership_exists(sue_believer, jkeys)
+    assert not believer_partner_membership_exists(None, {})
+    assert not believer_partner_membership_exists(sue_believer, jkeys)
 
     # WHEN
-    sue_believer.add_personunit(yao_str)
+    sue_believer.add_partnerunit(yao_str)
     # THEN
-    assert not believer_person_membership_exists(sue_believer, jkeys)
+    assert not believer_partner_membership_exists(sue_believer, jkeys)
 
     # WHEN
-    yao_plan = sue_believer.get_person(yao_str)
+    yao_plan = sue_believer.get_partner(yao_str)
     yao_plan.add_membership(";run")
     # THEN
-    assert not believer_person_membership_exists(sue_believer, jkeys)
+    assert not believer_partner_membership_exists(sue_believer, jkeys)
 
     # WHEN
-    yao_plan = sue_believer.get_person(yao_str)
+    yao_plan = sue_believer.get_partner(yao_str)
     yao_plan.add_membership(swim_str)
     # THEN
-    assert believer_person_membership_exists(sue_believer, jkeys)
+    assert believer_partner_membership_exists(sue_believer, jkeys)
 
 
 def test_believer_planunit_exists_ReturnsObj():
@@ -344,48 +344,48 @@ def test_believer_attr_exists_ReturnsObj_believerunit():
     assert believer_attr_exists(believerunit_str(), believerunit_shop("Sue"), {})
 
 
-def test_believer_attr_exists_ReturnsObj_believer_personunit():
+def test_believer_attr_exists_ReturnsObj_believer_partnerunit():
     # ESTABLISH
     yao_str = "Yao"
     sue_believer = believerunit_shop("Sue")
-    x_jkeys = {person_name_str(): yao_str}
+    x_jkeys = {partner_name_str(): yao_str}
 
     # WHEN / THEN
-    assert not believer_attr_exists(believer_personunit_str(), None, {})
-    assert not believer_attr_exists(believer_personunit_str(), sue_believer, x_jkeys)
+    assert not believer_attr_exists(believer_partnerunit_str(), None, {})
+    assert not believer_attr_exists(believer_partnerunit_str(), sue_believer, x_jkeys)
 
     # WHEN
-    sue_believer.add_personunit(yao_str)
+    sue_believer.add_partnerunit(yao_str)
 
     # THEN
-    assert believer_attr_exists(believer_personunit_str(), sue_believer, x_jkeys)
+    assert believer_attr_exists(believer_partnerunit_str(), sue_believer, x_jkeys)
 
 
-def test_believer_attr_exists_ReturnsObj_believer_person_membership():
+def test_believer_attr_exists_ReturnsObj_believer_partner_membership():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_believer = believerunit_shop("Sue")
-    x_jkeys = {person_name_str(): yao_str, group_title_str(): swim_str}
-    x_dimen = believer_person_membership_str()
+    x_jkeys = {partner_name_str(): yao_str, group_title_str(): swim_str}
+    x_dimen = believer_partner_membership_str()
 
     # WHEN / THEN
     assert not believer_attr_exists(x_dimen, None, {})
     assert not believer_attr_exists(x_dimen, sue_believer, x_jkeys)
 
     # WHEN
-    sue_believer.add_personunit(yao_str)
+    sue_believer.add_partnerunit(yao_str)
     # THEN
     assert not believer_attr_exists(x_dimen, sue_believer, x_jkeys)
 
     # WHEN
-    yao_plan = sue_believer.get_person(yao_str)
+    yao_plan = sue_believer.get_partner(yao_str)
     yao_plan.add_membership(";run")
     # THEN
     assert not believer_attr_exists(x_dimen, sue_believer, x_jkeys)
 
     # WHEN
-    yao_plan = sue_believer.get_person(yao_str)
+    yao_plan = sue_believer.get_partner(yao_str)
     yao_plan.add_membership(swim_str)
     # THEN
     assert believer_attr_exists(x_dimen, sue_believer, x_jkeys)

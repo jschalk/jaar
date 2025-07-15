@@ -1,7 +1,7 @@
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_personunit_str,
+    believer_partnerunit_str,
     believerunit_str,
-    person_name_str,
+    partner_name_str,
 )
 from src.a08_believer_atom_logic.atom import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import DELETE_str, UPDATE_str
@@ -16,10 +16,10 @@ def get_believerdelta_sue_example() -> BelieverDelta:
     pool_believeratom.set_jvalue(pool_attribute, 77)
     sue_believerdelta.set_believeratom(pool_believeratom)
 
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     sue_str = "Sue"
     sue_believeratom = believeratom_shop(dimen, DELETE_str())
-    sue_believeratom.set_jkey(person_name_str(), sue_str)
+    sue_believeratom.set_jkey(partner_name_str(), sue_str)
     sue_believerdelta.set_believeratom(sue_believeratom)
     return sue_believerdelta
 
@@ -38,9 +38,9 @@ def get_believerdelta_example1() -> BelieverDelta:
     x_believeratom.set_jvalue(x_attribute, 88)
     sue_believerdelta.set_believeratom(x_believeratom)
 
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     zia_str = "Zia"
     x_believeratom = believeratom_shop(dimen, DELETE_str())
-    x_believeratom.set_jkey(person_name_str(), zia_str)
+    x_believeratom.set_jkey(partner_name_str(), zia_str)
     sue_believerdelta.set_believeratom(x_believeratom)
     return sue_believerdelta

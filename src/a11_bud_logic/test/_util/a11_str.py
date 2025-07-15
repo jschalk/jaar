@@ -27,8 +27,8 @@ def bud_believer_name_str() -> str:
     return "bud_believer_name"
 
 
-def bud_person_nets_str() -> str:
-    return "bud_person_nets"
+def bud_partner_nets_str() -> str:
+    return "bud_partner_nets"
 
 
 def bud_time_str() -> str:

@@ -2,9 +2,9 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
-from src.a01_term_logic.term import BelieverName, GroupTitle, PersonName, RopeTerm
+from src.a01_term_logic.term import BelieverName, GroupTitle, PartnerName, RopeTerm
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
-from src.a03_group_logic.person import PersonUnit
+from src.a03_group_logic.partner import PartnerUnit
 from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a04_reason_logic.reason_plan import FactHeir, PremiseUnit, ReasonHeir
 from src.a05_plan_logic.plan import HealerLink, PlanUnit
@@ -15,7 +15,7 @@ from src.a11_bud_logic.bud import BeliefLabel
 def create_blrmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
-    person_name = values_dict.get("person_name")
+    partner_name = values_dict.get("partner_name")
     group_title = values_dict.get("group_title")
     group_cred_points = values_dict.get("group_cred_points")
     group_debt_points = values_dict.get("group_debt_points")
@@ -28,11 +28,11 @@ def create_blrmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
     _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
     real_str = "REAL"
-    return f"""INSERT INTO believer_person_membership_job (belief_label, believer_name, person_name, group_title, group_cred_points, group_debt_points, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
+    return f"""INSERT INTO believer_partner_membership_job (belief_label, believer_name, partner_name, group_title, group_cred_points, group_debt_points, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
-, {sqlite_obj_str(person_name, "TEXT")}
+, {sqlite_obj_str(partner_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
 , {sqlite_obj_str(group_cred_points, real_str)}
 , {sqlite_obj_str(group_debt_points, real_str)}
@@ -52,9 +52,9 @@ VALUES (
 def create_blrpern_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
-    person_name = values_dict.get("person_name")
-    person_cred_points = values_dict.get("person_cred_points")
-    person_debt_points = values_dict.get("person_debt_points")
+    partner_name = values_dict.get("partner_name")
+    partner_cred_points = values_dict.get("partner_cred_points")
+    partner_debt_points = values_dict.get("partner_debt_points")
     _credor_pool = values_dict.get("_credor_pool")
     _debtor_pool = values_dict.get("_debtor_pool")
     _fund_give = values_dict.get("_fund_give")
@@ -63,16 +63,18 @@ def create_blrpern_metrics_insert_sqlstr(values_dict: dict[str,]):
     _fund_agenda_take = values_dict.get("_fund_agenda_take")
     _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
     _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
-    _inallocable_person_debt_points = values_dict.get("_inallocable_person_debt_points")
-    _irrational_person_debt_points = values_dict.get("_irrational_person_debt_points")
+    _inallocable_partner_debt_points = values_dict.get(
+        "_inallocable_partner_debt_points"
+    )
+    _irrational_partner_debt_points = values_dict.get("_irrational_partner_debt_points")
     real_str = "REAL"
-    return f"""INSERT INTO believer_personunit_job (belief_label, believer_name, person_name, person_cred_points, person_debt_points, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_person_debt_points, _irrational_person_debt_points)
+    return f"""INSERT INTO believer_partnerunit_job (belief_label, believer_name, partner_name, partner_cred_points, partner_debt_points, _credor_pool, _debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_partner_debt_points, _irrational_partner_debt_points)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
-, {sqlite_obj_str(person_name, "TEXT")}
-, {sqlite_obj_str(person_cred_points, real_str)}
-, {sqlite_obj_str(person_debt_points, real_str)}
+, {sqlite_obj_str(partner_name, "TEXT")}
+, {sqlite_obj_str(partner_cred_points, real_str)}
+, {sqlite_obj_str(partner_debt_points, real_str)}
 , {sqlite_obj_str(_credor_pool, real_str)}
 , {sqlite_obj_str(_debtor_pool, real_str)}
 , {sqlite_obj_str(_fund_give, real_str)}
@@ -81,8 +83,8 @@ VALUES (
 , {sqlite_obj_str(_fund_agenda_take, real_str)}
 , {sqlite_obj_str(_fund_agenda_ratio_give, real_str)}
 , {sqlite_obj_str(_fund_agenda_ratio_take, real_str)}
-, {sqlite_obj_str(_inallocable_person_debt_points, real_str)}
-, {sqlite_obj_str(_irrational_person_debt_points, real_str)}
+, {sqlite_obj_str(_inallocable_partner_debt_points, real_str)}
+, {sqlite_obj_str(_irrational_partner_debt_points, real_str)}
 )
 ;
 """
@@ -278,12 +280,12 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     _range_evaluated = values_dict.get("_range_evaluated")
     _descendant_task_count = values_dict.get("_descendant_task_count")
     _healerlink_ratio = values_dict.get("_healerlink_ratio")
-    _all_person_cred = values_dict.get("_all_person_cred")
-    _all_person_debt = values_dict.get("_all_person_debt")
+    _all_partner_cred = values_dict.get("_all_partner_cred")
+    _all_partner_debt = values_dict.get("_all_partner_debt")
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_person_cred, _all_person_debt)
+    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_partner_cred, _all_partner_debt)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -311,8 +313,8 @@ VALUES (
 , {sqlite_obj_str(_range_evaluated, "INTEGER")}
 , {sqlite_obj_str(_descendant_task_count, "INTEGER")}
 , {sqlite_obj_str(_healerlink_ratio, real_str)}
-, {sqlite_obj_str(_all_person_cred, real_str)}
-, {sqlite_obj_str(_all_person_debt, real_str)}
+, {sqlite_obj_str(_all_partner_cred, real_str)}
+, {sqlite_obj_str(_all_partner_debt, real_str)}
 )
 ;
 """
@@ -367,7 +369,7 @@ class ObjKeysHolder:
     believer_name: BelieverName = None
     rope: RopeTerm = None
     rcontext: RopeTerm = None
-    person_name: PersonName = None
+    partner_name: PartnerName = None
     membership: GroupTitle = None
     group_title: GroupTitle = None
     fact_rope: RopeTerm = None
@@ -388,9 +390,9 @@ def insert_job_blrmemb(
 def insert_job_blrpern(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
-    x_person: PersonUnit,
+    x_partner: PartnerUnit,
 ):
-    x_dict = copy_deepcopy(x_person.__dict__)
+    x_dict = copy_deepcopy(x_partner.__dict__)
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["believer_name"] = x_objkeysholder.believer_name
     insert_sqlstr = create_blrpern_metrics_insert_sqlstr(x_dict)
@@ -532,9 +534,9 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_believer: BelieverUnit):
             for prem in reasonheir.premises.values():
                 insert_job_blrprem(cursor, x_objkeysholder, prem)
 
-    for x_person in job_believer.persons.values():
-        insert_job_blrpern(cursor, x_objkeysholder, x_person)
-        for x_membership in x_person._memberships.values():
+    for x_partner in job_believer.partners.values():
+        insert_job_blrpern(cursor, x_objkeysholder, x_partner)
+        for x_membership in x_partner._memberships.values():
             insert_job_blrmemb(cursor, x_objkeysholder, x_membership)
 
     for x_groupunit in job_believer._groupunits.values():

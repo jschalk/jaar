@@ -306,7 +306,7 @@ def _add_paypurchases_from_df(x_beliefunit: BeliefUnit, br00002_df: DataFrame):
     for index, row in br00002_df.query(query_str).iterrows():
         x_beliefunit.add_paypurchase(
             believer_name=row["believer_name"],
-            person_name=row["person_name"],
+            partner_name=row["partner_name"],
             tran_time=row["tran_time"],
             amount=row["amount"],
         )

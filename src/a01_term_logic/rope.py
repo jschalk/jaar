@@ -1,7 +1,7 @@
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import is_path_valid
 from src.a01_term_logic.term import (
-    AxiomLabel,
+    CentralLabel,
     EporTerm,
     LabelTerm,
     RopeTerm,
@@ -13,7 +13,7 @@ class knot_not_in_parent_rope_Exception(Exception):
     pass
 
 
-def get_default_axiom_label() -> AxiomLabel:
+def get_default_central_label() -> CentralLabel:
     return LabelTerm("YY")
 
 
@@ -25,8 +25,8 @@ def to_rope(label: LabelTerm, knot: str = None) -> LabelTerm:
     return label if label.endswith(x_knot) else LabelTerm(f"{label}{x_knot}")
 
 
-def get_default_axiom_rope(knot: str = None) -> str:
-    return to_rope(get_default_axiom_label(), knot)
+def get_default_central_rope(knot: str = None) -> str:
+    return to_rope(get_default_central_label(), knot)
 
 
 class init_knot_not_presentException(Exception):

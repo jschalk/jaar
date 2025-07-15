@@ -13,39 +13,39 @@ def test_get_debtors_roll_ReturnsObj():
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
     yao_duty.settle_believer()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
 
     # THEN
-    zia_personunit = yao_duty.get_person(zia_str)
-    assert yao_roll == [zia_personunit]
+    zia_partnerunit = yao_duty.get_partner(zia_str)
+    assert yao_roll == [zia_partnerunit]
 
 
-def test_get_debtors_roll_ReturnsObjIgnoresZero_person_debt_points():
+def test_get_debtors_roll_ReturnsObjIgnoresZero_partner_debt_points():
     # ESTABLISH
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
     wei_str = "Wei"
-    wei_person_cred_points = 67
-    wei_person_debt_points = 0
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    yao_duty.add_personunit(wei_str, wei_person_cred_points, wei_person_debt_points)
+    wei_partner_cred_points = 67
+    wei_partner_debt_points = 0
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
+    yao_duty.add_partnerunit(wei_str, wei_partner_cred_points, wei_partner_debt_points)
     yao_duty.settle_believer()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
 
     # THEN
-    zia_personunit = yao_duty.get_person(zia_str)
-    assert yao_roll == [zia_personunit]
+    zia_partnerunit = yao_duty.get_partner(zia_str)
+    assert yao_roll == [zia_partnerunit]
 
 
 def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
@@ -53,68 +53,72 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
     sue_str = "Sue"
-    sue_person_cred_points = 57
-    sue_person_debt_points = 51
-    yao_believer.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    yao_believer.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
+    sue_partner_cred_points = 57
+    sue_partner_debt_points = 51
+    yao_believer.add_partnerunit(
+        zia_str, zia_partner_cred_points, zia_partner_debt_points
+    )
+    yao_believer.add_partnerunit(
+        sue_str, sue_partner_cred_points, sue_partner_debt_points
+    )
     yao_pool = 92
-    yao_believer.set_person_respect(yao_pool)
+    yao_believer.set_partner_respect(yao_pool)
 
     # WHEN
-    ordered_persons1 = get_ordered_debtors_roll(yao_believer)
+    ordered_partners1 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    zia_person = yao_believer.get_person(zia_str)
-    sue_person = yao_believer.get_person(sue_str)
-    assert ordered_persons1[0].get_dict() == sue_person.get_dict()
-    assert ordered_persons1 == [sue_person, zia_person]
+    zia_partner = yao_believer.get_partner(zia_str)
+    sue_partner = yao_believer.get_partner(sue_str)
+    assert ordered_partners1[0].get_dict() == sue_partner.get_dict()
+    assert ordered_partners1 == [sue_partner, zia_partner]
 
     # ESTABLISH
     bob_str = "Bob"
-    bob_person_debt_points = 75
-    yao_believer.add_personunit(bob_str, 0, bob_person_debt_points)
-    bob_person = yao_believer.get_person(bob_str)
+    bob_partner_debt_points = 75
+    yao_believer.add_partnerunit(bob_str, 0, bob_partner_debt_points)
+    bob_partner = yao_believer.get_partner(bob_str)
 
     # WHEN
-    ordered_persons2 = get_ordered_debtors_roll(yao_believer)
+    ordered_partners2 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    assert ordered_persons2[0].get_dict() == bob_person.get_dict()
-    assert ordered_persons2 == [bob_person, sue_person, zia_person]
+    assert ordered_partners2[0].get_dict() == bob_partner.get_dict()
+    assert ordered_partners2 == [bob_partner, sue_partner, zia_partner]
 
 
-def test_get_ordered_debtors_roll_DoesNotReturnZero_person_debt_points():
+def test_get_ordered_debtors_roll_DoesNotReturnZero_partner_debt_points():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
     zia_str = "Zia"
-    zia_person_debt_points = 41
+    zia_partner_debt_points = 41
     sue_str = "Sue"
-    sue_person_debt_points = 51
+    sue_partner_debt_points = 51
     yao_pool = 92
-    yao_believer.set_person_respect(yao_pool)
+    yao_believer.set_partner_respect(yao_pool)
     bob_str = "Bob"
-    bob_person_debt_points = 75
+    bob_partner_debt_points = 75
     xio_str = "Xio"
-    yao_believer.add_personunit(zia_str, 0, zia_person_debt_points)
-    yao_believer.add_personunit(sue_str, 0, sue_person_debt_points)
-    yao_believer.add_personunit(bob_str, 0, bob_person_debt_points)
-    yao_believer.add_personunit(yao_str, 0, 0)
-    yao_believer.add_personunit(xio_str, 0, 0)
+    yao_believer.add_partnerunit(zia_str, 0, zia_partner_debt_points)
+    yao_believer.add_partnerunit(sue_str, 0, sue_partner_debt_points)
+    yao_believer.add_partnerunit(bob_str, 0, bob_partner_debt_points)
+    yao_believer.add_partnerunit(yao_str, 0, 0)
+    yao_believer.add_partnerunit(xio_str, 0, 0)
 
     # WHEN
-    ordered_persons2 = get_ordered_debtors_roll(yao_believer)
+    ordered_partners2 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    assert len(ordered_persons2) == 3
-    zia_person = yao_believer.get_person(zia_str)
-    sue_person = yao_believer.get_person(sue_str)
-    bob_person = yao_believer.get_person(bob_str)
-    assert ordered_persons2[0].get_dict() == bob_person.get_dict()
-    assert ordered_persons2 == [bob_person, sue_person, zia_person]
+    assert len(ordered_partners2) == 3
+    zia_partner = yao_believer.get_partner(zia_str)
+    sue_partner = yao_believer.get_partner(sue_str)
+    bob_partner = yao_believer.get_partner(bob_str)
+    assert ordered_partners2[0].get_dict() == bob_partner.get_dict()
+    assert ordered_partners2 == [bob_partner, sue_partner, zia_partner]
 
 
 def test_set_listen_to_speaker_fact_SetsFact():
@@ -132,8 +136,8 @@ def test_set_listen_to_speaker_fact_SetsFact():
     sweep_str = "sweep"
     sweep_rope = yao_listener.make_rope(casa_rope, sweep_str)
 
-    yao_listener.add_personunit(yao_str)
-    yao_listener.set_person_respect(20)
+    yao_listener.add_partnerunit(yao_str)
+    yao_listener.set_partner_respect(20)
     yao_listener.set_plan(planunit_shop(clean_str), status_rope)
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
@@ -157,8 +161,8 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     # ESTABLISH
     yao_str = "Yao"
     yao_listener = believerunit_shop(yao_str)
-    yao_listener.add_personunit(yao_str)
-    yao_listener.set_person_respect(20)
+    yao_listener.add_partnerunit(yao_str)
+    yao_listener.set_partner_respect(20)
     casa_str = "casa"
     casa_rope = yao_listener.make_l1_rope(casa_str)
     status_str = "status"
@@ -225,8 +229,8 @@ def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
     snow_str = "snow"
     snow_rope = yao_src.make_rope(weather_rope, snow_str)
 
-    yao_src.add_personunit(yao_str)
-    yao_src.set_person_respect(20)
+    yao_src.add_partnerunit(yao_str)
+    yao_src.set_partner_respect(20)
     yao_src.set_plan(planunit_shop(clean_str), status_rope)
     yao_src.set_plan(planunit_shop(dirty_str), status_rope)
     yao_src.set_plan(planunit_shop(sweep_str, task=True), casa_rope)

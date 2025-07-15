@@ -4,25 +4,25 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.term import BelieverName, PersonName
+from src.a01_term_logic.term import BelieverName, PartnerName
 from src.a02_finance_logic.allot import allot_scale
 from src.a06_believer_logic.believer import BelieverUnit
 from src.a12_hub_toolbox.hubunit import HubUnit
 
 
-def get_credorledger(x_believer: BelieverUnit) -> dict[PersonName, float]:
+def get_credorledger(x_believer: BelieverUnit) -> dict[PartnerName, float]:
     return {
-        personunit.person_name: personunit.person_cred_points
-        for personunit in x_believer.persons.values()
-        if personunit.person_cred_points > 0
+        partnerunit.partner_name: partnerunit.partner_cred_points
+        for partnerunit in x_believer.partners.values()
+        if partnerunit.partner_cred_points > 0
     }
 
 
-def get_debtorledger(x_believer: BelieverUnit) -> dict[PersonName, float]:
+def get_debtorledger(x_believer: BelieverUnit) -> dict[PartnerName, float]:
     return {
-        personunit.person_name: personunit.person_debt_points
-        for personunit in x_believer.persons.values()
-        if personunit.person_debt_points > 0
+        partnerunit.partner_name: partnerunit.partner_debt_points
+        for partnerunit in x_believer.partners.values()
+        if partnerunit.partner_debt_points > 0
     }
 
 
@@ -30,7 +30,7 @@ def get_debtorledger(x_believer: BelieverUnit) -> dict[PersonName, float]:
 class RiverBook:
     hubunit: HubUnit = None
     believer_name: BelieverName = None
-    _rivergrants: dict[PersonName, float] = None
+    _rivergrants: dict[PartnerName, float] = None
 
 
 def riverbook_shop(hubunit: HubUnit, believer_name: BelieverName):
@@ -58,24 +58,24 @@ def create_riverbook(
 class RiverCycle:
     hubunit: HubUnit = None
     number: int = None
-    keep_credorledgers: dict[BelieverName : dict[PersonName, float]] = None
-    riverbooks: dict[PersonName, RiverBook] = None
+    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]] = None
+    riverbooks: dict[PartnerName, RiverBook] = None
 
     def _set_complete_riverbook(self, x_riverbook: RiverBook):
         self.riverbooks[x_riverbook.believer_name] = x_riverbook
 
-    def set_riverbook(self, book_person_name: PersonName, book_point_amount: float):
-        believer_credorledger = self.keep_credorledgers.get(book_person_name)
+    def set_riverbook(self, book_partner_name: PartnerName, book_point_amount: float):
+        believer_credorledger = self.keep_credorledgers.get(book_partner_name)
         if believer_credorledger is not None:
             x_riverbook = create_riverbook(
                 hubunit=self.hubunit,
-                believer_name=book_person_name,
+                believer_name=book_partner_name,
                 keep_credorledger=believer_credorledger,
                 book_point_amount=book_point_amount,
             )
             self._set_complete_riverbook(x_riverbook)
 
-    def create_cylceledger(self) -> dict[PersonName, float]:
+    def create_cylceledger(self) -> dict[PartnerName, float]:
         x_dict = {}
         for x_riverbook in self.riverbooks.values():
             for chargeee, charge_amount in x_riverbook._rivergrants.items():
@@ -89,7 +89,7 @@ class RiverCycle:
 def rivercycle_shop(
     hubunit: HubUnit,
     number: int,
-    keep_credorledgers: dict[BelieverName : dict[PersonName, float]] = None,
+    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]] = None,
 ):
     return RiverCycle(
         hubunit=hubunit,
@@ -101,7 +101,7 @@ def rivercycle_shop(
 
 def create_init_rivercycle(
     healer_hubunit: HubUnit,
-    keep_credorledgers: dict[BelieverName : dict[PersonName, float]],
+    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]],
 ) -> RiverCycle:
     x_rivercycle = rivercycle_shop(healer_hubunit, 0, keep_credorledgers)
     init_amount = healer_hubunit.keep_point_magnitude
@@ -111,7 +111,7 @@ def create_init_rivercycle(
 
 def create_next_rivercycle(
     prev_rivercycle: RiverCycle,
-    prev_cycle_cycleledger_post_tax: dict[PersonName, float],
+    prev_cycle_cycleledger_post_tax: dict[PartnerName, float],
 ) -> RiverCycle:
     next_rivercycle = rivercycle_shop(
         hubunit=prev_rivercycle.hubunit,
@@ -126,7 +126,7 @@ def create_next_rivercycle(
 @dataclass
 class RiverGrade:
     hubunit: HubUnit = None
-    person_name: PersonName = None
+    partner_name: PartnerName = None
     number: int = None
     tax_bill_amount: float = None
     grant_amount: float = None
@@ -184,14 +184,14 @@ class RiverGrade:
 
 def rivergrade_shop(
     hubunit: HubUnit,
-    person_name: PersonName,
+    partner_name: PartnerName,
     number: float = None,
     debtor_count: int = None,
     credor_count: int = None,
 ):
     return RiverGrade(
         hubunit=hubunit,
-        person_name=person_name,
+        partner_name=partner_name,
         number=get_0_if_None(number),
         debtor_count=debtor_count,
         credor_count=credor_count,

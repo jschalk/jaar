@@ -1,9 +1,9 @@
 from src.a01_term_logic.term import BeliefLabel
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_personunit_str,
+    believer_partnerunit_str,
     believer_planunit_str,
     parent_rope_str,
-    person_name_str,
+    partner_name_str,
     plan_label_str,
 )
 from src.a08_believer_atom_logic.atom import BelieverAtom, believeratom_shop
@@ -35,10 +35,10 @@ def get_believerdelta_sue_example() -> BelieverDelta:
     pool_believeratom.set_jvalue(pool_attribute, 77)
     sue_believerdelta.set_believeratom(pool_believeratom)
 
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     sue_str = "Sue"
     sue_believeratom = believeratom_shop(dimen, DELETE_str())
-    sue_believeratom.set_jkey(person_name_str(), sue_str)
+    sue_believeratom.set_jkey(partner_name_str(), sue_str)
     sue_believerdelta.set_believeratom(sue_believeratom)
     return sue_believerdelta
 
@@ -58,10 +58,10 @@ def get_believerdelta_example1() -> BelieverDelta:
     x_believeratom.set_jvalue(x_attribute, 88)
     sue_believerdelta.set_believeratom(x_believeratom)
 
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     sue_str = "Sue"
     x_believeratom = believeratom_shop(dimen, DELETE_str())
-    x_believeratom.set_jkey(person_name_str(), sue_str)
+    x_believeratom.set_jkey(partner_name_str(), sue_str)
     sue_believerdelta.set_believeratom(x_believeratom)
     return sue_believerdelta
 
@@ -74,9 +74,9 @@ def get_believerdelta_example2() -> BelieverDelta:
     x_attribute = "_credor_respect"
     x_believeratom.set_jvalue(x_attribute, 77)
 
-    dimen = believer_personunit_str()
+    dimen = believer_partnerunit_str()
     sue_str = "Sue"
     x_believeratom = believeratom_shop(dimen, DELETE_str())
-    x_believeratom.set_jkey(person_name_str(), sue_str)
+    x_believeratom.set_jkey(partner_name_str(), sue_str)
     sue_believerdelta.set_believeratom(x_believeratom)
     return sue_believerdelta

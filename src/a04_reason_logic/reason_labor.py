@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
 from src.a03_group_logic.group import GroupTitle, GroupUnit
-from src.a03_group_logic.person import PersonName
+from src.a03_group_logic.partner import PartnerName
 
 
 class InvalidLaborHeirPopulateException(Exception):
@@ -44,7 +44,7 @@ class LaborHeir:
     _laborlinks: set[GroupTitle]
     _believer_name_labor: bool
 
-    def _get_all_persons(
+    def _get_all_partners(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
         labor_title_set: set[GroupTitle],
@@ -60,7 +60,7 @@ class LaborHeir:
     def set_believer_name_labor(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_believer_name: PersonName,
+        believer_believer_name: PartnerName,
     ):
         self._believer_name_labor = self.get_believer_name_labor_bool(
             groupunits, believer_believer_name
@@ -69,15 +69,15 @@ class LaborHeir:
     def get_believer_name_labor_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_believer_name: PersonName,
+        believer_believer_name: PartnerName,
     ) -> bool:
         if self._laborlinks == set():
             return True
 
         for x_labor_title, x_groupunit in groupunits.items():
             if x_labor_title in self._laborlinks:
-                for x_person_name in x_groupunit._memberships.keys():
-                    if x_person_name == believer_believer_name:
+                for x_partner_name in x_groupunit._memberships.keys():
+                    if x_partner_name == believer_believer_name:
                         return True
         return False
 
@@ -97,22 +97,22 @@ class LaborHeir:
             for laborlink in parent_laborheir._laborlinks:
                 x_laborlinks.add(laborlink)
         else:
-            # get all_persons of parent laborheir groupunits
-            all_parent_laborheir_persons = self._get_all_persons(
+            # get all_partners of parent laborheir groupunits
+            all_parent_laborheir_partners = self._get_all_partners(
                 groupunits=groupunits,
                 labor_title_set=parent_laborheir._laborlinks,
             )
-            # get all_persons of laborunit groupunits
-            all_laborunit_persons = self._get_all_persons(
+            # get all_partners of laborunit groupunits
+            all_laborunit_partners = self._get_all_partners(
                 groupunits=groupunits,
                 labor_title_set=laborunit._laborlinks,
             )
-            if not set(all_laborunit_persons).issubset(
-                set(all_parent_laborheir_persons)
+            if not set(all_laborunit_partners).issubset(
+                set(all_parent_laborheir_partners)
             ):
                 # else raise error
                 raise InvalidLaborHeirPopulateException(
-                    f"parent_laborheir does not contain all persons of the plan's laborunit\n{set(all_parent_laborheir_persons)=}\n\n{set(all_laborunit_persons)=}"
+                    f"parent_laborheir does not contain all partners of the plan's laborunit\n{set(all_parent_laborheir_partners)=}\n\n{set(all_laborunit_partners)=}"
                 )
 
             # set dict_x = to laborunit groupunits

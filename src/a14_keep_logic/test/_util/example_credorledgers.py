@@ -1,4 +1,4 @@
-from src.a01_term_logic.term import BelieverName, PersonName
+from src.a01_term_logic.term import BelieverName, PartnerName
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger
@@ -19,13 +19,13 @@ def example_yao_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_person_cred_points = 7
-    bob_person_cred_points = 3
-    zia_person_cred_points = 10
+    yao_partner_cred_points = 7
+    bob_partner_cred_points = 3
+    zia_partner_cred_points = 10
     yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_personunit(yao_str, yao_person_cred_points)
-    yao_believer.add_personunit(bob_str, bob_person_cred_points)
-    yao_believer.add_personunit(zia_str, zia_person_cred_points)
+    yao_believer.add_partnerunit(yao_str, yao_partner_cred_points)
+    yao_believer.add_partnerunit(bob_str, bob_partner_cred_points)
+    yao_believer.add_partnerunit(zia_str, zia_partner_cred_points)
     return get_credorledger(yao_believer)
 
 
@@ -33,13 +33,13 @@ def example_bob_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_person_cred_points = 1
-    bob_person_cred_points = 7
-    zia_person_cred_points = 42
+    yao_partner_cred_points = 1
+    bob_partner_cred_points = 7
+    zia_partner_cred_points = 42
     bob_believer = believerunit_shop(bob_str)
-    bob_believer.add_personunit(yao_str, yao_person_cred_points)
-    bob_believer.add_personunit(bob_str, bob_person_cred_points)
-    bob_believer.add_personunit(zia_str, zia_person_cred_points)
+    bob_believer.add_partnerunit(yao_str, yao_partner_cred_points)
+    bob_believer.add_partnerunit(bob_str, bob_partner_cred_points)
+    bob_believer.add_partnerunit(zia_str, zia_partner_cred_points)
     return get_credorledger(bob_believer)
 
 
@@ -47,17 +47,19 @@ def example_zia_credorledger() -> dict[str, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_person_cred_points = 89
-    bob_person_cred_points = 150
-    zia_person_cred_points = 61
+    yao_partner_cred_points = 89
+    bob_partner_cred_points = 150
+    zia_partner_cred_points = 61
     zia_believer = believerunit_shop(zia_str)
-    zia_believer.add_personunit(yao_str, yao_person_cred_points)
-    zia_believer.add_personunit(bob_str, bob_person_cred_points)
-    zia_believer.add_personunit(zia_str, zia_person_cred_points)
+    zia_believer.add_partnerunit(yao_str, yao_partner_cred_points)
+    zia_believer.add_partnerunit(bob_str, bob_partner_cred_points)
+    zia_believer.add_partnerunit(zia_str, zia_partner_cred_points)
     return get_credorledger(zia_believer)
 
 
-def example_yao_bob_zia_credorledgers() -> dict[BelieverName : dict[PersonName, float]]:
+def example_yao_bob_zia_credorledgers() -> (
+    dict[BelieverName : dict[PartnerName, float]]
+):
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
@@ -68,7 +70,7 @@ def example_yao_bob_zia_credorledgers() -> dict[BelieverName : dict[PersonName, 
     }
 
 
-def example_yao_bob_zia_tax_dues() -> dict[PersonName, float]:
+def example_yao_bob_zia_tax_dues() -> dict[PartnerName, float]:
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"

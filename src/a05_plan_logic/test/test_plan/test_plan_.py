@@ -10,8 +10,8 @@ from src.a05_plan_logic.plan import PlanUnit, get_default_belief_label, planunit
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
-    _all_person_cred_str,
-    _all_person_debt_str,
+    _all_partner_cred_str,
+    _all_partner_debt_str,
     _awardheirs_str,
     _awardlines_str,
     _descendant_task_count_str,
@@ -84,8 +84,8 @@ def test_PlanUnit_Exists():
     assert x_planunit._stop_calc is None
     assert x_planunit._descendant_task_count is None
     assert x_planunit._is_expanded is None
-    assert x_planunit._all_person_cred is None
-    assert x_planunit._all_person_debt is None
+    assert x_planunit._all_partner_cred is None
+    assert x_planunit._all_partner_debt is None
     assert x_planunit._level is None
     assert x_planunit._active_hx is None
     assert x_planunit._fund_ratio is None
@@ -100,8 +100,8 @@ def test_PlanUnit_Exists():
     assert obj_attrs == {
         _active_str(),
         _active_hx_str(),
-        _all_person_cred_str(),
-        _all_person_debt_str(),
+        _all_partner_cred_str(),
+        _all_partner_debt_str(),
         _awardheirs_str(),
         _awardlines_str(),
         _descendant_task_count_str(),
@@ -186,8 +186,8 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit._laborheir is None
     assert x_planunit.knot == default_knot_if_None()
     assert x_planunit.root is False
-    assert x_planunit._all_person_cred is None
-    assert x_planunit._all_person_debt is None
+    assert x_planunit._all_partner_cred is None
+    assert x_planunit._all_partner_debt is None
     assert x_planunit._healerlink_ratio == 0
 
 

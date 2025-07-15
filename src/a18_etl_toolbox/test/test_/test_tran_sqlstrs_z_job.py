@@ -3,8 +3,8 @@ from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sq
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -61,9 +61,9 @@ def test_create_job_tables_CreatesTables():
         assert cursor.fetchone()[0] == 0
 
         blrmemb_job_table = prime_table(
-            believer_person_membership_str(), job_str(), None
+            believer_partner_membership_str(), job_str(), None
         )
-        blrpern_job_table = prime_table(believer_personunit_str(), job_str(), None)
+        blrpern_job_table = prime_table(believer_partnerunit_str(), job_str(), None)
         blrgrou_job_table = prime_table(believer_groupunit_str(), job_str(), None)
         blrawar_job_table = prime_table(believer_plan_awardlink_str(), job_str(), None)
         blrfact_job_table = prime_table(believer_plan_factunit_str(), job_str(), None)
@@ -77,8 +77,8 @@ def test_create_job_tables_CreatesTables():
         blrlabo_job_table = prime_table(believer_plan_laborlink_str(), job_str(), None)
         blrplan_job_table = prime_table(believer_planunit_str(), job_str(), None)
         blrunit_job_table = prime_table(believerunit_str(), job_str(), None)
-        # blrmemb_job_table = f"{believer_person_membership_str()}_job"
-        # blrpern_job_table = f"{believer_personunit_str()}_job"
+        # blrmemb_job_table = f"{believer_partner_membership_str()}_job"
+        # blrpern_job_table = f"{believer_partnerunit_str()}_job"
         # blrgrou_job_table = f"{believer_groupunit_str()}_job"
         # blrawar_job_table = f"{believer_plan_awardlink_str()}_job"
         # blrfact_job_table = f"{believer_plan_factunit_str()}_job"

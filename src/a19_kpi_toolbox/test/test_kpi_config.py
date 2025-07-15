@@ -7,7 +7,7 @@ from src.a19_kpi_toolbox.kpi_mstr import (
     get_default_kpi_bundle,
     get_kpi_set_from_bundle,
 )
-from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_person_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_partner_nets_str
 
 
 def test_get_default_kpi_bundle_ReturnsObj():
@@ -21,7 +21,7 @@ def test_get_all_kpi_functions_ReturnsObj():
     assert get_all_kpi_functions() is not None, "all_kpi_set should be defined"
     assert len(get_all_kpi_functions()) == 1
     assert get_all_kpi_functions() == {
-        belief_kpi001_person_nets_str(): create_populate_kpi001_table
+        belief_kpi001_partner_nets_str(): create_populate_kpi001_table
     }
 
 
@@ -31,7 +31,7 @@ def test_get_bundles_config_ReturnsObj():
     assert get_bundles_config() is not None, "bundles_config should be defined"
     assert len(get_bundles_config()) == 1
     assert get_bundles_config() == {
-        "default_kpi_bundle": {belief_kpi001_person_nets_str()}
+        "default_kpi_bundle": {belief_kpi001_partner_nets_str()}
     }
 
 
@@ -51,5 +51,5 @@ def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_NoBundleGiven():
     kpi_set = get_kpi_set_from_bundle()
 
     # THEN
-    assert kpi_set == {belief_kpi001_person_nets_str()}
+    assert kpi_set == {belief_kpi001_partner_nets_str()}
     assert kpi_set == default_kpi_set

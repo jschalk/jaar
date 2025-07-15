@@ -15,8 +15,6 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 from src.a18_etl_toolbox.transformers import set_all_voice_raw_inx_columns
 
-# TODO create test for mapped_names sqlstr (link otx_)
-
 
 def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_FullPidginTables():
     # ESTABLISH

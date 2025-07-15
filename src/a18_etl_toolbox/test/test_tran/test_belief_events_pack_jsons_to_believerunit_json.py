@@ -5,10 +5,10 @@ from src.a06_believer_logic.believer import (
     get_from_json as believerunit_get_from_json,
 )
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_personunit_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    believer_partnerunit_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
 )
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
@@ -48,19 +48,19 @@ def test_etl_event_pack_json_to_event_inherited_believerunits_SetsFiles_believer
     )
     a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    blrpern_dimen = believer_personunit_str()
-    bob_jkeys = {person_name_str(): bob_inx}
-    bob_jvalues = {person_cred_points_str(): credit77, person_debt_points_str(): None}
-    yao_jkeys = {person_name_str(): yao_inx}
-    yao_jvalues = {person_cred_points_str(): credit44, person_debt_points_str(): None}
+    blrpern_dimen = believer_partnerunit_str()
+    bob_jkeys = {partner_name_str(): bob_inx}
+    bob_jvalues = {partner_cred_points_str(): credit77, partner_debt_points_str(): None}
+    yao_jkeys = {partner_name_str(): yao_inx}
+    yao_jvalues = {partner_cred_points_str(): credit44, partner_debt_points_str(): None}
     a23_bob_e3_pack.add_believeratom(
         blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues
     )
     a23_bob_e3_pack.add_believeratom(
         blrpern_dimen, INSERT_str(), yao_jkeys, yao_jvalues
     )
-    sue_jkeys = {person_name_str(): sue_inx}
-    sue_jvalues = {person_cred_points_str(): credit88, person_debt_points_str(): None}
+    sue_jkeys = {partner_name_str(): sue_inx}
+    sue_jvalues = {partner_cred_points_str(): credit88, partner_debt_points_str(): None}
     a23_bob_e7_pack.add_believeratom(
         blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues
     )
@@ -91,17 +91,17 @@ def test_etl_event_pack_json_to_event_inherited_believerunits_SetsFiles_believer
     assert os_path_exists(e7_believer_path)
     expected_e3_bob_believer = believerunit_shop(bob_inx, a23_str)
     expected_e7_bob_believer = believerunit_shop(bob_inx, a23_str)
-    expected_e3_bob_believer.add_personunit(bob_inx, credit77)
-    expected_e3_bob_believer.add_personunit(yao_inx, credit44)
-    expected_e7_bob_believer.add_personunit(bob_inx, credit77)
-    expected_e7_bob_believer.add_personunit(sue_inx, credit88)
-    expected_e7_bob_believer.add_personunit(yao_inx, credit44)
+    expected_e3_bob_believer.add_partnerunit(bob_inx, credit77)
+    expected_e3_bob_believer.add_partnerunit(yao_inx, credit44)
+    expected_e7_bob_believer.add_partnerunit(bob_inx, credit77)
+    expected_e7_bob_believer.add_partnerunit(sue_inx, credit88)
+    expected_e7_bob_believer.add_partnerunit(yao_inx, credit44)
     generated_e3_believer = believerunit_get_from_json(open_file(e3_believer_path))
     generated_e7_believer = believerunit_get_from_json(open_file(e7_believer_path))
-    assert generated_e3_believer.persons == expected_e3_bob_believer.persons
+    assert generated_e3_believer.partners == expected_e3_bob_believer.partners
     assert generated_e3_believer == expected_e3_bob_believer
     assert generated_e3_believer.get_dict() == expected_e3_bob_believer.get_dict()
-    assert generated_e7_believer.persons == expected_e7_bob_believer.persons
+    assert generated_e7_believer.partners == expected_e7_bob_believer.partners
     assert generated_e7_believer.get_dict() == expected_e7_bob_believer.get_dict()
 
 
@@ -122,19 +122,19 @@ def test_etl_event_pack_json_to_event_inherited_believerunits_SetsFiles_expresse
     belief_mstr_dir = get_module_temp_dir()
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
-    blrpern_dimen = believer_personunit_str()
-    bob_jkeys = {person_name_str(): bob_inx}
-    bob_jvalues = {person_cred_points_str(): credit77}
-    yao_jkeys = {person_name_str(): yao_inx}
-    yao_jvalues = {person_cred_points_str(): credit44}
+    blrpern_dimen = believer_partnerunit_str()
+    bob_jkeys = {partner_name_str(): bob_inx}
+    bob_jvalues = {partner_cred_points_str(): credit77}
+    yao_jkeys = {partner_name_str(): yao_inx}
+    yao_jvalues = {partner_cred_points_str(): credit44}
     a23_bob_e3_pack.add_believeratom(
         blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues
     )
     a23_bob_e3_pack.add_believeratom(
         blrpern_dimen, INSERT_str(), yao_jkeys, yao_jvalues
     )
-    sue_jkeys = {person_name_str(): sue_inx}
-    sue_jvalues = {person_cred_points_str(): credit88}
+    sue_jkeys = {partner_name_str(): sue_inx}
+    sue_jvalues = {partner_cred_points_str(): credit88}
     a23_bob_e7_pack.add_believeratom(
         blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues
     )

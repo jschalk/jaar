@@ -1,12 +1,12 @@
 {
     "attributes": {
-        "person_name": {
+        "partner_name": {
             "otx_key": true
         },
-        "person_cred_points": {
+        "partner_cred_points": {
             "otx_key": false
         },
-        "person_debt_points": {
+        "partner_debt_points": {
             "otx_key": false
         },
         "event_int": {
@@ -26,6 +26,6 @@
     "dimens": [
         "beliefunit",
         "believerunit",
-        "believer_personunit"
+        "believer_partnerunit"
     ]
 }

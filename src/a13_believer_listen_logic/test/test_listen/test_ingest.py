@@ -1,35 +1,37 @@
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a13_believer_listen_logic.listen import (
-    _allocate_irrational_person_debt_points,
+    _allocate_irrational_partner_debt_points,
     generate_ingest_list,
     generate_perspective_agenda,
 )
 
 
-def test_allocate_irrational_person_debt_points_CorrectlySetsBelieverAttr():
+def test_allocate_irrational_partner_debt_points_CorrectlySetsBelieverAttr():
     yao_str = "Yao"
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
     yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    zia_personunit = yao_believer.get_person(zia_str)
-    assert zia_personunit._irrational_person_debt_points == 0
+    yao_believer.add_partnerunit(
+        zia_str, zia_partner_cred_points, zia_partner_debt_points
+    )
+    zia_partnerunit = yao_believer.get_partner(zia_str)
+    assert zia_partnerunit._irrational_partner_debt_points == 0
 
     # WHEN
-    _allocate_irrational_person_debt_points(yao_believer, zia_str)
+    _allocate_irrational_partner_debt_points(yao_believer, zia_str)
 
     # THEN
-    assert zia_personunit._irrational_person_debt_points == zia_person_debt_points
+    assert zia_partnerunit._irrational_partner_debt_points == zia_partner_debt_points
 
 
 def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     # ESTABLISH
     yao_str = "Yao"
     yao_speaker = believerunit_shop(yao_str)
-    yao_speaker.add_personunit(yao_str)
-    yao_speaker.set_person_respect(20)
+    yao_speaker.add_partnerunit(yao_str)
+    yao_speaker.set_partner_respect(20)
     casa_str = "casa"
     casa_rope = yao_speaker.make_l1_rope(casa_str)
     status_str = "status"

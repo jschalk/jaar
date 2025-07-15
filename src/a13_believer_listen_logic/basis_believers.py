@@ -26,14 +26,14 @@ def create_empty_believer_from_believer(
 
 def create_listen_basis(x_believer: BelieverUnit) -> BelieverUnit:
     x_listen = create_empty_believer_from_believer(x_believer, x_believer.believer_name)
-    x_listen.persons = x_believer.persons
+    x_listen.partners = x_believer.partners
     x_listen.set_max_tree_traverse(x_believer.max_tree_traverse)
     if x_believer.credor_respect is not None:
         x_listen.set_credor_respect(x_believer.credor_respect)
     if x_believer.debtor_respect is not None:
         x_listen.set_debtor_respect(x_believer.debtor_respect)
-    for x_personunit in x_listen.persons.values():
-        x_personunit.reset_listen_calculated_attrs()
+    for x_partnerunit in x_listen.partners.values():
+        x_partnerunit.reset_listen_calculated_attrs()
     return x_listen
 
 
