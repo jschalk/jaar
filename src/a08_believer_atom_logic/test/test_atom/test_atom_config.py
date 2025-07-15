@@ -7,8 +7,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     addin_str,
     awardee_title_str,
     begin_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -34,11 +34,11 @@ from src.a06_believer_logic.test._util.a06_str import (
     morph_str,
     numor_str,
     parent_rope_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
+    partner_pool_str,
     penny_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
-    person_pool_str,
     plan_rope_str,
     rcontext_str,
     respect_bit_str,
@@ -80,7 +80,7 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
 def test_get_believer_dimens_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_believer_dimens() == set(get_atom_config_dict().keys())
-    assert believer_personunit_str() in get_believer_dimens()
+    assert believer_partnerunit_str() in get_believer_dimens()
     assert is_believer_dimen("planroot") is False
 
 
@@ -90,7 +90,7 @@ def test_get_all_believer_dimen_keys_ReturnsObj():
     all_believer_dimen_keys = get_all_believer_dimen_keys()
 
     # THEN
-    assert not all_believer_dimen_keys.isdisjoint({"person_name"})
+    assert not all_believer_dimen_keys.isdisjoint({"partner_name"})
     expected_believer_keys = set()
     for believer_dimen in get_believer_dimens():
         expected_believer_keys.update(_get_atom_config_jkey_keys(believer_dimen))
@@ -113,7 +113,7 @@ def test_get_all_believer_dimen_delete_keys_ReturnsObj():
 
     # THEN
     assert not all_believer_dimen_delete_keys.isdisjoint(
-        {get_delete_key_name("person_name")}
+        {get_delete_key_name("partner_name")}
     )
     expected_believer_delete_keys = {
         get_delete_key_name(believer_dimen_key)
@@ -160,8 +160,8 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # WHEN / THEN
     assert _check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
     # # Simple script for editing atom_config.json
-    # set_mog(INSERT_str(), believer_personunit_str(), 0)
-    # set_mog(INSERT_str(), believer_person_membership_str(), 1)
+    # set_mog(INSERT_str(), believer_partnerunit_str(), 0)
+    # set_mog(INSERT_str(), believer_partner_membership_str(), 1)
     # set_mog(INSERT_str(), believer_planunit_str(), 2)
     # set_mog(INSERT_str(), believer_plan_awardlink_str(), 3)
     # set_mog(INSERT_str(), believer_plan_laborlink_str(), 4)
@@ -169,8 +169,8 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(INSERT_str(), believer_plan_factunit_str(), 6)
     # set_mog(INSERT_str(), believer_plan_reasonunit_str(), 7)
     # set_mog(INSERT_str(), believer_plan_reason_premiseunit_str(), 8)
-    # set_mog(UPDATE_str(), believer_personunit_str(), 9)
-    # set_mog(UPDATE_str(), believer_person_membership_str(), 10)
+    # set_mog(UPDATE_str(), believer_partnerunit_str(), 9)
+    # set_mog(UPDATE_str(), believer_partner_membership_str(), 10)
     # set_mog(UPDATE_str(), believer_planunit_str(), 11)
     # set_mog(UPDATE_str(), believer_plan_awardlink_str(), 12)
     # set_mog(UPDATE_str(), believer_plan_factunit_str(), 13)
@@ -183,12 +183,12 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(DELETE_str(), believer_plan_healerlink_str(), 20)
     # set_mog(DELETE_str(), believer_plan_awardlink_str(), 21)
     # set_mog(DELETE_str(), believer_planunit_str(), 22)
-    # set_mog(DELETE_str(), believer_person_membership_str(), 23)
-    # set_mog(DELETE_str(), believer_personunit_str(), 24)
+    # set_mog(DELETE_str(), believer_partner_membership_str(), 23)
+    # set_mog(DELETE_str(), believer_partnerunit_str(), 24)
     # set_mog(UPDATE_str(), believerunit_str(), 25)
 
-    assert 0 == q_order(INSERT_str(), believer_personunit_str())
-    assert 1 == q_order(INSERT_str(), believer_person_membership_str())
+    assert 0 == q_order(INSERT_str(), believer_partnerunit_str())
+    assert 1 == q_order(INSERT_str(), believer_partner_membership_str())
     assert 2 == q_order(INSERT_str(), believer_planunit_str())
     assert 3 == q_order(INSERT_str(), believer_plan_awardlink_str())
     assert 4 == q_order(INSERT_str(), believer_plan_laborlink_str())
@@ -196,8 +196,8 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 6 == q_order(INSERT_str(), believer_plan_factunit_str())
     assert 7 == q_order(INSERT_str(), believer_plan_reasonunit_str())
     assert 8 == q_order(INSERT_str(), believer_plan_reason_premiseunit_str())
-    assert 9 == q_order(UPDATE_str(), believer_personunit_str())
-    assert 10 == q_order(UPDATE_str(), believer_person_membership_str())
+    assert 9 == q_order(UPDATE_str(), believer_partnerunit_str())
+    assert 10 == q_order(UPDATE_str(), believer_partner_membership_str())
     assert 11 == q_order(UPDATE_str(), believer_planunit_str())
     assert 12 == q_order(UPDATE_str(), believer_plan_awardlink_str())
     assert 13 == q_order(UPDATE_str(), believer_plan_factunit_str())
@@ -210,8 +210,8 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 20 == q_order(DELETE_str(), believer_plan_healerlink_str())
     assert 21 == q_order(DELETE_str(), believer_plan_awardlink_str())
     assert 22 == q_order(DELETE_str(), believer_planunit_str())
-    assert 23 == q_order(DELETE_str(), believer_person_membership_str())
-    assert 24 == q_order(DELETE_str(), believer_personunit_str())
+    assert 23 == q_order(DELETE_str(), believer_partner_membership_str())
+    assert 24 == q_order(DELETE_str(), believer_partnerunit_str())
     assert 25 == q_order(UPDATE_str(), believerunit_str())
 
 
@@ -228,8 +228,8 @@ def _get_atom_config_jvalues_len(x_dimen: str) -> int:
 def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     # ESTABLISH
     assert _get_atom_config_jkeys_len(believerunit_str()) == 0
-    assert _get_atom_config_jkeys_len(believer_personunit_str()) == 1
-    assert _get_atom_config_jkeys_len(believer_person_membership_str()) == 2
+    assert _get_atom_config_jkeys_len(believer_partnerunit_str()) == 1
+    assert _get_atom_config_jkeys_len(believer_partner_membership_str()) == 2
     assert _get_atom_config_jkeys_len(believer_planunit_str()) == 1
     assert _get_atom_config_jkeys_len(believer_plan_awardlink_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_reasonunit_str()) == 2
@@ -239,8 +239,8 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(believer_plan_factunit_str()) == 2
 
     assert _get_atom_config_jvalues_len(believerunit_str()) == 8
-    assert _get_atom_config_jvalues_len(believer_personunit_str()) == 2
-    assert _get_atom_config_jvalues_len(believer_person_membership_str()) == 2
+    assert _get_atom_config_jvalues_len(believer_partnerunit_str()) == 2
+    assert _get_atom_config_jvalues_len(believer_partner_membership_str()) == 2
     assert _get_atom_config_jvalues_len(believer_planunit_str()) == 11
     assert _get_atom_config_jvalues_len(believer_plan_awardlink_str()) == 2
     assert _get_atom_config_jvalues_len(believer_plan_reasonunit_str()) == 1
@@ -349,8 +349,8 @@ def unique_jkeys():
             new_jkey_keys.remove(plan_rope_str())
         if rcontext_str() in new_jkey_keys:
             new_jkey_keys.remove(rcontext_str())
-        if person_name_str() in new_jkey_keys:
-            new_jkey_keys.remove(person_name_str())
+        if partner_name_str() in new_jkey_keys:
+            new_jkey_keys.remove(partner_name_str())
         if group_title_str() in new_jkey_keys:
             new_jkey_keys.remove(group_title_str())
         print(f"{atom_dimen} {new_jkey_keys=}")
@@ -368,15 +368,15 @@ def test_get_atom_config_dict_SomeRequiredArgAreUnique():
     assert jkey_key_count == len(jkey_keys)
 
 
-def test_get_sorted_jkey_keys_ReturnsObj_believer_personunit():
+def test_get_sorted_jkey_keys_ReturnsObj_believer_partnerunit():
     # ESTABLISH
-    x_dimen = believer_personunit_str()
+    x_dimen = believer_partnerunit_str()
 
     # WHEN
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [person_name_str()]
+    assert x_sorted_jkey_keys == [partner_name_str()]
 
 
 def test_get_sorted_jkey_keys_ReturnsObj_believer_plan_reason_premiseunit():
@@ -408,8 +408,8 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     # THEN
     assert len(nx) == 10
     cat_believerunit = nx.get(believerunit_str())
-    cat_personunit = nx.get(believer_personunit_str())
-    cat_membership = nx.get(believer_person_membership_str())
+    cat_partnerunit = nx.get(believer_partnerunit_str())
+    cat_membership = nx.get(believer_partner_membership_str())
     cat_plan = nx.get(believer_planunit_str())
     cat_awardlink = nx.get(believer_plan_awardlink_str())
     cat_reason = nx.get(believer_plan_reasonunit_str())
@@ -419,7 +419,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     cat_fact = nx.get(believer_plan_factunit_str())
 
     assert cat_believerunit is not None
-    assert cat_personunit is not None
+    assert cat_partnerunit is not None
     assert cat_membership is not None
     assert cat_plan is not None
     assert cat_awardlink is not None
@@ -430,7 +430,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert cat_fact is not None
 
     normal_specs_believerunit = cat_believerunit.get(normal_specs_str())
-    normal_specs_personunit = cat_personunit.get(normal_specs_str())
+    normal_specs_partnerunit = cat_partnerunit.get(normal_specs_str())
     normal_specs_membership = cat_membership.get(normal_specs_str())
     normal_specs_plan = cat_plan.get(normal_specs_str())
     normal_specs_awardlink = cat_awardlink.get(normal_specs_str())
@@ -444,7 +444,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     print(f"{cat_believerunit.keys()=}")
     print(f"{normal_specs_str()=}")
     assert normal_specs_believerunit is not None
-    assert normal_specs_personunit is not None
+    assert normal_specs_partnerunit is not None
     assert normal_specs_membership is not None
     assert normal_specs_plan is not None
     assert normal_specs_awardlink is not None
@@ -455,7 +455,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert normal_specs_fact is not None
 
     table_name_believerunit = normal_specs_believerunit.get(normal_table_name_str())
-    table_name_personunit = normal_specs_personunit.get(normal_table_name_str())
+    table_name_partnerunit = normal_specs_partnerunit.get(normal_table_name_str())
     table_name_membership = normal_specs_membership.get(normal_table_name_str())
     table_name_plan = normal_specs_plan.get(normal_table_name_str())
     table_name_awardlink = normal_specs_awardlink.get(normal_table_name_str())
@@ -466,7 +466,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     table_name_fact = normal_specs_fact.get(normal_table_name_str())
 
     assert table_name_believerunit == "believer"
-    assert table_name_personunit == "personunit"
+    assert table_name_partnerunit == "partnerunit"
     assert table_name_membership == "membership"
     assert table_name_plan == "plan"
     assert table_name_awardlink == "awardlink"
@@ -491,22 +491,22 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert believerunit_columns.get(penny_str()) is not None
     assert believerunit_columns.get("tally") is not None
 
-    assert len(cat_personunit) == 2
-    personunit_columns = cat_personunit.get(columns_str)
-    assert len(personunit_columns) == 4
-    assert personunit_columns.get("uid") is not None
-    assert personunit_columns.get(person_name_str()) is not None
-    assert personunit_columns.get(person_cred_points_str()) is not None
-    assert personunit_columns.get(person_debt_points_str()) is not None
+    assert len(cat_partnerunit) == 2
+    partnerunit_columns = cat_partnerunit.get(columns_str)
+    assert len(partnerunit_columns) == 4
+    assert partnerunit_columns.get("uid") is not None
+    assert partnerunit_columns.get(partner_name_str()) is not None
+    assert partnerunit_columns.get(partner_cred_points_str()) is not None
+    assert partnerunit_columns.get(partner_debt_points_str()) is not None
 
-    person_name_dict = personunit_columns.get(person_name_str())
-    assert len(person_name_dict) == 2
-    assert person_name_dict.get(sqlite_datatype_str()) == "TEXT"
-    assert person_name_dict.get("nullable") is False
-    person_debt_points_dict = personunit_columns.get("person_debt_points")
-    assert len(person_name_dict) == 2
-    assert person_debt_points_dict.get(sqlite_datatype_str()) == "REAL"
-    assert person_debt_points_dict.get("nullable") is True
+    partner_name_dict = partnerunit_columns.get(partner_name_str())
+    assert len(partner_name_dict) == 2
+    assert partner_name_dict.get(sqlite_datatype_str()) == "TEXT"
+    assert partner_name_dict.get("nullable") is False
+    partner_debt_points_dict = partnerunit_columns.get("partner_debt_points")
+    assert len(partner_name_dict) == 2
+    assert partner_debt_points_dict.get(sqlite_datatype_str()) == "REAL"
+    assert partner_debt_points_dict.get("nullable") is True
 
     assert len(cat_plan) == 2
     plan_columns = cat_plan.get(columns_str)
@@ -558,7 +558,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert (
-        get_class_type(believer_personunit_str(), person_name_str()) == NameTerm_str()
+        get_class_type(believer_partnerunit_str(), partner_name_str()) == NameTerm_str()
     )
     assert get_class_type(believer_planunit_str(), gogo_want_str()) == "float"
 
@@ -627,7 +627,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(person_name_str()) == NameTerm_str()
+    assert x_class_types.get(partner_name_str()) == NameTerm_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
     assert x_class_types.get(rcontext_str()) == RopeTerm_str()
@@ -635,10 +635,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
-    assert x_class_types.get(person_cred_points_str()) == "float"
+    assert x_class_types.get(partner_cred_points_str()) == "float"
     assert x_class_types.get(group_cred_points_str()) == "float"
     assert x_class_types.get(credor_respect_str()) == "float"
-    assert x_class_types.get(person_debt_points_str()) == "float"
+    assert x_class_types.get(partner_debt_points_str()) == "float"
     assert x_class_types.get(group_debt_points_str()) == "float"
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"

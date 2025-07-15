@@ -6,8 +6,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     addin_str,
     awardee_title_str,
     begin_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -35,10 +35,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
     penny_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
     plan_rope_str,
     pnigh_str,
     popen_str,
@@ -148,8 +148,8 @@ from src.a17_idea_logic.idea_config import (
     get_quick_ideas_column_ref,
     idea_config_path,
     idea_format_00013_planunit_v0_0_0,
-    idea_format_00020_believer_person_membership_v0_0_0,
-    idea_format_00021_believer_personunit_v0_0_0,
+    idea_format_00020_believer_partner_membership_v0_0_0,
+    idea_format_00021_believer_partnerunit_v0_0_0,
 )
 from src.a17_idea_logic.test._util.a17_str import (
     allowed_crud_str,
@@ -241,12 +241,12 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[33] == "believer_name_ERASE"
     assert table_sorting_priority[34] == "believer_name_ERASE_otx"
     assert table_sorting_priority[35] == "believer_name_ERASE_inx"
-    assert table_sorting_priority[36] == "person_name"
-    assert table_sorting_priority[37] == "person_name_otx"
-    assert table_sorting_priority[38] == "person_name_inx"
-    assert table_sorting_priority[39] == "person_name_ERASE"
-    assert table_sorting_priority[40] == "person_name_ERASE_otx"
-    assert table_sorting_priority[41] == "person_name_ERASE_inx"
+    assert table_sorting_priority[36] == "partner_name"
+    assert table_sorting_priority[37] == "partner_name_otx"
+    assert table_sorting_priority[38] == "partner_name_inx"
+    assert table_sorting_priority[39] == "partner_name_ERASE"
+    assert table_sorting_priority[40] == "partner_name_ERASE_otx"
+    assert table_sorting_priority[41] == "partner_name_ERASE_inx"
     assert table_sorting_priority[42] == "group_title"
     assert table_sorting_priority[43] == "group_title_otx"
     assert table_sorting_priority[44] == "group_title_inx"
@@ -309,8 +309,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[101] == "gogo_want"
     assert table_sorting_priority[102] == "stop_want"
     assert table_sorting_priority[103] == "rplan_active_requisite"
-    assert table_sorting_priority[104] == "person_cred_points"
-    assert table_sorting_priority[105] == "person_debt_points"
+    assert table_sorting_priority[104] == "partner_cred_points"
+    assert table_sorting_priority[105] == "partner_debt_points"
     assert table_sorting_priority[106] == "group_cred_points"
     assert table_sorting_priority[107] == "group_debt_points"
     assert table_sorting_priority[108] == "credor_respect"
@@ -364,21 +364,21 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[156] == "_fund_agenda_take"
     assert table_sorting_priority[157] == "_fund_agenda_ratio_give"
     assert table_sorting_priority[158] == "_fund_agenda_ratio_take"
-    assert table_sorting_priority[159] == "_inallocable_person_debt_points"
+    assert table_sorting_priority[159] == "_inallocable_partner_debt_points"
     assert table_sorting_priority[160] == "_gogo_calc"
     assert table_sorting_priority[161] == "_stop_calc"
     assert table_sorting_priority[162] == "_level"
     assert table_sorting_priority[163] == "_range_evaluated"
     assert table_sorting_priority[164] == "_descendant_task_count"
     assert table_sorting_priority[165] == "_healerlink_ratio"
-    assert table_sorting_priority[166] == "_all_person_cred"
+    assert table_sorting_priority[166] == "_all_partner_cred"
     assert table_sorting_priority[167] == "_keeps_justified"
     assert table_sorting_priority[168] == "_offtrack_fund"
     assert table_sorting_priority[169] == "_rplan_active_value"
-    assert table_sorting_priority[170] == "_irrational_person_debt_points"
+    assert table_sorting_priority[170] == "_irrational_partner_debt_points"
     assert table_sorting_priority[171] == "_sum_healerlink_share"
     assert table_sorting_priority[172] == "_keeps_buildable"
-    assert table_sorting_priority[173] == "_all_person_debt"
+    assert table_sorting_priority[173] == "_all_partner_debt"
     assert table_sorting_priority[174] == "_tree_traverse_count"
     assert table_sorting_priority[175] == "funds"
     assert table_sorting_priority[176] == "fund_rank"
@@ -429,7 +429,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(belief_label_str()) == "TEXT"
     assert sqlite_types.get(believer_name_str()) == "TEXT"
-    assert sqlite_types.get(person_name_str()) == "TEXT"
+    assert sqlite_types.get(partner_name_str()) == "TEXT"
     assert sqlite_types.get(group_title_str()) == "TEXT"
     assert sqlite_types.get(plan_rope_str()) == "TEXT"
     assert sqlite_types.get(rcontext_str()) == "TEXT"
@@ -450,8 +450,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
     assert sqlite_types.get(rplan_active_requisite_str()) == "INTEGER"
-    assert sqlite_types.get(person_cred_points_str()) == "REAL"
-    assert sqlite_types.get(person_debt_points_str()) == "REAL"
+    assert sqlite_types.get(partner_cred_points_str()) == "REAL"
+    assert sqlite_types.get(partner_debt_points_str()) == "REAL"
     assert sqlite_types.get(group_cred_points_str()) == "REAL"
     assert sqlite_types.get(group_debt_points_str()) == "REAL"
     assert sqlite_types.get(credor_respect_str()) == "REAL"
@@ -534,8 +534,8 @@ def test_get_idea_config_dict_ReturnsObj():
     assert belief_timeline_month_str() in idea_config_dimens
     assert belief_timeline_weekday_str() in idea_config_dimens
     assert belief_timeoffi_str() in idea_config_dimens
-    assert believer_person_membership_str() in idea_config_dimens
-    assert believer_personunit_str() in idea_config_dimens
+    assert believer_partner_membership_str() in idea_config_dimens
+    assert believer_partnerunit_str() in idea_config_dimens
     assert believer_plan_awardlink_str() in idea_config_dimens
     assert believer_plan_factunit_str() in idea_config_dimens
     assert believer_plan_laborlink_str() in idea_config_dimens
@@ -710,8 +710,8 @@ def test_get_idea_format_filenames_ReturnsObj():
     # print(idea_filenames_sorted)
 
     # THEN
-    assert idea_format_00021_believer_personunit_v0_0_0() in idea_filenames_set
-    assert idea_format_00020_believer_person_membership_v0_0_0() in idea_filenames_set
+    assert idea_format_00021_believer_partnerunit_v0_0_0() in idea_filenames_set
+    assert idea_format_00020_believer_partner_membership_v0_0_0() in idea_filenames_set
     assert idea_format_00013_planunit_v0_0_0() in idea_filenames_set
 
     # WHEN / THEN
@@ -817,8 +817,8 @@ def test_get_idea_format_filename_ReturnsObj():
     br00013_filename = get_idea_format_filename(br00013_str)
 
     # THEN
-    assert br00021_filename == idea_format_00021_believer_personunit_v0_0_0()
-    assert br00020_filename == idea_format_00020_believer_person_membership_v0_0_0()
+    assert br00021_filename == idea_format_00021_believer_partnerunit_v0_0_0()
+    assert br00020_filename == idea_format_00020_believer_partner_membership_v0_0_0()
     assert br00013_filename == idea_format_00013_planunit_v0_0_0()
 
     all_set = {get_idea_format_filename(br) for br in get_idea_numbers()}
@@ -844,8 +844,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(belief_timeline_hour_str(), 6)
     # set_idea_config_json(belief_timeline_month_str(), 7)
     # set_idea_config_json(belief_timeline_weekday_str(), 8)
-    # set_idea_config_json(believer_person_membership_str(), 9)
-    # set_idea_config_json(believer_personunit_str(), 10)
+    # set_idea_config_json(believer_partner_membership_str(), 9)
+    # set_idea_config_json(believer_partnerunit_str(), 10)
     # set_idea_config_json(believer_plan_awardlink_str(), 11)
     # set_idea_config_json(believer_plan_factunit_str(), 12)
     # set_idea_config_json(believer_plan_laborlink_str(), 14)
@@ -868,8 +868,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(belief_timeline_hour_str()).get(bo) == 6
     assert x_idea_config.get(belief_timeline_month_str()).get(bo) == 7
     assert x_idea_config.get(belief_timeline_weekday_str()).get(bo) == 8
-    assert x_idea_config.get(believer_person_membership_str()).get(bo) == 9
-    assert x_idea_config.get(believer_personunit_str()).get(bo) == 10
+    assert x_idea_config.get(believer_partner_membership_str()).get(bo) == 9
+    assert x_idea_config.get(believer_partnerunit_str()).get(bo) == 10
     assert x_idea_config.get(believer_plan_awardlink_str()).get(bo) == 11
     assert x_idea_config.get(believer_plan_factunit_str()).get(bo) == 12
     assert x_idea_config.get(believer_plan_laborlink_str()).get(bo) == 14

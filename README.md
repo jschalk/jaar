@@ -30,7 +30,7 @@ For jaar all data must have *event_int*, *face_name*, *belief_label*. These are 
 `jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is interpreted and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
-| event_int | face_name | belief_label | believer_name | person_name | tran_time | amount |
+| event_int | face_name | belief_label | believer_name | partner_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
@@ -42,13 +42,13 @@ When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that c
 
 
 Output stance: emmanuel_stance.xlsx, sheet "br00000"
-| event_int | face_name | belief_label | believer_name | person_name | tran_time | amount |
+| event_int | face_name | belief_label | believer_name | partner_name | tran_time | amount |
 |-----------|-----------|--------------|---------------|-----------|-----------|--------|
 |    77     | Emmanuel  |   OxboxDean  |    Emmanuel   |    Dean   |    891    |  7000  |
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | belief_label | believer_name | person_name | person_cred_points | person_debt_points |
+| event_int | face_name | belief_label | believer_name | partner_name | partner_cred_points | partner_debt_points |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |
@@ -62,7 +62,7 @@ positions are aggregated by a listener into a coherant agenda that can include t
 to do and tasks of  of existence. Listening and acting on it.
 
 A agents's agenda in the community is built by the the massed intreprtation of
-1. Person agents agendas 
+1. Partner agents agendas 
 2. Their own independent agenda
 
 Each agenda is saved as a JSON file. 
@@ -104,7 +104,7 @@ base attributes vs reason attributess
 
 BelieverUnit objects
 
-BelieverUnit PersonUnit objects
+BelieverUnit PartnerUnit objects
 
 BelieverUnit GroupUnit objects
 

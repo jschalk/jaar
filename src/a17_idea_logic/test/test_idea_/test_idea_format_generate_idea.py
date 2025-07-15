@@ -2,16 +2,16 @@ from src.a01_term_logic.rope import to_rope
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_planunit_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
     mass_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
     plan_rope_str,
     task_str,
 )
@@ -21,73 +21,73 @@ from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, make_believerdelta
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
-    idea_format_00020_believer_person_membership_v0_0_0,
-    idea_format_00021_believer_personunit_v0_0_0,
+    idea_format_00020_believer_partner_membership_v0_0_0,
+    idea_format_00021_believer_partnerunit_v0_0_0,
 )
 
 
-def test_make_believerdelta_Arg_idea_format_00021_believer_personunit_v0_0_0():
+def test_make_believerdelta_Arg_idea_format_00021_believer_partnerunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_person_cred_points = 11
-    bob_person_cred_points = 13
-    yao_person_cred_points = 41
-    sue_person_debt_points = 23
-    bob_person_debt_points = 29
-    yao_person_debt_points = 37
+    sue_partner_cred_points = 11
+    bob_partner_cred_points = 13
+    yao_partner_cred_points = 41
+    sue_partner_debt_points = 23
+    bob_partner_debt_points = 29
+    yao_partner_debt_points = 37
     amy_belief_label = "amy56"
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
-    sue_believerunit.add_personunit(
-        sue_str, sue_person_cred_points, sue_person_debt_points
+    sue_believerunit.add_partnerunit(
+        sue_str, sue_partner_cred_points, sue_partner_debt_points
     )
-    sue_believerunit.add_personunit(
-        bob_str, bob_person_cred_points, bob_person_debt_points
+    sue_believerunit.add_partnerunit(
+        bob_str, bob_partner_cred_points, bob_partner_debt_points
     )
-    sue_believerunit.add_personunit(
-        yao_str, yao_person_cred_points, yao_person_debt_points
+    sue_believerunit.add_partnerunit(
+        yao_str, yao_partner_cred_points, yao_partner_debt_points
     )
-    x_idea_name = idea_format_00021_believer_personunit_v0_0_0()
-    person_dataframe = create_idea_df(sue_believerunit, x_idea_name)
-    print(f"{person_dataframe.columns=}")
-    person_csv = person_dataframe.to_csv(index=False)
+    x_idea_name = idea_format_00021_believer_partnerunit_v0_0_0()
+    partner_dataframe = create_idea_df(sue_believerunit, x_idea_name)
+    print(f"{partner_dataframe.columns=}")
+    partner_csv = partner_dataframe.to_csv(index=False)
 
     # WHEN
-    sue_person_believerdelta = make_believerdelta(person_csv)
+    sue_partner_believerdelta = make_believerdelta(partner_csv)
 
     # THEN
-    assert sue_person_believerdelta
-    sue_believeratom = believeratom_shop(believer_personunit_str(), INSERT_str())
-    sue_believeratom.set_arg(person_name_str(), sue_str)
-    sue_believeratom.set_arg(person_cred_points_str(), sue_person_cred_points)
-    sue_believeratom.set_arg(person_debt_points_str(), sue_person_debt_points)
+    assert sue_partner_believerdelta
+    sue_believeratom = believeratom_shop(believer_partnerunit_str(), INSERT_str())
+    sue_believeratom.set_arg(partner_name_str(), sue_str)
+    sue_believeratom.set_arg(partner_cred_points_str(), sue_partner_cred_points)
+    sue_believeratom.set_arg(partner_debt_points_str(), sue_partner_debt_points)
     sue_believeratom.set_atom_order()
-    bob_believeratom = believeratom_shop(believer_personunit_str(), INSERT_str())
-    bob_believeratom.set_arg(person_name_str(), bob_str)
-    bob_believeratom.set_arg(person_cred_points_str(), bob_person_cred_points)
-    bob_believeratom.set_arg(person_debt_points_str(), bob_person_debt_points)
+    bob_believeratom = believeratom_shop(believer_partnerunit_str(), INSERT_str())
+    bob_believeratom.set_arg(partner_name_str(), bob_str)
+    bob_believeratom.set_arg(partner_cred_points_str(), bob_partner_cred_points)
+    bob_believeratom.set_arg(partner_debt_points_str(), bob_partner_debt_points)
     bob_believeratom.set_atom_order()
-    # print(f"{sue_person_believerdelta.get_ordered_dict()=}")
+    # print(f"{sue_partner_believerdelta.get_ordered_dict()=}")
     # print(
-    #     f"{sue_person_believerdelta.believeratoms.get(INSERT_str()).get(believer_personunit_str()).get(sue_str)=}"
+    #     f"{sue_partner_believerdelta.believeratoms.get(INSERT_str()).get(believer_partnerunit_str()).get(sue_str)=}"
     # )
     print(f"{sue_believeratom=}")
-    assert sue_person_believerdelta.believeratom_exists(sue_believeratom)
-    assert sue_person_believerdelta.believeratom_exists(bob_believeratom)
-    assert len(sue_person_believerdelta.get_ordered_believeratoms()) == 3
+    assert sue_partner_believerdelta.believeratom_exists(sue_believeratom)
+    assert sue_partner_believerdelta.believeratom_exists(bob_believeratom)
+    assert len(sue_partner_believerdelta.get_ordered_believeratoms()) == 3
 
 
-# def test_make_believerdelta_Arg_idea_format_00020_believer_person_membership_v0_0_0():
+# def test_make_believerdelta_Arg_idea_format_00020_believer_partner_membership_v0_0_0():
 #     # ESTABLISH
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     yao_str = "Yao"
 #     amy_belief_label = "amy56"
 #     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
-#     sue_believerunit.add_personunit(sue_str)
-#     sue_believerunit.add_personunit(bob_str)
-#     sue_believerunit.add_personunit(yao_str)
+#     sue_believerunit.add_partnerunit(sue_str)
+#     sue_believerunit.add_partnerunit(bob_str)
+#     sue_believerunit.add_partnerunit(yao_str)
 #     iowa_str = ";Iowa"
 #     sue_iowa_group_cred_points = 37
 #     bob_iowa_group_cred_points = 43
@@ -98,14 +98,14 @@ def test_make_believerdelta_Arg_idea_format_00021_believer_personunit_v0_0_0():
 #     ohio_str = ";Ohio"
 #     yao_ohio_group_cred_points = 73
 #     yao_ohio_group_debt_points = 67
-#     sue_personunit = sue_believerunit.get_person(sue_str)
-#     bob_personunit = sue_believerunit.get_person(bob_str)
-#     yao_personunit = sue_believerunit.get_person(yao_str)
-#     sue_personunit.add_membership(iowa_str, sue_iowa_group_cred_points, sue_iowa_group_debt_points)
-#     bob_personunit.add_membership(iowa_str, bob_iowa_group_cred_points, bob_iowa_group_debt_points)
-#     yao_personunit.add_membership(iowa_str, yao_iowa_group_cred_points, yao_iowa_group_debt_points)
-#     yao_personunit.add_membership(ohio_str, yao_ohio_group_cred_points, yao_ohio_group_debt_points)
-#     x_idea_name = idea_format_00020_believer_person_membership_v0_0_0()
+#     sue_partnerunit = sue_believerunit.get_partner(sue_str)
+#     bob_partnerunit = sue_believerunit.get_partner(bob_str)
+#     yao_partnerunit = sue_believerunit.get_partner(yao_str)
+#     sue_partnerunit.add_membership(iowa_str, sue_iowa_group_cred_points, sue_iowa_group_debt_points)
+#     bob_partnerunit.add_membership(iowa_str, bob_iowa_group_cred_points, bob_iowa_group_debt_points)
+#     yao_partnerunit.add_membership(iowa_str, yao_iowa_group_cred_points, yao_iowa_group_debt_points)
+#     yao_partnerunit.add_membership(ohio_str, yao_ohio_group_cred_points, yao_ohio_group_debt_points)
+#     x_idea_name = idea_format_00020_believer_partner_membership_v0_0_0()
 #     membership_dataframe = create_idea_df(sue_believerunit, x_idea_name)
 #     assert len(membership_dataframe) == 10
 #     print(membership_dataframe)
@@ -117,18 +117,18 @@ def test_make_believerdelta_Arg_idea_format_00021_believer_personunit_v0_0_0():
 
 #     # THEN
 #     assert membership_changunit
-#     sue_iowa_believeratom = believeratom_shop(believer_person_membership_str(), INSERT_str())
-#     bob_iowa_believeratom = believeratom_shop(believer_person_membership_str(), INSERT_str())
-#     yao_iowa_believeratom = believeratom_shop(believer_person_membership_str(), INSERT_str())
-#     yao_ohio_believeratom = believeratom_shop(believer_person_membership_str(), INSERT_str())
+#     sue_iowa_believeratom = believeratom_shop(believer_partner_membership_str(), INSERT_str())
+#     bob_iowa_believeratom = believeratom_shop(believer_partner_membership_str(), INSERT_str())
+#     yao_iowa_believeratom = believeratom_shop(believer_partner_membership_str(), INSERT_str())
+#     yao_ohio_believeratom = believeratom_shop(believer_partner_membership_str(), INSERT_str())
 #     sue_iowa_believeratom.set_arg(group_title_str(), iowa_str)
 #     bob_iowa_believeratom.set_arg(group_title_str(), iowa_str)
 #     yao_iowa_believeratom.set_arg(group_title_str(), iowa_str)
 #     yao_ohio_believeratom.set_arg(group_title_str(), ohio_str)
-#     sue_iowa_believeratom.set_arg(person_name_str(), sue_str)
-#     bob_iowa_believeratom.set_arg(person_name_str(), bob_str)
-#     yao_iowa_believeratom.set_arg(person_name_str(), yao_str)
-#     yao_ohio_believeratom.set_arg(person_name_str(), yao_str)
+#     sue_iowa_believeratom.set_arg(partner_name_str(), sue_str)
+#     bob_iowa_believeratom.set_arg(partner_name_str(), bob_str)
+#     yao_iowa_believeratom.set_arg(partner_name_str(), yao_str)
+#     yao_ohio_believeratom.set_arg(partner_name_str(), yao_str)
 #     sue_iowa_believeratom.set_arg(group_cred_points_str(), sue_iowa_group_cred_points)
 #     bob_iowa_believeratom.set_arg(group_cred_points_str(), bob_iowa_group_cred_points)
 #     yao_iowa_believeratom.set_arg(group_cred_points_str(), yao_iowa_group_cred_points)

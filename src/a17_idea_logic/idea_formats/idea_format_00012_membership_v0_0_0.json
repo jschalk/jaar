@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "person_name": {
+        "partner_name": {
             "otx_key": true
         },
         "event_int": {
@@ -22,8 +22,8 @@
     "idea_number": "br00012",
     "dimens": [
         "believerunit",
-        "believer_personunit",
-        "believer_person_membership",
+        "believer_partnerunit",
+        "believer_partner_membership",
         "beliefunit"
     ]
 }

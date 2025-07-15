@@ -44,7 +44,7 @@ def test_CellUnit_Exists():
     assert not x_cellunit.mandate
     assert not x_cellunit.believeradjust
     assert not x_cellunit._reason_rcontexts
-    assert not x_cellunit._person_mandate_ledger
+    assert not x_cellunit._partner_mandate_ledger
     assert not x_cellunit.believerevent_facts
     assert not x_cellunit.found_facts
     assert not x_cellunit.boss_facts
@@ -66,7 +66,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.believeradjust.get_dict() == believerunit_shop(bob_str).get_dict()
     assert x_cellunit.believerevent_facts == {}
     assert x_cellunit._reason_rcontexts == set()
-    assert x_cellunit._person_mandate_ledger == {}
+    assert x_cellunit._partner_mandate_ledger == {}
     assert x_cellunit.found_facts == {}
     assert x_cellunit.boss_facts == {}
 
@@ -84,7 +84,7 @@ def test_cellunit_shop_ReturnsObj_Scenario1_WithParameters():
     bob_sue_quota300 = 300
     bob_sue_mandate = 444
     bob_sue_believer = believerunit_shop(sue_str)
-    bob_sue_believer.add_personunit(bob_str, 7, 13)
+    bob_sue_believer.add_partnerunit(bob_str, 7, 13)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sky_blue_fact = sky_blue_factunit()
@@ -263,8 +263,8 @@ def test_get_believerevents_credit_ledger_ReturnsObj_Scenario1_FileExists():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
     sue_cell = cellunit_shop(yao_str, believeradjust=sue_believer)
 
     # WHEN
@@ -292,8 +292,8 @@ def test_get_believerevents_quota_ledger_ReturnsObj_Scenario1_FileExists():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
     sue_cell = cellunit_shop(yao_str, quota=55, believeradjust=sue_believer)
 
     # WHEN
@@ -751,7 +751,7 @@ def test_CellUnit_set_believeradjust_facts_ReturnsObj_Scenario3():
     assert sue_believer_casa_fact_dict.get("fstate") == casa_grimy_fact.fstate
 
 
-def test_CellUnit_set_person_mandate_ledger_ReturnsObj_Scenario0():
+def test_CellUnit_set_partner_mandate_ledger_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -774,18 +774,18 @@ def test_CellUnit_set_person_mandate_ledger_ReturnsObj_Scenario0():
     )
     assert sue_cell.believeradjust.fund_pool != sue_quota300
     assert sue_cell.believeradjust.fund_pool != sue_mandate
-    assert sue_cell._person_mandate_ledger == {}
+    assert sue_cell._partner_mandate_ledger == {}
 
     # WHEN
-    sue_cell._set_person_mandate_ledger()
+    sue_cell._set_partner_mandate_ledger()
 
     # THEN
     assert sue_cell.believeradjust.fund_pool != sue_quota300
     assert sue_cell.believeradjust.fund_pool == sue_mandate
-    assert sue_cell._person_mandate_ledger == {sue_str: sue_mandate}
+    assert sue_cell._partner_mandate_ledger == {sue_str: sue_mandate}
 
 
-def test_CellUnit_set_person_mandate_ledger_ReturnsObj_Scenario1():
+def test_CellUnit_set_partner_mandate_ledger_ReturnsObj_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -796,8 +796,8 @@ def test_CellUnit_set_person_mandate_ledger_ReturnsObj_Scenario1():
     sue_quota300 = 300
     sue_mandate = 444
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
     sue_cell = cellunit_shop(
         yao_str,
         sue_ancestors,
@@ -810,19 +810,19 @@ def test_CellUnit_set_person_mandate_ledger_ReturnsObj_Scenario1():
     )
     assert sue_cell.believeradjust.fund_pool != sue_quota300
     assert sue_cell.believeradjust.fund_pool != sue_mandate
-    assert sue_cell._person_mandate_ledger == {}
+    assert sue_cell._partner_mandate_ledger == {}
 
     # WHEN
-    sue_cell._set_person_mandate_ledger()
+    sue_cell._set_partner_mandate_ledger()
 
     # THEN
     assert sue_cell.believeradjust.fund_pool != sue_quota300
     assert sue_cell.believeradjust.fund_pool == sue_mandate
-    assert sue_cell._person_mandate_ledger != {}
-    assert sue_cell._person_mandate_ledger == {yao_str: 311, sue_str: 133}
+    assert sue_cell._partner_mandate_ledger != {}
+    assert sue_cell._partner_mandate_ledger == {yao_str: 311, sue_str: 133}
 
 
-def test_CellUnit_calc_person_mandate_ledger_ReturnsObj_Scenario0():
+def test_CellUnit_calc_partner_mandate_ledger_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -833,8 +833,8 @@ def test_CellUnit_calc_person_mandate_ledger_ReturnsObj_Scenario0():
     sue_quota300 = 300
     sue_mandate = 444
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sue_believer.add_plan(clean_fact.fstate)
@@ -867,10 +867,10 @@ def test_CellUnit_calc_person_mandate_ledger_ReturnsObj_Scenario0():
     assert not sue_cell._reason_rcontexts
     assert sue_cell.boss_facts == {sky_blue_fact.fcontext: sky_blue_fact}
     assert sue_cell.believeradjust.get_factunits_dict() == {}
-    assert sue_cell._person_mandate_ledger == {}
+    assert sue_cell._partner_mandate_ledger == {}
 
     # WHEN
-    sue_cell.calc_person_mandate_ledger()
+    sue_cell.calc_partner_mandate_ledger()
 
     # THEN
     assert sue_cell._reason_rcontexts == {clean_fact.fcontext}
@@ -882,8 +882,8 @@ def test_CellUnit_calc_person_mandate_ledger_ReturnsObj_Scenario0():
     # plan_dict = sue_cell.believeradjust.get_plan_dict()
     # for plan_rope, plan_obj in plan_dict.items():
     #     print(f"{plan_rope=} {plan_obj._fund_onset=} {plan_obj._fund_cease}")
-    assert sue_cell._person_mandate_ledger != {}
-    assert sue_cell._person_mandate_ledger == {yao_str: 311, sue_str: 133}
+    assert sue_cell._partner_mandate_ledger != {}
+    assert sue_cell._partner_mandate_ledger == {yao_str: 311, sue_str: 133}
 
 
 def test_create_child_cellunits_ReturnsObj_Scenario0():
@@ -898,9 +898,9 @@ def test_create_child_cellunits_ReturnsObj_Scenario0():
     sue_quota300 = 300
     sue_mandate = 444
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
-    sue_believer.add_personunit(bob_str, 0, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(bob_str, 0, 2)
     sue_cell = cellunit_shop(
         yao_str,
         sue_ancestors,
@@ -954,9 +954,9 @@ def test_create_child_cellunits_ReturnsObj_Scenario1_BudDepth0():
     sue_penny2 = 2
     sue_quota300 = 300
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
-    sue_believer.add_personunit(bob_str, 0, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(bob_str, 0, 2)
     sue_cell = cellunit_shop(
         yao_str,
         sue_ancestors,
@@ -985,9 +985,9 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     yao_believer = believerunit_shop(yao_str, "amy23")
-    yao_believer.add_personunit(sue_str, 3, 5)
-    yao_believer.add_personunit(yao_str, 7, 2)
-    yao_believer.add_personunit(bob_str, 0, 2)
+    yao_believer.add_partnerunit(sue_str, 3, 5)
+    yao_believer.add_partnerunit(yao_str, 7, 2)
+    yao_believer.add_partnerunit(bob_str, 0, 2)
     casa_rope = yao_believer.make_l1_rope("casa")
     mop_rope = yao_believer.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
@@ -1000,7 +1000,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
         yao_str, celldepth=yao_celldepth, quota=yao_quota, believeradjust=yao_believer
     )
     yao_cell.believerevent_facts = {dirty_fact.fcontext: dirty_fact}
-    # sue_cell._person_mandate_ledger = {yao_str: 210, sue_str: 90, bob_str: 0}
+    # sue_cell._partner_mandate_ledger = {yao_str: 210, sue_str: 90, bob_str: 0}
 
     # WHEN
     sue_child_cellunits = create_child_cellunits(yao_cell)
@@ -1028,8 +1028,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_penny2 = 2
     sue_mandate = 444
     sue_believer = believerunit_shop(sue_str, "amy23")
-    sue_believer.add_personunit(sue_str, 3, 5)
-    sue_believer.add_personunit(yao_str, 7, 2)
+    sue_believer.add_partnerunit(sue_str, 3, 5)
+    sue_believer.add_partnerunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sue_believer.add_plan(clean_fact.fstate)
@@ -1061,13 +1061,13 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     assert not sue_cell._reason_rcontexts
     assert sue_cell.boss_facts == {sky_blue_fact.fcontext: sky_blue_fact}
     assert sue_cell.believeradjust.get_factunits_dict() == {}
-    assert sue_cell._person_mandate_ledger == {}
+    assert sue_cell._partner_mandate_ledger == {}
 
     # WHEN
     sue_child_cellunits = create_child_cellunits(sue_cell)
 
     # # WHEN
-    # sue_cell.calc_person_mandate_ledger()
+    # sue_cell.calc_partner_mandate_ledger()
 
     # # THEN
     assert sue_cell._reason_rcontexts == {dirty_fact.fcontext}
@@ -1079,8 +1079,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     # plan_dict = sue_cell.believeradjust.get_plan_dict()
     # for plan_rope, plan_obj in plan_dict.items():
     #     print(f"{plan_rope=} {plan_obj._fund_onset=} {plan_obj._fund_cease}")
-    assert sue_cell._person_mandate_ledger != {}
-    assert sue_cell._person_mandate_ledger == {yao_str: 311, sue_str: 133}
+    assert sue_cell._partner_mandate_ledger != {}
+    assert sue_cell._partner_mandate_ledger == {yao_str: 311, sue_str: 133}
 
     # THEN
     assert len(sue_child_cellunits) == 2

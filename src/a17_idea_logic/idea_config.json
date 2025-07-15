@@ -1,10 +1,10 @@
 {
-  "believer_person_membership": {
+  "believer_partner_membership": {
     "allowed_crud": "delete_insert_update",
     "build_order": 9,
     "idea_category": "believer",
     "jkeys": {
-      "person_name": {},
+      "partner_name": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
@@ -16,20 +16,20 @@
       "group_debt_points": {}
     }
   },
-  "believer_personunit": {
+  "believer_partnerunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 10,
     "idea_category": "believer",
     "jkeys": {
-      "person_name": {},
+      "partner_name": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},
       "believer_name": {}
     },
     "jvalues": {
-      "person_cred_points": {},
-      "person_debt_points": {}
+      "partner_cred_points": {},
+      "partner_debt_points": {}
     }
   },
   "believer_plan_awardlink": {
@@ -181,7 +181,7 @@
     "build_order": 21,
     "idea_category": "belief",
     "jkeys": {
-      "person_name": {},
+      "partner_name": {},
       "event_int": {},
       "face_name": {},
       "belief_label": {},

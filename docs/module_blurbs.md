@@ -17,7 +17,7 @@ What does each one do?
 - **a12_hub_tools**: These tools are used to handle complex operations involving believer files, will be deprecated.
 - **a13_believer_listen_logic**: These tools describe how one believerunit listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
-- **a15_belief_logic**: A BeliefUnit is a Belief system with the basic requirements: common system of time, person tranactions ledger, etc. Importantly a Belief system must know the state of a believer's believerunit at any time in the past. 
+- **a15_belief_logic**: A BeliefUnit is a Belief system with the basic requirements: common system of time, partner tranactions ledger, etc. Importantly a Belief system must know the state of a believer's believerunit at any time in the past. 
 - **a16_pidgin_logic**: A tool that translates words from outside language to inside language.  
 - **a17_idea_logic**: idea bricks are tables of data that build belief systems and the believerunits within them.
 - **a18_etl_toolbox**: 

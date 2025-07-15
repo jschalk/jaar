@@ -187,20 +187,26 @@ def get_believerunit_irrational_example() -> BelieverUnit:
     return hatter_believer
 
 
-def get_believerunit_3_person() -> BelieverUnit:
+def get_believerunit_3_partner() -> BelieverUnit:
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
-    sue_person_cred_points = 5
-    yao_person_cred_points = 2
-    zia_person_cred_points = 33
-    sue_person_debt_points = 1
-    yao_person_debt_points = 7
-    zia_person_debt_points = 13
+    sue_partner_cred_points = 5
+    yao_partner_cred_points = 2
+    zia_partner_cred_points = 33
+    sue_partner_debt_points = 1
+    yao_partner_debt_points = 7
+    zia_partner_debt_points = 13
     bob_believer = believerunit_shop(bob_str)
-    bob_believer.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
-    bob_believer.add_personunit(yao_str, yao_person_cred_points, yao_person_debt_points)
-    bob_believer.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    bob_believer.add_partnerunit(
+        sue_str, sue_partner_cred_points, sue_partner_debt_points
+    )
+    bob_believer.add_partnerunit(
+        yao_str, yao_partner_cred_points, yao_partner_debt_points
+    )
+    bob_believer.add_partnerunit(
+        zia_str, zia_partner_cred_points, zia_partner_debt_points
+    )
 
     return bob_believer

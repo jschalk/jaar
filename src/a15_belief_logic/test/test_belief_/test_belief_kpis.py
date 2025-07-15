@@ -8,20 +8,20 @@ from src.a06_believer_logic.test._util.a06_str import (
     morph_str,
     numor_str,
     parent_rope_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
     plan_label_str,
 )
 from src.a15_belief_logic.belief_report import (
     get_belief_guts_agenda_dataframe,
     get_belief_guts_agenda_plotly_fig,
-    get_belief_guts_persons_dataframe,
-    get_belief_guts_persons_plotly_fig,
+    get_belief_guts_partners_dataframe,
+    get_belief_guts_partners_plotly_fig,
     get_belief_jobs_agenda_dataframe,
     get_belief_jobs_agenda_plotly_fig,
-    get_belief_jobs_persons_dataframe,
-    get_belief_jobs_persons_plotly_fig,
+    get_belief_jobs_partners_dataframe,
+    get_belief_jobs_partners_plotly_fig,
 )
 from src.a15_belief_logic.test._util.a15_env import env_dir_setup_cleanup
 from src.a15_belief_logic.test._util.example_beliefs import (
@@ -31,21 +31,21 @@ from src.a15_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_get_belief_guts_persons_dataframe_ReturnsObj(
+def test_get_belief_guts_partners_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     amy_belief = create_example_belief2()
 
     # WHEN
-    x_df = get_belief_guts_persons_dataframe(amy_belief)
+    x_df = get_belief_guts_partners_dataframe(amy_belief)
 
     # THEN
-    personunit_colums = {
+    partnerunit_colums = {
         believer_name_str(),
-        person_name_str(),
-        person_cred_points_str(),
-        person_debt_points_str(),
+        partner_name_str(),
+        partner_cred_points_str(),
+        partner_debt_points_str(),
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -57,24 +57,24 @@ def test_get_belief_guts_persons_dataframe_ReturnsObj(
     print(f"{set(x_df.columns)=}")
     print(x_df)
 
-    assert set(x_df.columns) == personunit_colums
+    assert set(x_df.columns) == partnerunit_colums
     assert x_df.shape[0] == 8
 
 
-def test_get_belief_guts_persons_plotly_fig_DisplaysCorrectInfo(
+def test_get_belief_guts_partners_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     amy_belief = create_example_belief2()
 
     # WHEN
-    x_fig = get_belief_guts_persons_plotly_fig(amy_belief)
+    x_fig = get_belief_guts_partners_plotly_fig(amy_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_belief_jobs_persons_dataframe_ReturnsObj(
+def test_get_belief_jobs_partners_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -82,14 +82,14 @@ def test_get_belief_jobs_persons_dataframe_ReturnsObj(
     amy_belief.generate_all_jobs()
 
     # WHEN
-    x_df = get_belief_jobs_persons_dataframe(amy_belief)
+    x_df = get_belief_jobs_partners_dataframe(amy_belief)
 
     # THEN
-    personunit_colums = {
+    partnerunit_colums = {
         believer_name_str(),
-        person_name_str(),
-        person_cred_points_str(),
-        person_debt_points_str(),
+        partner_name_str(),
+        partner_cred_points_str(),
+        partner_debt_points_str(),
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -97,16 +97,16 @@ def test_get_belief_jobs_persons_dataframe_ReturnsObj(
         "_fund_agenda_take",
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
-        "_inallocable_person_debt_points",
+        "_inallocable_partner_debt_points",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
 
     assert x_df.shape[0] == 8
-    assert set(x_df.columns) == personunit_colums
+    assert set(x_df.columns) == partnerunit_colums
 
 
-def test_get_belief_jobs_persons_plotly_fig_DisplaysCorrectInfo(
+def test_get_belief_jobs_partners_plotly_fig_DisplaysCorrectInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -114,7 +114,7 @@ def test_get_belief_jobs_persons_plotly_fig_DisplaysCorrectInfo(
     amy_belief.generate_all_jobs()
 
     # WHEN
-    x_fig = get_belief_jobs_persons_plotly_fig(amy_belief)
+    x_fig = get_belief_jobs_partners_plotly_fig(amy_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

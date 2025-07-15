@@ -4,8 +4,8 @@ from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -17,7 +17,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    person_name_str,
+    partner_name_str,
     plan_label_str,
     plan_rope_str,
     rcontext_str,
@@ -26,17 +26,17 @@ from src.a08_believer_atom_logic.atom import believeratom_shop, sift_believerato
 from src.a08_believer_atom_logic.test._util.a08_str import DELETE_str
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_personunit():
+def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_partnerunit():
     # ESTABLISH
     bob_str = "Bob"
     zia_str = "Zia"
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_personunit(zia_str)
+    sue_believer.add_partnerunit(zia_str)
 
-    bob_atom = believeratom_shop(believer_personunit_str(), DELETE_str())
-    bob_atom.set_arg(person_name_str(), bob_str)
-    zia_atom = believeratom_shop(believer_personunit_str(), DELETE_str())
-    zia_atom.set_arg(person_name_str(), zia_str)
+    bob_atom = believeratom_shop(believer_partnerunit_str(), DELETE_str())
+    bob_atom.set_arg(partner_name_str(), bob_str)
+    zia_atom = believeratom_shop(believer_partnerunit_str(), DELETE_str())
+    zia_atom.set_arg(partner_name_str(), zia_str)
 
     # WHEN
     new_bob_believeratom = sift_believeratom(sue_believer, bob_atom)
@@ -48,23 +48,23 @@ def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_personunit():
     assert not new_bob_believeratom
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_person_membership():
+def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_partner_membership():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
     run_str = ";run"
     sue_believer = believerunit_shop("Sue")
-    sue_believer.add_personunit(yao_str)
-    sue_believer.add_personunit(bob_str)
-    yao_personunit = sue_believer.get_person(yao_str)
-    yao_personunit.add_membership(run_str)
-    print(f"{yao_personunit._memberships.keys()=}")
+    sue_believer.add_partnerunit(yao_str)
+    sue_believer.add_partnerunit(bob_str)
+    yao_partnerunit = sue_believer.get_partner(yao_str)
+    yao_partnerunit.add_membership(run_str)
+    print(f"{yao_partnerunit._memberships.keys()=}")
 
-    bob_run_atom = believeratom_shop(believer_person_membership_str(), DELETE_str())
-    bob_run_atom.set_arg(person_name_str(), bob_str)
+    bob_run_atom = believeratom_shop(believer_partner_membership_str(), DELETE_str())
+    bob_run_atom.set_arg(partner_name_str(), bob_str)
     bob_run_atom.set_arg(group_title_str(), run_str)
-    yao_run_atom = believeratom_shop(believer_person_membership_str(), DELETE_str())
-    yao_run_atom.set_arg(person_name_str(), yao_str)
+    yao_run_atom = believeratom_shop(believer_partner_membership_str(), DELETE_str())
+    yao_run_atom.set_arg(partner_name_str(), yao_str)
     yao_run_atom.set_arg(group_title_str(), run_str)
 
     # WHEN

@@ -9,7 +9,7 @@ from src.a01_term_logic.rope import (
     is_labelterm,
     validate_labelterm,
 )
-from src.a01_term_logic.term import PersonName
+from src.a01_term_logic.term import PartnerName
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
 from src.a03_group_logic.group import (
@@ -20,40 +20,40 @@ from src.a03_group_logic.group import (
 )
 
 
-class InvalidPersonException(Exception):
+class InvalidPartnerException(Exception):
     pass
 
 
-class Bad_person_nameMemberShipException(Exception):
+class Bad_partner_nameMemberShipException(Exception):
     pass
 
 
 @dataclass
-class PersonCore:
-    person_name: PersonName = None
+class PartnerCore:
+    partner_name: PartnerName = None
     knot: str = None
     respect_bit: float = None
 
-    def set_nameterm(self, x_person_name: PersonName):
-        self.person_name = validate_labelterm(x_person_name, self.knot)
+    def set_nameterm(self, x_partner_name: PartnerName):
+        self.partner_name = validate_labelterm(x_partner_name, self.knot)
 
 
 @dataclass
-class PersonUnit(PersonCore):
-    """This represents the believer_name's opinion of the PersonUnit.person_name
-    PersonUnit.person_cred_points represents how much person_cred_points the _believer_name projects to the person_name
-    PersonUnit.person_debt_points represents how much person_debt_points the _believer_name projects to the person_name
+class PartnerUnit(PartnerCore):
+    """This represents the believer_name's opinion of the PartnerUnit.partner_name
+    PartnerUnit.partner_cred_points represents how much partner_cred_points the _believer_name projects to the partner_name
+    PartnerUnit.partner_debt_points represents how much partner_debt_points the _believer_name projects to the partner_name
     """
 
-    person_cred_points: int = None
-    person_debt_points: int = None
+    partner_cred_points: int = None
+    partner_debt_points: int = None
     # special attribute: static in believer json, in memory it is deleted after loading and recalculated during saving.
-    _memberships: dict[PersonName, MemberShip] = None
+    _memberships: dict[PartnerName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
-    _irrational_person_debt_points: int = None  # set by listening process
-    _inallocable_person_debt_points: int = None  # set by listening process
+    _irrational_partner_debt_points: int = None  # set by listening process
+    _inallocable_partner_debt_points: int = None  # set by listening process
     # set by Believer.settle_believer()
     _fund_give: float = None
     _fund_take: float = None
@@ -65,27 +65,27 @@ class PersonUnit(PersonCore):
     def set_respect_bit(self, x_respect_bit: float):
         self.respect_bit = x_respect_bit
 
-    def set_credor_person_debt_points(
+    def set_credor_partner_debt_points(
         self,
-        person_cred_points: float = None,
-        person_debt_points: float = None,
+        partner_cred_points: float = None,
+        partner_debt_points: float = None,
     ):
-        if person_cred_points is not None:
-            self.set_person_cred_points(person_cred_points)
-        if person_debt_points is not None:
-            self.set_person_debt_points(person_debt_points)
+        if partner_cred_points is not None:
+            self.set_partner_cred_points(partner_cred_points)
+        if partner_debt_points is not None:
+            self.set_partner_debt_points(partner_debt_points)
 
-    def set_person_cred_points(self, person_cred_points: int):
-        self.person_cred_points = person_cred_points
+    def set_partner_cred_points(self, partner_cred_points: int):
+        self.partner_cred_points = partner_cred_points
 
-    def set_person_debt_points(self, person_debt_points: int):
-        self.person_debt_points = person_debt_points
+    def set_partner_debt_points(self, partner_debt_points: int):
+        self.partner_debt_points = partner_debt_points
 
-    def get_person_cred_points(self):
-        return get_1_if_None(self.person_cred_points)
+    def get_partner_cred_points(self):
+        return get_1_if_None(self.partner_cred_points)
 
-    def get_person_debt_points(self):
-        return get_1_if_None(self.person_debt_points)
+    def get_partner_debt_points(self):
+        return get_1_if_None(self.partner_debt_points)
 
     def clear_fund_give_take(self):
         self._fund_give = 0
@@ -95,17 +95,19 @@ class PersonUnit(PersonCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def add_irrational_person_debt_points(self, x_irrational_person_debt_points: float):
-        self._irrational_person_debt_points += x_irrational_person_debt_points
-
-    def add_inallocable_person_debt_points(
-        self, x_inallocable_person_debt_points: float
+    def add_irrational_partner_debt_points(
+        self, x_irrational_partner_debt_points: float
     ):
-        self._inallocable_person_debt_points += x_inallocable_person_debt_points
+        self._irrational_partner_debt_points += x_irrational_partner_debt_points
+
+    def add_inallocable_partner_debt_points(
+        self, x_inallocable_partner_debt_points: float
+    ):
+        self._inallocable_partner_debt_points += x_inallocable_partner_debt_points
 
     def reset_listen_calculated_attrs(self):
-        self._irrational_person_debt_points = 0
-        self._inallocable_person_debt_points = 0
+        self._irrational_partner_debt_points = 0
+        self._inallocable_partner_debt_points = 0
 
     def add_fund_give(self, fund_give: float):
         self._fund_give += fund_give
@@ -135,20 +137,20 @@ class PersonUnit(PersonCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        personunits_person_cred_points_sum: float,
-        personunits_person_debt_points_sum: float,
+        partnerunits_partner_cred_points_sum: float,
+        partnerunits_partner_debt_points_sum: float,
     ):
-        total_person_cred_points = personunits_person_cred_points_sum
+        total_partner_cred_points = partnerunits_partner_cred_points_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
         self._fund_agenda_ratio_give = (
-            self.get_person_cred_points() / total_person_cred_points
+            self.get_partner_cred_points() / total_partner_cred_points
             if fund_agenda_ratio_give_sum == 0
             else self._fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_person_debt_points = personunits_person_debt_points_sum
+            total_partner_debt_points = partnerunits_partner_debt_points_sum
             self._fund_agenda_ratio_take = (
-                self.get_person_debt_points() / total_person_debt_points
+                self.get_partner_debt_points() / total_partner_debt_points
             )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
@@ -167,13 +169,13 @@ class PersonUnit(PersonCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_title = x_membership.group_title
-        group_title_is_person_name = is_labelterm(x_group_title, self.knot)
-        if group_title_is_person_name and self.person_name != x_group_title:
-            raise Bad_person_nameMemberShipException(
-                f"PersonUnit with person_name='{self.person_name}' cannot have link to '{x_group_title}'."
+        group_title_is_partner_name = is_labelterm(x_group_title, self.knot)
+        if group_title_is_partner_name and self.partner_name != x_group_title:
+            raise Bad_partner_nameMemberShipException(
+                f"PartnerUnit with partner_name='{self.partner_name}' cannot have link to '{x_group_title}'."
             )
 
-        x_membership.person_name = self.person_name
+        x_membership.partner_name = self.partner_name
         self._memberships[x_membership.group_title] = x_membership
 
     def get_membership(self, group_title: GroupTitle) -> MemberShip:
@@ -219,18 +221,18 @@ class PersonUnit(PersonCore):
 
     def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
-            "person_name": self.person_name,
-            "person_cred_points": self.person_cred_points,
-            "person_debt_points": self.person_debt_points,
+            "partner_name": self.partner_name,
+            "partner_cred_points": self.partner_cred_points,
+            "partner_debt_points": self.partner_debt_points,
             "_memberships": self.get_memberships_dict(),
         }
-        if self._irrational_person_debt_points not in [None, 0]:
-            x_dict["_irrational_person_debt_points"] = (
-                self._irrational_person_debt_points
+        if self._irrational_partner_debt_points not in [None, 0]:
+            x_dict["_irrational_partner_debt_points"] = (
+                self._irrational_partner_debt_points
             )
-        if self._inallocable_person_debt_points not in [None, 0]:
-            x_dict["_inallocable_person_debt_points"] = (
-                self._inallocable_person_debt_points
+        if self._inallocable_partner_debt_points not in [None, 0]:
+            x_dict["_inallocable_partner_debt_points"] = (
+                self._inallocable_partner_debt_points
             )
 
         if all_attrs:
@@ -246,61 +248,63 @@ class PersonUnit(PersonCore):
         x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
 
 
-def personunits_get_from_json(personunits_json: str) -> dict[str, PersonUnit]:
-    personunits_dict = get_dict_from_json(personunits_json)
-    return personunits_get_from_dict(x_dict=personunits_dict)
+def partnerunits_get_from_json(partnerunits_json: str) -> dict[str, PartnerUnit]:
+    partnerunits_dict = get_dict_from_json(partnerunits_json)
+    return partnerunits_get_from_dict(x_dict=partnerunits_dict)
 
 
-def personunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, PersonUnit]:
-    personunits = {}
-    for personunit_dict in x_dict.values():
-        x_personunit = personunit_get_from_dict(personunit_dict, _knot)
-        personunits[x_personunit.person_name] = x_personunit
-    return personunits
+def partnerunits_get_from_dict(
+    x_dict: dict, _knot: str = None
+) -> dict[str, PartnerUnit]:
+    partnerunits = {}
+    for partnerunit_dict in x_dict.values():
+        x_partnerunit = partnerunit_get_from_dict(partnerunit_dict, _knot)
+        partnerunits[x_partnerunit.partner_name] = x_partnerunit
+    return partnerunits
 
 
-def personunit_get_from_dict(personunit_dict: dict, _knot: str) -> PersonUnit:
-    x_person_name = personunit_dict["person_name"]
-    x_person_cred_points = personunit_dict["person_cred_points"]
-    x_person_debt_points = personunit_dict["person_debt_points"]
-    x_memberships_dict = personunit_dict["_memberships"]
-    x_personunit = personunit_shop(
-        x_person_name, x_person_cred_points, x_person_debt_points, _knot
+def partnerunit_get_from_dict(partnerunit_dict: dict, _knot: str) -> PartnerUnit:
+    x_partner_name = partnerunit_dict["partner_name"]
+    x_partner_cred_points = partnerunit_dict["partner_cred_points"]
+    x_partner_debt_points = partnerunit_dict["partner_debt_points"]
+    x_memberships_dict = partnerunit_dict["_memberships"]
+    x_partnerunit = partnerunit_shop(
+        x_partner_name, x_partner_cred_points, x_partner_debt_points, _knot
     )
-    x_personunit._memberships = memberships_get_from_dict(
-        x_memberships_dict, x_person_name
+    x_partnerunit._memberships = memberships_get_from_dict(
+        x_memberships_dict, x_partner_name
     )
-    _irrational_person_debt_points = personunit_dict.get(
-        "_irrational_person_debt_points", 0
+    _irrational_partner_debt_points = partnerunit_dict.get(
+        "_irrational_partner_debt_points", 0
     )
-    _inallocable_person_debt_points = personunit_dict.get(
-        "_inallocable_person_debt_points", 0
+    _inallocable_partner_debt_points = partnerunit_dict.get(
+        "_inallocable_partner_debt_points", 0
     )
-    x_personunit.add_irrational_person_debt_points(
-        get_0_if_None(_irrational_person_debt_points)
+    x_partnerunit.add_irrational_partner_debt_points(
+        get_0_if_None(_irrational_partner_debt_points)
     )
-    x_personunit.add_inallocable_person_debt_points(
-        get_0_if_None(_inallocable_person_debt_points)
+    x_partnerunit.add_inallocable_partner_debt_points(
+        get_0_if_None(_inallocable_partner_debt_points)
     )
 
-    return x_personunit
+    return x_partnerunit
 
 
-def personunit_shop(
-    person_name: PersonName,
-    person_cred_points: int = None,
-    person_debt_points: int = None,
+def partnerunit_shop(
+    partner_name: PartnerName,
+    partner_cred_points: int = None,
+    partner_debt_points: int = None,
     knot: str = None,
     respect_bit: float = None,
-) -> PersonUnit:
-    x_personunit = PersonUnit(
-        person_cred_points=get_1_if_None(person_cred_points),
-        person_debt_points=get_1_if_None(person_debt_points),
+) -> PartnerUnit:
+    x_partnerunit = PartnerUnit(
+        partner_cred_points=get_1_if_None(partner_cred_points),
+        partner_debt_points=get_1_if_None(partner_debt_points),
         _memberships={},
         _credor_pool=0,
         _debtor_pool=0,
-        _irrational_person_debt_points=0,
-        _inallocable_person_debt_points=0,
+        _irrational_partner_debt_points=0,
+        _inallocable_partner_debt_points=0,
         _fund_give=0,
         _fund_take=0,
         _fund_agenda_give=0,
@@ -310,5 +314,5 @@ def personunit_shop(
         knot=default_knot_if_None(knot),
         respect_bit=default_RespectBit_if_None(respect_bit),
     )
-    x_personunit.set_nameterm(x_person_name=person_name)
-    return x_personunit
+    x_partnerunit.set_nameterm(x_partner_name=partner_name)
+    return x_partnerunit

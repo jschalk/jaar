@@ -12,8 +12,8 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    _inallocable_person_debt_points_str,
-    _irrational_person_debt_points_str,
+    _inallocable_partner_debt_points_str,
+    _irrational_partner_debt_points_str,
     awardee_title_str,
     fund_give_str,
     fund_take_str,
@@ -21,8 +21,8 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    person_cred_points_str,
-    person_debt_points_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
     respect_bit_str,
     take_force_str,
 )
@@ -44,8 +44,8 @@ from src.a04_reason_logic.test._util.a04_str import (
     rplan_active_requisite_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
-    _all_person_cred_str,
-    _all_person_debt_str,
+    _all_partner_cred_str,
+    _all_partner_debt_str,
     _descendant_task_count_str,
     _fund_cease_str,
     _fund_onset_str,
@@ -70,8 +70,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     addin_str,
     awardee_title_str,
     begin_str,
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -98,10 +98,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     max_tree_traverse_str,
     morph_str,
     numor_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
     penny_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
     plan_rope_str,
     pnigh_str,
     popen_str,
@@ -152,8 +152,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel0Keys():
 
     # THEN
     assert believerunit_str() in believer_calc_config_keys
-    assert believer_personunit_str() in believer_calc_config_keys
-    assert believer_person_membership_str() in believer_calc_config_keys
+    assert believer_partnerunit_str() in believer_calc_config_keys
+    assert believer_partner_membership_str() in believer_calc_config_keys
     assert believer_planunit_str() in believer_calc_config_keys
     assert believer_plan_awardlink_str() in believer_calc_config_keys
     assert believer_plan_reasonunit_str() in believer_calc_config_keys
@@ -215,8 +215,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                     assert fm_aspect_keys == dimen_keys
 
     blrunit_aspect = believer_calc_config.get(believerunit_str())
-    blrpern_aspect = believer_calc_config.get(believer_personunit_str())
-    blrmemb_aspect = believer_calc_config.get(believer_person_membership_str())
+    blrpern_aspect = believer_calc_config.get(believer_partnerunit_str())
+    blrmemb_aspect = believer_calc_config.get(believer_partner_membership_str())
     blrplan_aspect = believer_calc_config.get(believer_planunit_str())
     blrawar_aspect = believer_calc_config.get(believer_plan_awardlink_str())
     blrreas_aspect = believer_calc_config.get(believer_plan_reasonunit_str())
@@ -250,8 +250,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_blrpern_jmetrics_keys = {
         "_credor_pool",
         "_debtor_pool",
-        "_irrational_person_debt_points",
-        "_inallocable_person_debt_points",
+        "_irrational_partner_debt_points",
+        "_inallocable_partner_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -273,8 +273,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert expected_blrmemb_jmetrics_keys == blrmemb_jmetrics_keys
     expected_blrplan_jmetrics_keys = {
         "_active",
-        "_all_person_cred",
-        "_all_person_debt",
+        "_all_partner_cred",
+        "_all_partner_debt",
         "_descendant_task_count",
         "_fund_ratio",
         "fund_iota",
@@ -330,8 +330,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckAbbreviations():
 
     # THEN
     blrunit_aspect = believer_calc_config.get(believerunit_str())
-    blrpern_aspect = believer_calc_config.get(believer_personunit_str())
-    blrmemb_aspect = believer_calc_config.get(believer_person_membership_str())
+    blrpern_aspect = believer_calc_config.get(believer_partnerunit_str())
+    blrmemb_aspect = believer_calc_config.get(believer_partner_membership_str())
     blrplan_aspect = believer_calc_config.get(believer_planunit_str())
     blrawar_aspect = believer_calc_config.get(believer_plan_awardlink_str())
     blrreas_aspect = believer_calc_config.get(believer_plan_reasonunit_str())
@@ -365,14 +365,14 @@ def test_get_all_believer_calc_args_ReturnsObj():
     assert "_fund_give" in all_believer_calc_args
     assert all_believer_calc_args.get("_fund_give") == {
         "believer_plan_awardlink",
-        "believer_person_membership",
+        "believer_partner_membership",
         "believer_groupunit",
-        "believer_personunit",
+        "believer_partnerunit",
     }
 
     # believer_calc_config = get_believer_calc_config_dict()
-    # believer_personunit_aspects = believer_calc_config.get("believer_personunit")
-    # blrpern_jmetrics_dict = believer_personunit_aspects.get("jmetrics")
+    # believer_partnerunit_aspects = believer_calc_config.get("believer_partnerunit")
+    # blrpern_jmetrics_dict = believer_partnerunit_aspects.get("jmetrics")
     # rope_believer_calc_aspects = blrpern_jmetrics_dict.get("_fund_give")
     # assert believer_plan_factunit_str() in rope_believer_calc_aspects
     # assert believer_plan_laborlink_str() in rope_believer_calc_aspects
@@ -406,8 +406,8 @@ def test_get_believer_calc_dimens_ReturnsObj():
     # THEN
     expected_believer_calc_dimens = {
         believerunit_str(),
-        believer_personunit_str(),
-        believer_person_membership_str(),
+        believer_partnerunit_str(),
+        believer_partner_membership_str(),
         believer_planunit_str(),
         believer_plan_awardlink_str(),
         believer_plan_reasonunit_str(),
@@ -423,29 +423,29 @@ def test_get_believer_calc_dimens_ReturnsObj():
 
 def test_get_believer_calc_dimen_args_ReturnsObj():
     # ESTABLISH / WHEN
-    believer_personunit_args = get_believer_calc_dimen_args(believer_personunit_str())
+    believer_partnerunit_args = get_believer_calc_dimen_args(believer_partnerunit_str())
     believer_planunit_args = get_believer_calc_dimen_args(believer_planunit_str())
     believer_groupunit_args = get_believer_calc_dimen_args(believer_groupunit_str())
 
     #  THEN
-    print(f"{believer_personunit_args=}")
+    print(f"{believer_partnerunit_args=}")
     print(f"{believer_groupunit_args=}")
-    assert believer_personunit_args == {
+    assert believer_partnerunit_args == {
         belief_label_str(),
         believer_name_str(),
         "_fund_agenda_give",
         "_credor_pool",
         "_fund_give",
-        person_cred_points_str(),
-        person_name_str(),
-        person_debt_points_str(),
+        partner_cred_points_str(),
+        partner_name_str(),
+        partner_debt_points_str(),
         "_fund_agenda_ratio_take",
-        "_inallocable_person_debt_points",
+        "_inallocable_partner_debt_points",
         "_fund_agenda_ratio_give",
         "_fund_agenda_take",
         "_fund_take",
         "_debtor_pool",
-        "_irrational_person_debt_points",
+        "_irrational_partner_debt_points",
     }
     assert believer_planunit_args == {
         belief_label_str(),
@@ -464,8 +464,8 @@ def test_get_believer_calc_dimen_args_ReturnsObj():
         "_fund_onset",
         "_fund_cease",
         "_descendant_task_count",
-        "_all_person_cred",
-        "_all_person_debt",
+        "_all_partner_cred",
+        "_all_partner_debt",
         "_healerlink_ratio",
         "_level",
         "_chore",
@@ -531,8 +531,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     jv = "jvalues"
     jm = "jmetrics"
     believerunit = believerunit_str()
-    blrpern = believer_personunit_str()
-    blrmemb = believer_person_membership_str()
+    blrpern = believer_partnerunit_str()
+    blrmemb = believer_partner_membership_str()
     blrplan = believer_planunit_str()
     blrawar = believer_plan_awardlink_str()
     blrreas = believer_plan_reasonunit_str()
@@ -541,8 +541,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     blrheal = believer_plan_healerlink_str()
     blrfact = believer_plan_factunit_str()
     blrgrou = believer_groupunit_str()
-    assert g_class_type(cfig, blrmemb, jk, person_name_str()) == NameTerm_str()
-    assert g_sqlitetype(cfig, blrmemb, jk, person_name_str()) == "TEXT"
+    assert g_class_type(cfig, blrmemb, jk, partner_name_str()) == NameTerm_str()
+    assert g_sqlitetype(cfig, blrmemb, jk, partner_name_str()) == "TEXT"
     assert g_class_type(cfig, blrmemb, jk, group_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, blrmemb, jk, group_title_str()) == "TEXT"
     assert g_class_type(cfig, blrmemb, jm, _credor_pool_str()) == "float"
@@ -565,8 +565,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrmemb, jv, group_cred_points_str()) == "REAL"
     assert g_class_type(cfig, blrmemb, jv, group_debt_points_str()) == "float"
     assert g_sqlitetype(cfig, blrmemb, jv, group_debt_points_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jk, person_name_str()) == NameTerm_str()
-    assert g_sqlitetype(cfig, blrpern, jk, person_name_str()) == "TEXT"
+    assert g_class_type(cfig, blrpern, jk, partner_name_str()) == NameTerm_str()
+    assert g_sqlitetype(cfig, blrpern, jk, partner_name_str()) == "TEXT"
     assert g_class_type(cfig, blrpern, jm, _credor_pool_str()) == "float"
     assert g_sqlitetype(cfig, blrpern, jm, _credor_pool_str()) == "REAL"
     assert g_class_type(cfig, blrpern, jm, _debtor_pool_str()) == "float"
@@ -584,22 +584,24 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_class_type(cfig, blrpern, jm, _fund_take_str()) == "float"
     assert g_sqlitetype(cfig, blrpern, jm, _fund_take_str()) == "REAL"
     assert (
-        g_class_type(cfig, blrpern, jm, _inallocable_person_debt_points_str())
+        g_class_type(cfig, blrpern, jm, _inallocable_partner_debt_points_str())
         == "float"
     )
     assert (
-        g_sqlitetype(cfig, blrpern, jm, _inallocable_person_debt_points_str()) == "REAL"
+        g_sqlitetype(cfig, blrpern, jm, _inallocable_partner_debt_points_str())
+        == "REAL"
     )
     assert (
-        g_class_type(cfig, blrpern, jm, _irrational_person_debt_points_str()) == "float"
+        g_class_type(cfig, blrpern, jm, _irrational_partner_debt_points_str())
+        == "float"
     )
     assert (
-        g_sqlitetype(cfig, blrpern, jm, _irrational_person_debt_points_str()) == "REAL"
+        g_sqlitetype(cfig, blrpern, jm, _irrational_partner_debt_points_str()) == "REAL"
     )
-    assert g_class_type(cfig, blrpern, jv, person_cred_points_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jv, person_cred_points_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jv, person_debt_points_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jv, person_debt_points_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jv, partner_cred_points_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, partner_cred_points_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jv, partner_debt_points_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, partner_debt_points_str()) == "REAL"
 
     assert g_class_type(cfig, blrgrou, jk, group_title_str()) == "TitleTerm"
     assert g_sqlitetype(cfig, blrgrou, jk, group_title_str()) == "TEXT"
@@ -682,10 +684,10 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrlabo, jm, "_believer_name_labor") == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, "_active") == "int"
     assert g_sqlitetype(cfig, blrplan, jm, "_active") == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _all_person_cred_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, _all_person_cred_str()) == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _all_person_debt_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, _all_person_debt_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, _all_partner_cred_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, _all_partner_cred_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, _all_partner_debt_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, _all_partner_debt_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, _descendant_task_count_str()) == "int"
     assert g_sqlitetype(cfig, blrplan, jm, _descendant_task_count_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, _fund_cease_str()) == "float"
@@ -827,7 +829,7 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     believer_calc_args_type_dict = get_believer_calc_args_type_dict()
 
     # THEN
-    assert believer_calc_args_type_dict.get(person_name_str()) == NameTerm_str()
+    assert believer_calc_args_type_dict.get(partner_name_str()) == NameTerm_str()
     assert believer_calc_args_type_dict.get(group_title_str()) == TitleTerm_str()
     assert believer_calc_args_type_dict.get(_credor_pool_str()) == "float"
     assert believer_calc_args_type_dict.get(_debtor_pool_str()) == "float"
@@ -840,15 +842,15 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get(group_cred_points_str()) == "int"
     assert believer_calc_args_type_dict.get(group_debt_points_str()) == "int"
     assert (
-        believer_calc_args_type_dict.get(_inallocable_person_debt_points_str())
+        believer_calc_args_type_dict.get(_inallocable_partner_debt_points_str())
         == "float"
     )
     assert (
-        believer_calc_args_type_dict.get(_irrational_person_debt_points_str())
+        believer_calc_args_type_dict.get(_irrational_partner_debt_points_str())
         == "float"
     )
-    assert believer_calc_args_type_dict.get(person_cred_points_str()) == "float"
-    assert believer_calc_args_type_dict.get(person_debt_points_str()) == "float"
+    assert believer_calc_args_type_dict.get(partner_cred_points_str()) == "float"
+    assert believer_calc_args_type_dict.get(partner_debt_points_str()) == "float"
     assert believer_calc_args_type_dict.get(addin_str()) == "float"
     assert believer_calc_args_type_dict.get(begin_str()) == "float"
     assert believer_calc_args_type_dict.get(close_str()) == "float"
@@ -880,8 +882,8 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get(labor_title_str()) == TitleTerm_str()
     assert believer_calc_args_type_dict.get("_believer_name_labor") == "int"
     assert believer_calc_args_type_dict.get("_active") == "int"
-    assert believer_calc_args_type_dict.get(_all_person_cred_str()) == "int"
-    assert believer_calc_args_type_dict.get(_all_person_debt_str()) == "int"
+    assert believer_calc_args_type_dict.get(_all_partner_cred_str()) == "int"
+    assert believer_calc_args_type_dict.get(_all_partner_debt_str()) == "int"
     assert believer_calc_args_type_dict.get(_descendant_task_count_str()) == "int"
     assert believer_calc_args_type_dict.get(_fund_cease_str()) == "float"
     assert believer_calc_args_type_dict.get(_fund_onset_str()) == "float"

@@ -1,13 +1,13 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a03_group_logic.person import personunit_shop
+from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import get_default_belief_label
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_personunit_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    believer_partnerunit_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
 )
 from src.a08_believer_atom_logic.atom import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import (
@@ -367,9 +367,9 @@ def test_PackUnit_get_json_ReturnsObj_WithBelieverDeltaPopulated():
   "delta": {
     "0": {
       "crud": "DELETE",
-      "dimen": "believer_personunit",
+      "dimen": "believer_partnerunit",
       "jkeys": {
-        "person_name": "Sue"
+        "partner_name": "Sue"
       },
       "jvalues": {}
     },
@@ -480,29 +480,29 @@ def test_PackUnit_get_deltametric_json_ReturnsObj():
     assert x_is_json(delta_json)
 
 
-def test_PackUnit_add_believeratom_CorrectlySets_BelieverUnit_personunits():
+def test_PackUnit_add_believeratom_CorrectlySets_BelieverUnit_partnerunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_person_cred_points = 55
-    bob_person_debt_points = 66
-    bob_personunit = personunit_shop(
-        bob_str, bob_person_cred_points, bob_person_debt_points
+    bob_partner_cred_points = 55
+    bob_partner_debt_points = 66
+    bob_partnerunit = partnerunit_shop(
+        bob_str, bob_partner_cred_points, bob_partner_debt_points
     )
-    cw_str = person_cred_points_str()
-    dw_str = person_debt_points_str()
-    print(f"{bob_personunit.get_dict()=}")
+    cw_str = partner_cred_points_str()
+    dw_str = partner_debt_points_str()
+    print(f"{bob_partnerunit.get_dict()=}")
     bob_required_dict = {
-        person_name_str(): bob_personunit.get_dict().get(person_name_str())
+        partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())
     }
-    bob_optional_dict = {cw_str: bob_personunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_personunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     assert bob_packunit._believerdelta.believeratoms == {}
 
     # WHEN
     bob_packunit.add_believeratom(
-        dimen=believer_personunit_str(),
+        dimen=believer_partnerunit_str(),
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -512,13 +512,13 @@ def test_PackUnit_add_believeratom_CorrectlySets_BelieverUnit_personunits():
     assert len(bob_packunit._believerdelta.believeratoms) == 1
     assert (
         bob_packunit._believerdelta.believeratoms.get(INSERT_str())
-        .get(believer_personunit_str())
+        .get(believer_partnerunit_str())
         .get(bob_str)
         is not None
     )
 
 
-def test_PackUnit_get_edited_believer_ReturnsObj_BelieverUnit_insert_person():
+def test_PackUnit_get_edited_believer_ReturnsObj_BelieverUnit_insert_partner():
     # ESTABLISH
     sue_str = "Sue"
     sue_packunit = packunit_shop(sue_str)
@@ -526,16 +526,16 @@ def test_PackUnit_get_edited_believer_ReturnsObj_BelieverUnit_insert_person():
     before_sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_believerunit.add_personunit(yao_str)
-    assert before_sue_believerunit.person_exists(yao_str)
-    assert before_sue_believerunit.person_exists(zia_str) is False
-    dimen = believer_personunit_str()
+    before_sue_believerunit.add_partnerunit(yao_str)
+    assert before_sue_believerunit.partner_exists(yao_str)
+    assert before_sue_believerunit.partner_exists(zia_str) is False
+    dimen = believer_partnerunit_str()
     x_believeratom = believeratom_shop(dimen, INSERT_str())
-    x_believeratom.set_jkey(person_name_str(), zia_str)
-    x_person_cred_points = 55
-    x_person_debt_points = 66
-    x_believeratom.set_jvalue("person_cred_points", x_person_cred_points)
-    x_believeratom.set_jvalue("person_debt_points", x_person_debt_points)
+    x_believeratom.set_jkey(partner_name_str(), zia_str)
+    x_partner_cred_points = 55
+    x_partner_debt_points = 66
+    x_believeratom.set_jvalue("partner_cred_points", x_partner_cred_points)
+    x_believeratom.set_jvalue("partner_debt_points", x_partner_debt_points)
     sue_packunit._believerdelta.set_believeratom(x_believeratom)
     print(f"{sue_packunit._believerdelta.believeratoms.keys()=}")
 
@@ -543,12 +543,12 @@ def test_PackUnit_get_edited_believer_ReturnsObj_BelieverUnit_insert_person():
     after_sue_believerunit = sue_packunit.get_edited_believer(before_sue_believerunit)
 
     # THEN
-    yao_personunit = after_sue_believerunit.get_person(yao_str)
-    zia_personunit = after_sue_believerunit.get_person(zia_str)
-    assert yao_personunit is not None
-    assert zia_personunit is not None
-    assert zia_personunit.person_cred_points == x_person_cred_points
-    assert zia_personunit.person_debt_points == x_person_debt_points
+    yao_partnerunit = after_sue_believerunit.get_partner(yao_str)
+    zia_partnerunit = after_sue_believerunit.get_partner(zia_str)
+    assert yao_partnerunit is not None
+    assert zia_partnerunit is not None
+    assert zia_partnerunit.partner_cred_points == x_partner_cred_points
+    assert zia_partnerunit.partner_debt_points == x_partner_debt_points
 
 
 def test_PackUnit_get_edited_believer_RaisesErrorWhenpackAttrsAndBelieverAttrsAreNotTheSame():
@@ -571,26 +571,26 @@ def test_PackUnit_is_empty_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_person_cred_points = 55
-    bob_person_debt_points = 66
-    bob_personunit = personunit_shop(
-        bob_str, bob_person_cred_points, bob_person_debt_points
+    bob_partner_cred_points = 55
+    bob_partner_debt_points = 66
+    bob_partnerunit = partnerunit_shop(
+        bob_str, bob_partner_cred_points, bob_partner_debt_points
     )
-    cw_str = person_cred_points_str()
-    dw_str = person_debt_points_str()
-    print(f"{bob_personunit.get_dict()=}")
+    cw_str = partner_cred_points_str()
+    dw_str = partner_debt_points_str()
+    print(f"{bob_partnerunit.get_dict()=}")
     bob_required_dict = {
-        person_name_str(): bob_personunit.get_dict().get(person_name_str())
+        partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())
     }
-    bob_optional_dict = {cw_str: bob_personunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_personunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     assert bob_packunit._believerdelta.believeratoms == {}
     assert bob_packunit.is_empty()
 
     # WHEN
     bob_packunit.add_believeratom(
-        dimen=believer_personunit_str(),
+        dimen=believer_partnerunit_str(),
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -609,7 +609,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for UPDATE_str operation
     bob_packunit_update = packunit_shop(bob_str)
     bob_packunit_update.add_believeratom(
-        dimen=believer_personunit_str(),
+        dimen=believer_partnerunit_str(),
         crud_str=UPDATE_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -620,7 +620,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for DELETE_str operation
     bob_packunit_delete = packunit_shop(bob_str)
     bob_packunit_delete.add_believeratom(
-        dimen=believer_personunit_str(),
+        dimen=believer_partnerunit_str(),
         crud_str=DELETE_str(),
         jkeys=bob_required_dict,
         jvalues={},

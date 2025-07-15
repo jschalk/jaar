@@ -3,8 +3,8 @@ from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     believer_get_obj,
-    believer_person_membership_get_obj,
-    believer_personunit_get_obj,
+    believer_partner_membership_get_obj,
+    believer_partnerunit_get_obj,
     believer_plan_awardlink_get_obj,
     believer_plan_factunit_get_obj,
     believer_plan_reason_premiseunit_get_obj as premiseunit_get_obj,
@@ -12,8 +12,8 @@ from src.a06_believer_logic.believer_tool import (
     believer_planunit_get_obj,
 )
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_person_membership_str,
-    believer_personunit_str,
+    believer_partner_membership_str,
+    believer_partnerunit_str,
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
@@ -30,34 +30,34 @@ from src.a06_believer_logic.test._util.a06_str import (
 )
 
 
-def test_believer_personunit_get_obj_ReturnsObj():
+def test_believer_partnerunit_get_obj_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {"person_name": yao_str}
-    sue_believer.add_personunit(yao_str)
+    jkeys = {"partner_name": yao_str}
+    sue_believer.add_partnerunit(yao_str)
 
     # WHEN
-    x_obj = believer_personunit_get_obj(sue_believer, jkeys)
+    x_obj = believer_partnerunit_get_obj(sue_believer, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_believer.get_person(yao_str)
+    assert x_obj == sue_believer.get_partner(yao_str)
 
 
-def test_believer_person_membership_get_obj_ReturnsObj():
+def test_believer_partner_membership_get_obj_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {"person_name": yao_str, "group_title": swim_str}
-    sue_believer.add_personunit(yao_str)
-    sue_believer.get_person(yao_str).add_membership(swim_str)
+    jkeys = {"partner_name": yao_str, "group_title": swim_str}
+    sue_believer.add_partnerunit(yao_str)
+    sue_believer.get_partner(yao_str).add_membership(swim_str)
 
     # WHEN
-    x_obj = believer_person_membership_get_obj(sue_believer, jkeys)
+    x_obj = believer_partner_membership_get_obj(sue_believer, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_believer.get_person(yao_str).get_membership(swim_str)
+    assert x_obj == sue_believer.get_partner(yao_str).get_membership(swim_str)
 
 
 def test_believer_planunit_get_obj_ReturnsObj():
@@ -162,8 +162,8 @@ def test_believer_get_obj_ReturnsObj_BelieverUnit():
     # ESTABLISH
     yao_str = "Yao"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {"person_name": yao_str}
-    sue_believer.add_personunit(yao_str)
+    jkeys = {"partner_name": yao_str}
+    sue_believer.add_partnerunit(yao_str)
 
     # WHEN
     x_obj = believer_get_obj(believerunit_str(), sue_believer, jkeys)
@@ -172,34 +172,34 @@ def test_believer_get_obj_ReturnsObj_BelieverUnit():
     assert x_obj == sue_believer
 
 
-def test_believer_get_obj_ReturnsObj_believer_personunit_get_obj():
+def test_believer_get_obj_ReturnsObj_believer_partnerunit_get_obj():
     # ESTABLISH
     yao_str = "Yao"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {"person_name": yao_str}
-    sue_believer.add_personunit(yao_str)
+    jkeys = {"partner_name": yao_str}
+    sue_believer.add_partnerunit(yao_str)
 
     # WHEN
-    x_obj = believer_get_obj(believer_personunit_str(), sue_believer, jkeys)
+    x_obj = believer_get_obj(believer_partnerunit_str(), sue_believer, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_believer.get_person(yao_str)
+    assert x_obj == sue_believer.get_partner(yao_str)
 
 
-def test_believer_get_obj_ReturnsObj_believer_person_membership_get_obj():
+def test_believer_get_obj_ReturnsObj_believer_partner_membership_get_obj():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_believer = believerunit_shop("Sue")
-    jkeys = {"person_name": yao_str, "group_title": swim_str}
-    sue_believer.add_personunit(yao_str)
-    sue_believer.get_person(yao_str).add_membership(swim_str)
+    jkeys = {"partner_name": yao_str, "group_title": swim_str}
+    sue_believer.add_partnerunit(yao_str)
+    sue_believer.get_partner(yao_str).add_membership(swim_str)
 
     # WHEN
-    x_obj = believer_get_obj(believer_person_membership_str(), sue_believer, jkeys)
+    x_obj = believer_get_obj(believer_partner_membership_str(), sue_believer, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_believer.get_person(yao_str).get_membership(swim_str)
+    assert x_obj == sue_believer.get_partner(yao_str).get_membership(swim_str)
 
 
 def test_believer_get_obj_ReturnsObj_believer_planunit_get_obj():

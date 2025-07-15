@@ -6,16 +6,16 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a04_reason_logic.test._util.a04_str import belief_label_str, believer_name_str
 from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_person_nets_str,
+    belief_partner_nets_str,
     believer_net_amount_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_BELIEF_PERSON_NETS_SQLSTR,
+    CREATE_BELIEF_PARTNER_NETS_SQLSTR,
     CREATE_JOB_BLRPLAN_SQLSTR,
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
-from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_person_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_partner_nets_str
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():
@@ -23,33 +23,33 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():
     a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
-    yao_person_net = -55
-    bob_person_net = 600
+    yao_partner_net = -55
+    bob_partner_net = 600
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
-        cursor.execute(CREATE_BELIEF_PERSON_NETS_SQLSTR)
-        belief_person_nets_tablename = belief_person_nets_str()
-        insert_sqlstr = f"""INSERT INTO {belief_person_nets_tablename} ({belief_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
+        cursor.execute(CREATE_BELIEF_PARTNER_NETS_SQLSTR)
+        belief_partner_nets_tablename = belief_partner_nets_str()
+        insert_sqlstr = f"""INSERT INTO {belief_partner_nets_tablename} ({belief_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
 VALUES
-  ('{a23_str}', '{bob_str}', {bob_person_net})
-, ('{a23_str}', '{yao_str}', {yao_person_net})
+  ('{a23_str}', '{bob_str}', {bob_partner_net})
+, ('{a23_str}', '{yao_str}', {yao_partner_net})
 """
         cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, belief_person_nets_tablename) == 2
-        belief_kpi001_person_nets_tablename = belief_kpi001_person_nets_str()
-        assert not db_table_exists(cursor, belief_kpi001_person_nets_tablename)
+        assert get_row_count(cursor, belief_partner_nets_tablename) == 2
+        belief_kpi001_partner_nets_tablename = belief_kpi001_partner_nets_str()
+        assert not db_table_exists(cursor, belief_kpi001_partner_nets_tablename)
 
         # WHEN
         populate_kpi_bundle(cursor, get_default_kpi_bundle())
 
         # THEN
-        assert get_row_count(cursor, belief_kpi001_person_nets_tablename) == 2
+        assert get_row_count(cursor, belief_kpi001_partner_nets_tablename) == 2
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
-            belief_kpi001_person_nets_str(),
-            belief_person_nets_tablename,
+            belief_kpi001_partner_nets_str(),
+            belief_partner_nets_tablename,
             blrplan_job_tablename,
         }
 
@@ -59,32 +59,32 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_GivenNoBundleID():
     a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
-    yao_person_net = -55
-    bob_person_net = 600
+    yao_partner_net = -55
+    bob_partner_net = 600
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
-        cursor.execute(CREATE_BELIEF_PERSON_NETS_SQLSTR)
-        belief_person_nets_tablename = belief_person_nets_str()
-        insert_sqlstr = f"""INSERT INTO {belief_person_nets_tablename} ({belief_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
+        cursor.execute(CREATE_BELIEF_PARTNER_NETS_SQLSTR)
+        belief_partner_nets_tablename = belief_partner_nets_str()
+        insert_sqlstr = f"""INSERT INTO {belief_partner_nets_tablename} ({belief_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
 VALUES
-  ('{a23_str}', '{bob_str}', {bob_person_net})
-, ('{a23_str}', '{yao_str}', {yao_person_net})
+  ('{a23_str}', '{bob_str}', {bob_partner_net})
+, ('{a23_str}', '{yao_str}', {yao_partner_net})
 """
         cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, belief_person_nets_tablename) == 2
-        belief_kpi001_person_nets_tablename = belief_kpi001_person_nets_str()
-        assert not db_table_exists(cursor, belief_kpi001_person_nets_tablename)
+        assert get_row_count(cursor, belief_partner_nets_tablename) == 2
+        belief_kpi001_partner_nets_tablename = belief_kpi001_partner_nets_str()
+        assert not db_table_exists(cursor, belief_kpi001_partner_nets_tablename)
 
         # WHEN
         populate_kpi_bundle(cursor)
 
         # THEN
-        assert get_row_count(cursor, belief_kpi001_person_nets_tablename) == 2
+        assert get_row_count(cursor, belief_kpi001_partner_nets_tablename) == 2
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
-            belief_kpi001_person_nets_str(),
-            belief_person_nets_tablename,
+            belief_kpi001_partner_nets_str(),
+            belief_partner_nets_tablename,
             blrplan_job_tablename,
         }

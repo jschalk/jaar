@@ -119,7 +119,7 @@ def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue_gut_believer = sue_hubunit.default_gut_believer()
     bob_str = "Bob"
-    sue_gut_believer.add_personunit(bob_str)
+    sue_gut_believer.add_partnerunit(bob_str)
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
     save_gut_file(env_dir(), sue_gut_believer)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
@@ -192,7 +192,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     sue_hubunit.initialize_pack_gut_files()
     sue_gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
     bob_str = "Bob"
-    sue_gut_believer.add_personunit(bob_str)
+    sue_gut_believer.add_partnerunit(bob_str)
     save_gut_file(env_dir(), sue_gut_believer)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_pack_file_path = create_path(sue_hubunit._packs_dir, f"{init_pack_id()}.json")
@@ -206,7 +206,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
     assert sue_gut_believer.belief_label == "amy23"
     assert sue_gut_believer.believer_name == sue_str
     assert sue_gut_believer.respect_bit == seven_int
-    assert sue_gut_believer.person_exists(bob_str)
+    assert sue_gut_believer.partner_exists(bob_str)
     assert os_path_exists(init_pack_file_path)
 
 

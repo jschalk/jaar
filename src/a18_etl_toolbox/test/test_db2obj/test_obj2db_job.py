@@ -94,8 +94,8 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x__active = 1
-    x__all_person_cred = 2
-    x__all_person_debt = 3
+    x__all_partner_cred = 2
+    x__all_partner_debt = 3
     x__descendant_task_count = 4
     x__fund_cease = 5
     x_fund_iota = 6
@@ -123,8 +123,8 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "_active": x__active,
-        "_all_person_cred": x__all_person_cred,
-        "_all_person_debt": x__all_person_debt,
+        "_all_partner_cred": x__all_partner_cred,
+        "_all_partner_debt": x__all_partner_debt,
         "_descendant_task_count": x__descendant_task_count,
         "_fund_cease": x__fund_cease,
         "fund_iota": x_fund_iota,
@@ -534,7 +534,7 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_personunit")
+    x_args = get_believer_calc_dimen_args("believer_partnerunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -559,9 +559,9 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
 
     x_belief_label = "amy23"
     x_believer_name = "Sue"
-    x_person_name = 1
-    x_person_cred_points = 2
-    x_person_debt_points = 3
+    x_partner_name = 1
+    x_partner_cred_points = 2
+    x_partner_debt_points = 3
     x__credor_pool = 4
     x__debtor_pool = 5
     x__fund_give = 6
@@ -570,14 +570,14 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_take = 9
     x__fund_agenda_ratio_give = 10
     x__fund_agenda_ratio_take = 11
-    x__inallocable_person_debt_points = 12
-    x__irrational_person_debt_points = 13
+    x__inallocable_partner_debt_points = 12
+    x__irrational_partner_debt_points = 13
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
-        "person_name": x_person_name,
-        "person_cred_points": x_person_cred_points,
-        "person_debt_points": x_person_debt_points,
+        "partner_name": x_partner_name,
+        "partner_cred_points": x_partner_cred_points,
+        "partner_debt_points": x_partner_debt_points,
         "_credor_pool": x__credor_pool,
         "_debtor_pool": x__debtor_pool,
         "_fund_give": x__fund_give,
@@ -586,8 +586,8 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
         "_fund_agenda_take": x__fund_agenda_take,
         "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
         "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
-        "_inallocable_person_debt_points": x__inallocable_person_debt_points,
-        "_irrational_person_debt_points": x__irrational_person_debt_points,
+        "_inallocable_partner_debt_points": x__inallocable_partner_debt_points,
+        "_irrational_partner_debt_points": x__irrational_partner_debt_points,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -600,7 +600,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_personunit_job"
+        table_name = "believer_partnerunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -611,7 +611,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_person_membership")
+    x_args = get_believer_calc_dimen_args("believer_partner_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -636,7 +636,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
 
     x_belief_label = "amy23"
     x_believer_name = "Sue"
-    x_person_name = 1
+    x_partner_name = 1
     x_group_title = 2
     x_group_cred_points = 3
     x_group_debt_points = 4
@@ -651,7 +651,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
-        "person_name": x_person_name,
+        "partner_name": x_partner_name,
         "group_title": x_group_title,
         "group_cred_points": x_group_cred_points,
         "group_debt_points": x_group_debt_points,
@@ -675,7 +675,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_person_membership_job"
+        table_name = "believer_partner_membership_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

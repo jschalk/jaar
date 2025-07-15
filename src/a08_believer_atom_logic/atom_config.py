@@ -63,17 +63,17 @@ def get_allowed_class_types() -> set[str]:
 
 def get_atom_args_class_types() -> dict[str, str]:
     return {
-        "person_name": "NameTerm",
+        "partner_name": "NameTerm",
         "addin": "float",
         "awardee_title": "TitleTerm",
         "rcontext": "RopeTerm",
         "rplan_active_requisite": "bool",
         "begin": "float",
         "close": "float",
-        "person_cred_points": "float",
+        "partner_cred_points": "float",
         "group_cred_points": "float",
         "credor_respect": "float",
-        "person_debt_points": "float",
+        "partner_debt_points": "float",
         "group_debt_points": "float",
         "debtor_respect": "float",
         "denom": "int",
@@ -229,8 +229,8 @@ def save_atom_config_file(atom_config_dict):
 def get_believer_dimens() -> set:
     return {
         "believerunit",
-        "believer_personunit",
-        "believer_person_membership",
+        "believer_partnerunit",
+        "believer_partner_membership",
         "believer_planunit",
         "believer_plan_awardlink",
         "believer_plan_reasonunit",
@@ -243,7 +243,7 @@ def get_believer_dimens() -> set:
 
 def get_all_believer_dimen_keys() -> set:
     return {
-        "person_name",
+        "partner_name",
         "awardee_title",
         "rcontext",
         "fcontext",
@@ -262,7 +262,7 @@ def get_delete_key_name(key: str) -> str:
 
 def get_all_believer_dimen_delete_keys() -> set:
     return {
-        "person_name_ERASE",
+        "partner_name_ERASE",
         "awardee_title_ERASE",
         "rcontext_ERASE",
         "fcontext_ERASE",

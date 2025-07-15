@@ -67,7 +67,7 @@ def get_pidgin_args_dimen_mapping() -> dict[str, str]:
 
 def get_pidgin_args_class_types() -> dict[str, str]:
     return {
-        "person_name": "NameTerm",
+        "partner_name": "NameTerm",
         "addin": "float",
         "amount": "float",
         "awardee_title": "TitleTerm",
@@ -75,12 +75,12 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "c400_number": "int",
         "celldepth": "int",
         "close": "float",
-        "person_cred_points": "float",
+        "partner_cred_points": "float",
         "group_cred_points": "float",
         "credor_respect": "float",
         "cumulative_day": "int",
         "cumulative_minute": "int",
-        "person_debt_points": "float",
+        "partner_debt_points": "float",
         "group_debt_points": "float",
         "debtor_respect": "float",
         "denom": "int",
@@ -172,7 +172,7 @@ def pidginable_class_types() -> set:
 
 def get_pidginable_args() -> set:
     return {
-        "person_name",
+        "partner_name",
         "awardee_title",
         "face_name",
         "fcontext",
@@ -209,7 +209,7 @@ def find_set_otx_inx_args(args: set) -> set:
 
 def get_pidgin_NameTerm_args() -> set[str]:
     return {
-        "person_name",
+        "partner_name",
         "face_name",
         "healer_name",
         "believer_name",

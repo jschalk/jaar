@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a01_term_logic.term import BelieverName, PersonName
+from src.a01_term_logic.term import BelieverName, PartnerName
 from src.a02_finance_logic.allot import allot_scale
 from src.a12_hub_toolbox.hubunit import HubUnit
 from src.a14_keep_logic.rivercycle import (
@@ -21,12 +21,12 @@ from src.a14_keep_logic.rivercycle import (
 class RiverRun:
     hubunit: HubUnit = None
     number: int = None
-    keep_credorledgers: dict[BelieverName : dict[PersonName, float]] = None
-    tax_dues: dict[PersonName, float] = None
+    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]] = None
+    tax_dues: dict[PartnerName, float] = None
     cycle_max: int = None
     # calculated fields
-    _grants: dict[PersonName, float] = None
-    _tax_yields: dict[PersonName, float] = None
+    _grants: dict[PartnerName, float] = None
+    _tax_yields: dict[PartnerName, float] = None
     _tax_got_prev: float = None
     _tax_got_curr: float = None
     _cycle_count: int = None
@@ -34,38 +34,41 @@ class RiverRun:
     _cycle_chargeees_curr: set = None
     _debtor_count: int = None
     _credor_count: int = None
-    _rivergrades: dict[PersonName, RiverGrade] = None
+    _rivergrades: dict[PartnerName, RiverGrade] = None
 
     def set_cycle_max(self, x_cycle_max: int):
         self.cycle_max = get_positive_int(x_cycle_max)
 
     def set_keep_credorledger(
-        self, believer_name: BelieverName, person_name: PersonName, credit_ledger: float
+        self,
+        believer_name: BelieverName,
+        partner_name: PartnerName,
+        credit_ledger: float,
     ):
         set_in_nested_dict(
             x_dict=self.keep_credorledgers,
-            x_keylist=[believer_name, person_name],
+            x_keylist=[believer_name, partner_name],
             x_obj=credit_ledger,
         )
 
     def delete_keep_credorledgers_believer(self, believer_name: BelieverName):
         self.keep_credorledgers.pop(believer_name)
 
-    def get_all_keep_credorledger_person_names(self):
+    def get_all_keep_credorledger_partner_names(self):
         x_set = set()
         for believer_name, believer_dict in self.keep_credorledgers.items():
             if believer_name not in x_set:
                 x_set.add(believer_name)
-            for person_name in believer_dict.keys():
-                if person_name not in x_set:
-                    x_set.add(person_name)
+            for partner_name in believer_dict.keys():
+                if partner_name not in x_set:
+                    x_set.add(partner_name)
         return x_set
 
-    def levy_tax_dues(self, cycleledger: tuple[dict[PersonName, float], float]):
+    def levy_tax_dues(self, cycleledger: tuple[dict[PartnerName, float], float]):
         delete_from_cycleledger = []
         tax_got_total = 0
         for chargeee, chargeee_amount in cycleledger.items():
-            if self.person_has_tax_due(chargeee):
+            if self.partner_has_tax_due(chargeee):
                 excess_chargeer_points, tax_got = self.levy_tax_due(
                     chargeee, chargeee_amount
                 )
@@ -79,45 +82,47 @@ class RiverRun:
             cycleledger.pop(chargeee_to_delete)
         return cycleledger, tax_got_total
 
-    def set_person_tax_due(self, x_person_name: PersonName, tax_due: float):
-        self.tax_dues[x_person_name] = tax_due
+    def set_partner_tax_due(self, x_partner_name: PartnerName, tax_due: float):
+        self.tax_dues[x_partner_name] = tax_due
 
     def tax_dues_unpaid(self) -> bool:
         return len(self.tax_dues) != 0
 
-    def set_tax_dues(self, debtorledger: dict[PersonName, float]):
+    def set_tax_dues(self, debtorledger: dict[PartnerName, float]):
         x_amount = self.hubunit.keep_point_magnitude
         self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
 
-    def person_has_tax_due(self, x_person_name: PersonName) -> bool:
-        return self.tax_dues.get(x_person_name) is not None
+    def partner_has_tax_due(self, x_partner_name: PartnerName) -> bool:
+        return self.tax_dues.get(x_partner_name) is not None
 
-    def get_person_tax_due(self, x_person_name: PersonName) -> float:
-        x_tax_due = self.tax_dues.get(x_person_name)
+    def get_partner_tax_due(self, x_partner_name: PartnerName) -> float:
+        x_tax_due = self.tax_dues.get(x_partner_name)
         return 0 if x_tax_due is None else x_tax_due
 
-    def delete_tax_due(self, x_person_name: PersonName):
-        self.tax_dues.pop(x_person_name)
+    def delete_tax_due(self, x_partner_name: PartnerName):
+        self.tax_dues.pop(x_partner_name)
 
-    def levy_tax_due(self, x_person_name: PersonName, chargeer_points: float) -> float:
-        if self.person_has_tax_due(x_person_name) is False:
+    def levy_tax_due(
+        self, x_partner_name: PartnerName, chargeer_points: float
+    ) -> float:
+        if self.partner_has_tax_due(x_partner_name) is False:
             return chargeer_points, 0
-        x_tax_due = self.get_person_tax_due(x_person_name)
+        x_tax_due = self.get_partner_tax_due(x_partner_name)
         if x_tax_due > chargeer_points:
             left_over_charge = x_tax_due - chargeer_points
-            self.set_person_tax_due(x_person_name, left_over_charge)
-            self.add_person_tax_yield(x_person_name, chargeer_points)
+            self.set_partner_tax_due(x_partner_name, left_over_charge)
+            self.add_partner_tax_yield(x_partner_name, chargeer_points)
             return 0, chargeer_points
         else:
-            self.delete_tax_due(x_person_name)
-            self.add_person_tax_yield(x_person_name, x_tax_due)
+            self.delete_tax_due(x_partner_name)
+            self.add_partner_tax_yield(x_partner_name, x_tax_due)
             return chargeer_points - x_tax_due, x_tax_due
 
-    def get_ledger_dict(self) -> dict[PersonName, float]:
+    def get_ledger_dict(self) -> dict[PartnerName, float]:
         return self.tax_dues
 
-    def set_person_tax_yield(self, x_person_name: PersonName, tax_yield: float):
-        self._tax_yields[x_person_name] = tax_yield
+    def set_partner_tax_yield(self, x_partner_name: PartnerName, tax_yield: float):
+        self._tax_yields[x_partner_name] = tax_yield
 
     def tax_yields_is_empty(self) -> bool:
         return len(self._tax_yields) == 0
@@ -125,52 +130,52 @@ class RiverRun:
     def reset_tax_yields(self):
         self._tax_yields = {}
 
-    def person_has_tax_yield(self, x_person_name: PersonName) -> bool:
-        return self._tax_yields.get(x_person_name) is not None
+    def partner_has_tax_yield(self, x_partner_name: PartnerName) -> bool:
+        return self._tax_yields.get(x_partner_name) is not None
 
-    def get_person_tax_yield(self, x_person_name: PersonName) -> float:
-        x_tax_yield = self._tax_yields.get(x_person_name)
+    def get_partner_tax_yield(self, x_partner_name: PartnerName) -> float:
+        x_tax_yield = self._tax_yields.get(x_partner_name)
         return 0 if x_tax_yield is None else x_tax_yield
 
-    def delete_tax_yield(self, x_person_name: PersonName):
-        self._tax_yields.pop(x_person_name)
+    def delete_tax_yield(self, x_partner_name: PartnerName):
+        self._tax_yields.pop(x_partner_name)
 
-    def add_person_tax_yield(self, x_person_name: PersonName, x_tax_yield: float):
-        if self.person_has_tax_yield(x_person_name):
-            x_tax_yield = self.get_person_tax_yield(x_person_name) + x_tax_yield
-        self.set_person_tax_yield(x_person_name, x_tax_yield)
+    def add_partner_tax_yield(self, x_partner_name: PartnerName, x_tax_yield: float):
+        if self.partner_has_tax_yield(x_partner_name):
+            x_tax_yield = self.get_partner_tax_yield(x_partner_name) + x_tax_yield
+        self.set_partner_tax_yield(x_partner_name, x_tax_yield)
 
-    def get_rivergrade(self, person_name: PersonName) -> RiverGrade:
-        return self._rivergrades.get(person_name)
+    def get_rivergrade(self, partner_name: PartnerName) -> RiverGrade:
+        return self._rivergrades.get(partner_name)
 
     def _rivergrades_is_empty(self) -> bool:
         return self._rivergrades == {}
 
-    def rivergrade_exists(self, person_name: PersonName) -> bool:
-        return self._rivergrades.get(person_name) is not None
+    def rivergrade_exists(self, partner_name: PartnerName) -> bool:
+        return self._rivergrades.get(partner_name) is not None
 
-    def _get_person_grant(self, person_name: PersonName) -> float:
-        return get_0_if_None(self._grants.get(person_name))
+    def _get_partner_grant(self, partner_name: PartnerName) -> float:
+        return get_0_if_None(self._grants.get(partner_name))
 
-    def set_initial_rivergrade(self, person_name: PersonName):
-        x_rivergrade = rivergrade_shop(self.hubunit, person_name, self.number)
+    def set_initial_rivergrade(self, partner_name: PartnerName):
+        x_rivergrade = rivergrade_shop(self.hubunit, partner_name, self.number)
         x_rivergrade.debtor_count = self._debtor_count
         x_rivergrade.credor_count = self._credor_count
-        x_rivergrade.grant_amount = self._get_person_grant(person_name)
-        self._rivergrades[person_name] = x_rivergrade
+        x_rivergrade.grant_amount = self._get_partner_grant(partner_name)
+        self._rivergrades[partner_name] = x_rivergrade
 
     def set_all_initial_rivergrades(self):
         self._rivergrades = {}
-        all_person_names = self.get_all_keep_credorledger_person_names()
-        for person_name in all_person_names:
-            self.set_initial_rivergrade(person_name)
+        all_partner_names = self.get_all_keep_credorledger_partner_names()
+        for partner_name in all_partner_names:
+            self.set_initial_rivergrade(partner_name)
 
     def _set_post_loop_rivergrade_attrs(self):
-        for x_person_name, person_rivergrade in self._rivergrades.items():
-            tax_due_leftover = self.get_person_tax_due(x_person_name)
-            tax_due_paid = self.get_person_tax_yield(x_person_name)
-            person_rivergrade.set_tax_bill_amount(tax_due_paid + tax_due_leftover)
-            person_rivergrade.set_tax_paid_amount(tax_due_paid)
+        for x_partner_name, partner_rivergrade in self._rivergrades.items():
+            tax_due_leftover = self.get_partner_tax_due(x_partner_name)
+            tax_due_paid = self.get_partner_tax_yield(x_partner_name)
+            partner_rivergrade.set_tax_bill_amount(tax_due_paid + tax_due_leftover)
+            partner_rivergrade.set_tax_paid_amount(tax_due_paid)
 
     def calc_metrics(self):
         self._set_debtor_count_credor_count()
@@ -196,9 +201,9 @@ class RiverRun:
         self._set_post_loop_rivergrade_attrs()
 
     def _set_debtor_count_credor_count(self):
-        tax_dues_persons = set(self.tax_dues.keys())
-        tax_yields_persons = set(self._tax_yields.keys())
-        self._debtor_count = len(tax_dues_persons.union(tax_yields_persons))
+        tax_dues_partners = set(self.tax_dues.keys())
+        tax_yields_partners = set(self._tax_yields.keys())
+        self._debtor_count = len(tax_dues_partners.union(tax_yields_partners))
         self._credor_count = len(
             self.keep_credorledgers.get(self.hubunit.believer_name)
         )
@@ -211,14 +216,14 @@ class RiverRun:
             grain_unit=self.hubunit.penny,
         )
 
-    def _save_rivergrade_file(self, person_name: PersonName):
-        rivergrade = self.get_rivergrade(person_name)
-        grade_path = self.hubunit.grade_path(person_name)
+    def _save_rivergrade_file(self, partner_name: PartnerName):
+        rivergrade = self.get_rivergrade(partner_name)
+        grade_path = self.hubunit.grade_path(partner_name)
         save_file(grade_path, None, rivergrade.get_json())
 
     def save_rivergrade_files(self):
-        for rivergrade_person in self._rivergrades.keys():
-            self._save_rivergrade_file(rivergrade_person)
+        for rivergrade_partner in self._rivergrades.keys():
+            self._save_rivergrade_file(rivergrade_partner)
 
     def _cycle_chargeees_vary(self) -> bool:
         return self._cycle_chargeees_prev != self._cycle_chargeees_curr
@@ -237,8 +242,8 @@ class RiverRun:
 def riverrun_shop(
     hubunit: HubUnit,
     number: int = None,
-    keep_credorledgers: dict[BelieverName : dict[PersonName, float]] = None,
-    tax_dues: dict[PersonName, float] = None,
+    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]] = None,
+    tax_dues: dict[PartnerName, float] = None,
     cycle_max: int = None,
 ):
     x_riverun = RiverRun(

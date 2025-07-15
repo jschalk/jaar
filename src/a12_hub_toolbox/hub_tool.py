@@ -150,18 +150,18 @@ def save_arbitrary_believerevent(
     belief_label: str,
     believer_name: str,
     event_int: int,
-    persons: list[list] = None,
+    partners: list[list] = None,
     facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
 ) -> str:
-    persons = get_empty_list_if_None(persons)
+    partners = get_empty_list_if_None(partners)
     facts = get_empty_list_if_None(facts)
     x_believerunit = believerunit_shop(believer_name, belief_label)
-    for person_list in persons:
+    for partner_list in partners:
         try:
-            person_cred_points = person_list[1]
+            partner_cred_points = partner_list[1]
         except Exception:
-            person_cred_points = None
-        x_believerunit.add_personunit(person_list[0], person_cred_points)
+            partner_cred_points = None
+        x_believerunit.add_partnerunit(partner_list[0], partner_cred_points)
     for fact_tup in facts:
         x_rcontext = fact_tup[0]
         x_fstate = fact_tup[1]
@@ -205,11 +205,11 @@ def cellunit_get_from_dir(dirpath: str) -> CellUnit:
         return cellunit_get_from_dict(open_json(cell_json_path))
 
 
-def create_cell_person_mandate_ledger_json(dirpath: str):
+def create_cell_partner_mandate_ledger_json(dirpath: str):
     if cell := cellunit_get_from_dir(dirpath):
-        cell.calc_person_mandate_ledger()
+        cell.calc_partner_mandate_ledger()
         save_json(
-            dirpath, "cell_person_mandate_ledger.json", cell._person_mandate_ledger
+            dirpath, "cell_partner_mandate_ledger.json", cell._partner_mandate_ledger
         )
 
 

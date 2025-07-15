@@ -20,13 +20,13 @@ def test_create_groupunits_metrics_SetsAttrScenario1():
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
-    sue_believerunit.add_personunit(yao_str)
-    yao_personunit = sue_believerunit.get_person(yao_str)
-    yao_personunit.add_membership(yao_str)
+    sue_believerunit.add_partnerunit(yao_str)
+    yao_partnerunit = sue_believerunit.get_partner(yao_str)
+    yao_partnerunit.add_membership(yao_str)
     ohio_str = ";Ohio"
-    yao_personunit.add_membership(ohio_str)
-    yao_yao_membership = yao_personunit.get_membership(yao_str)
-    yao_ohio_membership = yao_personunit.get_membership(ohio_str)
+    yao_partnerunit.add_membership(ohio_str)
+    yao_yao_membership = yao_partnerunit.get_membership(yao_str)
+    yao_ohio_membership = yao_partnerunit.get_membership(ohio_str)
     yao_yao_membership._credor_pool = 66
     yao_yao_membership._debtor_pool = 44
     yao_ohio_membership._credor_pool = 77
@@ -47,20 +47,20 @@ def test_create_groupunits_metrics_SetsAttrScenario1():
     assert yao_groupunit._debtor_pool == 44
 
 
-def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_SetsAttr_scenario0():
+def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_SetsAttr_scenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
     assert sue_believerunit._groupunits == {}
 
     # WHEN
-    sue_believerunit._set_personunit_groupunit_respect_ledgers()
+    sue_believerunit._set_partnerunit_groupunit_respect_ledgers()
 
     # THEN
     assert sue_believerunit._groupunits == {}
 
 
-def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_Clears_groups():
+def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_Clears_groups():
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
@@ -70,36 +70,36 @@ def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_Clears_groups():
     assert sue_believerunit._groupunits != {}
 
     # WHEN
-    sue_believerunit._set_personunit_groupunit_respect_ledgers()
+    sue_believerunit._set_partnerunit_groupunit_respect_ledgers()
 
     # THEN
     assert sue_believerunit._groups != {}
     assert sue_believerunit._groupunits == {}
 
 
-def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_SetsAttr_scenario1():
+def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_SetsAttr_scenario1():
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
-    sue_believerunit.add_personunit(yao_str)
-    yao_personunit = sue_believerunit.get_person(yao_str)
-    yao_personunit.add_membership(yao_str)
-    assert yao_personunit._credor_pool == 0
-    assert yao_personunit._debtor_pool == 0
-    assert yao_personunit.get_membership(yao_str)._credor_pool == 0
-    assert yao_personunit.get_membership(yao_str)._debtor_pool == 0
+    sue_believerunit.add_partnerunit(yao_str)
+    yao_partnerunit = sue_believerunit.get_partner(yao_str)
+    yao_partnerunit.add_membership(yao_str)
+    assert yao_partnerunit._credor_pool == 0
+    assert yao_partnerunit._debtor_pool == 0
+    assert yao_partnerunit.get_membership(yao_str)._credor_pool == 0
+    assert yao_partnerunit.get_membership(yao_str)._debtor_pool == 0
     # assert sue_believerunit._groupunits == {}
 
     # WHEN
-    sue_believerunit._set_personunit_groupunit_respect_ledgers()
+    sue_believerunit._set_partnerunit_groupunit_respect_ledgers()
 
     # THEN
-    assert yao_personunit._credor_pool != 0
-    assert yao_personunit._debtor_pool != 0
-    assert yao_personunit._credor_pool == sue_believerunit.credor_respect
-    assert yao_personunit._debtor_pool == sue_believerunit.debtor_respect
-    yao_membership = yao_personunit.get_membership(yao_str)
+    assert yao_partnerunit._credor_pool != 0
+    assert yao_partnerunit._debtor_pool != 0
+    assert yao_partnerunit._credor_pool == sue_believerunit.credor_respect
+    assert yao_partnerunit._debtor_pool == sue_believerunit.debtor_respect
+    yao_membership = yao_partnerunit.get_membership(yao_str)
     assert yao_membership._credor_pool != 0
     assert yao_membership._debtor_pool != 0
     assert yao_membership._credor_pool == sue_believerunit.credor_respect
@@ -111,37 +111,37 @@ def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_SetsAttr_scenario
     assert yao_membership == groupunit_yao_membership
 
 
-def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_SetsAttr_scenario2():
+def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_SetsAttr_scenario2():
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
-    sue_believerunit.add_personunit(yao_str)
-    yao_personunit = sue_believerunit.get_person(yao_str)
-    yao_personunit.add_membership(yao_str, 1, 4)
+    sue_believerunit.add_partnerunit(yao_str)
+    yao_partnerunit = sue_believerunit.get_partner(yao_str)
+    yao_partnerunit.add_membership(yao_str, 1, 4)
     ohio_str = ";Ohio"
-    yao_personunit.add_membership(ohio_str, 3, 1)
-    assert yao_personunit._credor_pool == 0
-    assert yao_personunit._debtor_pool == 0
-    assert yao_personunit.get_membership(yao_str)._credor_pool == 0
-    assert yao_personunit.get_membership(yao_str)._debtor_pool == 0
+    yao_partnerunit.add_membership(ohio_str, 3, 1)
+    assert yao_partnerunit._credor_pool == 0
+    assert yao_partnerunit._debtor_pool == 0
+    assert yao_partnerunit.get_membership(yao_str)._credor_pool == 0
+    assert yao_partnerunit.get_membership(yao_str)._debtor_pool == 0
 
     # WHEN
-    sue_believerunit._set_personunit_groupunit_respect_ledgers()
+    sue_believerunit._set_partnerunit_groupunit_respect_ledgers()
 
     # THEN
-    assert sue_believerunit.get_person(yao_str)._credor_pool != 0
-    assert sue_believerunit.get_person(yao_str)._debtor_pool != 0
-    assert yao_personunit.get_membership(yao_str)._credor_pool != 0
-    assert yao_personunit.get_membership(yao_str)._debtor_pool != 0
-    yao_yao_membership = yao_personunit.get_membership(yao_str)
+    assert sue_believerunit.get_partner(yao_str)._credor_pool != 0
+    assert sue_believerunit.get_partner(yao_str)._debtor_pool != 0
+    assert yao_partnerunit.get_membership(yao_str)._credor_pool != 0
+    assert yao_partnerunit.get_membership(yao_str)._debtor_pool != 0
+    yao_yao_membership = yao_partnerunit.get_membership(yao_str)
     assert yao_yao_membership._credor_pool != 0
     assert yao_yao_membership._debtor_pool != 0
     assert yao_yao_membership._credor_pool == sue_believerunit.credor_respect * 0.25
     assert yao_yao_membership._debtor_pool == sue_believerunit.debtor_respect * 0.8
     assert yao_yao_membership._credor_pool == 250000000
     assert yao_yao_membership._debtor_pool == 800000000
-    yao_ohio_membership = yao_personunit.get_membership(ohio_str)
+    yao_ohio_membership = yao_partnerunit.get_membership(ohio_str)
     assert yao_ohio_membership._credor_pool != 0
     assert yao_ohio_membership._debtor_pool != 0
     assert yao_ohio_membership._credor_pool == sue_believerunit.credor_respect * 0.75
@@ -153,48 +153,48 @@ def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_SetsAttr_scenario
     assert len(ohio_groupunit._memberships) == 1
 
 
-def test_BelieverUnit_set_personunit_groupunit_respect_ledgers_ResetPersonUnitsAttrs():
+def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_ResetPartnerUnitsAttrs():
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    sue_believerunit.add_personunit(yao_str, 55, 55)
-    sue_believerunit.add_personunit(zia_str, 55, 55)
-    yao_personunit = sue_believerunit.get_person(yao_str)
-    zia_personunit = sue_believerunit.get_person(zia_str)
-    yao_personunit.add_fund_give_take(0.5, 0.6, 0.1, 0.22)
-    zia_personunit.add_fund_give_take(0.2, 0.1, 0.1, 0.22)
+    sue_believerunit.add_partnerunit(yao_str, 55, 55)
+    sue_believerunit.add_partnerunit(zia_str, 55, 55)
+    yao_partnerunit = sue_believerunit.get_partner(yao_str)
+    zia_partnerunit = sue_believerunit.get_partner(zia_str)
+    yao_partnerunit.add_fund_give_take(0.5, 0.6, 0.1, 0.22)
+    zia_partnerunit.add_fund_give_take(0.2, 0.1, 0.1, 0.22)
     zia_1 = 0.8
     zia_2 = 0.5
     zia_3 = 200
     zia_4 = 140
-    zia_personunit.set_fund_agenda_ratio_give_take(
+    zia_partnerunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=zia_1,
         fund_agenda_ratio_take_sum=zia_2,
-        personunits_person_cred_points_sum=zia_3,
-        personunits_person_debt_points_sum=zia_4,
+        partnerunits_partner_cred_points_sum=zia_3,
+        partnerunits_partner_debt_points_sum=zia_4,
     )
     yao_1 = 0.2
     yao_2 = 0.5
     yao_3 = 204
     yao_4 = 144
-    yao_personunit.set_fund_agenda_ratio_give_take(
+    yao_partnerunit.set_fund_agenda_ratio_give_take(
         fund_agenda_ratio_give_sum=yao_1,
         fund_agenda_ratio_take_sum=yao_2,
-        personunits_person_cred_points_sum=yao_3,
-        personunits_person_debt_points_sum=yao_4,
+        partnerunits_partner_cred_points_sum=yao_3,
+        partnerunits_partner_debt_points_sum=yao_4,
     )
-    assert zia_personunit._fund_agenda_ratio_give == 0.125
-    assert zia_personunit._fund_agenda_ratio_take == 0.44
-    assert yao_personunit._fund_agenda_ratio_give == 0.5
-    assert yao_personunit._fund_agenda_ratio_take == 0.44
+    assert zia_partnerunit._fund_agenda_ratio_give == 0.125
+    assert zia_partnerunit._fund_agenda_ratio_take == 0.44
+    assert yao_partnerunit._fund_agenda_ratio_give == 0.5
+    assert yao_partnerunit._fund_agenda_ratio_take == 0.44
 
     # WHEN
-    sue_believerunit._set_personunit_groupunit_respect_ledgers()
+    sue_believerunit._set_partnerunit_groupunit_respect_ledgers()
 
     # THEN
-    assert zia_personunit._fund_agenda_ratio_give == 0
-    assert zia_personunit._fund_agenda_ratio_take == 0
-    assert yao_personunit._fund_agenda_ratio_give == 0
-    assert yao_personunit._fund_agenda_ratio_take == 0
+    assert zia_partnerunit._fund_agenda_ratio_give == 0
+    assert zia_partnerunit._fund_agenda_ratio_take == 0
+    assert yao_partnerunit._fund_agenda_ratio_give == 0
+    assert yao_partnerunit._fund_agenda_ratio_take == 0

@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import RopeTerm, to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.group import awardline_shop, awardlink_shop
-from src.a03_group_logic.person import personunit_shop
+from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
@@ -302,10 +302,10 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massSc
     assert sue_believer.get_plan_obj(dirty_rope)._fund_ratio == 0
 
 
-def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNoMassDistributeFundsToPersonUnits_scenario0():
+def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNoMassDistributeFundsToPartnerUnits_scenario0():
     sue_believerunit = believerunit_shop("Sue")
     yao_str = "Yao"
-    sue_believerunit.add_personunit(yao_str)
+    sue_believerunit.add_partnerunit(yao_str)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
     casa_plan = planunit_shop(casa_str, mass=1)
@@ -340,8 +340,8 @@ def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNoMassDist
     assert sue_believerunit.get_groupunit(yao_str) is None
 
     assert not sue_believerunit._offtrack_fund
-    assert sue_believerunit.get_person(yao_str)._fund_give == 0
-    assert sue_believerunit.get_person(yao_str)._fund_take == 0
+    assert sue_believerunit.get_partner(yao_str)._fund_give == 0
+    assert sue_believerunit.get_partner(yao_str)._fund_take == 0
 
     # WHEN
     sue_believerunit.settle_believer()
@@ -358,8 +358,8 @@ def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNoMassDist
     assert sue_believerunit.get_groupunit(yao_str)._fund_take == 0
 
     assert sue_believerunit._offtrack_fund == clean_fund_ratio * default_fund_pool()
-    assert sue_believerunit.get_person(yao_str)._fund_give == default_fund_pool()
-    assert sue_believerunit.get_person(yao_str)._fund_take == default_fund_pool()
+    assert sue_believerunit.get_partner(yao_str)._fund_give == default_fund_pool()
+    assert sue_believerunit.get_partner(yao_str)._fund_take == default_fund_pool()
 
 
 def test_BelieverUnit_settle_believer_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
@@ -372,7 +372,7 @@ def test_BelieverUnit_settle_believer_TreeTraverseSetsAwardLine_fundFromRootCorr
     wk_str = "wkdays"
     nation_str = "nation"
     sue_awardlink = awardlink_shop(awardee_title=sue_str)
-    sue_believer.add_personunit(person_name=sue_str)
+    sue_believer.add_partnerunit(partner_name=sue_str)
     sue_believer.planroot.set_awardlink(awardlink=sue_awardlink)
     # plan tree has awardlines
     assert sue_believer.planroot._awardheirs.get(sue_str) is None
@@ -424,7 +424,7 @@ def test_BelieverUnit_settle_believer_TreeTraverseSets_awardlines_ToRootPlanUnit
     sue_believer = get_believerunit_with_4_levels()
     sue_believer.settle_believer()
     sue_str = "Sue"
-    sue_believer.add_personunit(sue_str)
+    sue_believer.add_partnerunit(sue_str)
     casa_rope = sue_believer.make_l1_rope("casa")
     sue_believer.get_plan_obj(casa_rope).set_awardlink(
         awardlink_shop(awardee_title=sue_str)
@@ -455,9 +455,9 @@ def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_g
     yao_str = "Yao"
     zia_str = "Zia"
     xio_str = "Xio"
-    sue_believer.set_personunit(personunit_shop(yao_str))
-    sue_believer.set_personunit(personunit_shop(zia_str))
-    sue_believer.set_personunit(personunit_shop(xio_str))
+    sue_believer.set_partnerunit(partnerunit_shop(yao_str))
+    sue_believer.set_partnerunit(partnerunit_shop(zia_str))
+    sue_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
@@ -466,7 +466,7 @@ def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_g
     x_planroot.set_awardlink(awardlink=yao_awardlink)
     x_planroot.set_awardlink(awardlink=zia_awardlink)
     x_planroot.set_awardlink(awardlink=xio_awardlink)
-    assert len(sue_believer.get_personunit_group_titles_dict()) == 3
+    assert len(sue_believer.get_partnerunit_group_titles_dict()) == 3
 
     # WHEN
     sue_believer.settle_believer()
@@ -489,11 +489,11 @@ def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_g
     assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
-    sue_believer.set_personunit(personunit_shop(sue_str))
+    sue_believer.set_partnerunit(partnerunit_shop(sue_str))
     sue_awardlink = awardlink_shop(sue_str, give_force=37)
     x_planroot.set_awardlink(sue_awardlink)
     assert len(x_planroot.awardlinks) == 4
-    assert len(sue_believer.get_personunit_group_titles_dict()) == 4
+    assert len(sue_believer.get_partnerunit_group_titles_dict()) == 4
 
     # WHEN
     sue_believer.settle_believer()
@@ -530,9 +530,9 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkSetsGroupUnit_fund_give
     yao_str = "Yao"
     zia_str = "Zia"
     xio_str = "Xio"
-    x_believer.set_personunit(personunit_shop(yao_str))
-    x_believer.set_personunit(personunit_shop(zia_str))
-    x_believer.set_personunit(personunit_shop(xio_str))
+    x_believer.set_partnerunit(partnerunit_shop(yao_str))
+    x_believer.set_partnerunit(partnerunit_shop(zia_str))
+    x_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
@@ -540,7 +540,7 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkSetsGroupUnit_fund_give
     swim_plan.set_awardlink(yao_awardlink)
     swim_plan.set_awardlink(zia_awardlink)
     swim_plan.set_awardlink(xio_awardlink)
-    assert len(x_believer.get_personunit_group_titles_dict()) == 3
+    assert len(x_believer.get_partnerunit_group_titles_dict()) == 3
 
     # WHEN
     x_believer.settle_believer()
@@ -576,9 +576,9 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsGroup_fund_give_
     yao_str = "Yao"
     zia_str = "Zia"
     xio_str = "Xio"
-    x_believer.set_personunit(personunit_shop(yao_str))
-    x_believer.set_personunit(personunit_shop(zia_str))
-    # x_believer.set_personunit(personunit_shop(xio_str))
+    x_believer.set_partnerunit(partnerunit_shop(yao_str))
+    x_believer.set_partnerunit(partnerunit_shop(zia_str))
+    # x_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
@@ -586,7 +586,7 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsGroup_fund_give_
     swim_plan.set_awardlink(yao_awardlink)
     swim_plan.set_awardlink(zia_awardlink)
     swim_plan.set_awardlink(xio_awardlink)
-    assert len(x_believer.get_personunit_group_titles_dict()) == 2
+    assert len(x_believer.get_partnerunit_group_titles_dict()) == 2
 
     # WHEN
     x_believer.settle_believer()
@@ -595,7 +595,7 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsGroup_fund_give_
     yao_groupunit = x_believer.get_groupunit(yao_str)
     zia_groupunit = x_believer.get_groupunit(zia_str)
     xio_groupunit = x_believer.get_groupunit(xio_str)
-    assert len(x_believer.get_personunit_group_titles_dict()) != len(
+    assert len(x_believer.get_partnerunit_group_titles_dict()) != len(
         x_believer._groupunits
     )
     assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
@@ -625,9 +625,9 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGr
     yao_str = "Yao"
     zia_str = "Zia"
     xio_str = "Xio"
-    x_believer.set_personunit(personunit_shop(yao_str))
-    x_believer.set_personunit(personunit_shop(zia_str))
-    x_believer.set_personunit(personunit_shop(xio_str))
+    x_believer.set_partnerunit(partnerunit_shop(yao_str))
+    x_believer.set_partnerunit(partnerunit_shop(zia_str))
+    x_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
@@ -690,9 +690,9 @@ def test_BelieverUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBelieve
     yao_str = "Yao"
     zia_str = "Zia"
     Xio_str = "Xio"
-    sue_believer.set_personunit(personunit_shop(yao_str))
-    sue_believer.set_personunit(personunit_shop(zia_str))
-    sue_believer.set_personunit(personunit_shop(Xio_str))
+    sue_believer.set_partnerunit(partnerunit_shop(yao_str))
+    sue_believer.set_partnerunit(partnerunit_shop(zia_str))
+    sue_believer.set_partnerunit(partnerunit_shop(Xio_str))
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     Xio_awardlink = awardlink_shop(Xio_str, give_force=10)
@@ -748,9 +748,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt(
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_believer.set_personunit(personunit_shop(sue_str))
-    yao_believer.set_personunit(personunit_shop(bob_str))
-    yao_believer.set_personunit(personunit_shop(zia_str))
+    yao_believer.set_partnerunit(partnerunit_shop(sue_str))
+    yao_believer.set_partnerunit(partnerunit_shop(bob_str))
+    yao_believer.set_partnerunit(partnerunit_shop(zia_str))
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
@@ -759,12 +759,12 @@ def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt(
     yao_believer.edit_plan_attr(root_rope, awardlink=bob_awardlink)
     yao_believer.edit_plan_attr(root_rope, awardlink=zia_awardlink)
 
-    sue_personunit = yao_believer.get_person(sue_str)
-    bob_personunit = yao_believer.get_person(bob_str)
-    zia_personunit = yao_believer.get_person(zia_str)
-    sue_sue_membership = sue_personunit.get_membership(sue_str)
-    bob_bob_membership = bob_personunit.get_membership(bob_str)
-    zia_zia_membership = zia_personunit.get_membership(zia_str)
+    sue_partnerunit = yao_believer.get_partner(sue_str)
+    bob_partnerunit = yao_believer.get_partner(bob_str)
+    zia_partnerunit = yao_believer.get_partner(zia_str)
+    sue_sue_membership = sue_partnerunit.get_membership(sue_str)
+    bob_bob_membership = bob_partnerunit.get_membership(bob_str)
+    zia_zia_membership = zia_partnerunit.get_membership(zia_str)
     assert sue_sue_membership._fund_give is None
     assert sue_sue_membership._fund_take is None
     assert bob_bob_membership._fund_give is None
@@ -798,7 +798,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt(
 
     # ESTABLISH another task, check metrics are as expected
     xio_str = "Xio"
-    yao_believer.set_personunit(personunit_shop(xio_str))
+    yao_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_believer.planroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
 
     # WHEN
@@ -807,12 +807,12 @@ def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt(
     # THEN
     xio_groupunit = yao_believer.get_groupunit(xio_str)
     xio_xio_membership = xio_groupunit.get_membership(xio_str)
-    sue_personunit = yao_believer.get_person(sue_str)
-    bob_personunit = yao_believer.get_person(bob_str)
-    zia_personunit = yao_believer.get_person(zia_str)
-    sue_sue_membership = sue_personunit.get_membership(sue_str)
-    bob_bob_membership = bob_personunit.get_membership(bob_str)
-    zia_zia_membership = zia_personunit.get_membership(zia_str)
+    sue_partnerunit = yao_believer.get_partner(sue_str)
+    bob_partnerunit = yao_believer.get_partner(bob_str)
+    zia_partnerunit = yao_believer.get_partner(zia_str)
+    sue_sue_membership = sue_partnerunit.get_membership(sue_str)
+    bob_bob_membership = bob_partnerunit.get_membership(bob_str)
+    zia_zia_membership = zia_partnerunit.get_membership(zia_str)
     assert sue_sue_membership._fund_give != 0.25 * default_fund_pool()
     assert sue_sue_membership._fund_take != 0.8 * default_fund_pool()
     assert bob_bob_membership._fund_give != 0.25 * default_fund_pool()
@@ -839,7 +839,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt(
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPersonUnitBeliever_fund():
+def test_BelieverUnit_settle_believer_CorrectlySetsPartnerUnitBeliever_fund():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     swim_str = "swim"
@@ -848,9 +848,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPersonUnitBeliever_fund():
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_believer.set_personunit(personunit_shop(sue_str))
-    yao_believer.set_personunit(personunit_shop(bob_str))
-    yao_believer.set_personunit(personunit_shop(zia_str))
+    yao_believer.set_partnerunit(partnerunit_shop(sue_str))
+    yao_believer.set_partnerunit(partnerunit_shop(bob_str))
+    yao_believer.set_partnerunit(partnerunit_shop(zia_str))
     bl_sue = awardlink_shop(sue_str, 20, take_force=40)
     bl_bob = awardlink_shop(bob_str, 10, take_force=5)
     bl_zia = awardlink_shop(zia_str, 10, take_force=5)
@@ -858,88 +858,88 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPersonUnitBeliever_fund():
     yao_believer.get_plan_obj(swim_rope).set_awardlink(bl_bob)
     yao_believer.get_plan_obj(swim_rope).set_awardlink(bl_zia)
 
-    sue_personunit = yao_believer.get_person(sue_str)
-    bob_personunit = yao_believer.get_person(bob_str)
-    zia_personunit = yao_believer.get_person(zia_str)
+    sue_partnerunit = yao_believer.get_partner(sue_str)
+    bob_partnerunit = yao_believer.get_partner(bob_str)
+    zia_partnerunit = yao_believer.get_partner(zia_str)
 
-    assert sue_personunit._fund_give == 0
-    assert sue_personunit._fund_take == 0
-    assert bob_personunit._fund_give == 0
-    assert bob_personunit._fund_take == 0
-    assert zia_personunit._fund_give == 0
-    assert zia_personunit._fund_take == 0
+    assert sue_partnerunit._fund_give == 0
+    assert sue_partnerunit._fund_take == 0
+    assert bob_partnerunit._fund_give == 0
+    assert bob_partnerunit._fund_take == 0
+    assert zia_partnerunit._fund_give == 0
+    assert zia_partnerunit._fund_take == 0
 
     # WHEN
     yao_believer.settle_believer()
 
     # THEN
-    assert sue_personunit._fund_give == 0.5 * default_fund_pool()
-    assert sue_personunit._fund_take == 0.8 * default_fund_pool()
-    assert bob_personunit._fund_give == 0.25 * default_fund_pool()
-    assert bob_personunit._fund_take == 0.1 * default_fund_pool()
-    assert zia_personunit._fund_give == 0.25 * default_fund_pool()
-    assert zia_personunit._fund_take == 0.1 * default_fund_pool()
+    assert sue_partnerunit._fund_give == 0.5 * default_fund_pool()
+    assert sue_partnerunit._fund_take == 0.8 * default_fund_pool()
+    assert bob_partnerunit._fund_give == 0.25 * default_fund_pool()
+    assert bob_partnerunit._fund_take == 0.1 * default_fund_pool()
+    assert zia_partnerunit._fund_give == 0.25 * default_fund_pool()
+    assert zia_partnerunit._fund_take == 0.1 * default_fund_pool()
 
     assert (
-        sue_personunit._fund_give
-        + bob_personunit._fund_give
-        + zia_personunit._fund_give
+        sue_partnerunit._fund_give
+        + bob_partnerunit._fund_give
+        + zia_partnerunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_personunit._fund_take
-        + bob_personunit._fund_take
-        + zia_personunit._fund_take
+        sue_partnerunit._fund_take
+        + bob_partnerunit._fund_take
+        + zia_partnerunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
     # WHEN another task, check metrics are as expected
     xio_str = "Xio"
-    yao_believer.set_personunit(personunit_shop(xio_str))
+    yao_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_believer.planroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))
     yao_believer.settle_believer()
 
     # THEN
-    xio_personunit = yao_believer.get_person(xio_str)
+    xio_partnerunit = yao_believer.get_partner(xio_str)
 
-    assert sue_personunit._fund_give != 0.5 * default_fund_pool()
-    assert sue_personunit._fund_take != 0.8 * default_fund_pool()
-    assert bob_personunit._fund_give != 0.25 * default_fund_pool()
-    assert bob_personunit._fund_take != 0.1 * default_fund_pool()
-    assert zia_personunit._fund_give != 0.25 * default_fund_pool()
-    assert zia_personunit._fund_take != 0.1 * default_fund_pool()
-    assert xio_personunit._fund_give is not None
-    assert xio_personunit._fund_take is not None
+    assert sue_partnerunit._fund_give != 0.5 * default_fund_pool()
+    assert sue_partnerunit._fund_take != 0.8 * default_fund_pool()
+    assert bob_partnerunit._fund_give != 0.25 * default_fund_pool()
+    assert bob_partnerunit._fund_take != 0.1 * default_fund_pool()
+    assert zia_partnerunit._fund_give != 0.25 * default_fund_pool()
+    assert zia_partnerunit._fund_take != 0.1 * default_fund_pool()
+    assert xio_partnerunit._fund_give is not None
+    assert xio_partnerunit._fund_take is not None
 
-    sum_personunit_fund_give = (
-        sue_personunit._fund_give
-        + bob_personunit._fund_give
-        + zia_personunit._fund_give
+    sum_partnerunit_fund_give = (
+        sue_partnerunit._fund_give
+        + bob_partnerunit._fund_give
+        + zia_partnerunit._fund_give
     )
-    assert sum_personunit_fund_give < 1.0 * default_fund_pool()
+    assert sum_partnerunit_fund_give < 1.0 * default_fund_pool()
     assert (
-        sue_personunit._fund_give
-        + bob_personunit._fund_give
-        + zia_personunit._fund_give
-        + xio_personunit._fund_give
+        sue_partnerunit._fund_give
+        + bob_partnerunit._fund_give
+        + zia_partnerunit._fund_give
+        + xio_partnerunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_personunit._fund_take
-        + bob_personunit._fund_take
-        + zia_personunit._fund_take
+        sue_partnerunit._fund_take
+        + bob_partnerunit._fund_take
+        + zia_partnerunit._fund_take
         < 1.0 * default_fund_pool()
     )
     assert (
-        sue_personunit._fund_take
-        + bob_personunit._fund_take
-        + zia_personunit._fund_take
-        + xio_personunit._fund_take
+        sue_partnerunit._fund_take
+        + bob_partnerunit._fund_take
+        + zia_partnerunit._fund_take
+        + xio_partnerunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPartGroupedLWPersonUnitBeliever_fund():
+def test_BelieverUnit_settle_believer_CorrectlySetsPartGroupedLWPartnerUnitBeliever_fund():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     swim_str = "swim"
@@ -948,9 +948,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPartGroupedLWPersonUnitBeliev
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_believer.set_personunit(personunit_shop(sue_str))
-    yao_believer.set_personunit(personunit_shop(bob_str))
-    yao_believer.set_personunit(personunit_shop(zia_str))
+    yao_believer.set_partnerunit(partnerunit_shop(sue_str))
+    yao_believer.set_partnerunit(partnerunit_shop(bob_str))
+    yao_believer.set_partnerunit(partnerunit_shop(zia_str))
     sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
     bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
     zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
@@ -985,32 +985,32 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPartGroupedLWPersonUnitBeliev
         == 0.25 * default_fund_pool()
     )
 
-    sue_personunit = yao_believer.get_person(sue_str)
-    bob_personunit = yao_believer.get_person(bob_str)
-    zia_personunit = yao_believer.get_person(zia_str)
+    sue_partnerunit = yao_believer.get_partner(sue_str)
+    bob_partnerunit = yao_believer.get_partner(bob_str)
+    zia_partnerunit = yao_believer.get_partner(zia_str)
 
-    assert sue_personunit._fund_give == 0.375 * default_fund_pool()
-    assert sue_personunit._fund_take == 0.45 * default_fund_pool()
-    assert bob_personunit._fund_give == 0.3125 * default_fund_pool()
-    assert bob_personunit._fund_take == 0.275 * default_fund_pool()
-    assert zia_personunit._fund_give == 0.3125 * default_fund_pool()
-    assert zia_personunit._fund_take == 0.275 * default_fund_pool()
+    assert sue_partnerunit._fund_give == 0.375 * default_fund_pool()
+    assert sue_partnerunit._fund_take == 0.45 * default_fund_pool()
+    assert bob_partnerunit._fund_give == 0.3125 * default_fund_pool()
+    assert bob_partnerunit._fund_take == 0.275 * default_fund_pool()
+    assert zia_partnerunit._fund_give == 0.3125 * default_fund_pool()
+    assert zia_partnerunit._fund_take == 0.275 * default_fund_pool()
 
     assert (
-        sue_personunit._fund_give
-        + bob_personunit._fund_give
-        + zia_personunit._fund_give
+        sue_partnerunit._fund_give
+        + bob_partnerunit._fund_give
+        + zia_partnerunit._fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_personunit._fund_take
-        + bob_personunit._fund_take
-        + zia_personunit._fund_take
+        sue_partnerunit._fund_take
+        + bob_partnerunit._fund_take
+        + zia_partnerunit._fund_take
         == 1.0 * default_fund_pool()
     )
 
 
-def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsPerson_fund_give_fund_take():
+def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsPartner_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     bob_believer = believerunit_shop(bob_str)
@@ -1021,9 +1021,9 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsPerson_fund_give
     yao_str = "Yao"
     zia_str = "Zia"
     xio_str = "Xio"
-    bob_believer.set_personunit(personunit_shop(yao_str))
-    bob_believer.set_personunit(personunit_shop(zia_str))
-    # bob_believer.set_personunit(personunit_shop(xio_str))
+    bob_believer.set_partnerunit(partnerunit_shop(yao_str))
+    bob_believer.set_partnerunit(partnerunit_shop(zia_str))
+    # bob_believer.set_partnerunit(partnerunit_shop(xio_str))
     yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
     zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
     xio_awardlink = awardlink_shop(xio_str, give_force=10)
@@ -1031,72 +1031,72 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsPerson_fund_give
     swim_plan.set_awardlink(yao_awardlink)
     swim_plan.set_awardlink(zia_awardlink)
     swim_plan.set_awardlink(xio_awardlink)
-    assert len(bob_believer.get_personunit_group_titles_dict()) == 2
+    assert len(bob_believer.get_partnerunit_group_titles_dict()) == 2
 
     # WHEN
     bob_believer.settle_believer()
 
     # THEN
-    assert len(bob_believer.get_personunit_group_titles_dict()) != len(
+    assert len(bob_believer.get_partnerunit_group_titles_dict()) != len(
         bob_believer._groupunits
     )
-    assert not bob_believer.person_exists(xio_str)
-    yao_personunit = bob_believer.get_person(yao_str)
-    zia_personunit = bob_believer.get_person(zia_str)
-    personunit_fund_give_sum = yao_personunit._fund_give + zia_personunit._fund_give
-    personunit_fund_take_sum = yao_personunit._fund_take + zia_personunit._fund_take
-    assert personunit_fund_give_sum == default_fund_pool()
-    assert personunit_fund_take_sum == default_fund_pool()
+    assert not bob_believer.partner_exists(xio_str)
+    yao_partnerunit = bob_believer.get_partner(yao_str)
+    zia_partnerunit = bob_believer.get_partner(zia_str)
+    partnerunit_fund_give_sum = yao_partnerunit._fund_give + zia_partnerunit._fund_give
+    partnerunit_fund_take_sum = yao_partnerunit._fund_take + zia_partnerunit._fund_take
+    assert partnerunit_fund_give_sum == default_fund_pool()
+    assert partnerunit_fund_take_sum == default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPersonUnit_fund_give_fund_take():
+def test_BelieverUnit_settle_believer_CorrectlySetsPartnerUnit_fund_give_fund_take():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     yao_believer.set_l1_plan(planunit_shop("swim"))
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    yao_believer.set_personunit(personunit_shop(sue_str, 8))
-    yao_believer.set_personunit(personunit_shop(bob_str))
-    yao_believer.set_personunit(personunit_shop(zia_str))
-    sue_personunit = yao_believer.get_person(sue_str)
-    bob_personunit = yao_believer.get_person(bob_str)
-    zia_personunit = yao_believer.get_person(zia_str)
-    assert sue_personunit._fund_give == 0
-    assert sue_personunit._fund_take == 0
-    assert bob_personunit._fund_give == 0
-    assert bob_personunit._fund_take == 0
-    assert zia_personunit._fund_give == 0
-    assert zia_personunit._fund_take == 0
+    yao_believer.set_partnerunit(partnerunit_shop(sue_str, 8))
+    yao_believer.set_partnerunit(partnerunit_shop(bob_str))
+    yao_believer.set_partnerunit(partnerunit_shop(zia_str))
+    sue_partnerunit = yao_believer.get_partner(sue_str)
+    bob_partnerunit = yao_believer.get_partner(bob_str)
+    zia_partnerunit = yao_believer.get_partner(zia_str)
+    assert sue_partnerunit._fund_give == 0
+    assert sue_partnerunit._fund_take == 0
+    assert bob_partnerunit._fund_give == 0
+    assert bob_partnerunit._fund_take == 0
+    assert zia_partnerunit._fund_give == 0
+    assert zia_partnerunit._fund_take == 0
 
     # WHEN
     yao_believer.settle_believer()
 
     # THEN
     fund_give_sum = (
-        sue_personunit._fund_give
-        + bob_personunit._fund_give
-        + zia_personunit._fund_give
+        sue_partnerunit._fund_give
+        + bob_partnerunit._fund_give
+        + zia_partnerunit._fund_give
     )
     assert fund_give_sum == 1.0 * default_fund_pool()
     fund_take_sum = (
-        sue_personunit._fund_take
-        + bob_personunit._fund_take
-        + zia_personunit._fund_take
+        sue_partnerunit._fund_take
+        + bob_partnerunit._fund_take
+        + zia_partnerunit._fund_take
     )
     assert fund_take_sum == 1.0 * default_fund_pool()
 
 
-def clear_all_personunits_groupunits_fund_agenda_give_take(x_believer: BelieverUnit):
+def clear_all_partnerunits_groupunits_fund_agenda_give_take(x_believer: BelieverUnit):
     # delete believer_agenda_debt and believer_agenda_cred
     for groupunit_x in x_believer._groupunits.values():
         groupunit_x.clear_fund_give_take()
-        # for membership_x in groupunit_x._persons.values():
-        #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.person_debt_points=} {membership__fund_take:t:.6f} {membership_x.} ")
+        # for membership_x in groupunit_x._partners.values():
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.partner_debt_points=} {membership__fund_take:t:.6f} {membership_x.} ")
 
     # delete believer_agenda_debt and believer_agenda_cred
-    for x_personunit in x_believer.persons.values():
-        x_personunit.clear_fund_give_take()
+    for x_partnerunit in x_believer.partners.values():
+        x_partnerunit.clear_fund_give_take()
 
 
 @dataclass
@@ -1125,11 +1125,11 @@ class AcclabelendaMetrics:
     sum_agenda_ratio_debt: float = 0
 
     def set_sums(self, x_believer: BelieverUnit):
-        for personunit in x_believer.persons.values():
-            self.sum_agenda_cred += personunit._fund_agenda_give
-            self.sum_agenda_debt += personunit._fund_agenda_take
-            self.sum_agenda_ratio_cred += personunit._fund_agenda_ratio_give
-            self.sum_agenda_ratio_debt += personunit._fund_agenda_ratio_take
+        for partnerunit in x_believer.partners.values():
+            self.sum_agenda_cred += partnerunit._fund_agenda_give
+            self.sum_agenda_debt += partnerunit._fund_agenda_take
+            self.sum_agenda_ratio_cred += partnerunit._fund_agenda_ratio_give
+            self.sum_agenda_ratio_debt += partnerunit._fund_agenda_ratio_take
 
 
 @dataclass
@@ -1154,7 +1154,7 @@ class AwardAgendaMetrics:
 def test_BelieverUnit_agenda_cred_debt_IsCorrectlySet():
     # ESTABLISH
     yao_believer = believerunit_v001_with_large_agenda()
-    clear_all_personunits_groupunits_fund_agenda_give_take(yao_believer)
+    clear_all_partnerunits_groupunits_fund_agenda_give_take(yao_believer)
 
     # TEST believer_agenda_debt and believer_agenda_cred are empty
     x_groupagendametrics = GroupAgendaMetrics()
@@ -1176,8 +1176,8 @@ def test_BelieverUnit_agenda_cred_debt_IsCorrectlySet():
     agenda_dict = yao_believer.get_agenda_dict()
     # for plan_rope in yao_believer._plan_dict.keys():
     #     print(f"{plan_rope=}")
-    # for x_person in yao_believer.persons.values():
-    #     for x_membership in x_person._memberships.values():
+    # for x_partner in yao_believer.partners.values():
+    #     for x_membership in x_partner._memberships.values():
     #         print(f"{x_membership.group_title=}")
 
     # THEN
@@ -1223,7 +1223,7 @@ def test_BelieverUnit_agenda_cred_debt_IsCorrectlySet():
         x_groupagendametrics.sum_groupunit_give,
     )
 
-    assert all_personunits_have_legitimate_values(yao_believer)
+    assert all_partnerunits_have_legitimate_values(yao_believer)
 
     x_acclabelendametrics = AcclabelendaMetrics()
     x_acclabelendametrics.set_sums(yao_believer)
@@ -1238,23 +1238,23 @@ def test_BelieverUnit_agenda_cred_debt_IsCorrectlySet():
     assert are_equal(x_acclabelendametrics.sum_agenda_ratio_cred, 1)
     assert are_equal(x_acclabelendametrics.sum_agenda_ratio_debt, 1)
 
-    # personunit_fund_give_sum = 0.0
-    # personunit_fund_take_sum = 0.0
+    # partnerunit_fund_give_sum = 0.0
+    # partnerunit_fund_take_sum = 0.0
 
-    # assert personunit_fund_give_sum == 1.0
-    # assert personunit_fund_take_sum > 0.9999999
-    # assert personunit_fund_take_sum < 1.00000001
+    # assert partnerunit_fund_give_sum == 1.0
+    # assert partnerunit_fund_take_sum > 0.9999999
+    # assert partnerunit_fund_take_sum < 1.00000001
 
 
-def all_personunits_have_legitimate_values(x_believer: BelieverUnit):
+def all_partnerunits_have_legitimate_values(x_believer: BelieverUnit):
     return not any(
         (
-            personunit._fund_give is None
-            or personunit._fund_give in [0.25, 0.5]
-            or personunit._fund_take is None
-            or personunit._fund_take in [0.8, 0.1]
+            partnerunit._fund_give is None
+            or partnerunit._fund_give in [0.25, 0.5]
+            or partnerunit._fund_take is None
+            or partnerunit._fund_take in [0.8, 0.1]
         )
-        for personunit in x_believer.persons.values()
+        for partnerunit in x_believer.partners.values()
     )
 
 
@@ -1269,64 +1269,64 @@ def test_BelieverUnit_settle_believer_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty
     sue_str = "Sue"
     bob_str = "Bob"
     zia_str = "Zia"
-    sue_personunit = personunit_shop(sue_str, 0.5, person_debt_points=2)
-    bob_personunit = personunit_shop(bob_str, 1.5, person_debt_points=3)
-    zia_personunit = personunit_shop(zia_str, 8, person_debt_points=5)
-    yao_believer.set_personunit(sue_personunit)
-    yao_believer.set_personunit(bob_personunit)
-    yao_believer.set_personunit(zia_personunit)
-    sue_person = yao_believer.get_person(sue_str)
-    bob_person = yao_believer.get_person(bob_str)
-    zia_person = yao_believer.get_person(zia_str)
+    sue_partnerunit = partnerunit_shop(sue_str, 0.5, partner_debt_points=2)
+    bob_partnerunit = partnerunit_shop(bob_str, 1.5, partner_debt_points=3)
+    zia_partnerunit = partnerunit_shop(zia_str, 8, partner_debt_points=5)
+    yao_believer.set_partnerunit(sue_partnerunit)
+    yao_believer.set_partnerunit(bob_partnerunit)
+    yao_believer.set_partnerunit(zia_partnerunit)
+    sue_partner = yao_believer.get_partner(sue_str)
+    bob_partner = yao_believer.get_partner(bob_str)
+    zia_partner = yao_believer.get_partner(zia_str)
 
-    assert not sue_person._fund_give
-    assert not sue_person._fund_take
-    assert not bob_person._fund_give
-    assert not bob_person._fund_take
-    assert not zia_person._fund_give
-    assert not zia_person._fund_take
-    assert not sue_person._fund_agenda_give
-    assert not sue_person._fund_agenda_take
-    assert not bob_person._fund_agenda_give
-    assert not bob_person._fund_agenda_take
-    assert not zia_person._fund_agenda_give
-    assert not zia_person._fund_agenda_take
-    assert not sue_person._fund_agenda_ratio_give
-    assert not sue_person._fund_agenda_ratio_take
-    assert not bob_person._fund_agenda_ratio_give
-    assert not bob_person._fund_agenda_ratio_take
-    assert not zia_person._fund_agenda_ratio_give
-    assert not zia_person._fund_agenda_ratio_take
+    assert not sue_partner._fund_give
+    assert not sue_partner._fund_take
+    assert not bob_partner._fund_give
+    assert not bob_partner._fund_take
+    assert not zia_partner._fund_give
+    assert not zia_partner._fund_take
+    assert not sue_partner._fund_agenda_give
+    assert not sue_partner._fund_agenda_take
+    assert not bob_partner._fund_agenda_give
+    assert not bob_partner._fund_agenda_take
+    assert not zia_partner._fund_agenda_give
+    assert not zia_partner._fund_agenda_take
+    assert not sue_partner._fund_agenda_ratio_give
+    assert not sue_partner._fund_agenda_ratio_take
+    assert not bob_partner._fund_agenda_ratio_give
+    assert not bob_partner._fund_agenda_ratio_take
+    assert not zia_partner._fund_agenda_ratio_give
+    assert not zia_partner._fund_agenda_ratio_take
 
     # WHEN
     yao_believer.settle_believer()
 
     # THEN
     assert yao_believer._reason_rcontexts == set()
-    assert sue_person._fund_give == 50000000
-    assert sue_person._fund_take == 200000000
-    assert bob_person._fund_give == 150000000
-    assert bob_person._fund_take == 300000000
-    assert zia_person._fund_give == 800000000
-    assert zia_person._fund_take == 500000000
-    assert sue_person._fund_agenda_give == 50000000
-    assert sue_person._fund_agenda_take == 200000000
-    assert bob_person._fund_agenda_give == 150000000
-    assert bob_person._fund_agenda_take == 300000000
-    assert zia_person._fund_agenda_give == 800000000
-    assert zia_person._fund_agenda_take == 500000000
-    assert sue_person._fund_agenda_give == sue_person._fund_give
-    assert sue_person._fund_agenda_take == sue_person._fund_take
-    assert bob_person._fund_agenda_give == bob_person._fund_give
-    assert bob_person._fund_agenda_take == bob_person._fund_take
-    assert zia_person._fund_agenda_give == zia_person._fund_give
-    assert zia_person._fund_agenda_take == zia_person._fund_take
-    assert sue_person._fund_agenda_ratio_give == 0.05
-    assert sue_person._fund_agenda_ratio_take == 0.2
-    assert bob_person._fund_agenda_ratio_give == 0.15
-    assert bob_person._fund_agenda_ratio_take == 0.3
-    assert zia_person._fund_agenda_ratio_give == 0.8
-    assert zia_person._fund_agenda_ratio_take == 0.5
+    assert sue_partner._fund_give == 50000000
+    assert sue_partner._fund_take == 200000000
+    assert bob_partner._fund_give == 150000000
+    assert bob_partner._fund_take == 300000000
+    assert zia_partner._fund_give == 800000000
+    assert zia_partner._fund_take == 500000000
+    assert sue_partner._fund_agenda_give == 50000000
+    assert sue_partner._fund_agenda_take == 200000000
+    assert bob_partner._fund_agenda_give == 150000000
+    assert bob_partner._fund_agenda_take == 300000000
+    assert zia_partner._fund_agenda_give == 800000000
+    assert zia_partner._fund_agenda_take == 500000000
+    assert sue_partner._fund_agenda_give == sue_partner._fund_give
+    assert sue_partner._fund_agenda_take == sue_partner._fund_take
+    assert bob_partner._fund_agenda_give == bob_partner._fund_give
+    assert bob_partner._fund_agenda_take == bob_partner._fund_take
+    assert zia_partner._fund_agenda_give == zia_partner._fund_give
+    assert zia_partner._fund_agenda_take == zia_partner._fund_take
+    assert sue_partner._fund_agenda_ratio_give == 0.05
+    assert sue_partner._fund_agenda_ratio_take == 0.2
+    assert bob_partner._fund_agenda_ratio_give == 0.15
+    assert bob_partner._fund_agenda_ratio_take == 0.3
+    assert zia_partner._fund_agenda_ratio_give == 0.8
+    assert zia_partner._fund_agenda_ratio_take == 0.5
 
 
 def test_BelieverUnit_settle_believer_CreatesGroupUnitWith_believerunit_v001():
@@ -1337,10 +1337,10 @@ def test_BelieverUnit_settle_believer_CreatesGroupUnitWith_believerunit_v001():
     # THEN
     assert yao_believer._groupunits is not None
     assert len(yao_believer._groupunits) == 34
-    everyone_persons_len = None
+    everyone_partners_len = None
     everyone_group = yao_believer.get_groupunit(";Everyone")
-    everyone_persons_len = len(everyone_group._memberships)
-    assert everyone_persons_len == 22
+    everyone_partners_len = len(everyone_group._memberships)
+    assert everyone_partners_len == 22
 
     # WHEN
     yao_believer.settle_believer()

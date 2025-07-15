@@ -57,7 +57,7 @@ def get_belief_args_dimen_mapping() -> dict[str, str]:
 
 def get_belief_args_class_types() -> dict[str, str]:
     return {
-        "person_name": "NameTerm",
+        "partner_name": "NameTerm",
         "amount": "float",
         "knot": "str",
         "celldepth": "int",
@@ -86,7 +86,7 @@ def get_belief_args_class_types() -> dict[str, str]:
 
 def get_belief_args_set() -> set[str]:
     return {
-        "person_name",
+        "partner_name",
         "amount",
         "knot",
         "c400_number",

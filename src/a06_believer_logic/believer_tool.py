@@ -1,9 +1,9 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
-from src.a01_term_logic.term import BeliefLabel, PersonName, RopeTerm
+from src.a01_term_logic.term import BeliefLabel, PartnerName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.group import AwardLink, MemberShip
-from src.a03_group_logic.person import PersonUnit
+from src.a03_group_logic.partner import PartnerUnit
 from src.a04_reason_logic.reason_plan import (
     FactUnit,
     PremiseUnit,
@@ -18,19 +18,21 @@ def believerunit_exists(x_believer: BelieverUnit) -> bool:
     return x_believer is not None
 
 
-def believer_personunit_exists(x_believer: BelieverUnit, jkeys: dict[str, any]) -> bool:
-    x_person_name = jkeys.get("person_name")
-    return False if x_believer is None else x_believer.person_exists(x_person_name)
-
-
-def believer_person_membership_exists(
+def believer_partnerunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
-    x_person_name = jkeys.get("person_name")
+    x_partner_name = jkeys.get("partner_name")
+    return False if x_believer is None else x_believer.partner_exists(x_partner_name)
+
+
+def believer_partner_membership_exists(
+    x_believer: BelieverUnit, jkeys: dict[str, any]
+) -> bool:
+    x_partner_name = jkeys.get("partner_name")
     x_group_title = jkeys.get("group_title")
     return bool(
-        believer_personunit_exists(x_believer, jkeys)
-        and x_believer.get_person(x_person_name).membership_exists(x_group_title)
+        believer_partnerunit_exists(x_believer, jkeys)
+        and x_believer.get_partner(x_partner_name).membership_exists(x_group_title)
     )
 
 
@@ -111,10 +113,10 @@ def believer_plan_factunit_exists(
 def believer_attr_exists(
     x_dimen: str, x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
-    if x_dimen == "believer_person_membership":
-        return believer_person_membership_exists(x_believer, jkeys)
-    elif x_dimen == "believer_personunit":
-        return believer_personunit_exists(x_believer, jkeys)
+    if x_dimen == "believer_partner_membership":
+        return believer_partner_membership_exists(x_believer, jkeys)
+    elif x_dimen == "believer_partnerunit":
+        return believer_partnerunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_awardlink":
         return believer_plan_awardlink_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_factunit":
@@ -134,18 +136,18 @@ def believer_attr_exists(
     return True
 
 
-def believer_personunit_get_obj(
+def believer_partnerunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
-) -> PersonUnit:
-    return x_believer.get_person(jkeys.get("person_name"))
+) -> PartnerUnit:
+    return x_believer.get_partner(jkeys.get("partner_name"))
 
 
-def believer_person_membership_get_obj(
+def believer_partner_membership_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> MemberShip:
-    x_person_name = jkeys.get("person_name")
+    x_partner_name = jkeys.get("partner_name")
     x_group_title = jkeys.get("group_title")
-    return x_believer.get_person(x_person_name).get_membership(x_group_title)
+    return x_believer.get_partner(x_partner_name).get_membership(x_group_title)
 
 
 def believer_planunit_get_obj(
@@ -197,8 +199,8 @@ def believer_get_obj(
         return x_believer
 
     x_dimens = {
-        "believer_personunit": believer_personunit_get_obj,
-        "believer_person_membership": believer_person_membership_get_obj,
+        "believer_partnerunit": believer_partnerunit_get_obj,
+        "believer_partner_membership": believer_partner_membership_get_obj,
         "believer_planunit": believer_planunit_get_obj,
         "believer_plan_awardlink": believer_plan_awardlink_get_obj,
         "believer_plan_reasonunit": believer_plan_reasonunit_get_obj,
@@ -209,44 +211,48 @@ def believer_get_obj(
         return x_func(x_believer, jkeys)
 
 
-def get_believer_person_agenda_award_array(
+def get_believer_partner_agenda_award_array(
     x_believer: BelieverUnit, settle_believer: bool = None
 ) -> list[list]:
     if settle_believer:
         x_believer.settle_believer()
 
     x_list = [
-        [x_person.person_name, x_person._fund_agenda_take, x_person._fund_agenda_give]
-        for x_person in x_believer.persons.values()
+        [
+            x_partner.partner_name,
+            x_partner._fund_agenda_take,
+            x_partner._fund_agenda_give,
+        ]
+        for x_partner in x_believer.partners.values()
     ]
     x_list.sort(key=lambda y: y[0], reverse=False)
     return x_list
 
 
-def get_believer_person_agenda_award_csv(
+def get_believer_partner_agenda_award_csv(
     x_believer: BelieverUnit, settle_believer: bool = None
 ) -> str:
-    x_person_agenda_award_array = get_believer_person_agenda_award_array(
+    x_partner_agenda_award_array = get_believer_partner_agenda_award_array(
         x_believer, settle_believer
     )
-    x_headers = ["person_name", "fund_agenda_take", "fund_agenda_give"]
-    return create_csv(x_headers, x_person_agenda_award_array)
+    x_headers = ["partner_name", "fund_agenda_take", "fund_agenda_give"]
+    return create_csv(x_headers, x_partner_agenda_award_array)
 
 
-def get_person_mandate_ledger(
+def get_partner_mandate_ledger(
     x_believer: BelieverUnit, settle_believer: bool = None
-) -> dict[PersonName, FundNum]:
+) -> dict[PartnerName, FundNum]:
     if not x_believer:
         return {}
-    if len(x_believer.persons) == 0:
+    if len(x_believer.partners) == 0:
         return {x_believer.believer_name: x_believer.fund_pool}
 
     if settle_believer:
         x_believer.settle_believer()
-    believer_persons = x_believer.persons.values()
+    believer_partners = x_believer.partners.values()
     mandates = {
-        x_person.person_name: x_person._fund_agenda_give
-        for x_person in believer_persons
+        x_partner.partner_name: x_partner._fund_agenda_give
+        for x_partner in believer_partners
     }
     mandate_sum = sum(mandates.values())
     if mandate_sum == 0:
@@ -257,31 +263,31 @@ def get_person_mandate_ledger(
 
 
 def reset_mandates_to_minimum(
-    mandates: dict[PersonName, FundNum], penny: FundNum
-) -> dict[PersonName, FundNum]:
+    mandates: dict[PartnerName, FundNum], penny: FundNum
+) -> dict[PartnerName, FundNum]:
     """Reset all mandates to the minimum value (penny)."""
 
-    person_names = set(mandates.keys())
-    for person_name in person_names:
-        mandates[person_name] = penny
+    partner_names = set(mandates.keys())
+    for partner_name in partner_names:
+        mandates[partner_name] = penny
     return mandates
 
 
-def get_person_agenda_net_ledger(
+def get_partner_agenda_net_ledger(
     x_believer: BelieverUnit, settle_believer: bool = None
-) -> dict[PersonName, FundNum]:
+) -> dict[PartnerName, FundNum]:
     if settle_believer:
         x_believer.settle_believer()
 
     x_dict = {}
-    for x_person in x_believer.persons.values():
-        settle_net = get_net(x_person._fund_agenda_give, x_person._fund_agenda_take)
+    for x_partner in x_believer.partners.values():
+        settle_net = get_net(x_partner._fund_agenda_give, x_partner._fund_agenda_take)
         if settle_net != 0:
-            x_dict[x_person.person_name] = settle_net
+            x_dict[x_partner.partner_name] = settle_net
     return x_dict
 
 
-def get_credit_ledger(x_believer: BelieverUnit) -> dict[PersonUnit, RespectNum]:
+def get_credit_ledger(x_believer: BelieverUnit) -> dict[PartnerUnit, RespectNum]:
     credit_ledger, debt_ledger = x_believer.get_credit_ledger_debt_ledger()
     return credit_ledger
 

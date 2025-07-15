@@ -1,7 +1,7 @@
 {
     "belief_paybook": {
         "jkeys": {
-            "person_name": {
+            "partner_name": {
                 "class_type": "NameTerm"
             },
             "belief_label": {

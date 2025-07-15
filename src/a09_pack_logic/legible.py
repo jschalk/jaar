@@ -12,16 +12,22 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
     atoms_dict = x_delta.believeratoms
     believerunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "believerunit"])
 
-    personunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "believer_personunit"])
-    personunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "believer_personunit"])
-    personunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "believer_personunit"])
+    partnerunit_insert_dict = get_leg_obj(
+        atoms_dict, ["INSERT", "believer_partnerunit"]
+    )
+    partnerunit_update_dict = get_leg_obj(
+        atoms_dict, ["UPDATE", "believer_partnerunit"]
+    )
+    partnerunit_delete_dict = get_leg_obj(
+        atoms_dict, ["DELETE", "believer_partnerunit"]
+    )
 
-    x_list = ["INSERT", "believer_person_membership"]
-    person_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_person_membership"]
-    person_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_person_membership"]
-    person_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_partner_membership"]
+    partner_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_partner_membership"]
+    partner_membership_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_partner_membership"]
+    partner_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = ["INSERT", "believer_planunit"]
     believer_planunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -71,30 +77,30 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
     leg_list = []
     if believerunit_atom is not None:
         add_believerunit_legible_list(leg_list, believerunit_atom, x_believer)
-    if personunit_insert_dict is not None:
-        add_believer_personunit_insert_to_legible_list(
-            leg_list, personunit_insert_dict, x_believer
+    if partnerunit_insert_dict is not None:
+        add_believer_partnerunit_insert_to_legible_list(
+            leg_list, partnerunit_insert_dict, x_believer
         )
-    if personunit_update_dict is not None:
-        add_believer_personunit_update_to_legible_list(
-            leg_list, personunit_update_dict, x_believer
+    if partnerunit_update_dict is not None:
+        add_believer_partnerunit_update_to_legible_list(
+            leg_list, partnerunit_update_dict, x_believer
         )
-    if personunit_delete_dict is not None:
-        add_believer_personunit_delete_to_legible_list(
-            leg_list, personunit_delete_dict, x_believer
+    if partnerunit_delete_dict is not None:
+        add_believer_partnerunit_delete_to_legible_list(
+            leg_list, partnerunit_delete_dict, x_believer
         )
 
-    if person_membership_insert_dict is not None:
-        add_believer_person_membership_insert_to_legible_list(
-            leg_list, person_membership_insert_dict, x_believer
+    if partner_membership_insert_dict is not None:
+        add_believer_partner_membership_insert_to_legible_list(
+            leg_list, partner_membership_insert_dict, x_believer
         )
-    if person_membership_update_dict is not None:
-        add_believer_person_membership_update_to_legible_list(
-            leg_list, person_membership_update_dict, x_believer
+    if partner_membership_update_dict is not None:
+        add_believer_partner_membership_update_to_legible_list(
+            leg_list, partner_membership_update_dict, x_believer
         )
-    if person_membership_delete_dict is not None:
-        add_believer_person_membership_delete_to_legible_list(
-            leg_list, person_membership_delete_dict, x_believer
+    if partner_membership_delete_dict is not None:
+        add_believer_partner_membership_delete_to_legible_list(
+            leg_list, partner_membership_delete_dict, x_believer
         )
 
     if believer_planunit_insert_dict is not None:
@@ -219,101 +225,101 @@ def add_believerunit_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_personunit_insert_to_legible_list(
-    legible_list: list[str], personunit_dict: BelieverAtom, x_believer: BelieverUnit
+def add_believer_partnerunit_insert_to_legible_list(
+    legible_list: list[str], partnerunit_dict: BelieverAtom, x_believer: BelieverUnit
 ):
-    for personunit_atom in personunit_dict.values():
-        person_name = personunit_atom.get_value("person_name")
-        person_cred_points_value = personunit_atom.get_value("person_cred_points")
-        person_debt_points_value = personunit_atom.get_value("person_debt_points")
-        x_str = f"{person_name} was added with {person_cred_points_value} score credit and {person_debt_points_value} score debt"
+    for partnerunit_atom in partnerunit_dict.values():
+        partner_name = partnerunit_atom.get_value("partner_name")
+        partner_cred_points_value = partnerunit_atom.get_value("partner_cred_points")
+        partner_debt_points_value = partnerunit_atom.get_value("partner_debt_points")
+        x_str = f"{partner_name} was added with {partner_cred_points_value} score credit and {partner_debt_points_value} score debt"
         legible_list.append(x_str)
 
 
-def add_believer_personunit_update_to_legible_list(
-    legible_list: list[str], personunit_dict: BelieverAtom, x_believer: BelieverUnit
+def add_believer_partnerunit_update_to_legible_list(
+    legible_list: list[str], partnerunit_dict: BelieverAtom, x_believer: BelieverUnit
 ):
-    for personunit_atom in personunit_dict.values():
-        person_name = personunit_atom.get_value("person_name")
-        person_cred_points_value = personunit_atom.get_value("person_cred_points")
-        person_debt_points_value = personunit_atom.get_value("person_debt_points")
+    for partnerunit_atom in partnerunit_dict.values():
+        partner_name = partnerunit_atom.get_value("partner_name")
+        partner_cred_points_value = partnerunit_atom.get_value("partner_cred_points")
+        partner_debt_points_value = partnerunit_atom.get_value("partner_debt_points")
         if (
-            person_cred_points_value is not None
-            and person_debt_points_value is not None
+            partner_cred_points_value is not None
+            and partner_debt_points_value is not None
         ):
-            x_str = f"{person_name} now has {person_cred_points_value} score credit and {person_debt_points_value} score debt."
-        elif person_cred_points_value is not None:
-            x_str = f"{person_name} now has {person_cred_points_value} score credit."
-        elif person_debt_points_value is not None:
-            x_str = f"{person_name} now has {person_debt_points_value} score debt."
+            x_str = f"{partner_name} now has {partner_cred_points_value} score credit and {partner_debt_points_value} score debt."
+        elif partner_cred_points_value is not None:
+            x_str = f"{partner_name} now has {partner_cred_points_value} score credit."
+        elif partner_debt_points_value is not None:
+            x_str = f"{partner_name} now has {partner_debt_points_value} score debt."
         legible_list.append(x_str)
 
 
-def add_believer_personunit_delete_to_legible_list(
-    legible_list: list[str], personunit_dict: BelieverAtom, x_believer: BelieverUnit
+def add_believer_partnerunit_delete_to_legible_list(
+    legible_list: list[str], partnerunit_dict: BelieverAtom, x_believer: BelieverUnit
 ):
-    for personunit_atom in personunit_dict.values():
-        person_name = personunit_atom.get_value("person_name")
-        x_str = f"{person_name} was removed from score persons."
+    for partnerunit_atom in partnerunit_dict.values():
+        partner_name = partnerunit_atom.get_value("partner_name")
+        x_str = f"{partner_name} was removed from score partners."
         legible_list.append(x_str)
 
 
-def add_believer_person_membership_insert_to_legible_list(
+def add_believer_partner_membership_insert_to_legible_list(
     legible_list: list[str],
-    person_membership_insert_dict: dict,
+    partner_membership_insert_dict: dict,
     x_believer: BelieverUnit,
 ):
-    for person_membership_dict in person_membership_insert_dict.values():
-        for person_membership_atom in person_membership_dict.values():
-            group_title = person_membership_atom.get_value("group_title")
-            person_name = person_membership_atom.get_value("person_name")
-            group_cred_points_value = person_membership_atom.get_value(
+    for partner_membership_dict in partner_membership_insert_dict.values():
+        for partner_membership_atom in partner_membership_dict.values():
+            group_title = partner_membership_atom.get_value("group_title")
+            partner_name = partner_membership_atom.get_value("partner_name")
+            group_cred_points_value = partner_membership_atom.get_value(
                 "group_cred_points"
             )
-            group_debt_points_value = person_membership_atom.get_value(
+            group_debt_points_value = partner_membership_atom.get_value(
                 "group_debt_points"
             )
-            x_str = f"Group '{group_title}' has new membership {person_name} with group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
+            x_str = f"Group '{group_title}' has new membership {partner_name} with group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
             legible_list.append(x_str)
 
 
-def add_believer_person_membership_update_to_legible_list(
+def add_believer_partner_membership_update_to_legible_list(
     legible_list: list[str],
-    person_membership_update_dict: dict,
+    partner_membership_update_dict: dict,
     x_believer: BelieverUnit,
 ):
-    for person_membership_dict in person_membership_update_dict.values():
-        for person_membership_atom in person_membership_dict.values():
-            group_title = person_membership_atom.get_value("group_title")
-            person_name = person_membership_atom.get_value("person_name")
-            group_cred_points_value = person_membership_atom.get_value(
+    for partner_membership_dict in partner_membership_update_dict.values():
+        for partner_membership_atom in partner_membership_dict.values():
+            group_title = partner_membership_atom.get_value("group_title")
+            partner_name = partner_membership_atom.get_value("partner_name")
+            group_cred_points_value = partner_membership_atom.get_value(
                 "group_cred_points"
             )
-            group_debt_points_value = person_membership_atom.get_value(
+            group_debt_points_value = partner_membership_atom.get_value(
                 "group_debt_points"
             )
             if (
                 group_cred_points_value is not None
                 and group_debt_points_value is not None
             ):
-                x_str = f"Group '{group_title}' membership {person_name} has new group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
+                x_str = f"Group '{group_title}' membership {partner_name} has new group_cred_points_value{group_cred_points_value} and group_debt_points_value={group_debt_points_value}."
             elif group_cred_points_value is not None:
-                x_str = f"Group '{group_title}' membership {person_name} has new group_cred_points_value{group_cred_points_value}."
+                x_str = f"Group '{group_title}' membership {partner_name} has new group_cred_points_value{group_cred_points_value}."
             elif group_debt_points_value is not None:
-                x_str = f"Group '{group_title}' membership {person_name} has new group_debt_points_value={group_debt_points_value}."
+                x_str = f"Group '{group_title}' membership {partner_name} has new group_debt_points_value={group_debt_points_value}."
             legible_list.append(x_str)
 
 
-def add_believer_person_membership_delete_to_legible_list(
+def add_believer_partner_membership_delete_to_legible_list(
     legible_list: list[str],
-    person_membership_delete_dict: dict,
+    partner_membership_delete_dict: dict,
     x_believer: BelieverUnit,
 ):
-    for person_membership_dict in person_membership_delete_dict.values():
-        for person_membership_atom in person_membership_dict.values():
-            group_title = person_membership_atom.get_value("group_title")
-            person_name = person_membership_atom.get_value("person_name")
-            x_str = f"Group '{group_title}' no longer has membership {person_name}."
+    for partner_membership_dict in partner_membership_delete_dict.values():
+        for partner_membership_atom in partner_membership_dict.values():
+            group_title = partner_membership_atom.get_value("group_title")
+            partner_name = partner_membership_atom.get_value("partner_name")
+            x_str = f"Group '{group_title}' no longer has membership {partner_name}."
             legible_list.append(x_str)
 
 

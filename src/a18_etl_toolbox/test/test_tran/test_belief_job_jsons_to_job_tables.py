@@ -29,9 +29,9 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     bob_str = "Bob"
     run_str = ";run"
     sue_believer = believerunit_shop(sue_str, a23_str)
-    sue_believer.add_personunit(sue_str)
-    sue_believer.add_personunit(bob_str)
-    sue_believer.get_person(bob_str).add_membership(run_str)
+    sue_believer.add_partnerunit(sue_str)
+    sue_believer.add_partnerunit(bob_str)
+    sue_believer.get_partner(bob_str).add_membership(run_str)
     casa_rope = sue_believer.make_l1_rope("casa")
     status_rope = sue_believer.make_l1_rope("status")
     clean_rope = sue_believer.make_rope(status_rope, "clean")
@@ -105,11 +105,11 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     a23_str = "amy23"
     belief_mstr_dir = get_module_temp_dir()
     bob_job = believerunit_shop(bob_inx, a23_str)
-    bob_job.add_personunit(bob_inx, credit77)
-    bob_job.add_personunit(yao_inx, credit44)
-    bob_job.add_personunit(bob_inx, credit77)
-    bob_job.add_personunit(sue_inx, credit88)
-    bob_job.add_personunit(yao_inx, credit44)
+    bob_job.add_partnerunit(bob_inx, credit77)
+    bob_job.add_partnerunit(yao_inx, credit44)
+    bob_job.add_partnerunit(bob_inx, credit77)
+    bob_job.add_partnerunit(sue_inx, credit88)
+    bob_job.add_partnerunit(yao_inx, credit44)
     save_job_file(belief_mstr_dir, bob_job)
     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
     save_file(

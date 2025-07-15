@@ -90,7 +90,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
     save_file(belief_json_path, None, a23_belief.get_json())
     # create believer gut file
     bob_gut = believerunit_shop(bob_str, a23_str)
-    bob_gut.add_personunit("Yao", 44, 55)
+    bob_gut.add_partnerunit("Yao", 44, 55)
     a23_bob_gut_path = create_gut_path(belief_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
 

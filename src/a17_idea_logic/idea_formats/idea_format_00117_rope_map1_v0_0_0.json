@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "person_name": {
+        "partner_name": {
             "otx_key": true
         },
         "event_int": {
@@ -25,7 +25,7 @@
     "idea_number": "br00117",
     "dimens": [
         "pidgin_rope",
-        "believer_personunit",
+        "believer_partnerunit",
         "believerunit",
         "beliefunit"
     ]

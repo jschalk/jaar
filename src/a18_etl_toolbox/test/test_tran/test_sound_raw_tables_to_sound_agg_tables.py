@@ -3,10 +3,10 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,
-    believer_personunit_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    believer_partnerunit_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
@@ -165,7 +165,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_beli
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         believera_s_raw_del = create_prime_tablename(
-            believer_personunit_str(), "s", "raw", "del"
+            believer_partnerunit_str(), "s", "raw", "del"
         )
         insert_into_clause = f"""INSERT INTO {believera_s_raw_del} (
   {idea_number_str()}
@@ -173,7 +173,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTableCorrectly_Scenario1_beli
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {person_name_str()}_ERASE
+, {partner_name_str()}_ERASE
 )"""
         b117 = "br00117"
         b045 = "br00045"
@@ -262,9 +262,9 @@ VALUES
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {person_name_str()}
-, {person_cred_points_str()}
-, {person_debt_points_str()}
+, {partner_name_str()}
+, {partner_cred_points_str()}
+, {partner_debt_points_str()}
 , {error_message_str()}
 )"""
         values_clause = f"""
@@ -342,7 +342,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {person_name_str()}_ERASE
+, {partner_name_str()}_ERASE
 )"""
         values_clause = f"""
 VALUES
@@ -430,9 +430,9 @@ VALUES
 , {face_name_str()}
 , {belief_label_str()}
 , {believer_name_str()}
-, {person_name_str()}
-, {person_cred_points_str()}
-, {person_debt_points_str()}
+, {partner_name_str()}
+, {partner_cred_points_str()}
+, {partner_debt_points_str()}
 , {error_message_str()}
 )"""
         values_clause = f"""

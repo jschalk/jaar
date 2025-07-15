@@ -1,8 +1,8 @@
 {
-    "believer_person_membership": {
+    "believer_partner_membership": {
         "abbreviation": "blrmemb",
         "jkeys": {
-            "person_name": {
+            "partner_name": {
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -64,10 +64,10 @@
             }
         }
     },
-    "believer_personunit": {
+    "believer_partnerunit": {
         "abbreviation": "blrpern",
         "jkeys": {
-            "person_name": {
+            "partner_name": {
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -113,21 +113,21 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_person_debt_points": {
+            "_inallocable_partner_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_person_debt_points": {
+            "_irrational_partner_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {
-            "person_cred_points": {
+            "partner_cred_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "person_debt_points": {
+            "partner_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -372,11 +372,11 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_all_person_cred": {
+            "_all_partner_cred": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_all_person_debt": {
+            "_all_partner_debt": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

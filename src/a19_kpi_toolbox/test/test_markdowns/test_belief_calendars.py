@@ -3,7 +3,7 @@ from src.a00_data_toolbox.file_toolbox import count_files, create_path, save_jso
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,
-    person_name_str,
+    partner_name_str,
 )
 from src.a07_timeline_logic.test._util.calendar_examples import (
     get_creg_config,
@@ -80,7 +80,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
 #         face_name_str(),
 #         belief_label_str(),
 #         believer_name_str(),
-#         person_name_str()
+#         partner_name_str()
 #     ]
 #     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)

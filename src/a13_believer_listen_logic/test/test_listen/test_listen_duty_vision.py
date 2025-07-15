@@ -108,10 +108,10 @@ def get_example_yao_believer() -> BelieverUnit:
     bob_str = "Bob"
     yao_speaker = believerunit_shop(yao_str, get_default_belief_label())
     yao_speaker.set_plan(planunit_shop(run_str()), casa_rope())
-    yao_speaker.add_personunit(yao_str, person_debt_points=10)
-    yao_speaker.add_personunit(zia_str, person_debt_points=30)
-    yao_speaker.add_personunit(bob_str, person_debt_points=40)
-    yao_speaker.set_person_respect(80)
+    yao_speaker.add_partnerunit(yao_str, partner_debt_points=10)
+    yao_speaker.add_partnerunit(zia_str, partner_debt_points=30)
+    yao_speaker.add_partnerunit(bob_str, partner_debt_points=40)
+    yao_speaker.set_partner_respect(80)
     return yao_speaker
 
 
@@ -119,7 +119,7 @@ def get_example_yao_vision1_speaker() -> BelieverUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_believer()
     yao_speaker.del_plan_obj(run_rope())
-    yao_speaker.set_person_respect(40)
+    yao_speaker.set_partner_respect(40)
     yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
@@ -134,7 +134,7 @@ def get_example_yao_vision2_speaker() -> BelieverUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_believer()
     yao_speaker.del_plan_obj(run_rope())
-    yao_speaker.set_person_respect(30)
+    yao_speaker.set_partner_respect(30)
     yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
@@ -154,7 +154,7 @@ def get_example_yao_vision2_speaker() -> BelieverUnit:
 def get_example_yao_vision3_speaker() -> BelieverUnit:
     yao_speaker = get_example_yao_believer()
     yao_speaker.del_plan_obj(run_rope())
-    yao_speaker.set_person_respect(10)
+    yao_speaker.set_partner_respect(10)
     yao_speaker.set_plan(planunit_shop(sweep_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(dirty_str()), sanitation_rope())
     yao_speaker.set_plan(planunit_shop(clean_str()), sanitation_rope())
@@ -258,9 +258,9 @@ def get_zia_utah_hubunit() -> HubUnit:
 
 def get_example_yao_gut_with_3_healers():
     yao_gut = get_example_yao_believer()
-    yao_str = yao_gut.get_person("Yao").person_name
-    bob_str = yao_gut.get_person("Bob").person_name
-    zia_str = yao_gut.get_person("Zia").person_name
+    yao_str = yao_gut.get_partner("Yao").partner_name
+    bob_str = yao_gut.get_partner("Bob").partner_name
+    zia_str = yao_gut.get_partner("Zia").partner_name
     iowa_plan = planunit_shop(get_iowa_str(), problem_bool=True)
     ohio_plan = planunit_shop(get_ohio_str(), problem_bool=True)
     utah_plan = planunit_shop(get_utah_str(), problem_bool=True)
@@ -278,7 +278,7 @@ def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceI
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # yao0_gut with 3 debotors of different person_cred_pointss
+    # yao0_gut with 3 debotors of different partner_cred_pointss
     # yao_vision1 with 1 chore, fact that doesn't make that chore active
     # yao_vision2 with 2 chores, one is equal fact that makes chore active
     # yao_vision3 with 1 new chore, fact stays with it
@@ -330,18 +330,18 @@ def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceI
 
     yao_job = open_job_file(belief_mstr_dir, belief_label, yao_str)
     yao_job.settle_believer()
-    assert yao_job.persons.keys() == yao_gut0.persons.keys()
-    assert yao_job.get_person(yao_str)._irrational_person_debt_points == 0
-    yao_job_persons = yao_job.get_dict().get("persons")
-    yao_gut0_persons = yao_gut0.get_dict().get("persons")
-    yao_job_bob = yao_job_persons.get("Bob")
-    yao_gut0_bob = yao_gut0_persons.get("Bob")
+    assert yao_job.partners.keys() == yao_gut0.partners.keys()
+    assert yao_job.get_partner(yao_str)._irrational_partner_debt_points == 0
+    yao_job_partners = yao_job.get_dict().get("partners")
+    yao_gut0_partners = yao_gut0.get_dict().get("partners")
+    yao_job_bob = yao_job_partners.get("Bob")
+    yao_gut0_bob = yao_gut0_partners.get("Bob")
     print(f"{yao_job_bob=}")
     print(f"{yao_gut0_bob=}")
     assert yao_job_bob == yao_gut0_bob
-    assert yao_job_persons.keys() == yao_gut0_persons.keys()
-    assert yao_job_persons == yao_gut0_persons
-    assert len(yao_job.get_dict().get("persons")) == 3
+    assert yao_job_partners.keys() == yao_gut0_partners.keys()
+    assert yao_job_partners == yao_gut0_partners
+    assert len(yao_job.get_dict().get("partners")) == 3
     assert len(yao_job._plan_dict) == 4
     print(f"{yao_job._plan_dict.keys()=}")
     print(f"{yao_job.get_factunits_dict().keys()=}")

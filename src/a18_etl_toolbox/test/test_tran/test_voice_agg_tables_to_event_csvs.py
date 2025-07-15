@@ -4,9 +4,9 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,
-    believer_personunit_str,
-    person_cred_points_str,
-    person_name_str,
+    believer_partnerunit_str,
+    partner_cred_points_str,
+    partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.a12_path import create_believer_event_dir_path
@@ -31,10 +31,10 @@ def test_etl_voice_agg_to_event_believer_csvs_PopulatesBelieverPulabelTables(
     event3 = 3
     event7 = 7
     amy23_str = "amy23"
-    yao_person_cred_points5 = 5
-    sue_person_cred_points7 = 7
+    yao_partner_cred_points5 = 5
+    sue_partner_cred_points7 = 7
     put_agg_tablename = create_prime_tablename(
-        believer_personunit_str(), "v", "agg", "put"
+        believer_partnerunit_str(), "v", "agg", "put"
     )
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_belief_mstr_dir = get_module_temp_dir()
@@ -51,11 +51,11 @@ def test_etl_voice_agg_to_event_believer_csvs_PopulatesBelieverPulabelTables(
         cursor = believer_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{person_name_str()},{person_cred_points_str()})
+INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{partner_name_str()},{partner_cred_points_str()})
 VALUES
-  ({event3},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_person_cred_points5})
-, ({event7},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_person_cred_points5})
-, ({event7},'{sue_inx}','{amy23_str}','{bob_inx}','{sue_inx}',{sue_person_cred_points7})
+  ({event3},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_partner_cred_points5})
+, ({event7},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_partner_cred_points5})
+, ({event7},'{sue_inx}','{amy23_str}','{bob_inx}','{sue_inx}',{sue_partner_cred_points7})
 ;
 """
         print(insert_raw_sqlstr)
@@ -73,10 +73,10 @@ VALUES
         e7_put_csv = open_file(a23_e7_blrpern_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = """event_int,face_name,belief_label,believer_name,person_name,person_cred_points,person_debt_points
+        expected_e3_put_csv = """event_int,face_name,belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points
 3,Suzy,amy23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """event_int,face_name,belief_label,believer_name,person_name,person_cred_points,person_debt_points
+        expected_e7_put_csv = """event_int,face_name,belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points
 7,Suzy,amy23,Bobby,Bobby,5.0,
 7,Suzy,amy23,Bobby,Suzy,7.0,
 """

@@ -65,7 +65,7 @@ def test_BelieverUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BelieverUnit_set_person_respect_CorrectlySetsAttrs():
+def test_BelieverUnit_set_partner_respect_CorrectlySetsAttrs():
     # ESTABLISH
     zia_str = "Zia"
     old_credor_respect = 77
@@ -81,10 +81,10 @@ def test_BelieverUnit_set_person_respect_CorrectlySetsAttrs():
     assert zia_believer.fund_pool == old_fund_pool
 
     # WHEN
-    new_person_pool = 200
-    zia_believer.set_person_respect(new_person_pool)
+    new_partner_pool = 200
+    zia_believer.set_partner_respect(new_partner_pool)
 
     # THEN
-    assert zia_believer.credor_respect == new_person_pool
-    assert zia_believer.debtor_respect == new_person_pool
-    assert zia_believer.fund_pool == new_person_pool
+    assert zia_believer.credor_respect == new_partner_pool
+    assert zia_believer.debtor_respect == new_partner_pool
+    assert zia_believer.fund_pool == new_partner_pool

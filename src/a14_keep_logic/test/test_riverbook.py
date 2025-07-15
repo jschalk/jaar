@@ -40,8 +40,8 @@ def test_create_riverbook_ReturnsObj():
     yao_str = "Yao"
     sue_str = "Sue"
     yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_personunit(yao_str)
-    yao_believer.add_personunit(sue_str)
+    yao_believer.add_partnerunit(yao_str)
+    yao_believer.add_partnerunit(sue_str)
     x_belief_mstr_dir = temp_belief_mstr_dir()
     yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
     yao_book_point_amount = 500

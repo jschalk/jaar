@@ -33,12 +33,12 @@ def _fund_take_str() -> str:
     return "_fund_take"
 
 
-def _inallocable_person_debt_points_str() -> str:
-    return "_inallocable_person_debt_points"
+def _inallocable_partner_debt_points_str() -> str:
+    return "_inallocable_partner_debt_points"
 
 
-def _irrational_person_debt_points_str() -> str:
-    return "_irrational_person_debt_points"
+def _irrational_partner_debt_points_str() -> str:
+    return "_irrational_partner_debt_points"
 
 
 def _memberships_str() -> str:
@@ -77,16 +77,16 @@ def group_title_str() -> str:
     return "group_title"
 
 
-def person_cred_points_str() -> str:
-    return "person_cred_points"
+def partner_cred_points_str() -> str:
+    return "partner_cred_points"
 
 
-def person_debt_points_str() -> str:
-    return "person_debt_points"
+def partner_debt_points_str() -> str:
+    return "partner_debt_points"
 
 
-def person_name_str() -> str:
-    return "person_name"
+def partner_name_str() -> str:
+    return "partner_name"
 
 
 def respect_bit_str() -> str:

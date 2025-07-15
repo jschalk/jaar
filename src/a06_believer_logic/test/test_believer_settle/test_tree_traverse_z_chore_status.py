@@ -663,7 +663,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsEmpty_sum_healerlink_share():
 def test_BelieverUnit_settle_believer_CorrectlySets_sum_healerlink_share(graphics_bool):
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    sue_believerunit.add_personunit("Sue")
+    sue_believerunit.add_partnerunit("Sue")
     sue_believerunit.settle_believer()
     nation_rope = sue_believerunit.make_l1_rope("nation")
     usa_rope = sue_believerunit.make_rope(nation_rope, "USA")
@@ -733,7 +733,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_sum_healerlink_share(graphic
 def test_BelieverUnit_settle_believer_CorrectlySets_keep_dict_v1(graphics_bool):
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    sue_believerunit.add_personunit("Sue")
+    sue_believerunit.add_partnerunit("Sue")
     sue_believerunit.settle_believer()
     nation_rope = sue_believerunit.make_l1_rope("nation")
     usa_rope = sue_believerunit.make_rope(nation_rope, "USA")
@@ -796,8 +796,8 @@ def test_BelieverUnit_settle_believer_CorrectlySets_healers_dict():
     sue_str = "Sue"
     bob_str = "Bob"
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    sue_believerunit.add_personunit(sue_str)
-    sue_believerunit.add_personunit(bob_str)
+    sue_believerunit.add_partnerunit(sue_str)
+    sue_believerunit.add_partnerunit(bob_str)
     assert sue_believerunit._healers_dict == {}
 
     # WHEN
@@ -837,8 +837,8 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_buildable_True():
     sue_str = "Sue"
     bob_str = "Bob"
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    sue_believerunit.add_personunit(sue_str)
-    sue_believerunit.add_personunit(bob_str)
+    sue_believerunit.add_partnerunit(sue_str)
+    sue_believerunit.add_partnerunit(bob_str)
     assert sue_believerunit._keeps_buildable is False
 
     # WHEN
@@ -872,8 +872,8 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_buildable_False():
     sue_str = "Sue"
     bob_str = "Bob"
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    sue_believerunit.add_personunit(sue_str)
-    sue_believerunit.add_personunit(bob_str)
+    sue_believerunit.add_partnerunit(sue_str)
+    sue_believerunit.add_partnerunit(bob_str)
     assert sue_believerunit._keeps_buildable is False
 
     # WHEN

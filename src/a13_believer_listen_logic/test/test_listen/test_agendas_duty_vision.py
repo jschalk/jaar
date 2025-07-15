@@ -39,16 +39,16 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_BelieverWhenNo_l
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
     zia_pool = 87
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    yao_duty.set_person_respect(zia_pool)
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
+    yao_duty.set_partner_respect(zia_pool)
 
     zia_vision = believerunit_shop(zia_str, a23_str)
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_vision.add_personunit(yao_str, person_debt_points=12)
+    zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     yao_dakota_hubunit.save_vision_believer(zia_vision)
     new_yao_vision = create_listen_basis(yao_duty)
@@ -70,16 +70,16 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Believer(
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
     zia_pool = 87
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    yao_duty.set_person_respect(zia_pool)
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
+    yao_duty.set_partner_respect(zia_pool)
 
     zia_vision = believerunit_shop(zia_str, a23_str)
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_vision.add_personunit(yao_str, person_debt_points=12)
+    zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
     clean_planunit.laborunit.set_laborlink(yao_str)
@@ -100,7 +100,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Believer(
     assert len(new_yao_vision.get_agenda_dict()) == 2
 
 
-def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetailsDecidedBy_person_debt_points(
+def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetailsDecidedBy_partner_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -141,16 +141,16 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetai
     # THEN
     assert new_yao_job1.plan_exists(cook_rope())
     new_cook_plan = new_yao_job1.get_plan_obj(cook_rope())
-    zia_personunit = new_yao_job1.get_person(zia_str)
-    bob_personunit = new_yao_job1.get_person(bob_str)
-    assert zia_personunit.person_debt_points < bob_personunit.person_debt_points
+    zia_partnerunit = new_yao_job1.get_partner(zia_str)
+    bob_partnerunit = new_yao_job1.get_partner(bob_str)
+    assert zia_partnerunit.partner_debt_points < bob_partnerunit.partner_debt_points
     assert new_cook_plan.get_reasonunit(eat_rope()) is None
 
-    yao_zia_person_debt_points = 15
-    yao_bob_person_debt_points = 5
-    yao_duty.add_personunit(zia_str, None, yao_zia_person_debt_points)
-    yao_duty.add_personunit(bob_str, None, yao_bob_person_debt_points)
-    yao_duty.set_person_respect(100)
+    yao_zia_partner_debt_points = 15
+    yao_bob_partner_debt_points = 5
+    yao_duty.add_partnerunit(zia_str, None, yao_zia_partner_debt_points)
+    yao_duty.add_partnerunit(bob_str, None, yao_bob_partner_debt_points)
+    yao_duty.set_partner_respect(100)
     new_yao_job2 = create_listen_basis(yao_duty)
     assert new_yao_job2.plan_exists(cook_rope()) is False
 
@@ -160,9 +160,9 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetai
     # THEN
     assert new_yao_job2.plan_exists(cook_rope())
     new_cook_plan = new_yao_job2.get_plan_obj(cook_rope())
-    zia_personunit = new_yao_job2.get_person(zia_str)
-    bob_personunit = new_yao_job2.get_person(bob_str)
-    assert zia_personunit.person_debt_points > bob_personunit.person_debt_points
+    zia_partnerunit = new_yao_job2.get_partner(zia_str)
+    bob_partnerunit = new_yao_job2.get_partner(bob_str)
+    assert zia_partnerunit.partner_debt_points > bob_partnerunit.partner_debt_points
     zia_eat_reasonunit = zia_cook_planunit.get_reasonunit(eat_rope())
     assert new_cook_plan.get_reasonunit(eat_rope()) == zia_eat_reasonunit
 
@@ -175,15 +175,15 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
     sue_str = "Sue"
-    sue_person_cred_points = 57
-    sue_person_debt_points = 51
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    yao_duty.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
+    sue_partner_cred_points = 57
+    sue_partner_debt_points = 51
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
+    yao_duty.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
     yao_pool = 92
-    yao_duty.set_person_respect(yao_pool)
+    yao_duty.set_partner_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_believer(
         belief_mstr_dir=yao_dakota_hubunit.belief_mstr_dir,
@@ -198,7 +198,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     zia_vision = believerunit_shop(zia_str, a23_str)
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_vision.add_personunit(yao_str, person_debt_points=12)
+    zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
     clean_planunit.laborunit.set_laborlink(yao_str)
@@ -207,7 +207,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
 
     sue_vision = believerunit_shop(sue_str)
     sue_vision.set_max_tree_traverse(5)
-    zia_vision.add_personunit(yao_str, person_debt_points=12)
+    zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     vacuum_str = "vacuum"
     vacuum_rope = sue_vision.make_l1_rope(vacuum_str)
     sue_vision.set_l1_plan(planunit_shop(vacuum_str, task=True))
@@ -243,12 +243,12 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     # THEN irrational believer is ignored
     assert len(new_yao_vision.get_agenda_dict()) != 3
     assert len(new_yao_vision.get_agenda_dict()) == 2
-    zia_personunit = new_yao_vision.get_person(zia_str)
-    sue_personunit = new_yao_vision.get_person(sue_str)
-    print(f"{sue_personunit.person_debt_points=}")
-    print(f"{sue_personunit._irrational_person_debt_points=}")
-    assert zia_personunit._irrational_person_debt_points == 0
-    assert sue_personunit._irrational_person_debt_points == 51
+    zia_partnerunit = new_yao_vision.get_partner(zia_str)
+    sue_partnerunit = new_yao_vision.get_partner(sue_str)
+    print(f"{sue_partnerunit.partner_debt_points=}")
+    print(f"{sue_partnerunit._irrational_partner_debt_points=}")
+    assert zia_partnerunit._irrational_partner_debt_points == 0
+    assert sue_partnerunit._irrational_partner_debt_points == 51
 
 
 def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBeliever(
@@ -260,14 +260,14 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelieve
     yao_duty = believerunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     sue_str = "Sue"
-    zia_person_cred_points = 47
-    sue_person_cred_points = 57
-    zia_person_debt_points = 41
-    sue_person_debt_points = 51
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
-    yao_duty.add_personunit(sue_str, sue_person_cred_points, sue_person_debt_points)
+    zia_partner_cred_points = 47
+    sue_partner_cred_points = 57
+    zia_partner_debt_points = 41
+    sue_partner_debt_points = 51
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
+    yao_duty.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
     yao_pool = 92
-    yao_duty.set_person_respect(yao_pool)
+    yao_duty.set_partner_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_believer(
         belief_mstr_dir=yao_dakota_hubunit.belief_mstr_dir,
@@ -281,7 +281,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelieve
     zia_vision = believerunit_shop(zia_str, a23_str)
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_vision.add_personunit(yao_str, person_debt_points=12)
+    zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
     clean_planunit.laborunit.set_laborlink(yao_str)
@@ -296,12 +296,12 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelieve
     # THEN irrational believer is ignored
     assert len(new_yao_vision.get_agenda_dict()) != 3
     assert len(new_yao_vision.get_agenda_dict()) == 2
-    zia_personunit = new_yao_vision.get_person(zia_str)
-    sue_personunit = new_yao_vision.get_person(sue_str)
-    print(f"{sue_personunit.person_debt_points=}")
-    print(f"{sue_personunit._inallocable_person_debt_points=}")
-    assert zia_personunit._inallocable_person_debt_points == 0
-    assert sue_personunit._inallocable_person_debt_points == 51
+    zia_partnerunit = new_yao_vision.get_partner(zia_str)
+    sue_partnerunit = new_yao_vision.get_partner(sue_str)
+    print(f"{sue_partnerunit.partner_debt_points=}")
+    print(f"{sue_partnerunit._inallocable_partner_debt_points=}")
+    assert zia_partnerunit._inallocable_partner_debt_points == 0
+    assert sue_partnerunit._inallocable_partner_debt_points == 51
 
 
 def test_listen_to_agenda_duty_vision_agenda_ListensToBeliever_duty_AndNotBeliever_vision(
@@ -312,15 +312,15 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBeliever_duty_AndNotBeliev
     yao_str = "Yao"
     yao_duty = believerunit_shop(yao_str, a23_str)
     yao_str = "Yao"
-    yao_person_cred_points = 57
-    yao_person_debt_points = 51
-    yao_duty.add_personunit(yao_str, yao_person_cred_points, yao_person_debt_points)
+    yao_partner_cred_points = 57
+    yao_partner_debt_points = 51
+    yao_duty.add_partnerunit(yao_str, yao_partner_cred_points, yao_partner_debt_points)
     zia_str = "Zia"
-    zia_person_cred_points = 47
-    zia_person_debt_points = 41
-    yao_duty.add_personunit(zia_str, zia_person_cred_points, zia_person_debt_points)
+    zia_partner_cred_points = 47
+    zia_partner_debt_points = 41
+    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
     yao_pool = 87
-    yao_duty.set_person_respect(yao_pool)
+    yao_duty.set_partner_respect(yao_pool)
     # save yao without chore to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_believer(
@@ -337,7 +337,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBeliever_duty_AndNotBeliev
     zia_vision = believerunit_shop(zia_str, a23_str)
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_vision.add_personunit(yao_str, person_debt_points=12)
+    zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
     clean_planunit.laborunit.set_laborlink(yao_str)

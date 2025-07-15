@@ -19,9 +19,9 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    person_cred_points_str,
-    person_debt_points_str,
-    person_name_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+    partner_name_str,
     respect_bit_str,
     take_force_str,
 )
@@ -95,12 +95,12 @@ def attributes_str() -> str:
     return "attributes"
 
 
-def believer_person_membership_str() -> str:
-    return "believer_person_membership"
+def believer_partner_membership_str() -> str:
+    return "believer_partner_membership"
 
 
-def believer_personunit_str() -> str:
-    return "believer_personunit"
+def believer_partnerunit_str() -> str:
+    return "believer_partnerunit"
 
 
 def believer_plan_awardlink_str() -> str:
@@ -167,8 +167,8 @@ def max_tree_traverse_str() -> str:
     return "max_tree_traverse"
 
 
-def person_pool_str() -> str:
-    return "person_pool"
+def partner_pool_str() -> str:
+    return "partner_pool"
 
 
 def tally_str() -> str:

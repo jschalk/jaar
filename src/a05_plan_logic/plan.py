@@ -19,7 +19,7 @@ from src.a01_term_logic.term import (
     BeliefLabel,
     GroupTitle,
     LabelTerm,
-    PersonName,
+    PartnerName,
     RopeTerm,
     default_knot_if_None,
 )
@@ -115,8 +115,8 @@ class PlanAttrHolder:
     task: bool = None
     factunit: FactUnit = None
     descendant_task_count: int = None
-    all_person_cred: bool = None
-    all_person_debt: bool = None
+    all_partner_cred: bool = None
+    all_partner_debt: bool = None
     awardlink: AwardLink = None
     awardlink_del: GroupTitle = None
     is_expanded: bool = None
@@ -162,8 +162,8 @@ def planattrholder_shop(
     task: bool = None,
     factunit: FactUnit = None,
     descendant_task_count: int = None,
-    all_person_cred: bool = None,
-    all_person_debt: bool = None,
+    all_partner_cred: bool = None,
+    all_partner_debt: bool = None,
     awardlink: AwardLink = None,
     awardlink_del: GroupTitle = None,
     is_expanded: bool = None,
@@ -194,8 +194,8 @@ def planattrholder_shop(
         task=task,
         factunit=factunit,
         descendant_task_count=descendant_task_count,
-        all_person_cred=all_person_cred,
-        all_person_debt=all_person_debt,
+        all_partner_cred=all_partner_cred,
+        all_partner_debt=all_partner_debt,
         awardlink=awardlink,
         awardlink_del=awardlink_del,
         is_expanded=is_expanded,
@@ -247,8 +247,8 @@ class PlanUnit:
 
     _active : bool that describes if the plan task is active, calculated by BeliefUnit.
     _active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
-    _all_person_cred : bool Flag indicating there are not explicitley defined awardlinks
-    _all_person_debt : bool Flag indicating there are not explicitley defined awardlinks
+    _all_partner_cred : bool Flag indicating there are not explicitley defined awardlinks
+    _all_partner_debt : bool Flag indicating there are not explicitley defined awardlinks
     _awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
     _awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
     _descendant_task_count : int Count of descendant plans marked as tasks.
@@ -294,8 +294,8 @@ class PlanUnit:
     # Calculated fields
     _active: bool = None
     _active_hx: dict[int, bool] = None
-    _all_person_cred: bool = None
-    _all_person_debt: bool = None
+    _all_partner_cred: bool = None
+    _all_partner_debt: bool = None
     _awardheirs: dict[GroupTitle, AwardHeir] = None
     _awardlines: dict[GroupTitle, AwardLine] = None
     _descendant_task_count: int = None
@@ -477,9 +477,9 @@ class PlanUnit:
 
         return descendant_ropes
 
-    def clear_all_person_cred_debt(self):
-        self._all_person_cred = None
-        self._all_person_debt = None
+    def clear_all_partner_cred_debt(self):
+        self._all_partner_cred = None
+        self._all_partner_debt = None
 
     def set_level(self, parent_level):
         self._level = parent_level + 1
@@ -649,10 +649,10 @@ class PlanUnit:
             self.morph = plan_attr.morph
         if plan_attr.descendant_task_count is not None:
             self._descendant_task_count = plan_attr.descendant_task_count
-        if plan_attr.all_person_cred is not None:
-            self._all_person_cred = plan_attr.all_person_cred
-        if plan_attr.all_person_debt is not None:
-            self._all_person_debt = plan_attr.all_person_debt
+        if plan_attr.all_partner_cred is not None:
+            self._all_partner_cred = plan_attr.all_partner_cred
+        if plan_attr.all_partner_debt is not None:
+            self._all_partner_debt = plan_attr.all_partner_debt
         if plan_attr.awardlink is not None:
             self.set_awardlink(awardlink=plan_attr.awardlink)
         if plan_attr.awardlink_del is not None:
@@ -822,7 +822,7 @@ class PlanUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        believer_believer_name: PersonName = None,
+        believer_believer_name: PartnerName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
         self._active = self._create_active_bool(groupunits, believer_believer_name)
@@ -843,7 +843,7 @@ class PlanUnit:
     def _create_active_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_believer_name: PersonName,
+        believer_believer_name: PartnerName,
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
@@ -1064,8 +1064,8 @@ def planunit_shop(
     _chore: bool = None,
     _active: bool = None,
     _descendant_task_count: int = None,
-    _all_person_cred: bool = None,
-    _all_person_debt: bool = None,
+    _all_partner_cred: bool = None,
+    _all_partner_debt: bool = None,
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
     knot: str = None,
@@ -1111,8 +1111,8 @@ def planunit_shop(
         _chore=_chore,
         _active=_active,
         _descendant_task_count=_descendant_task_count,
-        _all_person_cred=_all_person_cred,
-        _all_person_debt=_all_person_debt,
+        _all_partner_cred=_all_partner_cred,
+        _all_partner_debt=_all_partner_debt,
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_None(_active_hx),
         knot=default_knot_if_None(knot),

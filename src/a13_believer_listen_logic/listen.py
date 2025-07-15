@@ -4,7 +4,7 @@ from src.a01_term_logic.rope import get_ancestor_ropes, get_root_label_from_rope
 from src.a01_term_logic.term import BelieverName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit, PersonUnit
+from src.a06_believer_logic.believer import BelieverUnit, PartnerUnit
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.keep_tool import get_duty_believer
@@ -34,21 +34,21 @@ def _ingest_perspective_agenda(
     return listener
 
 
-def _allocate_irrational_person_debt_points(
+def _allocate_irrational_partner_debt_points(
     listener: BelieverUnit, speaker_believer_name: BelieverName
 ) -> BelieverUnit:
-    speaker_personunit = listener.get_person(speaker_believer_name)
-    speaker_person_debt_points = speaker_personunit.person_debt_points
-    speaker_personunit.add_irrational_person_debt_points(speaker_person_debt_points)
+    speaker_partnerunit = listener.get_partner(speaker_believer_name)
+    speaker_partner_debt_points = speaker_partnerunit.partner_debt_points
+    speaker_partnerunit.add_irrational_partner_debt_points(speaker_partner_debt_points)
     return listener
 
 
-def _allocate_inallocable_person_debt_points(
+def _allocate_inallocable_partner_debt_points(
     listener: BelieverUnit, speaker_believer_name: BelieverName
 ) -> BelieverUnit:
-    speaker_personunit = listener.get_person(speaker_believer_name)
-    speaker_personunit.add_inallocable_person_debt_points(
-        speaker_personunit.person_debt_points
+    speaker_partnerunit = listener.get_partner(speaker_believer_name)
+    speaker_partnerunit.add_inallocable_partner_debt_points(
+        speaker_partnerunit.partner_debt_points
     )
     return listener
 
@@ -119,20 +119,20 @@ def _add_and_replace_planunit_masss(
         x_planunit.mass += x_mass
 
 
-def get_debtors_roll(x_duty: BelieverUnit) -> list[PersonUnit]:
+def get_debtors_roll(x_duty: BelieverUnit) -> list[PartnerUnit]:
     return [
-        x_personunit
-        for x_personunit in x_duty.persons.values()
-        if x_personunit.person_debt_points != 0
+        x_partnerunit
+        for x_partnerunit in x_duty.partners.values()
+        if x_partnerunit.partner_debt_points != 0
     ]
 
 
-def get_ordered_debtors_roll(x_believer: BelieverUnit) -> list[PersonUnit]:
-    persons_ordered_list = get_debtors_roll(x_believer)
-    persons_ordered_list.sort(
-        key=lambda x: (x.person_debt_points, x.person_name), reverse=True
+def get_ordered_debtors_roll(x_believer: BelieverUnit) -> list[PartnerUnit]:
+    partners_ordered_list = get_debtors_roll(x_believer)
+    partners_ordered_list.sort(
+        key=lambda x: (x.partner_debt_points, x.partner_name), reverse=True
     )
-    return persons_ordered_list
+    return partners_ordered_list
 
 
 def migrate_all_facts(src_listener: BelieverUnit, dst_listener: BelieverUnit):
@@ -170,21 +170,25 @@ def listen_to_speaker_fact(
 def listen_to_speaker_agenda(
     listener: BelieverUnit, speaker: BelieverUnit
 ) -> BelieverUnit:
-    if listener.person_exists(speaker.believer_name) is False:
+    if listener.partner_exists(speaker.believer_name) is False:
         raise Missing_debtor_respectException(
-            f"listener '{listener.believer_name}' believer is assumed to have {speaker.believer_name} personunit."
+            f"listener '{listener.believer_name}' believer is assumed to have {speaker.believer_name} partnerunit."
         )
     perspective_believer = get_speaker_perspective(speaker, listener.believer_name)
     if perspective_believer._rational is False:
-        return _allocate_irrational_person_debt_points(listener, speaker.believer_name)
+        return _allocate_irrational_partner_debt_points(listener, speaker.believer_name)
     if listener.debtor_respect is None:
-        return _allocate_inallocable_person_debt_points(listener, speaker.believer_name)
+        return _allocate_inallocable_partner_debt_points(
+            listener, speaker.believer_name
+        )
     if listener.believer_name != speaker.believer_name:
         agenda = generate_perspective_agenda(perspective_believer)
     else:
         agenda = list(perspective_believer.get_all_tasks().values())
     if len(agenda) == 0:
-        return _allocate_inallocable_person_debt_points(listener, speaker.believer_name)
+        return _allocate_inallocable_partner_debt_points(
+            listener, speaker.believer_name
+        )
     return _ingest_perspective_agenda(listener, agenda)
 
 
@@ -192,8 +196,8 @@ def listen_to_agendas_create_init_job_from_guts(
     belief_mstr_dir: str, listener_job: BelieverUnit
 ):
     belief_label = listener_job.belief_label
-    for x_personunit in get_ordered_debtors_roll(listener_job):
-        speaker_id = x_personunit.person_name
+    for x_partnerunit in get_ordered_debtors_roll(listener_job):
+        speaker_id = x_partnerunit.partner_name
         speaker_gut = open_gut_file(belief_mstr_dir, belief_label, speaker_id)
         if speaker_gut is None:
             speaker_gut = create_empty_believer_from_believer(listener_job, speaker_id)
@@ -203,8 +207,8 @@ def listen_to_agendas_create_init_job_from_guts(
 
 def listen_to_agendas_jobs_into_job(belief_mstr_dir: str, listener_job: BelieverUnit):
     belief_label = listener_job.belief_label
-    for x_personunit in get_ordered_debtors_roll(listener_job):
-        speaker_id = x_personunit.person_name
+    for x_partnerunit in get_ordered_debtors_roll(listener_job):
+        speaker_id = x_partnerunit.partner_name
         speaker_job = open_job_file(belief_mstr_dir, belief_label, speaker_id)
         if speaker_job is None:
             speaker_job = create_empty_believer_from_believer(listener_job, speaker_id)
@@ -215,8 +219,8 @@ def listen_to_agendas_duty_vision(
     listener_vision: BelieverUnit, healer_hubunit: HubUnit
 ):
     listener_id = listener_vision.believer_name
-    for x_personunit in get_ordered_debtors_roll(listener_vision):
-        if x_personunit.person_name == listener_id:
+    for x_partnerunit in get_ordered_debtors_roll(listener_vision):
+        if x_partnerunit.partner_name == listener_id:
             listener_duty = get_duty_believer(
                 belief_mstr_dir=healer_hubunit.belief_mstr_dir,
                 believer_name=healer_hubunit.believer_name,
@@ -227,7 +231,7 @@ def listen_to_agendas_duty_vision(
             )
             listen_to_speaker_agenda(listener_vision, listener_duty)
         else:
-            speaker_id = x_personunit.person_name
+            speaker_id = x_partnerunit.partner_name
             healer_name = healer_hubunit.believer_name
             speaker_vision = healer_hubunit.rj_speaker_believer(healer_name, speaker_id)
             if speaker_vision is None:
@@ -247,10 +251,10 @@ def listen_to_facts_duty_vision(new_vision: BelieverUnit, healer_hubunit: HubUni
         duty_believer_name=new_vision.believer_name,
     )
     migrate_all_facts(duty, new_vision)
-    for x_personunit in get_ordered_debtors_roll(new_vision):
-        if x_personunit.person_name != new_vision.believer_name:
+    for x_partnerunit in get_ordered_debtors_roll(new_vision):
+        if x_partnerunit.partner_name != new_vision.believer_name:
             speaker_vision = healer_hubunit.get_vision_believer(
-                x_personunit.person_name
+                x_partnerunit.partner_name
             )
             if speaker_vision is not None:
                 listen_to_speaker_fact(new_vision, speaker_vision)
@@ -259,8 +263,8 @@ def listen_to_facts_duty_vision(new_vision: BelieverUnit, healer_hubunit: HubUni
 def listen_to_facts_gut_job(belief_mstr_dir: str, new_job: BelieverUnit):
     belief_label = new_job.belief_label
     old_job = open_job_file(belief_mstr_dir, belief_label, new_job.believer_name)
-    for x_personunit in get_ordered_debtors_roll(old_job):
-        speaker_id = x_personunit.person_name
+    for x_partnerunit in get_ordered_debtors_roll(old_job):
+        speaker_id = x_partnerunit.partner_name
         speaker_job = open_job_file(belief_mstr_dir, belief_label, speaker_id)
         if speaker_job is not None:
             listen_to_speaker_fact(new_job, speaker_job)

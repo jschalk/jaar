@@ -82,7 +82,7 @@ def test_belief_build_from_df_ReturnsObj_Scenario0_OneBeliefLabel(
     )
     expected_amy23_beliefunit.add_paypurchase(
         believer_name="Zia",
-        person_name="Bob",
+        partner_name="Bob",
         tran_time=777,
         amount=888,
     )
