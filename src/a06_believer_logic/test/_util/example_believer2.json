@@ -2451,7 +2451,7 @@
                                             }
                                         }
                                     },
-                                    "core lower back": {
+                                    "core all back": {
                                         "_uid": 86,
                                         "awardlinks": {
                                             ";Family": {
@@ -2460,7 +2460,7 @@
                                                 "take_force": 1
                                             }
                                         },
-                                        "plan_label": "core lower back",
+                                        "plan_label": "core all back",
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {

@@ -1378,9 +1378,9 @@ class BelieverUnit:
         label_dict = {
             plan.get_plan_rope().lower(): plan.get_plan_rope() for plan in plan_list
         }
-        label_lowercase_ordered_list = sorted(list(label_dict))
+        label_same_case_ordered_list = sorted(list(label_dict))
         label_orginalcase_ordered_list = [
-            label_dict[label_l] for label_l in label_lowercase_ordered_list
+            label_dict[label_l] for label_l in label_same_case_ordered_list
         ]
 
         list_x = []
