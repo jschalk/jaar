@@ -10,7 +10,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_laborlink_str,
-    believer_plan_reason_premiseunit_str,
+    believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
     f_context_str,
@@ -223,7 +223,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reasonunit():
     assert sift_believeratom(sue_believer, clean_week_atom)
 
 
-def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_premiseunit_exists():
+def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_caseunit_exists():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -236,17 +236,17 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_premiseuni
     thur_rope = sue_believer.make_rope(week_rope, thur_str)
 
     casa_week_atom = believeratom_shop(
-        believer_plan_reason_premiseunit_str(), DELETE_str()
+        believer_plan_reason_caseunit_str(), DELETE_str()
     )
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
     casa_week_atom.set_arg(r_context_str(), week_rope)
-    casa_week_atom.set_arg("p_state", thur_rope)
+    casa_week_atom.set_arg("r_state", thur_rope)
     clean_week_atom = believeratom_shop(
-        believer_plan_reason_premiseunit_str(), DELETE_str()
+        believer_plan_reason_caseunit_str(), DELETE_str()
     )
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
     clean_week_atom.set_arg(r_context_str(), week_rope)
-    clean_week_atom.set_arg("p_state", thur_rope)
+    clean_week_atom.set_arg("r_state", thur_rope)
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(clean_rope)
     casa_plan = sue_believer.get_plan_obj(casa_rope)
@@ -257,14 +257,14 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_premiseuni
     assert not sift_believeratom(sue_believer, clean_week_atom)
 
     # WHEN
-    casa_plan.get_reasonunit(week_rope).set_premise(thur_rope)
+    casa_plan.get_reasonunit(week_rope).set_case(thur_rope)
 
     # THEN
     assert sift_believeratom(sue_believer, casa_week_atom)
     assert not sift_believeratom(sue_believer, clean_week_atom)
 
     # WHEN
-    clean_plan.get_reasonunit(week_rope).set_premise(thur_rope)
+    clean_plan.get_reasonunit(week_rope).set_case(thur_rope)
 
     # THEN
     assert sift_believeratom(sue_believer, casa_week_atom)

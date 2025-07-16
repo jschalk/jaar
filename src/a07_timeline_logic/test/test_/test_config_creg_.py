@@ -603,16 +603,16 @@ def test_BelieverUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
     sue_believer.edit_plan_attr(
         clean_rope,
         reason_r_context=day_rope,
-        reason_premise=day_rope,
-        p_lower=320,
-        reason_p_upper=480,
+        reason_case=day_rope,
+        r_lower=320,
+        reason_r_upper=480,
     )
 
     # WHEN
-    x_p_lower = 2063971110
-    x_p_upper1 = 2063971523
+    x_r_lower = 2063971110
+    x_r_upper1 = 2063971523
     sue_believer.add_fact(
-        cregtime_rope, f_state=cregtime_rope, f_lower=x_p_lower, f_upper=x_p_upper1
+        cregtime_rope, f_state=cregtime_rope, f_lower=x_r_lower, f_upper=x_r_upper1
     )
 
     # THEN
@@ -622,11 +622,11 @@ def test_BelieverUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
     assert clean_rope in agenda_dict.keys()
 
     # WHEN
-    # x_p_upper2 = 1063971923
-    x_p_lower2 = 0
-    x_p_upper2 = 0
+    # x_r_upper2 = 1063971923
+    x_r_lower2 = 0
+    x_r_upper2 = 0
     sue_believer.add_fact(
-        cregtime_rope, f_state=cregtime_rope, f_lower=x_p_lower2, f_upper=x_p_upper2
+        cregtime_rope, f_state=cregtime_rope, f_lower=x_r_lower2, f_upper=x_r_upper2
     )
     print(f"{sue_believer.planroot.factunits=}")
 
@@ -663,17 +663,15 @@ def test_BelieverUnit_create_agenda_plan_CorrectlyCreatesAllBelieverAttributes()
     creg_plan = sue_believer.get_plan_obj(cregtime_rope)
     print(f"{creg_plan._kids.keys()=}")
     daytime_rope = sue_believer.make_rope(cregtime_rope, "day")
-    p_lower_8am = 480
-    p_upper_8am = 480
+    r_lower_8am = 480
+    r_upper_8am = 480
 
     dirty_cookery_reason = reasonunit_shop(cookery_room_rope)
-    dirty_cookery_reason.set_premise(premise=cookery_dirty_rope)
+    dirty_cookery_reason.set_case(case=cookery_dirty_rope)
     sweep_plan.set_reasonunit(reason=dirty_cookery_reason)
 
     daytime_reason = reasonunit_shop(daytime_rope)
-    daytime_reason.set_premise(
-        premise=daytime_rope, p_lower=p_lower_8am, p_upper=p_upper_8am
-    )
+    daytime_reason.set_case(case=daytime_rope, r_lower=r_lower_8am, r_upper=r_upper_8am)
     sweep_plan.set_reasonunit(reason=daytime_reason)
 
     family_str = ",family"
@@ -724,10 +722,10 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     sue_believer.edit_plan_attr(
         laundry_rope,
         reason_r_context=cregtime_rope,
-        reason_premise=cregtime_rope,
-        p_lower=3420.0,
-        reason_p_upper=3420.0,
-        p_divisor=10080.0,
+        reason_case=cregtime_rope,
+        r_lower=3420.0,
+        reason_r_upper=3420.0,
+        r_divisor=10080.0,
     )
     print("set first fact")
 
@@ -739,15 +737,15 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
 
     laundry_plan = sue_believer.get_plan_obj(laundry_rope)
     laundry_reasonheir = laundry_plan.get_reasonheir(cregtime_rope)
-    laundry_premise = laundry_reasonheir.get_premise(cregtime_rope)
+    laundry_case = laundry_reasonheir.get_case(cregtime_rope)
     laundry_factheir = laundry_plan._factheirs.get(cregtime_rope)
     # print(
-    #     f"{laundry_plan._active=} {laundry_premise.p_lower=} {laundry_factheir.f_lower % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.r_lower=} {laundry_factheir.f_lower % 10080=}"
     # )
     # print(
-    #     f"{laundry_plan._active=} {laundry_premise.p_upper=} {laundry_factheir.f_upper % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.r_upper=} {laundry_factheir.f_upper % 10080=}"
     # )
-    # print(f"{laundry_reasonheir.r_context=} {laundry_premise=}")
+    # print(f"{laundry_reasonheir.r_context=} {laundry_case=}")
     # for x_planunit in sue_believer._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:
     #         print(f"{x_planunit.plan_label=} {x_planunit.begin=} {x_planunit.close=}")
@@ -762,13 +760,13 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
 
     laundry_plan = sue_believer.get_plan_obj(laundry_rope)
     laundry_reasonheir = laundry_plan.get_reasonheir(cregtime_rope)
-    laundry_premise = laundry_reasonheir.get_premise(cregtime_rope)
+    laundry_case = laundry_reasonheir.get_case(cregtime_rope)
     laundry_factheir = laundry_plan._factheirs.get(cregtime_rope)
     # print(
-    #     f"{laundry_plan._active=} {laundry_premise.p_lower=} {laundry_factheir.f_lower % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.r_lower=} {laundry_factheir.f_lower % 10080=}"
     # )
     # print(
-    #     f"{laundry_plan._active=} {laundry_premise.p_upper=} {laundry_factheir.f_upper % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.r_upper=} {laundry_factheir.f_upper % 10080=}"
     # )
     # for x_planunit in sue_believer._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:

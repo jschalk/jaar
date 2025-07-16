@@ -95,7 +95,7 @@
     },
     "jvalues": {}
   },
-  "believer_plan_reason_premiseunit": {
+  "believer_plan_reason_caseunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 16,
     "idea_category": "believer",
@@ -105,13 +105,13 @@
       "face_name": {},
       "belief_label": {},
       "believer_name": {},
-      "p_state": {},
+      "r_state": {},
       "r_context": {}
     },
     "jvalues": {
-      "p_divisor": {},
-      "p_upper": {},
-      "p_lower": {}
+      "r_divisor": {},
+      "r_upper": {},
+      "r_lower": {}
     }
   },
   "believer_plan_reasonunit": {

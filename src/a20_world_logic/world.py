@@ -58,7 +58,7 @@ class WorldUnit:
     world_name: WorldName = None
     worlds_dir: str = None
     output_dir: str = None
-    world_time_p_upper: TimeLinePoint = None
+    world_time_r_upper: TimeLinePoint = None
     _world_dir: str = None
     _input_dir: str = None
     _brick_dir: str = None
@@ -176,7 +176,7 @@ class WorldUnit:
     def get_dict(self) -> dict:
         return {
             "world_name": self.world_name,
-            "world_time_p_upper": self.world_time_p_upper,
+            "world_time_r_upper": self.world_time_r_upper,
         }
 
 
@@ -185,14 +185,14 @@ def worldunit_shop(
     worlds_dir: str,
     output_dir: str = None,
     input_dir: str = None,
-    world_time_p_upper: TimeLinePoint = None,
+    world_time_r_upper: TimeLinePoint = None,
     _beliefunits: set[BeliefLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_name=world_name,
         worlds_dir=worlds_dir,
         output_dir=output_dir,
-        world_time_p_upper=get_0_if_None(world_time_p_upper),
+        world_time_r_upper=get_0_if_None(world_time_r_upper),
         _events={},
         _beliefunits=get_empty_set_if_None(_beliefunits),
         _input_dir=input_dir,

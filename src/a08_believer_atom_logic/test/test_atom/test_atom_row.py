@@ -32,7 +32,7 @@ def test_AtomRow_exists():
     assert x_atomrow.group_debt_points is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
-    assert x_atomrow.p_divisor is None
+    assert x_atomrow.r_divisor is None
     assert x_atomrow.f_context is None
     assert x_atomrow.f_upper is None
     assert x_atomrow.f_lower is None
@@ -45,10 +45,10 @@ def test_AtomRow_exists():
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
-    assert x_atomrow.p_state is None
-    assert x_atomrow.p_upper is None
+    assert x_atomrow.r_state is None
+    assert x_atomrow.r_upper is None
     assert x_atomrow.numor is None
-    assert x_atomrow.p_lower is None
+    assert x_atomrow.r_lower is None
     assert x_atomrow.penny is None
     assert x_atomrow.f_state is None
     assert x_atomrow.task is None

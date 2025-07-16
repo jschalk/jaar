@@ -363,7 +363,7 @@ def add_believer_to_br00026_csv(
 ) -> str:
     for planunit in x_believer._plan_dict.values():
         for reasonunit in planunit.reasonunits.values():
-            for premiseunit in reasonunit.premises.values():
+            for caseunit in reasonunit.cases.values():
                 x_row = [
                     if_none_str(face_name),
                     if_none_str(event_int),
@@ -371,10 +371,10 @@ def add_believer_to_br00026_csv(
                     x_believer.believer_name,
                     planunit.get_plan_rope(),
                     reasonunit.r_context,
-                    premiseunit.p_state,
-                    if_none_str(premiseunit.p_lower),
-                    if_none_str(premiseunit.p_upper),
-                    if_none_str(premiseunit.p_divisor),
+                    caseunit.r_state,
+                    if_none_str(caseunit.r_lower),
+                    if_none_str(caseunit.r_upper),
+                    if_none_str(caseunit.r_divisor),
                 ]
                 x_csv += csv_delimiter.join(x_row)
                 x_csv += "\n"
@@ -617,7 +617,7 @@ def add_pack_to_br00026_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_plan_reason_premiseunit":
+        if believeratom.dimen == "believer_plan_reason_caseunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
@@ -625,10 +625,10 @@ def add_pack_to_br00026_csv(
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
                 believeratom.jkeys.get("r_context"),
-                believeratom.jkeys.get("p_state"),
-                if_none_str(believeratom.jvalues.get("p_lower")),
-                if_none_str(believeratom.jvalues.get("p_upper")),
-                if_none_str(believeratom.jvalues.get("p_divisor")),
+                believeratom.jkeys.get("r_state"),
+                if_none_str(believeratom.jvalues.get("r_lower")),
+                if_none_str(believeratom.jvalues.get("r_upper")),
+                if_none_str(believeratom.jvalues.get("r_divisor")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

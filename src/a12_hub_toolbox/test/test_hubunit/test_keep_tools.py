@@ -198,7 +198,7 @@ def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
     assert os_path_exists(keep_duty_path)
 
 
-def test_get_duty_believer_p_lowersFile(env_dir_setup_cleanup):
+def test_get_duty_believer_r_lowersFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"

@@ -81,7 +81,7 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_f_state_IsNone():
     }
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_p_lower_IsNone():
+def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_r_lower_IsNone():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     wkday_rope = sue_believer.make_l1_rope("wkdays")
@@ -172,7 +172,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_believer.set_l1_plan(clean_plan)
     c_rope = sue_believer.make_l1_rope(clean_str)
     time_rope = sue_believer.make_l1_rope(time_str)
-    # sue_believer.edit_plan_attr(c_rope, reason_r_context=time_rope, reason_premise=time_rope, p_lower=5, reason_p_upper=10)
+    # sue_believer.edit_plan_attr(c_rope, reason_r_context=time_rope, reason_case=time_rope, r_lower=5, reason_r_upper=10)
 
     sue_believer.add_fact(f_context=time_rope, f_state=time_rope, f_lower=5, f_upper=10)
     print(f"Establish a single ranged fact {sue_believer.planroot.factunits=}")

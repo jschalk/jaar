@@ -71,12 +71,12 @@ def test_BelieverAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    knee_p_lower = 7
+    knee_r_lower = 7
     x_dimen = believer_plan_factunit_str()
     update_disc_believeratom = believeratom_shop(x_dimen, INSERT_str())
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_believeratom.set_jkey(f_context_str(), knee_rope)
-    update_disc_believeratom.set_jvalue(f_lower_str(), knee_p_lower)
+    update_disc_believeratom.set_jvalue(f_lower_str(), knee_r_lower)
 
     # WHEN
     generated_sqlstr = update_disc_believeratom.get_insert_sqlstr()
@@ -91,7 +91,7 @@ INSERT INTO {atom_hx_str()} (
 VALUES (
   '{ball_rope}'
 , '{knee_rope}'
-, {knee_p_lower}
+, {knee_r_lower}
 )
 ;"""
     print(f"{generated_sqlstr=}")

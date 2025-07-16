@@ -197,16 +197,14 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     wednesday_str = "Wednesday"
     old_wednesday_rope = sue_believer.make_rope(old_wkday_rope, wednesday_str)
     casa_plan = sue_believer.get_plan_obj(sue_believer.make_l1_rope("casa"))
-    # casa_wk_reason = reasonunit_shop(wkday, premises={wed_premise.p_state: wed_premise})
-    # nation_reason = reasonunit_shop(nation, premises={usa_premise.p_state: usa_premise})
+    # casa_wk_reason = reasonunit_shop(wkday, cases={wed_case.r_state: wed_case})
+    # nation_reason = reasonunit_shop(nation, cases={usa_case.r_state: usa_case})
     assert len(casa_plan.reasonunits) == 2
     assert casa_plan.reasonunits.get(old_wkday_rope) is not None
     wednesday_plan = sue_believer.get_plan_obj(old_wkday_rope)
     casa_wkday_reason = casa_plan.reasonunits.get(old_wkday_rope)
-    assert casa_wkday_reason.premises.get(old_wednesday_rope) is not None
-    assert (
-        casa_wkday_reason.premises.get(old_wednesday_rope).p_state == old_wednesday_rope
-    )
+    assert casa_wkday_reason.cases.get(old_wednesday_rope) is not None
+    assert casa_wkday_reason.cases.get(old_wednesday_rope).r_state == old_wednesday_rope
     new_wkday_str = "days of wk"
     new_wkday_rope = sue_believer.make_l1_rope(new_wkday_str)
     new_wednesday_rope = sue_believer.make_rope(new_wkday_rope, wednesday_str)
@@ -227,10 +225,8 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     assert casa_plan.reasonunits.get(new_wkday_rope) is not None
     assert casa_plan.reasonunits.get(old_wkday_rope) is None
     casa_wkday_reason = casa_plan.reasonunits.get(new_wkday_rope)
-    assert casa_wkday_reason.premises.get(new_wednesday_rope) is not None
-    assert (
-        casa_wkday_reason.premises.get(new_wednesday_rope).p_state == new_wednesday_rope
-    )
+    assert casa_wkday_reason.cases.get(new_wednesday_rope) is not None
+    assert casa_wkday_reason.cases.get(new_wednesday_rope).r_state == new_wednesday_rope
     assert len(casa_plan.reasonunits) == 2
 
 

@@ -2,8 +2,8 @@ from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import (
+    caseunit_shop,
     factunit_shop,
-    premiseunit_shop,
     reasonheir_shop,
     reasonunit_shop,
 )
@@ -75,20 +75,20 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
 
-    wed_premise = premiseunit_shop(p_state=wed_rope)
-    wed_premise._status = True
-    usa_premise = premiseunit_shop(p_state=usa_rope)
-    usa_premise._status = False
+    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_case._status = True
+    usa_case = caseunit_shop(r_state=usa_rope)
+    usa_case._status = False
 
     x1_reasonunits = {
-        wk_rope: reasonunit_shop(wk_rope, premises={wed_premise.p_state: wed_premise}),
-        nation_rope: reasonunit_shop(nation_rope, {usa_premise.p_state: usa_premise}),
+        wk_rope: reasonunit_shop(wk_rope, cases={wed_case.r_state: wed_case}),
+        nation_rope: reasonunit_shop(nation_rope, {usa_case.r_state: usa_case}),
     }
-    wed_premises = {wed_premise.p_state: wed_premise}
-    usa_premises = {usa_premise.p_state: usa_premise}
+    wed_cases = {wed_case.r_state: wed_case}
+    usa_cases = {usa_case.r_state: usa_case}
     x1_reasonheirs = {
-        wk_rope: reasonheir_shop(wk_rope, wed_premises, _status=True),
-        nation_rope: reasonheir_shop(nation_rope, usa_premises, _status=False),
+        wk_rope: reasonheir_shop(wk_rope, wed_cases, _status=True),
+        nation_rope: reasonheir_shop(nation_rope, usa_cases, _status=False),
     }
     biker_awardee_title = "bikers"
     biker_give_force = 3.0

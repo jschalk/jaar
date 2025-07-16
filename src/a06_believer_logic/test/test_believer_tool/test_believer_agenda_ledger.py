@@ -293,7 +293,7 @@ def test_get_partner_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give()
     sue_believer.add_plan(dirty_rope)
     sue_believer.add_plan(mop_rope, task=True)
     sue_believer.edit_plan_attr(
-        mop_rope, reason_r_context=floor_rope, reason_premise=clean_rope
+        mop_rope, reason_r_context=floor_rope, reason_case=clean_rope
     )
     yao_str = "Yao"
     sue_believer.add_partnerunit(yao_str, 13, 5)

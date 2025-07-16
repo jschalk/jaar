@@ -596,11 +596,11 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -620,11 +620,11 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -645,11 +645,11 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -668,11 +668,11 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;x2;Sept 4th 2023 9am": {
-                        "p_upper": 1064350680.0,
-                        "p_lower": 1064350680.0,
-                        "p_state": ";A;time;gregtime;x2;Sept 4th 2023 9am"
+                        "r_upper": 1064350680.0,
+                        "r_lower": 1064350680.0,
+                        "r_state": ";A;time;gregtime;x2;Sept 4th 2023 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -688,11 +688,11 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -713,11 +713,11 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -737,11 +737,11 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -762,11 +762,11 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -786,11 +786,11 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;x;Sept 4th 2023 9am": {
-                            "p_upper": 1064350680.0,
-                            "p_lower": 1064350680.0,
-                            "p_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                            "r_upper": 1064350680.0,
+                            "r_lower": 1064350680.0,
+                            "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -821,12 +821,12 @@
                         "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
-                            "premises": {
+                            "cases": {
                               "A;time;gregtime;day": {
-                                "p_divisor": 1440,
-                                "p_upper": 360,
-                                "p_lower": 360,
-                                "p_state": ";A;time;gregtime;day"
+                                "r_divisor": 1440,
+                                "r_upper": 360,
+                                "r_lower": 360,
+                                "r_state": ";A;time;gregtime;day"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -862,12 +862,12 @@
                         "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
-                            "premises": {
+                            "cases": {
                               "A;time;gregtime;day": {
-                                "p_divisor": 1440,
-                                "p_upper": 360,
-                                "p_lower": 360,
-                                "p_state": ";A;time;gregtime;day"
+                                "r_divisor": 1440,
+                                "r_upper": 360,
+                                "r_lower": 360,
+                                "r_state": ";A;time;gregtime;day"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -880,12 +880,12 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 360,
-                            "p_lower": 360,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 360,
+                            "r_lower": 360,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -899,12 +899,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 450,
-                            "p_lower": 450,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 450,
+                            "r_lower": 450,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -918,12 +918,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 525,
-                            "p_lower": 525,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 525,
+                            "r_lower": 525,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -936,12 +936,12 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;day": {
-                        "p_divisor": 1440,
-                        "p_upper": 360,
-                        "p_lower": 360,
-                        "p_state": ";A;time;gregtime;day"
+                        "r_divisor": 1440,
+                        "r_upper": 360,
+                        "r_lower": 360,
+                        "r_state": ";A;time;gregtime;day"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -957,12 +957,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 540,
-                            "p_lower": 540,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 540,
+                            "r_lower": 540,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -976,12 +976,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 540,
-                            "p_lower": 540,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 540,
+                            "r_lower": 540,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -997,12 +997,12 @@
                         "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
-                            "premises": {
+                            "cases": {
                               "A;time;gregtime;day": {
-                                "p_divisor": 1440,
-                                "p_upper": 540,
-                                "p_lower": 540,
-                                "p_state": ";A;time;gregtime;day"
+                                "r_divisor": 1440,
+                                "r_upper": 540,
+                                "r_lower": 540,
+                                "r_state": ";A;time;gregtime;day"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1038,12 +1038,12 @@
                         "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
-                            "premises": {
+                            "cases": {
                               "A;time;gregtime;day": {
-                                "p_divisor": 1440,
-                                "p_upper": 480,
-                                "p_lower": 480,
-                                "p_state": ";A;time;gregtime;day"
+                                "r_divisor": 1440,
+                                "r_upper": 480,
+                                "r_lower": 480,
+                                "r_state": ";A;time;gregtime;day"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1057,12 +1057,12 @@
                         "task": true,
                         "reasonunits": {
                           "A;time;gregtime;": {
-                            "premises": {
+                            "cases": {
                               "A;time;gregtime;day": {
-                                "p_divisor": 1440,
-                                "p_upper": 540,
-                                "p_lower": 540,
-                                "p_state": ";A;time;gregtime;day"
+                                "r_divisor": 1440,
+                                "r_upper": 540,
+                                "r_lower": 540,
+                                "r_state": ";A;time;gregtime;day"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1080,12 +1080,12 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 1020,
-                            "p_lower": 1020,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 1020,
+                            "r_lower": 1020,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -1099,12 +1099,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 540,
-                            "p_lower": 540,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 540,
+                            "r_lower": 540,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -1119,12 +1119,12 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;time;gregtime;": {
-                            "premises": {
+                            "cases": {
                               "A;time;gregtime;day": {
-                                "p_divisor": 1440,
-                                "p_upper": 540,
-                                "p_lower": 540,
-                                "p_state": ";A;time;gregtime;day"
+                                "r_divisor": 1440,
+                                "r_upper": 540,
+                                "r_lower": 540,
+                                "r_state": ";A;time;gregtime;day"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1137,12 +1137,12 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;day": {
-                            "p_divisor": 1440,
-                            "p_upper": 540,
-                            "p_lower": 540,
-                            "p_state": ";A;time;gregtime;day"
+                            "r_divisor": 1440,
+                            "r_upper": 540,
+                            "r_lower": 540,
+                            "r_state": ";A;time;gregtime;day"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -1157,12 +1157,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;day": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 1080.0,
-                        "p_lower": 540.0,
-                        "p_state": ";A;time;gregtime;day"
+                        "r_divisor": 1440.0,
+                        "r_upper": 1080.0,
+                        "r_lower": 540.0,
+                        "r_state": ";A;time;gregtime;day"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1175,12 +1175,12 @@
             "mass": 1,
             "reasonunits": {
               "A;time;gregtime;": {
-                "premises": {
+                "cases": {
                   "A;time;gregtime;day": {
-                    "p_divisor": 1440,
-                    "p_upper": 360,
-                    "p_lower": 360,
-                    "p_state": ";A;time;gregtime;day"
+                    "r_divisor": 1440,
+                    "r_upper": 360,
+                    "r_lower": 360,
+                    "r_state": ";A;time;gregtime;day"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -1209,9 +1209,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
-                                "premises": {
+                                "cases": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;": {
-                                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"
+                                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"
                                   }
                                 },
                                 "r_context": ";A;Nation-States;"
@@ -1226,9 +1226,9 @@
                                 "mass": 1,
                                 "reasonunits": {
                                   "A;Interweb;": {
-                                    "premises": {
+                                    "cases": {
                                       "A;Interweb,YahooVideo": {
-                                        "p_state": ";A;Interweb,YahooVideo"
+                                        "r_state": ";A;Interweb,YahooVideo"
                                       }
                                     },
                                     "r_context": ";A;Interweb;"
@@ -1241,9 +1241,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
-                                "premises": {
+                                "cases": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;": {
-                                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
+                                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
                                   }
                                 },
                                 "r_context": ";A;Nation-States;"
@@ -1256,9 +1256,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
-                                "premises": {
+                                "cases": {
                                   "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                   }
                                 },
                                 "r_context": ";A;Nation-States;"
@@ -1271,9 +1271,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Moods;": {
-                                "premises": {
+                                "cases": {
                                   "A;Moods;hungry;": {
-                                    "p_state": ";A;Moods;hungry;"
+                                    "r_state": ";A;Moods;hungry;"
                                   }
                                 },
                                 "r_context": ";A;Moods;"
@@ -1286,9 +1286,9 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States;": {
-                            "premises": {
+                            "cases": {
                               "A;Nation-States;USA;Portland OR;Downtown;Flats": {
-                                "p_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
+                                "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
                               }
                             },
                             "r_context": ";A;Nation-States;"
@@ -1303,9 +1303,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
-                                "premises": {
+                                "cases": {
                                   "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
-                                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
+                                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
                                   }
                                 },
                                 "r_context": ";A;Nation-States;"
@@ -1318,9 +1318,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Seasons;": {
-                                "premises": {
+                                "cases": {
                                   "A;Seasons;Summer;": {
-                                    "p_state": ";A;Seasons;Summer;"
+                                    "r_state": ";A;Seasons;Summer;"
                                   }
                                 },
                                 "r_context": ";A;Seasons;"
@@ -1333,9 +1333,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
-                                "premises": {
+                                "cases": {
                                   "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
-                                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
+                                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
                                   }
                                 },
                                 "r_context": ";A;Nation-States;"
@@ -1348,9 +1348,9 @@
                             "mass": 1,
                             "reasonunits": {
                               "A;Nation-States;": {
-                                "premises": {
+                                "cases": {
                                   "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
-                                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
+                                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
                                   }
                                 },
                                 "r_context": ";A;Nation-States;"
@@ -1363,9 +1363,9 @@
                         "mass": 1,
                         "reasonunits": {
                           "A;Nation-States;": {
-                            "premises": {
+                            "cases": {
                               "A;Nation-States;USA;Portland OR;Downtown;PSU": {
-                                "p_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
+                                "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
                               }
                             },
                             "r_context": ";A;Nation-States;"
@@ -1378,9 +1378,9 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;Nation-States;": {
-                        "premises": {
+                        "cases": {
                           "A;Nation-States;USA;Portland OR;Downtown": {
-                            "p_state": ";A;Nation-States;USA;Portland OR;Downtown"
+                            "r_state": ";A;Nation-States;USA;Portland OR;Downtown"
                           }
                         },
                         "r_context": ";A;Nation-States;"
@@ -1393,9 +1393,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States;": {
-                    "premises": {
+                    "cases": {
                       "A;Nation-States;USA;Portland OR": {
-                        "p_state": ";A;Nation-States;USA;Portland OR"
+                        "r_state": ";A;Nation-States;USA;Portland OR"
                       }
                     },
                     "r_context": ";A;Nation-States;"
@@ -1408,9 +1408,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Nation-States;": {
-                    "premises": {
+                    "cases": {
                       "A;Nation-States;USA;Texas": {
-                        "p_state": ";A;Nation-States;USA;Texas"
+                        "r_state": ";A;Nation-States;USA;Texas"
                       }
                     },
                     "r_context": ";A;Nation-States;"
@@ -1423,9 +1423,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
-                "premises": {
+                "cases": {
                   "A;Nation-States;USA": {
-                    "p_state": ";A;Nation-States;USA"
+                    "r_state": ";A;Nation-States;USA"
                   }
                 },
                 "r_context": ";A;Nation-States;"
@@ -1438,9 +1438,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
-                "premises": {
+                "cases": {
                   "A;Nation-States;France2": {
-                    "p_state": ";A;Nation-States;France2"
+                    "r_state": ";A;Nation-States;France2"
                   }
                 },
                 "r_context": ";A;Nation-States;"
@@ -1464,11 +1464,11 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_upper": 1472657760,
-                        "p_lower": 0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_upper": 1472657760,
+                        "r_lower": 0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1520,12 +1520,12 @@
             "task": true,
             "reasonunits": {
               "A;time;gregtime;": {
-                "premises": {
+                "cases": {
                   "A;time;gregtime;": {
-                    "p_divisor": 10080.0,
-                    "p_upper": 480.0,
-                    "p_lower": 480.0,
-                    "p_state": ";A;time;gregtime;"
+                    "r_divisor": 10080.0,
+                    "r_upper": 480.0,
+                    "r_lower": 480.0,
+                    "r_state": ";A;time;gregtime;"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -1538,9 +1538,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Moods;": {
-                "premises": {
+                "cases": {
                   "A;Moods;Happy;Happy - angerish": {
-                    "p_state": ";A;Moods;Happy;Happy - angerish"
+                    "r_state": ";A;Moods;Happy;Happy - angerish"
                   }
                 },
                 "r_context": ";A;Moods;"
@@ -1563,12 +1563,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3360.0,
-                        "p_lower": 3360.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3360.0,
+                        "r_lower": 3360.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1582,12 +1582,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 420.0,
-                        "p_lower": 420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 420.0,
+                        "r_lower": 420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1608,12 +1608,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 60480.0,
-                        "p_upper": 660.0,
-                        "p_lower": 660.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 60480.0,
+                        "r_upper": 660.0,
+                        "r_lower": 660.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1634,12 +1634,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 600.0,
-                        "p_lower": 600.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 600.0,
+                        "r_lower": 600.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1661,12 +1661,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1687,12 +1687,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1713,12 +1713,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 30240.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 30240.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1739,12 +1739,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 1200.0,
-                        "p_lower": 1200.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 1200.0,
+                        "r_lower": 1200.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1765,12 +1765,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 40320.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 40320.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1791,12 +1791,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 4800.0,
-                        "p_lower": 4800.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 4800.0,
+                        "r_lower": 4800.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1817,12 +1817,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 9120.0,
-                        "p_lower": 9120.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 9120.0,
+                        "r_lower": 9120.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1860,20 +1860,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
-                    "premises": {
+                    "cases": {
                       "A;casa;cleaning;laundry basket status;full": {
-                        "p_state": ";A;casa;cleaning;laundry basket status;full"
+                        "r_state": ";A;casa;cleaning;laundry basket status;full"
                       }
                     },
                     "r_context": ";A;casa;cleaning;laundry basket status;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1894,20 +1894,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
-                    "premises": {
+                    "cases": {
                       "A;casa;cleaning;laundry basket status;full": {
-                        "p_state": ";A;casa;cleaning;laundry basket status;full"
+                        "r_state": ";A;casa;cleaning;laundry basket status;full"
                       }
                     },
                     "r_context": ";A;casa;cleaning;laundry basket status;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 420.0,
-                        "p_lower": 420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 420.0,
+                        "r_lower": 420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1921,20 +1921,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
-                    "premises": {
+                    "cases": {
                       "A;casa;cleaning;laundry basket status;full": {
-                        "p_state": ";A;casa;cleaning;laundry basket status;full"
+                        "r_state": ";A;casa;cleaning;laundry basket status;full"
                       }
                     },
                     "r_context": ";A;casa;cleaning;laundry basket status;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 7740.0,
-                        "p_lower": 7740.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 7740.0,
+                        "r_lower": 7740.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1955,20 +1955,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;casa;cleaning;laundry basket status;": {
-                    "premises": {
+                    "cases": {
                       "A;casa;cleaning;laundry basket status;full": {
-                        "p_state": ";A;casa;cleaning;laundry basket status;full"
+                        "r_state": ";A;casa;cleaning;laundry basket status;full"
                       }
                     },
                     "r_context": ";A;casa;cleaning;laundry basket status;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 6300.0,
-                        "p_lower": 6300.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 6300.0,
+                        "r_lower": 6300.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1981,12 +1981,12 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 480.0,
-                        "p_lower": 480.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 480.0,
+                        "r_lower": 480.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2007,12 +2007,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 480.0,
-                        "p_lower": 480.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 480.0,
+                        "r_lower": 480.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2033,12 +2033,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 4740.0,
-                        "p_lower": 4740.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 4740.0,
+                        "r_lower": 4740.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2059,12 +2059,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 9060.0,
-                        "p_lower": 9060.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 9060.0,
+                        "r_lower": 9060.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2085,12 +2085,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2111,12 +2111,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 7620.0,
-                        "p_lower": 7620.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 7620.0,
+                        "r_lower": 7620.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2137,12 +2137,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2163,12 +2163,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2181,9 +2181,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
-                "premises": {
+                "cases": {
                   "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                    "p_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                    "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                   }
                 },
                 "r_context": ";A;Nation-States;"
@@ -2207,12 +2207,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;day": {
-                        "p_divisor": 1440,
-                        "p_upper": 420,
-                        "p_lower": 420,
-                        "p_state": ";A;time;gregtime;day"
+                        "r_divisor": 1440,
+                        "r_upper": 420,
+                        "r_lower": 420,
+                        "r_state": ";A;time;gregtime;day"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2233,12 +2233,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 420.0,
-                        "p_lower": 420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 420.0,
+                        "r_lower": 420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2259,12 +2259,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 80640.0,
-                        "p_upper": 4860.0,
-                        "p_lower": 4860.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 80640.0,
+                        "r_upper": 4860.0,
+                        "r_lower": 4860.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2285,12 +2285,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2311,12 +2311,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 420.0,
-                        "p_lower": 420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 420.0,
+                        "r_lower": 420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2329,12 +2329,12 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 1080.0,
-                        "p_lower": 1080.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 1080.0,
+                        "r_lower": 1080.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2355,12 +2355,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 80640.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 80640.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2383,12 +2383,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 9600.0,
-                            "p_lower": 9600.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 9600.0,
+                            "r_lower": 9600.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2421,12 +2421,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 3360.0,
-                            "p_lower": 3360.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 3360.0,
+                            "r_lower": 3360.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2439,12 +2439,12 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 6242.0,
-                            "p_lower": 6242.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 6242.0,
+                            "r_lower": 6242.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2465,12 +2465,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 3420.0,
-                            "p_lower": 3420.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 3420.0,
+                            "r_lower": 3420.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2490,12 +2490,12 @@
                     "mass": 1,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 7200.0,
-                            "p_lower": 7200.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 7200.0,
+                            "r_lower": 7200.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2532,12 +2532,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 4800.0,
-                            "p_lower": 4800.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 4800.0,
+                            "r_lower": 4800.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2558,12 +2558,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 6240.0,
-                            "p_lower": 6240.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 6240.0,
+                            "r_lower": 6240.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2589,12 +2589,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 420.0,
-                        "p_lower": 420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 420.0,
+                        "r_lower": 420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2615,12 +2615,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2641,12 +2641,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 1440.0,
-                        "p_upper": 420.0,
-                        "p_lower": 420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 1440.0,
+                        "r_upper": 420.0,
+                        "r_lower": 420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2663,12 +2663,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 9180.0,
-                            "p_lower": 9180.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 9180.0,
+                            "r_lower": 9180.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2682,12 +2682,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 9180.0,
-                            "p_lower": 9180.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 9180.0,
+                            "r_lower": 9180.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -2707,12 +2707,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 9180.0,
-                        "p_lower": 9180.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 9180.0,
+                        "r_lower": 9180.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2733,12 +2733,12 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 3420.0,
-                        "p_lower": 3420.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 3420.0,
+                        "r_lower": 3420.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2767,11 +2767,11 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                        "p_upper": 1064041020.0,
-                        "p_lower": 1064041020.0,
-                        "p_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_upper": 1064041020.0,
+                        "r_lower": 1064041020.0,
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2792,11 +2792,11 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                        "p_upper": 1064041020.0,
-                        "p_lower": 1064041020.0,
-                        "p_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_upper": 1064041020.0,
+                        "r_lower": 1064041020.0,
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2817,11 +2817,11 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                        "p_upper": 1064041020.0,
-                        "p_lower": 1064041020.0,
-                        "p_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_upper": 1064041020.0,
+                        "r_lower": 1064041020.0,
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2842,11 +2842,11 @@
                 "task": true,
                 "reasonunits": {
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
-                        "p_upper": 1064041020.0,
-                        "p_lower": 1064041020.0,
-                        "p_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_upper": 1064041020.0,
+                        "r_lower": 1064041020.0,
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2984,9 +2984,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Interweb;": {
-                "premises": {
+                "cases": {
                   "A;Interweb,Faaceboook": {
-                    "p_state": ";A;Interweb,Faaceboook"
+                    "r_state": ";A;Interweb,Faaceboook"
                   }
                 },
                 "r_context": ";A;Interweb;"
@@ -3010,20 +3010,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;Nation-States;": {
-                    "premises": {
+                    "cases": {
                       "A;Nation-States;USA;Portland OR": {
-                        "p_state": ";A;Nation-States;USA;Portland OR"
+                        "r_state": ";A;Nation-States;USA;Portland OR"
                       }
                     },
                     "r_context": ";A;Nation-States;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 10080.0,
-                        "p_upper": 5340.0,
-                        "p_lower": 5340.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 10080.0,
+                        "r_upper": 5340.0,
+                        "r_lower": 5340.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3044,20 +3044,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;Nation-States;": {
-                    "premises": {
+                    "cases": {
                       "A;Nation-States;USA;Portland OR": {
-                        "p_state": ";A;Nation-States;USA;Portland OR"
+                        "r_state": ";A;Nation-States;USA;Portland OR"
                       }
                     },
                     "r_context": ";A;Nation-States;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 60480.0,
-                        "p_upper": 840.0,
-                        "p_lower": 840.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 60480.0,
+                        "r_upper": 840.0,
+                        "r_lower": 840.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3070,9 +3070,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Nation-States;": {
-                "premises": {
+                "cases": {
                   "A;Nation-States;USA;Portland OR": {
-                    "p_state": ";A;Nation-States;USA;Portland OR"
+                    "r_state": ";A;Nation-States;USA;Portland OR"
                   }
                 },
                 "r_context": ";A;Nation-States;"
@@ -3086,12 +3086,12 @@
             "task": true,
             "reasonunits": {
               "A;time;gregtime;": {
-                "premises": {
+                "cases": {
                   "A;time;gregtime;day": {
-                    "p_divisor": 1440.0,
-                    "p_upper": 480.0,
-                    "p_lower": 480.0,
-                    "p_state": ";A;time;gregtime;day"
+                    "r_divisor": 1440.0,
+                    "r_upper": 480.0,
+                    "r_lower": 480.0,
+                    "r_state": ";A;time;gregtime;day"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -3112,12 +3112,12 @@
             "task": true,
             "reasonunits": {
               "A;time;gregtime;": {
-                "premises": {
+                "cases": {
                   "A;time;gregtime;": {
-                    "p_divisor": 1440.0,
-                    "p_upper": 480.0,
-                    "p_lower": 480.0,
-                    "p_state": ";A;time;gregtime;"
+                    "r_divisor": 1440.0,
+                    "r_upper": 480.0,
+                    "r_lower": 480.0,
+                    "r_state": ";A;time;gregtime;"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -3148,9 +3148,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
-                    "premises": {
+                    "cases": {
                       "A;Aaron Donald objects effected by him;interesting": {
-                        "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
                       }
                     },
                     "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3170,9 +3170,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
-                "premises": {
+                "cases": {
                   "A;Aaron Donald objects effected by him;interesting": {
-                    "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                    "r_state": ";A;Aaron Donald objects effected by him;interesting"
                   }
                 },
                 "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3188,20 +3188,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
-                    "premises": {
+                    "cases": {
                       "A;Aaron Donald objects effected by him;interesting": {
-                        "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
                       }
                     },
                     "r_context": ";A;Aaron Donald objects effected by him;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;day": {
-                        "p_divisor": 1440,
-                        "p_upper": 660,
-                        "p_lower": 660,
-                        "p_state": ";A;time;gregtime;day"
+                        "r_divisor": 1440,
+                        "r_upper": 660,
+                        "r_lower": 660,
+                        "r_state": ";A;time;gregtime;day"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3221,9 +3221,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
-                "premises": {
+                "cases": {
                   "A;Aaron Donald objects effected by him;interesting": {
-                    "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                    "r_state": ";A;Aaron Donald objects effected by him;interesting"
                   }
                 },
                 "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3246,20 +3246,20 @@
                 "task": true,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
-                    "premises": {
+                    "cases": {
                       "A;Aaron Donald objects effected by him;interesting": {
-                        "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
                       }
                     },
                     "r_context": ";A;Aaron Donald objects effected by him;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 20160.0,
-                        "p_upper": 4920.0,
-                        "p_lower": 4920.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 20160.0,
+                        "r_upper": 4920.0,
+                        "r_lower": 4920.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3272,9 +3272,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
-                "premises": {
+                "cases": {
                   "A;Aaron Donald objects effected by him;interesting": {
-                    "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                    "r_state": ";A;Aaron Donald objects effected by him;interesting"
                   }
                 },
                 "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3288,20 +3288,20 @@
             "task": true,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
-                "premises": {
+                "cases": {
                   "A;Aaron Donald objects effected by him;interesting": {
-                    "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                    "r_state": ";A;Aaron Donald objects effected by him;interesting"
                   }
                 },
                 "r_context": ";A;Aaron Donald objects effected by him;"
               },
               "A;time;gregtime;": {
-                "premises": {
+                "cases": {
                   "A;time;gregtime;": {
-                    "p_divisor": 1440.0,
-                    "p_upper": 1305.0,
-                    "p_lower": 1305.0,
-                    "p_state": ";A;time;gregtime;"
+                    "r_divisor": 1440.0,
+                    "r_upper": 1305.0,
+                    "r_lower": 1305.0,
+                    "r_state": ";A;time;gregtime;"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -3319,12 +3319,12 @@
                     "task": true,
                     "reasonunits": {
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 6495.0,
-                            "p_lower": 6480.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 6495.0,
+                            "r_lower": 6480.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -3357,20 +3357,20 @@
                     "task": true,
                     "reasonunits": {
                       "A;Aaron Donald objects effected by him;": {
-                        "premises": {
+                        "cases": {
                           "A;Aaron Donald objects effected by him;interesting": {
-                            "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                            "r_state": ";A;Aaron Donald objects effected by him;interesting"
                           }
                         },
                         "r_context": ";A;Aaron Donald objects effected by him;"
                       },
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 10080.0,
-                            "p_upper": 6540.0,
-                            "p_lower": 6480.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 10080.0,
+                            "r_upper": 6540.0,
+                            "r_lower": 6480.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -3396,20 +3396,20 @@
                     "task": true,
                     "reasonunits": {
                       "A;Aaron Donald objects effected by him;": {
-                        "premises": {
+                        "cases": {
                           "A;Aaron Donald objects effected by him;interesting": {
-                            "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                            "r_state": ";A;Aaron Donald objects effected by him;interesting"
                           }
                         },
                         "r_context": ";A;Aaron Donald objects effected by him;"
                       },
                       "A;time;gregtime;": {
-                        "premises": {
+                        "cases": {
                           "A;time;gregtime;": {
-                            "p_divisor": 20160.0,
-                            "p_upper": 600.0,
-                            "p_lower": 600.0,
-                            "p_state": ";A;time;gregtime;"
+                            "r_divisor": 20160.0,
+                            "r_upper": 600.0,
+                            "r_lower": 600.0,
+                            "r_state": ";A;time;gregtime;"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -3429,9 +3429,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
-                    "premises": {
+                    "cases": {
                       "A;Aaron Donald objects effected by him;interesting": {
-                        "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
                       }
                     },
                     "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3444,9 +3444,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
-                "premises": {
+                "cases": {
                   "A;Aaron Donald objects effected by him;interesting": {
-                    "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                    "r_state": ";A;Aaron Donald objects effected by him;interesting"
                   }
                 },
                 "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3468,20 +3468,20 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Aaron Donald objects effected by him;": {
-                    "premises": {
+                    "cases": {
                       "A;Aaron Donald objects effected by him;interesting": {
-                        "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
                       }
                     },
                     "r_context": ";A;Aaron Donald objects effected by him;"
                   },
                   "A;time;gregtime;": {
-                    "premises": {
+                    "cases": {
                       "A;time;gregtime;": {
-                        "p_divisor": 20160.0,
-                        "p_upper": 600.0,
-                        "p_lower": 600.0,
-                        "p_state": ";A;time;gregtime;"
+                        "r_divisor": 20160.0,
+                        "r_upper": 600.0,
+                        "r_lower": 600.0,
+                        "r_state": ";A;time;gregtime;"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3494,9 +3494,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Aaron Donald objects effected by him;": {
-                "premises": {
+                "cases": {
                   "A;Aaron Donald objects effected by him;interesting": {
-                    "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                    "r_state": ";A;Aaron Donald objects effected by him;interesting"
                   }
                 },
                 "r_context": ";A;Aaron Donald objects effected by him;"
@@ -3526,9 +3526,9 @@
         "mass": 1,
         "reasonunits": {
           "A;Aaron Donald objects effected by him;": {
-            "premises": {
+            "cases": {
               "A;Aaron Donald objects effected by him;interesting": {
-                "p_state": ";A;Aaron Donald objects effected by him;interesting"
+                "r_state": ";A;Aaron Donald objects effected by him;interesting"
               }
             },
             "r_context": ";A;Aaron Donald objects effected by him;"
@@ -5188,9 +5188,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Moods;": {
-                "premises": {
+                "cases": {
                   "A;Moods;Happy": {
-                    "p_state": ";A;Moods;Happy"
+                    "r_state": ";A;Moods;Happy"
                   }
                 },
                 "r_context": ";A;Moods;"
@@ -5203,9 +5203,9 @@
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing;": {
-                "premises": {
+                "cases": {
                   "A;No Movie playing;Big Lewbwski": {
-                    "p_state": ";A;No Movie playing;Big Lewbwski"
+                    "r_state": ";A;No Movie playing;Big Lewbwski"
                   }
                 },
                 "r_context": ";A;No Movie playing;"
@@ -5220,9 +5220,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;Moods;": {
-                    "premises": {
+                    "cases": {
                       "A;Moods;Happy": {
-                        "p_state": ";A;Moods;Happy"
+                        "r_state": ";A;Moods;Happy"
                       }
                     },
                     "r_context": ";A;Moods;"
@@ -5235,9 +5235,9 @@
             "mass": 1,
             "reasonunits": {
               "A;Moods;": {
-                "premises": {
+                "cases": {
                   "A;Moods;Happy": {
-                    "p_state": ";A;Moods;Happy"
+                    "r_state": ";A;Moods;Happy"
                   }
                 },
                 "r_context": ";A;Moods;"
@@ -5250,9 +5250,9 @@
             "mass": 1,
             "reasonunits": {
               "A;No Movie playing;": {
-                "premises": {
+                "cases": {
                   "A;No Movie playing;Star Wars eps IV": {
-                    "p_state": ";A;No Movie playing;Star Wars eps IV"
+                    "r_state": ";A;No Movie playing;Star Wars eps IV"
                   }
                 },
                 "r_context": ";A;No Movie playing;"
@@ -5265,9 +5265,9 @@
         "mass": 1,
         "reasonunits": {
           "A;Moods;": {
-            "premises": {
+            "cases": {
               "A;Moods;Happy": {
-                "p_state": ";A;Moods;Happy"
+                "r_state": ";A;Moods;Happy"
               }
             },
             "r_context": ";A;Moods;"
@@ -5285,9 +5285,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence;": {
-                    "premises": {
+                    "cases": {
                       "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
-                        "p_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                        "r_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
                       }
                     },
                     "r_context": ";A;WaterExistence;"
@@ -5300,9 +5300,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence;": {
-                    "premises": {
+                    "cases": {
                       "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
-                        "p_state": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                        "r_state": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
                       }
                     },
                     "r_context": ";A;WaterExistence;"
@@ -5315,9 +5315,9 @@
                 "mass": 1,
                 "reasonunits": {
                   "A;WaterExistence;": {
-                    "premises": {
+                    "cases": {
                       "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
-                        "p_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                        "r_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
                       }
                     },
                     "r_context": ";A;WaterExistence;"
@@ -5330,9 +5330,9 @@
             "mass": 1,
             "reasonunits": {
               "A;WaterExistence;": {
-                "premises": {
+                "cases": {
                   "A;WaterExistence;Williamette WaterShed": {
-                    "p_state": ";A;WaterExistence;Williamette WaterShed"
+                    "r_state": ";A;WaterExistence;Williamette WaterShed"
                   }
                 },
                 "r_context": ";A;WaterExistence;"

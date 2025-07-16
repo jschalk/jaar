@@ -109,8 +109,8 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetai
     bob_vision = get_example_bob_speaker()
     bob_vision.edit_plan_attr(
         cook_rope(),
-        reason_del_premise_r_context=eat_rope(),
-        reason_del_premise_p_state=hungry_rope(),
+        reason_del_case_r_context=eat_rope(),
+        reason_del_case_r_state=hungry_rope(),
     )
     bob_cook_planunit = bob_vision.get_plan_obj(cook_rope())
     zia_cook_planunit = zia_vision.get_plan_obj(cook_rope())

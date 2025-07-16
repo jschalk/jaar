@@ -10,7 +10,7 @@ from src.a06_believer_logic.believer_tool import (
     believer_plan_factunit_exists,
     believer_plan_healerlink_exists,
     believer_plan_laborlink_exists,
-    believer_plan_reason_premiseunit_exists as premiseunit_exists,
+    believer_plan_reason_caseunit_exists as caseunit_exists,
     believer_plan_reasonunit_exists,
     believer_planunit_exists,
     believerunit_exists,
@@ -23,7 +23,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_laborlink_str,
-    believer_plan_reason_premiseunit_str,
+    believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
@@ -31,10 +31,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    p_state_str,
     partner_name_str,
     plan_rope_str,
     r_context_str,
+    r_state_str,
 )
 
 
@@ -193,7 +193,7 @@ def test_believer_plan_reasonunit_exists_ReturnsObj():
     assert not believer_plan_reasonunit_exists(sue_believer, clean_jkeys)
 
 
-def test_believer_plan_reason_premiseunit_exists_ReturnsObj():
+def test_believer_plan_reason_caseunit_exists_ReturnsObj():
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -206,45 +206,45 @@ def test_believer_plan_reason_premiseunit_exists_ReturnsObj():
     root_jkeys = {
         plan_rope_str(): root_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
     casa_jkeys = {
         plan_rope_str(): casa_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
     clean_jkeys = {
         plan_rope_str(): clean_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
 
     # WHEN / THEN
-    assert not premiseunit_exists(None, {})
-    assert not premiseunit_exists(sue_believer, {})
-    assert not premiseunit_exists(sue_believer, root_jkeys)
-    assert not premiseunit_exists(sue_believer, casa_jkeys)
-    assert not premiseunit_exists(sue_believer, clean_jkeys)
+    assert not caseunit_exists(None, {})
+    assert not caseunit_exists(sue_believer, {})
+    assert not caseunit_exists(sue_believer, root_jkeys)
+    assert not caseunit_exists(sue_believer, casa_jkeys)
+    assert not caseunit_exists(sue_believer, clean_jkeys)
 
     # WHEN
     sue_believer.add_plan(wk_rope)
     sue_believer.planroot.set_reasonunit(reasonunit_shop(wk_rope))
 
     # THEN
-    assert not premiseunit_exists(sue_believer, {})
-    assert not premiseunit_exists(sue_believer, root_jkeys)
-    assert not premiseunit_exists(sue_believer, casa_jkeys)
-    assert not premiseunit_exists(sue_believer, clean_jkeys)
+    assert not caseunit_exists(sue_believer, {})
+    assert not caseunit_exists(sue_believer, root_jkeys)
+    assert not caseunit_exists(sue_believer, casa_jkeys)
+    assert not caseunit_exists(sue_believer, clean_jkeys)
 
     # WHEN
     sue_believer.add_plan(thur_rope)
-    sue_believer.planroot.get_reasonunit(wk_rope).set_premise(thur_rope)
+    sue_believer.planroot.get_reasonunit(wk_rope).set_case(thur_rope)
 
     # THEN
-    assert not premiseunit_exists(sue_believer, {})
-    assert premiseunit_exists(sue_believer, root_jkeys)
-    assert not premiseunit_exists(sue_believer, casa_jkeys)
-    assert not premiseunit_exists(sue_believer, clean_jkeys)
+    assert not caseunit_exists(sue_believer, {})
+    assert caseunit_exists(sue_believer, root_jkeys)
+    assert not caseunit_exists(sue_believer, casa_jkeys)
+    assert not caseunit_exists(sue_believer, clean_jkeys)
 
 
 def test_believer_plan_laborlink_exists_ReturnsObj():
@@ -495,7 +495,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reasonunit():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
 
-def test_believer_attr_exists_ReturnsObj_believer_plan_reason_premiseunit():
+def test_believer_attr_exists_ReturnsObj_believer_plan_reason_caseunit():
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -505,21 +505,21 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reason_premiseunit():
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
     thur_rope = sue_believer.make_rope(wk_rope, "thur")
-    x_dimen = believer_plan_reason_premiseunit_str()
+    x_dimen = believer_plan_reason_caseunit_str()
     root_jkeys = {
         plan_rope_str(): root_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
     casa_jkeys = {
         plan_rope_str(): casa_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
     clean_jkeys = {
         plan_rope_str(): clean_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
 
     # WHEN / THEN
@@ -540,7 +540,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reason_premiseunit():
 
     # WHEN
     sue_believer.add_plan(thur_rope)
-    sue_believer.planroot.get_reasonunit(wk_rope).set_premise(thur_rope)
+    sue_believer.planroot.get_reasonunit(wk_rope).set_case(thur_rope)
 
     # THEN
     assert believer_attr_exists(x_dimen, sue_believer, root_jkeys)

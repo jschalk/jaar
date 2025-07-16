@@ -142,7 +142,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
+        sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
     )
     missing_fact_f_contexts = list(yao_listener.get_missing_fact_r_contexts().keys())
 
@@ -183,10 +183,10 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
+        sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
     )
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_r_context=fridge_rope, reason_premise=running_rope
+        sweep_rope, reason_r_context=fridge_rope, reason_case=running_rope
     )
     assert len(yao_listener.get_missing_fact_r_contexts()) == 2
     yao_listener.add_fact(status_rope, dirty_rope)

@@ -499,9 +499,9 @@ class BelieverDelta:
                 ),
             )
             # insert / update / delete reasonunits_permises
-            # update reasonunits_permises insert_premise
-            # update reasonunits_permises update_premise
-            # update reasonunits_permises delete_premise
+            # update reasonunits_permises insert_case
+            # update reasonunits_permises update_case
+            # update reasonunits_permises delete_case
 
             # insert / update / delete laborlinks
             before_laborlinks_labor_titles = set(before_planunit.laborunit._laborlinks)
@@ -587,10 +587,10 @@ class BelieverDelta:
                 )
             self.set_believeratom(x_believeratom)
 
-            self.add_believeratom_plan_reason_premiseunit_inserts(
+            self.add_believeratom_plan_reason_caseunit_inserts(
                 plan_rope=after_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
-                insert_premise_p_states=set(after_reasonunit.premises.keys()),
+                insert_case_r_states=set(after_reasonunit.cases.keys()),
             )
 
     def add_believeratom_plan_reasonunit_updates(
@@ -622,28 +622,28 @@ class BelieverDelta:
                     )
                 self.set_believeratom(x_believeratom)
 
-            before_premise_p_states = set(before_reasonunit.premises.keys())
-            after_premise_p_states = set(after_reasonunit.premises.keys())
-            self.add_believeratom_plan_reason_premiseunit_inserts(
+            before_case_r_states = set(before_reasonunit.cases.keys())
+            after_case_r_states = set(after_reasonunit.cases.keys())
+            self.add_believeratom_plan_reason_caseunit_inserts(
                 plan_rope=before_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
-                insert_premise_p_states=after_premise_p_states.difference(
-                    before_premise_p_states
+                insert_case_r_states=after_case_r_states.difference(
+                    before_case_r_states
                 ),
             )
-            self.add_believeratom_plan_reason_premiseunit_updates(
+            self.add_believeratom_plan_reason_caseunit_updates(
                 plan_rope=before_planunit.get_plan_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
-                update_premise_p_states=after_premise_p_states.intersection(
-                    before_premise_p_states
+                update_case_r_states=after_case_r_states.intersection(
+                    before_case_r_states
                 ),
             )
-            self.add_believeratom_plan_reason_premiseunit_deletes(
+            self.add_believeratom_plan_reason_caseunit_deletes(
                 plan_rope=before_planunit.get_plan_rope(),
                 reasonunit_r_context=update_reasonunit_r_context,
-                delete_premise_p_states=before_premise_p_states.difference(
-                    after_premise_p_states
+                delete_case_r_states=before_case_r_states.difference(
+                    after_case_r_states
                 ),
             )
 
@@ -659,76 +659,76 @@ class BelieverDelta:
             before_reasonunit = before_planunit.get_reasonunit(
                 delete_reasonunit_r_context
             )
-            self.add_believeratom_plan_reason_premiseunit_deletes(
+            self.add_believeratom_plan_reason_caseunit_deletes(
                 plan_rope=before_planunit.get_plan_rope(),
                 reasonunit_r_context=delete_reasonunit_r_context,
-                delete_premise_p_states=set(before_reasonunit.premises.keys()),
+                delete_case_r_states=set(before_reasonunit.cases.keys()),
             )
 
-    def add_believeratom_plan_reason_premiseunit_inserts(
+    def add_believeratom_plan_reason_caseunit_inserts(
         self,
         plan_rope: RopeTerm,
         after_reasonunit: ReasonUnit,
-        insert_premise_p_states: set,
+        insert_case_r_states: set,
     ):
-        for insert_premise_p_state in insert_premise_p_states:
-            after_premiseunit = after_reasonunit.get_premise(insert_premise_p_state)
+        for insert_case_r_state in insert_case_r_states:
+            after_caseunit = after_reasonunit.get_case(insert_case_r_state)
             x_believeratom = believeratom_shop(
-                "believer_plan_reason_premiseunit", "INSERT"
+                "believer_plan_reason_caseunit", "INSERT"
             )
             x_believeratom.set_jkey("plan_rope", plan_rope)
             x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
-            x_believeratom.set_jkey("p_state", after_premiseunit.p_state)
-            if after_premiseunit.p_lower is not None:
-                x_believeratom.set_jvalue("p_lower", after_premiseunit.p_lower)
-            if after_premiseunit.p_upper is not None:
-                x_believeratom.set_jvalue("p_upper", after_premiseunit.p_upper)
-            if after_premiseunit.p_divisor is not None:
-                x_believeratom.set_jvalue("p_divisor", after_premiseunit.p_divisor)
+            x_believeratom.set_jkey("r_state", after_caseunit.r_state)
+            if after_caseunit.r_lower is not None:
+                x_believeratom.set_jvalue("r_lower", after_caseunit.r_lower)
+            if after_caseunit.r_upper is not None:
+                x_believeratom.set_jvalue("r_upper", after_caseunit.r_upper)
+            if after_caseunit.r_divisor is not None:
+                x_believeratom.set_jvalue("r_divisor", after_caseunit.r_divisor)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_reason_premiseunit_updates(
+    def add_believeratom_plan_reason_caseunit_updates(
         self,
         plan_rope: RopeTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
-        update_premise_p_states: set,
+        update_case_r_states: set,
     ):
-        for update_premise_p_state in update_premise_p_states:
-            before_premiseunit = before_reasonunit.get_premise(update_premise_p_state)
-            after_premiseunit = after_reasonunit.get_premise(update_premise_p_state)
+        for update_case_r_state in update_case_r_states:
+            before_caseunit = before_reasonunit.get_case(update_case_r_state)
+            after_caseunit = after_reasonunit.get_case(update_case_r_state)
             if jvalues_different(
-                "believer_plan_reason_premiseunit",
-                before_premiseunit,
-                after_premiseunit,
+                "believer_plan_reason_caseunit",
+                before_caseunit,
+                after_caseunit,
             ):
                 x_believeratom = believeratom_shop(
-                    "believer_plan_reason_premiseunit", "UPDATE"
+                    "believer_plan_reason_caseunit", "UPDATE"
                 )
                 x_believeratom.set_jkey("plan_rope", plan_rope)
                 x_believeratom.set_jkey("r_context", before_reasonunit.r_context)
-                x_believeratom.set_jkey("p_state", after_premiseunit.p_state)
-                if after_premiseunit.p_lower != before_premiseunit.p_lower:
-                    x_believeratom.set_jvalue("p_lower", after_premiseunit.p_lower)
-                if after_premiseunit.p_upper != before_premiseunit.p_upper:
-                    x_believeratom.set_jvalue("p_upper", after_premiseunit.p_upper)
-                if after_premiseunit.p_divisor != before_premiseunit.p_divisor:
-                    x_believeratom.set_jvalue("p_divisor", after_premiseunit.p_divisor)
+                x_believeratom.set_jkey("r_state", after_caseunit.r_state)
+                if after_caseunit.r_lower != before_caseunit.r_lower:
+                    x_believeratom.set_jvalue("r_lower", after_caseunit.r_lower)
+                if after_caseunit.r_upper != before_caseunit.r_upper:
+                    x_believeratom.set_jvalue("r_upper", after_caseunit.r_upper)
+                if after_caseunit.r_divisor != before_caseunit.r_divisor:
+                    x_believeratom.set_jvalue("r_divisor", after_caseunit.r_divisor)
                 self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_reason_premiseunit_deletes(
+    def add_believeratom_plan_reason_caseunit_deletes(
         self,
         plan_rope: RopeTerm,
         reasonunit_r_context: RopeTerm,
-        delete_premise_p_states: set,
+        delete_case_r_states: set,
     ):
-        for delete_premise_p_state in delete_premise_p_states:
+        for delete_case_r_state in delete_case_r_states:
             x_believeratom = believeratom_shop(
-                "believer_plan_reason_premiseunit", "DELETE"
+                "believer_plan_reason_caseunit", "DELETE"
             )
             x_believeratom.set_jkey("plan_rope", plan_rope)
             x_believeratom.set_jkey("r_context", reasonunit_r_context)
-            x_believeratom.set_jkey("p_state", delete_premise_p_state)
+            x_believeratom.set_jkey("r_state", delete_case_r_state)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_laborlink_insert(

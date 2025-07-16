@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason_plan import (
-    premiseunit_shop,
+    caseunit_shop,
     reasonheir_shop,
     reasonunit_shop,
 )
@@ -121,25 +121,25 @@ def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
     oregon_str = "Oregon"
     oregon_rope = sue_believerunit.make_rope(usa_rope, oregon_str)
 
-    wed = premiseunit_shop(p_state=wed_rope)
+    wed = caseunit_shop(r_state=wed_rope)
     wed._status = True
     wed._chore = False
-    usa = premiseunit_shop(p_state=usa_rope)
+    usa = caseunit_shop(r_state=usa_rope)
     usa._status = True
     usa._chore = False
 
-    wed_lu = reasonunit_shop(wk_rope, premises={wed.p_state: wed})
-    sta_lu = reasonunit_shop(nation_rope, premises={usa.p_state: usa})
+    wed_lu = reasonunit_shop(wk_rope, cases={wed.r_state: wed})
+    sta_lu = reasonunit_shop(nation_rope, cases={usa.r_state: usa})
     wed_lh = reasonheir_shop(
         r_context=wk_rope,
-        premises={wed.p_state: wed},
+        cases={wed.r_state: wed},
         _status=True,
         _chore=False,
         _rplan_active_value=True,
     )
     sta_lh = reasonheir_shop(
         r_context=nation_rope,
-        premises={usa.p_state: usa},
+        cases={usa.r_state: usa},
         _status=True,
         _chore=False,
         _rplan_active_value=True,
@@ -176,18 +176,18 @@ def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
 
     assert len(casa_plan._reasonheirs) == len(x1_reasonheirs)
     wk_reasonheir = casa_plan._reasonheirs.get(wk_rope)
-    # usa_premise = wk_reasonheir.premises.get(usa_rope)
+    # usa_case = wk_reasonheir.cases.get(usa_rope)
     print(f"    {casa_plan.plan_label=}")
-    # print(f"    {usa_premise.r_context=}")
-    # print(f"    {usa_premise._chore=}")
-    # print(f"    {usa_premise._chore=}")
+    # print(f"    {usa_case.r_context=}")
+    # print(f"    {usa_case._chore=}")
+    # print(f"    {usa_case._chore=}")
     assert wk_reasonheir._chore is False
-    # print(f"      premises: {w=}")
-    # w_state = usa_premise.premises[wed_rope].p_state
+    # print(f"      cases: {w=}")
+    # w_state = usa_case.cases[wed_rope].r_state
     # print(f"      {w_state=}")
-    # assert usa_premise._chore == w_state._chore
-    # assert usa_premise._status == w_state._status
-    # assert wk_reasonheir.premises == wk_reasonheir.premises
+    # assert usa_case._chore == w_state._chore
+    # assert usa_case._status == w_state._status
+    # assert wk_reasonheir.cases == wk_reasonheir.cases
 
     # assert casa_plan.reasonunits == x1_reasonunits
 
@@ -207,10 +207,10 @@ def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
     #         assert str(type(reason)).find(".reason.ReasonHeir'>") > 0
     #         print(f"    {reason.r_context=}")
     #         assert reason._status is not None
-    #         for premise_x in reason.premises.values():
-    #             assert premise_x._status is not None
+    #         for case_x in reason.cases.values():
+    #             assert case_x._status is not None
     #         assert _check_all_objects_in_dict_are_correct_type(
-    #             x_dict=reason.premises, type_str="src.s2_believerunit.reason.PremiseUnit"
+    #             x_dict=reason.cases, type_str="src.s2_believerunit.reason.CaseUnit"
     #         )
 
 
@@ -240,15 +240,15 @@ def test_BelieverUnit_settle_believer_CorrectlyCalculatesRangeAttributes():
     day24hr_rope = sue_believerunit.make_rope(time_rope, day24hr_str)
     day24hr_r_context = day24hr_rope
     day24hr_f_state = day24hr_rope
-    day24hr_p_lower = 0.0
-    day24hr_p_upper = 8.0
+    day24hr_r_lower = 0.0
+    day24hr_r_upper = 8.0
 
     # WHEN
     sue_believerunit.add_fact(
         day24hr_r_context,
         f_state=day24hr_f_state,
-        f_lower=day24hr_p_lower,
-        f_upper=day24hr_p_upper,
+        f_lower=day24hr_r_lower,
+        f_upper=day24hr_r_upper,
     )
 
     # THEN
@@ -257,14 +257,14 @@ def test_BelieverUnit_settle_believer_CorrectlyCalculatesRangeAttributes():
 
     # WHEN
     # set facts as 8am to 10am
-    day24hr_p_lower = 8.0
-    day24hr_p_upper = 10.0
+    day24hr_r_lower = 8.0
+    day24hr_r_upper = 10.0
     print(sue_believerunit.planroot.factunits[day24hr_rope])
     sue_believerunit.add_fact(
         day24hr_r_context,
         f_state=day24hr_f_state,
-        f_lower=day24hr_p_lower,
-        f_upper=day24hr_p_upper,
+        f_lower=day24hr_r_lower,
+        f_upper=day24hr_r_upper,
     )
     print(sue_believerunit.planroot.factunits[day24hr_rope])
     print(sue_believerunit.planroot._kids[house_str]._kids[clean_str].reasonunits)
@@ -293,7 +293,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     yao_believerunit = believerunit_v001()
     print(f"{yao_believerunit.get_reason_r_contexts()=}")
     # day_hr = f"{yao_believerunit.belief_label},day_hr"
-    # yao_believerunit.add_fact(f_context=day_hr, f_state=day_hr, p_lower=0, p_upper=23)
+    # yao_believerunit.add_fact(f_context=day_hr, f_state=day_hr, r_lower=0, r_upper=23)
     day_min_str = "day_minute"
     day_min_rope = yao_believerunit.make_l1_rope(day_min_str)
     yao_believerunit.add_fact(
@@ -343,7 +343,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     #     # print(f"{plan.plan_label=}")
     #     if plan.plan_label == laundry_str:
     #         for reason in plan.reasonunits.values():
-    #             print(f"{plan.plan_label=} {reason.r_context=}")  # {reason.premises=}")
+    #             print(f"{plan.plan_label=} {reason.r_context=}")  # {reason.cases=}")
     # assert plan._active is False
     assert yao_believerunit._plan_dict.get(laundry_rope)._active is False
 
@@ -405,31 +405,31 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
     mon_rope = yao_believerunit.make_rope(wk_rope, mon_str)
     tue_str = "Tuesday"
     tue_rope = yao_believerunit.make_rope(wk_rope, tue_str)
-    mon_premise_x = premiseunit_shop(p_state=mon_rope)
-    mon_premise_x._status = False
-    mon_premise_x._chore = False
-    tue_premise_x = premiseunit_shop(p_state=tue_rope)
-    tue_premise_x._status = False
-    tue_premise_x._chore = False
-    mt_premises = {
-        mon_premise_x.p_state: mon_premise_x,
-        tue_premise_x.p_state: tue_premise_x,
+    mon_case_x = caseunit_shop(r_state=mon_rope)
+    mon_case_x._status = False
+    mon_case_x._chore = False
+    tue_case_x = caseunit_shop(r_state=tue_rope)
+    tue_case_x._status = False
+    tue_case_x._chore = False
+    mt_cases = {
+        mon_case_x.r_state: mon_case_x,
+        tue_case_x.r_state: tue_case_x,
     }
-    mt_reasonunit = reasonunit_shop(wk_rope, premises=mt_premises)
-    mt_reasonheir = reasonheir_shop(wk_rope, premises=mt_premises, _status=False)
+    mt_reasonunit = reasonunit_shop(wk_rope, cases=mt_cases)
+    mt_reasonheir = reasonheir_shop(wk_rope, cases=mt_cases, _status=False)
     x_planroot = yao_believerunit.get_plan_obj(to_rope(yao_believerunit.belief_label))
     x_planroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_believerunit.reasonunits[wk_rope].r_context=}")
-    # print(f"{yao_believerunit.reasonunits[wk_rope].premises[mon_rope].p_state=}")
-    # print(f"{yao_believerunit.reasonunits[wk_rope].premises[tue_rope].p_state=}")
+    # print(f"{yao_believerunit.reasonunits[wk_rope].cases[mon_rope].r_state=}")
+    # print(f"{yao_believerunit.reasonunits[wk_rope].cases[tue_rope].r_state=}")
     wk_reasonunit = x_planroot.reasonunits[wk_rope]
-    print(f"{wk_reasonunit.premises=}")
-    premise_mon = wk_reasonunit.premises.get(mon_rope)
-    premise_tue = wk_reasonunit.premises.get(tue_rope)
-    assert premise_mon
-    assert premise_mon == mt_reasonunit.premises[premise_mon.p_state]
-    assert premise_tue
-    assert premise_tue == mt_reasonunit.premises[premise_tue.p_state]
+    print(f"{wk_reasonunit.cases=}")
+    case_mon = wk_reasonunit.cases.get(mon_rope)
+    case_tue = wk_reasonunit.cases.get(tue_rope)
+    assert case_mon
+    assert case_mon == mt_reasonunit.cases[case_mon.r_state]
+    assert case_tue
+    assert case_tue == mt_reasonunit.cases[case_tue.r_state]
     assert wk_reasonunit == mt_reasonunit
 
     # WHEN
@@ -437,10 +437,10 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
 
     # THEN
     gen_wk_reasonheir = x_planroot.get_reasonheir(wk_rope)
-    gen_mon_premise = gen_wk_reasonheir.premises.get(mon_rope)
-    assert gen_mon_premise._status == mt_reasonheir.premises.get(mon_rope)._status
-    assert gen_mon_premise == mt_reasonheir.premises.get(mon_rope)
-    assert gen_wk_reasonheir.premises == mt_reasonheir.premises
+    gen_mon_case = gen_wk_reasonheir.cases.get(mon_rope)
+    assert gen_mon_case._status == mt_reasonheir.cases.get(mon_rope)._status
+    assert gen_mon_case == mt_reasonheir.cases.get(mon_rope)
+    assert gen_wk_reasonheir.cases == mt_reasonheir.cases
     assert gen_wk_reasonheir == mt_reasonheir
 
     casa_str = "casa"
@@ -488,9 +488,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6Week
     # THEN
     ced_wk_r_context = yao_believerunit.make_l1_rope("ced_wk")
 
-    p_divisor = None
-    p_lower = None
-    p_upper = None
+    r_divisor = None
+    r_lower = None
+    r_upper = None
     print(f"{len(yao_believerunit._plan_dict)=}")
 
     casa_rope = yao_believerunit.make_l1_rope("casa")
@@ -501,14 +501,14 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6Week
     clean_sheet_plan = yao_believerunit.get_plan_obj(clean_couch_rope)
     # print(f"{clean_sheet_plan.reasonunits.values()=}")
     ced_wk_reason = clean_sheet_plan.reasonunits.get(ced_wk_r_context)
-    ced_wk_premise = ced_wk_reason.premises.get(ced_wk_r_context)
+    ced_wk_case = ced_wk_reason.cases.get(ced_wk_r_context)
     print(
-        f"{clean_sheet_plan.plan_label=} {ced_wk_reason.r_context=} {ced_wk_premise.p_state=}"
+        f"{clean_sheet_plan.plan_label=} {ced_wk_reason.r_context=} {ced_wk_case.r_state=}"
     )
-    # print(f"{clean_sheet_plan.plan_label=} {ced_wk_reason.r_context=} {premise_x=}")
-    p_divisor = ced_wk_premise.p_divisor
-    p_lower = ced_wk_premise.p_lower
-    p_upper = ced_wk_premise.p_upper
+    # print(f"{clean_sheet_plan.plan_label=} {ced_wk_reason.r_context=} {case_x=}")
+    r_divisor = ced_wk_case.r_divisor
+    r_lower = ced_wk_case.r_lower
+    r_upper = ced_wk_case.r_upper
     # print(f"{plan.reasonunits=}")
     assert clean_sheet_plan._active is False
 
@@ -517,26 +517,26 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6Week
     #     if plan.plan_label == "clean sheets couch blankets":
     #         print(f"{plan.get_plan_rope()=}")
 
-    assert p_divisor == 6
-    assert p_lower == 1
+    assert r_divisor == 6
+    assert r_lower == 1
     print(
-        f"There exists a plan with a reason_r_context {ced_wk_r_context} that also has lemmet div =6 and p_lower/p_upper =1"
+        f"There exists a plan with a reason_r_context {ced_wk_r_context} that also has lemmet div =6 and r_lower/r_upper =1"
     )
     # print(f"{len(plan_dict)=}")
-    ced_wk_p_lower = 6001
+    ced_wk_r_lower = 6001
 
     # WHEN
     yao_believerunit.add_fact(
         ced_wk_r_context,
         f_state=ced_wk_r_context,
-        f_lower=ced_wk_p_lower,
-        f_upper=ced_wk_p_lower,
+        f_lower=ced_wk_r_lower,
+        f_upper=ced_wk_r_lower,
     )
     nation_str = "Nation-States"
     nation_rope = yao_believerunit.make_l1_rope(nation_str)
     yao_believerunit.add_fact(f_context=nation_rope, f_state=nation_rope)
     print(
-        f"Nation set and also fact set: {ced_wk_r_context=} with {ced_wk_p_lower=} and {ced_wk_p_lower=}"
+        f"Nation set and also fact set: {ced_wk_r_context=} with {ced_wk_r_lower=} and {ced_wk_r_lower=}"
     )
     print(f"{yao_believerunit.planroot.factunits=}")
     yao_believerunit.settle_believer()
@@ -550,9 +550,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6Week
     clean_couch_rope = yao_believerunit.make_rope(cleaning_rope, clean_couch_str)
     clean_couch_plan = yao_believerunit.get_plan_obj(rope=clean_couch_rope)
     wk_reason = clean_couch_plan.reasonunits.get(wk_rope)
-    wk_premise = wk_reason.premises.get(wk_rope)
-    print(f"{clean_couch_plan.plan_label=} {wk_reason.r_context=} {wk_premise=}")
-    assert wk_premise.p_divisor == 6 and wk_premise.p_lower == 1
+    wk_case = wk_reason.cases.get(wk_rope)
+    print(f"{clean_couch_plan.plan_label=} {wk_reason.r_context=} {wk_case=}")
+    assert wk_case.r_divisor == 6 and wk_case.r_lower == 1
 
 
 def test_BelieverUnit_settle_believer_EveryPlanHasActiveStatus_believerunit_v001():

@@ -17,7 +17,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_laborlink_str,
-    believer_plan_reason_premiseunit_str,
+    believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
@@ -811,13 +811,13 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     before_sue_believer.set_plan(planunit_shop(damaged_str), knee_rope)
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
-    before_damaged_p_lower = 55
-    before_damaged_p_upper = 66
+    before_damaged_r_lower = 55
+    before_damaged_r_upper = 66
     before_fact = factunit_shop(
         f_context=knee_rope,
         f_state=damaged_rope,
-        f_lower=before_damaged_p_lower,
-        f_upper=before_damaged_p_upper,
+        f_lower=before_damaged_r_lower,
+        f_upper=before_damaged_r_upper,
     )
     before_sue_believer.edit_plan_attr(ball_rope, factunit=before_fact)
 
@@ -836,7 +836,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_reason_premiseunit_insert():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_reason_caseunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -855,20 +855,20 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     bend_rope = before_sue_believer.make_rope(knee_rope, bend_str)
     before_sue_believer.set_plan(planunit_shop(bend_str), knee_rope)
     before_sue_believer.edit_plan_attr(
-        ball_rope, reason_r_context=knee_rope, reason_premise=bend_rope
+        ball_rope, reason_r_context=knee_rope, reason_case=bend_rope
     )
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
-    damaged_p_lower = 45
-    damaged_p_upper = 77
-    damaged_p_divisor = 3
+    damaged_r_lower = 45
+    damaged_r_upper = 77
+    damaged_r_divisor = 3
     after_sue_believer.edit_plan_attr(
         ball_rope,
         reason_r_context=knee_rope,
-        reason_premise=damaged_rope,
-        p_lower=damaged_p_lower,
-        reason_p_upper=damaged_p_upper,
-        p_divisor=damaged_p_divisor,
+        reason_case=damaged_rope,
+        r_lower=damaged_r_lower,
+        reason_r_upper=damaged_r_upper,
+        r_divisor=damaged_r_divisor,
     )
 
     # WHEN
@@ -881,7 +881,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        believer_plan_reason_premiseunit_str(),
+        believer_plan_reason_caseunit_str(),
         ball_rope,
         knee_rope,
         damaged_rope,
@@ -889,14 +889,14 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
     assert ball_believeratom.get_value("r_context") == knee_rope
-    assert ball_believeratom.get_value("p_state") == damaged_rope
-    assert ball_believeratom.get_value("p_lower") == damaged_p_lower
-    assert ball_believeratom.get_value("p_upper") == damaged_p_upper
-    assert ball_believeratom.get_value("p_divisor") == damaged_p_divisor
+    assert ball_believeratom.get_value("r_state") == damaged_rope
+    assert ball_believeratom.get_value("r_lower") == damaged_r_lower
+    assert ball_believeratom.get_value("r_upper") == damaged_r_upper
+    assert ball_believeratom.get_value("r_divisor") == damaged_r_divisor
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_reason_premiseunit_delete():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_reason_caseunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -915,24 +915,24 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     bend_rope = before_sue_believer.make_rope(knee_rope, bend_str)
     before_sue_believer.set_plan(planunit_shop(bend_str), knee_rope)
     before_sue_believer.edit_plan_attr(
-        ball_rope, reason_r_context=knee_rope, reason_premise=bend_rope
+        ball_rope, reason_r_context=knee_rope, reason_case=bend_rope
     )
-    damaged_p_lower = 45
-    damaged_p_upper = 77
-    damaged_p_divisor = 3
+    damaged_r_lower = 45
+    damaged_r_upper = 77
+    damaged_r_divisor = 3
     before_sue_believer.edit_plan_attr(
         ball_rope,
         reason_r_context=knee_rope,
-        reason_premise=damaged_rope,
-        p_lower=damaged_p_lower,
-        reason_p_upper=damaged_p_upper,
-        p_divisor=damaged_p_divisor,
+        reason_case=damaged_rope,
+        r_lower=damaged_r_lower,
+        reason_r_upper=damaged_r_upper,
+        r_divisor=damaged_r_divisor,
     )
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_sue_believer.edit_plan_attr(
         ball_rope,
-        reason_del_premise_r_context=knee_rope,
-        reason_del_premise_p_state=damaged_rope,
+        reason_del_case_r_context=knee_rope,
+        reason_del_case_r_state=damaged_rope,
     )
 
     # WHEN
@@ -945,7 +945,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        believer_plan_reason_premiseunit_str(),
+        believer_plan_reason_caseunit_str(),
         ball_rope,
         knee_rope,
         damaged_rope,
@@ -953,11 +953,11 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
     assert ball_believeratom.get_value("r_context") == knee_rope
-    assert ball_believeratom.get_value("p_state") == damaged_rope
+    assert ball_believeratom.get_value("r_state") == damaged_rope
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_reason_premiseunit_update():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_reason_caseunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -976,31 +976,31 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     bend_rope = before_sue_believer.make_rope(knee_rope, bend_str)
     before_sue_believer.set_plan(planunit_shop(bend_str), knee_rope)
     before_sue_believer.edit_plan_attr(
-        ball_rope, reason_r_context=knee_rope, reason_premise=bend_rope
+        ball_rope, reason_r_context=knee_rope, reason_case=bend_rope
     )
-    before_damaged_p_lower = 111
-    before_damaged_p_upper = 777
-    before_damaged_p_divisor = 13
+    before_damaged_r_lower = 111
+    before_damaged_r_upper = 777
+    before_damaged_r_divisor = 13
     before_sue_believer.edit_plan_attr(
         ball_rope,
         reason_r_context=knee_rope,
-        reason_premise=damaged_rope,
-        p_lower=before_damaged_p_lower,
-        reason_p_upper=before_damaged_p_upper,
-        p_divisor=before_damaged_p_divisor,
+        reason_case=damaged_rope,
+        r_lower=before_damaged_r_lower,
+        reason_r_upper=before_damaged_r_upper,
+        r_divisor=before_damaged_r_divisor,
     )
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
-    after_damaged_p_lower = 333
-    after_damaged_p_upper = 555
-    after_damaged_p_divisor = 78
+    after_damaged_r_lower = 333
+    after_damaged_r_upper = 555
+    after_damaged_r_divisor = 78
     after_sue_believer.edit_plan_attr(
         ball_rope,
         reason_r_context=knee_rope,
-        reason_premise=damaged_rope,
-        p_lower=after_damaged_p_lower,
-        reason_p_upper=after_damaged_p_upper,
-        p_divisor=after_damaged_p_divisor,
+        reason_case=damaged_rope,
+        r_lower=after_damaged_r_lower,
+        reason_r_upper=after_damaged_r_upper,
+        r_divisor=after_damaged_r_divisor,
     )
 
     # WHEN
@@ -1013,7 +1013,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         UPDATE_str(),
-        believer_plan_reason_premiseunit_str(),
+        believer_plan_reason_caseunit_str(),
         ball_rope,
         knee_rope,
         damaged_rope,
@@ -1021,10 +1021,10 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
     assert ball_believeratom.get_value("r_context") == knee_rope
-    assert ball_believeratom.get_value("p_state") == damaged_rope
-    assert ball_believeratom.get_value("p_lower") == after_damaged_p_lower
-    assert ball_believeratom.get_value("p_upper") == after_damaged_p_upper
-    assert ball_believeratom.get_value("p_divisor") == after_damaged_p_divisor
+    assert ball_believeratom.get_value("r_state") == damaged_rope
+    assert ball_believeratom.get_value("r_lower") == after_damaged_r_lower
+    assert ball_believeratom.get_value("r_upper") == after_damaged_r_upper
+    assert ball_believeratom.get_value("r_divisor") == after_damaged_r_divisor
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 

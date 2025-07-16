@@ -15,16 +15,7 @@
         "believer_name": {
             "otx_key": true
         },
-        "p_divisor": {
-            "otx_key": false
-        },
-        "p_upper": {
-            "otx_key": false
-        },
-        "p_lower": {
-            "otx_key": false
-        },
-        "p_state": {
+        "r_state_ERASE": {
             "otx_key": true
         },
         "r_context": {
@@ -36,7 +27,7 @@
         "believerunit",
         "believer_planunit",
         "believer_plan_reasonunit",
-        "believer_plan_reason_premiseunit"
+        "believer_plan_reason_caseunit"
     ],
-    "idea_number": "br00026"
+    "idea_number": "br00056"
 }

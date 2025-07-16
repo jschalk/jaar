@@ -136,7 +136,7 @@ def test_BelieverUnit_set_plan_dict_Sets_reason_r_contexts():
     sue_believer.add_plan(polis_rope)
     sue_believer.add_plan(nation_rope)
     sue_believer.edit_plan_attr(
-        nation_rope, reason_r_context=polis_rope, reason_premise=polis_rope
+        nation_rope, reason_r_context=polis_rope, reason_case=polis_rope
     )
     nation_plan = sue_believer.get_plan_obj(nation_rope)
     assert nation_plan.r_context_reasonunit_exists(polis_rope)
@@ -164,7 +164,7 @@ def test_BelieverUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     cookery_dirty_str = "dirty"
     cookery_dirty_rope = sue_believer.make_rope(cookery_room_rope, cookery_dirty_str)
     cookery_reasonunit = reasonunit_shop(r_context=cookery_room_rope)
-    cookery_reasonunit.set_premise(premise=cookery_dirty_rope)
+    cookery_reasonunit.set_case(case=cookery_dirty_rope)
     clean_cookery_plan.set_reasonunit(cookery_reasonunit)
 
     assert sue_believer.plan_exists(buildings_rope) is False

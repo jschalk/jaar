@@ -183,7 +183,7 @@ def test_BelieverUnit_settle_believer_FactUnitMoldsFactHeir():
     assert swim_plan._factheirs == first_earthdict
 
     # WHEN
-    # earth_curb = factunit_shop(f_context=earth_rope, f_state=earth_rope, p_lower=3.0, p_upper=4.0)
+    # earth_curb = factunit_shop(f_context=earth_rope, f_state=earth_rope, r_lower=3.0, r_upper=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
     zia_believer.add_fact(
         f_context=earth_rope, f_state=earth_rope, f_lower=3.0, f_upper=5.0

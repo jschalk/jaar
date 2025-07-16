@@ -6,7 +6,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_laborlink_str,
-    believer_plan_reason_premiseunit_str,
+    believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
@@ -15,13 +15,13 @@ from src.a08_believer_atom_logic.atom_config import get_normalized_believer_tabl
 from src.a08_believer_atom_logic.normal_models import (
     AwardLinkTable,
     BelieverTable,
+    CaseTable,
     FactTable,
     HealerLinkTable,
     LaborLinkTable,
     MemberShipTable,
     PartnerUnitTable,
     PlanTable,
-    PremiseTable,
     ReasonTable,
 )
 from src.a08_believer_atom_logic.test._util.a08_str import (
@@ -154,18 +154,18 @@ def test_normalized_table_ReasonTable_reason_Exists():
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
-def test_normalized_table_PremiseTable_premise_Exists():
+def test_normalized_table_CaseTable_case_Exists():
     # ESTABLISH
     config_dimen = get_normalized_believer_table_build().get(
-        believer_plan_reason_premiseunit_str()
+        believer_plan_reason_caseunit_str()
     )
-    mapper = inspect(PremiseTable)
+    mapper = inspect(CaseTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_dimen)
-    assert config_table_name == "premise"
-    assert config_table_name == PremiseTable.__tablename__
+    assert config_table_name == "case"
+    assert config_table_name == CaseTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 

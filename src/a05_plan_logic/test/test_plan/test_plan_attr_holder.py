@@ -8,12 +8,12 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.uid is None
     assert new_obj.reason is None
     assert new_obj.reason_r_context is None
-    assert new_obj.reason_premise is None
-    assert new_obj.p_lower is None
-    assert new_obj.reason_p_upper is None
-    assert new_obj.p_divisor is None
-    assert new_obj.reason_del_premise_r_context is None
-    assert new_obj.reason_del_premise_p_state is None
+    assert new_obj.reason_case is None
+    assert new_obj.r_lower is None
+    assert new_obj.reason_r_upper is None
+    assert new_obj.r_divisor is None
+    assert new_obj.reason_del_case_r_context is None
+    assert new_obj.reason_del_case_r_state is None
     assert new_obj.reason_r_plan_active_requisite is None
     assert new_obj.laborunit is None
     assert new_obj.healerlink is None
@@ -33,28 +33,28 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.is_expanded is None
 
 
-def test_PlanAttrHolder_CorrectlyCalculatesPremiseRanges():
+def test_PlanAttrHolder_CorrectlyCalculatesCaseRanges():
     # ESTABLISH
-    plan_attr = PlanAttrHolder(reason_premise="some_rope")
-    assert plan_attr.p_lower is None
-    assert plan_attr.reason_p_upper is None
-    # assert plan_attr.reason_premise_numor is None
-    assert plan_attr.p_divisor is None
-    # assert plan_attr.reason_premise_morph is None
+    plan_attr = PlanAttrHolder(reason_case="some_rope")
+    assert plan_attr.r_lower is None
+    assert plan_attr.reason_r_upper is None
+    # assert plan_attr.reason_case_numor is None
+    assert plan_attr.r_divisor is None
+    # assert plan_attr.reason_case_morph is None
 
     # WHEN
-    plan_attr.set_premise_range_influenced_by_premise_plan(
-        p_lower=5.0,
-        p_upper=20.0,
-        # premise_numor,
-        premise_denom=4.0,
-        # premise_morph,
+    plan_attr.set_case_range_influenced_by_case_plan(
+        r_lower=5.0,
+        r_upper=20.0,
+        # case_numor,
+        case_denom=4.0,
+        # case_morph,
     )
-    assert plan_attr.p_lower == 5.0
-    assert plan_attr.reason_p_upper == 20.0
-    # assert plan_attr.reason_premise_numor is None
-    assert plan_attr.p_divisor == 4.0
-    # assert plan_attr.reason_premise_morph is None
+    assert plan_attr.r_lower == 5.0
+    assert plan_attr.reason_r_upper == 20.0
+    # assert plan_attr.reason_case_numor is None
+    assert plan_attr.r_divisor == 4.0
+    # assert plan_attr.reason_case_morph is None
 
 
 def test_planattrholder_shop_ReturnsObj():

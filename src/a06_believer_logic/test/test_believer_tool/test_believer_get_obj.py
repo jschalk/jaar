@@ -7,7 +7,7 @@ from src.a06_believer_logic.believer_tool import (
     believer_partnerunit_get_obj,
     believer_plan_awardlink_get_obj,
     believer_plan_factunit_get_obj,
-    believer_plan_reason_premiseunit_get_obj as premiseunit_get_obj,
+    believer_plan_reason_caseunit_get_obj as caseunit_get_obj,
     believer_plan_reasonunit_get_obj,
     believer_planunit_get_obj,
 )
@@ -18,15 +18,15 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_laborlink_str,
-    believer_plan_reason_premiseunit_str as premiseunit_str,
+    believer_plan_reason_caseunit_str as caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
     f_context_str,
     f_state_str,
-    p_state_str,
     plan_rope_str,
     r_context_str,
+    r_state_str,
 )
 
 
@@ -112,7 +112,7 @@ def test_believer_plan_reasonunit_get_obj_ReturnsObj():
     assert x_obj == sue_believer.get_plan_obj(casa_rope).get_reasonunit(wk_rope)
 
 
-def test_believer_plan_reason_premiseunit_get_obj_ReturnsObj():
+def test_believer_plan_reason_caseunit_get_obj_ReturnsObj():
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -123,20 +123,20 @@ def test_believer_plan_reason_premiseunit_get_obj_ReturnsObj():
     casa_jkeys = {
         plan_rope_str(): casa_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(wk_rope)
     sue_believer.add_plan(thur_rope)
     casa_plan = sue_believer.get_plan_obj(casa_rope)
     casa_plan.set_reasonunit(reasonunit_shop(wk_rope))
-    casa_plan.get_reasonunit(wk_rope).set_premise(thur_rope)
+    casa_plan.get_reasonunit(wk_rope).set_case(thur_rope)
 
     # WHEN
-    x_obj = premiseunit_get_obj(sue_believer, casa_jkeys)
+    x_obj = caseunit_get_obj(sue_believer, casa_jkeys)
     # THEN
     assert x_obj
-    assert x_obj == casa_plan.get_reasonunit(wk_rope).get_premise(thur_rope)
+    assert x_obj == casa_plan.get_reasonunit(wk_rope).get_case(thur_rope)
 
 
 def test_believer_plan_factunit_get_obj_ReturnsObj():
@@ -254,7 +254,7 @@ def test_believer_get_obj_ReturnsObj_believer_plan_reasonunit_get_obj():
     assert x_obj == sue_believer.get_plan_obj(casa_rope).get_reasonunit(wk_rope)
 
 
-def test_believer_get_obj_ReturnsObj_believer_plan_reason_premiseunit_get_obj():
+def test_believer_get_obj_ReturnsObj_believer_plan_reason_caseunit_get_obj():
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -265,20 +265,20 @@ def test_believer_get_obj_ReturnsObj_believer_plan_reason_premiseunit_get_obj():
     casa_jkeys = {
         plan_rope_str(): casa_rope,
         r_context_str(): wk_rope,
-        p_state_str(): thur_rope,
+        r_state_str(): thur_rope,
     }
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(wk_rope)
     sue_believer.add_plan(thur_rope)
     casa_plan = sue_believer.get_plan_obj(casa_rope)
     casa_plan.set_reasonunit(reasonunit_shop(wk_rope))
-    casa_plan.get_reasonunit(wk_rope).set_premise(thur_rope)
+    casa_plan.get_reasonunit(wk_rope).set_case(thur_rope)
 
     # WHEN
-    x_obj = believer_get_obj(premiseunit_str(), sue_believer, casa_jkeys)
+    x_obj = believer_get_obj(caseunit_str(), sue_believer, casa_jkeys)
     # THEN
     assert x_obj
-    assert x_obj == casa_plan.get_reasonunit(wk_rope).get_premise(thur_rope)
+    assert x_obj == casa_plan.get_reasonunit(wk_rope).get_case(thur_rope)
 
 
 def test_believer_get_obj_ReturnsObj_believer_plan_factunit_get_obj():

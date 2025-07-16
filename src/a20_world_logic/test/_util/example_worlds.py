@@ -35,7 +35,7 @@ def get_bob_mop_with_reason_believerunit_example() -> BelieverUnit:
     bob_believer.add_plan(dirty_rope)
     bob_believer.add_plan(mop_rope, task=True)
     bob_believer.edit_plan_attr(
-        mop_rope, reason_r_context=floor_rope, reason_premise=clean_rope
+        mop_rope, reason_r_context=floor_rope, reason_case=clean_rope
     )
     return bob_believer
 

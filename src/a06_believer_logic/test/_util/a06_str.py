@@ -32,11 +32,11 @@ from src.a04_reason_logic.test._util.a04_str import (
     f_state_str,
     f_upper_str,
     labor_title_str,
-    p_lower_str,
-    p_state_str,
-    p_upper_str,
     r_context_str,
+    r_lower_str,
     r_plan_active_requisite_str,
+    r_state_str,
+    r_upper_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
@@ -119,8 +119,8 @@ def believer_plan_laborlink_str() -> str:
     return "believer_plan_laborlink"
 
 
-def believer_plan_reason_premiseunit_str() -> str:
-    return "believer_plan_reason_premiseunit"
+def believer_plan_reason_caseunit_str() -> str:
+    return "believer_plan_reason_caseunit"
 
 
 def believer_plan_reasonunit_str() -> str:
