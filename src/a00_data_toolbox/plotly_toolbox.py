@@ -66,7 +66,7 @@ def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None):
     # aliceblue, antiquewhite, aqua, aquamarine, azure,
     # beige, bisque, black, blanchedalmond, blue,
     # blueviolet, brown, burlywood, cadetblue,
-    # chartreuse, chocolate, coral, cornflowerblue,
+    # chartreuse, chocolate, coral,
     # cornsilk, crimson, cyan, darkblue, darkcyan,
     # darkgoldenrod, darkgray, darkgrey, darkgreen,
     # darkkhaki, darkmagenta, darkolivegreen, darkorange,
