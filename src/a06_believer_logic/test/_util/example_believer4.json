@@ -2502,7 +2502,7 @@
                       }
                     }
                   },
-                  "shoulders and upper back": {
+                  "shoulders and back": {
                     "_kids": {
                       "shoulder exercises": {
                         "_uid": 131,
@@ -2511,9 +2511,9 @@
                         "morph": false,
                         "task": true
                       },
-                      "upper back exercises": {
+                      "back exercises": {
                         "_uid": 132,
-                        "plan_label": "upper back exercises",
+                        "plan_label": "back exercises",
                         "mass": 1,
                         "morph": false,
                         "task": true
@@ -2527,7 +2527,7 @@
                         "take_force": 1
                       }
                     },
-                    "plan_label": "shoulders and upper back",
+                    "plan_label": "shoulders and back",
                     "mass": 1,
                     "task": true,
                     "reasonunits": {
