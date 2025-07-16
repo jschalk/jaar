@@ -56,10 +56,10 @@ def believer_plan_reasonunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
-    x_rcontext = jkeys.get("rcontext")
+    x_r_context = jkeys.get("r_context")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).reasonunit_exists(x_rcontext)
+        and x_believer.get_plan_obj(x_rope).reasonunit_exists(x_r_context)
     )
 
 
@@ -67,13 +67,13 @@ def believer_plan_reason_premiseunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
-    x_rcontext = jkeys.get("rcontext")
-    x_pstate = jkeys.get("pstate")
+    x_r_context = jkeys.get("r_context")
+    x_p_state = jkeys.get("p_state")
     return bool(
         believer_plan_reasonunit_exists(x_believer, jkeys)
         and x_believer.get_plan_obj(x_rope)
-        .get_reasonunit(x_rcontext)
-        .premise_exists(x_pstate)
+        .get_reasonunit(x_r_context)
+        .premise_exists(x_p_state)
     )
 
 
@@ -103,10 +103,10 @@ def believer_plan_factunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
-    x_fcontext = jkeys.get("fcontext")
+    x_f_context = jkeys.get("f_context")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).factunit_exists(x_fcontext)
+        and x_believer.get_plan_obj(x_rope).factunit_exists(x_f_context)
     )
 
 
@@ -169,18 +169,20 @@ def believer_plan_reasonunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> ReasonUnit:
     x_rope = jkeys.get("plan_rope")
-    x_rcontext = jkeys.get("rcontext")
-    return x_believer.get_plan_obj(x_rope).get_reasonunit(x_rcontext)
+    x_r_context = jkeys.get("r_context")
+    return x_believer.get_plan_obj(x_rope).get_reasonunit(x_r_context)
 
 
 def believer_plan_reason_premiseunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> PremiseUnit:
     x_rope = jkeys.get("plan_rope")
-    x_rcontext = jkeys.get("rcontext")
-    x_pstate = jkeys.get("pstate")
+    x_r_context = jkeys.get("r_context")
+    x_p_state = jkeys.get("p_state")
     return (
-        x_believer.get_plan_obj(x_rope).get_reasonunit(x_rcontext).get_premise(x_pstate)
+        x_believer.get_plan_obj(x_rope)
+        .get_reasonunit(x_r_context)
+        .get_premise(x_p_state)
     )
 
 
@@ -188,8 +190,8 @@ def believer_plan_factunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> FactUnit:
     x_rope = jkeys.get("plan_rope")
-    x_fcontext = jkeys.get("fcontext")
-    return x_believer.get_plan_obj(x_rope).factunits.get(x_fcontext)
+    x_f_context = jkeys.get("f_context")
+    return x_believer.get_plan_obj(x_rope).factunits.get(x_f_context)
 
 
 def believer_get_obj(
@@ -302,20 +304,22 @@ def set_factunits_to_believer(
     x_believer: BelieverUnit, x_facts_dict: dict[RopeTerm, dict]
 ):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
-    missing_fact_rcontexts = set(x_believer.get_missing_fact_rcontexts().keys())
-    not_missing_fact_rcontexts = set(x_believer.get_factunits_dict().keys())
-    believer_fact_rcontexts = not_missing_fact_rcontexts.union(missing_fact_rcontexts)
+    missing_fact_r_contexts = set(x_believer.get_missing_fact_r_contexts().keys())
+    not_missing_fact_r_contexts = set(x_believer.get_factunits_dict().keys())
+    believer_fact_r_contexts = not_missing_fact_r_contexts.union(
+        missing_fact_r_contexts
+    )
     for factunit in factunits_dict.values():
-        if factunit.fcontext in believer_fact_rcontexts:
+        if factunit.f_context in believer_fact_r_contexts:
             x_believer.add_fact(
-                factunit.fcontext,
-                factunit.fstate,
-                factunit.fopen,
-                factunit.fnigh,
+                factunit.f_context,
+                factunit.f_state,
+                factunit.f_lower,
+                factunit.f_upper,
                 create_missing_plans=True,
             )
 
 
 def clear_factunits_from_believer(x_believer: BelieverUnit):
-    for fact_rcontext in get_believer_root_facts_dict(x_believer).keys():
-        x_believer.del_fact(fact_rcontext)
+    for fact_r_context in get_believer_root_facts_dict(x_believer).keys():
+        x_believer.del_fact(fact_r_context)

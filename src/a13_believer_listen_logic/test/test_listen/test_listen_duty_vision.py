@@ -352,7 +352,7 @@ def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceI
     assert yao_job.plan_exists(get_in_mer_rope())
     assert yao_job.plan_exists(get_on_land_rope()) is False
     assert yao_job.get_fact(get_location_rope()) is not None
-    assert yao_job.get_fact(get_location_rope()).fstate == get_in_mer_rope()
+    assert yao_job.get_fact(get_location_rope()).f_state == get_in_mer_rope()
     assert len(yao_job.get_agenda_dict()) == 1
     assert len(yao_job.planroot.factunits) == 1
     assert yao_job != yao_gut0

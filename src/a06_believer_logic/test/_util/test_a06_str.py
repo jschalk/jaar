@@ -4,7 +4,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     _offtrack_fund_str,
     _offtrack_kids_mass_set_str,
     _rational_str,
-    _reason_rcontexts_str,
+    _reason_r_contexts_str,
     _sum_healerlink_share_str,
     _tree_traverse_count_str,
     ancestors_str,
@@ -43,7 +43,7 @@ def test_str_functions_ReturnsObj():
     assert _offtrack_fund_str() == "_offtrack_fund"
     assert _offtrack_kids_mass_set_str() == "_offtrack_kids_mass_set"
     assert _rational_str() == "_rational"
-    assert _reason_rcontexts_str() == "_reason_rcontexts"
+    assert _reason_r_contexts_str() == "_reason_r_contexts"
     assert _sum_healerlink_share_str() == "_sum_healerlink_share"
     assert _tree_traverse_count_str() == "_tree_traverse_count"
     assert last_pack_id_str() == "last_pack_id"

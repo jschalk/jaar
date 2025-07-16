@@ -20,8 +20,8 @@ def test_AtomRow_exists():
     assert x_atomrow._crud_command is None
     assert x_atomrow.partner_name is None
     assert x_atomrow.addin is None
-    assert x_atomrow.rcontext is None
-    assert x_atomrow.rplan_active_requisite is None
+    assert x_atomrow.r_context is None
+    assert x_atomrow.r_plan_active_requisite is None
     assert x_atomrow.begin is None
     assert x_atomrow.respect_bit is None
     assert x_atomrow.close is None
@@ -32,10 +32,10 @@ def test_AtomRow_exists():
     assert x_atomrow.group_debt_points is None
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
-    assert x_atomrow.pdivisor is None
-    assert x_atomrow.fcontext is None
-    assert x_atomrow.fnigh is None
-    assert x_atomrow.fopen is None
+    assert x_atomrow.p_divisor is None
+    assert x_atomrow.f_context is None
+    assert x_atomrow.f_upper is None
+    assert x_atomrow.f_lower is None
     assert x_atomrow.fund_iota is None
     assert x_atomrow.fund_pool is None
     assert x_atomrow.give_force is None
@@ -45,12 +45,12 @@ def test_AtomRow_exists():
     assert x_atomrow.mass is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None
-    assert x_atomrow.pstate is None
-    assert x_atomrow.pnigh is None
+    assert x_atomrow.p_state is None
+    assert x_atomrow.p_upper is None
     assert x_atomrow.numor is None
-    assert x_atomrow.popen is None
+    assert x_atomrow.p_lower is None
     assert x_atomrow.penny is None
-    assert x_atomrow.fstate is None
+    assert x_atomrow.f_state is None
     assert x_atomrow.task is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.plan_rope is None

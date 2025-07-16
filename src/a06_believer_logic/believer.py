@@ -146,7 +146,7 @@ class BelieverUnit:
     _groupunits: dict[GroupTitle, GroupUnit] = None
     _offtrack_kids_mass_set: set[RopeTerm] = None
     _offtrack_fund: float = None
-    _reason_rcontexts: set[RopeTerm] = None
+    _reason_r_contexts: set[RopeTerm] = None
     _range_inheritors: dict[RopeTerm, RopeTerm] = None
     # settle_believer Calculated field end
 
@@ -244,12 +244,12 @@ class BelieverUnit:
             x_rope = to_evaluate_list.pop()
             x_plan = self.get_plan_obj(x_rope)
             for reasonunit_obj in x_plan.reasonunits.values():
-                reason_rcontext = reasonunit_obj.rcontext
+                reason_r_context = reasonunit_obj.r_context
                 self._evaluate_relevancy(
                     to_evaluate_list=to_evaluate_list,
                     to_evaluate_hx_dict=to_evaluate_hx_dict,
-                    to_evaluate_rope=reason_rcontext,
-                    rope_type="reasonunit_rcontext",
+                    to_evaluate_rope=reason_r_context,
+                    rope_type="reasonunit_r_context",
                 )
             forefather_ropes = get_forefather_ropes(x_rope)
             for forefather_rope in forefather_ropes:
@@ -274,11 +274,11 @@ class BelieverUnit:
             to_evaluate_list.append(to_evaluate_rope)
             to_evaluate_hx_dict[to_evaluate_rope] = rope_type
 
-            if rope_type == "reasonunit_rcontext":
-                ru_rcontext_plan = self.get_plan_obj(to_evaluate_rope)
+            if rope_type == "reasonunit_r_context":
+                ru_r_context_plan = self.get_plan_obj(to_evaluate_rope)
                 for (
                     descendant_rope
-                ) in ru_rcontext_plan.get_descendant_ropes_from_kids():
+                ) in ru_r_context_plan.get_descendant_ropes_from_kids():
                     self._evaluate_relevancy(
                         to_evaluate_list=to_evaluate_list,
                         to_evaluate_hx_dict=to_evaluate_hx_dict,
@@ -440,70 +440,71 @@ class BelieverUnit:
         return [
             fact
             for fact in self.planroot.factunits.values()
-            if fact.fopen is not None
-            and fact.fnigh is not None
-            and self._is_plan_rangeroot(plan_rope=fact.fcontext)
+            if fact.f_lower is not None
+            and fact.f_upper is not None
+            and self._is_plan_rangeroot(plan_rope=fact.f_context)
         ]
 
     def add_fact(
         self,
-        fcontext: RopeTerm,
-        fstate: RopeTerm = None,
-        fopen: float = None,
-        fnigh: float = None,
+        f_context: RopeTerm,
+        f_state: RopeTerm = None,
+        f_lower: float = None,
+        f_upper: float = None,
         create_missing_plans: bool = None,
     ):
-        fstate = fcontext if fstate is None else fstate
+        f_state = f_context if f_state is None else f_state
         if create_missing_plans:
-            self._create_plankid_if_empty(rope=fcontext)
-            self._create_plankid_if_empty(rope=fstate)
+            self._create_plankid_if_empty(rope=f_context)
+            self._create_plankid_if_empty(rope=f_state)
 
-        fact_fcontext_plan = self.get_plan_obj(fcontext)
+        fact_f_context_plan = self.get_plan_obj(f_context)
         x_planroot = self.get_plan_obj(to_rope(self.belief_label))
-        x_fopen = None
-        if fnigh is not None and fopen is None:
-            x_fopen = x_planroot.factunits.get(fcontext).fopen
+        x_f_lower = None
+        if f_upper is not None and f_lower is None:
+            x_f_lower = x_planroot.factunits.get(f_context).f_lower
         else:
-            x_fopen = fopen
-        x_fnigh = None
-        if fopen is not None and fnigh is None:
-            x_fnigh = x_planroot.factunits.get(fcontext).fnigh
+            x_f_lower = f_lower
+        x_f_upper = None
+        if f_lower is not None and f_upper is None:
+            x_f_upper = x_planroot.factunits.get(f_context).f_upper
         else:
-            x_fnigh = fnigh
+            x_f_upper = f_upper
         x_factunit = factunit_shop(
-            fcontext=fcontext,
-            fstate=fstate,
-            fopen=x_fopen,
-            fnigh=x_fnigh,
+            f_context=f_context,
+            f_state=f_state,
+            f_lower=x_f_lower,
+            f_upper=x_f_upper,
         )
 
-        if fact_fcontext_plan.is_math() is False:
+        if fact_f_context_plan.is_math() is False:
             x_planroot.set_factunit(x_factunit)
         # if fact's plan no range or is a "range-root" then allow fact to be set
         elif (
-            fact_fcontext_plan.is_math() and self._is_plan_rangeroot(fcontext) is False
+            fact_f_context_plan.is_math()
+            and self._is_plan_rangeroot(f_context) is False
         ):
             raise InvalidBelieverException(
-                f"Non range-root fact:{fcontext} can only be set by range-root fact"
+                f"Non range-root fact:{f_context} can only be set by range-root fact"
             )
-        elif fact_fcontext_plan.is_math() and self._is_plan_rangeroot(fcontext):
-            # WHEN plan is "range-root" identify any reason.rcontexts that are descendants
+        elif fact_f_context_plan.is_math() and self._is_plan_rangeroot(f_context):
+            # WHEN plan is "range-root" identify any reason.r_contexts that are descendants
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,wks" (spllt 10080) is range-descendant
-            # there exists a reason rcontext "timeline,wks" with premise.pstate = "timeline,wks"
-            # and (1,2) pdivisor=2 (every other wk)
+            # there exists a reason r_context "timeline,wks" with premise.p_state = "timeline,wks"
+            # and (1,2) p_divisor=2 (every other wk)
             #
             # should not set "timeline,wks" fact, only "timeline" fact and
             # "timeline,wks" should be set automatica_lly since there exists a reason
-            # that has that rcontext.
+            # that has that r_context.
             x_planroot.set_factunit(x_factunit)
 
-    def get_fact(self, fcontext: RopeTerm) -> FactUnit:
-        return self.planroot.factunits.get(fcontext)
+    def get_fact(self, f_context: RopeTerm) -> FactUnit:
+        return self.planroot.factunits.get(f_context)
 
-    def del_fact(self, fcontext: RopeTerm):
-        self.planroot.del_factunit(fcontext)
+    def del_fact(self, f_context: RopeTerm):
+        self.planroot.del_factunit(f_context)
 
     def get_plan_dict(self, problem: bool = None) -> dict[RopeTerm, PlanUnit]:
         self.settle_believer()
@@ -577,19 +578,19 @@ class BelieverUnit:
             level_count = 0
         return level_count
 
-    def get_reason_rcontexts(self) -> set[RopeTerm]:
-        return set(self.get_tree_metrics().reason_rcontexts.keys())
+    def get_reason_r_contexts(self) -> set[RopeTerm]:
+        return set(self.get_tree_metrics().reason_r_contexts.keys())
 
-    def get_missing_fact_rcontexts(self) -> dict[RopeTerm, int]:
+    def get_missing_fact_r_contexts(self) -> dict[RopeTerm, int]:
         tree_metrics = self.get_tree_metrics()
-        reason_rcontexts = tree_metrics.reason_rcontexts
-        missing_rcontexts = {}
-        for rcontext, rcontext_count in reason_rcontexts.items():
+        reason_r_contexts = tree_metrics.reason_r_contexts
+        missing_r_contexts = {}
+        for r_context, r_context_count in reason_r_contexts.items():
             try:
-                self.planroot.factunits[rcontext]
+                self.planroot.factunits[r_context]
             except KeyError:
-                missing_rcontexts[rcontext] = rcontext_count
-        return missing_rcontexts
+                missing_r_contexts[r_context] = r_context_count
+        return missing_r_contexts
 
     def add_plan(
         self, plan_rope: RopeTerm, mass: float = None, task: bool = None
@@ -704,9 +705,9 @@ class BelieverUnit:
         posted_plan = self.get_plan_obj(rope)
 
         for x_reason in posted_plan.reasonunits.values():
-            self._create_plankid_if_empty(rope=x_reason.rcontext)
+            self._create_plankid_if_empty(rope=x_reason.r_context)
             for premise_x in x_reason.premises.values():
-                self._create_plankid_if_empty(rope=premise_x.pstate)
+                self._create_plankid_if_empty(rope=premise_x.p_state)
 
     def _create_plankid_if_empty(self, rope: RopeTerm):
         if self.plan_exists(rope) is False:
@@ -783,27 +784,27 @@ class BelieverUnit:
     def _set_planattrholder_premise_ranges(self, x_planattrholder: PlanAttrHolder):
         premise_plan = self.get_plan_obj(x_planattrholder.reason_premise)
         x_planattrholder.set_premise_range_influenced_by_premise_plan(
-            popen=premise_plan.begin,
-            pnigh=premise_plan.close,
+            p_lower=premise_plan.begin,
+            p_upper=premise_plan.close,
             premise_denom=premise_plan.denom,
         )
 
     def edit_reason(
         self,
         plan_rope: RopeTerm,
-        reason_rcontext: RopeTerm = None,
+        reason_r_context: RopeTerm = None,
         reason_premise: RopeTerm = None,
-        popen: float = None,
-        reason_pnigh: float = None,
-        pdivisor: int = None,
+        p_lower: float = None,
+        reason_p_upper: float = None,
+        p_divisor: int = None,
     ):
         self.edit_plan_attr(
             plan_rope=plan_rope,
-            reason_rcontext=reason_rcontext,
+            reason_r_context=reason_r_context,
             reason_premise=reason_premise,
-            popen=popen,
-            reason_pnigh=reason_pnigh,
-            pdivisor=pdivisor,
+            p_lower=p_lower,
+            reason_p_upper=reason_p_upper,
+            p_divisor=p_divisor,
         )
 
     def edit_plan_attr(
@@ -812,14 +813,14 @@ class BelieverUnit:
         mass: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
-        reason_rcontext: RopeTerm = None,
+        reason_r_context: RopeTerm = None,
         reason_premise: RopeTerm = None,
-        popen: float = None,
-        reason_pnigh: float = None,
-        pdivisor: int = None,
-        reason_del_premise_rcontext: RopeTerm = None,
-        reason_del_premise_pstate: RopeTerm = None,
-        reason_rplan_active_requisite: str = None,
+        p_lower: float = None,
+        reason_p_upper: float = None,
+        p_divisor: int = None,
+        reason_del_premise_r_context: RopeTerm = None,
+        reason_del_premise_p_state: RopeTerm = None,
+        reason_r_plan_active_requisite: str = None,
         laborunit: LaborUnit = None,
         healerlink: HealerLink = None,
         begin: float = None,
@@ -850,14 +851,14 @@ class BelieverUnit:
             mass=mass,
             uid=uid,
             reason=reason,
-            reason_rcontext=reason_rcontext,
+            reason_r_context=reason_r_context,
             reason_premise=reason_premise,
-            popen=popen,
-            reason_pnigh=reason_pnigh,
-            pdivisor=pdivisor,
-            reason_del_premise_rcontext=reason_del_premise_rcontext,
-            reason_del_premise_pstate=reason_del_premise_pstate,
-            reason_rplan_active_requisite=reason_rplan_active_requisite,
+            p_lower=p_lower,
+            reason_p_upper=reason_p_upper,
+            p_divisor=p_divisor,
+            reason_del_premise_r_context=reason_del_premise_r_context,
+            reason_del_premise_p_state=reason_del_premise_p_state,
+            reason_r_plan_active_requisite=reason_r_plan_active_requisite,
             laborunit=laborunit,
             healerlink=healerlink,
             begin=begin,
@@ -884,13 +885,13 @@ class BelieverUnit:
         x_plan._set_attrs_to_planunit(plan_attr=x_planattrholder)
 
     def get_agenda_dict(
-        self, necessary_rcontext: RopeTerm = None
+        self, necessary_r_context: RopeTerm = None
     ) -> dict[RopeTerm, PlanUnit]:
         self.settle_believer()
         return {
             x_plan.get_plan_rope(): x_plan
             for x_plan in self._plan_dict.values()
-            if x_plan.is_agenda_plan(necessary_rcontext)
+            if x_plan.is_agenda_plan(necessary_r_context)
         }
 
     def get_all_tasks(self) -> dict[RopeTerm, PlanUnit]:
@@ -898,9 +899,9 @@ class BelieverUnit:
         all_plans = self._plan_dict.values()
         return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.task}
 
-    def set_agenda_chore_complete(self, chore_rope: RopeTerm, rcontext: RopeTerm):
+    def set_agenda_chore_complete(self, chore_rope: RopeTerm, r_context: RopeTerm):
         task_plan = self.get_plan_obj(chore_rope)
-        task_plan.set_factunit_to_complete(self.planroot.factunits[rcontext])
+        task_plan.set_factunit_to_complete(self.planroot.factunits[r_context])
 
     def get_credit_ledger_debt_ledger(
         self,
@@ -936,12 +937,12 @@ class BelieverUnit:
         for x_partner_name, partner_fund_give in fund_give_allot.items():
             self.get_partner(x_partner_name).add_fund_give(partner_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_rcontexts:
+            if not self._reason_r_contexts:
                 self.get_partner(x_partner_name).add_fund_agenda_give(partner_fund_give)
         for x_partner_name, partner_fund_take in fund_take_allot.items():
             self.get_partner(x_partner_name).add_fund_take(partner_fund_take)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_rcontexts:
+            if not self._reason_r_contexts:
                 self.get_partner(x_partner_name).add_fund_agenda_take(partner_fund_take)
 
     def _add_to_partnerunits_fund_agenda_give_take(self, plan_fund_share: float):
@@ -1086,8 +1087,8 @@ class BelieverUnit:
                 plan_kid.set_level(x_plan._level)
                 plan_list.append(plan_kid)
             self._plan_dict[x_plan.get_plan_rope()] = x_plan
-            for x_reason_rcontext in x_plan.reasonunits.keys():
-                self._reason_rcontexts.add(x_reason_rcontext)
+            for x_reason_r_context in x_plan.reasonunits.keys():
+                self._reason_r_contexts.add(x_reason_r_context)
 
     def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
         exception_str = f"Error has occurred, Plan '{plan_rope}' is having _gogo_calc and _stop_calc attributes set twice"
@@ -1238,7 +1239,7 @@ class BelieverUnit:
         self._rational = False
         self._tree_traverse_count = 0
         self._offtrack_kids_mass_set = set()
-        self._reason_rcontexts = set()
+        self._reason_r_contexts = set()
         self._range_inheritors = {}
         self._keeps_justified = True
         self._keeps_buildable = False
@@ -1489,7 +1490,7 @@ def believerunit_shop(
         _keeps_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
         _offtrack_kids_mass_set=set(),
-        _reason_rcontexts=set(),
+        _reason_r_contexts=set(),
         _range_inheritors={},
     )
     x_believer.planroot = planunit_shop(

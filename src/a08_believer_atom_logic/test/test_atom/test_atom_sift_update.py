@@ -22,8 +22,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     believerunit_str,
     close_str,
     denom_str,
-    fcontext_str,
-    fopen_str,
+    f_context_str,
+    f_lower_str,
     give_force_str,
     gogo_want_str,
     group_debt_points_str,
@@ -37,8 +37,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_name_str,
     plan_label_str,
     plan_rope_str,
-    rcontext_str,
-    rplan_active_requisite_str,
+    r_context_str,
+    r_plan_active_requisite_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -243,15 +243,15 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reasonunit():
     sue_believer.add_plan(casa_rope)
     sue_believer.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
-    new_rplan_active_requisite = True
+    new_r_plan_active_requisite = True
     casa_atom = believeratom_shop(believer_plan_reasonunit_str(), INSERT_str())
     casa_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_atom.set_arg(rcontext_str(), week_rope)
-    casa_atom.set_arg(rplan_active_requisite_str(), new_rplan_active_requisite)
+    casa_atom.set_arg(r_context_str(), week_rope)
+    casa_atom.set_arg(r_plan_active_requisite_str(), new_r_plan_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = believer_plan_reasonunit_get_obj(sue_believer, casa_jkeys)
-    assert casa_reasonunit.rplan_active_requisite != new_rplan_active_requisite
-    assert casa_reasonunit.rplan_active_requisite is None
+    assert casa_reasonunit.r_plan_active_requisite != new_r_plan_active_requisite
+    assert casa_reasonunit.r_plan_active_requisite is None
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, casa_atom)
@@ -261,8 +261,8 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reasonunit():
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(rplan_active_requisite_str())
-    assert zia_requisite_value == new_rplan_active_requisite
+    zia_requisite_value = zia_jvalues.get(r_plan_active_requisite_str())
+    assert zia_requisite_value == new_r_plan_active_requisite
 
 
 def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reason_premiseunit():
@@ -282,17 +282,17 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reason_premiseun
     clean_plan.set_reasonunit(reasonunit_shop(week_rope))
     clean_plan.get_reasonunit(week_rope).set_premise(thur_rope)
 
-    thur_pdivisor = 39
+    thur_p_divisor = 39
     thur_atom = believeratom_shop(believer_plan_reason_premiseunit_str(), INSERT_str())
     thur_atom.set_arg(plan_rope_str(), clean_rope)
-    thur_atom.set_arg(rcontext_str(), week_rope)
-    thur_atom.set_arg("pstate", thur_rope)
+    thur_atom.set_arg(r_context_str(), week_rope)
+    thur_atom.set_arg("p_state", thur_rope)
     assert thur_atom.is_valid()
-    thur_atom.set_arg("pdivisor", thur_pdivisor)
+    thur_atom.set_arg("p_divisor", thur_p_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
     thur_premiseunit = premiseunit_get_obj(sue_believer, thur_jkeys)
-    assert thur_premiseunit.pdivisor != thur_pdivisor
-    assert thur_premiseunit.pdivisor is None
+    assert thur_premiseunit.p_divisor != thur_p_divisor
+    assert thur_premiseunit.p_divisor is None
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, thur_atom)
@@ -302,7 +302,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reason_premiseun
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    assert zia_jvalues.get("pdivisor") == thur_pdivisor
+    assert zia_jvalues.get("p_divisor") == thur_p_divisor
 
 
 def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_factunit():
@@ -315,15 +315,15 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_factunit():
     sue_believer.add_plan(casa_rope)
     sue_believer.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
-    casa_fopen = 32
+    casa_f_lower = 32
     casa_atom = believeratom_shop(believer_plan_factunit_str(), INSERT_str())
     casa_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_atom.set_arg(fcontext_str(), week_rope)
-    casa_atom.set_arg(fopen_str(), casa_fopen)
+    casa_atom.set_arg(f_context_str(), week_rope)
+    casa_atom.set_arg(f_lower_str(), casa_f_lower)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_factunit = believer_plan_factunit_get_obj(sue_believer, casa_jkeys)
-    assert casa_factunit.fopen != casa_fopen
-    assert casa_factunit.fopen is None
+    assert casa_factunit.f_lower != casa_f_lower
+    assert casa_factunit.f_lower is None
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, casa_atom)
@@ -333,4 +333,4 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_factunit():
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    assert zia_jvalues.get(fopen_str()) == casa_fopen
+    assert zia_jvalues.get(f_lower_str()) == casa_f_lower

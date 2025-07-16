@@ -158,13 +158,13 @@ def test_believer_edit_plan_label_Modifies_factunits():
     yao_believer.set_l1_plan(planunit_shop(casa_str))
     yao_believer.set_plan(planunit_shop(roses_str), parent_rope=bloomers_rope)
     yao_believer.set_plan(planunit_shop(rain_str), parent_rope=old_water_rope)
-    yao_believer.add_fact(fcontext=old_water_rope, fstate=old_rain_rope)
+    yao_believer.add_fact(f_context=old_water_rope, f_state=old_rain_rope)
 
     plan_x = yao_believer.get_plan_obj(roses_rope)
     assert yao_believer.planroot.factunits[old_water_rope] is not None
     old_water_rain_factunit = yao_believer.planroot.factunits[old_water_rope]
-    assert old_water_rain_factunit.fcontext == old_water_rope
-    assert old_water_rain_factunit.fstate == old_rain_rope
+    assert old_water_rain_factunit.f_context == old_water_rope
+    assert old_water_rain_factunit.f_state == old_rain_rope
 
     # WHEN
     new_water_str = "h2o"
@@ -177,16 +177,16 @@ def test_believer_edit_plan_label_Modifies_factunits():
     assert yao_believer.planroot.factunits.get(old_water_rope) is None
     assert yao_believer.planroot.factunits.get(new_water_rope) is not None
     new_water_rain_factunit = yao_believer.planroot.factunits[new_water_rope]
-    assert new_water_rain_factunit.fcontext == new_water_rope
+    assert new_water_rain_factunit.f_context == new_water_rope
     new_rain_rope = yao_believer.make_rope(new_water_rope, rain_str)
-    assert new_water_rain_factunit.fstate == new_rain_rope
+    assert new_water_rain_factunit.f_state == new_rain_rope
 
     assert yao_believer.planroot.factunits.get(new_water_rope)
     x_factunit = yao_believer.planroot.factunits.get(new_water_rope)
     # for factunit_key, x_factunit in yao_believer.planroot.factunits.items():
     #     assert factunit_key == new_water_rope
-    assert x_factunit.fcontext == new_water_rope
-    assert x_factunit.fstate == new_rain_rope
+    assert x_factunit.f_context == new_water_rope
+    assert x_factunit.f_state == new_rain_rope
 
 
 def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
@@ -197,15 +197,15 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     wednesday_str = "Wednesday"
     old_wednesday_rope = sue_believer.make_rope(old_wkday_rope, wednesday_str)
     casa_plan = sue_believer.get_plan_obj(sue_believer.make_l1_rope("casa"))
-    # casa_wk_reason = reasonunit_shop(wkday, premises={wed_premise.pstate: wed_premise})
-    # nation_reason = reasonunit_shop(nation, premises={usa_premise.pstate: usa_premise})
+    # casa_wk_reason = reasonunit_shop(wkday, premises={wed_premise.p_state: wed_premise})
+    # nation_reason = reasonunit_shop(nation, premises={usa_premise.p_state: usa_premise})
     assert len(casa_plan.reasonunits) == 2
     assert casa_plan.reasonunits.get(old_wkday_rope) is not None
     wednesday_plan = sue_believer.get_plan_obj(old_wkday_rope)
     casa_wkday_reason = casa_plan.reasonunits.get(old_wkday_rope)
     assert casa_wkday_reason.premises.get(old_wednesday_rope) is not None
     assert (
-        casa_wkday_reason.premises.get(old_wednesday_rope).pstate == old_wednesday_rope
+        casa_wkday_reason.premises.get(old_wednesday_rope).p_state == old_wednesday_rope
     )
     new_wkday_str = "days of wk"
     new_wkday_rope = sue_believer.make_l1_rope(new_wkday_str)
@@ -214,12 +214,12 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
 
     # WHEN
     # for key_x, x_reason in casa_plan.reasonunits.items():
-    #     print(f"Before {key_x=} {x_reason.rcontext=}")
+    #     print(f"Before {key_x=} {x_reason.r_context=}")
     print(f"before {wednesday_plan.plan_label=}")
     print(f"before {wednesday_plan.parent_rope=}")
     sue_believer.edit_plan_label(old_rope=old_wkday_rope, new_plan_label=new_wkday_str)
     # for key_x, x_reason in casa_plan.reasonunits.items():
-    #     print(f"after {key_x=} {x_reason.rcontext=}")
+    #     print(f"after {key_x=} {x_reason.r_context=}")
     print(f"after  {wednesday_plan.plan_label=}")
     print(f"after  {wednesday_plan.parent_rope=}")
 
@@ -229,7 +229,7 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     casa_wkday_reason = casa_plan.reasonunits.get(new_wkday_rope)
     assert casa_wkday_reason.premises.get(new_wednesday_rope) is not None
     assert (
-        casa_wkday_reason.premises.get(new_wednesday_rope).pstate == new_wednesday_rope
+        casa_wkday_reason.premises.get(new_wednesday_rope).p_state == new_wednesday_rope
     )
     assert len(casa_plan.reasonunits) == 2
 

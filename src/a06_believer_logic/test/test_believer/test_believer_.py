@@ -16,7 +16,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     _offtrack_fund_str,
     _offtrack_kids_mass_set_str,
     _rational_str,
-    _reason_rcontexts_str,
+    _reason_r_contexts_str,
     _sum_healerlink_share_str,
     _tree_traverse_count_str,
     belief_label_str,
@@ -63,7 +63,7 @@ def test_BelieverUnit_Exists():
     assert x_believer._sum_healerlink_share is None
     assert x_believer._offtrack_kids_mass_set is None
     assert x_believer._offtrack_fund is None
-    assert x_believer._reason_rcontexts is None
+    assert x_believer._reason_r_contexts is None
     assert x_believer._range_inheritors is None
     assert str(type(x_believer.planroot)).find("None") == 8
     obj_attrs = set(x_believer.__dict__.keys())
@@ -78,7 +78,7 @@ def test_BelieverUnit_Exists():
         _offtrack_kids_mass_set_str(),
         "_range_inheritors",
         _rational_str(),
-        _reason_rcontexts_str(),
+        _reason_r_contexts_str(),
         _sum_healerlink_share_str(),
         _tree_traverse_count_str(),
         "partners",
@@ -147,7 +147,7 @@ def test_believerunit_shop_ReturnsObjectWithFilledFields():
     assert x_believer._sum_healerlink_share == 0
     assert x_believer._offtrack_kids_mass_set == set()
     assert not x_believer._offtrack_fund
-    assert x_believer._reason_rcontexts == set()
+    assert x_believer._reason_r_contexts == set()
     assert x_believer._range_inheritors == {}
     print(f"{type(x_believer.planroot)=}") == 0
     assert str(type(x_believer.planroot)).find(".plan.PlanUnit'>") > 0

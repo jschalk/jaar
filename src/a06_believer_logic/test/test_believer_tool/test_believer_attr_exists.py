@@ -27,14 +27,14 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
-    fcontext_str,
+    f_context_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
+    p_state_str,
     partner_name_str,
     plan_rope_str,
-    pstate_str,
-    rcontext_str,
+    r_context_str,
 )
 
 
@@ -171,9 +171,9 @@ def test_believer_plan_reasonunit_exists_ReturnsObj():
     root_rope = to_rope(sue_believer.belief_label)
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    root_jkeys = {plan_rope_str(): root_rope, rcontext_str(): wk_rope}
-    casa_jkeys = {plan_rope_str(): casa_rope, rcontext_str(): wk_rope}
-    clean_jkeys = {plan_rope_str(): clean_rope, rcontext_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, r_context_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, r_context_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, r_context_str(): wk_rope}
 
     # WHEN / THEN
     assert not believer_plan_reasonunit_exists(None, {})
@@ -205,18 +205,18 @@ def test_believer_plan_reason_premiseunit_exists_ReturnsObj():
     thur_rope = sue_believer.make_rope(wk_rope, "thur")
     root_jkeys = {
         plan_rope_str(): root_rope,
-        rcontext_str(): wk_rope,
-        pstate_str(): thur_rope,
+        r_context_str(): wk_rope,
+        p_state_str(): thur_rope,
     }
     casa_jkeys = {
         plan_rope_str(): casa_rope,
-        rcontext_str(): wk_rope,
-        pstate_str(): thur_rope,
+        r_context_str(): wk_rope,
+        p_state_str(): thur_rope,
     }
     clean_jkeys = {
         plan_rope_str(): clean_rope,
-        rcontext_str(): wk_rope,
-        pstate_str(): thur_rope,
+        r_context_str(): wk_rope,
+        p_state_str(): thur_rope,
     }
 
     # WHEN / THEN
@@ -316,9 +316,9 @@ def test_believer_plan_factunit_exists_ReturnsObj():
     root_rope = to_rope(sue_believer.belief_label)
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    root_jkeys = {plan_rope_str(): root_rope, fcontext_str(): wk_rope}
-    casa_jkeys = {plan_rope_str(): casa_rope, fcontext_str(): wk_rope}
-    clean_jkeys = {plan_rope_str(): clean_rope, fcontext_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, f_context_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, f_context_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, f_context_str(): wk_rope}
 
     # WHEN / THEN
     assert not believer_plan_factunit_exists(None, {})
@@ -474,9 +474,9 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reasonunit():
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
     x_dimen = believer_plan_reasonunit_str()
-    root_jkeys = {plan_rope_str(): root_rope, rcontext_str(): wk_rope}
-    casa_jkeys = {plan_rope_str(): casa_rope, rcontext_str(): wk_rope}
-    clean_jkeys = {plan_rope_str(): clean_rope, rcontext_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, r_context_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, r_context_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, r_context_str(): wk_rope}
 
     # WHEN / THEN
     assert not believer_attr_exists(x_dimen, None, {})
@@ -508,18 +508,18 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reason_premiseunit():
     x_dimen = believer_plan_reason_premiseunit_str()
     root_jkeys = {
         plan_rope_str(): root_rope,
-        rcontext_str(): wk_rope,
-        pstate_str(): thur_rope,
+        r_context_str(): wk_rope,
+        p_state_str(): thur_rope,
     }
     casa_jkeys = {
         plan_rope_str(): casa_rope,
-        rcontext_str(): wk_rope,
-        pstate_str(): thur_rope,
+        r_context_str(): wk_rope,
+        p_state_str(): thur_rope,
     }
     clean_jkeys = {
         plan_rope_str(): clean_rope,
-        rcontext_str(): wk_rope,
-        pstate_str(): thur_rope,
+        r_context_str(): wk_rope,
+        p_state_str(): thur_rope,
     }
 
     # WHEN / THEN
@@ -620,9 +620,9 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_factunit():
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
     x_dimen = believer_plan_factunit_str()
-    root_jkeys = {plan_rope_str(): root_rope, fcontext_str(): wk_rope}
-    casa_jkeys = {plan_rope_str(): casa_rope, fcontext_str(): wk_rope}
-    clean_jkeys = {plan_rope_str(): clean_rope, fcontext_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, f_context_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, f_context_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, f_context_str(): wk_rope}
 
     # WHEN / THEN
     assert not believer_attr_exists(x_dimen, None, {})

@@ -16,7 +16,7 @@ def test_TreeMetrics_Exists():
     assert x_tree_metrics is not None
     assert x_tree_metrics.label_count is None
     assert x_tree_metrics.level_count is None
-    assert x_tree_metrics.reason_rcontexts is None
+    assert x_tree_metrics.reason_r_contexts is None
     assert x_tree_metrics.awardlinks_metrics is None
     assert x_tree_metrics.uid_max is None
     assert x_tree_metrics.uid_dict is None
@@ -31,7 +31,7 @@ def test_treemetrics_shop_ReturnsObj():
     assert x_tree_metrics is not None
     assert x_tree_metrics.label_count == 0
     assert x_tree_metrics.level_count == {}
-    assert x_tree_metrics.reason_rcontexts == {}
+    assert x_tree_metrics.reason_r_contexts == {}
     assert x_tree_metrics.awardlinks_metrics == {}
     assert x_tree_metrics.uid_max == 0
     assert x_tree_metrics.uid_dict == {}
@@ -56,7 +56,7 @@ def test_BelieverUnit_set_plan_dict_Scenario0():
     assert not root_plan._gogo_calc
     assert not root_plan._stop_calc
     assert yao_believer._plan_dict == {}
-    assert yao_believer._reason_rcontexts == set()
+    assert yao_believer._reason_r_contexts == set()
 
     # WHEN
     yao_believer._set_plan_dict()
@@ -67,7 +67,7 @@ def test_BelieverUnit_set_plan_dict_Scenario0():
     assert not root_plan._gogo_calc
     assert not root_plan._stop_calc
     assert yao_believer._plan_dict == {root_plan.get_plan_rope(): root_plan}
-    assert yao_believer._reason_rcontexts == set()
+    assert yao_believer._reason_r_contexts == set()
 
 
 def test_BelieverUnit_set_plan_dict_Scenario1():
@@ -126,7 +126,7 @@ def test_BelieverUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     assert not texas_plan._stop_calc
 
 
-def test_BelieverUnit_set_plan_dict_Sets_reason_rcontexts():
+def test_BelieverUnit_set_plan_dict_Sets_reason_r_contexts():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     nation_str = "nation"
@@ -136,17 +136,17 @@ def test_BelieverUnit_set_plan_dict_Sets_reason_rcontexts():
     sue_believer.add_plan(polis_rope)
     sue_believer.add_plan(nation_rope)
     sue_believer.edit_plan_attr(
-        nation_rope, reason_rcontext=polis_rope, reason_premise=polis_rope
+        nation_rope, reason_r_context=polis_rope, reason_premise=polis_rope
     )
     nation_plan = sue_believer.get_plan_obj(nation_rope)
-    assert nation_plan.rcontext_reasonunit_exists(polis_rope)
-    assert sue_believer._reason_rcontexts == set()
+    assert nation_plan.r_context_reasonunit_exists(polis_rope)
+    assert sue_believer._reason_r_contexts == set()
 
     # WHEN
     sue_believer._set_plan_dict()
 
     # THEN
-    assert sue_believer._reason_rcontexts == {polis_rope}
+    assert sue_believer._reason_r_contexts == {polis_rope}
 
 
 def test_BelieverUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
@@ -163,7 +163,7 @@ def test_BelieverUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     cookery_room_rope = sue_believer.make_rope(buildings_rope, cookery_room_str)
     cookery_dirty_str = "dirty"
     cookery_dirty_rope = sue_believer.make_rope(cookery_room_rope, cookery_dirty_str)
-    cookery_reasonunit = reasonunit_shop(rcontext=cookery_room_rope)
+    cookery_reasonunit = reasonunit_shop(r_context=cookery_room_rope)
     cookery_reasonunit.set_premise(premise=cookery_dirty_rope)
     clean_cookery_plan.set_reasonunit(cookery_reasonunit)
 

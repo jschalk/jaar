@@ -75,17 +75,17 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
 
-    wed_premise = premiseunit_shop(pstate=wed_rope)
+    wed_premise = premiseunit_shop(p_state=wed_rope)
     wed_premise._status = True
-    usa_premise = premiseunit_shop(pstate=usa_rope)
+    usa_premise = premiseunit_shop(p_state=usa_rope)
     usa_premise._status = False
 
     x1_reasonunits = {
-        wk_rope: reasonunit_shop(wk_rope, premises={wed_premise.pstate: wed_premise}),
-        nation_rope: reasonunit_shop(nation_rope, {usa_premise.pstate: usa_premise}),
+        wk_rope: reasonunit_shop(wk_rope, premises={wed_premise.p_state: wed_premise}),
+        nation_rope: reasonunit_shop(nation_rope, {usa_premise.p_state: usa_premise}),
     }
-    wed_premises = {wed_premise.pstate: wed_premise}
-    usa_premises = {usa_premise.pstate: usa_premise}
+    wed_premises = {wed_premise.p_state: wed_premise}
+    usa_premises = {usa_premise.p_state: usa_premise}
     x1_reasonheirs = {
         wk_rope: reasonheir_shop(wk_rope, wed_premises, _status=True),
         nation_rope: reasonheir_shop(nation_rope, usa_premises, _status=False),
@@ -144,7 +144,9 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
         task=True,
         problem_bool=x_problem_bool,
     )
-    x_factunit = factunit_shop(fcontext=wk_rope, fstate=wk_rope, fopen=5, fnigh=59)
+    x_factunit = factunit_shop(
+        f_context=wk_rope, f_state=wk_rope, f_lower=5, f_upper=59
+    )
     casa_plan.set_factunit(factunit=x_factunit)
     x_begin = 11
     x_close = 12

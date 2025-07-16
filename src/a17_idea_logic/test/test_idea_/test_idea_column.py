@@ -3,7 +3,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     partner_name_str,
     plan_rope_str,
-    rcontext_str,
+    r_context_str,
 )
 from src.a17_idea_logic.idea import IdeaRef, idearef_shop
 
@@ -156,11 +156,11 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
     x3_idearef = idearef_shop("0003", believer_partnerunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
     x3_idearef.set_attribute(group_title_str(), False)
-    x3_idearef.set_attribute(rcontext_str(), False)
+    x3_idearef.set_attribute(r_context_str(), False)
     x3_idearef.set_attribute(partner_name_str(), False)
 
     # WHEN
     x_otx_values_list = x3_idearef.get_otx_values_list()
 
     # THEN
-    assert x_otx_values_list == [partner_name_str(), group_title_str(), rcontext_str()]
+    assert x_otx_values_list == [partner_name_str(), group_title_str(), r_context_str()]

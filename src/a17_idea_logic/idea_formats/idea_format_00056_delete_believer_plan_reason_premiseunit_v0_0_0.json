@@ -15,10 +15,10 @@
         "believer_name": {
             "otx_key": true
         },
-        "pstate_ERASE": {
+        "p_state_ERASE": {
             "otx_key": true
         },
-        "rcontext": {
+        "r_context": {
             "otx_key": true
         }
     },

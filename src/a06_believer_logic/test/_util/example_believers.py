@@ -36,15 +36,15 @@ def believerunit_v001_with_large_agenda() -> BelieverUnit:
     wkdays_rope = yao_believer.make_l1_rope("wkdays")
 
     yao_believer.add_fact(aaron_rope, aaron_rope)
-    yao_believer.add_fact(ced_wk_rope, ced_wk_rope, fopen=0, fnigh=53)
-    yao_believer.add_fact(day_minute_rope, day_minute_rope, fopen=0, fnigh=1399)
+    yao_believer.add_fact(ced_wk_rope, ced_wk_rope, f_lower=0, f_upper=53)
+    yao_believer.add_fact(day_minute_rope, day_minute_rope, f_lower=0, f_upper=1399)
     # yao_believer.add_fact(interweb, interweb)
-    yao_believer.add_fact(month_wk_rope, month_wk_rope, fopen=0, fnigh=5)
+    yao_believer.add_fact(month_wk_rope, month_wk_rope, f_lower=0, f_upper=5)
     yao_believer.add_fact(mood_rope, mood_rope)
     # yao_believer.add_fact(movie, movie)
     yao_believer.add_fact(nations_rope, nations_rope)
     yao_believer.add_fact(season_rope, season_rope)
-    yao_believer.add_fact(yr_month_rope, yr_month_rope, fopen=0, fnigh=12)
+    yao_believer.add_fact(yr_month_rope, yr_month_rope, f_lower=0, f_upper=12)
     # yao_believer.add_fact(water, water)
     yao_believer.add_fact(wkdays_rope, wkdays_rope)
     return yao_believer
@@ -138,8 +138,8 @@ def get_believerunit_with_4_levels_and_2reasons_2facts() -> BelieverUnit:
     nation_rope = sue_believer.make_l1_rope(nation_str)
     usa_str = "USA"
     usa_rope = sue_believer.make_rope(nation_rope, usa_str)
-    sue_believer.add_fact(fcontext=wk_rope, fstate=wed_rope)
-    sue_believer.add_fact(fcontext=nation_rope, fstate=usa_rope)
+    sue_believer.add_fact(f_context=wk_rope, f_state=wed_rope)
+    sue_believer.add_fact(f_context=nation_rope, f_state=usa_rope)
     return sue_believer
 
 
@@ -195,15 +195,15 @@ def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     sue_believer.set_plan(soap_plan, clean_rope)
     sue_believer.set_plan(grab_plan, soap_rope)
 
-    clean_table_7am_rcontext = day24hr_rope
+    clean_table_7am_r_context = day24hr_rope
     clean_table_7am_premise_rope = day24hr_rope
-    clean_table_7am_popen = 7.0
-    clean_table_7am_pnigh = 7.0
-    clean_table_7am_reason = reasonunit_shop(clean_table_7am_rcontext)
+    clean_table_7am_p_lower = 7.0
+    clean_table_7am_p_upper = 7.0
+    clean_table_7am_reason = reasonunit_shop(clean_table_7am_r_context)
     clean_table_7am_reason.set_premise(
         premise=clean_table_7am_premise_rope,
-        popen=clean_table_7am_popen,
-        pnigh=clean_table_7am_pnigh,
+        p_lower=clean_table_7am_p_lower,
+        p_upper=clean_table_7am_p_upper,
     )
     sue_believer.edit_plan_attr(clean_rope, reason=clean_table_7am_reason)
     casa_str = "casa"
@@ -218,7 +218,7 @@ def get_believerunit_1Chore_1CE0MinutesReason_1Fact() -> BelieverUnit:
     hr_min_plan = planunit_shop(hr_min_str)
     hr_rope = yao_believer.make_l1_rope(hr_min_str)
     hr_reasonunit = reasonunit_shop(hr_rope)
-    hr_reasonunit.set_premise(hr_rope, popen=80, pnigh=90)
+    hr_reasonunit.set_premise(hr_rope, p_lower=80, p_upper=90)
     yao_believer.set_l1_plan(hr_min_plan)
     yao_believer.add_fact(hr_rope, hr_rope, 85, 95)
     mail_str = "obtain mail"
@@ -256,13 +256,13 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     shave_reason.set_premise(mon_rope)
 
     zia_believer.edit_plan_attr(shave_rope, reason=shave_reason)
-    zia_believer.add_fact(fcontext=wk_rope, fstate=sun_rope)
-    x_factunit = factunit_shop(fcontext=wk_rope, fstate=church_rope)
+    zia_believer.add_fact(f_context=wk_rope, f_state=sun_rope)
+    x_factunit = factunit_shop(f_context=wk_rope, f_state=church_rope)
     zia_believer.edit_plan_attr(shave_rope, factunit=x_factunit)
     return zia_believer
 
 
-def get_believerunit_rcontext_time_example() -> BelieverUnit:
+def get_believerunit_r_context_time_example() -> BelieverUnit:
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_l1_plan(planunit_shop("casa"))
     return sue_believer
@@ -296,16 +296,16 @@ def get_believerunit_irrational_example() -> BelieverUnit:
     hatter_believer.edit_plan_attr(
         egg_rope,
         task=True,
-        reason_rcontext=chicken_rope,
-        reason_rplan_active_requisite=True,
+        reason_r_context=chicken_rope,
+        reason_r_plan_active_requisite=True,
     )
 
     # set chick task is True when egg first is False
     hatter_believer.edit_plan_attr(
         chicken_rope,
         task=True,
-        reason_rcontext=egg_rope,
-        reason_rplan_active_requisite=False,
+        reason_r_context=egg_rope,
+        reason_r_plan_active_requisite=False,
     )
 
     return hatter_believer
@@ -369,16 +369,16 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
 
     # laundry requirement
     amos_believer.edit_plan_attr(
-        laundry_chore_rope, reason_rcontext=basket_rope, reason_premise=b_full_rope
+        laundry_chore_rope, reason_r_context=basket_rope, reason_premise=b_full_rope
     )
     # laundry requirement
     amos_believer.edit_plan_attr(
-        laundry_chore_rope, reason_rcontext=basket_rope, reason_premise=b_smel_rope
+        laundry_chore_rope, reason_r_context=basket_rope, reason_premise=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)
     amos_believer.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
-    amos_believer.add_fact(fcontext=basket_rope, fstate=b_full_rope)
+    amos_believer.add_fact(f_context=basket_rope, f_state=b_full_rope)
 
     return amos_believer
 

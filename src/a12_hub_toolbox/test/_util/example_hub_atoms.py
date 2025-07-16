@@ -6,9 +6,9 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_planunit_str,
     believerunit_str,
-    fcontext_str,
-    fnigh_str,
-    fopen_str,
+    f_context_str,
+    f_lower_str,
+    f_upper_str,
     partner_name_str,
     plan_rope_str,
 )
@@ -77,14 +77,14 @@ def get_atom_example_factunit_knee(belief_label: BeliefLabel = None) -> Believer
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope(belief_label, knee_str)
-    knee_fopen = 7
-    knee_fnigh = 23
+    knee_f_lower = 7
+    knee_f_upper = 23
     x_dimen = believer_plan_factunit_str()
     insert_factunit_believeratom = believeratom_shop(x_dimen, INSERT_str())
     insert_factunit_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    insert_factunit_believeratom.set_jkey(fcontext_str(), knee_rope)
-    insert_factunit_believeratom.set_jvalue(fopen_str(), knee_fopen)
-    insert_factunit_believeratom.set_jvalue(fnigh_str(), knee_fnigh)
+    insert_factunit_believeratom.set_jkey(f_context_str(), knee_rope)
+    insert_factunit_believeratom.set_jvalue(f_lower_str(), knee_f_lower)
+    insert_factunit_believeratom.set_jvalue(f_upper_str(), knee_f_upper)
     return insert_factunit_believeratom
 
 

@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_believer_logic.test._util.a06_str import partner_name_str, rcontext_str
+from src.a06_believer_logic.test._util.a06_str import partner_name_str, r_context_str
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
 from src.a16_pidgin_logic.test._util.example_pidgins import (
@@ -142,16 +142,16 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_R
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][rcontext_str()] == inx_amy87_rope
-    assert gen_inx_dt.iloc[1][rcontext_str()] == casa_inx_rope
+    assert gen_inx_dt.iloc[0][r_context_str()] == inx_amy87_rope
+    assert gen_inx_dt.iloc[1][r_context_str()] == casa_inx_rope
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
-    assert gen_inx_dt.iloc[0][rcontext_str()] == sue_inx_dt.iloc[0][rcontext_str()]
-    assert gen_inx_dt.iloc[1][rcontext_str()] == sue_inx_dt.iloc[1][rcontext_str()]
-    assert gen_inx_dt.iloc[2][rcontext_str()] == sue_inx_dt.iloc[2][rcontext_str()]
-    assert gen_inx_dt.iloc[3][rcontext_str()] == sue_inx_dt.iloc[3][rcontext_str()]
+    assert gen_inx_dt.iloc[0][r_context_str()] == sue_inx_dt.iloc[0][r_context_str()]
+    assert gen_inx_dt.iloc[1][r_context_str()] == sue_inx_dt.iloc[1][r_context_str()]
+    assert gen_inx_dt.iloc[2][r_context_str()] == sue_inx_dt.iloc[2][r_context_str()]
+    assert gen_inx_dt.iloc[3][r_context_str()] == sue_inx_dt.iloc[3][r_context_str()]
     print(f"{gen_inx_dt.to_csv(index=False)=}")
-    gen_csv = gen_inx_dt.sort_values(rcontext_str()).to_csv(index=False)
-    sue_inx_csv = sue_inx_dt.sort_values(rcontext_str()).to_csv(index=False)
+    gen_csv = gen_inx_dt.sort_values(r_context_str()).to_csv(index=False)
+    sue_inx_csv = sue_inx_dt.sort_values(r_context_str()).to_csv(index=False)
     assert gen_csv == sue_inx_csv
     assert gen_inx_dt.to_csv() == sue_inx_dt.to_csv()
 

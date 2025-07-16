@@ -107,8 +107,8 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBelieverWithDetailsDecidedB
     bob_job = get_example_bob_speaker()
     bob_job.edit_plan_attr(
         cook_rope(),
-        reason_del_premise_rcontext=eat_rope(),
-        reason_del_premise_pstate=hungry_rope(),
+        reason_del_premise_r_context=eat_rope(),
+        reason_del_premise_p_state=hungry_rope(),
     )
     bob_cook_planunit = bob_job.get_plan_obj(cook_rope())
     zia_cook_planunit = zia_job.get_plan_obj(cook_rope())
@@ -212,15 +212,15 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBeliever(
     sue_job.edit_plan_attr(
         egg_rope,
         task=True,
-        reason_rcontext=chicken_rope,
-        reason_rplan_active_requisite=True,
+        reason_r_context=chicken_rope,
+        reason_r_plan_active_requisite=True,
     )
     # set chick task is True when egg first is False
     sue_job.edit_plan_attr(
         chicken_rope,
         task=True,
-        reason_rcontext=egg_rope,
-        reason_rplan_active_requisite=False,
+        reason_r_context=egg_rope,
+        reason_r_plan_active_requisite=False,
     )
     save_job_file(belief_mstr_dir, sue_job)
 

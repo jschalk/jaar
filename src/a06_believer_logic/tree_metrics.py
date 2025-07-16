@@ -9,7 +9,7 @@ from src.a04_reason_logic.reason_plan import ReasonUnit, RopeTerm
 class TreeMetrics:
     label_count: int = None
     level_count: dict[int, int] = None
-    reason_rcontexts: dict[RopeTerm, int] = None
+    reason_r_contexts: dict[RopeTerm, int] = None
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
@@ -45,11 +45,11 @@ class TreeMetrics:
     def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
-            if self.reason_rcontexts.get(reason.rcontext) is None:
-                self.reason_rcontexts[reason.rcontext] = 1
+            if self.reason_r_contexts.get(reason.r_context) is None:
+                self.reason_r_contexts[reason.r_context] = 1
             else:
-                self.reason_rcontexts[reason.rcontext] = (
-                    self.reason_rcontexts[reason.rcontext] + 1
+                self.reason_r_contexts[reason.r_context] = (
+                    self.reason_r_contexts[reason.r_context] + 1
                 )
 
     def evaluate_awardlinks(self, awardlinks: dict[GroupTitle, AwardLink]):
@@ -71,7 +71,7 @@ class TreeMetrics:
 def treemetrics_shop(
     label_count: int = None,
     level_count: dict[int, int] = None,
-    reason_rcontexts: dict[RopeTerm, int] = None,
+    reason_r_contexts: dict[RopeTerm, int] = None,
     awardlinks_metrics: dict[GroupTitle, AwardLink] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,
@@ -79,7 +79,7 @@ def treemetrics_shop(
     x_treemetrics = TreeMetrics(
         label_count=get_0_if_None(label_count),
         level_count=get_empty_dict_if_None(level_count),
-        reason_rcontexts=get_empty_dict_if_None(reason_rcontexts),
+        reason_r_contexts=get_empty_dict_if_None(reason_r_contexts),
         awardlinks_metrics=get_empty_dict_if_None(awardlinks_metrics),
         uid_dict=get_empty_dict_if_None(uid_dict),
         uid_max=get_0_if_None(uid_max),

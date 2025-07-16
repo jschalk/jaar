@@ -47,18 +47,18 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     rain_str = "rain"
     old_rain_rope = create_rope(old_water_rope, rain_str)
     # create reasonunit
-    premise_x = premiseunit_shop(pstate=old_rain_rope)
-    premises_x = {premise_x.pstate: premise_x}
+    premise_x = premiseunit_shop(p_state=old_rain_rope)
+    premises_x = {premise_x.p_state: premise_x}
     x_reason = reasonunit_shop(old_water_rope, premises=premises_x)
-    reasons_x = {x_reason.rcontext: x_reason}
+    reasons_x = {x_reason.r_context: x_reason}
     x_plan = planunit_shop(roses_str, reasonunits=reasons_x)
     # check asserts
     assert x_plan.reasonunits.get(old_water_rope) is not None
     old_water_rain_reason = x_plan.reasonunits[old_water_rope]
-    assert old_water_rain_reason.rcontext == old_water_rope
+    assert old_water_rain_reason.r_context == old_water_rope
     assert old_water_rain_reason.premises.get(old_rain_rope) is not None
     water_rain_l_premise = old_water_rain_reason.premises[old_rain_rope]
-    assert water_rain_l_premise.pstate == old_rain_rope
+    assert water_rain_l_premise.p_state == old_rain_rope
 
     # WHEN
     new_water_str = "h2o"
@@ -70,12 +70,12 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     assert x_plan.reasonunits.get(old_water_rope) is None
     assert x_plan.reasonunits.get(new_water_rope) is not None
     new_water_rain_reason = x_plan.reasonunits[new_water_rope]
-    assert new_water_rain_reason.rcontext == new_water_rope
+    assert new_water_rain_reason.r_context == new_water_rope
     new_rain_rope = create_rope(new_water_rope, rain_str)
     assert new_water_rain_reason.premises.get(old_rain_rope) is None
     assert new_water_rain_reason.premises.get(new_rain_rope) is not None
     new_water_rain_l_premise = new_water_rain_reason.premises[new_rain_rope]
-    assert new_water_rain_l_premise.pstate == new_rain_rope
+    assert new_water_rain_l_premise.p_state == new_rain_rope
 
     print(f"{len(x_plan.reasonunits)=}")
     reason_obj = x_plan.reasonunits.get(new_water_rope)
@@ -84,7 +84,7 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     print(f"{len(reason_obj.premises)=}")
     premise_obj = reason_obj.premises.get(new_rain_rope)
     assert premise_obj is not None
-    assert premise_obj.pstate == new_rain_rope
+    assert premise_obj.p_state == new_rain_rope
 
 
 def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():
@@ -96,13 +96,13 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():
     rain_str = "rain"
     old_rain_rope = create_rope(old_water_rope, rain_str)
 
-    x_factunit = factunit_shop(fcontext=old_water_rope, fstate=old_rain_rope)
-    factunits_x = {x_factunit.fcontext: x_factunit}
+    x_factunit = factunit_shop(f_context=old_water_rope, f_state=old_rain_rope)
+    factunits_x = {x_factunit.f_context: x_factunit}
     x_plan = planunit_shop(roses_str, factunits=factunits_x)
     assert x_plan.factunits[old_water_rope] is not None
     old_water_rain_factunit = x_plan.factunits[old_water_rope]
-    assert old_water_rain_factunit.fcontext == old_water_rope
-    assert old_water_rain_factunit.fstate == old_rain_rope
+    assert old_water_rain_factunit.f_context == old_water_rope
+    assert old_water_rain_factunit.f_state == old_rain_rope
 
     # WHEN
     new_water_str = "h2o"
@@ -114,15 +114,15 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():
     assert x_plan.factunits.get(old_water_rope) is None
     assert x_plan.factunits.get(new_water_rope) is not None
     new_water_rain_factunit = x_plan.factunits[new_water_rope]
-    assert new_water_rain_factunit.fcontext == new_water_rope
+    assert new_water_rain_factunit.f_context == new_water_rope
     new_rain_rope = create_rope(new_water_rope, rain_str)
-    assert new_water_rain_factunit.fstate == new_rain_rope
+    assert new_water_rain_factunit.f_state == new_rain_rope
 
     print(f"{len(x_plan.factunits)=}")
     x_factunit = x_plan.factunits.get(new_water_rope)
     assert x_factunit is not None
-    assert x_factunit.fcontext == new_water_rope
-    assert x_factunit.fstate == new_rain_rope
+    assert x_factunit.f_context == new_water_rope
+    assert x_factunit.f_state == new_rain_rope
 
 
 def test_PlanUnit_get_obj_key_ReturnsCorrectInfo():

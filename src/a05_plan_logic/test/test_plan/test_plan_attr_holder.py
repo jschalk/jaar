@@ -7,14 +7,14 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.mass is None
     assert new_obj.uid is None
     assert new_obj.reason is None
-    assert new_obj.reason_rcontext is None
+    assert new_obj.reason_r_context is None
     assert new_obj.reason_premise is None
-    assert new_obj.popen is None
-    assert new_obj.reason_pnigh is None
-    assert new_obj.pdivisor is None
-    assert new_obj.reason_del_premise_rcontext is None
-    assert new_obj.reason_del_premise_pstate is None
-    assert new_obj.reason_rplan_active_requisite is None
+    assert new_obj.p_lower is None
+    assert new_obj.reason_p_upper is None
+    assert new_obj.p_divisor is None
+    assert new_obj.reason_del_premise_r_context is None
+    assert new_obj.reason_del_premise_p_state is None
+    assert new_obj.reason_r_plan_active_requisite is None
     assert new_obj.laborunit is None
     assert new_obj.healerlink is None
     assert new_obj.begin is None
@@ -36,24 +36,24 @@ def test_PlanAttrHolder_Exists():
 def test_PlanAttrHolder_CorrectlyCalculatesPremiseRanges():
     # ESTABLISH
     plan_attr = PlanAttrHolder(reason_premise="some_rope")
-    assert plan_attr.popen is None
-    assert plan_attr.reason_pnigh is None
+    assert plan_attr.p_lower is None
+    assert plan_attr.reason_p_upper is None
     # assert plan_attr.reason_premise_numor is None
-    assert plan_attr.pdivisor is None
+    assert plan_attr.p_divisor is None
     # assert plan_attr.reason_premise_morph is None
 
     # WHEN
     plan_attr.set_premise_range_influenced_by_premise_plan(
-        popen=5.0,
-        pnigh=20.0,
+        p_lower=5.0,
+        p_upper=20.0,
         # premise_numor,
         premise_denom=4.0,
         # premise_morph,
     )
-    assert plan_attr.popen == 5.0
-    assert plan_attr.reason_pnigh == 20.0
+    assert plan_attr.p_lower == 5.0
+    assert plan_attr.reason_p_upper == 20.0
     # assert plan_attr.reason_premise_numor is None
-    assert plan_attr.pdivisor == 4.0
+    assert plan_attr.p_divisor == 4.0
     # assert plan_attr.reason_premise_morph is None
 
 

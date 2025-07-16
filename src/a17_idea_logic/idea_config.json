@@ -57,14 +57,14 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fcontext": {},
+      "f_context": {},
       "belief_label": {},
       "believer_name": {}
     },
     "jvalues": {
-      "fnigh": {},
-      "fopen": {},
-      "fstate": {}
+      "f_upper": {},
+      "f_lower": {},
+      "f_state": {}
     }
   },
   "believer_plan_healerlink": {
@@ -105,13 +105,13 @@
       "face_name": {},
       "belief_label": {},
       "believer_name": {},
-      "pstate": {},
-      "rcontext": {}
+      "p_state": {},
+      "r_context": {}
     },
     "jvalues": {
-      "pdivisor": {},
-      "pnigh": {},
-      "popen": {}
+      "p_divisor": {},
+      "p_upper": {},
+      "p_lower": {}
     }
   },
   "believer_plan_reasonunit": {
@@ -124,10 +124,10 @@
       "face_name": {},
       "belief_label": {},
       "believer_name": {},
-      "rcontext": {}
+      "r_context": {}
     },
     "jvalues": {
-      "rplan_active_requisite": {}
+      "r_plan_active_requisite": {}
     }
   },
   "believer_planunit": {

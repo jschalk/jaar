@@ -7,7 +7,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     partner_cred_points_str,
     partner_name_str,
-    rcontext_str,
+    r_context_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop
 from src.a16_pidgin_logic.pidgin import pidginunit_shop
@@ -33,11 +33,11 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
     x_dt = DataFrame(columns=[partner_name_str(), partner_cred_points_str()])
     assert get_dataframe_pidginable_columns(x_dt) == {partner_name_str()}
     x_dt = DataFrame(
-        columns=[rcontext_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[r_context_str(), partner_name_str(), partner_cred_points_str()]
     )
     assert get_dataframe_pidginable_columns(x_dt) == {
         partner_name_str(),
-        rcontext_str(),
+        r_context_str(),
     }
     x_dt = DataFrame(
         columns=["calc_swim", partner_name_str(), partner_cred_points_str()]
@@ -245,20 +245,20 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     yao_pidginunit = get_casa_maison_pidginunit_set_by_otx2inx()
     otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][rcontext_str()] == otx_amy45_rope
-    assert otx_dt.iloc[1][rcontext_str()] == casa_otx_rope
-    assert otx_dt.iloc[2][rcontext_str()] == clean_otx_rope
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_rope
+    assert otx_dt.iloc[0][r_context_str()] == otx_amy45_rope
+    assert otx_dt.iloc[1][r_context_str()] == casa_otx_rope
+    assert otx_dt.iloc[2][r_context_str()] == clean_otx_rope
+    assert otx_dt.iloc[3][r_context_str()] == sweep_otx_rope
     print(f"{otx_dt=}")
 
     # WHEN
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][rcontext_str()] == inx_amy87_rope
-    assert otx_dt.iloc[1][rcontext_str()] == casa_inx_rope
-    assert otx_dt.iloc[2][rcontext_str()] == clean_inx_rope
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_rope
+    assert otx_dt.iloc[0][r_context_str()] == inx_amy87_rope
+    assert otx_dt.iloc[1][r_context_str()] == casa_inx_rope
+    assert otx_dt.iloc[2][r_context_str()] == clean_inx_rope
+    assert otx_dt.iloc[3][r_context_str()] == sweep_inx_rope
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = get_casa_maison_rope_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
@@ -288,10 +288,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # print(f"{yao_pidginunit=}")
     otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][rcontext_str()] == otx_amy45_rope
-    assert otx_dt.iloc[1][rcontext_str()] == casa_otx_rope
-    assert otx_dt.iloc[2][rcontext_str()] == clean_otx_rope
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_otx_rope
+    assert otx_dt.iloc[0][r_context_str()] == otx_amy45_rope
+    assert otx_dt.iloc[1][r_context_str()] == casa_otx_rope
+    assert otx_dt.iloc[2][r_context_str()] == clean_otx_rope
+    assert otx_dt.iloc[3][r_context_str()] == sweep_otx_rope
     print(f"Before {otx_dt=}")
     print("")
 
@@ -301,10 +301,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][rcontext_str()] == inx_amy87_rope
-    assert otx_dt.iloc[1][rcontext_str()] == casa_inx_rope
-    assert otx_dt.iloc[2][rcontext_str()] == clean_inx_rope
-    assert otx_dt.iloc[3][rcontext_str()] == sweep_inx_rope
+    assert otx_dt.iloc[0][r_context_str()] == inx_amy87_rope
+    assert otx_dt.iloc[1][r_context_str()] == casa_inx_rope
+    assert otx_dt.iloc[2][r_context_str()] == clean_inx_rope
+    assert otx_dt.iloc[3][r_context_str()] == sweep_inx_rope
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = get_casa_maison_rope_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")

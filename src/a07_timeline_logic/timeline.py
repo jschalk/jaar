@@ -475,9 +475,9 @@ class BelieverTimelinePoint:
         week_rope = get_week_rope(self.x_believerunit, self.time_range_root_rope)
         week_plan = self.x_believerunit.get_plan_obj(week_rope)
         x_plan_list = [self._timeline_plan, week_plan]
-        popen_rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
-        popen_weekday_dict = week_plan.get_kids_in_range(popen_rangeunit.gogo)
-        for x_weekday in popen_weekday_dict.keys():
+        p_lower_rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
+        p_lower_weekday_dict = week_plan.get_kids_in_range(p_lower_rangeunit.gogo)
+        for x_weekday in p_lower_weekday_dict.keys():
             self._weekday = x_weekday
 
     def _set_month(self):
@@ -490,14 +490,16 @@ class BelieverTimelinePoint:
             year_rope,
             knot=self.x_believerunit.knot,
         )
-        popen_rangeunit = calc_range(plan_list, self.x_min, self.x_min)
-        gogo_month_dict = year_plan.get_kids_in_range(popen_rangeunit.gogo)
+        p_lower_rangeunit = calc_range(plan_list, self.x_min, self.x_min)
+        gogo_month_dict = year_plan.get_kids_in_range(p_lower_rangeunit.gogo)
         month_plan = None
         for x_monthname, month_plan in gogo_month_dict.items():
             self._month = x_monthname
             month_plan = month_plan
 
-        self._monthday = popen_rangeunit.gogo - month_plan._gogo_calc + month_plan.addin
+        self._monthday = (
+            p_lower_rangeunit.gogo - month_plan._gogo_calc + month_plan.addin
+        )
         self._monthday = self._monthday // 1440
 
     def _set_hour(self):
