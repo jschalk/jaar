@@ -108,8 +108,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWithDet
     bob_gut = get_example_bob_speaker()
     bob_gut.edit_plan_attr(
         cook_rope(),
-        reason_del_premise_r_context=eat_rope(),
-        reason_del_premise_p_state=hungry_rope(),
+        reason_del_case_r_context=eat_rope(),
+        reason_del_case_r_state=hungry_rope(),
     )
     bob_cook_planunit = bob_gut.get_plan_obj(cook_rope())
     zia_cook_planunit = zia_gut.get_plan_obj(cook_rope())

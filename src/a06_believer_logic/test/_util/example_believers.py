@@ -112,14 +112,14 @@ def get_believerunit_with_4_levels_and_2reasons() -> BelieverUnit:
     wed_str = "Wednesday"
     wed_rope = sue_believer.make_rope(wk_rope, wed_str)
     wk_reason = reasonunit_shop(wk_rope)
-    wk_reason.set_premise(wed_rope)
+    wk_reason.set_case(wed_rope)
 
     nation_str = "nation"
     nation_rope = sue_believer.make_l1_rope(nation_str)
     usa_str = "USA"
     usa_rope = sue_believer.make_rope(nation_rope, usa_str)
     nation_reason = reasonunit_shop(nation_rope)
-    nation_reason.set_premise(usa_rope)
+    nation_reason.set_case(usa_rope)
 
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -196,14 +196,14 @@ def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     sue_believer.set_plan(grab_plan, soap_rope)
 
     clean_table_7am_r_context = day24hr_rope
-    clean_table_7am_premise_rope = day24hr_rope
-    clean_table_7am_p_lower = 7.0
-    clean_table_7am_p_upper = 7.0
+    clean_table_7am_case_rope = day24hr_rope
+    clean_table_7am_r_lower = 7.0
+    clean_table_7am_r_upper = 7.0
     clean_table_7am_reason = reasonunit_shop(clean_table_7am_r_context)
-    clean_table_7am_reason.set_premise(
-        premise=clean_table_7am_premise_rope,
-        p_lower=clean_table_7am_p_lower,
-        p_upper=clean_table_7am_p_upper,
+    clean_table_7am_reason.set_case(
+        case=clean_table_7am_case_rope,
+        r_lower=clean_table_7am_r_lower,
+        r_upper=clean_table_7am_r_upper,
     )
     sue_believer.edit_plan_attr(clean_rope, reason=clean_table_7am_reason)
     casa_str = "casa"
@@ -218,7 +218,7 @@ def get_believerunit_1Chore_1CE0MinutesReason_1Fact() -> BelieverUnit:
     hr_min_plan = planunit_shop(hr_min_str)
     hr_rope = yao_believer.make_l1_rope(hr_min_str)
     hr_reasonunit = reasonunit_shop(hr_rope)
-    hr_reasonunit.set_premise(hr_rope, p_lower=80, p_upper=90)
+    hr_reasonunit.set_case(hr_rope, r_lower=80, r_upper=90)
     yao_believer.set_l1_plan(hr_min_plan)
     yao_believer.add_fact(hr_rope, hr_rope, 85, 95)
     mail_str = "obtain mail"
@@ -253,7 +253,7 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     zia_believer.set_plan(plan_grandkidM, wk_rope)
 
     shave_reason = reasonunit_shop(wk_rope)
-    shave_reason.set_premise(mon_rope)
+    shave_reason.set_case(mon_rope)
 
     zia_believer.edit_plan_attr(shave_rope, reason=shave_reason)
     zia_believer.add_fact(f_context=wk_rope, f_state=sun_rope)
@@ -333,7 +333,7 @@ def get_mop_with_reason_believerunit_example1():
     sue_believer.set_plan(planunit_shop("dirty"), status_rope)
 
     floor_reason = reasonunit_shop(status_rope)
-    floor_reason.set_premise(premise=status_rope)
+    floor_reason.set_case(case=status_rope)
     sue_believer.edit_plan_attr(floor_rope, reason=floor_reason)
     return sue_believer
 
@@ -369,11 +369,11 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
 
     # laundry requirement
     amos_believer.edit_plan_attr(
-        laundry_chore_rope, reason_r_context=basket_rope, reason_premise=b_full_rope
+        laundry_chore_rope, reason_r_context=basket_rope, reason_case=b_full_rope
     )
     # laundry requirement
     amos_believer.edit_plan_attr(
-        laundry_chore_rope, reason_r_context=basket_rope, reason_premise=b_smel_rope
+        laundry_chore_rope, reason_r_context=basket_rope, reason_case=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)

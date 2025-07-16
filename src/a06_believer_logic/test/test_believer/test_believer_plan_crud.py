@@ -177,7 +177,7 @@ def test_BelieverUnit_set_plan_CorrectlyAddsPlanObjWithNonDefault_knot():
 
     # WHEN
     bob_believer.edit_plan_attr(
-        casa_rope, reason_r_context=wk_rope, reason_premise=wed_rope
+        casa_rope, reason_r_context=wk_rope, reason_case=wed_rope
     )
 
     # THEN

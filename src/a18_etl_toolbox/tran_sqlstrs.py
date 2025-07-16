@@ -51,7 +51,7 @@ def get_dimen_abbv7(dimen: str) -> str:
         "believer_plan_awardlink": "BLRAWAR",
         "believer_plan_factunit": "BLRFACT",
         "believer_plan_healerlink": "BLRHEAL",
-        "believer_plan_reason_premiseunit": "BLRPREM",
+        "believer_plan_reason_caseunit": "BLRPREM",
         "believer_plan_reasonunit": "BLRREAS",
         "believer_plan_laborlink": "BLRLABO",
         "believer_planunit": "BLRPLAN",
@@ -90,7 +90,7 @@ def create_prime_tablename(
         "BLRFACT": "believer_plan_factunit",
         "BLRGROU": "believer_groupunit",
         "BLRHEAL": "believer_plan_healerlink",
-        "BLRPREM": "believer_plan_reason_premiseunit",
+        "BLRPREM": "believer_plan_reason_caseunit",
         "BLRREAS": "believer_plan_reasonunit",
         "BLRLABO": "believer_plan_laborlink",
         "BLRPLAN": "believer_planunit",
@@ -217,16 +217,16 @@ CREATE_BLRHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_hea
 CREATE_BLRHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT)"
 CREATE_BLRHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
 CREATE_BLRHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
-CREATE_BLRPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state TEXT, p_upper REAL, p_lower REAL, p_divisor INTEGER, error_message TEXT)"
-CREATE_BLRPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state TEXT, p_upper REAL, p_lower REAL, p_divisor INTEGER, error_message TEXT)"
-CREATE_BLRPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state TEXT, p_upper REAL, p_lower REAL, p_divisor INTEGER)"
-CREATE_BLRPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state_ERASE TEXT)"
-CREATE_BLRPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state_ERASE TEXT, error_message TEXT)"
-CREATE_BLRPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state_ERASE TEXT)"
-CREATE_BLRPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, p_state_otx TEXT, p_state_inx TEXT, p_upper REAL, p_lower REAL, p_divisor INTEGER)"
-CREATE_BLRPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state TEXT, p_upper REAL, p_lower REAL, p_divisor INTEGER)"
-CREATE_BLRPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, p_state_ERASE_otx TEXT, p_state_ERASE_inx TEXT)"
-CREATE_BLRPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state_ERASE TEXT)"
+CREATE_BLRPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER, error_message TEXT)"
+CREATE_BLRPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER, error_message TEXT)"
+CREATE_BLRPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER)"
+CREATE_BLRPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT)"
+CREATE_BLRPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT, error_message TEXT)"
+CREATE_BLRPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT)"
+CREATE_BLRPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, r_state_otx TEXT, r_state_inx TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER)"
+CREATE_BLRPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER)"
+CREATE_BLRPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, r_state_ERASE_otx TEXT, r_state_ERASE_inx TEXT)"
+CREATE_BLRPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT)"
 CREATE_BLRREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER, error_message TEXT)"
 CREATE_BLRREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER, error_message TEXT)"
 CREATE_BLRREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER)"
@@ -371,16 +371,16 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "believer_plan_healerlink_v_put_agg": CREATE_BLRHEAL_VOICE_PUT_AGG_STR,
         "believer_plan_healerlink_v_del_raw": CREATE_BLRHEAL_VOICE_DEL_RAW_STR,
         "believer_plan_healerlink_v_del_agg": CREATE_BLRHEAL_VOICE_DEL_AGG_STR,
-        "believer_plan_reason_premiseunit_s_put_raw": CREATE_BLRPREM_SOUND_PUT_RAW_STR,
-        "believer_plan_reason_premiseunit_s_put_agg": CREATE_BLRPREM_SOUND_PUT_AGG_STR,
-        "believer_plan_reason_premiseunit_s_put_vld": CREATE_BLRPREM_SOUND_PUT_VLD_STR,
-        "believer_plan_reason_premiseunit_s_del_raw": CREATE_BLRPREM_SOUND_DEL_RAW_STR,
-        "believer_plan_reason_premiseunit_s_del_agg": CREATE_BLRPREM_SOUND_DEL_AGG_STR,
-        "believer_plan_reason_premiseunit_s_del_vld": CREATE_BLRPREM_SOUND_DEL_VLD_STR,
-        "believer_plan_reason_premiseunit_v_put_raw": CREATE_BLRPREM_VOICE_PUT_RAW_STR,
-        "believer_plan_reason_premiseunit_v_put_agg": CREATE_BLRPREM_VOICE_PUT_AGG_STR,
-        "believer_plan_reason_premiseunit_v_del_raw": CREATE_BLRPREM_VOICE_DEL_RAW_STR,
-        "believer_plan_reason_premiseunit_v_del_agg": CREATE_BLRPREM_VOICE_DEL_AGG_STR,
+        "believer_plan_reason_caseunit_s_put_raw": CREATE_BLRPREM_SOUND_PUT_RAW_STR,
+        "believer_plan_reason_caseunit_s_put_agg": CREATE_BLRPREM_SOUND_PUT_AGG_STR,
+        "believer_plan_reason_caseunit_s_put_vld": CREATE_BLRPREM_SOUND_PUT_VLD_STR,
+        "believer_plan_reason_caseunit_s_del_raw": CREATE_BLRPREM_SOUND_DEL_RAW_STR,
+        "believer_plan_reason_caseunit_s_del_agg": CREATE_BLRPREM_SOUND_DEL_AGG_STR,
+        "believer_plan_reason_caseunit_s_del_vld": CREATE_BLRPREM_SOUND_DEL_VLD_STR,
+        "believer_plan_reason_caseunit_v_put_raw": CREATE_BLRPREM_VOICE_PUT_RAW_STR,
+        "believer_plan_reason_caseunit_v_put_agg": CREATE_BLRPREM_VOICE_PUT_AGG_STR,
+        "believer_plan_reason_caseunit_v_del_raw": CREATE_BLRPREM_VOICE_DEL_RAW_STR,
+        "believer_plan_reason_caseunit_v_del_agg": CREATE_BLRPREM_VOICE_DEL_AGG_STR,
         "believer_plan_reasonunit_s_put_raw": CREATE_BLRREAS_SOUND_PUT_RAW_STR,
         "believer_plan_reasonunit_s_put_agg": CREATE_BLRREAS_SOUND_PUT_AGG_STR,
         "believer_plan_reasonunit_s_put_vld": CREATE_BLRREAS_SOUND_PUT_VLD_STR,
@@ -438,8 +438,8 @@ def get_belief_believer_sound_agg_tablenames():
         "believer_plan_healerlink_s_put_agg",
         "believer_plan_laborlink_s_del_agg",
         "believer_plan_laborlink_s_put_agg",
-        "believer_plan_reason_premiseunit_s_del_agg",
-        "believer_plan_reason_premiseunit_s_put_agg",
+        "believer_plan_reason_caseunit_s_del_agg",
+        "believer_plan_reason_caseunit_s_put_agg",
         "believer_plan_reasonunit_s_del_agg",
         "believer_plan_reasonunit_s_put_agg",
         "believer_planunit_s_del_agg",
@@ -461,7 +461,7 @@ def get_believer_voice_agg_tablenames() -> set[str]:
         "believerunit_v_put_agg",
         "believer_plan_healerlink_v_put_agg",
         "believer_partnerunit_v_put_agg",
-        "believer_plan_reason_premiseunit_v_put_agg",
+        "believer_plan_reason_caseunit_v_put_agg",
         "believer_plan_laborlink_v_put_agg",
         "believer_plan_reasonunit_v_put_agg",
         "believer_plan_factunit_v_put_agg",
@@ -736,8 +736,8 @@ INSERT_BLRFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_factunit_s_put_
 INSERT_BLRFACT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_factunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE FROM believer_plan_factunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BLRHEAL_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_healerlink_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, healer_name) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name FROM believer_plan_healerlink_s_put_agg WHERE error_message IS NULL"
 INSERT_BLRHEAL_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_healerlink_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE FROM believer_plan_healerlink_s_del_agg WHERE error_message IS NULL"
-INSERT_BLRPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_reason_premiseunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state, p_upper, p_lower, p_divisor) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state, p_upper, p_lower, p_divisor FROM believer_plan_reason_premiseunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BLRPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_reason_premiseunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state_ERASE FROM believer_plan_reason_premiseunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor FROM believer_plan_reason_caseunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE FROM believer_plan_reason_caseunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BLRREAS_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_reasonunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite FROM believer_plan_reasonunit_s_put_agg WHERE error_message IS NULL"
 INSERT_BLRREAS_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_reasonunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE FROM believer_plan_reasonunit_s_del_agg WHERE error_message IS NULL"
 INSERT_BLRLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_laborlink_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, labor_title) SELECT event_int, face_name, belief_label, believer_name, plan_rope, labor_title FROM believer_plan_laborlink_s_put_agg WHERE error_message IS NULL"
@@ -768,8 +768,8 @@ def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
         "believer_plan_factunit_s_del_vld": INSERT_BLRFACT_SOUND_VLD_DEL_SQLSTR,
         "believer_plan_healerlink_s_put_vld": INSERT_BLRHEAL_SOUND_VLD_PUT_SQLSTR,
         "believer_plan_healerlink_s_del_vld": INSERT_BLRHEAL_SOUND_VLD_DEL_SQLSTR,
-        "believer_plan_reason_premiseunit_s_put_vld": INSERT_BLRPREM_SOUND_VLD_PUT_SQLSTR,
-        "believer_plan_reason_premiseunit_s_del_vld": INSERT_BLRPREM_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_reason_caseunit_s_put_vld": INSERT_BLRPREM_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_reason_caseunit_s_del_vld": INSERT_BLRPREM_SOUND_VLD_DEL_SQLSTR,
         "believer_plan_reasonunit_s_put_vld": INSERT_BLRREAS_SOUND_VLD_PUT_SQLSTR,
         "believer_plan_reasonunit_s_del_vld": INSERT_BLRREAS_SOUND_VLD_DEL_SQLSTR,
         "believer_plan_laborlink_s_put_vld": INSERT_BLRLABO_SOUND_VLD_PUT_SQLSTR,
@@ -806,8 +806,8 @@ INSERT_BLRFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_factunit_v_put_
 INSERT_BLRFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_factunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, f_context_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE FROM believer_plan_factunit_s_del_vld "
 INSERT_BLRHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_healerlink_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, healer_name_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name FROM believer_plan_healerlink_s_put_vld "
 INSERT_BLRHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_healerlink_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, healer_name_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE FROM believer_plan_healerlink_s_del_vld "
-INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_reason_premiseunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, p_state_otx, p_upper, p_lower, p_divisor) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state, p_upper, p_lower, p_divisor FROM believer_plan_reason_premiseunit_s_put_vld "
-INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_reason_premiseunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, p_state_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state_ERASE FROM believer_plan_reason_premiseunit_s_del_vld "
+INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, r_state_otx, r_upper, r_lower, r_divisor) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor FROM believer_plan_reason_caseunit_s_put_vld "
+INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, r_state_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE FROM believer_plan_reason_caseunit_s_del_vld "
 INSERT_BLRREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_reasonunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, r_plan_active_requisite) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite FROM believer_plan_reasonunit_s_put_vld "
 INSERT_BLRREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_reasonunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE FROM believer_plan_reasonunit_s_del_vld "
 INSERT_BLRLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_laborlink_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, labor_title_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, labor_title FROM believer_plan_laborlink_s_put_vld "
@@ -837,8 +837,8 @@ def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
         "believer_plan_factunit_v_del_raw": INSERT_BLRFACT_VOICE_RAW_DEL_SQLSTR,
         "believer_plan_healerlink_v_put_raw": INSERT_BLRHEAL_VOICE_RAW_PUT_SQLSTR,
         "believer_plan_healerlink_v_del_raw": INSERT_BLRHEAL_VOICE_RAW_DEL_SQLSTR,
-        "believer_plan_reason_premiseunit_v_put_raw": INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR,
-        "believer_plan_reason_premiseunit_v_del_raw": INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_reason_caseunit_v_put_raw": INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_reason_caseunit_v_del_raw": INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR,
         "believer_plan_reasonunit_v_put_raw": INSERT_BLRREAS_VOICE_RAW_PUT_SQLSTR,
         "believer_plan_reasonunit_v_del_raw": INSERT_BLRREAS_VOICE_RAW_DEL_SQLSTR,
         "believer_plan_laborlink_v_put_raw": INSERT_BLRLABO_VOICE_RAW_PUT_SQLSTR,
@@ -1002,16 +1002,16 @@ FROM believer_plan_healerlink_v_del_raw
 GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, healer_name_ERASE_inx
 """
 INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO believer_plan_reason_premiseunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state, p_upper, p_lower, p_divisor)
-SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, p_state_inx, p_upper, p_lower, p_divisor
-FROM believer_plan_reason_premiseunit_v_put_raw
-GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, p_state_inx, p_upper, p_lower, p_divisor
+INSERT INTO believer_plan_reason_caseunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_inx, r_upper, r_lower, r_divisor
+FROM believer_plan_reason_caseunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_inx, r_upper, r_lower, r_divisor
 """
 INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO believer_plan_reason_premiseunit_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state_ERASE)
-SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, p_state_ERASE_inx
-FROM believer_plan_reason_premiseunit_v_del_raw
-GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, p_state_ERASE_inx
+INSERT INTO believer_plan_reason_caseunit_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_ERASE_inx
+FROM believer_plan_reason_caseunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_ERASE_inx
 """
 INSERT_BLRREAS_VOICE_AGG_PUT_SQLSTR = """
 INSERT INTO believer_plan_reasonunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite)
@@ -1082,8 +1082,8 @@ def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
         "believer_plan_factunit_v_del_agg": INSERT_BLRFACT_VOICE_AGG_DEL_SQLSTR,
         "believer_plan_healerlink_v_put_agg": INSERT_BLRHEAL_VOICE_AGG_PUT_SQLSTR,
         "believer_plan_healerlink_v_del_agg": INSERT_BLRHEAL_VOICE_AGG_DEL_SQLSTR,
-        "believer_plan_reason_premiseunit_v_put_agg": INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR,
-        "believer_plan_reason_premiseunit_v_del_agg": INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_reason_caseunit_v_put_agg": INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_reason_caseunit_v_del_agg": INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR,
         "believer_plan_reasonunit_v_put_agg": INSERT_BLRREAS_VOICE_AGG_PUT_SQLSTR,
         "believer_plan_reasonunit_v_del_agg": INSERT_BLRREAS_VOICE_AGG_DEL_SQLSTR,
         "believer_plan_laborlink_v_put_agg": INSERT_BLRLABO_VOICE_AGG_PUT_SQLSTR,
@@ -1174,7 +1174,7 @@ def get_idea_stageble_put_dimens() -> dict[str, list[str]]:
         ],
         "br00026": [
             "beliefunit",
-            "believer_plan_reason_premiseunit",
+            "believer_plan_reason_caseunit",
             "believer_plan_reasonunit",
             "believer_planunit",
             "believerunit",
@@ -1226,7 +1226,7 @@ IDEA_STAGEBLE_DEL_DIMENS = {
     "br00053": ["believer_plan_factunit"],
     "br00054": ["believer_plan_laborlink"],
     "br00055": ["believer_plan_healerlink"],
-    "br00056": ["believer_plan_reason_premiseunit"],
+    "br00056": ["believer_plan_reason_caseunit"],
     "br00057": ["believer_plan_reasonunit"],
     "br00058": ["believer_planunit"],
     "br00059": ["believerunit"],
@@ -1310,7 +1310,7 @@ CREATE_JOB_BLRGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_groupunit_job
 CREATE_JOB_BLRAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_awardlink_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
 CREATE_JOB_BLRFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_factunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context TEXT, f_state TEXT, f_lower REAL, f_upper REAL)"""
 CREATE_JOB_BLRHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_healerlink_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT)"""
-CREATE_JOB_BLRPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_reason_premiseunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, p_state TEXT, p_upper REAL, p_lower REAL, p_divisor INTEGER, _chore INTEGER, _status INTEGER)"""
+CREATE_JOB_BLRPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER, _chore INTEGER, _status INTEGER)"""
 CREATE_JOB_BLRREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER, _chore INTEGER, _status INTEGER, _rplan_active_value INTEGER)"""
 CREATE_JOB_BLRLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_laborlink_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title TEXT, _believer_name_labor INTEGER)"""
 CREATE_JOB_BLRPLAN_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_planunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, fund_iota REAL, _active INTEGER, _chore INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_task_count INTEGER, _healerlink_ratio REAL, _all_partner_cred INTEGER, _all_partner_debt INTEGER)"""
@@ -1325,7 +1325,7 @@ def get_job_create_table_sqlstrs() -> dict[str, str]:
         "believer_plan_awardlink_job": CREATE_JOB_BLRAWAR_SQLSTR,
         "believer_plan_factunit_job": CREATE_JOB_BLRFACT_SQLSTR,
         "believer_plan_healerlink_job": CREATE_JOB_BLRHEAL_SQLSTR,
-        "believer_plan_reason_premiseunit_job": CREATE_JOB_BLRPREM_SQLSTR,
+        "believer_plan_reason_caseunit_job": CREATE_JOB_BLRPREM_SQLSTR,
         "believer_plan_reasonunit_job": CREATE_JOB_BLRREAS_SQLSTR,
         "believer_plan_laborlink_job": CREATE_JOB_BLRLABO_SQLSTR,
         "believer_planunit_job": CREATE_JOB_BLRPLAN_SQLSTR,

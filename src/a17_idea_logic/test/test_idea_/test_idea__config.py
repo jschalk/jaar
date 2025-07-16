@@ -12,7 +12,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_laborlink_str,
-    believer_plan_reason_premiseunit_str,
+    believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
@@ -35,16 +35,16 @@ from src.a06_believer_logic.test._util.a06_str import (
     mass_str,
     morph_str,
     numor_str,
-    p_lower_str,
-    p_state_str,
-    p_upper_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
     penny_str,
     plan_rope_str,
     r_context_str,
+    r_lower_str,
     r_plan_active_requisite_str,
+    r_state_str,
+    r_upper_str,
     respect_bit_str,
     stop_want_str,
     take_force_str,
@@ -271,12 +271,12 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[63] == "f_context_ERASE"
     assert table_sorting_priority[64] == "f_context_ERASE_otx"
     assert table_sorting_priority[65] == "f_context_ERASE_inx"
-    assert table_sorting_priority[66] == "p_state"
-    assert table_sorting_priority[67] == "p_state_otx"
-    assert table_sorting_priority[68] == "p_state_inx"
-    assert table_sorting_priority[69] == "p_state_ERASE"
-    assert table_sorting_priority[70] == "p_state_ERASE_otx"
-    assert table_sorting_priority[71] == "p_state_ERASE_inx"
+    assert table_sorting_priority[66] == "r_state"
+    assert table_sorting_priority[67] == "r_state_otx"
+    assert table_sorting_priority[68] == "r_state_inx"
+    assert table_sorting_priority[69] == "r_state_ERASE"
+    assert table_sorting_priority[70] == "r_state_ERASE_otx"
+    assert table_sorting_priority[71] == "r_state_ERASE_inx"
     assert table_sorting_priority[72] == "f_state"
     assert table_sorting_priority[73] == "f_state_otx"
     assert table_sorting_priority[74] == "f_state_inx"
@@ -321,9 +321,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[113] == "give_force"
     assert table_sorting_priority[114] == "mass"
     assert table_sorting_priority[115] == "max_tree_traverse"
-    assert table_sorting_priority[116] == "p_upper"
-    assert table_sorting_priority[117] == "p_lower"
-    assert table_sorting_priority[118] == "p_divisor"
+    assert table_sorting_priority[116] == "r_upper"
+    assert table_sorting_priority[117] == "r_lower"
+    assert table_sorting_priority[118] == "r_divisor"
     assert table_sorting_priority[119] == "task"
     assert table_sorting_priority[120] == "problem_bool"
     assert table_sorting_priority[121] == "take_force"
@@ -433,7 +433,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(group_title_str()) == "TEXT"
     assert sqlite_types.get(plan_rope_str()) == "TEXT"
     assert sqlite_types.get(r_context_str()) == "TEXT"
-    assert sqlite_types.get("p_state") == "TEXT"
+    assert sqlite_types.get("r_state") == "TEXT"
     assert sqlite_types.get("f_state") == "TEXT"
     assert sqlite_types.get(labor_title_str()) == "TEXT"
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
@@ -462,9 +462,9 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(give_force_str()) == "REAL"
     assert sqlite_types.get(mass_str()) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
-    assert sqlite_types.get("p_upper") == "REAL"
-    assert sqlite_types.get("p_lower") == "REAL"
-    assert sqlite_types.get("p_divisor") == "INTEGER"
+    assert sqlite_types.get("r_upper") == "REAL"
+    assert sqlite_types.get("r_lower") == "REAL"
+    assert sqlite_types.get("r_divisor") == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"
@@ -540,7 +540,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert believer_plan_factunit_str() in idea_config_dimens
     assert believer_plan_laborlink_str() in idea_config_dimens
     assert believer_plan_healerlink_str() in idea_config_dimens
-    assert believer_plan_reason_premiseunit_str() in idea_config_dimens
+    assert believer_plan_reason_caseunit_str() in idea_config_dimens
     assert believer_plan_reasonunit_str() in idea_config_dimens
     assert believer_planunit_str() in idea_config_dimens
     assert believerunit_str() in idea_config_dimens
@@ -850,7 +850,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(believer_plan_factunit_str(), 12)
     # set_idea_config_json(believer_plan_laborlink_str(), 14)
     # set_idea_config_json(believer_plan_healerlink_str(), 15)
-    # set_idea_config_json(believer_plan_reason_premiseunit_str(), 16)
+    # set_idea_config_json(believer_plan_reason_caseunit_str(), 16)
     # set_idea_config_json(believer_plan_reasonunit_str(), 17)
     # set_idea_config_json(believer_planunit_str(), 18)
     # set_idea_config_json(believerunit_str(), 19)
@@ -874,7 +874,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(believer_plan_factunit_str()).get(bo) == 12
     assert x_idea_config.get(believer_plan_laborlink_str()).get(bo) == 14
     assert x_idea_config.get(believer_plan_healerlink_str()).get(bo) == 15
-    assert x_idea_config.get(believer_plan_reason_premiseunit_str()).get(bo) == 16
+    assert x_idea_config.get(believer_plan_reason_caseunit_str()).get(bo) == 16
     assert x_idea_config.get(believer_plan_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(believer_planunit_str()).get(bo) == 18
     assert x_idea_config.get(believerunit_str()).get(bo) == 19

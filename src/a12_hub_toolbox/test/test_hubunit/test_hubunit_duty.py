@@ -67,7 +67,7 @@ def test_HubUnit_vision_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
     assert sue_hubunit.vision_file_exists(bob_str)
 
 
-def test_HubUnit_get_vision_believer_p_lowersFile(env_dir_setup_cleanup):
+def test_HubUnit_get_vision_believer_r_lowersFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"

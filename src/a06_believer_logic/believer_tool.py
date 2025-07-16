@@ -5,8 +5,8 @@ from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.group import AwardLink, MemberShip
 from src.a03_group_logic.partner import PartnerUnit
 from src.a04_reason_logic.reason_plan import (
+    CaseUnit,
     FactUnit,
-    PremiseUnit,
     ReasonUnit,
     factunits_get_from_dict,
 )
@@ -63,17 +63,17 @@ def believer_plan_reasonunit_exists(
     )
 
 
-def believer_plan_reason_premiseunit_exists(
+def believer_plan_reason_caseunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
     x_r_context = jkeys.get("r_context")
-    x_p_state = jkeys.get("p_state")
+    x_r_state = jkeys.get("r_state")
     return bool(
         believer_plan_reasonunit_exists(x_believer, jkeys)
         and x_believer.get_plan_obj(x_rope)
         .get_reasonunit(x_r_context)
-        .premise_exists(x_p_state)
+        .case_exists(x_r_state)
     )
 
 
@@ -123,8 +123,8 @@ def believer_attr_exists(
         return believer_plan_factunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_healerlink":
         return believer_plan_healerlink_exists(x_believer, jkeys)
-    elif x_dimen == "believer_plan_reason_premiseunit":
-        return believer_plan_reason_premiseunit_exists(x_believer, jkeys)
+    elif x_dimen == "believer_plan_reason_caseunit":
+        return believer_plan_reason_caseunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_reasonunit":
         return believer_plan_reasonunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_laborlink":
@@ -173,16 +173,14 @@ def believer_plan_reasonunit_get_obj(
     return x_believer.get_plan_obj(x_rope).get_reasonunit(x_r_context)
 
 
-def believer_plan_reason_premiseunit_get_obj(
+def believer_plan_reason_caseunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
-) -> PremiseUnit:
+) -> CaseUnit:
     x_rope = jkeys.get("plan_rope")
     x_r_context = jkeys.get("r_context")
-    x_p_state = jkeys.get("p_state")
+    x_r_state = jkeys.get("r_state")
     return (
-        x_believer.get_plan_obj(x_rope)
-        .get_reasonunit(x_r_context)
-        .get_premise(x_p_state)
+        x_believer.get_plan_obj(x_rope).get_reasonunit(x_r_context).get_case(x_r_state)
     )
 
 
@@ -206,7 +204,7 @@ def believer_get_obj(
         "believer_planunit": believer_planunit_get_obj,
         "believer_plan_awardlink": believer_plan_awardlink_get_obj,
         "believer_plan_reasonunit": believer_plan_reasonunit_get_obj,
-        "believer_plan_reason_premiseunit": believer_plan_reason_premiseunit_get_obj,
+        "believer_plan_reason_caseunit": believer_plan_reason_caseunit_get_obj,
         "believer_plan_factunit": believer_plan_factunit_get_obj,
     }
     if x_func := x_dimens.get(x_dimen):

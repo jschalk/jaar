@@ -492,8 +492,8 @@ class BelieverUnit:
             # calculate and set those descendant facts
             # example: timeline range (0-, 1.5e9) is range-root
             # example: "timeline,wks" (spllt 10080) is range-descendant
-            # there exists a reason r_context "timeline,wks" with premise.p_state = "timeline,wks"
-            # and (1,2) p_divisor=2 (every other wk)
+            # there exists a reason r_context "timeline,wks" with case.r_state = "timeline,wks"
+            # and (1,2) r_divisor=2 (every other wk)
             #
             # should not set "timeline,wks" fact, only "timeline" fact and
             # "timeline,wks" should be set automatica_lly since there exists a reason
@@ -706,8 +706,8 @@ class BelieverUnit:
 
         for x_reason in posted_plan.reasonunits.values():
             self._create_plankid_if_empty(rope=x_reason.r_context)
-            for premise_x in x_reason.premises.values():
-                self._create_plankid_if_empty(rope=premise_x.p_state)
+            for case_x in x_reason.cases.values():
+                self._create_plankid_if_empty(rope=case_x.r_state)
 
     def _create_plankid_if_empty(self, rope: RopeTerm):
         if self.plan_exists(rope) is False:
@@ -781,30 +781,30 @@ class BelieverUnit:
                         )
                     plan_kid.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
-    def _set_planattrholder_premise_ranges(self, x_planattrholder: PlanAttrHolder):
-        premise_plan = self.get_plan_obj(x_planattrholder.reason_premise)
-        x_planattrholder.set_premise_range_influenced_by_premise_plan(
-            p_lower=premise_plan.begin,
-            p_upper=premise_plan.close,
-            premise_denom=premise_plan.denom,
+    def _set_planattrholder_case_ranges(self, x_planattrholder: PlanAttrHolder):
+        case_plan = self.get_plan_obj(x_planattrholder.reason_case)
+        x_planattrholder.set_case_range_influenced_by_case_plan(
+            r_lower=case_plan.begin,
+            r_upper=case_plan.close,
+            case_denom=case_plan.denom,
         )
 
     def edit_reason(
         self,
         plan_rope: RopeTerm,
         reason_r_context: RopeTerm = None,
-        reason_premise: RopeTerm = None,
-        p_lower: float = None,
-        reason_p_upper: float = None,
-        p_divisor: int = None,
+        reason_case: RopeTerm = None,
+        r_lower: float = None,
+        reason_r_upper: float = None,
+        r_divisor: int = None,
     ):
         self.edit_plan_attr(
             plan_rope=plan_rope,
             reason_r_context=reason_r_context,
-            reason_premise=reason_premise,
-            p_lower=p_lower,
-            reason_p_upper=reason_p_upper,
-            p_divisor=p_divisor,
+            reason_case=reason_case,
+            r_lower=r_lower,
+            reason_r_upper=reason_r_upper,
+            r_divisor=r_divisor,
         )
 
     def edit_plan_attr(
@@ -814,12 +814,12 @@ class BelieverUnit:
         uid: int = None,
         reason: ReasonUnit = None,
         reason_r_context: RopeTerm = None,
-        reason_premise: RopeTerm = None,
-        p_lower: float = None,
-        reason_p_upper: float = None,
-        p_divisor: int = None,
-        reason_del_premise_r_context: RopeTerm = None,
-        reason_del_premise_p_state: RopeTerm = None,
+        reason_case: RopeTerm = None,
+        r_lower: float = None,
+        reason_r_upper: float = None,
+        r_divisor: int = None,
+        reason_del_case_r_context: RopeTerm = None,
+        reason_del_case_r_state: RopeTerm = None,
         reason_r_plan_active_requisite: str = None,
         laborunit: LaborUnit = None,
         healerlink: HealerLink = None,
@@ -852,12 +852,12 @@ class BelieverUnit:
             uid=uid,
             reason=reason,
             reason_r_context=reason_r_context,
-            reason_premise=reason_premise,
-            p_lower=p_lower,
-            reason_p_upper=reason_p_upper,
-            p_divisor=p_divisor,
-            reason_del_premise_r_context=reason_del_premise_r_context,
-            reason_del_premise_p_state=reason_del_premise_p_state,
+            reason_case=reason_case,
+            r_lower=r_lower,
+            reason_r_upper=reason_r_upper,
+            r_divisor=r_divisor,
+            reason_del_case_r_context=reason_del_case_r_context,
+            reason_del_case_r_state=reason_del_case_r_state,
             reason_r_plan_active_requisite=reason_r_plan_active_requisite,
             laborunit=laborunit,
             healerlink=healerlink,
@@ -879,8 +879,8 @@ class BelieverUnit:
             factunit=factunit,
             problem_bool=problem_bool,
         )
-        if reason_premise is not None:
-            self._set_planattrholder_premise_ranges(x_planattrholder)
+        if reason_case is not None:
+            self._set_planattrholder_case_ranges(x_planattrholder)
         x_plan = self.get_plan_obj(plan_rope)
         x_plan._set_attrs_to_planunit(plan_attr=x_planattrholder)
 

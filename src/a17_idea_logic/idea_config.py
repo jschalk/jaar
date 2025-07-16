@@ -104,12 +104,12 @@ def get_idea_elements_sort_order() -> list[str]:
         "f_context_ERASE",
         "f_context_ERASE_otx",
         "f_context_ERASE_inx",
-        "p_state",
-        "p_state_otx",
-        "p_state_inx",
-        "p_state_ERASE",
-        "p_state_ERASE_otx",
-        "p_state_ERASE_inx",
+        "r_state",
+        "r_state_otx",
+        "r_state_inx",
+        "r_state_ERASE",
+        "r_state_ERASE_otx",
+        "r_state_ERASE_inx",
         "f_state",
         "f_state_otx",
         "f_state_inx",
@@ -154,9 +154,9 @@ def get_idea_elements_sort_order() -> list[str]:
         "give_force",
         "mass",
         "max_tree_traverse",
-        "p_upper",
-        "p_lower",
-        "p_divisor",
+        "r_upper",
+        "r_lower",
+        "r_divisor",
         "task",
         "problem_bool",
         "take_force",
@@ -278,12 +278,12 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "f_context_ERASE": "TEXT",
         "f_context_ERASE_otx": "TEXT",
         "f_context_ERASE_inx": "TEXT",
-        "p_state": "TEXT",
-        "p_state_otx": "TEXT",
-        "p_state_inx": "TEXT",
-        "p_state_ERASE": "TEXT",
-        "p_state_ERASE_otx": "TEXT",
-        "p_state_ERASE_inx": "TEXT",
+        "r_state": "TEXT",
+        "r_state_otx": "TEXT",
+        "r_state_inx": "TEXT",
+        "r_state_ERASE": "TEXT",
+        "r_state_ERASE_otx": "TEXT",
+        "r_state_ERASE_inx": "TEXT",
         "f_state": "TEXT",
         "f_state_otx": "TEXT",
         "f_state_inx": "TEXT",
@@ -329,9 +329,9 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "give_force": "REAL",
         "mass": "INTEGER",
         "max_tree_traverse": "INTEGER",
-        "p_upper": "REAL",
-        "p_lower": "REAL",
-        "p_divisor": "INTEGER",
+        "r_upper": "REAL",
+        "r_lower": "REAL",
+        "r_divisor": "INTEGER",
         "task": "INTEGER",
         "problem_bool": "INTEGER",
         "take_force": "REAL",
@@ -470,7 +470,7 @@ def idea_format_00019_planunit_v0_0_0() -> str:
 # def idea_format_00023_believer_plan_factunit_v0_0_0()-> str: return "idea_format_00023_believer_plan_factunit_v0_0_0"
 # def idea_format_00024_believer_plan_laborlink_v0_0_0()-> str: return "idea_format_00024_believer_plan_laborlink_v0_0_0"
 # def idea_format_00025_believer_plan_healerlink_v0_0_0()-> str: return "idea_format_00025_believer_plan_healerlink_v0_0_0"
-# def idea_format_00026_believer_plan_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_believer_plan_reason_premiseunit_v0_0_0"
+# def idea_format_00026_believer_plan_reason_caseunit_v0_0_0()-> str: return "idea_format_00026_believer_plan_reason_caseunit_v0_0_0"
 # def idea_format_00027_believer_plan_reasonunit_v0_0_0()-> str: return "idea_format_00027_believer_plan_reasonunit_v0_0_0"
 # def idea_format_00028_believer_planunit_v0_0_0()-> str: return "idea_format_00028_believer_planunit_v0_0_0"
 # def idea_format_00029_believerunit_v0_0_0()-> str: return "idea_format_00029_believerunit_v0_0_0"
@@ -500,8 +500,8 @@ def idea_format_00025_believer_plan_healerlink_v0_0_0() -> str:
     return "idea_format_00025_believer_plan_healerlink_v0_0_0"
 
 
-def idea_format_00026_believer_plan_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00026_believer_plan_reason_premiseunit_v0_0_0"
+def idea_format_00026_believer_plan_reason_caseunit_v0_0_0() -> str:
+    return "idea_format_00026_believer_plan_reason_caseunit_v0_0_0"
 
 
 def idea_format_00027_believer_plan_reasonunit_v0_0_0() -> str:
@@ -564,8 +564,8 @@ def idea_format_00055_delete_believer_plan_healerlink_v0_0_0() -> str:
     return "idea_format_00055_delete_believer_plan_healerlink_v0_0_0"
 
 
-def idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0"
+def idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0() -> str:
+    return "idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0"
 
 
 def idea_format_00057_delete_believer_plan_reasonunit_v0_0_0() -> str:
@@ -615,7 +615,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00023_believer_plan_factunit_v0_0_0(),
         idea_format_00024_believer_plan_laborlink_v0_0_0(),
         idea_format_00025_believer_plan_healerlink_v0_0_0(),
-        idea_format_00026_believer_plan_reason_premiseunit_v0_0_0(),
+        idea_format_00026_believer_plan_reason_caseunit_v0_0_0(),
         idea_format_00027_believer_plan_reasonunit_v0_0_0(),
         idea_format_00028_believer_planunit_v0_0_0(),
         idea_format_00029_believerunit_v0_0_0(),
@@ -630,7 +630,7 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
         idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
         idea_format_00055_delete_believer_plan_healerlink_v0_0_0(),
-        idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0(),
+        idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0(),
         idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
         idea_format_00058_delete_believer_planunit_v0_0_0(),
         idea_format_00059_delete_believerunit_v0_0_0(),
@@ -712,7 +712,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "belief_label,believer_name,plan_rope,f_context,f_state,f_lower,f_upper": idea_format_00023_believer_plan_factunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,labor_title": idea_format_00024_believer_plan_laborlink_v0_0_0(),
         "belief_label,believer_name,plan_rope,healer_name": idea_format_00025_believer_plan_healerlink_v0_0_0(),
-        "belief_label,believer_name,plan_rope,r_context,p_state,p_upper,p_lower,p_divisor": idea_format_00026_believer_plan_reason_premiseunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,r_context,r_state,r_upper,r_lower,r_divisor": idea_format_00026_believer_plan_reason_caseunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,r_context,r_plan_active_requisite": idea_format_00027_believer_plan_reasonunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_believer_planunit_v0_0_0(),
         "belief_label,believer_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_believerunit_v0_0_0(),
@@ -727,7 +727,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "belief_label,believer_name,plan_rope,f_context_ERASE": idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,labor_title_ERASE": idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
         "belief_label,believer_name,plan_rope,healer_name_ERASE": idea_format_00055_delete_believer_plan_healerlink_v0_0_0(),
-        "belief_label,believer_name,plan_rope,r_context,p_state_ERASE": idea_format_00056_delete_believer_plan_reason_premiseunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,r_context,r_state_ERASE": idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0(),
         "belief_label,believer_name,plan_rope,r_context_ERASE": idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
         "belief_label,believer_name,plan_rope_ERASE": idea_format_00058_delete_believer_planunit_v0_0_0(),
         "belief_label,believer_name_ERASE": idea_format_00059_delete_believerunit_v0_0_0(),
@@ -772,7 +772,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         "believer_plan_awardlink": {"br00022", "br00052"},
         "believer_plan_factunit": {"br00023", "br00053"},
         "believer_plan_healerlink": {"br00025", "br00036", "br00055"},
-        "believer_plan_reason_premiseunit": {"br00026", "br00056"},
+        "believer_plan_reason_caseunit": {"br00026", "br00056"},
         "believer_plan_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
         "believer_plan_laborlink": {"br00024", "br00054"},
         "believer_planunit": {

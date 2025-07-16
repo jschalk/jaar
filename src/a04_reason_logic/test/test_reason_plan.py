@@ -5,8 +5,8 @@ from src.a01_term_logic.rope import (
 )
 from src.a04_reason_logic.reason_plan import (
     ReasonCore,
+    caseunit_shop,
     factheir_shop,
-    premiseunit_shop,
     reasoncore_shop,
     reasonheir_shop,
     reasons_get_from_dict,
@@ -25,24 +25,22 @@ def test_ReasonCore_Exists():
     wkday_rope = create_rope(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_rope = create_rope(wkday_rope, wed_str)
-    wed_premise = premiseunit_shop(p_state=wed_rope)
-    premises = {wed_premise.p_state: wed_premise}
+    wed_case = caseunit_shop(r_state=wed_rope)
+    cases = {wed_case.r_state: wed_case}
 
     # WHEN
-    wkday_reason = ReasonCore(
-        wkday_rope, premises=premises, r_plan_active_requisite=False
-    )
+    wkday_reason = ReasonCore(wkday_rope, cases=cases, r_plan_active_requisite=False)
 
     # THEN
     assert wkday_reason.r_context == wkday_rope
-    assert wkday_reason.premises == premises
+    assert wkday_reason.cases == cases
     assert wkday_reason.r_plan_active_requisite is False
     assert wkday_reason.knot is None
     obj_attrs = set(wkday_reason.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         knot_str(),
-        "premises",
+        "cases",
         r_plan_active_requisite_str(),
         r_context_str(),
     }
@@ -71,7 +69,7 @@ def test_reasonheir_shop_ReturnsObj():
     casa_reason = reasonheir_shop(casa_rope)
 
     # THEN
-    assert casa_reason.premises == {}
+    assert casa_reason.cases == {}
     assert casa_reason.knot == default_knot_if_None()
 
 
@@ -81,11 +79,11 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
     casa_rope = create_rope(root_label(), casa_str)
     email_str = "check email"
     email_rope = create_rope(casa_rope, email_str)
-    email_premise = premiseunit_shop(p_state=email_rope)
-    email_premises = {email_premise.p_state: email_premise}
+    email_case = caseunit_shop(r_state=email_rope)
+    email_cases = {email_case.r_state: email_case}
 
     # WHEN
-    casa_reason = reasonheir_shop(r_context=casa_rope, premises=email_premises)
+    casa_reason = reasonheir_shop(r_context=casa_rope, cases=email_cases)
     # THEN
     assert casa_reason._status is None
 
@@ -111,9 +109,9 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     wed_rope = create_rope(wkday_rope, wed_str)
     wed_noon_str = "noon"
     wed_noon_rope = create_rope(wed_rope, wed_noon_str)
-    wed_premise = premiseunit_shop(p_state=wed_rope)
-    wed_premises = {wed_premise.p_state: wed_premise}
-    wkday_reason = reasonheir_shop(r_context=wkday_rope, premises=wed_premises)
+    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_cases = {wed_case.r_state: wed_case}
+    wkday_reason = reasonheir_shop(r_context=wkday_rope, cases=wed_cases)
     assert wkday_reason._status is None
     # WHEN
     wkday_fact = factheir_shop(f_context=wkday_rope, f_state=wed_noon_rope)
@@ -123,9 +121,9 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     assert wkday_reason._status is True
 
     # ESTABLISH
-    thu_premise = premiseunit_shop(p_state=thu_rope)
-    two_premises = {wed_premise.p_state: wed_premise, thu_premise.p_state: thu_premise}
-    two_reason = reasonheir_shop(r_context=wkday_rope, premises=two_premises)
+    thu_case = caseunit_shop(r_state=thu_rope)
+    two_cases = {wed_case.r_state: wed_case, thu_case.r_state: thu_case}
+    two_reason = reasonheir_shop(r_context=wkday_rope, cases=two_cases)
     assert two_reason._status is None
     # WHEN
     noon_fact = factheir_shop(f_context=wkday_rope, f_state=wed_noon_rope)
@@ -151,9 +149,9 @@ def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
     wkday_rope = create_rope(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_rope = create_rope(wkday_rope, wed_str)
-    wed_premise = premiseunit_shop(p_state=wed_rope)
-    wed_premises = {wed_premise.p_state: wed_premise}
-    wkday_reason = reasonheir_shop(r_context=wkday_rope, premises=wed_premises)
+    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_cases = {wed_case.r_state: wed_case}
+    wkday_reason = reasonheir_shop(r_context=wkday_rope, cases=wed_cases)
     assert wkday_reason._status is None
     wkday_reason.set_status(factheirs=None)
     assert wkday_reason._status is False
@@ -242,19 +240,19 @@ def test_reasonunit_shop_ReturnsObj():
     wkday_reasonunit = reasonunit_shop(wkday_rope)
 
     # THEN
-    assert wkday_reasonunit.premises == {}
+    assert wkday_reasonunit.cases == {}
     assert wkday_reasonunit.knot == default_knot_if_None()
 
 
-def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
+def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_caseequireds():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_rope = create_rope(root_label(), wkday_str)
     wed_str = "wednesday"
     wed_rope = create_rope(wkday_rope, wed_str)
-    wed_premise = premiseunit_shop(p_state=wed_rope)
-    wed_premises = {wed_premise.p_state: wed_premise}
-    wkday_reason = reasonunit_shop(wkday_rope, premises=wed_premises)
+    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_cases = {wed_case.r_state: wed_case}
+    wkday_reason = reasonunit_shop(wkday_rope, cases=wed_cases)
 
     # WHEN
     wkday_reason_dict = wkday_reason.get_dict()
@@ -263,7 +261,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_premiseequireds():
     assert wkday_reason_dict is not None
     static_wkday_reason_dict = {
         "r_context": wkday_rope,
-        "premises": {wed_rope: {"p_state": wed_rope}},
+        "cases": {wed_rope: {"r_state": wed_rope}},
     }
     print(wkday_reason_dict)
     assert wkday_reason_dict == static_wkday_reason_dict
@@ -292,7 +290,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_r_plan_active_requisite():
     assert wkday_reason_dict == static_wkday_reason_dict
 
 
-def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
+def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoCasesReasons():
     # ESTABLISH
     wkday_str = "wkday"
     wkday_rope = create_rope(root_label(), wkday_str)
@@ -300,10 +298,10 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
     wed_rope = create_rope(wkday_rope, wed_str)
     thu_str = "thursday"
     thu_rope = create_rope(wkday_rope, thu_str)
-    wed_premise = premiseunit_shop(p_state=wed_rope)
-    thu_premise = premiseunit_shop(p_state=thu_rope)
-    two_premises = {wed_premise.p_state: wed_premise, thu_premise.p_state: thu_premise}
-    wkday_reason = reasonunit_shop(wkday_rope, premises=two_premises)
+    wed_case = caseunit_shop(r_state=wed_rope)
+    thu_case = caseunit_shop(r_state=thu_rope)
+    two_cases = {wed_case.r_state: wed_case, thu_case.r_state: thu_case}
+    wkday_reason = reasonunit_shop(wkday_rope, cases=two_cases)
 
     # WHEN
     wkday_reason_dict = wkday_reason.get_dict()
@@ -312,7 +310,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoPremisesReasons():
     assert wkday_reason_dict is not None
     static_wkday_reason_dict = {
         "r_context": wkday_rope,
-        "premises": {wed_rope: {"p_state": wed_rope}, thu_rope: {"p_state": thu_rope}},
+        "cases": {wed_rope: {"r_state": wed_rope}, thu_rope: {"r_state": thu_rope}},
     }
     print(wkday_reason_dict)
     assert wkday_reason_dict == static_wkday_reason_dict
@@ -349,9 +347,9 @@ def test_ReasonHeir_correctSetsTaskState():
     # ESTABLISH
     day_str = "ced_day"
     day_rope = create_rope(root_label(), day_str)
-    range_3_to_6_premise = premiseunit_shop(p_state=day_rope, p_lower=3, p_upper=6)
-    range_3_to_6_premises = {range_3_to_6_premise.p_state: range_3_to_6_premise}
-    range_3_to_6_reason = reasonheir_shop(day_rope, range_3_to_6_premises)
+    range_3_to_6_case = caseunit_shop(r_state=day_rope, r_lower=3, r_upper=6)
+    range_3_to_6_cases = {range_3_to_6_case.r_state: range_3_to_6_case}
+    range_3_to_6_reason = reasonheir_shop(day_rope, range_3_to_6_cases)
     assert range_3_to_6_reason._status is None
 
     # WHEN
@@ -379,7 +377,7 @@ def test_ReasonHeir_correctSetsTaskState():
     assert range_3_to_6_reason._chore is None
 
 
-def test_ReasonCore_get_premises_count():
+def test_ReasonCore_get_cases_count():
     # ESTABLISH
     day_str = "day"
     day_rope = create_rope(root_label(), day_str)
@@ -387,75 +385,75 @@ def test_ReasonCore_get_premises_count():
     # WHEN
     day_reason = reasoncore_shop(r_context=day_rope)
     # THEN
-    assert day_reason.get_premises_count() == 0
+    assert day_reason.get_cases_count() == 0
 
     # WHEN
-    range_3_to_6_premise = premiseunit_shop(p_state=day_rope, p_lower=3, p_upper=6)
-    range_3_to_6_premises = {range_3_to_6_premise.p_state: range_3_to_6_premise}
-    day_reason = reasoncore_shop(r_context=day_rope, premises=range_3_to_6_premises)
+    range_3_to_6_case = caseunit_shop(r_state=day_rope, r_lower=3, r_upper=6)
+    range_3_to_6_cases = {range_3_to_6_case.r_state: range_3_to_6_case}
+    day_reason = reasoncore_shop(r_context=day_rope, cases=range_3_to_6_cases)
     # THEN
-    assert day_reason.get_premises_count() == 1
+    assert day_reason.get_cases_count() == 1
 
 
-def test_ReasonCore_set_premise_CorrectlySetsPremise():
+def test_ReasonCore_set_case_CorrectlySetsCase():
     # ESTABLISH
     day_str = "day"
     day_rope = create_rope(root_label(), day_str)
     day_reason = reasoncore_shop(r_context=day_rope)
-    assert day_reason.get_premises_count() == 0
+    assert day_reason.get_cases_count() == 0
 
     # WHEN
-    day_reason.set_premise(premise=day_rope, p_lower=3, p_upper=6)
+    day_reason.set_case(case=day_rope, r_lower=3, r_upper=6)
 
     # THEN
-    assert day_reason.get_premises_count() == 1
-    range_3_to_6_premise = premiseunit_shop(p_state=day_rope, p_lower=3, p_upper=6)
-    premises = {range_3_to_6_premise.p_state: range_3_to_6_premise}
-    assert day_reason.premises == premises
+    assert day_reason.get_cases_count() == 1
+    range_3_to_6_case = caseunit_shop(r_state=day_rope, r_lower=3, r_upper=6)
+    cases = {range_3_to_6_case.r_state: range_3_to_6_case}
+    assert day_reason.cases == cases
 
 
-def test_ReasonCore_premise_exists_ReturnsObj():
+def test_ReasonCore_case_exists_ReturnsObj():
     # ESTABLISH
     day_str = "day"
     day_rope = create_rope(root_label(), day_str)
     day_reason = reasoncore_shop(r_context=day_rope)
-    assert not day_reason.premise_exists(day_rope)
+    assert not day_reason.case_exists(day_rope)
 
     # WHEN
-    day_reason.set_premise(day_rope, p_lower=3, p_upper=6)
+    day_reason.set_case(day_rope, r_lower=3, r_upper=6)
 
     # THEN
-    assert day_reason.premise_exists(day_rope)
+    assert day_reason.case_exists(day_rope)
 
 
 def test_ReasonCore_get_single_premis_ReturnsObj():
     # ESTABLISH
     day_rope = create_rope(root_label(), "day")
     day_reason = reasoncore_shop(r_context=day_rope)
-    day_reason.set_premise(premise=day_rope, p_lower=3, p_upper=6)
-    day_reason.set_premise(premise=day_rope, p_lower=7, p_upper=10)
+    day_reason.set_case(case=day_rope, r_lower=3, r_upper=6)
+    day_reason.set_case(case=day_rope, r_lower=7, r_upper=10)
     noon_rope = create_rope(day_rope, "noon")
-    day_reason.set_premise(premise=noon_rope)
-    assert day_reason.get_premises_count() == 2
+    day_reason.set_case(case=noon_rope)
+    assert day_reason.get_cases_count() == 2
 
     # WHEN / THEN
-    assert day_reason.get_premise(premise=day_rope).p_lower == 7
-    assert day_reason.get_premise(premise=noon_rope).p_lower is None
+    assert day_reason.get_case(case=day_rope).r_lower == 7
+    assert day_reason.get_case(case=noon_rope).r_lower is None
 
 
-def test_ReasonCore_del_premise_CorrectlyDeletesPremise():
+def test_ReasonCore_del_case_CorrectlyDeletesCase():
     # ESTABLISH
     day_str = "day"
     day_rope = create_rope(root_label(), day_str)
     day_reason = reasoncore_shop(r_context=day_rope)
-    day_reason.set_premise(premise=day_rope, p_lower=3, p_upper=6)
-    assert day_reason.get_premises_count() == 1
+    day_reason.set_case(case=day_rope, r_lower=3, r_upper=6)
+    assert day_reason.get_cases_count() == 1
 
     # WHEN
-    day_reason.del_premise(premise=day_rope)
+    day_reason.del_case(case=day_rope)
 
     # THEN
-    assert day_reason.get_premises_count() == 0
+    assert day_reason.get_cases_count() == 0
 
 
 def test_ReasonCore_find_replace_rope_casas():
@@ -466,12 +464,12 @@ def test_ReasonCore_find_replace_rope_casas():
     old_wkday_rope = create_rope(old_rope, wkday_str)
     old_sunday_rope = create_rope(old_wkday_rope, sunday_str)
     x_reason = reasoncore_shop(r_context=old_wkday_rope)
-    x_reason.set_premise(premise=old_sunday_rope)
+    x_reason.set_case(case=old_sunday_rope)
     # print(f"{x_reason=}")
     assert x_reason.r_context == old_wkday_rope
-    assert len(x_reason.premises) == 1
-    print(f"{x_reason.premises=}")
-    assert x_reason.premises.get(old_sunday_rope).p_state == old_sunday_rope
+    assert len(x_reason.cases) == 1
+    print(f"{x_reason.cases=}")
+    assert x_reason.cases.get(old_sunday_rope).r_state == old_sunday_rope
 
     # WHEN
     new_rope = create_rope("fun")
@@ -481,11 +479,11 @@ def test_ReasonCore_find_replace_rope_casas():
 
     # THEN
     assert x_reason.r_context == new_wkday_rope
-    assert len(x_reason.premises) == 1
-    assert x_reason.premises.get(new_sunday_rope) is not None
-    assert x_reason.premises.get(old_sunday_rope) is None
-    print(f"{x_reason.premises=}")
-    assert x_reason.premises.get(new_sunday_rope).p_state == new_sunday_rope
+    assert len(x_reason.cases) == 1
+    assert x_reason.cases.get(new_sunday_rope) is not None
+    assert x_reason.cases.get(old_sunday_rope) is None
+    print(f"{x_reason.cases=}")
+    assert x_reason.cases.get(new_sunday_rope).r_state == new_sunday_rope
 
 
 def test_ReasonCore_set_knot_SetsAttrsCorrectly():
@@ -496,10 +494,10 @@ def test_ReasonCore_set_knot_SetsAttrsCorrectly():
     slash_wk_rope = create_rope(root_label(), wk_str, knot=slash_str)
     slash_sun_rope = create_rope(slash_wk_rope, sun_str, knot=slash_str)
     wk_reasonunit = reasoncore_shop(slash_wk_rope, knot=slash_str)
-    wk_reasonunit.set_premise(slash_sun_rope)
+    wk_reasonunit.set_case(slash_sun_rope)
     assert wk_reasonunit.knot == slash_str
     assert wk_reasonunit.r_context == slash_wk_rope
-    assert wk_reasonunit.premises.get(slash_sun_rope).p_state == slash_sun_rope
+    assert wk_reasonunit.cases.get(slash_sun_rope).r_state == slash_sun_rope
 
     # WHEN
     star_str = "*"
@@ -510,8 +508,8 @@ def test_ReasonCore_set_knot_SetsAttrsCorrectly():
     star_wk_rope = create_rope(root_label(), wk_str, knot=star_str)
     star_sun_rope = create_rope(star_wk_rope, sun_str, knot=star_str)
     assert wk_reasonunit.r_context == star_wk_rope
-    assert wk_reasonunit.premises.get(star_sun_rope) is not None
-    assert wk_reasonunit.premises.get(star_sun_rope).p_state == star_sun_rope
+    assert wk_reasonunit.cases.get(star_sun_rope) is not None
+    assert wk_reasonunit.cases.get(star_sun_rope).r_state == star_sun_rope
 
 
 def test_ReasonCore_get_obj_key():
@@ -520,11 +518,11 @@ def test_ReasonCore_get_obj_key():
     casa_rope = create_rope(root_label(), casa_str)
     email_str = "check email"
     email_rope = create_rope(casa_rope, email_str)
-    email_premise = premiseunit_shop(p_state=email_rope)
-    premises_x = {email_premise.p_state: email_premise}
+    email_case = caseunit_shop(r_state=email_rope)
+    cases_x = {email_case.r_state: email_case}
 
     # WHEN
-    x_reason = reasonheir_shop(casa_rope, premises=premises_x)
+    x_reason = reasonheir_shop(casa_rope, cases=cases_x)
 
     # THEN
     assert x_reason.get_obj_key() == casa_rope

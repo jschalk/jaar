@@ -100,8 +100,8 @@ def test_BelieverUnit_get_agenda_dict_With7amPlanExample():
     assert len(x_believer.get_agenda_dict()) == 1
     timetech_rope = x_believer.make_l1_rope("timetech")
     day24hr_rope = x_believer.make_rope(timetech_rope, "24hr day")
-    day24hr_p_lower = 0.0
-    day24hr_p_upper = 8.0
+    day24hr_r_lower = 0.0
+    day24hr_r_upper = 8.0
     housemanagement_str = "housemanagement"
     housemanagement_rope = x_believer.make_l1_rope(housemanagement_str)
     clean_str = "clean table"
@@ -109,7 +109,7 @@ def test_BelieverUnit_get_agenda_dict_With7amPlanExample():
 
     # WHEN
     x_believer.add_fact(
-        day24hr_rope, day24hr_rope, day24hr_p_lower, day24hr_p_upper, True
+        day24hr_rope, day24hr_rope, day24hr_r_lower, day24hr_r_upper, True
     )
 
     # THEN
@@ -272,16 +272,16 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
     zia_believer.edit_plan_attr(
         run_rope,
         reason_r_context=day_rope,
-        reason_premise=day_rope,
-        p_lower=25,
-        reason_p_upper=81,
+        reason_case=day_rope,
+        r_lower=25,
+        reason_r_upper=81,
     )
     zia_believer.add_fact(f_context=day_rope, f_state=day_rope, f_lower=30, f_upper=87)
     zia_believer.get_agenda_dict()
     run_reasonunits = zia_believer.planroot._kids[run_str].reasonunits[day_rope]
     print(f"{run_reasonunits=}")
-    print(f"{run_reasonunits.premises[day_rope]._status=}")
-    print(f"{run_reasonunits.premises[day_rope]._chore=}")
+    print(f"{run_reasonunits.cases[day_rope]._status=}")
+    print(f"{run_reasonunits.cases[day_rope]._chore=}")
     print(f"{zia_believer.get_reason_r_contexts()=}")
     assert len(zia_believer.get_plan_dict()) == 4
     assert len(zia_believer.get_agenda_dict()) == 1
@@ -313,10 +313,10 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
     zia_believer.edit_plan_attr(
         run_rope,
         reason_r_context=day_rope,
-        reason_premise=day_rope,
-        p_lower=1,
-        reason_p_upper=1,
-        p_divisor=2,
+        reason_case=day_rope,
+        r_lower=1,
+        reason_r_upper=1,
+        r_divisor=2,
     )
 
     run_plan = zia_believer.get_plan_obj(run_rope)
@@ -430,22 +430,20 @@ def test_BelieverUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.r_context}', status={reasonheir_gregtime._status}, chore={reasonheir_gregtime._chore}"
     print(reasonheir_str)
 
-    premiseunit = reasonheir_gregtime.premises.get(gregtime_rope)
-    print(f"----\n {premiseunit=}")
-    print(f" {premiseunit._get_chore_status(factheir=factheir_gregtime)=}")
-    print(f" {premiseunit._status=} , {premiseunit._is_range()=} premiseunit fails")
-    print(
-        f" {premiseunit._status=} , {premiseunit._is_segregate()=} premiseunit passes"
-    )
-    # segr_obj = premisestatusfinder_shop(
-    #     p_lower=premiseunit.p_lower,
-    #     p_upper=premiseunit.p_upper,
-    #     p_divisor=premiseunit.p_divisor,
-    #     f_lower_full=factheir_gregtime.p_lower,
-    #     f_upper_full=factheir_gregtime.p_upper,
+    caseunit = reasonheir_gregtime.cases.get(gregtime_rope)
+    print(f"----\n {caseunit=}")
+    print(f" {caseunit._get_chore_status(factheir=factheir_gregtime)=}")
+    print(f" {caseunit._status=} , {caseunit._is_range()=} caseunit fails")
+    print(f" {caseunit._status=} , {caseunit._is_segregate()=} caseunit passes")
+    # segr_obj = casestatusfinder_shop(
+    #     r_lower=caseunit.r_lower,
+    #     r_upper=caseunit.r_upper,
+    #     r_divisor=caseunit.r_divisor,
+    #     f_lower_full=factheir_gregtime.r_lower,
+    #     f_upper_full=factheir_gregtime.r_upper,
     # )
     # print(
-    #     f"----\n  {segr_obj.p_lower=}  {segr_obj.p_upper=}  {segr_obj.p_divisor=}"
+    #     f"----\n  {segr_obj.r_lower=}  {segr_obj.r_upper=}  {segr_obj.r_divisor=}"
     # )
     # print(
     #     f"       {segr_obj.f_lower_full=}         {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"

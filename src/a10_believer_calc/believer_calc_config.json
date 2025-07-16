@@ -261,7 +261,7 @@
         },
         "jvalues": {}
     },
-    "believer_plan_reason_premiseunit": {
+    "believer_plan_reason_caseunit": {
         "abbreviation": "blrprem",
         "jkeys": {
             "plan_rope": {
@@ -276,7 +276,7 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "p_state": {
+            "r_state": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -296,15 +296,15 @@
             }
         },
         "jvalues": {
-            "p_divisor": {
+            "r_divisor": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "p_upper": {
+            "r_upper": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "p_lower": {
+            "r_lower": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

@@ -8,12 +8,12 @@ from src.a04_reason_logic.test._util.a04_str import (
     f_state_str,
     f_upper_str,
     labor_title_str,
-    p_divisor_str,
-    p_lower_str,
-    p_state_str,
-    p_upper_str,
     r_context_str,
+    r_divisor_str,
+    r_lower_str,
     r_plan_active_requisite_str,
+    r_state_str,
+    r_upper_str,
 )
 
 
@@ -27,9 +27,9 @@ def test_str_functions_ReturnsObj():
     assert f_lower_str() == "f_lower"
     assert f_state_str() == "f_state"
     assert labor_title_str() == "labor_title"
-    assert p_divisor_str() == "p_divisor"
-    assert p_upper_str() == "p_upper"
-    assert p_lower_str() == "p_lower"
-    assert p_state_str() == "p_state"
+    assert r_divisor_str() == "r_divisor"
+    assert r_upper_str() == "r_upper"
+    assert r_lower_str() == "r_lower"
+    assert r_state_str() == "r_state"
     assert r_plan_active_requisite_str() == "r_plan_active_requisite"
     assert r_context_str() == "r_context"

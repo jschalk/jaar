@@ -143,67 +143,67 @@ def factheir_shop(
     )
 
 
-class PremiseStatusFinderException(Exception):
+class CaseStatusFinderException(Exception):
     pass
 
 
 @dataclass
-class PremiseStatusFinder:
-    p_lower: float  # between 0 and p_divisor, can be more than p_upper
-    p_upper: float  # between 0 and p_divisor, can be less than p_lower
-    p_divisor: float  # greater than zero
+class CaseStatusFinder:
+    r_lower: float  # between 0 and r_divisor, can be more than r_upper
+    r_upper: float  # between 0 and r_divisor, can be less than r_lower
+    r_divisor: float  # greater than zero
     f_lower_full: float  # less than f_upper
     f_upper_full: float  # less than f_upper
 
     def check_attr(self):
         if None in (
-            self.p_lower,
-            self.p_upper,
-            self.p_divisor,
+            self.r_lower,
+            self.r_upper,
+            self.r_divisor,
             self.f_lower_full,
             self.f_upper_full,
         ):
-            raise PremiseStatusFinderException("No parameter can be None")
+            raise CaseStatusFinderException("No parameter can be None")
 
         if self.f_lower_full > self.f_upper_full:
-            raise PremiseStatusFinderException(
+            raise CaseStatusFinderException(
                 f"{self.f_lower_full=} cannot be greater than {self.f_upper_full=}"
             )
 
-        if self.p_divisor <= 0:
-            raise PremiseStatusFinderException(
-                f"{self.p_divisor=} cannot be less/equal to zero"
+        if self.r_divisor <= 0:
+            raise CaseStatusFinderException(
+                f"{self.r_divisor=} cannot be less/equal to zero"
             )
 
-        if self.p_lower < 0 or self.p_lower > self.p_divisor:
-            raise PremiseStatusFinderException(
-                f"{self.p_lower=} cannot be less than zero or greater than {self.p_divisor=}"
+        if self.r_lower < 0 or self.r_lower > self.r_divisor:
+            raise CaseStatusFinderException(
+                f"{self.r_lower=} cannot be less than zero or greater than {self.r_divisor=}"
             )
 
-        if self.p_upper < 0 or self.p_upper > self.p_divisor:
-            raise PremiseStatusFinderException(
-                f"{self.p_upper=} cannot be less than zero or greater than {self.p_divisor=}"
+        if self.r_upper < 0 or self.r_upper > self.r_divisor:
+            raise CaseStatusFinderException(
+                f"{self.r_upper=} cannot be less than zero or greater than {self.r_divisor=}"
             )
 
     def bo(self) -> float:
-        return self.f_lower_full % self.p_divisor
+        return self.f_lower_full % self.r_divisor
 
     def bn(self) -> float:
-        return self.f_upper_full % self.p_divisor
+        return self.f_upper_full % self.r_divisor
 
     def po(self) -> float:
-        return self.p_lower
+        return self.r_lower
 
     def pn(self) -> float:
-        return self.p_upper
+        return self.r_upper
 
     def pd(self) -> float:
-        return self.p_divisor
+        return self.r_divisor
 
     def get_active(self) -> bool:
-        if self.f_upper_full - self.f_lower_full > self.p_divisor:
+        if self.f_upper_full - self.f_lower_full > self.r_divisor:
             return True
-        elif get_range_less_than_p_divisor_active(
+        elif get_range_less_than_r_divisor_active(
             bo=self.bo(), bn=self.bn(), po=self.po(), pn=self.pn()
         ):
             return True
@@ -215,9 +215,9 @@ class PremiseStatusFinder:
             (
                 self.get_active()
                 and get_collasped_fact_range_active(
-                    self.p_lower,
-                    self.p_upper,
-                    self.p_divisor,
+                    self.r_lower,
+                    self.r_upper,
+                    self.r_divisor,
                     self.f_upper_full,
                 )
                 is False
@@ -225,7 +225,7 @@ class PremiseStatusFinder:
         )
 
 
-def get_range_less_than_p_divisor_active(bo, bn, po, pn):
+def get_range_less_than_r_divisor_active(bo, bn, po, pn):
     # x_bool = False
     # if bo <= bn and po <= pn:
     #     if (
@@ -266,61 +266,61 @@ def get_range_less_than_p_divisor_active(bo, bn, po, pn):
 
 
 def get_collasped_fact_range_active(
-    p_lower: float,
-    p_upper: float,
-    p_divisor: float,
+    r_lower: float,
+    r_upper: float,
+    r_divisor: float,
     f_upper_full: float,
 ) -> bool:
-    x_pbsd = premisestatusfinder_shop(
-        p_lower=p_lower,
-        p_upper=p_upper,
-        p_divisor=p_divisor,
+    x_pbsd = casestatusfinder_shop(
+        r_lower=r_lower,
+        r_upper=r_upper,
+        r_divisor=r_divisor,
         f_lower_full=f_upper_full,
         f_upper_full=f_upper_full,
     )
     return x_pbsd.get_active()
 
 
-def premisestatusfinder_shop(
-    p_lower: float,
-    p_upper: float,
-    p_divisor: float,
+def casestatusfinder_shop(
+    r_lower: float,
+    r_upper: float,
+    r_divisor: float,
     f_lower_full: float,
     f_upper_full: float,
 ):
-    x_premisestatusfinder = PremiseStatusFinder(
-        p_lower,
-        p_upper,
-        p_divisor,
+    x_casestatusfinder = CaseStatusFinder(
+        r_lower,
+        r_upper,
+        r_divisor,
         f_lower_full,
         f_upper_full,
     )
-    x_premisestatusfinder.check_attr()
-    return x_premisestatusfinder
+    x_casestatusfinder.check_attr()
+    return x_casestatusfinder
 
 
 @dataclass
-class PremiseUnit:
-    p_state: RopeTerm
-    p_lower: float = None
-    p_upper: float = None
-    p_divisor: int = None
+class CaseUnit:
+    r_state: RopeTerm
+    r_lower: float = None
+    r_upper: float = None
+    r_divisor: int = None
     _status: bool = None
     _chore: bool = None
     knot: str = None
 
     def get_obj_key(self):
-        return self.p_state
+        return self.r_state
 
     def get_dict(self) -> dict[str, str]:
-        x_dict = {"p_state": self.p_state}
-        if self.p_lower is not None:
-            x_dict["p_lower"] = self.p_lower
-        if self.p_upper is not None:
-            x_dict["p_upper"] = self.p_upper
+        x_dict = {"r_state": self.r_state}
+        if self.r_lower is not None:
+            x_dict["r_lower"] = self.r_lower
+        if self.r_upper is not None:
+            x_dict["r_upper"] = self.r_upper
 
-        if self.p_divisor is not None:
-            x_dict["p_divisor"] = self.p_divisor
+        if self.r_divisor is not None:
+            x_dict["r_divisor"] = self.r_divisor
 
         return x_dict
 
@@ -330,14 +330,14 @@ class PremiseUnit:
     def set_knot(self, new_knot: str):
         old_knot = copy_deepcopy(self.knot)
         self.knot = new_knot
-        self.p_state = replace_knot(
-            rope=self.p_state, old_knot=old_knot, new_knot=self.knot
+        self.r_state = replace_knot(
+            rope=self.r_state, old_knot=old_knot, new_knot=self.knot
         )
 
     def is_in_lineage(self, fact_f_state: RopeTerm):
         return is_heir_rope(
-            src=self.p_state, heir=fact_f_state, knot=self.knot
-        ) or is_heir_rope(src=fact_f_state, heir=self.p_state, knot=self.knot)
+            src=self.r_state, heir=fact_f_state, knot=self.knot
+        ) or is_heir_rope(src=fact_f_state, heir=self.r_state, knot=self.knot)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -345,7 +345,7 @@ class PremiseUnit:
 
     def _get_active(self, factheir: FactHeir):
         x_status = None
-        # status might be true if premise is in lineage of fact
+        # status might be true if case is in lineage of fact
         if factheir is None:
             x_status = False
         elif self.is_in_lineage(fact_f_state=factheir.f_state):
@@ -365,27 +365,27 @@ class PremiseUnit:
 
     def _is_segregate(self):
         return (
-            self.p_divisor is not None
-            and self.p_lower is not None
-            and self.p_upper is not None
+            self.r_divisor is not None
+            and self.r_lower is not None
+            and self.r_upper is not None
         )
 
     def _is_range(self):
         return (
-            self.p_divisor is None
-            and self.p_lower is not None
-            and self.p_upper is not None
+            self.r_divisor is None
+            and self.r_lower is not None
+            and self.r_upper is not None
         )
 
     def _get_chore_status(self, factheir: FactHeir) -> bool:
         x_chore = None
         if self._status and self._is_range():
-            x_chore = factheir.f_upper > self.p_upper
+            x_chore = factheir.f_upper > self.r_upper
         elif self._status and self._is_segregate():
-            segr_obj = premisestatusfinder_shop(
-                p_lower=self.p_lower,
-                p_upper=self.p_upper,
-                p_divisor=self.p_divisor,
+            segr_obj = casestatusfinder_shop(
+                r_lower=self.r_lower,
+                r_upper=self.r_upper,
+                r_divisor=self.r_divisor,
                 f_lower_full=factheir.f_lower,
                 f_upper_full=factheir.f_upper,
             )
@@ -405,10 +405,10 @@ class PremiseUnit:
         return x_status
 
     def _get_segregate_status(self, factheir: FactHeir) -> bool:
-        segr_obj = premisestatusfinder_shop(
-            p_lower=self.p_lower,
-            p_upper=self.p_upper,
-            p_divisor=self.p_divisor,
+        segr_obj = casestatusfinder_shop(
+            r_lower=self.r_lower,
+            r_upper=self.r_upper,
+            r_divisor=self.r_divisor,
             f_lower_full=factheir.f_lower,
             f_upper_full=factheir.f_upper,
         )
@@ -416,62 +416,62 @@ class PremiseUnit:
 
     def _get_range_status(self, factheir: FactHeir) -> bool:
         return (
-            (self.p_lower <= factheir.f_lower and self.p_upper > factheir.f_lower)
-            or (self.p_lower <= factheir.f_upper and self.p_upper > factheir.f_upper)
-            or (self.p_lower >= factheir.f_lower and self.p_upper < factheir.f_upper)
+            (self.r_lower <= factheir.f_lower and self.r_upper > factheir.f_lower)
+            or (self.r_lower <= factheir.f_upper and self.r_upper > factheir.f_upper)
+            or (self.r_lower >= factheir.f_lower and self.r_upper < factheir.f_upper)
         )
 
     def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
-        self.p_state = rebuild_rope(self.p_state, old_rope, new_rope)
+        self.r_state = rebuild_rope(self.r_state, old_rope, new_rope)
 
 
-# class premisesshop:
-def premiseunit_shop(
-    p_state: RopeTerm,
-    p_lower: float = None,
-    p_upper: float = None,
-    p_divisor: float = None,
+# class casesshop:
+def caseunit_shop(
+    r_state: RopeTerm,
+    r_lower: float = None,
+    r_upper: float = None,
+    r_divisor: float = None,
     knot: str = None,
-) -> PremiseUnit:
-    return PremiseUnit(
-        p_state=p_state,
-        p_lower=p_lower,
-        p_upper=p_upper,
-        p_divisor=p_divisor,
+) -> CaseUnit:
+    return CaseUnit(
+        r_state=r_state,
+        r_lower=r_lower,
+        r_upper=r_upper,
+        r_divisor=r_divisor,
         knot=default_knot_if_None(knot),
     )
 
 
-def premises_get_from_dict(x_dict: dict) -> dict[str, PremiseUnit]:
-    premises = {}
-    for premise_dict in x_dict.values():
+def cases_get_from_dict(x_dict: dict) -> dict[str, CaseUnit]:
+    cases = {}
+    for case_dict in x_dict.values():
         try:
-            x_p_lower = premise_dict["p_lower"]
+            x_r_lower = case_dict["r_lower"]
         except KeyError:
-            x_p_lower = None
+            x_r_lower = None
         try:
-            x_p_upper = premise_dict["p_upper"]
+            x_r_upper = case_dict["r_upper"]
         except KeyError:
-            x_p_upper = None
+            x_r_upper = None
         try:
-            x_p_divisor = premise_dict["p_divisor"]
+            x_r_divisor = case_dict["r_divisor"]
         except KeyError:
-            x_p_divisor = None
+            x_r_divisor = None
 
-        premise_x = premiseunit_shop(
-            p_state=premise_dict["p_state"],
-            p_lower=x_p_lower,
-            p_upper=x_p_upper,
-            p_divisor=x_p_divisor,
+        case_x = caseunit_shop(
+            r_state=case_dict["r_state"],
+            r_lower=x_r_lower,
+            r_upper=x_r_upper,
+            r_divisor=x_r_divisor,
         )
-        premises[premise_x.p_state] = premise_x
-    return premises
+        cases[case_x.r_state] = case_x
+    return cases
 
 
 @dataclass
 class ReasonCore:
     r_context: RopeTerm
-    premises: dict[RopeTerm, PremiseUnit]
+    cases: dict[RopeTerm, CaseUnit]
     r_plan_active_requisite: bool = None
     knot: str = None
 
@@ -480,66 +480,66 @@ class ReasonCore:
         self.knot = new_knot
         self.r_context = replace_knot(self.r_context, old_knot, new_knot)
 
-        new_premises = {}
-        for premise_rope, premise_obj in self.premises.items():
-            new_premise_rope = replace_knot(
-                rope=premise_rope,
+        new_cases = {}
+        for case_rope, case_obj in self.cases.items():
+            new_case_rope = replace_knot(
+                rope=case_rope,
                 old_knot=old_knot,
                 new_knot=self.knot,
             )
-            premise_obj.set_knot(self.knot)
-            new_premises[new_premise_rope] = premise_obj
-        self.premises = new_premises
+            case_obj.set_knot(self.knot)
+            new_cases[new_case_rope] = case_obj
+        self.cases = new_cases
 
     def get_obj_key(self):
         return self.r_context
 
-    def get_premises_count(self):
-        return sum(1 for _ in self.premises.values())
+    def get_cases_count(self):
+        return sum(1 for _ in self.cases.values())
 
-    def set_premise(
+    def set_case(
         self,
-        premise: RopeTerm,
-        p_lower: float = None,
-        p_upper: float = None,
-        p_divisor: int = None,
+        case: RopeTerm,
+        r_lower: float = None,
+        r_upper: float = None,
+        r_divisor: int = None,
     ):
-        self.premises[premise] = premiseunit_shop(
-            p_state=premise,
-            p_lower=p_lower,
-            p_upper=p_upper,
-            p_divisor=p_divisor,
+        self.cases[case] = caseunit_shop(
+            r_state=case,
+            r_lower=r_lower,
+            r_upper=r_upper,
+            r_divisor=r_divisor,
             knot=self.knot,
         )
 
-    def premise_exists(self, p_state: RopeTerm) -> bool:
-        return self.premises.get(p_state) != None
+    def case_exists(self, r_state: RopeTerm) -> bool:
+        return self.cases.get(r_state) != None
 
-    def get_premise(self, premise: RopeTerm) -> PremiseUnit:
-        return self.premises.get(premise)
+    def get_case(self, case: RopeTerm) -> CaseUnit:
+        return self.cases.get(case)
 
-    def del_premise(self, premise: RopeTerm):
+    def del_case(self, case: RopeTerm):
         try:
-            self.premises.pop(premise)
+            self.cases.pop(case)
         except KeyError as e:
-            raise InvalidReasonException(f"Reason unable to delete premise {e}") from e
+            raise InvalidReasonException(f"Reason unable to delete case {e}") from e
 
     def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
         self.r_context = rebuild_rope(self.r_context, old_rope, new_rope)
-        self.premises = find_replace_rope_key_dict(
-            dict_x=self.premises, old_rope=old_rope, new_rope=new_rope
+        self.cases = find_replace_rope_key_dict(
+            dict_x=self.cases, old_rope=old_rope, new_rope=new_rope
         )
 
 
 def reasoncore_shop(
     r_context: RopeTerm,
-    premises: dict[RopeTerm, PremiseUnit] = None,
+    cases: dict[RopeTerm, CaseUnit] = None,
     r_plan_active_requisite: bool = None,
     knot: str = None,
 ):
     return ReasonCore(
         r_context=r_context,
-        premises=get_empty_dict_if_None(premises),
+        cases=get_empty_dict_if_None(cases),
         r_plan_active_requisite=r_plan_active_requisite,
         knot=default_knot_if_None(knot),
     )
@@ -548,13 +548,12 @@ def reasoncore_shop(
 @dataclass
 class ReasonUnit(ReasonCore):
     def get_dict(self) -> dict[str, str]:
-        premises_dict = {
-            premise_rope: premise.get_dict()
-            for premise_rope, premise in self.premises.items()
+        cases_dict = {
+            case_rope: case.get_dict() for case_rope, case in self.cases.items()
         }
         x_dict = {"r_context": self.r_context}
-        if premises_dict != {}:
-            x_dict["premises"] = premises_dict
+        if cases_dict != {}:
+            x_dict["cases"] = cases_dict
         if self.r_plan_active_requisite is not None:
             x_dict["r_plan_active_requisite"] = self.r_plan_active_requisite
         return x_dict
@@ -562,13 +561,13 @@ class ReasonUnit(ReasonCore):
 
 def reasonunit_shop(
     r_context: RopeTerm,
-    premises: dict[RopeTerm, PremiseUnit] = None,
+    cases: dict[RopeTerm, CaseUnit] = None,
     r_plan_active_requisite: bool = None,
     knot: str = None,
 ):
     return ReasonUnit(
         r_context=r_context,
-        premises=get_empty_dict_if_None(premises),
+        cases=get_empty_dict_if_None(cases),
         r_plan_active_requisite=r_plan_active_requisite,
         knot=default_knot_if_None(knot),
     )
@@ -581,25 +580,25 @@ class ReasonHeir(ReasonCore):
     _rplan_active_value: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
-        x_premises = {}
-        for x_premiseunit in x_reasonunit.premises.values():
-            premise_x = premiseunit_shop(
-                p_state=x_premiseunit.p_state,
-                p_lower=x_premiseunit.p_lower,
-                p_upper=x_premiseunit.p_upper,
-                p_divisor=x_premiseunit.p_divisor,
+        x_cases = {}
+        for x_caseunit in x_reasonunit.cases.values():
+            case_x = caseunit_shop(
+                r_state=x_caseunit.r_state,
+                r_lower=x_caseunit.r_lower,
+                r_upper=x_caseunit.r_upper,
+                r_divisor=x_caseunit.r_divisor,
             )
-            x_premises[premise_x.p_state] = premise_x
-        self.premises = x_premises
+            x_cases[case_x.r_state] = case_x
+        self.cases = x_cases
 
     def clear_status(self):
         self._status = None
-        for premise in self.premises.values():
-            premise.clear_status()
+        for case in self.cases.values():
+            case.clear_status()
 
-    def _set_premise_status(self, factheir: FactHeir):
-        for premise in self.premises.values():
-            premise.set_status(factheir)
+    def _set_case_status(self, factheir: FactHeir):
+        for case in self.cases.values():
+            case.set_status(factheir)
 
     def _get_f_context(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
         f_context = None
@@ -618,18 +617,18 @@ class ReasonHeir(ReasonCore):
             and self._rplan_active_value == self.r_plan_active_requisite
         )
 
-    def is_any_premise_true(self) -> tuple[bool, bool]:
-        any_premise_true = False
+    def is_any_case_true(self) -> tuple[bool, bool]:
+        any_case_true = False
         any_chore_true = False
-        for x_premiseunit in self.premises.values():
-            if x_premiseunit._status:
-                any_premise_true = True
-                if x_premiseunit._chore:
+        for x_caseunit in self.cases.values():
+            if x_caseunit._status:
+                any_case_true = True
+                if x_caseunit._chore:
                     any_chore_true = True
-        return any_premise_true, any_chore_true
+        return any_case_true, any_chore_true
 
-    def _set_attr_status(self, any_premise_true: bool):
-        self._status = any_premise_true or self.is_r_plan_active_requisite_operational()
+    def _set_attr_status(self, any_case_true: bool):
+        self._status = any_case_true or self.is_r_plan_active_requisite_operational()
 
     def _set_attr_chore(self, any_chore_true: bool):
         self._chore = True if any_chore_true else None
@@ -638,15 +637,15 @@ class ReasonHeir(ReasonCore):
 
     def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
         self.clear_status()
-        self._set_premise_status(self._get_f_context(factheirs))
-        any_premise_true, any_chore_true = self.is_any_premise_true()
-        self._set_attr_status(any_premise_true)
+        self._set_case_status(self._get_f_context(factheirs))
+        any_case_true, any_chore_true = self.is_any_case_true()
+        self._set_attr_status(any_case_true)
         self._set_attr_chore(any_chore_true)
 
 
 def reasonheir_shop(
     r_context: RopeTerm,
-    premises: dict[RopeTerm, PremiseUnit] = None,
+    cases: dict[RopeTerm, CaseUnit] = None,
     r_plan_active_requisite: bool = None,
     _status: bool = None,
     _chore: bool = None,
@@ -655,7 +654,7 @@ def reasonheir_shop(
 ):
     return ReasonHeir(
         r_context=r_context,
-        premises=get_empty_dict_if_None(premises),
+        cases=get_empty_dict_if_None(cases),
         r_plan_active_requisite=r_plan_active_requisite,
         _status=_status,
         _chore=_chore,
@@ -669,10 +668,8 @@ def reasons_get_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(r_context=reason_dict["r_context"])
-        if reason_dict.get("premises") is not None:
-            x_reasonunit.premises = premises_get_from_dict(
-                x_dict=reason_dict["premises"]
-            )
+        if reason_dict.get("cases") is not None:
+            x_reasonunit.cases = cases_get_from_dict(x_dict=reason_dict["cases"])
         if reason_dict.get("r_plan_active_requisite") is not None:
             x_reasonunit.r_plan_active_requisite = reason_dict.get(
                 "r_plan_active_requisite"

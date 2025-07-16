@@ -71,15 +71,15 @@ class ReasonTable(Base):
     r_plan_active_requisite = Column(Integer)
 
 
-class PremiseTable(Base):
-    __tablename__ = "premise"
+class CaseTable(Base):
+    __tablename__ = "case"
     uid = Column(Integer, primary_key=True)
     r_context = Column(String)
-    p_state = Column(String)
+    r_state = Column(String)
     plan_rope = Column(String)
-    p_divisor = Column(Integer)
-    p_upper = Column(Float)
-    p_lower = Column(Float)
+    r_divisor = Column(Integer)
+    r_upper = Column(Float)
+    r_lower = Column(Float)
 
 
 class LaborLinkTable(Base):

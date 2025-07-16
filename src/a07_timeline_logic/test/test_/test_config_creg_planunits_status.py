@@ -62,10 +62,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario1():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=day_rope,
-        reason_premise=day_rope,
-        p_lower=0,
-        reason_p_upper=1,
-        p_divisor=1,
+        reason_case=day_rope,
+        r_lower=0,
+        reason_r_upper=1,
+        r_divisor=1,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 0, 1440)
 
@@ -96,10 +96,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario2():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=day_rope,
-        reason_premise=day_rope,
-        p_lower=360,
-        reason_p_upper=420,
-        p_divisor=1440,
+        reason_case=day_rope,
+        r_lower=360,
+        reason_r_upper=420,
+        r_divisor=1440,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 14400300, 14400480)
 
@@ -129,10 +129,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_days_plan_Scenario0():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=days_rope,
-        reason_premise=days_rope,
-        p_lower=4,
-        reason_p_upper=5,
-        p_divisor=7,
+        reason_case=days_rope,
+        r_lower=4,
+        reason_r_upper=5,
+        r_divisor=7,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 11 * 1400, 12 * 1400)
 
@@ -165,10 +165,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario0():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=week_rope,
-        reason_premise=week_rope,
-        p_lower=0,
-        reason_p_upper=1440,
-        p_divisor=10080,
+        reason_case=week_rope,
+        r_lower=0,
+        reason_r_upper=1440,
+        r_divisor=10080,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 0, 1440)
 
@@ -199,10 +199,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario1():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=week_rope,
-        reason_premise=week_rope,
-        p_lower=2880,
-        reason_p_upper=4220,
-        p_divisor=10080,
+        reason_case=week_rope,
+        r_lower=2880,
+        reason_r_upper=4220,
+        r_divisor=10080,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 100802880, 100804220)
 
@@ -233,10 +233,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_weeks_plan_Scenario0():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=weeks_rope,
-        reason_premise=weeks_rope,
-        p_lower=4,
-        reason_p_upper=5,
-        p_divisor=7,
+        reason_case=weeks_rope,
+        r_lower=4,
+        reason_r_upper=5,
+        r_divisor=7,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 11 * 10080, 12 * 10080)
 
@@ -266,10 +266,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario0():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=year_rope,
-        reason_premise=year_rope,
-        p_lower=0,
-        reason_p_upper=1440,
-        p_divisor=525600,
+        reason_case=year_rope,
+        r_lower=0,
+        reason_r_upper=1440,
+        r_divisor=525600,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 0, 1440)
 
@@ -309,10 +309,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario1():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=year_rope,
-        reason_premise=year_rope,
-        p_lower=0,
-        reason_p_upper=1440,
-        p_divisor=525600,
+        reason_case=year_rope,
+        r_lower=0,
+        reason_r_upper=1440,
+        r_divisor=525600,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 525600, 525600 + 1440)
 
@@ -344,10 +344,10 @@ def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario2():
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=year_rope,
-        reason_premise=year_rope,
-        p_lower=0,
-        reason_p_upper=1440,
-        p_divisor=525600,
+        reason_case=year_rope,
+        r_lower=0,
+        reason_r_upper=1440,
+        r_divisor=525600,
     )
     sue_believerunit.add_fact(creg_rope, creg_rope, 525600, 525600 + 1440)
 
@@ -411,16 +411,16 @@ def test_BelieverUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=wed_rope,
-        reason_premise=wed_rope,
-        p_lower=wed_gogo_want(),
-        reason_p_upper=wed_gogo_want() + 1440,
+        reason_case=wed_rope,
+        r_lower=wed_gogo_want(),
+        reason_r_upper=wed_gogo_want() + 1440,
     )
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=year_rope,
-        reason_premise=year_rope,
-        p_lower=0,
-        reason_p_upper=1400,
+        reason_case=year_rope,
+        r_lower=0,
+        reason_r_upper=1400,
     )
 
     yr2000_mar1day = get_creg_min_from_dt(datetime(2000, 3, 1, 0, 0))
@@ -538,16 +538,16 @@ def test_BelieverUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=wed_rope,
-        reason_premise=wed_rope,
-        p_lower=thu_gogo_want(),
-        reason_p_upper=thu_gogo_want() + 1440,
+        reason_case=wed_rope,
+        r_lower=thu_gogo_want(),
+        reason_r_upper=thu_gogo_want() + 1440,
     )
     sue_believerunit.edit_plan_attr(
         clean_rope,
         reason_r_context=year_rope,
-        reason_premise=year_rope,
-        p_lower=1400,
-        reason_p_upper=2800,
+        reason_case=year_rope,
+        r_lower=1400,
+        reason_r_upper=2800,
     )
 
     yr2000_mar1day = get_creg_min_from_dt(datetime(2000, 3, 1, 0, 0))

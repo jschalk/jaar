@@ -46,7 +46,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     yao_speaker.set_plan(planunit_shop(dirty_str), status_rope)
     yao_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_speaker.edit_plan_attr(
-        sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
+        sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
     )
     yao_speaker.add_fact(status_rope, clean_rope)
     assert len(yao_speaker.get_agenda_dict()) == 0

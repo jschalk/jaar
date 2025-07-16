@@ -469,8 +469,8 @@ def believerunit_graph4(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Premise against Task")
-    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Premise for Task")
+    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Case against Task")
+    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Case for Task")
     create_plan_rect(fig, base_w, base_h, 1, 0, 0.1, "Plan")
     create_plan_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Task Reason Base")
     create_plan_rect(fig, base_w, base_h, 0, 0, 1, "Root Plan")

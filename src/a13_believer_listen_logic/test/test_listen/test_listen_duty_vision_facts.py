@@ -309,7 +309,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     sue_speaker.set_plan(planunit_shop(dirty_str), status_rope)
 #     sue_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
 #     sue_speaker.edit_plan_attr(
-#         sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
+#         sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
 #     )
 #     sweep_plan = sue_speaker.get_plan_obj(sweep_rope)
 #     sweep_plan.laborunit.set_laborlink(yao_str)
@@ -363,10 +363,10 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     yao_duty.set_plan(planunit_shop(dirty_str), status_rope)
 #     yao_duty.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
 #     yao_duty.edit_plan_attr(
-#         sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
+#         sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
 #     )
 #     yao_duty.edit_plan_attr(
-#         sweep_rope, reason_r_context=fridge_rope, reason_premise=running_rope
+#         sweep_rope, reason_r_context=fridge_rope, reason_case=running_rope
 #     )
 #     assert len(yao_duty.get_missing_fact_r_contexts()) == 2
 #     yao_duty.add_fact(status_rope, dirty_rope)

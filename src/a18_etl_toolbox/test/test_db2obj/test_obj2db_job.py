@@ -231,7 +231,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_plan_reason_premiseunit")
+    x_args = get_believer_calc_dimen_args("believer_plan_reason_caseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -258,10 +258,10 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_believer_name = "Sue"
     x_rope = 1
     x_r_context = 2
-    x_p_state = 3
-    x_p_upper = 4
-    x_p_lower = 5
-    x_p_divisor = 6
+    x_r_state = 3
+    x_r_upper = 4
+    x_r_lower = 5
+    x_r_divisor = 6
     x__chore = 7
     x__status = 8
     values_dict = {
@@ -269,10 +269,10 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "r_context": x_r_context,
-        "p_state": x_p_state,
-        "p_upper": x_p_upper,
-        "p_lower": x_p_lower,
-        "p_divisor": x_p_divisor,
+        "r_state": x_r_state,
+        "r_upper": x_r_upper,
+        "r_lower": x_r_lower,
+        "r_divisor": x_r_divisor,
         "_chore": x__chore,
         "_status": x__status,
     }
@@ -287,7 +287,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_plan_reason_premiseunit_job"
+        table_name = "believer_plan_reason_caseunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         # print(expected_sqlstr)
         print("")

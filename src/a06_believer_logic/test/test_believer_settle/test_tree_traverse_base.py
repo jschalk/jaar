@@ -673,12 +673,12 @@ def test_BelieverUnit_settle_believer_Sets_planroot_factheir_With_range_factheir
     yao_believer.set_plan(planunit_shop(tue_str, addin=tue_addin), wk_rope)
     root_rope = to_rope(yao_believer.belief_label)
     yao_believer.edit_plan_attr(
-        root_rope, reason_r_context=tue_rope, reason_premise=tue_rope
+        root_rope, reason_r_context=tue_rope, reason_case=tue_rope
     )
 
-    wk_p_lower = 3
-    wk_p_upper = 7
-    yao_believer.add_fact(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    wk_r_lower = 3
+    wk_r_upper = 7
+    yao_believer.add_fact(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
 
     # assert len(ball_plan._reasonheirs) == 1
     # assert ball_plan._factheirs == {wk_rope: wk_factheir}
@@ -693,16 +693,16 @@ def test_BelieverUnit_settle_believer_Sets_planroot_factheir_With_range_factheir
     assert str(excinfo.value) == exception_str
 
     # THEN
-    # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
     # tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}
     # x_believer_plan_dict = {wk_plan.get_plan_rope(): wk_plan, tue_plan.get_plan_rope(): tue_plan}
     # ball_plan.set_reasonheirs(x_believer_plan_dict, tue_reasonheirs)
     # x_range_inheritors = {tue_rope: wk_rope}
-    # wk_factheir = factheir_shop(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    # wk_factheir = factheir_shop(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
 
-    # tue_p_lower = 113
-    # tue_p_upper = 117
-    # tue_factheir = factheir_shop(tue_rope, tue_rope, tue_p_lower, tue_p_upper)
+    # tue_r_lower = 113
+    # tue_r_upper = 117
+    # tue_factheir = factheir_shop(tue_rope, tue_rope, tue_r_lower, tue_r_upper)
     # root_plan = yao_believer.get_plan_obj(root_rope)
     # print(f"{wk_rope=} {root_plan._factheirs.keys()=}")
     # assert root_plan._factheirs.get(wk_rope) == wk_factheir
@@ -727,12 +727,12 @@ def test_BelieverUnit_settle_believer_SetsPlanUnit_factheir_With_range_factheirs
     ball_rope = yao_believer.make_l1_rope(ball_str)
     yao_believer.set_l1_plan(planunit_shop(ball_str))
     yao_believer.edit_plan_attr(
-        ball_rope, reason_r_context=tue_rope, reason_premise=tue_rope
+        ball_rope, reason_r_context=tue_rope, reason_case=tue_rope
     )
 
-    wk_p_lower = 3
-    wk_p_upper = 7
-    yao_believer.add_fact(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    wk_r_lower = 3
+    wk_r_upper = 7
+    yao_believer.add_fact(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
 
     # assert len(ball_plan._reasonheirs) == 1
     # assert ball_plan._factheirs == {wk_rope: wk_factheir}
@@ -744,16 +744,16 @@ def test_BelieverUnit_settle_believer_SetsPlanUnit_factheir_With_range_factheirs
     yao_believer.settle_believer()
 
     # THEN
-    # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
     # tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}
     # x_believer_plan_dict = {wk_plan.get_plan_rope(): wk_plan, tue_plan.get_plan_rope(): tue_plan}
     # ball_plan.set_reasonheirs(x_believer_plan_dict, tue_reasonheirs)
     x_range_inheritors = {tue_rope: wk_rope}
-    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
 
-    tue_p_lower = 113
-    tue_p_upper = 117
-    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_p_lower, tue_p_upper)
+    tue_r_lower = 113
+    tue_r_upper = 117
+    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_r_lower, tue_r_upper)
     ball_plan = yao_believer.get_plan_obj(ball_rope)
     print(f"{wk_rope=} {ball_plan._factheirs.keys()=}")
     assert ball_plan._factheirs.get(wk_rope) == wk_factheir

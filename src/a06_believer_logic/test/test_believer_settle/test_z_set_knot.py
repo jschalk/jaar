@@ -146,14 +146,14 @@ def test_believer_set_knot_CorrectlyModifiesReasonUnit():
     semicolon_8am_rope = zia_believer.make_rope(semicolon_time_rope, _8am_str)
 
     semicolon_time_reasonunit = reasonunit_shop(r_context=semicolon_time_rope)
-    semicolon_time_reasonunit.set_premise(semicolon_8am_rope)
+    semicolon_time_reasonunit.set_case(semicolon_8am_rope)
 
     semicolon_casa_rope = zia_believer.make_l1_rope(casa_str)
     zia_believer.edit_plan_attr(semicolon_casa_rope, reason=semicolon_time_reasonunit)
     casa_plan = zia_believer.get_plan_obj(semicolon_casa_rope)
     assert casa_plan.reasonunits.get(semicolon_time_rope) is not None
     gen_time_reasonunit = casa_plan.reasonunits.get(semicolon_time_rope)
-    assert gen_time_reasonunit.premises.get(semicolon_8am_rope) is not None
+    assert gen_time_reasonunit.cases.get(semicolon_8am_rope) is not None
 
     # WHEN
     slash_str = "/"
@@ -168,10 +168,10 @@ def test_believer_set_knot_CorrectlyModifiesReasonUnit():
     slash_8am_rope = zia_believer.make_rope(slash_time_rope, _8am_str)
     assert casa_plan.reasonunits.get(slash_time_rope) is not None
     gen_time_reasonunit = casa_plan.reasonunits.get(slash_time_rope)
-    assert gen_time_reasonunit.premises.get(slash_8am_rope) is not None
+    assert gen_time_reasonunit.cases.get(slash_8am_rope) is not None
 
     assert casa_plan.reasonunits.get(semicolon_time_rope) is None
-    assert gen_time_reasonunit.premises.get(semicolon_8am_rope) is None
+    assert gen_time_reasonunit.cases.get(semicolon_8am_rope) is None
 
 
 def test_believer_set_knot_CorrectlyModifiesFactUnit():

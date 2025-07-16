@@ -75,7 +75,7 @@ def test_BelieverUnit_get_relevant_ropes_ReturnsSimpleReasonUnitr_context():
     status_plan = planunit_shop(status_str)
     sue_believer.set_plan(status_plan, parent_rope=casa_rope)
     floor_reason = reasonunit_shop(r_context=status_rope)
-    floor_reason.set_premise(premise=status_rope)
+    floor_reason.set_case(case=status_rope)
     sue_believer.edit_plan_attr(floor_rope, reason=floor_reason)
 
     # WHEN

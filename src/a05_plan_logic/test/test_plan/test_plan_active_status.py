@@ -2,9 +2,9 @@ from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_plan import (
+    caseunit_shop,
     factheir_shop,
     factunit_shop,
-    premiseunit_shop,
     reasonheir_shop,
     reasonunit_shop,
 )
@@ -159,9 +159,9 @@ def test_PlanUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     run_str = "run"
     run_rope = create_rope(ball_rope, run_str)
     ball_plan = planunit_shop(ball_str)
-    run_premise = premiseunit_shop(p_state=run_rope, p_lower=0, p_upper=7)
-    run_premises = {run_premise.p_state: run_premise}
-    reasonheir = reasonheir_shop(run_rope, premises=run_premises)
+    run_case = caseunit_shop(r_state=run_rope, r_lower=0, r_upper=7)
+    run_cases = {run_case.r_state: run_case}
+    reasonheir = reasonheir_shop(run_rope, cases=run_cases)
     reasonheirs = {reasonheir.r_context: reasonheir}
     assert ball_plan._reasonheirs == {}
 
@@ -179,9 +179,9 @@ def test_PlanUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_rope = create_rope(ball_str)
     run_str = "run"
     run_rope = create_rope(ball_rope, run_str)
-    run_premise = premiseunit_shop(p_state=run_rope, p_lower=0, p_upper=7)
-    run_premises = {run_premise.p_state: run_premise}
-    run_reasonunit = reasonunit_shop(r_context=run_rope, premises=run_premises)
+    run_case = caseunit_shop(r_state=run_rope, r_lower=0, r_upper=7)
+    run_cases = {run_case.r_state: run_case}
+    run_reasonunit = reasonunit_shop(r_context=run_rope, cases=run_cases)
     run_reasonunits = {run_reasonunit.r_context: run_reasonunit}
     ball_plan = planunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_plan.reasonunits != {}
@@ -190,7 +190,7 @@ def test_PlanUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_plan.set_reasonheirs(reasonheirs={}, believer_plan_dict={})
 
     # THEN
-    reasonheir = reasonheir_shop(run_rope, premises=run_premises)
+    reasonheir = reasonheir_shop(run_rope, cases=run_cases)
     reasonheirs = {reasonheir.r_context: reasonheir}
     assert ball_plan._reasonheirs == reasonheirs
 
@@ -211,11 +211,11 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
-    wk_p_lower = 3
-    wk_p_upper = 7
+    wk_r_lower = 3
+    wk_r_upper = 7
     wk_addin = 10
     wk_plan = planunit_shop(wk_str, parent_rope=root_label(), addin=wk_addin)
-    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_p_lower, wk_p_upper)
+    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
     tue_str = "Tue"
     tue_rope = create_rope(wk_rope, tue_str)
     tue_addin = 100
@@ -242,9 +242,9 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_plan.set_range_factheirs(x_believer_plan_dict, x_range_inheritors)
 
     # THEN
-    tue_p_lower = 113
-    tue_p_upper = 117
-    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_p_lower, tue_p_upper)
+    tue_r_lower = 113
+    tue_r_upper = 117
+    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_r_lower, tue_r_upper)
     assert len(ball_plan._factheirs) == 2
     assert ball_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
@@ -385,12 +385,12 @@ def test_PlanUnit_factunit_exists_ReturnsObj():
 #     # ESTABLISH
 # clean_str = "clean"
 # clean_plan = planunit_shop(clean_str)
-#     clean_plan.set_reason_premise(
+#     clean_plan.set_reason_case(
 #         r_context="testing1,sec",
-#         premise="testing1,sec,next",
-#         p_lower=None,
-#         p_upper=None,
-#         p_divisor=None,
+#         case="testing1,sec,next",
+#         r_lower=None,
+#         r_upper=None,
+#         r_divisor=None,
 #     )
 #     clean_plan._active_hx = {0: True, 4: False}
 #     assert clean_plan._active_hx != {0: False}

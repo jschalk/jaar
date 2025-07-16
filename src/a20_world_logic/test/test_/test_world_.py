@@ -26,7 +26,7 @@ def test_WorldUnit_Exists():
     assert not x_world.world_name
     assert not x_world.worlds_dir
     assert not x_world.output_dir
-    assert not x_world.world_time_p_upper
+    assert not x_world.world_time_r_upper
     assert not x_world._events
     assert not x_world._world_dir
     assert not x_world._input_dir
@@ -96,7 +96,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     example_input_dir = create_path(worlds_dir(), "example_input")
     output_dir = create_path(worlds_dir(), "output")
     five_world_name = "five"
-    world2_time_p_upper = 55
+    world2_time_r_upper = 55
     world2_beliefunits = {"amy45"}
 
     # WHEN
@@ -105,7 +105,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
         worlds_dir=worlds2_dir,
         output_dir=output_dir,
         input_dir=example_input_dir,
-        world_time_p_upper=world2_time_p_upper,
+        world_time_r_upper=world2_time_r_upper,
         _beliefunits=world2_beliefunits,
     )
 
@@ -115,7 +115,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world.worlds_dir == worlds2_dir
     assert x_world.output_dir == output_dir
     assert x_world._input_dir == example_input_dir
-    assert x_world.world_time_p_upper == world2_time_p_upper
+    assert x_world.world_time_r_upper == world2_time_r_upper
     assert x_world._events == {}
     assert x_world._beliefunits == world2_beliefunits
     assert x_world._pidgin_events == {}
@@ -133,7 +133,7 @@ def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cle
     assert x_world.world_name == a23_str
     assert x_world.worlds_dir == worlds_dir()
     assert not x_world.output_dir
-    assert x_world.world_time_p_upper == 0
+    assert x_world.world_time_r_upper == 0
     assert x_world._events == {}
     assert x_world._input_dir == create_path(x_world._world_dir, "input")
     assert x_world._beliefunits == set()

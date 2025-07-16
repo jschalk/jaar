@@ -10,8 +10,8 @@ from src.a03_group_logic.group import (
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_plan import (
+    caseunit_shop,
     factheir_shop,
-    premiseunit_shop,
     reasonheir_shop,
 )
 from src.a05_plan_logic.healer import healerlink_shop
@@ -338,14 +338,14 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
 def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_reason_premiseunit")
+    # x_args = get_believer_calc_dimen_args("believer_plan_reason_caseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_premiseunit.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_caseunit.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
@@ -354,31 +354,31 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     x_believer_name = 2
     x_rope = 3
     x_r_context = 4
-    x_p_state = 5
-    x_p_upper = 6.0
-    x_p_lower = 7.0
-    x_p_divisor = 8
+    x_r_state = 5
+    x_r_upper = 6.0
+    x_r_lower = 7.0
+    x_r_divisor = 8
     x__chore = 9
     x__status = 10
-    x_premiseunit = premiseunit_shop(p_state=x_p_state)
-    x_premiseunit.p_state = x_p_state
-    x_premiseunit.p_upper = x_p_upper
-    x_premiseunit.p_lower = x_p_lower
-    x_premiseunit.p_divisor = x_p_divisor
-    x_premiseunit._chore = x__chore
-    x_premiseunit._status = x__status
+    x_caseunit = caseunit_shop(r_state=x_r_state)
+    x_caseunit.r_state = x_r_state
+    x_caseunit.r_upper = x_r_upper
+    x_caseunit.r_lower = x_r_lower
+    x_caseunit.r_divisor = x_r_divisor
+    x_caseunit._chore = x__chore
+    x_caseunit._status = x__status
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_reason_premiseunit_job"
+        x_table_name = "believer_plan_reason_caseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
             x_belief_label, x_believer_name, x_rope, x_r_context
         )
 
         # WHEN
-        insert_job_blrprem(cursor, x_objkeysholder, x_premiseunit)
+        insert_job_blrprem(cursor, x_objkeysholder, x_caseunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -390,10 +390,10 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
             str(x_believer_name),
             str(x_rope),
             str(x_r_context),
-            str(x_p_state),
-            x_p_upper,
-            x_p_lower,
-            x_p_divisor,
+            str(x_r_state),
+            x_r_upper,
+            x_r_lower,
+            x_r_divisor,
             x__chore,
             x__status,
         )
@@ -875,7 +875,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_believer.add_plan(clean_rope)
     sue_believer.add_plan(dirty_rope)
     sue_believer.edit_plan_attr(
-        casa_rope, reason_r_context=status_rope, reason_premise=dirty_rope
+        casa_rope, reason_r_context=status_rope, reason_case=dirty_rope
     )
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
@@ -891,7 +891,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         blrawar_job_table = "believer_plan_awardlink_job"
         blrfact_job_table = "believer_plan_factunit_job"
         blrheal_job_table = "believer_plan_healerlink_job"
-        blrprem_job_table = "believer_plan_reason_premiseunit_job"
+        blrprem_job_table = "believer_plan_reason_caseunit_job"
         blrreas_job_table = "believer_plan_reasonunit_job"
         blrlabo_job_table = "believer_plan_laborlink_job"
         blrplan_job_table = "believer_planunit_job"

@@ -120,9 +120,9 @@ BelieverUnit PlanUnit AwardHeir objects
 
 BelieverUnit PlanUnit AwardHeir objects
 
-BelieverUnit PlanUnit Reason PremiseUnit objects
+BelieverUnit PlanUnit Reason CaseUnit objects
 
-BelieverUnit PlanUnit Reason PremiseHeir objects
+BelieverUnit PlanUnit Reason CaseHeir objects
 
 BelieverUnit PlanUnit FactUnit objects
 
