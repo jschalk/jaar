@@ -278,7 +278,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         trace_name="p_divisor Range",
         x_color=None,
         showlegend=True,
-        case_str="Case",
+        case_str="Scenario",
         sought_str="active",
         sought_status_str="Chore Status",
         p_divisor=pd,
@@ -292,10 +292,10 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
 
 def test_PremiseStatusFinder_get_active_ReturnsObj(graphics_bool):
     """Check scenarios PremiseUnit._active. Plotly graph can be used to identify problems."""
-    # # Case A
+    # # Scenario A
     assert premisestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()
 
-    # # Case B1
+    # # Scenario B1
     graph_b = graphics_bool
     pd = 1  # p_divisor
     fig = get_fig(pd, graphics_bool)
@@ -389,7 +389,7 @@ def test_PremiseStatusFinder_get_active_ReturnsObj(graphics_bool):
     assert caseb1_10.get_active() == sought_active
     assert caseb1_10.get_chore_status() == sought_chore
 
-    # Case B2
+    # Scenario B2
     linel -= 0.1
     caseb2_1 = premisestatusfinder_shop(0.3, 0.7, pd, 0.8, 1.4)
     caseb2_2 = premisestatusfinder_shop(0.3, 0.7, pd, 0.6, 1.2)
@@ -474,7 +474,7 @@ def test_PremiseStatusFinder_get_active_ReturnsObj(graphics_bool):
     assert caseb2_9.get_active() == sought_active
     assert caseb2_9.get_chore_status() == sought_chore
 
-    # Case B3
+    # Scenario B3
     linel -= 0.1
     sought_active = True
     sought_chore = True
@@ -551,7 +551,7 @@ def test_PremiseStatusFinder_get_active_ReturnsObj(graphics_bool):
     assert caseb3_8.get_active() == sought_active
     assert caseb3_8.get_chore_status() == sought_chore
 
-    # Case B4
+    # Scenario B4
     linel -= 0.1
     sought_active = True
     sought_chore = True

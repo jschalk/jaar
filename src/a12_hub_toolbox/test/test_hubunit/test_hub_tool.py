@@ -308,7 +308,7 @@ def test_get_believerevent_obj_ReturnsObj_Scenario1_FileExists(env_dir_setup_cle
     t3 = 3
     t3_json_path = create_believerevent_path(belief_mstr_dir, a23_str, sue_str, t3)
     sue_believer = believerunit_shop(sue_str, a23_str)
-    casa_rope = sue_believer.make_l1_rope("case")
+    casa_rope = sue_believer.make_l1_rope("casa")
     clean_rope = sue_believer.make_l1_rope("clean")
     dirty_rope = sue_believer.make_l1_rope("dirty")
     sue_believer.add_fact(casa_rope, dirty_rope, create_missing_plans=True)

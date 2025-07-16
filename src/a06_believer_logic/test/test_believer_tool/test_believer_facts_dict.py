@@ -23,7 +23,7 @@ def test_get_believer_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
-    casa_rope = sue_believer.make_l1_rope("case")
+    casa_rope = sue_believer.make_l1_rope("casa")
     clean_rope = sue_believer.make_l1_rope("clean")
     dirty_rope = sue_believer.make_l1_rope("dirty")
     sue_believer.add_fact(casa_rope, dirty_rope, create_missing_plans=True)
@@ -48,7 +48,7 @@ def test_get_believer_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
-    casa_rope = sue_believer.make_l1_rope("case")
+    casa_rope = sue_believer.make_l1_rope("casa")
     clean_rope = sue_believer.make_l1_rope("clean")
     dirty_rope = sue_believer.make_l1_rope("dirty")
     dirty_p_lower = 10

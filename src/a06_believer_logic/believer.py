@@ -1379,13 +1379,13 @@ class BelieverUnit:
         label_dict = {
             plan.get_plan_rope().lower(): plan.get_plan_rope() for plan in plan_list
         }
-        label_same_case_ordered_list = sorted(list(label_dict))
-        label_orginalcase_ordered_list = [
-            label_dict[label_l] for label_l in label_same_case_ordered_list
+        label_same_capitalization_ordered_list = sorted(list(label_dict))
+        label_orginalcapitalization_ordered_list = [
+            label_dict[label_l] for label_l in label_same_capitalization_ordered_list
         ]
 
         list_x = []
-        for rope in label_orginalcase_ordered_list:
+        for rope in label_orginalcapitalization_ordered_list:
             if not no_range_descendants:
                 list_x.append(rope)
             else:

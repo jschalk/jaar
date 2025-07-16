@@ -520,7 +520,7 @@ def test_PidginUnit_set_mapunit_SetsAttr():
     assert sue_pidginunit.namemap == namemap
 
 
-def test_PidginUnit_set_mapunit_SetsAttr_SpecialCase_RopeTerm():
+def test_PidginUnit_set_mapunit_SetsAttr_SpecialSituation_RopeTerm():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)

@@ -203,7 +203,6 @@ class PremiseStatusFinder:
     def get_active(self) -> bool:
         if self.f_upper_full - self.f_lower_full > self.p_divisor:
             return True
-        # Case B1
         elif get_range_less_than_p_divisor_active(
             bo=self.bo(), bn=self.bn(), po=self.po(), pn=self.pn()
         ):
