@@ -3,7 +3,7 @@ from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.a06_believer_logic.test._util.a06_str import (
     RopeTerm_str,
     partner_name_str,
-    rcontext_str,
+    r_context_str,
 )
 from src.a16_pidgin_logic.map import (
     LabelMap,
@@ -264,11 +264,11 @@ def get_casa_maison_rope_otx_dt() -> DataFrame:
     clean_otx_rope = create_rope(casa_otx_rope, clean_otx_str)
     sweep_str = "sweep"
     sweep_otx_rope = create_rope(clean_otx_rope, sweep_str)
-    otx_dt = DataFrame(columns=[rcontext_str()])
-    otx_dt.loc[0, rcontext_str()] = otx_amy45_rope
-    otx_dt.loc[1, rcontext_str()] = casa_otx_rope
-    otx_dt.loc[2, rcontext_str()] = clean_otx_rope
-    otx_dt.loc[3, rcontext_str()] = sweep_otx_rope
+    otx_dt = DataFrame(columns=[r_context_str()])
+    otx_dt.loc[0, r_context_str()] = otx_amy45_rope
+    otx_dt.loc[1, r_context_str()] = casa_otx_rope
+    otx_dt.loc[2, r_context_str()] = clean_otx_rope
+    otx_dt.loc[3, r_context_str()] = sweep_otx_rope
     return otx_dt
 
 
@@ -278,11 +278,11 @@ def get_casa_maison_rope_inx_dt() -> DataFrame:
     casa_inx_rope = create_rope(inx_amy87_rope, "maison")
     clean_inx_rope = create_rope(casa_inx_rope, "propre")
     sweep_inx_rope = create_rope(clean_inx_rope, "sweep")
-    inx_dt = DataFrame(columns=[rcontext_str()])
-    inx_dt.loc[0, rcontext_str()] = inx_amy87_rope
-    inx_dt.loc[1, rcontext_str()] = casa_inx_rope
-    inx_dt.loc[2, rcontext_str()] = clean_inx_rope
-    inx_dt.loc[3, rcontext_str()] = sweep_inx_rope
+    inx_dt = DataFrame(columns=[r_context_str()])
+    inx_dt.loc[0, r_context_str()] = inx_amy87_rope
+    inx_dt.loc[1, r_context_str()] = casa_inx_rope
+    inx_dt.loc[2, r_context_str()] = clean_inx_rope
+    inx_dt.loc[3, r_context_str()] = sweep_inx_rope
     return inx_dt
 
 

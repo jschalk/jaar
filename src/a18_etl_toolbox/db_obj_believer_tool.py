@@ -149,19 +149,19 @@ def create_blrfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
-    fcontext = values_dict.get("fcontext")
-    fstate = values_dict.get("fstate")
-    fopen = values_dict.get("fopen")
-    fnigh = values_dict.get("fnigh")
-    return f"""INSERT INTO believer_plan_factunit_job (belief_label, believer_name, plan_rope, fcontext, fstate, fopen, fnigh)
+    f_context = values_dict.get("f_context")
+    f_state = values_dict.get("f_state")
+    f_lower = values_dict.get("f_lower")
+    f_upper = values_dict.get("f_upper")
+    return f"""INSERT INTO believer_plan_factunit_job (belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
-, {sqlite_obj_str(fcontext, "TEXT")}
-, {sqlite_obj_str(fstate, "TEXT")}
-, {sqlite_obj_str(fopen, "REAL")}
-, {sqlite_obj_str(fnigh, "REAL")}
+, {sqlite_obj_str(f_context, "TEXT")}
+, {sqlite_obj_str(f_state, "TEXT")}
+, {sqlite_obj_str(f_lower, "REAL")}
+, {sqlite_obj_str(f_upper, "REAL")}
 )
 ;
 """
@@ -187,23 +187,23 @@ def create_blrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
-    rcontext = values_dict.get("rcontext")
-    pstate = values_dict.get("pstate")
-    pnigh = values_dict.get("pnigh")
-    popen = values_dict.get("popen")
-    pdivisor = values_dict.get("pdivisor")
+    r_context = values_dict.get("r_context")
+    p_state = values_dict.get("p_state")
+    p_upper = values_dict.get("p_upper")
+    p_lower = values_dict.get("p_lower")
+    p_divisor = values_dict.get("p_divisor")
     _chore = values_dict.get("_chore")
     _status = values_dict.get("_status")
-    return f"""INSERT INTO believer_plan_reason_premiseunit_job (belief_label, believer_name, plan_rope, rcontext, pstate, pnigh, popen, pdivisor, _chore, _status)
+    return f"""INSERT INTO believer_plan_reason_premiseunit_job (belief_label, believer_name, plan_rope, r_context, p_state, p_upper, p_lower, p_divisor, _chore, _status)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
-, {sqlite_obj_str(rcontext, "TEXT")}
-, {sqlite_obj_str(pstate, "TEXT")}
-, {sqlite_obj_str(pnigh, "REAL")}
-, {sqlite_obj_str(popen, "REAL")}
-, {sqlite_obj_str(pdivisor, "REAL")}
+, {sqlite_obj_str(r_context, "TEXT")}
+, {sqlite_obj_str(p_state, "TEXT")}
+, {sqlite_obj_str(p_upper, "REAL")}
+, {sqlite_obj_str(p_lower, "REAL")}
+, {sqlite_obj_str(p_divisor, "REAL")}
 , {sqlite_obj_str(_chore, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 )
@@ -215,18 +215,18 @@ def create_blrreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
-    rcontext = values_dict.get("rcontext")
-    rplan_active_requisite = values_dict.get("rplan_active_requisite")
+    r_context = values_dict.get("r_context")
+    r_plan_active_requisite = values_dict.get("r_plan_active_requisite")
     _chore = values_dict.get("_chore")
     _status = values_dict.get("_status")
     _rplan_active_value = values_dict.get("_rplan_active_value")
-    return f"""INSERT INTO believer_plan_reasonunit_job (belief_label, believer_name, plan_rope, rcontext, rplan_active_requisite, _chore, _status, _rplan_active_value)
+    return f"""INSERT INTO believer_plan_reasonunit_job (belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite, _chore, _status, _rplan_active_value)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
-, {sqlite_obj_str(rcontext, "TEXT")}
-, {sqlite_obj_str(rplan_active_requisite, "INTEGER")}
+, {sqlite_obj_str(r_context, "TEXT")}
+, {sqlite_obj_str(r_plan_active_requisite, "INTEGER")}
 , {sqlite_obj_str(_chore, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 , {sqlite_obj_str(_rplan_active_value, "INTEGER")}
@@ -368,7 +368,7 @@ class ObjKeysHolder:
     belief_label: BeliefLabel = None
     believer_name: BelieverName = None
     rope: RopeTerm = None
-    rcontext: RopeTerm = None
+    r_context: RopeTerm = None
     partner_name: PartnerName = None
     membership: GroupTitle = None
     group_title: GroupTitle = None
@@ -462,7 +462,7 @@ def insert_job_blrprem(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["believer_name"] = x_objkeysholder.believer_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    x_dict["rcontext"] = x_objkeysholder.rcontext
+    x_dict["r_context"] = x_objkeysholder.r_context
     insert_sqlstr = create_blrprem_metrics_insert_sqlstr(x_dict)
     cursor.execute(insert_sqlstr)
 
@@ -528,9 +528,9 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_believer: BelieverUnit):
         insert_job_blrlabo(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_plan._awardheirs.values():
             insert_job_blrawar(cursor, x_objkeysholder, x_awardheir)
-        for rcontext, reasonheir in x_plan._reasonheirs.items():
+        for r_context, reasonheir in x_plan._reasonheirs.items():
             insert_job_blrreas(cursor, x_objkeysholder, reasonheir)
-            x_objkeysholder.rcontext = rcontext
+            x_objkeysholder.r_context = r_context
             for prem in reasonheir.premises.values():
                 insert_job_blrprem(cursor, x_objkeysholder, prem)
 

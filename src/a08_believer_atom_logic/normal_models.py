@@ -66,20 +66,20 @@ class AwardLinkTable(Base):
 class ReasonTable(Base):
     __tablename__ = "reason"
     uid = Column(Integer, primary_key=True)
-    rcontext = Column(String)
+    r_context = Column(String)
     plan_rope = Column(String)
-    rplan_active_requisite = Column(Integer)
+    r_plan_active_requisite = Column(Integer)
 
 
 class PremiseTable(Base):
     __tablename__ = "premise"
     uid = Column(Integer, primary_key=True)
-    rcontext = Column(String)
-    pstate = Column(String)
+    r_context = Column(String)
+    p_state = Column(String)
     plan_rope = Column(String)
-    pdivisor = Column(Integer)
-    pnigh = Column(Float)
-    popen = Column(Float)
+    p_divisor = Column(Integer)
+    p_upper = Column(Float)
+    p_lower = Column(Float)
 
 
 class LaborLinkTable(Base):
@@ -99,8 +99,8 @@ class HealerLinkTable(Base):
 class FactTable(Base):
     __tablename__ = "fact"
     uid = Column(Integer, primary_key=True)
-    fcontext = Column(String)
+    f_context = Column(String)
     plan_rope = Column(String)
-    fnigh = Column(Float)
-    fopen = Column(Float)
-    fstate = Column(String)
+    f_upper = Column(Float)
+    f_lower = Column(Float)
+    f_state = Column(String)

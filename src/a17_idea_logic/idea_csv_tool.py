@@ -300,10 +300,10 @@ def add_believer_to_br00023_csv(
             x_believer.belief_label,
             x_believer.believer_name,
             x_believer.planroot.get_plan_rope(),
-            factunit.fcontext,
-            factunit.fstate,
-            if_none_str(factunit.fopen),
-            if_none_str(factunit.fnigh),
+            factunit.f_context,
+            factunit.f_state,
+            if_none_str(factunit.f_lower),
+            if_none_str(factunit.f_upper),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -370,11 +370,11 @@ def add_believer_to_br00026_csv(
                     x_believer.belief_label,
                     x_believer.believer_name,
                     planunit.get_plan_rope(),
-                    reasonunit.rcontext,
-                    premiseunit.pstate,
-                    if_none_str(premiseunit.popen),
-                    if_none_str(premiseunit.pnigh),
-                    if_none_str(premiseunit.pdivisor),
+                    reasonunit.r_context,
+                    premiseunit.p_state,
+                    if_none_str(premiseunit.p_lower),
+                    if_none_str(premiseunit.p_upper),
+                    if_none_str(premiseunit.p_divisor),
                 ]
                 x_csv += csv_delimiter.join(x_row)
                 x_csv += "\n"
@@ -396,8 +396,8 @@ def add_believer_to_br00027_csv(
                 x_believer.belief_label,
                 x_believer.believer_name,
                 planunit.get_plan_rope(),
-                reasonunit.rcontext,
-                if_none_str(reasonunit.rplan_active_requisite),
+                reasonunit.r_context,
+                if_none_str(reasonunit.r_plan_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -567,10 +567,10 @@ def add_pack_to_br00023_csv(
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("fcontext"),
-                if_none_str(believeratom.jvalues.get("fstate")),
-                if_none_str(believeratom.jvalues.get("fopen")),
-                if_none_str(believeratom.jvalues.get("fnigh")),
+                believeratom.jkeys.get("f_context"),
+                if_none_str(believeratom.jvalues.get("f_state")),
+                if_none_str(believeratom.jvalues.get("f_lower")),
+                if_none_str(believeratom.jvalues.get("f_upper")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -624,11 +624,11 @@ def add_pack_to_br00026_csv(
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("rcontext"),
-                believeratom.jkeys.get("pstate"),
-                if_none_str(believeratom.jvalues.get("popen")),
-                if_none_str(believeratom.jvalues.get("pnigh")),
-                if_none_str(believeratom.jvalues.get("pdivisor")),
+                believeratom.jkeys.get("r_context"),
+                believeratom.jkeys.get("p_state"),
+                if_none_str(believeratom.jvalues.get("p_lower")),
+                if_none_str(believeratom.jvalues.get("p_upper")),
+                if_none_str(believeratom.jvalues.get("p_divisor")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -646,8 +646,8 @@ def add_pack_to_br00027_csv(
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("rcontext"),
-                if_none_str(believeratom.jvalues.get("rplan_active_requisite")),
+                believeratom.jkeys.get("r_context"),
+                if_none_str(believeratom.jvalues.get("r_plan_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

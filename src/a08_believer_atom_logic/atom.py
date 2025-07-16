@@ -320,18 +320,18 @@ def _modify_believer_plan_factunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.del_factunit(x_atom.get_value("fcontext"))
+    x_planunit.del_factunit(x_atom.get_value("f_context"))
 
 
 def _modify_believer_plan_factunit_update(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_factunit = x_planunit.factunits.get(x_atom.get_value("fcontext"))
+    x_factunit = x_planunit.factunits.get(x_atom.get_value("f_context"))
     x_factunit.set_attr(
-        fstate=x_atom.get_value("fstate"),
-        fopen=x_atom.get_value("fopen"),
-        fnigh=x_atom.get_value("fnigh"),
+        f_state=x_atom.get_value("f_state"),
+        f_lower=x_atom.get_value("f_lower"),
+        f_upper=x_atom.get_value("f_upper"),
     )
 
 
@@ -341,10 +341,10 @@ def _modify_believer_plan_factunit_insert(
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
         factunit=factunit_shop(
-            fcontext=x_atom.get_value("fcontext"),
-            fstate=x_atom.get_value("fstate"),
-            fopen=x_atom.get_value("fopen"),
-            fnigh=x_atom.get_value("fnigh"),
+            f_context=x_atom.get_value("f_context"),
+            f_state=x_atom.get_value("f_state"),
+            f_lower=x_atom.get_value("f_lower"),
+            f_upper=x_atom.get_value("f_upper"),
         ),
     )
 
@@ -353,7 +353,7 @@ def _modify_believer_plan_reasonunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.del_reasonunit_rcontext(x_atom.get_value("rcontext"))
+    x_planunit.del_reasonunit_r_context(x_atom.get_value("r_context"))
 
 
 def _modify_believer_plan_reasonunit_update(
@@ -361,8 +361,8 @@ def _modify_believer_plan_reasonunit_update(
 ):
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
-        reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rplan_active_requisite=x_atom.get_value("rplan_active_requisite"),
+        reason_r_context=x_atom.get_value("r_context"),
+        reason_r_plan_active_requisite=x_atom.get_value("r_plan_active_requisite"),
     )
 
 
@@ -371,8 +371,8 @@ def _modify_believer_plan_reasonunit_insert(
 ):
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
-        reason_rcontext=x_atom.get_value("rcontext"),
-        reason_rplan_active_requisite=x_atom.get_value("rplan_active_requisite"),
+        reason_r_context=x_atom.get_value("r_context"),
+        reason_r_plan_active_requisite=x_atom.get_value("r_plan_active_requisite"),
     )
 
 
@@ -381,8 +381,8 @@ def _modify_believer_plan_reason_premiseunit_delete(
 ):
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
-        reason_del_premise_rcontext=x_atom.get_value("rcontext"),
-        reason_del_premise_pstate=x_atom.get_value("pstate"),
+        reason_del_premise_r_context=x_atom.get_value("r_context"),
+        reason_del_premise_p_state=x_atom.get_value("p_state"),
     )
 
 
@@ -391,11 +391,11 @@ def _modify_believer_plan_reason_premiseunit_update(
 ):
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
-        reason_rcontext=x_atom.get_value("rcontext"),
-        reason_premise=x_atom.get_value("pstate"),
-        popen=x_atom.get_value("popen"),
-        reason_pnigh=x_atom.get_value("pnigh"),
-        pdivisor=x_atom.get_value("pdivisor"),
+        reason_r_context=x_atom.get_value("r_context"),
+        reason_premise=x_atom.get_value("p_state"),
+        p_lower=x_atom.get_value("p_lower"),
+        reason_p_upper=x_atom.get_value("p_upper"),
+        p_divisor=x_atom.get_value("p_divisor"),
     )
 
 
@@ -404,11 +404,11 @@ def _modify_believer_plan_reason_premiseunit_insert(
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
     x_planunit.set_reason_premise(
-        rcontext=x_atom.get_value("rcontext"),
-        premise=x_atom.get_value("pstate"),
-        popen=x_atom.get_value("popen"),
-        pnigh=x_atom.get_value("pnigh"),
-        pdivisor=x_atom.get_value("pdivisor"),
+        r_context=x_atom.get_value("r_context"),
+        premise=x_atom.get_value("p_state"),
+        p_lower=x_atom.get_value("p_lower"),
+        p_upper=x_atom.get_value("p_upper"),
+        p_divisor=x_atom.get_value("p_divisor"),
     )
 
 
@@ -601,17 +601,17 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "believer_plan_factunit":
         return (
-            (x_obj.fstate != y_obj.fstate)
-            or (x_obj.popen != y_obj.popen)
-            or (x_obj.pnigh != y_obj.pnigh)
+            (x_obj.f_state != y_obj.f_state)
+            or (x_obj.p_lower != y_obj.p_lower)
+            or (x_obj.p_upper != y_obj.p_upper)
         )
     elif dimen == "believer_plan_reasonunit":
-        return x_obj.rplan_active_requisite != y_obj.rplan_active_requisite
+        return x_obj.r_plan_active_requisite != y_obj.r_plan_active_requisite
     elif dimen == "believer_plan_reason_premiseunit":
         return (
-            x_obj.popen != y_obj.popen
-            or x_obj.pnigh != y_obj.pnigh
-            or x_obj.pdivisor != y_obj.pdivisor
+            x_obj.p_lower != y_obj.p_lower
+            or x_obj.p_upper != y_obj.p_upper
+            or x_obj.p_divisor != y_obj.p_divisor
         )
     elif dimen == "believer_partnerunit":
         return (x_obj.partner_cred_points != y_obj.partner_cred_points) or (
@@ -640,8 +640,8 @@ class AtomRow:
     partner_name: PartnerName = None
     addin: float = None
     awardee_title: TitleTerm = None
-    rcontext: RopeTerm = None
-    rplan_active_requisite: bool = None
+    r_context: RopeTerm = None
+    r_plan_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
     close: float = None
@@ -652,10 +652,10 @@ class AtomRow:
     group_debt_points: int = None
     debtor_respect: int = None
     denom: int = None
-    pdivisor: int = None
-    fcontext: RopeTerm = None
-    fnigh: float = None
-    fopen: float = None
+    p_divisor: int = None
+    f_context: RopeTerm = None
+    f_upper: float = None
+    f_lower: float = None
     fund_iota: float = None
     fund_pool: float = None
     give_force: float = None
@@ -665,12 +665,12 @@ class AtomRow:
     mass: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    pstate: RopeTerm = None
-    pnigh: float = None
+    p_state: RopeTerm = None
+    p_upper: float = None
     numor: int = None
-    popen: float = None
+    p_lower: float = None
     penny: float = None
-    fstate: RopeTerm = None
+    f_state: RopeTerm = None
     task: bool = None
     problem_bool: bool = None
     plan_rope: RopeTerm = None

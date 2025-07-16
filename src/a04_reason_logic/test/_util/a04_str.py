@@ -18,45 +18,45 @@ def belief_label_str() -> str:
     return "belief_label"
 
 
-def fcontext_str() -> str:
-    return "fcontext"
+def f_context_str() -> str:
+    return "f_context"
 
 
-def fnigh_str() -> str:
-    return "fnigh"
+def f_lower_str() -> str:
+    return "f_lower"
 
 
-def fopen_str() -> str:
-    return "fopen"
+def f_state_str() -> str:
+    return "f_state"
 
 
-def fstate_str() -> str:
-    return "fstate"
+def f_upper_str() -> str:
+    return "f_upper"
 
 
 def labor_title_str() -> str:
     return "labor_title"
 
 
-def pdivisor_str() -> str:
-    return "pdivisor"
+def p_divisor_str() -> str:
+    return "p_divisor"
 
 
-def pnigh_str() -> str:
-    return "pnigh"
+def p_lower_str() -> str:
+    return "p_lower"
 
 
-def popen_str() -> str:
-    return "popen"
+def p_state_str() -> str:
+    return "p_state"
 
 
-def pstate_str() -> str:
-    return "pstate"
+def p_upper_str() -> str:
+    return "p_upper"
 
 
-def rcontext_str() -> str:
-    return "rcontext"
+def r_context_str() -> str:
+    return "r_context"
 
 
-def rplan_active_requisite_str() -> str:
-    return "rplan_active_requisite"
+def r_plan_active_requisite_str() -> str:
+    return "r_plan_active_requisite"

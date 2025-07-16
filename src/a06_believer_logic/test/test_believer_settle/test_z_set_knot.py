@@ -145,7 +145,7 @@ def test_believer_set_knot_CorrectlyModifiesReasonUnit():
     _8am_str = "8am"
     semicolon_8am_rope = zia_believer.make_rope(semicolon_time_rope, _8am_str)
 
-    semicolon_time_reasonunit = reasonunit_shop(rcontext=semicolon_time_rope)
+    semicolon_time_reasonunit = reasonunit_shop(r_context=semicolon_time_rope)
     semicolon_time_reasonunit.set_premise(semicolon_8am_rope)
 
     semicolon_casa_rope = zia_believer.make_l1_rope(casa_str)
@@ -204,10 +204,10 @@ def test_believer_set_knot_CorrectlyModifiesFactUnit():
     slash_8am_rope = zia_believer.make_rope(slash_time_rope, _8am_str)
     assert casa_plan.factunits.get(slash_time_rope) is not None
     gen_time_factunit = casa_plan.factunits.get(slash_time_rope)
-    assert gen_time_factunit.fcontext is not None
-    assert gen_time_factunit.fcontext == slash_time_rope
-    assert gen_time_factunit.fstate is not None
-    assert gen_time_factunit.fstate == slash_8am_rope
+    assert gen_time_factunit.f_context is not None
+    assert gen_time_factunit.f_context == slash_time_rope
+    assert gen_time_factunit.f_state is not None
+    assert gen_time_factunit.f_state == slash_8am_rope
 
     assert casa_plan.factunits.get(semicolon_time_rope) is None
 

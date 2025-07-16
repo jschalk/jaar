@@ -13,7 +13,7 @@ from src.a06_believer_logic.believer import (
 )
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
-    get_believerunit_rcontext_time_example,
+    get_believerunit_r_context_time_example,
     get_believerunit_x1_3levels_1reason_1facts,
 )
 
@@ -24,9 +24,13 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     day_hr_str = "day_hr"
     day_hr_rope = yao_believer.make_l1_rope(day_hr_str)
     day_hr_plan = yao_believer.get_plan_obj(day_hr_rope)
-    yao_believer.add_fact(fcontext=day_hr_rope, fstate=day_hr_rope, fopen=0, fnigh=23)
+    yao_believer.add_fact(
+        f_context=day_hr_rope, f_state=day_hr_rope, f_lower=0, f_upper=23
+    )
     time_minute = yao_believer.make_l1_rope("day_minute")
-    yao_believer.add_fact(fcontext=time_minute, fstate=time_minute, fopen=0, fnigh=1440)
+    yao_believer.add_fact(
+        f_context=time_minute, f_state=time_minute, f_lower=0, f_upper=1440
+    )
     yao_str = "Yao"
     yao_fund_pool = 23000
     yao_believer.fund_pool = yao_fund_pool
@@ -220,12 +224,16 @@ def test_BelieverUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_believer = believerunit_v001()
     day_hr_str = "day_hr"
     day_hr_rope = yao_believer.make_l1_rope(day_hr_str)
-    yao_believer.add_fact(fcontext=day_hr_rope, fstate=day_hr_rope, fopen=0, fnigh=23)
+    yao_believer.add_fact(
+        f_context=day_hr_rope, f_state=day_hr_rope, f_lower=0, f_upper=23
+    )
     day_min_str = "day_minute"
     day_min_rope = yao_believer.make_l1_rope(day_min_str)
-    yao_believer.add_fact(fcontext=day_min_rope, fstate=day_min_rope, fopen=0, fnigh=59)
+    yao_believer.add_fact(
+        f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=59
+    )
     x_factunit = factunit_shop(day_min_rope, day_min_rope, 5, 59)
-    yao_believer.edit_plan_attr(x_factunit.fcontext, factunit=x_factunit)
+    yao_believer.edit_plan_attr(x_factunit.f_context, factunit=x_factunit)
     yao_believer.set_max_tree_traverse(2)
     yao_str = "Yao"
 
@@ -518,7 +526,7 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     # ESTABLISH
     x1_believer = believerunit_v001()
     x2_believer = get_believerunit_x1_3levels_1reason_1facts()
-    x3_believer = get_believerunit_rcontext_time_example()
+    x3_believer = get_believerunit_r_context_time_example()
     print(f"{x1_believer.believer_name}")
     print(f"{x2_believer.believer_name}")
     print(f"{x3_believer.believer_name}")

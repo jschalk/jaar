@@ -172,16 +172,16 @@ def get_believerunit_irrational_example() -> BelieverUnit:
     hatter_believer.edit_plan_attr(
         egg_rope,
         task=True,
-        reason_rcontext=chicken_rope,
-        reason_rplan_active_requisite=True,
+        reason_r_context=chicken_rope,
+        reason_r_plan_active_requisite=True,
     )
 
     # set chick task is True when egg first is False
     hatter_believer.edit_plan_attr(
         chicken_rope,
         task=True,
-        reason_rcontext=egg_rope,
-        reason_rplan_active_requisite=False,
+        reason_r_context=egg_rope,
+        reason_r_plan_active_requisite=False,
     )
 
     return hatter_believer

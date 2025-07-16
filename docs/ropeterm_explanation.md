@@ -17,7 +17,7 @@ There are infinitly many ways of defining a rope between to things:
 The way those ropes are made creates context that changes what exactly is being talked about. 
 1. My cat, all basic cat food, and her food bowl. 
 2. My cat, all fancy cat food, and her food bowl. 
-In the first case my cat's food has a conext of "basic" food., in the second case the food context is "fancy". But it's not explicit that the food bowl has any food in it or what type it is. 
+In the first situation my cat's food has a conext of "basic" food., in the second situation the food context is "fancy". But it's not explicit that the food bowl has any food in it or what type it is. 
 
 In the example of "My cat, all basic cat food, and her food bowl." it is intuitive that there are three things (My cat) (all basic cat food) (her food bowl) but it's also reasonable to say there are two things: (My cat) (all basic cat food, her bowl). To clearly express what things the rope is connecting to and through we must use seperator characters. I call them "knots". (In computer science they are call delimiters or seperators) Every rope that connects two things can tie itself a knot and that knot defines where one thing ends and another begins. 
 - Example with knot ";" and three things: ;My Cat;all basic cat food;her food bowl;

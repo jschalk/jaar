@@ -121,7 +121,7 @@ def test_WorldUnit_calc_belief_bud_partner_mandate_net_ledgers_Scenaro2_BudExist
     yao44_believerevent.set_believer_name(yao_str)
     yao44_believerevent.add_partnerunit(zia_str, 1)
     clean_fact = example_casa_clean_factunit()
-    yao44_believerevent.add_fact(clean_fact.fcontext, clean_fact.fstate)
+    yao44_believerevent.add_fact(clean_fact.f_context, clean_fact.f_state)
     zia33_believerevent = get_bob_mop_with_reason_believerunit_example()
     zia33_believerevent.set_believer_name(zia_str)
     bob55_path = create_believerevent_path(mstr_dir, a23_str, bob_str, event55)

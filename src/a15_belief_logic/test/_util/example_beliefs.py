@@ -227,7 +227,7 @@ def get_bob_mop_with_reason_believerunit_example() -> BelieverUnit:
     dirty_rope = bob_believer.make_rope(floor_rope, dirty_str)
     mop_rope = bob_believer.make_rope(casa_rope, mop_str)
     bob_believer.edit_plan_attr(
-        mop_rope, reason_rcontext=floor_rope, reason_premise=dirty_rope
+        mop_rope, reason_r_context=floor_rope, reason_premise=dirty_rope
     )
     return bob_believer
 
@@ -265,10 +265,10 @@ def get_yao_run_with_reason_believerunit_example() -> BelieverUnit:
     yao_believer.add_plan(rain_rope)
     yao_believer.add_plan(snow_rope)
     yao_believer.edit_plan_attr(
-        ski_rope, reason_rcontext=weather_rope, reason_premise=snow_rope
+        ski_rope, reason_r_context=weather_rope, reason_premise=snow_rope
     )
     yao_believer.edit_plan_attr(
-        run_rope, reason_rcontext=weather_rope, reason_premise=rain_rope
+        run_rope, reason_r_context=weather_rope, reason_premise=rain_rope
     )
     return yao_believer
 

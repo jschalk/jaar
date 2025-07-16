@@ -635,7 +635,7 @@ def test_ropeterm_valid_dir_path_ReturnsObj_complicated_knot():
     ) or platform_system() == "Linux"
 
 
-def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeCases():
+def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"

@@ -194,8 +194,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_rcontext = 2
-    x_rplan_active_requisite = 3
+    x_r_context = 2
+    x_r_plan_active_requisite = 3
     x__chore = 4
     x__status = 5
     x__rplan_active_value = 6
@@ -203,8 +203,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "rcontext": x_rcontext,
-        "rplan_active_requisite": x_rplan_active_requisite,
+        "r_context": x_r_context,
+        "r_plan_active_requisite": x_r_plan_active_requisite,
         "_chore": x__chore,
         "_status": x__status,
         "_rplan_active_value": x__rplan_active_value,
@@ -257,22 +257,22 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_rcontext = 2
-    x_pstate = 3
-    x_pnigh = 4
-    x_popen = 5
-    x_pdivisor = 6
+    x_r_context = 2
+    x_p_state = 3
+    x_p_upper = 4
+    x_p_lower = 5
+    x_p_divisor = 6
     x__chore = 7
     x__status = 8
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "rcontext": x_rcontext,
-        "pstate": x_pstate,
-        "pnigh": x_pnigh,
-        "popen": x_popen,
-        "pdivisor": x_pdivisor,
+        "r_context": x_r_context,
+        "p_state": x_p_state,
+        "p_upper": x_p_upper,
+        "p_lower": x_p_lower,
+        "p_divisor": x_p_divisor,
         "_chore": x__chore,
         "_status": x__status,
     }
@@ -387,18 +387,18 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_fcontext = 2
-    x_fstate = 3
-    x_fopen = 4
-    x_fnigh = 5
+    x_f_context = 2
+    x_f_state = 3
+    x_f_lower = 4
+    x_f_upper = 5
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "fcontext": x_fcontext,
-        "fstate": x_fstate,
-        "fopen": x_fopen,
-        "fnigh": x_fnigh,
+        "f_context": x_f_context,
+        "f_state": x_f_state,
+        "f_lower": x_f_lower,
+        "f_upper": x_f_upper,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

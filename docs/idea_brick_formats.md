@@ -14,11 +14,11 @@
 - [`br00020`](ideas/br00020.md): event_int, face_name, belief_label, believer_name, partner_name, group_title, group_cred_points, group_debt_points
 - [`br00021`](ideas/br00021.md): event_int, face_name, belief_label, believer_name, partner_name, partner_cred_points, partner_debt_points
 - [`br00022`](ideas/br00022.md): event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force
-- [`br00023`](ideas/br00023.md): event_int, face_name, belief_label, believer_name, plan_rope, fcontext, fstate, fopen, fnigh
+- [`br00023`](ideas/br00023.md): event_int, face_name, belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper
 - [`br00024`](ideas/br00024.md): event_int, face_name, belief_label, believer_name, plan_rope, labor_title
 - [`br00025`](ideas/br00025.md): event_int, face_name, belief_label, believer_name, plan_rope, healer_name
-- [`br00026`](ideas/br00026.md): event_int, face_name, belief_label, believer_name, plan_rope, rcontext, pstate, pnigh, popen, pdivisor
-- [`br00027`](ideas/br00027.md): event_int, face_name, belief_label, believer_name, plan_rope, rcontext, rplan_active_requisite
+- [`br00026`](ideas/br00026.md): event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state, p_upper, p_lower, p_divisor
+- [`br00027`](ideas/br00027.md): event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite
 - [`br00028`](ideas/br00028.md): event_int, face_name, belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
 - [`br00029`](ideas/br00029.md): event_int, face_name, belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 - [`br00036`](ideas/br00036.md): event_int, face_name, belief_label, believer_name, plan_rope, healer_name, problem_bool
@@ -29,11 +29,11 @@
 - [`br00050`](ideas/br00050.md): event_int, face_name, belief_label, believer_name, partner_name, group_title_ERASE
 - [`br00051`](ideas/br00051.md): event_int, face_name, belief_label, believer_name, partner_name_ERASE
 - [`br00052`](ideas/br00052.md): event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE
-- [`br00053`](ideas/br00053.md): event_int, face_name, belief_label, believer_name, plan_rope, fcontext_ERASE
+- [`br00053`](ideas/br00053.md): event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE
 - [`br00054`](ideas/br00054.md): event_int, face_name, belief_label, believer_name, plan_rope, labor_title_ERASE
 - [`br00055`](ideas/br00055.md): event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE
-- [`br00056`](ideas/br00056.md): event_int, face_name, belief_label, believer_name, plan_rope, rcontext, pstate_ERASE
-- [`br00057`](ideas/br00057.md): event_int, face_name, belief_label, believer_name, plan_rope, rcontext_ERASE
+- [`br00056`](ideas/br00056.md): event_int, face_name, belief_label, believer_name, plan_rope, r_context, p_state_ERASE
+- [`br00057`](ideas/br00057.md): event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE
 - [`br00058`](ideas/br00058.md): event_int, face_name, belief_label, believer_name, plan_rope_ERASE
 - [`br00059`](ideas/br00059.md): event_int, face_name, belief_label, believer_name_ERASE
 - [`br00113`](ideas/br00113.md): event_int, face_name, belief_label, believer_name, partner_name, otx_name, inx_name

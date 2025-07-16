@@ -43,7 +43,7 @@ class CellUnit:
     believerevent_facts: dict[RopeTerm, FactUnit] = None
     found_facts: dict[RopeTerm, FactUnit] = None
     boss_facts: dict[RopeTerm, FactUnit] = None
-    _reason_rcontexts: set[RopeTerm] = None
+    _reason_r_contexts: set[RopeTerm] = None
     _partner_mandate_ledger: dict[BelieverName, FundNum] = None
 
     def get_cell_believer_name(self) -> BelieverName:
@@ -53,12 +53,12 @@ class CellUnit:
         if not x_believer:
             self.believeradjust = None
             self.believerevent_facts = {}
-            self._reason_rcontexts = set()
+            self._reason_r_contexts = set()
         else:
             self._load_existing_believerevent(x_believer)
 
     def _load_existing_believerevent(self, x_believer: BelieverUnit):
-        self._reason_rcontexts = x_believer.get_reason_rcontexts()
+        self._reason_r_contexts = x_believer.get_reason_r_contexts()
         self.believerevent_facts = factunits_get_from_dict(get_facts_dict(x_believer))
         y_believer = copy_deepcopy(x_believer)
         clear_factunits_from_believer(y_believer)
@@ -87,23 +87,23 @@ class CellUnit:
     def set_boss_facts_from_other_facts(self):
         self.boss_facts = copy_deepcopy(self.believerevent_facts)
         for x_fact in self.found_facts.values():
-            self.boss_facts[x_fact.fcontext] = copy_deepcopy(x_fact)
+            self.boss_facts[x_fact.f_context] = copy_deepcopy(x_fact)
 
     def add_other_facts_to_boss_facts(self):
         for x_fact in self.found_facts.values():
-            if not self.boss_facts.get(x_fact.fcontext):
-                self.boss_facts[x_fact.fcontext] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.f_context):
+                self.boss_facts[x_fact.f_context] = copy_deepcopy(x_fact)
         for x_fact in self.believerevent_facts.values():
-            if not self.boss_facts.get(x_fact.fcontext):
-                self.boss_facts[x_fact.fcontext] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.f_context):
+                self.boss_facts[x_fact.f_context] = copy_deepcopy(x_fact)
 
-    def filter_facts_by_reason_rcontexts(self):
+    def filter_facts_by_reason_r_contexts(self):
         to_delete_believerevent_fact_keys = set(self.believerevent_facts.keys())
         to_delete_found_fact_keys = set(self.found_facts.keys())
         to_delete_boss_fact_keys = set(self.boss_facts.keys())
-        to_delete_believerevent_fact_keys.difference_update(self._reason_rcontexts)
-        to_delete_found_fact_keys.difference_update(self._reason_rcontexts)
-        to_delete_boss_fact_keys.difference_update(self._reason_rcontexts)
+        to_delete_believerevent_fact_keys.difference_update(self._reason_r_contexts)
+        to_delete_found_fact_keys.difference_update(self._reason_r_contexts)
+        to_delete_boss_fact_keys.difference_update(self._reason_r_contexts)
         for believerevent_fact_key in to_delete_believerevent_fact_keys:
             self.believerevent_facts.pop(believerevent_fact_key)
         for found_fact_key in to_delete_found_fact_keys:
@@ -114,15 +114,15 @@ class CellUnit:
     def set_believeradjust_facts(self):
         for fact in self.believerevent_facts.values():
             self.believeradjust.add_fact(
-                fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
+                fact.f_context, fact.f_state, fact.f_lower, fact.f_upper, True
             )
         for fact in self.found_facts.values():
             self.believeradjust.add_fact(
-                fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
+                fact.f_context, fact.f_state, fact.f_lower, fact.f_upper, True
             )
         for fact in self.boss_facts.values():
             self.believeradjust.add_fact(
-                fact.fcontext, fact.fstate, fact.fopen, fact.fnigh, True
+                fact.f_context, fact.f_state, fact.f_lower, fact.f_upper, True
             )
 
     def _set_partner_mandate_ledger(self):
@@ -132,8 +132,8 @@ class CellUnit:
         )
 
     def calc_partner_mandate_ledger(self):
-        self._reason_rcontexts = self.believeradjust.get_reason_rcontexts()
-        self.filter_facts_by_reason_rcontexts()
+        self._reason_r_contexts = self.believeradjust.get_reason_r_contexts()
+        self.filter_facts_by_reason_r_contexts()
         self.set_believeradjust_facts()
         self._set_partner_mandate_ledger()
 
@@ -177,8 +177,8 @@ def cellunit_shop(
         mandate = CELLNODE_QUOTA_DEFAULT
     if believeradjust is None:
         believeradjust = believerunit_shop(bud_believer_name)
-    reason_rcontexts = (
-        believeradjust.get_reason_rcontexts() if believeradjust else set()
+    reason_r_contexts = (
+        believeradjust.get_reason_r_contexts() if believeradjust else set()
     )
     if believeradjust:
         believeradjust = copy_deepcopy(believeradjust)
@@ -196,7 +196,7 @@ def cellunit_shop(
         believerevent_facts=get_empty_dict_if_None(believerevent_facts),
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
-        _reason_rcontexts=reason_rcontexts,
+        _reason_r_contexts=reason_r_contexts,
         _partner_mandate_ledger={},
     )
 

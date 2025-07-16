@@ -45,7 +45,7 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario01_Multiple_Nodes_NoFa
 def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario02_RootHasOneFact():
     # ESTABLISH
     clean_fact = example_casa_clean_factunit()
-    root_facts = {clean_fact.fcontext: clean_fact}
+    root_facts = {clean_fact.f_context: clean_fact}
     root_addr = ()
     bob_str = "Bob"
     nodes_facts_dict = {root_addr: root_facts}
@@ -63,7 +63,7 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario03_ChildHasOneFact():
     bob_str = "Bob"
     clean_fact = example_casa_clean_factunit()
     root_facts = {}
-    bob_facts = {clean_fact.fcontext: clean_fact}
+    bob_facts = {clean_fact.f_context: clean_fact}
     root_addr = ()
     bob_addr = (bob_str,)
     yao_str = "Yao"
@@ -83,7 +83,7 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario04_ChildHasOneFact():
     bob_str = "Bob"
     clean_fact = example_casa_clean_factunit()
     root_facts = {}
-    bob_facts = {clean_fact.fcontext: clean_fact}
+    bob_facts = {clean_fact.f_context: clean_fact}
     bob_str = "Bob"
     root_addr = ()
     bob_addr = (bob_str,)
@@ -106,7 +106,7 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario05_Level2ChildHasOneFa
     root_addr = ()
     bob_addr = (bob_str,)
     bob_yao_addr = (bob_str, yao_str)
-    bob_yao_facts = {clean_fact.fcontext: clean_fact}
+    bob_yao_facts = {clean_fact.f_context: clean_fact}
     nodes_facts_dict = {root_addr: {}, bob_addr: {}, bob_yao_addr: bob_yao_facts}
     nodes_quota_dict = {
         root_addr: {bob_str: 1},
@@ -138,8 +138,8 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario06_Level2ChildsHaveTwo
     root_addr = ()
     bob_addr = (bob_str,)
     bob_yao_addr = (bob_str, yao_str)
-    bob_facts = {sky_fact.fcontext: sky_fact}
-    bob_yao_facts = {clean_fact.fcontext: clean_fact}
+    bob_facts = {sky_fact.f_context: sky_fact}
+    bob_yao_facts = {clean_fact.f_context: clean_fact}
     nodes_facts_dict = {root_addr: {}, bob_addr: bob_facts, bob_yao_addr: bob_yao_facts}
     nodes_quota_dict = {
         root_addr: {bob_str: 1},
@@ -151,7 +151,10 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario06_Level2ChildsHaveTwo
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
 
     # THEN
-    expected_bob_facts = {sky_fact.fcontext: sky_fact, clean_fact.fcontext: clean_fact}
+    expected_bob_facts = {
+        sky_fact.f_context: sky_fact,
+        clean_fact.f_context: clean_fact,
+    }
     expected_nodes_weighted_facts = {
         root_addr: expected_bob_facts,
         bob_addr: expected_bob_facts,
@@ -172,8 +175,8 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario07_Level2ChildFactOver
     root_addr = ()
     bob_addr = (bob_str,)
     bob_yao_addr = (bob_str, yao_str)
-    dirty_facts = {dirty_fact.fcontext: dirty_fact}
-    bob_yao_facts = {clean_fact.fcontext: clean_fact}
+    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    bob_yao_facts = {clean_fact.f_context: clean_fact}
     nodes_facts_dict = {
         root_addr: {},
         bob_addr: dirty_facts,
@@ -189,7 +192,7 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario07_Level2ChildFactOver
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
 
     # THEN
-    expected_clean_facts = {clean_fact.fcontext: clean_fact}
+    expected_clean_facts = {clean_fact.f_context: clean_fact}
     expected_nodes_weighted_facts = {
         root_addr: expected_clean_facts,
         bob_addr: expected_clean_facts,
@@ -215,8 +218,8 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario08_Level2ChildHasDiffe
     bob_yao_addr = (bob_str, yao_str)
     bob_sue_addr = (bob_str, sue_str)
     bob_facts = {}
-    bob_yao_facts = {clean_fact.fcontext: clean_fact}
-    bob_sue_facts = {dirty_fact.fcontext: dirty_fact}
+    bob_yao_facts = {clean_fact.f_context: clean_fact}
+    bob_sue_facts = {dirty_fact.f_context: dirty_fact}
     nodes_facts_dict = {
         root_addr: {},
         bob_addr: bob_facts,
@@ -235,8 +238,8 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario08_Level2ChildHasDiffe
     nodes_wgt_facts = get_nodes_with_weighted_facts(nodes_facts_dict, nodes_quota_dict)
 
     # THEN
-    dirty_facts = {dirty_fact.fcontext: dirty_fact}
-    expected_clean_facts = {clean_fact.fcontext: clean_fact}
+    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    expected_clean_facts = {clean_fact.f_context: clean_fact}
     expected_nodes_weighted_facts = {
         root_addr: expected_clean_facts,
         bob_addr: expected_clean_facts,
@@ -266,8 +269,8 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario09_Level2ChildThreeChi
     bob_yao_addr = (bob_str, yao_str)
     bob_sue_addr = (bob_str, sue_str)
     bob_zia_addr = (bob_str, zia_str)
-    clean_facts = {clean_fact.fcontext: clean_fact}
-    dirty_facts = {dirty_fact.fcontext: dirty_fact}
+    clean_facts = {clean_fact.f_context: clean_fact}
+    dirty_facts = {dirty_fact.f_context: dirty_fact}
     nodes_facts_dict = {
         root_addr: {},
         bob_addr: {},
@@ -322,8 +325,8 @@ def test_get_nodes_with_weighted_facts_ReturnsObj_Scenario10_Level2ChildTwoChild
     bob_quota_zia = 5
     bob_yao_addr = (bob_str, yao_str)
     bob_sue_addr = (bob_str, sue_str)
-    clean_facts = {clean_fact.fcontext: clean_fact}
-    dirty_facts = {dirty_fact.fcontext: dirty_fact}
+    clean_facts = {clean_fact.f_context: clean_fact}
+    dirty_facts = {dirty_fact.f_context: dirty_fact}
     nodes_facts_dict = {
         root_addr: {},
         bob_addr: dirty_facts,

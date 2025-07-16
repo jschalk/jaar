@@ -142,19 +142,19 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
+        sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
     )
-    missing_fact_fcontexts = list(yao_listener.get_missing_fact_rcontexts().keys())
+    missing_fact_f_contexts = list(yao_listener.get_missing_fact_r_contexts().keys())
 
     yao_speaker = believerunit_shop(yao_str)
     yao_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
-    assert yao_listener.get_missing_fact_rcontexts().keys() == {status_rope}
+    assert yao_listener.get_missing_fact_r_contexts().keys() == {status_rope}
 
     # WHEN
-    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
+    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_f_contexts)
 
     # THEN
-    assert len(yao_listener.get_missing_fact_rcontexts().keys()) == 0
+    assert len(yao_listener.get_missing_fact_r_contexts().keys()) == 0
 
 
 def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
@@ -183,29 +183,29 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
     yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_rcontext=status_rope, reason_premise=dirty_rope
+        sweep_rope, reason_r_context=status_rope, reason_premise=dirty_rope
     )
     yao_listener.edit_plan_attr(
-        sweep_rope, reason_rcontext=fridge_rope, reason_premise=running_rope
+        sweep_rope, reason_r_context=fridge_rope, reason_premise=running_rope
     )
-    assert len(yao_listener.get_missing_fact_rcontexts()) == 2
+    assert len(yao_listener.get_missing_fact_r_contexts()) == 2
     yao_listener.add_fact(status_rope, dirty_rope)
-    assert len(yao_listener.get_missing_fact_rcontexts()) == 1
-    assert yao_listener.get_fact(status_rope).fstate == dirty_rope
+    assert len(yao_listener.get_missing_fact_r_contexts()) == 1
+    assert yao_listener.get_fact(status_rope).f_state == dirty_rope
 
     # WHEN
     yao_speaker = believerunit_shop(yao_str)
     yao_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
     yao_speaker.add_fact(fridge_rope, running_rope, create_missing_plans=True)
-    missing_fact_fcontexts = list(yao_listener.get_missing_fact_rcontexts().keys())
-    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_fcontexts)
+    missing_fact_f_contexts = list(yao_listener.get_missing_fact_r_contexts().keys())
+    listen_to_speaker_fact(yao_listener, yao_speaker, missing_fact_f_contexts)
 
     # THEN
-    assert len(yao_listener.get_missing_fact_rcontexts()) == 0
+    assert len(yao_listener.get_missing_fact_r_contexts()) == 0
     # did not grab speaker's factunit
-    assert yao_listener.get_fact(status_rope).fstate == dirty_rope
+    assert yao_listener.get_fact(status_rope).f_state == dirty_rope
     # grabed speaker's factunit
-    assert yao_listener.get_fact(fridge_rope).fstate == running_rope
+    assert yao_listener.get_fact(fridge_rope).f_state == running_rope
 
 
 def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
@@ -235,7 +235,7 @@ def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
     yao_src.set_plan(planunit_shop(dirty_str), status_rope)
     yao_src.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
     yao_src.edit_reason(sweep_rope, status_rope, dirty_rope)
-    # missing_fact_fcontexts = list(yao_src.get_missing_fact_rcontexts().keys())
+    # missing_fact_f_contexts = list(yao_src.get_missing_fact_r_contexts().keys())
     yao_src.set_plan(planunit_shop(rain_str), weather_rope)
     yao_src.set_plan(planunit_shop(snow_str), weather_rope)
     yao_src.add_fact(weather_rope, rain_rope)
@@ -260,5 +260,5 @@ def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
     assert yao_dst.plan_exists(snow_rope)
     assert yao_dst.get_fact(weather_rope) is not None
     assert yao_dst.get_fact(status_rope) is not None
-    assert yao_dst.get_fact(weather_rope).fstate == rain_rope
-    assert yao_dst.get_fact(status_rope).fstate == clean_rope
+    assert yao_dst.get_fact(weather_rope).f_state == rain_rope
+    assert yao_dst.get_fact(status_rope).f_state == clean_rope

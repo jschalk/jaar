@@ -69,11 +69,11 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyBeliefUnit(
         "br00020": "belief_label,believer_name,partner_name,group_title,group_cred_points,group_debt_points\n",
         "br00021": "belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points\n",
         "br00022": "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force\n",
-        "br00023": "belief_label,believer_name,plan_rope,fcontext,fstate,fopen,fnigh\n",
+        "br00023": "belief_label,believer_name,plan_rope,f_context,f_state,f_lower,f_upper\n",
         "br00024": "belief_label,believer_name,plan_rope,labor_title\n",
         "br00025": "belief_label,believer_name,plan_rope,healer_name\n",
-        "br00026": "belief_label,believer_name,plan_rope,rcontext,pstate,pnigh,popen,pdivisor\n",
-        "br00027": "belief_label,believer_name,plan_rope,rcontext,rplan_active_requisite\n",
+        "br00026": "belief_label,believer_name,plan_rope,r_context,p_state,p_upper,p_lower,p_divisor\n",
+        "br00027": "belief_label,believer_name,plan_rope,r_context,r_plan_active_requisite\n",
         "br00028": "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
         "br00029": "belief_label,believer_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
@@ -361,11 +361,11 @@ def test_add_believer_to_br00023_csv_ReturnsObj():
     bob_believer = believerunit_shop(bob_str, a23_str)
     casa_rope = bob_believer.make_l1_rope("casa")
     clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    clean_fopen = 55
-    clean_fnigh = 77
+    clean_f_lower = 55
+    clean_f_upper = 77
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
-    bob_believer.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh)
+    bob_believer.add_fact(casa_rope, clean_rope, clean_f_lower, clean_f_upper)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
@@ -373,7 +373,7 @@ def test_add_believer_to_br00023_csv_ReturnsObj():
     x_csv = add_believer_to_br00023_csv(csv_header, bob_believer, csv_delimiter)
 
     # THEN
-    clean_row = f",,{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f",,{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_f_lower},{clean_f_upper}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
@@ -435,19 +435,19 @@ def test_add_believer_to_br00026_csv_ReturnsObj():
     mop_rope = bob_believer.make_l1_rope("mop")
     casa_rope = bob_believer.make_l1_rope("casa")
     clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    clean_popen = 22
-    clean_pnigh = 55
-    clean_pdivisor = 77
+    clean_p_lower = 22
+    clean_p_upper = 55
+    clean_p_divisor = 77
     bob_believer.add_plan(mop_rope)
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
     bob_believer.edit_plan_attr(
         mop_rope,
-        reason_rcontext=casa_rope,
+        reason_r_context=casa_rope,
         reason_premise=clean_rope,
-        popen=clean_popen,
-        reason_pnigh=clean_pnigh,
-        pdivisor=clean_pdivisor,
+        p_lower=clean_p_lower,
+        reason_p_upper=clean_p_upper,
+        p_divisor=clean_p_divisor,
     )
     csv_header = x_ideas.get("br00026")
     print(f"{csv_header=}")
@@ -457,7 +457,7 @@ def test_add_believer_to_br00026_csv_ReturnsObj():
     x_csv = add_believer_to_br00026_csv(csv_header, bob_believer, csv_delimiter)
 
     # THEN
-    mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_popen},{clean_pnigh},{clean_pdivisor}\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_p_lower},{clean_p_upper},{clean_p_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -474,8 +474,8 @@ def test_add_believer_to_br00027_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     bob_believer.edit_plan_attr(
         mop_rope,
-        reason_rcontext=casa_rope,
-        reason_rplan_active_requisite=True,
+        reason_r_context=casa_rope,
+        reason_r_plan_active_requisite=True,
     )
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
@@ -586,7 +586,7 @@ def test_add_believerunit_to_stance_csv_strs_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
     bob_believer.edit_plan_attr(
-        mop_rope, reason_rcontext=casa_rope, reason_premise=clean_rope
+        mop_rope, reason_r_context=casa_rope, reason_premise=clean_rope
     )
     bob_believer.add_plan(casa_rope)
     bob_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(yao_str))
@@ -723,11 +723,11 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     bob_believer = believerunit_shop(bob_str, a23_str)
     casa_rope = bob_believer.make_l1_rope("casa")
     clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    clean_fopen = 55
-    clean_fnigh = 77
+    clean_f_lower = 55
+    clean_f_upper = 77
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
-    bob_believer.add_fact(casa_rope, clean_rope, clean_fopen, clean_fnigh)
+    bob_believer.add_fact(casa_rope, clean_rope, clean_f_lower, clean_f_upper)
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
     sue_str = "Sue"
@@ -741,7 +741,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_csv = add_pack_to_br00023_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fopen},{clean_fnigh}\n"
+    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_f_lower},{clean_f_upper}\n"
     expected_csv = f"{csv_header}{clean_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")
@@ -823,19 +823,19 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     mop_rope = bob_believer.make_l1_rope("mop")
     casa_rope = bob_believer.make_l1_rope("casa")
     clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    clean_popen = 22
-    clean_pnigh = 55
-    clean_pdivisor = 77
+    clean_p_lower = 22
+    clean_p_upper = 55
+    clean_p_divisor = 77
     bob_believer.add_plan(mop_rope)
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
     bob_believer.edit_plan_attr(
         mop_rope,
-        reason_rcontext=casa_rope,
+        reason_r_context=casa_rope,
         reason_premise=clean_rope,
-        popen=clean_popen,
-        reason_pnigh=clean_pnigh,
-        pdivisor=clean_pdivisor,
+        p_lower=clean_p_lower,
+        reason_p_upper=clean_p_upper,
+        p_divisor=clean_p_divisor,
     )
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
@@ -850,7 +850,7 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     x_csv = add_pack_to_br00026_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_popen},{clean_pnigh},{clean_pdivisor}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_p_lower},{clean_p_upper},{clean_p_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
@@ -867,8 +867,8 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     bob_believer.edit_plan_attr(
         mop_rope,
-        reason_rcontext=casa_rope,
-        reason_rplan_active_requisite=True,
+        reason_r_context=casa_rope,
+        reason_r_plan_active_requisite=True,
     )
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
@@ -998,7 +998,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
     bob_believer.edit_plan_attr(
-        mop_rope, reason_rcontext=casa_rope, reason_premise=clean_rope
+        mop_rope, reason_r_context=casa_rope, reason_premise=clean_rope
     )
     bob_believer.add_plan(casa_rope)
     bob_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(yao_str))

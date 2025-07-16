@@ -72,7 +72,7 @@ def get_example_zia_speaker() -> BelieverUnit:
     cook_planunit = zia_speaker.get_plan_obj(cook_rope())
     cook_planunit.laborunit.set_laborlink(yao_str)
     zia_speaker.edit_plan_attr(
-        cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
+        cook_rope(), reason_r_context=eat_rope(), reason_premise=hungry_rope()
     )
     zia_speaker.add_fact(eat_rope(), full_rope())
     zia_speaker.set_partner_respect(100)
@@ -91,7 +91,7 @@ def get_example_bob_speaker() -> BelieverUnit:
     cook_planunit = bob_speaker.get_plan_obj(cook_rope())
     cook_planunit.laborunit.set_laborlink(yao_str)
     bob_speaker.edit_plan_attr(
-        cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
+        cook_rope(), reason_r_context=eat_rope(), reason_premise=hungry_rope()
     )
     bob_speaker.add_fact(eat_rope(), hungry_rope())
     bob_speaker.set_partner_respect(100)
@@ -114,7 +114,7 @@ def get_example_yao_speaker() -> BelieverUnit:
     cook_planunit = yao_speaker.get_plan_obj(cook_rope())
     cook_planunit.laborunit.set_laborlink(yao_str)
     yao_speaker.edit_plan_attr(
-        cook_rope(), reason_rcontext=eat_rope(), reason_premise=hungry_rope()
+        cook_rope(), reason_r_context=eat_rope(), reason_premise=hungry_rope()
     )
     yao_speaker.add_fact(eat_rope(), hungry_rope())
     return yao_speaker

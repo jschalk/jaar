@@ -15,19 +15,19 @@
         "believer_name": {
             "otx_key": true
         },
-        "pdivisor": {
+        "p_divisor": {
             "otx_key": false
         },
-        "pnigh": {
+        "p_upper": {
             "otx_key": false
         },
-        "popen": {
+        "p_lower": {
             "otx_key": false
         },
-        "pstate": {
+        "p_state": {
             "otx_key": true
         },
-        "rcontext": {
+        "r_context": {
             "otx_key": true
         }
     },
