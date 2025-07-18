@@ -75,7 +75,7 @@ def test_Modules_DoNotHaveEmptyDirectories():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
-    exclude_dir = "src/a20_world_logic/test/test_z_examples/worlds"
+    exclude_dir = "src/a20_world_logic/test/test_world_examples/worlds"
 
     # WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
