@@ -255,7 +255,7 @@ def is_path_existent_or_creatable(path: str) -> bool:
             os_path_exists(path) or can_usser_edit_paths(path)
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
-    # timeouts, permissions issues) implying this path to be inaccessible. All
+    # timouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
@@ -297,7 +297,7 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
             os_path_exists(path) or is_path_probably_creatable(path)
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
-    # timeouts, permissions issues) implying this path to be inaccessible. All
+    # timouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
