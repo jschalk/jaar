@@ -618,16 +618,10 @@ def test__create_allot_dict_SummationFailsInConsistentOrder():
         "Water Living": 1,
         "WaterExistence": 1,
         "casa": 1,
-        "ced_day": 40,
-        "ced_w_eek": 40,
-        "ced_y_ear": 40,
-        "day_h_our": 40,
-        "day_m_inute": 40,
-        "m_onth_d_ay": 40,
-        "m_onth_w_eek": 40,
-        "w_eekd_ays": 40,
-        "y_ear_mo_nth": 40,
-        "y_ear_we_ek": 40,
+        "color_red": 40,
+        "color_lightness": 40,
+        "color_blue": 40,
+        "color_yellow": 40,
     }
     scale_number = 1000000000.0
     grain_unit = 1
@@ -653,16 +647,10 @@ def test__create_allot_dict_SummationFailsInConsistentOrder():
     #     "Water Living": 2192982,
     #     "WaterExistence": 2192982,
     #     "casa": 2192982,
-    #     "ced_day": 87719298,
-    #     "ced_w_eek": 87719298,
-    #     "ced_y_ear": 87719298,
-    #     "day_h_our": 87719298,
-    #     "day_m_inute": 87719298,
-    #     "m_onth_d_ay": 87719298,
-    #     "m_onth_w_eek": 87719298,
-    #     "w_eekd_ays": 87719298,
-    #     "y_ear_mo_nth": 87719298,
-    #     "y_ear_we_ek": 87719298,
+    #     "color_red": 87719298,
+    #     "color_lightness": 87719298,
+    #     "color_blue": 87719298,
+    #     "color_yellow": 87719298,
     # }
     # assert gen_alloted_dict == wrongsum_allot_dict
     assert sum(gen_alloted_dict.values()) != scale_number
@@ -688,16 +676,10 @@ def test_allot_scale_Summation():
         "Water Living": 1,
         "WaterExistence": 1,
         "casa": 1,
-        "ced_day": 40,
-        "ced_w_eek": 40,
-        "ced_y_ear": 40,
-        "day_h_our": 40,
-        "day_m_inute": 40,
-        "m_onth_d_ay": 40,
-        "m_onth_w_eek": 40,
-        "w_eekd_ays": 40,
-        "y_ear_mo_nth": 40,
-        "y_ear_we_ek": 40,
+        "color_red": 40,
+        "color_lightness": 40,
+        "color_blue": 40,
+        "color_yellow": 40,
     }
     scale_number = 1000000000.0
     grain_unit = 1
@@ -727,16 +709,10 @@ def test_allot_scale_Summation():
     #     "Water Living": 2192982,
     #     "WaterExistence": 2192982,
     #     "casa": 2192982,
-    #     "ced_day": 87719298,
-    #     "ced_w_eek": 87719298,
-    #     "ced_y_ear": 87719298,
-    #     "day_h_our": 87719298,
-    #     "day_m_inute": 87719298,
-    #     "m_onth_d_ay": 87719298,
-    #     "m_onth_w_eek": 87719298,
-    #     "w_eekd_ays": 87719298,
-    #     "y_ear_mo_nth": 87719298,
-    #     "y_ear_we_ek": 87719298,
+    #     "color_red": 87719298,
+    #     "color_lightness": 87719298,
+    #     "color_blue": 87719298,
+    #     "color_yellow": 87719298,
     # }
     # assert sub_function_alloted_dict != correct_sum_allot_dict
     # assert top_function_alloted_dict == correct_sum_allot_dict

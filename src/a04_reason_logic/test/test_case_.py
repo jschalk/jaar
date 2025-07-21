@@ -282,57 +282,53 @@ def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregat
 
 def test_CaseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
 
     # WHEN / THEN
-    wkday_case = caseunit_shop(r_state=wkday_rope)
-    assert wkday_case._is_range_or_segregate() is False
+    wk_case = caseunit_shop(r_state=wk_rope)
+    assert wk_case._is_range_or_segregate() is False
 
-    wkday_case = caseunit_shop(r_state=wkday_rope, r_lower=5, r_upper=13)
-    assert wkday_case._is_range_or_segregate()
+    wk_case = caseunit_shop(r_state=wk_rope, r_lower=5, r_upper=13)
+    assert wk_case._is_range_or_segregate()
 
-    wkday_case = caseunit_shop(r_state=wkday_rope, r_divisor=17, r_lower=7, r_upper=7)
-    assert wkday_case._is_range_or_segregate()
+    wk_case = caseunit_shop(r_state=wk_rope, r_divisor=17, r_lower=7, r_upper=7)
+    assert wk_case._is_range_or_segregate()
 
 
 def test_CaseUnitUnit_get_case_status_Returns_active_Boolean():
     # WHEN assumes fact is in lineage
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wkday_case = caseunit_shop(r_state=wkday_rope)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wk_case = caseunit_shop(r_state=wk_rope)
 
     # WHEN / THEN
-    wkday_fact = factheir_shop(f_context=wkday_rope, f_state=wkday_rope)
-    assert wkday_case._get_active(factheir=wkday_fact)
+    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope)
+    assert wk_case._get_active(factheir=wk_fact)
     # if fact has range but case does not reqquire range, fact's range does not matter
-    wkday_fact = factheir_shop(
-        f_context=wkday_rope, f_state=wkday_rope, f_lower=0, f_upper=2
-    )
-    assert wkday_case._get_active(factheir=wkday_fact)
+    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope, f_lower=0, f_upper=2)
+    assert wk_case._get_active(factheir=wk_fact)
 
 
 def test_CaseUnitUnit_get_active_Returns_is_range_active_Boolean():
     # ESTABLISH assumes fact is in lineage
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wkday_case = caseunit_shop(r_state=wkday_rope, r_lower=3, r_upper=7)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wk_case = caseunit_shop(r_state=wk_rope, r_lower=3, r_upper=7)
 
     # WHEN / THEN
-    wkday_fact = factheir_shop(f_context=wkday_rope, f_state=wkday_rope)
-    assert wkday_case._get_active(factheir=wkday_fact) is False
-    wkday_fact = factheir_shop(
-        f_context=wkday_rope, f_state=wkday_rope, f_lower=0, f_upper=2
-    )
-    assert wkday_case._get_active(factheir=wkday_fact) is False
+    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope)
+    assert wk_case._get_active(factheir=wk_fact) is False
+    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope, f_lower=0, f_upper=2)
+    assert wk_case._get_active(factheir=wk_fact) is False
 
 
 def test_CaseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
     after_str = "afternoon"
-    after_rope = create_rope(wkday_rope, after_str)
+    after_rope = create_rope(wk_rope, after_str)
     case_2 = caseunit_shop(r_state=after_rope)
     believer_fact_2 = None
     assert case_2._status is None
@@ -346,12 +342,12 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
 
 def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wed_str = "wednesday"
-    wed_rope = create_rope(wkday_rope, wed_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(r_state=wed_rope)
-    believer_fact = factheir_shop(f_context=wkday_rope, f_state=wed_rope)
+    believer_fact = factheir_shop(f_context=wk_rope, f_state=wed_rope)
     assert wed_case._status is None
 
     # WHEN
@@ -363,17 +359,17 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario2():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wed_str = "wednesday"
-    wed_rope = create_rope(wkday_rope, wed_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
     wed_after_str = "afternoon"
     wed_after_rope = create_rope(wed_rope, wed_after_str)
     wed_after_case = caseunit_shop(r_state=wed_after_rope)
     assert wed_after_case._status is None
 
     # WHEN
-    wed_fact = factheir_shop(f_context=wkday_rope, f_state=wed_rope)
+    wed_fact = factheir_shop(f_context=wk_rope, f_state=wed_rope)
     wed_after_case.set_status(x_factheir=wed_fact)
 
     # THEN
@@ -382,17 +378,17 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario2():
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario3():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wed_str = "wednesday"
-    wed_rope = create_rope(wkday_rope, wed_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
     wed_noon_str = "noon"
     wed_noon_rope = create_rope(wed_rope, wed_noon_str)
     wed_case = caseunit_shop(r_state=wed_rope)
     assert wed_case._status is None
 
     # WHEN
-    noon_fact = factheir_shop(f_context=wkday_rope, f_state=wed_noon_rope)
+    noon_fact = factheir_shop(f_context=wk_rope, f_state=wed_noon_rope)
     wed_case.set_status(x_factheir=noon_fact)
 
     # THEN
@@ -401,14 +397,14 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario3():
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario4():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wed_str = "wednesday"
-    wed_rope = create_rope(wkday_rope, wed_str)
-    thu_str = "thursday"
-    thu_rope = create_rope(wkday_rope, thu_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
+    thu_str = "thur"
+    thu_rope = create_rope(wk_rope, thu_str)
     wed_case = caseunit_shop(r_state=wed_rope)
-    thu_fact = factheir_shop(f_context=wkday_rope, f_state=thu_rope)
+    thu_fact = factheir_shop(f_context=wk_rope, f_state=thu_rope)
     assert wed_case._status is None
     assert wed_case.is_in_lineage(fact_f_state=thu_fact.f_state) is False
     assert thu_fact.f_lower is None
@@ -423,10 +419,10 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario4():
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wed_str = "wednesday"
-    wed_rope = create_rope(wkday_rope, wed_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wed_str = "wed"
+    wed_rope = create_rope(wk_rope, wed_str)
     wed_cloudy_str = "cloudy"
     wed_cloudy_rope = create_rope(wed_rope, wed_cloudy_str)
     wed_rain_str = "rainy"
@@ -435,7 +431,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
     assert wed_sun_case._status is None
 
     # WHEN
-    wed_rain_fact = factheir_shop(f_context=wkday_rope, f_state=wed_rain_rope)
+    wed_rain_fact = factheir_shop(f_context=wk_rope, f_state=wed_rain_rope)
     wed_sun_case.set_status(x_factheir=wed_rain_fact)
 
     # THEN
@@ -545,9 +541,9 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_02():
 
 def test_CaseUnit_get_chore_status_ReturnsObjNotNull():
     # ESTABLISH
-    wk_str = "wkdays"
+    wk_str = "wks"
     wk_rope = create_rope(root_label(), wk_str)
-    wed_str = "Wednesday"
+    wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(r_state=wed_rope)
     wed_case._status = True
@@ -727,31 +723,31 @@ def test_CaseUnit_get_obj_key():
 def test_CaseUnit_find_replace_rope_casas():
     # ESTABLISH
     old_root_rope = create_rope("old_rope")
-    wkday_str = "wkday"
-    wkday_rope = create_rope(old_root_rope, wkday_str)
-    sunday_str = "Sunday"
-    old_sunday_rope = create_rope(wkday_rope, sunday_str)
-    sunday_case = caseunit_shop(r_state=old_sunday_rope)
-    print(sunday_case)
-    assert sunday_case.r_state == old_sunday_rope
+    wk_str = "wk"
+    wk_rope = create_rope(old_root_rope, wk_str)
+    sun_str = "Sun"
+    old_sun_rope = create_rope(wk_rope, sun_str)
+    sun_case = caseunit_shop(r_state=old_sun_rope)
+    print(sun_case)
+    assert sun_case.r_state == old_sun_rope
 
     # WHEN
     new_rope = create_rope("fun")
-    sunday_case.find_replace_rope(old_rope=old_root_rope, new_rope=new_rope)
+    sun_case.find_replace_rope(old_rope=old_root_rope, new_rope=new_rope)
 
     # THEN
-    new_wkday_rope = create_rope(new_rope, wkday_str)
-    new_sunday_rope = create_rope(new_wkday_rope, sunday_str)
-    assert sunday_case.r_state == new_sunday_rope
+    new_wk_rope = create_rope(new_rope, wk_str)
+    new_sun_rope = create_rope(new_wk_rope, sun_str)
+    assert sun_case.r_state == new_sun_rope
 
 
 def test_CaseUnits_get_from_dict_ReturnsCompleteObj():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
+    wk_str = "wks"
+    wk_rope = create_rope(root_label(), wk_str)
     static_dict = {
-        wkday_rope: {
-            "r_state": wkday_rope,
+        wk_rope: {
+            "r_state": wk_rope,
             "r_lower": 1,
             "r_upper": 30,
             "r_divisor": 5,
@@ -763,29 +759,29 @@ def test_CaseUnits_get_from_dict_ReturnsCompleteObj():
 
     # THEN
     assert len(cases_dict) == 1
-    wkday_case = cases_dict.get(wkday_rope)
-    assert wkday_case == caseunit_shop(wkday_rope, 1, 30, r_divisor=5)
+    wk_case = cases_dict.get(wk_rope)
+    assert wk_case == caseunit_shop(wk_rope, 1, 30, r_divisor=5)
 
 
 def test_CaseUnits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    static_dict = {wkday_rope: {"r_state": wkday_rope}}
+    wk_str = "wks"
+    wk_rope = create_rope(root_label(), wk_str)
+    static_dict = {wk_rope: {"r_state": wk_rope}}
 
     # WHEN
     cases_dict = cases_get_from_dict(static_dict)
 
     # THEN
     assert len(cases_dict) == 1
-    wkday_case = cases_dict.get(wkday_rope)
-    assert wkday_case == caseunit_shop(wkday_rope)
+    wk_case = cases_dict.get(wk_rope)
+    assert wk_case == caseunit_shop(wk_rope)
 
 
 def test_CaseUnitsUnit_set_knot_SetsAttrsCorrectly():
     # ESTABLISH
-    wk_str = "wkday"
-    sun_str = "Sunday"
+    wk_str = "wk"
+    sun_str = "Sun"
     slash_str = "/"
     slash_wk_rope = create_rope(root_label(), wk_str, knot=slash_str)
     slash_sun_rope = create_rope(slash_wk_rope, sun_str, knot=slash_str)
