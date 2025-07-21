@@ -73,8 +73,6 @@ def test_get_believer_partners_plotly_fig_DisplaysCorrectInfo(graphics_bool):
 def test_get_believer_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     # ESTABLISH
     yao_believer = believerunit_v001_with_large_agenda()
-    wk_str = "wkdays"
-    wk_rope = yao_believer.make_l1_rope(wk_str)
     assert len(yao_believer.get_agenda_dict()) == 63
 
     # WHEN

@@ -19,7 +19,7 @@ def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenar
     x_believerunit = get_believerunit_with7amCleanTableReason()
     casa_rope = x_believerunit.make_l1_rope("casa")
     catt_rope = x_believerunit.make_l1_rope("cat have dinner")
-    wk_rope = x_believerunit.make_l1_rope("wkdays")
+    wk_rope = x_believerunit.make_l1_rope("sem_jours")
     x_believerunit.planroot._fund_onset = 13
     x_believerunit.planroot._fund_cease = 13
     x_believerunit.get_plan_obj(casa_rope)._fund_onset = 13
@@ -369,7 +369,7 @@ def test_BelieverUnit_settle_believer_TreeTraverseSetsAwardLine_fundFromRootCorr
     # plan tree has no awardlinks
     assert sue_believer.planroot._awardlines == {}
     sue_str = "Sue"
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     nation_str = "nation"
     sue_awardlink = awardlink_shop(awardee_title=sue_str)
     sue_believer.add_partnerunit(partner_name=sue_str)

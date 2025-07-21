@@ -42,9 +42,9 @@ def test_BelieverUnit_get_relevant_ropes_SimpleReturnsOnlyAncestors():
     root_rope = to_rope(sue_believer.belief_label)
 
     # WHEN
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    sun_str = "Sunday"
+    sun_str = "Sun"
     sun_rope = sue_believer.make_rope(wk_rope, sun_str)
     sun_dict = {sun_rope}
     relevant_ropes = sue_believer._get_relevant_ropes(sun_dict)
@@ -189,7 +189,7 @@ def test_BelieverUnit_get_inheritor_plan_list_ReturnsObj_Scenario0():
     wk_str = "wk"
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     yao_believerunit.set_plan(planunit_shop(wk_str, begin=0, close=10800), tech_rope)
-    mon_str = "Monday"
+    mon_str = "Mon"
     mon_rope = yao_believerunit.make_rope(wk_rope, mon_str)
     yao_believerunit.set_plan(planunit_shop(mon_str), wk_rope)
     yao_believerunit.settle_believer()

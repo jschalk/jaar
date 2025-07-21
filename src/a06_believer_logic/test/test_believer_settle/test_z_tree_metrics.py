@@ -84,8 +84,8 @@ def test_BelieverUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_believer = believerunit_shop(nia_str, tally=10)
-    wkdays = "wkdays"
-    nia_believer.set_l1_plan(planunit_shop(wkdays, mass=40))
+    wk = "wk"
+    nia_believer.set_l1_plan(planunit_shop(wk, mass=40))
     tree_metrics_before = nia_believer.get_tree_metrics()
 
     # WHEN / THEN
@@ -136,8 +136,8 @@ def test_BelieverUnit_get_missing_fact_r_contexts_ReturnsAllr_contextsNotCovered
     assert len(missing_r_contexts) == 11
 
     yao_believerunit.add_fact(
-        yao_believerunit.make_l1_rope("day_minute"),
-        f_state=yao_believerunit.make_l1_rope("day_minute"),
+        yao_believerunit.make_l1_rope("jour_minute"),
+        f_state=yao_believerunit.make_l1_rope("jour_minute"),
         f_lower=0,
         f_upper=1439,
     )

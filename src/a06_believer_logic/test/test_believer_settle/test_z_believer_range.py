@@ -11,13 +11,13 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsAllChildren():
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
     yao_believerunit.set_plan(wk_plan, tech_rope)
-    mon_str = "Monday"
-    tue_str = "Tuesday"
-    wed_str = "Wednesday"
-    thu_str = "Thursday"
-    fri_str = "Friday"
-    sat_str = "Saturday"
-    sun_str = "Sunday"
+    mon_str = "Mon"
+    tue_str = "Tue"
+    wed_str = "Wed"
+    thu_str = "Thur"
+    fri_str = "Fri"
+    sat_str = "Sat"
+    sun_str = "Sun"
     mon_plan = planunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
     tue_plan = planunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
     wed_plan = planunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
@@ -50,13 +50,13 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
     yao_believerunit.set_plan(wk_plan, tech_rope)
-    mon_str = "Monday"
-    tue_str = "Tuesday"
-    wed_str = "Wednesday"
-    thu_str = "Thursday"
-    fri_str = "Friday"
-    sat_str = "Saturday"
-    sun_str = "Sunday"
+    mon_str = "Mon"
+    tue_str = "Tue"
+    wed_str = "Wed"
+    thu_str = "Thur"
+    fri_str = "Fri"
+    sat_str = "Sat"
+    sun_str = "Sun"
     mon_plan = planunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
     tue_plan = planunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
     wed_plan = planunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
@@ -97,13 +97,13 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
     yao_believerunit.set_plan(wk_plan, tech_rope)
-    mon_str = "Monday"
-    tue_str = "Tuesday"
-    wed_str = "Wednesday"
-    thu_str = "Thursday"
-    fri_str = "Friday"
-    sat_str = "Saturday"
-    sun_str = "Sunday"
+    mon_str = "Mon"
+    tue_str = "Tue"
+    wed_str = "Wed"
+    thu_str = "Thur"
+    fri_str = "Fri"
+    sat_str = "Sat"
+    sun_str = "Sun"
     mon_plan = planunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
     tue_plan = planunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
     wed_plan = planunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
@@ -135,13 +135,13 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
     yao_believerunit.set_plan(wk_plan, tech_rope)
-    mon_str = "Monday"
-    tue_str = "Tuesday"
-    wed_str = "Wednesday"
-    thu_str = "Thursday"
-    fri_str = "Friday"
-    sat_str = "Saturday"
-    sun_str = "Sunday"
+    mon_str = "Mon"
+    tue_str = "Tue"
+    wed_str = "Wed"
+    thu_str = "Thur"
+    fri_str = "Fri"
+    sat_str = "Sat"
+    sun_str = "Sun"
     mon_plan = planunit_shop(mon_str, gogo_want=1440 * 0, stop_want=1440 * 1)
     tue_plan = planunit_shop(tue_str, gogo_want=1440 * 1, stop_want=1440 * 2)
     wed_plan = planunit_shop(wed_str, gogo_want=1440 * 2, stop_want=1440 * 3)
@@ -163,9 +163,9 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     assert len(yao_believerunit.get_plan_ranged_kids(wk_rope, 1440)) == 1
 
     # ESTABLISH
-    wkday_str = "wkday"
-    wkdays_plan = planunit_shop(wkday_str, gogo_want=0, stop_want=1440 * 5)
-    yao_believerunit.set_plan(wkdays_plan, wk_rope)
+    wk_str = "wk"
+    wks_plan = planunit_shop(wk_str, gogo_want=0, stop_want=1440 * 5)
+    yao_believerunit.set_plan(wks_plan, wk_rope)
 
     # WHEN
     yao_believerunit.settle_believer()

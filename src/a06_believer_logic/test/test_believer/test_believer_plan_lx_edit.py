@@ -192,41 +192,43 @@ def test_believer_edit_plan_label_Modifies_factunits():
 def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels_and_2reasons_2facts()
-    old_wkday_str = "wkdays"
-    old_wkday_rope = sue_believer.make_l1_rope(old_wkday_str)
-    wednesday_str = "Wednesday"
-    old_wednesday_rope = sue_believer.make_rope(old_wkday_rope, wednesday_str)
+    old_sem_jour_str = "sem_jours"
+    old_sem_jour_rope = sue_believer.make_l1_rope(old_sem_jour_str)
+    wed_str = "Wed"
+    old_wed_rope = sue_believer.make_rope(old_sem_jour_rope, wed_str)
     casa_plan = sue_believer.get_plan_obj(sue_believer.make_l1_rope("casa"))
-    # casa_wk_reason = reasonunit_shop(wkday, cases={wed_case.r_state: wed_case})
+    # casa_wk_reason = reasonunit_shop(sem_jour, cases={wed_case.r_state: wed_case})
     # nation_reason = reasonunit_shop(nation, cases={usa_case.r_state: usa_case})
     assert len(casa_plan.reasonunits) == 2
-    assert casa_plan.reasonunits.get(old_wkday_rope) is not None
-    wednesday_plan = sue_believer.get_plan_obj(old_wkday_rope)
-    casa_wkday_reason = casa_plan.reasonunits.get(old_wkday_rope)
-    assert casa_wkday_reason.cases.get(old_wednesday_rope) is not None
-    assert casa_wkday_reason.cases.get(old_wednesday_rope).r_state == old_wednesday_rope
-    new_wkday_str = "days of wk"
-    new_wkday_rope = sue_believer.make_l1_rope(new_wkday_str)
-    new_wednesday_rope = sue_believer.make_rope(new_wkday_rope, wednesday_str)
-    assert casa_plan.reasonunits.get(new_wkday_str) is None
+    assert casa_plan.reasonunits.get(old_sem_jour_rope) is not None
+    wed_plan = sue_believer.get_plan_obj(old_sem_jour_rope)
+    casa_sem_jour_reason = casa_plan.reasonunits.get(old_sem_jour_rope)
+    assert casa_sem_jour_reason.cases.get(old_wed_rope) is not None
+    assert casa_sem_jour_reason.cases.get(old_wed_rope).r_state == old_wed_rope
+    new_sem_jour_str = "days of wk"
+    new_sem_jour_rope = sue_believer.make_l1_rope(new_sem_jour_str)
+    new_wed_rope = sue_believer.make_rope(new_sem_jour_rope, wed_str)
+    assert casa_plan.reasonunits.get(new_sem_jour_str) is None
 
     # WHEN
     # for key_x, x_reason in casa_plan.reasonunits.items():
     #     print(f"Before {key_x=} {x_reason.r_context=}")
-    print(f"before {wednesday_plan.plan_label=}")
-    print(f"before {wednesday_plan.parent_rope=}")
-    sue_believer.edit_plan_label(old_rope=old_wkday_rope, new_plan_label=new_wkday_str)
+    print(f"before {wed_plan.plan_label=}")
+    print(f"before {wed_plan.parent_rope=}")
+    sue_believer.edit_plan_label(
+        old_rope=old_sem_jour_rope, new_plan_label=new_sem_jour_str
+    )
     # for key_x, x_reason in casa_plan.reasonunits.items():
     #     print(f"after {key_x=} {x_reason.r_context=}")
-    print(f"after  {wednesday_plan.plan_label=}")
-    print(f"after  {wednesday_plan.parent_rope=}")
+    print(f"after  {wed_plan.plan_label=}")
+    print(f"after  {wed_plan.parent_rope=}")
 
     # THEN
-    assert casa_plan.reasonunits.get(new_wkday_rope) is not None
-    assert casa_plan.reasonunits.get(old_wkday_rope) is None
-    casa_wkday_reason = casa_plan.reasonunits.get(new_wkday_rope)
-    assert casa_wkday_reason.cases.get(new_wednesday_rope) is not None
-    assert casa_wkday_reason.cases.get(new_wednesday_rope).r_state == new_wednesday_rope
+    assert casa_plan.reasonunits.get(new_sem_jour_rope) is not None
+    assert casa_plan.reasonunits.get(old_sem_jour_rope) is None
+    casa_sem_jour_reason = casa_plan.reasonunits.get(new_sem_jour_rope)
+    assert casa_sem_jour_reason.cases.get(new_wed_rope) is not None
+    assert casa_sem_jour_reason.cases.get(new_wed_rope).r_state == new_wed_rope
     assert len(casa_plan.reasonunits) == 2
 
 
@@ -252,16 +254,16 @@ def test_believer_set_believer_name_CorrectlyModifiesBoth():
 def test_believer_edit_plan_label_RaisesErrorIfknotIsInLabel():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels_and_2reasons_2facts()
-    old_wkday_str = "wkdays"
-    old_wkday_rope = sue_believer.make_l1_rope(old_wkday_str)
+    old_sem_jour_str = "sem_jours"
+    old_sem_jour_rope = sue_believer.make_l1_rope(old_sem_jour_str)
 
     # WHEN / THEN
-    new_wkday_str = "days; of wk"
+    new_sem_jour_str = "days; of wk"
     with pytest_raises(Exception) as excinfo:
         sue_believer.edit_plan_label(
-            old_rope=old_wkday_rope, new_plan_label=new_wkday_str
+            old_rope=old_sem_jour_rope, new_plan_label=new_sem_jour_str
         )
     assert (
         str(excinfo.value)
-        == f"Cannot modify '{old_wkday_rope}' because new_plan_label {new_wkday_str} contains knot {sue_believer.knot}"
+        == f"Cannot modify '{old_sem_jour_rope}' because new_plan_label {new_sem_jour_str} contains knot {sue_believer.knot}"
     )

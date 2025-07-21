@@ -38,9 +38,9 @@ def test_BelieverUnit_get_agenda_dict_ReturnsObj_WithTwoPlans():
 def test_BelieverUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectPlans():
     # ESTABLISH
     x_believer = get_believerunit_with_4_levels_and_2reasons()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = x_believer.make_l1_rope(wk_str)
-    sun_str = "Sunday"
+    sun_str = "Sun"
     sun_rope = x_believer.make_rope(wk_rope, sun_str)
     x_believer.add_fact(f_context=wk_rope, f_state=sun_rope)
 
@@ -126,7 +126,7 @@ def test_BelieverUnit_get_agenda_dict_With7amPlanExample():
 def test_believerunit_v001_AgendaExists():
     # ESTABLISH
     yao_believer = believerunit_v001()
-    min_str = "day_minute"
+    min_str = "jour_minute"
     min_rope = yao_believer.make_l1_rope(min_str)
     yao_believer.add_fact(f_context=min_rope, f_state=min_rope, f_lower=0, f_upper=1399)
     assert yao_believer
@@ -151,7 +151,7 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
     # ESTABLISH
     yao_believer = believerunit_v001()
 
-    day_min_str = "day_minute"
+    day_min_str = "jour_minute"
     day_min_rope = yao_believer.make_l1_rope(day_min_str)
     yao_believer.add_fact(
         f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=1399
@@ -198,16 +198,16 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
     plan_task_list = yao_believer.get_agenda_dict()
     assert len(plan_task_list) == 27
 
-    wkday_str = "wkdays"
-    wkday_rope = yao_believer.make_l1_rope(wkday_str)
-    monday_str = "Monday"
-    monday_rope = yao_believer.make_rope(wkday_rope, monday_str)
+    sem_jour_str = "sem_jours"
+    sem_jour_rope = yao_believer.make_l1_rope(sem_jour_str)
+    mon_str = "Mon"
+    mon_rope = yao_believer.make_rope(sem_jour_rope, mon_str)
 
-    yao_believer.add_fact(f_context=wkday_rope, f_state=monday_rope)
+    yao_believer.add_fact(f_context=sem_jour_rope, f_state=mon_rope)
     plan_task_list = yao_believer.get_agenda_dict()
     assert len(plan_task_list) == 39
 
-    yao_believer.add_fact(f_context=wkday_rope, f_state=wkday_rope)
+    yao_believer.add_fact(f_context=sem_jour_rope, f_state=sem_jour_rope)
     plan_task_list = yao_believer.get_agenda_dict()
     assert len(plan_task_list) == 53
 
@@ -231,7 +231,7 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
 def test_BelieverUnit_get_agenda_dict_BelieverUnitCanCleanOn_r_context_believerunit_v001_with_large_agenda():
     # ESTABLISH
     yao_believer = believerunit_v001_with_large_agenda()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = yao_believer.make_l1_rope(wk_str)
     print(f"{type(yao_believer)=}")
     # for r_context in yao_believer.get_missing_fact_r_contexts():
@@ -242,8 +242,8 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitCanCleanOn_r_context_believeru
     #         f"{agenda_plan.parent_rope=} {agenda_plan.plan_label} {len(agenda_plan.reasonunits)=}"
     #     )
     #     for reason in agenda_plan.reasonunits.values():
-    #         if reason.r_context == wkdays:
-    #             print(f"         {wkdays}")
+    #         if reason.r_context == sem_jours:
+    #             print(f"         {sem_jours}")
 
     # this list went from 68 to 63 when the method of identifying activees was improved.
     assert len(yao_believer.get_agenda_dict()) == 63
@@ -382,7 +382,7 @@ def test_believerunit_get_from_json_CorrectlyLoadsTaskFromJSON():
     # assert task_true_count > 0
 
     # WHEN
-    day_min_str = "day_minute"
+    day_min_str = "jour_minute"
     day_min_rope = yao_believer.make_l1_rope(day_min_str)
     yao_believer.add_fact(
         f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=1399

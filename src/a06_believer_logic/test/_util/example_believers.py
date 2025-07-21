@@ -25,7 +25,7 @@ def believerunit_v001() -> BelieverUnit:
 
 def believerunit_v001_with_large_agenda() -> BelieverUnit:
     yao_believer = believerunit_v001()
-    day_minute_rope = yao_believer.make_l1_rope("day_minute")
+    jour_minute_rope = yao_believer.make_l1_rope("jour_minute")
     month_wk_rope = yao_believer.make_l1_rope("month_wk")
     nations_rope = yao_believer.make_l1_rope("Nation-States")
     mood_rope = yao_believer.make_l1_rope("Moods")
@@ -33,11 +33,11 @@ def believerunit_v001_with_large_agenda() -> BelieverUnit:
     yr_month_rope = yao_believer.make_l1_rope("yr_month")
     season_rope = yao_believer.make_l1_rope("Seasons")
     ced_wk_rope = yao_believer.make_l1_rope("ced_wk")
-    wkdays_rope = yao_believer.make_l1_rope("wkdays")
+    sem_jours_rope = yao_believer.make_l1_rope("sem_jours")
 
     yao_believer.add_fact(aaron_rope, aaron_rope)
     yao_believer.add_fact(ced_wk_rope, ced_wk_rope, f_lower=0, f_upper=53)
-    yao_believer.add_fact(day_minute_rope, day_minute_rope, f_lower=0, f_upper=1399)
+    yao_believer.add_fact(jour_minute_rope, jour_minute_rope, f_lower=0, f_upper=1399)
     # yao_believer.add_fact(interweb, interweb)
     yao_believer.add_fact(month_wk_rope, month_wk_rope, f_lower=0, f_upper=5)
     yao_believer.add_fact(mood_rope, mood_rope)
@@ -46,7 +46,7 @@ def believerunit_v001_with_large_agenda() -> BelieverUnit:
     yao_believer.add_fact(season_rope, season_rope)
     yao_believer.add_fact(yr_month_rope, yr_month_rope, f_lower=0, f_upper=12)
     # yao_believer.add_fact(water, water)
-    yao_believer.add_fact(wkdays_rope, wkdays_rope)
+    yao_believer.add_fact(sem_jours_rope, sem_jours_rope)
     return yao_believer
 
 
@@ -63,17 +63,17 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
     cat_str = "cat have dinner"
     sue_believer.set_l1_plan(planunit_shop(cat_str, mass=30, task=True))
 
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    plan_kid_wkdays = planunit_shop(wk_str, mass=40)
-    sue_believer.set_l1_plan(plan_kid_wkdays)
-    sun_str = "Sunday"
-    mon_str = "Monday"
-    tue_str = "Tuesday"
-    wed_str = "Wednesday"
-    thu_str = "Thursday"
-    fri_str = "Friday"
-    sat_str = "Saturday"
+    plan_kid_sem_jours = planunit_shop(wk_str, mass=40)
+    sue_believer.set_l1_plan(plan_kid_sem_jours)
+    sun_str = "Sun"
+    mon_str = "Mon"
+    tue_str = "Tue"
+    wed_str = "Wed"
+    thu_str = "Thur"
+    fri_str = "Fri"
+    sat_str = "Sat"
     sue_believer.set_plan(planunit_shop(sun_str, mass=20), wk_rope)
     sue_believer.set_plan(planunit_shop(mon_str, mass=20), wk_rope)
     sue_believer.set_plan(planunit_shop(tue_str, mass=20), wk_rope)
@@ -107,9 +107,9 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
 
 def get_believerunit_with_4_levels_and_2reasons() -> BelieverUnit:
     sue_believer = get_believerunit_with_4_levels()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     wed_rope = sue_believer.make_rope(wk_rope, wed_str)
     wk_reason = reasonunit_shop(wk_rope)
     wk_reason.set_case(wed_rope)
@@ -130,9 +130,9 @@ def get_believerunit_with_4_levels_and_2reasons() -> BelieverUnit:
 
 def get_believerunit_with_4_levels_and_2reasons_2facts() -> BelieverUnit:
     sue_believer = get_believerunit_with_4_levels_and_2reasons()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     wed_rope = sue_believer.make_rope(wk_rope, wed_str)
     nation_str = "nation"
     nation_rope = sue_believer.make_l1_rope(nation_str)
@@ -236,16 +236,16 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     shave_rope = zia_believer.make_l1_rope(shave_str)
     plan_kid_shave = planunit_shop(shave_str, mass=30, task=True)
     zia_believer.set_l1_plan(plan_kid_shave)
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = zia_believer.make_l1_rope(wk_str)
     wk_plan = planunit_shop(wk_str, mass=40)
     zia_believer.set_l1_plan(wk_plan)
 
-    sun_str = "Sunday"
+    sun_str = "Sun"
     sun_rope = zia_believer.make_rope(wk_rope, sun_str)
     church_str = "Church"
     church_rope = zia_believer.make_rope(sun_rope, church_str)
-    mon_str = "Monday"
+    mon_str = "Mon"
     mon_rope = zia_believer.make_rope(wk_rope, mon_str)
     plan_grandkidU = planunit_shop(sun_str, mass=20)
     plan_grandkidM = planunit_shop(mon_str, mass=20)

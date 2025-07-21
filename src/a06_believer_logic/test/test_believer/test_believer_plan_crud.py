@@ -162,7 +162,7 @@ def test_BelieverUnit_set_plan_CorrectlyAddsPlanObjWithNonDefault_knot():
     bob_believer = believerunit_shop("Bob", knot=slash_str)
     casa_str = "casa"
     wk_str = "wk"
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     casa_rope = bob_believer.make_l1_rope(casa_str)
     wk_rope = bob_believer.make_l1_rope(wk_str)
     wed_rope = bob_believer.make_rope(wk_rope, wed_str)
@@ -217,9 +217,9 @@ def test_BelieverUnit_del_plan_obj_Level0CannotBeDeleted():
 def test_BelieverUnit_del_plan_obj_Level1CanBeDeleted_ChildrenDeleted():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    sun_str = "Sunday"
+    sun_str = "Sun"
     sun_rope = sue_believer.make_rope(wk_rope, sun_str)
     assert sue_believer.get_plan_obj(wk_rope)
     assert sue_believer.get_plan_obj(sun_rope)
@@ -231,32 +231,32 @@ def test_BelieverUnit_del_plan_obj_Level1CanBeDeleted_ChildrenDeleted():
     with pytest_raises(Exception) as excinfo:
         sue_believer.get_plan_obj(wk_rope)
     assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{wk_rope}'"
-    new_sunday_rope = sue_believer.make_l1_rope("Sunday")
+    new_sun_rope = sue_believer.make_l1_rope("Sun")
     with pytest_raises(Exception) as excinfo:
-        sue_believer.get_plan_obj(new_sunday_rope)
-    assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{new_sunday_rope}'"
+        sue_believer.get_plan_obj(new_sun_rope)
+    assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{new_sun_rope}'"
 
 
 def test_BelieverUnit_del_plan_obj_Level1CanBeDeleted_ChildrenInherited():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    sun_str = "Sunday"
-    old_sunday_rope = sue_believer.make_rope(wk_rope, sun_str)
-    assert sue_believer.get_plan_obj(old_sunday_rope)
+    sun_str = "Sun"
+    old_sun_rope = sue_believer.make_rope(wk_rope, sun_str)
+    assert sue_believer.get_plan_obj(old_sun_rope)
 
     # WHEN
     sue_believer.del_plan_obj(rope=wk_rope, del_children=False)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_believer.get_plan_obj(old_sunday_rope)
-    assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{old_sunday_rope}'"
-    new_sunday_rope = sue_believer.make_l1_rope(sun_str)
-    assert sue_believer.get_plan_obj(new_sunday_rope)
-    new_sunday_plan = sue_believer.get_plan_obj(new_sunday_rope)
-    assert new_sunday_plan.parent_rope == to_rope(sue_believer.belief_label)
+        sue_believer.get_plan_obj(old_sun_rope)
+    assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{old_sun_rope}'"
+    new_sun_rope = sue_believer.make_l1_rope(sun_str)
+    assert sue_believer.get_plan_obj(new_sun_rope)
+    new_sun_plan = sue_believer.get_plan_obj(new_sun_rope)
+    assert new_sun_plan.parent_rope == to_rope(sue_believer.belief_label)
 
 
 def test_BelieverUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -292,17 +292,17 @@ def test_BelieverUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenInherited():
 def test_BelieverUnit_del_plan_obj_Level2CanBeDeleted_ChildrenDeleted():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
-    wkday_rope = sue_believer.make_l1_rope("wkdays")
-    monday_rope = sue_believer.make_rope(wkday_rope, "Monday")
-    assert sue_believer.get_plan_obj(monday_rope)
+    sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
+    mon_rope = sue_believer.make_rope(sem_jour_rope, "Mon")
+    assert sue_believer.get_plan_obj(mon_rope)
 
     # WHEN
-    sue_believer.del_plan_obj(rope=monday_rope)
+    sue_believer.del_plan_obj(rope=mon_rope)
 
     # THEN
     with pytest_raises(Exception) as excinfo:
-        sue_believer.get_plan_obj(monday_rope)
-    assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{monday_rope}'"
+        sue_believer.get_plan_obj(mon_rope)
+    assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{mon_rope}'"
 
 
 def test_BelieverUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenDeleted():
@@ -371,8 +371,8 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     # factunit: factunit_shop = None,
     # sue_believer.planroot._kids[casa_str].factunits = None
     assert sue_believer.planroot._kids[casa_str].factunits == {}
-    wkdays_rope = sue_believer.make_l1_rope("wkdays")
-    fact_rope = sue_believer.make_rope(wkdays_rope, "Sunday")
+    sem_jours_rope = sue_believer.make_l1_rope("sem_jours")
+    fact_rope = sue_believer.make_rope(sem_jours_rope, "Sun")
     x_factunit = factunit_shop(f_context=fact_rope, f_state=fact_rope)
 
     casa_factunits = sue_believer.planroot._kids[casa_str].factunits
@@ -809,7 +809,7 @@ def test_BelieverUnit_get_plan_obj_ReturnsPlan():
     assert brazil_plan.plan_label == brazil_str
 
     # WHEN
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
     wk_plan = sue_believer.get_plan_obj(rope=wk_rope)
 
@@ -836,16 +836,16 @@ def test_BelieverUnit_plan_exists_ReturnsCorrectBool():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     cat_rope = sue_believer.make_l1_rope("cat have dinner")
-    wk_rope = sue_believer.make_l1_rope("wkdays")
+    wk_rope = sue_believer.make_l1_rope("sem_jours")
     casa_rope = sue_believer.make_l1_rope("casa")
     nation_rope = sue_believer.make_l1_rope("nation")
-    sun_rope = sue_believer.make_rope(wk_rope, "Sunday")
-    mon_rope = sue_believer.make_rope(wk_rope, "Monday")
-    tue_rope = sue_believer.make_rope(wk_rope, "Tuesday")
-    wed_rope = sue_believer.make_rope(wk_rope, "Wednesday")
-    thu_rope = sue_believer.make_rope(wk_rope, "Thursday")
-    fri_rope = sue_believer.make_rope(wk_rope, "Friday")
-    sat_rope = sue_believer.make_rope(wk_rope, "Saturday")
+    sun_rope = sue_believer.make_rope(wk_rope, "Sun")
+    mon_rope = sue_believer.make_rope(wk_rope, "Mon")
+    tue_rope = sue_believer.make_rope(wk_rope, "Tue")
+    wed_rope = sue_believer.make_rope(wk_rope, "Wed")
+    thu_rope = sue_believer.make_rope(wk_rope, "Thur")
+    fri_rope = sue_believer.make_rope(wk_rope, "Fri")
+    sat_rope = sue_believer.make_rope(wk_rope, "Sat")
     france_rope = sue_believer.make_rope(nation_rope, "France")
     brazil_rope = sue_believer.make_rope(nation_rope, "Brazil")
     usa_rope = sue_believer.make_rope(nation_rope, "USA")
@@ -898,7 +898,7 @@ def test_BelieverUnit_set_offtrack_fund_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
     wk_str = "wk"
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     casa_rope = bob_believerunit.make_l1_rope(casa_str)
     wk_rope = bob_believerunit.make_l1_rope(wk_str)
     wed_rope = bob_believerunit.make_rope(wk_rope, wed_str)
@@ -955,7 +955,7 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     # WHEN
     casa_str = "casa"
     wk_str = "wk"
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     casa_rope = bob_believerunit.make_l1_rope(casa_str)
     wk_rope = bob_believerunit.make_l1_rope(wk_str)
     wed_rope = bob_believerunit.make_rope(wk_rope, wed_str)

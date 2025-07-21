@@ -20,9 +20,9 @@ from src.a06_believer_logic.test._util.example_believers import (
 def test_BelieverUnit_settle_believer_SetsStatus_active_WhenFactSaysNo():
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believerunit.make_l1_rope(wk_str)
-    sun_str = "Sunday"
+    sun_str = "Sun"
     sun_rope = sue_believerunit.make_rope(wk_rope, sun_str)
 
     # for plan in sue_believerunit._plan_dict.values():
@@ -47,9 +47,9 @@ def test_BelieverUnit_settle_believer_SetsStatus_active_WhenFactSaysNo():
 def test_BelieverUnit_settle_believer_SetsStatus_active_WhenFactModifies():
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believerunit.make_l1_rope(wk_str)
-    sun_str = "Wednesday"
+    sun_str = "Wed"
     sun_rope = sue_believerunit.make_rope(wk_rope, sun_str)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
@@ -91,9 +91,9 @@ def test_BelieverUnit_settle_believer_SetsStatus_active_WhenFactModifies():
 def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believerunit.make_l1_rope(wk_str)
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     wed_rope = sue_believerunit.make_rope(wk_rope, wed_str)
     nation_str = "nation"
     nation_rope = sue_believerunit.make_l1_rope(nation_str)
@@ -292,9 +292,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
     print(f"{yao_believerunit.get_reason_r_contexts()=}")
-    # day_hr = f"{yao_believerunit.belief_label},day_hr"
-    # yao_believerunit.add_fact(f_context=day_hr, f_state=day_hr, r_lower=0, r_upper=23)
-    day_min_str = "day_minute"
+    # hr_number = f"{yao_believerunit.belief_label},hr_number"
+    # yao_believerunit.add_fact(f_context=hr_number, f_state=hr_number, r_lower=0, r_upper=23)
+    day_min_str = "jour_minute"
     day_min_rope = yao_believerunit.make_l1_rope(day_min_str)
     yao_believerunit.add_fact(
         f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=1439
@@ -330,7 +330,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     # THEN
     # print(f"{str(type(plan))=}")
     # print(f"{len(plan_dict)=}")
-    laundry_str = "laundry monday"
+    laundry_str = "laundry mon"
     casa_rope = yao_believerunit.make_l1_rope("casa")
     cleaning_rope = yao_believerunit.make_rope(casa_rope, "cleaning")
     laundry_rope = yao_believerunit.make_rope(cleaning_rope, laundry_str)
@@ -348,9 +348,9 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     assert yao_believerunit._plan_dict.get(laundry_rope)._active is False
 
     # WHEN
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = yao_believerunit.make_l1_rope(wk_str)
-    mon_str = "Monday"
+    mon_str = "Mon"
     mon_rope = yao_believerunit.make_rope(wk_rope, mon_str)
     yao_believerunit.add_fact(f_context=wk_rope, f_state=mon_rope)
     yao_believerunit.settle_believer()
@@ -363,12 +363,12 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
     # ESTABLISH
     yao_believerunit = believerunit_v001()
 
-    day_hr_str = "day_hr"
-    day_hr_rope = yao_believerunit.make_l1_rope(day_hr_str)
+    hr_number_str = "hr_number"
+    hr_number_rope = yao_believerunit.make_l1_rope(hr_number_str)
     yao_believerunit.add_fact(
-        f_context=day_hr_rope, f_state=day_hr_rope, f_lower=0, f_upper=23
+        f_context=hr_number_rope, f_state=hr_number_rope, f_lower=0, f_upper=23
     )
-    day_min_str = "day_minute"
+    day_min_str = "jour_minute"
     day_min_rope = yao_believerunit.make_l1_rope(day_min_str)
     yao_believerunit.add_fact(
         f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=59
@@ -399,11 +399,11 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
     # for missing_fact, count in missing_facts.items():
     #     print(f"{missing_fact=} {count=}")
 
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = yao_believerunit.make_l1_rope(wk_str)
-    mon_str = "Monday"
+    mon_str = "Mon"
     mon_rope = yao_believerunit.make_rope(wk_rope, mon_str)
-    tue_str = "Tuesday"
+    tue_str = "Tue"
     tue_rope = yao_believerunit.make_rope(wk_rope, tue_str)
     mon_case_x = caseunit_shop(r_state=mon_rope)
     mon_case_x._status = False
@@ -459,11 +459,11 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
 
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
 
-    # yao_believerunit.add_fact(f_context=f"{yao_believerunit.belief_label},wkdays", f_state=f"{yao_believerunit.belief_label},wkdays,Tuesday")
+    # yao_believerunit.add_fact(f_context=f"{yao_believerunit.belief_label},sem_jours", f_state=f"{yao_believerunit.belief_label},sem_jours,Tue")
     # plan_dict = yao_believerunit.get_plan_dict()
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
 
-    # yao_believerunit.add_fact(f_context=f"{yao_believerunit.belief_label},wkdays", f_state=f"{yao_believerunit.belief_label},wkdays,Wednesday")
+    # yao_believerunit.add_fact(f_context=f"{yao_believerunit.belief_label},sem_jours", f_state=f"{yao_believerunit.belief_label},sem_jours,Wed")
     # plan_dict = yao_believerunit.get_plan_dict()
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is False
 
@@ -471,9 +471,9 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
 def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6WeeksReason_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
-    day_str = "day_hr"
+    day_str = "hr_number"
     day_rope = yao_believerunit.make_l1_rope(day_str)
-    min_str = "day_minute"
+    min_str = "jour_minute"
     min_rope = yao_believerunit.make_l1_rope(day_str)
 
     # WHEN
@@ -599,7 +599,7 @@ def test_BelieverUnit_settle_believer_EveryPlanHasActiveStatus_believerunit_v001
 def test_BelieverUnit_settle_believer_EveryTwoMonthReturnsObj_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
-    minute_str = "day_minute"
+    minute_str = "jour_minute"
     minute_rope = yao_believerunit.make_l1_rope(minute_str)
     yao_believerunit.add_fact(
         f_context=minute_rope, f_state=minute_rope, f_lower=0, f_upper=1399
@@ -619,9 +619,9 @@ def test_BelieverUnit_settle_believer_EveryTwoMonthReturnsObj_believerunit_v001(
     interweb_str = "Interweb"
     interweb_rope = yao_believerunit.make_l1_rope(interweb_str)
     yao_believerunit.add_fact(f_context=interweb_rope, f_state=interweb_rope)
-    wkdays_str = "wkdays"
-    wkdays_rope = yao_believerunit.make_l1_rope(wkdays_str)
-    yao_believerunit.add_fact(f_context=wkdays_rope, f_state=wkdays_rope)
+    sem_jours_str = "sem_jours"
+    sem_jours_rope = yao_believerunit.make_l1_rope(sem_jours_str)
+    yao_believerunit.add_fact(f_context=sem_jours_rope, f_state=sem_jours_rope)
     plan_dict = yao_believerunit.get_plan_dict()
     print(f"{len(plan_dict)=}")
 
@@ -688,9 +688,9 @@ def test_BelieverUnit_settle_believer_CorrectlySets_sum_healerlink_share(graphic
     assert oregon_plan._healerlink_ratio == 1
 
     # WHEN
-    wk_rope = sue_believerunit.make_l1_rope("wkdays")
+    wk_rope = sue_believerunit.make_l1_rope("sem_jours")
     sue_believerunit.edit_plan_attr(wk_rope, problem_bool=True)
-    mon_rope = sue_believerunit.make_rope(wk_rope, "Monday")
+    mon_rope = sue_believerunit.make_rope(wk_rope, "Mon")
     sue_believerunit.edit_plan_attr(mon_rope, healerlink=sue_healerlink)
     mon_plan = sue_believerunit.get_plan_obj(mon_rope)
     # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
@@ -702,11 +702,11 @@ def test_BelieverUnit_settle_believer_CorrectlySets_sum_healerlink_share(graphic
     assert mon_plan._healerlink_ratio == 0.4444444428395062
 
     # WHEN
-    tue_rope = sue_believerunit.make_rope(wk_rope, "Tuesday")
+    tue_rope = sue_believerunit.make_rope(wk_rope, "Tue")
     sue_believerunit.edit_plan_attr(tue_rope, healerlink=sue_healerlink)
     tue_plan = sue_believerunit.get_plan_obj(tue_rope)
     # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
-    # sat_rope = sue_believerunit.make_rope(wk_rope, "Saturday")
+    # sat_rope = sue_believerunit.make_rope(wk_rope, "Sat")
     # sat_plan = sue_believerunit.get_plan_obj(sat_rope)
     # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
     sue_believerunit.settle_believer()
@@ -756,9 +756,9 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keep_dict_v1(graphics_bool):
     assert sue_believerunit._keep_dict.get(oregon_rope) is not None
 
     # WHEN
-    wk_rope = sue_believerunit.make_l1_rope("wkdays")
+    wk_rope = sue_believerunit.make_l1_rope("sem_jours")
     sue_believerunit.edit_plan_attr(wk_rope, problem_bool=True)
-    mon_rope = sue_believerunit.make_rope(wk_rope, "Monday")
+    mon_rope = sue_believerunit.make_rope(wk_rope, "Mon")
     sue_believerunit.edit_plan_attr(mon_rope, healerlink=sue_healerlink)
     # mon_plan = sue_believerunit.get_plan_obj(mon_rope)
     # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
@@ -769,11 +769,11 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keep_dict_v1(graphics_bool):
     assert sue_believerunit._keep_dict.get(mon_rope) is not None
 
     # WHEN
-    tue_rope = sue_believerunit.make_rope(wk_rope, "Tuesday")
+    tue_rope = sue_believerunit.make_rope(wk_rope, "Tue")
     sue_believerunit.edit_plan_attr(tue_rope, healerlink=sue_healerlink)
     # tue_plan = sue_believerunit.get_plan_obj(tue_rope)
     # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
-    # sat_rope = sue_believerunit.make_rope(wk_rope, "Saturday")
+    # sat_rope = sue_believerunit.make_rope(wk_rope, "Sat")
     # sat_plan = sue_believerunit.get_plan_obj(sat_rope)
     # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
     sue_believerunit.settle_believer()
@@ -818,7 +818,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_healers_dict():
         oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
 
-    wk_rope = sue_believerunit.make_l1_rope("wkdays")
+    wk_rope = sue_believerunit.make_l1_rope("sem_jours")
     bob_healerlink = healerlink_shop({bob_str})
     sue_believerunit.edit_plan_attr(
         wk_rope, problem_bool=True, healerlink=bob_healerlink
@@ -859,7 +859,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_buildable_True():
         oregon_rope, problem_bool=True, healerlink=sue_healerlink
     )
 
-    wk_rope = sue_believerunit.make_l1_rope("wkdays")
+    wk_rope = sue_believerunit.make_l1_rope("sem_jours")
     bob_healerlink = healerlink_shop({bob_str})
     sue_believerunit.edit_plan_attr(
         wk_rope, problem_bool=True, healerlink=bob_healerlink

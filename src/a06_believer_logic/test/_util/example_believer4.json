@@ -1803,7 +1803,7 @@
                   }
                 }
               },
-              "empty roomba Friday": {
+              "empty roomba Fri": {
                 "_uid": 13,
                 "awardlinks": {
                   ";Family": {
@@ -1812,7 +1812,7 @@
                     "take_force": 1
                   }
                 },
-                "plan_label": "empty roomba Friday",
+                "plan_label": "empty roomba Fri",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1846,7 +1846,7 @@
                 "mass": 1,
                 "morph": false
               },
-              "laundry monday": {
+              "laundry mon": {
                 "_uid": 25,
                 "awardlinks": {
                   ";Family": {
@@ -1855,7 +1855,7 @@
                     "take_force": 1
                   }
                 },
-                "plan_label": "laundry monday",
+                "plan_label": "laundry mon",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1880,7 +1880,7 @@
                   }
                 }
               },
-              "laundry saturday": {
+              "laundry sat": {
                 "_uid": 29,
                 "awardlinks": {
                   "Travis Fox": {
@@ -1889,7 +1889,7 @@
                     "take_force": 1
                   }
                 },
-                "plan_label": "laundry saturday",
+                "plan_label": "laundry sat",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -1914,8 +1914,8 @@
                   }
                 }
               },
-              "laundry thursday": {
-                "plan_label": "laundry thursday",
+              "laundry thur": {
+                "plan_label": "laundry thur",
                 "mass": 1,
                 "morph": false,
                 "task": true,
@@ -1941,7 +1941,7 @@
                   }
                 }
               },
-              "laundry wednesday": {
+              "laundry wed": {
                 "_uid": 27,
                 "awardlinks": {
                   "America": {
@@ -1950,7 +1950,7 @@
                     "take_force": 1
                   }
                 },
-                "plan_label": "laundry wednesday",
+                "plan_label": "laundry wed",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -2045,7 +2045,7 @@
                   }
                 }
               },
-              "roomba bedroom Friday": {
+              "roomba bedroom Fri": {
                 "_uid": 17,
                 "awardlinks": {
                   ";Family": {
@@ -2054,7 +2054,7 @@
                     "take_force": 1
                   }
                 },
-                "plan_label": "roomba bedroom Friday",
+                "plan_label": "roomba bedroom Fri",
                 "mass": 1,
                 "task": true,
                 "reasonunits": {
@@ -5098,51 +5098,51 @@
               "wk": {
                 "_is_expanded": false,
                 "_kids": {
-                  "Friday": {
+                  "Fri": {
                     "_is_expanded": false,
-                    "plan_label": "Friday",
+                    "plan_label": "Fri",
                     "gogo_want": 8640,
                     "mass": 1,
                     "stop_want": 10080
                   },
-                  "Monday": {
+                  "Mon": {
                     "_is_expanded": false,
-                    "plan_label": "Monday",
+                    "plan_label": "Mon",
                     "gogo_want": 2880,
                     "mass": 1,
                     "stop_want": 4320
                   },
-                  "Saturday": {
+                  "Sat": {
                     "_is_expanded": false,
-                    "plan_label": "Saturday",
+                    "plan_label": "Sat",
                     "gogo_want": 0,
                     "mass": 1,
                     "stop_want": 1440
                   },
-                  "Sunday": {
+                  "Sun": {
                     "_is_expanded": false,
-                    "plan_label": "Sunday",
+                    "plan_label": "Sun",
                     "gogo_want": 1440,
                     "mass": 1,
                     "stop_want": 2880
                   },
-                  "Thursday": {
+                  "Thur": {
                     "_is_expanded": false,
-                    "plan_label": "Thursday",
+                    "plan_label": "Thur",
                     "gogo_want": 7200,
                     "mass": 1,
                     "stop_want": 8640
                   },
-                  "Tuesday": {
+                  "Tue": {
                     "_is_expanded": false,
-                    "plan_label": "Tuesday",
+                    "plan_label": "Tue",
                     "gogo_want": 4320,
                     "mass": 1,
                     "stop_want": 5760
                   },
-                  "Wednesday": {
+                  "Wed": {
                     "_is_expanded": false,
-                    "plan_label": "Wednesday",
+                    "plan_label": "Wed",
                     "gogo_want": 5760,
                     "mass": 1,
                     "stop_want": 7200

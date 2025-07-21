@@ -21,13 +21,13 @@ from src.a06_believer_logic.test._util.example_believers import (
 def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_believer = believerunit_v001()
-    day_hr_str = "day_hr"
-    day_hr_rope = yao_believer.make_l1_rope(day_hr_str)
-    day_hr_plan = yao_believer.get_plan_obj(day_hr_rope)
+    hr_number_str = "hr_number"
+    hr_number_rope = yao_believer.make_l1_rope(hr_number_str)
+    hr_number_plan = yao_believer.get_plan_obj(hr_number_rope)
     yao_believer.add_fact(
-        f_context=day_hr_rope, f_state=day_hr_rope, f_lower=0, f_upper=23
+        f_context=hr_number_rope, f_state=hr_number_rope, f_lower=0, f_upper=23
     )
-    time_minute = yao_believer.make_l1_rope("day_minute")
+    time_minute = yao_believer.make_l1_rope("jour_minute")
     yao_believer.add_fact(
         f_context=time_minute, f_state=time_minute, f_lower=0, f_upper=1440
     )
@@ -222,12 +222,12 @@ def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():
 def test_BelieverUnit_get_json_ReturnsCorrectJSON_BigExample():
     # ESTABLISH
     yao_believer = believerunit_v001()
-    day_hr_str = "day_hr"
-    day_hr_rope = yao_believer.make_l1_rope(day_hr_str)
+    hr_number_str = "hr_number"
+    hr_number_rope = yao_believer.make_l1_rope(hr_number_str)
     yao_believer.add_fact(
-        f_context=day_hr_rope, f_state=day_hr_rope, f_lower=0, f_upper=23
+        f_context=hr_number_rope, f_state=hr_number_rope, f_lower=0, f_upper=23
     )
-    day_min_str = "day_minute"
+    day_min_str = "jour_minute"
     day_min_rope = yao_believer.make_l1_rope(day_min_str)
     yao_believer.add_fact(
         f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=59
@@ -382,15 +382,15 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
 
     assert len(json_believer.planroot._kids) == 2
 
-    wkday_str = "wkdays"
-    wkday_rope = json_believer.make_l1_rope(wkday_str)
-    wkday_plan_x = json_believer.get_plan_obj(wkday_rope)
-    assert len(wkday_plan_x._kids) == 2
+    sem_jour_str = "sem_jours"
+    sem_jour_rope = json_believer.make_l1_rope(sem_jour_str)
+    sem_jour_plan_x = json_believer.get_plan_obj(sem_jour_rope)
+    assert len(sem_jour_plan_x._kids) == 2
 
-    sunday_str = "Sunday"
-    sunday_rope = json_believer.make_rope(wkday_rope, sunday_str)
-    sunday_plan = json_believer.get_plan_obj(sunday_rope)
-    assert sunday_plan.mass == 20
+    sun_str = "Sun"
+    sun_rope = json_believer.make_rope(sem_jour_rope, sun_str)
+    sun_plan = json_believer.get_plan_obj(sun_rope)
+    assert sun_plan.mass == 20
 
     json_shave_plan = json_believer.get_plan_obj(shave_rope)
     zia_shave_plan = zia_believer.get_plan_obj(shave_rope)
@@ -487,12 +487,12 @@ def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrect
     run_str = "runners"
     sue_believer = believerunit_shop("Sue", knot=slash_str)
     root_rope = to_rope(sue_believer.belief_label, slash_str)
-    day_hr_str = "day_hr"
-    day_hr_rope = sue_believer.make_l1_rope(day_hr_str)
-    sue_believer.add_plan(day_hr_rope)
+    hr_number_str = "hr_number"
+    hr_number_rope = sue_believer.make_l1_rope(hr_number_str)
+    sue_believer.add_plan(hr_number_rope)
     assert sue_believer.knot == slash_str
     assert sue_believer.get_plan_obj(root_rope).knot == slash_str
-    assert sue_believer.get_plan_obj(day_hr_rope).knot == slash_str
+    assert sue_believer.get_plan_obj(hr_number_rope).knot == slash_str
 
     # WHEN
     after_bob_believer = believerunit_get_from_json(sue_believer.get_json())
@@ -500,7 +500,7 @@ def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrect
     # THEN
     assert after_bob_believer.knot == slash_str
     assert after_bob_believer.get_plan_obj(root_rope).knot == slash_str
-    assert after_bob_believer.get_plan_obj(day_hr_rope).knot == slash_str
+    assert after_bob_believer.get_plan_obj(hr_number_rope).knot == slash_str
 
 
 def test_believerunit_get_from_json_ExportsBelieverUnit_mass():
@@ -550,7 +550,7 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     assert ccn2_believer.planroot.parent_rope == x2_believer.planroot.parent_rope
     assert ccn2_believer.planroot.fund_iota == x2_believer.planroot.fund_iota
     shave_rope = ccn2_believer.make_l1_rope("shave")
-    wk_rope = ccn2_believer.make_l1_rope("wkdays")
+    wk_rope = ccn2_believer.make_l1_rope("sem_jours")
     # assert ccn2_believer.get_plan_obj(shave_rope) == x2_believer.get_plan_obj(shave_rope)
     # assert ccn2_believer.get_plan_obj(wk_rope) == x2_believer.get_plan_obj(wk_rope)
     # assert ccn2_believer.planroot == x2_believer.planroot
