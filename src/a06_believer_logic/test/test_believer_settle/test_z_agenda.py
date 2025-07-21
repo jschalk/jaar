@@ -99,21 +99,19 @@ def test_BelieverUnit_get_agenda_dict_With7amPlanExample():
     print(f"{len(x_believer.get_agenda_dict())=}")
     assert len(x_believer.get_agenda_dict()) == 1
     timetech_rope = x_believer.make_l1_rope("timetech")
-    day24hr_rope = x_believer.make_rope(timetech_rope, "24hr day")
-    day24hr_r_lower = 0.0
-    day24hr_r_upper = 8.0
+    x24hr_rope = x_believer.make_rope(timetech_rope, "24hr")
+    x24hr_r_lower = 0.0
+    x24hr_r_upper = 8.0
     housemanagement_str = "housemanagement"
     housemanagement_rope = x_believer.make_l1_rope(housemanagement_str)
     clean_str = "clean table"
     clean_rope = x_believer.make_rope(housemanagement_rope, clean_str)
 
     # WHEN
-    x_believer.add_fact(
-        day24hr_rope, day24hr_rope, day24hr_r_lower, day24hr_r_upper, True
-    )
+    x_believer.add_fact(x24hr_rope, x24hr_rope, x24hr_r_lower, x24hr_r_upper, True)
 
     # THEN
-    print(x_believer.planroot.factunits[day24hr_rope])
+    print(x_believer.planroot.factunits[x24hr_rope])
     print(x_believer.get_plan_obj(clean_rope).reasonunits)
     print(x_believer.get_plan_obj(clean_rope)._active)
     agenda_dict = x_believer.get_agenda_dict()
@@ -151,10 +149,10 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
     # ESTABLISH
     yao_believer = believerunit_v001()
 
-    day_min_str = "jour_minute"
-    day_min_rope = yao_believer.make_l1_rope(day_min_str)
+    jour_min_str = "jour_minute"
+    jour_min_rope = yao_believer.make_l1_rope(jour_min_str)
     yao_believer.add_fact(
-        f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=1399
+        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=1399
     )
     month_wk_str = "month_wk"
     month_wk_rope = yao_believer.make_l1_rope(month_wk_str)
@@ -264,24 +262,26 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
     run_str = "run"
     run_rope = zia_believer.make_l1_rope(run_str)
     time_rope = zia_believer.make_l1_rope("time")
-    day_str = "day"
-    day_rope = zia_believer.make_rope(time_rope, day_str)
+    jour_str = "jour"
+    jour_rope = zia_believer.make_rope(time_rope, jour_str)
 
     zia_believer.set_l1_plan(planunit_shop(run_str, task=True))
-    zia_believer.set_plan(planunit_shop(day_str, begin=0, close=500), time_rope)
+    zia_believer.set_plan(planunit_shop(jour_str, begin=0, close=500), time_rope)
     zia_believer.edit_plan_attr(
         run_rope,
-        reason_r_context=day_rope,
-        reason_case=day_rope,
+        reason_r_context=jour_rope,
+        reason_case=jour_rope,
         r_lower=25,
         reason_r_upper=81,
     )
-    zia_believer.add_fact(f_context=day_rope, f_state=day_rope, f_lower=30, f_upper=87)
+    zia_believer.add_fact(
+        f_context=jour_rope, f_state=jour_rope, f_lower=30, f_upper=87
+    )
     zia_believer.get_agenda_dict()
-    run_reasonunits = zia_believer.planroot._kids[run_str].reasonunits[day_rope]
+    run_reasonunits = zia_believer.planroot._kids[run_str].reasonunits[jour_rope]
     print(f"{run_reasonunits=}")
-    print(f"{run_reasonunits.cases[day_rope]._status=}")
-    print(f"{run_reasonunits.cases[day_rope]._chore=}")
+    print(f"{run_reasonunits.cases[jour_rope]._status=}")
+    print(f"{run_reasonunits.cases[jour_rope]._chore=}")
     print(f"{zia_believer.get_reason_r_contexts()=}")
     assert len(zia_believer.get_plan_dict()) == 4
     assert len(zia_believer.get_agenda_dict()) == 1
@@ -289,7 +289,7 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
     assert zia_believer.get_agenda_dict().get(run_rope)._chore is True
 
     # WHEN
-    zia_believer.set_agenda_chore_complete(chore_rope=run_rope, r_context=day_rope)
+    zia_believer.set_agenda_chore_complete(chore_rope=run_rope, r_context=jour_rope)
 
     # THEN
     agenda_dict = zia_believer.get_agenda_dict()
@@ -305,15 +305,15 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
     run_rope = zia_believer.make_l1_rope(run_str)
     time_str = "time"
     time_rope = zia_believer.make_l1_rope(time_str)
-    day_str = "day"
-    day_rope = zia_believer.make_rope(time_rope, day_str)
+    jour_str = "jour"
+    jour_rope = zia_believer.make_rope(time_rope, jour_str)
 
     zia_believer.set_l1_plan(planunit_shop(run_str, task=True))
-    zia_believer.set_plan(planunit_shop(day_str, begin=0, close=500), time_rope)
+    zia_believer.set_plan(planunit_shop(jour_str, begin=0, close=500), time_rope)
     zia_believer.edit_plan_attr(
         run_rope,
-        reason_r_context=day_rope,
-        reason_case=day_rope,
+        reason_r_context=jour_rope,
+        reason_case=jour_rope,
         r_lower=1,
         reason_r_upper=1,
         r_divisor=2,
@@ -321,23 +321,23 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
 
     run_plan = zia_believer.get_plan_obj(run_rope)
     # print(f"{run_plan._factheirs=}")
-    zia_believer.add_fact(f_context=day_rope, f_state=day_rope, f_lower=1, f_upper=2)
+    zia_believer.add_fact(f_context=jour_rope, f_state=jour_rope, f_lower=1, f_upper=2)
     assert len(zia_believer.get_agenda_dict()) == 1
-    zia_believer.add_fact(f_context=day_rope, f_state=day_rope, f_lower=2, f_upper=2)
+    zia_believer.add_fact(f_context=jour_rope, f_state=jour_rope, f_lower=2, f_upper=2)
     assert len(zia_believer.get_agenda_dict()) == 0
     zia_believer.add_fact(
-        f_context=day_rope, f_state=day_rope, f_lower=400, f_upper=400
+        f_context=jour_rope, f_state=jour_rope, f_lower=400, f_upper=400
     )
     assert len(zia_believer.get_agenda_dict()) == 0
     zia_believer.add_fact(
-        f_context=day_rope, f_state=day_rope, f_lower=401, f_upper=402
+        f_context=jour_rope, f_state=jour_rope, f_lower=401, f_upper=402
     )
     assert len(zia_believer.get_agenda_dict()) == 1
     # print(f"{run_plan._factheirs=}")
     print(f"{run_plan.factunits=}")
 
     # WHEN
-    zia_believer.set_agenda_chore_complete(chore_rope=run_rope, r_context=day_rope)
+    zia_believer.set_agenda_chore_complete(chore_rope=run_rope, r_context=jour_rope)
 
     # THEN
     print(f"{run_plan.factunits=}")
@@ -382,10 +382,10 @@ def test_believerunit_get_from_json_CorrectlyLoadsTaskFromJSON():
     # assert task_true_count > 0
 
     # WHEN
-    day_min_str = "jour_minute"
-    day_min_rope = yao_believer.make_l1_rope(day_min_str)
+    jour_min_str = "jour_minute"
+    jour_min_rope = yao_believer.make_l1_rope(jour_min_str)
     yao_believer.add_fact(
-        f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=1399
+        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=1399
     )
 
     # THEN

@@ -150,12 +150,12 @@ def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     time_rope = sue_believer.make_l1_rope(time_str)
     time_plan = planunit_shop(time_str)
 
-    day24hr_str = "24hr day"
-    day24hr_rope = sue_believer.make_rope(time_rope, day24hr_str)
-    day24hr_plan = planunit_shop(day24hr_str, begin=0.0, close=24.0)
+    x24hr_str = "24hr"
+    x24hr_rope = sue_believer.make_rope(time_rope, x24hr_str)
+    x24hr_plan = planunit_shop(x24hr_str, begin=0.0, close=24.0)
 
     am_str = "am"
-    am_rope = sue_believer.make_rope(day24hr_rope, am_str)
+    am_rope = sue_believer.make_rope(x24hr_rope, am_str)
     pm_str = "pm"
     n1_str = "1"
     n2_str = "2"
@@ -167,9 +167,9 @@ def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     n3_plan = planunit_shop(n3_str, gogo_want=3, stop_want=4)
 
     sue_believer.set_l1_plan(time_plan)
-    sue_believer.set_plan(day24hr_plan, time_rope)
-    sue_believer.set_plan(am_plan, day24hr_rope)
-    sue_believer.set_plan(pm_plan, day24hr_rope)
+    sue_believer.set_plan(x24hr_plan, time_rope)
+    sue_believer.set_plan(am_plan, x24hr_rope)
+    sue_believer.set_plan(pm_plan, x24hr_rope)
     sue_believer.set_plan(n1_plan, am_rope)  # plan_am
     sue_believer.set_plan(n2_plan, am_rope)  # plan_am
     sue_believer.set_plan(n3_plan, am_rope)  # plan_am
@@ -195,8 +195,8 @@ def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     sue_believer.set_plan(soap_plan, clean_rope)
     sue_believer.set_plan(grab_plan, soap_rope)
 
-    clean_table_7am_r_context = day24hr_rope
-    clean_table_7am_case_rope = day24hr_rope
+    clean_table_7am_r_context = x24hr_rope
+    clean_table_7am_case_rope = x24hr_rope
     clean_table_7am_r_lower = 7.0
     clean_table_7am_r_upper = 7.0
     clean_table_7am_reason = reasonunit_shop(clean_table_7am_r_context)

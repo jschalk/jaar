@@ -465,10 +465,9 @@ def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerlink_healer_names_DoN
     casa_str = "casa"
     casa_rope = yao_believer.make_l1_rope(casa_str)
     yao_believer.set_l1_plan(planunit_shop(casa_str))
-    day_str = "day_range"
-    day_plan = planunit_shop(day_str, begin=44, close=110)
-    day_rope = yao_believer.make_l1_rope(day_str)
-    yao_believer.set_l1_plan(day_plan)
+    jour_str = "jour_range"
+    jour_plan = planunit_shop(jour_str, begin=44, close=110)
+    yao_believer.set_l1_plan(jour_plan)
 
     casa_plan = yao_believer.get_plan_obj(casa_rope)
     assert casa_plan.begin is None

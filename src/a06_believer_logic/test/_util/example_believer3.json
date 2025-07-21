@@ -3555,10 +3555,10 @@
         "plan_label": "casa",
         "mass": 1
       },
-      "ced_day": {
+      "ced_jour": {
         "begin": 0,
         "close": 80000,
-        "plan_label": "ced_day",
+        "plan_label": "ced_jour",
         "mass": 40
       },
       "ced_wk": {

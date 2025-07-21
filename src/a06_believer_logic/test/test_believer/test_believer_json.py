@@ -227,12 +227,12 @@ def test_BelieverUnit_get_json_ReturnsCorrectJSON_BigExample():
     yao_believer.add_fact(
         f_context=hr_number_rope, f_state=hr_number_rope, f_lower=0, f_upper=23
     )
-    day_min_str = "jour_minute"
-    day_min_rope = yao_believer.make_l1_rope(day_min_str)
+    jour_min_str = "jour_minute"
+    jour_min_rope = yao_believer.make_l1_rope(jour_min_str)
     yao_believer.add_fact(
-        f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=59
+        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=59
     )
-    x_factunit = factunit_shop(day_min_rope, day_min_rope, 5, 59)
+    x_factunit = factunit_shop(jour_min_rope, jour_min_rope, 5, 59)
     yao_believer.edit_plan_attr(x_factunit.f_context, factunit=x_factunit)
     yao_believer.set_max_tree_traverse(2)
     yao_str = "Yao"
@@ -254,12 +254,12 @@ def test_BelieverUnit_get_json_ReturnsCorrectJSON_BigExample():
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
     kids = planroot_dict[_kids]
-    day_min_dict = kids[day_min_str]
-    day_min_factunits_dict = day_min_dict["factunits"]
-    day_min_plan_x = yao_believer.get_plan_obj(day_min_rope)
-    print(f"{day_min_factunits_dict=}")
-    assert len(day_min_factunits_dict) == 1
-    assert len(day_min_factunits_dict) == len(day_min_plan_x.factunits)
+    jour_min_dict = kids[jour_min_str]
+    jour_min_factunits_dict = jour_min_dict["factunits"]
+    jour_min_plan_x = yao_believer.get_plan_obj(jour_min_rope)
+    print(f"{jour_min_factunits_dict=}")
+    assert len(jour_min_factunits_dict) == 1
+    assert len(jour_min_factunits_dict) == len(jour_min_plan_x.factunits)
 
     _reasonunits = "reasonunits"
     cont_str = "Freelancing"

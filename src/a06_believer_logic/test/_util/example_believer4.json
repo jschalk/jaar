@@ -822,11 +822,11 @@
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "cases": {
-                              "A;time;gregtime;day": {
+                              "A;time;gregtime;jour": {
                                 "r_divisor": 1440,
                                 "r_upper": 360,
                                 "r_lower": 360,
-                                "r_state": ";A;time;gregtime;day"
+                                "r_state": ";A;time;gregtime;jour"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -863,11 +863,11 @@
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "cases": {
-                              "A;time;gregtime;day": {
+                              "A;time;gregtime;jour": {
                                 "r_divisor": 1440,
                                 "r_upper": 360,
                                 "r_lower": 360,
-                                "r_state": ";A;time;gregtime;day"
+                                "r_state": ";A;time;gregtime;jour"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -881,11 +881,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 360,
                             "r_lower": 360,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -900,11 +900,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 450,
                             "r_lower": 450,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -919,11 +919,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 525,
                             "r_lower": 525,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -937,11 +937,11 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;day": {
+                      "A;time;gregtime;jour": {
                         "r_divisor": 1440,
                         "r_upper": 360,
                         "r_lower": 360,
-                        "r_state": ";A;time;gregtime;day"
+                        "r_state": ";A;time;gregtime;jour"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -958,11 +958,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 540,
                             "r_lower": 540,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -977,11 +977,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 540,
                             "r_lower": 540,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -998,11 +998,11 @@
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "cases": {
-                              "A;time;gregtime;day": {
+                              "A;time;gregtime;jour": {
                                 "r_divisor": 1440,
                                 "r_upper": 540,
                                 "r_lower": 540,
-                                "r_state": ";A;time;gregtime;day"
+                                "r_state": ";A;time;gregtime;jour"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1039,11 +1039,11 @@
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "cases": {
-                              "A;time;gregtime;day": {
+                              "A;time;gregtime;jour": {
                                 "r_divisor": 1440,
                                 "r_upper": 480,
                                 "r_lower": 480,
-                                "r_state": ";A;time;gregtime;day"
+                                "r_state": ";A;time;gregtime;jour"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1058,11 +1058,11 @@
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "cases": {
-                              "A;time;gregtime;day": {
+                              "A;time;gregtime;jour": {
                                 "r_divisor": 1440,
                                 "r_upper": 540,
                                 "r_lower": 540,
-                                "r_state": ";A;time;gregtime;day"
+                                "r_state": ";A;time;gregtime;jour"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1081,11 +1081,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 1020,
                             "r_lower": 1020,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -1100,11 +1100,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 540,
                             "r_lower": 540,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -1120,11 +1120,11 @@
                         "reasonunits": {
                           "A;time;gregtime;": {
                             "cases": {
-                              "A;time;gregtime;day": {
+                              "A;time;gregtime;jour": {
                                 "r_divisor": 1440,
                                 "r_upper": 540,
                                 "r_lower": 540,
-                                "r_state": ";A;time;gregtime;day"
+                                "r_state": ";A;time;gregtime;jour"
                               }
                             },
                             "r_context": ";A;time;gregtime;"
@@ -1138,11 +1138,11 @@
                     "reasonunits": {
                       "A;time;gregtime;": {
                         "cases": {
-                          "A;time;gregtime;day": {
+                          "A;time;gregtime;jour": {
                             "r_divisor": 1440,
                             "r_upper": 540,
                             "r_lower": 540,
-                            "r_state": ";A;time;gregtime;day"
+                            "r_state": ";A;time;gregtime;jour"
                           }
                         },
                         "r_context": ";A;time;gregtime;"
@@ -1158,11 +1158,11 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;day": {
+                      "A;time;gregtime;jour": {
                         "r_divisor": 1440.0,
                         "r_upper": 1080.0,
                         "r_lower": 540.0,
-                        "r_state": ";A;time;gregtime;day"
+                        "r_state": ";A;time;gregtime;jour"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -1176,11 +1176,11 @@
             "reasonunits": {
               "A;time;gregtime;": {
                 "cases": {
-                  "A;time;gregtime;day": {
+                  "A;time;gregtime;jour": {
                     "r_divisor": 1440,
                     "r_upper": 360,
                     "r_lower": 360,
-                    "r_state": ";A;time;gregtime;day"
+                    "r_state": ";A;time;gregtime;jour"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -2208,11 +2208,11 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;day": {
+                      "A;time;gregtime;jour": {
                         "r_divisor": 1440,
                         "r_upper": 420,
                         "r_lower": 420,
-                        "r_state": ";A;time;gregtime;day"
+                        "r_state": ";A;time;gregtime;jour"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2768,10 +2768,10 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                      "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
                         "r_upper": 1064041020.0,
                         "r_lower": 1064041020.0,
-                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2793,10 +2793,10 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                      "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
                         "r_upper": 1064041020.0,
                         "r_lower": 1064041020.0,
-                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2818,10 +2818,10 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                      "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
                         "r_upper": 1064041020.0,
                         "r_lower": 1064041020.0,
-                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -2843,10 +2843,10 @@
                 "reasonunits": {
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am": {
+                      "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
                         "r_upper": 1064041020.0,
                         "r_lower": 1064041020.0,
-                        "r_state": ";A;time;gregtime;x2;monthly 1st business day;2023 Feb 9am"
+                        "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3087,11 +3087,11 @@
             "reasonunits": {
               "A;time;gregtime;": {
                 "cases": {
-                  "A;time;gregtime;day": {
+                  "A;time;gregtime;jour": {
                     "r_divisor": 1440.0,
                     "r_upper": 480.0,
                     "r_lower": 480.0,
-                    "r_state": ";A;time;gregtime;day"
+                    "r_state": ";A;time;gregtime;jour"
                   }
                 },
                 "r_context": ";A;time;gregtime;"
@@ -3197,11 +3197,11 @@
                   },
                   "A;time;gregtime;": {
                     "cases": {
-                      "A;time;gregtime;day": {
+                      "A;time;gregtime;jour": {
                         "r_divisor": 1440,
                         "r_upper": 660,
                         "r_lower": 660,
-                        "r_state": ";A;time;gregtime;day"
+                        "r_state": ";A;time;gregtime;jour"
                       }
                     },
                     "r_context": ";A;time;gregtime;"
@@ -3753,9 +3753,9 @@
                 "numor": 1,
                 "stop_want": 7.0
               },
-              "day": {
+              "jour": {
                 "_is_expanded": false,
-                "plan_label": "day",
+                "plan_label": "jour",
                 "denom": 1022679.0,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3763,9 +3763,9 @@
                 "numor": 1,
                 "stop_want": 1440.0
               },
-              "days": {
+              "jours": {
                 "_is_expanded": false,
-                "plan_label": "days",
+                "plan_label": "jours",
                 "denom": 1440,
                 "gogo_want": 0.0,
                 "mass": 1,
@@ -3795,7 +3795,7 @@
               },
               "x2": {
                 "_kids": {
-                  "monthly 1st business day": {
+                  "monthly 1st business journee": {
                     "_kids": {
                       "2023 Feb 9am": {
                         "plan_label": "2023 Feb 9am",
@@ -3805,7 +3805,7 @@
                         "stop_want": 1064041020.0
                       }
                     },
-                    "plan_label": "monthly 1st business day",
+                    "plan_label": "monthly 1st business journee",
                     "gogo_want": 0.0,
                     "mass": 1,
                     "morph": false,
@@ -4235,7 +4235,7 @@
                 "plan_label": "4yr wo leap",
                 "mass": 1
               },
-              "day": {
+              "jour": {
                 "_is_expanded": false,
                 "_kids": {
                   "0-12am": {
@@ -4409,7 +4409,7 @@
                 },
                 "begin": 0,
                 "close": 1440,
-                "plan_label": "day",
+                "plan_label": "jour",
                 "mass": 1
               },
               "hr": {
@@ -4847,9 +4847,9 @@
                   "Apr": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4866,9 +4866,9 @@
                   "Aug": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4885,9 +4885,9 @@
                   "Dec": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4904,9 +4904,9 @@
                   "Feb28": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4923,9 +4923,9 @@
                   "Feb29": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4942,9 +4942,9 @@
                   "Jan": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4961,9 +4961,9 @@
                   "Jul": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4980,9 +4980,9 @@
                   "Jun": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -4999,9 +4999,9 @@
                   "Mar": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5018,9 +5018,9 @@
                   "May": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5037,9 +5037,9 @@
                   "Nov": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5056,9 +5056,9 @@
                   "Oct": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,
@@ -5075,9 +5075,9 @@
                   "Sep": {
                     "_is_expanded": false,
                     "_kids": {
-                      "days": {
+                      "jours": {
                         "_is_expanded": false,
-                        "plan_label": "days",
+                        "plan_label": "jours",
                         "denom": 1440,
                         "gogo_want": 0.0,
                         "mass": 1,

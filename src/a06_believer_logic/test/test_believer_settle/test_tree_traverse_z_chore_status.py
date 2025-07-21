@@ -236,19 +236,19 @@ def test_BelieverUnit_settle_believer_CorrectlyCalculatesRangeAttributes():
     # set facts as midevening to 8am
     time_str = "timetech"
     time_rope = sue_believerunit.make_l1_rope(time_str)
-    day24hr_str = "24hr day"
-    day24hr_rope = sue_believerunit.make_rope(time_rope, day24hr_str)
-    day24hr_r_context = day24hr_rope
-    day24hr_f_state = day24hr_rope
-    day24hr_r_lower = 0.0
-    day24hr_r_upper = 8.0
+    x24hr_str = "24hr"
+    x24hr_rope = sue_believerunit.make_rope(time_rope, x24hr_str)
+    x24hr_r_context = x24hr_rope
+    x24hr_f_state = x24hr_rope
+    x24hr_r_lower = 0.0
+    x24hr_r_upper = 8.0
 
     # WHEN
     sue_believerunit.add_fact(
-        day24hr_r_context,
-        f_state=day24hr_f_state,
-        f_lower=day24hr_r_lower,
-        f_upper=day24hr_r_upper,
+        x24hr_r_context,
+        f_state=x24hr_f_state,
+        f_lower=x24hr_r_lower,
+        f_upper=x24hr_r_upper,
     )
 
     # THEN
@@ -257,16 +257,16 @@ def test_BelieverUnit_settle_believer_CorrectlyCalculatesRangeAttributes():
 
     # WHEN
     # set facts as 8am to 10am
-    day24hr_r_lower = 8.0
-    day24hr_r_upper = 10.0
-    print(sue_believerunit.planroot.factunits[day24hr_rope])
+    x24hr_r_lower = 8.0
+    x24hr_r_upper = 10.0
+    print(sue_believerunit.planroot.factunits[x24hr_rope])
     sue_believerunit.add_fact(
-        day24hr_r_context,
-        f_state=day24hr_f_state,
-        f_lower=day24hr_r_lower,
-        f_upper=day24hr_r_upper,
+        x24hr_r_context,
+        f_state=x24hr_f_state,
+        f_lower=x24hr_r_lower,
+        f_upper=x24hr_r_upper,
     )
-    print(sue_believerunit.planroot.factunits[day24hr_rope])
+    print(sue_believerunit.planroot.factunits[x24hr_rope])
     print(sue_believerunit.planroot._kids[house_str]._kids[clean_str].reasonunits)
     # sue_believerunit.planroot._kids["housemanagement"]._kids[clean_str]._active = None
 
@@ -294,10 +294,10 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     print(f"{yao_believerunit.get_reason_r_contexts()=}")
     # hr_number = f"{yao_believerunit.belief_label},hr_number"
     # yao_believerunit.add_fact(f_context=hr_number, f_state=hr_number, r_lower=0, r_upper=23)
-    day_min_str = "jour_minute"
-    day_min_rope = yao_believerunit.make_l1_rope(day_min_str)
+    jour_min_str = "jour_minute"
+    jour_min_rope = yao_believerunit.make_l1_rope(jour_min_str)
     yao_believerunit.add_fact(
-        f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=1439
+        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=1439
     )
 
     mood_str = "Moods"
@@ -359,7 +359,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
     assert yao_believerunit._plan_dict.get(laundry_rope)._active is False
 
 
-def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001():
+def test_BelieverUnit_settle_believer_OptionWeekJoursReturnsObj_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
 
@@ -368,10 +368,10 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
     yao_believerunit.add_fact(
         f_context=hr_number_rope, f_state=hr_number_rope, f_lower=0, f_upper=23
     )
-    day_min_str = "jour_minute"
-    day_min_rope = yao_believerunit.make_l1_rope(day_min_str)
+    jour_min_str = "jour_minute"
+    jour_min_rope = yao_believerunit.make_l1_rope(jour_min_str)
     yao_believerunit.add_fact(
-        f_context=day_min_rope, f_state=day_min_rope, f_lower=0, f_upper=59
+        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=59
     )
     mon_wk_str = "month_wk"
     mon_wk_rope = yao_believerunit.make_l1_rope(mon_wk_str)
@@ -471,14 +471,14 @@ def test_BelieverUnit_settle_believer_OptionWeekdaysReturnsObj_believerunit_v001
 def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6WeeksReason_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
-    day_str = "hr_number"
-    day_rope = yao_believerunit.make_l1_rope(day_str)
+    hr_num_str = "hr_number"
+    hr_num_rope = yao_believerunit.make_l1_rope(hr_num_str)
     min_str = "jour_minute"
-    min_rope = yao_believerunit.make_l1_rope(day_str)
+    min_rope = yao_believerunit.make_l1_rope(min_str)
 
     # WHEN
     yao_believerunit.add_fact(
-        f_context=day_rope, f_state=day_rope, f_lower=0, f_upper=23
+        f_context=hr_num_rope, f_state=hr_num_rope, f_lower=0, f_upper=23
     )
     yao_believerunit.add_fact(
         f_context=min_rope, f_state=min_rope, f_lower=0, f_upper=59

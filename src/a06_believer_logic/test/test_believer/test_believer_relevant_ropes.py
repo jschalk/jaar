@@ -151,35 +151,35 @@ def test_BelieverUnit_get_relevant_ropes_ReturnSimple():
     min_range_plan = planunit_shop(min_range_x_str, begin=0, close=2880)
     yao_believer.set_l1_plan(min_range_plan)
 
-    day_length_str = "day_1ce"
-    day_length_rope = yao_believer.make_l1_rope(day_length_str)
-    day_length_plan = planunit_shop(day_length_str, begin=0, close=1440)
-    yao_believer.set_l1_plan(day_length_plan)
+    jour_length_str = "jour_1ce"
+    jour_length_rope = yao_believer.make_l1_rope(jour_length_str)
+    jour_length_plan = planunit_shop(jour_length_str, begin=0, close=1440)
+    yao_believer.set_l1_plan(jour_length_plan)
 
     hr_length_str = "hr_length"
     hr_length_rope = yao_believer.make_l1_rope(hr_length_str)
     hr_length_plan = planunit_shop(hr_length_str)
     yao_believer.set_l1_plan(hr_length_plan)
 
-    min_days_str = "days in minute_range"
-    min_days_rope = yao_believer.make_rope(min_range_x_rope, min_days_str)
-    min_days_plan = planunit_shop(min_days_str)
-    yao_believer.set_plan(min_days_plan, parent_rope=min_range_x_rope)
+    min_jours_str = "jours in minute_range"
+    min_jours_rope = yao_believer.make_rope(min_range_x_rope, min_jours_str)
+    min_jours_plan = planunit_shop(min_jours_str)
+    yao_believer.set_plan(min_jours_plan, parent_rope=min_range_x_rope)
 
     # WHEN
     print(f"{yao_believer._plan_dict.keys()}")
-    ropes_dict = {min_days_rope}
+    ropes_dict = {min_jours_rope}
     relevant_ropes = yao_believer._get_relevant_ropes(ropes_dict)
 
     # THEN
     print(f"{relevant_ropes=}")
     assert len(relevant_ropes) == 3
     assert min_range_x_rope in relevant_ropes
-    assert day_length_rope not in relevant_ropes
+    assert jour_length_rope not in relevant_ropes
     assert hr_length_rope not in relevant_ropes
-    assert min_days_rope in relevant_ropes
+    assert min_jours_rope in relevant_ropes
     assert root_rope in relevant_ropes
-    # min_days_plan = yao_believer.get_plan_obj(min_days_rope)
+    # min_jours_plan = yao_believer.get_plan_obj(min_jours_rope)
 
 
 def test_BelieverUnit_get_inheritor_plan_list_ReturnsObj_Scenario0():
