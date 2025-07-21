@@ -15,17 +15,20 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_te
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
+
     if not run_big_tests:
         return
-    examples_dir = "src/a20_world_logic/test/test_z_examples"
+    examples_dir = "src/a20_world_logic/test/test_world_examples"
     example_names = set(get_level1_dirs(examples_dir))
-    example_names.remove("__pycache__")  # Remove __pycache__ if it exists
+    if "__pycache__" in example_names:
+        example_names.remove("__pycache__")  # Remove __pycache__ if it exists
     worlds_mstr_str = "worlds"
     output_str = "output"
     if worlds_mstr_str in example_names:
         example_names.remove(worlds_mstr_str)  # Remove __pycache__ if it exists
     if output_str in example_names:
         example_names.remove(output_str)  # Remove __pycache__ if it exists
+
     for example_name in example_names:
         worlds_dir = create_path(examples_dir, worlds_mstr_str)
         parent_output_dir = create_path(examples_dir, "output")
@@ -40,6 +43,7 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_te
             input_dir=input_dir,
             output_dir=output_dir,
         )
+        example_worldunit.delete_world_db()
         assert count_dirs_files(output_dir) == 0
         print(f"before WHEN {os_path_exists(input_dir)=}")
 
@@ -53,3 +57,4 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_te
         # print(f"{count_dirs_files(output_dir)=}")
         assert count_dirs_files(output_dir) > 0
         assert count_dirs_files(input_dir) > 0
+    assert 1 == 2

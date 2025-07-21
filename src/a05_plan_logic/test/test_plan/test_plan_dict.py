@@ -66,9 +66,9 @@ def test_get_obj_from_plan_dict_ReturnsCorrect_HealerLink():
 
 def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     # ESTABLISH
-    wk_str = "wkdays"
+    wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
-    wed_str = "Wednesday"
+    wed_str = "Wed"
     wed_rope = create_rope(wk_rope, wed_str)
     nation_str = "nation"
     nation_rope = create_rope(root_label(), nation_str)

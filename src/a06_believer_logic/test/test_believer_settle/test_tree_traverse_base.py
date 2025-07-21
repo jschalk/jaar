@@ -81,9 +81,9 @@ def test_BelieverUnit_settle_believer_ClearsDescendantAttributes():
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
     casa_plan = sue_believer.get_plan_obj(casa_rope)
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    mon_str = "Monday"
+    mon_str = "Mon"
     mon_rope = sue_believer.make_rope(wk_rope, mon_str)
     mon_plan = sue_believer.get_plan_obj(mon_rope)
     assert sue_believer.planroot._descendant_task_count is None
@@ -154,10 +154,10 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_1(
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
     casa_plan = sue_believer.get_plan_obj(casa_rope)
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
     wk_plan = sue_believer.get_plan_obj(wk_rope)
-    mon_str = "Monday"
+    mon_str = "Mon"
     mon_rope = sue_believer.make_rope(wk_rope, mon_str)
     mon_plan = sue_believer.get_plan_obj(mon_rope)
 
@@ -199,9 +199,9 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_2(
     sue_believer = get_believerunit_with_4_levels()
     email_str = "email"
     casa_str = "casa"
-    wk_str = "wkdays"
-    mon_str = "Monday"
-    tue_str = "Tuesday"
+    wk_str = "sem_jours"
+    mon_str = "Mon"
+    tue_str = "Tue"
     vacuum_str = "vacuum"
     sue_str = "Sue"
 
@@ -368,7 +368,7 @@ def test_BelieverUnit_settle_believer_DoesNotKeepUnneeded_awardheirs():
 def test_BelieverUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
-    wk_str = "wkdays"
+    wk_str = "sem_jours"
     assert sue_believer.get_plan_tree_ordered_rope_list()
 
     # WHEN

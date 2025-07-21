@@ -31,39 +31,37 @@ def test_FactUnit_Exists():
 
 def test_FactUnit_DataClass_function():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
 
     # WHEN
-    sunday_fact = FactUnit(
-        f_context=wkday_rope, f_state=sunday_rope, f_lower=1.9, f_upper=2.3
-    )
+    sun_fact = FactUnit(f_context=wk_rope, f_state=sun_rope, f_lower=1.9, f_upper=2.3)
 
     # THEN
-    print(sunday_fact)
-    assert sunday_fact is not None
-    assert sunday_fact.f_context == wkday_rope
-    assert sunday_fact.f_state == sunday_rope
-    assert sunday_fact.f_lower == 1.9
-    assert sunday_fact.f_upper == 2.3
+    print(sun_fact)
+    assert sun_fact is not None
+    assert sun_fact.f_context == wk_rope
+    assert sun_fact.f_state == sun_rope
+    assert sun_fact.f_lower == 1.9
+    assert sun_fact.f_upper == 2.3
 
 
 def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wkday_fact = factunit_shop(wkday_rope, wkday_rope, f_lower=1.0, f_upper=5.0)
-    assert wkday_fact.f_lower == 1.0
-    assert wkday_fact.f_upper == 5.0
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wk_fact = factunit_shop(wk_rope, wk_rope, f_lower=1.0, f_upper=5.0)
+    assert wk_fact.f_lower == 1.0
+    assert wk_fact.f_upper == 5.0
 
     # WHEN
-    wkday_fact.set_range_null()
+    wk_fact.set_range_null()
 
     # THEN
-    assert wkday_fact.f_lower is None
-    assert wkday_fact.f_upper is None
+    assert wk_fact.f_lower is None
+    assert wk_fact.f_upper is None
 
 
 def test_FactUnit_set_f_state_to_f_context_SetsAttr_1():
@@ -104,52 +102,52 @@ def test_FactUnit_set_f_state_to_f_context_SetsAttr_2():
 
 def test_FactUnit_set_attr_SetsAttrCorrectly_2():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    wkday_fact = factunit_shop(wkday_rope, wkday_rope, f_lower=1.0, f_upper=5.0)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    wk_fact = factunit_shop(wk_rope, wk_rope, f_lower=1.0, f_upper=5.0)
 
     # WHEN
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
-    wkday_fact.set_attr(f_state=sunday_rope)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
+    wk_fact.set_attr(f_state=sun_rope)
     # THEN
-    assert wkday_fact.f_state == sunday_rope
+    assert wk_fact.f_state == sun_rope
 
     # WHEN
-    wkday_fact.set_attr(f_lower=45)
+    wk_fact.set_attr(f_lower=45)
     # THEN
-    assert wkday_fact.f_lower == 45
+    assert wk_fact.f_lower == 45
 
     # WHEN
-    wkday_fact.set_attr(f_upper=65)
+    wk_fact.set_attr(f_upper=65)
     # THEN
-    assert wkday_fact.f_upper == 65
+    assert wk_fact.f_upper == 65
 
 
 def test_FactUnit_get_dict_ReturnsDict():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
     x_f_lower = 35
     x_f_upper = 50
-    sunday_fact = factunit_shop(
-        f_context=wkday_rope,
-        f_state=sunday_rope,
+    sun_fact = factunit_shop(
+        f_context=wk_rope,
+        f_state=sun_rope,
         f_lower=x_f_lower,
         f_upper=x_f_upper,
     )
-    print(sunday_fact)
+    print(sun_fact)
 
     # WHEN
-    fact_dict = sunday_fact.get_dict()
+    fact_dict = sun_fact.get_dict()
 
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "f_context": wkday_rope,
-        "f_state": sunday_rope,
+        "f_context": wk_rope,
+        "f_state": sun_rope,
         "f_lower": x_f_lower,
         "f_upper": x_f_upper,
     }
@@ -158,116 +156,116 @@ def test_FactUnit_get_dict_ReturnsDict():
 
 def test_FactUnit_get_dict_ReturnsPartialDict():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
-    sunday_fact = factunit_shop(f_context=wkday_rope, f_state=sunday_rope)
-    print(sunday_fact)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
+    sun_fact = factunit_shop(f_context=wk_rope, f_state=sun_rope)
+    print(sun_fact)
 
     # WHEN
-    fact_dict = sunday_fact.get_dict()
+    fact_dict = sun_fact.get_dict()
 
     # THEN
     assert fact_dict is not None
     static_dict = {
-        "f_context": wkday_rope,
-        "f_state": sunday_rope,
+        "f_context": wk_rope,
+        "f_state": sun_rope,
     }
     assert fact_dict == static_dict
 
 
 def test_FactUnit_find_replace_rope_SetsAttrCorrectly():
     # ESTABLISH
-    wkday_str = "wkday"
+    wk_str = "wk"
     old_rope = create_rope("old_new")
-    old_wkday_rope = create_rope(old_rope, wkday_str)
-    sunday_str = "Sunday"
-    old_sunday_rope = create_rope(old_wkday_rope, sunday_str)
-    sunday_fact = factunit_shop(f_context=old_wkday_rope, f_state=old_sunday_rope)
-    print(sunday_fact)
-    assert sunday_fact.f_context == old_wkday_rope
-    assert sunday_fact.f_state == old_sunday_rope
+    old_wk_rope = create_rope(old_rope, wk_str)
+    sun_str = "Sun"
+    old_sun_rope = create_rope(old_wk_rope, sun_str)
+    sun_fact = factunit_shop(f_context=old_wk_rope, f_state=old_sun_rope)
+    print(sun_fact)
+    assert sun_fact.f_context == old_wk_rope
+    assert sun_fact.f_state == old_sun_rope
 
     # WHEN
     new_rope = create_rope("new_fun")
-    sunday_fact.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
+    sun_fact.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
     # THEN
-    new_wkday_rope = create_rope(new_rope, wkday_str)
-    new_sunday_rope = create_rope(new_wkday_rope, sunday_str)
-    assert sunday_fact.f_context == new_wkday_rope
-    assert sunday_fact.f_state == new_sunday_rope
+    new_wk_rope = create_rope(new_rope, wk_str)
+    new_sun_rope = create_rope(new_wk_rope, sun_str)
+    assert sun_fact.f_context == new_wk_rope
+    assert sun_fact.f_state == new_sun_rope
 
 
 def test_FactUnit_get_tuple_ReturnsObj_Scenario0_r_context_f_state_only():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
-    sunday_fact = factunit_shop(f_context=wkday_rope, f_state=sunday_rope)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
+    sun_fact = factunit_shop(f_context=wk_rope, f_state=sun_rope)
 
     # WHEN
-    sunday_tuple = sunday_fact.get_tuple()
+    sun_tuple = sun_fact.get_tuple()
 
     # THEN
-    assert sunday_tuple
-    assert sunday_tuple == (wkday_rope, sunday_rope, None, None)
+    assert sun_tuple
+    assert sun_tuple == (wk_rope, sun_rope, None, None)
 
 
 def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_f_lower_f_upper():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
     sun_f_lower = 6
     sun_f_upper = 9
-    sunday_fact = factunit_shop(wkday_rope, sunday_rope, sun_f_lower, sun_f_upper)
+    sun_fact = factunit_shop(wk_rope, sun_rope, sun_f_lower, sun_f_upper)
 
     # WHEN
-    sunday_tuple = sunday_fact.get_tuple()
+    sun_tuple = sun_fact.get_tuple()
 
     # THEN
-    assert sunday_tuple
-    assert sunday_tuple == (wkday_rope, sunday_rope, sun_f_lower, sun_f_upper)
+    assert sun_tuple
+    assert sun_tuple == (wk_rope, sun_rope, sun_f_lower, sun_f_upper)
 
 
 def test_get_factunit_from_tuple_ReturnsObj_Scenario0_r_context_f_state_only():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
-    sunday_fact = factunit_shop(f_context=wkday_rope, f_state=sunday_rope)
-    sunday_tuple = sunday_fact.get_tuple()
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
+    sun_fact = factunit_shop(f_context=wk_rope, f_state=sun_rope)
+    sun_tuple = sun_fact.get_tuple()
 
     # WHEN
-    gen_sunday_factunit = get_factunit_from_tuple(sunday_tuple)
+    gen_sun_factunit = get_factunit_from_tuple(sun_tuple)
 
     # THEN
-    assert gen_sunday_factunit
-    assert gen_sunday_factunit == sunday_fact
+    assert gen_sun_factunit
+    assert gen_sun_factunit == sun_fact
 
 
 def test_get_factunit_from_tuple_ReturnsObj_Scenario1_ValuesIn_f_lower_f_upper():
     # ESTABLISH
-    wkday_str = "wkday"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
     sun_f_lower = 6
     sun_f_upper = 9
-    sunday_fact = factunit_shop(wkday_rope, sunday_rope, sun_f_lower, sun_f_upper)
-    sunday_tuple = sunday_fact.get_tuple()
+    sun_fact = factunit_shop(wk_rope, sun_rope, sun_f_lower, sun_f_upper)
+    sun_tuple = sun_fact.get_tuple()
 
     # WHEN
-    gen_sunday_factunit = get_factunit_from_tuple(sunday_tuple)
+    gen_sun_factunit = get_factunit_from_tuple(sun_tuple)
 
     # THEN
-    assert gen_sunday_factunit
-    assert gen_sunday_factunit == sunday_fact
+    assert gen_sun_factunit
+    assert gen_sun_factunit == sun_fact
 
 
 def test_FactHeir_IsModifiedByFactUnit():
@@ -364,14 +362,14 @@ def test_FactCore_get_obj_key_SetsAttrCorrectly():
 
 def test_factunits_get_from_dict_CorrectlyBuildsObj():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
-        wkday_rope: {
-            "f_context": wkday_rope,
-            "f_state": sunday_rope,
+        wk_rope: {
+            "f_context": wk_rope,
+            "f_state": sun_rope,
             "f_lower": None,
             "f_upper": None,
         }
@@ -382,20 +380,20 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
 
     # THEN
     assert len(facts_dict) == 1
-    wkday_fact = facts_dict.get(wkday_rope)
-    assert wkday_fact == factunit_shop(f_context=wkday_rope, f_state=sunday_rope)
+    wk_fact = facts_dict.get(wk_rope)
+    assert wk_fact == factunit_shop(f_context=wk_rope, f_state=sun_rope)
 
 
 def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     # ESTABLISH
-    wkday_str = "wkdays"
-    wkday_rope = create_rope(root_label(), wkday_str)
-    sunday_str = "Sunday"
-    sunday_rope = create_rope(wkday_rope, sunday_str)
+    wk_str = "wk"
+    wk_rope = create_rope(root_label(), wk_str)
+    sun_str = "Sun"
+    sun_rope = create_rope(wk_rope, sun_str)
     static_dict = {
-        wkday_rope: {
-            "f_context": wkday_rope,
-            "f_state": sunday_rope,
+        wk_rope: {
+            "f_context": wk_rope,
+            "f_state": sun_rope,
         }
     }
 
@@ -403,5 +401,5 @@ def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     facts_dict = factunits_get_from_dict(static_dict)
 
     # THEN
-    wkday_fact = facts_dict.get(wkday_rope)
-    assert wkday_fact == factunit_shop(f_context=wkday_rope, f_state=sunday_rope)
+    wk_fact = facts_dict.get(wk_rope)
+    assert wk_fact == factunit_shop(f_context=wk_rope, f_state=sun_rope)

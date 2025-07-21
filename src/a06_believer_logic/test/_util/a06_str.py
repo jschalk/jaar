@@ -26,6 +26,9 @@ from src.a03_group_logic.test._util.a03_str import (
     take_force_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
+    _active_str,
+    _chore_str,
+    _status_str,
     belief_label_str,
     f_context_str,
     f_lower_str,

@@ -1,5 +1,5 @@
 from os.path import exists as os_path_exists
-from src.a00_data_toolbox.file_toolbox import create_path
+from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
@@ -218,3 +218,18 @@ def test_WorldUnit_get_world_db_path_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     assert a23_db_path == create_path(a23_world._world_dir, "world.db")
+
+
+def test_WorldUnit_delete_world_db_DeletesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    a23_world = worldunit_shop("amy23", worlds_dir())
+    a23_db_path = a23_world.get_world_db_path()
+    print(f"{a23_db_path=}")
+    save_file(a23_db_path, None, "example_text")
+    assert os_path_exists(a23_db_path)
+
+    # WHEN
+    a23_world.delete_world_db()
+
+    # THEN
+    assert not os_path_exists(a23_db_path)

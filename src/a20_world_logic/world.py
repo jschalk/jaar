@@ -71,6 +71,9 @@ class WorldUnit:
         "Returns path: world_dir/world.db"
         return create_world_db_path(self._world_dir)
 
+    def delete_world_db(self):
+        delete_dir(self.get_world_db_path())
+
     def set_event(self, event_int: EventInt, face_name: FaceName):
         self._events[event_int] = face_name
 

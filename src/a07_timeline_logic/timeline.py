@@ -162,7 +162,7 @@ def add_newtimeline_planunit(x_believerunit: BelieverUnit, timeline_config: dict
     x_months = timeline_config.get("months_config")
     x_mday = timeline_config.get("monthday_distortion")
     x_hours_list = timeline_config.get("hours_config")
-    x_wkdays_list = timeline_config.get("weekdays_config")
+    x_weekdays_list = timeline_config.get("weekdays_config")
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
     timeline_rope = get_timeline_rope(
@@ -176,8 +176,8 @@ def add_newtimeline_planunit(x_believerunit: BelieverUnit, timeline_config: dict
 
     add_stan_planunits(x_believerunit, x_plan_label, x_c400_number)
     add_planunits(x_believerunit, day_rope, create_hour_planunits(x_hours_list))
-    add_planunits(x_believerunit, timeline_rope, create_week_planunits(x_wkdays_list))
-    add_planunits(x_believerunit, week_rope, create_weekday_planunits(x_wkdays_list))
+    add_planunits(x_believerunit, timeline_rope, create_week_planunits(x_weekdays_list))
+    add_planunits(x_believerunit, week_rope, create_weekday_planunits(x_weekdays_list))
     add_planunits(x_believerunit, year_rope, create_month_planunits(x_months, x_mday))
     offset_plan = planunit_shop("yr1_jan1_offset", addin=x_yr1_jan1_offset)
     x_believerunit.set_plan(offset_plan, timeline_rope)

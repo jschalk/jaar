@@ -75,7 +75,7 @@ def test_Modules_DoNotHaveEmptyDirectories():
     # sourcery skip: no-loop-in-tests
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
-    exclude_dir = "src/a20_world_logic/test/test_z_examples/worlds"
+    exclude_dir = "src/a20_world_logic/test/test_world_examples/worlds"
 
     # WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
@@ -189,7 +189,7 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
     # TODO change excluded_strs to empty set by editing codebase
-    excluded_strs = {"close", "day", "days", "time"}
+    excluded_strs = {"close", "time"}
 
     # WHEN / THEN
 
