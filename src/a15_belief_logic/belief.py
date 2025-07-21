@@ -24,13 +24,13 @@ from src.a02_finance_logic.finance_config import (
     FundIota,
     FundNum,
     PennyNum,
-    TimeLinePoint,
     default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
 )
 from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.timeline import (
+    TimeLinePoint,
     TimeLineUnit,
     add_newtimeline_planunit,
     timelineunit_shop,
