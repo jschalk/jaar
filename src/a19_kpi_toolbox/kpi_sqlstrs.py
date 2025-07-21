@@ -19,5 +19,16 @@ GROUP BY belief_partner_nets.belief_label, belief_partner_nets.believer_name
 """
 
 
-def get_belief_kpi002_partner_tasks_sqlstr() -> str:
-    return ""
+def get_belief_kpi002_believer_tasks_sqlstr() -> str:
+    return """
+CREATE TABLE belief_kpi002_believer_tasks AS
+SELECT
+  believer_planunit_job.belief_label
+, believer_planunit_job.believer_name
+, believer_planunit_job.plan_rope
+, believer_planunit_job.task
+, believer_planunit_job._active
+, believer_planunit_job._chore
+FROM believer_planunit_job
+;
+"""

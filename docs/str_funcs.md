@@ -20,6 +20,6 @@
 - a16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, map_otx2inx, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
 - a17_idea_logic: allowed_crud, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_name
 - a18_etl_toolbox: belief_event_time_agg, belief_ote1_agg, belief_partner_nets, believer_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, sound_agg, sound_raw, voice_agg, voice_raw
-- a19_kpi_toolbox: belief_kpi001_partner_nets, belief_kpi002_partner_tasks
+- a19_kpi_toolbox: belief_kpi001_partner_nets, belief_kpi002_believer_tasks
 - a20_world_logic: 
 - a21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys
