@@ -490,13 +490,13 @@ class BelieverUnit:
         elif fact_f_context_plan.is_math() and self._is_plan_rangeroot(f_context):
             # WHEN plan is "range-root" identify any reason.r_contexts that are descendants
             # calculate and set those descendant facts
-            # example: timeline range (0-, 1.5e9) is range-root
-            # example: "timeline,wks" (spllt 10080) is range-descendant
-            # there exists a reason r_context "timeline,wks" with case.r_state = "timeline,wks"
+            # example: zietline range (0-, 1.5e9) is range-root
+            # example: "zietline,wks" (spllt 10080) is range-descendant
+            # there exists a reason r_context "zietline,wks" with case.r_state = "zietline,wks"
             # and (1,2) r_divisor=2 (every other wk)
             #
-            # should not set "timeline,wks" fact, only "timeline" fact and
-            # "timeline,wks" should be set automatica_lly since there exists a reason
+            # should not set "zietline,wks" fact, only "zietline" fact and
+            # "zietline,wks" should be set automatica_lly since there exists a reason
             # that has that r_context.
             x_planroot.set_factunit(x_factunit)
 

@@ -176,7 +176,3 @@ def partner_pool_str() -> str:
 
 def tally_str() -> str:
     return "tally"
-
-
-def timeline_str() -> str:
-    return "timeline"

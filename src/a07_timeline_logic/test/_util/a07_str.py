@@ -58,6 +58,10 @@ def timeline_label_str() -> str:
     return "timeline_label"
 
 
+def timeline_str() -> str:
+    return "timeline"
+
+
 def week_str() -> str:
     return "week"
 

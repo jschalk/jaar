@@ -395,7 +395,7 @@ def test_BelieverUnit_get_plan_tree_ordered_rope_list_CorrectlyCleansRangedPlanR
     yao_believer = believerunit_shop("Yao")
 
     # WHEN
-    time_str = "timeline"
+    time_str = "zietline"
     time_rope = yao_believer.make_l1_rope(time_str)
     yao_believer.set_l1_plan(planunit_shop(time_str, begin=0, close=700))
     wks_str = "wks"

@@ -364,296 +364,298 @@ def test_PlanUnit_is_math_ReturnsObj():
 
 def test_PlanUnit_clear_gogo_calc_stop_calc_SetsAttr():
     # ESTABLISH
-    time_str = "time"
-    time_plan = planunit_shop(time_str)
-    time_plan._range_evaluated = True
-    time_plan._gogo_calc = 3
-    time_plan._stop_calc = 4
-    assert time_plan._range_evaluated
-    assert time_plan._gogo_calc
-    assert time_plan._stop_calc
+    num_range_str = "num_range"
+    num_range_plan = planunit_shop(num_range_str)
+    num_range_plan._range_evaluated = True
+    num_range_plan._gogo_calc = 3
+    num_range_plan._stop_calc = 4
+    assert num_range_plan._range_evaluated
+    assert num_range_plan._gogo_calc
+    assert num_range_plan._stop_calc
 
     # WHEN
-    time_plan.clear_gogo_calc_stop_calc()
+    num_range_plan.clear_gogo_calc_stop_calc()
 
     # THEN
-    assert not time_plan._range_evaluated
-    assert not time_plan._gogo_calc
-    assert not time_plan._stop_calc
+    assert not num_range_plan._range_evaluated
+    assert not num_range_plan._gogo_calc
+    assert not num_range_plan._stop_calc
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_denom():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom)
     init_gogo_calc = 21
     init_stop_calc = 42
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert not time_plan._range_evaluated
-    assert time_plan._gogo_calc
-    assert time_plan._stop_calc
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert not num_range_plan._range_evaluated
+    assert num_range_plan._gogo_calc
+    assert num_range_plan._stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._range_evaluated
-    assert time_plan._gogo_calc == init_gogo_calc / time_denom
-    assert time_plan._stop_calc == init_stop_calc / time_denom
-    assert time_plan._gogo_calc == 3
-    assert time_plan._stop_calc == 6
+    assert num_range_plan._range_evaluated
+    assert num_range_plan._gogo_calc == init_gogo_calc / num_range_denom
+    assert num_range_plan._stop_calc == init_stop_calc / num_range_denom
+    assert num_range_plan._gogo_calc == 3
+    assert num_range_plan._stop_calc == 6
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRangeCovered():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 22
     init_stop_calc = 45
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc
-    assert time_plan._stop_calc
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc
+    assert num_range_plan._stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == 0
-    assert time_plan._stop_calc == time_denom
-    assert time_plan._gogo_calc == 0
-    assert time_plan._stop_calc == 7
+    assert num_range_plan._gogo_calc == 0
+    assert num_range_plan._stop_calc == num_range_denom
+    assert num_range_plan._gogo_calc == 0
+    assert num_range_plan._stop_calc == 7
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_PartialRangeCovered():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 24
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc
-    assert time_plan._stop_calc
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc
+    assert num_range_plan._stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == 0
-    assert time_plan._stop_calc == (init_stop_calc - init_gogo_calc) % time_denom
-    assert time_plan._gogo_calc == 0
-    assert time_plan._stop_calc == 3
+    assert num_range_plan._gogo_calc == 0
+    assert (
+        num_range_plan._stop_calc == (init_stop_calc - init_gogo_calc) % num_range_denom
+    )
+    assert num_range_plan._gogo_calc == 0
+    assert num_range_plan._stop_calc == 3
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_PartialRangeCovered():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 22
     init_stop_calc = 25
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc
-    assert time_plan._stop_calc
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc
+    assert num_range_plan._stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == init_gogo_calc % time_denom
-    assert time_plan._stop_calc == init_stop_calc % time_denom
-    assert time_plan._gogo_calc == 1
-    assert time_plan._stop_calc == 4
+    assert num_range_plan._gogo_calc == init_gogo_calc % num_range_denom
+    assert num_range_plan._stop_calc == init_stop_calc % num_range_denom
+    assert num_range_plan._gogo_calc == 1
+    assert num_range_plan._stop_calc == 4
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoModifications():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
     stop_want = 40
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == gogo_want
-    assert time_plan._stop_calc == stop_want
-    assert time_plan._gogo_calc == 30
-    assert time_plan._stop_calc == 40
+    assert num_range_plan._gogo_calc == gogo_want
+    assert num_range_plan._stop_calc == stop_want
+    assert num_range_plan._gogo_calc == 30
+    assert num_range_plan._stop_calc == 40
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_ModifiyBoth():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
     stop_want = 50
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
-    assert time_plan._gogo_calc == 21
-    assert time_plan._stop_calc == 45
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan._gogo_calc == 21
+    assert num_range_plan._stop_calc == 45
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_ModifyLeft():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
     stop_want = 40
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == stop_want
-    assert time_plan._gogo_calc == 21
-    assert time_plan._stop_calc == 40
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == stop_want
+    assert num_range_plan._gogo_calc == 21
+    assert num_range_plan._stop_calc == 40
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario2_ModifyRight():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 30
     stop_want = 50
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert time_plan._gogo_calc == gogo_want
-    assert time_plan._stop_calc == init_stop_calc
-    assert time_plan._gogo_calc == 30
-    assert time_plan._stop_calc == 45
+    assert num_range_plan._gogo_calc == gogo_want
+    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan._gogo_calc == 30
+    assert num_range_plan._stop_calc == 45
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsLeft():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 10
     stop_want = 15
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert not time_plan._gogo_calc
-    assert not time_plan._stop_calc
+    assert not num_range_plan._gogo_calc
+    assert not num_range_plan._stop_calc
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsRight():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = 21
     init_stop_calc = 45
     gogo_want = 60
     stop_want = 65
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert not time_plan._gogo_calc
-    assert not time_plan._stop_calc
+    assert not num_range_plan._gogo_calc
+    assert not num_range_plan._stop_calc
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario4_None():
     # ESTABLISH
-    time_str = "time"
-    time_denom = 7
-    time_plan = planunit_shop(time_str, denom=time_denom, morph=True)
+    num_range_str = "num_range"
+    num_range_denom = 7
+    num_range_plan = planunit_shop(num_range_str, denom=num_range_denom, morph=True)
     init_gogo_calc = None
     init_stop_calc = None
     gogo_want = 21
     stop_want = 45
-    time_plan.gogo_want = gogo_want
-    time_plan.stop_want = stop_want
-    time_plan._gogo_calc = init_gogo_calc
-    time_plan._stop_calc = init_stop_calc
-    time_plan.denom = time_denom
-    assert time_plan._gogo_calc == init_gogo_calc
-    assert time_plan._stop_calc == init_stop_calc
+    num_range_plan.gogo_want = gogo_want
+    num_range_plan.stop_want = stop_want
+    num_range_plan._gogo_calc = init_gogo_calc
+    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.denom = num_range_denom
+    assert num_range_plan._gogo_calc == init_gogo_calc
+    assert num_range_plan._stop_calc == init_stop_calc
 
     # WHEN
-    time_plan._mold_gogo_calc_stop_calc()
+    num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert not time_plan._gogo_calc
-    assert not time_plan._stop_calc
+    assert not num_range_plan._gogo_calc
+    assert not num_range_plan._stop_calc

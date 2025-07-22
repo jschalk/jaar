@@ -438,7 +438,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
     assert wed_sun_case._status is False
 
 
-def test_CaseUnit_set_status_SetsStatus_status_ScenarioTime():
+def test_CaseUnit_set_status_SetsStatus_status_ScenarioClock():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)

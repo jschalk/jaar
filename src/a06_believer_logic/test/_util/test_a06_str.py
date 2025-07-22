@@ -33,7 +33,6 @@ from src.a06_believer_logic.test._util.a06_str import (
     penny_str,
     respect_bit_str,
     tally_str,
-    timeline_str,
 )
 
 
@@ -68,7 +67,6 @@ def test_str_functions_ReturnsObj():
     assert believer_plan_factunit_str() == "believer_plan_factunit"
     assert jkeys_str() == "jkeys"
     assert attributes_str() == "attributes"
-    assert timeline_str() == "timeline"
     assert ancestors_str() == "ancestors"
     assert mandate_str() == "mandate"
     assert dimen_str() == "dimen"
