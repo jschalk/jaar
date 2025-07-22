@@ -1330,9 +1330,9 @@
                               }
                             }
                           },
-                          "gym time": {
+                          "gym": {
                             "_uid": 215,
-                            "plan_label": "gym time",
+                            "plan_label": "gym",
                             "mass": 1,
                             "reasonunits": {
                               ";amy45;Moods;": {

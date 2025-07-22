@@ -595,15 +595,15 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -619,15 +619,15 @@
                                         "plan_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -644,15 +644,15 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -667,15 +667,15 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;x2;Sept 4th 2023 9am": {
+                                            "A;ziet;gregziet;x2;Sept 4th 2023 9am": {
                                                 "r_upper": 1064350680.0,
                                                 "r_lower": 1064350680.0,
-                                                "r_state": ";A;time;gregtime;x2;Sept 4th 2023 9am"
+                                                "r_state": ";A;ziet;gregziet;x2;Sept 4th 2023 9am"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -687,15 +687,15 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -712,15 +712,15 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -736,15 +736,15 @@
                                         "plan_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -761,15 +761,15 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -785,15 +785,15 @@
                                         "plan_label": "Accomplish Fall 2021 traaining",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;x;Sept 4th 2023 9am": {
+                                                    "A;ziet;gregziet;x;Sept 4th 2023 9am": {
                                                         "r_upper": 1064350680.0,
                                                         "r_lower": 1064350680.0,
-                                                        "r_state": ";A;time;gregtime;x;Sept 4th 2023 9am"
+                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -820,16 +820,16 @@
                                                 "mass": 1,
                                                 "task": true,
                                                 "reasonunits": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "cases": {
-                                                            "A;time;gregtime;jour": {
+                                                            "A;ziet;gregziet;jour": {
                                                                 "r_divisor": 1440,
                                                                 "r_upper": 360,
                                                                 "r_lower": 360,
-                                                                "r_state": ";A;time;gregtime;jour"
+                                                                "r_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;time;gregtime;"
+                                                        "r_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             },
@@ -861,16 +861,16 @@
                                                 "mass": 1,
                                                 "task": true,
                                                 "reasonunits": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "cases": {
-                                                            "A;time;gregtime;jour": {
+                                                            "A;ziet;gregziet;jour": {
                                                                 "r_divisor": 1440,
                                                                 "r_upper": 360,
                                                                 "r_lower": 360,
-                                                                "r_state": ";A;time;gregtime;jour"
+                                                                "r_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;time;gregtime;"
+                                                        "r_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             }
@@ -879,16 +879,16 @@
                                         "plan_label": "check ETLs ran correctly",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 360,
                                                         "r_lower": 360,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -898,16 +898,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 450,
                                                         "r_lower": 450,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -917,16 +917,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 525,
                                                         "r_lower": 525,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -935,16 +935,16 @@
                                 "plan_label": "IT DEPT off-hrs responsiblities",
                                 "mass": 1,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;jour": {
+                                            "A;ziet;gregziet;jour": {
                                                 "r_divisor": 1440,
                                                 "r_upper": 360,
                                                 "r_lower": 360,
-                                                "r_state": ";A;time;gregtime;jour"
+                                                "r_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -956,16 +956,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 540,
                                                         "r_lower": 540,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -975,16 +975,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 540,
                                                         "r_lower": 540,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -996,16 +996,16 @@
                                                 "mass": 1,
                                                 "task": true,
                                                 "reasonunits": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "cases": {
-                                                            "A;time;gregtime;jour": {
+                                                            "A;ziet;gregziet;jour": {
                                                                 "r_divisor": 1440,
                                                                 "r_upper": 540,
                                                                 "r_lower": 540,
-                                                                "r_state": ";A;time;gregtime;jour"
+                                                                "r_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;time;gregtime;"
+                                                        "r_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             },
@@ -1037,16 +1037,16 @@
                                                 "mass": 1,
                                                 "task": true,
                                                 "reasonunits": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "cases": {
-                                                            "A;time;gregtime;jour": {
+                                                            "A;ziet;gregziet;jour": {
                                                                 "r_divisor": 1440,
                                                                 "r_upper": 480,
                                                                 "r_lower": 480,
-                                                                "r_state": ";A;time;gregtime;jour"
+                                                                "r_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;time;gregtime;"
+                                                        "r_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             },
@@ -1056,16 +1056,16 @@
                                                 "mass": 1,
                                                 "task": true,
                                                 "reasonunits": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "cases": {
-                                                            "A;time;gregtime;jour": {
+                                                            "A;ziet;gregziet;jour": {
                                                                 "r_divisor": 1440,
                                                                 "r_upper": 540,
                                                                 "r_lower": 540,
-                                                                "r_state": ";A;time;gregtime;jour"
+                                                                "r_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;time;gregtime;"
+                                                        "r_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             }
@@ -1079,16 +1079,16 @@
                                         "plan_label": "IT DEPT general",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 1020,
                                                         "r_lower": 1020,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -1098,16 +1098,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 540,
                                                         "r_lower": 540,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -1118,16 +1118,16 @@
                                                 "plan_label": "check for access",
                                                 "mass": 1,
                                                 "reasonunits": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "cases": {
-                                                            "A;time;gregtime;jour": {
+                                                            "A;ziet;gregziet;jour": {
                                                                 "r_divisor": 1440,
                                                                 "r_upper": 540,
                                                                 "r_lower": 540,
-                                                                "r_state": ";A;time;gregtime;jour"
+                                                                "r_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;time;gregtime;"
+                                                        "r_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             }
@@ -1136,16 +1136,16 @@
                                         "plan_label": "SQLIte",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;jour": {
+                                                    "A;ziet;gregziet;jour": {
                                                         "r_divisor": 1440,
                                                         "r_upper": 540,
                                                         "r_lower": 540,
-                                                        "r_state": ";A;time;gregtime;jour"
+                                                        "r_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -1156,16 +1156,16 @@
                                 "morph": false,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;jour": {
+                                            "A;ziet;gregziet;jour": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 1080.0,
                                                 "r_lower": 540.0,
-                                                "r_state": ";A;time;gregtime;jour"
+                                                "r_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -1174,16 +1174,16 @@
                         "plan_label": "IT DEPT",
                         "mass": 1,
                         "reasonunits": {
-                            "A;time;gregtime;": {
+                            "A;ziet;gregziet;": {
                                 "cases": {
-                                    "A;time;gregtime;jour": {
+                                    "A;ziet;gregziet;jour": {
                                         "r_divisor": 1440,
                                         "r_upper": 360,
                                         "r_lower": 360,
-                                        "r_state": ";A;time;gregtime;jour"
+                                        "r_state": ";A;ziet;gregziet;jour"
                                     }
                                 },
-                                "r_context": ";A;time;gregtime;"
+                                "r_context": ";A;ziet;gregziet;"
                             }
                         }
                     }
@@ -1218,7 +1218,7 @@
                                                             }
                                                         }
                                                     },
-                                                    "enjoy silent time": {
+                                                    "enjoy silent ziet": {
                                                         "_kids": {
                                                             "maybe watch a video": {
                                                                 "_uid": 218,
@@ -1237,7 +1237,7 @@
                                                             }
                                                         },
                                                         "_uid": 214,
-                                                        "plan_label": "enjoy silent time",
+                                                        "plan_label": "enjoy silent ziet",
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Nation-States;": {
@@ -1265,9 +1265,9 @@
                                                             }
                                                         }
                                                     },
-                                                    "gym time": {
+                                                    "gym": {
                                                         "_uid": 215,
-                                                        "plan_label": "gym time",
+                                                        "plan_label": "gym",
                                                         "mass": 1,
                                                         "reasonunits": {
                                                             "A;Moods;": {
@@ -1463,15 +1463,15 @@
                                 "morph": false,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_upper": 1472657760,
                                                 "r_lower": 0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -1519,16 +1519,16 @@
                         "morph": false,
                         "task": true,
                         "reasonunits": {
-                            "A;time;gregtime;": {
+                            "A;ziet;gregziet;": {
                                 "cases": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "r_divisor": 10080.0,
                                         "r_upper": 480.0,
                                         "r_lower": 480.0,
-                                        "r_state": ";A;time;gregtime;"
+                                        "r_state": ";A;ziet;gregziet;"
                                     }
                                 },
-                                "r_context": ";A;time;gregtime;"
+                                "r_context": ";A;ziet;gregziet;"
                             }
                         }
                     },
@@ -1562,16 +1562,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3360.0,
                                                 "r_lower": 3360.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1581,16 +1581,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 420.0,
                                                 "r_lower": 420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1607,16 +1607,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 60480.0,
                                                 "r_upper": 660.0,
                                                 "r_lower": 660.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1633,16 +1633,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 600.0,
                                                 "r_lower": 600.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1660,16 +1660,16 @@
                                 "morph": false,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1686,16 +1686,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1712,16 +1712,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 30240.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1738,16 +1738,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 1200.0,
                                                 "r_lower": 1200.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1764,16 +1764,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 40320.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1790,16 +1790,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 4800.0,
                                                 "r_lower": 4800.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1816,16 +1816,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 9120.0,
                                                 "r_lower": 9120.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1867,16 +1867,16 @@
                                         },
                                         "r_context": ";A;casa;cleaning;laundry basket status;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1901,16 +1901,16 @@
                                         },
                                         "r_context": ";A;casa;cleaning;laundry basket status;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 420.0,
                                                 "r_lower": 420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1928,16 +1928,16 @@
                                         },
                                         "r_context": ";A;casa;cleaning;laundry basket status;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 7740.0,
                                                 "r_lower": 7740.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1962,16 +1962,16 @@
                                         },
                                         "r_context": ";A;casa;cleaning;laundry basket status;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 6300.0,
                                                 "r_lower": 6300.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1980,16 +1980,16 @@
                                 "plan_label": "morning cookery clean-up",
                                 "mass": 1,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 480.0,
                                                 "r_lower": 480.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2006,16 +2006,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 480.0,
                                                 "r_lower": 480.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2032,16 +2032,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 4740.0,
                                                 "r_lower": 4740.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2058,16 +2058,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 9060.0,
                                                 "r_lower": 9060.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2084,16 +2084,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2110,16 +2110,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 7620.0,
                                                 "r_lower": 7620.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2136,16 +2136,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2162,16 +2162,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -2206,16 +2206,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;jour": {
+                                            "A;ziet;gregziet;jour": {
                                                 "r_divisor": 1440,
                                                 "r_upper": 420,
                                                 "r_lower": 420,
-                                                "r_state": ";A;time;gregtime;jour"
+                                                "r_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2232,16 +2232,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 420.0,
                                                 "r_lower": 420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2258,16 +2258,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 80640.0,
                                                 "r_upper": 4860.0,
                                                 "r_lower": 4860.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2284,16 +2284,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2310,16 +2310,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 420.0,
                                                 "r_lower": 420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2328,16 +2328,16 @@
                                 "plan_label": "evening multivitamin",
                                 "mass": 1,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 1080.0,
                                                 "r_lower": 1080.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2354,16 +2354,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 80640.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2382,16 +2382,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 9600.0,
                                                         "r_lower": 9600.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2420,16 +2420,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 3360.0,
                                                         "r_lower": 3360.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2438,16 +2438,16 @@
                                         "plan_label": "core and squats",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 6242.0,
                                                         "r_lower": 6242.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2464,16 +2464,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 3420.0,
                                                         "r_lower": 3420.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2489,16 +2489,16 @@
                                         "plan_label": "rest",
                                         "mass": 1,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 7200.0,
                                                         "r_lower": 7200.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2531,16 +2531,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 4800.0,
                                                         "r_lower": 4800.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2557,16 +2557,16 @@
                                         "mass": 1,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 6240.0,
                                                         "r_lower": 6240.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -2588,16 +2588,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 420.0,
                                                 "r_lower": 420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2614,16 +2614,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2640,16 +2640,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 1440.0,
                                                 "r_upper": 420.0,
                                                 "r_lower": 420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2662,16 +2662,16 @@
                                         "morph": false,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 9180.0,
                                                         "r_lower": 9180.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2681,16 +2681,16 @@
                                         "morph": false,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 9180.0,
                                                         "r_lower": 9180.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2706,16 +2706,16 @@
                                 "morph": false,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 9180.0,
                                                 "r_lower": 9180.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2732,16 +2732,16 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 3420.0,
                                                 "r_lower": 3420.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -2766,15 +2766,15 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
+                                            "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
                                                 "r_upper": 1064041020.0,
                                                 "r_lower": 1064041020.0,
-                                                "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2791,15 +2791,15 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
+                                            "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
                                                 "r_upper": 1064041020.0,
                                                 "r_lower": 1064041020.0,
-                                                "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2816,15 +2816,15 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
+                                            "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
                                                 "r_upper": 1064041020.0,
                                                 "r_lower": 1064041020.0,
-                                                "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2841,15 +2841,15 @@
                                 "mass": 1,
                                 "task": true,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am": {
+                                            "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
                                                 "r_upper": 1064041020.0,
                                                 "r_lower": 1064041020.0,
-                                                "r_state": ";A;time;gregtime;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3017,16 +3017,16 @@
                                         },
                                         "r_context": ";A;Nation-States;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 10080.0,
                                                 "r_upper": 5340.0,
                                                 "r_lower": 5340.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -3051,16 +3051,16 @@
                                         },
                                         "r_context": ";A;Nation-States;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 60480.0,
                                                 "r_upper": 840.0,
                                                 "r_lower": 840.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3085,16 +3085,16 @@
                         "morph": false,
                         "task": true,
                         "reasonunits": {
-                            "A;time;gregtime;": {
+                            "A;ziet;gregziet;": {
                                 "cases": {
-                                    "A;time;gregtime;jour": {
+                                    "A;ziet;gregziet;jour": {
                                         "r_divisor": 1440.0,
                                         "r_upper": 480.0,
                                         "r_lower": 480.0,
-                                        "r_state": ";A;time;gregtime;jour"
+                                        "r_state": ";A;ziet;gregziet;jour"
                                     }
                                 },
-                                "r_context": ";A;time;gregtime;"
+                                "r_context": ";A;ziet;gregziet;"
                             }
                         }
                     },
@@ -3111,16 +3111,16 @@
                         "mass": 1.0,
                         "task": true,
                         "reasonunits": {
-                            "A;time;gregtime;": {
+                            "A;ziet;gregziet;": {
                                 "cases": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "r_divisor": 1440.0,
                                         "r_upper": 480.0,
                                         "r_lower": 480.0,
-                                        "r_state": ";A;time;gregtime;"
+                                        "r_state": ";A;ziet;gregziet;"
                                     }
                                 },
-                                "r_context": ";A;time;gregtime;"
+                                "r_context": ";A;ziet;gregziet;"
                             }
                         }
                     }
@@ -3195,16 +3195,16 @@
                                         },
                                         "r_context": ";A;Aaron Donald objects effected by him;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;jour": {
+                                            "A;ziet;gregziet;jour": {
                                                 "r_divisor": 1440,
                                                 "r_upper": 660,
                                                 "r_lower": 660,
-                                                "r_state": ";A;time;gregtime;jour"
+                                                "r_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3253,16 +3253,16 @@
                                         },
                                         "r_context": ";A;Aaron Donald objects effected by him;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 20160.0,
                                                 "r_upper": 4920.0,
                                                 "r_lower": 4920.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3295,16 +3295,16 @@
                                 },
                                 "r_context": ";A;Aaron Donald objects effected by him;"
                             },
-                            "A;time;gregtime;": {
+                            "A;ziet;gregziet;": {
                                 "cases": {
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "r_divisor": 1440.0,
                                         "r_upper": 1305.0,
                                         "r_lower": 1305.0,
-                                        "r_state": ";A;time;gregtime;"
+                                        "r_state": ";A;ziet;gregziet;"
                                     }
                                 },
-                                "r_context": ";A;time;gregtime;"
+                                "r_context": ";A;ziet;gregziet;"
                             }
                         }
                     },
@@ -3318,16 +3318,16 @@
                                         "morph": false,
                                         "task": true,
                                         "reasonunits": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 6495.0,
                                                         "r_lower": 6480.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -3336,8 +3336,8 @@
                                 "mass": 4.0,
                                 "morph": false,
                                 "reasonunits": {
-                                    "A;time;gregtime;": {
-                                        "r_context": ";A;time;gregtime;"
+                                    "A;ziet;gregziet;": {
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -3364,16 +3364,16 @@
                                                 },
                                                 "r_context": ";A;Aaron Donald objects effected by him;"
                                             },
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 10080.0,
                                                         "r_upper": 6540.0,
                                                         "r_lower": 6480.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -3403,16 +3403,16 @@
                                                 },
                                                 "r_context": ";A;Aaron Donald objects effected by him;"
                                             },
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "cases": {
-                                                    "A;time;gregtime;": {
+                                                    "A;ziet;gregziet;": {
                                                         "r_divisor": 20160.0,
                                                         "r_upper": 600.0,
                                                         "r_lower": 600.0,
-                                                        "r_state": ";A;time;gregtime;"
+                                                        "r_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;time;gregtime;"
+                                                "r_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -3475,16 +3475,16 @@
                                         },
                                         "r_context": ";A;Aaron Donald objects effected by him;"
                                     },
-                                    "A;time;gregtime;": {
+                                    "A;ziet;gregziet;": {
                                         "cases": {
-                                            "A;time;gregtime;": {
+                                            "A;ziet;gregziet;": {
                                                 "r_divisor": 20160.0,
                                                 "r_upper": 600.0,
                                                 "r_lower": 600.0,
-                                                "r_state": ";A;time;gregtime;"
+                                                "r_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;time;gregtime;"
+                                        "r_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3594,8 +3594,8 @@
                         "plan_label": "hungry",
                         "mass": 1
                     },
-                    "I will waste time": {
-                        "plan_label": "I will waste time",
+                    "I will waste ziet": {
+                        "plan_label": "I will waste ziet",
                         "mass": 1.0,
                         "morph": false
                     }
@@ -3728,10 +3728,10 @@
                 "plan_label": "Seasons",
                 "mass": 1
             },
-            "time": {
+            "ziet": {
                 "_is_expanded": false,
                 "_kids": {
-                    "gregtime": {
+                    "gregziet": {
                         "_kids": {
                             "400 yr segment": {
                                 "_is_expanded": false,
@@ -3828,7 +3828,7 @@
                         },
                         "begin": 0,
                         "close": 1472657760,
-                        "plan_label": "gregtime",
+                        "plan_label": "gregziet",
                         "mass": 1
                     },
                     "tech": {
@@ -5158,7 +5158,7 @@
                         "mass": 1
                     }
                 },
-                "plan_label": "time",
+                "plan_label": "ziet",
                 "mass": 1
             },
             "Tired Status": {
@@ -5408,11 +5408,11 @@
                 "f_context": ";A;Seasons;",
                 "f_state": ";A;Seasons;"
             },
-            "A;time;gregtime;": {
-                "f_context": ";A;time;gregtime;",
+            "A;ziet;gregziet;": {
+                "f_context": ";A;ziet;gregziet;",
                 "f_upper": 1064130373,
                 "f_lower": 1064128320,
-                "f_state": ";A;time;gregtime;"
+                "f_state": ";A;ziet;gregziet;"
             },
             "A;WaterExistence;": {
                 "f_context": ";A;WaterExistence;",

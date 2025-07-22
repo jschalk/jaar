@@ -98,8 +98,8 @@ def test_BelieverUnit_get_agenda_dict_With7amPlanExample():
     x_believer = get_believerunit_with7amCleanTableReason()
     print(f"{len(x_believer.get_agenda_dict())=}")
     assert len(x_believer.get_agenda_dict()) == 1
-    timetech_rope = x_believer.make_l1_rope("timetech")
-    x24hr_rope = x_believer.make_rope(timetech_rope, "24hr")
+    ziettech_rope = x_believer.make_l1_rope("ziettech")
+    x24hr_rope = x_believer.make_rope(ziettech_rope, "24hr")
     x24hr_r_lower = 0.0
     x24hr_r_upper = 8.0
     housemanagement_str = "housemanagement"
@@ -261,12 +261,12 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
 
     run_str = "run"
     run_rope = zia_believer.make_l1_rope(run_str)
-    time_rope = zia_believer.make_l1_rope("time")
+    ziet_rope = zia_believer.make_l1_rope("ziet")
     jour_str = "jour"
-    jour_rope = zia_believer.make_rope(time_rope, jour_str)
+    jour_rope = zia_believer.make_rope(ziet_rope, jour_str)
 
     zia_believer.set_l1_plan(planunit_shop(run_str, task=True))
-    zia_believer.set_plan(planunit_shop(jour_str, begin=0, close=500), time_rope)
+    zia_believer.set_plan(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
     zia_believer.edit_plan_attr(
         run_rope,
         reason_r_context=jour_rope,
@@ -303,13 +303,13 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
 
     run_str = "run"
     run_rope = zia_believer.make_l1_rope(run_str)
-    time_str = "time"
-    time_rope = zia_believer.make_l1_rope(time_str)
+    ziet_str = "ziet"
+    ziet_rope = zia_believer.make_l1_rope(ziet_str)
     jour_str = "jour"
-    jour_rope = zia_believer.make_rope(time_rope, jour_str)
+    jour_rope = zia_believer.make_rope(ziet_rope, jour_str)
 
     zia_believer.set_l1_plan(planunit_shop(run_str, task=True))
-    zia_believer.set_plan(planunit_shop(jour_str, begin=0, close=500), time_rope)
+    zia_believer.set_plan(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
     zia_believer.edit_plan_attr(
         run_rope,
         reason_r_context=jour_rope,
@@ -398,12 +398,12 @@ def test_BelieverUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     print(f"{yao_believer.get_reason_r_contexts()=}")
 
     assert len(yao_believer.get_agenda_dict()) == 44
-    time_rope = yao_believer.make_l1_rope("time")
-    gregtime_rope = yao_believer.make_rope(time_rope, "gregtime")
+    ziet_rope = yao_believer.make_l1_rope("ziet")
+    gregziet_rope = yao_believer.make_rope(ziet_rope, "gregziet")
 
     # WHEN
     yao_believer.add_fact(
-        gregtime_rope, gregtime_rope, f_lower=1063998720, f_upper=1064130373
+        gregziet_rope, gregziet_rope, f_lower=1063998720, f_upper=1064130373
     )
     task_plan_list = yao_believer.get_agenda_dict()
 
@@ -420,27 +420,27 @@ def test_BelieverUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     #         evening_plan = plan_x
     #         print(f"{plan_x.get_plan_rope()=}")
 
-    print(f"\nPlan = '{evening_str}' and reason '{gregtime_rope}'")
-    factheir_gregtime = evening_plan._factheirs.get(gregtime_rope)
-    print(f"\n{factheir_gregtime=}")
+    print(f"\nPlan = '{evening_str}' and reason '{gregziet_rope}'")
+    factheir_gregziet = evening_plan._factheirs.get(gregziet_rope)
+    print(f"\n{factheir_gregziet=}")
 
     # for reasonheir in agenda_plan._reasonheirs.values():
     #     print(f"{reasonheir.r_context=} {reasonheir._status=} {reasonheir._chore=}")
-    reasonheir_gregtime = evening_plan._reasonheirs.get(gregtime_rope)
-    reasonheir_str = f"\nreasonheir_gregtime= '{reasonheir_gregtime.r_context}', status={reasonheir_gregtime._status}, chore={reasonheir_gregtime._chore}"
+    reasonheir_gregziet = evening_plan._reasonheirs.get(gregziet_rope)
+    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.r_context}', status={reasonheir_gregziet._status}, chore={reasonheir_gregziet._chore}"
     print(reasonheir_str)
 
-    caseunit = reasonheir_gregtime.cases.get(gregtime_rope)
+    caseunit = reasonheir_gregziet.cases.get(gregziet_rope)
     print(f"----\n {caseunit=}")
-    print(f" {caseunit._get_chore_status(factheir=factheir_gregtime)=}")
+    print(f" {caseunit._get_chore_status(factheir=factheir_gregziet)=}")
     print(f" {caseunit._status=} , {caseunit._is_range()=} caseunit fails")
     print(f" {caseunit._status=} , {caseunit._is_segregate()=} caseunit passes")
     # segr_obj = casestatusfinder_shop(
     #     r_lower=caseunit.r_lower,
     #     r_upper=caseunit.r_upper,
     #     r_divisor=caseunit.r_divisor,
-    #     f_lower_full=factheir_gregtime.r_lower,
-    #     f_upper_full=factheir_gregtime.r_upper,
+    #     f_lower_full=factheir_gregziet.r_lower,
+    #     f_upper_full=factheir_gregziet.r_upper,
     # )
     # print(
     #     f"----\n  {segr_obj.r_lower=}  {segr_obj.r_upper=}  {segr_obj.r_divisor=}"

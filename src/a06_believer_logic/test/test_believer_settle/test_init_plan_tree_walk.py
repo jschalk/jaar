@@ -73,14 +73,14 @@ def test_BelieverUnit_set_plan_dict_Scenario0():
 def test_BelieverUnit_set_plan_dict_Scenario1():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
-    time0_begin = 7
-    time0_close = 31
+    ziet0_begin = 7
+    ziet0_close = 31
     root_rope = to_rope(yao_believer.belief_label)
-    yao_believer.edit_plan_attr(root_rope, begin=time0_begin, close=time0_close)
+    yao_believer.edit_plan_attr(root_rope, begin=ziet0_begin, close=ziet0_close)
     root_rope = to_rope(yao_believer.belief_label)
     root_plan = yao_believer.get_plan_obj(root_rope)
-    assert root_plan.begin == time0_begin
-    assert root_plan.close == time0_close
+    assert root_plan.begin == ziet0_begin
+    assert root_plan.close == ziet0_close
     assert not root_plan._gogo_calc
     assert not root_plan._stop_calc
 
@@ -88,8 +88,8 @@ def test_BelieverUnit_set_plan_dict_Scenario1():
     yao_believer._set_plan_dict()
 
     # THEN
-    assert root_plan.begin == time0_begin
-    assert root_plan.close == time0_close
+    assert root_plan.begin == ziet0_begin
+    assert root_plan.close == ziet0_close
     assert not root_plan._gogo_calc
     assert not root_plan._stop_calc
 
