@@ -5,8 +5,8 @@ from src.a06_believer_logic.believer import believerunit_shop
 def test_BelieverUnit_get_plan_ranged_kids_ReturnsAllChildren():
     # ESTABLISH
     yao_believerunit = believerunit_shop("Yao")
-    time_rope = yao_believerunit.make_l1_rope("time")
-    tech_rope = yao_believerunit.make_rope(time_rope, "tech")
+    ziet_rope = yao_believerunit.make_l1_rope("ziet")
+    tech_rope = yao_believerunit.make_rope(ziet_rope, "tech")
     wk_str = "wk"
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
@@ -44,8 +44,8 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsAllChildren():
 def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
     # ESTABLISH
     yao_believerunit = believerunit_shop("Yao")
-    time_rope = yao_believerunit.make_l1_rope("time")
-    tech_rope = yao_believerunit.make_rope(time_rope, "tech")
+    ziet_rope = yao_believerunit.make_l1_rope("ziet")
+    tech_rope = yao_believerunit.make_rope(ziet_rope, "tech")
     wk_str = "wk"
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
@@ -91,8 +91,8 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
 def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
     # ESTABLISH
     yao_believerunit = believerunit_shop("Yao")
-    time_rope = yao_believerunit.make_l1_rope("time")
-    tech_rope = yao_believerunit.make_rope(time_rope, "tech")
+    ziet_rope = yao_believerunit.make_l1_rope("ziet")
+    tech_rope = yao_believerunit.make_rope(ziet_rope, "tech")
     wk_str = "wk"
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)
@@ -129,8 +129,8 @@ def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
 def test_BelieverUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     # ESTABLISH
     yao_believerunit = believerunit_shop("Yao")
-    time_rope = yao_believerunit.make_l1_rope("time")
-    tech_rope = yao_believerunit.make_rope(time_rope, "tech")
+    ziet_rope = yao_believerunit.make_l1_rope("ziet")
+    tech_rope = yao_believerunit.make_rope(ziet_rope, "tech")
     wk_str = "wk"
     wk_rope = yao_believerunit.make_rope(tech_rope, wk_str)
     wk_plan = planunit_shop(wk_str, begin=0, close=10800)

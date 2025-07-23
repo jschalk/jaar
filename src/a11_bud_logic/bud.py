@@ -12,11 +12,8 @@ from src.a00_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.a01_term_logic.term import BeliefLabel, BelieverName, PartnerName
-from src.a02_finance_logic.finance_config import (
-    FundNum,
-    TimeLinePoint,
-    default_fund_pool,
-)
+from src.a02_finance_logic.finance_config import FundNum, default_fund_pool
+from src.a07_timeline_logic.timeline import TimeLinePoint
 
 
 class calc_magnitudeException(Exception):

@@ -13,7 +13,6 @@ from src.a00_data_toolbox.test._util.a00_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-import time
 
 
 def test_open_csv_with_types(env_dir_setup_cleanup):

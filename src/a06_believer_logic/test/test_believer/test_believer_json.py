@@ -13,7 +13,7 @@ from src.a06_believer_logic.believer import (
 )
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
-    get_believerunit_r_context_time_example,
+    get_believerunit_r_context_ziet_example,
     get_believerunit_x1_3levels_1reason_1facts,
 )
 
@@ -27,9 +27,9 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     yao_believer.add_fact(
         f_context=hr_number_rope, f_state=hr_number_rope, f_lower=0, f_upper=23
     )
-    time_minute = yao_believer.make_l1_rope("jour_minute")
+    ziet_minute = yao_believer.make_l1_rope("jour_minute")
     yao_believer.add_fact(
-        f_context=time_minute, f_state=time_minute, f_lower=0, f_upper=1440
+        f_context=ziet_minute, f_state=ziet_minute, f_lower=0, f_upper=1440
     )
     yao_str = "Yao"
     yao_fund_pool = 23000
@@ -526,7 +526,7 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     # ESTABLISH
     x1_believer = believerunit_v001()
     x2_believer = get_believerunit_x1_3levels_1reason_1facts()
-    x3_believer = get_believerunit_r_context_time_example()
+    x3_believer = get_believerunit_r_context_ziet_example()
     print(f"{x1_believer.believer_name}")
     print(f"{x2_believer.believer_name}")
     print(f"{x3_believer.believer_name}")

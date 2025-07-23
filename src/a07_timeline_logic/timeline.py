@@ -434,6 +434,10 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
     return offset_x0 - offset_x1
 
 
+class TimeLinePoint(int):
+    pass
+
+
 @dataclass
 class BelieverTimelinePoint:
     """Given believer, timeline_rope, and TimelinePoint, returns time technology attrs
@@ -452,7 +456,7 @@ class BelieverTimelinePoint:
 
     x_believerunit: BelieverUnit = None
     time_range_root_rope: RopeTerm = None
-    x_min: int = None
+    x_min: TimeLinePoint = None
     # calculated fields
     _timeline_plan: PlanUnit = None
     _weekday: str = None

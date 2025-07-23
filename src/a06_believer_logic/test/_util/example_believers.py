@@ -146,12 +146,12 @@ def get_believerunit_with_4_levels_and_2reasons_2facts() -> BelieverUnit:
 def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     sue_believer = get_believerunit_with_4_levels_and_2reasons_2facts()
 
-    time_str = "timetech"
-    time_rope = sue_believer.make_l1_rope(time_str)
-    time_plan = planunit_shop(time_str)
+    ziet_str = "ziettech"
+    ziet_rope = sue_believer.make_l1_rope(ziet_str)
+    ziet_plan = planunit_shop(ziet_str)
 
     x24hr_str = "24hr"
-    x24hr_rope = sue_believer.make_rope(time_rope, x24hr_str)
+    x24hr_rope = sue_believer.make_rope(ziet_rope, x24hr_str)
     x24hr_plan = planunit_shop(x24hr_str, begin=0.0, close=24.0)
 
     am_str = "am"
@@ -166,8 +166,8 @@ def get_believerunit_with7amCleanTableReason() -> BelieverUnit:
     n2_plan = planunit_shop(n2_str, gogo_want=2, stop_want=3)
     n3_plan = planunit_shop(n3_str, gogo_want=3, stop_want=4)
 
-    sue_believer.set_l1_plan(time_plan)
-    sue_believer.set_plan(x24hr_plan, time_rope)
+    sue_believer.set_l1_plan(ziet_plan)
+    sue_believer.set_plan(x24hr_plan, ziet_rope)
     sue_believer.set_plan(am_plan, x24hr_rope)
     sue_believer.set_plan(pm_plan, x24hr_rope)
     sue_believer.set_plan(n1_plan, am_rope)  # plan_am
@@ -262,7 +262,7 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     return zia_believer
 
 
-def get_believerunit_r_context_time_example() -> BelieverUnit:
+def get_believerunit_r_context_ziet_example() -> BelieverUnit:
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_l1_plan(planunit_shop("casa"))
     return sue_believer

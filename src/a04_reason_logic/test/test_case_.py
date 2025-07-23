@@ -438,12 +438,12 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
     assert wed_sun_case._status is False
 
 
-def test_CaseUnit_set_status_SetsStatus_status_ScenarioTime():
+def test_CaseUnit_set_status_SetsStatus_status_ScenarioClock():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     hr24_str = "24hr"
-    hr24_rope = create_rope(timetech_rope, hr24_str)
+    hr24_rope = create_rope(clock_rope, hr24_str)
     hr24_case = caseunit_shop(r_state=hr24_rope, r_lower=7, r_upper=7)
     assert hr24_case._status is None
 
@@ -604,10 +604,10 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
 
 def test_CaseUnit_set_status_SetsAttrs_Scenario03():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     hr24_str = "24hr"
-    hr24_rope = create_rope(timetech_rope, hr24_str)
+    hr24_rope = create_rope(clock_rope, hr24_str)
     hr24_case = caseunit_shop(r_state=hr24_rope, r_lower=7, r_upper=7)
     assert hr24_case._status is None
 
@@ -623,10 +623,10 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
 
 def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     wk_str = "ced_wk"
-    wk_rope = create_rope(timetech_rope, wk_str)
+    wk_rope = create_rope(clock_rope, wk_str)
     o1_n1_d6_case = caseunit_shop(r_state=wk_rope, r_divisor=6, r_lower=1, r_upper=1)
     assert o1_n1_d6_case._status is None
 
@@ -640,10 +640,10 @@ def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
 
 def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     wk_str = "ced_wk"
-    wk_rope = create_rope(timetech_rope, wk_str)
+    wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(r_state=wk_rope, r_divisor=6, r_lower=1, r_upper=1)
     believer_fact = factheir_shop(
         f_context=wk_rope, f_state=wk_rope, f_lower=7, f_upper=7
@@ -659,10 +659,10 @@ def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
 
 def test_CaseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndr_lower_r_upper():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     wk_str = "ced_wk"
-    wk_rope = create_rope(timetech_rope, wk_str)
+    wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(r_state=wk_rope, r_divisor=6, r_lower=1, r_upper=1)
 
     # WHEN
@@ -676,10 +676,10 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndr_lower_r_upper():
 
 def test_CaseUnit_get_dict_ReturnsCorrectDictWithr_lowerAndr_upper():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     wk_str = "ced_wk"
-    wk_rope = create_rope(timetech_rope, wk_str)
+    wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(r_state=wk_rope, r_lower=1, r_upper=4)
 
     # WHEN
@@ -693,10 +693,10 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithr_lowerAndr_upper():
 
 def test_CaseUnit_get_dict_ReturnsCorrectDictWithOnlyRopeTerm():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     wk_str = "ced_wk"
-    wk_rope = create_rope(timetech_rope, wk_str)
+    wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(r_state=wk_rope)
 
     # WHEN
@@ -710,10 +710,10 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithOnlyRopeTerm():
 
 def test_CaseUnit_get_obj_key():
     # ESTABLISH
-    timetech_str = "timetech"
-    timetech_rope = create_rope(root_label(), timetech_str)
+    clock_str = "clock"
+    clock_rope = create_rope(root_label(), clock_str)
     wk_str = "ced_wk"
-    wk_rope = create_rope(timetech_rope, wk_str)
+    wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(r_state=wk_rope)
 
     # WHEN / THEN

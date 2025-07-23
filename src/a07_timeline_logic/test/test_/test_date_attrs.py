@@ -12,8 +12,14 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 )
 from src.a07_timeline_logic.timeline import (
     BelieverTimelinePoint,
+    TimeLinePoint,
     believertimelinepoint_shop,
 )
+
+
+def test_TimeLinePoint_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert TimeLinePoint(8) == 8
 
 
 def test_BelieverTimelinePoint_Exists():

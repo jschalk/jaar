@@ -2,7 +2,6 @@ from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.rope import create_rope, default_knot_if_None
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a02_finance_logic.finance_config import TimeLinePoint
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,

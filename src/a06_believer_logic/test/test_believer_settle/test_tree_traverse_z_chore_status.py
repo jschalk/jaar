@@ -234,10 +234,10 @@ def test_BelieverUnit_settle_believer_CorrectlyCalculatesRangeAttributes():
     assert sue_believerunit._plan_dict.get(clean_rope)._active is False
 
     # set facts as midevening to 8am
-    time_str = "timetech"
-    time_rope = sue_believerunit.make_l1_rope(time_str)
+    ziet_str = "ziettech"
+    ziet_rope = sue_believerunit.make_l1_rope(ziet_str)
     x24hr_str = "24hr"
-    x24hr_rope = sue_believerunit.make_rope(time_rope, x24hr_str)
+    x24hr_rope = sue_believerunit.make_rope(ziet_rope, x24hr_str)
     x24hr_r_context = x24hr_rope
     x24hr_f_state = x24hr_rope
     x24hr_r_lower = 0.0

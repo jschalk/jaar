@@ -7,7 +7,6 @@ from src.a02_finance_logic.finance_config import (
     MoneyUnit,
     PennyNum,
     RespectNum,
-    TimeLinePoint,
     default_fund_iota_if_None,
     default_fund_pool,
     default_respect_num,
@@ -209,8 +208,3 @@ def test_get_net_ReturnsObj():
         str(excinfo.value)
         == "get_net x_give=-4 and x_take=-5. Only non-negative numbers allowed."
     )
-
-
-def test_TimeLinePoint_Exists():
-    # ESTABLISH / WHEN / THEN
-    assert TimeLinePoint(8) == 8

@@ -395,17 +395,17 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithDenomSetsCaseDivision():
     sue_believer = get_believerunit_with_4_levels()
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
-    time_str = "time"
-    time_rope = sue_believer.make_l1_rope(time_str)
+    ziet_str = "ziet"
+    ziet_rope = sue_believer.make_l1_rope(ziet_str)
     wk_str = "wk"
-    wk_rope = sue_believer.make_rope(time_rope, wk_str)
-    sue_believer.set_l1_plan(planunit_shop(time_str, begin=100, close=2000))
-    sue_believer.set_plan(planunit_shop(wk_str, denom=7), parent_rope=time_rope)
+    wk_rope = sue_believer.make_rope(ziet_rope, wk_str)
+    sue_believer.set_l1_plan(planunit_shop(ziet_str, begin=100, close=2000))
+    sue_believer.set_plan(planunit_shop(wk_str, denom=7), parent_rope=ziet_rope)
 
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=time_rope,
+        reason_r_context=ziet_rope,
         reason_case=wk_rope,
         r_lower=2,
         reason_r_upper=5,
@@ -414,10 +414,10 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithDenomSetsCaseDivision():
 
     # THEN
     casa_plan1 = sue_believer.get_plan_obj(casa_rope)
-    assert casa_plan1.reasonunits[time_rope] is not None
-    assert casa_plan1.reasonunits[time_rope].cases[wk_rope].r_divisor == 7
-    assert casa_plan1.reasonunits[time_rope].cases[wk_rope].r_lower == 2
-    assert casa_plan1.reasonunits[time_rope].cases[wk_rope].r_upper == 5
+    assert casa_plan1.reasonunits[ziet_rope] is not None
+    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].r_divisor == 7
+    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].r_lower == 2
+    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].r_upper == 5
 
 
 def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCaser_lower_r_upper():
@@ -425,19 +425,19 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCaser_lower_r_up
     sue_believer = get_believerunit_with_4_levels()
     casa = "casa"
     casa_rope = sue_believer.make_l1_rope(casa)
-    time = "time"
-    time_rope = sue_believer.make_l1_rope(time)
+    ziet = "ziet"
+    ziet_rope = sue_believer.make_l1_rope(ziet)
     rus_war = "rus_war"
-    rus_war_rope = sue_believer.make_rope(time_rope, rus_war)
+    rus_war_rope = sue_believer.make_rope(ziet_rope, rus_war)
     sue_believer.set_plan(
-        planunit_shop(time, begin=100, close=2000), sue_believer.belief_label
+        planunit_shop(ziet, begin=100, close=2000), sue_believer.belief_label
     )
-    sue_believer.set_plan(planunit_shop(rus_war, begin=22, close=34), time_rope)
+    sue_believer.set_plan(planunit_shop(rus_war, begin=22, close=34), ziet_rope)
 
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=time_rope,
+        reason_r_context=ziet_rope,
         reason_case=rus_war_rope,
         r_lower=None,
         reason_r_upper=None,
@@ -446,10 +446,10 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCaser_lower_r_up
 
     # THEN
     casa_plan1 = sue_believer.get_plan_obj(casa_rope)
-    assert casa_plan1.reasonunits[time_rope] is not None
-    assert casa_plan1.reasonunits[time_rope].cases[rus_war_rope].r_divisor is None
-    assert casa_plan1.reasonunits[time_rope].cases[rus_war_rope].r_lower == 22
-    assert casa_plan1.reasonunits[time_rope].cases[rus_war_rope].r_upper == 34
+    assert casa_plan1.reasonunits[ziet_rope] is not None
+    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].r_divisor is None
+    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].r_lower == 22
+    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].r_upper == 34
 
 
 def test_BelieverUnit_ReasonUnits_edit_plan_attr_CorrectlyDeletes_ReasonUnits_And_CaseUnits():

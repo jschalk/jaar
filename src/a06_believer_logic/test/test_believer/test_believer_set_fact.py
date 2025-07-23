@@ -95,14 +95,14 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_r_lower_IsNone():
 def test_BelieverUnit_set_fact_FailsToCreateWhenr_contextAndFactAreDifferenctAndFactPlanIsNot_RangeRoot():
     # ESTABLISH
     bob_believer = believerunit_shop("Bob")
-    time_str = "time"
-    time_plan = planunit_shop(time_str, begin=0, close=140)
-    bob_believer.set_l1_plan(time_plan)
-    time_rope = bob_believer.make_l1_rope(time_str)
+    ziet_str = "ziet"
+    ziet_plan = planunit_shop(ziet_str, begin=0, close=140)
+    bob_believer.set_l1_plan(ziet_plan)
+    ziet_rope = bob_believer.make_l1_rope(ziet_str)
     a1st = "age1st"
-    a1st_rope = bob_believer.make_rope(time_rope, a1st)
+    a1st_rope = bob_believer.make_rope(ziet_rope, a1st)
     a1st_plan = planunit_shop(a1st, begin=0, close=20)
-    bob_believer.set_plan(a1st_plan, parent_rope=time_rope)
+    bob_believer.set_plan(a1st_plan, parent_rope=ziet_rope)
     a1e1st_str = "a1_era1st"
     a1e1st_plan = planunit_shop(a1e1st_str, begin=20, close=30)
     bob_believer.set_plan(a1e1st_plan, parent_rope=a1st_rope)
@@ -155,18 +155,18 @@ def test_BelieverUnit_get_fact_ReturnsFactUnit():
 def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     # ESTABLISH a single ranged fact
     sue_believer = believerunit_shop("Sue")
-    time_str = "time"
-    time_plan = planunit_shop(time_str, begin=0, close=140)
-    sue_believer.set_l1_plan(time_plan)
+    ziet_str = "ziet"
+    ziet_plan = planunit_shop(ziet_str, begin=0, close=140)
+    sue_believer.set_l1_plan(ziet_plan)
 
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str, task=True)
     sue_believer.set_l1_plan(clean_plan)
     c_rope = sue_believer.make_l1_rope(clean_str)
-    time_rope = sue_believer.make_l1_rope(time_str)
-    # sue_believer.edit_plan_attr(c_rope, reason_r_context=time_rope, reason_case=time_rope, r_lower=5, reason_r_upper=10)
+    ziet_rope = sue_believer.make_l1_rope(ziet_str)
+    # sue_believer.edit_plan_attr(c_rope, reason_r_context=ziet_rope, reason_case=ziet_rope, r_lower=5, reason_r_upper=10)
 
-    sue_believer.add_fact(f_context=time_rope, f_state=time_rope, f_lower=5, f_upper=10)
+    sue_believer.add_fact(f_context=ziet_rope, f_state=ziet_rope, f_lower=5, f_upper=10)
     print(f"Establish a single ranged fact {sue_believer.planroot.factunits=}")
     assert len(sue_believer.planroot.factunits) == 1
 
@@ -202,9 +202,9 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
 def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     # ESTABLISH a two ranged facts where one is "range-root" get_root_ranged_facts returns one "range-root" fact
     sue_believer = believerunit_shop("Sue")
-    time_str = "time"
-    sue_believer.set_l1_plan(planunit_shop(time_str, begin=0, close=140))
-    time_rope = sue_believer.make_l1_rope(time_str)
+    ziet_str = "ziet"
+    sue_believer.set_l1_plan(planunit_shop(ziet_str, begin=0, close=140))
+    ziet_rope = sue_believer.make_l1_rope(ziet_str)
     mood_x = "mood_x"
     sue_believer.set_l1_plan(planunit_shop(mood_x))
     m_x_rope = sue_believer.make_l1_rope(mood_x)
@@ -212,7 +212,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     sad = "Sad"
     sue_believer.set_plan(planunit_shop(happy), parent_rope=m_x_rope)
     sue_believer.set_plan(planunit_shop(sad), parent_rope=m_x_rope)
-    sue_believer.add_fact(f_context=time_rope, f_state=time_rope, f_lower=5, f_upper=10)
+    sue_believer.add_fact(f_context=ziet_rope, f_state=ziet_rope, f_lower=5, f_upper=10)
     sue_believer.add_fact(
         f_context=m_x_rope, f_state=sue_believer.make_rope(m_x_rope, happy)
     )
@@ -223,7 +223,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
 
     # WHEN / THEN
     assert len(sue_believer._get_rangeroot_factunits()) == 1
-    assert sue_believer._get_rangeroot_factunits()[0].f_context == time_rope
+    assert sue_believer._get_rangeroot_factunits()[0].f_context == ziet_rope
 
 
 def test_BelieverUnit_set_fact_create_missing_plans_Createsr_contextAndFact():
