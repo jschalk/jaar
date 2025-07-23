@@ -188,7 +188,7 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     # ESTABLISH
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
-    # TODO change excluded_strs to empty set by editing codebase
+    # "close" is excluded because it is used to close sqlite database connections
     excluded_strs = {"close"}
 
     # WHEN / THEN
