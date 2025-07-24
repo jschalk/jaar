@@ -1,0 +1,10 @@
+{
+    "_mode": "flatten",
+    "data": {
+        "user": {
+            "id": 1,
+            "name": "Jo"
+        },
+        "status": "active"
+    }
+}

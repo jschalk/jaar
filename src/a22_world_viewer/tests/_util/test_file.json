@@ -1,0 +1,13 @@
+{
+    "name": "Test Object",
+    "items": [
+        {
+            "id": 1,
+            "value": "A"
+        },
+        {
+            "id": 2,
+            "value": "B"
+        }
+    ]
+}

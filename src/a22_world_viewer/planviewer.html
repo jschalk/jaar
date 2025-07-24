@@ -1,0 +1,138 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PlanViewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        #controls {
+            margin-bottom: 15px;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>PlanViewer</h2>
+
+    <div id="controls">
+        <label for="mode">View Plan:</label>
+        <select id="mode">
+            <option value="default">default</option>
+            <option value="clean">clean</option>
+            <option value="enrich">enrich</option>
+            <option value="flatten">flatten</option>
+        </select>
+
+        <input type="file" id="jsonFile" accept=".json" />
+    </div>
+    <div id="ExportControl">
+        <button id="exportBtn" disabled>Export JSON</button>
+    </div>
+
+    <div id="tree"></div>
+
+    <script>
+        const fileInput = document.getElementById("jsonFile");
+        const modeSelect = document.getElementById("mode");
+        const treeContainer = document.getElementById("tree");
+        const exportBtn = document.getElementById("exportBtn");
+
+        let lastResult = null;
+
+        fileInput.addEventListener("change", async function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = async function (e) {
+                try {
+                    const rawJson = JSON.parse(e.target.result);
+                    const mode = modeSelect.value;
+
+                    const requestBody = {
+                        _mode: mode,
+                        data: rawJson
+                    };
+
+                    const response = await fetch("http://localhost:5000/process", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(requestBody)
+                    });
+
+                    if (!response.ok) {
+                        const err = await response.json();
+                        alert("Server error: " + (err.error || response.statusText));
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    lastResult = result.result || result;
+                    renderTree(lastResult);
+                    exportBtn.disabled = false;
+
+                } catch (err) {
+                    alert("Error occurred: " + err.message);
+                    console.error("ETL Error:", err);
+                }
+            };
+
+            reader.readAsText(file);
+        });
+
+        exportBtn.addEventListener("click", function () {
+            if (!lastResult) return;
+
+            const blob = new Blob([JSON.stringify(lastResult, null, 2)], {
+                type: "application/json"
+            });
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "processed_data.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        function renderTree(obj, container = treeContainer) {
+            container.innerHTML = "";
+            const ul = document.createElement("ul");
+            buildTree(obj, ul);
+            container.appendChild(ul);
+        }
+
+        function buildTree(obj, parent) {
+            for (const key in obj) {
+                const li = document.createElement("li");
+                if (typeof obj[key] === "object" && obj[key] !== null) {
+                    li.textContent = key;
+                    const ul = document.createElement("ul");
+                    buildTree(obj[key], ul);
+                    li.appendChild(ul);
+                } else {
+                    li.textContent = `${key}: ${obj[key]}`;
+                }
+                parent.appendChild(li);
+            }
+        }
+    </script>
+</body>
+
+</html>
