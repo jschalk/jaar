@@ -22,22 +22,36 @@
         #controls {
             margin-bottom: 15px;
         }
+
+        #treeContainer ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .tree-label {
+            cursor: pointer;
+            display: inline-block;
+            user-select: none;
+        }
+
+        .arrow {
+            display: inline-block;
+            width: 1em;
+            font-weight: bold;
+        }
     </style>
 </head>
 
 <body>
     <h2>PlanViewer</h2>
 
-    <div id="controls">
-        <label for="mode">View Plan:</label>
-        <select id="mode">
-            <option value="default">default</option>
-            <option value="clean">clean</option>
-            <option value="enrich">enrich</option>
-            <option value="flatten">flatten</option>
-        </select>
-
+    <div id="FileInput">
         <input type="file" id="jsonFile" accept=".json" />
+    </div>
+    <div id="controls">
+        <label for="viewOptions">View Options:</label>
+        <select id="viewOptions"></select>
+        </select>
     </div>
     <div id="ExportControl">
         <button id="exportBtn" disabled>Export JSON</button>
@@ -47,7 +61,7 @@
 
     <script>
         const fileInput = document.getElementById("jsonFile");
-        const modeSelect = document.getElementById("mode");
+        const viewOptions = document.getElementById("viewOptions");
         const treeContainer = document.getElementById("tree");
         const exportBtn = document.getElementById("exportBtn");
 
@@ -62,7 +76,7 @@
             reader.onload = async function (e) {
                 try {
                     const rawJson = JSON.parse(e.target.result);
-                    const mode = modeSelect.value;
+                    const mode = viewOptions.value;
 
                     const requestBody = {
                         _mode: mode,
@@ -111,6 +125,25 @@
             URL.revokeObjectURL(url);
         });
 
+        async function loadModes() {
+            const viewOptions = document.getElementById("viewOptions");
+            try {
+                const res = await fetch("http://localhost:5000/modes");
+                const modes = await res.json();
+
+                viewOptions.innerHTML = "";
+                for (const mode of modes) {
+                    const option = document.createElement("option");
+                    option.value = mode;
+                    option.textContent = mode;
+                    viewOptions.appendChild(option);
+                }
+            } catch (err) {
+                console.error("Failed to fetch modes:", err);
+                alert("Could not load ETL modes from server.");
+            }
+        }
+
         function renderTree(obj, container = treeContainer) {
             container.innerHTML = "";
             const ul = document.createElement("ul");
@@ -118,20 +151,39 @@
             container.appendChild(ul);
         }
 
-        function buildTree(obj, parent) {
-            for (const key in obj) {
+        function buildTree(data, parent) {
+            for (const key in data) {
                 const li = document.createElement("li");
-                if (typeof obj[key] === "object" && obj[key] !== null) {
-                    li.textContent = key;
+                const value = data[key];
+
+                if (typeof value === "object" && value !== null) {
+                    const label = document.createElement("span");
+                    label.classList.add("tree-label");
+                    label.innerHTML = `<span class="arrow">▶</span> <strong>${key}</strong>`;
+
                     const ul = document.createElement("ul");
-                    buildTree(obj[key], ul);
+                    ul.style.display = "none";
+                    buildTree(value, ul);
+
+                    label.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                        const isHidden = ul.style.display === "none";
+                        ul.style.display = isHidden ? "block" : "none";
+                        label.querySelector(".arrow").textContent = isHidden ? "▼" : "▶";
+                    });
+
+                    li.appendChild(label);
                     li.appendChild(ul);
                 } else {
-                    li.textContent = `${key}: ${obj[key]}`;
+                    li.textContent = `${key}: ${value}`;
                 }
+
                 parent.appendChild(li);
             }
         }
+
+        // Load ETL modes on page load
+        window.addEventListener("DOMContentLoaded", loadModes);
     </script>
 </body>
 

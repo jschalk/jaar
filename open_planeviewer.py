@@ -1,7 +1,7 @@
 import os
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a22_world_viewer.planview_server import planviewer
-from src.a22_world_viewer.tests._util.a22_env import module_dir
+from src.a22_world_viewer.test._util.a22_env import module_dir
 import threading
 import time
 import webbrowser
