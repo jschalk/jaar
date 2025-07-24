@@ -59,8 +59,7 @@ def process_json():
         elif mode == "static_dict_testing":
             plan_tree_display_dict = {"amy23": {"x1": {}, "x2": {}, "x3": {"x4": {}}}}
         else:
-            # default mode: just return data unchanged
-            plan_tree_display_dict = data
+            plan_tree_display_dict = {"Mode not loaded correctly": "Contact support"}
 
         return jsonify(
             {"mode": mode, "result": plan_tree_display_dict, "believer_name": "Sue"}

@@ -1,4 +1,4 @@
-from src.a05_plan_logic.test._util.a05_str import _kids_str, plan_label_str
+from src.a05_plan_logic.test._util.a05_str import _kids_str, plan_label_str, task_str
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v002
 from src.a22_world_viewer.planview_filters import (
@@ -20,21 +20,21 @@ def test_plan_label_ReturnsObj_Scenario0():
     x2_str = "x2"
     x3_str = "x3"
     x4_str = "x4"
-    sue_beliverunit = believerunit_shop(sue_str, amy23_str)
-    x1_rope = sue_beliverunit.make_l1_rope(x1_str)
-    x2_rope = sue_beliverunit.make_l1_rope(x2_str)
-    x3_rope = sue_beliverunit.make_l1_rope(x3_str)
-    x4_rope = sue_beliverunit.make_rope(x3_rope, x4_str)
-    sue_beliverunit.add_plan(x1_rope)
-    sue_beliverunit.add_plan(x2_rope)
-    sue_beliverunit.add_plan(x3_rope)
-    sue_beliverunit.add_plan(x4_rope)
+    sue_believerunit = believerunit_shop(sue_str, amy23_str)
+    x1_rope = sue_believerunit.make_l1_rope(x1_str)
+    x2_rope = sue_believerunit.make_l1_rope(x2_str)
+    x3_rope = sue_believerunit.make_l1_rope(x3_str)
+    x4_rope = sue_believerunit.make_rope(x3_rope, x4_str)
+    sue_believerunit.add_plan(x1_rope)
+    sue_believerunit.add_plan(x2_rope)
+    sue_believerunit.add_plan(x3_rope)
+    sue_believerunit.add_plan(x4_rope)
 
     # WHEN
-    plan_label_dict = plan_label(sue_beliverunit.get_dict())
+    plan_label_dict = plan_label(sue_believerunit.get_dict())
 
     # THEN
-    expected_output = {amy23_str: {x1_str: {}, x2_str: {}, x3_str: {x4_str: {}}}}
+    expected_output = {amy23_str: {x1_str: "", x2_str: "", x3_str: {x4_str: ""}}}
     print(f"{plan_label_dict=}")
     print(f"{expected_output=}")
     assert isinstance(plan_label_dict, dict)
@@ -56,17 +56,42 @@ def test_plan_label_ReturnsObj_Scenario1_LargeBelieverJSON():
     assert len(planroot_dict) == 17
 
 
-# def test_plan_tasks_ReturnsObj_Scenario0():
-#     # ESTABLISH
-#     input_data = {"key": "value"}
-#     expected_output = {}  # Define expected output based on plan_label logic
+def test_plan_tasks_ReturnsObj_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    amy23_str = "Amy23"
+    x1_str = "x1"
+    x2_str = "x2"
+    x3_str = "x3"
+    x4_str = "x4"
+    x5_str = "x5"
+    sue_believerunit = believerunit_shop(sue_str, amy23_str)
+    x1_rope = sue_believerunit.make_l1_rope(x1_str)
+    x2_rope = sue_believerunit.make_l1_rope(x2_str)
+    x3_rope = sue_believerunit.make_l1_rope(x3_str)
+    x4_rope = sue_believerunit.make_rope(x3_rope, x4_str)
+    x5_rope = sue_believerunit.make_rope(x4_rope, x5_str)
+    sue_believerunit.add_plan(x1_rope, task=True)
+    sue_believerunit.add_plan(x2_rope)
+    sue_believerunit.add_plan(x3_rope)
+    sue_believerunit.add_plan(x4_rope, task=True)
+    sue_believerunit.add_plan(x5_rope, task=True)
 
-#     # WHEN
-#     result = plan_label(input_data)
+    # WHEN
+    plan_display_dict = plan_tasks(sue_believerunit.get_dict())
 
-#     # THEN
-#     assert isinstance(result, dict)
-#     assert result == expected_output
+    # THEN
+    expected_output = {
+        amy23_str: {
+            x1_str: {task_str(): "True"},
+            x3_str: {x4_str: {x5_str: {task_str(): "True"}, task_str(): "True"}},
+        }
+    }
+    print(f"{plan_display_dict=}")
+    print(f"  {expected_output=}")
+    assert isinstance(plan_display_dict, dict)
+    assert plan_display_dict == expected_output
+
 
 # def test_plan_fund_ReturnsObj_Scenario0():
 #     # ESTABLISH

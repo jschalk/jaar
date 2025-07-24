@@ -26,7 +26,7 @@ def test_process_endpoint():
     json_data = response.get_json()
 
     # THEN
-    assert json_data["result"]["foo"] == "bar"
+    assert json_data["result"]["Mode not loaded correctly"] == "Contact support"
 
 
 @pytest_fixture
