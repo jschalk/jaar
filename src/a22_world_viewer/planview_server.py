@@ -1,9 +1,6 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from src.a22_world_viewer.planview_filters import (
-    etl_clean,
-    etl_enrich,
-    etl_flatten,
     plan_awardees,
     plan_facts,
     plan_fund,
@@ -27,9 +24,6 @@ def get_modes():
         "Plan Reasons",
         "Plan Facts",
         "Plan Time",
-        "etl_clean",
-        "etl_flatten",
-        "etl_enrich",
         "static_dict_testing",
     ]
     return jsonify(modes_list)
@@ -62,12 +56,6 @@ def process_json():
             plan_tree_display_dict = plan_facts(data)
         elif mode == "Plan Time":
             plan_tree_display_dict = plan_time(data)
-        elif mode == "etl_clean":
-            plan_tree_display_dict = etl_clean(data)
-        elif mode == "etl_enrich":
-            plan_tree_display_dict = etl_enrich(data)
-        elif mode == "etl_flatten":
-            plan_tree_display_dict = etl_flatten(data)
         elif mode == "static_dict_testing":
             plan_tree_display_dict = {"amy23": {"x1": {}, "x2": {}, "x3": {"x4": {}}}}
         else:

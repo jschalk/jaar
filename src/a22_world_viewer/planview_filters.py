@@ -44,32 +44,3 @@ def plan_facts(x_dict: dict) -> dict:
 def plan_time(x_dict: dict) -> dict:
     view_dict = {}
     return view_dict
-
-
-# Example ETL functions
-def etl_clean(data):
-    # Just delete null or empty fields
-    if isinstance(data, dict):
-        return {k: v for k, v in data.items() if v not in (None, "", [], {})}
-    return data
-
-
-def etl_enrich(data):
-    # Add a field to every object
-    if isinstance(data, dict):
-        data["enriched"] = "yes"
-    return data
-
-
-def etl_flatten(data):
-    # Example: flatten a dict of dicts (one level)
-    if isinstance(data, dict):
-        flat = {}
-        for k, v in data.items():
-            if isinstance(v, dict):
-                for sub_k, sub_v in v.items():
-                    flat[f"{k}.{sub_k}"] = sub_v
-            else:
-                flat[k] = v
-        return flat
-    return data

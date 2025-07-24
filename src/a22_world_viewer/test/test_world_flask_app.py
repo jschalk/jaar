@@ -56,8 +56,5 @@ def test_load_modes(client):
         "Plan Reasons",
         "Plan Facts",
         "Plan Time",
-        "etl_clean",
-        "etl_flatten",
-        "etl_enrich",
         "static_dict_testing",
     ]
