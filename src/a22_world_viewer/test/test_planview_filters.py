@@ -1,4 +1,9 @@
-from src.a05_plan_logic.test._util.a05_str import _kids_str, plan_label_str, task_str
+from src.a05_plan_logic.test._util.a05_str import (
+    _kids_str,
+    fund_share_str,
+    plan_label_str,
+    task_str,
+)
 from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v002
 from src.a22_world_viewer.planview_filters import (
@@ -82,28 +87,60 @@ def test_plan_tasks_ReturnsObj_Scenario0():
 
     # THEN
     expected_output = {
-        amy23_str: {
-            x1_str: {task_str(): "True"},
-            x3_str: {x4_str: {x5_str: {task_str(): "True"}, task_str(): "True"}},
-        }
+        amy23_str: {x3_str: {"x4 (TASK)": {"x5 (TASK)": {}}}, "x1 (TASK)": {}}
     }
     print(f"{plan_display_dict=}")
     print(f"  {expected_output=}")
-    assert isinstance(plan_display_dict, dict)
     assert plan_display_dict == expected_output
 
 
-# def test_plan_fund_ReturnsObj_Scenario0():
-#     # ESTABLISH
-#     input_data = {"key": "value"}
-#     expected_output = {}  # Define expected output based on plan_label logic
+def test_plan_fund_ReturnsObj_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    amy26_str = "Amy2026"
+    x1_str = "x1"
+    x2_str = "x2"
+    sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=20)
+    x1_rope = sue_believerunit.make_l1_rope(x1_str)
+    x2_rope = sue_believerunit.make_l1_rope(x2_str)
+    sue_believerunit.add_plan(x1_rope, mass=4)
+    sue_believerunit.add_plan(x2_rope, mass=1)
 
-#     # WHEN
-#     result = plan_label(input_data)
+    # WHEN
+    plan_display_dict = plan_fund(sue_believerunit.get_dict())
 
-#     # THEN
-#     assert isinstance(result, dict)
-#     assert result == expected_output
+    # THEN
+    expected_output = {"Amy2026 (fund 20)": {"x2 (fund 4)": {}, "x1 (fund 16)": {}}}
+    print(f"{plan_display_dict=}")
+    print(f"  {expected_output=}")
+    assert plan_display_dict == expected_output
+
+
+def test_plan_fund_ReturnsObj_Scenario1_CheckCommasInNumber():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    amy26_str = "Amy2026"
+    x1_str = "x1"
+    x2_str = "x2"
+    sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=33333)
+    x1_rope = sue_believerunit.make_l1_rope(x1_str)
+    x2_rope = sue_believerunit.make_l1_rope(x2_str)
+    sue_believerunit.add_plan(x1_rope, mass=4)
+    sue_believerunit.add_plan(x2_rope, mass=1)
+
+    # WHEN
+    plan_display_dict = plan_fund(sue_believerunit.get_dict())
+
+    # THEN
+    expected_output = {
+        "Amy2026 (fund 33,333)": {"x2 (fund 6,667)": {}, "x1 (fund 26,666)": {}}
+    }
+    print(f"{plan_display_dict=}")
+    print(f"  {expected_output=}")
+    assert plan_display_dict == expected_output
+
 
 # def test_plan_awardees_ReturnsObj_Scenario0():
 #     # ESTABLISH

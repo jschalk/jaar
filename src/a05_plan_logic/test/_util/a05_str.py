@@ -91,6 +91,10 @@ def denom_str() -> str:
     return "denom"
 
 
+def fund_share_str() -> str:
+    return "fund_share"
+
+
 def gogo_want_str() -> str:
     return "gogo_want"
 
