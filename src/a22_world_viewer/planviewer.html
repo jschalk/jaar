@@ -56,9 +56,12 @@
     <div id="ExportControl">
         <button id="exportBtn" disabled>Export JSON</button>
     </div>
-    <div>
+    <div style="margin-bottom: 10px;">
         <button onclick="expandAll()">Expand All</button>
-        <button onclick="collapseAll()">Collapse All</button>
+        <button onclick="expandToLevel(3)">Expand to Level 1</button>
+        <button onclick="expandToLevel(4)">Expand to Level 2</button>
+        <button onclick="expandToLevel(5)">Expand to Level 3</button>
+        <button onclick="expandToLevel(2)">Collapse All</button>
     </div>
     <div id="treeContainer"></div>
 
@@ -156,15 +159,6 @@
             arrows.forEach(arrow => arrow.textContent = "▼");
         }
 
-        function collapseAll() {
-            console.log("collapseAll was called");
-            const uls = document.querySelectorAll("#treeContainer ul");
-            const arrows = document.querySelectorAll("#treeContainer .arrow");
-            uls.forEach(ul => ul.style.display = "none");
-            arrows.forEach(arrow => arrow.textContent = "▶");
-        }
-
-
         function renderTree(obj, container = treeContainer) {
             container.innerHTML = "";
             const ul = document.createElement("ul");
@@ -200,6 +194,32 @@
                 }
 
                 parent.appendChild(li);
+            }
+        }
+
+        function expandToLevel(level) {
+            console.log(`Expanding to level ${level}`);
+            const root = document.getElementById("treeContainer");
+            setVisibilityByDepth(root, 1, level);
+        }
+
+        function setVisibilityByDepth(node, currentLevel, maxLevel) {
+            const children = node.children;
+            for (let child of children) {
+                if (child.tagName === "UL") {
+                    if (currentLevel < maxLevel) {
+                        child.style.display = "block";
+                        const arrow = child.previousElementSibling?.querySelector(".arrow");
+                        if (arrow) arrow.textContent = "▼";
+                        setVisibilityByDepth(child, currentLevel + 1, maxLevel);
+                    } else {
+                        child.style.display = "none";
+                        const arrow = child.previousElementSibling?.querySelector(".arrow");
+                        if (arrow) arrow.textContent = "▶";
+                    }
+                } else {
+                    setVisibilityByDepth(child, currentLevel, maxLevel);
+                }
             }
         }
 
