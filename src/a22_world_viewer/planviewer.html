@@ -63,6 +63,7 @@
         <button onclick="expandToLevel(5)">Expand to Level 3</button>
         <button onclick="expandToLevel(2)">Collapse All</button>
     </div>
+    <div id="infoPanel" style="margin: 10px 0; font-weight: bold;"></div>
     <div id="treeContainer"></div>
 
     <script>
@@ -102,6 +103,10 @@
                     }
 
                     const result = await response.json();
+
+                    if (result.believer_name) {
+                        document.getElementById("infoPanel").textContent = `Believer_Name: ${result.believer_name}`;
+                    }
 
                     lastResult = result.result || result;
                     renderTree(lastResult);
@@ -149,7 +154,6 @@
                 alert("Could not load ETL modes from server.");
             }
         }
-
 
         function expandAll() {
             console.log("expandAll was called");

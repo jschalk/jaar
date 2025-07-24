@@ -49,32 +49,34 @@ def process_json():
             raise ValueError("Missing 'data' field in request")
 
         if mode == "Plan Label":
-            result = plan_label(data)
+            plan_tree_display_dict = plan_label(data)
         elif mode == "Plan Tasks":
-            result = plan_tasks(data)
+            plan_tree_display_dict = plan_tasks(data)
         elif mode == "Plan Fund":
-            result = plan_fund(data)
+            plan_tree_display_dict = plan_fund(data)
         elif mode == "Plan Awardees":
-            result = plan_awardees(data)
+            plan_tree_display_dict = plan_awardees(data)
         elif mode == "Plan Reasons":
-            result = plan_reasons(data)
+            plan_tree_display_dict = plan_reasons(data)
         elif mode == "Plan Facts":
-            result = plan_facts(data)
+            plan_tree_display_dict = plan_facts(data)
         elif mode == "Plan Time":
-            result = plan_time(data)
+            plan_tree_display_dict = plan_time(data)
         elif mode == "etl_clean":
-            result = etl_clean(data)
+            plan_tree_display_dict = etl_clean(data)
         elif mode == "etl_enrich":
-            result = etl_enrich(data)
+            plan_tree_display_dict = etl_enrich(data)
         elif mode == "etl_flatten":
-            result = etl_flatten(data)
+            plan_tree_display_dict = etl_flatten(data)
         elif mode == "static_dict_testing":
-            result = {"amy23": {"x1": {}, "x2": {}, "x3": {"x4": {}}}}
+            plan_tree_display_dict = {"amy23": {"x1": {}, "x2": {}, "x3": {"x4": {}}}}
         else:
             # default mode: just return data unchanged
-            result = data
+            plan_tree_display_dict = data
 
-        return jsonify({"mode": mode, "result": result})
+        return jsonify(
+            {"mode": mode, "result": plan_tree_display_dict, "believer_name": "Sue"}
+        )
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
