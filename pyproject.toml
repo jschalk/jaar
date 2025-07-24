@@ -6,6 +6,8 @@ dependencies = [
   "openpyxl",
   "sqlalchemy",
   "xlsxwriter",
+  "flask",
+  "flask_cors",
 ]
 description = ""
 license = {text = "MIT"}
