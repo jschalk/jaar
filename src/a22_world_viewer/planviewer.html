@@ -56,13 +56,16 @@
     <div id="ExportControl">
         <button id="exportBtn" disabled>Export JSON</button>
     </div>
-
-    <div id="tree"></div>
+    <div>
+        <button onclick="expandAll()">Expand All</button>
+        <button onclick="collapseAll()">Collapse All</button>
+    </div>
+    <div id="treeContainer"></div>
 
     <script>
         const fileInput = document.getElementById("jsonFile");
         const viewOptions = document.getElementById("viewOptions");
-        const treeContainer = document.getElementById("tree");
+        const treeContainer = document.getElementById("treeContainer");
         const exportBtn = document.getElementById("exportBtn");
 
         let lastResult = null;
@@ -144,6 +147,24 @@
             }
         }
 
+
+        function expandAll() {
+            console.log("expandAll was called");
+            const uls = document.querySelectorAll("#treeContainer ul");
+            const arrows = document.querySelectorAll("#treeContainer .arrow");
+            uls.forEach(ul => ul.style.display = "block");
+            arrows.forEach(arrow => arrow.textContent = "▼");
+        }
+
+        function collapseAll() {
+            console.log("collapseAll was called");
+            const uls = document.querySelectorAll("#treeContainer ul");
+            const arrows = document.querySelectorAll("#treeContainer .arrow");
+            uls.forEach(ul => ul.style.display = "none");
+            arrows.forEach(arrow => arrow.textContent = "▶");
+        }
+
+
         function renderTree(obj, container = treeContainer) {
             container.innerHTML = "";
             const ul = document.createElement("ul");
@@ -182,7 +203,6 @@
             }
         }
 
-        // Load ETL modes on page load
         window.addEventListener("DOMContentLoaded", loadModes);
     </script>
 </body>
