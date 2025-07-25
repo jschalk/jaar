@@ -50,8 +50,14 @@ jobs:
 
       - name: Create initial tag if missing
         shell: bash
+        env:
+          GH_TOKEN: ${{ secrets.PAT_jaar }}
         run: |
           echo "start Create initial tag if missing"
+
+          # Override origin to use PAT for authentication
+          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/jschalk/jaar.git
+
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
             VERSION=$(python -c "
