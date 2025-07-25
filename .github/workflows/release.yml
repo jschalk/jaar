@@ -23,8 +23,8 @@ jobs:
 
       - name: Set Git identity
         run: |
-          git config user.name "Release Bot"
-          git config user.email "bot@example.com"
+          git config user.name "Joachim"
+          git config user.email "jschalk@users.noreply.github.com"
 
       - name: Create initial tag if missing
         shell: bash
