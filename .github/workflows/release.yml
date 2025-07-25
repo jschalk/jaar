@@ -26,17 +26,17 @@ jobs:
           git config user.name "Release Bot"
           git config user.email "bot@example.com"
 
-      - name: Show current directory and files
-        run: |
-          pwd
-          ls -la
-          echo "complete Show current directory and files"
-
       - name: Create initial tag if missing
         shell: bash
         env:
-          GH_TOKEN: ${{ secrets.PAT_jaar }}
+          GH_TOKEN: ${{ secrets.PAT_RELEASE }}
         run: |
+          echo "GH_TOKEN length: ${#GH_TOKEN}"
+          if [ -z "$GH_TOKEN" ]; then
+            echo "ERROR: GH_TOKEN is empty! Check your secret name."
+            exit 1
+          fi
+
           echo "Setting git remote to use PAT token"
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/jschalk/jaar.git
           git remote -v
@@ -63,5 +63,5 @@ jobs:
 
       - name: Run python-semantic-release
         env:
-          GH_TOKEN: ${{ secrets.PAT_jaar }}
+          GH_TOKEN: ${{ secrets.PAT_RELEASE }}
         run: semantic-release publish
