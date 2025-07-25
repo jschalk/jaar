@@ -29,6 +29,34 @@ jobs:
           git config user.name "${{ github.actor }}"
           git config user.email "${{ github.actor }}@users.noreply.github.com"
 
+      - name: Debug Git remote
+        run: git config --get remote.origin.url
+
+      - name: Create initial tag if missing
+        shell: bash
+        run: |
+          echo "Checking for existing tags..."
+          if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
+            echo "No tags found. Creating initial tag from __version__..."
+
+            VERSION=$(python -c "
+          import re
+          with open('__init__.py') as f:
+              content = f.read()
+          match = re.search(r'__version__ *= *[\"\\']([^\"\\']+)', content)
+          if match:
+              print(match.group(1))
+          else:
+              raise ValueError('Version not found')
+          ")
+
+            echo "Tagging as v$VERSION"
+            git tag "v$VERSION"
+            git push origin "v$VERSION"
+          else
+            echo "Tag already exists, skipping."
+          fi
+
       - name: Run python-semantic-release
         env:
           GH_TOKEN: ${{ secrets.PAT_RELEASE }}
