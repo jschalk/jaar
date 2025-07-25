@@ -25,11 +25,11 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la jaar
           echo "complete Show current directory and files"
 
       - name: Run version extractor
         run: |
+          echo "start Run version extractor"
           python -c "
           import os, re
           path = '__init__.py'
