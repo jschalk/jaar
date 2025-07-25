@@ -46,9 +46,19 @@ jobs:
       - name: Create initial tag if missing
         shell: bash
         run: |
+          echo "start Create initial tag if missing"
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
-            VERSION=$(python -c "import re; f=open('__init__.py'); print(re.search(r'__version__ *= *[\"\\\']([^\"\\\']+)', f.read()).group(1))")
+            VERSION=$(python -c "
+              import re
+              with open('__init__.py') as f:
+                  content = f.read()
+              match = re.search(r'__version__ *= *[\"\\']([^\"\\']+)', content)
+              if match:
+                  print(match.group(1))
+              else:
+                  raise ValueError('Version not found')
+              ")
             git tag "v$VERSION"
             git push origin "v$VERSION"
           else
