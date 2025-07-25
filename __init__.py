@@ -6,7 +6,7 @@ A Python package for communiticating across cultures.
 
 import open_planeviewer
 
-__version__ = "0.200.0"
+__version__ = "0.1.0"
 __author__ = "Emmanuel Schalk"
 
 __all__ = [
