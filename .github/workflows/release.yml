@@ -16,7 +16,7 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.10'
+          python-version: '3.12'
 
       - name: Install dependencies
         run: pip install python-semantic-release
@@ -26,12 +26,13 @@ jobs:
           pwd
           ls -la
           ls -la jaar
+          echo "complete Show current directory and files"
 
       - name: Run version extractor
         run: |
           python -c "
           import os, re
-          path = 'jaar/__init__.py'
+          path = '__init__.py'
           print('Working dir:', os.getcwd())
           print('Absolute path:', os.path.abspath(path))
           print('File exists:', os.path.isfile(path))
@@ -40,6 +41,7 @@ jobs:
           match = re.search(r'__version__ *= *[\"\\']([^\"\\']+)', content)
           print(match.group(1) if match else 'No version found')
           "
+          echo "complete Run version extractor"
 
       - name: Create initial tag if missing
         shell: bash
