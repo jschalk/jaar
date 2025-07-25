@@ -16,11 +16,22 @@ jobs:
       - name: Set up Python
         uses: actions/setup-python@v5
         with:
-          python-version: '3.12'
+          python-version: '3.10'
 
       - name: Install dependencies
+        run: pip install python-semantic-release
+
+      - name: Create initial tag if missing
+        shell: bash
         run: |
-          pip install python-semantic-release
+          if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
+            echo "No tags found. Creating initial tag from __version__..."
+            VERSION=$(python -c "import re; f=open('jaar/__init__.py'); print(re.search(r'__version__ *= *[\"\\\']([^\"\\\']+)', f.read()).group(1))")
+            git tag "v$VERSION"
+            git push origin "v$VERSION"
+          else
+            echo "Tag found, continuing with release..."
+          fi
 
       - name: Run python-semantic-release
         env:
