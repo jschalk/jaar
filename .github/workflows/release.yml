@@ -25,14 +25,14 @@ jobs:
         run: |
           pwd
           ls -la
-          ls -la repo_name
+          ls -la jaar
 
       - name: Create initial tag if missing
         shell: bash
         run: |
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
-            VERSION=$(python -c "import re; f=open('__init__.py'); print(re.search(r'__version__ *= *[\"\\\']([^\"\\\']+)', f.read()).group(1))")
+            VERSION=$(python -c "import re; f=open('jaar\__init__.py'); print(re.search(r'__version__ *= *[\"\\\']([^\"\\\']+)', f.read()).group(1))")
             git tag "v$VERSION"
             git push origin "v$VERSION"
           else
