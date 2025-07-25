@@ -23,24 +23,22 @@ jobs:
 
       - name: Set Git identity
         run: |
-          git config user.name "jschalk"
-          git config user.email "jschalk@users.noreply.github.com"
+          git config user.name "${{ github.actor }}"
+          git config user.email "${{ github.actor }}@users.noreply.github.com"
+
+      - name: Set Git remote to use PAT token
+        env:
+          GH_TOKEN: ${{ secrets.PAT_RELEASE }}
+        run: |
+          echo "GH_TOKEN length: ${#GH_TOKEN}"
+          git remote set-url origin https://${{ github.actor }}:${GH_TOKEN}@github.com/jschalk/jaar.git
+          git remote -v
 
       - name: Create initial tag if missing
         shell: bash
         env:
           GH_TOKEN: ${{ secrets.PAT_RELEASE }}
         run: |
-          echo "GH_TOKEN length: ${#GH_TOKEN}"
-          if [ -z "$GH_TOKEN" ]; then
-            echo "ERROR: GH_TOKEN is empty! Check your secret name."
-            exit 1
-          fi
-
-          echo "Setting git remote to use PAT token"
-          git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/jschalk/jaar.git
-          git remote -v
-
           echo "Checking for existing tags..."
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
