@@ -184,15 +184,42 @@ def test_plan_awardees_ReturnsObj_Scenario0():
 
 # def test_plan_reasons_ReturnsObj_Scenario0():
 #     # ESTABLISH
-#     input_data = {"key": "value"}
-#     expected_output = {}  # Define expected output based on plan_label logic
+#     sue_str = "Sue"
+#     amy26_str = "Amy2026"
+#     sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=33333)
+#     casa_str = "casa"
+#     sweep_str = "sweep"
+#     mop_str = "mop"
+#     cleaniness_status_str = "cleaniness_status"
+#     dirty_status_str = "status dirty"
+#     casa_rope = sue_believerunit.make_l1_rope(casa_str)
+#     clean_status_rope = sue_believerunit.make_rope(casa_rope, cleaniness_status_str)
+#     dirty_rope = sue_believerunit.make_rope(clean_status_rope, dirty_status_str)
+#     sweep_rope = sue_believerunit.make_rope(casa_rope, sweep_str)
+#     mop_rope = sue_believerunit.make_rope(casa_rope, mop_str)
+#     sue_believerunit.add_plan(dirty_rope)
+#     sue_believerunit.add_plan(sweep_rope)
+#     sue_believerunit.add_plan(mop_rope)
+#     sue_believerunit.edit_plan_attr(
+#         sweep_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
+#     )
+#     sue_believerunit.edit_plan_attr(
+#         mop_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
+#     )
 
 #     # WHEN
-#     result = plan_label(input_data)
+#     plan_display_dict = plan_awardees(sue_believerunit.get_dict())
 
 #     # THEN
-#     assert isinstance(result, dict)
-#     assert result == expected_output
+#     expected_output = {
+#         amy26_str: {
+#             casa_str: {},sweep_str: {}, mop_str: {                     }
+#         }
+#     }
+#     print(f"{plan_display_dict=}")
+#     print(f"  {expected_output=}")
+#     assert plan_display_dict == expected_output
+
 
 # def test_plan_facts_ReturnsObj_Scenario0():
 #     # ESTABLISH
