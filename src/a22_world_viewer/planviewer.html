@@ -56,13 +56,20 @@
     <div id="ExportControl">
         <button id="exportBtn" disabled>Export JSON</button>
     </div>
-
-    <div id="tree"></div>
+    <div style="margin-bottom: 10px;">
+        <button onclick="expandAll()">Expand All</button>
+        <button onclick="expandToLevel(3)">Expand to Level 1</button>
+        <button onclick="expandToLevel(4)">Expand to Level 2</button>
+        <button onclick="expandToLevel(5)">Expand to Level 3</button>
+        <button onclick="expandToLevel(2)">Collapse All</button>
+    </div>
+    <div id="infoPanel" style="margin: 10px 0; font-weight: bold;"></div>
+    <div id="treeContainer"></div>
 
     <script>
         const fileInput = document.getElementById("jsonFile");
         const viewOptions = document.getElementById("viewOptions");
-        const treeContainer = document.getElementById("tree");
+        const treeContainer = document.getElementById("treeContainer");
         const exportBtn = document.getElementById("exportBtn");
 
         let lastResult = null;
@@ -96,6 +103,10 @@
                     }
 
                     const result = await response.json();
+
+                    if (result.believer_name) {
+                        document.getElementById("infoPanel").textContent = `Believer_Name: ${result.believer_name}`;
+                    }
 
                     lastResult = result.result || result;
                     renderTree(lastResult);
@@ -144,6 +155,14 @@
             }
         }
 
+        function expandAll() {
+            console.log("expandAll was called");
+            const uls = document.querySelectorAll("#treeContainer ul");
+            const arrows = document.querySelectorAll("#treeContainer .arrow");
+            uls.forEach(ul => ul.style.display = "block");
+            arrows.forEach(arrow => arrow.textContent = "▼");
+        }
+
         function renderTree(obj, container = treeContainer) {
             container.innerHTML = "";
             const ul = document.createElement("ul");
@@ -182,7 +201,32 @@
             }
         }
 
-        // Load ETL modes on page load
+        function expandToLevel(level) {
+            console.log(`Expanding to level ${level}`);
+            const root = document.getElementById("treeContainer");
+            setVisibilityByDepth(root, 1, level);
+        }
+
+        function setVisibilityByDepth(node, currentLevel, maxLevel) {
+            const children = node.children;
+            for (let child of children) {
+                if (child.tagName === "UL") {
+                    if (currentLevel < maxLevel) {
+                        child.style.display = "block";
+                        const arrow = child.previousElementSibling?.querySelector(".arrow");
+                        if (arrow) arrow.textContent = "▼";
+                        setVisibilityByDepth(child, currentLevel + 1, maxLevel);
+                    } else {
+                        child.style.display = "none";
+                        const arrow = child.previousElementSibling?.querySelector(".arrow");
+                        if (arrow) arrow.textContent = "▶";
+                    }
+                } else {
+                    setVisibilityByDepth(child, currentLevel, maxLevel);
+                }
+            }
+        }
+
         window.addEventListener("DOMContentLoaded", loadModes);
     </script>
 </body>

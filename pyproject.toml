@@ -14,7 +14,6 @@ license = {text = "MIT"}
 name = "jaar"
 readme = "README.md"
 requires-python = ">=3.7"
-version = "0.1.0"
 
 [build-system]
 build-backend = "setuptools.build_meta"
@@ -31,3 +30,15 @@ test = [
   "pytest",
   "pytest-cov",
 ]
+
+[tool.semantic_release]
+branch = "main"
+build_command = ""
+changelog_file = "CHANGELOG.md"
+upload_to_pypi = false
+version_variable = "jaar/__init__.py:__version__"
+
+[tool.commitizen]
+name = "cz_conventional_commits"
+tag_format = "v$version"
+version = "0.1.0"

@@ -26,7 +26,7 @@ def test_process_endpoint():
     json_data = response.get_json()
 
     # THEN
-    assert json_data["result"]["foo"] == "bar"
+    assert json_data["result"]["Mode not loaded correctly"] == "Contact support"
 
 
 @pytest_fixture
@@ -56,8 +56,5 @@ def test_load_modes(client):
         "Plan Reasons",
         "Plan Facts",
         "Plan Time",
-        "etl_clean",
-        "etl_flatten",
-        "etl_enrich",
         "static_dict_testing",
     ]

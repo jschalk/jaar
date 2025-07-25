@@ -414,6 +414,7 @@ class PlanUnit:
         self.set_awardheirs_fund_give_fund_take()
 
     def get_fund_share(self) -> float:
+        """Return plan fund share from different of _fund_cease and _fund_onset"""
         if self._fund_onset is None or self._fund_cease is None:
             return 0
         else:

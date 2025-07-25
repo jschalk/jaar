@@ -1,8 +1,10 @@
+from copy import deepcopy as copy_deepcopy
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import (
     add_headers_to_csv,
     add_nested_dict_if_missing,
+    change_nested_key,
     create_2d_array_from_dict,
     create_l2nested_csv_dict,
     del_in_nested_dict,
@@ -937,3 +939,40 @@ def test_get_max_key_ReturnsObj_Scenario2_TupleOrdering():
     }
     # WHEN / THEN
     assert get_max_key(x_dict) == (1, "a", 2, "x")
+
+
+def test_change_nested_key_Scenario0():
+    d = {"a": {"b": {"c": 123}}}
+    expected = {"a": {"b": {"new_c": 123}}}
+    result = change_nested_key(copy_deepcopy(d), ["a", "b", "c"], "new_c")
+    assert result == expected
+
+
+def test_change_nested_key_Scenario1():
+    d = {"old": "value"}
+    expected = {"new": "value"}
+    result = change_nested_key(copy_deepcopy(d), ["old"], "new")
+    assert result == expected
+
+
+def test_change_nested_key_Scenario2():
+    d = {"a": {"b": {"c": 123}}}
+    original = copy_deepcopy(d)
+    result = change_nested_key(d, ["a", "b", "missing_key"], "new_key")
+    # Should be unchanged
+    assert result == original
+
+
+def test_change_nested_key_Scenario3():
+    d = {"x": {"y": {"z": {"target": "val"}}}}
+    expected = {"x": {"y": {"z": {"renamed": "val"}}}}
+    result = change_nested_key(copy_deepcopy(d), ["x", "y", "z", "target"], "renamed")
+    assert result == expected
+
+
+def test_change_nested_key_Scenario4():
+    d = {"a": {"b": 123}}
+    original = copy_deepcopy(d)
+    result = change_nested_key(d, ["a", "b", "c"], "d")
+    # Should not raise error, but should not modify
+    assert result == original
