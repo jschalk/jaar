@@ -27,12 +27,26 @@ jobs:
           ls -la
           ls -la jaar
 
+      - name: Run version extractor
+        run: |
+          python -c "
+          import os, re
+          path = 'jaar/__init__.py'
+          print('Working dir:', os.getcwd())
+          print('Absolute path:', os.path.abspath(path))
+          print('File exists:', os.path.isfile(path))
+          with open(path) as f:
+              content = f.read()
+          match = re.search(r'__version__ *= *[\"\\']([^\"\\']+)', content)
+          print(match.group(1) if match else 'No version found')
+          "
+
       - name: Create initial tag if missing
         shell: bash
         run: |
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
-            VERSION=$(python -c "import re; f=open('jaar\__init__.py'); print(re.search(r'__version__ *= *[\"\\\']([^\"\\\']+)', f.read()).group(1))")
+            VERSION=$(python -c "import re; f=open('__init__.py'); print(re.search(r'__version__ *= *[\"\\\']([^\"\\\']+)', f.read()).group(1))")
             git tag "v$VERSION"
             git push origin "v$VERSION"
           else
