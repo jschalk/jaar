@@ -1,3 +1,4 @@
+from src.a03_group_logic.group import awardlink_shop
 from src.a05_plan_logic.test._util.a05_str import (
     _kids_str,
     fund_share_str,
@@ -142,17 +143,44 @@ def test_plan_fund_ReturnsObj_Scenario1_CheckCommasInNumber():
     assert plan_display_dict == expected_output
 
 
-# def test_plan_awardees_ReturnsObj_Scenario0():
-#     # ESTABLISH
-#     input_data = {"key": "value"}
-#     expected_output = {}  # Define expected output based on plan_label logic
+def test_plan_awardees_ReturnsObj_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    bob_str = "Bob"
+    yao_str = "Yao"
+    amy26_str = "Amy2026"
+    x1_str = "x1"
+    x2_str = "x2"
+    sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=33333)
+    sue_believerunit.add_partnerunit(bob_str, 1, 7)
+    sue_believerunit.add_partnerunit(yao_str, 5, 1)
+    x1_rope = sue_believerunit.make_l1_rope(x1_str)
+    x2_rope = sue_believerunit.make_l1_rope(x2_str)
+    sue_believerunit.add_plan(x1_rope, mass=4)
+    sue_believerunit.add_plan(x2_rope, mass=1)
+    bob_awardlink = awardlink_shop(bob_str, 1, 3)
+    yao_awardlink = awardlink_shop(yao_str, 4, 1)
+    sue_believerunit.edit_plan_attr(x1_rope, awardlink=bob_awardlink)
+    sue_believerunit.edit_plan_attr(x1_rope, awardlink=yao_awardlink)
+    assert sue_believerunit.get_plan_obj(x1_rope).awardlinks != {}
 
-#     # WHEN
-#     result = plan_label(input_data)
+    # WHEN
+    plan_display_dict = plan_awardees(sue_believerunit.get_dict())
 
-#     # THEN
-#     assert isinstance(result, dict)
-#     assert result == expected_output
+    # THEN
+    expected_output = {
+        "Amy2026 (fund 33,333)": {
+            "x2 (fund 6,667)": {},
+            "x1 (fund 26,666)": {
+                "Bob": "Give 5,333, Take 20,000",
+                "Yao": "Give 21,333, Take 6,666",
+            },
+        }
+    }
+    print(f"{plan_display_dict=}")
+    print(f"  {expected_output=}")
+    assert plan_display_dict == expected_output
+
 
 # def test_plan_reasons_ReturnsObj_Scenario0():
 #     # ESTABLISH

@@ -90,8 +90,21 @@ def plan_fund(believerunit_dict: dict) -> dict:
 
 
 def plan_awardees(believerunit_dict: dict) -> dict:
-    view_dict = {}
-    return view_dict
+    result = {}
+    for planunit in get_planunits_list(believerunit_dict):
+        fund_share_display = f"fund {planunit.get_fund_share():,}"
+        plan_rope_labels = get_all_rope_labels(planunit.get_plan_rope())
+        fund_share_keys = plan_rope_labels + ["fund_share"]
+        set_in_nested_dict(result, fund_share_keys, fund_share_display)
+
+        for awardline in planunit._awardheirs.values():
+            awardline_display = (
+                f"Give {awardline._fund_give:,}, Take {awardline._fund_take:,}"
+            )
+            awardline_keys = plan_rope_labels + [awardline.awardee_title]
+            set_in_nested_dict(result, awardline_keys, awardline_display)
+
+    return mark_keys(result, marking_key="fund_share")
 
 
 def plan_reasons(believerunit_dict: dict) -> dict:
