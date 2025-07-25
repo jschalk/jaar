@@ -8,35 +8,35 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.way import TitleTerm, WayTerm
-from src.a03_group_logic.acct import AcctName, AcctUnit, MemberShip
+from src.a01_term_logic.term import RopeTerm, TitleTerm
 from src.a03_group_logic.group import MemberShip
-from src.a04_reason_logic.reason_concept import FactUnit, ReasonUnit
-from src.a05_concept_logic.concept import ConceptUnit
-from src.a06_bud_logic.bud import BudUnit, budunit_shop
-from src.a08_bud_atom_logic.atom import (
-    BudAtom,
-    InvalidBudAtomException,
-    budatom_shop,
-    get_from_dict as get_budatom_from_dict,
+from src.a03_group_logic.partner import MemberShip, PartnerName, PartnerUnit
+from src.a04_reason_logic.reason_plan import FactUnit, ReasonUnit
+from src.a05_plan_logic.plan import PlanUnit
+from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a08_believer_atom_logic.atom import (
+    BelieverAtom,
+    InvalidBelieverAtomException,
+    believeratom_shop,
+    get_from_dict as get_believeratom_from_dict,
     jvalues_different,
-    modify_bud_with_budatom,
-    sift_budatom,
+    modify_believer_with_believeratom,
+    sift_believeratom,
 )
-from src.a08_bud_atom_logic.atom_config import CRUD_command
+from src.a08_believer_atom_logic.atom_config import CRUD_command
 
 
 @dataclass
-class BudDelta:
-    budatoms: dict[CRUD_command : dict[str, BudAtom]] = None
-    _bud_build_validated: bool = None
+class BelieverDelta:
+    believeratoms: dict[CRUD_command : dict[str, BelieverAtom]] = None
+    _believer_build_validated: bool = None
 
-    def _get_crud_budatoms_list(self) -> dict[CRUD_command, list[BudAtom]]:
-        return get_all_nondictionary_objs(self.budatoms)
+    def _get_crud_believeratoms_list(self) -> dict[CRUD_command, list[BelieverAtom]]:
+        return get_all_nondictionary_objs(self.believeratoms)
 
-    def get_dimen_sorted_budatoms_list(self) -> list[BudAtom]:
+    def get_dimen_sorted_believeratoms_list(self) -> list[BelieverAtom]:
         atoms_list = []
-        for crud_list in self._get_crud_budatoms_list().values():
+        for crud_list in self._get_crud_believeratoms_list().values():
             atoms_list.extend(iter(crud_list))
 
         atom_order_key_dict = {}
@@ -49,426 +49,471 @@ class BudDelta:
 
         ordered_list = []
         for x_list in atom_order_key_dict.values():
-            if x_list[0].jkeys.get("concept_way") is not None:
-                x_list = sorted(x_list, key=lambda x: x.jkeys.get("concept_way"))
+            if x_list[0].jkeys.get("plan_rope") is not None:
+                x_list = sorted(x_list, key=lambda x: x.jkeys.get("plan_rope"))
             ordered_list.extend(x_list)
         return ordered_list
 
-    def get_sorted_budatoms(self) -> list[BudAtom]:
-        budatoms_list = self.get_dimen_sorted_budatoms_list()
-        return sorted(budatoms_list, key=lambda x: x.atom_order)
+    def get_sorted_believeratoms(self) -> list[BelieverAtom]:
+        believeratoms_list = self.get_dimen_sorted_believeratoms_list()
+        return sorted(believeratoms_list, key=lambda x: x.atom_order)
 
-    def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
-        edited_bud = copy_deepcopy(before_bud)
-        for x_budatom in self.get_sorted_budatoms():
-            modify_bud_with_budatom(edited_bud, x_budatom)
-        return edited_bud
+    def get_edited_believer(self, before_believer: BelieverUnit) -> BelieverUnit:
+        edited_believer = copy_deepcopy(before_believer)
+        for x_believeratom in self.get_sorted_believeratoms():
+            modify_believer_with_believeratom(edited_believer, x_believeratom)
+        return edited_believer
 
-    def set_budatom(self, x_budatom: BudAtom):
-        if x_budatom.is_valid() is False:
-            raise InvalidBudAtomException(
-                f"""'{x_budatom.dimen}' {x_budatom.crud_str} BudAtom is invalid
-                {x_budatom.is_jkeys_valid()=}
-                {x_budatom.is_jvalues_valid()=}"""
+    def set_believeratom(self, x_believeratom: BelieverAtom):
+        if x_believeratom.is_valid() is False:
+            raise InvalidBelieverAtomException(
+                f"""'{x_believeratom.dimen}' {x_believeratom.crud_str} BelieverAtom is invalid
+                {x_believeratom.is_jkeys_valid()=}
+                {x_believeratom.is_jvalues_valid()=}"""
             )
 
-        x_budatom.set_atom_order()
+        x_believeratom.set_atom_order()
         x_keylist = [
-            x_budatom.crud_str,
-            x_budatom.dimen,
-            *x_budatom.get_nesting_order_args(),
+            x_believeratom.crud_str,
+            x_believeratom.dimen,
+            *x_believeratom.get_nesting_order_args(),
         ]
-        set_in_nested_dict(self.budatoms, x_keylist, x_budatom)
+        set_in_nested_dict(self.believeratoms, x_keylist, x_believeratom)
 
-    def budatom_exists(self, x_budatom: BudAtom) -> bool:
-        if x_budatom.is_valid() is False:
-            raise InvalidBudAtomException(
-                f"""'{x_budatom.dimen}' {x_budatom.crud_str} BudAtom is invalid
-                {x_budatom.is_jkeys_valid()=}
-                {x_budatom.is_jvalues_valid()=}"""
+    def believeratom_exists(self, x_believeratom: BelieverAtom) -> bool:
+        if x_believeratom.is_valid() is False:
+            raise InvalidBelieverAtomException(
+                f"""'{x_believeratom.dimen}' {x_believeratom.crud_str} BelieverAtom is invalid
+                {x_believeratom.is_jkeys_valid()=}
+                {x_believeratom.is_jvalues_valid()=}"""
             )
 
-        x_budatom.set_atom_order()
+        x_believeratom.set_atom_order()
         x_keylist = [
-            x_budatom.crud_str,
-            x_budatom.dimen,
-            *list(x_budatom.get_nesting_order_args()),
+            x_believeratom.crud_str,
+            x_believeratom.dimen,
+            *list(x_believeratom.get_nesting_order_args()),
         ]
-        nested_budatom = get_from_nested_dict(self.budatoms, x_keylist, True)
-        return nested_budatom == x_budatom
+        nested_believeratom = get_from_nested_dict(self.believeratoms, x_keylist, True)
+        return nested_believeratom == x_believeratom
 
-    def add_budatom(
+    def add_believeratom(
         self,
         dimen: str,
         crud_str: str,
         jkeys: dict[str, str] = None,
         jvalues: dict[str, str] = None,
     ):
-        x_budatom = budatom_shop(
+        x_believeratom = believeratom_shop(
             dimen=dimen,
             crud_str=crud_str,
             jkeys=jkeys,
             jvalues=jvalues,
         )
-        self.set_budatom(x_budatom)
+        self.set_believeratom(x_believeratom)
 
-    def get_budatom(self, crud_str: str, dimen: str, jkeys: list[str]) -> BudAtom:
+    def get_believeratom(
+        self, crud_str: str, dimen: str, jkeys: list[str]
+    ) -> BelieverAtom:
         x_keylist = [crud_str, dimen, *jkeys]
-        return get_from_nested_dict(self.budatoms, x_keylist)
+        return get_from_nested_dict(self.believeratoms, x_keylist)
 
-    def add_all_budatoms(self, after_bud: BudUnit):
-        before_bud = budunit_shop(after_bud.owner_name, after_bud.fisc_label)
-        self.add_all_different_budatoms(before_bud, after_bud)
+    def add_all_believeratoms(self, after_believer: BelieverUnit):
+        before_believer = believerunit_shop(
+            after_believer.believer_name, after_believer.belief_label
+        )
+        self.add_all_different_believeratoms(before_believer, after_believer)
 
-    def add_all_different_budatoms(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_bud.settle_bud()
-        after_bud.settle_bud()
-        self.add_budatoms_budunit_simple_attrs(before_bud, after_bud)
-        self.add_budatoms_accts(before_bud, after_bud)
-        self.add_budatoms_concepts(before_bud, after_bud)
-
-    def add_budatoms_budunit_simple_attrs(
-        self, before_bud: BudUnit, after_bud: BudUnit
+    def add_all_different_believeratoms(
+        self, before_believer: BelieverUnit, after_believer: BelieverUnit
     ):
-        if not jvalues_different("budunit", before_bud, after_bud):
+        before_believer.settle_believer()
+        after_believer.settle_believer()
+        self.add_believeratoms_believerunit_simple_attrs(
+            before_believer, after_believer
+        )
+        self.add_believeratoms_partners(before_believer, after_believer)
+        self.add_believeratoms_plans(before_believer, after_believer)
+
+    def add_believeratoms_believerunit_simple_attrs(
+        self, before_believer: BelieverUnit, after_believer: BelieverUnit
+    ):
+        if not jvalues_different("believerunit", before_believer, after_believer):
             return
-        x_budatom = budatom_shop("budunit", "UPDATE")
-        if before_bud.max_tree_traverse != after_bud.max_tree_traverse:
-            x_budatom.set_jvalue("max_tree_traverse", after_bud.max_tree_traverse)
-        if before_bud.credor_respect != after_bud.credor_respect:
-            x_budatom.set_jvalue("credor_respect", after_bud.credor_respect)
-        if before_bud.debtor_respect != after_bud.debtor_respect:
-            x_budatom.set_jvalue("debtor_respect", after_bud.debtor_respect)
-        if before_bud.tally != after_bud.tally:
-            x_budatom.set_jvalue("tally", after_bud.tally)
-        if before_bud.fund_pool != after_bud.fund_pool:
-            x_budatom.set_jvalue("fund_pool", after_bud.fund_pool)
-        if before_bud.fund_coin != after_bud.fund_coin:
-            x_budatom.set_jvalue("fund_coin", after_bud.fund_coin)
-        if before_bud.respect_bit != after_bud.respect_bit:
-            x_budatom.set_jvalue("respect_bit", after_bud.respect_bit)
-        self.set_budatom(x_budatom)
+        x_believeratom = believeratom_shop("believerunit", "UPDATE")
+        if before_believer.max_tree_traverse != after_believer.max_tree_traverse:
+            x_believeratom.set_jvalue(
+                "max_tree_traverse", after_believer.max_tree_traverse
+            )
+        if before_believer.credor_respect != after_believer.credor_respect:
+            x_believeratom.set_jvalue("credor_respect", after_believer.credor_respect)
+        if before_believer.debtor_respect != after_believer.debtor_respect:
+            x_believeratom.set_jvalue("debtor_respect", after_believer.debtor_respect)
+        if before_believer.tally != after_believer.tally:
+            x_believeratom.set_jvalue("tally", after_believer.tally)
+        if before_believer.fund_pool != after_believer.fund_pool:
+            x_believeratom.set_jvalue("fund_pool", after_believer.fund_pool)
+        if before_believer.fund_iota != after_believer.fund_iota:
+            x_believeratom.set_jvalue("fund_iota", after_believer.fund_iota)
+        if before_believer.respect_bit != after_believer.respect_bit:
+            x_believeratom.set_jvalue("respect_bit", after_believer.respect_bit)
+        self.set_believeratom(x_believeratom)
 
-    def add_budatoms_accts(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_acct_names = set(before_bud.accts.keys())
-        after_acct_names = set(after_bud.accts.keys())
+    def add_believeratoms_partners(
+        self, before_believer: BelieverUnit, after_believer: BelieverUnit
+    ):
+        before_partner_names = set(before_believer.partners.keys())
+        after_partner_names = set(after_believer.partners.keys())
 
-        self.add_budatom_acctunit_inserts(
-            after_bud=after_bud,
-            insert_acct_names=after_acct_names.difference(before_acct_names),
+        self.add_believeratom_partnerunit_inserts(
+            after_believer=after_believer,
+            insert_partner_names=after_partner_names.difference(before_partner_names),
         )
-        self.add_budatom_acctunit_deletes(
-            before_bud=before_bud,
-            delete_acct_names=before_acct_names.difference(after_acct_names),
+        self.add_believeratom_partnerunit_deletes(
+            before_believer=before_believer,
+            delete_partner_names=before_partner_names.difference(after_partner_names),
         )
-        self.add_budatom_acctunit_updates(
-            before_bud=before_bud,
-            after_bud=after_bud,
-            update_acct_names=before_acct_names.intersection(after_acct_names),
+        self.add_believeratom_partnerunit_updates(
+            before_believer=before_believer,
+            after_believer=after_believer,
+            update_partner_names=before_partner_names.intersection(after_partner_names),
         )
 
-    def add_budatom_acctunit_inserts(self, after_bud: BudUnit, insert_acct_names: set):
-        for insert_acct_name in insert_acct_names:
-            insert_acctunit = after_bud.get_acct(insert_acct_name)
-            x_budatom = budatom_shop("bud_acctunit", "INSERT")
-            x_budatom.set_jkey("acct_name", insert_acctunit.acct_name)
-            if insert_acctunit.credit_belief is not None:
-                x_budatom.set_jvalue("credit_belief", insert_acctunit.credit_belief)
-            if insert_acctunit.debtit_belief is not None:
-                x_budatom.set_jvalue("debtit_belief", insert_acctunit.debtit_belief)
-            self.set_budatom(x_budatom)
-            all_group_titles = set(insert_acctunit._memberships.keys())
-            self.add_budatom_memberships_inserts(
-                after_acctunit=insert_acctunit,
+    def add_believeratom_partnerunit_inserts(
+        self, after_believer: BelieverUnit, insert_partner_names: set
+    ):
+        for insert_partner_name in insert_partner_names:
+            insert_partnerunit = after_believer.get_partner(insert_partner_name)
+            x_believeratom = believeratom_shop("believer_partnerunit", "INSERT")
+            x_believeratom.set_jkey("partner_name", insert_partnerunit.partner_name)
+            if insert_partnerunit.partner_cred_points is not None:
+                x_believeratom.set_jvalue(
+                    "partner_cred_points", insert_partnerunit.partner_cred_points
+                )
+            if insert_partnerunit.partner_debt_points is not None:
+                x_believeratom.set_jvalue(
+                    "partner_debt_points", insert_partnerunit.partner_debt_points
+                )
+            self.set_believeratom(x_believeratom)
+            all_group_titles = set(insert_partnerunit._memberships.keys())
+            self.add_believeratom_memberships_inserts(
+                after_partnerunit=insert_partnerunit,
                 insert_membership_group_titles=all_group_titles,
             )
 
-    def add_budatom_acctunit_updates(
-        self, before_bud: BudUnit, after_bud: BudUnit, update_acct_names: set
+    def add_believeratom_partnerunit_updates(
+        self,
+        before_believer: BelieverUnit,
+        after_believer: BelieverUnit,
+        update_partner_names: set,
     ):
-        for acct_name in update_acct_names:
-            after_acctunit = after_bud.get_acct(acct_name)
-            before_acctunit = before_bud.get_acct(acct_name)
-            if jvalues_different("bud_acctunit", after_acctunit, before_acctunit):
-                x_budatom = budatom_shop("bud_acctunit", "UPDATE")
-                x_budatom.set_jkey("acct_name", after_acctunit.acct_name)
-                if before_acctunit.credit_belief != after_acctunit.credit_belief:
-                    x_budatom.set_jvalue("credit_belief", after_acctunit.credit_belief)
-                if before_acctunit.debtit_belief != after_acctunit.debtit_belief:
-                    x_budatom.set_jvalue("debtit_belief", after_acctunit.debtit_belief)
-                self.set_budatom(x_budatom)
-            self.add_budatom_acctunit_update_memberships(
-                after_acctunit=after_acctunit, before_acctunit=before_acctunit
+        for partner_name in update_partner_names:
+            after_partnerunit = after_believer.get_partner(partner_name)
+            before_partnerunit = before_believer.get_partner(partner_name)
+            if jvalues_different(
+                "believer_partnerunit", after_partnerunit, before_partnerunit
+            ):
+                x_believeratom = believeratom_shop("believer_partnerunit", "UPDATE")
+                x_believeratom.set_jkey("partner_name", after_partnerunit.partner_name)
+                if (
+                    before_partnerunit.partner_cred_points
+                    != after_partnerunit.partner_cred_points
+                ):
+                    x_believeratom.set_jvalue(
+                        "partner_cred_points", after_partnerunit.partner_cred_points
+                    )
+                if (
+                    before_partnerunit.partner_debt_points
+                    != after_partnerunit.partner_debt_points
+                ):
+                    x_believeratom.set_jvalue(
+                        "partner_debt_points", after_partnerunit.partner_debt_points
+                    )
+                self.set_believeratom(x_believeratom)
+            self.add_believeratom_partnerunit_update_memberships(
+                after_partnerunit=after_partnerunit,
+                before_partnerunit=before_partnerunit,
             )
 
-    def add_budatom_acctunit_deletes(self, before_bud: BudUnit, delete_acct_names: set):
-        for delete_acct_name in delete_acct_names:
-            x_budatom = budatom_shop("bud_acctunit", "DELETE")
-            x_budatom.set_jkey("acct_name", delete_acct_name)
-            self.set_budatom(x_budatom)
-            delete_acctunit = before_bud.get_acct(delete_acct_name)
+    def add_believeratom_partnerunit_deletes(
+        self, before_believer: BelieverUnit, delete_partner_names: set
+    ):
+        for delete_partner_name in delete_partner_names:
+            x_believeratom = believeratom_shop("believer_partnerunit", "DELETE")
+            x_believeratom.set_jkey("partner_name", delete_partner_name)
+            self.set_believeratom(x_believeratom)
+            delete_partnerunit = before_believer.get_partner(delete_partner_name)
             non_mirror_group_titles = {
                 x_group_title
-                for x_group_title in delete_acctunit._memberships.keys()
-                if x_group_title != delete_acct_name
+                for x_group_title in delete_partnerunit._memberships.keys()
+                if x_group_title != delete_partner_name
             }
-            self.add_budatom_memberships_delete(
-                delete_acct_name, non_mirror_group_titles
+            self.add_believeratom_memberships_delete(
+                delete_partner_name, non_mirror_group_titles
             )
 
-    def add_budatom_acctunit_update_memberships(
-        self, after_acctunit: AcctUnit, before_acctunit: AcctUnit
+    def add_believeratom_partnerunit_update_memberships(
+        self, after_partnerunit: PartnerUnit, before_partnerunit: PartnerUnit
     ):
         # before_non_mirror_group_titles
         before_group_titles = {
             x_group_title
-            for x_group_title in before_acctunit._memberships.keys()
-            if x_group_title != before_acctunit.acct_name
+            for x_group_title in before_partnerunit._memberships.keys()
+            if x_group_title != before_partnerunit.partner_name
         }
         # after_non_mirror_group_titles
         after_group_titles = {
             x_group_title
-            for x_group_title in after_acctunit._memberships.keys()
-            if x_group_title != after_acctunit.acct_name
+            for x_group_title in after_partnerunit._memberships.keys()
+            if x_group_title != after_partnerunit.partner_name
         }
 
-        self.add_budatom_memberships_inserts(
-            after_acctunit=after_acctunit,
+        self.add_believeratom_memberships_inserts(
+            after_partnerunit=after_partnerunit,
             insert_membership_group_titles=after_group_titles.difference(
                 before_group_titles
             ),
         )
 
-        self.add_budatom_memberships_delete(
-            before_acct_name=after_acctunit.acct_name,
+        self.add_believeratom_memberships_delete(
+            before_partner_name=after_partnerunit.partner_name,
             before_group_titles=before_group_titles.difference(after_group_titles),
         )
 
         update_group_titles = before_group_titles.intersection(after_group_titles)
-        for update_acct_name in update_group_titles:
-            before_membership = before_acctunit.get_membership(update_acct_name)
-            after_membership = after_acctunit.get_membership(update_acct_name)
+        for update_partner_name in update_group_titles:
+            before_membership = before_partnerunit.get_membership(update_partner_name)
+            after_membership = after_partnerunit.get_membership(update_partner_name)
             if jvalues_different(
-                "bud_acct_membership", before_membership, after_membership
+                "believer_partner_membership", before_membership, after_membership
             ):
-                self.add_budatom_membership_update(
-                    acct_name=after_acctunit.acct_name,
+                self.add_believeratom_membership_update(
+                    partner_name=after_partnerunit.partner_name,
                     before_membership=before_membership,
                     after_membership=after_membership,
                 )
 
-    def add_budatom_memberships_inserts(
+    def add_believeratom_memberships_inserts(
         self,
-        after_acctunit: AcctUnit,
+        after_partnerunit: PartnerUnit,
         insert_membership_group_titles: list[TitleTerm],
     ):
-        after_acct_name = after_acctunit.acct_name
+        after_partner_name = after_partnerunit.partner_name
         for insert_group_title in insert_membership_group_titles:
-            after_membership = after_acctunit.get_membership(insert_group_title)
-            x_budatom = budatom_shop("bud_acct_membership", "INSERT")
-            x_budatom.set_jkey("acct_name", after_acct_name)
-            x_budatom.set_jkey("group_title", after_membership.group_title)
-            if after_membership.credit_vote is not None:
-                x_budatom.set_jvalue("credit_vote", after_membership.credit_vote)
-            if after_membership.debtit_vote is not None:
-                x_budatom.set_jvalue("debtit_vote", after_membership.debtit_vote)
-            self.set_budatom(x_budatom)
+            after_membership = after_partnerunit.get_membership(insert_group_title)
+            x_believeratom = believeratom_shop("believer_partner_membership", "INSERT")
+            x_believeratom.set_jkey("partner_name", after_partner_name)
+            x_believeratom.set_jkey("group_title", after_membership.group_title)
+            if after_membership.group_cred_points is not None:
+                x_believeratom.set_jvalue(
+                    "group_cred_points", after_membership.group_cred_points
+                )
+            if after_membership.group_debt_points is not None:
+                x_believeratom.set_jvalue(
+                    "group_debt_points", after_membership.group_debt_points
+                )
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_membership_update(
+    def add_believeratom_membership_update(
         self,
-        acct_name: AcctName,
+        partner_name: PartnerName,
         before_membership: MemberShip,
         after_membership: MemberShip,
     ):
-        x_budatom = budatom_shop("bud_acct_membership", "UPDATE")
-        x_budatom.set_jkey("acct_name", acct_name)
-        x_budatom.set_jkey("group_title", after_membership.group_title)
-        if after_membership.credit_vote != before_membership.credit_vote:
-            x_budatom.set_jvalue("credit_vote", after_membership.credit_vote)
-        if after_membership.debtit_vote != before_membership.debtit_vote:
-            x_budatom.set_jvalue("debtit_vote", after_membership.debtit_vote)
-        self.set_budatom(x_budatom)
+        x_believeratom = believeratom_shop("believer_partner_membership", "UPDATE")
+        x_believeratom.set_jkey("partner_name", partner_name)
+        x_believeratom.set_jkey("group_title", after_membership.group_title)
+        if after_membership.group_cred_points != before_membership.group_cred_points:
+            x_believeratom.set_jvalue(
+                "group_cred_points", after_membership.group_cred_points
+            )
+        if after_membership.group_debt_points != before_membership.group_debt_points:
+            x_believeratom.set_jvalue(
+                "group_debt_points", after_membership.group_debt_points
+            )
+        self.set_believeratom(x_believeratom)
 
-    def add_budatom_memberships_delete(
-        self, before_acct_name: AcctName, before_group_titles: TitleTerm
+    def add_believeratom_memberships_delete(
+        self, before_partner_name: PartnerName, before_group_titles: TitleTerm
     ):
         for delete_group_title in before_group_titles:
-            x_budatom = budatom_shop("bud_acct_membership", "DELETE")
-            x_budatom.set_jkey("acct_name", before_acct_name)
-            x_budatom.set_jkey("group_title", delete_group_title)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_partner_membership", "DELETE")
+            x_believeratom.set_jkey("partner_name", before_partner_name)
+            x_believeratom.set_jkey("group_title", delete_group_title)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatoms_concepts(self, before_bud: BudUnit, after_bud: BudUnit):
-        before_concept_ways = set(before_bud._concept_dict.keys())
-        after_concept_ways = set(after_bud._concept_dict.keys())
-
-        self.add_budatom_concept_inserts(
-            after_bud=after_bud,
-            insert_concept_ways=after_concept_ways.difference(before_concept_ways),
-        )
-        self.add_budatom_concept_deletes(
-            before_bud=before_bud,
-            delete_concept_ways=before_concept_ways.difference(after_concept_ways),
-        )
-        self.add_budatom_concept_updates(
-            before_bud=before_bud,
-            after_bud=after_bud,
-            update_ways=before_concept_ways.intersection(after_concept_ways),
-        )
-
-    def add_budatom_concept_inserts(self, after_bud: BudUnit, insert_concept_ways: set):
-        for insert_concept_way in insert_concept_ways:
-            insert_conceptunit = after_bud.get_concept_obj(insert_concept_way)
-            x_budatom = budatom_shop("bud_conceptunit", "INSERT")
-            x_budatom.set_jkey("concept_way", insert_conceptunit.get_concept_way())
-            x_budatom.set_jvalue("addin", insert_conceptunit.addin)
-            x_budatom.set_jvalue("begin", insert_conceptunit.begin)
-            x_budatom.set_jvalue("close", insert_conceptunit.close)
-            x_budatom.set_jvalue("denom", insert_conceptunit.denom)
-            x_budatom.set_jvalue("numor", insert_conceptunit.numor)
-            x_budatom.set_jvalue("morph", insert_conceptunit.morph)
-            x_budatom.set_jvalue("mass", insert_conceptunit.mass)
-            x_budatom.set_jvalue("pledge", insert_conceptunit.pledge)
-            self.set_budatom(x_budatom)
-
-            self.add_budatom_concept_factunit_inserts(
-                conceptunit=insert_conceptunit,
-                insert_factunit_rcontexts=set(insert_conceptunit.factunits.keys()),
-            )
-            self.add_budatom_concept_awardlink_inserts(
-                after_conceptunit=insert_conceptunit,
-                insert_awardlink_awardee_titles=set(
-                    insert_conceptunit.awardlinks.keys()
-                ),
-            )
-            self.add_budatom_concept_reasonunit_inserts(
-                after_conceptunit=insert_conceptunit,
-                insert_reasonunit_rcontexts=set(insert_conceptunit.reasonunits.keys()),
-            )
-            self.add_budatom_concept_laborlink_insert(
-                concept_way=insert_concept_way,
-                insert_laborlink_labor_titles=insert_conceptunit.laborunit._laborlinks,
-            )
-            self.add_budatom_concept_healerlink_insert(
-                concept_way=insert_concept_way,
-                insert_healerlink_healer_names=insert_conceptunit.healerlink._healer_names,
-            )
-
-    def add_budatom_concept_updates(
-        self, before_bud: BudUnit, after_bud: BudUnit, update_ways: set
+    def add_believeratoms_plans(
+        self, before_believer: BelieverUnit, after_believer: BelieverUnit
     ):
-        for concept_way in update_ways:
-            after_conceptunit = after_bud.get_concept_obj(concept_way)
-            before_conceptunit = before_bud.get_concept_obj(concept_way)
-            if jvalues_different(
-                "bud_conceptunit", before_conceptunit, after_conceptunit
-            ):
-                x_budatom = budatom_shop("bud_conceptunit", "UPDATE")
-                x_budatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
-                if before_conceptunit.addin != after_conceptunit.addin:
-                    x_budatom.set_jvalue("addin", after_conceptunit.addin)
-                if before_conceptunit.begin != after_conceptunit.begin:
-                    x_budatom.set_jvalue("begin", after_conceptunit.begin)
-                if before_conceptunit.close != after_conceptunit.close:
-                    x_budatom.set_jvalue("close", after_conceptunit.close)
-                if before_conceptunit.denom != after_conceptunit.denom:
-                    x_budatom.set_jvalue("denom", after_conceptunit.denom)
-                if before_conceptunit.numor != after_conceptunit.numor:
-                    x_budatom.set_jvalue("numor", after_conceptunit.numor)
-                if before_conceptunit.morph != after_conceptunit.morph:
-                    x_budatom.set_jvalue("morph", after_conceptunit.morph)
-                if before_conceptunit.mass != after_conceptunit.mass:
-                    x_budatom.set_jvalue("mass", after_conceptunit.mass)
-                if before_conceptunit.pledge != after_conceptunit.pledge:
-                    x_budatom.set_jvalue("pledge", after_conceptunit.pledge)
-                self.set_budatom(x_budatom)
+        before_plan_ropes = set(before_believer._plan_dict.keys())
+        after_plan_ropes = set(after_believer._plan_dict.keys())
+
+        self.add_believeratom_plan_inserts(
+            after_believer=after_believer,
+            insert_plan_ropes=after_plan_ropes.difference(before_plan_ropes),
+        )
+        self.add_believeratom_plan_deletes(
+            before_believer=before_believer,
+            delete_plan_ropes=before_plan_ropes.difference(after_plan_ropes),
+        )
+        self.add_believeratom_plan_updates(
+            before_believer=before_believer,
+            after_believer=after_believer,
+            update_ropes=before_plan_ropes.intersection(after_plan_ropes),
+        )
+
+    def add_believeratom_plan_inserts(
+        self, after_believer: BelieverUnit, insert_plan_ropes: set
+    ):
+        for insert_plan_rope in insert_plan_ropes:
+            insert_planunit = after_believer.get_plan_obj(insert_plan_rope)
+            x_believeratom = believeratom_shop("believer_planunit", "INSERT")
+            x_believeratom.set_jkey("plan_rope", insert_planunit.get_plan_rope())
+            x_believeratom.set_jvalue("addin", insert_planunit.addin)
+            x_believeratom.set_jvalue("begin", insert_planunit.begin)
+            x_believeratom.set_jvalue("close", insert_planunit.close)
+            x_believeratom.set_jvalue("denom", insert_planunit.denom)
+            x_believeratom.set_jvalue("numor", insert_planunit.numor)
+            x_believeratom.set_jvalue("morph", insert_planunit.morph)
+            x_believeratom.set_jvalue("mass", insert_planunit.mass)
+            x_believeratom.set_jvalue("task", insert_planunit.task)
+            self.set_believeratom(x_believeratom)
+
+            self.add_believeratom_plan_factunit_inserts(
+                planunit=insert_planunit,
+                insert_factunit_r_contexts=set(insert_planunit.factunits.keys()),
+            )
+            self.add_believeratom_plan_awardlink_inserts(
+                after_planunit=insert_planunit,
+                insert_awardlink_awardee_titles=set(insert_planunit.awardlinks.keys()),
+            )
+            self.add_believeratom_plan_reasonunit_inserts(
+                after_planunit=insert_planunit,
+                insert_reasonunit_r_contexts=set(insert_planunit.reasonunits.keys()),
+            )
+            self.add_believeratom_plan_laborlink_insert(
+                plan_rope=insert_plan_rope,
+                insert_laborlink_labor_titles=insert_planunit.laborunit._laborlinks,
+            )
+            self.add_believeratom_plan_healerlink_insert(
+                plan_rope=insert_plan_rope,
+                insert_healerlink_healer_names=insert_planunit.healerlink._healer_names,
+            )
+
+    def add_believeratom_plan_updates(
+        self,
+        before_believer: BelieverUnit,
+        after_believer: BelieverUnit,
+        update_ropes: set,
+    ):
+        for plan_rope in update_ropes:
+            after_planunit = after_believer.get_plan_obj(plan_rope)
+            before_planunit = before_believer.get_plan_obj(plan_rope)
+            if jvalues_different("believer_planunit", before_planunit, after_planunit):
+                x_believeratom = believeratom_shop("believer_planunit", "UPDATE")
+                x_believeratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
+                if before_planunit.addin != after_planunit.addin:
+                    x_believeratom.set_jvalue("addin", after_planunit.addin)
+                if before_planunit.begin != after_planunit.begin:
+                    x_believeratom.set_jvalue("begin", after_planunit.begin)
+                if before_planunit.close != after_planunit.close:
+                    x_believeratom.set_jvalue("close", after_planunit.close)
+                if before_planunit.denom != after_planunit.denom:
+                    x_believeratom.set_jvalue("denom", after_planunit.denom)
+                if before_planunit.numor != after_planunit.numor:
+                    x_believeratom.set_jvalue("numor", after_planunit.numor)
+                if before_planunit.morph != after_planunit.morph:
+                    x_believeratom.set_jvalue("morph", after_planunit.morph)
+                if before_planunit.mass != after_planunit.mass:
+                    x_believeratom.set_jvalue("mass", after_planunit.mass)
+                if before_planunit.task != after_planunit.task:
+                    x_believeratom.set_jvalue("task", after_planunit.task)
+                self.set_believeratom(x_believeratom)
 
             # insert / update / delete factunits
-            before_factunit_rcontexts = set(before_conceptunit.factunits.keys())
-            after_factunit_rcontexts = set(after_conceptunit.factunits.keys())
-            self.add_budatom_concept_factunit_inserts(
-                conceptunit=after_conceptunit,
-                insert_factunit_rcontexts=after_factunit_rcontexts.difference(
-                    before_factunit_rcontexts
+            before_factunit_r_contexts = set(before_planunit.factunits.keys())
+            after_factunit_r_contexts = set(after_planunit.factunits.keys())
+            self.add_believeratom_plan_factunit_inserts(
+                planunit=after_planunit,
+                insert_factunit_r_contexts=after_factunit_r_contexts.difference(
+                    before_factunit_r_contexts
                 ),
             )
-            self.add_budatom_concept_factunit_updates(
-                before_conceptunit=before_conceptunit,
-                after_conceptunit=after_conceptunit,
-                update_factunit_rcontexts=before_factunit_rcontexts.intersection(
-                    after_factunit_rcontexts
+            self.add_believeratom_plan_factunit_updates(
+                before_planunit=before_planunit,
+                after_planunit=after_planunit,
+                update_factunit_r_contexts=before_factunit_r_contexts.intersection(
+                    after_factunit_r_contexts
                 ),
             )
-            self.add_budatom_concept_factunit_deletes(
-                concept_way=concept_way,
-                delete_factunit_rcontexts=before_factunit_rcontexts.difference(
-                    after_factunit_rcontexts
+            self.add_believeratom_plan_factunit_deletes(
+                plan_rope=plan_rope,
+                delete_factunit_r_contexts=before_factunit_r_contexts.difference(
+                    after_factunit_r_contexts
                 ),
             )
 
             # insert / update / delete awardunits
-            before_awardlinks_awardee_titles = set(before_conceptunit.awardlinks.keys())
-            after_awardlinks_awardee_titles = set(after_conceptunit.awardlinks.keys())
-            self.add_budatom_concept_awardlink_inserts(
-                after_conceptunit=after_conceptunit,
+            before_awardlinks_awardee_titles = set(before_planunit.awardlinks.keys())
+            after_awardlinks_awardee_titles = set(after_planunit.awardlinks.keys())
+            self.add_believeratom_plan_awardlink_inserts(
+                after_planunit=after_planunit,
                 insert_awardlink_awardee_titles=after_awardlinks_awardee_titles.difference(
                     before_awardlinks_awardee_titles
                 ),
             )
-            self.add_budatom_concept_awardlink_updates(
-                before_conceptunit=before_conceptunit,
-                after_conceptunit=after_conceptunit,
+            self.add_believeratom_plan_awardlink_updates(
+                before_planunit=before_planunit,
+                after_planunit=after_planunit,
                 update_awardlink_awardee_titles=before_awardlinks_awardee_titles.intersection(
                     after_awardlinks_awardee_titles
                 ),
             )
-            self.add_budatom_concept_awardlink_deletes(
-                concept_way=concept_way,
+            self.add_believeratom_plan_awardlink_deletes(
+                plan_rope=plan_rope,
                 delete_awardlink_awardee_titles=before_awardlinks_awardee_titles.difference(
                     after_awardlinks_awardee_titles
                 ),
             )
 
             # insert / update / delete reasonunits
-            before_reasonunit_rcontexts = set(before_conceptunit.reasonunits.keys())
-            after_reasonunit_rcontexts = set(after_conceptunit.reasonunits.keys())
-            self.add_budatom_concept_reasonunit_inserts(
-                after_conceptunit=after_conceptunit,
-                insert_reasonunit_rcontexts=after_reasonunit_rcontexts.difference(
-                    before_reasonunit_rcontexts
+            before_reasonunit_r_contexts = set(before_planunit.reasonunits.keys())
+            after_reasonunit_r_contexts = set(after_planunit.reasonunits.keys())
+            self.add_believeratom_plan_reasonunit_inserts(
+                after_planunit=after_planunit,
+                insert_reasonunit_r_contexts=after_reasonunit_r_contexts.difference(
+                    before_reasonunit_r_contexts
                 ),
             )
-            self.add_budatom_concept_reasonunit_updates(
-                before_conceptunit=before_conceptunit,
-                after_conceptunit=after_conceptunit,
-                update_reasonunit_rcontexts=before_reasonunit_rcontexts.intersection(
-                    after_reasonunit_rcontexts
+            self.add_believeratom_plan_reasonunit_updates(
+                before_planunit=before_planunit,
+                after_planunit=after_planunit,
+                update_reasonunit_r_contexts=before_reasonunit_r_contexts.intersection(
+                    after_reasonunit_r_contexts
                 ),
             )
-            self.add_budatom_concept_reasonunit_deletes(
-                before_conceptunit=before_conceptunit,
-                delete_reasonunit_rcontexts=before_reasonunit_rcontexts.difference(
-                    after_reasonunit_rcontexts
+            self.add_believeratom_plan_reasonunit_deletes(
+                before_planunit=before_planunit,
+                delete_reasonunit_r_contexts=before_reasonunit_r_contexts.difference(
+                    after_reasonunit_r_contexts
                 ),
             )
             # insert / update / delete reasonunits_permises
-            # update reasonunits_permises insert_premise
-            # update reasonunits_permises update_premise
-            # update reasonunits_permises delete_premise
+            # update reasonunits_permises insert_case
+            # update reasonunits_permises update_case
+            # update reasonunits_permises delete_case
 
             # insert / update / delete laborlinks
-            before_laborlinks_labor_titles = set(
-                before_conceptunit.laborunit._laborlinks
-            )
-            after_laborlinks_labor_titles = set(after_conceptunit.laborunit._laborlinks)
-            self.add_budatom_concept_laborlink_insert(
-                concept_way=concept_way,
+            before_laborlinks_labor_titles = set(before_planunit.laborunit._laborlinks)
+            after_laborlinks_labor_titles = set(after_planunit.laborunit._laborlinks)
+            self.add_believeratom_plan_laborlink_insert(
+                plan_rope=plan_rope,
                 insert_laborlink_labor_titles=after_laborlinks_labor_titles.difference(
                     before_laborlinks_labor_titles
                 ),
             )
-            self.add_budatom_concept_laborlink_deletes(
-                concept_way=concept_way,
+            self.add_believeratom_plan_laborlink_deletes(
+                plan_rope=plan_rope,
                 delete_laborlink_labor_titles=before_laborlinks_labor_titles.difference(
                     after_laborlinks_labor_titles
                 ),
@@ -476,357 +521,361 @@ class BudDelta:
 
             # insert / update / delete healerlinks
             before_healerlinks_healer_names = set(
-                before_conceptunit.healerlink._healer_names
+                before_planunit.healerlink._healer_names
             )
             after_healerlinks_healer_names = set(
-                after_conceptunit.healerlink._healer_names
+                after_planunit.healerlink._healer_names
             )
-            self.add_budatom_concept_healerlink_insert(
-                concept_way=concept_way,
+            self.add_believeratom_plan_healerlink_insert(
+                plan_rope=plan_rope,
                 insert_healerlink_healer_names=after_healerlinks_healer_names.difference(
                     before_healerlinks_healer_names
                 ),
             )
-            self.add_budatom_concept_healerlink_deletes(
-                concept_way=concept_way,
+            self.add_believeratom_plan_healerlink_deletes(
+                plan_rope=plan_rope,
                 delete_healerlink_healer_names=before_healerlinks_healer_names.difference(
                     after_healerlinks_healer_names
                 ),
             )
 
-    def add_budatom_concept_deletes(
-        self, before_bud: BudUnit, delete_concept_ways: set
+    def add_believeratom_plan_deletes(
+        self, before_believer: BelieverUnit, delete_plan_ropes: set
     ):
-        for delete_concept_way in delete_concept_ways:
-            x_budatom = budatom_shop("bud_conceptunit", "DELETE")
-            x_budatom.set_jkey("concept_way", delete_concept_way)
-            self.set_budatom(x_budatom)
+        for delete_plan_rope in delete_plan_ropes:
+            x_believeratom = believeratom_shop("believer_planunit", "DELETE")
+            x_believeratom.set_jkey("plan_rope", delete_plan_rope)
+            self.set_believeratom(x_believeratom)
 
-            delete_conceptunit = before_bud.get_concept_obj(delete_concept_way)
-            self.add_budatom_concept_factunit_deletes(
-                concept_way=delete_concept_way,
-                delete_factunit_rcontexts=set(delete_conceptunit.factunits.keys()),
-            )
-
-            self.add_budatom_concept_awardlink_deletes(
-                concept_way=delete_concept_way,
-                delete_awardlink_awardee_titles=set(
-                    delete_conceptunit.awardlinks.keys()
-                ),
-            )
-            self.add_budatom_concept_reasonunit_deletes(
-                before_conceptunit=delete_conceptunit,
-                delete_reasonunit_rcontexts=set(delete_conceptunit.reasonunits.keys()),
-            )
-            self.add_budatom_concept_laborlink_deletes(
-                concept_way=delete_concept_way,
-                delete_laborlink_labor_titles=delete_conceptunit.laborunit._laborlinks,
-            )
-            self.add_budatom_concept_healerlink_deletes(
-                concept_way=delete_concept_way,
-                delete_healerlink_healer_names=delete_conceptunit.healerlink._healer_names,
+            delete_planunit = before_believer.get_plan_obj(delete_plan_rope)
+            self.add_believeratom_plan_factunit_deletes(
+                plan_rope=delete_plan_rope,
+                delete_factunit_r_contexts=set(delete_planunit.factunits.keys()),
             )
 
-    def add_budatom_concept_reasonunit_inserts(
-        self, after_conceptunit: ConceptUnit, insert_reasonunit_rcontexts: set
+            self.add_believeratom_plan_awardlink_deletes(
+                plan_rope=delete_plan_rope,
+                delete_awardlink_awardee_titles=set(delete_planunit.awardlinks.keys()),
+            )
+            self.add_believeratom_plan_reasonunit_deletes(
+                before_planunit=delete_planunit,
+                delete_reasonunit_r_contexts=set(delete_planunit.reasonunits.keys()),
+            )
+            self.add_believeratom_plan_laborlink_deletes(
+                plan_rope=delete_plan_rope,
+                delete_laborlink_labor_titles=delete_planunit.laborunit._laborlinks,
+            )
+            self.add_believeratom_plan_healerlink_deletes(
+                plan_rope=delete_plan_rope,
+                delete_healerlink_healer_names=delete_planunit.healerlink._healer_names,
+            )
+
+    def add_believeratom_plan_reasonunit_inserts(
+        self, after_planunit: PlanUnit, insert_reasonunit_r_contexts: set
     ):
-        for insert_reasonunit_rcontext in insert_reasonunit_rcontexts:
-            after_reasonunit = after_conceptunit.get_reasonunit(
-                insert_reasonunit_rcontext
+        for insert_reasonunit_r_context in insert_reasonunit_r_contexts:
+            after_reasonunit = after_planunit.get_reasonunit(
+                insert_reasonunit_r_context
             )
-            x_budatom = budatom_shop("bud_concept_reasonunit", "INSERT")
-            x_budatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
-            x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
-            if after_reasonunit.rconcept_active_requisite is not None:
-                x_budatom.set_jvalue(
-                    "rconcept_active_requisite",
-                    after_reasonunit.rconcept_active_requisite,
+            x_believeratom = believeratom_shop("believer_plan_reasonunit", "INSERT")
+            x_believeratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
+            x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
+            if after_reasonunit.r_plan_active_requisite is not None:
+                x_believeratom.set_jvalue(
+                    "r_plan_active_requisite",
+                    after_reasonunit.r_plan_active_requisite,
                 )
-            self.set_budatom(x_budatom)
+            self.set_believeratom(x_believeratom)
 
-            self.add_budatom_concept_reason_premiseunit_inserts(
-                concept_way=after_conceptunit.get_concept_way(),
+            self.add_believeratom_plan_reason_caseunit_inserts(
+                plan_rope=after_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
-                insert_premise_pstates=set(after_reasonunit.premises.keys()),
+                insert_case_r_states=set(after_reasonunit.cases.keys()),
             )
 
-    def add_budatom_concept_reasonunit_updates(
+    def add_believeratom_plan_reasonunit_updates(
         self,
-        before_conceptunit: ConceptUnit,
-        after_conceptunit: ConceptUnit,
-        update_reasonunit_rcontexts: set,
+        before_planunit: PlanUnit,
+        after_planunit: PlanUnit,
+        update_reasonunit_r_contexts: set,
     ):
-        for update_reasonunit_rcontext in update_reasonunit_rcontexts:
-            before_reasonunit = before_conceptunit.get_reasonunit(
-                update_reasonunit_rcontext
+        for update_reasonunit_r_context in update_reasonunit_r_contexts:
+            before_reasonunit = before_planunit.get_reasonunit(
+                update_reasonunit_r_context
             )
-            after_reasonunit = after_conceptunit.get_reasonunit(
-                update_reasonunit_rcontext
+            after_reasonunit = after_planunit.get_reasonunit(
+                update_reasonunit_r_context
             )
             if jvalues_different(
-                "bud_concept_reasonunit", before_reasonunit, after_reasonunit
+                "believer_plan_reasonunit", before_reasonunit, after_reasonunit
             ):
-                x_budatom = budatom_shop("bud_concept_reasonunit", "UPDATE")
-                x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
-                x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
+                x_believeratom = believeratom_shop("believer_plan_reasonunit", "UPDATE")
+                x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
+                x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
                 if (
-                    before_reasonunit.rconcept_active_requisite
-                    != after_reasonunit.rconcept_active_requisite
+                    before_reasonunit.r_plan_active_requisite
+                    != after_reasonunit.r_plan_active_requisite
                 ):
-                    x_budatom.set_jvalue(
-                        "rconcept_active_requisite",
-                        after_reasonunit.rconcept_active_requisite,
+                    x_believeratom.set_jvalue(
+                        "r_plan_active_requisite",
+                        after_reasonunit.r_plan_active_requisite,
                     )
-                self.set_budatom(x_budatom)
+                self.set_believeratom(x_believeratom)
 
-            before_premise_pstates = set(before_reasonunit.premises.keys())
-            after_premise_pstates = set(after_reasonunit.premises.keys())
-            self.add_budatom_concept_reason_premiseunit_inserts(
-                concept_way=before_conceptunit.get_concept_way(),
+            before_case_r_states = set(before_reasonunit.cases.keys())
+            after_case_r_states = set(after_reasonunit.cases.keys())
+            self.add_believeratom_plan_reason_caseunit_inserts(
+                plan_rope=before_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
-                insert_premise_pstates=after_premise_pstates.difference(
-                    before_premise_pstates
+                insert_case_r_states=after_case_r_states.difference(
+                    before_case_r_states
                 ),
             )
-            self.add_budatom_concept_reason_premiseunit_updates(
-                concept_way=before_conceptunit.get_concept_way(),
+            self.add_believeratom_plan_reason_caseunit_updates(
+                plan_rope=before_planunit.get_plan_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
-                update_premise_pstates=after_premise_pstates.intersection(
-                    before_premise_pstates
+                update_case_r_states=after_case_r_states.intersection(
+                    before_case_r_states
                 ),
             )
-            self.add_budatom_concept_reason_premiseunit_deletes(
-                concept_way=before_conceptunit.get_concept_way(),
-                reasonunit_rcontext=update_reasonunit_rcontext,
-                delete_premise_pstates=before_premise_pstates.difference(
-                    after_premise_pstates
+            self.add_believeratom_plan_reason_caseunit_deletes(
+                plan_rope=before_planunit.get_plan_rope(),
+                reasonunit_r_context=update_reasonunit_r_context,
+                delete_case_r_states=before_case_r_states.difference(
+                    after_case_r_states
                 ),
             )
 
-    def add_budatom_concept_reasonunit_deletes(
-        self, before_conceptunit: ConceptUnit, delete_reasonunit_rcontexts: set
+    def add_believeratom_plan_reasonunit_deletes(
+        self, before_planunit: PlanUnit, delete_reasonunit_r_contexts: set
     ):
-        for delete_reasonunit_rcontext in delete_reasonunit_rcontexts:
-            x_budatom = budatom_shop("bud_concept_reasonunit", "DELETE")
-            x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
-            x_budatom.set_jkey("rcontext", delete_reasonunit_rcontext)
-            self.set_budatom(x_budatom)
+        for delete_reasonunit_r_context in delete_reasonunit_r_contexts:
+            x_believeratom = believeratom_shop("believer_plan_reasonunit", "DELETE")
+            x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
+            x_believeratom.set_jkey("r_context", delete_reasonunit_r_context)
+            self.set_believeratom(x_believeratom)
 
-            before_reasonunit = before_conceptunit.get_reasonunit(
-                delete_reasonunit_rcontext
+            before_reasonunit = before_planunit.get_reasonunit(
+                delete_reasonunit_r_context
             )
-            self.add_budatom_concept_reason_premiseunit_deletes(
-                concept_way=before_conceptunit.get_concept_way(),
-                reasonunit_rcontext=delete_reasonunit_rcontext,
-                delete_premise_pstates=set(before_reasonunit.premises.keys()),
+            self.add_believeratom_plan_reason_caseunit_deletes(
+                plan_rope=before_planunit.get_plan_rope(),
+                reasonunit_r_context=delete_reasonunit_r_context,
+                delete_case_r_states=set(before_reasonunit.cases.keys()),
             )
 
-    def add_budatom_concept_reason_premiseunit_inserts(
+    def add_believeratom_plan_reason_caseunit_inserts(
         self,
-        concept_way: WayTerm,
+        plan_rope: RopeTerm,
         after_reasonunit: ReasonUnit,
-        insert_premise_pstates: set,
+        insert_case_r_states: set,
     ):
-        for insert_premise_pstate in insert_premise_pstates:
-            after_premiseunit = after_reasonunit.get_premise(insert_premise_pstate)
-            x_budatom = budatom_shop("bud_concept_reason_premiseunit", "INSERT")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("rcontext", after_reasonunit.rcontext)
-            x_budatom.set_jkey("pstate", after_premiseunit.pstate)
-            if after_premiseunit.popen is not None:
-                x_budatom.set_jvalue("popen", after_premiseunit.popen)
-            if after_premiseunit.pnigh is not None:
-                x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
-            if after_premiseunit.pdivisor is not None:
-                x_budatom.set_jvalue("pdivisor", after_premiseunit.pdivisor)
-            self.set_budatom(x_budatom)
+        for insert_case_r_state in insert_case_r_states:
+            after_caseunit = after_reasonunit.get_case(insert_case_r_state)
+            x_believeratom = believeratom_shop(
+                "believer_plan_reason_caseunit", "INSERT"
+            )
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
+            x_believeratom.set_jkey("r_state", after_caseunit.r_state)
+            if after_caseunit.r_lower is not None:
+                x_believeratom.set_jvalue("r_lower", after_caseunit.r_lower)
+            if after_caseunit.r_upper is not None:
+                x_believeratom.set_jvalue("r_upper", after_caseunit.r_upper)
+            if after_caseunit.r_divisor is not None:
+                x_believeratom.set_jvalue("r_divisor", after_caseunit.r_divisor)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_reason_premiseunit_updates(
+    def add_believeratom_plan_reason_caseunit_updates(
         self,
-        concept_way: WayTerm,
+        plan_rope: RopeTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
-        update_premise_pstates: set,
+        update_case_r_states: set,
     ):
-        for update_premise_pstate in update_premise_pstates:
-            before_premiseunit = before_reasonunit.get_premise(update_premise_pstate)
-            after_premiseunit = after_reasonunit.get_premise(update_premise_pstate)
+        for update_case_r_state in update_case_r_states:
+            before_caseunit = before_reasonunit.get_case(update_case_r_state)
+            after_caseunit = after_reasonunit.get_case(update_case_r_state)
             if jvalues_different(
-                "bud_concept_reason_premiseunit",
-                before_premiseunit,
-                after_premiseunit,
+                "believer_plan_reason_caseunit",
+                before_caseunit,
+                after_caseunit,
             ):
-                x_budatom = budatom_shop("bud_concept_reason_premiseunit", "UPDATE")
-                x_budatom.set_jkey("concept_way", concept_way)
-                x_budatom.set_jkey("rcontext", before_reasonunit.rcontext)
-                x_budatom.set_jkey("pstate", after_premiseunit.pstate)
-                if after_premiseunit.popen != before_premiseunit.popen:
-                    x_budatom.set_jvalue("popen", after_premiseunit.popen)
-                if after_premiseunit.pnigh != before_premiseunit.pnigh:
-                    x_budatom.set_jvalue("pnigh", after_premiseunit.pnigh)
-                if after_premiseunit.pdivisor != before_premiseunit.pdivisor:
-                    x_budatom.set_jvalue("pdivisor", after_premiseunit.pdivisor)
-                self.set_budatom(x_budatom)
+                x_believeratom = believeratom_shop(
+                    "believer_plan_reason_caseunit", "UPDATE"
+                )
+                x_believeratom.set_jkey("plan_rope", plan_rope)
+                x_believeratom.set_jkey("r_context", before_reasonunit.r_context)
+                x_believeratom.set_jkey("r_state", after_caseunit.r_state)
+                if after_caseunit.r_lower != before_caseunit.r_lower:
+                    x_believeratom.set_jvalue("r_lower", after_caseunit.r_lower)
+                if after_caseunit.r_upper != before_caseunit.r_upper:
+                    x_believeratom.set_jvalue("r_upper", after_caseunit.r_upper)
+                if after_caseunit.r_divisor != before_caseunit.r_divisor:
+                    x_believeratom.set_jvalue("r_divisor", after_caseunit.r_divisor)
+                self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_reason_premiseunit_deletes(
+    def add_believeratom_plan_reason_caseunit_deletes(
         self,
-        concept_way: WayTerm,
-        reasonunit_rcontext: WayTerm,
-        delete_premise_pstates: set,
+        plan_rope: RopeTerm,
+        reasonunit_r_context: RopeTerm,
+        delete_case_r_states: set,
     ):
-        for delete_premise_pstate in delete_premise_pstates:
-            x_budatom = budatom_shop("bud_concept_reason_premiseunit", "DELETE")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("rcontext", reasonunit_rcontext)
-            x_budatom.set_jkey("pstate", delete_premise_pstate)
-            self.set_budatom(x_budatom)
+        for delete_case_r_state in delete_case_r_states:
+            x_believeratom = believeratom_shop(
+                "believer_plan_reason_caseunit", "DELETE"
+            )
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("r_context", reasonunit_r_context)
+            x_believeratom.set_jkey("r_state", delete_case_r_state)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_laborlink_insert(
-        self, concept_way: WayTerm, insert_laborlink_labor_titles: set
+    def add_believeratom_plan_laborlink_insert(
+        self, plan_rope: RopeTerm, insert_laborlink_labor_titles: set
     ):
         for insert_laborlink_labor_title in insert_laborlink_labor_titles:
-            x_budatom = budatom_shop("bud_concept_laborlink", "INSERT")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("labor_title", insert_laborlink_labor_title)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_plan_laborlink", "INSERT")
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("labor_title", insert_laborlink_labor_title)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_laborlink_deletes(
-        self, concept_way: WayTerm, delete_laborlink_labor_titles: set
+    def add_believeratom_plan_laborlink_deletes(
+        self, plan_rope: RopeTerm, delete_laborlink_labor_titles: set
     ):
         for delete_laborlink_labor_title in delete_laborlink_labor_titles:
-            x_budatom = budatom_shop("bud_concept_laborlink", "DELETE")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("labor_title", delete_laborlink_labor_title)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_plan_laborlink", "DELETE")
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("labor_title", delete_laborlink_labor_title)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_healerlink_insert(
-        self, concept_way: WayTerm, insert_healerlink_healer_names: set
+    def add_believeratom_plan_healerlink_insert(
+        self, plan_rope: RopeTerm, insert_healerlink_healer_names: set
     ):
         for insert_healerlink_healer_name in insert_healerlink_healer_names:
-            x_budatom = budatom_shop("bud_concept_healerlink", "INSERT")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("healer_name", insert_healerlink_healer_name)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_plan_healerlink", "INSERT")
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("healer_name", insert_healerlink_healer_name)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_healerlink_deletes(
-        self, concept_way: WayTerm, delete_healerlink_healer_names: set
+    def add_believeratom_plan_healerlink_deletes(
+        self, plan_rope: RopeTerm, delete_healerlink_healer_names: set
     ):
         for delete_healerlink_healer_name in delete_healerlink_healer_names:
-            x_budatom = budatom_shop("bud_concept_healerlink", "DELETE")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("healer_name", delete_healerlink_healer_name)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_plan_healerlink", "DELETE")
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("healer_name", delete_healerlink_healer_name)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_awardlink_inserts(
-        self, after_conceptunit: ConceptUnit, insert_awardlink_awardee_titles: set
+    def add_believeratom_plan_awardlink_inserts(
+        self, after_planunit: PlanUnit, insert_awardlink_awardee_titles: set
     ):
         for after_awardlink_awardee_title in insert_awardlink_awardee_titles:
-            after_awardlink = after_conceptunit.awardlinks.get(
+            after_awardlink = after_planunit.awardlinks.get(
                 after_awardlink_awardee_title
             )
-            x_budatom = budatom_shop("bud_concept_awardlink", "INSERT")
-            x_budatom.set_jkey("concept_way", after_conceptunit.get_concept_way())
-            x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
-            x_budatom.set_jvalue("give_force", after_awardlink.give_force)
-            x_budatom.set_jvalue("take_force", after_awardlink.take_force)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_plan_awardlink", "INSERT")
+            x_believeratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
+            x_believeratom.set_jkey("awardee_title", after_awardlink.awardee_title)
+            x_believeratom.set_jvalue("give_force", after_awardlink.give_force)
+            x_believeratom.set_jvalue("take_force", after_awardlink.take_force)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_awardlink_updates(
+    def add_believeratom_plan_awardlink_updates(
         self,
-        before_conceptunit: ConceptUnit,
-        after_conceptunit: ConceptUnit,
+        before_planunit: PlanUnit,
+        after_planunit: PlanUnit,
         update_awardlink_awardee_titles: set,
     ):
         for update_awardlink_awardee_title in update_awardlink_awardee_titles:
-            before_awardlink = before_conceptunit.awardlinks.get(
+            before_awardlink = before_planunit.awardlinks.get(
                 update_awardlink_awardee_title
             )
-            after_awardlink = after_conceptunit.awardlinks.get(
+            after_awardlink = after_planunit.awardlinks.get(
                 update_awardlink_awardee_title
             )
             if jvalues_different(
-                "bud_concept_awardlink", before_awardlink, after_awardlink
+                "believer_plan_awardlink", before_awardlink, after_awardlink
             ):
-                x_budatom = budatom_shop("bud_concept_awardlink", "UPDATE")
-                x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
-                x_budatom.set_jkey("awardee_title", after_awardlink.awardee_title)
+                x_believeratom = believeratom_shop("believer_plan_awardlink", "UPDATE")
+                x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
+                x_believeratom.set_jkey("awardee_title", after_awardlink.awardee_title)
                 if before_awardlink.give_force != after_awardlink.give_force:
-                    x_budatom.set_jvalue("give_force", after_awardlink.give_force)
+                    x_believeratom.set_jvalue("give_force", after_awardlink.give_force)
                 if before_awardlink.take_force != after_awardlink.take_force:
-                    x_budatom.set_jvalue("take_force", after_awardlink.take_force)
-                self.set_budatom(x_budatom)
+                    x_believeratom.set_jvalue("take_force", after_awardlink.take_force)
+                self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_awardlink_deletes(
-        self, concept_way: WayTerm, delete_awardlink_awardee_titles: set
+    def add_believeratom_plan_awardlink_deletes(
+        self, plan_rope: RopeTerm, delete_awardlink_awardee_titles: set
     ):
         for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
-            x_budatom = budatom_shop("bud_concept_awardlink", "DELETE")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("awardee_title", delete_awardlink_awardee_title)
-            self.set_budatom(x_budatom)
+            x_believeratom = believeratom_shop("believer_plan_awardlink", "DELETE")
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("awardee_title", delete_awardlink_awardee_title)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_factunit_inserts(
-        self, conceptunit: ConceptUnit, insert_factunit_rcontexts: set
+    def add_believeratom_plan_factunit_inserts(
+        self, planunit: PlanUnit, insert_factunit_r_contexts: set
     ):
-        for insert_factunit_rcontext in insert_factunit_rcontexts:
-            insert_factunit = conceptunit.factunits.get(insert_factunit_rcontext)
-            x_budatom = budatom_shop("bud_concept_factunit", "INSERT")
-            x_budatom.set_jkey("concept_way", conceptunit.get_concept_way())
-            x_budatom.set_jkey("fcontext", insert_factunit.fcontext)
-            if insert_factunit.fstate is not None:
-                x_budatom.set_jvalue("fstate", insert_factunit.fstate)
-            if insert_factunit.fopen is not None:
-                x_budatom.set_jvalue("fopen", insert_factunit.fopen)
-            if insert_factunit.fnigh is not None:
-                x_budatom.set_jvalue("fnigh", insert_factunit.fnigh)
-            self.set_budatom(x_budatom)
+        for insert_factunit_r_context in insert_factunit_r_contexts:
+            insert_factunit = planunit.factunits.get(insert_factunit_r_context)
+            x_believeratom = believeratom_shop("believer_plan_factunit", "INSERT")
+            x_believeratom.set_jkey("plan_rope", planunit.get_plan_rope())
+            x_believeratom.set_jkey("f_context", insert_factunit.f_context)
+            if insert_factunit.f_state is not None:
+                x_believeratom.set_jvalue("f_state", insert_factunit.f_state)
+            if insert_factunit.f_lower is not None:
+                x_believeratom.set_jvalue("f_lower", insert_factunit.f_lower)
+            if insert_factunit.f_upper is not None:
+                x_believeratom.set_jvalue("f_upper", insert_factunit.f_upper)
+            self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_factunit_updates(
+    def add_believeratom_plan_factunit_updates(
         self,
-        before_conceptunit: ConceptUnit,
-        after_conceptunit: ConceptUnit,
-        update_factunit_rcontexts: set,
+        before_planunit: PlanUnit,
+        after_planunit: PlanUnit,
+        update_factunit_r_contexts: set,
     ):
-        for update_factunit_rcontext in update_factunit_rcontexts:
-            before_factunit = before_conceptunit.factunits.get(update_factunit_rcontext)
-            after_factunit = after_conceptunit.factunits.get(update_factunit_rcontext)
+        for update_factunit_r_context in update_factunit_r_contexts:
+            before_factunit = before_planunit.factunits.get(update_factunit_r_context)
+            after_factunit = after_planunit.factunits.get(update_factunit_r_context)
             if jvalues_different(
-                "bud_concept_factunit", before_factunit, after_factunit
+                "believer_plan_factunit", before_factunit, after_factunit
             ):
-                x_budatom = budatom_shop("bud_concept_factunit", "UPDATE")
-                x_budatom.set_jkey("concept_way", before_conceptunit.get_concept_way())
-                x_budatom.set_jkey("fcontext", after_factunit.fcontext)
-                if before_factunit.fstate != after_factunit.fstate:
-                    x_budatom.set_jvalue("fstate", after_factunit.fstate)
-                if before_factunit.fopen != after_factunit.fopen:
-                    x_budatom.set_jvalue("fopen", after_factunit.fopen)
-                if before_factunit.fnigh != after_factunit.fnigh:
-                    x_budatom.set_jvalue("fnigh", after_factunit.fnigh)
-                self.set_budatom(x_budatom)
+                x_believeratom = believeratom_shop("believer_plan_factunit", "UPDATE")
+                x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
+                x_believeratom.set_jkey("f_context", after_factunit.f_context)
+                if before_factunit.f_state != after_factunit.f_state:
+                    x_believeratom.set_jvalue("f_state", after_factunit.f_state)
+                if before_factunit.f_lower != after_factunit.f_lower:
+                    x_believeratom.set_jvalue("f_lower", after_factunit.f_lower)
+                if before_factunit.f_upper != after_factunit.f_upper:
+                    x_believeratom.set_jvalue("f_upper", after_factunit.f_upper)
+                self.set_believeratom(x_believeratom)
 
-    def add_budatom_concept_factunit_deletes(
-        self, concept_way: WayTerm, delete_factunit_rcontexts: FactUnit
+    def add_believeratom_plan_factunit_deletes(
+        self, plan_rope: RopeTerm, delete_factunit_r_contexts: FactUnit
     ):
-        for delete_factunit_rcontext in delete_factunit_rcontexts:
-            x_budatom = budatom_shop("bud_concept_factunit", "DELETE")
-            x_budatom.set_jkey("concept_way", concept_way)
-            x_budatom.set_jkey("fcontext", delete_factunit_rcontext)
-            self.set_budatom(x_budatom)
+        for delete_factunit_r_context in delete_factunit_r_contexts:
+            x_believeratom = believeratom_shop("believer_plan_factunit", "DELETE")
+            x_believeratom.set_jkey("plan_rope", plan_rope)
+            x_believeratom.set_jkey("f_context", delete_factunit_r_context)
+            self.set_believeratom(x_believeratom)
 
     def is_empty(self) -> bool:
-        return self.budatoms == {}
+        return self.believeratoms == {}
 
-    def get_ordered_budatoms(self, x_count: int = None) -> dict[int, BudAtom]:
+    def get_ordered_believeratoms(self, x_count: int = None) -> dict[int, BelieverAtom]:
         x_count = get_0_if_None(x_count)
         x_dict = {}
-        for x_atom in self.get_sorted_budatoms():
+        for x_atom in self.get_sorted_believeratoms():
             x_dict[x_count] = x_atom
             x_count += 1
         return x_dict
 
     def get_ordered_dict(self, x_count: int = None) -> dict[int, str]:
-        atom_tuples = self.get_ordered_budatoms(x_count).items()
+        atom_tuples = self.get_ordered_believeratoms(x_count).items()
         return {atom_num: atom_obj.get_dict() for atom_num, atom_obj in atom_tuples}
 
     def get_json(self, x_count: int = None) -> str:
@@ -834,45 +883,49 @@ class BudDelta:
         return get_json_from_dict(x_dict)
 
 
-def buddelta_shop(budatoms: dict[str, BudAtom] = None) -> BudDelta:
-    return BudDelta(
-        budatoms=get_empty_dict_if_None(budatoms),
-        _bud_build_validated=False,
+def believerdelta_shop(believeratoms: dict[str, BelieverAtom] = None) -> BelieverDelta:
+    return BelieverDelta(
+        believeratoms=get_empty_dict_if_None(believeratoms),
+        _believer_build_validated=False,
     )
 
 
-def bud_built_from_delta_is_valid(x_delta: BudDelta, x_bud: BudUnit = None) -> bool:
-    x_bud = budunit_shop() if x_bud is None else x_bud
-    x_bud = x_delta.get_edited_bud(x_bud)
+def believer_built_from_delta_is_valid(
+    x_delta: BelieverDelta, x_believer: BelieverUnit = None
+) -> bool:
+    x_believer = believerunit_shop() if x_believer is None else x_believer
+    x_believer = x_delta.get_edited_believer(x_believer)
     try:
-        x_bud.settle_bud()
+        x_believer.settle_believer()
     except Exception:
         return False
     return True
 
 
-def get_dimens_cruds_buddelta(
-    x_buddelta: BudDelta, dimen_set: set[str], curd_set: set[str]
-) -> BudDelta:
-    new_buddelta = buddelta_shop()
-    for x_budatom in x_buddelta.get_sorted_budatoms():
-        if x_budatom.crud_str in curd_set and x_budatom.dimen in dimen_set:
-            new_buddelta.set_budatom(x_budatom)
-    return new_buddelta
+def get_dimens_cruds_believerdelta(
+    x_believerdelta: BelieverDelta, dimen_set: set[str], curd_set: set[str]
+) -> BelieverDelta:
+    new_believerdelta = believerdelta_shop()
+    for x_believeratom in x_believerdelta.get_sorted_believeratoms():
+        if x_believeratom.crud_str in curd_set and x_believeratom.dimen in dimen_set:
+            new_believerdelta.set_believeratom(x_believeratom)
+    return new_believerdelta
 
 
-def get_minimal_buddelta(x_buddelta: BudDelta, x_bud: BudUnit) -> BudDelta:
-    """Creates new BudDelta with only BudAtoms that would actually change the BudUnit"""
-    new_buddelta = buddelta_shop()
-    for x_atom in x_buddelta.get_sorted_budatoms():
-        sifted_atom = sift_budatom(x_bud, x_atom)
+def get_minimal_believerdelta(
+    x_believerdelta: BelieverDelta, x_believer: BelieverUnit
+) -> BelieverDelta:
+    """Creates new BelieverDelta with only BelieverAtoms that would actually change the BelieverUnit"""
+    new_believerdelta = believerdelta_shop()
+    for x_atom in x_believerdelta.get_sorted_believeratoms():
+        sifted_atom = sift_believeratom(x_believer, x_atom)
         if sifted_atom != None:
-            new_buddelta.set_budatom(sifted_atom)
-    return new_buddelta
+            new_believerdelta.set_believeratom(sifted_atom)
+    return new_believerdelta
 
 
-def get_buddelta_from_ordered_dict(x_dict: dict) -> BudDelta:
-    x_buddelta = buddelta_shop()
+def get_believerdelta_from_ordered_dict(x_dict: dict) -> BelieverDelta:
+    x_believerdelta = believerdelta_shop()
     for x_atom_dict in x_dict.values():
-        x_buddelta.set_budatom(get_budatom_from_dict(x_atom_dict))
-    return x_buddelta
+        x_believerdelta.set_believeratom(get_believeratom_from_dict(x_atom_dict))
+    return x_believerdelta

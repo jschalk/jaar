@@ -1,6 +1,6 @@
 def pytest_addoption(parser):
     parser.addoption("--graphics_bool", action="store", default=False)
-    parser.addoption("--big_volume", action="store", default=False)
+    parser.addoption("--run_big_tests", action="store", default=False)
     parser.addoption("--rebuild_bool", action="store", default=False)
 
 
@@ -11,10 +11,10 @@ def pytest_generate_tests(metafunc):
     graphics_bool_value = graphics_bool_value == "True"
     if "graphics_bool" in metafunc.fixturenames and graphics_bool_value is not None:
         metafunc.parametrize("graphics_bool", [graphics_bool_value])
-    big_volume_value = metafunc.config.option.big_volume
-    big_volume_value = big_volume_value == "True"
-    if "big_volume" in metafunc.fixturenames and big_volume_value is not None:
-        metafunc.parametrize("big_volume", [big_volume_value])
+    run_big_tests_value = metafunc.config.option.run_big_tests
+    run_big_tests_value = run_big_tests_value == "True"
+    if "run_big_tests" in metafunc.fixturenames and run_big_tests_value is not None:
+        metafunc.parametrize("run_big_tests", [run_big_tests_value])
     rebuild_bool_value = metafunc.config.option.rebuild_bool
     rebuild_bool_value = rebuild_bool_value == "True"
     if "rebuild_bool" in metafunc.fixturenames and rebuild_bool_value is not None:

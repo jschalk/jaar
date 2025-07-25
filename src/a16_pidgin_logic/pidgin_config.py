@@ -1,16 +1,14 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a08_bud_atom_logic.atom_config import get_all_bud_dimen_delete_keys
+from src.a08_believer_atom_logic.atom_config import get_all_believer_dimen_delete_keys
 
 
-def config_file_dir() -> str:
+def pidgin_config_path() -> str:
+    "Returns path: a16_pidgin_logic/pidgin_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a16_pidgin_logic")
-
-
-def get_pidgin_config_filename() -> str:
-    return "pidgin_config.json"
+    module_dir = create_path(src_dir, "a16_pidgin_logic")
+    return create_path(module_dir, "pidgin_config.json")
 
 
 def get_pidgin_filename() -> str:
@@ -18,7 +16,7 @@ def get_pidgin_filename() -> str:
 
 
 def get_pidgin_config_dict() -> dict:
-    return open_json(config_file_dir(), get_pidgin_config_filename())
+    return open_json(pidgin_config_path())
 
 
 def get_pidgin_dimens() -> set[str]:
@@ -69,7 +67,7 @@ def get_pidgin_args_dimen_mapping() -> dict[str, str]:
 
 def get_pidgin_args_class_types() -> dict[str, str]:
     return {
-        "acct_name": "NameTerm",
+        "partner_name": "NameTerm",
         "addin": "float",
         "amount": "float",
         "awardee_title": "TitleTerm",
@@ -77,29 +75,29 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "c400_number": "int",
         "celldepth": "int",
         "close": "float",
-        "credit_belief": "float",
-        "credit_vote": "float",
+        "partner_cred_points": "float",
+        "group_cred_points": "float",
         "credor_respect": "float",
-        "cumlative_day": "int",
-        "cumlative_minute": "int",
-        "debtit_belief": "float",
-        "debtit_vote": "float",
+        "cumulative_day": "int",
+        "cumulative_minute": "int",
+        "partner_debt_points": "float",
+        "group_debt_points": "float",
         "debtor_respect": "float",
         "denom": "int",
         "face_name": "NameTerm",
-        "fcontext": "WayTerm",
-        "fisc_label": "LabelTerm",
-        "fstate": "WayTerm",
-        "fnigh": "float",
-        "fopen": "float",
-        "fund_coin": "float",
+        "f_context": "RopeTerm",
+        "belief_label": "LabelTerm",
+        "f_state": "RopeTerm",
+        "f_upper": "float",
+        "f_lower": "float",
+        "fund_iota": "float",
         "fund_pool": "float",
         "give_force": "float",
         "gogo_want": "float",
         "group_title": "TitleTerm",
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
-        "concept_way": "WayTerm",
+        "plan_rope": "RopeTerm",
         "mass": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
@@ -107,29 +105,29 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "morph": "bool",
         "numor": "int",
         "offi_time": "TimeLinePoint",
-        "owner_name": "NameTerm",
+        "believer_name": "NameTerm",
         "penny": "float",
         "job_listen_rotations": "int",
-        "pledge": "bool",
+        "task": "bool",
         "problem_bool": "bool",
         "quota": "int",
-        "pstate": "WayTerm",
-        "pdivisor": "int",
-        "popen": "float",
-        "pnigh": "float",
-        "rcontext": "WayTerm",
-        "rconcept_active_requisite": "bool",
+        "r_state": "RopeTerm",
+        "r_divisor": "int",
+        "r_lower": "float",
+        "r_upper": "float",
+        "r_context": "RopeTerm",
+        "r_plan_active_requisite": "bool",
         "respect_bit": "float",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
         "labor_title": "TitleTerm",
         "tran_time": "TimeLinePoint",
-        "deal_time": "TimeLinePoint",
+        "bud_time": "TimeLinePoint",
         "timeline_label": "LabelTerm",
         "weekday_label": "LabelTerm",
         "weekday_order": "int",
-        "bridge": "str",
+        "knot": "str",
         "yr1_jan1_offset": "int",
     }
 
@@ -140,54 +138,54 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
         "pidgin_title": {
             "inx_title",
             "otx_title",
-            "inx_bridge",
-            "otx_bridge",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
         "pidgin_name": {
             "inx_name",
             "otx_name",
-            "inx_bridge",
-            "otx_bridge",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
         "pidgin_label": {
             "inx_label",
             "otx_label",
-            "inx_bridge",
-            "otx_bridge",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
-        "pidgin_way": {
-            "inx_way",
-            "otx_way",
-            "inx_bridge",
-            "otx_bridge",
+        "pidgin_rope": {
+            "inx_rope",
+            "otx_rope",
+            "inx_knot",
+            "otx_knot",
             "unknown_str",
         },
     }
 
 
 def pidginable_class_types() -> set:
-    return {"NameTerm", "TitleTerm", "LabelTerm", "WayTerm"}
+    return {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}
 
 
 def get_pidginable_args() -> set:
     return {
-        "acct_name",
+        "partner_name",
         "awardee_title",
         "face_name",
-        "fcontext",
-        "fisc_label",
-        "fstate",
+        "f_context",
+        "belief_label",
+        "f_state",
         "group_title",
         "healer_name",
         "hour_label",
-        "concept_way",
+        "plan_rope",
         "month_label",
-        "owner_name",
-        "pstate",
-        "rcontext",
+        "believer_name",
+        "r_state",
+        "r_context",
         "labor_title",
         "timeline_label",
         "weekday_label",
@@ -197,7 +195,7 @@ def get_pidginable_args() -> set:
 def find_set_otx_inx_args(args: set) -> set:
     """Receives set of args, returns a set with all "Pidginable" args replaced with "_otx" and "_inx" """
     all_pidginable = get_pidginable_args()
-    all_pidginable.update(get_all_bud_dimen_delete_keys())
+    all_pidginable.update(get_all_believer_dimen_delete_keys())
     all_pidginable.intersection_update(args)
     transformed_args = set()
     for arg in args:
@@ -211,10 +209,10 @@ def find_set_otx_inx_args(args: set) -> set:
 
 def get_pidgin_NameTerm_args() -> set[str]:
     return {
-        "acct_name",
+        "partner_name",
         "face_name",
         "healer_name",
-        "owner_name",
+        "believer_name",
     }
 
 
@@ -228,7 +226,7 @@ def get_pidgin_TitleTerm_args() -> set[str]:
 
 def get_pidgin_LabelTerm_args() -> set[str]:
     return {
-        "fisc_label",
+        "belief_label",
         "hour_label",
         "month_label",
         "timeline_label",
@@ -236,11 +234,11 @@ def get_pidgin_LabelTerm_args() -> set[str]:
     }
 
 
-def get_pidgin_WayTerm_args() -> set[str]:
+def get_pidgin_RopeTerm_args() -> set[str]:
     return {
-        "fstate",
-        "fcontext",
-        "concept_way",
-        "pstate",
-        "rcontext",
+        "f_state",
+        "f_context",
+        "plan_rope",
+        "r_state",
+        "r_context",
     }

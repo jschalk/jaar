@@ -1,0 +1,234 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8" />
+    <title>PlanViewer</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            padding: 20px;
+        }
+
+        ul {
+            list-style-type: none;
+            padding-left: 20px;
+        }
+
+        li {
+            margin: 4px 0;
+        }
+
+        #controls {
+            margin-bottom: 15px;
+        }
+
+        #treeContainer ul {
+            list-style: none;
+            padding-left: 20px;
+        }
+
+        .tree-label {
+            cursor: pointer;
+            display: inline-block;
+            user-select: none;
+        }
+
+        .arrow {
+            display: inline-block;
+            width: 1em;
+            font-weight: bold;
+        }
+    </style>
+</head>
+
+<body>
+    <h2>PlanViewer</h2>
+
+    <div id="FileInput">
+        <input type="file" id="jsonFile" accept=".json" />
+    </div>
+    <div id="controls">
+        <label for="viewOptions">View Options:</label>
+        <select id="viewOptions"></select>
+        </select>
+    </div>
+    <div id="ExportControl">
+        <button id="exportBtn" disabled>Export JSON</button>
+    </div>
+    <div style="margin-bottom: 10px;">
+        <button onclick="expandAll()">Expand All</button>
+        <button onclick="expandToLevel(3)">Expand to Level 1</button>
+        <button onclick="expandToLevel(4)">Expand to Level 2</button>
+        <button onclick="expandToLevel(5)">Expand to Level 3</button>
+        <button onclick="expandToLevel(2)">Collapse All</button>
+    </div>
+    <div id="infoPanel" style="margin: 10px 0; font-weight: bold;"></div>
+    <div id="treeContainer"></div>
+
+    <script>
+        const fileInput = document.getElementById("jsonFile");
+        const viewOptions = document.getElementById("viewOptions");
+        const treeContainer = document.getElementById("treeContainer");
+        const exportBtn = document.getElementById("exportBtn");
+
+        let lastResult = null;
+
+        fileInput.addEventListener("change", async function () {
+            const file = this.files[0];
+            if (!file) return;
+
+            const reader = new FileReader();
+
+            reader.onload = async function (e) {
+                try {
+                    const rawJson = JSON.parse(e.target.result);
+                    const mode = viewOptions.value;
+
+                    const requestBody = {
+                        _mode: mode,
+                        data: rawJson
+                    };
+
+                    const response = await fetch("http://localhost:5000/process", {
+                        method: "POST",
+                        headers: { "Content-Type": "application/json" },
+                        body: JSON.stringify(requestBody)
+                    });
+
+                    if (!response.ok) {
+                        const err = await response.json();
+                        alert("Server error: " + (err.error || response.statusText));
+                        return;
+                    }
+
+                    const result = await response.json();
+
+                    if (result.believer_name) {
+                        document.getElementById("infoPanel").textContent = `Believer_Name: ${result.believer_name}`;
+                    }
+
+                    lastResult = result.result || result;
+                    renderTree(lastResult);
+                    exportBtn.disabled = false;
+
+                } catch (err) {
+                    alert("Error occurred: " + err.message);
+                    console.error("ETL Error:", err);
+                }
+            };
+
+            reader.readAsText(file);
+        });
+
+        exportBtn.addEventListener("click", function () {
+            if (!lastResult) return;
+
+            const blob = new Blob([JSON.stringify(lastResult, null, 2)], {
+                type: "application/json"
+            });
+
+            const url = URL.createObjectURL(blob);
+            const a = document.createElement("a");
+            a.href = url;
+            a.download = "processed_data.json";
+            a.click();
+            URL.revokeObjectURL(url);
+        });
+
+        async function loadModes() {
+            const viewOptions = document.getElementById("viewOptions");
+            try {
+                const res = await fetch("http://localhost:5000/modes");
+                const modes = await res.json();
+
+                viewOptions.innerHTML = "";
+                for (const mode of modes) {
+                    const option = document.createElement("option");
+                    option.value = mode;
+                    option.textContent = mode;
+                    viewOptions.appendChild(option);
+                }
+            } catch (err) {
+                console.error("Failed to fetch modes:", err);
+                alert("Could not load ETL modes from server.");
+            }
+        }
+
+        function expandAll() {
+            console.log("expandAll was called");
+            const uls = document.querySelectorAll("#treeContainer ul");
+            const arrows = document.querySelectorAll("#treeContainer .arrow");
+            uls.forEach(ul => ul.style.display = "block");
+            arrows.forEach(arrow => arrow.textContent = "▼");
+        }
+
+        function renderTree(obj, container = treeContainer) {
+            container.innerHTML = "";
+            const ul = document.createElement("ul");
+            buildTree(obj, ul);
+            container.appendChild(ul);
+        }
+
+        function buildTree(data, parent) {
+            for (const key in data) {
+                const li = document.createElement("li");
+                const value = data[key];
+
+                if (typeof value === "object" && value !== null) {
+                    const label = document.createElement("span");
+                    label.classList.add("tree-label");
+                    label.innerHTML = `<span class="arrow">▶</span> <strong>${key}</strong>`;
+
+                    const ul = document.createElement("ul");
+                    ul.style.display = "none";
+                    buildTree(value, ul);
+
+                    label.addEventListener("click", function (e) {
+                        e.stopPropagation();
+                        const isHidden = ul.style.display === "none";
+                        ul.style.display = isHidden ? "block" : "none";
+                        label.querySelector(".arrow").textContent = isHidden ? "▼" : "▶";
+                    });
+
+                    li.appendChild(label);
+                    li.appendChild(ul);
+                } else {
+                    li.textContent = `${key}: ${value}`;
+                }
+
+                parent.appendChild(li);
+            }
+        }
+
+        function expandToLevel(level) {
+            console.log(`Expanding to level ${level}`);
+            const root = document.getElementById("treeContainer");
+            setVisibilityByDepth(root, 1, level);
+        }
+
+        function setVisibilityByDepth(node, currentLevel, maxLevel) {
+            const children = node.children;
+            for (let child of children) {
+                if (child.tagName === "UL") {
+                    if (currentLevel < maxLevel) {
+                        child.style.display = "block";
+                        const arrow = child.previousElementSibling?.querySelector(".arrow");
+                        if (arrow) arrow.textContent = "▼";
+                        setVisibilityByDepth(child, currentLevel + 1, maxLevel);
+                    } else {
+                        child.style.display = "none";
+                        const arrow = child.previousElementSibling?.querySelector(".arrow");
+                        if (arrow) arrow.textContent = "▶";
+                    }
+                } else {
+                    setVisibilityByDepth(child, currentLevel, maxLevel);
+                }
+            }
+        }
+
+        window.addEventListener("DOMContentLoaded", loadModes);
+    </script>
+</body>
+
+</html>

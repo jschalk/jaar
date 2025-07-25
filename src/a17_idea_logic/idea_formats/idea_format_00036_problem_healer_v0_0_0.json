@@ -6,19 +6,19 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "belief_label": {
             "otx_key": true
         },
         "healer_name": {
             "otx_key": true
         },
-        "concept_label": {
+        "plan_label": {
             "otx_key": true
         },
-        "concept_way": {
+        "plan_rope": {
             "otx_key": true
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         },
         "problem_bool": {
@@ -27,9 +27,9 @@
     },
     "idea_number": "br00036",
     "dimens": [
-        "fiscunit",
-        "budunit",
-        "bud_conceptunit",
-        "bud_concept_healerlink"
+        "beliefunit",
+        "believerunit",
+        "believer_planunit",
+        "believer_plan_healerlink"
     ]
 }

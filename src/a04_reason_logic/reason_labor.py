@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.a03_group_logic.acct import AcctName
 from src.a03_group_logic.group import GroupTitle, GroupUnit
+from src.a03_group_logic.partner import PartnerName
 
 
 class InvalidLaborHeirPopulateException(Exception):
@@ -42,9 +42,9 @@ def create_laborunit(laborlink: GroupTitle):
 @dataclass
 class LaborHeir:
     _laborlinks: set[GroupTitle]
-    _owner_name_labor: bool
+    _believer_name_labor: bool
 
-    def _get_all_accts(
+    def _get_all_partners(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
         labor_title_set: set[GroupTitle],
@@ -57,23 +57,27 @@ class LaborHeir:
     def is_empty(self) -> bool:
         return self._laborlinks == set()
 
-    def set_owner_name_labor(
-        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+    def set_believer_name_labor(
+        self,
+        groupunits: dict[GroupTitle, GroupUnit],
+        believer_believer_name: PartnerName,
     ):
-        self._owner_name_labor = self.get_owner_name_labor_bool(
-            groupunits, bud_owner_name
+        self._believer_name_labor = self.get_believer_name_labor_bool(
+            groupunits, believer_believer_name
         )
 
-    def get_owner_name_labor_bool(
-        self, groupunits: dict[GroupTitle, GroupUnit], bud_owner_name: AcctName
+    def get_believer_name_labor_bool(
+        self,
+        groupunits: dict[GroupTitle, GroupUnit],
+        believer_believer_name: PartnerName,
     ) -> bool:
         if self._laborlinks == set():
             return True
 
         for x_labor_title, x_groupunit in groupunits.items():
             if x_labor_title in self._laborlinks:
-                for x_acct_name in x_groupunit._memberships.keys():
-                    if x_acct_name == bud_owner_name:
+                for x_partner_name in x_groupunit._memberships.keys():
+                    if x_partner_name == believer_believer_name:
                         return True
         return False
 
@@ -93,20 +97,22 @@ class LaborHeir:
             for laborlink in parent_laborheir._laborlinks:
                 x_laborlinks.add(laborlink)
         else:
-            # get all_accts of parent laborheir groupunits
-            all_parent_laborheir_accts = self._get_all_accts(
+            # get all_partners of parent laborheir groupunits
+            all_parent_laborheir_partners = self._get_all_partners(
                 groupunits=groupunits,
                 labor_title_set=parent_laborheir._laborlinks,
             )
-            # get all_accts of laborunit groupunits
-            all_laborunit_accts = self._get_all_accts(
+            # get all_partners of laborunit groupunits
+            all_laborunit_partners = self._get_all_partners(
                 groupunits=groupunits,
                 labor_title_set=laborunit._laborlinks,
             )
-            if not set(all_laborunit_accts).issubset(set(all_parent_laborheir_accts)):
+            if not set(all_laborunit_partners).issubset(
+                set(all_parent_laborheir_partners)
+            ):
                 # else raise error
                 raise InvalidLaborHeirPopulateException(
-                    f"parent_laborheir does not contain all accts of the concept's laborunit\n{set(all_parent_laborheir_accts)=}\n\n{set(all_laborunit_accts)=}"
+                    f"parent_laborheir does not contain all partners of the plan's laborunit\n{set(all_parent_laborheir_partners)=}\n\n{set(all_laborunit_partners)=}"
                 )
 
             # set dict_x = to laborunit groupunits
@@ -119,13 +125,13 @@ class LaborHeir:
 
 
 def laborheir_shop(
-    _laborlinks: set[GroupTitle] = None, _owner_name_labor: bool = None
+    _laborlinks: set[GroupTitle] = None, _believer_name_labor: bool = None
 ) -> LaborHeir:
     _laborlinks = get_empty_set_if_None(_laborlinks)
-    if _owner_name_labor is None:
-        _owner_name_labor = False
+    if _believer_name_labor is None:
+        _believer_name_labor = False
 
-    return LaborHeir(_laborlinks=_laborlinks, _owner_name_labor=_owner_name_labor)
+    return LaborHeir(_laborlinks=_laborlinks, _believer_name_labor=_believer_name_labor)
 
 
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:

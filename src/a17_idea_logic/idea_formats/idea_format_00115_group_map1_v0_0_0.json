@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "acct_name": {
+        "partner_name": {
             "otx_key": true
         },
         "event_int": {
@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "fisc_label": {
+        "belief_label": {
             "otx_key": true
         },
         "inx_title": {
@@ -18,15 +18,15 @@
         "otx_title": {
             "otx_key": true
         },
-        "owner_name": {
+        "believer_name": {
             "otx_key": true
         }
     },
     "idea_number": "br00115",
     "dimens": [
         "pidgin_title",
-        "bud_acctunit",
-        "budunit",
-        "fiscunit"
+        "believer_partnerunit",
+        "believerunit",
+        "beliefunit"
     ]
 }

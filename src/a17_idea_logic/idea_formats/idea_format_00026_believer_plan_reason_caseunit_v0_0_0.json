@@ -1,0 +1,42 @@
+{
+    "attributes": {
+        "plan_rope": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "belief_label": {
+            "otx_key": true
+        },
+        "believer_name": {
+            "otx_key": true
+        },
+        "r_divisor": {
+            "otx_key": false
+        },
+        "r_upper": {
+            "otx_key": false
+        },
+        "r_lower": {
+            "otx_key": false
+        },
+        "r_state": {
+            "otx_key": true
+        },
+        "r_context": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "beliefunit",
+        "believerunit",
+        "believer_planunit",
+        "believer_plan_reasonunit",
+        "believer_plan_reason_caseunit"
+    ],
+    "idea_number": "br00026"
+}

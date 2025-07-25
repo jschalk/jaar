@@ -4,9 +4,9 @@
             "otx_title": {}
         },
         "jvalues": {
-            "inx_bridge": {},
+            "inx_knot": {},
             "inx_title": {},
-            "otx_bridge": {},
+            "otx_knot": {},
             "unknown_str": {}
         }
     },
@@ -15,9 +15,9 @@
             "otx_name": {}
         },
         "jvalues": {
-            "inx_bridge": {},
+            "inx_knot": {},
             "inx_name": {},
-            "otx_bridge": {},
+            "otx_knot": {},
             "unknown_str": {}
         }
     },
@@ -26,20 +26,20 @@
             "otx_label": {}
         },
         "jvalues": {
-            "inx_bridge": {},
+            "inx_knot": {},
             "inx_label": {},
-            "otx_bridge": {},
+            "otx_knot": {},
             "unknown_str": {}
         }
     },
-    "pidgin_way": {
+    "pidgin_rope": {
         "jkeys": {
-            "otx_way": {}
+            "otx_rope": {}
         },
         "jvalues": {
-            "inx_bridge": {},
-            "inx_way": {},
-            "otx_bridge": {},
+            "inx_knot": {},
+            "inx_rope": {},
+            "otx_knot": {},
             "unknown_str": {}
         }
     }

@@ -1,0 +1,25 @@
+{
+    "attributes": {
+        "partner_name": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "belief_label": {
+            "otx_key": true
+        },
+        "believer_name": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00011",
+    "dimens": [
+        "beliefunit",
+        "believerunit",
+        "believer_partnerunit"
+    ]
+}

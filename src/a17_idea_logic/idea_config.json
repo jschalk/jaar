@@ -1,145 +1,145 @@
 {
-  "bud_acct_membership": {
+  "believer_partner_membership": {
     "allowed_crud": "delete_insert_update",
     "build_order": 9,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "acct_name": {},
+      "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "belief_label": {},
       "group_title": {},
-      "owner_name": {}
+      "believer_name": {}
     },
     "jvalues": {
-      "credit_vote": {},
-      "debtit_vote": {}
+      "group_cred_points": {},
+      "group_debt_points": {}
     }
   },
-  "bud_acctunit": {
+  "believer_partnerunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 10,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "acct_name": {},
+      "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {}
+      "belief_label": {},
+      "believer_name": {}
     },
     "jvalues": {
-      "credit_belief": {},
-      "debtit_belief": {}
+      "partner_cred_points": {},
+      "partner_debt_points": {}
     }
   },
-  "bud_concept_awardlink": {
+  "believer_plan_awardlink": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
       "awardee_title": {},
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {}
+      "belief_label": {},
+      "believer_name": {}
     },
     "jvalues": {
       "give_force": {},
       "take_force": {}
     }
   },
-  "bud_concept_factunit": {
+  "believer_plan_factunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 12,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fcontext": {},
-      "fisc_label": {},
-      "owner_name": {}
+      "f_context": {},
+      "belief_label": {},
+      "believer_name": {}
     },
     "jvalues": {
-      "fnigh": {},
-      "fopen": {},
-      "fstate": {}
+      "f_upper": {},
+      "f_lower": {},
+      "f_state": {}
     }
   },
-  "bud_concept_healerlink": {
+  "believer_plan_healerlink": {
     "allowed_crud": "delete_insert",
     "build_order": 15,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "belief_label": {},
       "healer_name": {},
-      "owner_name": {}
+      "believer_name": {}
     },
     "jvalues": {}
   },
-  "bud_concept_laborlink": {
+  "believer_plan_laborlink": {
     "allowed_crud": "delete_insert",
     "build_order": 14,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "belief_label": {},
       "labor_title": {},
-      "owner_name": {}
+      "believer_name": {}
     },
     "jvalues": {}
   },
-  "bud_concept_reason_premiseunit": {
+  "believer_plan_reason_caseunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 16,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {},
-      "pstate": {},
-      "rcontext": {}
+      "belief_label": {},
+      "believer_name": {},
+      "r_state": {},
+      "r_context": {}
     },
     "jvalues": {
-      "pdivisor": {},
-      "pnigh": {},
-      "popen": {}
+      "r_divisor": {},
+      "r_upper": {},
+      "r_lower": {}
     }
   },
-  "bud_concept_reasonunit": {
+  "believer_plan_reasonunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 17,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {},
-      "rcontext": {}
+      "belief_label": {},
+      "believer_name": {},
+      "r_context": {}
     },
     "jvalues": {
-      "rconcept_active_requisite": {}
+      "r_plan_active_requisite": {}
     }
   },
-  "bud_conceptunit": {
+  "believer_planunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 18,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
-      "concept_way": {},
+      "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {}
+      "belief_label": {},
+      "believer_name": {}
     },
     "jvalues": {
       "addin": {},
@@ -150,25 +150,25 @@
       "mass": {},
       "morph": {},
       "numor": {},
-      "pledge": {},
+      "task": {},
       "problem_bool": {},
       "stop_want": {}
     }
   },
-  "budunit": {
+  "believerunit": {
     "allowed_crud": "UPDATE",
     "build_order": 19,
-    "idea_category": "bud",
+    "idea_category": "believer",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {}
+      "belief_label": {},
+      "believer_name": {}
     },
     "jvalues": {
       "credor_respect": {},
       "debtor_respect": {},
-      "fund_coin": {},
+      "fund_iota": {},
       "fund_pool": {},
       "max_tree_traverse": {},
       "penny": {},
@@ -176,105 +176,105 @@
       "tally": {}
     }
   },
-  "fisc_cashbook": {
+  "belief_paybook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
-      "acct_name": {},
+      "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {},
+      "belief_label": {},
+      "believer_name": {},
       "tran_time": {}
     },
     "jvalues": {
       "amount": {}
     }
   },
-  "fisc_dealunit": {
+  "belief_budunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
-      "deal_time": {},
+      "bud_time": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
-      "owner_name": {}
+      "belief_label": {},
+      "believer_name": {}
     },
     "jvalues": {
       "celldepth": {},
       "quota": {}
     }
   },
-  "fisc_timeline_hour": {
+  "belief_timeline_hour": {
     "allowed_crud": "insert_one_time",
     "build_order": 6,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
-      "cumlative_minute": {},
+      "cumulative_minute": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "belief_label": {}
     },
     "jvalues": {
       "hour_label": {}
     }
   },
-  "fisc_timeline_month": {
+  "belief_timeline_month": {
     "allowed_crud": "insert_one_time",
     "build_order": 7,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
-      "cumlative_day": {},
+      "cumulative_day": {},
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "belief_label": {}
     },
     "jvalues": {
       "month_label": {}
     }
   },
-  "fisc_timeline_weekday": {
+  "belief_timeline_weekday": {
     "allowed_crud": "insert_one_time",
     "build_order": 8,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "belief_label": {},
       "weekday_order": {}
     },
     "jvalues": {
       "weekday_label": {}
     }
   },
-  "fisc_timeoffi": {
+  "belief_timeoffi": {
     "allowed_crud": "insert_multiple",
     "build_order": 8,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {},
+      "belief_label": {},
       "offi_time": {}
     },
     "jvalues": {}
   },
-  "fiscunit": {
+  "beliefunit": {
     "allowed_crud": "insert_one_time",
     "build_order": 5,
-    "idea_category": "fisc",
+    "idea_category": "belief",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "fisc_label": {}
+      "belief_label": {}
     },
     "jvalues": {
-      "bridge": {},
+      "knot": {},
       "c400_number": {},
-      "fund_coin": {},
+      "fund_iota": {},
       "job_listen_rotations": {},
       "monthday_distortion": {},
       "penny": {},
@@ -293,9 +293,9 @@
       "otx_label": {}
     },
     "jvalues": {
-      "inx_bridge": {},
+      "inx_knot": {},
       "inx_label": {},
-      "otx_bridge": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   },
@@ -309,9 +309,9 @@
       "otx_name": {}
     },
     "jvalues": {
-      "inx_bridge": {},
+      "inx_knot": {},
       "inx_name": {},
-      "otx_bridge": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   },
@@ -325,25 +325,25 @@
       "otx_title": {}
     },
     "jvalues": {
-      "inx_bridge": {},
+      "inx_knot": {},
       "inx_title": {},
-      "otx_bridge": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   },
-  "pidgin_way": {
+  "pidgin_rope": {
     "allowed_crud": "insert_one_time",
     "build_order": 3,
     "idea_category": "pidgin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "otx_way": {}
+      "otx_rope": {}
     },
     "jvalues": {
-      "inx_bridge": {},
-      "inx_way": {},
-      "otx_bridge": {},
+      "inx_knot": {},
+      "inx_rope": {},
+      "otx_knot": {},
       "unknown_str": {}
     }
   }

@@ -1,23 +1,18 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.db_toolbox import get_sorted_intersection_list
-from src.a00_data_toolbox.file_toolbox import (
-    create_path,
-    get_json_filename,
-    open_json,
-)
+from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename, open_json
 
 
-def get_idea_config_filename() -> str:
-    return "idea_config.json"
-
-
-def config_file_dir() -> str:
+def idea_config_path() -> str:
+    "Returns path: a17_idea_logic/idea_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    return create_path(src_dir, "a17_idea_logic")
+    module_dir = create_path(src_dir, "a17_idea_logic")
+    return create_path(module_dir, "idea_config.json")
 
 
 def get_idea_config_dict() -> dict:
-    return open_json(config_file_dir(), get_idea_config_filename())
+    "Returns path: a17_idea_logic/idea_config.json"
+    return open_json(idea_config_path())
 
 
 def get_allowed_curds() -> set[str]:
@@ -41,9 +36,9 @@ def get_idea_formats_dir() -> str:
 
 
 def get_idea_elements_sort_order() -> list[str]:
-    """Contains the standard sort order for all idea and bud_calc columns"""
+    """Contains the standard sort order for all idea and believer_calc columns"""
     return [
-        "world_id",
+        "world_name",
         "idea_number",
         "source_dimen",
         "pidgin_event_int",
@@ -51,9 +46,9 @@ def get_idea_elements_sort_order() -> list[str]:
         "face_name",
         "face_name_otx",
         "face_name_inx",
-        "fisc_label",
-        "fisc_label_otx",
-        "fisc_label_inx",
+        "belief_label",
+        "belief_label_otx",
+        "belief_label_inx",
         "timeline_label",
         "timeline_label_otx",
         "timeline_label_inx",
@@ -61,11 +56,11 @@ def get_idea_elements_sort_order() -> list[str]:
         "c400_number",
         "yr1_jan1_offset",
         "monthday_distortion",
-        "cumlative_day",
+        "cumulative_day",
         "month_label",
         "month_label_otx",
         "month_label_inx",
-        "cumlative_minute",
+        "cumulative_minute",
         "hour_label",
         "hour_label_otx",
         "hour_label_inx",
@@ -73,51 +68,51 @@ def get_idea_elements_sort_order() -> list[str]:
         "weekday_label",
         "weekday_label_otx",
         "weekday_label_inx",
-        "owner_name",
-        "owner_name_otx",
-        "owner_name_inx",
-        "owner_name_ERASE",
-        "owner_name_ERASE_otx",
-        "owner_name_ERASE_inx",
-        "acct_name",
-        "acct_name_otx",
-        "acct_name_inx",
-        "acct_name_ERASE",
-        "acct_name_ERASE_otx",
-        "acct_name_ERASE_inx",
+        "believer_name",
+        "believer_name_otx",
+        "believer_name_inx",
+        "believer_name_ERASE",
+        "believer_name_ERASE_otx",
+        "believer_name_ERASE_inx",
+        "partner_name",
+        "partner_name_otx",
+        "partner_name_inx",
+        "partner_name_ERASE",
+        "partner_name_ERASE_otx",
+        "partner_name_ERASE_inx",
         "group_title",
         "group_title_otx",
         "group_title_inx",
         "group_title_ERASE",
         "group_title_ERASE_otx",
         "group_title_ERASE_inx",
-        "concept_way",
-        "concept_way_otx",
-        "concept_way_inx",
-        "concept_way_ERASE",
-        "concept_way_ERASE_otx",
-        "concept_way_ERASE_inx",
-        "rcontext",
-        "rcontext_otx",
-        "rcontext_inx",
-        "rcontext_ERASE",
-        "rcontext_ERASE_otx",
-        "rcontext_ERASE_inx",
-        "fcontext",
-        "fcontext_otx",
-        "fcontext_inx",
-        "fcontext_ERASE",
-        "fcontext_ERASE_otx",
-        "fcontext_ERASE_inx",
-        "pstate",
-        "pstate_otx",
-        "pstate_inx",
-        "pstate_ERASE",
-        "pstate_ERASE_otx",
-        "pstate_ERASE_inx",
-        "fstate",
-        "fstate_otx",
-        "fstate_inx",
+        "plan_rope",
+        "plan_rope_otx",
+        "plan_rope_inx",
+        "plan_rope_ERASE",
+        "plan_rope_ERASE_otx",
+        "plan_rope_ERASE_inx",
+        "r_context",
+        "r_context_otx",
+        "r_context_inx",
+        "r_context_ERASE",
+        "r_context_ERASE_otx",
+        "r_context_ERASE_inx",
+        "f_context",
+        "f_context_otx",
+        "f_context_inx",
+        "f_context_ERASE",
+        "f_context_ERASE_otx",
+        "f_context_ERASE_inx",
+        "r_state",
+        "r_state_otx",
+        "r_state_inx",
+        "r_state_ERASE",
+        "r_state_ERASE_otx",
+        "r_state_ERASE_inx",
+        "f_state",
+        "f_state_otx",
+        "f_state_inx",
         "labor_title",
         "labor_title_otx",
         "labor_title_inx",
@@ -136,7 +131,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "healer_name_ERASE",
         "healer_name_ERASE_otx",
         "healer_name_ERASE_inx",
-        "deal_time",
+        "bud_time",
         "tran_time",
         "begin",
         "close",
@@ -146,49 +141,49 @@ def get_idea_elements_sort_order() -> list[str]:
         "morph",
         "gogo_want",
         "stop_want",
-        "rconcept_active_requisite",
-        "credit_belief",
-        "debtit_belief",
-        "credit_vote",
-        "debtit_vote",
+        "r_plan_active_requisite",
+        "partner_cred_points",
+        "partner_debt_points",
+        "group_cred_points",
+        "group_debt_points",
         "credor_respect",
         "debtor_respect",
-        "fopen",
-        "fnigh",
+        "f_lower",
+        "f_upper",
         "fund_pool",
         "give_force",
         "mass",
         "max_tree_traverse",
-        "pnigh",
-        "popen",
-        "pdivisor",
-        "pledge",
+        "r_upper",
+        "r_lower",
+        "r_divisor",
+        "task",
         "problem_bool",
         "take_force",
         "tally",
-        "fund_coin",
+        "fund_iota",
         "penny",
         "respect_bit",
         "amount",
         "otx_label",
         "inx_label",
-        "otx_way",
-        "inx_way",
+        "otx_rope",
+        "inx_rope",
         "otx_name",
         "inx_name",
         "otx_title",
         "inx_title",
-        "otx_bridge",
-        "inx_bridge",
-        "bridge",
+        "otx_knot",
+        "inx_knot",
+        "knot",
         "unknown_str",
         "quota",
         "celldepth",
         "job_listen_rotations",
         "error_message",
-        "_owner_name_labor",
+        "_believer_name_labor",
         "_active",
-        "_task",
+        "_chore",
         "_status",
         "_credor_pool",
         "_debtor_pool",
@@ -202,22 +197,25 @@ def get_idea_elements_sort_order() -> list[str]:
         "_fund_agenda_take",
         "_fund_agenda_ratio_give",
         "_fund_agenda_ratio_take",
-        "_inallocable_debtit_belief",
+        "_inallocable_partner_debt_points",
         "_gogo_calc",
         "_stop_calc",
         "_level",
         "_range_evaluated",
-        "_descendant_pledge_count",
+        "_descendant_task_count",
         "_healerlink_ratio",
-        "_all_acct_cred",
+        "_all_partner_cred",
         "_keeps_justified",
         "_offtrack_fund",
-        "_rconcept_active_value",
-        "_irrational_debtit_belief",
+        "_rplan_active_value",
+        "_irrational_partner_debt_points",
         "_sum_healerlink_share",
         "_keeps_buildable",
-        "_all_acct_debt",
+        "_all_partner_debt",
         "_tree_traverse_count",
+        "funds",
+        "fund_rank",
+        "tasks_count",
     ]
 
 
@@ -230,10 +228,10 @@ def get_default_sorted_list(
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
-    """Contains the sqlite_type for all idea and bud_calc columns"""
+    """Returns dictionary of sqlite_type for all idea elements (reference source: get_idea_elements_sort_order)"""
 
     return {
-        "world_id": "TEXT",
+        "world_name": "TEXT",
         "idea_number": "TEXT",
         "face_name": "TEXT",
         "face_name_otx": "TEXT",
@@ -241,54 +239,54 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "source_dimen": "TEXT",
         "pidgin_event_int": "INTEGER",
         "event_int": "INTEGER",
-        "fisc_label": "TEXT",
-        "fisc_label_otx": "TEXT",
-        "fisc_label_inx": "TEXT",
-        "owner_name": "TEXT",
-        "owner_name_otx": "TEXT",
-        "owner_name_inx": "TEXT",
-        "owner_name_ERASE": "TEXT",
-        "owner_name_ERASE_otx": "TEXT",
-        "owner_name_ERASE_inx": "TEXT",
-        "acct_name": "TEXT",
-        "acct_name_otx": "TEXT",
-        "acct_name_inx": "TEXT",
-        "acct_name_ERASE": "TEXT",
-        "acct_name_ERASE_otx": "TEXT",
-        "acct_name_ERASE_inx": "TEXT",
+        "belief_label": "TEXT",
+        "belief_label_otx": "TEXT",
+        "belief_label_inx": "TEXT",
+        "believer_name": "TEXT",
+        "believer_name_otx": "TEXT",
+        "believer_name_inx": "TEXT",
+        "believer_name_ERASE": "TEXT",
+        "believer_name_ERASE_otx": "TEXT",
+        "believer_name_ERASE_inx": "TEXT",
+        "partner_name": "TEXT",
+        "partner_name_otx": "TEXT",
+        "partner_name_inx": "TEXT",
+        "partner_name_ERASE": "TEXT",
+        "partner_name_ERASE_otx": "TEXT",
+        "partner_name_ERASE_inx": "TEXT",
         "group_title": "TEXT",
         "group_title_otx": "TEXT",
         "group_title_inx": "TEXT",
         "group_title_ERASE": "TEXT",
         "group_title_ERASE_otx": "TEXT",
         "group_title_ERASE_inx": "TEXT",
-        "concept_way": "TEXT",
-        "concept_way_otx": "TEXT",
-        "concept_way_inx": "TEXT",
-        "concept_way_ERASE": "TEXT",
-        "concept_way_ERASE_otx": "TEXT",
-        "concept_way_ERASE_inx": "TEXT",
-        "rcontext": "TEXT",
-        "rcontext_otx": "TEXT",
-        "rcontext_inx": "TEXT",
-        "rcontext_ERASE": "TEXT",
-        "rcontext_ERASE_otx": "TEXT",
-        "rcontext_ERASE_inx": "TEXT",
-        "fcontext": "TEXT",
-        "fcontext_otx": "TEXT",
-        "fcontext_inx": "TEXT",
-        "fcontext_ERASE": "TEXT",
-        "fcontext_ERASE_otx": "TEXT",
-        "fcontext_ERASE_inx": "TEXT",
-        "pstate": "TEXT",
-        "pstate_otx": "TEXT",
-        "pstate_inx": "TEXT",
-        "pstate_ERASE": "TEXT",
-        "pstate_ERASE_otx": "TEXT",
-        "pstate_ERASE_inx": "TEXT",
-        "fstate": "TEXT",
-        "fstate_otx": "TEXT",
-        "fstate_inx": "TEXT",
+        "plan_rope": "TEXT",
+        "plan_rope_otx": "TEXT",
+        "plan_rope_inx": "TEXT",
+        "plan_rope_ERASE": "TEXT",
+        "plan_rope_ERASE_otx": "TEXT",
+        "plan_rope_ERASE_inx": "TEXT",
+        "r_context": "TEXT",
+        "r_context_otx": "TEXT",
+        "r_context_inx": "TEXT",
+        "r_context_ERASE": "TEXT",
+        "r_context_ERASE_otx": "TEXT",
+        "r_context_ERASE_inx": "TEXT",
+        "f_context": "TEXT",
+        "f_context_otx": "TEXT",
+        "f_context_inx": "TEXT",
+        "f_context_ERASE": "TEXT",
+        "f_context_ERASE_otx": "TEXT",
+        "f_context_ERASE_inx": "TEXT",
+        "r_state": "TEXT",
+        "r_state_otx": "TEXT",
+        "r_state_inx": "TEXT",
+        "r_state_ERASE": "TEXT",
+        "r_state_ERASE_otx": "TEXT",
+        "r_state_ERASE_inx": "TEXT",
+        "f_state": "TEXT",
+        "f_state_otx": "TEXT",
+        "f_state_inx": "TEXT",
         "labor_title": "TEXT",
         "labor_title_otx": "TEXT",
         "labor_title_inx": "TEXT",
@@ -307,7 +305,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "healer_name_ERASE": "TEXT",
         "healer_name_ERASE_otx": "TEXT",
         "healer_name_ERASE_inx": "TEXT",
-        "deal_time": "INTEGER",
+        "bud_time": "INTEGER",
         "tran_time": "INTEGER",
         "offi_time": "INTEGER",
         "begin": "REAL",
@@ -318,23 +316,23 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "morph": "INTEGER",
         "gogo_want": "REAL",
         "stop_want": "REAL",
-        "rconcept_active_requisite": "INTEGER",
-        "credit_belief": "REAL",
-        "debtit_belief": "REAL",
-        "credit_vote": "REAL",
-        "debtit_vote": "REAL",
+        "r_plan_active_requisite": "INTEGER",
+        "partner_cred_points": "REAL",
+        "partner_debt_points": "REAL",
+        "group_cred_points": "REAL",
+        "group_debt_points": "REAL",
         "credor_respect": "REAL",
         "debtor_respect": "REAL",
-        "fopen": "REAL",
-        "fnigh": "REAL",
+        "f_lower": "REAL",
+        "f_upper": "REAL",
         "fund_pool": "REAL",
         "give_force": "REAL",
         "mass": "INTEGER",
         "max_tree_traverse": "INTEGER",
-        "pnigh": "REAL",
-        "popen": "REAL",
-        "pdivisor": "INTEGER",
-        "pledge": "INTEGER",
+        "r_upper": "REAL",
+        "r_lower": "REAL",
+        "r_divisor": "INTEGER",
+        "task": "INTEGER",
         "problem_bool": "INTEGER",
         "take_force": "REAL",
         "tally": "INTEGER",
@@ -347,28 +345,28 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "hour_label": "TEXT",
         "hour_label_otx": "TEXT",
         "hour_label_inx": "TEXT",
-        "cumlative_minute": "INTEGER",
-        "cumlative_day": "INTEGER",
+        "cumulative_minute": "INTEGER",
+        "cumulative_day": "INTEGER",
         "weekday_label": "TEXT",
         "weekday_label_otx": "TEXT",
         "weekday_label_inx": "TEXT",
         "weekday_order": "INTEGER",
-        "otx_bridge": "TEXT",
-        "inx_bridge": "TEXT",
+        "otx_knot": "TEXT",
+        "inx_knot": "TEXT",
         "unknown_str": "TEXT",
         "otx_label": "TEXT",
         "inx_label": "TEXT",
-        "otx_way": "TEXT",
-        "inx_way": "TEXT",
+        "otx_rope": "TEXT",
+        "inx_rope": "TEXT",
         "otx_name": "TEXT",
         "inx_name": "TEXT",
         "otx_title": "TEXT",
         "inx_title": "TEXT",
-        "bridge": "TEXT",
+        "knot": "TEXT",
         "c400_number": "INTEGER",
         "yr1_jan1_offset": "INTEGER",
         "quota": "REAL",
-        "celldepth": "INT",
+        "celldepth": "INTEGER",
         "monthday_distortion": "INTEGER",
         "job_listen_rotations": "INTEGER",
         "timeline_label": "TEXT",
@@ -380,7 +378,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_fund_cease": "REAL",
         "_fund_onset": "REAL",
         "_fund_ratio": "REAL",
-        "fund_coin": "REAL",
+        "fund_iota": "REAL",
         "_fund_agenda_give": "REAL",
         "_fund_agenda_ratio_give": "REAL",
         "_fund_agenda_ratio_take": "REAL",
@@ -389,16 +387,16 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_fund_take": "REAL",
         "_gogo_calc": "REAL",
         "_stop_calc": "REAL",
-        "_all_acct_cred": "INTEGER",
-        "_all_acct_debt": "INTEGER",
-        "_rconcept_active_value": "INTEGER",
-        "_inallocable_debtit_belief": "REAL",
-        "_irrational_debtit_belief": "REAL",
+        "_all_partner_cred": "INTEGER",
+        "_all_partner_debt": "INTEGER",
+        "_rplan_active_value": "INTEGER",
+        "_inallocable_partner_debt_points": "REAL",
+        "_irrational_partner_debt_points": "REAL",
         "_status": "INTEGER",
-        "_task": "INTEGER",
-        "_owner_name_labor": "INTEGER",
+        "_chore": "INTEGER",
+        "_believer_name_labor": "INTEGER",
         "_active": "INTEGER",
-        "_descendant_pledge_count": "INTEGER",
+        "_descendant_task_count": "INTEGER",
         "_healerlink_ratio": "REAL",
         "_level": "INTEGER",
         "_range_evaluated": "INTEGER",
@@ -408,111 +406,114 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "_rational": "INTEGER",
         "_sum_healerlink_share": "REAL",
         "_tree_traverse_count": "INTEGER",
+        "funds": "REAL",
+        "fund_rank": "INTEGER",
+        "tasks_count": "INTEGER",
     }
 
 
-# def idea_format_00000_fiscunit_v0_0_0()->str: return "idea_format_00000_fiscunit_v0_0_0"
-# def idea_format_00001_fisc_dealunit_v0_0_0()->str: return "idea_format_00001_fisc_dealunit_v0_0_0"
-# def idea_format_00002_fisc_cashbook_v0_0_0()->str: return "idea_format_00002_fisc_cashbook_v0_0_0"
-# def idea_format_00003_fisc_timeline_hour_v0_0_0()->str: return "idea_format_00003_fisc_timeline_hour_v0_0_0"
-# def idea_format_00004_fisc_timeline_month_v0_0_0()->str: return "idea_format_00004_fisc_timeline_month_v0_0_0"
-# def idea_format_00005_fisc_timeline_weekday_v0_0_0()->str: return "idea_format_00005_fisc_timeline_weekday_v0_0_0"
+# def idea_format_00000_beliefunit_v0_0_0()->str: return "idea_format_00000_beliefunit_v0_0_0"
+# def idea_format_00001_belief_budunit_v0_0_0()->str: return "idea_format_00001_belief_budunit_v0_0_0"
+# def idea_format_00002_belief_paybook_v0_0_0()->str: return "idea_format_00002_belief_paybook_v0_0_0"
+# def idea_format_00003_belief_timeline_hour_v0_0_0()->str: return "idea_format_00003_belief_timeline_hour_v0_0_0"
+# def idea_format_00004_belief_timeline_month_v0_0_0()->str: return "idea_format_00004_belief_timeline_month_v0_0_0"
+# def idea_format_00005_belief_timeline_weekday_v0_0_0()->str: return "idea_format_00005_belief_timeline_weekday_v0_0_0"
 
 
-def idea_format_00000_fiscunit_v0_0_0() -> str:
-    return "idea_format_00000_fiscunit_v0_0_0"
+def idea_format_00000_beliefunit_v0_0_0() -> str:
+    return "idea_format_00000_beliefunit_v0_0_0"
 
 
-def idea_format_00001_fisc_dealunit_v0_0_0() -> str:
-    return "idea_format_00001_fisc_dealunit_v0_0_0"
+def idea_format_00001_belief_budunit_v0_0_0() -> str:
+    return "idea_format_00001_belief_budunit_v0_0_0"
 
 
-def idea_format_00002_fisc_cashbook_v0_0_0() -> str:
-    return "idea_format_00002_fisc_cashbook_v0_0_0"
+def idea_format_00002_belief_paybook_v0_0_0() -> str:
+    return "idea_format_00002_belief_paybook_v0_0_0"
 
 
-def idea_format_00003_fisc_timeline_hour_v0_0_0() -> str:
-    return "idea_format_00003_fisc_timeline_hour_v0_0_0"
+def idea_format_00003_belief_timeline_hour_v0_0_0() -> str:
+    return "idea_format_00003_belief_timeline_hour_v0_0_0"
 
 
-def idea_format_00004_fisc_timeline_month_v0_0_0() -> str:
-    return "idea_format_00004_fisc_timeline_month_v0_0_0"
+def idea_format_00004_belief_timeline_month_v0_0_0() -> str:
+    return "idea_format_00004_belief_timeline_month_v0_0_0"
 
 
-def idea_format_00005_fisc_timeline_weekday_v0_0_0() -> str:
-    return "idea_format_00005_fisc_timeline_weekday_v0_0_0"
+def idea_format_00005_belief_timeline_weekday_v0_0_0() -> str:
+    return "idea_format_00005_belief_timeline_weekday_v0_0_0"
 
 
-def idea_format_00006_fisc_timeoffi_v0_0_0() -> str:
-    return "idea_format_00006_fisc_timeoffi_v0_0_0"
+def idea_format_00006_belief_timeoffi_v0_0_0() -> str:
+    return "idea_format_00006_belief_timeoffi_v0_0_0"
 
 
-def idea_format_00011_acct_v0_0_0() -> str:
-    return "idea_format_00011_acct_v0_0_0"
+def idea_format_00011_partner_v0_0_0() -> str:
+    return "idea_format_00011_partner_v0_0_0"
 
 
 def idea_format_00012_membership_v0_0_0() -> str:
     return "idea_format_00012_membership_v0_0_0"
 
 
-def idea_format_00013_conceptunit_v0_0_0() -> str:
-    return "idea_format_00013_conceptunit_v0_0_0"
+def idea_format_00013_planunit_v0_0_0() -> str:
+    return "idea_format_00013_planunit_v0_0_0"
 
 
-def idea_format_00019_conceptunit_v0_0_0() -> str:
-    return "idea_format_00019_conceptunit_v0_0_0"
+def idea_format_00019_planunit_v0_0_0() -> str:
+    return "idea_format_00019_planunit_v0_0_0"
 
 
-# def idea_format_00020_bud_acct_membership_v0_0_0()-> str: return "idea_format_00020_bud_acct_membership_v0_0_0"
-# def idea_format_00021_bud_acctunit_v0_0_0()-> str: return "idea_format_00021_bud_acctunit_v0_0_0"
-# def idea_format_00022_bud_concept_awardlink_v0_0_0()-> str: return "idea_format_00022_bud_concept_awardlink_v0_0_0"
-# def idea_format_00023_bud_concept_factunit_v0_0_0()-> str: return "idea_format_00023_bud_concept_factunit_v0_0_0"
-# def idea_format_00024_bud_concept_laborlink_v0_0_0()-> str: return "idea_format_00024_bud_concept_laborlink_v0_0_0"
-# def idea_format_00025_bud_concept_healerlink_v0_0_0()-> str: return "idea_format_00025_bud_concept_healerlink_v0_0_0"
-# def idea_format_00026_bud_concept_reason_premiseunit_v0_0_0()-> str: return "idea_format_00026_bud_concept_reason_premiseunit_v0_0_0"
-# def idea_format_00027_bud_concept_reasonunit_v0_0_0()-> str: return "idea_format_00027_bud_concept_reasonunit_v0_0_0"
-# def idea_format_00028_bud_conceptunit_v0_0_0()-> str: return "idea_format_00028_bud_conceptunit_v0_0_0"
-# def idea_format_00029_budunit_v0_0_0()-> str: return "idea_format_00029_budunit_v0_0_0"
+# def idea_format_00020_believer_partner_membership_v0_0_0()-> str: return "idea_format_00020_believer_partner_membership_v0_0_0"
+# def idea_format_00021_believer_partnerunit_v0_0_0()-> str: return "idea_format_00021_believer_partnerunit_v0_0_0"
+# def idea_format_00022_believer_plan_awardlink_v0_0_0()-> str: return "idea_format_00022_believer_plan_awardlink_v0_0_0"
+# def idea_format_00023_believer_plan_factunit_v0_0_0()-> str: return "idea_format_00023_believer_plan_factunit_v0_0_0"
+# def idea_format_00024_believer_plan_laborlink_v0_0_0()-> str: return "idea_format_00024_believer_plan_laborlink_v0_0_0"
+# def idea_format_00025_believer_plan_healerlink_v0_0_0()-> str: return "idea_format_00025_believer_plan_healerlink_v0_0_0"
+# def idea_format_00026_believer_plan_reason_caseunit_v0_0_0()-> str: return "idea_format_00026_believer_plan_reason_caseunit_v0_0_0"
+# def idea_format_00027_believer_plan_reasonunit_v0_0_0()-> str: return "idea_format_00027_believer_plan_reasonunit_v0_0_0"
+# def idea_format_00028_believer_planunit_v0_0_0()-> str: return "idea_format_00028_believer_planunit_v0_0_0"
+# def idea_format_00029_believerunit_v0_0_0()-> str: return "idea_format_00029_believerunit_v0_0_0"
 
 
-def idea_format_00020_bud_acct_membership_v0_0_0() -> str:
-    return "idea_format_00020_bud_acct_membership_v0_0_0"
+def idea_format_00020_believer_partner_membership_v0_0_0() -> str:
+    return "idea_format_00020_believer_partner_membership_v0_0_0"
 
 
-def idea_format_00021_bud_acctunit_v0_0_0() -> str:
-    return "idea_format_00021_bud_acctunit_v0_0_0"
+def idea_format_00021_believer_partnerunit_v0_0_0() -> str:
+    return "idea_format_00021_believer_partnerunit_v0_0_0"
 
 
-def idea_format_00022_bud_concept_awardlink_v0_0_0() -> str:
-    return "idea_format_00022_bud_concept_awardlink_v0_0_0"
+def idea_format_00022_believer_plan_awardlink_v0_0_0() -> str:
+    return "idea_format_00022_believer_plan_awardlink_v0_0_0"
 
 
-def idea_format_00023_bud_concept_factunit_v0_0_0() -> str:
-    return "idea_format_00023_bud_concept_factunit_v0_0_0"
+def idea_format_00023_believer_plan_factunit_v0_0_0() -> str:
+    return "idea_format_00023_believer_plan_factunit_v0_0_0"
 
 
-def idea_format_00024_bud_concept_laborlink_v0_0_0() -> str:
-    return "idea_format_00024_bud_concept_laborlink_v0_0_0"
+def idea_format_00024_believer_plan_laborlink_v0_0_0() -> str:
+    return "idea_format_00024_believer_plan_laborlink_v0_0_0"
 
 
-def idea_format_00025_bud_concept_healerlink_v0_0_0() -> str:
-    return "idea_format_00025_bud_concept_healerlink_v0_0_0"
+def idea_format_00025_believer_plan_healerlink_v0_0_0() -> str:
+    return "idea_format_00025_believer_plan_healerlink_v0_0_0"
 
 
-def idea_format_00026_bud_concept_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00026_bud_concept_reason_premiseunit_v0_0_0"
+def idea_format_00026_believer_plan_reason_caseunit_v0_0_0() -> str:
+    return "idea_format_00026_believer_plan_reason_caseunit_v0_0_0"
 
 
-def idea_format_00027_bud_concept_reasonunit_v0_0_0() -> str:
-    return "idea_format_00027_bud_concept_reasonunit_v0_0_0"
+def idea_format_00027_believer_plan_reasonunit_v0_0_0() -> str:
+    return "idea_format_00027_believer_plan_reasonunit_v0_0_0"
 
 
-def idea_format_00028_bud_conceptunit_v0_0_0() -> str:
-    return "idea_format_00028_bud_conceptunit_v0_0_0"
+def idea_format_00028_believer_planunit_v0_0_0() -> str:
+    return "idea_format_00028_believer_planunit_v0_0_0"
 
 
-def idea_format_00029_budunit_v0_0_0() -> str:
-    return "idea_format_00029_budunit_v0_0_0"
+def idea_format_00029_believerunit_v0_0_0() -> str:
+    return "idea_format_00029_believerunit_v0_0_0"
 
 
 def idea_format_00036_problem_healer_v0_0_0() -> str:
@@ -535,56 +536,52 @@ def idea_format_00044_pidgin_label_v0_0_0() -> str:
     return "idea_format_00044_pidgin_label_v0_0_0"
 
 
-def idea_format_00045_pidgin_way_v0_0_0() -> str:
-    return "idea_format_00045_pidgin_way_v0_0_0"
+def idea_format_00045_pidgin_rope_v0_0_0() -> str:
+    return "idea_format_00045_pidgin_rope_v0_0_0"
 
 
-def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_bud_acct_membership_v0_0_0"
+def idea_format_00050_delete_believer_partner_membership_v0_0_0() -> str:
+    return "idea_format_00050_delete_believer_partner_membership_v0_0_0"
 
 
-def idea_format_00051_delete_bud_acctunit_v0_0_0() -> str:
-    return "idea_format_00051_delete_bud_acctunit_v0_0_0"
+def idea_format_00051_delete_believer_partnerunit_v0_0_0() -> str:
+    return "idea_format_00051_delete_believer_partnerunit_v0_0_0"
 
 
-def idea_format_00052_delete_bud_concept_awardlink_v0_0_0() -> str:
-    return "idea_format_00052_delete_bud_concept_awardlink_v0_0_0"
+def idea_format_00052_delete_believer_plan_awardlink_v0_0_0() -> str:
+    return "idea_format_00052_delete_believer_plan_awardlink_v0_0_0"
 
 
-def idea_format_00053_delete_bud_concept_factunit_v0_0_0() -> str:
-    return "idea_format_00053_delete_bud_concept_factunit_v0_0_0"
+def idea_format_00053_delete_believer_plan_factunit_v0_0_0() -> str:
+    return "idea_format_00053_delete_believer_plan_factunit_v0_0_0"
 
 
-def idea_format_00054_delete_bud_concept_laborlink_v0_0_0() -> str:
-    return "idea_format_00054_delete_bud_concept_laborlink_v0_0_0"
+def idea_format_00054_delete_believer_plan_laborlink_v0_0_0() -> str:
+    return "idea_format_00054_delete_believer_plan_laborlink_v0_0_0"
 
 
-def idea_format_00055_delete_bud_concept_healerlink_v0_0_0() -> str:
-    return "idea_format_00055_delete_bud_concept_healerlink_v0_0_0"
+def idea_format_00055_delete_believer_plan_healerlink_v0_0_0() -> str:
+    return "idea_format_00055_delete_believer_plan_healerlink_v0_0_0"
 
 
-def idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0() -> str:
-    return "idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0"
+def idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0() -> str:
+    return "idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0"
 
 
-def idea_format_00057_delete_bud_concept_reasonunit_v0_0_0() -> str:
-    return "idea_format_00057_delete_bud_concept_reasonunit_v0_0_0"
+def idea_format_00057_delete_believer_plan_reasonunit_v0_0_0() -> str:
+    return "idea_format_00057_delete_believer_plan_reasonunit_v0_0_0"
 
 
-def idea_format_00058_delete_bud_conceptunit_v0_0_0() -> str:
-    return "idea_format_00058_delete_bud_conceptunit_v0_0_0"
+def idea_format_00058_delete_believer_planunit_v0_0_0() -> str:
+    return "idea_format_00058_delete_believer_planunit_v0_0_0"
 
 
-def idea_format_00059_delete_budunit_v0_0_0() -> str:
-    return "idea_format_00059_delete_budunit_v0_0_0"
+def idea_format_00059_delete_believerunit_v0_0_0() -> str:
+    return "idea_format_00059_delete_believerunit_v0_0_0"
 
 
-def idea_format_00050_delete_bud_acct_membership_v0_0_0() -> str:
-    return "idea_format_00050_delete_bud_acct_membership_v0_0_0"
-
-
-def idea_format_00113_acct_map1_v0_0_0() -> str:
-    return "idea_format_00113_acct_map1_v0_0_0"
+def idea_format_00113_partner_map1_v0_0_0() -> str:
+    return "idea_format_00113_partner_map1_v0_0_0"
 
 
 def idea_format_00115_group_map1_v0_0_0() -> str:
@@ -595,52 +592,52 @@ def idea_format_00116_label_map1_v0_0_0() -> str:
     return "idea_format_00116_label_map1_v0_0_0"
 
 
-def idea_format_00117_way_map1_v0_0_0() -> str:
-    return "idea_format_00117_way_map1_v0_0_0"
+def idea_format_00117_rope_map1_v0_0_0() -> str:
+    return "idea_format_00117_rope_map1_v0_0_0"
 
 
 def get_idea_format_filenames() -> set[str]:
     return {
-        idea_format_00000_fiscunit_v0_0_0(),
-        idea_format_00001_fisc_dealunit_v0_0_0(),
-        idea_format_00002_fisc_cashbook_v0_0_0(),
-        idea_format_00003_fisc_timeline_hour_v0_0_0(),
-        idea_format_00004_fisc_timeline_month_v0_0_0(),
-        idea_format_00005_fisc_timeline_weekday_v0_0_0(),
-        idea_format_00006_fisc_timeoffi_v0_0_0(),
-        idea_format_00011_acct_v0_0_0(),
+        idea_format_00000_beliefunit_v0_0_0(),
+        idea_format_00001_belief_budunit_v0_0_0(),
+        idea_format_00002_belief_paybook_v0_0_0(),
+        idea_format_00003_belief_timeline_hour_v0_0_0(),
+        idea_format_00004_belief_timeline_month_v0_0_0(),
+        idea_format_00005_belief_timeline_weekday_v0_0_0(),
+        idea_format_00006_belief_timeoffi_v0_0_0(),
+        idea_format_00011_partner_v0_0_0(),
         idea_format_00012_membership_v0_0_0(),
-        idea_format_00013_conceptunit_v0_0_0(),
-        idea_format_00019_conceptunit_v0_0_0(),
-        idea_format_00020_bud_acct_membership_v0_0_0(),
-        idea_format_00021_bud_acctunit_v0_0_0(),
-        idea_format_00022_bud_concept_awardlink_v0_0_0(),
-        idea_format_00023_bud_concept_factunit_v0_0_0(),
-        idea_format_00024_bud_concept_laborlink_v0_0_0(),
-        idea_format_00025_bud_concept_healerlink_v0_0_0(),
-        idea_format_00026_bud_concept_reason_premiseunit_v0_0_0(),
-        idea_format_00027_bud_concept_reasonunit_v0_0_0(),
-        idea_format_00028_bud_conceptunit_v0_0_0(),
-        idea_format_00029_budunit_v0_0_0(),
+        idea_format_00013_planunit_v0_0_0(),
+        idea_format_00019_planunit_v0_0_0(),
+        idea_format_00020_believer_partner_membership_v0_0_0(),
+        idea_format_00021_believer_partnerunit_v0_0_0(),
+        idea_format_00022_believer_plan_awardlink_v0_0_0(),
+        idea_format_00023_believer_plan_factunit_v0_0_0(),
+        idea_format_00024_believer_plan_laborlink_v0_0_0(),
+        idea_format_00025_believer_plan_healerlink_v0_0_0(),
+        idea_format_00026_believer_plan_reason_caseunit_v0_0_0(),
+        idea_format_00027_believer_plan_reasonunit_v0_0_0(),
+        idea_format_00028_believer_planunit_v0_0_0(),
+        idea_format_00029_believerunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
         idea_format_00042_pidgin_title_v0_0_0(),
         idea_format_00043_pidgin_name_v0_0_0(),
         idea_format_00044_pidgin_label_v0_0_0(),
-        idea_format_00045_pidgin_way_v0_0_0(),
-        idea_format_00050_delete_bud_acct_membership_v0_0_0(),
-        idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        idea_format_00052_delete_bud_concept_awardlink_v0_0_0(),
-        idea_format_00053_delete_bud_concept_factunit_v0_0_0(),
-        idea_format_00054_delete_bud_concept_laborlink_v0_0_0(),
-        idea_format_00055_delete_bud_concept_healerlink_v0_0_0(),
-        idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0(),
-        idea_format_00057_delete_bud_concept_reasonunit_v0_0_0(),
-        idea_format_00058_delete_bud_conceptunit_v0_0_0(),
-        idea_format_00059_delete_budunit_v0_0_0(),
-        idea_format_00113_acct_map1_v0_0_0(),
+        idea_format_00045_pidgin_rope_v0_0_0(),
+        idea_format_00050_delete_believer_partner_membership_v0_0_0(),
+        idea_format_00051_delete_believer_partnerunit_v0_0_0(),
+        idea_format_00052_delete_believer_plan_awardlink_v0_0_0(),
+        idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
+        idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
+        idea_format_00055_delete_believer_plan_healerlink_v0_0_0(),
+        idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0(),
+        idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
+        idea_format_00058_delete_believer_planunit_v0_0_0(),
+        idea_format_00059_delete_believerunit_v0_0_0(),
+        idea_format_00113_partner_map1_v0_0_0(),
         idea_format_00115_group_map1_v0_0_0(),
         idea_format_00116_label_map1_v0_0_0(),
-        idea_format_00117_way_map1_v0_0_0(),
+        idea_format_00117_rope_map1_v0_0_0(),
     }
 
 
@@ -698,46 +695,46 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "fisc_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_coin,penny,respect_bit,bridge,job_listen_rotations": idea_format_00000_fiscunit_v0_0_0(),
-        "fisc_label,owner_name,deal_time,quota,celldepth": idea_format_00001_fisc_dealunit_v0_0_0(),
-        "fisc_label,owner_name,acct_name,tran_time,amount": idea_format_00002_fisc_cashbook_v0_0_0(),
-        "fisc_label,cumlative_minute,hour_label": idea_format_00003_fisc_timeline_hour_v0_0_0(),
-        "fisc_label,cumlative_day,month_label": idea_format_00004_fisc_timeline_month_v0_0_0(),
-        "fisc_label,weekday_order,weekday_label": idea_format_00005_fisc_timeline_weekday_v0_0_0(),
-        "fisc_label,offi_time": idea_format_00006_fisc_timeoffi_v0_0_0(),
-        "fisc_label,owner_name,acct_name": idea_format_00011_acct_v0_0_0(),
-        "fisc_label,owner_name,acct_name,group_title": idea_format_00012_membership_v0_0_0(),
-        "fisc_label,owner_name,concept_way,mass,pledge": idea_format_00013_conceptunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_conceptunit_v0_0_0(),
-        "fisc_label,owner_name,acct_name,group_title,credit_vote,debtit_vote": idea_format_00020_bud_acct_membership_v0_0_0(),
-        "fisc_label,owner_name,acct_name,credit_belief,debtit_belief": idea_format_00021_bud_acctunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,awardee_title,give_force,take_force": idea_format_00022_bud_concept_awardlink_v0_0_0(),
-        "fisc_label,owner_name,concept_way,fcontext,fstate,fopen,fnigh": idea_format_00023_bud_concept_factunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,labor_title": idea_format_00024_bud_concept_laborlink_v0_0_0(),
-        "fisc_label,owner_name,concept_way,healer_name": idea_format_00025_bud_concept_healerlink_v0_0_0(),
-        "fisc_label,owner_name,concept_way,rcontext,pstate,pnigh,popen,pdivisor": idea_format_00026_bud_concept_reason_premiseunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,rcontext,rconcept_active_requisite": idea_format_00027_bud_concept_reasonunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,pledge,problem_bool": idea_format_00028_bud_conceptunit_v0_0_0(),
-        "fisc_label,owner_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_coin,penny,respect_bit": idea_format_00029_budunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
-        "otx_title,inx_title,otx_bridge,inx_bridge,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
-        "otx_name,inx_name,otx_bridge,inx_bridge,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
-        "otx_label,inx_label,otx_bridge,inx_bridge,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
-        "otx_way,inx_way,otx_bridge,inx_bridge,unknown_str": idea_format_00045_pidgin_way_v0_0_0(),
-        "fisc_label,owner_name,acct_name,group_title_ERASE": idea_format_00050_delete_bud_acct_membership_v0_0_0(),
-        "fisc_label,owner_name,acct_name_ERASE": idea_format_00051_delete_bud_acctunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,awardee_title_ERASE": idea_format_00052_delete_bud_concept_awardlink_v0_0_0(),
-        "fisc_label,owner_name,concept_way,fcontext_ERASE": idea_format_00053_delete_bud_concept_factunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,labor_title_ERASE": idea_format_00054_delete_bud_concept_laborlink_v0_0_0(),
-        "fisc_label,owner_name,concept_way,healer_name_ERASE": idea_format_00055_delete_bud_concept_healerlink_v0_0_0(),
-        "fisc_label,owner_name,concept_way,rcontext,pstate_ERASE": idea_format_00056_delete_bud_concept_reason_premiseunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way,rcontext_ERASE": idea_format_00057_delete_bud_concept_reasonunit_v0_0_0(),
-        "fisc_label,owner_name,concept_way_ERASE": idea_format_00058_delete_bud_conceptunit_v0_0_0(),
-        "fisc_label,owner_name_ERASE": idea_format_00059_delete_budunit_v0_0_0(),
-        "fisc_label,owner_name,acct_name,otx_name,inx_name": idea_format_00113_acct_map1_v0_0_0(),
-        "fisc_label,owner_name,acct_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
-        "fisc_label,owner_name,acct_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
-        "fisc_label,owner_name,acct_name,otx_way,inx_way": idea_format_00117_way_map1_v0_0_0(),
+        "belief_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_beliefunit_v0_0_0(),
+        "belief_label,believer_name,bud_time,quota,celldepth": idea_format_00001_belief_budunit_v0_0_0(),
+        "belief_label,believer_name,partner_name,tran_time,amount": idea_format_00002_belief_paybook_v0_0_0(),
+        "belief_label,cumulative_minute,hour_label": idea_format_00003_belief_timeline_hour_v0_0_0(),
+        "belief_label,cumulative_day,month_label": idea_format_00004_belief_timeline_month_v0_0_0(),
+        "belief_label,weekday_order,weekday_label": idea_format_00005_belief_timeline_weekday_v0_0_0(),
+        "belief_label,offi_time": idea_format_00006_belief_timeoffi_v0_0_0(),
+        "belief_label,believer_name,partner_name": idea_format_00011_partner_v0_0_0(),
+        "belief_label,believer_name,partner_name,group_title": idea_format_00012_membership_v0_0_0(),
+        "belief_label,believer_name,plan_rope,mass,task": idea_format_00013_planunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_planunit_v0_0_0(),
+        "belief_label,believer_name,partner_name,group_title,group_cred_points,group_debt_points": idea_format_00020_believer_partner_membership_v0_0_0(),
+        "belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points": idea_format_00021_believer_partnerunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force": idea_format_00022_believer_plan_awardlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,f_context,f_state,f_lower,f_upper": idea_format_00023_believer_plan_factunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,labor_title": idea_format_00024_believer_plan_laborlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,healer_name": idea_format_00025_believer_plan_healerlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,r_context,r_state,r_upper,r_lower,r_divisor": idea_format_00026_believer_plan_reason_caseunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,r_context,r_plan_active_requisite": idea_format_00027_believer_plan_reasonunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool": idea_format_00028_believer_planunit_v0_0_0(),
+        "belief_label,believer_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_believerunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
+        "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
+        "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
+        "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
+        "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_pidgin_rope_v0_0_0(),
+        "belief_label,believer_name,partner_name,group_title_ERASE": idea_format_00050_delete_believer_partner_membership_v0_0_0(),
+        "belief_label,believer_name,partner_name_ERASE": idea_format_00051_delete_believer_partnerunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_believer_plan_awardlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,f_context_ERASE": idea_format_00053_delete_believer_plan_factunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,labor_title_ERASE": idea_format_00054_delete_believer_plan_laborlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,healer_name_ERASE": idea_format_00055_delete_believer_plan_healerlink_v0_0_0(),
+        "belief_label,believer_name,plan_rope,r_context,r_state_ERASE": idea_format_00056_delete_believer_plan_reason_caseunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope,r_context_ERASE": idea_format_00057_delete_believer_plan_reasonunit_v0_0_0(),
+        "belief_label,believer_name,plan_rope_ERASE": idea_format_00058_delete_believer_planunit_v0_0_0(),
+        "belief_label,believer_name_ERASE": idea_format_00059_delete_believerunit_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_name,inx_name": idea_format_00113_partner_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_title,inx_title": idea_format_00115_group_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_label,inx_label": idea_format_00116_label_map1_v0_0_0(),
+        "belief_label,believer_name,partner_name,otx_rope,inx_rope": idea_format_00117_rope_map1_v0_0_0(),
     }
 
 
@@ -758,8 +755,8 @@ def get_quick_ideas_column_ref() -> dict[str, set[str]]:
 def get_idea_dimen_ref() -> dict[str, set[str]]:
     """dictionary with key=dimen and value=set of all idea_numbers with that dimen's data"""
     return {
-        "bud_acct_membership": {"br00012", "br00020", "br00050"},
-        "bud_acctunit": {
+        "believer_partner_membership": {"br00012", "br00020", "br00050"},
+        "believer_partnerunit": {
             "br00002",
             "br00011",
             "br00012",
@@ -772,13 +769,13 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "bud_concept_awardlink": {"br00022", "br00052"},
-        "bud_concept_factunit": {"br00023", "br00053"},
-        "bud_concept_healerlink": {"br00025", "br00036", "br00055"},
-        "bud_concept_reason_premiseunit": {"br00026", "br00056"},
-        "bud_concept_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
-        "bud_concept_laborlink": {"br00024", "br00054"},
-        "bud_conceptunit": {
+        "believer_plan_awardlink": {"br00022", "br00052"},
+        "believer_plan_factunit": {"br00023", "br00053"},
+        "believer_plan_healerlink": {"br00025", "br00036", "br00055"},
+        "believer_plan_reason_caseunit": {"br00026", "br00056"},
+        "believer_plan_reasonunit": {"br00026", "br00027", "br00056", "br00057"},
+        "believer_plan_laborlink": {"br00024", "br00054"},
+        "believer_planunit": {
             "br00013",
             "br00019",
             "br00022",
@@ -797,7 +794,7 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00057",
             "br00058",
         },
-        "budunit": {
+        "believerunit": {
             "br00001",
             "br00002",
             "br00011",
@@ -830,13 +827,13 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "fisc_cashbook": {"br00002"},
-        "fisc_dealunit": {"br00001"},
-        "fisc_timeline_hour": {"br00003"},
-        "fisc_timeline_month": {"br00004"},
-        "fisc_timeline_weekday": {"br00005"},
-        "fisc_timeoffi": {"br00006"},
-        "fiscunit": {
+        "belief_paybook": {"br00002"},
+        "belief_budunit": {"br00001"},
+        "belief_timeline_hour": {"br00003"},
+        "belief_timeline_month": {"br00004"},
+        "belief_timeline_weekday": {"br00005"},
+        "belief_timeoffi": {"br00006"},
+        "beliefunit": {
             "br00000",
             "br00001",
             "br00002",
@@ -876,6 +873,6 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
         },
         "pidgin_title": {"br00042", "br00115"},
         "pidgin_name": {"br00043", "br00113"},
-        "pidgin_way": {"br00045", "br00117"},
+        "pidgin_rope": {"br00045", "br00117"},
         "pidgin_label": {"br00044", "br00116"},
     }

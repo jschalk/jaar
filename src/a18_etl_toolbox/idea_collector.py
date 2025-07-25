@@ -1,10 +1,7 @@
 from dataclasses import dataclass
-from pandas import DataFrame, Series as PandaSeries, read_excel as pandas_read_excel
+from pandas import read_excel as pandas_read_excel
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a17_idea_logic.idea_config import (
-    get_idea_numbers,
-    get_quick_ideas_column_ref,
-)
+from src.a17_idea_logic.idea_config import get_idea_numbers, get_quick_ideas_column_ref
 from src.a17_idea_logic.idea_db_tool import get_all_excel_sheet_names
 
 
@@ -38,5 +35,4 @@ def get_all_idea_dataframes(dir: str) -> list[IdeaFileRef]:
         df = pandas_read_excel(file_path, sheet_name=sheet_name)
         if idea_columns.issubset(set(df.columns)):
             valid_ideas.append(IdeaFileRef(dir, filename, sheet_name, idea_number))
-
     return valid_ideas

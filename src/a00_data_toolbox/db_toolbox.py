@@ -1,12 +1,7 @@
-from contextlib import contextmanager
 from csv import reader as csv_reader, writer as csv_writer
 from dataclasses import dataclass
 from os.path import join as os_path_join
-from sqlite3 import (
-    Connection as sqlite3_Connection,
-    Error as sqlite3_Error,
-    connect as sqlite3_connect,
-)
+from sqlite3 import Connection as sqlite3_Connection, Error as sqlite3_Error
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
 
 
@@ -57,6 +52,42 @@ def get_sorted_intersection_list(
     return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
 
 
+def get_nonconvertible_columns(
+    row_dict: dict[str, str], col_types: dict[str, str]
+) -> dict[str, str]:
+    """
+    Returns a list of columns from row_dict that cannot be converted
+    to the expected numeric type defined in col_types.
+
+    Parameters:
+    - row_dict: dict with column names as keys and cell values.
+    - col_types: dict mapping column names to "Integer", "Real", or "Text".
+
+    Returns:
+    - Dictionary of column names and the values where numeric conversion fails.
+    """
+    nonconvertible = {}
+    for col, value in row_dict.items():
+        expected_type = col_types.get(col)
+        if expected_type == "INTEGER":
+            try:
+                int_val = int(value)
+                if isinstance(value, float) and not value.is_integer():
+                    raise ValueError("float with decimal")
+            except (ValueError, TypeError):
+                nonconvertible[col] = value
+
+        elif expected_type == "REAL":
+            try:
+                float(value)
+            except (ValueError, TypeError):
+                nonconvertible[col] = value
+        elif expected_type and expected_type != "TEXT":
+            nonconvertible[col] = value
+        # ignore if expected_type == "Text" or expected_type is None:
+    return nonconvertible
+
+
 def create_type_reference_insert_sqlstr(
     x_table: str, x_columns: list[str], x_values: list[str]
 ) -> str:
@@ -72,8 +103,13 @@ INSERT INTO {x_table} ("""
 , {x_column}"""
     values_str = ""
     for x_value in x_values:
-        if str(type(x_value)) != "<class 'int'>":
-            x_value = f"'{x_value}'"
+        if x_value is None:
+            x_value = "NULL"
+        else:
+            try:
+                float(x_value)
+            except (ValueError, TypeError):
+                x_value = f"'{x_value}'"
 
         if values_str == "":
             values_str = f"""{values_str}
@@ -185,42 +221,6 @@ def get_row_count(db_conn: sqlite3_Connection, table_name: str) -> str:
     return get_single_result(db_conn, get_row_count_sqlstr(table_name))
 
 
-def check_table_column_existence(
-    tables_dict: dict, db_conn: sqlite3_Connection
-) -> bool:
-    db_tables = get_db_tables(db_conn)
-    db_tables_columns = get_db_columns(db_conn)
-
-    # # for table_name, table_dict in tables_dict.items():
-    # for table_name in tables_dict:
-    #     if db_tables.get(table_name) is None:
-    #         # print(f"Table {table_name} is missing")
-    #         return False
-
-    #     # db_columns = set(db_tables_columns.get(table_name).keys())
-    #     # config_columns = set(table_dict.get("columns").keys())
-    #     # diff_columns = db_columns.symmetric_difference(config_columns)
-    #     # print(f"Table: {table_name} Column differences: {diff_columns}")
-
-    #     # if diff_columns:
-    #     #     return False
-    return all(db_tables.get(table_name) is not None for table_name in tables_dict)
-
-
-@contextmanager
-def sqlite_connection(db_name):
-    conn = sqlite3_connect(db_name)
-    conn.row_factory = dict_factory
-    try:
-        yield conn
-        conn.commit()
-    except Exception:
-        conn.rollback()
-        raise
-    finally:
-        conn.close()
-
-
 def _get_grouping_select_clause(
     groupby_columns: list[str], value_columns: list[str]
 ) -> str:
@@ -255,15 +255,27 @@ def _get_having_equal_value_clause(value_columns: list[str]) -> str:
 
 
 def get_groupby_sql_query(
-    x_table: str, groupby_columns: list[str], value_columns: list[str]
+    x_table: str,
+    groupby_columns: list[str],
+    value_columns: list[str],
+    where_clause: str = None,
 ) -> str:
-    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)}"
+    where_clause = "" if not where_clause else f"{where_clause} "
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)}"
 
 
 def get_grouping_with_all_values_equal_sql_query(
-    x_table: str, groupby_columns: list[str], value_columns: list[str]
+    x_table: str,
+    groupby_columns: list[str],
+    value_columns: list[str],
+    where_clause: str = None,
 ) -> str:
-    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
+    where_clause = "" if not where_clause else f"{where_clause} "
+    return f"{_get_grouping_select_clause(groupby_columns, value_columns)} FROM {x_table} {where_clause}{_get_grouping_groupby_clause(groupby_columns)} {_get_having_equal_value_clause(value_columns)}"
+
+
+class insert_csv_Exception(Exception):
+    pass
 
 
 def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_name: str):
@@ -272,7 +284,7 @@ def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_nam
 
     Args:
         csv_file_path (str): Path to the CSV file.
-        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        conn_or_cursor (sqlite3.Connection): SQLite database connection object.
         table_name (str): Name of the table to insert data into.
 
     Returns:
@@ -294,10 +306,10 @@ def insert_csv(csv_file_path: str, conn_or_cursor: sqlite3_Connection, table_nam
                 conn_or_cursor.execute(insert_query, row)
 
     except sqlite3_Error as e:
-        print(f"SQLite error: {e}")
+        raise insert_csv_Exception(f"SQLite error: {e}") from e
 
     except Exception as e:
-        print(f"Error: {e}")
+        raise insert_csv_Exception(f"Error: {e}") from e
 
 
 class sqlite3_Error_Exception(Exception):
@@ -339,7 +351,7 @@ def create_table_from_csv(
 
     Args:
         csv_file_path (str): Path to the CSV file.
-        sqlite_connection (sqlite3.Connection): SQLite database connection object.
+        conn_or_cursor (sqlite3.Connection): SQLite database connection object.
         table_name (str): Name of the table to create.
         column_types (dict): Dictionary mapping column names to their SQLite data types.
 
@@ -369,6 +381,8 @@ def db_table_exists(conn_or_cursor: sqlite3_Connection, tablename: str) -> bool:
 
 def get_table_columns(conn_or_cursor: sqlite3_Connection, tablename: str) -> list[str]:
     db_columns = conn_or_cursor.execute(f"PRAGMA table_info({tablename})").fetchall()
+    if db_columns and str(type(db_columns[0])) == "<class 'dict'>":
+        return [db_column.get("name") for db_column in db_columns]
     return [db_column[1] for db_column in db_columns]
 
 
@@ -407,6 +421,8 @@ def create_update_inconsistency_error_query(
     x_tablename: str,
     focus_columns: set[str],
     exclude_columns: set[str],
+    error_holder_column: str,
+    error_str: str,
 ):
     select_inconsistency_query = create_select_inconsistency_query(
         conn_or_cursor, x_tablename, focus_columns, exclude_columns
@@ -425,7 +441,7 @@ def create_update_inconsistency_error_query(
     return f"""WITH inconsistency_rows AS (
 {select_inconsistency_query})
 UPDATE {x_tablename}
-SET error_message = 'Inconsistent data'
+SET {error_holder_column} = '{error_str}'
 FROM inconsistency_rows
 {where_str}
 ;
@@ -438,7 +454,7 @@ def create_table2table_agg_insert_query(
     dst_table: str,
     focus_cols: list[str],
     exclude_cols: set[str],
-    where_block: str = None,
+    where_block: str,
 ) -> str:
     if not focus_cols:
         focus_cols = set(get_table_columns(conn_or_cursor, dst_table))
@@ -456,9 +472,7 @@ def create_table2table_agg_insert_query(
         else:
             select_columns_str += f", MAX({dst_column})"
     groupby_columns_str = ", ".join(focus_col_list)
-    if where_block is None:
-        where_block = "\nWHERE error_message IS NULL"
-
+    where_block = f"\n{where_block}" if where_block else ""
     return f"""INSERT INTO {dst_table} ({dst_columns_str})
 SELECT {select_columns_str}
 FROM {src_table}{where_block}
@@ -546,7 +560,7 @@ def save_to_split_csvs(
     conn_or_cursor: sqlite3_Connection,
     tablename,
     key_columns,
-    output_dir,
+    dst_dir,
     col1_prefix=None,
     col2_prefix=None,
 ):
@@ -556,7 +570,7 @@ def save_to_split_csvs(
     :param db_path: Path to the SQLite database file.
     :param tablename: Name of the table to query.
     :param key_columns: List of columns to use as keys for filtering rows.
-    :param output_dir: Directory to save the resulting CSVs.
+    :param dst_dir: Directory to save the resulting CSVs.
     """
     # Fetch all rows from the table
     column_names = get_table_columns(conn_or_cursor, tablename)
@@ -589,11 +603,11 @@ def save_to_split_csvs(
             key_values = new_key_values
 
         key_path_part = get_key_part(key_values)
-        csv_path = create_path(output_dir, key_path_part)
+        csv_path = create_path(dst_dir, key_path_part)
         set_dir(csv_path)
-        output_file = os_path_join(csv_path, f"{tablename}.csv")
+        dst_file = os_path_join(csv_path, f"{tablename}.csv")
         # Write to CSV
-        with open(output_file, mode="w", newline="", encoding="utf-8") as csv_file:
+        with open(dst_file, mode="w", newline="", encoding="utf-8") as csv_file:
             writer = csv_writer(csv_file)
             writer.writerow(column_names)
             writer.writerows(collection)

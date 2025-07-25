@@ -6,13 +6,13 @@
         "face_name": {
             "otx_key": true
         },
-        "inx_bridge": {
+        "inx_knot": {
             "otx_key": false
         },
         "inx_title": {
             "otx_key": false
         },
-        "otx_bridge": {
+        "otx_knot": {
             "otx_key": false
         },
         "otx_title": {

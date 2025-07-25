@@ -1,0 +1,150 @@
+from src.a01_term_logic.rope import create_rope
+from src.a04_reason_logic.reason_plan import (
+    caseunit_shop,
+    factunit_shop,
+    reasonunit_shop,
+)
+from src.a05_plan_logic.plan import planunit_shop
+
+
+def test_PlanUnit_find_replace_rope_CorrectlyModifies_parent_rope():
+    # ESTABLISH Plan with _parent_rope that will be different
+    old_casa_str = "casa1"
+    old_root_label = "ZZ"
+    old_casa_rope = create_rope(old_root_label, old_casa_str)
+    bloomers_str = "bloomers"
+    old_bloomers_rope = create_rope(old_casa_rope, bloomers_str)
+    roses_str = "roses"
+    old_roses_rope = create_rope(old_bloomers_rope, roses_str)
+    x_plan = planunit_shop(roses_str, parent_rope=old_bloomers_rope)
+    assert create_rope(x_plan.parent_rope) == old_bloomers_rope
+    assert create_rope(x_plan.parent_rope, x_plan.plan_label) == old_roses_rope
+
+    # WHEN
+    new_casa = "casa2"
+    new_casa_rope = create_rope(old_root_label, new_casa)
+    x_plan.find_replace_rope(old_rope=old_casa_rope, new_rope=new_casa_rope)
+
+    # THEN
+    new_bloomers_rope = create_rope(new_casa_rope, bloomers_str)
+    new_roses_rope = create_rope(new_bloomers_rope, roses_str)
+    assert create_rope(x_plan.parent_rope) == new_bloomers_rope
+    assert create_rope(x_plan.parent_rope, x_plan.plan_label) == new_roses_rope
+
+
+def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
+    # ESTABLISH Plan with reason that will be different
+    casa_str = "casa1"
+    old_root_label = "ZZ"
+    casa_rope = create_rope(old_root_label, casa_str)
+    bloomers_str = "bloomers"
+    bloomers_rope = create_rope(casa_rope, bloomers_str)
+    roses_str = "roses"
+    roses_rope = create_rope(bloomers_rope, roses_str)
+    # reason ropes
+    old_water_str = "water"
+    old_water_rope = create_rope(old_root_label, old_water_str)
+    rain_str = "rain"
+    old_rain_rope = create_rope(old_water_rope, rain_str)
+    # create reasonunit
+    case_x = caseunit_shop(r_state=old_rain_rope)
+    cases_x = {case_x.r_state: case_x}
+    x_reason = reasonunit_shop(old_water_rope, cases=cases_x)
+    reasons_x = {x_reason.r_context: x_reason}
+    x_plan = planunit_shop(roses_str, reasonunits=reasons_x)
+    # check asserts
+    assert x_plan.reasonunits.get(old_water_rope) is not None
+    old_water_rain_reason = x_plan.reasonunits[old_water_rope]
+    assert old_water_rain_reason.r_context == old_water_rope
+    assert old_water_rain_reason.cases.get(old_rain_rope) is not None
+    water_rain_l_case = old_water_rain_reason.cases[old_rain_rope]
+    assert water_rain_l_case.r_state == old_rain_rope
+
+    # WHEN
+    new_water_str = "h2o"
+    new_water_rope = create_rope(old_root_label, new_water_str)
+    assert x_plan.reasonunits.get(new_water_rope) is None
+    x_plan.find_replace_rope(old_rope=old_water_rope, new_rope=new_water_rope)
+
+    # THEN
+    assert x_plan.reasonunits.get(old_water_rope) is None
+    assert x_plan.reasonunits.get(new_water_rope) is not None
+    new_water_rain_reason = x_plan.reasonunits[new_water_rope]
+    assert new_water_rain_reason.r_context == new_water_rope
+    new_rain_rope = create_rope(new_water_rope, rain_str)
+    assert new_water_rain_reason.cases.get(old_rain_rope) is None
+    assert new_water_rain_reason.cases.get(new_rain_rope) is not None
+    new_water_rain_l_case = new_water_rain_reason.cases[new_rain_rope]
+    assert new_water_rain_l_case.r_state == new_rain_rope
+
+    print(f"{len(x_plan.reasonunits)=}")
+    reason_obj = x_plan.reasonunits.get(new_water_rope)
+    assert reason_obj is not None
+
+    print(f"{len(reason_obj.cases)=}")
+    case_obj = reason_obj.cases.get(new_rain_rope)
+    assert case_obj is not None
+    assert case_obj.r_state == new_rain_rope
+
+
+def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():
+    # ESTABLISH Plan with factunit that will be different
+    roses_str = "roses"
+    old_water_str = "water"
+    old_root_label = "ZZ"
+    old_water_rope = create_rope(old_root_label, old_water_str)
+    rain_str = "rain"
+    old_rain_rope = create_rope(old_water_rope, rain_str)
+
+    x_factunit = factunit_shop(f_context=old_water_rope, f_state=old_rain_rope)
+    factunits_x = {x_factunit.f_context: x_factunit}
+    x_plan = planunit_shop(roses_str, factunits=factunits_x)
+    assert x_plan.factunits[old_water_rope] is not None
+    old_water_rain_factunit = x_plan.factunits[old_water_rope]
+    assert old_water_rain_factunit.f_context == old_water_rope
+    assert old_water_rain_factunit.f_state == old_rain_rope
+
+    # WHEN
+    new_water_str = "h2o"
+    new_water_rope = create_rope(old_root_label, new_water_str)
+    assert x_plan.factunits.get(new_water_rope) is None
+    x_plan.find_replace_rope(old_rope=old_water_rope, new_rope=new_water_rope)
+
+    # THEN
+    assert x_plan.factunits.get(old_water_rope) is None
+    assert x_plan.factunits.get(new_water_rope) is not None
+    new_water_rain_factunit = x_plan.factunits[new_water_rope]
+    assert new_water_rain_factunit.f_context == new_water_rope
+    new_rain_rope = create_rope(new_water_rope, rain_str)
+    assert new_water_rain_factunit.f_state == new_rain_rope
+
+    print(f"{len(x_plan.factunits)=}")
+    x_factunit = x_plan.factunits.get(new_water_rope)
+    assert x_factunit is not None
+    assert x_factunit.f_context == new_water_rope
+    assert x_factunit.f_state == new_rain_rope
+
+
+def test_PlanUnit_get_obj_key_ReturnsCorrectInfo():
+    # ESTABLISH
+    red_str = "red"
+
+    # WHEN
+    red_plan = planunit_shop(red_str)
+
+    # THEN
+    assert red_plan.get_obj_key() == red_str
+
+
+def test_PlanUnit_set_knot_CorrectlyModifiesReason_RopeTerms():
+    # ESTABLISH
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
+    casa_plan.set_parent_rope("")
+
+    # WHEN
+    slash_str = "/"
+    casa_plan.set_knot(slash_str)
+
+    # THEN
+    assert casa_plan.knot == slash_str

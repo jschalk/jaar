@@ -1,15 +1,15 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox._test_util.a00_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
 from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
 from src.a00_data_toolbox.db_toolbox import save_to_split_csvs
 from src.a00_data_toolbox.file_toolbox import create_path
+from src.a00_data_toolbox.test._util.a00_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario0():
+def test_save_to_split_csvs_CreatesFiles_Scenario0(env_dir_setup_cleanup):
     # sourcery skip: extract-method
     # ESTABLISH
     x_tablename = "test_table56"
@@ -83,10 +83,12 @@ VALUES
         assert C4_csv[2] == expected_C4_1_row
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col1_prefix():
+def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col1_prefix(
+    env_dir_setup_cleanup,
+):
     # sourcery skip: extract-method
     # ESTABLISH
-    x_tablename = "test_table56"
+    x_tablename = "test_table567"
     key_columns = ["user", "hair"]
     x_column_types = {"hair": "INTEGER", "user": "TEXT", "y_int": "INTEGER"}
 
@@ -161,10 +163,12 @@ VALUES
         assert C4_csv[2] == expected_C4_1_row
 
 
-def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix():
+def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix(
+    env_dir_setup_cleanup,
+):
     # sourcery skip: extract-method
     # ESTABLISH
-    x_tablename = "test_table56"
+    x_tablename = "test_table568"
     key_columns = ["user", "hair", "y_int"]
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -191,7 +195,7 @@ def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix():
             conn_or_cursor=conn,
             tablename=x_tablename,
             key_columns=key_columns,
-            output_dir=x_dir,
+            dst_dir=x_dir,
             col1_prefix=hairs_str,
             col2_prefix=y_ints_str,
         )

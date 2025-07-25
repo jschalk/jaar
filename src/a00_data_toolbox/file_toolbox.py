@@ -32,6 +32,7 @@ from tempfile import TemporaryFile as tempfile_TemporaryFile
 
 
 def create_path(x_dir: any, filename: any) -> str:
+    """Create a path by joining two parameters, both parameters are converted to strings."""
     if not x_dir:
         return f"{filename}" if filename else ""
     x_dir = str(x_dir)
@@ -96,7 +97,6 @@ def save_file(dest_dir: str, filename: str, file_str: str, replace: bool = True)
     if (os_path_exists(file_path) and replace) or os_path_exists(file_path) is False:
         with open(file_path, "w") as f:
             f.write(file_str)
-            f.close()
 
 
 class CouldNotOpenFileException(Exception):
@@ -110,7 +110,6 @@ def open_file(dest_dir: str, filename: str = None):
     try:
         with open(file_path, "r") as f:
             x_str = f.read()
-            f.close()
     except (PermissionError, FileNotFoundError, OSError) as e:
         raise CouldNotOpenFileException(
             f"Could not load file {file_path} {e.args}"
@@ -127,6 +126,8 @@ def open_json(dest_dir: str, filename: str = None):
 
 
 def count_files(dir_path: str) -> int:
+    """Return number of first level files and directories"""
+
     return (
         sum(bool(path_x.is_file()) for path_x in os_scandir(dir_path))
         if os_path_exists(path=dir_path)
@@ -137,6 +138,7 @@ def count_files(dir_path: str) -> int:
 def get_dir_file_strs(
     x_dir: str, delete_extensions: bool = None, include_dirs=None, include_files=None
 ) -> dict[str, str]:
+    """Returns dictionary of first level files/dirs, for files the contents are included."""
     include_dirs = True if include_dirs is None else include_dirs
     include_files = True if include_files is None else include_files
 
@@ -181,7 +183,8 @@ def rename_dir(src, dst):
     os_rename(src=src, dst=dst)
 
 
-def get_directory_path(x_list: list[str] = None) -> str:
+def create_directory_path(x_list: list[str] = None) -> str:
+    """Create directory path from a list of strs."""
     x_list = [] if x_list is None else x_list
     x_str = ""
     while x_list != []:
@@ -227,7 +230,7 @@ def is_path_valid(path: str) -> bool:
         return True
 
 
-def can_active_usser_edit_paths(path: str = None) -> bool:
+def can_usser_edit_paths(path: str = None) -> bool:
     """
     `True` if the active usser has sufficient permissions to create the passed
     path; `False` otherwise.
@@ -249,10 +252,10 @@ def is_path_existent_or_creatable(path: str) -> bool:
         # To circumvent "os" module calls from raising undesirable exceptions on
         # invalid path, is_path_valid() is explicitly called first.
         return is_path_valid(path) and (
-            os_path_exists(path) or can_active_usser_edit_paths(path)
+            os_path_exists(path) or can_usser_edit_paths(path)
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
-    # timeouts, permissions issues) implying this path to be inaccessible. All
+    # timouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
@@ -268,7 +271,7 @@ def is_path_probably_creatable(path: str = None) -> bool:
     # workinng directory (CWD) instead.
     dirname = os_getcwd() if path is None else os_path_dirname(path) or os_getcwd()
     try:
-        # For safety, explicitly close and hence delete this temporary file
+        # For safety, explicitly delete this temporary file
         # immediately after creating it in the passed path's parent directory.
         with tempfile_TemporaryFile(dir=dirname):
             pass
@@ -294,7 +297,7 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
             os_path_exists(path) or is_path_probably_creatable(path)
         )
     # Report failure on non-fatal filesystem complaints (e.g., connection
-    # timeouts, permissions issues) implying this path to be inaccessible. All
+    # timouts, permissions issues) implying this path to be inaccessible. All
     # other exceptions are unrelated fatal issues and should not be caught here.
     except OSError:
         return False
@@ -350,6 +353,7 @@ def get_max_file_number(x_dir: str) -> int:
 
 
 def count_dirs_files(x_dir: str) -> int:
+    """Return count of all files and directories"""
     # path = pathlib_Path(x_dir)
     # if not path.is_dir():
     #     raise ValueError(f"'{x_dir}' is not a valid directory.")

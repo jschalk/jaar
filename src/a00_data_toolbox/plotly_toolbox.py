@@ -1,10 +1,6 @@
 from plotly.graph_objects import Figure as plotly_Figure
 
 
-def get_positional_dict(x_list: list[str]) -> dict[str, int]:
-    return {x_element: x_count for x_count, x_element in enumerate(x_list)}
-
-
 def conditional_fig_show(fig: plotly_Figure, graphics_bool: bool):
     if graphics_bool:
         fig.show()
@@ -70,7 +66,7 @@ def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None):
     # aliceblue, antiquewhite, aqua, aquamarine, azure,
     # beige, bisque, black, blanchedalmond, blue,
     # blueviolet, brown, burlywood, cadetblue,
-    # chartreuse, chocolate, coral, cornflowerblue,
+    # chartreuse, chocolate, coral,
     # cornsilk, crimson, cyan, darkblue, darkcyan,
     # darkgoldenrod, darkgray, darkgrey, darkgreen,
     # darkkhaki, darkmagenta, darkolivegreen, darkorange,

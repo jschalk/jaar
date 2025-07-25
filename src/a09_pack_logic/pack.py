@@ -8,22 +8,21 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.a01_term_logic.way import (
-    FaceName,
-    FiscLabel,
-    OwnerName,
-    get_default_fisc_label,
+from src.a01_term_logic.term import BeliefLabel, BelieverName, FaceName
+from src.a05_plan_logic.plan import get_default_belief_label
+from src.a06_believer_logic.believer import BelieverUnit
+from src.a08_believer_atom_logic.atom import (
+    BelieverAtom,
+    get_from_json as believeratom_get_from_json,
 )
-from src.a06_bud_logic.bud import BudUnit
-from src.a08_bud_atom_logic.atom import BudAtom, get_from_json as budatom_get_from_json
 from src.a09_pack_logic.delta import (
-    BudDelta,
-    buddelta_shop,
-    get_buddelta_from_ordered_dict,
+    BelieverDelta,
+    believerdelta_shop,
+    get_believerdelta_from_ordered_dict,
 )
 
 
-class pack_bud_conflict_Exception(Exception):
+class pack_believer_conflict_Exception(Exception):
     pass
 
 
@@ -38,15 +37,15 @@ def get_init_pack_id_if_None(x_pack_id: int = None) -> int:
 @dataclass
 class PackUnit:
     face_name: FaceName = None
-    fisc_label: FiscLabel = None
-    owner_name: OwnerName = None
+    belief_label: BeliefLabel = None
+    believer_name: BelieverName = None
     _pack_id: int = None
-    _buddelta: BudDelta = None
+    _believerdelta: BelieverDelta = None
     _delta_start: int = None
     _packs_dir: str = None
     _atoms_dir: str = None
     event_int: int = None
-    """Represents a per fisc_label/event_int BudDelta for a owner_name"""
+    """Represents a per belief_label/event_int BelieverDelta for a believer_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -54,30 +53,30 @@ class PackUnit:
     def del_face(self):
         self.face_name = None
 
-    def set_buddelta(self, x_buddelta: BudDelta):
-        self._buddelta = x_buddelta
+    def set_believerdelta(self, x_believerdelta: BelieverDelta):
+        self._believerdelta = x_believerdelta
 
-    def del_buddelta(self):
-        self._buddelta = buddelta_shop()
+    def del_believerdelta(self):
+        self._believerdelta = believerdelta_shop()
 
     def set_delta_start(self, x_delta_start: int):
         self._delta_start = get_init_pack_id_if_None(x_delta_start)
 
-    def budatom_exists(self, x_budatom: BudAtom):
-        return self._buddelta.budatom_exists(x_budatom)
+    def believeratom_exists(self, x_believeratom: BelieverAtom):
+        return self._believerdelta.believeratom_exists(x_believeratom)
 
     def get_step_dict(self) -> dict[str, any]:
         return {
             "face_name": self.face_name,
-            "fisc_label": self.fisc_label,
-            "owner_name": self.owner_name,
+            "belief_label": self.belief_label,
+            "believer_name": self.believer_name,
             "event_int": self.event_int,
-            "delta": self._buddelta.get_ordered_budatoms(self._delta_start),
+            "delta": self._believerdelta.get_ordered_believeratoms(self._delta_start),
         }
 
     def get_serializable_dict(self) -> dict[str, dict]:
         total_dict = self.get_step_dict()
-        total_dict["delta"] = self._buddelta.get_ordered_dict()
+        total_dict["delta"] = self._believerdelta.get_ordered_dict()
         return total_dict
 
     def get_json(self) -> str:
@@ -90,7 +89,7 @@ class PackUnit:
     def get_deltametric_dict(self) -> dict:
         x_dict = self.get_step_dict()
         return {
-            "owner_name": x_dict.get("owner_name"),
+            "believer_name": x_dict.get("believer_name"),
             "face_name": x_dict.get("face_name"),
             "event_int": x_dict.get("event_int"),
             "delta_atom_numbers": self.get_delta_atom_numbers(x_dict),
@@ -102,7 +101,7 @@ class PackUnit:
     def _get_num_filename(self, x_number: int) -> str:
         return get_json_filename(x_number)
 
-    def _save_atom_file(self, atom_number: int, x_atom: BudAtom):
+    def _save_atom_file(self, atom_number: int, x_atom: BelieverAtom):
         x_filename = self._get_num_filename(atom_number)
         save_file(self._atoms_dir, x_filename, x_atom.get_json())
 
@@ -110,9 +109,9 @@ class PackUnit:
         x_filename = self._get_num_filename(atom_number)
         return os_path_exists(create_path(self._atoms_dir, x_filename))
 
-    def _open_atom_file(self, atom_number: int) -> BudAtom:
+    def _open_atom_file(self, atom_number: int) -> BelieverAtom:
         x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
-        return budatom_get_from_json(x_json)
+        return believeratom_get_from_json(x_json)
 
     def _save_pack_file(self):
         x_filename = self._get_num_filename(self._pack_id)
@@ -124,63 +123,67 @@ class PackUnit:
 
     def _save_atom_files(self):
         step_dict = self.get_step_dict()
-        ordered_budatoms = step_dict.get("delta")
-        for order_int, budatom in ordered_budatoms.items():
-            self._save_atom_file(order_int, budatom)
+        ordered_believeratoms = step_dict.get("delta")
+        for order_int, believeratom in ordered_believeratoms.items():
+            self._save_atom_file(order_int, believeratom)
 
     def save_files(self):
         self._save_pack_file()
         self._save_atom_files()
 
-    def _create_buddelta_from_atom_files(self, atom_number_list: list) -> BudDelta:
-        x_buddelta = buddelta_shop()
+    def _create_believerdelta_from_atom_files(
+        self, atom_number_list: list
+    ) -> BelieverDelta:
+        x_believerdelta = believerdelta_shop()
         for atom_number in atom_number_list:
-            x_budatom = self._open_atom_file(atom_number)
-            x_buddelta.set_budatom(x_budatom)
-        self._buddelta = x_buddelta
+            x_believeratom = self._open_atom_file(atom_number)
+            x_believerdelta.set_believeratom(x_believeratom)
+        self._believerdelta = x_believerdelta
 
-    def add_budatom(
+    def add_believeratom(
         self,
         dimen: str,
         crud_str: str,
         jkeys: dict[str, str] = None,
         jvalues: dict[str, str] = None,
     ):
-        self._buddelta.add_budatom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
+        self._believerdelta.add_believeratom(
+            dimen, crud_str, jkeys=jkeys, jvalues=jvalues
+        )
 
-    def get_edited_bud(self, before_bud: BudUnit) -> BudUnit:
+    def get_edited_believer(self, before_believer: BelieverUnit) -> BelieverUnit:
         if (
-            self.fisc_label != before_bud.fisc_label
-            or self.owner_name != before_bud.owner_name
+            self.belief_label != before_believer.belief_label
+            or self.believer_name != before_believer.believer_name
         ):
-            raise pack_bud_conflict_Exception(
-                f"pack bud conflict {self.fisc_label} != {before_bud.fisc_label} or {self.owner_name} != {before_bud.owner_name}"
+            raise pack_believer_conflict_Exception(
+                f"pack believer conflict {self.belief_label} != {before_believer.belief_label} or {self.believer_name} != {before_believer.believer_name}"
             )
-        return self._buddelta.get_edited_bud(before_bud)
+        return self._believerdelta.get_edited_believer(before_believer)
 
     def is_empty(self) -> bool:
-        return self._buddelta.is_empty()
+        return self._believerdelta.is_empty()
 
 
 def packunit_shop(
-    owner_name: OwnerName,
+    believer_name: BelieverName,
     face_name: FaceName = None,
-    fisc_label: FiscLabel = None,
+    belief_label: BeliefLabel = None,
     _pack_id: int = None,
-    _buddelta: BudDelta = None,
+    _believerdelta: BelieverDelta = None,
     _delta_start: int = None,
     _packs_dir: str = None,
     _atoms_dir: str = None,
     event_int: int = None,
 ) -> PackUnit:
-    _buddelta = buddelta_shop() if _buddelta is None else _buddelta
-    fisc_label = get_default_fisc_label() if fisc_label is None else fisc_label
+    _believerdelta = believerdelta_shop() if _believerdelta is None else _believerdelta
+    belief_label = get_default_belief_label() if belief_label is None else belief_label
     x_packunit = PackUnit(
         face_name=face_name,
-        owner_name=owner_name,
-        fisc_label=fisc_label,
+        believer_name=believer_name,
+        belief_label=belief_label,
         _pack_id=get_init_pack_id_if_None(_pack_id),
-        _buddelta=_buddelta,
+        _believerdelta=_believerdelta,
         _packs_dir=_packs_dir,
         _atoms_dir=_atoms_dir,
         event_int=event_int,
@@ -196,18 +199,18 @@ def create_packunit_from_files(
 ) -> PackUnit:
     pack_filename = get_json_filename(pack_id)
     pack_dict = open_json(packs_dir, pack_filename)
-    x_owner_name = pack_dict.get("owner_name")
-    x_fisc_label = pack_dict.get("fisc_label")
+    x_believer_name = pack_dict.get("believer_name")
+    x_belief_label = pack_dict.get("belief_label")
     x_face_name = pack_dict.get("face_name")
     delta_atom_numbers_list = pack_dict.get("delta_atom_numbers")
     x_packunit = packunit_shop(
         face_name=x_face_name,
-        owner_name=x_owner_name,
-        fisc_label=x_fisc_label,
+        believer_name=x_believer_name,
+        belief_label=x_belief_label,
         _pack_id=pack_id,
         _atoms_dir=atoms_dir,
     )
-    x_packunit._create_buddelta_from_atom_files(delta_atom_numbers_list)
+    x_packunit._create_believerdelta_from_atom_files(delta_atom_numbers_list)
     return x_packunit
 
 
@@ -219,12 +222,12 @@ def get_packunit_from_json(x_json: str) -> PackUnit:
         x_event_int = int(pack_dict.get("event_int"))
     x_packunit = packunit_shop(
         face_name=pack_dict.get("face_name"),
-        owner_name=pack_dict.get("owner_name"),
-        fisc_label=pack_dict.get("fisc_label"),
+        believer_name=pack_dict.get("believer_name"),
+        belief_label=pack_dict.get("belief_label"),
         _pack_id=pack_dict.get("pack_id"),
         _atoms_dir=pack_dict.get("atoms_dir"),
         event_int=x_event_int,
     )
-    x_buddelta = get_buddelta_from_ordered_dict(pack_dict.get("delta"))
-    x_packunit.set_buddelta(x_buddelta)
+    x_believerdelta = get_believerdelta_from_ordered_dict(pack_dict.get("delta"))
+    x_packunit.set_believerdelta(x_believerdelta)
     return x_packunit

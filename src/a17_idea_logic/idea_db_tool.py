@@ -1,20 +1,24 @@
 from io import StringIO as io_StringIO
 from numpy import float64
 from openpyxl import load_workbook as openpyxl_load_workbook
-from os.path import dirname as os_path_dirname, exists as os_path_exists
+from os import listdir as os_listdir
+from os.path import (
+    dirname as os_path_dirname,
+    exists as os_path_exists,
+    join as os_path_join,
+)
 from pandas import (
     DataFrame,
     ExcelWriter,
     read_csv as pandas_read_csv,
     read_excel as pandas_read_excel,
-    read_sql_query as pandas_read_sql_query,
 )
-from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
+from pandas.api.types import is_numeric_dtype as pandas_api_types_is_numeric_dtype
+from sqlite3 import Connection as sqlite3_Connection
 from src.a00_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_table_from_csv,
     db_table_exists,
-    get_grouping_with_all_values_equal_sql_query,
     get_table_columns,
     insert_csv,
 )
@@ -27,7 +31,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.a01_term_logic.way import EventInt, FaceName
+from src.a01_term_logic.term import EventInt, FaceName
 from src.a16_pidgin_logic.map import MapCore
 from src.a16_pidgin_logic.pidgin import PidginUnit, get_pidginunit_from_json
 from src.a16_pidgin_logic.pidgin_config import (
@@ -55,10 +59,10 @@ def get_ordered_csv(x_df: DataFrame, sorting_columns: list[str] = None) -> str:
     return x_df.to_csv(index=False).replace("\r", "")
 
 
-def open_csv(x_file_dir: str, x_filename: str = None) -> DataFrame:
-    if os_path_exists(create_path(x_file_dir, x_filename)) is False:
+def open_csv(x_dir: str, x_filename: str = None) -> DataFrame:
+    if os_path_exists(create_path(x_dir, x_filename)) is False:
         return None
-    return pandas_read_csv(create_path(x_file_dir, x_filename))
+    return pandas_read_csv(create_path(x_dir, x_filename))
 
 
 def get_sheet_names(x_path: str) -> list[str]:
@@ -87,9 +91,7 @@ def get_all_excel_sheet_names(
 
 
 def get_relevant_columns_dataframe(
-    src_df: DataFrame,
-    relevant_columns: list[str] = None,
-    relevant_columns_necessary: bool = True,
+    src_df: DataFrame, relevant_columns: list[str] = None
 ) -> DataFrame:
     if relevant_columns is None:
         relevant_columns = get_idea_elements_sort_order()
@@ -100,25 +102,6 @@ def get_relevant_columns_dataframe(
         r_col for r_col in relevant_columns if r_col in current_relevant_columns
     ]
     return src_df[relevant_cols_in_order]
-
-
-def get_brick_raw_grouping_with_all_values_equal_df(
-    x_df: DataFrame, groupby_list: list, idea_number: str
-) -> DataFrame:
-    df_columns = set(x_df.columns)
-    grouping_columns = get_default_sorted_list(df_columns, groupby_list)
-    value_columns = df_columns.difference(grouping_columns)
-
-    if grouping_columns == []:
-        return x_df
-    with sqlite3_connect(":memory:") as conn:
-        x_df.to_sql("brick_raw", conn, index=False)
-        query_str = get_grouping_with_all_values_equal_sql_query(
-            x_table="brick_raw",
-            groupby_columns=grouping_columns,
-            value_columns=value_columns,
-        )
-        return pandas_read_sql_query(query_str, conn)
 
 
 def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
@@ -133,7 +116,6 @@ def translate_single_column_dataframe(
         for cur_row in range(row_count):
             otx_value = x_df.iloc[cur_row][column_name]
             inx_value = x_mapunit.reveal_inx(otx_value)
-            print(f"{otx_value=} {inx_value=}")
             x_df.at[cur_row, column_name] = inx_value
     return x_df
 
@@ -167,7 +149,7 @@ def _get_pidgen_idea_format_filenames() -> set[str]:
     idea_numbers = set(get_idea_dimen_ref().get("pidgin_name"))
     idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_title")))
     idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_label")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_way")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_rope")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
@@ -265,24 +247,24 @@ def sheet_exists(file_path: str, sheet_name: str):
 
 
 def split_excel_into_dirs(
-    input_file: str, output_dir: str, column_name: str, filename: str, sheet_name: str
+    src_file: str, dst_dir: str, column_name: str, filename: str, sheet_name: str
 ):
     """
     Splits an Excel file into multiple Excel files, each containing rows
     corresponding to a unique value in the specified column.
 
     Args:
-        input_file (str): Path to the input Excel file.
-        output_dir (str): Directory where the output files will be saved.
+        src_file (str): Path to the src Excel file.
+        dst_dir (str): Directory where the files will be saved.
         column_name (str): Column to split by unique values.
     """
-    # Create the output directory if it doesn't exist
-    set_dir(output_dir)
-    df = pandas_read_excel(input_file, sheet_name=sheet_name)
+    # Create the destination directory if it doesn't exist
+    set_dir(dst_dir)
+    df = pandas_read_excel(src_file, sheet_name=sheet_name)
 
     # Check if the column exists
     if column_name not in df.columns:
-        raise ValueError(f"Column '{column_name}' does not exist in the input file.")
+        raise ValueError(f"Column '{column_name}' does not exist in the src file.")
 
     # Group by unique values in the column
     unique_values = df[column_name].unique()
@@ -294,12 +276,12 @@ def split_excel_into_dirs(
 
             # Create a safe subdirectory name for the unique value
             safe_value = str(value).replace("/", "_").replace("\\", "_")
-            subdirectory = create_path(output_dir, safe_value)
+            subdirectory = create_path(dst_dir, safe_value)
             # Create the subdirectory if it doesn't exist
             set_dir(subdirectory)
-            # Define the output file path
-            output_file = create_path(subdirectory, f"{filename}.xlsx")
-            upsert_sheet(output_file, sheet_name, filtered_df)
+            # Define the destination file path
+            dst_file = create_path(subdirectory, f"{filename}.xlsx")
+            upsert_sheet(dst_file, sheet_name, filtered_df)
 
 
 def if_nan_return_None(x_obj: any) -> any:
@@ -345,16 +327,16 @@ def get_pragma_table_fetchall(table_columns):
     return pragma_table_attrs
 
 
-def save_table_to_csv(
-    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str, tablename
-):
-    fiscunit_sqlstr = f"""SELECT * FROM {tablename};"""
-    fiscunit_rows = conn_or_cursor.execute(fiscunit_sqlstr).fetchall()
-    fiscunit_columns = get_table_columns(conn_or_cursor, tablename)
-    # fiscunit_columns = [desc[0] for desc in cursor.description]
-    fiscunit_df = DataFrame(fiscunit_rows, columns=fiscunit_columns)
-    fiscunit_filename = f"{tablename}.csv"
-    save_dataframe_to_csv(fiscunit_df, fisc_mstr_dir, fiscunit_filename)
+def save_table_to_csv(conn_or_cursor: sqlite3_Connection, dst_dir: str, tablename: str):
+    """given a cursor object, a directory, a tablename create tablename.csv file"""
+
+    select_sqlstr = f"""SELECT * FROM {tablename};"""
+    tables_rows = conn_or_cursor.execute(select_sqlstr).fetchall()
+    tables_columns = get_table_columns(conn_or_cursor, tablename)
+    # beliefunit_columns = [desc[0] for desc in cursor.description]
+    table_df = DataFrame(tables_rows, columns=tables_columns)
+    table_filename = f"{tablename}.csv"
+    save_dataframe_to_csv(table_df, dst_dir, table_filename)
 
 
 def create_idea_sorted_table(
@@ -409,14 +391,14 @@ def csv_dict_to_excel(csv_dict: dict[str, str], dir: str, filename: str):
     """
     set_dir(dir)
     file_path = create_path(dir, filename)
-    output = ExcelWriter(file_path, engine="xlsxwriter")
+    x_excelwriter = ExcelWriter(file_path, engine="xlsxwriter")
 
     for sheet_name, csv_str in csv_dict.items():
         df = pandas_read_csv(io_StringIO(csv_str))  # Convert CSV string to DataFrame
         # Excel sheet names max length is 31 chars
-        df.to_excel(output, sheet_name=sheet_name[:31], index=False)
+        df.to_excel(x_excelwriter, sheet_name=sheet_name[:31], index=False)
 
-    output.close()
+    x_excelwriter.close()
 
 
 def set_dataframe_first_two_columns(df: DataFrame, value_col1, value_col2) -> DataFrame:
@@ -494,3 +476,101 @@ def is_column_type_valid(df: DataFrame, column: str, sqlite_data_type: str) -> b
         return True
     actual_dtype = df[column].dropna().infer_objects().dtype
     return str(actual_dtype) == expected_data_type
+
+
+def prettify_excel(input_file: str, zoom: int = 120) -> None:
+    """
+    Reads all sheets from an Excel file, applies formatting improvements to each,
+    and overwrites the original file. Safely handles sheets with only headers and no data.
+
+    Args:
+        input_file (str): Path to the Excel file to overwrite.
+        zoom (int): Zoom level for each worksheet.
+    """
+    # Load all sheets
+    sheet_data = pandas_read_excel(input_file, sheet_name=None)
+
+    with ExcelWriter(input_file, engine="xlsxwriter") as writer:
+        for sheet_name, df in sheet_data.items():
+            df.to_excel(writer, sheet_name=sheet_name, index=False)
+            workbook = writer.book
+            worksheet = writer.sheets[sheet_name]
+
+            worksheet.freeze_panes(1, 0)
+            worksheet.set_zoom(zoom)
+
+            # Format header
+            header_format = workbook.add_format(
+                {
+                    "bold": True,
+                    "text_wrap": True,
+                    "valign": "top",
+                    "fg_color": "#D7E4BC",
+                    "border": 1,
+                }
+            )
+            for col_num, value in enumerate(df.columns.values):
+                worksheet.write(0, col_num, value, header_format)
+
+            # Format columns and set widths
+            for i, col in enumerate(df.columns):
+                col_data = df[col]
+                width = (
+                    max(
+                        (0 if col_data.empty else col_data.astype(str).map(len).max()),
+                        len(str(col)),
+                    )
+                    + 2
+                )
+
+                if pandas_api_types_is_numeric_dtype(col_data):
+                    if "salary" in col.lower() or "amount" in col.lower():
+                        fmt = workbook.add_format({"num_format": "$#,##0", "border": 1})
+                    else:
+                        fmt = workbook.add_format({"num_format": "0.00", "border": 1})
+                else:
+                    fmt = workbook.add_format({"border": 1})
+                worksheet.set_column(i, i, width, fmt)
+            # Add table only if DataFrame has at least one row
+            if not df.empty:
+                worksheet.add_table(
+                    0,
+                    0,
+                    len(df),
+                    len(df.columns) - 1,
+                    {
+                        "columns": [{"header": col} for col in df.columns],
+                        "style": "Table Style Medium 9",
+                    },
+                )
+
+
+def update_event_int_in_excel_files(directory: str, value) -> None:
+    """
+    Adds or updates the 'event_int' column with a given value
+    in all Excel files in the directory that contain 'stance' in the filename.
+
+    Args:
+        directory (str): Path to the directory containing Excel files.
+        value: The value to set in the 'event_int' column.
+    """
+    for filename in os_listdir(directory):
+        if (
+            filename.lower().endswith((".xlsx", ".xls"))
+            and "stance" in filename.lower()
+        ):
+            filepath = os_path_join(directory, filename)
+
+            # Read all sheets
+            sheets = pandas_read_excel(filepath, sheet_name=None)
+
+            # Modify each sheet
+            updated_sheets = {}
+            for sheet_name, df in sheets.items():
+                df["event_int"] = value  # Add or overwrite
+                updated_sheets[sheet_name] = df
+
+            # Write all sheets back to the same file
+            with ExcelWriter(filepath, engine="xlsxwriter") as writer:
+                for sheet_name, df in updated_sheets.items():
+                    df.to_excel(writer, sheet_name=sheet_name, index=False)

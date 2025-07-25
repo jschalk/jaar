@@ -1,9 +1,6 @@
 from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists
-from pandas import (
-    read_excel as pandas_read_excel,
-    read_sql_query as pandas_read_sql_query,
-)
+from pandas import read_excel as pandas_read_excel
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
 from src.a00_data_toolbox.db_toolbox import (
@@ -11,63 +8,63 @@ from src.a00_data_toolbox.db_toolbox import (
     create_insert_into_clause_str,
     create_select_query,
     create_table_from_columns,
+    create_type_reference_insert_sqlstr,
     create_update_inconsistency_error_query,
     db_table_exists,
+    get_create_table_sqlstr,
     get_db_tables,
+    get_grouping_with_all_values_equal_sql_query,
+    get_nonconvertible_columns,
     get_row_count,
     get_table_columns,
     save_to_split_csvs,
 )
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
-    get_dir_file_strs,
     get_level1_dirs,
     open_file,
     open_json,
     save_file,
     save_json,
 )
-from src.a01_term_logic.way import EventInt, FaceName
-from src.a06_bud_logic.bud import BudUnit, budunit_shop
-from src.a08_bud_atom_logic.atom import budatom_shop
-from src.a08_bud_atom_logic.atom_config import get_bud_dimens
-from src.a09_pack_logic.delta import get_minimal_buddelta
+from src.a01_term_logic.term import EventInt, FaceName
+from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_config import get_believer_dimens
+from src.a09_pack_logic.delta import get_minimal_believerdelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
-from src.a12_hub_tools.hub_path import (
-    create_budevent_path,
+from src.a11_bud_logic.bud import TranBook
+from src.a12_hub_toolbox.a12_path import (
+    create_belief_json_path,
+    create_believer_event_dir_path,
+    create_believerevent_path,
     create_event_all_pack_path,
-    create_fisc_ote1_csv_path,
-    create_fisc_ote1_json_path,
     create_gut_path,
-    create_job_path,
-    create_owner_event_dir_path,
 )
-from src.a12_hub_tools.hub_tool import (
-    collect_owner_event_dir_sets,
-    get_owners_downhill_event_ints,
-    open_bud_file,
+from src.a12_hub_toolbox.hub_tool import (
+    collect_believer_event_dir_sets,
+    get_believers_downhill_event_ints,
+    open_believer_file,
     open_job_file,
 )
-from src.a15_fisc_logic.fisc import (
-    get_from_default_path as fiscunit_get_from_default_path,
-)
-from src.a15_fisc_logic.fisc_tool import (
-    create_deal_mandate_ledgers,
-    create_fisc_owners_cell_trees,
+from src.a15_belief_logic.belief import get_default_path_beliefunit
+from src.a15_belief_logic.belief_cell import (
+    create_belief_believers_cell_trees,
+    create_bud_mandate_ledgers,
     set_cell_tree_cell_mandates,
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
 )
 from src.a16_pidgin_logic.pidgin import (
-    default_bridge_if_None,
+    default_knot_if_None,
     default_unknown_str_if_None,
 )
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
     get_pidgin_NameTerm_args,
+    get_pidgin_RopeTerm_args,
     get_pidgin_TitleTerm_args,
-    get_pidgin_WayTerm_args,
     get_quick_pidgens_column_ref,
 )
 from src.a17_idea_logic.idea import get_idearef_obj
@@ -81,45 +78,50 @@ from src.a17_idea_logic.idea_config import (
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
     get_default_sorted_list,
-    get_grouping_with_all_values_equal_sql_query,
     split_excel_into_dirs,
-    upsert_sheet,
 )
-from src.a17_idea_logic.pidgin_toolbox import init_pidginunit_from_dir
-from src.a18_etl_toolbox.db_obj_bud_tool import insert_job_obj
-from src.a18_etl_toolbox.db_obj_fisc_tool import get_fisc_dict_from_voice_tables
+from src.a18_etl_toolbox.a18_path import (
+    create_belief_ote1_csv_path,
+    create_belief_ote1_json_path,
+    create_last_run_metrics_path,
+)
+from src.a18_etl_toolbox.db_obj_belief_tool import get_belief_dict_from_voice_tables
+from src.a18_etl_toolbox.db_obj_believer_tool import insert_job_obj
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_FISC_OTE1_AGG_SQLSTR,
-    INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR,
-    create_bridge_exists_in_label_error_update_sqlstr,
-    create_bridge_exists_in_name_error_update_sqlstr,
+    CREATE_BELIEF_OTE1_AGG_SQLSTR,
+    CREATE_BELIEF_PARTNER_NETS_SQLSTR,
+    INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_core_agg_into_vld_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     create_job_tables,
+    create_knot_exists_in_label_error_update_sqlstr,
+    create_knot_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
     create_sound_agg_insert_sqlstrs,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
-    create_update_pidlabe_sound_agg_bridge_error_sqlstr,
-    create_update_pidname_sound_agg_bridge_error_sqlstr,
-    create_update_pidtitl_sound_agg_bridge_error_sqlstr,
-    create_update_pidwayy_sound_agg_bridge_error_sqlstr,
+    create_update_pidlabe_sound_agg_knot_error_sqlstr,
+    create_update_pidname_sound_agg_knot_error_sqlstr,
+    create_update_pidrope_sound_agg_knot_error_sqlstr,
+    create_update_pidtitl_sound_agg_knot_error_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     create_update_voice_raw_existing_inx_col_sqlstr,
-    get_bud_voice_agg_tablenames,
-    get_fisc_bud_sound_agg_tablenames,
+    get_belief_believer_sound_agg_tablenames,
+    get_believer_voice_agg_tablenames,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_insert_voice_agg_sqlstrs,
 )
 
 
-def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
-    for ref in get_all_idea_dataframes(mud_dir):
+def etl_input_dfs_to_brick_raw_tables(cursor: sqlite3_Cursor, input_dir: str):
+    idea_sqlite_types = get_idea_sqlite_types()
+
+    for ref in get_all_idea_dataframes(input_dir):
         x_file_path = create_path(ref.file_dir, ref.filename)
         df = pandas_read_excel(x_file_path, ref.sheet_name)
         idea_sorting_columns = get_default_sorted_list(set(df.columns))
@@ -131,19 +133,50 @@ def etl_mud_dfs_to_brick_raw_tables(conn: sqlite3_Connection, mud_dir: str):
         df.insert(1, "filename", ref.filename)
         df.insert(2, "sheet_name", ref.sheet_name)
         x_tablename = f"{ref.idea_number}_brick_raw"
-        df.to_sql(x_tablename, conn, index=False, if_exists="append")
+        column_names = list(df.columns)
+        column_names.append("error_message")
+        create_table_sqlstr = get_create_table_sqlstr(
+            x_tablename, column_names, idea_sqlite_types
+        )
+        cursor.execute(create_table_sqlstr)
+
+        for idx, row in df.iterrows():
+            row_dict = row.to_dict()
+            nonconvertible_columns = get_nonconvertible_columns(
+                row_dict, idea_sqlite_types
+            )
+            error_message = None
+            if nonconvertible_columns:
+                error_message = ""
+                for issue_col, issue_value in nonconvertible_columns.items():
+                    if error_message:
+                        error_message += ", "
+                    error_message += f"{issue_col}: {issue_value}"
+                error_message = f"Conversion errors: {error_message}"
+            row_values = list(row)
+            row_values.append(error_message)
+            # Set value to None for non-convertible columns
+            for x_index, col in enumerate(column_names):
+                if nonconvertible_columns.get(col):
+                    row_values[x_index] = None
+            insert_sqlstr = create_type_reference_insert_sqlstr(
+                x_tablename, column_names, row_values
+            )
+            cursor.execute(insert_sqlstr)
 
 
-def etl_brick_raw_db_to_brick_raw_df(conn: sqlite3_Connection, brick_dir: str):
-    brick_raw_dict = {f"{idea}_brick_raw": idea for idea in get_idea_numbers()}
-    brick_raw_tables = set(brick_raw_dict.keys())
-    for table_name in get_db_tables(conn):
-        if table_name in brick_raw_tables:
-            idea_number = brick_raw_dict.get(table_name)
-            brick_path = create_path(brick_dir, f"{idea_number}.xlsx")
-            sqlstr = f"SELECT * FROM {table_name}"
-            brick_raw_idea_df = pandas_read_sql_query(sqlstr, conn)
-            upsert_sheet(brick_path, "brick_raw", brick_raw_idea_df)
+def get_max_brick_agg_event_int(cursor: sqlite3_Cursor) -> int:
+    agg_tables = get_db_tables(cursor, "brick_agg")
+    brick_aggs_max_event_int = 0
+    for agg_table in agg_tables:
+        if agg_table.startswith("br") and agg_table.endswith("brick_agg"):
+            sqlstr = f"SELECT MAX(event_int) FROM {agg_table}"
+            table_max_event_int = cursor.execute(sqlstr).fetchone()[0]
+            if not table_max_event_int:
+                table_max_event_int = 1
+            if table_max_event_int > brick_aggs_max_event_int:
+                brick_aggs_max_event_int = table_max_event_int
+    return brick_aggs_max_event_int
 
 
 def get_existing_excel_idea_file_refs(x_dir: str) -> list[IdeaFileRef]:
@@ -182,6 +215,7 @@ def etl_brick_raw_tables_to_brick_agg_tables(conn_or_cursor: sqlite3_Connection)
                 x_table=x_tablename,
                 groupby_columns=key_columns_list,
                 value_columns=value_columns_list,
+                where_clause="WHERE error_message IS NULL",
             )
             insert_clause_sqlstr = create_insert_into_clause_str(
                 conn_or_cursor,
@@ -227,7 +261,7 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
             conn_or_cursor.execute(insert_select_into_sqlstr)
 
 
-def etl_brick_raw_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
+def etl_brick_agg_tables_to_events_brick_agg_table(conn_or_cursor: sqlite3_Cursor):
     brick_events_tablename = "events_brick_agg"
     if not db_table_exists(conn_or_cursor, brick_events_tablename):
         brick_events_columns = [
@@ -337,12 +371,12 @@ def get_sound_raw_tablenames(
     valid_columns = set(get_table_columns(cursor, brick_valid_tablename))
     s_raw_tables = set()
     for dimen in dimens:
-        if dimen.lower().startswith("bud"):
-            bud_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
-            bud_del_columns = get_table_columns(cursor, bud_del_tablename)
-            delete_key = bud_del_columns[-1]
+        if dimen.lower().startswith("believer"):
+            believer_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+            believer_del_columns = get_table_columns(cursor, believer_del_tablename)
+            delete_key = believer_del_columns[-1]
             if delete_key in valid_columns:
-                s_raw_tables.add(bud_del_tablename)
+                s_raw_tables.add(believer_del_tablename)
             else:
                 s_raw_tables.add(create_prime_tablename(dimen, "s", "raw", "put"))
         else:
@@ -389,17 +423,23 @@ def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
 
 
 def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
-    bridge = default_bridge_if_None()
+    knot = default_knot_if_None()
     unknown = default_unknown_str_if_None()
-    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(bridge, unknown)
+    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(knot, unknown)
     cursor.execute(insert_sqlstr)
 
 
 def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     sqlstr = create_update_inconsistency_error_query(
-        cursor, pidgin_core_s_raw_tablename, {"face_name"}, {"source_dimen"}
+        cursor,
+        x_tablename=pidgin_core_s_raw_tablename,
+        focus_columns={"face_name"},
+        exclude_columns={"source_dimen"},
+        error_holder_column="error_message",
+        error_str="Inconsistent data",
     )
+
     cursor.execute(sqlstr)
 
 
@@ -407,8 +447,8 @@ def insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
     sqlstr = f"""
-INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_bridge, inx_bridge, unknown_str)
-SELECT face_name, MAX(otx_bridge), MAX(inx_bridge), MAX(unknown_str)
+INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_knot, inx_knot, unknown_str)
+SELECT face_name, MAX(otx_knot), MAX(inx_knot), MAX(unknown_str)
 FROM {pidgin_core_s_raw_tablename}
 WHERE error_message IS NULL
 GROUP BY face_name
@@ -421,11 +461,11 @@ def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
         cursor.execute(create_update_pidgin_sound_agg_inconsist_sqlstr(dimen))
 
 
-def update_pidgin_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
-    cursor.execute(create_update_pidlabe_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidwayy_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidname_sound_agg_bridge_error_sqlstr())
-    cursor.execute(create_update_pidtitl_sound_agg_bridge_error_sqlstr())
+def update_pidgin_sound_agg_knot_errors(cursor: sqlite3_Cursor):
+    cursor.execute(create_update_pidlabe_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_pidrope_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_pidname_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_pidtitl_sound_agg_knot_error_sqlstr())
 
 
 def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):
@@ -433,31 +473,33 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def set_fisc_bud_sound_agg_bridge_errors(cursor: sqlite3_Cursor):
+def set_belief_believer_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_label_args = get_pidgin_LabelTerm_args()
     pidgin_name_args = get_pidgin_NameTerm_args()
     pidgin_title_args = get_pidgin_TitleTerm_args()
-    pidgin_way_args = get_pidgin_WayTerm_args()
+    pidgin_rope_args = get_pidgin_RopeTerm_args()
     pidgin_args = copy_copy(pidgin_label_args)
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
-    pidgin_args.update(pidgin_way_args)
-    pidginable_tuples = get_fisc_bud_sound_agg_pidginable_columns(cursor, pidgin_args)
+    pidgin_args.update(pidgin_rope_args)
+    pidginable_tuples = get_belief_believer_sound_agg_pidginable_columns(
+        cursor, pidgin_args
+    )
     for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
         error_update_sqlstr = None
         if pidginable_columnname in pidgin_label_args:
-            error_update_sqlstr = create_bridge_exists_in_label_error_update_sqlstr(
+            error_update_sqlstr = create_knot_exists_in_label_error_update_sqlstr(
                 voice_raw_tablename, pidginable_columnname
             )
         if pidginable_columnname in pidgin_name_args:
-            error_update_sqlstr = create_bridge_exists_in_name_error_update_sqlstr(
+            error_update_sqlstr = create_knot_exists_in_name_error_update_sqlstr(
                 voice_raw_tablename, pidginable_columnname
             )
         if error_update_sqlstr:
             cursor.execute(error_update_sqlstr)
 
 
-def get_fisc_bud_sound_agg_pidginable_columns(
+def get_belief_believer_sound_agg_pidginable_columns(
     cursor: sqlite3_Cursor, pidgin_args: set[str]
 ) -> set[tuple[str, str]]:
     pidgin_columns = set()
@@ -471,11 +513,11 @@ def get_fisc_bud_sound_agg_pidginable_columns(
 
 
 def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
-    for agg_tablename in get_fisc_bud_sound_agg_tablenames():
+    for agg_tablename in get_belief_believer_sound_agg_tablenames():
         insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-            default_bridge=default_bridge_if_None(),
+            default_knot=default_knot_if_None(),
             default_unknown=default_unknown_str_if_None(),
-            fisc_bud_sound_agg_tablename=agg_tablename,
+            belief_believer_sound_agg_tablename=agg_tablename,
         )
         cursor.execute(insert_sqlstr)
 
@@ -487,7 +529,7 @@ def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Curso
     insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
     populate_pidgin_core_vld_with_missing_face_names(cursor)
     update_pidgin_sound_agg_inconsist_errors(cursor)
-    update_pidgin_sound_agg_bridge_errors(cursor)
+    update_pidgin_sound_agg_knot_errors(cursor)
     insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
 
 
@@ -530,7 +572,7 @@ def set_voice_raw_inx_column(
     column_without_otx: str,
     arg_class_type: str,
 ):
-    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "WayTerm"}:
+    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}:
         pidgin_type_abbv = ""
         if arg_class_type == "NameTerm":
             pidgin_type_abbv = "name"
@@ -538,8 +580,8 @@ def set_voice_raw_inx_column(
             pidgin_type_abbv = "title"
         elif arg_class_type == "LabelTerm":
             pidgin_type_abbv = "label"
-        elif arg_class_type == "WayTerm":
-            pidgin_type_abbv = "way"
+        elif arg_class_type == "RopeTerm":
+            pidgin_type_abbv = "rope"
         update_calc_inx_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
             pidgin_type_abbv, voice_raw_tablename, column_without_otx
         )
@@ -555,16 +597,14 @@ def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
         cursor.execute(insert_voice_agg_sqlstr)
 
 
-def etl_voice_agg_tables_to_fisc_jsons(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
-    fisc_filename = "fisc.json"
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    select_fisc_label_sqlstr = """SELECT fisc_label FROM fiscunit_v_agg;"""
-    cursor.execute(select_fisc_label_sqlstr)
-    for fisc_label_set in cursor.fetchall():
-        fisc_label = fisc_label_set[0]
-        fisc_dict = get_fisc_dict_from_voice_tables(cursor, fisc_label)
-        fiscunit_dir = create_path(fiscs_dir, fisc_label)
-        save_json(fiscunit_dir, fisc_filename, fisc_dict)
+def etl_voice_agg_tables_to_belief_jsons(cursor: sqlite3_Cursor, belief_mstr_dir: str):
+    select_belief_label_sqlstr = """SELECT belief_label FROM beliefunit_v_agg;"""
+    cursor.execute(select_belief_label_sqlstr)
+    for belief_label_set in cursor.fetchall():
+        belief_label = belief_label_set[0]
+        belief_dict = get_belief_dict_from_voice_tables(cursor, belief_label)
+        belief_json_path = create_belief_json_path(belief_mstr_dir, belief_label)
+        save_json(belief_json_path, None, belief_dict)
 
 
 def etl_brick_valid_table_into_prime_table(
@@ -612,46 +652,6 @@ def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: st
     split_excel_into_dirs(pidgin_file, face_dir, "event_int", "pidgin", sheet_name)
 
 
-def _get_all_syntax_otz_dir_event_dirs(faces_dir) -> list[str]:
-    full_event_dirs = []
-    for face_name_dir in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name_dir)
-        event_dirs = get_dir_file_strs(face_dir, include_dirs=True, include_files=False)
-        full_event_dirs.extend(
-            create_path(face_dir, event_dir) for event_dir in event_dirs.keys()
-        )
-    return full_event_dirs
-
-
-def etl_event_pidgin_csvs_to_pidgin_json(event_dir: str):
-    pidginunit = init_pidginunit_from_dir(event_dir)
-    save_file(event_dir, "pidgin.json", pidginunit.get_json(), replace=True)
-
-
-def get_event_pidgin_path(
-    faces_dir: str, face_name: FaceName, pidgin_event_int: EventInt
-):
-    face_dir = create_path(faces_dir, face_name)
-    event_dir = create_path(face_dir, pidgin_event_int)
-    return create_path(event_dir, "pidgin.json")
-
-
-def get_pidgin_events_by_dirs(faces_dir: str) -> dict[FaceName, set[EventInt]]:
-    pidgin_events = {}
-    for face_name in get_level1_dirs(faces_dir):
-        face_dir = create_path(faces_dir, face_name)
-        for event_int in get_level1_dirs(face_dir):
-            event_dir = create_path(face_dir, event_int)
-            pidgin_path = create_path(event_dir, "pidgin.json")
-            if os_path_exists(pidgin_path):
-                if pidgin_events.get(face_name) is None:
-                    pidgin_events[face_name] = {int(event_int)}
-                else:
-                    events_list = pidgin_events.get(face_name)
-                    events_list.add(int(event_int))
-    return pidgin_events
-
-
 def get_most_recent_event_int(
     event_set: set[EventInt], max_event_int: EventInt
 ) -> EventInt:
@@ -659,237 +659,285 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_voice_raw_tables_to_fisc_ote1_agg(conn_or_cursor: sqlite3_Connection):
-    conn_or_cursor.execute(CREATE_FISC_OTE1_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR)
+def etl_voice_raw_tables_to_belief_ote1_agg(conn_or_cursor: sqlite3_Connection):
+    conn_or_cursor.execute(CREATE_BELIEF_OTE1_AGG_SQLSTR)
+    conn_or_cursor.execute(INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR)
 
 
-def etl_fisc_ote1_agg_table_to_fisc_ote1_agg_csvs(
-    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
+def etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs(
+    conn_or_cursor: sqlite3_Connection, belief_mstr_dir: str
 ):
-    empty_ote1_csv_str = """fisc_label,owner_name,event_int,deal_time,error_message
+    empty_ote1_csv_str = """belief_label,believer_name,event_int,bud_time,error_message
 """
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        ote1_csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_label)
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        ote1_csv_path = create_belief_ote1_csv_path(belief_mstr_dir, belief_label)
         save_file(ote1_csv_path, None, empty_ote1_csv_str)
 
-    save_to_split_csvs(conn_or_cursor, "fisc_ote1_agg", ["fisc_label"], fiscs_dir)
+    save_to_split_csvs(conn_or_cursor, "belief_ote1_agg", ["belief_label"], beliefs_dir)
 
 
-def etl_fisc_ote1_agg_csvs_to_jsons(fisc_mstr_dir: str):
+def etl_belief_ote1_agg_csvs_to_jsons(belief_mstr_dir: str):
     idea_types = get_idea_sqlite_types()
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        csv_path = create_fisc_ote1_csv_path(fisc_mstr_dir, fisc_label)
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        csv_path = create_belief_ote1_csv_path(belief_mstr_dir, belief_label)
         csv_arrays = open_csv_with_types(csv_path, idea_types)
         x_dict = {}
         header_row = csv_arrays.pop(0)
         for row in csv_arrays:
-            owner_name = row[1]
+            believer_name = row[1]
             event_int = row[2]
-            deal_time = row[3]
-            if x_dict.get(owner_name) is None:
-                x_dict[owner_name] = {}
-            owner_dict = x_dict.get(owner_name)
-            owner_dict[int(deal_time)] = event_int
-        json_path = create_fisc_ote1_json_path(fisc_mstr_dir, fisc_label)
+            bud_time = row[3]
+            if x_dict.get(believer_name) is None:
+                x_dict[believer_name] = {}
+            believer_dict = x_dict.get(believer_name)
+            believer_dict[int(bud_time)] = event_int
+        json_path = create_belief_ote1_json_path(belief_mstr_dir, belief_label)
         save_json(json_path, None, x_dict)
 
 
-def etl_create_deals_root_cells(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        fisc_dir = create_path(fiscs_dir, fisc_label)
-        ote1_json_path = create_path(fisc_dir, "fisc_ote1_agg.json")
+def etl_create_buds_root_cells(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        belief_dir = create_path(beliefs_dir, belief_label)
+        ote1_json_path = create_path(belief_dir, "belief_ote1_agg.json")
         if os_path_exists(ote1_json_path):
             ote1_dict = open_json(ote1_json_path)
-            x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_label)
-            x_fiscunit.create_deals_root_cells(ote1_dict)
+            x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
+            x_beliefunit.create_buds_root_cells(ote1_dict)
 
 
-def etl_create_fisc_cell_trees(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        create_fisc_owners_cell_trees(fisc_mstr_dir, fisc_label)
+def etl_create_belief_cell_trees(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        create_belief_believers_cell_trees(belief_mstr_dir, belief_label)
 
 
-def etl_set_cell_trees_found_facts(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        set_cell_trees_found_facts(fisc_mstr_dir, fisc_label)
+def etl_set_cell_trees_found_facts(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        set_cell_trees_found_facts(belief_mstr_dir, belief_label)
 
 
-def etl_set_cell_trees_decrees(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        set_cell_trees_decrees(fisc_mstr_dir, fisc_label)
+def etl_set_cell_trees_decrees(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        set_cell_trees_decrees(belief_mstr_dir, belief_label)
 
 
-def etl_set_cell_tree_cell_mandates(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        set_cell_tree_cell_mandates(fisc_mstr_dir, fisc_label)
+def etl_set_cell_tree_cell_mandates(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        set_cell_tree_cell_mandates(belief_mstr_dir, belief_label)
 
 
-def etl_create_deal_mandate_ledgers(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        create_deal_mandate_ledgers(fisc_mstr_dir, fisc_label)
+def etl_create_bud_mandate_ledgers(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        create_bud_mandate_ledgers(belief_mstr_dir, belief_label)
 
 
-def etl_voice_agg_to_event_bud_csvs(
-    conn_or_cursor: sqlite3_Connection, fisc_mstr_dir: str
+def etl_voice_agg_to_event_believer_csvs(
+    conn_or_cursor: sqlite3_Connection, belief_mstr_dir: str
 ):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for bud_table in get_bud_voice_agg_tablenames():
-        if get_row_count(conn_or_cursor, bud_table) > 0:
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for believer_table in get_believer_voice_agg_tablenames():
+        if get_row_count(conn_or_cursor, believer_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
-                tablename=bud_table,
-                key_columns=["fisc_label", "owner_name", "event_int"],
-                output_dir=fiscs_dir,
-                col1_prefix="owners",
+                tablename=believer_table,
+                key_columns=["belief_label", "believer_name", "event_int"],
+                dst_dir=beliefs_dir,
+                col1_prefix="believers",
                 col2_prefix="events",
             )
 
 
-def etl_event_bud_csvs_to_pack_json(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_label)
-        owners_path = create_path(fisc_path, "owners")
-        for owner_name in get_level1_dirs(owners_path):
-            owner_path = create_path(owners_path, owner_name)
-            events_path = create_path(owner_path, "events")
+def etl_event_believer_csvs_to_pack_json(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        belief_path = create_path(beliefs_dir, belief_label)
+        believers_path = create_path(belief_path, "believers")
+        for believer_name in get_level1_dirs(believers_path):
+            believer_path = create_path(believers_path, believer_name)
+            events_path = create_path(believer_path, "events")
             for event_int in get_level1_dirs(events_path):
                 event_pack = packunit_shop(
-                    owner_name=owner_name,
+                    believer_name=believer_name,
                     face_name=None,
-                    fisc_label=fisc_label,
+                    belief_label=belief_label,
                     event_int=event_int,
                 )
                 event_dir = create_path(events_path, event_int)
-                add_budatoms_from_csv(event_pack, event_dir)
+                add_believeratoms_from_csv(event_pack, event_dir)
                 event_all_pack_path = create_event_all_pack_path(
-                    fisc_mstr_dir, fisc_label, owner_name, event_int
+                    belief_mstr_dir, belief_label, believer_name, event_int
                 )
                 save_file(event_all_pack_path, None, event_pack.get_json())
 
 
-def add_budatoms_from_csv(event_pack: PackUnit, event_dir: str):
+def add_believeratoms_from_csv(event_pack: PackUnit, event_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
-    bud_dimens = get_bud_dimens()
-    bud_dimens.remove("budunit")
-    for bud_dimen in bud_dimens:
-        bud_dimen_put_tablename = create_prime_tablename(bud_dimen, "v", "agg", "put")
-        bud_dimen_del_tablename = create_prime_tablename(bud_dimen, "v", "agg", "del")
-        bud_dimen_put_csv = f"{bud_dimen_put_tablename}.csv"
-        bud_dimen_del_csv = f"{bud_dimen_del_tablename}.csv"
-        put_path = create_path(event_dir, bud_dimen_put_csv)
-        del_path = create_path(event_dir, bud_dimen_del_csv)
+    believer_dimens = get_believer_dimens()
+    believer_dimens.remove("believerunit")
+    for believer_dimen in believer_dimens:
+        believer_dimen_put_tablename = create_prime_tablename(
+            believer_dimen, "v", "agg", "put"
+        )
+        believer_dimen_del_tablename = create_prime_tablename(
+            believer_dimen, "v", "agg", "del"
+        )
+        believer_dimen_put_csv = f"{believer_dimen_put_tablename}.csv"
+        believer_dimen_del_csv = f"{believer_dimen_del_tablename}.csv"
+        put_path = create_path(event_dir, believer_dimen_put_csv)
+        del_path = create_path(event_dir, believer_dimen_del_csv)
         if os_path_exists(put_path):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
             for put_row in put_rows:
-                x_atom = budatom_shop(bud_dimen, "INSERT")
+                x_atom = believeratom_shop(believer_dimen, "INSERT")
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "fisc_label",
-                        "owner_name",
+                        "belief_label",
+                        "believer_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._buddelta.set_budatom(x_atom)
+                event_pack._believerdelta.set_believeratom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
             headers = del_rows.pop(0)
             for del_row in del_rows:
-                x_atom = budatom_shop(bud_dimen, "DELETE")
+                x_atom = believeratom_shop(believer_dimen, "DELETE")
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
                         "event_int",
-                        "fisc_label",
-                        "owner_name",
+                        "belief_label",
+                        "believer_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._buddelta.set_budatom(x_atom)
+                event_pack._believerdelta.set_believeratom(x_atom)
 
 
-def etl_event_pack_json_to_event_inherited_budunits(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_label)
-        owners_dir = create_path(fisc_path, "owners")
-        for owner_name in get_level1_dirs(owners_dir):
-            owner_dir = create_path(owners_dir, owner_name)
-            events_dir = create_path(owner_dir, "events")
+def etl_event_pack_json_to_event_inherited_believerunits(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        belief_path = create_path(beliefs_dir, belief_label)
+        believers_dir = create_path(belief_path, "believers")
+        for believer_name in get_level1_dirs(believers_dir):
+            believer_dir = create_path(believers_dir, believer_name)
+            events_dir = create_path(believer_dir, "events")
             prev_event_int = None
             for event_int in get_level1_dirs(events_dir):
-                prev_bud = _get_prev_event_int_budunit(
-                    fisc_mstr_dir, fisc_label, owner_name, prev_event_int
+                prev_believer = _get_prev_event_int_believerunit(
+                    belief_mstr_dir, belief_label, believer_name, prev_event_int
                 )
-                budevent_path = create_budevent_path(
-                    fisc_mstr_dir, fisc_label, owner_name, event_int
+                believerevent_path = create_believerevent_path(
+                    belief_mstr_dir, belief_label, believer_name, event_int
                 )
-                event_dir = create_owner_event_dir_path(
-                    fisc_mstr_dir, fisc_label, owner_name, event_int
+                event_dir = create_believer_event_dir_path(
+                    belief_mstr_dir, belief_label, believer_name, event_int
                 )
 
                 event_all_pack_path = create_event_all_pack_path(
-                    fisc_mstr_dir, fisc_label, owner_name, event_int
+                    belief_mstr_dir, belief_label, believer_name, event_int
                 )
                 event_pack = get_packunit_from_json(open_file(event_all_pack_path))
-                sift_delta = get_minimal_buddelta(event_pack._buddelta, prev_bud)
-                curr_bud = event_pack.get_edited_bud(prev_bud)
-                save_file(budevent_path, None, curr_bud.get_json())
+                sift_delta = get_minimal_believerdelta(
+                    event_pack._believerdelta, prev_believer
+                )
+                curr_believer = event_pack.get_edited_believer(prev_believer)
+                save_file(believerevent_path, None, curr_believer.get_json())
                 expressed_pack = copy_deepcopy(event_pack)
-                expressed_pack.set_buddelta(sift_delta)
+                expressed_pack.set_believerdelta(sift_delta)
                 save_file(event_dir, "expressed_pack.json", expressed_pack.get_json())
                 prev_event_int = event_int
 
 
-def _get_prev_event_int_budunit(
-    fisc_mstr_dir, fisc_label, owner_name, prev_event_int
-) -> BudUnit:
+def _get_prev_event_int_believerunit(
+    belief_mstr_dir, belief_label, believer_name, prev_event_int
+) -> BelieverUnit:
     if prev_event_int is None:
-        return budunit_shop(owner_name, fisc_label)
-    prev_budevent_path = create_budevent_path(
-        fisc_mstr_dir, fisc_label, owner_name, prev_event_int
+        return believerunit_shop(believer_name, belief_label)
+    prev_believerevent_path = create_believerevent_path(
+        belief_mstr_dir, belief_label, believer_name, prev_event_int
     )
-    return open_bud_file(prev_budevent_path)
+    return open_believer_file(prev_believerevent_path)
 
 
-def etl_event_inherited_budunits_to_fisc_gut(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        owner_events = collect_owner_event_dir_sets(fisc_mstr_dir, fisc_label)
-        owners_max_event_int_dict = get_owners_downhill_event_ints(owner_events)
-        for owner_name, max_event_int in owners_max_event_int_dict.items():
-            max_budevent_path = create_budevent_path(
-                fisc_mstr_dir, fisc_label, owner_name, max_event_int
+def etl_event_inherited_believerunits_to_belief_gut(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        believer_events = collect_believer_event_dir_sets(belief_mstr_dir, belief_label)
+        believers_max_event_int_dict = get_believers_downhill_event_ints(
+            believer_events
+        )
+        for believer_name, max_event_int in believers_max_event_int_dict.items():
+            max_believerevent_path = create_believerevent_path(
+                belief_mstr_dir, belief_label, believer_name, max_event_int
             )
-            max_event_bud_json = open_file(max_budevent_path)
-            gut_path = create_gut_path(fisc_mstr_dir, fisc_label, owner_name)
-            save_file(gut_path, None, max_event_bud_json)
+            max_event_believer_json = open_file(max_believerevent_path)
+            gut_path = create_gut_path(belief_mstr_dir, belief_label, believer_name)
+            save_file(gut_path, None, max_event_believer_json)
 
 
-def etl_fisc_guts_to_fisc_jobs(fisc_mstr_dir: str):
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        x_fiscunit = fiscunit_get_from_default_path(fisc_mstr_dir, fisc_label)
-        x_fiscunit.generate_all_jobs()
+def add_belief_timeline_to_guts(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
+        x_beliefunit.add_timeline_to_guts()
 
 
-def etl_fisc_job_jsons_to_job_tables(cursor: sqlite3_Cursor, fisc_mstr_dir: str):
+def etl_belief_guts_to_belief_jobs(belief_mstr_dir: str):
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
+        x_beliefunit.generate_all_jobs()
+
+
+def etl_belief_job_jsons_to_job_tables(cursor: sqlite3_Cursor, belief_mstr_dir: str):
     create_job_tables(cursor)
-    fiscs_dir = create_path(fisc_mstr_dir, "fiscs")
-    for fisc_label in get_level1_dirs(fiscs_dir):
-        fisc_path = create_path(fiscs_dir, fisc_label)
-        owners_dir = create_path(fisc_path, "owners")
-        for owner_name in get_level1_dirs(owners_dir):
-            job_obj = open_job_file(fisc_mstr_dir, fisc_label, owner_name)
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        belief_path = create_path(beliefs_dir, belief_label)
+        believers_dir = create_path(belief_path, "believers")
+        for believer_name in get_level1_dirs(believers_dir):
+            job_obj = open_job_file(belief_mstr_dir, belief_label, believer_name)
             insert_job_obj(cursor, job_obj)
+
+
+def insert_tranunit_partners_net(cursor: sqlite3_Cursor, tranbook: TranBook):
+    """
+    Insert the net amounts for each account in the tranbook into the specified table.
+
+    :param cursor: SQLite cursor object
+    :param tranbook: TranBook object containing transaction units
+    :param dst_tablename: Name of the destination table
+    """
+    partners_net_array = tranbook._get_partners_net_array()
+    cursor.executemany(
+        f"INSERT INTO belief_partner_nets (belief_label, believer_name, believer_net_amount) VALUES ('{tranbook.belief_label}', ?, ?)",
+        partners_net_array,
+    )
+
+
+def etl_belief_json_partner_nets_to_belief_partner_nets_table(
+    cursor: sqlite3_Cursor, belief_mstr_dir: str
+):
+    cursor.execute(CREATE_BELIEF_PARTNER_NETS_SQLSTR)
+    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
+    for belief_label in get_level1_dirs(beliefs_dir):
+        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
+        x_beliefunit.set_all_tranbook()
+        insert_tranunit_partners_net(cursor, x_beliefunit._all_tranbook)
+
+
+def create_last_run_metrics_json(cursor: sqlite3_Cursor, belief_mstr_dir: str):
+    max_brick_agg_event_int = get_max_brick_agg_event_int(cursor)
+    last_run_metrics_path = create_last_run_metrics_path(belief_mstr_dir)
+    last_run_metrics_dict = {"max_brick_agg_event_int": max_brick_agg_event_int}
+    save_json(last_run_metrics_path, None, last_run_metrics_dict)

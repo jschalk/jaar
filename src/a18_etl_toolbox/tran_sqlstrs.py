@@ -13,52 +13,52 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 
 ALL_DIMEN_ABBV7 = {
-    "FISCASH",
-    "FISDEAL",
-    "FISHOUR",
-    "FISMONT",
-    "FISWEEK",
-    "FISOFFI",
-    "FISUNIT",
-    "BUDMEMB",
-    "BUDACCT",
-    "BUDAWAR",
-    "BUDFACT",
-    "BUDHEAL",
-    "BUDPREM",
-    "BUDREAS",
-    "BUDLABO",
-    "BUDCONC",
-    "BUDUNIT",
+    "BLFPAYY",
+    "BLFBUDD",
+    "BLFHOUR",
+    "BLFMONT",
+    "BLFWEEK",
+    "BLFOFFI",
+    "BLFUNIT",
+    "BLRMEMB",
+    "BLRPERN",
+    "BLRAWAR",
+    "BLRFACT",
+    "BLRHEAL",
+    "BLRPREM",
+    "BLRREAS",
+    "BLRLABO",
+    "BLRPLAN",
+    "BLRUNIT",
     "PIDTITL",
     "PIDNAME",
-    "PIDWAYY",
+    "PIDROPE",
     "PIDLABE",
 }
 
 
 def get_dimen_abbv7(dimen: str) -> str:
     return {
-        "fisc_cashbook": "FISCASH",
-        "fisc_dealunit": "FISDEAL",
-        "fisc_timeline_hour": "FISHOUR",
-        "fisc_timeline_month": "FISMONT",
-        "fisc_timeline_weekday": "FISWEEK",
-        "fisc_timeoffi": "FISOFFI",
-        "fiscunit": "FISUNIT",
-        "bud_acct_membership": "BUDMEMB",
-        "bud_acctunit": "BUDACCT",
-        "bud_concept_awardlink": "BUDAWAR",
-        "bud_concept_factunit": "BUDFACT",
-        "bud_concept_healerlink": "BUDHEAL",
-        "bud_concept_reason_premiseunit": "BUDPREM",
-        "bud_concept_reasonunit": "BUDREAS",
-        "bud_concept_laborlink": "BUDLABO",
-        "bud_conceptunit": "BUDCONC",
-        "budunit": "BUDUNIT",
+        "belief_paybook": "BLFPAYY",
+        "belief_budunit": "BLFBUDD",
+        "belief_timeline_hour": "BLFHOUR",
+        "belief_timeline_month": "BLFMONT",
+        "belief_timeline_weekday": "BLFWEEK",
+        "belief_timeoffi": "BLFOFFI",
+        "beliefunit": "BLFUNIT",
+        "believer_partner_membership": "BLRMEMB",
+        "believer_partnerunit": "BLRPERN",
+        "believer_plan_awardlink": "BLRAWAR",
+        "believer_plan_factunit": "BLRFACT",
+        "believer_plan_healerlink": "BLRHEAL",
+        "believer_plan_reason_caseunit": "BLRPREM",
+        "believer_plan_reasonunit": "BLRREAS",
+        "believer_plan_laborlink": "BLRLABO",
+        "believer_planunit": "BLRPLAN",
+        "believerunit": "BLRUNIT",
         "pidgin_title": "PIDTITL",
         "pidgin_name": "PIDNAME",
-        "pidgin_way": "PIDWAYY",
+        "pidgin_rope": "PIDROPE",
         "pidgin_label": "PIDLABE",
         "pidgin_core": "PIDCORE",
     }.get(dimen)
@@ -77,27 +77,27 @@ def create_prime_tablename(
     """
 
     abbv_references = {
-        "FISCASH": "fisc_cashbook",
-        "FISDEAL": "fisc_dealunit",
-        "FISHOUR": "fisc_timeline_hour",
-        "FISMONT": "fisc_timeline_month",
-        "FISWEEK": "fisc_timeline_weekday",
-        "FISOFFI": "fisc_timeoffi",
-        "FISUNIT": "fiscunit",
-        "BUDMEMB": "bud_acct_membership",
-        "BUDACCT": "bud_acctunit",
-        "BUDAWAR": "bud_concept_awardlink",
-        "BUDFACT": "bud_concept_factunit",
-        "BUDGROU": "bud_groupunit",
-        "BUDHEAL": "bud_concept_healerlink",
-        "BUDPREM": "bud_concept_reason_premiseunit",
-        "BUDREAS": "bud_concept_reasonunit",
-        "BUDLABO": "bud_concept_laborlink",
-        "BUDCONC": "bud_conceptunit",
-        "BUDUNIT": "budunit",
+        "BLFPAYY": "belief_paybook",
+        "BLFBUDD": "belief_budunit",
+        "BLFHOUR": "belief_timeline_hour",
+        "BLFMONT": "belief_timeline_month",
+        "BLFWEEK": "belief_timeline_weekday",
+        "BLFOFFI": "belief_timeoffi",
+        "BLFUNIT": "beliefunit",
+        "BLRMEMB": "believer_partner_membership",
+        "BLRPERN": "believer_partnerunit",
+        "BLRAWAR": "believer_plan_awardlink",
+        "BLRFACT": "believer_plan_factunit",
+        "BLRGROU": "believer_groupunit",
+        "BLRHEAL": "believer_plan_healerlink",
+        "BLRPREM": "believer_plan_reason_caseunit",
+        "BLRREAS": "believer_plan_reasonunit",
+        "BLRLABO": "believer_plan_laborlink",
+        "BLRPLAN": "believer_planunit",
+        "BLRUNIT": "believerunit",
         "PIDTITL": "pidgin_title",
         "PIDNAME": "pidgin_name",
-        "PIDWAYY": "pidgin_way",
+        "PIDROPE": "pidgin_rope",
         "PIDLABE": "pidgin_label",
         "PIDCORE": "pidgin_core",
     }
@@ -114,159 +114,159 @@ def create_prime_tablename(
     return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
 
-CREATE_PIDTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDTITL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDTITL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
 CREATE_PIDTITL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_title_s_vld (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT)"""
-CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
 CREATE_PIDNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT)"""
-CREATE_PIDWAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDWAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_agg (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDWAYY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_way_s_vld (event_int INTEGER, face_name TEXT, otx_way TEXT, inx_way TEXT)"""
-CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDROPE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_rope_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDROPE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_rope_s_agg (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDROPE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_rope_s_vld (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT)"""
+CREATE_PIDLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
 CREATE_PIDLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_label_s_vld (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT)"""
 
-CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT)"""
-CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_bridge TEXT, inx_bridge TEXT, unknown_str TEXT)"""
+CREATE_PIDCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_raw (source_dimen TEXT, face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_PIDCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_agg (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
+CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vld (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
 
-CREATE_FISCASH_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCASH_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCASH_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISCASH_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_FISCASH_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_cashbook_v_agg (fisc_label TEXT, owner_name TEXT, acct_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_FISDEAL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISDEAL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISDEAL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISDEAL_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, deal_time INTEGER, quota REAL, celldepth INT, error_message TEXT)"""
-CREATE_FISDEAL_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_dealunit_v_agg (fisc_label TEXT, owner_name TEXT, deal_time INTEGER, quota REAL, celldepth INT)"""
-CREATE_FISHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, cumlative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
-CREATE_FISHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, cumlative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
-CREATE_FISHOUR_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, cumlative_minute INTEGER, hour_label TEXT)"""
-CREATE_FISHOUR_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, cumlative_minute INTEGER, hour_label_otx TEXT, hour_label_inx TEXT, error_message TEXT)"""
-CREATE_FISHOUR_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_hour_v_agg (fisc_label TEXT, cumlative_minute INTEGER, hour_label TEXT)"""
-CREATE_FISMONT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, cumlative_day INTEGER, month_label TEXT, error_message TEXT)"""
-CREATE_FISMONT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, cumlative_day INTEGER, month_label TEXT, error_message TEXT)"""
-CREATE_FISMONT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, cumlative_day INTEGER, month_label TEXT)"""
-CREATE_FISMONT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, cumlative_day INTEGER, month_label_otx TEXT, month_label_inx TEXT, error_message TEXT)"""
-CREATE_FISMONT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_month_v_agg (fisc_label TEXT, cumlative_day INTEGER, month_label TEXT)"""
-CREATE_FISWEEK_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, weekday_order INTEGER, weekday_label TEXT, error_message TEXT)"""
-CREATE_FISWEEK_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, weekday_order INTEGER, weekday_label TEXT, error_message TEXT)"""
-CREATE_FISWEEK_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
-CREATE_FISWEEK_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, weekday_order INTEGER, weekday_label_otx TEXT, weekday_label_inx TEXT, error_message TEXT)"""
-CREATE_FISWEEK_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeline_weekday_v_agg (fisc_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
-CREATE_FISOFFI_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, offi_time INTEGER)"""
-CREATE_FISOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_FISOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fisc_timeoffi_v_agg (fisc_label TEXT, offi_time INTEGER)"""
-CREATE_FISUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_FISUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_FISUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_s_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
-CREATE_FISUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_FISUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS fiscunit_v_agg (fisc_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, bridge TEXT, job_listen_rotations INTEGER)"""
+CREATE_BLFPAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_BLFPAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_BLFPAYY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_BLFPAYY_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_BLFPAYY_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_paybook_v_agg (belief_label TEXT, believer_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_BLFBUDD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
+CREATE_BLFBUDD_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_budunit_v_agg (belief_label TEXT, believer_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
+CREATE_BLFHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
+CREATE_BLFHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
+CREATE_BLFHOUR_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT)"""
+CREATE_BLFHOUR_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, cumulative_minute INTEGER, hour_label_otx TEXT, hour_label_inx TEXT, error_message TEXT)"""
+CREATE_BLFHOUR_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_hour_v_agg (belief_label TEXT, cumulative_minute INTEGER, hour_label TEXT)"""
+CREATE_BLFMONT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_month_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_day INTEGER, month_label TEXT, error_message TEXT)"""
+CREATE_BLFMONT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_month_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_day INTEGER, month_label TEXT, error_message TEXT)"""
+CREATE_BLFMONT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_month_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, cumulative_day INTEGER, month_label TEXT)"""
+CREATE_BLFMONT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_month_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, cumulative_day INTEGER, month_label_otx TEXT, month_label_inx TEXT, error_message TEXT)"""
+CREATE_BLFMONT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_month_v_agg (belief_label TEXT, cumulative_day INTEGER, month_label TEXT)"""
+CREATE_BLFWEEK_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_weekday_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, weekday_order INTEGER, weekday_label TEXT, error_message TEXT)"""
+CREATE_BLFWEEK_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_weekday_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, weekday_order INTEGER, weekday_label TEXT, error_message TEXT)"""
+CREATE_BLFWEEK_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_weekday_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
+CREATE_BLFWEEK_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_weekday_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, weekday_order INTEGER, weekday_label_otx TEXT, weekday_label_inx TEXT, error_message TEXT)"""
+CREATE_BLFWEEK_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeline_weekday_v_agg (belief_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
+CREATE_BLFOFFI_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeoffi_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_BLFOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeoffi_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_BLFOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeoffi_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, offi_time INTEGER)"""
+CREATE_BLFOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeoffi_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_BLFOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS belief_timeoffi_v_agg (belief_label TEXT, offi_time INTEGER)"""
+CREATE_BLFUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS beliefunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS beliefunit_s_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS beliefunit_s_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
+CREATE_BLFUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS beliefunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS beliefunit_v_agg (belief_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
 
-CREATE_BUDMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
-CREATE_BUDMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, error_message TEXT)"
-CREATE_BUDMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT)"
-CREATE_BUDMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT, error_message TEXT)"
-CREATE_BUDMEMB_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT)"
-CREATE_BUDMEMB_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL)"
-CREATE_BUDMEMB_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
-CREATE_BUDMEMB_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acct_membership_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title_ERASE TEXT)"
-CREATE_BUDACCT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"
-CREATE_BUDACCT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, error_message TEXT)"
-CREATE_BUDACCT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
-CREATE_BUDACCT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name_ERASE TEXT, error_message TEXT)"
-CREATE_BUDACCT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
-CREATE_BUDACCT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_otx TEXT, acct_name_inx TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL)"
-CREATE_BUDACCT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, acct_name_ERASE_otx TEXT, acct_name_ERASE_inx TEXT)"
-CREATE_BUDACCT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_acctunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, acct_name_ERASE TEXT)"
-CREATE_BUDAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
-CREATE_BUDAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
-CREATE_BUDAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_BUDAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT, error_message TEXT)"
-CREATE_BUDAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_BUDAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BUDAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
-CREATE_BUDAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title_ERASE TEXT)"
-CREATE_BUDFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_BUDFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL, error_message TEXT)"
-CREATE_BUDFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_BUDFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT, error_message TEXT)"
-CREATE_BUDFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_BUDFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_otx TEXT, fcontext_inx TEXT, fstate_otx TEXT, fstate_inx TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"
-CREATE_BUDFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, fcontext_ERASE_otx TEXT, fcontext_ERASE_inx TEXT)"
-CREATE_BUDFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_factunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext_ERASE TEXT)"
-CREATE_BUDHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT, error_message TEXT)"
-CREATE_BUDHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT, error_message TEXT)"
-CREATE_BUDHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"
-CREATE_BUDHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT, error_message TEXT)"
-CREATE_BUDHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
-CREATE_BUDHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"
-CREATE_BUDHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
-CREATE_BUDHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, error_message TEXT)"
-CREATE_BUDPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
-CREATE_BUDPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT, error_message TEXT)"
-CREATE_BUDPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
-CREATE_BUDPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_otx TEXT, pstate_inx TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER)"
-CREATE_BUDPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, pstate_ERASE_otx TEXT, pstate_ERASE_inx TEXT)"
-CREATE_BUDPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate_ERASE TEXT)"
-CREATE_BUDREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, error_message TEXT)"
-CREATE_BUDREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, error_message TEXT)"
-CREATE_BUDREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER)"
-CREATE_BUDREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT)"
-CREATE_BUDREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT, error_message TEXT)"
-CREATE_BUDREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT)"
-CREATE_BUDREAS_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_otx TEXT, rcontext_inx TEXT, rconcept_active_requisite INTEGER)"
-CREATE_BUDREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER)"
-CREATE_BUDREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, rcontext_ERASE_otx TEXT, rcontext_ERASE_inx TEXT)"
-CREATE_BUDREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext_ERASE TEXT)"
-CREATE_BUDLABO_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, error_message TEXT)"
-CREATE_BUDLABO_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, error_message TEXT)"
-CREATE_BUDLABO_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT)"
-CREATE_BUDLABO_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT)"
-CREATE_BUDLABO_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT, error_message TEXT)"
-CREATE_BUDLABO_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT)"
-CREATE_BUDLABO_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, labor_title_otx TEXT, labor_title_inx TEXT)"
-CREATE_BUDLABO_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT)"
-CREATE_BUDLABO_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, labor_title_ERASE_otx TEXT, labor_title_ERASE_inx TEXT)"
-CREATE_BUDLABO_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_concept_laborlink_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title_ERASE TEXT)"
-CREATE_BUDCONC_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_BUDCONC_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, error_message TEXT)"
-CREATE_BUDCONC_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDCONC_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
-CREATE_BUDCONC_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way_ERASE TEXT, error_message TEXT)"
-CREATE_BUDCONC_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
-CREATE_BUDCONC_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_otx TEXT, concept_way_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDCONC_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER)"
-CREATE_BUDCONC_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, concept_way_ERASE_otx TEXT, concept_way_ERASE_inx TEXT)"
-CREATE_BUDCONC_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS bud_conceptunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, concept_way_ERASE TEXT)"
-CREATE_BUDUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_BUDUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, error_message TEXT)"
-CREATE_BUDUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS budunit_s_put_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name_ERASE TEXT)"
-CREATE_BUDUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name_ERASE TEXT, error_message TEXT)"
-CREATE_BUDUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS budunit_s_del_vld (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name_ERASE TEXT)"
-CREATE_BUDUNIT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_otx TEXT, owner_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_v_put_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL)"
-CREATE_BUDUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, fisc_label_otx TEXT, fisc_label_inx TEXT, owner_name_ERASE_otx TEXT, owner_name_ERASE_inx TEXT)"
-CREATE_BUDUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS budunit_v_del_agg (event_int INTEGER, face_name TEXT, fisc_label TEXT, owner_name_ERASE TEXT)"
+CREATE_BLRMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, error_message TEXT)"
+CREATE_BLRMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, error_message TEXT)"
+CREATE_BLRMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL)"
+CREATE_BLRMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
+CREATE_BLRMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title_ERASE TEXT, error_message TEXT)"
+CREATE_BLRMEMB_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
+CREATE_BLRMEMB_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, group_cred_points REAL, group_debt_points REAL)"
+CREATE_BLRMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL)"
+CREATE_BLRMEMB_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
+CREATE_BLRMEMB_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partner_membership_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
+CREATE_BLRPERN_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL, error_message TEXT)"
+CREATE_BLRPERN_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL, error_message TEXT)"
+CREATE_BLRPERN_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL)"
+CREATE_BLRPERN_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name_ERASE TEXT)"
+CREATE_BLRPERN_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name_ERASE TEXT, error_message TEXT)"
+CREATE_BLRPERN_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name_ERASE TEXT)"
+CREATE_BLRPERN_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, partner_cred_points REAL, partner_debt_points REAL)"
+CREATE_BLRPERN_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL)"
+CREATE_BLRPERN_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, partner_name_ERASE_otx TEXT, partner_name_ERASE_inx TEXT)"
+CREATE_BLRPERN_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_partnerunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, partner_name_ERASE TEXT)"
+CREATE_BLRAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
+CREATE_BLRAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
+CREATE_BLRAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_BLRAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_BLRAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT, error_message TEXT)"
+CREATE_BLRAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_BLRAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
+CREATE_BLRAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_BLRAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
+CREATE_BLRAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_awardlink_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_BLRFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context TEXT, f_state TEXT, f_lower REAL, f_upper REAL, error_message TEXT)"
+CREATE_BLRFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context TEXT, f_state TEXT, f_lower REAL, f_upper REAL, error_message TEXT)"
+CREATE_BLRFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context TEXT, f_state TEXT, f_lower REAL, f_upper REAL)"
+CREATE_BLRFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context_ERASE TEXT)"
+CREATE_BLRFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context_ERASE TEXT, error_message TEXT)"
+CREATE_BLRFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context_ERASE TEXT)"
+CREATE_BLRFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, f_context_otx TEXT, f_context_inx TEXT, f_state_otx TEXT, f_state_inx TEXT, f_lower REAL, f_upper REAL)"
+CREATE_BLRFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context TEXT, f_state TEXT, f_lower REAL, f_upper REAL)"
+CREATE_BLRFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, f_context_ERASE_otx TEXT, f_context_ERASE_inx TEXT)"
+CREATE_BLRFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_factunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context_ERASE TEXT)"
+CREATE_BLRHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT, error_message TEXT)"
+CREATE_BLRHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT, error_message TEXT)"
+CREATE_BLRHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT)"
+CREATE_BLRHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_BLRHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT, error_message TEXT)"
+CREATE_BLRHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_BLRHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
+CREATE_BLRHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT)"
+CREATE_BLRHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
+CREATE_BLRHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_healerlink_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_BLRPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER, error_message TEXT)"
+CREATE_BLRPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER, error_message TEXT)"
+CREATE_BLRPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER)"
+CREATE_BLRPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT)"
+CREATE_BLRPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT, error_message TEXT)"
+CREATE_BLRPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT)"
+CREATE_BLRPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, r_state_otx TEXT, r_state_inx TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER)"
+CREATE_BLRPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER)"
+CREATE_BLRPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, r_state_ERASE_otx TEXT, r_state_ERASE_inx TEXT)"
+CREATE_BLRPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state_ERASE TEXT)"
+CREATE_BLRREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER, error_message TEXT)"
+CREATE_BLRREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER, error_message TEXT)"
+CREATE_BLRREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER)"
+CREATE_BLRREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context_ERASE TEXT)"
+CREATE_BLRREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context_ERASE TEXT, error_message TEXT)"
+CREATE_BLRREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context_ERASE TEXT)"
+CREATE_BLRREAS_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_otx TEXT, r_context_inx TEXT, r_plan_active_requisite INTEGER)"
+CREATE_BLRREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER)"
+CREATE_BLRREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, r_context_ERASE_otx TEXT, r_context_ERASE_inx TEXT)"
+CREATE_BLRREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context_ERASE TEXT)"
+CREATE_BLRLABO_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title TEXT, error_message TEXT)"
+CREATE_BLRLABO_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title TEXT, error_message TEXT)"
+CREATE_BLRLABO_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title TEXT)"
+CREATE_BLRLABO_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title_ERASE TEXT)"
+CREATE_BLRLABO_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title_ERASE TEXT, error_message TEXT)"
+CREATE_BLRLABO_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title_ERASE TEXT)"
+CREATE_BLRLABO_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, labor_title_otx TEXT, labor_title_inx TEXT)"
+CREATE_BLRLABO_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title TEXT)"
+CREATE_BLRLABO_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, labor_title_ERASE_otx TEXT, labor_title_ERASE_inx TEXT)"
+CREATE_BLRLABO_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_plan_laborlink_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title_ERASE TEXT)"
+CREATE_BLRPLAN_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
+CREATE_BLRPLAN_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
+CREATE_BLRPLAN_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_BLRPLAN_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope_ERASE TEXT)"
+CREATE_BLRPLAN_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope_ERASE TEXT, error_message TEXT)"
+CREATE_BLRPLAN_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope_ERASE TEXT)"
+CREATE_BLRPLAN_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_BLRPLAN_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_BLRPLAN_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, plan_rope_ERASE_otx TEXT, plan_rope_ERASE_inx TEXT)"
+CREATE_BLRPLAN_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believer_planunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, plan_rope_ERASE TEXT)"
+CREATE_BLRUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believerunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
+CREATE_BLRUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believerunit_s_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
+CREATE_BLRUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS believerunit_s_put_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_BLRUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believerunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name_ERASE TEXT)"
+CREATE_BLRUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believerunit_s_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name_ERASE TEXT, error_message TEXT)"
+CREATE_BLRUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS believerunit_s_del_vld (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name_ERASE TEXT)"
+CREATE_BLRUNIT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS believerunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_otx TEXT, believer_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_BLRUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS believerunit_v_put_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_BLRUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believerunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, belief_label_otx TEXT, belief_label_inx TEXT, believer_name_ERASE_otx TEXT, believer_name_ERASE_inx TEXT)"
+CREATE_BLRUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believerunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name_ERASE TEXT)"
 
 
 def get_prime_create_table_sqlstrs() -> dict[str:str]:
@@ -277,197 +277,197 @@ def get_prime_create_table_sqlstrs() -> dict[str:str]:
         "pidgin_name_s_raw": CREATE_PIDNAME_SOUND_RAW_SQLSTR,
         "pidgin_name_s_agg": CREATE_PIDNAME_SOUND_AGG_SQLSTR,
         "pidgin_name_s_vld": CREATE_PIDNAME_SOUND_VLD_SQLSTR,
-        "pidgin_way_s_raw": CREATE_PIDWAYY_SOUND_RAW_SQLSTR,
-        "pidgin_way_s_agg": CREATE_PIDWAYY_SOUND_AGG_SQLSTR,
-        "pidgin_way_s_vld": CREATE_PIDWAYY_SOUND_VLD_SQLSTR,
+        "pidgin_rope_s_raw": CREATE_PIDROPE_SOUND_RAW_SQLSTR,
+        "pidgin_rope_s_agg": CREATE_PIDROPE_SOUND_AGG_SQLSTR,
+        "pidgin_rope_s_vld": CREATE_PIDROPE_SOUND_VLD_SQLSTR,
         "pidgin_label_s_raw": CREATE_PIDLABE_SOUND_RAW_SQLSTR,
         "pidgin_label_s_agg": CREATE_PIDLABE_SOUND_AGG_SQLSTR,
         "pidgin_label_s_vld": CREATE_PIDLABE_SOUND_VLD_SQLSTR,
         "pidgin_core_s_raw": CREATE_PIDCORE_SOUND_RAW_SQLSTR,
         "pidgin_core_s_agg": CREATE_PIDCORE_SOUND_AGG_SQLSTR,
         "pidgin_core_s_vld": CREATE_PIDCORE_SOUND_VLD_SQLSTR,
-        "fisc_cashbook_s_raw": CREATE_FISCASH_SOUND_RAW_SQLSTR,
-        "fisc_cashbook_s_agg": CREATE_FISCASH_SOUND_AGG_SQLSTR,
-        "fisc_cashbook_s_vld": CREATE_FISCASH_SOUND_VLD_SQLSTR,
-        "fisc_cashbook_v_raw": CREATE_FISCASH_VOICE_RAW_SQLSTR,
-        "fisc_cashbook_v_agg": CREATE_FISCASH_VOICE_AGG_SQLSTR,
-        "fisc_dealunit_s_raw": CREATE_FISDEAL_SOUND_RAW_SQLSTR,
-        "fisc_dealunit_s_agg": CREATE_FISDEAL_SOUND_AGG_SQLSTR,
-        "fisc_dealunit_s_vld": CREATE_FISDEAL_SOUND_VLD_SQLSTR,
-        "fisc_dealunit_v_raw": CREATE_FISDEAL_VOICE_RAW_SQLSTR,
-        "fisc_dealunit_v_agg": CREATE_FISDEAL_VOICE_AGG_SQLSTR,
-        "fisc_timeline_hour_s_raw": CREATE_FISHOUR_SOUND_RAW_SQLSTR,
-        "fisc_timeline_hour_s_agg": CREATE_FISHOUR_SOUND_AGG_SQLSTR,
-        "fisc_timeline_hour_s_vld": CREATE_FISHOUR_SOUND_VLD_SQLSTR,
-        "fisc_timeline_hour_v_raw": CREATE_FISHOUR_VOICE_RAW_SQLSTR,
-        "fisc_timeline_hour_v_agg": CREATE_FISHOUR_VOICE_AGG_SQLSTR,
-        "fisc_timeline_month_s_raw": CREATE_FISMONT_SOUND_RAW_SQLSTR,
-        "fisc_timeline_month_s_agg": CREATE_FISMONT_SOUND_AGG_SQLSTR,
-        "fisc_timeline_month_s_vld": CREATE_FISMONT_SOUND_VLD_SQLSTR,
-        "fisc_timeline_month_v_raw": CREATE_FISMONT_VOICE_RAW_SQLSTR,
-        "fisc_timeline_month_v_agg": CREATE_FISMONT_VOICE_AGG_SQLSTR,
-        "fisc_timeline_weekday_s_raw": CREATE_FISWEEK_SOUND_RAW_SQLSTR,
-        "fisc_timeline_weekday_s_agg": CREATE_FISWEEK_SOUND_AGG_SQLSTR,
-        "fisc_timeline_weekday_s_vld": CREATE_FISWEEK_SOUND_VLD_SQLSTR,
-        "fisc_timeline_weekday_v_raw": CREATE_FISWEEK_VOICE_RAW_SQLSTR,
-        "fisc_timeline_weekday_v_agg": CREATE_FISWEEK_VOICE_AGG_SQLSTR,
-        "fisc_timeoffi_s_raw": CREATE_FISOFFI_SOUND_RAW_SQLSTR,
-        "fisc_timeoffi_s_agg": CREATE_FISOFFI_SOUND_AGG_SQLSTR,
-        "fisc_timeoffi_s_vld": CREATE_FISOFFI_SOUND_VLD_SQLSTR,
-        "fisc_timeoffi_v_raw": CREATE_FISOFFI_VOICE_RAW_SQLSTR,
-        "fisc_timeoffi_v_agg": CREATE_FISOFFI_VOICE_AGG_SQLSTR,
-        "fiscunit_s_raw": CREATE_FISUNIT_SOUND_RAW_SQLSTR,
-        "fiscunit_s_agg": CREATE_FISUNIT_SOUND_AGG_SQLSTR,
-        "fiscunit_s_vld": CREATE_FISUNIT_SOUND_VLD_SQLSTR,
-        "fiscunit_v_raw": CREATE_FISUNIT_VOICE_RAW_SQLSTR,
-        "fiscunit_v_agg": CREATE_FISUNIT_VOICE_AGG_SQLSTR,
-        "bud_acct_membership_s_put_raw": CREATE_BUDMEMB_SOUND_PUT_RAW_STR,
-        "bud_acct_membership_s_put_agg": CREATE_BUDMEMB_SOUND_PUT_AGG_STR,
-        "bud_acct_membership_s_put_vld": CREATE_BUDMEMB_SOUND_PUT_VLD_STR,
-        "bud_acct_membership_s_del_raw": CREATE_BUDMEMB_SOUND_DEL_RAW_STR,
-        "bud_acct_membership_s_del_agg": CREATE_BUDMEMB_SOUND_DEL_AGG_STR,
-        "bud_acct_membership_s_del_vld": CREATE_BUDMEMB_SOUND_DEL_VLD_STR,
-        "bud_acct_membership_v_put_raw": CREATE_BUDMEMB_VOICE_PUT_RAW_STR,
-        "bud_acct_membership_v_put_agg": CREATE_BUDMEMB_VOICE_PUT_AGG_STR,
-        "bud_acct_membership_v_del_raw": CREATE_BUDMEMB_VOICE_DEL_RAW_STR,
-        "bud_acct_membership_v_del_agg": CREATE_BUDMEMB_VOICE_DEL_AGG_STR,
-        "bud_acctunit_s_put_raw": CREATE_BUDACCT_SOUND_PUT_RAW_STR,
-        "bud_acctunit_s_put_agg": CREATE_BUDACCT_SOUND_PUT_AGG_STR,
-        "bud_acctunit_s_put_vld": CREATE_BUDACCT_SOUND_PUT_VLD_STR,
-        "bud_acctunit_s_del_raw": CREATE_BUDACCT_SOUND_DEL_RAW_STR,
-        "bud_acctunit_s_del_agg": CREATE_BUDACCT_SOUND_DEL_AGG_STR,
-        "bud_acctunit_s_del_vld": CREATE_BUDACCT_SOUND_DEL_VLD_STR,
-        "bud_acctunit_v_put_raw": CREATE_BUDACCT_VOICE_PUT_RAW_STR,
-        "bud_acctunit_v_put_agg": CREATE_BUDACCT_VOICE_PUT_AGG_STR,
-        "bud_acctunit_v_del_raw": CREATE_BUDACCT_VOICE_DEL_RAW_STR,
-        "bud_acctunit_v_del_agg": CREATE_BUDACCT_VOICE_DEL_AGG_STR,
-        "bud_concept_awardlink_s_put_raw": CREATE_BUDAWAR_SOUND_PUT_RAW_STR,
-        "bud_concept_awardlink_s_put_agg": CREATE_BUDAWAR_SOUND_PUT_AGG_STR,
-        "bud_concept_awardlink_s_put_vld": CREATE_BUDAWAR_SOUND_PUT_VLD_STR,
-        "bud_concept_awardlink_s_del_raw": CREATE_BUDAWAR_SOUND_DEL_RAW_STR,
-        "bud_concept_awardlink_s_del_agg": CREATE_BUDAWAR_SOUND_DEL_AGG_STR,
-        "bud_concept_awardlink_s_del_vld": CREATE_BUDAWAR_SOUND_DEL_VLD_STR,
-        "bud_concept_awardlink_v_put_raw": CREATE_BUDAWAR_VOICE_PUT_RAW_STR,
-        "bud_concept_awardlink_v_put_agg": CREATE_BUDAWAR_VOICE_PUT_AGG_STR,
-        "bud_concept_awardlink_v_del_raw": CREATE_BUDAWAR_VOICE_DEL_RAW_STR,
-        "bud_concept_awardlink_v_del_agg": CREATE_BUDAWAR_VOICE_DEL_AGG_STR,
-        "bud_concept_factunit_s_put_raw": CREATE_BUDFACT_SOUND_PUT_RAW_STR,
-        "bud_concept_factunit_s_put_agg": CREATE_BUDFACT_SOUND_PUT_AGG_STR,
-        "bud_concept_factunit_s_put_vld": CREATE_BUDFACT_SOUND_PUT_VLD_STR,
-        "bud_concept_factunit_s_del_raw": CREATE_BUDFACT_SOUND_DEL_RAW_STR,
-        "bud_concept_factunit_s_del_agg": CREATE_BUDFACT_SOUND_DEL_AGG_STR,
-        "bud_concept_factunit_s_del_vld": CREATE_BUDFACT_SOUND_DEL_VLD_STR,
-        "bud_concept_factunit_v_put_raw": CREATE_BUDFACT_VOICE_PUT_RAW_STR,
-        "bud_concept_factunit_v_put_agg": CREATE_BUDFACT_VOICE_PUT_AGG_STR,
-        "bud_concept_factunit_v_del_raw": CREATE_BUDFACT_VOICE_DEL_RAW_STR,
-        "bud_concept_factunit_v_del_agg": CREATE_BUDFACT_VOICE_DEL_AGG_STR,
-        "bud_concept_healerlink_s_put_raw": CREATE_BUDHEAL_SOUND_PUT_RAW_STR,
-        "bud_concept_healerlink_s_put_agg": CREATE_BUDHEAL_SOUND_PUT_AGG_STR,
-        "bud_concept_healerlink_s_put_vld": CREATE_BUDHEAL_SOUND_PUT_VLD_STR,
-        "bud_concept_healerlink_s_del_raw": CREATE_BUDHEAL_SOUND_DEL_RAW_STR,
-        "bud_concept_healerlink_s_del_agg": CREATE_BUDHEAL_SOUND_DEL_AGG_STR,
-        "bud_concept_healerlink_s_del_vld": CREATE_BUDHEAL_SOUND_DEL_VLD_STR,
-        "bud_concept_healerlink_v_put_raw": CREATE_BUDHEAL_VOICE_PUT_RAW_STR,
-        "bud_concept_healerlink_v_put_agg": CREATE_BUDHEAL_VOICE_PUT_AGG_STR,
-        "bud_concept_healerlink_v_del_raw": CREATE_BUDHEAL_VOICE_DEL_RAW_STR,
-        "bud_concept_healerlink_v_del_agg": CREATE_BUDHEAL_VOICE_DEL_AGG_STR,
-        "bud_concept_reason_premiseunit_s_put_raw": CREATE_BUDPREM_SOUND_PUT_RAW_STR,
-        "bud_concept_reason_premiseunit_s_put_agg": CREATE_BUDPREM_SOUND_PUT_AGG_STR,
-        "bud_concept_reason_premiseunit_s_put_vld": CREATE_BUDPREM_SOUND_PUT_VLD_STR,
-        "bud_concept_reason_premiseunit_s_del_raw": CREATE_BUDPREM_SOUND_DEL_RAW_STR,
-        "bud_concept_reason_premiseunit_s_del_agg": CREATE_BUDPREM_SOUND_DEL_AGG_STR,
-        "bud_concept_reason_premiseunit_s_del_vld": CREATE_BUDPREM_SOUND_DEL_VLD_STR,
-        "bud_concept_reason_premiseunit_v_put_raw": CREATE_BUDPREM_VOICE_PUT_RAW_STR,
-        "bud_concept_reason_premiseunit_v_put_agg": CREATE_BUDPREM_VOICE_PUT_AGG_STR,
-        "bud_concept_reason_premiseunit_v_del_raw": CREATE_BUDPREM_VOICE_DEL_RAW_STR,
-        "bud_concept_reason_premiseunit_v_del_agg": CREATE_BUDPREM_VOICE_DEL_AGG_STR,
-        "bud_concept_reasonunit_s_put_raw": CREATE_BUDREAS_SOUND_PUT_RAW_STR,
-        "bud_concept_reasonunit_s_put_agg": CREATE_BUDREAS_SOUND_PUT_AGG_STR,
-        "bud_concept_reasonunit_s_put_vld": CREATE_BUDREAS_SOUND_PUT_VLD_STR,
-        "bud_concept_reasonunit_s_del_raw": CREATE_BUDREAS_SOUND_DEL_RAW_STR,
-        "bud_concept_reasonunit_s_del_agg": CREATE_BUDREAS_SOUND_DEL_AGG_STR,
-        "bud_concept_reasonunit_s_del_vld": CREATE_BUDREAS_SOUND_DEL_VLD_STR,
-        "bud_concept_reasonunit_v_put_raw": CREATE_BUDREAS_VOICE_PUT_RAW_STR,
-        "bud_concept_reasonunit_v_put_agg": CREATE_BUDREAS_VOICE_PUT_AGG_STR,
-        "bud_concept_reasonunit_v_del_raw": CREATE_BUDREAS_VOICE_DEL_RAW_STR,
-        "bud_concept_reasonunit_v_del_agg": CREATE_BUDREAS_VOICE_DEL_AGG_STR,
-        "bud_concept_laborlink_s_put_raw": CREATE_BUDLABO_SOUND_PUT_RAW_STR,
-        "bud_concept_laborlink_s_put_agg": CREATE_BUDLABO_SOUND_PUT_AGG_STR,
-        "bud_concept_laborlink_s_put_vld": CREATE_BUDLABO_SOUND_PUT_VLD_STR,
-        "bud_concept_laborlink_s_del_raw": CREATE_BUDLABO_SOUND_DEL_RAW_STR,
-        "bud_concept_laborlink_s_del_agg": CREATE_BUDLABO_SOUND_DEL_AGG_STR,
-        "bud_concept_laborlink_s_del_vld": CREATE_BUDLABO_SOUND_DEL_VLD_STR,
-        "bud_concept_laborlink_v_put_raw": CREATE_BUDLABO_VOICE_PUT_RAW_STR,
-        "bud_concept_laborlink_v_put_agg": CREATE_BUDLABO_VOICE_PUT_AGG_STR,
-        "bud_concept_laborlink_v_del_raw": CREATE_BUDLABO_VOICE_DEL_RAW_STR,
-        "bud_concept_laborlink_v_del_agg": CREATE_BUDLABO_VOICE_DEL_AGG_STR,
-        "bud_conceptunit_s_put_raw": CREATE_BUDCONC_SOUND_PUT_RAW_STR,
-        "bud_conceptunit_s_put_agg": CREATE_BUDCONC_SOUND_PUT_AGG_STR,
-        "bud_conceptunit_s_put_vld": CREATE_BUDCONC_SOUND_PUT_VLD_STR,
-        "bud_conceptunit_s_del_raw": CREATE_BUDCONC_SOUND_DEL_RAW_STR,
-        "bud_conceptunit_s_del_agg": CREATE_BUDCONC_SOUND_DEL_AGG_STR,
-        "bud_conceptunit_s_del_vld": CREATE_BUDCONC_SOUND_DEL_VLD_STR,
-        "bud_conceptunit_v_put_raw": CREATE_BUDCONC_VOICE_PUT_RAW_STR,
-        "bud_conceptunit_v_put_agg": CREATE_BUDCONC_VOICE_PUT_AGG_STR,
-        "bud_conceptunit_v_del_raw": CREATE_BUDCONC_VOICE_DEL_RAW_STR,
-        "bud_conceptunit_v_del_agg": CREATE_BUDCONC_VOICE_DEL_AGG_STR,
-        "budunit_s_put_raw": CREATE_BUDUNIT_SOUND_PUT_RAW_STR,
-        "budunit_s_put_agg": CREATE_BUDUNIT_SOUND_PUT_AGG_STR,
-        "budunit_s_put_vld": CREATE_BUDUNIT_SOUND_PUT_VLD_STR,
-        "budunit_s_del_raw": CREATE_BUDUNIT_SOUND_DEL_RAW_STR,
-        "budunit_s_del_agg": CREATE_BUDUNIT_SOUND_DEL_AGG_STR,
-        "budunit_s_del_vld": CREATE_BUDUNIT_SOUND_DEL_VLD_STR,
-        "budunit_v_put_raw": CREATE_BUDUNIT_VOICE_PUT_RAW_STR,
-        "budunit_v_put_agg": CREATE_BUDUNIT_VOICE_PUT_AGG_STR,
-        "budunit_v_del_raw": CREATE_BUDUNIT_VOICE_DEL_RAW_STR,
-        "budunit_v_del_agg": CREATE_BUDUNIT_VOICE_DEL_AGG_STR,
+        "belief_paybook_s_raw": CREATE_BLFPAYY_SOUND_RAW_SQLSTR,
+        "belief_paybook_s_agg": CREATE_BLFPAYY_SOUND_AGG_SQLSTR,
+        "belief_paybook_s_vld": CREATE_BLFPAYY_SOUND_VLD_SQLSTR,
+        "belief_paybook_v_raw": CREATE_BLFPAYY_VOICE_RAW_SQLSTR,
+        "belief_paybook_v_agg": CREATE_BLFPAYY_VOICE_AGG_SQLSTR,
+        "belief_budunit_s_raw": CREATE_BLFBUDD_SOUND_RAW_SQLSTR,
+        "belief_budunit_s_agg": CREATE_BLFBUDD_SOUND_AGG_SQLSTR,
+        "belief_budunit_s_vld": CREATE_BLFBUDD_SOUND_VLD_SQLSTR,
+        "belief_budunit_v_raw": CREATE_BLFBUDD_VOICE_RAW_SQLSTR,
+        "belief_budunit_v_agg": CREATE_BLFBUDD_VOICE_AGG_SQLSTR,
+        "belief_timeline_hour_s_raw": CREATE_BLFHOUR_SOUND_RAW_SQLSTR,
+        "belief_timeline_hour_s_agg": CREATE_BLFHOUR_SOUND_AGG_SQLSTR,
+        "belief_timeline_hour_s_vld": CREATE_BLFHOUR_SOUND_VLD_SQLSTR,
+        "belief_timeline_hour_v_raw": CREATE_BLFHOUR_VOICE_RAW_SQLSTR,
+        "belief_timeline_hour_v_agg": CREATE_BLFHOUR_VOICE_AGG_SQLSTR,
+        "belief_timeline_month_s_raw": CREATE_BLFMONT_SOUND_RAW_SQLSTR,
+        "belief_timeline_month_s_agg": CREATE_BLFMONT_SOUND_AGG_SQLSTR,
+        "belief_timeline_month_s_vld": CREATE_BLFMONT_SOUND_VLD_SQLSTR,
+        "belief_timeline_month_v_raw": CREATE_BLFMONT_VOICE_RAW_SQLSTR,
+        "belief_timeline_month_v_agg": CREATE_BLFMONT_VOICE_AGG_SQLSTR,
+        "belief_timeline_weekday_s_raw": CREATE_BLFWEEK_SOUND_RAW_SQLSTR,
+        "belief_timeline_weekday_s_agg": CREATE_BLFWEEK_SOUND_AGG_SQLSTR,
+        "belief_timeline_weekday_s_vld": CREATE_BLFWEEK_SOUND_VLD_SQLSTR,
+        "belief_timeline_weekday_v_raw": CREATE_BLFWEEK_VOICE_RAW_SQLSTR,
+        "belief_timeline_weekday_v_agg": CREATE_BLFWEEK_VOICE_AGG_SQLSTR,
+        "belief_timeoffi_s_raw": CREATE_BLFOFFI_SOUND_RAW_SQLSTR,
+        "belief_timeoffi_s_agg": CREATE_BLFOFFI_SOUND_AGG_SQLSTR,
+        "belief_timeoffi_s_vld": CREATE_BLFOFFI_SOUND_VLD_SQLSTR,
+        "belief_timeoffi_v_raw": CREATE_BLFOFFI_VOICE_RAW_SQLSTR,
+        "belief_timeoffi_v_agg": CREATE_BLFOFFI_VOICE_AGG_SQLSTR,
+        "beliefunit_s_raw": CREATE_BLFUNIT_SOUND_RAW_SQLSTR,
+        "beliefunit_s_agg": CREATE_BLFUNIT_SOUND_AGG_SQLSTR,
+        "beliefunit_s_vld": CREATE_BLFUNIT_SOUND_VLD_SQLSTR,
+        "beliefunit_v_raw": CREATE_BLFUNIT_VOICE_RAW_SQLSTR,
+        "beliefunit_v_agg": CREATE_BLFUNIT_VOICE_AGG_SQLSTR,
+        "believer_partner_membership_s_put_raw": CREATE_BLRMEMB_SOUND_PUT_RAW_STR,
+        "believer_partner_membership_s_put_agg": CREATE_BLRMEMB_SOUND_PUT_AGG_STR,
+        "believer_partner_membership_s_put_vld": CREATE_BLRMEMB_SOUND_PUT_VLD_STR,
+        "believer_partner_membership_s_del_raw": CREATE_BLRMEMB_SOUND_DEL_RAW_STR,
+        "believer_partner_membership_s_del_agg": CREATE_BLRMEMB_SOUND_DEL_AGG_STR,
+        "believer_partner_membership_s_del_vld": CREATE_BLRMEMB_SOUND_DEL_VLD_STR,
+        "believer_partner_membership_v_put_raw": CREATE_BLRMEMB_VOICE_PUT_RAW_STR,
+        "believer_partner_membership_v_put_agg": CREATE_BLRMEMB_VOICE_PUT_AGG_STR,
+        "believer_partner_membership_v_del_raw": CREATE_BLRMEMB_VOICE_DEL_RAW_STR,
+        "believer_partner_membership_v_del_agg": CREATE_BLRMEMB_VOICE_DEL_AGG_STR,
+        "believer_partnerunit_s_put_raw": CREATE_BLRPERN_SOUND_PUT_RAW_STR,
+        "believer_partnerunit_s_put_agg": CREATE_BLRPERN_SOUND_PUT_AGG_STR,
+        "believer_partnerunit_s_put_vld": CREATE_BLRPERN_SOUND_PUT_VLD_STR,
+        "believer_partnerunit_s_del_raw": CREATE_BLRPERN_SOUND_DEL_RAW_STR,
+        "believer_partnerunit_s_del_agg": CREATE_BLRPERN_SOUND_DEL_AGG_STR,
+        "believer_partnerunit_s_del_vld": CREATE_BLRPERN_SOUND_DEL_VLD_STR,
+        "believer_partnerunit_v_put_raw": CREATE_BLRPERN_VOICE_PUT_RAW_STR,
+        "believer_partnerunit_v_put_agg": CREATE_BLRPERN_VOICE_PUT_AGG_STR,
+        "believer_partnerunit_v_del_raw": CREATE_BLRPERN_VOICE_DEL_RAW_STR,
+        "believer_partnerunit_v_del_agg": CREATE_BLRPERN_VOICE_DEL_AGG_STR,
+        "believer_plan_awardlink_s_put_raw": CREATE_BLRAWAR_SOUND_PUT_RAW_STR,
+        "believer_plan_awardlink_s_put_agg": CREATE_BLRAWAR_SOUND_PUT_AGG_STR,
+        "believer_plan_awardlink_s_put_vld": CREATE_BLRAWAR_SOUND_PUT_VLD_STR,
+        "believer_plan_awardlink_s_del_raw": CREATE_BLRAWAR_SOUND_DEL_RAW_STR,
+        "believer_plan_awardlink_s_del_agg": CREATE_BLRAWAR_SOUND_DEL_AGG_STR,
+        "believer_plan_awardlink_s_del_vld": CREATE_BLRAWAR_SOUND_DEL_VLD_STR,
+        "believer_plan_awardlink_v_put_raw": CREATE_BLRAWAR_VOICE_PUT_RAW_STR,
+        "believer_plan_awardlink_v_put_agg": CREATE_BLRAWAR_VOICE_PUT_AGG_STR,
+        "believer_plan_awardlink_v_del_raw": CREATE_BLRAWAR_VOICE_DEL_RAW_STR,
+        "believer_plan_awardlink_v_del_agg": CREATE_BLRAWAR_VOICE_DEL_AGG_STR,
+        "believer_plan_factunit_s_put_raw": CREATE_BLRFACT_SOUND_PUT_RAW_STR,
+        "believer_plan_factunit_s_put_agg": CREATE_BLRFACT_SOUND_PUT_AGG_STR,
+        "believer_plan_factunit_s_put_vld": CREATE_BLRFACT_SOUND_PUT_VLD_STR,
+        "believer_plan_factunit_s_del_raw": CREATE_BLRFACT_SOUND_DEL_RAW_STR,
+        "believer_plan_factunit_s_del_agg": CREATE_BLRFACT_SOUND_DEL_AGG_STR,
+        "believer_plan_factunit_s_del_vld": CREATE_BLRFACT_SOUND_DEL_VLD_STR,
+        "believer_plan_factunit_v_put_raw": CREATE_BLRFACT_VOICE_PUT_RAW_STR,
+        "believer_plan_factunit_v_put_agg": CREATE_BLRFACT_VOICE_PUT_AGG_STR,
+        "believer_plan_factunit_v_del_raw": CREATE_BLRFACT_VOICE_DEL_RAW_STR,
+        "believer_plan_factunit_v_del_agg": CREATE_BLRFACT_VOICE_DEL_AGG_STR,
+        "believer_plan_healerlink_s_put_raw": CREATE_BLRHEAL_SOUND_PUT_RAW_STR,
+        "believer_plan_healerlink_s_put_agg": CREATE_BLRHEAL_SOUND_PUT_AGG_STR,
+        "believer_plan_healerlink_s_put_vld": CREATE_BLRHEAL_SOUND_PUT_VLD_STR,
+        "believer_plan_healerlink_s_del_raw": CREATE_BLRHEAL_SOUND_DEL_RAW_STR,
+        "believer_plan_healerlink_s_del_agg": CREATE_BLRHEAL_SOUND_DEL_AGG_STR,
+        "believer_plan_healerlink_s_del_vld": CREATE_BLRHEAL_SOUND_DEL_VLD_STR,
+        "believer_plan_healerlink_v_put_raw": CREATE_BLRHEAL_VOICE_PUT_RAW_STR,
+        "believer_plan_healerlink_v_put_agg": CREATE_BLRHEAL_VOICE_PUT_AGG_STR,
+        "believer_plan_healerlink_v_del_raw": CREATE_BLRHEAL_VOICE_DEL_RAW_STR,
+        "believer_plan_healerlink_v_del_agg": CREATE_BLRHEAL_VOICE_DEL_AGG_STR,
+        "believer_plan_reason_caseunit_s_put_raw": CREATE_BLRPREM_SOUND_PUT_RAW_STR,
+        "believer_plan_reason_caseunit_s_put_agg": CREATE_BLRPREM_SOUND_PUT_AGG_STR,
+        "believer_plan_reason_caseunit_s_put_vld": CREATE_BLRPREM_SOUND_PUT_VLD_STR,
+        "believer_plan_reason_caseunit_s_del_raw": CREATE_BLRPREM_SOUND_DEL_RAW_STR,
+        "believer_plan_reason_caseunit_s_del_agg": CREATE_BLRPREM_SOUND_DEL_AGG_STR,
+        "believer_plan_reason_caseunit_s_del_vld": CREATE_BLRPREM_SOUND_DEL_VLD_STR,
+        "believer_plan_reason_caseunit_v_put_raw": CREATE_BLRPREM_VOICE_PUT_RAW_STR,
+        "believer_plan_reason_caseunit_v_put_agg": CREATE_BLRPREM_VOICE_PUT_AGG_STR,
+        "believer_plan_reason_caseunit_v_del_raw": CREATE_BLRPREM_VOICE_DEL_RAW_STR,
+        "believer_plan_reason_caseunit_v_del_agg": CREATE_BLRPREM_VOICE_DEL_AGG_STR,
+        "believer_plan_reasonunit_s_put_raw": CREATE_BLRREAS_SOUND_PUT_RAW_STR,
+        "believer_plan_reasonunit_s_put_agg": CREATE_BLRREAS_SOUND_PUT_AGG_STR,
+        "believer_plan_reasonunit_s_put_vld": CREATE_BLRREAS_SOUND_PUT_VLD_STR,
+        "believer_plan_reasonunit_s_del_raw": CREATE_BLRREAS_SOUND_DEL_RAW_STR,
+        "believer_plan_reasonunit_s_del_agg": CREATE_BLRREAS_SOUND_DEL_AGG_STR,
+        "believer_plan_reasonunit_s_del_vld": CREATE_BLRREAS_SOUND_DEL_VLD_STR,
+        "believer_plan_reasonunit_v_put_raw": CREATE_BLRREAS_VOICE_PUT_RAW_STR,
+        "believer_plan_reasonunit_v_put_agg": CREATE_BLRREAS_VOICE_PUT_AGG_STR,
+        "believer_plan_reasonunit_v_del_raw": CREATE_BLRREAS_VOICE_DEL_RAW_STR,
+        "believer_plan_reasonunit_v_del_agg": CREATE_BLRREAS_VOICE_DEL_AGG_STR,
+        "believer_plan_laborlink_s_put_raw": CREATE_BLRLABO_SOUND_PUT_RAW_STR,
+        "believer_plan_laborlink_s_put_agg": CREATE_BLRLABO_SOUND_PUT_AGG_STR,
+        "believer_plan_laborlink_s_put_vld": CREATE_BLRLABO_SOUND_PUT_VLD_STR,
+        "believer_plan_laborlink_s_del_raw": CREATE_BLRLABO_SOUND_DEL_RAW_STR,
+        "believer_plan_laborlink_s_del_agg": CREATE_BLRLABO_SOUND_DEL_AGG_STR,
+        "believer_plan_laborlink_s_del_vld": CREATE_BLRLABO_SOUND_DEL_VLD_STR,
+        "believer_plan_laborlink_v_put_raw": CREATE_BLRLABO_VOICE_PUT_RAW_STR,
+        "believer_plan_laborlink_v_put_agg": CREATE_BLRLABO_VOICE_PUT_AGG_STR,
+        "believer_plan_laborlink_v_del_raw": CREATE_BLRLABO_VOICE_DEL_RAW_STR,
+        "believer_plan_laborlink_v_del_agg": CREATE_BLRLABO_VOICE_DEL_AGG_STR,
+        "believer_planunit_s_put_raw": CREATE_BLRPLAN_SOUND_PUT_RAW_STR,
+        "believer_planunit_s_put_agg": CREATE_BLRPLAN_SOUND_PUT_AGG_STR,
+        "believer_planunit_s_put_vld": CREATE_BLRPLAN_SOUND_PUT_VLD_STR,
+        "believer_planunit_s_del_raw": CREATE_BLRPLAN_SOUND_DEL_RAW_STR,
+        "believer_planunit_s_del_agg": CREATE_BLRPLAN_SOUND_DEL_AGG_STR,
+        "believer_planunit_s_del_vld": CREATE_BLRPLAN_SOUND_DEL_VLD_STR,
+        "believer_planunit_v_put_raw": CREATE_BLRPLAN_VOICE_PUT_RAW_STR,
+        "believer_planunit_v_put_agg": CREATE_BLRPLAN_VOICE_PUT_AGG_STR,
+        "believer_planunit_v_del_raw": CREATE_BLRPLAN_VOICE_DEL_RAW_STR,
+        "believer_planunit_v_del_agg": CREATE_BLRPLAN_VOICE_DEL_AGG_STR,
+        "believerunit_s_put_raw": CREATE_BLRUNIT_SOUND_PUT_RAW_STR,
+        "believerunit_s_put_agg": CREATE_BLRUNIT_SOUND_PUT_AGG_STR,
+        "believerunit_s_put_vld": CREATE_BLRUNIT_SOUND_PUT_VLD_STR,
+        "believerunit_s_del_raw": CREATE_BLRUNIT_SOUND_DEL_RAW_STR,
+        "believerunit_s_del_agg": CREATE_BLRUNIT_SOUND_DEL_AGG_STR,
+        "believerunit_s_del_vld": CREATE_BLRUNIT_SOUND_DEL_VLD_STR,
+        "believerunit_v_put_raw": CREATE_BLRUNIT_VOICE_PUT_RAW_STR,
+        "believerunit_v_put_agg": CREATE_BLRUNIT_VOICE_PUT_AGG_STR,
+        "believerunit_v_del_raw": CREATE_BLRUNIT_VOICE_DEL_RAW_STR,
+        "believerunit_v_del_agg": CREATE_BLRUNIT_VOICE_DEL_AGG_STR,
     }
 
 
-def get_fisc_bud_sound_agg_tablenames():
+def get_belief_believer_sound_agg_tablenames():
     return {
-        "bud_acct_membership_s_del_agg",
-        "bud_acct_membership_s_put_agg",
-        "bud_acctunit_s_del_agg",
-        "bud_acctunit_s_put_agg",
-        "bud_concept_awardlink_s_del_agg",
-        "bud_concept_awardlink_s_put_agg",
-        "bud_concept_factunit_s_del_agg",
-        "bud_concept_factunit_s_put_agg",
-        "bud_concept_healerlink_s_del_agg",
-        "bud_concept_healerlink_s_put_agg",
-        "bud_concept_laborlink_s_del_agg",
-        "bud_concept_laborlink_s_put_agg",
-        "bud_concept_reason_premiseunit_s_del_agg",
-        "bud_concept_reason_premiseunit_s_put_agg",
-        "bud_concept_reasonunit_s_del_agg",
-        "bud_concept_reasonunit_s_put_agg",
-        "bud_conceptunit_s_del_agg",
-        "bud_conceptunit_s_put_agg",
-        "budunit_s_del_agg",
-        "budunit_s_put_agg",
-        "fisc_cashbook_s_agg",
-        "fisc_dealunit_s_agg",
-        "fisc_timeline_hour_s_agg",
-        "fisc_timeline_month_s_agg",
-        "fisc_timeline_weekday_s_agg",
-        "fisc_timeoffi_s_agg",
-        "fiscunit_s_agg",
+        "believer_partner_membership_s_del_agg",
+        "believer_partner_membership_s_put_agg",
+        "believer_partnerunit_s_del_agg",
+        "believer_partnerunit_s_put_agg",
+        "believer_plan_awardlink_s_del_agg",
+        "believer_plan_awardlink_s_put_agg",
+        "believer_plan_factunit_s_del_agg",
+        "believer_plan_factunit_s_put_agg",
+        "believer_plan_healerlink_s_del_agg",
+        "believer_plan_healerlink_s_put_agg",
+        "believer_plan_laborlink_s_del_agg",
+        "believer_plan_laborlink_s_put_agg",
+        "believer_plan_reason_caseunit_s_del_agg",
+        "believer_plan_reason_caseunit_s_put_agg",
+        "believer_plan_reasonunit_s_del_agg",
+        "believer_plan_reasonunit_s_put_agg",
+        "believer_planunit_s_del_agg",
+        "believer_planunit_s_put_agg",
+        "believerunit_s_del_agg",
+        "believerunit_s_put_agg",
+        "belief_paybook_s_agg",
+        "belief_budunit_s_agg",
+        "belief_timeline_hour_s_agg",
+        "belief_timeline_month_s_agg",
+        "belief_timeline_weekday_s_agg",
+        "belief_timeoffi_s_agg",
+        "beliefunit_s_agg",
     }
 
 
-def get_bud_voice_agg_tablenames() -> set[str]:
+def get_believer_voice_agg_tablenames() -> set[str]:
     return {
-        "budunit_v_put_agg",
-        "bud_concept_healerlink_v_put_agg",
-        "bud_acctunit_v_put_agg",
-        "bud_concept_reason_premiseunit_v_put_agg",
-        "bud_concept_laborlink_v_put_agg",
-        "bud_concept_reasonunit_v_put_agg",
-        "bud_concept_factunit_v_put_agg",
-        "bud_acct_membership_v_put_agg",
-        "bud_conceptunit_v_put_agg",
-        "bud_concept_awardlink_v_put_agg",
+        "believerunit_v_put_agg",
+        "believer_plan_healerlink_v_put_agg",
+        "believer_partnerunit_v_put_agg",
+        "believer_plan_reason_caseunit_v_put_agg",
+        "believer_plan_laborlink_v_put_agg",
+        "believer_plan_reasonunit_v_put_agg",
+        "believer_plan_factunit_v_put_agg",
+        "believer_partner_membership_v_put_agg",
+        "believer_planunit_v_put_agg",
+        "believer_plan_awardlink_v_put_agg",
     }
 
 
@@ -486,18 +486,23 @@ def create_all_idea_tables(conn_or_cursor: sqlite3_Connection):
 def create_sound_raw_update_inconsist_error_message_sqlstr(
     conn_or_cursor: sqlite3_Connection, dimen: str
 ) -> str:
-    if dimen.lower().startswith("fisc"):
+    if dimen.lower().startswith("belief"):
         exclude_cols = {"idea_number", "event_int", "face_name", "error_message"}
     else:
         exclude_cols = {"idea_number", "error_message"}
-    if dimen.lower().startswith("bud"):
+    if dimen.lower().startswith("believer"):
         x_tablename = create_prime_tablename(dimen, "s", "raw", "put")
     else:
         x_tablename = create_prime_tablename(dimen, "s", "raw")
     dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
     return create_update_inconsistency_error_query(
-        conn_or_cursor, x_tablename, dimen_focus_columns, exclude_cols
+        conn_or_cursor=conn_or_cursor,
+        x_tablename=x_tablename,
+        focus_columns=dimen_focus_columns,
+        exclude_columns=exclude_cols,
+        error_holder_column="error_message",
+        error_str="Inconsistent data",
     )
 
 
@@ -507,32 +512,33 @@ def create_sound_agg_insert_sqlstrs(
     dimen_config = get_idea_config_dict().get(dimen)
     dimen_focus_columns = set(dimen_config.get("jkeys").keys())
 
-    if dimen.lower().startswith("fisc"):
+    if dimen.lower().startswith("belief"):
         dimen_focus_columns = set(dimen_config.get("jkeys").keys())
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
     exclude_cols = {"idea_number", "error_message"}
-    if dimen.lower().startswith("bud"):
+    if dimen.lower().startswith("believer"):
         agg_tablename = create_prime_tablename(dimen, "s", "agg", "put")
         raw_tablename = create_prime_tablename(dimen, "s", "raw", "put")
     else:
         raw_tablename = create_prime_tablename(dimen, "s", "raw")
         agg_tablename = create_prime_tablename(dimen, "s", "agg")
 
-    pidgin_fisc_bud_put_sqlstr = create_table2table_agg_insert_query(
+    pidgin_belief_believer_put_sqlstr = create_table2table_agg_insert_query(
         conn_or_cursor,
         src_table=raw_tablename,
         dst_table=agg_tablename,
         focus_cols=dimen_focus_columns,
         exclude_cols=exclude_cols,
+        where_block="WHERE error_message IS NULL",
     )
-    sqlstrs = [pidgin_fisc_bud_put_sqlstr]
-    if dimen.lower().startswith("bud"):
+    sqlstrs = [pidgin_belief_believer_put_sqlstr]
+    if dimen.lower().startswith("believer"):
         del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
         del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
         dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
         last_element = dimen_focus_columns.pop(-1)
         dimen_focus_columns.append(f"{last_element}_ERASE")
-        bud_del_sqlstr = create_table2table_agg_insert_query(
+        believer_del_sqlstr = create_table2table_agg_insert_query(
             conn_or_cursor,
             src_table=del_raw_tablename,
             dst_table=del_agg_tablename,
@@ -540,7 +546,7 @@ def create_sound_agg_insert_sqlstrs(
             exclude_cols=exclude_cols,
             where_block="",
         )
-        sqlstrs.append(bud_del_sqlstr)
+        sqlstrs.append(believer_del_sqlstr)
 
     return sqlstrs
 
@@ -548,22 +554,22 @@ def create_sound_agg_insert_sqlstrs(
 def create_insert_into_pidgin_core_raw_sqlstr(dimen: str) -> str:
     pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
     pidgin_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    return f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_bridge, inx_bridge, unknown_str)
-SELECT '{pidgin_s_agg_tablename}', face_name, otx_bridge, inx_bridge, unknown_str
+    return f"""INSERT INTO {pidgin_core_s_raw_tablename} (source_dimen, face_name, otx_knot, inx_knot, unknown_str)
+SELECT '{pidgin_s_agg_tablename}', face_name, otx_knot, inx_knot, unknown_str
 FROM {pidgin_s_agg_tablename}
-GROUP BY face_name, otx_bridge, inx_bridge, unknown_str
+GROUP BY face_name, otx_knot, inx_knot, unknown_str
 ;
 """
 
 
 def create_insert_pidgin_core_agg_into_vld_sqlstr(
-    default_bridge: str, default_unknown: str
+    default_knot: str, default_unknown: str
 ):
-    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_str)
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   face_name
-, IFNULL(otx_bridge, '{default_bridge}')
-, IFNULL(inx_bridge, '{default_bridge}')
+, IFNULL(otx_knot, '{default_knot}')
+, IFNULL(inx_knot, '{default_knot}')
 , IFNULL(unknown_str, '{default_unknown}')
 FROM pidgin_core_s_agg
 ;
@@ -571,18 +577,18 @@ FROM pidgin_core_s_agg
 
 
 def create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
-    default_bridge: str, default_unknown: str, fisc_bud_sound_agg_tablename: str
+    default_knot: str, default_unknown: str, belief_believer_sound_agg_tablename: str
 ):
-    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_bridge, inx_bridge, unknown_str)
+    return f"""INSERT INTO pidgin_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
-  {fisc_bud_sound_agg_tablename}.face_name
-, '{default_bridge}'
-, '{default_bridge}'
+  {belief_believer_sound_agg_tablename}.face_name
+, '{default_knot}'
+, '{default_knot}'
 , '{default_unknown}'
-FROM {fisc_bud_sound_agg_tablename} 
-LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {fisc_bud_sound_agg_tablename}.face_name
+FROM {belief_believer_sound_agg_tablename} 
+LEFT JOIN pidgin_core_s_vld ON pidgin_core_s_vld.face_name = {belief_believer_sound_agg_tablename}.face_name
 WHERE pidgin_core_s_vld.face_name IS NULL
-GROUP BY {fisc_bud_sound_agg_tablename}.face_name
+GROUP BY {belief_believer_sound_agg_tablename}.face_name
 ;
 """
 
@@ -602,69 +608,69 @@ WHERE face_name IN (
 """
 
 
-def create_update_pidlabe_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidlabe_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidlabe_s_agg_tablename = create_prime_tablename("pidlabe", "s", "agg")
     return f"""UPDATE {pidlabe_s_agg_tablename}
-SET error_message = 'Bridge cannot exist in LabelTerm'
+SET error_message = 'Knot cannot exist in LabelTerm'
 WHERE rowid IN (
     SELECT label_agg.rowid
     FROM {pidlabe_s_agg_tablename} label_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = label_agg.face_name
-    WHERE label_agg.otx_label LIKE '%' || core_vld.otx_bridge || '%'
-      OR label_agg.inx_label LIKE '%' || core_vld.inx_bridge || '%'
+    WHERE label_agg.otx_label LIKE '%' || core_vld.otx_knot || '%'
+      OR label_agg.inx_label LIKE '%' || core_vld.inx_knot || '%'
 )
 ;
 """
 
 
-def create_update_pidwayy_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidrope_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
-    pidwayy_s_agg_tablename = create_prime_tablename("pidwayy", "s", "agg")
-    return f"""UPDATE {pidwayy_s_agg_tablename}
-SET error_message = 'Bridge must exist in WayTerm'
+    pidrope_s_agg_tablename = create_prime_tablename("pidrope", "s", "agg")
+    return f"""UPDATE {pidrope_s_agg_tablename}
+SET error_message = 'Knot must exist in RopeTerm'
 WHERE rowid IN (
-    SELECT way_agg.rowid
-    FROM {pidwayy_s_agg_tablename} way_agg
-    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = way_agg.face_name
-    WHERE NOT way_agg.otx_way LIKE core_vld.otx_bridge || '%'
-        OR NOT way_agg.inx_way LIKE core_vld.inx_bridge || '%'
+    SELECT rope_agg.rowid
+    FROM {pidrope_s_agg_tablename} rope_agg
+    JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = rope_agg.face_name
+    WHERE NOT rope_agg.otx_rope LIKE core_vld.otx_knot || '%'
+        OR NOT rope_agg.inx_rope LIKE core_vld.inx_knot || '%'
 )
 ;
 """
 
 
-def create_update_pidname_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidname_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidname_s_agg_tablename = create_prime_tablename("pidname", "s", "agg")
     return f"""UPDATE {pidname_s_agg_tablename}
-SET error_message = 'Bridge cannot exist in NameTerm'
+SET error_message = 'Knot cannot exist in NameTerm'
 WHERE rowid IN (
     SELECT name_agg.rowid
     FROM {pidname_s_agg_tablename} name_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = name_agg.face_name
-    WHERE name_agg.otx_name LIKE '%' || core_vld.otx_bridge || '%'
-      OR name_agg.inx_name LIKE '%' || core_vld.inx_bridge || '%'
+    WHERE name_agg.otx_name LIKE '%' || core_vld.otx_knot || '%'
+      OR name_agg.inx_name LIKE '%' || core_vld.inx_knot || '%'
 )
 ;
 """
 
 
-def create_update_pidtitl_sound_agg_bridge_error_sqlstr() -> str:
+def create_update_pidtitl_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidtitl_s_agg_tablename = create_prime_tablename("pidtitl", "s", "agg")
     return f"""UPDATE {pidtitl_s_agg_tablename}
-SET error_message = 'Otx and inx titles must match bridge property.'
+SET error_message = 'Otx and inx titles must match knot.'
 WHERE rowid IN (
   SELECT title_agg.rowid
   FROM {pidtitl_s_agg_tablename} title_agg
   JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = title_agg.face_name
   WHERE NOT ((
-            title_agg.otx_title LIKE core_vld.otx_bridge || '%' 
-        AND title_agg.inx_title LIKE core_vld.inx_bridge || '%') 
+            title_agg.otx_title LIKE core_vld.otx_knot || '%' 
+        AND title_agg.inx_title LIKE core_vld.inx_knot || '%') 
       OR (
-            NOT title_agg.otx_title LIKE core_vld.otx_bridge || '%'
-        AND NOT title_agg.inx_title LIKE core_vld.inx_bridge || '%'
+            NOT title_agg.otx_title LIKE core_vld.otx_knot || '%'
+        AND NOT title_agg.inx_title LIKE core_vld.inx_knot || '%'
         ))
 )
 ;
@@ -678,7 +684,7 @@ def create_insert_pidgin_sound_vld_table_sqlstr(dimen: str) -> str:
         "pidgin_name": "name",
         "pidgin_title": "title",
         "pidgin_label": "label",
-        "pidgin_way": "way",
+        "pidgin_rope": "rope",
     }
     otx_str = f"otx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
     inx_str = f"inx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
@@ -692,155 +698,155 @@ GROUP BY event_int, face_name
 """
 
 
-def create_bridge_exists_in_name_error_update_sqlstr(table: str, column: str) -> str:
+def create_knot_exists_in_name_error_update_sqlstr(table: str, column: str) -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     return f"""UPDATE {table}
-SET error_message = 'Bridge cannot exist in NameTerm column {column}'
+SET error_message = 'Knot cannot exist in NameTerm column {column}'
 WHERE rowid IN (
     SELECT sound_agg.rowid
     FROM {table} sound_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
-    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_bridge || '%'
+    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_knot || '%'
 )
 ;
 """
 
 
-def create_bridge_exists_in_label_error_update_sqlstr(table: str, column: str) -> str:
+def create_knot_exists_in_label_error_update_sqlstr(table: str, column: str) -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     return f"""UPDATE {table}
-SET error_message = 'Bridge cannot exist in LabelTerm column {column}'
+SET error_message = 'Knot cannot exist in LabelTerm column {column}'
 WHERE rowid IN (
     SELECT sound_agg.rowid
     FROM {table} sound_agg
     JOIN {pidcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
-    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_bridge || '%'
+    WHERE sound_agg.{column} LIKE '%' || core_vld.otx_knot || '%'
 )
 ;
 """
 
 
-INSERT_BUDMEMB_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_acct_membership_s_put_vld (event_int, face_name, fisc_label, owner_name, acct_name, group_title, credit_vote, debtit_vote) SELECT event_int, face_name, fisc_label, owner_name, acct_name, group_title, credit_vote, debtit_vote FROM bud_acct_membership_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDMEMB_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_acct_membership_s_del_vld (event_int, face_name, fisc_label, owner_name, acct_name, group_title_ERASE) SELECT event_int, face_name, fisc_label, owner_name, acct_name, group_title_ERASE FROM bud_acct_membership_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDACCT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_acctunit_s_put_vld (event_int, face_name, fisc_label, owner_name, acct_name, credit_belief, debtit_belief) SELECT event_int, face_name, fisc_label, owner_name, acct_name, credit_belief, debtit_belief FROM bud_acctunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDACCT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_acctunit_s_del_vld (event_int, face_name, fisc_label, owner_name, acct_name_ERASE) SELECT event_int, face_name, fisc_label, owner_name, acct_name_ERASE FROM bud_acctunit_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDAWAR_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_awardlink_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force FROM bud_concept_awardlink_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDAWAR_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_awardlink_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE FROM bud_concept_awardlink_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_factunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh FROM bud_concept_factunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDFACT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_factunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE FROM bud_concept_factunit_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDHEAL_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_healerlink_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, healer_name) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name FROM bud_concept_healerlink_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDHEAL_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_healerlink_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE FROM bud_concept_healerlink_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor FROM bud_concept_reason_premiseunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE FROM bud_concept_reason_premiseunit_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDREAS_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_reasonunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite FROM bud_concept_reasonunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDREAS_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_reasonunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE FROM bud_concept_reasonunit_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_concept_laborlink_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, labor_title) SELECT event_int, face_name, fisc_label, owner_name, concept_way, labor_title FROM bud_concept_laborlink_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDLABO_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_concept_laborlink_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way, labor_title_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way, labor_title_ERASE FROM bud_concept_laborlink_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDCONC_SOUND_VLD_PUT_SQLSTR = "INSERT INTO bud_conceptunit_s_put_vld (event_int, face_name, fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool) SELECT event_int, face_name, fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool FROM bud_conceptunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDCONC_SOUND_VLD_DEL_SQLSTR = "INSERT INTO bud_conceptunit_s_del_vld (event_int, face_name, fisc_label, owner_name, concept_way_ERASE) SELECT event_int, face_name, fisc_label, owner_name, concept_way_ERASE FROM bud_conceptunit_s_del_agg WHERE error_message IS NULL"
-INSERT_BUDUNIT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO budunit_s_put_vld (event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit) SELECT event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit FROM budunit_s_put_agg WHERE error_message IS NULL"
-INSERT_BUDUNIT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO budunit_s_del_vld (event_int, face_name, fisc_label, owner_name_ERASE) SELECT event_int, face_name, fisc_label, owner_name_ERASE FROM budunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRMEMB_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_partner_membership_s_put_vld (event_int, face_name, belief_label, believer_name, partner_name, group_title, group_cred_points, group_debt_points) SELECT event_int, face_name, belief_label, believer_name, partner_name, group_title, group_cred_points, group_debt_points FROM believer_partner_membership_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRMEMB_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_partner_membership_s_del_vld (event_int, face_name, belief_label, believer_name, partner_name, group_title_ERASE) SELECT event_int, face_name, belief_label, believer_name, partner_name, group_title_ERASE FROM believer_partner_membership_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRPERN_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_partnerunit_s_put_vld (event_int, face_name, belief_label, believer_name, partner_name, partner_cred_points, partner_debt_points) SELECT event_int, face_name, belief_label, believer_name, partner_name, partner_cred_points, partner_debt_points FROM believer_partnerunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRPERN_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_partnerunit_s_del_vld (event_int, face_name, belief_label, believer_name, partner_name_ERASE) SELECT event_int, face_name, belief_label, believer_name, partner_name_ERASE FROM believer_partnerunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRAWAR_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_awardlink_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force) SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force FROM believer_plan_awardlink_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRAWAR_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_awardlink_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE FROM believer_plan_awardlink_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRFACT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_factunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper) SELECT event_int, face_name, belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper FROM believer_plan_factunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRFACT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_factunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE FROM believer_plan_factunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRHEAL_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_healerlink_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, healer_name) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name FROM believer_plan_healerlink_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRHEAL_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_healerlink_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE FROM believer_plan_healerlink_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRPREM_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor FROM believer_plan_reason_caseunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRPREM_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE FROM believer_plan_reason_caseunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRREAS_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_reasonunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite FROM believer_plan_reasonunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRREAS_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_reasonunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE FROM believer_plan_reasonunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRLABO_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_plan_laborlink_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, labor_title) SELECT event_int, face_name, belief_label, believer_name, plan_rope, labor_title FROM believer_plan_laborlink_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRLABO_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_plan_laborlink_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope, labor_title_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope, labor_title_ERASE FROM believer_plan_laborlink_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRPLAN_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believer_planunit_s_put_vld (event_int, face_name, belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM believer_planunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRPLAN_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believer_planunit_s_del_vld (event_int, face_name, belief_label, believer_name, plan_rope_ERASE) SELECT event_int, face_name, belief_label, believer_name, plan_rope_ERASE FROM believer_planunit_s_del_agg WHERE error_message IS NULL"
+INSERT_BLRUNIT_SOUND_VLD_PUT_SQLSTR = "INSERT INTO believerunit_s_put_vld (event_int, face_name, belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM believerunit_s_put_agg WHERE error_message IS NULL"
+INSERT_BLRUNIT_SOUND_VLD_DEL_SQLSTR = "INSERT INTO believerunit_s_del_vld (event_int, face_name, belief_label, believer_name_ERASE) SELECT event_int, face_name, belief_label, believer_name_ERASE FROM believerunit_s_del_agg WHERE error_message IS NULL"
 
-INSERT_FISCASH_SOUND_VLD_SQLSTR = "INSERT INTO fisc_cashbook_s_vld (event_int, face_name, fisc_label, owner_name, acct_name, tran_time, amount) SELECT event_int, face_name, fisc_label, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_s_agg WHERE error_message IS NULL"
-INSERT_FISDEAL_SOUND_VLD_SQLSTR = "INSERT INTO fisc_dealunit_s_vld (event_int, face_name, fisc_label, owner_name, deal_time, quota, celldepth) SELECT event_int, face_name, fisc_label, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_s_agg WHERE error_message IS NULL"
-INSERT_FISHOUR_SOUND_VLD_SQLSTR = "INSERT INTO fisc_timeline_hour_s_vld (event_int, face_name, fisc_label, cumlative_minute, hour_label) SELECT event_int, face_name, fisc_label, cumlative_minute, hour_label FROM fisc_timeline_hour_s_agg WHERE error_message IS NULL"
-INSERT_FISMONT_SOUND_VLD_SQLSTR = "INSERT INTO fisc_timeline_month_s_vld (event_int, face_name, fisc_label, cumlative_day, month_label) SELECT event_int, face_name, fisc_label, cumlative_day, month_label FROM fisc_timeline_month_s_agg WHERE error_message IS NULL"
-INSERT_FISWEEK_SOUND_VLD_SQLSTR = "INSERT INTO fisc_timeline_weekday_s_vld (event_int, face_name, fisc_label, weekday_order, weekday_label) SELECT event_int, face_name, fisc_label, weekday_order, weekday_label FROM fisc_timeline_weekday_s_agg WHERE error_message IS NULL"
-INSERT_FISOFFI_SOUND_VLD_SQLSTR = "INSERT INTO fisc_timeoffi_s_vld (event_int, face_name, fisc_label, offi_time) SELECT event_int, face_name, fisc_label, offi_time FROM fisc_timeoffi_s_agg WHERE error_message IS NULL"
-INSERT_FISUNIT_SOUND_VLD_SQLSTR = "INSERT INTO fiscunit_s_vld (event_int, face_name, fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations) SELECT event_int, face_name, fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_s_agg WHERE error_message IS NULL"
+INSERT_BLFPAYY_SOUND_VLD_SQLSTR = "INSERT INTO belief_paybook_s_vld (event_int, face_name, belief_label, believer_name, partner_name, tran_time, amount) SELECT event_int, face_name, belief_label, believer_name, partner_name, tran_time, amount FROM belief_paybook_s_agg WHERE error_message IS NULL"
+INSERT_BLFBUDD_SOUND_VLD_SQLSTR = "INSERT INTO belief_budunit_s_vld (event_int, face_name, belief_label, believer_name, bud_time, quota, celldepth) SELECT event_int, face_name, belief_label, believer_name, bud_time, quota, celldepth FROM belief_budunit_s_agg WHERE error_message IS NULL"
+INSERT_BLFHOUR_SOUND_VLD_SQLSTR = "INSERT INTO belief_timeline_hour_s_vld (event_int, face_name, belief_label, cumulative_minute, hour_label) SELECT event_int, face_name, belief_label, cumulative_minute, hour_label FROM belief_timeline_hour_s_agg WHERE error_message IS NULL"
+INSERT_BLFMONT_SOUND_VLD_SQLSTR = "INSERT INTO belief_timeline_month_s_vld (event_int, face_name, belief_label, cumulative_day, month_label) SELECT event_int, face_name, belief_label, cumulative_day, month_label FROM belief_timeline_month_s_agg WHERE error_message IS NULL"
+INSERT_BLFWEEK_SOUND_VLD_SQLSTR = "INSERT INTO belief_timeline_weekday_s_vld (event_int, face_name, belief_label, weekday_order, weekday_label) SELECT event_int, face_name, belief_label, weekday_order, weekday_label FROM belief_timeline_weekday_s_agg WHERE error_message IS NULL"
+INSERT_BLFOFFI_SOUND_VLD_SQLSTR = "INSERT INTO belief_timeoffi_s_vld (event_int, face_name, belief_label, offi_time) SELECT event_int, face_name, belief_label, offi_time FROM belief_timeoffi_s_agg WHERE error_message IS NULL"
+INSERT_BLFUNIT_SOUND_VLD_SQLSTR = "INSERT INTO beliefunit_s_vld (event_int, face_name, belief_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, belief_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM beliefunit_s_agg WHERE error_message IS NULL"
 
 
 def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
     return {
-        "bud_acct_membership_s_put_vld": INSERT_BUDMEMB_SOUND_VLD_PUT_SQLSTR,
-        "bud_acct_membership_s_del_vld": INSERT_BUDMEMB_SOUND_VLD_DEL_SQLSTR,
-        "bud_acctunit_s_put_vld": INSERT_BUDACCT_SOUND_VLD_PUT_SQLSTR,
-        "bud_acctunit_s_del_vld": INSERT_BUDACCT_SOUND_VLD_DEL_SQLSTR,
-        "bud_concept_awardlink_s_put_vld": INSERT_BUDAWAR_SOUND_VLD_PUT_SQLSTR,
-        "bud_concept_awardlink_s_del_vld": INSERT_BUDAWAR_SOUND_VLD_DEL_SQLSTR,
-        "bud_concept_factunit_s_put_vld": INSERT_BUDFACT_SOUND_VLD_PUT_SQLSTR,
-        "bud_concept_factunit_s_del_vld": INSERT_BUDFACT_SOUND_VLD_DEL_SQLSTR,
-        "bud_concept_healerlink_s_put_vld": INSERT_BUDHEAL_SOUND_VLD_PUT_SQLSTR,
-        "bud_concept_healerlink_s_del_vld": INSERT_BUDHEAL_SOUND_VLD_DEL_SQLSTR,
-        "bud_concept_reason_premiseunit_s_put_vld": INSERT_BUDPREM_SOUND_VLD_PUT_SQLSTR,
-        "bud_concept_reason_premiseunit_s_del_vld": INSERT_BUDPREM_SOUND_VLD_DEL_SQLSTR,
-        "bud_concept_reasonunit_s_put_vld": INSERT_BUDREAS_SOUND_VLD_PUT_SQLSTR,
-        "bud_concept_reasonunit_s_del_vld": INSERT_BUDREAS_SOUND_VLD_DEL_SQLSTR,
-        "bud_concept_laborlink_s_put_vld": INSERT_BUDLABO_SOUND_VLD_PUT_SQLSTR,
-        "bud_concept_laborlink_s_del_vld": INSERT_BUDLABO_SOUND_VLD_DEL_SQLSTR,
-        "bud_conceptunit_s_put_vld": INSERT_BUDCONC_SOUND_VLD_PUT_SQLSTR,
-        "bud_conceptunit_s_del_vld": INSERT_BUDCONC_SOUND_VLD_DEL_SQLSTR,
-        "budunit_s_put_vld": INSERT_BUDUNIT_SOUND_VLD_PUT_SQLSTR,
-        "budunit_s_del_vld": INSERT_BUDUNIT_SOUND_VLD_DEL_SQLSTR,
-        "fisc_cashbook_s_vld": INSERT_FISCASH_SOUND_VLD_SQLSTR,
-        "fisc_dealunit_s_vld": INSERT_FISDEAL_SOUND_VLD_SQLSTR,
-        "fisc_timeline_hour_s_vld": INSERT_FISHOUR_SOUND_VLD_SQLSTR,
-        "fisc_timeline_month_s_vld": INSERT_FISMONT_SOUND_VLD_SQLSTR,
-        "fisc_timeline_weekday_s_vld": INSERT_FISWEEK_SOUND_VLD_SQLSTR,
-        "fisc_timeoffi_s_vld": INSERT_FISOFFI_SOUND_VLD_SQLSTR,
-        "fiscunit_s_vld": INSERT_FISUNIT_SOUND_VLD_SQLSTR,
+        "believer_partner_membership_s_put_vld": INSERT_BLRMEMB_SOUND_VLD_PUT_SQLSTR,
+        "believer_partner_membership_s_del_vld": INSERT_BLRMEMB_SOUND_VLD_DEL_SQLSTR,
+        "believer_partnerunit_s_put_vld": INSERT_BLRPERN_SOUND_VLD_PUT_SQLSTR,
+        "believer_partnerunit_s_del_vld": INSERT_BLRPERN_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_awardlink_s_put_vld": INSERT_BLRAWAR_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_awardlink_s_del_vld": INSERT_BLRAWAR_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_factunit_s_put_vld": INSERT_BLRFACT_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_factunit_s_del_vld": INSERT_BLRFACT_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_healerlink_s_put_vld": INSERT_BLRHEAL_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_healerlink_s_del_vld": INSERT_BLRHEAL_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_reason_caseunit_s_put_vld": INSERT_BLRPREM_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_reason_caseunit_s_del_vld": INSERT_BLRPREM_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_reasonunit_s_put_vld": INSERT_BLRREAS_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_reasonunit_s_del_vld": INSERT_BLRREAS_SOUND_VLD_DEL_SQLSTR,
+        "believer_plan_laborlink_s_put_vld": INSERT_BLRLABO_SOUND_VLD_PUT_SQLSTR,
+        "believer_plan_laborlink_s_del_vld": INSERT_BLRLABO_SOUND_VLD_DEL_SQLSTR,
+        "believer_planunit_s_put_vld": INSERT_BLRPLAN_SOUND_VLD_PUT_SQLSTR,
+        "believer_planunit_s_del_vld": INSERT_BLRPLAN_SOUND_VLD_DEL_SQLSTR,
+        "believerunit_s_put_vld": INSERT_BLRUNIT_SOUND_VLD_PUT_SQLSTR,
+        "believerunit_s_del_vld": INSERT_BLRUNIT_SOUND_VLD_DEL_SQLSTR,
+        "belief_paybook_s_vld": INSERT_BLFPAYY_SOUND_VLD_SQLSTR,
+        "belief_budunit_s_vld": INSERT_BLFBUDD_SOUND_VLD_SQLSTR,
+        "belief_timeline_hour_s_vld": INSERT_BLFHOUR_SOUND_VLD_SQLSTR,
+        "belief_timeline_month_s_vld": INSERT_BLFMONT_SOUND_VLD_SQLSTR,
+        "belief_timeline_weekday_s_vld": INSERT_BLFWEEK_SOUND_VLD_SQLSTR,
+        "belief_timeoffi_s_vld": INSERT_BLFOFFI_SOUND_VLD_SQLSTR,
+        "beliefunit_s_vld": INSERT_BLFUNIT_SOUND_VLD_SQLSTR,
     }
 
 
-INSERT_FISCASH_VOICE_RAW_SQLSTR = "INSERT INTO fisc_cashbook_v_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_otx, tran_time, amount) SELECT event_int, face_name, fisc_label, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_s_vld "
-INSERT_FISDEAL_VOICE_RAW_SQLSTR = "INSERT INTO fisc_dealunit_v_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, deal_time, quota, celldepth) SELECT event_int, face_name, fisc_label, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_s_vld "
-INSERT_FISHOUR_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_hour_v_raw (event_int, face_name_otx, fisc_label_otx, cumlative_minute, hour_label_otx) SELECT event_int, face_name, fisc_label, cumlative_minute, hour_label FROM fisc_timeline_hour_s_vld "
-INSERT_FISMONT_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_month_v_raw (event_int, face_name_otx, fisc_label_otx, cumlative_day, month_label_otx) SELECT event_int, face_name, fisc_label, cumlative_day, month_label FROM fisc_timeline_month_s_vld "
-INSERT_FISWEEK_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeline_weekday_v_raw (event_int, face_name_otx, fisc_label_otx, weekday_order, weekday_label_otx) SELECT event_int, face_name, fisc_label, weekday_order, weekday_label FROM fisc_timeline_weekday_s_vld "
-INSERT_FISOFFI_VOICE_RAW_SQLSTR = "INSERT INTO fisc_timeoffi_v_raw (event_int, face_name_otx, fisc_label_otx, offi_time) SELECT event_int, face_name, fisc_label, offi_time FROM fisc_timeoffi_s_vld "
-INSERT_FISUNIT_VOICE_RAW_SQLSTR = "INSERT INTO fiscunit_v_raw (event_int, face_name_otx, fisc_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations) SELECT event_int, face_name, fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_s_vld "
+INSERT_BLFPAYY_VOICE_RAW_SQLSTR = "INSERT INTO belief_paybook_v_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, partner_name_otx, tran_time, amount) SELECT event_int, face_name, belief_label, believer_name, partner_name, tran_time, amount FROM belief_paybook_s_vld "
+INSERT_BLFBUDD_VOICE_RAW_SQLSTR = "INSERT INTO belief_budunit_v_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, bud_time, quota, celldepth) SELECT event_int, face_name, belief_label, believer_name, bud_time, quota, celldepth FROM belief_budunit_s_vld "
+INSERT_BLFHOUR_VOICE_RAW_SQLSTR = "INSERT INTO belief_timeline_hour_v_raw (event_int, face_name_otx, belief_label_otx, cumulative_minute, hour_label_otx) SELECT event_int, face_name, belief_label, cumulative_minute, hour_label FROM belief_timeline_hour_s_vld "
+INSERT_BLFMONT_VOICE_RAW_SQLSTR = "INSERT INTO belief_timeline_month_v_raw (event_int, face_name_otx, belief_label_otx, cumulative_day, month_label_otx) SELECT event_int, face_name, belief_label, cumulative_day, month_label FROM belief_timeline_month_s_vld "
+INSERT_BLFWEEK_VOICE_RAW_SQLSTR = "INSERT INTO belief_timeline_weekday_v_raw (event_int, face_name_otx, belief_label_otx, weekday_order, weekday_label_otx) SELECT event_int, face_name, belief_label, weekday_order, weekday_label FROM belief_timeline_weekday_s_vld "
+INSERT_BLFOFFI_VOICE_RAW_SQLSTR = "INSERT INTO belief_timeoffi_v_raw (event_int, face_name_otx, belief_label_otx, offi_time) SELECT event_int, face_name, belief_label, offi_time FROM belief_timeoffi_s_vld "
+INSERT_BLFUNIT_VOICE_RAW_SQLSTR = "INSERT INTO beliefunit_v_raw (event_int, face_name_otx, belief_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, belief_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM beliefunit_s_vld "
 
-INSERT_BUDMEMB_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_acct_membership_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_otx, group_title_otx, credit_vote, debtit_vote) SELECT event_int, face_name, fisc_label, owner_name, acct_name, group_title, credit_vote, debtit_vote FROM bud_acct_membership_s_put_vld "
-INSERT_BUDMEMB_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_acct_membership_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, acct_name, group_title_ERASE FROM bud_acct_membership_s_del_vld "
-INSERT_BUDACCT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_acctunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_otx, credit_belief, debtit_belief) SELECT event_int, face_name, fisc_label, owner_name, acct_name, credit_belief, debtit_belief FROM bud_acctunit_s_put_vld "
-INSERT_BUDACCT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_acctunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, acct_name_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, acct_name_ERASE FROM bud_acctunit_s_del_vld "
-INSERT_BUDAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_awardlink_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force FROM bud_concept_awardlink_s_put_vld "
-INSERT_BUDAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_awardlink_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE FROM bud_concept_awardlink_s_del_vld "
-INSERT_BUDFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_factunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, fcontext_otx, fstate_otx, fopen, fnigh) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh FROM bud_concept_factunit_s_put_vld "
-INSERT_BUDFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_factunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, fcontext_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE FROM bud_concept_factunit_s_del_vld "
-INSERT_BUDHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_healerlink_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, healer_name_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name FROM bud_concept_healerlink_s_put_vld "
-INSERT_BUDHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_healerlink_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, healer_name_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE FROM bud_concept_healerlink_s_del_vld "
-INSERT_BUDPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pstate_otx, pnigh, popen, pdivisor) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor FROM bud_concept_reason_premiseunit_s_put_vld "
-INSERT_BUDPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_reason_premiseunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, pstate_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE FROM bud_concept_reason_premiseunit_s_del_vld "
-INSERT_BUDREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_reasonunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_otx, rconcept_active_requisite) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite FROM bud_concept_reasonunit_s_put_vld "
-INSERT_BUDREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_reasonunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, rcontext_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE FROM bud_concept_reasonunit_s_del_vld "
-INSERT_BUDLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_concept_laborlink_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, labor_title_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, labor_title FROM bud_concept_laborlink_s_put_vld "
-INSERT_BUDLABO_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_concept_laborlink_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, labor_title_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way, labor_title_ERASE FROM bud_concept_laborlink_s_del_vld "
-INSERT_BUDCONC_VOICE_RAW_PUT_SQLSTR = "INSERT INTO bud_conceptunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool) SELECT event_int, face_name, fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool FROM bud_conceptunit_s_put_vld "
-INSERT_BUDCONC_VOICE_RAW_DEL_SQLSTR = "INSERT INTO bud_conceptunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, concept_way_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name, concept_way_ERASE FROM bud_conceptunit_s_del_vld "
-INSERT_BUDUNIT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO budunit_v_put_raw (event_int, face_name_otx, fisc_label_otx, owner_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit) SELECT event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit FROM budunit_s_put_vld "
-INSERT_BUDUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO budunit_v_del_raw (event_int, face_name_otx, fisc_label_otx, owner_name_ERASE_otx) SELECT event_int, face_name, fisc_label, owner_name_ERASE FROM budunit_s_del_vld "
+INSERT_BLRMEMB_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_partner_membership_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, partner_name_otx, group_title_otx, group_cred_points, group_debt_points) SELECT event_int, face_name, belief_label, believer_name, partner_name, group_title, group_cred_points, group_debt_points FROM believer_partner_membership_s_put_vld "
+INSERT_BLRMEMB_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_partner_membership_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, partner_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, partner_name, group_title_ERASE FROM believer_partner_membership_s_del_vld "
+INSERT_BLRPERN_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_partnerunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, partner_name_otx, partner_cred_points, partner_debt_points) SELECT event_int, face_name, belief_label, believer_name, partner_name, partner_cred_points, partner_debt_points FROM believer_partnerunit_s_put_vld "
+INSERT_BLRPERN_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_partnerunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, partner_name_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, partner_name_ERASE FROM believer_partnerunit_s_del_vld "
+INSERT_BLRAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_awardlink_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force FROM believer_plan_awardlink_s_put_vld "
+INSERT_BLRAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_awardlink_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE FROM believer_plan_awardlink_s_del_vld "
+INSERT_BLRFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_factunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, f_context_otx, f_state_otx, f_lower, f_upper) SELECT event_int, face_name, belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper FROM believer_plan_factunit_s_put_vld "
+INSERT_BLRFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_factunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, f_context_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE FROM believer_plan_factunit_s_del_vld "
+INSERT_BLRHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_healerlink_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, healer_name_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name FROM believer_plan_healerlink_s_put_vld "
+INSERT_BLRHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_healerlink_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, healer_name_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE FROM believer_plan_healerlink_s_del_vld "
+INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, r_state_otx, r_upper, r_lower, r_divisor) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor FROM believer_plan_reason_caseunit_s_put_vld "
+INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_reason_caseunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, r_state_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE FROM believer_plan_reason_caseunit_s_del_vld "
+INSERT_BLRREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_reasonunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_otx, r_plan_active_requisite) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite FROM believer_plan_reasonunit_s_put_vld "
+INSERT_BLRREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_reasonunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, r_context_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE FROM believer_plan_reasonunit_s_del_vld "
+INSERT_BLRLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_plan_laborlink_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, labor_title_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, labor_title FROM believer_plan_laborlink_s_put_vld "
+INSERT_BLRLABO_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_plan_laborlink_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, labor_title_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope, labor_title_ERASE FROM believer_plan_laborlink_s_del_vld "
+INSERT_BLRPLAN_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believer_planunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool) SELECT event_int, face_name, belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool FROM believer_planunit_s_put_vld "
+INSERT_BLRPLAN_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believer_planunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, plan_rope_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name, plan_rope_ERASE FROM believer_planunit_s_del_vld "
+INSERT_BLRUNIT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO believerunit_v_put_raw (event_int, face_name_otx, belief_label_otx, believer_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM believerunit_s_put_vld "
+INSERT_BLRUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO believerunit_v_del_raw (event_int, face_name_otx, belief_label_otx, believer_name_ERASE_otx) SELECT event_int, face_name, belief_label, believer_name_ERASE FROM believerunit_s_del_vld "
 
 
 def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
     return {
-        "fisc_cashbook_v_raw": INSERT_FISCASH_VOICE_RAW_SQLSTR,
-        "fisc_dealunit_v_raw": INSERT_FISDEAL_VOICE_RAW_SQLSTR,
-        "fisc_timeline_hour_v_raw": INSERT_FISHOUR_VOICE_RAW_SQLSTR,
-        "fisc_timeline_month_v_raw": INSERT_FISMONT_VOICE_RAW_SQLSTR,
-        "fisc_timeline_weekday_v_raw": INSERT_FISWEEK_VOICE_RAW_SQLSTR,
-        "fisc_timeoffi_v_raw": INSERT_FISOFFI_VOICE_RAW_SQLSTR,
-        "fiscunit_v_raw": INSERT_FISUNIT_VOICE_RAW_SQLSTR,
-        "bud_acct_membership_v_put_raw": INSERT_BUDMEMB_VOICE_RAW_PUT_SQLSTR,
-        "bud_acct_membership_v_del_raw": INSERT_BUDMEMB_VOICE_RAW_DEL_SQLSTR,
-        "bud_acctunit_v_put_raw": INSERT_BUDACCT_VOICE_RAW_PUT_SQLSTR,
-        "bud_acctunit_v_del_raw": INSERT_BUDACCT_VOICE_RAW_DEL_SQLSTR,
-        "bud_concept_awardlink_v_put_raw": INSERT_BUDAWAR_VOICE_RAW_PUT_SQLSTR,
-        "bud_concept_awardlink_v_del_raw": INSERT_BUDAWAR_VOICE_RAW_DEL_SQLSTR,
-        "bud_concept_factunit_v_put_raw": INSERT_BUDFACT_VOICE_RAW_PUT_SQLSTR,
-        "bud_concept_factunit_v_del_raw": INSERT_BUDFACT_VOICE_RAW_DEL_SQLSTR,
-        "bud_concept_healerlink_v_put_raw": INSERT_BUDHEAL_VOICE_RAW_PUT_SQLSTR,
-        "bud_concept_healerlink_v_del_raw": INSERT_BUDHEAL_VOICE_RAW_DEL_SQLSTR,
-        "bud_concept_reason_premiseunit_v_put_raw": INSERT_BUDPREM_VOICE_RAW_PUT_SQLSTR,
-        "bud_concept_reason_premiseunit_v_del_raw": INSERT_BUDPREM_VOICE_RAW_DEL_SQLSTR,
-        "bud_concept_reasonunit_v_put_raw": INSERT_BUDREAS_VOICE_RAW_PUT_SQLSTR,
-        "bud_concept_reasonunit_v_del_raw": INSERT_BUDREAS_VOICE_RAW_DEL_SQLSTR,
-        "bud_concept_laborlink_v_put_raw": INSERT_BUDLABO_VOICE_RAW_PUT_SQLSTR,
-        "bud_concept_laborlink_v_del_raw": INSERT_BUDLABO_VOICE_RAW_DEL_SQLSTR,
-        "bud_conceptunit_v_put_raw": INSERT_BUDCONC_VOICE_RAW_PUT_SQLSTR,
-        "bud_conceptunit_v_del_raw": INSERT_BUDCONC_VOICE_RAW_DEL_SQLSTR,
-        "budunit_v_put_raw": INSERT_BUDUNIT_VOICE_RAW_PUT_SQLSTR,
-        "budunit_v_del_raw": INSERT_BUDUNIT_VOICE_RAW_DEL_SQLSTR,
+        "belief_paybook_v_raw": INSERT_BLFPAYY_VOICE_RAW_SQLSTR,
+        "belief_budunit_v_raw": INSERT_BLFBUDD_VOICE_RAW_SQLSTR,
+        "belief_timeline_hour_v_raw": INSERT_BLFHOUR_VOICE_RAW_SQLSTR,
+        "belief_timeline_month_v_raw": INSERT_BLFMONT_VOICE_RAW_SQLSTR,
+        "belief_timeline_weekday_v_raw": INSERT_BLFWEEK_VOICE_RAW_SQLSTR,
+        "belief_timeoffi_v_raw": INSERT_BLFOFFI_VOICE_RAW_SQLSTR,
+        "beliefunit_v_raw": INSERT_BLFUNIT_VOICE_RAW_SQLSTR,
+        "believer_partner_membership_v_put_raw": INSERT_BLRMEMB_VOICE_RAW_PUT_SQLSTR,
+        "believer_partner_membership_v_del_raw": INSERT_BLRMEMB_VOICE_RAW_DEL_SQLSTR,
+        "believer_partnerunit_v_put_raw": INSERT_BLRPERN_VOICE_RAW_PUT_SQLSTR,
+        "believer_partnerunit_v_del_raw": INSERT_BLRPERN_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_awardlink_v_put_raw": INSERT_BLRAWAR_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_awardlink_v_del_raw": INSERT_BLRAWAR_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_factunit_v_put_raw": INSERT_BLRFACT_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_factunit_v_del_raw": INSERT_BLRFACT_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_healerlink_v_put_raw": INSERT_BLRHEAL_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_healerlink_v_del_raw": INSERT_BLRHEAL_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_reason_caseunit_v_put_raw": INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_reason_caseunit_v_del_raw": INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_reasonunit_v_put_raw": INSERT_BLRREAS_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_reasonunit_v_del_raw": INSERT_BLRREAS_VOICE_RAW_DEL_SQLSTR,
+        "believer_plan_laborlink_v_put_raw": INSERT_BLRLABO_VOICE_RAW_PUT_SQLSTR,
+        "believer_plan_laborlink_v_del_raw": INSERT_BLRLABO_VOICE_RAW_DEL_SQLSTR,
+        "believer_planunit_v_put_raw": INSERT_BLRPLAN_VOICE_RAW_PUT_SQLSTR,
+        "believer_planunit_v_del_raw": INSERT_BLRPLAN_VOICE_RAW_DEL_SQLSTR,
+        "believerunit_v_put_raw": INSERT_BLRUNIT_VOICE_RAW_PUT_SQLSTR,
+        "believerunit_v_del_raw": INSERT_BLRUNIT_VOICE_RAW_DEL_SQLSTR,
     }
 
 
@@ -892,391 +898,444 @@ WHERE {column_prefix}_inx IS NULL
 """
 
 
-FISCASH_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fisc_cashbook_v_agg (fisc_label, owner_name, acct_name, tran_time, amount)
-SELECT fisc_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
-FROM fisc_cashbook_v_raw
-GROUP BY fisc_label_inx, owner_name_inx, acct_name_inx, tran_time, amount
+BLFPAYY_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO belief_paybook_v_agg (belief_label, believer_name, partner_name, tran_time, amount)
+SELECT belief_label_inx, believer_name_inx, partner_name_inx, tran_time, amount
+FROM belief_paybook_v_raw
+GROUP BY belief_label_inx, believer_name_inx, partner_name_inx, tran_time, amount
 """
-FISDEAL_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fisc_dealunit_v_agg (fisc_label, owner_name, deal_time, quota, celldepth)
-SELECT fisc_label_inx, owner_name_inx, deal_time, quota, celldepth
-FROM fisc_dealunit_v_raw
-GROUP BY fisc_label_inx, owner_name_inx, deal_time, quota, celldepth
+BLFBUDD_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO belief_budunit_v_agg (belief_label, believer_name, bud_time, quota, celldepth)
+SELECT belief_label_inx, believer_name_inx, bud_time, quota, celldepth
+FROM belief_budunit_v_raw
+GROUP BY belief_label_inx, believer_name_inx, bud_time, quota, celldepth
 """
-FISHOUR_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fisc_timeline_hour_v_agg (fisc_label, cumlative_minute, hour_label)
-SELECT fisc_label_inx, cumlative_minute, hour_label_inx
-FROM fisc_timeline_hour_v_raw
-GROUP BY fisc_label_inx, cumlative_minute, hour_label_inx
+BLFHOUR_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO belief_timeline_hour_v_agg (belief_label, cumulative_minute, hour_label)
+SELECT belief_label_inx, cumulative_minute, hour_label_inx
+FROM belief_timeline_hour_v_raw
+GROUP BY belief_label_inx, cumulative_minute, hour_label_inx
 """
-FISMONT_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fisc_timeline_month_v_agg (fisc_label, cumlative_day, month_label)
-SELECT fisc_label_inx, cumlative_day, month_label_inx
-FROM fisc_timeline_month_v_raw
-GROUP BY fisc_label_inx, cumlative_day, month_label_inx
+BLFMONT_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO belief_timeline_month_v_agg (belief_label, cumulative_day, month_label)
+SELECT belief_label_inx, cumulative_day, month_label_inx
+FROM belief_timeline_month_v_raw
+GROUP BY belief_label_inx, cumulative_day, month_label_inx
 """
-FISWEEK_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fisc_timeline_weekday_v_agg (fisc_label, weekday_order, weekday_label)
-SELECT fisc_label_inx, weekday_order, weekday_label_inx
-FROM fisc_timeline_weekday_v_raw
-GROUP BY fisc_label_inx, weekday_order, weekday_label_inx
+BLFWEEK_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO belief_timeline_weekday_v_agg (belief_label, weekday_order, weekday_label)
+SELECT belief_label_inx, weekday_order, weekday_label_inx
+FROM belief_timeline_weekday_v_raw
+GROUP BY belief_label_inx, weekday_order, weekday_label_inx
 """
-FISOFFI_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fisc_timeoffi_v_agg (fisc_label, offi_time)
-SELECT fisc_label_inx, offi_time
-FROM fisc_timeoffi_v_raw
-GROUP BY fisc_label_inx, offi_time
+BLFOFFI_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO belief_timeoffi_v_agg (belief_label, offi_time)
+SELECT belief_label_inx, offi_time
+FROM belief_timeoffi_v_raw
+GROUP BY belief_label_inx, offi_time
 """
-FISUNIT_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO fiscunit_v_agg (fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations)
-SELECT fisc_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
-FROM fiscunit_v_raw
-GROUP BY fisc_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations
+BLFUNIT_VOICE_AGG_INSERT_SQLSTR = """
+INSERT INTO beliefunit_v_agg (belief_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations)
+SELECT belief_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
+FROM beliefunit_v_raw
+GROUP BY belief_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
 """
 
-INSERT_BUDMEMB_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_acct_membership_v_put_agg (event_int, face_name, fisc_label, owner_name, acct_name, group_title, credit_vote, debtit_vote)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
-FROM bud_acct_membership_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_inx, credit_vote, debtit_vote
+INSERT_BLRMEMB_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_partner_membership_v_put_agg (event_int, face_name, belief_label, believer_name, partner_name, group_title, group_cred_points, group_debt_points)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_inx, group_title_inx, group_cred_points, group_debt_points
+FROM believer_partner_membership_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_inx, group_title_inx, group_cred_points, group_debt_points
 """
-INSERT_BUDMEMB_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_acct_membership_v_del_agg (event_int, face_name, fisc_label, owner_name, acct_name, group_title_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
-FROM bud_acct_membership_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, group_title_ERASE_inx
+INSERT_BLRMEMB_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_partner_membership_v_del_agg (event_int, face_name, belief_label, believer_name, partner_name, group_title_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_inx, group_title_ERASE_inx
+FROM believer_partner_membership_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_inx, group_title_ERASE_inx
 """
-INSERT_BUDACCT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_acctunit_v_put_agg (event_int, face_name, fisc_label, owner_name, acct_name, credit_belief, debtit_belief)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, credit_belief, debtit_belief
-FROM bud_acctunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_inx, credit_belief, debtit_belief
+INSERT_BLRPERN_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_partnerunit_v_put_agg (event_int, face_name, belief_label, believer_name, partner_name, partner_cred_points, partner_debt_points)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_inx, partner_cred_points, partner_debt_points
+FROM believer_partnerunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_inx, partner_cred_points, partner_debt_points
 """
-INSERT_BUDACCT_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_acctunit_v_del_agg (event_int, face_name, fisc_label, owner_name, acct_name_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_ERASE_inx
-FROM bud_acctunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, acct_name_ERASE_inx
+INSERT_BLRPERN_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_partnerunit_v_del_agg (event_int, face_name, belief_label, believer_name, partner_name_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_ERASE_inx
+FROM believer_partnerunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, partner_name_ERASE_inx
 """
-INSERT_BUDAWAR_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_awardlink_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title, give_force, take_force)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
-FROM bud_concept_awardlink_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_inx, give_force, take_force
+INSERT_BLRAWAR_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_plan_awardlink_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, awardee_title_inx, give_force, take_force
+FROM believer_plan_awardlink_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, awardee_title_inx, give_force, take_force
 """
-INSERT_BUDAWAR_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_awardlink_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, awardee_title_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
-FROM bud_concept_awardlink_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, awardee_title_ERASE_inx
+INSERT_BLRAWAR_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_plan_awardlink_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, awardee_title_ERASE_inx
+FROM believer_plan_awardlink_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, awardee_title_ERASE_inx
 """
-INSERT_BUDFACT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_factunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext, fstate, fopen, fnigh)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fstate_inx, fopen, fnigh
-FROM bud_concept_factunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_inx, fstate_inx, fopen, fnigh
+INSERT_BLRFACT_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_plan_factunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, f_context_inx, f_state_inx, f_lower, f_upper
+FROM believer_plan_factunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, f_context_inx, f_state_inx, f_lower, f_upper
 """
-INSERT_BUDFACT_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_factunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, fcontext_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
-FROM bud_concept_factunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, fcontext_ERASE_inx
+INSERT_BLRFACT_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_plan_factunit_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, f_context_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, f_context_ERASE_inx
+FROM believer_plan_factunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, f_context_ERASE_inx
 """
-INSERT_BUDHEAL_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_healerlink_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, healer_name)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
-FROM bud_concept_healerlink_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_inx
+INSERT_BLRHEAL_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_plan_healerlink_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, healer_name)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, healer_name_inx
+FROM believer_plan_healerlink_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, healer_name_inx
 """
-INSERT_BUDHEAL_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_healerlink_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, healer_name_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
-FROM bud_concept_healerlink_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, healer_name_ERASE_inx
+INSERT_BLRHEAL_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_plan_healerlink_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, healer_name_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, healer_name_ERASE_inx
+FROM believer_plan_healerlink_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, healer_name_ERASE_inx
 """
-INSERT_BUDPREM_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_reason_premiseunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate, pnigh, popen, pdivisor)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
-FROM bud_concept_reason_premiseunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_inx, pnigh, popen, pdivisor
+INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_plan_reason_caseunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state, r_upper, r_lower, r_divisor)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_inx, r_upper, r_lower, r_divisor
+FROM believer_plan_reason_caseunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_inx, r_upper, r_lower, r_divisor
 """
-INSERT_BUDPREM_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_reason_premiseunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, pstate_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_ERASE_inx
-FROM bud_concept_reason_premiseunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, pstate_ERASE_inx
+INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_plan_reason_caseunit_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_state_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_ERASE_inx
+FROM believer_plan_reason_caseunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_state_ERASE_inx
 """
-INSERT_BUDREAS_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_reasonunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext, rconcept_active_requisite)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rconcept_active_requisite
-FROM bud_concept_reasonunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_inx, rconcept_active_requisite
+INSERT_BLRREAS_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_plan_reasonunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context, r_plan_active_requisite)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_plan_active_requisite
+FROM believer_plan_reasonunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_inx, r_plan_active_requisite
 """
-INSERT_BUDREAS_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_reasonunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, rcontext_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
-FROM bud_concept_reasonunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, rcontext_ERASE_inx
+INSERT_BLRREAS_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_plan_reasonunit_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, r_context_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_ERASE_inx
+FROM believer_plan_reasonunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, r_context_ERASE_inx
 """
-INSERT_BUDLABO_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_concept_laborlink_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, labor_title)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
-FROM bud_concept_laborlink_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_inx
+INSERT_BLRLABO_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_plan_laborlink_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, labor_title)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, labor_title_inx
+FROM believer_plan_laborlink_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, labor_title_inx
 """
-INSERT_BUDLABO_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_concept_laborlink_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way, labor_title_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
-FROM bud_concept_laborlink_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, labor_title_ERASE_inx
+INSERT_BLRLABO_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_plan_laborlink_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, labor_title_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, labor_title_ERASE_inx
+FROM believer_plan_laborlink_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, labor_title_ERASE_inx
 """
-INSERT_BUDCONC_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO bud_conceptunit_v_put_agg (event_int, face_name, fisc_label, owner_name, concept_way, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
-FROM bud_conceptunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, pledge, problem_bool
+INSERT_BLRPLAN_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believer_planunit_v_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
+FROM believer_planunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool
 """
-INSERT_BUDCONC_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO bud_conceptunit_v_del_agg (event_int, face_name, fisc_label, owner_name, concept_way_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_ERASE_inx
-FROM bud_conceptunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, concept_way_ERASE_inx
+INSERT_BLRPLAN_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believer_planunit_v_del_agg (event_int, face_name, belief_label, believer_name, plan_rope_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_ERASE_inx
+FROM believer_planunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, plan_rope_ERASE_inx
 """
-INSERT_BUDUNIT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO budunit_v_put_agg (event_int, face_name, fisc_label, owner_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
-FROM budunit_v_put_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_coin, penny, respect_bit
+INSERT_BLRUNIT_VOICE_AGG_PUT_SQLSTR = """
+INSERT INTO believerunit_v_put_agg (event_int, face_name, belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
+FROM believerunit_v_put_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 """
-INSERT_BUDUNIT_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO budunit_v_del_agg (event_int, face_name, fisc_label, owner_name_ERASE)
-SELECT event_int, face_name_inx, fisc_label_inx, owner_name_ERASE_inx
-FROM budunit_v_del_raw
-GROUP BY event_int, face_name_inx, fisc_label_inx, owner_name_ERASE_inx
+INSERT_BLRUNIT_VOICE_AGG_DEL_SQLSTR = """
+INSERT INTO believerunit_v_del_agg (event_int, face_name, belief_label, believer_name_ERASE)
+SELECT event_int, face_name_inx, belief_label_inx, believer_name_ERASE_inx
+FROM believerunit_v_del_raw
+GROUP BY event_int, face_name_inx, belief_label_inx, believer_name_ERASE_inx
 """
 
 
 def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
     return {
-        "fisc_cashbook": FISCASH_VOICE_AGG_INSERT_SQLSTR,
-        "fisc_dealunit": FISDEAL_VOICE_AGG_INSERT_SQLSTR,
-        "fisc_timeline_hour": FISHOUR_VOICE_AGG_INSERT_SQLSTR,
-        "fisc_timeline_month": FISMONT_VOICE_AGG_INSERT_SQLSTR,
-        "fisc_timeline_weekday": FISWEEK_VOICE_AGG_INSERT_SQLSTR,
-        "fisc_timeoffi": FISOFFI_VOICE_AGG_INSERT_SQLSTR,
-        "fiscunit": FISUNIT_VOICE_AGG_INSERT_SQLSTR,
-        "bud_acct_membership_v_put_agg": INSERT_BUDMEMB_VOICE_AGG_PUT_SQLSTR,
-        "bud_acct_membership_v_del_agg": INSERT_BUDMEMB_VOICE_AGG_DEL_SQLSTR,
-        "bud_acctunit_v_put_agg": INSERT_BUDACCT_VOICE_AGG_PUT_SQLSTR,
-        "bud_acctunit_v_del_agg": INSERT_BUDACCT_VOICE_AGG_DEL_SQLSTR,
-        "bud_concept_awardlink_v_put_agg": INSERT_BUDAWAR_VOICE_AGG_PUT_SQLSTR,
-        "bud_concept_awardlink_v_del_agg": INSERT_BUDAWAR_VOICE_AGG_DEL_SQLSTR,
-        "bud_concept_factunit_v_put_agg": INSERT_BUDFACT_VOICE_AGG_PUT_SQLSTR,
-        "bud_concept_factunit_v_del_agg": INSERT_BUDFACT_VOICE_AGG_DEL_SQLSTR,
-        "bud_concept_healerlink_v_put_agg": INSERT_BUDHEAL_VOICE_AGG_PUT_SQLSTR,
-        "bud_concept_healerlink_v_del_agg": INSERT_BUDHEAL_VOICE_AGG_DEL_SQLSTR,
-        "bud_concept_reason_premiseunit_v_put_agg": INSERT_BUDPREM_VOICE_AGG_PUT_SQLSTR,
-        "bud_concept_reason_premiseunit_v_del_agg": INSERT_BUDPREM_VOICE_AGG_DEL_SQLSTR,
-        "bud_concept_reasonunit_v_put_agg": INSERT_BUDREAS_VOICE_AGG_PUT_SQLSTR,
-        "bud_concept_reasonunit_v_del_agg": INSERT_BUDREAS_VOICE_AGG_DEL_SQLSTR,
-        "bud_concept_laborlink_v_put_agg": INSERT_BUDLABO_VOICE_AGG_PUT_SQLSTR,
-        "bud_concept_laborlink_v_del_agg": INSERT_BUDLABO_VOICE_AGG_DEL_SQLSTR,
-        "bud_conceptunit_v_put_agg": INSERT_BUDCONC_VOICE_AGG_PUT_SQLSTR,
-        "bud_conceptunit_v_del_agg": INSERT_BUDCONC_VOICE_AGG_DEL_SQLSTR,
-        "budunit_v_put_agg": INSERT_BUDUNIT_VOICE_AGG_PUT_SQLSTR,
-        "budunit_v_del_agg": INSERT_BUDUNIT_VOICE_AGG_DEL_SQLSTR,
+        "belief_paybook": BLFPAYY_VOICE_AGG_INSERT_SQLSTR,
+        "belief_budunit": BLFBUDD_VOICE_AGG_INSERT_SQLSTR,
+        "belief_timeline_hour": BLFHOUR_VOICE_AGG_INSERT_SQLSTR,
+        "belief_timeline_month": BLFMONT_VOICE_AGG_INSERT_SQLSTR,
+        "belief_timeline_weekday": BLFWEEK_VOICE_AGG_INSERT_SQLSTR,
+        "belief_timeoffi": BLFOFFI_VOICE_AGG_INSERT_SQLSTR,
+        "beliefunit": BLFUNIT_VOICE_AGG_INSERT_SQLSTR,
+        "believer_partner_membership_v_put_agg": INSERT_BLRMEMB_VOICE_AGG_PUT_SQLSTR,
+        "believer_partner_membership_v_del_agg": INSERT_BLRMEMB_VOICE_AGG_DEL_SQLSTR,
+        "believer_partnerunit_v_put_agg": INSERT_BLRPERN_VOICE_AGG_PUT_SQLSTR,
+        "believer_partnerunit_v_del_agg": INSERT_BLRPERN_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_awardlink_v_put_agg": INSERT_BLRAWAR_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_awardlink_v_del_agg": INSERT_BLRAWAR_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_factunit_v_put_agg": INSERT_BLRFACT_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_factunit_v_del_agg": INSERT_BLRFACT_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_healerlink_v_put_agg": INSERT_BLRHEAL_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_healerlink_v_del_agg": INSERT_BLRHEAL_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_reason_caseunit_v_put_agg": INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_reason_caseunit_v_del_agg": INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_reasonunit_v_put_agg": INSERT_BLRREAS_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_reasonunit_v_del_agg": INSERT_BLRREAS_VOICE_AGG_DEL_SQLSTR,
+        "believer_plan_laborlink_v_put_agg": INSERT_BLRLABO_VOICE_AGG_PUT_SQLSTR,
+        "believer_plan_laborlink_v_del_agg": INSERT_BLRLABO_VOICE_AGG_DEL_SQLSTR,
+        "believer_planunit_v_put_agg": INSERT_BLRPLAN_VOICE_AGG_PUT_SQLSTR,
+        "believer_planunit_v_del_agg": INSERT_BLRPLAN_VOICE_AGG_DEL_SQLSTR,
+        "believerunit_v_put_agg": INSERT_BLRUNIT_VOICE_AGG_PUT_SQLSTR,
+        "believerunit_v_del_agg": INSERT_BLRUNIT_VOICE_AGG_DEL_SQLSTR,
     }
 
 
-FISCASH_FU2_SELECT_SQLSTR = "SELECT fisc_label, owner_name, acct_name, tran_time, amount FROM fisc_cashbook_v_agg WHERE fisc_label = "
-FISDEAL_FU2_SELECT_SQLSTR = "SELECT fisc_label, owner_name, deal_time, quota, celldepth FROM fisc_dealunit_v_agg WHERE fisc_label = "
-FISHOUR_FU2_SELECT_SQLSTR = "SELECT fisc_label, cumlative_minute, hour_label FROM fisc_timeline_hour_v_agg WHERE fisc_label = "
-FISMONT_FU2_SELECT_SQLSTR = "SELECT fisc_label, cumlative_day, month_label FROM fisc_timeline_month_v_agg WHERE fisc_label = "
-FISWEEK_FU2_SELECT_SQLSTR = "SELECT fisc_label, weekday_order, weekday_label FROM fisc_timeline_weekday_v_agg WHERE fisc_label = "
-FISOFFI_FU2_SELECT_SQLSTR = (
-    "SELECT fisc_label, offi_time FROM fisc_timeoffi_v_agg WHERE fisc_label = "
+BLFPAYY_FU2_SELECT_SQLSTR = "SELECT belief_label, believer_name, partner_name, tran_time, amount FROM belief_paybook_v_agg WHERE belief_label = "
+BLFBUDD_FU2_SELECT_SQLSTR = "SELECT belief_label, believer_name, bud_time, quota, celldepth FROM belief_budunit_v_agg WHERE belief_label = "
+BLFHOUR_FU2_SELECT_SQLSTR = "SELECT belief_label, cumulative_minute, hour_label FROM belief_timeline_hour_v_agg WHERE belief_label = "
+BLFMONT_FU2_SELECT_SQLSTR = "SELECT belief_label, cumulative_day, month_label FROM belief_timeline_month_v_agg WHERE belief_label = "
+BLFWEEK_FU2_SELECT_SQLSTR = "SELECT belief_label, weekday_order, weekday_label FROM belief_timeline_weekday_v_agg WHERE belief_label = "
+BLFOFFI_FU2_SELECT_SQLSTR = (
+    "SELECT belief_label, offi_time FROM belief_timeoffi_v_agg WHERE belief_label = "
 )
-FISUNIT_FU2_SELECT_SQLSTR = "SELECT fisc_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_coin, penny, respect_bit, bridge, job_listen_rotations FROM fiscunit_v_agg WHERE fisc_label = "
+BLFUNIT_FU2_SELECT_SQLSTR = "SELECT belief_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM beliefunit_v_agg WHERE belief_label = "
 
 
-def get_fisc_voice_select1_sqlstrs(fisc_label: str) -> dict[str, str]:
+def get_belief_voice_select1_sqlstrs(belief_label: str) -> dict[str, str]:
     return {
-        "fiscunit": f"{FISUNIT_FU2_SELECT_SQLSTR}'{fisc_label}'",
-        "fisc_dealunit": f"{FISDEAL_FU2_SELECT_SQLSTR}'{fisc_label}'",
-        "fisc_cashbook": f"{FISCASH_FU2_SELECT_SQLSTR}'{fisc_label}'",
-        "fisc_timeline_hour": f"{FISHOUR_FU2_SELECT_SQLSTR}'{fisc_label}'",
-        "fisc_timeline_month": f"{FISMONT_FU2_SELECT_SQLSTR}'{fisc_label}'",
-        "fisc_timeline_weekday": f"{FISWEEK_FU2_SELECT_SQLSTR}'{fisc_label}'",
-        "fisc_timeoffi": f"{FISOFFI_FU2_SELECT_SQLSTR}'{fisc_label}'",
+        "beliefunit": f"{BLFUNIT_FU2_SELECT_SQLSTR}'{belief_label}'",
+        "belief_budunit": f"{BLFBUDD_FU2_SELECT_SQLSTR}'{belief_label}'",
+        "belief_paybook": f"{BLFPAYY_FU2_SELECT_SQLSTR}'{belief_label}'",
+        "belief_timeline_hour": f"{BLFHOUR_FU2_SELECT_SQLSTR}'{belief_label}'",
+        "belief_timeline_month": f"{BLFMONT_FU2_SELECT_SQLSTR}'{belief_label}'",
+        "belief_timeline_weekday": f"{BLFWEEK_FU2_SELECT_SQLSTR}'{belief_label}'",
+        "belief_timeoffi": f"{BLFOFFI_FU2_SELECT_SQLSTR}'{belief_label}'",
     }
 
 
 def get_idea_stageble_put_dimens() -> dict[str, list[str]]:
     return {
-        "br00000": ["fiscunit"],
-        "br00001": ["budunit", "fisc_dealunit", "fiscunit"],
-        "br00002": ["bud_acctunit", "budunit", "fisc_cashbook", "fiscunit"],
-        "br00003": ["fisc_timeline_hour", "fiscunit"],
-        "br00004": ["fisc_timeline_month", "fiscunit"],
-        "br00005": ["fisc_timeline_weekday", "fiscunit"],
-        "br00006": ["fisc_timeoffi", "fiscunit"],
-        "br00011": ["bud_acctunit", "budunit", "fiscunit"],
-        "br00012": ["bud_acct_membership", "bud_acctunit", "budunit", "fiscunit"],
-        "br00013": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00019": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00020": ["bud_acct_membership", "bud_acctunit", "budunit", "fiscunit"],
-        "br00021": ["bud_acctunit", "budunit", "fiscunit"],
-        "br00022": ["bud_concept_awardlink", "bud_conceptunit", "budunit", "fiscunit"],
-        "br00023": ["bud_concept_factunit", "bud_conceptunit", "budunit", "fiscunit"],
-        "br00024": ["bud_concept_laborlink", "bud_conceptunit", "budunit", "fiscunit"],
-        "br00025": ["bud_concept_healerlink", "bud_conceptunit", "budunit", "fiscunit"],
-        "br00026": [
-            "bud_concept_reason_premiseunit",
-            "bud_concept_reasonunit",
-            "bud_conceptunit",
-            "budunit",
-            "fiscunit",
+        "br00000": ["beliefunit"],
+        "br00001": ["belief_budunit", "beliefunit", "believerunit"],
+        "br00002": [
+            "belief_paybook",
+            "beliefunit",
+            "believer_partnerunit",
+            "believerunit",
         ],
-        "br00027": ["bud_concept_reasonunit", "bud_conceptunit", "budunit", "fiscunit"],
-        "br00028": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00029": ["budunit", "fiscunit"],
-        "br00036": ["bud_concept_healerlink", "bud_conceptunit", "budunit", "fiscunit"],
+        "br00003": ["belief_timeline_hour", "beliefunit"],
+        "br00004": ["belief_timeline_month", "beliefunit"],
+        "br00005": ["belief_timeline_weekday", "beliefunit"],
+        "br00006": ["belief_timeoffi", "beliefunit"],
+        "br00011": ["beliefunit", "believer_partnerunit", "believerunit"],
+        "br00012": [
+            "beliefunit",
+            "believer_partner_membership",
+            "believer_partnerunit",
+            "believerunit",
+        ],
+        "br00013": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00019": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00020": [
+            "beliefunit",
+            "believer_partner_membership",
+            "believer_partnerunit",
+            "believerunit",
+        ],
+        "br00021": ["beliefunit", "believer_partnerunit", "believerunit"],
+        "br00022": [
+            "beliefunit",
+            "believer_plan_awardlink",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00023": [
+            "beliefunit",
+            "believer_plan_factunit",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00024": [
+            "beliefunit",
+            "believer_plan_laborlink",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00025": [
+            "beliefunit",
+            "believer_plan_healerlink",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00026": [
+            "beliefunit",
+            "believer_plan_reason_caseunit",
+            "believer_plan_reasonunit",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00027": [
+            "beliefunit",
+            "believer_plan_reasonunit",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00028": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00029": ["beliefunit", "believerunit"],
+        "br00036": [
+            "beliefunit",
+            "believer_plan_healerlink",
+            "believer_planunit",
+            "believerunit",
+        ],
         "br00042": [],
         "br00043": [],
         "br00044": [],
         "br00045": [],
-        "br00050": ["bud_acctunit", "budunit", "fiscunit"],
-        "br00051": ["budunit", "fiscunit"],
-        "br00052": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00053": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00054": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00055": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00056": ["bud_concept_reasonunit", "bud_conceptunit", "budunit", "fiscunit"],
-        "br00057": ["bud_conceptunit", "budunit", "fiscunit"],
-        "br00058": ["budunit", "fiscunit"],
-        "br00059": ["fiscunit"],
-        "br00113": ["bud_acctunit", "budunit", "fiscunit"],
-        "br00115": ["bud_acctunit", "budunit", "fiscunit"],
-        "br00116": ["bud_acctunit", "budunit", "fiscunit"],
-        "br00117": ["bud_acctunit", "budunit", "fiscunit"],
+        "br00050": ["beliefunit", "believer_partnerunit", "believerunit"],
+        "br00051": ["beliefunit", "believerunit"],
+        "br00052": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00053": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00054": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00055": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00056": [
+            "beliefunit",
+            "believer_plan_reasonunit",
+            "believer_planunit",
+            "believerunit",
+        ],
+        "br00057": ["beliefunit", "believer_planunit", "believerunit"],
+        "br00058": ["beliefunit", "believerunit"],
+        "br00059": ["beliefunit"],
+        "br00113": ["beliefunit", "believer_partnerunit", "believerunit"],
+        "br00115": ["beliefunit", "believer_partnerunit", "believerunit"],
+        "br00116": ["beliefunit", "believer_partnerunit", "believerunit"],
+        "br00117": ["beliefunit", "believer_partnerunit", "believerunit"],
     }
 
 
 IDEA_STAGEBLE_DEL_DIMENS = {
-    "br00050": ["bud_acct_membership"],
-    "br00051": ["bud_acctunit"],
-    "br00052": ["bud_concept_awardlink"],
-    "br00053": ["bud_concept_factunit"],
-    "br00054": ["bud_concept_laborlink"],
-    "br00055": ["bud_concept_healerlink"],
-    "br00056": ["bud_concept_reason_premiseunit"],
-    "br00057": ["bud_concept_reasonunit"],
-    "br00058": ["bud_conceptunit"],
-    "br00059": ["budunit"],
+    "br00050": ["believer_partner_membership"],
+    "br00051": ["believer_partnerunit"],
+    "br00052": ["believer_plan_awardlink"],
+    "br00053": ["believer_plan_factunit"],
+    "br00054": ["believer_plan_laborlink"],
+    "br00055": ["believer_plan_healerlink"],
+    "br00056": ["believer_plan_reason_caseunit"],
+    "br00057": ["believer_plan_reasonunit"],
+    "br00058": ["believer_planunit"],
+    "br00059": ["believerunit"],
 }
 
 
-CREATE_FISC_EVENT_TIME_AGG_SQLSTR = """
-CREATE TABLE IF NOT EXISTS fisc_event_time_agg (
-  fisc_label TEXT
+CREATE_BELIEF_EVENT_TIME_AGG_SQLSTR = """
+CREATE TABLE IF NOT EXISTS belief_event_time_agg (
+  belief_label TEXT
 , event_int INTEGER
 , agg_time INTEGER
 , error_message TEXT
 )
 ;
 """
-INSERT_FISC_EVENT_TIME_AGG_SQLSTR = """
-INSERT INTO fisc_event_time_agg (fisc_label, event_int, agg_time)
-SELECT fisc_label, event_int, agg_time
+INSERT_BELIEF_EVENT_TIME_AGG_SQLSTR = """
+INSERT INTO belief_event_time_agg (belief_label, event_int, agg_time)
+SELECT belief_label, event_int, agg_time
 FROM (
-    SELECT fisc_label, event_int, tran_time as agg_time
-    FROM fisc_cashbook_raw
-    GROUP BY fisc_label, event_int, tran_time
+    SELECT belief_label, event_int, tran_time as agg_time
+    FROM belief_paybook_raw
+    GROUP BY belief_label, event_int, tran_time
     UNION 
-    SELECT fisc_label, event_int, deal_time as agg_time
-    FROM fisc_dealunit_raw
-    GROUP BY fisc_label, event_int, deal_time
+    SELECT belief_label, event_int, bud_time as agg_time
+    FROM belief_budunit_raw
+    GROUP BY belief_label, event_int, bud_time
 )
-ORDER BY fisc_label, event_int, agg_time
+ORDER BY belief_label, event_int, agg_time
 ;
 """
-UPDATE_ERROR_MESSAGE_FISC_EVENT_TIME_AGG_SQLSTR = """
+UPDATE_ERROR_MESSAGE_BELIEF_EVENT_TIME_AGG_SQLSTR = """
 WITH EventTimeOrdered AS (
-    SELECT fisc_label, event_int, agg_time,
-           LAG(agg_time) OVER (PARTITION BY fisc_label ORDER BY event_int) AS prev_agg_time
-    FROM fisc_event_time_agg
+    SELECT belief_label, event_int, agg_time,
+           LAG(agg_time) OVER (PARTITION BY belief_label ORDER BY event_int) AS prev_agg_time
+    FROM belief_event_time_agg
 )
-UPDATE fisc_event_time_agg
+UPDATE belief_event_time_agg
 SET error_message = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.event_int = fisc_event_time_agg.event_int
-    AND EventTimeOrdered.fisc_label = fisc_event_time_agg.fisc_label
-    AND EventTimeOrdered.agg_time = fisc_event_time_agg.agg_time
+WHERE EventTimeOrdered.event_int = belief_event_time_agg.event_int
+    AND EventTimeOrdered.belief_label = belief_event_time_agg.belief_label
+    AND EventTimeOrdered.agg_time = belief_event_time_agg.agg_time
 ;
 """
 
 
-CREATE_FISC_OTE1_AGG_SQLSTR = """
-CREATE TABLE IF NOT EXISTS fisc_ote1_agg (
-  fisc_label TEXT
-, owner_name TEXT
+CREATE_BELIEF_OTE1_AGG_SQLSTR = """
+CREATE TABLE IF NOT EXISTS belief_ote1_agg (
+  belief_label TEXT
+, believer_name TEXT
 , event_int INTEGER
-, deal_time INTEGER
+, bud_time INTEGER
 , error_message TEXT
 )
 ;
 """
-INSERT_FISC_OTE1_AGG_FROM_VOICE_SQLSTR = """
-INSERT INTO fisc_ote1_agg (fisc_label, owner_name, event_int, deal_time)
-SELECT fisc_label, owner_name, event_int, deal_time
+INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR = """
+INSERT INTO belief_ote1_agg (belief_label, believer_name, event_int, bud_time)
+SELECT belief_label, believer_name, event_int, bud_time
 FROM (
     SELECT 
-      fisc_label_inx fisc_label
-    , owner_name_inx owner_name
+      belief_label_inx belief_label
+    , believer_name_inx believer_name
     , event_int
-    , deal_time
-    FROM fisc_dealunit_v_raw
-    GROUP BY fisc_label_inx, owner_name_inx, event_int, deal_time
+    , bud_time
+    FROM belief_budunit_v_raw
+    GROUP BY belief_label_inx, believer_name_inx, event_int, bud_time
 )
-ORDER BY fisc_label, owner_name, event_int, deal_time
+ORDER BY belief_label, believer_name, event_int, bud_time
 ;
 """
 
 
-CREATE_JOB_BUDMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acct_membership_job (fisc_label TEXT, owner_name TEXT, acct_name TEXT, group_title TEXT, credit_vote REAL, debtit_vote REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
-CREATE_JOB_BUDACCT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_acctunit_job (fisc_label TEXT, owner_name TEXT, acct_name TEXT, credit_belief REAL, debtit_belief REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_debtit_belief REAL, _irrational_debtit_belief REAL)"""
-CREATE_JOB_BUDGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_groupunit_job (fisc_label TEXT, owner_name TEXT, group_title TEXT, fund_coin REAL, bridge TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
-CREATE_JOB_BUDAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_awardlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
-CREATE_JOB_BUDFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_factunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, fcontext TEXT, fstate TEXT, fopen REAL, fnigh REAL)"""
-CREATE_JOB_BUDHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_healerlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, healer_name TEXT)"""
-CREATE_JOB_BUDPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reason_premiseunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, pstate TEXT, pnigh REAL, popen REAL, pdivisor INTEGER, _task INTEGER, _status INTEGER)"""
-CREATE_JOB_BUDREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_reasonunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, rcontext TEXT, rconcept_active_requisite INTEGER, _task INTEGER, _status INTEGER, _rconcept_active_value INTEGER)"""
-CREATE_JOB_BUDLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_concept_laborlink_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, labor_title TEXT, _owner_name_labor INTEGER)"""
-CREATE_JOB_BUDCONC_SQLSTR = """CREATE TABLE IF NOT EXISTS bud_conceptunit_job (fisc_label TEXT, owner_name TEXT, concept_way TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, pledge INTEGER, problem_bool INTEGER, fund_coin REAL, _active INTEGER, _task INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_pledge_count INTEGER, _healerlink_ratio REAL, _all_acct_cred INTEGER, _all_acct_debt INTEGER)"""
-CREATE_JOB_BUDUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS budunit_job (fisc_label TEXT, owner_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_coin REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
+CREATE_JOB_BLRMEMB_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_partner_membership_job (belief_label TEXT, believer_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL)"""
+CREATE_JOB_BLRPERN_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_partnerunit_job (belief_label TEXT, believer_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL, _fund_agenda_ratio_give REAL, _fund_agenda_ratio_take REAL, _inallocable_partner_debt_points REAL, _irrational_partner_debt_points REAL)"""
+CREATE_JOB_BLRGROU_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_groupunit_job (belief_label TEXT, believer_name TEXT, group_title TEXT, fund_iota REAL, knot TEXT, _credor_pool REAL, _debtor_pool REAL, _fund_give REAL, _fund_take REAL, _fund_agenda_give REAL, _fund_agenda_take REAL)"""
+CREATE_JOB_BLRAWAR_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_awardlink_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, _fund_give REAL, _fund_take REAL)"""
+CREATE_JOB_BLRFACT_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_factunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, f_context TEXT, f_state TEXT, f_lower REAL, f_upper REAL)"""
+CREATE_JOB_BLRHEAL_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_healerlink_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, healer_name TEXT)"""
+CREATE_JOB_BLRPREM_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_reason_caseunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_state TEXT, r_upper REAL, r_lower REAL, r_divisor INTEGER, _chore INTEGER, _status INTEGER)"""
+CREATE_JOB_BLRREAS_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_reasonunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, r_context TEXT, r_plan_active_requisite INTEGER, _chore INTEGER, _status INTEGER, _rplan_active_value INTEGER)"""
+CREATE_JOB_BLRLABO_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_plan_laborlink_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, labor_title TEXT, _believer_name_labor INTEGER)"""
+CREATE_JOB_BLRPLAN_SQLSTR = """CREATE TABLE IF NOT EXISTS believer_planunit_job (belief_label TEXT, believer_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, mass INTEGER, task INTEGER, problem_bool INTEGER, fund_iota REAL, _active INTEGER, _chore INTEGER, _fund_onset REAL, _fund_cease REAL, _fund_ratio REAL, _gogo_calc REAL, _stop_calc REAL, _level INTEGER, _range_evaluated INTEGER, _descendant_task_count INTEGER, _healerlink_ratio REAL, _all_partner_cred INTEGER, _all_partner_debt INTEGER)"""
+CREATE_JOB_BLRUNIT_SQLSTR = """CREATE TABLE IF NOT EXISTS believerunit_job (belief_label TEXT, believer_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, _rational INTEGER, _keeps_justified INTEGER, _offtrack_fund REAL, _sum_healerlink_share REAL, _keeps_buildable INTEGER, _tree_traverse_count INTEGER)"""
 
 
 def get_job_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "bud_acct_membership_job": CREATE_JOB_BUDMEMB_SQLSTR,
-        "bud_acctunit_job": CREATE_JOB_BUDACCT_SQLSTR,
-        "bud_groupunit_job": CREATE_JOB_BUDGROU_SQLSTR,
-        "bud_concept_awardlink_job": CREATE_JOB_BUDAWAR_SQLSTR,
-        "bud_concept_factunit_job": CREATE_JOB_BUDFACT_SQLSTR,
-        "bud_concept_healerlink_job": CREATE_JOB_BUDHEAL_SQLSTR,
-        "bud_concept_reason_premiseunit_job": CREATE_JOB_BUDPREM_SQLSTR,
-        "bud_concept_reasonunit_job": CREATE_JOB_BUDREAS_SQLSTR,
-        "bud_concept_laborlink_job": CREATE_JOB_BUDLABO_SQLSTR,
-        "bud_conceptunit_job": CREATE_JOB_BUDCONC_SQLSTR,
-        "budunit_job": CREATE_JOB_BUDUNIT_SQLSTR,
+        "believer_partner_membership_job": CREATE_JOB_BLRMEMB_SQLSTR,
+        "believer_partnerunit_job": CREATE_JOB_BLRPERN_SQLSTR,
+        "believer_groupunit_job": CREATE_JOB_BLRGROU_SQLSTR,
+        "believer_plan_awardlink_job": CREATE_JOB_BLRAWAR_SQLSTR,
+        "believer_plan_factunit_job": CREATE_JOB_BLRFACT_SQLSTR,
+        "believer_plan_healerlink_job": CREATE_JOB_BLRHEAL_SQLSTR,
+        "believer_plan_reason_caseunit_job": CREATE_JOB_BLRPREM_SQLSTR,
+        "believer_plan_reasonunit_job": CREATE_JOB_BLRREAS_SQLSTR,
+        "believer_plan_laborlink_job": CREATE_JOB_BLRLABO_SQLSTR,
+        "believer_planunit_job": CREATE_JOB_BLRPLAN_SQLSTR,
+        "believerunit_job": CREATE_JOB_BLRUNIT_SQLSTR,
     }
 
 
 def create_job_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_job_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
+
+
+CREATE_BELIEF_PARTNER_NETS_SQLSTR = "CREATE TABLE IF NOT EXISTS belief_partner_nets (belief_label TEXT, believer_name TEXT, believer_net_amount REAL)"

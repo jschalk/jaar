@@ -86,6 +86,31 @@ def get_from_nested_dict(
         return None
 
 
+def change_nested_key(x_dict: dict, x_keylist: list, new_key: str):
+    """
+    Renames the final key in a nested dictionary.
+
+    Args:
+        d (dict): The dictionary to modify.
+        key_path (list): List of keys leading to the target key to rename.
+                         The last key in the list is the one to be renamed.
+        new_key (str): The new name for the final key in key_path.
+
+    Returns:
+        dict: The modified dictionary.
+    """
+    current = x_dict
+    for key in x_keylist[:-1]:
+        current = current.get(key, {})
+
+    if isinstance(current, dict):
+        old_key = x_keylist[-1]
+        if old_key in current:
+            current[new_key] = current.pop(old_key)
+
+    return x_dict
+
+
 def _sub_get_from_nested_dict(x_dict: dict, x_keylist: list) -> any:
     last_key = x_keylist.pop(-1)
     temp_dict = x_dict

@@ -1,12 +1,22 @@
 from ast import (
     FunctionDef as ast_FunctionDef,
     ImportFrom as ast_ImportFrom,
+    get_docstring as ast_get_docstring,
     parse as ast_parse,
     walk as ast_walk,
 )
+import inspect
 from os import walk as os_walk
-from os.path import join as os_path_join
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
+from os.path import (
+    basename as os_path_basename,
+    join as os_path_join,
+    splitext as os_path_splitext,
+)
+from src.a00_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_filenames,
+    get_level1_dirs,
+)
 
 
 def get_imports_from_file(file_path):
@@ -81,6 +91,18 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
     return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
 
 
+def get_top_level_functions(file_path) -> list[str]:
+    with open(file_path, "r") as f:
+        tree = ast_parse(f.read(), filename=file_path)
+
+    functions = []
+    for node in tree.body:
+        if isinstance(node, ast_FunctionDef):
+            functions.append(node.name)
+
+    return functions
+
+
 def get_module_descs() -> dict[str, str]:
     src_dir = "src"
     module_descs = get_level1_dirs(src_dir)
@@ -123,7 +145,8 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
 
 
 def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
-    util_dir = create_path(module_dir, "_test_util")
+    test_dir = create_path(module_dir, "test")
+    util_dir = create_path(test_dir, "_util")
     str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
     return get_function_names_from_file(str_util_path)
 
@@ -132,7 +155,8 @@ def get_all_str_functions() -> list:
     all_str_functions = []
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
-        util_dir = create_path(module_dir, "_test_util")
+        test_dir = create_path(module_dir, "test")
+        util_dir = create_path(test_dir, "_util")
         str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
         str_functions = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:
@@ -141,12 +165,51 @@ def get_all_str_functions() -> list:
     return all_str_functions
 
 
+def get_duplicated_functions(excluded_functions) -> set[str]:
+    x_count = 0
+    duplicate_functions = set()
+    all_functions = set()
+    for module_desc, module_dir in get_module_descs().items():
+        filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})
+        for filenames in filenames_set:
+            file_dir = create_path(module_dir, filenames[0])
+            file_path = create_path(file_dir, filenames[1])
+            file_functions = get_function_names_from_file(file_path)
+            for function_name in file_functions:
+                x_count += 1
+                if function_name in all_functions:
+                    print(
+                        f"Function #{x_count}: Duplicate function {function_name} in {file_path}"
+                    )
+                    duplicate_functions.add(function_name)
+                if function_name not in excluded_functions:
+                    all_functions.add(function_name)
+    print(f"{duplicate_functions=}")
+    print(f"{len(all_functions)=}")
+    return duplicate_functions
+
+
 def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):
     if module_str_funcs != sorted(module_str_funcs):
         for module_str_func in sorted(module_str_funcs):
             module_str_func = module_str_func.replace("'", "")
             module_str_func = module_str_func.replace("_str", "")
-            print(f"def {module_str_func}_str() -> str: return '{module_str_func}'")
+    sorted_module_str_funcs = sorted(module_str_funcs)
+    if module_str_funcs != sorted_module_str_funcs:
+        first_wrong_index = None
+        for x in range(len(module_str_funcs)):
+            # print(f"{module_str_funcs[x]}")
+            if (
+                not first_wrong_index
+                and module_str_funcs[x] != sorted_module_str_funcs[x]
+            ):
+                first_wrong_index = (
+                    f"{module_str_funcs[x]} should be {sorted_module_str_funcs[x]}"
+                )
+
+        print(f"{first_wrong_index=}")
+        # print(f"Bad Order     {module_str_funcs}")
+        # print(f"Correct order {sorted(module_str_funcs)}")
     assert module_str_funcs == sorted(module_str_funcs)
 
 
@@ -186,3 +249,17 @@ def check_str_func_test_file_has_needed_asserts(
             str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
             print(f"{str_util_path} {str_func_assert_str=}")
         assert test_file_str.find(str_func_assert_str) > 0
+
+
+def get_docstring(file_path: str, function_name: str) -> str:
+    with open(file_path, "r") as f:
+        tree = ast_parse(f.read(), filename=file_path)
+
+    return next(
+        (
+            ast_get_docstring(node)
+            for node in ast_walk(tree)
+            if isinstance(node, ast_FunctionDef) and node.name == function_name
+        ),
+        None,
+    )
