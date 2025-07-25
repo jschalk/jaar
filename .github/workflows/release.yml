@@ -48,16 +48,16 @@ jobs:
           "
           echo "complete Run version extractor"
 
-      - name: Create initial tag if missing
-        shell: bash
+      - name: Set Git remote to use PAT
         env:
           GH_TOKEN: ${{ secrets.PAT_jaar }}
         run: |
-          echo "start Create initial tag if missing"
-
-          # Override origin to use PAT for authentication
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/jschalk/jaar.git
 
+      - name: Create initial tag if missing
+        shell: bash
+        run: |
+          echo "Checking for existing tags..."
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
             VERSION=$(python -c "
@@ -70,10 +70,11 @@ jobs:
           else:
               raise ValueError('Version not found')
           ")
+            echo "Tagging as v$VERSION"
             git tag "v$VERSION"
             git push origin "v$VERSION"
           else
-            echo "Tag found, continuing with release..."
+            echo "Tag already exists, skipping."
           fi
 
       - name: Run python-semantic-release
