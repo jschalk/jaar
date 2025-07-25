@@ -8,7 +8,7 @@ import open_planeviewer
 
 # from .utils import load_config
 
-__version__ = "0.200.0"
+__version__ = "v0.200.0"
 __author__ = "Emmanuel Schalk"
 
 __all__ = [
