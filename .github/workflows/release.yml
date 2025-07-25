@@ -21,6 +21,12 @@ jobs:
       - name: Install dependencies
         run: pip install python-semantic-release
 
+      - name: Show current directory and files
+        run: |
+          pwd
+          ls -la
+          ls -la repo_name
+
       - name: Create initial tag if missing
         shell: bash
         run: |
