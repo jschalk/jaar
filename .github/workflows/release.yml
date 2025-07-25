@@ -21,6 +21,11 @@ jobs:
       - name: Install dependencies
         run: pip install python-semantic-release
 
+      - name: Set Git identity
+        run: |
+          git config user.name "Release Bot"
+          git config user.email "bot@example.com"
+
       - name: Show current directory and files
         run: |
           pwd
@@ -67,5 +72,5 @@ jobs:
 
       - name: Run python-semantic-release
         env:
-          GH_TOKEN: ${{ secrets.PAT_JAAR }}
+          GH_TOKEN: ${{ secrets.PAT_jaar }}
         run: semantic-release publish
