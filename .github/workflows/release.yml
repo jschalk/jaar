@@ -67,5 +67,5 @@ jobs:
 
       - name: Run python-semantic-release
         env:
-          GH_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          GH_TOKEN: ${{ secrets.PAT_jaar }}
         run: semantic-release publish
