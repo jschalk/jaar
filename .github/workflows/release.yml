@@ -32,31 +32,15 @@ jobs:
           ls -la
           echo "complete Show current directory and files"
 
-      - name: Run version extractor
-        run: |
-          echo "start Run version extractor"
-          python -c "
-          import os, re
-          path = '__init__.py'
-          print('Working dir:', os.getcwd())
-          print('Absolute path:', os.path.abspath(path))
-          print('File exists:', os.path.isfile(path))
-          with open(path) as f:
-              content = f.read()
-          match = re.search(r'__version__ *= *[\"\\']([^\"\\']+)', content)
-          print(match.group(1) if match else 'No version found')
-          "
-          echo "complete Run version extractor"
-
-      - name: Set Git remote to use PAT
+      - name: Create initial tag if missing
+        shell: bash
         env:
           GH_TOKEN: ${{ secrets.PAT_jaar }}
         run: |
+          echo "Setting git remote to use PAT token"
           git remote set-url origin https://x-access-token:${GH_TOKEN}@github.com/jschalk/jaar.git
+          git remote -v
 
-      - name: Create initial tag if missing
-        shell: bash
-        run: |
           echo "Checking for existing tags..."
           if ! git describe --tags --abbrev=0 > /dev/null 2>&1; then
             echo "No tags found. Creating initial tag from __version__..."
