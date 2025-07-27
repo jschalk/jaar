@@ -6,7 +6,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.pidgin import (
+from src.a16_pidgin_logic.pidgin_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )

@@ -7,7 +7,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     TitleTerm_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     otx_knot_str,

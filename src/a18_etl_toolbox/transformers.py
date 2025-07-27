@@ -55,10 +55,6 @@ from src.a15_belief_logic.belief_cell import (
     set_cell_trees_found_facts,
 )
 from src.a15_belief_logic.belief_main import get_default_path_beliefunit
-from src.a16_pidgin_logic.pidgin import (
-    default_knot_if_None,
-    default_unknown_str_if_None,
-)
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
@@ -66,6 +62,10 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_RopeTerm_args,
     get_pidgin_TitleTerm_args,
     get_quick_pidgens_column_ref,
+)
+from src.a16_pidgin_logic.pidgin_main import (
+    default_knot_if_None,
+    default_unknown_str_if_None,
 )
 from src.a17_idea_logic.idea_config import (
     get_idea_dimen_ref,

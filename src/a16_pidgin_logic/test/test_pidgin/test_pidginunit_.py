@@ -41,7 +41,6 @@ from src.a16_pidgin_logic.map import (
     ropemap_shop,
     titlemap_shop,
 )
-from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import (
     default_unknown_str_if_None,
     find_set_otx_inx_args,
@@ -53,6 +52,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidginable_args,
     pidginable_class_types,
 )
+from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,

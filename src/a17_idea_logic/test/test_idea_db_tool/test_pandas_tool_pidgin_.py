@@ -10,7 +10,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     r_context_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_casa_maison_pidginunit_set_by_label,
     get_casa_maison_pidginunit_set_by_otx2inx,

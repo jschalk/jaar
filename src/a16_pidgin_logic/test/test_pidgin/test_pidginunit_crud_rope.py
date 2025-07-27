@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a16_pidgin_logic.map import ropemap_shop
-from src.a16_pidgin_logic.pidgin import pidginunit_shop
+from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 
 
 def test_PidginUnit_set_ropemap_SetsAttr():
