@@ -11,7 +11,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
 )
 from src.a01_term_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a06_believer_logic.report import (
     get_believer_agenda_dataframe,
     get_believer_partnerunits_dataframe,

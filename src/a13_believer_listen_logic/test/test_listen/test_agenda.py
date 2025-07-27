@@ -1,8 +1,8 @@
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
-from src.a13_believer_listen_logic.listen import (
+from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a13_believer_listen_logic.listen_main import (
     create_empty_believer_from_believer,
     listen_to_speaker_agenda,
 )

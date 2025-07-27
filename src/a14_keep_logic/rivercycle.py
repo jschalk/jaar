@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import BelieverName, PartnerName
 from src.a02_finance_logic.allot import allot_scale
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a12_hub_toolbox.hubunit import HubUnit
 
 

@@ -8,8 +8,8 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
-from src.a07_timeline_logic.timeline import timelineunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a11_bud_logic.bud import tranbook_shop
 from src.a12_hub_toolbox.a12_path import (
     create_believer_dir_path,
@@ -25,7 +25,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_job_file,
 )
 from src.a12_hub_toolbox.hubunit import hubunit_shop
-from src.a15_belief_logic.belief import (
+from src.a15_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_default_job_listen_count,

@@ -15,7 +15,7 @@ from src.a04_reason_logic.reason_plan import (
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     BelieverUnit,
     believerunit_shop,
     get_from_dict as believerunit_get_from_dict,

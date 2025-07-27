@@ -1,6 +1,6 @@
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
-from src.a13_believer_listen_logic.listen import (
+from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a13_believer_listen_logic.listen_main import (
     _allocate_irrational_partner_debt_points,
     generate_ingest_list,
     generate_perspective_agenda,

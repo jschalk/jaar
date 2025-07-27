@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     believerunit_shop,
     get_from_json as believerunit_get_from_json,
 )
@@ -9,7 +9,7 @@ from src.a12_hub_toolbox.a12_path import (
     create_gut_path,
     create_job_path,
 )
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

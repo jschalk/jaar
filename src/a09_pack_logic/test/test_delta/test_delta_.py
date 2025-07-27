@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     believer_partner_membership_str,
@@ -17,7 +17,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_name_str,
     plan_rope_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,

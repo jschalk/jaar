@@ -1,6 +1,6 @@
 from pandas import DataFrame
 from src.a01_term_logic.rope import RopeTerm
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 
 
 def get_believer_partnerunits_dataframe(x_believer: BelieverUnit) -> DataFrame:

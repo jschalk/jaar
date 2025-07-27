@@ -16,7 +16,7 @@ from src.a04_reason_logic.reason_plan import (
 )
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a18_etl_toolbox.db_obj_believer_tool import (
     ObjKeysHolder,
     insert_job_blrawar,

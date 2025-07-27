@@ -1,6 +1,6 @@
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     believer_plan_factunit_get_obj,
     believer_plan_reason_caseunit_get_obj as caseunit_get_obj,
@@ -43,7 +43,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     take_force_str,
     task_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop, sift_believeratom
+from src.a08_believer_atom_logic.atom_main import believeratom_shop, sift_believeratom
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str, UPDATE_str
 
 

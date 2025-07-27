@@ -5,7 +5,7 @@ from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.group import awardline_shop, awardlink_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, planunit_shop
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
     believerunit_v001_with_large_agenda,

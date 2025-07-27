@@ -8,15 +8,15 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
 )
 from src.a01_term_logic.term import BeliefLabel, BelieverName
-from src.a06_believer_logic.believer import BelieverUnit
-from src.a07_timeline_logic.timeline import timelineunit_shop
-from src.a08_believer_atom_logic.atom import BelieverAtom, atomrow_shop
+from src.a06_believer_logic.believer_main import BelieverUnit
+from src.a07_timeline_logic.timeline_main import timelineunit_shop
+from src.a08_believer_atom_logic.atom_main import BelieverAtom, atomrow_shop
 from src.a09_pack_logic.delta import (
     BelieverDelta,
     believerdelta_shop,
     get_dimens_cruds_believerdelta,
 )
-from src.a15_belief_logic.belief import BeliefUnit, beliefunit_shop
+from src.a15_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a17_idea_logic.idea_config import (
     get_idea_format_headers,
     get_idearef_from_file,

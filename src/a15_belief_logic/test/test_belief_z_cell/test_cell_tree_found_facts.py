@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a11_bud_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.a12_path import create_cell_dir_path as cell_dir
 from src.a12_hub_toolbox.hub_tool import cellunit_get_from_dir, cellunit_save_to_dir

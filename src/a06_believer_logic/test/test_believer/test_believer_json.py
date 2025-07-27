@@ -6,7 +6,7 @@ from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     believerunit_shop,
     get_dict_of_believer_from_dict,
     get_from_json as believerunit_get_from_json,
@@ -346,7 +346,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     json_believer = believerunit_get_from_json(x_believer_json=x_json)
 
     # THEN
-    assert str(type(json_believer)).find(".believer.BelieverUnit'>") > 0
+    assert str(type(json_believer)).find(".believer_main.BelieverUnit'>") > 0
     assert json_believer.believer_name is not None
     assert json_believer.believer_name == zia_believer.believer_name
     assert json_believer.belief_label == zia_believer.belief_label

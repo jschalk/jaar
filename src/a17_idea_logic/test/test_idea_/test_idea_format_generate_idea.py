@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partner_membership_str,
     believer_partnerunit_str,
@@ -16,13 +16,17 @@ from src.a06_believer_logic.test._util.a06_str import (
     task_str,
 )
 from src.a06_believer_logic.test._util.example_believers import believerunit_v001
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
-from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, make_believerdelta
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00020_believer_partner_membership_v0_0_0,
     idea_format_00021_believer_partnerunit_v0_0_0,
+)
+from src.a17_idea_logic.idea_main import (
+    create_idea_df,
+    get_idearef_obj,
+    make_believerdelta,
 )
 
 

@@ -1,5 +1,5 @@
 from pytest import fixture as pytest_fixture
-from src.a22_world_viewer.planview_server import planviewer
+from src.a22_planviewer.planview_server import planviewer
 
 
 def test_planviewer_IsCreated():

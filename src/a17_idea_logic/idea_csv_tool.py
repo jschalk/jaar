@@ -1,8 +1,8 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
 from src.a01_term_logic.term import BeliefLabel, FaceName
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a09_pack_logic.pack import PackUnit
-from src.a15_belief_logic.belief import BeliefUnit
+from src.a15_belief_logic.belief_main import BeliefUnit
 from src.a17_idea_logic.idea_config import (
     get_idea_format_filename,
     get_idea_format_headers,

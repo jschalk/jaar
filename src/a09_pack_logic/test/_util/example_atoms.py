@@ -4,7 +4,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_planunit_str,
     plan_rope_str,
 )
-from src.a08_believer_atom_logic.atom import BelieverAtom, believeratom_shop
+from src.a08_believer_atom_logic.atom_main import BelieverAtom, believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 
 

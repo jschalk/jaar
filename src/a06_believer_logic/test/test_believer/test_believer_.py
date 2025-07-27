@@ -9,7 +9,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
 from src.a05_plan_logic.plan import get_default_belief_label as root_label
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     _keeps_buildable_str,
     _keeps_justified_str,

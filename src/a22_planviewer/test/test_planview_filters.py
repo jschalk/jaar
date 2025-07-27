@@ -5,9 +5,9 @@ from src.a05_plan_logic.test._util.a05_str import (
     plan_label_str,
     task_str,
 )
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v002
-from src.a22_world_viewer.planview_filters import (
+from src.a22_planviewer.planview_filters import (
     plan_awardees,
     plan_facts,
     plan_fund,

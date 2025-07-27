@@ -2,7 +2,7 @@ from src.a01_term_logic.rope import get_parent_rope, get_tail_label
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
@@ -35,7 +35,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     take_force_str,
     task_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,

@@ -7,7 +7,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     f_upper_str,
     plan_rope_str,
 )
-from src.a08_believer_atom_logic.atom import (
+from src.a08_believer_atom_logic.atom_main import (
     believeratom_shop,
     get_from_json as believeratom_get_from_json,
 )

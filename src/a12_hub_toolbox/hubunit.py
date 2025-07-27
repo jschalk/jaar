@@ -27,12 +27,12 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     BelieverUnit,
     believerunit_shop,
     get_from_json as believerunit_get_from_json,
 )
-from src.a08_believer_atom_logic.atom import (
+from src.a08_believer_atom_logic.atom_main import (
     BelieverAtom,
     get_from_json as believeratom_get_from_json,
     modify_believer_with_believeratom,

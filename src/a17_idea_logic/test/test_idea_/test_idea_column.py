@@ -5,7 +5,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     plan_rope_str,
     r_context_str,
 )
-from src.a17_idea_logic.idea import IdeaRef, idearef_shop
+from src.a17_idea_logic.idea_main import IdeaRef, idearef_shop
 
 
 def test_IdeaRef_Exists():

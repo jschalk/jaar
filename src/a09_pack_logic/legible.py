@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_believer_logic.believer import BelieverUnit
-from src.a08_believer_atom_logic.atom import BelieverAtom
+from src.a06_believer_logic.believer_main import BelieverUnit
+from src.a08_believer_atom_logic.atom_main import BelieverAtom
 from src.a09_pack_logic.delta import BelieverDelta
 
 

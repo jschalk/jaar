@@ -1,5 +1,5 @@
 from src.a01_term_logic.term import BelieverName, PartnerName
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger
 from src.a14_keep_logic.test._util.a14_env import get_module_temp_dir, temp_belief_label

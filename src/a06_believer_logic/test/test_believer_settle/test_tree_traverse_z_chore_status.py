@@ -7,8 +7,8 @@ from src.a04_reason_logic.reason_plan import (
 )
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
     from_list_get_active,

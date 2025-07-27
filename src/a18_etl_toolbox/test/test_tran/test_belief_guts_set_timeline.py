@@ -1,15 +1,15 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import save_json
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import time_str
 from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_five_config,
 )
-from src.a07_timeline_logic.timeline import timelineunit_shop
+from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a12_hub_toolbox.a12_path import create_belief_json_path
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

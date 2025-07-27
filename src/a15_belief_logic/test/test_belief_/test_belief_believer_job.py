@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import set_dir
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a12_hub_toolbox.a12_path import create_believer_dir_path
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
@@ -9,7 +9,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a15_belief_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

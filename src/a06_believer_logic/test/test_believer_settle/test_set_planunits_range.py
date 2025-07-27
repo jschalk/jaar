@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
     get_believerunit_with_4_levels_and_2reasons,
 )

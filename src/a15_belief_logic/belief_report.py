@@ -5,7 +5,7 @@ from src.a06_believer_logic.report import (
     get_believer_partnerunits_dataframe,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file
-from src.a15_belief_logic.belief import BeliefUnit
+from src.a15_belief_logic.belief_main import BeliefUnit
 
 
 def get_belief_guts_partners_dataframe(x_belief: BeliefUnit) -> DataFrame:

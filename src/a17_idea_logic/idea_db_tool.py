@@ -33,11 +33,11 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a01_term_logic.term import EventInt, FaceName
 from src.a16_pidgin_logic.map import MapCore
-from src.a16_pidgin_logic.pidgin import PidginUnit, get_pidginunit_from_json
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidginable_args,
 )
+from src.a16_pidgin_logic.pidgin_main import PidginUnit, get_pidginunit_from_json
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_dimen_ref,

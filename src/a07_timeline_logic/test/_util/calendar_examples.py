@@ -3,7 +3,7 @@ from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scat
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
     creg_str,
@@ -13,7 +13,7 @@ from src.a07_timeline_logic.test._util.a07_str import (
     weekdays_config_str,
     yr1_jan1_offset_str,
 )
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     believertimelinepoint_shop,
     create_weekday_planunits,

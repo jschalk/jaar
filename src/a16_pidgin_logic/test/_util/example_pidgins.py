@@ -15,8 +15,8 @@ from src.a16_pidgin_logic.map import (
     ropemap_shop,
     titlemap_shop,
 )
-from src.a16_pidgin_logic.pidgin import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
+from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
 
 
 def get_clean_labelmap() -> LabelMap:

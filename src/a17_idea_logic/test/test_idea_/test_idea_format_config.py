@@ -25,11 +25,6 @@ from src.a06_believer_logic.test._util.a06_str import (
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_belief_logic.test._util.a15_str import beliefunit_str
-from src.a17_idea_logic.idea import (
-    _generate_idea_dataframe,
-    _get_headers_list,
-    get_idearef_obj,
-)
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_elements_sort_order,
@@ -41,6 +36,11 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00019_planunit_v0_0_0,
     idea_format_00020_believer_partner_membership_v0_0_0,
     idea_format_00021_believer_partnerunit_v0_0_0,
+)
+from src.a17_idea_logic.idea_main import (
+    _generate_idea_dataframe,
+    _get_headers_list,
+    get_idearef_obj,
 )
 from src.a17_idea_logic.test._util.a17_env import src_module_dir
 from src.a17_idea_logic.test._util.a17_str import attributes_str

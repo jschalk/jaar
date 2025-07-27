@@ -8,7 +8,7 @@ from src.a03_group_logic.partner import PartnerUnit
 from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a04_reason_logic.reason_plan import CaseUnit, FactHeir, ReasonHeir
 from src.a05_plan_logic.plan import HealerLink, PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a11_bud_logic.bud import BeliefLabel
 
 

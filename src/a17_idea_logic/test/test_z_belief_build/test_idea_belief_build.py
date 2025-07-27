@@ -1,11 +1,11 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a07_timeline_logic.test._util.calendar_examples import get_five_config
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
-from src.a15_belief_logic.belief import beliefunit_shop
-from src.a17_idea_logic.idea import belief_build_from_df
+from src.a15_belief_logic.belief_main import beliefunit_shop
+from src.a17_idea_logic.idea_main import belief_build_from_df
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_beliefs_dir,

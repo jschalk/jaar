@@ -5,7 +5,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a12_hub_toolbox.a12_path import (
     create_belief_believers_dir_path,
     create_belief_json_path,
@@ -14,7 +14,7 @@ from src.a12_hub_toolbox.a12_path import (
 from src.a15_belief_logic.a15_path import (
     create_bud_partner_mandate_ledger_path as bud_mandate_path,
 )
-from src.a15_belief_logic.belief import (
+from src.a15_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_dict as beliefunit_get_from_dict,
 )

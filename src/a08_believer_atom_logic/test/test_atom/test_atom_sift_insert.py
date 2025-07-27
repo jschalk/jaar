@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     believer_partner_membership_str,
@@ -21,7 +21,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     plan_rope_str,
     r_context_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop, sift_believeratom
+from src.a08_believer_atom_logic.atom_main import believeratom_shop, sift_believeratom
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 
 

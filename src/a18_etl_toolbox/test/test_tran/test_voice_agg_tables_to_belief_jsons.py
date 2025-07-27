@@ -8,8 +8,8 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a04_reason_logic.test._util.a04_str import belief_label_str
 from src.a12_hub_toolbox.a12_path import create_belief_json_path
-from src.a15_belief_logic.belief import get_from_json as beliefunit_get_from_json
 from src.a15_belief_logic.belief_config import get_belief_dimens
+from src.a15_belief_logic.belief_main import get_from_json as beliefunit_get_from_json
 from src.a15_belief_logic.test._util.a15_str import (
     belief_budunit_str,
     belief_paybook_str,

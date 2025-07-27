@@ -28,9 +28,9 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a01_term_logic.term import EventInt, FaceName
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a08_believer_atom_logic.atom_config import get_believer_dimens
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a09_pack_logic.delta import get_minimal_believerdelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a11_bud_logic.bud import TranBook
@@ -47,7 +47,6 @@ from src.a12_hub_toolbox.hub_tool import (
     open_believer_file,
     open_job_file,
 )
-from src.a15_belief_logic.belief import get_default_path_beliefunit
 from src.a15_belief_logic.belief_cell import (
     create_belief_believers_cell_trees,
     create_bud_mandate_ledgers,
@@ -55,10 +54,7 @@ from src.a15_belief_logic.belief_cell import (
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
 )
-from src.a16_pidgin_logic.pidgin import (
-    default_knot_if_None,
-    default_unknown_str_if_None,
-)
+from src.a15_belief_logic.belief_main import get_default_path_beliefunit
 from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
@@ -67,7 +63,10 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_TitleTerm_args,
     get_quick_pidgens_column_ref,
 )
-from src.a17_idea_logic.idea import get_idearef_obj
+from src.a16_pidgin_logic.pidgin_main import (
+    default_knot_if_None,
+    default_unknown_str_if_None,
+)
 from src.a17_idea_logic.idea_config import (
     get_idea_dimen_ref,
     get_idea_format_filename,
@@ -80,6 +79,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     split_excel_into_dirs,
 )
+from src.a17_idea_logic.idea_main import get_idearef_obj
 from src.a18_etl_toolbox.a18_path import (
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,
@@ -171,9 +171,7 @@ def get_max_brick_agg_event_int(cursor: sqlite3_Cursor) -> int:
     for agg_table in agg_tables:
         if agg_table.startswith("br") and agg_table.endswith("brick_agg"):
             sqlstr = f"SELECT MAX(event_int) FROM {agg_table}"
-            table_max_event_int = cursor.execute(sqlstr).fetchone()[0]
-            if not table_max_event_int:
-                table_max_event_int = 1
+            table_max_event_int = cursor.execute(sqlstr).fetchone()[0] or 1
             if table_max_event_int > brick_aggs_max_event_int:
                 brick_aggs_max_event_int = table_max_event_int
     return brick_aggs_max_event_int

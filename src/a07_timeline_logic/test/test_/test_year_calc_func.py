@@ -2,7 +2,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_creg_config,
     get_five_config,
 )
-from src.a07_timeline_logic.timeline import get_first_weekday_index_of_year
+from src.a07_timeline_logic.timeline_main import get_first_weekday_index_of_year
 
 
 def test_get_first_weekday_index_of_year_ReturnsObj_Scenario0_creg_timeline_config():

@@ -1,7 +1,9 @@
 from src.a00_data_toolbox.dict_toolbox import change_nested_key, set_in_nested_dict
 from src.a01_term_logic.rope import RopeTerm, get_all_rope_labels
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import get_from_dict as get_believerunit_from_dict
+from src.a06_believer_logic.believer_main import (
+    get_from_dict as get_believerunit_from_dict,
+)
 
 
 def mark_keys(
