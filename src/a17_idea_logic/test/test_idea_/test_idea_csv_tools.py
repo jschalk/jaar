@@ -1,4 +1,4 @@
-from src.a17_idea_logic.idea import (
+from src.a17_idea_logic.idea_main import (
     belief_label_believer_name_nested_csv_dict,
     get_csv_belief_label_believer_name_metrics,
 )

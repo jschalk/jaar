@@ -67,7 +67,6 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_TitleTerm_args,
     get_quick_pidgens_column_ref,
 )
-from src.a17_idea_logic.idea import get_idearef_obj
 from src.a17_idea_logic.idea_config import (
     get_idea_dimen_ref,
     get_idea_format_filename,
@@ -80,6 +79,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     split_excel_into_dirs,
 )
+from src.a17_idea_logic.idea_main import get_idearef_obj
 from src.a18_etl_toolbox.a18_path import (
     create_belief_ote1_csv_path,
     create_belief_ote1_json_path,

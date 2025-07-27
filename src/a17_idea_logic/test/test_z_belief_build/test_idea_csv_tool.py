@@ -5,7 +5,6 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a09_pack_logic.delta import believerdelta_shop
 from src.a09_pack_logic.pack import packunit_shop
-from src.a17_idea_logic.idea import belief_build_from_df
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
     add_beliefunits_to_stance_csv_strs,
@@ -34,6 +33,7 @@ from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_ordered_csv
+from src.a17_idea_logic.idea_main import belief_build_from_df
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_beliefs_dir,

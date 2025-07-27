@@ -19,13 +19,13 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
 )
-from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, save_idea_csv
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00019_planunit_v0_0_0,
     idea_format_00020_believer_partner_membership_v0_0_0,
     idea_format_00021_believer_partnerunit_v0_0_0,
 )
+from src.a17_idea_logic.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_beliefs_dir,
