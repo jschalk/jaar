@@ -31,17 +31,17 @@ test = [
   "pytest-cov",
 ]
 
-[tool.semantic_release]
-branch = "main"
-build_command = ""
-changelog_file = "CHANGELOG.md"
-plugins = [
-  "semantic_release.hooks.commit_parser",
-  "semantic_release.hooks.tag_formatter",
-]
-tag_format = "v{version}"
-upload_to_pypi = false
-version_variable = "jaar/__init__.py:__version__"
+# [tool.semantic_release]
+# branch = "main"
+# build_command = ""
+# changelog_file = "CHANGELOG.md"
+# plugins = [
+#   "semantic_release.hooks.commit_parser",
+#   "semantic_release.hooks.tag_formatter",
+# ]
+# tag_format = "v{version}"
+# upload_to_pypi = false
+# version_variable = "jaar/__init__.py:__version__"
 
 [tool.commitizen]
 name = "cz_conventional_commits"
