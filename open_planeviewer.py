@@ -14,7 +14,7 @@ def run_planview_server_flask():
 if __name__ == "__main__":
 
     html_file_path = os.path.abspath(f"{module_dir()}/planviewer.html")
-    file_url = "file://" + html_file_path
+    file_url = f"file://{html_file_path}"
 
     # Start Flask server in a background thread
     threading.Thread(target=run_planview_server_flask, daemon=True).start()
