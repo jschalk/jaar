@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_json, set_dir
 from src.a01_term_logic.term import BeliefLabel, BelieverName, LabelTerm
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     BelieverUnit,
     get_from_json as believerunit_get_from_json,
 )

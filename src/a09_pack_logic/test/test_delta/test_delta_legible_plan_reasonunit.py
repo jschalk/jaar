@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_reasonunit_str,
     plan_rope_str,

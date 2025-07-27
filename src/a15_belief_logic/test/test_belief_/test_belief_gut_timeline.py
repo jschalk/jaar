@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import set_dir
 from src.a01_term_logic.rope import create_rope
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.test._util.a07_str import time_str
 from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,

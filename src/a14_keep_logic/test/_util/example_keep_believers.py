@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import RopeTerm, create_rope_from_labels
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     BeliefLabel,
     BelieverUnit,
     believerunit_shop,

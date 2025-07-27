@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,

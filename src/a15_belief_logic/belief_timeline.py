@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import create_rope
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.timeline import (
     BelieverTimelinePoint,
     add_newtimeline_planunit,

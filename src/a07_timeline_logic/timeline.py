@@ -10,7 +10,7 @@ from src.a05_plan_logic.plan import (
     plans_calculated_range as calc_range,
     planunit_shop,
 )
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 
 
 class TimeLineLabel(LabelTerm):

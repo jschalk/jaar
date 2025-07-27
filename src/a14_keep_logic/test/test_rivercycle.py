@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import (
     RiverCycle,

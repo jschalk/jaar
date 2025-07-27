@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_plan import factunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a11_bud_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
     CellUnit,

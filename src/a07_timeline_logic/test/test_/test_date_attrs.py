@@ -1,5 +1,5 @@
 from datetime import datetime
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,

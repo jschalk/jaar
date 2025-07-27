@@ -13,7 +13,7 @@ from src.a03_group_logic.group import MemberShip
 from src.a03_group_logic.partner import MemberShip, PartnerName, PartnerUnit
 from src.a04_reason_logic.reason_plan import FactUnit, ReasonUnit
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a08_believer_atom_logic.atom import (
     BelieverAtom,
     InvalidBelieverAtomException,

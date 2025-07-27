@@ -6,7 +6,7 @@ from src.a04_reason_logic.reason_labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import (
+from src.a06_believer_logic.believer_main import (
     believerunit_shop,
     get_dict_of_believer_from_dict,
     get_from_json as believerunit_get_from_json,

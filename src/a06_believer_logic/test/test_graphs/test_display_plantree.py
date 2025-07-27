@@ -1,11 +1,11 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a06_believer_logic.believer import believerunit_shop
 from src.a06_believer_logic.believer_graphics import (
     display_plantree,
     fund_graph0,
     get_believer_agenda_plotly_fig,
     get_believer_partners_plotly_fig,
 )
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001_with_large_agenda,
     get_believerunit_laundry_example1,

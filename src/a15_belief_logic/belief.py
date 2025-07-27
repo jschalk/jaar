@@ -28,7 +28,7 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a07_timeline_logic.timeline import (
     TimeLinePoint,
     TimeLineUnit,

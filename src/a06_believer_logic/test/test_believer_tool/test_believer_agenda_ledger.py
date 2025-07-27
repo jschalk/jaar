@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     get_believer_partner_agenda_award_array,
     get_believer_partner_agenda_award_csv,

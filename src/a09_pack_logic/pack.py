@@ -10,7 +10,7 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a01_term_logic.term import BeliefLabel, BelieverName, FaceName
 from src.a05_plan_logic.plan import get_default_belief_label
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a08_believer_atom_logic.atom import (
     BelieverAtom,
     get_from_json as believeratom_get_from_json,

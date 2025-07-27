@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import penny_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop

@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     get_creg_config,

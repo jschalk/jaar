@@ -1,5 +1,5 @@
 from src.a03_group_logic.group import groupunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 
 
 def test_BelieverUnit_get_partnerunit_group_titles_dict_ReturnsObj():

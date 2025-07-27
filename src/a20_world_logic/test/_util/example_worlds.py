@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_plan import FactUnit, factunit_shop
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 
 
 def _example_empty_bob_believerunit() -> BelieverUnit:

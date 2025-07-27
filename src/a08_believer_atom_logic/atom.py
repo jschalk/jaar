@@ -11,7 +11,7 @@ from src.a03_group_logic.group import awardlink_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a06_believer_logic.believer_tool import believer_attr_exists, believer_get_obj
 from src.a08_believer_atom_logic.atom_config import (
     CRUD_command,

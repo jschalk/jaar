@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from src.a01_term_logic.rope import create_rope
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     clear_factunits_from_believer,
     get_believer_root_facts_dict,

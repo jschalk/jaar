@@ -4,7 +4,7 @@ from src.a01_term_logic.rope import get_ancestor_ropes, get_root_label_from_rope
 from src.a01_term_logic.term import BelieverName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit, PartnerUnit
+from src.a06_believer_logic.believer_main import BelieverUnit, PartnerUnit
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.keep_tool import get_duty_believer

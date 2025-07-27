@@ -8,7 +8,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_positional_dict,
 )
 from src.a01_term_logic.term import BeliefLabel, BelieverName
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a07_timeline_logic.timeline import timelineunit_shop
 from src.a08_believer_atom_logic.atom import BelieverAtom, atomrow_shop
 from src.a09_pack_logic.delta import (

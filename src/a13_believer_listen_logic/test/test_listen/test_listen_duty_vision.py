@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_plan_logic.plan import get_default_belief_label, planunit_shop
-from src.a06_believer_logic.believer import BelieverUnit, believerunit_shop
+from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,

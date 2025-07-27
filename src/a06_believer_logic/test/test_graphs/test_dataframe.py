@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.report import (
     get_believer_agenda_dataframe,
     get_believer_partnerunits_dataframe,

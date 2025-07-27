@@ -1,6 +1,6 @@
 from src.a03_group_logic.group import awardlink_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     believer_plan_factunit_get_obj,
     believer_plan_reason_caseunit_get_obj as caseunit_get_obj,

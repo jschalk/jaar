@@ -11,7 +11,7 @@ from src.a04_reason_logic.reason_plan import (
     factunits_get_from_dict,
 )
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer import BelieverUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
 
 
 def believerunit_exists(x_believer: BelieverUnit) -> bool:

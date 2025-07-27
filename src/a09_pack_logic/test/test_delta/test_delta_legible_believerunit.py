@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer import believerunit_shop
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import believerunit_str
 from src.a08_believer_atom_logic.atom import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import UPDATE_str
