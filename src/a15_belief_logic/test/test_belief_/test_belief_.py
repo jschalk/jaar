@@ -25,7 +25,7 @@ from src.a12_hub_toolbox.hub_tool import (
     save_job_file,
 )
 from src.a12_hub_toolbox.hubunit import hubunit_shop
-from src.a15_belief_logic.belief import (
+from src.a15_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_default_job_listen_count,

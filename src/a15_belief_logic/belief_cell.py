@@ -35,7 +35,7 @@ from src.a12_hub_toolbox.hub_tool import (
     open_believer_file,
 )
 from src.a15_belief_logic.a15_path import BUD_MANDATE_FILENAME
-from src.a15_belief_logic.belief import get_from_dict as beliefunit_get_from_dict
+from src.a15_belief_logic.belief_main import get_from_dict as beliefunit_get_from_dict
 
 
 def create_belief_believers_cell_trees(belief_mstr_dir, belief_label):

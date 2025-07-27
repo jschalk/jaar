@@ -7,7 +7,7 @@ from src.a07_timeline_logic.timeline_main import (
     get_timeline_rope,
     timeline_config_shop,
 )
-from src.a15_belief_logic.belief import BeliefUnit
+from src.a15_belief_logic.belief_main import BeliefUnit
 
 
 def get_belief_believertimelinepoint(beliefunit: BeliefUnit) -> BelieverTimelinePoint:

@@ -4,7 +4,7 @@ from src.a07_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a17_idea_logic.idea import belief_build_from_df
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,

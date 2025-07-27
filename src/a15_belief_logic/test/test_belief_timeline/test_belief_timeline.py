@@ -7,7 +7,7 @@ from src.a07_timeline_logic.timeline_main import (
     believertimelinepoint_shop,
     timelineunit_shop,
 )
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a15_belief_logic.belief_timeline import get_belief_believertimelinepoint
 from src.a15_belief_logic.test._util.a15_env import (
     env_dir_setup_cleanup,

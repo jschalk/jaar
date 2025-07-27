@@ -47,7 +47,6 @@ from src.a12_hub_toolbox.hub_tool import (
     open_believer_file,
     open_job_file,
 )
-from src.a15_belief_logic.belief import get_default_path_beliefunit
 from src.a15_belief_logic.belief_cell import (
     create_belief_believers_cell_trees,
     create_bud_mandate_ledgers,
@@ -55,6 +54,7 @@ from src.a15_belief_logic.belief_cell import (
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
 )
+from src.a15_belief_logic.belief_main import get_default_path_beliefunit
 from src.a16_pidgin_logic.pidgin import (
     default_knot_if_None,
     default_unknown_str_if_None,

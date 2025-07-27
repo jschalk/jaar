@@ -5,7 +5,7 @@ from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_No
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
 from src.a11_bud_logic.bud import TimeLinePoint
-from src.a15_belief_logic.belief import BeliefUnit
+from src.a15_belief_logic.belief_main import BeliefUnit
 from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
 from src.a18_etl_toolbox.a18_path import create_belief_mstr_path, create_world_db_path
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file

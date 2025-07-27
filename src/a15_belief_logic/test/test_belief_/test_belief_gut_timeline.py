@@ -13,7 +13,7 @@ from src.a07_timeline_logic.timeline_main import (
 )
 from src.a12_hub_toolbox.a12_path import create_believer_dir_path
 from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file, save_gut_file
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a15_belief_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

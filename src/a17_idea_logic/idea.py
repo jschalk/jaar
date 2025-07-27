@@ -16,7 +16,7 @@ from src.a09_pack_logic.delta import (
     believerdelta_shop,
     get_dimens_cruds_believerdelta,
 )
-from src.a15_belief_logic.belief import BeliefUnit, beliefunit_shop
+from src.a15_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a17_idea_logic.idea_config import (
     get_idea_format_headers,
     get_idearef_from_file,

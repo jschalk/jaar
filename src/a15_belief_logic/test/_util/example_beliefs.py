@@ -4,7 +4,7 @@ from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.a15_belief_logic.belief import BeliefUnit, beliefunit_shop
+from src.a15_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a15_belief_logic.test._util.a15_env import get_module_temp_dir
 
 

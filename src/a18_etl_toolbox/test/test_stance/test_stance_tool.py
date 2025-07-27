@@ -6,7 +6,7 @@ from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import believer_plan_awardlink_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.a12_path import create_belief_json_path, create_gut_path
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     inx_name_str,

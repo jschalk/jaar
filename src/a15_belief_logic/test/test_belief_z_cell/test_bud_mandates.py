@@ -8,11 +8,11 @@ from src.a12_hub_toolbox.a12_path import (
 from src.a15_belief_logic.a15_path import (
     create_bud_partner_mandate_ledger_path as bud_mandate_path,
 )
-from src.a15_belief_logic.belief import (
+from src.a15_belief_logic.belief_cell import create_bud_mandate_ledgers
+from src.a15_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_dict as beliefunit_get_from_dict,
 )
-from src.a15_belief_logic.belief_cell import create_bud_mandate_ledgers
 from src.a15_belief_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

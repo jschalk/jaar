@@ -6,7 +6,7 @@ from src.a00_data_toolbox.csv_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a12_hub_toolbox.hub_tool import open_believer_file
-from src.a15_belief_logic.belief import get_default_path_beliefunit
+from src.a15_belief_logic.belief_main import get_default_path_beliefunit
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
     add_believerunit_to_stance_csv_strs,

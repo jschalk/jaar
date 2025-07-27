@@ -14,7 +14,10 @@ from src.a12_hub_toolbox.a12_path import (
     create_belief_json_path,
     create_cell_json_path,
 )
-from src.a15_belief_logic.belief import _get_ote1_max_past_event_int, beliefunit_shop
+from src.a15_belief_logic.belief_main import (
+    _get_ote1_max_past_event_int,
+    beliefunit_shop,
+)
 from src.a15_belief_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

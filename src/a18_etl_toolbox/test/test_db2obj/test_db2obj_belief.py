@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a15_belief_logic.belief import get_from_dict as beliefunit_get_from_dict
+from src.a15_belief_logic.belief_main import get_from_dict as beliefunit_get_from_dict
 from src.a15_belief_logic.test._util.a15_str import (
     belief_label_str,
     brokerunits_str,

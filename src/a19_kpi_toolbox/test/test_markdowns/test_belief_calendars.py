@@ -11,7 +11,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 )
 from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a12_hub_toolbox.a12_path import create_belief_json_path
-from src.a15_belief_logic.belief import beliefunit_shop
+from src.a15_belief_logic.belief_main import beliefunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a19_kpi_toolbox.kpi_mstr import create_calendar_markdown_files
 from src.a19_kpi_toolbox.test._util.a19_env import (
