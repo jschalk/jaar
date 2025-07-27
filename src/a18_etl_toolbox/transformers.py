@@ -171,9 +171,7 @@ def get_max_brick_agg_event_int(cursor: sqlite3_Cursor) -> int:
     for agg_table in agg_tables:
         if agg_table.startswith("br") and agg_table.endswith("brick_agg"):
             sqlstr = f"SELECT MAX(event_int) FROM {agg_table}"
-            table_max_event_int = cursor.execute(sqlstr).fetchone()[0]
-            if not table_max_event_int:
-                table_max_event_int = 1
+            table_max_event_int = cursor.execute(sqlstr).fetchone()[0] or 1
             if table_max_event_int > brick_aggs_max_event_int:
                 brick_aggs_max_event_int = table_max_event_int
     return brick_aggs_max_event_int
