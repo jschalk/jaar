@@ -3,6 +3,7 @@ from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
+    get_dir_file_strs,
     get_dir_filenames,
     get_level1_dirs,
 )
@@ -387,6 +388,8 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
 
 
 def test_Modules_path_FunctionStructureAndFormat():
+    # sourcery skip: no-loop-in-tests
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}
@@ -417,7 +420,7 @@ def test_Modules_path_FunctionStructureAndFormat():
                     path_func_set.add(function_name)
                     if (
                         not str(function_name).endswith("config_path")
-                        and not function_name in filterout_path_funcs
+                        and function_name not in filterout_path_funcs
                     ):
                         filtered_path_funcs.add(function_name)
 
@@ -490,3 +493,31 @@ def check_if_test_HasDocString_pytests_exist(
             # )
         assert pytest_for_func_exists, f"missing {expected_test_func=}"
         # print(f"{module_desc} {test_func_exists} {path_func}")
+
+
+# def test_check_Modules_filenames_FollowFileNameConventions_NoNamingCollision():
+#     # sourcery skip: no-loop-in-tests
+#     # sourcery skip: no-conditionals-in-tests
+#     # ESTABLISH
+#     for module_desc, module_dir in get_module_descs().items():
+#         level1_py_files = set(get_dir_file_strs(module_dir, True, False, True).keys())
+#         # print(f"{level1_py_files=}")
+#         base_map = {}
+
+#         for focus_filenamebase in level1_py_files:
+#             for check_filenamebase in level1_py_files:
+#                 if check_filenamebase.find(focus_filenamebase) > -1:
+#                     if base_map.get(focus_filenamebase) is None:
+#                         base_map[focus_filenamebase] = []
+#                     base_map[focus_filenamebase].append(check_filenamebase)
+
+#         # Collect all names that share the same base
+#         collisions = []
+#         for name_group in base_map.values():
+#             if len(name_group) > 1:
+#                 collisions.extend(name_group)
+
+#         if collisions:
+#             print(f"{module_desc} {collisions=}")
+
+#     assert 1 == 2
