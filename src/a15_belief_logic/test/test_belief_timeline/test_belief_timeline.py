@@ -3,7 +3,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     get_creg_config,
 )
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     believertimelinepoint_shop,
     timelineunit_shop,
 )

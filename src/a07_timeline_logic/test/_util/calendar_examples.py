@@ -13,7 +13,7 @@ from src.a07_timeline_logic.test._util.a07_str import (
     weekdays_config_str,
     yr1_jan1_offset_str,
 )
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     believertimelinepoint_shop,
     create_weekday_planunits,

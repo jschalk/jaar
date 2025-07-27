@@ -13,7 +13,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import BeliefLabel, BelieverName, PartnerName
 from src.a02_finance_logic.finance_config import FundNum, default_fund_pool
-from src.a07_timeline_logic.timeline import TimeLinePoint
+from src.a07_timeline_logic.timeline_main import TimeLinePoint
 
 
 class calc_magnitudeException(Exception):

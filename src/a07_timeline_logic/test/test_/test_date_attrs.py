@@ -10,7 +10,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_creg_min_from_dt,
     get_five_min_from_dt,
 )
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     BelieverTimelinePoint,
     TimeLinePoint,
     believertimelinepoint_shop,

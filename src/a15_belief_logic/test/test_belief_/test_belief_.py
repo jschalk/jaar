@@ -9,7 +9,7 @@ from src.a02_finance_logic.finance_config import (
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
-from src.a07_timeline_logic.timeline import timelineunit_shop
+from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a11_bud_logic.bud import tranbook_shop
 from src.a12_hub_toolbox.a12_path import (
     create_believer_dir_path,

@@ -6,7 +6,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_five_config,
 )
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
     timelineunit_shop,

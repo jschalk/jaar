@@ -9,7 +9,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )
-from src.a07_timeline_logic.timeline import timelineunit_shop
+from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a12_hub_toolbox.a12_path import create_belief_json_path
 from src.a15_belief_logic.belief import beliefunit_shop
 from src.a17_idea_logic.idea_db_tool import upsert_sheet

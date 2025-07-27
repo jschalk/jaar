@@ -42,7 +42,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_tue,
     get_wed,
 )
-from src.a07_timeline_logic.timeline import (
+from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_c400_constants,
     get_min_from_dt,

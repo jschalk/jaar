@@ -16,7 +16,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     get_thu,
     get_wed,
 )
-from src.a07_timeline_logic.timeline import get_year_rope
+from src.a07_timeline_logic.timeline_main import get_year_rope
 
 
 def test_BelieverUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():

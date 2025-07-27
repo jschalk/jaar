@@ -12,7 +12,7 @@ from src.a01_term_logic.term import BelieverName, LabelTerm
 from src.a02_finance_logic.allot import allot_nested_scale
 from src.a02_finance_logic.finance_config import FundNum
 from src.a04_reason_logic.reason_plan import get_dict_from_factunits
-from src.a07_timeline_logic.timeline import TimeLinePoint
+from src.a07_timeline_logic.timeline_main import TimeLinePoint
 from src.a11_bud_logic.bud import BeliefLabel
 from src.a11_bud_logic.cell import CellUnit, cellunit_shop
 from src.a12_hub_toolbox.a12_path import (
