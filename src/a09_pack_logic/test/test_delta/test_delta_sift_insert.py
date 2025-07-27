@@ -5,7 +5,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     partner_name_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 from src.a09_pack_logic.delta import believerdelta_shop, get_minimal_believerdelta
 

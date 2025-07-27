@@ -43,7 +43,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     take_force_str,
     task_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop, sift_believeratom
+from src.a08_believer_atom_logic.atom_main import believeratom_shop, sift_believeratom
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str, UPDATE_str
 
 

@@ -6,8 +6,12 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_planunit_str,
     partner_name_str,
 )
-from src.a08_believer_atom_logic.atom import AtomRow, atomrow_shop, believeratom_shop
 from src.a08_believer_atom_logic.atom_config import get_atom_args_class_types
+from src.a08_believer_atom_logic.atom_main import (
+    AtomRow,
+    atomrow_shop,
+    believeratom_shop,
+)
 from src.a08_believer_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
 
 

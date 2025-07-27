@@ -29,8 +29,8 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a01_term_logic.term import EventInt, FaceName
 from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
-from src.a08_believer_atom_logic.atom import believeratom_shop
 from src.a08_believer_atom_logic.atom_config import get_believer_dimens
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a09_pack_logic.delta import get_minimal_believerdelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a11_bud_logic.bud import TranBook

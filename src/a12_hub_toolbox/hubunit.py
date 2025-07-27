@@ -32,7 +32,7 @@ from src.a06_believer_logic.believer_main import (
     believerunit_shop,
     get_from_json as believerunit_get_from_json,
 )
-from src.a08_believer_atom_logic.atom import (
+from src.a08_believer_atom_logic.atom_main import (
     BelieverAtom,
     get_from_json as believeratom_get_from_json,
     modify_believer_with_believeratom,

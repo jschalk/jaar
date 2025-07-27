@@ -3,7 +3,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     partner_name_str,
 )
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,

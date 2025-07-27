@@ -16,7 +16,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     task_str,
 )
 from src.a06_believer_logic.test._util.example_believers import believerunit_v001
-from src.a08_believer_atom_logic.atom import believeratom_shop
+from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
 from src.a17_idea_logic.idea import create_idea_df, get_idearef_obj, make_believerdelta
 from src.a17_idea_logic.idea_config import (
