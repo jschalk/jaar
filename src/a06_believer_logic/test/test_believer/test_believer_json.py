@@ -346,7 +346,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     json_believer = believerunit_get_from_json(x_believer_json=x_json)
 
     # THEN
-    assert str(type(json_believer)).find(".believer.BelieverUnit'>") > 0
+    assert str(type(json_believer)).find(".believer_main.BelieverUnit'>") > 0
     assert json_believer.believer_name is not None
     assert json_believer.believer_name == zia_believer.believer_name
     assert json_believer.belief_label == zia_believer.belief_label
