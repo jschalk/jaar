@@ -57,7 +57,7 @@ from src.a12_hub_toolbox.hub_tool import (
 )
 from src.a12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_believer
 from src.a13_believer_listen_logic.basis_believers import create_listen_basis
-from src.a13_believer_listen_logic.listen import (
+from src.a13_believer_listen_logic.listen_main import (
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
 )

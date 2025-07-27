@@ -9,7 +9,7 @@ from src.a12_hub_toolbox.hub_tool import (
 )
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.keep_tool import save_duty_believer
-from src.a13_believer_listen_logic.listen import (
+from src.a13_believer_listen_logic.listen_main import (
     create_vision_file_from_duty_file,
     listen_to_believer_visions,
 )
