@@ -20,10 +20,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     credor_respect_str,
     debtor_respect_str,
     denom_str,
-    f_context_str,
-    f_lower_str,
-    f_state_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fact_upper_str,
     fund_iota_str,
     give_force_str,
     gogo_want_str,
@@ -265,21 +265,21 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[57] == "reason_context_ERASE"
     assert table_sorting_priority[58] == "reason_context_ERASE_otx"
     assert table_sorting_priority[59] == "reason_context_ERASE_inx"
-    assert table_sorting_priority[60] == "f_context"
-    assert table_sorting_priority[61] == "f_context_otx"
-    assert table_sorting_priority[62] == "f_context_inx"
-    assert table_sorting_priority[63] == "f_context_ERASE"
-    assert table_sorting_priority[64] == "f_context_ERASE_otx"
-    assert table_sorting_priority[65] == "f_context_ERASE_inx"
+    assert table_sorting_priority[60] == "fact_context"
+    assert table_sorting_priority[61] == "fact_context_otx"
+    assert table_sorting_priority[62] == "fact_context_inx"
+    assert table_sorting_priority[63] == "fact_context_ERASE"
+    assert table_sorting_priority[64] == "fact_context_ERASE_otx"
+    assert table_sorting_priority[65] == "fact_context_ERASE_inx"
     assert table_sorting_priority[66] == "reason_state"
     assert table_sorting_priority[67] == "reason_state_otx"
     assert table_sorting_priority[68] == "reason_state_inx"
     assert table_sorting_priority[69] == "reason_state_ERASE"
     assert table_sorting_priority[70] == "reason_state_ERASE_otx"
     assert table_sorting_priority[71] == "reason_state_ERASE_inx"
-    assert table_sorting_priority[72] == "f_state"
-    assert table_sorting_priority[73] == "f_state_otx"
-    assert table_sorting_priority[74] == "f_state_inx"
+    assert table_sorting_priority[72] == "fact_state"
+    assert table_sorting_priority[73] == "fact_state_otx"
+    assert table_sorting_priority[74] == "fact_state_inx"
     assert table_sorting_priority[75] == "labor_title"
     assert table_sorting_priority[76] == "labor_title_otx"
     assert table_sorting_priority[77] == "labor_title_inx"
@@ -315,8 +315,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[107] == "group_debt_points"
     assert table_sorting_priority[108] == "credor_respect"
     assert table_sorting_priority[109] == "debtor_respect"
-    assert table_sorting_priority[110] == "f_lower"
-    assert table_sorting_priority[111] == "f_upper"
+    assert table_sorting_priority[110] == "fact_lower"
+    assert table_sorting_priority[111] == "fact_upper"
     assert table_sorting_priority[112] == "fund_pool"
     assert table_sorting_priority[113] == "give_force"
     assert table_sorting_priority[114] == "mass"
@@ -434,7 +434,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(plan_rope_str()) == "TEXT"
     assert sqlite_types.get(reason_context_str()) == "TEXT"
     assert sqlite_types.get("reason_state") == "TEXT"
-    assert sqlite_types.get("f_state") == "TEXT"
+    assert sqlite_types.get("fact_state") == "TEXT"
     assert sqlite_types.get(labor_title_str()) == "TEXT"
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
@@ -456,8 +456,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(group_debt_points_str()) == "REAL"
     assert sqlite_types.get(credor_respect_str()) == "REAL"
     assert sqlite_types.get(debtor_respect_str()) == "REAL"
-    assert sqlite_types.get(f_lower_str()) == "REAL"
-    assert sqlite_types.get(f_upper_str()) == "REAL"
+    assert sqlite_types.get(fact_lower_str()) == "REAL"
+    assert sqlite_types.get(fact_upper_str()) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
     assert sqlite_types.get(give_force_str()) == "REAL"
     assert sqlite_types.get(mass_str()) == "INTEGER"

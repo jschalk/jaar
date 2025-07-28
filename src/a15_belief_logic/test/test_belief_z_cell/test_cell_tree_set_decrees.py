@@ -92,7 +92,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_believereven
     bob_believeradjust = get_bob_mop_with_reason_believerunit_example()
     # create cell file
     clean_fact = example_casa_clean_factunit()
-    clean_facts = {clean_fact.f_context: clean_fact}
+    clean_facts = {clean_fact.fact_context: clean_fact}
     bob_cell = cellunit_shop(
         bob_str,
         [],
@@ -125,7 +125,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     bob_believeradjust = get_bob_mop_with_reason_believerunit_example()
     # create cell file
     clean_fact = example_casa_clean_factunit()
-    clean_facts = {clean_fact.f_context: clean_fact}
+    clean_facts = {clean_fact.fact_context: clean_fact}
     bob_cell = cellunit_shop(
         bob_str,
         [],
@@ -204,7 +204,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     bob_sue_believeradjust.set_believer_name(sue_str)
     # create cell file
     dirty_fact = example_casa_dirty_factunit()
-    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
@@ -263,7 +263,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     bsy_zia_ba.set_believer_name(zia_str)
     # create cell file
     dirty_fact = example_casa_dirty_factunit()
-    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
@@ -328,7 +328,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     bsy_zia_ba.set_believer_name(zia_str)
     # create cell file
     dirty_fact = example_casa_dirty_factunit()
-    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
@@ -390,12 +390,12 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     bs_yao_ba.set_believer_name(yao_str)
     bs_yao_ba.add_partnerunit(zia_str, 1)
     clean_fact = example_casa_clean_factunit()
-    bs_yao_ba.add_fact(clean_fact.f_context, clean_fact.f_state)
+    bs_yao_ba.add_fact(clean_fact.fact_context, clean_fact.fact_state)
     bsy_zia_ba = get_bob_mop_with_reason_believerunit_example()
     bsy_zia_ba.set_believer_name(zia_str)
     # create cell file
     dirty_fact = example_casa_dirty_factunit()
-    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,
@@ -429,7 +429,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     # THEN
     assert cellunit_get_from_dir(bob_root_dir).boss_facts == dirty_facts
     assert cellunit_get_from_dir(bob_sue_dir).boss_facts == {}
-    clean_facts = {clean_fact.f_context: clean_fact}
+    clean_facts = {clean_fact.fact_context: clean_fact}
     assert cellunit_get_from_dir(bob_sue_yao_dir).boss_facts == clean_facts
     assert cellunit_get_from_dir(bob_sue_yao_zia_dir).boss_facts == clean_facts
 
@@ -462,7 +462,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBelieverEvent
     bsy_zia_ba.set_believer_name(zia_str)
     # create cell file
     dirty_fact = example_casa_dirty_factunit()
-    dirty_facts = {dirty_fact.f_context: dirty_fact}
+    dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
         bob_ancs,

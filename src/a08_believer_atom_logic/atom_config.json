@@ -126,7 +126,7 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "f_context": {
+            "fact_context": {
                 "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
@@ -134,17 +134,17 @@
             }
         },
         "jvalues": {
-            "f_upper": {
+            "fact_upper": {
                 "class_type": "float",
                 "column_order": 4,
                 "sqlite_datatype": "REAL"
             },
-            "f_lower": {
+            "fact_lower": {
                 "class_type": "float",
                 "column_order": 3,
                 "sqlite_datatype": "REAL"
             },
-            "f_state": {
+            "fact_state": {
                 "class_type": "RopeTerm",
                 "column_order": 2,
                 "sqlite_datatype": "TEXT"

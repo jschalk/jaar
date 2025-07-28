@@ -3983,10 +3983,10 @@
         "plan_label": "jour_minute",
         "factunits": {
           ";amy45;jour_minute;": {
-            "f_context": ";amy45;jour_minute;",
-            "f_upper": 59,
-            "f_lower": 5,
-            "f_state": ";amy45;jour_minute;"
+            "fact_context": ";amy45;jour_minute;",
+            "fact_upper": 59,
+            "fact_lower": 5,
+            "fact_state": ";amy45;jour_minute;"
           }
         },
         "mass": 40
@@ -4606,16 +4606,16 @@
     "plan_label": "amy45",
     "factunits": {
       ";amy45;hr_number": {
-        "f_context": ";amy45;hr_number",
-        "f_upper": 23,
-        "f_lower": 0,
-        "f_state": ";amy45;hr_number"
+        "fact_context": ";amy45;hr_number",
+        "fact_upper": 23,
+        "fact_lower": 0,
+        "fact_state": ";amy45;hr_number"
       },
       ";amy45;jour_minute;": {
-        "f_context": ";amy45;jour_minute;",
-        "f_upper": 59,
-        "f_lower": 0,
-        "f_state": ";amy45;jour_minute;"
+        "fact_context": ";amy45;jour_minute;",
+        "fact_upper": 59,
+        "fact_lower": 0,
+        "fact_state": ";amy45;jour_minute;"
       }
     },
     "mass": 1

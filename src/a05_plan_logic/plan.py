@@ -344,7 +344,7 @@ class PlanUnit:
 
     def _set_factheir(self, x_fact: FactCore):
         if (
-            x_fact.f_context == self.get_plan_rope()
+            x_fact.fact_context == self.get_plan_rope()
             and self._gogo_calc is not None
             and self._stop_calc is not None
             and self.begin is None
@@ -354,15 +354,15 @@ class PlanUnit:
                 f"Cannot have fact for range inheritor '{self.get_plan_rope()}'. A ranged fact plan must have _begin, _close"
             )
         x_factheir = factheir_shop(
-            x_fact.f_context, x_fact.f_state, x_fact.f_lower, x_fact.f_upper
+            x_fact.fact_context, x_fact.fact_state, x_fact.fact_lower, x_fact.fact_upper
         )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
-        self._factheirs[x_factheir.f_context] = x_factheir
+        self._factheirs[x_factheir.fact_context] = x_factheir
 
     def apply_factunit_moldations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self.factunits.values():
-            if factunit.f_context == factheir.f_context:
+            if factunit.fact_context == factheir.fact_context:
                 factheir.mold(factunit)
         return factheir
 
@@ -370,39 +370,39 @@ class PlanUnit:
         delete_factunit = False
         for factunit in self.factunits.values():
             if (
-                factunit.f_context == factheir.f_context
-                and factunit.f_upper is not None
-                and factheir.f_lower is not None
-            ) and factunit.f_upper < factheir.f_lower:
+                factunit.fact_context == factheir.fact_context
+                and factunit.fact_upper is not None
+                and factheir.fact_lower is not None
+            ) and factunit.fact_upper < factheir.fact_lower:
                 delete_factunit = True
 
         if delete_factunit:
-            del self.factunits[factunit.f_context]
+            del self.factunits[factunit.fact_context]
 
     def set_factunit(self, factunit: FactUnit):
-        self.factunits[factunit.f_context] = factunit
+        self.factunits[factunit.fact_context] = factunit
 
-    def factunit_exists(self, x_f_context: RopeTerm) -> bool:
-        return self.factunits.get(x_f_context) != None
+    def factunit_exists(self, x_fact_context: RopeTerm) -> bool:
+        return self.factunits.get(x_fact_context) != None
 
     def get_factunits_dict(self) -> dict[RopeTerm, str]:
         return get_dict_from_factunits(self.factunits)
 
-    def set_factunit_to_complete(self, f_contextunit: FactUnit):
-        # if a plan is considered a chore then a factheir.f_lower attribute can be increased to
-        # a number <= factheir.f_upper so the plan no longer is a chore. This method finds
-        # the minimal factheir.f_lower to modify plan._chore is False. plan_core._factheir cannot be straight up manipulated
+    def set_factunit_to_complete(self, fact_contextunit: FactUnit):
+        # if a plan is considered a chore then a factheir.fact_lower attribute can be increased to
+        # a number <= factheir.fact_upper so the plan no longer is a chore. This method finds
+        # the minimal factheir.fact_lower to modify plan._chore is False. plan_core._factheir cannot be straight up manipulated
         # so it is mandatory that plan._factunit is different.
-        # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=f_upper)
-        self.factunits[f_contextunit.f_context] = factunit_shop(
-            f_context=f_contextunit.f_context,
-            f_state=f_contextunit.f_context,
-            f_lower=f_contextunit.f_upper,
-            f_upper=f_contextunit.f_upper,
+        # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=fact_upper)
+        self.factunits[fact_contextunit.fact_context] = factunit_shop(
+            fact_context=fact_contextunit.fact_context,
+            fact_state=fact_contextunit.fact_context,
+            fact_lower=fact_contextunit.fact_upper,
+            fact_upper=fact_contextunit.fact_upper,
         )
 
-    def del_factunit(self, f_context: RopeTerm):
-        self.factunits.pop(f_context)
+    def del_factunit(self, fact_context: RopeTerm):
+        self.factunits.pop(fact_context)
 
     def set_fund_attr(
         self,
@@ -596,13 +596,13 @@ class PlanUnit:
                 old_knot=old_knot,
                 new_knot=self.knot,
             )
-            x_factunit.f_context = new_reason_context_rope
-            new_f_state_rope = replace_knot(
-                rope=x_factunit.f_state,
+            x_factunit.fact_context = new_reason_context_rope
+            new_fact_state_rope = replace_knot(
+                rope=x_factunit.fact_state,
                 old_knot=old_knot,
                 new_knot=self.knot,
             )
-            x_factunit.set_attr(f_state=new_f_state_rope)
+            x_factunit.set_attr(fact_state=new_fact_state_rope)
             new_factunits[new_reason_context_rope] = x_factunit
         self.factunits = new_factunits
 
@@ -879,8 +879,8 @@ class PlanUnit:
         self, all_plans: list, range_root_rope: RopeTerm, reason_context: RopeTerm
     ):
         range_root_factheir = self._factheirs.get(range_root_rope)
-        old_reason_lower = range_root_factheir.f_lower
-        old_reason_upper = range_root_factheir.f_upper
+        old_reason_lower = range_root_factheir.fact_lower
+        old_reason_upper = range_root_factheir.fact_upper
         x_rangeunit = plans_calculated_range(
             all_plans, old_reason_lower, old_reason_upper
         )

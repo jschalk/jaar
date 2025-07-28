@@ -361,7 +361,7 @@ def test_PlanUnit_set_factunit_SetsAttr():
     assert not clean_plan.factunits.get(dirty_str)
 
     # WHEN
-    clean_plan.set_factunit(factunit_shop(f_context=dirty_str))
+    clean_plan.set_factunit(factunit_shop(fact_context=dirty_str))
 
     # THEN
     assert clean_plan.factunits.get(dirty_str)
@@ -375,7 +375,7 @@ def test_PlanUnit_factunit_exists_ReturnsObj():
     assert not clean_plan.factunit_exists(dirty_str)
 
     # WHEN
-    clean_plan.set_factunit(factunit_shop(f_context=dirty_str))
+    clean_plan.set_factunit(factunit_shop(fact_context=dirty_str))
 
     # THEN
     assert clean_plan.factunit_exists(dirty_str)

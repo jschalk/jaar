@@ -158,13 +158,13 @@ def test_believer_edit_plan_label_Modifies_factunits():
     yao_believer.set_l1_plan(planunit_shop(casa_str))
     yao_believer.set_plan(planunit_shop(roses_str), parent_rope=bloomers_rope)
     yao_believer.set_plan(planunit_shop(rain_str), parent_rope=old_water_rope)
-    yao_believer.add_fact(f_context=old_water_rope, f_state=old_rain_rope)
+    yao_believer.add_fact(fact_context=old_water_rope, fact_state=old_rain_rope)
 
     plan_x = yao_believer.get_plan_obj(roses_rope)
     assert yao_believer.planroot.factunits[old_water_rope] is not None
     old_water_rain_factunit = yao_believer.planroot.factunits[old_water_rope]
-    assert old_water_rain_factunit.f_context == old_water_rope
-    assert old_water_rain_factunit.f_state == old_rain_rope
+    assert old_water_rain_factunit.fact_context == old_water_rope
+    assert old_water_rain_factunit.fact_state == old_rain_rope
 
     # WHEN
     new_water_str = "h2o"
@@ -177,16 +177,16 @@ def test_believer_edit_plan_label_Modifies_factunits():
     assert yao_believer.planroot.factunits.get(old_water_rope) is None
     assert yao_believer.planroot.factunits.get(new_water_rope) is not None
     new_water_rain_factunit = yao_believer.planroot.factunits[new_water_rope]
-    assert new_water_rain_factunit.f_context == new_water_rope
+    assert new_water_rain_factunit.fact_context == new_water_rope
     new_rain_rope = yao_believer.make_rope(new_water_rope, rain_str)
-    assert new_water_rain_factunit.f_state == new_rain_rope
+    assert new_water_rain_factunit.fact_state == new_rain_rope
 
     assert yao_believer.planroot.factunits.get(new_water_rope)
     x_factunit = yao_believer.planroot.factunits.get(new_water_rope)
     # for factunit_key, x_factunit in yao_believer.planroot.factunits.items():
     #     assert factunit_key == new_water_rope
-    assert x_factunit.f_context == new_water_rope
-    assert x_factunit.f_state == new_rain_rope
+    assert x_factunit.fact_context == new_water_rope
+    assert x_factunit.fact_state == new_rain_rope
 
 
 def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():

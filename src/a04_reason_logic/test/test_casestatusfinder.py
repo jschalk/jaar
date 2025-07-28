@@ -9,24 +9,24 @@ def test_CaseStatusFinder_Exists():
     x_reason_lower = 1
     x_reason_upper = 1
     x_reason_divisor = 1
-    x_f_lower_full = 1
-    x_f_upper_full = 1
+    x_fact_lower_full = 1
+    x_fact_upper_full = 1
 
     # WHEN
     x_pbsd = CaseStatusFinder(
         x_reason_lower,
         x_reason_upper,
         x_reason_divisor,
-        x_f_lower_full,
-        x_f_upper_full,
+        x_fact_lower_full,
+        x_fact_upper_full,
     )
 
     # THEN
     assert x_pbsd.reason_lower == x_reason_lower
     assert x_pbsd.reason_upper == x_reason_upper
     assert x_pbsd.reason_divisor == x_reason_divisor
-    assert x_pbsd.f_lower_full == x_f_lower_full
-    assert x_pbsd.f_upper_full == x_f_upper_full
+    assert x_pbsd.fact_lower_full == x_fact_lower_full
+    assert x_pbsd.fact_upper_full == x_fact_upper_full
 
 
 def test_casestatusfinder_shop_ReturnsObj():
@@ -34,24 +34,24 @@ def test_casestatusfinder_shop_ReturnsObj():
     x_reason_lower = 1
     x_reason_upper = 1
     x_reason_divisor = 1
-    x_f_lower_full = 1
-    x_f_upper_full = 1
+    x_fact_lower_full = 1
+    x_fact_upper_full = 1
 
     # WHEN
     x_pbsd = casestatusfinder_shop(
         x_reason_lower,
         x_reason_upper,
         x_reason_divisor,
-        x_f_lower_full,
-        x_f_upper_full,
+        x_fact_lower_full,
+        x_fact_upper_full,
     )
 
     # THEN
     assert x_pbsd.reason_lower == x_reason_lower
     assert x_pbsd.reason_upper == x_reason_upper
     assert x_pbsd.reason_divisor == x_reason_divisor
-    assert x_pbsd.f_lower_full == x_f_lower_full
-    assert x_pbsd.f_upper_full == x_f_upper_full
+    assert x_pbsd.fact_lower_full == x_fact_lower_full
+    assert x_pbsd.fact_upper_full == x_fact_upper_full
 
 
 def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
@@ -60,24 +60,24 @@ def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
             reason_lower=1,
             reason_upper=None,
             reason_divisor=1,
-            f_lower_full=1,
-            f_upper_full=1,
+            fact_lower_full=1,
+            fact_upper_full=1,
         )
     assert str(excinfo_1.value) == "No parameter can be None"
 
-    x_f_lower_full = 2
-    x_f_upper_full = 1
+    x_fact_lower_full = 2
+    x_fact_upper_full = 1
     with pytest_raises(Exception) as excinfo_2:
         casestatusfinder_shop(
             reason_lower=1,
             reason_upper=1,
             reason_divisor=1,
-            f_lower_full=x_f_lower_full,
-            f_upper_full=x_f_upper_full,
+            fact_lower_full=x_fact_lower_full,
+            fact_upper_full=x_fact_upper_full,
         )
     assert (
         str(excinfo_2.value)
-        == f"self.f_lower_full={x_f_lower_full} cannot be greater than self.f_upper_full={x_f_upper_full}"
+        == f"self.fact_lower_full={x_fact_lower_full} cannot be greater than self.fact_upper_full={x_fact_upper_full}"
     )
 
     x_reason_divisor = -1
@@ -86,8 +86,8 @@ def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
             reason_lower=1,
             reason_upper=1,
             reason_divisor=x_reason_divisor,
-            f_lower_full=1,
-            f_upper_full=1,
+            fact_lower_full=1,
+            fact_upper_full=1,
         )
     assert (
         str(excinfo_3.value)
@@ -101,8 +101,8 @@ def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
             reason_lower=x_reason_lower,
             reason_upper=1,
             reason_divisor=x_reason_divisor,
-            f_lower_full=1,
-            f_upper_full=1,
+            fact_lower_full=1,
+            fact_upper_full=1,
         )
     assert (
         str(excinfo_4.value)
@@ -115,8 +115,8 @@ def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
             reason_lower=1,
             reason_upper=x_reason_upper,
             reason_divisor=x_reason_divisor,
-            f_lower_full=1,
-            f_upper_full=1,
+            fact_lower_full=1,
+            fact_upper_full=1,
         )
     assert (
         str(excinfo_5.value)
@@ -129,21 +129,21 @@ def test_CaseStatusFinder_AbbrevationMethodsReturnsObjs():
     x_reason_lower = 1
     x_reason_upper = 2
     x_reason_divisor = 3
-    x_f_lower_full = 4
-    x_f_upper_full = 5
+    x_fact_lower_full = 4
+    x_fact_upper_full = 5
 
     # WHEN
     x_pbsd = casestatusfinder_shop(
         x_reason_lower,
         x_reason_upper,
         x_reason_divisor,
-        x_f_lower_full,
-        x_f_upper_full,
+        x_fact_lower_full,
+        x_fact_upper_full,
     )
 
     # THEN
-    assert x_pbsd.bo() == x_f_lower_full % x_reason_divisor
-    assert x_pbsd.bn() == x_f_upper_full % x_reason_divisor
+    assert x_pbsd.bo() == x_fact_lower_full % x_reason_divisor
+    assert x_pbsd.bn() == x_fact_upper_full % x_reason_divisor
     assert x_pbsd.po() == x_reason_lower
     assert x_pbsd.pn() == x_reason_upper
     assert x_pbsd.pd() == x_reason_divisor
@@ -625,21 +625,21 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_01(
         reason_lower=1305.0,
         reason_upper=1305.0,
         reason_divisor=1440,
-        f_lower_full=20000,
-        f_upper_full=29000,
+        fact_lower_full=20000,
+        fact_upper_full=29000,
     )
-    print(f"----\n  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=}")
+    print(f"----\n  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=}")
     print(
         f"  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
     )
     print(
-        f"  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
+        f"  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     )
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
 
     # THEN
     # assert segr_obj._fact_range_len == 9000
-    # assert segr_obj.get_f_upper_mod_div() == 200
+    # assert segr_obj.get_fact_upper_mod_div() == 200
     assert segr_obj.get_active()
     assert segr_obj.get_chore_status()
 
@@ -650,15 +650,15 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_02(
         reason_lower=1305.0,
         reason_upper=1305.0,
         reason_divisor=1440,
-        f_lower_full=1300,
-        f_upper_full=1400,
+        fact_lower_full=1300,
+        fact_upper_full=1400,
     )
-    print(f"----\n  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=}")
+    print(f"----\n  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=}")
     print(
         f"  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
     )
     print(
-        f"  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
+        f"  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     )
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
 
@@ -673,15 +673,15 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_03(
         reason_lower=1305.0,
         reason_upper=1305.0,
         reason_divisor=1440,
-        f_lower_full=1300,
-        f_upper_full=1300,
+        fact_lower_full=1300,
+        fact_upper_full=1300,
     )
-    print(f"----\n  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=}")
+    print(f"----\n  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=}")
     print(
         f"  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
     )
     print(
-        f"  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
+        f"  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     )
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
 

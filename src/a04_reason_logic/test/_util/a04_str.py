@@ -18,20 +18,20 @@ def belief_label_str() -> str:
     return "belief_label"
 
 
-def f_context_str() -> str:
-    return "f_context"
+def fact_context_str() -> str:
+    return "fact_context"
 
 
-def f_lower_str() -> str:
-    return "f_lower"
+def fact_lower_str() -> str:
+    return "fact_lower"
 
 
-def f_state_str() -> str:
-    return "f_state"
+def fact_state_str() -> str:
+    return "fact_state"
 
 
-def f_upper_str() -> str:
-    return "f_upper"
+def fact_upper_str() -> str:
+    return "fact_upper"
 
 
 def labor_title_str() -> str:

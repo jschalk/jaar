@@ -87,15 +87,15 @@ class CellUnit:
     def set_boss_facts_from_other_facts(self):
         self.boss_facts = copy_deepcopy(self.believerevent_facts)
         for x_fact in self.found_facts.values():
-            self.boss_facts[x_fact.f_context] = copy_deepcopy(x_fact)
+            self.boss_facts[x_fact.fact_context] = copy_deepcopy(x_fact)
 
     def add_other_facts_to_boss_facts(self):
         for x_fact in self.found_facts.values():
-            if not self.boss_facts.get(x_fact.f_context):
-                self.boss_facts[x_fact.f_context] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.fact_context):
+                self.boss_facts[x_fact.fact_context] = copy_deepcopy(x_fact)
         for x_fact in self.believerevent_facts.values():
-            if not self.boss_facts.get(x_fact.f_context):
-                self.boss_facts[x_fact.f_context] = copy_deepcopy(x_fact)
+            if not self.boss_facts.get(x_fact.fact_context):
+                self.boss_facts[x_fact.fact_context] = copy_deepcopy(x_fact)
 
     def filter_facts_by_reason_contexts(self):
         to_delete_believerevent_fact_keys = set(self.believerevent_facts.keys())
@@ -114,15 +114,27 @@ class CellUnit:
     def set_believeradjust_facts(self):
         for fact in self.believerevent_facts.values():
             self.believeradjust.add_fact(
-                fact.f_context, fact.f_state, fact.f_lower, fact.f_upper, True
+                fact.fact_context,
+                fact.fact_state,
+                fact.fact_lower,
+                fact.fact_upper,
+                True,
             )
         for fact in self.found_facts.values():
             self.believeradjust.add_fact(
-                fact.f_context, fact.f_state, fact.f_lower, fact.f_upper, True
+                fact.fact_context,
+                fact.fact_state,
+                fact.fact_lower,
+                fact.fact_upper,
+                True,
             )
         for fact in self.boss_facts.values():
             self.believeradjust.add_fact(
-                fact.f_context, fact.f_state, fact.f_lower, fact.f_upper, True
+                fact.fact_context,
+                fact.fact_state,
+                fact.fact_lower,
+                fact.fact_upper,
+                True,
             )
 
     def _set_partner_mandate_ledger(self):

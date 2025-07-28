@@ -12,38 +12,40 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_1():
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
     sun_rope = sue_believer.make_rope(sem_jour_rope, "Sun")
-    sun_believer_fact = factunit_shop(f_context=sem_jour_rope, f_state=sun_rope)
+    sun_believer_fact = factunit_shop(fact_context=sem_jour_rope, fact_state=sun_rope)
     print(sun_believer_fact)
     x_planroot = sue_believer.planroot
-    x_planroot.factunits = {sun_believer_fact.f_context: sun_believer_fact}
+    x_planroot.factunits = {sun_believer_fact.fact_context: sun_believer_fact}
     assert x_planroot.factunits is not None
     x_planroot.factunits = {}
     assert not x_planroot.factunits
 
     # ESTABLISH
-    sue_believer.add_fact(f_context=sem_jour_rope, f_state=sun_rope)
+    sue_believer.add_fact(fact_context=sem_jour_rope, fact_state=sun_rope)
 
     # THEN
-    assert x_planroot.factunits == {sun_believer_fact.f_context: sun_believer_fact}
+    assert x_planroot.factunits == {sun_believer_fact.fact_context: sun_believer_fact}
 
     # ESTABLISH
     x_planroot.factunits = {}
     assert not x_planroot.factunits
     usa_wk_rope = sue_believer.make_l1_rope("nation")
-    usa_wk_fact = factunit_shop(usa_wk_rope, usa_wk_rope, f_lower=608, f_upper=610)
-    x_planroot.factunits = {usa_wk_fact.f_context: usa_wk_fact}
+    usa_wk_fact = factunit_shop(
+        usa_wk_rope, usa_wk_rope, fact_lower=608, fact_upper=610
+    )
+    x_planroot.factunits = {usa_wk_fact.fact_context: usa_wk_fact}
 
     x_planroot.factunits = {}
     assert not x_planroot.factunits
 
     # WHEN
     sue_believer.add_fact(
-        f_context=usa_wk_rope, f_state=usa_wk_rope, f_lower=608, f_upper=610
+        fact_context=usa_wk_rope, fact_state=usa_wk_rope, fact_lower=608, fact_upper=610
     )
 
     # THEN
     assert x_planroot.factunits is not None
-    assert x_planroot.factunits == {usa_wk_fact.f_context: usa_wk_fact}
+    assert x_planroot.factunits == {usa_wk_fact.fact_context: usa_wk_fact}
 
 
 def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_2():
@@ -53,39 +55,39 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_2():
     sun_rope = sue_believer.make_rope(sem_jour_rope, "Sun")
 
     # WHEN
-    sue_believer.add_fact(f_context=sem_jour_rope, f_state=sun_rope)
+    sue_believer.add_fact(fact_context=sem_jour_rope, fact_state=sun_rope)
 
     # THEN
-    sun_believer_fact = factunit_shop(f_context=sem_jour_rope, f_state=sun_rope)
+    sun_believer_fact = factunit_shop(fact_context=sem_jour_rope, fact_state=sun_rope)
     x_planroot = sue_believer.planroot
-    assert x_planroot.factunits == {sun_believer_fact.f_context: sun_believer_fact}
+    assert x_planroot.factunits == {sun_believer_fact.fact_context: sun_believer_fact}
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_f_state_IsNone():
+def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_fact_state_IsNone():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
 
     # WHEN
-    sue_believer.add_fact(f_context=sem_jour_rope, f_lower=5, f_upper=7)
+    sue_believer.add_fact(fact_context=sem_jour_rope, fact_lower=5, fact_upper=7)
 
     # THEN
     sun_believer_fact = factunit_shop(sem_jour_rope, sem_jour_rope, 5, 7)
     x_planroot = sue_believer.planroot
-    assert x_planroot.factunits == {sun_believer_fact.f_context: sun_believer_fact}
+    assert x_planroot.factunits == {sun_believer_fact.fact_context: sun_believer_fact}
 
 
 def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_reason_lower_IsNone():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
-    sue_believer.add_fact(f_context=sem_jour_rope, f_lower=5, f_upper=7)
+    sue_believer.add_fact(fact_context=sem_jour_rope, fact_lower=5, fact_upper=7)
     x_planroot = sue_believer.planroot
     x7_factunit = factunit_shop(sem_jour_rope, sem_jour_rope, 5, 7)
     assert x_planroot.factunits.get(sem_jour_rope) == x7_factunit
 
     # WHEN
-    sue_believer.add_fact(f_context=sem_jour_rope, f_upper=10)
+    sue_believer.add_fact(fact_context=sem_jour_rope, fact_upper=10)
 
     # THEN
     x10_factunit = factunit_shop(sem_jour_rope, sem_jour_rope, 5, 10)
@@ -112,7 +114,7 @@ def test_BelieverUnit_set_fact_FailsToCreateWhenreason_contextAndFactAreDifferen
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         bob_believer.add_fact(
-            f_context=a1e1_rope, f_state=a1e1_rope, f_lower=20, f_upper=23
+            fact_context=a1e1_rope, fact_state=a1e1_rope, fact_lower=20, fact_upper=23
         )
     x_str = f"Non range-root fact:{a1e1_rope} can only be set by range-root fact"
     assert str(excinfo.value) == x_str
@@ -123,13 +125,13 @@ def test_BelieverUnit_del_fact_CorrectlyModifiesAttr():
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
     sun_rope = sue_believer.make_rope(sem_jour_rope, "Sun")
-    sue_believer.add_fact(f_context=sem_jour_rope, f_state=sun_rope)
-    sun_believer_fact = factunit_shop(f_context=sem_jour_rope, f_state=sun_rope)
+    sue_believer.add_fact(fact_context=sem_jour_rope, fact_state=sun_rope)
+    sun_believer_fact = factunit_shop(fact_context=sem_jour_rope, fact_state=sun_rope)
     x_planroot = sue_believer.planroot
-    assert x_planroot.factunits == {sun_believer_fact.f_context: sun_believer_fact}
+    assert x_planroot.factunits == {sun_believer_fact.fact_context: sun_believer_fact}
 
     # WHEN
-    sue_believer.del_fact(f_context=sem_jour_rope)
+    sue_believer.del_fact(fact_context=sem_jour_rope)
 
     # THEN
     assert x_planroot.factunits == {}
@@ -168,7 +170,9 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     ziet_rope = sue_believer.make_l1_rope(ziet_str)
     # sue_believer.edit_plan_attr(c_rope, reason_context=ziet_rope, reason_case=ziet_rope, reason_lower=5, reason_upper=10)
 
-    sue_believer.add_fact(f_context=ziet_rope, f_state=ziet_rope, f_lower=5, f_upper=10)
+    sue_believer.add_fact(
+        fact_context=ziet_rope, fact_state=ziet_rope, fact_lower=5, fact_upper=10
+    )
     print(f"Establish a single ranged fact {sue_believer.planroot.factunits=}")
     assert len(sue_believer.planroot.factunits) == 1
 
@@ -181,7 +185,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_believer.set_l1_plan(place_plan)
     place_rope = sue_believer.make_l1_rope(place_str)
     sue_believer.add_fact(
-        f_context=place_rope, f_state=place_rope, f_lower=5, f_upper=10
+        fact_context=place_rope, fact_state=place_rope, fact_lower=5, fact_upper=10
     )
     print(f"When one ranged fact added {sue_believer.planroot.factunits=}")
     assert len(sue_believer.planroot.factunits) == 2
@@ -193,7 +197,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     mood = "mood_x"
     sue_believer.set_l1_plan(planunit_shop(mood))
     m_rope = sue_believer.make_l1_rope(mood)
-    sue_believer.add_fact(f_context=m_rope, f_state=m_rope)
+    sue_believer.add_fact(fact_context=m_rope, fact_state=m_rope)
     print(f"When one non-ranged_fact added {sue_believer.planroot.factunits=}")
     assert len(sue_believer.planroot.factunits) == 3
 
@@ -214,9 +218,11 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     sad = "Sad"
     sue_believer.set_plan(planunit_shop(happy), parent_rope=m_x_rope)
     sue_believer.set_plan(planunit_shop(sad), parent_rope=m_x_rope)
-    sue_believer.add_fact(f_context=ziet_rope, f_state=ziet_rope, f_lower=5, f_upper=10)
     sue_believer.add_fact(
-        f_context=m_x_rope, f_state=sue_believer.make_rope(m_x_rope, happy)
+        fact_context=ziet_rope, fact_state=ziet_rope, fact_lower=5, fact_upper=10
+    )
+    sue_believer.add_fact(
+        fact_context=m_x_rope, fact_state=sue_believer.make_rope(m_x_rope, happy)
     )
     print(
         f"Establish a root ranged fact and non-range fact:\n{sue_believer.planroot.factunits=}"
@@ -225,7 +231,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
 
     # WHEN / THEN
     assert len(sue_believer._get_rangeroot_factunits()) == 1
-    assert sue_believer._get_rangeroot_factunits()[0].f_context == ziet_rope
+    assert sue_believer._get_rangeroot_factunits()[0].fact_context == ziet_rope
 
 
 def test_BelieverUnit_set_fact_create_missing_plans_Createsreason_contextAndFact():

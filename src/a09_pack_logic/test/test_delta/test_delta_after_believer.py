@@ -17,10 +17,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_planunit_str,
     believerunit_str,
     close_str,
-    f_context_str,
-    f_lower_str,
-    f_state_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fact_upper_str,
     give_force_str,
     gogo_want_str,
     group_cred_points_str,
@@ -629,16 +629,16 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_f
     assert before_ball_plan.factunits == {}
 
     # WHEN
-    damaged_f_lower = 55
-    damaged_f_upper = 66
+    damaged_fact_lower = 55
+    damaged_fact_upper = 66
     update_disc_believeratom = believeratom_shop(
         believer_plan_factunit_str(), INSERT_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(f_context_str(), knee_rope)
-    update_disc_believeratom.set_jvalue(f_state_str(), damaged_rope)
-    update_disc_believeratom.set_jvalue(f_lower_str(), damaged_f_lower)
-    update_disc_believeratom.set_jvalue(f_upper_str(), damaged_f_upper)
+    update_disc_believeratom.set_jkey(fact_context_str(), knee_rope)
+    update_disc_believeratom.set_jvalue(fact_state_str(), damaged_rope)
+    update_disc_believeratom.set_jvalue(fact_lower_str(), damaged_fact_lower)
+    update_disc_believeratom.set_jvalue(fact_upper_str(), damaged_fact_upper)
     # print(f"{update_disc_believeratom=}")
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.set_believeratom(update_disc_believeratom)
@@ -648,10 +648,10 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_f
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
     assert after_ball_plan.factunits != {}
     assert after_ball_plan.factunits.get(knee_rope) is not None
-    assert after_ball_plan.factunits.get(knee_rope).f_context == knee_rope
-    assert after_ball_plan.factunits.get(knee_rope).f_state == damaged_rope
-    assert after_ball_plan.factunits.get(knee_rope).f_lower == damaged_f_lower
-    assert after_ball_plan.factunits.get(knee_rope).f_upper == damaged_f_upper
+    assert after_ball_plan.factunits.get(knee_rope).fact_context == knee_rope
+    assert after_ball_plan.factunits.get(knee_rope).fact_state == damaged_rope
+    assert after_ball_plan.factunits.get(knee_rope).fact_lower == damaged_fact_lower
+    assert after_ball_plan.factunits.get(knee_rope).fact_upper == damaged_fact_upper
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_factunit():
@@ -670,7 +670,8 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_f
     before_sue_au.set_l1_plan(planunit_shop(knee_str))
     before_sue_au.set_plan(planunit_shop(damaged_str), knee_rope)
     before_sue_au.edit_plan_attr(
-        ball_rope, factunit=factunit_shop(f_context=knee_rope, f_state=damaged_rope)
+        ball_rope,
+        factunit=factunit_shop(fact_context=knee_rope, fact_state=damaged_rope),
     )
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.factunits != {}
@@ -681,7 +682,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_f
         believer_plan_factunit_str(), DELETE_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(f_context_str(), knee_rope)
+    update_disc_believeratom.set_jkey(fact_context_str(), knee_rope)
     # print(f"{update_disc_believeratom=}")
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.set_believeratom(update_disc_believeratom)
@@ -715,21 +716,21 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_f
     before_ball_plan = before_sue_au.get_plan_obj(ball_rope)
     assert before_ball_plan.factunits != {}
     assert before_ball_plan.factunits.get(knee_rope) is not None
-    assert before_ball_plan.factunits.get(knee_rope).f_state == damaged_rope
-    assert before_ball_plan.factunits.get(knee_rope).f_lower is None
-    assert before_ball_plan.factunits.get(knee_rope).f_upper is None
+    assert before_ball_plan.factunits.get(knee_rope).fact_state == damaged_rope
+    assert before_ball_plan.factunits.get(knee_rope).fact_lower is None
+    assert before_ball_plan.factunits.get(knee_rope).fact_upper is None
 
     # WHEN
-    medical_f_lower = 45
-    medical_f_upper = 77
+    medical_fact_lower = 45
+    medical_fact_upper = 77
     update_disc_believeratom = believeratom_shop(
         believer_plan_factunit_str(), UPDATE_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(f_context_str(), knee_rope)
-    update_disc_believeratom.set_jvalue(f_state_str(), medical_rope)
-    update_disc_believeratom.set_jvalue(f_lower_str(), medical_f_lower)
-    update_disc_believeratom.set_jvalue(f_upper_str(), medical_f_upper)
+    update_disc_believeratom.set_jkey(fact_context_str(), knee_rope)
+    update_disc_believeratom.set_jvalue(fact_state_str(), medical_rope)
+    update_disc_believeratom.set_jvalue(fact_lower_str(), medical_fact_lower)
+    update_disc_believeratom.set_jvalue(fact_upper_str(), medical_fact_upper)
     # print(f"{update_disc_believeratom=}")
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.set_believeratom(update_disc_believeratom)
@@ -739,9 +740,9 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_f
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
     assert after_ball_plan.factunits != {}
     assert after_ball_plan.factunits.get(knee_rope) is not None
-    assert after_ball_plan.factunits.get(knee_rope).f_state == medical_rope
-    assert after_ball_plan.factunits.get(knee_rope).f_lower == medical_f_lower
-    assert after_ball_plan.factunits.get(knee_rope).f_upper == medical_f_upper
+    assert after_ball_plan.factunits.get(knee_rope).fact_state == medical_rope
+    assert after_ball_plan.factunits.get(knee_rope).fact_lower == medical_fact_lower
+    assert after_ball_plan.factunits.get(knee_rope).fact_upper == medical_fact_upper
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_reason_caseunit():

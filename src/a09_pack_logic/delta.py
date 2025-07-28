@@ -838,13 +838,13 @@ class BelieverDelta:
             insert_factunit = planunit.factunits.get(insert_factunit_reason_context)
             x_believeratom = believeratom_shop("believer_plan_factunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", planunit.get_plan_rope())
-            x_believeratom.set_jkey("f_context", insert_factunit.f_context)
-            if insert_factunit.f_state is not None:
-                x_believeratom.set_jvalue("f_state", insert_factunit.f_state)
-            if insert_factunit.f_lower is not None:
-                x_believeratom.set_jvalue("f_lower", insert_factunit.f_lower)
-            if insert_factunit.f_upper is not None:
-                x_believeratom.set_jvalue("f_upper", insert_factunit.f_upper)
+            x_believeratom.set_jkey("fact_context", insert_factunit.fact_context)
+            if insert_factunit.fact_state is not None:
+                x_believeratom.set_jvalue("fact_state", insert_factunit.fact_state)
+            if insert_factunit.fact_lower is not None:
+                x_believeratom.set_jvalue("fact_lower", insert_factunit.fact_lower)
+            if insert_factunit.fact_upper is not None:
+                x_believeratom.set_jvalue("fact_upper", insert_factunit.fact_upper)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_factunit_updates(
@@ -865,13 +865,13 @@ class BelieverDelta:
             ):
                 x_believeratom = believeratom_shop("believer_plan_factunit", "UPDATE")
                 x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
-                x_believeratom.set_jkey("f_context", after_factunit.f_context)
-                if before_factunit.f_state != after_factunit.f_state:
-                    x_believeratom.set_jvalue("f_state", after_factunit.f_state)
-                if before_factunit.f_lower != after_factunit.f_lower:
-                    x_believeratom.set_jvalue("f_lower", after_factunit.f_lower)
-                if before_factunit.f_upper != after_factunit.f_upper:
-                    x_believeratom.set_jvalue("f_upper", after_factunit.f_upper)
+                x_believeratom.set_jkey("fact_context", after_factunit.fact_context)
+                if before_factunit.fact_state != after_factunit.fact_state:
+                    x_believeratom.set_jvalue("fact_state", after_factunit.fact_state)
+                if before_factunit.fact_lower != after_factunit.fact_lower:
+                    x_believeratom.set_jvalue("fact_lower", after_factunit.fact_lower)
+                if before_factunit.fact_upper != after_factunit.fact_upper:
+                    x_believeratom.set_jvalue("fact_upper", after_factunit.fact_upper)
                 self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_factunit_deletes(
@@ -880,7 +880,7 @@ class BelieverDelta:
         for delete_factunit_reason_context in delete_factunit_reason_contexts:
             x_believeratom = believeratom_shop("believer_plan_factunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("f_context", delete_factunit_reason_context)
+            x_believeratom.set_jkey("fact_context", delete_factunit_reason_context)
             self.set_believeratom(x_believeratom)
 
     def is_empty(self) -> bool:

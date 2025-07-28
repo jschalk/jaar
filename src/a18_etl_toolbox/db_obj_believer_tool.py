@@ -149,19 +149,19 @@ def create_blrfact_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
-    f_context = values_dict.get("f_context")
-    f_state = values_dict.get("f_state")
-    f_lower = values_dict.get("f_lower")
-    f_upper = values_dict.get("f_upper")
-    return f"""INSERT INTO believer_plan_factunit_job (belief_label, believer_name, plan_rope, f_context, f_state, f_lower, f_upper)
+    fact_context = values_dict.get("fact_context")
+    fact_state = values_dict.get("fact_state")
+    fact_lower = values_dict.get("fact_lower")
+    fact_upper = values_dict.get("fact_upper")
+    return f"""INSERT INTO believer_plan_factunit_job (belief_label, believer_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
-, {sqlite_obj_str(f_context, "TEXT")}
-, {sqlite_obj_str(f_state, "TEXT")}
-, {sqlite_obj_str(f_lower, "REAL")}
-, {sqlite_obj_str(f_upper, "REAL")}
+, {sqlite_obj_str(fact_context, "TEXT")}
+, {sqlite_obj_str(fact_state, "TEXT")}
+, {sqlite_obj_str(fact_lower, "REAL")}
+, {sqlite_obj_str(fact_upper, "REAL")}
 )
 ;
 """

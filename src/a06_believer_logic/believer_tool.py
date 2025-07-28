@@ -103,10 +103,10 @@ def believer_plan_factunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
-    x_f_context = jkeys.get("f_context")
+    x_fact_context = jkeys.get("fact_context")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).factunit_exists(x_f_context)
+        and x_believer.get_plan_obj(x_rope).factunit_exists(x_fact_context)
     )
 
 
@@ -190,8 +190,8 @@ def believer_plan_factunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> FactUnit:
     x_rope = jkeys.get("plan_rope")
-    x_f_context = jkeys.get("f_context")
-    return x_believer.get_plan_obj(x_rope).factunits.get(x_f_context)
+    x_fact_context = jkeys.get("fact_context")
+    return x_believer.get_plan_obj(x_rope).factunits.get(x_fact_context)
 
 
 def believer_get_obj(
@@ -312,12 +312,12 @@ def set_factunits_to_believer(
         missing_fact_reason_contexts
     )
     for factunit in factunits_dict.values():
-        if factunit.f_context in believer_fact_reason_contexts:
+        if factunit.fact_context in believer_fact_reason_contexts:
             x_believer.add_fact(
-                factunit.f_context,
-                factunit.f_state,
-                factunit.f_lower,
-                factunit.f_upper,
+                factunit.fact_context,
+                factunit.fact_state,
+                factunit.fact_lower,
+                factunit.fact_upper,
                 create_missing_plans=True,
             )
 

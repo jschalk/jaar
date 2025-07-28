@@ -21,9 +21,9 @@ from src.a06_believer_logic.test._util.a06_str import (
     credor_respect_str,
     debtor_respect_str,
     denom_str,
-    f_context_str,
-    f_lower_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_upper_str,
     fund_iota_str,
     gogo_want_str,
     group_cred_points_str,
@@ -643,9 +643,9 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("reason_divisor") == "int"
-    assert x_class_types.get(f_context_str()) == RopeTerm_str()
-    assert x_class_types.get(f_upper_str()) == "float"
-    assert x_class_types.get(f_lower_str()) == "float"
+    assert x_class_types.get(fact_context_str()) == RopeTerm_str()
+    assert x_class_types.get(fact_upper_str()) == "float"
+    assert x_class_types.get(fact_lower_str()) == "float"
     assert x_class_types.get(fund_iota_str()) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
@@ -660,7 +660,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("f_state") == RopeTerm_str()
+    assert x_class_types.get("fact_state") == RopeTerm_str()
     assert x_class_types.get("task") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(plan_rope_str()) == RopeTerm_str()

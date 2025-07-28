@@ -706,14 +706,14 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
     x_believer_name = 2
     x_rope = 3
     x_reason_context = 4
-    x_f_state = 5
-    x_f_lower = 6
-    x_f_upper = 7
+    x_fact_state = 5
+    x_fact_lower = 6
+    x_fact_upper = 7
     x_factheir = factheir_shop()
-    x_factheir.f_context = x_reason_context
-    x_factheir.f_state = x_f_state
-    x_factheir.f_lower = x_f_lower
-    x_factheir.f_upper = x_f_upper
+    x_factheir.fact_context = x_reason_context
+    x_factheir.fact_state = x_fact_state
+    x_factheir.fact_lower = x_fact_lower
+    x_factheir.fact_upper = x_fact_upper
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -735,9 +735,9 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
             str(x_believer_name),
             str(x_rope),
             str(x_reason_context),
-            str(x_f_state),
-            x_f_lower,
-            x_f_upper,
+            str(x_fact_state),
+            x_fact_lower,
+            x_fact_upper,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

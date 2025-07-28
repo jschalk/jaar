@@ -34,10 +34,10 @@ def test_get_believer_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
     # THEN
     assert sue_fact_dict.get(casa_rope) != None
     casa_fact_dict = sue_fact_dict.get(casa_rope)
-    assert casa_fact_dict.get("f_context") == casa_rope
-    assert casa_fact_dict.get("f_state") == dirty_rope
+    assert casa_fact_dict.get("fact_context") == casa_rope
+    assert casa_fact_dict.get("fact_state") == dirty_rope
     expected_sue_fact_dict = {
-        casa_rope: {"f_context": casa_rope, "f_state": dirty_rope}
+        casa_rope: {"fact_context": casa_rope, "fact_state": dirty_rope}
     }
     print(f"{sue_fact_dict=}")
     print(f"{expected_sue_fact_dict=}")
@@ -63,16 +63,16 @@ def test_get_believer_root_facts_dict_ReturnsObj_Scenario2_factunits_Exist():
     # THEN
     assert sue_fact_dict.get(casa_rope) != None
     casa_fact_dict = sue_fact_dict.get(casa_rope)
-    assert casa_fact_dict.get("f_context") == casa_rope
-    assert casa_fact_dict.get("f_state") == dirty_rope
-    assert casa_fact_dict.get("f_lower") == dirty_reason_lower
-    assert casa_fact_dict.get("f_upper") == dirty_reason_upper
+    assert casa_fact_dict.get("fact_context") == casa_rope
+    assert casa_fact_dict.get("fact_state") == dirty_rope
+    assert casa_fact_dict.get("fact_lower") == dirty_reason_lower
+    assert casa_fact_dict.get("fact_upper") == dirty_reason_upper
     expected_sue_fact_dict = {
         casa_rope: {
-            "f_context": casa_rope,
-            "f_state": dirty_rope,
-            "f_lower": dirty_reason_lower,
-            "f_upper": dirty_reason_upper,
+            "fact_context": casa_rope,
+            "fact_state": dirty_rope,
+            "fact_lower": dirty_reason_lower,
+            "fact_upper": dirty_reason_upper,
         }
     }
     print(f"{sue_fact_dict=}")
@@ -114,7 +114,9 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario1_Believer1FactsChanged():
     bob_believer.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
-    dirty_facts_dict = {floor_rope: {"f_context": floor_rope, "f_state": dirty_rope}}
+    dirty_facts_dict = {
+        floor_rope: {"fact_context": floor_rope, "fact_state": dirty_rope}
+    }
     before_bob_believer = copy_deepcopy(bob_believer)
     assert bob_believer.get_factunits_dict() != dirty_facts_dict
     assert bob_believer.get_factunits_dict() == {}
@@ -148,7 +150,9 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario2_FactUnit_reason_context_
     bob_believer.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
-    clean_facts_dict = {floor_rope: {"f_context": floor_rope, "f_state": clean_rope}}
+    clean_facts_dict = {
+        floor_rope: {"fact_context": floor_rope, "fact_state": clean_rope}
+    }
     before_bob_believer = copy_deepcopy(bob_believer)
     assert bob_believer.get_factunits_dict() != clean_facts_dict
     assert bob_believer.get_factunits_dict() == {}
@@ -190,8 +194,8 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario3_FactUnit_reason_context_
     rain_rope = bob_believer.make_rope(weather_rope, raining_str)
 
     two_facts_dict = {
-        floor_rope: {"f_context": floor_rope, "f_state": clean_rope},
-        weather_rope: {"f_context": weather_rope, "f_state": rain_rope},
+        floor_rope: {"fact_context": floor_rope, "fact_state": clean_rope},
+        weather_rope: {"fact_context": weather_rope, "fact_state": rain_rope},
     }
     before_bob_believer = copy_deepcopy(bob_believer)
     assert bob_believer.get_factunits_dict() != two_facts_dict
@@ -228,7 +232,9 @@ def test_clear_factunits_from_believer_ReturnsObj_Scenario1_FactUnit_Exist():
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
     bob_believer.add_fact(floor_rope, dirty_rope)
-    floor_facts_dict = {floor_rope: {"f_context": floor_rope, "f_state": dirty_rope}}
+    floor_facts_dict = {
+        floor_rope: {"fact_context": floor_rope, "fact_state": dirty_rope}
+    }
     assert bob_believer.get_factunits_dict() == floor_facts_dict
     assert bob_believer.get_factunits_dict() != {}
 

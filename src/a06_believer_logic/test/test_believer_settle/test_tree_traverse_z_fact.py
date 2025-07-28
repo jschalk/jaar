@@ -14,13 +14,17 @@ def test_BelieverUnit_settle_believer_ChangesPlanUnit_task_chore():
     hr_rope = yao_believer.make_l1_rope(hr_str)
 
     # WHEN
-    yao_believer.add_fact(f_context=hr_rope, f_state=hr_rope, f_lower=82, f_upper=85)
+    yao_believer.add_fact(
+        fact_context=hr_rope, fact_state=hr_rope, fact_lower=82, fact_upper=85
+    )
 
     # THEN
     mail_rope = yao_believer.make_l1_rope("obtain mail")
     plan_dict = yao_believer.get_plan_dict()
     mail_plan = plan_dict.get(mail_rope)
-    yao_believer.add_fact(f_context=hr_rope, f_state=hr_rope, f_lower=82, f_upper=95)
+    yao_believer.add_fact(
+        fact_context=hr_rope, fact_state=hr_rope, fact_lower=82, fact_upper=95
+    )
     assert mail_plan.task is True
     assert mail_plan._chore is False
 
@@ -51,7 +55,7 @@ def test_BelieverUnit_settle_believer_ExecutesWithRangeRootFacts():
     sweep_plan.stop_want = sweep_stop_want
     zia_believer.set_plan(clean_plan, parent_rope=casa_rope)
     zia_believer.add_fact(
-        f_context=clean_rope, f_state=clean_rope, f_lower=1, f_upper=5
+        fact_context=clean_rope, fact_state=clean_rope, fact_lower=1, fact_upper=5
     )
     assert zia_believer.planroot._factheirs == {}
 
@@ -62,7 +66,7 @@ def test_BelieverUnit_settle_believer_ExecutesWithRangeRootFacts():
     assert zia_believer.planroot._factheirs != {}
     clean_factheir = factheir_shop(clean_rope, clean_rope, 1.0, 5.0)
     assert zia_believer.planroot._factheirs == {
-        clean_factheir.f_context: clean_factheir
+        clean_factheir.fact_context: clean_factheir
     }
 
 
@@ -82,7 +86,7 @@ def test_BelieverUnit_settle_believer_RaisesErrorIfNon_RangeRootHasFactUnit():
     sweep_plan = planunit_shop(sweep_str, addin=2)
     zia_believer.set_plan(clean_plan, parent_rope=casa_rope)
     zia_believer.set_plan(sweep_plan, parent_rope=clean_rope)
-    zia_believer.add_fact(sweep_rope, sweep_rope, f_lower=1, f_upper=5)
+    zia_believer.add_fact(sweep_rope, sweep_rope, fact_lower=1, fact_upper=5)
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
@@ -114,7 +118,7 @@ def test_BelieverUnit_settle_believer_FactHeirsCorrectlyInherited():
     fast_plan = zia_believer.get_plan_obj(fast_rope)
     slow_plan = zia_believer.get_plan_obj(slow_rope)
     zia_believer.add_fact(
-        f_context=earth_rope, f_state=earth_rope, f_lower=1.0, f_upper=5.0
+        fact_context=earth_rope, fact_state=earth_rope, fact_lower=1.0, fact_upper=5.0
     )
     assert swim_plan._factheirs == {}
     assert fast_plan._factheirs == {}
@@ -128,7 +132,7 @@ def test_BelieverUnit_settle_believer_FactHeirsCorrectlyInherited():
     assert fast_plan._factheirs != {}
     assert slow_plan._factheirs != {}
     factheir_set_range = factheir_shop(earth_rope, earth_rope, 1.0, 5.0)
-    factheirs_set_range = {factheir_set_range.f_context: factheir_set_range}
+    factheirs_set_range = {factheir_set_range.fact_context: factheir_set_range}
     assert swim_plan._factheirs == factheirs_set_range
     assert fast_plan._factheirs == factheirs_set_range
     assert slow_plan._factheirs == factheirs_set_range
@@ -141,7 +145,7 @@ def test_BelieverUnit_settle_believer_FactHeirsCorrectlyInherited():
 
     # THEN
     fact_none_range = factheir_shop(earth_rope, earth_rope, None, None)
-    facts_none_range = {fact_none_range.f_context: fact_none_range}
+    facts_none_range = {fact_none_range.fact_context: fact_none_range}
     assert swim_plan._factheirs == facts_none_range
     assert fast_plan._factheirs == factheirs_set_range
     assert slow_plan._factheirs == factheirs_set_range
@@ -173,26 +177,30 @@ def test_BelieverUnit_settle_believer_FactUnitMoldsFactHeir():
 
     # WHEN
     zia_believer.add_fact(
-        f_context=earth_rope, f_state=earth_rope, f_lower=1.0, f_upper=5.0
+        fact_context=earth_rope, fact_state=earth_rope, fact_lower=1.0, fact_upper=5.0
     )
     zia_believer.settle_believer()
 
     # THEN
-    first_earthheir = factheir_shop(earth_rope, earth_rope, f_lower=1.0, f_upper=5.0)
-    first_earthdict = {first_earthheir.f_context: first_earthheir}
+    first_earthheir = factheir_shop(
+        earth_rope, earth_rope, fact_lower=1.0, fact_upper=5.0
+    )
+    first_earthdict = {first_earthheir.fact_context: first_earthheir}
     assert swim_plan._factheirs == first_earthdict
 
     # WHEN
-    # earth_curb = factunit_shop(f_context=earth_rope, f_state=earth_rope, reason_lower=3.0, reason_upper=4.0)
+    # earth_curb = factunit_shop(fact_context=earth_rope, fact_state=earth_rope, reason_lower=3.0, reason_upper=4.0)
     # swim_y.set_factunit(factunit=earth_curb) Not sure what this is for. Testing what "set_factunit" does with the parameters, but what?
     zia_believer.add_fact(
-        f_context=earth_rope, f_state=earth_rope, f_lower=3.0, f_upper=5.0
+        fact_context=earth_rope, fact_state=earth_rope, fact_lower=3.0, fact_upper=5.0
     )
     zia_believer.settle_believer()
 
     # THEN
-    after_earthheir = factheir_shop(earth_rope, earth_rope, f_lower=3.0, f_upper=5.0)
-    after_earthdict = {after_earthheir.f_context: after_earthheir}
+    after_earthheir = factheir_shop(
+        earth_rope, earth_rope, fact_lower=3.0, fact_upper=5.0
+    )
+    after_earthdict = {after_earthheir.fact_context: after_earthheir}
     assert swim_plan._factheirs == after_earthdict
 
 
@@ -211,10 +219,10 @@ def test_BelieverUnit_settle_believer_FactHeirCorrectlyDeletesFactUnit():
     sue_believer.set_l1_plan(planunit_shop(earth_str))
     swim_plan = sue_believer.get_plan_obj(swim_rope)
     first_earthheir = factheir_shop(
-        earth_rope, earth_rope, f_lower=200.0, f_upper=500.0
+        earth_rope, earth_rope, fact_lower=200.0, fact_upper=500.0
     )
-    first_earthdict = {first_earthheir.f_context: first_earthheir}
-    sue_believer.add_fact(earth_rope, earth_rope, f_lower=200.0, f_upper=500.0)
+    first_earthdict = {first_earthheir.fact_context: first_earthheir}
+    sue_believer.add_fact(earth_rope, earth_rope, fact_lower=200.0, fact_upper=500.0)
     assert swim_plan._factheirs == {}
 
     # WHEN
@@ -224,7 +232,7 @@ def test_BelieverUnit_settle_believer_FactHeirCorrectlyDeletesFactUnit():
     assert swim_plan._factheirs == first_earthdict
 
     # WHEN
-    earth_curb = factunit_shop(earth_rope, earth_rope, f_lower=3.0, f_upper=4.0)
+    earth_curb = factunit_shop(earth_rope, earth_rope, fact_lower=3.0, fact_upper=4.0)
     swim_plan.set_factunit(factunit=earth_curb)
     sue_believer.settle_believer()
 
@@ -243,7 +251,7 @@ def test_BelieverUnit_settle_believer_SetsChoreAsComplete():
     mail_plan = plan_dict.get(yao_believer.make_l1_rope(mail_str))
     hr_str = "hr"
     hr_rope = yao_believer.make_l1_rope(hr_str)
-    yao_believer.add_fact(hr_rope, hr_rope, f_lower=82, f_upper=85)
+    yao_believer.add_fact(hr_rope, hr_rope, fact_lower=82, fact_upper=85)
     assert mail_plan.task
     assert mail_plan._chore
 

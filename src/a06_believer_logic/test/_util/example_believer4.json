@@ -5381,42 +5381,42 @@
     "plan_label": "A",
     "factunits": {
       "A;Aaron Donald objects effected by him;": {
-        "f_context": ";A;Aaron Donald objects effected by him;",
-        "f_state": ";A;Aaron Donald objects effected by him;"
+        "fact_context": ";A;Aaron Donald objects effected by him;",
+        "fact_state": ";A;Aaron Donald objects effected by him;"
       },
       "A;casa;cleaning;laundry basket status;": {
-        "f_context": ";A;casa;cleaning;laundry basket status;",
-        "f_state": ";A;casa;cleaning;laundry basket status;not full"
+        "fact_context": ";A;casa;cleaning;laundry basket status;",
+        "fact_state": ";A;casa;cleaning;laundry basket status;not full"
       },
       "A;Interweb;": {
-        "f_context": ";A;Interweb;",
-        "f_state": ";A;Interweb;"
+        "fact_context": ";A;Interweb;",
+        "fact_state": ";A;Interweb;"
       },
       "A;Moods;": {
-        "f_context": ";A;Moods;",
-        "f_state": ";A;Moods;"
+        "fact_context": ";A;Moods;",
+        "fact_state": ";A;Moods;"
       },
       "A;Nation-States;": {
-        "f_context": ";A;Nation-States;",
-        "f_state": ";A;Nation-States;"
+        "fact_context": ";A;Nation-States;",
+        "fact_state": ";A;Nation-States;"
       },
       "A;No Movie playing;": {
-        "f_context": ";A;No Movie playing;",
-        "f_state": ";A;No Movie playing;"
+        "fact_context": ";A;No Movie playing;",
+        "fact_state": ";A;No Movie playing;"
       },
       "A;Seasons;": {
-        "f_context": ";A;Seasons;",
-        "f_state": ";A;Seasons;"
+        "fact_context": ";A;Seasons;",
+        "fact_state": ";A;Seasons;"
       },
       "A;ziet;gregziet;": {
-        "f_context": ";A;ziet;gregziet;",
-        "f_upper": 1064130373,
-        "f_lower": 1064128320,
-        "f_state": ";A;ziet;gregziet;"
+        "fact_context": ";A;ziet;gregziet;",
+        "fact_upper": 1064130373,
+        "fact_lower": 1064128320,
+        "fact_state": ";A;ziet;gregziet;"
       },
       "A;WaterExistence;": {
-        "f_context": ";A;WaterExistence;",
-        "f_state": ";A;WaterExistence;"
+        "fact_context": ";A;WaterExistence;",
+        "fact_state": ";A;WaterExistence;"
       }
     },
     "mass": 1

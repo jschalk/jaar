@@ -17,50 +17,53 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    f_context: RopeTerm = None
-    f_state: RopeTerm = None
-    f_lower: float = None
-    f_upper: float = None
+    fact_context: RopeTerm = None
+    fact_state: RopeTerm = None
+    fact_lower: float = None
+    fact_upper: float = None
 
     def get_dict(self) -> dict[str,]:
         x_dict = {
-            "f_context": self.f_context,
-            "f_state": self.f_state,
+            "fact_context": self.fact_context,
+            "fact_state": self.fact_state,
         }
-        if self.f_lower is not None:
-            x_dict["f_lower"] = self.f_lower
-        if self.f_upper is not None:
-            x_dict["f_upper"] = self.f_upper
+        if self.fact_lower is not None:
+            x_dict["fact_lower"] = self.fact_lower
+        if self.fact_upper is not None:
+            x_dict["fact_upper"] = self.fact_upper
         return x_dict
 
     def set_range_null(self):
-        self.f_lower = None
-        self.f_upper = None
+        self.fact_lower = None
+        self.fact_upper = None
 
     def set_attr(
-        self, f_state: RopeTerm = None, f_lower: float = None, f_upper: float = None
+        self,
+        fact_state: RopeTerm = None,
+        fact_lower: float = None,
+        fact_upper: float = None,
     ):
-        if f_state is not None:
-            self.f_state = f_state
-        if f_lower is not None:
-            self.f_lower = f_lower
-        if f_upper is not None:
-            self.f_upper = f_upper
+        if fact_state is not None:
+            self.fact_state = fact_state
+        if fact_lower is not None:
+            self.fact_lower = fact_lower
+        if fact_upper is not None:
+            self.fact_upper = fact_upper
 
-    def set_f_state_to_f_context(self):
-        self.set_attr(f_state=self.f_context)
-        self.f_lower = None
-        self.f_upper = None
+    def set_fact_state_to_fact_context(self):
+        self.set_attr(fact_state=self.fact_context)
+        self.fact_lower = None
+        self.fact_upper = None
 
     def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
-        self.f_context = rebuild_rope(self.f_context, old_rope, new_rope)
-        self.f_state = rebuild_rope(self.f_state, old_rope, new_rope)
+        self.fact_context = rebuild_rope(self.fact_context, old_rope, new_rope)
+        self.fact_state = rebuild_rope(self.fact_state, old_rope, new_rope)
 
     def get_obj_key(self) -> RopeTerm:
-        return self.f_context
+        return self.fact_context
 
     def get_tuple(self) -> tuple[RopeTerm, RopeTerm, float, float]:
-        return (self.f_context, self.f_state, self.f_lower, self.f_upper)
+        return (self.fact_context, self.fact_state, self.fact_lower, self.fact_upper)
 
 
 @dataclass
@@ -69,39 +72,42 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    f_context: RopeTerm = None,
-    f_state: RopeTerm = None,
-    f_lower: float = None,
-    f_upper: float = None,
+    fact_context: RopeTerm = None,
+    fact_state: RopeTerm = None,
+    fact_lower: float = None,
+    fact_upper: float = None,
 ) -> FactUnit:
     return FactUnit(
-        f_context=f_context, f_state=f_state, f_lower=f_lower, f_upper=f_upper
+        fact_context=fact_context,
+        fact_state=fact_state,
+        fact_lower=fact_lower,
+        fact_upper=fact_upper,
     )
 
 
 def factunits_get_from_dict(x_dict: dict) -> dict[RopeTerm, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
-        x_f_context = fact_dict["f_context"]
-        x_f_state = fact_dict["f_state"]
+        x_fact_context = fact_dict["fact_context"]
+        x_fact_state = fact_dict["fact_state"]
 
         try:
-            x_f_lower = fact_dict["f_lower"]
+            x_fact_lower = fact_dict["fact_lower"]
         except KeyError:
-            x_f_lower = None
+            x_fact_lower = None
         try:
-            x_f_upper = fact_dict["f_upper"]
+            x_fact_upper = fact_dict["fact_upper"]
         except KeyError:
-            x_f_upper = None
+            x_fact_upper = None
 
         x_fact = factunit_shop(
-            f_context=x_f_context,
-            f_state=x_f_state,
-            f_lower=x_f_lower,
-            f_upper=x_f_upper,
+            fact_context=x_fact_context,
+            fact_state=x_fact_state,
+            fact_lower=x_fact_lower,
+            fact_upper=x_fact_upper,
         )
 
-        facts[x_fact.f_context] = x_fact
+        facts[x_fact.fact_context] = x_fact
     return facts
 
 
@@ -114,32 +120,35 @@ def get_factunit_from_tuple(
 def get_dict_from_factunits(
     factunits: dict[RopeTerm, FactUnit],
 ) -> dict[RopeTerm, dict[str,]]:
-    return {fact.f_context: fact.get_dict() for fact in factunits.values()}
+    return {fact.fact_context: fact.get_dict() for fact in factunits.values()}
 
 
 @dataclass
 class FactHeir(FactCore):
     def mold(self, factunit: FactUnit):
-        x_bool = self.f_lower and factunit.f_lower and self.f_upper
+        x_bool = self.fact_lower and factunit.fact_lower and self.fact_upper
         if (
             x_bool
-            and self.f_lower <= factunit.f_lower
-            and self.f_upper >= factunit.f_lower
+            and self.fact_lower <= factunit.fact_lower
+            and self.fact_upper >= factunit.fact_lower
         ):
-            self.f_lower = factunit.f_lower
+            self.fact_lower = factunit.fact_lower
 
     def is_range(self):
-        return self.f_lower is not None and self.f_upper is not None
+        return self.fact_lower is not None and self.fact_upper is not None
 
 
 def factheir_shop(
-    f_context: RopeTerm = None,
-    f_state: RopeTerm = None,
-    f_lower: float = None,
-    f_upper: float = None,
+    fact_context: RopeTerm = None,
+    fact_state: RopeTerm = None,
+    fact_lower: float = None,
+    fact_upper: float = None,
 ) -> FactHeir:
     return FactHeir(
-        f_context=f_context, f_state=f_state, f_lower=f_lower, f_upper=f_upper
+        fact_context=fact_context,
+        fact_state=fact_state,
+        fact_lower=fact_lower,
+        fact_upper=fact_upper,
     )
 
 
@@ -152,22 +161,22 @@ class CaseStatusFinder:
     reason_lower: float  # between 0 and reason_divisor, can be more than reason_upper
     reason_upper: float  # between 0 and reason_divisor, can be less than reason_lower
     reason_divisor: float  # greater than zero
-    f_lower_full: float  # less than f_upper
-    f_upper_full: float  # less than f_upper
+    fact_lower_full: float  # less than fact_upper
+    fact_upper_full: float  # less than fact_upper
 
     def check_attr(self):
         if None in (
             self.reason_lower,
             self.reason_upper,
             self.reason_divisor,
-            self.f_lower_full,
-            self.f_upper_full,
+            self.fact_lower_full,
+            self.fact_upper_full,
         ):
             raise CaseStatusFinderException("No parameter can be None")
 
-        if self.f_lower_full > self.f_upper_full:
+        if self.fact_lower_full > self.fact_upper_full:
             raise CaseStatusFinderException(
-                f"{self.f_lower_full=} cannot be greater than {self.f_upper_full=}"
+                f"{self.fact_lower_full=} cannot be greater than {self.fact_upper_full=}"
             )
 
         if self.reason_divisor <= 0:
@@ -186,10 +195,10 @@ class CaseStatusFinder:
             )
 
     def bo(self) -> float:
-        return self.f_lower_full % self.reason_divisor
+        return self.fact_lower_full % self.reason_divisor
 
     def bn(self) -> float:
-        return self.f_upper_full % self.reason_divisor
+        return self.fact_upper_full % self.reason_divisor
 
     def po(self) -> float:
         return self.reason_lower
@@ -201,7 +210,7 @@ class CaseStatusFinder:
         return self.reason_divisor
 
     def get_active(self) -> bool:
-        if self.f_upper_full - self.f_lower_full > self.reason_divisor:
+        if self.fact_upper_full - self.fact_lower_full > self.reason_divisor:
             return True
         elif get_range_less_than_reason_divisor_active(
             bo=self.bo(), bn=self.bn(), po=self.po(), pn=self.pn()
@@ -218,7 +227,7 @@ class CaseStatusFinder:
                     self.reason_lower,
                     self.reason_upper,
                     self.reason_divisor,
-                    self.f_upper_full,
+                    self.fact_upper_full,
                 )
                 is False
             )
@@ -269,14 +278,14 @@ def get_collasped_fact_range_active(
     reason_lower: float,
     reason_upper: float,
     reason_divisor: float,
-    f_upper_full: float,
+    fact_upper_full: float,
 ) -> bool:
     x_pbsd = casestatusfinder_shop(
         reason_lower=reason_lower,
         reason_upper=reason_upper,
         reason_divisor=reason_divisor,
-        f_lower_full=f_upper_full,
-        f_upper_full=f_upper_full,
+        fact_lower_full=fact_upper_full,
+        fact_upper_full=fact_upper_full,
     )
     return x_pbsd.get_active()
 
@@ -285,15 +294,15 @@ def casestatusfinder_shop(
     reason_lower: float,
     reason_upper: float,
     reason_divisor: float,
-    f_lower_full: float,
-    f_upper_full: float,
+    fact_lower_full: float,
+    fact_upper_full: float,
 ):
     x_casestatusfinder = CaseStatusFinder(
         reason_lower,
         reason_upper,
         reason_divisor,
-        f_lower_full,
-        f_upper_full,
+        fact_lower_full,
+        fact_upper_full,
     )
     x_casestatusfinder.check_attr()
     return x_casestatusfinder
@@ -334,10 +343,10 @@ class CaseUnit:
             rope=self.reason_state, old_knot=old_knot, new_knot=self.knot
         )
 
-    def is_in_lineage(self, fact_f_state: RopeTerm):
+    def is_in_lineage(self, fact_fact_state: RopeTerm):
         return is_heir_rope(
-            src=self.reason_state, heir=fact_f_state, knot=self.knot
-        ) or is_heir_rope(src=fact_f_state, heir=self.reason_state, knot=self.knot)
+            src=self.reason_state, heir=fact_fact_state, knot=self.knot
+        ) or is_heir_rope(src=fact_fact_state, heir=self.reason_state, knot=self.knot)
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
@@ -348,14 +357,14 @@ class CaseUnit:
         # status might be true if case is in lineage of fact
         if factheir is None:
             x_status = False
-        elif self.is_in_lineage(fact_f_state=factheir.f_state):
+        elif self.is_in_lineage(fact_fact_state=factheir.fact_state):
             if self._is_range_or_segregate() is False:
                 x_status = True
             elif self._is_range_or_segregate() and factheir.is_range() is False:
                 x_status = False
             elif self._is_range_or_segregate() and factheir.is_range():
                 x_status = self._get_range_segregate_status(factheir=factheir)
-        elif self.is_in_lineage(fact_f_state=factheir.f_state) is False:
+        elif self.is_in_lineage(fact_fact_state=factheir.fact_state) is False:
             x_status = False
 
         return x_status
@@ -380,14 +389,14 @@ class CaseUnit:
     def _get_chore_status(self, factheir: FactHeir) -> bool:
         x_chore = None
         if self._status and self._is_range():
-            x_chore = factheir.f_upper > self.reason_upper
+            x_chore = factheir.fact_upper > self.reason_upper
         elif self._status and self._is_segregate():
             segr_obj = casestatusfinder_shop(
                 reason_lower=self.reason_lower,
                 reason_upper=self.reason_upper,
                 reason_divisor=self.reason_divisor,
-                f_lower_full=factheir.f_lower,
-                f_upper_full=factheir.f_upper,
+                fact_lower_full=factheir.fact_lower,
+                fact_upper_full=factheir.fact_upper,
             )
             x_chore = segr_obj.get_chore_status()
         elif self._status in [True, False]:
@@ -409,24 +418,24 @@ class CaseUnit:
             reason_lower=self.reason_lower,
             reason_upper=self.reason_upper,
             reason_divisor=self.reason_divisor,
-            f_lower_full=factheir.f_lower,
-            f_upper_full=factheir.f_upper,
+            fact_lower_full=factheir.fact_lower,
+            fact_upper_full=factheir.fact_upper,
         )
         return segr_obj.get_active()
 
     def _get_range_status(self, factheir: FactHeir) -> bool:
         return (
             (
-                self.reason_lower <= factheir.f_lower
-                and self.reason_upper > factheir.f_lower
+                self.reason_lower <= factheir.fact_lower
+                and self.reason_upper > factheir.fact_lower
             )
             or (
-                self.reason_lower <= factheir.f_upper
-                and self.reason_upper > factheir.f_upper
+                self.reason_lower <= factheir.fact_upper
+                and self.reason_upper > factheir.fact_upper
             )
             or (
-                self.reason_lower >= factheir.f_lower
-                and self.reason_upper < factheir.f_upper
+                self.reason_lower >= factheir.fact_lower
+                and self.reason_upper < factheir.fact_upper
             )
         )
 
@@ -609,13 +618,13 @@ class ReasonHeir(ReasonCore):
         for case in self.cases.values():
             case.set_status(factheir)
 
-    def _get_f_context(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
-        f_context = None
+    def _get_fact_context(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
+        fact_context = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
-            if self.reason_context == y_factheir.f_context:
-                f_context = y_factheir
-        return f_context
+            if self.reason_context == y_factheir.fact_context:
+                fact_context = y_factheir
+        return fact_context
 
     def set_rplan_active_value(self, bool_x: bool):
         self._rplan_active_value = bool_x
@@ -646,7 +655,7 @@ class ReasonHeir(ReasonCore):
 
     def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
         self.clear_status()
-        self._set_case_status(self._get_f_context(factheirs))
+        self._set_case_status(self._get_fact_context(factheirs))
         any_case_true, any_chore_true = self.is_any_case_true()
         self._set_attr_status(any_case_true)
         self._set_attr_chore(any_chore_true)

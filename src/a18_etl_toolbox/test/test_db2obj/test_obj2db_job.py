@@ -387,18 +387,18 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_f_context = 2
-    x_f_state = 3
-    x_f_lower = 4
-    x_f_upper = 5
+    x_fact_context = 2
+    x_fact_state = 3
+    x_fact_lower = 4
+    x_fact_upper = 5
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "f_context": x_f_context,
-        "f_state": x_f_state,
-        "f_lower": x_f_lower,
-        "f_upper": x_f_upper,
+        "fact_context": x_fact_context,
+        "fact_state": x_fact_state,
+        "fact_lower": x_fact_lower,
+        "fact_upper": x_fact_upper,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

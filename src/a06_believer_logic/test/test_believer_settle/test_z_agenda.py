@@ -42,7 +42,7 @@ def test_BelieverUnit_get_agenda_dict_ReturnsAgendaWithOnlyCorrectPlans():
     wk_rope = x_believer.make_l1_rope(wk_str)
     sun_str = "Sun"
     sun_rope = x_believer.make_rope(wk_rope, sun_str)
-    x_believer.add_fact(f_context=wk_rope, f_state=sun_rope)
+    x_believer.add_fact(fact_context=wk_rope, fact_state=sun_rope)
 
     # WHEN
     agenda_dict = x_believer.get_agenda_dict()
@@ -128,7 +128,9 @@ def test_believerunit_v001_AgendaExists():
     yao_believer = believerunit_v001()
     min_str = "jour_minute"
     min_rope = yao_believer.make_l1_rope(min_str)
-    yao_believer.add_fact(f_context=min_rope, f_state=min_rope, f_lower=0, f_upper=1399)
+    yao_believer.add_fact(
+        fact_context=min_rope, fact_state=min_rope, fact_lower=0, fact_upper=1399
+    )
     assert yao_believer
     # for plan_kid in yao_believer.planroot._kids.values():
     #     # print(plan_kid.plan_label)
@@ -154,7 +156,10 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
     jour_min_str = "jour_minute"
     jour_min_rope = yao_believer.make_l1_rope(jour_min_str)
     yao_believer.add_fact(
-        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=1399
+        fact_context=jour_min_rope,
+        fact_state=jour_min_rope,
+        fact_lower=0,
+        fact_upper=1399,
     )
     month_wk_str = "month_wk"
     month_wk_rope = yao_believer.make_l1_rope(month_wk_str)
@@ -168,24 +173,24 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
     # interweb_rope = yao_believer.make_l1_rope(interweb_str)
     yr_month_str = "yr_month"
     yr_month_rope = yao_believer.make_l1_rope(yr_month_str)
-    yao_believer.add_fact(f_context=month_wk_rope, f_state=month_wk_rope)
-    yao_believer.add_fact(f_context=nations_rope, f_state=nations_rope)
-    yao_believer.add_fact(f_context=mood_rope, f_state=mood_rope)
-    yao_believer.add_fact(f_context=aaron_rope, f_state=aaron_rope)
-    # yao_believer.add_fact(f_context=interweb_rope, f_state=interweb_rope)
-    yao_believer.add_fact(f_context=yr_month_rope, f_state=yr_month_rope)
+    yao_believer.add_fact(fact_context=month_wk_rope, fact_state=month_wk_rope)
+    yao_believer.add_fact(fact_context=nations_rope, fact_state=nations_rope)
+    yao_believer.add_fact(fact_context=mood_rope, fact_state=mood_rope)
+    yao_believer.add_fact(fact_context=aaron_rope, fact_state=aaron_rope)
+    # yao_believer.add_fact(fact_context=interweb_rope, fact_state=interweb_rope)
+    yao_believer.add_fact(fact_context=yr_month_rope, fact_state=yr_month_rope)
     # season_str = "Seasons"
     # season_rope = yao_believer.make_l1_rope(season_str)
-    # yao_believer.add_fact(f_context=season_rope, f_state=season_rope)
+    # yao_believer.add_fact(fact_context=season_rope, fact_state=season_rope)
     ced_wk_str = "ced_wk"
     ced_wk_rope = yao_believer.make_l1_rope(ced_wk_str)
-    yao_believer.add_fact(f_context=ced_wk_rope, f_state=ced_wk_rope)
+    yao_believer.add_fact(fact_context=ced_wk_rope, fact_state=ced_wk_rope)
     # water_str = "WaterExistence"
     # water_rope = yao_believer.make_l1_rope(water_str)
-    # yao_believer.add_fact(f_context=water_rope, f_state=water_rope)
+    # yao_believer.add_fact(fact_context=water_rope, fact_state=water_rope)
     # movie_str = "No Movie playing"
     # movie_rope = yao_believer.make_l1_rope(movie_str)
-    # yao_believer.add_fact(f_context=movie_rope, f_state=movie_str)
+    # yao_believer.add_fact(fact_context=movie_rope, fact_state=movie_str)
 
     # WHEN
     plan_task_list = yao_believer.get_agenda_dict()
@@ -203,15 +208,15 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitHasCorrectAttributes_believeru
     mon_str = "Mon"
     mon_rope = yao_believer.make_rope(sem_jour_rope, mon_str)
 
-    yao_believer.add_fact(f_context=sem_jour_rope, f_state=mon_rope)
+    yao_believer.add_fact(fact_context=sem_jour_rope, fact_state=mon_rope)
     plan_task_list = yao_believer.get_agenda_dict()
     assert len(plan_task_list) == 39
 
-    yao_believer.add_fact(f_context=sem_jour_rope, f_state=sem_jour_rope)
+    yao_believer.add_fact(fact_context=sem_jour_rope, fact_state=sem_jour_rope)
     plan_task_list = yao_believer.get_agenda_dict()
     assert len(plan_task_list) == 53
 
-    # yao_believer.add_fact(f_context=nations_rope, f_state=nations_rope)
+    # yao_believer.add_fact(fact_context=nations_rope, fact_state=nations_rope)
     # plan_task_list = yao_believer.get_agenda_dict()
     # assert len(plan_task_list) == 53
 
@@ -277,7 +282,7 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
         reason_upper=81,
     )
     zia_believer.add_fact(
-        f_context=jour_rope, f_state=jour_rope, f_lower=30, f_upper=87
+        fact_context=jour_rope, fact_state=jour_rope, fact_lower=30, fact_upper=87
     )
     zia_believer.get_agenda_dict()
     run_reasonunits = zia_believer.planroot._kids[run_str].reasonunits[jour_rope]
@@ -325,16 +330,20 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
 
     run_plan = zia_believer.get_plan_obj(run_rope)
     # print(f"{run_plan._factheirs=}")
-    zia_believer.add_fact(f_context=jour_rope, f_state=jour_rope, f_lower=1, f_upper=2)
-    assert len(zia_believer.get_agenda_dict()) == 1
-    zia_believer.add_fact(f_context=jour_rope, f_state=jour_rope, f_lower=2, f_upper=2)
-    assert len(zia_believer.get_agenda_dict()) == 0
     zia_believer.add_fact(
-        f_context=jour_rope, f_state=jour_rope, f_lower=400, f_upper=400
+        fact_context=jour_rope, fact_state=jour_rope, fact_lower=1, fact_upper=2
+    )
+    assert len(zia_believer.get_agenda_dict()) == 1
+    zia_believer.add_fact(
+        fact_context=jour_rope, fact_state=jour_rope, fact_lower=2, fact_upper=2
     )
     assert len(zia_believer.get_agenda_dict()) == 0
     zia_believer.add_fact(
-        f_context=jour_rope, f_state=jour_rope, f_lower=401, f_upper=402
+        fact_context=jour_rope, fact_state=jour_rope, fact_lower=400, fact_upper=400
+    )
+    assert len(zia_believer.get_agenda_dict()) == 0
+    zia_believer.add_fact(
+        fact_context=jour_rope, fact_state=jour_rope, fact_lower=401, fact_upper=402
     )
     assert len(zia_believer.get_agenda_dict()) == 1
     # print(f"{run_plan._factheirs=}")
@@ -391,7 +400,10 @@ def test_believerunit_get_from_json_CorrectlyLoadsTaskFromJSON():
     jour_min_str = "jour_minute"
     jour_min_rope = yao_believer.make_l1_rope(jour_min_str)
     yao_believer.add_fact(
-        f_context=jour_min_rope, f_state=jour_min_rope, f_lower=0, f_upper=1399
+        fact_context=jour_min_rope,
+        fact_state=jour_min_rope,
+        fact_lower=0,
+        fact_upper=1399,
     )
 
     # THEN
@@ -409,7 +421,7 @@ def test_BelieverUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
 
     # WHEN
     yao_believer.add_fact(
-        gregziet_rope, gregziet_rope, f_lower=1063998720, f_upper=1064130373
+        gregziet_rope, gregziet_rope, fact_lower=1063998720, fact_upper=1064130373
     )
     task_plan_list = yao_believer.get_agenda_dict()
 
@@ -445,14 +457,14 @@ def test_BelieverUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     #     reason_lower=caseunit.reason_lower,
     #     reason_upper=caseunit.reason_upper,
     #     reason_divisor=caseunit.reason_divisor,
-    #     f_lower_full=factheir_gregziet.reason_lower,
-    #     f_upper_full=factheir_gregziet.reason_upper,
+    #     fact_lower_full=factheir_gregziet.reason_lower,
+    #     fact_upper_full=factheir_gregziet.reason_upper,
     # )
     # print(
     #     f"----\n  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
     # )
     # print(
-    #     f"       {segr_obj.f_lower_full=}         {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
+    #     f"       {segr_obj.fact_lower_full=}         {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     # )
 
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")

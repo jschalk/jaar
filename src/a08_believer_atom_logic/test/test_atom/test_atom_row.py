@@ -37,9 +37,9 @@ def test_AtomRow_exists():
     assert x_atomrow.debtor_respect is None
     assert x_atomrow.denom is None
     assert x_atomrow.reason_divisor is None
-    assert x_atomrow.f_context is None
-    assert x_atomrow.f_upper is None
-    assert x_atomrow.f_lower is None
+    assert x_atomrow.fact_context is None
+    assert x_atomrow.fact_upper is None
+    assert x_atomrow.fact_lower is None
     assert x_atomrow.fund_iota is None
     assert x_atomrow.fund_pool is None
     assert x_atomrow.give_force is None
@@ -54,7 +54,7 @@ def test_AtomRow_exists():
     assert x_atomrow.numor is None
     assert x_atomrow.reason_lower is None
     assert x_atomrow.penny is None
-    assert x_atomrow.f_state is None
+    assert x_atomrow.fact_state is None
     assert x_atomrow.task is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.plan_rope is None

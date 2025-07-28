@@ -31,10 +31,10 @@ from src.a04_reason_logic.test._util.a04_str import (
     _status_str,
     belief_label_str,
     believer_name_str,
-    f_context_str,
-    f_lower_str,
-    f_state_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fact_upper_str,
     labor_title_str,
     reason_active_requisite_str,
     reason_context_str,
@@ -84,10 +84,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     credor_respect_str,
     debtor_respect_str,
     denom_str,
-    f_context_str,
-    f_lower_str,
-    f_state_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fact_upper_str,
     fund_iota_str,
     fund_pool_str,
     gogo_want_str,
@@ -634,16 +634,16 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrawar, jv, give_force_str()) == "REAL"
     assert g_class_type(cfig, blrawar, jv, take_force_str()) == "float"
     assert g_sqlitetype(cfig, blrawar, jv, take_force_str()) == "REAL"
-    assert g_class_type(cfig, blrfact, jk, f_context_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, blrfact, jk, f_context_str()) == "TEXT"
+    assert g_class_type(cfig, blrfact, jk, fact_context_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, blrfact, jk, fact_context_str()) == "TEXT"
     assert g_class_type(cfig, blrfact, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrfact, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, blrfact, jv, f_upper_str()) == "float"
-    assert g_sqlitetype(cfig, blrfact, jv, f_upper_str()) == "REAL"
-    assert g_class_type(cfig, blrfact, jv, f_lower_str()) == "float"
-    assert g_sqlitetype(cfig, blrfact, jv, f_lower_str()) == "REAL"
-    assert g_class_type(cfig, blrfact, jv, f_state_str()) == RopeTerm_str()
-    assert g_sqlitetype(cfig, blrfact, jv, f_state_str()) == "TEXT"
+    assert g_class_type(cfig, blrfact, jv, fact_upper_str()) == "float"
+    assert g_sqlitetype(cfig, blrfact, jv, fact_upper_str()) == "REAL"
+    assert g_class_type(cfig, blrfact, jv, fact_lower_str()) == "float"
+    assert g_sqlitetype(cfig, blrfact, jv, fact_lower_str()) == "REAL"
+    assert g_class_type(cfig, blrfact, jv, fact_state_str()) == RopeTerm_str()
+    assert g_sqlitetype(cfig, blrfact, jv, fact_state_str()) == "TEXT"
     assert g_class_type(cfig, blrheal, jk, healer_name_str()) == NameTerm_str()
     assert g_sqlitetype(cfig, blrheal, jk, healer_name_str()) == "TEXT"
     assert g_class_type(cfig, blrheal, jk, plan_rope_str()) == RopeTerm_str()
@@ -867,9 +867,9 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get(give_force_str()) == "float"
     assert believer_calc_args_type_dict.get(take_force_str()) == "float"
     assert believer_calc_args_type_dict.get(reason_context_str()) == RopeTerm_str()
-    assert believer_calc_args_type_dict.get(f_upper_str()) == "float"
-    assert believer_calc_args_type_dict.get(f_lower_str()) == "float"
-    assert believer_calc_args_type_dict.get(f_state_str()) == RopeTerm_str()
+    assert believer_calc_args_type_dict.get(fact_upper_str()) == "float"
+    assert believer_calc_args_type_dict.get(fact_lower_str()) == "float"
+    assert believer_calc_args_type_dict.get(fact_state_str()) == RopeTerm_str()
     assert believer_calc_args_type_dict.get(healer_name_str()) == NameTerm_str()
     assert believer_calc_args_type_dict.get(reason_state_str()) == RopeTerm_str()
     assert believer_calc_args_type_dict.get("_status") == "int"

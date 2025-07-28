@@ -36,15 +36,17 @@ def believerunit_v001_with_large_agenda() -> BelieverUnit:
     sem_jours_rope = yao_believer.make_l1_rope("sem_jours")
 
     yao_believer.add_fact(aaron_rope, aaron_rope)
-    yao_believer.add_fact(ced_wk_rope, ced_wk_rope, f_lower=0, f_upper=53)
-    yao_believer.add_fact(jour_minute_rope, jour_minute_rope, f_lower=0, f_upper=1399)
+    yao_believer.add_fact(ced_wk_rope, ced_wk_rope, fact_lower=0, fact_upper=53)
+    yao_believer.add_fact(
+        jour_minute_rope, jour_minute_rope, fact_lower=0, fact_upper=1399
+    )
     # yao_believer.add_fact(interweb, interweb)
-    yao_believer.add_fact(month_wk_rope, month_wk_rope, f_lower=0, f_upper=5)
+    yao_believer.add_fact(month_wk_rope, month_wk_rope, fact_lower=0, fact_upper=5)
     yao_believer.add_fact(mood_rope, mood_rope)
     # yao_believer.add_fact(movie, movie)
     yao_believer.add_fact(nations_rope, nations_rope)
     yao_believer.add_fact(season_rope, season_rope)
-    yao_believer.add_fact(yr_month_rope, yr_month_rope, f_lower=0, f_upper=12)
+    yao_believer.add_fact(yr_month_rope, yr_month_rope, fact_lower=0, fact_upper=12)
     # yao_believer.add_fact(water, water)
     yao_believer.add_fact(sem_jours_rope, sem_jours_rope)
     return yao_believer
@@ -138,8 +140,8 @@ def get_believerunit_with_4_levels_and_2reasons_2facts() -> BelieverUnit:
     nation_rope = sue_believer.make_l1_rope(nation_str)
     usa_str = "USA"
     usa_rope = sue_believer.make_rope(nation_rope, usa_str)
-    sue_believer.add_fact(f_context=wk_rope, f_state=wed_rope)
-    sue_believer.add_fact(f_context=nation_rope, f_state=usa_rope)
+    sue_believer.add_fact(fact_context=wk_rope, fact_state=wed_rope)
+    sue_believer.add_fact(fact_context=nation_rope, fact_state=usa_rope)
     return sue_believer
 
 
@@ -256,8 +258,8 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     shave_reason.set_case(mon_rope)
 
     zia_believer.edit_plan_attr(shave_rope, reason=shave_reason)
-    zia_believer.add_fact(f_context=wk_rope, f_state=sun_rope)
-    x_factunit = factunit_shop(f_context=wk_rope, f_state=church_rope)
+    zia_believer.add_fact(fact_context=wk_rope, fact_state=sun_rope)
+    x_factunit = factunit_shop(fact_context=wk_rope, fact_state=church_rope)
     zia_believer.edit_plan_attr(shave_rope, factunit=x_factunit)
     return zia_believer
 
@@ -378,7 +380,7 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
     cali_laborunit = laborunit_shop()
     cali_laborunit.set_laborlink(cali_str)
     amos_believer.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
-    amos_believer.add_fact(f_context=basket_rope, f_state=b_full_rope)
+    amos_believer.add_fact(fact_context=basket_rope, fact_state=b_full_rope)
 
     return amos_believer
 

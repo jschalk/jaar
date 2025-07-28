@@ -265,9 +265,9 @@ def test_save_arbitrary_believerevent_SetsFile_Scenario1_includes_facts(
     )
     casa_rope = create_rope(a23_str, "casa")
     clean_rope = create_rope(casa_rope, "clean")
-    clean_f_lower = 11
-    clean_f_upper = 16
-    x_facts = [(casa_rope, clean_rope, clean_f_lower, clean_f_upper)]
+    clean_fact_lower = 11
+    clean_fact_upper = 16
+    x_facts = [(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)]
     assert os_path_exists(believerevent_path) is False
 
     # WHEN
@@ -279,7 +279,7 @@ def test_save_arbitrary_believerevent_SetsFile_Scenario1_includes_facts(
     assert os_path_exists(believerevent_path)
     expected_sue_believer = believerunit_shop(sue_str, a23_str)
     expected_sue_believer.add_fact(
-        casa_rope, clean_rope, clean_f_lower, clean_f_upper, True
+        casa_rope, clean_rope, clean_fact_lower, clean_fact_upper, True
     )
     gen_sue_believer = open_believer_file(believerevent_path)
     assert (
@@ -678,19 +678,19 @@ def test_create_cell_partner_mandate_ledger_json_CreatesFile_Scenario1(
     sue_believer.add_partnerunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
-    sue_believer.add_plan(clean_fact.f_state)
-    sue_believer.add_plan(dirty_fact.f_state)
+    sue_believer.add_plan(clean_fact.fact_state)
+    sue_believer.add_plan(dirty_fact.fact_state)
     casa_rope = sue_believer.make_l1_rope("casa")
     mop_rope = sue_believer.make_rope(casa_rope, "mop")
     sue_believer.add_plan(mop_rope, 1, task=True)
-    sue_believer.edit_reason(mop_rope, dirty_fact.f_context, dirty_fact.f_state)
+    sue_believer.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     sue_believer.add_fact(
-        dirty_fact.f_context, dirty_fact.f_state, create_missing_plans=True
+        dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True
     )
     sky_blue_fact = sky_blue_factunit()
-    sue_believerevent_factunits = {clean_fact.f_context: clean_fact}
-    sue_found_factunits = {dirty_fact.f_context: dirty_fact}
-    sue_boss_factunits = {sky_blue_fact.f_context: sky_blue_fact}
+    sue_believerevent_factunits = {clean_fact.fact_context: clean_fact}
+    sue_found_factunits = {dirty_fact.fact_context: dirty_fact}
+    sue_boss_factunits = {sky_blue_fact.fact_context: sky_blue_fact}
     sue_cell = cellunit_shop(
         bud_believer_name=yao_str,
         ancestors=sue_ancestors,

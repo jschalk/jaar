@@ -29,8 +29,8 @@ def get_nodes_with_weighted_facts(
                     _add_to_tuple_quota_sum(to_eval_temp, child_fact, child_quota)
 
             for node_fact in node_facts.values():
-                if to_eval_temp.get(node_fact.f_context) is None:
-                    to_eval_temp[node_fact.f_context] = {
+                if to_eval_temp.get(node_fact.fact_context) is None:
+                    to_eval_temp[node_fact.fact_context] = {
                         node_fact.get_tuple(): child_quota
                     }
 
@@ -48,9 +48,9 @@ def _add_to_tuple_quota_sum(
     child_fact: FactUnit,
     child_quota: float,
 ):
-    if to_eval_temp.get(child_fact.f_context) is None:
-        to_eval_temp[child_fact.f_context] = {}
-    reason_context_to_eval = to_eval_temp.get(child_fact.f_context)
+    if to_eval_temp.get(child_fact.fact_context) is None:
+        to_eval_temp[child_fact.fact_context] = {}
+    reason_context_to_eval = to_eval_temp.get(child_fact.fact_context)
     child_fact_tuple = child_fact.get_tuple()
     if reason_context_to_eval.get(child_fact_tuple) is None:
         reason_context_to_eval[child_fact_tuple] = 0

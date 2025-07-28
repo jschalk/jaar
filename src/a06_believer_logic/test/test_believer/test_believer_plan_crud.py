@@ -371,7 +371,7 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     assert sue_believer.planroot._kids[casa_str].factunits == {}
     sem_jours_rope = sue_believer.make_l1_rope("sem_jours")
     fact_rope = sue_believer.make_rope(sem_jours_rope, "Sun")
-    x_factunit = factunit_shop(f_context=fact_rope, f_state=fact_rope)
+    x_factunit = factunit_shop(fact_context=fact_rope, fact_state=fact_rope)
 
     casa_factunits = sue_believer.planroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
@@ -379,7 +379,7 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     casa_factunits = sue_believer.planroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
     assert sue_believer.planroot._kids[casa_str].factunits == {
-        x_factunit.f_context: x_factunit
+        x_factunit.fact_context: x_factunit
     }
 
     # _descendant_task_count: int = None,

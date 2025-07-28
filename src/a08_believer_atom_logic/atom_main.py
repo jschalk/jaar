@@ -320,18 +320,18 @@ def _modify_believer_plan_factunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.del_factunit(x_atom.get_value("f_context"))
+    x_planunit.del_factunit(x_atom.get_value("fact_context"))
 
 
 def _modify_believer_plan_factunit_update(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_factunit = x_planunit.factunits.get(x_atom.get_value("f_context"))
+    x_factunit = x_planunit.factunits.get(x_atom.get_value("fact_context"))
     x_factunit.set_attr(
-        f_state=x_atom.get_value("f_state"),
-        f_lower=x_atom.get_value("f_lower"),
-        f_upper=x_atom.get_value("f_upper"),
+        fact_state=x_atom.get_value("fact_state"),
+        fact_lower=x_atom.get_value("fact_lower"),
+        fact_upper=x_atom.get_value("fact_upper"),
     )
 
 
@@ -341,10 +341,10 @@ def _modify_believer_plan_factunit_insert(
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
         factunit=factunit_shop(
-            f_context=x_atom.get_value("f_context"),
-            f_state=x_atom.get_value("f_state"),
-            f_lower=x_atom.get_value("f_lower"),
-            f_upper=x_atom.get_value("f_upper"),
+            fact_context=x_atom.get_value("fact_context"),
+            fact_state=x_atom.get_value("fact_state"),
+            fact_lower=x_atom.get_value("fact_lower"),
+            fact_upper=x_atom.get_value("fact_upper"),
         ),
     )
 
@@ -601,7 +601,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         )
     elif dimen == "believer_plan_factunit":
         return (
-            (x_obj.f_state != y_obj.f_state)
+            (x_obj.fact_state != y_obj.fact_state)
             or (x_obj.reason_lower != y_obj.reason_lower)
             or (x_obj.reason_upper != y_obj.reason_upper)
         )
@@ -653,9 +653,9 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None
-    f_context: RopeTerm = None
-    f_upper: float = None
-    f_lower: float = None
+    fact_context: RopeTerm = None
+    fact_upper: float = None
+    fact_lower: float = None
     fund_iota: float = None
     fund_pool: float = None
     give_force: float = None
@@ -670,7 +670,7 @@ class AtomRow:
     numor: int = None
     reason_lower: float = None
     penny: float = None
-    f_state: RopeTerm = None
+    fact_state: RopeTerm = None
     task: bool = None
     problem_bool: bool = None
     plan_rope: RopeTerm = None

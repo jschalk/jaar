@@ -368,7 +368,7 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBelieverNotSpeaker
     # ESTABLISH
     # yao_duty has chore run_rope
     # yao_vision has chore clean_rope
-    # yao_new_vision f_states yao_duty chore run_rope and not clean_rope
+    # yao_new_vision fact_states yao_duty chore run_rope and not clean_rope
     yao_duty = get_example_yao_speaker()
     assert yao_duty.plan_exists(run_rope()) is False
     assert yao_duty.plan_exists(clean_rope()) is False

@@ -204,10 +204,10 @@ def test_believer_set_knot_CorrectlyModifiesFactUnit():
     slash_8am_rope = zia_believer.make_rope(slash_ziet_rope, _8am_str)
     assert casa_plan.factunits.get(slash_ziet_rope) is not None
     gen_ziet_factunit = casa_plan.factunits.get(slash_ziet_rope)
-    assert gen_ziet_factunit.f_context is not None
-    assert gen_ziet_factunit.f_context == slash_ziet_rope
-    assert gen_ziet_factunit.f_state is not None
-    assert gen_ziet_factunit.f_state == slash_8am_rope
+    assert gen_ziet_factunit.fact_context is not None
+    assert gen_ziet_factunit.fact_context == slash_ziet_rope
+    assert gen_ziet_factunit.fact_state is not None
+    assert gen_ziet_factunit.fact_state == slash_8am_rope
 
     assert casa_plan.factunits.get(semicolon_ziet_rope) is None
 

@@ -57,14 +57,14 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "f_context": {},
+      "fact_context": {},
       "belief_label": {},
       "believer_name": {}
     },
     "jvalues": {
-      "f_upper": {},
-      "f_lower": {},
-      "f_state": {}
+      "fact_upper": {},
+      "fact_lower": {},
+      "fact_state": {}
     }
   },
   "believer_plan_healerlink": {

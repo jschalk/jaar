@@ -22,8 +22,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     believerunit_str,
     close_str,
     denom_str,
-    f_context_str,
-    f_lower_str,
+    fact_context_str,
+    fact_lower_str,
     give_force_str,
     gogo_want_str,
     group_debt_points_str,
@@ -315,15 +315,15 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_factunit():
     sue_believer.add_plan(casa_rope)
     sue_believer.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
-    casa_f_lower = 32
+    casa_fact_lower = 32
     casa_atom = believeratom_shop(believer_plan_factunit_str(), INSERT_str())
     casa_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_atom.set_arg(f_context_str(), week_rope)
-    casa_atom.set_arg(f_lower_str(), casa_f_lower)
+    casa_atom.set_arg(fact_context_str(), week_rope)
+    casa_atom.set_arg(fact_lower_str(), casa_fact_lower)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_factunit = believer_plan_factunit_get_obj(sue_believer, casa_jkeys)
-    assert casa_factunit.f_lower != casa_f_lower
-    assert casa_factunit.f_lower is None
+    assert casa_factunit.fact_lower != casa_fact_lower
+    assert casa_factunit.fact_lower is None
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, casa_atom)
@@ -333,4 +333,4 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_factunit():
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    assert zia_jvalues.get(f_lower_str()) == casa_f_lower
+    assert zia_jvalues.get(fact_lower_str()) == casa_fact_lower

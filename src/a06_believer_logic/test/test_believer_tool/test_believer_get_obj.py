@@ -22,8 +22,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
-    f_context_str,
-    f_state_str,
+    fact_context_str,
+    fact_state_str,
     plan_rope_str,
     reason_context_str,
     reason_state_str,
@@ -146,7 +146,7 @@ def test_believer_plan_factunit_get_obj_ReturnsObj():
     casa_rope = sue_believer.make_l1_rope(casa_str)
     wk_rope = sue_believer.make_l1_rope("wk")
     sue_believer.add_plan(casa_rope)
-    jkeys = {plan_rope_str(): casa_rope, f_context_str(): wk_rope}
+    jkeys = {plan_rope_str(): casa_rope, fact_context_str(): wk_rope}
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(wk_rope)
     sue_believer.get_plan_obj(casa_rope).set_factunit(factunit_shop(wk_rope))
@@ -288,7 +288,7 @@ def test_believer_get_obj_ReturnsObj_believer_plan_factunit_get_obj():
     casa_rope = sue_believer.make_l1_rope(casa_str)
     wk_rope = sue_believer.make_l1_rope("wk")
     sue_believer.add_plan(casa_rope)
-    jkeys = {plan_rope_str(): casa_rope, f_context_str(): wk_rope}
+    jkeys = {plan_rope_str(): casa_rope, fact_context_str(): wk_rope}
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(wk_rope)
     sue_believer.get_plan_obj(casa_rope).set_factunit(factunit_shop(wk_rope))

@@ -27,7 +27,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_reasonunit_str,
     believer_planunit_str,
     believerunit_str,
-    f_context_str,
+    fact_context_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
@@ -316,9 +316,9 @@ def test_believer_plan_factunit_exists_ReturnsObj():
     root_rope = to_rope(sue_believer.belief_label)
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    root_jkeys = {plan_rope_str(): root_rope, f_context_str(): wk_rope}
-    casa_jkeys = {plan_rope_str(): casa_rope, f_context_str(): wk_rope}
-    clean_jkeys = {plan_rope_str(): clean_rope, f_context_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, fact_context_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, fact_context_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, fact_context_str(): wk_rope}
 
     # WHEN / THEN
     assert not believer_plan_factunit_exists(None, {})
@@ -620,9 +620,9 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_factunit():
     wk_str = "wk"
     wk_rope = sue_believer.make_l1_rope(wk_str)
     x_dimen = believer_plan_factunit_str()
-    root_jkeys = {plan_rope_str(): root_rope, f_context_str(): wk_rope}
-    casa_jkeys = {plan_rope_str(): casa_rope, f_context_str(): wk_rope}
-    clean_jkeys = {plan_rope_str(): clean_rope, f_context_str(): wk_rope}
+    root_jkeys = {plan_rope_str(): root_rope, fact_context_str(): wk_rope}
+    casa_jkeys = {plan_rope_str(): casa_rope, fact_context_str(): wk_rope}
+    clean_jkeys = {plan_rope_str(): clean_rope, fact_context_str(): wk_rope}
 
     # WHEN / THEN
     assert not believer_attr_exists(x_dimen, None, {})

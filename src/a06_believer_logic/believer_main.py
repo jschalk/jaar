@@ -440,54 +440,54 @@ class BelieverUnit:
         return [
             fact
             for fact in self.planroot.factunits.values()
-            if fact.f_lower is not None
-            and fact.f_upper is not None
-            and self._is_plan_rangeroot(plan_rope=fact.f_context)
+            if fact.fact_lower is not None
+            and fact.fact_upper is not None
+            and self._is_plan_rangeroot(plan_rope=fact.fact_context)
         ]
 
     def add_fact(
         self,
-        f_context: RopeTerm,
-        f_state: RopeTerm = None,
-        f_lower: float = None,
-        f_upper: float = None,
+        fact_context: RopeTerm,
+        fact_state: RopeTerm = None,
+        fact_lower: float = None,
+        fact_upper: float = None,
         create_missing_plans: bool = None,
     ):
-        f_state = f_context if f_state is None else f_state
+        fact_state = fact_context if fact_state is None else fact_state
         if create_missing_plans:
-            self._create_plankid_if_empty(rope=f_context)
-            self._create_plankid_if_empty(rope=f_state)
+            self._create_plankid_if_empty(rope=fact_context)
+            self._create_plankid_if_empty(rope=fact_state)
 
-        fact_f_context_plan = self.get_plan_obj(f_context)
+        fact_fact_context_plan = self.get_plan_obj(fact_context)
         x_planroot = self.get_plan_obj(to_rope(self.belief_label))
-        x_f_lower = None
-        if f_upper is not None and f_lower is None:
-            x_f_lower = x_planroot.factunits.get(f_context).f_lower
+        x_fact_lower = None
+        if fact_upper is not None and fact_lower is None:
+            x_fact_lower = x_planroot.factunits.get(fact_context).fact_lower
         else:
-            x_f_lower = f_lower
-        x_f_upper = None
-        if f_lower is not None and f_upper is None:
-            x_f_upper = x_planroot.factunits.get(f_context).f_upper
+            x_fact_lower = fact_lower
+        x_fact_upper = None
+        if fact_lower is not None and fact_upper is None:
+            x_fact_upper = x_planroot.factunits.get(fact_context).fact_upper
         else:
-            x_f_upper = f_upper
+            x_fact_upper = fact_upper
         x_factunit = factunit_shop(
-            f_context=f_context,
-            f_state=f_state,
-            f_lower=x_f_lower,
-            f_upper=x_f_upper,
+            fact_context=fact_context,
+            fact_state=fact_state,
+            fact_lower=x_fact_lower,
+            fact_upper=x_fact_upper,
         )
 
-        if fact_f_context_plan.is_math() is False:
+        if fact_fact_context_plan.is_math() is False:
             x_planroot.set_factunit(x_factunit)
         # if fact's plan no range or is a "range-root" then allow fact to be set
         elif (
-            fact_f_context_plan.is_math()
-            and self._is_plan_rangeroot(f_context) is False
+            fact_fact_context_plan.is_math()
+            and self._is_plan_rangeroot(fact_context) is False
         ):
             raise InvalidBelieverException(
-                f"Non range-root fact:{f_context} can only be set by range-root fact"
+                f"Non range-root fact:{fact_context} can only be set by range-root fact"
             )
-        elif fact_f_context_plan.is_math() and self._is_plan_rangeroot(f_context):
+        elif fact_fact_context_plan.is_math() and self._is_plan_rangeroot(fact_context):
             # WHEN plan is "range-root" identify any reason.reason_contexts that are descendants
             # calculate and set those descendant facts
             # example: zietline range (0-, 1.5e9) is range-root
@@ -500,11 +500,11 @@ class BelieverUnit:
             # that has that reason_context.
             x_planroot.set_factunit(x_factunit)
 
-    def get_fact(self, f_context: RopeTerm) -> FactUnit:
-        return self.planroot.factunits.get(f_context)
+    def get_fact(self, fact_context: RopeTerm) -> FactUnit:
+        return self.planroot.factunits.get(fact_context)
 
-    def del_fact(self, f_context: RopeTerm):
-        self.planroot.del_factunit(f_context)
+    def del_fact(self, fact_context: RopeTerm):
+        self.planroot.del_factunit(fact_context)
 
     def get_plan_dict(self, problem: bool = None) -> dict[RopeTerm, PlanUnit]:
         self.settle_believer()

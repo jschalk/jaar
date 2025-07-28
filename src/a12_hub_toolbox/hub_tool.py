@@ -164,10 +164,12 @@ def save_arbitrary_believerevent(
         x_believerunit.add_partnerunit(partner_list[0], partner_cred_points)
     for fact_tup in facts:
         x_reason_context = fact_tup[0]
-        x_f_state = fact_tup[1]
-        x_f_lower = fact_tup[2]
-        x_f_upper = fact_tup[3]
-        x_believerunit.add_fact(x_reason_context, x_f_state, x_f_lower, x_f_upper, True)
+        x_fact_state = fact_tup[1]
+        x_fact_lower = fact_tup[2]
+        x_fact_upper = fact_tup[3]
+        x_believerunit.add_fact(
+            x_reason_context, x_fact_state, x_fact_lower, x_fact_upper, True
+        )
     x_believerevent_path = create_believerevent_path(
         belief_mstr_dir, belief_label, believer_name, event_int
     )

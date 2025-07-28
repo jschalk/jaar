@@ -107,7 +107,7 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
     # ESTABLISH
     # yao_duty has fact eat_rope = full
     # yao_vision has fact eat_rope = hungry
-    # new_yao_vision f_states yao_duty fact eat_rope = full
+    # new_yao_vision fact_states yao_duty fact eat_rope = full
     yao_duty = get_example_yao_speaker()
     yao_duty.add_fact(eat_rope(), full_rope())
     sue_texas_hubunit = get_texas_hubunit()
@@ -120,10 +120,10 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
         duty_believer=yao_duty,
     )
 
-    assert yao_duty.get_fact(eat_rope()).f_state == full_rope()
+    assert yao_duty.get_fact(eat_rope()).fact_state == full_rope()
 
     old_yao_vision = get_example_yao_speaker()
-    assert old_yao_vision.get_fact(eat_rope()).f_state == hungry_rope()
+    assert old_yao_vision.get_fact(eat_rope()).fact_state == hungry_rope()
     sue_texas_hubunit.save_vision_believer(old_yao_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
@@ -137,10 +137,10 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
 
     # THEN
     assert new_yao_vision.get_fact(eat_rope()) is not None
-    assert new_yao_vision.get_fact(eat_rope()).f_state == full_rope()
+    assert new_yao_vision.get_fact(eat_rope()).fact_state == full_rope()
 
 
-def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerDirBeliever_v1(
+def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBelieversSpeakerDirBeliever_v1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -159,11 +159,11 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 
     zia_vision = get_example_zia_speaker()
     zia_vision.add_fact(eat_rope(), eat_rope())
-    assert zia_vision.get_fact(eat_rope()).f_state == eat_rope()
+    assert zia_vision.get_fact(eat_rope()).fact_state == eat_rope()
     sue_texas_hubunit.save_vision_believer(zia_vision)
 
     old_yao_vision = get_example_yao_speaker()
-    assert old_yao_vision.get_fact(eat_rope()).f_state == hungry_rope()
+    assert old_yao_vision.get_fact(eat_rope()).fact_state == hungry_rope()
     sue_texas_hubunit.save_vision_believer(old_yao_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
@@ -179,9 +179,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 
     # THEN
     assert yao_duty.get_fact(eat_rope()) is None
-    assert zia_vision.get_fact(eat_rope()).f_state == eat_rope()
-    assert old_yao_vision.get_fact(eat_rope()).f_state == hungry_rope()
-    assert new_yao_vision.get_fact(eat_rope()).f_state == eat_rope()
+    assert zia_vision.get_fact(eat_rope()).fact_state == eat_rope()
+    assert old_yao_vision.get_fact(eat_rope()).fact_state == hungry_rope()
+    assert new_yao_vision.get_fact(eat_rope()).fact_state == eat_rope()
 
 
 def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
@@ -190,7 +190,7 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
     # ESTABLISH
     yao_duty = get_example_yao_speaker()
     yao_duty.add_fact(eat_rope(), full_rope())
-    assert yao_duty.get_fact(eat_rope()).f_state == full_rope()
+    assert yao_duty.get_fact(eat_rope()).fact_state == full_rope()
     sue_texas_hubunit = get_texas_hubunit()
     save_duty_believer(
         belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
@@ -203,7 +203,7 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
 
     zia_vision = get_example_zia_speaker()
     zia_vision.add_fact(eat_rope(), hungry_rope())
-    assert zia_vision.get_fact(eat_rope()).f_state == hungry_rope()
+    assert zia_vision.get_fact(eat_rope()).fact_state == hungry_rope()
     sue_texas_hubunit.save_vision_believer(zia_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
@@ -217,23 +217,23 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
 
     # THEN
     assert new_yao_vision.get_fact(eat_rope()) is not None
-    assert new_yao_vision.get_fact(eat_rope()).f_state == full_rope()
+    assert new_yao_vision.get_fact(eat_rope()).fact_state == full_rope()
 
 
-def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerDirBeliever_v2(
+def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBelieversSpeakerDirBeliever_v2(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     zia_vision = get_example_zia_speaker()
     zia_str = zia_vision.believer_name
     zia_vision.add_fact(eat_rope(), eat_rope())
-    assert zia_vision.get_fact(eat_rope()).f_state == eat_rope()
+    assert zia_vision.get_fact(eat_rope()).fact_state == eat_rope()
     sue_texas_hubunit = get_texas_hubunit()
     sue_texas_hubunit.save_vision_believer(zia_vision)
 
     bob_vision = get_example_bob_speaker()
     bob_str = bob_vision.believer_name
-    assert bob_vision.get_fact(eat_rope()).f_state == hungry_rope()
+    assert bob_vision.get_fact(eat_rope()).fact_state == hungry_rope()
     sue_texas_hubunit.save_vision_believer(bob_vision)
 
     yao_duty = get_example_yao_speaker()
@@ -266,9 +266,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
     zia_partnerunit = new_yao_vision1.get_partner(zia_str)
     bob_partnerunit = new_yao_vision1.get_partner(bob_str)
     assert zia_partnerunit.partner_debt_points < bob_partnerunit.partner_debt_points
-    assert bob_vision.get_fact(eat_rope()).f_state == hungry_rope()
-    assert zia_vision.get_fact(eat_rope()).f_state == eat_rope()
-    assert new_yao_vision1.get_fact(eat_rope()).f_state == hungry_rope()
+    assert bob_vision.get_fact(eat_rope()).fact_state == hungry_rope()
+    assert zia_vision.get_fact(eat_rope()).fact_state == eat_rope()
+    assert new_yao_vision1.get_fact(eat_rope()).fact_state == hungry_rope()
 
     # WHEN
     yao_zia_partner_debt_points = 15
@@ -284,9 +284,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
     zia_partnerunit = new_yao_vision2.get_partner(zia_str)
     bob_partnerunit = new_yao_vision2.get_partner(bob_str)
     assert zia_partnerunit.partner_debt_points > bob_partnerunit.partner_debt_points
-    assert bob_vision.get_fact(eat_rope()).f_state == hungry_rope()
-    assert zia_vision.get_fact(eat_rope()).f_state == eat_rope()
-    assert new_yao_vision2.get_fact(eat_rope()).f_state == eat_rope()
+    assert bob_vision.get_fact(eat_rope()).fact_state == hungry_rope()
+    assert zia_vision.get_fact(eat_rope()).fact_state == eat_rope()
+    assert new_yao_vision2.get_fact(eat_rope()).fact_state == eat_rope()
 
 
 # def test_listen_to_facts_duty_vision_SetsFact(env_dir_setup_cleanup):
@@ -332,7 +332,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     # sue_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
 
 #     # # WHEN
-#     # listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_f_contexts)
+#     # listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_fact_contexts)
 
 #     # # THEN
 #     # assert len(yao_duty.get_missing_fact_reason_contexts().keys()) == 0
@@ -373,18 +373,18 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     assert len(yao_duty.get_missing_fact_reason_contexts()) == 2
 #     yao_duty.add_fact(status_rope, dirty_rope)
 #     assert len(yao_duty.get_missing_fact_reason_contexts()) == 1
-#     assert yao_duty.get_fact(status_rope).f_state == dirty_rope
+#     assert yao_duty.get_fact(status_rope).fact_state == dirty_rope
 
 #     # WHEN
 #     yao_vision = believerunit_shop(yao_str)
 #     yao_vision.add_fact(status_rope, clean_rope, create_missing_plans=True)
 #     yao_vision.add_fact(fridge_rope, running_rope, create_missing_plans=True)
-#     missing_fact_f_contexts = list(yao_duty.get_missing_fact_reason_contexts().keys())
-#     listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_f_contexts)
+#     missing_fact_fact_contexts = list(yao_duty.get_missing_fact_reason_contexts().keys())
+#     listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_fact_contexts)
 
 #     # THEN
 #     assert len(yao_duty.get_missing_fact_reason_contexts()) == 0
 #     # did not grab speaker's factunit
-#     assert yao_duty.get_fact(status_rope).f_state == dirty_rope
+#     assert yao_duty.get_fact(status_rope).fact_state == dirty_rope
 #     # grabed speaker's factunit
-#     assert yao_duty.get_fact(fridge_rope).f_state == running_rope
+#     assert yao_duty.get_fact(fridge_rope).fact_state == running_rope

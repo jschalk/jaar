@@ -20,7 +20,7 @@ class Missing_debtor_respectException(Exception):
 
 def generate_perspective_agenda(perspective_believer: BelieverUnit) -> list[PlanUnit]:
     for x_factunit in perspective_believer.planroot.factunits.values():
-        x_factunit.set_f_state_to_f_context()
+        x_factunit.set_fact_state_to_fact_context()
     return list(perspective_believer.get_agenda_dict().values())
 
 
@@ -137,15 +137,15 @@ def get_ordered_debtors_roll(x_believer: BelieverUnit) -> list[PartnerUnit]:
 
 def migrate_all_facts(src_listener: BelieverUnit, dst_listener: BelieverUnit):
     for x_factunit in src_listener.planroot.factunits.values():
-        f_context_rope = x_factunit.f_context
-        f_state_rope = x_factunit.f_state
-        if dst_listener.plan_exists(f_context_rope) is False:
-            reason_context_plan = src_listener.get_plan_obj(f_context_rope)
+        fact_context_rope = x_factunit.fact_context
+        fact_state_rope = x_factunit.fact_state
+        if dst_listener.plan_exists(fact_context_rope) is False:
+            reason_context_plan = src_listener.get_plan_obj(fact_context_rope)
             dst_listener.set_plan(reason_context_plan, reason_context_plan.parent_rope)
-        if dst_listener.plan_exists(f_state_rope) is False:
-            f_state_plan = src_listener.get_plan_obj(f_state_rope)
-            dst_listener.set_plan(f_state_plan, f_state_plan.parent_rope)
-        dst_listener.add_fact(f_context_rope, f_state_rope)
+        if dst_listener.plan_exists(fact_state_rope) is False:
+            fact_state_plan = src_listener.get_plan_obj(fact_state_rope)
+            dst_listener.set_plan(fact_state_plan, fact_state_plan.parent_rope)
+        dst_listener.add_fact(fact_context_rope, fact_state_rope)
 
 
 def listen_to_speaker_fact(
@@ -159,10 +159,10 @@ def listen_to_speaker_fact(
         x_factunit = speaker.get_fact(missing_fact_reason_context)
         if x_factunit is not None:
             listener.add_fact(
-                f_context=x_factunit.f_context,
-                f_state=x_factunit.f_state,
-                f_lower=x_factunit.f_lower,
-                f_upper=x_factunit.f_upper,
+                fact_context=x_factunit.fact_context,
+                fact_state=x_factunit.fact_state,
+                fact_lower=x_factunit.fact_lower,
+                fact_upper=x_factunit.fact_upper,
                 create_missing_plans=True,
             )
 
@@ -316,7 +316,7 @@ def listen_to_believer_visions(listener_hubunit: HubUnit) -> None:
         listener_id = listener_hubunit.believer_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.believer_name = x_healer_name
-        _f_state_keep_visions_and_listen(
+        _fact_state_keep_visions_and_listen(
             listener_id, keep_dict, healer_hubunit, new_job
         )
 
@@ -328,7 +328,7 @@ def listen_to_believer_visions(listener_hubunit: HubUnit) -> None:
     save_job_file(listener_hubunit.belief_mstr_dir, new_job)
 
 
-def _f_state_keep_visions_and_listen(
+def _fact_state_keep_visions_and_listen(
     listener_id: BelieverName,
     keep_dict: dict[RopeTerm],
     healer_hubunit: HubUnit,
@@ -336,10 +336,10 @@ def _f_state_keep_visions_and_listen(
 ):
     for keep_path in keep_dict:
         healer_hubunit.keep_rope = keep_path
-        f_state_keep_vision_and_listen(listener_id, healer_hubunit, new_job)
+        fact_state_keep_vision_and_listen(listener_id, healer_hubunit, new_job)
 
 
-def f_state_keep_vision_and_listen(
+def fact_state_keep_vision_and_listen(
     listener_believer_name: BelieverName, healer_hubunit: HubUnit, new_job: BelieverUnit
 ):
     listener_id = listener_believer_name

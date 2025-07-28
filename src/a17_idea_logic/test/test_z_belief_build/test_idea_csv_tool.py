@@ -69,7 +69,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyBeliefUnit(
         "br00020": "belief_label,believer_name,partner_name,group_title,group_cred_points,group_debt_points\n",
         "br00021": "belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points\n",
         "br00022": "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force\n",
-        "br00023": "belief_label,believer_name,plan_rope,f_context,f_state,f_lower,f_upper\n",
+        "br00023": "belief_label,believer_name,plan_rope,fact_context,fact_state,fact_lower,fact_upper\n",
         "br00024": "belief_label,believer_name,plan_rope,labor_title\n",
         "br00025": "belief_label,believer_name,plan_rope,healer_name\n",
         "br00026": "belief_label,believer_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
@@ -361,11 +361,11 @@ def test_add_believer_to_br00023_csv_ReturnsObj():
     bob_believer = believerunit_shop(bob_str, a23_str)
     casa_rope = bob_believer.make_l1_rope("casa")
     clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    clean_f_lower = 55
-    clean_f_upper = 77
+    clean_fact_lower = 55
+    clean_fact_upper = 77
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
-    bob_believer.add_fact(casa_rope, clean_rope, clean_f_lower, clean_f_upper)
+    bob_believer.add_fact(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
@@ -373,7 +373,7 @@ def test_add_believer_to_br00023_csv_ReturnsObj():
     x_csv = add_believer_to_br00023_csv(csv_header, bob_believer, csv_delimiter)
 
     # THEN
-    clean_row = f",,{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_f_lower},{clean_f_upper}\n"
+    clean_row = f",,{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fact_lower},{clean_fact_upper}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
@@ -723,11 +723,11 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     bob_believer = believerunit_shop(bob_str, a23_str)
     casa_rope = bob_believer.make_l1_rope("casa")
     clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    clean_f_lower = 55
-    clean_f_upper = 77
+    clean_fact_lower = 55
+    clean_fact_upper = 77
     bob_believer.add_plan(casa_rope)
     bob_believer.add_plan(clean_rope)
-    bob_believer.add_fact(casa_rope, clean_rope, clean_f_lower, clean_f_upper)
+    bob_believer.add_fact(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
     sue_str = "Sue"
@@ -741,7 +741,7 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     x_csv = add_pack_to_br00023_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_f_lower},{clean_f_upper}\n"
+    clean_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fact_lower},{clean_fact_upper}\n"
     expected_csv = f"{csv_header}{clean_row}"
     print(f"       {x_csv=}")
     print(f"{expected_csv=}")

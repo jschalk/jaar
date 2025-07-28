@@ -137,9 +137,9 @@ def test_BelieverUnit_get_missing_fact_reason_contexts_ReturnsAllreason_contexts
 
     yao_believerunit.add_fact(
         yao_believerunit.make_l1_rope("jour_minute"),
-        f_state=yao_believerunit.make_l1_rope("jour_minute"),
-        f_lower=0,
-        f_upper=1439,
+        fact_state=yao_believerunit.make_l1_rope("jour_minute"),
+        fact_lower=0,
+        fact_upper=1439,
     )
 
     # WHEN

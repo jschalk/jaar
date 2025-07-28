@@ -136,31 +136,31 @@ def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     usa_rope = create_rope(nation_rope, "USA")
     texas_rope = create_rope(usa_rope, "Texas")
     idaho_rope = create_rope(usa_rope, "Idaho")
-    texas_fact = factheir_shop(f_context=usa_rope, f_state=texas_rope)
+    texas_fact = factheir_shop(fact_context=usa_rope, fact_state=texas_rope)
 
     # WHEN / THEN
     texas_case = caseunit_shop(reason_state=texas_rope)
-    assert texas_case.is_in_lineage(fact_f_state=texas_fact.f_state)
+    assert texas_case.is_in_lineage(fact_fact_state=texas_fact.fact_state)
 
     # WHEN / THEN
     idaho_case = caseunit_shop(reason_state=idaho_rope)
-    assert idaho_case.is_in_lineage(fact_f_state=texas_fact.f_state) is False
+    assert idaho_case.is_in_lineage(fact_fact_state=texas_fact.fact_state) is False
 
     # WHEN / THEN
     usa_case = caseunit_shop(reason_state=usa_rope)
-    assert usa_case.is_in_lineage(fact_f_state=texas_fact.f_state)
+    assert usa_case.is_in_lineage(fact_fact_state=texas_fact.fact_state)
 
     # ESTABLISH
     sea_rope = create_rope("earth", "sea")  # "earth,sea"
     sea_case = caseunit_shop(reason_state=sea_rope)
 
     # THEN
-    sea_fact = factheir_shop(f_context=sea_rope, f_state=sea_rope)
-    assert sea_case.is_in_lineage(fact_f_state=sea_fact.f_state)
+    sea_fact = factheir_shop(fact_context=sea_rope, fact_state=sea_rope)
+    assert sea_case.is_in_lineage(fact_fact_state=sea_fact.fact_state)
     seaside_rope = create_rope("earth", "seaside")  # "earth,seaside,beach"
     seaside_beach_rope = create_rope(seaside_rope, "beach")  # "earth,seaside,beach"
     seaside_fact = factheir_shop(seaside_beach_rope, seaside_beach_rope)
-    assert sea_case.is_in_lineage(fact_f_state=seaside_fact.f_state) is False
+    assert sea_case.is_in_lineage(fact_fact_state=seaside_fact.fact_state) is False
 
 
 def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultKnot():
@@ -172,19 +172,19 @@ def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultKnot():
     idaho_rope = create_rope(usa_rope, "Idaho", knot=slash_str)
 
     # WHEN
-    texas_fact = factheir_shop(f_context=usa_rope, f_state=texas_rope)
+    texas_fact = factheir_shop(fact_context=usa_rope, fact_state=texas_rope)
 
     # THEN
     texas_case = caseunit_shop(reason_state=texas_rope, knot=slash_str)
-    assert texas_case.is_in_lineage(fact_f_state=texas_fact.f_state)
+    assert texas_case.is_in_lineage(fact_fact_state=texas_fact.fact_state)
 
     idaho_case = caseunit_shop(reason_state=idaho_rope, knot=slash_str)
-    assert idaho_case.is_in_lineage(fact_f_state=texas_fact.f_state) is False
+    assert idaho_case.is_in_lineage(fact_fact_state=texas_fact.fact_state) is False
 
     usa_case = caseunit_shop(reason_state=usa_rope, knot=slash_str)
     print(f"  {usa_case.reason_state=}")
-    print(f"{texas_fact.f_state=}")
-    assert usa_case.is_in_lineage(fact_f_state=texas_fact.f_state)
+    print(f"{texas_fact.fact_state=}")
+    assert usa_case.is_in_lineage(fact_fact_state=texas_fact.fact_state)
 
     # ESTABLISH
     # "earth,sea"
@@ -198,10 +198,10 @@ def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultKnot():
     sea_case = caseunit_shop(reason_state=sea_rope, knot=slash_str)
 
     # THEN
-    sea_fact = factheir_shop(f_context=sea_rope, f_state=sea_rope)
-    assert sea_case.is_in_lineage(fact_f_state=sea_fact.f_state)
+    sea_fact = factheir_shop(fact_context=sea_rope, fact_state=sea_rope)
+    assert sea_case.is_in_lineage(fact_fact_state=sea_fact.fact_state)
     seaside_fact = factheir_shop(seaside_beach_rope, seaside_beach_rope)
-    assert sea_case.is_in_lineage(fact_f_state=seaside_fact.f_state) is False
+    assert sea_case.is_in_lineage(fact_fact_state=seaside_fact.fact_state) is False
 
 
 def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rangeCase():
@@ -211,41 +211,67 @@ def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rang
     yr_case = caseunit_shop(reason_state=yr_rope, reason_lower=3, reason_upper=13)
 
     # WHEN / THEN
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=5, f_upper=11, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=5, fact_upper=11, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=1, f_upper=11, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=1, fact_upper=11, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=8, f_upper=17, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=8, fact_upper=17, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=0, f_upper=2, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=0, fact_upper=2, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=15, f_upper=19, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=15, fact_upper=19, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=1, f_upper=19, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=1, fact_upper=19, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
     # boundary tests
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=13, f_upper=19, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=13, fact_upper=19, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=0, f_upper=3, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=0, fact_upper=3, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=0, f_upper=0, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=0, fact_upper=0, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=3, f_upper=3, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=3, fact_upper=3, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=13, f_upper=13, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=13, fact_upper=13, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=17, f_upper=17, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=17, fact_upper=17, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_lower=20, f_upper=17, f_state=yr_rope)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_lower=20, fact_upper=17, fact_state=yr_rope
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
 
@@ -258,16 +284,24 @@ def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregat
     )
 
     # WHEN / THEN
-    yr_fact = factheir_shop(f_context=yr_rope, f_state=yr_rope, f_lower=5, f_upper=5)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=5, fact_upper=5
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_state=yr_rope, f_lower=6, f_upper=6)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=6, fact_upper=6
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_state=yr_rope, f_lower=4, f_upper=6)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=4, fact_upper=6
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_state=yr_rope, f_lower=3, f_upper=4)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=3, fact_upper=4
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
     # ESTABLISH
@@ -276,15 +310,19 @@ def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregat
     )
 
     # WHEN / THEN
-    yr_fact = factheir_shop(f_context=yr_rope, f_state=yr_rope, f_lower=2, f_upper=2)
-    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
-
     yr_fact = factheir_shop(
-        f_context=yr_rope, f_state=yr_rope, f_lower=102, f_upper=102
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=2, fact_upper=2
     )
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
-    yr_fact = factheir_shop(f_context=yr_rope, f_state=yr_rope, f_lower=1, f_upper=4)
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=102, fact_upper=102
+    )
+    assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
+
+    yr_fact = factheir_shop(
+        fact_context=yr_rope, fact_state=yr_rope, fact_lower=1, fact_upper=4
+    )
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
 
@@ -313,10 +351,12 @@ def test_CaseUnitUnit_get_case_status_Returns_active_Boolean():
     wk_case = caseunit_shop(reason_state=wk_rope)
 
     # WHEN / THEN
-    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope)
+    wk_fact = factheir_shop(fact_context=wk_rope, fact_state=wk_rope)
     assert wk_case._get_active(factheir=wk_fact)
     # if fact has range but case does not reqquire range, fact's range does not matter
-    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope, f_lower=0, f_upper=2)
+    wk_fact = factheir_shop(
+        fact_context=wk_rope, fact_state=wk_rope, fact_lower=0, fact_upper=2
+    )
     assert wk_case._get_active(factheir=wk_fact)
 
 
@@ -327,9 +367,11 @@ def test_CaseUnitUnit_get_active_Returns_is_range_active_Boolean():
     wk_case = caseunit_shop(reason_state=wk_rope, reason_lower=3, reason_upper=7)
 
     # WHEN / THEN
-    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope)
+    wk_fact = factheir_shop(fact_context=wk_rope, fact_state=wk_rope)
     assert wk_case._get_active(factheir=wk_fact) is False
-    wk_fact = factheir_shop(f_context=wk_rope, f_state=wk_rope, f_lower=0, f_upper=2)
+    wk_fact = factheir_shop(
+        fact_context=wk_rope, fact_state=wk_rope, fact_lower=0, fact_upper=2
+    )
     assert wk_case._get_active(factheir=wk_fact) is False
 
 
@@ -357,7 +399,7 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
-    believer_fact = factheir_shop(f_context=wk_rope, f_state=wed_rope)
+    believer_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
     assert wed_case._status is None
 
     # WHEN
@@ -379,7 +421,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario2():
     assert wed_after_case._status is None
 
     # WHEN
-    wed_fact = factheir_shop(f_context=wk_rope, f_state=wed_rope)
+    wed_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
     wed_after_case.set_status(x_factheir=wed_fact)
 
     # THEN
@@ -398,7 +440,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario3():
     assert wed_case._status is None
 
     # WHEN
-    noon_fact = factheir_shop(f_context=wk_rope, f_state=wed_noon_rope)
+    noon_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_noon_rope)
     wed_case.set_status(x_factheir=noon_fact)
 
     # THEN
@@ -414,11 +456,11 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario4():
     thu_str = "thur"
     thu_rope = create_rope(wk_rope, thu_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
-    thu_fact = factheir_shop(f_context=wk_rope, f_state=thu_rope)
+    thu_fact = factheir_shop(fact_context=wk_rope, fact_state=thu_rope)
     assert wed_case._status is None
-    assert wed_case.is_in_lineage(fact_f_state=thu_fact.f_state) is False
-    assert thu_fact.f_lower is None
-    assert thu_fact.f_upper is None
+    assert wed_case.is_in_lineage(fact_fact_state=thu_fact.fact_state) is False
+    assert thu_fact.fact_lower is None
+    assert thu_fact.fact_upper is None
 
     # WHEN
     wed_case.set_status(x_factheir=thu_fact)
@@ -441,7 +483,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
     assert wed_sun_case._status is None
 
     # WHEN
-    wed_rain_fact = factheir_shop(f_context=wk_rope, f_state=wed_rain_rope)
+    wed_rain_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rain_rope)
     wed_sun_case.set_status(x_factheir=wed_rain_fact)
 
     # THEN
@@ -458,7 +500,7 @@ def test_CaseUnit_set_status_SetsStatus_status_ScenarioClock():
     assert hr24_case._status is None
 
     # WHEN
-    range_0_to_8_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=0, f_upper=8)
+    range_0_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=8)
     hr24_case.set_status(x_factheir=range_0_to_8_fact)
 
     # THEN
@@ -473,7 +515,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhen_status_IsFalse():
     no_range_case._status = False
 
     # WHEN / THEN
-    no_range_fact = factheir_shop(f_context=hr24_rope, f_state=hr24_rope)
+    no_range_fact = factheir_shop(fact_context=hr24_rope, fact_state=hr24_rope)
     assert no_range_case._get_chore_status(factheir=no_range_fact) is False
 
 
@@ -487,7 +529,9 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_True():
     range_5_to_31_case._status = True
 
     # WHEN / THEN
-    range_7_to_41_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=7, f_upper=41)
+    range_7_to_41_fact = factheir_shop(
+        hr24_rope, hr24_rope, fact_lower=7, fact_upper=41
+    )
     assert range_5_to_31_case._get_chore_status(range_7_to_41_fact)
 
 
@@ -501,7 +545,9 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_False():
     range_5_to_31_case._status = True
 
     # WHEN / THEN
-    range_7_to_21_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=7, f_upper=21)
+    range_7_to_21_fact = factheir_shop(
+        hr24_rope, hr24_rope, fact_lower=7, fact_upper=21
+    )
     assert range_5_to_31_case._get_chore_status(range_7_to_21_fact) is False
 
 
@@ -515,7 +561,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_01():
     o0_n0_d5_case._status = True
 
     # WHEN / THEN
-    range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=3, f_upper=5)
+    range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=3, fact_upper=5)
     assert o0_n0_d5_case._get_chore_status(range_3_to_5_fact) is False
 
 
@@ -529,7 +575,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_02():
     o0_n0_d5_case._status = False
 
     # WHEN / THEN
-    range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=5, f_upper=7)
+    range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=7)
     assert o0_n0_d5_case._get_chore_status(range_5_to_7_fact) is False
 
 
@@ -543,7 +589,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_01():
     o0_n0_d5_case._status = True
 
     # WHEN / THEN
-    range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=5, f_upper=7)
+    range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=7)
     assert o0_n0_d5_case._get_chore_status(range_5_to_7_fact)
 
 
@@ -557,7 +603,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_02():
     o0_n0_d5_case._status = True
 
     # WHEN / THEN
-    range_5_to_5_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=5, f_upper=5)
+    range_5_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=5)
     assert o0_n0_d5_case._get_chore_status(factheir=range_5_to_5_fact) is False
 
 
@@ -571,7 +617,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjNotNull():
     wed_case._status = True
 
     # ESTABLISH
-    factheir = factheir_shop(f_context=wk_rope, f_state=wed_rope)
+    factheir = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
 
     # THEN
     assert wed_case._get_chore_status(factheir=factheir) is False
@@ -588,7 +634,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
     assert range_2_to_7_case._chore is None
 
     # WHEN
-    range_0_to_5_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=0, f_upper=5)
+    range_0_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=5)
     range_2_to_7_case.set_status(x_factheir=range_0_to_5_fact)
 
     # THEN
@@ -603,7 +649,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
-    range_0_to_8_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=0, f_upper=8)
+    range_0_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=8)
     assert range_2_to_7_case._status is None
 
     # WHEN
@@ -613,7 +659,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     assert range_2_to_7_case._chore
 
     # ESTABLISH
-    range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=3, f_upper=5)
+    range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=3, fact_upper=5)
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_3_to_5_fact)
     # THEN
@@ -621,7 +667,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     assert range_2_to_7_case._chore is False
 
     # ESTABLISH
-    range_8_to_8_fact = factheir_shop(hr24_rope, hr24_rope, f_lower=8, f_upper=8)
+    range_8_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=8, fact_upper=8)
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_8_to_8_fact)
     assert range_2_to_7_case._status is False
@@ -639,7 +685,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
 
     # WHEN
     believer_fact = factheir_shop(
-        f_context=hr24_rope, f_state=hr24_rope, f_lower=8, f_upper=10
+        fact_context=hr24_rope, fact_state=hr24_rope, fact_lower=8, fact_upper=10
     )
     hr24_case.set_status(x_factheir=believer_fact)
 
@@ -659,7 +705,7 @@ def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
     assert o1_n1_d6_case._status is None
 
     # WHEN
-    range_6_to_6_fact = factheir_shop(wk_rope, wk_rope, f_lower=6, f_upper=6)
+    range_6_to_6_fact = factheir_shop(wk_rope, wk_rope, fact_lower=6, fact_upper=6)
     o1_n1_d6_case.set_status(x_factheir=range_6_to_6_fact)
 
     # THEN
@@ -676,7 +722,7 @@ def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
         reason_state=wk_rope, reason_divisor=6, reason_lower=1, reason_upper=1
     )
     believer_fact = factheir_shop(
-        f_context=wk_rope, f_state=wk_rope, f_lower=7, f_upper=7
+        fact_context=wk_rope, fact_state=wk_rope, fact_lower=7, fact_upper=7
     )
     assert wk_case._status is None
 

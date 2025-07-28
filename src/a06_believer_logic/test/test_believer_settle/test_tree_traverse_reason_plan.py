@@ -608,8 +608,8 @@ def test_BelieverUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     sue_believer.settle_believer()
     assert run_plan._active is False
 
-    # Fact: reason_context: (...,sem_jours) f_state: (...,sem_jours,wed)
-    sue_believer.add_fact(f_context=sem_jours_rope, f_state=wed_rope)
+    # Fact: reason_context: (...,sem_jours) fact_state: (...,sem_jours,wed)
+    sue_believer.add_fact(fact_context=sem_jours_rope, fact_state=wed_rope)
     sue_believer.settle_believer()
 
     assert casa_plan._active is False
@@ -617,7 +617,7 @@ def test_BelieverUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
 
     # WHEN
     print("before changing fact")
-    sue_believer.add_fact(f_context=sem_jours_rope, f_state=thu_rope)
+    sue_believer.add_fact(fact_context=sem_jours_rope, fact_state=thu_rope)
     print("after changing fact")
     sue_believer.settle_believer()
     assert casa_plan._active is True
