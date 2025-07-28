@@ -96,17 +96,16 @@ def get_top_level_functions(file_path) -> list[str]:
         tree = ast_parse(f.read(), filename=file_path)
 
     functions = []
-    for node in tree.body:
-        if isinstance(node, ast_FunctionDef):
-            functions.append(node.name)
-
+    functions.extend(
+        node.name for node in tree.body if isinstance(node, ast_FunctionDef)
+    )
     return functions
 
 
 def get_module_descs() -> dict[str, str]:
     src_dir = "src"
     module_descs = get_level1_dirs(src_dir)
-    module_descs.pop(-1) == "a99_jaar_linter"
+    module_descs.remove("a99_module_linter")
     return {
         module_desc: create_path(src_dir, module_desc) for module_desc in module_descs
     }
