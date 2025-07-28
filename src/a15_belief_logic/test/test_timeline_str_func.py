@@ -151,7 +151,7 @@ def test_get_fact_state_readable_str_ReturnsObj_Scenario0_Level1():
     assert dirty_fact_str == expected_str
 
 
-def test_get_reason_case_readable_str_ReturnsObj_Scenario1_TwoLevel_state():
+def test_get_fact_state_readable_str_ReturnsObj_Scenario1_TwoLevel_state():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -175,7 +175,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario1_TwoLevel_state():
     assert dirty_fact_str == expected_str
 
 
-def test_get_reason_case_readable_str_ReturnsObj_Scenario2_CaseRange():
+def test_get_fact_state_readable_str_ReturnsObj_Scenario2_CaseRange():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
