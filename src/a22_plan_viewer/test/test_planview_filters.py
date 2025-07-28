@@ -7,6 +7,7 @@ from src.a05_plan_logic.test._util.a05_str import (
 )
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v002
+from src.a15_belief_logic.reason_str_func import get_reason_case_str
 from src.a22_plan_viewer.planview_filters import (
     plan_awardees,
     plan_facts,
@@ -182,43 +183,58 @@ def test_plan_awardees_ReturnsObj_Scenario0():
     assert plan_display_dict == expected_output
 
 
-# def test_plan_reasons_ReturnsObj_Scenario0():
-#     # ESTABLISH
-#     sue_str = "Sue"
-#     amy26_str = "Amy2026"
-#     sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=33333)
-#     casa_str = "casa"
-#     sweep_str = "sweep"
-#     mop_str = "mop"
-#     cleaniness_status_str = "cleaniness_status"
-#     dirty_status_str = "status dirty"
-#     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-#     clean_status_rope = sue_believerunit.make_rope(casa_rope, cleaniness_status_str)
-#     dirty_rope = sue_believerunit.make_rope(clean_status_rope, dirty_status_str)
-#     sweep_rope = sue_believerunit.make_rope(casa_rope, sweep_str)
-#     mop_rope = sue_believerunit.make_rope(casa_rope, mop_str)
-#     sue_believerunit.add_plan(dirty_rope)
-#     sue_believerunit.add_plan(sweep_rope)
-#     sue_believerunit.add_plan(mop_rope)
-#     sue_believerunit.edit_plan_attr(
-#         sweep_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
-#     )
-#     sue_believerunit.edit_plan_attr(
-#         mop_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
-#     )
+def test_plan_reasons_ReturnsObj_Scenario0():
+    # ESTABLISH
+    sue_str = "Sue"
+    amy26_str = "Amy2026"
+    sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=33333)
+    casa_str = "casa"
+    sweep_str = "sweep"
+    mop_str = "mop"
+    cleaniness_status_str = "cleaniness_status"
+    dirty_status_str = "status dirty"
+    casa_rope = sue_believerunit.make_l1_rope(casa_str)
+    clean_status_rope = sue_believerunit.make_rope(casa_rope, cleaniness_status_str)
+    dirty_rope = sue_believerunit.make_rope(clean_status_rope, dirty_status_str)
+    sweep_rope = sue_believerunit.make_rope(casa_rope, sweep_str)
+    mop_rope = sue_believerunit.make_rope(casa_rope, mop_str)
+    sue_believerunit.add_plan(dirty_rope)
+    sue_believerunit.add_plan(sweep_rope)
+    sue_believerunit.add_plan(mop_rope)
+    sue_believerunit.edit_plan_attr(
+        sweep_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
+    )
+    sue_believerunit.edit_plan_attr(
+        mop_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
+    )
+    clean_reason = sue_believerunit.get_plan_obj(sweep_rope).get_reasonunit(
+        clean_status_rope
+    )
+    dirty_case = clean_reason.get_case(dirty_rope)
 
-#     # WHEN
-#     plan_display_dict = plan_awardees(sue_believerunit.get_dict())
+    # WHEN
+    plan_display_dict = plan_reasons(sue_believerunit.get_dict())
 
-#     # THEN
-#     expected_output = {
-#         amy26_str: {
-#             casa_str: {},sweep_str: {}, mop_str: {                     }
-#         }
-#     }
-#     print(f"{plan_display_dict=}")
-#     print(f"  {expected_output=}")
-#     assert plan_display_dict == expected_output
+    # THEN
+    expected_output = {
+        amy26_str: {
+            casa_str: {
+                sweep_str: {
+                    f"Reason {cleaniness_status_str}": {
+                        get_reason_case_str(clean_status_rope, dirty_case): ""
+                    }
+                },
+                mop_str: {
+                    f"Reason {cleaniness_status_str}": {
+                        get_reason_case_str(clean_status_rope, dirty_case): ""
+                    },
+                },
+            }
+        }
+    }
+    print(f"{plan_display_dict=}")
+    print(f"  {expected_output=}")
+    assert plan_display_dict == expected_output
 
 
 # def test_plan_facts_ReturnsObj_Scenario0():
