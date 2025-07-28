@@ -197,14 +197,14 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     wed_str = "Wed"
     old_wed_rope = sue_believer.make_rope(old_sem_jour_rope, wed_str)
     casa_plan = sue_believer.get_plan_obj(sue_believer.make_l1_rope("casa"))
-    # casa_wk_reason = reasonunit_shop(sem_jour, cases={wed_case.r_state: wed_case})
-    # nation_reason = reasonunit_shop(nation, cases={usa_case.r_state: usa_case})
+    # casa_wk_reason = reasonunit_shop(sem_jour, cases={wed_case.reason_state: wed_case})
+    # nation_reason = reasonunit_shop(nation, cases={usa_case.reason_state: usa_case})
     assert len(casa_plan.reasonunits) == 2
     assert casa_plan.reasonunits.get(old_sem_jour_rope) is not None
     wed_plan = sue_believer.get_plan_obj(old_sem_jour_rope)
     casa_sem_jour_reason = casa_plan.reasonunits.get(old_sem_jour_rope)
     assert casa_sem_jour_reason.cases.get(old_wed_rope) is not None
-    assert casa_sem_jour_reason.cases.get(old_wed_rope).r_state == old_wed_rope
+    assert casa_sem_jour_reason.cases.get(old_wed_rope).reason_state == old_wed_rope
     new_sem_jour_str = "jours des sem"
     new_sem_jour_rope = sue_believer.make_l1_rope(new_sem_jour_str)
     new_wed_rope = sue_believer.make_rope(new_sem_jour_rope, wed_str)
@@ -212,14 +212,14 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
 
     # WHEN
     # for key_x, x_reason in casa_plan.reasonunits.items():
-    #     print(f"Before {key_x=} {x_reason.r_context=}")
+    #     print(f"Before {key_x=} {x_reason.reason_context=}")
     print(f"before {wed_plan.plan_label=}")
     print(f"before {wed_plan.parent_rope=}")
     sue_believer.edit_plan_label(
         old_rope=old_sem_jour_rope, new_plan_label=new_sem_jour_str
     )
     # for key_x, x_reason in casa_plan.reasonunits.items():
-    #     print(f"after {key_x=} {x_reason.r_context=}")
+    #     print(f"after {key_x=} {x_reason.reason_context=}")
     print(f"after  {wed_plan.plan_label=}")
     print(f"after  {wed_plan.parent_rope=}")
 
@@ -228,7 +228,7 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     assert casa_plan.reasonunits.get(old_sem_jour_rope) is None
     casa_sem_jour_reason = casa_plan.reasonunits.get(new_sem_jour_rope)
     assert casa_sem_jour_reason.cases.get(new_wed_rope) is not None
-    assert casa_sem_jour_reason.cases.get(new_wed_rope).r_state == new_wed_rope
+    assert casa_sem_jour_reason.cases.get(new_wed_rope).reason_state == new_wed_rope
     assert len(casa_plan.reasonunits) == 2
 
 

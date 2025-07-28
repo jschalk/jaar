@@ -1181,7 +1181,7 @@ def test_BelieverUnit_agenda_cred_debt_IsCorrectlySet():
     #         print(f"{x_membership.group_title=}")
 
     # THEN
-    print(f"{yao_believer.get_reason_r_contexts()=}")
+    print(f"{yao_believer.get_reason_contexts()=}")
     assert len(agenda_dict) == 63
     x_awardagendametrics = AwardAgendaMetrics()
     x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
@@ -1302,7 +1302,7 @@ def test_BelieverUnit_settle_believer_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty
     yao_believer.settle_believer()
 
     # THEN
-    assert yao_believer._reason_r_contexts == set()
+    assert yao_believer._reason_contexts == set()
     assert sue_partner._fund_give == 50000000
     assert sue_partner._fund_take == 200000000
     assert bob_partner._fund_give == 150000000

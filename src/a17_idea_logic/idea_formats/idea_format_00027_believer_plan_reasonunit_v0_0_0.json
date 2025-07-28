@@ -15,10 +15,10 @@
         "believer_name": {
             "otx_key": true
         },
-        "r_context": {
+        "reason_context": {
             "otx_key": true
         },
-        "r_plan_active_requisite": {
+        "reason_active_requisite": {
             "otx_key": false
         }
     },

@@ -123,10 +123,10 @@ def plan_reasons(believerunit_dict: dict) -> dict:
         # set_in_nested_dict(result, fund_share_keys, planunit.plan_label)
 
         for reason in planunit.reasonunits.values():
-            reason_label_str = f"Reason {get_tail_label(reason.r_context)}"
+            reason_label_str = f"Reason {get_tail_label(reason.reason_context)}"
             reason_keys = copy_copy(plan_rope_labels) + [reason_label_str]
             for case in reason.cases.values():
-                case_line_display = get_reason_case_str(reason.r_context, case)
+                case_line_display = get_reason_case_str(reason.reason_context, case)
                 case_keys = copy_copy(reason_keys) + [case_line_display]
                 set_in_nested_dict(result, case_keys, "")
 

@@ -15,7 +15,7 @@
         "believer_name": {
             "otx_key": true
         },
-        "r_context_ERASE": {
+        "reason_context_ERASE": {
             "otx_key": true
         }
     },

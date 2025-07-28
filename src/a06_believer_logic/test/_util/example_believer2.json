@@ -598,12 +598,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -622,12 +622,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -647,12 +647,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -670,12 +670,12 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;x2;Sept 4th 2023 9am": {
-                                                "r_upper": 1064350680.0,
-                                                "r_lower": 1064350680.0,
-                                                "r_state": ";A;ziet;gregziet;x2;Sept 4th 2023 9am"
+                                                "reason_upper": 1064350680.0,
+                                                "reason_lower": 1064350680.0,
+                                                "reason_state": ";A;ziet;gregziet;x2;Sept 4th 2023 9am"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -690,12 +690,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -715,12 +715,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -739,12 +739,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -764,12 +764,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -788,12 +788,12 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;x;Sept 4th 2023 9am": {
-                                                        "r_upper": 1064350680.0,
-                                                        "r_lower": 1064350680.0,
-                                                        "r_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
+                                                        "reason_upper": 1064350680.0,
+                                                        "reason_lower": 1064350680.0,
+                                                        "reason_state": ";A;ziet;gregziet;x;Sept 4th 2023 9am"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -823,13 +823,13 @@
                                                     "A;ziet;gregziet;": {
                                                         "cases": {
                                                             "A;ziet;gregziet;jour": {
-                                                                "r_divisor": 1440,
-                                                                "r_upper": 360,
-                                                                "r_lower": 360,
-                                                                "r_state": ";A;ziet;gregziet;jour"
+                                                                "reason_divisor": 1440,
+                                                                "reason_upper": 360,
+                                                                "reason_lower": 360,
+                                                                "reason_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;ziet;gregziet;"
+                                                        "reason_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             },
@@ -864,13 +864,13 @@
                                                     "A;ziet;gregziet;": {
                                                         "cases": {
                                                             "A;ziet;gregziet;jour": {
-                                                                "r_divisor": 1440,
-                                                                "r_upper": 360,
-                                                                "r_lower": 360,
-                                                                "r_state": ";A;ziet;gregziet;jour"
+                                                                "reason_divisor": 1440,
+                                                                "reason_upper": 360,
+                                                                "reason_lower": 360,
+                                                                "reason_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;ziet;gregziet;"
+                                                        "reason_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             }
@@ -882,13 +882,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 360,
-                                                        "r_lower": 360,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 360,
+                                                        "reason_lower": 360,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -901,13 +901,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 450,
-                                                        "r_lower": 450,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 450,
+                                                        "reason_lower": 450,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -920,13 +920,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 525,
-                                                        "r_lower": 525,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 525,
+                                                        "reason_lower": 525,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -938,13 +938,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;jour": {
-                                                "r_divisor": 1440,
-                                                "r_upper": 360,
-                                                "r_lower": 360,
-                                                "r_state": ";A;ziet;gregziet;jour"
+                                                "reason_divisor": 1440,
+                                                "reason_upper": 360,
+                                                "reason_lower": 360,
+                                                "reason_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -959,13 +959,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 540,
-                                                        "r_lower": 540,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 540,
+                                                        "reason_lower": 540,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -978,13 +978,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 540,
-                                                        "r_lower": 540,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 540,
+                                                        "reason_lower": 540,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -999,13 +999,13 @@
                                                     "A;ziet;gregziet;": {
                                                         "cases": {
                                                             "A;ziet;gregziet;jour": {
-                                                                "r_divisor": 1440,
-                                                                "r_upper": 540,
-                                                                "r_lower": 540,
-                                                                "r_state": ";A;ziet;gregziet;jour"
+                                                                "reason_divisor": 1440,
+                                                                "reason_upper": 540,
+                                                                "reason_lower": 540,
+                                                                "reason_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;ziet;gregziet;"
+                                                        "reason_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             },
@@ -1040,13 +1040,13 @@
                                                     "A;ziet;gregziet;": {
                                                         "cases": {
                                                             "A;ziet;gregziet;jour": {
-                                                                "r_divisor": 1440,
-                                                                "r_upper": 480,
-                                                                "r_lower": 480,
-                                                                "r_state": ";A;ziet;gregziet;jour"
+                                                                "reason_divisor": 1440,
+                                                                "reason_upper": 480,
+                                                                "reason_lower": 480,
+                                                                "reason_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;ziet;gregziet;"
+                                                        "reason_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             },
@@ -1059,13 +1059,13 @@
                                                     "A;ziet;gregziet;": {
                                                         "cases": {
                                                             "A;ziet;gregziet;jour": {
-                                                                "r_divisor": 1440,
-                                                                "r_upper": 540,
-                                                                "r_lower": 540,
-                                                                "r_state": ";A;ziet;gregziet;jour"
+                                                                "reason_divisor": 1440,
+                                                                "reason_upper": 540,
+                                                                "reason_lower": 540,
+                                                                "reason_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;ziet;gregziet;"
+                                                        "reason_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             }
@@ -1082,13 +1082,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 1020,
-                                                        "r_lower": 1020,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 1020,
+                                                        "reason_lower": 1020,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -1101,13 +1101,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 540,
-                                                        "r_lower": 540,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 540,
+                                                        "reason_lower": 540,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -1121,13 +1121,13 @@
                                                     "A;ziet;gregziet;": {
                                                         "cases": {
                                                             "A;ziet;gregziet;jour": {
-                                                                "r_divisor": 1440,
-                                                                "r_upper": 540,
-                                                                "r_lower": 540,
-                                                                "r_state": ";A;ziet;gregziet;jour"
+                                                                "reason_divisor": 1440,
+                                                                "reason_upper": 540,
+                                                                "reason_lower": 540,
+                                                                "reason_state": ";A;ziet;gregziet;jour"
                                                             }
                                                         },
-                                                        "r_context": ";A;ziet;gregziet;"
+                                                        "reason_context": ";A;ziet;gregziet;"
                                                     }
                                                 }
                                             }
@@ -1139,13 +1139,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;jour": {
-                                                        "r_divisor": 1440,
-                                                        "r_upper": 540,
-                                                        "r_lower": 540,
-                                                        "r_state": ";A;ziet;gregziet;jour"
+                                                        "reason_divisor": 1440,
+                                                        "reason_upper": 540,
+                                                        "reason_lower": 540,
+                                                        "reason_state": ";A;ziet;gregziet;jour"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -1159,13 +1159,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;jour": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 1080.0,
-                                                "r_lower": 540.0,
-                                                "r_state": ";A;ziet;gregziet;jour"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 1080.0,
+                                                "reason_lower": 540.0,
+                                                "reason_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -1177,13 +1177,13 @@
                             "A;ziet;gregziet;": {
                                 "cases": {
                                     "A;ziet;gregziet;jour": {
-                                        "r_divisor": 1440,
-                                        "r_upper": 360,
-                                        "r_lower": 360,
-                                        "r_state": ";A;ziet;gregziet;jour"
+                                        "reason_divisor": 1440,
+                                        "reason_upper": 360,
+                                        "reason_lower": 360,
+                                        "reason_state": ";A;ziet;gregziet;jour"
                                     }
                                 },
-                                "r_context": ";A;ziet;gregziet;"
+                                "reason_context": ";A;ziet;gregziet;"
                             }
                         }
                     }
@@ -1211,10 +1211,10 @@
                                                             "A;Nation-States;": {
                                                                 "cases": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;": {
-                                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"
+                                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;workspace;"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Nation-States;"
+                                                                "reason_context": ";A;Nation-States;"
                                                             }
                                                         }
                                                     },
@@ -1228,10 +1228,10 @@
                                                                     "A;Interweb;": {
                                                                         "cases": {
                                                                             "A;Interweb,YahooVideo": {
-                                                                                "r_state": ";A;Interweb,YahooVideo"
+                                                                                "reason_state": ";A;Interweb,YahooVideo"
                                                                             }
                                                                         },
-                                                                        "r_context": ";A;Interweb;"
+                                                                        "reason_context": ";A;Interweb;"
                                                                     }
                                                                 }
                                                             }
@@ -1243,10 +1243,10 @@
                                                             "A;Nation-States;": {
                                                                 "cases": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;": {
-                                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
+                                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;10th floor gaarden;"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Nation-States;"
+                                                                "reason_context": ";A;Nation-States;"
                                                             }
                                                         }
                                                     },
@@ -1258,10 +1258,10 @@
                                                             "A;Nation-States;": {
                                                                 "cases": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Nation-States;"
+                                                                "reason_context": ";A;Nation-States;"
                                                             }
                                                         }
                                                     },
@@ -1273,10 +1273,10 @@
                                                             "A;Moods;": {
                                                                 "cases": {
                                                                     "A;Moods;hungry;": {
-                                                                        "r_state": ";A;Moods;hungry;"
+                                                                        "reason_state": ";A;Moods;hungry;"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Moods;"
+                                                                "reason_context": ";A;Moods;"
                                                             }
                                                         }
                                                     }
@@ -1288,10 +1288,10 @@
                                                     "A;Nation-States;": {
                                                         "cases": {
                                                             "A;Nation-States;USA;Portland OR;Downtown;Flats": {
-                                                                "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
+                                                                "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats"
                                                             }
                                                         },
-                                                        "r_context": ";A;Nation-States;"
+                                                        "reason_context": ";A;Nation-States;"
                                                     }
                                                 }
                                             },
@@ -1305,10 +1305,10 @@
                                                             "A;Nation-States;": {
                                                                 "cases": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;library": {
-                                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
+                                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;library"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Nation-States;"
+                                                                "reason_context": ";A;Nation-States;"
                                                             }
                                                         }
                                                     },
@@ -1320,10 +1320,10 @@
                                                             "A;Seasons;": {
                                                                 "cases": {
                                                                     "A;Seasons;Summer;": {
-                                                                        "r_state": ";A;Seasons;Summer;"
+                                                                        "reason_state": ";A;Seasons;Summer;"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Seasons;"
+                                                                "reason_context": ";A;Seasons;"
                                                             }
                                                         }
                                                     },
@@ -1335,10 +1335,10 @@
                                                             "A;Nation-States;": {
                                                                 "cases": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field": {
-                                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
+                                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Stott Field"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Nation-States;"
+                                                                "reason_context": ";A;Nation-States;"
                                                             }
                                                         }
                                                     },
@@ -1350,10 +1350,10 @@
                                                             "A;Nation-States;": {
                                                                 "cases": {
                                                                     "A;Nation-States;USA;Portland OR;Downtown;PSU;Pool": {
-                                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
+                                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU;Pool"
                                                                     }
                                                                 },
-                                                                "r_context": ";A;Nation-States;"
+                                                                "reason_context": ";A;Nation-States;"
                                                             }
                                                         }
                                                     }
@@ -1365,10 +1365,10 @@
                                                     "A;Nation-States;": {
                                                         "cases": {
                                                             "A;Nation-States;USA;Portland OR;Downtown;PSU": {
-                                                                "r_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
+                                                                "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;PSU"
                                                             }
                                                         },
-                                                        "r_context": ";A;Nation-States;"
+                                                        "reason_context": ";A;Nation-States;"
                                                     }
                                                 }
                                             }
@@ -1380,10 +1380,10 @@
                                             "A;Nation-States;": {
                                                 "cases": {
                                                     "A;Nation-States;USA;Portland OR;Downtown": {
-                                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown"
+                                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown"
                                                     }
                                                 },
-                                                "r_context": ";A;Nation-States;"
+                                                "reason_context": ";A;Nation-States;"
                                             }
                                         }
                                     }
@@ -1395,10 +1395,10 @@
                                     "A;Nation-States;": {
                                         "cases": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "r_state": ";A;Nation-States;USA;Portland OR"
+                                                "reason_state": ";A;Nation-States;USA;Portland OR"
                                             }
                                         },
-                                        "r_context": ";A;Nation-States;"
+                                        "reason_context": ";A;Nation-States;"
                                     }
                                 }
                             },
@@ -1410,10 +1410,10 @@
                                     "A;Nation-States;": {
                                         "cases": {
                                             "A;Nation-States;USA;Texas": {
-                                                "r_state": ";A;Nation-States;USA;Texas"
+                                                "reason_state": ";A;Nation-States;USA;Texas"
                                             }
                                         },
-                                        "r_context": ";A;Nation-States;"
+                                        "reason_context": ";A;Nation-States;"
                                     }
                                 }
                             }
@@ -1425,10 +1425,10 @@
                             "A;Nation-States;": {
                                 "cases": {
                                     "A;Nation-States;USA": {
-                                        "r_state": ";A;Nation-States;USA"
+                                        "reason_state": ";A;Nation-States;USA"
                                     }
                                 },
-                                "r_context": ";A;Nation-States;"
+                                "reason_context": ";A;Nation-States;"
                             }
                         }
                     },
@@ -1440,10 +1440,10 @@
                             "A;Nation-States;": {
                                 "cases": {
                                     "A;Nation-States;France2": {
-                                        "r_state": ";A;Nation-States;France2"
+                                        "reason_state": ";A;Nation-States;France2"
                                     }
                                 },
-                                "r_context": ";A;Nation-States;"
+                                "reason_context": ";A;Nation-States;"
                             }
                         }
                     }
@@ -1466,12 +1466,12 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_upper": 1472657760,
-                                                "r_lower": 0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_upper": 1472657760,
+                                                "reason_lower": 0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -1522,13 +1522,13 @@
                             "A;ziet;gregziet;": {
                                 "cases": {
                                     "A;ziet;gregziet;": {
-                                        "r_divisor": 10080.0,
-                                        "r_upper": 480.0,
-                                        "r_lower": 480.0,
-                                        "r_state": ";A;ziet;gregziet;"
+                                        "reason_divisor": 10080.0,
+                                        "reason_upper": 480.0,
+                                        "reason_lower": 480.0,
+                                        "reason_state": ";A;ziet;gregziet;"
                                     }
                                 },
-                                "r_context": ";A;ziet;gregziet;"
+                                "reason_context": ";A;ziet;gregziet;"
                             }
                         }
                     },
@@ -1540,10 +1540,10 @@
                             "A;Moods;": {
                                 "cases": {
                                     "A;Moods;Happy;Happy - angerish": {
-                                        "r_state": ";A;Moods;Happy;Happy - angerish"
+                                        "reason_state": ";A;Moods;Happy;Happy - angerish"
                                     }
                                 },
-                                "r_context": ";A;Moods;"
+                                "reason_context": ";A;Moods;"
                             }
                         }
                     },
@@ -1565,13 +1565,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3360.0,
-                                                "r_lower": 3360.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3360.0,
+                                                "reason_lower": 3360.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1584,13 +1584,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 420.0,
-                                                "r_lower": 420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 420.0,
+                                                "reason_lower": 420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1610,13 +1610,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 60480.0,
-                                                "r_upper": 660.0,
-                                                "r_lower": 660.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 60480.0,
+                                                "reason_upper": 660.0,
+                                                "reason_lower": 660.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1636,13 +1636,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 600.0,
-                                                "r_lower": 600.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 600.0,
+                                                "reason_lower": 600.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1663,13 +1663,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1689,13 +1689,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1715,13 +1715,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 30240.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 30240.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1741,13 +1741,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 1200.0,
-                                                "r_lower": 1200.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 1200.0,
+                                                "reason_lower": 1200.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1767,13 +1767,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 40320.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 40320.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1793,13 +1793,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 4800.0,
-                                                "r_lower": 4800.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 4800.0,
+                                                "reason_lower": 4800.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1819,13 +1819,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 9120.0,
-                                                "r_lower": 9120.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 9120.0,
+                                                "reason_lower": 9120.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1862,21 +1862,21 @@
                                     "A;casa;cleaning;laundry basket status;": {
                                         "cases": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "r_state": ";A;casa;cleaning;laundry basket status;full"
+                                                "reason_state": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         },
-                                        "r_context": ";A;casa;cleaning;laundry basket status;"
+                                        "reason_context": ";A;casa;cleaning;laundry basket status;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1896,21 +1896,21 @@
                                     "A;casa;cleaning;laundry basket status;": {
                                         "cases": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "r_state": ";A;casa;cleaning;laundry basket status;full"
+                                                "reason_state": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         },
-                                        "r_context": ";A;casa;cleaning;laundry basket status;"
+                                        "reason_context": ";A;casa;cleaning;laundry basket status;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 420.0,
-                                                "r_lower": 420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 420.0,
+                                                "reason_lower": 420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1923,21 +1923,21 @@
                                     "A;casa;cleaning;laundry basket status;": {
                                         "cases": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "r_state": ";A;casa;cleaning;laundry basket status;full"
+                                                "reason_state": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         },
-                                        "r_context": ";A;casa;cleaning;laundry basket status;"
+                                        "reason_context": ";A;casa;cleaning;laundry basket status;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 7740.0,
-                                                "r_lower": 7740.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 7740.0,
+                                                "reason_lower": 7740.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1957,21 +1957,21 @@
                                     "A;casa;cleaning;laundry basket status;": {
                                         "cases": {
                                             "A;casa;cleaning;laundry basket status;full": {
-                                                "r_state": ";A;casa;cleaning;laundry basket status;full"
+                                                "reason_state": ";A;casa;cleaning;laundry basket status;full"
                                             }
                                         },
-                                        "r_context": ";A;casa;cleaning;laundry basket status;"
+                                        "reason_context": ";A;casa;cleaning;laundry basket status;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 6300.0,
-                                                "r_lower": 6300.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 6300.0,
+                                                "reason_lower": 6300.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -1983,13 +1983,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 480.0,
-                                                "r_lower": 480.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 480.0,
+                                                "reason_lower": 480.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2009,13 +2009,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 480.0,
-                                                "r_lower": 480.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 480.0,
+                                                "reason_lower": 480.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2035,13 +2035,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 4740.0,
-                                                "r_lower": 4740.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 4740.0,
+                                                "reason_lower": 4740.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2061,13 +2061,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 9060.0,
-                                                "r_lower": 9060.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 9060.0,
+                                                "reason_lower": 9060.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2087,13 +2087,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2113,13 +2113,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 7620.0,
-                                                "r_lower": 7620.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 7620.0,
+                                                "reason_lower": 7620.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2139,13 +2139,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2165,13 +2165,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -2183,10 +2183,10 @@
                             "A;Nation-States;": {
                                 "cases": {
                                     "A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450": {
-                                        "r_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
+                                        "reason_state": ";A;Nation-States;USA;Portland OR;Downtown;Flats;Apt 450"
                                     }
                                 },
-                                "r_context": ";A;Nation-States;"
+                                "reason_context": ";A;Nation-States;"
                             }
                         }
                     },
@@ -2209,13 +2209,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;jour": {
-                                                "r_divisor": 1440,
-                                                "r_upper": 420,
-                                                "r_lower": 420,
-                                                "r_state": ";A;ziet;gregziet;jour"
+                                                "reason_divisor": 1440,
+                                                "reason_upper": 420,
+                                                "reason_lower": 420,
+                                                "reason_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2235,13 +2235,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 420.0,
-                                                "r_lower": 420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 420.0,
+                                                "reason_lower": 420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2261,13 +2261,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 80640.0,
-                                                "r_upper": 4860.0,
-                                                "r_lower": 4860.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 80640.0,
+                                                "reason_upper": 4860.0,
+                                                "reason_lower": 4860.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2287,13 +2287,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2313,13 +2313,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 420.0,
-                                                "r_lower": 420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 420.0,
+                                                "reason_lower": 420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2331,13 +2331,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 1080.0,
-                                                "r_lower": 1080.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 1080.0,
+                                                "reason_lower": 1080.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2357,13 +2357,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 80640.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 80640.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2385,13 +2385,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 9600.0,
-                                                        "r_lower": 9600.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 9600.0,
+                                                        "reason_lower": 9600.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2423,13 +2423,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 3360.0,
-                                                        "r_lower": 3360.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 3360.0,
+                                                        "reason_lower": 3360.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2441,13 +2441,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 6242.0,
-                                                        "r_lower": 6242.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 6242.0,
+                                                        "reason_lower": 6242.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2467,13 +2467,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 3420.0,
-                                                        "r_lower": 3420.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 3420.0,
+                                                        "reason_lower": 3420.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2492,13 +2492,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 7200.0,
-                                                        "r_lower": 7200.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 7200.0,
+                                                        "reason_lower": 7200.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2534,13 +2534,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 4800.0,
-                                                        "r_lower": 4800.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 4800.0,
+                                                        "reason_lower": 4800.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2560,13 +2560,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 6240.0,
-                                                        "r_lower": 6240.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 6240.0,
+                                                        "reason_lower": 6240.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -2591,13 +2591,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 420.0,
-                                                "r_lower": 420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 420.0,
+                                                "reason_lower": 420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2617,13 +2617,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2643,13 +2643,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 1440.0,
-                                                "r_upper": 420.0,
-                                                "r_lower": 420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 1440.0,
+                                                "reason_upper": 420.0,
+                                                "reason_lower": 420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2665,13 +2665,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 9180.0,
-                                                        "r_lower": 9180.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 9180.0,
+                                                        "reason_lower": 9180.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2684,13 +2684,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 9180.0,
-                                                        "r_lower": 9180.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 9180.0,
+                                                        "reason_lower": 9180.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -2709,13 +2709,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 9180.0,
-                                                "r_lower": 9180.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 9180.0,
+                                                "reason_lower": 9180.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2735,13 +2735,13 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 3420.0,
-                                                "r_lower": 3420.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 3420.0,
+                                                "reason_lower": 3420.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -2769,12 +2769,12 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
-                                                "r_upper": 1064041020.0,
-                                                "r_lower": 1064041020.0,
-                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "reason_upper": 1064041020.0,
+                                                "reason_lower": 1064041020.0,
+                                                "reason_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2794,12 +2794,12 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
-                                                "r_upper": 1064041020.0,
-                                                "r_lower": 1064041020.0,
-                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "reason_upper": 1064041020.0,
+                                                "reason_lower": 1064041020.0,
+                                                "reason_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2819,12 +2819,12 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
-                                                "r_upper": 1064041020.0,
-                                                "r_lower": 1064041020.0,
-                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "reason_upper": 1064041020.0,
+                                                "reason_lower": 1064041020.0,
+                                                "reason_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -2844,12 +2844,12 @@
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am": {
-                                                "r_upper": 1064041020.0,
-                                                "r_lower": 1064041020.0,
-                                                "r_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
+                                                "reason_upper": 1064041020.0,
+                                                "reason_lower": 1064041020.0,
+                                                "reason_state": ";A;ziet;gregziet;x2;monthly 1st business journee;2023 Feb 9am"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -2986,10 +2986,10 @@
                             "A;Interweb;": {
                                 "cases": {
                                     "A;Interweb,Faaceboook": {
-                                        "r_state": ";A;Interweb,Faaceboook"
+                                        "reason_state": ";A;Interweb,Faaceboook"
                                     }
                                 },
-                                "r_context": ";A;Interweb;"
+                                "reason_context": ";A;Interweb;"
                             }
                         }
                     },
@@ -3012,21 +3012,21 @@
                                     "A;Nation-States;": {
                                         "cases": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "r_state": ";A;Nation-States;USA;Portland OR"
+                                                "reason_state": ";A;Nation-States;USA;Portland OR"
                                             }
                                         },
-                                        "r_context": ";A;Nation-States;"
+                                        "reason_context": ";A;Nation-States;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 10080.0,
-                                                "r_upper": 5340.0,
-                                                "r_lower": 5340.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 10080.0,
+                                                "reason_upper": 5340.0,
+                                                "reason_lower": 5340.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -3046,21 +3046,21 @@
                                     "A;Nation-States;": {
                                         "cases": {
                                             "A;Nation-States;USA;Portland OR": {
-                                                "r_state": ";A;Nation-States;USA;Portland OR"
+                                                "reason_state": ";A;Nation-States;USA;Portland OR"
                                             }
                                         },
-                                        "r_context": ";A;Nation-States;"
+                                        "reason_context": ";A;Nation-States;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 60480.0,
-                                                "r_upper": 840.0,
-                                                "r_lower": 840.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 60480.0,
+                                                "reason_upper": 840.0,
+                                                "reason_lower": 840.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3072,10 +3072,10 @@
                             "A;Nation-States;": {
                                 "cases": {
                                     "A;Nation-States;USA;Portland OR": {
-                                        "r_state": ";A;Nation-States;USA;Portland OR"
+                                        "reason_state": ";A;Nation-States;USA;Portland OR"
                                     }
                                 },
-                                "r_context": ";A;Nation-States;"
+                                "reason_context": ";A;Nation-States;"
                             }
                         }
                     },
@@ -3088,13 +3088,13 @@
                             "A;ziet;gregziet;": {
                                 "cases": {
                                     "A;ziet;gregziet;jour": {
-                                        "r_divisor": 1440.0,
-                                        "r_upper": 480.0,
-                                        "r_lower": 480.0,
-                                        "r_state": ";A;ziet;gregziet;jour"
+                                        "reason_divisor": 1440.0,
+                                        "reason_upper": 480.0,
+                                        "reason_lower": 480.0,
+                                        "reason_state": ";A;ziet;gregziet;jour"
                                     }
                                 },
-                                "r_context": ";A;ziet;gregziet;"
+                                "reason_context": ";A;ziet;gregziet;"
                             }
                         }
                     },
@@ -3114,13 +3114,13 @@
                             "A;ziet;gregziet;": {
                                 "cases": {
                                     "A;ziet;gregziet;": {
-                                        "r_divisor": 1440.0,
-                                        "r_upper": 480.0,
-                                        "r_lower": 480.0,
-                                        "r_state": ";A;ziet;gregziet;"
+                                        "reason_divisor": 1440.0,
+                                        "reason_upper": 480.0,
+                                        "reason_lower": 480.0,
+                                        "reason_state": ";A;ziet;gregziet;"
                                     }
                                 },
-                                "r_context": ";A;ziet;gregziet;"
+                                "reason_context": ";A;ziet;gregziet;"
                             }
                         }
                     }
@@ -3150,10 +3150,10 @@
                                     "A;Aaron Donald objects effected by him;": {
                                         "cases": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         },
-                                        "r_context": ";A;Aaron Donald objects effected by him;"
+                                        "reason_context": ";A;Aaron Donald objects effected by him;"
                                     }
                                 }
                             }
@@ -3172,10 +3172,10 @@
                             "A;Aaron Donald objects effected by him;": {
                                 "cases": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 },
-                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                "reason_context": ";A;Aaron Donald objects effected by him;"
                             }
                         }
                     },
@@ -3190,21 +3190,21 @@
                                     "A;Aaron Donald objects effected by him;": {
                                         "cases": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         },
-                                        "r_context": ";A;Aaron Donald objects effected by him;"
+                                        "reason_context": ";A;Aaron Donald objects effected by him;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;jour": {
-                                                "r_divisor": 1440,
-                                                "r_upper": 660,
-                                                "r_lower": 660,
-                                                "r_state": ";A;ziet;gregziet;jour"
+                                                "reason_divisor": 1440,
+                                                "reason_upper": 660,
+                                                "reason_lower": 660,
+                                                "reason_state": ";A;ziet;gregziet;jour"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3223,10 +3223,10 @@
                             "A;Aaron Donald objects effected by him;": {
                                 "cases": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 },
-                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                "reason_context": ";A;Aaron Donald objects effected by him;"
                             }
                         }
                     },
@@ -3248,21 +3248,21 @@
                                     "A;Aaron Donald objects effected by him;": {
                                         "cases": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         },
-                                        "r_context": ";A;Aaron Donald objects effected by him;"
+                                        "reason_context": ";A;Aaron Donald objects effected by him;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 20160.0,
-                                                "r_upper": 4920.0,
-                                                "r_lower": 4920.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 20160.0,
+                                                "reason_upper": 4920.0,
+                                                "reason_lower": 4920.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3274,10 +3274,10 @@
                             "A;Aaron Donald objects effected by him;": {
                                 "cases": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 },
-                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                "reason_context": ";A;Aaron Donald objects effected by him;"
                             }
                         }
                     },
@@ -3290,21 +3290,21 @@
                             "A;Aaron Donald objects effected by him;": {
                                 "cases": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 },
-                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                "reason_context": ";A;Aaron Donald objects effected by him;"
                             },
                             "A;ziet;gregziet;": {
                                 "cases": {
                                     "A;ziet;gregziet;": {
-                                        "r_divisor": 1440.0,
-                                        "r_upper": 1305.0,
-                                        "r_lower": 1305.0,
-                                        "r_state": ";A;ziet;gregziet;"
+                                        "reason_divisor": 1440.0,
+                                        "reason_upper": 1305.0,
+                                        "reason_lower": 1305.0,
+                                        "reason_state": ";A;ziet;gregziet;"
                                     }
                                 },
-                                "r_context": ";A;ziet;gregziet;"
+                                "reason_context": ";A;ziet;gregziet;"
                             }
                         }
                     },
@@ -3321,13 +3321,13 @@
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 6495.0,
-                                                        "r_lower": 6480.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 6495.0,
+                                                        "reason_lower": 6480.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -3337,7 +3337,7 @@
                                 "morph": false,
                                 "reasonunits": {
                                     "A;ziet;gregziet;": {
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             },
@@ -3359,21 +3359,21 @@
                                             "A;Aaron Donald objects effected by him;": {
                                                 "cases": {
                                                     "A;Aaron Donald objects effected by him;interesting": {
-                                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 },
-                                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                                "reason_context": ";A;Aaron Donald objects effected by him;"
                                             },
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 10080.0,
-                                                        "r_upper": 6540.0,
-                                                        "r_lower": 6480.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 10080.0,
+                                                        "reason_upper": 6540.0,
+                                                        "reason_lower": 6480.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     },
@@ -3398,21 +3398,21 @@
                                             "A;Aaron Donald objects effected by him;": {
                                                 "cases": {
                                                     "A;Aaron Donald objects effected by him;interesting": {
-                                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                                     }
                                                 },
-                                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                                "reason_context": ";A;Aaron Donald objects effected by him;"
                                             },
                                             "A;ziet;gregziet;": {
                                                 "cases": {
                                                     "A;ziet;gregziet;": {
-                                                        "r_divisor": 20160.0,
-                                                        "r_upper": 600.0,
-                                                        "r_lower": 600.0,
-                                                        "r_state": ";A;ziet;gregziet;"
+                                                        "reason_divisor": 20160.0,
+                                                        "reason_upper": 600.0,
+                                                        "reason_lower": 600.0,
+                                                        "reason_state": ";A;ziet;gregziet;"
                                                     }
                                                 },
-                                                "r_context": ";A;ziet;gregziet;"
+                                                "reason_context": ";A;ziet;gregziet;"
                                             }
                                         }
                                     }
@@ -3431,10 +3431,10 @@
                                     "A;Aaron Donald objects effected by him;": {
                                         "cases": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         },
-                                        "r_context": ";A;Aaron Donald objects effected by him;"
+                                        "reason_context": ";A;Aaron Donald objects effected by him;"
                                     }
                                 }
                             }
@@ -3446,10 +3446,10 @@
                             "A;Aaron Donald objects effected by him;": {
                                 "cases": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 },
-                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                "reason_context": ";A;Aaron Donald objects effected by him;"
                             }
                         }
                     },
@@ -3470,21 +3470,21 @@
                                     "A;Aaron Donald objects effected by him;": {
                                         "cases": {
                                             "A;Aaron Donald objects effected by him;interesting": {
-                                                "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                                "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                             }
                                         },
-                                        "r_context": ";A;Aaron Donald objects effected by him;"
+                                        "reason_context": ";A;Aaron Donald objects effected by him;"
                                     },
                                     "A;ziet;gregziet;": {
                                         "cases": {
                                             "A;ziet;gregziet;": {
-                                                "r_divisor": 20160.0,
-                                                "r_upper": 600.0,
-                                                "r_lower": 600.0,
-                                                "r_state": ";A;ziet;gregziet;"
+                                                "reason_divisor": 20160.0,
+                                                "reason_upper": 600.0,
+                                                "reason_lower": 600.0,
+                                                "reason_state": ";A;ziet;gregziet;"
                                             }
                                         },
-                                        "r_context": ";A;ziet;gregziet;"
+                                        "reason_context": ";A;ziet;gregziet;"
                                     }
                                 }
                             }
@@ -3496,10 +3496,10 @@
                             "A;Aaron Donald objects effected by him;": {
                                 "cases": {
                                     "A;Aaron Donald objects effected by him;interesting": {
-                                        "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                        "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                                     }
                                 },
-                                "r_context": ";A;Aaron Donald objects effected by him;"
+                                "reason_context": ";A;Aaron Donald objects effected by him;"
                             }
                         }
                     }
@@ -3528,10 +3528,10 @@
                     "A;Aaron Donald objects effected by him;": {
                         "cases": {
                             "A;Aaron Donald objects effected by him;interesting": {
-                                "r_state": ";A;Aaron Donald objects effected by him;interesting"
+                                "reason_state": ";A;Aaron Donald objects effected by him;interesting"
                             }
                         },
-                        "r_context": ";A;Aaron Donald objects effected by him;"
+                        "reason_context": ";A;Aaron Donald objects effected by him;"
                     }
                 }
             },
@@ -5190,10 +5190,10 @@
                             "A;Moods;": {
                                 "cases": {
                                     "A;Moods;Happy": {
-                                        "r_state": ";A;Moods;Happy"
+                                        "reason_state": ";A;Moods;Happy"
                                     }
                                 },
-                                "r_context": ";A;Moods;"
+                                "reason_context": ";A;Moods;"
                             }
                         }
                     },
@@ -5205,10 +5205,10 @@
                             "A;No Movie playing;": {
                                 "cases": {
                                     "A;No Movie playing;Big Lewbwski": {
-                                        "r_state": ";A;No Movie playing;Big Lewbwski"
+                                        "reason_state": ";A;No Movie playing;Big Lewbwski"
                                     }
                                 },
-                                "r_context": ";A;No Movie playing;"
+                                "reason_context": ";A;No Movie playing;"
                             }
                         }
                     },
@@ -5222,10 +5222,10 @@
                                     "A;Moods;": {
                                         "cases": {
                                             "A;Moods;Happy": {
-                                                "r_state": ";A;Moods;Happy"
+                                                "reason_state": ";A;Moods;Happy"
                                             }
                                         },
-                                        "r_context": ";A;Moods;"
+                                        "reason_context": ";A;Moods;"
                                     }
                                 }
                             }
@@ -5237,10 +5237,10 @@
                             "A;Moods;": {
                                 "cases": {
                                     "A;Moods;Happy": {
-                                        "r_state": ";A;Moods;Happy"
+                                        "reason_state": ";A;Moods;Happy"
                                     }
                                 },
-                                "r_context": ";A;Moods;"
+                                "reason_context": ";A;Moods;"
                             }
                         }
                     },
@@ -5252,10 +5252,10 @@
                             "A;No Movie playing;": {
                                 "cases": {
                                     "A;No Movie playing;Star Wars eps IV": {
-                                        "r_state": ";A;No Movie playing;Star Wars eps IV"
+                                        "reason_state": ";A;No Movie playing;Star Wars eps IV"
                                     }
                                 },
-                                "r_context": ";A;No Movie playing;"
+                                "reason_context": ";A;No Movie playing;"
                             }
                         }
                     }
@@ -5267,10 +5267,10 @@
                     "A;Moods;": {
                         "cases": {
                             "A;Moods;Happy": {
-                                "r_state": ";A;Moods;Happy"
+                                "reason_state": ";A;Moods;Happy"
                             }
                         },
-                        "r_context": ";A;Moods;"
+                        "reason_context": ";A;Moods;"
                     }
                 }
             },
@@ -5287,10 +5287,10 @@
                                     "A;WaterExistence;": {
                                         "cases": {
                                             "A;WaterExistence;Williamette WaterShed;East Side of Watershed": {
-                                                "r_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
+                                                "reason_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed"
                                             }
                                         },
-                                        "r_context": ";A;WaterExistence;"
+                                        "reason_context": ";A;WaterExistence;"
                                     }
                                 }
                             },
@@ -5302,10 +5302,10 @@
                                     "A;WaterExistence;": {
                                         "cases": {
                                             "A;WaterExistence;Williamette WaterShed;West side of Watershed": {
-                                                "r_state": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
+                                                "reason_state": ";A;WaterExistence;Williamette WaterShed;West side of Watershed"
                                             }
                                         },
-                                        "r_context": ";A;WaterExistence;"
+                                        "reason_context": ";A;WaterExistence;"
                                     }
                                 }
                             },
@@ -5317,10 +5317,10 @@
                                     "A;WaterExistence;": {
                                         "cases": {
                                             "A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat": {
-                                                "r_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
+                                                "reason_state": ";A;WaterExistence;Williamette WaterShed;East Side of Watershed;flat"
                                             }
                                         },
-                                        "r_context": ";A;WaterExistence;"
+                                        "reason_context": ";A;WaterExistence;"
                                     }
                                 }
                             }
@@ -5332,10 +5332,10 @@
                             "A;WaterExistence;": {
                                 "cases": {
                                     "A;WaterExistence;Williamette WaterShed": {
-                                        "r_state": ";A;WaterExistence;Williamette WaterShed"
+                                        "reason_state": ";A;WaterExistence;Williamette WaterShed"
                                     }
                                 },
-                                "r_context": ";A;WaterExistence;"
+                                "reason_context": ";A;WaterExistence;"
                             }
                         }
                     }

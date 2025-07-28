@@ -35,8 +35,8 @@ def get_nodes_with_weighted_facts(
                     }
 
         evaluated_facts = {
-            fact_r_context: get_factunit_from_tuple(get_max_key(wgt_facts))
-            for fact_r_context, wgt_facts in to_eval_temp.items()
+            fact_reason_context: get_factunit_from_tuple(get_max_key(wgt_facts))
+            for fact_reason_context, wgt_facts in to_eval_temp.items()
         }
         nodes_facts_dict[node_addr] = evaluated_facts
 
@@ -50,9 +50,9 @@ def _add_to_tuple_quota_sum(
 ):
     if to_eval_temp.get(child_fact.f_context) is None:
         to_eval_temp[child_fact.f_context] = {}
-    r_context_to_eval = to_eval_temp.get(child_fact.f_context)
+    reason_context_to_eval = to_eval_temp.get(child_fact.f_context)
     child_fact_tuple = child_fact.get_tuple()
-    if r_context_to_eval.get(child_fact_tuple) is None:
-        r_context_to_eval[child_fact_tuple] = 0
-    current_fact_tuple_quota = r_context_to_eval.get(child_fact_tuple)
-    r_context_to_eval[child_fact_tuple] = child_quota + current_fact_tuple_quota
+    if reason_context_to_eval.get(child_fact_tuple) is None:
+        reason_context_to_eval[child_fact_tuple] = 0
+    current_fact_tuple_quota = reason_context_to_eval.get(child_fact_tuple)
+    reason_context_to_eval[child_fact_tuple] = child_quota + current_fact_tuple_quota

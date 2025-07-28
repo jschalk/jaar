@@ -20,7 +20,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_name_str,
     plan_label_str,
     plan_rope_str,
-    r_context_str,
+    reason_context_str,
 )
 from src.a08_believer_atom_logic.atom_main import believeratom_shop, sift_believeratom
 from src.a08_believer_atom_logic.test._util.a08_str import DELETE_str
@@ -200,10 +200,10 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reasonunit():
 
     casa_week_atom = believeratom_shop(believer_plan_reasonunit_str(), DELETE_str())
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_week_atom.set_arg(r_context_str(), week_rope)
+    casa_week_atom.set_arg(reason_context_str(), week_rope)
     clean_week_atom = believeratom_shop(believer_plan_reasonunit_str(), DELETE_str())
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
-    clean_week_atom.set_arg(r_context_str(), week_rope)
+    clean_week_atom.set_arg(reason_context_str(), week_rope)
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(clean_rope)
     assert not sift_believeratom(sue_believer, casa_week_atom)
@@ -239,14 +239,14 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_caseunit_e
         believer_plan_reason_caseunit_str(), DELETE_str()
     )
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_week_atom.set_arg(r_context_str(), week_rope)
-    casa_week_atom.set_arg("r_state", thur_rope)
+    casa_week_atom.set_arg(reason_context_str(), week_rope)
+    casa_week_atom.set_arg("reason_state", thur_rope)
     clean_week_atom = believeratom_shop(
         believer_plan_reason_caseunit_str(), DELETE_str()
     )
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
-    clean_week_atom.set_arg(r_context_str(), week_rope)
-    clean_week_atom.set_arg("r_state", thur_rope)
+    clean_week_atom.set_arg(reason_context_str(), week_rope)
+    clean_week_atom.set_arg("reason_state", thur_rope)
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(clean_rope)
     casa_plan = sue_believer.get_plan_obj(casa_rope)

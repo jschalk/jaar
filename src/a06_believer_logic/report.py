@@ -25,9 +25,9 @@ def get_believer_partnerunits_dataframe(x_believer: BelieverUnit) -> DataFrame:
 
 
 def get_believer_agenda_dataframe(
-    x_believer: BelieverUnit, r_context: RopeTerm = None
+    x_believer: BelieverUnit, reason_context: RopeTerm = None
 ) -> DataFrame:
-    agenda_dict = x_believer.get_agenda_dict(necessary_r_context=r_context)
+    agenda_dict = x_believer.get_agenda_dict(necessary_reason_context=reason_context)
     if agenda_dict == {}:
         return DataFrame(
             columns=[

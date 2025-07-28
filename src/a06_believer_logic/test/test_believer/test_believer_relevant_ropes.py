@@ -55,7 +55,7 @@ def test_BelieverUnit_get_relevant_ropes_SimpleReturnsOnlyAncestors():
     assert relevant_ropes == {root_rope, sun_rope, wk_rope}
 
 
-def test_BelieverUnit_get_relevant_ropes_ReturnsSimpleReasonUnitr_context():
+def test_BelieverUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     # ESTABLISH
     sue_believer = believerunit_shop(believer_name="Sue")
     casa_str = "casa"
@@ -74,7 +74,7 @@ def test_BelieverUnit_get_relevant_ropes_ReturnsSimpleReasonUnitr_context():
     status_rope = sue_believer.make_rope(casa_rope, status_str)
     status_plan = planunit_shop(status_str)
     sue_believer.set_plan(status_plan, parent_rope=casa_rope)
-    floor_reason = reasonunit_shop(r_context=status_rope)
+    floor_reason = reasonunit_shop(reason_context=status_rope)
     floor_reason.set_case(case=status_rope)
     sue_believer.edit_plan_attr(floor_rope, reason=floor_reason)
 
@@ -90,7 +90,7 @@ def test_BelieverUnit_get_relevant_ropes_ReturnsSimpleReasonUnitr_context():
     assert unim_rope not in relevant_ropes
 
 
-def test_BelieverUnit_get_relevant_ropes_ReturnsReasonUnitr_contextAndDescendents():
+def test_BelieverUnit_get_relevant_ropes_ReturnsReasonUnitreason_contextAndDescendents():
     # ESTABLISH
     x_believer = get_mop_with_reason_believerunit_example1()
     root_rope = to_rope(x_believer.belief_label)

@@ -75,17 +75,17 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
 
-    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_case = caseunit_shop(reason_state=wed_rope)
     wed_case._status = True
-    usa_case = caseunit_shop(r_state=usa_rope)
+    usa_case = caseunit_shop(reason_state=usa_rope)
     usa_case._status = False
 
     x1_reasonunits = {
-        wk_rope: reasonunit_shop(wk_rope, cases={wed_case.r_state: wed_case}),
-        nation_rope: reasonunit_shop(nation_rope, {usa_case.r_state: usa_case}),
+        wk_rope: reasonunit_shop(wk_rope, cases={wed_case.reason_state: wed_case}),
+        nation_rope: reasonunit_shop(nation_rope, {usa_case.reason_state: usa_case}),
     }
-    wed_cases = {wed_case.r_state: wed_case}
-    usa_cases = {usa_case.r_state: usa_case}
+    wed_cases = {wed_case.reason_state: wed_case}
+    usa_cases = {usa_case.reason_state: usa_case}
     x1_reasonheirs = {
         wk_rope: reasonheir_shop(wk_rope, wed_cases, _status=True),
         nation_rope: reasonheir_shop(nation_rope, usa_cases, _status=False),

@@ -75,7 +75,7 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_f_state_IsNone():
     assert x_planroot.factunits == {sun_believer_fact.f_context: sun_believer_fact}
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_r_lower_IsNone():
+def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_reason_lower_IsNone():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
@@ -92,7 +92,7 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_r_lower_IsNone():
     assert x_planroot.factunits.get(sem_jour_rope) == x10_factunit
 
 
-def test_BelieverUnit_set_fact_FailsToCreateWhenr_contextAndFactAreDifferenctAndFactPlanIsNot_RangeRoot():
+def test_BelieverUnit_set_fact_FailsToCreateWhenreason_contextAndFactAreDifferenctAndFactPlanIsNot_RangeRoot():
     # ESTABLISH
     bob_believer = believerunit_shop("Bob")
     ziet_str = "ziet"
@@ -145,11 +145,13 @@ def test_BelieverUnit_get_fact_ReturnsFactUnit():
     sue_believer.add_fact(situations_rope, climate_rope, create_missing_plans=True)
 
     # WHEN
-    generated_situations_r_context = sue_believer.get_fact(situations_rope)
+    generated_situations_reason_context = sue_believer.get_fact(situations_rope)
 
     # THEN
-    static_situations_r_context = sue_believer.planroot.factunits.get(situations_rope)
-    assert generated_situations_r_context == static_situations_r_context
+    static_situations_reason_context = sue_believer.planroot.factunits.get(
+        situations_rope
+    )
+    assert generated_situations_reason_context == static_situations_reason_context
 
 
 def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
@@ -164,7 +166,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_believer.set_l1_plan(clean_plan)
     c_rope = sue_believer.make_l1_rope(clean_str)
     ziet_rope = sue_believer.make_l1_rope(ziet_str)
-    # sue_believer.edit_plan_attr(c_rope, reason_r_context=ziet_rope, reason_case=ziet_rope, r_lower=5, reason_r_upper=10)
+    # sue_believer.edit_plan_attr(c_rope, reason_context=ziet_rope, reason_case=ziet_rope, reason_lower=5, reason_upper=10)
 
     sue_believer.add_fact(f_context=ziet_rope, f_state=ziet_rope, f_lower=5, f_upper=10)
     print(f"Establish a single ranged fact {sue_believer.planroot.factunits=}")
@@ -226,7 +228,7 @@ def test_BelieverUnit_get_rangeroot_factunits_ReturnsObjsScenario1():
     assert sue_believer._get_rangeroot_factunits()[0].f_context == ziet_rope
 
 
-def test_BelieverUnit_set_fact_create_missing_plans_Createsr_contextAndFact():
+def test_BelieverUnit_set_fact_create_missing_plans_Createsreason_contextAndFact():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     situations_str = "situations"

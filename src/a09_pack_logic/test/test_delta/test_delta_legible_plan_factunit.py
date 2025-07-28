@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithOutNumberArgs()
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"FactUnit '{f_state_value}' created for r_context '{f_context_value}' for plan '{rope_value}'."
+    x_str = f"FactUnit '{f_state_value}' created for reason_context '{f_context_value}' for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -50,13 +50,13 @@ def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithNumberArgs():
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    f_state_value = sue_believer.make_rope(r_context_value, "dirty")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    f_state_value = sue_believer.make_rope(reason_context_value, "dirty")
     f_upper_value = 13
     f_lower_value = 17
     swim_believeratom = believeratom_shop(dimen, INSERT_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(f_context_str(), r_context_value)
+    swim_believeratom.set_arg(f_context_str(), reason_context_value)
     swim_believeratom.set_arg(f_state_str(), f_state_value)
     swim_believeratom.set_arg(f_upper_str(), f_upper_value)
     swim_believeratom.set_arg(f_lower_str(), f_lower_value)
@@ -68,7 +68,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithNumberArgs():
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"FactUnit '{f_state_value}' created for r_context '{r_context_value}' for plan '{rope_value}'. f_lower={f_lower_value}. f_upper={f_upper_value}."
+    x_str = f"FactUnit '{f_state_value}' created for reason_context '{reason_context_value}' for plan '{rope_value}'. f_lower={f_lower_value}. f_upper={f_upper_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -80,11 +80,11 @@ def test_create_legible_list_ReturnsObj_plan_factunit_UPDATE_WithOutNumberArgs()
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    f_state_value = sue_believer.make_rope(r_context_value, "dirty")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    f_state_value = sue_believer.make_rope(reason_context_value, "dirty")
     swim_believeratom = believeratom_shop(dimen, UPDATE_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(f_context_str(), r_context_value)
+    swim_believeratom.set_arg(f_context_str(), reason_context_value)
     swim_believeratom.set_arg(f_state_str(), f_state_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
@@ -94,7 +94,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_UPDATE_WithOutNumberArgs()
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"FactUnit '{f_state_value}' updated for r_context '{r_context_value}' for plan '{rope_value}'."
+    x_str = f"FactUnit '{f_state_value}' updated for reason_context '{reason_context_value}' for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -106,13 +106,13 @@ def test_create_legible_list_ReturnsObj_plan_factunit_UPDATE_WithNumberArgs():
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    f_state_value = sue_believer.make_rope(r_context_value, "dirty")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    f_state_value = sue_believer.make_rope(reason_context_value, "dirty")
     f_upper_value = 13
     f_lower_value = 17
     swim_believeratom = believeratom_shop(dimen, UPDATE_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(f_context_str(), r_context_value)
+    swim_believeratom.set_arg(f_context_str(), reason_context_value)
     swim_believeratom.set_arg(f_state_str(), f_state_value)
     swim_believeratom.set_arg(f_upper_str(), f_upper_value)
     swim_believeratom.set_arg(f_lower_str(), f_lower_value)
@@ -124,7 +124,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_UPDATE_WithNumberArgs():
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"FactUnit '{f_state_value}' updated for r_context '{r_context_value}' for plan '{rope_value}'. f_lower={f_lower_value}. f_upper={f_upper_value}."
+    x_str = f"FactUnit '{f_state_value}' updated for reason_context '{reason_context_value}' for plan '{rope_value}'. f_lower={f_lower_value}. f_upper={f_upper_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -136,10 +136,10 @@ def test_create_legible_list_ReturnsObj_plan_factunit_DELETE():
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
     swim_believeratom = believeratom_shop(dimen, DELETE_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(f_context_str(), r_context_value)
+    swim_believeratom.set_arg(f_context_str(), reason_context_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
     x_believerdelta.set_believeratom(swim_believeratom)
@@ -148,6 +148,6 @@ def test_create_legible_list_ReturnsObj_plan_factunit_DELETE():
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"FactUnit r_context '{r_context_value}' deleted for plan '{rope_value}'."
+    x_str = f"FactUnit reason_context '{reason_context_value}' deleted for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

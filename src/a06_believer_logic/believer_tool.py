@@ -56,10 +56,10 @@ def believer_plan_reasonunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
-    x_r_context = jkeys.get("r_context")
+    x_reason_context = jkeys.get("reason_context")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).reasonunit_exists(x_r_context)
+        and x_believer.get_plan_obj(x_rope).reasonunit_exists(x_reason_context)
     )
 
 
@@ -67,13 +67,13 @@ def believer_plan_reason_caseunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_rope = jkeys.get("plan_rope")
-    x_r_context = jkeys.get("r_context")
-    x_r_state = jkeys.get("r_state")
+    x_reason_context = jkeys.get("reason_context")
+    x_reason_state = jkeys.get("reason_state")
     return bool(
         believer_plan_reasonunit_exists(x_believer, jkeys)
         and x_believer.get_plan_obj(x_rope)
-        .get_reasonunit(x_r_context)
-        .case_exists(x_r_state)
+        .get_reasonunit(x_reason_context)
+        .case_exists(x_reason_state)
     )
 
 
@@ -169,18 +169,20 @@ def believer_plan_reasonunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> ReasonUnit:
     x_rope = jkeys.get("plan_rope")
-    x_r_context = jkeys.get("r_context")
-    return x_believer.get_plan_obj(x_rope).get_reasonunit(x_r_context)
+    x_reason_context = jkeys.get("reason_context")
+    return x_believer.get_plan_obj(x_rope).get_reasonunit(x_reason_context)
 
 
 def believer_plan_reason_caseunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> CaseUnit:
     x_rope = jkeys.get("plan_rope")
-    x_r_context = jkeys.get("r_context")
-    x_r_state = jkeys.get("r_state")
+    x_reason_context = jkeys.get("reason_context")
+    x_reason_state = jkeys.get("reason_state")
     return (
-        x_believer.get_plan_obj(x_rope).get_reasonunit(x_r_context).get_case(x_r_state)
+        x_believer.get_plan_obj(x_rope)
+        .get_reasonunit(x_reason_context)
+        .get_case(x_reason_state)
     )
 
 
@@ -302,13 +304,15 @@ def set_factunits_to_believer(
     x_believer: BelieverUnit, x_facts_dict: dict[RopeTerm, dict]
 ):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
-    missing_fact_r_contexts = set(x_believer.get_missing_fact_r_contexts().keys())
-    not_missing_fact_r_contexts = set(x_believer.get_factunits_dict().keys())
-    believer_fact_r_contexts = not_missing_fact_r_contexts.union(
-        missing_fact_r_contexts
+    missing_fact_reason_contexts = set(
+        x_believer.get_missing_fact_reason_contexts().keys()
+    )
+    not_missing_fact_reason_contexts = set(x_believer.get_factunits_dict().keys())
+    believer_fact_reason_contexts = not_missing_fact_reason_contexts.union(
+        missing_fact_reason_contexts
     )
     for factunit in factunits_dict.values():
-        if factunit.f_context in believer_fact_r_contexts:
+        if factunit.f_context in believer_fact_reason_contexts:
             x_believer.add_fact(
                 factunit.f_context,
                 factunit.f_state,
@@ -319,5 +323,5 @@ def set_factunits_to_believer(
 
 
 def clear_factunits_from_believer(x_believer: BelieverUnit):
-    for fact_r_context in get_believer_root_facts_dict(x_believer).keys():
-        x_believer.del_fact(fact_r_context)
+    for fact_reason_context in get_believer_root_facts_dict(x_believer).keys():
+        x_believer.del_fact(fact_reason_context)

@@ -202,10 +202,10 @@ def test_plan_reasons_ReturnsObj_Scenario0():
     sue_believerunit.add_plan(sweep_rope)
     sue_believerunit.add_plan(mop_rope)
     sue_believerunit.edit_plan_attr(
-        sweep_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
+        sweep_rope, reason_context=clean_status_rope, reason_case=dirty_rope
     )
     sue_believerunit.edit_plan_attr(
-        mop_rope, reason_r_context=clean_status_rope, reason_case=dirty_rope
+        mop_rope, reason_context=clean_status_rope, reason_case=dirty_rope
     )
     clean_reason = sue_believerunit.get_plan_obj(sweep_rope).get_reasonunit(
         clean_status_rope

@@ -105,13 +105,13 @@
       "face_name": {},
       "belief_label": {},
       "believer_name": {},
-      "r_state": {},
-      "r_context": {}
+      "reason_state": {},
+      "reason_context": {}
     },
     "jvalues": {
-      "r_divisor": {},
-      "r_upper": {},
-      "r_lower": {}
+      "reason_divisor": {},
+      "reason_upper": {},
+      "reason_lower": {}
     }
   },
   "believer_plan_reasonunit": {
@@ -124,10 +124,10 @@
       "face_name": {},
       "belief_label": {},
       "believer_name": {},
-      "r_context": {}
+      "reason_context": {}
     },
     "jvalues": {
-      "r_plan_active_requisite": {}
+      "reason_active_requisite": {}
     }
   },
   "believer_planunit": {

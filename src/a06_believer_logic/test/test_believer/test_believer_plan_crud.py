@@ -176,9 +176,7 @@ def test_BelieverUnit_set_plan_CorrectlyAddsPlanObjWithNonDefault_knot():
     assert wed_plan.knot == bob_believer.knot
 
     # WHEN
-    bob_believer.edit_plan_attr(
-        casa_rope, reason_r_context=wk_rope, reason_case=wed_rope
-    )
+    bob_believer.edit_plan_attr(casa_rope, reason_context=wk_rope, reason_case=wed_rope)
 
     # THEN
     casa_plan = bob_believer.get_plan_obj(casa_rope)

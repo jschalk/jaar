@@ -159,10 +159,10 @@ def test_PlanUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     run_str = "run"
     run_rope = create_rope(ball_rope, run_str)
     ball_plan = planunit_shop(ball_str)
-    run_case = caseunit_shop(r_state=run_rope, r_lower=0, r_upper=7)
-    run_cases = {run_case.r_state: run_case}
+    run_case = caseunit_shop(reason_state=run_rope, reason_lower=0, reason_upper=7)
+    run_cases = {run_case.reason_state: run_case}
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
-    reasonheirs = {reasonheir.r_context: reasonheir}
+    reasonheirs = {reasonheir.reason_context: reasonheir}
     assert ball_plan._reasonheirs == {}
 
     # WHEN
@@ -179,10 +179,10 @@ def test_PlanUnit_set_reasonheirs_CorrectlyRefusesNewValues():
     ball_rope = create_rope(ball_str)
     run_str = "run"
     run_rope = create_rope(ball_rope, run_str)
-    run_case = caseunit_shop(r_state=run_rope, r_lower=0, r_upper=7)
-    run_cases = {run_case.r_state: run_case}
-    run_reasonunit = reasonunit_shop(r_context=run_rope, cases=run_cases)
-    run_reasonunits = {run_reasonunit.r_context: run_reasonunit}
+    run_case = caseunit_shop(reason_state=run_rope, reason_lower=0, reason_upper=7)
+    run_cases = {run_case.reason_state: run_case}
+    run_reasonunit = reasonunit_shop(reason_context=run_rope, cases=run_cases)
+    run_reasonunits = {run_reasonunit.reason_context: run_reasonunit}
     ball_plan = planunit_shop(ball_str, reasonunits=run_reasonunits)
     assert ball_plan.reasonunits != {}
 
@@ -191,7 +191,7 @@ def test_PlanUnit_set_reasonheirs_CorrectlyRefusesNewValues():
 
     # THEN
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
-    reasonheirs = {reasonheir.r_context: reasonheir}
+    reasonheirs = {reasonheir.reason_context: reasonheir}
     assert ball_plan._reasonheirs == reasonheirs
 
 
@@ -211,11 +211,11 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
-    wk_r_lower = 3
-    wk_r_upper = 7
+    wk_reason_lower = 3
+    wk_reason_upper = 7
     wk_addin = 10
     wk_plan = planunit_shop(wk_str, parent_rope=root_label(), addin=wk_addin)
-    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_r_lower, wk_r_upper)
+    wk_factheir = factheir_shop(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)
     tue_str = "Tue"
     tue_rope = create_rope(wk_rope, tue_str)
     tue_addin = 100
@@ -242,9 +242,9 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_plan.set_range_factheirs(x_believer_plan_dict, x_range_inheritors)
 
     # THEN
-    tue_r_lower = 113
-    tue_r_upper = 117
-    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_r_lower, tue_r_upper)
+    tue_reason_lower = 113
+    tue_reason_upper = 117
+    tue_factheir = factheir_shop(tue_rope, tue_rope, tue_reason_lower, tue_reason_upper)
     assert len(ball_plan._factheirs) == 2
     assert ball_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
@@ -257,13 +257,13 @@ def test_PlanUnit_set_reasonunit_SetsAttr():
     assert not clean_plan.reasonunits.get(dirty_str)
 
     # WHEN
-    clean_plan.set_reasonunit(reasonunit_shop(r_context=dirty_str))
+    clean_plan.set_reasonunit(reasonunit_shop(reason_context=dirty_str))
 
     # THEN
     assert clean_plan.reasonunits.get(dirty_str)
-    x_reasonunit = clean_plan.get_reasonunit(r_context=dirty_str)
+    x_reasonunit = clean_plan.get_reasonunit(reason_context=dirty_str)
     assert x_reasonunit is not None
-    assert x_reasonunit.r_context == dirty_str
+    assert x_reasonunit.reason_context == dirty_str
 
 
 def test_PlanUnit_reasonunit_exists_ReturnsObj():
@@ -274,7 +274,7 @@ def test_PlanUnit_reasonunit_exists_ReturnsObj():
     assert not clean_plan.reasonunit_exists(dirty_str)
 
     # WHEN
-    clean_plan.set_reasonunit(reasonunit_shop(r_context=dirty_str))
+    clean_plan.set_reasonunit(reasonunit_shop(reason_context=dirty_str))
 
     # THEN
     assert clean_plan.reasonunit_exists(dirty_str)
@@ -285,14 +285,14 @@ def test_PlanUnit_get_reasonunit_ReturnsObj():
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
     dirty_str = "dirty"
-    clean_plan.set_reasonunit(reasonunit_shop(r_context=dirty_str))
+    clean_plan.set_reasonunit(reasonunit_shop(reason_context=dirty_str))
 
     # WHEN
-    x_reasonunit = clean_plan.get_reasonunit(r_context=dirty_str)
+    x_reasonunit = clean_plan.get_reasonunit(reason_context=dirty_str)
 
     # THEN
     assert x_reasonunit is not None
-    assert x_reasonunit.r_context == dirty_str
+    assert x_reasonunit.reason_context == dirty_str
 
 
 def test_PlanUnit_get_reasonheir_ReturnsObj():
@@ -300,16 +300,16 @@ def test_PlanUnit_get_reasonheir_ReturnsObj():
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
     dirty_str = "dirty"
-    x_reasonheir = reasonheir_shop(r_context=dirty_str)
-    x_reasonheirs = {x_reasonheir.r_context: x_reasonheir}
+    x_reasonheir = reasonheir_shop(reason_context=dirty_str)
+    x_reasonheirs = {x_reasonheir.reason_context: x_reasonheir}
     clean_plan.set_reasonheirs(reasonheirs=x_reasonheirs, believer_plan_dict={})
 
     # WHEN
-    z_reasonheir = clean_plan.get_reasonheir(r_context=dirty_str)
+    z_reasonheir = clean_plan.get_reasonheir(reason_context=dirty_str)
 
     # THEN
     assert z_reasonheir is not None
-    assert z_reasonheir.r_context == dirty_str
+    assert z_reasonheir.reason_context == dirty_str
 
 
 def test_PlanUnit_get_reasonheir_ReturnsNone():
@@ -318,12 +318,12 @@ def test_PlanUnit_get_reasonheir_ReturnsNone():
     clean_plan = planunit_shop(clean_str)
     dirty_str = "dirty"
     x_reasonheir = reasonheir_shop(dirty_str)
-    x_reasonheirs = {x_reasonheir.r_context: x_reasonheir}
+    x_reasonheirs = {x_reasonheir.reason_context: x_reasonheir}
     clean_plan.set_reasonheirs(reasonheirs=x_reasonheirs, believer_plan_dict={})
 
     # WHEN
     test6_str = "test6"
-    reason_heir_test6 = clean_plan.get_reasonheir(r_context=test6_str)
+    reason_heir_test6 = clean_plan.get_reasonheir(reason_context=test6_str)
 
     # THEN
     assert reason_heir_test6 is None
@@ -386,11 +386,11 @@ def test_PlanUnit_factunit_exists_ReturnsObj():
 # clean_str = "clean"
 # clean_plan = planunit_shop(clean_str)
 #     clean_plan.set_reason_case(
-#         r_context="testing1,sec",
+#         reason_context="testing1,sec",
 #         case="testing1,sec,next",
-#         r_lower=None,
-#         r_upper=None,
-#         r_divisor=None,
+#         reason_lower=None,
+#         reason_upper=None,
+#         reason_divisor=None,
 #     )
 #     clean_plan._active_hx = {0: True, 4: False}
 #     assert clean_plan._active_hx != {0: False}

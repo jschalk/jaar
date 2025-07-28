@@ -48,15 +48,15 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     sue_texas_hubunit.save_vision_believer(zia_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit)
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is not None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is not None
 
     # WHEN
     listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit)
 
     # THEN
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is None
 
 
 def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
@@ -89,9 +89,9 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     sue_texas_hubunit.save_vision_believer(zia_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit)
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is not None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is not None
     assert new_yao_vision.get_fact(eat_rope()) is None
 
     # WHEN
@@ -128,9 +128,9 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(eat_rope()) is None
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit)
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is not None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is not None
 
     # WHEN
     listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit)
@@ -168,11 +168,11 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(eat_rope()) is None
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit)
-    print(f"{new_yao_vision.get_missing_fact_r_contexts().keys()=}")
+    print(f"{new_yao_vision.get_missing_fact_reason_contexts().keys()=}")
     print(f"{new_yao_vision.planroot.factunits.keys()=}")
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is not None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is not None
 
     # WHEN
     listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit)
@@ -208,9 +208,9 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
 
     new_yao_vision = create_listen_basis(yao_duty)
     assert new_yao_vision.get_fact(eat_rope()) is None
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision, sue_texas_hubunit)
-    assert new_yao_vision.get_missing_fact_r_contexts().get(eat_rope()) is not None
+    assert new_yao_vision.get_missing_fact_reason_contexts().get(eat_rope()) is not None
 
     # WHEN
     listen_to_facts_duty_vision(new_yao_vision, sue_texas_hubunit)
@@ -250,11 +250,13 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 
     new_yao_vision1 = create_listen_basis(yao_duty)
     assert new_yao_vision1.get_fact(eat_rope()) is None
-    assert new_yao_vision1.get_missing_fact_r_contexts().get(eat_rope()) is None
+    assert new_yao_vision1.get_missing_fact_reason_contexts().get(eat_rope()) is None
     listen_to_agendas_duty_vision(new_yao_vision1, sue_texas_hubunit)
-    print(f"{new_yao_vision1.get_missing_fact_r_contexts().keys()=}")
+    print(f"{new_yao_vision1.get_missing_fact_reason_contexts().keys()=}")
     print(f"{new_yao_vision1.planroot.factunits.keys()=}")
-    assert new_yao_vision1.get_missing_fact_r_contexts().get(eat_rope()) is not None
+    assert (
+        new_yao_vision1.get_missing_fact_reason_contexts().get(eat_rope()) is not None
+    )
 
     # WHEN
     listen_to_facts_duty_vision(new_yao_vision1, sue_texas_hubunit)
@@ -309,7 +311,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     sue_speaker.set_plan(planunit_shop(dirty_str), status_rope)
 #     sue_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
 #     sue_speaker.edit_plan_attr(
-#         sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
+#         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
 #     )
 #     sweep_plan = sue_speaker.get_plan_obj(sweep_rope)
 #     sweep_plan.laborunit.set_laborlink(yao_str)
@@ -321,19 +323,19 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     yao_duty.add_partnerunit(sue_str)
 #     new_yao_vision = create_listen_basis(yao_duty)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
-#     # assert new_yao_vision.get_missing_fact_r_contexts().get(status_rope) is None
+#     # assert new_yao_vision.get_missing_fact_reason_contexts().get(status_rope) is None
 #     listen_to_agendas_duty_vision(new_yao_vision, texas_hubunit)
 #     print(f"{new_yao_vision.get_plan_dict().keys()=}")
-#     assert new_yao_vision.get_missing_fact_r_contexts().get(status_rope) is not None
+#     assert new_yao_vision.get_missing_fact_reason_contexts().get(status_rope) is not None
 
-#     # assert new_yao_vision.get_missing_fact_r_contexts().keys() == {status_rope}
+#     # assert new_yao_vision.get_missing_fact_reason_contexts().keys() == {status_rope}
 #     # sue_speaker.add_fact(status_rope, clean_rope, create_missing_plans=True)
 
 #     # # WHEN
 #     # listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_f_contexts)
 
 #     # # THEN
-#     # assert len(yao_duty.get_missing_fact_r_contexts().keys()) == 0
+#     # assert len(yao_duty.get_missing_fact_reason_contexts().keys()) == 0
 #     assert 1 == 3
 
 
@@ -363,25 +365,25 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactf_stateedFromBelieversSpeakerD
 #     yao_duty.set_plan(planunit_shop(dirty_str), status_rope)
 #     yao_duty.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
 #     yao_duty.edit_plan_attr(
-#         sweep_rope, reason_r_context=status_rope, reason_case=dirty_rope
+#         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
 #     )
 #     yao_duty.edit_plan_attr(
-#         sweep_rope, reason_r_context=fridge_rope, reason_case=running_rope
+#         sweep_rope, reason_context=fridge_rope, reason_case=running_rope
 #     )
-#     assert len(yao_duty.get_missing_fact_r_contexts()) == 2
+#     assert len(yao_duty.get_missing_fact_reason_contexts()) == 2
 #     yao_duty.add_fact(status_rope, dirty_rope)
-#     assert len(yao_duty.get_missing_fact_r_contexts()) == 1
+#     assert len(yao_duty.get_missing_fact_reason_contexts()) == 1
 #     assert yao_duty.get_fact(status_rope).f_state == dirty_rope
 
 #     # WHEN
 #     yao_vision = believerunit_shop(yao_str)
 #     yao_vision.add_fact(status_rope, clean_rope, create_missing_plans=True)
 #     yao_vision.add_fact(fridge_rope, running_rope, create_missing_plans=True)
-#     missing_fact_f_contexts = list(yao_duty.get_missing_fact_r_contexts().keys())
+#     missing_fact_f_contexts = list(yao_duty.get_missing_fact_reason_contexts().keys())
 #     listen_to_facts_duty_vision(yao_duty, yao_vision, missing_fact_f_contexts)
 
 #     # THEN
-#     assert len(yao_duty.get_missing_fact_r_contexts()) == 0
+#     assert len(yao_duty.get_missing_fact_reason_contexts()) == 0
 #     # did not grab speaker's factunit
 #     assert yao_duty.get_fact(status_rope).f_state == dirty_rope
 #     # grabed speaker's factunit

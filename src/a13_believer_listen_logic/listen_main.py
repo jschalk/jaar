@@ -140,8 +140,8 @@ def migrate_all_facts(src_listener: BelieverUnit, dst_listener: BelieverUnit):
         f_context_rope = x_factunit.f_context
         f_state_rope = x_factunit.f_state
         if dst_listener.plan_exists(f_context_rope) is False:
-            r_context_plan = src_listener.get_plan_obj(f_context_rope)
-            dst_listener.set_plan(r_context_plan, r_context_plan.parent_rope)
+            reason_context_plan = src_listener.get_plan_obj(f_context_rope)
+            dst_listener.set_plan(reason_context_plan, reason_context_plan.parent_rope)
         if dst_listener.plan_exists(f_state_rope) is False:
             f_state_plan = src_listener.get_plan_obj(f_state_rope)
             dst_listener.set_plan(f_state_plan, f_state_plan.parent_rope)
@@ -151,12 +151,12 @@ def migrate_all_facts(src_listener: BelieverUnit, dst_listener: BelieverUnit):
 def listen_to_speaker_fact(
     listener: BelieverUnit,
     speaker: BelieverUnit,
-    missing_fact_r_contexts: list[RopeTerm] = None,
+    missing_fact_reason_contexts: list[RopeTerm] = None,
 ) -> BelieverUnit:
-    if missing_fact_r_contexts is None:
-        missing_fact_r_contexts = list(listener.get_missing_fact_r_contexts())
-    for missing_fact_r_context in missing_fact_r_contexts:
-        x_factunit = speaker.get_fact(missing_fact_r_context)
+    if missing_fact_reason_contexts is None:
+        missing_fact_reason_contexts = list(listener.get_missing_fact_reason_contexts())
+    for missing_fact_reason_context in missing_fact_reason_contexts:
+        x_factunit = speaker.get_fact(missing_fact_reason_context)
         if x_factunit is not None:
             listener.add_fact(
                 f_context=x_factunit.f_context,

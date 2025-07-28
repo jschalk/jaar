@@ -194,8 +194,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_r_context = 2
-    x_r_plan_active_requisite = 3
+    x_reason_context = 2
+    x_reason_active_requisite = 3
     x__chore = 4
     x__status = 5
     x__rplan_active_value = 6
@@ -203,8 +203,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "r_context": x_r_context,
-        "r_plan_active_requisite": x_r_plan_active_requisite,
+        "reason_context": x_reason_context,
+        "reason_active_requisite": x_reason_active_requisite,
         "_chore": x__chore,
         "_status": x__status,
         "_rplan_active_value": x__rplan_active_value,
@@ -257,22 +257,22 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_r_context = 2
-    x_r_state = 3
-    x_r_upper = 4
-    x_r_lower = 5
-    x_r_divisor = 6
+    x_reason_context = 2
+    x_reason_state = 3
+    x_reason_upper = 4
+    x_reason_lower = 5
+    x_reason_divisor = 6
     x__chore = 7
     x__status = 8
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "r_context": x_r_context,
-        "r_state": x_r_state,
-        "r_upper": x_r_upper,
-        "r_lower": x_r_lower,
-        "r_divisor": x_r_divisor,
+        "reason_context": x_reason_context,
+        "reason_state": x_reason_state,
+        "reason_upper": x_reason_upper,
+        "reason_lower": x_reason_lower,
+        "reason_divisor": x_reason_divisor,
         "_chore": x__chore,
         "_status": x__status,
     }

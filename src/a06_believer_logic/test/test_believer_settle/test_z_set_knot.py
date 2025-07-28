@@ -145,7 +145,7 @@ def test_believer_set_knot_CorrectlyModifiesReasonUnit():
     _8am_str = "8am"
     semicolon_8am_rope = zia_believer.make_rope(semicolon_ziet_rope, _8am_str)
 
-    semicolon_ziet_reasonunit = reasonunit_shop(r_context=semicolon_ziet_rope)
+    semicolon_ziet_reasonunit = reasonunit_shop(reason_context=semicolon_ziet_rope)
     semicolon_ziet_reasonunit.set_case(semicolon_8am_rope)
 
     semicolon_casa_rope = zia_believer.make_l1_rope(casa_str)

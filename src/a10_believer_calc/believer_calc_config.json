@@ -276,11 +276,11 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "r_state": {
+            "reason_state": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "r_context": {
+            "reason_context": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             }
@@ -296,15 +296,15 @@
             }
         },
         "jvalues": {
-            "r_divisor": {
+            "reason_divisor": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "r_upper": {
+            "reason_upper": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "r_lower": {
+            "reason_lower": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -325,7 +325,7 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "r_context": {
+            "reason_context": {
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             }
@@ -345,7 +345,7 @@
             }
         },
         "jvalues": {
-            "r_plan_active_requisite": {
+            "reason_active_requisite": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             }

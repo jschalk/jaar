@@ -22,10 +22,10 @@ def test_BelieverUnit_ReasonUnits_create():
     wed_str = "Wed"
     wed_rope = sue_believer.make_rope(sem_jour_rope, wed_str)
 
-    wed_case = caseunit_shop(r_state=wed_rope)
-    casa_wk_reason = reasonunit_shop(sem_jour_rope, {wed_case.r_state: wed_case})
-    print(f"{type(casa_wk_reason.r_context)=}")
-    print(f"{casa_wk_reason.r_context=}")
+    wed_case = caseunit_shop(reason_state=wed_rope)
+    casa_wk_reason = reasonunit_shop(sem_jour_rope, {wed_case.reason_state: wed_case})
+    print(f"{type(casa_wk_reason.reason_context)=}")
+    print(f"{casa_wk_reason.reason_context=}")
 
     # WHEN
     sue_believer.edit_plan_attr(casa_rope, reason=casa_wk_reason)
@@ -60,7 +60,7 @@ def test_BelieverUnit_edit_plan_attr_reasonunit_CorrectlySets_knot():
     assert wk_reasonunit.knot == sue_believer.knot
 
 
-def test_BelieverUnit_edit_plan_attr_reason_r_context_CorrectlySets_knot():
+def test_BelieverUnit_edit_plan_attr_reason_context_CorrectlySets_knot():
     # ESTABLISH
     slash_str = "/"
     bob_believer = believerunit_shop("Bob", knot=slash_str)
@@ -79,9 +79,7 @@ def test_BelieverUnit_edit_plan_attr_reason_r_context_CorrectlySets_knot():
     assert wed_plan.knot == bob_believer.knot
 
     # WHEN
-    bob_believer.edit_plan_attr(
-        casa_rope, reason_r_context=wk_rope, reason_case=wed_rope
-    )
+    bob_believer.edit_plan_attr(casa_rope, reason_context=wk_rope, reason_case=wed_rope)
 
     # THEN
     casa_plan = bob_believer.get_plan_obj(casa_rope)
@@ -101,12 +99,12 @@ def test_BelieverUnit_set_reasonunits_status():
     wed_str = "Wed"
     wed_rope = sue_believer.make_rope(sem_jour_rope, wed_str)
 
-    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_case = caseunit_shop(reason_state=wed_rope)
     casa_wk_reason = reasonunit_shop(
-        r_context=sem_jour_rope, cases={wed_case.r_state: wed_case}
+        reason_context=sem_jour_rope, cases={wed_case.reason_state: wed_case}
     )
-    print(f"{type(casa_wk_reason.r_context)=}")
-    print(f"{casa_wk_reason.r_context=}")
+    print(f"{type(casa_wk_reason.reason_context)=}")
+    print(f"{casa_wk_reason.reason_context=}")
 
     # WHEN
     sue_believer.edit_plan_attr(casa_rope, reason=casa_wk_reason)
@@ -156,19 +154,19 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInherited_v1():
     assert len(casa_plan.get_reasonheir(wk_rope).cases) == 1
     assert casa_plan.get_reasonheir(wk_rope).get_case(tue_rope)
     case_tue = casa_plan.get_reasonheir(wk_rope).get_case(tue_rope)
-    tue_case = caseunit_shop(r_state=tue_rope)
+    tue_case = caseunit_shop(reason_state=tue_rope)
     tue_case._status = False
     tue_case._chore = False
-    cases = {tue_case.r_state: tue_case}
+    cases = {tue_case.reason_state: tue_case}
     built_wk_reasonheir = reasonheir_shop(
-        r_context=wk_rope,
+        reason_context=wk_rope,
         cases=cases,
         _status=False,
         _rplan_active_value=True,
     )
-    tue_chore = built_wk_reasonheir.cases.get(case_tue.r_state)._chore
+    tue_chore = built_wk_reasonheir.cases.get(case_tue.reason_state)._chore
     assert case_tue._chore == tue_chore
-    assert case_tue == built_wk_reasonheir.cases[case_tue.r_state]
+    assert case_tue == built_wk_reasonheir.cases[case_tue.reason_state]
     wk_reasonheir = casa_plan.get_reasonheir(wk_rope)
     assert wk_reasonheir.cases == built_wk_reasonheir.cases
     assert casa_plan.get_reasonheir(wk_rope) == built_wk_reasonheir
@@ -184,14 +182,14 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     wed_str = "Wed"
     wed_rope = a4_believer.make_rope(wk_rope, wed_str)
 
-    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_case = caseunit_shop(reason_state=wed_rope)
     wed_case._status = False
     wed_case._chore = False
 
-    cases_x = {wed_case.r_state: wed_case}
-    casa_wk_build_reasonunit = reasonunit_shop(r_context=wk_rope, cases=cases_x)
+    cases_x = {wed_case.reason_state: wed_case}
+    casa_wk_build_reasonunit = reasonunit_shop(reason_context=wk_rope, cases=cases_x)
     casa_wk_built_reasonheir = reasonheir_shop(
-        r_context=wk_rope,
+        reason_context=wk_rope,
         cases=cases_x,
         _status=False,
         _rplan_active_value=True,
@@ -218,11 +216,11 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
 
     # 2
     rla_wk_reasonheir = rla_plan._reasonheirs[wk_rope]
-    assert rla_wk_reasonheir.r_context == casa_wk_built_reasonheir.r_context
+    assert rla_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert rla_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        rla_wk_reasonheir.r_plan_active_requisite
-        == casa_wk_built_reasonheir.r_plan_active_requisite
+        rla_wk_reasonheir.reason_active_requisite
+        == casa_wk_built_reasonheir.reason_active_requisite
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
@@ -231,11 +229,11 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
 
     # 3
     cost_wk_reasonheir = cost_plan._reasonheirs[wk_rope]
-    assert cost_wk_reasonheir.r_context == casa_wk_built_reasonheir.r_context
+    assert cost_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert cost_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        cost_wk_reasonheir.r_plan_active_requisite
-        == casa_wk_built_reasonheir.r_plan_active_requisite
+        cost_wk_reasonheir.reason_active_requisite
+        == casa_wk_built_reasonheir.reason_active_requisite
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
@@ -252,13 +250,13 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
     wed_str = "Wed"
     wed_rope = a4_believer.make_rope(wk_rope, wed_str)
 
-    wed_case = caseunit_shop(r_state=wed_rope)
+    wed_case = caseunit_shop(reason_state=wed_rope)
     wed_case._status = False
     wed_case._chore = False
-    cases = {wed_case.r_state: wed_case}
+    cases = {wed_case.reason_state: wed_case}
     casa_wk_build_reasonunit = reasonunit_shop(wk_rope, cases=cases)
     casa_wk_built_reasonheir = reasonheir_shop(
-        r_context=wk_rope,
+        reason_context=wk_rope,
         cases=cases,
         _status=False,
         _rplan_active_value=True,
@@ -291,11 +289,11 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
 
     # 2
     rla_wk_reasonheir = rla_plan._reasonheirs[wk_rope]
-    assert rla_wk_reasonheir.r_context == casa_wk_built_reasonheir.r_context
+    assert rla_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert rla_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        rla_wk_reasonheir.r_plan_active_requisite
-        == casa_wk_built_reasonheir.r_plan_active_requisite
+        rla_wk_reasonheir.reason_active_requisite
+        == casa_wk_built_reasonheir.reason_active_requisite
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
@@ -304,11 +302,11 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
 
     # 3
     cost_wk_reasonheir = cost_plan._reasonheirs[wk_rope]
-    assert cost_wk_reasonheir.r_context == casa_wk_built_reasonheir.r_context
+    assert cost_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert cost_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
-        cost_wk_reasonheir.r_plan_active_requisite
-        == casa_wk_built_reasonheir.r_plan_active_requisite
+        cost_wk_reasonheir.reason_active_requisite
+        == casa_wk_built_reasonheir.reason_active_requisite
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
@@ -327,51 +325,52 @@ def test_BelieverUnit_ReasonUnits_set_UnCoupledMethod():
     wed_rope = sue_believer.make_rope(wk_rope, wed_str)
 
     # WHEN
-    sue_believer.edit_plan_attr(
-        casa_rope, reason_r_context=wk_rope, reason_case=wed_rope
-    )
+    sue_believer.edit_plan_attr(casa_rope, reason_context=wk_rope, reason_case=wed_rope)
 
     # THEN
     casa_plan1 = sue_believer.get_plan_obj(casa_rope)
     assert casa_plan1.reasonunits is not None
     print(casa_plan1.reasonunits)
     assert casa_plan1.reasonunits[wk_rope] is not None
-    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].r_lower is None
-    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].r_upper is None
+    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].reason_lower is None
+    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].reason_upper is None
 
     casa_wk_reason1 = reasonunit_shop(wk_rope)
     casa_wk_reason1.set_case(case=wed_rope)
-    print(f" {type(casa_wk_reason1.r_context)=}")
-    print(f" {casa_wk_reason1.r_context=}")
+    print(f" {type(casa_wk_reason1.reason_context)=}")
+    print(f" {casa_wk_reason1.reason_context=}")
     assert casa_plan1.reasonunits[wk_rope] == casa_wk_reason1
 
     # ESTABLISH
-    r_divisor_x = 34
-    x_r_lower = 12
-    x_r_upper = 12
+    reason_divisor_x = 34
+    x_reason_lower = 12
+    x_reason_upper = 12
 
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=wk_rope,
+        reason_context=wk_rope,
         reason_case=wed_rope,
-        r_divisor=r_divisor_x,
-        r_lower=x_r_lower,
-        reason_r_upper=x_r_upper,
+        reason_divisor=reason_divisor_x,
+        reason_lower=x_reason_lower,
+        reason_upper=x_reason_upper,
     )
 
     # THEN
-    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].r_lower == 12
-    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].r_upper == 12
+    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].reason_lower == 12
+    assert casa_plan1.reasonunits[wk_rope].cases[wed_rope].reason_upper == 12
 
     wed_case2 = caseunit_shop(
-        wed_rope, r_divisor=r_divisor_x, r_lower=x_r_lower, r_upper=x_r_upper
+        wed_rope,
+        reason_divisor=reason_divisor_x,
+        reason_lower=x_reason_lower,
+        reason_upper=x_reason_upper,
     )
     casa_wk_reason2 = reasonunit_shop(
-        r_context=wk_rope, cases={wed_case2.r_state: wed_case2}
+        reason_context=wk_rope, cases={wed_case2.reason_state: wed_case2}
     )
-    print(f"{type(casa_wk_reason2.r_context)=}")
-    print(f"{casa_wk_reason2.r_context=}")
+    print(f"{type(casa_wk_reason2.reason_context)=}")
+    print(f"{casa_wk_reason2.reason_context=}")
     assert casa_plan1.reasonunits[wk_rope] == casa_wk_reason2
 
     # WHEN
@@ -379,11 +378,11 @@ def test_BelieverUnit_ReasonUnits_set_UnCoupledMethod():
     thu_rope = sue_believer.make_rope(wk_rope, thu_str)
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=wk_rope,
+        reason_context=wk_rope,
         reason_case=thu_rope,
-        r_divisor=r_divisor_x,
-        r_lower=x_r_lower,
-        reason_r_upper=x_r_upper,
+        reason_divisor=reason_divisor_x,
+        reason_lower=x_reason_lower,
+        reason_upper=x_reason_upper,
     )
 
     # THEN
@@ -405,22 +404,22 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithDenomSetsCaseDivision():
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=ziet_rope,
+        reason_context=ziet_rope,
         reason_case=wk_rope,
-        r_lower=2,
-        reason_r_upper=5,
-        r_divisor=None,
+        reason_lower=2,
+        reason_upper=5,
+        reason_divisor=None,
     )
 
     # THEN
     casa_plan1 = sue_believer.get_plan_obj(casa_rope)
     assert casa_plan1.reasonunits[ziet_rope] is not None
-    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].r_divisor == 7
-    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].r_lower == 2
-    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].r_upper == 5
+    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].reason_divisor == 7
+    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].reason_lower == 2
+    assert casa_plan1.reasonunits[ziet_rope].cases[wk_rope].reason_upper == 5
 
 
-def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCaser_lower_r_upper():
+def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCasereason_lower_reason_upper():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     casa = "casa"
@@ -437,19 +436,19 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCaser_lower_r_up
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=ziet_rope,
+        reason_context=ziet_rope,
         reason_case=rus_war_rope,
-        r_lower=None,
-        reason_r_upper=None,
-        r_divisor=None,
+        reason_lower=None,
+        reason_upper=None,
+        reason_divisor=None,
     )
 
     # THEN
     casa_plan1 = sue_believer.get_plan_obj(casa_rope)
     assert casa_plan1.reasonunits[ziet_rope] is not None
-    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].r_divisor is None
-    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].r_lower == 22
-    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].r_upper == 34
+    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].reason_divisor is None
+    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].reason_lower == 22
+    assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].reason_upper == 34
 
 
 def test_BelieverUnit_ReasonUnits_edit_plan_attr_CorrectlyDeletes_ReasonUnits_And_CaseUnits():
@@ -460,12 +459,12 @@ def test_BelieverUnit_ReasonUnits_edit_plan_attr_CorrectlyDeletes_ReasonUnits_An
     wed_rope = sue_believer.make_rope(sem_jour_rope, "Wed")
 
     sue_believer.edit_plan_attr(
-        casa_rope, reason_r_context=sem_jour_rope, reason_case=wed_rope
+        casa_rope, reason_context=sem_jour_rope, reason_case=wed_rope
     )
     thu_rope = sue_believer.make_rope(sem_jour_rope, "Thur")
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=sem_jour_rope,
+        reason_context=sem_jour_rope,
         reason_case=thu_rope,
     )
     casa_plan1 = sue_believer.get_plan_obj(casa_rope)
@@ -474,8 +473,8 @@ def test_BelieverUnit_ReasonUnits_edit_plan_attr_CorrectlyDeletes_ReasonUnits_An
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_del_case_r_context=sem_jour_rope,
-        reason_del_case_r_state=thu_rope,
+        reason_del_case_reason_context=sem_jour_rope,
+        reason_del_case_reason_state=thu_rope,
     )
 
     # THEN
@@ -484,8 +483,8 @@ def test_BelieverUnit_ReasonUnits_edit_plan_attr_CorrectlyDeletes_ReasonUnits_An
     # WHEN
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_del_case_r_context=sem_jour_rope,
-        reason_del_case_r_state=wed_rope,
+        reason_del_case_reason_context=sem_jour_rope,
+        reason_del_case_reason_state=wed_rope,
     )
 
     # THEN
@@ -505,12 +504,12 @@ def test_BelieverUnit_ReasonUnits_del_reason_case_UncoupledMethod2():
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        casa_plan1.del_reasonunit_r_context(sem_jours_rope)
+        casa_plan1.del_reasonunit_reason_context(sem_jours_rope)
     assert str(excinfo.value) == f"No ReasonUnit at '{sem_jours_rope}'"
 
 
-def test_BelieverUnit_edit_plan_attr_believerIsAbleToEdit_r_plan_active_requisite_AnyPlanIfInvaildThrowsError():
-    # _r_plan_active_requisite: str = None
+def test_BelieverUnit_edit_plan_attr_believerIsAbleToEdit_reason_active_requisite_AnyPlanIfInvaildThrowsError():
+    # _reason_active_requisite: str = None
     # must be 1 of 3: bool: True, bool: False, str="Set to Ignore"
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
@@ -527,44 +526,44 @@ def test_BelieverUnit_edit_plan_attr_believerIsAbleToEdit_r_plan_active_requisit
     # WHEN
     sue_believer.edit_plan_attr(
         run_rope,
-        reason_r_context=casa_rope,
-        reason_r_plan_active_requisite=True,
+        reason_context=casa_rope,
+        reason_plan_active_requisite=True,
     )
 
     # THEN
     assert len(run_plan.reasonunits) == 1
     reasonunit_casa = run_plan.reasonunits.get(casa_rope)
-    assert reasonunit_casa.r_context == casa_rope
+    assert reasonunit_casa.reason_context == casa_rope
     assert len(reasonunit_casa.cases) == 0
-    assert reasonunit_casa.r_plan_active_requisite is True
+    assert reasonunit_casa.reason_active_requisite is True
 
     # WHEN
     sue_believer.edit_plan_attr(
         run_rope,
-        reason_r_context=casa_rope,
-        reason_r_plan_active_requisite=False,
+        reason_context=casa_rope,
+        reason_plan_active_requisite=False,
     )
 
     # THEN
     assert len(run_plan.reasonunits) == 1
     reasonunit_casa = run_plan.reasonunits.get(casa_rope)
-    assert reasonunit_casa.r_context == casa_rope
+    assert reasonunit_casa.reason_context == casa_rope
     assert len(reasonunit_casa.cases) == 0
-    assert reasonunit_casa.r_plan_active_requisite is False
+    assert reasonunit_casa.reason_active_requisite is False
 
     # WHEN
     sue_believer.edit_plan_attr(
         run_rope,
-        reason_r_context=casa_rope,
-        reason_r_plan_active_requisite="Set to Ignore",
+        reason_context=casa_rope,
+        reason_plan_active_requisite="Set to Ignore",
     )
 
     # THEN
     assert len(run_plan.reasonunits) == 1
     reasonunit_casa = run_plan.reasonunits.get(casa_rope)
-    assert reasonunit_casa.r_context == casa_rope
+    assert reasonunit_casa.reason_context == casa_rope
     assert len(reasonunit_casa.cases) == 0
-    assert reasonunit_casa.r_plan_active_requisite is None
+    assert reasonunit_casa.reason_active_requisite is None
 
 
 def test_BelieverUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
@@ -583,11 +582,11 @@ def test_BelieverUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     thu_rope = sue_believer.make_rope(sem_jours_rope, thu_str)
 
     # 4. plan(...,casa) with
-    # 4.1 ReasonUnit: r_context=sem_jours_rope, r_state=thu_rope
+    # 4.1 ReasonUnit: reason_context=sem_jours_rope, reason_state=thu_rope
     # 4.2 .active = False
     sue_believer.edit_plan_attr(
         casa_rope,
-        reason_r_context=sem_jours_rope,
+        reason_context=sem_jours_rope,
         reason_case=thu_rope,
     )
     sue_believer.settle_believer()  # set tree metrics
@@ -595,21 +594,21 @@ def test_BelieverUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     assert casa_plan._active is False
 
     # 5. plan(...,run to casa) with
-    # 5.1. ReasonUnit: plan(r_context=...,casa) has .r_plan_active_requisite = True
+    # 5.1. ReasonUnit: plan(reason_context=...,casa) has .reason_active_requisite = True
     # 5.2. plan(...,casa).active = False
     run_str = "run to casa"
     run_rope = sue_believer.make_l1_rope(run_str)
     sue_believer.set_plan(planunit_shop(run_str), sue_believer.belief_label)
     sue_believer.edit_plan_attr(
         run_rope,
-        reason_r_context=casa_rope,
-        reason_r_plan_active_requisite=True,
+        reason_context=casa_rope,
+        reason_plan_active_requisite=True,
     )
     run_plan = sue_believer.get_plan_obj(run_rope)
     sue_believer.settle_believer()
     assert run_plan._active is False
 
-    # Fact: r_context: (...,sem_jours) f_state: (...,sem_jours,wed)
+    # Fact: reason_context: (...,sem_jours) f_state: (...,sem_jours,wed)
     sue_believer.add_fact(f_context=sem_jours_rope, f_state=wed_rope)
     sue_believer.settle_believer()
 

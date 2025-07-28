@@ -6,50 +6,50 @@ from src.a04_reason_logic.reason_plan import CaseStatusFinder, casestatusfinder_
 
 def test_CaseStatusFinder_Exists():
     # ESTABLISH
-    x_r_lower = 1
-    x_r_upper = 1
-    x_r_divisor = 1
+    x_reason_lower = 1
+    x_reason_upper = 1
+    x_reason_divisor = 1
     x_f_lower_full = 1
     x_f_upper_full = 1
 
     # WHEN
     x_pbsd = CaseStatusFinder(
-        x_r_lower,
-        x_r_upper,
-        x_r_divisor,
+        x_reason_lower,
+        x_reason_upper,
+        x_reason_divisor,
         x_f_lower_full,
         x_f_upper_full,
     )
 
     # THEN
-    assert x_pbsd.r_lower == x_r_lower
-    assert x_pbsd.r_upper == x_r_upper
-    assert x_pbsd.r_divisor == x_r_divisor
+    assert x_pbsd.reason_lower == x_reason_lower
+    assert x_pbsd.reason_upper == x_reason_upper
+    assert x_pbsd.reason_divisor == x_reason_divisor
     assert x_pbsd.f_lower_full == x_f_lower_full
     assert x_pbsd.f_upper_full == x_f_upper_full
 
 
 def test_casestatusfinder_shop_ReturnsObj():
     # ESTABLISH
-    x_r_lower = 1
-    x_r_upper = 1
-    x_r_divisor = 1
+    x_reason_lower = 1
+    x_reason_upper = 1
+    x_reason_divisor = 1
     x_f_lower_full = 1
     x_f_upper_full = 1
 
     # WHEN
     x_pbsd = casestatusfinder_shop(
-        x_r_lower,
-        x_r_upper,
-        x_r_divisor,
+        x_reason_lower,
+        x_reason_upper,
+        x_reason_divisor,
         x_f_lower_full,
         x_f_upper_full,
     )
 
     # THEN
-    assert x_pbsd.r_lower == x_r_lower
-    assert x_pbsd.r_upper == x_r_upper
-    assert x_pbsd.r_divisor == x_r_divisor
+    assert x_pbsd.reason_lower == x_reason_lower
+    assert x_pbsd.reason_upper == x_reason_upper
+    assert x_pbsd.reason_divisor == x_reason_divisor
     assert x_pbsd.f_lower_full == x_f_lower_full
     assert x_pbsd.f_upper_full == x_f_upper_full
 
@@ -57,9 +57,9 @@ def test_casestatusfinder_shop_ReturnsObj():
 def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
     with pytest_raises(Exception) as excinfo_1:
         casestatusfinder_shop(
-            r_lower=1,
-            r_upper=None,
-            r_divisor=1,
+            reason_lower=1,
+            reason_upper=None,
+            reason_divisor=1,
             f_lower_full=1,
             f_upper_full=1,
         )
@@ -69,9 +69,9 @@ def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
     x_f_upper_full = 1
     with pytest_raises(Exception) as excinfo_2:
         casestatusfinder_shop(
-            r_lower=1,
-            r_upper=1,
-            r_divisor=1,
+            reason_lower=1,
+            reason_upper=1,
+            reason_divisor=1,
             f_lower_full=x_f_lower_full,
             f_upper_full=x_f_upper_full,
         )
@@ -80,73 +80,73 @@ def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
         == f"self.f_lower_full={x_f_lower_full} cannot be greater than self.f_upper_full={x_f_upper_full}"
     )
 
-    x_r_divisor = -1
+    x_reason_divisor = -1
     with pytest_raises(Exception) as excinfo_3:
         casestatusfinder_shop(
-            r_lower=1,
-            r_upper=1,
-            r_divisor=x_r_divisor,
+            reason_lower=1,
+            reason_upper=1,
+            reason_divisor=x_reason_divisor,
             f_lower_full=1,
             f_upper_full=1,
         )
     assert (
         str(excinfo_3.value)
-        == f"self.r_divisor={x_r_divisor} cannot be less/equal to zero"
+        == f"self.reason_divisor={x_reason_divisor} cannot be less/equal to zero"
     )
 
-    x_r_divisor = 1
-    x_r_lower = -1
+    x_reason_divisor = 1
+    x_reason_lower = -1
     with pytest_raises(Exception) as excinfo_4:
         casestatusfinder_shop(
-            r_lower=x_r_lower,
-            r_upper=1,
-            r_divisor=x_r_divisor,
+            reason_lower=x_reason_lower,
+            reason_upper=1,
+            reason_divisor=x_reason_divisor,
             f_lower_full=1,
             f_upper_full=1,
         )
     assert (
         str(excinfo_4.value)
-        == f"self.r_lower={x_r_lower} cannot be less than zero or greater than self.r_divisor={x_r_divisor}"
+        == f"self.reason_lower={x_reason_lower} cannot be less than zero or greater than self.reason_divisor={x_reason_divisor}"
     )
 
-    x_r_upper = 2
+    x_reason_upper = 2
     with pytest_raises(Exception) as excinfo_5:
         casestatusfinder_shop(
-            r_lower=1,
-            r_upper=x_r_upper,
-            r_divisor=x_r_divisor,
+            reason_lower=1,
+            reason_upper=x_reason_upper,
+            reason_divisor=x_reason_divisor,
             f_lower_full=1,
             f_upper_full=1,
         )
     assert (
         str(excinfo_5.value)
-        == f"self.r_upper={x_r_upper} cannot be less than zero or greater than self.r_divisor={x_r_divisor}"
+        == f"self.reason_upper={x_reason_upper} cannot be less than zero or greater than self.reason_divisor={x_reason_divisor}"
     )
 
 
 def test_CaseStatusFinder_AbbrevationMethodsReturnsObjs():
     # ESTABLISH
-    x_r_lower = 1
-    x_r_upper = 2
-    x_r_divisor = 3
+    x_reason_lower = 1
+    x_reason_upper = 2
+    x_reason_divisor = 3
     x_f_lower_full = 4
     x_f_upper_full = 5
 
     # WHEN
     x_pbsd = casestatusfinder_shop(
-        x_r_lower,
-        x_r_upper,
-        x_r_divisor,
+        x_reason_lower,
+        x_reason_upper,
+        x_reason_divisor,
         x_f_lower_full,
         x_f_upper_full,
     )
 
     # THEN
-    assert x_pbsd.bo() == x_f_lower_full % x_r_divisor
-    assert x_pbsd.bn() == x_f_upper_full % x_r_divisor
-    assert x_pbsd.po() == x_r_lower
-    assert x_pbsd.pn() == x_r_upper
-    assert x_pbsd.pd() == x_r_divisor
+    assert x_pbsd.bo() == x_f_lower_full % x_reason_divisor
+    assert x_pbsd.bn() == x_f_upper_full % x_reason_divisor
+    assert x_pbsd.po() == x_reason_lower
+    assert x_pbsd.pn() == x_reason_upper
+    assert x_pbsd.pd() == x_reason_divisor
 
 
 # for CaseStatusFinder tests
@@ -161,7 +161,7 @@ def add_trace(
     case_str: str = "",
     sought_str: str = "",
     sought_status_str: str = "",
-    r_divisor: float = 0,
+    reason_divisor: float = 0,
 ) -> plotly_figure:
     x_end = x_int if x_end is None else x_end
     x_color = "Black" if x_color is None else x_color
@@ -176,9 +176,11 @@ def add_trace(
             showlegend=showlegend,
         )
     )
-    fig.add_annotation(x=r_divisor + 0.15, y=y_int, text=sought_str, showarrow=False)
     fig.add_annotation(
-        x=r_divisor + 0.4, y=y_int, text=sought_status_str, showarrow=False
+        x=reason_divisor + 0.15, y=y_int, text=sought_str, showarrow=False
+    )
+    fig.add_annotation(
+        x=reason_divisor + 0.4, y=y_int, text=sought_status_str, showarrow=False
     )
     fig.add_annotation(x=-0.1, y=y_int, text=case_str, showarrow=False)
 
@@ -192,7 +194,7 @@ def add_traces(
     case_str: str = "",
     sought_str: str = "",
     sought_status_str: str = "",
-    r_divisor: float = 1,
+    reason_divisor: float = 1,
 ) -> plotly_figure:
     fact_str = "FactUnit Remaiinder range"
     case_str = "Case Range"
@@ -217,7 +219,7 @@ def add_traces(
             case_str=case_str,
             sought_str=sought_str,
             sought_status_str=sought_status_str,
-            r_divisor=r_divisor,
+            reason_divisor=reason_divisor,
         )
     else:
         add_trace(
@@ -231,7 +233,7 @@ def add_traces(
             case_str=case_str,
             sought_str=sought_str,
             sought_status_str=sought_status_str,
-            r_divisor=r_divisor,
+            reason_divisor=reason_divisor,
         )
         add_trace(fig, x_pbsd.bo(), x_pbsd.pd(), y_int, fact_str, pink_str, sl)
 
@@ -272,15 +274,15 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         x_int=0.0,
         x_end=pd,
         y_int=0.0,
-        trace_name="r_divisor Range",
+        trace_name="reason_divisor Range",
         x_color=None,
         showlegend=True,
         case_str="Scenario",
         sought_str="active",
         sought_status_str="Chore Status",
-        r_divisor=pd,
+        reason_divisor=pd,
     )
-    fig_label = "When Fact.range < r_divisor: Case.active Checks."
+    fig_label = "When Fact.range < reason_divisor: Case.active Checks."
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
@@ -294,7 +296,7 @@ def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
 
     # # Scenario B1
     graph_b = graphics_bool
-    pd = 1  # r_divisor
+    pd = 1  # reason_divisor
     fig = get_fig(pd, graphics_bool)
     caseb1_1 = casestatusfinder_shop(0.3, 0.7, pd, 0.5, 0.8)
     caseb1_2 = casestatusfinder_shop(0.3, 0.7, pd, 0.2, 0.5)
@@ -607,27 +609,29 @@ def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
     assert caseb4_6.get_active() == sought_active
     assert caseb4_6.get_chore_status() == sought_chore
 
-    # Bottom r_divisor line
+    # Bottom reason_divisor line
     _add_last_trace_and_show(fig, pd, linel, graph_b)
 
 
 def _add_last_trace_and_show(fig: plotly_figure, pd, linel, graphics_bool: bool):
     if graphics_bool:
-        add_trace(fig, 0.0, pd, linel - 0.2, "r_divisor Range", None)
+        add_trace(fig, 0.0, pd, linel - 0.2, "reason_divisor Range", None)
         conditional_fig_show(fig, graphics_bool)
 
 
 def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_01():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
-        r_lower=1305.0,
-        r_upper=1305.0,
-        r_divisor=1440,
+        reason_lower=1305.0,
+        reason_upper=1305.0,
+        reason_divisor=1440,
         f_lower_full=20000,
         f_upper_full=29000,
     )
     print(f"----\n  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=}")
-    print(f"  {segr_obj.r_lower=}  {segr_obj.r_upper=}  {segr_obj.r_divisor=}")
+    print(
+        f"  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
+    )
     print(
         f"  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
     )
@@ -643,14 +647,16 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_01(
 def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_02():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
-        r_lower=1305.0,
-        r_upper=1305.0,
-        r_divisor=1440,
+        reason_lower=1305.0,
+        reason_upper=1305.0,
+        reason_divisor=1440,
         f_lower_full=1300,
         f_upper_full=1400,
     )
     print(f"----\n  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=}")
-    print(f"  {segr_obj.r_lower=}  {segr_obj.r_upper=}  {segr_obj.r_divisor=}")
+    print(
+        f"  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
+    )
     print(
         f"  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
     )
@@ -664,14 +670,16 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_02(
 def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_03():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
-        r_lower=1305.0,
-        r_upper=1305.0,
-        r_divisor=1440,
+        reason_lower=1305.0,
+        reason_upper=1305.0,
+        reason_divisor=1440,
         f_lower_full=1300,
         f_upper_full=1300,
     )
     print(f"----\n  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=}")
-    print(f"  {segr_obj.r_lower=}  {segr_obj.r_upper=}  {segr_obj.r_divisor=}")
+    print(
+        f"  {segr_obj.reason_lower=}  {segr_obj.reason_upper=}  {segr_obj.reason_divisor=}"
+    )
     print(
         f"  {segr_obj.f_lower_full=}  {segr_obj.f_upper_full=} \tdifference:{segr_obj.f_upper_full-segr_obj.f_lower_full}"
     )

@@ -40,7 +40,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_pool_str,
     penny_str,
     plan_rope_str,
-    r_context_str,
+    reason_context_str,
     respect_bit_str,
     stop_want_str,
 )
@@ -347,8 +347,8 @@ def unique_jkeys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
         if plan_rope_str() in new_jkey_keys:
             new_jkey_keys.remove(plan_rope_str())
-        if r_context_str() in new_jkey_keys:
-            new_jkey_keys.remove(r_context_str())
+        if reason_context_str() in new_jkey_keys:
+            new_jkey_keys.remove(reason_context_str())
         if partner_name_str() in new_jkey_keys:
             new_jkey_keys.remove(partner_name_str())
         if group_title_str() in new_jkey_keys:
@@ -387,7 +387,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_believer_plan_reason_caseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [plan_rope_str(), r_context_str(), "r_state"]
+    assert x_sorted_jkey_keys == [plan_rope_str(), reason_context_str(), "reason_state"]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -630,8 +630,8 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(partner_name_str()) == NameTerm_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
-    assert x_class_types.get(r_context_str()) == RopeTerm_str()
-    assert x_class_types.get("r_plan_active_requisite") == "bool"
+    assert x_class_types.get(reason_context_str()) == RopeTerm_str()
+    assert x_class_types.get("reason_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
     assert x_class_types.get(close_str()) == "float"
@@ -642,7 +642,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(group_debt_points_str()) == "float"
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
-    assert x_class_types.get("r_divisor") == "int"
+    assert x_class_types.get("reason_divisor") == "int"
     assert x_class_types.get(f_context_str()) == RopeTerm_str()
     assert x_class_types.get(f_upper_str()) == "float"
     assert x_class_types.get(f_lower_str()) == "float"
@@ -655,10 +655,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("mass") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("r_state") == RopeTerm_str()
-    assert x_class_types.get("r_upper") == "float"
+    assert x_class_types.get("reason_state") == RopeTerm_str()
+    assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(numor_str()) == "int"
-    assert x_class_types.get("r_lower") == "float"
+    assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(penny_str()) == "float"
     assert x_class_types.get("f_state") == RopeTerm_str()
     assert x_class_types.get("task") == "bool"

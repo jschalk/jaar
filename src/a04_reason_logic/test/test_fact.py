@@ -198,7 +198,7 @@ def test_FactUnit_find_replace_rope_SetsAttrCorrectly():
     assert sun_fact.f_state == new_sun_rope
 
 
-def test_FactUnit_get_tuple_ReturnsObj_Scenario0_r_context_f_state_only():
+def test_FactUnit_get_tuple_ReturnsObj_Scenario0_reason_context_f_state_only():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -232,7 +232,7 @@ def test_FactUnit_get_tuple_ReturnsObj_Scenario1_ValuesIn_f_lower_f_upper():
     assert sun_tuple == (wk_rope, sun_rope, sun_f_lower, sun_f_upper)
 
 
-def test_get_factunit_from_tuple_ReturnsObj_Scenario0_r_context_f_state_only():
+def test_get_factunit_from_tuple_ReturnsObj_Scenario0_reason_context_f_state_only():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)

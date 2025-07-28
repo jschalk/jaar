@@ -47,18 +47,18 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     rain_str = "rain"
     old_rain_rope = create_rope(old_water_rope, rain_str)
     # create reasonunit
-    case_x = caseunit_shop(r_state=old_rain_rope)
-    cases_x = {case_x.r_state: case_x}
+    case_x = caseunit_shop(reason_state=old_rain_rope)
+    cases_x = {case_x.reason_state: case_x}
     x_reason = reasonunit_shop(old_water_rope, cases=cases_x)
-    reasons_x = {x_reason.r_context: x_reason}
+    reasons_x = {x_reason.reason_context: x_reason}
     x_plan = planunit_shop(roses_str, reasonunits=reasons_x)
     # check asserts
     assert x_plan.reasonunits.get(old_water_rope) is not None
     old_water_rain_reason = x_plan.reasonunits[old_water_rope]
-    assert old_water_rain_reason.r_context == old_water_rope
+    assert old_water_rain_reason.reason_context == old_water_rope
     assert old_water_rain_reason.cases.get(old_rain_rope) is not None
     water_rain_l_case = old_water_rain_reason.cases[old_rain_rope]
-    assert water_rain_l_case.r_state == old_rain_rope
+    assert water_rain_l_case.reason_state == old_rain_rope
 
     # WHEN
     new_water_str = "h2o"
@@ -70,12 +70,12 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     assert x_plan.reasonunits.get(old_water_rope) is None
     assert x_plan.reasonunits.get(new_water_rope) is not None
     new_water_rain_reason = x_plan.reasonunits[new_water_rope]
-    assert new_water_rain_reason.r_context == new_water_rope
+    assert new_water_rain_reason.reason_context == new_water_rope
     new_rain_rope = create_rope(new_water_rope, rain_str)
     assert new_water_rain_reason.cases.get(old_rain_rope) is None
     assert new_water_rain_reason.cases.get(new_rain_rope) is not None
     new_water_rain_l_case = new_water_rain_reason.cases[new_rain_rope]
-    assert new_water_rain_l_case.r_state == new_rain_rope
+    assert new_water_rain_l_case.reason_state == new_rain_rope
 
     print(f"{len(x_plan.reasonunits)=}")
     reason_obj = x_plan.reasonunits.get(new_water_rope)
@@ -84,7 +84,7 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     print(f"{len(reason_obj.cases)=}")
     case_obj = reason_obj.cases.get(new_rain_rope)
     assert case_obj is not None
-    assert case_obj.r_state == new_rain_rope
+    assert case_obj.reason_state == new_rain_rope
 
 
 def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():

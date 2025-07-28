@@ -13,7 +13,7 @@ from src.a06_believer_logic.believer_main import (
 )
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
-    get_believerunit_r_context_ziet_example,
+    get_believerunit_reason_context_ziet_example,
     get_believerunit_x1_3levels_1reason_1facts,
 )
 
@@ -526,7 +526,7 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     # ESTABLISH
     x1_believer = believerunit_v001()
     x2_believer = get_believerunit_x1_3levels_1reason_1facts()
-    x3_believer = get_believerunit_r_context_ziet_example()
+    x3_believer = get_believerunit_reason_context_ziet_example()
     print(f"{x1_believer.believer_name}")
     print(f"{x2_believer.believer_name}")
     print(f"{x3_believer.believer_name}")

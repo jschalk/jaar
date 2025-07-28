@@ -37,8 +37,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_name_str,
     plan_label_str,
     plan_rope_str,
-    r_context_str,
-    r_plan_active_requisite_str,
+    reason_active_requisite_str,
+    reason_context_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -243,15 +243,15 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reasonunit():
     sue_believer.add_plan(casa_rope)
     sue_believer.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
-    new_r_plan_active_requisite = True
+    new_reason_active_requisite = True
     casa_atom = believeratom_shop(believer_plan_reasonunit_str(), INSERT_str())
     casa_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_atom.set_arg(r_context_str(), week_rope)
-    casa_atom.set_arg(r_plan_active_requisite_str(), new_r_plan_active_requisite)
+    casa_atom.set_arg(reason_context_str(), week_rope)
+    casa_atom.set_arg(reason_active_requisite_str(), new_reason_active_requisite)
     casa_jkeys = casa_atom.get_jkeys_dict()
     casa_reasonunit = believer_plan_reasonunit_get_obj(sue_believer, casa_jkeys)
-    assert casa_reasonunit.r_plan_active_requisite != new_r_plan_active_requisite
-    assert casa_reasonunit.r_plan_active_requisite is None
+    assert casa_reasonunit.reason_active_requisite != new_reason_active_requisite
+    assert casa_reasonunit.reason_active_requisite is None
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, casa_atom)
@@ -261,8 +261,8 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reasonunit():
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    zia_requisite_value = zia_jvalues.get(r_plan_active_requisite_str())
-    assert zia_requisite_value == new_r_plan_active_requisite
+    zia_requisite_value = zia_jvalues.get(reason_active_requisite_str())
+    assert zia_requisite_value == new_reason_active_requisite
 
 
 def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reason_caseunit():
@@ -282,17 +282,17 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reason_caseunit(
     clean_plan.set_reasonunit(reasonunit_shop(week_rope))
     clean_plan.get_reasonunit(week_rope).set_case(thur_rope)
 
-    thur_r_divisor = 39
+    thur_reason_divisor = 39
     thur_atom = believeratom_shop(believer_plan_reason_caseunit_str(), INSERT_str())
     thur_atom.set_arg(plan_rope_str(), clean_rope)
-    thur_atom.set_arg(r_context_str(), week_rope)
-    thur_atom.set_arg("r_state", thur_rope)
+    thur_atom.set_arg(reason_context_str(), week_rope)
+    thur_atom.set_arg("reason_state", thur_rope)
     assert thur_atom.is_valid()
-    thur_atom.set_arg("r_divisor", thur_r_divisor)
+    thur_atom.set_arg("reason_divisor", thur_reason_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
     thur_caseunit = caseunit_get_obj(sue_believer, thur_jkeys)
-    assert thur_caseunit.r_divisor != thur_r_divisor
-    assert thur_caseunit.r_divisor is None
+    assert thur_caseunit.reason_divisor != thur_reason_divisor
+    assert thur_caseunit.reason_divisor is None
 
     # WHEN
     new_zia_believeratom = sift_believeratom(sue_believer, thur_atom)
@@ -302,7 +302,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_reason_caseunit(
     assert new_zia_believeratom.crud_str == UPDATE_str()
     assert new_zia_believeratom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_believeratom.get_jvalues_dict()
-    assert zia_jvalues.get("r_divisor") == thur_r_divisor
+    assert zia_jvalues.get("reason_divisor") == thur_reason_divisor
 
 
 def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_factunit():
