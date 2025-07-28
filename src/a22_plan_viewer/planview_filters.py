@@ -5,7 +5,10 @@ from src.a05_plan_logic.plan import PlanUnit
 from src.a06_believer_logic.believer_main import (
     get_from_dict as get_believerunit_from_dict,
 )
-from src.a15_belief_logic.reason_str_func import get_reason_case_str
+from src.a15_belief_logic.reason_str_func import (
+    get_fact_state_readable_str,
+    get_reason_case_readable_str,
+)
 
 
 def mark_keys(
@@ -114,31 +117,32 @@ def plan_awardees(believerunit_dict: dict) -> dict:
 def plan_reasons(believerunit_dict: dict) -> dict:
     result = {}
     for planunit in get_planunits_list(believerunit_dict):
-        # if planunit.reasonunits:
-        #     reasons_count_display = f"Reasons ({len(planunit.reasonunits)})"
-        # else:
-        #     reasons_count_display = ""
         plan_rope_labels = get_all_rope_labels(planunit.get_plan_rope())
-        # fund_share_keys = plan_rope_labels + [reasons_count_display]
-        # set_in_nested_dict(result, fund_share_keys, planunit.plan_label)
 
         for reason in planunit.reasonunits.values():
             reason_label_str = f"Reason {get_tail_label(reason.reason_context)}"
             reason_keys = copy_copy(plan_rope_labels) + [reason_label_str]
             for case in reason.cases.values():
-                case_line_display = get_reason_case_str(reason.reason_context, case)
+                case_line_display = get_reason_case_readable_str(
+                    reason.reason_context, case
+                )
                 case_keys = copy_copy(reason_keys) + [case_line_display]
                 set_in_nested_dict(result, case_keys, "")
-
-    # return mark_keys(result, marking_key=reasons_count_str)
     return result
 
 
 def plan_facts(believerunit_dict: dict) -> dict:
-    view_dict = {}
-    return view_dict
+    result = {}
+    for planunit in get_planunits_list(believerunit_dict):
+        plan_rope_labels = get_all_rope_labels(planunit.get_plan_rope())
+        plan_keys = copy_copy(plan_rope_labels) + [planunit.plan_label]
+
+        for fact in planunit.factunits.values():
+            fact_display_str = get_fact_state_readable_str(fact)
+            fact_keys = copy_copy(plan_keys) + [fact_display_str]
+            set_in_nested_dict(result, fact_keys, "")
+    return result
 
 
 def plan_time(believerunit_dict: dict) -> dict:
-    view_dict = {}
-    return view_dict
+    return {}
