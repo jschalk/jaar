@@ -2,10 +2,10 @@ from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_reason_caseunit_str,
     plan_rope_str,
-    r_context_str,
-    r_lower_str,
-    r_state_str,
-    r_upper_str,
+    reason_context_str,
+    reason_lower_str,
+    reason_state_str,
+    reason_upper_str,
 )
 from src.a08_believer_atom_logic.atom_main import believeratom_shop
 from src.a08_believer_atom_logic.test._util.a08_str import (
@@ -24,12 +24,12 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumbe
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    r_state_value = sue_believer.make_rope(r_context_value, "dirty")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    reason_state_value = sue_believer.make_rope(reason_context_value, "dirty")
     swim_believeratom = believeratom_shop(dimen, INSERT_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(r_context_str(), r_context_value)
-    swim_believeratom.set_arg(r_state_str(), r_state_value)
+    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
+    swim_believeratom.set_arg(reason_state_str(), reason_state_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
     x_believerdelta.set_believeratom(swim_believeratom)
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumbe
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"CaseUnit '{r_state_value}' created for reason '{r_context_value}' for plan '{rope_value}'."
+    x_str = f"CaseUnit '{reason_state_value}' created for reason '{reason_context_value}' for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -50,18 +50,18 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    r_state_value = sue_believer.make_rope(r_context_value, "dirty")
-    r_divisor_value = 7
-    r_upper_value = 13
-    r_lower_value = 17
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    reason_state_value = sue_believer.make_rope(reason_context_value, "dirty")
+    reason_divisor_value = 7
+    reason_upper_value = 13
+    reason_lower_value = 17
     swim_believeratom = believeratom_shop(dimen, INSERT_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(r_context_str(), r_context_value)
-    swim_believeratom.set_arg(r_state_str(), r_state_value)
-    swim_believeratom.set_arg("r_divisor", r_divisor_value)
-    swim_believeratom.set_arg(r_upper_str(), r_upper_value)
-    swim_believeratom.set_arg(r_lower_str(), r_lower_value)
+    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
+    swim_believeratom.set_arg(reason_state_str(), reason_state_value)
+    swim_believeratom.set_arg("reason_divisor", reason_divisor_value)
+    swim_believeratom.set_arg(reason_upper_str(), reason_upper_value)
+    swim_believeratom.set_arg(reason_lower_str(), reason_lower_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
     x_believerdelta.set_believeratom(swim_believeratom)
@@ -70,7 +70,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"CaseUnit '{r_state_value}' created for reason '{r_context_value}' for plan '{rope_value}'. r_lower={r_lower_value}. r_upper={r_upper_value}. r_divisor={r_divisor_value}."
+    x_str = f"CaseUnit '{reason_state_value}' created for reason '{reason_context_value}' for plan '{rope_value}'. reason_lower={reason_lower_value}. reason_upper={reason_upper_value}. reason_divisor={reason_divisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -82,12 +82,12 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumbe
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    r_state_value = sue_believer.make_rope(r_context_value, "dirty")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    reason_state_value = sue_believer.make_rope(reason_context_value, "dirty")
     swim_believeratom = believeratom_shop(dimen, UPDATE_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(r_context_str(), r_context_value)
-    swim_believeratom.set_arg(r_state_str(), r_state_value)
+    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
+    swim_believeratom.set_arg(reason_state_str(), reason_state_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
     x_believerdelta.set_believeratom(swim_believeratom)
@@ -96,7 +96,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumbe
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"CaseUnit '{r_state_value}' updated for reason '{r_context_value}' for plan '{rope_value}'."
+    x_str = f"CaseUnit '{reason_state_value}' updated for reason '{reason_context_value}' for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -108,18 +108,18 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    r_state_value = sue_believer.make_rope(r_context_value, "dirty")
-    r_divisor_value = 7
-    r_upper_value = 13
-    r_lower_value = 17
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    reason_state_value = sue_believer.make_rope(reason_context_value, "dirty")
+    reason_divisor_value = 7
+    reason_upper_value = 13
+    reason_lower_value = 17
     swim_believeratom = believeratom_shop(dimen, UPDATE_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(r_context_str(), r_context_value)
-    swim_believeratom.set_arg(r_state_str(), r_state_value)
-    swim_believeratom.set_arg("r_divisor", r_divisor_value)
-    swim_believeratom.set_arg(r_upper_str(), r_upper_value)
-    swim_believeratom.set_arg(r_lower_str(), r_lower_value)
+    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
+    swim_believeratom.set_arg(reason_state_str(), reason_state_value)
+    swim_believeratom.set_arg("reason_divisor", reason_divisor_value)
+    swim_believeratom.set_arg(reason_upper_str(), reason_upper_value)
+    swim_believeratom.set_arg(reason_lower_str(), reason_lower_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
     x_believerdelta.set_believeratom(swim_believeratom)
@@ -128,7 +128,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"CaseUnit '{r_state_value}' updated for reason '{r_context_value}' for plan '{rope_value}'. r_lower={r_lower_value}. r_upper={r_upper_value}. r_divisor={r_divisor_value}."
+    x_str = f"CaseUnit '{reason_state_value}' updated for reason '{reason_context_value}' for plan '{rope_value}'. reason_lower={reason_lower_value}. reason_upper={reason_upper_value}. reason_divisor={reason_divisor_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -140,12 +140,12 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_DELETE():
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_believer.make_l1_rope("casa")
-    r_context_value = sue_believer.make_rope(casa_rope, "fridge status")
-    r_state_value = sue_believer.make_rope(r_context_value, "dirty")
+    reason_context_value = sue_believer.make_rope(casa_rope, "fridge status")
+    reason_state_value = sue_believer.make_rope(reason_context_value, "dirty")
     swim_believeratom = believeratom_shop(dimen, DELETE_str())
     swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(r_context_str(), r_context_value)
-    swim_believeratom.set_arg(r_state_str(), r_state_value)
+    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
+    swim_believeratom.set_arg(reason_state_str(), reason_state_value)
     # print(f"{swim_believeratom=}")
     x_believerdelta = believerdelta_shop()
     x_believerdelta.set_believeratom(swim_believeratom)
@@ -154,6 +154,6 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_DELETE():
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"CaseUnit '{r_state_value}' deleted from reason '{r_context_value}' for plan '{rope_value}'."
+    x_str = f"CaseUnit '{reason_state_value}' deleted from reason '{reason_context_value}' for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

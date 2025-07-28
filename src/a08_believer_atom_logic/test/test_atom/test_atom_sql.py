@@ -5,8 +5,8 @@ from src.a01_term_logic.rope import create_rope
 from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
     believerunit_str,
-    f_context_str,
-    f_lower_str,
+    fact_context_str,
+    fact_lower_str,
     plan_rope_str,
 )
 from src.a08_believer_atom_logic.atom_main import (
@@ -32,7 +32,7 @@ def test_BelieverAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     # WHEN
     x_dimen = believer_plan_factunit_str()
     update_disc_believeratom = believeratom_shop(x_dimen, UPDATE_str())
-    update_disc_believeratom.set_jkey("r_context", knee_rope)
+    update_disc_believeratom.set_jkey("reason_context", knee_rope)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -71,12 +71,12 @@ def test_BelieverAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    knee_r_lower = 7
+    knee_reason_lower = 7
     x_dimen = believer_plan_factunit_str()
     update_disc_believeratom = believeratom_shop(x_dimen, INSERT_str())
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(f_context_str(), knee_rope)
-    update_disc_believeratom.set_jvalue(f_lower_str(), knee_r_lower)
+    update_disc_believeratom.set_jkey(fact_context_str(), knee_rope)
+    update_disc_believeratom.set_jvalue(fact_lower_str(), knee_reason_lower)
 
     # WHEN
     generated_sqlstr = update_disc_believeratom.get_insert_sqlstr()
@@ -85,13 +85,13 @@ def test_BelieverAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     example_sqlstr = f"""
 INSERT INTO {atom_hx_str()} (
   {x_dimen}_{INSERT_str()}_{plan_rope_str()}
-, {x_dimen}_{INSERT_str()}_{f_context_str()}
-, {x_dimen}_{INSERT_str()}_{f_lower_str()}
+, {x_dimen}_{INSERT_str()}_{fact_context_str()}
+, {x_dimen}_{INSERT_str()}_{fact_lower_str()}
 )
 VALUES (
   '{ball_rope}'
 , '{knee_rope}'
-, {knee_r_lower}
+, {knee_reason_lower}
 )
 ;"""
     print(f"{generated_sqlstr=}")
@@ -106,12 +106,12 @@ def test_get_believeratom_from_rowdata_ReturnsObj_plan_factunit():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    knee_f_lower = 7
+    knee_fact_lower = 7
     x_dimen = believer_plan_factunit_str()
     x_sqlstr = f"""SELECT
   '{ball_rope}' as {x_dimen}_{INSERT_str()}_{plan_rope_str()}
-, '{knee_rope}' as {x_dimen}_{INSERT_str()}_{f_context_str()}
-, {knee_f_lower} as {x_dimen}_{INSERT_str()}_{f_lower_str()}
+, '{knee_rope}' as {x_dimen}_{INSERT_str()}_{fact_context_str()}
+, {knee_fact_lower} as {x_dimen}_{INSERT_str()}_{fact_lower_str()}
 """
     with sqlite3_connect(":memory:") as x_conn:
         x_rowdata = get_rowdata(atom_hx_str(), x_conn, x_sqlstr)
@@ -122,8 +122,8 @@ def test_get_believeratom_from_rowdata_ReturnsObj_plan_factunit():
     # THEN
     update_disc_believeratom = believeratom_shop(x_dimen, INSERT_str())
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(f_context_str(), knee_rope)
-    update_disc_believeratom.set_jvalue(f_lower_str(), knee_f_lower)
+    update_disc_believeratom.set_jkey(fact_context_str(), knee_rope)
+    update_disc_believeratom.set_jvalue(fact_lower_str(), knee_fact_lower)
     assert update_disc_believeratom.dimen == x_believeratom.dimen
     assert update_disc_believeratom.crud_str == x_believeratom.crud_str
     assert update_disc_believeratom.jkeys == x_believeratom.jkeys

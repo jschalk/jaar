@@ -381,7 +381,7 @@ class BelieverDelta:
 
             self.add_believeratom_plan_factunit_inserts(
                 planunit=insert_planunit,
-                insert_factunit_r_contexts=set(insert_planunit.factunits.keys()),
+                insert_factunit_reason_contexts=set(insert_planunit.factunits.keys()),
             )
             self.add_believeratom_plan_awardlink_inserts(
                 after_planunit=insert_planunit,
@@ -389,7 +389,9 @@ class BelieverDelta:
             )
             self.add_believeratom_plan_reasonunit_inserts(
                 after_planunit=insert_planunit,
-                insert_reasonunit_r_contexts=set(insert_planunit.reasonunits.keys()),
+                insert_reasonunit_reason_contexts=set(
+                    insert_planunit.reasonunits.keys()
+                ),
             )
             self.add_believeratom_plan_laborlink_insert(
                 plan_rope=insert_plan_rope,
@@ -431,25 +433,25 @@ class BelieverDelta:
                 self.set_believeratom(x_believeratom)
 
             # insert / update / delete factunits
-            before_factunit_r_contexts = set(before_planunit.factunits.keys())
-            after_factunit_r_contexts = set(after_planunit.factunits.keys())
+            before_factunit_reason_contexts = set(before_planunit.factunits.keys())
+            after_factunit_reason_contexts = set(after_planunit.factunits.keys())
             self.add_believeratom_plan_factunit_inserts(
                 planunit=after_planunit,
-                insert_factunit_r_contexts=after_factunit_r_contexts.difference(
-                    before_factunit_r_contexts
+                insert_factunit_reason_contexts=after_factunit_reason_contexts.difference(
+                    before_factunit_reason_contexts
                 ),
             )
             self.add_believeratom_plan_factunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_factunit_r_contexts=before_factunit_r_contexts.intersection(
-                    after_factunit_r_contexts
+                update_factunit_reason_contexts=before_factunit_reason_contexts.intersection(
+                    after_factunit_reason_contexts
                 ),
             )
             self.add_believeratom_plan_factunit_deletes(
                 plan_rope=plan_rope,
-                delete_factunit_r_contexts=before_factunit_r_contexts.difference(
-                    after_factunit_r_contexts
+                delete_factunit_reason_contexts=before_factunit_reason_contexts.difference(
+                    after_factunit_reason_contexts
                 ),
             )
 
@@ -477,25 +479,25 @@ class BelieverDelta:
             )
 
             # insert / update / delete reasonunits
-            before_reasonunit_r_contexts = set(before_planunit.reasonunits.keys())
-            after_reasonunit_r_contexts = set(after_planunit.reasonunits.keys())
+            before_reasonunit_reason_contexts = set(before_planunit.reasonunits.keys())
+            after_reasonunit_reason_contexts = set(after_planunit.reasonunits.keys())
             self.add_believeratom_plan_reasonunit_inserts(
                 after_planunit=after_planunit,
-                insert_reasonunit_r_contexts=after_reasonunit_r_contexts.difference(
-                    before_reasonunit_r_contexts
+                insert_reasonunit_reason_contexts=after_reasonunit_reason_contexts.difference(
+                    before_reasonunit_reason_contexts
                 ),
             )
             self.add_believeratom_plan_reasonunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_reasonunit_r_contexts=before_reasonunit_r_contexts.intersection(
-                    after_reasonunit_r_contexts
+                update_reasonunit_reason_contexts=before_reasonunit_reason_contexts.intersection(
+                    after_reasonunit_reason_contexts
                 ),
             )
             self.add_believeratom_plan_reasonunit_deletes(
                 before_planunit=before_planunit,
-                delete_reasonunit_r_contexts=before_reasonunit_r_contexts.difference(
-                    after_reasonunit_r_contexts
+                delete_reasonunit_reason_contexts=before_reasonunit_reason_contexts.difference(
+                    after_reasonunit_reason_contexts
                 ),
             )
             # insert / update / delete reasonunits_permises
@@ -550,7 +552,7 @@ class BelieverDelta:
             delete_planunit = before_believer.get_plan_obj(delete_plan_rope)
             self.add_believeratom_plan_factunit_deletes(
                 plan_rope=delete_plan_rope,
-                delete_factunit_r_contexts=set(delete_planunit.factunits.keys()),
+                delete_factunit_reason_contexts=set(delete_planunit.factunits.keys()),
             )
 
             self.add_believeratom_plan_awardlink_deletes(
@@ -559,7 +561,9 @@ class BelieverDelta:
             )
             self.add_believeratom_plan_reasonunit_deletes(
                 before_planunit=delete_planunit,
-                delete_reasonunit_r_contexts=set(delete_planunit.reasonunits.keys()),
+                delete_reasonunit_reason_contexts=set(
+                    delete_planunit.reasonunits.keys()
+                ),
             )
             self.add_believeratom_plan_laborlink_deletes(
                 plan_rope=delete_plan_rope,
@@ -571,120 +575,124 @@ class BelieverDelta:
             )
 
     def add_believeratom_plan_reasonunit_inserts(
-        self, after_planunit: PlanUnit, insert_reasonunit_r_contexts: set
+        self, after_planunit: PlanUnit, insert_reasonunit_reason_contexts: set
     ):
-        for insert_reasonunit_r_context in insert_reasonunit_r_contexts:
+        for insert_reasonunit_reason_context in insert_reasonunit_reason_contexts:
             after_reasonunit = after_planunit.get_reasonunit(
-                insert_reasonunit_r_context
+                insert_reasonunit_reason_context
             )
             x_believeratom = believeratom_shop("believer_plan_reasonunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
-            x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
-            if after_reasonunit.r_plan_active_requisite is not None:
+            x_believeratom.set_jkey("reason_context", after_reasonunit.reason_context)
+            if after_reasonunit.reason_active_requisite is not None:
                 x_believeratom.set_jvalue(
-                    "r_plan_active_requisite",
-                    after_reasonunit.r_plan_active_requisite,
+                    "reason_active_requisite",
+                    after_reasonunit.reason_active_requisite,
                 )
             self.set_believeratom(x_believeratom)
 
             self.add_believeratom_plan_reason_caseunit_inserts(
                 plan_rope=after_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
-                insert_case_r_states=set(after_reasonunit.cases.keys()),
+                insert_case_reason_states=set(after_reasonunit.cases.keys()),
             )
 
     def add_believeratom_plan_reasonunit_updates(
         self,
         before_planunit: PlanUnit,
         after_planunit: PlanUnit,
-        update_reasonunit_r_contexts: set,
+        update_reasonunit_reason_contexts: set,
     ):
-        for update_reasonunit_r_context in update_reasonunit_r_contexts:
+        for update_reasonunit_reason_context in update_reasonunit_reason_contexts:
             before_reasonunit = before_planunit.get_reasonunit(
-                update_reasonunit_r_context
+                update_reasonunit_reason_context
             )
             after_reasonunit = after_planunit.get_reasonunit(
-                update_reasonunit_r_context
+                update_reasonunit_reason_context
             )
             if jvalues_different(
                 "believer_plan_reasonunit", before_reasonunit, after_reasonunit
             ):
                 x_believeratom = believeratom_shop("believer_plan_reasonunit", "UPDATE")
                 x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
-                x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
+                x_believeratom.set_jkey(
+                    "reason_context", after_reasonunit.reason_context
+                )
                 if (
-                    before_reasonunit.r_plan_active_requisite
-                    != after_reasonunit.r_plan_active_requisite
+                    before_reasonunit.reason_active_requisite
+                    != after_reasonunit.reason_active_requisite
                 ):
                     x_believeratom.set_jvalue(
-                        "r_plan_active_requisite",
-                        after_reasonunit.r_plan_active_requisite,
+                        "reason_active_requisite",
+                        after_reasonunit.reason_active_requisite,
                     )
                 self.set_believeratom(x_believeratom)
 
-            before_case_r_states = set(before_reasonunit.cases.keys())
-            after_case_r_states = set(after_reasonunit.cases.keys())
+            before_case_reason_states = set(before_reasonunit.cases.keys())
+            after_case_reason_states = set(after_reasonunit.cases.keys())
             self.add_believeratom_plan_reason_caseunit_inserts(
                 plan_rope=before_planunit.get_plan_rope(),
                 after_reasonunit=after_reasonunit,
-                insert_case_r_states=after_case_r_states.difference(
-                    before_case_r_states
+                insert_case_reason_states=after_case_reason_states.difference(
+                    before_case_reason_states
                 ),
             )
             self.add_believeratom_plan_reason_caseunit_updates(
                 plan_rope=before_planunit.get_plan_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
-                update_case_r_states=after_case_r_states.intersection(
-                    before_case_r_states
+                update_case_reason_states=after_case_reason_states.intersection(
+                    before_case_reason_states
                 ),
             )
             self.add_believeratom_plan_reason_caseunit_deletes(
                 plan_rope=before_planunit.get_plan_rope(),
-                reasonunit_r_context=update_reasonunit_r_context,
-                delete_case_r_states=before_case_r_states.difference(
-                    after_case_r_states
+                reasonunit_reason_context=update_reasonunit_reason_context,
+                delete_case_reason_states=before_case_reason_states.difference(
+                    after_case_reason_states
                 ),
             )
 
     def add_believeratom_plan_reasonunit_deletes(
-        self, before_planunit: PlanUnit, delete_reasonunit_r_contexts: set
+        self, before_planunit: PlanUnit, delete_reasonunit_reason_contexts: set
     ):
-        for delete_reasonunit_r_context in delete_reasonunit_r_contexts:
+        for delete_reasonunit_reason_context in delete_reasonunit_reason_contexts:
             x_believeratom = believeratom_shop("believer_plan_reasonunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
-            x_believeratom.set_jkey("r_context", delete_reasonunit_r_context)
+            x_believeratom.set_jkey("reason_context", delete_reasonunit_reason_context)
             self.set_believeratom(x_believeratom)
 
             before_reasonunit = before_planunit.get_reasonunit(
-                delete_reasonunit_r_context
+                delete_reasonunit_reason_context
             )
             self.add_believeratom_plan_reason_caseunit_deletes(
                 plan_rope=before_planunit.get_plan_rope(),
-                reasonunit_r_context=delete_reasonunit_r_context,
-                delete_case_r_states=set(before_reasonunit.cases.keys()),
+                reasonunit_reason_context=delete_reasonunit_reason_context,
+                delete_case_reason_states=set(before_reasonunit.cases.keys()),
             )
 
     def add_believeratom_plan_reason_caseunit_inserts(
         self,
         plan_rope: RopeTerm,
         after_reasonunit: ReasonUnit,
-        insert_case_r_states: set,
+        insert_case_reason_states: set,
     ):
-        for insert_case_r_state in insert_case_r_states:
-            after_caseunit = after_reasonunit.get_case(insert_case_r_state)
+        for insert_case_reason_state in insert_case_reason_states:
+            after_caseunit = after_reasonunit.get_case(insert_case_reason_state)
             x_believeratom = believeratom_shop(
                 "believer_plan_reason_caseunit", "INSERT"
             )
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("r_context", after_reasonunit.r_context)
-            x_believeratom.set_jkey("r_state", after_caseunit.r_state)
-            if after_caseunit.r_lower is not None:
-                x_believeratom.set_jvalue("r_lower", after_caseunit.r_lower)
-            if after_caseunit.r_upper is not None:
-                x_believeratom.set_jvalue("r_upper", after_caseunit.r_upper)
-            if after_caseunit.r_divisor is not None:
-                x_believeratom.set_jvalue("r_divisor", after_caseunit.r_divisor)
+            x_believeratom.set_jkey("reason_context", after_reasonunit.reason_context)
+            x_believeratom.set_jkey("reason_state", after_caseunit.reason_state)
+            if after_caseunit.reason_lower is not None:
+                x_believeratom.set_jvalue("reason_lower", after_caseunit.reason_lower)
+            if after_caseunit.reason_upper is not None:
+                x_believeratom.set_jvalue("reason_upper", after_caseunit.reason_upper)
+            if after_caseunit.reason_divisor is not None:
+                x_believeratom.set_jvalue(
+                    "reason_divisor", after_caseunit.reason_divisor
+                )
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_reason_caseunit_updates(
@@ -692,11 +700,11 @@ class BelieverDelta:
         plan_rope: RopeTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
-        update_case_r_states: set,
+        update_case_reason_states: set,
     ):
-        for update_case_r_state in update_case_r_states:
-            before_caseunit = before_reasonunit.get_case(update_case_r_state)
-            after_caseunit = after_reasonunit.get_case(update_case_r_state)
+        for update_case_reason_state in update_case_reason_states:
+            before_caseunit = before_reasonunit.get_case(update_case_reason_state)
+            after_caseunit = after_reasonunit.get_case(update_case_reason_state)
             if jvalues_different(
                 "believer_plan_reason_caseunit",
                 before_caseunit,
@@ -706,29 +714,37 @@ class BelieverDelta:
                     "believer_plan_reason_caseunit", "UPDATE"
                 )
                 x_believeratom.set_jkey("plan_rope", plan_rope)
-                x_believeratom.set_jkey("r_context", before_reasonunit.r_context)
-                x_believeratom.set_jkey("r_state", after_caseunit.r_state)
-                if after_caseunit.r_lower != before_caseunit.r_lower:
-                    x_believeratom.set_jvalue("r_lower", after_caseunit.r_lower)
-                if after_caseunit.r_upper != before_caseunit.r_upper:
-                    x_believeratom.set_jvalue("r_upper", after_caseunit.r_upper)
-                if after_caseunit.r_divisor != before_caseunit.r_divisor:
-                    x_believeratom.set_jvalue("r_divisor", after_caseunit.r_divisor)
+                x_believeratom.set_jkey(
+                    "reason_context", before_reasonunit.reason_context
+                )
+                x_believeratom.set_jkey("reason_state", after_caseunit.reason_state)
+                if after_caseunit.reason_lower != before_caseunit.reason_lower:
+                    x_believeratom.set_jvalue(
+                        "reason_lower", after_caseunit.reason_lower
+                    )
+                if after_caseunit.reason_upper != before_caseunit.reason_upper:
+                    x_believeratom.set_jvalue(
+                        "reason_upper", after_caseunit.reason_upper
+                    )
+                if after_caseunit.reason_divisor != before_caseunit.reason_divisor:
+                    x_believeratom.set_jvalue(
+                        "reason_divisor", after_caseunit.reason_divisor
+                    )
                 self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_reason_caseunit_deletes(
         self,
         plan_rope: RopeTerm,
-        reasonunit_r_context: RopeTerm,
-        delete_case_r_states: set,
+        reasonunit_reason_context: RopeTerm,
+        delete_case_reason_states: set,
     ):
-        for delete_case_r_state in delete_case_r_states:
+        for delete_case_reason_state in delete_case_reason_states:
             x_believeratom = believeratom_shop(
                 "believer_plan_reason_caseunit", "DELETE"
             )
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("r_context", reasonunit_r_context)
-            x_believeratom.set_jkey("r_state", delete_case_r_state)
+            x_believeratom.set_jkey("reason_context", reasonunit_reason_context)
+            x_believeratom.set_jkey("reason_state", delete_case_reason_state)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_laborlink_insert(
@@ -816,51 +832,55 @@ class BelieverDelta:
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_factunit_inserts(
-        self, planunit: PlanUnit, insert_factunit_r_contexts: set
+        self, planunit: PlanUnit, insert_factunit_reason_contexts: set
     ):
-        for insert_factunit_r_context in insert_factunit_r_contexts:
-            insert_factunit = planunit.factunits.get(insert_factunit_r_context)
+        for insert_factunit_reason_context in insert_factunit_reason_contexts:
+            insert_factunit = planunit.factunits.get(insert_factunit_reason_context)
             x_believeratom = believeratom_shop("believer_plan_factunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", planunit.get_plan_rope())
-            x_believeratom.set_jkey("f_context", insert_factunit.f_context)
-            if insert_factunit.f_state is not None:
-                x_believeratom.set_jvalue("f_state", insert_factunit.f_state)
-            if insert_factunit.f_lower is not None:
-                x_believeratom.set_jvalue("f_lower", insert_factunit.f_lower)
-            if insert_factunit.f_upper is not None:
-                x_believeratom.set_jvalue("f_upper", insert_factunit.f_upper)
+            x_believeratom.set_jkey("fact_context", insert_factunit.fact_context)
+            if insert_factunit.fact_state is not None:
+                x_believeratom.set_jvalue("fact_state", insert_factunit.fact_state)
+            if insert_factunit.fact_lower is not None:
+                x_believeratom.set_jvalue("fact_lower", insert_factunit.fact_lower)
+            if insert_factunit.fact_upper is not None:
+                x_believeratom.set_jvalue("fact_upper", insert_factunit.fact_upper)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_factunit_updates(
         self,
         before_planunit: PlanUnit,
         after_planunit: PlanUnit,
-        update_factunit_r_contexts: set,
+        update_factunit_reason_contexts: set,
     ):
-        for update_factunit_r_context in update_factunit_r_contexts:
-            before_factunit = before_planunit.factunits.get(update_factunit_r_context)
-            after_factunit = after_planunit.factunits.get(update_factunit_r_context)
+        for update_factunit_reason_context in update_factunit_reason_contexts:
+            before_factunit = before_planunit.factunits.get(
+                update_factunit_reason_context
+            )
+            after_factunit = after_planunit.factunits.get(
+                update_factunit_reason_context
+            )
             if jvalues_different(
                 "believer_plan_factunit", before_factunit, after_factunit
             ):
                 x_believeratom = believeratom_shop("believer_plan_factunit", "UPDATE")
                 x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
-                x_believeratom.set_jkey("f_context", after_factunit.f_context)
-                if before_factunit.f_state != after_factunit.f_state:
-                    x_believeratom.set_jvalue("f_state", after_factunit.f_state)
-                if before_factunit.f_lower != after_factunit.f_lower:
-                    x_believeratom.set_jvalue("f_lower", after_factunit.f_lower)
-                if before_factunit.f_upper != after_factunit.f_upper:
-                    x_believeratom.set_jvalue("f_upper", after_factunit.f_upper)
+                x_believeratom.set_jkey("fact_context", after_factunit.fact_context)
+                if before_factunit.fact_state != after_factunit.fact_state:
+                    x_believeratom.set_jvalue("fact_state", after_factunit.fact_state)
+                if before_factunit.fact_lower != after_factunit.fact_lower:
+                    x_believeratom.set_jvalue("fact_lower", after_factunit.fact_lower)
+                if before_factunit.fact_upper != after_factunit.fact_upper:
+                    x_believeratom.set_jvalue("fact_upper", after_factunit.fact_upper)
                 self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_factunit_deletes(
-        self, plan_rope: RopeTerm, delete_factunit_r_contexts: FactUnit
+        self, plan_rope: RopeTerm, delete_factunit_reason_contexts: FactUnit
     ):
-        for delete_factunit_r_context in delete_factunit_r_contexts:
+        for delete_factunit_reason_context in delete_factunit_reason_contexts:
             x_believeratom = believeratom_shop("believer_plan_factunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("f_context", delete_factunit_r_context)
+            x_believeratom.set_jkey("fact_context", delete_factunit_reason_context)
             self.set_believeratom(x_believeratom)
 
     def is_empty(self) -> bool:

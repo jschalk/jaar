@@ -9,19 +9,19 @@
         "face_name": {
             "otx_key": true
         },
-        "f_context": {
+        "fact_context": {
             "otx_key": true
         },
         "belief_label": {
             "otx_key": true
         },
-        "f_upper": {
+        "fact_upper": {
             "otx_key": false
         },
-        "f_lower": {
+        "fact_lower": {
             "otx_key": false
         },
-        "f_state": {
+        "fact_state": {
             "otx_key": false
         },
         "believer_name": {

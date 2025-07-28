@@ -13,13 +13,13 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
-    f_context_str,
+    fact_context_str,
     group_title_str,
     healer_name_str,
     labor_title_str,
     partner_name_str,
     plan_rope_str,
-    r_context_str,
+    reason_context_str,
 )
 from src.a08_believer_atom_logic.atom_main import believeratom_shop, sift_believeratom
 from src.a08_believer_atom_logic.test._util.a08_str import INSERT_str
@@ -161,10 +161,10 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_reasonunit():
 
     casa_week_atom = believeratom_shop(believer_plan_reasonunit_str(), INSERT_str())
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_week_atom.set_arg(r_context_str(), week_rope)
+    casa_week_atom.set_arg(reason_context_str(), week_rope)
     clean_week_atom = believeratom_shop(believer_plan_reasonunit_str(), INSERT_str())
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
-    clean_week_atom.set_arg(r_context_str(), week_rope)
+    clean_week_atom.set_arg(reason_context_str(), week_rope)
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(clean_rope)
     assert sift_believeratom(sue_believer, casa_week_atom)
@@ -200,14 +200,14 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_reason_caseunit_
         believer_plan_reason_caseunit_str(), INSERT_str()
     )
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_week_atom.set_arg(r_context_str(), week_rope)
-    casa_week_atom.set_arg("r_state", thur_rope)
+    casa_week_atom.set_arg(reason_context_str(), week_rope)
+    casa_week_atom.set_arg("reason_state", thur_rope)
     clean_week_atom = believeratom_shop(
         believer_plan_reason_caseunit_str(), INSERT_str()
     )
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
-    clean_week_atom.set_arg(r_context_str(), week_rope)
-    clean_week_atom.set_arg("r_state", thur_rope)
+    clean_week_atom.set_arg(reason_context_str(), week_rope)
+    clean_week_atom.set_arg("reason_state", thur_rope)
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(clean_rope)
     casa_plan = sue_believer.get_plan_obj(casa_rope)
@@ -312,10 +312,10 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_factunit():
 
     casa_week_atom = believeratom_shop(believer_plan_factunit_str(), INSERT_str())
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_week_atom.set_arg(f_context_str(), week_rope)
+    casa_week_atom.set_arg(fact_context_str(), week_rope)
     clean_week_atom = believeratom_shop(believer_plan_factunit_str(), INSERT_str())
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
-    clean_week_atom.set_arg(f_context_str(), week_rope)
+    clean_week_atom.set_arg(fact_context_str(), week_rope)
     sue_believer.add_plan(casa_rope)
     sue_believer.add_plan(clean_rope)
     assert sift_believeratom(sue_believer, casa_week_atom)

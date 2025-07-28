@@ -109,8 +109,8 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetai
     bob_vision = get_example_bob_speaker()
     bob_vision.edit_plan_attr(
         cook_rope(),
-        reason_del_case_r_context=eat_rope(),
-        reason_del_case_r_state=hungry_rope(),
+        reason_del_case_reason_context=eat_rope(),
+        reason_del_case_reason_state=hungry_rope(),
     )
     bob_cook_planunit = bob_vision.get_plan_obj(cook_rope())
     zia_cook_planunit = zia_vision.get_plan_obj(cook_rope())
@@ -224,15 +224,15 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     sue_vision.edit_plan_attr(
         egg_rope,
         task=True,
-        reason_r_context=chicken_rope,
-        reason_r_plan_active_requisite=True,
+        reason_context=chicken_rope,
+        reason_plan_active_requisite=True,
     )
     # set chick task is True when egg first is False
     sue_vision.edit_plan_attr(
         chicken_rope,
         task=True,
-        reason_r_context=egg_rope,
-        reason_r_plan_active_requisite=False,
+        reason_context=egg_rope,
+        reason_plan_active_requisite=False,
     )
     yao_dakota_hubunit.save_vision_believer(sue_vision)
 
@@ -368,7 +368,7 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBelieverNotSpeaker
     # ESTABLISH
     # yao_duty has chore run_rope
     # yao_vision has chore clean_rope
-    # yao_new_vision f_states yao_duty chore run_rope and not clean_rope
+    # yao_new_vision fact_states yao_duty chore run_rope and not clean_rope
     yao_duty = get_example_yao_speaker()
     assert yao_duty.plan_exists(run_rope()) is False
     assert yao_duty.plan_exists(clean_rope()) is False

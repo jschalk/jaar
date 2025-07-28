@@ -2,9 +2,9 @@ from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope
 from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_factunit_str,
-    f_context_str,
-    f_lower_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_upper_str,
     plan_rope_str,
 )
 from src.a08_believer_atom_logic.atom_main import (
@@ -29,13 +29,13 @@ def test_BelieverAtom_get_dict_ReturnsObj():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     x_dimen = believer_plan_factunit_str()
-    knee_r_lower = 7
-    knee_r_upper = 13
+    knee_reason_lower = 7
+    knee_reason_upper = 13
     insert_factunit_believeratom = believeratom_shop(x_dimen, INSERT_str())
     insert_factunit_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    insert_factunit_believeratom.set_jkey(f_context_str(), knee_rope)
-    insert_factunit_believeratom.set_jvalue(f_lower_str(), knee_r_lower)
-    insert_factunit_believeratom.set_jvalue(f_upper_str(), knee_r_upper)
+    insert_factunit_believeratom.set_jkey(fact_context_str(), knee_rope)
+    insert_factunit_believeratom.set_jvalue(fact_lower_str(), knee_reason_lower)
+    insert_factunit_believeratom.set_jvalue(fact_upper_str(), knee_reason_upper)
 
     # WHEN
     atom_dict = insert_factunit_believeratom.get_dict()
@@ -44,8 +44,11 @@ def test_BelieverAtom_get_dict_ReturnsObj():
     assert atom_dict == {
         dimen_str(): x_dimen,
         crud_str(): INSERT_str(),
-        jkeys_str(): {plan_rope_str(): ball_rope, f_context_str(): knee_rope},
-        jvalues_str(): {f_lower_str(): knee_r_lower, f_upper_str(): knee_r_upper},
+        jkeys_str(): {plan_rope_str(): ball_rope, fact_context_str(): knee_rope},
+        jvalues_str(): {
+            fact_lower_str(): knee_reason_lower,
+            fact_upper_str(): knee_reason_upper,
+        },
     }
 
 
@@ -58,13 +61,13 @@ def test_BelieverAtom_get_json_ReturnsObj():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     x_dimen = believer_plan_factunit_str()
-    knee_r_lower = 7
-    knee_r_upper = 13
+    knee_reason_lower = 7
+    knee_reason_upper = 13
     insert_factunit_believeratom = believeratom_shop(x_dimen, INSERT_str())
     insert_factunit_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    insert_factunit_believeratom.set_jkey(f_context_str(), knee_rope)
-    insert_factunit_believeratom.set_jvalue(f_lower_str(), knee_r_lower)
-    insert_factunit_believeratom.set_jvalue(f_upper_str(), knee_r_upper)
+    insert_factunit_believeratom.set_jkey(fact_context_str(), knee_rope)
+    insert_factunit_believeratom.set_jvalue(fact_lower_str(), knee_reason_lower)
+    insert_factunit_believeratom.set_jvalue(fact_upper_str(), knee_reason_upper)
 
     # WHEN
     atom_json = insert_factunit_believeratom.get_json()
@@ -82,13 +85,13 @@ def test_believeratom_get_from_json_ReturnsObj():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     x_dimen = believer_plan_factunit_str()
-    knee_r_lower = 7
-    knee_r_upper = 13
+    knee_reason_lower = 7
+    knee_reason_upper = 13
     gen_believeratom = believeratom_shop(x_dimen, INSERT_str())
     gen_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    gen_believeratom.set_jkey(f_context_str(), knee_rope)
-    gen_believeratom.set_jvalue(f_lower_str(), knee_r_lower)
-    gen_believeratom.set_jvalue(f_upper_str(), knee_r_upper)
+    gen_believeratom.set_jkey(fact_context_str(), knee_rope)
+    gen_believeratom.set_jvalue(fact_lower_str(), knee_reason_lower)
+    gen_believeratom.set_jvalue(fact_upper_str(), knee_reason_upper)
     atom_json = gen_believeratom.get_json()
 
     # WHEN

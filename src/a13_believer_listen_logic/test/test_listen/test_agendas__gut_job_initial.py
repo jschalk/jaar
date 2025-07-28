@@ -108,8 +108,8 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWithDet
     bob_gut = get_example_bob_speaker()
     bob_gut.edit_plan_attr(
         cook_rope(),
-        reason_del_case_r_context=eat_rope(),
-        reason_del_case_r_state=hungry_rope(),
+        reason_del_case_reason_context=eat_rope(),
+        reason_del_case_reason_state=hungry_rope(),
     )
     bob_cook_planunit = bob_gut.get_plan_obj(cook_rope())
     zia_cook_planunit = zia_gut.get_plan_obj(cook_rope())
@@ -213,15 +213,15 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBeliever
     sue_gut.edit_plan_attr(
         egg_rope,
         task=True,
-        reason_r_context=chicken_rope,
-        reason_r_plan_active_requisite=True,
+        reason_context=chicken_rope,
+        reason_plan_active_requisite=True,
     )
     # set chick task is True when egg first is False
     sue_gut.edit_plan_attr(
         chicken_rope,
         task=True,
-        reason_r_context=egg_rope,
-        reason_r_plan_active_requisite=False,
+        reason_context=egg_rope,
+        reason_plan_active_requisite=False,
     )
     save_gut_file(belief_mstr_dir, sue_gut)
 

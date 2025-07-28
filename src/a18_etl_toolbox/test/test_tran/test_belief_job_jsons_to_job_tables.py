@@ -40,7 +40,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_believer.add_plan(clean_rope)
     sue_believer.add_plan(dirty_rope)
     sue_believer.edit_plan_attr(
-        casa_rope, reason_r_context=status_rope, reason_case=dirty_rope
+        casa_rope, reason_context=status_rope, reason_case=dirty_rope
     )
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))

@@ -300,10 +300,10 @@ def add_believer_to_br00023_csv(
             x_believer.belief_label,
             x_believer.believer_name,
             x_believer.planroot.get_plan_rope(),
-            factunit.f_context,
-            factunit.f_state,
-            if_none_str(factunit.f_lower),
-            if_none_str(factunit.f_upper),
+            factunit.fact_context,
+            factunit.fact_state,
+            if_none_str(factunit.fact_lower),
+            if_none_str(factunit.fact_upper),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -370,11 +370,11 @@ def add_believer_to_br00026_csv(
                     x_believer.belief_label,
                     x_believer.believer_name,
                     planunit.get_plan_rope(),
-                    reasonunit.r_context,
-                    caseunit.r_state,
-                    if_none_str(caseunit.r_lower),
-                    if_none_str(caseunit.r_upper),
-                    if_none_str(caseunit.r_divisor),
+                    reasonunit.reason_context,
+                    caseunit.reason_state,
+                    if_none_str(caseunit.reason_lower),
+                    if_none_str(caseunit.reason_upper),
+                    if_none_str(caseunit.reason_divisor),
                 ]
                 x_csv += csv_delimiter.join(x_row)
                 x_csv += "\n"
@@ -396,8 +396,8 @@ def add_believer_to_br00027_csv(
                 x_believer.belief_label,
                 x_believer.believer_name,
                 planunit.get_plan_rope(),
-                reasonunit.r_context,
-                if_none_str(reasonunit.r_plan_active_requisite),
+                reasonunit.reason_context,
+                if_none_str(reasonunit.reason_active_requisite),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -567,10 +567,10 @@ def add_pack_to_br00023_csv(
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("f_context"),
-                if_none_str(believeratom.jvalues.get("f_state")),
-                if_none_str(believeratom.jvalues.get("f_lower")),
-                if_none_str(believeratom.jvalues.get("f_upper")),
+                believeratom.jkeys.get("fact_context"),
+                if_none_str(believeratom.jvalues.get("fact_state")),
+                if_none_str(believeratom.jvalues.get("fact_lower")),
+                if_none_str(believeratom.jvalues.get("fact_upper")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -624,11 +624,11 @@ def add_pack_to_br00026_csv(
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("r_context"),
-                believeratom.jkeys.get("r_state"),
-                if_none_str(believeratom.jvalues.get("r_lower")),
-                if_none_str(believeratom.jvalues.get("r_upper")),
-                if_none_str(believeratom.jvalues.get("r_divisor")),
+                believeratom.jkeys.get("reason_context"),
+                believeratom.jkeys.get("reason_state"),
+                if_none_str(believeratom.jvalues.get("reason_lower")),
+                if_none_str(believeratom.jvalues.get("reason_upper")),
+                if_none_str(believeratom.jvalues.get("reason_divisor")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -646,8 +646,8 @@ def add_pack_to_br00027_csv(
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("r_context"),
-                if_none_str(believeratom.jvalues.get("r_plan_active_requisite")),
+                believeratom.jkeys.get("reason_context"),
+                if_none_str(believeratom.jvalues.get("reason_active_requisite")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

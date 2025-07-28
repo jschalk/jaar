@@ -94,14 +94,14 @@ class PlanAttrHolder:
     mass: int = None
     uid: int = None
     reason: ReasonUnit = None
-    reason_r_context: RopeTerm = None
+    reason_context: RopeTerm = None
     reason_case: RopeTerm = None
-    r_lower: float = None
-    reason_r_upper: float = None
-    r_divisor: int = None
-    reason_del_case_r_context: RopeTerm = None
-    reason_del_case_r_state: RopeTerm = None
-    reason_r_plan_active_requisite: str = None
+    reason_lower: float = None
+    reason_upper: float = None
+    reason_divisor: int = None
+    reason_del_case_reason_context: RopeTerm = None
+    reason_del_case_reason_state: RopeTerm = None
+    reason_plan_active_requisite: str = None
     laborunit: LaborUnit = None
     healerlink: HealerLink = None
     begin: float = None
@@ -124,31 +124,31 @@ class PlanAttrHolder:
 
     def set_case_range_influenced_by_case_plan(
         self,
-        r_lower,
-        r_upper,
+        reason_lower,
+        reason_upper,
         case_denom,
     ):
         if self.reason_case is not None:
-            if self.r_lower is None:
-                self.r_lower = r_lower
-            if self.reason_r_upper is None:
-                self.reason_r_upper = r_upper
-            if self.r_divisor is None:
-                self.r_divisor = case_denom
+            if self.reason_lower is None:
+                self.reason_lower = reason_lower
+            if self.reason_upper is None:
+                self.reason_upper = reason_upper
+            if self.reason_divisor is None:
+                self.reason_divisor = case_denom
 
 
 def planattrholder_shop(
     mass: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
-    reason_r_context: RopeTerm = None,
+    reason_context: RopeTerm = None,
     reason_case: RopeTerm = None,
-    r_lower: float = None,
-    reason_r_upper: float = None,
-    r_divisor: int = None,
-    reason_del_case_r_context: RopeTerm = None,
-    reason_del_case_r_state: RopeTerm = None,
-    reason_r_plan_active_requisite: str = None,
+    reason_lower: float = None,
+    reason_upper: float = None,
+    reason_divisor: int = None,
+    reason_del_case_reason_context: RopeTerm = None,
+    reason_del_case_reason_state: RopeTerm = None,
+    reason_plan_active_requisite: str = None,
     laborunit: LaborUnit = None,
     healerlink: HealerLink = None,
     begin: float = None,
@@ -173,14 +173,14 @@ def planattrholder_shop(
         mass=mass,
         uid=uid,
         reason=reason,
-        reason_r_context=reason_r_context,
+        reason_context=reason_context,
         reason_case=reason_case,
-        r_lower=r_lower,
-        reason_r_upper=reason_r_upper,
-        r_divisor=r_divisor,
-        reason_del_case_r_context=reason_del_case_r_context,
-        reason_del_case_r_state=reason_del_case_r_state,
-        reason_r_plan_active_requisite=reason_r_plan_active_requisite,
+        reason_lower=reason_lower,
+        reason_upper=reason_upper,
+        reason_divisor=reason_divisor,
+        reason_del_case_reason_context=reason_del_case_reason_context,
+        reason_del_case_reason_state=reason_del_case_reason_state,
+        reason_plan_active_requisite=reason_plan_active_requisite,
         laborunit=laborunit,
         healerlink=healerlink,
         begin=begin,
@@ -313,17 +313,19 @@ class PlanUnit:
     _gogo_calc: float = None
     _stop_calc: float = None
 
-    def is_agenda_plan(self, necessary_r_context: RopeTerm = None) -> bool:
-        r_context_reasonunit_exists = self.r_context_reasonunit_exists(
-            necessary_r_context
+    def is_agenda_plan(self, necessary_reason_context: RopeTerm = None) -> bool:
+        reason_context_reasonunit_exists = self.reason_context_reasonunit_exists(
+            necessary_reason_context
         )
-        return self.task and self._active and r_context_reasonunit_exists
+        return self.task and self._active and reason_context_reasonunit_exists
 
-    def r_context_reasonunit_exists(self, necessary_r_context: RopeTerm = None) -> bool:
+    def reason_context_reasonunit_exists(
+        self, necessary_reason_context: RopeTerm = None
+    ) -> bool:
         x_reasons = self.reasonunits.values()
-        x_r_context = necessary_r_context
-        return x_r_context is None or any(
-            reason.r_context == x_r_context for reason in x_reasons
+        x_reason_context = necessary_reason_context
+        return x_reason_context is None or any(
+            reason.reason_context == x_reason_context for reason in x_reasons
         )
 
     def record_active_hx(
@@ -342,7 +344,7 @@ class PlanUnit:
 
     def _set_factheir(self, x_fact: FactCore):
         if (
-            x_fact.f_context == self.get_plan_rope()
+            x_fact.fact_context == self.get_plan_rope()
             and self._gogo_calc is not None
             and self._stop_calc is not None
             and self.begin is None
@@ -352,15 +354,15 @@ class PlanUnit:
                 f"Cannot have fact for range inheritor '{self.get_plan_rope()}'. A ranged fact plan must have _begin, _close"
             )
         x_factheir = factheir_shop(
-            x_fact.f_context, x_fact.f_state, x_fact.f_lower, x_fact.f_upper
+            x_fact.fact_context, x_fact.fact_state, x_fact.fact_lower, x_fact.fact_upper
         )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
-        self._factheirs[x_factheir.f_context] = x_factheir
+        self._factheirs[x_factheir.fact_context] = x_factheir
 
     def apply_factunit_moldations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self.factunits.values():
-            if factunit.f_context == factheir.f_context:
+            if factunit.fact_context == factheir.fact_context:
                 factheir.mold(factunit)
         return factheir
 
@@ -368,39 +370,39 @@ class PlanUnit:
         delete_factunit = False
         for factunit in self.factunits.values():
             if (
-                factunit.f_context == factheir.f_context
-                and factunit.f_upper is not None
-                and factheir.f_lower is not None
-            ) and factunit.f_upper < factheir.f_lower:
+                factunit.fact_context == factheir.fact_context
+                and factunit.fact_upper is not None
+                and factheir.fact_lower is not None
+            ) and factunit.fact_upper < factheir.fact_lower:
                 delete_factunit = True
 
         if delete_factunit:
-            del self.factunits[factunit.f_context]
+            del self.factunits[factunit.fact_context]
 
     def set_factunit(self, factunit: FactUnit):
-        self.factunits[factunit.f_context] = factunit
+        self.factunits[factunit.fact_context] = factunit
 
-    def factunit_exists(self, x_f_context: RopeTerm) -> bool:
-        return self.factunits.get(x_f_context) != None
+    def factunit_exists(self, x_fact_context: RopeTerm) -> bool:
+        return self.factunits.get(x_fact_context) != None
 
     def get_factunits_dict(self) -> dict[RopeTerm, str]:
         return get_dict_from_factunits(self.factunits)
 
-    def set_factunit_to_complete(self, f_contextunit: FactUnit):
-        # if a plan is considered a chore then a factheir.f_lower attribute can be increased to
-        # a number <= factheir.f_upper so the plan no longer is a chore. This method finds
-        # the minimal factheir.f_lower to modify plan._chore is False. plan_core._factheir cannot be straight up manipulated
+    def set_factunit_to_complete(self, fact_contextunit: FactUnit):
+        # if a plan is considered a chore then a factheir.fact_lower attribute can be increased to
+        # a number <= factheir.fact_upper so the plan no longer is a chore. This method finds
+        # the minimal factheir.fact_lower to modify plan._chore is False. plan_core._factheir cannot be straight up manipulated
         # so it is mandatory that plan._factunit is different.
-        # self.set_factunits(r_context=fact, fact=r_context, r_lower=r_upper, r_upper=f_upper)
-        self.factunits[f_contextunit.f_context] = factunit_shop(
-            f_context=f_contextunit.f_context,
-            f_state=f_contextunit.f_context,
-            f_lower=f_contextunit.f_upper,
-            f_upper=f_contextunit.f_upper,
+        # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=fact_upper)
+        self.factunits[fact_contextunit.fact_context] = factunit_shop(
+            fact_context=fact_contextunit.fact_context,
+            fact_state=fact_contextunit.fact_context,
+            fact_lower=fact_contextunit.fact_upper,
+            fact_upper=fact_contextunit.fact_upper,
         )
 
-    def del_factunit(self, f_context: RopeTerm):
-        self.factunits.pop(f_context)
+    def del_factunit(self, fact_context: RopeTerm):
+        self.factunits.pop(fact_context)
 
     def set_fund_attr(
         self,
@@ -589,19 +591,19 @@ class PlanUnit:
 
         new_factunits = {}
         for factunit_rope, x_factunit in self.factunits.items():
-            new_r_context_rope = replace_knot(
+            new_reason_context_rope = replace_knot(
                 rope=factunit_rope,
                 old_knot=old_knot,
                 new_knot=self.knot,
             )
-            x_factunit.f_context = new_r_context_rope
-            new_f_state_rope = replace_knot(
-                rope=x_factunit.f_state,
+            x_factunit.fact_context = new_reason_context_rope
+            new_fact_state_rope = replace_knot(
+                rope=x_factunit.fact_state,
                 old_knot=old_knot,
                 new_knot=self.knot,
             )
-            x_factunit.set_attr(f_state=new_f_state_rope)
-            new_factunits[new_r_context_rope] = x_factunit
+            x_factunit.set_attr(fact_state=new_fact_state_rope)
+            new_factunits[new_reason_context_rope] = x_factunit
         self.factunits = new_factunits
 
     def _set_attrs_to_planunit(self, plan_attr: PlanAttrHolder):
@@ -611,21 +613,21 @@ class PlanUnit:
             self._uid = plan_attr.uid
         if plan_attr.reason is not None:
             self.set_reasonunit(reason=plan_attr.reason)
-        if plan_attr.reason_r_context is not None and plan_attr.reason_case is not None:
+        if plan_attr.reason_context is not None and plan_attr.reason_case is not None:
             self.set_reason_case(
-                r_context=plan_attr.reason_r_context,
+                reason_context=plan_attr.reason_context,
                 case=plan_attr.reason_case,
-                r_lower=plan_attr.r_lower,
-                r_upper=plan_attr.reason_r_upper,
-                r_divisor=plan_attr.r_divisor,
+                reason_lower=plan_attr.reason_lower,
+                reason_upper=plan_attr.reason_upper,
+                reason_divisor=plan_attr.reason_divisor,
             )
         if (
-            plan_attr.reason_r_context is not None
-            and plan_attr.reason_r_plan_active_requisite is not None
+            plan_attr.reason_context is not None
+            and plan_attr.reason_plan_active_requisite is not None
         ):
-            self.set_reason_r_plan_active_requisite(
-                r_context=plan_attr.reason_r_context,
-                r_plan_active_requisite=plan_attr.reason_r_plan_active_requisite,
+            self.set_reason_plan_active_requisite(
+                reason_context=plan_attr.reason_context,
+                reason_active_requisite=plan_attr.reason_plan_active_requisite,
             )
         if plan_attr.laborunit is not None:
             self.laborunit = plan_attr.laborunit
@@ -667,8 +669,8 @@ class PlanUnit:
             self.problem_bool = plan_attr.problem_bool
 
         self._del_reasonunit_all_cases(
-            r_context=plan_attr.reason_del_case_r_context,
-            case=plan_attr.reason_del_case_r_state,
+            reason_context=plan_attr.reason_del_case_reason_context,
+            case=plan_attr.reason_del_case_reason_state,
         )
         self._set_addin_to_zero_if_any_moldations_exist()
 
@@ -715,53 +717,56 @@ class PlanUnit:
             self._stop_calc = (self._stop_calc * r_plan_numor) / r_plan_denom
         self._range_evaluated = True
 
-    def _del_reasonunit_all_cases(self, r_context: RopeTerm, case: RopeTerm):
-        if r_context is not None and case is not None:
-            self.del_reasonunit_case(r_context=r_context, case=case)
-            if len(self.reasonunits[r_context].cases) == 0:
-                self.del_reasonunit_r_context(r_context=r_context)
+    def _del_reasonunit_all_cases(self, reason_context: RopeTerm, case: RopeTerm):
+        if reason_context is not None and case is not None:
+            self.del_reasonunit_case(reason_context=reason_context, case=case)
+            if len(self.reasonunits[reason_context].cases) == 0:
+                self.del_reasonunit_reason_context(reason_context=reason_context)
 
-    def set_reason_r_plan_active_requisite(
-        self, r_context: RopeTerm, r_plan_active_requisite: str
+    def set_reason_plan_active_requisite(
+        self, reason_context: RopeTerm, reason_active_requisite: str
     ):
-        x_reasonunit = self._get_or_create_reasonunit(r_context=r_context)
-        if r_plan_active_requisite is False:
-            x_reasonunit.r_plan_active_requisite = False
-        elif r_plan_active_requisite == "Set to Ignore":
-            x_reasonunit.r_plan_active_requisite = None
-        elif r_plan_active_requisite:
-            x_reasonunit.r_plan_active_requisite = True
+        x_reasonunit = self._get_or_create_reasonunit(reason_context=reason_context)
+        if reason_active_requisite is False:
+            x_reasonunit.reason_active_requisite = False
+        elif reason_active_requisite == "Set to Ignore":
+            x_reasonunit.reason_active_requisite = None
+        elif reason_active_requisite:
+            x_reasonunit.reason_active_requisite = True
 
-    def _get_or_create_reasonunit(self, r_context: RopeTerm) -> ReasonUnit:
+    def _get_or_create_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         x_reasonunit = None
         try:
-            x_reasonunit = self.reasonunits[r_context]
+            x_reasonunit = self.reasonunits[reason_context]
         except Exception:
-            x_reasonunit = reasonunit_shop(r_context, knot=self.knot)
-            self.reasonunits[r_context] = x_reasonunit
+            x_reasonunit = reasonunit_shop(reason_context, knot=self.knot)
+            self.reasonunits[reason_context] = x_reasonunit
         return x_reasonunit
 
     def set_reason_case(
         self,
-        r_context: RopeTerm,
+        reason_context: RopeTerm,
         case: RopeTerm,
-        r_lower: float,
-        r_upper: float,
-        r_divisor: int,
+        reason_lower: float,
+        reason_upper: float,
+        reason_divisor: int,
     ):
-        x_reasonunit = self._get_or_create_reasonunit(r_context=r_context)
+        x_reasonunit = self._get_or_create_reasonunit(reason_context=reason_context)
         x_reasonunit.set_case(
-            case=case, r_lower=r_lower, r_upper=r_upper, r_divisor=r_divisor
+            case=case,
+            reason_lower=reason_lower,
+            reason_upper=reason_upper,
+            reason_divisor=reason_divisor,
         )
 
-    def del_reasonunit_r_context(self, r_context: RopeTerm):
+    def del_reasonunit_reason_context(self, reason_context: RopeTerm):
         try:
-            self.reasonunits.pop(r_context)
+            self.reasonunits.pop(reason_context)
         except KeyError as e:
-            raise InvalidPlanException(f"No ReasonUnit at '{r_context}'") from e
+            raise InvalidPlanException(f"No ReasonUnit at '{reason_context}'") from e
 
-    def del_reasonunit_case(self, r_context: RopeTerm, case: RopeTerm):
-        reason_unit = self.reasonunits[r_context]
+    def del_reasonunit_case(self, reason_context: RopeTerm, case: RopeTerm):
+        reason_unit = self.reasonunits[reason_context]
         reason_unit.del_case(case=case)
 
     def add_kid(self, plan_kid):
@@ -805,13 +810,13 @@ class PlanUnit:
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.knot = self.knot
-        self.reasonunits[reason.r_context] = reason
+        self.reasonunits[reason.reason_context] = reason
 
-    def reasonunit_exists(self, x_r_context: RopeTerm) -> bool:
-        return self.reasonunits.get(x_r_context) != None
+    def reasonunit_exists(self, x_reason_context: RopeTerm) -> bool:
+        return self.reasonunits.get(x_reason_context) != None
 
-    def get_reasonunit(self, r_context: RopeTerm) -> ReasonUnit:
-        return self.reasonunits.get(r_context)
+    def get_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
+        return self.reasonunits.get(reason_context)
 
     def set_reasonheirs_status(self):
         self.clear_reasonheirs_status()
@@ -863,25 +868,27 @@ class PlanUnit:
         believer_plan_dict: dict[RopeTerm,],
         range_inheritors: dict[RopeTerm, RopeTerm],
     ):
-        for reason_r_context in self._reasonheirs.keys():
-            if range_root_rope := range_inheritors.get(reason_r_context):
+        for reason_context in self._reasonheirs.keys():
+            if range_root_rope := range_inheritors.get(reason_context):
                 all_plans = all_plans_between(
-                    believer_plan_dict, range_root_rope, reason_r_context, self.knot
+                    believer_plan_dict, range_root_rope, reason_context, self.knot
                 )
-                self._create_factheir(all_plans, range_root_rope, reason_r_context)
+                self._create_factheir(all_plans, range_root_rope, reason_context)
 
     def _create_factheir(
-        self, all_plans: list, range_root_rope: RopeTerm, reason_r_context: RopeTerm
+        self, all_plans: list, range_root_rope: RopeTerm, reason_context: RopeTerm
     ):
         range_root_factheir = self._factheirs.get(range_root_rope)
-        old_r_lower = range_root_factheir.f_lower
-        old_r_upper = range_root_factheir.f_upper
-        x_rangeunit = plans_calculated_range(all_plans, old_r_lower, old_r_upper)
-        new_factheir_r_lower = x_rangeunit.gogo
-        new_factheir_r_upper = x_rangeunit.stop
-        new_factheir_obj = factheir_shop(reason_r_context)
+        old_reason_lower = range_root_factheir.fact_lower
+        old_reason_upper = range_root_factheir.fact_upper
+        x_rangeunit = plans_calculated_range(
+            all_plans, old_reason_lower, old_reason_upper
+        )
+        new_factheir_reason_lower = x_rangeunit.gogo
+        new_factheir_reason_upper = x_rangeunit.stop
+        new_factheir_obj = factheir_shop(reason_context)
         new_factheir_obj.set_attr(
-            reason_r_context, new_factheir_r_lower, new_factheir_r_upper
+            reason_context, new_factheir_reason_lower, new_factheir_reason_upper
         )
         self._set_factheir(new_factheir_obj)
 
@@ -908,29 +915,33 @@ class PlanUnit:
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self._reasonheirs = {}
         for old_reasonheir in coalesced_reasons.values():
-            old_r_context = old_reasonheir.r_context
-            old_active_requisite = old_reasonheir.r_plan_active_requisite
-            new_reasonheir = reasonheir_shop(old_r_context, None, old_active_requisite)
+            old_reason_context = old_reasonheir.reason_context
+            old_active_requisite = old_reasonheir.reason_active_requisite
+            new_reasonheir = reasonheir_shop(
+                old_reason_context, None, old_active_requisite
+            )
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if r_context_plan := believer_plan_dict.get(old_reasonheir.r_context):
-                new_reasonheir.set_rplan_active_value(r_context_plan._active)
-            self._reasonheirs[new_reasonheir.r_context] = new_reasonheir
+            if reason_context_plan := believer_plan_dict.get(
+                old_reasonheir.reason_context
+            ):
+                new_reasonheir.set_rplan_active_value(reason_context_plan._active)
+            self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
     def set_planroot_inherit_reasonheirs(self):
         self._reasonheirs = {}
         for x_reasonunit in self.reasonunits.values():
-            new_reasonheir = reasonheir_shop(x_reasonunit.r_context)
+            new_reasonheir = reasonheir_shop(x_reasonunit.reason_context)
             new_reasonheir.inherit_from_reasonheir(x_reasonunit)
-            self._reasonheirs[new_reasonheir.r_context] = new_reasonheir
+            self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
-    def get_reasonheir(self, r_context: RopeTerm) -> ReasonHeir:
-        return self._reasonheirs.get(r_context)
+    def get_reasonheir(self, reason_context: RopeTerm) -> ReasonHeir:
+        return self._reasonheirs.get(reason_context)
 
     def get_reasonunits_dict(self):
         return {
-            r_context: reason.get_dict()
-            for r_context, reason in self.reasonunits.items()
+            reason_context: reason.get_dict()
+            for reason_context, reason in self.reasonunits.items()
         }
 
     def get_kids_dict(self) -> dict[GroupTitle,]:
@@ -1168,10 +1179,10 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 def all_plans_between(
     believer_plan_dict: dict[RopeTerm, PlanUnit],
     src_rope: RopeTerm,
-    dst_r_context: RopeTerm,
+    dst_reason_context: RopeTerm,
     knot: str,
 ) -> list[PlanUnit]:
-    all_ropes = all_ropeterms_between(src_rope, dst_r_context, knot)
+    all_ropes = all_ropeterms_between(src_rope, dst_reason_context, knot)
     return [believer_plan_dict.get(x_rope) for x_rope in all_ropes]
 
 

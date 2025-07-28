@@ -44,7 +44,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.belief_label
     assert not x_objkeyholder.believer_name
     assert not x_objkeyholder.rope
-    assert not x_objkeyholder.r_context
+    assert not x_objkeyholder.reason_context
     assert not x_objkeyholder.partner_name
     assert not x_objkeyholder.membership
     assert not x_objkeyholder.group_title
@@ -294,14 +294,14 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     x_belief_label = 1
     x_believer_name = 2
     x_rope = 3
-    x_r_context = 4
-    x_r_plan_active_requisite = 5
+    x_reason_context = 4
+    x_reason_active_requisite = 5
     x__chore = 6
     x__status = 7
     x__rplan_active_value = 8
-    x_reasonheir = reasonheir_shop(r_context=x_r_context)
-    x_reasonheir.r_context = x_r_context
-    x_reasonheir.r_plan_active_requisite = x_r_plan_active_requisite
+    x_reasonheir = reasonheir_shop(reason_context=x_reason_context)
+    x_reasonheir.reason_context = x_reason_context
+    x_reasonheir.reason_active_requisite = x_reason_active_requisite
     x_reasonheir._chore = x__chore
     x_reasonheir._status = x__status
     x_reasonheir._rplan_active_value = x__rplan_active_value
@@ -325,8 +325,8 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
             str(x_belief_label),
             str(x_believer_name),
             str(x_rope),
-            str(x_r_context),
-            x_r_plan_active_requisite,
+            str(x_reason_context),
+            x_reason_active_requisite,
             x__chore,
             x__status,
             x__rplan_active_value,
@@ -353,18 +353,18 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     x_belief_label = 1
     x_believer_name = 2
     x_rope = 3
-    x_r_context = 4
-    x_r_state = 5
-    x_r_upper = 6.0
-    x_r_lower = 7.0
-    x_r_divisor = 8
+    x_reason_context = 4
+    x_reason_state = 5
+    x_reason_upper = 6.0
+    x_reason_lower = 7.0
+    x_reason_divisor = 8
     x__chore = 9
     x__status = 10
-    x_caseunit = caseunit_shop(r_state=x_r_state)
-    x_caseunit.r_state = x_r_state
-    x_caseunit.r_upper = x_r_upper
-    x_caseunit.r_lower = x_r_lower
-    x_caseunit.r_divisor = x_r_divisor
+    x_caseunit = caseunit_shop(reason_state=x_reason_state)
+    x_caseunit.reason_state = x_reason_state
+    x_caseunit.reason_upper = x_reason_upper
+    x_caseunit.reason_lower = x_reason_lower
+    x_caseunit.reason_divisor = x_reason_divisor
     x_caseunit._chore = x__chore
     x_caseunit._status = x__status
 
@@ -374,7 +374,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
         x_table_name = "believer_plan_reason_caseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_belief_label, x_believer_name, x_rope, x_r_context
+            x_belief_label, x_believer_name, x_rope, x_reason_context
         )
 
         # WHEN
@@ -389,11 +389,11 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
             str(x_belief_label),
             str(x_believer_name),
             str(x_rope),
-            str(x_r_context),
-            str(x_r_state),
-            x_r_upper,
-            x_r_lower,
-            x_r_divisor,
+            str(x_reason_context),
+            str(x_reason_state),
+            x_reason_upper,
+            x_reason_lower,
+            x_reason_divisor,
             x__chore,
             x__status,
         )
@@ -705,15 +705,15 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
     x_belief_label = 1
     x_believer_name = 2
     x_rope = 3
-    x_r_context = 4
-    x_f_state = 5
-    x_f_lower = 6
-    x_f_upper = 7
+    x_reason_context = 4
+    x_fact_state = 5
+    x_fact_lower = 6
+    x_fact_upper = 7
     x_factheir = factheir_shop()
-    x_factheir.f_context = x_r_context
-    x_factheir.f_state = x_f_state
-    x_factheir.f_lower = x_f_lower
-    x_factheir.f_upper = x_f_upper
+    x_factheir.fact_context = x_reason_context
+    x_factheir.fact_state = x_fact_state
+    x_factheir.fact_lower = x_fact_lower
+    x_factheir.fact_upper = x_fact_upper
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -734,10 +734,10 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
             str(x_belief_label),
             str(x_believer_name),
             str(x_rope),
-            str(x_r_context),
-            str(x_f_state),
-            x_f_lower,
-            x_f_upper,
+            str(x_reason_context),
+            str(x_fact_state),
+            x_fact_lower,
+            x_fact_upper,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -875,7 +875,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_believer.add_plan(clean_rope)
     sue_believer.add_plan(dirty_rope)
     sue_believer.edit_plan_attr(
-        casa_rope, reason_r_context=status_rope, reason_case=dirty_rope
+        casa_rope, reason_context=status_rope, reason_case=dirty_rope
     )
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))

@@ -479,9 +479,11 @@ class BelieverTimelinePoint:
         week_rope = get_week_rope(self.x_believerunit, self.time_range_root_rope)
         week_plan = self.x_believerunit.get_plan_obj(week_rope)
         x_plan_list = [self._timeline_plan, week_plan]
-        r_lower_rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
-        r_lower_weekday_dict = week_plan.get_kids_in_range(r_lower_rangeunit.gogo)
-        for x_weekday in r_lower_weekday_dict.keys():
+        reason_lower_rangeunit = calc_range(x_plan_list, self.x_min, self.x_min)
+        reason_lower_weekday_dict = week_plan.get_kids_in_range(
+            reason_lower_rangeunit.gogo
+        )
+        for x_weekday in reason_lower_weekday_dict.keys():
             self._weekday = x_weekday
 
     def _set_month(self):
@@ -494,15 +496,15 @@ class BelieverTimelinePoint:
             year_rope,
             knot=self.x_believerunit.knot,
         )
-        r_lower_rangeunit = calc_range(plan_list, self.x_min, self.x_min)
-        gogo_month_dict = year_plan.get_kids_in_range(r_lower_rangeunit.gogo)
+        reason_lower_rangeunit = calc_range(plan_list, self.x_min, self.x_min)
+        gogo_month_dict = year_plan.get_kids_in_range(reason_lower_rangeunit.gogo)
         month_plan = None
         for x_monthname, month_plan in gogo_month_dict.items():
             self._month = x_monthname
             month_plan = month_plan
 
         self._monthday = (
-            r_lower_rangeunit.gogo - month_plan._gogo_calc + month_plan.addin
+            reason_lower_rangeunit.gogo - month_plan._gogo_calc + month_plan.addin
         )
         self._monthday = self._monthday // 1440
 

@@ -30,16 +30,16 @@ from src.a04_reason_logic.test._util.a04_str import (
     _chore_str,
     _status_str,
     belief_label_str,
-    f_context_str,
-    f_lower_str,
-    f_state_str,
-    f_upper_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fact_upper_str,
     labor_title_str,
-    r_context_str,
-    r_lower_str,
-    r_plan_active_requisite_str,
-    r_state_str,
-    r_upper_str,
+    reason_active_requisite_str,
+    reason_context_str,
+    reason_lower_str,
+    reason_state_str,
+    reason_upper_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
@@ -78,8 +78,8 @@ def _rational_str() -> str:
     return "_rational"
 
 
-def _reason_r_contexts_str() -> str:
-    return "_reason_r_contexts"
+def _reason_contexts_str() -> str:
+    return "_reason_contexts"
 
 
 def _sum_healerlink_share_str() -> str:

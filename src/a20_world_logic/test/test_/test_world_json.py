@@ -19,23 +19,23 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
     assert x_world_dict
     assert set(x_world_dict.keys()) == {
         "world_name",
-        "world_time_r_upper",
+        "world_time_reason_upper",
     }
     assert x_world_dict.get("world_name") == five_world_name
-    assert x_world_dict.get("world_time_r_upper") == 0
+    assert x_world_dict.get("world_time_reason_upper") == 0
 
 
 def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
     five_world_name = "five"
-    world2_time_r_upper = 55
+    world2_time_reason_upper = 55
     amy45_str = "amy45"
     world2_beliefunits = {"amy45"}
     x_world = worldunit_shop(
         world_name=five_world_name,
         worlds_dir=worlds2_dir,
-        world_time_r_upper=world2_time_r_upper,
+        world_time_reason_upper=world2_time_reason_upper,
         _beliefunits=world2_beliefunits,
     )
 
@@ -45,4 +45,4 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     # THEN
     assert x_world_dict
     assert x_world_dict.get("world_name") == five_world_name
-    assert x_world_dict.get("world_time_r_upper") == world2_time_r_upper
+    assert x_world_dict.get("world_time_reason_upper") == world2_time_reason_upper

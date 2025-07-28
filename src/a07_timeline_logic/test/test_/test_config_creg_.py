@@ -602,17 +602,20 @@ def test_BelieverUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
 
     sue_believer.edit_plan_attr(
         clean_rope,
-        reason_r_context=day_rope,
+        reason_context=day_rope,
         reason_case=day_rope,
-        r_lower=320,
-        reason_r_upper=480,
+        reason_lower=320,
+        reason_upper=480,
     )
 
     # WHEN
-    x_r_lower = 2063971110
-    x_r_upper1 = 2063971523
+    x_reason_lower = 2063971110
+    x_reason_upper1 = 2063971523
     sue_believer.add_fact(
-        cregtime_rope, f_state=cregtime_rope, f_lower=x_r_lower, f_upper=x_r_upper1
+        cregtime_rope,
+        fact_state=cregtime_rope,
+        fact_lower=x_reason_lower,
+        fact_upper=x_reason_upper1,
     )
 
     # THEN
@@ -622,11 +625,14 @@ def test_BelieverUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
     assert clean_rope in agenda_dict.keys()
 
     # WHEN
-    # x_r_upper2 = 1063971923
-    x_r_lower2 = 0
-    x_r_upper2 = 0
+    # x_reason_upper2 = 1063971923
+    x_reason_lower2 = 0
+    x_reason_upper2 = 0
     sue_believer.add_fact(
-        cregtime_rope, f_state=cregtime_rope, f_lower=x_r_lower2, f_upper=x_r_upper2
+        cregtime_rope,
+        fact_state=cregtime_rope,
+        fact_lower=x_reason_lower2,
+        fact_upper=x_reason_upper2,
     )
     print(f"{sue_believer.planroot.factunits=}")
 
@@ -663,15 +669,17 @@ def test_BelieverUnit_create_agenda_plan_CorrectlyCreatesAllBelieverAttributes()
     creg_plan = sue_believer.get_plan_obj(cregtime_rope)
     print(f"{creg_plan._kids.keys()=}")
     daytime_rope = sue_believer.make_rope(cregtime_rope, "day")
-    r_lower_8am = 480
-    r_upper_8am = 480
+    reason_lower_8am = 480
+    reason_upper_8am = 480
 
     dirty_cookery_reason = reasonunit_shop(cookery_room_rope)
     dirty_cookery_reason.set_case(case=cookery_dirty_rope)
     sweep_plan.set_reasonunit(reason=dirty_cookery_reason)
 
     daytime_reason = reasonunit_shop(daytime_rope)
-    daytime_reason.set_case(case=daytime_rope, r_lower=r_lower_8am, r_upper=r_upper_8am)
+    daytime_reason.set_case(
+        case=daytime_rope, reason_lower=reason_lower_8am, reason_upper=reason_upper_8am
+    )
     sweep_plan.set_reasonunit(reason=daytime_reason)
 
     family_str = ",family"
@@ -721,15 +729,17 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     cregtime_rope = sue_believer.make_rope(time_rope, creg_str())
     sue_believer.edit_plan_attr(
         laundry_rope,
-        reason_r_context=cregtime_rope,
+        reason_context=cregtime_rope,
         reason_case=cregtime_rope,
-        r_lower=3420.0,
-        reason_r_upper=3420.0,
-        r_divisor=10080.0,
+        reason_lower=3420.0,
+        reason_upper=3420.0,
+        reason_divisor=10080.0,
     )
     print("set first fact")
 
-    sue_believer.add_fact(cregtime_rope, cregtime_rope, 1064131200, f_upper=1064135133)
+    sue_believer.add_fact(
+        cregtime_rope, cregtime_rope, 1064131200, fact_upper=1064135133
+    )
     print("get 1st agenda dictionary")
     sue_agenda_dict = sue_believer.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
@@ -740,12 +750,12 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_case = laundry_reasonheir.get_case(cregtime_rope)
     laundry_factheir = laundry_plan._factheirs.get(cregtime_rope)
     # print(
-    #     f"{laundry_plan._active=} {laundry_case.r_lower=} {laundry_factheir.f_lower % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
     # )
     # print(
-    #     f"{laundry_plan._active=} {laundry_case.r_upper=} {laundry_factheir.f_upper % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.reason_upper=} {laundry_factheir.fact_upper % 10080=}"
     # )
-    # print(f"{laundry_reasonheir.r_context=} {laundry_case=}")
+    # print(f"{laundry_reasonheir.reason_context=} {laundry_case=}")
     # for x_planunit in sue_believer._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:
     #         print(f"{x_planunit.plan_label=} {x_planunit.begin=} {x_planunit.close=}")
@@ -753,7 +763,9 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
 
     # WHEN
     print("set 2nd fact")
-    sue_believer.add_fact(cregtime_rope, cregtime_rope, 1064131200, f_upper=1064136133)
+    sue_believer.add_fact(
+        cregtime_rope, cregtime_rope, 1064131200, fact_upper=1064136133
+    )
     print("get 2nd agenda dictionary")
     sue_agenda_dict = sue_believer.get_agenda_dict()
     print(f"{sue_agenda_dict.keys()=}")
@@ -763,18 +775,18 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_case = laundry_reasonheir.get_case(cregtime_rope)
     laundry_factheir = laundry_plan._factheirs.get(cregtime_rope)
     # print(
-    #     f"{laundry_plan._active=} {laundry_case.r_lower=} {laundry_factheir.f_lower % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
     # )
     # print(
-    #     f"{laundry_plan._active=} {laundry_case.r_upper=} {laundry_factheir.f_upper % 10080=}"
+    #     f"{laundry_plan._active=} {laundry_case.reason_upper=} {laundry_factheir.fact_upper % 10080=}"
     # )
     # for x_planunit in sue_believer._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:
     #         print(f"{x_planunit.plan_label=} {x_planunit.begin=} {x_planunit.close=}")
     #         print(f"{x_planunit._kids.keys()=}")
     #         creg_factheir = x_planunit._factheirs.get(cregtime_rope)
-    #         print(f"{creg_factheir.f_lower % 10080=}")
-    #         print(f"{creg_factheir.f_upper % 10080=}")
+    #         print(f"{creg_factheir.fact_lower % 10080=}")
+    #         print(f"{creg_factheir.fact_upper % 10080=}")
 
     # THEN
     assert sue_agenda_dict == {}

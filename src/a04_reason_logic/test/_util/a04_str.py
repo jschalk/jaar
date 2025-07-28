@@ -18,45 +18,45 @@ def belief_label_str() -> str:
     return "belief_label"
 
 
-def f_context_str() -> str:
-    return "f_context"
+def fact_context_str() -> str:
+    return "fact_context"
 
 
-def f_lower_str() -> str:
-    return "f_lower"
+def fact_lower_str() -> str:
+    return "fact_lower"
 
 
-def f_state_str() -> str:
-    return "f_state"
+def fact_state_str() -> str:
+    return "fact_state"
 
 
-def f_upper_str() -> str:
-    return "f_upper"
+def fact_upper_str() -> str:
+    return "fact_upper"
 
 
 def labor_title_str() -> str:
     return "labor_title"
 
 
-def r_context_str() -> str:
-    return "r_context"
+def reason_active_requisite_str() -> str:
+    return "reason_active_requisite"
 
 
-def r_divisor_str() -> str:
-    return "r_divisor"
+def reason_context_str() -> str:
+    return "reason_context"
 
 
-def r_lower_str() -> str:
-    return "r_lower"
+def reason_divisor_str() -> str:
+    return "reason_divisor"
 
 
-def r_plan_active_requisite_str() -> str:
-    return "r_plan_active_requisite"
+def reason_lower_str() -> str:
+    return "reason_lower"
 
 
-def r_state_str() -> str:
-    return "r_state"
+def reason_state_str() -> str:
+    return "reason_state"
 
 
-def r_upper_str() -> str:
-    return "r_upper"
+def reason_upper_str() -> str:
+    return "reason_upper"

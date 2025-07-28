@@ -8,9 +8,9 @@ from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     belief_label_str,
     believer_name_str,
-    f_context_str,
-    f_lower_str,
-    f_state_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
     fund_iota_str,
     group_title_str,
     healer_name_str,
@@ -19,8 +19,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     penny_str,
     plan_label_str,
     plan_rope_str,
-    r_context_str,
-    r_state_str,
+    reason_context_str,
+    reason_state_str,
     respect_bit_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import timeline_label_str
@@ -73,8 +73,8 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == TitleTerm_str()
-    assert pidgin_args_class_types.get("r_context") == RopeTerm_str()
-    assert pidgin_args_class_types.get("r_plan_active_requisite") == "bool"
+    assert pidgin_args_class_types.get("reason_context") == RopeTerm_str()
+    assert pidgin_args_class_types.get("reason_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
@@ -87,12 +87,12 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("group_debt_points") == "float"
     assert pidgin_args_class_types.get("debtor_respect") == "float"
     assert pidgin_args_class_types.get("denom") == "int"
-    assert pidgin_args_class_types.get("r_divisor") == "int"
+    assert pidgin_args_class_types.get("reason_divisor") == "int"
     assert pidgin_args_class_types.get("face_name") == NameTerm_str()
-    assert pidgin_args_class_types.get("f_context") == RopeTerm_str()
+    assert pidgin_args_class_types.get("fact_context") == RopeTerm_str()
     assert pidgin_args_class_types.get("belief_label") == LabelTerm_str()
-    assert pidgin_args_class_types.get("f_upper") == "float"
-    assert pidgin_args_class_types.get("f_lower") == "float"
+    assert pidgin_args_class_types.get("fact_upper") == "float"
+    assert pidgin_args_class_types.get("fact_lower") == "float"
     assert pidgin_args_class_types.get("fund_iota") == "float"
     assert pidgin_args_class_types.get("fund_pool") == "float"
     assert pidgin_args_class_types.get("give_force") == "float"
@@ -105,14 +105,14 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("month_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("r_state") == RopeTerm_str()
-    assert pidgin_args_class_types.get("r_upper") == "float"
+    assert pidgin_args_class_types.get("reason_state") == RopeTerm_str()
+    assert pidgin_args_class_types.get("reason_upper") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("believer_name") == NameTerm_str()
-    assert pidgin_args_class_types.get("r_lower") == "float"
+    assert pidgin_args_class_types.get("reason_lower") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("f_state") == RopeTerm_str()
+    assert pidgin_args_class_types.get("fact_state") == RopeTerm_str()
     assert pidgin_args_class_types.get("task") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
@@ -205,16 +205,16 @@ def test_get_pidginable_args_ReturnsObj():
     assert get_pidginable_args() == {
         partner_name_str(),
         awardee_title_str(),
-        r_context_str(),
+        reason_context_str(),
         face_name_str(),
-        f_context_str(),
+        fact_context_str(),
         belief_label_str(),
-        f_state_str(),
+        fact_state_str(),
         group_title_str(),
         healer_name_str(),
         hour_label_str(),
         month_label_str(),
-        r_state_str(),
+        reason_state_str(),
         believer_name_str(),
         plan_rope_str(),
         labor_title_str(),
@@ -360,11 +360,11 @@ def test_get_pidgin_RopeTerm_args_ReturnsObj():
 
     # THEN
     assert pidgin_RopeTerm_args == {
-        f_state_str(),
-        f_context_str(),
+        fact_state_str(),
+        fact_context_str(),
         plan_rope_str(),
-        r_context_str(),
-        r_state_str(),
+        reason_context_str(),
+        reason_state_str(),
     }
     expected_args = {
         x_arg

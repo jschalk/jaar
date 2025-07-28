@@ -100,7 +100,9 @@ def test_get_reason_case_str_ReturnsObj_Scenario2_CaseRange():
     dirtiness_lower_int = 4
     dirtiness_upper_int = 8
     status_casa_reason.set_case(
-        dirty_floors_rope, r_lower=dirtiness_lower_int, r_upper=dirtiness_upper_int
+        dirty_floors_rope,
+        reason_lower=dirtiness_lower_int,
+        reason_upper=dirtiness_upper_int,
     )
     dirty_floors_case = status_casa_reason.get_case(dirty_floors_rope)
 
@@ -116,7 +118,7 @@ def test_get_reason_case_str_ReturnsObj_Scenario2_CaseRange():
     assert dirty_floors_context_str == expected_str
 
 
-def test_get_reason_case_str_ReturnsObj_Scenario3_CaseRangeAnd_r_divisor():
+def test_get_reason_case_str_ReturnsObj_Scenario3_CaseRangeAnd_reason_divisor():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -132,9 +134,9 @@ def test_get_reason_case_str_ReturnsObj_Scenario3_CaseRangeAnd_r_divisor():
     dirtiness_divisor_int = 2
     status_casa_reason.set_case(
         dirty_floors_rope,
-        r_lower=dirtiness_lower_int,
-        r_upper=dirtiness_upper_int,
-        r_divisor=dirtiness_divisor_int,
+        reason_lower=dirtiness_lower_int,
+        reason_upper=dirtiness_upper_int,
+        reason_divisor=dirtiness_divisor_int,
     )
     dirty_floors_case = status_casa_reason.get_case(dirty_floors_rope)
 

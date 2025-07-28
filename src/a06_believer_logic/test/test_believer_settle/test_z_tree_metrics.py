@@ -15,7 +15,7 @@ def test_BelieverUnit_get_tree_metrics_exists():
 
     # THEN
     assert zia_believer_tree_metrics.label_count is not None
-    assert zia_believer_tree_metrics.reason_r_contexts is not None
+    assert zia_believer_tree_metrics.reason_contexts is not None
     assert zia_believer_tree_metrics.level_count is not None
     assert zia_believer_tree_metrics.awardlinks_metrics is not None
 
@@ -110,7 +110,7 @@ def test_BelieverUnit_get_tree_metrics_Returns_task_PlanRopeTerm():
     assert yao_tree_metrics.last_evaluated_task_plan_rope == traain_rope
 
 
-def test_BelieverUnit_get_tree_metrics_TracksReasonsThatHaveNoFactr_contexts():
+def test_BelieverUnit_get_tree_metrics_TracksReasonsThatHaveNoFactreason_contexts():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
 
@@ -119,34 +119,34 @@ def test_BelieverUnit_get_tree_metrics_TracksReasonsThatHaveNoFactr_contexts():
 
     # THEN
     print(f"{yao_tree_metrics.level_count=}")
-    print(f"{yao_tree_metrics.reason_r_contexts=}")
+    print(f"{yao_tree_metrics.reason_contexts=}")
     assert yao_tree_metrics is not None
-    reason_r_contexts_x = yao_tree_metrics.reason_r_contexts
-    assert reason_r_contexts_x is not None
-    assert len(reason_r_contexts_x) > 0
+    reason_contexts_x = yao_tree_metrics.reason_contexts
+    assert reason_contexts_x is not None
+    assert len(reason_contexts_x) > 0
 
 
-def test_BelieverUnit_get_missing_fact_r_contexts_ReturnsAllr_contextsNotCoveredByFacts():
+def test_BelieverUnit_get_missing_fact_reason_contexts_ReturnsAllreason_contextsNotCoveredByFacts():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
-    missing_r_contexts = yao_believerunit.get_missing_fact_r_contexts()
-    assert missing_r_contexts is not None
-    print(f"{missing_r_contexts=}")
-    print(f"{len(missing_r_contexts)=}")
-    assert len(missing_r_contexts) == 11
+    missing_reason_contexts = yao_believerunit.get_missing_fact_reason_contexts()
+    assert missing_reason_contexts is not None
+    print(f"{missing_reason_contexts=}")
+    print(f"{len(missing_reason_contexts)=}")
+    assert len(missing_reason_contexts) == 11
 
     yao_believerunit.add_fact(
         yao_believerunit.make_l1_rope("jour_minute"),
-        f_state=yao_believerunit.make_l1_rope("jour_minute"),
-        f_lower=0,
-        f_upper=1439,
+        fact_state=yao_believerunit.make_l1_rope("jour_minute"),
+        fact_lower=0,
+        fact_upper=1439,
     )
 
     # WHEN
-    missing_r_contexts = yao_believerunit.get_missing_fact_r_contexts()
+    missing_reason_contexts = yao_believerunit.get_missing_fact_reason_contexts()
 
     # THEN
-    assert len(missing_r_contexts) == 11
+    assert len(missing_reason_contexts) == 11
 
 
 def test_BelieverUnit_3AdvocatesNoplanunit_shop():

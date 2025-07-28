@@ -456,13 +456,13 @@ def add_believer_plan_reasonunit_insert_to_legible_list(
     for rope_dict in plan_reasonunit_insert_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
             rope_value = plan_reasonunit_atom.get_value("plan_rope")
-            r_context_value = plan_reasonunit_atom.get_value("r_context")
-            r_plan_active_requisite_value = plan_reasonunit_atom.get_value(
-                "r_plan_active_requisite"
+            reason_context_value = plan_reasonunit_atom.get_value("reason_context")
+            reason_active_requisite_value = plan_reasonunit_atom.get_value(
+                "reason_active_requisite"
             )
-            x_str = f"ReasonUnit created for plan '{rope_value}' with r_context '{r_context_value}'."
-            if r_plan_active_requisite_value is not None:
-                x_str += f" r_plan_active_requisite={r_plan_active_requisite_value}."
+            x_str = f"ReasonUnit created for plan '{rope_value}' with reason_context '{reason_context_value}'."
+            if reason_active_requisite_value is not None:
+                x_str += f" reason_active_requisite={reason_active_requisite_value}."
             legible_list.append(x_str)
 
 
@@ -472,14 +472,14 @@ def add_believer_plan_reasonunit_update_to_legible_list(
     for rope_dict in plan_reasonunit_update_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
             rope_value = plan_reasonunit_atom.get_value("plan_rope")
-            r_context_value = plan_reasonunit_atom.get_value("r_context")
-            r_plan_active_requisite_value = plan_reasonunit_atom.get_value(
-                "r_plan_active_requisite"
+            reason_context_value = plan_reasonunit_atom.get_value("reason_context")
+            reason_active_requisite_value = plan_reasonunit_atom.get_value(
+                "reason_active_requisite"
             )
-            if r_plan_active_requisite_value is not None:
-                x_str = f"ReasonUnit r_context='{r_context_value}' for plan '{rope_value}' set with r_plan_active_requisite={r_plan_active_requisite_value}."
+            if reason_active_requisite_value is not None:
+                x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' set with reason_active_requisite={reason_active_requisite_value}."
             else:
-                x_str = f"ReasonUnit r_context='{r_context_value}' for plan '{rope_value}' and no longer checks r_context active mode."
+                x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' and no longer checks reason_context active mode."
             legible_list.append(x_str)
 
 
@@ -489,8 +489,8 @@ def add_believer_plan_reasonunit_delete_to_legible_list(
     for rope_dict in plan_reasonunit_delete_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
             rope_value = plan_reasonunit_atom.get_value("plan_rope")
-            r_context_value = plan_reasonunit_atom.get_value("r_context")
-            x_str = f"ReasonUnit r_context='{r_context_value}' for plan '{rope_value}' has been deleted."
+            reason_context_value = plan_reasonunit_atom.get_value("reason_context")
+            x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -500,21 +500,25 @@ def add_believer_reason_caseunit_insert_to_legible_list(
     x_believer: BelieverUnit,
 ):
     for rope_dict in plan_reason_caseunit_insert_dict.values():
-        for r_context_dict in rope_dict.values():
-            for plan_reason_caseunit_atom in r_context_dict.values():
+        for reason_context_dict in rope_dict.values():
+            for plan_reason_caseunit_atom in reason_context_dict.values():
                 rope_value = plan_reason_caseunit_atom.get_value("plan_rope")
-                r_context_value = plan_reason_caseunit_atom.get_value("r_context")
-                r_state_value = plan_reason_caseunit_atom.get_value("r_state")
-                r_divisor_value = plan_reason_caseunit_atom.get_value("r_divisor")
-                r_upper_value = plan_reason_caseunit_atom.get_value("r_upper")
-                r_lower_value = plan_reason_caseunit_atom.get_value("r_lower")
-                x_str = f"CaseUnit '{r_state_value}' created for reason '{r_context_value}' for plan '{rope_value}'."
-                if r_lower_value is not None:
-                    x_str += f" r_lower={r_lower_value}."
-                if r_upper_value is not None:
-                    x_str += f" r_upper={r_upper_value}."
-                if r_divisor_value is not None:
-                    x_str += f" r_divisor={r_divisor_value}."
+                reason_context_value = plan_reason_caseunit_atom.get_value(
+                    "reason_context"
+                )
+                reason_state_value = plan_reason_caseunit_atom.get_value("reason_state")
+                reason_divisor_value = plan_reason_caseunit_atom.get_value(
+                    "reason_divisor"
+                )
+                reason_upper_value = plan_reason_caseunit_atom.get_value("reason_upper")
+                reason_lower_value = plan_reason_caseunit_atom.get_value("reason_lower")
+                x_str = f"CaseUnit '{reason_state_value}' created for reason '{reason_context_value}' for plan '{rope_value}'."
+                if reason_lower_value is not None:
+                    x_str += f" reason_lower={reason_lower_value}."
+                if reason_upper_value is not None:
+                    x_str += f" reason_upper={reason_upper_value}."
+                if reason_divisor_value is not None:
+                    x_str += f" reason_divisor={reason_divisor_value}."
                 legible_list.append(x_str)
 
 
@@ -524,21 +528,25 @@ def add_believer_reason_caseunit_update_to_legible_list(
     x_believer: BelieverUnit,
 ):
     for rope_dict in plan_reason_caseunit_update_dict.values():
-        for r_context_dict in rope_dict.values():
-            for plan_reason_caseunit_atom in r_context_dict.values():
+        for reason_context_dict in rope_dict.values():
+            for plan_reason_caseunit_atom in reason_context_dict.values():
                 rope_value = plan_reason_caseunit_atom.get_value("plan_rope")
-                r_context_value = plan_reason_caseunit_atom.get_value("r_context")
-                r_state_value = plan_reason_caseunit_atom.get_value("r_state")
-                r_divisor_value = plan_reason_caseunit_atom.get_value("r_divisor")
-                r_upper_value = plan_reason_caseunit_atom.get_value("r_upper")
-                r_lower_value = plan_reason_caseunit_atom.get_value("r_lower")
-                x_str = f"CaseUnit '{r_state_value}' updated for reason '{r_context_value}' for plan '{rope_value}'."
-                if r_lower_value is not None:
-                    x_str += f" r_lower={r_lower_value}."
-                if r_upper_value is not None:
-                    x_str += f" r_upper={r_upper_value}."
-                if r_divisor_value is not None:
-                    x_str += f" r_divisor={r_divisor_value}."
+                reason_context_value = plan_reason_caseunit_atom.get_value(
+                    "reason_context"
+                )
+                reason_state_value = plan_reason_caseunit_atom.get_value("reason_state")
+                reason_divisor_value = plan_reason_caseunit_atom.get_value(
+                    "reason_divisor"
+                )
+                reason_upper_value = plan_reason_caseunit_atom.get_value("reason_upper")
+                reason_lower_value = plan_reason_caseunit_atom.get_value("reason_lower")
+                x_str = f"CaseUnit '{reason_state_value}' updated for reason '{reason_context_value}' for plan '{rope_value}'."
+                if reason_lower_value is not None:
+                    x_str += f" reason_lower={reason_lower_value}."
+                if reason_upper_value is not None:
+                    x_str += f" reason_upper={reason_upper_value}."
+                if reason_divisor_value is not None:
+                    x_str += f" reason_divisor={reason_divisor_value}."
                 legible_list.append(x_str)
 
 
@@ -548,12 +556,14 @@ def add_believer_reason_caseunit_delete_to_legible_list(
     x_believer: BelieverUnit,
 ):
     for rope_dict in plan_reason_caseunit_delete_dict.values():
-        for r_context_dict in rope_dict.values():
-            for plan_reason_caseunit_atom in r_context_dict.values():
+        for reason_context_dict in rope_dict.values():
+            for plan_reason_caseunit_atom in reason_context_dict.values():
                 rope_value = plan_reason_caseunit_atom.get_value("plan_rope")
-                r_context_value = plan_reason_caseunit_atom.get_value("r_context")
-                r_state_value = plan_reason_caseunit_atom.get_value("r_state")
-                x_str = f"CaseUnit '{r_state_value}' deleted from reason '{r_context_value}' for plan '{rope_value}'."
+                reason_context_value = plan_reason_caseunit_atom.get_value(
+                    "reason_context"
+                )
+                reason_state_value = plan_reason_caseunit_atom.get_value("reason_state")
+                x_str = f"CaseUnit '{reason_state_value}' deleted from reason '{reason_context_value}' for plan '{rope_value}'."
                 legible_list.append(x_str)
 
 
@@ -607,15 +617,15 @@ def add_believer_plan_factunit_insert_to_legible_list(
     for rope_dict in plan_factunit_insert_dict.values():
         for plan_factunit_atom in rope_dict.values():
             rope_value = plan_factunit_atom.get_value("plan_rope")
-            f_context_value = plan_factunit_atom.get_value("f_context")
-            f_state_value = plan_factunit_atom.get_value("f_state")
-            f_upper_value = plan_factunit_atom.get_value("f_upper")
-            f_lower_value = plan_factunit_atom.get_value("f_lower")
-            x_str = f"FactUnit '{f_state_value}' created for r_context '{f_context_value}' for plan '{rope_value}'."
-            if f_lower_value is not None:
-                x_str += f" f_lower={f_lower_value}."
-            if f_upper_value is not None:
-                x_str += f" f_upper={f_upper_value}."
+            fact_context_value = plan_factunit_atom.get_value("fact_context")
+            fact_state_value = plan_factunit_atom.get_value("fact_state")
+            fact_upper_value = plan_factunit_atom.get_value("fact_upper")
+            fact_lower_value = plan_factunit_atom.get_value("fact_lower")
+            x_str = f"FactUnit '{fact_state_value}' created for reason_context '{fact_context_value}' for plan '{rope_value}'."
+            if fact_lower_value is not None:
+                x_str += f" fact_lower={fact_lower_value}."
+            if fact_upper_value is not None:
+                x_str += f" fact_upper={fact_upper_value}."
             legible_list.append(x_str)
 
 
@@ -625,15 +635,15 @@ def add_believer_plan_factunit_update_to_legible_list(
     for rope_dict in plan_factunit_update_dict.values():
         for plan_factunit_atom in rope_dict.values():
             rope_value = plan_factunit_atom.get_value("plan_rope")
-            f_context_value = plan_factunit_atom.get_value("f_context")
-            f_state_value = plan_factunit_atom.get_value("f_state")
-            f_upper_value = plan_factunit_atom.get_value("f_upper")
-            f_lower_value = plan_factunit_atom.get_value("f_lower")
-            x_str = f"FactUnit '{f_state_value}' updated for r_context '{f_context_value}' for plan '{rope_value}'."
-            if f_lower_value is not None:
-                x_str += f" f_lower={f_lower_value}."
-            if f_upper_value is not None:
-                x_str += f" f_upper={f_upper_value}."
+            fact_context_value = plan_factunit_atom.get_value("fact_context")
+            fact_state_value = plan_factunit_atom.get_value("fact_state")
+            fact_upper_value = plan_factunit_atom.get_value("fact_upper")
+            fact_lower_value = plan_factunit_atom.get_value("fact_lower")
+            x_str = f"FactUnit '{fact_state_value}' updated for reason_context '{fact_context_value}' for plan '{rope_value}'."
+            if fact_lower_value is not None:
+                x_str += f" fact_lower={fact_lower_value}."
+            if fact_upper_value is not None:
+                x_str += f" fact_upper={fact_upper_value}."
             legible_list.append(x_str)
 
 
@@ -643,7 +653,7 @@ def add_believer_plan_factunit_delete_to_legible_list(
     for rope_dict in plan_factunit_delete_dict.values():
         for plan_factunit_atom in rope_dict.values():
             rope_value = plan_factunit_atom.get_value("plan_rope")
-            f_context_value = plan_factunit_atom.get_value("f_context")
-            f_state_value = plan_factunit_atom.get_value("f_state")
-            x_str = f"FactUnit r_context '{f_context_value}' deleted for plan '{rope_value}'."
+            fact_context_value = plan_factunit_atom.get_value("fact_context")
+            fact_state_value = plan_factunit_atom.get_value("fact_state")
+            x_str = f"FactUnit reason_context '{fact_context_value}' deleted for plan '{rope_value}'."
             legible_list.append(x_str)
