@@ -135,7 +135,7 @@ def test_BelieverTimelinePoint_set_hour_SetsAttr():
     x_timelinepoint._set_hour()
 
     # THEN
-    assert x_timelinepoint._hour == "10-10am"
+    assert x_timelinepoint._hour == "10am"
     assert x_timelinepoint._minute == 41
 
 
@@ -257,7 +257,7 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     assert creg_timelinepoint._weekday == "Wednesday"
     assert creg_timelinepoint._month == "March"
     assert creg_timelinepoint._monthday == 1
-    assert creg_timelinepoint._hour == "0-12am"
+    assert creg_timelinepoint._hour == "12am"
     assert creg_timelinepoint._minute == 0
     assert creg_timelinepoint._year_num == 2000
     assert five_timelinepoint._weekday == "Baileyday"
@@ -286,13 +286,13 @@ def check_creg_timeline_attr(x_believer: BelieverUnit, x_datetime: datetime):
     hour_str = ""
     hour_int = int(dt_hour)
     if hour_int == 0:
-        hour_str = f"{hour_int}-12am"
+        hour_str = "12am"
     elif hour_int < 12:
-        hour_str = f"{hour_int}-{hour_int}am"
+        hour_str = f"{hour_int}am"
     elif hour_int == 12:
-        hour_str = f"{hour_int}-12pm"
+        hour_str = "12pm"
     else:
-        hour_str = f"{hour_int}-{hour_int%12}pm"
+        hour_str = f"{hour_int%12}pm"
     print(x_datetime.strftime("%H:%M, %A, %d %B, %Y"))
     if creg_timelinepoint._month in {"January", "February"}:
         dt_year = int(dt_year) - 1
