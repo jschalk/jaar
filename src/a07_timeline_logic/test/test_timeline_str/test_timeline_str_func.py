@@ -8,7 +8,7 @@ from src.a04_reason_logic.reason_plan import (
     factunit_shop,
     reasonunit_shop,
 )
-from src.a15_belief_logic.reason_str_func import (
+from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )

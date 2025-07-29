@@ -1,13 +1,7 @@
 from src.a03_group_logic.group import awardlink_shop
-from src.a05_plan_logic.test._util.a05_str import (
-    _kids_str,
-    fund_share_str,
-    plan_label_str,
-    task_str,
-)
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v002
-from src.a15_belief_logic.reason_str_func import get_reason_case_readable_str
+from src.a07_timeline_logic.reason_str_func import get_reason_case_readable_str
 from src.a22_plan_viewer.planview_filters import (
     plan_awardees,
     plan_facts,

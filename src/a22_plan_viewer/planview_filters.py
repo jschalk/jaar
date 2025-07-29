@@ -5,7 +5,7 @@ from src.a05_plan_logic.plan import PlanUnit
 from src.a06_believer_logic.believer_main import (
     get_from_dict as get_believerunit_from_dict,
 )
-from src.a15_belief_logic.reason_str_func import (
+from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )

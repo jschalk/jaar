@@ -171,6 +171,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_weeks():
 
 
 def test_add_time_creg_planunit_ReturnsObjWith_c400_leap_rope():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
     time_rope = sue_believerunit.make_l1_rope(time_str())
@@ -590,6 +591,7 @@ def test_add_newtimeline_planunit_SetsAttr_Scenario0():
 
 
 def test_BelieverUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = add_time_creg_planunit(believerunit_shop(sue_str))

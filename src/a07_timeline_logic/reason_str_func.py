@@ -1,10 +1,9 @@
-from src.a01_term_logic.rope import RopeTerm, get_tail_label
+from src.a01_term_logic.rope import LabelTerm, RopeTerm, get_tail_label
 from src.a04_reason_logic.reason_plan import CaseUnit, FactUnit
-from src.a15_belief_logic.belief_main import BeliefUnit
 
 
 def get_reason_case_readable_str(
-    context: RopeTerm, caseunit: CaseUnit, beliefunit: BeliefUnit = None
+    context: RopeTerm, caseunit: CaseUnit, timeline_label: LabelTerm = None
 ) -> str:
     """Returns a string describing reason case in readable language. Will have special cases for time."""
 
@@ -18,7 +17,7 @@ def get_reason_case_readable_str(
 
 
 def get_fact_state_readable_str(
-    factunit: FactUnit, beliefunit: BeliefUnit = None
+    factunit: FactUnit, timeline_label: LabelTerm = None
 ) -> str:
     """Returns a string describing fact in readable language. Will have special cases for time."""
 
