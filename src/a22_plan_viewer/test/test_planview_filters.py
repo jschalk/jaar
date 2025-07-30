@@ -3,6 +3,7 @@ from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v002
 from src.a07_timeline_logic.reason_str_func import get_reason_case_readable_str
 from src.a22_plan_viewer.planview_filters import (
+    get_planunits_list,
     plan_awardees,
     plan_facts,
     plan_fund,
@@ -32,7 +33,7 @@ def test_plan_label_ReturnsObj_Scenario0():
     sue_believerunit.add_plan(x4_rope)
 
     # WHEN
-    plan_label_dict = plan_label(sue_believerunit.get_dict())
+    plan_label_dict = plan_label(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {amy23_str: {x1_str: "", x2_str: "", x3_str: {x4_str: ""}}}
@@ -48,7 +49,7 @@ def test_plan_label_ReturnsObj_Scenario1_LargeBelieverJSON():
     believer_dict = x_believerunit.get_dict()
 
     # WHEN
-    plan_label_dict = plan_label(believer_dict)
+    plan_label_dict = plan_label(get_planunits_list(believer_dict))
 
     # THEN
     planroot_dict = plan_label_dict.get(x_believerunit.belief_label)
@@ -79,7 +80,7 @@ def test_plan_tasks_ReturnsObj_Scenario0():
     sue_believerunit.add_plan(x5_rope, task=True)
 
     # WHEN
-    plan_display_dict = plan_tasks(sue_believerunit.get_dict())
+    plan_display_dict = plan_tasks(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {
@@ -104,7 +105,7 @@ def test_plan_fund_ReturnsObj_Scenario0():
     sue_believerunit.add_plan(x2_rope, mass=1)
 
     # WHEN
-    plan_display_dict = plan_fund(sue_believerunit.get_dict())
+    plan_display_dict = plan_fund(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {"Amy2026 (fund 20)": {"x2 (fund 4)": {}, "x1 (fund 16)": {}}}
@@ -127,7 +128,7 @@ def test_plan_fund_ReturnsObj_Scenario1_CheckCommasInNumber():
     sue_believerunit.add_plan(x2_rope, mass=1)
 
     # WHEN
-    plan_display_dict = plan_fund(sue_believerunit.get_dict())
+    plan_display_dict = plan_fund(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {
@@ -160,7 +161,7 @@ def test_plan_awardees_ReturnsObj_Scenario0():
     assert sue_believerunit.get_plan_obj(x1_rope).awardlinks != {}
 
     # WHEN
-    plan_display_dict = plan_awardees(sue_believerunit.get_dict())
+    plan_display_dict = plan_awardees(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {
@@ -207,7 +208,7 @@ def test_plan_reasons_ReturnsObj_Scenario0():
     dirty_case = clean_reason.get_case(dirty_rope)
 
     # WHEN
-    plan_display_dict = plan_reasons(sue_believerunit.get_dict())
+    plan_display_dict = plan_reasons(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {
@@ -255,7 +256,7 @@ def test_plan_facts_ReturnsObj_Scenario0():
     # )
 
     # WHEN
-    plan_display_dict = plan_facts(sue_believerunit.get_dict())
+    plan_display_dict = plan_facts(get_planunits_list(sue_believerunit.get_dict()))
 
     # THEN
     expected_output = {

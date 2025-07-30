@@ -1,10 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
 from src.a05_plan_logic.plan import PlanUnit
-from src.a06_believer_logic.believer_main import (
-    get_from_dict as get_believerunit_from_dict,
-)
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a22_plan_viewer.planview_filters import (
+    get_planunits_list,
     plan_awardees,
     plan_facts,
     plan_fund,
@@ -33,12 +32,6 @@ def get_modes():
     return jsonify(modes_list)
 
 
-def get_planunits_list(believerunit_dict: dict) -> list[PlanUnit]:
-    x_believerunit = get_believerunit_from_dict(believerunit_dict)
-    x_believerunit.settle_believer()
-    return x_believerunit._plan_dict.values()
-
-
 @planviewer.route("/process", methods=["POST"])
 def process_json():
     try:
@@ -52,22 +45,20 @@ def process_json():
         if data is None:
             raise ValueError("Missing 'data' field in request")
 
-        planunits_list = get_planunits_list(data)
-
         if mode == "Plan Label":
-            plan_tree_display_dict = plan_label(planunits_list)
+            plan_tree_display_dict = plan_label(get_planunits_list(data))
         elif mode == "Plan Tasks":
-            plan_tree_display_dict = plan_tasks(planunits_list)
+            plan_tree_display_dict = plan_tasks(get_planunits_list(data))
         elif mode == "Plan Fund":
-            plan_tree_display_dict = plan_fund(planunits_list)
+            plan_tree_display_dict = plan_fund(get_planunits_list(data))
         elif mode == "Plan Awardees":
-            plan_tree_display_dict = plan_awardees(planunits_list)
+            plan_tree_display_dict = plan_awardees(get_planunits_list(data))
         elif mode == "Plan Reasons":
-            plan_tree_display_dict = plan_reasons(planunits_list)
+            plan_tree_display_dict = plan_reasons(get_planunits_list(data))
         elif mode == "Plan Facts":
-            plan_tree_display_dict = plan_facts(planunits_list)
+            plan_tree_display_dict = plan_facts(get_planunits_list(data))
         elif mode == "Plan Time":
-            plan_tree_display_dict = plan_time(planunits_list)
+            plan_tree_display_dict = plan_time(get_planunits_list(data))
         elif mode == "static_dict_testing":
             plan_tree_display_dict = {"amy23": {"x1": {}, "x2": {}, "x3": {"x4": {}}}}
         else:

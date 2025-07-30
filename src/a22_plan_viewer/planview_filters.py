@@ -2,10 +2,19 @@ from copy import copy as copy_copy
 from src.a00_data_toolbox.dict_toolbox import mark_keys, set_in_nested_dict
 from src.a01_term_logic.rope import get_all_rope_labels, get_tail_label
 from src.a05_plan_logic.plan import PlanUnit
+from src.a06_believer_logic.believer_main import (
+    get_from_dict as get_believerunit_from_dict,
+)
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
+
+
+def get_planunits_list(believerunit_dict: dict) -> list[PlanUnit]:
+    x_believerunit = get_believerunit_from_dict(believerunit_dict)
+    x_believerunit.settle_believer()
+    return list(x_believerunit._plan_dict.values())
 
 
 def plan_label(planunits_list: list[PlanUnit]) -> dict:

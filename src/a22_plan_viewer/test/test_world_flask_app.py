@@ -10,15 +10,15 @@ def test_planviewer_IsCreated():
     response = client.get("/")  # or some valid route you define
 
     # WHEN / THEN
-    # If '/' route not defined, skip or test /refresh_tree with dummy data
+    # If '/' route not defined, skip or test /process with dummy data
     assert response.status_code in (200, 404)
 
 
-def test_refresh_tree_endpoint():
+def test_process_endpoint():
     # ESTABLISH
     client = planviewer.test_client()
     response = client.post(
-        "/refresh_tree", json={"_mode": "default", "data": {"foo": "bar"}}
+        "/process", json={"_mode": "default", "data": {"foo": "bar"}}
     )
     assert response.status_code == 200
 
