@@ -56,6 +56,11 @@
     <div id="ExportControl">
         <button id="exportBtn" disabled>Export JSON</button>
     </div>
+    <div>
+        <label for="flaskFundPool">Enter flask_fund_pool:</label>
+        <input type="number" id="flaskFundPool" min="1" max="100">
+        <button id="refreshFlaskFundPool">Send flask_fund_pool</button>
+    </div>
     <div style="margin-bottom: 10px;">
         <button onclick="expandAll()">Expand All</button>
         <button onclick="expandToLevel(3)">Expand to Level 1</button>
@@ -228,6 +233,26 @@
         }
 
         window.addEventListener("DOMContentLoaded", loadModes);
+
+        document.getElementById("refreshFlaskFundPool").addEventListener("click", function () {
+            const flaskFundPoolValue = document.getElementById("flaskFundPool").value;
+
+            fetch("http://localhost:5000/set_flask_fund_pool", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json",
+                },
+                body: JSON.stringify({ number: Number(flaskFundPoolValue) }),
+            })
+                .then((res) => res.json())
+                .then((data) => {
+                    console.log("Server response:", data);
+                    // Optionally re-render the tree or update UI
+                })
+                .catch((err) => {
+                    console.error("Error sending number:", err);
+                });
+        });
     </script>
 </body>
 
