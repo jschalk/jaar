@@ -265,7 +265,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     morph = values_dict.get("morph")
     gogo_want = values_dict.get("gogo_want")
     stop_want = values_dict.get("stop_want")
-    mass = values_dict.get("mass")
+    star = values_dict.get("star")
     task = values_dict.get("task")
     problem_bool = values_dict.get("problem_bool")
     _active = values_dict.get("_active")
@@ -285,7 +285,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_partner_cred, _all_partner_debt)
+    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_partner_cred, _all_partner_debt)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -298,7 +298,7 @@ VALUES (
 , {sqlite_obj_str(morph, real_str)}
 , {sqlite_obj_str(gogo_want, real_str)}
 , {sqlite_obj_str(stop_want, real_str)}
-, {sqlite_obj_str(mass, real_str)}
+, {sqlite_obj_str(star, real_str)}
 , {sqlite_obj_str(task, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
 , {sqlite_obj_str(fund_iota, real_str)}

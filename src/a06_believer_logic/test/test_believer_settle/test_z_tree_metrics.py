@@ -85,7 +85,7 @@ def test_BelieverUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():
     nia_str = "Nia"
     nia_believer = believerunit_shop(nia_str, tally=10)
     wk = "wk"
-    nia_believer.set_l1_plan(planunit_shop(wk, mass=40))
+    nia_believer.set_l1_plan(planunit_shop(wk, star=40))
     tree_metrics_before = nia_believer.get_tree_metrics()
 
     # WHEN / THEN

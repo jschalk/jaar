@@ -61,17 +61,17 @@ def test_BelieverDelta_set_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
     opt1_arg = "tally"
     jvalues = {opt1_arg: attribute_value}
     jkeys = {}
-    believer_mass_believeratom = believeratom_shop(
+    believer_star_believeratom = believeratom_shop(
         dimen,
         UPDATE_str(),
         jkeys=jkeys,
         jvalues=jvalues,
     )
     assert ex1_believerdelta.believeratoms == {}
-    assert believer_mass_believeratom.atom_order is None
+    assert believer_star_believeratom.atom_order is None
 
     # WHEN
-    ex1_believerdelta.set_believeratom(believer_mass_believeratom)
+    ex1_believerdelta.set_believeratom(believer_star_believeratom)
 
     # THEN
     assert len(ex1_believerdelta.believeratoms) == 1
@@ -79,19 +79,19 @@ def test_BelieverDelta_set_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
     # print(f"{x_update_dict=}")
     x_dimen_believeratom = x_update_dict.get(dimen)
     print(f"{x_dimen_believeratom=}")
-    assert x_dimen_believeratom == believer_mass_believeratom
-    assert believer_mass_believeratom.atom_order is not None
+    assert x_dimen_believeratom == believer_star_believeratom
+    assert believer_star_believeratom.atom_order is not None
 
 
 def test_BelieverDelta_set_believeratom_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
     x_dimen = believer_partnerunit_str()
-    believer_mass_believeratom = believeratom_shop(x_dimen, UPDATE_str())
+    believer_star_believeratom = believeratom_shop(x_dimen, UPDATE_str())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ex1_believerdelta.set_believeratom(believer_mass_believeratom)
+        ex1_believerdelta.set_believeratom(believer_star_believeratom)
     assert (
         str(excinfo.value)
         == f"""'{x_dimen}' UPDATE BelieverAtom is invalid
@@ -269,16 +269,16 @@ def test_BelieverDelta_get_dimen_sorted_believeratoms_list_ReturnsObj_Scenario0_
 #     # WHEN
 #     opt2_value = 55
 #     dimen = believerunit_str()
-#     opt2_arg = "mass"
-#     mass_believeratom = believeratom_shop(dimen, UPDATE_str())
-#     mass_believeratom.set_jvalue(opt2_arg, opt2_value)
-#     ex1_believerdelta.set_believeratom(mass_believeratom)
+#     opt2_arg = "star"
+#     star_believeratom = believeratom_shop(dimen, UPDATE_str())
+#     star_believeratom.set_jvalue(opt2_arg, opt2_value)
+#     ex1_believerdelta.set_believeratom(star_believeratom)
 #     # THEN
 #     assert len(ex1_believerdelta.believeratoms.get(UPDATE_str()).keys()) == 1
 #     sue_believerunit_dict = ex1_believerdelta.believeratoms.get(UPDATE_str())
-#     sue_mass_believeratom = sue_believerunit_dict.get(dimen)
-#     print(f"{sue_mass_believeratom=}")
-#     assert mass_believeratom == sue_mass_believeratom
+#     sue_star_believeratom = sue_believerunit_dict.get(dimen)
+#     print(f"{sue_star_believeratom=}")
+#     assert star_believeratom == sue_star_believeratom
 
 #     # WHEN
 #     new2_value = 66

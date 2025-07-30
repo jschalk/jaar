@@ -336,7 +336,7 @@ def add_believer_planunit_insert_to_legible_list(
         _numor_value = planunit_atom.get_value("numor")
         _problem_bool_value = planunit_atom.get_value(_problem_bool_str)
         _morph_value = planunit_atom.get_value("morph")
-        _mass_value = planunit_atom.get_value("mass")
+        _star_value = planunit_atom.get_value("star")
         task_value = planunit_atom.get_value("task")
         x_str = f"Created Plan '{rope_value}'. "
         if _addin_value is not None:
@@ -353,8 +353,8 @@ def add_believer_planunit_insert_to_legible_list(
             x_str += f"problem_bool={_problem_bool_value}."
         if _morph_value is not None:
             x_str += f"morph={_morph_value}."
-        if _mass_value is not None:
-            x_str += f"mass={_mass_value}."
+        if _star_value is not None:
+            x_str += f"star={_star_value}."
         if task_value is not None:
             x_str += f"task={task_value}."
 
@@ -374,7 +374,7 @@ def add_believer_planunit_update_to_legible_list(
         numor_value = planunit_atom.get_value("numor")
         problem_bool_value = planunit_atom.get_value(_problem_bool_str)
         morph_value = planunit_atom.get_value("morph")
-        mass_value = planunit_atom.get_value("mass")
+        star_value = planunit_atom.get_value("star")
         task_value = planunit_atom.get_value("task")
         x_str = f"Plan '{rope_value}' set these attributes: "
         if addin_value is not None:
@@ -391,8 +391,8 @@ def add_believer_planunit_update_to_legible_list(
             x_str += f"problem_bool={problem_bool_value}."
         if morph_value is not None:
             x_str += f"morph={morph_value}."
-        if mass_value is not None:
-            x_str += f"mass={mass_value}."
+        if star_value is not None:
+            x_str += f"star={star_value}."
         if task_value is not None:
             x_str += f"task={task_value}."
 

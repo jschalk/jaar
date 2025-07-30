@@ -8,11 +8,11 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    mass_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
     plan_rope_str,
+    star_str,
     task_str,
 )
 from src.a06_believer_logic.test._util.example_believers import believerunit_v001
@@ -161,8 +161,8 @@ def test_make_believerdelta_Arg_idea_format_00013_planunit_v0_0_0():
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-    casa_mass = 31
-    sue_believerunit.set_l1_plan(planunit_shop(casa_str, mass=casa_mass))
+    casa_star = 31
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
     sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
@@ -177,13 +177,13 @@ def test_make_believerdelta_Arg_idea_format_00013_planunit_v0_0_0():
     casa_believeratom = believeratom_shop(believer_planunit_str(), INSERT_str())
     casa_believeratom.set_arg(plan_rope_str(), casa_rope)
     casa_believeratom.set_arg(task_str(), False)
-    casa_believeratom.set_arg(mass_str(), casa_mass)
+    casa_believeratom.set_arg(star_str(), casa_star)
     print(f"{casa_believeratom=}")
-    assert casa_believeratom.get_value(mass_str()) == casa_mass
+    assert casa_believeratom.get_value(star_str()) == casa_star
     clean_believeratom = believeratom_shop(believer_planunit_str(), INSERT_str())
     clean_believeratom.set_arg(plan_rope_str(), clean_rope)
     clean_believeratom.set_arg(task_str(), True)
-    clean_believeratom.set_arg(mass_str(), 1)
+    clean_believeratom.set_arg(star_str(), 1)
     assert planunit_changunit.believeratom_exists(casa_believeratom)
     assert planunit_changunit.believeratom_exists(clean_believeratom)
     assert len(planunit_changunit.get_ordered_believeratoms()) == 2

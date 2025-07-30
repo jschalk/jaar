@@ -101,8 +101,8 @@ def test_plan_fund_ReturnsObj_Scenario0():
     sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=20)
     x1_rope = sue_believerunit.make_l1_rope(x1_str)
     x2_rope = sue_believerunit.make_l1_rope(x2_str)
-    sue_believerunit.add_plan(x1_rope, mass=4)
-    sue_believerunit.add_plan(x2_rope, mass=1)
+    sue_believerunit.add_plan(x1_rope, star=4)
+    sue_believerunit.add_plan(x2_rope, star=1)
 
     # WHEN
     plan_display_dict = plan_fund(get_planunits_list(sue_believerunit.to_dict()))
@@ -124,8 +124,8 @@ def test_plan_fund_ReturnsObj_Scenario1_CheckCommasInNumber():
     sue_believerunit = believerunit_shop(sue_str, amy26_str, fund_pool=33333)
     x1_rope = sue_believerunit.make_l1_rope(x1_str)
     x2_rope = sue_believerunit.make_l1_rope(x2_str)
-    sue_believerunit.add_plan(x1_rope, mass=4)
-    sue_believerunit.add_plan(x2_rope, mass=1)
+    sue_believerunit.add_plan(x1_rope, star=4)
+    sue_believerunit.add_plan(x2_rope, star=1)
 
     # WHEN
     plan_display_dict = plan_fund(get_planunits_list(sue_believerunit.to_dict()))
@@ -152,8 +152,8 @@ def test_plan_awardees_ReturnsObj_Scenario0():
     sue_believerunit.add_partnerunit(yao_str, 5, 1)
     x1_rope = sue_believerunit.make_l1_rope(x1_str)
     x2_rope = sue_believerunit.make_l1_rope(x2_str)
-    sue_believerunit.add_plan(x1_rope, mass=4)
-    sue_believerunit.add_plan(x2_rope, mass=1)
+    sue_believerunit.add_plan(x1_rope, star=4)
+    sue_believerunit.add_plan(x2_rope, star=1)
     bob_awardlink = awardlink_shop(bob_str, 1, 3)
     yao_awardlink = awardlink_shop(yao_str, 4, 1)
     sue_believerunit.edit_plan_attr(x1_rope, awardlink=bob_awardlink)

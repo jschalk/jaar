@@ -112,7 +112,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_close = 17
     x_denom = 18
     x_gogo_want = 19
-    x_mass = 21
+    x_star = 21
     x_morph = 22
     x_numor = 23
     x_rope = 24
@@ -141,7 +141,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "close": x_close,
         "denom": x_denom,
         "gogo_want": x_gogo_want,
-        "mass": x_mass,
+        "star": x_star,
         "morph": x_morph,
         "numor": x_numor,
         "plan_rope": x_rope,

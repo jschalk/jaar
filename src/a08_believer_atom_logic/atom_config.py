@@ -87,7 +87,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "gogo_want": "float",
         "group_title": "TitleTerm",
         "healer_name": "NameTerm",
-        "mass": "int",
+        "star": "int",
         "max_tree_traverse": "int",
         "morph": "bool",
         "reason_state": "RopeTerm",

@@ -107,10 +107,6 @@ def healerlink_str() -> str:
     return "healerlink"
 
 
-def mass_str() -> str:
-    return "mass"
-
-
 def morph_str() -> str:
     return "morph"
 
@@ -129,6 +125,10 @@ def plan_rope_str() -> str:
 
 def problem_bool_str() -> str:
     return "problem_bool"
+
+
+def star_str() -> str:
+    return "star"
 
 
 def stop_want_str() -> str:

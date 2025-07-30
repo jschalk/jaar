@@ -80,7 +80,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     clean_rope = zia_believerunit.make_l1_rope(clean_str)
     clean_planunit = zia_believerunit.get_plan_obj(clean_rope)
     assert ingested_list[0] == clean_planunit
-    assert ingested_list[0].mass == zia_debtor_pool
+    assert ingested_list[0].star == zia_debtor_pool
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v2():
@@ -110,7 +110,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     clean_planunit = zia_believerunit.get_plan_obj(clean_rope)
     cook_planunit = zia_believerunit.get_plan_obj(cook_rope)
     assert ingested_list[0] == cook_planunit
-    assert ingested_list[0].mass == 16.0
+    assert ingested_list[0].star == 16.0
     assert ingested_list == [cook_planunit, clean_planunit]
 
 
@@ -121,7 +121,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     clean_str = "clean"
     cook_str = "cook"
     zia_believerunit.set_l1_plan(planunit_shop(clean_str, task=True))
-    zia_believerunit.set_l1_plan(planunit_shop(cook_str, mass=3, task=True))
+    zia_believerunit.set_l1_plan(planunit_shop(cook_str, star=3, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_believerunit.get_agenda_dict()) == 2
@@ -139,8 +139,8 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     clean_planunit = zia_believerunit.get_plan_obj(clean_rope)
     cook_planunit = zia_believerunit.get_plan_obj(cook_rope)
     assert ingested_list == [cook_planunit, clean_planunit]
-    assert ingested_list[0].mass == 24.0
-    assert ingested_list[1].mass == 8.0
+    assert ingested_list[0].star == 24.0
+    assert ingested_list[1].star == 8.0
 
 
 def test_generate_ingest_list_ReturnsCorrectList_v4():
@@ -150,7 +150,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     clean_str = "clean"
     cook_str = "cook"
     zia_believerunit.set_l1_plan(planunit_shop(clean_str, task=True))
-    zia_believerunit.set_l1_plan(planunit_shop(cook_str, mass=2, task=True))
+    zia_believerunit.set_l1_plan(planunit_shop(cook_str, star=2, task=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_believerunit.get_agenda_dict()) == 2
@@ -167,6 +167,6 @@ def test_generate_ingest_list_ReturnsCorrectList_v4():
     cook_rope = zia_believerunit.make_l1_rope(cook_str)
     clean_planunit = zia_believerunit.get_plan_obj(clean_rope)
     cook_planunit = zia_believerunit.get_plan_obj(cook_rope)
-    assert ingested_list[0].mass == 22
-    assert ingested_list[1].mass == 10
+    assert ingested_list[0].star == 22
+    assert ingested_list[1].star == 10
     assert ingested_list == [cook_planunit, clean_planunit]

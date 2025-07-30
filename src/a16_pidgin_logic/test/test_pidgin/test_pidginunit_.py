@@ -100,7 +100,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("group_title") == TitleTerm_str()
     assert pidgin_args_class_types.get("healer_name") == NameTerm_str()
     assert pidgin_args_class_types.get("hour_label") == LabelTerm_str()
-    assert pidgin_args_class_types.get("mass") == "int"
+    assert pidgin_args_class_types.get("star") == "int"
     assert pidgin_args_class_types.get("max_tree_traverse") == "int"
     assert pidgin_args_class_types.get("month_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"

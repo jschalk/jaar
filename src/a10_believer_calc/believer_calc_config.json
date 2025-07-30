@@ -446,7 +446,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "mass": {
+            "star": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

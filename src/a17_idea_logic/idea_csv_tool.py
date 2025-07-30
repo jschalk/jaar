@@ -427,7 +427,7 @@ def add_believer_to_br00028_csv(
                 if_none_str(planunit.morph),
                 if_none_str(planunit.gogo_want),
                 if_none_str(planunit.stop_want),
-                if_none_str(planunit.mass),
+                if_none_str(planunit.star),
                 if_none_str(planunit.task),
                 if_none_str(planunit.problem_bool),
             ]
@@ -673,7 +673,7 @@ def add_pack_to_br00028_csv(
                 if_none_str(believeratom.jvalues.get("morph")),
                 if_none_str(believeratom.jvalues.get("gogo_want")),
                 if_none_str(believeratom.jvalues.get("stop_want")),
-                if_none_str(believeratom.jvalues.get("mass")),
+                if_none_str(believeratom.jvalues.get("star")),
                 if_none_str(believeratom.jvalues.get("task")),
                 if_none_str(believeratom.jvalues.get("problem_bool")),
             ]

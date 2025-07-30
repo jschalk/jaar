@@ -30,10 +30,10 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    mass_str,
     partner_name_str,
     plan_rope_str,
     reason_active_requisite_str,
+    star_str,
     take_force_str,
     task_str,
 )
@@ -456,7 +456,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     amy45_str = "amy45"
     amy_begin = 34
     amy_close = 78
-    amy_mass = 55
+    amy_star = 55
     amy_task = True
     amy_rope = after_sue_believer.make_l1_rope(amy45_str)
     after_sue_believer.set_l1_plan(
@@ -464,7 +464,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
             amy45_str,
             begin=amy_begin,
             close=amy_close,
-            mass=amy_mass,
+            star=amy_star,
             task=amy_task,
         )
     )
@@ -490,7 +490,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert ball_believeratom.get_value(plan_rope_str()) == a45_rope
     assert ball_believeratom.get_value(begin_str()) == amy_begin
     assert ball_believeratom.get_value(close_str()) == amy_close
-    assert ball_believeratom.get_value(mass_str()) == amy_mass
+    assert ball_believeratom.get_value(star_str()) == amy_star
     assert ball_believeratom.get_value(task_str()) == amy_task
 
     assert get_believeratom_total_count(sue_believerdelta) == 2
@@ -506,7 +506,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     amy45_rope = before_sue_believer.make_l1_rope(amy45_str)
     before_amy_begin = 34
     before_amy_close = 78
-    before_amy_mass = 55
+    before_amy_star = 55
     before_amy_task = True
     amy_rope = before_sue_believer.make_l1_rope(amy45_str)
     before_sue_believer.set_l1_plan(
@@ -514,7 +514,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
             amy45_str,
             begin=before_amy_begin,
             close=before_amy_close,
-            mass=before_amy_mass,
+            star=before_amy_star,
             task=before_amy_task,
         )
     )
@@ -522,13 +522,13 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_amy_begin = 99
     after_amy_close = 111
-    after_amy_mass = 22
+    after_amy_star = 22
     after_amy_task = False
     after_sue_believer.edit_plan_attr(
         amy_rope,
         begin=after_amy_begin,
         close=after_amy_close,
-        mass=after_amy_mass,
+        star=after_amy_star,
         task=after_amy_task,
     )
 
@@ -546,7 +546,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert ball_believeratom.get_value(plan_rope_str()) == amy45_rope
     assert ball_believeratom.get_value(begin_str()) == after_amy_begin
     assert ball_believeratom.get_value(close_str()) == after_amy_close
-    assert ball_believeratom.get_value(mass_str()) == after_amy_mass
+    assert ball_believeratom.get_value(star_str()) == after_amy_star
     assert ball_believeratom.get_value(task_str()) == after_amy_task
 
     assert get_believeratom_total_count(sue_believerdelta) == 1

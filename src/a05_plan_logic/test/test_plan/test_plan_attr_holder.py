@@ -4,7 +4,7 @@ from src.a05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 
 def test_PlanAttrHolder_Exists():
     new_obj = PlanAttrHolder()
-    assert new_obj.mass is None
+    assert new_obj.star is None
     assert new_obj.uid is None
     assert new_obj.reason is None
     assert new_obj.reason_context is None

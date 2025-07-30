@@ -254,7 +254,7 @@ def _modify_believer_planunit_update(x_believer: BelieverUnit, x_atom: BelieverA
         denom=x_atom.get_value("denom"),
         numor=x_atom.get_value("numor"),
         morph=x_atom.get_value("morph"),
-        mass=x_atom.get_value("mass"),
+        star=x_atom.get_value("star"),
         task=x_atom.get_value("task"),
     )
 
@@ -596,7 +596,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.denom != y_obj.denom
             or x_obj.numor != y_obj.numor
             or x_obj.morph != y_obj.morph
-            or x_obj.mass != y_obj.mass
+            or x_obj.star != y_obj.star
             or x_obj.task != y_obj.task
         )
     elif dimen == "believer_plan_factunit":
@@ -662,7 +662,7 @@ class AtomRow:
     gogo_want: float = None
     group_title: TitleTerm = None
     healer_name: TitleTerm = None
-    mass: int = None
+    star: int = None
     max_tree_traverse: int = None
     morph: bool = None
     reason_state: RopeTerm = None

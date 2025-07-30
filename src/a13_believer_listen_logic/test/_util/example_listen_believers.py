@@ -9,14 +9,14 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
     )
 
     casa = "casa"
-    sue_believer.set_l1_plan(planunit_shop(casa, mass=30, task=True))
+    sue_believer.set_l1_plan(planunit_shop(casa, star=30, task=True))
 
     cat = "cat have dinner"
-    sue_believer.set_l1_plan(planunit_shop(cat, mass=30, task=True))
+    sue_believer.set_l1_plan(planunit_shop(cat, star=30, task=True))
 
     week_str = "weekdays"
     week_rope = sue_believer.make_l1_rope(week_str)
-    plan_kid_weekdays = planunit_shop(week_str, mass=40)
+    plan_kid_weekdays = planunit_shop(week_str, star=40)
     sue_believer.set_l1_plan(plan_kid_weekdays)
 
     sun_str = "Sunday"
@@ -27,13 +27,13 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
     fri_str = "Friday"
     sat_str = "Saturday"
 
-    plan_grandkidU = planunit_shop(sun_str, mass=20)
-    plan_grandkidM = planunit_shop(mon_str, mass=20)
-    plan_grandkidT = planunit_shop(tue_str, mass=20)
-    plan_grandkidW = planunit_shop(wed_str, mass=20)
-    plan_grandkidR = planunit_shop(thu_str, mass=30)
-    plan_grandkidF = planunit_shop(fri_str, mass=40)
-    plan_grandkidA = planunit_shop(sat_str, mass=50)
+    plan_grandkidU = planunit_shop(sun_str, star=20)
+    plan_grandkidM = planunit_shop(mon_str, star=20)
+    plan_grandkidT = planunit_shop(tue_str, star=20)
+    plan_grandkidW = planunit_shop(wed_str, star=20)
+    plan_grandkidR = planunit_shop(thu_str, star=30)
+    plan_grandkidF = planunit_shop(fri_str, star=40)
+    plan_grandkidA = planunit_shop(sat_str, star=50)
 
     sue_believer.set_plan(plan_grandkidU, week_rope)
     sue_believer.set_plan(plan_grandkidM, week_rope)
@@ -45,24 +45,24 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
 
     nation_str = "nation"
     nation_rope = sue_believer.make_l1_rope(nation_str)
-    plan_kid_nation = planunit_shop(nation_str, mass=30)
+    plan_kid_nation = planunit_shop(nation_str, star=30)
     sue_believer.set_l1_plan(plan_kid_nation)
 
     usa_str = "USA"
     usa_rope = sue_believer.make_rope(nation_rope, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
-    plan_grandkid_usa = planunit_shop(usa_str, mass=50)
-    plan_grandkid_france = planunit_shop(france_str, mass=50)
-    plan_grandkid_brazil = planunit_shop(brazil_str, mass=50)
+    plan_grandkid_usa = planunit_shop(usa_str, star=50)
+    plan_grandkid_france = planunit_shop(france_str, star=50)
+    plan_grandkid_brazil = planunit_shop(brazil_str, star=50)
     sue_believer.set_plan(plan_grandkid_france, nation_rope)
     sue_believer.set_plan(plan_grandkid_brazil, nation_rope)
     sue_believer.set_plan(plan_grandkid_usa, nation_rope)
 
     texas_str = "Texas"
     oregon_str = "Oregon"
-    plan_grandgrandkid_usa_texas = planunit_shop(texas_str, mass=50)
-    plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, mass=50)
+    plan_grandgrandkid_usa_texas = planunit_shop(texas_str, star=50)
+    plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, star=50)
     sue_believer.set_plan(plan_grandgrandkid_usa_texas, usa_rope)
     sue_believer.set_plan(plan_grandgrandkid_usa_oregon, usa_rope)
     return sue_believer
@@ -81,20 +81,20 @@ def get_fund_breakdown_believer() -> BelieverUnit:
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     sweep_str = "sweep floor"
     dish_str = "clean dishes"
-    sue_believer.set_l1_plan(planunit_shop(casa_str, mass=30))
-    sue_believer.set_plan(planunit_shop(cat_str, mass=30), casa_rope)
-    sue_believer.set_plan(planunit_shop(hun_n_str, mass=30), cat_rope)
-    sue_believer.set_plan(planunit_shop(hun_y_str, mass=30), cat_rope)
-    sue_believer.set_plan(planunit_shop(clean_str, mass=30), casa_rope)
-    sue_believer.set_plan(planunit_shop(sweep_str, mass=30, task=True), clean_rope)
-    sue_believer.set_plan(planunit_shop(dish_str, mass=30, task=True), clean_rope)
+    sue_believer.set_l1_plan(planunit_shop(casa_str, star=30))
+    sue_believer.set_plan(planunit_shop(cat_str, star=30), casa_rope)
+    sue_believer.set_plan(planunit_shop(hun_n_str, star=30), cat_rope)
+    sue_believer.set_plan(planunit_shop(hun_y_str, star=30), cat_rope)
+    sue_believer.set_plan(planunit_shop(clean_str, star=30), casa_rope)
+    sue_believer.set_plan(planunit_shop(sweep_str, star=30, task=True), clean_rope)
+    sue_believer.set_plan(planunit_shop(dish_str, star=30, task=True), clean_rope)
 
     cat_str = "cat have dinner"
-    sue_believer.set_l1_plan(planunit_shop(cat_str, mass=30, task=True))
+    sue_believer.set_l1_plan(planunit_shop(cat_str, star=30, task=True))
 
     # week_str = "weekdays"
     # week_rope = sue_believer.make_l1_rope(week_str)
-    # plan_kid_weekdays = planunit_shop(week_str, mass=25)
+    # plan_kid_weekdays = planunit_shop(week_str, star=25)
     # sue_believer.set_l1_plan(plan_kid_weekdays)
 
     # sun_str = "Sunday"
@@ -104,13 +104,13 @@ def get_fund_breakdown_believer() -> BelieverUnit:
     # thu_str = "Thursday"
     # fri_str = "Friday"
     # sat_str = "Saturday"
-    # plan_grandkidU = planunit_shop(sun_str, mass=20)
-    # plan_grandkidM = planunit_shop(mon_str, mass=20)
-    # plan_grandkidT = planunit_shop(tue_str, mass=20)
-    # plan_grandkidW = planunit_shop(wed_str, mass=20)
-    # plan_grandkidR = planunit_shop(thu_str, mass=30)
-    # plan_grandkidF = planunit_shop(fri_str, mass=40)
-    # plan_grandkidA = planunit_shop(sat_str, mass=50)
+    # plan_grandkidU = planunit_shop(sun_str, star=20)
+    # plan_grandkidM = planunit_shop(mon_str, star=20)
+    # plan_grandkidT = planunit_shop(tue_str, star=20)
+    # plan_grandkidW = planunit_shop(wed_str, star=20)
+    # plan_grandkidR = planunit_shop(thu_str, star=30)
+    # plan_grandkidF = planunit_shop(fri_str, star=40)
+    # plan_grandkidA = planunit_shop(sat_str, star=50)
     # sue_believer.set_plan(plan_grandkidU, week_rope)
     # sue_believer.set_plan(plan_grandkidM, week_rope)
     # sue_believer.set_plan(plan_grandkidT, week_rope)
@@ -121,24 +121,24 @@ def get_fund_breakdown_believer() -> BelieverUnit:
 
     # nation_str = "nation"
     # nation_rope = sue_believer.make_l1_rope(nation_str)
-    # plan_kid_nation = planunit_shop(nation_str, mass=30)
+    # plan_kid_nation = planunit_shop(nation_str, star=30)
     # sue_believer.set_l1_plan(plan_kid_nation)
 
     # usa_str = "USA"
     # usa_rope = sue_believer.make_rope(nation_rope, usa_str)
     # france_str = "France"
     # brazil_str = "Brazil"
-    # plan_grandkid_usa = planunit_shop(usa_str, mass=50)
-    # plan_grandkid_france = planunit_shop(france_str, mass=50)
-    # plan_grandkid_brazil = planunit_shop(brazil_str, mass=50)
+    # plan_grandkid_usa = planunit_shop(usa_str, star=50)
+    # plan_grandkid_france = planunit_shop(france_str, star=50)
+    # plan_grandkid_brazil = planunit_shop(brazil_str, star=50)
     # sue_believer.set_plan(plan_grandkid_france, nation_rope)
     # sue_believer.set_plan(plan_grandkid_brazil, nation_rope)
     # sue_believer.set_plan(plan_grandkid_usa, nation_rope)
 
     # texas_str = "Texas"
     # oregon_str = "Oregon"
-    # plan_grandgrandkid_usa_texas = planunit_shop(texas_str, mass=50)
-    # plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, mass=50)
+    # plan_grandgrandkid_usa_texas = planunit_shop(texas_str, star=50)
+    # plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, star=50)
     # sue_believer.set_plan(plan_grandgrandkid_usa_texas, usa_rope)
     # sue_believer.set_plan(plan_grandgrandkid_usa_oregon, usa_rope)
     return sue_believer

@@ -375,7 +375,7 @@ class BelieverDelta:
             x_believeratom.set_jvalue("denom", insert_planunit.denom)
             x_believeratom.set_jvalue("numor", insert_planunit.numor)
             x_believeratom.set_jvalue("morph", insert_planunit.morph)
-            x_believeratom.set_jvalue("mass", insert_planunit.mass)
+            x_believeratom.set_jvalue("star", insert_planunit.star)
             x_believeratom.set_jvalue("task", insert_planunit.task)
             self.set_believeratom(x_believeratom)
 
@@ -426,8 +426,8 @@ class BelieverDelta:
                     x_believeratom.set_jvalue("numor", after_planunit.numor)
                 if before_planunit.morph != after_planunit.morph:
                     x_believeratom.set_jvalue("morph", after_planunit.morph)
-                if before_planunit.mass != after_planunit.mass:
-                    x_believeratom.set_jvalue("mass", after_planunit.mass)
+                if before_planunit.star != after_planunit.star:
+                    x_believeratom.set_jvalue("star", after_planunit.star)
                 if before_planunit.task != after_planunit.task:
                     x_believeratom.set_jvalue("task", after_planunit.task)
                 self.set_believeratom(x_believeratom)

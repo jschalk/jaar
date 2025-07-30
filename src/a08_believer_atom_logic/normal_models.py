@@ -49,7 +49,7 @@ class PlanTable(Base):
     numor = Column(Integer)
     problem_bool = Column(Integer)
     morph = Column(Integer)
-    mass = Column(Integer)
+    star = Column(Integer)
     task = Column(Integer)
     stop_want = Column(Float)
 

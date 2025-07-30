@@ -91,7 +91,7 @@ class ranged_fact_plan_Exception(Exception):
 
 @dataclass
 class PlanAttrHolder:
-    mass: int = None
+    star: int = None
     uid: int = None
     reason: ReasonUnit = None
     reason_context: RopeTerm = None
@@ -138,7 +138,7 @@ class PlanAttrHolder:
 
 
 def planattrholder_shop(
-    mass: int = None,
+    star: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
     reason_context: RopeTerm = None,
@@ -170,7 +170,7 @@ def planattrholder_shop(
     problem_bool: bool = None,
 ) -> PlanAttrHolder:
     return PlanAttrHolder(
-        mass=mass,
+        star=star,
         uid=uid,
         reason=reason,
         reason_context=reason_context,
@@ -225,7 +225,7 @@ class PlanUnit:
     belief_label : BeliefLabel that is root plan LabelTerm.
     knot : str Identifier or label for bridging plans.
     optional:
-    mass : int weight that is arbitrary used by parent plan to calculated relative importance.
+    star : int weight that is arbitrary used by parent plan to calculated relative importance.
     _kids : dict[RopeTerm], Internal mapping of child plans by their LabelTerm
     _uid : int Unique identifier, forgot how I use this.
     awardlinks : dict[GroupTitle, AwardLink] that describe who funds and who is funded
@@ -272,7 +272,7 @@ class PlanUnit:
     parent_rope: RopeTerm = None
     _kids: dict[RopeTerm,] = None
     root: bool = None
-    mass: int = None
+    star: int = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[RopeTerm, ReasonUnit] = None
@@ -607,8 +607,8 @@ class PlanUnit:
         self.factunits = new_factunits
 
     def _set_attrs_to_planunit(self, plan_attr: PlanAttrHolder):
-        if plan_attr.mass is not None:
-            self.mass = plan_attr.mass
+        if plan_attr.star is not None:
+            self.star = plan_attr.star
         if plan_attr.uid is not None:
             self._uid = plan_attr.uid
         if plan_attr.reason is not None:
@@ -790,8 +790,8 @@ class PlanUnit:
     def clear_kids(self):
         self._kids = {}
 
-    def get_kids_mass_sum(self) -> float:
-        return sum(x_kid.mass for x_kid in self._kids.values())
+    def get_kids_star_sum(self) -> float:
+        return sum(x_kid.star for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
         self.awardlinks[awardlink.awardee_title] = awardlink
@@ -964,7 +964,7 @@ class PlanUnit:
         return self._awardheirs != {}
 
     def to_dict(self) -> dict[str, str]:
-        x_dict = {"mass": self.mass}
+        x_dict = {"star": self.star}
 
         if self.plan_label is not None:
             x_dict["plan_label"] = self.plan_label
@@ -1044,7 +1044,7 @@ def planunit_shop(
     _uid: int = None,  # Calculated field?
     parent_rope: RopeTerm = None,
     _kids: dict = None,
-    mass: int = 1,
+    star: int = 1,
     awardlinks: dict[GroupTitle, AwardLink] = None,
     _awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
     _awardlines: dict[GroupTitle, AwardLink] = None,  # Calculated field
@@ -1091,7 +1091,7 @@ def planunit_shop(
         _uid=_uid,
         parent_rope=parent_rope,
         _kids=get_empty_dict_if_None(_kids),
-        mass=get_positive_int(mass),
+        star=get_positive_int(star),
         awardlinks=get_empty_dict_if_None(awardlinks),
         _awardheirs=get_empty_dict_if_None(_awardheirs),
         _awardlines=get_empty_dict_if_None(_awardlines),

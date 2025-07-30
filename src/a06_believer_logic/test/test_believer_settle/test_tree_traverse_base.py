@@ -19,13 +19,13 @@ def test_BelieverUnit_clear_plan_dict_and_believer_obj_settle_attrs_SetsAttrs_Sc
     sue_believer._rational = x_rational
     sue_believer._tree_traverse_count = x_tree_traverse_count
     sue_believer._plan_dict = x_plan_dict
-    sue_believer._offtrack_kids_mass_set = "example"
+    sue_believer._offtrack_kids_star_set = "example"
     sue_believer._reason_contexts = {"example2"}
     sue_believer._range_inheritors = {"example2": 1}
     assert sue_believer._rational == x_rational
     assert sue_believer._tree_traverse_count == x_tree_traverse_count
     assert sue_believer._plan_dict == x_plan_dict
-    assert sue_believer._offtrack_kids_mass_set != set()
+    assert sue_believer._offtrack_kids_star_set != set()
     assert sue_believer._reason_contexts != set()
     assert sue_believer._range_inheritors != {}
 
@@ -41,7 +41,7 @@ def test_BelieverUnit_clear_plan_dict_and_believer_obj_settle_attrs_SetsAttrs_Sc
     assert sue_believer._plan_dict == {
         sue_believer.planroot.get_plan_rope(): sue_believer.planroot
     }
-    assert sue_believer._offtrack_kids_mass_set == set()
+    assert sue_believer._offtrack_kids_star_set == set()
     assert not sue_believer._reason_contexts
     assert not sue_believer._range_inheritors
 
@@ -439,81 +439,81 @@ def test_BelieverUnit_settle_believer_CreatesFullyPopulated_plan_dict():
     assert len(sue_believerunit._plan_dict) == 17
 
 
-def test_BelieverUnit_settle_believer_Resets_offtrack_kids_mass_set():
+def test_BelieverUnit_settle_believer_Resets_offtrack_kids_star_set():
     # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
-    sue_believerunit._offtrack_kids_mass_set = set("ZZ")
+    sue_believerunit._offtrack_kids_star_set = set("ZZ")
     x_set = set()
 
-    assert sue_believerunit._offtrack_kids_mass_set != x_set
+    assert sue_believerunit._offtrack_kids_star_set != x_set
 
     # WHEN
     sue_believerunit.settle_believer()
 
     # THEN
-    assert sue_believerunit._offtrack_kids_mass_set == x_set
+    assert sue_believerunit._offtrack_kids_star_set == x_set
 
 
-def test_BelieverUnit_settle_believer_WhenPlanRootHas_massButAll_kidsHaveZero_massAddTo_offtrack_kids_mass_set_Scenario0():
+def test_BelieverUnit_settle_believer_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set_Scenario0():
     # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-    casa_plan = planunit_shop(casa_str, mass=0)
+    casa_plan = planunit_shop(casa_str, star=0)
     sue_believerunit.set_l1_plan(casa_plan)
-    assert sue_believerunit._offtrack_kids_mass_set == set()
+    assert sue_believerunit._offtrack_kids_star_set == set()
 
     # WHEN
     sue_believerunit.settle_believer()
 
     # THEN
     root_rope = to_rope(sue_believerunit.belief_label)
-    assert sue_believerunit._offtrack_kids_mass_set == {root_rope}
+    assert sue_believerunit._offtrack_kids_star_set == {root_rope}
 
     # WHEN
-    sue_believerunit.edit_plan_attr(casa_rope, mass=2)
+    sue_believerunit.edit_plan_attr(casa_rope, star=2)
     sue_believerunit.settle_believer()
 
     # THEN
-    assert sue_believerunit._offtrack_kids_mass_set == set()
+    assert sue_believerunit._offtrack_kids_star_set == set()
 
 
-def test_BelieverUnit_settle_believer_WhenPlanUnitHas_massButAll_kidsHaveZero_massAddTo_offtrack_kids_mass_set():
+def test_BelieverUnit_settle_believer_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set():
     # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-    casa_plan = planunit_shop(casa_str, mass=1)
+    casa_plan = planunit_shop(casa_str, star=1)
 
     swim_str = "swimming"
     swim_rope = sue_believerunit.make_rope(casa_rope, swim_str)
-    swim_plan = planunit_shop(swim_str, mass=8)
+    swim_plan = planunit_shop(swim_str, star=8)
 
     clean_str = "cleaning"
     clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
-    clean_plan = planunit_shop(clean_str, mass=2)
+    clean_plan = planunit_shop(clean_str, star=2)
     sue_believerunit.set_plan(planunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
     sweep_rope = sue_believerunit.make_rope(clean_rope, sweep_str)
-    sweep_plan = planunit_shop(sweep_str, mass=0)
+    sweep_plan = planunit_shop(sweep_str, star=0)
     vaccum_str = "vaccum"
     vaccum_rope = sue_believerunit.make_rope(clean_rope, vaccum_str)
-    vaccum_plan = planunit_shop(vaccum_str, mass=0)
+    vaccum_plan = planunit_shop(vaccum_str, star=0)
 
     sue_believerunit.set_l1_plan(casa_plan)
     sue_believerunit.set_plan(swim_plan, casa_rope)
     sue_believerunit.set_plan(clean_plan, casa_rope)
-    sue_believerunit.set_plan(sweep_plan, clean_rope)  # _mass=0
-    sue_believerunit.set_plan(vaccum_plan, clean_rope)  # _mass=0
+    sue_believerunit.set_plan(sweep_plan, clean_rope)  # _star=0
+    sue_believerunit.set_plan(vaccum_plan, clean_rope)  # _star=0
 
-    assert sue_believerunit._offtrack_kids_mass_set == set()
+    assert sue_believerunit._offtrack_kids_star_set == set()
 
     # WHEN
     sue_believerunit.settle_believer()
 
     # THEN
-    assert sue_believerunit._offtrack_kids_mass_set == {clean_rope}
+    assert sue_believerunit._offtrack_kids_star_set == {clean_rope}
 
 
 def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario0():

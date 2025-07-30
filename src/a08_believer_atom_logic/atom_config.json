@@ -336,7 +336,7 @@
                 "column_order": 11,
                 "sqlite_datatype": "REAL"
             },
-            "mass": {
+            "star": {
                 "class_type": "int",
                 "column_order": 3,
                 "sqlite_datatype": "INTEGER"

@@ -54,8 +54,8 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerlink_ratio_str,
     _range_evaluated_str,
     _stop_calc_str,
-    mass_str,
     problem_bool_str,
+    star_str,
     task_str,
 )
 from src.a06_believer_logic.test._util.a06_str import (
@@ -456,7 +456,7 @@ def test_get_believer_calc_dimen_args_ReturnsObj():
         close_str(),
         addin_str(),
         numor_str(),
-        "mass",
+        "star",
         stop_want_str(),
         "_gogo_calc",
         "_stop_calc",
@@ -720,8 +720,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, denom_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jv, gogo_want_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, gogo_want_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jv, mass_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jv, mass_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jv, star_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, star_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jv, morph_str()) == "bool"
     assert g_sqlitetype(cfig, blrplan, jv, morph_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jv, numor_str()) == "int"
@@ -856,7 +856,7 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get(close_str()) == "float"
     assert believer_calc_args_type_dict.get(denom_str()) == "int"
     assert believer_calc_args_type_dict.get(gogo_want_str()) == "float"
-    assert believer_calc_args_type_dict.get(mass_str()) == "int"
+    assert believer_calc_args_type_dict.get(star_str()) == "int"
     assert believer_calc_args_type_dict.get(morph_str()) == "bool"
     assert believer_calc_args_type_dict.get(numor_str()) == "int"
     assert believer_calc_args_type_dict.get(task_str()) == "bool"

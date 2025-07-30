@@ -48,11 +48,11 @@ from src.a05_plan_logic.test._util.a05_str import (
     denom_str,
     gogo_want_str,
     healer_name_str,
-    mass_str,
     morph_str,
     numor_str,
     plan_label_str,
     plan_rope_str,
+    star_str,
     stop_want_str,
     task_str,
 )
@@ -70,8 +70,8 @@ def _offtrack_fund_str() -> str:
     return "_offtrack_fund"
 
 
-def _offtrack_kids_mass_set_str() -> str:
-    return "_offtrack_kids_mass_set"
+def _offtrack_kids_star_set_str() -> str:
+    return "_offtrack_kids_star_set"
 
 
 def _rational_str() -> str:

@@ -32,7 +32,6 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     labor_title_str,
-    mass_str,
     morph_str,
     numor_str,
     partner_cred_points_str,
@@ -46,6 +45,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     reason_state_str,
     reason_upper_str,
     respect_bit_str,
+    star_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -319,7 +319,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[111] == "fact_upper"
     assert table_sorting_priority[112] == "fund_pool"
     assert table_sorting_priority[113] == "give_force"
-    assert table_sorting_priority[114] == "mass"
+    assert table_sorting_priority[114] == "star"
     assert table_sorting_priority[115] == "max_tree_traverse"
     assert table_sorting_priority[116] == "reason_upper"
     assert table_sorting_priority[117] == "reason_lower"
@@ -460,7 +460,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fact_upper_str()) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
     assert sqlite_types.get(give_force_str()) == "REAL"
-    assert sqlite_types.get(mass_str()) == "INTEGER"
+    assert sqlite_types.get(star_str()) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
     assert sqlite_types.get("reason_upper") == "REAL"
     assert sqlite_types.get("reason_lower") == "REAL"

@@ -523,7 +523,7 @@ def fund_graph0(
     add_simp_rect(fig, 4, -3.2, 5, -2.8, laborunit_str)
     add_rect_arrow(fig, 4, -2.9, 3.1, -2.9, green_str)
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_label, "", "", "")
-    d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by mass "
+    d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by star "
     d_sue1_p1 = "PlanRoot Fund ranges: Black arrows. Sum of childless Plan's funds equal planroot's fund "
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at PartnerUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"

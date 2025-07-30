@@ -12,7 +12,6 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    mass_str,
     morph_str,
     numor_str,
     partner_cred_points_str,
@@ -20,6 +19,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_name_str,
     partner_pool_str,
     plan_rope_str,
+    star_str,
     stop_want_str,
     task_str,
 )
@@ -270,7 +270,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_planunit_v0_0_0():
     assert headers_list[2] == belief_label_str()
     assert headers_list[3] == believer_name_str()
     assert headers_list[4] == plan_rope_str()
-    assert headers_list[5] == mass_str()
+    assert headers_list[5] == star_str()
     assert headers_list[6] == task_str()
 
 

@@ -163,7 +163,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
     print(f"\nlook at {casa_plan.get_plan_rope()=}")
     assert casa_plan.parent_rope == to_rope(sue_believerunit.belief_label)
     assert casa_plan._kids == {}
-    assert casa_plan.mass == 30
+    assert casa_plan.star == 30
     assert casa_plan.plan_label == casa_str
     assert casa_plan._level == 1
     assert casa_plan._active

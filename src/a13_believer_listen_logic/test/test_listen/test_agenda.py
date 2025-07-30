@@ -70,9 +70,9 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBeliever():
     # THEN
     clean_rope = zia_believerunit.make_l1_rope(clean_str)
     yao_clean_planunit = after_yao_believerunit.get_plan_obj(clean_rope)
-    print(f"{yao_clean_planunit.mass=}")
-    assert yao_clean_planunit.mass != zia_clean_planunit.mass
-    assert yao_clean_planunit.mass == yao_partner_partner_debt_points
+    print(f"{yao_clean_planunit.star=}")
+    assert yao_clean_planunit.star != zia_clean_planunit.star
+    assert yao_clean_planunit.star == yao_partner_partner_debt_points
     assert after_yao_believerunit == before_yao_believerunit
     assert len(after_yao_believerunit.get_agenda_dict()) == 1
 
@@ -106,13 +106,13 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBeliever():
     # THEN
     clean_rope = zia_believerunit.make_rope(casa_rope, clean_str)
     yao_clean_planunit = after_yao_believerunit.get_plan_obj(clean_rope)
-    print(f"{yao_clean_planunit.mass=}")
-    assert yao_clean_planunit.mass != zia_clean_planunit.mass
-    assert yao_clean_planunit.mass == yao_partner_debt_points
+    print(f"{yao_clean_planunit.star=}")
+    assert yao_clean_planunit.star != zia_clean_planunit.star
+    assert yao_clean_planunit.star == yao_partner_debt_points
     after_casa_planunit = after_yao_believerunit.get_plan_obj(casa_rope)
-    print(f"{after_casa_planunit.mass=}")
-    assert after_casa_planunit.mass != 1
-    assert after_casa_planunit.mass == yao_partner_debt_points
+    print(f"{after_casa_planunit.star=}")
+    assert after_casa_planunit.star != 1
+    assert after_casa_planunit.star == yao_partner_debt_points
     assert after_yao_believerunit == before_yao_believerunit
     assert len(after_yao_believerunit.get_agenda_dict()) == 1
 
@@ -160,19 +160,19 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBeliever():
     after_clean_planunit = after_yao_believerunit.get_plan_obj(clean_rope)
     after_casa_planunit = after_yao_believerunit.get_plan_obj(casa_rope)
     after_fly_planunit = after_yao_believerunit.get_plan_obj(fly_rope)
-    print(f"{after_clean_planunit.mass=}")
-    assert after_clean_planunit.mass != yao_clean_planunit.mass
-    assert after_clean_planunit.mass == 19
-    print(f"{after_cook_planunit.mass=}")
-    assert after_cook_planunit.mass != yao_cook_planunit.mass
-    assert after_cook_planunit.mass == 18
-    print(f"{after_casa_planunit.mass=}")
-    assert after_casa_planunit.mass != 1
-    assert after_casa_planunit.mass == 37
+    print(f"{after_clean_planunit.star=}")
+    assert after_clean_planunit.star != yao_clean_planunit.star
+    assert after_clean_planunit.star == 19
+    print(f"{after_cook_planunit.star=}")
+    assert after_cook_planunit.star != yao_cook_planunit.star
+    assert after_cook_planunit.star == 18
+    print(f"{after_casa_planunit.star=}")
+    assert after_casa_planunit.star != 1
+    assert after_casa_planunit.star == 37
     assert after_yao_believerunit == before_yao_believerunit
     assert len(after_yao_believerunit.get_agenda_dict()) == 3
-    assert after_fly_planunit.mass != 1
-    assert after_fly_planunit.mass == 18
+    assert after_fly_planunit.star != 1
+    assert after_fly_planunit.star == 18
 
 
 def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelieverWhereAnPlanUnitExistsInAdvance():
@@ -201,7 +201,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelieverWhereAnP
     before_yao_dish_planunit = planunit_shop(dish_str, task=True)
     before_yao_dish_planunit.laborunit.set_laborlink(yao_str)
     before_yao_believerunit.set_plan(before_yao_dish_planunit, casa_rope)
-    before_yao_believerunit.edit_plan_attr(dish_rope, mass=1000)
+    before_yao_believerunit.edit_plan_attr(dish_rope, star=1000)
     zia_believerunit.set_plan(yao_dish_planunit, casa_rope)
     zia_believerunit.set_plan(yao_cook_planunit, casa_rope)
     zia_believerunit.set_l1_plan(yao_fly_planunit)
@@ -221,19 +221,19 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelieverWhereAnP
     after_dish_planunit = after_yao_believerunit.get_plan_obj(dish_rope)
     after_casa_planunit = after_yao_believerunit.get_plan_obj(casa_rope)
     after_fly_planunit = after_yao_believerunit.get_plan_obj(fly_rope)
-    print(f"{after_dish_planunit.mass=}")
-    assert after_dish_planunit.mass != yao_dish_planunit.mass
-    assert after_dish_planunit.mass == 1018
-    print(f"{after_cook_planunit.mass=}")
-    assert after_cook_planunit.mass != yao_cook_planunit.mass
-    assert after_cook_planunit.mass == 19
-    print(f"{after_casa_planunit.mass=}")
-    assert after_casa_planunit.mass != 1
-    assert after_casa_planunit.mass == 38
+    print(f"{after_dish_planunit.star=}")
+    assert after_dish_planunit.star != yao_dish_planunit.star
+    assert after_dish_planunit.star == 1018
+    print(f"{after_cook_planunit.star=}")
+    assert after_cook_planunit.star != yao_cook_planunit.star
+    assert after_cook_planunit.star == 19
+    print(f"{after_casa_planunit.star=}")
+    assert after_casa_planunit.star != 1
+    assert after_casa_planunit.star == 38
     assert after_yao_believerunit == before_yao_believerunit
     assert len(after_yao_believerunit.get_agenda_dict()) == 3
-    assert after_fly_planunit.mass != 1
-    assert after_fly_planunit.mass == 18
+    assert after_fly_planunit.star != 1
+    assert after_fly_planunit.star == 18
 
 
 def test_listen_to_speaker_agenda_ProcessesIrrationalBeliever():

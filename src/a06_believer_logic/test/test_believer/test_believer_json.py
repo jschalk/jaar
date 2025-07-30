@@ -75,7 +75,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     _kids = "_kids"
     assert x_planroot.plan_label == yao_believer.belief_label
     assert planroot_dict["plan_label"] == x_planroot.plan_label
-    assert planroot_dict["mass"] == x_planroot.mass
+    assert planroot_dict["star"] == x_planroot.star
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
 
@@ -399,7 +399,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     sun_str = "Sun"
     sun_rope = json_believer.make_rope(sem_jour_rope, sun_str)
     sun_plan = json_believer.get_plan_obj(sun_rope)
-    assert sun_plan.mass == 20
+    assert sun_plan.star == 20
 
     json_shave_plan = json_believer.get_plan_obj(shave_rope)
     zia_shave_plan = zia_believer.get_plan_obj(shave_rope)
@@ -512,13 +512,13 @@ def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrect
     assert after_bob_believer.get_plan_obj(hr_number_rope).knot == slash_str
 
 
-def test_believerunit_get_from_json_ExportsBelieverUnit_mass():
+def test_believerunit_get_from_json_ExportsBelieverUnit_star():
     # ESTABLISH
     x1_believer = believerunit_v001()
     x1_believer.tally = 15
     assert x1_believer.tally == 15
-    assert x1_believer.planroot.mass != x1_believer.tally
-    assert x1_believer.planroot.mass == 1
+    assert x1_believer.planroot.star != x1_believer.tally
+    assert x1_believer.planroot.star == 1
 
     # WHEN
     x2_believer = believerunit_get_from_json(x1_believer.get_json())
@@ -526,8 +526,8 @@ def test_believerunit_get_from_json_ExportsBelieverUnit_mass():
     # THEN
     assert x1_believer.tally == 15
     assert x1_believer.tally == x2_believer.tally
-    assert x1_believer.planroot.mass == 1
-    assert x1_believer.planroot.mass == x2_believer.planroot.mass
+    assert x1_believer.planroot.star == 1
+    assert x1_believer.planroot.star == x2_believer.planroot.star
     assert x1_believer.planroot._kids == x2_believer.planroot._kids
 
 

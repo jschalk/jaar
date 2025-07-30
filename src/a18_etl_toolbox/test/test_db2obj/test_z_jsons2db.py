@@ -153,7 +153,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_morph = 10
     x_gogo_want = 11.0
     x_stop_want = 12.0
-    x_mass = 13
+    x_star = 13
     x_task = 14
     x_problem_bool = 15
     x__active = 16
@@ -182,7 +182,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.morph = x_morph
     x_plan.gogo_want = x_gogo_want
     x_plan.stop_want = x_stop_want
-    x_plan.mass = x_mass
+    x_plan.star = x_star
     x_plan.task = x_task
     x_plan.problem_bool = x_problem_bool
     x_plan._active = x__active
@@ -207,7 +207,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.morph = x_morph
     x_plan.gogo_want = x_gogo_want
     x_plan.stop_want = x_stop_want
-    x_plan.mass = x_mass
+    x_plan.star = x_star
     x_plan.task = x_task
     x_plan.problem_bool = x_problem_bool
     x_plan._active = x__active
@@ -253,7 +253,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x_morph,
             x_gogo_want,
             x_stop_want,
-            x_mass,
+            x_star,
             x_task,
             x_problem_bool,
             x_fund_iota,

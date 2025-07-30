@@ -652,7 +652,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(gogo_want_str()) == "float"
     assert x_class_types.get(group_title_str()) == TitleTerm_str()
     assert x_class_types.get(healer_name_str()) == NameTerm_str()
-    assert x_class_types.get("mass") == "int"
+    assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
     assert x_class_types.get("reason_state") == RopeTerm_str()

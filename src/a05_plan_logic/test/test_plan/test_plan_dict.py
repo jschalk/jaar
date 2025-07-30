@@ -133,7 +133,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
         parent_rope=casa_rope,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
-        mass=30,
+        star=30,
         plan_label=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
@@ -179,7 +179,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["awardlinks"] == x1_awardlinks
     assert casa_dict["laborunit"] == sue_laborunit.to_dict()
     assert casa_dict["healerlink"] == yao_healerlink.to_dict()
-    assert casa_dict["mass"] == casa_plan.mass
+    assert casa_dict["star"] == casa_plan.star
     assert casa_dict["plan_label"] == casa_plan.plan_label
     assert casa_dict["_uid"] == casa_plan._uid
     assert casa_dict["begin"] == casa_plan.begin
@@ -206,7 +206,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"mass": 1}
+    assert casa_dict == {"star": 1}
 
 
 def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():

@@ -98,7 +98,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
         "plan_rope": "RopeTerm",
-        "mass": "int",
+        "star": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
         "monthday_distortion": "int",

@@ -47,9 +47,9 @@ def get_believerdelta_example1() -> BelieverDelta:
     sue_believerdelta = believerdelta_shop()
 
     believerunit_str = believerunit_str()
-    mass_name = "mass"
+    star_name = "star"
     x_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
-    x_believeratom.set_jvalue(mass_name, 55)
+    x_believeratom.set_jvalue(star_name, 55)
     x_attribute = "_max_tree_traverse"
     x_believeratom.set_jvalue(x_attribute, 66)
     x_attribute = "_credor_respect"

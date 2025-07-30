@@ -63,60 +63,60 @@ def get_speaker_perspective(
 def generate_ingest_list(
     plan_list: list[PlanUnit], debtor_amount: float, respect_bit: float
 ) -> list[PlanUnit]:
-    plan_ledger = {x_plan.get_plan_rope(): x_plan.mass for x_plan in plan_list}
-    mass_allot = allot_scale(plan_ledger, debtor_amount, respect_bit)
+    plan_ledger = {x_plan.get_plan_rope(): x_plan.star for x_plan in plan_list}
+    star_allot = allot_scale(plan_ledger, debtor_amount, respect_bit)
     for x_planunit in plan_list:
-        x_planunit.mass = mass_allot.get(x_planunit.get_plan_rope())
+        x_planunit.star = star_allot.get(x_planunit.get_plan_rope())
     return plan_list
 
 
 def _ingest_single_planunit(listener: BelieverUnit, ingest_planunit: PlanUnit):
-    mass_data = _create_mass_data(listener, ingest_planunit.get_plan_rope())
+    star_data = _create_star_data(listener, ingest_planunit.get_plan_rope())
 
     if listener.plan_exists(ingest_planunit.get_plan_rope()) is False:
         x_parent_rope = ingest_planunit.parent_rope
         listener.set_plan(ingest_planunit, x_parent_rope, create_missing_plans=True)
 
-    _add_and_replace_planunit_masss(
+    _add_and_replace_planunit_stars(
         listener=listener,
-        replace_mass_list=mass_data.replace_mass_list,
-        add_to_mass_list=mass_data.add_to_mass_list,
-        x_mass=ingest_planunit.mass,
+        replace_star_list=star_data.replace_star_list,
+        add_to_star_list=star_data.add_to_star_list,
+        x_star=ingest_planunit.star,
     )
 
 
 @dataclass
-class MassReplaceOrAddData:
-    add_to_mass_list: list = None
-    replace_mass_list: list = None
+class starReplaceOrAddData:
+    add_to_star_list: list = None
+    replace_star_list: list = None
 
 
-def _create_mass_data(listener: BelieverUnit, x_rope: RopeTerm) -> list:
-    mass_data = MassReplaceOrAddData()
-    mass_data.add_to_mass_list = []
-    mass_data.replace_mass_list = []
+def _create_star_data(listener: BelieverUnit, x_rope: RopeTerm) -> list:
+    star_data = starReplaceOrAddData()
+    star_data.add_to_star_list = []
+    star_data.replace_star_list = []
     ancestor_ropes = get_ancestor_ropes(x_rope, listener.knot)
     root_rope = get_root_label_from_rope(x_rope, listener.knot)
     for ancestor_rope in ancestor_ropes:
         if ancestor_rope != root_rope:
             if listener.plan_exists(ancestor_rope):
-                mass_data.add_to_mass_list.append(ancestor_rope)
+                star_data.add_to_star_list.append(ancestor_rope)
             else:
-                mass_data.replace_mass_list.append(ancestor_rope)
-    return mass_data
+                star_data.replace_star_list.append(ancestor_rope)
+    return star_data
 
 
-def _add_and_replace_planunit_masss(
+def _add_and_replace_planunit_stars(
     listener: BelieverUnit,
-    replace_mass_list: list[RopeTerm],
-    add_to_mass_list: list[RopeTerm],
-    x_mass: float,
+    replace_star_list: list[RopeTerm],
+    add_to_star_list: list[RopeTerm],
+    x_star: float,
 ) -> None:
-    for plan_rope in replace_mass_list:
-        listener.edit_plan_attr(plan_rope, mass=x_mass)
-    for plan_rope in add_to_mass_list:
+    for plan_rope in replace_star_list:
+        listener.edit_plan_attr(plan_rope, star=x_star)
+    for plan_rope in add_to_star_list:
         x_planunit = listener.get_plan_obj(plan_rope)
-        x_planunit.mass += x_mass
+        x_planunit.star += x_star
 
 
 def get_debtors_roll(x_duty: BelieverUnit) -> list[PartnerUnit]:

@@ -128,15 +128,15 @@ def test_BelieverUnit_add_plan_SetsAttr_Scenario1():
     bob_str = "Bob"
     bob_believerunit = believerunit_shop(bob_str)
     casa_rope = bob_believerunit.make_l1_rope("casa")
-    casa_mass = 13
+    casa_star = 13
     casa_task = True
 
     # WHEN
-    bob_believerunit.add_plan(casa_rope, mass=casa_mass, task=casa_task)
+    bob_believerunit.add_plan(casa_rope, star=casa_star, task=casa_task)
 
     # THEN
     casa_planunit = bob_believerunit.get_plan_obj(casa_rope)
-    assert casa_planunit.mass == casa_mass
+    assert casa_planunit.star == casa_star
     assert casa_planunit.task
 
 
@@ -145,14 +145,14 @@ def test_BelieverUnit_add_plan_ReturnsObj():
     bob_str = "Bob"
     bob_believerunit = believerunit_shop(bob_str)
     casa_rope = bob_believerunit.make_l1_rope("casa")
-    casa_mass = 13
+    casa_star = 13
 
     # WHEN
-    casa_planunit = bob_believerunit.add_plan(casa_rope, mass=casa_mass)
+    casa_planunit = bob_believerunit.add_plan(casa_rope, star=casa_star)
 
     # THEN
     assert casa_planunit.plan_label == "casa"
-    assert casa_planunit.mass == casa_mass
+    assert casa_planunit.star == casa_star
 
 
 def test_BelieverUnit_set_plan_CorrectlyAddsPlanObjWithNonDefault_knot():
@@ -328,11 +328,11 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
     print(f"{casa_rope=}")
-    old_mass = sue_believer.planroot._kids[casa_str].mass
-    assert old_mass == 30
-    sue_believer.edit_plan_attr(casa_rope, mass=23)
-    new_mass = sue_believer.planroot._kids[casa_str].mass
-    assert new_mass == 23
+    old_star = sue_believer.planroot._kids[casa_str].star
+    assert old_star == 30
+    sue_believer.edit_plan_attr(casa_rope, star=23)
+    new_star = sue_believer.planroot._kids[casa_str].star
+    assert new_star == 23
 
     # uid: int = None,
     sue_believer.planroot._kids[casa_str]._uid = 34
@@ -555,27 +555,27 @@ def test_BelieverUnit_set_plan_adoptee_CorrectlyAddsAdoptee():
     assert bob_believer.plan_exists(sports_hike_rope) is False
 
 
-def test_BelieverUnit_set_plan_bundling_SetsNewParentWithMassEqualToSumOfAdoptedPlans():
+def test_BelieverUnit_set_plan_bundling_SetsNewParentWithstarEqualToSumOfAdoptedPlans():
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
-    bob_believer.set_l1_plan(planunit_shop(sports_str, mass=2))
+    bob_believer.set_l1_plan(planunit_shop(sports_str, star=2))
     swim_str = "swim"
-    swim_mass = 3
-    bob_believer.set_plan(planunit_shop(swim_str, mass=swim_mass), sports_rope)
+    swim_star = 3
+    bob_believer.set_plan(planunit_shop(swim_str, star=swim_star), sports_rope)
     hike_str = "hike"
-    hike_mass = 5
-    bob_believer.set_plan(planunit_shop(hike_str, mass=hike_mass), sports_rope)
+    hike_star = 5
+    bob_believer.set_plan(planunit_shop(hike_str, star=hike_star), sports_rope)
     bball_str = "bball"
-    bball_mass = 7
-    bob_believer.set_plan(planunit_shop(bball_str, mass=bball_mass), sports_rope)
+    bball_star = 7
+    bob_believer.set_plan(planunit_shop(bball_str, star=bball_star), sports_rope)
 
     sports_swim_rope = bob_believer.make_rope(sports_rope, swim_str)
     sports_hike_rope = bob_believer.make_rope(sports_rope, hike_str)
     sports_bball_rope = bob_believer.make_rope(sports_rope, bball_str)
-    assert bob_believer.get_plan_obj(sports_swim_rope).mass == swim_mass
-    assert bob_believer.get_plan_obj(sports_hike_rope).mass == hike_mass
-    assert bob_believer.get_plan_obj(sports_bball_rope).mass == bball_mass
+    assert bob_believer.get_plan_obj(sports_swim_rope).star == swim_star
+    assert bob_believer.get_plan_obj(sports_hike_rope).star == hike_star
+    assert bob_believer.get_plan_obj(sports_bball_rope).star == bball_star
     summer_str = "summer"
     summer_rope = bob_believer.make_rope(sports_rope, summer_str)
     summer_swim_rope = bob_believer.make_rope(summer_rope, swim_str)
@@ -594,9 +594,9 @@ def test_BelieverUnit_set_plan_bundling_SetsNewParentWithMassEqualToSumOfAdopted
     )
 
     # THEN
-    assert bob_believer.get_plan_obj(summer_rope).mass == swim_mass + hike_mass
-    assert bob_believer.get_plan_obj(summer_swim_rope).mass == swim_mass
-    assert bob_believer.get_plan_obj(summer_hike_rope).mass == hike_mass
+    assert bob_believer.get_plan_obj(summer_rope).star == swim_star + hike_star
+    assert bob_believer.get_plan_obj(summer_swim_rope).star == swim_star
+    assert bob_believer.get_plan_obj(summer_hike_rope).star == hike_star
     assert bob_believer.plan_exists(summer_bball_rope) is False
     assert bob_believer.plan_exists(sports_swim_rope) is False
     assert bob_believer.plan_exists(sports_hike_rope) is False
@@ -607,23 +607,23 @@ def test_BelieverUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalStat
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
-    bob_believer.set_l1_plan(planunit_shop(sports_str, mass=2))
+    bob_believer.set_l1_plan(planunit_shop(sports_str, star=2))
     swim_str = "swim"
-    swim_mass = 3
-    bob_believer.set_plan(planunit_shop(swim_str, mass=swim_mass), sports_rope)
+    swim_star = 3
+    bob_believer.set_plan(planunit_shop(swim_str, star=swim_star), sports_rope)
     hike_str = "hike"
-    hike_mass = 5
-    bob_believer.set_plan(planunit_shop(hike_str, mass=hike_mass), sports_rope)
+    hike_star = 5
+    bob_believer.set_plan(planunit_shop(hike_str, star=hike_star), sports_rope)
     bball_str = "bball"
-    bball_mass = 7
-    bob_believer.set_plan(planunit_shop(bball_str, mass=bball_mass), sports_rope)
+    bball_star = 7
+    bob_believer.set_plan(planunit_shop(bball_str, star=bball_star), sports_rope)
 
     sports_swim_rope = bob_believer.make_rope(sports_rope, swim_str)
     sports_hike_rope = bob_believer.make_rope(sports_rope, hike_str)
     sports_bball_rope = bob_believer.make_rope(sports_rope, bball_str)
-    assert bob_believer.get_plan_obj(sports_swim_rope).mass == swim_mass
-    assert bob_believer.get_plan_obj(sports_hike_rope).mass == hike_mass
-    assert bob_believer.get_plan_obj(sports_bball_rope).mass == bball_mass
+    assert bob_believer.get_plan_obj(sports_swim_rope).star == swim_star
+    assert bob_believer.get_plan_obj(sports_hike_rope).star == hike_star
+    assert bob_believer.get_plan_obj(sports_bball_rope).star == bball_star
     summer_str = "summer"
     summer_rope = bob_believer.make_rope(sports_rope, summer_str)
     summer_swim_rope = bob_believer.make_rope(summer_rope, swim_str)
@@ -638,9 +638,9 @@ def test_BelieverUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalStat
         adoptees=[swim_str, hike_str],
         bundling=True,
     )
-    assert bob_believer.get_plan_obj(summer_rope).mass == swim_mass + hike_mass
-    assert bob_believer.get_plan_obj(summer_swim_rope).mass == swim_mass
-    assert bob_believer.get_plan_obj(summer_hike_rope).mass == hike_mass
+    assert bob_believer.get_plan_obj(summer_rope).star == swim_star + hike_star
+    assert bob_believer.get_plan_obj(summer_swim_rope).star == swim_star
+    assert bob_believer.get_plan_obj(summer_hike_rope).star == hike_star
     assert bob_believer.plan_exists(summer_bball_rope) is False
     assert bob_believer.plan_exists(sports_swim_rope) is False
     assert bob_believer.plan_exists(sports_hike_rope) is False
@@ -654,9 +654,9 @@ def test_BelieverUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalStat
     sports_swim_plan = bob_believer.get_plan_obj(sports_swim_rope)
     sports_hike_plan = bob_believer.get_plan_obj(sports_hike_rope)
     sports_bball_plan = bob_believer.get_plan_obj(sports_bball_rope)
-    assert sports_swim_plan.mass == swim_mass
-    assert sports_hike_plan.mass == hike_mass
-    assert sports_bball_plan.mass == bball_mass
+    assert sports_swim_plan.star == swim_star
+    assert sports_hike_plan.star == hike_star
+    assert sports_bball_plan.star == bball_star
 
 
 def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardlinks():
@@ -908,8 +908,8 @@ def test_BelieverUnit_set_offtrack_fund_ReturnsObj():
     bob_believerunit.set_l1_plan(casa_plan)
     bob_believerunit.set_l1_plan(wk_plan)
     bob_believerunit.set_plan(wed_plan, wk_rope)
-    bob_believerunit._offtrack_kids_mass_set.add(casa_rope)
-    bob_believerunit._offtrack_kids_mass_set.add(wk_rope)
+    bob_believerunit._offtrack_kids_star_set.add(casa_rope)
+    bob_believerunit._offtrack_kids_star_set.add(wk_rope)
     assert bob_believerunit._offtrack_fund == 0
 
     # WHEN
@@ -919,7 +919,7 @@ def test_BelieverUnit_set_offtrack_fund_ReturnsObj():
     assert bob_believerunit._offtrack_fund == 105
 
     # WHEN
-    bob_believerunit._offtrack_kids_mass_set.add(wed_rope)
+    bob_believerunit._offtrack_kids_star_set.add(wed_rope)
     bob_believerunit.set_offtrack_fund()
 
     # THEN
@@ -965,8 +965,8 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_believerunit.set_l1_plan(casa_plan)
     bob_believerunit.set_l1_plan(wk_plan)
     bob_believerunit.set_plan(wed_plan, wk_rope)
-    bob_believerunit._offtrack_kids_mass_set.add(casa_rope)
-    bob_believerunit._offtrack_kids_mass_set.add(wk_rope)
+    bob_believerunit._offtrack_kids_star_set.add(casa_rope)
+    bob_believerunit._offtrack_kids_star_set.add(wk_rope)
     bob_believerunit.set_offtrack_fund()
     assert bob_believerunit._offtrack_fund == 105
 
@@ -981,7 +981,7 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     assert bob_believerunit.get_partner(sue_str)._fund_give == 26
     assert bob_believerunit.get_partner(sue_str)._fund_take == 53
 
-    bob_believerunit._offtrack_kids_mass_set.add(wed_rope)
+    bob_believerunit._offtrack_kids_star_set.add(wed_rope)
     bob_believerunit.set_offtrack_fund()
 
     # THEN
