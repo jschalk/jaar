@@ -64,6 +64,7 @@ def process_json():
         else:
             plan_tree_display_dict = {"Mode not loaded correctly": "Contact support"}
 
+        # TODO replace hardcoded "Sue" with believerunit object reference
         return jsonify(
             {"mode": mode, "result": plan_tree_display_dict, "believer_name": "Sue"}
         )

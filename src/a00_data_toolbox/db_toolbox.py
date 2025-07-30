@@ -208,7 +208,7 @@ def get_column_data_type(cursor: sqlite3_Connection, table_name: str, column_nam
         return None
 
 
-def get_single_result(db_conn: sqlite3_Connection, sqlstr: str) -> str:
+def get_single_result(db_conn: sqlite3_Connection, sqlstr: str) -> any:
     results = db_conn.execute(sqlstr)
     return results.fetchone()[0]
 
