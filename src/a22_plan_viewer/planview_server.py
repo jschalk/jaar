@@ -78,8 +78,6 @@ def set_flask_fund_pool():
     flask_fund_pool = data.get("number")
 
     # You can do whatever you want with the number here.
-    print(f"Received number: {flask_fund_pool}")
-    # For now, just return a confirmation.
     return jsonify({"status": "success", "received": flask_fund_pool})
 
 

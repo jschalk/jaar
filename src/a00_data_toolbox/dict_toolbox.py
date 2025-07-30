@@ -447,7 +447,6 @@ def mark_keys(
                 else:
                     new_key = f"{key} ({mark_text})"
 
-                # Remove the 'task' key
                 value = {k: v for k, v in value.items() if k != marking_key}
 
             # Recurse if within depth
