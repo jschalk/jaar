@@ -24,7 +24,7 @@ def test_add_belief_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
     a23_belief.timeline = timelineunit_shop(get_five_config())
     belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
-    save_json(belief_json_path, None, a23_belief.get_dict())
+    save_json(belief_json_path, None, a23_belief.to_dict())
     assert os_path_exists(belief_json_path)
     sue_str = "Sue"
     init_sue_gut = believerunit_shop(sue_str, a23_str)

@@ -226,7 +226,7 @@ def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{swim_membership}")
 
     # WHEN
-    swim_dict = swim_membership.get_dict()
+    swim_dict = swim_membership.to_dict()
 
     # THEN
     assert swim_dict is not None
@@ -249,7 +249,7 @@ def test_membership_get_from_dict_ReturnsObj():
         group_debt_points=swim_group_debt_points,
         partner_name=yao_str,
     )
-    swim_membership_dict = before_swim_membership.get_dict()
+    swim_membership_dict = before_swim_membership.to_dict()
 
     # WHEN
     after_swim_membership = membership_get_from_dict(swim_membership_dict, yao_str)
@@ -272,7 +272,7 @@ def test_memberships_get_from_dict_ReturnsObj():
         partner_name=yao_str,
     )
     before_swim_memberships_objs = {swim_str: before_swim_membership}
-    swim_memberships_dict = {swim_str: before_swim_membership.get_dict()}
+    swim_memberships_dict = {swim_str: before_swim_membership.to_dict()}
 
     # WHEN
     after_swim_memberships_objs = memberships_get_from_dict(
@@ -388,7 +388,7 @@ def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
     print(f"{bikers_awardlink}")
 
     # WHEN
-    biker_dict = bikers_awardlink.get_dict()
+    biker_dict = bikers_awardlink.to_dict()
 
     # THEN
     assert biker_dict is not None
@@ -405,7 +405,7 @@ def test_awardlinks_get_from_JSON_ReturnsObj_SimpleExample():
     teacher_awardlink = awardlink_shop(
         awardee_title=teacher_str, give_force=103, take_force=155
     )
-    teacher_dict = teacher_awardlink.get_dict()
+    teacher_dict = teacher_awardlink.to_dict()
     awardlinks_dict = {teacher_awardlink.awardee_title: teacher_dict}
 
     teachers_json = get_json_from_dict(awardlinks_dict)

@@ -65,7 +65,7 @@ def test_LaborUnit_get_dict_ReturnsCorrectDictWithSingle_laborlink():
     x_laborunit = laborunit_shop(_laborlinks=x_laborlinks)
 
     # WHEN
-    obj_dict = x_laborunit.get_dict()
+    obj_dict = x_laborunit.to_dict()
 
     # THEN
     assert obj_dict is not None

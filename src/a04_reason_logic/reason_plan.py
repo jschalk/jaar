@@ -22,7 +22,7 @@ class FactCore:
     fact_lower: float = None
     fact_upper: float = None
 
-    def get_dict(self) -> dict[str,]:
+    def to_dict(self) -> dict[str,]:
         x_dict = {
             "fact_context": self.fact_context,
             "fact_state": self.fact_state,
@@ -120,7 +120,7 @@ def get_factunit_from_tuple(
 def get_dict_from_factunits(
     factunits: dict[RopeTerm, FactUnit],
 ) -> dict[RopeTerm, dict[str,]]:
-    return {fact.fact_context: fact.get_dict() for fact in factunits.values()}
+    return {fact.fact_context: fact.to_dict() for fact in factunits.values()}
 
 
 @dataclass
@@ -321,7 +321,7 @@ class CaseUnit:
     def get_obj_key(self):
         return self.reason_state
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         x_dict = {"reason_state": self.reason_state}
         if self.reason_lower is not None:
             x_dict["reason_lower"] = self.reason_lower
@@ -565,9 +565,9 @@ def reasoncore_shop(
 
 @dataclass
 class ReasonUnit(ReasonCore):
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         cases_dict = {
-            case_rope: case.get_dict() for case_rope, case in self.cases.items()
+            case_rope: case.to_dict() for case_rope, case in self.cases.items()
         }
         x_dict = {"reason_context": self.reason_context}
         if cases_dict != {}:

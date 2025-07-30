@@ -215,11 +215,11 @@ class PartnerUnit(PartnerCore):
 
     def get_memberships_dict(self) -> dict:
         return {
-            x_membership.group_title: x_membership.get_dict()
+            x_membership.group_title: x_membership.to_dict()
             for x_membership in self._memberships.values()
         }
 
-    def get_dict(self, all_attrs: bool = False) -> dict[str, str]:
+    def to_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
             "partner_name": self.partner_name,
             "partner_cred_points": self.partner_cred_points,

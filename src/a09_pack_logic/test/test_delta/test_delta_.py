@@ -191,12 +191,12 @@ def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_partnerunits(
     )
     cw_str = partner_cred_points_str()
     dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.get_dict()=}")
+    print(f"{bob_partnerunit.to_dict()=}")
     bob_required_dict = {
-        partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())
+        partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())
     }
-    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     partnerunit_str = believer_partnerunit_str()
     ex1_believerdelta.add_believeratom(
@@ -568,9 +568,9 @@ def test_BelieverDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber()
     # assert delta_zia == zia_believeratom
     # assert delta_yao == yao_believeratom
     # assert delta_pool == pool_believeratom
-    assert believerdelta_dict.get(5) == zia_believeratom.get_dict()
-    assert believerdelta_dict.get(6) == yao_believeratom.get_dict()
-    assert believerdelta_dict.get(7) == pool_believeratom.get_dict()
+    assert believerdelta_dict.get(5) == zia_believeratom.to_dict()
+    assert believerdelta_dict.get(6) == yao_believeratom.to_dict()
+    assert believerdelta_dict.get(7) == pool_believeratom.to_dict()
 
 
 def test_get_believerdelta_from_ordered_dict_ReturnsObj():
@@ -605,9 +605,9 @@ def test_get_believerdelta_from_ordered_dict_ReturnsObj():
     # assert delta_zia == zia_believeratom
     # assert delta_yao == yao_believeratom
     # assert delta_pool == pool_believeratom
-    # assert believerdelta_dict.get(5) == zia_believeratom.get_dict()
-    # assert believerdelta_dict.get(6) == yao_believeratom.get_dict()
-    # assert believerdelta_dict.get(7) == pool_believeratom.get_dict()
+    # assert believerdelta_dict.get(5) == zia_believeratom.to_dict()
+    # assert believerdelta_dict.get(6) == yao_believeratom.to_dict()
+    # assert believerdelta_dict.get(7) == pool_believeratom.to_dict()
     assert generated_believerdelta == expected_believerdelta
 
 

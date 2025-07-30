@@ -356,4 +356,4 @@ def create_bud_mandate_ledgers(belief_mstr_dir: str, belief_label: str):
             )
             save_json(bud_root_dir, BUD_MANDATE_FILENAME, bud_partner_mandate_ledger)
             budunit._bud_partner_nets = bud_partner_mandate_ledger
-    save_json(belief_json_path, None, beliefunit.get_dict())
+    save_json(belief_json_path, None, beliefunit.to_dict())

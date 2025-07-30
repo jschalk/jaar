@@ -168,7 +168,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_plan.add_kid(planunit_shop("paper"))
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict is not None
@@ -177,8 +177,8 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["reasonunits"] == casa_plan.get_reasonunits_dict()
     assert casa_dict["awardlinks"] == casa_plan.get_awardlinks_dict()
     assert casa_dict["awardlinks"] == x1_awardlinks
-    assert casa_dict["laborunit"] == sue_laborunit.get_dict()
-    assert casa_dict["healerlink"] == yao_healerlink.get_dict()
+    assert casa_dict["laborunit"] == sue_laborunit.to_dict()
+    assert casa_dict["healerlink"] == yao_healerlink.to_dict()
     assert casa_dict["mass"] == casa_plan.mass
     assert casa_dict["plan_label"] == casa_plan.plan_label
     assert casa_dict["_uid"] == casa_plan._uid
@@ -202,7 +202,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
     casa_plan = planunit_shop()
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict is not None
@@ -237,7 +237,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_plan._kids != {}
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict.get("_is_expanded") is False
@@ -260,7 +260,7 @@ def test_PlanUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_plan._kids == {}
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict.get("_is_expanded") is None

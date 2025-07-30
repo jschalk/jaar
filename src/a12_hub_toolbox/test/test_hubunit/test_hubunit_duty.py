@@ -84,9 +84,7 @@ def test_HubUnit_get_vision_believer_reason_lowersFile(env_dir_setup_cleanup):
     sue_hubunit.save_vision_believer(bob_believer)
 
     # WHEN / THEN
-    assert (
-        sue_hubunit.get_vision_believer(bob_str).get_dict() == bob_believer.get_dict()
-    )
+    assert sue_hubunit.get_vision_believer(bob_str).to_dict() == bob_believer.to_dict()
 
 
 def test_HubUnit_get_vision_believer_ReturnsNoneIfFileDoesNotExist(

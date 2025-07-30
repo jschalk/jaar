@@ -148,7 +148,7 @@ def test_FactUnit_get_dict_ReturnsDict():
     print(sun_fact)
 
     # WHEN
-    fact_dict = sun_fact.get_dict()
+    fact_dict = sun_fact.to_dict()
 
     # THEN
     assert fact_dict is not None
@@ -171,7 +171,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
     print(sun_fact)
 
     # WHEN
-    fact_dict = sun_fact.get_dict()
+    fact_dict = sun_fact.to_dict()
 
     # THEN
     assert fact_dict is not None

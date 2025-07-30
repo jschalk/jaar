@@ -132,7 +132,7 @@ class BelieverAtom:
     def get_jvalues_dict(self) -> dict[str, str]:
         return dict(self.jvalues.items())
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         jkeys_dict = self.get_jkeys_dict()
         jvalues_dict = self.get_jvalues_dict()
         return {
@@ -143,7 +143,7 @@ class BelieverAtom:
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def believeratom_shop(

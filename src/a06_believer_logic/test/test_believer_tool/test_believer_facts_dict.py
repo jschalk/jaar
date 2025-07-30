@@ -85,13 +85,13 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario0_BelieverEmptyNoFacts():
     yao_believer = believerunit_shop("Yao", "amy23")
     before_yao_believer = copy_deepcopy(yao_believer)
     facts_dict = {}
-    assert yao_believer.get_dict() == before_yao_believer.get_dict()
+    assert yao_believer.to_dict() == before_yao_believer.to_dict()
 
     # WHEN
     set_factunits_to_believer(yao_believer, facts_dict)
 
     # THEN
-    assert yao_believer.get_dict() == before_yao_believer.get_dict()
+    assert yao_believer.to_dict() == before_yao_believer.to_dict()
 
 
 def test_set_factunits_to_believer_ReturnsObj_Scenario1_Believer1FactsChanged():
@@ -120,13 +120,13 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario1_Believer1FactsChanged():
     before_bob_believer = copy_deepcopy(bob_believer)
     assert bob_believer.get_factunits_dict() != dirty_facts_dict
     assert bob_believer.get_factunits_dict() == {}
-    assert bob_believer.get_dict() == before_bob_believer.get_dict()
+    assert bob_believer.to_dict() == before_bob_believer.to_dict()
 
     # WHEN
     set_factunits_to_believer(bob_believer, dirty_facts_dict)
 
     # THEN
-    assert bob_believer.get_dict() != before_bob_believer.get_dict()
+    assert bob_believer.to_dict() != before_bob_believer.to_dict()
     assert bob_believer.get_factunits_dict() == dirty_facts_dict
 
 
@@ -156,13 +156,13 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario2_FactUnit_reason_context_
     before_bob_believer = copy_deepcopy(bob_believer)
     assert bob_believer.get_factunits_dict() != clean_facts_dict
     assert bob_believer.get_factunits_dict() == {}
-    assert bob_believer.get_dict() == before_bob_believer.get_dict()
+    assert bob_believer.to_dict() == before_bob_believer.to_dict()
 
     # WHEN
     set_factunits_to_believer(bob_believer, clean_facts_dict)
 
     # THEN
-    assert bob_believer.get_dict() != before_bob_believer.get_dict()
+    assert bob_believer.to_dict() != before_bob_believer.to_dict()
     assert bob_believer.get_factunits_dict() == clean_facts_dict
     assert bob_believer.get_plan_obj(clean_rope)
 
@@ -200,7 +200,7 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario3_FactUnit_reason_context_
     before_bob_believer = copy_deepcopy(bob_believer)
     assert bob_believer.get_factunits_dict() != two_facts_dict
     assert bob_believer.get_factunits_dict() == {}
-    assert bob_believer.get_dict() == before_bob_believer.get_dict()
+    assert bob_believer.to_dict() == before_bob_believer.to_dict()
 
     # WHEN
     set_factunits_to_believer(bob_believer, two_facts_dict)
@@ -208,7 +208,7 @@ def test_set_factunits_to_believer_ReturnsObj_Scenario3_FactUnit_reason_context_
     # THEN
     assert floor_rope in set(bob_believer.get_factunits_dict().keys())
     assert weather_rope not in set(bob_believer.get_factunits_dict().keys())
-    assert bob_believer.get_dict() != before_bob_believer.get_dict()
+    assert bob_believer.to_dict() != before_bob_believer.to_dict()
 
 
 def test_clear_factunits_from_believer_ReturnsObj_Scenario1_FactUnit_Exist():

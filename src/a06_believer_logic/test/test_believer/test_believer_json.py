@@ -50,7 +50,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     yao_believer.set_last_pack_id(x_last_pack_id)
 
     # WHEN
-    believer_dict = yao_believer.get_dict()
+    believer_dict = yao_believer.to_dict()
 
     # THEN
     assert believer_dict is not None
@@ -94,11 +94,11 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     root_plan.stop_want = x_stop_want
 
     # WHEN
-    believer_dict = sue_believer.get_dict()
+    believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
-    assert planroot_dict["laborunit"] == x_laborunit.get_dict()
+    assert planroot_dict["laborunit"] == x_laborunit.to_dict()
     assert planroot_dict["laborunit"] == {"_laborlinks": [run_str]}
     assert planroot_dict.get("gogo_want") == x_gogo_want
     assert planroot_dict.get("stop_want") == x_stop_want
@@ -118,11 +118,11 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     sue_believer.edit_plan_attr(root_rope, healerlink=run_healerlink)
 
     # WHEN
-    believer_dict = sue_believer.get_dict()
+    believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
-    assert planroot_dict["healerlink"] == run_healerlink.get_dict()
+    assert planroot_dict["healerlink"] == run_healerlink.to_dict()
 
 
 def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
@@ -142,7 +142,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     sue_believer.edit_plan_attr(morn_rope, laborunit=x_laborunit)
 
     # WHEN
-    believer_dict = sue_believer.get_dict()
+    believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
@@ -150,7 +150,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     _laborunit = "laborunit"
 
     labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
-    assert labor_dict_x == x_laborunit.get_dict()
+    assert labor_dict_x == x_laborunit.to_dict()
     assert labor_dict_x == {"_laborlinks": [run_str]}
 
 
@@ -541,9 +541,9 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     print(f"{x3_believer.believer_name}")
 
     cn_dict_of_dicts = {
-        x1_believer.believer_name: x1_believer.get_dict(),
-        x2_believer.believer_name: x2_believer.get_dict(),
-        x3_believer.believer_name: x3_believer.get_dict(),
+        x1_believer.believer_name: x1_believer.to_dict(),
+        x2_believer.believer_name: x2_believer.to_dict(),
+        x3_believer.believer_name: x3_believer.to_dict(),
     }
 
     # WHEN
@@ -563,10 +563,10 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     # assert ccn2_believer.get_plan_obj(shave_rope) == x2_believer.get_plan_obj(shave_rope)
     # assert ccn2_believer.get_plan_obj(wk_rope) == x2_believer.get_plan_obj(wk_rope)
     # assert ccn2_believer.planroot == x2_believer.planroot
-    assert ccn2_believer.get_dict() == x2_believer.get_dict()
+    assert ccn2_believer.to_dict() == x2_believer.to_dict()
 
     ccn_believer3 = ccn_dict_of_obj.get(x3_believer.believer_name)
-    assert ccn_believer3.get_dict() == x3_believer.get_dict()
+    assert ccn_believer3.to_dict() == x3_believer.to_dict()
 
     cc1_plan_root = ccn_dict_of_obj.get(x1_believer.believer_name).planroot
     ccn_believer1 = ccn_dict_of_obj.get(x1_believer.believer_name)

@@ -59,7 +59,7 @@ class MapCore:
             raise set_all_otx2inxException(exception_str)
         self.otx2inx = x_otx2inx
 
-    def get_dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {
             "face_name": self.face_name,
             "event_int": self.event_int,
@@ -70,7 +70,7 @@ class MapCore:
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 class NameMap(MapCore):
@@ -411,7 +411,7 @@ class RopeMap:
     def is_valid(self) -> bool:
         return self.all_otx_parent_ropes_exist()
 
-    def get_dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {
             "face_name": self.face_name,
             "event_int": self.event_int,
@@ -422,7 +422,7 @@ class RopeMap:
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def ropemap_shop(

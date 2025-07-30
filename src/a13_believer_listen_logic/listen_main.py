@@ -308,7 +308,7 @@ def listen_to_believer_visions(listener_hubunit: HubUnit) -> None:
         listener_hubunit.believer_name,
     )
     new_job = create_listen_basis(gut)
-    pre_job_dict = new_job.get_dict()
+    pre_job_dict = new_job.to_dict()
     gut.settle_believer()
     new_job.settle_believer()
 
@@ -320,7 +320,7 @@ def listen_to_believer_visions(listener_hubunit: HubUnit) -> None:
             listener_id, keep_dict, healer_hubunit, new_job
         )
 
-    if new_job.get_dict() == pre_job_dict:
+    if new_job.to_dict() == pre_job_dict:
         agenda = list(gut.get_agenda_dict().values())
         _ingest_perspective_agenda(new_job, agenda)
         listen_to_speaker_fact(new_job, gut)

@@ -73,7 +73,7 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     # THEN
     zia_partner = yao_believer.get_partner(zia_str)
     sue_partner = yao_believer.get_partner(sue_str)
-    assert ordered_partners1[0].get_dict() == sue_partner.get_dict()
+    assert ordered_partners1[0].to_dict() == sue_partner.to_dict()
     assert ordered_partners1 == [sue_partner, zia_partner]
 
     # ESTABLISH
@@ -86,7 +86,7 @@ def test_get_ordered_debtors_roll_ReturnsObjsInOrder():
     ordered_partners2 = get_ordered_debtors_roll(yao_believer)
 
     # THEN
-    assert ordered_partners2[0].get_dict() == bob_partner.get_dict()
+    assert ordered_partners2[0].to_dict() == bob_partner.to_dict()
     assert ordered_partners2 == [bob_partner, sue_partner, zia_partner]
 
 
@@ -117,7 +117,7 @@ def test_get_ordered_debtors_roll_DoesNotReturnZero_partner_debt_points():
     zia_partner = yao_believer.get_partner(zia_str)
     sue_partner = yao_believer.get_partner(sue_str)
     bob_partner = yao_believer.get_partner(bob_str)
-    assert ordered_partners2[0].get_dict() == bob_partner.get_dict()
+    assert ordered_partners2[0].to_dict() == bob_partner.to_dict()
     assert ordered_partners2 == [bob_partner, sue_partner, zia_partner]
 
 

@@ -65,4 +65,4 @@ def test_etl_event_inherited_believerunits_to_belief_gut_SetsFiles_Scenario0(
     generated_gut_believer = believerunit_get_from_json(open_file(a23_bob_gut_path))
     assert generated_gut_believer.partners == e7_bob_believer.partners
     assert generated_gut_believer == e7_bob_believer
-    assert generated_gut_believer.get_dict() == e7_bob_believer.get_dict()
+    assert generated_gut_believer.to_dict() == e7_bob_believer.to_dict()

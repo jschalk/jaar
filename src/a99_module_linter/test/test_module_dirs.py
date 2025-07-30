@@ -374,6 +374,7 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
         "sue_str",
         "taxs1_dict",
         "test_str_functions_ReturnsObj",
+        "to_dict",
         "xio_str",
         "yao_str",
         "zia_str",

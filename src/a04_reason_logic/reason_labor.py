@@ -12,7 +12,7 @@ class InvalidLaborHeirPopulateException(Exception):
 class LaborUnit:
     _laborlinks: set[GroupTitle]
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         return {"_laborlinks": list(self._laborlinks)}
 
     def set_laborlink(self, labor_title: GroupTitle):

@@ -525,7 +525,7 @@ def test_TimeLineUnit_get_dict_ReturnsObj():
     x_timelineunit = timelineunit_shop()
 
     # WHEN
-    x_config = x_timelineunit.get_dict()
+    x_config = x_timelineunit.to_dict()
 
     # THEN
     assert x_config

@@ -896,7 +896,7 @@ class BelieverDelta:
 
     def get_ordered_dict(self, x_count: int = None) -> dict[int, str]:
         atom_tuples = self.get_ordered_believeratoms(x_count).items()
-        return {atom_num: atom_obj.get_dict() for atom_num, atom_obj in atom_tuples}
+        return {atom_num: atom_obj.to_dict() for atom_num, atom_obj in atom_tuples}
 
     def get_json(self, x_count: int = None) -> str:
         x_dict = self.get_ordered_dict(x_count)

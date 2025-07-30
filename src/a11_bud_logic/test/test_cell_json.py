@@ -43,7 +43,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
     )
 
     # WHEN
-    x_cell_dict = x_cellunit.get_dict()
+    x_cell_dict = x_cellunit.to_dict()
 
     # THEN
     assert list(x_cell_dict.keys()) == [
@@ -67,7 +67,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
     assert x_cell_dict.get(quota_str()) == bob_sue_quota300
     assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
     bob_sue_believer = believerunit_shop(bob_sue_bud_believer)
-    assert x_cell_dict.get(believeradjust_str()) == bob_sue_believer.get_dict()
+    assert x_cell_dict.get(believeradjust_str()) == bob_sue_believer.to_dict()
     assert x_cell_dict.get(believerevent_facts_str()) == {}
     assert x_cell_dict.get(found_facts_str()) == {}
     assert x_cell_dict.get(boss_facts_str()) == {}
@@ -96,7 +96,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyBelieverAdjust():
     x_cellunit.believeradjust = None
 
     # WHEN
-    x_cell_dict = x_cellunit.get_dict()
+    x_cell_dict = x_cellunit.to_dict()
 
     # THEN
     assert list(x_cell_dict.keys()) == [
@@ -120,7 +120,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyBelieverAdjust():
     assert x_cell_dict.get(quota_str()) == bob_sue_quota300
     assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
     bob_sue_believer = believerunit_shop(sue_str)
-    assert x_cell_dict.get(believeradjust_str()) == bob_sue_believer.get_dict()
+    assert x_cell_dict.get(believeradjust_str()) == bob_sue_believer.to_dict()
     assert x_cell_dict.get(believerevent_facts_str()) == {}
     assert x_cell_dict.get(found_facts_str()) == {}
     assert x_cell_dict.get(boss_facts_str()) == {}
@@ -159,7 +159,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     )
 
     # WHEN
-    x_cell_dict = x_cellunit.get_dict()
+    x_cell_dict = x_cellunit.to_dict()
 
     # THEN
     assert list(x_cell_dict.keys()) == [
@@ -184,11 +184,11 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
     assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
     assert (
         x_cell_dict.get(believeradjust_str())
-        == believerunit_shop(bob_sue_bud_believer).get_dict()
+        == believerunit_shop(bob_sue_bud_believer).to_dict()
     )
-    bob_sue_believerevent_fact_dicts = {clean_fact.fact_context: clean_fact.get_dict()}
-    bob_sue_found_fact_dicts = {dirty_fact.fact_context: dirty_fact.get_dict()}
-    bob_sue_boss_fact_dicts = {sky_blue_fact.fact_context: sky_blue_fact.get_dict()}
+    bob_sue_believerevent_fact_dicts = {clean_fact.fact_context: clean_fact.to_dict()}
+    bob_sue_found_fact_dicts = {dirty_fact.fact_context: dirty_fact.to_dict()}
+    bob_sue_boss_fact_dicts = {sky_blue_fact.fact_context: sky_blue_fact.to_dict()}
     assert (
         x_cell_dict.get(believerevent_facts_str()) == bob_sue_believerevent_fact_dicts
     )
@@ -279,7 +279,7 @@ def test_cellunit_get_from_dict_ReturnsObj_Scenario1():
         bob_sue_found_factunits,
         bob_sue_boss_factunits,
     )
-    x_cell_dict = bob_sue_cellunit.get_dict()
+    x_cell_dict = bob_sue_cellunit.to_dict()
 
     # WHEN
     gen_cellunit = cellunit_get_from_dict(x_cell_dict)

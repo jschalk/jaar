@@ -62,12 +62,12 @@ def test_BeliefUnit_get_dict_ReturnsObjWith_paybook():
     )
 
     # WHEN
-    x_dict = amy_belief.get_dict()
+    x_dict = amy_belief.to_dict()
 
     # THEN
     offi_times_str = f"{offi_time_str()}s"
     print(f"{ amy_belief._get_brokerunits_dict()=}")
-    print(f"{ amy_belief.paybook.get_dict()=}")
+    print(f"{ amy_belief.paybook.to_dict()=}")
     assert x_dict.get(belief_label_str()) == a45_str
     assert x_dict.get(belief_mstr_dir_str()) == belief_mstr_dir
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
@@ -77,7 +77,7 @@ def test_BeliefUnit_get_dict_ReturnsObjWith_paybook():
     assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
     assert x_dict.get(brokerunits_str()) == amy_belief._get_brokerunits_dict()
-    assert x_dict.get(paybook_str()) == amy_belief.paybook.get_dict()
+    assert x_dict.get(paybook_str()) == amy_belief.paybook.to_dict()
     assert set(x_dict.keys()) == {
         belief_label_str(),
         belief_mstr_dir_str(),
@@ -98,7 +98,7 @@ def test_BeliefUnit_get_dict_ReturnsObjWithOut_paybook():
     amy_belief = beliefunit_shop(amy45_str, get_module_temp_dir())
 
     # WHEN
-    x_dict = amy_belief.get_dict(include_paybook=False)
+    x_dict = amy_belief.to_dict(include_paybook=False)
 
     # THEN
     assert not x_dict.get(paybook_str())
@@ -175,7 +175,7 @@ def test_get_from_dict_ReturnsBeliefUnit_Scenario0_WithParameters():
         tran_time=pay_tran_time,
         amount=bob_sue_amount,
     )
-    x_dict = amy_belief.get_dict()
+    x_dict = amy_belief.to_dict()
 
     # WHEN
     x_belief = beliefunit_get_from_dict(x_dict)
@@ -201,7 +201,7 @@ def test_get_from_dict_ReturnsBeliefUnit_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
     amy_belief = beliefunit_shop(amy45_str, get_module_temp_dir())
-    x_dict = amy_belief.get_dict()
+    x_dict = amy_belief.to_dict()
     x_dict["timeline"] = {}
     x_dict.pop("knot")
     x_dict.pop("fund_iota")

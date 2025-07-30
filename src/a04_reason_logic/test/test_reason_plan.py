@@ -255,7 +255,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_caseequireds():
     wk_reason = reasonunit_shop(wk_rope, cases=wed_cases)
 
     # WHEN
-    wk_reason_dict = wk_reason.get_dict()
+    wk_reason_dict = wk_reason.to_dict()
 
     # THEN
     assert wk_reason_dict is not None
@@ -278,7 +278,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_reason_active_requisite():
     )
 
     # WHEN
-    wk_reason_dict = wk_reason.get_dict()
+    wk_reason_dict = wk_reason.to_dict()
 
     # THEN
     assert wk_reason_dict is not None
@@ -304,7 +304,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoCasesReasons():
     wk_reason = reasonunit_shop(wk_rope, cases=two_cases)
 
     # WHEN
-    wk_reason_dict = wk_reason.get_dict()
+    wk_reason_dict = wk_reason.to_dict()
 
     # THEN
     assert wk_reason_dict is not None
@@ -328,7 +328,7 @@ def test_reasons_get_from_dict_ReturnsObj():
         wk_rope,
         reason_active_requisite=wk_reason_active_requisite,
     )
-    x_wk_reasonunits_dict = {wk_reasonunit.reason_context: wk_reasonunit.get_dict()}
+    x_wk_reasonunits_dict = {wk_reasonunit.reason_context: wk_reasonunit.to_dict()}
     assert x_wk_reasonunits_dict is not None
     static_wk_reason_dict = {
         wk_rope: {

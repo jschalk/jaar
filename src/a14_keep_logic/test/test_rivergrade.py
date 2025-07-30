@@ -170,7 +170,7 @@ def test_RiverGrade_get_dict_ReturnsObj():
     x_rivergrade.rewards_magnitude = x_rewards_magnitude
 
     # WHEN
-    rivergrade_dict = x_rivergrade.get_dict()
+    rivergrade_dict = x_rivergrade.to_dict()
 
     # THEN
     assert rivergrade_dict.get(belief_label_str()) == yao_hubunit.belief_label

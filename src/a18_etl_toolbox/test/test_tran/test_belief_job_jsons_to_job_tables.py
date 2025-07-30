@@ -47,7 +47,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_believer.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
     sue_believer.add_fact(status_rope, clean_rope)
     print(f"{sue_believer.get_plan_obj(casa_rope).laborunit=}")
-    print(f"{sue_believer.get_plan_obj(casa_rope).get_dict()=}")
+    print(f"{sue_believer.get_plan_obj(casa_rope).to_dict()=}")
     save_job_file(m23_belief_mstr_dir, sue_believer)
 
     with sqlite3_connect(":memory:") as conn:

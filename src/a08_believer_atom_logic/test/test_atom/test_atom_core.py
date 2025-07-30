@@ -35,8 +35,8 @@ def test_believeratom_shop_ReturnsObj():
     cw_str = "_partner_cred_points"
     dw_str = "_partner_debt_points"
     bob_required_dict = {partner_name_str(): "huh"}
-    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
     partnerunit_str = believer_partnerunit_str()
 
     # WHEN
@@ -156,8 +156,8 @@ def test_BelieverAtom_is_valid_ReturnsCorrectBoolean_PartnerUnit_INSERT():
     bob_insert_believeratom.jvalues = {}
     cw_str = partner_cred_points_str()
     dw_str = partner_debt_points_str()
-    bob_insert_believeratom.set_jvalue(cw_str, bob_partnerunit.get_dict().get(cw_str))
-    bob_insert_believeratom.set_jvalue(dw_str, bob_partnerunit.get_dict().get(dw_str))
+    bob_insert_believeratom.set_jvalue(cw_str, bob_partnerunit.to_dict().get(cw_str))
+    bob_insert_believeratom.set_jvalue(dw_str, bob_partnerunit.to_dict().get(dw_str))
 
     # THEN
     assert bob_insert_believeratom.is_jkeys_valid()
@@ -191,12 +191,12 @@ def test_BelieverAtom_get_value_ReturnsObj_Scenario1():
     bob_insert_believeratom = believeratom_shop(partnerunit_str, INSERT_str())
     cw_str = partner_cred_points_str()
     dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.get_dict()=}")
-    # bob_partnerunit_dict = {partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())}
+    print(f"{bob_partnerunit.to_dict()=}")
+    # bob_partnerunit_dict = {partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())}
     # print(f"{bob_partnerunit_dict=}")
     bob_insert_believeratom.set_jkey(partner_name_str(), bob_str)
-    bob_insert_believeratom.set_jvalue(cw_str, bob_partnerunit.get_dict().get(cw_str))
-    bob_insert_believeratom.set_jvalue(dw_str, bob_partnerunit.get_dict().get(dw_str))
+    bob_insert_believeratom.set_jvalue(cw_str, bob_partnerunit.to_dict().get(cw_str))
+    bob_insert_believeratom.set_jvalue(dw_str, bob_partnerunit.to_dict().get(dw_str))
     assert bob_insert_believeratom.is_valid()
 
     # WHEN / THEN

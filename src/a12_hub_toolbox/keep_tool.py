@@ -88,7 +88,7 @@ def save_duty_believer(
         knot=knot,
         duty_believer=duty_believer.believer_name,
     )
-    save_json(duty_path, None, duty_believer.get_dict())
+    save_json(duty_path, None, duty_believer.to_dict())
 
 
 def get_duty_believer(

@@ -247,8 +247,8 @@ def test_save_arbitrary_believerevent_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert os_path_exists(believerevent_path)
     expected_sue_believer = believerunit_shop(sue_str, a23_str)
     assert (
-        open_believer_file(believerevent_path).get_dict()
-        == expected_sue_believer.get_dict()
+        open_believer_file(believerevent_path).to_dict()
+        == expected_sue_believer.to_dict()
     )
 
 
@@ -286,7 +286,7 @@ def test_save_arbitrary_believerevent_SetsFile_Scenario1_includes_facts(
         gen_sue_believer.get_factunits_dict()
         == expected_sue_believer.get_factunits_dict()
     )
-    assert gen_sue_believer.get_dict() == expected_sue_believer.get_dict()
+    assert gen_sue_believer.to_dict() == expected_sue_believer.to_dict()
 
 
 def test_get_believerevent_obj_ReturnsObj_Scenario0_NoFile(env_dir_setup_cleanup):
@@ -876,7 +876,7 @@ def test_open_believerpoint_file_ReturnsObj_Scenario1_FileExists(env_dir_setup_c
     )
 
     # THEN
-    assert file_believerpoint.get_dict() == t55_believerpoint.get_dict()
+    assert file_believerpoint.to_dict() == t55_believerpoint.to_dict()
 
 
 def test_get_timepoint_dirs_ReturnsObj_Scenario0(env_dir_setup_cleanup):

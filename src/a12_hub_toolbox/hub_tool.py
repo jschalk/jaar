@@ -198,7 +198,7 @@ def cellunit_add_json_file(
 
 
 def cellunit_save_to_dir(dirpath: str, x_cell: CellUnit):
-    save_json(dirpath, CELLNODE_FILENAME, x_cell.get_dict())
+    save_json(dirpath, CELLNODE_FILENAME, x_cell.to_dict())
 
 
 def cellunit_get_from_dir(dirpath: str) -> CellUnit:
@@ -225,7 +225,7 @@ def save_bud_file(
     bud_json_path = create_budunit_json_path(
         belief_mstr_dir, belief_label, believer_name, x_bud.bud_time
     )
-    save_json(bud_json_path, None, x_bud.get_dict(), replace=True)
+    save_json(bud_json_path, None, x_bud.to_dict(), replace=True)
 
 
 def bud_file_exists(

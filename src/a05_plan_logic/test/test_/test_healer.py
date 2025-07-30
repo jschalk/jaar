@@ -47,7 +47,7 @@ def test_HealerLink_get_dict_ReturnsCorrectDictWithSingle_group_title():
     x_healerlink = healerlink_shop(_healer_names=run_healer_names)
 
     # WHEN
-    obj_dict = x_healerlink.get_dict()
+    obj_dict = x_healerlink.to_dict()
 
     # THEN
     assert obj_dict is not None

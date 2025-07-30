@@ -940,17 +940,17 @@ class PlanUnit:
 
     def get_reasonunits_dict(self):
         return {
-            reason_context: reason.get_dict()
+            reason_context: reason.to_dict()
             for reason_context, reason in self.reasonunits.items()
         }
 
     def get_kids_dict(self) -> dict[GroupTitle,]:
-        return {c_rope: kid.get_dict() for c_rope, kid in self._kids.items()}
+        return {c_rope: kid.to_dict() for c_rope, kid in self._kids.items()}
 
     def get_awardlinks_dict(self) -> dict[GroupTitle, dict]:
         x_awardlinks = self.awardlinks.items()
         return {
-            x_awardee_title: awardlink.get_dict()
+            x_awardee_title: awardlink.to_dict()
             for x_awardee_title, awardlink in x_awardlinks
         }
 
@@ -963,7 +963,7 @@ class PlanUnit:
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         x_dict = {"mass": self.mass}
 
         if self.plan_label is not None:
@@ -977,7 +977,7 @@ class PlanUnit:
         if self.laborunit not in [None, laborunit_shop()]:
             x_dict["laborunit"] = self.get_laborunit_dict()
         if self.healerlink not in [None, healerlink_shop()]:
-            x_dict["healerlink"] = self.healerlink.get_dict()
+            x_dict["healerlink"] = self.healerlink.to_dict()
         if self.awardlinks not in [{}, None]:
             x_dict["awardlinks"] = self.get_awardlinks_dict()
         if self.begin is not None:
@@ -1036,7 +1036,7 @@ class PlanUnit:
         )
 
     def get_laborunit_dict(self) -> dict:
-        return self.laborunit.get_dict()
+        return self.laborunit.to_dict()
 
 
 def planunit_shop(

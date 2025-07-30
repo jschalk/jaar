@@ -1406,17 +1406,17 @@ class BelieverUnit:
         x_dict = {}
         if self.planroot.factunits is not None:
             for fact_rope, fact_obj in self.planroot.factunits.items():
-                x_dict[fact_rope] = fact_obj.get_dict()
+                x_dict[fact_rope] = fact_obj.to_dict()
         return x_dict
 
     def get_partnerunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
         if self.partners is not None:
             for partner_name, partner_obj in self.partners.items():
-                x_dict[partner_name] = partner_obj.get_dict(all_attrs)
+                x_dict[partner_name] = partner_obj.to_dict(all_attrs)
         return x_dict
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         x_dict = {
             "partners": self.get_partnerunits_dict(),
             "tally": self.tally,
@@ -1428,7 +1428,7 @@ class BelieverUnit:
             "belief_label": self.belief_label,
             "max_tree_traverse": self.max_tree_traverse,
             "knot": self.knot,
-            "planroot": self.planroot.get_dict(),
+            "planroot": self.planroot.to_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1440,7 +1440,7 @@ class BelieverUnit:
         return x_dict
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
     def set_dominate_task_plan(self, plan_kid: PlanUnit):
         plan_kid.task = True

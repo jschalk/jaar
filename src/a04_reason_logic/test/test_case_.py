@@ -744,7 +744,7 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndreason_lower_reason_u
     )
 
     # WHEN
-    case_dict = wk_case.get_dict()
+    case_dict = wk_case.to_dict()
 
     # THEN
     assert case_dict is not None
@@ -766,7 +766,7 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithreason_lowerAndreason_upper():
     wk_case = caseunit_shop(reason_state=wk_rope, reason_lower=1, reason_upper=4)
 
     # WHEN
-    case_dict = wk_case.get_dict()
+    case_dict = wk_case.to_dict()
 
     # THEN
     assert case_dict is not None
@@ -783,7 +783,7 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithOnlyRopeTerm():
     wk_case = caseunit_shop(reason_state=wk_rope)
 
     # WHEN
-    case_dict = wk_case.get_dict()
+    case_dict = wk_case.to_dict()
 
     # THEN
     assert case_dict is not None

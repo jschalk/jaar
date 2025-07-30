@@ -602,7 +602,7 @@ class TimeLineUnit:
     weekdays_config: list[str] = None
     yr1_jan1_offset: int = None
 
-    def get_dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {
             "c400_number": self.c400_number,
             "hours_config": self.hours_config,

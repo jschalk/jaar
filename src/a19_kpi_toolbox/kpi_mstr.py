@@ -74,7 +74,7 @@ def create_calendar_markdown_files(belief_mstr_dir: str, output_dir: str):
         x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
         belief_believertimelinepoint = get_belief_believertimelinepoint(x_beliefunit)
         belief_year_num = belief_believertimelinepoint._year_num
-        belief_timeline_config = x_beliefunit.timeline.get_dict()
+        belief_timeline_config = x_beliefunit.timeline.to_dict()
         x_calendarmarkdown = get_calendarmarkdown_str(
             belief_timeline_config, belief_year_num
         )

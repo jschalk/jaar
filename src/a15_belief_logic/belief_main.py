@@ -233,7 +233,7 @@ class BeliefUnit:
         x_brokerunit = self.get_brokerunit(believer_name)
         return x_brokerunit.get_bud(bud_time)
 
-    def get_dict(self, include_paybook: bool = True) -> dict:
+    def to_dict(self, include_paybook: bool = True) -> dict:
         x_dict = {
             "belief_label": self.belief_label,
             "belief_mstr_dir": self.belief_mstr_dir,
@@ -242,19 +242,19 @@ class BeliefUnit:
             "penny": self.penny,
             "brokerunits": self._get_brokerunits_dict(),
             "respect_bit": self.respect_bit,
-            "timeline": self.timeline.get_dict(),
+            "timeline": self.timeline.to_dict(),
             "offi_times": list(self.offi_times),
         }
         if include_paybook:
-            x_dict["paybook"] = self.paybook.get_dict()
+            x_dict["paybook"] = self.paybook.to_dict()
         return x_dict
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
     def _get_brokerunits_dict(self) -> dict[BelieverName, dict]:
         return {
-            x_bud.believer_name: x_bud.get_dict() for x_bud in self.brokerunits.values()
+            x_bud.believer_name: x_bud.to_dict() for x_bud in self.brokerunits.values()
         }
 
     def get_brokerunits_bud_times(self) -> set[TimeLinePoint]:
@@ -367,7 +367,7 @@ class BeliefUnit:
         cellunit_save_to_dir(root_cell_dir, cellunit)
 
     def get_timeline_config(self) -> dict:
-        return self.timeline.get_dict()
+        return self.timeline.to_dict()
 
     def add_timeline_to_gut(self, believer_name: BelieverName) -> None:
         """Adds the timeline to the gut file for the given believer."""

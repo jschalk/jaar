@@ -61,7 +61,7 @@ def test_BeliefUnit_rotate_job_ReturnsObj_Scenario2_EmptyPartnersCause_inallocab
 
     # THEN method should wipe over job believer
     assert rotated_sue_job.partner_exists(bob_str)
-    assert rotated_sue_job.get_dict() != init_sue_job.get_dict()
+    assert rotated_sue_job.to_dict() != init_sue_job.to_dict()
     assert init_sue_job.get_partner(bob_str)._inallocable_partner_debt_points == 0
     assert rotated_sue_job.get_partner(bob_str)._inallocable_partner_debt_points == 1
 

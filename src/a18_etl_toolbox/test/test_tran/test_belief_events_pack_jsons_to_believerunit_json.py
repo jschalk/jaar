@@ -100,9 +100,9 @@ def test_etl_event_pack_json_to_event_inherited_believerunits_SetsFiles_believer
     generated_e7_believer = believerunit_get_from_json(open_file(e7_believer_path))
     assert generated_e3_believer.partners == expected_e3_bob_believer.partners
     assert generated_e3_believer == expected_e3_bob_believer
-    assert generated_e3_believer.get_dict() == expected_e3_bob_believer.get_dict()
+    assert generated_e3_believer.to_dict() == expected_e3_bob_believer.to_dict()
     assert generated_e7_believer.partners == expected_e7_bob_believer.partners
-    assert generated_e7_believer.get_dict() == expected_e7_bob_believer.get_dict()
+    assert generated_e7_believer.to_dict() == expected_e7_bob_believer.to_dict()
 
 
 def test_etl_event_pack_json_to_event_inherited_believerunits_SetsFiles_expressed_pack(

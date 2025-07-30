@@ -491,12 +491,12 @@ def test_PackUnit_add_believeratom_CorrectlySets_BelieverUnit_partnerunits():
     )
     cw_str = partner_cred_points_str()
     dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.get_dict()=}")
+    print(f"{bob_partnerunit.to_dict()=}")
     bob_required_dict = {
-        partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())
+        partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())
     }
-    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     assert bob_packunit._believerdelta.believeratoms == {}
 
@@ -578,12 +578,12 @@ def test_PackUnit_is_empty_ReturnsObj():
     )
     cw_str = partner_cred_points_str()
     dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.get_dict()=}")
+    print(f"{bob_partnerunit.to_dict()=}")
     bob_required_dict = {
-        partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())
+        partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())
     }
-    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     assert bob_packunit._believerdelta.believeratoms == {}
     assert bob_packunit.is_empty()

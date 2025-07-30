@@ -212,11 +212,11 @@ class PidginUnit:
     def del_label(self, x_otx: str):
         self.ropemap.del_label(x_otx)
 
-    def get_dict(self) -> dict:
-        x_namemap = _get_rid_of_pidgin_core_keys(self.namemap.get_dict())
-        x_titlemap = _get_rid_of_pidgin_core_keys(self.titlemap.get_dict())
-        x_labelmap = _get_rid_of_pidgin_core_keys(self.labelmap.get_dict())
-        x_ropemap = _get_rid_of_pidgin_core_keys(self.ropemap.get_dict())
+    def to_dict(self) -> dict:
+        x_namemap = _get_rid_of_pidgin_core_keys(self.namemap.to_dict())
+        x_titlemap = _get_rid_of_pidgin_core_keys(self.titlemap.to_dict())
+        x_labelmap = _get_rid_of_pidgin_core_keys(self.labelmap.to_dict())
+        x_ropemap = _get_rid_of_pidgin_core_keys(self.ropemap.to_dict())
 
         return {
             "face_name": self.face_name,
@@ -231,7 +231,7 @@ class PidginUnit:
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def pidginunit_shop(
