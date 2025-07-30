@@ -873,14 +873,14 @@ def test_CaseUnitsUnit_set_knot_SetsAttrsCorrectly():
     assert sun_caseunit.reason_state == slash_sun_rope
 
     # WHEN
-    star_str = "*"
-    sun_caseunit.set_knot(new_knot=star_str)
+    colon_str = ":"
+    sun_caseunit.set_knot(new_knot=colon_str)
 
     # THEN
-    assert sun_caseunit.knot == star_str
-    star_wk_rope = create_rope(root_label(), wk_str, knot=star_str)
-    star_sun_rope = create_rope(star_wk_rope, sun_str, knot=star_str)
-    assert sun_caseunit.reason_state == star_sun_rope
+    assert sun_caseunit.knot == colon_str
+    colon_wk_rope = create_rope(root_label(), wk_str, knot=colon_str)
+    colon_sun_rope = create_rope(colon_wk_rope, sun_str, knot=colon_str)
+    assert sun_caseunit.reason_state == colon_sun_rope
 
 
 def test_rope_find_replace_rope_key_dict_ReturnsCorrectCasesUnit_Scenario1():

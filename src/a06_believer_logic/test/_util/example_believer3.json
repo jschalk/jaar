@@ -4246,9 +4246,9 @@
             "plan_label": "Big Lewbwski",
             "mass": 1
           },
-          "Star Wars eps IV": {
+          "Jedi Movie eps IV": {
             "_uid": 274,
-            "plan_label": "Star Wars eps IV",
+            "plan_label": "Jedi Movie eps IV",
             "mass": 1
           }
         },
@@ -4357,8 +4357,8 @@
             "reasonunits": {
               ";amy45;No Movie playing;": {
                 "cases": {
-                  ";amy45;No Movie playing,Star Wars eps IV": {
-                    "reason_state": ";amy45;No Movie playing,Star Wars eps IV"
+                  ";amy45;No Movie playing,Jedi Movie eps IV": {
+                    "reason_state": ";amy45;No Movie playing,Jedi Movie eps IV"
                   }
                 },
                 "reason_context": ";amy45;No Movie playing;"
