@@ -377,6 +377,7 @@ def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj_PlanUnitsSorted():
 
 
 def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj_Rope_Sorted():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     x_belief_label = root_label()
     sports_str = "sports"
@@ -433,6 +434,7 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
 
 
 def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_scenario2():
+    # sourcery skip: extract-duplicate-method
     sue_believerdelta = believerdelta_shop()
     dimen = believer_partnerunit_str()
     # WHEN
@@ -457,6 +459,7 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
 
 
 def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithNoStartingNumber():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -496,6 +499,7 @@ def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithNoStart
 
 
 def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithStartingNumber():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -535,6 +539,7 @@ def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithStartin
 
 
 def test_BelieverDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -574,6 +579,7 @@ def test_BelieverDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber()
 
 
 def test_get_believerdelta_from_ordered_dict_ReturnsObj():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     expected_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -612,6 +618,7 @@ def test_get_believerdelta_from_ordered_dict_ReturnsObj():
 
 
 def test_BelieverDelta_get_json_ReturnsObj():
+    # sourcery skip: extract-duplicate-method, inline-variable
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
