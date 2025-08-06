@@ -469,7 +469,7 @@ def test_PlanUnit_set_laborheir_CorrectlySetsAttr():
     swim_laborunit = laborunit_shop()
     swim_laborunit.set_laborlink(labor_title=swim_str)
     swim_laborheir = laborheir_shop()
-    swim_laborheir.set_laborlinks(
+    swim_laborheir.set_partys(
         laborunit=swim_laborunit, parent_laborheir=None, groupunits=None
     )
     assert sport_plan._laborheir == swim_laborheir

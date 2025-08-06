@@ -36,7 +36,7 @@ def test_believer_planroot_laborunit_CorrectlySets_plan_laborheir():
 
     # THEN
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(
+    x_laborheir.set_partys(
         parent_laborheir=None, laborunit=x_laborunit, groupunits=None
     )
     assert yao_believer.planroot._laborheir is not None
@@ -65,7 +65,7 @@ def test_believer_plankid_laborunit_EmptyCorrectlySets_plan_laborheir():
     assert run_plan._laborheir._believer_name_is_labor
 
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(
+    x_laborheir.set_partys(
         parent_laborheir=None,
         laborunit=x_laborunit,
         groupunits=bob_believer._groupunits,
@@ -113,7 +113,7 @@ def test_believer_plankid_laborunit_CorrectlySets_grandchild_plan_laborheir():
 
     # THEN
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(
+    x_laborheir.set_partys(
         parent_laborheir=None,
         laborunit=x_laborunit,
         groupunits=sue_believer._groupunits,
@@ -146,8 +146,8 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laboruni
     swim_laborunit.set_laborlink(labor_title=zoa_str)
     sue1_believer.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_believer_swim_plan = sue1_believer.get_plan_obj(swim_rope)
-    sue1_believer_swim_laborlinks = sue1_believer_swim_plan.laborunit._laborlinks
-    assert len(sue1_believer_swim_laborlinks) == 2
+    sue1_believer_swim_partys = sue1_believer_swim_plan.laborunit._partys
+    assert len(sue1_believer_swim_partys) == 2
 
     # WHEN
     sue2_believer = believerunit_shop(sue_str)
@@ -155,9 +155,9 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laboruni
     cleaned_plan = sue2_believer._get_filtered_awardlinks_plan(sue1_believer_swim_plan)
 
     # THEN
-    cleaned_swim_laborlinks = cleaned_plan.laborunit._laborlinks
-    assert len(cleaned_swim_laborlinks) == 1
-    assert list(cleaned_swim_laborlinks) == [xia_str]
+    cleaned_swim_partys = cleaned_plan.laborunit._partys
+    assert len(cleaned_swim_partys) == 1
+    assert list(cleaned_swim_partys) == [xia_str]
 
 
 def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
@@ -183,8 +183,8 @@ def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
     swim_laborunit.set_laborlink(labor_title=zoa_str)
     sue1_believer.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_believer_swim_plan = sue1_believer.get_plan_obj(swim_rope)
-    sue1_believer_swim_laborlinks = sue1_believer_swim_plan.laborunit._laborlinks
-    assert len(sue1_believer_swim_laborlinks) == 2
+    sue1_believer_swim_partys = sue1_believer_swim_plan.laborunit._partys
+    assert len(sue1_believer_swim_partys) == 2
 
     # WHEN
     sue2_believer = believerunit_shop("Sue")
@@ -195,6 +195,6 @@ def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
 
     # THEN
     sue2_believer_swim_plan = sue2_believer.get_plan_obj(swim_rope)
-    sue2_believer_swim_laborlinks = sue2_believer_swim_plan.laborunit._laborlinks
-    assert len(sue2_believer_swim_laborlinks) == 1
-    assert list(sue2_believer_swim_laborlinks) == [xia_str]
+    sue2_believer_swim_partys = sue2_believer_swim_plan.laborunit._partys
+    assert len(sue2_believer_swim_partys) == 1
+    assert list(sue2_believer_swim_partys) == [xia_str]

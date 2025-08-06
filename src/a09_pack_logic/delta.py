@@ -395,7 +395,7 @@ class BelieverDelta:
             )
             self.add_believeratom_plan_laborlink_insert(
                 plan_rope=insert_plan_rope,
-                insert_laborlink_labor_titles=insert_planunit.laborunit._laborlinks,
+                insert_laborlink_labor_titles=insert_planunit.laborunit._partys,
             )
             self.add_believeratom_plan_healerlink_insert(
                 plan_rope=insert_plan_rope,
@@ -506,18 +506,18 @@ class BelieverDelta:
             # update reasonunits_permises delete_case
 
             # insert / update / delete laborlinks
-            before_laborlinks_labor_titles = set(before_planunit.laborunit._laborlinks)
-            after_laborlinks_labor_titles = set(after_planunit.laborunit._laborlinks)
+            before_partys_labor_titles = set(before_planunit.laborunit._partys)
+            after_partys_labor_titles = set(after_planunit.laborunit._partys)
             self.add_believeratom_plan_laborlink_insert(
                 plan_rope=plan_rope,
-                insert_laborlink_labor_titles=after_laborlinks_labor_titles.difference(
-                    before_laborlinks_labor_titles
+                insert_laborlink_labor_titles=after_partys_labor_titles.difference(
+                    before_partys_labor_titles
                 ),
             )
             self.add_believeratom_plan_laborlink_deletes(
                 plan_rope=plan_rope,
-                delete_laborlink_labor_titles=before_laborlinks_labor_titles.difference(
-                    after_laborlinks_labor_titles
+                delete_laborlink_labor_titles=before_partys_labor_titles.difference(
+                    after_partys_labor_titles
                 ),
             )
 
@@ -567,7 +567,7 @@ class BelieverDelta:
             )
             self.add_believeratom_plan_laborlink_deletes(
                 plan_rope=delete_plan_rope,
-                delete_laborlink_labor_titles=delete_planunit.laborunit._laborlinks,
+                delete_laborlink_labor_titles=delete_planunit.laborunit._partys,
             )
             self.add_believeratom_plan_healerlink_deletes(
                 plan_rope=delete_plan_rope,

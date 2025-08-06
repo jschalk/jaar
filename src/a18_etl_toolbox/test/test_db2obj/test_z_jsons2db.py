@@ -821,7 +821,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     x_laborheir._believer_name_is_labor = x__believer_name_is_labor
     bob_str = "Bob"
     sue_str = "Sue"
-    x_laborheir._laborlinks = {bob_str, sue_str}
+    x_laborheir._partys = {bob_str, sue_str}
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()

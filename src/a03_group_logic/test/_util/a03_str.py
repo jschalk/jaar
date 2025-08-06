@@ -45,6 +45,10 @@ def _memberships_str() -> str:
     return "_memberships"
 
 
+def _parent_solo_str() -> str:
+    return "_parent_solo"
+
+
 def awardee_title_str() -> str:
     return "awardee_title"
 
@@ -93,8 +97,16 @@ def partner_name_str() -> str:
     return "partner_name"
 
 
+def party_title_str() -> str:
+    return "party_title"
+
+
 def respect_bit_str() -> str:
     return "respect_bit"
+
+
+def solo_str() -> str:
+    return "solo"
 
 
 def take_force_str() -> str:

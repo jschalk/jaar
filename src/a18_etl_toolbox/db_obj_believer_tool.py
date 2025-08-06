@@ -489,7 +489,7 @@ def insert_job_blrlabo(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["believer_name"] = x_objkeysholder.believer_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    for labor_title in sorted(x_laborheir._laborlinks):
+    for labor_title in sorted(x_laborheir._partys):
         x_dict["labor_title"] = labor_title
         insert_sqlstr = create_blrlabo_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)

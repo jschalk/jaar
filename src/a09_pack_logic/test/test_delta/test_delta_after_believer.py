@@ -1052,7 +1052,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_l
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_planunit.laborunit._laborlinks == set()
+    assert before_ball_planunit.laborunit._partys == set()
 
     # WHEN
     update_disc_believeratom = believeratom_shop(
@@ -1066,7 +1066,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_l
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.laborunit._laborlinks != set()
+    assert after_ball_planunit.laborunit._partys != set()
     assert after_ball_planunit.laborunit.get_laborlink(yao_str) is not None
 
 
@@ -1083,7 +1083,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_l
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
     before_ball_planunit.laborunit.set_laborlink(yao_str)
-    assert before_ball_planunit.laborunit._laborlinks != set()
+    assert before_ball_planunit.laborunit._partys != set()
     assert before_ball_planunit.laborunit.get_laborlink(yao_str) is not None
 
     # WHEN
@@ -1099,7 +1099,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_l
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.laborunit._laborlinks == set()
+    assert after_ball_planunit.laborunit._partys == set()
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_healerlink():

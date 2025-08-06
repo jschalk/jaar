@@ -1,40 +1,126 @@
-from src.a01_term_logic.term import GroupTitle
+from src.a01_term_logic.term import GroupTitle, default_knot_if_None
 from src.a03_group_logic.group import groupunit_shop, membership_shop
 from src.a03_group_logic.labor import (
     LaborHeir,
     LaborUnit,
+    PartyHeir,
+    PartyUnit,
     create_laborunit,
     laborheir_shop,
     laborunit_shop,
+    partyheir_shop,
+    partyunit_shop,
 )
-from src.a04_reason_logic.test._util.a04_str import knot_str
+from src.a03_group_logic.test._util.a03_str import (
+    _parent_solo_str,
+    party_title_str,
+    solo_str,
+)
+
+
+def test_PartyUnit_Exists():
+    # ESTABLISH / WHEN
+    x_partyunit = PartyUnit()
+
+    # THEN
+    assert not x_partyunit.party_title
+    assert not x_partyunit.solo
+    obj_attrs = set(x_partyunit.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {party_title_str(), solo_str()}
+
+
+def test_partyunit_shop_ReturnsObj_Scenario0_ParametersGiven():
+    # ESTABLISH
+    bob_str = "Bob"
+    bob_solo_bool = True
+
+    # WHEN
+    x_partyunit = partyunit_shop(bob_str, solo=bob_solo_bool)
+
+    # THEN
+    assert x_partyunit.party_title == bob_str
+    assert x_partyunit.solo == bob_solo_bool
+
+
+def test_PartyUnit_get_dict_ReturnsObj():
+    # ESTABLISH
+    bob_str = "Bob"
+    bob_solo_bool = True
+    x_partyunit = partyunit_shop(bob_str, solo=bob_solo_bool)
+
+    # WHEN
+    party_dict = x_partyunit.get_dict()
+
+    # THEN
+    assert party_dict
+    assert party_dict.get(party_title_str()) == bob_str
+    assert party_dict.get(solo_str()) == bob_solo_bool
+
+
+def test_partyunit_shop_ReturnsObj_Scenario1_ParametersNotGiven():
+    # ESTABLISH
+    bob_str = "Bob"
+
+    # WHEN
+    x_partyunit = partyunit_shop(bob_str)
+
+    # THEN
+    assert x_partyunit.party_title == bob_str
+    assert x_partyunit.solo is False
+
+
+def test_PartyHeir_Exists():
+    # ESTABLISH / WHEN
+    x_partyheir = PartyHeir()
+
+    # THEN
+    assert not x_partyheir.party_title
+    assert not x_partyheir.solo
+    assert not x_partyheir._parent_solo
+    obj_attrs = set(x_partyheir.__dict__.keys())
+    print(sorted(list(obj_attrs)))
+    assert obj_attrs == {party_title_str(), solo_str(), _parent_solo_str()}
+
+
+def test_partyheir_shop_ReturnsObj():
+    # ESTABLISH
+    bob_str = "Bob"
+    bob_solo_bool = True
+
+    # WHEN
+    x_partyheir = partyheir_shop(bob_str, bob_solo_bool)
+
+    # THEN
+    assert x_partyheir.party_title == bob_str
+    assert x_partyheir.solo == bob_solo_bool
 
 
 def test_LaborUnit_exists():
     # ESTABLISH
-    x_laborlinks = {1}
+    x_partys = {1}
 
     # WHEN
-    x_laborunit = LaborUnit(_laborlinks=x_laborlinks)
+    x_laborunit = LaborUnit(_partys=x_partys)
 
     # THEN
     assert x_laborunit
-    assert x_laborunit._laborlinks == x_laborlinks
+    assert x_laborunit._partys == x_partys
     obj_attrs = set(x_laborunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {"_laborlinks"}
+    assert obj_attrs == {"_partys"}
 
 
 def test_laborunit_shop_ReturnsCorrectWithCorrectAttributes_v1():
     # ESTABLISH
-    x_laborlinks = {1}
+    x_partys = {1}
 
     # WHEN
-    x_laborunit = laborunit_shop(_laborlinks=x_laborlinks)
+    x_laborunit = laborunit_shop(_partys=x_partys)
 
     # THEN
     assert x_laborunit
-    assert x_laborunit._laborlinks == x_laborlinks
+    assert x_laborunit._partys == x_partys
 
 
 def test_laborunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
@@ -43,7 +129,7 @@ def test_laborunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
 
     # THEN
     assert x_laborunit
-    assert x_laborunit._laborlinks == set()
+    assert x_laborunit._partys == set()
 
 
 def test_create_laborunit_ReturnsObj():
@@ -55,36 +141,36 @@ def test_create_laborunit_ReturnsObj():
 
     # THEN
     assert swim_laborunit
-    assert len(swim_laborunit._laborlinks) == 1
+    assert len(swim_laborunit._partys) == 1
 
 
 def test_LaborUnit_get_dict_ReturnsCorrectDictWithSingle_laborlink():
     # ESTABLISH
     bob_labor_title = GroupTitle("Bob")
-    x_laborlinks = {bob_labor_title: bob_labor_title}
-    x_laborunit = laborunit_shop(_laborlinks=x_laborlinks)
+    x_partys = {bob_labor_title: bob_labor_title}
+    x_laborunit = laborunit_shop(_partys=x_partys)
 
     # WHEN
     obj_dict = x_laborunit.to_dict()
 
     # THEN
     assert obj_dict is not None
-    example_dict = {"_laborlinks": [bob_labor_title]}
+    example_dict = {"_partys": [bob_labor_title]}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
 
 
-def test_LaborUnit_set_laborlink_CorrectlySets_laborlinks_v1():
+def test_LaborUnit_set_laborlink_CorrectlySets_partys_v1():
     # ESTABLISH
     x_laborunit = laborunit_shop()
-    assert len(x_laborunit._laborlinks) == 0
+    assert len(x_laborunit._partys) == 0
 
     # WHEN
     yao_str = "Yao"
     x_laborunit.set_laborlink(labor_title=yao_str)
 
     # THEN
-    assert len(x_laborunit._laborlinks) == 1
+    assert len(x_laborunit._partys) == 1
 
 
 def test_LaborUnit_laborlink_exists_ReturnsObj():
@@ -100,61 +186,61 @@ def test_LaborUnit_laborlink_exists_ReturnsObj():
     assert x_laborunit.laborlink_exists(yao_str)
 
 
-def test_LaborUnit_del_laborlink_CorrectlyDeletes_laborlinks_v1():
+def test_LaborUnit_del_laborlink_CorrectlyDeletes_partys_v1():
     # ESTABLISH
     x_laborunit = laborunit_shop()
     yao_str = "Yao"
     sue_str = "Sue"
     x_laborunit.set_laborlink(labor_title=yao_str)
     x_laborunit.set_laborlink(labor_title=sue_str)
-    assert len(x_laborunit._laborlinks) == 2
+    assert len(x_laborunit._partys) == 2
 
     # WHEN
     x_laborunit.del_laborlink(labor_title=sue_str)
 
     # THEN
-    assert len(x_laborunit._laborlinks) == 1
+    assert len(x_laborunit._partys) == 1
 
 
 def test_LaborHeir_exists():
     # ESTABLISH
-    x_laborlinks = {1}
+    x_partys = {1}
     _believer_name_x_laborunit = True
 
     # WHEN
     x_laborheir = LaborHeir(
-        _laborlinks=x_laborlinks, _believer_name_is_labor=_believer_name_x_laborunit
+        _partys=x_partys, _believer_name_is_labor=_believer_name_x_laborunit
     )
 
     # THEN
     assert x_laborheir
-    assert x_laborheir._laborlinks == x_laborlinks
+    assert x_laborheir._partys == x_partys
     assert x_laborheir._believer_name_is_labor == _believer_name_x_laborunit
     obj_attrs = set(x_laborheir.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {"_laborlinks", "_believer_name_is_labor"}
+    assert obj_attrs == {"_partys", "_believer_name_is_labor"}
 
 
 def test_laborheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
     # ESTABLISH
-    x_laborlinks = {1}
+    x_partys = {1}
     _believer_name_x_laborunit = "example"
 
     # WHEN
     x_laborheir = laborheir_shop(
-        _laborlinks=x_laborlinks, _believer_name_is_labor=_believer_name_x_laborunit
+        _partys=x_partys, _believer_name_is_labor=_believer_name_x_laborunit
     )
 
     # THEN
     assert x_laborheir
-    assert x_laborheir._laborlinks == x_laborlinks
+    assert x_laborheir._partys == x_partys
     assert x_laborheir._believer_name_is_labor == _believer_name_x_laborunit
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_Emptyx_laborlinks():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_Emptyx_partys():
     # ESTABLISH
-    x_laborlinks = set()
-    x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
+    x_partys = set()
+    x_laborheir = laborheir_shop(_partys=x_partys)
     assert x_laborheir._believer_name_is_labor is False
 
     # WHEN
@@ -165,7 +251,7 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_Emptyx_labo
     assert x_laborheir._believer_name_is_labor
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v1():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_partys_v1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -176,8 +262,8 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_l
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     believer_believer_name = yao_str
 
-    x_laborlinks = {yao_str}
-    x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
+    x_partys = {yao_str}
+    x_laborheir = laborheir_shop(_partys=x_partys)
     assert x_laborheir._believer_name_is_labor is False
 
     # WHEN
@@ -187,7 +273,7 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_l
     assert x_laborheir._believer_name_is_labor
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v2():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_partys_v2():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -196,8 +282,8 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_l
     yao_groupunit.set_membership(membership_shop(yao_str, partner_name=yao_str))
     sue_groupunit.set_membership(membership_shop(sue_str, partner_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
-    x_laborlinks = {sue_str}
-    x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
+    x_partys = {sue_str}
+    x_laborheir = laborheir_shop(_partys=x_partys)
     assert yao_groupunit.get_membership(yao_str) is not None
     assert x_laborheir._believer_name_is_labor is False
 
@@ -208,7 +294,7 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_l
     assert x_laborheir._believer_name_is_labor is False
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v3():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_partys_v3():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -230,8 +316,8 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_l
         swim_str: swim_groupunit,
     }
 
-    x_laborlinks = {swim_str}
-    x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
+    x_partys = {swim_str}
+    x_laborheir = laborheir_shop(_partys=x_partys)
     assert x_laborheir._believer_name_is_labor is False
     x_laborheir.set_believer_name_is_labor(x_groupunits, believer_believer_name=yao_str)
     assert x_laborheir._believer_name_is_labor
@@ -246,19 +332,19 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_l
 
 def test_LaborHeir_set_laborlink_LaborUnit_Empty_ParentLaborHeirEmpty():
     # ESTABLISH
-    x_laborheir = laborheir_shop(_laborlinks={})
+    x_laborheir = laborheir_shop(_partys={})
     parent_laborheir_empty = laborheir_shop()
     x_laborunit = laborunit_shop()
 
     # WHEN
-    x_laborheir.set_laborlinks(
+    x_laborheir.set_partys(
         parent_laborheir=parent_laborheir_empty,
         laborunit=x_laborunit,
         groupunits=None,
     )
 
     # THEN
-    x_laborheir._laborlinks = {}
+    x_laborheir._partys = {}
 
 
 def test_LaborHeir_set_laborlink_LaborUnitNotEmpty_ParentLaborHeirIsNone():
@@ -271,10 +357,10 @@ def test_LaborHeir_set_laborlink_LaborUnitNotEmpty_ParentLaborHeirIsNone():
 
     # WHEN
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(None, laborunit=x_laborunit, groupunits=None)
+    x_laborheir.set_partys(None, laborunit=x_laborunit, groupunits=None)
 
     # THEN
-    assert x_laborheir._laborlinks == x_laborunit._laborlinks
+    assert x_laborheir._partys == x_laborunit._partys
 
 
 def test_LaborHeir_set_laborlink_LaborUnitNotEmpty_ParentLaborHeirEmpty():
@@ -288,10 +374,10 @@ def test_LaborHeir_set_laborlink_LaborUnitNotEmpty_ParentLaborHeirEmpty():
     # WHEN
     x_laborheir = laborheir_shop()
     parent_laborheir_empty = laborheir_shop()
-    x_laborheir.set_laborlinks(parent_laborheir_empty, x_laborunit, groupunits=None)
+    x_laborheir.set_partys(parent_laborheir_empty, x_laborunit, groupunits=None)
 
     # THEN
-    assert x_laborheir._laborlinks == x_laborunit._laborlinks
+    assert x_laborheir._partys == x_laborunit._partys
 
 
 def test_LaborHeir_set_laborlink_LaborUnit_Empty_ParentLaborHeirNotEmpty():
@@ -304,18 +390,18 @@ def test_LaborHeir_set_laborlink_LaborUnit_Empty_ParentLaborHeirNotEmpty():
     empty_laborheir = laborheir_shop()
 
     parent_laborheir = laborheir_shop()
-    parent_laborheir.set_laborlinks(empty_laborheir, laborunit_swim, groupunits=None)
+    parent_laborheir.set_partys(empty_laborheir, laborunit_swim, groupunits=None)
 
     laborunit_empty = laborunit_shop()
 
     # WHEN
     x_laborheir = laborheir_shop()
-    assert x_laborheir._laborlinks == set()
-    x_laborheir.set_laborlinks(parent_laborheir, laborunit_empty, groupunits=None)
+    assert x_laborheir._partys == set()
+    x_laborheir.set_partys(parent_laborheir, laborunit_empty, groupunits=None)
 
     # THEN
-    assert len(x_laborheir._laborlinks)
-    assert x_laborheir._laborlinks == parent_laborheir._laborlinks
+    assert len(x_laborheir._partys)
+    assert x_laborheir._partys == parent_laborheir._partys
 
 
 def test_LaborHeir_set_laborlink_LaborUnitEqualParentLaborHeir_NonEmpty():
@@ -328,15 +414,15 @@ def test_LaborHeir_set_laborlink_LaborUnitEqualParentLaborHeir_NonEmpty():
     empty_laborheir = laborheir_shop()
 
     parent_laborheir = laborheir_shop()
-    parent_laborheir.set_laborlinks(empty_laborheir, laborunit_swim, groupunits=None)
+    parent_laborheir.set_partys(empty_laborheir, laborunit_swim, groupunits=None)
 
     # WHEN
     x_laborheir = laborheir_shop()
-    assert x_laborheir._laborlinks == set()
-    x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim, groupunits=None)
+    assert x_laborheir._partys == set()
+    x_laborheir.set_partys(parent_laborheir, laborunit_swim, groupunits=None)
 
     # THEN
-    assert x_laborheir._laborlinks == parent_laborheir._laborlinks
+    assert x_laborheir._partys == parent_laborheir._partys
 
 
 def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
@@ -374,7 +460,7 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
     parent_laborunit = laborunit_shop()
     parent_laborunit.set_laborlink(labor_title=swim3_str)
     parent_laborheir = laborheir_shop()
-    parent_laborheir.set_laborlinks(
+    parent_laborheir.set_partys(
         parent_laborheir=None, laborunit=parent_laborunit, groupunits=None
     )
 
@@ -383,12 +469,12 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
 
     # WHEN
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim2, x_groupunits)
+    x_laborheir.set_partys(parent_laborheir, laborunit_swim2, x_groupunits)
 
     # THEN
-    assert x_laborheir._laborlinks == laborunit_swim2._laborlinks
-    assert len(x_laborheir._laborlinks) == 1
-    assert list(x_laborheir._laborlinks) == [swim2_str]
+    assert x_laborheir._partys == laborunit_swim2._partys
+    assert len(x_laborheir._partys) == 1
+    assert list(x_laborheir._partys) == [swim2_str]
 
 
 # def test_LaborHeir_set_laborlink_LaborUnit_NotEqualParentLaborHeir_RaisesError():
@@ -426,7 +512,7 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
 #     parent_laborunit = laborunit_shop()
 #     parent_laborunit.set_laborlink(swim2_str)
 #     parent_laborheir = laborheir_shop()
-#     parent_laborheir.set_laborlinks(None, parent_laborunit, x_groupunits)
+#     parent_laborheir.set_partys(None, parent_laborunit, x_groupunits)
 
 #     laborunit_swim3 = laborunit_shop()
 #     laborunit_swim3.set_laborlink(labor_title=swim3_str)
@@ -436,7 +522,7 @@ def test_LaborHeir_set_laborlink_LaborUnit_NotEqual_ParentLaborHeir_NonEmpty():
 #     all_parent_laborheir_partners = {yao_str, sue_str}
 #     all_laborunit_partners = {yao_str, sue_str, zia_str}
 #     with pytest_raises(Exception) as excinfo:
-#         x_laborheir.set_laborlinks(parent_laborheir, laborunit_swim3, x_groupunits)
+#         x_laborheir.set_partys(parent_laborheir, laborunit_swim3, x_groupunits)
 #     assert (
 #         str(excinfo.value)
 #         == f"parent_laborheir does not contain all partners of the plan's laborunit\n{set(all_parent_laborheir_partners)=}\n\n{set(all_laborunit_partners)=}"
@@ -461,7 +547,7 @@ def test_LaborUnit_get_laborlink_ReturnsObj():
     assert x_laborunit.get_laborlink(run_str) is None
 
 
-def test_LaborHeir_labor_title_in_ReturnsCorrectBoolWhen_laborlinksNotEmpty():
+def test_LaborHeir_labor_title_in_ReturnsCorrectBoolWhen_partysNotEmpty():
     # ESTABLISH
     swim_str = ",swim"
     hike_str = ",hike"
@@ -471,18 +557,18 @@ def test_LaborHeir_labor_title_in_ReturnsCorrectBoolWhen_laborlinksNotEmpty():
     x_laborunit.set_laborlink(labor_title=swim_str)
     x_laborunit.set_laborlink(labor_title=hike_str)
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(
+    x_laborheir.set_partys(
         parent_laborheir=None, laborunit=x_laborunit, groupunits=None
     )
     hunt_str = ",hunt"
     hunt_dict = {hunt_str}
     play_str = ",play"
     play_dict = {play_str}
-    assert swim_str in x_laborheir._laborlinks
-    assert hike_str in x_laborheir._laborlinks
-    print(f"{hunt_str in x_laborheir._laborlinks=}")
-    assert hunt_str not in x_laborheir._laborlinks
-    assert play_str not in x_laborheir._laborlinks
+    assert swim_str in x_laborheir._partys
+    assert hike_str in x_laborheir._partys
+    print(f"{hunt_str in x_laborheir._partys=}")
+    assert hunt_str not in x_laborheir._partys
+    assert play_str not in x_laborheir._partys
     hunt_hike_dict = {hunt_str, hike_str}
     hunt_play_dict = {hunt_str, play_str}
 
@@ -494,20 +580,20 @@ def test_LaborHeir_labor_title_in_ReturnsCorrectBoolWhen_laborlinksNotEmpty():
     assert x_laborheir.has_labor(hunt_play_dict) is False
 
 
-def test_LaborHeir_has_labor_ReturnsCorrectBoolWhen_laborlinksEmpty():
+def test_LaborHeir_has_labor_ReturnsCorrectBoolWhen_partysEmpty():
     # ESTABLISH
     hike_str = ",hike"
     hike_dict = {hike_str}
     x_laborunit = laborunit_shop()
     x_laborheir = laborheir_shop()
-    x_laborheir.set_laborlinks(
+    x_laborheir.set_partys(
         parent_laborheir=None, laborunit=x_laborunit, groupunits=None
     )
     hunt_str = ",hunt"
     hunt_dict = {hunt_str}
     play_str = ",play"
     play_dict = {play_str}
-    assert x_laborheir._laborlinks == set()
+    assert x_laborheir._partys == set()
     hunt_hike_dict = {hunt_str, hike_str}
     hunt_play_dict = {hunt_str, play_str}
 

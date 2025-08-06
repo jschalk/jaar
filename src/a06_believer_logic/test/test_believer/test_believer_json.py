@@ -99,7 +99,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
 
     # THEN
     assert planroot_dict["laborunit"] == x_laborunit.to_dict()
-    assert planroot_dict["laborunit"] == {"_laborlinks": [run_str]}
+    assert planroot_dict["laborunit"] == {"_partys": [run_str]}
     assert planroot_dict.get("gogo_want") == x_gogo_want
     assert planroot_dict.get("stop_want") == x_stop_want
 
@@ -151,7 +151,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
 
     labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
-    assert labor_dict_x == {"_laborlinks": [run_str]}
+    assert labor_dict_x == {"_partys": [run_str]}
 
 
 def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():

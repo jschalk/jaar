@@ -318,7 +318,7 @@ def add_believer_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for planunit in x_believer._plan_dict.values():
-        for group_title in planunit.laborunit._laborlinks:
+        for group_title in planunit.laborunit._partys:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),

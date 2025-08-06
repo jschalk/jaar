@@ -856,7 +856,7 @@ class PlanUnit:
             active_bool
             and groupunits != {}
             and believer_believer_name is not None
-            and self._laborheir._laborlinks != {}
+            and self._laborheir._partys != {}
         ):
             self._laborheir.set_believer_name_is_labor(
                 groupunits, believer_believer_name
@@ -1031,7 +1031,7 @@ class PlanUnit:
         groupunits: dict[GroupTitle, GroupUnit],
     ):
         self._laborheir = laborheir_shop()
-        self._laborheir.set_laborlinks(
+        self._laborheir.set_partys(
             parent_laborheir=parent_laborheir,
             laborunit=self.laborunit,
             groupunits=groupunits,
