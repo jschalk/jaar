@@ -38,7 +38,7 @@ from src.a03_group_logic.group import (
     awardline_shop,
     awardlinks_get_from_dict,
 )
-from src.a04_reason_logic.reason_labor import (
+from src.a03_group_logic.labor import (
     LaborHeir,
     LaborUnit,
     laborheir_shop,
@@ -858,8 +858,10 @@ class PlanUnit:
             and believer_believer_name is not None
             and self._laborheir._laborlinks != {}
         ):
-            self._laborheir.set_believer_name_labor(groupunits, believer_believer_name)
-            if self._laborheir._believer_name_labor is False:
+            self._laborheir.set_believer_name_is_labor(
+                groupunits, believer_believer_name
+            )
+            if self._laborheir._believer_name_is_labor is False:
                 active_bool = False
         return active_bool
 

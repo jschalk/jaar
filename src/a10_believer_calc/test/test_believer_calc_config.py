@@ -298,7 +298,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert expected_blrreas_jmetrics_keys == blrreas_jmetrics_keys
     expected_blrprem_jmetrics_keys = {"_status", "_chore"}
     assert expected_blrprem_jmetrics_keys == blrprem_jmetrics_keys
-    expected_blrlabo_jmetrics_keys = {"_believer_name_labor"}
+    expected_blrlabo_jmetrics_keys = {"_believer_name_is_labor"}
     assert expected_blrlabo_jmetrics_keys == blrlabo_jmetrics_keys
     expected_blrgrou_jmetrics_keys = {
         "_fund_give",
@@ -680,8 +680,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrlabo, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, blrlabo, jk, labor_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, blrlabo, jk, labor_title_str()) == "TEXT"
-    assert g_class_type(cfig, blrlabo, jm, "_believer_name_labor") == "int"
-    assert g_sqlitetype(cfig, blrlabo, jm, "_believer_name_labor") == "INTEGER"
+    assert g_class_type(cfig, blrlabo, jm, "_believer_name_is_labor") == "int"
+    assert g_sqlitetype(cfig, blrlabo, jm, "_believer_name_is_labor") == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, "_active") == "int"
     assert g_sqlitetype(cfig, blrplan, jm, "_active") == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, _all_partner_cred_str()) == "int"
@@ -880,7 +880,7 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get("_rplan_active_value") == "int"
     assert believer_calc_args_type_dict.get("reason_active_requisite") == "bool"
     assert believer_calc_args_type_dict.get(labor_title_str()) == TitleTerm_str()
-    assert believer_calc_args_type_dict.get("_believer_name_labor") == "int"
+    assert believer_calc_args_type_dict.get("_believer_name_is_labor") == "int"
     assert believer_calc_args_type_dict.get("_active") == "int"
     assert believer_calc_args_type_dict.get(_all_partner_cred_str()) == "int"
     assert believer_calc_args_type_dict.get(_all_partner_debt_str()) == "int"

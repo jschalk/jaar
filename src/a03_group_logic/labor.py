@@ -42,7 +42,7 @@ def create_laborunit(laborlink: GroupTitle):
 @dataclass
 class LaborHeir:
     _laborlinks: set[GroupTitle]
-    _believer_name_labor: bool
+    _believer_name_is_labor: bool
 
     def _get_all_partners(
         self,
@@ -57,16 +57,16 @@ class LaborHeir:
     def is_empty(self) -> bool:
         return self._laborlinks == set()
 
-    def set_believer_name_labor(
+    def set_believer_name_is_labor(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
         believer_believer_name: PartnerName,
     ):
-        self._believer_name_labor = self.get_believer_name_labor_bool(
+        self._believer_name_is_labor = self.get_believer_name_is_labor_bool(
             groupunits, believer_believer_name
         )
 
-    def get_believer_name_labor_bool(
+    def get_believer_name_is_labor_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
         believer_believer_name: PartnerName,
@@ -125,13 +125,15 @@ class LaborHeir:
 
 
 def laborheir_shop(
-    _laborlinks: set[GroupTitle] = None, _believer_name_labor: bool = None
+    _laborlinks: set[GroupTitle] = None, _believer_name_is_labor: bool = None
 ) -> LaborHeir:
     _laborlinks = get_empty_set_if_None(_laborlinks)
-    if _believer_name_labor is None:
-        _believer_name_labor = False
+    if _believer_name_is_labor is None:
+        _believer_name_is_labor = False
 
-    return LaborHeir(_laborlinks=_laborlinks, _believer_name_labor=_believer_name_labor)
+    return LaborHeir(
+        _laborlinks=_laborlinks, _believer_name_is_labor=_believer_name_is_labor
+    )
 
 
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:

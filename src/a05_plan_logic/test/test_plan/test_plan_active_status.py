@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import awardheir_shop, awardlink_shop
-from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
+from src.a03_group_logic.labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_plan import (
     caseunit_shop,
     factheir_shop,

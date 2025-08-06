@@ -3,7 +3,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_file
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a12_hub_toolbox.a12_path import create_belief_json_path, create_job_path

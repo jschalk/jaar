@@ -53,12 +53,12 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
+from src.a03_group_logic.labor import LaborUnit
 from src.a03_group_logic.partner import (
     PartnerUnit,
     partnerunit_shop,
     partnerunits_get_from_dict,
 )
-from src.a04_reason_logic.reason_labor import LaborUnit
 from src.a04_reason_logic.reason_plan import (
     FactUnit,
     ReasonUnit,

@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop

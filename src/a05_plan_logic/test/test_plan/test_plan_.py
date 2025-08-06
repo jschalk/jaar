@@ -3,7 +3,7 @@ from src.a01_term_logic.test._util.a01_str import knot_str, parent_rope_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.test._util.a04_str import _chore_str
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import PlanUnit, get_default_belief_label, planunit_shop

@@ -504,13 +504,13 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     x_believer_name = "Sue"
     x_rope = 1
     x_labor_title = 2
-    x__believer_name_labor = 3
+    x__believer_name_is_labor = 3
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "labor_title": x_labor_title,
-        "_believer_name_labor": x__believer_name_labor,
+        "_believer_name_is_labor": x__believer_name_is_labor,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

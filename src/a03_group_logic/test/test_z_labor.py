@@ -1,6 +1,6 @@
 from src.a01_term_logic.term import GroupTitle
 from src.a03_group_logic.group import groupunit_shop, membership_shop
-from src.a04_reason_logic.reason_labor import (
+from src.a03_group_logic.labor import (
     LaborHeir,
     LaborUnit,
     create_laborunit,
@@ -123,16 +123,16 @@ def test_LaborHeir_exists():
 
     # WHEN
     x_laborheir = LaborHeir(
-        _laborlinks=x_laborlinks, _believer_name_labor=_believer_name_x_laborunit
+        _laborlinks=x_laborlinks, _believer_name_is_labor=_believer_name_x_laborunit
     )
 
     # THEN
     assert x_laborheir
     assert x_laborheir._laborlinks == x_laborlinks
-    assert x_laborheir._believer_name_labor == _believer_name_x_laborunit
+    assert x_laborheir._believer_name_is_labor == _believer_name_x_laborunit
     obj_attrs = set(x_laborheir.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {"_laborlinks", "_believer_name_labor"}
+    assert obj_attrs == {"_laborlinks", "_believer_name_is_labor"}
 
 
 def test_laborheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
@@ -142,30 +142,30 @@ def test_laborheir_shop_ReturnsCorrectWithCorrectAttributes_v1():
 
     # WHEN
     x_laborheir = laborheir_shop(
-        _laborlinks=x_laborlinks, _believer_name_labor=_believer_name_x_laborunit
+        _laborlinks=x_laborlinks, _believer_name_is_labor=_believer_name_x_laborunit
     )
 
     # THEN
     assert x_laborheir
     assert x_laborheir._laborlinks == x_laborlinks
-    assert x_laborheir._believer_name_labor == _believer_name_x_laborunit
+    assert x_laborheir._believer_name_is_labor == _believer_name_x_laborunit
 
 
-def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_Emptyx_laborlinks():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_Emptyx_laborlinks():
     # ESTABLISH
     x_laborlinks = set()
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
-    assert x_laborheir._believer_name_labor is False
+    assert x_laborheir._believer_name_is_labor is False
 
     # WHEN
     groupunits = {}
-    x_laborheir.set_believer_name_labor(groupunits, believer_believer_name="")
+    x_laborheir.set_believer_name_is_labor(groupunits, believer_believer_name="")
 
     # THEN
-    assert x_laborheir._believer_name_labor
+    assert x_laborheir._believer_name_is_labor
 
 
-def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v1():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -178,16 +178,16 @@ def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_labo
 
     x_laborlinks = {yao_str}
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
-    assert x_laborheir._believer_name_labor is False
+    assert x_laborheir._believer_name_is_labor is False
 
     # WHEN
-    x_laborheir.set_believer_name_labor(x_groupunits, believer_believer_name)
+    x_laborheir.set_believer_name_is_labor(x_groupunits, believer_believer_name)
 
     # THEN
-    assert x_laborheir._believer_name_labor
+    assert x_laborheir._believer_name_is_labor
 
 
-def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v2():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v2():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -199,16 +199,16 @@ def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_labo
     x_laborlinks = {sue_str}
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
     assert yao_groupunit.get_membership(yao_str) is not None
-    assert x_laborheir._believer_name_labor is False
+    assert x_laborheir._believer_name_is_labor is False
 
     # WHEN
-    x_laborheir.set_believer_name_labor(x_groupunits, yao_str)
+    x_laborheir.set_believer_name_is_labor(x_groupunits, yao_str)
 
     # THEN
-    assert x_laborheir._believer_name_labor is False
+    assert x_laborheir._believer_name_is_labor is False
 
 
-def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v3():
+def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_laborlinks_v3():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -232,16 +232,16 @@ def test_LaborHeir_set_believer_name_labor_CorrectlySetsAttribute_NonEmptyx_labo
 
     x_laborlinks = {swim_str}
     x_laborheir = laborheir_shop(_laborlinks=x_laborlinks)
-    assert x_laborheir._believer_name_labor is False
-    x_laborheir.set_believer_name_labor(x_groupunits, believer_believer_name=yao_str)
-    assert x_laborheir._believer_name_labor
+    assert x_laborheir._believer_name_is_labor is False
+    x_laborheir.set_believer_name_is_labor(x_groupunits, believer_believer_name=yao_str)
+    assert x_laborheir._believer_name_is_labor
 
     # WHEN
     swim_groupunit.del_membership(yao_str)
-    x_laborheir.set_believer_name_labor(x_groupunits, yao_str)
+    x_laborheir.set_believer_name_is_labor(x_groupunits, yao_str)
 
     # THEN
-    assert x_laborheir._believer_name_labor is False
+    assert x_laborheir._believer_name_is_labor is False
 
 
 def test_LaborHeir_set_laborlink_LaborUnit_Empty_ParentLaborHeirEmpty():

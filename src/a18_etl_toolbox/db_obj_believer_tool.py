@@ -4,8 +4,8 @@ from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
 from src.a01_term_logic.term import BelieverName, GroupTitle, PartnerName, RopeTerm
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
+from src.a03_group_logic.labor import LaborHeir
 from src.a03_group_logic.partner import PartnerUnit
-from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a04_reason_logic.reason_plan import CaseUnit, FactHeir, ReasonHeir
 from src.a05_plan_logic.plan import HealerLink, PlanUnit
 from src.a06_believer_logic.believer_main import BelieverUnit
@@ -240,14 +240,14 @@ def create_blrlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
     labor_title = values_dict.get("labor_title")
-    _believer_name_labor = values_dict.get("_believer_name_labor")
-    return f"""INSERT INTO believer_plan_laborlink_job (belief_label, believer_name, plan_rope, labor_title, _believer_name_labor)
+    _believer_name_is_labor = values_dict.get("_believer_name_is_labor")
+    return f"""INSERT INTO believer_plan_laborlink_job (belief_label, believer_name, plan_rope, labor_title, _believer_name_is_labor)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
 , {sqlite_obj_str(labor_title, "TEXT")}
-, {sqlite_obj_str(_believer_name_labor, "INTEGER")}
+, {sqlite_obj_str(_believer_name_is_labor, "INTEGER")}
 )
 ;
 """

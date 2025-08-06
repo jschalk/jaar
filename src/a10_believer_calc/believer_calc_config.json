@@ -254,7 +254,7 @@
             }
         },
         "jmetrics": {
-            "_believer_name_labor": {
+            "_believer_name_is_labor": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

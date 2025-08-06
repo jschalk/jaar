@@ -7,8 +7,8 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
+from src.a03_group_logic.labor import laborheir_shop, laborunit_shop
 from src.a03_group_logic.partner import partnerunit_shop
-from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_plan import (
     caseunit_shop,
     factheir_shop,
@@ -816,9 +816,9 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     x_belief_label = 1
     x_believer_name = 2
     x_rope = 3
-    x__believer_name_labor = 5
+    x__believer_name_is_labor = 5
     x_laborheir = laborheir_shop()
-    x_laborheir._believer_name_labor = x__believer_name_labor
+    x_laborheir._believer_name_is_labor = x__believer_name_is_labor
     bob_str = "Bob"
     sue_str = "Sue"
     x_laborheir._laborlinks = {bob_str, sue_str}
@@ -843,14 +843,14 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
             str(x_believer_name),
             str(x_rope),
             bob_str,
-            x__believer_name_labor,
+            x__believer_name_is_labor,
         )
         expected_row2 = (
             str(x_belief_label),
             str(x_believer_name),
             str(x_rope),
             sue_str,
-            x__believer_name_labor,
+            x__believer_name_is_labor,
         )
         expected_data = [expected_row1, expected_row2]
         assert rows == expected_data

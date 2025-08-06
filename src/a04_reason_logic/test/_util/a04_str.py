@@ -1,5 +1,5 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a03_group_logic.test._util.a03_str import believer_name_str
+from src.a03_group_logic.test._util.a03_str import believer_name_str, labor_title_str
 
 
 def _active_str() -> str:
@@ -32,10 +32,6 @@ def fact_state_str() -> str:
 
 def fact_upper_str() -> str:
     return "fact_upper"
-
-
-def labor_title_str() -> str:
-    return "labor_title"
 
 
 def reason_active_requisite_str() -> str:

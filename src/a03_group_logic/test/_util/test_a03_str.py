@@ -18,6 +18,7 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    labor_title_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
@@ -39,6 +40,7 @@ def test_str_functions_ReturnsObj():
     assert _inallocable_partner_debt_points_str() == "_inallocable_partner_debt_points"
     assert _irrational_partner_debt_points_str() == "_irrational_partner_debt_points"
     assert _memberships_str() == "_memberships"
+    assert labor_title_str() == "labor_title"
     assert partner_name_str() == "partner_name"
     assert partner_cred_points_str() == "partner_cred_points"
     assert partner_debt_points_str() == "partner_debt_points"

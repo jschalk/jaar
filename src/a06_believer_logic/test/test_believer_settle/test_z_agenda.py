@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import RopeTerm
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_believer_logic.believer_main import (
     believerunit_shop,

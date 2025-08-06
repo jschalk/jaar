@@ -348,7 +348,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[140] == "celldepth"
     assert table_sorting_priority[141] == job_listen_rotations_str()
     assert table_sorting_priority[142] == error_message_str()
-    assert table_sorting_priority[143] == "_believer_name_labor"
+    assert table_sorting_priority[143] == "_believer_name_is_labor"
     assert table_sorting_priority[144] == "_active"
     assert table_sorting_priority[145] == "_chore"
     assert table_sorting_priority[146] == "_status"
