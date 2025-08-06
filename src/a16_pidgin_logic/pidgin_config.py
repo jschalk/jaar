@@ -121,7 +121,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_title": "TitleTerm",
+        "party_title": "TitleTerm",
         "tran_time": "TimeLinePoint",
         "bud_time": "TimeLinePoint",
         "timeline_label": "LabelTerm",
@@ -186,7 +186,7 @@ def get_pidginable_args() -> set:
         "believer_name",
         "reason_state",
         "reason_context",
-        "labor_title",
+        "party_title",
         "timeline_label",
         "weekday_label",
     }
@@ -220,7 +220,7 @@ def get_pidgin_TitleTerm_args() -> set[str]:
     return {
         "awardee_title",
         "group_title",
-        "labor_title",
+        "party_title",
     }
 
 

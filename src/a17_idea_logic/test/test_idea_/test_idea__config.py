@@ -11,7 +11,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -31,12 +31,12 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_debt_points_str,
     group_title_str,
     healer_name_str,
-    labor_title_str,
     morph_str,
     numor_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
+    party_title_str,
     penny_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -280,12 +280,12 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[72] == "fact_state"
     assert table_sorting_priority[73] == "fact_state_otx"
     assert table_sorting_priority[74] == "fact_state_inx"
-    assert table_sorting_priority[75] == "labor_title"
-    assert table_sorting_priority[76] == "labor_title_otx"
-    assert table_sorting_priority[77] == "labor_title_inx"
-    assert table_sorting_priority[78] == "labor_title_ERASE"
-    assert table_sorting_priority[79] == "labor_title_ERASE_otx"
-    assert table_sorting_priority[80] == "labor_title_ERASE_inx"
+    assert table_sorting_priority[75] == "party_title"
+    assert table_sorting_priority[76] == "party_title_otx"
+    assert table_sorting_priority[77] == "party_title_inx"
+    assert table_sorting_priority[78] == "party_title_ERASE"
+    assert table_sorting_priority[79] == "party_title_ERASE_otx"
+    assert table_sorting_priority[80] == "party_title_ERASE_inx"
     assert table_sorting_priority[81] == "awardee_title"
     assert table_sorting_priority[82] == "awardee_title_otx"
     assert table_sorting_priority[83] == "awardee_title_inx"
@@ -435,7 +435,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(reason_context_str()) == "TEXT"
     assert sqlite_types.get("reason_state") == "TEXT"
     assert sqlite_types.get("fact_state") == "TEXT"
-    assert sqlite_types.get(labor_title_str()) == "TEXT"
+    assert sqlite_types.get(party_title_str()) == "TEXT"
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
@@ -538,7 +538,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert believer_partnerunit_str() in idea_config_dimens
     assert believer_plan_awardlink_str() in idea_config_dimens
     assert believer_plan_factunit_str() in idea_config_dimens
-    assert believer_plan_laborlink_str() in idea_config_dimens
+    assert believer_plan_partyunit_str() in idea_config_dimens
     assert believer_plan_healerlink_str() in idea_config_dimens
     assert believer_plan_reason_caseunit_str() in idea_config_dimens
     assert believer_plan_reasonunit_str() in idea_config_dimens
@@ -848,7 +848,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(believer_partnerunit_str(), 10)
     # set_idea_config_json(believer_plan_awardlink_str(), 11)
     # set_idea_config_json(believer_plan_factunit_str(), 12)
-    # set_idea_config_json(believer_plan_laborlink_str(), 14)
+    # set_idea_config_json(believer_plan_partyunit_str(), 14)
     # set_idea_config_json(believer_plan_healerlink_str(), 15)
     # set_idea_config_json(believer_plan_reason_caseunit_str(), 16)
     # set_idea_config_json(believer_plan_reasonunit_str(), 17)
@@ -872,7 +872,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(believer_partnerunit_str()).get(bo) == 10
     assert x_idea_config.get(believer_plan_awardlink_str()).get(bo) == 11
     assert x_idea_config.get(believer_plan_factunit_str()).get(bo) == 12
-    assert x_idea_config.get(believer_plan_laborlink_str()).get(bo) == 14
+    assert x_idea_config.get(believer_plan_partyunit_str()).get(bo) == 14
     assert x_idea_config.get(believer_plan_healerlink_str()).get(bo) == 15
     assert x_idea_config.get(believer_plan_reason_caseunit_str()).get(bo) == 16
     assert x_idea_config.get(believer_plan_reasonunit_str()).get(bo) == 17

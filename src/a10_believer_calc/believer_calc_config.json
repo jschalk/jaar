@@ -233,7 +233,7 @@
         "jmetrics": {},
         "jvalues": {}
     },
-    "believer_plan_laborlink": {
+    "believer_plan_partyunit": {
         "abbreviation": "blrlabo",
         "jkeys": {
             "plan_rope": {
@@ -244,7 +244,7 @@
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "labor_title": {
+            "party_title": {
                 "class_type": "TitleTerm",
                 "sqlite_datatype": "TEXT"
             },

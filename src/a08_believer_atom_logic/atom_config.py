@@ -103,7 +103,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_title": "TitleTerm",
+        "party_title": "TitleTerm",
     }
 
 
@@ -235,7 +235,7 @@ def get_believer_dimens() -> set:
         "believer_plan_awardlink",
         "believer_plan_reasonunit",
         "believer_plan_reason_caseunit",
-        "believer_plan_laborlink",
+        "believer_plan_partyunit",
         "believer_plan_healerlink",
         "believer_plan_factunit",
     }
@@ -252,7 +252,7 @@ def get_all_believer_dimen_keys() -> set:
         "reason_state",
         "believer_name",
         "plan_rope",
-        "labor_title",
+        "party_title",
     }
 
 
@@ -271,7 +271,7 @@ def get_all_believer_dimen_delete_keys() -> set:
         "reason_state_ERASE",
         "believer_name_ERASE",
         "plan_rope_ERASE",
-        "labor_title_ERASE",
+        "party_title_ERASE",
     }
 
 

@@ -92,7 +92,7 @@ def test_believer_plankid_laborunit_CorrectlySets_grandchild_plan_laborheir():
     four_rope = sue_believer.make_rope(morn_rope, four_str)
     x_laborunit = laborunit_shop()
     swimmers_str = ";swimmers"
-    x_laborunit.set_laborlink(labor_title=swimmers_str)
+    x_laborunit.set_partyunit(party_title=swimmers_str)
 
     yao_str = "Yao"
     sue_believer.add_partnerunit(yao_str)
@@ -142,8 +142,8 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laboruni
         planunit_shop(swim_str), parent_rope=sue1_believer.belief_label
     )
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_laborlink(labor_title=xia_str)
-    swim_laborunit.set_laborlink(labor_title=zoa_str)
+    swim_laborunit.set_partyunit(party_title=xia_str)
+    swim_laborunit.set_partyunit(party_title=zoa_str)
     sue1_believer.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_believer_swim_plan = sue1_believer.get_plan_obj(swim_rope)
     sue1_believer_swim_partys = sue1_believer_swim_plan.laborunit._partys
@@ -179,8 +179,8 @@ def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
         planunit_shop(swim_str), parent_rope=sue1_believer.belief_label
     )
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_laborlink(labor_title=xia_str)
-    swim_laborunit.set_laborlink(labor_title=zoa_str)
+    swim_laborunit.set_partyunit(party_title=xia_str)
+    swim_laborunit.set_partyunit(party_title=zoa_str)
     sue1_believer.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_believer_swim_plan = sue1_believer.get_plan_obj(swim_rope)
     sue1_believer_swim_partys = sue1_believer_swim_plan.laborunit._partys

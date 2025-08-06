@@ -9,7 +9,7 @@ from src.a06_believer_logic.believer_tool import (
     believer_plan_awardlink_exists,
     believer_plan_factunit_exists,
     believer_plan_healerlink_exists,
-    believer_plan_laborlink_exists,
+    believer_plan_partyunit_exists,
     believer_plan_reason_caseunit_exists as caseunit_exists,
     believer_plan_reasonunit_exists,
     believer_planunit_exists,
@@ -22,7 +22,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -30,8 +30,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     fact_context_str,
     group_title_str,
     healer_name_str,
-    labor_title_str,
     partner_name_str,
+    party_title_str,
     plan_rope_str,
     reason_context_str,
     reason_state_str,
@@ -247,7 +247,7 @@ def test_believer_plan_reason_caseunit_exists_ReturnsObj():
     assert not caseunit_exists(sue_believer, clean_jkeys)
 
 
-def test_believer_plan_laborlink_exists_ReturnsObj():
+def test_believer_plan_partyunit_exists_ReturnsObj():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -256,25 +256,25 @@ def test_believer_plan_laborlink_exists_ReturnsObj():
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_believer.belief_label)
     swim_str = "Swim"
-    root_jkeys = {plan_rope_str(): root_rope, labor_title_str(): swim_str}
-    casa_jkeys = {plan_rope_str(): casa_rope, labor_title_str(): swim_str}
-    clean_jkeys = {plan_rope_str(): clean_rope, labor_title_str(): swim_str}
+    root_jkeys = {plan_rope_str(): root_rope, party_title_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, party_title_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, party_title_str(): swim_str}
 
     # WHEN / THEN
-    assert not believer_plan_laborlink_exists(None, {})
-    assert not believer_plan_laborlink_exists(sue_believer, {})
-    assert not believer_plan_laborlink_exists(sue_believer, root_jkeys)
-    assert not believer_plan_laborlink_exists(sue_believer, casa_jkeys)
-    assert not believer_plan_laborlink_exists(sue_believer, clean_jkeys)
+    assert not believer_plan_partyunit_exists(None, {})
+    assert not believer_plan_partyunit_exists(sue_believer, {})
+    assert not believer_plan_partyunit_exists(sue_believer, root_jkeys)
+    assert not believer_plan_partyunit_exists(sue_believer, casa_jkeys)
+    assert not believer_plan_partyunit_exists(sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.laborunit.set_laborlink(swim_str)
+    sue_believer.planroot.laborunit.set_partyunit(swim_str)
 
     # THEN
-    assert not believer_plan_laborlink_exists(sue_believer, {})
-    assert believer_plan_laborlink_exists(sue_believer, root_jkeys)
-    assert not believer_plan_laborlink_exists(sue_believer, casa_jkeys)
-    assert not believer_plan_laborlink_exists(sue_believer, clean_jkeys)
+    assert not believer_plan_partyunit_exists(sue_believer, {})
+    assert believer_plan_partyunit_exists(sue_believer, root_jkeys)
+    assert not believer_plan_partyunit_exists(sue_believer, casa_jkeys)
+    assert not believer_plan_partyunit_exists(sue_believer, clean_jkeys)
 
 
 def test_believer_plan_healerlink_exists_ReturnsObj():
@@ -548,7 +548,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reason_caseunit():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
 
-def test_believer_attr_exists_ReturnsObj_believer_plan_laborlink():
+def test_believer_attr_exists_ReturnsObj_believer_plan_partyunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -557,10 +557,10 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_laborlink():
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_believer.belief_label)
     swim_str = "Swim"
-    x_dimen = believer_plan_laborlink_str()
-    root_jkeys = {plan_rope_str(): root_rope, labor_title_str(): swim_str}
-    casa_jkeys = {plan_rope_str(): casa_rope, labor_title_str(): swim_str}
-    clean_jkeys = {plan_rope_str(): clean_rope, labor_title_str(): swim_str}
+    x_dimen = believer_plan_partyunit_str()
+    root_jkeys = {plan_rope_str(): root_rope, party_title_str(): swim_str}
+    casa_jkeys = {plan_rope_str(): casa_rope, party_title_str(): swim_str}
+    clean_jkeys = {plan_rope_str(): clean_rope, party_title_str(): swim_str}
 
     # WHEN / THEN
     assert not believer_attr_exists(x_dimen, None, {})
@@ -570,7 +570,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_laborlink():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.laborunit.set_laborlink(swim_str)
+    sue_believer.planroot.laborunit.set_partyunit(swim_str)
 
     # THEN
     assert not believer_attr_exists(x_dimen, sue_believer, {})

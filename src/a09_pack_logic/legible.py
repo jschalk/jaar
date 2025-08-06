@@ -57,10 +57,10 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
     x_list = ["DELETE", "believer_plan_reason_caseunit"]
     believer_plan_reason_caseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_laborlink"]
-    believer_plan_laborlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_laborlink"]
-    believer_plan_laborlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_partyunit"]
+    believer_plan_partyunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_partyunit"]
+    believer_plan_partyunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = ["INSERT", "believer_plan_healerlink"]
     believer_plan_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -155,13 +155,13 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
             leg_list, believer_plan_reason_caseunit_delete_dict, x_believer
         )
 
-    if believer_plan_laborlink_insert_dict is not None:
-        add_believer_plan_laborlink_insert_to_legible_list(
-            leg_list, believer_plan_laborlink_insert_dict, x_believer
+    if believer_plan_partyunit_insert_dict is not None:
+        add_believer_plan_partyunit_insert_to_legible_list(
+            leg_list, believer_plan_partyunit_insert_dict, x_believer
         )
-    if believer_plan_laborlink_delete_dict is not None:
-        add_believer_plan_laborlink_delete_to_legible_list(
-            leg_list, believer_plan_laborlink_delete_dict, x_believer
+    if believer_plan_partyunit_delete_dict is not None:
+        add_believer_plan_partyunit_delete_to_legible_list(
+            leg_list, believer_plan_partyunit_delete_dict, x_believer
         )
 
     if believer_plan_healerlink_insert_dict is not None:
@@ -567,25 +567,25 @@ def add_believer_reason_caseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_believer_plan_laborlink_insert_to_legible_list(
-    legible_list: list[str], plan_laborlink_insert_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_partyunit_insert_to_legible_list(
+    legible_list: list[str], plan_partyunit_insert_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_laborlink_insert_dict.values():
-        for plan_laborlink_atom in rope_dict.values():
-            labor_title_value = plan_laborlink_atom.get_value("labor_title")
-            rope_value = plan_laborlink_atom.get_value("plan_rope")
-            x_str = f"laborlink '{labor_title_value}' created for plan '{rope_value}'."
+    for rope_dict in plan_partyunit_insert_dict.values():
+        for plan_partyunit_atom in rope_dict.values():
+            party_title_value = plan_partyunit_atom.get_value("party_title")
+            rope_value = plan_partyunit_atom.get_value("plan_rope")
+            x_str = f"partyunit '{party_title_value}' created for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_believer_plan_laborlink_delete_to_legible_list(
-    legible_list: list[str], plan_laborlink_delete_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_partyunit_delete_to_legible_list(
+    legible_list: list[str], plan_partyunit_delete_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_laborlink_delete_dict.values():
-        for plan_laborlink_atom in rope_dict.values():
-            labor_title_value = plan_laborlink_atom.get_value("labor_title")
-            rope_value = plan_laborlink_atom.get_value("plan_rope")
-            x_str = f"laborlink '{labor_title_value}' deleted for plan '{rope_value}'."
+    for rope_dict in plan_partyunit_delete_dict.values():
+        for plan_partyunit_atom in rope_dict.values():
+            party_title_value = plan_partyunit_atom.get_value("party_title")
+            rope_value = plan_partyunit_atom.get_value("plan_rope")
+            x_str = f"partyunit '{party_title_value}' deleted for plan '{rope_value}'."
             legible_list.append(x_str)
 
 

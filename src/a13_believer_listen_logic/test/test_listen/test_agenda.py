@@ -52,7 +52,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBeliever():
     before_yao_believerunit.set_partner_respect(yao_partner_partner_debt_points)
     clean_str = "clean"
     zia_clean_planunit = planunit_shop(clean_str, task=True)
-    zia_clean_planunit.laborunit.set_laborlink(yao_str)
+    zia_clean_planunit.laborunit.set_partyunit(yao_str)
     zia_believerunit = believerunit_shop(zia_str)
     zia_believerunit.add_partnerunit(yao_str)
     zia_believerunit.set_l1_plan(zia_clean_planunit)
@@ -89,7 +89,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBeliever():
     zia_believerunit.add_partnerunit(yao_str)
     clean_str = "clean"
     zia_clean_planunit = planunit_shop(clean_str, task=True)
-    zia_clean_planunit.laborunit.set_laborlink(yao_str)
+    zia_clean_planunit.laborunit.set_partyunit(yao_str)
     casa_rope = zia_believerunit.make_l1_rope("casa")
     zia_believerunit.set_plan(zia_clean_planunit, casa_rope)
     assert len(zia_believerunit.get_agenda_dict()) == 0
@@ -133,11 +133,11 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBeliever():
     cook_str = "cook"
     fly_str = "fly"
     yao_clean_planunit = planunit_shop(clean_str, task=True)
-    yao_clean_planunit.laborunit.set_laborlink(yao_str)
+    yao_clean_planunit.laborunit.set_partyunit(yao_str)
     yao_cook_planunit = planunit_shop(cook_str, task=True)
-    yao_cook_planunit.laborunit.set_laborlink(yao_str)
+    yao_cook_planunit.laborunit.set_partyunit(yao_str)
     yao_fly_planunit = planunit_shop(fly_str, task=True)
-    yao_fly_planunit.laborunit.set_laborlink(yao_str)
+    yao_fly_planunit.laborunit.set_partyunit(yao_str)
     casa_rope = zia_believerunit.make_l1_rope("casa")
     fly_rope = zia_believerunit.make_l1_rope(fly_str)
     zia_believerunit.set_plan(yao_clean_planunit, casa_rope)
@@ -190,16 +190,16 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelieverWhereAnP
     cook_str = "cook"
     fly_str = "fly"
     yao_dish_planunit = planunit_shop(dish_str, task=True)
-    yao_dish_planunit.laborunit.set_laborlink(yao_str)
+    yao_dish_planunit.laborunit.set_partyunit(yao_str)
     yao_cook_planunit = planunit_shop(cook_str, task=True)
-    yao_cook_planunit.laborunit.set_laborlink(yao_str)
+    yao_cook_planunit.laborunit.set_partyunit(yao_str)
     yao_fly_planunit = planunit_shop(fly_str, task=True)
-    yao_fly_planunit.laborunit.set_laborlink(yao_str)
+    yao_fly_planunit.laborunit.set_partyunit(yao_str)
     casa_rope = zia_believerunit.make_l1_rope("casa")
     dish_rope = zia_believerunit.make_rope(casa_rope, dish_str)
     fly_rope = zia_believerunit.make_l1_rope(fly_str)
     before_yao_dish_planunit = planunit_shop(dish_str, task=True)
-    before_yao_dish_planunit.laborunit.set_laborlink(yao_str)
+    before_yao_dish_planunit.laborunit.set_partyunit(yao_str)
     before_yao_believerunit.set_plan(before_yao_dish_planunit, casa_rope)
     before_yao_believerunit.edit_plan_attr(dish_rope, star=1000)
     zia_believerunit.set_plan(yao_dish_planunit, casa_rope)
@@ -257,7 +257,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBeliever():
     vacuum_rope = sue_believerunit.make_l1_rope(vacuum_str)
     sue_believerunit.set_l1_plan(planunit_shop(vacuum_str, task=True))
     vacuum_planunit = sue_believerunit.get_plan_obj(vacuum_rope)
-    vacuum_planunit.laborunit.set_laborlink(yao_str)
+    vacuum_planunit.laborunit.set_partyunit(yao_str)
 
     egg_str = "egg first"
     egg_rope = sue_believerunit.make_l1_rope(egg_str)

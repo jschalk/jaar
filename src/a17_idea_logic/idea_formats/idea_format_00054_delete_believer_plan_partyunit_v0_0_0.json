@@ -15,7 +15,7 @@
         "believer_name": {
             "otx_key": true
         },
-        "labor_title_ERASE": {
+        "party_title_ERASE": {
             "otx_key": true
         }
     },
@@ -24,6 +24,6 @@
         "beliefunit",
         "believerunit",
         "believer_planunit",
-        "believer_plan_laborlink"
+        "believer_plan_partyunit"
     ]
 }

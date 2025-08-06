@@ -393,9 +393,9 @@ class BelieverDelta:
                     insert_planunit.reasonunits.keys()
                 ),
             )
-            self.add_believeratom_plan_laborlink_insert(
+            self.add_believeratom_plan_partyunit_insert(
                 plan_rope=insert_plan_rope,
-                insert_laborlink_labor_titles=insert_planunit.laborunit._partys,
+                insert_partyunit_party_titles=insert_planunit.laborunit._partys,
             )
             self.add_believeratom_plan_healerlink_insert(
                 plan_rope=insert_plan_rope,
@@ -505,19 +505,19 @@ class BelieverDelta:
             # update reasonunits_permises update_case
             # update reasonunits_permises delete_case
 
-            # insert / update / delete laborlinks
-            before_partys_labor_titles = set(before_planunit.laborunit._partys)
-            after_partys_labor_titles = set(after_planunit.laborunit._partys)
-            self.add_believeratom_plan_laborlink_insert(
+            # insert / update / delete partyunits
+            before_partys_party_titles = set(before_planunit.laborunit._partys)
+            after_partys_party_titles = set(after_planunit.laborunit._partys)
+            self.add_believeratom_plan_partyunit_insert(
                 plan_rope=plan_rope,
-                insert_laborlink_labor_titles=after_partys_labor_titles.difference(
-                    before_partys_labor_titles
+                insert_partyunit_party_titles=after_partys_party_titles.difference(
+                    before_partys_party_titles
                 ),
             )
-            self.add_believeratom_plan_laborlink_deletes(
+            self.add_believeratom_plan_partyunit_deletes(
                 plan_rope=plan_rope,
-                delete_laborlink_labor_titles=before_partys_labor_titles.difference(
-                    after_partys_labor_titles
+                delete_partyunit_party_titles=before_partys_party_titles.difference(
+                    after_partys_party_titles
                 ),
             )
 
@@ -565,9 +565,9 @@ class BelieverDelta:
                     delete_planunit.reasonunits.keys()
                 ),
             )
-            self.add_believeratom_plan_laborlink_deletes(
+            self.add_believeratom_plan_partyunit_deletes(
                 plan_rope=delete_plan_rope,
-                delete_laborlink_labor_titles=delete_planunit.laborunit._partys,
+                delete_partyunit_party_titles=delete_planunit.laborunit._partys,
             )
             self.add_believeratom_plan_healerlink_deletes(
                 plan_rope=delete_plan_rope,
@@ -747,22 +747,22 @@ class BelieverDelta:
             x_believeratom.set_jkey("reason_state", delete_case_reason_state)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_laborlink_insert(
-        self, plan_rope: RopeTerm, insert_laborlink_labor_titles: set
+    def add_believeratom_plan_partyunit_insert(
+        self, plan_rope: RopeTerm, insert_partyunit_party_titles: set
     ):
-        for insert_laborlink_labor_title in insert_laborlink_labor_titles:
-            x_believeratom = believeratom_shop("believer_plan_laborlink", "INSERT")
+        for insert_partyunit_party_title in insert_partyunit_party_titles:
+            x_believeratom = believeratom_shop("believer_plan_partyunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("labor_title", insert_laborlink_labor_title)
+            x_believeratom.set_jkey("party_title", insert_partyunit_party_title)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_laborlink_deletes(
-        self, plan_rope: RopeTerm, delete_laborlink_labor_titles: set
+    def add_believeratom_plan_partyunit_deletes(
+        self, plan_rope: RopeTerm, delete_partyunit_party_titles: set
     ):
-        for delete_laborlink_labor_title in delete_laborlink_labor_titles:
-            x_believeratom = believeratom_shop("believer_plan_laborlink", "DELETE")
+        for delete_partyunit_party_title in delete_partyunit_party_titles:
+            x_believeratom = believeratom_shop("believer_plan_partyunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("labor_title", delete_laborlink_labor_title)
+            x_believeratom.set_jkey("party_title", delete_partyunit_party_title)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_healerlink_insert(

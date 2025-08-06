@@ -12,7 +12,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -30,7 +30,6 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_debt_points_str,
     group_title_str,
     healer_name_str,
-    labor_title_str,
     morph_str,
     numor_str,
     parent_rope_str,
@@ -38,6 +37,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_debt_points_str,
     partner_name_str,
     partner_pool_str,
+    party_title_str,
     penny_str,
     plan_rope_str,
     reason_context_str,
@@ -164,7 +164,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(INSERT_str(), believer_partner_membership_str(), 1)
     # set_mog(INSERT_str(), believer_planunit_str(), 2)
     # set_mog(INSERT_str(), believer_plan_awardlink_str(), 3)
-    # set_mog(INSERT_str(), believer_plan_laborlink_str(), 4)
+    # set_mog(INSERT_str(), believer_plan_partyunit_str(), 4)
     # set_mog(INSERT_str(), believer_plan_healerlink_str(), 5)
     # set_mog(INSERT_str(), believer_plan_factunit_str(), 6)
     # set_mog(INSERT_str(), believer_plan_reasonunit_str(), 7)
@@ -179,7 +179,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(DELETE_str(), believer_plan_reason_caseunit_str(), 16)
     # set_mog(DELETE_str(), believer_plan_reasonunit_str(), 17)
     # set_mog(DELETE_str(), believer_plan_factunit_str(), 18)
-    # set_mog(DELETE_str(), believer_plan_laborlink_str(), 19)
+    # set_mog(DELETE_str(), believer_plan_partyunit_str(), 19)
     # set_mog(DELETE_str(), believer_plan_healerlink_str(), 20)
     # set_mog(DELETE_str(), believer_plan_awardlink_str(), 21)
     # set_mog(DELETE_str(), believer_planunit_str(), 22)
@@ -191,7 +191,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 1 == q_order(INSERT_str(), believer_partner_membership_str())
     assert 2 == q_order(INSERT_str(), believer_planunit_str())
     assert 3 == q_order(INSERT_str(), believer_plan_awardlink_str())
-    assert 4 == q_order(INSERT_str(), believer_plan_laborlink_str())
+    assert 4 == q_order(INSERT_str(), believer_plan_partyunit_str())
     assert 5 == q_order(INSERT_str(), believer_plan_healerlink_str())
     assert 6 == q_order(INSERT_str(), believer_plan_factunit_str())
     assert 7 == q_order(INSERT_str(), believer_plan_reasonunit_str())
@@ -206,7 +206,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 16 == q_order(DELETE_str(), believer_plan_reason_caseunit_str())
     assert 17 == q_order(DELETE_str(), believer_plan_reasonunit_str())
     assert 18 == q_order(DELETE_str(), believer_plan_factunit_str())
-    assert 19 == q_order(DELETE_str(), believer_plan_laborlink_str())
+    assert 19 == q_order(DELETE_str(), believer_plan_partyunit_str())
     assert 20 == q_order(DELETE_str(), believer_plan_healerlink_str())
     assert 21 == q_order(DELETE_str(), believer_plan_awardlink_str())
     assert 22 == q_order(DELETE_str(), believer_planunit_str())
@@ -234,7 +234,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(believer_plan_awardlink_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_reasonunit_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_reason_caseunit_str()) == 3
-    assert _get_atom_config_jkeys_len(believer_plan_laborlink_str()) == 2
+    assert _get_atom_config_jkeys_len(believer_plan_partyunit_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_healerlink_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_factunit_str()) == 2
 
@@ -245,7 +245,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jvalues_len(believer_plan_awardlink_str()) == 2
     assert _get_atom_config_jvalues_len(believer_plan_reasonunit_str()) == 1
     assert _get_atom_config_jvalues_len(believer_plan_reason_caseunit_str()) == 3
-    assert _get_atom_config_jvalues_len(believer_plan_laborlink_str()) == 0
+    assert _get_atom_config_jvalues_len(believer_plan_partyunit_str()) == 0
     assert _get_atom_config_jvalues_len(believer_plan_healerlink_str()) == 0
     assert _get_atom_config_jvalues_len(believer_plan_factunit_str()) == 3
 
@@ -414,7 +414,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     cat_awardlink = nx.get(believer_plan_awardlink_str())
     cat_reason = nx.get(believer_plan_reasonunit_str())
     cat_case = nx.get(believer_plan_reason_caseunit_str())
-    cat_laborlink = nx.get(believer_plan_laborlink_str())
+    cat_partyunit = nx.get(believer_plan_partyunit_str())
     cat_healerlink = nx.get(believer_plan_healerlink_str())
     cat_fact = nx.get(believer_plan_factunit_str())
 
@@ -425,7 +425,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert cat_awardlink is not None
     assert cat_reason is not None
     assert cat_case is not None
-    assert cat_laborlink is not None
+    assert cat_partyunit is not None
     assert cat_healerlink is not None
     assert cat_fact is not None
 
@@ -436,7 +436,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     normal_specs_awardlink = cat_awardlink.get(normal_specs_str())
     normal_specs_reason = cat_reason.get(normal_specs_str())
     normal_specs_case = cat_case.get(normal_specs_str())
-    normal_specs_laborlink = cat_laborlink.get(normal_specs_str())
+    normal_specs_partyunit = cat_partyunit.get(normal_specs_str())
     normal_specs_healerlink = cat_healerlink.get(normal_specs_str())
     normal_specs_fact = cat_fact.get(normal_specs_str())
 
@@ -450,7 +450,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert normal_specs_awardlink is not None
     assert normal_specs_reason is not None
     assert normal_specs_case is not None
-    assert normal_specs_laborlink is not None
+    assert normal_specs_partyunit is not None
     assert normal_specs_healerlink is not None
     assert normal_specs_fact is not None
 
@@ -461,7 +461,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     table_name_awardlink = normal_specs_awardlink.get(normal_table_name_str())
     table_name_reason = normal_specs_reason.get(normal_table_name_str())
     table_name_case = normal_specs_case.get(normal_table_name_str())
-    table_name_laborlink = normal_specs_laborlink.get(normal_table_name_str())
+    table_name_partyunit = normal_specs_partyunit.get(normal_table_name_str())
     table_name_healerlink = normal_specs_healerlink.get(normal_table_name_str())
     table_name_fact = normal_specs_fact.get(normal_table_name_str())
 
@@ -472,7 +472,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert table_name_awardlink == "awardlink"
     assert table_name_reason == "reason"
     assert table_name_case == "case"
-    assert table_name_laborlink == "laborlink"
+    assert table_name_partyunit == "partyunit"
     assert table_name_healerlink == "healerlink"
     assert table_name_fact == "fact"
 
@@ -537,7 +537,7 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert x_atom_args_dimen_mapping.get(plan_rope_str())
     rope_dimens = x_atom_args_dimen_mapping.get(plan_rope_str())
     assert believer_plan_factunit_str() in rope_dimens
-    assert believer_plan_laborlink_str() in rope_dimens
+    assert believer_plan_partyunit_str() in rope_dimens
     assert len(rope_dimens) == 7
     assert len(x_atom_args_dimen_mapping) == 41
 
@@ -667,6 +667,6 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(labor_title_str()) == TitleTerm_str()
+    assert x_class_types.get(party_title_str()) == TitleTerm_str()
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

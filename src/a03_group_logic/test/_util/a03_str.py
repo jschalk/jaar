@@ -81,10 +81,6 @@ def group_title_str() -> str:
     return "group_title"
 
 
-def labor_title_str() -> str:
-    return "labor_title"
-
-
 def partner_cred_points_str() -> str:
     return "partner_cred_points"
 

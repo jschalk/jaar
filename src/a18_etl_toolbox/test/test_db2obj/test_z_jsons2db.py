@@ -801,7 +801,7 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
 def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_laborlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_partyunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -826,7 +826,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_laborlink_job"
+        x_table_name = "believer_plan_partyunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
@@ -893,7 +893,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         blrheal_job_table = "believer_plan_healerlink_job"
         blrprem_job_table = "believer_plan_reason_caseunit_job"
         blrreas_job_table = "believer_plan_reasonunit_job"
-        blrlabo_job_table = "believer_plan_laborlink_job"
+        blrlabo_job_table = "believer_plan_partyunit_job"
         blrplan_job_table = "believer_planunit_job"
         blrunit_job_table = "believerunit_job"
         assert get_row_count(cursor, blrunit_job_table) == 0

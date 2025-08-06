@@ -2,10 +2,10 @@ from sqlite3 import connect as sqlite3_connect
 from src.a06_believer_logic.test._util.a06_str import (
     belief_label_str,
     believer_name_str,
-    labor_title_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
+    party_title_str,
     plan_rope_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -18,7 +18,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_believer_plan_laborlink():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_believer_plan_partyunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -27,12 +27,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_believer_plan_laborl
             face_name_str(),
             belief_label_str(),
             plan_rope_str(),
-            labor_title_str(),
+            party_title_str(),
             believer_name_str(),
             partner_name_str(),
             amount_str(),
         ]
-        blrlabo_cat = "believer_plan_laborlink"
+        blrlabo_cat = "believer_plan_partyunit"
         src_table = f"{idea_number}_raw"
         dst_table = f"{blrlabo_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -55,12 +55,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_believer_plan_laborl
 
         # THEN
         columns_str = (
-            "event_int, face_name, belief_label, believer_name, plan_rope, labor_title"
+            "event_int, face_name, belief_label, believer_name, plan_rope, party_title"
         )
         expected_sqlstr = f"""INSERT INTO {blrlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND believer_name IS NOT NULL AND plan_rope IS NOT NULL AND labor_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND belief_label IS NOT NULL AND believer_name IS NOT NULL AND plan_rope IS NOT NULL AND party_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -79,7 +79,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_believer_partnerunit
             face_name_str(),
             belief_label_str(),
             plan_rope_str(),
-            labor_title_str(),
+            party_title_str(),
             believer_name_str(),
             partner_name_str(),
             partner_cred_points_str(),
@@ -129,7 +129,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_believer_partnerunit
             face_name_str(),
             belief_label_str(),
             plan_rope_str(),
-            labor_title_str(),
+            party_title_str(),
             believer_name_str(),
             partner_name_str(),
             partner_cred_points_str(),

@@ -11,7 +11,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -27,8 +27,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_debt_points_str,
     group_title_str,
     healer_name_str,
-    labor_title_str,
     partner_name_str,
+    party_title_str,
     plan_rope_str,
     reason_active_requisite_str,
     stop_want_str,
@@ -1040,7 +1040,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_r
     assert after_ball_plan.get_reasonunit(knee_rope) is None
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_laborlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_partyunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1056,10 +1056,10 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_l
 
     # WHEN
     update_disc_believeratom = believeratom_shop(
-        believer_plan_laborlink_str(), INSERT_str()
+        believer_plan_partyunit_str(), INSERT_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(labor_title_str(), yao_str)
+    update_disc_believeratom.set_jkey(party_title_str(), yao_str)
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.set_believeratom(update_disc_believeratom)
     after_sue_au = sue_believerdelta.get_edited_believer(before_sue_au)
@@ -1067,10 +1067,10 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_l
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
     assert after_ball_planunit.laborunit._partys != set()
-    assert after_ball_planunit.laborunit.get_laborlink(yao_str) is not None
+    assert after_ball_planunit.laborunit.get_partyunit(yao_str) is not None
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_laborlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_partyunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1082,16 +1082,16 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_l
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    before_ball_planunit.laborunit.set_laborlink(yao_str)
+    before_ball_planunit.laborunit.set_partyunit(yao_str)
     assert before_ball_planunit.laborunit._partys != set()
-    assert before_ball_planunit.laborunit.get_laborlink(yao_str) is not None
+    assert before_ball_planunit.laborunit.get_partyunit(yao_str) is not None
 
     # WHEN
     update_disc_believeratom = believeratom_shop(
-        believer_plan_laborlink_str(), DELETE_str()
+        believer_plan_partyunit_str(), DELETE_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_believeratom.set_jkey(labor_title_str(), yao_str)
+    update_disc_believeratom.set_jkey(party_title_str(), yao_str)
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.set_believeratom(update_disc_believeratom)
     print(f"{before_sue_au.get_plan_obj(ball_rope).laborunit=}")

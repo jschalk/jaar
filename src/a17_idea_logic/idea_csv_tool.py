@@ -581,14 +581,14 @@ def add_pack_to_br00024_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_plan_laborlink":
+        if believeratom.dimen == "believer_plan_partyunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("labor_title"),
+                believeratom.jkeys.get("party_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

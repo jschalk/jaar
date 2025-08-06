@@ -691,13 +691,13 @@ class BelieverUnit:
             x_plan.awardlinks.pop(_awardlink_awardee_title)
         if x_plan.laborunit is not None:
             _partys_to_delete = [
-                _laborlink_labor_title
-                for _laborlink_labor_title in x_plan.laborunit._partys
-                if self.get_partnerunit_group_titles_dict().get(_laborlink_labor_title)
+                _partyunit_party_title
+                for _partyunit_party_title in x_plan.laborunit._partys
+                if self.get_partnerunit_group_titles_dict().get(_partyunit_party_title)
                 is None
             ]
-            for _laborlink_labor_title in _partys_to_delete:
-                x_plan.laborunit.del_laborlink(_laborlink_labor_title)
+            for _partyunit_party_title in _partys_to_delete:
+                x_plan.laborunit.del_partyunit(_partyunit_party_title)
         return x_plan
 
     def _create_missing_plans(self, rope):

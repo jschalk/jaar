@@ -39,27 +39,27 @@ class LaborUnit:
     def to_dict(self) -> dict[str, str]:
         return {"_partys": list(self._partys)}
 
-    def set_laborlink(self, labor_title: GroupTitle):
-        self._partys.add(labor_title)
+    def set_partyunit(self, party_title: GroupTitle):
+        self._partys.add(party_title)
 
-    def laborlink_exists(self, labor_title: GroupTitle):
-        return labor_title in self._partys
+    def partyunit_exists(self, party_title: GroupTitle):
+        return party_title in self._partys
 
-    def del_laborlink(self, labor_title: GroupTitle):
-        self._partys.remove(labor_title)
+    def del_partyunit(self, party_title: GroupTitle):
+        self._partys.remove(party_title)
 
-    def get_laborlink(self, labor_title: GroupTitle) -> GroupTitle:
-        if self.laborlink_exists(labor_title):
-            return labor_title
+    def get_partyunit(self, party_title: GroupTitle) -> GroupTitle:
+        if self.partyunit_exists(party_title):
+            return party_title
 
 
 def laborunit_shop(_partys: set[GroupTitle] = None) -> LaborUnit:
     return LaborUnit(get_empty_set_if_None(_partys))
 
 
-def create_laborunit(laborlink: GroupTitle):
+def create_laborunit(partyunit: GroupTitle):
     x_laborunit = laborunit_shop()
-    x_laborunit.set_laborlink(laborlink)
+    x_laborunit.set_partyunit(partyunit)
     return x_laborunit
 
 
@@ -71,11 +71,11 @@ class LaborHeir:
     def _get_all_partners(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        labor_title_set: set[GroupTitle],
+        party_title_set: set[GroupTitle],
     ) -> dict[GroupTitle, GroupUnit]:
         dict_x = {}
-        for x_labor_title in labor_title_set:
-            dict_x |= groupunits.get(x_labor_title)._memberships
+        for x_party_title in party_title_set:
+            dict_x |= groupunits.get(x_party_title)._memberships
         return dict_x
 
     def is_empty(self) -> bool:
@@ -98,8 +98,8 @@ class LaborHeir:
         if self._partys == set():
             return True
 
-        for x_labor_title, x_groupunit in groupunits.items():
-            if x_labor_title in self._partys:
+        for x_party_title, x_groupunit in groupunits.items():
+            if x_party_title in self._partys:
                 for x_partner_name in x_groupunit._memberships.keys():
                     if x_partner_name == believer_believer_name:
                         return True
@@ -113,23 +113,23 @@ class LaborHeir:
     ):
         x_partys = set()
         if parent_laborheir is None or parent_laborheir._partys == set():
-            for laborlink in laborunit._partys:
-                x_partys.add(laborlink)
+            for partyunit in laborunit._partys:
+                x_partys.add(partyunit)
         elif laborunit._partys == set() or (
             parent_laborheir._partys == laborunit._partys
         ):
-            for laborlink in parent_laborheir._partys:
-                x_partys.add(laborlink)
+            for partyunit in parent_laborheir._partys:
+                x_partys.add(partyunit)
         else:
             # get all_partners of parent laborheir groupunits
             all_parent_laborheir_partners = self._get_all_partners(
                 groupunits=groupunits,
-                labor_title_set=parent_laborheir._partys,
+                party_title_set=parent_laborheir._partys,
             )
             # get all_partners of laborunit groupunits
             all_laborunit_partners = self._get_all_partners(
                 groupunits=groupunits,
-                labor_title_set=laborunit._partys,
+                party_title_set=laborunit._partys,
             )
             if not set(all_laborunit_partners).issubset(
                 set(all_parent_laborheir_partners)
@@ -140,12 +140,12 @@ class LaborHeir:
                 )
 
             # set dict_x = to laborunit groupunits
-            for laborlink in laborunit._partys:
-                x_partys.add(laborlink)
+            for partyunit in laborunit._partys:
+                x_partys.add(partyunit)
         self._partys = x_partys
 
-    def has_labor(self, labor_titles: set[GroupTitle]):
-        return self.is_empty() or any(gn_x in self._partys for gn_x in labor_titles)
+    def has_labor(self, party_titles: set[GroupTitle]):
+        return self.is_empty() or any(gn_x in self._partys for gn_x in party_titles)
 
 
 def laborheir_shop(
@@ -160,7 +160,7 @@ def laborheir_shop(
 
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
-    for x_labor_title in laborunit_dict.get("_partys"):
-        x_laborunit.set_laborlink(x_labor_title)
+    for x_party_title in laborunit_dict.get("_partys"):
+        x_laborunit.set_partyunit(x_party_title)
 
     return x_laborunit

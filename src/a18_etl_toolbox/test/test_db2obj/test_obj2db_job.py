@@ -477,7 +477,7 @@ def test_create_blrheal_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_plan_laborlink")
+    x_args = get_believer_calc_dimen_args("believer_plan_partyunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -503,13 +503,13 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     x_belief_label = "amy23"
     x_believer_name = "Sue"
     x_rope = 1
-    x_labor_title = 2
+    x_party_title = 2
     x__believer_name_is_labor = 3
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
-        "labor_title": x_labor_title,
+        "party_title": x_party_title,
         "_believer_name_is_labor": x__believer_name_is_labor,
     }
     # all args included in values dict
@@ -523,7 +523,7 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_plan_laborlink_job"
+        table_name = "believer_plan_partyunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

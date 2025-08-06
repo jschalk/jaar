@@ -412,18 +412,18 @@ def _modify_believer_plan_reason_caseunit_insert(
     )
 
 
-def _modify_believer_plan_laborlink_delete(
+def _modify_believer_plan_partyunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
+    x_planunit.laborunit.del_partyunit(party_title=x_atom.get_value("party_title"))
 
 
-def _modify_believer_plan_laborlink_insert(
+def _modify_believer_plan_partyunit_insert(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
+    x_planunit.laborunit.set_partyunit(party_title=x_atom.get_value("party_title"))
 
 
 def _modify_believer_plan_healerlink_delete(
@@ -523,11 +523,11 @@ def _modify_believer_plan_reason_caseunit(
         _modify_believer_plan_reason_caseunit_insert(x_believer, x_atom)
 
 
-def _modify_believer_plan_laborlink(x_believer: BelieverUnit, x_atom: BelieverAtom):
+def _modify_believer_plan_partyunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_believer_plan_laborlink_delete(x_believer, x_atom)
+        _modify_believer_plan_partyunit_delete(x_believer, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_believer_plan_laborlink_insert(x_believer, x_atom)
+        _modify_believer_plan_partyunit_insert(x_believer, x_atom)
 
 
 def _modify_believer_plan_healerlink(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -563,8 +563,8 @@ def modify_believer_with_believeratom(x_believer: BelieverUnit, x_atom: Believer
         _modify_believer_plan_reason_caseunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_healerlink":
         _modify_believer_plan_healerlink(x_believer, x_atom)
-    elif x_atom.dimen == "believer_plan_laborlink":
-        _modify_believer_plan_laborlink(x_believer, x_atom)
+    elif x_atom.dimen == "believer_plan_partyunit":
+        _modify_believer_plan_partyunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_partnerunit":
         _modify_believer_partnerunit(x_believer, x_atom)
 
@@ -677,7 +677,7 @@ class AtomRow:
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    labor_title: int = None
+    party_title: int = None
 
     def set_atom_dimen(self, atom_dimen: str):
         self._atom_dimens.add(atom_dimen)

@@ -239,14 +239,14 @@ def create_blrlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
-    labor_title = values_dict.get("labor_title")
+    party_title = values_dict.get("party_title")
     _believer_name_is_labor = values_dict.get("_believer_name_is_labor")
-    return f"""INSERT INTO believer_plan_laborlink_job (belief_label, believer_name, plan_rope, labor_title, _believer_name_is_labor)
+    return f"""INSERT INTO believer_plan_partyunit_job (belief_label, believer_name, plan_rope, party_title, _believer_name_is_labor)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
-, {sqlite_obj_str(labor_title, "TEXT")}
+, {sqlite_obj_str(party_title, "TEXT")}
 , {sqlite_obj_str(_believer_name_is_labor, "INTEGER")}
 )
 ;
@@ -489,8 +489,8 @@ def insert_job_blrlabo(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["believer_name"] = x_objkeysholder.believer_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    for labor_title in sorted(x_laborheir._partys):
-        x_dict["labor_title"] = labor_title
+    for party_title in sorted(x_laborheir._partys):
+        x_dict["party_title"] = party_title
         insert_sqlstr = create_blrlabo_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 

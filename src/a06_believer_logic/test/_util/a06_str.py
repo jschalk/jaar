@@ -34,7 +34,7 @@ from src.a04_reason_logic.test._util.a04_str import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    labor_title_str,
+    party_title_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_lower_str,
@@ -118,8 +118,8 @@ def believer_plan_healerlink_str() -> str:
     return "believer_plan_healerlink"
 
 
-def believer_plan_laborlink_str() -> str:
-    return "believer_plan_laborlink"
+def believer_plan_partyunit_str() -> str:
+    return "believer_plan_partyunit"
 
 
 def believer_plan_reason_caseunit_str() -> str:

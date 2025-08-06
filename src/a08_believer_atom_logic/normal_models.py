@@ -83,9 +83,9 @@ class CaseTable(Base):
 
 
 class LaborLinkTable(Base):
-    __tablename__ = "laborlink"
+    __tablename__ = "partyunit"
     uid = Column(Integer, primary_key=True)
-    labor_title = Column(String)
+    party_title = Column(String)
     plan_rope = Column(String)
 
 
