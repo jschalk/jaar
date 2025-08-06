@@ -87,6 +87,7 @@ def test_PlanUnit_get_awardlink_ReturnsObj():
 
 
 def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     biker_give_force = 12
     biker_take_force = 15
