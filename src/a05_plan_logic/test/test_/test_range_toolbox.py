@@ -5,7 +5,7 @@ from src.a05_plan_logic.range_toolbox import (
 )
 
 
-def test_RangeUnit_exists():
+def test_RangeUnit_Exists():
     # ESTABLISH
     x_gogo = 0
     x_stop = 20

@@ -394,6 +394,7 @@ def test_Modules_path_FunctionStructureAndFormat():
     # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}
+    all_test_functions = set()
     modules_path_funcs = {}
     filtered_modules_path_funcs = {}
     filterout_path_funcs = {
@@ -407,9 +408,9 @@ def test_Modules_path_FunctionStructureAndFormat():
         path_func_set = set()
         modules_path_funcs[module_desc] = path_func_set
         filtered_modules_path_funcs[module_desc] = filtered_path_funcs
-        for filenames in filenames_set:
-            file_dir = create_path(module_dir, filenames[0])
-            file_path = create_path(file_dir, filenames[1])
+        for filepath_set in filenames_set:
+            file_dir = create_path(module_dir, filepath_set[0])
+            file_path = create_path(file_dir, filepath_set[1])
             file_functions = get_top_level_functions(file_path)
             for function_name in file_functions:
                 x_count += 1
@@ -424,16 +425,18 @@ def test_Modules_path_FunctionStructureAndFormat():
                         and function_name not in filterout_path_funcs
                     ):
                         filtered_path_funcs.add(function_name)
+                if str(function_name).startswith("test_"):
+                    all_test_functions.add(function_name)
 
     print(f"Total path functions found: {len(path_functions)}")
     for function_name, file_path in path_functions.items():
         func_docstring = get_docstring(file_path, function_name)
-        if not func_docstring:
-            print(f"docstring for {function_name} is None")
-        else:
-            print(
-                f"docstring for {function_name}: \t{func_docstring.replace("\n", "")}"
-            )
+        # if not func_docstring:
+        #     print(f"docstring for {function_name} is None")
+        # else:
+        #     print(
+        #         f"docstring for {function_name}: \t{func_docstring.replace("\n", "")}"
+        #     )
         assert func_docstring is not None, function_name
 
     # print(f"Path functions: {path_functions.keys()=}")
@@ -461,6 +464,8 @@ def test_Modules_path_FunctionStructureAndFormat():
                 path_funcs, module_desc, test_path_func_names
             )
 
+    check_all_test_functions_have_proper_naming_format(all_test_functions)
+
 
 def check_if_test_ReturnsObj_pytests_exist(
     path_funcs: set, module_desc: str, test_path_func_names: set[str]
@@ -484,7 +489,7 @@ def check_if_test_HasDocString_pytests_exist(
 ):
     for path_func in path_funcs:
         pytest_for_func_exists = False
-        print(f"{module_desc} {path_func}")
+        # print(f"{module_desc} {path_func}")
         expected_test_func = f"test_{path_func}_HasDocString"
         for test_path_func_name in test_path_func_names:
             if test_path_func_name.startswith(expected_test_func):
@@ -494,6 +499,14 @@ def check_if_test_HasDocString_pytests_exist(
             # )
         assert pytest_for_func_exists, f"missing {expected_test_func=}"
         # print(f"{module_desc} {test_func_exists} {path_func}")
+
+
+def check_all_test_functions_have_proper_naming_format(all_test_functions):
+    for test_function_name in sorted(all_test_functions):
+        test_function_name = str(test_function_name)
+        assert not test_function_name.endswith(
+            "_exists"
+        ), f"{test_function_name} name format"
 
 
 def test_check_Modules_filenames_FollowFileNameConventions_NoNamingCollision():

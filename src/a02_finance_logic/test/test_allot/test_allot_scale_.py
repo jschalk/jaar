@@ -9,7 +9,7 @@ from src.a02_finance_logic.allot import (
 )
 
 
-def test_GrainFloat_exists():
+def test_GrainFloat_Exists():
     # ESTABLISH
     x_float = 2.45
     # WHEN

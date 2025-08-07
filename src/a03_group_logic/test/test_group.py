@@ -4,7 +4,7 @@ from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 
 
-def test_GroupUnit_exists():
+def test_GroupUnit_Exists():
     # ESTABLISH
     swim_str = ";swimmers"
     # WHEN
@@ -100,6 +100,7 @@ def test_GroupUnit_set_membership_CorrectlySetsAttr():
 
 
 def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"

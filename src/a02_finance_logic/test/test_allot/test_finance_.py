@@ -22,7 +22,7 @@ from src.a02_finance_logic.finance_config import (
 )
 
 
-def test_BitNum_exists():
+def test_BitNum_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
@@ -53,7 +53,7 @@ def test_trim_bit_excess_ReturnsCorrectedFloat():
     assert trim_bit_excess(num=0.56, bit=0.133) == 0.532
 
 
-def test_RespectNum_exists():
+def test_RespectNum_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
@@ -63,7 +63,7 @@ def test_RespectNum_exists():
     assert inspect_getdoc(y_RespectNum) == "RespectNum inherits from float class"
 
 
-def test_PennyNum_exists():
+def test_PennyNum_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
@@ -90,7 +90,7 @@ def test_trim_penny_excess_ReturnsCorrectedFloat():
     assert trim_penny_excess(num=0.56, penny=0.133) == 0.532
 
 
-def test_MoneyUnit_exists():
+def test_MoneyUnit_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
@@ -100,7 +100,7 @@ def test_MoneyUnit_exists():
     assert inspect_getdoc(y_moneyunit) == "MoneyUnit inherits from float class"
 
 
-def test_FundNum_exists():
+def test_FundNum_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN
@@ -129,7 +129,7 @@ def test_validate_fund_pool_ReturnsObj():
     assert validate_fund_pool(25) == 25
 
 
-def test_FundIota_exists():
+def test_FundIota_Exists():
     # ESTABLISH
     x_float = 0.045
     # WHEN

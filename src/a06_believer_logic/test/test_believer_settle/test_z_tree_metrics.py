@@ -6,7 +6,7 @@ from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import believerunit_v001
 
 
-def test_BelieverUnit_get_tree_metrics_exists():
+def test_BelieverUnit_get_tree_metrics_Exists():
     # ESTABLISH
     zia_believer = believerunit_shop(believer_name="Zia")
 
