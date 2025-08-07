@@ -70,7 +70,7 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyBeliefUnit(
         "br00021": "belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points\n",
         "br00022": "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force\n",
         "br00023": "belief_label,believer_name,plan_rope,fact_context,fact_state,fact_lower,fact_upper\n",
-        "br00024": "belief_label,believer_name,plan_rope,party_title\n",
+        "br00024": "belief_label,believer_name,plan_rope,party_title,solo\n",
         "br00025": "belief_label,believer_name,plan_rope,healer_name\n",
         "br00026": "belief_label,believer_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
         "br00027": "belief_label,believer_name,plan_rope,reason_context,reason_active_requisite\n",

@@ -55,13 +55,13 @@ def test_believer_plankid_laborunit_EmptyCorrectlySets_plan_laborheir():
     bob_believer.edit_plan_attr(run_rope, laborunit=x_laborunit)
     run_plan = bob_believer.get_plan_obj(run_rope)
     assert run_plan.laborunit == x_laborunit
-    assert run_plan._laborheir is None
+    assert not run_plan._laborheir
 
     # WHEN
     bob_believer.settle_believer()
 
     # THEN
-    assert run_plan._laborheir is not None
+    assert run_plan._laborheir
     assert run_plan._laborheir._believer_name_is_labor
 
     x_laborheir = laborheir_shop()

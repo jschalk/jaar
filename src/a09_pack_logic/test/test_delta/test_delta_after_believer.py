@@ -213,6 +213,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_partne
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_membership():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)
@@ -305,6 +306,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_member
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_membership():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)
@@ -472,6 +474,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_planun
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_awardlink():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)
@@ -694,6 +697,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_f
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_factunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -746,6 +750,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_f
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_reason_caseunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -858,6 +863,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_r
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_reason_caseunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -949,6 +955,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_r
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_reasonunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1052,7 +1059,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_p
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_planunit.laborunit._partys == set()
+    assert before_ball_planunit.laborunit._partys == {}
 
     # WHEN
     update_disc_believeratom = believeratom_shop(
@@ -1099,7 +1106,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_p
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.laborunit._partys == set()
+    assert after_ball_planunit.laborunit._partys == {}
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_healerlink():
@@ -1164,6 +1171,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_h
 
 
 def test_BelieverDelta_get_believerdelta_example1_ContainsBelieverAtoms():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)

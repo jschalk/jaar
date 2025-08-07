@@ -7,7 +7,7 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
-from src.a03_group_logic.labor import laborheir_shop, laborunit_shop
+from src.a03_group_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a04_reason_logic.reason_plan import (
     caseunit_shop,
@@ -820,8 +820,12 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     x_laborheir = laborheir_shop()
     x_laborheir._believer_name_is_labor = x__believer_name_is_labor
     bob_str = "Bob"
+    bob_solo_bool = 6
     sue_str = "Sue"
-    x_laborheir._partys = {bob_str, sue_str}
+    sue_solo_bool = 7
+    bob_partyheir = partyheir_shop(bob_str, bob_solo_bool)
+    sue_partyheir = partyheir_shop(sue_str, sue_solo_bool)
+    x_laborheir._partys = {bob_str: bob_partyheir, sue_str: sue_partyheir}
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -843,6 +847,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
             str(x_believer_name),
             str(x_rope),
             bob_str,
+            bob_solo_bool,
             x__believer_name_is_labor,
         )
         expected_row2 = (
@@ -850,6 +855,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
             str(x_believer_name),
             str(x_rope),
             sue_str,
+            sue_solo_bool,
             x__believer_name_is_labor,
         )
         expected_data = [expected_row1, expected_row2]
@@ -879,7 +885,9 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     )
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_believer.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    casa_laborunit = laborunit_shop()
+    casa_laborunit.set_partyunit(sue_str, True)
+    sue_believer.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
     sue_believer.add_fact(status_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:

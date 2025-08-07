@@ -504,12 +504,14 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     x_believer_name = "Sue"
     x_rope = 1
     x_party_title = 2
+    x_solo = 4
     x__believer_name_is_labor = 3
     values_dict = {
         "belief_label": x_belief_label,
         "believer_name": x_believer_name,
         "plan_rope": x_rope,
         "party_title": x_party_title,
+        "solo": x_solo,
         "_believer_name_is_labor": x__believer_name_is_labor,
     }
     # all args included in values dict
@@ -527,7 +529,8 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
-        # print(insert_sqlstr)
+        print("")
+        print(insert_sqlstr)
         assert insert_sqlstr == expected_sqlstr
 
 

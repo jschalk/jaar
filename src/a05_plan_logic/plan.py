@@ -827,10 +827,10 @@ class PlanUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        believer_believer_name: PartnerName = None,
+        believer_name: PartnerName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, believer_believer_name)
+        self._active = self._create_active_bool(groupunits, believer_name)
         self._set_plan_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -848,19 +848,12 @@ class PlanUnit:
     def _create_active_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_believer_name: PartnerName,
+        believer_name: PartnerName,
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
-        if (
-            active_bool
-            and groupunits != {}
-            and believer_believer_name is not None
-            and self._laborheir._partys != {}
-        ):
-            self._laborheir.set_believer_name_is_labor(
-                groupunits, believer_believer_name
-            )
+        if active_bool and groupunits != {} and believer_name is not None:
+            self._laborheir.set_believer_name_is_labor(groupunits, believer_name)
             if self._laborheir._believer_name_is_labor is False:
                 active_bool = False
         return active_bool

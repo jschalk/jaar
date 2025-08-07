@@ -93,7 +93,9 @@
       "party_title": {},
       "believer_name": {}
     },
-    "jvalues": {}
+    "jvalues": {
+      "solo": {}
+    }
   },
   "believer_plan_reason_caseunit": {
     "allowed_crud": "delete_insert_update",

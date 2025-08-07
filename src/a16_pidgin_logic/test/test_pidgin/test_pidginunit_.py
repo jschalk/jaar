@@ -130,6 +130,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("weekday_order") == "int"
     assert pidgin_args_class_types.get("knot") == "str"
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
+    assert pidgin_args_class_types.get("solo") == "int"
 
     # make sure it pidgin_arg_class_types has all belief and all atom args
     pidgin_args = set(pidgin_args_class_types.keys())

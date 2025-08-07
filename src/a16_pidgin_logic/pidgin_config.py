@@ -118,6 +118,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "reason_context": "RopeTerm",
         "reason_active_requisite": "bool",
         "respect_bit": "float",
+        "solo": "int",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",

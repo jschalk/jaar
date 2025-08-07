@@ -189,6 +189,7 @@ def get_believer_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "max_tree_traverse": "INTEGER",
         "penny": "REAL",
         "respect_bit": "REAL",
+        "solo": "INTEGER",
         "tally": "INTEGER",
     }
 

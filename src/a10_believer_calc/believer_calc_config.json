@@ -259,7 +259,12 @@
                 "sqlite_datatype": "INTEGER"
             }
         },
-        "jvalues": {}
+        "jvalues": {
+            "solo": {
+                "class_type": "int",
+                "sqlite_datatype": "INTEGER"
+            }
+        }
     },
     "believer_plan_reason_caseunit": {
         "abbreviation": "blrprem",

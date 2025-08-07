@@ -204,7 +204,14 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jvalues": {},
+        "jvalues": {
+            "solo": {
+                "class_type": "int",
+                "column_order": 2,
+                "nesting_order": 2,
+                "sqlite_datatype": "INTEGER"
+            }
+        },
         "normal_specs": {
             "normal_table_name": "partyunit"
         }

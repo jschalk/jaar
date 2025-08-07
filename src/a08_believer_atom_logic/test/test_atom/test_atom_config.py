@@ -42,6 +42,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     plan_rope_str,
     reason_context_str,
     respect_bit_str,
+    solo_str,
     stop_want_str,
 )
 from src.a08_believer_atom_logic.atom_config import (
@@ -245,7 +246,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jvalues_len(believer_plan_awardlink_str()) == 2
     assert _get_atom_config_jvalues_len(believer_plan_reasonunit_str()) == 1
     assert _get_atom_config_jvalues_len(believer_plan_reason_caseunit_str()) == 3
-    assert _get_atom_config_jvalues_len(believer_plan_partyunit_str()) == 0
+    assert _get_atom_config_jvalues_len(believer_plan_partyunit_str()) == 1
     assert _get_atom_config_jvalues_len(believer_plan_healerlink_str()) == 0
     assert _get_atom_config_jvalues_len(believer_plan_factunit_str()) == 3
 
@@ -395,7 +396,7 @@ def test_get_flattened_atom_table_build_ReturnsObj():
     atom_columns = get_flattened_atom_table_build()
 
     # THEN
-    assert len(atom_columns) == 103
+    assert len(atom_columns) == 104
     assert atom_columns.get("believerunit_UPDATE_credor_respect") == "REAL"
     # print(f"{atom_columns.keys()=}")
 
@@ -539,7 +540,7 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
     assert believer_plan_factunit_str() in rope_dimens
     assert believer_plan_partyunit_str() in rope_dimens
     assert len(rope_dimens) == 7
-    assert len(x_atom_args_dimen_mapping) == 41
+    assert len(x_atom_args_dimen_mapping) == 42
 
 
 def get_class_type(x_dimen: str, x_arg: str) -> str:
@@ -664,6 +665,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("task") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(plan_rope_str()) == RopeTerm_str()
+    assert x_class_types.get(solo_str()) == "int"
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"

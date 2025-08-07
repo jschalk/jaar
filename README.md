@@ -61,8 +61,8 @@ Output stance: emmanuel_stance.xlsx, sheet "br00000"
 positions are aggregated by a listener into a coherant agenda that can include tasks 
 to do and tasks of  of existence. Listening and acting on it.
 
-A agents's agenda in the community is built by the the stared intreprtation of
-1. Partner agents agendas 
+A person's agenda in the community is built by the the stared intreprtation of
+1. Partner persons agendas 
 2. Their own independent agenda
 
 Each agenda is saved as a JSON file. 

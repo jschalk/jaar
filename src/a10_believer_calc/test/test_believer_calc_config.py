@@ -377,7 +377,7 @@ def test_get_all_believer_calc_args_ReturnsObj():
     # assert believer_plan_factunit_str() in rope_believer_calc_aspects
     # assert believer_plan_partyunit_str() in rope_believer_calc_aspects
     # assert len(rope_believer_calc_aspects) == 6
-    assert len(all_believer_calc_args) == 76
+    assert len(all_believer_calc_args) == 77
 
 
 def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():

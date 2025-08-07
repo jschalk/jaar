@@ -17,6 +17,9 @@
         },
         "party_title": {
             "otx_key": true
+        },
+        "solo": {
+            "otx_key": false
         }
     },
     "idea_number": "br00024",

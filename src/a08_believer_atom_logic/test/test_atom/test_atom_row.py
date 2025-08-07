@@ -46,6 +46,7 @@ def test_AtomRow_exists():
     assert x_atomrow.gogo_want is None
     assert x_atomrow.group_title is None
     assert x_atomrow.healer_name is None
+    assert x_atomrow.solo is None
     assert x_atomrow.star is None
     assert x_atomrow.max_tree_traverse is None
     assert x_atomrow.morph is None

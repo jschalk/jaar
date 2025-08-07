@@ -87,6 +87,7 @@ class LaborLinkTable(Base):
     uid = Column(Integer, primary_key=True)
     party_title = Column(String)
     plan_rope = Column(String)
+    solo = Column(Integer)
 
 
 class HealerLinkTable(Base):

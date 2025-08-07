@@ -674,6 +674,7 @@ class AtomRow:
     task: bool = None
     problem_bool: bool = None
     plan_rope: RopeTerm = None
+    solo: int = None
     stop_want: float = None
     take_force: float = None
     tally: int = None

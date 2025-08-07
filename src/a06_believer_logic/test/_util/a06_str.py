@@ -23,6 +23,7 @@ from src.a03_group_logic.test._util.a03_str import (
     partner_debt_points_str,
     partner_name_str,
     respect_bit_str,
+    solo_str,
     take_force_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
