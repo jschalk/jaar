@@ -77,14 +77,14 @@ def believer_plan_reason_caseunit_exists(
     )
 
 
-def believer_plan_laborlink_exists(
+def believer_plan_partyunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
-    x_labor_title = jkeys.get("labor_title")
+    x_party_title = jkeys.get("party_title")
     x_rope = jkeys.get("plan_rope")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).laborunit.laborlink_exists(x_labor_title)
+        and x_believer.get_plan_obj(x_rope).laborunit.partyunit_exists(x_party_title)
     )
 
 
@@ -127,8 +127,8 @@ def believer_attr_exists(
         return believer_plan_reason_caseunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_reasonunit":
         return believer_plan_reasonunit_exists(x_believer, jkeys)
-    elif x_dimen == "believer_plan_laborlink":
-        return believer_plan_laborlink_exists(x_believer, jkeys)
+    elif x_dimen == "believer_plan_partyunit":
+        return believer_plan_partyunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_planunit":
         return believer_planunit_exists(x_believer, jkeys)
     elif x_dimen == "believerunit":

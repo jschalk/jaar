@@ -319,7 +319,7 @@ def test_TitleMap_get_dict_ReturnsObj():
         event_int_str(): x_titlemap.event_int,
         face_name_str(): x_titlemap.face_name,
     }
-    assert x_titlemap.get_dict() == x1_rope_map_dict
+    assert x_titlemap.to_dict() == x1_rope_map_dict
 
     # WHEN
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
@@ -332,7 +332,7 @@ def test_TitleMap_get_dict_ReturnsObj():
         event_int_str(): x_titlemap.event_int,
         face_name_str(): sue_str,
     }
-    assert x_titlemap.get_dict() == x2_rope_map_dict
+    assert x_titlemap.to_dict() == x2_rope_map_dict
 
 
 def test_TitleMap_get_json_ReturnsObj():
@@ -387,7 +387,7 @@ def test_get_titlemap_from_dict_ReturnsObj():
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    gen_titlemap = get_titlemap_from_dict(x_titlemap.get_dict())
+    gen_titlemap = get_titlemap_from_dict(x_titlemap.to_dict())
 
     # THEN
     assert gen_titlemap.face_name == x_titlemap.face_name

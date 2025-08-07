@@ -614,7 +614,7 @@ def test_TranBook_get_dict_ReturnsObj():
     x_tranbook = tranbook_shop(amy23_str, all_tranunits)
 
     # WHEN
-    x_dict = x_tranbook.get_dict()
+    x_dict = x_tranbook.to_dict()
 
     # THEN
     tranunits_str = "tranunits"
@@ -655,7 +655,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
         },
         yao_str: {yao_str: {t77_tran_time: t77_yao_amount}},
     }
-    amy23_dict = amy23_tranbook.get_dict()
+    amy23_dict = amy23_tranbook.to_dict()
 
     # WHEN
     generated_tranbook = get_tranbook_from_dict(amy23_dict)

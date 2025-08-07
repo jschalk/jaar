@@ -53,12 +53,12 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
+from src.a03_group_logic.labor import LaborUnit
 from src.a03_group_logic.partner import (
     PartnerUnit,
     partnerunit_shop,
     partnerunits_get_from_dict,
 )
-from src.a04_reason_logic.reason_labor import LaborUnit
 from src.a04_reason_logic.reason_plan import (
     FactUnit,
     ReasonUnit,
@@ -144,7 +144,7 @@ class BelieverUnit:
     _keeps_buildable: bool = None
     _sum_healerlink_share: float = None
     _groupunits: dict[GroupTitle, GroupUnit] = None
-    _offtrack_kids_mass_set: set[RopeTerm] = None
+    _offtrack_kids_star_set: set[RopeTerm] = None
     _offtrack_fund: float = None
     _reason_contexts: set[RopeTerm] = None
     _range_inheritors: dict[RopeTerm, RopeTerm] = None
@@ -593,11 +593,11 @@ class BelieverUnit:
         return missing_reason_contexts
 
     def add_plan(
-        self, plan_rope: RopeTerm, mass: float = None, task: bool = None
+        self, plan_rope: RopeTerm, star: float = None, task: bool = None
     ) -> PlanUnit:
         x_plan_label = get_tail_label(plan_rope, self.knot)
         x_parent_rope = get_parent_rope(plan_rope, self.knot)
-        x_planunit = planunit_shop(x_plan_label, mass=mass)
+        x_planunit = planunit_shop(x_plan_label, star=star)
         if task:
             x_planunit.task = True
         self.set_plan(x_planunit, x_parent_rope)
@@ -664,18 +664,18 @@ class BelieverUnit:
 
         kid_rope = self.make_rope(parent_rope, plan_kid.plan_label)
         if adoptees is not None:
-            mass_sum = 0
+            star_sum = 0
             for adoptee_plan_label in adoptees:
                 adoptee_rope = self.make_rope(parent_rope, adoptee_plan_label)
                 adoptee_plan = self.get_plan_obj(adoptee_rope)
-                mass_sum += adoptee_plan.mass
+                star_sum += adoptee_plan.star
                 new_adoptee_parent_rope = self.make_rope(kid_rope, adoptee_plan_label)
                 self.set_plan(adoptee_plan, new_adoptee_parent_rope)
-                self.edit_plan_attr(new_adoptee_parent_rope, mass=adoptee_plan.mass)
+                self.edit_plan_attr(new_adoptee_parent_rope, star=adoptee_plan.star)
                 self.del_plan_obj(adoptee_rope)
 
             if bundling:
-                self.edit_plan_attr(kid_rope, mass=mass_sum)
+                self.edit_plan_attr(kid_rope, star=star_sum)
 
         if create_missing_plans:
             self._create_missing_plans(rope=kid_rope)
@@ -690,14 +690,14 @@ class BelieverUnit:
         for _awardlink_awardee_title in _awardlinks_to_delete:
             x_plan.awardlinks.pop(_awardlink_awardee_title)
         if x_plan.laborunit is not None:
-            _laborlinks_to_delete = [
-                _laborlink_labor_title
-                for _laborlink_labor_title in x_plan.laborunit._laborlinks
-                if self.get_partnerunit_group_titles_dict().get(_laborlink_labor_title)
+            _partys_to_delete = [
+                _partyunit_party_title
+                for _partyunit_party_title in x_plan.laborunit._partys
+                if self.get_partnerunit_group_titles_dict().get(_partyunit_party_title)
                 is None
             ]
-            for _laborlink_labor_title in _laborlinks_to_delete:
-                x_plan.laborunit.del_laborlink(_laborlink_labor_title)
+            for _partyunit_party_title in _partys_to_delete:
+                x_plan.laborunit.del_partyunit(_partyunit_party_title)
         return x_plan
 
     def _create_missing_plans(self, rope):
@@ -810,7 +810,7 @@ class BelieverUnit:
     def edit_plan_attr(
         self,
         plan_rope: RopeTerm,
-        mass: int = None,
+        star: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
         reason_context: RopeTerm = None,
@@ -848,7 +848,7 @@ class BelieverUnit:
                     raise healerlink_group_title_Exception(exception_str)
 
         x_planattrholder = planattrholder_shop(
-            mass=mass,
+            star=star,
             uid=uid,
             reason=reason,
             reason_context=reason_context,
@@ -1123,10 +1123,10 @@ class BelieverUnit:
 
             if (
                 not x_plan.is_kidless()
-                and x_plan.get_kids_mass_sum() == 0
-                and x_plan.mass != 0
+                and x_plan.get_kids_star_sum() == 0
+                and x_plan.star != 0
             ):
-                self._offtrack_kids_mass_set.add(x_plan.get_plan_rope())
+                self._offtrack_kids_star_set.add(x_plan.get_plan_rope())
 
     def _set_groupunit_partnerunit_funds(self, keep_exceptions):
         for x_plan in self._plan_dict.values():
@@ -1238,7 +1238,7 @@ class BelieverUnit:
         self._plan_dict = {self.planroot.get_plan_rope(): self.planroot}
         self._rational = False
         self._tree_traverse_count = 0
-        self._offtrack_kids_mass_set = set()
+        self._offtrack_kids_star_set = set()
         self._reason_contexts = set()
         self._range_inheritors = {}
         self._keeps_justified = True
@@ -1300,7 +1300,7 @@ class BelieverUnit:
         while cache_plan_list != []:
             parent_plan = cache_plan_list.pop()
             kids_plans = parent_plan._kids.items()
-            x_ledger = {x_rope: plan_kid.mass for x_rope, plan_kid in kids_plans}
+            x_ledger = {x_rope: plan_kid.star for x_rope, plan_kid in kids_plans}
             parent_fund_num = parent_plan._fund_cease - parent_plan._fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
 
@@ -1406,17 +1406,17 @@ class BelieverUnit:
         x_dict = {}
         if self.planroot.factunits is not None:
             for fact_rope, fact_obj in self.planroot.factunits.items():
-                x_dict[fact_rope] = fact_obj.get_dict()
+                x_dict[fact_rope] = fact_obj.to_dict()
         return x_dict
 
     def get_partnerunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
         if self.partners is not None:
             for partner_name, partner_obj in self.partners.items():
-                x_dict[partner_name] = partner_obj.get_dict(all_attrs)
+                x_dict[partner_name] = partner_obj.to_dict(all_attrs)
         return x_dict
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         x_dict = {
             "partners": self.get_partnerunits_dict(),
             "tally": self.tally,
@@ -1428,7 +1428,7 @@ class BelieverUnit:
             "belief_label": self.belief_label,
             "max_tree_traverse": self.max_tree_traverse,
             "knot": self.knot,
-            "planroot": self.planroot.get_dict(),
+            "planroot": self.planroot.to_dict(),
         }
         if self.credor_respect is not None:
             x_dict["credor_respect"] = self.credor_respect
@@ -1440,7 +1440,7 @@ class BelieverUnit:
         return x_dict
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
     def set_dominate_task_plan(self, plan_kid: PlanUnit):
         plan_kid.task = True
@@ -1452,9 +1452,9 @@ class BelieverUnit:
         )
 
     def set_offtrack_fund(self) -> float:
-        mass_set = self._offtrack_kids_mass_set
+        star_set = self._offtrack_kids_star_set
         self._offtrack_fund = sum(
-            self.get_plan_obj(x_ropeterm).get_fund_share() for x_ropeterm in mass_set
+            self.get_plan_obj(x_ropeterm).get_fund_share() for x_ropeterm in star_set
         )
 
 
@@ -1489,7 +1489,7 @@ def believerunit_shop(
         _keeps_justified=get_False_if_None(),
         _keeps_buildable=get_False_if_None(),
         _sum_healerlink_share=get_0_if_None(),
-        _offtrack_kids_mass_set=set(),
+        _offtrack_kids_star_set=set(),
         _reason_contexts=set(),
         _range_inheritors={},
     )
@@ -1553,7 +1553,7 @@ def create_planroot_from_believer_dict(x_believer: BelieverUnit, believer_dict: 
         parent_rope="",
         _level=0,
         _uid=get_obj_from_plan_dict(planroot_dict, "_uid"),
-        mass=get_obj_from_plan_dict(planroot_dict, "mass"),
+        star=get_obj_from_plan_dict(planroot_dict, "star"),
         begin=get_obj_from_plan_dict(planroot_dict, "begin"),
         close=get_obj_from_plan_dict(planroot_dict, "close"),
         numor=get_obj_from_plan_dict(planroot_dict, "numor"),
@@ -1595,7 +1595,7 @@ def create_planroot_kids_from_dict(x_believer: BelieverUnit, planroot_dict: dict
             to_evaluate_plan_dicts.append(kid_dict)
         x_plankid = planunit_shop(
             plan_label=get_obj_from_plan_dict(plan_dict, "plan_label"),
-            mass=get_obj_from_plan_dict(plan_dict, "mass"),
+            star=get_obj_from_plan_dict(plan_dict, "star"),
             _uid=get_obj_from_plan_dict(plan_dict, "_uid"),
             begin=get_obj_from_plan_dict(plan_dict, "begin"),
             close=get_obj_from_plan_dict(plan_dict, "close"),

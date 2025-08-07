@@ -412,3 +412,51 @@ def get_max_key(x_dict: dict) -> any:
         return None
     max_value = max(x_dict.values())  # Find max value
     return min((k for k in x_dict if x_dict[k] == max_value), key=lambda x: x)
+
+
+def mark_keys(
+    x_dict: dict, marking_key: str, mark_text: str = None, max_depth=None, _depth=0
+):
+    """
+    Recursively renames keys in nested dictionaries if their value is a dict containing `marking_key`.
+    Appends ' (MARK)' to the key name and removes the `marking_key` from the inner dict.
+
+    Args:
+        x_dict (dict): The dictionary to process.
+        marking_key (str): The key to detect in nested dictionaries.
+        mark_text (str or None): Optional override for the mark text. Defaults to value of `marking_key`.
+        max_depth (int or None): How deep to go. None means unlimited.
+        _depth (int): Used internally for recursion tracking.
+
+    Returns:
+        dict: The transformed dictionary.
+    """
+    if not isinstance(x_dict, dict):
+        return x_dict  # Safety check, shouldn't happen if inputs are valid
+
+    new_dict = {}
+
+    for key, value in x_dict.items():
+        new_key = key
+        new_value = value
+
+        if isinstance(value, dict):
+            if marking_key in value:
+                if not mark_text:
+                    new_key = f"{key} ({value.get(marking_key)})"
+                else:
+                    new_key = f"{key} ({mark_text})"
+
+                value = {k: v for k, v in value.items() if k != marking_key}
+
+            # Recurse if within depth
+            if max_depth is None or _depth + 1 < max_depth:
+                new_value = mark_keys(
+                    value, marking_key, mark_text, max_depth, _depth + 1
+                )
+            else:
+                new_value = value
+
+        new_dict[new_key] = new_value
+
+    return new_dict

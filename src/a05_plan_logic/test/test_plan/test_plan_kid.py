@@ -171,7 +171,7 @@ def test_PlanUnit_del_kid_CorrectModifiesAttr():
     assert len(nation_plan._kids) == 1
 
 
-def test_PlanUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
+def test_PlanUnit_get_kids_star_sum_ReturnsObj_Scenario0():
     # ESTABLISH
     nation_str = "nation"
     nation_rope = create_rope(root_label(), nation_str)
@@ -184,28 +184,28 @@ def test_PlanUnit_get_kids_mass_sum_ReturnsObj_Scenario0():
     nation_plan.add_kid(france_plan)
 
     # WHEN / THEN
-    assert nation_plan.get_kids_mass_sum() == 2
+    assert nation_plan.get_kids_star_sum() == 2
 
 
-def test_PlanUnit_get_kids_mass_sum_ReturnsObj_Scenario1():
+def test_PlanUnit_get_kids_star_sum_ReturnsObj_Scenario1():
     # ESTABLISH
     nation_str = "nation"
     nation_rope = create_rope(root_label(), nation_str)
     nation_plan = planunit_shop(nation_str, parent_rope=root_label())
     usa_str = "USA"
-    usa_plan = planunit_shop(usa_str, mass=0, parent_rope=nation_rope)
+    usa_plan = planunit_shop(usa_str, star=0, parent_rope=nation_rope)
     nation_plan.add_kid(usa_plan)
     france_str = "France"
-    france_plan = planunit_shop(france_str, mass=0, parent_rope=nation_rope)
+    france_plan = planunit_shop(france_str, star=0, parent_rope=nation_rope)
     nation_plan.add_kid(france_plan)
 
     # WHEN / THEN
-    assert nation_plan.get_kids_mass_sum() == 0
+    assert nation_plan.get_kids_star_sum() == 0
 
     # WHEN
     france_str = "France"
-    france_plan = planunit_shop(france_str, mass=3, parent_rope=nation_rope)
+    france_plan = planunit_shop(france_str, star=3, parent_rope=nation_rope)
     nation_plan.add_kid(france_plan)
 
     # WHEN / THEN
-    assert nation_plan.get_kids_mass_sum() == 3
+    assert nation_plan.get_kids_star_sum() == 3

@@ -38,7 +38,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     sue_pidginunit = pidginunit_shop(sue_str)
 
     # WHEN
-    sue_dict = sue_pidginunit.get_dict()
+    sue_dict = sue_pidginunit.to_dict()
 
     # THEN
     print(sue_dict)
@@ -48,10 +48,10 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict.get(otx_knot_str()) == default_knot_if_None()
     assert sue_dict.get(inx_knot_str()) == default_knot_if_None()
     assert sue_dict.get(unknown_str_str()) == default_unknown_str_if_None()
-    sue_namemap = sue_pidginunit.namemap.get_dict()
-    sue_titlemap = sue_pidginunit.titlemap.get_dict()
-    sue_labelmap = sue_pidginunit.labelmap.get_dict()
-    sue_ropemap = sue_pidginunit.ropemap.get_dict()
+    sue_namemap = sue_pidginunit.namemap.to_dict()
+    sue_titlemap = sue_pidginunit.titlemap.to_dict()
+    sue_labelmap = sue_pidginunit.labelmap.to_dict()
+    sue_ropemap = sue_pidginunit.ropemap.to_dict()
     assert sue_dict.get("namemap") == _get_rid_of_pidgin_core_keys(sue_namemap)
     assert sue_dict.get("titlemap") == _get_rid_of_pidgin_core_keys(sue_titlemap)
     assert sue_dict.get("labelmap") == _get_rid_of_pidgin_core_keys(sue_labelmap)
@@ -73,17 +73,17 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
     sue_pidginunit.set_ropemap(get_slash_ropemap())
 
     # WHEN
-    sue_dict = sue_pidginunit.get_dict()
+    sue_dict = sue_pidginunit.to_dict()
 
     # THEN
     assert sue_dict.get(face_name_str()) == sue_str
     assert sue_dict.get(otx_knot_str()) == slash_otx_knot
     assert sue_dict.get(inx_knot_str()) == colon_inx_knot
     assert sue_dict.get(unknown_str_str()) == x_unknown_str
-    sue_namemap = sue_pidginunit.namemap.get_dict()
-    sue_titlemap = sue_pidginunit.titlemap.get_dict()
-    sue_labelmap = sue_pidginunit.labelmap.get_dict()
-    sue_ropemap = sue_pidginunit.ropemap.get_dict()
+    sue_namemap = sue_pidginunit.namemap.to_dict()
+    sue_titlemap = sue_pidginunit.titlemap.to_dict()
+    sue_labelmap = sue_pidginunit.labelmap.to_dict()
+    sue_ropemap = sue_pidginunit.ropemap.to_dict()
     assert sue_dict.get("namemap") == _get_rid_of_pidgin_core_keys(sue_namemap)
     assert sue_dict.get("titlemap") == _get_rid_of_pidgin_core_keys(sue_titlemap)
     assert sue_dict.get("labelmap") == _get_rid_of_pidgin_core_keys(sue_labelmap)
@@ -128,7 +128,7 @@ def test_get_pidginunit_from_dict_ReturnsObj():
     sue_pidginunit.set_titlemap(get_slash_titlemap())
 
     # WHEN
-    gen_pidginunit = get_pidginunit_from_dict(sue_pidginunit.get_dict())
+    gen_pidginunit = get_pidginunit_from_dict(sue_pidginunit.to_dict())
 
     # THEN
     assert gen_pidginunit
@@ -170,6 +170,6 @@ def test_get_pidginunit_from_json_ReturnsObj():
     assert gen_pidginunit.otx_knot == slash_otx_knot
     assert gen_pidginunit.inx_knot == colon_inx_knot
     assert gen_pidginunit.unknown_str == x_unknown_str
-    assert gen_pidginunit.namemap.get_dict() == get_slash_namemap().get_dict()
-    assert gen_pidginunit.titlemap.get_dict() == get_slash_titlemap().get_dict()
-    assert gen_pidginunit.ropemap.get_dict() == get_slash_ropemap().get_dict()
+    assert gen_pidginunit.namemap.to_dict() == get_slash_namemap().to_dict()
+    assert gen_pidginunit.titlemap.to_dict() == get_slash_titlemap().to_dict()
+    assert gen_pidginunit.ropemap.to_dict() == get_slash_ropemap().to_dict()

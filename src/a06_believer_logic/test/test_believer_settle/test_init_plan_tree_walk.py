@@ -155,7 +155,7 @@ def test_BelieverUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     casa_rope = sue_believer.make_l1_rope("casa")
     cleaning_rope = sue_believer.make_rope(casa_rope, "cleaning")
     clean_cookery_str = "clean_cookery"
-    clean_cookery_plan = planunit_shop(clean_cookery_str, mass=40, task=True)
+    clean_cookery_plan = planunit_shop(clean_cookery_str, star=40, task=True)
 
     buildings_str = "buildings"
     buildings_rope = sue_believer.make_l1_rope(buildings_str)

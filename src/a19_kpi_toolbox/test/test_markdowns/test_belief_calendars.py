@@ -49,7 +49,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromBeliefUnitJSON(
     a23_belief_path = create_belief_json_path(belief_mstr_dir, a23_str)
     a23_beliefunit = beliefunit_shop(a23_str, belief_mstr_dir)
     assert a23_beliefunit.timeline == timelineunit_shop(get_creg_config())
-    save_json(a23_belief_path, None, a23_beliefunit.get_dict())
+    save_json(a23_belief_path, None, a23_beliefunit.to_dict())
     a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")
     print(f"{a23_calendar_md_path=}")
     assert not os_path_exists(a23_calendar_md_path)

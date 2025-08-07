@@ -149,7 +149,7 @@ class CellUnit:
         self.set_believeradjust_facts()
         self._set_partner_mandate_ledger()
 
-    def get_dict(self) -> dict[str, str | dict]:
+    def to_dict(self) -> dict[str, str | dict]:
         if not self.believeradjust:
             self.believeradjust = believerunit_shop(self.get_cell_believer_name())
         return {
@@ -160,14 +160,14 @@ class CellUnit:
             "penny": self.penny,
             "quota": self.quota,
             "mandate": self.mandate,
-            "believeradjust": self.believeradjust.get_dict(),
+            "believeradjust": self.believeradjust.to_dict(),
             "believerevent_facts": get_dict_from_factunits(self.believerevent_facts),
             "found_facts": get_dict_from_factunits(self.found_facts),
             "boss_facts": get_dict_from_factunits(self.boss_facts),
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def cellunit_shop(

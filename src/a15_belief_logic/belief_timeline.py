@@ -27,7 +27,7 @@ def get_belief_believertimelinepoint(beliefunit: BeliefUnit) -> BelieverTimeline
         timeline_label=beliefunit.timeline.timeline_label,
         knot=beliefunit.knot,
     )
-    belief_timeline_config = beliefunit.timeline.get_dict()
+    belief_timeline_config = beliefunit.timeline.to_dict()
     # create timeline plan from beliefunit.timeline_config
     add_newtimeline_planunit(x_believerunit, belief_timeline_config)
     x_believertimelinepoint = believertimelinepoint_shop(

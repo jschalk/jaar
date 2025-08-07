@@ -1,6 +1,9 @@
 from flask import Flask, jsonify, request
 from flask_cors import CORS
+from src.a05_plan_logic.plan import PlanUnit
+from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a22_plan_viewer.planview_filters import (
+    get_planunits_list,
     plan_awardees,
     plan_facts,
     plan_fund,
@@ -43,30 +46,40 @@ def process_json():
             raise ValueError("Missing 'data' field in request")
 
         if mode == "Plan Label":
-            plan_tree_display_dict = plan_label(data)
+            plan_tree_display_dict = plan_label(get_planunits_list(data))
         elif mode == "Plan Tasks":
-            plan_tree_display_dict = plan_tasks(data)
+            plan_tree_display_dict = plan_tasks(get_planunits_list(data))
         elif mode == "Plan Fund":
-            plan_tree_display_dict = plan_fund(data)
+            plan_tree_display_dict = plan_fund(get_planunits_list(data))
         elif mode == "Plan Awardees":
-            plan_tree_display_dict = plan_awardees(data)
+            plan_tree_display_dict = plan_awardees(get_planunits_list(data))
         elif mode == "Plan Reasons":
-            plan_tree_display_dict = plan_reasons(data)
+            plan_tree_display_dict = plan_reasons(get_planunits_list(data))
         elif mode == "Plan Facts":
-            plan_tree_display_dict = plan_facts(data)
+            plan_tree_display_dict = plan_facts(get_planunits_list(data))
         elif mode == "Plan Time":
-            plan_tree_display_dict = plan_time(data)
+            plan_tree_display_dict = plan_time(get_planunits_list(data))
         elif mode == "static_dict_testing":
             plan_tree_display_dict = {"amy23": {"x1": {}, "x2": {}, "x3": {"x4": {}}}}
         else:
             plan_tree_display_dict = {"Mode not loaded correctly": "Contact support"}
 
+        # TODO replace hardcoded "Sue" with believerunit object reference
         return jsonify(
             {"mode": mode, "result": plan_tree_display_dict, "believer_name": "Sue"}
         )
 
     except Exception as e:
         return jsonify({"error": str(e)}), 400
+
+
+@planviewer.route("/set_flask_fund_pool", methods=["POST"])
+def set_flask_fund_pool():
+    data = request.get_json()
+    flask_fund_pool = data.get("number")
+
+    # You can do whatever you want with the number here.
+    return jsonify({"status": "success", "received": flask_fund_pool})
 
 
 if __name__ == "__main__":

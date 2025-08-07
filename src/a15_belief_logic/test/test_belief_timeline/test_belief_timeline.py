@@ -39,7 +39,7 @@ def test_get_belief_believertimelinepoint_ReturnsObj_Scenario0_Empty_offi_time()
     assert fay_believerunit.respect_bit == fay_beliefunit.respect_bit
     assert fay_believerunit.penny == fay_beliefunit.penny
     assert fay_believertimelinepoint._month == "March"
-    assert fay_believertimelinepoint._hour == "0-12am"
+    assert fay_believertimelinepoint._hour == "12am"
     assert fay_believertimelinepoint._minute == 0
     assert fay_believertimelinepoint._monthday == 1
     assert fay_believertimelinepoint._c400_number == 0
@@ -81,7 +81,7 @@ def test_get_belief_believertimelinepoint_ReturnsObj_Scenario1_BeliefUnit_NonDef
     assert fay_believerunit.respect_bit == fay_beliefunit.respect_bit
     assert fay_believerunit.penny == fay_beliefunit.penny
     assert fay_believertimelinepoint._month == "March"
-    assert fay_believertimelinepoint._hour == "0-12am"
+    assert fay_believertimelinepoint._hour == "12am"
     assert fay_believertimelinepoint._minute == 0
     assert fay_believertimelinepoint._monthday == 1
     assert fay_believertimelinepoint._c400_number == 0

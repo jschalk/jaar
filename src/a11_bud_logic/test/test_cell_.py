@@ -63,7 +63,7 @@ def test_cellunit_shop_ReturnsObj_Scenario0_WithoutParameters():
     assert x_cellunit.penny == 1
     assert x_cellunit.quota == CELLNODE_QUOTA_DEFAULT
     assert x_cellunit.mandate == CELLNODE_QUOTA_DEFAULT
-    assert x_cellunit.believeradjust.get_dict() == believerunit_shop(bob_str).get_dict()
+    assert x_cellunit.believeradjust.to_dict() == believerunit_shop(bob_str).to_dict()
     assert x_cellunit.believerevent_facts == {}
     assert x_cellunit._reason_contexts == set()
     assert x_cellunit._partner_mandate_ledger == {}
@@ -241,9 +241,9 @@ def test_CellUnit_eval_believerevent_SetsAttr_Scenario1():
     expected_adjust_believer.settle_believer()
     expected_planroot = expected_adjust_believer.planroot
     generated_planroot = yao_cellunit.believeradjust.planroot
-    assert yao_cellunit.believeradjust.get_dict() != yao_believer.get_dict()
-    assert generated_planroot.get_dict() == expected_planroot.get_dict()
-    assert yao_cellunit.believeradjust.get_dict() == expected_adjust_believer.get_dict()
+    assert yao_cellunit.believeradjust.to_dict() != yao_believer.to_dict()
+    assert generated_planroot.to_dict() == expected_planroot.to_dict()
+    assert yao_cellunit.believeradjust.to_dict() == expected_adjust_believer.to_dict()
 
 
 def test_CellUnit_get_believerevents_credit_ledger_ReturnsObj_Scenario0_NoBeliever():
@@ -312,7 +312,7 @@ def test_CellUnit_set_found_facts_from_dict_SetsAttr():
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     assert yao_cellunit.found_facts == {}
 
@@ -332,7 +332,7 @@ def test_CellUnit_set_believerevent_facts_from_dict_SetsAttr():
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     assert yao_cellunit.believerevent_facts == {}
 
@@ -352,7 +352,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario0_found_facts
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     yao_cellunit.boss_facts = "testing_str"
@@ -377,7 +377,7 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario1_believereve
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_believerevent_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.believerevent_facts) == 1
@@ -403,8 +403,8 @@ def test_CellUnit_set_boss_facts_from_other_facts_SetsAttr_Scenario2_believereve
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_believerevent_fact_dict = {sky_fact.fact_context: sky_fact.get_dict()}
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_believerevent_fact_dict = {sky_fact.fact_context: sky_fact.to_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_believerevent_facts_from_dict(yao_believerevent_fact_dict)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
@@ -432,7 +432,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario0_found_facts_o
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.found_facts) == 1
@@ -456,7 +456,7 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario1_believerevent
     yao_believer.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
     )
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_believerevent_facts_from_dict(yao_found_fact_dict)
     assert len(yao_cellunit.believerevent_facts) == 1
@@ -485,8 +485,8 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario2_believerevent
     run_rope = yao_believer.make_l1_rope("run")
     run_fact = factunit_shop(run_rope, run_rope)
     run_facts = {run_fact.fact_context: run_fact}
-    yao_believerevent_fact_dict = {sky_fact.fact_context: sky_fact.get_dict()}
-    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.get_dict()}
+    yao_believerevent_fact_dict = {sky_fact.fact_context: sky_fact.to_dict()}
+    yao_found_fact_dict = {clean_fact.fact_context: clean_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_believerevent_facts_from_dict(yao_believerevent_fact_dict)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)
@@ -519,8 +519,8 @@ def test_CellUnit_add_other_facts_to_boss_facts_SetsAttr_Scenario3_boss_facts_Ar
     fast_fact = factunit_shop(run_rope, fast_rope)
     run_facts = {run_fact.fact_context: run_fact}
 
-    yao_believerevent_fact_dict = {fast_fact.fact_context: fast_fact.get_dict()}
-    yao_found_fact_dict = {fast_fact.fact_context: fast_fact.get_dict()}
+    yao_believerevent_fact_dict = {fast_fact.fact_context: fast_fact.to_dict()}
+    yao_found_fact_dict = {fast_fact.fact_context: fast_fact.to_dict()}
     yao_cellunit = cellunit_shop(yao_str)
     yao_cellunit.set_believerevent_facts_from_dict(yao_believerevent_fact_dict)
     yao_cellunit.set_found_facts_from_dict(yao_found_fact_dict)

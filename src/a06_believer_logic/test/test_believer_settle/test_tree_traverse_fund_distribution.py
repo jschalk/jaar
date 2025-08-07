@@ -58,25 +58,25 @@ def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenar
 
     auto_str = "auto"
     auto_rope = yao_believerunit.make_l1_rope(auto_str)
-    auto_plan = planunit_shop(auto_str, mass=10)
+    auto_plan = planunit_shop(auto_str, star=10)
     yao_believerunit.set_l1_plan(auto_plan)
 
     carn_str = "carn"
     carn_rope = yao_believerunit.make_l1_rope(carn_str)
-    carn_plan = planunit_shop(carn_str, mass=60)
+    carn_plan = planunit_shop(carn_str, star=60)
     yao_believerunit.set_l1_plan(carn_plan)
     lamb_str = "lambs"
     lamb_rope = yao_believerunit.make_rope(carn_rope, lamb_str)
-    lamb_plan = planunit_shop(lamb_str, mass=1)
+    lamb_plan = planunit_shop(lamb_str, star=1)
     yao_believerunit.set_plan(lamb_plan, parent_rope=carn_rope)
     duck_str = "ducks"
     duck_rope = yao_believerunit.make_rope(carn_rope, duck_str)
-    duck_plan = planunit_shop(duck_str, mass=2)
+    duck_plan = planunit_shop(duck_str, star=2)
     yao_believerunit.set_plan(duck_plan, parent_rope=carn_rope)
 
     coal_str = "coal"
     coal_rope = yao_believerunit.make_l1_rope(coal_str)
-    coal_plan = planunit_shop(coal_str, mass=30)
+    coal_plan = planunit_shop(coal_str, star=30)
     yao_believerunit.set_l1_plan(coal_plan)
 
     assert yao_believerunit.planroot._fund_onset is None
@@ -136,25 +136,25 @@ def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenar
 
     auto_str = "auto"
     auto_rope = yao_believerunit.make_l1_rope(auto_str)
-    auto_plan = planunit_shop(auto_str, mass=10)
+    auto_plan = planunit_shop(auto_str, star=10)
     yao_believerunit.set_l1_plan(auto_plan)
 
     yarn_str = "yarn"
     yarn_rope = yao_believerunit.make_l1_rope(yarn_str)
-    yarn_plan = planunit_shop(yarn_str, mass=60)
+    yarn_plan = planunit_shop(yarn_str, star=60)
     yao_believerunit.set_l1_plan(yarn_plan)
     lamb_str = "lambs"
     lamb_rope = yao_believerunit.make_rope(yarn_rope, lamb_str)
-    lamb_plan = planunit_shop(lamb_str, mass=1)
+    lamb_plan = planunit_shop(lamb_str, star=1)
     yao_believerunit.set_plan(lamb_plan, parent_rope=yarn_rope)
     duck_str = "ducks"
     duck_rope = yao_believerunit.make_rope(yarn_rope, duck_str)
-    duck_plan = planunit_shop(duck_str, mass=2)
+    duck_plan = planunit_shop(duck_str, star=2)
     yao_believerunit.set_plan(duck_plan, parent_rope=yarn_rope)
 
     coal_str = "coal"
     coal_rope = yao_believerunit.make_l1_rope(coal_str)
-    coal_plan = planunit_shop(coal_str, mass=30)
+    coal_plan = planunit_shop(coal_str, star=30)
     yao_believerunit.set_l1_plan(coal_plan)
 
     assert yao_believerunit.planroot._fund_onset is None
@@ -208,7 +208,7 @@ def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenar
     assert lamb_after._fund_cease == default_fund_pool() * 1.0
 
 
-def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massScenario0():
+def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -221,14 +221,14 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massSc
 
     status_str = "cleaniness status"
     status_rope = sue_believer.make_rope(casa_rope, status_str)
-    sue_believer.set_plan(planunit_shop(status_str, mass=0), casa_rope)
+    sue_believer.set_plan(planunit_shop(status_str, star=0), casa_rope)
 
     non_str = "not clean"
     yes_str = "yes clean"
     non_rope = sue_believer.make_rope(status_rope, non_str)
     yes_rope = sue_believer.make_rope(status_rope, yes_str)
     sue_believer.set_plan(planunit_shop(non_str), status_rope)
-    sue_believer.set_plan(planunit_shop(yes_str, mass=2), status_rope)
+    sue_believer.set_plan(planunit_shop(yes_str, star=2), status_rope)
 
     assert sue_believer.get_plan_obj(casa_rope)._fund_ratio is None
     assert sue_believer.get_plan_obj(floor_rope)._fund_ratio is None
@@ -248,7 +248,7 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massSc
     assert sue_believer.get_plan_obj(yes_rope)._fund_ratio == 0.0
 
 
-def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massScenario1():
+def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -263,7 +263,7 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massSc
     sue_believer.set_plan(planunit_shop(status_str), casa_rope)
 
     status_plan = sue_believer.get_plan_obj(status_rope)
-    print(f"{status_plan.mass=}")
+    print(f"{status_plan.star=}")
     print("This should raise error: 'Planunit._'")
 
     clean_str = "clean"
@@ -272,9 +272,9 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massSc
     mod_str = "moderately"
     dirty_str = "dirty"
 
-    sue_believer.set_plan(planunit_shop(clean_str, mass=0), status_rope)
+    sue_believer.set_plan(planunit_shop(clean_str, star=0), status_rope)
     sue_believer.set_plan(planunit_shop(very_str), clean_rope)
-    sue_believer.set_plan(planunit_shop(mod_str, mass=2), clean_rope)
+    sue_believer.set_plan(planunit_shop(mod_str, star=2), clean_rope)
     sue_believer.set_plan(planunit_shop(dirty_str), clean_rope)
 
     very_rope = sue_believer.make_rope(clean_rope, very_str)
@@ -302,35 +302,35 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_massSc
     assert sue_believer.get_plan_obj(dirty_rope)._fund_ratio == 0
 
 
-def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNoMassDistributeFundsToPartnerUnits_scenario0():
+def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFundsToPartnerUnits_scenario0():
     sue_believerunit = believerunit_shop("Sue")
     yao_str = "Yao"
     sue_believerunit.add_partnerunit(yao_str)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-    casa_plan = planunit_shop(casa_str, mass=1)
+    casa_plan = planunit_shop(casa_str, star=1)
 
     swim_str = "swimming"
     swim_rope = sue_believerunit.make_rope(casa_rope, swim_str)
-    swim_plan = planunit_shop(swim_str, mass=8)
+    swim_plan = planunit_shop(swim_str, star=8)
 
     clean_str = "cleaning"
     clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
-    clean_plan = planunit_shop(clean_str, mass=2)
+    clean_plan = planunit_shop(clean_str, star=2)
     sue_believerunit.set_plan(planunit_shop(clean_str), casa_rope)
 
     sweep_str = "sweep"
     sweep_rope = sue_believerunit.make_rope(clean_rope, sweep_str)
-    sweep_plan = planunit_shop(sweep_str, mass=0)
+    sweep_plan = planunit_shop(sweep_str, star=0)
     vaccum_str = "vaccum"
     vaccum_rope = sue_believerunit.make_rope(clean_rope, vaccum_str)
-    vaccum_plan = planunit_shop(vaccum_str, mass=0)
+    vaccum_plan = planunit_shop(vaccum_str, star=0)
 
     sue_believerunit.set_l1_plan(casa_plan)
     sue_believerunit.set_plan(swim_plan, casa_rope)
     sue_believerunit.set_plan(clean_plan, casa_rope)
-    sue_believerunit.set_plan(sweep_plan, clean_rope)  # _mass=0
-    sue_believerunit.set_plan(vaccum_plan, clean_rope)  # _mass=0
+    sue_believerunit.set_plan(sweep_plan, clean_rope)  # _star=0
+    sue_believerunit.set_plan(vaccum_plan, clean_rope)  # _star=0
 
     assert sue_believerunit.get_plan_obj(casa_rope)._fund_ratio is None
     assert sue_believerunit.get_plan_obj(swim_rope)._fund_ratio is None
@@ -637,7 +637,7 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGr
     swim_plan.set_awardlink(xio_awardlink)
 
     # no awardlinks attached to this one
-    x_believer.set_l1_plan(planunit_shop("hunt", mass=3))
+    x_believer.set_l1_plan(planunit_shop("hunt", star=3))
 
     # WHEN
     x_believer.settle_believer()
@@ -961,7 +961,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPartGroupedLWPartnerUnitBelie
 
     # no awardlinks attached to this one
     hunt_str = "hunt"
-    yao_believer.set_l1_plan(planunit_shop(hunt_str, mass=3))
+    yao_believer.set_l1_plan(planunit_shop(hunt_str, star=3))
 
     # WHEN
     yao_believer.settle_believer()

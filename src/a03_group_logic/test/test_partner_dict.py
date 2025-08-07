@@ -63,7 +63,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     bob_partnerunit.set_membership(membership_shop(run_str))
 
     # WHEN
-    x_dict = bob_partnerunit.get_dict()
+    x_dict = bob_partnerunit.to_dict()
 
     # THEN
     bl_dict = x_dict.get("_memberships")
@@ -127,7 +127,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     print(f"{bob_str}")
 
     # WHEN
-    x_dict = bob_partnerunit.get_dict(all_attrs=True)
+    x_dict = bob_partnerunit.to_dict(all_attrs=True)
 
     # THEN
     print(f"{x_dict=}")
@@ -156,7 +156,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_Va
     assert bob_partnerunit._inallocable_partner_debt_points == 0
 
     # WHEN
-    x_dict = bob_partnerunit.get_dict(all_attrs=True)
+    x_dict = bob_partnerunit.to_dict(all_attrs=True)
 
     # THEN
     x_irrational_partner_debt_points = "_irrational_partner_debt_points"
@@ -180,7 +180,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_Va
     )
 
     # WHEN
-    x_dict = bob_partnerunit.get_dict(all_attrs=True)
+    x_dict = bob_partnerunit.to_dict(all_attrs=True)
 
     # THEN
     x_irrational_partner_debt_points = "_irrational_partner_debt_points"
@@ -204,7 +204,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_Va
     bob_partnerunit._inallocable_partner_debt_points = None
 
     # WHEN
-    x_dict = bob_partnerunit.get_dict(all_attrs=True)
+    x_dict = bob_partnerunit.to_dict(all_attrs=True)
 
     # THEN
     x_irrational_partner_debt_points = "_irrational_partner_debt_points"
@@ -219,7 +219,7 @@ def test_partnerunit_get_from_dict_ReturnsObjWith_knot():
     yao_str = ",Yao"
     slash_str = "/"
     before_yao_partnerunit = partnerunit_shop(yao_str, knot=slash_str)
-    yao_dict = before_yao_partnerunit.get_dict()
+    yao_dict = before_yao_partnerunit.to_dict()
 
     # WHEN
     after_yao_partnerunit = partnerunit_get_from_dict(yao_dict, slash_str)
@@ -248,7 +248,7 @@ def test_partnerunit_get_from_dict_Returns_memberships():
     )
     before_yao_partnerunit.set_membership(ohio_membership)
     before_yao_partnerunit.set_membership(iowa_membership)
-    yao_dict = before_yao_partnerunit.get_dict()
+    yao_dict = before_yao_partnerunit.to_dict()
 
     # WHEN
     after_yao_partnerunit = partnerunit_get_from_dict(yao_dict, slash_str)
@@ -264,7 +264,7 @@ def test_partnerunits_get_from_dict_ReturnsObjWith_knot():
     yao_str = ",Yao"
     slash_str = "/"
     yao_partnerunit = partnerunit_shop(yao_str, knot=slash_str)
-    yao_dict = yao_partnerunit.get_dict()
+    yao_dict = yao_partnerunit.to_dict()
     x_partnerunits_dict = {yao_str: yao_dict}
 
     # WHEN

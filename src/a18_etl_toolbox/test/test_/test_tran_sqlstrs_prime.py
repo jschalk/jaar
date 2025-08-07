@@ -14,7 +14,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -81,8 +81,8 @@ BELIEVER_PRIME_TABLENAMES = {
     f"{believer_plan_reason_caseunit_str()}_sound_put_raw": "BLRPREM_PUT_RAW",
     f"{believer_plan_reasonunit_str()}_sound_put_agg": "BLRREAS_PUT_AGG",
     f"{believer_plan_reasonunit_str()}_sound_put_raw": "BLRREAS_PUT_RAW",
-    f"{believer_plan_laborlink_str()}_sound_put_agg": "BLRLABO_PUT_AGG",
-    f"{believer_plan_laborlink_str()}_sound_put_raw": "BLRLABO_PUT_RAW",
+    f"{believer_plan_partyunit_str()}_sound_put_agg": "BLRLABO_PUT_AGG",
+    f"{believer_plan_partyunit_str()}_sound_put_raw": "BLRLABO_PUT_RAW",
     f"{believer_planunit_str()}_sound_put_agg": "BLRPLAN_PUT_AGG",
     f"{believer_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
     f"{believerunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
@@ -101,8 +101,8 @@ BELIEVER_PRIME_TABLENAMES = {
     f"{believer_plan_reason_caseunit_str()}_sound_del_raw": "BLRPREM_DEL_RAW",
     f"{believer_plan_reasonunit_str()}_sound_del_agg": "BLRREAS_DEL_AGG",
     f"{believer_plan_reasonunit_str()}_sound_del_raw": "BLRREAS_DEL_RAW",
-    f"{believer_plan_laborlink_str()}_sound_del_agg": "BLRLABO_DEL_AGG",
-    f"{believer_plan_laborlink_str()}_sound_del_raw": "BLRLABO_DEL_RAW",
+    f"{believer_plan_partyunit_str()}_sound_del_agg": "BLRLABO_DEL_AGG",
+    f"{believer_plan_partyunit_str()}_sound_del_raw": "BLRLABO_DEL_RAW",
     f"{believer_planunit_str()}_sound_del_agg": "BLRPLAN_DEL_AGG",
     f"{believer_planunit_str()}_sound_del_raw": "BLRPLAN_DEL_RAW",
     f"{believerunit_str()}_sound_del_agg": "BLRUNIT_DEL_AGG",
@@ -438,17 +438,18 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBelieverDimens():
         expected_v_del_raw_sqlstr = create_believer_voice_del_raw_table_sqlstr(x_dimen)
         expected_v_del_agg_sqlstr = create_believer_voice_del_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
-        print(f"{x_dimen=} {abbv7=}")
-        # print(f'CREATE_{abbv7}_SOUND_PUT_RAW_STR= "{expected_s_put_raw_sqlstr}"')
-        # print(f'CREATE_{abbv7}_SOUND_PUT_AGG_STR= "{expected_s_put_agg_sqlstr}"')
-        # print(f'CREATE_{abbv7}_SOUND_PUT_VLD_STR= "{expected_s_put_vld_sqlstr}"')
-        # print(f'CREATE_{abbv7}_SOUND_DEL_RAW_STR= "{expected_s_del_raw_sqlstr}"')
-        # print(f'CREATE_{abbv7}_SOUND_DEL_AGG_STR= "{expected_s_del_agg_sqlstr}"')
-        # print(f'CREATE_{abbv7}_SOUND_DEL_VLD_STR= "{expected_s_del_vld_sqlstr}"')
-        # print(f'CREATE_{abbv7}_VOICE_PUT_RAW_STR= "{expected_v_put_raw_sqlstr}"')
-        # print(f'CREATE_{abbv7}_VOICE_PUT_AGG_STR= "{expected_v_put_agg_sqlstr}"')
-        # print(f'CREATE_{abbv7}_VOICE_DEL_RAW_STR= "{expected_v_del_raw_sqlstr}"')
-        # print(f'CREATE_{abbv7}_VOICE_DEL_AGG_STR= "{expected_v_del_agg_sqlstr}"')
+        # print(f"{x_dimen=} {abbv7=}")
+        print("")
+        print(f'CREATE_{abbv7}_SOUND_PUT_RAW_STR= "{expected_s_put_raw_sqlstr}"')
+        print(f'CREATE_{abbv7}_SOUND_PUT_AGG_STR= "{expected_s_put_agg_sqlstr}"')
+        print(f'CREATE_{abbv7}_SOUND_PUT_VLD_STR= "{expected_s_put_vld_sqlstr}"')
+        print(f'CREATE_{abbv7}_SOUND_DEL_RAW_STR= "{expected_s_del_raw_sqlstr}"')
+        print(f'CREATE_{abbv7}_SOUND_DEL_AGG_STR= "{expected_s_del_agg_sqlstr}"')
+        print(f'CREATE_{abbv7}_SOUND_DEL_VLD_STR= "{expected_s_del_vld_sqlstr}"')
+        print(f'CREATE_{abbv7}_VOICE_PUT_RAW_STR= "{expected_v_put_raw_sqlstr}"')
+        print(f'CREATE_{abbv7}_VOICE_PUT_AGG_STR= "{expected_v_put_agg_sqlstr}"')
+        print(f'CREATE_{abbv7}_VOICE_DEL_RAW_STR= "{expected_v_del_raw_sqlstr}"')
+        print(f'CREATE_{abbv7}_VOICE_DEL_AGG_STR= "{expected_v_del_agg_sqlstr}"')
 
         # print(f'"{s_put_raw_tablename}": CREATE_{abbv7}_SOUND_PUT_RAW_STR,')
         # print(f'"{s_put_agg_tablename}": CREATE_{abbv7}_SOUND_PUT_AGG_STR,')

@@ -24,10 +24,10 @@ def test_HubUnit_get_perspective_believer_ReturnsBelieverWith_believer_nameSetTo
     perspective_believerunit = sue_hubunit.get_perspective_believer(bob_believerunit)
 
     # THEN
-    assert perspective_believerunit.get_dict() != bob_believerunit.get_dict()
+    assert perspective_believerunit.to_dict() != bob_believerunit.to_dict()
     assert perspective_believerunit.believer_name == sue_str
     perspective_believerunit.set_believer_name(bob_str)
-    assert perspective_believerunit.get_dict() == bob_believerunit.get_dict()
+    assert perspective_believerunit.to_dict() == bob_believerunit.to_dict()
 
 
 def test_HubUnit_get_dw_perspective_believer_ReturnsBelieverWith_believer_nameSetToHubUnit_believer_name(
@@ -49,9 +49,9 @@ def test_HubUnit_get_dw_perspective_believer_ReturnsBelieverWith_believer_nameSe
 
     # THEN
     assert perspective_believerunit.believer_name == sue_str
-    assert perspective_believerunit.get_dict() != bob_believerunit.get_dict()
+    assert perspective_believerunit.to_dict() != bob_believerunit.to_dict()
     perspective_believerunit.set_believer_name(bob_str)
-    assert perspective_believerunit.get_dict() == bob_believerunit.get_dict()
+    assert perspective_believerunit.to_dict() == bob_believerunit.to_dict()
 
 
 def test_HubUnit_rj_perspective_believer_ReturnsBelieverWith_believer_nameSetToHubUnit_believer_name(
@@ -79,6 +79,6 @@ def test_HubUnit_rj_perspective_believer_ReturnsBelieverWith_believer_nameSetToH
 
     # THEN
     assert perspective_believerunit.believer_name == sue_str
-    assert perspective_believerunit.get_dict() != yao_believerunit.get_dict()
+    assert perspective_believerunit.to_dict() != yao_believerunit.to_dict()
     perspective_believerunit.set_believer_name(yao_str)
-    assert perspective_believerunit.get_dict() == yao_believerunit.get_dict()
+    assert perspective_believerunit.to_dict() == yao_believerunit.to_dict()

@@ -13,7 +13,7 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
     x_world = worldunit_shop(five_world_name, worlds2_dir)
 
     # WHEN
-    x_world_dict = x_world.get_dict()
+    x_world_dict = x_world.to_dict()
 
     # THEN
     assert x_world_dict
@@ -40,7 +40,7 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
     )
 
     # WHEN
-    x_world_dict = x_world.get_dict()
+    x_world_dict = x_world.to_dict()
 
     # THEN
     assert x_world_dict

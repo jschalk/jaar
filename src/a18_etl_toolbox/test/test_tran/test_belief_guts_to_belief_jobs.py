@@ -64,6 +64,6 @@ def test_etl_belief_guts_to_belief_jobs_SetsFiles_Scenario0(
     # assert generated_job.get_partner(yao_inx) == expected_job.get_partner(yao_inx)
     assert generated_job.partners.keys() == expected_job.partners.keys()
     # assert generated_job.partners == expected_job.partners
-    # assert generated_job.get_plan_dict() == expected_job.get_dict()
-    # assert generated_job.get_dict() == expected_job.get_dict()
+    # assert generated_job.get_plan_dict() == expected_job.to_dict()
+    # assert generated_job.to_dict() == expected_job.to_dict()
     # assert generated_job == expected_job

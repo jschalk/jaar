@@ -86,7 +86,7 @@ def test_HubUnit_create_gut_from_packs_CreatesgutFileFromPackFiles(
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_believer())
     gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.get_dict() == static_sue_gut.get_dict()
+    assert gut_believer.to_dict() == static_sue_gut.to_dict()
 
 
 def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
@@ -108,7 +108,7 @@ def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_believer())
     gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.get_dict() == static_sue_gut.get_dict()
+    assert gut_believer.to_dict() == static_sue_gut.to_dict()
 
 
 def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(

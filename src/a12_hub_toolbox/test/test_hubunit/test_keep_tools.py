@@ -232,4 +232,4 @@ def test_get_duty_believer_reason_lowersFile(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert gen_bob_duty.get_dict() == bob_believer.get_dict()
+    assert gen_bob_duty.to_dict() == bob_believer.to_dict()

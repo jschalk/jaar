@@ -99,16 +99,16 @@ def test_BelieverUnit_fund_flow(graphics_bool):
     sweep_rope = sue_believer.make_rope(clean_rope, sweep_str)
     dish_str = "clean dishes"
     dish_rope = sue_believer.make_rope(clean_rope, dish_str)
-    sue_believer.add_plan(casa_rope, mass=30)
-    sue_believer.add_plan(cat_rope, mass=30)
-    sue_believer.add_plan(hun_n_rope, mass=30)
-    sue_believer.add_plan(hun_y_rope, mass=30)
-    sue_believer.add_plan(clean_rope, mass=30)
-    sue_believer.add_plan(sweep_rope, mass=30, task=True)
-    sue_believer.add_plan(dish_rope, mass=30, task=True)
+    sue_believer.add_plan(casa_rope, star=30)
+    sue_believer.add_plan(cat_rope, star=30)
+    sue_believer.add_plan(hun_n_rope, star=30)
+    sue_believer.add_plan(hun_y_rope, star=30)
+    sue_believer.add_plan(clean_rope, star=30)
+    sue_believer.add_plan(sweep_rope, star=30, task=True)
+    sue_believer.add_plan(dish_rope, star=30, task=True)
     dinner_str = "cat have dinner"
     dinner_rope = sue_believer.make_l1_rope(dinner_str)
-    sue_believer.add_plan(dinner_rope, mass=30, task=True)
+    sue_believer.add_plan(dinner_rope, star=30, task=True)
 
     # WHEN / THEN
     fund_graph0(sue_believer, "Chore", graphics_bool)

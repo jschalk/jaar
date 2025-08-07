@@ -16,7 +16,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -29,11 +29,11 @@ from src.a06_believer_logic.test._util.a06_str import (
     give_force_str,
     group_title_str,
     healer_name_str,
-    labor_title_str,
-    mass_str,
     partner_name_str,
+    party_title_str,
     plan_rope_str,
     reason_active_requisite_str,
+    star_str,
     take_force_str,
     task_str,
 )
@@ -456,7 +456,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     amy45_str = "amy45"
     amy_begin = 34
     amy_close = 78
-    amy_mass = 55
+    amy_star = 55
     amy_task = True
     amy_rope = after_sue_believer.make_l1_rope(amy45_str)
     after_sue_believer.set_l1_plan(
@@ -464,7 +464,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
             amy45_str,
             begin=amy_begin,
             close=amy_close,
-            mass=amy_mass,
+            star=amy_star,
             task=amy_task,
         )
     )
@@ -490,7 +490,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert ball_believeratom.get_value(plan_rope_str()) == a45_rope
     assert ball_believeratom.get_value(begin_str()) == amy_begin
     assert ball_believeratom.get_value(close_str()) == amy_close
-    assert ball_believeratom.get_value(mass_str()) == amy_mass
+    assert ball_believeratom.get_value(star_str()) == amy_star
     assert ball_believeratom.get_value(task_str()) == amy_task
 
     assert get_believeratom_total_count(sue_believerdelta) == 2
@@ -506,7 +506,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     amy45_rope = before_sue_believer.make_l1_rope(amy45_str)
     before_amy_begin = 34
     before_amy_close = 78
-    before_amy_mass = 55
+    before_amy_star = 55
     before_amy_task = True
     amy_rope = before_sue_believer.make_l1_rope(amy45_str)
     before_sue_believer.set_l1_plan(
@@ -514,7 +514,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
             amy45_str,
             begin=before_amy_begin,
             close=before_amy_close,
-            mass=before_amy_mass,
+            star=before_amy_star,
             task=before_amy_task,
         )
     )
@@ -522,13 +522,13 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_amy_begin = 99
     after_amy_close = 111
-    after_amy_mass = 22
+    after_amy_star = 22
     after_amy_task = False
     after_sue_believer.edit_plan_attr(
         amy_rope,
         begin=after_amy_begin,
         close=after_amy_close,
-        mass=after_amy_mass,
+        star=after_amy_star,
         task=after_amy_task,
     )
 
@@ -546,7 +546,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert ball_believeratom.get_value(plan_rope_str()) == amy45_rope
     assert ball_believeratom.get_value(begin_str()) == after_amy_begin
     assert ball_believeratom.get_value(close_str()) == after_amy_close
-    assert ball_believeratom.get_value(mass_str()) == after_amy_mass
+    assert ball_believeratom.get_value(star_str()) == after_amy_star
     assert ball_believeratom.get_value(task_str()) == after_amy_task
 
     assert get_believeratom_total_count(sue_believerdelta) == 1
@@ -1181,7 +1181,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_laborlink_insert():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_partyunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -1195,7 +1195,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.laborunit.set_laborlink(xio_str)
+    after_ball_planunit.laborunit.set_partyunit(xio_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -1207,17 +1207,17 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        believer_plan_laborlink_str(),
+        believer_plan_partyunit_str(),
         ball_rope,
         xio_str,
     ]
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
-    assert ball_believeratom.get_value(labor_title_str()) == xio_str
+    assert ball_believeratom.get_value(party_title_str()) == xio_str
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_laborlink_delete():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_partyunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -1229,11 +1229,11 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_rope = before_sue_believer.make_rope(sports_rope, ball_str)
     before_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_believer.get_plan_obj(ball_rope)
-    before_ball_planunit.laborunit.set_laborlink(xio_str)
+    before_ball_planunit.laborunit.set_partyunit(xio_str)
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.laborunit.del_laborlink(xio_str)
+    after_ball_planunit.laborunit.del_partyunit(xio_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -1245,13 +1245,13 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        believer_plan_laborlink_str(),
+        believer_plan_partyunit_str(),
         ball_rope,
         xio_str,
     ]
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
-    assert ball_believeratom.get_value(labor_title_str()) == xio_str
+    assert ball_believeratom.get_value(party_title_str()) == xio_str
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
@@ -1425,7 +1425,7 @@ def test_BelieverDelta_add_all_believeratoms_CorrectlyCreates_BelieverAtoms():
     ball_rope = after_sue_believer.make_rope(sports_rope, ball_str)
     after_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.laborunit.set_laborlink(xio_str)
+    after_ball_planunit.laborunit.set_partyunit(xio_str)
 
     before_sue_believer = believerunit_shop(sue_str)
     sue1_believerdelta = believerdelta_shop()

@@ -41,7 +41,7 @@ def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     assert os_path_exists(sue_atom2_path)
     assert os_path_exists(sue_atom6_path) is False
     two_file_dict = open_json(sue_atoms_dir, two_filename)
-    assert two_file_dict == sports_atom.get_dict()
+    assert two_file_dict == sports_atom.to_dict()
 
 
 def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):

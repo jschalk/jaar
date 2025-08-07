@@ -569,17 +569,17 @@
           "interesting": {
             "_uid": 262,
             "plan_label": "interesting",
-            "mass": 1
+            "star": 1
           },
           "not interesting": {
             "_uid": 263,
             "plan_label": "not interesting",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 261,
         "plan_label": "Aaron Donald objects effected by him",
-        "mass": 1
+        "star": 1
       },
       "ACME": {
         "_is_expanded": false,
@@ -591,7 +591,7 @@
                 "_is_expanded": false,
                 "_uid": 123,
                 "plan_label": "Employee Intruction manuel.",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -622,7 +622,7 @@
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 116,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -651,14 +651,14 @@
                 },
                 "_uid": 106,
                 "plan_label": "Know Abuse Deterrence and Reporting guildlines",
-                "mass": 1
+                "star": 1
               },
               "Know Discrimination Harassment Bully guildlines": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 117,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -686,7 +686,7 @@
                 },
                 "_uid": 107,
                 "plan_label": "Know Discrimination Harassment Bully guildlines",
-                "mass": 1
+                "star": 1
               },
               "PC1025 Identifying and Supporting houseless Youth": {
                 "_kids": {
@@ -694,7 +694,7 @@
                     "_is_expanded": false,
                     "_uid": 119,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -723,7 +723,7 @@
                 },
                 "_uid": 109,
                 "plan_label": "PC1025 Identifying and Supporting houseless Youth",
-                "mass": 1
+                "star": 1
               },
               "PC1026 Rick Management and Hazard Analysis": {
                 "_kids": {
@@ -731,12 +731,12 @@
                     "_is_expanded": false,
                     "_uid": 122,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1
+                    "star": 1
                   }
                 },
                 "_uid": 112,
                 "plan_label": "PC1026 Rick Management and Hazard Analysis",
-                "mass": 1
+                "star": 1
               },
               "PC1027 Adult Sexual Misconduct: Staff to Student/ IX": {
                 "_kids": {
@@ -744,7 +744,7 @@
                     "_is_expanded": false,
                     "_uid": 118,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -773,7 +773,7 @@
                 },
                 "_uid": 108,
                 "plan_label": "PC1027 Adult Sexual Misconduct: Staff to Student/ IX",
-                "mass": 1
+                "star": 1
               },
               "PC1029 Information Security Awareness traaining": {
                 "_kids": {
@@ -781,7 +781,7 @@
                     "_is_expanded": false,
                     "_uid": 121,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -810,7 +810,7 @@
                 },
                 "_uid": 111,
                 "plan_label": "PC1029 Information Security Awareness traaining",
-                "mass": 1
+                "star": 1
               },
               "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining": {
                 "_kids": {
@@ -818,7 +818,7 @@
                     "_is_expanded": false,
                     "_uid": 120,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -847,14 +847,14 @@
                 },
                 "_uid": 110,
                 "plan_label": "PRM1003 ACME OSHA COVID-19 Rick Reduction traaining",
-                "mass": 1
+                "star": 1
               },
               "PRM1005 ACME Staff  and Safety": {
                 "_kids": {
                   "Accomplish Fall 2021 traaining": {
                     "_uid": 115,
                     "plan_label": "Accomplish Fall 2021 traaining",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -882,12 +882,12 @@
                 },
                 "_uid": 105,
                 "plan_label": "PRM1005 ACME Staff  and Safety",
-                "mass": 1
+                "star": 1
               }
             },
             "_uid": 102,
             "plan_label": "ACME Employee Responsiblities",
-            "mass": 1
+            "star": 1
           },
           "IT DEPT": {
             "_kids": {
@@ -898,7 +898,7 @@
                       "check emails": {
                         "_uid": 138,
                         "plan_label": "check emails",
-                        "mass": 1,
+                        "star": 1,
                         "task": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
@@ -918,27 +918,27 @@
                           "MECHANISM2": {
                             "_uid": 171,
                             "plan_label": "MECHANISM2",
-                            "mass": 1
+                            "star": 1
                           },
                           "MECHANISM3": {
                             "_uid": 172,
                             "plan_label": "MECHANISM3",
-                            "mass": 1
+                            "star": 1
                           },
                           "MECHANISM5": {
                             "_uid": 173,
                             "plan_label": "MECHANISM5",
-                            "mass": 1
+                            "star": 1
                           },
                           "MECHANISM7": {
                             "_uid": 170,
                             "plan_label": "MECHANISM7",
-                            "mass": 1
+                            "star": 1
                           }
                         },
                         "_uid": 139,
                         "plan_label": "check mechanisms",
-                        "mass": 1,
+                        "star": 1,
                         "task": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
@@ -956,7 +956,7 @@
                     },
                     "_uid": 137,
                     "plan_label": "check ETLs ran correctly",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -973,7 +973,7 @@
                   "dress to slightly impress": {
                     "_uid": 158,
                     "plan_label": "dress to slightly impress",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -992,7 +992,7 @@
                     "_is_expanded": false,
                     "_uid": 231,
                     "plan_label": "go to employment",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -1010,7 +1010,7 @@
                 },
                 "_uid": 136,
                 "plan_label": "IT DEPT off-hrs responsiblities",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1029,7 +1029,7 @@
                   "Add to Azure DevOps": {
                     "_uid": 156,
                     "plan_label": "Add to Azure DevOps",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -1047,7 +1047,7 @@
                   "consider management perspective": {
                     "_uid": 155,
                     "plan_label": "consider management perspective",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -1067,7 +1067,7 @@
                       "Datawarehouse Expertise acquisition": {
                         "_uid": 142,
                         "plan_label": "Datawarehouse Expertise acquisition",
-                        "mass": 1,
+                        "star": 1,
                         "task": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
@@ -1087,27 +1087,27 @@
                           "MECHANISM2": {
                             "_uid": 176,
                             "plan_label": "MECHANISM2",
-                            "mass": 1
+                            "star": 1
                           },
                           "MECHANISM7": {
                             "_uid": 175,
                             "plan_label": "MECHANISM7",
-                            "mass": 1
+                            "star": 1
                           },
                           "WPRD": {
                             "_uid": 177,
                             "plan_label": "WPRD",
-                            "mass": 1
+                            "star": 1
                           },
                           "WPRDD": {
                             "_uid": 174,
                             "plan_label": "WPRDD",
-                            "mass": 1
+                            "star": 1
                           }
                         },
                         "_uid": 157,
                         "plan_label": "dev quantification script \"TIMOTHY\"",
-                        "mass": 1,
+                        "star": 1,
                         "task": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
@@ -1125,7 +1125,7 @@
                       "go to daily meeting ": {
                         "_uid": 232,
                         "plan_label": "go to daily meeting ",
-                        "mass": 1,
+                        "star": 1,
                         "task": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
@@ -1143,12 +1143,12 @@
                     },
                     "_uid": 135,
                     "plan_label": "Datawarehouse",
-                    "mass": 1
+                    "star": 1
                   },
                   "IT DEPT general": {
                     "_uid": 141,
                     "plan_label": "IT DEPT general",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -1165,7 +1165,7 @@
                   "Keep track of Chatroom conversations": {
                     "_uid": 151,
                     "plan_label": "Keep track of Chatroom conversations",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -1185,7 +1185,7 @@
                       "check for access": {
                         "_uid": 143,
                         "plan_label": "check for access",
-                        "mass": 1,
+                        "star": 1,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
                             "cases": {
@@ -1202,7 +1202,7 @@
                     },
                     "_uid": 140,
                     "plan_label": "Synergy",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -1219,7 +1219,7 @@
                 },
                 "_uid": 133,
                 "plan_label": "IT DEPT regular hrs responsiblities",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1237,7 +1237,7 @@
             },
             "_uid": 101,
             "plan_label": "IT DEPT",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;jour_minute;": {
                 "cases": {
@@ -1254,7 +1254,7 @@
         },
         "_uid": 100,
         "plan_label": "ACME",
-        "mass": 1
+        "star": 1
       },
       "Asset management": {
         "_is_expanded": false,
@@ -1271,7 +1271,7 @@
                           "be reponsible for rent": {
                             "_uid": 209,
                             "plan_label": "be reponsible for rent",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
@@ -1286,7 +1286,7 @@
                           "flat": {
                             "_uid": 211,
                             "plan_label": "flat",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
@@ -1303,7 +1303,7 @@
                               "maybe watch a video": {
                                 "_uid": 218,
                                 "plan_label": "maybe watch a video",
-                                "mass": 1,
+                                "star": 1,
                                 "reasonunits": {
                                   ";amy45;Interweb;": {
                                     "cases": {
@@ -1318,7 +1318,7 @@
                             },
                             "_uid": 214,
                             "plan_label": "go for parent_rope",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
@@ -1333,7 +1333,7 @@
                           "gym": {
                             "_uid": 215,
                             "plan_label": "gym",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Moods;": {
                                 "cases": {
@@ -1348,7 +1348,7 @@
                         },
                         "_uid": 208,
                         "plan_label": "flats",
-                        "mass": 1,
+                        "star": 1,
                         "reasonunits": {
                           ";amy45;Nation-States;": {
                             "cases": {
@@ -1365,7 +1365,7 @@
                           "browsing": {
                             "_uid": 217,
                             "plan_label": "browsing",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
@@ -1380,7 +1380,7 @@
                           "picnic": {
                             "_uid": 216,
                             "plan_label": "picnic",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Seasons;": {
                                 "cases": {
@@ -1395,7 +1395,7 @@
                           "street soccer": {
                             "_uid": 213,
                             "plan_label": "street soccer",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
@@ -1410,7 +1410,7 @@
                           "swimming": {
                             "_uid": 212,
                             "plan_label": "swimming",
-                            "mass": 1,
+                            "star": 1,
                             "reasonunits": {
                               ";amy45;Nation-States;": {
                                 "cases": {
@@ -1425,7 +1425,7 @@
                         },
                         "_uid": 210,
                         "plan_label": "PSU Sports",
-                        "mass": 1,
+                        "star": 1,
                         "reasonunits": {
                           ";amy45;Nation-States;": {
                             "cases": {
@@ -1440,7 +1440,7 @@
                     },
                     "_uid": 207,
                     "plan_label": "downtown",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;Nation-States;": {
                         "cases": {
@@ -1455,7 +1455,7 @@
                 },
                 "_uid": 206,
                 "plan_label": "portland sovereignty",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
@@ -1470,7 +1470,7 @@
               "texas sovereignty": {
                 "_uid": 205,
                 "plan_label": "texas sovereignty",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;Nation-States;": {
                     "cases": {
@@ -1485,7 +1485,7 @@
             },
             "_uid": 204,
             "plan_label": "American sovereignty",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": {
@@ -1500,7 +1500,7 @@
           "French sovereignty": {
             "_uid": 203,
             "plan_label": "French sovereignty",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": {
@@ -1515,24 +1515,24 @@
         },
         "_uid": 199,
         "plan_label": "Asset management",
-        "mass": 1
+        "star": 1
       },
       "Bob Dylan Root": {
         "_kids": {
           "Aint me Babe": {
             "_uid": 270,
             "plan_label": "Aint me Babe",
-            "mass": 1
+            "star": 1
           },
           "tangled up in blue": {
             "_uid": 271,
             "plan_label": "tangled up in blue",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 269,
         "plan_label": "Bob Dylan Root",
-        "mass": 1
+        "star": 1
       },
       "casa": {
         "_is_expanded": false,
@@ -1547,7 +1547,7 @@
               }
             },
             "plan_label": "call high school friend",
-            "mass": 1,
+            "star": 1,
             "task": true,
             "reasonunits": {
               ";amy45;jour_minute;": {
@@ -1576,7 +1576,7 @@
           "check up on old family friends": {
             "_uid": 222,
             "plan_label": "check up on old family friends",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Moods;": {
                 "cases": {
@@ -1601,7 +1601,7 @@
                   }
                 },
                 "plan_label": "check cat water",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1635,7 +1635,7 @@
               "check humidifer": {
                 "_uid": 159,
                 "plan_label": "check humidifer",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1668,7 +1668,7 @@
                   }
                 },
                 "plan_label": "clean baby seats",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1712,7 +1712,7 @@
                   }
                 },
                 "plan_label": "clean bathroom",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1745,7 +1745,7 @@
                   }
                 },
                 "plan_label": "clean cat poo",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1786,7 +1786,7 @@
                   }
                 },
                 "plan_label": "clean humidifiers",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1827,7 +1827,7 @@
                   }
                 },
                 "plan_label": "clean sheets couch blankets",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;ced_wk;": {
@@ -1879,7 +1879,7 @@
                   }
                 },
                 "plan_label": "clean table",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1920,7 +1920,7 @@
                   }
                 },
                 "plan_label": "deep clean play mat",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -1972,7 +1972,7 @@
                   }
                 },
                 "plan_label": "empty roomba",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2013,7 +2013,7 @@
                   }
                 },
                 "plan_label": "empty roomba Fri",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2054,7 +2054,7 @@
                   }
                 },
                 "plan_label": "laundry mon",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2095,7 +2095,7 @@
                   }
                 },
                 "plan_label": "laundry sat",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2136,7 +2136,7 @@
                   }
                 },
                 "plan_label": "laundry wed",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2170,7 +2170,7 @@
               "morning cookery clean-up": {
                 "_uid": 150,
                 "plan_label": "morning cookery clean-up",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2202,7 +2202,7 @@
                   }
                 },
                 "plan_label": "prepare_bed clean bedroom",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2235,7 +2235,7 @@
                   }
                 },
                 "plan_label": "roomba bedroom",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2276,7 +2276,7 @@
                   }
                 },
                 "plan_label": "roomba bedroom Fri",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2317,7 +2317,7 @@
                   }
                 },
                 "plan_label": "roomba living area",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2358,7 +2358,7 @@
                   }
                 },
                 "plan_label": "roomba living area thur",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2399,7 +2399,7 @@
                   }
                 },
                 "plan_label": "roomba maintenance",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2440,7 +2440,7 @@
                   }
                 },
                 "plan_label": "wipe down play mat2",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2474,7 +2474,7 @@
             },
             "_uid": 146,
             "plan_label": "cleaning",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": {
@@ -2498,7 +2498,7 @@
                   }
                 },
                 "plan_label": "5 push-ups",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2523,7 +2523,7 @@
                   }
                 },
                 "plan_label": "check protein for wk is adequate",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2548,7 +2548,7 @@
                   }
                 },
                 "plan_label": "clean ears",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2584,7 +2584,7 @@
                   }
                 },
                 "plan_label": "clip nails",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2617,7 +2617,7 @@
                   }
                 },
                 "plan_label": "cook veggies every morning",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2638,7 +2638,7 @@
                   "I do not be desperate for of I have to exercise": {
                     "_uid": 154,
                     "plan_label": "I do not be desperate for of I have to exercise",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2662,7 +2662,7 @@
                   }
                 },
                 "plan_label": "daily exercise 20min",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2680,7 +2680,7 @@
               "evening multivitamin": {
                 "_uid": 230,
                 "plan_label": "evening multivitamin",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2704,7 +2704,7 @@
                   }
                 },
                 "plan_label": "flossing teeth",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -2730,7 +2730,7 @@
                   }
                 }
               },
-              "mass traaining": {
+              "full traaining": {
                 "_kids": {
                   "bike or stuff": {
                     "_uid": 92,
@@ -2742,7 +2742,7 @@
                       }
                     },
                     "plan_label": "bike or stuff",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -2772,13 +2772,13 @@
                         "_is_expanded": false,
                         "_uid": 130,
                         "plan_label": "bi and triceps exercises",
-                        "mass": 1
+                        "star": 1
                       },
                       "chest  exercises": {
                         "_is_expanded": false,
                         "_uid": 129,
                         "plan_label": "chest  exercises",
-                        "mass": 1
+                        "star": 1
                       }
                     },
                     "_uid": 84,
@@ -2790,7 +2790,7 @@
                       }
                     },
                     "plan_label": "chest and arms (mon)",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -2816,7 +2816,7 @@
                   "core and squats": {
                     "_uid": 179,
                     "plan_label": "core and squats",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2848,7 +2848,7 @@
                       }
                     },
                     "plan_label": "core all back",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -2882,7 +2882,7 @@
                       }
                     },
                     "plan_label": "rest",
-                    "mass": 1,
+                    "star": 1,
                     "reasonunits": {
                       ";amy45;sem_jours;": {
                         "cases": {
@@ -2901,13 +2901,13 @@
                         "_is_expanded": false,
                         "_uid": 131,
                         "plan_label": "shoulder exercises",
-                        "mass": 1
+                        "star": 1
                       },
                       "back exercises": {
                         "_is_expanded": false,
                         "_uid": 132,
                         "plan_label": "back exercises",
-                        "mass": 1
+                        "star": 1
                       }
                     },
                     "_uid": 82,
@@ -2919,7 +2919,7 @@
                       }
                     },
                     "plan_label": "shoulders and back",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -2952,7 +2952,7 @@
                       }
                     },
                     "plan_label": "squats hamstrings and calves",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
@@ -2977,8 +2977,8 @@
                   }
                 },
                 "_uid": 81,
-                "plan_label": "mass traaining",
-                "mass": 1
+                "plan_label": "full traaining",
+                "star": 1
               },
               "morning multivitamin": {
                 "_uid": 3,
@@ -2990,7 +2990,7 @@
                   }
                 },
                 "plan_label": "morning multivitamin",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3015,7 +3015,7 @@
                   }
                 },
                 "plan_label": "shampooing",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3048,7 +3048,7 @@
                   }
                 },
                 "plan_label": "straight back for 45 secs",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3073,7 +3073,7 @@
                   }
                 },
                 "plan_label": "trim beard",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3099,7 +3099,7 @@
             },
             "_uid": 147,
             "plan_label": "exercise",
-            "mass": 1
+            "star": 1
           },
           "Financial Ops": {
             "_is_expanded": false,
@@ -3114,7 +3114,7 @@
                   }
                 },
                 "plan_label": "be reponsible for rent",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3147,7 +3147,7 @@
                   }
                 },
                 "plan_label": "be responsible for expenses card",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3180,7 +3180,7 @@
                   }
                 },
                 "plan_label": "be responsible for utilities",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3213,7 +3213,7 @@
                   }
                 },
                 "plan_label": "set resturant bucks for the wk",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3239,7 +3239,7 @@
             },
             "_uid": 148,
             "plan_label": "Financial Ops",
-            "mass": 1
+            "star": 1
           },
           "Housing": {
             "_is_expanded": false,
@@ -3247,36 +3247,36 @@
               "Bike Garage": {
                 "_uid": 185,
                 "plan_label": "Bike Garage",
-                "mass": 1
+                "star": 1
               },
               "Bike Gym": {
                 "_uid": 184,
                 "plan_label": "Bike Gym",
-                "mass": 1
+                "star": 1
               },
               "Flat": {
                 "_kids": {
                   "bathroom #2": {
                     "_uid": 196,
                     "plan_label": "bathroom #2",
-                    "mass": 1
+                    "star": 1
                   },
                   "bedroom #1": {
                     "_kids": {
                       "big bathroom": {
                         "_uid": 195,
                         "plan_label": "big bathroom",
-                        "mass": 1
+                        "star": 1
                       },
                       "closet": {
                         "_uid": 194,
                         "plan_label": "closet",
-                        "mass": 1
+                        "star": 1
                       }
                     },
                     "_uid": 191,
                     "plan_label": "bedroom #1",
-                    "mass": 1
+                    "star": 1
                   },
                   "bedroom #2": {
                     "_kids": {
@@ -3292,62 +3292,62 @@
                               }
                             },
                             "plan_label": "heater maintenance",
-                            "mass": 1
+                            "star": 1
                           }
                         },
                         "_uid": 197,
                         "plan_label": "bed area",
-                        "mass": 1
+                        "star": 1
                       },
                       "closet": {
                         "_uid": 193,
                         "plan_label": "closet",
-                        "mass": 1
+                        "star": 1
                       }
                     },
                     "_uid": 192,
                     "plan_label": "bedroom #2",
-                    "mass": 1
+                    "star": 1
                   },
                   "cookery": {
                     "_uid": 189,
                     "plan_label": "cookery",
-                    "mass": 1
+                    "star": 1
                   },
                   "dining area": {
                     "_uid": 190,
                     "plan_label": "dining area",
-                    "mass": 1
+                    "star": 1
                   },
                   "maintenance": {
                     "_uid": 187,
                     "plan_label": "maintenance",
-                    "mass": 1
+                    "star": 1
                   },
                   "nursery": {
                     "_uid": 188,
                     "plan_label": "nursery",
-                    "mass": 1
+                    "star": 1
                   }
                 },
                 "_uid": 181,
                 "plan_label": "Flat",
-                "mass": 1
+                "star": 1
               },
               "Lifting Gym": {
                 "_uid": 183,
                 "plan_label": "Lifting Gym",
-                "mass": 1
+                "star": 1
               },
               "Playing in nurserys": {
                 "_uid": 186,
                 "plan_label": "Playing in nurserys",
-                "mass": 1
+                "star": 1
               },
               "Pool": {
                 "_uid": 182,
                 "plan_label": "Pool",
-                "mass": 1
+                "star": 1
               }
             },
             "_uid": 180,
@@ -3359,13 +3359,13 @@
               }
             },
             "plan_label": "Housing",
-            "mass": 1
+            "star": 1
           },
           "keep up with friends": {
             "_is_expanded": false,
             "_uid": 220,
             "plan_label": "keep up with friends",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Interweb;": {
                 "cases": {
@@ -3390,7 +3390,7 @@
                   }
                 },
                 "plan_label": "clip fingernails",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;ced_wk;": {
@@ -3442,7 +3442,7 @@
                   }
                 },
                 "plan_label": "get rid of toy get new toy",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3479,7 +3479,7 @@
               "going to get them": {
                 "_uid": 145,
                 "plan_label": "going to get them",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
@@ -3505,7 +3505,7 @@
             },
             "_uid": 144,
             "plan_label": "responsible for kids",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Nation-States;": {
                 "cases": {
@@ -3527,7 +3527,7 @@
               }
             },
             "plan_label": "say hi to birds",
-            "mass": 1,
+            "star": 1,
             "task": true,
             "reasonunits": {
               ";amy45;jour_minute;": {
@@ -3553,25 +3553,25 @@
         },
         "_uid": 2,
         "plan_label": "casa",
-        "mass": 1
+        "star": 1
       },
       "ced_jour": {
         "begin": 0,
         "close": 80000,
         "plan_label": "ced_jour",
-        "mass": 40
+        "star": 40
       },
       "ced_wk": {
         "begin": 0,
         "close": 110000,
         "plan_label": "ced_wk",
-        "mass": 40
+        "star": 40
       },
       "ced_yr": {
         "begin": 0,
         "close": 2100,
         "plan_label": "ced_yr",
-        "mass": 40
+        "star": 40
       },
       "D&B": {
         "_is_expanded": false,
@@ -3589,7 +3589,7 @@
                   }
                 },
                 "plan_label": "Ask Chuck monthly what I can do",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
                     "cases": {
@@ -3611,7 +3611,7 @@
               }
             },
             "plan_label": "Aarons friends are desperate for of housing support",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
                 "cases": {
@@ -3628,7 +3628,7 @@
               "test program": {
                 "_uid": 178,
                 "plan_label": "test program",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
@@ -3669,7 +3669,7 @@
               }
             },
             "plan_label": "develop D&B software",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
                 "cases": {
@@ -3694,7 +3694,7 @@
                   }
                 },
                 "plan_label": "donate to influential people that are pro-Climate Death",
-                "mass": 1,
+                "star": 1,
                 "task": true,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
@@ -3739,7 +3739,7 @@
             },
             "_uid": 167,
             "plan_label": "donate to pro-climate committees",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
                 "cases": {
@@ -3754,7 +3754,7 @@
           "late_evening_go_to_sleep": {
             "_uid": 149,
             "plan_label": "late_evening_go_to_sleep",
-            "mass": 1,
+            "star": 1,
             "task": true,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
@@ -3782,7 +3782,7 @@
                       }
                     },
                     "plan_label": "be available for phone call",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;Aaron Donald objects effected by him;": {
@@ -3820,7 +3820,7 @@
                       }
                     },
                     "plan_label": "call David and discuss methodology",
-                    "mass": 1,
+                    "star": 1,
                     "task": true,
                     "reasonunits": {
                       ";amy45;Aaron Donald objects effected by him;": {
@@ -3864,7 +3864,7 @@
                   }
                 },
                 "plan_label": "sympathetic receptive to David",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
                     "cases": {
@@ -3879,7 +3879,7 @@
             },
             "_uid": 161,
             "plan_label": "sympathetic receptive",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
                 "cases": {
@@ -3904,7 +3904,7 @@
                   }
                 },
                 "plan_label": "write letters about Climate Death to congressman",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
                     "cases": {
@@ -3927,7 +3927,7 @@
             },
             "_uid": 165,
             "plan_label": "write letters to reps",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
                 "cases": {
@@ -3959,7 +3959,7 @@
           }
         },
         "plan_label": "D&B",
-        "mass": 1,
+        "star": 1,
         "reasonunits": {
           ";amy45;Aaron Donald objects effected by him;": {
             "cases": {
@@ -3975,7 +3975,7 @@
         "begin": 0,
         "close": 23,
         "plan_label": "hr_number",
-        "mass": 40
+        "star": 40
       },
       "jour_minute": {
         "begin": 0,
@@ -3989,7 +3989,7 @@
             "fact_state": ";amy45;jour_minute;"
           }
         },
-        "mass": 40
+        "star": 40
       },
       "Freelancing": {
         "_is_expanded": false,
@@ -3998,7 +3998,7 @@
             "_is_expanded": false,
             "_uid": 104,
             "plan_label": "Submit hrs on website",
-            "mass": 1,
+            "star": 1,
             "task": true,
             "reasonunits": {
               ";amy45;jour_minute;": {
@@ -4024,7 +4024,7 @@
         },
         "_uid": 103,
         "plan_label": "Freelancing",
-        "mass": 1,
+        "star": 1,
         "reasonunits": {
           ";amy45;jour_minute;": {
             "cases": {
@@ -4046,112 +4046,112 @@
               "PSU Ultimate": {
                 "_uid": 254,
                 "plan_label": "PSU Ultimate",
-                "mass": 1
+                "star": 1
               }
             },
             "_uid": 253,
             "plan_label": "AOL AIM",
-            "mass": 1
+            "star": 1
           },
           "Faaceboook": {
             "_uid": 251,
             "plan_label": "Faaceboook",
-            "mass": 1
+            "star": 1
           },
           "Github": {
             "_uid": 252,
             "plan_label": "Github",
-            "mass": 1
+            "star": 1
           },
           "YahooVideo": {
             "_uid": 255,
             "plan_label": "YahooVideo",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 250,
         "plan_label": "Interweb",
-        "mass": 1
+        "star": 1
       },
       "month_number": {
         "begin": 1,
         "close": 31,
         "plan_label": "month_number",
-        "mass": 40
+        "star": 40
       },
       "month_wk": {
         "_kids": {
           "1st wk": {
             "plan_label": "1st wk",
             "gogo_want": 1,
-            "mass": 40,
+            "star": 40,
             "stop_want": 2
           },
           "2nd wk": {
             "plan_label": "2nd wk",
             "gogo_want": 2,
-            "mass": 40,
+            "star": 40,
             "stop_want": 3
           },
           "3rd wk": {
             "plan_label": "3rd wk",
             "gogo_want": 3,
-            "mass": 40,
+            "star": 40,
             "stop_want": 4
           },
           "4th wk": {
             "plan_label": "4th wk",
             "gogo_want": 4,
-            "mass": 40,
+            "star": 40,
             "stop_want": 5
           },
           "5th wk": {
             "plan_label": "5th wk",
             "gogo_want": 5,
-            "mass": 40,
+            "star": 40,
             "stop_want": 6
           }
         },
         "begin": 1,
         "close": 5,
         "plan_label": "month_wk",
-        "mass": 40
+        "star": 40
       },
       "Moods": {
         "_kids": {
           "Bllod Meridan by Cormac": {
             "_uid": 265,
             "plan_label": "Bllod Meridan by Cormac",
-            "mass": 1
+            "star": 1
           },
           "Happy": {
             "_kids": {
               "Happy - angerish": {
                 "_uid": 267,
                 "plan_label": "Happy - angerish",
-                "mass": 1
+                "star": 1
               }
             },
             "_uid": 266,
             "plan_label": "Happy",
-            "mass": 1
+            "star": 1
           },
           "hungry": {
             "_uid": 268,
             "plan_label": "hungry",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 264,
         "plan_label": "Moods",
-        "mass": 1
+        "star": 1
       },
       "Nation-States": {
         "_kids": {
           "France2": {
             "_uid": 235,
             "plan_label": "France2",
-            "mass": 1
+            "star": 1
           },
           "USA": {
             "_kids": {
@@ -4164,79 +4164,79 @@
                           "10th floor gaarden": {
                             "_uid": 246,
                             "plan_label": "10th floor gaarden",
-                            "mass": 1
+                            "star": 1
                           },
                           "Apt X4XX": {
                             "_uid": 247,
                             "plan_label": "Apt X4XX",
-                            "mass": 1
+                            "star": 1
                           },
                           "Gym": {
                             "_uid": 248,
                             "plan_label": "Gym",
-                            "mass": 1
+                            "star": 1
                           },
                           "workspace": {
                             "_uid": 249,
                             "plan_label": "workspace",
-                            "mass": 1
+                            "star": 1
                           }
                         },
                         "_uid": 245,
                         "plan_label": "Northfield Apt",
-                        "mass": 1
+                        "star": 1
                       },
                       "PSU": {
                         "_kids": {
                           "library": {
                             "_uid": 244,
                             "plan_label": "library",
-                            "mass": 1
+                            "star": 1
                           },
                           "Park Squares": {
                             "_uid": 241,
                             "plan_label": "Park Squares",
-                            "mass": 1
+                            "star": 1
                           },
                           "Pool": {
                             "_uid": 242,
                             "plan_label": "Pool",
-                            "mass": 1
+                            "star": 1
                           },
                           "Stott Field": {
                             "_uid": 243,
                             "plan_label": "Stott Field",
-                            "mass": 1
+                            "star": 1
                           }
                         },
                         "_uid": 240,
                         "plan_label": "PSU",
-                        "mass": 1
+                        "star": 1
                       }
                     },
                     "_uid": 239,
                     "plan_label": "Downtown",
-                    "mass": 1
+                    "star": 1
                   }
                 },
                 "_uid": 237,
                 "plan_label": "Portland OR",
-                "mass": 1
+                "star": 1
               },
               "Texas": {
                 "_uid": 238,
                 "plan_label": "Texas",
-                "mass": 1
+                "star": 1
               }
             },
             "_uid": 236,
             "plan_label": "USA",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 234,
         "plan_label": "Nation-States",
-        "mass": 1
+        "star": 1
       },
       "No Movie playing": {
         "_is_expanded": false,
@@ -4244,46 +4244,46 @@
           "Big Lewbwski": {
             "_uid": 273,
             "plan_label": "Big Lewbwski",
-            "mass": 1
+            "star": 1
           },
-          "Star Wars eps IV": {
+          "Jedi Movie eps IV": {
             "_uid": 274,
-            "plan_label": "Star Wars eps IV",
-            "mass": 1
+            "plan_label": "Jedi Movie eps IV",
+            "star": 1
           }
         },
         "_uid": 272,
         "plan_label": "No Movie playing",
-        "mass": 1
+        "star": 1
       },
       "Seasons": {
         "_kids": {
           "Summer": {
             "_uid": 276,
             "plan_label": "Summer",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 275,
         "plan_label": "Seasons",
-        "mass": 1
+        "star": 1
       },
       "Tired Status": {
         "_kids": {
           "Not tired": {
             "_uid": 278,
             "plan_label": "Not tired",
-            "mass": 1
+            "star": 1
           },
           "Tired": {
             "_uid": 279,
             "plan_label": "Tired",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 277,
         "plan_label": "Tired Status",
-        "mass": 1
+        "star": 1
       },
       "Ultimate Frisbee": {
         "_is_expanded": false,
@@ -4291,7 +4291,7 @@
           "check on m33": {
             "_uid": 221,
             "plan_label": "check on m33",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Moods;": {
                 "cases": {
@@ -4306,7 +4306,7 @@
           "contemplate the disc": {
             "_uid": 229,
             "plan_label": "contemplate the disc",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;No Movie playing;": {
                 "cases": {
@@ -4323,7 +4323,7 @@
               "check PSU mini": {
                 "_uid": 219,
                 "plan_label": "check PSU mini",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;Moods;": {
                     "cases": {
@@ -4338,7 +4338,7 @@
             },
             "_uid": 201,
             "plan_label": "playing ultimate",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;Moods;": {
                 "cases": {
@@ -4353,12 +4353,12 @@
           "relaxing": {
             "_uid": 202,
             "plan_label": "relaxing",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;No Movie playing;": {
                 "cases": {
-                  ";amy45;No Movie playing,Star Wars eps IV": {
-                    "reason_state": ";amy45;No Movie playing,Star Wars eps IV"
+                  ";amy45;No Movie playing,Jedi Movie eps IV": {
+                    "reason_state": ";amy45;No Movie playing,Jedi Movie eps IV"
                   }
                 },
                 "reason_context": ";amy45;No Movie playing;"
@@ -4368,7 +4368,7 @@
         },
         "_uid": 200,
         "plan_label": "Ultimate Frisbee",
-        "mass": 1,
+        "star": 1,
         "reasonunits": {
           ";amy45;Moods;": {
             "cases": {
@@ -4388,7 +4388,7 @@
               "animate": {
                 "_uid": 228,
                 "plan_label": "animate",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;WaterExistence;": {
                     "cases": {
@@ -4403,7 +4403,7 @@
               "bike around": {
                 "_uid": 227,
                 "plan_label": "bike around",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;WaterExistence;": {
                     "cases": {
@@ -4418,7 +4418,7 @@
               "Go climbing at east Circuit": {
                 "_uid": 226,
                 "plan_label": "Go climbing at east Circuit",
-                "mass": 1,
+                "star": 1,
                 "reasonunits": {
                   ";amy45;WaterExistence;": {
                     "cases": {
@@ -4433,7 +4433,7 @@
             },
             "_uid": 225,
             "plan_label": "Swimming in Williamette watershed",
-            "mass": 1,
+            "star": 1,
             "reasonunits": {
               ";amy45;WaterExistence;": {
                 "cases": {
@@ -4448,7 +4448,7 @@
         },
         "_uid": 223,
         "plan_label": "Water Living",
-        "mass": 1
+        "star": 1
       },
       "WaterExistence": {
         "_kids": {
@@ -4459,147 +4459,147 @@
                   "flat": {
                     "_uid": 260,
                     "plan_label": "flat",
-                    "mass": 1
+                    "star": 1
                   }
                 },
                 "_uid": 258,
                 "plan_label": "East Side of Watershed",
-                "mass": 1
+                "star": 1
               },
               "West side of Watershed": {
                 "_uid": 259,
                 "plan_label": "West side of Watershed",
-                "mass": 1
+                "star": 1
               }
             },
             "_uid": 257,
             "plan_label": "Williamette WaterShed",
-            "mass": 1
+            "star": 1
           }
         },
         "_uid": 256,
         "plan_label": "WaterExistence",
-        "mass": 1
+        "star": 1
       },
       "sem_jours": {
         "_kids": {
           "Fri": {
             "plan_label": "Fri",
-            "mass": 40
+            "star": 40
           },
           "Mon": {
             "plan_label": "Mon",
-            "mass": 20
+            "star": 20
           },
           "Sat": {
             "plan_label": "Sat",
-            "mass": 50
+            "star": 50
           },
           "Sun": {
             "plan_label": "Sun",
-            "mass": 20
+            "star": 20
           },
           "Thur": {
             "plan_label": "Thur",
-            "mass": 30
+            "star": 30
           },
           "Tue": {
             "plan_label": "Tue",
-            "mass": 20
+            "star": 20
           },
           "Wed": {
             "plan_label": "Wed",
-            "mass": 20
+            "star": 20
           }
         },
         "plan_label": "sem_jours",
-        "mass": 40
+        "star": 40
       },
       "yr_month": {
         "_kids": {
           "April": {
             "plan_label": "April",
             "gogo_want": 4,
-            "mass": 40,
+            "star": 40,
             "stop_want": 5
           },
           "August": {
             "plan_label": "August",
             "gogo_want": 8,
-            "mass": 40,
+            "star": 40,
             "stop_want": 9
           },
           "December": {
             "plan_label": "December",
             "gogo_want": 12,
-            "mass": 40,
+            "star": 40,
             "stop_want": 13
           },
           "February": {
             "plan_label": "February",
             "gogo_want": 2,
-            "mass": 40,
+            "star": 40,
             "stop_want": 3
           },
           "January": {
             "plan_label": "January",
             "gogo_want": 1,
-            "mass": 40,
+            "star": 40,
             "stop_want": 2
           },
           "July": {
             "plan_label": "July",
             "gogo_want": 7,
-            "mass": 40,
+            "star": 40,
             "stop_want": 8
           },
           "June": {
             "plan_label": "June",
             "gogo_want": 6,
-            "mass": 40,
+            "star": 40,
             "stop_want": 7
           },
           "March": {
             "plan_label": "March",
             "gogo_want": 3,
-            "mass": 40,
+            "star": 40,
             "stop_want": 4
           },
           "May": {
             "plan_label": "May",
             "gogo_want": 5,
-            "mass": 40,
+            "star": 40,
             "stop_want": 6
           },
           "November": {
             "plan_label": "November",
             "gogo_want": 11,
-            "mass": 40,
+            "star": 40,
             "stop_want": 12
           },
           "October": {
             "plan_label": "October",
             "gogo_want": 10,
-            "mass": 40,
+            "star": 40,
             "stop_want": 11
           },
           "September": {
             "plan_label": "September",
             "gogo_want": 9,
-            "mass": 40,
+            "star": 40,
             "stop_want": 10
           }
         },
         "begin": 1,
         "close": 13,
         "plan_label": "yr_month",
-        "mass": 40
+        "star": 40
       },
       "yr_wk": {
         "begin": 0,
         "close": 52,
         "plan_label": "yr_wk",
-        "mass": 40
+        "star": 40
       }
     },
     "_uid": 1,
@@ -4618,7 +4618,7 @@
         "fact_state": ";amy45;jour_minute;"
       }
     },
-    "mass": 1
+    "star": 1
   },
   "belief_label": "amy45",
   "fund_iota": 1,

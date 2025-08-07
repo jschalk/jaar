@@ -512,7 +512,7 @@ def test_get_ropemap_from_dict_ReturnsObj():
     x_ropemap.set_label("bob", "bobito")
 
     # WHEN
-    gen_ropemap = get_ropemap_from_dict(x_ropemap.get_dict())
+    gen_ropemap = get_ropemap_from_dict(x_ropemap.to_dict())
 
     # THEN
     assert gen_ropemap.face_name == x_ropemap.face_name

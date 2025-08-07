@@ -15,8 +15,11 @@
         "believer_name": {
             "otx_key": true
         },
-        "labor_title": {
+        "party_title": {
             "otx_key": true
+        },
+        "solo": {
+            "otx_key": false
         }
     },
     "idea_number": "br00024",
@@ -24,6 +27,6 @@
         "beliefunit",
         "believerunit",
         "believer_planunit",
-        "believer_plan_laborlink"
+        "believer_plan_partyunit"
     ]
 }

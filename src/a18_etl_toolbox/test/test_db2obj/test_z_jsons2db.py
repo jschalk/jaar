@@ -7,8 +7,8 @@ from src.a03_group_logic.group import (
     groupunit_shop,
     membership_shop,
 )
+from src.a03_group_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
 from src.a03_group_logic.partner import partnerunit_shop
-from src.a04_reason_logic.reason_labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_plan import (
     caseunit_shop,
     factheir_shop,
@@ -153,7 +153,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_morph = 10
     x_gogo_want = 11.0
     x_stop_want = 12.0
-    x_mass = 13
+    x_star = 13
     x_task = 14
     x_problem_bool = 15
     x__active = 16
@@ -182,7 +182,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.morph = x_morph
     x_plan.gogo_want = x_gogo_want
     x_plan.stop_want = x_stop_want
-    x_plan.mass = x_mass
+    x_plan.star = x_star
     x_plan.task = x_task
     x_plan.problem_bool = x_problem_bool
     x_plan._active = x__active
@@ -207,7 +207,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.morph = x_morph
     x_plan.gogo_want = x_gogo_want
     x_plan.stop_want = x_stop_want
-    x_plan.mass = x_mass
+    x_plan.star = x_star
     x_plan.task = x_task
     x_plan.problem_bool = x_problem_bool
     x_plan._active = x__active
@@ -253,7 +253,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x_morph,
             x_gogo_want,
             x_stop_want,
-            x_mass,
+            x_star,
             x_task,
             x_problem_bool,
             x_fund_iota,
@@ -801,7 +801,7 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
 def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_laborlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_partyunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -816,17 +816,21 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     x_belief_label = 1
     x_believer_name = 2
     x_rope = 3
-    x__believer_name_labor = 5
+    x__believer_name_is_labor = 5
     x_laborheir = laborheir_shop()
-    x_laborheir._believer_name_labor = x__believer_name_labor
+    x_laborheir._believer_name_is_labor = x__believer_name_is_labor
     bob_str = "Bob"
+    bob_solo_bool = 6
     sue_str = "Sue"
-    x_laborheir._laborlinks = {bob_str, sue_str}
+    sue_solo_bool = 7
+    bob_partyheir = partyheir_shop(bob_str, bob_solo_bool)
+    sue_partyheir = partyheir_shop(sue_str, sue_solo_bool)
+    x_laborheir._partys = {bob_str: bob_partyheir, sue_str: sue_partyheir}
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_laborlink_job"
+        x_table_name = "believer_plan_partyunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
@@ -843,14 +847,16 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
             str(x_believer_name),
             str(x_rope),
             bob_str,
-            x__believer_name_labor,
+            bob_solo_bool,
+            x__believer_name_is_labor,
         )
         expected_row2 = (
             str(x_belief_label),
             str(x_believer_name),
             str(x_rope),
             sue_str,
-            x__believer_name_labor,
+            sue_solo_bool,
+            x__believer_name_is_labor,
         )
         expected_data = [expected_row1, expected_row2]
         assert rows == expected_data
@@ -879,7 +885,9 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     )
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
-    sue_believer.edit_plan_attr(casa_rope, laborunit=laborunit_shop({sue_str}))
+    casa_laborunit = laborunit_shop()
+    casa_laborunit.set_partyunit(sue_str, True)
+    sue_believer.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
     sue_believer.add_fact(status_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:
@@ -893,7 +901,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         blrheal_job_table = "believer_plan_healerlink_job"
         blrprem_job_table = "believer_plan_reason_caseunit_job"
         blrreas_job_table = "believer_plan_reasonunit_job"
-        blrlabo_job_table = "believer_plan_laborlink_job"
+        blrlabo_job_table = "believer_plan_partyunit_job"
         blrplan_job_table = "believer_planunit_job"
         blrunit_job_table = "believerunit_job"
         assert get_row_count(cursor, blrunit_job_table) == 0

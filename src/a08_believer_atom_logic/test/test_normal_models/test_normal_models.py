@@ -5,7 +5,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -169,17 +169,17 @@ def test_normalized_table_CaseTable_case_Exists():
     all_columns_are_as_config_requires(mapper, config_dimen)
 
 
-def test_normalized_table_LaborLinkTable_laborlink_Exists():
+def test_normalized_table_LaborLinkTable_partyunit_Exists():
     # ESTABLISH
     config_dimen = get_normalized_believer_table_build().get(
-        believer_plan_laborlink_str()
+        believer_plan_partyunit_str()
     )
     mapper = inspect(LaborLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
     # WHEN / THEN
     config_table_name = get_config_table_name(config_dimen)
-    assert config_table_name == "laborlink"
+    assert config_table_name == "partyunit"
     assert config_table_name == LaborLinkTable.__tablename__
     all_columns_are_as_config_requires(mapper, config_dimen)
 

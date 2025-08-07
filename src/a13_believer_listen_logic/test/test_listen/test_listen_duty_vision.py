@@ -124,7 +124,7 @@ def get_example_yao_vision1_speaker() -> BelieverUnit:
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.set_laborlink(yao_str)
+    cook_planunit.laborunit.set_partyunit(yao_str)
     yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
     yao_speaker.add_fact(eat_rope(), hungry_rope())
     return yao_speaker
@@ -139,7 +139,7 @@ def get_example_yao_vision2_speaker() -> BelieverUnit:
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.set_laborlink(yao_str)
+    cook_planunit.laborunit.set_partyunit(yao_str)
     yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
     yao_speaker.add_fact(eat_rope(), hungry_rope())
 
@@ -332,8 +332,8 @@ def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceI
     yao_job.settle_believer()
     assert yao_job.partners.keys() == yao_gut0.partners.keys()
     assert yao_job.get_partner(yao_str)._irrational_partner_debt_points == 0
-    yao_job_partners = yao_job.get_dict().get("partners")
-    yao_gut0_partners = yao_gut0.get_dict().get("partners")
+    yao_job_partners = yao_job.to_dict().get("partners")
+    yao_gut0_partners = yao_gut0.to_dict().get("partners")
     yao_job_bob = yao_job_partners.get("Bob")
     yao_gut0_bob = yao_gut0_partners.get("Bob")
     print(f"{yao_job_bob=}")
@@ -341,7 +341,7 @@ def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceI
     assert yao_job_bob == yao_gut0_bob
     assert yao_job_partners.keys() == yao_gut0_partners.keys()
     assert yao_job_partners == yao_gut0_partners
-    assert len(yao_job.get_dict().get("partners")) == 3
+    assert len(yao_job.to_dict().get("partners")) == 3
     assert len(yao_job._plan_dict) == 4
     print(f"{yao_job._plan_dict.keys()=}")
     print(f"{yao_job.get_factunits_dict().keys()=}")
@@ -382,4 +382,4 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
     yao_vision = sue_texas_hubunit.get_vision_believer(yao_str)
     assert yao_vision.believer_name is not None
     assert yao_vision.believer_name == yao_str
-    assert yao_vision.get_dict() == yao_duty.get_dict()
+    assert yao_vision.to_dict() == yao_duty.to_dict()

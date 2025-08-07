@@ -375,7 +375,7 @@ class BelieverDelta:
             x_believeratom.set_jvalue("denom", insert_planunit.denom)
             x_believeratom.set_jvalue("numor", insert_planunit.numor)
             x_believeratom.set_jvalue("morph", insert_planunit.morph)
-            x_believeratom.set_jvalue("mass", insert_planunit.mass)
+            x_believeratom.set_jvalue("star", insert_planunit.star)
             x_believeratom.set_jvalue("task", insert_planunit.task)
             self.set_believeratom(x_believeratom)
 
@@ -393,9 +393,9 @@ class BelieverDelta:
                     insert_planunit.reasonunits.keys()
                 ),
             )
-            self.add_believeratom_plan_laborlink_insert(
+            self.add_believeratom_plan_partyunit_insert(
                 plan_rope=insert_plan_rope,
-                insert_laborlink_labor_titles=insert_planunit.laborunit._laborlinks,
+                insert_partyunit_party_titles=insert_planunit.laborunit._partys,
             )
             self.add_believeratom_plan_healerlink_insert(
                 plan_rope=insert_plan_rope,
@@ -426,8 +426,8 @@ class BelieverDelta:
                     x_believeratom.set_jvalue("numor", after_planunit.numor)
                 if before_planunit.morph != after_planunit.morph:
                     x_believeratom.set_jvalue("morph", after_planunit.morph)
-                if before_planunit.mass != after_planunit.mass:
-                    x_believeratom.set_jvalue("mass", after_planunit.mass)
+                if before_planunit.star != after_planunit.star:
+                    x_believeratom.set_jvalue("star", after_planunit.star)
                 if before_planunit.task != after_planunit.task:
                     x_believeratom.set_jvalue("task", after_planunit.task)
                 self.set_believeratom(x_believeratom)
@@ -505,19 +505,19 @@ class BelieverDelta:
             # update reasonunits_permises update_case
             # update reasonunits_permises delete_case
 
-            # insert / update / delete laborlinks
-            before_laborlinks_labor_titles = set(before_planunit.laborunit._laborlinks)
-            after_laborlinks_labor_titles = set(after_planunit.laborunit._laborlinks)
-            self.add_believeratom_plan_laborlink_insert(
+            # insert / update / delete partyunits
+            before_partys_party_titles = set(before_planunit.laborunit._partys)
+            after_partys_party_titles = set(after_planunit.laborunit._partys)
+            self.add_believeratom_plan_partyunit_insert(
                 plan_rope=plan_rope,
-                insert_laborlink_labor_titles=after_laborlinks_labor_titles.difference(
-                    before_laborlinks_labor_titles
+                insert_partyunit_party_titles=after_partys_party_titles.difference(
+                    before_partys_party_titles
                 ),
             )
-            self.add_believeratom_plan_laborlink_deletes(
+            self.add_believeratom_plan_partyunit_deletes(
                 plan_rope=plan_rope,
-                delete_laborlink_labor_titles=before_laborlinks_labor_titles.difference(
-                    after_laborlinks_labor_titles
+                delete_partyunit_party_titles=before_partys_party_titles.difference(
+                    after_partys_party_titles
                 ),
             )
 
@@ -565,9 +565,9 @@ class BelieverDelta:
                     delete_planunit.reasonunits.keys()
                 ),
             )
-            self.add_believeratom_plan_laborlink_deletes(
+            self.add_believeratom_plan_partyunit_deletes(
                 plan_rope=delete_plan_rope,
-                delete_laborlink_labor_titles=delete_planunit.laborunit._laborlinks,
+                delete_partyunit_party_titles=delete_planunit.laborunit._partys,
             )
             self.add_believeratom_plan_healerlink_deletes(
                 plan_rope=delete_plan_rope,
@@ -747,22 +747,22 @@ class BelieverDelta:
             x_believeratom.set_jkey("reason_state", delete_case_reason_state)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_laborlink_insert(
-        self, plan_rope: RopeTerm, insert_laborlink_labor_titles: set
+    def add_believeratom_plan_partyunit_insert(
+        self, plan_rope: RopeTerm, insert_partyunit_party_titles: set
     ):
-        for insert_laborlink_labor_title in insert_laborlink_labor_titles:
-            x_believeratom = believeratom_shop("believer_plan_laborlink", "INSERT")
+        for insert_partyunit_party_title in insert_partyunit_party_titles:
+            x_believeratom = believeratom_shop("believer_plan_partyunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("labor_title", insert_laborlink_labor_title)
+            x_believeratom.set_jkey("party_title", insert_partyunit_party_title)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_laborlink_deletes(
-        self, plan_rope: RopeTerm, delete_laborlink_labor_titles: set
+    def add_believeratom_plan_partyunit_deletes(
+        self, plan_rope: RopeTerm, delete_partyunit_party_titles: set
     ):
-        for delete_laborlink_labor_title in delete_laborlink_labor_titles:
-            x_believeratom = believeratom_shop("believer_plan_laborlink", "DELETE")
+        for delete_partyunit_party_title in delete_partyunit_party_titles:
+            x_believeratom = believeratom_shop("believer_plan_partyunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("labor_title", delete_laborlink_labor_title)
+            x_believeratom.set_jkey("party_title", delete_partyunit_party_title)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_healerlink_insert(
@@ -896,7 +896,7 @@ class BelieverDelta:
 
     def get_ordered_dict(self, x_count: int = None) -> dict[int, str]:
         atom_tuples = self.get_ordered_believeratoms(x_count).items()
-        return {atom_num: atom_obj.get_dict() for atom_num, atom_obj in atom_tuples}
+        return {atom_num: atom_obj.to_dict() for atom_num, atom_obj in atom_tuples}
 
     def get_json(self, x_count: int = None) -> str:
         x_dict = self.get_ordered_dict(x_count)

@@ -128,10 +128,10 @@ def test_WorldUnit_calc_belief_bud_partner_mandate_net_ledgers_Scenaro2_BudExist
     sue44_path = create_believerevent_path(mstr_dir, a23_str, sue_str, event44)
     yao44_path = create_believerevent_path(mstr_dir, a23_str, yao_str, event44)
     zia33_path = create_believerevent_path(mstr_dir, a23_str, zia_str, event33)
-    save_json(bob55_path, None, bob55_believerevent.get_dict())
-    save_json(sue44_path, None, sue44_believerevent.get_dict())
-    save_json(yao44_path, None, yao44_believerevent.get_dict())
-    save_json(zia33_path, None, zia33_believerevent.get_dict())
+    save_json(bob55_path, None, bob55_believerevent.to_dict())
+    save_json(sue44_path, None, sue44_believerevent.to_dict())
+    save_json(yao44_path, None, yao44_believerevent.to_dict())
+    save_json(zia33_path, None, zia33_believerevent.to_dict())
 
     # Create empty ote1 file
     a23_ote1_dict = {

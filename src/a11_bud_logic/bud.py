@@ -157,7 +157,7 @@ class TranBook:
                         src_partner_name, dst_partner_name, x_tran_time, x_amount
                     )
 
-    def get_dict(
+    def to_dict(
         self,
     ) -> dict[
         BeliefLabel, dict[BelieverName, dict[PartnerName, dict[TimeLinePoint, FundNum]]]
@@ -220,7 +220,7 @@ class BudUnit:
             raise calc_magnitudeException(exception_str)
         self._magnitude = x_cred_sum
 
-    def get_dict(self) -> dict[str,]:
+    def to_dict(self) -> dict[str,]:
         x_dict = {"bud_time": self.bud_time, "quota": self.quota}
         if self._bud_partner_nets:
             x_dict["bud_partner_nets"] = self._bud_partner_nets
@@ -231,7 +231,7 @@ class BudUnit:
         return x_dict
 
     def get_json(self) -> dict[str,]:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def budunit_shop(
@@ -291,11 +291,11 @@ class BrokerUnit:
     def get_headers(self) -> list:
         return ["believer_name", "bud_time", "quota"]
 
-    def get_dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {"believer_name": self.believer_name, "buds": self._get_buds_dict()}
 
     def _get_buds_dict(self) -> dict:
-        return {x_bud.bud_time: x_bud.get_dict() for x_bud in self.buds.values()}
+        return {x_bud.bud_time: x_bud.to_dict() for x_bud in self.buds.values()}
 
     def get_bud_times(self) -> set[TimeLinePoint]:
         return set(self.buds.keys())

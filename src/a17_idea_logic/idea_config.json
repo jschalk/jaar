@@ -81,7 +81,7 @@
     },
     "jvalues": {}
   },
-  "believer_plan_laborlink": {
+  "believer_plan_partyunit": {
     "allowed_crud": "delete_insert",
     "build_order": 14,
     "idea_category": "believer",
@@ -90,10 +90,12 @@
       "event_int": {},
       "face_name": {},
       "belief_label": {},
-      "labor_title": {},
+      "party_title": {},
       "believer_name": {}
     },
-    "jvalues": {}
+    "jvalues": {
+      "solo": {}
+    }
   },
   "believer_plan_reason_caseunit": {
     "allowed_crud": "delete_insert_update",
@@ -147,7 +149,7 @@
       "close": {},
       "denom": {},
       "gogo_want": {},
-      "mass": {},
+      "star": {},
       "morph": {},
       "numor": {},
       "task": {},

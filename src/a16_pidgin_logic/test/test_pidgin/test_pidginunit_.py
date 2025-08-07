@@ -14,8 +14,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     fund_iota_str,
     group_title_str,
     healer_name_str,
-    labor_title_str,
     partner_name_str,
+    party_title_str,
     penny_str,
     plan_label_str,
     plan_rope_str,
@@ -100,7 +100,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("group_title") == TitleTerm_str()
     assert pidgin_args_class_types.get("healer_name") == NameTerm_str()
     assert pidgin_args_class_types.get("hour_label") == LabelTerm_str()
-    assert pidgin_args_class_types.get("mass") == "int"
+    assert pidgin_args_class_types.get("star") == "int"
     assert pidgin_args_class_types.get("max_tree_traverse") == "int"
     assert pidgin_args_class_types.get("month_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
@@ -122,7 +122,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
     assert pidgin_args_class_types.get("tally") == "int"
-    assert pidgin_args_class_types.get("labor_title") == TitleTerm_str()
+    assert pidgin_args_class_types.get("party_title") == TitleTerm_str()
     assert pidgin_args_class_types.get("bud_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("tran_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("timeline_label") == LabelTerm_str()
@@ -130,6 +130,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("weekday_order") == "int"
     assert pidgin_args_class_types.get("knot") == "str"
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
+    assert pidgin_args_class_types.get("solo") == "int"
 
     # make sure it pidgin_arg_class_types has all belief and all atom args
     pidgin_args = set(pidgin_args_class_types.keys())
@@ -217,7 +218,7 @@ def test_get_pidginable_args_ReturnsObj():
         reason_state_str(),
         believer_name_str(),
         plan_rope_str(),
-        labor_title_str(),
+        party_title_str(),
         timeline_label_str(),
         weekday_label_str(),
     }
@@ -324,7 +325,7 @@ def test_get_pidgin_TitleTerm_args_ReturnsObj():
     assert pidgin_TitleTerm_args == {
         awardee_title_str(),
         group_title_str(),
-        labor_title_str(),
+        party_title_str(),
     }
     expected_args = {
         x_arg

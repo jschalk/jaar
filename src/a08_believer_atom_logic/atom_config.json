@@ -183,7 +183,7 @@
             "normal_table_name": "healerlink"
         }
     },
-    "believer_plan_laborlink": {
+    "believer_plan_partyunit": {
         "DELETE": {
             "atom_order": 19
         },
@@ -197,16 +197,23 @@
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
-            "labor_title": {
+            "party_title": {
                 "class_type": "TitleTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jvalues": {},
+        "jvalues": {
+            "solo": {
+                "class_type": "int",
+                "column_order": 2,
+                "nesting_order": 2,
+                "sqlite_datatype": "INTEGER"
+            }
+        },
         "normal_specs": {
-            "normal_table_name": "laborlink"
+            "normal_table_name": "partyunit"
         }
     },
     "believer_plan_reason_caseunit": {
@@ -336,7 +343,7 @@
                 "column_order": 11,
                 "sqlite_datatype": "REAL"
             },
-            "mass": {
+            "star": {
                 "class_type": "int",
                 "column_order": 3,
                 "sqlite_datatype": "INTEGER"

@@ -2,7 +2,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     _keeps_buildable_str,
     _keeps_justified_str,
     _offtrack_fund_str,
-    _offtrack_kids_mass_set_str,
+    _offtrack_kids_star_set_str,
     _rational_str,
     _reason_contexts_str,
     _sum_healerlink_share_str,
@@ -14,7 +14,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -40,7 +40,7 @@ def test_str_functions_ReturnsObj():
     assert _keeps_buildable_str() == "_keeps_buildable"
     assert _keeps_justified_str() == "_keeps_justified"
     assert _offtrack_fund_str() == "_offtrack_fund"
-    assert _offtrack_kids_mass_set_str() == "_offtrack_kids_mass_set"
+    assert _offtrack_kids_star_set_str() == "_offtrack_kids_star_set"
     assert _rational_str() == "_rational"
     assert _reason_contexts_str() == "_reason_contexts"
     assert _sum_healerlink_share_str() == "_sum_healerlink_share"
@@ -62,7 +62,7 @@ def test_str_functions_ReturnsObj():
     assert believer_plan_awardlink_str() == "believer_plan_awardlink"
     assert believer_plan_reasonunit_str() == "believer_plan_reasonunit"
     assert believer_plan_reason_caseunit_str() == "believer_plan_reason_caseunit"
-    assert believer_plan_laborlink_str() == "believer_plan_laborlink"
+    assert believer_plan_partyunit_str() == "believer_plan_partyunit"
     assert believer_plan_healerlink_str() == "believer_plan_healerlink"
     assert believer_plan_factunit_str() == "believer_plan_factunit"
     assert jkeys_str() == "jkeys"

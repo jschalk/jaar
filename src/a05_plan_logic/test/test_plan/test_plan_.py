@@ -3,7 +3,7 @@ from src.a01_term_logic.test._util.a01_str import knot_str, parent_rope_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.test._util.a04_str import _chore_str
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import PlanUnit, get_default_belief_label, planunit_shop
@@ -36,11 +36,11 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerlink_str,
     knot_str,
-    mass_str,
     morph_str,
     numor_str,
     plan_label_str,
     problem_bool_str,
+    star_str,
     stop_want_str,
     task_str,
 )
@@ -54,7 +54,7 @@ def test_PlanUnit_Exists():
     x_planunit = PlanUnit()
     assert x_planunit
     assert x_planunit._kids is None
-    assert x_planunit.mass is None
+    assert x_planunit.star is None
     assert x_planunit.plan_label is None
     assert x_planunit._uid is None
     assert x_planunit.reasonunits is None
@@ -133,7 +133,7 @@ def test_PlanUnit_Exists():
         gogo_want_str(),
         healerlink_str(),
         "laborunit",
-        mass_str(),
+        star_str(),
         morph_str(),
         numor_str(),
         parent_rope_str(),
@@ -152,7 +152,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     # THEN
     assert x_planunit
     assert x_planunit._kids == {}
-    assert x_planunit.mass == 1
+    assert x_planunit.star == 1
     assert x_planunit.plan_label is None
     assert x_planunit.belief_label == get_default_belief_label()
     assert x_planunit._uid is None
@@ -191,23 +191,23 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit._healerlink_ratio == 0
 
 
-def test_planunit_shop_Allows_massToBeZero():
+def test_planunit_shop_Allows_starToBeZero():
     # ESTABLISH
     zero_int = 0
     # WHEN
-    x_planunit = planunit_shop("run", mass=zero_int)
+    x_planunit = planunit_shop("run", star=zero_int)
     # THEN
-    assert x_planunit.mass == zero_int
+    assert x_planunit.star == zero_int
 
 
-def test_planunit_shop_Allows_doesNotAllow_massToBeNegative():
+def test_planunit_shop_Allows_doesNotAllow_starToBeNegative():
     # ESTABLISH
     negative_int = -4
     # WHEN
-    x_planunit = planunit_shop("run", mass=negative_int)
+    x_planunit = planunit_shop("run", star=negative_int)
     # THEN
     zero_int = 0
-    assert x_planunit.mass == zero_int
+    assert x_planunit.star == zero_int
 
 
 def test_planunit_shop_NonNoneParametersReturnsObj():

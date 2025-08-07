@@ -18,7 +18,7 @@ from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bu
 from src.a19_kpi_toolbox.test._util.a19_str import belief_kpi001_partner_nets_str
 
 
-def test_populate_kpi_bundle_PopulatesTable_Scenario0_GivenDefaultBundleID():
+def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"
@@ -54,7 +54,7 @@ VALUES
         }
 
 
-def test_populate_kpi_bundle_PopulatesTable_Scenario1_GivenNoBundleID():
+def test_populate_kpi_bundle_PopulatesTable_Scenario1_WithNoBundleID():
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"

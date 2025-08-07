@@ -318,7 +318,7 @@ def add_believer_to_br00024_csv(
     event_int: int = None,
 ) -> str:
     for planunit in x_believer._plan_dict.values():
-        for group_title in planunit.laborunit._laborlinks:
+        for group_title in planunit.laborunit._partys:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
@@ -427,7 +427,7 @@ def add_believer_to_br00028_csv(
                 if_none_str(planunit.morph),
                 if_none_str(planunit.gogo_want),
                 if_none_str(planunit.stop_want),
-                if_none_str(planunit.mass),
+                if_none_str(planunit.star),
                 if_none_str(planunit.task),
                 if_none_str(planunit.problem_bool),
             ]
@@ -581,14 +581,14 @@ def add_pack_to_br00024_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_plan_laborlink":
+        if believeratom.dimen == "believer_plan_partyunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.belief_label,
                 x_packunit.believer_name,
                 believeratom.jkeys.get("plan_rope"),
-                believeratom.jkeys.get("labor_title"),
+                believeratom.jkeys.get("party_title"),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -673,7 +673,7 @@ def add_pack_to_br00028_csv(
                 if_none_str(believeratom.jvalues.get("morph")),
                 if_none_str(believeratom.jvalues.get("gogo_want")),
                 if_none_str(believeratom.jvalues.get("stop_want")),
-                if_none_str(believeratom.jvalues.get("mass")),
+                if_none_str(believeratom.jvalues.get("star")),
                 if_none_str(believeratom.jvalues.get("task")),
                 if_none_str(believeratom.jvalues.get("problem_bool")),
             ]

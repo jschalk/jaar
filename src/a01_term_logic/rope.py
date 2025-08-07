@@ -89,7 +89,6 @@ def is_sub_rope(ref_rope: RopeTerm, sub_rope: RopeTerm) -> bool:
 
 
 def is_heir_rope(src: RopeTerm, heir: RopeTerm, knot: str = None) -> bool:
-    # return src == heir or heir.startswith(src + default_knot_if_None(knot))
     return src == heir or heir.find(src) == 0
 
 

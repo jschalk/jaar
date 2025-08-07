@@ -176,7 +176,7 @@ class WorldUnit:
     def create_kpi_csvs(self):
         create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
-    def get_dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {
             "world_name": self.world_name,
             "world_time_reason_upper": self.world_time_reason_upper,

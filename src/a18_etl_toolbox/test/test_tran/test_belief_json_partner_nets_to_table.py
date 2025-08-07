@@ -79,7 +79,7 @@ def test_etl_belief_json_partner_nets_to_belief_partner_nets_table_PopulatesData
     a23_belief.add_paypurchase(sue_str, bob_str, t55_tran_time, t55_bob_amount)
     a23_belief.add_paypurchase(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     a23_json_path = create_belief_json_path(mstr_dir, a23_str)
-    save_json(a23_json_path, None, a23_belief.get_dict())
+    save_json(a23_json_path, None, a23_belief.to_dict())
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()

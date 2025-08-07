@@ -57,4 +57,3 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_te
         # print(f"{count_dirs_files(output_dir)=}")
         assert count_dirs_files(output_dir) > 0
         assert count_dirs_files(input_dir) > 0
-    assert 1 == 2

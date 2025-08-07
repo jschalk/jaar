@@ -98,6 +98,7 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
 
 
 def test_ReasonHeir_set_status_CorrectlySetsStatus():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -255,7 +256,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_caseequireds():
     wk_reason = reasonunit_shop(wk_rope, cases=wed_cases)
 
     # WHEN
-    wk_reason_dict = wk_reason.get_dict()
+    wk_reason_dict = wk_reason.to_dict()
 
     # THEN
     assert wk_reason_dict is not None
@@ -278,7 +279,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_reason_active_requisite():
     )
 
     # WHEN
-    wk_reason_dict = wk_reason.get_dict()
+    wk_reason_dict = wk_reason.to_dict()
 
     # THEN
     assert wk_reason_dict is not None
@@ -304,7 +305,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoCasesReasons():
     wk_reason = reasonunit_shop(wk_rope, cases=two_cases)
 
     # WHEN
-    wk_reason_dict = wk_reason.get_dict()
+    wk_reason_dict = wk_reason.to_dict()
 
     # THEN
     assert wk_reason_dict is not None
@@ -328,7 +329,7 @@ def test_reasons_get_from_dict_ReturnsObj():
         wk_rope,
         reason_active_requisite=wk_reason_active_requisite,
     )
-    x_wk_reasonunits_dict = {wk_reasonunit.reason_context: wk_reasonunit.get_dict()}
+    x_wk_reasonunits_dict = {wk_reasonunit.reason_context: wk_reasonunit.to_dict()}
     assert x_wk_reasonunits_dict is not None
     static_wk_reason_dict = {
         wk_rope: {
@@ -509,16 +510,16 @@ def test_ReasonCore_set_knot_SetsAttrsCorrectly():
     assert wk_reasonunit.cases.get(slash_sun_rope).reason_state == slash_sun_rope
 
     # WHEN
-    star_str = "*"
-    wk_reasonunit.set_knot(new_knot=star_str)
+    colon_str = ":"
+    wk_reasonunit.set_knot(new_knot=colon_str)
 
     # THEN
-    assert wk_reasonunit.knot == star_str
-    star_wk_rope = create_rope(root_label(), wk_str, knot=star_str)
-    star_sun_rope = create_rope(star_wk_rope, sun_str, knot=star_str)
-    assert wk_reasonunit.reason_context == star_wk_rope
-    assert wk_reasonunit.cases.get(star_sun_rope) is not None
-    assert wk_reasonunit.cases.get(star_sun_rope).reason_state == star_sun_rope
+    assert wk_reasonunit.knot == colon_str
+    colon_wk_rope = create_rope(root_label(), wk_str, knot=colon_str)
+    colon_sun_rope = create_rope(colon_wk_rope, sun_str, knot=colon_str)
+    assert wk_reasonunit.reason_context == colon_wk_rope
+    assert wk_reasonunit.cases.get(colon_sun_rope) is not None
+    assert wk_reasonunit.cases.get(colon_sun_rope).reason_state == colon_sun_rope
 
 
 def test_ReasonCore_get_obj_key():

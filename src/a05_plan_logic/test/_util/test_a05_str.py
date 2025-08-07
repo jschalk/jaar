@@ -25,12 +25,12 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healer_name_str,
     healerlink_str,
-    mass_str,
     morph_str,
     numor_str,
     plan_label_str,
     plan_rope_str,
     problem_bool_str,
+    star_str,
     stop_want_str,
     task_str,
 )
@@ -64,7 +64,7 @@ def test_str_functions_ReturnsObj():
     assert fund_share_str() == "fund_share"
     assert gogo_want_str() == "gogo_want"
     assert healerlink_str() == "healerlink"
-    assert mass_str() == "mass"
+    assert star_str() == "star"
     assert morph_str() == "morph"
     assert numor_str() == "numor"
     assert task_str() == "task"

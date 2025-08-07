@@ -301,30 +301,30 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
     # ESTABLISH
     h_c400_number = 7
     h_hours_config = [
-        ["0-12am", 60],
-        ["1-1am", 120],
-        ["2-2am", 180],
-        ["3-3am", 240],
-        ["4-4am", 300],
-        ["5-5am", 360],
-        ["6-6am", 420],
-        ["7-7am", 480],
-        ["8-8am", 540],
-        ["9-9am", 600],
-        ["10-10am", 660],
-        ["11-11am", 720],
-        ["12-12pm", 780],
-        ["13-1pm", 840],
-        ["14-2pm", 900],
-        ["15-3pm", 960],
-        ["16-4pm", 1020],
-        ["17-5pm", 1080],
-        ["18-6pm", 1140],
-        ["19-7pm", 1200],
-        ["20-8pm", 1260],
-        ["21-9pm", 1320],
-        ["22-10pm", 1380],
-        ["23-11pm", 1440],
+        ["12am", 60],
+        ["1am", 120],
+        ["2am", 180],
+        ["3am", 240],
+        ["4am", 300],
+        ["5am", 360],
+        ["6am", 420],
+        ["7am", 480],
+        ["8am", 540],
+        ["9am", 600],
+        ["10am", 660],
+        ["11am", 720],
+        ["12pm", 780],
+        ["1pm", 840],
+        ["2pm", 900],
+        ["3pm", 960],
+        ["4pm", 1020],
+        ["5pm", 1080],
+        ["6pm", 1140],
+        ["7pm", 1200],
+        ["8pm", 1260],
+        ["9pm", 1320],
+        ["10pm", 1380],
+        ["11pm", 1440],
     ]
     h_months_config = [
         ["March", 31],
@@ -525,7 +525,7 @@ def test_TimeLineUnit_get_dict_ReturnsObj():
     x_timelineunit = timelineunit_shop()
 
     # WHEN
-    x_config = x_timelineunit.get_dict()
+    x_config = x_timelineunit.to_dict()
 
     # THEN
     assert x_config

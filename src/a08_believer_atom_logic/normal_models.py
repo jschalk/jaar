@@ -49,7 +49,7 @@ class PlanTable(Base):
     numor = Column(Integer)
     problem_bool = Column(Integer)
     morph = Column(Integer)
-    mass = Column(Integer)
+    star = Column(Integer)
     task = Column(Integer)
     stop_want = Column(Float)
 
@@ -83,10 +83,11 @@ class CaseTable(Base):
 
 
 class LaborLinkTable(Base):
-    __tablename__ = "laborlink"
+    __tablename__ = "partyunit"
     uid = Column(Integer, primary_key=True)
-    labor_title = Column(String)
+    party_title = Column(String)
     plan_rope = Column(String)
+    solo = Column(Integer)
 
 
 class HealerLinkTable(Base):

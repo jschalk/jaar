@@ -1,0 +1,77 @@
+from src.a01_term_logic.rope import (
+    LabelTerm,
+    RopeTerm,
+    create_rope,
+    get_root_label_from_rope,
+    get_tail_label,
+)
+from src.a04_reason_logic.reason_plan import CaseUnit, FactUnit
+from src.a06_believer_logic.believer_main import BelieverUnit
+from src.a07_timeline_logic.timeline_main import (
+    BelieverTimelinePoint,
+    believertimelinepoint_shop,
+)
+
+
+def get_reason_case_readable_str(
+    context: RopeTerm,
+    caseunit: CaseUnit,
+    timeline_label: LabelTerm = None,
+    believerunit: BelieverUnit = None,
+) -> str:
+    """Returns a string describing reason case in readable language. Will have special cases for time."""
+
+    belief_label = get_root_label_from_rope(context)
+    time_rope = create_rope(belief_label, "time")
+    timeline_rope = create_rope(time_rope, timeline_label)
+    week_rope = create_rope(timeline_rope, "week")
+    if context == week_rope:
+        week_plan = believerunit.get_plan_obj(week_rope)
+        for weekday_plan in week_plan._kids.values():
+            if (
+                caseunit.reason_lower == weekday_plan.gogo_want
+                and caseunit.reason_upper == weekday_plan.stop_want
+            ):
+                return f"case: every {weekday_plan.plan_label}"
+
+    x_str = f"case: {caseunit.reason_state.replace(context, "", 1)}"
+    if caseunit.reason_divisor:
+        x_str += f" divided by {caseunit.reason_divisor} then"
+    if caseunit.reason_lower is not None and caseunit.reason_upper is not None:
+        x_str += f" from {caseunit.reason_lower} to {caseunit.reason_upper}"
+
+    return x_str
+
+
+def get_fact_state_readable_str(
+    factunit: FactUnit,
+    timeline_label: LabelTerm = None,
+    believerunit: BelieverUnit = None,
+) -> str:
+    """Returns a string describing fact in readable language. Will have special cases for time."""
+
+    context_rope = factunit.fact_context
+    state_rope = factunit.fact_state
+    lower_float = factunit.fact_lower
+    upper_float = factunit.fact_upper
+    context_tail = get_tail_label(context_rope)
+    state_trailing = state_rope.replace(context_rope, "", 1)
+    x_str = f"({context_tail}) fact: {state_trailing}"
+    belief_label = get_root_label_from_rope(context_rope)
+    time_rope = create_rope(belief_label, "time")
+    timeline_rope = create_rope(time_rope, timeline_label)
+    if factunit.fact_context == timeline_rope:
+        lower_blurb = get_timelinepoint_blurb(believerunit, timeline_rope, lower_float)
+        upper_blurb = get_timelinepoint_blurb(believerunit, timeline_rope, upper_float)
+        return f"from {lower_blurb} to {upper_blurb}"
+
+    if lower_float is not None and upper_float is not None:
+        x_str += f" from {lower_float} to {upper_float}"
+
+    return x_str
+
+
+def get_timelinepoint_blurb(believerunit, timeline_rope, arg2):
+    lower_btlp = believertimelinepoint_shop(believerunit, timeline_rope, arg2)
+    lower_btlp.calc_timeline()
+    return lower_btlp.get_blurb()

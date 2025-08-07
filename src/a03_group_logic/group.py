@@ -41,7 +41,7 @@ class MemberShip(GroupCore):
         if x_group_debt_points is not None:
             self.group_debt_points = x_group_debt_points
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         return {
             "group_title": self.group_title,
             "group_cred_points": self.group_cred_points,
@@ -101,7 +101,7 @@ class AwardLink(AwardCore):
     give_force: float = 1.0
     take_force: float = 1.0
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         return {
             "awardee_title": self.awardee_title,
             "give_force": self.give_force,

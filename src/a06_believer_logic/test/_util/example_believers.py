@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import open_file
 from src.a01_term_logic.rope import RopeTerm
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import (
@@ -61,13 +61,13 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
     a23_str = "amy23"
     sue_believer = believerunit_shop("Sue", a23_str)
     casa_str = "casa"
-    sue_believer.set_l1_plan(planunit_shop(casa_str, mass=30, task=True))
+    sue_believer.set_l1_plan(planunit_shop(casa_str, star=30, task=True))
     cat_str = "cat have dinner"
-    sue_believer.set_l1_plan(planunit_shop(cat_str, mass=30, task=True))
+    sue_believer.set_l1_plan(planunit_shop(cat_str, star=30, task=True))
 
     wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
-    plan_kid_sem_jours = planunit_shop(wk_str, mass=40)
+    plan_kid_sem_jours = planunit_shop(wk_str, star=40)
     sue_believer.set_l1_plan(plan_kid_sem_jours)
     sun_str = "Sun"
     mon_str = "Mon"
@@ -76,32 +76,32 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
     thu_str = "Thur"
     fri_str = "Fri"
     sat_str = "Sat"
-    sue_believer.set_plan(planunit_shop(sun_str, mass=20), wk_rope)
-    sue_believer.set_plan(planunit_shop(mon_str, mass=20), wk_rope)
-    sue_believer.set_plan(planunit_shop(tue_str, mass=20), wk_rope)
-    sue_believer.set_plan(planunit_shop(wed_str, mass=20), wk_rope)
-    sue_believer.set_plan(planunit_shop(thu_str, mass=30), wk_rope)
-    sue_believer.set_plan(planunit_shop(fri_str, mass=40), wk_rope)
-    sue_believer.set_plan(planunit_shop(sat_str, mass=50), wk_rope)
+    sue_believer.set_plan(planunit_shop(sun_str, star=20), wk_rope)
+    sue_believer.set_plan(planunit_shop(mon_str, star=20), wk_rope)
+    sue_believer.set_plan(planunit_shop(tue_str, star=20), wk_rope)
+    sue_believer.set_plan(planunit_shop(wed_str, star=20), wk_rope)
+    sue_believer.set_plan(planunit_shop(thu_str, star=30), wk_rope)
+    sue_believer.set_plan(planunit_shop(fri_str, star=40), wk_rope)
+    sue_believer.set_plan(planunit_shop(sat_str, star=50), wk_rope)
 
     nation_str = "nation"
     nation_rope = sue_believer.make_l1_rope(nation_str)
-    plan_kid_nation = planunit_shop(nation_str, mass=30)
+    plan_kid_nation = planunit_shop(nation_str, star=30)
     sue_believer.set_l1_plan(plan_kid_nation)
     usa_str = "USA"
     usa_rope = sue_believer.make_rope(nation_rope, usa_str)
     france_str = "France"
     brazil_str = "Brazil"
-    plan_grandkid_usa = planunit_shop(usa_str, mass=50)
-    plan_grandkid_france = planunit_shop(france_str, mass=50)
-    plan_grandkid_brazil = planunit_shop(brazil_str, mass=50)
+    plan_grandkid_usa = planunit_shop(usa_str, star=50)
+    plan_grandkid_france = planunit_shop(france_str, star=50)
+    plan_grandkid_brazil = planunit_shop(brazil_str, star=50)
     sue_believer.set_plan(plan_grandkid_france, nation_rope)
     sue_believer.set_plan(plan_grandkid_brazil, nation_rope)
     sue_believer.set_plan(plan_grandkid_usa, nation_rope)
     texas_str = "Texas"
     oregon_str = "Oregon"
-    plan_grandgrandkid_usa_texas = planunit_shop(texas_str, mass=50)
-    plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, mass=50)
+    plan_grandgrandkid_usa_texas = planunit_shop(texas_str, star=50)
+    plan_grandgrandkid_usa_oregon = planunit_shop(oregon_str, star=50)
     sue_believer.set_plan(plan_grandgrandkid_usa_texas, usa_rope)
     sue_believer.set_plan(plan_grandgrandkid_usa_oregon, usa_rope)
     return sue_believer
@@ -236,11 +236,11 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     zia_believer = believerunit_shop("Zia", belief_label=tiger_str)
     shave_str = "shave"
     shave_rope = zia_believer.make_l1_rope(shave_str)
-    plan_kid_shave = planunit_shop(shave_str, mass=30, task=True)
+    plan_kid_shave = planunit_shop(shave_str, star=30, task=True)
     zia_believer.set_l1_plan(plan_kid_shave)
     wk_str = "sem_jours"
     wk_rope = zia_believer.make_l1_rope(wk_str)
-    wk_plan = planunit_shop(wk_str, mass=40)
+    wk_plan = planunit_shop(wk_str, star=40)
     zia_believer.set_l1_plan(wk_plan)
 
     sun_str = "Sun"
@@ -249,8 +249,8 @@ def get_believerunit_x1_3levels_1reason_1facts() -> BelieverUnit:
     church_rope = zia_believer.make_rope(sun_rope, church_str)
     mon_str = "Mon"
     mon_rope = zia_believer.make_rope(wk_rope, mon_str)
-    plan_grandkidU = planunit_shop(sun_str, mass=20)
-    plan_grandkidM = planunit_shop(mon_str, mass=20)
+    plan_grandkidU = planunit_shop(sun_str, star=20)
+    plan_grandkidM = planunit_shop(mon_str, star=20)
     zia_believer.set_plan(plan_grandkidU, wk_rope)
     zia_believer.set_plan(plan_grandkidM, wk_rope)
 
@@ -378,7 +378,7 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
         laundry_chore_rope, reason_context=basket_rope, reason_case=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
-    cali_laborunit.set_laborlink(cali_str)
+    cali_laborunit.set_partyunit(cali_str)
     amos_believer.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
     amos_believer.add_fact(fact_context=basket_rope, fact_state=b_full_rope)
 

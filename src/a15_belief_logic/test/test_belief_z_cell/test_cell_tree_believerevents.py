@@ -69,7 +69,7 @@ def test_load_cells_believerevent_SetsFiles_Scenario1_WithFacts(
     load_cells_believerevent(belief_mstr_dir, a23_str)
 
     # THEN
-    expected_believerevent_facts = {clean_fact.fact_context: clean_fact.get_dict()}
+    expected_believerevent_facts = {clean_fact.fact_context: clean_fact.to_dict()}
     assert (
         open_json(bob5_cell_path).get(believerevent_facts_str())
         == expected_believerevent_facts
@@ -102,7 +102,7 @@ def test_load_cells_believerevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     load_cells_believerevent(belief_mstr_dir, a23_str)
 
     # THEN
-    expected_believerevent_facts = {clean_fact.fact_context: clean_fact.get_dict()}
+    expected_believerevent_facts = {clean_fact.fact_context: clean_fact.to_dict()}
     assert (
         open_json(bob5_cell_path).get(believerevent_facts_str())
         == expected_believerevent_facts

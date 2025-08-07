@@ -38,7 +38,7 @@ def test_BelieverAtom_get_dict_ReturnsObj():
     insert_factunit_believeratom.set_jvalue(fact_upper_str(), knee_reason_upper)
 
     # WHEN
-    atom_dict = insert_factunit_believeratom.get_dict()
+    atom_dict = insert_factunit_believeratom.to_dict()
 
     # THEN
     assert atom_dict == {

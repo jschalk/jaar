@@ -70,11 +70,11 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyBeliefUnit(
         "br00021": "belief_label,believer_name,partner_name,partner_cred_points,partner_debt_points\n",
         "br00022": "belief_label,believer_name,plan_rope,awardee_title,give_force,take_force\n",
         "br00023": "belief_label,believer_name,plan_rope,fact_context,fact_state,fact_lower,fact_upper\n",
-        "br00024": "belief_label,believer_name,plan_rope,labor_title\n",
+        "br00024": "belief_label,believer_name,plan_rope,party_title,solo\n",
         "br00025": "belief_label,believer_name,plan_rope,healer_name\n",
         "br00026": "belief_label,believer_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
         "br00027": "belief_label,believer_name,plan_rope,reason_context,reason_active_requisite\n",
-        "br00028": "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,mass,task,problem_bool\n",
+        "br00028": "belief_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,task,problem_bool\n",
         "br00029": "belief_label,believer_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
         "br00043": "otx_name,inx_name,otx_knot,inx_knot,unknown_str\n",
@@ -186,7 +186,7 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj_Scenario0_OneBeliefUnit(
         ",,amy23,Bob,999,332,3\n,,amy23,Sue,777,445,3\n,,amy23,Yao,222,700,3\n"
     )
     expected_br00002_csv = ",,amy23,Bob,Zia,777,888\n,,amy23,Sue,Zia,999,234\n,,amy23,Yao,Zia,999,234\n,,amy23,Zia,Bob,777,888\n"
-    expected_br00003_csv = ",,amy23,60,0-12am\n,,amy23,120,1-1am\n,,amy23,180,2-2am\n,,amy23,240,3-3am\n,,amy23,300,4-4am\n,,amy23,360,5-5am\n,,amy23,420,6-6am\n,,amy23,480,7-7am\n,,amy23,540,8-8am\n,,amy23,600,9-9am\n,,amy23,660,10-10am\n,,amy23,720,11-11am\n,,amy23,780,12-12pm\n,,amy23,840,13-1pm\n,,amy23,900,14-2pm\n,,amy23,960,15-3pm\n,,amy23,1020,16-4pm\n,,amy23,1080,17-5pm\n,,amy23,1140,18-6pm\n,,amy23,1200,19-7pm\n,,amy23,1260,20-8pm\n,,amy23,1320,21-9pm\n,,amy23,1380,22-10pm\n,,amy23,1440,23-11pm\n"
+    expected_br00003_csv = ",,amy23,60,12am\n,,amy23,120,1am\n,,amy23,180,2am\n,,amy23,240,3am\n,,amy23,300,4am\n,,amy23,360,5am\n,,amy23,420,6am\n,,amy23,480,7am\n,,amy23,540,8am\n,,amy23,600,9am\n,,amy23,660,10am\n,,amy23,720,11am\n,,amy23,780,12pm\n,,amy23,840,1pm\n,,amy23,900,2pm\n,,amy23,960,3pm\n,,amy23,1020,4pm\n,,amy23,1080,5pm\n,,amy23,1140,6pm\n,,amy23,1200,7pm\n,,amy23,1260,8pm\n,,amy23,1320,9pm\n,,amy23,1380,10pm\n,,amy23,1440,11pm\n"
     expected_br00004_csv = ",,amy23,31,March\n,,amy23,61,April\n,,amy23,92,May\n,,amy23,122,June\n,,amy23,153,July\n,,amy23,184,August\n,,amy23,214,September\n,,amy23,245,October\n,,amy23,275,November\n,,amy23,306,December\n,,amy23,337,January\n,,amy23,365,February\n"
     expected_br00005_csv = ",,amy23,0,Wednesday\n,,amy23,1,Thursday\n,,amy23,2,Friday\n,,amy23,3,Saturday\n,,amy23,4,Sunday\n,,amy23,5,Monday\n,,amy23,6,Tuesday\n"
     # expected_br00006_csv = ",,amy23,0,Wednesday\n,,amy23,1,Thursday\n,,amy23,2,Friday\n,,amy23,3,Saturday\n,,amy23,4,Sunday\n,,amy23,5,Monday\n,,amy23,6,Tuesday\n"
@@ -388,7 +388,7 @@ def test_add_believer_to_br00024_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     casa_plan = bob_believer.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_plan.laborunit.set_laborlink(cleaners_str)
+    casa_plan.laborunit.set_partyunit(cleaners_str)
     csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
@@ -507,7 +507,7 @@ def test_add_believer_to_br00028_csv_ReturnsObj():
     casa_morph = 27
     casa_gogo_want = 31
     casa_stop_want = 41
-    casa_mass = 2
+    casa_star = 2
     casa_task = False
     casa_problem_bool = False
     bob_believer.add_plan(casa_rope)
@@ -522,7 +522,7 @@ def test_add_believer_to_br00028_csv_ReturnsObj():
         morph=casa_morph,
         gogo_want=casa_gogo_want,
         stop_want=casa_stop_want,
-        mass=casa_mass,
+        star=casa_star,
         task=casa_task,
         problem_bool=casa_problem_bool,
     )
@@ -535,7 +535,7 @@ def test_add_believer_to_br00028_csv_ReturnsObj():
 
     # THEN
     root_row = f",,{a23_str},{bob_str},,{a23_rope},,,,,,,,,1,False,False\n"
-    mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
+    mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_star},{casa_task},{casa_problem_bool}\n"
     casa_row = f",,{a23_str},{bob_str},{casa_rope},,,,,,,,,0,False,False\n"
     # print(f"{mop_row=}")
     expected_csv = f"{csv_header}{mop_row}{casa_row}"
@@ -759,7 +759,7 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     casa_plan = bob_believer.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_plan.laborunit.set_laborlink(cleaners_str)
+    casa_plan.laborunit.set_partyunit(cleaners_str)
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
     sue_str = "Sue"
@@ -905,7 +905,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_morph = 27
     casa_gogo_want = 31
     casa_stop_want = 41
-    casa_mass = 2
+    casa_star = 2
     casa_task = False
     casa_problem_bool = False
     bob_believer.add_plan(casa_rope)
@@ -920,7 +920,7 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
         morph=casa_morph,
         gogo_want=casa_gogo_want,
         stop_want=casa_stop_want,
-        mass=casa_mass,
+        star=casa_star,
         task=casa_task,
         problem_bool=casa_problem_bool,
     )
@@ -938,8 +938,8 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
 
     # THEN
     # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_believer.belief_label},,,,,,,,,1,False,False\n"
-    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_believer.belief_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_mass},{casa_task},{casa_problem_bool}\n"
-    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_mass},{casa_task},\n"
+    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_believer.belief_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_star},{casa_task},{casa_problem_bool}\n"
+    mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_star},{casa_task},\n"
     casa_row = (
         f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},casa,,,,,,,,,0,False,\n"
     )

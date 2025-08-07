@@ -4,8 +4,8 @@ from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.db_toolbox import sqlite_obj_str
 from src.a01_term_logic.term import BelieverName, GroupTitle, PartnerName, RopeTerm
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
+from src.a03_group_logic.labor import LaborHeir
 from src.a03_group_logic.partner import PartnerUnit
-from src.a04_reason_logic.reason_labor import LaborHeir
 from src.a04_reason_logic.reason_plan import CaseUnit, FactHeir, ReasonHeir
 from src.a05_plan_logic.plan import HealerLink, PlanUnit
 from src.a06_believer_logic.believer_main import BelieverUnit
@@ -239,15 +239,17 @@ def create_blrlabo_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_label = values_dict.get("belief_label")
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
-    labor_title = values_dict.get("labor_title")
-    _believer_name_labor = values_dict.get("_believer_name_labor")
-    return f"""INSERT INTO believer_plan_laborlink_job (belief_label, believer_name, plan_rope, labor_title, _believer_name_labor)
+    party_title = values_dict.get("party_title")
+    solo = values_dict.get("solo")
+    _believer_name_is_labor = values_dict.get("_believer_name_is_labor")
+    return f"""INSERT INTO believer_plan_partyunit_job (belief_label, believer_name, plan_rope, party_title, solo, _believer_name_is_labor)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
-, {sqlite_obj_str(labor_title, "TEXT")}
-, {sqlite_obj_str(_believer_name_labor, "INTEGER")}
+, {sqlite_obj_str(party_title, "TEXT")}
+, {sqlite_obj_str(solo, "INTEGER")}
+, {sqlite_obj_str(_believer_name_is_labor, "INTEGER")}
 )
 ;
 """
@@ -265,7 +267,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     morph = values_dict.get("morph")
     gogo_want = values_dict.get("gogo_want")
     stop_want = values_dict.get("stop_want")
-    mass = values_dict.get("mass")
+    star = values_dict.get("star")
     task = values_dict.get("task")
     problem_bool = values_dict.get("problem_bool")
     _active = values_dict.get("_active")
@@ -285,7 +287,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, mass, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_partner_cred, _all_partner_debt)
+    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_partner_cred, _all_partner_debt)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -298,7 +300,7 @@ VALUES (
 , {sqlite_obj_str(morph, real_str)}
 , {sqlite_obj_str(gogo_want, real_str)}
 , {sqlite_obj_str(stop_want, real_str)}
-, {sqlite_obj_str(mass, real_str)}
+, {sqlite_obj_str(star, real_str)}
 , {sqlite_obj_str(task, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
 , {sqlite_obj_str(fund_iota, real_str)}
@@ -489,8 +491,10 @@ def insert_job_blrlabo(
     x_dict["belief_label"] = x_objkeysholder.belief_label
     x_dict["believer_name"] = x_objkeysholder.believer_name
     x_dict["plan_rope"] = x_objkeysholder.rope
-    for labor_title in sorted(x_laborheir._laborlinks):
-        x_dict["labor_title"] = labor_title
+    for party_title in sorted(x_laborheir._partys):
+        partyheir = x_laborheir._partys.get(party_title)
+        x_dict["party_title"] = partyheir.party_title
+        x_dict["solo"] = partyheir.solo
         insert_sqlstr = create_blrlabo_metrics_insert_sqlstr(x_dict)
         cursor.execute(insert_sqlstr)
 

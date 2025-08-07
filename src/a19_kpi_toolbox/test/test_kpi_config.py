@@ -35,15 +35,15 @@ def test_get_bundles_config_ReturnsObj():
     }
 
 
-def test_get_kpi_set_from_bundle_ReturnsObj_Scenario0_BundleGiven():
+def test_get_kpi_set_from_bundle_ReturnsObj_Scenario0_WithBundle():
     # ESTABLISH / WHEN
-    kpi_set = get_kpi_set_from_bundle("believer_star_kpis")
+    kpi_set = get_kpi_set_from_bundle("believer_no_reference_kpis")
 
     # THEN
     assert kpi_set == set()
 
 
-def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_NoBundleGiven():
+def test_get_kpi_set_from_bundle_ReturnsObj_Scenario1_WithNoBundle():
     # ESTABLISH
     default_kpi_set = get_kpi_set_from_bundle("default_kpi_bundle")
 

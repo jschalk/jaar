@@ -10,6 +10,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _inallocable_partner_debt_points_str,
     _irrational_partner_debt_points_str,
     _memberships_str,
+    _parent_solo_str,
     awardee_title_str,
     believer_name_str,
     fund_give_str,
@@ -21,7 +22,9 @@ from src.a03_group_logic.test._util.a03_str import (
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
+    party_title_str,
     respect_bit_str,
+    solo_str,
     take_force_str,
 )
 
@@ -38,10 +41,12 @@ def test_str_functions_ReturnsObj():
     assert _fund_take_str() == "_fund_take"
     assert _inallocable_partner_debt_points_str() == "_inallocable_partner_debt_points"
     assert _irrational_partner_debt_points_str() == "_irrational_partner_debt_points"
+    assert _parent_solo_str() == "_parent_solo"
     assert _memberships_str() == "_memberships"
     assert partner_name_str() == "partner_name"
     assert partner_cred_points_str() == "partner_cred_points"
     assert partner_debt_points_str() == "partner_debt_points"
+    assert party_title_str() == "party_title"
     assert awardee_title_str() == "awardee_title"
     assert group_cred_points_str() == "group_cred_points"
     assert group_title_str() == "group_title"
@@ -51,4 +56,5 @@ def test_str_functions_ReturnsObj():
     assert group_debt_points_str() == "group_debt_points"
     assert give_force_str() == "give_force"
     assert believer_name_str() == "believer_name"
+    assert solo_str() == "solo"
     assert take_force_str() == "take_force"

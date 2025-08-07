@@ -15,7 +15,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -29,7 +29,6 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_debt_points_str,
     group_title_str,
     healer_name_str,
-    mass_str,
     morph_str,
     numor_str,
     parent_rope_str,
@@ -39,6 +38,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     plan_rope_str,
     reason_active_requisite_str,
     reason_context_str,
+    star_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -56,7 +56,7 @@ def test_sift_atom_ReturnsNoneIfGivenBelieverAtomIsUPDATE():
     casa_atom = believeratom_shop(believer_planunit_str(), UPDATE_str())
     casa_atom.set_arg(parent_rope_str(), sue_believer.belief_label)
     casa_atom.set_arg(plan_label_str(), casa_str)
-    casa_atom.set_arg(mass_str(), 8)
+    casa_atom.set_arg(star_str(), 8)
     # THEN
     new_casa_atom = sift_believeratom(sue_believer, casa_atom)
 
@@ -164,7 +164,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_planunit():
     sue_close = 43
     sue_denom = 47
     sue_gogo_want = 59
-    sue_mass = 67
+    sue_star = 67
     sue_morph = 79
     sue_numor = 83
     sue_task = 97
@@ -177,7 +177,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_planunit():
     old_casa_atom.set_arg(close_str(), sue_close)
     old_casa_atom.set_arg(denom_str(), sue_denom)
     old_casa_atom.set_arg(gogo_want_str(), sue_gogo_want)
-    old_casa_atom.set_arg(mass_str(), sue_mass)
+    old_casa_atom.set_arg(star_str(), sue_star)
     old_casa_atom.set_arg(morph_str(), sue_morph)
     old_casa_atom.set_arg(numor_str(), sue_numor)
     old_casa_atom.set_arg(task_str(), sue_task)
@@ -196,7 +196,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_planunit():
     assert zia_jvalues.get(close_str()) == sue_close
     assert zia_jvalues.get(denom_str()) == sue_denom
     assert zia_jvalues.get(gogo_want_str()) == sue_gogo_want
-    assert zia_jvalues.get(mass_str()) == sue_mass
+    assert zia_jvalues.get(star_str()) == sue_star
     assert zia_jvalues.get(morph_str()) == sue_morph
     assert zia_jvalues.get(numor_str()) == sue_numor
     assert zia_jvalues.get(task_str()) == sue_task

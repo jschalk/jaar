@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import (
     caseunit_shop,
     factunit_shop,
@@ -133,7 +133,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
         parent_rope=casa_rope,
         _kids=None,
         awardlinks=biker_and_flyer_awardlinks,
-        mass=30,
+        star=30,
         plan_label=casa_str,
         _level=1,
         reasonunits=x1_reasonunits,
@@ -168,7 +168,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     casa_plan.add_kid(planunit_shop("paper"))
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict is not None
@@ -177,9 +177,9 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     assert casa_dict["reasonunits"] == casa_plan.get_reasonunits_dict()
     assert casa_dict["awardlinks"] == casa_plan.get_awardlinks_dict()
     assert casa_dict["awardlinks"] == x1_awardlinks
-    assert casa_dict["laborunit"] == sue_laborunit.get_dict()
-    assert casa_dict["healerlink"] == yao_healerlink.get_dict()
-    assert casa_dict["mass"] == casa_plan.mass
+    assert casa_dict["laborunit"] == sue_laborunit.to_dict()
+    assert casa_dict["healerlink"] == yao_healerlink.to_dict()
+    assert casa_dict["star"] == casa_plan.star
     assert casa_dict["plan_label"] == casa_plan.plan_label
     assert casa_dict["_uid"] == casa_plan._uid
     assert casa_dict["begin"] == casa_plan.begin
@@ -202,11 +202,11 @@ def test_PlanUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
     casa_plan = planunit_shop()
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"mass": 1}
+    assert casa_dict == {"star": 1}
 
 
 def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
@@ -224,7 +224,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_plan.set_awardlink(awardlink_shop(yao_str))
 
     x_laborunit = casa_plan.laborunit
-    x_laborunit.set_laborlink(labor_title=yao_str)
+    x_laborunit.set_partyunit(party_title=yao_str)
 
     clean_str = "clean"
     casa_plan.add_kid(planunit_shop(clean_str))
@@ -237,7 +237,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_plan._kids != {}
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict.get("_is_expanded") is False
@@ -260,7 +260,7 @@ def test_PlanUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
     assert casa_plan._kids == {}
 
     # WHEN
-    casa_dict = casa_plan.get_dict()
+    casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict.get("_is_expanded") is None

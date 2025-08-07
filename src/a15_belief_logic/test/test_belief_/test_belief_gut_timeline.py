@@ -30,7 +30,7 @@ def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_clean
     a23_timeline_config = a23_belief.get_timeline_config()
 
     # THEN
-    assert a23_timeline_config == a23_belief.timeline.get_dict()
+    assert a23_timeline_config == a23_belief.timeline.to_dict()
     assert a23_timeline_config == get_default_timeline_config_dict()
     assert a23_timeline_config.get("timeline_label") == "creg"
 
@@ -46,7 +46,7 @@ def test_BeliefUnit_get_timeline_config_ReturnsObj_Scenario1(env_dir_setup_clean
     a23_timeline_config = a23_belief.get_timeline_config()
 
     # THEN
-    assert a23_timeline_config == a23_belief.timeline.get_dict()
+    assert a23_timeline_config == a23_belief.timeline.to_dict()
     assert a23_timeline_config == get_five_config()
     assert a23_timeline_config.get("timeline_label") == "five"
 

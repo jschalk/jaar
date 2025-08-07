@@ -30,7 +30,7 @@ from src.a13_believer_listen_logic.test._util.example_listen import (
 )
 
 
-def test_listen_to_agendas_jobs_into_job_AddsChoresToBelieverWhenNo_laborlinkIsSet(
+def test_listen_to_agendas_jobs_into_job_AddsChoresToBelieverWhenNo_partyunitIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -84,8 +84,8 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliever(env_dir_setup_clea
     zia_job.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_job.get_plan_obj(clean_rope())
     cook_planunit = zia_job.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.set_laborlink(yao_str)
-    cook_planunit.laborunit.set_laborlink(yao_str)
+    clean_planunit.laborunit.set_partyunit(yao_str)
+    cook_planunit.laborunit.set_partyunit(yao_str)
     save_job_file(belief_mstr_dir, zia_job)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
@@ -189,8 +189,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBeliever(
     zia_job.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_job.get_plan_obj(clean_rope())
     cook_planunit = zia_job.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.set_laborlink(yao_str)
-    cook_planunit.laborunit.set_laborlink(yao_str)
+    clean_planunit.laborunit.set_partyunit(yao_str)
+    cook_planunit.laborunit.set_partyunit(yao_str)
     save_job_file(belief_mstr_dir, zia_job)
 
     sue_job = believerunit_shop(sue_str, a23_str)
@@ -200,7 +200,7 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBeliever(
     vacuum_rope = sue_job.make_l1_rope(vacuum_str)
     sue_job.set_l1_plan(planunit_shop(vacuum_str, task=True))
     vacuum_planunit = sue_job.get_plan_obj(vacuum_rope)
-    vacuum_planunit.laborunit.set_laborlink(yao_str)
+    vacuum_planunit.laborunit.set_partyunit(yao_str)
 
     egg_str = "egg first"
     egg_rope = sue_job.make_l1_rope(egg_str)
@@ -268,8 +268,8 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBeliever(
     zia_job.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_job.get_plan_obj(clean_rope())
     cook_planunit = zia_job.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.set_laborlink(yao_str)
-    cook_planunit.laborunit.set_laborlink(yao_str)
+    clean_planunit.laborunit.set_partyunit(yao_str)
+    cook_planunit.laborunit.set_partyunit(yao_str)
     save_job_file(belief_mstr_dir, zia_job)
 
     # WHEN
@@ -316,8 +316,8 @@ def test_listen_to_agendas_jobs_into_job_ListensToBeliever_gut_AndNotBeliever_jo
     zia_job.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_job.get_plan_obj(clean_rope())
     cook_planunit = zia_job.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.set_laborlink(yao_str)
-    cook_planunit.laborunit.set_laborlink(yao_str)
+    clean_planunit.laborunit.set_partyunit(yao_str)
+    cook_planunit.laborunit.set_partyunit(yao_str)
     save_job_file(belief_mstr_dir, zia_job)
 
     # save yao with chore to dutys
@@ -326,7 +326,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToBeliever_gut_AndNotBeliever_jo
     vacuum_rope = yao_old_job.make_l1_rope(vacuum_str)
     yao_old_job.set_l1_plan(planunit_shop(vacuum_str, task=True))
     vacuum_planunit = yao_old_job.get_plan_obj(vacuum_rope)
-    vacuum_planunit.laborunit.set_laborlink(yao_str)
+    vacuum_planunit.laborunit.set_partyunit(yao_str)
     save_job_file(belief_mstr_dir, yao_old_job)
 
     # WHEN

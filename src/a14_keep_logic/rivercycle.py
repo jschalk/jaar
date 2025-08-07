@@ -157,7 +157,7 @@ class RiverGrade:
             and self.tax_bill_amount == self.tax_paid_amount
         )
 
-    def get_dict(self) -> dict:
+    def to_dict(self) -> dict:
         return {
             "belief_label": self.hubunit.belief_label,
             "healer_name": self.hubunit.believer_name,
@@ -179,7 +179,7 @@ class RiverGrade:
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def rivergrade_shop(

@@ -98,7 +98,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
         "plan_rope": "RopeTerm",
-        "mass": "int",
+        "star": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
         "monthday_distortion": "int",
@@ -118,10 +118,11 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "reason_context": "RopeTerm",
         "reason_active_requisite": "bool",
         "respect_bit": "float",
+        "solo": "int",
         "stop_want": "float",
         "take_force": "float",
         "tally": "int",
-        "labor_title": "TitleTerm",
+        "party_title": "TitleTerm",
         "tran_time": "TimeLinePoint",
         "bud_time": "TimeLinePoint",
         "timeline_label": "LabelTerm",
@@ -186,7 +187,7 @@ def get_pidginable_args() -> set:
         "believer_name",
         "reason_state",
         "reason_context",
-        "labor_title",
+        "party_title",
         "timeline_label",
         "weekday_label",
     }
@@ -220,7 +221,7 @@ def get_pidgin_TitleTerm_args() -> set[str]:
     return {
         "awardee_title",
         "group_title",
-        "labor_title",
+        "party_title",
     }
 
 

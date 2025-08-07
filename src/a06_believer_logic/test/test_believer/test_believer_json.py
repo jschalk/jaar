@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a04_reason_logic.reason_labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -50,7 +50,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     yao_believer.set_last_pack_id(x_last_pack_id)
 
     # WHEN
-    believer_dict = yao_believer.get_dict()
+    believer_dict = yao_believer.to_dict()
 
     # THEN
     assert believer_dict is not None
@@ -75,7 +75,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     _kids = "_kids"
     assert x_planroot.plan_label == yao_believer.belief_label
     assert planroot_dict["plan_label"] == x_planroot.plan_label
-    assert planroot_dict["mass"] == x_planroot.mass
+    assert planroot_dict["star"] == x_planroot.star
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
 
@@ -84,7 +84,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     run_str = "runners"
     sue_believer = believerunit_shop("Sue")
     x_laborunit = laborunit_shop()
-    x_laborunit.set_laborlink(labor_title=run_str)
+    x_laborunit.set_partyunit(party_title=run_str)
     root_rope = to_rope(sue_believer.belief_label)
     sue_believer.edit_plan_attr(root_rope, laborunit=x_laborunit)
     root_plan = sue_believer.get_plan_obj(root_rope)
@@ -94,12 +94,12 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     root_plan.stop_want = x_stop_want
 
     # WHEN
-    believer_dict = sue_believer.get_dict()
+    believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
-    assert planroot_dict["laborunit"] == x_laborunit.get_dict()
-    assert planroot_dict["laborunit"] == {"_laborlinks": [run_str]}
+    assert planroot_dict["laborunit"] == x_laborunit.to_dict()
+    assert planroot_dict["laborunit"] == {"_partys": [run_str]}
     assert planroot_dict.get("gogo_want") == x_gogo_want
     assert planroot_dict.get("stop_want") == x_stop_want
 
@@ -118,11 +118,11 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     sue_believer.edit_plan_attr(root_rope, healerlink=run_healerlink)
 
     # WHEN
-    believer_dict = sue_believer.get_dict()
+    believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
-    assert planroot_dict["healerlink"] == run_healerlink.get_dict()
+    assert planroot_dict["healerlink"] == run_healerlink.to_dict()
 
 
 def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
@@ -138,11 +138,11 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     morn_rope = sue_believer.make_l1_rope(morn_str)
     sue_believer.set_l1_plan(planunit_shop(morn_str))
     x_laborunit = laborunit_shop()
-    x_laborunit.set_laborlink(labor_title=run_str)
+    x_laborunit.set_partyunit(party_title=run_str)
     sue_believer.edit_plan_attr(morn_rope, laborunit=x_laborunit)
 
     # WHEN
-    believer_dict = sue_believer.get_dict()
+    believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
@@ -150,8 +150,8 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     _laborunit = "laborunit"
 
     labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
-    assert labor_dict_x == x_laborunit.get_dict()
-    assert labor_dict_x == {"_laborlinks": [run_str]}
+    assert labor_dict_x == x_laborunit.to_dict()
+    assert labor_dict_x == {"_partys": [run_str]}
 
 
 def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():
@@ -329,11 +329,11 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     sue_partnerunit.add_membership(run_str)
     xio_partnerunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
-    run_laborunit.set_laborlink(labor_title=run_str)
+    run_laborunit.set_partyunit(party_title=run_str)
     root_rope = to_rope(zia_believer.belief_label)
     zia_believer.edit_plan_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
-    xio_laborunit.set_laborlink(labor_title=xio_str)
+    xio_laborunit.set_partyunit(party_title=xio_str)
     zia_believer.edit_plan_attr(shave_rope, laborunit=xio_laborunit)
     zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(xio_str))
     zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(sue_str))
@@ -399,7 +399,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     sun_str = "Sun"
     sun_rope = json_believer.make_rope(sem_jour_rope, sun_str)
     sun_plan = json_believer.get_plan_obj(sun_rope)
-    assert sun_plan.mass == 20
+    assert sun_plan.star == 20
 
     json_shave_plan = json_believer.get_plan_obj(shave_rope)
     zia_shave_plan = zia_believer.get_plan_obj(shave_rope)
@@ -512,13 +512,13 @@ def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrect
     assert after_bob_believer.get_plan_obj(hr_number_rope).knot == slash_str
 
 
-def test_believerunit_get_from_json_ExportsBelieverUnit_mass():
+def test_believerunit_get_from_json_ExportsBelieverUnit_star():
     # ESTABLISH
     x1_believer = believerunit_v001()
     x1_believer.tally = 15
     assert x1_believer.tally == 15
-    assert x1_believer.planroot.mass != x1_believer.tally
-    assert x1_believer.planroot.mass == 1
+    assert x1_believer.planroot.star != x1_believer.tally
+    assert x1_believer.planroot.star == 1
 
     # WHEN
     x2_believer = believerunit_get_from_json(x1_believer.get_json())
@@ -526,8 +526,8 @@ def test_believerunit_get_from_json_ExportsBelieverUnit_mass():
     # THEN
     assert x1_believer.tally == 15
     assert x1_believer.tally == x2_believer.tally
-    assert x1_believer.planroot.mass == 1
-    assert x1_believer.planroot.mass == x2_believer.planroot.mass
+    assert x1_believer.planroot.star == 1
+    assert x1_believer.planroot.star == x2_believer.planroot.star
     assert x1_believer.planroot._kids == x2_believer.planroot._kids
 
 
@@ -541,9 +541,9 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     print(f"{x3_believer.believer_name}")
 
     cn_dict_of_dicts = {
-        x1_believer.believer_name: x1_believer.get_dict(),
-        x2_believer.believer_name: x2_believer.get_dict(),
-        x3_believer.believer_name: x3_believer.get_dict(),
+        x1_believer.believer_name: x1_believer.to_dict(),
+        x2_believer.believer_name: x2_believer.to_dict(),
+        x3_believer.believer_name: x3_believer.to_dict(),
     }
 
     # WHEN
@@ -563,10 +563,10 @@ def test_get_dict_of_believer_from_dict_ReturnsDictOfBelieverUnits():
     # assert ccn2_believer.get_plan_obj(shave_rope) == x2_believer.get_plan_obj(shave_rope)
     # assert ccn2_believer.get_plan_obj(wk_rope) == x2_believer.get_plan_obj(wk_rope)
     # assert ccn2_believer.planroot == x2_believer.planroot
-    assert ccn2_believer.get_dict() == x2_believer.get_dict()
+    assert ccn2_believer.to_dict() == x2_believer.to_dict()
 
     ccn_believer3 = ccn_dict_of_obj.get(x3_believer.believer_name)
-    assert ccn_believer3.get_dict() == x3_believer.get_dict()
+    assert ccn_believer3.to_dict() == x3_believer.to_dict()
 
     cc1_plan_root = ccn_dict_of_obj.get(x1_believer.believer_name).planroot
     ccn_believer1 = ccn_dict_of_obj.get(x1_believer.believer_name)

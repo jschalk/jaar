@@ -132,7 +132,7 @@ class BelieverAtom:
     def get_jvalues_dict(self) -> dict[str, str]:
         return dict(self.jvalues.items())
 
-    def get_dict(self) -> dict[str, str]:
+    def to_dict(self) -> dict[str, str]:
         jkeys_dict = self.get_jkeys_dict()
         jvalues_dict = self.get_jvalues_dict()
         return {
@@ -143,7 +143,7 @@ class BelieverAtom:
         }
 
     def get_json(self) -> str:
-        return get_json_from_dict(self.get_dict())
+        return get_json_from_dict(self.to_dict())
 
 
 def believeratom_shop(
@@ -254,7 +254,7 @@ def _modify_believer_planunit_update(x_believer: BelieverUnit, x_atom: BelieverA
         denom=x_atom.get_value("denom"),
         numor=x_atom.get_value("numor"),
         morph=x_atom.get_value("morph"),
-        mass=x_atom.get_value("mass"),
+        star=x_atom.get_value("star"),
         task=x_atom.get_value("task"),
     )
 
@@ -412,18 +412,18 @@ def _modify_believer_plan_reason_caseunit_insert(
     )
 
 
-def _modify_believer_plan_laborlink_delete(
+def _modify_believer_plan_partyunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.laborunit.del_laborlink(labor_title=x_atom.get_value("labor_title"))
+    x_planunit.laborunit.del_partyunit(party_title=x_atom.get_value("party_title"))
 
 
-def _modify_believer_plan_laborlink_insert(
+def _modify_believer_plan_partyunit_insert(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.laborunit.set_laborlink(labor_title=x_atom.get_value("labor_title"))
+    x_planunit.laborunit.set_partyunit(party_title=x_atom.get_value("party_title"))
 
 
 def _modify_believer_plan_healerlink_delete(
@@ -523,11 +523,11 @@ def _modify_believer_plan_reason_caseunit(
         _modify_believer_plan_reason_caseunit_insert(x_believer, x_atom)
 
 
-def _modify_believer_plan_laborlink(x_believer: BelieverUnit, x_atom: BelieverAtom):
+def _modify_believer_plan_partyunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_believer_plan_laborlink_delete(x_believer, x_atom)
+        _modify_believer_plan_partyunit_delete(x_believer, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_believer_plan_laborlink_insert(x_believer, x_atom)
+        _modify_believer_plan_partyunit_insert(x_believer, x_atom)
 
 
 def _modify_believer_plan_healerlink(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -563,8 +563,8 @@ def modify_believer_with_believeratom(x_believer: BelieverUnit, x_atom: Believer
         _modify_believer_plan_reason_caseunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_healerlink":
         _modify_believer_plan_healerlink(x_believer, x_atom)
-    elif x_atom.dimen == "believer_plan_laborlink":
-        _modify_believer_plan_laborlink(x_believer, x_atom)
+    elif x_atom.dimen == "believer_plan_partyunit":
+        _modify_believer_plan_partyunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_partnerunit":
         _modify_believer_partnerunit(x_believer, x_atom)
 
@@ -596,7 +596,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.denom != y_obj.denom
             or x_obj.numor != y_obj.numor
             or x_obj.morph != y_obj.morph
-            or x_obj.mass != y_obj.mass
+            or x_obj.star != y_obj.star
             or x_obj.task != y_obj.task
         )
     elif dimen == "believer_plan_factunit":
@@ -662,7 +662,7 @@ class AtomRow:
     gogo_want: float = None
     group_title: TitleTerm = None
     healer_name: TitleTerm = None
-    mass: int = None
+    star: int = None
     max_tree_traverse: int = None
     morph: bool = None
     reason_state: RopeTerm = None
@@ -674,10 +674,11 @@ class AtomRow:
     task: bool = None
     problem_bool: bool = None
     plan_rope: RopeTerm = None
+    solo: int = None
     stop_want: float = None
     take_force: float = None
     tally: int = None
-    labor_title: int = None
+    party_title: int = None
 
     def set_atom_dimen(self, atom_dimen: str):
         self._atom_dimens.add(atom_dimen)

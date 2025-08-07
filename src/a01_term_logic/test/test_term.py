@@ -26,7 +26,7 @@ def test_KnotTerm_Exists():
     x_knot = KnotTerm(empty_str)
     # THEN
     assert x_knot == empty_str
-    doc_str = f"A string to used as a delimiter in RopeTerms."
+    doc_str = "A string to used as a delimiter in RopeTerms."
     assert inspect_getdoc(x_knot) == doc_str
 
 

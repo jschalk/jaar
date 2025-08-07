@@ -61,17 +61,17 @@ def test_BelieverDelta_set_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
     opt1_arg = "tally"
     jvalues = {opt1_arg: attribute_value}
     jkeys = {}
-    believer_mass_believeratom = believeratom_shop(
+    believer_star_believeratom = believeratom_shop(
         dimen,
         UPDATE_str(),
         jkeys=jkeys,
         jvalues=jvalues,
     )
     assert ex1_believerdelta.believeratoms == {}
-    assert believer_mass_believeratom.atom_order is None
+    assert believer_star_believeratom.atom_order is None
 
     # WHEN
-    ex1_believerdelta.set_believeratom(believer_mass_believeratom)
+    ex1_believerdelta.set_believeratom(believer_star_believeratom)
 
     # THEN
     assert len(ex1_believerdelta.believeratoms) == 1
@@ -79,19 +79,19 @@ def test_BelieverDelta_set_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
     # print(f"{x_update_dict=}")
     x_dimen_believeratom = x_update_dict.get(dimen)
     print(f"{x_dimen_believeratom=}")
-    assert x_dimen_believeratom == believer_mass_believeratom
-    assert believer_mass_believeratom.atom_order is not None
+    assert x_dimen_believeratom == believer_star_believeratom
+    assert believer_star_believeratom.atom_order is not None
 
 
 def test_BelieverDelta_set_believeratom_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
     x_dimen = believer_partnerunit_str()
-    believer_mass_believeratom = believeratom_shop(x_dimen, UPDATE_str())
+    believer_star_believeratom = believeratom_shop(x_dimen, UPDATE_str())
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ex1_believerdelta.set_believeratom(believer_mass_believeratom)
+        ex1_believerdelta.set_believeratom(believer_star_believeratom)
     assert (
         str(excinfo.value)
         == f"""'{x_dimen}' UPDATE BelieverAtom is invalid
@@ -191,12 +191,12 @@ def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_partnerunits(
     )
     cw_str = partner_cred_points_str()
     dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.get_dict()=}")
+    print(f"{bob_partnerunit.to_dict()=}")
     bob_required_dict = {
-        partner_name_str(): bob_partnerunit.get_dict().get(partner_name_str())
+        partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())
     }
-    bob_optional_dict = {cw_str: bob_partnerunit.get_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.get_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     partnerunit_str = believer_partnerunit_str()
     ex1_believerdelta.add_believeratom(
@@ -269,16 +269,16 @@ def test_BelieverDelta_get_dimen_sorted_believeratoms_list_ReturnsObj_Scenario0_
 #     # WHEN
 #     opt2_value = 55
 #     dimen = believerunit_str()
-#     opt2_arg = "mass"
-#     mass_believeratom = believeratom_shop(dimen, UPDATE_str())
-#     mass_believeratom.set_jvalue(opt2_arg, opt2_value)
-#     ex1_believerdelta.set_believeratom(mass_believeratom)
+#     opt2_arg = "star"
+#     star_believeratom = believeratom_shop(dimen, UPDATE_str())
+#     star_believeratom.set_jvalue(opt2_arg, opt2_value)
+#     ex1_believerdelta.set_believeratom(star_believeratom)
 #     # THEN
 #     assert len(ex1_believerdelta.believeratoms.get(UPDATE_str()).keys()) == 1
 #     sue_believerunit_dict = ex1_believerdelta.believeratoms.get(UPDATE_str())
-#     sue_mass_believeratom = sue_believerunit_dict.get(dimen)
-#     print(f"{sue_mass_believeratom=}")
-#     assert mass_believeratom == sue_mass_believeratom
+#     sue_star_believeratom = sue_believerunit_dict.get(dimen)
+#     print(f"{sue_star_believeratom=}")
+#     assert star_believeratom == sue_star_believeratom
 
 #     # WHEN
 #     new2_value = 66
@@ -377,6 +377,7 @@ def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj_PlanUnitsSorted():
 
 
 def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj_Rope_Sorted():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     x_belief_label = root_label()
     sports_str = "sports"
@@ -433,6 +434,7 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
 
 
 def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_scenario2():
+    # sourcery skip: extract-duplicate-method
     sue_believerdelta = believerdelta_shop()
     dimen = believer_partnerunit_str()
     # WHEN
@@ -457,6 +459,7 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
 
 
 def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithNoStartingNumber():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -496,6 +499,7 @@ def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithNoStart
 
 
 def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithStartingNumber():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -535,6 +539,7 @@ def test_BelieverDelta_get_ordered_believeratoms_ReturnsObj_EstablishWithStartin
 
 
 def test_BelieverDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -568,12 +573,13 @@ def test_BelieverDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber()
     # assert delta_zia == zia_believeratom
     # assert delta_yao == yao_believeratom
     # assert delta_pool == pool_believeratom
-    assert believerdelta_dict.get(5) == zia_believeratom.get_dict()
-    assert believerdelta_dict.get(6) == yao_believeratom.get_dict()
-    assert believerdelta_dict.get(7) == pool_believeratom.get_dict()
+    assert believerdelta_dict.get(5) == zia_believeratom.to_dict()
+    assert believerdelta_dict.get(6) == yao_believeratom.to_dict()
+    assert believerdelta_dict.get(7) == pool_believeratom.to_dict()
 
 
 def test_get_believerdelta_from_ordered_dict_ReturnsObj():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     expected_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())
@@ -605,13 +611,14 @@ def test_get_believerdelta_from_ordered_dict_ReturnsObj():
     # assert delta_zia == zia_believeratom
     # assert delta_yao == yao_believeratom
     # assert delta_pool == pool_believeratom
-    # assert believerdelta_dict.get(5) == zia_believeratom.get_dict()
-    # assert believerdelta_dict.get(6) == yao_believeratom.get_dict()
-    # assert believerdelta_dict.get(7) == pool_believeratom.get_dict()
+    # assert believerdelta_dict.get(5) == zia_believeratom.to_dict()
+    # assert believerdelta_dict.get(6) == yao_believeratom.to_dict()
+    # assert believerdelta_dict.get(7) == pool_believeratom.to_dict()
     assert generated_believerdelta == expected_believerdelta
 
 
 def test_BelieverDelta_get_json_ReturnsObj():
+    # sourcery skip: extract-duplicate-method, inline-variable
     # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     pool_believeratom = believeratom_shop(believerunit_str(), UPDATE_str())

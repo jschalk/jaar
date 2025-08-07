@@ -11,7 +11,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_plan_awardlink_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
-    believer_plan_laborlink_str,
+    believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
     believer_planunit_str,
@@ -92,7 +92,7 @@ def test_create_prime_tablename_ReturnsObj():
     blrawar_dimen = believer_plan_awardlink_str()
     blrreas_dimen = believer_plan_reasonunit_str()
     blrprem_dimen = believer_plan_reason_caseunit_str()
-    blrlabo_dimen = believer_plan_laborlink_str()
+    blrlabo_dimen = believer_plan_partyunit_str()
     blrheal_dimen = believer_plan_healerlink_str()
     blrfact_dimen = believer_plan_factunit_str()
     blfunit_dimen = beliefunit_str()

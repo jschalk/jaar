@@ -8,11 +8,11 @@ from src.a06_believer_logic.test._util.a06_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    mass_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
     plan_rope_str,
+    star_str,
     task_str,
 )
 from src.a07_timeline_logic.test._util.calendar_examples import (
@@ -189,8 +189,8 @@ def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0():
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-    casa_mass = 31
-    sue_believerunit.set_l1_plan(planunit_shop(casa_str, mass=casa_mass))
+    casa_star = 31
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
     sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
@@ -207,13 +207,13 @@ def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0():
     assert planunit_format.loc[0, task_str()] == ""
     assert planunit_format.loc[0, belief_label_str()] == amy_belief_label
     assert planunit_format.loc[0, plan_rope_str()] == casa_rope
-    assert planunit_format.loc[0, mass_str()] == casa_mass
+    assert planunit_format.loc[0, star_str()] == casa_star
 
     assert planunit_format.loc[1, believer_name_str()] == sue_believerunit.believer_name
     assert planunit_format.loc[1, task_str()] == "Yes"
     assert planunit_format.loc[1, belief_label_str()] == amy_belief_label
     assert planunit_format.loc[1, plan_rope_str()] == clean_rope
-    assert planunit_format.loc[1, mass_str()] == 1
+    assert planunit_format.loc[1, star_str()] == 1
     assert len(planunit_format) == 2
 
 
@@ -308,8 +308,8 @@ def test_save_idea_csv_Arg_idea_format_00013_planunit_v0_0_0(
     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
-    casa_mass = 31
-    sue_believerunit.set_l1_plan(planunit_shop(casa_str, mass=casa_mass))
+    casa_star = 31
+    sue_believerunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_believerunit.make_rope(casa_rope, clean_str)
     sue_believerunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)

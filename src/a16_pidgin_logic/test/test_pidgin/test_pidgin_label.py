@@ -320,7 +320,7 @@ def test_LabelMap_get_dict_ReturnsObj():
         face_name_str(): x_labelmap.face_name,
         event_int_str(): x_labelmap.event_int,
     }
-    assert x_labelmap.get_dict() == x1_rope_map_dict
+    assert x_labelmap.to_dict() == x1_rope_map_dict
 
     # WHEN
     x_labelmap.set_otx2inx(clean_otx, clean_inx)
@@ -334,7 +334,7 @@ def test_LabelMap_get_dict_ReturnsObj():
         face_name_str(): sue_str,
         event_int_str(): event7,
     }
-    assert x_labelmap.get_dict() == x2_rope_map_dict
+    assert x_labelmap.to_dict() == x2_rope_map_dict
 
 
 def test_LabelMap_get_json_ReturnsObj():
@@ -389,7 +389,7 @@ def test_get_labelmap_from_dict_ReturnsObj():
     x_labelmap.set_otx2inx(clean_otx, clean_inx)
 
     # WHEN
-    gen_labelmap = get_labelmap_from_dict(x_labelmap.get_dict())
+    gen_labelmap = get_labelmap_from_dict(x_labelmap.to_dict())
 
     # THEN
     assert gen_labelmap.face_name == x_labelmap.face_name

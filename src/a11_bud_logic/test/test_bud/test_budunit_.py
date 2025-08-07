@@ -140,7 +140,7 @@ def test_BudUnit_get_dict_ReturnsObj():
     t4_budunit = budunit_shop(t4_bud_time, t4_quota)
 
     # WHEN
-    t4_dict = t4_budunit.get_dict()
+    t4_dict = t4_budunit.to_dict()
 
     # THEN
     assert t4_dict == {bud_time_str(): t4_bud_time, quota_str(): t4_quota}
@@ -221,7 +221,7 @@ def test_BudUnit_get_dict_ReturnsObjWith_bud_partner_net():
     )
 
     # WHEN
-    t4_dict = t4_budunit.get_dict()
+    t4_dict = t4_budunit.to_dict()
 
     # THEN
     assert t4_dict == {
@@ -266,7 +266,7 @@ def test_get_budunit_from_dict_ReturnsObj_Sccenario0():
     t4_bud_time = 4
     t4_quota = 55
     t4_budunit = budunit_shop(t4_bud_time, t4_quota)
-    t4_dict = t4_budunit.get_dict()
+    t4_dict = t4_budunit.to_dict()
     assert t4_dict == {bud_time_str(): t4_bud_time, quota_str(): t4_quota}
 
     # WHEN
@@ -294,7 +294,7 @@ def test_get_budunit_from_dict_ReturnsObj_Scenario1():
         t4_magnitude,
         celldepth=t4_celldepth,
     )
-    t4_dict = t4_budunit.get_dict()
+    t4_dict = t4_budunit.to_dict()
 
     # WHEN
     x_budunit = get_budunit_from_dict(t4_dict)

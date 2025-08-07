@@ -218,7 +218,7 @@ def test_BrokerUnit_get_dict_ReturnsObj_Scenario0():
     sue_brokerunit.add_bud(x7_bud_time, x7_quota, celldepth=x7_celldepth)
 
     # WHEN
-    sue_buds_dict = sue_brokerunit.get_dict()
+    sue_buds_dict = sue_brokerunit.to_dict()
 
     # THEN
     assert sue_buds_dict == {
@@ -238,7 +238,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_brokerunit = brokerunit_shop(sue_str)
-    sue_buds_dict = sue_brokerunit.get_dict()
+    sue_buds_dict = sue_brokerunit.to_dict()
     assert sue_buds_dict == {believer_name_str(): sue_str, "buds": {}}
 
     # WHEN
@@ -262,7 +262,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario1():
     x7_quota = 66
     sue_brokerunit.add_bud(x4_bud_time, x4_quota)
     sue_brokerunit.add_bud(x7_bud_time, x7_quota)
-    sue_buds_dict = sue_brokerunit.get_dict()
+    sue_buds_dict = sue_brokerunit.to_dict()
     assert sue_buds_dict == {
         believer_name_str(): sue_str,
         "buds": {
@@ -302,7 +302,7 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
     sue_brokerunit.get_bud(x7_bud_time).set_bud_partner_net(
         zia_str, zia_bud_partner_net
     )
-    sue_buds_dict = sue_brokerunit.get_dict()
+    sue_buds_dict = sue_brokerunit.to_dict()
     assert sue_buds_dict == {
         believer_name_str(): sue_str,
         "buds": {
@@ -352,7 +352,7 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     sue_brokerunit.get_bud(x7_bud_time).set_bud_partner_net(
         zia_str, zia_bud_partner_net
     )
-    sue_buds_dict = sue_brokerunit.get_dict()
+    sue_buds_dict = sue_brokerunit.to_dict()
     assert sue_buds_dict == {
         believer_name_str(): sue_str,
         "buds": {

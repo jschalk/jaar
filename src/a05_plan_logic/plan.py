@@ -38,7 +38,7 @@ from src.a03_group_logic.group import (
     awardline_shop,
     awardlinks_get_from_dict,
 )
-from src.a04_reason_logic.reason_labor import (
+from src.a03_group_logic.labor import (
     LaborHeir,
     LaborUnit,
     laborheir_shop,
@@ -91,7 +91,7 @@ class ranged_fact_plan_Exception(Exception):
 
 @dataclass
 class PlanAttrHolder:
-    mass: int = None
+    star: int = None
     uid: int = None
     reason: ReasonUnit = None
     reason_context: RopeTerm = None
@@ -138,7 +138,7 @@ class PlanAttrHolder:
 
 
 def planattrholder_shop(
-    mass: int = None,
+    star: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
     reason_context: RopeTerm = None,
@@ -170,7 +170,7 @@ def planattrholder_shop(
     problem_bool: bool = None,
 ) -> PlanAttrHolder:
     return PlanAttrHolder(
-        mass=mass,
+        star=star,
         uid=uid,
         reason=reason,
         reason_context=reason_context,
@@ -225,7 +225,7 @@ class PlanUnit:
     belief_label : BeliefLabel that is root plan LabelTerm.
     knot : str Identifier or label for bridging plans.
     optional:
-    mass : int weight that is arbitrary used by parent plan to calculated relative importance.
+    star : int weight that is arbitrary used by parent plan to calculated relative importance.
     _kids : dict[RopeTerm], Internal mapping of child plans by their LabelTerm
     _uid : int Unique identifier, forgot how I use this.
     awardlinks : dict[GroupTitle, AwardLink] that describe who funds and who is funded
@@ -272,7 +272,7 @@ class PlanUnit:
     parent_rope: RopeTerm = None
     _kids: dict[RopeTerm,] = None
     root: bool = None
-    mass: int = None
+    star: int = None
     _uid: int = None  # Calculated field?
     awardlinks: dict[GroupTitle, AwardLink] = None
     reasonunits: dict[RopeTerm, ReasonUnit] = None
@@ -607,8 +607,8 @@ class PlanUnit:
         self.factunits = new_factunits
 
     def _set_attrs_to_planunit(self, plan_attr: PlanAttrHolder):
-        if plan_attr.mass is not None:
-            self.mass = plan_attr.mass
+        if plan_attr.star is not None:
+            self.star = plan_attr.star
         if plan_attr.uid is not None:
             self._uid = plan_attr.uid
         if plan_attr.reason is not None:
@@ -790,8 +790,8 @@ class PlanUnit:
     def clear_kids(self):
         self._kids = {}
 
-    def get_kids_mass_sum(self) -> float:
-        return sum(x_kid.mass for x_kid in self._kids.values())
+    def get_kids_star_sum(self) -> float:
+        return sum(x_kid.star for x_kid in self._kids.values())
 
     def set_awardlink(self, awardlink: AwardLink):
         self.awardlinks[awardlink.awardee_title] = awardlink
@@ -827,10 +827,10 @@ class PlanUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        believer_believer_name: PartnerName = None,
+        believer_name: PartnerName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, believer_believer_name)
+        self._active = self._create_active_bool(groupunits, believer_name)
         self._set_plan_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -848,18 +848,13 @@ class PlanUnit:
     def _create_active_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_believer_name: PartnerName,
+        believer_name: PartnerName,
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
-        if (
-            active_bool
-            and groupunits != {}
-            and believer_believer_name is not None
-            and self._laborheir._laborlinks != {}
-        ):
-            self._laborheir.set_believer_name_labor(groupunits, believer_believer_name)
-            if self._laborheir._believer_name_labor is False:
+        if active_bool and groupunits != {} and believer_name is not None:
+            self._laborheir.set_believer_name_is_labor(groupunits, believer_name)
+            if self._laborheir._believer_name_is_labor is False:
                 active_bool = False
         return active_bool
 
@@ -940,17 +935,17 @@ class PlanUnit:
 
     def get_reasonunits_dict(self):
         return {
-            reason_context: reason.get_dict()
+            reason_context: reason.to_dict()
             for reason_context, reason in self.reasonunits.items()
         }
 
     def get_kids_dict(self) -> dict[GroupTitle,]:
-        return {c_rope: kid.get_dict() for c_rope, kid in self._kids.items()}
+        return {c_rope: kid.to_dict() for c_rope, kid in self._kids.items()}
 
     def get_awardlinks_dict(self) -> dict[GroupTitle, dict]:
         x_awardlinks = self.awardlinks.items()
         return {
-            x_awardee_title: awardlink.get_dict()
+            x_awardee_title: awardlink.to_dict()
             for x_awardee_title, awardlink in x_awardlinks
         }
 
@@ -963,8 +958,8 @@ class PlanUnit:
     def awardheir_exists(self) -> bool:
         return self._awardheirs != {}
 
-    def get_dict(self) -> dict[str, str]:
-        x_dict = {"mass": self.mass}
+    def to_dict(self) -> dict[str, str]:
+        x_dict = {"star": self.star}
 
         if self.plan_label is not None:
             x_dict["plan_label"] = self.plan_label
@@ -977,7 +972,7 @@ class PlanUnit:
         if self.laborunit not in [None, laborunit_shop()]:
             x_dict["laborunit"] = self.get_laborunit_dict()
         if self.healerlink not in [None, healerlink_shop()]:
-            x_dict["healerlink"] = self.healerlink.get_dict()
+            x_dict["healerlink"] = self.healerlink.to_dict()
         if self.awardlinks not in [{}, None]:
             x_dict["awardlinks"] = self.get_awardlinks_dict()
         if self.begin is not None:
@@ -1029,14 +1024,14 @@ class PlanUnit:
         groupunits: dict[GroupTitle, GroupUnit],
     ):
         self._laborheir = laborheir_shop()
-        self._laborheir.set_laborlinks(
+        self._laborheir.set_partys(
             parent_laborheir=parent_laborheir,
             laborunit=self.laborunit,
             groupunits=groupunits,
         )
 
     def get_laborunit_dict(self) -> dict:
-        return self.laborunit.get_dict()
+        return self.laborunit.to_dict()
 
 
 def planunit_shop(
@@ -1044,7 +1039,7 @@ def planunit_shop(
     _uid: int = None,  # Calculated field?
     parent_rope: RopeTerm = None,
     _kids: dict = None,
-    mass: int = 1,
+    star: int = 1,
     awardlinks: dict[GroupTitle, AwardLink] = None,
     _awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
     _awardlines: dict[GroupTitle, AwardLink] = None,  # Calculated field
@@ -1091,7 +1086,7 @@ def planunit_shop(
         _uid=_uid,
         parent_rope=parent_rope,
         _kids=get_empty_dict_if_None(_kids),
-        mass=get_positive_int(mass),
+        star=get_positive_int(star),
         awardlinks=get_empty_dict_if_None(awardlinks),
         _awardheirs=get_empty_dict_if_None(_awardheirs),
         _awardlines=get_empty_dict_if_None(_awardlines),
