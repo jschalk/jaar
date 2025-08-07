@@ -5,7 +5,7 @@ from src.a05_plan_logic.healer import (
 )
 
 
-def test_HealerLink_exists():
+def test_HealerLink_Exists():
     # ESTABLISH
     run_str = ";runners"
     run_healer_names = {run_str}
@@ -103,6 +103,7 @@ def test_HealerLink_healer_name_exists_ReturnsObj():
 
 
 def test_HealerLink_any_healer_name_exists_ReturnsObj():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     x_healerlink = healerlink_shop()
     assert x_healerlink.any_healer_name_exists() is False

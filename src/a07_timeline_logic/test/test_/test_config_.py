@@ -44,7 +44,7 @@ from src.a07_timeline_logic.timeline_main import (
 )
 
 
-def test_TimeLineLabel_exists():
+def test_TimeLineLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN

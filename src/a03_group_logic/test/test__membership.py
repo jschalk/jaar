@@ -30,7 +30,7 @@ from src.a03_group_logic.test._util.a03_str import (
 )
 
 
-def test_GroupCore_exists():
+def test_GroupCore_Exists():
     # ESTABLISH
     swim_str = ";swimmers"
     # WHEN
@@ -40,7 +40,7 @@ def test_GroupCore_exists():
     assert swim_groupcore.group_title == swim_str
 
 
-def test_MemberShip_exists():
+def test_MemberShip_Exists():
     # ESTABLISH
     swim_str = ",swim"
 
@@ -312,7 +312,7 @@ def test_MemberShip_clear_fund_give_take_SetsAttrCorrectly():
     assert bob_membership._fund_agenda_ratio_take == 0
 
 
-def test_AwardLink_exists():
+def test_AwardLink_Exists():
     # ESTABLISH
     bikers_str = "bikers"
 
@@ -343,7 +343,7 @@ def test_awardlink_shop_ReturnsObj():
     assert bikers_awardlink.take_force == bikers_take_force
 
 
-def test_AwardHeir_exists():
+def test_AwardHeir_Exists():
     # ESTABLISH / WHEN
     x_awardheir = AwardHeir()
 
@@ -423,7 +423,7 @@ def test_awardlinks_get_from_JSON_ReturnsObj_SimpleExample():
     assert awardlinks_obj_dict == teachers_obj_check_dict
 
 
-def test_AwardLine_exists():
+def test_AwardLine_Exists():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_fund_give = 0.33
@@ -442,7 +442,7 @@ def test_AwardLine_exists():
     assert bikers_awardline._fund_take == bikers_fund_take
 
 
-def test_awardline_shop_ReturnsObj_exists():
+def test_awardline_shop_ReturnsObj_Exists():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_str = bikers_str

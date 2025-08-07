@@ -22,7 +22,7 @@ from src.a03_group_logic.test._util.a03_str import (
 )
 
 
-def test_PartnerUnit_exists():
+def test_PartnerUnit_Exists():
     # ESTABLISH
     bob_str = "Bob"
 

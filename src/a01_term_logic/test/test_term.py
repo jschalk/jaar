@@ -47,7 +47,7 @@ def test_default_knot_if_None_ReturnsObj():
     assert default_knot_if_None(bob_str) == bob_str
 
 
-def test_NameTerm_exists():
+def test_NameTerm_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
@@ -77,7 +77,7 @@ def test_NameTerm_is_name_ReturnsObj_Scenario1():
     assert x_nameterm.is_name(slash_str) is False
 
 
-def test_HealerName_exists():
+def test_HealerName_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
@@ -88,7 +88,7 @@ def test_HealerName_exists():
     assert inspect_getdoc(bob_healer_str) == doc_str
 
 
-def test_BelieverName_exists():
+def test_BelieverName_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
@@ -99,7 +99,7 @@ def test_BelieverName_exists():
     assert inspect_getdoc(bob_BelieverName_str) == doc_str
 
 
-def test_PartnerName_exists():
+def test_PartnerName_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
@@ -112,7 +112,7 @@ def test_PartnerName_exists():
     assert inspect_getdoc(bob_PartnerName) == doc_str
 
 
-def test_TitleTerm_exists():
+def test_TitleTerm_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
@@ -123,13 +123,13 @@ def test_TitleTerm_exists():
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 
-def test_GroupTitle_exists():
+def test_GroupTitle_Exists():
     bikers_GroupTitle = GroupTitle(";bikers")
     assert bikers_GroupTitle is not None
     assert str(type(bikers_GroupTitle)).find("src.a01_term_logic.term.GroupTitle") > 0
 
 
-def test_LabelTerm_exists():
+def test_LabelTerm_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
@@ -172,7 +172,7 @@ def test_CentralLabel_Exists():
     assert inspect_getdoc(x_central) == doc_str
 
 
-def test_RopeTerm_exists():
+def test_RopeTerm_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
@@ -183,7 +183,7 @@ def test_RopeTerm_exists():
     assert inspect_getdoc(x_rope) == doc_str
 
 
-def test_EporTerm_exists():
+def test_EporTerm_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN

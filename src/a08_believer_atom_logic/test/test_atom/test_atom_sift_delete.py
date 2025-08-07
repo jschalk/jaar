@@ -49,6 +49,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_partnerunit():
 
 
 def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_partner_membership():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
@@ -155,6 +156,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_planunit():
 
 
 def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_awardlink():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -189,6 +191,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_awardlink():
 
 
 def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reasonunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -223,7 +226,8 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reasonunit():
     assert sift_believeratom(sue_believer, clean_week_atom)
 
 
-def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_caseunit_exists():
+def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_caseunit_Exists():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -272,6 +276,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_reason_caseunit_e
 
 
 def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_partyunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -306,6 +311,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_partyunit():
 
 
 def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_healerlink():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -340,6 +346,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_healerlink():
 
 
 def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_factunit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"

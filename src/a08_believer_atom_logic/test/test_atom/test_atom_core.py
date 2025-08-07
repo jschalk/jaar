@@ -12,7 +12,7 @@ from src.a08_believer_atom_logic.atom_main import BelieverAtom, believeratom_sho
 from src.a08_believer_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
 
 
-def test_BelieverAtom_exists():
+def test_BelieverAtom_Exists():
     # ESTABLISH / WHEN
     x_believeratom = BelieverAtom()
 

@@ -45,7 +45,7 @@ def test_get_init_pack_id_if_None_ReturnsObj():
     assert get_init_pack_id_if_None(1) == 1
 
 
-def test_PackUnit_exists():
+def test_PackUnit_Exists():
     # ESTABLISH / WHEN
     x_packunit = PackUnit()
 

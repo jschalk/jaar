@@ -35,7 +35,7 @@ from src.a09_pack_logic.test._util.example_deltas import (
 )
 
 
-def test_BelieverDelta_exists():
+def test_BelieverDelta_Exists():
     # ESTABLISH / WHEN
     x_believerdelta = BelieverDelta()
 

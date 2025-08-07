@@ -96,7 +96,7 @@ def test_partyheir_shop_ReturnsObj():
     assert x_partyheir.solo == bob_solo_bool
 
 
-def test_LaborUnit_exists():
+def test_LaborUnit_Exists():
     # ESTABLISH / WHEN
     x_laborunit = LaborUnit()
 
@@ -219,7 +219,7 @@ def test_LaborUnit_del_partyunit_CorrectlyDeletes_partys_v1():
     assert len(x_laborunit._partys) == 1
 
 
-def test_LaborHeir_exists():
+def test_LaborHeir_Exists():
     # ESTABLISH / WHEN
     x_laborheir = LaborHeir()
 

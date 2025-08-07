@@ -184,7 +184,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_reasonunit():
     assert not sift_believeratom(sue_believer, clean_week_atom)
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_reason_caseunit_exists():
+def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_reason_caseunit_Exists():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
