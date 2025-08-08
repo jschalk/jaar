@@ -164,7 +164,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWithDet
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBeliever(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-duplicate-method
     # ESTABLISH
     belief_mstr_dir = env_dir()
     a23_str = "amy23"
