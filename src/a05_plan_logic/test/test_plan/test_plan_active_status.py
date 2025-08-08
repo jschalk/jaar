@@ -458,7 +458,7 @@ def test_PlanUnit_set_laborheir_CorrectlySetsAttr():
     swim_str = "swimmers"
     sport_str = "sports"
     sport_plan = planunit_shop(sport_str)
-    sport_plan.laborunit.set_partyunit(party_title=swim_str)
+    sport_plan.laborunit.add_partyunit(party_title=swim_str)
     # assert sport_plan._laborheir is None
 
     # WHEN
@@ -467,7 +467,7 @@ def test_PlanUnit_set_laborheir_CorrectlySetsAttr():
     # THEN
     assert sport_plan._laborheir is not None
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_partyunit(party_title=swim_str)
+    swim_laborunit.add_partyunit(party_title=swim_str)
     swim_laborheir = laborheir_shop()
     swim_laborheir.set_partys(
         laborunit=swim_laborunit, parent_laborheir=None, groupunits=None

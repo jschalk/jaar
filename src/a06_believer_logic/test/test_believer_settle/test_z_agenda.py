@@ -483,7 +483,7 @@ def test_BelieverUnit_agenda_IsSetByLaborUnit_1PartnerGroup():
     sue_str = "Sue"
     yao_believer.add_partnerunit(sue_str)
     laborunit_sue = laborunit_shop()
-    laborunit_sue.set_partyunit(party_title=sue_str)
+    laborunit_sue.add_partyunit(party_title=sue_str)
     assert len(yao_believer.get_agenda_dict()) == 1
 
     # WHEN
@@ -495,7 +495,7 @@ def test_BelieverUnit_agenda_IsSetByLaborUnit_1PartnerGroup():
     # WHEN
     yao_believer.add_partnerunit(yao_str)
     laborunit_yao = laborunit_shop()
-    laborunit_yao.set_partyunit(party_title=yao_str)
+    laborunit_yao.add_partyunit(party_title=yao_str)
 
     # WHEN
     yao_believer.edit_plan_attr(casa_rope, laborunit=laborunit_yao)
@@ -523,7 +523,7 @@ def test_BelieverUnit_get_agenda_dict_IsSetByLaborUnit_2PartnerGroup():
     sue_partnerunit.add_membership(run_str)
 
     run_laborunit = laborunit_shop()
-    run_laborunit.set_partyunit(party_title=run_str)
+    run_laborunit.add_partyunit(party_title=run_str)
     assert len(yao_believer.get_agenda_dict()) == 1
 
     # WHEN
@@ -558,7 +558,7 @@ def test_BelieverUnit_get_all_tasks_ReturnsObj():
     sweep_plan = zia_believer.get_plan_obj(sweep_rope)
     yao_str = "Yao"
     zia_believer.add_partnerunit(yao_str)
-    sweep_plan.laborunit.set_partyunit(yao_str)
+    sweep_plan.laborunit.add_partyunit(yao_str)
     print(f"{sweep_plan}")
     agenda_dict = zia_believer.get_agenda_dict()
     assert agenda_dict.get(clean_rope) is not None

@@ -84,7 +84,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     run_str = "runners"
     sue_believer = believerunit_shop("Sue")
     x_laborunit = laborunit_shop()
-    x_laborunit.set_partyunit(party_title=run_str)
+    x_laborunit.add_partyunit(party_title=run_str)
     root_rope = to_rope(sue_believer.belief_label)
     sue_believer.edit_plan_attr(root_rope, laborunit=x_laborunit)
     root_plan = sue_believer.get_plan_obj(root_rope)
@@ -138,7 +138,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     morn_rope = sue_believer.make_l1_rope(morn_str)
     sue_believer.set_l1_plan(planunit_shop(morn_str))
     x_laborunit = laborunit_shop()
-    x_laborunit.set_partyunit(party_title=run_str)
+    x_laborunit.add_partyunit(party_title=run_str)
     sue_believer.edit_plan_attr(morn_rope, laborunit=x_laborunit)
 
     # WHEN
@@ -329,11 +329,11 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     sue_partnerunit.add_membership(run_str)
     xio_partnerunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
-    run_laborunit.set_partyunit(party_title=run_str)
+    run_laborunit.add_partyunit(party_title=run_str)
     root_rope = to_rope(zia_believer.belief_label)
     zia_believer.edit_plan_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
-    xio_laborunit.set_partyunit(party_title=xio_str)
+    xio_laborunit.add_partyunit(party_title=xio_str)
     zia_believer.edit_plan_attr(shave_rope, laborunit=xio_laborunit)
     zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(xio_str))
     zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(sue_str))

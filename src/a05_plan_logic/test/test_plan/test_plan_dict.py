@@ -224,7 +224,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_plan.set_awardlink(awardlink_shop(yao_str))
 
     x_laborunit = casa_plan.laborunit
-    x_laborunit.set_partyunit(party_title=yao_str)
+    x_laborunit.add_partyunit(party_title=yao_str)
 
     clean_str = "clean"
     casa_plan.add_kid(planunit_shop(clean_str))
