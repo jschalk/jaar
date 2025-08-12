@@ -207,7 +207,7 @@ def test_idea_FilesExist():
     assert len(idea_filenames) == len(get_idea_format_filenames())
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_believer_partnerunit_v0_0_0():
+def test_get_idearef_obj_HasAttrs_idea_format_00021_believer_partnerunit_v0_0_0():
     # ESTABLISH
     idea_name = idea_format_00021_believer_partnerunit_v0_0_0()
 
@@ -235,7 +235,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00021_believer_partnerunit_
     assert headers_list[6] == partner_debt_points_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_believer_partner_membership_v0_0_0():
+def test_get_idearef_obj_HasAttrs_idea_format_00020_believer_partner_membership_v0_0_0():
     # ESTABLISH
     idea_name = idea_format_00020_believer_partner_membership_v0_0_0()
 
@@ -255,7 +255,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00020_believer_partner_memb
     assert headers_list[7] == group_debt_points_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_planunit_v0_0_0():
+def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
     # ESTABLISH
     idea_name = idea_format_00013_planunit_v0_0_0()
 
@@ -274,7 +274,7 @@ def test_get_idearef_obj_HasCorrectAttrs_idea_format_00013_planunit_v0_0_0():
     assert headers_list[6] == task_str()
 
 
-def test_get_idearef_obj_HasCorrectAttrs_idea_format_00019_planunit_v0_0_0():
+def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
     # ESTABLISH
     idea_name = idea_format_00019_planunit_v0_0_0()
 

@@ -284,7 +284,7 @@ def test_memberships_get_from_dict_ReturnsObj():
     assert after_swim_memberships_objs.get(swim_str) == before_swim_membership
 
 
-def test_MemberShip_clear_fund_give_take_SetsAttrCorrectly():
+def test_MemberShip_clear_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_membership = membership_shop("Bob")
     bob_membership._fund_give = 0.27
@@ -462,7 +462,7 @@ def test_awardline_shop_ReturnsObj_Exists():
     assert biker_awardline._fund_take == bikers_fund_take
 
 
-def test_AwardLine_add_fund_give_take_CorrectlyModifiesAttr():
+def test_AwardLine_add_fund_give_take_ModifiesAttr():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_awardline = awardline_shop(

@@ -53,7 +53,7 @@ def test_believerdelta_shop_ReturnsObj():
     assert ex1_believerdelta._believer_build_validated is False
 
 
-def test_BelieverDelta_set_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
+def test_BelieverDelta_set_believeratom_Sets_BelieverUnitSimpleAttrs():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
     attribute_value = 55
@@ -152,7 +152,7 @@ def test_BelieverDelta_get_atom_ReturnsObj():
     assert gen_believeratom == believerunit_believeratom
 
 
-def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
+def test_BelieverDelta_add_believeratom_Sets_BelieverUnitSimpleAttrs():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
     assert ex1_believerdelta.believeratoms == {}
@@ -177,7 +177,7 @@ def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnitSimpleAttrs():
     assert x_believeratom.dimen == believerunit_str()
 
 
-def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_partnerunits():
+def test_BelieverDelta_add_believeratom_Sets_BelieverUnit_partnerunits():
     # ESTABLISH
     ex1_believerdelta = believerdelta_shop()
     assert ex1_believerdelta.believeratoms == {}
@@ -261,7 +261,7 @@ def test_BelieverDelta_get_dimen_sorted_believeratoms_list_ReturnsObj_Scenario0_
     assert sue_atoms_list[1] == zia_partnerunit_delete
 
 
-# def test_BelieverDelta_add_believeratom_CorrectlySets_BelieverUnit_max_tree_traverse():
+# def test_BelieverDelta_add_believeratom_Sets_BelieverUnit_max_tree_traverse():
 #     # ESTABLISH
 #     ex1_believerdelta = believerdelta_shop(get_sue_rope())
 #     assert ex1_believerdelta.believeratoms == {}

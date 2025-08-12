@@ -191,7 +191,7 @@ def test_rope_is_sub_rope_ReturnsObj_Scenario1_WhenNone_default_knot_if_None():
     assert is_sub_rope(slash_cleaning_rope, default_laundrys_rope) is False
 
 
-def test_rope_rebuild_rope_ReturnsCorrectRopeTerm():
+def test_rope_rebuild_rope_ReturnsRopeTerm():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_rope(), casa_str)
@@ -331,7 +331,7 @@ class TempTestingObj:
         return self.x_rope
 
 
-def test_rope_find_replace_rope_key_dict_ReturnsCorrectDict_Scenario1():
+def test_rope_find_replace_rope_key_dict_ReturnsDict_Scenario1():
     # ESTABLISH
     x_s = default_knot_if_None()
     old_seasons_rope = f"{root_rope()}{x_s}casa{x_s}seasons"
@@ -471,7 +471,7 @@ def test_is_labelterm_ReturnsObj():
     assert is_labelterm(RopeTerm("ZZ"), x_s)
 
 
-def test_is_heir_rope_CorrectlyIdentifiesHeirs():
+def test_is_heir_rope_IdentifiesHeirs():
     # ESTABLISH
     x_s = default_knot_if_None()
     usa_str = "USA"
@@ -520,7 +520,7 @@ def test_replace_knot_ReturnsNewObj():
     assert gen_casa_rope == slash_knot_casa_rope
 
 
-def test_replace_knot_CorrectlyRaisesError():
+def test_replace_knot_RaisesError():
     # ESTABLISH
     cooker_str = "cooker/cleaner"
     gen_cooker_rope = create_rope(root_rope(), cooker_str)

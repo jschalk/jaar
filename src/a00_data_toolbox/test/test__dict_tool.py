@@ -63,7 +63,7 @@ def test_get_0_if_None():
     assert str(type(get_0_if_None(e7))) == "<class 'int'>"
 
 
-def test_add_nested_dict_if_missing_CorrectAddsDict():
+def test_add_nested_dict_if_missing_AddsToDict():
     # ESTABLISH
     y_dict = {}
 
@@ -77,7 +77,7 @@ def test_add_nested_dict_if_missing_CorrectAddsDict():
     assert y_dict == {y_key1: {y_key2: {y_key3: {}}}}
 
 
-def test_set_in_nested_dict_CorrectAddsDict():
+def test_set_in_nested_dict_AddsToDict():
     # ESTABLISH
     y_dict = {}
 
@@ -92,7 +92,7 @@ def test_set_in_nested_dict_CorrectAddsDict():
     assert y_dict == {y_key1: {y_key2: {y_key3: fly_str}}}
 
 
-def test_exists_in_nested_dict_CorrectAddsDict():
+def test_exists_in_nested_dict_AddsToDict():
     # ESTABLISH
     y_dict = {}
 
@@ -111,7 +111,7 @@ def test_exists_in_nested_dict_CorrectAddsDict():
     assert exists_in_nested_dict(y_dict, y_keylist)
 
 
-def test_del_in_nested_dict_CorrectSetsDict():
+def test_del_in_nested_dict_SetsDict():
     # TODO apply suggestions from Sourery
     # -def add_dict_if_missing(x_dict: dict, x_keylist: list[any]):
     # +def add_nested_dict_if_missing(x_dict: dict, x_keylist: list[any]):
@@ -188,7 +188,7 @@ def test_del_in_nested_dict_CorrectSetsDict():
     assert not get_from_nested_dict(y_dict, y3_0_keylist, True)
 
 
-def test_get_all_nondictionary_objs_ReturnsCorrectDict():
+def test_get_all_nondictionary_objs_ReturnsDict():
     # ESTABLISH
     y_dict = {}
     sports_str = "sports"

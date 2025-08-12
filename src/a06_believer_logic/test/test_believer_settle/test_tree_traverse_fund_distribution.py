@@ -53,6 +53,7 @@ def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenar
 
 
 def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenario1():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_believerunit = believerunit_shop("Yao", tally=10)
 
@@ -131,6 +132,7 @@ def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenar
 
 
 def test_BelieverUnit_settle_believer_Sets_planunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfPlans():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_believerunit = believerunit_shop("Yao", tally=10)
 
@@ -362,7 +364,7 @@ def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNostarDist
     assert sue_believerunit.get_partner(yao_str)._fund_take == default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_TreeTraverseSetsAwardLine_fundFromRootCorrectly():
+def test_BelieverUnit_settle_believer_TreeTraverseSetsAwardLine_fundFromRoot():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sue_believer.settle_believer()
@@ -683,7 +685,7 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGr
     )
 
 
-def test_BelieverUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBelieverFund():
+def test_BelieverUnit_set_awardlink_CalculatesInheritedAwardLinkBelieverFund():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
@@ -742,7 +744,7 @@ def test_BelieverUnit_set_awardlink_CorrectlyCalculatesInheritedAwardLinkBelieve
     # assert fund_take_sum == 1
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt():
+def test_BelieverUnit_settle_believer_SetsGroupLinkBelieverCredAndDebt():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     sue_str = "Sue"
@@ -839,7 +841,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsGroupLinkBelieverCredAndDebt(
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPartnerUnitBeliever_fund():
+def test_BelieverUnit_settle_believer_SetsPartnerUnitBeliever_fund():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     swim_str = "swim"
@@ -939,7 +941,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsPartnerUnitBeliever_fund():
     )
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPartGroupedLWPartnerUnitBeliever_fund():
+def test_BelieverUnit_settle_believer_SetsPartGroupedLWPartnerUnitBeliever_fund():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     swim_str = "swim"
@@ -1049,7 +1051,7 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsPartner_fund_giv
     assert partnerunit_fund_take_sum == default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPartnerUnit_fund_give_fund_take():
+def test_BelieverUnit_settle_believer_SetsPartnerUnit_fund_give_fund_take():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     yao_believer.set_l1_plan(planunit_shop("swim"))
@@ -1151,7 +1153,7 @@ class AwardAgendaMetrics:
                 self.agenda_yes_believer_i_sum += agenda_plan.get_fund_share()
 
 
-def test_BelieverUnit_agenda_cred_debt_IsCorrectlySet():
+def test_BelieverUnit_agenda_cred_debt_SetAttrs():
     # ESTABLISH
     yao_believer = believerunit_v001_with_large_agenda()
     clear_all_partnerunits_groupunits_fund_agenda_give_take(yao_believer)

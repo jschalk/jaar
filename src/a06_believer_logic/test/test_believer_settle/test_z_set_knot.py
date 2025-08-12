@@ -11,7 +11,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 
 
-def test_BelieverUnit_set_belief_label_CorrectlySetsAttr():
+def test_BelieverUnit_set_belief_label_SetsAttr():
     # ESTABLISH
     x_belief_label = "amy45"
     sue_str = "Sue"
@@ -25,7 +25,7 @@ def test_BelieverUnit_set_belief_label_CorrectlySetsAttr():
     assert sue_believer.belief_label == x_belief_label
 
 
-def test_BelieverUnit_set_plan_CorrectlySetsbelief_label_AND_fund_iota():
+def test_BelieverUnit_set_plan_Setsbelief_label_AND_fund_iota():
     # ESTABLISH'
     x_fund_iota = 500
     sue_believer = get_believerunit_with_4_levels()
@@ -48,7 +48,7 @@ def test_BelieverUnit_set_plan_CorrectlySetsbelief_label_AND_fund_iota():
     assert cookery_plan.fund_iota == x_fund_iota
 
 
-def test_believer_set_belief_label_CorrectlySetsAttr():
+def test_believer_set_belief_label_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(believer_name=yao_str)
@@ -104,7 +104,7 @@ def test_believer_set_knot_RaisesErrorIfNew_knot_IsAnPlan_label():
     )
 
 
-def test_believer_set_knot_CorrectlyModifies_parent_rope():
+def test_believer_set_knot_Modifies_parent_rope():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -135,7 +135,8 @@ def test_believer_set_knot_CorrectlyModifies_parent_rope():
     assert cook_plan.get_plan_rope() == slash_cook_rope
 
 
-def test_believer_set_knot_CorrectlyModifiesReasonUnit():
+def test_believer_set_knot_ModifiesReasonUnit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     zia_believer = believerunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -174,7 +175,7 @@ def test_believer_set_knot_CorrectlyModifiesReasonUnit():
     assert gen_ziet_reasonunit.cases.get(semicolon_8am_rope) is None
 
 
-def test_believer_set_knot_CorrectlyModifiesFactUnit():
+def test_believer_set_knot_ModifiesFactUnit():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia", "Texas")
     casa_str = "casa"
@@ -212,7 +213,7 @@ def test_believer_set_knot_CorrectlyModifiesFactUnit():
     assert casa_plan.factunits.get(semicolon_ziet_rope) is None
 
 
-def test_BelieverUnit_set_knot_CorrectlySetsAttr():
+def test_BelieverUnit_set_knot_SetsAttr():
     # ESTABLISH
     x_belief_label = "amy45"
     slash_knot = "/"

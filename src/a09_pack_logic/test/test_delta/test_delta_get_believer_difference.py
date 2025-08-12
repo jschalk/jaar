@@ -1411,7 +1411,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 2
 
 
-def test_BelieverDelta_add_all_believeratoms_CorrectlyCreates_BelieverAtoms():
+def test_BelieverDelta_add_all_believeratoms_Creates_BelieverAtoms():
     # ESTABLISH
     sue_str = "Sue"
 

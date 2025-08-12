@@ -241,7 +241,7 @@ def test_allot_missing_scale_RaisesErrorWhen_ledgerSummationIsNot_scale_number()
     )
 
 
-def test_allot_missing_scale_CorrectlyReturnsEmpty_ledger():
+def test_allot_missing_scale_ReturnsEmpty_ledger():
     # ESTABLISH
     before_ledger = {}
     x_missing_scale = 44

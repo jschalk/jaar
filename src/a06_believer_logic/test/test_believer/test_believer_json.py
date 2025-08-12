@@ -154,7 +154,8 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     assert labor_dict_x == {"_partys": [run_str]}
 
 
-def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():
+def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     zia_believer = get_believerunit_x1_3levels_1reason_1facts()
     x_fund_pool = 66000
@@ -222,7 +223,7 @@ def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert x_planroot.problem_bool
 
 
-def test_BelieverUnit_get_json_ReturnsCorrectJSON_BigExample():
+def test_BelieverUnit_get_json_ReturnsJSON_BigExample():
     # ESTABLISH
     yao_believer = believerunit_v001()
     hr_number_str = "hr_number"
@@ -416,7 +417,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     assert json_shave_plan.stop_want == zia_shave_plan.stop_want
 
 
-def test_believerunit_get_from_json_ReturnsCorrectPlanRoot():
+def test_believerunit_get_from_json_ReturnsPlanRoot():
     # ESTABLISH
     zia_believer = get_believerunit_x1_3levels_1reason_1facts()
     zia_believer.set_max_tree_traverse(23)
@@ -490,7 +491,8 @@ def test_believerunit_get_from_json_ReturnsObj_knot_GroupExample():
     assert after_yao_partnerunit.knot == slash_knot
 
 
-def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrectlySet():
+def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     slash_str = "/"
     run_str = "runners"

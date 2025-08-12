@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a06_believer_logic.believer_main import believerunit_shop
 
 
-def test_BelieverUnit_set_credor_respect_CorrectlySetsAttr():
+def test_BelieverUnit_set_credor_respect_SetsAttr():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
 
@@ -33,7 +33,7 @@ def test_BelieverUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BelieverUnit_set_debtor_respect_CorrectlySetsInt():
+def test_BelieverUnit_set_debtor_respect_SetsInt():
     # ESTABLISH
     zia_str = "Zia"
     zia_believer = believerunit_shop(believer_name=zia_str)
@@ -65,7 +65,7 @@ def test_BelieverUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     )
 
 
-def test_BelieverUnit_set_partner_respect_CorrectlySetsAttrs():
+def test_BelieverUnit_set_partner_respect_SetsAttrs():
     # ESTABLISH
     zia_str = "Zia"
     old_credor_respect = 77

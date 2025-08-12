@@ -134,7 +134,7 @@ def test_insert_idea_csv_ChangesDBState_add_to_empty_table(
     assert rows == expected_data
 
 
-def test_insert_idea_csv_ChangesDBState_CorrectlyInserts(
+def test_insert_idea_csv_ChangesDBState_Inserts(
     setup_database_and_csv: tuple[sqlite3_Connection, str, str], env_dir_setup_cleanup
 ):
     """Test the insert_csv function using pytest."""

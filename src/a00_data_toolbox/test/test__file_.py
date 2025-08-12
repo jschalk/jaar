@@ -103,7 +103,7 @@ def test_save_file_SetsFile(env_dir_setup_cleanup):
     assert os_path_exist(create_path(env_dir, x_filename))
 
 
-def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_filename(
+def test_open_file_OpensFilesWith_dest_dirAnd_filename(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -125,7 +125,7 @@ def test_open_file_OpensFilesCorrectlyWith_dest_dirAnd_filename(
     assert open_file(dest_dir=env_dir, filename=x2_filename) == x2_file_str
 
 
-def test_open_file_OpensFilesCorrectlyWithOnly_dest_dir(
+def test_open_file_OpensFilesWithOnly_dest_dir(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -531,7 +531,7 @@ def test_is_path_existent_or_probably_creatable_ReturnsObj():
     assert is_path_existent_or_probably_creatable("run///trail") is False
 
 
-def test_get_all_dirs_with_file_ReturnsCorrectDirectories(env_dir_setup_cleanup):
+def test_get_all_dirs_with_file_ReturnsDirectories(env_dir_setup_cleanup):
     # ESTABLISH
     env_dir = get_module_temp_dir()
     x1_filename = "x1.txt"

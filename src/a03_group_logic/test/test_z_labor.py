@@ -108,7 +108,7 @@ def test_LaborUnit_Exists():
     assert obj_attrs == {"_partys"}
 
 
-def test_laborunit_shop_ReturnsCorrectWithCorrectAttributes_v1():
+def test_laborunit_shop_ReturnsWithCorrectAttributes_v1():
     # ESTABLISH
     x_partys = {1}
 
@@ -120,7 +120,7 @@ def test_laborunit_shop_ReturnsCorrectWithCorrectAttributes_v1():
     assert x_laborunit._partys == x_partys
 
 
-def test_laborunit_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
+def test_laborunit_shop_ifEmptyReturnsWithCorrectAttributes():
     # ESTABLISH / WHEN
     x_laborunit = laborunit_shop()
 
@@ -174,7 +174,7 @@ def test_create_laborunit_ReturnsObj():
     assert swim_laborunit._partys == expected_partys
 
 
-def test_LaborUnit_get_dict_ReturnsCorrectDictWithSingle_partyunit():
+def test_LaborUnit_get_dict_ReturnsDictWithSingle_partyunit():
     # ESTABLISH
     bob_party_title = GroupTitle("Bob")
     x_partys = {bob_party_title: bob_party_title}
@@ -203,7 +203,7 @@ def test_LaborUnit_partyunit_exists_ReturnsObj():
     assert x_laborunit.partyunit_exists(yao_str)
 
 
-def test_LaborUnit_del_partyunit_CorrectlyDeletes_partys_v1():
+def test_LaborUnit_del_partyunit_Deletes_partys_v1():
     # ESTABLISH
     x_laborunit = laborunit_shop()
     yao_str = "Yao"
@@ -249,7 +249,7 @@ def test_laborheir_shop_ReturnsObj_Scenario1_WithAttributes():
     assert x_laborheir._believer_name_is_labor == _believer_name_x_laborunit
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_Emptyx_partys():
+def test_LaborHeir_set_believer_name_is_labor_SetsAttribute_Emptyx_partys():
     # ESTABLISH
     x_partys = {}
     x_laborheir = laborheir_shop(_partys=x_partys)
@@ -263,7 +263,7 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_Emptyx_part
     assert x_laborheir._believer_name_is_labor
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_partys_v1():
+def test_LaborHeir_set_believer_name_is_labor_SetsAttribute_NonEmptyx_partys_v1():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -285,7 +285,7 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_p
     assert x_laborheir._believer_name_is_labor
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_partys_v2():
+def test_LaborHeir_set_believer_name_is_labor_SetsAttribute_NonEmptyx_partys_v2():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -306,7 +306,7 @@ def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_p
     assert x_laborheir._believer_name_is_labor is False
 
 
-def test_LaborHeir_set_believer_name_is_labor_CorrectlySetsAttribute_NonEmptyx_partys_v3():
+def test_LaborHeir_set_believer_name_is_labor_SetsAttribute_NonEmptyx_partys_v3():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
@@ -544,7 +544,7 @@ def test_LaborUnit_get_partyunit_ReturnsObj():
     assert x_laborunit.get_partyunit(run_str) is None
 
 
-def test_LaborHeir_party_title_in_ReturnsCorrectBoolWhen_partysNotEmpty():
+def test_LaborHeir_party_title_in_ReturnsBoolWhen_partysNotEmpty():
     # ESTABLISH
     swim_str = ",swim"
     hike_str = ",hike"

@@ -504,9 +504,13 @@ def check_if_test_HasDocString_pytests_exist(
 def check_all_test_functions_have_proper_naming_format(all_test_functions):
     for test_function_name in sorted(all_test_functions):
         test_function_name = str(test_function_name)
-        assert not test_function_name.endswith(
-            "_exists"
-        ), f"{test_function_name} name format"
+        failed_assertion_str = f"test function {test_function_name} is not named well"
+        if test_function_name.lower().endswith("_exists"):
+            assert test_function_name.endswith("_Exists"), failed_assertion_str
+        if test_function_name.lower().find("returnsobj") > 0:
+            assert test_function_name.find("ReturnsObj") > 0, failed_assertion_str
+        assert test_function_name.lower().find("correctly") <= 0, failed_assertion_str
+        assert test_function_name.lower().find("returnobj") <= 0, failed_assertion_str
 
 
 def test_check_Modules_filenames_FollowFileNameConventions_NoNamingCollision():

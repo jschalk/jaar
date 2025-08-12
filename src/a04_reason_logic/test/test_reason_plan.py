@@ -46,7 +46,7 @@ def test_ReasonCore_Exists():
     }
 
 
-def test_reasoncore_shop_ReturnsCorrectAttrWith_knot():
+def test_reasoncore_shop_ReturnsAttrWith_knot():
     # ESTABLISH
     slash_str = "/"
     casa_str = "casa"
@@ -73,7 +73,7 @@ def test_reasonheir_shop_ReturnsObj():
     assert casa_reason.knot == default_knot_if_None()
 
 
-def test_ReasonHeir_clear_CorrectlyClearsField():
+def test_ReasonHeir_clear_SetsAttrs():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -97,7 +97,7 @@ def test_ReasonHeir_clear_CorrectlyClearsField():
     assert casa_reason._rplan_active_value is None
 
 
-def test_ReasonHeir_set_status_CorrectlySetsStatus():
+def test_ReasonHeir_set_status_SetsStatus():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     wk_str = "wk"
@@ -144,7 +144,7 @@ def test_ReasonHeir_set_status_CorrectlySetsStatus():
     assert two_reason._status is False
 
 
-def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
+def test_ReasonHeir_set_status_EmptyFactSetsStatus():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -158,7 +158,7 @@ def test_ReasonHeir_set_status_EmptyFactCorrectlySetsStatus():
     assert wk_reason._status is False
 
 
-def test_ReasonHeir_set_rplan_active_value_Correctly():
+def test_ReasonHeir_set_rplan_active_value_SetsAttr():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -172,7 +172,7 @@ def test_ReasonHeir_set_rplan_active_value_Correctly():
     assert wk_reason._rplan_active_value
 
 
-def test_ReasonHeir_set_status_BelieverTrueCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_BelieverTrueSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -187,7 +187,7 @@ def test_ReasonHeir_set_status_BelieverTrueCorrectlySetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BelieverFalseCorrectlySetsStatusTrue():
+def test_ReasonHeir_set_status_BelieverFalseSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -202,7 +202,7 @@ def test_ReasonHeir_set_status_BelieverFalseCorrectlySetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BelieverTrueCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_BelieverTrueSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -217,7 +217,7 @@ def test_ReasonHeir_set_status_BelieverTrueCorrectlySetsStatusFalse():
     assert wk_reason._status is False
 
 
-def test_ReasonHeir_set_status_BelieverNoneCorrectlySetsStatusFalse():
+def test_ReasonHeir_set_status_BelieverNoneSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -245,7 +245,7 @@ def test_reasonunit_shop_ReturnsObj():
     assert wk_reasonunit.knot == default_knot_if_None()
 
 
-def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_caseequireds():
+def test_ReasonUnit_get_dict_ReturnsDictWithSinglethu_caseequireds():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -268,7 +268,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWithSinglethu_caseequireds():
     assert wk_reason_dict == static_wk_reason_dict
 
 
-def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_reason_active_requisite():
+def test_ReasonUnit_get_dict_ReturnsDictWith_reason_active_requisite():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -291,7 +291,7 @@ def test_ReasonUnit_get_dict_ReturnsCorrectDictWith_reason_active_requisite():
     assert wk_reason_dict == static_wk_reason_dict
 
 
-def test_ReasonUnit_get_dict_ReturnsCorrectDictWithTwoCasesReasons():
+def test_ReasonUnit_get_dict_ReturnsDictWithTwoCasesReasons():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -403,7 +403,7 @@ def test_ReasonCore_get_cases_count():
     assert wk_reason.get_cases_count() == 1
 
 
-def test_ReasonCore_set_case_CorrectlySetsCase():
+def test_ReasonCore_set_case_SetsCase():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -451,7 +451,7 @@ def test_ReasonCore_get_single_premis_ReturnsObj():
     assert wk_reason.get_case(case=noon_rope).reason_lower is None
 
 
-def test_ReasonCore_del_case_CorrectlyDeletesCase():
+def test_ReasonCore_del_case_DeletesCase():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -479,15 +479,15 @@ def test_ReasonCore_find_replace_rope_casas():
     assert x_reason.reason_context == old_wk_rope
     assert len(x_reason.cases) == 1
     print(f"{x_reason.cases=}")
+    new_rope = create_rope("fun")
     assert x_reason.cases.get(old_sun_rope).reason_state == old_sun_rope
 
     # WHEN
-    new_rope = create_rope("fun")
     x_reason.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
-    new_wk_rope = create_rope(new_rope, wk_str)
-    new_sun_rope = create_rope(new_wk_rope, sun_str)
 
     # THEN
+    new_wk_rope = create_rope(new_rope, wk_str)
+    new_sun_rope = create_rope(new_wk_rope, sun_str)
     assert x_reason.reason_context == new_wk_rope
     assert len(x_reason.cases) == 1
     assert x_reason.cases.get(new_sun_rope) is not None
@@ -496,7 +496,7 @@ def test_ReasonCore_find_replace_rope_casas():
     assert x_reason.cases.get(new_sun_rope).reason_state == new_sun_rope
 
 
-def test_ReasonCore_set_knot_SetsAttrsCorrectly():
+def test_ReasonCore_set_knot_SetsAttrs():
     # ESTABLISH
     wk_str = "wk"
     sun_str = "Sun"

@@ -54,7 +54,7 @@ def test_casestatusfinder_shop_ReturnsObj():
     assert x_pbsd.fact_upper_full == x_fact_upper_full
 
 
-def test_CaseStatusFinder_check_attr_CorrectlyRaisesError():
+def test_CaseStatusFinder_check_attr_RaisesError():
     with pytest_raises(Exception) as excinfo_1:
         casestatusfinder_shop(
             reason_lower=1,
@@ -619,7 +619,7 @@ def _add_last_trace_and_show(fig: plotly_figure, pd, linel, graphics_bool: bool)
         conditional_fig_show(fig, graphics_bool)
 
 
-def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_01():
+def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_01():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
         reason_lower=1305.0,
@@ -644,7 +644,7 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_01(
     assert segr_obj.get_chore_status()
 
 
-def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_02():
+def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_02():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
         reason_lower=1305.0,
@@ -667,7 +667,7 @@ def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_02(
     assert segr_obj.get_chore_status()
 
 
-def test_casefactstatusdata_CorrectlyCalculates_active_AndChoreStatusExample_03():
+def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_03():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
         reason_lower=1305.0,

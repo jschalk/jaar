@@ -83,7 +83,7 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     )
 
 
-def test_create_treasury_db_file_CorrectlyCreatesDatabase(
+def test_create_treasury_db_file_CreatesDatabase(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

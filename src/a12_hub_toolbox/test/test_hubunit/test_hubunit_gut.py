@@ -48,7 +48,7 @@ def test_HubUnit_default_gut_believer_ReturnsObj():
     assert sue_default_gut.last_pack_id == init_pack_id()
 
 
-def test_HubUnit_create_initial_pack_files_from_default_CorrectlySavesPackUnitFiles(
+def test_HubUnit_create_initial_pack_files_from_default_SavesPackUnitFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -133,7 +133,7 @@ def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
     assert os_path_exists(init_pack_file_path)
 
 
-def test_HubUnit_initialize_pack_gut_files_CorrectlySavesgutFileAndPackFile(
+def test_HubUnit_initialize_pack_gut_files_SavesgutFileAndPackFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -156,7 +156,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesgutFileAndPackFile(
     assert os_path_exists(init_pack_file_path)
 
 
-def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlygutFile(
+def test_HubUnit_initialize_pack_gut_files_SavesOnlygutFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -182,7 +182,7 @@ def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlygutFile(
     assert os_path_exists(init_pack_file_path)
 
 
-def test_HubUnit_initialize_pack_gut_files_CorrectlySavesOnlyPackFile(
+def test_HubUnit_initialize_pack_gut_files_SavesOnlyPackFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

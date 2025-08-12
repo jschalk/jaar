@@ -65,7 +65,7 @@ def test_RiverRun_rivergrade_exists_ReturnsObj():
     assert yao_riverrun._rivergrades_is_empty() is False
 
 
-def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
+def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
@@ -95,7 +95,8 @@ def test_RiverRun_set_all_initial_rivergrades_CorrectlySetsAttr():
     assert x_riverrun.rivergrade_exists(zia_str)
 
 
-def test_RiverRun_set_all_initial_rivergrades_CorrectlyOverWritesPrevious():
+def test_RiverRun_set_all_initial_rivergrades_OverWritesPrevious():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"

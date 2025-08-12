@@ -7,7 +7,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_1():
+def test_BelieverUnit_set_fact_ModifiesAttr_1():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
@@ -48,7 +48,7 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_1():
     assert x_planroot.factunits == {usa_wk_fact.fact_context: usa_wk_fact}
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_2():
+def test_BelieverUnit_set_fact_ModifiesAttr_2():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
@@ -63,7 +63,7 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttr_2():
     assert x_planroot.factunits == {sun_believer_fact.fact_context: sun_believer_fact}
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_fact_state_IsNone():
+def test_BelieverUnit_set_fact_ModifiesAttrWhen_fact_state_IsNone():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
@@ -77,7 +77,7 @@ def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_fact_state_IsNone():
     assert x_planroot.factunits == {sun_believer_fact.fact_context: sun_believer_fact}
 
 
-def test_BelieverUnit_set_fact_CorrectlyModifiesAttrWhen_reason_lower_IsNone():
+def test_BelieverUnit_set_fact_ModifiesAttrWhen_reason_lower_IsNone():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")
@@ -120,7 +120,7 @@ def test_BelieverUnit_set_fact_FailsToCreateWhenreason_contextAndFactAreDifferen
     assert str(excinfo.value) == x_str
 
 
-def test_BelieverUnit_del_fact_CorrectlyModifiesAttr():
+def test_BelieverUnit_del_fact_ModifiesAttr():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sem_jour_rope = sue_believer.make_l1_rope("sem_jours")

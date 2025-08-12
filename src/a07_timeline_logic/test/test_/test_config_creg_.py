@@ -643,7 +643,7 @@ def test_BelieverUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
     assert len(agenda_dict) == 0
 
 
-def test_BelieverUnit_create_agenda_plan_CorrectlyCreatesAllBelieverAttributes():
+def test_BelieverUnit_create_agenda_plan_CreatesAllBelieverAttributes():
     # WHEN "I am cleaning the cookery since I'm in the flat and it's 8am and it's dirty and it's for my family"
 
     # ESTABLISH

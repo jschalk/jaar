@@ -175,7 +175,7 @@ def test_believerunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_believer.planroot.parent_rope == ""
 
 
-def test_BelieverUnit_set_max_tree_traverse_CorrectlySetsInt():
+def test_BelieverUnit_set_max_tree_traverse_SetsInt():
     # ESTABLISH
     zia_str = "Zia"
     zia_believer = believerunit_shop(believer_name=zia_str)
@@ -236,7 +236,7 @@ def test_BelieverUnit_make_rope_ReturnsObj():
     assert v1_casa_rope == v2_casa_rope
 
 
-def test_BelieverUnit_set_last_pack_id_SetsAttrCorrectly():
+def test_BelieverUnit_set_last_pack_id_SetsAttr():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue", "Texas")
     assert sue_believer.last_pack_id is None
@@ -266,7 +266,7 @@ def test_BelieverUnit_set_last_pack_id_RaisesError():
     )
 
 
-def test_BelieverUnit_del_last_pack_id_SetsAttrCorrectly():
+def test_BelieverUnit_del_last_pack_id_SetsAttr():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue", "Texas")
     old_last_pack_id = 89
@@ -280,7 +280,7 @@ def test_BelieverUnit_del_last_pack_id_SetsAttrCorrectly():
     assert sue_believer.last_pack_id is None
 
 
-def test_BelieverUnit_set_fund_pool_CorrectlySetsAttr():
+def test_BelieverUnit_set_fund_pool_SetsAttr():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue", "Texas")
     sue_fund_pool = 99000

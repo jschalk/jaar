@@ -10,7 +10,7 @@ from src.a14_keep_logic.test._util.example_credorledgers import (
 )
 
 
-def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_RiverRun_save_rivergrade_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     yao_hubunit = example_yao_texas_hubunit()
     yao_str = "Yao"
@@ -29,7 +29,7 @@ def test_RiverRun_save_rivergrade_file_CorrectlySavesFile(env_dir_setup_cleanup)
     assert os_path_exists(x_riverrun.hubunit.grade_path(yao_str))
 
 
-def test_RiverRun_save_rivergrade_files_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_RiverRun_save_rivergrade_files_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     delete_dir(get_module_temp_dir())
     github_error_path1 = "src\\a14_keep_logic\\test\\_util\\belief_mstr\\beliefs/beliefs/ex_keep04/believers/Yao/keeps/nation/usa/texas/grades/Yao.json"

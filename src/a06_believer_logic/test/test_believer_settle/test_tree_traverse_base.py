@@ -132,7 +132,7 @@ def test_BelieverUnit_settle_believer_ClearsDescendantAttributes():
     assert sue_believer.planroot._all_partner_debt is True
 
 
-def test_BelieverUnit_settle_believer_RootOnlyCorrectlySetsDescendantAttributes():
+def test_BelieverUnit_settle_believer_RootOnlySetsDescendantAttributes():
     # ESTABLISH
     yao_believer = believerunit_shop(believer_name="Yao")
     assert yao_believer.planroot._descendant_task_count is None
@@ -148,7 +148,7 @@ def test_BelieverUnit_settle_believer_RootOnlyCorrectlySetsDescendantAttributes(
     assert yao_believer.planroot._all_partner_debt is True
 
 
-def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_1():
+def test_BelieverUnit_settle_believer_NLevelSetsDescendantAttributes_1():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     casa_str = "casa"
@@ -194,7 +194,8 @@ def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_1(
     assert mon_plan._all_partner_debt is True
 
 
-def test_BelieverUnit_settle_believer_NLevelCorrectlySetsDescendantAttributes_2():
+def test_BelieverUnit_settle_believer_NLevelSetsDescendantAttributes_2():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     email_str = "email"
@@ -294,7 +295,7 @@ def test_BelieverUnit_settle_believer_SetsPlanUnitAttr_awardlinks():
     assert len(sue_believer.planroot._kids["swim"]._awardheirs) == 3
 
 
-def test_BelieverUnit_settle_believer_TreeTraverseSetsClearsAwardLineestorsCorrectly():
+def test_BelieverUnit_settle_believer_TreeTraverseSetsClearsAwardLineestors():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sue_believer.settle_believer()
@@ -322,6 +323,7 @@ def test_BelieverUnit_settle_believer_TreeTraverseSetsClearsAwardLineestorsCorre
 
 
 def test_BelieverUnit_settle_believer_DoesNotKeepUnneeded_awardheirs():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
@@ -390,7 +392,7 @@ def test_BelieverUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     assert y_1st_rope_in_ordered_list == root_rope
 
 
-def test_BelieverUnit_get_plan_tree_ordered_rope_list_CorrectlyCleansRangedPlanRopeTerms():
+def test_BelieverUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopeTerms():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
 

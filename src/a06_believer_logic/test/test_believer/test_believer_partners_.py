@@ -4,7 +4,7 @@ from src.a03_group_logic.partner import partnerunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 
 
-def test_BelieverUnit_set_partnerunit_SetObjCorrectly():
+def test_BelieverUnit_set_partnerunit_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_partnerunit = partnerunit_shop(yao_str)
@@ -76,7 +76,7 @@ def test_BelieverUnit_set_partner_DoesNotOverRide_partner_name_membership():
     assert zia_zia_membership is None
 
 
-def test_BelieverUnit_add_partnerunit_CorrectlySets_partners():
+def test_BelieverUnit_add_partnerunit_Sets_partners():
     # ESTABLISH
     x_respect_bit = 6
     yao_believer = believerunit_shop("Yao", respect_bit=x_respect_bit)
@@ -113,6 +113,7 @@ def test_BelieverUnit_partner_exists_ReturnsObj():
 
 
 def test_BelieverUnit_set_partner_Creates_membership():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     zia_str = "Zia"
@@ -154,7 +155,7 @@ def test_BelieverUnit_edit_partner_RaiseExceptionWhenPartnerDoesNotExist():
     assert str(excinfo.value) == f"PartnerUnit '{zia_str}' does not exist."
 
 
-def test_BelieverUnit_edit_partner_CorrectlyUpdatesObj():
+def test_BelieverUnit_edit_partner_UpdatesObj():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     zia_str = "Zia"

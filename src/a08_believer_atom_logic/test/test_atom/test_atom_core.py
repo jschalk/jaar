@@ -55,7 +55,7 @@ def test_believeratom_shop_ReturnsObj():
     assert x_believeratom.jvalues == bob_optional_dict
 
 
-def test_BelieverAtom_set_jkey_CorrectlySetsAttr():
+def test_BelieverAtom_set_jkey_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     partnerunit_str = believer_partnerunit_str()
@@ -69,7 +69,7 @@ def test_BelieverAtom_set_jkey_CorrectlySetsAttr():
     assert partnerunit_believeratom.jkeys == {partner_name_str(): bob_str}
 
 
-def test_BelieverAtom_set_jvalue_CorrectlySetsAttr():
+def test_BelieverAtom_set_jvalue_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     partnerunit_str = believer_partnerunit_str()
@@ -94,7 +94,7 @@ def test_BelieverAtom_get_value_ReturnsObj_Scenario0():
     assert partnerunit_believeratom.get_value(partner_name_str()) == bob_str
 
 
-def test_BelieverAtom_is_jvalues_valid_ReturnsCorrectBoolean():
+def test_BelieverAtom_is_jvalues_valid_ReturnsBoolean():
     # WHEN
     partnerunit_str = believer_partnerunit_str()
     bob_insert_believeratom = believeratom_shop(partnerunit_str, crud_str=INSERT_str())
@@ -119,7 +119,7 @@ def test_BelieverAtom_is_jvalues_valid_ReturnsCorrectBoolean():
     assert bob_insert_believeratom.is_jvalues_valid() is False
 
 
-def test_BelieverAtom_is_valid_ReturnsCorrectBoolean_PartnerUnit_INSERT():
+def test_BelieverAtom_is_valid_ReturnsBoolean_PartnerUnit_INSERT():
     bob_str = "Bob"
     bob_partner_cred_points = 55
     bob_partner_debt_points = 66
@@ -204,7 +204,7 @@ def test_BelieverAtom_get_value_ReturnsObj_Scenario1():
     assert bob_insert_believeratom.get_value(dw_str) == bob_partner_debt_points
 
 
-def test_BelieverAtom_is_valid_ReturnsCorrectBoolean_PartnerUnit_DELETE():
+def test_BelieverAtom_is_valid_ReturnsBoolean_PartnerUnit_DELETE():
     bob_str = "Bob"
     partnerunit_str = believer_partnerunit_str()
     delete_str = DELETE_str()
@@ -224,7 +224,7 @@ def test_BelieverAtom_is_valid_ReturnsCorrectBoolean_PartnerUnit_DELETE():
     assert bob_delete_believeratom.is_valid()
 
 
-def test_BelieverAtom_is_valid_ReturnsCorrectBoolean_believerunit():
+def test_BelieverAtom_is_valid_ReturnsBoolean_believerunit():
     # ESTABLISH / WHEN
     bob_update_believeratom = believeratom_shop(believerunit_str(), INSERT_str())
 
@@ -240,7 +240,7 @@ def test_BelieverAtom_is_valid_ReturnsCorrectBoolean_believerunit():
     assert bob_update_believeratom.is_valid()
 
 
-def test_BelieverAtom_set_atom_order_SetCorrectAttr():
+def test_BelieverAtom_set_atom_order_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     bob_partner_cred_points = 55

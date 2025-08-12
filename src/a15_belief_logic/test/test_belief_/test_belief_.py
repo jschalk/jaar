@@ -162,7 +162,7 @@ def test_beliefunit_shop_ReturnsBeliefUnitWith_knot(env_dir_setup_cleanup):
     assert a23_belief.job_listen_rotations == x_job_listen_rotations
 
 
-def test_BeliefUnit_set_belief_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_BeliefUnit_set_belief_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
     amy_belief = BeliefUnit(a23_str, get_module_temp_dir())
@@ -452,7 +452,7 @@ def test_BeliefUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     assert sue_agenda.get(clean_rope).get_plan_rope() == clean_rope
 
 
-def test_BeliefUnit__set_all_healer_dutys_CorrectlySetsdutys(
+def test_BeliefUnit__set_all_healer_dutys_Setsdutys(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

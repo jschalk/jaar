@@ -262,7 +262,7 @@ def test_BelieverUnit_get_agenda_dict_BelieverUnitCanCleanOn_reason_context_beli
     assert len(task_list) == 29
 
 
-def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
+def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttr_Range():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
 
@@ -306,7 +306,7 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Range():
     assert agenda_dict == {}
 
 
-def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
+def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttr_Division():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
 
@@ -360,7 +360,7 @@ def test_BelieverUnit_set_agenda_chore_as_complete_SetsAttrCorrectly_Division():
     assert len(zia_believer.get_agenda_dict()) == 0
 
 
-def test_believerunit_get_from_json_CorrectlyLoadsTaskFromJSON():
+def test_believerunit_get_from_json_LoadsTaskFromJSON():
     # ESTABLISH
     yao_believer_json = believerunit_v001().get_json()
 

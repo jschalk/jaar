@@ -43,7 +43,7 @@ def test_default_RespectBit_if_None_ReturnsObj():
     assert default_RespectBit_if_None(0.03) == 1
 
 
-def test_trim_bit_excess_ReturnsCorrectedFloat():
+def test_trim_bit_excess_ReturnsedFloat():
     # ESTABLISH / WHEN / THEN
     assert trim_bit_excess(num=5.5, bit=1) == 5
     assert trim_bit_excess(num=0.5, bit=1) == 0
@@ -80,7 +80,7 @@ def test_filter_penny_ReturnsObj():
     assert filter_penny(0.03) == 1
 
 
-def test_trim_penny_excess_ReturnsCorrectedFloat():
+def test_trim_penny_excess_ReturnsedFloat():
     # ESTABLISH / WHEN / THEN
     assert trim_penny_excess(num=5.5, penny=1) == 5
     assert trim_penny_excess(num=0.5, penny=1) == 0
@@ -147,7 +147,7 @@ def test_default_fund_iota_if_None_ReturnsObj():
     assert default_fund_iota_if_None(0.03) == 0.03
 
 
-def test_trim_fund_iota_excess_ReturnsCorrectedFloat():
+def test_trim_fund_iota_excess_ReturnsedFloat():
     # ESTABLISH / WHEN / THEN
     assert trim_fund_iota_excess(num=5.5, fund_iota=1) == 5
     assert trim_fund_iota_excess(num=0.5, fund_iota=1) == 0

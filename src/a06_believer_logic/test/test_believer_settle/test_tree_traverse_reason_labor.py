@@ -4,7 +4,7 @@ from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 
 
-def test_believer_edit_plan_attr_CorrectlySetsLaborUnit():
+def test_believer_edit_plan_attr_SetsLaborUnit():
     # ESTABLISH
     xio_believer = believerunit_shop("Xio")
     run_str = "run"
@@ -21,7 +21,7 @@ def test_believer_edit_plan_attr_CorrectlySetsLaborUnit():
     assert run_plan.laborunit == x_laborunit
 
 
-def test_believer_planroot_laborunit_CorrectlySets_plan_laborheir():
+def test_believer_planroot_laborunit_Sets_plan_laborheir():
     # ESTABLISH
     x_laborunit = laborunit_shop()
 
@@ -43,7 +43,7 @@ def test_believer_planroot_laborunit_CorrectlySets_plan_laborheir():
     assert yao_believer.planroot._laborheir == x_laborheir
 
 
-def test_believer_plankid_laborunit_EmptyCorrectlySets_plan_laborheir():
+def test_believer_plankid_laborunit_EmptySets_plan_laborheir():
     # ESTABLISH
     bob_str = "Bob"
     x_laborunit = laborunit_shop()
@@ -81,7 +81,7 @@ def test_believer_plankid_laborunit_EmptyCorrectlySets_plan_laborheir():
     assert run_plan._laborheir == x_laborheir
 
 
-def test_believer_plankid_laborunit_CorrectlySets_grandchild_plan_laborheir():
+def test_believer_plankid_laborunit_Sets_grandchild_plan_laborheir():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     swim_str = "swimming"
@@ -122,7 +122,7 @@ def test_believer_plankid_laborunit_CorrectlySets_grandchild_plan_laborheir():
     assert four_plan._laborheir == x_laborheir
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laborunit():
+def test_BelieverUnit__get_filtered_awardlinks_plan_CleansPlan_Laborunit():
     # ESTABLISH
     sue_str = "Sue"
     sue1_believer = believerunit_shop(sue_str)
@@ -160,7 +160,7 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyCleansPlan_Laboruni
     assert list(cleaned_swim_partys) == [xia_str]
 
 
-def test_BelieverUnit_set_plan_CorrectlyCleansPlan_awardlinks():
+def test_BelieverUnit_set_plan_CleansPlan_awardlinks():
     # ESTABLISH
     sue1_believer = believerunit_shop("Sue")
     xia_str = "Xia"

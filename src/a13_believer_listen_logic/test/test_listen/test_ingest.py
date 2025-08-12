@@ -7,7 +7,7 @@ from src.a13_believer_listen_logic.listen_main import (
 )
 
 
-def test_allocate_irrational_partner_debt_points_CorrectlySetsBelieverAttr():
+def test_allocate_irrational_partner_debt_points_SetsBelieverAttr():
     yao_str = "Yao"
     zia_str = "Zia"
     zia_partner_cred_points = 47
@@ -26,7 +26,7 @@ def test_allocate_irrational_partner_debt_points_CorrectlySetsBelieverAttr():
     assert zia_partnerunit._irrational_partner_debt_points == zia_partner_debt_points
 
 
-def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
+def test_generate_perspective_agenda_GrabsAgendaChores():
     # ESTABLISH
     yao_str = "Yao"
     yao_speaker = believerunit_shop(yao_str)
@@ -58,7 +58,7 @@ def test_generate_perspective_agenda_CorrectlyGrabsAgendaChores():
     assert len(agenda_list) == 1
 
 
-def test_generate_ingest_list_ReturnsCorrectList_v1():
+def test_generate_ingest_list_ReturnsList_v1():
     # ESTABLISH
     zia_str = "Zia"
     zia_believerunit = believerunit_shop(zia_str)
@@ -83,7 +83,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v1():
     assert ingested_list[0].star == zia_debtor_pool
 
 
-def test_generate_ingest_list_ReturnsCorrectList_v2():
+def test_generate_ingest_list_ReturnsList_v2():
     # ESTABLISH
     zia_str = "Zia"
     zia_believerunit = believerunit_shop(zia_str)
@@ -114,7 +114,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v2():
     assert ingested_list == [cook_planunit, clean_planunit]
 
 
-def test_generate_ingest_list_ReturnsCorrectList_v3():
+def test_generate_ingest_list_ReturnsList_v3():
     # ESTABLISH
     zia_str = "Zia"
     zia_believerunit = believerunit_shop(zia_str)
@@ -143,7 +143,7 @@ def test_generate_ingest_list_ReturnsCorrectList_v3():
     assert ingested_list[1].star == 8.0
 
 
-def test_generate_ingest_list_ReturnsCorrectList_v4():
+def test_generate_ingest_list_ReturnsList_v4():
     # ESTABLISH
     zia_str = "Zia"
     zia_believerunit = believerunit_shop(zia_str)
