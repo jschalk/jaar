@@ -378,7 +378,7 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
         laundry_chore_rope, reason_context=basket_rope, reason_case=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
-    cali_laborunit.set_partyunit(cali_str)
+    cali_laborunit.add_partyunit(cali_str)
     amos_believer.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
     amos_believer.add_fact(fact_context=basket_rope, fact_state=b_full_rope)
 

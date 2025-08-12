@@ -29,7 +29,7 @@ def test_RiverRun_Exists():
     assert x_riverrun._credor_count is None
 
 
-def test_RiverRun_set_cycle_max_CorrectlySetsAttr():
+def test_RiverRun_set_cycle_max_SetsAttr():
     # ESTABLISH
     x_riverrun = RiverRun()
     assert not x_riverrun.cycle_max

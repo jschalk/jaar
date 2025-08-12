@@ -310,7 +310,7 @@ def test_PlanUnit_set_parent_rope_SetsAttr():
     assert ball_plan.parent_rope == sports_rope
 
 
-def test_PlanUnit_clear_descendant_task_count_ClearsCorrectly():
+def test_PlanUnit_clear_descendant_task_count_ClearsAttrs():
     # ESTABLISH
     ball_str = "ball"
     ball_plan = planunit_shop(ball_str, _descendant_task_count=55)
@@ -323,7 +323,7 @@ def test_PlanUnit_clear_descendant_task_count_ClearsCorrectly():
     assert ball_plan._descendant_task_count is None
 
 
-def test_PlanUnit_add_to_descendant_task_count_CorrectlyAdds():
+def test_PlanUnit_add_to_descendant_task_count_AddsToCount():
     # ESTABLISH
     ball_str = "ball"
     ball_plan = planunit_shop(ball_str, _descendant_task_count=55)

@@ -120,7 +120,7 @@ def test_memberships_exist_ReturnsObj():
     assert not yao_partnerunit.memberships_exist()
 
 
-def test_PartnerUnit_del_membership_SetsAttrCorrectly():
+def test_PartnerUnit_del_membership_SetsAttr():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"
@@ -144,7 +144,7 @@ def test_PartnerUnit_del_membership_SetsAttrCorrectly():
     assert yao_partnerunit._memberships.get(run_str) is None
 
 
-def test_PartnerUnit_clear_memberships_SetsAttrCorrectly():
+def test_PartnerUnit_clear_memberships_SetsAttr():
     # ESTABLISH
     run_str = ";run"
     fly_str = ";fly"
@@ -168,7 +168,7 @@ def test_PartnerUnit_clear_memberships_SetsAttrCorrectly():
     assert yao_partnerunit._memberships.get(run_str) is None
 
 
-def test_PartnerUnit_add_membership_SetsAttrCorrectly():
+def test_PartnerUnit_add_membership_SetsAttr():
     # ESTABLISH
     run_str = ";run"
     run_group_cred_points = 78

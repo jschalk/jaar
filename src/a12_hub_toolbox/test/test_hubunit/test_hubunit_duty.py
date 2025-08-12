@@ -21,7 +21,7 @@ from src.a12_hub_toolbox.test._util.example_hub_atoms import (
 )
 
 
-def test_HubUnit_save_vision_believer_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_vision_believer_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -44,7 +44,7 @@ def test_HubUnit_save_vision_believer_CorrectlySavesFile(env_dir_setup_cleanup):
     assert sue_hubunit.vision_file_exists(bob_str)
 
 
-def test_HubUnit_vision_file_exists_ReturnsCorrectBool(env_dir_setup_cleanup):
+def test_HubUnit_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"

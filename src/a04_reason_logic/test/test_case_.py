@@ -65,7 +65,7 @@ def test_caseunit_shop_ReturnsObj():
     assert email_case.reason_state == email_rope
 
 
-def test_CaseUnit_clear_status_CorrectlySetsAttrs():
+def test_CaseUnit_clear_status_SetsAttrs():
     # WHEN
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -107,7 +107,7 @@ def test_CaseUnit_is_range_IdentifiesStatus():
     assert casa_case._is_range() is False
 
 
-def test_CaseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
+def test_CaseUnit_is_segregate_IdentifiesSegregateStatus():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -130,7 +130,7 @@ def test_CaseUnit_is_segregate_CorrectlyIdentifiesSegregateStatus():
     assert casa_case._is_segregate()
 
 
-def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
+def test_CaseUnit_is_in_lineage_IdentifiesLineage():
     # ESTABLISH
     nation_rope = create_rope(root_label(), "Nation-States")
     usa_rope = create_rope(nation_rope, "USA")
@@ -163,7 +163,7 @@ def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineage():
     assert sea_case.is_in_lineage(fact_fact_state=seaside_fact.fact_state) is False
 
 
-def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultKnot():
+def test_CaseUnit_is_in_lineage_IdentifiesLineageWithNonDefaultKnot():
     # ESTABLISH
     slash_str = "/"
     nation_rope = create_rope(root_label(), "Nation-States", knot=slash_str)
@@ -204,7 +204,7 @@ def test_CaseUnit_is_in_lineage_CorrectlyIdentifiesLineageWithNonDefaultKnot():
     assert sea_case.is_in_lineage(fact_fact_state=seaside_fact.fact_state) is False
 
 
-def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rangeCase():
+def test_CaseUnit_get_range_segregate_status_ReturnsStatusBoolFor_is_rangeCase():
     # ESTABLISH
     yr_str = "ced_yr"
     yr_rope = create_rope(root_label(), yr_str)
@@ -275,7 +275,7 @@ def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolFor_is_rang
     assert yr_case._get_range_segregate_status(factheir=yr_fact) is False
 
 
-def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregateCase():
+def test_CaseUnit_get_range_segregate_status_ReturnsStatusBoolForSegregateCase():
     # ESTABLISH
     yr_str = "ced_yr"
     yr_rope = create_rope(root_label(), yr_str)
@@ -326,7 +326,7 @@ def test_CaseUnit_get_range_segregate_status_ReturnsCorrectStatusBoolForSegregat
     assert yr_case._get_range_segregate_status(factheir=yr_fact)
 
 
-def test_CaseUnitUnit_is_range_or_segregate_ReturnsCorrectBool():
+def test_CaseUnitUnit_is_range_or_segregate_ReturnsBool():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -693,7 +693,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_case._status is False
 
 
-def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
+def test_CaseUnit_set_status_SetCEDWeekStatusFalse():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -712,7 +712,7 @@ def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusFalse():
     assert o1_n1_d6_case._status is False
 
 
-def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
+def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -733,7 +733,7 @@ def test_CaseUnit_set_status_CorrectlySetCEDWeekStatusTrue():
     assert wk_case._status
 
 
-def test_CaseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndreason_lower_reason_upper():
+def test_CaseUnit_get_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -757,7 +757,7 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithDvisiorAndreason_lower_reason_u
     assert case_dict == static_dict
 
 
-def test_CaseUnit_get_dict_ReturnsCorrectDictWithreason_lowerAndreason_upper():
+def test_CaseUnit_get_dict_ReturnsDictWithreason_lowerAndreason_upper():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -774,7 +774,7 @@ def test_CaseUnit_get_dict_ReturnsCorrectDictWithreason_lowerAndreason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_get_dict_ReturnsCorrectDictWithOnlyRopeTerm():
+def test_CaseUnit_get_dict_ReturnsDictWithOnlyRopeTerm():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -846,7 +846,7 @@ def test_CaseUnits_get_from_dict_ReturnsCompleteObj():
     assert wk_case == caseunit_shop(wk_rope, 1, 30, reason_divisor=5)
 
 
-def test_CaseUnits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
+def test_CaseUnits_get_from_dict_BuildsObjFromIncompleteDict():
     # ESTABLISH
     wk_str = "wks"
     wk_rope = create_rope(root_label(), wk_str)
@@ -861,7 +861,7 @@ def test_CaseUnits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
     assert wk_case == caseunit_shop(wk_rope)
 
 
-def test_CaseUnitsUnit_set_knot_SetsAttrsCorrectly():
+def test_CaseUnitsUnit_set_knot_SetsAttrs():
     # ESTABLISH
     wk_str = "wk"
     sun_str = "Sun"
@@ -883,7 +883,7 @@ def test_CaseUnitsUnit_set_knot_SetsAttrsCorrectly():
     assert sun_caseunit.reason_state == colon_sun_rope
 
 
-def test_rope_find_replace_rope_key_dict_ReturnsCorrectCasesUnit_Scenario1():
+def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
     # ESTABLISH
     casa_rope = create_rope(root_label(), "casa")
     old_seasons_rope = create_rope(casa_rope, "seasons")
@@ -903,7 +903,7 @@ def test_rope_find_replace_rope_key_dict_ReturnsCorrectCasesUnit_Scenario1():
     assert new_cases_x.get(old_seasons_rope) is None
 
 
-def test_rope_find_replace_rope_key_dict_ReturnsCorrectCasesUnit_Scenario2():
+def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
     # ESTABLISH
     old_belief_label = "El Paso"
     casa_str = "casa"

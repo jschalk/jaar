@@ -39,7 +39,7 @@ class LaborUnit:
     def to_dict(self) -> dict[str, str]:
         return {"_partys": list(self._partys)}
 
-    def set_partyunit(self, party_title: GroupTitle, solo: bool = None):
+    def add_partyunit(self, party_title: GroupTitle, solo: bool = None):
         self._partys[party_title] = partyunit_shop(party_title, solo)
 
     def partyunit_exists(self, party_title: GroupTitle):
@@ -59,7 +59,7 @@ def laborunit_shop(_partys: dict[GroupTitle, PartyUnit] = None) -> LaborUnit:
 
 def create_laborunit(partyunit: GroupTitle):
     x_laborunit = laborunit_shop()
-    x_laborunit.set_partyunit(partyunit)
+    x_laborunit.add_partyunit(partyunit)
     return x_laborunit
 
 
@@ -165,5 +165,5 @@ def laborheir_shop(
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
     for x_party_title in laborunit_dict.get("_partys"):
-        x_laborunit.set_partyunit(x_party_title)
+        x_laborunit.add_partyunit(x_party_title)
     return x_laborunit

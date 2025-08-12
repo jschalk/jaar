@@ -42,7 +42,7 @@ def test_HubUnit_atom_file_path_ReturnsObj():
     assert one_atom_file_path == expected_path
 
 
-def test_HubUnit_save_valid_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_valid_atom_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(belief_mstr_dir(), belief_label(), yao_str)
@@ -74,7 +74,7 @@ def test_HubUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert yao_hubunit.atom_file_exists(four_int)
 
 
-def test_HubUnit_delete_atom_file_CorrectlyDeletesFile(env_dir_setup_cleanup):
+def test_HubUnit_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(belief_mstr_dir(), belief_label(), yao_str)
@@ -127,7 +127,7 @@ def test_HubUnit_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     assert yao_hubunit._get_next_atom_file_number() == 11
 
 
-def test_HubUnit_save_atom_file_CorrectlySavesFile(env_dir_setup_cleanup):
+def test_HubUnit_save_atom_file_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     yao_str = "Yao"
     yao_hubunit = hubunit_shop(belief_mstr_dir(), belief_label(), yao_str)
@@ -168,7 +168,7 @@ def test_HubUnit_get_believer_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_believer.respect_bit == yao_hubunit.respect_bit
 
 
-def test_HubUnit_get_believer_from_atom_files_ReturnsCorrectFile_SimplePlan(
+def test_HubUnit_get_believer_from_atom_files_ReturnsFile_SimplePlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -192,7 +192,7 @@ def test_HubUnit_get_believer_from_atom_files_ReturnsCorrectFile_SimplePlan(
     assert yao_believer.plan_exists(sports_rope)
 
 
-def test_HubUnit_get_believer_from_atom_files_ReturnsCorrectFile_WithFactUnit(
+def test_HubUnit_get_believer_from_atom_files_ReturnsFile_WithFactUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -91,7 +91,7 @@ def test_BelieverUnit_edit_plan_label_RaisesErrorForLevel0When_belief_label_IsDi
     assert str(excinfo.value) == assertion_str
 
 
-def test_BelieverUnit_find_replace_rope_CorrectlyModifies_kids_Scenario1():
+def test_BelieverUnit_find_replace_rope_Modifies_kids_Scenario1():
     # ESTABLISH Plan with kids that will be different
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
@@ -232,7 +232,7 @@ def test_believer_edit_plan_label_ModifiesPlanReasonUnitsScenario1():
     assert len(casa_plan.reasonunits) == 2
 
 
-def test_believer_set_believer_name_CorrectlyModifiesBoth():
+def test_believer_set_believer_name_ModifiesBoth():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels_and_2reasons_2facts()
     assert sue_believer.believer_name == "Sue"

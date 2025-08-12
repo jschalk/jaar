@@ -124,7 +124,7 @@ def test_RowData_Exists():
     assert x_rowdata.row_dict is None
 
 
-def test_rowdata_shop_ReturnsObj():
+def test_rowdata_shop_ReturnsObj():  # sourcery skip: extract-duplicate-method
     # ESTABLISH
     x_tablename = "earth"
     with sqlite3_connect(":memory:") as conn:
@@ -165,7 +165,7 @@ def test_rowdata_shop_RaiseErrorIf_row_dict_IsNotDict():
     assert str(excinfo.value) == "row_dict is not dictionary"
 
 
-def test_rowdata_shop_ReturnsObjWithoutNone():
+def test_rowdata_shop_ReturnsObjWithoutNone():  # sourcery skip: extract-method
     # ESTABLISH
     x_tablename = "earth"
     with sqlite3_connect(":memory:") as conn:
@@ -427,7 +427,7 @@ def test_insert_csv_ChangesDBState(env_dir_setup_cleanup):
 
 def test_insert_csv_ChangesDBState_WhenPassedCursorObj(
     env_dir_setup_cleanup,
-):
+):  # sourcery skip: extract-method
     """Test the insert_csv function using pytest."""
     # ESTABLISH
     test_tablename = get_example_test_tablename()

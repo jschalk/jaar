@@ -55,7 +55,7 @@ def test_FactUnit_DataClass_function():
     assert sun_fact.fact_upper == 2.3
 
 
-def test_FactUnit_set_range_null_SetsAttrCorrectly_1():
+def test_FactUnit_set_range_null_SetsAttr_1():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -107,7 +107,7 @@ def test_FactUnit_set_fact_state_to_fact_context_SetsAttr_2():
     assert floor_fact.fact_upper is None
 
 
-def test_FactUnit_set_attr_SetsAttrCorrectly_2():
+def test_FactUnit_set_attr_SetsAttr_2():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -182,7 +182,7 @@ def test_FactUnit_get_dict_ReturnsPartialDict():
     assert fact_dict == static_dict
 
 
-def test_FactUnit_find_replace_rope_SetsAttrCorrectly():
+def test_FactUnit_find_replace_rope_SetsAttr():
     # ESTABLISH
     wk_str = "wk"
     old_rope = create_rope("old_new")
@@ -357,7 +357,7 @@ def test_factheir_is_range_Returns_is_range_Status():
     assert x_factheir.is_range() is True
 
 
-def test_FactCore_get_obj_key_SetsAttrCorrectly():
+def test_FactCore_get_obj_key_SetsAttr():
     # ESTABLISH
     ced_min_str = "ced_minute"
     min_rope = create_rope(root_label(), ced_min_str)
@@ -371,7 +371,7 @@ def test_FactCore_get_obj_key_SetsAttrCorrectly():
     assert x_factcore.get_obj_key() == min_rope
 
 
-def test_factunits_get_from_dict_CorrectlyBuildsObj():
+def test_factunits_get_from_dict_BuildsObj():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -395,7 +395,7 @@ def test_factunits_get_from_dict_CorrectlyBuildsObj():
     assert wk_fact == factunit_shop(fact_context=wk_rope, fact_state=sun_rope)
 
 
-def test_factunits_get_from_dict_CorrectlyBuildsObjFromIncompleteDict():
+def test_factunits_get_from_dict_BuildsObjFromIncompleteDict():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)

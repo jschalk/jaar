@@ -59,7 +59,7 @@ def test_BelieverUnit_set_plan_RaisesErrorWhen_plan_label_IsNotLabel():
     assert str(excinfo.value) == exception_str
 
 
-def test_BelieverUnit_set_plan_CorrectlySetsAttr():
+def test_BelieverUnit_set_plan_SetsAttr():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
     casa_str = "casa"
@@ -91,7 +91,7 @@ def test_BelieverUnit_plan_exists_ReturnsObj():
     assert zia_believer.plan_exists(casa_rope)
 
 
-def test_BelieverUnit_set_l1_plan_CorrectlySetsAttr():
+def test_BelieverUnit_set_l1_plan_SetsAttr():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
     casa_str = "casa"
@@ -155,7 +155,7 @@ def test_BelieverUnit_add_plan_ReturnsObj():
     assert casa_planunit.star == casa_star
 
 
-def test_BelieverUnit_set_plan_CorrectlyAddsPlanObjWithNonDefault_knot():
+def test_BelieverUnit_set_plan_AddsPlanObjWithNonDefault_knot():
     # ESTABLISH
     slash_str = "/"
     assert slash_str != default_knot_if_None()
@@ -497,7 +497,7 @@ def test_BelieverUnit_set_plan_MustReorderKidsDictToBeAlphabetical():
     assert plan_list[0].plan_label == casa_str
 
 
-def test_BelieverUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveCorrectParent():
+def test_BelieverUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveParent():
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
@@ -518,7 +518,7 @@ def test_BelieverUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveCorrec
     assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{hike_rope}'"
 
 
-def test_BelieverUnit_set_plan_adoptee_CorrectlyAddsAdoptee():
+def test_BelieverUnit_set_plan_adoptee_AddsAdoptee():
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
@@ -698,7 +698,7 @@ def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardlinks():
     assert len(yao_believer.planroot._kids[swim_str].awardlinks) == 2
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesPartner_awardlinks():
+def test_BelieverUnit__get_filtered_awardlinks_plan_RemovesPartner_awardlinks():
     # ESTABLISH
     bob_str = "Bob"
     example_believer = believerunit_shop(bob_str)
@@ -730,7 +730,7 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesPartner_awar
     assert list(cleaned_plan.awardlinks.keys()) == [run_str]
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_CorrectlyRemovesGroup_awardlink():
+def test_BelieverUnit__get_filtered_awardlinks_plan_RemovesGroup_awardlink():
     # ESTABLISH
     bob_str = "Bob"
     example_believer = believerunit_shop(bob_str)
@@ -791,6 +791,7 @@ def test_BelieverUnit_set_plan_SetsPlan_awardlinks():
 
 
 def test_BelieverUnit_get_plan_obj_ReturnsPlan():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     nation_str = "nation"
@@ -829,7 +830,7 @@ def test_BelieverUnit_get_plan_obj_ReturnsPlan():
     assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{wrong_rope}'"
 
 
-def test_BelieverUnit_plan_exists_ReturnsCorrectBool():
+def test_BelieverUnit_plan_exists_ReturnsBool():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     cat_rope = sue_believer.make_l1_rope("cat have dinner")

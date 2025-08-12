@@ -36,7 +36,7 @@ def test_WorldUnit_Exists():
     assert not x_world._pidgin_events
 
 
-def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_input_dir_SetsDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fay_world = WorldUnit("Fay")
     x_example_dir = create_path(worlds_dir(), "example_dir")
@@ -59,7 +59,7 @@ def test_WorldUnit_set_input_dir_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
     assert os_path_exists(x_input_dir)
 
 
-def test_WorldUnit_set_world_dirs_SetsCorrectDirsAndFiles(env_dir_setup_cleanup):
+def test_WorldUnit_set_world_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     # ESTABLISH
     fay_str = "Fay"
     fay_world = WorldUnit(world_name=fay_str, worlds_dir=worlds_dir())

@@ -44,7 +44,7 @@ def test_get_obj_from_plan_dict_ReturnsObj():
     assert get_obj_from_plan_dict({}, field_str) == {}
 
 
-def test_get_obj_from_plan_dict_ReturnsCorrect_HealerLink():
+def test_get_obj_from_plan_dict_Returns_HealerLink():
     # ESTABLISH
     # WHEN / THEN
     healerlink_key = "healerlink"
@@ -64,7 +64,7 @@ def test_get_obj_from_plan_dict_ReturnsCorrect_HealerLink():
     assert get_obj_from_plan_dict(planunit_dict, healerlink_key) == static_healerlink
 
 
-def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
+def test_PlanUnit_get_dict_ReturnsCompleteDict():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -197,7 +197,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectCompleteDict():
     assert len(casa_dict["factunits"]) == len(casa_plan.get_factunits_dict())
 
 
-def test_PlanUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
+def test_PlanUnit_get_dict_ReturnsDictWithoutEmptyAttributes():
     # ESTABLISH
     casa_plan = planunit_shop()
 
@@ -209,7 +209,7 @@ def test_PlanUnit_get_dict_ReturnsCorrectDictWithoutEmptyAttributes():
     assert casa_dict == {"star": 1}
 
 
-def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
+def test_PlanUnit_get_dict_ReturnsDictWith_attrs_SetToTrue():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_plan._is_expanded = False
@@ -224,7 +224,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     casa_plan.set_awardlink(awardlink_shop(yao_str))
 
     x_laborunit = casa_plan.laborunit
-    x_laborunit.set_partyunit(party_title=yao_str)
+    x_laborunit.add_partyunit(party_title=yao_str)
 
     clean_str = "clean"
     casa_plan.add_kid(planunit_shop(clean_str))
@@ -248,7 +248,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_CorrectlySetTrue():
     assert casa_dict.get("_kids") is not None
 
 
-def test_PlanUnit_get_dict_ReturnsDictWithAttrsCorrectlyEmpty():
+def test_PlanUnit_get_dict_ReturnsDictWithAttrsEmpty():
     # ESTABLISH
     casa_plan = planunit_shop()
     assert casa_plan._is_expanded

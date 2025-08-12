@@ -88,7 +88,7 @@ def test_BelieverUnit_settle_believer_SetsStatus_active_WhenFactModifies():
     assert sue_believerunit._plan_dict.get(casa_rope)._active is False
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
+def test_BelieverUnit_settle_believer_Sets_plan_dict():
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
     wk_str = "sem_jours"
@@ -223,7 +223,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_plan_dict():
 #     return bool_x
 
 
-def test_BelieverUnit_settle_believer_CorrectlyCalculatesRangeAttributes():
+def test_BelieverUnit_settle_believer_CalculatesRangeAttributes():
     # ESTABLISH
     sue_believerunit = get_believerunit_with7amCleanTableReason()
     sue_believerunit.settle_believer()
@@ -288,7 +288,7 @@ def test_BelieverUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
     assert len(task_plans) == 1
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsData_believerunit_v001():
+def test_BelieverUnit_settle_believer_SetsData_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
     print(f"{yao_believerunit.get_reason_contexts()=}")
@@ -477,7 +477,7 @@ def test_BelieverUnit_settle_believer_OptionWeekJoursReturnsObj_believerunit_v00
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is False
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsPlanUnitsActiveWithEvery6WeeksReason_believerunit_v001():
+def test_BelieverUnit_settle_believer_SetsPlanUnitsActiveWithEvery6WeeksReason_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
     hr_num_str = "hr_number"
@@ -664,7 +664,7 @@ def test_BelieverUnit_settle_believer_EveryTwoMonthReturnsObj_believerunit_v001(
     assert from_list_get_active(mat_rope, yao_believerunit._plan_dict)
 
 
-def test_BelieverUnit_settle_believer_CorrectlySetsEmpty_sum_healerlink_share():
+def test_BelieverUnit_settle_believer_SetsEmpty_sum_healerlink_share():
     # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
     assert sue_believerunit._sum_healerlink_share == 0
@@ -678,7 +678,7 @@ def test_BelieverUnit_settle_believer_CorrectlySetsEmpty_sum_healerlink_share():
     assert sue_believerunit._keep_dict == {}
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_sum_healerlink_share(graphics_bool):
+def test_BelieverUnit_settle_believer_Sets_sum_healerlink_share(graphics_bool):
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
     sue_believerunit.add_partnerunit("Sue")
@@ -748,7 +748,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_sum_healerlink_share(graphic
     assert tue_plan._healerlink_ratio == 0
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keep_dict_v1(graphics_bool):
+def test_BelieverUnit_settle_believer_Sets_keep_dict_v1(graphics_bool):
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
     sue_believerunit.add_partnerunit("Sue")
@@ -809,7 +809,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keep_dict_v1(graphics_bool):
     assert sue_believerunit._keep_dict == {}
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_healers_dict():
+def test_BelieverUnit_settle_believer_Sets_healers_dict():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -850,7 +850,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_healers_dict():
     assert sue_believerunit._healers_dict.get(sue_str) == {oregon_rope: oregon_plan}
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_buildable_True():
+def test_BelieverUnit_settle_believer_Sets_keeps_buildable_True():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -885,7 +885,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_buildable_True():
     assert sue_believerunit._keeps_buildable
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_buildable_False():
+def test_BelieverUnit_settle_believer_Sets_keeps_buildable_False():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"

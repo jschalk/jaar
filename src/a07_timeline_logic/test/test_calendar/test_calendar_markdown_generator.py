@@ -17,7 +17,7 @@ from src.a07_timeline_logic.timeline_main import (
 )
 
 
-def test_center_word_ReturnObj():
+def test_center_word_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert center_word(10, "fay") == "   fay    "
     assert center_word(15, "fay") == "      fay      "
@@ -316,7 +316,7 @@ def test_CalendarMarkDown_Exists():
     assert x_calendarmarkdown.max_md_width == 84
 
 
-def test_CalendarMarkDown_create_2char_weekday_list_ReturnObj_Scenario0_display_init_day_ParameterPassed():
+def test_CalendarMarkDown_create_2char_weekday_list_ReturnsObj_Scenario0_display_init_day_ParameterPassed():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     creg_calendermarkdown = CalendarMarkDown(timeline_config=creg_config)
@@ -331,7 +331,7 @@ def test_CalendarMarkDown_create_2char_weekday_list_ReturnObj_Scenario0_display_
     assert weekday_2char_list == expected_weekday_2char_abvs
 
 
-def test_CalendarMarkDown_create_2char_weekday_list_ReturnObj_Scenario1_display_init_day_ParameterNotPassed():
+def test_CalendarMarkDown_create_2char_weekday_list_ReturnsObj_Scenario1_display_init_day_ParameterNotPassed():
     # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     creg_calendermarkdown = CalendarMarkDown(timeline_config=creg_config)

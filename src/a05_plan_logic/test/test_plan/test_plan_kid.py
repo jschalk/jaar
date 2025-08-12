@@ -111,7 +111,7 @@ def test_PlanUnit_get_descendants_ErrorRaisedIfInfiniteLoop():
     )
 
 
-def test_PlanUnit_clear_kids_CorrectlySetsAttr():
+def test_PlanUnit_clear_kids_SetsAttr():
     # ESTABLISH
     nation_str = "nation"
     nation_rope = create_rope(root_label(), nation_str)

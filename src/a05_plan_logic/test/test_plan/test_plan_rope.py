@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason_plan import (
 from src.a05_plan_logic.plan import planunit_shop
 
 
-def test_PlanUnit_find_replace_rope_CorrectlyModifies_parent_rope():
+def test_PlanUnit_find_replace_rope_Modifies_parent_rope():
     # ESTABLISH Plan with _parent_rope that will be different
     old_casa_str = "casa1"
     old_root_label = "ZZ"
@@ -32,7 +32,7 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_parent_rope():
     assert create_rope(x_plan.parent_rope, x_plan.plan_label) == new_roses_rope
 
 
-def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
+def test_PlanUnit_find_replace_rope_Modifies_reasonunits():
     # ESTABLISH Plan with reason that will be different
     casa_str = "casa1"
     old_root_label = "ZZ"
@@ -87,7 +87,7 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_reasonunits():
     assert case_obj.reason_state == new_rain_rope
 
 
-def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():
+def test_PlanUnit_find_replace_rope_Modifies_factunits():
     # ESTABLISH Plan with factunit that will be different
     roses_str = "roses"
     old_water_str = "water"
@@ -125,7 +125,7 @@ def test_PlanUnit_find_replace_rope_CorrectlyModifies_factunits():
     assert x_factunit.fact_state == new_rain_rope
 
 
-def test_PlanUnit_get_obj_key_ReturnsCorrectInfo():
+def test_PlanUnit_get_obj_key_ReturnsInfo():
     # ESTABLISH
     red_str = "red"
 
@@ -136,7 +136,7 @@ def test_PlanUnit_get_obj_key_ReturnsCorrectInfo():
     assert red_plan.get_obj_key() == red_str
 
 
-def test_PlanUnit_set_knot_CorrectlyModifiesReason_RopeTerms():
+def test_PlanUnit_set_knot_ModifiesReason_RopeTerms():
     # ESTABLISH
     casa_str = "casa"
     casa_plan = planunit_shop(casa_str)

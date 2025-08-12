@@ -423,7 +423,7 @@ def _modify_believer_plan_partyunit_insert(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.laborunit.set_partyunit(party_title=x_atom.get_value("party_title"))
+    x_planunit.laborunit.add_partyunit(party_title=x_atom.get_value("party_title"))
 
 
 def _modify_believer_plan_healerlink_delete(

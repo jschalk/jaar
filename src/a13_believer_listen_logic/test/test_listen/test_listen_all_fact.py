@@ -212,7 +212,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     assert yao_listener.get_fact(fridge_rope).fact_state == running_rope
 
 
-def test_migrate_all_facts_CorrectlyAddsPlanUnitsAndSetsFactUnits():
+def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
     # ESTABLISH
     yao_str = "Yao"
     yao_src = believerunit_shop(yao_str)

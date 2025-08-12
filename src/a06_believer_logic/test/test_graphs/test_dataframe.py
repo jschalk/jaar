@@ -8,7 +8,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 
 
-def test_get_believer_partnerunits_dataframe_ReturnsCorrectDataFrame():
+def test_get_believer_partnerunits_dataframe_ReturnsDataFrame():
     # ESTABLISH
     luca_believer = believerunit_shop()
     luca_believer.set_credor_respect(500)
@@ -48,7 +48,7 @@ def test_get_believer_partnerunits_dataframe_ReturnsCorrectDataFrame():
     assert x_df.shape[0] == 2
 
 
-def test_get_believer_partnerunits_dataframe_ReturnsCorrectEmptyDataFrame():
+def test_get_believer_partnerunits_dataframe_ReturnsEmptyDataFrame():
     # ESTABLISH
     luca_believer = believerunit_shop()
 
@@ -73,7 +73,7 @@ def test_get_believer_partnerunits_dataframe_ReturnsCorrectEmptyDataFrame():
     assert x_df.shape[0] == 0
 
 
-def test_get_believer_agenda_dataframe_ReturnsCorrectDataFrame():
+def test_get_believer_agenda_dataframe_ReturnsDataFrame():
     # ESTABLISH
     yao_believer = believerunit_v001_with_large_agenda()
     assert len(yao_believer.get_agenda_dict()) == 63
@@ -101,7 +101,7 @@ def test_get_believer_agenda_dataframe_ReturnsCorrectDataFrame():
     assert x_df.shape[0] == 63
 
 
-def test_get_believer_agenda_dataframe_ReturnsCorrectEmptyDataFrame():
+def test_get_believer_agenda_dataframe_ReturnsEmptyDataFrame():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     assert len(yao_believer.get_agenda_dict()) == 0

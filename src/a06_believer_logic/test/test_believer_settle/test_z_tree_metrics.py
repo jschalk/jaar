@@ -32,7 +32,7 @@ def test_BelieverUnit_get_tree_metrics_get_plan_uid_max_GetsMaxPlanUID():
     assert yao_believer.get_plan_uid_max() == 279
 
 
-def test_BelieverUnit_get_tree_metrics_CorrectlySetsBoolean_all_plan_uids_are_unique():
+def test_BelieverUnit_get_tree_metrics_SetsBoolean_all_plan_uids_are_unique():
     # ESTABLISH
     yao_believer = believerunit_v001()
 
@@ -62,7 +62,7 @@ def test_BelieverUnit_get_tree_set_all_plan_uids_unique():
     assert tree_metrics_after.all_plan_uids_are_unique is True
 
 
-def test_BelieverUnit_set_all_plan_uids_unique_SetsUIDsCorrectly():
+def test_BelieverUnit_set_all_plan_uids_unique_SetsUIDs():
     # ESTABLISH
     zia_str = "Zia"
     zia_believer = believerunit_shop(believer_name=zia_str)

@@ -45,7 +45,7 @@ def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
     display_plantree(a_believer, mode="Chore", graphics_bool=graphics_bool)
 
 
-def test_get_believer_partners_plotly_fig_DisplaysCorrectInfo(graphics_bool):
+def test_get_believer_partners_plotly_fig_DisplaysInfo(graphics_bool):
     # ESTABLISH
     luca_believer = believerunit_shop()
     luca_believer.set_credor_respect(500)
@@ -70,7 +70,7 @@ def test_get_believer_partners_plotly_fig_DisplaysCorrectInfo(graphics_bool):
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_believer_agenda_plotly_fig_DisplaysCorrectInfo(graphics_bool):
+def test_get_believer_agenda_plotly_fig_DisplaysInfo(graphics_bool):
     # ESTABLISH
     yao_believer = believerunit_v001_with_large_agenda()
     assert len(yao_believer.get_agenda_dict()) == 63

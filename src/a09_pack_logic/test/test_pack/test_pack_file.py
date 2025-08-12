@@ -160,7 +160,7 @@ def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert sue_packunit.pack_file_exists()
 
 
-def test_PackUnit_save_files_CorrectlySavesFiles(env_dir_setup_cleanup):
+def test_PackUnit_save_files_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
     x_belief_dir = create_path(beliefs_dir(), "amy23")
     x_believers_dir = create_path(x_belief_dir, "believers")

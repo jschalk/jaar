@@ -38,7 +38,7 @@ def test_BelieverUnit_ReasonUnits_create():
     assert casa_plan.reasonunits[sem_jour_rope] == casa_wk_reason
 
 
-def test_BelieverUnit_edit_plan_attr_reasonunit_CorrectlySets_knot():
+def test_BelieverUnit_edit_plan_attr_reasonunit_Sets_knot():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     casa_rope = sue_believer.make_l1_rope("casa")
@@ -60,7 +60,7 @@ def test_BelieverUnit_edit_plan_attr_reasonunit_CorrectlySets_knot():
     assert wk_reasonunit.knot == sue_believer.knot
 
 
-def test_BelieverUnit_edit_plan_attr_reason_context_CorrectlySets_knot():
+def test_BelieverUnit_edit_plan_attr_reason_context_Sets_knot():
     # ESTABLISH
     slash_str = "/"
     bob_believer = believerunit_shop("Bob", knot=slash_str)
@@ -131,7 +131,7 @@ def test_agenda_returned_WhenNoReasonsExist():
     assert sue_believer.get_plan_obj(cat_rope)._chore is True
 
 
-def test_BelieverUnit_reasonheirs_AreCorrectlyInherited_v1():
+def test_BelieverUnit_reasonheirs_AreInherited_v1():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     casa_rope = sue_believer.make_l1_rope("casa")
@@ -172,7 +172,8 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInherited_v1():
     assert casa_plan.get_reasonheir(wk_rope) == built_wk_reasonheir
 
 
-def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
+def test_BelieverUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     a4_believer = get_believerunit_with_4_levels()
     casa_str = "casa"
@@ -241,7 +242,8 @@ def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromRoot():
     assert cost_wk_reasonheir._rplan_active_value != casa_wk_built_reasonheir
 
 
-def test_BelieverUnit_reasonheirs_AreCorrectlyInheritedTo4LevelsFromLevel2():
+def test_BelieverUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
+    # sourcery skip: extract-duplicate-method
     a4_believer = get_believerunit_with_4_levels()
     casa_str = "casa"
     casa_rope = a4_believer.make_l1_rope(casa_str)
@@ -451,7 +453,7 @@ def test_BelieverUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCasereason_lower
     assert casa_plan1.reasonunits[ziet_rope].cases[rus_war_rope].reason_upper == 34
 
 
-def test_BelieverUnit_ReasonUnits_edit_plan_attr_CorrectlyDeletes_ReasonUnits_And_CaseUnits():
+def test_BelieverUnit_ReasonUnits_edit_plan_attr_Deletes_ReasonUnits_And_CaseUnits():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     casa_rope = sue_believer.make_l1_rope("casa")
@@ -567,6 +569,7 @@ def test_BelieverUnit_edit_plan_attr_believerIsAbleToEdit_reason_active_requisit
 
 
 def test_BelieverUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH an Believer with 5 plans, 1 Fact:
     # 1. plan(...,sem_jours) exists
     # 2. plan(...,sem_jours,wed) exists
@@ -657,7 +660,7 @@ def test_BelieverUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsSta
     assert sue_believer._tree_traverse_count == 2
 
 
-def test_BelieverUnit_tree_traverse_count_CorrectlyCountsTreeTraversesForIrrationalBelievers():
+def test_BelieverUnit_tree_traverse_count_CountsTreeTraversesForIrrationalBelievers():
     # ESTABLISH irrational believer
     sue_believer = get_believerunit_irrational_example()
     sue_believer.settle_believer()

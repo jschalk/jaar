@@ -33,7 +33,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.is_expanded is None
 
 
-def test_PlanAttrHolder_CorrectlyCalculatesCaseRanges():
+def test_PlanAttrHolder_CalculatesCaseRanges():
     # ESTABLISH
     plan_attr = PlanAttrHolder(reason_case="some_rope")
     assert plan_attr.reason_lower is None

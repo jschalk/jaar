@@ -147,7 +147,7 @@ def test_RiverRun_tax_dues_unpaid_ReturnsObj():
     assert x_riverrun.tax_dues_unpaid() is False
 
 
-def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
+def test_RiverRun_set_tax_dues_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -179,7 +179,7 @@ def test_RiverRun_set_tax_dues_CorrectlySetsAttr():
     assert bob_riverrun.get(yao_str) == 60
 
 
-def test_RiverRun_partner_has_tax_due_ReturnsCorrectBool():
+def test_RiverRun_partner_has_tax_due_ReturnsBool():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000

@@ -7,7 +7,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenBelieverUnit_Empty():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenBelieverUnit_Empty():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     assert sue_believer._keeps_justified is False
@@ -19,7 +19,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenBeliever
     assert sue_believer._keeps_justified
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenThereAreNotAny():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenThereAreNotAny():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     assert sue_believer._keeps_justified is False
@@ -31,7 +31,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenThereAre
     assert sue_believer._keeps_justified
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenSinglePlanUnit_healerlink_any_group_title_exists_IsTrue():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenSinglePlanUnit_healerlink_any_group_title_exists_IsTrue():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     sue_believer.set_l1_plan(
@@ -46,7 +46,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenSinglePl
     assert sue_believer._keeps_justified is False
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenSingleProblemAndKeep():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenSingleProblemAndKeep():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -64,7 +64,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenSinglePr
     assert sue_believer._keeps_justified
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenKeepIsLevelAboveProblem():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenKeepIsLevelAboveProblem():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -85,7 +85,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenKeepIsLe
     assert sue_believer._keeps_justified
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenKeepIsLevelBelowProblem():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     texas_str = "Texas"
@@ -102,7 +102,7 @@ def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenKeepIsLe
     assert sue_believer._keeps_justified is False
 
 
-def test_BelieverUnit_settle_believer_CorrectlyRaisesErrorWhenKeepIsLevelBelowProblem():
+def test_BelieverUnit_settle_believer_RaisesErrorWhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     texas_str = "Texas"
@@ -123,7 +123,7 @@ def test_BelieverUnit_settle_believer_CorrectlyRaisesErrorWhenKeepIsLevelBelowPr
     )
 
 
-def test_BelieverUnit_settle_believer_CorrectlySets_keeps_justified_WhenTwoKeepsAre_OnTheEqualLine():
+def test_BelieverUnit_settle_believer_Sets_keeps_justified_WhenTwoKeepsAre_OnTheEqualLine():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_healerlink = healerlink_shop({"Yao"})

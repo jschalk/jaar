@@ -351,7 +351,7 @@ VALUES
     assert a23_offi_times_config_dict == [offi_time5, offi_time7]
 
 
-def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario0_beliefunit():
+def test_get_belief_dict_from_voice_tables_ReturnsObj_IsFormatted_Scenario0_beliefunit():
     # ESTABLISH
     a23_str = "amy23"
     a23_timeline_label = "timeline88"
@@ -407,7 +407,7 @@ VALUES (
     assert a23_beliefunit.knot == a23_knot
 
 
-def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario1_blfpayy():
+def test_get_belief_dict_from_voice_tables_ReturnsObj_IsFormatted_Scenario1_blfpayy():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"
@@ -438,7 +438,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
     assert bob_tranunit == {sue_str: {tp55: bob_sue_tp55_amount}}
 
 
-def test_get_belief_dict_from_voice_tables_ReturnsObj_IsCorrectlyFormatted_Scenario2_beliefbud():
+def test_get_belief_dict_from_voice_tables_ReturnsObj_IsFormatted_Scenario2_beliefbud():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"

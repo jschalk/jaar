@@ -18,7 +18,7 @@ def test_HealerLink_Exists():
     assert x_healerlink._healer_names == run_healer_names
 
 
-def test_healerlink_shop_ReturnsCorrectWithCorrectAttributes_v1():
+def test_healerlink_shop_ReturnsWithCorrectAttributes_v1():
     # ESTABLISH
     run_str = ";runners"
     run_healer_names = {run_str}
@@ -31,7 +31,7 @@ def test_healerlink_shop_ReturnsCorrectWithCorrectAttributes_v1():
     assert x_healerlink._healer_names == run_healer_names
 
 
-def test_healerlink_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
+def test_healerlink_shop_ifEmptyReturnsWithCorrectAttributes():
     # ESTABLISH / WHEN
     x_healerlink = healerlink_shop()
 
@@ -40,7 +40,7 @@ def test_healerlink_shop_ifEmptyReturnsCorrectWithCorrectAttributes():
     assert x_healerlink._healer_names == set()
 
 
-def test_HealerLink_get_dict_ReturnsCorrectDictWithSingle_group_title():
+def test_HealerLink_get_dict_ReturnsDictWithSingle_group_title():
     # ESTABLISH
     bob_healer_name = "Bob"
     run_healer_names = {bob_healer_name}
@@ -57,7 +57,7 @@ def test_HealerLink_get_dict_ReturnsCorrectDictWithSingle_group_title():
     assert obj_dict == example_dict
 
 
-def test_HealerLink_set_healer_name_CorrectlySets_healer_names_v1():
+def test_HealerLink_set_healer_name_Sets_healer_names_v1():
     # ESTABLISH
     x_healerlink = healerlink_shop()
     assert len(x_healerlink._healer_names) == 0
@@ -70,7 +70,7 @@ def test_HealerLink_set_healer_name_CorrectlySets_healer_names_v1():
     assert len(x_healerlink._healer_names) == 1
 
 
-def test_HealerLink_del_healer_name_CorrectlyDeletes_healer_names_v1():
+def test_HealerLink_del_healer_name_Deletes_healer_names_v1():
     # ESTABLISH
     x_healerlink = healerlink_shop()
     yao_str = "Yao"

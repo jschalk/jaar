@@ -70,7 +70,7 @@ def test_PartnerUnit_Exists():
     }
 
 
-def test_PartnerUnit_set_nameterm_CorrectlySetsAttr():
+def test_PartnerUnit_set_nameterm_SetsAttr():
     # ESTABLISH
     x_partnerunit = PartnerUnit()
 
@@ -96,7 +96,7 @@ def test_PartnerUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
     )
 
 
-def test_partnerunit_shop_CorrectlySetsAttributes():
+def test_partnerunit_shop_SetsAttributes():
     # WHEN
     yao_str = "Yao"
 
@@ -123,7 +123,7 @@ def test_partnerunit_shop_CorrectlySetsAttributes():
     assert yao_partnerunit.respect_bit == default_RespectBit_if_None()
 
 
-def test_partnerunit_shop_CorrectlySetsAttributes_knot():
+def test_partnerunit_shop_SetsAttributes_knot():
     # ESTABLISH
     slash_str = "/"
 
@@ -134,7 +134,7 @@ def test_partnerunit_shop_CorrectlySetsAttributes_knot():
     assert yao_partnerunit.knot == slash_str
 
 
-def test_partnerunit_shop_CorrectlySetsAttributes_respect_bit():
+def test_partnerunit_shop_SetsAttributes_respect_bit():
     # ESTABLISH
     respect_bit_float = 00.45
 
@@ -145,7 +145,7 @@ def test_partnerunit_shop_CorrectlySetsAttributes_respect_bit():
     assert yao_partnerunit.respect_bit == 1
 
 
-def test_PartnerUnit_set_respect_bit_CorrectlySetsAttribute():
+def test_PartnerUnit_set_respect_bit_SetsAttribute():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
     assert bob_partnerunit.respect_bit == 1
@@ -158,7 +158,7 @@ def test_PartnerUnit_set_respect_bit_CorrectlySetsAttribute():
     assert bob_partnerunit.respect_bit == x_respect_bit
 
 
-def test_PartnerUnit_set_partner_cred_points_CorrectlySetsAttribute():
+def test_PartnerUnit_set_partner_cred_points_SetsAttribute():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
 
@@ -170,7 +170,7 @@ def test_PartnerUnit_set_partner_cred_points_CorrectlySetsAttribute():
     assert bob_partnerunit.partner_cred_points == x_partner_cred_points
 
 
-def test_PartnerUnit_set_partner_debt_points_CorrectlySetsAttribute():
+def test_PartnerUnit_set_partner_debt_points_SetsAttribute():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
 
@@ -232,7 +232,7 @@ def test_PartnerUnit_set_credor_partner_debt_points_IgnoresNoneArgs_Scenario1():
     assert bob_partnerunit.partner_debt_points == 1
 
 
-def test_PartnerUnit_add_irrational_partner_debt_points_SetsAttrCorrectly():
+def test_PartnerUnit_add_irrational_partner_debt_points_SetsAttr():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
     assert bob_partnerunit._irrational_partner_debt_points == 0
@@ -252,7 +252,7 @@ def test_PartnerUnit_add_irrational_partner_debt_points_SetsAttrCorrectly():
     assert bob_partnerunit._irrational_partner_debt_points == bob_int1 + bob_int2
 
 
-def test_PartnerUnit_add_inallocable_partner_debt_points_SetsAttrCorrectly():
+def test_PartnerUnit_add_inallocable_partner_debt_points_SetsAttr():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
     assert bob_partnerunit._inallocable_partner_debt_points == 0
@@ -272,7 +272,7 @@ def test_PartnerUnit_add_inallocable_partner_debt_points_SetsAttrCorrectly():
     assert bob_partnerunit._inallocable_partner_debt_points == bob_int1 + bob_int2
 
 
-def test_PartnerUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
+def test_PartnerUnit_reset_listen_calculated_attrs_SetsAttr():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
     bob_int1 = 11
@@ -290,7 +290,7 @@ def test_PartnerUnit_reset_listen_calculated_attrs_SetsAttrCorrectly():
     assert bob_partnerunit._inallocable_partner_debt_points == 0
 
 
-def test_PartnerUnit_clear_fund_give_take_SetsAttrCorrectly():
+def test_PartnerUnit_clear_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
     bob_partnerunit._fund_give = 0.27
@@ -344,7 +344,7 @@ def test_PartnerUnit_add_fund_agenda_take_SetsAttr():
     assert bob_partnerunit._fund_agenda_take == 0.71
 
 
-def test_PartnerUnit_add_fund_give_take_SetsAttrCorrectly():
+def test_PartnerUnit_add_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop("Bob")
     bob_partnerunit._fund_give = 0.4106
@@ -369,7 +369,7 @@ def test_PartnerUnit_add_fund_give_take_SetsAttrCorrectly():
     assert bob_partnerunit._fund_agenda_take == 0.56
 
 
-def test_PartnerUnit_set_partnerunits_fund_agenda_ratios_SetsAttrCorrectly():
+def test_PartnerUnit_set_partnerunits_fund_agenda_ratios_SetsAttr():
     # ESTABLISH
     bob_partnerunit = partnerunit_shop(
         "Bob", partner_cred_points=15, partner_debt_points=7

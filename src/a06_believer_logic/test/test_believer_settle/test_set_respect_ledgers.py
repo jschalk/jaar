@@ -16,6 +16,7 @@ def test_create_groupunits_metrics_SetsAttrScenario0():
 
 
 def test_create_groupunits_metrics_SetsAttrScenario1():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
@@ -78,6 +79,7 @@ def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_Clears_groups():
 
 
 def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_SetsAttr_scenario1():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)
@@ -154,6 +156,7 @@ def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_SetsAttr_scenari
 
 
 def test_BelieverUnit_set_partnerunit_groupunit_respect_ledgers_ResetPartnerUnitsAttrs():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     sue_believerunit = believerunit_shop(sue_str)

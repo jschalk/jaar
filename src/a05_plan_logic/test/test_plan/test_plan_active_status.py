@@ -14,7 +14,7 @@ from src.a05_plan_logic.plan import (
 )
 
 
-def test_PlanUnit_clear_all_partner_cred_debt_ClearsCorrectly():
+def test_PlanUnit_clear_all_partner_cred_debt_ClearsAttrs():
     # ESTABLISH
     ball_str = "ball"
     ball_plan = planunit_shop(ball_str, _all_partner_cred=55, _all_partner_debt=33)
@@ -86,7 +86,7 @@ def test_PlanUnit_get_awardlink_ReturnsObj():
     assert biker_awardlink.awardee_title == biker_str
 
 
-def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttrCorrectly_WithValues():
+def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     biker_give_force = 12
@@ -153,7 +153,7 @@ def test_PlanUnit_set_awardheirs_fund_give_fund_take_ReturnsObj_NoValues():
     sport_plan.set_awardheirs_fund_give_fund_take()
 
 
-def test_PlanUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
+def test_PlanUnit_set_reasonheirsAcceptsNewValues():
     # ESTABLISH
     ball_str = "ball"
     ball_rope = create_rope(ball_str)
@@ -174,7 +174,7 @@ def test_PlanUnit_set_reasonheirs_CorrectlyAcceptsNewValues():
     assert id(ball_plan._reasonheirs) != id(reasonheirs)
 
 
-def test_PlanUnit_set_reasonheirs_CorrectlyRefusesNewValues():
+def test_PlanUnit_set_reasonheirsRefusesNewValues():
     # ESTABLISH
     ball_str = "ball"
     ball_rope = create_rope(ball_str)
@@ -401,7 +401,7 @@ def test_PlanUnit_factunit_exists_ReturnsObj():
 #     assert clean_plan._active_hx == {0: False}
 
 
-def test_PlanUnit_record_active_hx_CorrectlyRecordsHistorry():
+def test_PlanUnit_record_active_hx_Sets_active_hx():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
@@ -453,12 +453,12 @@ def test_PlanUnit_set_laborunit_empty_if_None():
     assert run_plan.laborunit == laborunit_shop()
 
 
-def test_PlanUnit_set_laborheir_CorrectlySetsAttr():
+def test_PlanUnit_set_laborheir_SetsAttr():
     # ESTABLISH
     swim_str = "swimmers"
     sport_str = "sports"
     sport_plan = planunit_shop(sport_str)
-    sport_plan.laborunit.set_partyunit(party_title=swim_str)
+    sport_plan.laborunit.add_partyunit(party_title=swim_str)
     # assert sport_plan._laborheir is None
 
     # WHEN
@@ -467,7 +467,7 @@ def test_PlanUnit_set_laborheir_CorrectlySetsAttr():
     # THEN
     assert sport_plan._laborheir is not None
     swim_laborunit = laborunit_shop()
-    swim_laborunit.set_partyunit(party_title=swim_str)
+    swim_laborunit.add_partyunit(party_title=swim_str)
     swim_laborheir = laborheir_shop()
     swim_laborheir.set_partys(
         laborunit=swim_laborunit, parent_laborheir=None, groupunits=None

@@ -55,7 +55,7 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     assert x_riverrun.tax_yields_is_empty()
 
 
-def test_RiverRun_reset_tax_yields_CorrectlySetsAttr():
+def test_RiverRun_reset_tax_yields_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -81,7 +81,7 @@ def test_RiverRun_reset_tax_yields_CorrectlySetsAttr():
     assert bob_riverrun.tax_yields_is_empty()
 
 
-def test_RiverRun_partner_has_tax_yield_ReturnsCorrectBool():
+def test_RiverRun_partner_has_tax_yield_ReturnsBool():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000

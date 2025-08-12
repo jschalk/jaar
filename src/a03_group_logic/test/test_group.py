@@ -76,7 +76,7 @@ def test_groupunit_shop_ReturnsObj_knot():
 #     )
 
 
-def test_GroupUnit_set_membership_CorrectlySetsAttr():
+def test_GroupUnit_set_membership_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"

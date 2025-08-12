@@ -43,7 +43,7 @@ def test_rivercycle_shop_ReturnsObj():
     assert one_rivercycle.riverbooks == {}
 
 
-def test_RiverCylce_set_complete_riverbook_CorrectlySetsAttr():
+def test_RiverCylce_set_complete_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
     x_belief_mstr_dir = temp_belief_mstr_dir()
@@ -61,7 +61,7 @@ def test_RiverCylce_set_complete_riverbook_CorrectlySetsAttr():
     assert one_rivercycle.riverbooks == {bob_str: bob_riverbook}
 
 
-def test_RiverCylce_set_riverbook_CorrectlySetsAttr():
+def test_RiverCylce_set_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
     yao_str = "Yao"

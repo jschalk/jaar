@@ -111,9 +111,7 @@ def test_HubUnit_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     assert elpaso_rope in sue_keep_ropes
 
 
-def test_HubUnit_save_all_gut_dutys_CorrectlySetsdutys(
-    env_dir_setup_cleanup, graphics_bool
-):
+def test_HubUnit_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bool):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"

@@ -97,7 +97,7 @@ def test_BelieverUnit_settle_believer_RaisesErrorIfNon_RangeRootHasFactUnit():
     )
 
 
-def test_BelieverUnit_settle_believer_FactHeirsCorrectlyInherited():
+def test_BelieverUnit_settle_believer_FactHeirsInherited():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
     swim_str = "swim"
@@ -204,7 +204,7 @@ def test_BelieverUnit_settle_believer_FactUnitMoldsFactHeir():
     assert swim_plan._factheirs == after_earthdict
 
 
-def test_BelieverUnit_settle_believer_FactHeirCorrectlyDeletesFactUnit():
+def test_BelieverUnit_settle_believer_FactHeirDeletesFactUnit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     swim_str = "swim"

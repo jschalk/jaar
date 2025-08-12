@@ -84,7 +84,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     run_str = "runners"
     sue_believer = believerunit_shop("Sue")
     x_laborunit = laborunit_shop()
-    x_laborunit.set_partyunit(party_title=run_str)
+    x_laborunit.add_partyunit(party_title=run_str)
     root_rope = to_rope(sue_believer.belief_label)
     sue_believer.edit_plan_attr(root_rope, laborunit=x_laborunit)
     root_plan = sue_believer.get_plan_obj(root_rope)
@@ -138,7 +138,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     morn_rope = sue_believer.make_l1_rope(morn_str)
     sue_believer.set_l1_plan(planunit_shop(morn_str))
     x_laborunit = laborunit_shop()
-    x_laborunit.set_partyunit(party_title=run_str)
+    x_laborunit.add_partyunit(party_title=run_str)
     sue_believer.edit_plan_attr(morn_rope, laborunit=x_laborunit)
 
     # WHEN
@@ -154,7 +154,8 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     assert labor_dict_x == {"_partys": [run_str]}
 
 
-def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():
+def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     zia_believer = get_believerunit_x1_3levels_1reason_1facts()
     x_fund_pool = 66000
@@ -222,7 +223,7 @@ def test_BelieverUnit_get_json_ReturnsCorrectJSON_SimpleExample():
     assert x_planroot.problem_bool
 
 
-def test_BelieverUnit_get_json_ReturnsCorrectJSON_BigExample():
+def test_BelieverUnit_get_json_ReturnsJSON_BigExample():
     # ESTABLISH
     yao_believer = believerunit_v001()
     hr_number_str = "hr_number"
@@ -329,11 +330,11 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     sue_partnerunit.add_membership(run_str)
     xio_partnerunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
-    run_laborunit.set_partyunit(party_title=run_str)
+    run_laborunit.add_partyunit(party_title=run_str)
     root_rope = to_rope(zia_believer.belief_label)
     zia_believer.edit_plan_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
-    xio_laborunit.set_partyunit(party_title=xio_str)
+    xio_laborunit.add_partyunit(party_title=xio_str)
     zia_believer.edit_plan_attr(shave_rope, laborunit=xio_laborunit)
     zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(xio_str))
     zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(sue_str))
@@ -416,7 +417,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     assert json_shave_plan.stop_want == zia_shave_plan.stop_want
 
 
-def test_believerunit_get_from_json_ReturnsCorrectPlanRoot():
+def test_believerunit_get_from_json_ReturnsPlanRoot():
     # ESTABLISH
     zia_believer = get_believerunit_x1_3levels_1reason_1facts()
     zia_believer.set_max_tree_traverse(23)
@@ -490,7 +491,8 @@ def test_believerunit_get_from_json_ReturnsObj_knot_GroupExample():
     assert after_yao_partnerunit.knot == slash_knot
 
 
-def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsCorrectlySet():
+def test_believerunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     slash_str = "/"
     run_str = "runners"

@@ -61,7 +61,7 @@ def test_get_belief_guts_partners_dataframe_ReturnsObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_belief_guts_partners_plotly_fig_DisplaysCorrectInfo(
+def test_get_belief_guts_partners_plotly_fig_DisplaysInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -106,7 +106,7 @@ def test_get_belief_jobs_partners_dataframe_ReturnsObj(
     assert set(x_df.columns) == partnerunit_colums
 
 
-def test_get_belief_jobs_partners_plotly_fig_DisplaysCorrectInfo(
+def test_get_belief_jobs_partners_plotly_fig_DisplaysInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -149,7 +149,7 @@ def test_get_belief_guts_agenda_dataframe_ReturnsObj(
     assert x_df.shape[0] == 8
 
 
-def test_get_belief_guts_agenda_plotly_fig_DisplaysCorrectInfo(
+def test_get_belief_guts_agenda_plotly_fig_DisplaysInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -190,7 +190,7 @@ def test_get_belief_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
     assert x_df.shape[0] in [8, 9]
 
 
-def test_get_belief_jobs_agenda_plotly_fig_DisplaysCorrectInfo(
+def test_get_belief_jobs_agenda_plotly_fig_DisplaysInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH

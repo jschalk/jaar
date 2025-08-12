@@ -480,7 +480,7 @@ def test_PackUnit_get_deltametric_json_ReturnsObj():
     assert x_is_json(delta_json)
 
 
-def test_PackUnit_add_believeratom_CorrectlySets_BelieverUnit_partnerunits():
+def test_PackUnit_add_believeratom_Sets_BelieverUnit_partnerunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
