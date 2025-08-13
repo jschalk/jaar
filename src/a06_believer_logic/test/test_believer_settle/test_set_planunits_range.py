@@ -7,6 +7,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 
 
 def test_BelieverUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_UnitDoesNotErrorWithEmptyBelieverUnit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     root_rope = to_rope(yao_believer.belief_label)

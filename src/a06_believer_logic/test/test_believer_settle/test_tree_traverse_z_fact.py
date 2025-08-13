@@ -159,6 +159,7 @@ def test_BelieverUnit_settle_believer_FactHeirsInherited():
 
 
 def test_BelieverUnit_settle_believer_FactUnitMoldsFactHeir():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
     swim_str = "swim"
@@ -207,6 +208,7 @@ def test_BelieverUnit_settle_believer_FactUnitMoldsFactHeir():
 
 
 def test_BelieverUnit_settle_believer_FactHeirDeletesFactUnit():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     swim_str = "swim"

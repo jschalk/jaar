@@ -277,6 +277,7 @@ def get_example_yao_gut_with_3_healers():
 def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     # yao0_gut with 3 debotors of different partner_cred_pointss
     # yao_vision1 with 1 chore, fact that doesn't make that chore active
