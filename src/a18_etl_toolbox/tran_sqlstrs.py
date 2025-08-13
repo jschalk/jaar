@@ -269,7 +269,7 @@ CREATE_BLRUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS believerunit_v_de
 CREATE_BLRUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS believerunit_v_del_agg (event_int INTEGER, face_name TEXT, belief_label TEXT, believer_name_ERASE TEXT)"
 
 
-def get_prime_create_table_sqlstrs() -> dict[str:str]:
+def get_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
         "pidgin_title_s_raw": CREATE_PIDTITL_SOUND_RAW_SQLSTR,
         "pidgin_title_s_agg": CREATE_PIDTITL_SOUND_AGG_SQLSTR,
