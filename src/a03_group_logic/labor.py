@@ -14,7 +14,10 @@ class PartyUnit:
     solo: bool = None
 
     def to_dict(self) -> dict[str,]:
-        return {"party_title": self.party_title, "solo": self.solo}
+        x_dict = {"party_title": self.party_title}
+        if self.solo is True:
+            x_dict["solo"] = self.solo
+        return x_dict
 
 
 def partyunit_shop(party_title: GroupTitle, solo: bool = None) -> PartyUnit:
@@ -65,9 +68,13 @@ def laborunit_shop(_partys: dict[GroupTitle, PartyUnit] = None) -> LaborUnit:
     return LaborUnit(get_empty_dict_if_None(_partys))
 
 
-def create_laborunit(partyunit: GroupTitle):
+def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
-    x_laborunit.add_partyunit(partyunit)
+    partys_dict = laborunit_dict.get("_partys")
+    for party_dict in partys_dict.values():
+        x_laborunit.add_partyunit(
+            party_title=party_dict.get("party_title"), solo=party_dict.get("solo")
+        )
     return x_laborunit
 
 
@@ -168,13 +175,3 @@ def laborheir_shop(
     _partys = get_empty_dict_if_None(_partys)
     _believer_name_is_labor = get_False_if_None(_believer_name_is_labor)
     return LaborHeir(_partys=_partys, _believer_name_is_labor=_believer_name_is_labor)
-
-
-def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
-    x_laborunit = laborunit_shop()
-    partys_dict = laborunit_dict.get("_partys")
-    for party_dict in partys_dict.values():
-        x_laborunit.add_partyunit(
-            party_title=party_dict.get("party_title"), solo=party_dict.get("solo")
-        )
-    return x_laborunit

@@ -1,11 +1,10 @@
-from src.a01_term_logic.term import GroupTitle, default_knot_if_None
+from src.a01_term_logic.term import GroupTitle
 from src.a03_group_logic.group import groupunit_shop, membership_shop
 from src.a03_group_logic.labor import (
     LaborHeir,
     LaborUnit,
     PartyHeir,
     PartyUnit,
-    create_laborunit,
     laborheir_shop,
     laborunit_shop,
     partyheir_shop,
@@ -143,20 +142,6 @@ def test_LaborUnit_add_partyunit_SetsAttr_Secnario1():
     assert len(x_laborunit._partys) == 1
     expected_partys = {yao_str: partyunit_shop(yao_str, solo=yao_solo_bool)}
     assert x_laborunit._partys == expected_partys
-
-
-def test_create_laborunit_ReturnsObj():
-    # ESTABLISH
-    swim_party_title = GroupTitle("swimmers")
-
-    # WHEN
-    swim_laborunit = create_laborunit(swim_party_title)
-
-    # THEN
-    assert swim_laborunit
-    assert len(swim_laborunit._partys) == 1
-    expected_partys = {swim_party_title: partyunit_shop(swim_party_title)}
-    assert swim_laborunit._partys == expected_partys
 
 
 def test_LaborUnit_partyunit_exists_ReturnsObj():
