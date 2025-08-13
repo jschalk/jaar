@@ -302,7 +302,7 @@ def test_NameMap_reveal_inx_ReturnsObjAndSetsAttr_partner_name():
     assert x_namemap.otx_exists(climb_otx) is False
 
 
-def test_NameMap_get_dict_ReturnsObj():
+def test_NameMap_to_dict_ReturnsObj():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"

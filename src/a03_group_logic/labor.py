@@ -21,6 +21,10 @@ def partyunit_shop(party_title: GroupTitle, solo: bool = None) -> PartyUnit:
     return PartyUnit(party_title=party_title, solo=get_False_if_None(solo))
 
 
+def partyunit_get_from_dict(x_dict: dict) -> PartyUnit:
+    return partyunit_shop(x_dict.get("party_title"), solo=x_dict.get("solo"))
+
+
 @dataclass
 class PartyHeir:
     party_title: GroupTitle = None
@@ -52,9 +56,9 @@ class LaborUnit:
     def del_partyunit(self, party_title: GroupTitle):
         self._partys.pop(party_title)
 
-    def get_partyunit(self, party_title: GroupTitle) -> GroupTitle:
+    def get_partyunit(self, party_title: GroupTitle) -> PartyUnit:
         if self.partyunit_exists(party_title):
-            return party_title
+            return self._partys.get(party_title)
 
 
 def laborunit_shop(_partys: dict[GroupTitle, PartyUnit] = None) -> LaborUnit:
@@ -168,6 +172,9 @@ def laborheir_shop(
 
 def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
-    for x_party_title in laborunit_dict.get("_partys"):
-        x_laborunit.add_partyunit(x_party_title)
+    partys_dict = laborunit_dict.get("_partys")
+    for party_dict in partys_dict.values():
+        x_laborunit.add_partyunit(
+            party_title=party_dict.get("party_title"), solo=party_dict.get("solo")
+        )
     return x_laborunit

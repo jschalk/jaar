@@ -212,7 +212,7 @@ def test_MemberShip_set_group_debt_points_DoesNotSetsAttrNone():
     assert swim_membership.group_debt_points == old_group_debt_points
 
 
-def test_MemberShip_get_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     swim_str = ",swim"
     swim_group_cred_points = 3.0
@@ -374,7 +374,7 @@ def test_awardheir_shop_ReturnsObj():
     assert x_awardheir.take_force == bikers_take_force
 
 
-def test_AwardLink_get_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_AwardLink_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_give_force = 3.0

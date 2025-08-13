@@ -6,7 +6,7 @@ from src.a20_world_logic.test._util.a20_env import (
 from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
+def test_WorldUnit_to_dict_ReturnsObj_Scenario0MinimalParameters():
     # ESTABLISH
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
     five_world_name = "five"
@@ -25,7 +25,7 @@ def test_WorldUnit_get_dict_ReturnsObj_Scenario0MinimalParameters():
     assert x_world_dict.get("world_time_reason_upper") == 0
 
 
-def test_WorldUnit_get_dict_ReturnsObj_Scenario1():
+def test_WorldUnit_to_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     worlds2_dir = create_path(get_module_temp_dir(), "worlds2")
     five_world_name = "five"

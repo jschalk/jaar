@@ -299,7 +299,7 @@ def test_TitleMap_reveal_inx_ReturnsObjAndSetsAttr_group_title():
     assert x_titlemap.otx_exists(climb_otx) is False
 
 
-def test_TitleMap_get_dict_ReturnsObj():
+def test_TitleMap_to_dict_ReturnsObj():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"

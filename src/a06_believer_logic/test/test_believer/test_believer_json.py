@@ -18,7 +18,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_believer = believerunit_v001()
     hr_number_str = "hr_number"
@@ -79,7 +79,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_planroot_laborunit():
     # ESTABLISH
     run_str = "runners"
     sue_believer = believerunit_shop("Sue")
@@ -105,7 +105,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
     assert planroot_dict.get("stop_want") == x_stop_want
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -126,7 +126,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     assert planroot_dict["healerlink"] == run_healerlink.to_dict()
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"

@@ -20,7 +20,7 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
 )
 
 
-def test_BelieverAtom_get_dict_ReturnsObj():
+def test_BelieverAtom_to_dict_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
     sports_rope = create_rope("a", sports_str)

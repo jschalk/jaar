@@ -20,7 +20,7 @@ from src.a11_bud_logic.test._util.example_factunits import (
 )
 
 
-def test_CellUnit_get_dict_ReturnsObj_Scenario0():
+def test_CellUnit_to_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -73,7 +73,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario0():
     assert x_cell_dict.get(boss_facts_str()) == {}
 
 
-def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyBelieverAdjust():
+def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBelieverAdjust():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
@@ -126,7 +126,7 @@ def test_CellUnit_get_dict_ReturnsObj_Scenario1_EmptyBelieverAdjust():
     assert x_cell_dict.get(boss_facts_str()) == {}
 
 
-def test_CellUnit_get_dict_ReturnsObj_Scenario1_WithMoreParameters():
+def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"

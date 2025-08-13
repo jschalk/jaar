@@ -132,7 +132,7 @@ def test_RiverGrade_set_tax_due_amount_SetsAttrs():
     assert x_rivergrade.tax_paid_bool is True
 
 
-def test_RiverGrade_get_dict_ReturnsObj():
+def test_RiverGrade_to_dict_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     yao_hubunit = example_yao_hubunit()

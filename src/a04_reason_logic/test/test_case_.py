@@ -733,7 +733,7 @@ def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
     assert wk_case._status
 
 
-def test_CaseUnit_get_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
+def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -757,7 +757,7 @@ def test_CaseUnit_get_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_get_dict_ReturnsDictWithreason_lowerAndreason_upper():
+def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -774,7 +774,7 @@ def test_CaseUnit_get_dict_ReturnsDictWithreason_lowerAndreason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_get_dict_ReturnsDictWithOnlyRopeTerm():
+def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)

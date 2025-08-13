@@ -520,7 +520,7 @@ def test_timelineunit_shop_ReturnsObj_Scenario2_timeline_label_Missing():
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
 
 
-def test_TimeLineUnit_get_dict_ReturnsObj():
+def test_TimeLineUnit_to_dict_ReturnsObj():
     # ESTABLISH
     x_timelineunit = timelineunit_shop()
 

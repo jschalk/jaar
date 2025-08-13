@@ -299,7 +299,7 @@ def test_LabelMap_reveal_inx_ReturnsObjAndSetsAttr_label():
     assert x_labelmap.otx_exists(climb_otx) is False
 
 
-def test_LabelMap_get_dict_ReturnsObj():
+def test_LabelMap_to_dict_ReturnsObj():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"

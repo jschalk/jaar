@@ -245,7 +245,7 @@ def test_reasonunit_shop_ReturnsObj():
     assert wk_reasonunit.knot == default_knot_if_None()
 
 
-def test_ReasonUnit_get_dict_ReturnsDictWithSinglethu_caseequireds():
+def test_ReasonUnit_to_dict_ReturnsDictWithSinglethu_caseequireds():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -268,7 +268,7 @@ def test_ReasonUnit_get_dict_ReturnsDictWithSinglethu_caseequireds():
     assert wk_reason_dict == static_wk_reason_dict
 
 
-def test_ReasonUnit_get_dict_ReturnsDictWith_reason_active_requisite():
+def test_ReasonUnit_to_dict_ReturnsDictWith_reason_active_requisite():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -291,7 +291,7 @@ def test_ReasonUnit_get_dict_ReturnsDictWith_reason_active_requisite():
     assert wk_reason_dict == static_wk_reason_dict
 
 
-def test_ReasonUnit_get_dict_ReturnsDictWithTwoCasesReasons():
+def test_ReasonUnit_to_dict_ReturnsDictWithTwoCasesReasons():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)

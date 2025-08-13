@@ -603,7 +603,7 @@ def test_TranBook_get_partners_csv_ReturnsObj():
     assert amy23_partners_net_csv == example_csv
 
 
-def test_TranBook_get_dict_ReturnsObj():
+def test_TranBook_to_dict_ReturnsObj():
     # ESTABLISH
     amy23_str = "amy23"
     x_TimeLinePoint = 5505
