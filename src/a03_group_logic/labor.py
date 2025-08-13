@@ -13,7 +13,7 @@ class PartyUnit:
     party_title: GroupTitle = None
     solo: bool = None
 
-    def get_dict(self) -> dict[str,]:
+    def to_dict(self) -> dict[str,]:
         return {"party_title": self.party_title, "solo": self.solo}
 
 
@@ -37,7 +37,11 @@ class LaborUnit:
     _partys: dict[GroupTitle, PartyUnit] = None
 
     def to_dict(self) -> dict[str, str]:
-        return {"_partys": list(self._partys)}
+        partys_dict = {
+            party_title: partyunit.to_dict()
+            for party_title, partyunit in self._partys.items()
+        }
+        return {"_partys": partys_dict}
 
     def add_partyunit(self, party_title: GroupTitle, solo: bool = None):
         self._partys[party_title] = partyunit_shop(party_title, solo)

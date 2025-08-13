@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a03_group_logic.labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop, partyunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -99,7 +99,8 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
 
     # THEN
     assert planroot_dict["laborunit"] == x_laborunit.to_dict()
-    assert planroot_dict["laborunit"] == {"_partys": [run_str]}
+    run_partyunit = partyunit_shop(run_str)
+    assert planroot_dict["laborunit"] == {"_partys": {run_str: run_partyunit.to_dict()}}
     assert planroot_dict.get("gogo_want") == x_gogo_want
     assert planroot_dict.get("stop_want") == x_stop_want
 
@@ -151,7 +152,8 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
 
     labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
-    assert labor_dict_x == {"_partys": [run_str]}
+    run_partyunit = partyunit_shop(run_str)
+    assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
 
 
 def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():

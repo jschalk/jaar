@@ -124,7 +124,9 @@ def test_PlanUnit_get_dict_ReturnsCompleteDict():
     }
     sue_str = "Sue"
     yao_str = "Yao"
-    sue_laborunit = laborunit_shop({sue_str: -1, yao_str: -1})
+    sue_laborunit = laborunit_shop()
+    sue_laborunit.add_partyunit(sue_str)
+    sue_laborunit.add_partyunit(yao_str)
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)

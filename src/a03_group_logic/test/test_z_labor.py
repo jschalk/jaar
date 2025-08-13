@@ -50,7 +50,7 @@ def test_PartyUnit_get_dict_ReturnsObj():
     x_partyunit = partyunit_shop(bob_str, solo=bob_solo_bool)
 
     # WHEN
-    party_dict = x_partyunit.get_dict()
+    party_dict = x_partyunit.to_dict()
 
     # THEN
     assert party_dict
@@ -177,7 +177,8 @@ def test_create_laborunit_ReturnsObj():
 def test_LaborUnit_get_dict_ReturnsDictWithSingle_partyunit():
     # ESTABLISH
     bob_party_title = GroupTitle("Bob")
-    x_partys = {bob_party_title: bob_party_title}
+    bob_partyunit = partyunit_shop(bob_party_title)
+    x_partys = {bob_party_title: bob_partyunit}
     x_laborunit = laborunit_shop(_partys=x_partys)
 
     # WHEN
@@ -185,7 +186,7 @@ def test_LaborUnit_get_dict_ReturnsDictWithSingle_partyunit():
 
     # THEN
     assert obj_dict is not None
-    example_dict = {"_partys": [bob_party_title]}
+    example_dict = {"_partys": {bob_party_title: bob_partyunit.to_dict()}}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
 
