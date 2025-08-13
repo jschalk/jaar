@@ -506,8 +506,11 @@ def test_inherit_namemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot()
     old_namemap = namemap_shop(sue_str, 0, otx_knot=slash_otx_knot)
     new_namemap = namemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_namemap(new_namemap, old_namemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -518,8 +521,11 @@ def test_inherit_namemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot()
     old_namemap = namemap_shop(sue_str, 0, inx_knot=slash_otx_knot)
     new_namemap = namemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_namemap(new_namemap, old_namemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -530,8 +536,11 @@ def test_inherit_namemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_
     old_namemap = namemap_shop(sue_str, 0, unknown_str=x_unknown_str)
     new_namemap = namemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_namemap(new_namemap, old_namemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -542,8 +551,11 @@ def test_inherit_namemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_nam
     old_namemap = namemap_shop(sue_str, 0)
     new_namemap = namemap_shop(bob_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_namemap(new_namemap, old_namemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -553,8 +565,11 @@ def test_inherit_namemap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder(
     old_namemap = namemap_shop(sue_str, 5)
     new_namemap = namemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_namemap(new_namemap, old_namemap)
+
+    # THEN
     assert str(excinfo.value) == "older mapunit is not older"
 
 

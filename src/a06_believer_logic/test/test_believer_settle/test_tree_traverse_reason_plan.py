@@ -244,6 +244,7 @@ def test_BelieverUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
 
 def test_BelieverUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     # sourcery skip: extract-duplicate-method
+    # ESTABLISH
     a4_believer = get_believerunit_with_4_levels()
     casa_str = "casa"
     casa_rope = a4_believer.make_l1_rope(casa_str)
@@ -507,6 +508,8 @@ def test_BelieverUnit_ReasonUnits_del_reason_case_UncoupledMethod2():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         casa_plan1.del_reasonunit_reason_context(sem_jours_rope)
+
+    # THEN
     assert str(excinfo.value) == f"No ReasonUnit at '{sem_jours_rope}'"
 
 

@@ -17,12 +17,14 @@ from src.a21_lobby_logic.test._util.a21_str import (
 
 
 def test_str_functions_ReturnsObjs():
+    # ESTABLISH / WHEN / THEN
     assert lobbys_str() == "lobbys"
     assert lobby_id_str() == "lobby_id"
     assert lobby_mstr_dir_str() == "lobby_mstr_dir"
 
 
 def test_LobbyID_Exists():
+    # ESTABLISH / WHEN / THEN
     assert LobbyID("chat23") == "chat23"
 
 

@@ -3,7 +3,10 @@ from src.a05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 
 
 def test_PlanAttrHolder_Exists():
+    # ESTABLISH / WHEN
     new_obj = PlanAttrHolder()
+
+    # THEN
     assert new_obj.star is None
     assert new_obj.uid is None
     assert new_obj.reason is None
@@ -50,6 +53,8 @@ def test_PlanAttrHolder_CalculatesCaseRanges():
         case_denom=4.0,
         # case_morph,
     )
+
+    # THEN
     assert plan_attr.reason_lower == 5.0
     assert plan_attr.reason_upper == 20.0
     # assert plan_attr.reason_case_numor is None

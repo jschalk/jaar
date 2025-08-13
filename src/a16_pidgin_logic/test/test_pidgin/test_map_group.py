@@ -495,8 +495,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot(
     old_titlemap = titlemap_shop(sue_str, 0, otx_knot=slash_otx_knot)
     new_titlemap = titlemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_titlemap(new_titlemap, old_titlemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -507,8 +510,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot(
     old_titlemap = titlemap_shop(sue_str, 0, inx_knot=slash_otx_knot)
     new_titlemap = titlemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_titlemap(new_titlemap, old_titlemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -519,8 +525,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown
     old_titlemap = titlemap_shop(sue_str, 0, unknown_str=x_unknown_str)
     new_titlemap = titlemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_titlemap(new_titlemap, old_titlemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -531,8 +540,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_na
     old_titlemap = titlemap_shop(sue_str, 0)
     new_titlemap = titlemap_shop(bob_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_titlemap(new_titlemap, old_titlemap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -542,8 +554,11 @@ def test_inherit_titlemap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder
     old_titlemap = titlemap_shop(sue_str, 5)
     new_titlemap = titlemap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_titlemap(new_titlemap, old_titlemap)
+
+    # THEN
     assert str(excinfo.value) == "older mapunit is not older"
 
 

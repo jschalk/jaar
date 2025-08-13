@@ -353,7 +353,7 @@ def test_TranBook_get_amount_ReturnsObj():
     amy23_tranbook.add_tranunit(sue_str, yao_str, t55_t, t55_yao_amount)
     assert amy23_tranbook.tranunit_exists(sue_str, yao_str, t55_t)
 
-    # WHEN
+    # WHEN / THEN
     assert amy23_tranbook.get_amount(sue_str, yao_str, t55_t) == t55_yao_amount
     assert not amy23_tranbook.get_amount(sue_str, "Bob", t55_t)
     assert not amy23_tranbook.get_amount("Bob", yao_str, t55_t)

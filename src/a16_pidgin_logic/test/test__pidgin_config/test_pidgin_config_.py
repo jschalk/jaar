@@ -47,6 +47,7 @@ def test_get_pidgin_filename_ReturnsObj():
 
 
 def test_pidgin_config_path_ReturnsObj_Pidgin() -> str:
+    # ESTABLISH / WHEN / THEN
     src_dir = create_path(os_getcwd(), "src")
     module_dir = create_path(src_dir, "a16_pidgin_logic")
     assert pidgin_config_path() == create_path(module_dir, "pidgin_config.json")

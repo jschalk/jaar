@@ -47,11 +47,15 @@ from src.a05_plan_logic.test._util.a05_str import (
 
 
 def test_get_default_belief_label_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert get_default_belief_label() == "ZZ"
 
 
 def test_PlanUnit_Exists():
+    # ESTABLISH
     x_planunit = PlanUnit()
+
+    # WHEN / THEN
     assert x_planunit
     assert x_planunit._kids is None
     assert x_planunit.star is None

@@ -18,6 +18,7 @@ from src.a15_belief_logic.test._util.a15_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert beliefunit_str() == "beliefunit"
     assert belief_budunit_str() == "belief_budunit"
     assert belief_paybook_str() == "belief_paybook"

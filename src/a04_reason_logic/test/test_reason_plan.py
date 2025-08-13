@@ -154,7 +154,11 @@ def test_ReasonHeir_set_status_EmptyFactSetsStatus():
     wed_cases = {wed_case.reason_state: wed_case}
     wk_reason = reasonheir_shop(reason_context=wk_rope, cases=wed_cases)
     assert wk_reason._status is None
+
+    # WHEN
     wk_reason.set_status(factheirs=None)
+
+    # THEN
     assert wk_reason._status is False
 
 

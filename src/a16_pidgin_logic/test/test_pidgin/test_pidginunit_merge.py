@@ -30,8 +30,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario1_RaiseErrorWhenDiffer
     old_pidginunit = pidginunit_shop(sue_str, 0, otx_knot=slash_otx_knot)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_pidginunit(old_pidginunit, new_pidginunit)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -42,8 +45,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario2_RaiseErrorWhenDiffer
     old_pidginunit = pidginunit_shop(sue_str, 0, inx_knot=slash_otx_knot)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_pidginunit(old_pidginunit, new_pidginunit)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -54,8 +60,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario3_RaiseErrorWhenDiffer
     old_pidginunit = pidginunit_shop(sue_str, 0, unknown_str=x_unknown_str)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_pidginunit(old_pidginunit, new_pidginunit)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -66,8 +75,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario4_RaiseErrorWhenDiffer
     old_pidginunit = pidginunit_shop(sue_str, 0)
     new_pidginunit = pidginunit_shop(bob_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_pidginunit(old_pidginunit, new_pidginunit)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -77,8 +89,11 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario5_RaiseErrorWhenEventI
     old_pidginunit = pidginunit_shop(sue_str, 5)
     new_pidginunit = pidginunit_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_pidginunit(old_pidginunit, new_pidginunit)
+
+    # THEN
     assert str(excinfo.value) == "older pidginunit is not older"
 
 

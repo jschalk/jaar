@@ -27,6 +27,8 @@ def test_BelieverUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     new_credor_respect = 13.5
     with pytest_raises(Exception) as excinfo:
         zia_believer.set_credor_respect(new_credor_respect)
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"Believer '{zia_str}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{zia_believer.respect_bit}'"
@@ -59,6 +61,8 @@ def test_BelieverUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     new_debtor_respect = 13.5
     with pytest_raises(Exception) as excinfo:
         zia_believer.set_debtor_respect(new_debtor_respect)
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"Believer '{zia_str}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_believer.respect_bit}'"

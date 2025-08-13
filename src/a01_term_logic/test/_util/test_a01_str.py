@@ -9,7 +9,7 @@ from src.a01_term_logic.test._util.a01_str import (
 
 
 def test_str_functions_ReturnsObj():
-    # ESTABLISH
+    # ESTABLISH / WHEN / THEN
     assert knot_str() == "knot"
     assert NameTerm_str() == "NameTerm"
     assert TitleTerm_str() == "TitleTerm"

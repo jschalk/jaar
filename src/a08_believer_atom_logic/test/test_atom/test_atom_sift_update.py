@@ -57,7 +57,8 @@ def test_sift_atom_ReturnsNoneIfGivenBelieverAtomIsUPDATE():
     casa_atom.set_arg(parent_rope_str(), sue_believer.belief_label)
     casa_atom.set_arg(plan_label_str(), casa_str)
     casa_atom.set_arg(star_str(), 8)
-    # THEN
+
+    # WHEN
     new_casa_atom = sift_believeratom(sue_believer, casa_atom)
 
     # THEN
@@ -183,7 +184,8 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_planunit():
     old_casa_atom.set_arg(task_str(), sue_task)
     old_casa_atom.set_arg("problem_bool", sue_problem_bool)
     old_casa_atom.set_arg(stop_want_str(), sue_stop_want)
-    # THEN
+
+    # WHEN
     new_casa_atom = sift_believeratom(sue_believer, old_casa_atom)
 
     # THEN

@@ -61,6 +61,7 @@ def test_open_csv_with_types(env_dir_setup_cleanup):
 
 
 def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
+    # ESTABLISH
     # 1. Create temporary SQLite DB
     temp_dir = get_module_temp_dir()
     set_dir(temp_dir)
@@ -79,9 +80,11 @@ def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
     conn.commit()
     conn.close()
 
+    # WHEN
     # 3. Run export function
     export_sqlite_tables_to_csv(str(db_path), str(temp_dir))
 
+    # THEN
     # 4. Check output files
     user_csv = create_path(temp_dir, "users_2.csv")
     product_csv = create_path(temp_dir, "products_1.csv")
@@ -129,22 +132,20 @@ def test_replace_csv_column_from_string():
 
 
 def test_delete_column_from_csv_string():
-    # Input CSV string
+    # ESTABLISH
     csv_input = """id,name,status
 1,Alice,active
 2,Bob,inactive
 """
 
-    # Expected CSV output after removing 'status'
-    expected_output = [{"id": "1", "name": "Alice"}, {"id": "2", "name": "Bob"}]
-
-    # Call the function
+    # WHEN
     result = delete_column_from_csv_string(csv_input, "status")
 
+    # THEN
     # Parse the result using csv.DictReader
     reader = csv_DictReader(io_StringIO(result))
     rows = list(reader)
-
-    # Assertions
+    # Expected CSV output after removing 'status'
+    expected_output = [{"id": "1", "name": "Alice"}, {"id": "2", "name": "Bob"}]
     assert reader.fieldnames == ["id", "name"]
     assert rows == expected_output

@@ -23,6 +23,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert pidginunit_str() == "pidginunit"
     assert otx_knot_str() == "otx_knot"
     assert inx_knot_str() == "inx_knot"

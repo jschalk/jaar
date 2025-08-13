@@ -159,8 +159,11 @@ def test_GroupUnit_set_membership_RaisesErrorIf_partner_name_IsNone():
     yao_ohio_membership = membership_shop(ohio_str)
     assert yao_ohio_membership.partner_name is None
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         ohio_groupunit.set_membership(yao_ohio_membership)
+
+    # THEN
     exception_str = (
         f"membership group_title={ohio_str} cannot be set when _partner_name is None."
     )

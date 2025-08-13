@@ -21,15 +21,13 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
 
 
 def test_BelieverAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
-    # WHEN
+    # ESTABLISH
     sports_str = "sports"
     sports_rope = create_rope("a", sports_str)
     ball_str = "basketball"
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-
-    # WHEN
     x_dimen = believer_plan_factunit_str()
     update_disc_believeratom = believeratom_shop(x_dimen, UPDATE_str())
     update_disc_believeratom.set_jkey("reason_context", knee_rope)
@@ -44,13 +42,12 @@ def test_BelieverAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
 
 
 def test_BelieverAtom_get_insert_sqlstr_ReturnsObj_BelieverUnitSimpleAttrs():
-    # WHEN
+    # ESTABLISH
     new2_value = 66
     dimen = believerunit_str()
     opt_arg2 = "max_tree_traverse"
     x_believeratom = believeratom_shop(dimen, UPDATE_str())
     x_believeratom.set_jvalue(opt_arg2, new2_value)
-    # THEN
     x_table = "atom_hx"
     example_sqlstr = f"""
 INSERT INTO {x_table} (
@@ -60,6 +57,8 @@ VALUES (
   {new2_value}
 )
 ;"""
+
+    # WHEN / THEN
     assert x_believeratom.get_insert_sqlstr() == example_sqlstr
 
 

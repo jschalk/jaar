@@ -37,6 +37,7 @@ from src.a05_plan_logic.test._util.a05_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert _active_hx_str() == "_active_hx"
     assert _all_partner_cred_str() == "_all_partner_cred"
     assert _all_partner_debt_str() == "_all_partner_debt"

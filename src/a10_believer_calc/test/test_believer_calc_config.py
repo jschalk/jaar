@@ -511,7 +511,7 @@ def g_sqlitetype(
 
 
 def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
-    # ESTABLISH / WHEN
+    # ESTABLISH / WHEN / THEN
     cfig = get_believer_calc_config_dict()
     # for level1_key, aspect_dict in config.items():
     #     for level2_key, fm_aspect_dict in aspect_dict.items():
@@ -776,6 +776,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_EachArgHasOneClassType():
                         all_args[x_arg] = set()
                     all_args.get(x_arg).add(arg_type)
 
+    # WHEN / THEN
     for x_arg, arg_types in all_args.items():
         print(f"{x_arg=} {arg_types=}")
         assert len(arg_types) == 1

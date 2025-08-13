@@ -368,7 +368,7 @@ def test_awardheir_shop_ReturnsObj():
         take_force=bikers_take_force,
     )
 
-    # WHEN
+    # THEN
     assert x_awardheir.awardee_title == bikers_str
     assert x_awardheir.give_force == bikers_give_force
     assert x_awardheir.take_force == bikers_take_force
@@ -456,6 +456,7 @@ def test_awardline_shop_ReturnsObj_Exists():
         _fund_take=bikers_fund_take,
     )
 
+    # THEN
     assert biker_awardline is not None
     assert biker_awardline.awardee_title == bikers_str
     assert biker_awardline._fund_give == bikers_fund_give

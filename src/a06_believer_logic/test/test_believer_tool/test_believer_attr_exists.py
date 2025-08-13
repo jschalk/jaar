@@ -163,6 +163,7 @@ def test_believer_plan_awardlink_exists_ReturnsObj():
 
 
 def test_believer_plan_reasonunit_exists_ReturnsObj():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -194,6 +195,7 @@ def test_believer_plan_reasonunit_exists_ReturnsObj():
 
 
 def test_believer_plan_reason_caseunit_exists_ReturnsObj():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -308,6 +310,7 @@ def test_believer_plan_healerlink_exists_ReturnsObj():
 
 
 def test_believer_plan_factunit_exists_ReturnsObj():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -465,6 +468,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_awardlink():
 
 
 def test_believer_attr_exists_ReturnsObj_believer_plan_reasonunit():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -496,6 +500,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_reasonunit():
 
 
 def test_believer_attr_exists_ReturnsObj_believer_plan_reason_caseunit():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -611,6 +616,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_healerlink():
 
 
 def test_believer_attr_exists_ReturnsObj_believer_plan_factunit():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)

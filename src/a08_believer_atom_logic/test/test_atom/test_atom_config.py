@@ -227,7 +227,7 @@ def _get_atom_config_jvalues_len(x_dimen: str) -> int:
 
 
 def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
-    # ESTABLISH
+    # ESTABLISH / WHEN / THEN
     assert _get_atom_config_jkeys_len(believerunit_str()) == 0
     assert _get_atom_config_jkeys_len(believer_partnerunit_str()) == 1
     assert _get_atom_config_jkeys_len(believer_partner_membership_str()) == 2
@@ -306,7 +306,7 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
     # the same. All atom_config elements with two or more required args
     # must assign to each of those args a nesting order
 
-    # ESTABLISH
+    # ESTABLISH / WHEN / THEN
     # grab every atom_config with multiple required args
     assert check_necessary_nesting_order_exists()
 

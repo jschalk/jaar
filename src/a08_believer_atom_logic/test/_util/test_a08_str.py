@@ -12,6 +12,7 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert atom_hx_str() == "atom_hx"
     assert DELETE_str() == "DELETE"
     assert column_order_str() == "column_order"

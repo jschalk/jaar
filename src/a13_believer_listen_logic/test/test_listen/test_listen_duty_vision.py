@@ -323,7 +323,7 @@ def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceI
     assert yao_ohio_hubunit.vision_file_exists(yao_str) is False
     assert zia_utah_hubunit.vision_file_exists(yao_str) is False
 
-    # WHEN
+    # WHEN / THEN
     assert job_file_exists(belief_mstr_dir, belief_label, yao_str) is False
     listen_to_believer_visions(yao_iowa_hubunit)
     assert job_file_exists(belief_mstr_dir, belief_label, yao_str)
@@ -377,7 +377,7 @@ def test_create_vision_file_from_duty_file_CreatesEmptyvision(env_dir_setup_clea
     # WHEN
     create_vision_file_from_duty_file(sue_texas_hubunit, yao_str)
 
-    # ESTABLISH
+    # THEN
     assert sue_texas_hubunit.vision_file_exists(yao_str)
     yao_vision = sue_texas_hubunit.get_vision_believer(yao_str)
     assert yao_vision.believer_name is not None

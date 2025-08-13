@@ -82,11 +82,12 @@ def test_BelieverUnit_edit_plan_label_RaisesErrorForLevel0When_belief_label_IsDi
     assert swim_plan.parent_rope == casa_rope
 
     # WHEN
-
     with pytest_raises(Exception) as excinfo:
         moon_str = "moon"
         root_rope = to_rope(root_label())
         yao_believer.edit_plan_label(old_rope=root_rope, new_plan_label=moon_str)
+
+    # THEN
     assertion_str = f"Cannot set planroot to string different than '{sun_str}'"
     assert str(excinfo.value) == assertion_str
 

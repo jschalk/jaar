@@ -59,7 +59,7 @@ def test_NameTerm_Exists():
 
 
 def test_NameTerm_is_name_ReturnsObj_Scenario0():
-    # WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert NameTerm("").is_name() is False
     assert NameTerm("A").is_name()
 
@@ -124,7 +124,10 @@ def test_TitleTerm_Exists():
 
 
 def test_GroupTitle_Exists():
+    # ESTABLISH / WHEN
     bikers_GroupTitle = GroupTitle(";bikers")
+
+    # THEN
     assert bikers_GroupTitle is not None
     assert str(type(bikers_GroupTitle)).find("src.a01_term_logic.term.GroupTitle") > 0
 
@@ -141,7 +144,7 @@ def test_LabelTerm_Exists():
 
 
 def test_LabelTerm_is_label_ReturnsObj_Scenario0():
-    # WHEN / THEN
+    # ESTABLISH / WHEN / THEN
     assert LabelTerm("").is_label() is False
     assert LabelTerm("A").is_label()
 

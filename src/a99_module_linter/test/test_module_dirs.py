@@ -8,6 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     get_level1_dirs,
 )
 from src.a99_module_linter.module_eval import (
+    check_all_test_functions_are_formatted,
     check_if_module_str_funcs_is_sorted,
     check_import_objs_are_ordered,
     check_str_func_test_file_has_needed_asserts,
@@ -394,7 +395,7 @@ def test_Modules_path_FunctionStructureAndFormat():
     # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}
-    all_test_functions = set()
+    all_test_functions = {}
     modules_path_funcs = {}
     filtered_modules_path_funcs = {}
     filterout_path_funcs = {
@@ -412,7 +413,7 @@ def test_Modules_path_FunctionStructureAndFormat():
             file_dir = create_path(module_dir, filepath_set[0])
             file_path = create_path(file_dir, filepath_set[1])
             file_functions = get_top_level_functions(file_path)
-            for function_name in file_functions:
+            for function_name in file_functions.keys():
                 x_count += 1
                 if str(function_name).endswith("_path"):
                     # print(
@@ -426,7 +427,8 @@ def test_Modules_path_FunctionStructureAndFormat():
                     ):
                         filtered_path_funcs.add(function_name)
                 if str(function_name).startswith("test_"):
-                    all_test_functions.add(function_name)
+                    function_str = file_functions.get(function_name)
+                    all_test_functions[function_name] = function_str
 
     print(f"Total path functions found: {len(path_functions)}")
     for function_name, file_path in path_functions.items():
@@ -455,7 +457,9 @@ def test_Modules_path_FunctionStructureAndFormat():
             pytest_path_func_filename = f"test_{path_func_filename}"
             pytest_path_func_path = create_path(util_dir, pytest_path_func_filename)
             assert os_path_exists(pytest_path_func_path)
-            test_path_func_names = set(get_top_level_functions(pytest_path_func_path))
+            test_path_func_names = set(
+                get_top_level_functions(pytest_path_func_path).keys()
+            )
             # print(f"{module_desc} {test_path_func_names=}")
             check_if_test_ReturnsObj_pytests_exist(
                 path_funcs, module_desc, test_path_func_names
@@ -464,7 +468,9 @@ def test_Modules_path_FunctionStructureAndFormat():
                 path_funcs, module_desc, test_path_func_names
             )
 
-    check_all_test_functions_have_proper_naming_format(all_test_functions)
+    all_test_function_names = all_test_functions.keys()
+    check_all_test_functions_have_proper_naming_format(all_test_function_names)
+    check_all_test_functions_are_formatted(all_test_functions)
 
 
 def check_if_test_ReturnsObj_pytests_exist(
@@ -501,8 +507,8 @@ def check_if_test_HasDocString_pytests_exist(
         # print(f"{module_desc} {test_func_exists} {path_func}")
 
 
-def check_all_test_functions_have_proper_naming_format(all_test_functions):
-    for test_function_name in sorted(all_test_functions):
+def check_all_test_functions_have_proper_naming_format(all_test_function_names: set):
+    for test_function_name in sorted(list(all_test_function_names)):
         test_function_name = str(test_function_name)
         failed_assertion_str = f"test function {test_function_name} is not named well"
         if test_function_name.lower().endswith("_exists"):
@@ -511,48 +517,3 @@ def check_all_test_functions_have_proper_naming_format(all_test_functions):
             assert test_function_name.find("ReturnsObj") > 0, failed_assertion_str
         assert test_function_name.lower().find("correctly") <= 0, failed_assertion_str
         assert test_function_name.lower().find("returnobj") <= 0, failed_assertion_str
-
-
-def test_check_Modules_filenames_FollowFileNameConventions_NoNamingCollision():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
-    # ESTABLISH
-    all_level1_py_files = set()
-    for module_desc, module_dir in get_module_descs().items():
-        level1_py_files = set(get_dir_file_strs(module_dir, True, False, True).keys())
-        all_level1_py_files.update(level1_py_files)
-        # print(f"{level1_py_files=}")
-        base_map = {}
-
-        for focus_filenamebase in level1_py_files:
-            for check_filenamebase in level1_py_files:
-                if check_filenamebase.find(focus_filenamebase) > -1:
-                    if base_map.get(focus_filenamebase) is None:
-                        base_map[focus_filenamebase] = []
-                    base_map[focus_filenamebase].append(check_filenamebase)
-
-        collisions = []
-        for name_group in base_map.values():
-            if len(name_group) > 1:
-                collisions.extend(name_group)
-        if collisions:
-            print(f"{module_desc} {collisions=}")
-        assert not collisions
-
-    # CHECK for collisions acress modules
-    # all_base_map = {}
-
-    # for focus_filenamebase in all_level1_py_files:
-    #     for check_filenamebase in all_level1_py_files:
-    #         if check_filenamebase.find(focus_filenamebase) > -1:
-    #             if all_base_map.get(focus_filenamebase) is None:
-    #                 all_base_map[focus_filenamebase] = []
-    #             all_base_map[focus_filenamebase].append(check_filenamebase)
-
-    # all_collisions = []
-    # for name_group in all_base_map.values():
-    #     if len(name_group) > 1:
-    #         all_collisions.extend(name_group)
-    # if all_collisions:
-    #     print(f"{module_desc} {all_collisions=}")
-    # assert not all_collisions

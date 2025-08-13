@@ -251,6 +251,7 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starSc
 
 
 def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -305,6 +306,7 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starSc
 
 
 def test_BelieverUnit_settle_believer_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFundsToPartnerUnits_scenario0():
+    # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
     yao_str = "Yao"
     sue_believerunit.add_partnerunit(yao_str)

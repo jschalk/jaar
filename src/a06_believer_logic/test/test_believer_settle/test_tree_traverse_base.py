@@ -691,6 +691,8 @@ def test_BelieverUnit_settle_believer_Sets_planroot_factheir_With_range_factheir
     # WHEN
     with pytest_raises(Exception) as excinfo:
         yao_believer.settle_believer()
+
+    # THEN
     exception_str = f"Cannot have fact for range inheritor '{tue_rope}'. A ranged fact plan must have _begin, _close"
     assert str(excinfo.value) == exception_str
 

@@ -110,8 +110,13 @@ def temp_excel_file() -> Path:
 
 
 def test_upsert_sheet_CreatesNewFile(temp_excel_file, sample_dataframe):
+    # ESTABLISH
     """Test creating a new Excel file with a specified sheet."""
+
+    # WHEN
     upsert_sheet(temp_excel_file, "Sheet1", sample_dataframe)
+
+    # THEN
     assert os_path_exists(temp_excel_file)
 
     # Verify the content of the sheet
@@ -291,6 +296,7 @@ def test_split_excel_into_dirs_CreatesFilesWhenColumnIsValid(
     # WHEN
     split_excel_into_dirs(sample_excel_file, dst_dir, "Dimen", x_filename, "sheet5")
 
+    # THEN
     # Verify files are created for each unique value in "Dimen"
     assert os_path_exists(a_file_path)
     assert os_path_exists(b_file_path)
@@ -415,10 +421,10 @@ def test_set_dataframe_first_two_columns_Scenario0_BasicFunctionality():
     # ESTABLISH a DataFrame with three columns
     df = DataFrame({"A": [1, 2, 3], "B": [4, 5, 6], "C": [7, 8, 9]})
 
-    # When we set the first and second columns to specific values
+    # WHEN we set the first and second columns to specific values
     updated_df = set_dataframe_first_two_columns(df, 100, 200)
 
-    # Then the first and second columns should reflect the new values
+    # THEN the first and second columns should reflect the new values
     assert (updated_df["A"] == 100).all(), "First column values are incorrect."
     assert (updated_df["B"] == 200).all(), "Second column values are incorrect."
 
@@ -427,10 +433,10 @@ def test_set_dataframe_first_two_columns_Scenario1_TwoColumns():
     # ESTABLISH a DataFrame with exactly two columns
     df = DataFrame({"A": [0, 0], "B": [0, 0]})
 
-    # When we set the first and second columns to specific values
+    # WHEN we set the first and second columns to specific values
     updated_df = set_dataframe_first_two_columns(df, -1, -2)
 
-    # Then the first and second columns should reflect the new values
+    # THEN the first and second columns should reflect the new values
     assert (
         updated_df["A"] == -1
     ).all(), "First column values are incorrect for two columns."
@@ -443,10 +449,10 @@ def test_set_dataframe_first_two_columns_Scenario2_MoreThanTwoColumns():
     # ESTABLISH a DataFrame with more than two columns
     df = DataFrame({"A": [1], "B": [2], "C": [3], "D": [4]})
 
-    # When we set the first and second columns to specific values
+    # WHEN we set the first and second columns to specific values
     updated_df = set_dataframe_first_two_columns(df, 999, 888)
 
-    # Then the first and second columns should reflect the new values
+    # THEN the first and second columns should reflect the new values
     assert (
         updated_df["A"] == 999
     ).all(), "First column values are incorrect for multiple columns."
@@ -459,10 +465,10 @@ def test_set_dataframe_first_two_columns_Scenario3_EmptyDataframe():
     # ESTABLISH an empty DataFrame with two columns
     df = DataFrame({"A": [], "B": []})
 
-    # When we set the first and second columns to specific values
+    # WHEN we set the first and second columns to specific values
     updated_df = set_dataframe_first_two_columns(df, 42, 43)
 
-    # Then the DataFrame should remain empty
+    # THEN the DataFrame should remain empty
     assert updated_df.empty, "Empty DataFrame should remain empty."
 
 
@@ -470,8 +476,8 @@ def test_set_dataframe_first_two_columns_Scenario4_LessThanTwoColumns():
     # ESTABLISH a DataFrame with less than two columns
     df = DataFrame({"A": [1, 2, 3]})
 
-    # When we attempt to set the first and second columns
-    # Then a ValueError should be raised
+    # WHEN we attempt to set the first and second columns
+    # THEN a ValueError should be raised
     with pytest_raises(ValueError, match="DataFrame must have at least two columns."):
         set_dataframe_first_two_columns(df, 10, 20)
 
@@ -480,10 +486,10 @@ def test_check_dataframe_column_names_ScenarioCorrectColumnNames():
     # ESTABLISH a DataFrame with the correct first two column names
     df = DataFrame({"A": [1, 2, 3], "B": [4, 5, 6]})
 
-    # When we check the first two column names
+    # WHEN we check the first two column names
     result = check_dataframe_column_names(df, "A", "B")
 
-    # Then the result should be True
+    # THEN the result should be True
     assert result == True, "Expected True when column names match."
 
 
@@ -491,10 +497,10 @@ def test_check_dataframe_column_names_ScenarioIncorrectColumnNames():
     # ESTABLISH a DataFrame with incorrect first two column names
     df = DataFrame({"X": [1, 2, 3], "Y": [4, 5, 6]})
 
-    # When we check the first two column names
+    # WHEN we check the first two column names
     result = check_dataframe_column_names(df, "A", "B")
 
-    # Then the result should be False
+    # THEN the result should be False
     assert result == False, "Expected False when column names do not match."
 
 
@@ -502,10 +508,10 @@ def test_check_dataframe_column_names_ScenarioPartialColumnMatch():
     # ESTABLISH a DataFrame where only the first column matches
     df = DataFrame({"A": [1, 2, 3], "Y": [4, 5, 6]})
 
-    # When we check the first two column names
+    # WHEN we check the first two column names
     result = check_dataframe_column_names(df, "A", "B")
 
-    # Then the result should be False
+    # THEN the result should be False
     assert result == False, "Expected False when only one column name matches."
 
 
@@ -513,8 +519,8 @@ def test_check_dataframe_column_names_ScenarioLessThanTwoColumns():
     # ESTABLISH a DataFrame with less than two columns
     df = DataFrame({"A": [1, 2, 3]})
 
-    # When we check the first two column names
-    # Then a ValueError should be raised
+    # WHEN we check the first two column names
+    # THEN a ValueError should be raised
     with pytest_raises(ValueError, match="DataFrame must have at least two columns."):
         check_dataframe_column_names(df, "A", "B")
 

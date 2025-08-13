@@ -276,7 +276,7 @@ def test_BelieverUnit_del_last_pack_id_SetsAttr():
     # WHEN
     sue_believer.del_last_pack_id()
 
-    # WHEN
+    # THEN
     assert sue_believer.last_pack_id is None
 
 
@@ -306,6 +306,8 @@ def test_BelieverUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
     new_fund_pool = 13.5
     with pytest_raises(Exception) as excinfo:
         zia_believer.set_fund_pool(new_fund_pool)
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"Believer '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_iota '{zia_believer.fund_iota}'"

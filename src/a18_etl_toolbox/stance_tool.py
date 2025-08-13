@@ -40,7 +40,8 @@ SELECT
 FROM {pidtitl_s_vld_tablename} pidtitl
 JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidtitl.face_name
 ORDER BY 
-  pidtitl.face_name
+  event_int
+, pidtitl.face_name
 , pidtitl.otx_title
 , pidtitl.inx_title
 , pidcore.otx_knot

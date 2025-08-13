@@ -16,8 +16,7 @@ def test_get_default_kpi_bundle_ReturnsObj():
 
 
 def test_get_all_kpi_functions_ReturnsObj():
-    # ESTABLISH: Check if all_kpi_set is defined
-
+    # ESTABLISH / WHEN / THEN: Check if all_kpi_set is defined
     assert get_all_kpi_functions() is not None, "all_kpi_set should be defined"
     assert len(get_all_kpi_functions()) == 1
     assert get_all_kpi_functions() == {
@@ -26,8 +25,7 @@ def test_get_all_kpi_functions_ReturnsObj():
 
 
 def test_get_bundles_config_ReturnsObj():
-    # ESTABLISH: Check if bundles_config is defined
-
+    # ESTABLISH / WHEN / THEN: Check if bundles_config is defined
     assert get_bundles_config() is not None, "bundles_config should be defined"
     assert len(get_bundles_config()) == 1
     assert get_bundles_config() == {

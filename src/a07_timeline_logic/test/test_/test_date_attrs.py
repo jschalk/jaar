@@ -308,7 +308,11 @@ def check_creg_timeline_attr(x_believer: BelieverUnit, x_datetime: datetime):
 def test_check_creg_timeline():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
+
+    # WHEN
     sue_believer = add_time_creg_planunit(sue_believer)
+
+    # THEN
     check_creg_timeline_attr(sue_believer, datetime(2000, 3, 1, 0, 21))
     check_creg_timeline_attr(sue_believer, datetime(2000, 3, 1, 3, 21))
     check_creg_timeline_attr(sue_believer, datetime(2000, 3, 1, 12, 00))
