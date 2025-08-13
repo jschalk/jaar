@@ -284,6 +284,52 @@ def get_docstring(file_path: str, function_name: str) -> str:
     )
 
 
+def check_if_test_ReturnsObj_pytests_exist(
+    path_funcs: set, module_desc: str, test_path_func_names: set[str]
+):
+    for path_func in path_funcs:
+        pytest_for_func_exists = False
+        # print(f"{module_desc} {path_func}")
+        expected_test_func = f"test_{path_func}_ReturnsObj"
+        for test_path_func_name in test_path_func_names:
+            if test_path_func_name.startswith(expected_test_func):
+                pytest_for_func_exists = True
+            # print(
+            #     f"{pytest_for_func_exists} {module_desc} {path_func} {test_path_func_name}"
+            # )
+        assert pytest_for_func_exists, f"missing {expected_test_func=}"
+        # print(f"{module_desc} {test_func_exists} {path_func}")
+
+
+def check_if_test_HasDocString_pytests_exist(
+    path_funcs: set, module_desc: str, test_path_func_names: set[str]
+):
+    for path_func in path_funcs:
+        pytest_for_func_exists = False
+        # print(f"{module_desc} {path_func}")
+        expected_test_func = f"test_{path_func}_HasDocString"
+        for test_path_func_name in test_path_func_names:
+            if test_path_func_name.startswith(expected_test_func):
+                pytest_for_func_exists = True
+            # print(
+            #     f"{pytest_for_func_exists} {module_desc} {path_func} {test_path_func_name}"
+            # )
+        assert pytest_for_func_exists, f"missing {expected_test_func=}"
+        # print(f"{module_desc} {test_func_exists} {path_func}")
+
+
+def check_all_test_functions_have_proper_naming_format(all_test_function_names: set):
+    for test_function_name in sorted(list(all_test_function_names)):
+        test_function_name = str(test_function_name)
+        failed_assertion_str = f"test function {test_function_name} is not named well"
+        if test_function_name.lower().endswith("_exists"):
+            assert test_function_name.endswith("_Exists"), failed_assertion_str
+        if test_function_name.lower().find("returnsobj") > 0:
+            assert test_function_name.find("ReturnsObj") > 0, failed_assertion_str
+        assert test_function_name.lower().find("correctly") <= 0, failed_assertion_str
+        assert test_function_name.lower().find("returnobj") <= 0, failed_assertion_str
+
+
 def check_all_test_functions_are_formatted(
     all_test_functions: dict[str, str],
 ):
