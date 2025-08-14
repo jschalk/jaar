@@ -54,12 +54,15 @@ def test_PartnerUnit_set_membership_RaisesErrorIf_group_titleIsPartnerNameAndNot
     bob_str = "Bob"
     bob_membership = membership_shop(bob_str)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         yao_partnerunit.set_membership(bob_membership)
-    assert (
-        str(excinfo.value)
-        == f"PartnerUnit with partner_name='{yao_str}' cannot have link to '{bob_str}'."
+
+    # THEN
+    assertion_fail_str = (
+        f"PartnerUnit with partner_name='{yao_str}' cannot have link to '{bob_str}'."
     )
+    assert str(excinfo.value) == assertion_fail_str
 
 
 def test_PartnerUnit_get_membership_ReturnsObj():

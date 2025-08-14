@@ -97,7 +97,7 @@ def test_PartnerUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
 
 
 def test_partnerunit_shop_SetsAttributes():
-    # WHEN
+    # ESTABLISH
     yao_str = "Yao"
 
     # WHEN

@@ -8,6 +8,7 @@ from src.a13_believer_listen_logic.listen_main import (
 
 
 def test_allocate_irrational_partner_debt_points_SetsBelieverAttr():
+    # ESTABLISH
     yao_str = "Yao"
     zia_str = "Zia"
     zia_partner_cred_points = 47

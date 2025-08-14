@@ -95,7 +95,7 @@ def test_BelieverAtom_get_value_ReturnsObj_Scenario0():
 
 
 def test_BelieverAtom_is_jvalues_valid_ReturnsBoolean():
-    # WHEN
+    # ESTABLISH / WHEN
     partnerunit_str = believer_partnerunit_str()
     bob_insert_believeratom = believeratom_shop(partnerunit_str, crud_str=INSERT_str())
     assert bob_insert_believeratom.is_jvalues_valid()
@@ -120,6 +120,7 @@ def test_BelieverAtom_is_jvalues_valid_ReturnsBoolean():
 
 
 def test_BelieverAtom_is_valid_ReturnsBoolean_PartnerUnit_INSERT():
+    # ESTABLISH
     bob_str = "Bob"
     bob_partner_cred_points = 55
     bob_partner_debt_points = 66
@@ -205,6 +206,7 @@ def test_BelieverAtom_get_value_ReturnsObj_Scenario1():
 
 
 def test_BelieverAtom_is_valid_ReturnsBoolean_PartnerUnit_DELETE():
+    # ESTABLISH
     bob_str = "Bob"
     partnerunit_str = believer_partnerunit_str()
     delete_str = DELETE_str()

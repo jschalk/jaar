@@ -345,7 +345,7 @@ def test_CaseUnitUnit_is_range_or_segregate_ReturnsBool():
 
 
 def test_CaseUnitUnit_get_case_status_Returns_active_Boolean():
-    # WHEN assumes fact is in lineage
+    # ESTABLISH / WHEN assumes fact is in lineage
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_case = caseunit_shop(reason_state=wk_rope)
@@ -388,7 +388,7 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     # WHEN
     case_2.set_status(x_factheir=believer_fact_2)
 
-    # ESTABLISH
+    # THEN
     assert case_2._status is False
 
 
@@ -616,7 +616,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjNotNull():
     wed_case = caseunit_shop(reason_state=wed_rope)
     wed_case._status = True
 
-    # ESTABLISH
+    # WHEN
     factheir = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
 
     # THEN
@@ -733,7 +733,7 @@ def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
     assert wk_case._status
 
 
-def test_CaseUnit_get_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
+def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -757,7 +757,7 @@ def test_CaseUnit_get_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_get_dict_ReturnsDictWithreason_lowerAndreason_upper():
+def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -774,7 +774,7 @@ def test_CaseUnit_get_dict_ReturnsDictWithreason_lowerAndreason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_get_dict_ReturnsDictWithOnlyRopeTerm():
+def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)
@@ -899,6 +899,7 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
     )
     new_case_x = caseunit_shop(reason_state=new_seasons_rope)
 
+    # THEN
     assert new_cases_x.get(new_seasons_rope) == new_case_x
     assert new_cases_x.get(old_seasons_rope) is None
 
@@ -923,5 +924,6 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
     )
     new_caseunit = caseunit_shop(reason_state=new_seasons_rope)
 
+    # THEN
     assert new_case_ropes.get(new_seasons_rope) == new_caseunit
     assert new_case_ropes.get(old_seasons_rope) is None

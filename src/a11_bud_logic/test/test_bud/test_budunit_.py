@@ -133,7 +133,7 @@ def test_BudUnit_del_bud_partner_net_SetsAttr():
     assert yao_budunit.bud_partner_net_exists(sue_str) is False
 
 
-def test_BudUnit_get_dict_ReturnsObj():
+def test_BudUnit_to_dict_ReturnsObj():
     # ESTABLISH
     t4_bud_time = 4
     t4_quota = 55
@@ -209,7 +209,7 @@ def test_BudUnit_calc_magnitude_SetsAttr_Scenario3_RaisesError():
     assert str(excinfo.value) == exception_str
 
 
-def test_BudUnit_get_dict_ReturnsObjWith_bud_partner_net():
+def test_BudUnit_to_dict_ReturnsObjWith_bud_partner_net():
     # ESTABLISH
     t4_bud_time = 4
     t4_quota = 55

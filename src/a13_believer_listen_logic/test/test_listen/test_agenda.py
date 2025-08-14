@@ -18,10 +18,10 @@ def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         listen_to_speaker_agenda(yao_believerunit, zia_believerunit)
-    assert (
-        str(excinfo.value)
-        == f"listener '{yao_str}' believer is assumed to have {zia_believerunit.believer_name} partnerunit."
-    )
+
+    # THEN
+    assertion_fail_str = f"listener '{yao_str}' believer is assumed to have {zia_believerunit.believer_name} partnerunit."
+    assert str(excinfo.value) == assertion_fail_str
 
 
 def test_listen_to_speaker_agenda_ReturnsEqualBeliever():

@@ -1058,6 +1058,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
         reason_plan_active_requisite=after_medical_reason_active_requisite,
     )
 
+    # WHEN
     sue_believerdelta = believerdelta_shop()
     sue_believerdelta.add_all_different_believeratoms(
         before_sue_believer, after_sue_believer
@@ -1072,6 +1073,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
         medical_rope,
     ]
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
+
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
     assert ball_believeratom.get_value("reason_context") == medical_rope
     assert (

@@ -43,21 +43,6 @@ def test_partyunit_shop_ReturnsObj_Scenario0_WithParameters():
     assert x_partyunit.solo == bob_solo_bool
 
 
-def test_PartyUnit_get_dict_ReturnsObj():
-    # ESTABLISH
-    bob_str = "Bob"
-    bob_solo_bool = True
-    x_partyunit = partyunit_shop(bob_str, solo=bob_solo_bool)
-
-    # WHEN
-    party_dict = x_partyunit.get_dict()
-
-    # THEN
-    assert party_dict
-    assert party_dict.get(party_title_str()) == bob_str
-    assert party_dict.get(solo_str()) == bob_solo_bool
-
-
 def test_partyunit_shop_ReturnsObj_Scenario1_WithParametersNot():
     # ESTABLISH
     bob_str = "Bob"
@@ -172,22 +157,6 @@ def test_create_laborunit_ReturnsObj():
     assert len(swim_laborunit._partys) == 1
     expected_partys = {swim_party_title: partyunit_shop(swim_party_title)}
     assert swim_laborunit._partys == expected_partys
-
-
-def test_LaborUnit_get_dict_ReturnsDictWithSingle_partyunit():
-    # ESTABLISH
-    bob_party_title = GroupTitle("Bob")
-    x_partys = {bob_party_title: bob_party_title}
-    x_laborunit = laborunit_shop(_partys=x_partys)
-
-    # WHEN
-    obj_dict = x_laborunit.to_dict()
-
-    # THEN
-    assert obj_dict is not None
-    example_dict = {"_partys": [bob_party_title]}
-    print(f"{example_dict=}")
-    assert obj_dict == example_dict
 
 
 def test_LaborUnit_partyunit_exists_ReturnsObj():

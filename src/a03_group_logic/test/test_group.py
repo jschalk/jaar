@@ -146,10 +146,10 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_title_IsWrong()
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         iowa_groupunit.set_membership(yao_ohio_membership)
-    assert (
-        str(excinfo.value)
-        == f"GroupUnit.group_title={iowa_str} cannot set membership.group_title={ohio_str}"
+    exception_str = (
+        f"GroupUnit.group_title={iowa_str} cannot set membership.group_title={ohio_str}"
     )
+    assert str(excinfo.value) == exception_str
 
 
 def test_GroupUnit_set_membership_RaisesErrorIf_partner_name_IsNone():
@@ -159,9 +159,12 @@ def test_GroupUnit_set_membership_RaisesErrorIf_partner_name_IsNone():
     yao_ohio_membership = membership_shop(ohio_str)
     assert yao_ohio_membership.partner_name is None
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         ohio_groupunit.set_membership(yao_ohio_membership)
-    assert (
-        str(excinfo.value)
-        == f"membership group_title={ohio_str} cannot be set when _partner_name is None."
+
+    # THEN
+    exception_str = (
+        f"membership group_title={ohio_str} cannot be set when _partner_name is None."
     )
+    assert str(excinfo.value) == exception_str

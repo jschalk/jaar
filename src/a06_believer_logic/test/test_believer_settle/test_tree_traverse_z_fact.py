@@ -91,6 +91,8 @@ def test_BelieverUnit_settle_believer_RaisesErrorIfNon_RangeRootHasFactUnit():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         zia_believer.settle_believer()
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"Cannot have fact for range inheritor '{sweep_rope}'. A ranged fact plan must have _begin, _close"

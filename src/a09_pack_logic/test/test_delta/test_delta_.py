@@ -92,6 +92,8 @@ def test_BelieverDelta_set_believeratom_RaisesErrorWhen_is_valid_IsFalse():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         ex1_believerdelta.set_believeratom(believer_star_believeratom)
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"""'{x_dimen}' UPDATE BelieverAtom is invalid
@@ -435,6 +437,7 @@ def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_sc
 
 def test_believer_built_from_delta_is_valid_ReturnsObjEstablishWithNoBeliever_scenario2():
     # sourcery skip: extract-duplicate-method
+    # ESTABLISH
     sue_believerdelta = believerdelta_shop()
     dimen = believer_partnerunit_str()
     # WHEN

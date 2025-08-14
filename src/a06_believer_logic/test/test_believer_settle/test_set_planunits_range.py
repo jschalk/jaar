@@ -33,7 +33,7 @@ def test_BelieverUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_ca
     root_plan = yao_believer.get_plan_obj(root_rope)
     assert not root_plan._gogo_calc
 
-    # WHEM
+    # WHEN
     yao_believer._set_plantree_range_attrs()
 
     # THEN

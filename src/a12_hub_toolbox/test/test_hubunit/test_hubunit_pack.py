@@ -66,6 +66,7 @@ def test_HubUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 
 def test_HubUnit_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
+    # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     two_int = 2
@@ -98,6 +99,7 @@ def test_HubUnit_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
 def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_atoms_dir_IsWrong(
     env_dir_setup_cleanup,
 ):
+    # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     x_pack_id = 6
@@ -123,6 +125,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_atoms_dir_IsWrong(
 def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
     env_dir_setup_cleanup,
 ):
+    # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     x_pack_id = 6
@@ -148,6 +151,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_packs_dir_IsWrong(
 def test_HubUnit_save_pack_file_RaisesErrorIfPackUnit_believer_name_IsWrong(
     env_dir_setup_cleanup,
 ):
+    # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     x_pack_id = 6
@@ -204,6 +208,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIf_replace_IsFalse(
 def test_HubUnit_validate_packunit_ReturnsObjWithAttributesFixed(
     env_dir_setup_cleanup,
 ):
+    # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     two_int = 2

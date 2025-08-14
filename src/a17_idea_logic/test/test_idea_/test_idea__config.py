@@ -518,6 +518,7 @@ def test_get_allowed_curds_ReturnsObj():
 
 
 def test_idea_config_path_ReturnsObj_Idea() -> str:
+    # ESTABLISH / WHEN / THEN
     src_dir = create_path(os_getcwd(), "src")
     module_dir = create_path(src_dir, "a17_idea_logic")
     assert idea_config_path() == create_path(module_dir, "idea_config.json")

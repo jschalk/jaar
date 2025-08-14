@@ -131,7 +131,7 @@ def test_FactUnit_set_attr_SetsAttr_2():
     assert wk_fact.fact_upper == 65
 
 
-def test_FactUnit_get_dict_ReturnsDict():
+def test_FactUnit_to_dict_ReturnsDict():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -161,7 +161,7 @@ def test_FactUnit_get_dict_ReturnsDict():
     assert fact_dict == static_dict
 
 
-def test_FactUnit_get_dict_ReturnsPartialDict():
+def test_FactUnit_to_dict_ReturnsPartialDict():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)

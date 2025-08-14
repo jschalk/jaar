@@ -8,6 +8,7 @@ from src.a02_finance_logic.test._util.a02_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert knot_str() == "knot"
     assert fund_pool_str() == "fund_pool"
     assert fund_iota_str() == "fund_iota"

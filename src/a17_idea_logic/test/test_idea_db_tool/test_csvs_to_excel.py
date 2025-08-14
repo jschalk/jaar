@@ -90,6 +90,7 @@ def test_prettify_excel(env_dir_setup_cleanup):
 
 
 def test_update_event_int_in_excel_files(env_dir_setup_cleanup):
+    # ESTABLISH
     # Setup: Create test directory and Excel file
     temp_dir = get_module_temp_dir()
     file_path = os_path_join(temp_dir, "example_stance.xlsx")
@@ -101,9 +102,11 @@ def test_update_event_int_in_excel_files(env_dir_setup_cleanup):
         df1.to_excel(writer, sheet_name="Sheet1", index=False)
         df2.to_excel(writer, sheet_name="Sheet2", index=False)
 
+    # WHEN
     # Apply function
     update_event_int_in_excel_files(temp_dir, 42)
 
+    # THEN
     # Reload the file and verify that event_int column exists and is correct
     result = pandas_read_excel(file_path, sheet_name=None)
 

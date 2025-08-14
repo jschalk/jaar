@@ -64,6 +64,7 @@ def rebuild_format_jsons(x_rebuild_format_jsons: bool):
 
 
 def test_idea_brick_formats_MarkdownFileExists():
+    # ESTABLISH
     # Gather lines here
     doc_main_dir = "docs"
     doc_ideas_dir = Path(f"{doc_main_dir}/a17_idea_brick_formats")
@@ -71,6 +72,8 @@ def test_idea_brick_formats_MarkdownFileExists():
 
     manifest_lines = []
     idea_formats_dir = Path(get_idea_formats_dir())
+
+    # WHEN
     for json_path in sorted(idea_formats_dir.glob("*.json")):
         data = json_loads(json_path.read_text())
         # print(f"{data=}")
@@ -102,6 +105,8 @@ def test_idea_brick_formats_MarkdownFileExists():
     dst_path = Path(f"{doc_main_dir}/idea_brick_formats.md")
     dst_path.parent.mkdir(parents=True, exist_ok=True)
     dst_path.write_text("# Idea Manifest\n\n" + "\n".join(manifest_lines))
+
+    # THEN
     assert dst_path.exists(), f"Failed to write manifest to {dst_path}"
 
     assertion_fail_str = f"Expected {len(get_idea_numbers())} idea files, found {count_files(doc_ideas_dir)}"

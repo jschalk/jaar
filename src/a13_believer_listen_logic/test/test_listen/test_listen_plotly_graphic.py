@@ -21,4 +21,6 @@ def test_listen_structures0_ShowsGraphs(graphics_bool):
 def test_fund_graph_ShowsGraph(graphics_bool):
     # ESTABLISH / WHEN
     x_believerunit = get_fund_breakdown_believer()
+
+    # THEN
     fund_graph0(x_believerunit, "Chore", graphics_bool)

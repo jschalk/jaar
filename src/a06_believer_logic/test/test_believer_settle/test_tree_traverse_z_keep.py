@@ -117,6 +117,8 @@ def test_BelieverUnit_settle_believer_RaisesErrorWhenKeepIsLevelBelowProblem():
     # WHEN
     with pytest_raises(Exception) as excinfo:
         sue_believer.settle_believer(keep_exceptions=True)
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"PlanUnit '{elpaso_plan.get_plan_rope()}' cannot sponsor ancestor keeps."

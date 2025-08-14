@@ -77,6 +77,7 @@ def test_cregtime_planunit_ReturnsObj():
 
 
 def test_creg_weekday_planunits_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert creg_weekday_planunits().get(get_wed()).gogo_want == 0
     assert creg_weekday_planunits().get(get_thu()).gogo_want == 1440
     assert creg_weekday_planunits().get(get_fri()).gogo_want == 2880
@@ -830,6 +831,7 @@ def test_add_time_five_planunit_SetsAttr_Scenario0_AddsMultiple_timelines():
 
 
 def test_get_creg_min_from_dt_ReturnsObj():
+    # ESTABLISH / WHEN /THEN
     assert get_creg_min_from_dt(datetime(1938, 11, 10))
     assert get_creg_min_from_dt(datetime(1, 1, 1)) == 440640
     assert get_creg_min_from_dt(datetime(1, 1, 2)) == 440640 + 1440

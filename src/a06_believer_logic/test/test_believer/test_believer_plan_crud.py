@@ -324,6 +324,8 @@ def test_BelieverUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenDeleted():
 
 
 def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
+    # ESTABLISH / WHEN / THEN
+    # TODO: break up this test function into smaller easier to understand test functions
     sue_believer = get_believerunit_with_4_levels()
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -498,6 +500,7 @@ def test_BelieverUnit_set_plan_MustReorderKidsDictToBeAlphabetical():
 
 
 def test_BelieverUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveParent():
+    # ESTABLISH
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
@@ -519,6 +522,7 @@ def test_BelieverUnit_set_plan_adoptee_RaisesErrorIfAdopteePlanDoesNotHaveParent
 
 
 def test_BelieverUnit_set_plan_adoptee_AddsAdoptee():
+    # ESTABLISH
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
@@ -556,6 +560,7 @@ def test_BelieverUnit_set_plan_adoptee_AddsAdoptee():
 
 
 def test_BelieverUnit_set_plan_bundling_SetsNewParentWithstarEqualToSumOfAdoptedPlans():
+    # ESTABLISH
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)
@@ -604,6 +609,7 @@ def test_BelieverUnit_set_plan_bundling_SetsNewParentWithstarEqualToSumOfAdopted
 
 
 def test_BelieverUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalState():
+    # ESTABLISH
     bob_believer = believerunit_shop("Bob")
     sports_str = "sports"
     sports_rope = bob_believer.make_l1_rope(sports_str)

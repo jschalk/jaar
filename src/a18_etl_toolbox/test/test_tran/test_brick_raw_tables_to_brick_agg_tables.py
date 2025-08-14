@@ -248,7 +248,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
 
-        # WHEN
+        # WHEN / THEN
         assert get_max_brick_agg_event_int(cursor) == 1
 
 

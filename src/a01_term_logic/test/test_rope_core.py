@@ -60,6 +60,7 @@ def test_to_rope_ReturnsObj_WithParameter_knot():
 
 
 def test_get_default_central_label_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert get_default_central_label() == "YY"
     assert get_default_central_label().is_label(default_knot_if_None())
 
@@ -150,7 +151,7 @@ def test_rope_create_rope_ReturnsObj_Scenario5():
 
 
 def test_rope_is_sub_rope_ReturnsObj_Scenario0_WhenNone_default_knot_if_None():
-    # WHEN
+    # ESTABLISH / WHEN
     casa_str = "casa"
     casa_rope = f"{root_rope()}{default_knot_if_None()}{casa_str}"
     cleaning_str = "cleaning"
@@ -167,7 +168,7 @@ def test_rope_is_sub_rope_ReturnsObj_Scenario0_WhenNone_default_knot_if_None():
 
 
 def test_rope_is_sub_rope_ReturnsObj_Scenario1_WhenNone_default_knot_if_None():
-    # WHEN
+    # ESTABLISH / WHEN
     casa_str = "casa"
     slash_str = "/"
     casa_rope = f"{root_rope()}{slash_str}{casa_str}"
@@ -435,6 +436,7 @@ def test_rope_get_forefather_ropes_ReturnsAncestorRopeTermsWithoutClean():
 
 
 def test_rope_get_default_central_label_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert get_default_central_label() == "YY"
 
 
@@ -575,6 +577,8 @@ def test_validate_labelterm_RaisesErrorWhenNotLabelTerm():
     comma_str = ","
     with pytest_raises(Exception) as excinfo:
         bob_str == validate_labelterm(bob_str, x_knot=comma_str)
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{comma_str}'"
@@ -595,6 +599,8 @@ def test_validate_labelterm_RaisesErrorWhenLabelTerm():
         bob_str == validate_labelterm(
             bob_str, x_knot=comma_str, not_labelterm_required=True
         )
+
+    # THEN
     assert (
         str(excinfo.value)
         == f"'{bob_str}' needs to not be a LabelTerm. Must contain knot: '{comma_str}'"
@@ -626,6 +632,7 @@ def test_ropeterm_valid_dir_path_ReturnsObj_complicated_knot():
     lap_rope = create_rope(run_rope, lap_str, knot=question_str)
     assert lap_rope == f"{sport_rope}{run_str}?{lap_str}?"
 
+    # WHEN / THEN
     assert ropeterm_valid_dir_path(sport_rope, knot=question_str)
     assert ropeterm_valid_dir_path(run_rope, knot=question_str)
     assert ropeterm_valid_dir_path(lap_rope, knot=question_str)
@@ -646,6 +653,7 @@ def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
     lap_rope = create_rope(run_rope, lap_str, knot=question_str)
     assert lap_rope == f"{sport_rope}{run_str}?{lap_str}?"
 
+    # WHEN / THEN
     assert ropeterm_valid_dir_path(sport_rope, knot=question_str)
     assert ropeterm_valid_dir_path(run_rope, knot=question_str) is False
     assert ropeterm_valid_dir_path(lap_rope, knot=question_str) is False
@@ -653,6 +661,7 @@ def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
 
 
 def test_all_ropeterms_between_ReturnsObj_Scenario0_Default_knot():
+    # ESTABLISH
     casa_str = "casa"
     sport_str = "sport"
     run_str = "run/swim"
@@ -661,6 +670,7 @@ def test_all_ropeterms_between_ReturnsObj_Scenario0_Default_knot():
     run_rope = create_rope(sport_rope, run_str)
     lap_rope = create_rope(run_rope, lap_str)
 
+    # WHEN / THEN
     assert all_ropeterms_between(sport_rope, sport_rope) == [sport_rope]
     assert all_ropeterms_between(sport_rope, run_rope) == [sport_rope, run_rope]
     assert all_ropeterms_between(sport_rope, lap_rope) == [
@@ -671,6 +681,7 @@ def test_all_ropeterms_between_ReturnsObj_Scenario0_Default_knot():
 
 
 def test_all_ropeterms_between_ReturnsObj_Scenario1_NonDefault_knot():
+    # ESTABLISH
     casa_str = "casa"
     sport_str = "sport"
     run_str = "run,swim"
@@ -680,6 +691,7 @@ def test_all_ropeterms_between_ReturnsObj_Scenario1_NonDefault_knot():
     run_rope = create_rope(sport_rope, run_str, knot=slash_str)
     lap_rope = create_rope(run_rope, lap_str, knot=slash_str)
 
+    # WHEN / THEN
     assert all_ropeterms_between(sport_rope, sport_rope, slash_str) == [sport_rope]
     assert all_ropeterms_between(sport_rope, run_rope, slash_str) == [
         sport_rope,

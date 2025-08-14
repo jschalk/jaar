@@ -17,6 +17,7 @@ from src.a04_reason_logic.test._util.a04_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert _active_str() == "_active"
     assert _status_str() == "_status"
     assert _chore_str() == "_chore"

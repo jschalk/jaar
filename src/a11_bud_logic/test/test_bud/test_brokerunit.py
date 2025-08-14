@@ -205,7 +205,7 @@ def test_BrokerUnit_get_headers_ReturnsObj():
     assert sue_headers_list == [believer_name_str(), bud_time_str(), quota_str()]
 
 
-def test_BrokerUnit_get_dict_ReturnsObj_Scenario0():
+def test_BrokerUnit_to_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_brokerunit = brokerunit_shop(sue_str)

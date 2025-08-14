@@ -47,18 +47,24 @@ def test_create_path_ReturnsObj(env_dir_setup_cleanup):
 
 
 def test_is_subdirectory_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
     env_dir = get_module_temp_dir()
     sub = os_path_join(env_dir, "subdir")
+
+    # WHEN / THEN
     assert is_subdirectory(sub, env_dir)
     assert is_subdirectory(env_dir, sub) is False
     assert is_subdirectory(env_dir, env_dir)
 
 
 def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
     env_dir = get_module_temp_dir()
     level1 = os_path_join(env_dir, "level1")
     level2 = os_path_join(level1, "level2")
     expected_path = str(pathlib_Path(level1).resolve())
+
+    # WHEN / THEN
     assert get_immediate_subdir(env_dir, level1) == expected_path
     assert get_immediate_subdir(env_dir, level2) == expected_path
     assert get_immediate_subdir(env_dir, level2) == expected_path
@@ -444,7 +450,7 @@ def test_get_integer_filenames_GrabsFileNamesWith_IntegersGreaterThan_min_intege
     save_file(env_dir, txt1_filename, x_file_str)
     save_file(env_dir, txt3_filename, x_file_str)
 
-    # WHEN
+    # WHEN / THEN
     assert get_integer_filenames(env_dir, 2) == {2, 3}
     assert get_integer_filenames(env_dir, 0, "txt") == {1, 3}
 

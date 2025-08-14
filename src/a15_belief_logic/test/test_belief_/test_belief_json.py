@@ -33,7 +33,7 @@ from src.a15_belief_logic.test._util.a15_str import (
 )
 
 
-def test_BeliefUnit_get_dict_ReturnsObjWith_paybook():
+def test_BeliefUnit_to_dict_ReturnsObjWith_paybook():
     # ESTABLISH
     belief_mstr_dir = create_path(get_module_temp_dir(), "temp1")
     a45_str = "amy45"
@@ -92,7 +92,7 @@ def test_BeliefUnit_get_dict_ReturnsObjWith_paybook():
     }
 
 
-def test_BeliefUnit_get_dict_ReturnsObjWithOut_paybook():
+def test_BeliefUnit_to_dict_ReturnsObjWithOut_paybook():
     # ESTABLISH
     amy45_str = "amy45"
     amy_belief = beliefunit_shop(amy45_str, get_module_temp_dir())

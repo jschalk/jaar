@@ -304,6 +304,7 @@ def test_get_from_nested_dict_RaisesNestedException():
 
 
 def test_get_from_nested_dict_ReturnsNoneWhen_if_missing_return_None_True():
+    # ESTABLISH
     y_dict = {}
     sports_str = "sports"
     run_str = "running"
@@ -921,6 +922,7 @@ def test_get_max_key_ReturnsObj_Scenario0_Empty():
 
 
 def test_get_max_key_ReturnsObj_Scenario1_Simple():
+    # ESTABLISH
     x_dict = {
         (1, "b", 3, "z"): 2.5,
         (1, "a", 2, "x"): 3.4,
@@ -931,6 +933,7 @@ def test_get_max_key_ReturnsObj_Scenario1_Simple():
 
 
 def test_get_max_key_ReturnsObj_Scenario2_TupleOrdering():
+    # ESTABLISH
     x_dict = {
         (1, "b", 3, "z"): 2.5,
         (2, "a", 1, "y"): 3.4,
@@ -942,37 +945,60 @@ def test_get_max_key_ReturnsObj_Scenario2_TupleOrdering():
 
 
 def test_change_nested_key_Scenario0():
+    # ESTABLISH
     d = {"a": {"b": {"c": 123}}}
     expected = {"a": {"b": {"new_c": 123}}}
+
+    # WHEN
     result = change_nested_key(copy_deepcopy(d), ["a", "b", "c"], "new_c")
+
+    # THEN
     assert result == expected
 
 
 def test_change_nested_key_Scenario1():
+    # ESTABLISH
     d = {"old": "value"}
     expected = {"new": "value"}
+
+    # WHEN
     result = change_nested_key(copy_deepcopy(d), ["old"], "new")
+
+    # THEN
     assert result == expected
 
 
 def test_change_nested_key_Scenario2():
+    # ESTABLISH
     d = {"a": {"b": {"c": 123}}}
     original = copy_deepcopy(d)
+
+    # WHEN
     result = change_nested_key(d, ["a", "b", "missing_key"], "new_key")
-    # Should be unchanged
+
+    # THEN Should be unchanged
     assert result == original
 
 
 def test_change_nested_key_Scenario3():
+    # ESTABLISH
     d = {"x": {"y": {"z": {"target": "val"}}}}
     expected = {"x": {"y": {"z": {"renamed": "val"}}}}
+
+    # WHEN
     result = change_nested_key(copy_deepcopy(d), ["x", "y", "z", "target"], "renamed")
+
+    # THEN
     assert result == expected
 
 
 def test_change_nested_key_Scenario4():
+    # ESTABLISH
     d = {"a": {"b": 123}}
     original = copy_deepcopy(d)
+
+    # WHEN
     result = change_nested_key(d, ["a", "b", "c"], "d")
-    # Should not raise error, but should not modify
+
+    # THEN Should not raise error, but should not modify
     assert result == original

@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardlink_shop
-from src.a03_group_logic.labor import laborunit_shop
+from src.a03_group_logic.labor import laborunit_shop, partyunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -18,7 +18,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 )
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_large_json():
     # ESTABLISH
     yao_believer = believerunit_v001()
     hr_number_str = "hr_number"
@@ -79,7 +79,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario1_large_json():
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_planroot_laborunit():
     # ESTABLISH
     run_str = "runners"
     sue_believer = believerunit_shop("Sue")
@@ -99,12 +99,13 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario2_planroot_laborunit():
 
     # THEN
     assert planroot_dict["laborunit"] == x_laborunit.to_dict()
-    assert planroot_dict["laborunit"] == {"_partys": [run_str]}
+    run_partyunit = partyunit_shop(run_str)
+    assert planroot_dict["laborunit"] == {"_partys": {run_str: run_partyunit.to_dict()}}
     assert planroot_dict.get("gogo_want") == x_gogo_want
     assert planroot_dict.get("stop_want") == x_stop_want
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -125,7 +126,7 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     assert planroot_dict["healerlink"] == run_healerlink.to_dict()
 
 
-def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -151,7 +152,8 @@ def test_BelieverUnit_get_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
 
     labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
-    assert labor_dict_x == {"_partys": [run_str]}
+    run_partyunit = partyunit_shop(run_str)
+    assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
 
 
 def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():

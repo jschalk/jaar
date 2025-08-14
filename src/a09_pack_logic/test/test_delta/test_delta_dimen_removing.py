@@ -29,6 +29,8 @@ def test_BelieverDelta_get_dimens_cruds_believerdelta_ReturnsObjWithCorrectDimen
 
     dimen_set = [believer_partnerunit_str()]
     curd_set = {INSERT_str()}
+
+    # WHEN
     new_believerdelta = get_dimens_cruds_believerdelta(
         old_believerdelta, dimen_set, curd_set
     )

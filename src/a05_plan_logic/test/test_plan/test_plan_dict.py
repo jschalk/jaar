@@ -64,7 +64,7 @@ def test_get_obj_from_plan_dict_Returns_HealerLink():
     assert get_obj_from_plan_dict(planunit_dict, healerlink_key) == static_healerlink
 
 
-def test_PlanUnit_get_dict_ReturnsCompleteDict():
+def test_PlanUnit_to_dict_ReturnsCompleteDict():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -124,7 +124,9 @@ def test_PlanUnit_get_dict_ReturnsCompleteDict():
     }
     sue_str = "Sue"
     yao_str = "Yao"
-    sue_laborunit = laborunit_shop({sue_str: -1, yao_str: -1})
+    sue_laborunit = laborunit_shop()
+    sue_laborunit.add_partyunit(sue_str)
+    sue_laborunit.add_partyunit(yao_str)
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -197,7 +199,7 @@ def test_PlanUnit_get_dict_ReturnsCompleteDict():
     assert len(casa_dict["factunits"]) == len(casa_plan.get_factunits_dict())
 
 
-def test_PlanUnit_get_dict_ReturnsDictWithoutEmptyAttributes():
+def test_PlanUnit_to_dict_ReturnsDictWithoutEmptyAttributes():
     # ESTABLISH
     casa_plan = planunit_shop()
 
@@ -209,7 +211,7 @@ def test_PlanUnit_get_dict_ReturnsDictWithoutEmptyAttributes():
     assert casa_dict == {"star": 1}
 
 
-def test_PlanUnit_get_dict_ReturnsDictWith_attrs_SetToTrue():
+def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_plan._is_expanded = False
@@ -248,7 +250,7 @@ def test_PlanUnit_get_dict_ReturnsDictWith_attrs_SetToTrue():
     assert casa_dict.get("_kids") is not None
 
 
-def test_PlanUnit_get_dict_ReturnsDictWithAttrsEmpty():
+def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     # ESTABLISH
     casa_plan = planunit_shop()
     assert casa_plan._is_expanded

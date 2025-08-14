@@ -102,10 +102,11 @@ def test_C400Constants_Exists():
     assert x_c400_constants.year_length == "x7"
 
 
-def test_get_c400_constantss_ReturnsObj():
+def test_get_c400_constants_ReturnsObj():
     # ESTABLISH / WHEN
     x_c400_constants = get_c400_constants()
 
+    # THEN
     assert x_c400_constants.day_length == 1440
     assert x_c400_constants.c400_leap_length == 210379680
     assert x_c400_constants.c400_clean_length == 210378240
@@ -520,7 +521,7 @@ def test_timelineunit_shop_ReturnsObj_Scenario2_timeline_label_Missing():
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
 
 
-def test_TimeLineUnit_get_dict_ReturnsObj():
+def test_TimeLineUnit_to_dict_ReturnsObj():
     # ESTABLISH
     x_timelineunit = timelineunit_shop()
 

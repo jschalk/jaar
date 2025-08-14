@@ -113,6 +113,7 @@ def test_believer_plan_reasonunit_get_obj_ReturnsObj():
 
 
 def test_believer_plan_reason_caseunit_get_obj_ReturnsObj():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
@@ -255,6 +256,7 @@ def test_believer_get_obj_ReturnsObj_believer_plan_reasonunit_get_obj():
 
 
 def test_believer_get_obj_ReturnsObj_believer_plan_reason_caseunit_get_obj():
+    # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)

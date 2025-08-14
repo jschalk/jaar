@@ -396,6 +396,7 @@ VALUES (
     # WHEN
     a23_beliefunit = beliefunit_get_from_dict(a23_dict)
 
+    # THEN
     assert a23_beliefunit.belief_label == a23_str
     assert a23_beliefunit.timeline.timeline_label == a23_timeline_label
     assert a23_beliefunit.timeline.c400_number == a23_c400_number

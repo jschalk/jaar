@@ -152,6 +152,8 @@ def test_BelieverUnit_edit_partner_RaiseExceptionWhenPartnerDoesNotExist():
         yao_believer.edit_partnerunit(
             zia_str, partner_cred_points=zia_partner_cred_points
         )
+
+    # THEN
     assert str(excinfo.value) == f"PartnerUnit '{zia_str}' does not exist."
 
 

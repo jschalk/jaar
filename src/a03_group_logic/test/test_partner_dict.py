@@ -46,7 +46,7 @@ def test_PartnerUnit_get_memberships_dict_ReturnsObj():
     }
 
 
-def test_PartnerUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_PartnerUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bob_str = "Bob"
     bob_partnerunit = partnerunit_shop(bob_str)
@@ -88,7 +88,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWithNecessaryDataForJSON():
     }
 
 
-def test_PartnerUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
+def test_PartnerUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
     # ESTABLISH
     bob_str = "Bob"
     bob_partnerunit = partnerunit_shop(bob_str)
@@ -148,7 +148,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWithAllAttrDataForJSON():
     }
 
 
-def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_ValuesIsZero():
+def test_PartnerUnit_to_dict_ReturnsDictWith__irrational_partner_debt_points_ValuesIsZero():
     # ESTABLISH
     bob_str = "Bob"
     bob_partnerunit = partnerunit_shop(bob_str)
@@ -166,7 +166,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_Va
     assert len(x_dict.keys()) == 10
 
 
-def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_ValuesIsNumber():
+def test_PartnerUnit_to_dict_ReturnsDictWith__irrational_partner_debt_points_ValuesIsNumber():
     # ESTABLISH
     bob_str = "Bob"
     bob_partnerunit = partnerunit_shop(bob_str)
@@ -196,7 +196,7 @@ def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_Va
     assert len(x_dict.keys()) == 12
 
 
-def test_PartnerUnit_get_dict_ReturnsDictWith__irrational_partner_debt_points_ValuesIsNone():
+def test_PartnerUnit_to_dict_ReturnsDictWith__irrational_partner_debt_points_ValuesIsNone():
     # ESTABLISH
     bob_str = "Bob"
     bob_partnerunit = partnerunit_shop(bob_str)

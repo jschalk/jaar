@@ -37,6 +37,7 @@ from src.a06_believer_logic.test._util.a06_str import (
 
 
 def test_str_functions_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert _keeps_buildable_str() == "_keeps_buildable"
     assert _keeps_justified_str() == "_keeps_justified"
     assert _offtrack_fund_str() == "_offtrack_fund"

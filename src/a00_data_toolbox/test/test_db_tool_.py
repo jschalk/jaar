@@ -37,6 +37,7 @@ from src.a00_data_toolbox.test._util.a00_env import (
 
 
 def test_sqlite_obj_str_ReturnsObj():
+    # ESTABLISH / WHEN / THEN
     assert sqlite_obj_str(True, "TEXT") == """'TRUE'"""
     assert sqlite_obj_str(False, "TEXT") == """'FALSE'"""
     assert sqlite_obj_str(True, "INTEGER") == "1"
@@ -115,7 +116,7 @@ VALUES (
 
 
 def test_RowData_Exists():
-    # WHEN
+    # ESTABLISH / WHEN
     x_rowdata = RowData()
 
     # THEN
@@ -457,14 +458,16 @@ def test_insert_csv_ChangesNotCommitted(
     # ESTABLISH
     test_tablename = get_example_test_tablename()
     csv_path = save_test_csv_file()
+
+    # WHEN
     with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         cursor.execute(get_create_test_table_sqlstr())
 
         insert_csv(csv_path, cursor, test_tablename)
 
+    # THEN
     # reopen the connection to verify persistence
-
     test_database7_path = create_path(get_module_temp_dir(), "test_database7.db")
     with sqlite3_connect(test_database7_path) as conn2:
         cursor2 = conn2.cursor()
@@ -586,6 +589,7 @@ def test_table_exists_ReturnsObjWhenPassedCusorObj():
 
 
 def test_sqlite_version():
+    # ESTABLISH
     # Retrieve the SQLite version
     sqlite_version = sqlite3_sqlite_version
 
@@ -593,12 +597,16 @@ def test_sqlite_version():
     print(f"SQLite version being used: {sqlite_version}")
 
     # Check if the version meets requirements (example: 3.30.0 or later)
+    # WHEN
     major, minor, patch = map(int, sqlite_version.split("."))
     sqlite_old_message = f"SQLite version is too old: {sqlite_version}"
+
+    # THEN
     assert (major, minor, patch) >= (3, 30, 0), sqlite_old_message
 
 
 def test_get_table_columns_ReturnsObj_Scenario0_TableDoesNotExist():
+    # ESTABLISH
     x_tablename = "some_dark_side_table"
     with sqlite3_connect(":memory:") as conn:
         assert db_table_exists(conn, x_tablename) is False

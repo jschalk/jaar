@@ -54,7 +54,8 @@ def test_casestatusfinder_shop_ReturnsObj():
     assert x_pbsd.fact_upper_full == x_fact_upper_full
 
 
-def test_CaseStatusFinder_check_attr_RaisesError():
+def test_CaseStatusFinder_check_attr_RaisesError_Scenario0():
+    # ESTABLISH / WHEN
     with pytest_raises(Exception) as excinfo_1:
         casestatusfinder_shop(
             reason_lower=1,
@@ -63,10 +64,17 @@ def test_CaseStatusFinder_check_attr_RaisesError():
             fact_lower_full=1,
             fact_upper_full=1,
         )
+
+    # THEN
     assert str(excinfo_1.value) == "No parameter can be None"
 
+
+def test_CaseStatusFinder_check_attr_RaisesError_Scenario1():
+    # ESTABLISH
     x_fact_lower_full = 2
     x_fact_upper_full = 1
+
+    # WHEN
     with pytest_raises(Exception) as excinfo_2:
         casestatusfinder_shop(
             reason_lower=1,
@@ -75,12 +83,17 @@ def test_CaseStatusFinder_check_attr_RaisesError():
             fact_lower_full=x_fact_lower_full,
             fact_upper_full=x_fact_upper_full,
         )
-    assert (
-        str(excinfo_2.value)
-        == f"self.fact_lower_full={x_fact_lower_full} cannot be greater than self.fact_upper_full={x_fact_upper_full}"
-    )
 
+    # THEN
+    assertion_fail_str = f"self.fact_lower_full={x_fact_lower_full} cannot be greater than self.fact_upper_full={x_fact_upper_full}"
+    assert str(excinfo_2.value) == assertion_fail_str
+
+
+def test_CaseStatusFinder_check_attr_RaisesError_Scenario2():
+    # ESTABLISH
     x_reason_divisor = -1
+
+    # WHEN
     with pytest_raises(Exception) as excinfo_3:
         casestatusfinder_shop(
             reason_lower=1,
@@ -89,13 +102,20 @@ def test_CaseStatusFinder_check_attr_RaisesError():
             fact_lower_full=1,
             fact_upper_full=1,
         )
-    assert (
-        str(excinfo_3.value)
-        == f"self.reason_divisor={x_reason_divisor} cannot be less/equal to zero"
-    )
 
+    # THEN
+    assertion_fail_str = (
+        f"self.reason_divisor={x_reason_divisor} cannot be less/equal to zero"
+    )
+    assert str(excinfo_3.value) == assertion_fail_str
+
+
+def test_CaseStatusFinder_check_attr_RaisesError_Scenario3():
+    # ESTABLISH
     x_reason_divisor = 1
     x_reason_lower = -1
+
+    # WHEN
     with pytest_raises(Exception) as excinfo_4:
         casestatusfinder_shop(
             reason_lower=x_reason_lower,
@@ -104,12 +124,18 @@ def test_CaseStatusFinder_check_attr_RaisesError():
             fact_lower_full=1,
             fact_upper_full=1,
         )
-    assert (
-        str(excinfo_4.value)
-        == f"self.reason_lower={x_reason_lower} cannot be less than zero or greater than self.reason_divisor={x_reason_divisor}"
-    )
 
+    # THEN
+    assertion_fail_str = f"self.reason_lower={x_reason_lower} cannot be less than zero or greater than self.reason_divisor={x_reason_divisor}"
+    assert str(excinfo_4.value) == assertion_fail_str
+
+
+def test_CaseStatusFinder_check_attr_RaisesError_Scenario4():
+    # ESTABLISH
+    x_reason_divisor = 1
     x_reason_upper = 2
+
+    # WHEN
     with pytest_raises(Exception) as excinfo_5:
         casestatusfinder_shop(
             reason_lower=1,
@@ -118,10 +144,10 @@ def test_CaseStatusFinder_check_attr_RaisesError():
             fact_lower_full=1,
             fact_upper_full=1,
         )
-    assert (
-        str(excinfo_5.value)
-        == f"self.reason_upper={x_reason_upper} cannot be less than zero or greater than self.reason_divisor={x_reason_divisor}"
-    )
+
+    # THEN
+    assertion_fail_str = f"self.reason_upper={x_reason_upper} cannot be less than zero or greater than self.reason_divisor={x_reason_divisor}"
+    assert str(excinfo_5.value) == assertion_fail_str
 
 
 def test_CaseStatusFinder_AbbrevationMethodsReturnsObjs():
@@ -290,6 +316,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
 
 
 def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
+    # ESTABLISH / WHEN / THEN
     """Check scenarios CaseUnit._active. Plotly graph can be used to identify problems."""
     # # Scenario A
     assert casestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()

@@ -16,6 +16,7 @@ from src.a06_believer_logic.test._util.example_believers import (
 
 
 def test_display_plantree_Scenario0(graphics_bool):
+    # ESTABLISH
     # a_believer = get_1label_believer()
     # a_believer = get_2label_believer()
     # a_believer = get_3label_believer()
@@ -31,6 +32,7 @@ def test_display_plantree_Scenario0(graphics_bool):
 
 
 def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
+    # ESTABLISH
     # a_believer = get_1label_believer()
     # a_believer = get_2label_believer()
     # a_believer = get_3label_believer()

@@ -32,7 +32,7 @@ def _get_rid_of_pidgin_core_keys(map_dict: dict) -> dict:
     return map_dict
 
 
-def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
+def test_PidginUnit_to_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
@@ -58,7 +58,7 @@ def test_PidginUnit_get_dict_ReturnsObj_Scenario0():
     assert sue_dict.get("ropemap") == _get_rid_of_pidgin_core_keys(sue_ropemap)
 
 
-def test_PidginUnit_get_dict_ReturnsObj_Scenario1():
+def test_PidginUnit_to_dict_ReturnsObj_Scenario1():
     # ESTABLISH
     sue_str = "Sue"
     x_unknown_str = "UnknownTerm"

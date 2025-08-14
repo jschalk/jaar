@@ -455,7 +455,7 @@ def test_get_calendarmarkdown_str_ReturnsObj_Scenario1_display_init_day_Paramete
 
 
 def test_get_calendarmarkdown_str_ReturnsObj_Scenario2_AllDefaults():
-    # ESTABLIS
+    # ESTABLISH
     creg_config = get_default_timeline_config_dict()
     year = 0
     expected_creg_year0_markdow = get_expected_creg_year0_markdown()

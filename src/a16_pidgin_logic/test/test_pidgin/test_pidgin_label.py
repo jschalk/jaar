@@ -299,7 +299,7 @@ def test_LabelMap_reveal_inx_ReturnsObjAndSetsAttr_label():
     assert x_labelmap.otx_exists(climb_otx) is False
 
 
-def test_LabelMap_get_dict_ReturnsObj():
+def test_LabelMap_to_dict_ReturnsObj():
     # ESTABLISH
     clean_otx = "clean"
     clean_inx = "propre"
@@ -354,8 +354,8 @@ def test_LabelMap_get_json_ReturnsObj():
   "{otx_knot_str()}": "{x_labelmap.otx_knot}",
   "{unknown_str_str()}": "{x_labelmap.unknown_str}"
 }}"""
-    print(f"           {x1_rope_map_json=}")
-    print(f"{x_labelmap.get_json()=}")
+    # print(f"           {x1_rope_map_json=}")
+    # print(f"{x_labelmap.get_json()=}")
     assert x_labelmap.get_json() == x1_rope_map_json
 
     # WHEN
@@ -488,6 +488,7 @@ def test_inherit_labelmap_ReturnsObj_Scenario0():
     zia_str = "Zia"
     old_labelmap = labelmap_shop(zia_str, 3)
     new_labelmap = labelmap_shop(zia_str, 5)
+
     # WHEN
     inherit_labelmap(new_labelmap, old_labelmap)
 
@@ -503,8 +504,11 @@ def test_inherit_labelmap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot(
     old_labelmap = labelmap_shop(sue_str, 0, otx_knot=slash_otx_knot)
     new_labelmap = labelmap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_labelmap(new_labelmap, old_labelmap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -515,8 +519,11 @@ def test_inherit_labelmap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot(
     old_labelmap = labelmap_shop(sue_str, 0, inx_knot=slash_otx_knot)
     new_labelmap = labelmap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_labelmap(new_labelmap, old_labelmap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -527,8 +534,11 @@ def test_inherit_labelmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown
     old_labelmap = labelmap_shop(sue_str, 0, unknown_str=x_unknown_str)
     new_labelmap = labelmap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_labelmap(new_labelmap, old_labelmap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -539,8 +549,11 @@ def test_inherit_labelmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_na
     old_labelmap = labelmap_shop(sue_str, 0)
     new_labelmap = labelmap_shop(bob_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_labelmap(new_labelmap, old_labelmap)
+
+    # THEN
     assert str(excinfo.value) == "Core attributes in conflict"
 
 
@@ -550,8 +563,11 @@ def test_inherit_labelmap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder
     old_labelmap = labelmap_shop(sue_str, 5)
     new_labelmap = labelmap_shop(sue_str, 1)
 
+    # WHEN
     with pytest_raises(Exception) as excinfo:
         inherit_labelmap(new_labelmap, old_labelmap)
+
+    # THEN
     assert str(excinfo.value) == "older mapunit is not older"
 
 

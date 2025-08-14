@@ -2,21 +2,18 @@ from ast import (
     FunctionDef as ast_FunctionDef,
     ImportFrom as ast_ImportFrom,
     get_docstring as ast_get_docstring,
+    get_source_segment as ast_get_source_segment,
     parse as ast_parse,
     walk as ast_walk,
 )
-import inspect
 from os import walk as os_walk
-from os.path import (
-    basename as os_path_basename,
-    join as os_path_join,
-    splitext as os_path_splitext,
-)
+from os.path import join as os_path_join
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_dir_filenames,
     get_level1_dirs,
 )
+from textwrap import dedent as textwrap_dedent
 
 
 def get_imports_from_file(file_path):
@@ -91,15 +88,38 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
     return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
 
 
-def get_top_level_functions(file_path) -> list[str]:
-    with open(file_path, "r") as f:
-        tree = ast_parse(f.read(), filename=file_path)
+def get_top_level_functions(file_path) -> dict[str, str]:
+    with open(file_path, "r", encoding="utf-8") as f:
+        source_code = f.read()
 
-    functions = []
-    functions.extend(
-        node.name for node in tree.body if isinstance(node, ast_FunctionDef)
-    )
+    tree = ast_parse(source_code)
+    functions = {}
+
+    for node in tree.body:
+        if isinstance(node, ast_FunctionDef):
+            # Get the function name
+            func_name = node.name
+
+            # Extract the exact source text of the function
+            # (ast.get_source_segment is available in Python 3.8+)
+            func_source = ast_get_source_segment(source_code, node)
+
+            # Optional: dedent to remove extra indentation
+            if func_source:
+                func_source = textwrap_dedent(func_source)
+
+            functions[func_name] = func_source
+
     return functions
+
+    # with open(file_path, "r") as f:
+    #     tree = ast_parse(f.read(), filename=file_path)
+
+    # functions = []
+    # functions.extend(
+    #     node.name for node in tree.body if isinstance(node, ast_FunctionDef)
+    # )
+    # return functions
 
 
 def get_module_descs() -> dict[str, str]:
@@ -262,3 +282,15 @@ def get_docstring(file_path: str, function_name: str) -> str:
         ),
         None,
     )
+
+
+def check_all_test_functions_are_formatted(
+    all_test_functions: dict[str, str],
+):
+    for test_function_str in all_test_functions.values():
+        establish_str_exists = test_function_str.find("ESTABLISH") > -1
+        when_str_exists = test_function_str.find("WHEN") > -1
+        then_str_exists = test_function_str.find("THEN") > -1
+        assert (
+            establish_str_exists and when_str_exists and then_str_exists
+        ), f"'ESTABLISH'/'WHEN'/'THEN' missing from {test_function_str[:300]}"
