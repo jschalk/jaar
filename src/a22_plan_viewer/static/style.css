@@ -1,0 +1,28 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+h1 {
+    color: #333;
+}
+
+.controls {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.tree-display {
+    font-family: monospace;
+    line-height: 1.4;
+}
+
+.tree-display small {
+    color: #666;
+}
+
+.tree-display div {
+    margin: 2px 0;
+}
