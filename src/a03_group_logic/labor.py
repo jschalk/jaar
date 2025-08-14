@@ -50,7 +50,7 @@ class LaborUnit:
         }
         return {"_partys": partys_dict}
 
-    def add_partyunit(self, party_title: GroupTitle, solo: bool = None):
+    def add_party(self, party_title: GroupTitle, solo: bool = None):
         self._partys[party_title] = partyunit_shop(party_title, solo)
 
     def partyunit_exists(self, party_title: GroupTitle):
@@ -72,7 +72,7 @@ def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
     x_laborunit = laborunit_shop()
     partys_dict = laborunit_dict.get("_partys")
     for party_dict in partys_dict.values():
-        x_laborunit.add_partyunit(
+        x_laborunit.add_party(
             party_title=party_dict.get("party_title"), solo=party_dict.get("solo")
         )
     return x_laborunit

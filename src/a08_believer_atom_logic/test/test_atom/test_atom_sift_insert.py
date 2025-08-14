@@ -253,14 +253,14 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_partyunit():
     assert sift_believeratom(sue_believer, clean_swim_atom)
 
     # WHEN
-    sue_believer.get_plan_obj(casa_rope).laborunit.add_partyunit(swim_str)
+    sue_believer.get_plan_obj(casa_rope).laborunit.add_party(swim_str)
 
     # THEN
     assert not sift_believeratom(sue_believer, casa_swim_atom)
     assert sift_believeratom(sue_believer, clean_swim_atom)
 
     # WHEN
-    sue_believer.get_plan_obj(clean_rope).laborunit.add_partyunit(swim_str)
+    sue_believer.get_plan_obj(clean_rope).laborunit.add_party(swim_str)
     # THEN
     assert not sift_believeratom(sue_believer, casa_swim_atom)
     assert not sift_believeratom(sue_believer, clean_swim_atom)

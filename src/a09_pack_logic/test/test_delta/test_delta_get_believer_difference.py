@@ -1197,7 +1197,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.laborunit.add_partyunit(xio_str)
+    after_ball_planunit.laborunit.add_party(xio_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -1231,7 +1231,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_rope = before_sue_believer.make_rope(sports_rope, ball_str)
     before_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_believer.get_plan_obj(ball_rope)
-    before_ball_planunit.laborunit.add_partyunit(xio_str)
+    before_ball_planunit.laborunit.add_party(xio_str)
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
@@ -1427,7 +1427,7 @@ def test_BelieverDelta_add_all_believeratoms_Creates_BelieverAtoms():
     ball_rope = after_sue_believer.make_rope(sports_rope, ball_str)
     after_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.laborunit.add_partyunit(xio_str)
+    after_ball_planunit.laborunit.add_party(xio_str)
 
     before_sue_believer = believerunit_shop(sue_str)
     sue1_believerdelta = believerdelta_shop()

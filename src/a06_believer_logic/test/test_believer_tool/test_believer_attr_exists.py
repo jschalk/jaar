@@ -270,7 +270,7 @@ def test_believer_plan_partyunit_exists_ReturnsObj():
     assert not believer_plan_partyunit_exists(sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.laborunit.add_partyunit(swim_str)
+    sue_believer.planroot.laborunit.add_party(swim_str)
 
     # THEN
     assert not believer_plan_partyunit_exists(sue_believer, {})
@@ -575,7 +575,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_partyunit():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.laborunit.add_partyunit(swim_str)
+    sue_believer.planroot.laborunit.add_party(swim_str)
 
     # THEN
     assert not believer_attr_exists(x_dimen, sue_believer, {})

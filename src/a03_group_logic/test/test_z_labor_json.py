@@ -90,8 +90,8 @@ def test_laborunit_get_from_dict_ReturnsObj_Scenario0():
     xio_str = "Xio"
     run_str = ";runners"
     expected_laborunit = laborunit_shop()
-    expected_laborunit.add_partyunit(run_str, True)
-    expected_laborunit.add_partyunit(xio_str, False)
+    expected_laborunit.add_party(run_str, True)
+    expected_laborunit.add_party(xio_str, False)
     run_partyunit = expected_laborunit.get_partyunit(run_str)
     xio_partyunit = expected_laborunit.get_partyunit(xio_str)
     src_laborunit_dict = {

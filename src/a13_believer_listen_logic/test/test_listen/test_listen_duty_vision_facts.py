@@ -85,7 +85,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     zia_vision = get_example_zia_speaker()
     zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
-    clean_planunit.laborunit.add_partyunit(yao_str)
+    clean_planunit.laborunit.add_party(yao_str)
     sue_texas_hubunit.save_vision_believer(zia_vision)
 
     new_yao_vision = create_listen_basis(yao_duty)
@@ -314,7 +314,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBelieversSpeak
 #         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
 #     )
 #     sweep_plan = sue_speaker.get_plan_obj(sweep_rope)
-#     sweep_plan.laborunit.add_partyunit(yao_str)
+#     sweep_plan.laborunit.add_party(yao_str)
 
 #     sue_texas_hubunit = get_texas_hubunit()
 #     sue_texas_hubunit.save_vision_believer(sue_str, sue_speaker.get_json(), True)

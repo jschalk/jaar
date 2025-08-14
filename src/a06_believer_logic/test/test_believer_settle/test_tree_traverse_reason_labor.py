@@ -13,7 +13,7 @@ def test_BelieverUnit_edit_plan_attr_SetsLaborUnit():
     run_plan = xio_believer.get_plan_obj(run_rope)
     sue_str = "Sue"
     sue_laborunit = laborunit_shop()
-    sue_laborunit.add_partyunit(sue_str)
+    sue_laborunit.add_party(sue_str)
     assert run_plan.laborunit == laborunit_shop()
 
     # WHEN
@@ -27,7 +27,7 @@ def test_BelieverUnit_settle_believer_Sets_planroot_laborheirFrom_planroot_labor
     # ESTABLISH
     sue_str = "Sue"
     sue_laborunit = laborunit_shop()
-    sue_laborunit.add_partyunit(sue_str)
+    sue_laborunit.add_party(sue_str)
     yao_believer = believerunit_shop("Yao")
     root_rope = to_rope(yao_believer.belief_label)
     yao_believer.edit_plan_attr(root_rope, laborunit=sue_laborunit)
@@ -95,7 +95,7 @@ def test_BelieverUnit_settle_believer_Set_grandchild_plan_laborheir_From_plankid
     four_rope = sue_believer.make_rope(morn_rope, four_str)
     x_laborunit = laborunit_shop()
     swimmers_str = ";swimmers"
-    x_laborunit.add_partyunit(party_title=swimmers_str)
+    x_laborunit.add_party(party_title=swimmers_str)
 
     yao_str = "Yao"
     sue_believer.add_partnerunit(yao_str)
@@ -137,7 +137,7 @@ def test_BelieverUnit_settle_believer_Set_grandchild_plan_laborheir_From_plankid
     swimmers_laborunit = laborunit_shop()
     swimmers_str = ";swimmers"
     swimmers_solo_bool = True
-    swimmers_laborunit.add_partyunit(swimmers_str, solo=swimmers_solo_bool)
+    swimmers_laborunit.add_party(swimmers_str, solo=swimmers_solo_bool)
 
     yao_str = "Yao"
     sue_believer.add_partnerunit(yao_str)
@@ -189,8 +189,8 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CleansPlan_Laborunit():
         planunit_shop(swim_str), parent_rope=sue1_believer.belief_label
     )
     swim_laborunit = laborunit_shop()
-    swim_laborunit.add_partyunit(party_title=xia_str)
-    swim_laborunit.add_partyunit(party_title=zoa_str)
+    swim_laborunit.add_party(party_title=xia_str)
+    swim_laborunit.add_party(party_title=zoa_str)
     sue1_believer.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_believer_swim_plan = sue1_believer.get_plan_obj(swim_rope)
     sue1_believer_swim_partys = sue1_believer_swim_plan.laborunit._partys
@@ -226,8 +226,8 @@ def test_BelieverUnit_set_plan_CleansPlan_awardlinks():
         planunit_shop(swim_str), parent_rope=sue1_believer.belief_label
     )
     swim_laborunit = laborunit_shop()
-    swim_laborunit.add_partyunit(party_title=xia_str)
-    swim_laborunit.add_partyunit(party_title=zoa_str)
+    swim_laborunit.add_party(party_title=xia_str)
+    swim_laborunit.add_party(party_title=zoa_str)
     sue1_believer.edit_plan_attr(swim_rope, laborunit=swim_laborunit)
     sue1_believer_swim_plan = sue1_believer.get_plan_obj(swim_rope)
     sue1_believer_swim_partys = sue1_believer_swim_plan.laborunit._partys

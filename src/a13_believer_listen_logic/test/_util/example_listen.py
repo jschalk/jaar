@@ -70,7 +70,7 @@ def get_example_zia_speaker() -> BelieverUnit:
     yao_str = "Yao"
     zia_speaker.add_partnerunit(yao_str, partner_debt_points=12)
     cook_planunit = zia_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     zia_speaker.edit_plan_attr(
         cook_rope(), reason_context=eat_rope(), reason_case=hungry_rope()
     )
@@ -89,7 +89,7 @@ def get_example_bob_speaker() -> BelieverUnit:
     yao_str = "Yao"
     bob_speaker.add_partnerunit(yao_str, partner_debt_points=12)
     cook_planunit = bob_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     bob_speaker.edit_plan_attr(
         cook_rope(), reason_context=eat_rope(), reason_case=hungry_rope()
     )
@@ -112,7 +112,7 @@ def get_example_yao_speaker() -> BelieverUnit:
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_speaker.edit_plan_attr(
         cook_rope(), reason_context=eat_rope(), reason_case=hungry_rope()
     )

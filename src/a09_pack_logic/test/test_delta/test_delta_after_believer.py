@@ -1089,7 +1089,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_p
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    before_ball_planunit.laborunit.add_partyunit(yao_str)
+    before_ball_planunit.laborunit.add_party(yao_str)
     assert before_ball_planunit.laborunit._partys != set()
     assert before_ball_planunit.laborunit.get_partyunit(yao_str) is not None
 
