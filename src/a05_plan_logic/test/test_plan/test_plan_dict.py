@@ -125,8 +125,8 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     sue_str = "Sue"
     yao_str = "Yao"
     sue_laborunit = laborunit_shop()
-    sue_laborunit.add_partyunit(sue_str)
-    sue_laborunit.add_partyunit(yao_str)
+    sue_laborunit.add_party(sue_str)
+    sue_laborunit.add_party(yao_str)
     yao_healerlink = healerlink_shop({yao_str})
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
@@ -226,7 +226,7 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     casa_plan.set_awardlink(awardlink_shop(yao_str))
 
     x_laborunit = casa_plan.laborunit
-    x_laborunit.add_partyunit(party_title=yao_str)
+    x_laborunit.add_party(party_title=yao_str)
 
     clean_str = "clean"
     casa_plan.add_kid(planunit_shop(clean_str))

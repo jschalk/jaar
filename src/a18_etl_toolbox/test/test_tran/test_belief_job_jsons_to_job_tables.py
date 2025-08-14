@@ -45,7 +45,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
     sue_laborunit = laborunit_shop()
-    sue_laborunit.add_partyunit(sue_str)
+    sue_laborunit.add_party(sue_str)
     sue_believer.edit_plan_attr(casa_rope, laborunit=sue_laborunit)
     sue_believer.add_fact(status_rope, clean_rope)
     print(f"{sue_believer.get_plan_obj(casa_rope).laborunit=}")

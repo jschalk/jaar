@@ -886,7 +886,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
     casa_laborunit = laborunit_shop()
-    casa_laborunit.add_partyunit(sue_str, True)
+    casa_laborunit.add_party(sue_str, True)
     sue_believer.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
     sue_believer.add_fact(status_rope, clean_rope)
 

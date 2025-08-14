@@ -82,8 +82,8 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Believer(
     zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.add_partyunit(yao_str)
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    clean_planunit.laborunit.add_party(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     yao_dakota_hubunit.save_vision_believer(zia_vision)
 
@@ -201,8 +201,8 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.add_partyunit(yao_str)
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    clean_planunit.laborunit.add_party(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit.save_vision_believer(zia_vision)
 
     sue_vision = believerunit_shop(sue_str)
@@ -212,7 +212,7 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     vacuum_rope = sue_vision.make_l1_rope(vacuum_str)
     sue_vision.set_l1_plan(planunit_shop(vacuum_str, task=True))
     vacuum_planunit = sue_vision.get_plan_obj(vacuum_rope)
-    vacuum_planunit.laborunit.add_partyunit(yao_str)
+    vacuum_planunit.laborunit.add_party(yao_str)
 
     egg_str = "egg first"
     egg_rope = sue_vision.make_l1_rope(egg_str)
@@ -284,8 +284,8 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelieve
     zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.add_partyunit(yao_str)
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    clean_planunit.laborunit.add_party(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     yao_dakota_hubunit.save_vision_believer(zia_vision)
 
@@ -340,8 +340,8 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBeliever_duty_AndNotBeliev
     zia_vision.add_partnerunit(yao_str, partner_debt_points=12)
     clean_planunit = zia_vision.get_plan_obj(clean_rope())
     cook_planunit = zia_vision.get_plan_obj(cook_rope())
-    clean_planunit.laborunit.add_partyunit(yao_str)
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    clean_planunit.laborunit.add_party(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit.save_vision_believer(zia_vision)
 
     # save yao with chore to visions
@@ -350,7 +350,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBeliever_duty_AndNotBeliev
     vacuum_rope = yao_old_vision.make_l1_rope(vacuum_str)
     yao_old_vision.set_l1_plan(planunit_shop(vacuum_str, task=True))
     vacuum_planunit = yao_old_vision.get_plan_obj(vacuum_rope)
-    vacuum_planunit.laborunit.add_partyunit(yao_str)
+    vacuum_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit.save_vision_believer(yao_old_vision)
 
     # WHEN

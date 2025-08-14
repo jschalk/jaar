@@ -104,6 +104,7 @@ def test_get_belief_dict_from_voice_tables_ReturnsObj_With_beliefunit_Attrs_Scen
 
 
 def test_get_belief_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenario0():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"

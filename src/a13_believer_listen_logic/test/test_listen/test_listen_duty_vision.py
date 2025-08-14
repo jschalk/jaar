@@ -124,7 +124,7 @@ def get_example_yao_vision1_speaker() -> BelieverUnit:
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
     yao_speaker.add_fact(eat_rope(), hungry_rope())
     return yao_speaker
@@ -139,7 +139,7 @@ def get_example_yao_vision2_speaker() -> BelieverUnit:
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(cook_rope())
-    cook_planunit.laborunit.add_partyunit(yao_str)
+    cook_planunit.laborunit.add_party(yao_str)
     yao_speaker.edit_reason(cook_rope(), eat_rope(), hungry_rope())
     yao_speaker.add_fact(eat_rope(), hungry_rope())
 
@@ -277,6 +277,7 @@ def get_example_yao_gut_with_3_healers():
 def test_listen_to_believer_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceItself(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     # yao0_gut with 3 debotors of different partner_cred_pointss
     # yao_vision1 with 1 chore, fact that doesn't make that chore active

@@ -120,8 +120,12 @@ def replace_csv_column_from_string(
     fieldnames = reader.fieldnames
 
     if fieldnames is None:
-        raise ValueError("csv_string cannot be parsed into columns with headers.")
-
+        snippet = input_io.getvalue()[:100]  # Show up to 100 chars of the input
+        raise ValueError(
+            f"csv_string cannot be parsed into columns with headers. "
+            f"Input length: {len(input_io.getvalue())}. "
+            f"Input snippet: {snippet!r}"
+        )
     if column_name not in fieldnames:
         raise ValueError(f"Column '{column_name}' not found in CSV headers.")
 

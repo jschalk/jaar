@@ -511,6 +511,7 @@ def g_sqlitetype(
 
 
 def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH / WHEN / THEN
     cfig = get_believer_calc_config_dict()
     # for level1_key, aspect_dict in config.items():
