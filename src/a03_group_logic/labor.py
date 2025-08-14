@@ -130,20 +130,20 @@ class LaborHeir:
         # there is no parent laborheir or parent laborheir is empty
         if parent_laborheir is None or parent_laborheir._partys == {}:
             for partyunit in laborunit._partys.values():
-                _add_party_to_partys(self._partys, partyunit)
+                _set_party_to_partys(self._partys, partyunit)
         # current laborunit is not empty and parent laborheir is empty
         elif laborunit._partys == {}:
             for parent_partyheir in parent_laborheir._partys.values():
-                _add_party_to_partys(self._partys, parent_partyheir)
+                _set_party_to_partys(self._partys, parent_partyheir)
         # current laborunit is not empty and parent laborheir is not empty
         else:
             # grab all parent heirs first
             for parent_partyheir in parent_laborheir._partys.values():
-                _add_party_to_partys(self._partys, parent_partyheir)
+                _set_party_to_partys(self._partys, parent_partyheir)
             # if it doesn't exist add current laborunit
             for partyunit in laborunit._partys.values():
                 if self._partys.get(partyunit.party_title) is None:
-                    _add_party_to_partys(self._partys, partyunit)
+                    _set_party_to_partys(self._partys, partyunit)
 
         #     # get all_partners of parent laborheir groupunits
         #     all_parent_laborheir_partners = self._get_all_partners(
@@ -164,7 +164,7 @@ class LaborHeir:
         return self.is_empty() or any(gn_x in self._partys for gn_x in party_titles)
 
 
-def _add_party_to_partys(partys: dict, x_party):
+def _set_party_to_partys(partys: dict, x_party):
     x_partyheir = partyheir_shop(party_title=x_party.party_title, solo=x_party.solo)
     partys[x_partyheir.party_title] = x_partyheir
 
