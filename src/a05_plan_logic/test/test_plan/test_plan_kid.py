@@ -16,9 +16,9 @@ def test_get_kids_in_range_GetsCorrectPlans():
     mon_plan.add_kid(planunit_shop(jan_str))
     mon_plan.add_kid(planunit_shop(feb_str))
     mon_plan.add_kid(planunit_shop(mar_str))
-    jan_plan = mon_plan._kids.get(jan_str)
-    feb_plan = mon_plan._kids.get(feb_str)
-    mar_plan = mon_plan._kids.get(mar_str)
+    jan_plan = mon_plan.get_kid(jan_str)
+    feb_plan = mon_plan.get_kid(feb_str)
+    mar_plan = mon_plan.get_kid(mar_str)
     jan_plan._gogo_calc = 0
     jan_plan._stop_calc = 31
     feb_plan._gogo_calc = 31

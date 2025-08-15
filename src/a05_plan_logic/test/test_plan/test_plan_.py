@@ -232,6 +232,7 @@ def test_planunit_shop_NonNoneParametersReturnsObj():
 
 
 def test_planunit_shop_ReturnsObjWith_awardlinks():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     biker_give_force = 12
     biker_take_force = 15
@@ -267,6 +268,31 @@ def test_planunit_shop_ReturnsObjWithParameters():
     # THEN
     assert sport_plan.gogo_want == sport_gogo_want
     assert sport_plan.stop_want == sport_stop_want
+
+
+def test_PlanUnit_get_obj_key_ReturnsInfo():
+    # ESTABLISH
+    red_str = "red"
+
+    # WHEN
+    red_plan = planunit_shop(red_str)
+
+    # THEN
+    assert red_plan.get_obj_key() == red_str
+
+
+def test_PlanUnit_set_knot_SetsAttr():
+    # ESTABLISH
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
+    casa_plan.set_parent_rope("")
+
+    # WHEN
+    slash_str = "/"
+    casa_plan.set_knot(slash_str)
+
+    # THEN
+    assert casa_plan.knot == slash_str
 
 
 def test_PlanUnit_get_obj_key_ReturnsObj():
@@ -332,7 +358,7 @@ def test_PlanUnit_add_to_descendant_task_count_AddsToCount():
     ball_str = "ball"
     ball_plan = planunit_shop(ball_str, _descendant_task_count=55)
     ball_plan.clear_descendant_task_count()
-    assert ball_plan._descendant_task_count is None
+    assert not ball_plan._descendant_task_count
 
     # WHEN
     ball_plan.add_to_descendant_task_count(44)
