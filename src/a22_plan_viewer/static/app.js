@@ -40,26 +40,36 @@ function renderTree() {
 
 // Recursively render a PlanUnit and its children
 function renderPlanUnit(planUnit, level) {
-    const indent = '&nbsp;'.repeat(level * 4);
-    const choreIndicator = planUnit.chore ? ' 🔧' : '';
+    const indent = '&nbsp;'.repeat(level * 2);
+    const taskIndicator = planUnit.task ? ' 🔧' : '';
+    // const taskIndicator = planUnit.task ? ` ${planUnit.task}` : '';
 
-    // Build award heirs HTML
-    let awardHeirsHtml = '';
-    if (planUnit.awardheirs && planUnit.awardheirs.length > 0 && !hideAwards) {
-        planUnit.awardheirs.forEach(heir => {
-            awardHeirsHtml += `<br>${indent}&nbsp;&nbsp;<small>• ${heir.awardee_title}: Credit ${heir.cred_weight}, Debt ${heir.debt_weight}</small>`;
-        });
-    }
+    // Build award links HTML using separate function
+    const awardLinksHtml = renderAwardLinks(planUnit.awardlinks, indent, hideAwards);
 
     // Start with current node
-    let html = `<div>${indent}• ${planUnit.plan_label}${choreIndicator}${awardHeirsHtml}</div>\n`;
+    let html = `<div>${indent}• ${planUnit.plan_label}${taskIndicator}${awardLinksHtml}</div>\n`;
 
     // Add children
-    if (planUnit.kids) {
-        Object.values(planUnit.kids).forEach(child => {
+    if (planUnit._kids) {
+        Object.values(planUnit._kids).forEach(child => {
             html += renderPlanUnit(child, level + 1);
         });
     }
+
+    return html;
+}
+
+// Render award links for a PlanUnit
+function renderAwardLinks(awardlinks, indent, hideAwards) {
+    if (!awardlinks || Object.keys(awardlinks).length === 0 || hideAwards) {
+        return '';
+    }
+
+    let html = '';
+    Object.values(awardlinks).forEach(link => {
+        html += `<br>${indent}&nbsp;&nbsp;<small>• ${link.awardee_title}: Take ${link.take_force}, Give ${link.give_force}</small>`;
+    });
 
     return html;
 }
