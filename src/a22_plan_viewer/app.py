@@ -1,14 +1,15 @@
 from flask import Flask, jsonify, render_template_string
 from src.a03_group_logic.group import awardlink_shop
 from src.a05_plan_logic.plan import planunit_shop
+from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
 
 app = Flask(__name__)
 
 
 # Create some sample data
 root = planunit_shop("Project Root")
-child1 = planunit_shop("Phase 1", task=True)
-child2 = planunit_shop("Phase 2")
+child1 = planunit_shop("Phasey 1", task=True)
+child2 = planunit_shop("Phasey 2")
 subchild1 = planunit_shop("Task 1.1", task=True)
 subchild2 = planunit_shop("Task- 1.2")
 
@@ -55,7 +56,8 @@ def index():
 @app.route("/api/tree")
 def get_tree():
     """API endpoint to get the tree data as JSON"""
-    return jsonify(root.to_dict())
+    # return jsonify(root.to_dict())
+    return jsonify(get_plan_view_dict(root))
 
 
 if __name__ == "__main__":
