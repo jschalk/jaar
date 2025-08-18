@@ -13,39 +13,21 @@ from src.a06_believer_logic.believer_main import (
 )
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
+    get_believerunit_laundry_example1,
     get_believerunit_reason_context_ziet_example,
     get_believerunit_x1_3levels_1reason_1facts,
 )
 
 
-def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_large_json():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario0():
     # ESTABLISH
-    yao_believer = believerunit_v001()
-    hr_number_str = "hr_number"
-    hr_number_rope = yao_believer.make_l1_rope(hr_number_str)
-    hr_number_plan = yao_believer.get_plan_obj(hr_number_rope)
-    yao_believer.add_fact(
-        fact_context=hr_number_rope,
-        fact_state=hr_number_rope,
-        fact_lower=0,
-        fact_upper=23,
-    )
-    ziet_minute = yao_believer.make_l1_rope("jour_minute")
-    yao_believer.add_fact(
-        fact_context=ziet_minute, fact_state=ziet_minute, fact_lower=0, fact_upper=1440
-    )
-    yao_str = "Yao"
+    yao_believer = get_believerunit_laundry_example1()
     yao_fund_pool = 23000
     yao_believer.fund_pool = yao_fund_pool
     yao_fund_iota = 23
     yao_believer.fund_iota = yao_fund_iota
     believer_tally = 23
     yao_believer.tally = believer_tally
-    x_credor_respect = 22
-    x_debtor_respect = 44
-    yao_believer.set_credor_respect(x_credor_respect)
-    yao_believer.set_debtor_respect(x_debtor_respect)
-    override_str = "override"
     x_last_pack_id = 77
     yao_believer.set_last_pack_id(x_last_pack_id)
 
@@ -79,7 +61,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_large_json():
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
 
-def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_planroot_laborunit():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     # ESTABLISH
     run_str = "runners"
     sue_believer = believerunit_shop("Sue")
@@ -105,7 +87,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_planroot_laborunit():
     assert planroot_dict.get("stop_want") == x_stop_want
 
 
-def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerlink():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -126,7 +108,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_With_planroot_healerlink():
     assert planroot_dict["healerlink"] == run_healerlink.to_dict()
 
 
-def test_BelieverUnit_to_dict_ReturnsObj_Scenario4_plankid_LaborUnit():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"

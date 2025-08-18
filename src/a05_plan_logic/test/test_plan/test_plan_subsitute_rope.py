@@ -123,28 +123,3 @@ def test_PlanUnit_find_replace_rope_Modifies_factunits():
     assert x_factunit is not None
     assert x_factunit.fact_context == new_water_rope
     assert x_factunit.fact_state == new_rain_rope
-
-
-def test_PlanUnit_get_obj_key_ReturnsInfo():
-    # ESTABLISH
-    red_str = "red"
-
-    # WHEN
-    red_plan = planunit_shop(red_str)
-
-    # THEN
-    assert red_plan.get_obj_key() == red_str
-
-
-def test_PlanUnit_set_knot_ModifiesReason_RopeTerms():
-    # ESTABLISH
-    casa_str = "casa"
-    casa_plan = planunit_shop(casa_str)
-    casa_plan.set_parent_rope("")
-
-    # WHEN
-    slash_str = "/"
-    casa_plan.set_knot(slash_str)
-
-    # THEN
-    assert casa_plan.knot == slash_str

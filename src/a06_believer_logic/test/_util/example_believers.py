@@ -58,6 +58,7 @@ def believerunit_v002() -> BelieverUnit:
 
 
 def get_believerunit_with_4_levels() -> BelieverUnit:
+    # sourcery skip: extract-duplicate-method
     a23_str = "amy23"
     sue_believer = believerunit_shop("Sue", a23_str)
     casa_str = "casa"
@@ -108,6 +109,7 @@ def get_believerunit_with_4_levels() -> BelieverUnit:
 
 
 def get_believerunit_with_4_levels_and_2reasons() -> BelieverUnit:
+    # sourcery skip: extract-duplicate-method
     sue_believer = get_believerunit_with_4_levels()
     wk_str = "sem_jours"
     wk_rope = sue_believer.make_l1_rope(wk_str)
@@ -271,6 +273,7 @@ def get_believerunit_reason_context_ziet_example() -> BelieverUnit:
 
 
 def get_believerunit_irrational_example() -> BelieverUnit:
+    # sourcery skip: extract-duplicate-method
     # this believer has no definitive agenda because 2 task plans are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
@@ -341,11 +344,11 @@ def get_mop_with_reason_believerunit_example1():
 
 
 def get_believerunit_laundry_example1() -> BelieverUnit:
-    amos_str = "Amos"
-    amos_believer = believerunit_shop(amos_str)
+    yao_str = "Yao"
+    yao_believer = believerunit_shop(yao_str)
     cali_str = "Cali"
-    amos_believer.add_partnerunit(amos_str)
-    amos_believer.add_partnerunit(cali_str)
+    yao_believer.add_partnerunit(yao_str)
+    yao_believer.add_partnerunit(cali_str)
 
     casa_str = "casa"
     basket_str = "laundry basket status"
@@ -355,37 +358,36 @@ def get_believerunit_laundry_example1() -> BelieverUnit:
     b_fine_str = "fine"
     b_half_str = "half full"
     do_laundry_str = "do_laundry"
-    casa_rope = amos_believer.make_l1_rope(casa_str)
-    basket_rope = amos_believer.make_rope(casa_rope, basket_str)
-    b_full_rope = amos_believer.make_rope(basket_rope, b_full_str)
-    b_smel_rope = amos_believer.make_rope(basket_rope, b_smel_str)
-    laundry_chore_rope = amos_believer.make_rope(casa_rope, do_laundry_str)
-    amos_believer.set_l1_plan(planunit_shop(casa_str))
-    amos_believer.set_plan(planunit_shop(basket_str), casa_rope)
-    amos_believer.set_plan(planunit_shop(b_full_str), basket_rope)
-    amos_believer.set_plan(planunit_shop(b_smel_str), basket_rope)
-    amos_believer.set_plan(planunit_shop(b_bare_str), basket_rope)
-    amos_believer.set_plan(planunit_shop(b_fine_str), basket_rope)
-    amos_believer.set_plan(planunit_shop(b_half_str), basket_rope)
-    amos_believer.set_plan(planunit_shop(do_laundry_str, task=True), casa_rope)
+    casa_rope = yao_believer.make_l1_rope(casa_str)
+    basket_rope = yao_believer.make_rope(casa_rope, basket_str)
+    b_full_rope = yao_believer.make_rope(basket_rope, b_full_str)
+    b_smel_rope = yao_believer.make_rope(basket_rope, b_smel_str)
+    laundry_chore_rope = yao_believer.make_rope(casa_rope, do_laundry_str)
+    yao_believer.set_l1_plan(planunit_shop(casa_str))
+    yao_believer.set_plan(planunit_shop(basket_str), casa_rope)
+    yao_believer.set_plan(planunit_shop(b_full_str), basket_rope)
+    yao_believer.set_plan(planunit_shop(b_smel_str), basket_rope)
+    yao_believer.set_plan(planunit_shop(b_bare_str), basket_rope)
+    yao_believer.set_plan(planunit_shop(b_fine_str), basket_rope)
+    yao_believer.set_plan(planunit_shop(b_half_str), basket_rope)
+    yao_believer.set_plan(planunit_shop(do_laundry_str, task=True), casa_rope)
 
     # laundry requirement
-    amos_believer.edit_plan_attr(
+    yao_believer.edit_plan_attr(
         laundry_chore_rope, reason_context=basket_rope, reason_case=b_full_rope
     )
     # laundry requirement
-    amos_believer.edit_plan_attr(
+    yao_believer.edit_plan_attr(
         laundry_chore_rope, reason_context=basket_rope, reason_case=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.add_party(cali_str)
-    amos_believer.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
-    amos_believer.add_fact(fact_context=basket_rope, fact_state=b_full_rope)
+    yao_believer.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
+    yao_believer.add_fact(fact_context=basket_rope, fact_state=b_full_rope)
 
-    return amos_believer
+    return yao_believer
 
 
-# class YR:
 def from_list_get_active(
     rope: RopeTerm, plan_dict: dict, asse_bool: bool = None
 ) -> bool:

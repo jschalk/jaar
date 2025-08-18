@@ -639,10 +639,10 @@ def test_get_nested_dict_keys_by_level_ReturnsObj():
     assert get_nested_dict_keys_by_level(x2_dict) == {0: {sue_str, bob_str}}
     x3_dict = {"swim": 155, sue_str: {}, bob_str: {}}
     assert get_nested_dict_keys_by_level(x3_dict) == {0: {sue_str, bob_str}}
-    x4_dict = {"swim": 155, sue_str: {"zia": {}}, bob_str: {"yao": {}}}
+    x4_dict = {"swim": 155, sue_str: {"zia": {}}, bob_str: {"Yao": {}}}
     assert get_nested_dict_keys_by_level(x4_dict) == {
         0: {sue_str, bob_str},
-        1: {"zia", "yao"},
+        1: {"zia", "Yao"},
     }
 
 
@@ -650,7 +650,7 @@ def test_get_nested_keys_by_level_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    yao_str = "yao"
+    yao_str = "Yao"
     swim_str = "Swim"
 
     #  WHEN / THEN
@@ -673,7 +673,7 @@ def test_get_nested_non_dict_keys_by_level_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    yao_str = "yao"
+    yao_str = "Yao"
     swim_str = "Swim"
 
     #  WHEN / THEN
@@ -696,7 +696,7 @@ def test_get_nested_non_dict_keys_list_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    yao_str = "yao"
+    yao_str = "Yao"
     swim_str = "Swim"
     run_str = "Run"
 
@@ -730,8 +730,8 @@ def test_get_nested_dict_key_by_level_ReturnsObj():
     #  WHEN / THEN
     assert get_nested_dict_key_by_level({}) == []
     assert get_nested_dict_key_by_level({"Sue": {}}) == [sue_str]
-    x4_dict = {"swim": 155, sue_str: {bob_str: {"yao": {}}}}
-    assert get_nested_dict_key_by_level(x4_dict) == [sue_str, bob_str, "yao"]
+    x4_dict = {"swim": 155, sue_str: {bob_str: {"Yao": {}}}}
+    assert get_nested_dict_key_by_level(x4_dict) == [sue_str, bob_str, "Yao"]
 
 
 def test_create_2d_array_from_dict_RaisesError_is_2d_with_unique_keys_IsFalse():

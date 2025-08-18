@@ -79,7 +79,7 @@ def test_budunit_shop_ReturnsObjWith_bud_partner_net():
 
 def test_BudUnit_set_bud_partner_net_SetsAttr():
     # ESTABLISH
-    yao_budunit = budunit_shop("yao", 33)
+    yao_budunit = budunit_shop("Yao", 33)
     assert yao_budunit._bud_partner_nets == {}
 
     # WHEN
@@ -94,7 +94,7 @@ def test_BudUnit_set_bud_partner_net_SetsAttr():
 
 def test_BudUnit_bud_partner_net_exists_ReturnsObj():
     # ESTABLISH
-    yao_budunit = budunit_shop("yao", 33)
+    yao_budunit = budunit_shop("Yao", 33)
     sue_str = "Sue"
     sue_bud_partner_net = -44
     assert yao_budunit.bud_partner_net_exists(sue_str) is False
@@ -108,7 +108,7 @@ def test_BudUnit_bud_partner_net_exists_ReturnsObj():
 
 def test_BudUnit_get_bud_partner_net_ReturnsObj():
     # ESTABLISH
-    yao_budunit = budunit_shop("yao", 33)
+    yao_budunit = budunit_shop("Yao", 33)
     sue_str = "Sue"
     sue_bud_partner_net = -44
     yao_budunit.set_bud_partner_net(sue_str, sue_bud_partner_net)
@@ -120,7 +120,7 @@ def test_BudUnit_get_bud_partner_net_ReturnsObj():
 
 def test_BudUnit_del_bud_partner_net_SetsAttr():
     # ESTABLISH
-    yao_budunit = budunit_shop("yao", 33)
+    yao_budunit = budunit_shop("Yao", 33)
     sue_str = "Sue"
     sue_bud_partner_net = -44
     yao_budunit.set_bud_partner_net(sue_str, sue_bud_partner_net)

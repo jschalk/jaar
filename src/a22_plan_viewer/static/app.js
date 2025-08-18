@@ -1,0 +1,155 @@
+// Global state
+let treeData = null;
+let show_awardlinks = false;
+let show_belief_label = false;
+let show_task = false;
+let show_active = false;
+let show_star = false;
+let show_fund_share = false;
+let show_parent_rope = false;
+let show_root_boolean = false;
+let show_uid = false;
+
+// Initialize the app when DOM loads
+document.addEventListener('DOMContentLoaded', function () {
+    const show_awardlinksCheckbox = document.getElementById('show_awardlinks');
+    const show_belief_labelCheckbox = document.getElementById('show_belief_label');
+    const show_taskCheckbox = document.getElementById('show_task');
+    const show_activeCheckbox = document.getElementById('show_active');
+    const show_starCheckbox = document.getElementById('show_star');
+    const show_fund_shareCheckbox = document.getElementById('show_fund_share');
+    const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
+    const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
+    const show_uidCheckbox = document.getElementById('show_uid');
+
+    // Set up checkbox event listener
+    show_awardlinksCheckbox.addEventListener('change', function () {
+        show_awardlinks = this.checked;
+        renderTree();
+    });
+    show_belief_labelCheckbox.addEventListener('change', function () {
+        show_belief_label = this.checked;
+        renderTree();
+    });
+    show_taskCheckbox.addEventListener('change', function () {
+        show_task = this.checked;
+        renderTree();
+    });
+    show_activeCheckbox.addEventListener('change', function () {
+        show_active = this.checked;
+        renderTree();
+    });
+    show_starCheckbox.addEventListener('change', function () {
+        show_star = this.checked;
+        renderTree();
+    });
+    show_fund_shareCheckbox.addEventListener('change', function () {
+        show_fund_share = this.checked;
+        renderTree();
+    });
+    show_parent_ropeCheckbox.addEventListener('change', function () {
+        show_parent_rope = this.checked;
+        renderTree();
+    });
+    show_root_booleanCheckbox.addEventListener('change', function () {
+        show_root_boolean = this.checked;
+        renderTree();
+    });
+    show_uidCheckbox.addEventListener('change', function () {
+        show_uid = this.checked;
+        renderTree();
+    });
+
+    // Load initial tree data
+    loadTreeData();
+});
+
+// Fetch tree data from server
+async function loadTreeData() {
+    try {
+        const response = await fetch('/api/tree');
+        treeData = await response.json();
+        renderTree();
+    } catch (error) {
+        console.error('Error loading tree data:', error);
+        document.getElementById('treeContainer').innerHTML = '<p>Error loading tree data</p>';
+    }
+}
+
+// Render the tree structure
+function renderTree() {
+    if (!treeData) {
+        return;
+    }
+
+    const container = document.getElementById('treeContainer');
+    container.innerHTML = renderPlanUnit(treeData, 0);
+}
+
+// Recursively render a PlanUnit and its children
+function renderPlanUnit(planUnit, level) {
+    const indent = '&nbsp;'.repeat(level * 2);
+    const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
+    const activeIndicator = planUnit._active && show_active ? '-ACTIVE' : '';
+    const starIndicator = planUnit.star && show_star ? ` star${planUnit.star}` : '';
+    const fund_shareIndicator = planUnit.fund_share && show_fund_share ? ` [${planUnit.fund_share}]` : '';
+    const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
+    const uidIndicator = planUnit._uid && show_uid ? ` uid${planUnit._uid}` : '';
+
+    // Build award links HTML using separate function
+    const awardLinksHtml = renderAwardLinks(planUnit.awardlinks, indent, show_awardlinks);
+    const belief_labelHtml = render_belief_label(planUnit.belief_label, planUnit.knot, show_belief_label);
+    const parent_ropeHtml = render_parent_rope(planUnit.parent_rope, indent, show_parent_rope);
+
+    // Start with current node
+    let html = `
+  <div>
+    ${indent}• 
+    ${belief_labelHtml}
+    ${planUnit.plan_label}
+    ${starIndicator}
+    ${uidIndicator}
+    ${taskIndicator}
+    ${fund_shareIndicator}
+    ${activeIndicator}
+    ${root_booleanIndicator}
+    ${parent_ropeHtml}
+    ${awardLinksHtml}
+  </div>\n
+`;
+    // Add children
+    if (planUnit._kids) {
+        Object.values(planUnit._kids).forEach(child => {
+            html += renderPlanUnit(child, level + 1);
+        });
+    }
+
+    return html;
+}
+
+// Render award links for a PlanUnit
+function renderAwardLinks(awardlinks, indent, show_awardlinks) {
+    if (!awardlinks || Object.keys(awardlinks).length === 0 || !show_awardlinks) {
+        return '';
+    }
+
+    let html = '';
+    Object.values(awardlinks).forEach(link => {
+        html += `<br>${indent}&nbsp;&nbsp;<small>• ${link.awardee_title}: Take ${link.take_force}, Give ${link.give_force}</small>`;
+    });
+
+    return html;
+}
+function render_belief_label(belief_label, knot, show_belief_label) {
+    if (!belief_label || !show_belief_label) {
+        return '';
+    }
+
+    return ` ${knot}${belief_label}...`;
+}
+function render_parent_rope(parent_rope, indent, show_parent_rope) {
+    if (!parent_rope || !show_parent_rope) {
+        return '';
+    }
+    return `<br>${indent}&nbsp;&nbsp;<small>• ${parent_rope}</small>`;
+}
