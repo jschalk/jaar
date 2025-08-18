@@ -40,27 +40,37 @@ def index():
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <body>
-        <h1>PlanUnit Tree Structure</h1>
+        <h1>PlanUnit Display</h1>
         
         <div class="controls">
+            <input type="checkbox" id="show_level">
+            <label for="show_level">level</label>
             <input type="checkbox" id="show_belief_label">
-            <label for="show_belief_label">show_belief_label</label>
+            <label for="show_belief_label">belief_label</label>
             <input type="checkbox" id="show_task">
-            <label for="show_task">show_task</label>
+            <label for="show_task">task</label>
+            <input type="checkbox" id="show_descendant_task_count">
+            <label for="show_descendant_task_count">descendant_task_count</label>
             <input type="checkbox" id="show_active">
-            <label for="show_active">show_active</label>
+            <label for="show_active">active</label>
             <input type="checkbox" id="show_star">
-            <label for="show_star">show_star</label>
+            <label for="show_star">star</label>
             <input type="checkbox" id="show_fund_share">
-            <label for="show_fund_share">show_fund_share</label>
+            <label for="show_fund_share">fund_share</label>
+            <input type="checkbox" id="show_fund_onset">
+            <label for="show_fund_onset">fund_onset</label>
+            <input type="checkbox" id="show_fund_cease">
+            <label for="show_fund_cease">fund_cease</label>
+            <input type="checkbox" id="show_fund_ratio">
+            <label for="show_fund_ratio">fund_ratio</label>
             <input type="checkbox" id="show_parent_rope">
-            <label for="show_parent_rope">show_parent_rope</label>
+            <label for="show_parent_rope">parent_rope</label>
             <input type="checkbox" id="show_root_boolean">
-            <label for="show_root_boolean">show_root_boolean</label>
+            <label for="show_root_boolean">root_boolean</label>
             <input type="checkbox" id="show_uid">
-            <label for="show_uid">show_uid</label>
+            <label for="show_uid">uid</label>
             <input type="checkbox" id="show_awardlinks">
-            <label for="show_awardlinks">show_awardlinks</label>
+            <label for="show_awardlinks">awardlinks</label>
             <input type="checkbox" id="_all_partner_cred">
             <label for="_all_partner_cred">_all_partner_cred</label>
             <input type="checkbox" id="_all_partner_debt">
