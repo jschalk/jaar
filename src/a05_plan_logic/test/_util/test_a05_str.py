@@ -13,6 +13,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerlink_ratio_str,
     _is_expanded_str,
     _kids_str,
+    _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
     _stop_calc_str,
@@ -51,6 +52,7 @@ def test_str_functions_ReturnsObj():
     assert _gogo_calc_str() == "_gogo_calc"
     assert _healerlink_ratio_str() == "_healerlink_ratio"
     assert _is_expanded_str() == "_is_expanded"
+    assert _level_str() == "_level"
     assert _kids_str() == "_kids"
     assert _range_evaluated_str() == "_range_evaluated"
     assert _reasonheirs_str() == "_reasonheirs"

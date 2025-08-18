@@ -1,11 +1,18 @@
 // Global state
 let treeData = null;
 let show_awardlinks = false;
+let show_level = false;
 let show_belief_label = false;
 let show_task = false;
+let show_descendant_task_count = false;
 let show_active = false;
 let show_star = false;
 let show_fund_share = false;
+let show_fund_onset = false;
+let show_fund_cease = false;
+let show_fund_ratio = false;
+let show_all_partner_cred = false;
+let show_all_partner_debt = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
@@ -13,52 +20,39 @@ let show_uid = false;
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
     const show_awardlinksCheckbox = document.getElementById('show_awardlinks');
+    const show_levelCheckbox = document.getElementById('show_level');
     const show_belief_labelCheckbox = document.getElementById('show_belief_label');
     const show_taskCheckbox = document.getElementById('show_task');
+    const show_descendant_task_countCheckbox = document.getElementById('show_descendant_task_count');
     const show_activeCheckbox = document.getElementById('show_active');
     const show_starCheckbox = document.getElementById('show_star');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
+    const show_fund_onsetCheckbox = document.getElementById('show_fund_onset');
+    const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
+    const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
+    const show_all_partner_credCheckbox = document.getElementById('_all_partner_cred');
+    const show_all_partner_debtCheckbox = document.getElementById('_all_partner_debt');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_awardlinksCheckbox.addEventListener('change', function () {
-        show_awardlinks = this.checked;
-        renderTree();
-    });
-    show_belief_labelCheckbox.addEventListener('change', function () {
-        show_belief_label = this.checked;
-        renderTree();
-    });
-    show_taskCheckbox.addEventListener('change', function () {
-        show_task = this.checked;
-        renderTree();
-    });
-    show_activeCheckbox.addEventListener('change', function () {
-        show_active = this.checked;
-        renderTree();
-    });
-    show_starCheckbox.addEventListener('change', function () {
-        show_star = this.checked;
-        renderTree();
-    });
-    show_fund_shareCheckbox.addEventListener('change', function () {
-        show_fund_share = this.checked;
-        renderTree();
-    });
-    show_parent_ropeCheckbox.addEventListener('change', function () {
-        show_parent_rope = this.checked;
-        renderTree();
-    });
-    show_root_booleanCheckbox.addEventListener('change', function () {
-        show_root_boolean = this.checked;
-        renderTree();
-    });
-    show_uidCheckbox.addEventListener('change', function () {
-        show_uid = this.checked;
-        renderTree();
-    });
+    show_awardlinksCheckbox.addEventListener('change', function () { show_awardlinks = this.checked; renderTree(); });
+    show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
+    show_belief_labelCheckbox.addEventListener('change', function () { show_belief_label = this.checked; renderTree(); });
+    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
+    show_descendant_task_countCheckbox.addEventListener('change', function () { show_descendant_task_count = this.checked; renderTree(); });
+    show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
+    show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
+    show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
+    show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderTree(); });
+    show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderTree(); });
+    show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderTree(); });
+    show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderTree(); });
+    show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
+    show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
+    show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
+    show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
 
     // Load initial tree data
     loadTreeData();
@@ -89,17 +83,23 @@ function renderTree() {
 // Recursively render a PlanUnit and its children
 function renderPlanUnit(planUnit, level) {
     const indent = '&nbsp;'.repeat(level * 2);
+    const levelIndicator = show_level ? ` level${planUnit._level}` : '';
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
+    const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit._descendant_task_count}` : '';
     const activeIndicator = planUnit._active && show_active ? '-ACTIVE' : '';
-    const starIndicator = planUnit.star && show_star ? ` star${planUnit.star}` : '';
-    const fund_shareIndicator = planUnit.fund_share && show_fund_share ? ` [${planUnit.fund_share}]` : '';
+    const starIndicator = show_star ? ` star${planUnit.star}` : '';
+    const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
     const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
     const uidIndicator = planUnit._uid && show_uid ? ` uid${planUnit._uid}` : '';
+
+    const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit._fund_onset}` : '';
+    const fund_ceaseIndicator = show_fund_cease ? ` cease-${planUnit._fund_cease}` : '';
+    const fund_ratioIndicator = show_fund_ratio ? ` ratio-${planUnit._fund_ratio}` : '';
+
 
     // Build award links HTML using separate function
     const awardLinksHtml = renderAwardLinks(planUnit.awardlinks, indent, show_awardlinks);
     const belief_labelHtml = render_belief_label(planUnit.belief_label, planUnit.knot, show_belief_label);
-    const parent_ropeHtml = render_parent_rope(planUnit.parent_rope, indent, show_parent_rope);
 
     // Start with current node
     let html = `
@@ -107,14 +107,21 @@ function renderPlanUnit(planUnit, level) {
     ${indent}• 
     ${belief_labelHtml}
     ${planUnit.plan_label}
+    <i>${levelIndicator}
     ${starIndicator}
     ${uidIndicator}
     ${taskIndicator}
+    ${descendant_task_countIndicator}
     ${fund_shareIndicator}
+    ${fund_onsetIndicator}
+    ${fund_ceaseIndicator}
+    ${fund_ratioIndicator}
     ${activeIndicator}
-    ${root_booleanIndicator}
-    ${parent_ropeHtml}
+    ${root_booleanIndicator}</i>
+    ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
     ${awardLinksHtml}
+    ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
+    ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
   </div>\n
 `;
     // Add children
@@ -147,9 +154,9 @@ function render_belief_label(belief_label, knot, show_belief_label) {
 
     return ` ${knot}${belief_label}...`;
 }
-function render_parent_rope(parent_rope, indent, show_parent_rope) {
-    if (!parent_rope || !show_parent_rope) {
+function render_new_small_dot(str, indent, show_bool) {
+    if (!str || !show_bool) {
         return '';
     }
-    return `<br>${indent}&nbsp;&nbsp;<small>• ${parent_rope}</small>`;
+    return `<br>${indent}${str}`;
 }

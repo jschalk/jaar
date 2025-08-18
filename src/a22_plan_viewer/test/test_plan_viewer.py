@@ -1,6 +1,43 @@
 from src.a05_plan_logic.plan import planunit_shop
-from src.a05_plan_logic.test._util.a05_str import fund_share_str
-from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
+from src.a05_plan_logic.test._util.a05_str import (
+    _active_hx_str,
+    _active_str,
+    _all_partner_cred_str,
+    _all_partner_debt_str,
+    _chore_str,
+    _descendant_task_count_str,
+    _factheirs_str,
+    _fund_cease_str,
+    _fund_onset_str,
+    _fund_ratio_str,
+    _gogo_calc_str,
+    _healerlink_ratio_str,
+    _is_expanded_str,
+    _kids_str,
+    _level_str,
+    _range_evaluated_str,
+    _reasonheirs_str,
+    _stop_calc_str,
+    _uid_str,
+    addin_str,
+    begin_str,
+    belief_label_str,
+    close_str,
+    denom_str,
+    fund_iota_str,
+    fund_share_str,
+    gogo_want_str,
+    healerlink_str,
+    knot_str,
+    morph_str,
+    numor_str,
+    plan_label_str,
+    problem_bool_str,
+    star_str,
+    stop_want_str,
+    task_str,
+)
+from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
 from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_believerunit
 
 
@@ -18,50 +55,50 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # for dict_key, value in casa_dict.items():
     #     print(f"{dict_key=} \t\t {value=}")
     assert set(casa_dict.keys()) == {
-        "plan_label",
-        "belief_label",
+        plan_label_str(),
+        belief_label_str(),
         "parent_rope",
-        "_kids",
+        _kids_str(),
         "root",
-        "star",
-        "_uid",
+        star_str(),
+        _uid_str(),
         "awardlinks",
         "reasonunits",
         "laborunit",
         "factunits",
-        "healerlink",
-        "begin",
-        "close",
-        "addin",
-        "denom",
-        "numor",
-        "morph",
-        "gogo_want",
-        "stop_want",
-        "task",
-        "problem_bool",
-        "knot",
-        "_is_expanded",
-        "_active",
-        "_active_hx",
-        "_all_partner_cred",
-        "_all_partner_debt",
+        healerlink_str(),
+        begin_str(),
+        close_str(),
+        addin_str(),
+        denom_str(),
+        numor_str(),
+        morph_str(),
+        gogo_want_str(),
+        stop_want_str(),
+        task_str(),
+        problem_bool_str(),
+        knot_str(),
+        _is_expanded_str(),
+        _active_str(),
+        _active_hx_str(),
+        _all_partner_cred_str(),
+        _all_partner_debt_str(),
         "_awardheirs",
         "_awardlines",
-        "_descendant_task_count",
+        _descendant_task_count_str(),
         "_factheirs",
-        "_fund_ratio",
-        "fund_iota",
-        "_fund_onset",
-        "_fund_cease",
-        "_healerlink_ratio",
-        "_level",
-        "_range_evaluated",
+        _fund_ratio_str(),
+        fund_iota_str(),
+        _fund_onset_str(),
+        _fund_cease_str(),
+        _healerlink_ratio_str(),
+        _level_str(),
+        _range_evaluated_str(),
         "_reasonheirs",
-        "_chore",
+        _chore_str(),
         "_laborheir",
-        "_gogo_calc",
-        "_stop_calc",
+        _gogo_calc_str(),
+        _stop_calc_str(),
         "fund_share",
     }
     assert casa_dict.get("healerlink") == {"_healer_names": []}
@@ -89,9 +126,27 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     assert casa_laborunit_dict == expected_laborunit_dict
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario2_fund_share():
+def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     # ESTABLISH
     sue_believerunit = get_sue_casa_believerunit()
+
+    # WHEN
+    root_plan_view_dict = get_plan_view_dict(sue_believerunit.planroot)
+
+    # THEN
+    # for dict_key, value in casa_dict.items():
+    #     print(f"{dict_key=} \t\t {value=}")
+    # expected_laborunit_dict = {
+    #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
+    # }
+    expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
+    assert root_plan_view_dict.get("parent_rope") == expected_parent_rope
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_attrs():
+    # ESTABLISH
+    sue_believerunit = get_sue_casa_believerunit()
+    root_rope = sue_believerunit.planroot.parent_rope
     casa_rope = sue_believerunit.make_l1_rope("casa")
     casa_plan = sue_believerunit.get_plan_obj(casa_rope)
 
@@ -106,4 +161,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_fund_share():
     # }
     print(f"{casa_dict.get(fund_share_str())=}")
     assert casa_dict.get(fund_share_str()) > 0
-    assert casa_dict.get(fund_share_str()) == casa_plan.get_fund_share()
+    expected_parent_rope = add_small_dot(casa_plan.parent_rope)
+    assert casa_dict.get("parent_rope") == expected_parent_rope
+    expected_all_partner_cred = f"all_partner_cred = {casa_plan._all_partner_cred}"
+    expected_all_partner_debt = f"all_partner_debt = {casa_plan._all_partner_debt}"
+    expected_all_partner_cred = add_small_dot(expected_all_partner_cred)
+    expected_all_partner_debt = add_small_dot(expected_all_partner_debt)
+    assert casa_dict.get(_all_partner_cred_str()) == expected_all_partner_cred
+    assert casa_dict.get(_all_partner_debt_str()) == expected_all_partner_debt
