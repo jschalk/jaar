@@ -391,7 +391,7 @@ def test_split_excel_into_dirs_SavesToCorrectFileNames(env_dir_setup_cleanup):
 
 def test_if_nan_return_None_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    ex1_df = DataFrame([["yao", None]], columns=["face_name", "example_col"])
+    ex1_df = DataFrame([["Yao", None]], columns=["face_name", "example_col"])
     ex1_sheet_name = "ex1"
     ex1_filename = "ex1.xlsx"
     ex1_path = create_path(idea_belief_mstr_dir(), ex1_filename)
