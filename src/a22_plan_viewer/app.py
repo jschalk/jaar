@@ -16,13 +16,16 @@ sue_believer.add_plan(casa_rope, 3)
 sue_believer.add_plan(clean_rope, 3)
 sue_believer.add_plan(mop_rope, 3, task=True)
 sue_believer.add_plan(sweep_rope, 3, task=True)
+sports_rope = sue_believer.make_l1_rope("sports")
+sue_believer.add_plan(sports_rope, 5)
 
 # Add some award links
 sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop("Manager", 0.5, 0.2))
 sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop("Team Lead", 0.3, 0.1))
-sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop("Developer A", 1, 0.8))
-sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop("Junior Dev", 0.7, 0.9))
+sue_believer.edit_plan_attr(mop_rope, awardlink=awardlink_shop("Developer A", 1, 0.8))
+sue_believer.edit_plan_attr(mop_rope, awardlink=awardlink_shop("Junior Dev", 0.7, 0.9))
 sue_believer.settle_believer()
+
 plan_view_dict = get_plan_view_dict(sue_believer.planroot)
 
 
@@ -48,6 +51,8 @@ def index():
             <label for="show_active">show_active</label>
             <input type="checkbox" id="show_star">
             <label for="show_star">show_star</label>
+            <input type="checkbox" id="show_fund_share">
+            <label for="show_fund_share">show_fund_share</label>
             <input type="checkbox" id="show_parent_rope">
             <label for="show_parent_rope">show_parent_rope</label>
             <input type="checkbox" id="show_root_boolean">

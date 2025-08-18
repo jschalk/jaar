@@ -5,6 +5,7 @@ let show_belief_label = false;
 let show_task = false;
 let show_active = false;
 let show_star = false;
+let show_fund_share = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
@@ -16,6 +17,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_taskCheckbox = document.getElementById('show_task');
     const show_activeCheckbox = document.getElementById('show_active');
     const show_starCheckbox = document.getElementById('show_star');
+    const show_fund_shareCheckbox = document.getElementById('show_fund_share');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
@@ -39,6 +41,10 @@ document.addEventListener('DOMContentLoaded', function () {
     });
     show_starCheckbox.addEventListener('change', function () {
         show_star = this.checked;
+        renderTree();
+    });
+    show_fund_shareCheckbox.addEventListener('change', function () {
+        show_fund_share = this.checked;
         renderTree();
     });
     show_parent_ropeCheckbox.addEventListener('change', function () {
@@ -86,6 +92,7 @@ function renderPlanUnit(planUnit, level) {
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
     const activeIndicator = planUnit._active && show_active ? '-ACTIVE' : '';
     const starIndicator = planUnit.star && show_star ? ` star${planUnit.star}` : '';
+    const fund_shareIndicator = planUnit.fund_share && show_fund_share ? ` [${planUnit.fund_share}]` : '';
     const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
     const uidIndicator = planUnit._uid && show_uid ? ` uid${planUnit._uid}` : '';
 
@@ -95,8 +102,21 @@ function renderPlanUnit(planUnit, level) {
     const parent_ropeHtml = render_parent_rope(planUnit.parent_rope, indent, show_parent_rope);
 
     // Start with current node
-    let html = `<div>${indent}• ${belief_labelHtml}${planUnit.plan_label}${starIndicator}${uidIndicator}${taskIndicator}${activeIndicator}${root_booleanIndicator}${parent_ropeHtml}${awardLinksHtml}</div>\n`;
-
+    let html = `
+  <div>
+    ${indent}• 
+    ${belief_labelHtml}
+    ${planUnit.plan_label}
+    ${starIndicator}
+    ${uidIndicator}
+    ${taskIndicator}
+    ${fund_shareIndicator}
+    ${activeIndicator}
+    ${root_booleanIndicator}
+    ${parent_ropeHtml}
+    ${awardLinksHtml}
+  </div>\n
+`;
     // Add children
     if (planUnit._kids) {
         Object.values(planUnit._kids).forEach(child => {

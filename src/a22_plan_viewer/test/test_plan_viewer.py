@@ -1,7 +1,7 @@
-from src.a03_group_logic.labor import laborunit_shop
-from src.a05_plan_logic.healer import healerlink_shop
 from src.a05_plan_logic.plan import planunit_shop
+from src.a05_plan_logic.test._util.a05_str import fund_share_str
 from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
+from src.a22_plan_viewer.test._util.example_believers import get_sue_casa_believerunit
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
@@ -62,6 +62,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         "_laborheir",
         "_gogo_calc",
         "_stop_calc",
+        "fund_share",
     }
     assert casa_dict.get("healerlink") == {"_healer_names": []}
 
@@ -86,3 +87,23 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
         "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
     }
     assert casa_laborunit_dict == expected_laborunit_dict
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario2_fund_share():
+    # ESTABLISH
+    sue_believerunit = get_sue_casa_believerunit()
+    casa_rope = sue_believerunit.make_l1_rope("casa")
+    casa_plan = sue_believerunit.get_plan_obj(casa_rope)
+
+    # WHEN
+    casa_dict = get_plan_view_dict(casa_plan)
+
+    # THEN
+    # for dict_key, value in casa_dict.items():
+    #     print(f"{dict_key=} \t\t {value=}")
+    # expected_laborunit_dict = {
+    #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
+    # }
+    print(f"{casa_dict.get(fund_share_str())=}")
+    assert casa_dict.get(fund_share_str()) > 0
+    assert casa_dict.get(fund_share_str()) == casa_plan.get_fund_share()
