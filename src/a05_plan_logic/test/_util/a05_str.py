@@ -1,6 +1,10 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
-from src.a04_reason_logic.test._util.a04_str import _active_str, belief_label_str
+from src.a04_reason_logic.test._util.a04_str import (
+    _active_str,
+    _chore_str,
+    belief_label_str,
+)
 
 
 def _active_hx_str() -> str:
@@ -57,6 +61,10 @@ def _is_expanded_str() -> str:
 
 def _kids_str() -> str:
     return "_kids"
+
+
+def _level_str() -> str:
+    return "_level"
 
 
 def _range_evaluated_str() -> str:

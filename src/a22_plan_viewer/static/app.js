@@ -6,6 +6,8 @@ let show_task = false;
 let show_active = false;
 let show_star = false;
 let show_fund_share = false;
+let show_all_partner_cred = false;
+let show_all_partner_debt = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
@@ -18,47 +20,24 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_activeCheckbox = document.getElementById('show_active');
     const show_starCheckbox = document.getElementById('show_star');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
+    const show_all_partner_credCheckbox = document.getElementById('_all_partner_cred');
+    const show_all_partner_debtCheckbox = document.getElementById('_all_partner_debt');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_awardlinksCheckbox.addEventListener('change', function () {
-        show_awardlinks = this.checked;
-        renderTree();
-    });
-    show_belief_labelCheckbox.addEventListener('change', function () {
-        show_belief_label = this.checked;
-        renderTree();
-    });
-    show_taskCheckbox.addEventListener('change', function () {
-        show_task = this.checked;
-        renderTree();
-    });
-    show_activeCheckbox.addEventListener('change', function () {
-        show_active = this.checked;
-        renderTree();
-    });
-    show_starCheckbox.addEventListener('change', function () {
-        show_star = this.checked;
-        renderTree();
-    });
-    show_fund_shareCheckbox.addEventListener('change', function () {
-        show_fund_share = this.checked;
-        renderTree();
-    });
-    show_parent_ropeCheckbox.addEventListener('change', function () {
-        show_parent_rope = this.checked;
-        renderTree();
-    });
-    show_root_booleanCheckbox.addEventListener('change', function () {
-        show_root_boolean = this.checked;
-        renderTree();
-    });
-    show_uidCheckbox.addEventListener('change', function () {
-        show_uid = this.checked;
-        renderTree();
-    });
+    show_awardlinksCheckbox.addEventListener('change', function () { show_awardlinks = this.checked; renderTree(); });
+    show_belief_labelCheckbox.addEventListener('change', function () { show_belief_label = this.checked; renderTree(); });
+    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
+    show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
+    show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
+    show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
+    show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderTree(); });
+    show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
+    show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
+    show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
+    show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
 
     // Load initial tree data
     loadTreeData();
@@ -99,7 +78,6 @@ function renderPlanUnit(planUnit, level) {
     // Build award links HTML using separate function
     const awardLinksHtml = renderAwardLinks(planUnit.awardlinks, indent, show_awardlinks);
     const belief_labelHtml = render_belief_label(planUnit.belief_label, planUnit.knot, show_belief_label);
-    const parent_ropeHtml = render_parent_rope(planUnit.parent_rope, indent, show_parent_rope);
 
     // Start with current node
     let html = `
@@ -113,8 +91,10 @@ function renderPlanUnit(planUnit, level) {
     ${fund_shareIndicator}
     ${activeIndicator}
     ${root_booleanIndicator}
-    ${parent_ropeHtml}
+    ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
     ${awardLinksHtml}
+    ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
+    ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
   </div>\n
 `;
     // Add children
@@ -147,9 +127,9 @@ function render_belief_label(belief_label, knot, show_belief_label) {
 
     return ` ${knot}${belief_label}...`;
 }
-function render_parent_rope(parent_rope, indent, show_parent_rope) {
-    if (!parent_rope || !show_parent_rope) {
+function render_new_small_dot(str, indent, show_bool) {
+    if (!str || !show_bool) {
         return '';
     }
-    return `<br>${indent}&nbsp;&nbsp;<small>• ${parent_rope}</small>`;
+    return `<br>${indent}${str}`;
 }

@@ -61,6 +61,10 @@ def index():
             <label for="show_uid">show_uid</label>
             <input type="checkbox" id="show_awardlinks">
             <label for="show_awardlinks">show_awardlinks</label>
+            <input type="checkbox" id="_all_partner_cred">
+            <label for="_all_partner_cred">_all_partner_cred</label>
+            <input type="checkbox" id="_all_partner_debt">
+            <label for="_all_partner_debt">_all_partner_debt</label>
         </div>
         
         <div id="treeContainer" class="tree-display"></div>
