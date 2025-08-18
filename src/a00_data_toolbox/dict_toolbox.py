@@ -460,3 +460,14 @@ def mark_keys(
         new_dict[new_key] = new_value
 
     return new_dict
+
+
+def make_dict_safe_for_json(obj):
+    if isinstance(obj, dict):
+        return {k: make_dict_safe_for_json(v) for k, v in obj.items()}
+    elif isinstance(obj, list):
+        return [make_dict_safe_for_json(v) for v in obj]
+    elif isinstance(obj, set):
+        return list(obj)
+    else:
+        return obj
