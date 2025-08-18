@@ -1,7 +1,7 @@
 from src.a05_plan_logic.plan import planunit_shop
 from src.a05_plan_logic.test._util.a05_str import fund_share_str
 from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
-from src.a22_plan_viewer.test._util.example_believers import get_sue_casa_believerunit
+from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_believerunit
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
