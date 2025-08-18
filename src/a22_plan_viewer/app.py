@@ -40,8 +40,14 @@ def index():
         <h1>PlanUnit Tree Structure</h1>
         
         <div class="controls">
-            <input type="checkbox" id="hideAwards">
-            <label for="hideAwards">Hide Award Links</label>
+            <input type="checkbox" id="show_belief_label">
+            <label for="show_belief_label">show_belief_label</label>
+            <input type="checkbox" id="show_task">
+            <label for="show_task">show_task</label>
+            <input type="checkbox" id="show_star">
+            <label for="show_star">show_star</label>
+            <input type="checkbox" id="show_awardlinks">
+            <label for="show_awardlinks">show_awardlinks</label>
         </div>
         
         <div id="treeContainer" class="tree-display"></div>
