@@ -6,10 +6,12 @@ let show_belief_label = false;
 let show_task = false;
 let show_descendant_task_count = false;
 let show_active = false;
+let show_chore = false;
 let show_star = false;
 let show_fund_share = false;
 let show_fund_onset = false;
 let show_fund_cease = false;
+let show_fund_iota = false;
 let show_fund_ratio = false;
 let show_all_partner_cred = false;
 let show_all_partner_debt = false;
@@ -25,10 +27,12 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_taskCheckbox = document.getElementById('show_task');
     const show_descendant_task_countCheckbox = document.getElementById('show_descendant_task_count');
     const show_activeCheckbox = document.getElementById('show_active');
+    const show_choreCheckbox = document.getElementById('show_chore');
     const show_starCheckbox = document.getElementById('show_star');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
     const show_fund_onsetCheckbox = document.getElementById('show_fund_onset');
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
+    const show_fund_iotaCheckbox = document.getElementById('show_fund_iota');
     const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
     const show_all_partner_credCheckbox = document.getElementById('_all_partner_cred');
     const show_all_partner_debtCheckbox = document.getElementById('_all_partner_debt');
@@ -43,10 +47,12 @@ document.addEventListener('DOMContentLoaded', function () {
     show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
     show_descendant_task_countCheckbox.addEventListener('change', function () { show_descendant_task_count = this.checked; renderTree(); });
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
+    show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
     show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
     show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderTree(); });
     show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderTree(); });
+    show_fund_iotaCheckbox.addEventListener('change', function () { show_fund_iota = this.checked; renderTree(); });
     show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderTree(); });
     show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderTree(); });
     show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
@@ -87,6 +93,7 @@ function renderPlanUnit(planUnit, level) {
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
     const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit._descendant_task_count}` : '';
     const activeIndicator = planUnit._active && show_active ? '-ACTIVE' : '';
+    const choreIndicator = planUnit._chore && show_chore ? '-CHORE' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
     const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
@@ -94,6 +101,7 @@ function renderPlanUnit(planUnit, level) {
 
     const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit._fund_onset}` : '';
     const fund_ceaseIndicator = show_fund_cease ? ` cease-${planUnit._fund_cease}` : '';
+    const fund_iotaIndicator = show_fund_iota ? ` (iota: ${planUnit.fund_iota})` : '';
     const fund_ratioIndicator = show_fund_ratio ? ` ratio-${planUnit._fund_ratio}` : '';
 
 
@@ -115,8 +123,10 @@ function renderPlanUnit(planUnit, level) {
     ${fund_shareIndicator}
     ${fund_onsetIndicator}
     ${fund_ceaseIndicator}
+    ${fund_iotaIndicator}
     ${fund_ratioIndicator}
     ${activeIndicator}
+    ${choreIndicator}
     ${root_booleanIndicator}</i>
     ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
     ${awardLinksHtml}

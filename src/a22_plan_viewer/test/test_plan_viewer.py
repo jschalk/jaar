@@ -44,6 +44,7 @@ from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_beli
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # ESTABLISH
     casa_plan = planunit_shop()
+    casa_plan._fund_ratio = 1
     assert casa_plan._kids == {}
     print(f"{type(casa_plan)=}")
 
@@ -107,6 +108,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
 def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     # ESTABLISH
     casa_plan = planunit_shop()
+    casa_plan._fund_ratio = 1
     sue_str = "Sue"
     casa_plan.laborunit.add_party(sue_str)
     assert casa_plan._kids == {}
@@ -146,6 +148,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_attrs():
     # ESTABLISH
     sue_believerunit = get_sue_casa_believerunit()
+    print(f"{sue_believerunit.planroot._fund_ratio=}")
     root_rope = sue_believerunit.planroot.parent_rope
     casa_rope = sue_believerunit.make_l1_rope("casa")
     casa_plan = sue_believerunit.get_plan_obj(casa_rope)
@@ -169,3 +172,4 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_attrs():
     expected_all_partner_debt = add_small_dot(expected_all_partner_debt)
     assert casa_dict.get(_all_partner_cred_str()) == expected_all_partner_cred
     assert casa_dict.get(_all_partner_debt_str()) == expected_all_partner_debt
+    assert casa_dict.get(_fund_ratio_str()) == "38%"

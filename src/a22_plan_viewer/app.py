@@ -53,6 +53,8 @@ def index():
             <label for="show_descendant_task_count">descendant_task_count</label>
             <input type="checkbox" id="show_active">
             <label for="show_active">active</label>
+            <input type="checkbox" id="show_chore">
+            <label for="show_chore">chore</label>
             <input type="checkbox" id="show_star">
             <label for="show_star">star</label>
             <input type="checkbox" id="show_fund_share">
@@ -61,6 +63,8 @@ def index():
             <label for="show_fund_onset">fund_onset</label>
             <input type="checkbox" id="show_fund_cease">
             <label for="show_fund_cease">fund_cease</label>
+            <input type="checkbox" id="show_fund_iota">
+            <label for="show_fund_iota">fund_iota</label>
             <input type="checkbox" id="show_fund_ratio">
             <label for="show_fund_ratio">fund_ratio</label>
             <input type="checkbox" id="show_parent_rope">
