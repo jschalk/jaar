@@ -232,6 +232,7 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starSc
     sue_believer.set_plan(planunit_shop(non_str), status_rope)
     sue_believer.set_plan(planunit_shop(yes_str, star=2), status_rope)
 
+    assert sue_believer.planroot._fund_ratio is None
     assert sue_believer.get_plan_obj(casa_rope)._fund_ratio is None
     assert sue_believer.get_plan_obj(floor_rope)._fund_ratio is None
     assert sue_believer.get_plan_obj(status_rope)._fund_ratio is None
@@ -243,6 +244,7 @@ def test_BelieverUnit_settle_believer_Sets_fund_ratio_WithSomePlansOfZero_starSc
 
     # THEN
     print(f"{sue_believer.fund_pool=}")
+    assert sue_believer.planroot._fund_ratio == 1
     assert sue_believer.get_plan_obj(casa_rope)._fund_ratio == 0.5
     assert sue_believer.get_plan_obj(floor_rope)._fund_ratio == 0.5
     assert sue_believer.get_plan_obj(status_rope)._fund_ratio == 0.0

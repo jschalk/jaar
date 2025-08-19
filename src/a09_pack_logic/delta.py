@@ -455,7 +455,7 @@ class BelieverDelta:
                 ),
             )
 
-            # insert / update / delete awardunits
+            # insert / update / delete awardlinks
             before_awardlinks_awardee_titles = set(before_planunit.awardlinks.keys())
             after_awardlinks_awardee_titles = set(after_planunit.awardlinks.keys())
             self.add_believeratom_plan_awardlink_inserts(
