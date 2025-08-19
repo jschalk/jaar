@@ -75,6 +75,8 @@ def index():
             <label for="show_uid">uid</label>
             <input type="checkbox" id="show_awardlinks">
             <label for="show_awardlinks">awardlinks</label>
+            <input type="checkbox" id="show_awardheirs">
+            <label for="show_awardheirs">awardheirs</label>
             <input type="checkbox" id="_all_partner_cred">
             <label for="_all_partner_cred">_all_partner_cred</label>
             <input type="checkbox" id="_all_partner_debt">

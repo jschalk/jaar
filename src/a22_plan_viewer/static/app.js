@@ -1,6 +1,7 @@
 // Global state
 let treeData = null;
-let show_awardlinks = true;
+let show_awardlinks = false;
+let show_awardheirs = true;
 let show_level = false;
 let show_belief_label = false;
 let show_task = false;
@@ -22,6 +23,7 @@ let show_uid = false;
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
     const show_awardlinksCheckbox = document.getElementById('show_awardlinks');
+    const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_levelCheckbox = document.getElementById('show_level');
     const show_belief_labelCheckbox = document.getElementById('show_belief_label');
     const show_taskCheckbox = document.getElementById('show_task');
@@ -42,6 +44,7 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up checkbox event listener
     show_awardlinksCheckbox.addEventListener('change', function () { show_awardlinks = this.checked; renderTree(); });
+    show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
     show_belief_labelCheckbox.addEventListener('change', function () { show_belief_label = this.checked; renderTree(); });
     show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
@@ -106,7 +109,6 @@ function renderPlanUnit(planUnit, level) {
 
 
     // Build award links HTML using separate function
-    const awardLinksHtml = renderFlatReadableDicts(planUnit.awardlinks, indent, show_awardlinks);
     const belief_labelHtml = render_belief_label(planUnit.belief_label, planUnit.knot, show_belief_label);
 
     // Start with current node
@@ -129,7 +131,8 @@ function renderPlanUnit(planUnit, level) {
     ${choreIndicator}
     ${root_booleanIndicator}</i>
     ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
-    ${awardLinksHtml}
+    ${renderFlatReadableJson(planUnit.awardlinks, indent, show_awardlinks)}
+    ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
     ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
   </div>\n
@@ -144,13 +147,13 @@ function renderPlanUnit(planUnit, level) {
 }
 
 // Render award links for a PlanUnit
-function renderFlatReadableDicts(awardlinks, indent, show_awardlinks) {
-    if (!awardlinks || Object.keys(awardlinks).length === 0 || !show_awardlinks) {
+function renderFlatReadableJson(flat_readables, indent, show_readable) {
+    if (!flat_readables || Object.keys(flat_readables).length === 0 || !show_readable) {
         return '';
     }
 
     let html = '';
-    Object.values(awardlinks).forEach(link => {
+    Object.values(flat_readables).forEach(link => {
         html += `<br>${indent}${link.readable}`;
     });
 
