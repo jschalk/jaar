@@ -20,7 +20,16 @@ def get_sue_casa_believerunit() -> BelieverUnit:
     sue_believer.add_plan(mop_rope, 3, task=True)
     sue_believer.add_plan(sweep_rope, 3, task=True)
     sports_rope = sue_believer.make_l1_rope("sports")
+    best_rope = sue_believer.make_rope(sports_rope, "best sport")
+    best_soccer_rope = sue_believer.make_rope(best_rope, "soccer")
+    best_swim_rope = sue_believer.make_rope(best_rope, "swim")
+    best_run_rope = sue_believer.make_rope(best_rope, "run")
     sue_believer.add_plan(sports_rope, 5)
+    sue_believer.add_plan(best_soccer_rope, 5)
+    sue_believer.add_plan(best_swim_rope, 5)
+    sue_believer.add_plan(best_run_rope, 5)
+    sue_believer.add_fact(tidiness_rope, dirty_rope, 4, 8)
+    sue_believer.add_fact(best_rope, best_soccer_rope, 1, 7)
 
     # Add some award links
     casa_manager_awardlink = awardlink_shop("Manager", 0.5, 0.2)

@@ -1,7 +1,7 @@
 // Global state
 let treeData = null;
 let show_awardlinks = false;
-let show_awardheirs = true;
+let show_awardheirs = false;
 let show_level = false;
 let show_belief_label = false;
 let show_task = false;
@@ -9,6 +9,8 @@ let show_descendant_task_count = false;
 let show_active = false;
 let show_chore = false;
 let show_star = false;
+let show_factunits = false;
+let show_factheirs = true;
 let show_fund_share = false;
 let show_fund_onset = false;
 let show_fund_cease = false;
@@ -31,6 +33,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_activeCheckbox = document.getElementById('show_active');
     const show_choreCheckbox = document.getElementById('show_chore');
     const show_starCheckbox = document.getElementById('show_star');
+    const show_factunitsCheckbox = document.getElementById('show_factunits');
+    const show_factheirsCheckbox = document.getElementById('show_factheirs');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
     const show_fund_onsetCheckbox = document.getElementById('show_fund_onset');
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
@@ -52,6 +56,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
     show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
+    show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderTree(); });
+    show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderTree(); });
     show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
     show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderTree(); });
     show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderTree(); });
@@ -133,6 +139,8 @@ function renderPlanUnit(planUnit, level) {
     ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
     ${renderFlatReadableJson(planUnit.awardlinks, indent, show_awardlinks)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
+    ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
+    ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
     ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
     ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
   </div>\n
