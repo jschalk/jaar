@@ -1,6 +1,6 @@
 // Global state
 let treeData = null;
-let show_awardlinks = false;
+let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
 let show_level = false;
@@ -25,7 +25,7 @@ let show_uid = false;
 
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
-    const show_awardlinksCheckbox = document.getElementById('show_awardlinks');
+    const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
     const show_levelCheckbox = document.getElementById('show_level');
@@ -49,7 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_awardlinksCheckbox.addEventListener('change', function () { show_awardlinks = this.checked; renderTree(); });
+    show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
     show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
@@ -140,7 +140,7 @@ function renderPlanUnit(planUnit, level) {
     ${choreIndicator}
     ${root_booleanIndicator}</i>
     ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
-    ${renderFlatReadableJson(planUnit.awardlinks, indent, show_awardlinks)}
+    ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}

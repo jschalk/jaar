@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import (
     awardheir_shop,
-    awardlink_shop,
+    awardunit_shop,
     groupunit_shop,
     membership_shop,
 )
@@ -631,7 +631,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
 def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_awardlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_awardunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -661,7 +661,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_awardlink_job"
+        x_table_name = "believer_plan_awardunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
@@ -883,7 +883,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_believer.edit_plan_attr(
         casa_rope, reason_context=status_rope, reason_case=dirty_rope
     )
-    sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
     casa_laborunit = laborunit_shop()
     casa_laborunit.add_party(sue_str, True)
@@ -896,7 +896,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         blrmemb_job_table = "believer_partner_membership_job"
         blrpern_job_table = "believer_partnerunit_job"
         blrgrou_job_table = "believer_groupunit_job"
-        blrawar_job_table = "believer_plan_awardlink_job"
+        blrawar_job_table = "believer_plan_awardunit_job"
         blrfact_job_table = "believer_plan_factunit_job"
         blrheal_job_table = "believer_plan_healerlink_job"
         blrprem_job_table = "believer_plan_reason_caseunit_job"

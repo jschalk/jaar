@@ -8,7 +8,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     begin_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -540,7 +540,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert belief_timeoffi_str() in idea_config_dimens
     assert believer_partner_membership_str() in idea_config_dimens
     assert believer_partnerunit_str() in idea_config_dimens
-    assert believer_plan_awardlink_str() in idea_config_dimens
+    assert believer_plan_awardunit_str() in idea_config_dimens
     assert believer_plan_factunit_str() in idea_config_dimens
     assert believer_plan_partyunit_str() in idea_config_dimens
     assert believer_plan_healerlink_str() in idea_config_dimens
@@ -850,7 +850,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(belief_timeline_weekday_str(), 8)
     # set_idea_config_json(believer_partner_membership_str(), 9)
     # set_idea_config_json(believer_partnerunit_str(), 10)
-    # set_idea_config_json(believer_plan_awardlink_str(), 11)
+    # set_idea_config_json(believer_plan_awardunit_str(), 11)
     # set_idea_config_json(believer_plan_factunit_str(), 12)
     # set_idea_config_json(believer_plan_partyunit_str(), 14)
     # set_idea_config_json(believer_plan_healerlink_str(), 15)
@@ -874,7 +874,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(belief_timeline_weekday_str()).get(bo) == 8
     assert x_idea_config.get(believer_partner_membership_str()).get(bo) == 9
     assert x_idea_config.get(believer_partnerunit_str()).get(bo) == 10
-    assert x_idea_config.get(believer_plan_awardlink_str()).get(bo) == 11
+    assert x_idea_config.get(believer_plan_awardunit_str()).get(bo) == 11
     assert x_idea_config.get(believer_plan_factunit_str()).get(bo) == 12
     assert x_idea_config.get(believer_plan_partyunit_str()).get(bo) == 14
     assert x_idea_config.get(believer_plan_healerlink_str()).get(bo) == 15

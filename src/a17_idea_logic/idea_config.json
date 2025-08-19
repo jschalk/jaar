@@ -32,7 +32,7 @@
       "partner_debt_points": {}
     }
   },
-  "believer_plan_awardlink": {
+  "believer_plan_awardunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
     "idea_category": "believer",

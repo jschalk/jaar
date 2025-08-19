@@ -31,8 +31,8 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.descendant_task_count is None
     assert new_obj.all_partner_cred is None
     assert new_obj.all_partner_debt is None
-    assert new_obj.awardlink is None
-    assert new_obj.awardlink_del is None
+    assert new_obj.awardunit is None
+    assert new_obj.awardunit_del is None
     assert new_obj.is_expanded is None
 
 

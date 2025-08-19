@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop, partyunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
@@ -320,9 +320,9 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     xio_laborunit = laborunit_shop()
     xio_laborunit.add_party(party_title=xio_str)
     zia_believer.edit_plan_attr(shave_rope, laborunit=xio_laborunit)
-    zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(xio_str))
-    zia_believer.edit_plan_attr(shave_rope, awardlink=awardlink_shop(sue_str))
-    zia_believer.edit_plan_attr(root_rope, awardlink=awardlink_shop(sue_str))
+    zia_believer.edit_plan_attr(shave_rope, awardunit=awardunit_shop(xio_str))
+    zia_believer.edit_plan_attr(shave_rope, awardunit=awardunit_shop(sue_str))
+    zia_believer.edit_plan_attr(root_rope, awardunit=awardunit_shop(sue_str))
     # add healerlink to shave planunit
     run_healerlink = healerlink_shop({run_str})
     zia_believer.edit_plan_attr(shave_rope, healerlink=run_healerlink)
@@ -372,7 +372,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     assert json_planroot.fund_iota == 8
     assert json_planroot.fund_iota == zia_fund_iota
     assert len(json_planroot.factunits) == 1
-    assert len(json_planroot.awardlinks) == 1
+    assert len(json_planroot.awardunits) == 1
 
     assert len(json_believer.planroot._kids) == 2
 
@@ -393,7 +393,7 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     assert json_shave_plan.laborunit == xio_laborunit
     print(f"{json_shave_plan.healerlink=}")
     assert json_shave_plan.healerlink == zia_shave_plan.healerlink
-    assert len(json_shave_plan.awardlinks) == 2
+    assert len(json_shave_plan.awardunits) == 2
     assert len(json_shave_plan.factunits) == 1
     assert zia_shave_plan.problem_bool
     assert json_shave_plan.problem_bool == zia_shave_plan.problem_bool

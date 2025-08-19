@@ -72,7 +72,7 @@
             "atom_order": 9
         }
     },
-    "believer_plan_awardlink": {
+    "believer_plan_awardunit": {
         "DELETE": {
             "atom_order": 21
         },
@@ -106,7 +106,7 @@
             }
         },
         "normal_specs": {
-            "normal_table_name": "awardlink"
+            "normal_table_name": "awardunit"
         },
         "UPDATE": {
             "atom_order": 12

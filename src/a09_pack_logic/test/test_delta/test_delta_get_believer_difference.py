@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_from_nested_dict,
 )
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -13,7 +13,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     begin_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -552,7 +552,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_awardlink_delete():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_awardunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -580,13 +580,13 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     disc_rope = before_sue_au.make_rope(sports_rope, disc_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_sue_au.set_plan(planunit_shop(disc_str), sports_rope)
-    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(fly_str))
-    before_sue_au.edit_plan_attr(disc_rope, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_plan_attr(disc_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
+    before_sue_au.edit_plan_attr(ball_rope, awardunit=awardunit_shop(fly_str))
+    before_sue_au.edit_plan_attr(disc_rope, awardunit=awardunit_shop(run_str))
+    before_sue_au.edit_plan_attr(disc_rope, awardunit=awardunit_shop(fly_str))
 
     after_sue_believer = copy_deepcopy(before_sue_au)
-    after_sue_believer.edit_plan_attr(disc_rope, awardlink_del=run_str)
+    after_sue_believer.edit_plan_attr(disc_rope, awardunit_del=run_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -595,7 +595,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     # THEN
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
 
-    x_keylist = [DELETE_str(), believer_plan_awardlink_str(), disc_rope, run_str]
+    x_keylist = [DELETE_str(), believer_plan_awardunit_str(), disc_rope, run_str]
     run_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert run_believeratom.get_value(plan_rope_str()) == disc_rope
     assert run_believeratom.get_value(awardee_title_str()) == run_str
@@ -603,7 +603,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_awardlink_insert():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_awardunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -631,14 +631,14 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     disc_rope = before_sue_au.make_rope(sports_rope, disc_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_sue_au.set_plan(planunit_shop(disc_str), sports_rope)
-    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    before_sue_au.edit_plan_attr(disc_rope, awardlink=awardlink_shop(fly_str))
+    before_sue_au.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
+    before_sue_au.edit_plan_attr(disc_rope, awardunit=awardunit_shop(fly_str))
     after_sue_au = copy_deepcopy(before_sue_au)
-    after_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(fly_str))
+    after_sue_au.edit_plan_attr(ball_rope, awardunit=awardunit_shop(fly_str))
     after_run_give_force = 44
     after_run_take_force = 66
-    x_awardlink = awardlink_shop(run_str, after_run_give_force, after_run_take_force)
-    after_sue_au.edit_plan_attr(disc_rope, awardlink=x_awardlink)
+    x_awardunit = awardunit_shop(run_str, after_run_give_force, after_run_take_force)
+    after_sue_au.edit_plan_attr(disc_rope, awardunit=x_awardunit)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -647,7 +647,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     # THEN
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
 
-    x_keylist = [INSERT_str(), believer_plan_awardlink_str(), disc_rope, run_str]
+    x_keylist = [INSERT_str(), believer_plan_awardunit_str(), disc_rope, run_str]
     run_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert run_believeratom.get_value(plan_rope_str()) == disc_rope
     assert run_believeratom.get_value(awardee_title_str()) == run_str
@@ -659,7 +659,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 2
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_awardlink_update():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_awardunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -675,15 +675,15 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_str = "basketball"
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
-    before_sue_au.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_au.get_plan_obj(ball_rope).awardlinks.get(run_str)
+    before_sue_au.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
+    run_awardunit = before_sue_au.get_plan_obj(ball_rope).awardunits.get(run_str)
 
     after_sue_believer = copy_deepcopy(before_sue_au)
     after_give_force = 55
     after_take_force = 66
     after_sue_believer.edit_plan_attr(
         ball_rope,
-        awardlink=awardlink_shop(
+        awardunit=awardunit_shop(
             awardee_title=run_str,
             give_force=after_give_force,
             take_force=after_take_force,
@@ -696,7 +696,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     # THEN
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
 
-    x_keylist = [UPDATE_str(), believer_plan_awardlink_str(), ball_rope, run_str]
+    x_keylist = [UPDATE_str(), believer_plan_awardunit_str(), ball_rope, run_str]
     ball_believeratom = get_from_nested_dict(sue_believerdelta.believeratoms, x_keylist)
     assert ball_believeratom.get_value(plan_rope_str()) == ball_rope
     assert ball_believeratom.get_value(awardee_title_str()) == run_str

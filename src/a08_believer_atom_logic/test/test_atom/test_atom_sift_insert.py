@@ -1,12 +1,12 @@
 from src.a01_term_logic.rope import to_rope
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -115,7 +115,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_planunit():
     assert sift_believeratom(sue_believer, sweep_atom)
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_awardlink():
+def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_awardunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -124,10 +124,10 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_awardlink():
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = believeratom_shop(believer_plan_awardlink_str(), INSERT_str())
+    casa_swim_atom = believeratom_shop(believer_plan_awardunit_str(), INSERT_str())
     casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
     casa_swim_atom.set_arg(awardee_title_str(), swim_str)
-    clean_swim_atom = believeratom_shop(believer_plan_awardlink_str(), INSERT_str())
+    clean_swim_atom = believeratom_shop(believer_plan_awardunit_str(), INSERT_str())
     clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
     clean_swim_atom.set_arg(awardee_title_str(), swim_str)
     sue_believer.add_plan(casa_rope)
@@ -136,14 +136,14 @@ def test_sift_atom_ReturnsObj_BelieverAtom_INSERT_believer_plan_awardlink():
     assert sift_believeratom(sue_believer, clean_swim_atom)
 
     # WHEN
-    sue_believer.get_plan_obj(casa_rope).set_awardlink(awardlink_shop(swim_str))
+    sue_believer.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(swim_str))
 
     # THEN
     assert not sift_believeratom(sue_believer, casa_swim_atom)
     assert sift_believeratom(sue_believer, clean_swim_atom)
 
     # WHEN
-    sue_believer.get_plan_obj(clean_rope).set_awardlink(awardlink_shop(swim_str))
+    sue_believer.get_plan_obj(clean_rope).set_awardunit(awardunit_shop(swim_str))
     # THEN
     assert not sift_believeratom(sue_believer, casa_swim_atom)
     assert not sift_believeratom(sue_believer, clean_swim_atom)

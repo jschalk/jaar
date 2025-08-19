@@ -2,7 +2,7 @@ from src.a00_data_toolbox.dict_toolbox import create_csv
 from src.a01_term_logic.term import BeliefLabel, PartnerName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
-from src.a03_group_logic.group import AwardLink, MemberShip
+from src.a03_group_logic.group import AwardUnit, MemberShip
 from src.a03_group_logic.partner import PartnerUnit
 from src.a04_reason_logic.reason_plan import (
     CaseUnit,
@@ -41,14 +41,14 @@ def believer_planunit_exists(x_believer: BelieverUnit, jkeys: dict[str, any]) ->
     return False if x_believer is None else bool(x_believer.plan_exists(x_rope))
 
 
-def believer_plan_awardlink_exists(
+def believer_plan_awardunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_awardee_title = jkeys.get("awardee_title")
     x_rope = jkeys.get("plan_rope")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).awardlink_exists(x_awardee_title)
+        and x_believer.get_plan_obj(x_rope).awardunit_exists(x_awardee_title)
     )
 
 
@@ -117,8 +117,8 @@ def believer_attr_exists(
         return believer_partner_membership_exists(x_believer, jkeys)
     elif x_dimen == "believer_partnerunit":
         return believer_partnerunit_exists(x_believer, jkeys)
-    elif x_dimen == "believer_plan_awardlink":
-        return believer_plan_awardlink_exists(x_believer, jkeys)
+    elif x_dimen == "believer_plan_awardunit":
+        return believer_plan_awardunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_factunit":
         return believer_plan_factunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_healerlink":
@@ -157,12 +157,12 @@ def believer_planunit_get_obj(
     return x_believer.get_plan_obj(x_rope)
 
 
-def believer_plan_awardlink_get_obj(
+def believer_plan_awardunit_get_obj(
     x_believer: BelieverUnit, jkeys: dict[str, any]
-) -> AwardLink:
+) -> AwardUnit:
     x_rope = jkeys.get("plan_rope")
     x_awardee_title = jkeys.get("awardee_title")
-    return x_believer.get_plan_obj(x_rope).get_awardlink(x_awardee_title)
+    return x_believer.get_plan_obj(x_rope).get_awardunit(x_awardee_title)
 
 
 def believer_plan_reasonunit_get_obj(
@@ -204,7 +204,7 @@ def believer_get_obj(
         "believer_partnerunit": believer_partnerunit_get_obj,
         "believer_partner_membership": believer_partner_membership_get_obj,
         "believer_planunit": believer_planunit_get_obj,
-        "believer_plan_awardlink": believer_plan_awardlink_get_obj,
+        "believer_plan_awardunit": believer_plan_awardunit_get_obj,
         "believer_plan_reasonunit": believer_plan_reasonunit_get_obj,
         "believer_plan_reason_caseunit": believer_plan_reason_caseunit_get_obj,
         "believer_plan_factunit": believer_plan_factunit_get_obj,

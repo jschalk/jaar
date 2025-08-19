@@ -2,14 +2,14 @@ from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.a03_group_logic.group import (
     AwardHeir,
     AwardLine,
-    AwardLink,
+    AwardUnit,
     GroupCore,
     GroupTitle,
     MemberShip,
     awardheir_shop,
     awardline_shop,
-    awardlink_shop,
-    awardlinks_get_from_json,
+    awardunit_shop,
+    awardunits_get_from_json,
     membership_get_from_dict,
     membership_shop,
     memberships_get_from_dict,
@@ -312,35 +312,35 @@ def test_MemberShip_clear_fund_give_take_SetsAttr():
     assert bob_membership._fund_agenda_ratio_take == 0
 
 
-def test_AwardLink_Exists():
+def test_AwardUnit_Exists():
     # ESTABLISH
     bikers_str = "bikers"
 
     # WHEN
-    bikers_awardlink = AwardLink(awardee_title=bikers_str)
+    bikers_awardunit = AwardUnit(awardee_title=bikers_str)
 
     # THEN
-    assert bikers_awardlink.awardee_title == bikers_str
-    assert bikers_awardlink.give_force == 1.0
-    assert bikers_awardlink.take_force == 1.0
+    assert bikers_awardunit.awardee_title == bikers_str
+    assert bikers_awardunit.give_force == 1.0
+    assert bikers_awardunit.take_force == 1.0
 
 
-def test_awardlink_shop_ReturnsObj():
+def test_awardunit_shop_ReturnsObj():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_give_force = 3.0
     bikers_take_force = 5.0
 
     # WHEN
-    bikers_awardlink = awardlink_shop(
+    bikers_awardunit = awardunit_shop(
         awardee_title=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
 
     # THEN
-    assert bikers_awardlink.give_force == bikers_give_force
-    assert bikers_awardlink.take_force == bikers_take_force
+    assert bikers_awardunit.give_force == bikers_give_force
+    assert bikers_awardunit.take_force == bikers_take_force
 
 
 def test_AwardHeir_Exists():
@@ -374,53 +374,53 @@ def test_awardheir_shop_ReturnsObj():
     assert x_awardheir.take_force == bikers_take_force
 
 
-def test_AwardLink_to_dict_ReturnsDictWithNecessaryDataForJSON():
+def test_AwardUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_give_force = 3.0
     bikers_take_force = 5.0
-    bikers_awardlink = awardlink_shop(
+    bikers_awardunit = awardunit_shop(
         awardee_title=bikers_str,
         give_force=bikers_give_force,
         take_force=bikers_take_force,
     )
 
-    print(f"{bikers_awardlink}")
+    print(f"{bikers_awardunit}")
 
     # WHEN
-    biker_dict = bikers_awardlink.to_dict()
+    biker_dict = bikers_awardunit.to_dict()
 
     # THEN
     assert biker_dict is not None
     assert biker_dict == {
-        "awardee_title": bikers_awardlink.awardee_title,
-        "give_force": bikers_awardlink.give_force,
-        "take_force": bikers_awardlink.take_force,
+        "awardee_title": bikers_awardunit.awardee_title,
+        "give_force": bikers_awardunit.give_force,
+        "take_force": bikers_awardunit.take_force,
     }
 
 
-def test_awardlinks_get_from_JSON_ReturnsObj_SimpleExample():
+def test_awardunits_get_from_JSON_ReturnsObj_SimpleExample():
     # ESTABLISH
     teacher_str = "teachers"
-    teacher_awardlink = awardlink_shop(
+    teacher_awardunit = awardunit_shop(
         awardee_title=teacher_str, give_force=103, take_force=155
     )
-    teacher_dict = teacher_awardlink.to_dict()
-    awardlinks_dict = {teacher_awardlink.awardee_title: teacher_dict}
+    teacher_dict = teacher_awardunit.to_dict()
+    awardunits_dict = {teacher_awardunit.awardee_title: teacher_dict}
 
-    teachers_json = get_json_from_dict(awardlinks_dict)
+    teachers_json = get_json_from_dict(awardunits_dict)
     assert teachers_json is not None
     assert x_is_json(teachers_json)
 
     # WHEN
-    awardlinks_obj_dict = awardlinks_get_from_json(awardlinks_json=teachers_json)
+    awardunits_obj_dict = awardunits_get_from_json(awardunits_json=teachers_json)
 
     # THEN
-    assert awardlinks_obj_dict is not None
-    teachers_obj_check_dict = {teacher_awardlink.awardee_title: teacher_awardlink}
-    print(f"    {awardlinks_obj_dict=}")
+    assert awardunits_obj_dict is not None
+    teachers_obj_check_dict = {teacher_awardunit.awardee_title: teacher_awardunit}
+    print(f"    {awardunits_obj_dict=}")
     print(f"{teachers_obj_check_dict=}")
-    assert awardlinks_obj_dict == teachers_obj_check_dict
+    assert awardunits_obj_dict == teachers_obj_check_dict
 
 
 def test_AwardLine_Exists():

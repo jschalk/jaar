@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import RopeTerm, to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
-from src.a03_group_logic.group import awardline_shop, awardlink_shop
+from src.a03_group_logic.group import awardline_shop, awardunit_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
@@ -372,14 +372,14 @@ def test_BelieverUnit_settle_believer_TreeTraverseSetsAwardLine_fundFromRoot():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
     sue_believer.settle_believer()
-    # plan tree has no awardlinks
+    # plan tree has no awardunits
     assert sue_believer.planroot._awardlines == {}
     sue_str = "Sue"
     wk_str = "sem_jours"
     nation_str = "nation"
-    sue_awardlink = awardlink_shop(awardee_title=sue_str)
+    sue_awardunit = awardunit_shop(awardee_title=sue_str)
     sue_believer.add_partnerunit(partner_name=sue_str)
-    sue_believer.planroot.set_awardlink(awardlink=sue_awardlink)
+    sue_believer.planroot.set_awardunit(awardunit=sue_awardunit)
     # plan tree has awardlines
     assert sue_believer.planroot._awardheirs.get(sue_str) is None
 
@@ -432,8 +432,8 @@ def test_BelieverUnit_settle_believer_TreeTraverseSets_awardlines_ToRootPlanUnit
     sue_str = "Sue"
     sue_believer.add_partnerunit(sue_str)
     casa_rope = sue_believer.make_l1_rope("casa")
-    sue_believer.get_plan_obj(casa_rope).set_awardlink(
-        awardlink_shop(awardee_title=sue_str)
+    sue_believer.get_plan_obj(casa_rope).set_awardunit(
+        awardunit_shop(awardee_title=sue_str)
     )
     assert sue_believer.planroot._awardlines == {}
 
@@ -454,7 +454,7 @@ def test_BelieverUnit_settle_believer_TreeTraverseSets_awardlines_ToRootPlanUnit
     assert casa_planunit._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
-def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_give_fund_take():
+def test_BelieverUnit_settle_believer_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
@@ -464,14 +464,14 @@ def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_g
     sue_believer.set_partnerunit(partnerunit_shop(yao_str))
     sue_believer.set_partnerunit(partnerunit_shop(zia_str))
     sue_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
-    zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
-    xio_awardlink = awardlink_shop(xio_str, give_force=10)
+    yao_awardunit = awardunit_shop(yao_str, give_force=20, take_force=6)
+    zia_awardunit = awardunit_shop(zia_str, give_force=10, take_force=1)
+    xio_awardunit = awardunit_shop(xio_str, give_force=10)
     root_rope = to_rope(sue_believer.planroot.plan_label)
     x_planroot = sue_believer.get_plan_obj(root_rope)
-    x_planroot.set_awardlink(awardlink=yao_awardlink)
-    x_planroot.set_awardlink(awardlink=zia_awardlink)
-    x_planroot.set_awardlink(awardlink=xio_awardlink)
+    x_planroot.set_awardunit(awardunit=yao_awardunit)
+    x_planroot.set_awardunit(awardunit=zia_awardunit)
+    x_planroot.set_awardunit(awardunit=xio_awardunit)
     assert len(sue_believer.get_partnerunit_group_titles_dict()) == 3
 
     # WHEN
@@ -496,9 +496,9 @@ def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_g
 
     # ESTABLISH
     sue_believer.set_partnerunit(partnerunit_shop(sue_str))
-    sue_awardlink = awardlink_shop(sue_str, give_force=37)
-    x_planroot.set_awardlink(sue_awardlink)
-    assert len(x_planroot.awardlinks) == 4
+    sue_awardunit = awardunit_shop(sue_str, give_force=37)
+    x_planroot.set_awardunit(sue_awardunit)
+    assert len(x_planroot.awardunits) == 4
     assert len(sue_believer.get_partnerunit_group_titles_dict()) == 4
 
     # WHEN
@@ -525,7 +525,7 @@ def test_BelieverUnit_settle_believer_WithRootLevelAwardLinkSetsGroupUnit_fund_g
     assert round(debt_sum1) == 1 * default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_WithLevel3AwardLinkSetsGroupUnit_fund_give_fund_take():
+def test_BelieverUnit_settle_believer_WithLevel3AwardUnitSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     x_believer = believerunit_shop(bob_str)
@@ -539,13 +539,13 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkSetsGroupUnit_fund_give
     x_believer.set_partnerunit(partnerunit_shop(yao_str))
     x_believer.set_partnerunit(partnerunit_shop(zia_str))
     x_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
-    zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
-    xio_awardlink = awardlink_shop(xio_str, give_force=10)
+    yao_awardunit = awardunit_shop(yao_str, give_force=20, take_force=6)
+    zia_awardunit = awardunit_shop(zia_str, give_force=10, take_force=1)
+    xio_awardunit = awardunit_shop(xio_str, give_force=10)
     swim_plan = x_believer.get_plan_obj(swim_rope)
-    swim_plan.set_awardlink(yao_awardlink)
-    swim_plan.set_awardlink(zia_awardlink)
-    swim_plan.set_awardlink(xio_awardlink)
+    swim_plan.set_awardunit(yao_awardunit)
+    swim_plan.set_awardunit(zia_awardunit)
+    swim_plan.set_awardunit(xio_awardunit)
     assert len(x_believer.get_partnerunit_group_titles_dict()) == 3
 
     # WHEN
@@ -585,13 +585,13 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsGroup_fund_give_
     x_believer.set_partnerunit(partnerunit_shop(yao_str))
     x_believer.set_partnerunit(partnerunit_shop(zia_str))
     # x_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
-    zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
-    xio_awardlink = awardlink_shop(xio_str, give_force=10)
+    yao_awardunit = awardunit_shop(yao_str, give_force=20, take_force=6)
+    zia_awardunit = awardunit_shop(zia_str, give_force=10, take_force=1)
+    xio_awardunit = awardunit_shop(xio_str, give_force=10)
     swim_plan = x_believer.get_plan_obj(swim_rope)
-    swim_plan.set_awardlink(yao_awardlink)
-    swim_plan.set_awardlink(zia_awardlink)
-    swim_plan.set_awardlink(xio_awardlink)
+    swim_plan.set_awardunit(yao_awardunit)
+    swim_plan.set_awardunit(zia_awardunit)
+    swim_plan.set_awardunit(xio_awardunit)
     assert len(x_believer.get_partnerunit_group_titles_dict()) == 2
 
     # WHEN
@@ -620,7 +620,7 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsGroup_fund_give_
     assert groupunit_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGroupUnit_fund_give_fund_take():
+def test_BelieverUnit_settle_believer_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     yao_str = "Yao"
     x_believer = believerunit_shop(yao_str)
@@ -634,15 +634,15 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGr
     x_believer.set_partnerunit(partnerunit_shop(yao_str))
     x_believer.set_partnerunit(partnerunit_shop(zia_str))
     x_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
-    zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
-    xio_awardlink = awardlink_shop(xio_str, give_force=10)
+    yao_awardunit = awardunit_shop(yao_str, give_force=20, take_force=6)
+    zia_awardunit = awardunit_shop(zia_str, give_force=10, take_force=1)
+    xio_awardunit = awardunit_shop(xio_str, give_force=10)
     swim_plan = x_believer.get_plan_obj(swim_rope)
-    swim_plan.set_awardlink(yao_awardlink)
-    swim_plan.set_awardlink(zia_awardlink)
-    swim_plan.set_awardlink(xio_awardlink)
+    swim_plan.set_awardunit(yao_awardunit)
+    swim_plan.set_awardunit(zia_awardunit)
+    swim_plan.set_awardunit(xio_awardunit)
 
-    # no awardlinks attached to this one
+    # no awardunits attached to this one
     x_believer.set_l1_plan(planunit_shop("hunt", star=3))
 
     # WHEN
@@ -651,13 +651,13 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGr
     # THEN
     x_planroot = x_believer.get_plan_obj(to_rope(x_believer.belief_label))
     with pytest_raises(Exception) as excinfo:
-        x_planroot.awardlinks[yao_str]
+        x_planroot.awardunits[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot.awardlinks[zia_str]
+        x_planroot.awardunits[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot.awardlinks[xio_str]
+        x_planroot.awardunits[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
     with pytest_raises(Exception) as excinfo:
         x_planroot._kids["hunt"]._awardheirs[yao_str]
@@ -689,7 +689,7 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardLinkAndEmptyAncestorsSetsGr
     )
 
 
-def test_BelieverUnit_set_awardlink_CalculatesInheritedAwardLinkBelieverFund():
+def test_BelieverUnit_set_awardunit_CalculatesInheritedAwardUnitBelieverFund():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
@@ -699,13 +699,13 @@ def test_BelieverUnit_set_awardlink_CalculatesInheritedAwardLinkBelieverFund():
     sue_believer.set_partnerunit(partnerunit_shop(yao_str))
     sue_believer.set_partnerunit(partnerunit_shop(zia_str))
     sue_believer.set_partnerunit(partnerunit_shop(Xio_str))
-    yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
-    zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
-    Xio_awardlink = awardlink_shop(Xio_str, give_force=10)
-    sue_believer.planroot.set_awardlink(yao_awardlink)
-    sue_believer.planroot.set_awardlink(zia_awardlink)
-    sue_believer.planroot.set_awardlink(Xio_awardlink)
-    assert len(sue_believer.planroot.awardlinks) == 3
+    yao_awardunit = awardunit_shop(yao_str, give_force=20, take_force=6)
+    zia_awardunit = awardunit_shop(zia_str, give_force=10, take_force=1)
+    Xio_awardunit = awardunit_shop(Xio_str, give_force=10)
+    sue_believer.planroot.set_awardunit(yao_awardunit)
+    sue_believer.planroot.set_awardunit(zia_awardunit)
+    sue_believer.planroot.set_awardunit(Xio_awardunit)
+    assert len(sue_believer.planroot.awardunits) == 3
 
     # WHEN
     plan_dict = sue_believer.get_plan_dict()
@@ -757,13 +757,13 @@ def test_BelieverUnit_settle_believer_SetsGroupLinkBelieverCredAndDebt():
     yao_believer.set_partnerunit(partnerunit_shop(sue_str))
     yao_believer.set_partnerunit(partnerunit_shop(bob_str))
     yao_believer.set_partnerunit(partnerunit_shop(zia_str))
-    sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
-    bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
-    zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
+    sue_awardunit = awardunit_shop(sue_str, 20, take_force=40)
+    bob_awardunit = awardunit_shop(bob_str, 10, take_force=5)
+    zia_awardunit = awardunit_shop(zia_str, 10, take_force=5)
     root_rope = to_rope(yao_believer.belief_label)
-    yao_believer.edit_plan_attr(root_rope, awardlink=sue_awardlink)
-    yao_believer.edit_plan_attr(root_rope, awardlink=bob_awardlink)
-    yao_believer.edit_plan_attr(root_rope, awardlink=zia_awardlink)
+    yao_believer.edit_plan_attr(root_rope, awardunit=sue_awardunit)
+    yao_believer.edit_plan_attr(root_rope, awardunit=bob_awardunit)
+    yao_believer.edit_plan_attr(root_rope, awardunit=zia_awardunit)
 
     sue_partnerunit = yao_believer.get_partner(sue_str)
     bob_partnerunit = yao_believer.get_partner(bob_str)
@@ -805,7 +805,7 @@ def test_BelieverUnit_settle_believer_SetsGroupLinkBelieverCredAndDebt():
     # ESTABLISH another task, check metrics are as expected
     xio_str = "Xio"
     yao_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_believer.planroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=13))
+    yao_believer.planroot.set_awardunit(awardunit_shop(xio_str, 20, take_force=13))
 
     # WHEN
     yao_believer.settle_believer()
@@ -857,12 +857,12 @@ def test_BelieverUnit_settle_believer_SetsPartnerUnitBeliever_fund():
     yao_believer.set_partnerunit(partnerunit_shop(sue_str))
     yao_believer.set_partnerunit(partnerunit_shop(bob_str))
     yao_believer.set_partnerunit(partnerunit_shop(zia_str))
-    bl_sue = awardlink_shop(sue_str, 20, take_force=40)
-    bl_bob = awardlink_shop(bob_str, 10, take_force=5)
-    bl_zia = awardlink_shop(zia_str, 10, take_force=5)
-    yao_believer.get_plan_obj(swim_rope).set_awardlink(bl_sue)
-    yao_believer.get_plan_obj(swim_rope).set_awardlink(bl_bob)
-    yao_believer.get_plan_obj(swim_rope).set_awardlink(bl_zia)
+    bl_sue = awardunit_shop(sue_str, 20, take_force=40)
+    bl_bob = awardunit_shop(bob_str, 10, take_force=5)
+    bl_zia = awardunit_shop(zia_str, 10, take_force=5)
+    yao_believer.get_plan_obj(swim_rope).set_awardunit(bl_sue)
+    yao_believer.get_plan_obj(swim_rope).set_awardunit(bl_bob)
+    yao_believer.get_plan_obj(swim_rope).set_awardunit(bl_zia)
 
     sue_partnerunit = yao_believer.get_partner(sue_str)
     bob_partnerunit = yao_believer.get_partner(bob_str)
@@ -902,7 +902,7 @@ def test_BelieverUnit_settle_believer_SetsPartnerUnitBeliever_fund():
     # WHEN another task, check metrics are as expected
     xio_str = "Xio"
     yao_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_believer.planroot.set_awardlink(awardlink_shop(xio_str, 20, take_force=10))
+    yao_believer.planroot.set_awardunit(awardunit_shop(xio_str, 20, take_force=10))
     yao_believer.settle_believer()
 
     # THEN
@@ -957,15 +957,15 @@ def test_BelieverUnit_settle_believer_SetsPartGroupedLWPartnerUnitBeliever_fund(
     yao_believer.set_partnerunit(partnerunit_shop(sue_str))
     yao_believer.set_partnerunit(partnerunit_shop(bob_str))
     yao_believer.set_partnerunit(partnerunit_shop(zia_str))
-    sue_awardlink = awardlink_shop(sue_str, 20, take_force=40)
-    bob_awardlink = awardlink_shop(bob_str, 10, take_force=5)
-    zia_awardlink = awardlink_shop(zia_str, 10, take_force=5)
+    sue_awardunit = awardunit_shop(sue_str, 20, take_force=40)
+    bob_awardunit = awardunit_shop(bob_str, 10, take_force=5)
+    zia_awardunit = awardunit_shop(zia_str, 10, take_force=5)
     swim_plan = yao_believer.get_plan_obj(swim_rope)
-    swim_plan.set_awardlink(sue_awardlink)
-    swim_plan.set_awardlink(bob_awardlink)
-    swim_plan.set_awardlink(zia_awardlink)
+    swim_plan.set_awardunit(sue_awardunit)
+    swim_plan.set_awardunit(bob_awardunit)
+    swim_plan.set_awardunit(zia_awardunit)
 
-    # no awardlinks attached to this one
+    # no awardunits attached to this one
     hunt_str = "hunt"
     yao_believer.set_l1_plan(planunit_shop(hunt_str, star=3))
 
@@ -1030,13 +1030,13 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitAndSetsPartner_fund_giv
     bob_believer.set_partnerunit(partnerunit_shop(yao_str))
     bob_believer.set_partnerunit(partnerunit_shop(zia_str))
     # bob_believer.set_partnerunit(partnerunit_shop(xio_str))
-    yao_awardlink = awardlink_shop(yao_str, give_force=20, take_force=6)
-    zia_awardlink = awardlink_shop(zia_str, give_force=10, take_force=1)
-    xio_awardlink = awardlink_shop(xio_str, give_force=10)
+    yao_awardunit = awardunit_shop(yao_str, give_force=20, take_force=6)
+    zia_awardunit = awardunit_shop(zia_str, give_force=10, take_force=1)
+    xio_awardunit = awardunit_shop(xio_str, give_force=10)
     swim_plan = bob_believer.get_plan_obj(swim_rope)
-    swim_plan.set_awardlink(yao_awardlink)
-    swim_plan.set_awardlink(zia_awardlink)
-    swim_plan.set_awardlink(xio_awardlink)
+    swim_plan.set_awardunit(yao_awardunit)
+    swim_plan.set_awardunit(zia_awardunit)
+    swim_plan.set_awardunit(xio_awardunit)
     assert len(bob_believer.get_partnerunit_group_titles_dict()) == 2
 
     # WHEN
@@ -1355,10 +1355,10 @@ def test_BelieverUnit_settle_believer_CreatesGroupUnitWith_believerunit_v001():
     # THEN
     # print(f"{len(plan_dict)=}")
     db_plan = plan_dict.get(yao_believer.make_l1_rope("D&B"))
-    assert len(db_plan.awardlinks) == 3
+    assert len(db_plan.awardunits) == 3
     # for plan_key in plan_dict:
     #     print(f"{plan_key=}")
     #     if plan.plan_label == "D&B":
-    #         print(f"{plan.plan_label=} {plan.awardlinks=}")
-    #         db_awardlink_len = len(plan.awardlinks)
-    # assert db_awardlink_len == 3
+    #         print(f"{plan.plan_label=} {plan.awardunits=}")
+    #         db_awardunit_len = len(plan.awardunits)
+    # assert db_awardunit_len == 3

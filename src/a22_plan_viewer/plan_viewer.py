@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
 from src.a05_plan_logic.plan import (
     AwardHeir,
     AwardLine,
-    AwardLink,
+    AwardUnit,
     FactHeir,
     FactUnit,
     PlanUnit,
@@ -60,7 +60,7 @@ def jaar_objs_asdict(obj: Any) -> dict:
             result["_all_partner_cred"] = _all_partner_cred_str
             result["_all_partner_debt"] = _all_partner_debt_str
             result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
-        elif isinstance(obj, AwardLink):
+        elif isinstance(obj, AwardUnit):
             readable_str = (
                 f"{obj.awardee_title}: Take {obj.take_force}, Give {obj.give_force}"
             )

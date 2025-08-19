@@ -270,16 +270,16 @@ def add_believer_to_br00022_csv(
     event_int: int = None,
 ) -> str:
     for planunit in x_believer._plan_dict.values():
-        for awardlink in planunit.awardlinks.values():
+        for awardunit in planunit.awardunits.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_believer.belief_label,
                 x_believer.believer_name,
                 planunit.get_plan_rope(),
-                awardlink.awardee_title,
-                if_none_str(awardlink.give_force),
-                if_none_str(awardlink.take_force),
+                awardunit.awardee_title,
+                if_none_str(awardunit.give_force),
+                if_none_str(awardunit.take_force),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"
@@ -540,7 +540,7 @@ def add_pack_to_br00022_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_plan_awardlink":
+        if believeratom.dimen == "believer_plan_awardunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),

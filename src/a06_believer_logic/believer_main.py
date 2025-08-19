@@ -48,7 +48,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a03_group_logic.group import (
-    AwardLink,
+    AwardUnit,
     GroupUnit,
     groupunit_shop,
     membership_shop,
@@ -291,9 +291,9 @@ class BelieverUnit:
         all_plans_set = set(self.get_plan_tree_ordered_rope_list())
         return all_plans_set == all_plans_set.intersection(task_plan_assoc_set)
 
-    def get_awardlinks_metrics(self) -> dict[GroupTitle, AwardLink]:
+    def get_awardunits_metrics(self) -> dict[GroupTitle, AwardUnit]:
         tree_metrics = self.get_tree_metrics()
-        return tree_metrics.awardlinks_metrics
+        return tree_metrics.awardunits_metrics
 
     def add_to_groupunit_fund_give_fund_take(
         self,
@@ -525,7 +525,7 @@ class BelieverUnit:
         tree_metrics.evaluate_label(
             level=self.planroot._level,
             reasons=self.planroot.reasonunits,
-            awardlinks=self.planroot.awardlinks,
+            awardunits=self.planroot.awardunits,
             uid=self.planroot._uid,
             task=self.planroot.task,
             plan_rope=self.planroot.get_plan_rope(),
@@ -545,7 +545,7 @@ class BelieverUnit:
         tree_metrics.evaluate_label(
             level=plan_kid._level,
             reasons=plan_kid.reasonunits,
-            awardlinks=plan_kid.awardlinks,
+            awardunits=plan_kid.awardunits,
             uid=plan_kid._uid,
             task=plan_kid.task,
             plan_rope=plan_kid.get_plan_rope(),
@@ -607,7 +607,7 @@ class BelieverUnit:
         self,
         plan_kid: PlanUnit,
         create_missing_plans: bool = None,
-        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
+        get_rid_of_missing_awardunits_awardee_titles: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
         create_missing_ancestors: bool = True,
@@ -616,7 +616,7 @@ class BelieverUnit:
             plan_kid=plan_kid,
             parent_rope=self.belief_label,
             create_missing_plans=create_missing_plans,
-            get_rid_of_missing_awardlinks_awardee_titles=get_rid_of_missing_awardlinks_awardee_titles,
+            get_rid_of_missing_awardunits_awardee_titles=get_rid_of_missing_awardunits_awardee_titles,
             adoptees=adoptees,
             bundling=bundling,
             create_missing_ancestors=create_missing_ancestors,
@@ -626,7 +626,7 @@ class BelieverUnit:
         self,
         plan_kid: PlanUnit,
         parent_rope: RopeTerm,
-        get_rid_of_missing_awardlinks_awardee_titles: bool = None,
+        get_rid_of_missing_awardunits_awardee_titles: bool = None,
         create_missing_plans: bool = None,
         adoptees: list[str] = None,
         bundling: bool = True,
@@ -649,8 +649,8 @@ class BelieverUnit:
             plan_kid.belief_label = self.belief_label
         if plan_kid.fund_iota != self.fund_iota:
             plan_kid.fund_iota = self.fund_iota
-        if not get_rid_of_missing_awardlinks_awardee_titles:
-            plan_kid = self._get_filtered_awardlinks_plan(plan_kid)
+        if not get_rid_of_missing_awardunits_awardee_titles:
+            plan_kid = self._get_filtered_awardunits_plan(plan_kid)
         plan_kid.set_parent_rope(parent_rope=parent_rope)
 
         # create any missing plans
@@ -680,15 +680,15 @@ class BelieverUnit:
         if create_missing_plans:
             self._create_missing_plans(rope=kid_rope)
 
-    def _get_filtered_awardlinks_plan(self, x_plan: PlanUnit) -> PlanUnit:
-        _awardlinks_to_delete = [
-            _awardlink_awardee_title
-            for _awardlink_awardee_title in x_plan.awardlinks.keys()
-            if self.get_partnerunit_group_titles_dict().get(_awardlink_awardee_title)
+    def _get_filtered_awardunits_plan(self, x_plan: PlanUnit) -> PlanUnit:
+        _awardunits_to_delete = [
+            _awardunit_awardee_title
+            for _awardunit_awardee_title in x_plan.awardunits.keys()
+            if self.get_partnerunit_group_titles_dict().get(_awardunit_awardee_title)
             is None
         ]
-        for _awardlink_awardee_title in _awardlinks_to_delete:
-            x_plan.awardlinks.pop(_awardlink_awardee_title)
+        for _awardunit_awardee_title in _awardunits_to_delete:
+            x_plan.awardunits.pop(_awardunit_awardee_title)
         if x_plan.laborunit is not None:
             _partys_to_delete = [
                 _partyunit_party_title
@@ -836,8 +836,8 @@ class BelieverUnit:
         descendant_task_count: int = None,
         all_partner_cred: bool = None,
         all_partner_debt: bool = None,
-        awardlink: AwardLink = None,
-        awardlink_del: GroupTitle = None,
+        awardunit: AwardUnit = None,
+        awardunit_del: GroupTitle = None,
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
@@ -872,8 +872,8 @@ class BelieverUnit:
             descendant_task_count=descendant_task_count,
             all_partner_cred=all_partner_cred,
             all_partner_debt=all_partner_debt,
-            awardlink=awardlink,
-            awardlink_del=awardlink_del,
+            awardunit=awardunit,
+            awardunit_del=awardunit_del,
             is_expanded=is_expanded,
             task=task,
             factunit=factunit,
@@ -958,15 +958,15 @@ class BelieverUnit:
         for groupunit_obj in self._groupunits.values():
             groupunit_obj.clear_fund_give_take()
 
-    def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardLink]):
-        for awardlink_obj in awardheirs.values():
-            x_awardee_title = awardlink_obj.awardee_title
+    def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardUnit]):
+        for awardunit_obj in awardheirs.values():
+            x_awardee_title = awardunit_obj.awardee_title
             if not self.groupunit_exists(x_awardee_title):
                 self.set_groupunit(self.create_symmetry_groupunit(x_awardee_title))
             self.add_to_groupunit_fund_give_fund_take(
-                group_title=awardlink_obj.awardee_title,
-                awardheir_fund_give=awardlink_obj._fund_give,
-                awardheir_fund_take=awardlink_obj._fund_take,
+                group_title=awardunit_obj.awardee_title,
+                awardheir_fund_give=awardunit_obj._fund_give,
+                awardheir_fund_take=awardunit_obj._fund_take,
             )
 
     def _allot_fund_believer_agenda(self):
@@ -1447,7 +1447,7 @@ class BelieverUnit:
         self.set_plan(
             plan_kid=plan_kid,
             parent_rope=self.make_rope(plan_kid.parent_rope),
-            get_rid_of_missing_awardlinks_awardee_titles=True,
+            get_rid_of_missing_awardunits_awardee_titles=True,
             create_missing_plans=True,
         )
 
@@ -1566,7 +1566,7 @@ def create_planroot_from_believer_dict(x_believer: BelieverUnit, believer_dict: 
         laborunit=get_obj_from_plan_dict(planroot_dict, "laborunit"),
         healerlink=get_obj_from_plan_dict(planroot_dict, "healerlink"),
         factunits=get_obj_from_plan_dict(planroot_dict, "factunits"),
-        awardlinks=get_obj_from_plan_dict(planroot_dict, "awardlinks"),
+        awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
         _is_expanded=get_obj_from_plan_dict(planroot_dict, "_is_expanded"),
         knot=x_believer.knot,
         belief_label=x_believer.belief_label,
@@ -1609,7 +1609,7 @@ def create_planroot_kids_from_dict(x_believer: BelieverUnit, planroot_dict: dict
             reasonunits=get_obj_from_plan_dict(plan_dict, "reasonunits"),
             laborunit=get_obj_from_plan_dict(plan_dict, "laborunit"),
             healerlink=get_obj_from_plan_dict(plan_dict, "healerlink"),
-            awardlinks=get_obj_from_plan_dict(plan_dict, "awardlinks"),
+            awardunits=get_obj_from_plan_dict(plan_dict, "awardunits"),
             factunits=get_obj_from_plan_dict(plan_dict, "factunits"),
             _is_expanded=get_obj_from_plan_dict(plan_dict, "_is_expanded"),
         )

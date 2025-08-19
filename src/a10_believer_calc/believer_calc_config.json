@@ -133,7 +133,7 @@
             }
         }
     },
-    "believer_plan_awardlink": {
+    "believer_plan_awardunit": {
         "abbreviation": "blrawar",
         "jkeys": {
             "awardee_title": {

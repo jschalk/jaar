@@ -19,7 +19,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _stop_calc_str,
     _uid_str,
     addin_str,
-    awardlinks_str,
     begin_str,
     close_str,
     denom_str,
@@ -60,7 +59,6 @@ def test_str_functions_ReturnsObj():
     assert _stop_calc_str() == "_stop_calc"
     assert _uid_str() == "_uid"
     assert addin_str() == "addin"
-    assert awardlinks_str() == "awardlinks"
     assert begin_str() == "begin"
     assert close_str() == "close"
     assert plan_label_str() == "plan_label"

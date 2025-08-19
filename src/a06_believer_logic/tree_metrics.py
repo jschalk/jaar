@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_dict_if_None
 from src.a01_term_logic.term import GroupTitle
-from src.a03_group_logic.group import AwardLink
+from src.a03_group_logic.group import AwardUnit
 from src.a04_reason_logic.reason_plan import ReasonUnit, RopeTerm
 
 
@@ -10,7 +10,7 @@ class TreeMetrics:
     label_count: int = None
     level_count: dict[int, int] = None
     reason_contexts: dict[RopeTerm, int] = None
-    awardlinks_metrics: dict[GroupTitle, AwardLink] = None
+    awardunits_metrics: dict[GroupTitle, AwardUnit] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_plan_uids_are_unique: bool = None
@@ -20,7 +20,7 @@ class TreeMetrics:
         self,
         level: int,
         reasons: dict[RopeTerm, ReasonUnit],
-        awardlinks: dict[GroupTitle, AwardLink],
+        awardunits: dict[GroupTitle, AwardUnit],
         uid: int,
         task: bool,
         plan_rope: RopeTerm,
@@ -29,7 +29,7 @@ class TreeMetrics:
         self.evaluate_task(task=task, plan_rope=plan_rope)
         self.evaluate_level(level=level)
         self.evaluate_reasonunits(reasons=reasons)
-        self.evaluate_awardlinks(awardlinks=awardlinks)
+        self.evaluate_awardunits(awardunits=awardunits)
         self.evaluate_uid_max(uid=uid)
 
     def evaluate_task(self, task: bool, plan_rope: RopeTerm):
@@ -52,10 +52,10 @@ class TreeMetrics:
                     self.reason_contexts[reason.reason_context] + 1
                 )
 
-    def evaluate_awardlinks(self, awardlinks: dict[GroupTitle, AwardLink]):
-        if awardlinks is not None:
-            for awardlink in awardlinks.values():
-                self.awardlinks_metrics[awardlink.awardee_title] = awardlink
+    def evaluate_awardunits(self, awardunits: dict[GroupTitle, AwardUnit]):
+        if awardunits is not None:
+            for awardunit in awardunits.values():
+                self.awardunits_metrics[awardunit.awardee_title] = awardunit
 
     def evaluate_uid_max(self, uid):
         if uid is not None and self.uid_max < uid:
@@ -72,7 +72,7 @@ def treemetrics_shop(
     label_count: int = None,
     level_count: dict[int, int] = None,
     reason_contexts: dict[RopeTerm, int] = None,
-    awardlinks_metrics: dict[GroupTitle, AwardLink] = None,
+    awardunits_metrics: dict[GroupTitle, AwardUnit] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,
 ) -> TreeMetrics:
@@ -80,7 +80,7 @@ def treemetrics_shop(
         label_count=get_0_if_None(label_count),
         level_count=get_empty_dict_if_None(level_count),
         reason_contexts=get_empty_dict_if_None(reason_contexts),
-        awardlinks_metrics=get_empty_dict_if_None(awardlinks_metrics),
+        awardunits_metrics=get_empty_dict_if_None(awardunits_metrics),
         uid_dict=get_empty_dict_if_None(uid_dict),
         uid_max=get_0_if_None(uid_max),
     )

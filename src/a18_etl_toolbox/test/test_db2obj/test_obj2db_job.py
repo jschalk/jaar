@@ -298,7 +298,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_plan_awardlink")
+    x_args = get_believer_calc_dimen_args("believer_plan_awardunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -350,7 +350,7 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_plan_awardlink_job"
+        table_name = "believer_plan_awardunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

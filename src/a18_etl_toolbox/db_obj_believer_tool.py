@@ -130,7 +130,7 @@ def create_blrawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     take_force = values_dict.get("take_force")
     _fund_give = values_dict.get("_fund_give")
     _fund_take = values_dict.get("_fund_take")
-    return f"""INSERT INTO believer_plan_awardlink_job (belief_label, believer_name, plan_rope, awardee_title, give_force, take_force, _fund_give, _fund_take)
+    return f"""INSERT INTO believer_plan_awardunit_job (belief_label, believer_name, plan_rope, awardee_title, give_force, take_force, _fund_give, _fund_take)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}

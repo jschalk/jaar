@@ -1,4 +1,4 @@
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 
@@ -32,14 +32,14 @@ def get_sue_casa_believerunit() -> BelieverUnit:
     sue_believer.add_fact(best_rope, best_soccer_rope, 1, 7)
 
     # Add some award links
-    casa_manager_awardlink = awardlink_shop("Manager", 0.5, 0.2)
-    casa_team_awardlink = awardlink_shop("Team Lead", 0.3, 0.1)
-    casa_devloper_awardlink = awardlink_shop("Sue", 1, 0.8)
-    casa_jundevloper_awardlink = awardlink_shop("Bob", 0.7, 0.9)
+    casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
+    casa_team_awardunit = awardunit_shop("Team Lead", 0.3, 0.1)
+    casa_devloper_awardunit = awardunit_shop("Sue", 1, 0.8)
+    casa_jundevloper_awardunit = awardunit_shop("Bob", 0.7, 0.9)
     root_rope = sue_believer.planroot.get_plan_rope()
-    sue_believer.edit_plan_attr(root_rope, awardlink=casa_manager_awardlink)
-    sue_believer.edit_plan_attr(root_rope, awardlink=casa_team_awardlink)
-    sue_believer.edit_plan_attr(casa_rope, awardlink=casa_devloper_awardlink)
-    sue_believer.edit_plan_attr(casa_rope, awardlink=casa_jundevloper_awardlink)
+    sue_believer.edit_plan_attr(root_rope, awardunit=casa_manager_awardunit)
+    sue_believer.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
+    sue_believer.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
+    sue_believer.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
     sue_believer.settle_believer()
     return sue_believer

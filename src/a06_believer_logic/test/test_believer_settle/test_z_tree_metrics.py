@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import create_rope_from_labels
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
@@ -17,7 +17,7 @@ def test_BelieverUnit_get_tree_metrics_Exists():
     assert zia_believer_tree_metrics.label_count is not None
     assert zia_believer_tree_metrics.reason_contexts is not None
     assert zia_believer_tree_metrics.level_count is not None
-    assert zia_believer_tree_metrics.awardlinks_metrics is not None
+    assert zia_believer_tree_metrics.awardunits_metrics is not None
 
 
 def test_BelieverUnit_get_tree_metrics_get_plan_uid_max_GetsMaxPlanUID():
@@ -163,21 +163,21 @@ def test_BelieverUnit_3AdvocatesNoplanunit_shop():
     zia_believerunit.set_partnerunit(yao_partnerunit)
     zia_believerunit.set_partnerunit(sue_partnerunit)
     zia_believerunit.set_partnerunit(zia_partnerunit)
-    zia_believerunit.planroot.set_awardlink(awardlink_shop(yao_str, give_force=10))
-    zia_believerunit.planroot.set_awardlink(awardlink_shop(sue_str, give_force=10))
-    zia_believerunit.planroot.set_awardlink(awardlink_shop(zia_str, give_force=10))
+    zia_believerunit.planroot.set_awardunit(awardunit_shop(yao_str, give_force=10))
+    zia_believerunit.planroot.set_awardunit(awardunit_shop(sue_str, give_force=10))
+    zia_believerunit.planroot.set_awardunit(awardunit_shop(zia_str, give_force=10))
 
     # WHEN
-    assert zia_believerunit.get_awardlinks_metrics() is not None
-    partners_metrics = zia_believerunit.get_awardlinks_metrics()
+    assert zia_believerunit.get_awardunits_metrics() is not None
+    partners_metrics = zia_believerunit.get_awardunits_metrics()
 
     # THEN
-    yao_awardlink = partners_metrics[yao_str]
-    sue_awardlink = partners_metrics[sue_str]
-    zia_awardlink = partners_metrics[zia_str]
-    assert yao_awardlink.awardee_title is not None
-    assert sue_awardlink.awardee_title is not None
-    assert zia_awardlink.awardee_title is not None
-    assert yao_awardlink.awardee_title == yao_str
-    assert sue_awardlink.awardee_title == sue_str
-    assert zia_awardlink.awardee_title == zia_str
+    yao_awardunit = partners_metrics[yao_str]
+    sue_awardunit = partners_metrics[sue_str]
+    zia_awardunit = partners_metrics[zia_str]
+    assert yao_awardunit.awardee_title is not None
+    assert sue_awardunit.awardee_title is not None
+    assert zia_awardunit.awardee_title is not None
+    assert yao_awardunit.awardee_title == yao_str
+    assert sue_awardunit.awardee_title == sue_str
+    assert zia_awardunit.awardee_title == zia_str

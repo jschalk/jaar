@@ -20,7 +20,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _stop_calc_str,
     _uid_str,
     addin_str,
-    awardlinks_str,
+    awardunits_str,
     begin_str,
     belief_label_str,
     close_str,
@@ -69,7 +69,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         "root",
         star_str(),
         _uid_str(),
-        awardlinks_str(),
+        awardunits_str(),
         "reasonunits",
         "laborunit",
         "factunits",
@@ -173,7 +173,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     assert casa_dict.get(_fund_ratio_str()) == "38%"
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
+def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     # ESTABLISH
     sue_believerunit = get_sue_casa_believerunit()
     casa_rope = sue_believerunit.make_l1_rope("casa")
@@ -183,21 +183,21 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    # awardlinks
-    awardlinks_dict = casa_dict.get(awardlinks_str())
-    assert len(awardlinks_dict) == 2
-    # print(f"{len(awardlinks_dict)=}")
+    # awardunits
+    awardunits_dict = casa_dict.get(awardunits_str())
+    assert len(awardunits_dict) == 2
+    # print(f"{len(awardunits_dict)=}")
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_awardlink_dict = awardlinks_dict.get(sue_str)
-    bob_awardlink_dict = awardlinks_dict.get(bob_str)
+    sue_awardunit_dict = awardunits_dict.get(sue_str)
+    bob_awardunit_dict = awardunits_dict.get(bob_str)
     readable_str = "readable"
     expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
     expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
-    # print(f"{sue_awardlink_dict.get(readable_str)=}")
-    # print(f"{bob_awardlink_dict.get(readable_str)=}")
-    assert sue_awardlink_dict.get(readable_str) == expected_sue_readable
-    assert bob_awardlink_dict.get(readable_str) == expected_bob_readable
+    # print(f"{sue_awardunit_dict.get(readable_str)=}")
+    # print(f"{bob_awardunit_dict.get(readable_str)=}")
+    assert sue_awardunit_dict.get(readable_str) == expected_sue_readable
+    assert bob_awardunit_dict.get(readable_str) == expected_bob_readable
 
     # _awardheirs
     awardheirs_dict = casa_dict.get("_awardheirs")

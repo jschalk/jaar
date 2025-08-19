@@ -72,7 +72,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     begin_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -155,7 +155,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel0Keys():
     assert believer_partnerunit_str() in believer_calc_config_keys
     assert believer_partner_membership_str() in believer_calc_config_keys
     assert believer_planunit_str() in believer_calc_config_keys
-    assert believer_plan_awardlink_str() in believer_calc_config_keys
+    assert believer_plan_awardunit_str() in believer_calc_config_keys
     assert believer_plan_reasonunit_str() in believer_calc_config_keys
     assert believer_plan_reason_caseunit_str() in believer_calc_config_keys
     assert believer_plan_partyunit_str() in believer_calc_config_keys
@@ -218,7 +218,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     blrpern_aspect = believer_calc_config.get(believer_partnerunit_str())
     blrmemb_aspect = believer_calc_config.get(believer_partner_membership_str())
     blrplan_aspect = believer_calc_config.get(believer_planunit_str())
-    blrawar_aspect = believer_calc_config.get(believer_plan_awardlink_str())
+    blrawar_aspect = believer_calc_config.get(believer_plan_awardunit_str())
     blrreas_aspect = believer_calc_config.get(believer_plan_reasonunit_str())
     blrprem_aspect = believer_calc_config.get(believer_plan_reason_caseunit_str())
     blrlabo_aspect = believer_calc_config.get(believer_plan_partyunit_str())
@@ -333,7 +333,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckAbbreviations():
     blrpern_aspect = believer_calc_config.get(believer_partnerunit_str())
     blrmemb_aspect = believer_calc_config.get(believer_partner_membership_str())
     blrplan_aspect = believer_calc_config.get(believer_planunit_str())
-    blrawar_aspect = believer_calc_config.get(believer_plan_awardlink_str())
+    blrawar_aspect = believer_calc_config.get(believer_plan_awardunit_str())
     blrreas_aspect = believer_calc_config.get(believer_plan_reasonunit_str())
     blrprem_aspect = believer_calc_config.get(believer_plan_reason_caseunit_str())
     blrlabo_aspect = believer_calc_config.get(believer_plan_partyunit_str())
@@ -364,7 +364,7 @@ def test_get_all_believer_calc_args_ReturnsObj():
     assert plan_rope_str() in all_believer_calc_args
     assert "_fund_give" in all_believer_calc_args
     assert all_believer_calc_args.get("_fund_give") == {
-        "believer_plan_awardlink",
+        "believer_plan_awardunit",
         "believer_partner_membership",
         "believer_groupunit",
         "believer_partnerunit",
@@ -409,7 +409,7 @@ def test_get_believer_calc_dimens_ReturnsObj():
         believer_partnerunit_str(),
         believer_partner_membership_str(),
         believer_planunit_str(),
-        believer_plan_awardlink_str(),
+        believer_plan_awardunit_str(),
         believer_plan_reasonunit_str(),
         believer_plan_reason_caseunit_str(),
         believer_plan_partyunit_str(),
@@ -535,7 +535,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     blrpern = believer_partnerunit_str()
     blrmemb = believer_partner_membership_str()
     blrplan = believer_planunit_str()
-    blrawar = believer_plan_awardlink_str()
+    blrawar = believer_plan_awardunit_str()
     blrreas = believer_plan_reasonunit_str()
     blrprem = believer_plan_reason_caseunit_str()
     blrlabo = believer_plan_partyunit_str()

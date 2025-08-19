@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import create_rope
-from src.a03_group_logic.group import awardheir_shop, awardlink_shop
+from src.a03_group_logic.group import awardheir_shop, awardunit_shop
 from src.a03_group_logic.labor import laborheir_shop, laborunit_shop
 from src.a04_reason_logic.reason_plan import (
     caseunit_shop,
@@ -43,47 +43,47 @@ def test_PlanUnit_get_fund_share_ReturnsObj():
     assert texas_plan.get_fund_share() == 11
 
 
-def test_PlanUnit_set_awardlink_SetsAttr():
+def test_PlanUnit_set_awardunit_SetsAttr():
     # ESTABLISH
     biker_str = "bikers2"
     sport_str = "sport"
     sport_planunit = planunit_shop(sport_str)
-    assert not sport_planunit.awardlinks.get(biker_str)
+    assert not sport_planunit.awardunits.get(biker_str)
 
     # WHEN
-    sport_planunit.set_awardlink(awardlink_shop(biker_str))
+    sport_planunit.set_awardunit(awardunit_shop(biker_str))
 
     # THEN
-    assert sport_planunit.awardlinks.get(biker_str)
+    assert sport_planunit.awardunits.get(biker_str)
 
 
-def test_PlanUnit_awardlink_exists_ReturnsObj():
+def test_PlanUnit_awardunit_exists_ReturnsObj():
     # ESTABLISH
     biker_str = "bikers2"
     sport_str = "sport"
     sport_planunit = planunit_shop(sport_str)
-    assert not sport_planunit.awardlink_exists(biker_str)
+    assert not sport_planunit.awardunit_exists(biker_str)
 
     # WHEN
-    sport_planunit.set_awardlink(awardlink_shop(biker_str))
+    sport_planunit.set_awardunit(awardunit_shop(biker_str))
 
     # THEN
-    assert sport_planunit.awardlink_exists(biker_str)
+    assert sport_planunit.awardunit_exists(biker_str)
 
 
-def test_PlanUnit_get_awardlink_ReturnsObj():
+def test_PlanUnit_get_awardunit_ReturnsObj():
     # ESTABLISH
     biker_str = "bikers2"
     sport_str = "sport"
     sport_planunit = planunit_shop(sport_str)
-    sport_planunit.set_awardlink(awardlink_shop(biker_str))
+    sport_planunit.set_awardunit(awardunit_shop(biker_str))
 
     # WHEN
-    biker_awardlink = sport_planunit.get_awardlink(biker_str)
+    biker_awardunit = sport_planunit.get_awardunit(biker_str)
 
     # THEN
-    assert biker_awardlink
-    assert biker_awardlink.awardee_title == biker_str
+    assert biker_awardunit
+    assert biker_awardunit.awardee_title == biker_str
 
 
 def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():

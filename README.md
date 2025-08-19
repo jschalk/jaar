@@ -112,7 +112,7 @@ BelieverUnit PlanUnit objects
 
 BelieverUnit PlanUnit hierarchical structure
 
-BelieverUnit PlanUnit AwardLink objects
+BelieverUnit PlanUnit AwardUnit objects
 
 BelieverUnit PlanUnit AwardLine objects
 

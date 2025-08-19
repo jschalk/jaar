@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template_string
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
@@ -34,15 +34,15 @@ sue_believer.add_fact(tidiness_rope, dirty_rope, 4, 8)
 sue_believer.add_fact(best_rope, best_soccer_rope, 1, 7)
 
 # Add some award links
-casa_manager_awardlink = awardlink_shop("Manager", 0.5, 0.2)
-casa_team_awardlink = awardlink_shop("Team Lead", 0.3, 0.1)
-casa_devloper_awardlink = awardlink_shop("Sue", 1, 0.8)
-casa_jundevloper_awardlink = awardlink_shop("Bob", 0.7, 0.9)
+casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
+casa_team_awardunit = awardunit_shop("Team Lead", 0.3, 0.1)
+casa_devloper_awardunit = awardunit_shop("Sue", 1, 0.8)
+casa_jundevloper_awardunit = awardunit_shop("Bob", 0.7, 0.9)
 root_rope = sue_believer.planroot.get_plan_rope()
-sue_believer.edit_plan_attr(root_rope, awardlink=casa_manager_awardlink)
-sue_believer.edit_plan_attr(root_rope, awardlink=casa_team_awardlink)
-sue_believer.edit_plan_attr(casa_rope, awardlink=casa_devloper_awardlink)
-sue_believer.edit_plan_attr(casa_rope, awardlink=casa_jundevloper_awardlink)
+sue_believer.edit_plan_attr(root_rope, awardunit=casa_manager_awardunit)
+sue_believer.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
+sue_believer.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
+sue_believer.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
 sue_believer.settle_believer()
 
 plan_view_dict = get_plan_view_dict(sue_believer.planroot)
@@ -94,8 +94,8 @@ def get_plan_viewer_template() -> str:
             <label for="show_factunits">factunits</label>
             <input type="checkbox" id="show_factheirs">
             <label for="show_factheirs">factheirs</label>
-            <input type="checkbox" id="show_awardlinks">
-            <label for="show_awardlinks">awardlinks</label>
+            <input type="checkbox" id="show_awardunits">
+            <label for="show_awardunits">awardunits</label>
             <input type="checkbox" id="show_awardheirs">
             <label for="show_awardheirs">awardheirs</label>
             <input type="checkbox" id="show_awardlines">

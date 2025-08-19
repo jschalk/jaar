@@ -9,7 +9,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     begin_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -164,7 +164,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(INSERT_str(), believer_partnerunit_str(), 0)
     # set_mog(INSERT_str(), believer_partner_membership_str(), 1)
     # set_mog(INSERT_str(), believer_planunit_str(), 2)
-    # set_mog(INSERT_str(), believer_plan_awardlink_str(), 3)
+    # set_mog(INSERT_str(), believer_plan_awardunit_str(), 3)
     # set_mog(INSERT_str(), believer_plan_partyunit_str(), 4)
     # set_mog(INSERT_str(), believer_plan_healerlink_str(), 5)
     # set_mog(INSERT_str(), believer_plan_factunit_str(), 6)
@@ -173,7 +173,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(UPDATE_str(), believer_partnerunit_str(), 9)
     # set_mog(UPDATE_str(), believer_partner_membership_str(), 10)
     # set_mog(UPDATE_str(), believer_planunit_str(), 11)
-    # set_mog(UPDATE_str(), believer_plan_awardlink_str(), 12)
+    # set_mog(UPDATE_str(), believer_plan_awardunit_str(), 12)
     # set_mog(UPDATE_str(), believer_plan_factunit_str(), 13)
     # set_mog(UPDATE_str(), believer_plan_reason_caseunit_str(), 14)
     # set_mog(UPDATE_str(), believer_plan_reasonunit_str(), 15)
@@ -182,7 +182,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(DELETE_str(), believer_plan_factunit_str(), 18)
     # set_mog(DELETE_str(), believer_plan_partyunit_str(), 19)
     # set_mog(DELETE_str(), believer_plan_healerlink_str(), 20)
-    # set_mog(DELETE_str(), believer_plan_awardlink_str(), 21)
+    # set_mog(DELETE_str(), believer_plan_awardunit_str(), 21)
     # set_mog(DELETE_str(), believer_planunit_str(), 22)
     # set_mog(DELETE_str(), believer_partner_membership_str(), 23)
     # set_mog(DELETE_str(), believer_partnerunit_str(), 24)
@@ -191,7 +191,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 0 == q_order(INSERT_str(), believer_partnerunit_str())
     assert 1 == q_order(INSERT_str(), believer_partner_membership_str())
     assert 2 == q_order(INSERT_str(), believer_planunit_str())
-    assert 3 == q_order(INSERT_str(), believer_plan_awardlink_str())
+    assert 3 == q_order(INSERT_str(), believer_plan_awardunit_str())
     assert 4 == q_order(INSERT_str(), believer_plan_partyunit_str())
     assert 5 == q_order(INSERT_str(), believer_plan_healerlink_str())
     assert 6 == q_order(INSERT_str(), believer_plan_factunit_str())
@@ -200,7 +200,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 9 == q_order(UPDATE_str(), believer_partnerunit_str())
     assert 10 == q_order(UPDATE_str(), believer_partner_membership_str())
     assert 11 == q_order(UPDATE_str(), believer_planunit_str())
-    assert 12 == q_order(UPDATE_str(), believer_plan_awardlink_str())
+    assert 12 == q_order(UPDATE_str(), believer_plan_awardunit_str())
     assert 13 == q_order(UPDATE_str(), believer_plan_factunit_str())
     assert 14 == q_order(UPDATE_str(), believer_plan_reason_caseunit_str())
     assert 15 == q_order(UPDATE_str(), believer_plan_reasonunit_str())
@@ -209,7 +209,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 18 == q_order(DELETE_str(), believer_plan_factunit_str())
     assert 19 == q_order(DELETE_str(), believer_plan_partyunit_str())
     assert 20 == q_order(DELETE_str(), believer_plan_healerlink_str())
-    assert 21 == q_order(DELETE_str(), believer_plan_awardlink_str())
+    assert 21 == q_order(DELETE_str(), believer_plan_awardunit_str())
     assert 22 == q_order(DELETE_str(), believer_planunit_str())
     assert 23 == q_order(DELETE_str(), believer_partner_membership_str())
     assert 24 == q_order(DELETE_str(), believer_partnerunit_str())
@@ -232,7 +232,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(believer_partnerunit_str()) == 1
     assert _get_atom_config_jkeys_len(believer_partner_membership_str()) == 2
     assert _get_atom_config_jkeys_len(believer_planunit_str()) == 1
-    assert _get_atom_config_jkeys_len(believer_plan_awardlink_str()) == 2
+    assert _get_atom_config_jkeys_len(believer_plan_awardunit_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_reasonunit_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_reason_caseunit_str()) == 3
     assert _get_atom_config_jkeys_len(believer_plan_partyunit_str()) == 2
@@ -243,7 +243,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jvalues_len(believer_partnerunit_str()) == 2
     assert _get_atom_config_jvalues_len(believer_partner_membership_str()) == 2
     assert _get_atom_config_jvalues_len(believer_planunit_str()) == 11
-    assert _get_atom_config_jvalues_len(believer_plan_awardlink_str()) == 2
+    assert _get_atom_config_jvalues_len(believer_plan_awardunit_str()) == 2
     assert _get_atom_config_jvalues_len(believer_plan_reasonunit_str()) == 1
     assert _get_atom_config_jvalues_len(believer_plan_reason_caseunit_str()) == 3
     assert _get_atom_config_jvalues_len(believer_plan_partyunit_str()) == 1
@@ -412,7 +412,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     cat_partnerunit = nx.get(believer_partnerunit_str())
     cat_membership = nx.get(believer_partner_membership_str())
     cat_plan = nx.get(believer_planunit_str())
-    cat_awardlink = nx.get(believer_plan_awardlink_str())
+    cat_awardunit = nx.get(believer_plan_awardunit_str())
     cat_reason = nx.get(believer_plan_reasonunit_str())
     cat_case = nx.get(believer_plan_reason_caseunit_str())
     cat_partyunit = nx.get(believer_plan_partyunit_str())
@@ -423,7 +423,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert cat_partnerunit is not None
     assert cat_membership is not None
     assert cat_plan is not None
-    assert cat_awardlink is not None
+    assert cat_awardunit is not None
     assert cat_reason is not None
     assert cat_case is not None
     assert cat_partyunit is not None
@@ -434,7 +434,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     normal_specs_partnerunit = cat_partnerunit.get(normal_specs_str())
     normal_specs_membership = cat_membership.get(normal_specs_str())
     normal_specs_plan = cat_plan.get(normal_specs_str())
-    normal_specs_awardlink = cat_awardlink.get(normal_specs_str())
+    normal_specs_awardunit = cat_awardunit.get(normal_specs_str())
     normal_specs_reason = cat_reason.get(normal_specs_str())
     normal_specs_case = cat_case.get(normal_specs_str())
     normal_specs_partyunit = cat_partyunit.get(normal_specs_str())
@@ -448,7 +448,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert normal_specs_partnerunit is not None
     assert normal_specs_membership is not None
     assert normal_specs_plan is not None
-    assert normal_specs_awardlink is not None
+    assert normal_specs_awardunit is not None
     assert normal_specs_reason is not None
     assert normal_specs_case is not None
     assert normal_specs_partyunit is not None
@@ -459,7 +459,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     table_name_partnerunit = normal_specs_partnerunit.get(normal_table_name_str())
     table_name_membership = normal_specs_membership.get(normal_table_name_str())
     table_name_plan = normal_specs_plan.get(normal_table_name_str())
-    table_name_awardlink = normal_specs_awardlink.get(normal_table_name_str())
+    table_name_awardunit = normal_specs_awardunit.get(normal_table_name_str())
     table_name_reason = normal_specs_reason.get(normal_table_name_str())
     table_name_case = normal_specs_case.get(normal_table_name_str())
     table_name_partyunit = normal_specs_partyunit.get(normal_table_name_str())
@@ -470,7 +470,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert table_name_partnerunit == "partnerunit"
     assert table_name_membership == "membership"
     assert table_name_plan == "plan"
-    assert table_name_awardlink == "awardlink"
+    assert table_name_awardunit == "awardunit"
     assert table_name_reason == "reason"
     assert table_name_case == "case"
     assert table_name_partyunit == "partyunit"

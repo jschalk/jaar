@@ -2,7 +2,7 @@ from src.a01_term_logic.rope import create_rope, default_knot_if_None
 from src.a01_term_logic.test._util.a01_str import knot_str, parent_rope_str
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.test._util.a04_str import _chore_str
 from src.a05_plan_logic.healer import healerlink_shop
@@ -29,7 +29,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _stop_calc_str,
     _uid_str,
     addin_str,
-    awardlinks_str,
+    awardunits_str,
     begin_str,
     belief_label_str,
     close_str,
@@ -69,7 +69,7 @@ def test_PlanUnit_Exists():
     assert x_planunit._laborheir is None  # calculated field
     assert x_planunit.factunits is None
     assert x_planunit._factheirs is None  # calculated field
-    assert x_planunit.awardlinks is None
+    assert x_planunit.awardunits is None
     assert x_planunit._awardlines is None  # calculated field'
     assert x_planunit._awardheirs is None  # calculated field'
     assert x_planunit.knot is None
@@ -127,7 +127,7 @@ def test_PlanUnit_Exists():
         _chore_str(),
         _uid_str(),
         addin_str(),
-        awardlinks_str(),
+        awardunits_str(),
         begin_str(),
         knot_str(),
         close_str(),
@@ -172,7 +172,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.problem_bool is False
     assert x_planunit._descendant_task_count is None
     assert x_planunit._awardlines == {}
-    assert x_planunit.awardlinks == {}
+    assert x_planunit.awardunits == {}
     assert x_planunit._awardheirs == {}
     assert x_planunit._is_expanded is True
     assert x_planunit._factheirs == {}
@@ -233,27 +233,27 @@ def test_planunit_shop_NonNoneParametersReturnsObj():
     assert x_planunit.fund_iota == x_fund_iota
 
 
-def test_planunit_shop_ReturnsObjWith_awardlinks():
+def test_planunit_shop_ReturnsObjWith_awardunits():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     biker_give_force = 12
     biker_take_force = 15
-    biker_awardlink = awardlink_shop("bikers2", biker_give_force, biker_take_force)
+    biker_awardunit = awardunit_shop("bikers2", biker_give_force, biker_take_force)
     swim_group_title = "swimmers"
     swim_give_force = 29
     swim_take_force = 32
-    swim_awardlink = awardlink_shop(swim_group_title, swim_give_force, swim_take_force)
-    x_awardlinks = {
-        swim_awardlink.awardee_title: swim_awardlink,
-        biker_awardlink.awardee_title: biker_awardlink,
+    swim_awardunit = awardunit_shop(swim_group_title, swim_give_force, swim_take_force)
+    x_awardunits = {
+        swim_awardunit.awardee_title: swim_awardunit,
+        biker_awardunit.awardee_title: biker_awardunit,
     }
 
     # WHEN
     sport_str = "sport"
-    sport_plan = planunit_shop(plan_label=sport_str, awardlinks=x_awardlinks)
+    sport_plan = planunit_shop(plan_label=sport_str, awardunits=x_awardunits)
 
     # THEN
-    assert sport_plan.awardlinks == x_awardlinks
+    assert sport_plan.awardunits == x_awardunits
 
 
 def test_planunit_shop_ReturnsObjWithParameters():

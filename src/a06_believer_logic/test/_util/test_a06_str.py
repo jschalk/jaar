@@ -11,7 +11,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     attributes_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -60,7 +60,7 @@ def test_str_functions_ReturnsObj():
     assert believer_partner_membership_str() == "believer_partner_membership"
     assert believer_partnerunit_str() == "believer_partnerunit"
     assert believer_planunit_str() == "believer_planunit"
-    assert believer_plan_awardlink_str() == "believer_plan_awardlink"
+    assert believer_plan_awardunit_str() == "believer_plan_awardunit"
     assert believer_plan_reasonunit_str() == "believer_plan_reasonunit"
     assert believer_plan_reason_caseunit_str() == "believer_plan_reason_caseunit"
     assert believer_plan_partyunit_str() == "believer_plan_partyunit"

@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
 from src.a01_term_logic.term import LabelTerm, PartnerName, RopeTerm, TitleTerm
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.partner import partnerunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -277,43 +277,43 @@ def _modify_believer_planunit_insert(x_believer: BelieverUnit, x_atom: BelieverA
         ),
         parent_rope=plan_parent_rope,
         create_missing_plans=False,
-        get_rid_of_missing_awardlinks_awardee_titles=False,
+        get_rid_of_missing_awardunits_awardee_titles=False,
         create_missing_ancestors=True,
     )
 
 
-def _modify_believer_plan_awardlink_delete(
+def _modify_believer_plan_awardunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_believer.edit_plan_attr(
         x_atom.get_value("plan_rope"),
-        awardlink_del=x_atom.get_value("awardee_title"),
+        awardunit_del=x_atom.get_value("awardee_title"),
     )
 
 
-def _modify_believer_plan_awardlink_update(
+def _modify_believer_plan_awardunit_update(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_plan = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_awardlink = x_plan.awardlinks.get(x_atom.get_value("awardee_title"))
+    x_awardunit = x_plan.awardunits.get(x_atom.get_value("awardee_title"))
     x_give_force = x_atom.get_value("give_force")
-    if x_give_force is not None and x_awardlink.give_force != x_give_force:
-        x_awardlink.give_force = x_give_force
+    if x_give_force is not None and x_awardunit.give_force != x_give_force:
+        x_awardunit.give_force = x_give_force
     x_take_force = x_atom.get_value("take_force")
-    if x_take_force is not None and x_awardlink.take_force != x_take_force:
-        x_awardlink.take_force = x_take_force
-    x_believer.edit_plan_attr(x_atom.get_value("plan_rope"), awardlink=x_awardlink)
+    if x_take_force is not None and x_awardunit.take_force != x_take_force:
+        x_awardunit.take_force = x_take_force
+    x_believer.edit_plan_attr(x_atom.get_value("plan_rope"), awardunit=x_awardunit)
 
 
-def _modify_believer_plan_awardlink_insert(
+def _modify_believer_plan_awardunit_insert(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
-    x_awardlink = awardlink_shop(
+    x_awardunit = awardunit_shop(
         awardee_title=x_atom.get_value("awardee_title"),
         give_force=x_atom.get_value("give_force"),
         take_force=x_atom.get_value("take_force"),
     )
-    x_believer.edit_plan_attr(x_atom.get_value("plan_rope"), awardlink=x_awardlink)
+    x_believer.edit_plan_attr(x_atom.get_value("plan_rope"), awardunit=x_awardunit)
 
 
 def _modify_believer_plan_factunit_delete(
@@ -485,13 +485,13 @@ def _modify_believer_planunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
         _modify_believer_planunit_insert(x_believer, x_atom)
 
 
-def _modify_believer_plan_awardlink(x_believer: BelieverUnit, x_atom: BelieverAtom):
+def _modify_believer_plan_awardunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_believer_plan_awardlink_delete(x_believer, x_atom)
+        _modify_believer_plan_awardunit_delete(x_believer, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_believer_plan_awardlink_update(x_believer, x_atom)
+        _modify_believer_plan_awardunit_update(x_believer, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_believer_plan_awardlink_insert(x_believer, x_atom)
+        _modify_believer_plan_awardunit_insert(x_believer, x_atom)
 
 
 def _modify_believer_plan_factunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -553,8 +553,8 @@ def modify_believer_with_believeratom(x_believer: BelieverUnit, x_atom: Believer
         _modify_believer_partner_membership(x_believer, x_atom)
     elif x_atom.dimen == "believer_planunit":
         _modify_believer_planunit(x_believer, x_atom)
-    elif x_atom.dimen == "believer_plan_awardlink":
-        _modify_believer_plan_awardlink(x_believer, x_atom)
+    elif x_atom.dimen == "believer_plan_awardunit":
+        _modify_believer_plan_awardunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_factunit":
         _modify_believer_plan_factunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_reasonunit":
@@ -584,7 +584,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
         return (x_obj.group_cred_points != y_obj.group_cred_points) or (
             x_obj.group_debt_points != y_obj.group_debt_points
         )
-    elif dimen in {"believer_plan_awardlink"}:
+    elif dimen in {"believer_plan_awardunit"}:
         return (x_obj.give_force != y_obj.give_force) or (
             x_obj.take_force != y_obj.take_force
         )

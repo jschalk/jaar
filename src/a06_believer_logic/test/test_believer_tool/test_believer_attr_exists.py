@@ -1,12 +1,12 @@
 from src.a01_term_logic.rope import to_rope
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     believer_attr_exists,
     believer_partner_membership_exists,
     believer_partnerunit_exists,
-    believer_plan_awardlink_exists,
+    believer_plan_awardunit_exists,
     believer_plan_factunit_exists,
     believer_plan_healerlink_exists,
     believer_plan_partyunit_exists,
@@ -19,7 +19,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
     believer_plan_healerlink_str,
     believer_plan_partyunit_str,
@@ -131,7 +131,7 @@ def test_believer_planunit_exists_ReturnsObj():
     assert not believer_planunit_exists(sue_believer, sweep_jkeys)
 
 
-def test_believer_plan_awardlink_exists_ReturnsObj():
+def test_believer_plan_awardunit_exists_ReturnsObj():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -146,20 +146,20 @@ def test_believer_plan_awardlink_exists_ReturnsObj():
     clean_jkeys = {plan_rope_str(): clean_rope, awardee_title_str(): swim_str}
 
     # WHEN / THEN
-    assert not believer_plan_awardlink_exists(None, {})
-    assert not believer_plan_awardlink_exists(sue_believer, {})
-    assert not believer_plan_awardlink_exists(sue_believer, root_jkeys)
-    assert not believer_plan_awardlink_exists(sue_believer, casa_jkeys)
-    assert not believer_plan_awardlink_exists(sue_believer, clean_jkeys)
+    assert not believer_plan_awardunit_exists(None, {})
+    assert not believer_plan_awardunit_exists(sue_believer, {})
+    assert not believer_plan_awardunit_exists(sue_believer, root_jkeys)
+    assert not believer_plan_awardunit_exists(sue_believer, casa_jkeys)
+    assert not believer_plan_awardunit_exists(sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.set_awardlink(awardlink_shop(swim_str))
+    sue_believer.planroot.set_awardunit(awardunit_shop(swim_str))
 
     # THEN
-    assert not believer_plan_awardlink_exists(sue_believer, {})
-    assert believer_plan_awardlink_exists(sue_believer, root_jkeys)
-    assert not believer_plan_awardlink_exists(sue_believer, casa_jkeys)
-    assert not believer_plan_awardlink_exists(sue_believer, clean_jkeys)
+    assert not believer_plan_awardunit_exists(sue_believer, {})
+    assert believer_plan_awardunit_exists(sue_believer, root_jkeys)
+    assert not believer_plan_awardunit_exists(sue_believer, casa_jkeys)
+    assert not believer_plan_awardunit_exists(sue_believer, clean_jkeys)
 
 
 def test_believer_plan_reasonunit_exists_ReturnsObj():
@@ -436,7 +436,7 @@ def test_believer_attr_exists_ReturnsObj_believer_planunit():
     assert not believer_attr_exists(x_dimen, sue_believer, sweep_jkeys)
 
 
-def test_believer_attr_exists_ReturnsObj_believer_plan_awardlink():
+def test_believer_attr_exists_ReturnsObj_believer_plan_awardunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -445,7 +445,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_awardlink():
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_believer.belief_label)
     swim_str = "Swim"
-    x_dimen = believer_plan_awardlink_str()
+    x_dimen = believer_plan_awardunit_str()
     root_jkeys = {plan_rope_str(): root_rope, awardee_title_str(): swim_str}
     casa_jkeys = {plan_rope_str(): casa_rope, awardee_title_str(): swim_str}
     clean_jkeys = {plan_rope_str(): clean_rope, awardee_title_str(): swim_str}
@@ -458,7 +458,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_awardlink():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.set_awardlink(awardlink_shop(swim_str))
+    sue_believer.planroot.set_awardunit(awardunit_shop(swim_str))
 
     # THEN
     assert not believer_attr_exists(x_dimen, sue_believer, {})

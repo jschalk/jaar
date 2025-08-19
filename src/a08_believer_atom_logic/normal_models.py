@@ -54,8 +54,8 @@ class PlanTable(Base):
     stop_want = Column(Float)
 
 
-class AwardLinkTable(Base):
-    __tablename__ = "awardlink"
+class AwardUnitTable(Base):
+    __tablename__ = "awardunit"
     uid = Column(Integer, primary_key=True)
     awardee_title = Column(String)
     plan_rope = Column(String)

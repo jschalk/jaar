@@ -169,7 +169,7 @@ def test_BelieverUnit_settle_believer_Set_grandchild_plan_laborheir_From_plankid
     assert swimmers_party.solo == swimmers_solo_bool
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_CleansPlan_Laborunit():
+def test_BelieverUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
     # ESTABLISH
     sue_str = "Sue"
     sue1_believer = believerunit_shop(sue_str)
@@ -199,7 +199,7 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CleansPlan_Laborunit():
     # WHEN
     sue2_believer = believerunit_shop(sue_str)
     sue2_believer.add_partnerunit(xia_str)
-    cleaned_plan = sue2_believer._get_filtered_awardlinks_plan(sue1_believer_swim_plan)
+    cleaned_plan = sue2_believer._get_filtered_awardunits_plan(sue1_believer_swim_plan)
 
     # THEN
     cleaned_swim_partys = cleaned_plan.laborunit._partys
@@ -207,7 +207,7 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_CleansPlan_Laborunit():
     assert list(cleaned_swim_partys) == [xia_str]
 
 
-def test_BelieverUnit_set_plan_CleansPlan_awardlinks():
+def test_BelieverUnit_set_plan_CleansPlan_awardunits():
     # ESTABLISH
     sue1_believer = believerunit_shop("Sue")
     xia_str = "Xia"
@@ -237,7 +237,7 @@ def test_BelieverUnit_set_plan_CleansPlan_awardlinks():
     sue2_believer = believerunit_shop("Sue")
     sue2_believer.add_partnerunit(xia_str)
     sue2_believer.set_l1_plan(
-        sue1_believer_swim_plan, get_rid_of_missing_awardlinks_awardee_titles=False
+        sue1_believer_swim_plan, get_rid_of_missing_awardunits_awardee_titles=False
     )
 
     # THEN

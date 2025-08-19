@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.healer import healerlink_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
@@ -42,7 +42,7 @@ def test_etl_belief_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     sue_believer.edit_plan_attr(
         casa_rope, reason_context=status_rope, reason_case=dirty_rope
     )
-    sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
+    sue_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
     sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
     sue_laborunit = laborunit_shop()
     sue_laborunit.add_party(sue_str)

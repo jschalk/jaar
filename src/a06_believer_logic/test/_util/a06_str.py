@@ -107,8 +107,8 @@ def believer_partnerunit_str() -> str:
     return "believer_partnerunit"
 
 
-def believer_plan_awardlink_str() -> str:
-    return "believer_plan_awardlink"
+def believer_plan_awardunit_str() -> str:
+    return "believer_plan_awardunit"
 
 
 def believer_plan_factunit_str() -> str:
