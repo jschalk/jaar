@@ -2,6 +2,10 @@ from flask import Flask, jsonify, render_template_string
 from src.a03_group_logic.group import awardunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a07_timeline_logic.timeline_main import (
+    add_newtimeline_planunit,
+    get_default_timeline_config_dict,
+)
 from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
 
 app = Flask(__name__)
@@ -43,6 +47,7 @@ sue_believer.edit_plan_attr(root_rope, awardunit=casa_manager_awardunit)
 sue_believer.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
 sue_believer.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
 sue_believer.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
+add_newtimeline_planunit(sue_believer, get_default_timeline_config_dict())
 sue_believer.settle_believer()
 
 plan_view_dict = get_plan_view_dict(sue_believer.planroot)
@@ -104,6 +109,11 @@ def get_plan_viewer_template() -> str:
             <label for="_all_partner_cred">_all_partner_cred</label>
             <input type="checkbox" id="_all_partner_debt">
             <label for="_all_partner_debt">_all_partner_debt</label>
+            <input type="checkbox" id="_gogo_calc">
+            <label for="_gogo_calc">_gogo_calc</label>
+            <input type="checkbox" id="_stop_calc">
+            <label for="_stop_calc">_stop_calc</label>
+
         </div>
         
         <div id="treeContainer" class="tree-display"></div>

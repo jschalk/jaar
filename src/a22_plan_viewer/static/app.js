@@ -19,6 +19,8 @@ let show_fund_iota = false;
 let show_fund_ratio = false;
 let show_all_partner_cred = false;
 let show_all_partner_debt = false;
+let show_gogo_calc = false;
+let show_stop_calc = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
@@ -44,6 +46,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
     const show_all_partner_credCheckbox = document.getElementById('_all_partner_cred');
     const show_all_partner_debtCheckbox = document.getElementById('_all_partner_debt');
+    const show_gogo_calcCheckbox = document.getElementById('_gogo_calc');
+    const show_stop_calcCheckbox = document.getElementById('_stop_calc');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
@@ -68,6 +72,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderTree(); });
     show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderTree(); });
     show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
+    show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderTree(); });
+    show_stop_calcCheckbox.addEventListener('change', function () { show_stop_calc = this.checked; renderTree(); });
     show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
     show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
     show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
@@ -147,6 +153,8 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
     ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
     ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
+    ${render_new_small_dot(planUnit._gogo_calc, indent, show_gogo_calc)}
+    ${render_new_small_dot(planUnit._stop_calc, indent, show_stop_calc)}
   </div>\n
 `;
     // Add children

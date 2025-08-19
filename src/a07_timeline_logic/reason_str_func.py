@@ -7,10 +7,7 @@ from src.a01_term_logic.rope import (
 )
 from src.a04_reason_logic.reason_plan import CaseUnit, FactUnit
 from src.a06_believer_logic.believer_main import BelieverUnit
-from src.a07_timeline_logic.timeline_main import (
-    BelieverTimelinePoint,
-    believertimelinepoint_shop,
-)
+from src.a07_timeline_logic.timeline_main import believertimelinepoint_shop
 
 
 def get_reason_case_readable_str(

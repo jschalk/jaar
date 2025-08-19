@@ -307,3 +307,24 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
     assert casa_tidi_factheir_dict.get(readable_str) == expected_casa_tidi_factheir_str
     assert casa_best_factheir_dict.get(readable_str) == expected_casa_best_factheir_str
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_calc_stop_calc():
+    # ESTABLISH
+    casa_plan = planunit_shop()
+    casa_gogo = 3
+    casa_stop = 7
+    casa_plan._gogo_calc = casa_gogo
+    casa_plan._stop_calc = casa_stop
+    casa_plan._fund_ratio = 0
+
+    # WHEN
+    casa_dict = get_plan_view_dict(casa_plan)
+
+    # THEN
+    gogo_calc_readable = casa_dict.get("_gogo_calc")
+    stop_calc_readable = casa_dict.get("_stop_calc")
+    expected_gogo_calc_readable = f"gogo_calc: {casa_plan._gogo_calc}"
+    expected_stop_calc_readable = f"stop_calc: {casa_plan._stop_calc}"
+    assert gogo_calc_readable == expected_gogo_calc_readable
+    assert stop_calc_readable == expected_stop_calc_readable

@@ -33,7 +33,6 @@ def readable_percent(value: float) -> str:
 
 
 def jaar_objs_asdict(obj: Any) -> dict:
-    # sourcery skip: extract-method
     """
     Convert a dataclass-like object to dict,
     including extra keys defined in a custom attribute.
@@ -47,19 +46,7 @@ def jaar_objs_asdict(obj: Any) -> dict:
         if isinstance(obj, BelieverUnit):
             current_believer = obj
         if isinstance(obj, PlanUnit):
-            if result.get("parent_rope") != "":
-                result["parent_rope"] = add_small_dot(obj.parent_rope)
-            else:
-                root_parent_rope_str = "Root Plan parent_rope is empty str"
-                result["parent_rope"] = add_small_dot(root_parent_rope_str)
-            result["fund_share"] = obj.get_fund_share()
-            _all_partner_cred_str = f"all_partner_cred = {obj._all_partner_cred}"
-            _all_partner_debt_str = f"all_partner_debt = {obj._all_partner_debt}"
-            _all_partner_cred_str = add_small_dot(_all_partner_cred_str)
-            _all_partner_debt_str = add_small_dot(_all_partner_debt_str)
-            result["_all_partner_cred"] = _all_partner_cred_str
-            result["_all_partner_debt"] = _all_partner_debt_str
-            result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
+            set_readable_plan_values(obj, result)
         elif isinstance(obj, AwardUnit):
             readable_str = (
                 f"{obj.awardee_title}: Take {obj.take_force}, Give {obj.give_force}"
@@ -81,6 +68,26 @@ def jaar_objs_asdict(obj: Any) -> dict:
         return {k: jaar_objs_asdict(v) for k, v in obj.items()}
     else:
         return obj
+
+
+def set_readable_plan_values(obj: PlanUnit, result: dict):
+    result["parent_rope"] = (
+        add_small_dot(obj.parent_rope)
+        if result.get("parent_rope") != ""
+        else add_small_dot("Root Plan parent_rope is empty str")
+    )
+    result["fund_share"] = obj.get_fund_share()
+    _all_partner_cred_str = f"all_partner_cred = {obj._all_partner_cred}"
+    _all_partner_debt_str = f"all_partner_debt = {obj._all_partner_debt}"
+    _all_partner_cred_str = add_small_dot(_all_partner_cred_str)
+    _all_partner_debt_str = add_small_dot(_all_partner_debt_str)
+    result["_all_partner_cred"] = _all_partner_cred_str
+    result["_all_partner_debt"] = _all_partner_debt_str
+    result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
+    result_gogo_calc = result.get("_gogo_calc")
+    result_stop_calc = result.get("_stop_calc")
+    result["_gogo_calc"] = f"gogo_calc: {result_gogo_calc}"
+    result["_stop_calc"] = f"stop_calc: {result_stop_calc}"
 
 
 def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
