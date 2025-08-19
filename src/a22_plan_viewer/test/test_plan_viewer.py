@@ -37,6 +37,10 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_want_str,
     task_str,
 )
+from src.a07_timeline_logic.reason_str_func import (
+    get_fact_state_readable_str,
+    get_reason_case_readable_str,
+)
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
 from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_believerunit
 
@@ -145,11 +149,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     assert root_plan_view_dict.get("parent_rope") == expected_parent_rope
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_attrs():
+def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     # ESTABLISH
     sue_believerunit = get_sue_casa_believerunit()
-    print(f"{sue_believerunit.planroot._fund_ratio=}")
-    root_rope = sue_believerunit.planroot.parent_rope
     casa_rope = sue_believerunit.make_l1_rope("casa")
     casa_plan = sue_believerunit.get_plan_obj(casa_rope)
 
@@ -157,12 +159,6 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_attrs():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    # for dict_key, value in casa_dict.items():
-    #     print(f"{dict_key=} \t\t {value=}")
-    # expected_laborunit_dict = {
-    #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
-    # }
-    print(f"{casa_dict.get(fund_share_str())=}")
     assert casa_dict.get(fund_share_str()) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
     assert casa_dict.get("parent_rope") == expected_parent_rope
@@ -173,3 +169,76 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_attrs():
     assert casa_dict.get(_all_partner_cred_str()) == expected_all_partner_cred
     assert casa_dict.get(_all_partner_debt_str()) == expected_all_partner_debt
     assert casa_dict.get(_fund_ratio_str()) == "38%"
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
+    # ESTABLISH
+    sue_believerunit = get_sue_casa_believerunit()
+    casa_rope = sue_believerunit.make_l1_rope("casa")
+    casa_plan = sue_believerunit.get_plan_obj(casa_rope)
+
+    # WHEN
+    casa_dict = get_plan_view_dict(casa_plan)
+
+    # THEN
+    # awardlinks
+    awardlinks_dict = casa_dict.get("awardlinks")
+    assert len(awardlinks_dict) == 2
+    print(f"{len(awardlinks_dict)=}")
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_awardlink_dict = awardlinks_dict.get(sue_str)
+    bob_awardlink_dict = awardlinks_dict.get(bob_str)
+    readable_str = "readable"
+    expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
+    expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
+    print(f"{sue_awardlink_dict.get(readable_str)=}")
+    print(f"{bob_awardlink_dict.get(readable_str)=}")
+    assert sue_awardlink_dict.get(readable_str) == expected_sue_readable
+    assert bob_awardlink_dict.get(readable_str) == expected_bob_readable
+
+    # _awardheirs
+    awardheirs_dict = casa_dict.get("_awardheirs")
+    assert len(awardheirs_dict) == 4
+    print(f"{len(awardheirs_dict)=}")
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_awardheir_dict = awardheirs_dict.get(sue_str)
+    bob_awardheir_dict = awardheirs_dict.get(bob_str)
+    readable_str = "readable"
+    expected_sue_readable = f"{sue_str}: Take 0.8 (150000000), Give 1 (150000000)"
+    expected_bob_readable = f"{bob_str}: Take 0.9 (168750000), Give 0.7 (105000000)"
+    print(f"{sue_awardheir_dict.get(readable_str)=}")
+    print(f"{bob_awardheir_dict.get(readable_str)=}")
+    assert sue_awardheir_dict.get(readable_str) == add_small_dot(expected_sue_readable)
+    assert bob_awardheir_dict.get(readable_str) == add_small_dot(expected_bob_readable)
+
+
+# def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
+#     # ESTABLISH
+#     # TODO create FactUnits
+#     # TODO create FactHeirs
+#     assert 1 == 2
+#     sue_believerunit = get_sue_casa_believerunit()
+#     casa_rope = sue_believerunit.make_l1_rope("casa")
+#     sue_believerunit.add_fact(casa_rope)
+#     casa_plan = sue_believerunit.get_plan_obj(casa_rope)
+
+#     # WHEN
+#     casa_dict = get_plan_view_dict(casa_plan)
+
+#     # THEN
+#     awardlinks_dict = casa_dict.get("awardlinks")
+#     assert len(awardlinks_dict) == 2
+#     print(f"{len(awardlinks_dict)=}")
+#     sue_str = "Sue"
+#     bob_str = "Bob"
+#     sue_awardlink_dict = awardlinks_dict.get(sue_str)
+#     bob_awardlink_dict = awardlinks_dict.get(bob_str)
+#     readable_str = "readable"
+#     expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
+#     expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
+#     print(f"{sue_awardlink_dict.get(readable_str)=}")
+#     print(f"{bob_awardlink_dict.get(readable_str)=}")
+#     assert sue_awardlink_dict.get(readable_str) == expected_sue_readable
+#     assert bob_awardlink_dict.get(readable_str) == expected_bob_readable

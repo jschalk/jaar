@@ -1,6 +1,6 @@
 // Global state
 let treeData = null;
-let show_awardlinks = false;
+let show_awardlinks = true;
 let show_level = false;
 let show_belief_label = false;
 let show_task = false;
@@ -106,7 +106,7 @@ function renderPlanUnit(planUnit, level) {
 
 
     // Build award links HTML using separate function
-    const awardLinksHtml = renderAwardLinks(planUnit.awardlinks, indent, show_awardlinks);
+    const awardLinksHtml = renderFlatReadableDicts(planUnit.awardlinks, indent, show_awardlinks);
     const belief_labelHtml = render_belief_label(planUnit.belief_label, planUnit.knot, show_belief_label);
 
     // Start with current node
@@ -140,19 +140,18 @@ function renderPlanUnit(planUnit, level) {
             html += renderPlanUnit(child, level + 1);
         });
     }
-
     return html;
 }
 
 // Render award links for a PlanUnit
-function renderAwardLinks(awardlinks, indent, show_awardlinks) {
+function renderFlatReadableDicts(awardlinks, indent, show_awardlinks) {
     if (!awardlinks || Object.keys(awardlinks).length === 0 || !show_awardlinks) {
         return '';
     }
 
     let html = '';
     Object.values(awardlinks).forEach(link => {
-        html += `<br>${indent}&nbsp;&nbsp;<small>• ${link.awardee_title}: Take ${link.take_force}, Give ${link.give_force}</small>`;
+        html += `<br>${indent}${link.readable}`;
     });
 
     return html;

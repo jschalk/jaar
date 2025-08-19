@@ -1,6 +1,6 @@
 import dataclasses
 from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
-from src.a05_plan_logic.plan import PlanUnit
+from src.a05_plan_logic.plan import AwardHeir, AwardLink, PlanUnit
 from typing import Any
 
 
@@ -46,6 +46,14 @@ def jaar_objs_asdict(obj: Any) -> dict:
             result["_all_partner_cred"] = _all_partner_cred_str
             result["_all_partner_debt"] = _all_partner_debt_str
             result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
+        elif isinstance(obj, AwardLink):
+            awardlink_readable_str = (
+                f"{obj.awardee_title}: Take {obj.take_force}, Give {obj.give_force}"
+            )
+            result["readable"] = add_small_dot(awardlink_readable_str)
+        elif isinstance(obj, AwardHeir):
+            awardlink_readable_str = f"{obj.awardee_title}: Take {obj.take_force} ({obj._fund_take}), Give {obj.give_force} ({obj._fund_give})"
+            result["readable"] = add_small_dot(awardlink_readable_str)
 
         return result
     elif isinstance(obj, (list, tuple)):
