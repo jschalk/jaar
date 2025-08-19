@@ -2,6 +2,7 @@
 let treeData = null;
 let show_awardlinks = false;
 let show_awardheirs = false;
+let show_awardlines = false;
 let show_level = false;
 let show_belief_label = false;
 let show_task = false;
@@ -10,7 +11,7 @@ let show_active = false;
 let show_chore = false;
 let show_star = false;
 let show_factunits = false;
-let show_factheirs = true;
+let show_factheirs = false;
 let show_fund_share = false;
 let show_fund_onset = false;
 let show_fund_cease = false;
@@ -26,6 +27,7 @@ let show_uid = false;
 document.addEventListener('DOMContentLoaded', function () {
     const show_awardlinksCheckbox = document.getElementById('show_awardlinks');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
+    const show_awardlinesCheckbox = document.getElementById('show_awardlines');
     const show_levelCheckbox = document.getElementById('show_level');
     const show_belief_labelCheckbox = document.getElementById('show_belief_label');
     const show_taskCheckbox = document.getElementById('show_task');
@@ -49,6 +51,7 @@ document.addEventListener('DOMContentLoaded', function () {
     // Set up checkbox event listener
     show_awardlinksCheckbox.addEventListener('change', function () { show_awardlinks = this.checked; renderTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
+    show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
     show_belief_labelCheckbox.addEventListener('change', function () { show_belief_label = this.checked; renderTree(); });
     show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
@@ -139,6 +142,7 @@ function renderPlanUnit(planUnit, level) {
     ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
     ${renderFlatReadableJson(planUnit.awardlinks, indent, show_awardlinks)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
+    ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
     ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}

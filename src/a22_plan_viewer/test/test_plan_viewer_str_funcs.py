@@ -185,7 +185,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
     # awardlinks
     awardlinks_dict = casa_dict.get("awardlinks")
     assert len(awardlinks_dict) == 2
-    print(f"{len(awardlinks_dict)=}")
+    # print(f"{len(awardlinks_dict)=}")
     sue_str = "Sue"
     bob_str = "Bob"
     sue_awardlink_dict = awardlinks_dict.get(sue_str)
@@ -193,15 +193,15 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
     readable_str = "readable"
     expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
     expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
-    print(f"{sue_awardlink_dict.get(readable_str)=}")
-    print(f"{bob_awardlink_dict.get(readable_str)=}")
+    # print(f"{sue_awardlink_dict.get(readable_str)=}")
+    # print(f"{bob_awardlink_dict.get(readable_str)=}")
     assert sue_awardlink_dict.get(readable_str) == expected_sue_readable
     assert bob_awardlink_dict.get(readable_str) == expected_bob_readable
 
     # _awardheirs
     awardheirs_dict = casa_dict.get("_awardheirs")
     assert len(awardheirs_dict) == 4
-    print(f"{len(awardheirs_dict)=}")
+    # print(f"{len(awardheirs_dict)=}")
     sue_str = "Sue"
     bob_str = "Bob"
     sue_awardheir_dict = awardheirs_dict.get(sue_str)
@@ -209,10 +209,26 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
     readable_str = "readable"
     expected_sue_readable = f"{sue_str}: Take 0.8 (150000000), Give 1 (150000000)"
     expected_bob_readable = f"{bob_str}: Take 0.9 (168750000), Give 0.7 (105000000)"
-    print(f"{sue_awardheir_dict.get(readable_str)=}")
-    print(f"{bob_awardheir_dict.get(readable_str)=}")
+    # print(f"{sue_awardheir_dict.get(readable_str)=}")
+    # print(f"{bob_awardheir_dict.get(readable_str)=}")
     assert sue_awardheir_dict.get(readable_str) == add_small_dot(expected_sue_readable)
     assert bob_awardheir_dict.get(readable_str) == add_small_dot(expected_bob_readable)
+
+    # _awardlines
+    awardlines_dict = casa_dict.get("_awardlines")
+    assert len(awardlines_dict) == 4
+    print(f"{len(awardlines_dict)=}")
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_awardline_dict = awardlines_dict.get(sue_str)
+    bob_awardline_dict = awardlines_dict.get(bob_str)
+    readable_str = "readable"
+    expected_sue_readable = f"{sue_str}: take_fund (150000000), give_fund (149999999)"
+    expected_bob_readable = f"{bob_str}: take_fund (168750000), give_fund (105000000)"
+    print(f"{sue_awardline_dict.get(readable_str)=}")
+    print(f"{bob_awardline_dict.get(readable_str)=}")
+    assert sue_awardline_dict.get(readable_str) == add_small_dot(expected_sue_readable)
+    assert bob_awardline_dict.get(readable_str) == add_small_dot(expected_bob_readable)
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():

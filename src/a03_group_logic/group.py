@@ -109,7 +109,6 @@ class AwardLink(AwardCore):
         }
 
 
-# class AwardLinksshop:
 def awardlinks_get_from_json(awardlinks_json: str) -> dict[GroupTitle, AwardLink]:
     awardlinks_dict = get_dict_from_json(awardlinks_json)
     return awardlinks_get_from_dict(awardlinks_dict)

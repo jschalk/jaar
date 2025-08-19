@@ -1,6 +1,13 @@
 import dataclasses
 from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
-from src.a05_plan_logic.plan import AwardHeir, AwardLink, FactHeir, FactUnit, PlanUnit
+from src.a05_plan_logic.plan import (
+    AwardHeir,
+    AwardLine,
+    AwardLink,
+    FactHeir,
+    FactUnit,
+    PlanUnit,
+)
 from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
@@ -60,6 +67,9 @@ def jaar_objs_asdict(obj: Any) -> dict:
             result["readable"] = add_small_dot(readable_str)
         elif isinstance(obj, AwardHeir):
             readable_str = f"{obj.awardee_title}: Take {obj.take_force} ({obj._fund_take}), Give {obj.give_force} ({obj._fund_give})"
+            result["readable"] = add_small_dot(readable_str)
+        elif isinstance(obj, AwardLine):
+            readable_str = f"{obj.awardee_title}: take_fund ({obj._fund_take}), give_fund ({obj._fund_give})"
             result["readable"] = add_small_dot(readable_str)
         elif isinstance(obj, (FactUnit, FactHeir)):
             readable_str = get_fact_state_readable_str(obj, None, current_believer)
