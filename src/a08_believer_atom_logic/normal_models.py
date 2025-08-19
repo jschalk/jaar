@@ -90,8 +90,8 @@ class LaborLinkTable(Base):
     solo = Column(Integer)
 
 
-class HealerLinkTable(Base):
-    __tablename__ = "healerlink"
+class HealerUnitTable(Base):
+    __tablename__ = "healerunit"
     uid = Column(Integer, primary_key=True)
     healer_name = Column(String)
     plan_rope = Column(String)

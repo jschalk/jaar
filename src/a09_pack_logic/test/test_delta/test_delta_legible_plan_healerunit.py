@@ -1,6 +1,6 @@
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     healer_name_str,
     plan_rope_str,
 )
@@ -10,10 +10,10 @@ from src.a09_pack_logic.delta import believerdelta_shop
 from src.a09_pack_logic.legible import create_legible_list
 
 
-def test_create_legible_list_ReturnsObj_plan_healerlink_INSERT():
+def test_create_legible_list_ReturnsObj_plan_healerunit_INSERT():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_healerlink_str()
+    dimen = believer_plan_healerunit_str()
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     healer_name_value = f"{sue_believer.knot}Swimmers"
@@ -28,15 +28,15 @@ def test_create_legible_list_ReturnsObj_plan_healerlink_INSERT():
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"HealerLink '{healer_name_value}' created for plan '{rope_value}'."
+    x_str = f"HealerUnit '{healer_name_value}' created for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
 
-def test_create_legible_list_ReturnsObj_plan_healerlink_DELETE():
+def test_create_legible_list_ReturnsObj_plan_healerunit_DELETE():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_healerlink_str()
+    dimen = believer_plan_healerunit_str()
     casa_rope = sue_believer.make_l1_rope("casa")
     rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
     healer_name_value = f"{sue_believer.knot}Swimmers"
@@ -51,6 +51,6 @@ def test_create_legible_list_ReturnsObj_plan_healerlink_DELETE():
     legible_list = create_legible_list(x_believerdelta, sue_believer)
 
     # THEN
-    x_str = f"HealerLink '{healer_name_value}' deleted for plan '{rope_value}'."
+    x_str = f"HealerUnit '{healer_name_value}' deleted for plan '{rope_value}'."
     print(f"{x_str=}")
     assert legible_list[0] == x_str

@@ -4,7 +4,7 @@ from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop, partyunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import (
     believerunit_shop,
@@ -87,7 +87,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     assert planroot_dict.get("stop_want") == x_stop_want
 
 
-def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerlink():
+def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     yao_str = "Yao"
@@ -95,17 +95,17 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerlink():
     run_str = ";runners"
     yao_partnerunit = sue_believer.get_partner(yao_str)
     yao_partnerunit.add_membership(run_str)
-    run_healerlink = healerlink_shop()
-    run_healerlink.set_healer_name(x_healer_name=run_str)
+    run_healerunit = healerunit_shop()
+    run_healerunit.set_healer_name(x_healer_name=run_str)
     root_rope = to_rope(sue_believer.belief_label)
-    sue_believer.edit_plan_attr(root_rope, healerlink=run_healerlink)
+    sue_believer.edit_plan_attr(root_rope, healerunit=run_healerunit)
 
     # WHEN
     believer_dict = sue_believer.to_dict()
     planroot_dict = believer_dict.get("planroot")
 
     # THEN
-    assert planroot_dict["healerlink"] == run_healerlink.to_dict()
+    assert planroot_dict["healerunit"] == run_healerunit.to_dict()
 
 
 def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
@@ -156,9 +156,9 @@ def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():
     zia_believer.add_partnerunit(yao_str)
     yao_partnerunit = zia_believer.get_partner(yao_str)
     yao_partnerunit.add_membership(run_str)
-    run_healerlink = healerlink_shop({run_str})
+    run_healerunit = healerunit_shop({run_str})
     root_rope = to_rope(zia_believer.belief_label)
-    zia_believer.edit_plan_attr(root_rope, healerlink=run_healerlink)
+    zia_believer.edit_plan_attr(root_rope, healerunit=run_healerunit)
     zia_believer.edit_plan_attr(root_rope, problem_bool=True)
 
     # WHEN
@@ -200,10 +200,10 @@ def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_planroot._kids[shave_str].factunits)
-    planroot_healerlink = planroot_dict["healerlink"]
-    print(f"{planroot_healerlink=}")
-    assert len(planroot_healerlink) == 1
-    assert x_planroot.healerlink.any_healer_name_exists()
+    planroot_healerunit = planroot_dict["healerunit"]
+    print(f"{planroot_healerunit=}")
+    assert len(planroot_healerunit) == 1
+    assert x_planroot.healerunit.any_healer_name_exists()
     assert x_planroot.problem_bool
 
 
@@ -323,9 +323,9 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     zia_believer.edit_plan_attr(shave_rope, awardunit=awardunit_shop(xio_str))
     zia_believer.edit_plan_attr(shave_rope, awardunit=awardunit_shop(sue_str))
     zia_believer.edit_plan_attr(root_rope, awardunit=awardunit_shop(sue_str))
-    # add healerlink to shave planunit
-    run_healerlink = healerlink_shop({run_str})
-    zia_believer.edit_plan_attr(shave_rope, healerlink=run_healerlink)
+    # add healerunit to shave planunit
+    run_healerunit = healerunit_shop({run_str})
+    zia_believer.edit_plan_attr(shave_rope, healerunit=run_healerunit)
     shave_plan = zia_believer.get_plan_obj(shave_rope)
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -391,8 +391,8 @@ def test_believerunit_get_from_json_ReturnsObjSimpleExample():
     assert len(json_shave_plan.reasonunits) == 1
     assert json_shave_plan.laborunit == zia_shave_plan.laborunit
     assert json_shave_plan.laborunit == xio_laborunit
-    print(f"{json_shave_plan.healerlink=}")
-    assert json_shave_plan.healerlink == zia_shave_plan.healerlink
+    print(f"{json_shave_plan.healerunit=}")
+    assert json_shave_plan.healerunit == zia_shave_plan.healerunit
     assert len(json_shave_plan.awardunits) == 2
     assert len(json_shave_plan.factunits) == 1
     assert zia_shave_plan.problem_bool

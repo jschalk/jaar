@@ -17,7 +17,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     _offtrack_kids_star_set_str,
     _rational_str,
     _reason_contexts_str,
-    _sum_healerlink_share_str,
+    _sum_healerunit_share_str,
     _tree_traverse_count_str,
     belief_label_str,
     believer_name_str,
@@ -60,7 +60,7 @@ def test_BelieverUnit_Exists():
     assert x_believer._rational is None
     assert x_believer._keeps_justified is None
     assert x_believer._keeps_buildable is None
-    assert x_believer._sum_healerlink_share is None
+    assert x_believer._sum_healerunit_share is None
     assert x_believer._offtrack_kids_star_set is None
     assert x_believer._offtrack_fund is None
     assert x_believer._reason_contexts is None
@@ -79,7 +79,7 @@ def test_BelieverUnit_Exists():
         "_range_inheritors",
         _rational_str(),
         _reason_contexts_str(),
-        _sum_healerlink_share_str(),
+        _sum_healerunit_share_str(),
         _tree_traverse_count_str(),
         "partners",
         knot_str(),
@@ -144,7 +144,7 @@ def test_believerunit_shop_ReturnsObjectWithFilledFields():
     assert x_believer._rational is False
     assert x_believer._keeps_justified is False
     assert x_believer._keeps_buildable is False
-    assert x_believer._sum_healerlink_share == 0
+    assert x_believer._sum_healerunit_share == 0
     assert x_believer._offtrack_kids_star_set == set()
     assert not x_believer._offtrack_fund
     assert x_believer._reason_contexts == set()

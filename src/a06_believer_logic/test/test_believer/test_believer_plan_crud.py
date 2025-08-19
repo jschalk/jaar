@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
@@ -438,17 +438,17 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     sue_believer.edit_plan_attr(casa_rope, task=True)
     assert sue_believer.planroot._kids[casa_str].task is True
 
-    # _healerlink:
-    sue_believer.planroot._kids[casa_str].healerlink = "fun3rol"
-    src_healerlink = sue_believer.planroot._kids[casa_str].healerlink
-    assert src_healerlink == "fun3rol"
+    # _healerunit:
+    sue_believer.planroot._kids[casa_str].healerunit = "fun3rol"
+    src_healerunit = sue_believer.planroot._kids[casa_str].healerunit
+    assert src_healerunit == "fun3rol"
     sue_str = "Sue"
     yao_str = "Yao"
-    x_healerlink = healerlink_shop({sue_str, yao_str})
+    x_healerunit = healerunit_shop({sue_str, yao_str})
     sue_believer.add_partnerunit(sue_str)
     sue_believer.add_partnerunit(yao_str)
-    sue_believer.edit_plan_attr(casa_rope, healerlink=x_healerlink)
-    assert sue_believer.planroot._kids[casa_str].healerlink == x_healerlink
+    sue_believer.edit_plan_attr(casa_rope, healerunit=x_healerunit)
+    assert sue_believer.planroot._kids[casa_str].healerunit == x_healerunit
 
     # _problem_bool: bool
     sue_believer.planroot._kids[casa_str].problem_bool = "fun3rol"
@@ -459,7 +459,7 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     assert sue_believer.planroot._kids[casa_str].problem_bool == x_problem_bool
 
 
-def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerlink_healer_names_DoNotExist():
+def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerunit_healer_names_DoNotExist():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     casa_str = "casa"
@@ -475,12 +475,12 @@ def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerlink_healer_names_DoN
 
     # WHEN / THEN
     sue_str = "Sue"
-    x_healerlink = healerlink_shop({sue_str})
+    x_healerunit = healerunit_shop({sue_str})
     with pytest_raises(Exception) as excinfo:
-        yao_believer.edit_plan_attr(casa_rope, healerlink=x_healerlink)
+        yao_believer.edit_plan_attr(casa_rope, healerunit=x_healerunit)
     assert (
         str(excinfo.value)
-        == f"Plan cannot edit healerlink because group_title '{sue_str}' does not exist as group in Believer"
+        == f"Plan cannot edit healerunit because group_title '{sue_str}' does not exist as group in Believer"
     )
 
 

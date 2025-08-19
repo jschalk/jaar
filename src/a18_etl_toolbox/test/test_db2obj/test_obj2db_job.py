@@ -30,7 +30,7 @@ def test_create_believerunit_metrics_insert_sqlstr_ReturnsObj():
     x__keeps_justified = False
     x__offtrack_fund = 55.5
     x__rational = True
-    x__sum_healerlink_share = 66.6
+    x__sum_healerunit_share = 66.6
     x__tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
@@ -47,7 +47,7 @@ def test_create_believerunit_metrics_insert_sqlstr_ReturnsObj():
         "_keeps_justified": x__keeps_justified,
         "_offtrack_fund": x__offtrack_fund,
         "_rational": x__rational,
-        "_sum_healerlink_share": x__sum_healerlink_share,
+        "_sum_healerunit_share": x__sum_healerunit_share,
         "_tree_traverse_count": x__tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,
@@ -102,7 +102,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x__fund_onset = 7
     x__fund_ratio = 8
     x__gogo_calc = 9
-    x__healerlink_ratio = 10
+    x__healerunit_ratio = 10
     x__level = 11
     x__range_evaluated = 12
     x__stop_calc = 13
@@ -131,7 +131,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "_fund_onset": x__fund_onset,
         "_fund_ratio": x__fund_ratio,
         "_gogo_calc": x__gogo_calc,
-        "_healerlink_ratio": x__healerlink_ratio,
+        "_healerunit_ratio": x__healerunit_ratio,
         "_level": x__level,
         "_range_evaluated": x__range_evaluated,
         "_stop_calc": x__stop_calc,
@@ -422,7 +422,7 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrheal_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_believer_calc_dimen_args("believer_plan_healerlink")
+    x_args = get_believer_calc_dimen_args("believer_plan_healerunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -466,7 +466,7 @@ def test_create_blrheal_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "believer_plan_healerlink_job"
+        table_name = "believer_plan_healerunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)

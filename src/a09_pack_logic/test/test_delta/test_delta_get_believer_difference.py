@@ -15,7 +15,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -1257,7 +1257,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerlink_insert_PlanUnitUpdate():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerunit_insert_PlanUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -1271,7 +1271,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.healerlink.set_healer_name(xio_str)
+    after_ball_planunit.healerunit.set_healer_name(xio_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -1283,7 +1283,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        believer_plan_healerlink_str(),
+        believer_plan_healerunit_str(),
         ball_rope,
         xio_str,
     ]
@@ -1293,7 +1293,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerlink_insert_PlanUnitInsert():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerunit_insert_PlanUnitInsert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -1307,7 +1307,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_rope = before_sue_believer.make_rope(sports_rope, ball_str)
     after_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.healerlink.set_healer_name(xio_str)
+    after_ball_planunit.healerunit.set_healer_name(xio_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -1319,7 +1319,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         INSERT_str(),
-        believer_plan_healerlink_str(),
+        believer_plan_healerunit_str(),
         ball_rope,
         xio_str,
     ]
@@ -1332,7 +1332,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 3
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerlink_delete_PlanUnitUpdate():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerunit_delete_PlanUnitUpdate():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -1344,11 +1344,11 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_rope = before_sue_believer.make_rope(sports_rope, ball_str)
     before_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_believer.get_plan_obj(ball_rope)
-    before_ball_planunit.healerlink.set_healer_name(xio_str)
+    before_ball_planunit.healerunit.set_healer_name(xio_str)
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_ball_planunit = after_sue_believer.get_plan_obj(ball_rope)
-    after_ball_planunit.healerlink.del_healer_name(xio_str)
+    after_ball_planunit.healerunit.del_healer_name(xio_str)
 
     # WHEN
     sue_believerdelta = believerdelta_shop()
@@ -1360,7 +1360,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        believer_plan_healerlink_str(),
+        believer_plan_healerunit_str(),
         ball_rope,
         xio_str,
     ]
@@ -1373,7 +1373,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     assert get_believeratom_total_count(sue_believerdelta) == 1
 
 
-def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerlink_delete_PlanUnitDelete():
+def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan_healerunit_delete_PlanUnitDelete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believer = believerunit_shop(sue_str)
@@ -1385,7 +1385,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     ball_rope = before_sue_believer.make_rope(sports_rope, ball_str)
     before_sue_believer.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_believer.get_plan_obj(ball_rope)
-    before_ball_planunit.healerlink.set_healer_name(xio_str)
+    before_ball_planunit.healerunit.set_healer_name(xio_str)
 
     after_sue_believer = copy_deepcopy(before_sue_believer)
     after_sue_believer.del_plan_obj(ball_rope)
@@ -1400,7 +1400,7 @@ def test_BelieverDelta_add_all_different_believeratoms_Creates_BelieverAtom_plan
     print(f"{print_believeratom_keys(sue_believerdelta)=}")
     x_keylist = [
         DELETE_str(),
-        believer_plan_healerlink_str(),
+        believer_plan_healerunit_str(),
         ball_rope,
         xio_str,
     ]

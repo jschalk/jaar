@@ -65,7 +65,7 @@ from src.a04_reason_logic.reason_plan import (
     RopeTerm,
     factunit_shop,
 )
-from src.a05_plan_logic.healer import HealerLink
+from src.a05_plan_logic.healer import HealerUnit
 from src.a05_plan_logic.plan import (
     PlanAttrHolder,
     PlanUnit,
@@ -110,7 +110,7 @@ class _last_pack_idException(Exception):
     pass
 
 
-class healerlink_group_title_Exception(Exception):
+class healerunit_group_title_Exception(Exception):
     pass
 
 
@@ -142,7 +142,7 @@ class BelieverUnit:
     _rational: bool = None
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
-    _sum_healerlink_share: float = None
+    _sum_healerunit_share: float = None
     _groupunits: dict[GroupTitle, GroupUnit] = None
     _offtrack_kids_star_set: set[RopeTerm] = None
     _offtrack_fund: float = None
@@ -822,7 +822,7 @@ class BelieverUnit:
         reason_del_case_reason_state: RopeTerm = None,
         reason_plan_active_requisite: str = None,
         laborunit: LaborUnit = None,
-        healerlink: HealerLink = None,
+        healerunit: HealerUnit = None,
         begin: float = None,
         close: float = None,
         gogo_want: float = None,
@@ -841,11 +841,11 @@ class BelieverUnit:
         is_expanded: bool = None,
         problem_bool: bool = None,
     ):
-        if healerlink is not None:
-            for x_healer_name in healerlink._healer_names:
+        if healerunit is not None:
+            for x_healer_name in healerunit._healer_names:
                 if self.get_partnerunit_group_titles_dict().get(x_healer_name) is None:
-                    exception_str = f"Plan cannot edit healerlink because group_title '{x_healer_name}' does not exist as group in Believer"
-                    raise healerlink_group_title_Exception(exception_str)
+                    exception_str = f"Plan cannot edit healerunit because group_title '{x_healer_name}' does not exist as group in Believer"
+                    raise healerunit_group_title_Exception(exception_str)
 
         x_planattrholder = planattrholder_shop(
             star=star,
@@ -860,7 +860,7 @@ class BelieverUnit:
             reason_del_case_reason_state=reason_del_case_reason_state,
             reason_plan_active_requisite=reason_plan_active_requisite,
             laborunit=laborunit,
-            healerlink=healerlink,
+            healerunit=healerunit,
             begin=begin,
             close=close,
             gogo_want=gogo_want,
@@ -1145,7 +1145,7 @@ class BelieverUnit:
         group_everyone = None
         ancestor_ropes = get_ancestor_ropes(rope, self.knot)
         keep_justified_by_problem = True
-        healerlink_count = 0
+        healerunit_count = 0
 
         while ancestor_ropes != []:
             youngest_rope = ancestor_ropes.pop(0)
@@ -1176,14 +1176,14 @@ class BelieverUnit:
             x_plan_obj._all_partner_cred = group_everyone
             x_plan_obj._all_partner_debt = group_everyone
 
-            if x_plan_obj.healerlink.any_healer_name_exists():
+            if x_plan_obj.healerunit.any_healer_name_exists():
                 keep_justified_by_problem = False
-                healerlink_count += 1
-                self._sum_healerlink_share += x_plan_obj.get_fund_share()
+                healerunit_count += 1
+                self._sum_healerunit_share += x_plan_obj.get_fund_share()
             if x_plan_obj.problem_bool:
                 keep_justified_by_problem = True
 
-        if keep_justified_by_problem is False or healerlink_count > 1:
+        if keep_justified_by_problem is False or healerunit_count > 1:
             if keep_exceptions:
                 exception_str = f"PlanUnit '{rope}' cannot sponsor ancestor keeps."
                 raise Exception_keeps_justified(exception_str)
@@ -1243,7 +1243,7 @@ class BelieverUnit:
         self._range_inheritors = {}
         self._keeps_justified = True
         self._keeps_buildable = False
-        self._sum_healerlink_share = 0
+        self._sum_healerunit_share = 0
         self._keep_dict = {}
         self._healers_dict = {}
 
@@ -1339,20 +1339,20 @@ class BelieverUnit:
 
     def _set_keep_dict(self):
         if self._keeps_justified is False:
-            self._sum_healerlink_share = 0
+            self._sum_healerunit_share = 0
         for x_plan in self._plan_dict.values():
-            if self._sum_healerlink_share == 0:
-                x_plan._healerlink_ratio = 0
+            if self._sum_healerunit_share == 0:
+                x_plan._healerunit_ratio = 0
             else:
-                x_sum = self._sum_healerlink_share
-                x_plan._healerlink_ratio = x_plan.get_fund_share() / x_sum
-            if self._keeps_justified and x_plan.healerlink.any_healer_name_exists():
+                x_sum = self._sum_healerunit_share
+                x_plan._healerunit_ratio = x_plan.get_fund_share() / x_sum
+            if self._keeps_justified and x_plan.healerunit.any_healer_name_exists():
                 self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
     def _get_healers_dict(self) -> dict[HealerName, dict[RopeTerm, PlanUnit]]:
         _healers_dict = {}
         for x_keep_rope, x_keep_plan in self._keep_dict.items():
-            for x_healer_name in x_keep_plan.healerlink._healer_names:
+            for x_healer_name in x_keep_plan.healerunit._healer_names:
                 x_groupunit = self.get_groupunit(x_healer_name)
                 for x_partner_name in x_groupunit._memberships.keys():
                     if _healers_dict.get(x_partner_name) is None:
@@ -1488,7 +1488,7 @@ def believerunit_shop(
         _healers_dict=get_empty_dict_if_None(),
         _keeps_justified=get_False_if_None(),
         _keeps_buildable=get_False_if_None(),
-        _sum_healerlink_share=get_0_if_None(),
+        _sum_healerunit_share=get_0_if_None(),
         _offtrack_kids_star_set=set(),
         _reason_contexts=set(),
         _range_inheritors={},
@@ -1564,7 +1564,7 @@ def create_planroot_from_believer_dict(x_believer: BelieverUnit, believer_dict: 
         problem_bool=get_obj_from_plan_dict(planroot_dict, "problem_bool"),
         reasonunits=get_obj_from_plan_dict(planroot_dict, "reasonunits"),
         laborunit=get_obj_from_plan_dict(planroot_dict, "laborunit"),
-        healerlink=get_obj_from_plan_dict(planroot_dict, "healerlink"),
+        healerunit=get_obj_from_plan_dict(planroot_dict, "healerunit"),
         factunits=get_obj_from_plan_dict(planroot_dict, "factunits"),
         awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
         _is_expanded=get_obj_from_plan_dict(planroot_dict, "_is_expanded"),
@@ -1608,7 +1608,7 @@ def create_planroot_kids_from_dict(x_believer: BelieverUnit, planroot_dict: dict
             problem_bool=get_obj_from_plan_dict(plan_dict, "problem_bool"),
             reasonunits=get_obj_from_plan_dict(plan_dict, "reasonunits"),
             laborunit=get_obj_from_plan_dict(plan_dict, "laborunit"),
-            healerlink=get_obj_from_plan_dict(plan_dict, "healerlink"),
+            healerunit=get_obj_from_plan_dict(plan_dict, "healerunit"),
             awardunits=get_obj_from_plan_dict(plan_dict, "awardunits"),
             factunits=get_obj_from_plan_dict(plan_dict, "factunits"),
             _is_expanded=get_obj_from_plan_dict(plan_dict, "_is_expanded"),

@@ -10,7 +10,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -1109,7 +1109,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_p
     assert after_ball_planunit.laborunit._partys == {}
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_healerlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_healerunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1121,11 +1121,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_h
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_planunit.healerlink._healer_names == set()
-    assert not before_ball_planunit.healerlink.healer_name_exists(yao_str)
+    assert before_ball_planunit.healerunit._healer_names == set()
+    assert not before_ball_planunit.healerunit.healer_name_exists(yao_str)
 
     # WHEN
-    x_believeratom = believeratom_shop(believer_plan_healerlink_str(), INSERT_str())
+    x_believeratom = believeratom_shop(believer_plan_healerunit_str(), INSERT_str())
     x_believeratom.set_jkey(plan_rope_str(), ball_rope)
     x_believeratom.set_jkey(healer_name_str(), yao_str)
     print(f"{x_believeratom=}")
@@ -1135,11 +1135,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_h
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.healerlink._healer_names != set()
-    assert after_ball_planunit.healerlink.healer_name_exists(yao_str)
+    assert after_ball_planunit.healerunit._healer_names != set()
+    assert after_ball_planunit.healerunit.healer_name_exists(yao_str)
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_healerlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_healerunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1151,12 +1151,12 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_h
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    before_ball_planunit.healerlink.set_healer_name(yao_str)
-    assert before_ball_planunit.healerlink._healer_names != set()
-    assert before_ball_planunit.healerlink.healer_name_exists(yao_str)
+    before_ball_planunit.healerunit.set_healer_name(yao_str)
+    assert before_ball_planunit.healerunit._healer_names != set()
+    assert before_ball_planunit.healerunit.healer_name_exists(yao_str)
 
     # WHEN
-    x_believeratom = believeratom_shop(believer_plan_healerlink_str(), DELETE_str())
+    x_believeratom = believeratom_shop(believer_plan_healerunit_str(), DELETE_str())
     x_believeratom.set_jkey(plan_rope_str(), ball_rope)
     x_believeratom.set_jkey(healer_name_str(), yao_str)
     sue_believerdelta = believerdelta_shop()
@@ -1166,8 +1166,8 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_h
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.healerlink._healer_names == set()
-    assert not after_ball_planunit.healerlink.healer_name_exists(yao_str)
+    assert after_ball_planunit.healerunit._healer_names == set()
+    assert not after_ball_planunit.healerunit.healer_name_exists(yao_str)
 
 
 def test_BelieverDelta_get_believerdelta_example1_ContainsBelieverAtoms():

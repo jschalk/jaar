@@ -62,9 +62,9 @@ from src.a04_reason_logic.reason_plan import (
     reasonunit_shop,
 )
 from src.a05_plan_logic.healer import (
-    HealerLink,
-    healerlink_get_from_dict,
-    healerlink_shop,
+    HealerUnit,
+    healerunit_get_from_dict,
+    healerunit_shop,
 )
 from src.a05_plan_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
 
@@ -103,7 +103,7 @@ class PlanAttrHolder:
     reason_del_case_reason_state: RopeTerm = None
     reason_plan_active_requisite: str = None
     laborunit: LaborUnit = None
-    healerlink: HealerLink = None
+    healerunit: HealerUnit = None
     begin: float = None
     close: float = None
     gogo_want: float = None
@@ -150,7 +150,7 @@ def planattrholder_shop(
     reason_del_case_reason_state: RopeTerm = None,
     reason_plan_active_requisite: str = None,
     laborunit: LaborUnit = None,
-    healerlink: HealerLink = None,
+    healerunit: HealerUnit = None,
     begin: float = None,
     close: float = None,
     gogo_want: float = None,
@@ -182,7 +182,7 @@ def planattrholder_shop(
         reason_del_case_reason_state=reason_del_case_reason_state,
         reason_plan_active_requisite=reason_plan_active_requisite,
         laborunit=laborunit,
-        healerlink=healerlink,
+        healerunit=healerunit,
         begin=begin,
         close=close,
         gogo_want=gogo_want,
@@ -232,7 +232,7 @@ class PlanUnit:
     reasonunits : dict[RopeTerm, ReasonUnit] that stores all reasons
     laborunit : LaborUnit that describes whom this task is for
     factunits : dict[RopeTerm, FactUnit] that stores all facts
-    healerlink : HealerLink, if a ancestor plan is a problem, this can donote a healing plan.
+    healerunit : HealerUnit, if a ancestor plan is a problem, this can donote a healing plan.
     begin : float that describes the begin of a numberical range if it exists
     close : float that describes the close of a numberical range if it exists
     addin : float that describes addition to parent range calculations
@@ -257,7 +257,7 @@ class PlanUnit:
     fund_iota : FundIota Smallest indivisible funding component.
     _fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
     _fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
-    _healerlink_ratio : float
+    _healerunit_ratio : float
     _level : int that describes Depth level in plan hierarchy.
     _range_evaluated : bool Flag indicating whether range has been evaluated.
     _reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
@@ -278,7 +278,7 @@ class PlanUnit:
     reasonunits: dict[RopeTerm, ReasonUnit] = None
     laborunit: LaborUnit = None
     factunits: dict[RopeTerm, FactUnit] = None
-    healerlink: HealerLink = None
+    healerunit: HealerUnit = None
     begin: float = None
     close: float = None
     addin: float = None
@@ -304,7 +304,7 @@ class PlanUnit:
     fund_iota: FundIota = None
     _fund_onset: FundNum = None
     _fund_cease: FundNum = None
-    _healerlink_ratio: float = None
+    _healerunit_ratio: float = None
     _level: int = None
     _range_evaluated: bool = None
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None
@@ -631,8 +631,8 @@ class PlanUnit:
             )
         if plan_attr.laborunit is not None:
             self.laborunit = plan_attr.laborunit
-        if plan_attr.healerlink is not None:
-            self.healerlink = plan_attr.healerlink
+        if plan_attr.healerunit is not None:
+            self.healerunit = plan_attr.healerunit
         if plan_attr.begin is not None:
             self.begin = plan_attr.begin
         if plan_attr.close is not None:
@@ -971,8 +971,8 @@ class PlanUnit:
             x_dict["reasonunits"] = self.get_reasonunits_dict()
         if self.laborunit not in [None, laborunit_shop()]:
             x_dict["laborunit"] = self.get_laborunit_dict()
-        if self.healerlink not in [None, healerlink_shop()]:
-            x_dict["healerlink"] = self.healerlink.to_dict()
+        if self.healerunit not in [None, healerunit_shop()]:
+            x_dict["healerunit"] = self.healerunit.to_dict()
         if self.awardunits not in [{}, None]:
             x_dict["awardunits"] = self.get_awardunits_dict()
         if self.begin is not None:
@@ -1049,7 +1049,7 @@ def planunit_shop(
     _laborheir: LaborHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
-    healerlink: HealerLink = None,
+    healerunit: HealerUnit = None,
     begin: float = None,
     close: float = None,
     gogo_want: float = None,
@@ -1076,10 +1076,10 @@ def planunit_shop(
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
     knot: str = None,
-    _healerlink_ratio: float = None,
+    _healerunit_ratio: float = None,
 ) -> PlanUnit:
     belief_label = get_default_belief_label() if belief_label is None else belief_label
-    x_healerlink = healerlink_shop() if healerlink is None else healerlink
+    x_healerunit = healerunit_shop() if healerunit is None else healerunit
 
     x_plankid = PlanUnit(
         plan_label=None,
@@ -1096,7 +1096,7 @@ def planunit_shop(
         _laborheir=_laborheir,
         factunits=get_empty_dict_if_None(factunits),
         _factheirs=get_empty_dict_if_None(_factheirs),
-        healerlink=x_healerlink,
+        healerunit=x_healerunit,
         begin=begin,
         close=close,
         gogo_want=gogo_want,
@@ -1123,7 +1123,7 @@ def planunit_shop(
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_None(_active_hx),
         knot=default_knot_if_None(knot),
-        _healerlink_ratio=get_0_if_None(_healerlink_ratio),
+        _healerunit_ratio=get_0_if_None(_healerunit_ratio),
     )
     if x_plankid.root:
         x_plankid.set_plan_label(plan_label=belief_label)
@@ -1146,11 +1146,11 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else laborunit_shop()
         )
-    elif dict_key == "healerlink":
+    elif dict_key == "healerunit":
         return (
-            healerlink_get_from_dict(x_dict[dict_key])
+            healerunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else healerlink_shop()
+            else healerunit_shop()
         )
     elif dict_key == "factunits":
         facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))

@@ -51,7 +51,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _fund_onset_str,
     _fund_ratio_str,
     _gogo_calc_str,
-    _healerlink_ratio_str,
+    _healerunit_ratio_str,
     _range_evaluated_str,
     _stop_calc_str,
     problem_bool_str,
@@ -65,7 +65,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     TitleTerm_str,
     _offtrack_fund_str,
     _rational_str,
-    _sum_healerlink_share_str,
+    _sum_healerunit_share_str,
     _tree_traverse_count_str,
     addin_str,
     awardee_title_str,
@@ -74,7 +74,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -159,7 +159,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel0Keys():
     assert believer_plan_reasonunit_str() in believer_calc_config_keys
     assert believer_plan_reason_caseunit_str() in believer_calc_config_keys
     assert believer_plan_partyunit_str() in believer_calc_config_keys
-    assert believer_plan_healerlink_str() in believer_calc_config_keys
+    assert believer_plan_healerunit_str() in believer_calc_config_keys
     assert believer_plan_factunit_str() in believer_calc_config_keys
     assert believer_groupunit_str() in believer_calc_config_keys
     assert len(get_believer_calc_config_dict()) == 11
@@ -222,7 +222,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     blrreas_aspect = believer_calc_config.get(believer_plan_reasonunit_str())
     blrprem_aspect = believer_calc_config.get(believer_plan_reason_caseunit_str())
     blrlabo_aspect = believer_calc_config.get(believer_plan_partyunit_str())
-    blrheal_aspect = believer_calc_config.get(believer_plan_healerlink_str())
+    blrheal_aspect = believer_calc_config.get(believer_plan_healerunit_str())
     blrfact_aspect = believer_calc_config.get(believer_plan_factunit_str())
     blrgrou_aspect = believer_calc_config.get(believer_groupunit_str())
 
@@ -243,7 +243,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_rational",
         "_keeps_justified",
         "_keeps_buildable",
-        "_sum_healerlink_share",
+        "_sum_healerunit_share",
         "_offtrack_fund",
     }
     assert expected_blrunit_jmetrics_keys == blrunit_jmetrics_keys
@@ -280,7 +280,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "fund_iota",
         "_fund_onset",
         "_fund_cease",
-        "_healerlink_ratio",
+        "_healerunit_ratio",
         "_level",
         "_range_evaluated",
         "_chore",
@@ -337,7 +337,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckAbbreviations():
     blrreas_aspect = believer_calc_config.get(believer_plan_reasonunit_str())
     blrprem_aspect = believer_calc_config.get(believer_plan_reason_caseunit_str())
     blrlabo_aspect = believer_calc_config.get(believer_plan_partyunit_str())
-    blrheal_aspect = believer_calc_config.get(believer_plan_healerlink_str())
+    blrheal_aspect = believer_calc_config.get(believer_plan_healerunit_str())
     blrfact_aspect = believer_calc_config.get(believer_plan_factunit_str())
     blrgrou_aspect = believer_calc_config.get(believer_groupunit_str())
     abbr_str = "abbreviation"
@@ -413,7 +413,7 @@ def test_get_believer_calc_dimens_ReturnsObj():
         believer_plan_reasonunit_str(),
         believer_plan_reason_caseunit_str(),
         believer_plan_partyunit_str(),
-        believer_plan_healerlink_str(),
+        believer_plan_healerunit_str(),
         believer_plan_factunit_str(),
         believer_groupunit_str(),
     }
@@ -466,7 +466,7 @@ def test_get_believer_calc_dimen_args_ReturnsObj():
         "_descendant_task_count",
         "_all_partner_cred",
         "_all_partner_debt",
-        "_healerlink_ratio",
+        "_healerunit_ratio",
         "_level",
         "_chore",
         "fund_iota",
@@ -539,7 +539,7 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     blrreas = believer_plan_reasonunit_str()
     blrprem = believer_plan_reason_caseunit_str()
     blrlabo = believer_plan_partyunit_str()
-    blrheal = believer_plan_healerlink_str()
+    blrheal = believer_plan_healerunit_str()
     blrfact = believer_plan_factunit_str()
     blrgrou = believer_groupunit_str()
     assert g_class_type(cfig, blrmemb, jk, partner_name_str()) == NameTerm_str()
@@ -701,8 +701,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jm, _fund_ratio_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, _gogo_calc_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, _gogo_calc_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, _healerlink_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _healerlink_ratio_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, _healerunit_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, _healerunit_ratio_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, "_level") == "int"
     assert g_sqlitetype(cfig, blrplan, jm, "_level") == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, _range_evaluated_str()) == "int"
@@ -741,8 +741,8 @@ def test_get_believer_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, believerunit, jm, _offtrack_fund_str()) == "REAL"
     assert g_class_type(cfig, believerunit, jm, _rational_str()) == "bool"
     assert g_sqlitetype(cfig, believerunit, jm, _rational_str()) == "INTEGER"
-    assert g_class_type(cfig, believerunit, jm, _sum_healerlink_share_str()) == "float"
-    assert g_sqlitetype(cfig, believerunit, jm, _sum_healerlink_share_str()) == "REAL"
+    assert g_class_type(cfig, believerunit, jm, _sum_healerunit_share_str()) == "float"
+    assert g_sqlitetype(cfig, believerunit, jm, _sum_healerunit_share_str()) == "REAL"
     assert g_class_type(cfig, believerunit, jm, _tree_traverse_count_str()) == "int"
     assert g_sqlitetype(cfig, believerunit, jm, _tree_traverse_count_str()) == "INTEGER"
     assert g_class_type(cfig, believerunit, jv, credor_respect_str()) == "float"
@@ -891,7 +891,7 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get(_fund_onset_str()) == "float"
     assert believer_calc_args_type_dict.get(_fund_ratio_str()) == "float"
     assert believer_calc_args_type_dict.get(_gogo_calc_str()) == "float"
-    assert believer_calc_args_type_dict.get("_healerlink_ratio") == "float"
+    assert believer_calc_args_type_dict.get("_healerunit_ratio") == "float"
     assert believer_calc_args_type_dict.get("_level") == "int"
     assert believer_calc_args_type_dict.get(_range_evaluated_str()) == "int"
     assert believer_calc_args_type_dict.get(_stop_calc_str()) == "float"
@@ -899,7 +899,7 @@ def test_get_believer_calc_args_type_dict_ReturnsObj():
     assert believer_calc_args_type_dict.get("_keeps_justified") == "int"
     assert believer_calc_args_type_dict.get(_offtrack_fund_str()) == "int"
     assert believer_calc_args_type_dict.get(_rational_str()) == "bool"
-    assert believer_calc_args_type_dict.get(_sum_healerlink_share_str()) == "float"
+    assert believer_calc_args_type_dict.get(_sum_healerunit_share_str()) == "float"
     assert believer_calc_args_type_dict.get(_tree_traverse_count_str()) == "int"
     assert believer_calc_args_type_dict.get(credor_respect_str()) == "float"
     assert believer_calc_args_type_dict.get(debtor_respect_str()) == "float"

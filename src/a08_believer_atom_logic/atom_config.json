@@ -157,7 +157,7 @@
             "atom_order": 13
         }
     },
-    "believer_plan_healerlink": {
+    "believer_plan_healerunit": {
         "DELETE": {
             "atom_order": 20
         },
@@ -180,7 +180,7 @@
         },
         "jvalues": {},
         "normal_specs": {
-            "normal_table_name": "healerlink"
+            "normal_table_name": "healerunit"
         }
     },
     "believer_plan_partyunit": {

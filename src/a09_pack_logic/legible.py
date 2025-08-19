@@ -62,10 +62,10 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
     x_list = ["DELETE", "believer_plan_partyunit"]
     believer_plan_partyunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_healerlink"]
-    believer_plan_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_healerlink"]
-    believer_plan_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_healerunit"]
+    believer_plan_healerunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_healerunit"]
+    believer_plan_healerunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = ["INSERT", "believer_plan_factunit"]
     believer_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -164,13 +164,13 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
             leg_list, believer_plan_partyunit_delete_dict, x_believer
         )
 
-    if believer_plan_healerlink_insert_dict is not None:
-        add_believer_plan_healerlink_insert_to_legible_list(
-            leg_list, believer_plan_healerlink_insert_dict, x_believer
+    if believer_plan_healerunit_insert_dict is not None:
+        add_believer_plan_healerunit_insert_to_legible_list(
+            leg_list, believer_plan_healerunit_insert_dict, x_believer
         )
-    if believer_plan_healerlink_delete_dict is not None:
-        add_believer_plan_healerlink_delete_to_legible_list(
-            leg_list, believer_plan_healerlink_delete_dict, x_believer
+    if believer_plan_healerunit_delete_dict is not None:
+        add_believer_plan_healerunit_delete_to_legible_list(
+            leg_list, believer_plan_healerunit_delete_dict, x_believer
         )
 
     if believer_plan_factunit_insert_dict is not None:
@@ -589,25 +589,25 @@ def add_believer_plan_partyunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_healerlink_insert_to_legible_list(
-    legible_list: list[str], plan_healerlink_insert_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_healerunit_insert_to_legible_list(
+    legible_list: list[str], plan_healerunit_insert_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_healerlink_insert_dict.values():
-        for plan_healerlink_atom in rope_dict.values():
-            healer_name_value = plan_healerlink_atom.get_value("healer_name")
-            rope_value = plan_healerlink_atom.get_value("plan_rope")
-            x_str = f"HealerLink '{healer_name_value}' created for plan '{rope_value}'."
+    for rope_dict in plan_healerunit_insert_dict.values():
+        for plan_healerunit_atom in rope_dict.values():
+            healer_name_value = plan_healerunit_atom.get_value("healer_name")
+            rope_value = plan_healerunit_atom.get_value("plan_rope")
+            x_str = f"HealerUnit '{healer_name_value}' created for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_believer_plan_healerlink_delete_to_legible_list(
-    legible_list: list[str], plan_healerlink_delete_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_healerunit_delete_to_legible_list(
+    legible_list: list[str], plan_healerunit_delete_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_healerlink_delete_dict.values():
-        for plan_healerlink_atom in rope_dict.values():
-            healer_name_value = plan_healerlink_atom.get_value("healer_name")
-            rope_value = plan_healerlink_atom.get_value("plan_rope")
-            x_str = f"HealerLink '{healer_name_value}' deleted for plan '{rope_value}'."
+    for rope_dict in plan_healerunit_delete_dict.values():
+        for plan_healerunit_atom in rope_dict.values():
+            healer_name_value = plan_healerunit_atom.get_value("healer_name")
+            rope_value = plan_healerunit_atom.get_value("plan_rope")
+            x_str = f"HealerUnit '{healer_name_value}' deleted for plan '{rope_value}'."
             legible_list.append(x_str)
 
 

@@ -412,7 +412,7 @@ def test_add_believer_to_br00025_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     casa_plan = bob_believer.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_plan.healerlink.set_healer_name(cleaners_str)
+    casa_plan.healerunit.set_healer_name(cleaners_str)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
@@ -793,7 +793,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     casa_plan = bob_believer.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_plan.healerlink.set_healer_name(cleaners_str)
+    casa_plan.healerunit.set_healer_name(cleaners_str)
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
     sue_str = "Sue"

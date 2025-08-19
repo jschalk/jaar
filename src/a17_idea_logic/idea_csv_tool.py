@@ -340,7 +340,7 @@ def add_believer_to_br00025_csv(
     event_int: int = None,
 ) -> str:
     for planunit in x_believer._plan_dict.values():
-        for group_title in planunit.healerlink._healer_names:
+        for group_title in planunit.healerunit._healer_names:
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
@@ -599,7 +599,7 @@ def add_pack_to_br00025_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for believeratom in x_packunit._believerdelta.get_ordered_believeratoms().values():
-        if believeratom.dimen == "believer_plan_healerlink":
+        if believeratom.dimen == "believer_plan_healerunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),

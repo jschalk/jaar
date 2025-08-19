@@ -5,7 +5,7 @@ from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.test._util.a04_str import _chore_str
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, get_default_belief_label, planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
@@ -20,7 +20,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _fund_onset_str,
     _fund_ratio_str,
     _gogo_calc_str,
-    _healerlink_ratio_str,
+    _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
     _level_str,
@@ -36,7 +36,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     denom_str,
     fund_iota_str,
     gogo_want_str,
-    healerlink_str,
+    healerunit_str,
     knot_str,
     morph_str,
     numor_str,
@@ -83,7 +83,7 @@ def test_PlanUnit_Exists():
     assert x_planunit.stop_want is None
     assert x_planunit.task is None
     assert x_planunit.problem_bool is None
-    assert x_planunit.healerlink is None
+    assert x_planunit.healerunit is None
     # calculated_fields
     assert x_planunit._range_evaluated is None
     assert x_planunit._gogo_calc is None
@@ -100,7 +100,7 @@ def test_PlanUnit_Exists():
     assert x_planunit._fund_cease is None
     assert x_planunit.root is None
     assert x_planunit.belief_label is None
-    assert x_planunit._healerlink_ratio is None
+    assert x_planunit._healerunit_ratio is None
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
@@ -116,7 +116,7 @@ def test_PlanUnit_Exists():
         _fund_onset_str(),
         _fund_ratio_str(),
         _gogo_calc_str(),
-        _healerlink_ratio_str(),
+        _healerunit_ratio_str(),
         _is_expanded_str(),
         _kids_str(),
         "_laborheir",
@@ -137,7 +137,7 @@ def test_PlanUnit_Exists():
         belief_label_str(),
         fund_iota_str(),
         gogo_want_str(),
-        healerlink_str(),
+        healerunit_str(),
         "laborunit",
         star_str(),
         morph_str(),
@@ -177,7 +177,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit._is_expanded is True
     assert x_planunit._factheirs == {}
     assert x_planunit.factunits == {}
-    assert x_planunit.healerlink == healerlink_shop()
+    assert x_planunit.healerunit == healerunit_shop()
     assert x_planunit._gogo_calc is None
     assert x_planunit._stop_calc is None
     assert x_planunit._level is None
@@ -194,7 +194,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.root is False
     assert x_planunit._all_partner_cred is None
     assert x_planunit._all_partner_debt is None
-    assert x_planunit._healerlink_ratio == 0
+    assert x_planunit._healerunit_ratio == 0
 
 
 def test_planunit_shop_Allows_starToBeZero():
@@ -218,17 +218,17 @@ def test_planunit_shop_Allows_doesNotAllow_starToBeNegative():
 
 def test_planunit_shop_NonNoneParametersReturnsObj():
     # ESTABLISH
-    x_healerlink = healerlink_shop({"Sue", "Yao"})
+    x_healerunit = healerunit_shop({"Sue", "Yao"})
     x_problem_bool = True
     x_fund_iota = 88
 
     # WHEN
     x_planunit = planunit_shop(
-        healerlink=x_healerlink, problem_bool=x_problem_bool, fund_iota=x_fund_iota
+        healerunit=x_healerunit, problem_bool=x_problem_bool, fund_iota=x_fund_iota
     )
 
     # THEN
-    assert x_planunit.healerlink == x_healerlink
+    assert x_planunit.healerunit == x_healerunit
     assert x_planunit.problem_bool == x_problem_bool
     assert x_planunit.fund_iota == x_fund_iota
 

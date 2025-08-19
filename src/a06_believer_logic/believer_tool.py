@@ -88,14 +88,14 @@ def believer_plan_partyunit_exists(
     )
 
 
-def believer_plan_healerlink_exists(
+def believer_plan_healerunit_exists(
     x_believer: BelieverUnit, jkeys: dict[str, any]
 ) -> bool:
     x_healer_name = jkeys.get("healer_name")
     x_rope = jkeys.get("plan_rope")
     return bool(
         believer_planunit_exists(x_believer, jkeys)
-        and x_believer.get_plan_obj(x_rope).healerlink.healer_name_exists(x_healer_name)
+        and x_believer.get_plan_obj(x_rope).healerunit.healer_name_exists(x_healer_name)
     )
 
 
@@ -121,8 +121,8 @@ def believer_attr_exists(
         return believer_plan_awardunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_factunit":
         return believer_plan_factunit_exists(x_believer, jkeys)
-    elif x_dimen == "believer_plan_healerlink":
-        return believer_plan_healerlink_exists(x_believer, jkeys)
+    elif x_dimen == "believer_plan_healerunit":
+        return believer_plan_healerunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_reason_caseunit":
         return believer_plan_reason_caseunit_exists(x_believer, jkeys)
     elif x_dimen == "believer_plan_reasonunit":

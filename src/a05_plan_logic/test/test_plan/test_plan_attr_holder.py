@@ -1,4 +1,4 @@
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 
 
@@ -19,7 +19,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.reason_del_case_reason_state is None
     assert new_obj.reason_plan_active_requisite is None
     assert new_obj.laborunit is None
-    assert new_obj.healerlink is None
+    assert new_obj.healerunit is None
     assert new_obj.begin is None
     assert new_obj.close is None
     assert new_obj.addin is None
@@ -64,10 +64,10 @@ def test_PlanAttrHolder_CalculatesCaseRanges():
 
 def test_planattrholder_shop_ReturnsObj():
     # ESTABLISH
-    sue_healerlink = healerlink_shop({"Sue", "Yim"})
+    sue_healerunit = healerunit_shop({"Sue", "Yim"})
 
     # WHEN
-    x_planattrholder = planattrholder_shop(healerlink=sue_healerlink)
+    x_planattrholder = planattrholder_shop(healerunit=sue_healerunit)
 
     # THEN
-    assert x_planattrholder.healerlink == sue_healerlink
+    assert x_planattrholder.healerunit == sue_healerunit

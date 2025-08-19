@@ -8,7 +8,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -310,7 +310,7 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_partyunit():
     assert sift_believeratom(sue_believer, clean_swim_atom)
 
 
-def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_healerlink():
+def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_healerunit():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
@@ -320,10 +320,10 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_healerlink():
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     swim_str = "Swim"
 
-    casa_swim_atom = believeratom_shop(believer_plan_healerlink_str(), DELETE_str())
+    casa_swim_atom = believeratom_shop(believer_plan_healerunit_str(), DELETE_str())
     casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
     casa_swim_atom.set_arg(healer_name_str(), swim_str)
-    clean_swim_atom = believeratom_shop(believer_plan_healerlink_str(), DELETE_str())
+    clean_swim_atom = believeratom_shop(believer_plan_healerunit_str(), DELETE_str())
     clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
     clean_swim_atom.set_arg(healer_name_str(), swim_str)
     sue_believer.add_plan(casa_rope)
@@ -332,14 +332,14 @@ def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_plan_healerlink():
     assert not sift_believeratom(sue_believer, clean_swim_atom)
 
     # WHEN
-    sue_believer.get_plan_obj(casa_rope).healerlink.set_healer_name(swim_str)
+    sue_believer.get_plan_obj(casa_rope).healerunit.set_healer_name(swim_str)
 
     # THEN
     assert sift_believeratom(sue_believer, casa_swim_atom)
     assert not sift_believeratom(sue_believer, clean_swim_atom)
 
     # WHEN
-    sue_believer.get_plan_obj(clean_rope).healerlink.set_healer_name(swim_str)
+    sue_believer.get_plan_obj(clean_rope).healerunit.set_healer_name(swim_str)
     # THEN
     assert sift_believeratom(sue_believer, casa_swim_atom)
     assert sift_believeratom(sue_believer, clean_swim_atom)

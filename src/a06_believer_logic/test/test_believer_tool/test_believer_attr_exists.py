@@ -8,7 +8,7 @@ from src.a06_believer_logic.believer_tool import (
     believer_partnerunit_exists,
     believer_plan_awardunit_exists,
     believer_plan_factunit_exists,
-    believer_plan_healerlink_exists,
+    believer_plan_healerunit_exists,
     believer_plan_partyunit_exists,
     believer_plan_reason_caseunit_exists as caseunit_exists,
     believer_plan_reasonunit_exists,
@@ -21,7 +21,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -279,7 +279,7 @@ def test_believer_plan_partyunit_exists_ReturnsObj():
     assert not believer_plan_partyunit_exists(sue_believer, clean_jkeys)
 
 
-def test_believer_plan_healerlink_exists_ReturnsObj():
+def test_believer_plan_healerunit_exists_ReturnsObj():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -293,20 +293,20 @@ def test_believer_plan_healerlink_exists_ReturnsObj():
     clean_jkeys = {plan_rope_str(): clean_rope, healer_name_str(): swim_str}
 
     # WHEN / THEN
-    assert not believer_plan_healerlink_exists(None, {})
-    assert not believer_plan_healerlink_exists(sue_believer, {})
-    assert not believer_plan_healerlink_exists(sue_believer, root_jkeys)
-    assert not believer_plan_healerlink_exists(sue_believer, casa_jkeys)
-    assert not believer_plan_healerlink_exists(sue_believer, clean_jkeys)
+    assert not believer_plan_healerunit_exists(None, {})
+    assert not believer_plan_healerunit_exists(sue_believer, {})
+    assert not believer_plan_healerunit_exists(sue_believer, root_jkeys)
+    assert not believer_plan_healerunit_exists(sue_believer, casa_jkeys)
+    assert not believer_plan_healerunit_exists(sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.healerlink.set_healer_name(swim_str)
+    sue_believer.planroot.healerunit.set_healer_name(swim_str)
 
     # THEN
-    assert not believer_plan_healerlink_exists(sue_believer, {})
-    assert believer_plan_healerlink_exists(sue_believer, root_jkeys)
-    assert not believer_plan_healerlink_exists(sue_believer, casa_jkeys)
-    assert not believer_plan_healerlink_exists(sue_believer, clean_jkeys)
+    assert not believer_plan_healerunit_exists(sue_believer, {})
+    assert believer_plan_healerunit_exists(sue_believer, root_jkeys)
+    assert not believer_plan_healerunit_exists(sue_believer, casa_jkeys)
+    assert not believer_plan_healerunit_exists(sue_believer, clean_jkeys)
 
 
 def test_believer_plan_factunit_exists_ReturnsObj():
@@ -584,7 +584,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_partyunit():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
 
-def test_believer_attr_exists_ReturnsObj_believer_plan_healerlink():
+def test_believer_attr_exists_ReturnsObj_believer_plan_healerunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -593,7 +593,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_healerlink():
     clean_rope = sue_believer.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_believer.belief_label)
     swim_str = "Swim"
-    x_dimen = believer_plan_healerlink_str()
+    x_dimen = believer_plan_healerunit_str()
     root_jkeys = {plan_rope_str(): root_rope, healer_name_str(): swim_str}
     casa_jkeys = {plan_rope_str(): casa_rope, healer_name_str(): swim_str}
     clean_jkeys = {plan_rope_str(): clean_rope, healer_name_str(): swim_str}
@@ -606,7 +606,7 @@ def test_believer_attr_exists_ReturnsObj_believer_plan_healerlink():
     assert not believer_attr_exists(x_dimen, sue_believer, clean_jkeys)
 
     # WHEN
-    sue_believer.planroot.healerlink.set_healer_name(swim_str)
+    sue_believer.planroot.healerunit.set_healer_name(swim_str)
 
     # THEN
     assert not believer_attr_exists(x_dimen, sue_believer, {})

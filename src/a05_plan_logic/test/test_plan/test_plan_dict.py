@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason_plan import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import (
     get_default_belief_label as root_label,
     get_obj_from_plan_dict,
@@ -27,7 +27,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _fund_onset_str,
     _fund_ratio_str,
     _gogo_calc_str,
-    _healerlink_ratio_str,
+    _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
     _level_str,
@@ -44,7 +44,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     fund_iota_str,
     fund_share_str,
     gogo_want_str,
-    healerlink_str,
+    healerunit_str,
     knot_str,
     morph_str,
     numor_str,
@@ -85,24 +85,24 @@ def test_get_obj_from_plan_dict_ReturnsObj():
     assert get_obj_from_plan_dict({}, field_str) == {}
 
 
-def test_get_obj_from_plan_dict_Returns_HealerLink():
+def test_get_obj_from_plan_dict_Returns_HealerUnit():
     # ESTABLISH
     # WHEN / THEN
-    healerlink_key = healerlink_str()
-    assert get_obj_from_plan_dict({}, healerlink_key) == healerlink_shop()
+    healerunit_key = healerunit_str()
+    assert get_obj_from_plan_dict({}, healerunit_key) == healerunit_shop()
 
     # WHEN
     sue_str = "Sue"
     zia_str = "Zia"
-    healerlink_dict = {"healerlink_healer_names": [sue_str, zia_str]}
-    planunit_dict = {healerlink_key: healerlink_dict}
+    healerunit_dict = {"healerunit_healer_names": [sue_str, zia_str]}
+    planunit_dict = {healerunit_key: healerunit_dict}
 
     # THEN
-    static_healerlink = healerlink_shop()
-    static_healerlink.set_healer_name(x_healer_name=sue_str)
-    static_healerlink.set_healer_name(x_healer_name=zia_str)
-    assert get_obj_from_plan_dict(planunit_dict, healerlink_key) is not None
-    assert get_obj_from_plan_dict(planunit_dict, healerlink_key) == static_healerlink
+    static_healerunit = healerunit_shop()
+    static_healerunit.set_healer_name(x_healer_name=sue_str)
+    static_healerunit.set_healer_name(x_healer_name=zia_str)
+    assert get_obj_from_plan_dict(planunit_dict, healerunit_key) is not None
+    assert get_obj_from_plan_dict(planunit_dict, healerunit_key) == static_healerunit
 
 
 def test_PlanUnit_to_dict_ReturnsCompleteDict():
@@ -168,7 +168,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     sue_laborunit = laborunit_shop()
     sue_laborunit.add_party(sue_str)
     sue_laborunit.add_party(yao_str)
-    yao_healerlink = healerlink_shop({yao_str})
+    yao_healerunit = healerunit_shop({yao_str})
     casa_str = "casa"
     casa_rope = create_rope(root_label(), casa_str)
     x_problem_bool = True
@@ -182,7 +182,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         reasonunits=x1_reasonunits,
         _reasonheirs=x1_reasonheirs,
         laborunit=sue_laborunit,
-        healerlink=yao_healerlink,
+        healerunit=yao_healerunit,
         _active=True,
         task=True,
         problem_bool=x_problem_bool,
@@ -221,7 +221,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[awardunits_str()] == casa_plan.get_awardunits_dict()
     assert casa_dict[awardunits_str()] == x1_awardunits
     assert casa_dict["laborunit"] == sue_laborunit.to_dict()
-    assert casa_dict["healerlink"] == yao_healerlink.to_dict()
+    assert casa_dict["healerunit"] == yao_healerunit.to_dict()
     assert casa_dict["star"] == casa_plan.star
     assert casa_dict["plan_label"] == casa_plan.plan_label
     assert casa_dict["_uid"] == casa_plan._uid
@@ -299,7 +299,7 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     assert casa_plan.factunits == {}
     assert casa_plan.awardunits == {}
     assert casa_plan.laborunit == laborunit_shop()
-    assert casa_plan.healerlink == healerlink_shop()
+    assert casa_plan.healerunit == healerunit_shop()
     assert casa_plan._kids == {}
 
     # WHEN
@@ -311,5 +311,5 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     assert casa_dict.get("factunits") is None
     assert casa_dict.get(awardunits_str()) is None
     assert casa_dict.get("laborunit") is None
-    assert casa_dict.get("healerlink") is None
+    assert casa_dict.get("healerunit") is None
     assert casa_dict.get("_kids") is None

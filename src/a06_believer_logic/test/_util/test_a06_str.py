@@ -5,7 +5,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     _offtrack_kids_star_set_str,
     _rational_str,
     _reason_contexts_str,
-    _sum_healerlink_share_str,
+    _sum_healerunit_share_str,
     _tree_traverse_count_str,
     ancestors_str,
     attributes_str,
@@ -13,7 +13,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -44,7 +44,7 @@ def test_str_functions_ReturnsObj():
     assert _offtrack_kids_star_set_str() == "_offtrack_kids_star_set"
     assert _rational_str() == "_rational"
     assert _reason_contexts_str() == "_reason_contexts"
-    assert _sum_healerlink_share_str() == "_sum_healerlink_share"
+    assert _sum_healerunit_share_str() == "_sum_healerunit_share"
     assert _tree_traverse_count_str() == "_tree_traverse_count"
     assert last_pack_id_str() == "last_pack_id"
     assert max_tree_traverse_str() == "max_tree_traverse"
@@ -64,7 +64,7 @@ def test_str_functions_ReturnsObj():
     assert believer_plan_reasonunit_str() == "believer_plan_reasonunit"
     assert believer_plan_reason_caseunit_str() == "believer_plan_reason_caseunit"
     assert believer_plan_partyunit_str() == "believer_plan_partyunit"
-    assert believer_plan_healerlink_str() == "believer_plan_healerlink"
+    assert believer_plan_healerunit_str() == "believer_plan_healerunit"
     assert believer_plan_factunit_str() == "believer_plan_factunit"
     assert jkeys_str() == "jkeys"
     assert attributes_str() == "attributes"

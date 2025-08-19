@@ -10,7 +10,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -372,13 +372,13 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[163] == "_level"
     assert table_sorting_priority[164] == "_range_evaluated"
     assert table_sorting_priority[165] == "_descendant_task_count"
-    assert table_sorting_priority[166] == "_healerlink_ratio"
+    assert table_sorting_priority[166] == "_healerunit_ratio"
     assert table_sorting_priority[167] == "_all_partner_cred"
     assert table_sorting_priority[168] == "_keeps_justified"
     assert table_sorting_priority[169] == "_offtrack_fund"
     assert table_sorting_priority[170] == "_rplan_active_value"
     assert table_sorting_priority[171] == "_irrational_partner_debt_points"
-    assert table_sorting_priority[172] == "_sum_healerlink_share"
+    assert table_sorting_priority[172] == "_sum_healerunit_share"
     assert table_sorting_priority[173] == "_keeps_buildable"
     assert table_sorting_priority[174] == "_all_partner_debt"
     assert table_sorting_priority[175] == "_tree_traverse_count"
@@ -543,7 +543,7 @@ def test_get_idea_config_dict_ReturnsObj():
     assert believer_plan_awardunit_str() in idea_config_dimens
     assert believer_plan_factunit_str() in idea_config_dimens
     assert believer_plan_partyunit_str() in idea_config_dimens
-    assert believer_plan_healerlink_str() in idea_config_dimens
+    assert believer_plan_healerunit_str() in idea_config_dimens
     assert believer_plan_reason_caseunit_str() in idea_config_dimens
     assert believer_plan_reasonunit_str() in idea_config_dimens
     assert believer_planunit_str() in idea_config_dimens
@@ -853,7 +853,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(believer_plan_awardunit_str(), 11)
     # set_idea_config_json(believer_plan_factunit_str(), 12)
     # set_idea_config_json(believer_plan_partyunit_str(), 14)
-    # set_idea_config_json(believer_plan_healerlink_str(), 15)
+    # set_idea_config_json(believer_plan_healerunit_str(), 15)
     # set_idea_config_json(believer_plan_reason_caseunit_str(), 16)
     # set_idea_config_json(believer_plan_reasonunit_str(), 17)
     # set_idea_config_json(believer_planunit_str(), 18)
@@ -877,7 +877,7 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(believer_plan_awardunit_str()).get(bo) == 11
     assert x_idea_config.get(believer_plan_factunit_str()).get(bo) == 12
     assert x_idea_config.get(believer_plan_partyunit_str()).get(bo) == 14
-    assert x_idea_config.get(believer_plan_healerlink_str()).get(bo) == 15
+    assert x_idea_config.get(believer_plan_healerunit_str()).get(bo) == 15
     assert x_idea_config.get(believer_plan_reason_caseunit_str()).get(bo) == 16
     assert x_idea_config.get(believer_plan_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(believer_planunit_str()).get(bo) == 18

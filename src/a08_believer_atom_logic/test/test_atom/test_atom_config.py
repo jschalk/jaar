@@ -11,7 +11,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -166,7 +166,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(INSERT_str(), believer_planunit_str(), 2)
     # set_mog(INSERT_str(), believer_plan_awardunit_str(), 3)
     # set_mog(INSERT_str(), believer_plan_partyunit_str(), 4)
-    # set_mog(INSERT_str(), believer_plan_healerlink_str(), 5)
+    # set_mog(INSERT_str(), believer_plan_healerunit_str(), 5)
     # set_mog(INSERT_str(), believer_plan_factunit_str(), 6)
     # set_mog(INSERT_str(), believer_plan_reasonunit_str(), 7)
     # set_mog(INSERT_str(), believer_plan_reason_caseunit_str(), 8)
@@ -181,7 +181,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     # set_mog(DELETE_str(), believer_plan_reasonunit_str(), 17)
     # set_mog(DELETE_str(), believer_plan_factunit_str(), 18)
     # set_mog(DELETE_str(), believer_plan_partyunit_str(), 19)
-    # set_mog(DELETE_str(), believer_plan_healerlink_str(), 20)
+    # set_mog(DELETE_str(), believer_plan_healerunit_str(), 20)
     # set_mog(DELETE_str(), believer_plan_awardunit_str(), 21)
     # set_mog(DELETE_str(), believer_planunit_str(), 22)
     # set_mog(DELETE_str(), believer_partner_membership_str(), 23)
@@ -193,7 +193,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 2 == q_order(INSERT_str(), believer_planunit_str())
     assert 3 == q_order(INSERT_str(), believer_plan_awardunit_str())
     assert 4 == q_order(INSERT_str(), believer_plan_partyunit_str())
-    assert 5 == q_order(INSERT_str(), believer_plan_healerlink_str())
+    assert 5 == q_order(INSERT_str(), believer_plan_healerunit_str())
     assert 6 == q_order(INSERT_str(), believer_plan_factunit_str())
     assert 7 == q_order(INSERT_str(), believer_plan_reasonunit_str())
     assert 8 == q_order(INSERT_str(), believer_plan_reason_caseunit_str())
@@ -208,7 +208,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBelieverDeltaOrderGroup():
     assert 17 == q_order(DELETE_str(), believer_plan_reasonunit_str())
     assert 18 == q_order(DELETE_str(), believer_plan_factunit_str())
     assert 19 == q_order(DELETE_str(), believer_plan_partyunit_str())
-    assert 20 == q_order(DELETE_str(), believer_plan_healerlink_str())
+    assert 20 == q_order(DELETE_str(), believer_plan_healerunit_str())
     assert 21 == q_order(DELETE_str(), believer_plan_awardunit_str())
     assert 22 == q_order(DELETE_str(), believer_planunit_str())
     assert 23 == q_order(DELETE_str(), believer_partner_membership_str())
@@ -236,7 +236,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jkeys_len(believer_plan_reasonunit_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_reason_caseunit_str()) == 3
     assert _get_atom_config_jkeys_len(believer_plan_partyunit_str()) == 2
-    assert _get_atom_config_jkeys_len(believer_plan_healerlink_str()) == 2
+    assert _get_atom_config_jkeys_len(believer_plan_healerunit_str()) == 2
     assert _get_atom_config_jkeys_len(believer_plan_factunit_str()) == 2
 
     assert _get_atom_config_jvalues_len(believerunit_str()) == 8
@@ -247,7 +247,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     assert _get_atom_config_jvalues_len(believer_plan_reasonunit_str()) == 1
     assert _get_atom_config_jvalues_len(believer_plan_reason_caseunit_str()) == 3
     assert _get_atom_config_jvalues_len(believer_plan_partyunit_str()) == 1
-    assert _get_atom_config_jvalues_len(believer_plan_healerlink_str()) == 0
+    assert _get_atom_config_jvalues_len(believer_plan_healerunit_str()) == 0
     assert _get_atom_config_jvalues_len(believer_plan_factunit_str()) == 3
 
 
@@ -416,7 +416,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     cat_reason = nx.get(believer_plan_reasonunit_str())
     cat_case = nx.get(believer_plan_reason_caseunit_str())
     cat_partyunit = nx.get(believer_plan_partyunit_str())
-    cat_healerlink = nx.get(believer_plan_healerlink_str())
+    cat_healerunit = nx.get(believer_plan_healerunit_str())
     cat_fact = nx.get(believer_plan_factunit_str())
 
     assert cat_believerunit is not None
@@ -427,7 +427,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert cat_reason is not None
     assert cat_case is not None
     assert cat_partyunit is not None
-    assert cat_healerlink is not None
+    assert cat_healerunit is not None
     assert cat_fact is not None
 
     normal_specs_believerunit = cat_believerunit.get(normal_specs_str())
@@ -438,7 +438,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     normal_specs_reason = cat_reason.get(normal_specs_str())
     normal_specs_case = cat_case.get(normal_specs_str())
     normal_specs_partyunit = cat_partyunit.get(normal_specs_str())
-    normal_specs_healerlink = cat_healerlink.get(normal_specs_str())
+    normal_specs_healerunit = cat_healerunit.get(normal_specs_str())
     normal_specs_fact = cat_fact.get(normal_specs_str())
 
     columns_str = "columns"
@@ -452,7 +452,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert normal_specs_reason is not None
     assert normal_specs_case is not None
     assert normal_specs_partyunit is not None
-    assert normal_specs_healerlink is not None
+    assert normal_specs_healerunit is not None
     assert normal_specs_fact is not None
 
     table_name_believerunit = normal_specs_believerunit.get(normal_table_name_str())
@@ -463,7 +463,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     table_name_reason = normal_specs_reason.get(normal_table_name_str())
     table_name_case = normal_specs_case.get(normal_table_name_str())
     table_name_partyunit = normal_specs_partyunit.get(normal_table_name_str())
-    table_name_healerlink = normal_specs_healerlink.get(normal_table_name_str())
+    table_name_healerunit = normal_specs_healerunit.get(normal_table_name_str())
     table_name_fact = normal_specs_fact.get(normal_table_name_str())
 
     assert table_name_believerunit == "believer"
@@ -474,7 +474,7 @@ def test_get_normalized_believer_table_build_ReturnsObj():
     assert table_name_reason == "reason"
     assert table_name_case == "case"
     assert table_name_partyunit == "partyunit"
-    assert table_name_healerlink == "healerlink"
+    assert table_name_healerunit == "healerunit"
     assert table_name_fact == "fact"
 
     assert len(cat_believerunit) == 2

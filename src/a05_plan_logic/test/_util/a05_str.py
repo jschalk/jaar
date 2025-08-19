@@ -52,8 +52,8 @@ def _gogo_calc_str() -> str:
     return "_gogo_calc"
 
 
-def _healerlink_ratio_str() -> str:
-    return "_healerlink_ratio"
+def _healerunit_ratio_str() -> str:
+    return "_healerunit_ratio"
 
 
 def _is_expanded_str() -> str:
@@ -112,8 +112,8 @@ def healer_name_str() -> str:
     return "healer_name"
 
 
-def healerlink_str() -> str:
-    return "healerlink"
+def healerunit_str() -> str:
+    return "healerunit"
 
 
 def morph_str() -> str:

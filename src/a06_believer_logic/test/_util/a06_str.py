@@ -83,8 +83,8 @@ def _reason_contexts_str() -> str:
     return "_reason_contexts"
 
 
-def _sum_healerlink_share_str() -> str:
-    return "_sum_healerlink_share"
+def _sum_healerunit_share_str() -> str:
+    return "_sum_healerunit_share"
 
 
 def _tree_traverse_count_str() -> str:
@@ -115,8 +115,8 @@ def believer_plan_factunit_str() -> str:
     return "believer_plan_factunit"
 
 
-def believer_plan_healerlink_str() -> str:
-    return "believer_plan_healerlink"
+def believer_plan_healerunit_str() -> str:
+    return "believer_plan_healerunit"
 
 
 def believer_plan_partyunit_str() -> str:

@@ -46,9 +46,9 @@ def _get_color_for_planunit_trace(x_planunit: PlanUnit, mode: str) -> str:
     elif mode == "Chore":
         return "Red" if x_planunit.task else "Pink"
     elif mode == "Keep":
-        if x_planunit.problem_bool and x_planunit.healerlink.any_healer_name_exists():
+        if x_planunit.problem_bool and x_planunit.healerunit.any_healer_name_exists():
             return "Purple"
-        elif x_planunit.healerlink.any_healer_name_exists():
+        elif x_planunit.healerunit.any_healer_name_exists():
             return "Blue"
         elif x_planunit.problem_bool:
             return "Red"
@@ -112,7 +112,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_believer: BelieverUnit
     if mode == "Chore":
         fig_label = "Plan Tree with chore plans in Red."
     fig_label += f" (Plans: {len(x_believer._plan_dict)})"
-    fig_label += f" (_sum_healerlink_share: {x_believer._sum_healerlink_share})"
+    fig_label += f" (_sum_healerunit_share: {x_believer._sum_healerunit_share})"
     fig_label += f" (_keeps_justified: {x_believer._keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 

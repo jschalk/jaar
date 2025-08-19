@@ -426,18 +426,18 @@ def _modify_believer_plan_partyunit_insert(
     x_planunit.laborunit.add_party(party_title=x_atom.get_value("party_title"))
 
 
-def _modify_believer_plan_healerlink_delete(
+def _modify_believer_plan_healerunit_delete(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.healerlink.del_healer_name(x_atom.get_value("healer_name"))
+    x_planunit.healerunit.del_healer_name(x_atom.get_value("healer_name"))
 
 
-def _modify_believer_plan_healerlink_insert(
+def _modify_believer_plan_healerunit_insert(
     x_believer: BelieverUnit, x_atom: BelieverAtom
 ):
     x_planunit = x_believer.get_plan_obj(x_atom.get_value("plan_rope"))
-    x_planunit.healerlink.set_healer_name(x_atom.get_value("healer_name"))
+    x_planunit.healerunit.set_healer_name(x_atom.get_value("healer_name"))
 
 
 def _modify_believer_partnerunit_delete(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -530,11 +530,11 @@ def _modify_believer_plan_partyunit(x_believer: BelieverUnit, x_atom: BelieverAt
         _modify_believer_plan_partyunit_insert(x_believer, x_atom)
 
 
-def _modify_believer_plan_healerlink(x_believer: BelieverUnit, x_atom: BelieverAtom):
+def _modify_believer_plan_healerunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_believer_plan_healerlink_delete(x_believer, x_atom)
+        _modify_believer_plan_healerunit_delete(x_believer, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_believer_plan_healerlink_insert(x_believer, x_atom)
+        _modify_believer_plan_healerunit_insert(x_believer, x_atom)
 
 
 def _modify_believer_partnerunit(x_believer: BelieverUnit, x_atom: BelieverAtom):
@@ -561,8 +561,8 @@ def modify_believer_with_believeratom(x_believer: BelieverUnit, x_atom: Believer
         _modify_believer_plan_reasonunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_reason_caseunit":
         _modify_believer_plan_reason_caseunit(x_believer, x_atom)
-    elif x_atom.dimen == "believer_plan_healerlink":
-        _modify_believer_plan_healerlink(x_believer, x_atom)
+    elif x_atom.dimen == "believer_plan_healerunit":
+        _modify_believer_plan_healerunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_plan_partyunit":
         _modify_believer_plan_partyunit(x_believer, x_atom)
     elif x_atom.dimen == "believer_partnerunit":

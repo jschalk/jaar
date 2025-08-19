@@ -11,7 +11,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _fund_onset_str,
     _fund_ratio_str,
     _gogo_calc_str,
-    _healerlink_ratio_str,
+    _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
     _level_str,
@@ -28,7 +28,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     fund_iota_str,
     fund_share_str,
     gogo_want_str,
-    healerlink_str,
+    healerunit_str,
     knot_str,
     morph_str,
     numor_str,
@@ -73,7 +73,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         "reasonunits",
         "laborunit",
         "factunits",
-        healerlink_str(),
+        healerunit_str(),
         begin_str(),
         close_str(),
         addin_str(),
@@ -98,7 +98,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         fund_iota_str(),
         _fund_onset_str(),
         _fund_cease_str(),
-        _healerlink_ratio_str(),
+        _healerunit_ratio_str(),
         _level_str(),
         _range_evaluated_str(),
         "_reasonheirs",
@@ -108,7 +108,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _stop_calc_str(),
         "fund_share",
     }
-    assert casa_dict.get("healerlink") == {"_healer_names": []}
+    assert casa_dict.get("healerunit") == {"_healer_names": []}
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():

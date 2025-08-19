@@ -1,145 +1,145 @@
 from src.a05_plan_logic.healer import (
-    HealerLink,
-    healerlink_get_from_dict,
-    healerlink_shop,
+    HealerUnit,
+    healerunit_get_from_dict,
+    healerunit_shop,
 )
 
 
-def test_HealerLink_Exists():
+def test_HealerUnit_Exists():
     # ESTABLISH
     run_str = ";runners"
     run_healer_names = {run_str}
 
     # WHEN
-    x_healerlink = HealerLink(_healer_names=run_healer_names)
+    x_healerunit = HealerUnit(_healer_names=run_healer_names)
 
     # THEN
-    assert x_healerlink
-    assert x_healerlink._healer_names == run_healer_names
+    assert x_healerunit
+    assert x_healerunit._healer_names == run_healer_names
 
 
-def test_healerlink_shop_ReturnsWithCorrectAttributes_v1():
+def test_healerunit_shop_ReturnsWithCorrectAttributes_v1():
     # ESTABLISH
     run_str = ";runners"
     run_healer_names = {run_str}
 
     # WHEN
-    x_healerlink = healerlink_shop(_healer_names=run_healer_names)
+    x_healerunit = healerunit_shop(_healer_names=run_healer_names)
 
     # THEN
-    assert x_healerlink
-    assert x_healerlink._healer_names == run_healer_names
+    assert x_healerunit
+    assert x_healerunit._healer_names == run_healer_names
 
 
-def test_healerlink_shop_ifEmptyReturnsWithCorrectAttributes():
+def test_healerunit_shop_ifEmptyReturnsWithCorrectAttributes():
     # ESTABLISH / WHEN
-    x_healerlink = healerlink_shop()
+    x_healerunit = healerunit_shop()
 
     # THEN
-    assert x_healerlink
-    assert x_healerlink._healer_names == set()
+    assert x_healerunit
+    assert x_healerunit._healer_names == set()
 
 
-def test_HealerLink_to_dict_ReturnsDictWithSingle_group_title():
+def test_HealerUnit_to_dict_ReturnsDictWithSingle_group_title():
     # ESTABLISH
     bob_healer_name = "Bob"
     run_healer_names = {bob_healer_name}
-    x_healerlink = healerlink_shop(_healer_names=run_healer_names)
+    x_healerunit = healerunit_shop(_healer_names=run_healer_names)
 
     # WHEN
-    obj_dict = x_healerlink.to_dict()
+    obj_dict = x_healerunit.to_dict()
 
     # THEN
     assert obj_dict is not None
     run_list = [bob_healer_name]
-    example_dict = {"healerlink_healer_names": run_list}
+    example_dict = {"healerunit_healer_names": run_list}
     print(f"{example_dict=}")
     assert obj_dict == example_dict
 
 
-def test_HealerLink_set_healer_name_Sets_healer_names_v1():
+def test_HealerUnit_set_healer_name_Sets_healer_names_v1():
     # ESTABLISH
-    x_healerlink = healerlink_shop()
-    assert len(x_healerlink._healer_names) == 0
+    x_healerunit = healerunit_shop()
+    assert len(x_healerunit._healer_names) == 0
 
     # WHEN
     yao_str = "Yao"
-    x_healerlink.set_healer_name(x_healer_name=yao_str)
+    x_healerunit.set_healer_name(x_healer_name=yao_str)
 
     # THEN
-    assert len(x_healerlink._healer_names) == 1
+    assert len(x_healerunit._healer_names) == 1
 
 
-def test_HealerLink_del_healer_name_Deletes_healer_names_v1():
+def test_HealerUnit_del_healer_name_Deletes_healer_names_v1():
     # ESTABLISH
-    x_healerlink = healerlink_shop()
-    yao_str = "Yao"
-    sue_str = "Sue"
-    x_healerlink.set_healer_name(x_healer_name=yao_str)
-    x_healerlink.set_healer_name(x_healer_name=sue_str)
-    assert len(x_healerlink._healer_names) == 2
-
-    # WHEN
-    x_healerlink.del_healer_name(x_healer_name=sue_str)
-
-    # THEN
-    assert len(x_healerlink._healer_names) == 1
-
-
-def test_HealerLink_healer_name_exists_ReturnsObj():
-    # ESTABLISH
-    x_healerlink = healerlink_shop()
+    x_healerunit = healerunit_shop()
     yao_str = "Yao"
     sue_str = "Sue"
-    assert x_healerlink.healer_name_exists(yao_str) is False
-    assert x_healerlink.healer_name_exists(sue_str) is False
+    x_healerunit.set_healer_name(x_healer_name=yao_str)
+    x_healerunit.set_healer_name(x_healer_name=sue_str)
+    assert len(x_healerunit._healer_names) == 2
 
     # WHEN
-    x_healerlink.set_healer_name(x_healer_name=yao_str)
+    x_healerunit.del_healer_name(x_healer_name=sue_str)
 
     # THEN
-    assert x_healerlink.healer_name_exists(yao_str)
-    assert x_healerlink.healer_name_exists(sue_str) is False
+    assert len(x_healerunit._healer_names) == 1
 
 
-def test_HealerLink_any_healer_name_exists_ReturnsObj():
+def test_HealerUnit_healer_name_exists_ReturnsObj():
+    # ESTABLISH
+    x_healerunit = healerunit_shop()
+    yao_str = "Yao"
+    sue_str = "Sue"
+    assert x_healerunit.healer_name_exists(yao_str) is False
+    assert x_healerunit.healer_name_exists(sue_str) is False
+
+    # WHEN
+    x_healerunit.set_healer_name(x_healer_name=yao_str)
+
+    # THEN
+    assert x_healerunit.healer_name_exists(yao_str)
+    assert x_healerunit.healer_name_exists(sue_str) is False
+
+
+def test_HealerUnit_any_healer_name_exists_ReturnsObj():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    x_healerlink = healerlink_shop()
-    assert x_healerlink.any_healer_name_exists() is False
+    x_healerunit = healerunit_shop()
+    assert x_healerunit.any_healer_name_exists() is False
 
     # WHEN / THEN
     sue_str = "Sue"
-    x_healerlink.set_healer_name(x_healer_name=sue_str)
-    assert x_healerlink.any_healer_name_exists()
+    x_healerunit.set_healer_name(x_healer_name=sue_str)
+    assert x_healerunit.any_healer_name_exists()
 
     # WHEN / THEN
     yao_str = "Yao"
-    x_healerlink.set_healer_name(x_healer_name=yao_str)
-    assert x_healerlink.any_healer_name_exists()
+    x_healerunit.set_healer_name(x_healer_name=yao_str)
+    assert x_healerunit.any_healer_name_exists()
 
     # WHEN / THEN
-    x_healerlink.del_healer_name(x_healer_name=yao_str)
-    assert x_healerlink.any_healer_name_exists()
+    x_healerunit.del_healer_name(x_healer_name=yao_str)
+    assert x_healerunit.any_healer_name_exists()
 
     # WHEN / THEN
-    x_healerlink.del_healer_name(x_healer_name=sue_str)
-    assert x_healerlink.any_healer_name_exists() is False
+    x_healerunit.del_healer_name(x_healer_name=sue_str)
+    assert x_healerunit.any_healer_name_exists() is False
 
 
-def test_healerlink_get_from_dict_ReturnsObj():
+def test_healerunit_get_from_dict_ReturnsObj():
     # ESTABLISH
     empty_dict = {}
 
     # WHEN / THEN
-    assert healerlink_get_from_dict(empty_dict) == healerlink_shop()
+    assert healerunit_get_from_dict(empty_dict) == healerunit_shop()
 
     # WHEN / THEN
     sue_str = "Sue"
     yao_str = "Yao"
-    static_healerlink = healerlink_shop()
-    static_healerlink.set_healer_name(x_healer_name=sue_str)
-    static_healerlink.set_healer_name(x_healer_name=yao_str)
+    static_healerunit = healerunit_shop()
+    static_healerunit.set_healer_name(x_healer_name=sue_str)
+    static_healerunit.set_healer_name(x_healer_name=yao_str)
 
-    sue_dict = {"healerlink_healer_names": [sue_str, yao_str]}
-    assert healerlink_get_from_dict(sue_dict) == static_healerlink
+    sue_dict = {"healerunit_healer_names": [sue_str, yao_str]}
+    assert healerunit_get_from_dict(sue_dict) == static_healerunit

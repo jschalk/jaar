@@ -7,7 +7,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -67,7 +67,7 @@ def test_create_job_tables_CreatesTables():
         blrgrou_job_table = prime_table(believer_groupunit_str(), job_str(), None)
         blrawar_job_table = prime_table(believer_plan_awardunit_str(), job_str(), None)
         blrfact_job_table = prime_table(believer_plan_factunit_str(), job_str(), None)
-        blrheal_job_table = prime_table(believer_plan_healerlink_str(), job_str(), None)
+        blrheal_job_table = prime_table(believer_plan_healerunit_str(), job_str(), None)
         blrprem_job_table = prime_table(
             believer_plan_reason_caseunit_str(), job_str(), None
         )
@@ -82,7 +82,7 @@ def test_create_job_tables_CreatesTables():
         # blrgrou_job_table = f"{believer_groupunit_str()}_job"
         # blrawar_job_table = f"{believer_plan_awardunit_str()}_job"
         # blrfact_job_table = f"{believer_plan_factunit_str()}_job"
-        # blrheal_job_table = f"{believer_plan_healerlink_str()}_job"
+        # blrheal_job_table = f"{believer_plan_healerunit_str()}_job"
         # blrprem_job_table = f"{believer_plan_reason_caseunit_str()}_job"
         # believerares_job_table = f"{believer_plan_reasonunit_str()}_job"
         # blrlabo_job_table = f"{believer_plan_partyunit_str()}_job"

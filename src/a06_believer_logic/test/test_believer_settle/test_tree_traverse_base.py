@@ -50,15 +50,15 @@ def test_BelieverUnit_clear_plan_dict_and_believer_obj_settle_attrs_SetsAttrs_Sc
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     x_keep_justifed = False
-    x_sum_healerlink_share = 140
+    x_sum_healerunit_share = 140
     sue_believer._keeps_justified = x_keep_justifed
     sue_believer._keeps_buildable = "swimmers"
-    sue_believer._sum_healerlink_share = x_sum_healerlink_share
+    sue_believer._sum_healerunit_share = x_sum_healerunit_share
     sue_believer._keep_dict = {"run": "run"}
     sue_believer._healers_dict = {"run": "run"}
     assert sue_believer._keeps_justified == x_keep_justifed
     assert sue_believer._keeps_buildable
-    assert sue_believer._sum_healerlink_share == x_sum_healerlink_share
+    assert sue_believer._sum_healerunit_share == x_sum_healerunit_share
     assert sue_believer._keep_dict != {}
     assert sue_believer._healers_dict != {}
 
@@ -69,7 +69,7 @@ def test_BelieverUnit_clear_plan_dict_and_believer_obj_settle_attrs_SetsAttrs_Sc
     assert sue_believer._keeps_justified != x_keep_justifed
     assert sue_believer._keeps_justified
     assert sue_believer._keeps_buildable is False
-    assert sue_believer._sum_healerlink_share == 0
+    assert sue_believer._sum_healerunit_share == 0
     assert not sue_believer._keep_dict
     assert not sue_believer._healers_dict
 
