@@ -20,6 +20,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _stop_calc_str,
     _uid_str,
     addin_str,
+    awardlinks_str,
     begin_str,
     belief_label_str,
     close_str,
@@ -68,7 +69,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         "root",
         star_str(),
         _uid_str(),
-        "awardlinks",
+        awardlinks_str(),
         "reasonunits",
         "laborunit",
         "factunits",
@@ -183,7 +184,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
 
     # THEN
     # awardlinks
-    awardlinks_dict = casa_dict.get("awardlinks")
+    awardlinks_dict = casa_dict.get(awardlinks_str())
     assert len(awardlinks_dict) == 2
     # print(f"{len(awardlinks_dict)=}")
     sue_str = "Sue"

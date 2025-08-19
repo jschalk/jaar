@@ -87,6 +87,10 @@ def addin_str() -> str:
     return "addin"
 
 
+def awardlinks_str() -> str:
+    return "awardlinks"
+
+
 def begin_str() -> str:
     return "begin"
 
