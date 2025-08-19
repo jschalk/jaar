@@ -21,6 +21,12 @@ let show_all_partner_cred = false;
 let show_all_partner_debt = false;
 let show_gogo_calc = false;
 let show_stop_calc = false;
+let show_addin = false;
+let show_begin = false;
+let show_close = false;
+let show_denom = false;
+let show_morph = false;
+let show_numor = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
@@ -44,10 +50,16 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
     const show_fund_iotaCheckbox = document.getElementById('show_fund_iota');
     const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
-    const show_all_partner_credCheckbox = document.getElementById('_all_partner_cred');
-    const show_all_partner_debtCheckbox = document.getElementById('_all_partner_debt');
-    const show_gogo_calcCheckbox = document.getElementById('_gogo_calc');
-    const show_stop_calcCheckbox = document.getElementById('_stop_calc');
+    const show_all_partner_credCheckbox = document.getElementById('show_all_partner_cred');
+    const show_all_partner_debtCheckbox = document.getElementById('show_all_partner_debt');
+    const show_gogo_calcCheckbox = document.getElementById('show_gogo_calc');
+    const show_stop_calcCheckbox = document.getElementById('show_stop_calc');
+    const show_addinCheckbox = document.getElementById('show_addin');
+    const show_beginCheckbox = document.getElementById('show_begin');
+    const show_closeCheckbox = document.getElementById('show_close');
+    const show_denomCheckbox = document.getElementById('show_denom');
+    const show_morphCheckbox = document.getElementById('show_morph');
+    const show_numorCheckbox = document.getElementById('show_numor');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
@@ -74,6 +86,12 @@ document.addEventListener('DOMContentLoaded', function () {
     show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
     show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderTree(); });
     show_stop_calcCheckbox.addEventListener('change', function () { show_stop_calc = this.checked; renderTree(); });
+    show_addinCheckbox.addEventListener('change', function () { show_addin = this.checked; renderTree(); });
+    show_beginCheckbox.addEventListener('change', function () { show_begin = this.checked; renderTree(); });
+    show_closeCheckbox.addEventListener('change', function () { show_close = this.checked; renderTree(); });
+    show_denomCheckbox.addEventListener('change', function () { show_denom = this.checked; renderTree(); });
+    show_morphCheckbox.addEventListener('change', function () { show_morph = this.checked; renderTree(); });
+    show_numorCheckbox.addEventListener('change', function () { show_numor = this.checked; renderTree(); });
     show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
     show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
     show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
@@ -155,6 +173,12 @@ function renderPlanUnit(planUnit, level) {
     ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
     ${render_new_small_dot(planUnit._gogo_calc, indent, show_gogo_calc)}
     ${render_new_small_dot(planUnit._stop_calc, indent, show_stop_calc)}
+    ${render_new_small_dot(planUnit.addin, indent, show_addin)}
+    ${render_new_small_dot(planUnit.begin, indent, show_begin)}
+    ${render_new_small_dot(planUnit.close, indent, show_close)}
+    ${render_new_small_dot(planUnit.denom, indent, show_denom)}
+    ${render_new_small_dot(planUnit.morph, indent, show_morph)}
+    ${render_new_small_dot(planUnit.numor, indent, show_numor)}
   </div>\n
 `;
     // Add children

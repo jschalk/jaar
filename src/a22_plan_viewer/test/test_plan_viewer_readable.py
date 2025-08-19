@@ -322,9 +322,50 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_calc_stop_calc():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    gogo_calc_readable = casa_dict.get("_gogo_calc")
-    stop_calc_readable = casa_dict.get("_stop_calc")
-    expected_gogo_calc_readable = f"gogo_calc: {casa_plan._gogo_calc}"
-    expected_stop_calc_readable = f"stop_calc: {casa_plan._stop_calc}"
+    gogo_calc_readable = casa_dict.get(_gogo_calc_str())
+    stop_calc_readable = casa_dict.get(_stop_calc_str())
+    expected_gogo_calc_readable = add_small_dot(f"gogo_calc: {casa_plan._gogo_calc}")
+    expected_stop_calc_readable = add_small_dot(f"stop_calc: {casa_plan._stop_calc}")
     assert gogo_calc_readable == expected_gogo_calc_readable
     assert stop_calc_readable == expected_stop_calc_readable
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario7_numeric_range_attrs():
+    # ESTABLISH
+    casa_plan = planunit_shop()
+    casa_addin = 11
+    casa_begin = 17
+    casa_close = 23
+    casa_denom = 29
+    casa_morph = 37
+    casa_numor = 43
+    casa_plan.addin = casa_addin
+    casa_plan.begin = casa_begin
+    casa_plan.close = casa_close
+    casa_plan.denom = casa_denom
+    casa_plan.morph = casa_morph
+    casa_plan.numor = casa_numor
+    casa_plan._fund_ratio = 0
+
+    # WHEN
+    casa_dict = get_plan_view_dict(casa_plan)
+
+    # THEN
+    casa_addin_readable = casa_dict.get(addin_str())
+    casa_begin_readable = casa_dict.get(begin_str())
+    casa_close_readable = casa_dict.get(close_str())
+    casa_denom_readable = casa_dict.get(denom_str())
+    casa_morph_readable = casa_dict.get(morph_str())
+    casa_numor_readable = casa_dict.get(numor_str())
+    expected_casa_addin_readable = add_small_dot(f"addin: {casa_plan.addin}")
+    expected_casa_begin_readable = add_small_dot(f"begin: {casa_plan.begin}")
+    expected_casa_close_readable = add_small_dot(f"close: {casa_plan.close}")
+    expected_casa_denom_readable = add_small_dot(f"denom: {casa_plan.denom}")
+    expected_casa_morph_readable = add_small_dot(f"morph: {casa_plan.morph}")
+    expected_casa_numor_readable = add_small_dot(f"numor: {casa_plan.numor}")
+    assert casa_addin_readable == expected_casa_addin_readable
+    assert casa_begin_readable == expected_casa_begin_readable
+    assert casa_close_readable == expected_casa_close_readable
+    assert casa_denom_readable == expected_casa_denom_readable
+    assert casa_morph_readable == expected_casa_morph_readable
+    assert casa_numor_readable == expected_casa_numor_readable

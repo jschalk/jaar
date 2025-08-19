@@ -65,55 +65,36 @@ def get_plan_viewer_template() -> str:
         <h1>PlanUnit Display</h1>
         
         <div class="controls">
-            <input type="checkbox" id="show_level">
-            <label for="show_level">level</label>
-            <input type="checkbox" id="show_belief_label">
-            <label for="show_belief_label">belief_label</label>
-            <input type="checkbox" id="show_task">
-            <label for="show_task">task</label>
-            <input type="checkbox" id="show_descendant_task_count">
-            <label for="show_descendant_task_count">descendant_task_count</label>
-            <input type="checkbox" id="show_active">
-            <label for="show_active">active</label>
-            <input type="checkbox" id="show_chore">
-            <label for="show_chore">chore</label>
-            <input type="checkbox" id="show_star">
-            <label for="show_star">star</label>
-            <input type="checkbox" id="show_fund_share">
-            <label for="show_fund_share">fund_share</label>
-            <input type="checkbox" id="show_fund_onset">
-            <label for="show_fund_onset">fund_onset</label>
-            <input type="checkbox" id="show_fund_cease">
-            <label for="show_fund_cease">fund_cease</label>
-            <input type="checkbox" id="show_fund_iota">
-            <label for="show_fund_iota">fund_iota</label>
-            <input type="checkbox" id="show_fund_ratio">
-            <label for="show_fund_ratio">fund_ratio</label>
-            <input type="checkbox" id="show_parent_rope">
-            <label for="show_parent_rope">parent_rope</label>
-            <input type="checkbox" id="show_root_boolean">
-            <label for="show_root_boolean">root_boolean</label>
-            <input type="checkbox" id="show_uid">
-            <label for="show_uid">uid</label>
-            <input type="checkbox" id="show_factunits">
-            <label for="show_factunits">factunits</label>
-            <input type="checkbox" id="show_factheirs">
-            <label for="show_factheirs">factheirs</label>
-            <input type="checkbox" id="show_awardunits">
-            <label for="show_awardunits">awardunits</label>
-            <input type="checkbox" id="show_awardheirs">
-            <label for="show_awardheirs">awardheirs</label>
-            <input type="checkbox" id="show_awardlines">
-            <label for="show_awardlines">awardlines</label>
-            <input type="checkbox" id="_all_partner_cred">
-            <label for="_all_partner_cred">_all_partner_cred</label>
-            <input type="checkbox" id="_all_partner_debt">
-            <label for="_all_partner_debt">_all_partner_debt</label>
-            <input type="checkbox" id="_gogo_calc">
-            <label for="_gogo_calc">_gogo_calc</label>
-            <input type="checkbox" id="_stop_calc">
-            <label for="_stop_calc">_stop_calc</label>
-
+            <input type="checkbox" id="show_level"><label for="show_level">level</label>
+            <input type="checkbox" id="show_belief_label"><label for="show_belief_label">belief_label</label>
+            <input type="checkbox" id="show_task"><label for="show_task">task</label>
+            <input type="checkbox" id="show_descendant_task_count"><label for="show_descendant_task_count">descendant_task_count</label>
+            <input type="checkbox" id="show_active"><label for="show_active">active</label>
+            <input type="checkbox" id="show_chore"><label for="show_chore">chore</label>
+            <input type="checkbox" id="show_star"><label for="show_star">star</label>
+            <input type="checkbox" id="show_fund_share"><label for="show_fund_share">fund_share</label>
+            <input type="checkbox" id="show_fund_onset"><label for="show_fund_onset">fund_onset</label>
+            <input type="checkbox" id="show_fund_cease"><label for="show_fund_cease">fund_cease</label>
+            <input type="checkbox" id="show_fund_iota"><label for="show_fund_iota">fund_iota</label>
+            <input type="checkbox" id="show_fund_ratio"><label for="show_fund_ratio">fund_ratio</label>
+            <input type="checkbox" id="show_parent_rope"><label for="show_parent_rope">parent_rope</label>
+            <input type="checkbox" id="show_root_boolean"><label for="show_root_boolean">root_boolean</label>
+            <input type="checkbox" id="show_uid"><label for="show_uid">uid</label>
+            <input type="checkbox" id="show_factunits"><label for="show_factunits">factunits</label>
+            <input type="checkbox" id="show_factheirs"><label for="show_factheirs">factheirs</label>
+            <input type="checkbox" id="show_awardunits"><label for="show_awardunits">awardunits</label>
+            <input type="checkbox" id="show_awardheirs"><label for="show_awardheirs">awardheirs</label>
+            <input type="checkbox" id="show_awardlines"><label for="show_awardlines">awardlines</label>
+            <input type="checkbox" id="show_all_partner_cred"><label for="show_all_partner_cred">_all_partner_cred</label>
+            <input type="checkbox" id="show_all_partner_debt"><label for="show_all_partner_debt">_all_partner_debt</label>
+            <input type="checkbox" id="show_gogo_calc"><label for="show_gogo_calc">_gogo_calc</label>
+            <input type="checkbox" id="show_stop_calc"><label for="show_stop_calc">_stop_calc</label>
+            <input type="checkbox" id="show_addin"><label for="show_addin">addin</label>
+            <input type="checkbox" id="show_begin"><label for="show_begin">begin</label>
+            <input type="checkbox" id="show_close"><label for="show_close">close</label>
+            <input type="checkbox" id="show_denom"><label for="show_denom">denom</label>
+            <input type="checkbox" id="show_morph"><label for="show_morph">morph</label>
+            <input type="checkbox" id="show_numor"><label for="show_numor">numor</label>
         </div>
         
         <div id="treeContainer" class="tree-display"></div>

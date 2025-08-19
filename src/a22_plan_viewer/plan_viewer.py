@@ -86,8 +86,20 @@ def set_readable_plan_values(obj: PlanUnit, result: dict):
     result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
     result_gogo_calc = result.get("_gogo_calc")
     result_stop_calc = result.get("_stop_calc")
-    result["_gogo_calc"] = f"gogo_calc: {result_gogo_calc}"
-    result["_stop_calc"] = f"stop_calc: {result_stop_calc}"
+    result["_gogo_calc"] = add_small_dot(f"gogo_calc: {result_gogo_calc}")
+    result["_stop_calc"] = add_small_dot(f"stop_calc: {result_stop_calc}")
+    result_addin = result.get("addin")
+    result_begin = result.get("begin")
+    result_close = result.get("close")
+    result_denom = result.get("denom")
+    result_morph = result.get("morph")
+    result_numor = result.get("numor")
+    result["addin"] = add_small_dot(f"addin: {result_addin}")
+    result["begin"] = add_small_dot(f"begin: {result_begin}")
+    result["close"] = add_small_dot(f"close: {result_close}")
+    result["denom"] = add_small_dot(f"denom: {result_denom}")
+    result["morph"] = add_small_dot(f"morph: {result_morph}")
+    result["numor"] = add_small_dot(f"numor: {result_numor}")
 
 
 def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
