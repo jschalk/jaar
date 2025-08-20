@@ -5,6 +5,8 @@ from src.a04_reason_logic.test._util.a04_str import (
     _active_str,
     _chore_str,
     belief_label_str,
+    factunits_str,
+    reasonunits_str,
 )
 
 

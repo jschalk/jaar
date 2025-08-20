@@ -41,6 +41,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     belief_label_str,
     close_str,
     denom_str,
+    factunits_str,
     fund_iota_str,
     fund_share_str,
     gogo_want_str,
@@ -50,6 +51,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     numor_str,
     plan_label_str,
     problem_bool_str,
+    reasonunits_str,
     star_str,
     stop_want_str,
     task_str,
@@ -217,7 +219,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict is not None
     assert len(casa_dict["_kids"]) == 1
     assert casa_dict["_kids"] == casa_plan.get_kids_dict()
-    assert casa_dict["reasonunits"] == casa_plan.get_reasonunits_dict()
+    assert casa_dict[reasonunits_str()] == casa_plan.get_reasonunits_dict()
     assert casa_dict[awardunits_str()] == casa_plan.get_awardunits_dict()
     assert casa_dict[awardunits_str()] == x1_awardunits
     assert casa_dict["laborunit"] == sue_laborunit.to_dict()
@@ -237,7 +239,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[problem_bool_str()] == x_problem_bool
     assert casa_plan._is_expanded
     assert casa_dict.get("_is_expanded") is None
-    assert len(casa_dict["factunits"]) == len(casa_plan.get_factunits_dict())
+    assert len(casa_dict[factunits_str()]) == len(casa_plan.get_factunits_dict())
 
 
 def test_PlanUnit_to_dict_ReturnsDictWithoutEmptyAttributes():
@@ -285,7 +287,7 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     # THEN
     assert casa_dict.get("_is_expanded") is False
     assert casa_dict.get("task")
-    assert casa_dict.get("factunits") is not None
+    assert casa_dict.get(factunits_str()) is not None
     assert casa_dict.get(awardunits_str()) is not None
     assert casa_dict.get("laborunit") is not None
     assert casa_dict.get("_kids") is not None
@@ -308,7 +310,7 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     # THEN
     assert casa_dict.get("_is_expanded") is None
     assert casa_dict.get("task") is None
-    assert casa_dict.get("factunits") is None
+    assert casa_dict.get(factunits_str()) is None
     assert casa_dict.get(awardunits_str()) is None
     assert casa_dict.get("laborunit") is None
     assert casa_dict.get("healerunit") is None

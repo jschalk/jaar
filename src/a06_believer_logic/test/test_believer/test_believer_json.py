@@ -11,7 +11,11 @@ from src.a06_believer_logic.believer_main import (
     get_dict_of_believer_from_dict,
     get_from_json as believerunit_get_from_json,
 )
-from src.a06_believer_logic.test._util.a06_str import planroot_str
+from src.a06_believer_logic.test._util.a06_str import (
+    factunits_str,
+    planroot_str,
+    reasonunits_str,
+)
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
     get_believerunit_laundry_example1,
@@ -197,7 +201,7 @@ def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():
 
     shave_str = "shave"
     shave_dict = planroot_dict[_kids][shave_str]
-    shave_factunits = shave_dict["factunits"]
+    shave_factunits = shave_dict[factunits_str()]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_planroot._kids[shave_str].factunits)
@@ -250,21 +254,20 @@ def test_BelieverUnit_get_json_ReturnsJSON_BigExample():
 
     kids = planroot_dict[_kids]
     jour_min_dict = kids[jour_min_str]
-    jour_min_factunits_dict = jour_min_dict["factunits"]
+    jour_min_factunits_dict = jour_min_dict[factunits_str()]
     jour_min_plan_x = yao_believer.get_plan_obj(jour_min_rope)
     print(f"{jour_min_factunits_dict=}")
     assert len(jour_min_factunits_dict) == 1
     assert len(jour_min_factunits_dict) == len(jour_min_plan_x.factunits)
 
-    _reasonunits = "reasonunits"
     cont_str = "Freelancing"
     ulti_str = "Ultimate Frisbee"
     cont_rope = yao_believer.make_l1_rope(cont_str)
     ulti_rope = yao_believer.make_l1_rope(ulti_str)
     cont_plan = yao_believer.get_plan_obj(cont_rope)
     ulti_plan = yao_believer.get_plan_obj(ulti_rope)
-    cont_reasonunits_dict = planroot_dict[_kids][cont_str][_reasonunits]
-    ulti_reasonunits_dict = planroot_dict[_kids][ulti_str][_reasonunits]
+    cont_reasonunits_dict = planroot_dict[_kids][cont_str][reasonunits_str()]
+    ulti_reasonunits_dict = planroot_dict[_kids][ulti_str][reasonunits_str()]
     assert len(cont_reasonunits_dict) == len(cont_plan.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 

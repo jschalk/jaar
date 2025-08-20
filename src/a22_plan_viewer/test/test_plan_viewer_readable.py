@@ -25,6 +25,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     belief_label_str,
     close_str,
     denom_str,
+    factunits_str,
     fund_iota_str,
     fund_share_str,
     gogo_want_str,
@@ -34,6 +35,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     numor_str,
     plan_label_str,
     problem_bool_str,
+    reasonunits_str,
     star_str,
     stop_want_str,
     task_str,
@@ -71,9 +73,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         star_str(),
         _uid_str(),
         awardunits_str(),
-        "reasonunits",
+        reasonunits_str(),
         "laborunit",
-        "factunits",
+        factunits_str(),
         healerunit_str(),
         begin_str(),
         close_str(),
@@ -262,7 +264,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     tidy_rope = sue_believer.make_rope(casa_rope, "tidy")
 
     # factunits
-    factunits_dict = casa_dict.get("factunits")
+    factunits_dict = casa_dict.get(factunits_str())
     assert len(factunits_dict) == 2
     # print(f"{len(factunits_dict)=}")
     tidi_factunit_dict = factunits_dict.get(tidi_rope)
