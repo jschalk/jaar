@@ -3,7 +3,7 @@ from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 
-def get_sue_casa_beliefunit() -> BeliefUnit:
+def get_sue_beliefunit() -> BeliefUnit:
     sue_belief = beliefunit_shop("Sue", "accord23")
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
@@ -21,15 +21,21 @@ def get_sue_casa_beliefunit() -> BeliefUnit:
     sue_belief.add_plan(sweep_rope, 3, task=True)
     sports_rope = sue_belief.make_l1_rope("sports")
     best_rope = sue_belief.make_rope(sports_rope, "best sport")
-    best_soccer_rope = sue_belief.make_rope(best_rope, "soccer")
-    best_swim_rope = sue_belief.make_rope(best_rope, "swim")
-    best_run_rope = sue_belief.make_rope(best_rope, "run")
+    best_soccer_rope = sue_belief.make_rope(best_rope, "The best sport is soccer")
+    best_swim_rope = sue_belief.make_rope(best_rope, "The best sport is swimming")
+    best_run_rope = sue_belief.make_rope(best_rope, "The best sport is running")
+    play_rope = sue_belief.make_rope(sports_rope, "playing")
+    play_soccer_rope = sue_belief.make_rope(play_rope, "play soccer")
+    play_swim_rope = sue_belief.make_rope(play_rope, "play swim")
+    play_run_rope = sue_belief.make_rope(play_rope, "play run")
     sue_belief.add_plan(sports_rope, 5)
-    sue_belief.add_plan(best_soccer_rope, 5)
-    sue_belief.add_plan(best_swim_rope, 5)
-    sue_belief.add_plan(best_run_rope, 5)
-    sue_belief.add_fact(tidiness_rope, dirty_rope, 4, 8)
-    sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
+    sue_belief.add_plan(best_soccer_rope, 23)
+    sue_belief.add_plan(best_swim_rope, 2)
+    sue_belief.add_plan(best_run_rope, 23)
+    sue_belief.add_plan(play_rope, 2)
+    sue_belief.add_plan(play_soccer_rope, 11)
+    sue_belief.add_plan(play_swim_rope, 55)
+    sue_belief.add_plan(play_run_rope, 22)
 
     # Add some award links
     casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
@@ -41,6 +47,26 @@ def get_sue_casa_beliefunit() -> BeliefUnit:
     sue_belief.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
     sue_belief.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
     sue_belief.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
+    sue_belief.settle_belief()
+    return sue_belief
+
+
+def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
+    sue_belief = get_sue_beliefunit()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    clean_rope = sue_belief.make_rope(casa_rope, "clean")
+    mop_rope = sue_belief.make_rope(clean_rope, "mop")
+    sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
+    tidiness_rope = sue_belief.make_rope(casa_rope, "tidiness")
+    dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
+    tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
+    sports_rope = sue_belief.make_l1_rope("sports")
+    best_rope = sue_belief.make_rope(sports_rope, "best sport")
+    best_soccer_rope = sue_belief.make_rope(best_rope, "soccer")
+    best_swim_rope = sue_belief.make_rope(best_rope, "swim")
+    best_run_rope = sue_belief.make_rope(best_rope, "run")
+    sue_belief.add_fact(tidiness_rope, dirty_rope, 4, 8)
+    sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
     sue_belief.settle_belief()
     return sue_belief
 

@@ -52,7 +52,7 @@ from src.a07_timeline_logic.reason_str_func import (
 )
 from src.a22_plan_viewer.app import get_plan_viewer_template
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_beliefs import get_sue_casa_beliefunit
+from src.a22_plan_viewer.test._util.example22_beliefs import get_sue_beliefunit
 
 
 def test_get_plan_viewer_template_ReturnsObj():
@@ -91,7 +91,7 @@ def test_get_plan_viewer_template_ReturnsObj():
         denom_str(),
         factunits_str(),
         fund_iota_str(),
-        "fund_share",
+        fund_share_str(),
         gogo_want_str(),
         # healerunit_str(),
         # knot_str(),

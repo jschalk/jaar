@@ -48,7 +48,8 @@ from src.a07_timeline_logic.reason_str_func import (
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
 from src.a22_plan_viewer.test._util.example22_beliefs import (
     get_beliefunit_irrational_example,
-    get_sue_casa_beliefunit,
+    get_sue_belief_with_facts_and_reasons,
+    get_sue_beliefunit,
 )
 
 
@@ -141,7 +142,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     # ESTABLISH
-    sue_beliefunit = get_sue_casa_beliefunit()
+    sue_beliefunit = get_sue_beliefunit()
 
     # WHEN
     root_plan_view_dict = get_plan_view_dict(sue_beliefunit.planroot)
@@ -158,7 +159,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     # ESTABLISH
-    sue_beliefunit = get_sue_casa_beliefunit()
+    sue_beliefunit = get_sue_beliefunit()
     casa_rope = sue_beliefunit.make_l1_rope("casa")
     casa_plan = sue_beliefunit.get_plan_obj(casa_rope)
 
@@ -180,7 +181,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     # ESTABLISH
-    sue_beliefunit = get_sue_casa_beliefunit()
+    sue_beliefunit = get_sue_beliefunit()
     casa_rope = sue_beliefunit.make_l1_rope("casa")
     casa_plan = sue_beliefunit.get_plan_obj(casa_rope)
 
@@ -239,7 +240,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     # ESTABLISH
-    sue_belief = get_sue_casa_beliefunit()
+    sue_belief = get_sue_belief_with_facts_and_reasons()
 
     # WHEN
     root_dict = get_plan_view_dict(sue_belief.planroot)
@@ -312,7 +313,83 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     assert casa_best_factheir_dict.get(readable_str) == expected_casa_best_factheir_str
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_stop():
+# def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
+#     # ESTABLISH
+#     sue_belief = get_sue_beliefunit()
+
+#     # WHEN
+#     root_dict = get_plan_view_dict(sue_belief.planroot)
+
+#     # THEN
+#     # sports ropes
+#     sports_rope = sue_belief.make_l1_rope("sports")
+#     best_sport_str = "best sport"
+#     best_rope = sue_belief.make_rope(sports_rope, best_sport_str)
+#     soccer_str = "soccer"
+#     swim_str = "swim"
+#     run_str = "run"
+#     best_soccer_rope = sue_belief.make_rope(best_rope, soccer_str)
+#     best_swim_rope = sue_belief.make_rope(best_rope, swim_str)
+#     best_run_rope = sue_belief.make_rope(best_rope, run_str)
+
+#     # casa ropes
+#     casa_rope = sue_belief.make_l1_rope("casa")
+#     clean_rope = sue_belief.make_rope(casa_rope, "clean")
+#     mop_rope = sue_belief.make_rope(clean_rope, "mop")
+#     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
+#     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
+#     dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
+#     tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
+
+#     # factunits
+#     root_factunits_dict = root_dict.get(factunits_str())
+#     assert len(root_factunits_dict) == 2
+#     # print(f"{len(factunits_dict)=}")
+#     tidi_factunit_dict = root_factunits_dict.get(tidi_rope)
+#     best_factunit_dict = root_factunits_dict.get(best_rope)
+#     # print(f"{tidi_factunit_dict=}")
+#     # print(f"{best_factunit_dict=}")
+#     readable_str = "readable"
+#     tidi_factunit = sue_belief.get_fact(tidi_rope)
+#     best_factunit = sue_belief.get_fact(best_rope)
+#     tidi_factunit_readable = get_fact_state_readable_str(
+#         tidi_factunit, None, sue_belief
+#     )
+#     best_factunit_readable = get_fact_state_readable_str(
+#         best_factunit, None, sue_belief
+#     )
+#     expected_tidi_factunit_str = add_small_dot(tidi_factunit_readable)
+#     expected_best_factunit_str = add_small_dot(best_factunit_readable)
+#     # print(f"{expected_tidi_factunit_str=}")
+#     # print(f"{expected_best_factunit_str=}")
+#     assert tidi_factunit_dict.get(readable_str) == expected_tidi_factunit_str
+#     assert best_factunit_dict.get(readable_str) == expected_best_factunit_str
+
+#     # factheirs
+#     casa_factheirs_dict = root_dict.get("_factheirs")
+#     assert len(casa_factheirs_dict) == 2
+#     print(f"{len(casa_factheirs_dict)=}")
+#     casa_tidi_factheir_dict = casa_factheirs_dict.get(tidi_rope)
+#     casa_best_factheir_dict = casa_factheirs_dict.get(best_rope)
+#     print(f"{casa_tidi_factheir_dict=}")
+#     print(f"{casa_best_factheir_dict=}")
+#     casa_plan = sue_belief.get_plan_obj(casa_rope)
+#     tidi_factheir = casa_plan._factheirs.get(tidi_rope)
+#     best_factheir = casa_plan._factheirs.get(best_rope)
+#     casa_tidi_factheir_readable = get_fact_state_readable_str(
+#         tidi_factheir, None, sue_belief
+#     )
+#     casa_best_factheir_readable = get_fact_state_readable_str(
+#         best_factheir, None, sue_belief
+#     )
+#     expected_casa_tidi_factheir_str = add_small_dot(casa_tidi_factheir_readable)
+#     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
+#     assert casa_tidi_factheir_dict.get(readable_str) == expected_casa_tidi_factheir_str
+#     assert casa_best_factheir_dict.get(readable_str) == expected_casa_best_factheir_str
+#     assert 1 == 2
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario7_gogo_stop():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_gogo_want = 13
@@ -343,7 +420,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_stop():
     assert stop_calc_readable == expected_stop_calc_readable
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario7_numeric_range_attrs():
+def test_get_plan_view_dict_ReturnsObj_Scenario8_numeric_range_attrs():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_addin = 11
@@ -384,7 +461,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_numeric_range_attrs():
     assert casa_numor_readable == expected_casa_numor_readable
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario5_active_hx():
+def test_get_plan_view_dict_ReturnsObj_Scenario9_active_hx():
     # ESTABLISH
     hatter_belief = get_beliefunit_irrational_example()
     hatter_belief.set_max_tree_traverse(8)
