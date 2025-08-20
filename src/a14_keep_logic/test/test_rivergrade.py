@@ -1,4 +1,4 @@
-from src.a04_reason_logic.test._util.a04_str import coin_label_str
+from src.a04_reason_logic.test._util.a04_str import moment_label_str
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
@@ -173,7 +173,7 @@ def test_RiverGrade_to_dict_ReturnsObj():
     rivergrade_dict = x_rivergrade.to_dict()
 
     # THEN
-    assert rivergrade_dict.get(coin_label_str()) == yao_hubunit.coin_label
+    assert rivergrade_dict.get(moment_label_str()) == yao_hubunit.moment_label
     assert rivergrade_dict.get("healer_name") == yao_hubunit.belief_name
     assert rivergrade_dict.get("keep_rope") == yao_hubunit.keep_rope
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
@@ -208,7 +208,6 @@ def test_RiverGrade_get_json_ReturnsObj():
 
     # THEN
     static_json = """{
-  "coin_label": "ex_keep04",
   "credor_count": 103,
   "credor_rank_num": null,
   "credor_rank_percent": null,
@@ -218,6 +217,7 @@ def test_RiverGrade_get_json_ReturnsObj():
   "grant_amount": null,
   "healer_name": "Yao",
   "keep_rope": null,
+  "moment_label": "ex_keep04",
   "rewards_count": null,
   "rewards_magnitude": null,
   "tax_bill_amount": null,

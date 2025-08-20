@@ -51,7 +51,7 @@ def get_listen_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
                 x=[4.0, 4.0],
                 y=[9.0, 8.75],
                 text=[
-                    "coinity Belief Listening Structures",
+                    "momentity Belief Listening Structures",
                     "The gut belief listens to other's job beliefs and builds a new belief from itself and others",
                 ],
                 mode="text",

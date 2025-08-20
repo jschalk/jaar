@@ -4,7 +4,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     _chore_str,
     _status_str,
     belief_name_str,
-    coin_label_str,
+    moment_label_str,
     plan_rope_str,
     reason_active_requisite_str,
     reason_context_str,
@@ -37,7 +37,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     # for x_arg in sorted(x_args):
     #     print(f"{x_arg=}")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x__keeps_buildable = True
     x__keeps_justified = False
@@ -54,7 +54,7 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     x_respect_bit = 0.2
     x_tally = 6
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "_keeps_buildable": x__keeps_buildable,
         "_keeps_justified": x__keeps_justified,
@@ -104,7 +104,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     #     # b1_str = "}"
     #     # print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x__active = 1
     x__all_partner_cred = 2
@@ -133,7 +133,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_problem_bool = 26
     x_stop_want = 27
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "_active": x__active,
         "_all_partner_cred": x__all_partner_cred,
@@ -204,7 +204,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     #     b1_str = "}"
     #     print(f""", {b0_str}sqlite_obj_str({x_arg}, real_str){b1_str}""")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_rope = 1
     x_reason_context = 2
@@ -213,7 +213,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x__status = 5
     x__reason_active_heir = 6
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
         reason_context_str(): x_reason_context,
@@ -267,7 +267,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_rope = 1
     x_reason_context = 2
@@ -278,7 +278,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x__chore = 7
     x__status = 8
     values_dict = {
-        coin_label_str(): x_coin_label,
+        moment_label_str(): x_moment_label,
         belief_name_str(): x_belief_name,
         plan_rope_str(): x_rope,
         reason_context_str(): x_reason_context,
@@ -334,7 +334,7 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_rope = 1
     x_awardee_title = 2
@@ -343,7 +343,7 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     x__fund_give = 5
     x__fund_take = 6
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
         "awardee_title": x_awardee_title,
@@ -397,7 +397,7 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_rope = 1
     x_fact_context = 2
@@ -405,7 +405,7 @@ def test_create_blrfact_metrics_insert_sqlstr_ReturnsObj():
     x_fact_lower = 4
     x_fact_upper = 5
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
         "fact_context": x_fact_context,
@@ -458,12 +458,12 @@ def test_create_blrheal_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_rope = 1
     x_healer_name = 2
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
         "healer_name": x_healer_name,
@@ -513,14 +513,14 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_rope = 1
     x_party_title = 2
     x_solo = 4
     x__belief_name_is_labor = 3
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
         "party_title": x_party_title,
@@ -573,7 +573,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_partner_name = 1
     x_partner_cred_points = 2
@@ -589,7 +589,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x__inallocable_partner_debt_points = 12
     x__irrational_partner_debt_points = 13
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "partner_name": x_partner_name,
         "partner_cred_points": x_partner_cred_points,
@@ -650,7 +650,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_partner_name = 1
     x_group_title = 2
@@ -665,7 +665,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_ratio_give = 11
     x__fund_agenda_ratio_take = 12
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "partner_name": x_partner_name,
         "group_title": x_group_title,
@@ -725,7 +725,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     # print(")")
     # print(";")
 
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_group_title = 1
     x__credor_pool = 2
@@ -737,7 +737,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x__fund_agenda_take = 8
     x_knot = 9
     values_dict = {
-        "coin_label": x_coin_label,
+        "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "group_title": x_group_title,
         "_credor_pool": x__credor_pool,

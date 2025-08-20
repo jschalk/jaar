@@ -185,23 +185,23 @@ def listen_to_speaker_agenda(listener: BeliefUnit, speaker: BeliefUnit) -> Belie
 
 
 def listen_to_agendas_create_init_job_from_guts(
-    coin_mstr_dir: str, listener_job: BeliefUnit
+    moment_mstr_dir: str, listener_job: BeliefUnit
 ):
-    coin_label = listener_job.coin_label
+    moment_label = listener_job.moment_label
     for x_partnerunit in get_ordered_debtors_roll(listener_job):
         speaker_id = x_partnerunit.partner_name
-        speaker_gut = open_gut_file(coin_mstr_dir, coin_label, speaker_id)
+        speaker_gut = open_gut_file(moment_mstr_dir, moment_label, speaker_id)
         if speaker_gut is None:
             speaker_gut = create_empty_belief_from_belief(listener_job, speaker_id)
         if speaker_gut:
             listen_to_speaker_agenda(listener_job, speaker_gut)
 
 
-def listen_to_agendas_jobs_into_job(coin_mstr_dir: str, listener_job: BeliefUnit):
-    coin_label = listener_job.coin_label
+def listen_to_agendas_jobs_into_job(moment_mstr_dir: str, listener_job: BeliefUnit):
+    moment_label = listener_job.moment_label
     for x_partnerunit in get_ordered_debtors_roll(listener_job):
         speaker_id = x_partnerunit.partner_name
-        speaker_job = open_job_file(coin_mstr_dir, coin_label, speaker_id)
+        speaker_job = open_job_file(moment_mstr_dir, moment_label, speaker_id)
         if speaker_job is None:
             speaker_job = create_empty_belief_from_belief(listener_job, speaker_id)
         listen_to_speaker_agenda(listener_job, speaker_job)
@@ -212,9 +212,9 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
     for x_partnerunit in get_ordered_debtors_roll(listener_vision):
         if x_partnerunit.partner_name == listener_id:
             listener_duty = get_duty_belief(
-                coin_mstr_dir=healer_hubunit.coin_mstr_dir,
+                moment_mstr_dir=healer_hubunit.moment_mstr_dir,
                 belief_name=healer_hubunit.belief_name,
-                coin_label=healer_hubunit.coin_label,
+                moment_label=healer_hubunit.moment_label,
                 keep_rope=healer_hubunit.keep_rope,
                 knot=healer_hubunit.knot,
                 duty_belief_name=listener_id,
@@ -233,9 +233,9 @@ def listen_to_agendas_duty_vision(listener_vision: BeliefUnit, healer_hubunit: H
 
 def listen_to_facts_duty_vision(new_vision: BeliefUnit, healer_hubunit: HubUnit):
     duty = get_duty_belief(
-        coin_mstr_dir=healer_hubunit.coin_mstr_dir,
+        moment_mstr_dir=healer_hubunit.moment_mstr_dir,
         belief_name=healer_hubunit.belief_name,
-        coin_label=healer_hubunit.coin_label,
+        moment_label=healer_hubunit.moment_label,
         keep_rope=healer_hubunit.keep_rope,
         knot=healer_hubunit.knot,
         duty_belief_name=new_vision.belief_name,
@@ -250,25 +250,25 @@ def listen_to_facts_duty_vision(new_vision: BeliefUnit, healer_hubunit: HubUnit)
                 listen_to_speaker_fact(new_vision, speaker_vision)
 
 
-def listen_to_facts_gut_job(coin_mstr_dir: str, new_job: BeliefUnit):
-    coin_label = new_job.coin_label
-    old_job = open_job_file(coin_mstr_dir, coin_label, new_job.belief_name)
+def listen_to_facts_gut_job(moment_mstr_dir: str, new_job: BeliefUnit):
+    moment_label = new_job.moment_label
+    old_job = open_job_file(moment_mstr_dir, moment_label, new_job.belief_name)
     for x_partnerunit in get_ordered_debtors_roll(old_job):
         speaker_id = x_partnerunit.partner_name
-        speaker_job = open_job_file(coin_mstr_dir, coin_label, speaker_id)
+        speaker_job = open_job_file(moment_mstr_dir, moment_label, speaker_id)
         if speaker_job is not None:
             listen_to_speaker_fact(new_job, speaker_job)
 
 
 def listen_to_debtors_roll_jobs_into_job(
-    coin_mstr_dir: str, coin_label: str, belief_name: BeliefName
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
 ) -> BeliefUnit:
-    old_job = open_job_file(coin_mstr_dir, coin_label, belief_name)
+    old_job = open_job_file(moment_mstr_dir, moment_label, belief_name)
     new_job = create_listen_basis(old_job)
     if old_job.debtor_respect is None:
         return new_job
-    listen_to_agendas_jobs_into_job(coin_mstr_dir, new_job)
-    listen_to_facts_gut_job(coin_mstr_dir, new_job)
+    listen_to_agendas_jobs_into_job(moment_mstr_dir, new_job)
+    listen_to_facts_gut_job(moment_mstr_dir, new_job)
     return new_job
 
 
@@ -276,9 +276,9 @@ def listen_to_debtors_roll_duty_vision(
     healer_hubunit: HubUnit, listener_id: BeliefName
 ) -> BeliefUnit:
     duty = get_duty_belief(
-        coin_mstr_dir=healer_hubunit.coin_mstr_dir,
+        moment_mstr_dir=healer_hubunit.moment_mstr_dir,
         belief_name=healer_hubunit.belief_name,
-        coin_label=healer_hubunit.coin_label,
+        moment_label=healer_hubunit.moment_label,
         keep_rope=healer_hubunit.keep_rope,
         knot=healer_hubunit.knot,
         duty_belief_name=listener_id,
@@ -293,8 +293,8 @@ def listen_to_debtors_roll_duty_vision(
 
 def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
     gut = open_gut_file(
-        listener_hubunit.coin_mstr_dir,
-        listener_hubunit.coin_label,
+        listener_hubunit.moment_mstr_dir,
+        listener_hubunit.moment_label,
         listener_hubunit.belief_name,
     )
     new_job = create_listen_basis(gut)
@@ -315,7 +315,7 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
         _ingest_perspective_agenda(new_job, agenda)
         listen_to_speaker_fact(new_job, gut)
 
-    save_job_file(listener_hubunit.coin_mstr_dir, new_job)
+    save_job_file(listener_hubunit.moment_mstr_dir, new_job)
 
 
 def _fact_state_keep_visions_and_listen(

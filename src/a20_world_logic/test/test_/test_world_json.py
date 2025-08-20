@@ -31,12 +31,12 @@ def test_WorldUnit_to_dict_ReturnsObj_Scenario1():
     five_world_name = "five"
     world2_time_reason_upper = 55
     amy45_str = "amy45"
-    world2_coinunits = {"amy45"}
+    world2_momentunits = {"amy45"}
     x_world = worldunit_shop(
         world_name=five_world_name,
         worlds_dir=worlds2_dir,
         world_time_reason_upper=world2_time_reason_upper,
-        _coinunits=world2_coinunits,
+        _momentunits=world2_momentunits,
     )
 
     # WHEN

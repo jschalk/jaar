@@ -11,12 +11,12 @@ def get_module_temp_dir() -> str:
     return "src/a17_idea_logic/test/_util/idea_examples"
 
 
-def idea_coin_mstr_dir() -> str:
-    return "src/a17_idea_logic/test/_util/idea_examples/coin_mstr"
+def idea_moment_mstr_dir() -> str:
+    return "src/a17_idea_logic/test/_util/idea_examples/moment_mstr"
 
 
-def idea_coins_dir() -> str:
-    return "src/a17_idea_logic/test/_util/idea_examples/coin_mstr/coins"
+def idea_moments_dir() -> str:
+    return "src/a17_idea_logic/test/_util/idea_examples/moment_mstr/moments"
 
 
 @pytest_fixture()

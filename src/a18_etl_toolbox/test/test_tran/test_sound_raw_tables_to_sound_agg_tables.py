@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     belief_partnerunit_str,
-    coin_label_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
@@ -171,7 +171,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}_ERASE
 )"""
@@ -200,13 +200,13 @@ VALUES
 
 
 # TODO copy over and use these tests?
-# test_coin_raw_tables2coin_agg_tables_Scenario0_coinunit_WithNo_error_message
-# test_coin_raw_tables2coin_agg_tables_Scenario1_coinunit_With_error_message
-# test_coin_raw_tables2coin_agg_tables_Scenario2_blfhour_Some_error_message
-# test_coin_raw_tables2coin_agg_tables_Scenario3_blfmont_Some_error_message
-# test_coin_raw_tables2coin_agg_tables_Scenario4_blfweek_Some_error_message
-# test_coin_raw_tables2coin_agg_tables_Scenario5_coinbud_Some_error_message
-# test_coin_raw_tables2coin_agg_tables_Scenario6_blfpayy_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario0_momentunit_WithNo_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario1_momentunit_With_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario2_blfhour_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario3_blfmont_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario4_blfweek_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario5_momentbud_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario6_blfpayy_Some_error_message
 
 
 def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scenario0():
@@ -260,7 +260,7 @@ VALUES
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -340,7 +340,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}_ERASE
 )"""
@@ -428,7 +428,7 @@ VALUES
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}

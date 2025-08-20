@@ -18,10 +18,6 @@ def cases_str() -> str:
     return "cases"
 
 
-def coin_label_str() -> str:
-    return "coin_label"
-
-
 def fact_context_str() -> str:
     return "fact_context"
 
@@ -40,6 +36,10 @@ def fact_upper_str() -> str:
 
 def factunits_str() -> str:
     return "factunits"
+
+
+def moment_label_str() -> str:
+    return "moment_label"
 
 
 def reason_active_requisite_str() -> str:

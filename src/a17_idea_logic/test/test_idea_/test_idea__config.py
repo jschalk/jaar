@@ -82,28 +82,28 @@ from src.a11_bud_logic.test._util.a11_str import (
     belief_name_str,
     bud_time_str,
     celldepth_str,
-    coin_label_str,
+    moment_label_str,
     quota_str,
     tran_time_str,
 )
-from src.a15_coin_logic.coin_config import (
-    get_coin_args_dimen_mapping,
-    get_coin_config_dict,
-    get_coin_dimens,
+from src.a15_moment_logic.moment_config import (
+    get_moment_args_dimen_mapping,
+    get_moment_config_dict,
+    get_moment_dimens,
 )
-from src.a15_coin_logic.test._util.a15_str import (
+from src.a15_moment_logic.test._util.a15_str import (
     amount_str,
-    coin_budunit_str,
-    coin_paybook_str,
-    coin_timeline_hour_str,
-    coin_timeline_month_str,
-    coin_timeline_weekday_str,
-    coin_timeoffi_str,
-    coinunit_str,
     cumulative_day_str,
     cumulative_minute_str,
     hour_label_str,
     job_listen_rotations_str,
+    moment_budunit_str,
+    moment_paybook_str,
+    moment_timeline_hour_str,
+    moment_timeline_month_str,
+    moment_timeline_weekday_str,
+    moment_timeoffi_str,
+    momentunit_str,
     month_label_str,
     offi_time_str,
     weekday_label_str,
@@ -177,10 +177,10 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     # THEN
     atom_args = set(get_atom_args_dimen_mapping().keys())
     assert atom_args.issubset(set(table_sorting_priority))
-    coin_args = set(get_coin_args_dimen_mapping().keys())
-    print(f"{coin_args=}")
-    print(f"{coin_args.difference(set(table_sorting_priority))=}")
-    assert coin_args.issubset(set(table_sorting_priority))
+    moment_args = set(get_moment_args_dimen_mapping().keys())
+    print(f"{moment_args=}")
+    print(f"{moment_args.difference(set(table_sorting_priority))=}")
+    assert moment_args.issubset(set(table_sorting_priority))
     pidgin_args = set(get_pidgin_args_dimen_mapping().keys())
     assert pidgin_args.issubset(set(table_sorting_priority))
     all_belief_dimen_delete_keys = get_all_belief_dimen_delete_keys()
@@ -212,9 +212,9 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[5] == "face_name"
     assert table_sorting_priority[6] == "face_name_otx"
     assert table_sorting_priority[7] == "face_name_inx"
-    assert table_sorting_priority[8] == "coin_label"
-    assert table_sorting_priority[9] == "coin_label_otx"
-    assert table_sorting_priority[10] == "coin_label_inx"
+    assert table_sorting_priority[8] == "moment_label"
+    assert table_sorting_priority[9] == "moment_label_otx"
+    assert table_sorting_priority[10] == "moment_label_inx"
     assert table_sorting_priority[11] == "timeline_label"
     assert table_sorting_priority[12] == "timeline_label_otx"
     assert table_sorting_priority[13] == "timeline_label_inx"
@@ -387,7 +387,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert len(table_sorting_priority) == 179
     all_args = copy_copy(atom_args)
     all_args.update(all_belief_dimen_delete_keys)
-    all_args.update(coin_args)
+    all_args.update(moment_args)
     all_args.update(pidgin_args)
     all_args.update(belief_calc_args)
     all_args.update(pidginable_otx_cols)
@@ -427,7 +427,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(face_name_str()) == "TEXT"
     assert sqlite_types.get("pidgin_event_int") == "INTEGER"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
-    assert sqlite_types.get(coin_label_str()) == "TEXT"
+    assert sqlite_types.get(moment_label_str()) == "TEXT"
     assert sqlite_types.get(belief_name_str()) == "TEXT"
     assert sqlite_types.get(partner_name_str()) == "TEXT"
     assert sqlite_types.get(group_title_str()) == "TEXT"
@@ -529,13 +529,13 @@ def test_get_idea_config_dict_ReturnsObj():
     # THEN
     assert x_idea_config
     idea_config_dimens = set(x_idea_config.keys())
-    assert coinunit_str() in idea_config_dimens
-    assert coin_budunit_str() in idea_config_dimens
-    assert coin_paybook_str() in idea_config_dimens
-    assert coin_timeline_hour_str() in idea_config_dimens
-    assert coin_timeline_month_str() in idea_config_dimens
-    assert coin_timeline_weekday_str() in idea_config_dimens
-    assert coin_timeoffi_str() in idea_config_dimens
+    assert momentunit_str() in idea_config_dimens
+    assert moment_budunit_str() in idea_config_dimens
+    assert moment_paybook_str() in idea_config_dimens
+    assert moment_timeline_hour_str() in idea_config_dimens
+    assert moment_timeline_month_str() in idea_config_dimens
+    assert moment_timeline_weekday_str() in idea_config_dimens
+    assert moment_timeoffi_str() in idea_config_dimens
     assert belief_partner_membership_str() in idea_config_dimens
     assert belief_partnerunit_str() in idea_config_dimens
     assert belief_plan_awardunit_str() in idea_config_dimens
@@ -551,19 +551,19 @@ def test_get_idea_config_dict_ReturnsObj():
     assert pidgin_label_str() in idea_config_dimens
     assert pidgin_rope_str() in idea_config_dimens
     assert get_belief_dimens().issubset(idea_config_dimens)
-    assert get_coin_dimens().issubset(idea_config_dimens)
+    assert get_moment_dimens().issubset(idea_config_dimens)
     assert get_pidgin_dimens().issubset(idea_config_dimens)
     assert len(x_idea_config) == 21
     _validate_idea_config(x_idea_config)
 
 
 def get_idea_categorys():
-    return {"belief", "coin", "pidgin"}
+    return {"belief", "moment", "pidgin"}
 
 
 def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
-    coin_config_dict = get_coin_config_dict()
+    moment_config_dict = get_moment_config_dict()
     pidgin_config_dict = get_pidgin_config_dict()
     # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
@@ -578,18 +578,18 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(normal_specs_str()) is None
         if idea_dict.get(idea_category_str()) == "belief":
             sub_dimen = atom_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_category_str()) == "coin":
-            sub_dimen = coin_config_dict.get(idea_dimen)
+        elif idea_dict.get(idea_category_str()) == "moment":
+            sub_dimen = moment_config_dict.get(idea_dimen)
         elif idea_dict.get(idea_category_str()) == "pidgin":
             sub_dimen = pidgin_config_dict.get(idea_dimen)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
 
         if idea_dimen in {
-            coin_timeline_hour_str(),
-            coin_timeline_month_str(),
-            coin_timeline_weekday_str(),
-            coinunit_str(),
+            moment_timeline_hour_str(),
+            moment_timeline_month_str(),
+            moment_timeline_weekday_str(),
+            momentunit_str(),
             map_otx2inx_str(),
             pidgin_title_str(),
             pidgin_name_str(),
@@ -598,9 +598,9 @@ def _validate_idea_config(x_idea_config: dict):
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
-            coin_budunit_str(),
-            coin_paybook_str(),
-            coin_timeoffi_str(),
+            moment_budunit_str(),
+            moment_paybook_str(),
+            moment_timeoffi_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
         elif (
@@ -656,9 +656,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) != "pidgin":
-            assert coin_label_str() in idea_jkeys_keys
+            assert moment_label_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) == "belief":
-            idea_jkeys_keys.remove(coin_label_str())
+            idea_jkeys_keys.remove(moment_label_str())
             idea_jkeys_keys.remove(belief_name_str())
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
@@ -666,8 +666,8 @@ def _validate_idea_config(x_idea_config: dict):
 
         sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
         print(f"  {sub_jvalues_keys=}")
-        if coin_label_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(coin_label_str())
+        if moment_label_str() in sub_jvalues_keys:
+            sub_jvalues_keys.remove(moment_label_str())
 
         idea_jvalues_dict = idea_dict.get(jvalues_str())
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
@@ -675,7 +675,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"{idea_jvalues_keys=}")
         assert sub_jvalues_keys == idea_jvalues_keys
 
-        assert coin_label_str() not in idea_jvalues_keys
+        assert moment_label_str() not in idea_jvalues_keys
 
         # sort_list = get_idea_elements_sort_order()
         # x_count = 0
@@ -728,7 +728,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
 
     valid_idea_dimens = set()
     valid_idea_dimens.update(get_belief_dimens())
-    valid_idea_dimens.update(get_coin_dimens())
+    valid_idea_dimens.update(get_moment_dimens())
     valid_idea_dimens.update(get_pidgin_dimens())
     config_dict = get_idea_config_dict()
 
@@ -842,10 +842,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(pidgin_title_str(), 1)
     # set_idea_config_json(pidgin_label_str(), 2)
     # set_idea_config_json(pidgin_rope_str(), 3)
-    # set_idea_config_json(coinunit_str(), 5)
-    # set_idea_config_json(coin_timeline_hour_str(), 6)
-    # set_idea_config_json(coin_timeline_month_str(), 7)
-    # set_idea_config_json(coin_timeline_weekday_str(), 8)
+    # set_idea_config_json(momentunit_str(), 5)
+    # set_idea_config_json(moment_timeline_hour_str(), 6)
+    # set_idea_config_json(moment_timeline_month_str(), 7)
+    # set_idea_config_json(moment_timeline_weekday_str(), 8)
     # set_idea_config_json(belief_partner_membership_str(), 9)
     # set_idea_config_json(belief_partnerunit_str(), 10)
     # set_idea_config_json(belief_plan_awardunit_str(), 11)
@@ -856,8 +856,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(belief_plan_reasonunit_str(), 17)
     # set_idea_config_json(belief_planunit_str(), 18)
     # set_idea_config_json(beliefunit_str(), 19)
-    # set_idea_config_json(coin_budunit_str(), 20)
-    # set_idea_config_json(coin_paybook_str(), 21)
+    # set_idea_config_json(moment_budunit_str(), 20)
+    # set_idea_config_json(moment_paybook_str(), 21)
 
     x_idea_config = get_idea_config_dict()
 
@@ -866,10 +866,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(pidgin_title_str()).get(bo) == 1
     assert x_idea_config.get(pidgin_label_str()).get(bo) == 2
     assert x_idea_config.get(pidgin_rope_str()).get(bo) == 3
-    assert x_idea_config.get(coinunit_str()).get(bo) == 5
-    assert x_idea_config.get(coin_timeline_hour_str()).get(bo) == 6
-    assert x_idea_config.get(coin_timeline_month_str()).get(bo) == 7
-    assert x_idea_config.get(coin_timeline_weekday_str()).get(bo) == 8
+    assert x_idea_config.get(momentunit_str()).get(bo) == 5
+    assert x_idea_config.get(moment_timeline_hour_str()).get(bo) == 6
+    assert x_idea_config.get(moment_timeline_month_str()).get(bo) == 7
+    assert x_idea_config.get(moment_timeline_weekday_str()).get(bo) == 8
     assert x_idea_config.get(belief_partner_membership_str()).get(bo) == 9
     assert x_idea_config.get(belief_partnerunit_str()).get(bo) == 10
     assert x_idea_config.get(belief_plan_awardunit_str()).get(bo) == 11
@@ -880,8 +880,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(belief_plan_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(belief_planunit_str()).get(bo) == 18
     assert x_idea_config.get(beliefunit_str()).get(bo) == 19
-    assert x_idea_config.get(coin_budunit_str()).get(bo) == 20
-    assert x_idea_config.get(coin_paybook_str()).get(bo) == 21
+    assert x_idea_config.get(moment_budunit_str()).get(bo) == 20
+    assert x_idea_config.get(moment_paybook_str()).get(bo) == 21
 
 
 def test_get_quick_ideas_column_ref_ReturnsObj():
@@ -894,7 +894,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         event_int_str(),
         face_name_str(),
         c400_number_str(),
-        coin_label_str(),
+        moment_label_str(),
         fund_iota_str(),
         monthday_distortion_str(),
         penny_str(),

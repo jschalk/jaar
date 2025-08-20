@@ -32,7 +32,7 @@ def test_RiverRun_save_rivergrade_file_SavesFile(env_dir_setup_cleanup):
 def test_RiverRun_save_rivergrade_files_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH / WHEN
     delete_dir(get_module_temp_dir())
-    github_error_path1 = "src\\a14_keep_logic\\test\\_util\\coin_mstr\\coins/coins/ex_keep04/beliefs/Yao/keeps/nation/usa/texas/grades/Yao.json"
+    github_error_path1 = "src\\a14_keep_logic\\test\\_util\\moment_mstr\\moments/moments/ex_keep04/beliefs/Yao/keeps/nation/usa/texas/grades/Yao.json"
     assert os_path_exists(github_error_path1) is False
     yao_hubunit = example_yao_texas_hubunit()
     yao_str = "Yao"

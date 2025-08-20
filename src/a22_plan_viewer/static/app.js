@@ -4,7 +4,7 @@ let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
 let show_level = false;
-let show_coin_label = false;
+let show_moment_label = false;
 let show_task = false;
 let show_descendant_task_count = false;
 let show_active = false;
@@ -40,7 +40,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
     const show_levelCheckbox = document.getElementById('show_level');
-    const show_coin_labelCheckbox = document.getElementById('show_coin_label');
+    const show_moment_labelCheckbox = document.getElementById('show_moment_label');
     const show_taskCheckbox = document.getElementById('show_task');
     const show_descendant_task_countCheckbox = document.getElementById('show_descendant_task_count');
     const show_activeCheckbox = document.getElementById('show_active');
@@ -75,7 +75,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
     show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
-    show_coin_labelCheckbox.addEventListener('change', function () { show_coin_label = this.checked; renderTree(); });
+    show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderTree(); });
     show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
     show_descendant_task_countCheckbox.addEventListener('change', function () { show_descendant_task_count = this.checked; renderTree(); });
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
@@ -151,13 +151,13 @@ function renderPlanUnit(planUnit, level) {
 
 
     // Build award links HTML using separate function
-    const coin_labelHtml = render_coin_label(planUnit.coin_label, planUnit.knot, show_coin_label);
+    const moment_labelHtml = render_moment_label(planUnit.moment_label, planUnit.knot, show_moment_label);
 
     // Start with current node
     let html = `
   <div>
     ${indent}• 
-    ${coin_labelHtml}
+    ${moment_labelHtml}
     ${planUnit.plan_label}
     <i>${levelIndicator}
     ${starIndicator}
@@ -215,12 +215,12 @@ function renderFlatReadableJson(flat_readables, indent, show_readable) {
 
     return html;
 }
-function render_coin_label(coin_label, knot, show_coin_label) {
-    if (!coin_label || !show_coin_label) {
+function render_moment_label(moment_label, knot, show_moment_label) {
+    if (!moment_label || !show_moment_label) {
         return '';
     }
 
-    return ` ${knot}${coin_label}...`;
+    return ` ${knot}${moment_label}...`;
 }
 function render_with_indent(str, indent, show_bool) {
     if (!str || !show_bool) {

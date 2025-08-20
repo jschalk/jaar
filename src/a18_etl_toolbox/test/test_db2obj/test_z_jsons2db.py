@@ -41,7 +41,7 @@ def test_ObjKeysHolder_Exists():
     x_objkeyholder = ObjKeysHolder()
 
     # THEN
-    assert not x_objkeyholder.coin_label
+    assert not x_objkeyholder.moment_label
     assert not x_objkeyholder.belief_name
     assert not x_objkeyholder.rope
     assert not x_objkeyholder.reason_context
@@ -54,7 +54,7 @@ def test_ObjKeysHolder_Exists():
 def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = "Sue"
     x__keeps_buildable = 99
     x__keeps_justified = 77
@@ -70,7 +70,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     x_penny = 4.0
     x_respect_bit = 0.2
     x_tally = 6
-    sue_belief = beliefunit_shop(belief_name=x_belief_name, coin_label=x_coin_label)
+    sue_belief = beliefunit_shop(belief_name=x_belief_name, moment_label=x_moment_label)
     sue_belief.fund_pool = x_fund_pool
     sue_belief.fund_iota = x_fund_iota
     sue_belief.penny = x_penny
@@ -102,7 +102,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            x_coin_label,
+            x_moment_label,
             x_belief_name,
             x_credor_respect,
             x_debtor_respect,
@@ -138,9 +138,9 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
     # print("")
-    x_coin_label = "amy23"
+    x_moment_label = "amy23"
     x_belief_name = 2
-    casa_rope = create_rope(x_coin_label, "casa")
+    casa_rope = create_rope(x_moment_label, "casa")
     x_parent_rope = casa_rope
     x_plan_label = "clean"
     x_begin = 5.0
@@ -169,7 +169,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x__all_partner_cred = 28
     x__all_partner_debt = 29
     x_plan = planunit_shop()
-    x_plan.coin_label = x_coin_label
+    x_plan.moment_label = x_moment_label
     x_plan.parent_rope = x_parent_rope
     x_plan.plan_label = x_plan_label
     x_plan.begin = x_begin
@@ -228,7 +228,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
         create_job_tables(cursor)
         x_table_name = "belief_planunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
         # WHEN
         insert_job_blrplan(cursor, x_objkeysholder, x_plan)
@@ -240,7 +240,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            x_coin_label,
+            x_moment_label,
             str(x_belief_name),
             clean_rope,
             x_begin,
@@ -289,7 +289,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     #     print(f"""            x_{x_arg},""")
     # print("")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
@@ -309,7 +309,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
         create_job_tables(cursor)
         x_table_name = "belief_plan_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrreas(cursor, x_objkeysholder, x_reasonheir)
@@ -320,7 +320,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
@@ -348,7 +348,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
@@ -372,7 +372,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
         x_table_name = "belief_plan_reason_caseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_coin_label, x_belief_name, x_rope, x_reason_context
+            x_moment_label, x_belief_name, x_rope, x_reason_context
         )
 
         # WHEN
@@ -384,7 +384,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
@@ -414,7 +414,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_partner_name = 3
     x_group_title = 4
@@ -446,7 +446,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
         create_job_tables(cursor)
         x_table_name = "belief_partner_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
         # WHEN
         insert_job_blrmemb(cursor, x_objkeysholder, x_membership)
@@ -457,7 +457,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_partner_name),
             str(x_group_title),
@@ -491,7 +491,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_partner_name = 3
     x_partner_cred_points = 4
@@ -526,7 +526,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
         create_job_tables(cursor)
         x_table_name = "belief_partnerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
         # WHEN
         insert_job_blrpern(cursor, x_objkeysholder, x_partner)
@@ -537,7 +537,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_partner_name),
             x_partner_cred_points,
@@ -572,7 +572,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_group_title = 3
     x_fund_iota = 4
@@ -599,7 +599,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
         create_job_tables(cursor)
         x_table_name = "belief_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
         # WHEN
         insert_job_blrgrou(cursor, x_objkeysholder, x_group)
@@ -610,7 +610,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_group_title),
             x_fund_iota,
@@ -641,7 +641,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_rope = 3
     x_awardee_title = 4
@@ -661,7 +661,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
         create_job_tables(cursor)
         x_table_name = "belief_plan_awardunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrawar(cursor, x_objkeysholder, x_awardheir)
@@ -672,7 +672,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             str(x_awardee_title),
@@ -700,7 +700,7 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
@@ -718,7 +718,7 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
         create_job_tables(cursor)
         x_table_name = "belief_plan_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrfact(cursor, x_objkeysholder, x_factheir)
@@ -729,7 +729,7 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
@@ -756,7 +756,7 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_rope = 3
     bob_str = "Bob"
@@ -770,7 +770,7 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
         create_job_tables(cursor)
         x_table_name = "belief_plan_healerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrheal(cursor, x_objkeysholder, x_healerunit)
@@ -781,13 +781,13 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             bob_str,
         )
         expected_row2 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             sue_str,
@@ -811,7 +811,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
-    x_coin_label = 1
+    x_moment_label = 1
     x_belief_name = 2
     x_rope = 3
     x__belief_name_is_labor = 5
@@ -830,7 +830,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
         create_job_tables(cursor)
         x_table_name = "belief_plan_partyunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrlabo(cursor, x_objkeysholder, x_laborheir)
@@ -841,7 +841,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             bob_str,
@@ -849,7 +849,7 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
             x__belief_name_is_labor,
         )
         expected_row2 = (
-            str(x_coin_label),
+            str(x_moment_label),
             str(x_belief_name),
             str(x_rope),
             sue_str,

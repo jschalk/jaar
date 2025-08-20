@@ -37,7 +37,7 @@ def test_HubUnit_get_dw_perspective_belief_ReturnsBeliefWith_belief_nameSetToHub
     bob_beliefunit = get_beliefunit_with_4_levels()
     bob_beliefunit.set_belief_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    save_job_file(bob_hubunit.coin_mstr_dir, bob_beliefunit)
+    save_job_file(bob_hubunit.moment_mstr_dir, bob_beliefunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)

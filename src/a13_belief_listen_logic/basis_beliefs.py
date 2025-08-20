@@ -13,7 +13,7 @@ def create_empty_belief_from_belief(
     x_penny = ref_belief.penny
     return beliefunit_shop(
         belief_name=x_belief_name,
-        coin_label=ref_belief.coin_label,
+        moment_label=ref_belief.moment_label,
         knot=x_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,

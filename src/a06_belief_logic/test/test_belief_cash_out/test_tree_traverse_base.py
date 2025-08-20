@@ -166,7 +166,7 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
     sue_belief.set_plan(email_plan, parent_rope=casa_rope)
 
     # test root status:
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
     x_planroot = sue_belief.get_plan_obj(root_rope)
     assert x_planroot._descendant_task_count is None
     assert x_planroot._all_partner_cred is None
@@ -377,13 +377,13 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     # THEN
     assert len(ordered_label_list) == 17
     x_1st_rope_in_ordered_list = sue_belief.get_plan_tree_ordered_rope_list()[0]
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
     assert x_1st_rope_in_ordered_list == root_rope
     x_8th_rope_in_ordered_list = sue_belief.get_plan_tree_ordered_rope_list()[9]
     assert x_8th_rope_in_ordered_list == sue_belief.make_l1_rope(wk_str)
 
     # WHEN
-    y_belief = beliefunit_shop(coin_label="amy23")
+    y_belief = beliefunit_shop(moment_label="amy23")
 
     # THEN
     y_1st_rope_in_ordered_list = y_belief.get_plan_tree_ordered_rope_list()[0]
@@ -466,7 +466,7 @@ def test_BeliefUnit_cash_out_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_o
     sue_beliefunit.cash_out()
 
     # THEN
-    root_rope = to_rope(sue_beliefunit.coin_label)
+    root_rope = to_rope(sue_beliefunit.moment_label)
     assert sue_beliefunit._offtrack_kids_star_set == {root_rope}
 
     # WHEN
@@ -530,7 +530,7 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     yao_belief.add_partnerunit(
         zia_str, zia_partner_cred_points, zia_partner_debt_points
     )
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     x_planroot = yao_belief.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(yao_str))
     x_planroot.set_awardunit(awardunit_shop(zia_str))
@@ -670,7 +670,7 @@ def test_BeliefUnit_cash_out_Sets_planroot_factheir_With_range_factheirs():
     tue_rope = yao_belief.make_rope(wk_rope, tue_str)
     tue_addin = 100
     yao_belief.set_plan(planunit_shop(tue_str, addin=tue_addin), wk_rope)
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     yao_belief.edit_plan_attr(root_rope, reason_context=tue_rope, reason_case=tue_rope)
 
     wk_reason_lower = 3

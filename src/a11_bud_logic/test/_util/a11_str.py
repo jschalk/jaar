@@ -2,8 +2,8 @@ from src.a02_finance_logic.test._util.a02_str import magnitude_str
 from src.a06_belief_logic.test._util.a06_str import (
     ancestors_str,
     belief_name_str,
-    coin_label_str,
     mandate_str,
+    moment_label_str,
 )
 
 

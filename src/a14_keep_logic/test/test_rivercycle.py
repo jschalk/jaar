@@ -8,7 +8,7 @@ from src.a14_keep_logic.rivercycle import (
     get_credorledger,
     rivercycle_shop,
 )
-from src.a14_keep_logic.test._util.a14_env import temp_coin_mstr_dir
+from src.a14_keep_logic.test._util.a14_env import temp_moment_mstr_dir
 from src.a14_keep_logic.test._util.example_credorledgers import (
     example_bob_credorledger,
     example_yao_credorledger,
@@ -30,8 +30,8 @@ def test_RiverCylce_Exists():
 def test_rivercycle_shop_ReturnsObj():
     # ESTABLISH
     one_int = 1
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, "Yao")
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, "Yao")
 
     # WHEN
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
@@ -46,8 +46,8 @@ def test_rivercycle_shop_ReturnsObj():
 def test_RiverCylce_set_complete_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, "Yao")
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, "Yao")
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int)
     bob_book_point_amount = 555
     bob_str = "Bob"
@@ -65,8 +65,8 @@ def test_RiverCylce_set_riverbook_SetsAttr():
     # ESTABLISH
     one_int = 1
     yao_str = "Yao"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     bob_str = "Bob"
     keep_credorledger = {bob_str: {yao_str: 75, bob_str: 25}}
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, keep_credorledger)
@@ -87,8 +87,8 @@ def test_RiverCylce_set_riverbook_SetsAttr():
 def test_RiverCylce_create_cylceledger_ReturnsObjOneRiverBook():
     # ESTABLISH
     yao_str = "Yao"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     one_int = 1
     yao_credorledger = {yao_str: {yao_str: 334.0}}
     one_rivercycle = rivercycle_shop(yao_hubunit, one_int, yao_credorledger)
@@ -106,8 +106,8 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
     # ESTABLISH
     yao_str = "Yao"
     bob_str = "Bob"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     one_int = 1
     keep_credorledgers = {
         yao_str: {yao_str: 75, bob_str: 25},
@@ -131,8 +131,8 @@ def test_RiverCylce_create_cylceledger_ReturnsObjTwoRiverBooks():
 def test_create_init_rivercycle_ReturnsObjScenarioOne_partnerunit():
     # ESTABLISH
     yao_str = "Yao"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     yao_belief = beliefunit_shop(yao_str)
     yao_belief.add_partnerunit(yao_str)
     yao_credorledger = get_credorledger(yao_belief)
@@ -155,8 +155,8 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_partnerunit():
     yao_partner_cred_points = 7
     bob_partner_cred_points = 3
     zia_partner_cred_points = 10
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     yao_belief = beliefunit_shop(yao_str)
     yao_belief.add_partnerunit(yao_str, yao_partner_cred_points)
     yao_belief.add_partnerunit(bob_str, bob_partner_cred_points)
@@ -184,8 +184,8 @@ def test_create_next_rivercycle_ReturnsObjScenarioThree_partnerunit():
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     yao_credorledger = example_yao_credorledger()
     bob_credorledger = example_bob_credorledger()
     zia_credorledger = example_zia_credorledger()
@@ -232,8 +232,8 @@ def test_create_next_rivercycle_ReturnsObjDoesNotReference_cycleledger_From_prev
     yao_str = "Yao"
     bob_str = "Bob"
     zia_str = "Zia"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    yao_hubunit = hubunit_shop(x_moment_mstr_dir, None, yao_str)
     yao_credorledger = example_yao_credorledger()
     bob_credorledger = example_bob_credorledger()
     zia_credorledger = example_zia_credorledger()

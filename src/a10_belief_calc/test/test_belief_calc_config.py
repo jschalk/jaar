@@ -30,11 +30,11 @@ from src.a04_reason_logic.test._util.a04_str import (
     _chore_str,
     _status_str,
     belief_name_str,
-    coin_label_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
+    moment_label_str,
     party_title_str,
     reason_active_requisite_str,
     reason_context_str,
@@ -198,7 +198,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
                     dimen_keys = set(atom_args)
-                    dimen_keys.add(coin_label_str())
+                    dimen_keys.add(moment_label_str())
                     dimen_keys.add(belief_name_str())
                     fm_aspect_keys = set(fm_aspect_dict.keys())
                     print(
@@ -428,7 +428,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
     print(f"{belief_partnerunit_args=}")
     print(f"{belief_groupunit_args=}")
     assert belief_partnerunit_args == {
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         "_fund_agenda_give",
         "_credor_pool",
@@ -445,7 +445,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         "_irrational_partner_debt_points",
     }
     assert belief_planunit_args == {
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         morph_str(),
         denom_str(),
@@ -475,7 +475,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         begin_str(),
     }
     assert belief_groupunit_args == {
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         "_debtor_pool",
         "_credor_pool",

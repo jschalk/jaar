@@ -3,13 +3,13 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     belief_partnerunit_str,
-    coin_label_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_coin_logic.coin_config import get_coin_dimens
+from src.a15_moment_logic.moment_config import get_moment_dimens
 from src.a17_idea_logic.idea_config import get_default_sorted_list, get_idea_config_dict
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -21,21 +21,21 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from src.a18_etl_toolbox.transformers import etl_voice_raw_tables_to_voice_agg_tables
 
 
-def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckCoinDimen():
+def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     insert_voice_agg_sqlstrs = get_insert_voice_agg_sqlstrs()
 
     # THEN
-    assert get_coin_dimens().issubset(set(insert_voice_agg_sqlstrs.keys()))
+    assert get_moment_dimens().issubset(set(insert_voice_agg_sqlstrs.keys()))
     idea_config = get_idea_config_dict()
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "coin"
+        if dimen_config.get(idea_category_str()) == "moment"
     }
-    with sqlite3_connect(":memory:") as coin_db_conn:
-        cursor = coin_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
 
         for x_dimen in idea_config:
@@ -159,7 +159,7 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {blrpern_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
-, {coin_label_str()}_inx
+, {moment_label_str()}_inx
 , {belief_name_str()}_inx
 , {partner_name_str()}_inx
 , {partner_cred_points_str()}
@@ -189,7 +189,7 @@ VALUES
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -233,7 +233,7 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {blrpern_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
-, {coin_label_str()}_inx
+, {moment_label_str()}_inx
 , {belief_name_str()}_inx
 , {partner_name_str()}_inx
 , {partner_cred_points_str()}
@@ -261,7 +261,7 @@ VALUES
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}

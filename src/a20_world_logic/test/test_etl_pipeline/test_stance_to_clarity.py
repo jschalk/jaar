@@ -9,17 +9,20 @@ from src.a11_bud_logic.test._util.a11_str import (
     belief_name_str,
     bud_time_str,
     celldepth_str,
-    coin_label_str,
+    moment_label_str,
     quota_str,
 )
-from src.a15_coin_logic.test._util.a15_str import cumulative_minute_str, hour_label_str
+from src.a15_moment_logic.test._util.a15_str import (
+    cumulative_minute_str,
+    hour_label_str,
+)
 from src.a16_pidgin_logic.test._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.a18_etl_toolbox.test._util.a18_str import (
     brick_agg_str,
-    coin_ote1_agg_str,
     events_brick_agg_str,
     events_brick_valid_str,
+    moment_ote1_agg_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import get_max_brick_agg_event_int
@@ -43,7 +46,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         partner_name_str(),
         otx_name_str(),
@@ -59,7 +62,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
 
     br00001_columns = [
         face_name_str(),
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         bud_time_str(),
         quota_str(),
@@ -91,14 +94,14 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_raw = create_prime_tablename("pidcore", "s", "raw")
         pidcore_sound_agg = create_prime_tablename("pidcore", "s", "agg")
         pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
-        coinunit_sound_raw = create_prime_tablename("coinunit", "s", "raw")
-        coinunit_sound_agg = create_prime_tablename("coinunit", "s", "agg")
+        momentunit_sound_raw = create_prime_tablename("momentunit", "s", "raw")
+        momentunit_sound_agg = create_prime_tablename("momentunit", "s", "agg")
         blrunit_sound_put_raw = create_prime_tablename("beliefunit", "s", "raw", "put")
         blrunit_sound_put_agg = create_prime_tablename("beliefunit", "s", "agg", "put")
         blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
         blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
-        coinunit_voice_raw = create_prime_tablename("coinunit", "v", "raw")
-        coinunit_voice_agg = create_prime_tablename("coinunit", "v", "agg")
+        momentunit_voice_raw = create_prime_tablename("momentunit", "v", "raw")
+        momentunit_voice_agg = create_prime_tablename("momentunit", "v", "agg")
         blrunit_voice_put_raw = create_prime_tablename("beliefunit", "v", "raw", "put")
         blrunit_voice_put_agg = create_prime_tablename("beliefunit", "v", "agg", "put")
         blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
@@ -111,24 +114,24 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, pidname_sound_raw) == 2
-        assert get_row_count(cursor, coinunit_sound_raw) == 4
+        assert get_row_count(cursor, momentunit_sound_raw) == 4
         assert get_row_count(cursor, blrunit_sound_put_raw) == 4
         assert get_row_count(cursor, blrpern_sound_put_raw) == 2
         assert get_row_count(cursor, pidname_sound_agg) == 1
-        assert get_row_count(cursor, coinunit_sound_agg) == 1
+        assert get_row_count(cursor, momentunit_sound_agg) == 1
         assert get_row_count(cursor, blrunit_sound_put_agg) == 1
         assert get_row_count(cursor, blrpern_sound_put_agg) == 1
         assert get_row_count(cursor, pidcore_sound_raw) == 1
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
-        assert get_row_count(cursor, coinunit_voice_raw) == 1
+        assert get_row_count(cursor, momentunit_voice_raw) == 1
         assert get_row_count(cursor, blrunit_voice_put_raw) == 1
         assert get_row_count(cursor, blrpern_voice_put_raw) == 1
-        assert get_row_count(cursor, coinunit_voice_agg) == 1
+        assert get_row_count(cursor, momentunit_voice_agg) == 1
         assert get_row_count(cursor, blrunit_voice_put_agg) == 1
         assert get_row_count(cursor, blrpern_voice_put_agg) == 1
-        assert get_row_count(cursor, coin_ote1_agg_str()) == 1
+        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
     db_conn.close()
 
 
@@ -140,7 +143,7 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        coin_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -150,7 +153,7 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 )"""
@@ -175,7 +178,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         face_name_str(),
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         partner_name_str(),
         otx_name_str(),

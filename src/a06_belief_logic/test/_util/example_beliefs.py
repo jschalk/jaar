@@ -235,7 +235,7 @@ def get_beliefunit_1Chore_1CE0MinutesReason_1Fact() -> BeliefUnit:
 
 def get_beliefunit_x1_3levels_1reason_1facts() -> BeliefUnit:
     tiger_str = "tiger"
-    zia_belief = beliefunit_shop("Zia", coin_label=tiger_str)
+    zia_belief = beliefunit_shop("Zia", moment_label=tiger_str)
     shave_str = "shave"
     shave_rope = zia_belief.make_l1_rope(shave_str)
     plan_kid_shave = planunit_shop(shave_str, star=30, task=True)

@@ -494,8 +494,8 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_1atom(
     sue_hubunit.save_pack_file(sue_1beliefatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
     gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
-    print(f"{gut_belief.coin_label=}")
-    print(f"{sue_hubunit.coin_label=}")
+    print(f"{gut_belief.moment_label=}")
+    print(f"{sue_hubunit.moment_label=}")
     sports_str = "sports"
     sports_rope = gut_belief.make_l1_rope(sports_str)
     knee_str = "knee"
@@ -519,7 +519,7 @@ def test_HubUnit_merge_any_packs_ReturnsObj_WithSinglepackModifies_2atoms(
     sue_hubunit.save_pack_file(sue_2beliefatoms_packunit())
     save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
     gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
-    print(f"{gut_belief.coin_label=}")
+    print(f"{gut_belief.moment_label=}")
     sports_str = "sports"
     sports_rope = gut_belief.make_l1_rope(sports_str)
     knee_str = "knee"

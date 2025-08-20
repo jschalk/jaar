@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_csv_column1_column2_metrics,
     get_positional_dict,
 )
-from src.a01_term_logic.term import BeliefName, CoinLabel
+from src.a01_term_logic.term import BeliefName, MomentLabel
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop
@@ -16,7 +16,7 @@ from src.a09_pack_logic.delta import (
     beliefdelta_shop,
     get_dimens_cruds_beliefdelta,
 )
-from src.a15_coin_logic.coin_main import CoinUnit, coinunit_shop
+from src.a15_moment_logic.moment_main import MomentUnit, momentunit_shop
 from src.a17_idea_logic.idea_config import (
     get_idea_format_headers,
     get_idearef_from_file,
@@ -84,11 +84,11 @@ def create_idea_df(x_beliefunit: BeliefUnit, idea_name: str) -> DataFrame:
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.add_all_beliefatoms(x_beliefunit)
     x_idearef = get_idearef_obj(idea_name)
-    x_coin_label = x_beliefunit.coin_label
+    x_moment_label = x_beliefunit.moment_label
     x_belief_name = x_beliefunit.belief_name
     sorted_beliefatoms = _get_sorted_INSERT_str_beliefatoms(x_beliefdelta, x_idearef)
     d2_list = _create_d2_list(
-        sorted_beliefatoms, x_idearef, x_coin_label, x_belief_name
+        sorted_beliefatoms, x_idearef, x_moment_label, x_belief_name
     )
     d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
@@ -108,15 +108,15 @@ def _get_sorted_INSERT_str_beliefatoms(
 def _create_d2_list(
     sorted_beliefatoms: list[BeliefAtom],
     x_idearef: IdeaRef,
-    x_coin_label: CoinLabel,
+    x_moment_label: MomentLabel,
     x_belief_name: BeliefName,
 ):
     d2_list = []
     for x_beliefatom in sorted_beliefatoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
-            if x_attribute == "coin_label":
-                d1_list.append(x_coin_label)
+            if x_attribute == "moment_label":
+                d1_list.append(x_moment_label)
             elif x_attribute == "belief_name":
                 d1_list.append(x_belief_name)
             else:
@@ -194,19 +194,19 @@ def make_beliefdelta(x_csv: str) -> BeliefDelta:
     return x_beliefdelta
 
 
-def get_csv_coin_label_belief_name_metrics(
+def get_csv_moment_label_belief_name_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[CoinLabel, dict[BeliefName, int]]:
+) -> dict[MomentLabel, dict[BeliefName, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def coin_label_belief_name_nested_csv_dict(
+def moment_label_belief_name_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[CoinLabel, dict[BeliefName, str]]:
+) -> dict[MomentLabel, dict[BeliefName, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
-def coin_build_from_df(
+def moment_build_from_df(
     br00000_df: DataFrame,
     br00001_df: DataFrame,
     br00002_df: DataFrame,
@@ -216,28 +216,28 @@ def coin_build_from_df(
     x_fund_iota: float,
     x_respect_bit: float,
     x_penny: float,
-    x_coins_dir: str,
-) -> dict[CoinLabel, CoinUnit]:
-    coin_hours_dict = _get_coin_hours_dict(br00003_df)
-    coin_months_dict = _get_coin_months_dict(br00004_df)
-    coin_weekdays_dict = _get_coin_weekdays_dict(br00005_df)
+    x_moments_dir: str,
+) -> dict[MomentLabel, MomentUnit]:
+    moment_hours_dict = _get_moment_hours_dict(br00003_df)
+    moment_months_dict = _get_moment_months_dict(br00004_df)
+    moment_weekdays_dict = _get_moment_weekdays_dict(br00005_df)
 
-    coinunit_dict = {}
+    momentunit_dict = {}
     for index, row in br00000_df.iterrows():
-        x_coin_label = row["coin_label"]
+        x_moment_label = row["moment_label"]
         x_timeline_config = {
             "c400_number": row["c400_number"],
-            "hours_config": coin_hours_dict.get(x_coin_label),
-            "months_config": coin_months_dict.get(x_coin_label),
+            "hours_config": moment_hours_dict.get(x_moment_label),
+            "months_config": moment_months_dict.get(x_moment_label),
             "monthday_distortion": row["monthday_distortion"],
             "timeline_label": row["timeline_label"],
-            "weekdays_config": coin_weekdays_dict.get(x_coin_label),
+            "weekdays_config": moment_weekdays_dict.get(x_moment_label),
             "yr1_jan1_offset": row["yr1_jan1_offset"],
         }
         x_timeline = timelineunit_shop(x_timeline_config)
-        x_coinunit = coinunit_shop(
-            coin_label=x_coin_label,
-            coin_mstr_dir=x_coins_dir,
+        x_momentunit = momentunit_shop(
+            moment_label=x_moment_label,
+            moment_mstr_dir=x_moments_dir,
             timeline=x_timeline,
             knot=row["knot"],
             fund_iota=x_fund_iota,
@@ -245,52 +245,52 @@ def coin_build_from_df(
             penny=x_penny,
             job_listen_rotations=row["job_listen_rotations"],
         )
-        coinunit_dict[x_coinunit.coin_label] = x_coinunit
-        _add_budunits_from_df(x_coinunit, br00001_df)
-        _add_paypurchases_from_df(x_coinunit, br00002_df)
-    return coinunit_dict
+        momentunit_dict[x_momentunit.moment_label] = x_momentunit
+        _add_budunits_from_df(x_momentunit, br00001_df)
+        _add_paypurchases_from_df(x_momentunit, br00002_df)
+    return momentunit_dict
 
 
-def _get_coin_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
-    coin_hours_dict = {}
-    for y_coin_label in br00003_df.coin_label.unique():
-        query_str = f"coin_label == '{y_coin_label}'"
+def _get_moment_hours_dict(br00003_df: DataFrame) -> dict[str, list[str, str]]:
+    moment_hours_dict = {}
+    for y_moment_label in br00003_df.moment_label.unique():
+        query_str = f"moment_label == '{y_moment_label}'"
         x_hours_list = [
             [row["hour_label"], row["cumulative_minute"]]
             for index, row in br00003_df.query(query_str).iterrows()
         ]
-        coin_hours_dict[y_coin_label] = x_hours_list
-    return coin_hours_dict
+        moment_hours_dict[y_moment_label] = x_hours_list
+    return moment_hours_dict
 
 
-def _get_coin_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
-    coin_months_dict = {}
-    for y_coin_label in br00004_df.coin_label.unique():
-        query_str = f"coin_label == '{y_coin_label}'"
+def _get_moment_months_dict(br00004_df: DataFrame) -> dict[str, list[str, str]]:
+    moment_months_dict = {}
+    for y_moment_label in br00004_df.moment_label.unique():
+        query_str = f"moment_label == '{y_moment_label}'"
         x_months_list = [
             [row["month_label"], row["cumulative_day"]]
             for index, row in br00004_df.query(query_str).iterrows()
         ]
-        coin_months_dict[y_coin_label] = x_months_list
-    return coin_months_dict
+        moment_months_dict[y_moment_label] = x_months_list
+    return moment_months_dict
 
 
-def _get_coin_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
-    coin_weekdays_dict = {}
-    for y_coin_label in br00005_df.coin_label.unique():
-        query_str = f"coin_label == '{y_coin_label}'"
+def _get_moment_weekdays_dict(br00005_df: DataFrame) -> dict[str, list[str, str]]:
+    moment_weekdays_dict = {}
+    for y_moment_label in br00005_df.moment_label.unique():
+        query_str = f"moment_label == '{y_moment_label}'"
         x_weekdays_list = [
             row["weekday_label"]
             for index, row in br00005_df.query(query_str).iterrows()
         ]
-        coin_weekdays_dict[y_coin_label] = x_weekdays_list
-    return coin_weekdays_dict
+        moment_weekdays_dict[y_moment_label] = x_weekdays_list
+    return moment_weekdays_dict
 
 
-def _add_budunits_from_df(x_coinunit: CoinUnit, br00001_df: DataFrame):
-    query_str = f"coin_label == '{x_coinunit.coin_label}'"
+def _add_budunits_from_df(x_momentunit: MomentUnit, br00001_df: DataFrame):
+    query_str = f"moment_label == '{x_momentunit.moment_label}'"
     for index, row in br00001_df.query(query_str).iterrows():
-        x_coinunit.add_budunit(
+        x_momentunit.add_budunit(
             belief_name=row["belief_name"],
             bud_time=row["bud_time"],
             quota=row["quota"],
@@ -299,10 +299,10 @@ def _add_budunits_from_df(x_coinunit: CoinUnit, br00001_df: DataFrame):
         )
 
 
-def _add_paypurchases_from_df(x_coinunit: CoinUnit, br00002_df: DataFrame):
-    query_str = f"coin_label == '{x_coinunit.coin_label}'"
+def _add_paypurchases_from_df(x_momentunit: MomentUnit, br00002_df: DataFrame):
+    query_str = f"moment_label == '{x_momentunit.moment_label}'"
     for index, row in br00002_df.query(query_str).iterrows():
-        x_coinunit.add_paypurchase(
+        x_momentunit.add_paypurchase(
             belief_name=row["belief_name"],
             partner_name=row["partner_name"],
             tran_time=row["tran_time"],
@@ -310,7 +310,7 @@ def _add_paypurchases_from_df(x_coinunit: CoinUnit, br00002_df: DataFrame):
         )
 
 
-def _add_time_offi_units_from_df(x_coinunit: CoinUnit, br00006_df: DataFrame):
-    query_str = f"coin_label == '{x_coinunit.coin_label}'"
+def _add_time_offi_units_from_df(x_momentunit: MomentUnit, br00006_df: DataFrame):
+    query_str = f"moment_label == '{x_momentunit.moment_label}'"
     for index, row in br00006_df.query(query_str).iterrows():
-        x_coinunit.offi_times.add(row["offi_time"])
+        x_momentunit.offi_times.add(row["offi_time"])

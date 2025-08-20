@@ -5421,7 +5421,7 @@
     },
     "star": 1
   },
-  "coin_label": "A",
+  "moment_label": "A",
   "fund_iota": 1,
   "fund_pool": 1000000000.0,
   "max_tree_traverse": 20,

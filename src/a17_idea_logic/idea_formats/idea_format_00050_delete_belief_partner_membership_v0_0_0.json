@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "coin_label": {
+        "moment_label": {
             "otx_key": true
         },
         "group_title_ERASE": {
@@ -21,7 +21,7 @@
     },
     "idea_number": "br00050",
     "dimens": [
-        "coinunit",
+        "momentunit",
         "beliefunit",
         "belief_partnerunit",
         "belief_partner_membership"

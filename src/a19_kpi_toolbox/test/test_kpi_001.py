@@ -5,19 +5,19 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a01_term_logic.rope import create_rope
-from src.a04_reason_logic.test._util.a04_str import belief_name_str, coin_label_str
+from src.a04_reason_logic.test._util.a04_str import belief_name_str, moment_label_str
 from src.a05_plan_logic.test._util.a05_str import plan_rope_str, task_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_net_amount_str,
-    coin_partner_nets_str,
+    moment_partner_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
-    CREATE_COIN_PARTNER_NETS_SQLSTR,
     CREATE_JOB_BLRPLAN_SQLSTR,
+    CREATE_MOMENT_PARTNER_NETS_SQLSTR,
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
-from src.a19_kpi_toolbox.test._util.a19_str import coin_kpi001_partner_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import moment_kpi001_partner_nets_str
 
 
 def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():
@@ -31,38 +31,38 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
-        cursor.execute(CREATE_COIN_PARTNER_NETS_SQLSTR)
-        coin_partner_nets_tablename = coin_partner_nets_str()
-        insert_sqlstr = f"""INSERT INTO {coin_partner_nets_tablename} ({coin_label_str()}, {belief_name_str()}, {belief_net_amount_str()}) 
+        cursor.execute(CREATE_MOMENT_PARTNER_NETS_SQLSTR)
+        moment_partner_nets_tablename = moment_partner_nets_str()
+        insert_sqlstr = f"""INSERT INTO {moment_partner_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()}) 
 VALUES 
   ('{a23_str}', '{bob_str}', {bob_partner_net})
 , ('{a23_str}', '{yao_str}', {yao_partner_net})
 """
         cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, coin_partner_nets_tablename) == 2
-        coin_kpi001_partner_nets_tablename = coin_kpi001_partner_nets_str()
-        assert not db_table_exists(cursor, coin_kpi001_partner_nets_tablename)
+        assert get_row_count(cursor, moment_partner_nets_tablename) == 2
+        moment_kpi001_partner_nets_tablename = moment_kpi001_partner_nets_str()
+        assert not db_table_exists(cursor, moment_kpi001_partner_nets_tablename)
 
         # WHEN
         create_populate_kpi001_table(cursor)
 
         # THEN
-        assert get_table_columns(cursor, coin_kpi001_partner_nets_tablename) == [
-            coin_label_str(),
+        assert get_table_columns(cursor, moment_kpi001_partner_nets_tablename) == [
+            moment_label_str(),
             belief_name_str(),
             "funds",
             "fund_rank",
             "tasks_count",
         ]
-        assert get_row_count(cursor, coin_kpi001_partner_nets_tablename)
+        assert get_row_count(cursor, moment_kpi001_partner_nets_tablename)
         select_sqlstr = f"""
         SELECT 
-  {coin_label_str()}
+  {moment_label_str()}
 , {belief_name_str()}
 , funds
 , fund_rank
 , tasks_count
-FROM {coin_kpi001_partner_nets_tablename}
+FROM {moment_kpi001_partner_nets_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -84,32 +84,32 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1task():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_COIN_PARTNER_NETS_SQLSTR)
-        coin_partner_nets_tablename = coin_partner_nets_str()
-        insert_sqlstr = f"""INSERT INTO {coin_partner_nets_tablename} ({coin_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        cursor.execute(CREATE_MOMENT_PARTNER_NETS_SQLSTR)
+        moment_partner_nets_tablename = moment_partner_nets_str()
+        insert_sqlstr = f"""INSERT INTO {moment_partner_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_partner_net})
 , ('{a23_str}', '{yao_str}', {yao_partner_net})
 """
         cursor.execute(insert_sqlstr)
-        assert get_row_count(cursor, coin_partner_nets_tablename) == 2
+        assert get_row_count(cursor, moment_partner_nets_tablename) == 2
 
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("blrplan", "job", None)
         insert_sqlstr = f"""
-INSERT INTO {job_blrplan_tablename} ({coin_label_str()}, {belief_name_str()}, {plan_rope_str()}, {task_str()})
+INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {belief_name_str()}, {plan_rope_str()}, {task_str()})
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)
-        coin_kpi001_partner_nets_tablename = coin_kpi001_partner_nets_str()
-        assert not db_table_exists(cursor, coin_kpi001_partner_nets_tablename)
+        moment_kpi001_partner_nets_tablename = moment_kpi001_partner_nets_str()
+        assert not db_table_exists(cursor, moment_kpi001_partner_nets_tablename)
 
         # WHEN
         create_populate_kpi001_table(cursor)
 
         # THEN
-        assert get_row_count(cursor, coin_kpi001_partner_nets_tablename)
-        select_sqlstr = f"""SELECT {coin_label_str()}, {belief_name_str()}, funds, fund_rank, tasks_count FROM {coin_kpi001_partner_nets_tablename}"""
+        assert get_row_count(cursor, moment_kpi001_partner_nets_tablename)
+        select_sqlstr = f"""SELECT {moment_label_str()}, {belief_name_str()}, funds, fund_rank, tasks_count FROM {moment_kpi001_partner_nets_tablename}"""
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(rows)

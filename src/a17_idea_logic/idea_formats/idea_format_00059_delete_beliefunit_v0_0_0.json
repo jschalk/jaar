@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "coin_label": {
+        "moment_label": {
             "otx_key": true
         },
         "belief_name_ERASE": {
@@ -16,6 +16,6 @@
     "idea_number": "br00059",
     "dimens": [
         "beliefunit",
-        "coinunit"
+        "momentunit"
     ]
 }

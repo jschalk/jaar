@@ -1,5 +1,8 @@
 from pytest import raises as pytest_raises
-from src.a05_plan_logic.plan import get_default_coin_label as root_label, planunit_shop
+from src.a05_plan_logic.plan import (
+    get_default_moment_label as root_label,
+    planunit_shop,
+)
 
 
 def test_planunit_shop_With_root_TrueReturnsObj():
@@ -14,7 +17,7 @@ def test_planunit_shop_With_root_TrueReturnsObj():
     assert root_plan.root is True
 
 
-def test_PlanUnit_set_plan_label_get_default_coin_label_DoesNotRaisesError():
+def test_PlanUnit_set_plan_label_get_default_moment_label_DoesNotRaisesError():
     # ESTABLISH
     root_plan = planunit_shop(root=True)
 
@@ -28,7 +31,7 @@ def test_PlanUnit_set_plan_label_get_default_coin_label_DoesNotRaisesError():
 def test_PlanUnit_set_plan_label_DoesNotRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    root_plan = planunit_shop(root=True, coin_label=el_paso_str)
+    root_plan = planunit_shop(root=True, moment_label=el_paso_str)
 
     # WHEN
     root_plan.set_plan_label(plan_label=el_paso_str)
@@ -40,7 +43,7 @@ def test_PlanUnit_set_plan_label_DoesNotRaisesError():
 def test_PlanUnit_set_plan_label_DoesRaisesError():
     # ESTABLISH
     el_paso_str = "El Paso"
-    root_plan = planunit_shop(root=True, coin_label=el_paso_str)
+    root_plan = planunit_shop(root=True, moment_label=el_paso_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -50,7 +53,7 @@ def test_PlanUnit_set_plan_label_DoesRaisesError():
     assert str(excinfo.value) == exception_str
 
 
-def test_PlanUnit_set_plan_label_RaisesErrorWhencoin_label_IsNone():
+def test_PlanUnit_set_plan_label_RaisesErrorWhenmoment_label_IsNone():
     # ESTABLISH
     root_plan = planunit_shop(root=True)
 

@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a03_group_logic.partner import partnerunit_shop
-from src.a05_plan_logic.plan import get_default_coin_label as root_label
+from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
     awardee_title_str,
@@ -343,12 +343,12 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj():
 
 def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_PlanUnitsSorted():
     # ESTABLISH
-    x_coin_label = root_label()
-    root_rope = to_rope(x_coin_label)
+    x_moment_label = root_label()
+    root_rope = to_rope(x_moment_label)
     sports_str = "sports"
-    sports_rope = create_rope(x_coin_label, sports_str)
+    sports_rope = create_rope(x_moment_label, sports_str)
     knee_str = "knee"
-    knee_rope = create_rope(x_coin_label, knee_str)
+    knee_rope = create_rope(x_moment_label, knee_str)
     x_dimen = belief_planunit_str()
     sports_insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
     sports_insert_planunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
@@ -377,9 +377,9 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_PlanUnitsSorted():
 def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_Rope_Sorted():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    x_coin_label = root_label()
+    x_moment_label = root_label()
     sports_str = "sports"
-    sports_rope = create_rope(x_coin_label, sports_str)
+    sports_rope = create_rope(x_moment_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(sports_rope, knee_str)
     x_dimen = belief_plan_awardunit_str()

@@ -22,8 +22,8 @@ from src.a06_belief_logic.test._util.a06_str import (
 )
 from src.a08_belief_atom_logic.atom_config import get_belief_dimens, get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_coin_logic.coin_config import get_coin_dimens
-from src.a15_coin_logic.test._util.a15_str import coin_timeline_hour_str
+from src.a15_moment_logic.moment_config import get_moment_dimens
+from src.a15_moment_logic.test._util.a15_str import moment_timeline_hour_str
 from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
@@ -56,10 +56,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
     get_belief_voice_agg_tablenames,
-    get_coin_belief_sound_agg_tablenames,
     get_dimen_abbv7,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
+    get_moment_belief_sound_agg_tablenames,
     get_prime_create_table_sqlstrs,
 )
 
@@ -147,7 +147,7 @@ def create_pidgin_sound_agg_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_coin_sound_agg_table_sqlstr(x_dimen):
+def create_moment_sound_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add(error_message_str())
@@ -155,7 +155,7 @@ def create_coin_sound_agg_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_coin_sound_vld_table_sqlstr(x_dimen):
+def create_moment_sound_vld_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
@@ -198,7 +198,7 @@ def create_pidgin_core_vld_table_sqlstr(x_dimen):
     return sqlstr
 
 
-def create_coin_voice_raw_table_sqlstr(x_dimen):
+def create_moment_voice_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = find_set_otx_inx_args(columns)
@@ -207,7 +207,7 @@ def create_coin_voice_raw_table_sqlstr(x_dimen):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_coin_voice_agg_table_sqlstr(x_dimen: str):
+def create_moment_voice_agg_table_sqlstr(x_dimen: str):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.remove(event_int_str())
@@ -356,20 +356,20 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_PidginCoreDimensPidgin():
     assert expected_s_vld_sqlstr == create_table_sqlstrs.get(s_vld_tablename)
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckCoinDimens():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckMomentDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     create_table_sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
     idea_config = get_idea_config_dict()
-    coin_dimens_config = {
+    moment_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "coin"
+        if dimen_config.get(idea_category_str()) == "moment"
     }
 
-    for x_dimen in coin_dimens_config:
+    for x_dimen in moment_dimens_config:
         # print(f"{abbv7} {x_dimen} checking...")
         s_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
         s_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
@@ -377,10 +377,10 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckCoinDimens():
         v_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw")
         v_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg")
         expected_s_raw_sqlstr = create_pidgin_sound_raw_table_sqlstr(x_dimen)
-        expected_s_agg_sqlstr = create_coin_sound_agg_table_sqlstr(x_dimen)
-        expected_s_vld_sqlstr = create_coin_sound_vld_table_sqlstr(x_dimen)
-        expected_v_raw_sqlstr = create_coin_voice_raw_table_sqlstr(x_dimen)
-        expected_v_agg_sqlstr = create_coin_voice_agg_table_sqlstr(x_dimen)
+        expected_s_agg_sqlstr = create_moment_sound_agg_table_sqlstr(x_dimen)
+        expected_s_vld_sqlstr = create_moment_sound_vld_table_sqlstr(x_dimen)
+        expected_v_raw_sqlstr = create_moment_voice_raw_table_sqlstr(x_dimen)
+        expected_v_agg_sqlstr = create_moment_voice_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
         print(f'CREATE_{abbv7.upper()}_SOUND_RAW_SQLSTR= """{expected_s_raw_sqlstr}"""')
         print(f'CREATE_{abbv7.upper()}_SOUND_AGG_SQLSTR= """{expected_s_agg_sqlstr}"""')
@@ -477,34 +477,36 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # THEN
     assert create_table_sqlstrs
     pidgin_dimens_count = len(get_pidgin_dimens()) * 3
-    coin_dimens_count = len(get_coin_dimens()) * 5
+    moment_dimens_count = len(get_moment_dimens()) * 5
     belief_dimens_count = len(get_belief_dimens()) * 10
     print(f"{pidgin_dimens_count=}")
-    print(f"{coin_dimens_count=}")
+    print(f"{moment_dimens_count=}")
     print(f"{belief_dimens_count=}")
-    all_dimens_count = pidgin_dimens_count + coin_dimens_count + belief_dimens_count
+    all_dimens_count = pidgin_dimens_count + moment_dimens_count + belief_dimens_count
     pidgin_core_count = 3
     all_dimens_count += pidgin_core_count
     assert len(create_table_sqlstrs) == all_dimens_count
 
 
-def test_get_coin_belief_sound_agg_tablenames_ReturnsObj():
+def test_get_moment_belief_sound_agg_tablenames_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    coin_belief_sound_agg_tablenames = get_coin_belief_sound_agg_tablenames()
+    moment_belief_sound_agg_tablenames = get_moment_belief_sound_agg_tablenames()
 
     # THEN
-    assert coin_belief_sound_agg_tablenames
+    assert moment_belief_sound_agg_tablenames
     expected_sound_agg_tablenames = set()
     for belief_dimen in get_belief_dimens():
         expected_sound_agg_tablenames.add(prime_tbl(belief_dimen, "s", "agg", "put"))
         expected_sound_agg_tablenames.add(prime_tbl(belief_dimen, "s", "agg", "del"))
-    for coin_dimen in get_coin_dimens():
-        expected_sound_agg_tablenames.add(prime_tbl(coin_dimen, "s", "agg"))
+    for moment_dimen in get_moment_dimens():
+        expected_sound_agg_tablenames.add(prime_tbl(moment_dimen, "s", "agg"))
     print(sorted(list(expected_sound_agg_tablenames)))
-    assert expected_sound_agg_tablenames == coin_belief_sound_agg_tablenames
-    agg_tablenames = coin_belief_sound_agg_tablenames
-    assert len(agg_tablenames) == len(get_belief_dimens()) * 2 + len(get_coin_dimens())
+    assert expected_sound_agg_tablenames == moment_belief_sound_agg_tablenames
+    agg_tablenames = moment_belief_sound_agg_tablenames
+    assert len(agg_tablenames) == len(get_belief_dimens()) * 2 + len(
+        get_moment_dimens()
+    )
     assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
@@ -525,10 +527,10 @@ def test_get_belief_voice_agg_tablenames_ReturnsObj_BeliefDimens():
     assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
-def test_create_sound_and_voice_tables_CreatesCoinRawTables():
+def test_create_sound_and_voice_tables_CreatesMomentRawTables():
     # ESTABLISH
-    with sqlite3_connect(":memory:") as coin_db_conn:
-        cursor = coin_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
         agg_str = "agg"
@@ -541,8 +543,8 @@ def test_create_sound_and_voice_tables_CreatesCoinRawTables():
         blrmemb_s_put_agg_table = prime_tbl("blrmemb", "s", agg_str, put_str)
         blrfact_s_del_agg_table = prime_tbl("blrfact", "s", agg_str, del_str)
         blrfact_s_del_vld_table = prime_tbl("blrfact", "s", vld_str, del_str)
-        coinunit_s_agg_table = prime_tbl("coinunit", "s", agg_str)
-        coinunit_s_vld_table = prime_tbl("coinunit", "s", vld_str)
+        momentunit_s_agg_table = prime_tbl("momentunit", "s", agg_str)
+        momentunit_s_vld_table = prime_tbl("momentunit", "s", vld_str)
         pidtitl_s_agg_table = prime_tbl("pidtitl", "s", agg_str)
         blfhour_v_agg_table = prime_tbl("blfhour", "v", agg_str)
         pidtitl_s_raw_table = prime_tbl("pidtitl", "s", raw_str)
@@ -555,8 +557,8 @@ def test_create_sound_and_voice_tables_CreatesCoinRawTables():
         assert not db_table_exists(cursor, blrmemb_s_put_agg_table)
         assert not db_table_exists(cursor, blrfact_s_del_agg_table)
         assert not db_table_exists(cursor, blrfact_s_del_vld_table)
-        assert not db_table_exists(cursor, coinunit_s_agg_table)
-        assert not db_table_exists(cursor, coinunit_s_vld_table)
+        assert not db_table_exists(cursor, momentunit_s_agg_table)
+        assert not db_table_exists(cursor, momentunit_s_vld_table)
         assert not db_table_exists(cursor, pidtitl_s_agg_table)
         assert not db_table_exists(cursor, blfhour_v_agg_table)
         assert not db_table_exists(cursor, pidtitl_s_raw_table)
@@ -579,8 +581,8 @@ def test_create_sound_and_voice_tables_CreatesCoinRawTables():
         assert db_table_exists(cursor, blrmemb_s_put_agg_table)
         assert db_table_exists(cursor, blrfact_s_del_agg_table)
         assert db_table_exists(cursor, blrfact_s_del_vld_table)
-        assert db_table_exists(cursor, coinunit_s_agg_table)
-        assert db_table_exists(cursor, coinunit_s_vld_table)
+        assert db_table_exists(cursor, momentunit_s_agg_table)
+        assert db_table_exists(cursor, momentunit_s_vld_table)
         assert db_table_exists(cursor, pidtitl_s_agg_table)
         assert db_table_exists(cursor, blfhour_v_agg_table)
         assert db_table_exists(cursor, pidtitl_s_raw_table)
@@ -640,10 +642,10 @@ WHERE inconsistency_rows.event_int = pidgin_title_s_raw.event_int
         assert update_sqlstr == static_example_sqlstr
 
 
-def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_CoinDimen():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_MomentDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = coin_timeline_hour_str()
+    dimen = moment_timeline_hour_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -675,16 +677,16 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT coin_label, cumulative_minute
-FROM coin_timeline_hour_s_raw
-GROUP BY coin_label, cumulative_minute
+SELECT moment_label, cumulative_minute
+FROM moment_timeline_hour_s_raw
+GROUP BY moment_label, cumulative_minute
 HAVING MIN(hour_label) != MAX(hour_label)
 )
-UPDATE coin_timeline_hour_s_raw
+UPDATE moment_timeline_hour_s_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.coin_label = coin_timeline_hour_s_raw.coin_label
-    AND inconsistency_rows.cumulative_minute = coin_timeline_hour_s_raw.cumulative_minute
+WHERE inconsistency_rows.moment_label = moment_timeline_hour_s_raw.moment_label
+    AND inconsistency_rows.cumulative_minute = moment_timeline_hour_s_raw.cumulative_minute
 ;
 """
         # print(update_sqlstr)
@@ -721,9 +723,9 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
+SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title
 FROM belief_plan_awardunit_s_put_raw
-GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
+GROUP BY event_int, face_name, moment_label, belief_name, plan_rope, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
@@ -732,7 +734,7 @@ SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
 WHERE inconsistency_rows.event_int = belief_plan_awardunit_s_put_raw.event_int
     AND inconsistency_rows.face_name = belief_plan_awardunit_s_put_raw.face_name
-    AND inconsistency_rows.coin_label = belief_plan_awardunit_s_put_raw.coin_label
+    AND inconsistency_rows.moment_label = belief_plan_awardunit_s_put_raw.moment_label
     AND inconsistency_rows.belief_name = belief_plan_awardunit_s_put_raw.belief_name
     AND inconsistency_rows.plan_rope = belief_plan_awardunit_s_put_raw.plan_rope
     AND inconsistency_rows.awardee_title = belief_plan_awardunit_s_put_raw.awardee_title
@@ -781,10 +783,10 @@ GROUP BY event_int, face_name, otx_title
         assert update_sqlstrs[0] == static_example_sqlstr
 
 
-def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_CoinDimen():
+def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_MomentDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = coin_timeline_hour_str()
+    dimen = moment_timeline_hour_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -814,11 +816,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_CoinDimen():
         print(expected_insert_sqlstr)
         assert update_sqlstrs[0] == expected_insert_sqlstr
 
-        static_example_sqlstr = """INSERT INTO coin_timeline_hour_s_agg (event_int, face_name, coin_label, cumulative_minute, hour_label)
-SELECT event_int, face_name, coin_label, cumulative_minute, MAX(hour_label)
-FROM coin_timeline_hour_s_raw
+        static_example_sqlstr = """INSERT INTO moment_timeline_hour_s_agg (event_int, face_name, moment_label, cumulative_minute, hour_label)
+SELECT event_int, face_name, moment_label, cumulative_minute, MAX(hour_label)
+FROM moment_timeline_hour_s_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, coin_label, cumulative_minute
+GROUP BY event_int, face_name, moment_label, cumulative_minute
 ;
 """
         print(update_sqlstrs[0])
@@ -853,11 +855,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BeliefDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO belief_plan_awardunit_s_put_agg (event_int, face_name, coin_label, belief_name, plan_rope, awardee_title, give_force, take_force)
-SELECT event_int, face_name, coin_label, belief_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
+        static_example_put_sqlstr = """INSERT INTO belief_plan_awardunit_s_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force)
+SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
 FROM belief_plan_awardunit_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
+GROUP BY event_int, face_name, moment_label, belief_name, plan_rope, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -884,10 +886,10 @@ GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO belief_plan_awardunit_s_del_agg (event_int, face_name, coin_label, belief_name, plan_rope, awardee_title_ERASE)
-SELECT event_int, face_name, coin_label, belief_name, plan_rope, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO belief_plan_awardunit_s_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE)
+SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE
 FROM belief_plan_awardunit_s_del_raw
-GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title_ERASE
+GROUP BY event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE
 ;
 """
         assert update_sqlstrs[1] == static_example_del_sqlstr
@@ -1069,14 +1071,14 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BeliefDimens():
             assert insert_s_vld_sqlstrs.get(s_del_vld_tbl) == s_del_vld_insert_select
 
 
-def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_CoinDimens():
+def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_MomentDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    coin_dimens_config = {
+    moment_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "coin"
+        if dimen_config.get(idea_category_str()) == "moment"
     }
 
     # WHEN
@@ -1087,10 +1089,10 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_CoinDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for coin_dimen in coin_dimens_config:
-            # print(f"{coin_dimen=}")
-            s_agg_tablename = prime_tbl(coin_dimen, "s", "agg")
-            s_vld_tablename = prime_tbl(coin_dimen, "s", "vld")
+        for moment_dimen in moment_dimens_config:
+            # print(f"{moment_dimen=}")
+            s_agg_tablename = prime_tbl(moment_dimen, "s", "agg")
+            s_vld_tablename = prime_tbl(moment_dimen, "s", "vld")
             s_agg_cols = get_table_columns(cursor, s_agg_tablename)
             s_agg_cols.remove(error_message_str())
             s_vld_cols = get_table_columns(cursor, s_vld_tablename)
@@ -1104,7 +1106,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_CoinDimens():
             s_agg_select_sql = f"{s_agg_select_sql}{where_clause}"
             s_vld_insert_select = f"{s_vld_insert_sql} {s_agg_select_sql}"
             # create_select_query(cursor=)
-            abbv7 = get_dimen_abbv7(coin_dimen)
+            abbv7 = get_dimen_abbv7(moment_dimen)
             sqlstr_ref = f"INSERT_{abbv7.upper()}_SOUND_VLD_SQLSTR"
             print(f'{sqlstr_ref}= "{s_vld_insert_select}"')
             # print(f""""{s_vld_tablename}": {sqlstr_ref},""")
@@ -1173,14 +1175,14 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BeliefDimens():
             assert insert_v_raw_sqlstrs.get(v_del_raw_tbl) == v_del_raw_insert_select
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_CoinDimens():
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_MomentDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    coin_dimens_config = {
+    moment_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "coin"
+        if dimen_config.get(idea_category_str()) == "moment"
     }
 
     # WHEN
@@ -1191,10 +1193,10 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_CoinDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for coin_dimen in coin_dimens_config:
-            # print(f"{coin_dimen=}")
-            s_vld_tablename = prime_tbl(coin_dimen, "s", "vld")
-            v_raw_tablename = prime_tbl(coin_dimen, "v", "raw")
+        for moment_dimen in moment_dimens_config:
+            # print(f"{moment_dimen=}")
+            s_vld_tablename = prime_tbl(moment_dimen, "s", "vld")
+            v_raw_tablename = prime_tbl(moment_dimen, "v", "raw")
             s_cols = get_table_columns(cursor, s_vld_tablename)
             v_raw_cols = get_table_columns(cursor, v_raw_tablename)
             v_raw_cols.remove(error_message_str())
@@ -1206,7 +1208,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_CoinDimens():
             s_vld_select_sql = get_select_sql(cursor, s_vld_tbl, s_cols, flat_bool=True)
             v_raw_insert_select = f"{v_raw_insert_sql} {s_vld_select_sql}"
             # create_select_query(cursor=)
-            abbv7 = get_dimen_abbv7(coin_dimen)
+            abbv7 = get_dimen_abbv7(moment_dimen)
             sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_SQLSTR"
             print(f'{sqlstr_ref}= "{v_raw_insert_select}"')
             # print(f""""{v_raw_tablename}": {sqlstr_ref},""")

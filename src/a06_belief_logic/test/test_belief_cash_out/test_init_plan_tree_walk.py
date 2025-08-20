@@ -47,7 +47,7 @@ def test_treemetrics_shop_ReturnsObj():
 def test_BeliefUnit_set_plan_dict_Scenario0():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert not root_plan.begin
     assert not root_plan.close
@@ -73,9 +73,9 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
     yao_belief = beliefunit_shop("Yao")
     ziet0_begin = 7
     ziet0_close = 31
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     yao_belief.edit_plan_attr(root_rope, begin=ziet0_begin, close=ziet0_close)
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
@@ -95,7 +95,7 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
 def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
     root_plan = sue_belief.get_plan_obj(root_rope)
     nation_str = "nation"
     nation_rope = sue_belief.make_l1_rope(nation_str)

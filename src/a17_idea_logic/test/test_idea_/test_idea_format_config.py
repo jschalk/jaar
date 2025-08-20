@@ -6,12 +6,12 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_partnerunit_str,
     beliefunit_str,
     close_str,
-    coin_label_str,
     denom_str,
     gogo_want_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    moment_label_str,
     morph_str,
     numor_str,
     partner_cred_points_str,
@@ -24,7 +24,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     task_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_coin_logic.test._util.a15_str import coinunit_str
+from src.a15_moment_logic.test._util.a15_str import momentunit_str
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_elements_sort_order,
@@ -83,7 +83,7 @@ def test_get_idearef_obj_ReturnsObj():
     assert set(x_idearef.dimens) == {
         belief_partnerunit_str(),
         beliefunit_str(),
-        coinunit_str(),
+        momentunit_str(),
     }
     assert x_idearef._attributes != {}
     assert len(x_idearef._attributes) == 7
@@ -100,7 +100,7 @@ def test_get_headers_list_ReturnsObj():
     assert format_00021_headers == [
         event_int_str(),
         face_name_str(),
-        coin_label_str(),
+        moment_label_str(),
         belief_name_str(),
         partner_name_str(),
         partner_cred_points_str(),
@@ -130,7 +130,7 @@ def test_get_sorted_headers_str_ReturnsObj():
     # THEN
     assert (
         br00021_headers
-        == "coin_label,belief_name,partner_name,partner_cred_points,partner_debt_points"
+        == "moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points"
     )
 
     # ESTABLISH / WHEN
@@ -138,7 +138,7 @@ def test_get_sorted_headers_str_ReturnsObj():
 
     # THEN
     print(f"{br00019_headers=}")
-    plan_headers_str = "coin_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    plan_headers_str = "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
     assert br00019_headers == plan_headers_str
 
 
@@ -222,13 +222,13 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_partnerunit_v0_0_0():
         "partner_debt_points": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
-        "coin_label": {"otx_key": True},
+        "moment_label": {"otx_key": True},
         "belief_name": {"otx_key": True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == coin_label_str()
+    assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
     assert headers_list[4] == partner_name_str()
     assert headers_list[5] == partner_cred_points_str()
@@ -247,7 +247,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_partner_membership_v0
     headers_list = format_00021_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == coin_label_str()
+    assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
     assert headers_list[4] == partner_name_str()
     assert headers_list[5] == group_title_str()
@@ -267,7 +267,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
     headers_list = format_00003_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == coin_label_str()
+    assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
     assert headers_list[4] == plan_rope_str()
     assert headers_list[5] == star_str()
@@ -286,7 +286,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
     headers_list = format_00019_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
     assert headers_list[1] == face_name_str()
-    assert headers_list[2] == coin_label_str()
+    assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
     assert headers_list[4] == plan_rope_str()
     assert headers_list[5] == begin_str()

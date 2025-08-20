@@ -43,7 +43,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict is not None
     assert str(type(belief_dict)) == "<class 'dict'>"
     assert belief_dict["belief_name"] == yao_belief.belief_name
-    assert belief_dict["coin_label"] == yao_belief.coin_label
+    assert belief_dict["moment_label"] == yao_belief.moment_label
     assert belief_dict["tally"] == yao_belief.tally
     assert belief_dict["tally"] == belief_tally
     assert belief_dict["fund_pool"] == yao_fund_pool
@@ -60,7 +60,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     x_planroot = yao_belief.planroot
     planroot_dict = belief_dict[planroot_str()]
     _kids = "_kids"
-    assert x_planroot.plan_label == yao_belief.coin_label
+    assert x_planroot.plan_label == yao_belief.moment_label
     assert planroot_dict["plan_label"] == x_planroot.plan_label
     assert planroot_dict["star"] == x_planroot.star
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
@@ -72,7 +72,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     sue_belief = beliefunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.add_party(party_title=run_str)
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
     sue_belief.edit_plan_attr(root_rope, laborunit=x_laborunit)
     root_plan = sue_belief.get_plan_obj(root_rope)
     x_gogo_want = 5
@@ -102,7 +102,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
     yao_partnerunit.add_membership(run_str)
     run_healerunit = healerunit_shop()
     run_healerunit.set_healer_name(x_healer_name=run_str)
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
     sue_belief.edit_plan_attr(root_rope, healerunit=run_healerunit)
 
     # WHEN
@@ -162,7 +162,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     yao_partnerunit = zia_belief.get_partner(yao_str)
     yao_partnerunit.add_membership(run_str)
     run_healerunit = healerunit_shop({run_str})
-    root_rope = to_rope(zia_belief.coin_label)
+    root_rope = to_rope(zia_belief.moment_label)
     zia_belief.edit_plan_attr(root_rope, healerunit=run_healerunit)
     zia_belief.edit_plan_attr(root_rope, problem_bool=True)
 
@@ -177,7 +177,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     belief_dict = get_dict_from_json(x_json)
 
     assert belief_dict["belief_name"] == zia_belief.belief_name
-    assert belief_dict["coin_label"] == zia_belief.coin_label
+    assert belief_dict["moment_label"] == zia_belief.moment_label
     assert belief_dict["tally"] == zia_belief.tally
     assert belief_dict["fund_pool"] == zia_belief.fund_pool
     assert belief_dict["fund_iota"] == zia_belief.fund_iota
@@ -242,7 +242,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     # THEN
     _kids = "_kids"
     assert belief_dict["belief_name"] == yao_belief.belief_name
-    assert belief_dict["coin_label"] == yao_belief.coin_label
+    assert belief_dict["moment_label"] == yao_belief.moment_label
     assert belief_dict["tally"] == yao_belief.tally
     assert belief_dict["max_tree_traverse"] == 2
     assert belief_dict["max_tree_traverse"] == yao_belief.max_tree_traverse
@@ -282,8 +282,8 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     zia_belief.set_max_tree_traverse(23)
-    tiger_coin_label = "tiger"
-    zia_belief.set_coin_label(tiger_coin_label)
+    tiger_moment_label = "tiger"
+    zia_belief.set_moment_label(tiger_moment_label)
     zia_fund_pool = 80000
     zia_belief.fund_pool = zia_fund_pool
     zia_fund_iota = 8
@@ -319,7 +319,7 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     xio_partnerunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
     run_laborunit.add_party(party_title=run_str)
-    root_rope = to_rope(zia_belief.coin_label)
+    root_rope = to_rope(zia_belief.moment_label)
     zia_belief.edit_plan_attr(root_rope, laborunit=run_laborunit)
     xio_laborunit = laborunit_shop()
     xio_laborunit.add_party(party_title=xio_str)
@@ -347,7 +347,7 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     assert str(type(json_belief)).find(".belief_main.BeliefUnit'>") > 0
     assert json_belief.belief_name is not None
     assert json_belief.belief_name == zia_belief.belief_name
-    assert json_belief.coin_label == zia_belief.coin_label
+    assert json_belief.moment_label == zia_belief.moment_label
     assert json_belief.fund_pool == zia_fund_pool
     assert json_belief.fund_pool == zia_belief.fund_pool
     assert json_belief.fund_iota == zia_fund_iota
@@ -409,7 +409,7 @@ def test_beliefunit_get_from_json_ReturnsPlanRoot():
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     zia_belief.set_max_tree_traverse(23)
-    # root_plan = zia_belief.get_plan_obj(zia_belief.get_plan_obj(zia_belief.coin_label))
+    # root_plan = zia_belief.get_plan_obj(zia_belief.get_plan_obj(zia_belief.moment_label))
     root_plan = zia_belief.planroot
     zia_gogo_want = 75
     zia_stop_want = 77
@@ -422,7 +422,7 @@ def test_beliefunit_get_from_json_ReturnsPlanRoot():
     json_belief = beliefunit_get_from_json(x_belief_json=x_json)
 
     # THEN
-    json_planroot = json_belief.get_plan_obj(to_rope(zia_belief.coin_label))
+    json_planroot = json_belief.get_plan_obj(to_rope(zia_belief.moment_label))
     assert json_planroot.gogo_want == zia_gogo_want
     assert json_planroot.stop_want == zia_stop_want
 
@@ -485,7 +485,7 @@ def test_beliefunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied()
     slash_str = "/"
     run_str = "runners"
     sue_belief = beliefunit_shop("Sue", knot=slash_str)
-    root_rope = to_rope(sue_belief.coin_label, slash_str)
+    root_rope = to_rope(sue_belief.moment_label, slash_str)
     hr_number_str = "hr_number"
     hr_number_rope = sue_belief.make_l1_rope(hr_number_str)
     sue_belief.add_plan(hr_number_rope)

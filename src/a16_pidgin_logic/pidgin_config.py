@@ -86,7 +86,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "denom": "int",
         "face_name": "NameTerm",
         "fact_context": "RopeTerm",
-        "coin_label": "LabelTerm",
+        "moment_label": "LabelTerm",
         "fact_state": "RopeTerm",
         "fact_upper": "float",
         "fact_lower": "float",
@@ -177,7 +177,7 @@ def get_pidginable_args() -> set:
         "awardee_title",
         "face_name",
         "fact_context",
-        "coin_label",
+        "moment_label",
         "fact_state",
         "group_title",
         "healer_name",
@@ -227,7 +227,7 @@ def get_pidgin_TitleTerm_args() -> set[str]:
 
 def get_pidgin_LabelTerm_args() -> set[str]:
     return {
-        "coin_label",
+        "moment_label",
         "hour_label",
         "month_label",
         "timeline_label",

@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     belief_partnerunit_str,
-    coin_label_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
@@ -44,7 +44,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         insert_into_clause = f"""INSERT INTO {beliefapartner_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -74,7 +74,7 @@ VALUES
         assert get_row_count(cursor, blrawar_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -118,7 +118,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -146,7 +146,7 @@ VALUES
         assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -189,7 +189,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -217,7 +217,7 @@ VALUES
         assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -260,7 +260,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
@@ -289,7 +289,7 @@ VALUES
         assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 3
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {coin_label_str()}
+, {moment_label_str()}
 , {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}

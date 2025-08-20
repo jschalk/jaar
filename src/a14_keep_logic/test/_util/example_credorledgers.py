@@ -2,17 +2,17 @@ from src.a01_term_logic.term import BeliefName, PartnerName
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger
-from src.a14_keep_logic.test._util.a14_env import get_module_temp_dir, temp_coin_label
+from src.a14_keep_logic.test._util.a14_env import get_module_temp_dir, temp_moment_label
 from src.a14_keep_logic.test._util.example_keep_beliefs import get_texas_rope
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(get_module_temp_dir(), temp_coin_label(), "Yao")
+    return hubunit_shop(get_module_temp_dir(), temp_moment_label(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    coin_mstr_dir = get_module_temp_dir()
-    return hubunit_shop(coin_mstr_dir, temp_coin_label(), "Yao", get_texas_rope())
+    moment_mstr_dir = get_module_temp_dir()
+    return hubunit_shop(moment_mstr_dir, temp_moment_label(), "Yao", get_texas_rope())
 
 
 def example_yao_credorledger() -> dict[str, float]:

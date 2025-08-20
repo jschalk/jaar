@@ -26,10 +26,10 @@ from src.a01_term_logic.rope import (
 )
 from src.a01_term_logic.term import (
     BeliefName,
-    CoinLabel,
     GroupTitle,
     HealerName,
     LabelTerm,
+    MomentLabel,
     PartnerName,
     RopeTerm,
 )
@@ -69,7 +69,7 @@ from src.a05_plan_logic.healer import HealerUnit
 from src.a05_plan_logic.plan import (
     PlanAttrHolder,
     PlanUnit,
-    get_default_coin_label,
+    get_default_moment_label,
     get_obj_from_plan_dict,
     planattrholder_shop,
     planunit_shop,
@@ -120,7 +120,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 
 @dataclass
 class BeliefUnit:
-    coin_label: CoinLabel = None
+    moment_label: MomentLabel = None
     belief_name: BeliefName = None
     partners: dict[PartnerName, PartnerUnit] = None
     planroot: PlanUnit = None
@@ -195,7 +195,7 @@ class BeliefUnit:
         )
 
     def make_l1_rope(self, l1_label: LabelTerm):
-        return self.make_rope(self.coin_label, l1_label)
+        return self.make_rope(self.moment_label, l1_label)
 
     def set_knot(self, new_knot: str):
         self.cash_out()
@@ -210,14 +210,14 @@ class BeliefUnit:
             for x_plan in self._plan_dict.values():
                 x_plan.set_knot(self.knot)
 
-    def set_coin_label(self, coin_label: str):
-        old_coin_label = copy_deepcopy(self.coin_label)
+    def set_moment_label(self, moment_label: str):
+        old_moment_label = copy_deepcopy(self.moment_label)
         self.cash_out()
         for plan_obj in self._plan_dict.values():
-            plan_obj.coin_label = coin_label
-        self.coin_label = coin_label
+            plan_obj.moment_label = moment_label
+        self.moment_label = moment_label
         self.edit_plan_label(
-            old_rope=to_rope(old_coin_label), new_plan_label=self.coin_label
+            old_rope=to_rope(old_moment_label), new_plan_label=self.moment_label
         )
         self.cash_out()
 
@@ -428,7 +428,7 @@ class BeliefUnit:
         return all_group_titles.difference(x_partnerunit_group_titles)
 
     def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
-        if self.coin_label == plan_rope:
+        if self.moment_label == plan_rope:
             raise InvalidBeliefException(
                 "its difficult to foresee a scenario where planroot is rangeroot"
             )
@@ -459,7 +459,7 @@ class BeliefUnit:
             self._create_plankid_if_empty(rope=fact_state)
 
         fact_fact_context_plan = self.get_plan_obj(fact_context)
-        x_planroot = self.get_plan_obj(to_rope(self.coin_label))
+        x_planroot = self.get_plan_obj(to_rope(self.moment_label))
         x_fact_lower = None
         if fact_upper is not None and fact_lower is None:
             x_fact_lower = x_planroot.factunits.get(fact_context).fact_lower
@@ -614,7 +614,7 @@ class BeliefUnit:
     ):
         self.set_plan(
             plan_kid=plan_kid,
-            parent_rope=self.coin_label,
+            parent_rope=self.moment_label,
             create_missing_plans=create_missing_plans,
             get_rid_of_missing_awardunits_awardee_titles=get_rid_of_missing_awardunits_awardee_titles,
             adoptees=adoptees,
@@ -645,8 +645,8 @@ class BeliefUnit:
             raise InvalidBeliefException(exception_str)
 
         plan_kid.knot = self.knot
-        if plan_kid.coin_label != self.coin_label:
-            plan_kid.coin_label = self.coin_label
+        if plan_kid.moment_label != self.moment_label:
+            plan_kid.moment_label = self.moment_label
         if plan_kid.fund_iota != self.fund_iota:
             plan_kid.fund_iota = self.fund_iota
         if not get_rid_of_missing_awardunits_awardee_titles:
@@ -1078,7 +1078,7 @@ class BeliefUnit:
         return [self.get_plan_obj(x_plan_rope) for x_plan_rope in plan_ropes]
 
     def _set_plan_dict(self):
-        plan_list = [self.get_plan_obj(to_rope(self.coin_label, self.knot))]
+        plan_list = [self.get_plan_obj(to_rope(self.moment_label, self.knot))]
         while plan_list != []:
             x_plan = plan_list.pop()
             x_plan.clear_gogo_calc_stop_calc()
@@ -1423,7 +1423,7 @@ class BeliefUnit:
             "respect_bit": self.respect_bit,
             "penny": self.penny,
             "belief_name": self.belief_name,
-            "coin_label": self.coin_label,
+            "moment_label": self.moment_label,
             "max_tree_traverse": self.max_tree_traverse,
             "knot": self.knot,
             "planroot": self.planroot.to_dict(),
@@ -1458,7 +1458,7 @@ class BeliefUnit:
 
 def beliefunit_shop(
     belief_name: BeliefName = None,
-    coin_label: CoinLabel = None,
+    moment_label: MomentLabel = None,
     knot: str = None,
     fund_pool: FundNum = None,
     fund_iota: FundIota = None,
@@ -1467,11 +1467,11 @@ def beliefunit_shop(
     tally: float = None,
 ) -> BeliefUnit:
     belief_name = "" if belief_name is None else belief_name
-    coin_label = get_default_coin_label() if coin_label is None else coin_label
+    moment_label = get_default_moment_label() if moment_label is None else moment_label
     x_belief = BeliefUnit(
         belief_name=belief_name,
         tally=get_1_if_None(tally),
-        coin_label=coin_label,
+        moment_label=moment_label,
         partners=get_empty_dict_if_None(),
         _groupunits={},
         knot=default_knot_if_None(knot),
@@ -1495,7 +1495,7 @@ def beliefunit_shop(
         root=True,
         _uid=1,
         _level=0,
-        coin_label=x_belief.coin_label,
+        moment_label=x_belief.moment_label,
         knot=x_belief.knot,
         fund_iota=x_belief.fund_iota,
         parent_rope="",
@@ -1516,8 +1516,8 @@ def get_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.set_max_tree_traverse(
         obj_from_belief_dict(belief_dict, "max_tree_traverse")
     )
-    x_belief.coin_label = obj_from_belief_dict(belief_dict, "coin_label")
-    x_belief.planroot.plan_label = obj_from_belief_dict(belief_dict, "coin_label")
+    x_belief.moment_label = obj_from_belief_dict(belief_dict, "moment_label")
+    x_belief.planroot.plan_label = obj_from_belief_dict(belief_dict, "moment_label")
     belief_knot = obj_from_belief_dict(belief_dict, "knot")
     x_belief.knot = default_knot_if_None(belief_knot)
     x_belief.fund_pool = validate_fund_pool(
@@ -1545,7 +1545,7 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
     planroot_dict = belief_dict.get("planroot")
     x_belief.planroot = planunit_shop(
         root=True,
-        plan_label=x_belief.coin_label,
+        plan_label=x_belief.moment_label,
         parent_rope="",
         _level=0,
         _uid=get_obj_from_plan_dict(planroot_dict, "_uid"),
@@ -1565,7 +1565,7 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
         _is_expanded=get_obj_from_plan_dict(planroot_dict, "_is_expanded"),
         knot=x_belief.knot,
-        coin_label=x_belief.coin_label,
+        moment_label=x_belief.moment_label,
         fund_iota=default_fund_iota_if_None(x_belief.fund_iota),
     )
     create_planroot_kids_from_dict(x_belief, planroot_dict)
@@ -1576,7 +1576,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
     for x_dict in get_obj_from_plan_dict(planroot_dict, "_kids").values():
-        x_dict[parent_rope_str] = x_belief.coin_label
+        x_dict[parent_rope_str] = x_belief.moment_label
         to_evaluate_plan_dicts.append(x_dict)
 
     while to_evaluate_plan_dicts != []:

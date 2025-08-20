@@ -5,8 +5,8 @@ from src.a04_reason_logic.test._util.a04_str import (
     _active_str,
     _chore_str,
     cases_str,
-    coin_label_str,
     factunits_str,
+    moment_label_str,
     reason_state_str,
     reasonunits_str,
 )

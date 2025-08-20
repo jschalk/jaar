@@ -136,17 +136,17 @@ def test_HubUnit_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bo
     display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_belief)
     sue_dallas_duty_path = create_keep_duty_path(
-        coin_mstr_dir=mstr_dir,
+        moment_mstr_dir=mstr_dir,
         belief_name=sue_str,
-        coin_label=a23_str,
+        moment_label=a23_str,
         keep_rope=dallas_rope,
         knot=None,
         duty_belief=sue_str,
     )
     sue_elpaso_duty_path = create_keep_duty_path(
-        coin_mstr_dir=mstr_dir,
+        moment_mstr_dir=mstr_dir,
         belief_name=sue_str,
-        coin_label=a23_str,
+        moment_label=a23_str,
         keep_rope=elpaso_rope,
         knot=None,
         duty_belief=sue_str,
@@ -192,16 +192,16 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_rope)
     elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_rope)
     dallas_treasury_db_path = create_treasury_db_path(
-        coin_mstr_dir=dallas_hubunit.coin_mstr_dir,
+        moment_mstr_dir=dallas_hubunit.moment_mstr_dir,
         belief_name=dallas_hubunit.belief_name,
-        coin_label=dallas_hubunit.coin_label,
+        moment_label=dallas_hubunit.moment_label,
         keep_rope=dallas_hubunit.keep_rope,
         knot=dallas_hubunit.knot,
     )
     elpaso_treasury_db_path = create_treasury_db_path(
-        coin_mstr_dir=elpaso_hubunit.coin_mstr_dir,
+        moment_mstr_dir=elpaso_hubunit.moment_mstr_dir,
         belief_name=elpaso_hubunit.belief_name,
-        coin_label=elpaso_hubunit.coin_label,
+        moment_label=elpaso_hubunit.moment_label,
         keep_rope=elpaso_hubunit.keep_rope,
         knot=elpaso_hubunit.knot,
     )

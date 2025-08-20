@@ -118,7 +118,7 @@ class BeliefDelta:
 
     def add_all_beliefatoms(self, after_belief: BeliefUnit):
         before_belief = beliefunit_shop(
-            after_belief.belief_name, after_belief.coin_label
+            after_belief.belief_name, after_belief.moment_label
         )
         self.add_all_different_beliefatoms(before_belief, after_belief)
 

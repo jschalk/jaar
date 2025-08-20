@@ -370,12 +370,12 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     }
 
     # WHEN
-    x_coin_label = "coin_label_x"
-    sue_tranbook = sue_brokerunit.get_tranbook(x_coin_label)
+    x_moment_label = "moment_label_x"
+    sue_tranbook = sue_brokerunit.get_tranbook(x_moment_label)
 
     # THEN
     assert sue_tranbook
-    assert sue_tranbook.coin_label == x_coin_label
+    assert sue_tranbook.moment_label == x_moment_label
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_bud_time)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_bud_time)
     assert sue_tranbook.get_amount(sue_str, zia_str, x7_bud_time) == zia_bud_partner_net

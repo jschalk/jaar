@@ -7,7 +7,7 @@
       "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "group_title": {},
       "belief_name": {}
     },
@@ -24,7 +24,7 @@
       "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
@@ -41,7 +41,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
@@ -58,7 +58,7 @@
       "event_int": {},
       "face_name": {},
       "fact_context": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
@@ -75,7 +75,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "healer_name": {},
       "belief_name": {}
     },
@@ -89,7 +89,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "party_title": {},
       "belief_name": {}
     },
@@ -105,7 +105,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {},
       "reason_state": {},
       "reason_context": {}
@@ -124,7 +124,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {},
       "reason_context": {}
     },
@@ -140,7 +140,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
@@ -164,7 +164,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
@@ -178,15 +178,15 @@
       "tally": {}
     }
   },
-  "coin_paybook": {
+  "moment_paybook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {},
       "tran_time": {}
     },
@@ -194,15 +194,15 @@
       "amount": {}
     }
   },
-  "coin_budunit": {
+  "moment_budunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "bud_time": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
@@ -210,68 +210,68 @@
       "quota": {}
     }
   },
-  "coin_timeline_hour": {
+  "moment_timeline_hour": {
     "allowed_crud": "insert_one_time",
     "build_order": 6,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "cumulative_minute": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {}
+      "moment_label": {}
     },
     "jvalues": {
       "hour_label": {}
     }
   },
-  "coin_timeline_month": {
+  "moment_timeline_month": {
     "allowed_crud": "insert_one_time",
     "build_order": 7,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "cumulative_day": {},
       "event_int": {},
       "face_name": {},
-      "coin_label": {}
+      "moment_label": {}
     },
     "jvalues": {
       "month_label": {}
     }
   },
-  "coin_timeline_weekday": {
+  "moment_timeline_weekday": {
     "allowed_crud": "insert_one_time",
     "build_order": 8,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "weekday_order": {}
     },
     "jvalues": {
       "weekday_label": {}
     }
   },
-  "coin_timeoffi": {
+  "moment_timeoffi": {
     "allowed_crud": "insert_multiple",
     "build_order": 8,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "coin_label": {},
+      "moment_label": {},
       "offi_time": {}
     },
     "jvalues": {}
   },
-  "coinunit": {
+  "momentunit": {
     "allowed_crud": "insert_one_time",
     "build_order": 5,
-    "idea_category": "coin",
+    "idea_category": "moment",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "coin_label": {}
+      "moment_label": {}
     },
     "jvalues": {
       "knot": {},

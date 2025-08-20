@@ -24,7 +24,7 @@ def test_BeliefUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():
 def test_BeliefUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
 
     # WHEN
     root_dict = {root_rope: -1}
@@ -39,7 +39,7 @@ def test_BeliefUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
 def test_BeliefUnit_get_relevant_ropes_SimpleReturnsOnlyAncestors():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
 
     # WHEN
     wk_str = "sem_jours"
@@ -68,7 +68,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     unim_str = "unimportant"
     unim_rope = sue_belief.make_l1_rope(unim_str)
     unim_plan = planunit_shop(unim_str)
-    sue_belief.set_plan(unim_plan, parent_rope=sue_belief.coin_label)
+    sue_belief.set_plan(unim_plan, parent_rope=sue_belief.moment_label)
 
     status_str = "cleaniness status"
     status_rope = sue_belief.make_rope(casa_rope, status_str)
@@ -85,7 +85,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     # THEN
     print(f"{relevant_ropes=}")
     assert len(relevant_ropes) == 4
-    root_rope = to_rope(sue_belief.coin_label)
+    root_rope = to_rope(sue_belief.moment_label)
     assert relevant_ropes == {root_rope, casa_rope, status_rope, floor_rope}
     assert unim_rope not in relevant_ropes
 
@@ -93,7 +93,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
 def test_BeliefUnit_get_relevant_ropes_ReturnsReasonUnitreason_contextAndDescendents():
     # ESTABLISH
     x_belief = get_mop_with_reason_beliefunit_example1()
-    root_rope = to_rope(x_belief.coin_label)
+    root_rope = to_rope(x_belief.moment_label)
     casa_str = "casa"
     casa_rope = x_belief.make_l1_rope(casa_str)
     floor_str = "mop floor"
@@ -145,7 +145,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnSimple():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(belief_name=yao_str)
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     min_range_x_str = "a_minute_range"
     min_range_x_rope = yao_belief.make_l1_rope(min_range_x_str)
     min_range_plan = planunit_shop(min_range_x_str, begin=0, close=2880)

@@ -1,6 +1,9 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import to_rope
-from src.a05_plan_logic.plan import get_default_coin_label as root_label, planunit_shop
+from src.a05_plan_logic.plan import (
+    get_default_moment_label as root_label,
+    planunit_shop,
+)
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.example_beliefs import (
     get_beliefunit_with_4_levels_and_2reasons_2facts,
@@ -24,7 +27,7 @@ def test_BeliefUnit_edit_plan_label_FailsWhenPlanDoesNotExist():
     assert str(excinfo.value) == f"Plan old_rope='{no_plan_rope}' does not exist"
 
 
-def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0PlanWhen_coin_label_isNone():
+def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0PlanWhen_moment_label_isNone():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(belief_name=yao_str)
@@ -36,11 +39,11 @@ def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0PlanWhen_coin_label_isNo
     yao_belief.set_l1_plan(planunit_shop(casa_str))
     yao_belief.set_plan(planunit_shop(swim_str), parent_rope=casa_rope)
     assert yao_belief.belief_name == yao_str
-    assert yao_belief.planroot.plan_label == yao_belief.coin_label
+    assert yao_belief.planroot.plan_label == yao_belief.moment_label
     casa_plan = yao_belief.get_plan_obj(casa_rope)
-    assert casa_plan.parent_rope == to_rope(yao_belief.coin_label)
+    assert casa_plan.parent_rope == to_rope(yao_belief.moment_label)
     swim_plan = yao_belief.get_plan_obj(swim_rope)
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     assert swim_plan.parent_rope == casa_rope
 
     # WHEN / THEN
@@ -49,14 +52,14 @@ def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0PlanWhen_coin_label_isNo
         yao_belief.edit_plan_label(old_rope=root_rope, new_plan_label=moon_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set a root Plan to string different than '{yao_belief.coin_label}'"
+        == f"Cannot set a root Plan to string different than '{yao_belief.moment_label}'"
     )
 
     assert yao_belief.planroot.plan_label != moon_str
-    assert yao_belief.planroot.plan_label == yao_belief.coin_label
+    assert yao_belief.planroot.plan_label == yao_belief.moment_label
 
 
-def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0When_coin_label_IsDifferent():
+def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0When_moment_label_IsDifferent():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(belief_name=yao_str)
@@ -67,11 +70,11 @@ def test_BeliefUnit_edit_plan_label_RaisesErrorForLevel0When_coin_label_IsDiffer
     yao_belief.set_l1_plan(planunit_shop(casa_str))
     yao_belief.set_plan(planunit_shop(swim_str), parent_rope=casa_rope)
     sun_str = "sun"
-    yao_belief.coin_label = sun_str
-    yao_belief.planroot.coin_label = sun_str
+    yao_belief.moment_label = sun_str
+    yao_belief.planroot.moment_label = sun_str
     assert yao_belief.belief_name == yao_str
-    assert yao_belief.coin_label == sun_str
-    assert yao_belief.planroot.coin_label == sun_str
+    assert yao_belief.moment_label == sun_str
+    assert yao_belief.planroot.moment_label == sun_str
     assert yao_belief.planroot.plan_label == root_label()
     casa_plan = yao_belief.get_plan_obj(casa_rope)
     assert casa_plan.parent_rope == to_rope(root_label())
@@ -234,7 +237,7 @@ def test_belief_set_belief_name_ModifiesBoth():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels_and_2reasons_2facts()
     assert sue_belief.belief_name == "Sue"
-    assert sue_belief.planroot.plan_label == sue_belief.coin_label
+    assert sue_belief.planroot.plan_label == sue_belief.moment_label
     # mid_plan_label1 = "Yao"
     # sue_belief.edit_plan_label(old_rope=old_plan_label, new_plan_label=mid_plan_label1)
     # assert sue_belief.belief_name == old_plan_label
@@ -246,7 +249,7 @@ def test_belief_set_belief_name_ModifiesBoth():
 
     # THEN
     assert sue_belief.belief_name == bob_str
-    assert sue_belief.planroot.plan_label == sue_belief.coin_label
+    assert sue_belief.planroot.plan_label == sue_belief.moment_label
 
 
 def test_belief_edit_plan_label_RaisesErrorIfknotIsInLabel():

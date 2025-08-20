@@ -2,15 +2,15 @@ from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import get_debtorledger
 from src.a14_keep_logic.riverrun import riverrun_shop
-from src.a14_keep_logic.test._util.a14_env import temp_coin_mstr_dir
+from src.a14_keep_logic.test._util.a14_env import temp_moment_mstr_dir
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverRun_set_partner_tax_yield_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_coin_mstr_dir = temp_coin_mstr_dir()
-    bob_hubunit = hubunit_shop(x_coin_mstr_dir, None, bob_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    bob_hubunit = hubunit_shop(x_moment_mstr_dir, None, bob_str)
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     assert bob_riverrun._tax_yields.get(yao_str) is None

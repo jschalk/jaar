@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a06_belief_logic.test._util.a06_str import coin_label_str
+from src.a06_belief_logic.test._util.a06_str import moment_label_str
 from src.a11_bud_logic.bud import (
     TranBook,
     TranUnit,
@@ -46,7 +46,7 @@ def test_TranBook_Exists():
 
     # THEN
     assert x_tranbook
-    assert not x_tranbook.coin_label
+    assert not x_tranbook.moment_label
     assert not x_tranbook.tranunits
     assert not x_tranbook._partners_net
 
@@ -65,7 +65,7 @@ def test_tranbook_shop_WithParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.coin_label == amy23_str
+    assert x_tranbook.moment_label == amy23_str
     assert x_tranbook.tranunits == x_tranunits
     assert x_tranbook._partners_net == {}
 
@@ -79,7 +79,7 @@ def test_tranbook_shop_WithoutParametersReturnsObj():
 
     # THEN
     assert x_tranbook
-    assert x_tranbook.coin_label == amy23_str
+    assert x_tranbook.moment_label == amy23_str
     assert x_tranbook.tranunits == {}
     assert x_tranbook._partners_net == {}
 
@@ -619,8 +619,8 @@ def test_TranBook_to_dict_ReturnsObj():
     # THEN
     tranunits_str = "tranunits"
     assert x_dict
-    assert coin_label_str() in x_dict.keys()
-    assert x_dict.get(coin_label_str()) == amy23_str
+    assert moment_label_str() in x_dict.keys()
+    assert x_dict.get(moment_label_str()) == amy23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)
@@ -662,7 +662,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario0():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.coin_label == amy23_str
+    assert generated_tranbook.moment_label == amy23_str
     assert generated_tranbook.tranunits == amy23_tranbook.tranunits
     assert generated_tranbook == amy23_tranbook
 
@@ -687,7 +687,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
     amy23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
 
     str_tran_time_amy23_dict = {
-        "coin_label": amy23_str,
+        "moment_label": amy23_str,
         "tranunits": {
             sue_str: {
                 yao_str: {
@@ -705,7 +705,7 @@ def test_get_tranbook_from_dict_ReturnsObj_Sccenario1():
 
     # THEN
     assert generated_tranbook
-    assert generated_tranbook.coin_label == amy23_str
+    assert generated_tranbook.moment_label == amy23_str
     assert generated_tranbook.tranunits == amy23_tranbook.tranunits
     assert generated_tranbook == amy23_tranbook
 

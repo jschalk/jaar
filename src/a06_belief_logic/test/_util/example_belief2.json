@@ -5421,7 +5421,7 @@
         },
         "star": 1
     },
-    "coin_label": "A",
+    "moment_label": "A",
     "star": 1,
     "max_tree_traverse": 20,
     "belief_name": "Bob",

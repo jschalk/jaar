@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.a01_term_logic.term import CoinLabel
-from src.a05_plan_logic.plan import get_default_coin_label
+from src.a01_term_logic.term import MomentLabel
+from src.a05_plan_logic.plan import get_default_moment_label
 from src.a06_belief_logic.test._util.a06_str import (
     belief_partnerunit_str,
     belief_plan_factunit_str,
@@ -25,22 +25,22 @@ from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
 
 
-def get_atom_example_planunit_sports(coin_label: CoinLabel = None) -> BeliefAtom:
-    if not coin_label:
-        coin_label = "amy23"
+def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:
+    if not moment_label:
+        moment_label = "amy23"
     sports_str = "sports"
     x_dimen = belief_planunit_str()
-    sports_rope = create_rope(coin_label, sports_str)
+    sports_rope = create_rope(moment_label, sports_str)
     insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
     insert_planunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
     return insert_planunit_beliefatom
 
 
-def get_atom_example_planunit_ball(coin_label: CoinLabel = None) -> BeliefAtom:
-    if not coin_label:
-        coin_label = "amy23"
+def get_atom_example_planunit_ball(moment_label: MomentLabel = None) -> BeliefAtom:
+    if not moment_label:
+        moment_label = "amy23"
     sports_str = "sports"
-    sports_rope = create_rope(coin_label, sports_str)
+    sports_rope = create_rope(moment_label, sports_str)
     ball_str = "basketball"
     x_dimen = belief_planunit_str()
     bball_rope = create_rope(sports_rope, ball_str)
@@ -49,11 +49,11 @@ def get_atom_example_planunit_ball(coin_label: CoinLabel = None) -> BeliefAtom:
     return insert_planunit_beliefatom
 
 
-def get_atom_example_planunit_knee(coin_label: CoinLabel = None) -> BeliefAtom:
-    if not coin_label:
-        coin_label = "amy23"
+def get_atom_example_planunit_knee(moment_label: MomentLabel = None) -> BeliefAtom:
+    if not moment_label:
+        moment_label = "amy23"
     sports_str = "sports"
-    sports_rope = create_rope(coin_label, sports_str)
+    sports_rope = create_rope(moment_label, sports_str)
     knee_str = "knee"
     knee_begin = 1
     knee_close = 71
@@ -68,15 +68,15 @@ def get_atom_example_planunit_knee(coin_label: CoinLabel = None) -> BeliefAtom:
     return insert_planunit_beliefatom
 
 
-def get_atom_example_factunit_knee(coin_label: CoinLabel = None) -> BeliefAtom:
-    if not coin_label:
-        coin_label = "amy23"
+def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAtom:
+    if not moment_label:
+        moment_label = "amy23"
     sports_str = "sports"
-    sports_rope = create_rope(coin_label, sports_str)
+    sports_rope = create_rope(moment_label, sports_str)
     ball_str = "basketball"
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
-    knee_rope = create_rope(coin_label, knee_str)
+    knee_rope = create_rope(moment_label, knee_str)
     knee_fact_lower = 7
     knee_fact_upper = 23
     x_dimen = belief_plan_factunit_str()
@@ -105,18 +105,18 @@ def get_beliefdelta_sue_example() -> BeliefDelta:
 
 
 def get_texas_rope() -> RopeTerm:
-    coin_label = get_default_coin_label()
+    moment_label = get_default_moment_label()
     nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"
-    return create_rope_from_labels([coin_label, nation_str, usa_str, texas_str])
+    return create_rope_from_labels([moment_label, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:
-    coin_label = get_default_coin_label()
+    moment_label = get_default_moment_label()
     return hubunit_shop(
         get_module_temp_dir(),
-        coin_label,
+        moment_label,
         belief_name="Sue",
         keep_rope=get_texas_rope(),
         # pipeline_duty_vision_str(),

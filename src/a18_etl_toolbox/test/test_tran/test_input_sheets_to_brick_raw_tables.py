@@ -7,11 +7,14 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a09_pack_logic.test._util.a09_str import (
-    coin_label_str,
     event_int_str,
     face_name_str,
+    moment_label_str,
 )
-from src.a15_coin_logic.test._util.a15_str import cumulative_minute_str, hour_label_str
+from src.a15_moment_logic.test._util.a15_str import (
+    cumulative_minute_str,
+    hour_label_str,
+)
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
@@ -40,7 +43,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        coin_label_str(),
+        moment_label_str(),
         hour_label_str(),
     ]
     a23_str = "amy23"
@@ -122,7 +125,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        coin_label_str(),
+        moment_label_str(),
         hour_label_str(),
     ]
     a23_str = "amy23"
@@ -133,7 +136,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        coin_label_str(),
+        moment_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, a23_str]
     incom_row2 = [event1, sue_str, minute_420, a23_str]
@@ -214,7 +217,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #         event_int_str(),
 #         face_name_str(),
 #         cumulative_minute_str(),
-#         coin_label_str(),
+#         moment_label_str(),
 #         hour_label_str(),
 #     ]
 #     a23_str = "amy23"

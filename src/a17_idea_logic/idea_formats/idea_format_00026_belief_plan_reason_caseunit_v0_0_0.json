@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "coin_label": {
+        "moment_label": {
             "otx_key": true
         },
         "belief_name": {
@@ -32,7 +32,7 @@
         }
     },
     "dimens": [
-        "coinunit",
+        "momentunit",
         "beliefunit",
         "belief_planunit",
         "belief_plan_reasonunit",

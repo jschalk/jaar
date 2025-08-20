@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     belief_partnerunit_str,
-    coin_label_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_name_str,
 )
@@ -37,12 +37,12 @@ def test_etl_voice_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
         belief_partnerunit_str(), "v", "agg", "put"
     )
     put_agg_csv = f"{put_agg_tablename}.csv"
-    x_coin_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_module_temp_dir()
     a23_bob_e3_dir = create_belief_event_dir_path(
-        x_coin_mstr_dir, amy23_str, bob_inx, event3
+        x_moment_mstr_dir, amy23_str, bob_inx, event3
     )
     a23_bob_e7_dir = create_belief_event_dir_path(
-        x_coin_mstr_dir, amy23_str, bob_inx, event7
+        x_moment_mstr_dir, amy23_str, bob_inx, event7
     )
     a23_e3_blrpern_put_path = create_path(a23_bob_e3_dir, put_agg_csv)
     a23_e7_blrpern_put_path = create_path(a23_bob_e7_dir, put_agg_csv)
@@ -51,7 +51,7 @@ def test_etl_voice_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
         cursor = belief_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{coin_label_str()},{belief_name_str()},{partner_name_str()},{partner_cred_points_str()})
+INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{partner_name_str()},{partner_cred_points_str()})
 VALUES
   ({event3},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_partner_cred_points5})
 , ({event7},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_partner_cred_points5})
@@ -64,7 +64,7 @@ VALUES
         assert os_path_exists(a23_e7_blrpern_put_path) is False
 
         # WHEN
-        etl_voice_agg_to_event_belief_csvs(cursor, x_coin_mstr_dir)
+        etl_voice_agg_to_event_belief_csvs(cursor, x_moment_mstr_dir)
 
         # THEN
         assert os_path_exists(a23_e3_blrpern_put_path)
@@ -73,10 +73,10 @@ VALUES
         e7_put_csv = open_file(a23_e7_blrpern_put_path)
         print(f"{e3_put_csv=}")
         print(f"{e7_put_csv=}")
-        expected_e3_put_csv = """event_int,face_name,coin_label,belief_name,partner_name,partner_cred_points,partner_debt_points
+        expected_e3_put_csv = """event_int,face_name,moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points
 3,Suzy,amy23,Bobby,Bobby,5.0,
 """
-        expected_e7_put_csv = """event_int,face_name,coin_label,belief_name,partner_name,partner_cred_points,partner_debt_points
+        expected_e7_put_csv = """event_int,face_name,moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points
 7,Suzy,amy23,Bobby,Bobby,5.0,
 7,Suzy,amy23,Bobby,Suzy,7.0,
 """

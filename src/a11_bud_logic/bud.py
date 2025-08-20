@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.term import BeliefName, CoinLabel, PartnerName
+from src.a01_term_logic.term import BeliefName, MomentLabel, PartnerName
 from src.a02_finance_logic.finance_config import FundNum, default_fund_pool
 from src.a07_timeline_logic.timeline_main import TimeLinePoint
 
@@ -43,7 +43,7 @@ def tranunit_shop(
 
 @dataclass
 class TranBook:
-    coin_label: CoinLabel = None
+    moment_label: MomentLabel = None
     tranunits: dict[BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]] = None
     _partners_net: dict[BeliefName, dict[PartnerName, FundNum]] = None
 
@@ -158,19 +158,19 @@ class TranBook:
     def to_dict(
         self,
     ) -> dict[
-        CoinLabel, dict[BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]]
+        MomentLabel, dict[BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]]
     ]:
-        return {"coin_label": self.coin_label, "tranunits": self.tranunits}
+        return {"moment_label": self.moment_label, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
-    x_coin_label: CoinLabel,
+    x_moment_label: MomentLabel,
     x_tranunits: dict[
         BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]
     ] = None,
 ):
     return TranBook(
-        coin_label=x_coin_label,
+        moment_label=x_moment_label,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _partners_net={},
     )
@@ -184,7 +184,7 @@ def get_tranbook_from_dict(x_dict: dict) -> TranBook:
             for x_tran_time, x_amount in x_tran_time_dict.items():
                 x_key_list = [x_belief_name, x_partner_name, int(x_tran_time)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
-    return tranbook_shop(x_dict.get("coin_label"), new_tranunits)
+    return tranbook_shop(x_dict.get("moment_label"), new_tranunits)
 
 
 @dataclass
@@ -298,8 +298,8 @@ class BrokerUnit:
     def get_bud_times(self) -> set[TimeLinePoint]:
         return set(self.buds.keys())
 
-    def get_tranbook(self, coin_label: CoinLabel) -> TranBook:
-        x_tranbook = tranbook_shop(coin_label)
+    def get_tranbook(self, moment_label: MomentLabel) -> TranBook:
+        x_tranbook = tranbook_shop(moment_label)
         for x_bud_time, x_bud in self.buds.items():
             for dst_partner_name, x_quota in x_bud._bud_partner_nets.items():
                 x_tranbook.add_tranunit(

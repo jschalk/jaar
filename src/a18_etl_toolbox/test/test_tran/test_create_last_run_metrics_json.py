@@ -2,10 +2,10 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_coin_logic.test._util.a15_str import (
-    coin_label_str,
+from src.a15_moment_logic.test._util.a15_str import (
     cumulative_minute_str,
     hour_label_str,
+    moment_label_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox.a18_path import create_last_run_metrics_path
@@ -28,8 +28,8 @@ def test_create_last_run_metrics_json_CreatesFile():
     event1 = 1
     event3 = 3
     event9 = 9
-    coin_mstr_dir = get_module_temp_dir()
-    last_run_metrics_path = create_last_run_metrics_path(coin_mstr_dir)
+    moment_mstr_dir = get_module_temp_dir()
+    last_run_metrics_path = create_last_run_metrics_path(moment_mstr_dir)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -51,7 +51,7 @@ VALUES ('{event3}');"""
         assert not os_path_exists(last_run_metrics_path)
 
         # WHEN
-        create_last_run_metrics_json(cursor, coin_mstr_dir)
+        create_last_run_metrics_json(cursor, moment_mstr_dir)
 
         # THEN
         assert os_path_exists(last_run_metrics_path)

@@ -2,7 +2,6 @@ from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
     BeliefName,
     CentralLabel,
-    CoinLabel,
     EporTerm,
     EventInt,
     FaceName,
@@ -10,6 +9,7 @@ from src.a01_term_logic.term import (
     HealerName,
     KnotTerm,
     LabelTerm,
+    MomentLabel,
     NameTerm,
     PartnerName,
     RopeTerm,
@@ -209,12 +209,12 @@ def test_EventInt_Exists():
     assert EventInt(12.4) == 12
 
 
-def test_CoinLabel_Exists():
+def test_MomentLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_coin = CoinLabel(empty_str)
+    x_moment = MomentLabel(empty_str)
     # THEN
-    assert x_coin == empty_str
-    doc_str = f"An CentralLabel for a Coin Coin. Cannot contain {knot_str()}"
-    assert inspect_getdoc(x_coin) == doc_str
+    assert x_moment == empty_str
+    doc_str = f"An CentralLabel for a Moment Moment. Cannot contain {knot_str()}"
+    assert inspect_getdoc(x_moment) == doc_str

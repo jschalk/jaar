@@ -5,8 +5,8 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file,
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import belief_plan_awardunit_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a12_hub_toolbox.a12_path import create_coin_json_path, create_gut_path
-from src.a15_coin_logic.coin_main import coinunit_shop
+from src.a12_hub_toolbox.a12_path import create_gut_path, create_moment_json_path
+from src.a15_moment_logic.moment_main import momentunit_shop
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     inx_name_str,
@@ -17,12 +17,12 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
-    add_coinunit_to_stance_csv_strs,
+    add_momentunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_sheet_names
 from src.a18_etl_toolbox.a18_path import (
-    create_coin_mstr_path,
+    create_moment_mstr_path,
     create_stance0001_path,
     create_world_db_path,
 )
@@ -42,7 +42,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoCoinUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -57,23 +57,23 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoCoinUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleCoinUnit_NoBeliefUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     world_dir = get_module_temp_dir()
-    coin_mstr_dir = create_coin_mstr_path(world_dir)
+    moment_mstr_dir = create_moment_mstr_path(world_dir)
     a23_str = "amy23"
-    a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
-    coin_json_path = create_coin_json_path(coin_mstr_dir, a23_str)
-    save_file(coin_json_path, None, a23_coin.get_json())
+    a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
+    moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
+    save_file(moment_json_path, None, a23_moment.get_json())
 
     # WHEN
     gen_stance_csv_strs = collect_stance_csv_strs(world_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
-    add_coinunit_to_stance_csv_strs(a23_coin, expected_stance_csv_strs, ",")
+    add_momentunit_to_stance_csv_strs(a23_moment, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
@@ -82,16 +82,16 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
 ):
     # ESTABLISH
     world_dir = get_module_temp_dir()
-    coin_mstr_dir = create_coin_mstr_path(world_dir)
+    moment_mstr_dir = create_moment_mstr_path(world_dir)
     bob_str = "Bob"
     a23_str = "amy23"
-    a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
-    coin_json_path = create_coin_json_path(coin_mstr_dir, a23_str)
-    save_file(coin_json_path, None, a23_coin.get_json())
+    a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
+    moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
+    save_file(moment_json_path, None, a23_moment.get_json())
     # create belief gut file
     bob_gut = beliefunit_shop(bob_str, a23_str)
     bob_gut.add_partnerunit("Yao", 44, 55)
-    a23_bob_gut_path = create_gut_path(coin_mstr_dir, a23_str, bob_str)
+    a23_bob_gut_path = create_gut_path(moment_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
 
     # WHEN
@@ -99,7 +99,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
-    add_coinunit_to_stance_csv_strs(a23_coin, expected_stance_csv_strs, ",")
+    add_momentunit_to_stance_csv_strs(a23_moment, expected_stance_csv_strs, ",")
     add_beliefunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
@@ -188,7 +188,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
     assert br00045_csv == expected_br00045_csv
 
 
-def test_create_stance0001_file_CreatesFile_Scenario0_NoCoinUnits(
+def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

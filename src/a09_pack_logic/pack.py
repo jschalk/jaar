@@ -8,8 +8,8 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.a01_term_logic.term import BeliefName, CoinLabel, FaceName
-from src.a05_plan_logic.plan import get_default_coin_label
+from src.a01_term_logic.term import BeliefName, FaceName, MomentLabel
+from src.a05_plan_logic.plan import get_default_moment_label
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a08_belief_atom_logic.atom_main import (
     BeliefAtom,
@@ -37,7 +37,7 @@ def get_init_pack_id_if_None(x_pack_id: int = None) -> int:
 @dataclass
 class PackUnit:
     face_name: FaceName = None
-    coin_label: CoinLabel = None
+    moment_label: MomentLabel = None
     belief_name: BeliefName = None
     _pack_id: int = None
     _beliefdelta: BeliefDelta = None
@@ -45,7 +45,7 @@ class PackUnit:
     _packs_dir: str = None
     _atoms_dir: str = None
     event_int: int = None
-    """Represents a per coin_label/event_int BeliefDelta for a belief_name"""
+    """Represents a per moment_label/event_int BeliefDelta for a belief_name"""
 
     def set_face(self, x_face_name: FaceName):
         self.face_name = x_face_name
@@ -68,7 +68,7 @@ class PackUnit:
     def get_step_dict(self) -> dict[str, any]:
         return {
             "face_name": self.face_name,
-            "coin_label": self.coin_label,
+            "moment_label": self.moment_label,
             "belief_name": self.belief_name,
             "event_int": self.event_int,
             "delta": self._beliefdelta.get_ordered_beliefatoms(self._delta_start),
@@ -151,11 +151,11 @@ class PackUnit:
 
     def get_edited_belief(self, before_belief: BeliefUnit) -> BeliefUnit:
         if (
-            self.coin_label != before_belief.coin_label
+            self.moment_label != before_belief.moment_label
             or self.belief_name != before_belief.belief_name
         ):
             raise pack_belief_conflict_Exception(
-                f"pack belief conflict {self.coin_label} != {before_belief.coin_label} or {self.belief_name} != {before_belief.belief_name}"
+                f"pack belief conflict {self.moment_label} != {before_belief.moment_label} or {self.belief_name} != {before_belief.belief_name}"
             )
         return self._beliefdelta.get_edited_belief(before_belief)
 
@@ -166,7 +166,7 @@ class PackUnit:
 def packunit_shop(
     belief_name: BeliefName,
     face_name: FaceName = None,
-    coin_label: CoinLabel = None,
+    moment_label: MomentLabel = None,
     _pack_id: int = None,
     _beliefdelta: BeliefDelta = None,
     _delta_start: int = None,
@@ -175,11 +175,11 @@ def packunit_shop(
     event_int: int = None,
 ) -> PackUnit:
     _beliefdelta = beliefdelta_shop() if _beliefdelta is None else _beliefdelta
-    coin_label = get_default_coin_label() if coin_label is None else coin_label
+    moment_label = get_default_moment_label() if moment_label is None else moment_label
     x_packunit = PackUnit(
         face_name=face_name,
         belief_name=belief_name,
-        coin_label=coin_label,
+        moment_label=moment_label,
         _pack_id=get_init_pack_id_if_None(_pack_id),
         _beliefdelta=_beliefdelta,
         _packs_dir=_packs_dir,
@@ -198,13 +198,13 @@ def create_packunit_from_files(
     pack_filename = get_json_filename(pack_id)
     pack_dict = open_json(packs_dir, pack_filename)
     x_belief_name = pack_dict.get("belief_name")
-    x_coin_label = pack_dict.get("coin_label")
+    x_moment_label = pack_dict.get("moment_label")
     x_face_name = pack_dict.get("face_name")
     delta_atom_numbers_list = pack_dict.get("delta_atom_numbers")
     x_packunit = packunit_shop(
         face_name=x_face_name,
         belief_name=x_belief_name,
-        coin_label=x_coin_label,
+        moment_label=x_moment_label,
         _pack_id=pack_id,
         _atoms_dir=atoms_dir,
     )
@@ -221,7 +221,7 @@ def get_packunit_from_json(x_json: str) -> PackUnit:
     x_packunit = packunit_shop(
         face_name=pack_dict.get("face_name"),
         belief_name=pack_dict.get("belief_name"),
-        coin_label=pack_dict.get("coin_label"),
+        moment_label=pack_dict.get("moment_label"),
         _pack_id=pack_dict.get("pack_id"),
         _atoms_dir=pack_dict.get("atoms_dir"),
         event_int=x_event_int,

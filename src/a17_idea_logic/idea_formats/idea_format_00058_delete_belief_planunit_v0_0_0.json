@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "coin_label": {
+        "moment_label": {
             "otx_key": true
         },
         "plan_rope_ERASE": {
@@ -20,6 +20,6 @@
     "dimens": [
         "belief_planunit",
         "beliefunit",
-        "coinunit"
+        "momentunit"
     ]
 }

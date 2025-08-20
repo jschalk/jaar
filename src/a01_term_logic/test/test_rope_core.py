@@ -288,9 +288,9 @@ def test_rope_get_root_label_from_rope_ReturnsLabelTerm():
 def test_rope_get_parent_rope_ReturnsObj_Scenario0():
     # ESTABLISH
     x_s = default_knot_if_None()
-    root_coin_rope = f"{x_s}{get_default_central_label()}{x_s}"
+    root_moment_rope = f"{x_s}{get_default_central_label()}{x_s}"
     casa_str = "casa"
-    casa_rope = f"{root_coin_rope}{casa_str}{x_s}"
+    casa_rope = f"{root_moment_rope}{casa_str}{x_s}"
     bloomers_str = "bloomers"
     bloomers_rope = f"{casa_rope}{bloomers_str}{x_s}"
     roses_str = "roses"
@@ -298,7 +298,7 @@ def test_rope_get_parent_rope_ReturnsObj_Scenario0():
 
     # WHEN / THENs
     assert get_parent_rope(root_rope(), x_s) == ""
-    assert get_parent_rope(casa_rope, x_s) == root_coin_rope
+    assert get_parent_rope(casa_rope, x_s) == root_moment_rope
     assert get_parent_rope(bloomers_rope, x_s) == casa_rope
     assert get_parent_rope(roses_rope, x_s) == bloomers_rope
 
@@ -306,17 +306,17 @@ def test_rope_get_parent_rope_ReturnsObj_Scenario0():
 def test_rope_get_parent_rope_ReturnsObj_Scenario1():
     # ESTABLISH
     x_s = "/"
-    root_coin_rope = f"{x_s}{get_default_central_label()}{x_s}"
+    root_moment_rope = f"{x_s}{get_default_central_label()}{x_s}"
     casa_str = "casa"
-    casa_rope = f"{root_coin_rope}{casa_str}{x_s}"
+    casa_rope = f"{root_moment_rope}{casa_str}{x_s}"
     bloomers_str = "bloomers"
     bloomers_rope = f"{casa_rope}{bloomers_str}{x_s}"
     roses_str = "roses"
     roses_rope = f"{bloomers_rope}{roses_str}{x_s}"
 
     # WHEN / THENs
-    assert get_parent_rope(root_coin_rope, x_s) == ""
-    assert get_parent_rope(casa_rope, x_s) == root_coin_rope
+    assert get_parent_rope(root_moment_rope, x_s) == ""
+    assert get_parent_rope(casa_rope, x_s) == root_moment_rope
     assert get_parent_rope(bloomers_rope, x_s) == casa_rope
     assert get_parent_rope(roses_rope, x_s) == bloomers_rope
 
@@ -387,9 +387,9 @@ def test_rope_get_ancestor_ropes_ReturnsObj_Scenario0_default_knot():
 def test_rope_get_ancestor_ropes_ReturnsObj_Scenario1_nondefault_knot():
     # ESTABLISH
     x_s = "/"
-    root_coin_rope = f"{x_s}amy23{x_s}"
+    root_moment_rope = f"{x_s}amy23{x_s}"
     nation_str = "nation"
-    nation_rope = f"{root_coin_rope}{nation_str}{x_s}"
+    nation_rope = f"{root_moment_rope}{nation_str}{x_s}"
     usa_str = "USA"
     usa_rope = f"{nation_rope}{usa_str}{x_s}"
     texas_str = "Texas"
@@ -406,7 +406,7 @@ def test_rope_get_ancestor_ropes_ReturnsObj_Scenario1_nondefault_knot():
         texas_rope,
         usa_rope,
         nation_rope,
-        root_coin_rope,
+        root_moment_rope,
     ]
     assert texas_anc_ropes == texas_ancestor_ropes
 

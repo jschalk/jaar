@@ -25,7 +25,7 @@ def test_display_plantree_Scenario0(graphics_bool):
     a_belief = get_beliefunit_with_4_levels()
     # a_belief = beliefunit_v001()
     a_belief.cash_out()
-    print(f"Belief {a_belief.coin_label}: Labels ({len(a_belief._plan_dict)})")
+    print(f"Belief {a_belief.moment_label}: Labels ({len(a_belief._plan_dict)})")
 
     # WHEN / THEN
     x_fig = display_plantree(a_belief, graphics_bool)
@@ -41,7 +41,7 @@ def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
     a_belief = get_beliefunit_laundry_example1()
     # a_belief = beliefunit_v001()
     a_belief.cash_out()
-    print(f"Belief {a_belief.coin_label}: Labels ({len(a_belief._plan_dict)})")
+    print(f"Belief {a_belief.moment_label}: Labels ({len(a_belief._plan_dict)})")
 
     # WHEN / THEN
     display_plantree(a_belief, mode="Chore", graphics_bool=graphics_bool)

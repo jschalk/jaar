@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "coin_label": {
+        "moment_label": {
             "otx_key": true
         },
         "plan_rope": {
@@ -22,7 +22,7 @@
     "idea_number": "br00052",
     "dimens": [
         "beliefunit",
-        "coinunit",
+        "momentunit",
         "belief_planunit",
         "belief_plan_awardunit"
     ]

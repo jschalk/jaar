@@ -16,7 +16,7 @@ from src.a00_data_toolbox.file_toolbox import (
 from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
     BeliefName,
-    CoinLabel,
+    MomentLabel,
     RopeTerm,
     default_knot_if_None,
 )
@@ -77,8 +77,8 @@ class get_keep_ropesException(Exception):
 @dataclass
 class HubUnit:
     belief_name: BeliefName = None
-    coin_mstr_dir: str = None
-    coin_label: str = None
+    moment_mstr_dir: str = None
+    moment_label: str = None
     keep_rope: RopeTerm = None
     knot: str = None
     fund_pool: float = None
@@ -91,17 +91,17 @@ class HubUnit:
     _packs_dir: str = None
 
     def set_dir_attrs(self):
-        mstr_dir = self.coin_mstr_dir
-        coin_label = self.coin_label
+        mstr_dir = self.moment_mstr_dir
+        moment_label = self.moment_label
         belief_name = self.belief_name
-        self._keeps_dir = create_keeps_dir_path(mstr_dir, coin_label, belief_name)
-        self._atoms_dir = create_atoms_dir_path(mstr_dir, coin_label, belief_name)
-        self._packs_dir = create_packs_dir_path(mstr_dir, coin_label, belief_name)
+        self._keeps_dir = create_keeps_dir_path(mstr_dir, moment_label, belief_name)
+        self._atoms_dir = create_atoms_dir_path(mstr_dir, moment_label, belief_name)
+        self._packs_dir = create_packs_dir_path(mstr_dir, moment_label, belief_name)
 
     def default_gut_belief(self) -> BeliefUnit:
         x_beliefunit = beliefunit_shop(
             belief_name=self.belief_name,
-            coin_label=self.coin_label,
+            moment_label=self.moment_label,
             knot=self.knot,
             fund_pool=self.fund_pool,
             fund_iota=self.fund_iota,
@@ -146,7 +146,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_belief_from_atom_files(self) -> BeliefUnit:
-        x_belief = beliefunit_shop(self.belief_name, self.coin_label)
+        x_belief = beliefunit_shop(self.belief_name, self.moment_label)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -273,7 +273,7 @@ class HubUnit:
 
     def _create_gut_from_packs(self):
         x_belief = self._merge_any_packs(self.default_gut_belief())
-        save_gut_file(self.coin_mstr_dir, x_belief)
+        save_gut_file(self.moment_mstr_dir, x_belief)
 
     def _create_initial_pack_and_gut_files(self):
         self._create_initial_pack_files_from_default()
@@ -284,14 +284,14 @@ class HubUnit:
         x_packunit._beliefdelta.add_all_different_beliefatoms(
             before_belief=self.default_gut_belief(),
             after_belief=open_gut_file(
-                self.coin_mstr_dir, self.coin_label, self.belief_name
+                self.moment_mstr_dir, self.moment_label, self.belief_name
             ),
         )
         x_packunit.save_files()
 
     def initialize_pack_gut_files(self):
         x_gut_file_exists = gut_file_exists(
-            self.coin_mstr_dir, self.coin_label, self.belief_name
+            self.moment_mstr_dir, self.moment_label, self.belief_name
         )
         pack_file_exists = self.pack_file_exists(init_pack_id())
         if x_gut_file_exists is False and pack_file_exists is False:
@@ -303,10 +303,10 @@ class HubUnit:
 
     def append_packs_to_gut_file(self) -> BeliefUnit:
         gut_belief = open_gut_file(
-            self.coin_mstr_dir, self.coin_label, self.belief_name
+            self.moment_mstr_dir, self.moment_label, self.belief_name
         )
         gut_belief = self._merge_any_packs(gut_belief)
-        save_gut_file(self.coin_mstr_dir, gut_belief)
+        save_gut_file(self.moment_mstr_dir, gut_belief)
         return gut_belief
 
     # keep management
@@ -322,18 +322,18 @@ class HubUnit:
 
     def visions_path(self) -> str:
         return create_keep_visions_path(
-            coin_mstr_dir=self.coin_mstr_dir,
+            moment_mstr_dir=self.moment_mstr_dir,
             belief_name=self.belief_name,
-            coin_label=self.coin_label,
+            moment_label=self.moment_label,
             keep_rope=self.keep_rope,
             knot=self.knot,
         )
 
     def grades_path(self) -> str:
         return create_keep_grades_path(
-            coin_mstr_dir=self.coin_mstr_dir,
+            moment_mstr_dir=self.moment_mstr_dir,
             belief_name=self.belief_name,
-            coin_label=self.coin_label,
+            moment_label=self.moment_label,
             keep_rope=self.keep_rope,
             knot=self.knot,
         )
@@ -365,15 +365,15 @@ class HubUnit:
         return perspective_belief
 
     def get_dw_perspective_belief(self, speaker_id: BeliefName) -> BeliefUnit:
-        speaker_job = open_job_file(self.coin_mstr_dir, self.coin_label, speaker_id)
+        speaker_job = open_job_file(self.moment_mstr_dir, self.moment_label, speaker_id)
         return self.get_perspective_belief(speaker_job)
 
     def rj_speaker_belief(
         self, healer_name: BeliefName, speaker_id: BeliefName
     ) -> BeliefUnit:
         speaker_hubunit = hubunit_shop(
-            coin_mstr_dir=self.coin_mstr_dir,
-            coin_label=self.coin_label,
+            moment_mstr_dir=self.moment_mstr_dir,
+            moment_label=self.moment_label,
             belief_name=healer_name,
             keep_rope=self.keep_rope,
             knot=self.knot,
@@ -389,7 +389,7 @@ class HubUnit:
 
     def get_keep_ropes(self) -> set[RopeTerm]:
         x_gut_belief = open_gut_file(
-            self.coin_mstr_dir, self.coin_label, self.belief_name
+            self.moment_mstr_dir, self.moment_label, self.belief_name
         )
         x_gut_belief.cash_out()
         if x_gut_belief._keeps_justified is False:
@@ -405,13 +405,13 @@ class HubUnit:
         return get_empty_set_if_None(keep_ropes)
 
     def save_all_gut_dutys(self):
-        gut = open_gut_file(self.coin_mstr_dir, self.coin_label, self.belief_name)
+        gut = open_gut_file(self.moment_mstr_dir, self.moment_label, self.belief_name)
         for x_keep_rope in self.get_keep_ropes():
             self.keep_rope = x_keep_rope
             save_duty_belief(
-                coin_mstr_dir=self.coin_mstr_dir,
+                moment_mstr_dir=self.moment_mstr_dir,
                 belief_name=self.belief_name,
-                coin_label=self.coin_label,
+                moment_label=self.moment_label,
                 keep_rope=self.keep_rope,
                 knot=self.knot,
                 duty_belief=gut,
@@ -421,9 +421,9 @@ class HubUnit:
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():
             create_treasury_db_file(
-                self.coin_mstr_dir,
+                self.moment_mstr_dir,
                 self.belief_name,
-                self.coin_label,
+                self.moment_label,
                 x_keep_rope,
                 self.knot,
             )
@@ -431,8 +431,8 @@ class HubUnit:
 
 
 def hubunit_shop(
-    coin_mstr_dir: str,
-    coin_label: CoinLabel,
+    moment_mstr_dir: str,
+    moment_label: MomentLabel,
     belief_name: BeliefName = None,
     keep_rope: RopeTerm = None,
     knot: str = None,
@@ -443,8 +443,8 @@ def hubunit_shop(
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     x_hubunit = HubUnit(
-        coin_mstr_dir=coin_mstr_dir,
-        coin_label=coin_label,
+        moment_mstr_dir=moment_mstr_dir,
+        moment_label=moment_label,
         belief_name=validate_labelterm(belief_name, knot),
         keep_rope=keep_rope,
         knot=default_knot_if_None(knot),

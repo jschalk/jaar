@@ -4,8 +4,8 @@ from src.a00_data_toolbox.file_toolbox import count_files, save_json
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     belief_planunit_str,
-    coin_label_str,
     gogo_want_str,
+    moment_label_str,
     plan_rope_str,
 )
 from src.a08_belief_atom_logic.atom_config import get_atom_config_args
@@ -24,7 +24,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get("idea_category") == "belief":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {coin_label_str(), belief_name_str()}
+            attributes_set = {moment_label_str(), belief_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -47,7 +47,7 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     assert belief_planunit_dict.get(dimens_str()) == [belief_planunit_str()]
     assert belief_planunit_dict.get(attributes_str())
     belief_planunit_attributes = belief_planunit_dict.get(attributes_str())
-    assert coin_label_str() in belief_planunit_attributes
+    assert moment_label_str() in belief_planunit_attributes
     assert belief_name_str() in belief_planunit_attributes
     assert plan_rope_str() in belief_planunit_attributes
     assert gogo_want_str() in belief_planunit_attributes

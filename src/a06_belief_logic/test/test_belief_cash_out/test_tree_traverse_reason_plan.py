@@ -432,7 +432,7 @@ def test_BeliefUnit_ReasonUnits_set_casePlanWithBeginCloseSetsCasereason_lower_r
     rus_war = "rus_war"
     rus_war_rope = sue_belief.make_rope(ziet_rope, rus_war)
     sue_belief.set_plan(
-        planunit_shop(ziet, begin=100, close=2000), sue_belief.coin_label
+        planunit_shop(ziet, begin=100, close=2000), sue_belief.moment_label
     )
     sue_belief.set_plan(planunit_shop(rus_war, begin=22, close=34), ziet_rope)
 
@@ -523,7 +523,7 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_An
 
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
-    sue_belief.set_plan(planunit_shop(run_str), sue_belief.coin_label)
+    sue_belief.set_plan(planunit_shop(run_str), sue_belief.moment_label)
     sue_belief.cash_out()  # set tree metrics
     run_plan = sue_belief.get_plan_obj(run_rope)
     assert len(run_plan.reasonunits) == 0
@@ -604,7 +604,7 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     # 5.2. plan(...,casa).active = False
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
-    sue_belief.set_plan(planunit_shop(run_str), sue_belief.coin_label)
+    sue_belief.set_plan(planunit_shop(run_str), sue_belief.moment_label)
     sue_belief.edit_plan_attr(
         run_rope,
         reason_context=casa_rope,

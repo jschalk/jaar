@@ -1,7 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
-    coin_label_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
@@ -9,7 +9,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     plan_rope_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_coin_logic.test._util.a15_str import amount_str
+from src.a15_moment_logic.test._util.a15_str import amount_str
 from src.a17_idea_logic.idea_config import get_idea_config_dict
 from src.a17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
@@ -25,7 +25,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
         idea_cols = [
             event_int_str(),
             face_name_str(),
-            coin_label_str(),
+            moment_label_str(),
             plan_rope_str(),
             party_title_str(),
             belief_name_str(),
@@ -55,12 +55,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
 
         # THEN
         columns_str = (
-            "event_int, face_name, coin_label, belief_name, plan_rope, party_title"
+            "event_int, face_name, moment_label, belief_name, plan_rope, party_title"
         )
         expected_sqlstr = f"""INSERT INTO {blrlabo_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND coin_label IS NOT NULL AND belief_name IS NOT NULL AND plan_rope IS NOT NULL AND party_title IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND plan_rope IS NOT NULL AND party_title IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -77,7 +77,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_partnerunit()
         idea_cols = [
             event_int_str(),
             face_name_str(),
-            coin_label_str(),
+            moment_label_str(),
             plan_rope_str(),
             party_title_str(),
             belief_name_str(),
@@ -105,11 +105,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_partnerunit()
         )
 
         # THEN
-        columns_str = "event_int, face_name, coin_label, belief_name, partner_name, partner_cred_points, partner_debt_points"
+        columns_str = "event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points, partner_debt_points"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND coin_label IS NOT NULL AND belief_name IS NOT NULL AND partner_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND partner_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -127,7 +127,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_partnerunit()
         idea_cols = [
             event_int_str(),
             face_name_str(),
-            coin_label_str(),
+            moment_label_str(),
             plan_rope_str(),
             party_title_str(),
             belief_name_str(),
@@ -154,11 +154,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_partnerunit()
         )
 
         # THEN
-        columns_str = "event_int, face_name, coin_label, belief_name, partner_name, partner_cred_points"
+        columns_str = "event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND coin_label IS NOT NULL AND belief_name IS NOT NULL AND partner_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND partner_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

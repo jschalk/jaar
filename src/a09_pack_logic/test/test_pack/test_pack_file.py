@@ -4,7 +4,7 @@ from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.a09_pack_logic.test._util.a09_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as coins_dir,
+    get_module_temp_dir as moments_dir,
 )
 from src.a09_pack_logic.test._util.a09_str import belief_name_str, face_name_str
 from src.a09_pack_logic.test._util.example_atoms import (
@@ -16,8 +16,8 @@ from src.a09_pack_logic.test._util.example_atoms import (
 
 def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_atoms_dir = create_path(sue_belief_dir, "atoms")
@@ -46,8 +46,8 @@ def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_atoms_dir = create_path(sue_belief_dir, "atoms")
@@ -73,8 +73,8 @@ def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_atoms_dir = create_path(sue_belief_dir, "atoms")
@@ -100,8 +100,8 @@ def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_pack_id = 2
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
@@ -136,8 +136,8 @@ def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_packs_dir = create_path(sue_belief_dir, "packs")
@@ -162,8 +162,8 @@ def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_save_files_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_atoms_dir = create_path(sue_belief_dir, "atoms")
@@ -199,8 +199,8 @@ def test_PackUnit_save_files_SavesFiles(env_dir_setup_cleanup):
 
 def test_PackUnit_create_beliefdelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_atoms_dir = create_path(sue_belief_dir, "atoms")
@@ -232,8 +232,8 @@ def test_PackUnit_create_beliefdelta_from_atom_files_SetsAttr(env_dir_setup_clea
 
 def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_coin_dir = create_path(coins_dir(), "amy23")
-    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_belief_dir = create_path(x_beliefs_dir, sue_str)
     sue_atoms_dir = create_path(sue_belief_dir, "atoms")

@@ -12,7 +12,7 @@
         "face_name": {
             "otx_key": true
         },
-        "coin_label": {
+        "moment_label": {
             "otx_key": true
         },
         "fund_iota": {
@@ -39,7 +39,7 @@
     },
     "idea_number": "br00029",
     "dimens": [
-        "coinunit",
+        "momentunit",
         "beliefunit"
     ]
 }

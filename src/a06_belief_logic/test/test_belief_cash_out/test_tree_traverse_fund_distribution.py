@@ -639,7 +639,7 @@ def test_BeliefUnit_cash_out_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_f
     x_belief.cash_out()
 
     # THEN
-    x_planroot = x_belief.get_plan_obj(to_rope(x_belief.coin_label))
+    x_planroot = x_belief.get_plan_obj(to_rope(x_belief.moment_label))
     with pytest_raises(Exception) as excinfo:
         x_planroot.awardunits[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -702,7 +702,7 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
 
     # THEN
     print(f"{plan_dict.keys()=}")
-    plan_bob = plan_dict.get(to_rope(sue_belief.coin_label))
+    plan_bob = plan_dict.get(to_rope(sue_belief.moment_label))
     assert len(plan_bob._awardheirs) == 3
 
     bheir_yao = plan_bob._awardheirs.get(yao_str)
@@ -750,7 +750,7 @@ def test_BeliefUnit_cash_out_SetsGroupLinkBeliefCredAndDebt():
     sue_awardunit = awardunit_shop(sue_str, 20, take_force=40)
     bob_awardunit = awardunit_shop(bob_str, 10, take_force=5)
     zia_awardunit = awardunit_shop(zia_str, 10, take_force=5)
-    root_rope = to_rope(yao_belief.coin_label)
+    root_rope = to_rope(yao_belief.moment_label)
     yao_belief.edit_plan_attr(root_rope, awardunit=sue_awardunit)
     yao_belief.edit_plan_attr(root_rope, awardunit=bob_awardunit)
     yao_belief.edit_plan_attr(root_rope, awardunit=zia_awardunit)

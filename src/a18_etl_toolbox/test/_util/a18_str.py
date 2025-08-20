@@ -19,25 +19,25 @@ def brick_valid_str() -> str:
     return "brick_valid"
 
 
-def coin_event_time_agg_str() -> Literal["coin_event_time_agg"]:
-    return "coin_event_time_agg"
-
-
-def coin_ote1_agg_str() -> Literal["coin_ote1_agg"]:
-    return "coin_ote1_agg"
-
-
-def coin_partner_nets_str() -> Literal["coin_partner_nets"]:
-    """Table name for the account net amounts."""
-    return "coin_partner_nets"
-
-
 def events_brick_agg_str() -> Literal["events_brick_agg"]:
     return "events_brick_agg"
 
 
 def events_brick_valid_str() -> Literal["events_brick_valid"]:
     return "events_brick_valid"
+
+
+def moment_event_time_agg_str() -> Literal["moment_event_time_agg"]:
+    return "moment_event_time_agg"
+
+
+def moment_ote1_agg_str() -> Literal["moment_ote1_agg"]:
+    return "moment_ote1_agg"
+
+
+def moment_partner_nets_str() -> Literal["moment_partner_nets"]:
+    """Table name for the account net amounts."""
+    return "moment_partner_nets"
 
 
 def sound_agg_str() -> str:

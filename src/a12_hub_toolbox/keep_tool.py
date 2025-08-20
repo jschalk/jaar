@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_json, set_dir
-from src.a01_term_logic.term import BeliefName, CoinLabel, LabelTerm
+from src.a01_term_logic.term import BeliefName, LabelTerm, MomentLabel
 from src.a06_belief_logic.belief_main import (
     BeliefUnit,
     get_from_json as beliefunit_get_from_json,
@@ -14,16 +14,16 @@ from src.a12_hub_toolbox.a12_path import (
 
 
 def create_keep_path_dir_if_missing(
-    coin_mstr_dir: str,
+    moment_mstr_dir: str,
     belief_name: BeliefName,
-    coin_label: CoinLabel,
+    moment_label: MomentLabel,
     keep_rope: LabelTerm,
     knot: str,
 ):
     keep_path = create_keep_rope_path(
-        coin_mstr_dir,
+        moment_mstr_dir,
         belief_name,
-        coin_label,
+        moment_label,
         keep_rope,
         knot,
     )
@@ -31,16 +31,16 @@ def create_keep_path_dir_if_missing(
 
 
 def treasury_db_file_exists(
-    coin_mstr_dir: str,
+    moment_mstr_dir: str,
     belief_name: BeliefName,
-    coin_label: CoinLabel,
+    moment_label: MomentLabel,
     keep_rope: LabelTerm,
     knot: str,
 ) -> bool:
     treasury_db_path = create_treasury_db_path(
-        coin_mstr_dir=coin_mstr_dir,
+        moment_mstr_dir=moment_mstr_dir,
         belief_name=belief_name,
-        coin_label=coin_label,
+        moment_label=moment_label,
         keep_rope=keep_rope,
         knot=knot,
     )
@@ -48,23 +48,23 @@ def treasury_db_file_exists(
 
 
 def create_treasury_db_file(
-    coin_mstr_dir: str,
+    moment_mstr_dir: str,
     belief_name: BeliefName,
-    coin_label: CoinLabel,
+    moment_label: MomentLabel,
     keep_rope: LabelTerm,
     knot: str,
 ) -> None:
     create_keep_path_dir_if_missing(
-        coin_mstr_dir=coin_mstr_dir,
+        moment_mstr_dir=moment_mstr_dir,
         belief_name=belief_name,
-        coin_label=coin_label,
+        moment_label=moment_label,
         keep_rope=keep_rope,
         knot=knot,
     )
     treasury_db_path = create_treasury_db_path(
-        coin_mstr_dir=coin_mstr_dir,
+        moment_mstr_dir=moment_mstr_dir,
         belief_name=belief_name,
-        coin_label=coin_label,
+        moment_label=moment_label,
         keep_rope=keep_rope,
         knot=knot,
     )
@@ -73,17 +73,17 @@ def create_treasury_db_file(
 
 
 def save_duty_belief(
-    coin_mstr_dir: str,
+    moment_mstr_dir: str,
     belief_name: BeliefName,
-    coin_label: CoinLabel,
+    moment_label: MomentLabel,
     keep_rope: LabelTerm,
     knot: str,
     duty_belief: BeliefUnit,
 ) -> None:
     duty_path = create_keep_duty_path(
-        coin_mstr_dir=coin_mstr_dir,
+        moment_mstr_dir=moment_mstr_dir,
         belief_name=belief_name,
-        coin_label=coin_label,
+        moment_label=moment_label,
         keep_rope=keep_rope,
         knot=knot,
         duty_belief=duty_belief.belief_name,
@@ -92,17 +92,17 @@ def save_duty_belief(
 
 
 def get_duty_belief(
-    coin_mstr_dir: str,
+    moment_mstr_dir: str,
     belief_name: BeliefName,
-    coin_label: CoinLabel,
+    moment_label: MomentLabel,
     keep_rope: LabelTerm,
     knot: str,
     duty_belief_name: BeliefName,
 ) -> BeliefUnit:
     keep_duty_path = create_keep_duty_path(
-        coin_mstr_dir=coin_mstr_dir,
+        moment_mstr_dir=moment_mstr_dir,
         belief_name=belief_name,
-        coin_label=coin_label,
+        moment_label=moment_label,
         keep_rope=keep_rope,
         knot=knot,
         duty_belief=duty_belief_name,
