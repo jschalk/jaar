@@ -91,6 +91,8 @@ class MomentUnit:
     pipeline7: packs->job (could be 5 of 6)
     """
 
+    # TODO extraction pipelines into standalone functions
+
     moment_label: MomentLabel = None
     moment_mstr_dir: str = None
     timeline: TimeLineUnit = None
