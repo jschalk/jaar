@@ -3,6 +3,7 @@ from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.a01_term_logic.rope import create_rope, create_rope_from_labels
+from src.a06_believer_logic.test._util.a06_str import planroot_str
 from src.a09_pack_logic.test._util.a09_str import (
     belief_label_str,
     believer_name_str,
@@ -163,7 +164,6 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
     dallas_str = "dallas"
     elpaso_str = "el paso"
     kern_str = "kern"
-    planroot = "planroot"
     texas_rope = create_rope_from_labels([peru_str, texas_str])
     dallas_rope = create_rope_from_labels([peru_str, texas_str, dallas_str])
     elpaso_rope = create_rope_from_labels([peru_str, texas_str, elpaso_str])
@@ -828,7 +828,7 @@ def test_create_keeps_dir_path_HasDocString():
 def test_create_keep_rope_path_HasDocString() -> None:
     # ESTABLISH
     level1_label_str = "level1_label"
-    level1_rope = create_rope("planroot", level1_label_str)
+    level1_rope = create_rope(planroot_str(), level1_label_str)
     doc_str = create_keep_rope_path(
         belief_mstr_dir="belief_mstr_dir",
         believer_name=believer_name_str(),

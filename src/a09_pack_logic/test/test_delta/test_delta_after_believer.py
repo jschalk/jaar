@@ -1,5 +1,5 @@
 from src.a01_term_logic.rope import get_parent_rope, get_tail_label
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
@@ -8,9 +8,9 @@ from src.a06_believer_logic.test._util.a06_str import (
     begin_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -473,7 +473,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_planun
     assert after_sue_believerunit.get_plan_obj(ball_rope).task
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_awardlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_awardunit():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
@@ -503,16 +503,16 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_a
     disc_rope = before_sue_believerunit.make_rope(sports_rope, disc_str)
     before_sue_believerunit.set_plan(planunit_shop(ball_str), sports_rope)
     before_sue_believerunit.set_plan(planunit_shop(disc_str), sports_rope)
-    before_sue_believerunit.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    before_sue_believerunit.edit_plan_attr(ball_rope, awardlink=awardlink_shop(fly_str))
-    before_sue_believerunit.edit_plan_attr(disc_rope, awardlink=awardlink_shop(run_str))
-    before_sue_believerunit.edit_plan_attr(disc_rope, awardlink=awardlink_shop(fly_str))
-    assert len(before_sue_believerunit.get_plan_obj(ball_rope).awardlinks) == 2
-    assert len(before_sue_believerunit.get_plan_obj(disc_rope).awardlinks) == 2
+    before_sue_believerunit.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
+    before_sue_believerunit.edit_plan_attr(ball_rope, awardunit=awardunit_shop(fly_str))
+    before_sue_believerunit.edit_plan_attr(disc_rope, awardunit=awardunit_shop(run_str))
+    before_sue_believerunit.edit_plan_attr(disc_rope, awardunit=awardunit_shop(fly_str))
+    assert len(before_sue_believerunit.get_plan_obj(ball_rope).awardunits) == 2
+    assert len(before_sue_believerunit.get_plan_obj(disc_rope).awardunits) == 2
 
     # WHEN
     delete_disc_believeratom = believeratom_shop(
-        believer_plan_awardlink_str(), DELETE_str()
+        believer_plan_awardunit_str(), DELETE_str()
     )
     delete_disc_believeratom.set_jkey(plan_rope_str(), disc_rope)
     delete_disc_believeratom.set_jkey(awardee_title_str(), fly_str)
@@ -524,11 +524,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_a
     )
 
     # THEN
-    assert len(after_sue_believerunit.get_plan_obj(ball_rope).awardlinks) == 2
-    assert len(after_sue_believerunit.get_plan_obj(disc_rope).awardlinks) == 1
+    assert len(after_sue_believerunit.get_plan_obj(ball_rope).awardunits) == 2
+    assert len(after_sue_believerunit.get_plan_obj(disc_rope).awardunits) == 1
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_awardlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_awardunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)
@@ -545,18 +545,18 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_a
     ball_str = "basketball"
     ball_rope = before_sue_believerunit.make_rope(sports_rope, ball_str)
     before_sue_believerunit.set_plan(planunit_shop(ball_str), sports_rope)
-    before_sue_believerunit.edit_plan_attr(ball_rope, awardlink=awardlink_shop(run_str))
-    run_awardlink = before_sue_believerunit.get_plan_obj(ball_rope).awardlinks.get(
+    before_sue_believerunit.edit_plan_attr(ball_rope, awardunit=awardunit_shop(run_str))
+    run_awardunit = before_sue_believerunit.get_plan_obj(ball_rope).awardunits.get(
         run_str
     )
-    assert run_awardlink.give_force == 1
-    assert run_awardlink.take_force == 1
+    assert run_awardunit.give_force == 1
+    assert run_awardunit.take_force == 1
 
     # WHEN
     x_give_force = 55
     x_take_force = 66
     update_disc_believeratom = believeratom_shop(
-        believer_plan_awardlink_str(), UPDATE_str()
+        believer_plan_awardunit_str(), UPDATE_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_believeratom.set_jkey(awardee_title_str(), run_str)
@@ -568,13 +568,13 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_update_plan_a
     after_sue_au = sue_believerdelta.get_edited_believer(before_sue_believerunit)
 
     # THEN
-    run_awardlink = after_sue_au.get_plan_obj(ball_rope).awardlinks.get(run_str)
-    print(f"{run_awardlink.give_force=}")
-    assert run_awardlink.give_force == x_give_force
-    assert run_awardlink.take_force == x_take_force
+    run_awardunit = after_sue_au.get_plan_obj(ball_rope).awardunits.get(run_str)
+    print(f"{run_awardunit.give_force=}")
+    assert run_awardunit.give_force == x_give_force
+    assert run_awardunit.take_force == x_take_force
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_awardlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_awardunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_believerunit = believerunit_shop(sue_str)
@@ -591,13 +591,13 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_a
     ball_rope = before_sue_believerunit.make_rope(sports_rope, ball_str)
     before_sue_believerunit.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_plan = before_sue_believerunit.get_plan_obj(ball_rope)
-    assert before_ball_plan.awardlinks.get(run_str) is None
+    assert before_ball_plan.awardunits.get(run_str) is None
 
     # WHEN
     x_give_force = 55
     x_take_force = 66
     update_disc_believeratom = believeratom_shop(
-        believer_plan_awardlink_str(), INSERT_str()
+        believer_plan_awardunit_str(), INSERT_str()
     )
     update_disc_believeratom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_believeratom.set_jkey(awardee_title_str(), run_str)
@@ -610,7 +610,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_a
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_plan.awardlinks.get(run_str) is not None
+    assert after_ball_plan.awardunits.get(run_str) is not None
 
 
 def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_factunit():
@@ -1109,7 +1109,7 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_p
     assert after_ball_planunit.laborunit._partys == {}
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_healerlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_healerunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1121,11 +1121,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_h
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    assert before_ball_planunit.healerlink._healer_names == set()
-    assert not before_ball_planunit.healerlink.healer_name_exists(yao_str)
+    assert before_ball_planunit.healerunit._healer_names == set()
+    assert not before_ball_planunit.healerunit.healer_name_exists(yao_str)
 
     # WHEN
-    x_believeratom = believeratom_shop(believer_plan_healerlink_str(), INSERT_str())
+    x_believeratom = believeratom_shop(believer_plan_healerunit_str(), INSERT_str())
     x_believeratom.set_jkey(plan_rope_str(), ball_rope)
     x_believeratom.set_jkey(healer_name_str(), yao_str)
     print(f"{x_believeratom=}")
@@ -1135,11 +1135,11 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_insert_plan_h
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.healerlink._healer_names != set()
-    assert after_ball_planunit.healerlink.healer_name_exists(yao_str)
+    assert after_ball_planunit.healerunit._healer_names != set()
+    assert after_ball_planunit.healerunit.healer_name_exists(yao_str)
 
 
-def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_healerlink():
+def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_healerunit():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_au = believerunit_shop(sue_str)
@@ -1151,12 +1151,12 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_h
     ball_rope = before_sue_au.make_rope(sports_rope, ball_str)
     before_sue_au.set_plan(planunit_shop(ball_str), sports_rope)
     before_ball_planunit = before_sue_au.get_plan_obj(ball_rope)
-    before_ball_planunit.healerlink.set_healer_name(yao_str)
-    assert before_ball_planunit.healerlink._healer_names != set()
-    assert before_ball_planunit.healerlink.healer_name_exists(yao_str)
+    before_ball_planunit.healerunit.set_healer_name(yao_str)
+    assert before_ball_planunit.healerunit._healer_names != set()
+    assert before_ball_planunit.healerunit.healer_name_exists(yao_str)
 
     # WHEN
-    x_believeratom = believeratom_shop(believer_plan_healerlink_str(), DELETE_str())
+    x_believeratom = believeratom_shop(believer_plan_healerunit_str(), DELETE_str())
     x_believeratom.set_jkey(plan_rope_str(), ball_rope)
     x_believeratom.set_jkey(healer_name_str(), yao_str)
     sue_believerdelta = believerdelta_shop()
@@ -1166,8 +1166,8 @@ def test_BelieverDelta_get_edited_believer_ReturnsObj_BelieverUnit_delete_plan_h
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
-    assert after_ball_planunit.healerlink._healer_names == set()
-    assert not after_ball_planunit.healerlink.healer_name_exists(yao_str)
+    assert after_ball_planunit.healerunit._healer_names == set()
+    assert not after_ball_planunit.healerunit.healer_name_exists(yao_str)
 
 
 def test_BelieverDelta_get_believerdelta_example1_ContainsBelieverAtoms():

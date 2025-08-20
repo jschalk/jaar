@@ -97,7 +97,7 @@ class AwardCore:
 
 
 @dataclass
-class AwardLink(AwardCore):
+class AwardUnit(AwardCore):
     give_force: float = 1.0
     take_force: float = 1.0
 
@@ -109,31 +109,31 @@ class AwardLink(AwardCore):
         }
 
 
-def awardlinks_get_from_json(awardlinks_json: str) -> dict[GroupTitle, AwardLink]:
-    awardlinks_dict = get_dict_from_json(awardlinks_json)
-    return awardlinks_get_from_dict(awardlinks_dict)
+def awardunits_get_from_json(awardunits_json: str) -> dict[GroupTitle, AwardUnit]:
+    awardunits_dict = get_dict_from_json(awardunits_json)
+    return awardunits_get_from_dict(awardunits_dict)
 
 
-def awardlinks_get_from_dict(x_dict: dict) -> dict[GroupTitle, AwardLink]:
-    awardlinks = {}
-    for awardlinks_dict in x_dict.values():
-        x_group = awardlink_shop(
-            awardee_title=awardlinks_dict["awardee_title"],
-            give_force=awardlinks_dict["give_force"],
-            take_force=awardlinks_dict["take_force"],
+def awardunits_get_from_dict(x_dict: dict) -> dict[GroupTitle, AwardUnit]:
+    awardunits = {}
+    for awardunits_dict in x_dict.values():
+        x_group = awardunit_shop(
+            awardee_title=awardunits_dict["awardee_title"],
+            give_force=awardunits_dict["give_force"],
+            take_force=awardunits_dict["take_force"],
         )
-        awardlinks[x_group.awardee_title] = x_group
-    return awardlinks
+        awardunits[x_group.awardee_title] = x_group
+    return awardunits
 
 
-def awardlink_shop(
+def awardunit_shop(
     awardee_title: GroupTitle,
     give_force: float = None,
     take_force: float = None,
-) -> AwardLink:
+) -> AwardUnit:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardLink(awardee_title, give_force, take_force=take_force)
+    return AwardUnit(awardee_title, give_force, take_force=take_force)
 
 
 @dataclass

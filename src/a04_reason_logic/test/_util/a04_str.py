@@ -34,6 +34,10 @@ def fact_upper_str() -> str:
     return "fact_upper"
 
 
+def factunits_str() -> str:
+    return "factunits"
+
+
 def reason_active_requisite_str() -> str:
     return "reason_active_requisite"
 
@@ -56,3 +60,7 @@ def reason_state_str() -> str:
 
 def reason_upper_str() -> str:
     return "reason_upper"
+
+
+def reasonunits_str() -> str:
+    return "reasonunits"

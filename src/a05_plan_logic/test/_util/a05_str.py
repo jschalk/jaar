@@ -1,9 +1,12 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
+from src.a03_group_logic.test._util.a03_str import awardunits_str
 from src.a04_reason_logic.test._util.a04_str import (
     _active_str,
     _chore_str,
     belief_label_str,
+    factunits_str,
+    reasonunits_str,
 )
 
 
@@ -51,8 +54,8 @@ def _gogo_calc_str() -> str:
     return "_gogo_calc"
 
 
-def _healerlink_ratio_str() -> str:
-    return "_healerlink_ratio"
+def _healerunit_ratio_str() -> str:
+    return "_healerunit_ratio"
 
 
 def _is_expanded_str() -> str:
@@ -111,8 +114,8 @@ def healer_name_str() -> str:
     return "healer_name"
 
 
-def healerlink_str() -> str:
-    return "healerlink"
+def healerunit_str() -> str:
+    return "healerunit"
 
 
 def morph_str() -> str:

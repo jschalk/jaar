@@ -11,9 +11,9 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -71,12 +71,12 @@ BELIEVER_PRIME_TABLENAMES = {
     f"{believer_partner_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
     f"{believer_partnerunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
     f"{believer_partnerunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
-    f"{believer_plan_awardlink_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
-    f"{believer_plan_awardlink_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
+    f"{believer_plan_awardunit_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
+    f"{believer_plan_awardunit_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
     f"{believer_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
     f"{believer_plan_factunit_str()}_sound_put_raw": "BLRFACT_PUT_RAW",
-    f"{believer_plan_healerlink_str()}_sound_put_agg": "BLRHEAL_PUT_AGG",
-    f"{believer_plan_healerlink_str()}_sound_put_raw": "BLRHEAL_PUT_RAW",
+    f"{believer_plan_healerunit_str()}_sound_put_agg": "BLRHEAL_PUT_AGG",
+    f"{believer_plan_healerunit_str()}_sound_put_raw": "BLRHEAL_PUT_RAW",
     f"{believer_plan_reason_caseunit_str()}_sound_put_agg": "BLRPREM_PUT_AGG",
     f"{believer_plan_reason_caseunit_str()}_sound_put_raw": "BLRPREM_PUT_RAW",
     f"{believer_plan_reasonunit_str()}_sound_put_agg": "BLRREAS_PUT_AGG",
@@ -91,12 +91,12 @@ BELIEVER_PRIME_TABLENAMES = {
     f"{believer_partner_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
     f"{believer_partnerunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
     f"{believer_partnerunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
-    f"{believer_plan_awardlink_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
-    f"{believer_plan_awardlink_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
+    f"{believer_plan_awardunit_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
+    f"{believer_plan_awardunit_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
     f"{believer_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
     f"{believer_plan_factunit_str()}_sound_del_raw": "BLRFACT_DEL_RAW",
-    f"{believer_plan_healerlink_str()}_sound_del_agg": "BLRHEAL_DEL_AGG",
-    f"{believer_plan_healerlink_str()}_sound_del_raw": "BLRHEAL_DEL_RAW",
+    f"{believer_plan_healerunit_str()}_sound_del_agg": "BLRHEAL_DEL_AGG",
+    f"{believer_plan_healerunit_str()}_sound_del_raw": "BLRHEAL_DEL_RAW",
     f"{believer_plan_reason_caseunit_str()}_sound_del_agg": "BLRPREM_DEL_AGG",
     f"{believer_plan_reason_caseunit_str()}_sound_del_raw": "BLRPREM_DEL_RAW",
     f"{believer_plan_reasonunit_str()}_sound_del_agg": "BLRREAS_DEL_AGG",
@@ -699,7 +699,7 @@ WHERE inconsistency_rows.belief_label = belief_timeline_hour_s_raw.belief_label
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BelieverDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = believer_plan_awardlink_str()
+    dimen = believer_plan_awardunit_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -727,20 +727,20 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
 SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title
-FROM believer_plan_awardlink_s_put_raw
+FROM believer_plan_awardunit_s_put_raw
 GROUP BY event_int, face_name, belief_label, believer_name, plan_rope, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
-UPDATE believer_plan_awardlink_s_put_raw
+UPDATE believer_plan_awardunit_s_put_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = believer_plan_awardlink_s_put_raw.event_int
-    AND inconsistency_rows.face_name = believer_plan_awardlink_s_put_raw.face_name
-    AND inconsistency_rows.belief_label = believer_plan_awardlink_s_put_raw.belief_label
-    AND inconsistency_rows.believer_name = believer_plan_awardlink_s_put_raw.believer_name
-    AND inconsistency_rows.plan_rope = believer_plan_awardlink_s_put_raw.plan_rope
-    AND inconsistency_rows.awardee_title = believer_plan_awardlink_s_put_raw.awardee_title
+WHERE inconsistency_rows.event_int = believer_plan_awardunit_s_put_raw.event_int
+    AND inconsistency_rows.face_name = believer_plan_awardunit_s_put_raw.face_name
+    AND inconsistency_rows.belief_label = believer_plan_awardunit_s_put_raw.belief_label
+    AND inconsistency_rows.believer_name = believer_plan_awardunit_s_put_raw.believer_name
+    AND inconsistency_rows.plan_rope = believer_plan_awardunit_s_put_raw.plan_rope
+    AND inconsistency_rows.awardee_title = believer_plan_awardunit_s_put_raw.awardee_title
 ;
 """
         print(update_sqlstr)
@@ -833,7 +833,7 @@ GROUP BY event_int, face_name, belief_label, cumulative_minute
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BelieverDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = believer_plan_awardlink_str()
+    dimen = believer_plan_awardunit_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -858,9 +858,9 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BelieverDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO believer_plan_awardlink_s_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force)
+        static_example_put_sqlstr = """INSERT INTO believer_plan_awardunit_s_put_agg (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, give_force, take_force)
 SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
-FROM believer_plan_awardlink_s_put_raw
+FROM believer_plan_awardunit_s_put_raw
 WHERE error_message IS NULL
 GROUP BY event_int, face_name, belief_label, believer_name, plan_rope, awardee_title
 ;
@@ -889,9 +889,9 @@ GROUP BY event_int, face_name, belief_label, believer_name, plan_rope, awardee_t
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO believer_plan_awardlink_s_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE)
+        static_example_del_sqlstr = """INSERT INTO believer_plan_awardunit_s_del_agg (event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE)
 SELECT event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE
-FROM believer_plan_awardlink_s_del_raw
+FROM believer_plan_awardunit_s_del_raw
 GROUP BY event_int, face_name, belief_label, believer_name, plan_rope, awardee_title_ERASE
 ;
 """

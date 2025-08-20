@@ -34,7 +34,7 @@ For jaar all data must have *event_int*, *face_name*, *belief_label*. These are 
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
-When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that contains believers Emmanuel and Dean and a single transaction of 7000 OxboxDean coins from Emmanuel to Dean. Here's the status metrics:
+When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that contains believers Emmanuel and Dean and a single transaction of 7000 OxboxDean from Emmanuel to Dean. Here's the status metrics:
 | belief_label | believer_name | belief_fund_amount | belief_fund_rank | belief_tasks |
 |--------------|---------------|--------------------|------------------|--------------|
 |  OxboxDean   |    Emmanuel   |       -7000        |         2        |       0      |
@@ -112,7 +112,7 @@ BelieverUnit PlanUnit objects
 
 BelieverUnit PlanUnit hierarchical structure
 
-BelieverUnit PlanUnit AwardLink objects
+BelieverUnit PlanUnit AwardUnit objects
 
 BelieverUnit PlanUnit AwardLine objects
 

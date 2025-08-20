@@ -7,7 +7,7 @@ from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a03_group_logic.labor import LaborHeir
 from src.a03_group_logic.partner import PartnerUnit
 from src.a04_reason_logic.reason_plan import CaseUnit, FactHeir, ReasonHeir
-from src.a05_plan_logic.plan import HealerLink, PlanUnit
+from src.a05_plan_logic.plan import HealerUnit, PlanUnit
 from src.a06_believer_logic.believer_main import BelieverUnit
 from src.a11_bud_logic.bud import BeliefLabel
 
@@ -130,7 +130,7 @@ def create_blrawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     take_force = values_dict.get("take_force")
     _fund_give = values_dict.get("_fund_give")
     _fund_take = values_dict.get("_fund_take")
-    return f"""INSERT INTO believer_plan_awardlink_job (belief_label, believer_name, plan_rope, awardee_title, give_force, take_force, _fund_give, _fund_take)
+    return f"""INSERT INTO believer_plan_awardunit_job (belief_label, believer_name, plan_rope, awardee_title, give_force, take_force, _fund_give, _fund_take)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -172,7 +172,7 @@ def create_blrheal_metrics_insert_sqlstr(values_dict: dict[str,]):
     believer_name = values_dict.get("believer_name")
     rope = values_dict.get("plan_rope")
     healer_name = values_dict.get("healer_name")
-    return f"""INSERT INTO believer_plan_healerlink_job (belief_label, believer_name, plan_rope, healer_name)
+    return f"""INSERT INTO believer_plan_healerunit_job (belief_label, believer_name, plan_rope, healer_name)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -281,13 +281,13 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     _level = values_dict.get("_level")
     _range_evaluated = values_dict.get("_range_evaluated")
     _descendant_task_count = values_dict.get("_descendant_task_count")
-    _healerlink_ratio = values_dict.get("_healerlink_ratio")
+    _healerunit_ratio = values_dict.get("_healerunit_ratio")
     _all_partner_cred = values_dict.get("_all_partner_cred")
     _all_partner_debt = values_dict.get("_all_partner_debt")
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerlink_ratio, _all_partner_cred, _all_partner_debt)
+    return f"""INSERT INTO believer_planunit_job (belief_label, believer_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerunit_ratio, _all_partner_cred, _all_partner_debt)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -314,7 +314,7 @@ VALUES (
 , {sqlite_obj_str(_level, "INTEGER")}
 , {sqlite_obj_str(_range_evaluated, "INTEGER")}
 , {sqlite_obj_str(_descendant_task_count, "INTEGER")}
-, {sqlite_obj_str(_healerlink_ratio, real_str)}
+, {sqlite_obj_str(_healerunit_ratio, real_str)}
 , {sqlite_obj_str(_all_partner_cred, real_str)}
 , {sqlite_obj_str(_all_partner_debt, real_str)}
 )
@@ -331,7 +331,7 @@ def create_believerunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     _keeps_justified = values_dict.get("_keeps_justified")
     _offtrack_fund = values_dict.get("_offtrack_fund")
     _rational = values_dict.get("_rational")
-    _sum_healerlink_share = values_dict.get("_sum_healerlink_share")
+    _sum_healerunit_share = values_dict.get("_sum_healerunit_share")
     _tree_traverse_count = values_dict.get("_tree_traverse_count")
     credor_respect = values_dict.get("credor_respect")
     debtor_respect = values_dict.get("debtor_respect")
@@ -342,7 +342,7 @@ def create_believerunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     respect_bit = values_dict.get("respect_bit")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO believerunit_job (belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerlink_share, _keeps_buildable, _tree_traverse_count)
+    return f"""INSERT INTO believerunit_job (belief_label, believer_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerunit_share, _keeps_buildable, _tree_traverse_count)
 VALUES (
   {sqlite_obj_str(belief_label, "TEXT")}
 , {sqlite_obj_str(believer_name, "TEXT")}
@@ -357,7 +357,7 @@ VALUES (
 , {sqlite_obj_str(_rational, integer_str)}
 , {sqlite_obj_str(_keeps_justified, integer_str)}
 , {sqlite_obj_str(_offtrack_fund, real_str)}
-, {sqlite_obj_str(_sum_healerlink_share, real_str)}
+, {sqlite_obj_str(_sum_healerunit_share, real_str)}
 , {sqlite_obj_str(_keeps_buildable, integer_str)}
 , {sqlite_obj_str(_tree_traverse_count, integer_str)}
 )
@@ -442,7 +442,7 @@ def insert_job_blrfact(
 def insert_job_blrheal(
     cursor: sqlite3_Cursor,
     x_objkeysholder: ObjKeysHolder,
-    x_healer: HealerLink,
+    x_healer: HealerUnit,
 ):
     x_dict = {
         "belief_label": x_objkeysholder.belief_label,
@@ -525,10 +525,10 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_believer: BelieverUnit):
     insert_job_blrunit(cursor, x_objkeysholder, job_believer)
     for x_plan in job_believer.get_plan_dict().values():
         x_objkeysholder.rope = x_plan.get_plan_rope()
-        healerlink = x_plan.healerlink
+        healerunit = x_plan.healerunit
         laborheir = x_plan._laborheir
         insert_job_blrplan(cursor, x_objkeysholder, x_plan)
-        insert_job_blrheal(cursor, x_objkeysholder, healerlink)
+        insert_job_blrheal(cursor, x_objkeysholder, healerunit)
         insert_job_blrlabo(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_plan._awardheirs.values():
             insert_job_blrawar(cursor, x_objkeysholder, x_awardheir)

@@ -1,6 +1,6 @@
 // Global state
 let treeData = null;
-let show_awardlinks = false;
+let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
 let show_level = false;
@@ -19,13 +19,24 @@ let show_fund_iota = false;
 let show_fund_ratio = false;
 let show_all_partner_cred = false;
 let show_all_partner_debt = false;
+let show_gogo_want = false;
+let show_stop_want = false;
+let show_gogo_calc = false;
+let show_stop_calc = false;
+let show_addin = false;
+let show_begin = false;
+let show_close = false;
+let show_denom = false;
+let show_morph = false;
+let show_numor = false;
+let show_active_hx = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
 
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
-    const show_awardlinksCheckbox = document.getElementById('show_awardlinks');
+    const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
     const show_levelCheckbox = document.getElementById('show_level');
@@ -42,14 +53,25 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
     const show_fund_iotaCheckbox = document.getElementById('show_fund_iota');
     const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
-    const show_all_partner_credCheckbox = document.getElementById('_all_partner_cred');
-    const show_all_partner_debtCheckbox = document.getElementById('_all_partner_debt');
+    const show_all_partner_credCheckbox = document.getElementById('show_all_partner_cred');
+    const show_all_partner_debtCheckbox = document.getElementById('show_all_partner_debt');
+    const show_gogo_wantCheckbox = document.getElementById('show_gogo_want');
+    const show_stop_wantCheckbox = document.getElementById('show_stop_want');
+    const show_gogo_calcCheckbox = document.getElementById('show_gogo_calc');
+    const show_stop_calcCheckbox = document.getElementById('show_stop_calc');
+    const show_addinCheckbox = document.getElementById('show_addin');
+    const show_beginCheckbox = document.getElementById('show_begin');
+    const show_closeCheckbox = document.getElementById('show_close');
+    const show_denomCheckbox = document.getElementById('show_denom');
+    const show_morphCheckbox = document.getElementById('show_morph');
+    const show_numorCheckbox = document.getElementById('show_numor');
+    const show_active_hxCheckbox = document.getElementById('show_active_hx');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_awardlinksCheckbox.addEventListener('change', function () { show_awardlinks = this.checked; renderTree(); });
+    show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
     show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
@@ -68,6 +90,17 @@ document.addEventListener('DOMContentLoaded', function () {
     show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderTree(); });
     show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderTree(); });
     show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
+    show_gogo_wantCheckbox.addEventListener('change', function () { show_gogo_want = this.checked; renderTree(); });
+    show_stop_wantCheckbox.addEventListener('change', function () { show_stop_want = this.checked; renderTree(); });
+    show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderTree(); });
+    show_stop_calcCheckbox.addEventListener('change', function () { show_stop_calc = this.checked; renderTree(); });
+    show_addinCheckbox.addEventListener('change', function () { show_addin = this.checked; renderTree(); });
+    show_beginCheckbox.addEventListener('change', function () { show_begin = this.checked; renderTree(); });
+    show_closeCheckbox.addEventListener('change', function () { show_close = this.checked; renderTree(); });
+    show_denomCheckbox.addEventListener('change', function () { show_denom = this.checked; renderTree(); });
+    show_morphCheckbox.addEventListener('change', function () { show_morph = this.checked; renderTree(); });
+    show_numorCheckbox.addEventListener('change', function () { show_numor = this.checked; renderTree(); });
+    show_active_hxCheckbox.addEventListener('change', function () { show_active_hx = this.checked; renderTree(); });
     show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
     show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
     show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
@@ -139,14 +172,25 @@ function renderPlanUnit(planUnit, level) {
     ${activeIndicator}
     ${choreIndicator}
     ${root_booleanIndicator}</i>
-    ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
-    ${renderFlatReadableJson(planUnit.awardlinks, indent, show_awardlinks)}
+    ${render_with_indent(planUnit.parent_rope, indent, show_parent_rope)}
+    ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
-    ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
-    ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
+    ${render_with_indent(planUnit._all_partner_cred, indent, show_all_partner_cred)}
+    ${render_with_indent(planUnit._all_partner_debt, indent, show_all_partner_debt)}
+    ${render_with_indent(planUnit.gogo_want, indent, show_gogo_want)}
+    ${render_with_indent(planUnit.stop_want, indent, show_stop_want)}
+    ${render_with_indent(planUnit._gogo_calc, indent, show_gogo_calc)}
+    ${render_with_indent(planUnit._stop_calc, indent, show_stop_calc)}
+    ${render_with_indent(planUnit.addin, indent, show_addin)}
+    ${render_with_indent(planUnit.begin, indent, show_begin)}
+    ${render_with_indent(planUnit.close, indent, show_close)}
+    ${render_with_indent(planUnit.denom, indent, show_denom)}
+    ${render_with_indent(planUnit.morph, indent, show_morph)}
+    ${render_with_indent(planUnit.numor, indent, show_numor)}
+    ${render_with_indent(planUnit._active_hx, indent, show_active_hx)}
   </div>\n
 `;
     // Add children
@@ -178,7 +222,7 @@ function render_belief_label(belief_label, knot, show_belief_label) {
 
     return ` ${knot}${belief_label}...`;
 }
-function render_new_small_dot(str, indent, show_bool) {
+function render_with_indent(str, indent, show_bool) {
     if (!str || !show_bool) {
         return '';
     }

@@ -11,7 +11,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _fund_onset_str,
     _fund_ratio_str,
     _gogo_calc_str,
-    _healerlink_ratio_str,
+    _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
     _level_str,
@@ -20,30 +20,36 @@ from src.a05_plan_logic.test._util.a05_str import (
     _stop_calc_str,
     _uid_str,
     addin_str,
+    awardunits_str,
     begin_str,
     belief_label_str,
     close_str,
     denom_str,
+    factunits_str,
     fund_iota_str,
     fund_share_str,
     gogo_want_str,
-    healerlink_str,
+    healerunit_str,
     knot_str,
     morph_str,
     numor_str,
     plan_label_str,
     problem_bool_str,
+    reasonunits_str,
     star_str,
     stop_want_str,
     task_str,
 )
-from src.a06_believer_logic.believer_tool import believer_plan_factunit_get_obj
+from src.a06_believer_logic.test._util.a06_str import parent_rope_str, planroot_str
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_believerunit
+from src.a22_plan_viewer.test._util.example22_believers import (
+    get_believerunit_irrational_example,
+    get_sue_casa_believerunit,
+)
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
@@ -63,16 +69,16 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     assert set(casa_dict.keys()) == {
         plan_label_str(),
         belief_label_str(),
-        "parent_rope",
+        parent_rope_str(),
         _kids_str(),
         "root",
         star_str(),
         _uid_str(),
-        "awardlinks",
-        "reasonunits",
+        awardunits_str(),
+        reasonunits_str(),
         "laborunit",
-        "factunits",
-        healerlink_str(),
+        factunits_str(),
+        healerunit_str(),
         begin_str(),
         close_str(),
         addin_str(),
@@ -97,7 +103,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         fund_iota_str(),
         _fund_onset_str(),
         _fund_cease_str(),
-        _healerlink_ratio_str(),
+        _healerunit_ratio_str(),
         _level_str(),
         _range_evaluated_str(),
         "_reasonheirs",
@@ -107,7 +113,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _stop_calc_str(),
         "fund_share",
     }
-    assert casa_dict.get("healerlink") == {"_healer_names": []}
+    assert casa_dict.get("healerunit") == {"_healer_names": []}
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
@@ -147,7 +153,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
     # }
     expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
-    assert root_plan_view_dict.get("parent_rope") == expected_parent_rope
+    assert root_plan_view_dict.get(parent_rope_str()) == expected_parent_rope
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
@@ -162,7 +168,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     # THEN
     assert casa_dict.get(fund_share_str()) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
-    assert casa_dict.get("parent_rope") == expected_parent_rope
+    assert casa_dict.get(parent_rope_str()) == expected_parent_rope
     expected_all_partner_cred = f"all_partner_cred = {casa_plan._all_partner_cred}"
     expected_all_partner_debt = f"all_partner_debt = {casa_plan._all_partner_debt}"
     expected_all_partner_cred = add_small_dot(expected_all_partner_cred)
@@ -172,7 +178,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     assert casa_dict.get(_fund_ratio_str()) == "38%"
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
+def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     # ESTABLISH
     sue_believerunit = get_sue_casa_believerunit()
     casa_rope = sue_believerunit.make_l1_rope("casa")
@@ -182,21 +188,21 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    # awardlinks
-    awardlinks_dict = casa_dict.get("awardlinks")
-    assert len(awardlinks_dict) == 2
-    # print(f"{len(awardlinks_dict)=}")
+    # awardunits
+    awardunits_dict = casa_dict.get(awardunits_str())
+    assert len(awardunits_dict) == 2
+    # print(f"{len(awardunits_dict)=}")
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_awardlink_dict = awardlinks_dict.get(sue_str)
-    bob_awardlink_dict = awardlinks_dict.get(bob_str)
+    sue_awardunit_dict = awardunits_dict.get(sue_str)
+    bob_awardunit_dict = awardunits_dict.get(bob_str)
     readable_str = "readable"
     expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
     expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
-    # print(f"{sue_awardlink_dict.get(readable_str)=}")
-    # print(f"{bob_awardlink_dict.get(readable_str)=}")
-    assert sue_awardlink_dict.get(readable_str) == expected_sue_readable
-    assert bob_awardlink_dict.get(readable_str) == expected_bob_readable
+    # print(f"{sue_awardunit_dict.get(readable_str)=}")
+    # print(f"{bob_awardunit_dict.get(readable_str)=}")
+    assert sue_awardunit_dict.get(readable_str) == expected_sue_readable
+    assert bob_awardunit_dict.get(readable_str) == expected_bob_readable
 
     # _awardheirs
     awardheirs_dict = casa_dict.get("_awardheirs")
@@ -233,12 +239,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardLinks():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     # ESTABLISH
-    # TODO create FactUnits
-    # TODO create FactHeirs
     sue_believer = get_sue_casa_believerunit()
 
     # WHEN
-    casa_dict = get_plan_view_dict(sue_believer.planroot)
+    root_dict = get_plan_view_dict(sue_believer.planroot)
 
     # THEN
     # sports ropes
@@ -262,11 +266,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     tidy_rope = sue_believer.make_rope(casa_rope, "tidy")
 
     # factunits
-    factunits_dict = casa_dict.get("factunits")
-    assert len(factunits_dict) == 2
+    root_factunits_dict = root_dict.get(factunits_str())
+    assert len(root_factunits_dict) == 2
     # print(f"{len(factunits_dict)=}")
-    tidi_factunit_dict = factunits_dict.get(tidi_rope)
-    best_factunit_dict = factunits_dict.get(best_rope)
+    tidi_factunit_dict = root_factunits_dict.get(tidi_rope)
+    best_factunit_dict = root_factunits_dict.get(best_rope)
     # print(f"{tidi_factunit_dict=}")
     # print(f"{best_factunit_dict=}")
     readable_str = "readable"
@@ -286,7 +290,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     assert best_factunit_dict.get(readable_str) == expected_best_factunit_str
 
     # factheirs
-    casa_factheirs_dict = casa_dict.get("_factheirs")
+    casa_factheirs_dict = root_dict.get("_factheirs")
     assert len(casa_factheirs_dict) == 2
     print(f"{len(casa_factheirs_dict)=}")
     casa_tidi_factheir_dict = casa_factheirs_dict.get(tidi_rope)
@@ -306,3 +310,98 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
     assert casa_tidi_factheir_dict.get(readable_str) == expected_casa_tidi_factheir_str
     assert casa_best_factheir_dict.get(readable_str) == expected_casa_best_factheir_str
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_stop():
+    # ESTABLISH
+    casa_plan = planunit_shop()
+    casa_gogo_want = 13
+    casa_stop_want = 17
+    casa_gogo_calc = 53
+    casa_stop_calc = 57
+    casa_plan.gogo_want = casa_gogo_want
+    casa_plan.stop_want = casa_stop_want
+    casa_plan._gogo_calc = casa_gogo_calc
+    casa_plan._stop_calc = casa_stop_calc
+    casa_plan._fund_ratio = 0
+
+    # WHEN
+    casa_dict = get_plan_view_dict(casa_plan)
+
+    # THEN
+    gogo_want_readable = casa_dict.get(gogo_want_str())
+    stop_want_readable = casa_dict.get(stop_want_str())
+    gogo_calc_readable = casa_dict.get(_gogo_calc_str())
+    stop_calc_readable = casa_dict.get(_stop_calc_str())
+    expected_gogo_want_readable = add_small_dot(f"gogo_want: {casa_plan.gogo_want}")
+    expected_stop_want_readable = add_small_dot(f"stop_want: {casa_plan.stop_want}")
+    expected_gogo_calc_readable = add_small_dot(f"gogo_calc: {casa_plan._gogo_calc}")
+    expected_stop_calc_readable = add_small_dot(f"stop_calc: {casa_plan._stop_calc}")
+    assert gogo_want_readable == expected_gogo_want_readable
+    assert stop_want_readable == expected_stop_want_readable
+    assert gogo_calc_readable == expected_gogo_calc_readable
+    assert stop_calc_readable == expected_stop_calc_readable
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario7_numeric_range_attrs():
+    # ESTABLISH
+    casa_plan = planunit_shop()
+    casa_addin = 11
+    casa_begin = 17
+    casa_close = 23
+    casa_denom = 29
+    casa_morph = 37
+    casa_numor = 43
+    casa_plan.addin = casa_addin
+    casa_plan.begin = casa_begin
+    casa_plan.close = casa_close
+    casa_plan.denom = casa_denom
+    casa_plan.morph = casa_morph
+    casa_plan.numor = casa_numor
+    casa_plan._fund_ratio = 0
+
+    # WHEN
+    casa_dict = get_plan_view_dict(casa_plan)
+
+    # THEN
+    casa_addin_readable = casa_dict.get(addin_str())
+    casa_begin_readable = casa_dict.get(begin_str())
+    casa_close_readable = casa_dict.get(close_str())
+    casa_denom_readable = casa_dict.get(denom_str())
+    casa_morph_readable = casa_dict.get(morph_str())
+    casa_numor_readable = casa_dict.get(numor_str())
+    expected_casa_addin_readable = add_small_dot(f"addin: {casa_plan.addin}")
+    expected_casa_begin_readable = add_small_dot(f"begin: {casa_plan.begin}")
+    expected_casa_close_readable = add_small_dot(f"close: {casa_plan.close}")
+    expected_casa_denom_readable = add_small_dot(f"denom: {casa_plan.denom}")
+    expected_casa_morph_readable = add_small_dot(f"morph: {casa_plan.morph}")
+    expected_casa_numor_readable = add_small_dot(f"numor: {casa_plan.numor}")
+    assert casa_addin_readable == expected_casa_addin_readable
+    assert casa_begin_readable == expected_casa_begin_readable
+    assert casa_close_readable == expected_casa_close_readable
+    assert casa_denom_readable == expected_casa_denom_readable
+    assert casa_morph_readable == expected_casa_morph_readable
+    assert casa_numor_readable == expected_casa_numor_readable
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario5_active_hx():
+    # ESTABLISH
+    hatter_believer = get_believerunit_irrational_example()
+    hatter_believer.set_max_tree_traverse(8)
+    hatter_believer.settle_believer()
+    egg_str = "egg first"
+    egg_rope = hatter_believer.make_l1_rope(egg_str)
+    chicken_str = "chicken first"
+    chicken_rope = hatter_believer.make_l1_rope(chicken_str)
+    chicken_plan = hatter_believer.get_plan_obj(chicken_rope)
+
+    # WHEN
+    chicken_dict = get_plan_view_dict(chicken_plan)
+
+    # THEN
+    print(f"{chicken_plan._active_hx=}")
+    # sports ropes
+    chicken_active_hx_str = chicken_dict.get(_active_hx_str())
+    expected_chicken_active_hx_str = f"active_hx: {chicken_plan._active_hx}"
+    expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
+    assert expected_chicken_active_hx_str == chicken_active_hx_str

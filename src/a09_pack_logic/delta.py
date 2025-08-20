@@ -383,9 +383,9 @@ class BelieverDelta:
                 planunit=insert_planunit,
                 insert_factunit_reason_contexts=set(insert_planunit.factunits.keys()),
             )
-            self.add_believeratom_plan_awardlink_inserts(
+            self.add_believeratom_plan_awardunit_inserts(
                 after_planunit=insert_planunit,
-                insert_awardlink_awardee_titles=set(insert_planunit.awardlinks.keys()),
+                insert_awardunit_awardee_titles=set(insert_planunit.awardunits.keys()),
             )
             self.add_believeratom_plan_reasonunit_inserts(
                 after_planunit=insert_planunit,
@@ -397,9 +397,9 @@ class BelieverDelta:
                 plan_rope=insert_plan_rope,
                 insert_partyunit_party_titles=insert_planunit.laborunit._partys,
             )
-            self.add_believeratom_plan_healerlink_insert(
+            self.add_believeratom_plan_healerunit_insert(
                 plan_rope=insert_plan_rope,
-                insert_healerlink_healer_names=insert_planunit.healerlink._healer_names,
+                insert_healerunit_healer_names=insert_planunit.healerunit._healer_names,
             )
 
     def add_believeratom_plan_updates(
@@ -455,26 +455,26 @@ class BelieverDelta:
                 ),
             )
 
-            # insert / update / delete awardlinks
-            before_awardlinks_awardee_titles = set(before_planunit.awardlinks.keys())
-            after_awardlinks_awardee_titles = set(after_planunit.awardlinks.keys())
-            self.add_believeratom_plan_awardlink_inserts(
+            # insert / update / delete awardunits
+            before_awardunits_awardee_titles = set(before_planunit.awardunits.keys())
+            after_awardunits_awardee_titles = set(after_planunit.awardunits.keys())
+            self.add_believeratom_plan_awardunit_inserts(
                 after_planunit=after_planunit,
-                insert_awardlink_awardee_titles=after_awardlinks_awardee_titles.difference(
-                    before_awardlinks_awardee_titles
+                insert_awardunit_awardee_titles=after_awardunits_awardee_titles.difference(
+                    before_awardunits_awardee_titles
                 ),
             )
-            self.add_believeratom_plan_awardlink_updates(
+            self.add_believeratom_plan_awardunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_awardlink_awardee_titles=before_awardlinks_awardee_titles.intersection(
-                    after_awardlinks_awardee_titles
+                update_awardunit_awardee_titles=before_awardunits_awardee_titles.intersection(
+                    after_awardunits_awardee_titles
                 ),
             )
-            self.add_believeratom_plan_awardlink_deletes(
+            self.add_believeratom_plan_awardunit_deletes(
                 plan_rope=plan_rope,
-                delete_awardlink_awardee_titles=before_awardlinks_awardee_titles.difference(
-                    after_awardlinks_awardee_titles
+                delete_awardunit_awardee_titles=before_awardunits_awardee_titles.difference(
+                    after_awardunits_awardee_titles
                 ),
             )
 
@@ -521,23 +521,23 @@ class BelieverDelta:
                 ),
             )
 
-            # insert / update / delete healerlinks
-            before_healerlinks_healer_names = set(
-                before_planunit.healerlink._healer_names
+            # insert / update / delete healerunits
+            before_healerunits_healer_names = set(
+                before_planunit.healerunit._healer_names
             )
-            after_healerlinks_healer_names = set(
-                after_planunit.healerlink._healer_names
+            after_healerunits_healer_names = set(
+                after_planunit.healerunit._healer_names
             )
-            self.add_believeratom_plan_healerlink_insert(
+            self.add_believeratom_plan_healerunit_insert(
                 plan_rope=plan_rope,
-                insert_healerlink_healer_names=after_healerlinks_healer_names.difference(
-                    before_healerlinks_healer_names
+                insert_healerunit_healer_names=after_healerunits_healer_names.difference(
+                    before_healerunits_healer_names
                 ),
             )
-            self.add_believeratom_plan_healerlink_deletes(
+            self.add_believeratom_plan_healerunit_deletes(
                 plan_rope=plan_rope,
-                delete_healerlink_healer_names=before_healerlinks_healer_names.difference(
-                    after_healerlinks_healer_names
+                delete_healerunit_healer_names=before_healerunits_healer_names.difference(
+                    after_healerunits_healer_names
                 ),
             )
 
@@ -555,9 +555,9 @@ class BelieverDelta:
                 delete_factunit_reason_contexts=set(delete_planunit.factunits.keys()),
             )
 
-            self.add_believeratom_plan_awardlink_deletes(
+            self.add_believeratom_plan_awardunit_deletes(
                 plan_rope=delete_plan_rope,
-                delete_awardlink_awardee_titles=set(delete_planunit.awardlinks.keys()),
+                delete_awardunit_awardee_titles=set(delete_planunit.awardunits.keys()),
             )
             self.add_believeratom_plan_reasonunit_deletes(
                 before_planunit=delete_planunit,
@@ -569,9 +569,9 @@ class BelieverDelta:
                 plan_rope=delete_plan_rope,
                 delete_partyunit_party_titles=delete_planunit.laborunit._partys,
             )
-            self.add_believeratom_plan_healerlink_deletes(
+            self.add_believeratom_plan_healerunit_deletes(
                 plan_rope=delete_plan_rope,
-                delete_healerlink_healer_names=delete_planunit.healerlink._healer_names,
+                delete_healerunit_healer_names=delete_planunit.healerunit._healer_names,
             )
 
     def add_believeratom_plan_reasonunit_inserts(
@@ -765,70 +765,70 @@ class BelieverDelta:
             x_believeratom.set_jkey("party_title", delete_partyunit_party_title)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_healerlink_insert(
-        self, plan_rope: RopeTerm, insert_healerlink_healer_names: set
+    def add_believeratom_plan_healerunit_insert(
+        self, plan_rope: RopeTerm, insert_healerunit_healer_names: set
     ):
-        for insert_healerlink_healer_name in insert_healerlink_healer_names:
-            x_believeratom = believeratom_shop("believer_plan_healerlink", "INSERT")
+        for insert_healerunit_healer_name in insert_healerunit_healer_names:
+            x_believeratom = believeratom_shop("believer_plan_healerunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("healer_name", insert_healerlink_healer_name)
+            x_believeratom.set_jkey("healer_name", insert_healerunit_healer_name)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_healerlink_deletes(
-        self, plan_rope: RopeTerm, delete_healerlink_healer_names: set
+    def add_believeratom_plan_healerunit_deletes(
+        self, plan_rope: RopeTerm, delete_healerunit_healer_names: set
     ):
-        for delete_healerlink_healer_name in delete_healerlink_healer_names:
-            x_believeratom = believeratom_shop("believer_plan_healerlink", "DELETE")
+        for delete_healerunit_healer_name in delete_healerunit_healer_names:
+            x_believeratom = believeratom_shop("believer_plan_healerunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("healer_name", delete_healerlink_healer_name)
+            x_believeratom.set_jkey("healer_name", delete_healerunit_healer_name)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_awardlink_inserts(
-        self, after_planunit: PlanUnit, insert_awardlink_awardee_titles: set
+    def add_believeratom_plan_awardunit_inserts(
+        self, after_planunit: PlanUnit, insert_awardunit_awardee_titles: set
     ):
-        for after_awardlink_awardee_title in insert_awardlink_awardee_titles:
-            after_awardlink = after_planunit.awardlinks.get(
-                after_awardlink_awardee_title
+        for after_awardunit_awardee_title in insert_awardunit_awardee_titles:
+            after_awardunit = after_planunit.awardunits.get(
+                after_awardunit_awardee_title
             )
-            x_believeratom = believeratom_shop("believer_plan_awardlink", "INSERT")
+            x_believeratom = believeratom_shop("believer_plan_awardunit", "INSERT")
             x_believeratom.set_jkey("plan_rope", after_planunit.get_plan_rope())
-            x_believeratom.set_jkey("awardee_title", after_awardlink.awardee_title)
-            x_believeratom.set_jvalue("give_force", after_awardlink.give_force)
-            x_believeratom.set_jvalue("take_force", after_awardlink.take_force)
+            x_believeratom.set_jkey("awardee_title", after_awardunit.awardee_title)
+            x_believeratom.set_jvalue("give_force", after_awardunit.give_force)
+            x_believeratom.set_jvalue("take_force", after_awardunit.take_force)
             self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_awardlink_updates(
+    def add_believeratom_plan_awardunit_updates(
         self,
         before_planunit: PlanUnit,
         after_planunit: PlanUnit,
-        update_awardlink_awardee_titles: set,
+        update_awardunit_awardee_titles: set,
     ):
-        for update_awardlink_awardee_title in update_awardlink_awardee_titles:
-            before_awardlink = before_planunit.awardlinks.get(
-                update_awardlink_awardee_title
+        for update_awardunit_awardee_title in update_awardunit_awardee_titles:
+            before_awardunit = before_planunit.awardunits.get(
+                update_awardunit_awardee_title
             )
-            after_awardlink = after_planunit.awardlinks.get(
-                update_awardlink_awardee_title
+            after_awardunit = after_planunit.awardunits.get(
+                update_awardunit_awardee_title
             )
             if jvalues_different(
-                "believer_plan_awardlink", before_awardlink, after_awardlink
+                "believer_plan_awardunit", before_awardunit, after_awardunit
             ):
-                x_believeratom = believeratom_shop("believer_plan_awardlink", "UPDATE")
+                x_believeratom = believeratom_shop("believer_plan_awardunit", "UPDATE")
                 x_believeratom.set_jkey("plan_rope", before_planunit.get_plan_rope())
-                x_believeratom.set_jkey("awardee_title", after_awardlink.awardee_title)
-                if before_awardlink.give_force != after_awardlink.give_force:
-                    x_believeratom.set_jvalue("give_force", after_awardlink.give_force)
-                if before_awardlink.take_force != after_awardlink.take_force:
-                    x_believeratom.set_jvalue("take_force", after_awardlink.take_force)
+                x_believeratom.set_jkey("awardee_title", after_awardunit.awardee_title)
+                if before_awardunit.give_force != after_awardunit.give_force:
+                    x_believeratom.set_jvalue("give_force", after_awardunit.give_force)
+                if before_awardunit.take_force != after_awardunit.take_force:
+                    x_believeratom.set_jvalue("take_force", after_awardunit.take_force)
                 self.set_believeratom(x_believeratom)
 
-    def add_believeratom_plan_awardlink_deletes(
-        self, plan_rope: RopeTerm, delete_awardlink_awardee_titles: set
+    def add_believeratom_plan_awardunit_deletes(
+        self, plan_rope: RopeTerm, delete_awardunit_awardee_titles: set
     ):
-        for delete_awardlink_awardee_title in delete_awardlink_awardee_titles:
-            x_believeratom = believeratom_shop("believer_plan_awardlink", "DELETE")
+        for delete_awardunit_awardee_title in delete_awardunit_awardee_titles:
+            x_believeratom = believeratom_shop("believer_plan_awardunit", "DELETE")
             x_believeratom.set_jkey("plan_rope", plan_rope)
-            x_believeratom.set_jkey("awardee_title", delete_awardlink_awardee_title)
+            x_believeratom.set_jkey("awardee_title", delete_awardunit_awardee_title)
             self.set_believeratom(x_believeratom)
 
     def add_believeratom_plan_factunit_inserts(

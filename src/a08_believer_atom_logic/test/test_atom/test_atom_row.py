@@ -2,7 +2,7 @@ from src.a01_term_logic.rope import create_rope, to_rope
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_planunit_str,
     partner_name_str,
 )
@@ -255,7 +255,7 @@ def test_AtomRow_get_believeratoms_ReturnsObj_believer_planunit_INSERT_task_Fals
 
 def test_AtomRow_get_believeratoms_ReturnsObj_believer_planunit_INSERT_task_False_Scenario1():
     # ESTABLISH
-    x_dimens = {believer_planunit_str(), believer_plan_healerlink_str()}
+    x_dimens = {believer_planunit_str(), believer_plan_healerunit_str()}
     x_atomrow = atomrow_shop(x_dimens, INSERT_str())
     x_atomrow.plan_rope = create_rope("amy78", "casa")
     x_atomrow.task = False
@@ -271,9 +271,9 @@ def test_AtomRow_get_believeratoms_ReturnsObj_believer_planunit_INSERT_task_Fals
     y_plan_believeratom.set_arg("plan_rope", casa_rope)
     y_plan_believeratom.set_arg("task", False)
     assert y_plan_believeratom in x_believeratoms
-    healerlink_believeratom = believeratom_shop(
-        believer_plan_healerlink_str(), INSERT_str()
+    healerunit_believeratom = believeratom_shop(
+        believer_plan_healerunit_str(), INSERT_str()
     )
-    healerlink_believeratom.set_arg("plan_rope", casa_rope)
-    healerlink_believeratom.set_arg("healer_name", "Bob")
-    assert healerlink_believeratom in x_believeratoms
+    healerunit_believeratom.set_arg("plan_rope", casa_rope)
+    healerunit_believeratom.set_arg("healer_name", "Bob")
+    assert healerunit_believeratom in x_believeratoms

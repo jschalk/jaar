@@ -1,6 +1,6 @@
 from datetime import datetime
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import reasonunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
@@ -686,8 +686,8 @@ def test_BelieverUnit_create_agenda_plan_CreatesAllBelieverAttributes():
     sweep_plan.set_reasonunit(reason=daytime_reason)
 
     family_str = ",family"
-    awardlink_z = awardlink_shop(awardee_title=family_str)
-    sweep_plan.set_awardlink(awardlink_z)
+    awardunit_z = awardunit_shop(awardee_title=family_str)
+    sweep_plan.set_awardunit(awardunit_z)
 
     assert len(sue_believer.partners) == 0
     assert len(sue_believer.get_partnerunit_group_titles_dict()) == 0

@@ -5,7 +5,7 @@ from src.a04_reason_logic.reason_plan import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
 from src.a06_believer_logic.believer_main import believerunit_shop
@@ -664,21 +664,21 @@ def test_BelieverUnit_settle_believer_EveryTwoMonthReturnsObj_believerunit_v001(
     assert from_list_get_active(mat_rope, yao_believerunit._plan_dict)
 
 
-def test_BelieverUnit_settle_believer_SetsEmpty_sum_healerlink_share():
+def test_BelieverUnit_settle_believer_SetsEmpty_sum_healerunit_share():
     # ESTABLISH
     sue_believerunit = believerunit_shop("Sue")
-    assert sue_believerunit._sum_healerlink_share == 0
+    assert sue_believerunit._sum_healerunit_share == 0
     assert sue_believerunit._keep_dict == {}
 
     # WHEN
     sue_believerunit.settle_believer()
 
     # THEN
-    assert sue_believerunit._sum_healerlink_share == 0
+    assert sue_believerunit._sum_healerunit_share == 0
     assert sue_believerunit._keep_dict == {}
 
 
-def test_BelieverUnit_settle_believer_Sets_sum_healerlink_share(graphics_bool):
+def test_BelieverUnit_settle_believer_Sets_sum_healerunit_share(graphics_bool):
     # ESTABLISH
     sue_believerunit = get_believerunit_with_4_levels_and_2reasons()
     sue_believerunit.add_partnerunit("Sue")
@@ -686,38 +686,38 @@ def test_BelieverUnit_settle_believer_Sets_sum_healerlink_share(graphics_bool):
     nation_rope = sue_believerunit.make_l1_rope("nation")
     usa_rope = sue_believerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_believerunit.make_rope(usa_rope, "Oregon")
-    sue_healerlink = healerlink_shop({"Sue"})
+    sue_healerunit = healerunit_shop({"Sue"})
     sue_believerunit.edit_plan_attr(
-        oregon_rope, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerunit=sue_healerunit
     )
     oregon_plan = sue_believerunit.get_plan_obj(oregon_rope)
     print(f"{oregon_plan._fund_ratio=}")
-    assert sue_believerunit._sum_healerlink_share == 0
-    assert oregon_plan._healerlink_ratio == 0
+    assert sue_believerunit._sum_healerunit_share == 0
+    assert oregon_plan._healerunit_ratio == 0
 
     # WHEN
     sue_believerunit.settle_believer()
     # THEN
-    assert sue_believerunit._sum_healerlink_share == 0.038461539 * default_fund_pool()
-    assert oregon_plan._healerlink_ratio == 1
+    assert sue_believerunit._sum_healerunit_share == 0.038461539 * default_fund_pool()
+    assert oregon_plan._healerunit_ratio == 1
 
     # WHEN
     wk_rope = sue_believerunit.make_l1_rope("sem_jours")
     sue_believerunit.edit_plan_attr(wk_rope, problem_bool=True)
     mon_rope = sue_believerunit.make_rope(wk_rope, "Mon")
-    sue_believerunit.edit_plan_attr(mon_rope, healerlink=sue_healerlink)
+    sue_believerunit.edit_plan_attr(mon_rope, healerunit=sue_healerunit)
     mon_plan = sue_believerunit.get_plan_obj(mon_rope)
     # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
     sue_believerunit.settle_believer()
     # THEN
-    assert sue_believerunit._sum_healerlink_share != 0.038461539 * default_fund_pool()
-    assert sue_believerunit._sum_healerlink_share == 0.06923077 * default_fund_pool()
-    assert oregon_plan._healerlink_ratio == 0.5555555571604938
-    assert mon_plan._healerlink_ratio == 0.4444444428395062
+    assert sue_believerunit._sum_healerunit_share != 0.038461539 * default_fund_pool()
+    assert sue_believerunit._sum_healerunit_share == 0.06923077 * default_fund_pool()
+    assert oregon_plan._healerunit_ratio == 0.5555555571604938
+    assert mon_plan._healerunit_ratio == 0.4444444428395062
 
     # WHEN
     tue_rope = sue_believerunit.make_rope(wk_rope, "Tue")
-    sue_believerunit.edit_plan_attr(tue_rope, healerlink=sue_healerlink)
+    sue_believerunit.edit_plan_attr(tue_rope, healerunit=sue_healerunit)
     tue_plan = sue_believerunit.get_plan_obj(tue_rope)
     # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
     # sat_rope = sue_believerunit.make_rope(wk_rope, "Sat")
@@ -727,25 +727,25 @@ def test_BelieverUnit_settle_believer_Sets_sum_healerlink_share(graphics_bool):
 
     # THEN
     assert (
-        sue_believerunit._sum_healerlink_share
+        sue_believerunit._sum_healerunit_share
         != 0.06923076923076923 * default_fund_pool()
     )
-    assert sue_believerunit._sum_healerlink_share == 0.100000001 * default_fund_pool()
-    assert oregon_plan._healerlink_ratio == 0.38461538615384616
-    assert mon_plan._healerlink_ratio == 0.3076923069230769
-    assert tue_plan._healerlink_ratio == 0.3076923069230769
+    assert sue_believerunit._sum_healerunit_share == 0.100000001 * default_fund_pool()
+    assert oregon_plan._healerunit_ratio == 0.38461538615384616
+    assert mon_plan._healerunit_ratio == 0.3076923069230769
+    assert tue_plan._healerunit_ratio == 0.3076923069230769
 
     # WHEN
-    sue_believerunit.edit_plan_attr(wk_rope, healerlink=sue_healerlink)
+    sue_believerunit.edit_plan_attr(wk_rope, healerunit=sue_healerunit)
     wk_plan = sue_believerunit.get_plan_obj(wk_rope)
     print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
     sue_believerunit.settle_believer()
     # THEN
     display_plantree(sue_believerunit, "Keep", graphics_bool)
-    assert sue_believerunit._sum_healerlink_share == 0
-    assert oregon_plan._healerlink_ratio == 0
-    assert mon_plan._healerlink_ratio == 0
-    assert tue_plan._healerlink_ratio == 0
+    assert sue_believerunit._sum_healerunit_share == 0
+    assert oregon_plan._healerunit_ratio == 0
+    assert mon_plan._healerunit_ratio == 0
+    assert tue_plan._healerunit_ratio == 0
 
 
 def test_BelieverUnit_settle_believer_Sets_keep_dict_v1(graphics_bool):
@@ -756,9 +756,9 @@ def test_BelieverUnit_settle_believer_Sets_keep_dict_v1(graphics_bool):
     nation_rope = sue_believerunit.make_l1_rope("nation")
     usa_rope = sue_believerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_believerunit.make_rope(usa_rope, "Oregon")
-    sue_healerlink = healerlink_shop({"Sue"})
+    sue_healerunit = healerunit_shop({"Sue"})
     sue_believerunit.edit_plan_attr(
-        oregon_rope, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerunit=sue_healerunit
     )
     assert len(sue_believerunit._keep_dict) == 0
     assert sue_believerunit._keep_dict.get(oregon_rope) is None
@@ -773,7 +773,7 @@ def test_BelieverUnit_settle_believer_Sets_keep_dict_v1(graphics_bool):
     wk_rope = sue_believerunit.make_l1_rope("sem_jours")
     sue_believerunit.edit_plan_attr(wk_rope, problem_bool=True)
     mon_rope = sue_believerunit.make_rope(wk_rope, "Mon")
-    sue_believerunit.edit_plan_attr(mon_rope, healerlink=sue_healerlink)
+    sue_believerunit.edit_plan_attr(mon_rope, healerunit=sue_healerunit)
     # mon_plan = sue_believerunit.get_plan_obj(mon_rope)
     # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
     sue_believerunit.settle_believer()
@@ -784,7 +784,7 @@ def test_BelieverUnit_settle_believer_Sets_keep_dict_v1(graphics_bool):
 
     # WHEN
     tue_rope = sue_believerunit.make_rope(wk_rope, "Tue")
-    sue_believerunit.edit_plan_attr(tue_rope, healerlink=sue_healerlink)
+    sue_believerunit.edit_plan_attr(tue_rope, healerunit=sue_healerunit)
     # tue_plan = sue_believerunit.get_plan_obj(tue_rope)
     # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
     # sat_rope = sue_believerunit.make_rope(wk_rope, "Sat")
@@ -799,7 +799,7 @@ def test_BelieverUnit_settle_believer_Sets_keep_dict_v1(graphics_bool):
     assert sue_believerunit._keep_dict.get(tue_rope) is not None
 
     # WHEN
-    sue_believerunit.edit_plan_attr(wk_rope, healerlink=sue_healerlink)
+    sue_believerunit.edit_plan_attr(wk_rope, healerunit=sue_healerunit)
     wk_plan = sue_believerunit.get_plan_obj(wk_rope)
     print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
     sue_believerunit.settle_believer()
@@ -827,15 +827,15 @@ def test_BelieverUnit_settle_believer_Sets_healers_dict():
     nation_rope = sue_believerunit.make_l1_rope("nation")
     usa_rope = sue_believerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_believerunit.make_rope(usa_rope, "Oregon")
-    sue_healerlink = healerlink_shop({sue_str})
+    sue_healerunit = healerunit_shop({sue_str})
     sue_believerunit.edit_plan_attr(
-        oregon_rope, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerunit=sue_healerunit
     )
 
     wk_rope = sue_believerunit.make_l1_rope("sem_jours")
-    bob_healerlink = healerlink_shop({bob_str})
+    bob_healerunit = healerunit_shop({bob_str})
     sue_believerunit.edit_plan_attr(
-        wk_rope, problem_bool=True, healerlink=bob_healerlink
+        wk_rope, problem_bool=True, healerunit=bob_healerunit
     )
     assert sue_believerunit._healers_dict == {}
 
@@ -868,15 +868,15 @@ def test_BelieverUnit_settle_believer_Sets_keeps_buildable_True():
     nation_rope = sue_believerunit.make_l1_rope("nation")
     usa_rope = sue_believerunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_believerunit.make_rope(usa_rope, "Oregon")
-    sue_healerlink = healerlink_shop({sue_str})
+    sue_healerunit = healerunit_shop({sue_str})
     sue_believerunit.edit_plan_attr(
-        oregon_rope, problem_bool=True, healerlink=sue_healerlink
+        oregon_rope, problem_bool=True, healerunit=sue_healerunit
     )
 
     wk_rope = sue_believerunit.make_l1_rope("sem_jours")
-    bob_healerlink = healerlink_shop({bob_str})
+    bob_healerunit = healerunit_shop({bob_str})
     sue_believerunit.edit_plan_attr(
-        wk_rope, problem_bool=True, healerlink=bob_healerlink
+        wk_rope, problem_bool=True, healerunit=bob_healerunit
     )
 
     # WHEN
@@ -906,9 +906,9 @@ def test_BelieverUnit_settle_believer_Sets_keeps_buildable_False():
     bend_str = "Be/nd"
     bend_rope = sue_believerunit.make_rope(oregon_rope, bend_str)
     sue_believerunit.set_plan(planunit_shop(bend_str), oregon_rope)
-    sue_healerlink = healerlink_shop({sue_str})
+    sue_healerunit = healerunit_shop({sue_str})
     sue_believerunit.edit_plan_attr(
-        bend_rope, problem_bool=True, healerlink=sue_healerlink
+        bend_rope, problem_bool=True, healerunit=sue_healerunit
     )
     assert sue_believerunit._keeps_buildable
 

@@ -1,11 +1,11 @@
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
     believer_get_obj,
     believer_partner_membership_get_obj,
     believer_partnerunit_get_obj,
-    believer_plan_awardlink_get_obj,
+    believer_plan_awardunit_get_obj,
     believer_plan_factunit_get_obj,
     believer_plan_reason_caseunit_get_obj as caseunit_get_obj,
     believer_plan_reasonunit_get_obj,
@@ -14,9 +14,9 @@ from src.a06_believer_logic.believer_tool import (
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str as caseunit_str,
     believer_plan_reasonunit_str,
@@ -75,7 +75,7 @@ def test_believer_planunit_get_obj_ReturnsObj():
     assert x_obj == sue_believer.get_plan_obj(casa_rope)
 
 
-def test_believer_plan_awardlink_get_obj_ReturnsObj():
+def test_believer_plan_awardunit_get_obj_ReturnsObj():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -84,13 +84,13 @@ def test_believer_plan_awardlink_get_obj_ReturnsObj():
     sue_believer.add_plan(casa_rope)
     jkeys = {plan_rope_str(): casa_rope, "awardee_title": swim_str}
     sue_believer.add_plan(casa_rope)
-    sue_believer.get_plan_obj(casa_rope).set_awardlink(awardlink_shop(swim_str))
+    sue_believer.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(swim_str))
 
     # WHEN
-    x_obj = believer_plan_awardlink_get_obj(sue_believer, jkeys)
+    x_obj = believer_plan_awardunit_get_obj(sue_believer, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_believer.get_plan_obj(casa_rope).get_awardlink(swim_str)
+    assert x_obj == sue_believer.get_plan_obj(casa_rope).get_awardunit(swim_str)
 
 
 def test_believer_plan_reasonunit_get_obj_ReturnsObj():
@@ -218,7 +218,7 @@ def test_believer_get_obj_ReturnsObj_believer_planunit_get_obj():
     assert x_obj == sue_believer.get_plan_obj(casa_rope)
 
 
-def test_believer_get_obj_ReturnsObj_believer_plan_awardlink_get_obj():
+def test_believer_get_obj_ReturnsObj_believer_plan_awardunit_get_obj():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -227,13 +227,13 @@ def test_believer_get_obj_ReturnsObj_believer_plan_awardlink_get_obj():
     sue_believer.add_plan(casa_rope)
     jkeys = {plan_rope_str(): casa_rope, "awardee_title": swim_str}
     sue_believer.add_plan(casa_rope)
-    sue_believer.get_plan_obj(casa_rope).set_awardlink(awardlink_shop(swim_str))
+    sue_believer.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(swim_str))
 
     # WHEN
-    x_obj = believer_get_obj(believer_plan_awardlink_str(), sue_believer, jkeys)
+    x_obj = believer_get_obj(believer_plan_awardunit_str(), sue_believer, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_believer.get_plan_obj(casa_rope).get_awardlink(swim_str)
+    assert x_obj == sue_believer.get_plan_obj(casa_rope).get_awardunit(swim_str)
 
 
 def test_believer_get_obj_ReturnsObj_believer_plan_reasonunit_get_obj():

@@ -233,11 +233,11 @@ def get_believer_dimens() -> set:
         "believer_partnerunit",
         "believer_partner_membership",
         "believer_planunit",
-        "believer_plan_awardlink",
+        "believer_plan_awardunit",
         "believer_plan_reasonunit",
         "believer_plan_reason_caseunit",
         "believer_plan_partyunit",
-        "believer_plan_healerlink",
+        "believer_plan_healerunit",
         "believer_plan_factunit",
     }
 

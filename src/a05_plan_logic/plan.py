@@ -32,11 +32,11 @@ from src.a02_finance_logic.finance_config import (
 from src.a03_group_logic.group import (
     AwardHeir,
     AwardLine,
-    AwardLink,
+    AwardUnit,
     GroupUnit,
     awardheir_shop,
     awardline_shop,
-    awardlinks_get_from_dict,
+    awardunits_get_from_dict,
 )
 from src.a03_group_logic.labor import (
     LaborHeir,
@@ -62,9 +62,9 @@ from src.a04_reason_logic.reason_plan import (
     reasonunit_shop,
 )
 from src.a05_plan_logic.healer import (
-    HealerLink,
-    healerlink_get_from_dict,
-    healerlink_shop,
+    HealerUnit,
+    healerunit_get_from_dict,
+    healerunit_shop,
 )
 from src.a05_plan_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
 
@@ -103,7 +103,7 @@ class PlanAttrHolder:
     reason_del_case_reason_state: RopeTerm = None
     reason_plan_active_requisite: str = None
     laborunit: LaborUnit = None
-    healerlink: HealerLink = None
+    healerunit: HealerUnit = None
     begin: float = None
     close: float = None
     gogo_want: float = None
@@ -117,8 +117,8 @@ class PlanAttrHolder:
     descendant_task_count: int = None
     all_partner_cred: bool = None
     all_partner_debt: bool = None
-    awardlink: AwardLink = None
-    awardlink_del: GroupTitle = None
+    awardunit: AwardUnit = None
+    awardunit_del: GroupTitle = None
     is_expanded: bool = None
     problem_bool: bool = None
 
@@ -150,7 +150,7 @@ def planattrholder_shop(
     reason_del_case_reason_state: RopeTerm = None,
     reason_plan_active_requisite: str = None,
     laborunit: LaborUnit = None,
-    healerlink: HealerLink = None,
+    healerunit: HealerUnit = None,
     begin: float = None,
     close: float = None,
     gogo_want: float = None,
@@ -164,8 +164,8 @@ def planattrholder_shop(
     descendant_task_count: int = None,
     all_partner_cred: bool = None,
     all_partner_debt: bool = None,
-    awardlink: AwardLink = None,
-    awardlink_del: GroupTitle = None,
+    awardunit: AwardUnit = None,
+    awardunit_del: GroupTitle = None,
     is_expanded: bool = None,
     problem_bool: bool = None,
 ) -> PlanAttrHolder:
@@ -182,7 +182,7 @@ def planattrholder_shop(
         reason_del_case_reason_state=reason_del_case_reason_state,
         reason_plan_active_requisite=reason_plan_active_requisite,
         laborunit=laborunit,
-        healerlink=healerlink,
+        healerunit=healerunit,
         begin=begin,
         close=close,
         gogo_want=gogo_want,
@@ -196,8 +196,8 @@ def planattrholder_shop(
         descendant_task_count=descendant_task_count,
         all_partner_cred=all_partner_cred,
         all_partner_debt=all_partner_debt,
-        awardlink=awardlink,
-        awardlink_del=awardlink_del,
+        awardunit=awardunit,
+        awardunit_del=awardunit_del,
         is_expanded=is_expanded,
         problem_bool=problem_bool,
     )
@@ -228,11 +228,11 @@ class PlanUnit:
     star : int weight that is arbitrary used by parent plan to calculated relative importance.
     _kids : dict[RopeTerm], Internal mapping of child plans by their LabelTerm
     _uid : int Unique identifier, forgot how I use this.
-    awardlinks : dict[GroupTitle, AwardLink] that describe who funds and who is funded
+    awardunits : dict[GroupTitle, AwardUnit] that describe who funds and who is funded
     reasonunits : dict[RopeTerm, ReasonUnit] that stores all reasons
     laborunit : LaborUnit that describes whom this task is for
     factunits : dict[RopeTerm, FactUnit] that stores all facts
-    healerlink : HealerLink, if a ancestor plan is a problem, this can donote a healing plan.
+    healerunit : HealerUnit, if a ancestor plan is a problem, this can donote a healing plan.
     begin : float that describes the begin of a numberical range if it exists
     close : float that describes the close of a numberical range if it exists
     addin : float that describes addition to parent range calculations
@@ -247,8 +247,8 @@ class PlanUnit:
 
     _active : bool that describes if the plan task is active, calculated by BeliefUnit.
     _active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
-    _all_partner_cred : bool Flag indicating there are not explicitley defined awardlinks
-    _all_partner_debt : bool Flag indicating there are not explicitley defined awardlinks
+    _all_partner_cred : bool Flag indicating there are not explicitley defined awardunits
+    _all_partner_debt : bool Flag indicating there are not explicitley defined awardunits
     _awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
     _awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
     _descendant_task_count : int Count of descendant plans marked as tasks.
@@ -257,7 +257,7 @@ class PlanUnit:
     fund_iota : FundIota Smallest indivisible funding component.
     _fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
     _fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
-    _healerlink_ratio : float
+    _healerunit_ratio : float
     _level : int that describes Depth level in plan hierarchy.
     _range_evaluated : bool Flag indicating whether range has been evaluated.
     _reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
@@ -274,11 +274,11 @@ class PlanUnit:
     root: bool = None
     star: int = None
     _uid: int = None  # Calculated field?
-    awardlinks: dict[GroupTitle, AwardLink] = None
+    awardunits: dict[GroupTitle, AwardUnit] = None
     reasonunits: dict[RopeTerm, ReasonUnit] = None
     laborunit: LaborUnit = None
     factunits: dict[RopeTerm, FactUnit] = None
-    healerlink: HealerLink = None
+    healerunit: HealerUnit = None
     begin: float = None
     close: float = None
     addin: float = None
@@ -304,7 +304,7 @@ class PlanUnit:
     fund_iota: FundIota = None
     _fund_onset: FundNum = None
     _fund_cease: FundNum = None
-    _healerlink_ratio: float = None
+    _healerunit_ratio: float = None
     _level: int = None
     _range_evaluated: bool = None
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None
@@ -503,7 +503,7 @@ class PlanUnit:
             )
             self._awardheirs[awardheir.awardee_title] = awardheir
 
-        for ib in self.awardlinks.values():
+        for ib in self.awardunits.values():
             awardheir = awardheir_shop(
                 awardee_title=ib.awardee_title,
                 give_force=ib.give_force,
@@ -562,7 +562,7 @@ class PlanUnit:
             and self.belief_label is not None
         ):
             raise Plan_root_LabelNotEmptyException(
-                f"Cannot set planroot to string different than '{self.belief_label}'"
+                f"Cannot set a root Plan to string different than '{self.belief_label}'"
             )
         else:
             self.plan_label = plan_label
@@ -631,8 +631,8 @@ class PlanUnit:
             )
         if plan_attr.laborunit is not None:
             self.laborunit = plan_attr.laborunit
-        if plan_attr.healerlink is not None:
-            self.healerlink = plan_attr.healerlink
+        if plan_attr.healerunit is not None:
+            self.healerunit = plan_attr.healerunit
         if plan_attr.begin is not None:
             self.begin = plan_attr.begin
         if plan_attr.close is not None:
@@ -655,10 +655,10 @@ class PlanUnit:
             self._all_partner_cred = plan_attr.all_partner_cred
         if plan_attr.all_partner_debt is not None:
             self._all_partner_debt = plan_attr.all_partner_debt
-        if plan_attr.awardlink is not None:
-            self.set_awardlink(awardlink=plan_attr.awardlink)
-        if plan_attr.awardlink_del is not None:
-            self.del_awardlink(awardee_title=plan_attr.awardlink_del)
+        if plan_attr.awardunit is not None:
+            self.set_awardunit(awardunit=plan_attr.awardunit)
+        if plan_attr.awardunit_del is not None:
+            self.del_awardunit(awardee_title=plan_attr.awardunit_del)
         if plan_attr.is_expanded is not None:
             self._is_expanded = plan_attr.is_expanded
         if plan_attr.task is not None:
@@ -793,20 +793,20 @@ class PlanUnit:
     def get_kids_star_sum(self) -> float:
         return sum(x_kid.star for x_kid in self._kids.values())
 
-    def set_awardlink(self, awardlink: AwardLink):
-        self.awardlinks[awardlink.awardee_title] = awardlink
+    def set_awardunit(self, awardunit: AwardUnit):
+        self.awardunits[awardunit.awardee_title] = awardunit
 
-    def get_awardlink(self, awardee_title: GroupTitle) -> AwardLink:
-        return self.awardlinks.get(awardee_title)
+    def get_awardunit(self, awardee_title: GroupTitle) -> AwardUnit:
+        return self.awardunits.get(awardee_title)
 
-    def del_awardlink(self, awardee_title: GroupTitle):
+    def del_awardunit(self, awardee_title: GroupTitle):
         try:
-            self.awardlinks.pop(awardee_title)
+            self.awardunits.pop(awardee_title)
         except KeyError as e:
-            raise (f"Cannot delete awardlink '{awardee_title}'.") from e
+            raise (f"Cannot delete awardunit '{awardee_title}'.") from e
 
-    def awardlink_exists(self, x_awardee_title: GroupTitle) -> bool:
-        return self.awardlinks.get(x_awardee_title) != None
+    def awardunit_exists(self, x_awardee_title: GroupTitle) -> bool:
+        return self.awardunits.get(x_awardee_title) != None
 
     def set_reasonunit(self, reason: ReasonUnit):
         reason.knot = self.knot
@@ -923,7 +923,7 @@ class PlanUnit:
                 new_reasonheir.set_rplan_active_value(reason_context_plan._active)
             self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
-    def set_planroot_inherit_reasonheirs(self):
+    def set_root_plan_reasonheirs(self):
         self._reasonheirs = {}
         for x_reasonunit in self.reasonunits.values():
             new_reasonheir = reasonheir_shop(x_reasonunit.reason_context)
@@ -939,14 +939,14 @@ class PlanUnit:
             for reason_context, reason in self.reasonunits.items()
         }
 
-    def get_kids_dict(self) -> dict[GroupTitle,]:
+    def get_kids_dict(self) -> dict[RopeTerm,]:
         return {c_rope: kid.to_dict() for c_rope, kid in self._kids.items()}
 
-    def get_awardlinks_dict(self) -> dict[GroupTitle, dict]:
-        x_awardlinks = self.awardlinks.items()
+    def get_awardunits_dict(self) -> dict[GroupTitle, dict]:
+        x_awardunits = self.awardunits.items()
         return {
-            x_awardee_title: awardlink.to_dict()
-            for x_awardee_title, awardlink in x_awardlinks
+            x_awardee_title: awardunit.to_dict()
+            for x_awardee_title, awardunit in x_awardunits
         }
 
     def is_kidless(self) -> bool:
@@ -971,10 +971,10 @@ class PlanUnit:
             x_dict["reasonunits"] = self.get_reasonunits_dict()
         if self.laborunit not in [None, laborunit_shop()]:
             x_dict["laborunit"] = self.get_laborunit_dict()
-        if self.healerlink not in [None, healerlink_shop()]:
-            x_dict["healerlink"] = self.healerlink.to_dict()
-        if self.awardlinks not in [{}, None]:
-            x_dict["awardlinks"] = self.get_awardlinks_dict()
+        if self.healerunit not in [None, healerunit_shop()]:
+            x_dict["healerunit"] = self.healerunit.to_dict()
+        if self.awardunits not in [{}, None]:
+            x_dict["awardunits"] = self.get_awardunits_dict()
         if self.begin is not None:
             x_dict["begin"] = self.begin
         if self.close is not None:
@@ -1040,16 +1040,16 @@ def planunit_shop(
     parent_rope: RopeTerm = None,
     _kids: dict = None,
     star: int = 1,
-    awardlinks: dict[GroupTitle, AwardLink] = None,
+    awardunits: dict[GroupTitle, AwardUnit] = None,
     _awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
-    _awardlines: dict[GroupTitle, AwardLink] = None,  # Calculated field
+    _awardlines: dict[GroupTitle, AwardUnit] = None,  # Calculated field
     reasonunits: dict[RopeTerm, ReasonUnit] = None,
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None,  # Calculated field
     laborunit: LaborUnit = None,
     _laborheir: LaborHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
-    healerlink: HealerLink = None,
+    healerunit: HealerUnit = None,
     begin: float = None,
     close: float = None,
     gogo_want: float = None,
@@ -1076,10 +1076,10 @@ def planunit_shop(
     _is_expanded: bool = True,
     _active_hx: dict[int, bool] = None,
     knot: str = None,
-    _healerlink_ratio: float = None,
+    _healerunit_ratio: float = None,
 ) -> PlanUnit:
     belief_label = get_default_belief_label() if belief_label is None else belief_label
-    x_healerlink = healerlink_shop() if healerlink is None else healerlink
+    x_healerunit = healerunit_shop() if healerunit is None else healerunit
 
     x_plankid = PlanUnit(
         plan_label=None,
@@ -1087,7 +1087,7 @@ def planunit_shop(
         parent_rope=parent_rope,
         _kids=get_empty_dict_if_None(_kids),
         star=get_positive_int(star),
-        awardlinks=get_empty_dict_if_None(awardlinks),
+        awardunits=get_empty_dict_if_None(awardunits),
         _awardheirs=get_empty_dict_if_None(_awardheirs),
         _awardlines=get_empty_dict_if_None(_awardlines),
         reasonunits=get_empty_dict_if_None(reasonunits),
@@ -1096,7 +1096,7 @@ def planunit_shop(
         _laborheir=_laborheir,
         factunits=get_empty_dict_if_None(factunits),
         _factheirs=get_empty_dict_if_None(_factheirs),
-        healerlink=x_healerlink,
+        healerunit=x_healerunit,
         begin=begin,
         close=close,
         gogo_want=gogo_want,
@@ -1123,7 +1123,7 @@ def planunit_shop(
         _is_expanded=_is_expanded,
         _active_hx=get_empty_dict_if_None(_active_hx),
         knot=default_knot_if_None(knot),
-        _healerlink_ratio=get_0_if_None(_healerlink_ratio),
+        _healerunit_ratio=get_0_if_None(_healerunit_ratio),
     )
     if x_plankid.root:
         x_plankid.set_plan_label(plan_label=belief_label)
@@ -1146,20 +1146,20 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
             if x_dict.get(dict_key) is not None
             else laborunit_shop()
         )
-    elif dict_key == "healerlink":
+    elif dict_key == "healerunit":
         return (
-            healerlink_get_from_dict(x_dict[dict_key])
+            healerunit_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else healerlink_shop()
+            else healerunit_shop()
         )
     elif dict_key == "factunits":
         facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))
         return factunits_get_from_dict(facts_dict)
-    elif dict_key == "awardlinks":
+    elif dict_key == "awardunits":
         return (
-            awardlinks_get_from_dict(x_dict[dict_key])
+            awardunits_get_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else awardlinks_get_from_dict({})
+            else awardunits_get_from_dict({})
         )
     elif dict_key in {"_kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}

@@ -7,10 +7,7 @@ from src.a01_term_logic.rope import (
 )
 from src.a04_reason_logic.reason_plan import CaseUnit, FactUnit
 from src.a06_believer_logic.believer_main import BelieverUnit
-from src.a07_timeline_logic.timeline_main import (
-    BelieverTimelinePoint,
-    believertimelinepoint_shop,
-)
+from src.a07_timeline_logic.timeline_main import believertimelinepoint_shop
 
 
 def get_reason_case_readable_str(
@@ -28,10 +25,9 @@ def get_reason_case_readable_str(
     if context == week_rope:
         week_plan = believerunit.get_plan_obj(week_rope)
         for weekday_plan in week_plan._kids.values():
-            if (
-                caseunit.reason_lower == weekday_plan.gogo_want
-                and caseunit.reason_upper == weekday_plan.stop_want
-            ):
+            week_lower_bool = caseunit.reason_lower == weekday_plan.gogo_want
+            week_upper_bool = caseunit.reason_upper == weekday_plan.stop_want
+            if week_lower_bool and week_upper_bool:
                 return f"case: every {weekday_plan.plan_label}"
 
     x_str = f"case: {caseunit.reason_state.replace(context, "", 1)}"

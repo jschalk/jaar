@@ -1,4 +1,4 @@
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.believer_tool import (
@@ -12,9 +12,9 @@ from src.a06_believer_logic.test._util.a06_str import (
     begin_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -206,7 +206,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_planunit():
     assert zia_jvalues.get(stop_want_str()) == sue_stop_want
 
 
-def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_awardlink():
+def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_awardunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
     casa_str = "casa"
@@ -215,9 +215,9 @@ def test_sift_atom_ReturnsObj_BelieverAtom_UPDATE_believer_plan_awardlink():
     run_str = ";run"
     zia_run_give_force = 72
     zia_run_take_force = 76
-    sue_believer.get_plan_obj(casa_rope).set_awardlink(awardlink_shop(run_str, 2, 3))
+    sue_believer.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(run_str, 2, 3))
 
-    zia_atom = believeratom_shop(believer_plan_awardlink_str(), INSERT_str())
+    zia_atom = believeratom_shop(believer_plan_awardunit_str(), INSERT_str())
     zia_atom.set_arg(plan_rope_str(), casa_rope)
     zia_atom.set_arg(awardee_title_str(), run_str)
     zia_atom.set_arg(give_force_str(), zia_run_give_force)

@@ -8,9 +8,9 @@ from src.a00_data_toolbox.db_toolbox import (
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_plan_factunit_str,
-    believer_plan_healerlink_str,
+    believer_plan_healerunit_str,
     believer_plan_partyunit_str,
     believer_plan_reason_caseunit_str,
     believer_plan_reasonunit_str,
@@ -89,11 +89,11 @@ def test_create_prime_tablename_ReturnsObj():
     blrmemb_dimen = believer_partner_membership_str()
     blrgrou_dimen = believer_groupunit_str()
     blrplan_dimen = believer_planunit_str()
-    blrawar_dimen = believer_plan_awardlink_str()
+    blrawar_dimen = believer_plan_awardunit_str()
     blrreas_dimen = believer_plan_reasonunit_str()
     blrprem_dimen = believer_plan_reason_caseunit_str()
     blrlabo_dimen = believer_plan_partyunit_str()
-    blrheal_dimen = believer_plan_healerlink_str()
+    blrheal_dimen = believer_plan_healerunit_str()
     blrfact_dimen = believer_plan_factunit_str()
     blfunit_dimen = beliefunit_str()
     blfpayy_dimen = belief_paybook_str()

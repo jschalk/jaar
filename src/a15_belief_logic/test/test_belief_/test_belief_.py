@@ -6,7 +6,7 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a07_timeline_logic.timeline_main import timelineunit_shop
@@ -476,12 +476,12 @@ def test_BeliefUnit__set_all_healer_dutys_Setsdutys(
     yao_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
-    dallas_healerlink = healerlink_shop({sue_str, yao_str})
-    dallas_plan = planunit_shop(dallas_str, healerlink=dallas_healerlink)
+    dallas_healerunit = healerunit_shop({sue_str, yao_str})
+    dallas_plan = planunit_shop(dallas_str, healerunit=dallas_healerunit)
     elpaso_str = "el paso"
     elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
-    elpaso_healerlink = healerlink_shop({sue_str})
-    elpaso_plan = planunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    elpaso_healerunit = healerunit_shop({sue_str})
+    elpaso_plan = planunit_shop(elpaso_str, healerunit=elpaso_healerunit)
 
     sue_gut_believer.set_plan(dallas_plan, texas_rope)
     sue_gut_believer.set_plan(elpaso_plan, texas_rope)

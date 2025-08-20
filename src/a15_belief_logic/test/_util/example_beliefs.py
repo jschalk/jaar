@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_plan import FactUnit, factunit_shop
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
@@ -45,12 +45,12 @@ def create_example_belief2() -> BeliefUnit:
     zia_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_rope = yao_gut_believer.make_rope(texas_rope, dallas_str)
-    dallas_healerlink = healerlink_shop({yao_str, zia_str})
-    dallas_plan = planunit_shop(dallas_str, healerlink=dallas_healerlink)
+    dallas_healerunit = healerunit_shop({yao_str, zia_str})
+    dallas_plan = planunit_shop(dallas_str, healerunit=dallas_healerunit)
     elpaso_str = "el paso"
     elpaso_rope = yao_gut_believer.make_rope(texas_rope, elpaso_str)
-    elpaso_healerlink = healerlink_shop({yao_str})
-    elpaso_plan = planunit_shop(elpaso_str, healerlink=elpaso_healerlink)
+    elpaso_healerunit = healerunit_shop({yao_str})
+    elpaso_plan = planunit_shop(elpaso_str, healerunit=elpaso_healerunit)
 
     yao_gut_believer.set_plan(dallas_plan, texas_rope)
     yao_gut_believer.set_plan(elpaso_plan, texas_rope)

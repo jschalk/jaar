@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a01_term_logic.rope import create_rope
 from src.a03_group_logic.group import (
     awardheir_shop,
-    awardlink_shop,
+    awardunit_shop,
     groupunit_shop,
     membership_shop,
 )
@@ -14,7 +14,7 @@ from src.a04_reason_logic.reason_plan import (
     factheir_shop,
     reasonheir_shop,
 )
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a18_etl_toolbox.db_obj_believer_tool import (
@@ -60,7 +60,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
     x__keeps_justified = 77
     x__offtrack_fund = 55.5
     x__rational = 92
-    x__sum_healerlink_share = 66.6
+    x__sum_healerunit_share = 66.6
     x__tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
@@ -83,7 +83,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
     sue_believer._keeps_justified = x__keeps_justified
     sue_believer._offtrack_fund = x__offtrack_fund
     sue_believer._rational = x__rational
-    sue_believer._sum_healerlink_share = x__sum_healerlink_share
+    sue_believer._sum_healerunit_share = x__sum_healerunit_share
     sue_believer._tree_traverse_count = x__tree_traverse_count
     sue_believer.credor_respect = x_credor_respect
     sue_believer.debtor_respect = x_debtor_respect
@@ -117,7 +117,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
             x__rational,
             x__keeps_justified,
             x__offtrack_fund,
-            x__sum_healerlink_share,
+            x__sum_healerunit_share,
             x__keeps_buildable,
             x__tree_traverse_count,
         )
@@ -167,7 +167,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x__level = 24
     x__range_evaluated = 25
     x__descendant_task_count = 26
-    x__healerlink_ratio = 27.0
+    x__healerunit_ratio = 27.0
     x__all_partner_cred = 28
     x__all_partner_debt = 29
     x_plan = planunit_shop()
@@ -196,7 +196,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan._level = x__level
     x_plan._range_evaluated = x__range_evaluated
     x_plan._descendant_task_count = x__descendant_task_count
-    x_plan._healerlink_ratio = x__healerlink_ratio
+    x_plan._healerunit_ratio = x__healerunit_ratio
     x_plan._all_partner_cred = x__all_partner_cred
     x_plan._all_partner_debt = x__all_partner_debt
     x_plan.begin = x_begin
@@ -221,7 +221,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan._level = x__level
     x_plan._range_evaluated = x__range_evaluated
     x_plan._descendant_task_count = x__descendant_task_count
-    x_plan._healerlink_ratio = x__healerlink_ratio
+    x_plan._healerunit_ratio = x__healerunit_ratio
     x_plan._all_partner_cred = x__all_partner_cred
     x_plan._all_partner_debt = x__all_partner_debt
 
@@ -267,7 +267,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x__level,
             x__range_evaluated,
             x__descendant_task_count,
-            x__healerlink_ratio,
+            x__healerunit_ratio,
             x__all_partner_cred,
             x__all_partner_debt,
         )
@@ -631,7 +631,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
 def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_awardlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_awardunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -661,7 +661,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_awardlink_job"
+        x_table_name = "believer_plan_awardunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
@@ -746,14 +746,14 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
 def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_healerlink")
+    # x_args = get_believer_calc_dimen_args("believer_plan_healerunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_healerlink.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_healerunit.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
@@ -763,19 +763,19 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
     x_rope = 3
     bob_str = "Bob"
     sue_str = "Sue"
-    x_healerlink = healerlink_shop()
-    x_healerlink.set_healer_name(bob_str)
-    x_healerlink.set_healer_name(sue_str)
+    x_healerunit = healerunit_shop()
+    x_healerunit.set_healer_name(bob_str)
+    x_healerunit.set_healer_name(sue_str)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_healerlink_job"
+        x_table_name = "believer_plan_healerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_belief_label, x_believer_name, x_rope)
 
         # WHEN
-        insert_job_blrheal(cursor, x_objkeysholder, x_healerlink)
+        insert_job_blrheal(cursor, x_objkeysholder, x_healerunit)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 2
@@ -883,8 +883,8 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_believer.edit_plan_attr(
         casa_rope, reason_context=status_rope, reason_case=dirty_rope
     )
-    sue_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(run_str))
-    sue_believer.edit_plan_attr(casa_rope, healerlink=healerlink_shop({bob_str}))
+    sue_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
+    sue_believer.edit_plan_attr(casa_rope, healerunit=healerunit_shop({bob_str}))
     casa_laborunit = laborunit_shop()
     casa_laborunit.add_party(sue_str, True)
     sue_believer.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
@@ -896,9 +896,9 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         blrmemb_job_table = "believer_partner_membership_job"
         blrpern_job_table = "believer_partnerunit_job"
         blrgrou_job_table = "believer_groupunit_job"
-        blrawar_job_table = "believer_plan_awardlink_job"
+        blrawar_job_table = "believer_plan_awardunit_job"
         blrfact_job_table = "believer_plan_factunit_job"
-        blrheal_job_table = "believer_plan_healerlink_job"
+        blrheal_job_table = "believer_plan_healerunit_job"
         blrprem_job_table = "believer_plan_reason_caseunit_job"
         blrreas_job_table = "believer_plan_reasonunit_job"
         blrlabo_job_table = "believer_plan_partyunit_job"

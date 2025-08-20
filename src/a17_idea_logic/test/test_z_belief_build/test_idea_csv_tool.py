@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.rope import to_rope
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a09_pack_logic.delta import believerdelta_shop
 from src.a09_pack_logic.pack import packunit_shop
@@ -336,9 +336,9 @@ def test_add_believer_to_br00022_csv_ReturnsObj():
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
-    casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
+    casa_awardunit = awardunit_shop(yao_str, yao_give_force, yao_take_force)
     bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardlink=casa_awardlink)
+    bob_believer.edit_plan_attr(casa_rope, awardunit=casa_awardunit)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
@@ -412,7 +412,7 @@ def test_add_believer_to_br00025_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     casa_plan = bob_believer.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_plan.healerlink.set_healer_name(cleaners_str)
+    casa_plan.healerunit.set_healer_name(cleaners_str)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
@@ -589,7 +589,7 @@ def test_add_believerunit_to_stance_csv_strs_ReturnsObj():
         mop_rope, reason_context=casa_rope, reason_case=clean_rope
     )
     bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(yao_str))
+    bob_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(yao_str))
     bob_believer.add_fact(casa_rope, clean_rope)
 
     br00020_header = x_ideas.get("br00020")
@@ -693,9 +693,9 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
-    casa_awardlink = awardlink_shop(yao_str, yao_give_force, yao_take_force)
+    casa_awardunit = awardunit_shop(yao_str, yao_give_force, yao_take_force)
     bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardlink=casa_awardlink)
+    bob_believer.edit_plan_attr(casa_rope, awardunit=casa_awardunit)
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
     sue_str = "Sue"
@@ -793,7 +793,7 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     bob_believer.add_plan(casa_rope)
     casa_plan = bob_believer.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
-    casa_plan.healerlink.set_healer_name(cleaners_str)
+    casa_plan.healerunit.set_healer_name(cleaners_str)
     bob_believerdelta = believerdelta_shop()
     bob_believerdelta.add_all_believeratoms(bob_believer)
     sue_str = "Sue"
@@ -1001,7 +1001,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
         mop_rope, reason_context=casa_rope, reason_case=clean_rope
     )
     bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardlink=awardlink_shop(yao_str))
+    bob_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(yao_str))
     bob_believer.add_fact(casa_rope, clean_rope)
     bob_believer.credor_respect = 444
     bob_believer.debtor_respect = 556

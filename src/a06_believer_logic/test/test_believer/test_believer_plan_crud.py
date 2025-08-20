@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.a03_group_logic.group import awardlink_shop
+from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason_plan import factunit_shop
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
@@ -412,17 +412,17 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     _all_partner_debt_new = sue_believer.planroot._kids[casa_str]._all_partner_debt
     assert _all_partner_debt_new == 59
 
-    # _awardlink: dict = None,
-    sue_believer.planroot._kids[casa_str].awardlinks = {
-        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
+    # _awardunit: dict = None,
+    sue_believer.planroot._kids[casa_str].awardunits = {
+        "fun": awardunit_shop(awardee_title="fun", give_force=1, take_force=7)
     }
-    _awardlinks = sue_believer.planroot._kids[casa_str].awardlinks
-    assert _awardlinks == {
-        "fun": awardlink_shop(awardee_title="fun", give_force=1, take_force=7)
+    _awardunits = sue_believer.planroot._kids[casa_str].awardunits
+    assert _awardunits == {
+        "fun": awardunit_shop(awardee_title="fun", give_force=1, take_force=7)
     }
-    x_awardlink = awardlink_shop(awardee_title="fun", give_force=4, take_force=8)
-    sue_believer.edit_plan_attr(casa_rope, awardlink=x_awardlink)
-    assert sue_believer.planroot._kids[casa_str].awardlinks == {"fun": x_awardlink}
+    x_awardunit = awardunit_shop(awardee_title="fun", give_force=4, take_force=8)
+    sue_believer.edit_plan_attr(casa_rope, awardunit=x_awardunit)
+    assert sue_believer.planroot._kids[casa_str].awardunits == {"fun": x_awardunit}
 
     # _is_expanded: dict = None,
     sue_believer.planroot._kids[casa_str]._is_expanded = "what"
@@ -438,17 +438,17 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     sue_believer.edit_plan_attr(casa_rope, task=True)
     assert sue_believer.planroot._kids[casa_str].task is True
 
-    # _healerlink:
-    sue_believer.planroot._kids[casa_str].healerlink = "fun3rol"
-    src_healerlink = sue_believer.planroot._kids[casa_str].healerlink
-    assert src_healerlink == "fun3rol"
+    # _healerunit:
+    sue_believer.planroot._kids[casa_str].healerunit = "fun3rol"
+    src_healerunit = sue_believer.planroot._kids[casa_str].healerunit
+    assert src_healerunit == "fun3rol"
     sue_str = "Sue"
     yao_str = "Yao"
-    x_healerlink = healerlink_shop({sue_str, yao_str})
+    x_healerunit = healerunit_shop({sue_str, yao_str})
     sue_believer.add_partnerunit(sue_str)
     sue_believer.add_partnerunit(yao_str)
-    sue_believer.edit_plan_attr(casa_rope, healerlink=x_healerlink)
-    assert sue_believer.planroot._kids[casa_str].healerlink == x_healerlink
+    sue_believer.edit_plan_attr(casa_rope, healerunit=x_healerunit)
+    assert sue_believer.planroot._kids[casa_str].healerunit == x_healerunit
 
     # _problem_bool: bool
     sue_believer.planroot._kids[casa_str].problem_bool = "fun3rol"
@@ -459,7 +459,7 @@ def test_BelieverUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     assert sue_believer.planroot._kids[casa_str].problem_bool == x_problem_bool
 
 
-def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerlink_healer_names_DoNotExist():
+def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerunit_healer_names_DoNotExist():
     # ESTABLISH
     yao_believer = believerunit_shop("Yao")
     casa_str = "casa"
@@ -475,12 +475,12 @@ def test_BelieverUnit_edit_plan_attr_RaisesErrorWhen_healerlink_healer_names_DoN
 
     # WHEN / THEN
     sue_str = "Sue"
-    x_healerlink = healerlink_shop({sue_str})
+    x_healerunit = healerunit_shop({sue_str})
     with pytest_raises(Exception) as excinfo:
-        yao_believer.edit_plan_attr(casa_rope, healerlink=x_healerlink)
+        yao_believer.edit_plan_attr(casa_rope, healerunit=x_healerunit)
     assert (
         str(excinfo.value)
-        == f"Plan cannot edit healerlink because group_title '{sue_str}' does not exist as group in Believer"
+        == f"Plan cannot edit healerunit because group_title '{sue_str}' does not exist as group in Believer"
     )
 
 
@@ -665,7 +665,7 @@ def test_BelieverUnit_del_plan_obj_DeletingBundledPlanReturnsPlansToOriginalStat
     assert sports_bball_plan.star == bball_star
 
 
-def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardlinks():
+def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardunits():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(yao_str)
@@ -680,31 +680,31 @@ def test_BelieverUnit_edit_plan_attr_DeletesPlanUnit_awardlinks():
     swim_rope = yao_believer.make_l1_rope(swim_str)
 
     yao_believer.set_l1_plan(planunit_shop(swim_str))
-    awardlink_yao = awardlink_shop(yao_str, give_force=10)
-    awardlink_zia = awardlink_shop(zia_str, give_force=10)
-    awardlink_Xio = awardlink_shop(Xio_str, give_force=10)
+    awardunit_yao = awardunit_shop(yao_str, give_force=10)
+    awardunit_zia = awardunit_shop(zia_str, give_force=10)
+    awardunit_Xio = awardunit_shop(Xio_str, give_force=10)
 
     swim_plan = yao_believer.get_plan_obj(swim_rope)
-    yao_believer.edit_plan_attr(swim_rope, awardlink=awardlink_yao)
-    yao_believer.edit_plan_attr(swim_rope, awardlink=awardlink_zia)
-    yao_believer.edit_plan_attr(swim_rope, awardlink=awardlink_Xio)
+    yao_believer.edit_plan_attr(swim_rope, awardunit=awardunit_yao)
+    yao_believer.edit_plan_attr(swim_rope, awardunit=awardunit_zia)
+    yao_believer.edit_plan_attr(swim_rope, awardunit=awardunit_Xio)
 
-    assert len(swim_plan.awardlinks) == 3
-    assert len(yao_believer.planroot._kids[swim_str].awardlinks) == 3
+    assert len(swim_plan.awardunits) == 3
+    assert len(yao_believer.planroot._kids[swim_str].awardunits) == 3
 
     # WHEN
-    yao_believer.edit_plan_attr(swim_rope, awardlink_del=yao_str)
+    yao_believer.edit_plan_attr(swim_rope, awardunit_del=yao_str)
 
     # THEN
     swim_plan = yao_believer.get_plan_obj(swim_rope)
     print(f"{swim_plan.plan_label=}")
-    print(f"{swim_plan.awardlinks=}")
+    print(f"{swim_plan.awardunits=}")
     print(f"{swim_plan._awardheirs=}")
 
-    assert len(yao_believer.planroot._kids[swim_str].awardlinks) == 2
+    assert len(yao_believer.planroot._kids[swim_str].awardunits) == 2
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_RemovesPartner_awardlinks():
+def test_BelieverUnit__get_filtered_awardunits_plan_RemovesPartner_awardunits():
     # ESTABLISH
     bob_str = "Bob"
     example_believer = believerunit_shop(bob_str)
@@ -717,26 +717,26 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_RemovesPartner_awardlinks():
     sports_str = "sports"
     sports_rope = example_believer.make_l1_rope(sports_str)
     example_believer.set_l1_plan(planunit_shop(sports_str))
-    example_believer.edit_plan_attr(sports_rope, awardlink=awardlink_shop(run_str))
-    example_believer.edit_plan_attr(sports_rope, awardlink=awardlink_shop(hike_str))
+    example_believer.edit_plan_attr(sports_rope, awardunit=awardunit_shop(run_str))
+    example_believer.edit_plan_attr(sports_rope, awardunit=awardunit_shop(hike_str))
     example_believer_sports_plan = example_believer.get_plan_obj(sports_rope)
-    assert len(example_believer_sports_plan.awardlinks) == 2
+    assert len(example_believer_sports_plan.awardunits) == 2
     bob_believer = believerunit_shop(bob_str)
     bob_believer.add_partnerunit(xia_str)
     bob_believer.get_partner(xia_str).add_membership(run_str)
-    print(f"{example_believer_sports_plan.awardlinks=}")
+    print(f"{example_believer_sports_plan.awardunits=}")
 
     # WHEN
-    cleaned_plan = bob_believer._get_filtered_awardlinks_plan(
+    cleaned_plan = bob_believer._get_filtered_awardunits_plan(
         example_believer_sports_plan
     )
 
     # THEN
-    assert len(cleaned_plan.awardlinks) == 1
-    assert list(cleaned_plan.awardlinks.keys()) == [run_str]
+    assert len(cleaned_plan.awardunits) == 1
+    assert list(cleaned_plan.awardunits.keys()) == [run_str]
 
 
-def test_BelieverUnit__get_filtered_awardlinks_plan_RemovesGroup_awardlink():
+def test_BelieverUnit__get_filtered_awardunits_plan_RemovesGroup_awardunit():
     # ESTABLISH
     bob_str = "Bob"
     example_believer = believerunit_shop(bob_str)
@@ -748,24 +748,24 @@ def test_BelieverUnit__get_filtered_awardlinks_plan_RemovesGroup_awardlink():
     swim_str = "swim"
     swim_rope = example_believer.make_l1_rope(swim_str)
     example_believer.set_l1_plan(planunit_shop(swim_str))
-    example_believer.edit_plan_attr(swim_rope, awardlink=awardlink_shop(xia_str))
-    example_believer.edit_plan_attr(swim_rope, awardlink=awardlink_shop(zoa_str))
+    example_believer.edit_plan_attr(swim_rope, awardunit=awardunit_shop(xia_str))
+    example_believer.edit_plan_attr(swim_rope, awardunit=awardunit_shop(zoa_str))
     example_believer_swim_plan = example_believer.get_plan_obj(swim_rope)
-    assert len(example_believer_swim_plan.awardlinks) == 2
+    assert len(example_believer_swim_plan.awardunits) == 2
     bob_believer = believerunit_shop(bob_str)
     bob_believer.add_partnerunit(xia_str)
 
     # WHEN
-    cleaned_plan = bob_believer._get_filtered_awardlinks_plan(
+    cleaned_plan = bob_believer._get_filtered_awardunits_plan(
         example_believer_swim_plan
     )
 
     # THEN
-    assert len(cleaned_plan.awardlinks) == 1
-    assert list(cleaned_plan.awardlinks.keys()) == [xia_str]
+    assert len(cleaned_plan.awardunits) == 1
+    assert list(cleaned_plan.awardunits.keys()) == [xia_str]
 
 
-def test_BelieverUnit_set_plan_SetsPlan_awardlinks():
+def test_BelieverUnit_set_plan_SetsPlan_awardunits():
     # ESTABLISH
     bob_str = "Bob"
     example_believer = believerunit_shop(bob_str)
@@ -780,10 +780,10 @@ def test_BelieverUnit_set_plan_SetsPlan_awardlinks():
     swim_rope = example_believer.make_l1_rope(swim_str)
     example_believer.set_l1_plan(planunit_shop(casa_str))
     example_believer.set_l1_plan(planunit_shop(swim_str))
-    example_believer.edit_plan_attr(swim_rope, awardlink=awardlink_shop(xia_str))
-    example_believer.edit_plan_attr(swim_rope, awardlink=awardlink_shop(zoa_str))
+    example_believer.edit_plan_attr(swim_rope, awardunit=awardunit_shop(xia_str))
+    example_believer.edit_plan_attr(swim_rope, awardunit=awardunit_shop(zoa_str))
     example_believer_swim_plan = example_believer.get_plan_obj(swim_rope)
-    assert len(example_believer_swim_plan.awardlinks) == 2
+    assert len(example_believer_swim_plan.awardunits) == 2
     bob_believer = believerunit_shop(bob_str)
     bob_believer.add_partnerunit(xia_str)
 
@@ -792,8 +792,8 @@ def test_BelieverUnit_set_plan_SetsPlan_awardlinks():
 
     # THEN
     bob_believer_swim_plan = bob_believer.get_plan_obj(swim_rope)
-    assert len(bob_believer_swim_plan.awardlinks) == 1
-    assert list(bob_believer_swim_plan.awardlinks.keys()) == [xia_str]
+    assert len(bob_believer_swim_plan.awardunits) == 1
+    assert list(bob_believer_swim_plan.awardunits.keys()) == [xia_str]
 
 
 def test_BelieverUnit_get_plan_obj_ReturnsPlan():

@@ -8,7 +8,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     awardee_title_str,
     believer_partner_membership_str,
     believer_partnerunit_str,
-    believer_plan_awardlink_str,
+    believer_plan_awardunit_str,
     believer_planunit_str,
     believerunit_str,
     group_title_str,
@@ -386,17 +386,17 @@ def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj_Rope_Sorted():
     sports_rope = create_rope(x_belief_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(sports_rope, knee_str)
-    x_dimen = believer_plan_awardlink_str()
+    x_dimen = believer_plan_awardunit_str()
     swimmers_str = ",Swimmers"
-    sports_awardlink_believeratom = believeratom_shop(x_dimen, INSERT_str())
-    sports_awardlink_believeratom.set_jkey(awardee_title_str(), swimmers_str)
-    sports_awardlink_believeratom.set_jkey(plan_rope_str(), sports_rope)
-    knee_awardlink_believeratom = believeratom_shop(x_dimen, INSERT_str())
-    knee_awardlink_believeratom.set_jkey(awardee_title_str(), swimmers_str)
-    knee_awardlink_believeratom.set_jkey(plan_rope_str(), knee_rope)
+    sports_awardunit_believeratom = believeratom_shop(x_dimen, INSERT_str())
+    sports_awardunit_believeratom.set_jkey(awardee_title_str(), swimmers_str)
+    sports_awardunit_believeratom.set_jkey(plan_rope_str(), sports_rope)
+    knee_awardunit_believeratom = believeratom_shop(x_dimen, INSERT_str())
+    knee_awardunit_believeratom.set_jkey(awardee_title_str(), swimmers_str)
+    knee_awardunit_believeratom.set_jkey(plan_rope_str(), knee_rope)
     x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(knee_awardlink_believeratom)
-    x_believerdelta.set_believeratom(sports_awardlink_believeratom)
+    x_believerdelta.set_believeratom(knee_awardunit_believeratom)
+    x_believerdelta.set_believeratom(sports_awardunit_believeratom)
 
     # WHEN
     x_atom_order_list = x_believerdelta.get_sorted_believeratoms()
@@ -405,8 +405,8 @@ def test_BelieverDelta_get_sorted_believeratoms_ReturnsObj_Rope_Sorted():
     assert len(x_atom_order_list) == 2
     # for believeratom in x_atom_order_list:
     #     print(f"{believeratom.jkeys=}")
-    assert x_atom_order_list[0] == sports_awardlink_believeratom
-    assert x_atom_order_list[1] == knee_awardlink_believeratom
+    assert x_atom_order_list[0] == sports_awardunit_believeratom
+    assert x_atom_order_list[1] == knee_awardunit_believeratom
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")

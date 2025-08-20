@@ -47,12 +47,14 @@ from src.a05_plan_logic.test._util.a05_str import (
     begin_str,
     close_str,
     denom_str,
+    factunits_str,
     gogo_want_str,
     healer_name_str,
     morph_str,
     numor_str,
     plan_label_str,
     plan_rope_str,
+    reasonunits_str,
     star_str,
     stop_want_str,
     task_str,
@@ -83,8 +85,8 @@ def _reason_contexts_str() -> str:
     return "_reason_contexts"
 
 
-def _sum_healerlink_share_str() -> str:
-    return "_sum_healerlink_share"
+def _sum_healerunit_share_str() -> str:
+    return "_sum_healerunit_share"
 
 
 def _tree_traverse_count_str() -> str:
@@ -107,16 +109,16 @@ def believer_partnerunit_str() -> str:
     return "believer_partnerunit"
 
 
-def believer_plan_awardlink_str() -> str:
-    return "believer_plan_awardlink"
+def believer_plan_awardunit_str() -> str:
+    return "believer_plan_awardunit"
 
 
 def believer_plan_factunit_str() -> str:
     return "believer_plan_factunit"
 
 
-def believer_plan_healerlink_str() -> str:
-    return "believer_plan_healerlink"
+def believer_plan_healerunit_str() -> str:
+    return "believer_plan_healerunit"
 
 
 def believer_plan_partyunit_str() -> str:
@@ -173,6 +175,10 @@ def max_tree_traverse_str() -> str:
 
 def partner_pool_str() -> str:
     return "partner_pool"
+
+
+def planroot_str() -> str:
+    return "planroot"
 
 
 def tally_str() -> str:

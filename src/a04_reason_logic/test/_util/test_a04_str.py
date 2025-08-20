@@ -7,12 +7,14 @@ from src.a04_reason_logic.test._util.a04_str import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
+    factunits_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_divisor_str,
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
+    reasonunits_str,
 )
 
 
@@ -26,9 +28,11 @@ def test_str_functions_ReturnsObj():
     assert fact_upper_str() == "fact_upper"
     assert fact_lower_str() == "fact_lower"
     assert fact_state_str() == "fact_state"
+    assert factunits_str() == "factunits"
     assert reason_divisor_str() == "reason_divisor"
     assert reason_upper_str() == "reason_upper"
     assert reason_lower_str() == "reason_lower"
     assert reason_state_str() == "reason_state"
     assert reason_active_requisite_str() == "reason_active_requisite"
     assert reason_context_str() == "reason_context"
+    assert reasonunits_str() == "reasonunits"

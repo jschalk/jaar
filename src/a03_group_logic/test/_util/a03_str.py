@@ -53,6 +53,10 @@ def awardee_title_str() -> str:
     return "awardee_title"
 
 
+def awardunits_str() -> str:
+    return "awardunits"
+
+
 def believer_name_str() -> str:
     return "believer_name"
 

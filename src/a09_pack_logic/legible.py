@@ -36,12 +36,12 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
     x_list = ["DELETE", "believer_planunit"]
     believer_planunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_awardlink"]
-    believer_plan_awardlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_plan_awardlink"]
-    believer_plan_awardlink_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_awardlink"]
-    believer_plan_awardlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_awardunit"]
+    believer_plan_awardunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "believer_plan_awardunit"]
+    believer_plan_awardunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_awardunit"]
+    believer_plan_awardunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = ["INSERT", "believer_plan_reasonunit"]
     believer_plan_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -62,10 +62,10 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
     x_list = ["DELETE", "believer_plan_partyunit"]
     believer_plan_partyunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_healerlink"]
-    believer_plan_healerlink_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_healerlink"]
-    believer_plan_healerlink_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "believer_plan_healerunit"]
+    believer_plan_healerunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "believer_plan_healerunit"]
+    believer_plan_healerunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     x_list = ["INSERT", "believer_plan_factunit"]
     believer_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
@@ -116,17 +116,17 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
             leg_list, believer_planunit_delete_dict, x_believer
         )
 
-    if believer_plan_awardlink_insert_dict is not None:
-        add_believer_plan_awardlink_insert_to_legible_list(
-            leg_list, believer_plan_awardlink_insert_dict, x_believer
+    if believer_plan_awardunit_insert_dict is not None:
+        add_believer_plan_awardunit_insert_to_legible_list(
+            leg_list, believer_plan_awardunit_insert_dict, x_believer
         )
-    if believer_plan_awardlink_update_dict is not None:
-        add_believer_plan_awardlink_update_to_legible_list(
-            leg_list, believer_plan_awardlink_update_dict, x_believer
+    if believer_plan_awardunit_update_dict is not None:
+        add_believer_plan_awardunit_update_to_legible_list(
+            leg_list, believer_plan_awardunit_update_dict, x_believer
         )
-    if believer_plan_awardlink_delete_dict is not None:
-        add_believer_plan_awardlink_delete_to_legible_list(
-            leg_list, believer_plan_awardlink_delete_dict, x_believer
+    if believer_plan_awardunit_delete_dict is not None:
+        add_believer_plan_awardunit_delete_to_legible_list(
+            leg_list, believer_plan_awardunit_delete_dict, x_believer
         )
 
     if believer_plan_reasonunit_insert_dict is not None:
@@ -164,13 +164,13 @@ def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> lis
             leg_list, believer_plan_partyunit_delete_dict, x_believer
         )
 
-    if believer_plan_healerlink_insert_dict is not None:
-        add_believer_plan_healerlink_insert_to_legible_list(
-            leg_list, believer_plan_healerlink_insert_dict, x_believer
+    if believer_plan_healerunit_insert_dict is not None:
+        add_believer_plan_healerunit_insert_to_legible_list(
+            leg_list, believer_plan_healerunit_insert_dict, x_believer
         )
-    if believer_plan_healerlink_delete_dict is not None:
-        add_believer_plan_healerlink_delete_to_legible_list(
-            leg_list, believer_plan_healerlink_delete_dict, x_believer
+    if believer_plan_healerunit_delete_dict is not None:
+        add_believer_plan_healerunit_delete_to_legible_list(
+            leg_list, believer_plan_healerunit_delete_dict, x_believer
         )
 
     if believer_plan_factunit_insert_dict is not None:
@@ -408,45 +408,45 @@ def add_believer_planunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_plan_awardlink_insert_to_legible_list(
-    legible_list: list[str], plan_awardlink_insert_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_awardunit_insert_to_legible_list(
+    legible_list: list[str], plan_awardunit_insert_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_awardlink_insert_dict.values():
-        for plan_awardlink_atom in rope_dict.values():
-            awardee_title_value = plan_awardlink_atom.get_value("awardee_title")
-            rope_value = plan_awardlink_atom.get_value("plan_rope")
-            give_force_value = plan_awardlink_atom.get_value("give_force")
-            take_force_value = plan_awardlink_atom.get_value("take_force")
-            x_str = f"Awardlink created for group {awardee_title_value} for plan '{rope_value}' with give_force={give_force_value} and take_force={take_force_value}."
+    for rope_dict in plan_awardunit_insert_dict.values():
+        for plan_awardunit_atom in rope_dict.values():
+            awardee_title_value = plan_awardunit_atom.get_value("awardee_title")
+            rope_value = plan_awardunit_atom.get_value("plan_rope")
+            give_force_value = plan_awardunit_atom.get_value("give_force")
+            take_force_value = plan_awardunit_atom.get_value("take_force")
+            x_str = f"AwardUnit created for group {awardee_title_value} for plan '{rope_value}' with give_force={give_force_value} and take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_believer_plan_awardlink_update_to_legible_list(
-    legible_list: list[str], plan_awardlink_update_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_awardunit_update_to_legible_list(
+    legible_list: list[str], plan_awardunit_update_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_awardlink_update_dict.values():
-        for plan_awardlink_atom in rope_dict.values():
-            awardee_title_value = plan_awardlink_atom.get_value("awardee_title")
-            rope_value = plan_awardlink_atom.get_value("plan_rope")
-            give_force_value = plan_awardlink_atom.get_value("give_force")
-            take_force_value = plan_awardlink_atom.get_value("take_force")
+    for rope_dict in plan_awardunit_update_dict.values():
+        for plan_awardunit_atom in rope_dict.values():
+            awardee_title_value = plan_awardunit_atom.get_value("awardee_title")
+            rope_value = plan_awardunit_atom.get_value("plan_rope")
+            give_force_value = plan_awardunit_atom.get_value("give_force")
+            take_force_value = plan_awardunit_atom.get_value("take_force")
             if give_force_value is not None and take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for plan '{rope_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
+                x_str = f"AwardUnit has been set for group {awardee_title_value} for plan '{rope_value}'. Now give_force={give_force_value} and take_force={take_force_value}."
             elif give_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for plan '{rope_value}'. Now give_force={give_force_value}."
+                x_str = f"AwardUnit has been set for group {awardee_title_value} for plan '{rope_value}'. Now give_force={give_force_value}."
             elif take_force_value is not None:
-                x_str = f"Awardlink has been set for group {awardee_title_value} for plan '{rope_value}'. Now take_force={take_force_value}."
+                x_str = f"AwardUnit has been set for group {awardee_title_value} for plan '{rope_value}'. Now take_force={take_force_value}."
             legible_list.append(x_str)
 
 
-def add_believer_plan_awardlink_delete_to_legible_list(
-    legible_list: list[str], plan_awardlink_delete_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_awardunit_delete_to_legible_list(
+    legible_list: list[str], plan_awardunit_delete_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_awardlink_delete_dict.values():
-        for plan_awardlink_atom in rope_dict.values():
-            awardee_title_value = plan_awardlink_atom.get_value("awardee_title")
-            rope_value = plan_awardlink_atom.get_value("plan_rope")
-            x_str = f"Awardlink for group {awardee_title_value}, plan '{rope_value}' has been deleted."
+    for rope_dict in plan_awardunit_delete_dict.values():
+        for plan_awardunit_atom in rope_dict.values():
+            awardee_title_value = plan_awardunit_atom.get_value("awardee_title")
+            rope_value = plan_awardunit_atom.get_value("plan_rope")
+            x_str = f"AwardUnit for group {awardee_title_value}, plan '{rope_value}' has been deleted."
             legible_list.append(x_str)
 
 
@@ -589,25 +589,25 @@ def add_believer_plan_partyunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_healerlink_insert_to_legible_list(
-    legible_list: list[str], plan_healerlink_insert_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_healerunit_insert_to_legible_list(
+    legible_list: list[str], plan_healerunit_insert_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_healerlink_insert_dict.values():
-        for plan_healerlink_atom in rope_dict.values():
-            healer_name_value = plan_healerlink_atom.get_value("healer_name")
-            rope_value = plan_healerlink_atom.get_value("plan_rope")
-            x_str = f"HealerLink '{healer_name_value}' created for plan '{rope_value}'."
+    for rope_dict in plan_healerunit_insert_dict.values():
+        for plan_healerunit_atom in rope_dict.values():
+            healer_name_value = plan_healerunit_atom.get_value("healer_name")
+            rope_value = plan_healerunit_atom.get_value("plan_rope")
+            x_str = f"HealerUnit '{healer_name_value}' created for plan '{rope_value}'."
             legible_list.append(x_str)
 
 
-def add_believer_plan_healerlink_delete_to_legible_list(
-    legible_list: list[str], plan_healerlink_delete_dict: dict, x_believer: BelieverUnit
+def add_believer_plan_healerunit_delete_to_legible_list(
+    legible_list: list[str], plan_healerunit_delete_dict: dict, x_believer: BelieverUnit
 ):
-    for rope_dict in plan_healerlink_delete_dict.values():
-        for plan_healerlink_atom in rope_dict.values():
-            healer_name_value = plan_healerlink_atom.get_value("healer_name")
-            rope_value = plan_healerlink_atom.get_value("plan_rope")
-            x_str = f"HealerLink '{healer_name_value}' deleted for plan '{rope_value}'."
+    for rope_dict in plan_healerunit_delete_dict.values():
+        for plan_healerunit_atom in rope_dict.values():
+            healer_name_value = plan_healerunit_atom.get_value("healer_name")
+            rope_value = plan_healerunit_atom.get_value("plan_rope")
+            x_str = f"HealerUnit '{healer_name_value}' deleted for plan '{rope_value}'."
             legible_list.append(x_str)
 
 

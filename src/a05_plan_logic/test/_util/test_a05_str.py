@@ -10,7 +10,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _fund_onset_str,
     _fund_ratio_str,
     _gogo_calc_str,
-    _healerlink_ratio_str,
+    _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
     _level_str,
@@ -25,7 +25,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     fund_share_str,
     gogo_want_str,
     healer_name_str,
-    healerlink_str,
+    healerunit_str,
     morph_str,
     numor_str,
     plan_label_str,
@@ -50,7 +50,7 @@ def test_str_functions_ReturnsObj():
     assert _fund_onset_str() == "_fund_onset"
     assert _fund_ratio_str() == "_fund_ratio"
     assert _gogo_calc_str() == "_gogo_calc"
-    assert _healerlink_ratio_str() == "_healerlink_ratio"
+    assert _healerunit_ratio_str() == "_healerunit_ratio"
     assert _is_expanded_str() == "_is_expanded"
     assert _level_str() == "_level"
     assert _kids_str() == "_kids"
@@ -66,7 +66,7 @@ def test_str_functions_ReturnsObj():
     assert denom_str() == "denom"
     assert fund_share_str() == "fund_share"
     assert gogo_want_str() == "gogo_want"
-    assert healerlink_str() == "healerlink"
+    assert healerunit_str() == "healerunit"
     assert star_str() == "star"
     assert morph_str() == "morph"
     assert numor_str() == "numor"

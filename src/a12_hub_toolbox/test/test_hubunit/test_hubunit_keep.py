@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
-from src.a05_plan_logic.healer import healerlink_shop
+from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_believer_logic.believer_graphics import display_plantree
 from src.a12_hub_toolbox.a12_path import (
@@ -36,8 +36,8 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
     dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
     sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     sue_gut_believer.set_plan(planunit_shop(dallas_str), texas_rope)
-    sue_gut_believer.edit_plan_attr(texas_rope, healerlink=healerlink_shop({sue_str}))
-    sue_gut_believer.edit_plan_attr(dallas_rope, healerlink=healerlink_shop({sue_str}))
+    sue_gut_believer.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
+    sue_gut_believer.edit_plan_attr(dallas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_believer.settle_believer()
     assert sue_gut_believer._keeps_justified is False
     save_gut_file(env_dir(), sue_gut_believer)
@@ -64,7 +64,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
     texas_str = "Tex/as"
     texas_rope = sue_gut_believer.make_l1_rope(texas_str)
     sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
-    sue_gut_believer.edit_plan_attr(texas_rope, healerlink=healerlink_shop({sue_str}))
+    sue_gut_believer.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_believer.settle_believer()
     assert sue_gut_believer._keeps_justified
     assert sue_gut_believer._keeps_buildable is False
@@ -94,8 +94,8 @@ def test_HubUnit_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     elpaso_str = "el paso"
     dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
     elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
-    dallas_plan = planunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    elpaso_plan = planunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
+    elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
     sue_gut_believer.set_plan(dallas_plan, texas_rope)
     sue_gut_believer.set_plan(elpaso_plan, texas_rope)
     sue_gut_believer.settle_believer()
@@ -127,11 +127,11 @@ def test_HubUnit_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bo
     sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
-    dallas_plan = planunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
+    dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
     sue_gut_believer.set_plan(dallas_plan, texas_rope)
     elpaso_str = "el paso"
     elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
-    elpaso_plan = planunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
     sue_gut_believer.set_plan(elpaso_plan, texas_rope)
     display_plantree(sue_gut_believer, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_believer)
@@ -181,8 +181,8 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     elpaso_str = "el paso"
     dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
     elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
-    dallas_plan = planunit_shop(dallas_str, healerlink=healerlink_shop({sue_str}))
-    elpaso_plan = planunit_shop(elpaso_str, healerlink=healerlink_shop({sue_str}))
+    dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
+    elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
     sue_gut_believer.set_plan(dallas_plan, texas_rope)
     sue_gut_believer.set_plan(elpaso_plan, texas_rope)
     sue_gut_believer.settle_believer()
