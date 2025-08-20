@@ -1,6 +1,38 @@
 from src.a03_group_logic.group import awardunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.a06_belief_logic.belief_main import BeliefUnit, RopeTerm, beliefunit_shop
+
+
+def best_sport_str() -> str:
+    return "best sport"
+
+
+def best_soccer_str() -> str:
+    return "The best sport is soccer"
+
+
+def best_swim_str() -> str:
+    return "The best sport is swimming"
+
+
+def best_run_str() -> str:
+    return "The best sport is running"
+
+
+def play_str() -> str:
+    return "playing"
+
+
+def play_soccer_str() -> str:
+    return "play soccer"
+
+
+def play_swim_str() -> str:
+    return "play swimming"
+
+
+def play_run_str() -> str:
+    return "play running"
 
 
 def get_sue_beliefunit() -> BeliefUnit:
@@ -9,33 +41,33 @@ def get_sue_beliefunit() -> BeliefUnit:
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
-    tidiness_rope = sue_belief.make_rope(casa_rope, "tidiness")
+    tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
     dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
     tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
     sue_belief.add_plan(casa_rope, 3)
-    sue_belief.add_plan(tidiness_rope, 7)
+    sue_belief.add_plan(tidi_rope, 7)
     sue_belief.add_plan(dirty_rope, 1)
     sue_belief.add_plan(tidy_rope, 3)
     sue_belief.add_plan(clean_rope, 3)
     sue_belief.add_plan(mop_rope, 3, task=True)
     sue_belief.add_plan(sweep_rope, 3, task=True)
     sports_rope = sue_belief.make_l1_rope("sports")
-    best_rope = sue_belief.make_rope(sports_rope, "best sport")
-    best_soccer_rope = sue_belief.make_rope(best_rope, "The best sport is soccer")
-    best_swim_rope = sue_belief.make_rope(best_rope, "The best sport is swimming")
-    best_run_rope = sue_belief.make_rope(best_rope, "The best sport is running")
-    play_rope = sue_belief.make_rope(sports_rope, "playing")
-    play_soccer_rope = sue_belief.make_rope(play_rope, "play soccer")
-    play_swim_rope = sue_belief.make_rope(play_rope, "play swim")
-    play_run_rope = sue_belief.make_rope(play_rope, "play run")
+    best_rope = sue_belief.make_rope(sports_rope, best_sport_str())
+    best_soccer_rope = sue_belief.make_rope(best_rope, best_soccer_str())
+    best_swim_rope = sue_belief.make_rope(best_rope, best_swim_str())
+    best_run_rope = sue_belief.make_rope(best_rope, best_run_str())
+    play_rope = sue_belief.make_rope(sports_rope, play_str())
+    play_soccer_rope = sue_belief.make_rope(play_rope, play_soccer_str())
+    play_swim_rope = sue_belief.make_rope(play_rope, play_swim_str())
+    play_run_rope = sue_belief.make_rope(play_rope, play_run_str())
     sue_belief.add_plan(sports_rope, 5)
     sue_belief.add_plan(best_soccer_rope, 23)
     sue_belief.add_plan(best_swim_rope, 2)
     sue_belief.add_plan(best_run_rope, 23)
     sue_belief.add_plan(play_rope, 2)
-    sue_belief.add_plan(play_soccer_rope, 11)
-    sue_belief.add_plan(play_swim_rope, 55)
-    sue_belief.add_plan(play_run_rope, 22)
+    sue_belief.add_plan(play_soccer_rope, 11, task=True)
+    sue_belief.add_plan(play_swim_rope, 55, task=True)
+    sue_belief.add_plan(play_run_rope, 22, task=True)
 
     # Add some award links
     casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
@@ -51,22 +83,46 @@ def get_sue_beliefunit() -> BeliefUnit:
     return sue_belief
 
 
+def set_case_attr(
+    belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    reason_context: RopeTerm,
+    reason_case: RopeTerm,
+):
+    belief.edit_plan_attr(
+        plan_rope, reason_context=reason_context, reason_case=reason_case
+    )
+
+
 def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     sue_belief = get_sue_beliefunit()
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
-    tidiness_rope = sue_belief.make_rope(casa_rope, "tidiness")
+    tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
     dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
     tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
     sports_rope = sue_belief.make_l1_rope("sports")
-    best_rope = sue_belief.make_rope(sports_rope, "best sport")
-    best_soccer_rope = sue_belief.make_rope(best_rope, "soccer")
-    best_swim_rope = sue_belief.make_rope(best_rope, "swim")
-    best_run_rope = sue_belief.make_rope(best_rope, "run")
-    sue_belief.add_fact(tidiness_rope, dirty_rope, 4, 8)
+    best_rope = sue_belief.make_rope(sports_rope, best_sport_str())
+    best_soccer_rope = sue_belief.make_rope(best_rope, best_soccer_str())
+    best_swim_rope = sue_belief.make_rope(best_rope, best_swim_str())
+    best_run_rope = sue_belief.make_rope(best_rope, best_run_str())
+    play_rope = sue_belief.make_rope(sports_rope, play_str())
+    play_soccer_rope = sue_belief.make_rope(play_rope, play_soccer_str())
+    play_swim_rope = sue_belief.make_rope(play_rope, play_swim_str())
+    play_run_rope = sue_belief.make_rope(play_rope, play_run_str())
+    sue_belief.add_fact(tidi_rope, dirty_rope, 4, 8)
     sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
+    # add reasons to mop_plan, sweep_plan, play_soccer_plan, plan_swim_plan, play_run_plan
+    set_case_attr(sue_belief, mop_rope, tidi_rope, dirty_rope)
+    set_case_attr(sue_belief, sweep_rope, tidi_rope, dirty_rope)
+    set_case_attr(sue_belief, play_soccer_rope, best_rope, best_soccer_rope)
+    set_case_attr(sue_belief, play_soccer_rope, best_rope, best_run_rope)
+    set_case_attr(sue_belief, play_soccer_rope, tidi_rope, clean_rope)
+    set_case_attr(sue_belief, play_swim_rope, best_rope, play_swim_rope)
+    set_case_attr(sue_belief, play_swim_rope, tidi_rope, clean_rope)
+    set_case_attr(sue_belief, play_run_rope, best_rope, play_run_rope)
     sue_belief.cash_out()
     return sue_belief
 

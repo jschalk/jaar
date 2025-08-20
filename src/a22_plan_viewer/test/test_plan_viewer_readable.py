@@ -22,6 +22,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
     awardunits_str,
     begin_str,
+    cases_str,
     close_str,
     coin_label_str,
     denom_str,
@@ -35,6 +36,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     numor_str,
     plan_label_str,
     problem_bool_str,
+    reason_state_str,
     reasonunits_str,
     star_str,
     stop_want_str,
@@ -47,9 +49,17 @@ from src.a07_timeline_logic.reason_str_func import (
 )
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
 from src.a22_plan_viewer.test._util.example22_beliefs import (
+    best_run_str,
+    best_soccer_str,
+    best_sport_str,
+    best_swim_str,
     get_beliefunit_irrational_example,
     get_sue_belief_with_facts_and_reasons,
     get_sue_beliefunit,
+    play_run_str,
+    play_soccer_str,
+    play_str,
+    play_swim_str,
 )
 
 
@@ -250,21 +260,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     sports_rope = sue_belief.make_l1_rope("sports")
     best_sport_str = "best sport"
     best_rope = sue_belief.make_rope(sports_rope, best_sport_str)
-    soccer_str = "soccer"
-    swim_str = "swim"
-    run_str = "run"
-    best_soccer_rope = sue_belief.make_rope(best_rope, soccer_str)
-    best_swim_rope = sue_belief.make_rope(best_rope, swim_str)
-    best_run_rope = sue_belief.make_rope(best_rope, run_str)
 
     # casa ropes
     casa_rope = sue_belief.make_l1_rope("casa")
-    clean_rope = sue_belief.make_rope(casa_rope, "clean")
-    mop_rope = sue_belief.make_rope(clean_rope, "mop")
-    sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
-    dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
-    tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
 
     # factunits
     root_factunits_dict = root_dict.get(factunits_str())
@@ -315,24 +314,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
 
 # def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
 #     # ESTABLISH
-#     sue_belief = get_sue_beliefunit()
-
-#     # WHEN
-#     root_dict = get_plan_view_dict(sue_belief.planroot)
-
-#     # THEN
-#     # sports ropes
-#     sports_rope = sue_belief.make_l1_rope("sports")
-#     best_sport_str = "best sport"
-#     best_rope = sue_belief.make_rope(sports_rope, best_sport_str)
-#     soccer_str = "soccer"
-#     swim_str = "swim"
-#     run_str = "run"
-#     best_soccer_rope = sue_belief.make_rope(best_rope, soccer_str)
-#     best_swim_rope = sue_belief.make_rope(best_rope, swim_str)
-#     best_run_rope = sue_belief.make_rope(best_rope, run_str)
-
-#     # casa ropes
+#     sue_belief = get_sue_belief_with_facts_and_reasons()
 #     casa_rope = sue_belief.make_l1_rope("casa")
 #     clean_rope = sue_belief.make_rope(casa_rope, "clean")
 #     mop_rope = sue_belief.make_rope(clean_rope, "mop")
@@ -340,52 +322,87 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
 #     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
 #     dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
 #     tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
+#     sports_rope = sue_belief.make_l1_rope("sports")
+#     best_rope = sue_belief.make_rope(sports_rope, best_sport_str())
+#     best_soccer_rope = sue_belief.make_rope(best_rope, best_soccer_str())
+#     best_swim_rope = sue_belief.make_rope(best_rope, best_swim_str())
+#     best_run_rope = sue_belief.make_rope(best_rope, best_run_str())
+#     play_rope = sue_belief.make_rope(sports_rope, play_str())
+#     play_soccer_rope = sue_belief.make_rope(play_rope, play_soccer_str())
+#     play_swim_rope = sue_belief.make_rope(play_rope, play_swim_str())
+#     play_run_rope = sue_belief.make_rope(play_rope, play_run_str())
+#     play_soccer_plan = sue_belief.get_plan_obj(play_soccer_rope)
 
-#     # factunits
-#     root_factunits_dict = root_dict.get(factunits_str())
-#     assert len(root_factunits_dict) == 2
-#     # print(f"{len(factunits_dict)=}")
-#     tidi_factunit_dict = root_factunits_dict.get(tidi_rope)
-#     best_factunit_dict = root_factunits_dict.get(best_rope)
-#     # print(f"{tidi_factunit_dict=}")
-#     # print(f"{best_factunit_dict=}")
+#     # WHEN
+#     play_soccer_dict = get_plan_view_dict(play_soccer_plan)
+
+#     # THEN
+#     # reasonunits
+#     play_soccer_reasonunits_dict = play_soccer_dict.get(reasonunits_str())
+#     assert len(play_soccer_reasonunits_dict) == 2
+#     print(f"{len(play_soccer_reasonunits_dict)=}")
+#     best_reasonunit_dict = play_soccer_reasonunits_dict.get(best_rope)
+#     tidi_reasonunit_dict = play_soccer_reasonunits_dict.get(tidi_rope)
+#     best_cases_dict = best_reasonunit_dict.get(cases_str())
+#     tidi_cases_dict = tidi_reasonunit_dict.get(cases_str())
+#     best_soccer_case_dict = best_cases_dict.get(best_soccer_rope)
+#     clean_case_dict = tidi_cases_dict.get(clean_rope)
+#     print(f"{best_soccer_case_dict.get(reason_state_str())=}")
+#     print(f"{clean_case_dict.get(reason_state_str())=}")
+#     assert best_soccer_case_dict.get(reason_state_str()) == best_soccer_rope
+#     assert clean_case_dict.get(reason_state_str()) == clean_rope
+
+#     best_reasonunit = play_soccer_plan.get_reasonunit(best_rope)
+#     tidi_reasonunit = play_soccer_plan.get_reasonunit(tidi_rope)
+#     print(f"{best_reasonunit.cases.keys()=}")
+#     print(f"{tidi_reasonunit.cases.keys()=}")
+#     best_soccer_caseunit = best_reasonunit.get_case(best_soccer_rope)
+#     best_run_caseunit = best_reasonunit.get_case(best_run_rope)
+#     tidy_caseunit = tidi_reasonunit.get_case(clean_rope)
+#     expected_soccer_case_readable = get_reason_case_readable_str(
+#         best_rope, best_soccer_caseunit, None, sue_belief
+#     )
+#     expected_run_case_readable = get_reason_case_readable_str(
+#         best_rope, best_run_caseunit, None, sue_belief
+#     )
+#     expected_tidy_case_readable = get_reason_case_readable_str(
+#         tidi_rope, tidy_caseunit, None, sue_belief
+#     )
+#     expected_soccer_case_readable = add_small_dot(expected_soccer_case_readable)
+#     expected_run_case_readable = add_small_dot(expected_run_case_readable)
+#     expected_tidy_case_readable = add_small_dot(expected_tidy_case_readable)
+#     # print(f"{expected_tidi_reasonunit_str=}")
+#     # print(f"{expected_best_reasonunit_str=}")
 #     readable_str = "readable"
-#     tidi_factunit = sue_belief.get_fact(tidi_rope)
-#     best_factunit = sue_belief.get_fact(best_rope)
-#     tidi_factunit_readable = get_fact_state_readable_str(
-#         tidi_factunit, None, sue_belief
-#     )
-#     best_factunit_readable = get_fact_state_readable_str(
-#         best_factunit, None, sue_belief
-#     )
-#     expected_tidi_factunit_str = add_small_dot(tidi_factunit_readable)
-#     expected_best_factunit_str = add_small_dot(best_factunit_readable)
-#     # print(f"{expected_tidi_factunit_str=}")
-#     # print(f"{expected_best_factunit_str=}")
-#     assert tidi_factunit_dict.get(readable_str) == expected_tidi_factunit_str
-#     assert best_factunit_dict.get(readable_str) == expected_best_factunit_str
+#     assert best_soccer_case_dict.get(readable_str) == expected_soccer_case_readable
+#     assert best_soccer_case_dict.get(readable_str) == expected_run_case_readable
+#     assert clean_case_dict.get(readable_str) == expected_tidy_case_readable
 
-#     # factheirs
-#     casa_factheirs_dict = root_dict.get("_factheirs")
-#     assert len(casa_factheirs_dict) == 2
-#     print(f"{len(casa_factheirs_dict)=}")
-#     casa_tidi_factheir_dict = casa_factheirs_dict.get(tidi_rope)
-#     casa_best_factheir_dict = casa_factheirs_dict.get(best_rope)
-#     print(f"{casa_tidi_factheir_dict=}")
-#     print(f"{casa_best_factheir_dict=}")
-#     casa_plan = sue_belief.get_plan_obj(casa_rope)
-#     tidi_factheir = casa_plan._factheirs.get(tidi_rope)
-#     best_factheir = casa_plan._factheirs.get(best_rope)
-#     casa_tidi_factheir_readable = get_fact_state_readable_str(
-#         tidi_factheir, None, sue_belief
-#     )
-#     casa_best_factheir_readable = get_fact_state_readable_str(
-#         best_factheir, None, sue_belief
-#     )
-#     expected_casa_tidi_factheir_str = add_small_dot(casa_tidi_factheir_readable)
-#     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
-#     assert casa_tidi_factheir_dict.get(readable_str) == expected_casa_tidi_factheir_str
-#     assert casa_best_factheir_dict.get(readable_str) == expected_casa_best_factheir_str
+#     # # reasonheirs
+#     # casa_reasonheirs_dict = root_dict.get("_reasonheirs")
+#     # assert len(casa_reasonheirs_dict) == 2
+#     # print(f"{len(casa_reasonheirs_dict)=}")
+#     # casa_tidi_reasonheir_dict = casa_reasonheirs_dict.get(tidi_rope)
+#     # casa_best_reasonheir_dict = casa_reasonheirs_dict.get(best_rope)
+#     # print(f"{casa_tidi_reasonheir_dict=}")
+#     # print(f"{casa_best_reasonheir_dict=}")
+#     # casa_plan = sue_belief.get_plan_obj(casa_rope)
+#     # tidi_reasonheir = casa_plan._reasonheirs.get(tidi_rope)
+#     # best_reasonheir = casa_plan._reasonheirs.get(best_rope)
+#     # casa_tidi_reasonheir_readable = get_reason_state_readable_str(
+#     #     tidi_reasonheir, None, sue_belief
+#     # )
+#     # casa_best_reasonheir_readable = get_reason_state_readable_str(
+#     #     best_reasonheir, None, sue_belief
+#     # )
+#     # expected_casa_tidi_reasonheir_str = add_small_dot(casa_tidi_reasonheir_readable)
+#     # expected_casa_best_reasonheir_str = add_small_dot(casa_best_reasonheir_readable)
+#     # assert (
+#     #     casa_tidi_reasonheir_dict.get(readable_str) == expected_casa_tidi_reasonheir_str
+#     # )
+#     # assert (
+#     #     casa_best_reasonheir_dict.get(readable_str) == expected_casa_best_reasonheir_str
+#     # )
 #     assert 1 == 2
 
 
