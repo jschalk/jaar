@@ -175,5 +175,9 @@ def partner_pool_str() -> str:
     return "partner_pool"
 
 
+def planroot_str() -> str:
+    return "planroot"
+
+
 def tally_str() -> str:
     return "tally"

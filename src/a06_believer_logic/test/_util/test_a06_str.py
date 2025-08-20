@@ -31,6 +31,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     partner_debt_points_str,
     partner_pool_str,
     penny_str,
+    planroot_str,
     respect_bit_str,
     tally_str,
 )
@@ -51,6 +52,7 @@ def test_str_functions_ReturnsObj():
     assert penny_str() == "penny"
     assert respect_bit_str() == "respect_bit"
     assert tally_str() == "tally"
+    assert planroot_str() == "planroot"
     assert partner_pool_str() == "partner_pool"
     assert partner_cred_points_str() == "partner_cred_points"
     assert credor_respect_str() == "credor_respect"

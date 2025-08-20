@@ -562,7 +562,7 @@ class PlanUnit:
             and self.belief_label is not None
         ):
             raise Plan_root_LabelNotEmptyException(
-                f"Cannot set planroot to string different than '{self.belief_label}'"
+                f"Cannot set a root Plan to string different than '{self.belief_label}'"
             )
         else:
             self.plan_label = plan_label
@@ -923,7 +923,7 @@ class PlanUnit:
                 new_reasonheir.set_rplan_active_value(reason_context_plan._active)
             self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
-    def set_planroot_inherit_reasonheirs(self):
+    def set_root_plan_reasonheirs(self):
         self._reasonheirs = {}
         for x_reasonunit in self.reasonunits.values():
             new_reasonheir = reasonheir_shop(x_reasonunit.reason_context)

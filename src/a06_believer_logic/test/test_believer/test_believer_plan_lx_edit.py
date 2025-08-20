@@ -52,7 +52,7 @@ def test_BelieverUnit_edit_plan_label_RaisesErrorForLevel0PlanWhen_belief_label_
         yao_believer.edit_plan_label(old_rope=root_rope, new_plan_label=moon_str)
     assert (
         str(excinfo.value)
-        == f"Cannot set planroot to string different than '{yao_believer.belief_label}'"
+        == f"Cannot set a root Plan to string different than '{yao_believer.belief_label}'"
     )
 
     assert yao_believer.planroot.plan_label != moon_str
@@ -88,7 +88,7 @@ def test_BelieverUnit_edit_plan_label_RaisesErrorForLevel0When_belief_label_IsDi
         yao_believer.edit_plan_label(old_rope=root_rope, new_plan_label=moon_str)
 
     # THEN
-    assertion_str = f"Cannot set planroot to string different than '{sun_str}'"
+    assertion_str = f"Cannot set a root Plan to string different than '{sun_str}'"
     assert str(excinfo.value) == assertion_str
 
 

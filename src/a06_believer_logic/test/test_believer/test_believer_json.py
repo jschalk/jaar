@@ -11,6 +11,7 @@ from src.a06_believer_logic.believer_main import (
     get_dict_of_believer_from_dict,
     get_from_json as believerunit_get_from_json,
 )
+from src.a06_believer_logic.test._util.a06_str import planroot_str
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001,
     get_believerunit_laundry_example1,
@@ -53,7 +54,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario0():
     assert believer_dict.get("_groups") is None
 
     x_planroot = yao_believer.planroot
-    planroot_dict = believer_dict["planroot"]
+    planroot_dict = believer_dict[planroot_str()]
     _kids = "_kids"
     assert x_planroot.plan_label == yao_believer.belief_label
     assert planroot_dict["plan_label"] == x_planroot.plan_label
@@ -77,7 +78,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
 
     # WHEN
     believer_dict = sue_believer.to_dict()
-    planroot_dict = believer_dict.get("planroot")
+    planroot_dict = believer_dict.get(planroot_str())
 
     # THEN
     assert planroot_dict["laborunit"] == x_laborunit.to_dict()
@@ -102,7 +103,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
 
     # WHEN
     believer_dict = sue_believer.to_dict()
-    planroot_dict = believer_dict.get("planroot")
+    planroot_dict = believer_dict.get(planroot_str())
 
     # THEN
     assert planroot_dict["healerunit"] == run_healerunit.to_dict()
@@ -126,7 +127,7 @@ def test_BelieverUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
 
     # WHEN
     believer_dict = sue_believer.to_dict()
-    planroot_dict = believer_dict.get("planroot")
+    planroot_dict = believer_dict.get(planroot_str())
 
     # THEN
     _kids = "_kids"
@@ -190,7 +191,7 @@ def test_BelieverUnit_get_json_ReturnsJSON_SimpleExample():
         believer_dict["last_pack_id"]
 
     x_planroot = zia_believer.planroot
-    planroot_dict = believer_dict.get("planroot")
+    planroot_dict = believer_dict.get(planroot_str())
 
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
@@ -244,7 +245,7 @@ def test_BelieverUnit_get_json_ReturnsJSON_BigExample():
     assert believer_dict["knot"] == yao_believer.knot
 
     x_planroot = yao_believer.planroot
-    planroot_dict = believer_dict.get("planroot")
+    planroot_dict = believer_dict.get(planroot_str())
     assert len(planroot_dict[_kids]) == len(x_planroot._kids)
 
     kids = planroot_dict[_kids]

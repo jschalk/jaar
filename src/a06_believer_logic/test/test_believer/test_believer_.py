@@ -27,6 +27,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     last_pack_id_str,
     max_tree_traverse_str,
     penny_str,
+    planroot_str,
     respect_bit_str,
     tally_str,
 )
@@ -83,7 +84,7 @@ def test_BelieverUnit_Exists():
         _tree_traverse_count_str(),
         "partners",
         knot_str(),
-        "planroot",
+        planroot_str(),
         credor_respect_str(),
         debtor_respect_str(),
         "_groupunits",

@@ -1251,7 +1251,7 @@ class BelieverUnit:
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
             if x_plan.root:
                 x_plan.set_factheirs(x_plan.factunits)
-                x_plan.set_planroot_inherit_reasonheirs()
+                x_plan.set_root_plan_reasonheirs()
                 x_plan.set_laborheir(None, self._groupunits)
                 x_plan.inherit_awardheirs()
             else:

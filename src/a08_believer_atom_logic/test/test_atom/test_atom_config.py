@@ -40,6 +40,7 @@ from src.a06_believer_logic.test._util.a06_str import (
     party_title_str,
     penny_str,
     plan_rope_str,
+    planroot_str,
     reason_context_str,
     respect_bit_str,
     solo_str,
@@ -82,7 +83,7 @@ def test_get_believer_dimens_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_believer_dimens() == set(get_atom_config_dict().keys())
     assert believer_partnerunit_str() in get_believer_dimens()
-    assert is_believer_dimen("planroot") is False
+    assert is_believer_dimen(planroot_str()) is False
 
 
 def test_get_all_believer_dimen_keys_ReturnsObj():
