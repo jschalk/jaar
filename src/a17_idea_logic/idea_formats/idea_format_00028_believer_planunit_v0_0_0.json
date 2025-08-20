@@ -18,7 +18,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "gogo_want": {
@@ -51,7 +51,7 @@
     },
     "idea_number": "br00028",
     "dimens": [
-        "beliefunit",
+        "coinunit",
         "believerunit",
         "believer_planunit"
     ]

@@ -25,7 +25,7 @@ def test_display_plantree_Scenario0(graphics_bool):
     a_believer = get_believerunit_with_4_levels()
     # a_believer = believerunit_v001()
     a_believer.settle_believer()
-    print(f"Believer {a_believer.belief_label}: Labels ({len(a_believer._plan_dict)})")
+    print(f"Believer {a_believer.coin_label}: Labels ({len(a_believer._plan_dict)})")
 
     # WHEN / THEN
     x_fig = display_plantree(a_believer, graphics_bool)
@@ -41,7 +41,7 @@ def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
     a_believer = get_believerunit_laundry_example1()
     # a_believer = believerunit_v001()
     a_believer.settle_believer()
-    print(f"Believer {a_believer.belief_label}: Labels ({len(a_believer._plan_dict)})")
+    print(f"Believer {a_believer.coin_label}: Labels ({len(a_believer._plan_dict)})")
 
     # WHEN / THEN
     display_plantree(a_believer, mode="Chore", graphics_bool=graphics_bool)

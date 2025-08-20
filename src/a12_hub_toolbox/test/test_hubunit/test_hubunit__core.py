@@ -7,7 +7,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.a05_plan_logic.plan import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_coin_label as root_label
 from src.a12_hub_toolbox.a12_path import (
     create_believer_dir_path,
     create_keep_rope_path,
@@ -25,8 +25,8 @@ def test_HubUnit_Exists():
     x_hubunit = HubUnit()
 
     # THEN
-    assert not x_hubunit.belief_mstr_dir
-    assert not x_hubunit.belief_label
+    assert not x_hubunit.coin_mstr_dir
+    assert not x_hubunit.coin_label
     assert not x_hubunit.believer_name
     assert not x_hubunit.keep_rope
     assert not x_hubunit.knot
@@ -42,8 +42,8 @@ def test_HubUnit_Exists():
 
 def test_hubunit_shop_ReturnsObj():
     # ESTABLISH
-    x_belief_mstr_dir = "src/a15_belief_logic/test/_util"
-    x_belief_label = "amy45"
+    x_coin_mstr_dir = "src/a15_coin_logic/test/_util"
+    x_coin_label = "amy45"
     sue_str = "Sue"
     x_knot = "/"
     x_fund_pool = 13000
@@ -54,8 +54,8 @@ def test_hubunit_shop_ReturnsObj():
 
     # WHEN
     x_hubunit = hubunit_shop(
-        belief_mstr_dir=x_belief_mstr_dir,
-        belief_label=x_belief_label,
+        coin_mstr_dir=x_coin_mstr_dir,
+        coin_label=x_coin_label,
         believer_name=sue_str,
         keep_rope=None,
         knot=x_knot,
@@ -67,8 +67,8 @@ def test_hubunit_shop_ReturnsObj():
     )
 
     # THEN
-    assert x_hubunit.belief_mstr_dir == x_belief_mstr_dir
-    assert x_hubunit.belief_label == x_belief_label
+    assert x_hubunit.coin_mstr_dir == x_coin_mstr_dir
+    assert x_hubunit.coin_label == x_coin_label
     assert x_hubunit.believer_name == sue_str
     assert x_hubunit.knot == x_knot
     assert x_hubunit.fund_pool == x_fund_pool
@@ -76,7 +76,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    sue_dir = create_believer_dir_path(x_belief_mstr_dir, x_belief_label, sue_str)
+    sue_dir = create_believer_dir_path(x_coin_mstr_dir, x_coin_label, sue_str)
     assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
@@ -91,21 +91,21 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
-    belief_mstr_dir = get_module_temp_dir()
+    coin_mstr_dir = get_module_temp_dir()
     amy23_str = "amy23"
 
     # WHEN
-    sue_hubunit = hubunit_shop(belief_mstr_dir, amy23_str, sue_str, texas_rope)
+    sue_hubunit = hubunit_shop(coin_mstr_dir, amy23_str, sue_str, texas_rope)
 
     # THEN
     keep_path = create_keep_rope_path(
-        belief_mstr_dir, sue_str, amy23_str, texas_rope, None
+        coin_mstr_dir, sue_str, amy23_str, texas_rope, None
     )
     x_visions_path = create_path(keep_path, "visions")
     x_grades_path = create_path(keep_path, "grades")
 
-    assert sue_hubunit.belief_mstr_dir == belief_mstr_dir
-    assert sue_hubunit.belief_label == amy23_str
+    assert sue_hubunit.coin_mstr_dir == coin_mstr_dir
+    assert sue_hubunit.coin_label == amy23_str
     assert sue_hubunit.believer_name == sue_str
     assert sue_hubunit.knot == default_knot_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()

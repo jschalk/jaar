@@ -9,7 +9,7 @@
         "fact_context_ERASE": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "plan_rope": {
@@ -21,7 +21,7 @@
     },
     "idea_number": "br00053",
     "dimens": [
-        "beliefunit",
+        "coinunit",
         "believerunit",
         "believer_planunit",
         "believer_plan_factunit"

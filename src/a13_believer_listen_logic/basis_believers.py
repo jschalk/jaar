@@ -15,7 +15,7 @@ def create_empty_believer_from_believer(
     x_penny = ref_believer.penny
     return believerunit_shop(
         believer_name=x_believer_name,
-        belief_label=ref_believer.belief_label,
+        coin_label=ref_believer.coin_label,
         knot=x_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,

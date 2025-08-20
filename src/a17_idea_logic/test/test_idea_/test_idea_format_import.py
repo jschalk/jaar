@@ -1,7 +1,7 @@
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
-    belief_label_str,
     believer_name_str,
+    coin_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
@@ -26,8 +26,8 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_partner_debt_points = 23
     bob_partner_debt_points = 29
     yao_partner_debt_points = 37
-    amy_belief_label = "amy56"
-    sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+    amy_coin_label = "amy56"
+    sue_believerunit = believerunit_shop(sue_str, amy_coin_label)
     sue_believerunit.add_partnerunit(
         sue_str, sue_partner_cred_points, sue_partner_debt_points
     )
@@ -48,7 +48,7 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     array_headers = list(partner_dataframe.columns)
     partner_idearef = get_idearef_obj(j1_ideaname)
     assert array_headers == partner_idearef.get_headers_list()
-    assert partner_dataframe.loc[0, belief_label_str()] == amy_belief_label
+    assert partner_dataframe.loc[0, coin_label_str()] == amy_coin_label
     assert (
         partner_dataframe.loc[0, believer_name_str()] == sue_believerunit.believer_name
     )
@@ -60,7 +60,7 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
         partner_dataframe.loc[0, partner_debt_points_str()] == bob_partner_debt_points
     )
 
-    assert partner_dataframe.loc[1, belief_label_str()] == amy_belief_label
+    assert partner_dataframe.loc[1, coin_label_str()] == amy_coin_label
     assert (
         partner_dataframe.loc[1, believer_name_str()] == sue_believerunit.believer_name
     )
@@ -72,7 +72,7 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
         partner_dataframe.loc[1, partner_debt_points_str()] == sue_partner_debt_points
     )
 
-    assert partner_dataframe.loc[2, belief_label_str()] == amy_belief_label
+    assert partner_dataframe.loc[2, coin_label_str()] == amy_coin_label
     assert (
         partner_dataframe.loc[2, believer_name_str()] == sue_believerunit.believer_name
     )

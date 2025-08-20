@@ -29,7 +29,7 @@ def test_BelieverUnit_settle_believer_Sets_planroot_laborheirFrom_planroot_labor
     sue_laborunit = laborunit_shop()
     sue_laborunit.add_party(sue_str)
     yao_believer = believerunit_shop("Yao")
-    root_rope = to_rope(yao_believer.belief_label)
+    root_rope = to_rope(yao_believer.coin_label)
     yao_believer.edit_plan_attr(root_rope, laborunit=sue_laborunit)
     assert yao_believer.planroot.laborunit == sue_laborunit
     assert not yao_believer.planroot._laborheir
@@ -183,10 +183,10 @@ def test_BelieverUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
     swim_str = "swim"
     swim_rope = sue1_believer.make_l1_rope(swim_str)
     sue1_believer.set_plan(
-        planunit_shop(casa_str), parent_rope=sue1_believer.belief_label
+        planunit_shop(casa_str), parent_rope=sue1_believer.coin_label
     )
     sue1_believer.set_plan(
-        planunit_shop(swim_str), parent_rope=sue1_believer.belief_label
+        planunit_shop(swim_str), parent_rope=sue1_believer.coin_label
     )
     swim_laborunit = laborunit_shop()
     swim_laborunit.add_party(party_title=xia_str)
@@ -220,10 +220,10 @@ def test_BelieverUnit_set_plan_CleansPlan_awardunits():
     swim_str = "swim"
     swim_rope = sue1_believer.make_l1_rope(swim_str)
     sue1_believer.set_plan(
-        planunit_shop(casa_str), parent_rope=sue1_believer.belief_label
+        planunit_shop(casa_str), parent_rope=sue1_believer.coin_label
     )
     sue1_believer.set_plan(
-        planunit_shop(swim_str), parent_rope=sue1_believer.belief_label
+        planunit_shop(swim_str), parent_rope=sue1_believer.coin_label
     )
     swim_laborunit = laborunit_shop()
     swim_laborunit.add_party(party_title=xia_str)

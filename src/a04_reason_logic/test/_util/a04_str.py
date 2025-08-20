@@ -14,8 +14,8 @@ def _status_str() -> str:
     return "_status"
 
 
-def belief_label_str() -> str:
-    return "belief_label"
+def coin_label_str() -> str:
+    return "coin_label"
 
 
 def fact_context_str() -> str:

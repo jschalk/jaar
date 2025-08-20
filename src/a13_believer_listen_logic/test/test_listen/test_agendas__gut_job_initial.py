@@ -34,7 +34,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWhenNo_
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    belief_mstr_dir = env_dir()
+    coin_mstr_dir = env_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = believerunit_shop(yao_str, a23_str)
@@ -44,20 +44,20 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWhenNo_
     zia_pool = 87
     yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
     yao_gut.set_partner_respect(zia_pool)
-    save_gut_file(belief_mstr_dir, yao_gut)
+    save_gut_file(coin_mstr_dir, yao_gut)
 
     zia_gut = believerunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
     zia_gut.add_partnerunit(yao_str, partner_debt_points=12)
-    save_gut_file(belief_mstr_dir, zia_gut)
+    save_gut_file(coin_mstr_dir, zia_gut)
 
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_job.get_plan_dict())=}")
-    listen_to_agendas_create_init_job_from_guts(belief_mstr_dir, new_yao_job)
+    listen_to_agendas_create_init_job_from_guts(coin_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
@@ -67,7 +67,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliever(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    belief_mstr_dir = env_dir()
+    coin_mstr_dir = env_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = believerunit_shop(yao_str, a23_str)
@@ -78,7 +78,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliever(
     yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
     yao_gut.set_partner_respect(zia_pool)
     a23_str = "amy23"
-    save_gut_file(belief_mstr_dir, yao_gut)
+    save_gut_file(coin_mstr_dir, yao_gut)
     zia_gut = believerunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
@@ -87,13 +87,13 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliever(
     cook_planunit = zia_gut.get_plan_obj(cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    save_gut_file(belief_mstr_dir, zia_gut)
+    save_gut_file(coin_mstr_dir, zia_gut)
     new_yao_job = create_listen_basis(yao_gut)
     assert len(new_yao_job.get_agenda_dict()) == 0
 
     # WHEN
     print(f"{len(new_yao_job.get_plan_dict())=}")
-    listen_to_agendas_create_init_job_from_guts(belief_mstr_dir, new_yao_job)
+    listen_to_agendas_create_init_job_from_guts(coin_mstr_dir, new_yao_job)
 
     # THEN
     assert len(new_yao_job.get_agenda_dict()) == 2
@@ -103,7 +103,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWithDet
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    belief_mstr_dir = env_dir()
+    coin_mstr_dir = env_dir()
     zia_gut = get_example_zia_speaker()
     bob_gut = get_example_bob_speaker()
     bob_gut.edit_plan_attr(
@@ -119,19 +119,19 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWithDet
     zia_str = zia_gut.believer_name
     bob_str = bob_gut.believer_name
     a23_str = "amy23"
-    save_gut_file(belief_mstr_dir, zia_gut)
-    save_gut_file(belief_mstr_dir, bob_gut)
+    save_gut_file(coin_mstr_dir, zia_gut)
+    save_gut_file(coin_mstr_dir, bob_gut)
 
     yao_gut = get_example_yao_speaker()
     yao_str = yao_gut.believer_name
-    save_gut_file(belief_mstr_dir, yao_gut)
+    save_gut_file(coin_mstr_dir, yao_gut)
 
     new_yao_gut1 = create_listen_basis(yao_gut)
     assert new_yao_gut1.plan_exists(cook_rope()) is False
 
     # WHEN
-    yao_hubunit = hubunit_shop(belief_mstr_dir, a23_str, yao_str)
-    listen_to_agendas_create_init_job_from_guts(belief_mstr_dir, new_yao_gut1)
+    yao_hubunit = hubunit_shop(coin_mstr_dir, a23_str, yao_str)
+    listen_to_agendas_create_init_job_from_guts(coin_mstr_dir, new_yao_gut1)
 
     # THEN
     assert new_yao_gut1.plan_exists(cook_rope())
@@ -150,7 +150,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelieverWithDet
     assert new_yao_gut2.plan_exists(cook_rope()) is False
 
     # WHEN
-    listen_to_agendas_create_init_job_from_guts(belief_mstr_dir, new_yao_gut2)
+    listen_to_agendas_create_init_job_from_guts(coin_mstr_dir, new_yao_gut2)
 
     # THEN
     assert new_yao_gut2.plan_exists(cook_rope())
@@ -166,7 +166,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBeliever
     env_dir_setup_cleanup,
 ):  # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    belief_mstr_dir = env_dir()
+    coin_mstr_dir = env_dir()
     a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = believerunit_shop(yao_str, a23_str)
@@ -181,7 +181,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBeliever
     yao_pool = 92
     yao_gut.set_partner_respect(yao_pool)
     a23_str = "amy23"
-    save_gut_file(belief_mstr_dir, yao_gut)
+    save_gut_file(coin_mstr_dir, yao_gut)
 
     zia_str = "Zia"
     zia_gut = believerunit_shop(zia_str, a23_str)
@@ -192,7 +192,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBeliever
     cook_planunit = zia_gut.get_plan_obj(cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    save_gut_file(belief_mstr_dir, zia_gut)
+    save_gut_file(coin_mstr_dir, zia_gut)
 
     sue_gut = believerunit_shop(sue_str, a23_str)
     sue_gut.set_max_tree_traverse(5)
@@ -223,11 +223,11 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBeliever
         reason_context=egg_rope,
         reason_plan_active_requisite=False,
     )
-    save_gut_file(belief_mstr_dir, sue_gut)
+    save_gut_file(coin_mstr_dir, sue_gut)
 
     # WHEN
     new_yao_gut = create_listen_basis(yao_gut)
-    listen_to_agendas_create_init_job_from_guts(belief_mstr_dir, new_yao_gut)
+    listen_to_agendas_create_init_job_from_guts(coin_mstr_dir, new_yao_gut)
 
     # THEN irrational believer is ignored
     assert len(new_yao_gut.get_agenda_dict()) != 3
@@ -244,10 +244,10 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    belief_mstr_dir = env_dir()
+    coin_mstr_dir = env_dir()
     yao_str = "Yao"
     a23_str = "amy23"
-    yao_gut_path = create_gut_path(belief_mstr_dir, a23_str, yao_str)
+    yao_gut_path = create_gut_path(coin_mstr_dir, a23_str, yao_str)
     delete_dir(yao_gut_path)  # don't know why I have to do this...
     print(f"{os_path_exists(yao_gut_path)=}")
     yao_gut = believerunit_shop(yao_str, a23_str)
@@ -261,7 +261,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     yao_gut.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
     yao_pool = 92
     yao_gut.set_partner_respect(yao_pool)
-    save_gut_file(belief_mstr_dir, yao_gut)
+    save_gut_file(coin_mstr_dir, yao_gut)
 
     zia_gut = believerunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
@@ -271,11 +271,11 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     cook_planunit = zia_gut.get_plan_obj(cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
-    save_gut_file(belief_mstr_dir, zia_gut)
+    save_gut_file(coin_mstr_dir, zia_gut)
 
     # WHEN
     new_yao_gut = create_listen_basis(yao_gut)
-    listen_to_agendas_create_init_job_from_guts(belief_mstr_dir, new_yao_gut)
+    listen_to_agendas_create_init_job_from_guts(coin_mstr_dir, new_yao_gut)
 
     # THEN irrational believer is ignored
     assert len(new_yao_gut.get_agenda_dict()) != 3

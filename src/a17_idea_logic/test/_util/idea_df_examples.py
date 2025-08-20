@@ -9,14 +9,14 @@ from src.a07_timeline_logic.test._util.a07_str import (
 )
 from src.a11_bud_logic.test._util.a11_str import (
     amount_str,
-    belief_label_str,
     believer_name_str,
     bud_time_str,
     celldepth_str,
+    coin_label_str,
     quota_str,
     tran_time_str,
 )
-from src.a15_belief_logic.test._util.a15_str import (
+from src.a15_coin_logic.test._util.a15_str import (
     job_listen_rotations_str,
     weekday_label_str,
     weekday_order_str,
@@ -27,13 +27,13 @@ JEFFY45_STR = "jeffy45"
 
 
 def get_ex1_br00000_df() -> DataFrame:
-    """idea_format_00000_beliefunit_v0_0_0
-    c400_number,belief_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
+    """idea_format_00000_coinunit_v0_0_0
+    c400_number,coin_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             c400_number_str(),
-            belief_label_str(),
+            coin_label_str(),
             fund_iota_str(),
             monthday_distortion_str(),
             penny_str(),
@@ -49,11 +49,11 @@ def get_ex1_br00000_df() -> DataFrame:
 
 
 def get_ex1_br00001_df() -> DataFrame:
-    """idea_format_00001_belief_budunit_v0_0_0
-    belief_label,believer_name,quota,bud_time,celldepth"""
+    """idea_format_00001_coin_budunit_v0_0_0
+    coin_label,believer_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            belief_label_str(),
+            coin_label_str(),
             believer_name_str(),
             quota_str(),
             bud_time_str(),
@@ -65,19 +65,19 @@ def get_ex1_br00001_df() -> DataFrame:
 
 
 def get_ex1_br00002_df() -> DataFrame:
-    """idea_format_00002_belief_paybook_v0_0_0
-    partner_name,amount,belief_label,believer_name,tran_time"""
+    """idea_format_00002_coin_paybook_v0_0_0
+    partner_name,amount,coin_label,believer_name,tran_time"""
     x_df = DataFrame(
-        columns=["partner_name", "amount", "belief_label", "believer_name", "tran_time"]
+        columns=["partner_name", "amount", "coin_label", "believer_name", "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, AMY23_STR, "Zia", 777]
     return x_df
 
 
 def get_ex1_br00003_df() -> DataFrame:
-    """idea_format_00003_belief_timeline_hour_v0_0_0
-    cumulative_minute,belief_label,hour_label"""
-    x_df = DataFrame(columns=["belief_label", "hour_label", "cumulative_minute"])
+    """idea_format_00003_coin_timeline_hour_v0_0_0
+    cumulative_minute,coin_label,hour_label"""
+    x_df = DataFrame(columns=["coin_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
     x_df.loc[1] = [AMY23_STR, "1am", 120]
     x_df.loc[2] = [AMY23_STR, "2am", 180]
@@ -106,9 +106,9 @@ def get_ex1_br00003_df() -> DataFrame:
 
 
 def get_ex1_br00004_df() -> DataFrame:
-    """idea_format_00004_belief_timeline_month_v0_0_0
-    cumulative_day,belief_label,month_label"""
-    x_df = DataFrame(columns=["belief_label", "month_label", "cumulative_day"])
+    """idea_format_00004_coin_timeline_month_v0_0_0
+    cumulative_day,coin_label,month_label"""
+    x_df = DataFrame(columns=["coin_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -125,10 +125,10 @@ def get_ex1_br00004_df() -> DataFrame:
 
 
 def get_ex1_br00005_df() -> DataFrame:
-    """idea_format_00005_belief_timeline_weekday_v0_0_0
-    belief_label,weekday_label,weekday_order"""
+    """idea_format_00005_coin_timeline_weekday_v0_0_0
+    coin_label,weekday_label,weekday_order"""
     x_df = DataFrame(
-        columns=[belief_label_str(), weekday_label_str(), weekday_order_str()]
+        columns=[coin_label_str(), weekday_label_str(), weekday_order_str()]
     )
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
@@ -141,13 +141,13 @@ def get_ex1_br00005_df() -> DataFrame:
 
 
 def get_ex2_br00000_df() -> DataFrame:
-    """idea_format_00000_beliefunit_v0_0_0
-    c400_number,belief_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
+    """idea_format_00000_coinunit_v0_0_0
+    c400_number,coin_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
             c400_number_str(),
-            belief_label_str(),
+            coin_label_str(),
             fund_iota_str(),
             monthday_distortion_str(),
             penny_str(),
@@ -164,11 +164,11 @@ def get_ex2_br00000_df() -> DataFrame:
 
 
 def get_ex2_br00001_df() -> DataFrame:
-    """idea_format_00001_belief_budunit_v0_0_0
-    belief_label,believer_name,quota,bud_time"""
+    """idea_format_00001_coin_budunit_v0_0_0
+    coin_label,believer_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
-            belief_label_str(),
+            coin_label_str(),
             believer_name_str(),
             quota_str(),
             bud_time_str(),
@@ -184,13 +184,13 @@ def get_ex2_br00001_df() -> DataFrame:
 
 
 def get_ex2_br00002_df() -> DataFrame:
-    """idea_format_00002_belief_paybook_v0_0_0
-    partner_name,amount,belief_label,believer_name,tran_time"""
+    """idea_format_00002_coin_paybook_v0_0_0
+    partner_name,amount,coin_label,believer_name,tran_time"""
     x_df = DataFrame(
         columns=[
             partner_name_str(),
             amount_str(),
-            belief_label_str(),
+            coin_label_str(),
             believer_name_str(),
             tran_time_str(),
         ]
@@ -204,9 +204,9 @@ def get_ex2_br00002_df() -> DataFrame:
 
 
 def get_ex2_br00003_df() -> DataFrame:
-    """idea_format_00003_belief_timeline_hour_v0_0_0
-    cumulative_minute,belief_label,hour_label"""
-    x_df = DataFrame(columns=["belief_label", "hour_label", "cumulative_minute"])
+    """idea_format_00003_coin_timeline_hour_v0_0_0
+    cumulative_minute,coin_label,hour_label"""
+    x_df = DataFrame(columns=["coin_label", "hour_label", "cumulative_minute"])
     x_df.loc[0] = [AMY23_STR, "12am", 60]
     x_df.loc[1] = [AMY23_STR, "1am", 120]
     x_df.loc[2] = [AMY23_STR, "2am", 180]
@@ -255,9 +255,9 @@ def get_ex2_br00003_df() -> DataFrame:
 
 
 def get_ex2_br00004_df() -> DataFrame:
-    """idea_format_00004_belief_timeline_month_v0_0_0
-    cumulative_day,belief_label,month_label"""
-    x_df = DataFrame(columns=["belief_label", "month_label", "cumulative_day"])
+    """idea_format_00004_coin_timeline_month_v0_0_0
+    cumulative_day,coin_label,month_label"""
+    x_df = DataFrame(columns=["coin_label", "month_label", "cumulative_day"])
     x_df.loc[0] = [AMY23_STR, "March", 31]
     x_df.loc[1] = [AMY23_STR, "April", 61]
     x_df.loc[2] = [AMY23_STR, "May", 92]
@@ -289,9 +289,9 @@ def get_ex2_br00004_df() -> DataFrame:
 
 
 def get_ex2_br00005_df() -> DataFrame:
-    """idea_format_00005_belief_timeline_weekday_v0_0_0
-    belief_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=["belief_label", "weekday_label", "weekday_order"])
+    """idea_format_00005_coin_timeline_weekday_v0_0_0
+    coin_label,weekday_label,weekday_order"""
+    x_df = DataFrame(columns=["coin_label", "weekday_label", "weekday_order"])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -308,9 +308,9 @@ def get_ex2_br00005_df() -> DataFrame:
 
 
 # def get_ex2_br00006_df() -> DataFrame:
-#     """idea_format_00006_belief_timeoffi_v0_0_0
-#     belief_label,offi_time,_offi_time_maxt"""
-#     x_df = DataFrame(columns=["belief_label", "offi_time", "_offi_time_max"])
+#     """idea_format_00006_coin_timeoffi_v0_0_0
+#     coin_label,offi_time,_offi_time_maxt"""
+#     x_df = DataFrame(columns=["coin_label", "offi_time", "_offi_time_max"])
 #     x_df.loc[0] = [AMY23_STR, 100, 300]
 #     x_df.loc[1] = [AMY23_STR, 110, 320]
 #     x_df.loc[2] = [AMY23_STR, 120, 330]

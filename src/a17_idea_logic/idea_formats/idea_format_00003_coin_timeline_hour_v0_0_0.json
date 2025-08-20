@@ -1,0 +1,24 @@
+{
+    "attributes": {
+        "cumulative_minute": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "coin_label": {
+            "otx_key": true
+        },
+        "hour_label": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00003",
+    "dimens": [
+        "coinunit",
+        "coin_timeline_hour"
+    ]
+}

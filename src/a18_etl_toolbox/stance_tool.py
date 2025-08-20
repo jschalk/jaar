@@ -6,15 +6,15 @@ from src.a00_data_toolbox.csv_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
 from src.a12_hub_toolbox.hub_tool import open_believer_file
-from src.a15_belief_logic.belief_main import get_default_path_beliefunit
+from src.a15_coin_logic.coin_main import get_default_path_coinunit
 from src.a17_idea_logic.idea_csv_tool import (
-    add_beliefunit_to_stance_csv_strs,
     add_believerunit_to_stance_csv_strs,
+    add_coinunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import csv_dict_to_excel, prettify_excel
 from src.a18_etl_toolbox.a18_path import (
-    create_belief_mstr_path,
+    create_coin_mstr_path,
     create_stance0001_path,
     create_world_db_path,
 )
@@ -149,31 +149,31 @@ ORDER BY
 
 
 def add_pidgin_rows_to_stance_csv_strs(
-    cursor: sqlite3_Cursor, belief_csv_strs: dict[str, str], csv_delimiter: str
+    cursor: sqlite3_Cursor, coin_csv_strs: dict[str, str], csv_delimiter: str
 ):
-    br00042_csv = belief_csv_strs.get("br00042")
-    br00043_csv = belief_csv_strs.get("br00043")
-    br00044_csv = belief_csv_strs.get("br00044")
-    br00045_csv = belief_csv_strs.get("br00045")
+    br00042_csv = coin_csv_strs.get("br00042")
+    br00043_csv = coin_csv_strs.get("br00043")
+    br00044_csv = coin_csv_strs.get("br00044")
+    br00045_csv = coin_csv_strs.get("br00045")
     br00042_csv = add_to_br00042_csv(br00042_csv, cursor, csv_delimiter)
     br00043_csv = add_to_br00043_csv(br00043_csv, cursor, csv_delimiter)
     br00044_csv = add_to_br00044_csv(br00044_csv, cursor, csv_delimiter)
     br00045_csv = add_to_br00045_csv(br00045_csv, cursor, csv_delimiter)
-    belief_csv_strs["br00042"] = br00042_csv
-    belief_csv_strs["br00043"] = br00043_csv
-    belief_csv_strs["br00044"] = br00044_csv
-    belief_csv_strs["br00045"] = br00045_csv
+    coin_csv_strs["br00042"] = br00042_csv
+    coin_csv_strs["br00043"] = br00043_csv
+    coin_csv_strs["br00044"] = br00044_csv
+    coin_csv_strs["br00045"] = br00045_csv
 
 
 def collect_stance_csv_strs(world_dir: str) -> dict[str, str]:
-    belief_mstr_dir = create_belief_mstr_path(world_dir)
+    coin_mstr_dir = create_coin_mstr_path(world_dir)
     x_csv_strs = create_init_stance_idea_csv_strs()
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    for belief_label in get_level1_dirs(beliefs_dir):
-        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
-        add_beliefunit_to_stance_csv_strs(x_beliefunit, x_csv_strs, ",")
-        belief_dir = create_path(beliefs_dir, belief_label)
-        believers_dir = create_path(belief_dir, "believers")
+    coins_dir = create_path(coin_mstr_dir, "coins")
+    for coin_label in get_level1_dirs(coins_dir):
+        x_coinunit = get_default_path_coinunit(coin_mstr_dir, coin_label)
+        add_coinunit_to_stance_csv_strs(x_coinunit, x_csv_strs, ",")
+        coin_dir = create_path(coins_dir, coin_label)
+        believers_dir = create_path(coin_dir, "believers")
         for believer_name in get_level1_dirs(believers_dir):
             believer_dir = create_path(believers_dir, believer_name)
             gut_dir = create_path(believer_dir, "gut")

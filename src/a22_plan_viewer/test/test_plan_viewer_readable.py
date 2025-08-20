@@ -22,8 +22,8 @@ from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
     awardunits_str,
     begin_str,
-    belief_label_str,
     close_str,
+    coin_label_str,
     denom_str,
     factunits_str,
     fund_iota_str,
@@ -68,7 +68,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     #     print(f"{dict_key=} \t\t {value=}")
     assert set(casa_dict.keys()) == {
         plan_label_str(),
-        belief_label_str(),
+        coin_label_str(),
         parent_rope_str(),
         _kids_str(),
         "root",

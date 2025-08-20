@@ -14,7 +14,7 @@ def test_BelieverUnit_set_plan_RaisesErrorWhen_parent_rope_IsInvalid():
     # ESTABLISH
     zia_believer = believerunit_shop("Zia")
     invalid_rootlabel_swim_rope = create_rope("swimming")
-    assert invalid_rootlabel_swim_rope != zia_believer.belief_label
+    assert invalid_rootlabel_swim_rope != zia_believer.coin_label
     casa_str = "casa"
 
     # WHEN / THEN
@@ -22,7 +22,7 @@ def test_BelieverUnit_set_plan_RaisesErrorWhen_parent_rope_IsInvalid():
         zia_believer.set_plan(
             planunit_shop(casa_str), parent_rope=invalid_rootlabel_swim_rope
         )
-    exception_str = f"set_plan failed because parent_rope '{invalid_rootlabel_swim_rope}' has an invalid root label. Should be {zia_believer.belief_label}."
+    exception_str = f"set_plan failed because parent_rope '{invalid_rootlabel_swim_rope}' has an invalid root label. Should be {zia_believer.coin_label}."
     assert str(excinfo.value) == exception_str
 
 
@@ -67,7 +67,7 @@ def test_BelieverUnit_set_plan_SetsAttr():
 
     # WHEN
     zia_believer.set_plan(
-        planunit_shop(casa_str), parent_rope=to_rope(zia_believer.belief_label)
+        planunit_shop(casa_str), parent_rope=to_rope(zia_believer.coin_label)
     )
 
     # THEN
@@ -84,7 +84,7 @@ def test_BelieverUnit_plan_exists_ReturnsObj():
 
     # WHEN
     zia_believer.set_plan(
-        planunit_shop(casa_str), parent_rope=to_rope(zia_believer.belief_label)
+        planunit_shop(casa_str), parent_rope=to_rope(zia_believer.coin_label)
     )
 
     # THEN
@@ -204,7 +204,7 @@ def test_BelieverUnit_set_plan_CanCreateMissingPlanUnits():
 def test_BelieverUnit_del_plan_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_believer = get_believerunit_with_4_levels()
-    root_rope = to_rope(sue_believer.belief_label)
+    root_rope = to_rope(sue_believer.coin_label)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -254,7 +254,7 @@ def test_BelieverUnit_del_plan_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sun_rope = sue_believer.make_l1_rope(sun_str)
     assert sue_believer.get_plan_obj(new_sun_rope)
     new_sun_plan = sue_believer.get_plan_obj(new_sun_rope)
-    assert new_sun_plan.parent_rope == to_rope(sue_believer.belief_label)
+    assert new_sun_plan.parent_rope == to_rope(sue_believer.coin_label)
 
 
 def test_BelieverUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -822,11 +822,11 @@ def test_BelieverUnit_get_plan_obj_ReturnsPlan():
     assert wk_plan.plan_label == wk_str
 
     # WHEN
-    root_plan = sue_believer.get_plan_obj(to_rope(sue_believer.belief_label))
+    root_plan = sue_believer.get_plan_obj(to_rope(sue_believer.coin_label))
 
     # THEN
     assert root_plan is not None
-    assert root_plan.plan_label == sue_believer.belief_label
+    assert root_plan.plan_label == sue_believer.coin_label
 
     # WHEN / THEN
     bobdylan_str = "bobdylan"
@@ -864,7 +864,7 @@ def test_BelieverUnit_plan_exists_ReturnsBool():
     # WHEN / THEN
     assert sue_believer.plan_exists("") is False
     assert sue_believer.plan_exists(None) is False
-    assert sue_believer.plan_exists(to_rope(sue_believer.belief_label))
+    assert sue_believer.plan_exists(to_rope(sue_believer.coin_label))
     assert sue_believer.plan_exists(cat_rope)
     assert sue_believer.plan_exists(wk_rope)
     assert sue_believer.plan_exists(casa_rope)
@@ -909,8 +909,8 @@ def test_BelieverUnit_set_offtrack_fund_ReturnsObj():
     casa_plan = planunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     wk_plan = planunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_plan = planunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_plan.parent_rope = bob_believerunit.belief_label
-    wk_plan.parent_rope = bob_believerunit.belief_label
+    casa_plan.parent_rope = bob_believerunit.coin_label
+    wk_plan.parent_rope = bob_believerunit.coin_label
     wed_plan.parent_rope = wk_rope
     bob_believerunit.set_l1_plan(casa_plan)
     bob_believerunit.set_l1_plan(wk_plan)
@@ -966,8 +966,8 @@ def test_BelieverUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_plan = planunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
     wk_plan = planunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
     wed_plan = planunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
-    casa_plan.parent_rope = bob_believerunit.belief_label
-    wk_plan.parent_rope = bob_believerunit.belief_label
+    casa_plan.parent_rope = bob_believerunit.coin_label
+    wk_plan.parent_rope = bob_believerunit.coin_label
     wed_plan.parent_rope = wk_rope
     bob_believerunit.set_l1_plan(casa_plan)
     bob_believerunit.set_l1_plan(wk_plan)

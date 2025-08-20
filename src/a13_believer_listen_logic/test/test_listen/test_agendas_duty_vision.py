@@ -125,9 +125,9 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBelieverWithDetai
 
     yao_duty = get_example_yao_speaker()
     save_duty_believer(
-        belief_mstr_dir=sue_dakota_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_dakota_hubunit.coin_mstr_dir,
         believer_name=sue_dakota_hubunit.believer_name,
-        belief_label=sue_dakota_hubunit.belief_label,
+        coin_label=sue_dakota_hubunit.coin_label,
         keep_rope=sue_dakota_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -186,9 +186,9 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBeliever(
     yao_duty.set_partner_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_believer(
-        belief_mstr_dir=yao_dakota_hubunit.belief_mstr_dir,
+        coin_mstr_dir=yao_dakota_hubunit.coin_mstr_dir,
         believer_name=yao_dakota_hubunit.believer_name,
-        belief_label=yao_dakota_hubunit.belief_label,
+        coin_label=yao_dakota_hubunit.coin_label,
         keep_rope=yao_dakota_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -270,9 +270,9 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelieve
     yao_duty.set_partner_respect(yao_pool)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_believer(
-        belief_mstr_dir=yao_dakota_hubunit.belief_mstr_dir,
+        coin_mstr_dir=yao_dakota_hubunit.coin_mstr_dir,
         believer_name=yao_dakota_hubunit.believer_name,
-        belief_label=yao_dakota_hubunit.belief_label,
+        coin_label=yao_dakota_hubunit.coin_label,
         keep_rope=yao_dakota_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -324,9 +324,9 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBeliever_duty_AndNotBeliev
     # save yao without chore to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_believer(
-        belief_mstr_dir=yao_dakota_hubunit.belief_mstr_dir,
+        coin_mstr_dir=yao_dakota_hubunit.coin_mstr_dir,
         believer_name=yao_dakota_hubunit.believer_name,
-        belief_label=yao_dakota_hubunit.belief_label,
+        coin_label=yao_dakota_hubunit.coin_label,
         keep_rope=yao_dakota_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -375,9 +375,9 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBelieverNotSpeaker
     yao_duty.set_plan(planunit_shop(run_str(), task=True), casa_rope())
     sue_dakota_hubunit = get_dakota_hubunit()
     save_duty_believer(
-        belief_mstr_dir=sue_dakota_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_dakota_hubunit.coin_mstr_dir,
         believer_name=sue_dakota_hubunit.believer_name,
-        belief_label=sue_dakota_hubunit.belief_label,
+        coin_label=sue_dakota_hubunit.coin_label,
         keep_rope=sue_dakota_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,

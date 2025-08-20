@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a01_term_logic.rope import create_rope
-from src.a05_plan_logic.plan import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_coin_label as root_label
 from src.a06_believer_logic.test._util.example_believers import (
     get_believerunit_with_4_levels,
 )

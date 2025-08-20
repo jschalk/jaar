@@ -36,9 +36,9 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     yao_duty.set_partner_respect(zia_pool)
     sue_texas_hubunit = get_texas_hubunit()
     save_duty_believer(
-        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_texas_hubunit.coin_mstr_dir,
         believer_name=sue_texas_hubunit.believer_name,
-        belief_label=sue_texas_hubunit.belief_label,
+        coin_label=sue_texas_hubunit.coin_label,
         keep_rope=sue_texas_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -74,9 +74,9 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     yao_duty.set_partner_respect(yao_pool)
     sue_texas_hubunit = get_texas_hubunit()
     save_duty_believer(
-        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_texas_hubunit.coin_mstr_dir,
         believer_name=sue_texas_hubunit.believer_name,
-        belief_label=sue_texas_hubunit.belief_label,
+        coin_label=sue_texas_hubunit.coin_label,
         keep_rope=sue_texas_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -112,9 +112,9 @@ def test_listen_to_facts_duty_vision_GetsFactsFromSrcBelieverSelfNotSpeakerSelf(
     yao_duty.add_fact(eat_rope(), full_rope())
     sue_texas_hubunit = get_texas_hubunit()
     save_duty_believer(
-        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_texas_hubunit.coin_mstr_dir,
         believer_name=sue_texas_hubunit.believer_name,
-        belief_label=sue_texas_hubunit.belief_label,
+        coin_label=sue_texas_hubunit.coin_label,
         keep_rope=sue_texas_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -149,9 +149,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBelieversSpeak
     assert yao_duty.get_fact(eat_rope()) is None
     sue_texas_hubunit = get_texas_hubunit()
     save_duty_believer(
-        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_texas_hubunit.coin_mstr_dir,
         believer_name=sue_texas_hubunit.believer_name,
-        belief_label=sue_texas_hubunit.belief_label,
+        coin_label=sue_texas_hubunit.coin_label,
         keep_rope=sue_texas_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -193,9 +193,9 @@ def test_listen_to_facts_duty_vision_SetsPrioritizesSelfFactsOverSpeakers(
     assert yao_duty.get_fact(eat_rope()).fact_state == full_rope()
     sue_texas_hubunit = get_texas_hubunit()
     save_duty_believer(
-        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_texas_hubunit.coin_mstr_dir,
         believer_name=sue_texas_hubunit.believer_name,
-        belief_label=sue_texas_hubunit.belief_label,
+        coin_label=sue_texas_hubunit.coin_label,
         keep_rope=sue_texas_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,
@@ -240,9 +240,9 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBelieversSpeak
     yao_duty.del_fact(eat_rope())
     assert yao_duty.get_fact(eat_rope()) is None
     save_duty_believer(
-        belief_mstr_dir=sue_texas_hubunit.belief_mstr_dir,
+        coin_mstr_dir=sue_texas_hubunit.coin_mstr_dir,
         believer_name=sue_texas_hubunit.believer_name,
-        belief_label=sue_texas_hubunit.belief_label,
+        coin_label=sue_texas_hubunit.coin_label,
         keep_rope=sue_texas_hubunit.keep_rope,
         knot=None,
         duty_believer=yao_duty,

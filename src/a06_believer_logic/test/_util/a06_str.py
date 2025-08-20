@@ -30,7 +30,7 @@ from src.a04_reason_logic.test._util.a04_str import (
     _active_str,
     _chore_str,
     _status_str,
-    belief_label_str,
+    coin_label_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,

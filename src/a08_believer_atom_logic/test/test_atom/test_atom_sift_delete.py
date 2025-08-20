@@ -81,7 +81,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_partner_membership():
 def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_planunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
-    root_rope = to_rope(sue_believer.belief_label)
+    root_rope = to_rope(sue_believer.coin_label)
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
     clean_str = "clean"
@@ -122,7 +122,7 @@ def test_sift_atom_ReturnsObj_BelieverAtom_DELETE_believer_planunit():
 def test_sift_atom_SetsBelieverDeltaBelieverAtom_believer_planunit():
     # ESTABLISH
     sue_believer = believerunit_shop("Sue")
-    root_rope = to_rope(sue_believer.belief_label)
+    root_rope = to_rope(sue_believer.coin_label)
     casa_str = "casa"
     casa_rope = sue_believer.make_l1_rope(casa_str)
     clean_str = "clean"

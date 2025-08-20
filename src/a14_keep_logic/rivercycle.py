@@ -159,7 +159,7 @@ class RiverGrade:
 
     def to_dict(self) -> dict:
         return {
-            "belief_label": self.hubunit.belief_label,
+            "coin_label": self.hubunit.coin_label,
             "healer_name": self.hubunit.believer_name,
             "keep_rope": self.hubunit.keep_rope,
             "tax_bill_amount": self.tax_bill_amount,

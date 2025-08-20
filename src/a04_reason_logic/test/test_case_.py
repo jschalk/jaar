@@ -906,18 +906,18 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
 
 def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
     # ESTABLISH
-    old_belief_label = "El Paso"
+    old_coin_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_rope = create_rope(old_belief_label, casa_str)
+    old_casa_rope = create_rope(old_coin_label, casa_str)
     old_seasons_rope = create_rope(old_casa_rope, seasons_str)
     old_caseunit = caseunit_shop(reason_state=old_seasons_rope)
     old_caseunits = {old_caseunit.reason_state: old_caseunit}
     assert old_caseunits.get(old_seasons_rope) == old_caseunit
 
     # WHEN
-    new_belief_label = "Austin"
-    new_casa_rope = create_rope(new_belief_label, casa_str)
+    new_coin_label = "Austin"
+    new_casa_rope = create_rope(new_coin_label, casa_str)
     new_seasons_rope = create_rope(new_casa_rope, seasons_str)
     new_case_ropes = find_replace_rope_key_dict(
         dict_x=old_caseunits, old_rope=old_seasons_rope, new_rope=new_seasons_rope

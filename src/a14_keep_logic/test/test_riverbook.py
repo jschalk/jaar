@@ -6,7 +6,7 @@ from src.a14_keep_logic.rivercycle import (
     get_credorledger,
     riverbook_shop,
 )
-from src.a14_keep_logic.test._util.a14_env import temp_belief_mstr_dir
+from src.a14_keep_logic.test._util.a14_env import temp_coin_mstr_dir
 
 
 def test_RiverBook_Exists():
@@ -22,8 +22,8 @@ def test_RiverBook_Exists():
 def test_riverbook_shop_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
-    x_belief_mstr_dir = temp_belief_mstr_dir()
-    yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
+    x_coin_mstr_dir = temp_coin_mstr_dir()
+    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
 
     # WHEN
     bob_str = "Bob"
@@ -42,8 +42,8 @@ def test_create_riverbook_ReturnsObj():
     yao_believer = believerunit_shop(yao_str)
     yao_believer.add_partnerunit(yao_str)
     yao_believer.add_partnerunit(sue_str)
-    x_belief_mstr_dir = temp_belief_mstr_dir()
-    yao_hubunit = hubunit_shop(x_belief_mstr_dir, None, yao_str)
+    x_coin_mstr_dir = temp_coin_mstr_dir()
+    yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
     yao_book_point_amount = 500
 
     # WHEN

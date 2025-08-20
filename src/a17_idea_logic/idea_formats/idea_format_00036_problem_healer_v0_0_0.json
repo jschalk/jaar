@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "healer_name": {
@@ -27,7 +27,7 @@
     },
     "idea_number": "br00036",
     "dimens": [
-        "beliefunit",
+        "coinunit",
         "believerunit",
         "believer_planunit",
         "believer_plan_healerunit"

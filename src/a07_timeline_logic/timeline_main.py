@@ -151,8 +151,8 @@ def new_timeline_planunit(timeline_label: TimeLineLabel, c400_number: int) -> Pl
     return planunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
-def get_timeline_rope(belief_label: str, timeline_label: str, knot: str) -> RopeTerm:
-    time_rope = create_rope(belief_label, "time", knot)
+def get_timeline_rope(coin_label: str, timeline_label: str, knot: str) -> RopeTerm:
+    time_rope = create_rope(coin_label, "time", knot)
     return create_rope(time_rope, timeline_label, knot)
 
 
@@ -166,7 +166,7 @@ def add_newtimeline_planunit(x_believerunit: BelieverUnit, timeline_config: dict
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
     timeline_rope = get_timeline_rope(
-        belief_label=x_believerunit.belief_label,
+        coin_label=x_believerunit.coin_label,
         timeline_label=x_plan_label,
         knot=x_believerunit.knot,
     )
@@ -200,7 +200,7 @@ def add_stan_planunits(
 ):
     time_rope = x_believerunit.make_l1_rope("time")
     timeline_rope = get_timeline_rope(
-        belief_label=x_believerunit.belief_label,
+        coin_label=x_believerunit.coin_label,
         timeline_label=timeline_label,
         knot=x_believerunit.knot,
     )

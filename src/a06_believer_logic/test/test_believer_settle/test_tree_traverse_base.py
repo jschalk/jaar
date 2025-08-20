@@ -166,7 +166,7 @@ def test_BelieverUnit_settle_believer_NLevelSetsDescendantAttributes_1():
     sue_believer.set_plan(email_plan, parent_rope=casa_rope)
 
     # test root status:
-    root_rope = to_rope(sue_believer.belief_label)
+    root_rope = to_rope(sue_believer.coin_label)
     x_planroot = sue_believer.get_plan_obj(root_rope)
     assert x_planroot._descendant_task_count is None
     assert x_planroot._all_partner_cred is None
@@ -379,13 +379,13 @@ def test_BelieverUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     # THEN
     assert len(ordered_label_list) == 17
     x_1st_rope_in_ordered_list = sue_believer.get_plan_tree_ordered_rope_list()[0]
-    root_rope = to_rope(sue_believer.belief_label)
+    root_rope = to_rope(sue_believer.coin_label)
     assert x_1st_rope_in_ordered_list == root_rope
     x_8th_rope_in_ordered_list = sue_believer.get_plan_tree_ordered_rope_list()[9]
     assert x_8th_rope_in_ordered_list == sue_believer.make_l1_rope(wk_str)
 
     # WHEN
-    y_believer = believerunit_shop(belief_label="amy23")
+    y_believer = believerunit_shop(coin_label="amy23")
 
     # THEN
     y_1st_rope_in_ordered_list = y_believer.get_plan_tree_ordered_rope_list()[0]
@@ -469,7 +469,7 @@ def test_BelieverUnit_settle_believer_WhenPlanRootHas_starButAll_kidsHaveZero_st
     sue_believerunit.settle_believer()
 
     # THEN
-    root_rope = to_rope(sue_believerunit.belief_label)
+    root_rope = to_rope(sue_believerunit.coin_label)
     assert sue_believerunit._offtrack_kids_star_set == {root_rope}
 
     # WHEN
@@ -533,7 +533,7 @@ def test_BelieverUnit_settle_believer_CreatesNewGroupUnitsWhenNeeded_Scenario0()
     yao_believer.add_partnerunit(
         zia_str, zia_partner_cred_points, zia_partner_debt_points
     )
-    root_rope = to_rope(yao_believer.belief_label)
+    root_rope = to_rope(yao_believer.coin_label)
     x_planroot = yao_believer.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(yao_str))
     x_planroot.set_awardunit(awardunit_shop(zia_str))
@@ -673,7 +673,7 @@ def test_BelieverUnit_settle_believer_Sets_planroot_factheir_With_range_factheir
     tue_rope = yao_believer.make_rope(wk_rope, tue_str)
     tue_addin = 100
     yao_believer.set_plan(planunit_shop(tue_str, addin=tue_addin), wk_rope)
-    root_rope = to_rope(yao_believer.belief_label)
+    root_rope = to_rope(yao_believer.coin_label)
     yao_believer.edit_plan_attr(
         root_rope, reason_context=tue_rope, reason_case=tue_rope
     )

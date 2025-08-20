@@ -15,8 +15,8 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a01_term_logic.rope import validate_labelterm
 from src.a01_term_logic.term import (
-    BeliefLabel,
     BelieverName,
+    CoinLabel,
     RopeTerm,
     default_knot_if_None,
 )
@@ -77,8 +77,8 @@ class get_keep_ropesException(Exception):
 @dataclass
 class HubUnit:
     believer_name: BelieverName = None
-    belief_mstr_dir: str = None
-    belief_label: str = None
+    coin_mstr_dir: str = None
+    coin_label: str = None
     keep_rope: RopeTerm = None
     knot: str = None
     fund_pool: float = None
@@ -91,17 +91,17 @@ class HubUnit:
     _packs_dir: str = None
 
     def set_dir_attrs(self):
-        mstr_dir = self.belief_mstr_dir
-        belief_label = self.belief_label
+        mstr_dir = self.coin_mstr_dir
+        coin_label = self.coin_label
         believer_name = self.believer_name
-        self._keeps_dir = create_keeps_dir_path(mstr_dir, belief_label, believer_name)
-        self._atoms_dir = create_atoms_dir_path(mstr_dir, belief_label, believer_name)
-        self._packs_dir = create_packs_dir_path(mstr_dir, belief_label, believer_name)
+        self._keeps_dir = create_keeps_dir_path(mstr_dir, coin_label, believer_name)
+        self._atoms_dir = create_atoms_dir_path(mstr_dir, coin_label, believer_name)
+        self._packs_dir = create_packs_dir_path(mstr_dir, coin_label, believer_name)
 
     def default_gut_believer(self) -> BelieverUnit:
         x_believerunit = believerunit_shop(
             believer_name=self.believer_name,
-            belief_label=self.belief_label,
+            coin_label=self.coin_label,
             knot=self.knot,
             fund_pool=self.fund_pool,
             fund_iota=self.fund_iota,
@@ -146,7 +146,7 @@ class HubUnit:
         delete_dir(self.atom_file_path(atom_number))
 
     def _get_believer_from_atom_files(self) -> BelieverUnit:
-        x_believer = believerunit_shop(self.believer_name, self.belief_label)
+        x_believer = believerunit_shop(self.believer_name, self.coin_label)
         if self.atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
@@ -275,7 +275,7 @@ class HubUnit:
 
     def _create_gut_from_packs(self):
         x_believer = self._merge_any_packs(self.default_gut_believer())
-        save_gut_file(self.belief_mstr_dir, x_believer)
+        save_gut_file(self.coin_mstr_dir, x_believer)
 
     def _create_initial_pack_and_gut_files(self):
         self._create_initial_pack_files_from_default()
@@ -286,14 +286,14 @@ class HubUnit:
         x_packunit._believerdelta.add_all_different_believeratoms(
             before_believer=self.default_gut_believer(),
             after_believer=open_gut_file(
-                self.belief_mstr_dir, self.belief_label, self.believer_name
+                self.coin_mstr_dir, self.coin_label, self.believer_name
             ),
         )
         x_packunit.save_files()
 
     def initialize_pack_gut_files(self):
         x_gut_file_exists = gut_file_exists(
-            self.belief_mstr_dir, self.belief_label, self.believer_name
+            self.coin_mstr_dir, self.coin_label, self.believer_name
         )
         pack_file_exists = self.pack_file_exists(init_pack_id())
         if x_gut_file_exists is False and pack_file_exists is False:
@@ -305,10 +305,10 @@ class HubUnit:
 
     def append_packs_to_gut_file(self) -> BelieverUnit:
         gut_believer = open_gut_file(
-            self.belief_mstr_dir, self.belief_label, self.believer_name
+            self.coin_mstr_dir, self.coin_label, self.believer_name
         )
         gut_believer = self._merge_any_packs(gut_believer)
-        save_gut_file(self.belief_mstr_dir, gut_believer)
+        save_gut_file(self.coin_mstr_dir, gut_believer)
         return gut_believer
 
     # keep management
@@ -324,18 +324,18 @@ class HubUnit:
 
     def visions_path(self) -> str:
         return create_keep_visions_path(
-            belief_mstr_dir=self.belief_mstr_dir,
+            coin_mstr_dir=self.coin_mstr_dir,
             believer_name=self.believer_name,
-            belief_label=self.belief_label,
+            coin_label=self.coin_label,
             keep_rope=self.keep_rope,
             knot=self.knot,
         )
 
     def grades_path(self) -> str:
         return create_keep_grades_path(
-            belief_mstr_dir=self.belief_mstr_dir,
+            coin_mstr_dir=self.coin_mstr_dir,
             believer_name=self.believer_name,
-            belief_label=self.belief_label,
+            coin_label=self.coin_label,
             keep_rope=self.keep_rope,
             knot=self.knot,
         )
@@ -367,15 +367,15 @@ class HubUnit:
         return perspective_believer
 
     def get_dw_perspective_believer(self, speaker_id: BelieverName) -> BelieverUnit:
-        speaker_job = open_job_file(self.belief_mstr_dir, self.belief_label, speaker_id)
+        speaker_job = open_job_file(self.coin_mstr_dir, self.coin_label, speaker_id)
         return self.get_perspective_believer(speaker_job)
 
     def rj_speaker_believer(
         self, healer_name: BelieverName, speaker_id: BelieverName
     ) -> BelieverUnit:
         speaker_hubunit = hubunit_shop(
-            belief_mstr_dir=self.belief_mstr_dir,
-            belief_label=self.belief_label,
+            coin_mstr_dir=self.coin_mstr_dir,
+            coin_label=self.coin_label,
             believer_name=healer_name,
             keep_rope=self.keep_rope,
             knot=self.knot,
@@ -391,7 +391,7 @@ class HubUnit:
 
     def get_keep_ropes(self) -> set[RopeTerm]:
         x_gut_believer = open_gut_file(
-            self.belief_mstr_dir, self.belief_label, self.believer_name
+            self.coin_mstr_dir, self.coin_label, self.believer_name
         )
         x_gut_believer.settle_believer()
         if x_gut_believer._keeps_justified is False:
@@ -407,13 +407,13 @@ class HubUnit:
         return get_empty_set_if_None(keep_ropes)
 
     def save_all_gut_dutys(self):
-        gut = open_gut_file(self.belief_mstr_dir, self.belief_label, self.believer_name)
+        gut = open_gut_file(self.coin_mstr_dir, self.coin_label, self.believer_name)
         for x_keep_rope in self.get_keep_ropes():
             self.keep_rope = x_keep_rope
             save_duty_believer(
-                belief_mstr_dir=self.belief_mstr_dir,
+                coin_mstr_dir=self.coin_mstr_dir,
                 believer_name=self.believer_name,
-                belief_label=self.belief_label,
+                coin_label=self.coin_label,
                 keep_rope=self.keep_rope,
                 knot=self.knot,
                 duty_believer=gut,
@@ -423,9 +423,9 @@ class HubUnit:
     def create_gut_treasury_db_files(self):
         for x_keep_rope in self.get_keep_ropes():
             create_treasury_db_file(
-                self.belief_mstr_dir,
+                self.coin_mstr_dir,
                 self.believer_name,
-                self.belief_label,
+                self.coin_label,
                 x_keep_rope,
                 self.knot,
             )
@@ -433,8 +433,8 @@ class HubUnit:
 
 
 def hubunit_shop(
-    belief_mstr_dir: str,
-    belief_label: BeliefLabel,
+    coin_mstr_dir: str,
+    coin_label: CoinLabel,
     believer_name: BelieverName = None,
     keep_rope: RopeTerm = None,
     knot: str = None,
@@ -445,8 +445,8 @@ def hubunit_shop(
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     x_hubunit = HubUnit(
-        belief_mstr_dir=belief_mstr_dir,
-        belief_label=belief_label,
+        coin_mstr_dir=coin_mstr_dir,
+        coin_label=coin_label,
         believer_name=validate_labelterm(believer_name, knot),
         keep_rope=keep_rope,
         knot=default_knot_if_None(knot),

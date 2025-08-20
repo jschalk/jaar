@@ -161,7 +161,7 @@ def test_BelieverUnit_settle_believer_Sets_plan_dict():
     # THEN
     casa_plan = sue_believerunit._plan_dict.get(casa_rope)
     print(f"\nlook at {casa_plan.get_plan_rope()=}")
-    assert casa_plan.parent_rope == to_rope(sue_believerunit.belief_label)
+    assert casa_plan.parent_rope == to_rope(sue_believerunit.coin_label)
     assert casa_plan._kids == {}
     assert casa_plan.star == 30
     assert casa_plan.plan_label == casa_str
@@ -292,7 +292,7 @@ def test_BelieverUnit_settle_believer_SetsData_believerunit_v001():
     # ESTABLISH
     yao_believerunit = believerunit_v001()
     print(f"{yao_believerunit.get_reason_contexts()=}")
-    # hr_number = f"{yao_believerunit.belief_label},hr_number"
+    # hr_number = f"{yao_believerunit.coin_label},hr_number"
     # yao_believerunit.add_fact(fact_context=hr_number, fact_state=hr_number, reason_lower=0, reason_upper=23)
     jour_min_str = "jour_minute"
     jour_min_rope = yao_believerunit.make_l1_rope(jour_min_str)
@@ -426,7 +426,7 @@ def test_BelieverUnit_settle_believer_OptionWeekJoursReturnsObj_believerunit_v00
     }
     mt_reasonunit = reasonunit_shop(wk_rope, cases=mt_cases)
     mt_reasonheir = reasonheir_shop(wk_rope, cases=mt_cases, _status=False)
-    x_planroot = yao_believerunit.get_plan_obj(to_rope(yao_believerunit.belief_label))
+    x_planroot = yao_believerunit.get_plan_obj(to_rope(yao_believerunit.coin_label))
     x_planroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_believerunit.reasonunits[wk_rope].reason_context=}")
     # print(f"{yao_believerunit.reasonunits[wk_rope].cases[mon_rope].reason_state=}")
@@ -468,11 +468,11 @@ def test_BelieverUnit_settle_believer_OptionWeekJoursReturnsObj_believerunit_v00
 
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
 
-    # yao_believerunit.add_fact(fact_context=f"{yao_believerunit.belief_label},sem_jours", fact_state=f"{yao_believerunit.belief_label},sem_jours,Tue")
+    # yao_believerunit.add_fact(fact_context=f"{yao_believerunit.coin_label},sem_jours", fact_state=f"{yao_believerunit.coin_label},sem_jours,Tue")
     # plan_dict = yao_believerunit.get_plan_dict()
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is True
 
-    # yao_believerunit.add_fact(fact_context=f"{yao_believerunit.belief_label},sem_jours", fact_state=f"{yao_believerunit.belief_label},sem_jours,Wed")
+    # yao_believerunit.add_fact(fact_context=f"{yao_believerunit.coin_label},sem_jours", fact_state=f"{yao_believerunit.coin_label},sem_jours,Wed")
     # plan_dict = yao_believerunit.get_plan_dict()
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is False
 

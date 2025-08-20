@@ -1,8 +1,8 @@
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
-    BeliefLabel,
     BelieverName,
     CentralLabel,
+    CoinLabel,
     EporTerm,
     EventInt,
     FaceName,
@@ -211,12 +211,12 @@ def test_EventInt_Exists():
     assert EventInt(12.4) == 12
 
 
-def test_BeliefLabel_Exists():
+def test_CoinLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_belief = BeliefLabel(empty_str)
+    x_coin = CoinLabel(empty_str)
     # THEN
-    assert x_belief == empty_str
-    doc_str = f"An CentralLabel for a Belief Belief. Cannot contain {knot_str()}"
-    assert inspect_getdoc(x_belief) == doc_str
+    assert x_coin == empty_str
+    doc_str = f"An CentralLabel for a Coin Coin. Cannot contain {knot_str()}"
+    assert inspect_getdoc(x_coin) == doc_str

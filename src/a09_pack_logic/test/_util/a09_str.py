@@ -1,4 +1,4 @@
-from src.a04_reason_logic.test._util.a04_str import belief_label_str, believer_name_str
+from src.a04_reason_logic.test._util.a04_str import believer_name_str, coin_label_str
 from src.a11_bud_logic.test._util.a11_str import bud_time_str
 
 

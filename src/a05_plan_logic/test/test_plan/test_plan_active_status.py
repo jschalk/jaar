@@ -8,10 +8,7 @@ from src.a04_reason_logic.reason_plan import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.a05_plan_logic.plan import (
-    get_default_belief_label as root_label,
-    planunit_shop,
-)
+from src.a05_plan_logic.plan import get_default_coin_label as root_label, planunit_shop
 
 
 def test_PlanUnit_clear_all_partner_cred_debt_ClearsAttrs():

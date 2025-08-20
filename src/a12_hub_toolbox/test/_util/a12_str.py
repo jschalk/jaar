@@ -1,8 +1,8 @@
 from typing import Literal
 
 
-def belief_mstr_dir_str() -> str:
-    return "belief_mstr_dir"
+def coin_mstr_dir_str() -> str:
+    return "coin_mstr_dir"
 
 
 def gut_str() -> Literal["gut"]:

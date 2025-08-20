@@ -24,8 +24,8 @@ class CentralLabel(LabelTerm):
     pass
 
 
-class BeliefLabel(CentralLabel):  # Created to help track the object class relations
-    """An CentralLabel for a Belief Belief. Cannot contain knot"""
+class CoinLabel(CentralLabel):  # Created to help track the object class relations
+    """An CentralLabel for a Coin Coin. Cannot contain knot"""
 
     pass
 

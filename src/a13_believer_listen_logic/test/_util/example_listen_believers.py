@@ -4,9 +4,7 @@ from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 
 def get_believerunit_with_4_levels() -> BelieverUnit:
     a23_str = "amy23"
-    sue_believer = believerunit_shop(
-        believer_name="Sue", belief_label=a23_str, tally=10
-    )
+    sue_believer = believerunit_shop(believer_name="Sue", coin_label=a23_str, tally=10)
 
     casa = "casa"
     sue_believer.set_l1_plan(planunit_shop(casa, star=30, task=True))

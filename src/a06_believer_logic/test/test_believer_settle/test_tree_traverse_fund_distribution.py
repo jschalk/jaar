@@ -649,7 +649,7 @@ def test_BelieverUnit_settle_believer_WithLevel3AwardUnitAndEmptyAncestorsSetsGr
     x_believer.settle_believer()
 
     # THEN
-    x_planroot = x_believer.get_plan_obj(to_rope(x_believer.belief_label))
+    x_planroot = x_believer.get_plan_obj(to_rope(x_believer.coin_label))
     with pytest_raises(Exception) as excinfo:
         x_planroot.awardunits[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
@@ -712,7 +712,7 @@ def test_BelieverUnit_set_awardunit_CalculatesInheritedAwardUnitBelieverFund():
 
     # THEN
     print(f"{plan_dict.keys()=}")
-    plan_bob = plan_dict.get(to_rope(sue_believer.belief_label))
+    plan_bob = plan_dict.get(to_rope(sue_believer.coin_label))
     assert len(plan_bob._awardheirs) == 3
 
     bheir_yao = plan_bob._awardheirs.get(yao_str)
@@ -760,7 +760,7 @@ def test_BelieverUnit_settle_believer_SetsGroupLinkBelieverCredAndDebt():
     sue_awardunit = awardunit_shop(sue_str, 20, take_force=40)
     bob_awardunit = awardunit_shop(bob_str, 10, take_force=5)
     zia_awardunit = awardunit_shop(zia_str, 10, take_force=5)
-    root_rope = to_rope(yao_believer.belief_label)
+    root_rope = to_rope(yao_believer.coin_label)
     yao_believer.edit_plan_attr(root_rope, awardunit=sue_awardunit)
     yao_believer.edit_plan_attr(root_rope, awardunit=bob_awardunit)
     yao_believer.edit_plan_attr(root_rope, awardunit=zia_awardunit)

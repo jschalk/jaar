@@ -46,7 +46,7 @@ def test_create_empty_believer_from_believer_ReturnsObj():
     # THEN
     assert yao_empty_vision.believer_name != yao_gut.believer_name
     assert yao_empty_vision.believer_name == zia_str
-    assert yao_empty_vision.belief_label == yao_gut.belief_label
+    assert yao_empty_vision.coin_label == yao_gut.coin_label
     assert yao_empty_vision.last_pack_id is None
     assert yao_empty_vision.get_partnerunits_dict() == {}
     assert yao_empty_vision.knot == yao_gut.knot
@@ -93,7 +93,7 @@ def test_create_listen_basis_ReturnsObj():
 
     # THEN
     assert yao_basis_vision.believer_name == yao_duty.believer_name
-    assert yao_basis_vision.belief_label == yao_duty.belief_label
+    assert yao_basis_vision.coin_label == yao_duty.coin_label
     assert yao_basis_vision.last_pack_id == yao_duty.last_pack_id
     assert yao_basis_vision.get_partnerunits_dict() == yao_duty.get_partnerunits_dict()
     assert yao_basis_vision.knot == yao_duty.knot
@@ -145,8 +145,8 @@ def test_get_default_job_ReturnsObj():
     default_job.settle_believer()
     assert default_job.believer_name == sue_believerunit.believer_name
     assert default_job.believer_name == sue_str
-    assert default_job.belief_label == sue_believerunit.belief_label
-    assert default_job.belief_label == blue_str
+    assert default_job.coin_label == sue_believerunit.coin_label
+    assert default_job.coin_label == blue_str
     assert default_job.knot == slash_str
     assert default_job.fund_pool == sue_partner_pool
     assert default_job.fund_iota == x_fund_iota

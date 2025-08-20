@@ -1,4 +1,4 @@
-from src.a01_term_logic.term import BeliefLabel
+from src.a01_term_logic.term import CoinLabel
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
     believer_planunit_str,
@@ -15,14 +15,14 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
 from src.a09_pack_logic.delta import BelieverDelta, believerdelta_shop
 
 
-def get_atom_example_planunit_sports(belief_label: BeliefLabel = None) -> BelieverAtom:
-    if not belief_label:
-        belief_label = "amy23"
+def get_atom_example_planunit_sports(coin_label: CoinLabel = None) -> BelieverAtom:
+    if not coin_label:
+        coin_label = "amy23"
     sports_str = "sports"
     x_dimen = believer_planunit_str()
     insert_planunit_believeratom = believeratom_shop(x_dimen, INSERT_str())
     insert_planunit_believeratom.set_jkey(plan_label_str(), sports_str)
-    insert_planunit_believeratom.set_jkey(parent_rope_str(), belief_label)
+    insert_planunit_believeratom.set_jkey(parent_rope_str(), coin_label)
     return insert_planunit_believeratom
 
 

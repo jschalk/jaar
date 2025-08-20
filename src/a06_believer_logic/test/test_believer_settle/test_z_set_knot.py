@@ -1,38 +1,35 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope, to_rope
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
-from src.a05_plan_logic.plan import (
-    get_default_belief_label as root_label,
-    planunit_shop,
-)
+from src.a05_plan_logic.plan import get_default_coin_label as root_label, planunit_shop
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.example_believers import (
     get_believerunit_with_4_levels,
 )
 
 
-def test_BelieverUnit_set_belief_label_SetsAttr():
+def test_BelieverUnit_set_coin_label_SetsAttr():
     # ESTABLISH
-    x_belief_label = "amy45"
+    x_coin_label = "amy45"
     sue_str = "Sue"
     sue_believer = believerunit_shop(sue_str)
-    assert sue_believer.belief_label == root_label()
+    assert sue_believer.coin_label == root_label()
 
     # WHEN
-    sue_believer.set_belief_label(belief_label=x_belief_label)
+    sue_believer.set_coin_label(coin_label=x_coin_label)
 
     # THEN
-    assert sue_believer.belief_label == x_belief_label
+    assert sue_believer.coin_label == x_coin_label
 
 
-def test_BelieverUnit_set_plan_Setsbelief_label_AND_fund_iota():
+def test_BelieverUnit_set_plan_Setscoin_label_AND_fund_iota():
     # ESTABLISH'
     x_fund_iota = 500
     sue_believer = get_believerunit_with_4_levels()
     sue_believer.fund_iota = x_fund_iota
-    believer_belief_label = "Texas"
-    sue_believer.set_belief_label(believer_belief_label)
-    assert sue_believer.belief_label == believer_belief_label
+    believer_coin_label = "Texas"
+    sue_believer.set_coin_label(believer_coin_label)
+    assert sue_believer.coin_label == believer_coin_label
 
     casa_rope = sue_believer.make_l1_rope("casa")
     clean_rope = sue_believer.make_rope(casa_rope, "cleaning")
@@ -44,11 +41,11 @@ def test_BelieverUnit_set_plan_Setsbelief_label_AND_fund_iota():
 
     # THEN
     cookery_plan = sue_believer.get_plan_obj(cookery_rope)
-    assert cookery_plan.belief_label == believer_belief_label
+    assert cookery_plan.coin_label == believer_coin_label
     assert cookery_plan.fund_iota == x_fund_iota
 
 
-def test_believer_set_belief_label_SetsAttr():
+def test_believer_set_coin_label_SetsAttr():
     # ESTABLISH
     yao_str = "Yao"
     yao_believer = believerunit_shop(believer_name=yao_str)
@@ -59,25 +56,25 @@ def test_believer_set_belief_label_SetsAttr():
     yao_believer.set_l1_plan(planunit_shop(casa_str))
     yao_believer.set_plan(planunit_shop(swim_str), parent_rope=old_casa_rope)
     assert yao_believer.believer_name == yao_str
-    assert yao_believer.planroot.plan_label == yao_believer.belief_label
+    assert yao_believer.planroot.plan_label == yao_believer.coin_label
     casa_plan = yao_believer.get_plan_obj(old_casa_rope)
-    assert casa_plan.parent_rope == to_rope(yao_believer.belief_label)
+    assert casa_plan.parent_rope == to_rope(yao_believer.coin_label)
     swim_plan = yao_believer.get_plan_obj(old_swim_rope)
     assert swim_plan.parent_rope == old_casa_rope
-    assert yao_believer.belief_label == yao_believer.belief_label
+    assert yao_believer.coin_label == yao_believer.coin_label
 
     # WHEN
-    x_belief_label = "amy45"
-    yao_believer.set_belief_label(belief_label=x_belief_label)
+    x_coin_label = "amy45"
+    yao_believer.set_coin_label(coin_label=x_coin_label)
 
     # THEN
     new_casa_rope = yao_believer.make_l1_rope(casa_str)
     swim_str = "swim"
     new_swim_rope = yao_believer.make_rope(new_casa_rope, swim_str)
-    assert yao_believer.belief_label == x_belief_label
-    assert yao_believer.planroot.plan_label == x_belief_label
+    assert yao_believer.coin_label == x_coin_label
+    assert yao_believer.planroot.plan_label == x_coin_label
     casa_plan = yao_believer.get_plan_obj(new_casa_rope)
-    assert casa_plan.parent_rope == to_rope(x_belief_label)
+    assert casa_plan.parent_rope == to_rope(x_coin_label)
     swim_plan = yao_believer.get_plan_obj(new_swim_rope)
     assert swim_plan.parent_rope == new_casa_rope
 
@@ -117,7 +114,7 @@ def test_believer_set_knot_Modifies_parent_rope():
     semicolon_str = ";"
     assert zia_believer.knot == semicolon_str
     semicolon_cook_rope = zia_believer.make_rope(semicolon_casa_rope, cook_str)
-    # print(f"{zia_believer.belief_label=} {zia_believer.planroot.plan_label=} {casa_rope=}")
+    # print(f"{zia_believer.coin_label=} {zia_believer.planroot.plan_label=} {casa_rope=}")
     # print(f"{cook_plan.parent_rope=} {cook_plan.plan_label=}")
     # semicolon_casa_plan = zia_believer.get_plan_obj(semicolon_casa_rope)
     # print(f"{semicolon_casa_plan.parent_rope=} {semicolon_casa_plan.plan_label=}")
@@ -129,8 +126,8 @@ def test_believer_set_knot_Modifies_parent_rope():
 
     # THEN
     assert cook_plan.get_plan_rope() != semicolon_cook_rope
-    zia_belief_label = zia_believer.belief_label
-    slash_casa_rope = create_rope(zia_belief_label, casa_str, knot=slash_str)
+    zia_coin_label = zia_believer.coin_label
+    slash_casa_rope = create_rope(zia_coin_label, casa_str, knot=slash_str)
     slash_cook_rope = create_rope(slash_casa_rope, cook_str, knot=slash_str)
     assert cook_plan.get_plan_rope() == slash_cook_rope
 
@@ -215,10 +212,10 @@ def test_believer_set_knot_ModifiesFactUnit():
 
 def test_BelieverUnit_set_knot_SetsAttr():
     # ESTABLISH
-    x_belief_label = "amy45"
+    x_coin_label = "amy45"
     slash_knot = "/"
     sue_str = "Sue"
-    sue_believer = believerunit_shop(sue_str, x_belief_label, knot=slash_knot)
+    sue_believer = believerunit_shop(sue_str, x_coin_label, knot=slash_knot)
     assert sue_believer.knot == slash_knot
 
     # WHEN

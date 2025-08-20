@@ -8,7 +8,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
-from src.a05_plan_logic.plan import get_default_belief_label as root_label
+from src.a05_plan_logic.plan import get_default_coin_label as root_label
 from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     _keeps_buildable_str,
@@ -19,8 +19,8 @@ from src.a06_believer_logic.test._util.a06_str import (
     _reason_contexts_str,
     _sum_healerunit_share_str,
     _tree_traverse_count_str,
-    belief_label_str,
     believer_name_str,
+    coin_label_str,
     credor_respect_str,
     debtor_respect_str,
     fund_iota_str,
@@ -39,7 +39,7 @@ def test_BelieverUnit_Exists():
 
     # THEN
     assert x_believer
-    assert x_believer.belief_label is None
+    assert x_believer.coin_label is None
     assert x_believer.believer_name is None
     assert x_believer.tally is None
     assert x_believer.partners is None
@@ -88,7 +88,7 @@ def test_BelieverUnit_Exists():
         credor_respect_str(),
         debtor_respect_str(),
         "_groupunits",
-        belief_label_str(),
+        coin_label_str(),
         fund_iota_str(),
         fund_pool_str(),
         last_pack_id_str(),
@@ -103,7 +103,7 @@ def test_BelieverUnit_Exists():
 def test_believerunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
-    iowa_belief_label = "Iowa"
+    iowa_coin_label = "Iowa"
     slash_knot = "/"
     x_fund_pool = 555
     x_fund_iota = 7
@@ -113,7 +113,7 @@ def test_believerunit_shop_ReturnsObjectWithFilledFields():
     # WHEN
     x_believer = believerunit_shop(
         believer_name=sue_str,
-        belief_label=iowa_belief_label,
+        coin_label=iowa_coin_label,
         knot=slash_knot,
         fund_pool=x_fund_pool,
         fund_iota=x_fund_iota,
@@ -124,7 +124,7 @@ def test_believerunit_shop_ReturnsObjectWithFilledFields():
     # THEN
     assert x_believer
     assert x_believer.believer_name == sue_str
-    assert x_believer.belief_label == iowa_belief_label
+    assert x_believer.coin_label == iowa_coin_label
     assert x_believer.tally == 1
     assert x_believer.partners == {}
     assert x_believer.planroot is not None
@@ -160,7 +160,7 @@ def test_believerunit_shop_ReturnsObjectWithCorrectEmptyField():
 
     # THEN
     assert x_believer.believer_name == ""
-    assert x_believer.belief_label == root_label()
+    assert x_believer.coin_label == root_label()
     assert x_believer.knot == default_knot_if_None()
     assert x_believer.fund_pool == validate_fund_pool()
     assert x_believer.fund_iota == default_fund_iota_if_None()
@@ -171,7 +171,7 @@ def test_believerunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_believer.planroot.root
     assert x_believer.planroot._uid == 1
     assert x_believer.planroot._level == 0
-    assert x_believer.planroot.belief_label == x_believer.belief_label
+    assert x_believer.planroot.coin_label == x_believer.coin_label
     assert x_believer.planroot.knot == x_believer.knot
     assert x_believer.planroot.parent_rope == ""
 
@@ -223,10 +223,10 @@ def test_BelieverUnit_set_max_tree_traverse_RaisesError_Scenario1():
 
 def test_BelieverUnit_make_rope_ReturnsObj():
     # ESTABLISH
-    x_belief_label = "amy45"
+    x_coin_label = "amy45"
     slash_knot = "/"
     sue_str = "Sue"
-    sue_believer = believerunit_shop(sue_str, x_belief_label, knot=slash_knot)
+    sue_believer = believerunit_shop(sue_str, x_coin_label, knot=slash_knot)
     casa_str = "casa"
     v1_casa_rope = sue_believer.make_l1_rope(casa_str)
 

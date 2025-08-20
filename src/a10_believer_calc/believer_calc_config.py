@@ -146,7 +146,7 @@ def get_believer_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "give_force": "REAL",
         "take_force": "REAL",
         "reason_context": "TEXT",
-        "belief_label": "TEXT",
+        "coin_label": "TEXT",
         "fact_context": "TEXT",
         "fact_state": "TEXT",
         "fact_upper": "REAL",

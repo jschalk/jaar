@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a03_group_logic.partner import partnerunit_shop
-from src.a05_plan_logic.plan import get_default_belief_label
+from src.a05_plan_logic.plan import get_default_coin_label
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.test._util.a06_str import (
     believer_partnerunit_str,
@@ -24,8 +24,8 @@ from src.a09_pack_logic.pack import (
     packunit_shop,
 )
 from src.a09_pack_logic.test._util.a09_str import (
-    belief_label_str,
     believer_name_str,
+    coin_label_str,
     event_int_str,
     face_name_str,
 )
@@ -51,7 +51,7 @@ def test_PackUnit_Exists():
 
     # THEN
     assert not x_packunit.face_name
-    assert not x_packunit.belief_label
+    assert not x_packunit.coin_label
     assert not x_packunit.believer_name
     assert not x_packunit._pack_id
     assert not x_packunit._believerdelta
@@ -70,7 +70,7 @@ def test_packunit_shop_ReturnsObjEstablishWithEmptyArgs():
 
     # THEN
     assert not bob_packunit.face_name
-    assert bob_packunit.belief_label == get_default_belief_label()
+    assert bob_packunit.coin_label == get_default_coin_label()
     assert bob_packunit.believer_name == bob_str
     assert bob_packunit._pack_id == 0
     assert bob_packunit._believerdelta == believerdelta_shop()
@@ -96,7 +96,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     bob_packunit = packunit_shop(
         face_name=sue_str,
         believer_name=bob_str,
-        belief_label=amy45_str,
+        coin_label=amy45_str,
         _pack_id=bob_pack_id,
         _believerdelta=bob_believerdelta,
         _delta_start=bob_delta_start,
@@ -108,7 +108,7 @@ def test_packunit_shop_ReturnsObjEstablishWithNonEmptyArgs():
     # THEN
     assert bob_packunit.face_name == sue_str
     assert bob_packunit.believer_name == bob_str
-    assert bob_packunit.belief_label == amy45_str
+    assert bob_packunit.coin_label == amy45_str
     assert bob_packunit._pack_id == bob_pack_id
     assert bob_packunit._believerdelta == bob_believerdelta
     assert bob_packunit._delta_start == bob_delta_start
@@ -234,7 +234,7 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     amy45_str = "amy45"
     amy45_e5_int = 5
     bob_packunit = packunit_shop(
-        belief_label=amy45_str, believer_name=bob_str, event_int=amy45_e5_int
+        coin_label=amy45_str, believer_name=bob_str, event_int=amy45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -242,8 +242,8 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_packunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(belief_label_str()) is not None
-    assert x_dict.get(belief_label_str()) == amy45_str
+    assert x_dict.get(coin_label_str()) is not None
+    assert x_dict.get(coin_label_str()) == amy45_str
     assert x_dict.get(believer_name_str()) is not None
     assert x_dict.get(believer_name_str()) == bob_str
     assert x_dict.get(face_name_str()) is not None
@@ -313,7 +313,7 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     amy45_str = "amy45"
     amy45_e5_int = 5
     bob_packunit = packunit_shop(
-        belief_label=amy45_str, believer_name=bob_str, event_int=amy45_e5_int
+        coin_label=amy45_str, believer_name=bob_str, event_int=amy45_e5_int
     )
     bob_packunit.set_face(sue_str)
 
@@ -321,8 +321,8 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(belief_label_str()) is not None
-    assert total_dict.get(belief_label_str()) == amy45_str
+    assert total_dict.get(coin_label_str()) is not None
+    assert total_dict.get(coin_label_str()) == amy45_str
     assert total_dict.get(believer_name_str()) is not None
     assert total_dict.get(believer_name_str()) == bob_str
     assert total_dict.get(face_name_str()) is not None
@@ -362,8 +362,8 @@ def test_PackUnit_get_json_ReturnsObj_WithBelieverDeltaPopulated():
     assert generated_json
     print(f"{generated_json=}")
     expected_json = """{
-  "belief_label": "ZZ",
   "believer_name": "Bob",
+  "coin_label": "ZZ",
   "delta": {
     "0": {
       "crud": "DELETE",
@@ -403,7 +403,7 @@ def test_get_packunit_from_json_ReturnsObj_WithBelieverDeltaPopulated():
     assert generated_bob_packunit
     assert generated_bob_packunit.face_name == bob_packunit.face_name
     assert generated_bob_packunit.event_int == bob_packunit.event_int
-    assert generated_bob_packunit.belief_label == bob_packunit.belief_label
+    assert generated_bob_packunit.coin_label == bob_packunit.coin_label
     assert generated_bob_packunit._believerdelta == bob_packunit._believerdelta
     assert generated_bob_packunit == bob_packunit
 
@@ -556,10 +556,10 @@ def test_PackUnit_get_edited_believer_RaisesErrorWhenpackAttrsAndBelieverAttrsAr
     yao_str = "Yao"
     xia_str = "Xia"
     amy23_str = "amy23"
-    bob_packunit = packunit_shop(yao_str, xia_str, belief_label=amy23_str)
+    bob_packunit = packunit_shop(yao_str, xia_str, coin_label=amy23_str)
     sue_str = "Sue"
     amy45_str = "amy45"
-    before_sue_believerunit = believerunit_shop(sue_str, belief_label=amy45_str)
+    before_sue_believerunit = believerunit_shop(sue_str, coin_label=amy45_str)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:

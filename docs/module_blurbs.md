@@ -13,13 +13,13 @@ What does each one do?
 - **a08_believer_atom_logic**: Defines the structure and behavior of believerunit atoms, which are single units of believerunit and plans used in a believerunit.
 - **a09_pack_logic**: Manages the creation and organization of packs, which are collections of believerunit atoms for building complex believerunits.
 - **a10_believer_calc**: Expresses the calculations performed when a believerunit is "settled" to determine final amounts for each plan and account.
-- **a11_bud_logic**: When a belief system decides to empower a believerunit the funds must be distributed
+- **a11_bud_logic**: When a coin system decides to empower a believerunit the funds must be distributed
 - **a12_hub_tools**: These tools are used to handle complex operations involving believer files, will be deprecated.
 - **a13_believer_listen_logic**: These tools describe how one believerunit listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
-- **a15_belief_logic**: A BeliefUnit is a Belief system with the basic requirements: common system of time, partner tranactions ledger, etc. Importantly a Belief system must know the state of a believer's believerunit at any time in the past. 
+- **a15_coin_logic**: A CoinUnit is a Coin system with the basic requirements: common system of time, partner tranactions ledger, etc. Importantly a Coin system must know the state of a believer's believerunit at any time in the past. 
 - **a16_pidgin_logic**: A tool that translates words from outside language to inside language.  
-- **a17_idea_logic**: idea bricks are tables of data that build belief systems and the believerunits within them.
+- **a17_idea_logic**: idea bricks are tables of data that build coin systems and the believerunits within them.
 - **a18_etl_toolbox**: 
 - **a19_world_logic**: *(description needed)*
 - **a20_lobby_logic**: *(description needed)*

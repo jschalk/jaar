@@ -67,7 +67,7 @@ def get_plan_viewer_template() -> str:
         
         <div class="controls">
             <input type="checkbox" id="show_level"><label for="show_level">level</label>
-            <input type="checkbox" id="show_belief_label"><label for="show_belief_label">belief_label</label>
+            <input type="checkbox" id="show_coin_label"><label for="show_coin_label">coin_label</label>
             <input type="checkbox" id="show_task"><label for="show_task">task</label>
             <input type="checkbox" id="show_descendant_task_count"><label for="show_descendant_task_count">descendant_task_count</label>
             <input type="checkbox" id="show_active"><label for="show_active">active</label>

@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import open_json
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_belief_logic.test._util.a15_str import (
-    belief_label_str,
+from src.a15_coin_logic.test._util.a15_str import (
+    coin_label_str,
     cumulative_minute_str,
     hour_label_str,
 )
@@ -28,8 +28,8 @@ def test_create_last_run_metrics_json_CreatesFile():
     event1 = 1
     event3 = 3
     event9 = 9
-    belief_mstr_dir = get_module_temp_dir()
-    last_run_metrics_path = create_last_run_metrics_path(belief_mstr_dir)
+    coin_mstr_dir = get_module_temp_dir()
+    last_run_metrics_path = create_last_run_metrics_path(coin_mstr_dir)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -51,7 +51,7 @@ VALUES ('{event3}');"""
         assert not os_path_exists(last_run_metrics_path)
 
         # WHEN
-        create_last_run_metrics_json(cursor, belief_mstr_dir)
+        create_last_run_metrics_json(cursor, coin_mstr_dir)
 
         # THEN
         assert os_path_exists(last_run_metrics_path)

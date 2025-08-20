@@ -2,7 +2,7 @@ from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import get_credorledger, get_debtorledger
 from src.a14_keep_logic.riverrun import riverrun_shop
-from src.a14_keep_logic.test._util.a14_env import temp_belief_mstr_dir
+from src.a14_keep_logic.test._util.a14_env import temp_coin_mstr_dir
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
 
@@ -101,8 +101,8 @@ def test_get_debtorledger_ReturnsObjWithNoEmpty_partner_debt_points():
 def test_RiverRun_set_partner_tax_due_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_belief_mstr_dir = temp_belief_mstr_dir()
-    bob_hubunit = hubunit_shop(x_belief_mstr_dir, None, bob_str)
+    x_coin_mstr_dir = temp_coin_mstr_dir()
+    bob_hubunit = hubunit_shop(x_coin_mstr_dir, None, bob_str)
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     assert bob_riverrun.tax_dues.get(yao_str) is None

@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "inx_title": {
@@ -27,6 +27,6 @@
         "pidgin_title",
         "believer_partnerunit",
         "believerunit",
-        "beliefunit"
+        "coinunit"
     ]
 }

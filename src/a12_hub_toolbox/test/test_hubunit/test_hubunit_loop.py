@@ -39,7 +39,7 @@ def test_HubUnit_get_dw_perspective_believer_ReturnsBelieverWith_believer_nameSe
     bob_believerunit = get_believerunit_with_4_levels()
     bob_believerunit.set_believer_name(bob_str)
     bob_hubunit = hubunit_shop(env_dir(), a23_str, bob_str)
-    save_job_file(bob_hubunit.belief_mstr_dir, bob_believerunit)
+    save_job_file(bob_hubunit.coin_mstr_dir, bob_believerunit)
 
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)

@@ -120,7 +120,7 @@ class BelieverDelta:
 
     def add_all_believeratoms(self, after_believer: BelieverUnit):
         before_believer = believerunit_shop(
-            after_believer.believer_name, after_believer.belief_label
+            after_believer.believer_name, after_believer.coin_label
         )
         self.add_all_different_believeratoms(before_believer, after_believer)
 

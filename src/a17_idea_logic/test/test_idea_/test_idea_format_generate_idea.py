@@ -41,8 +41,8 @@ def test_make_believerdelta_Arg_idea_format_00021_believer_partnerunit_v0_0_0():
     sue_partner_debt_points = 23
     bob_partner_debt_points = 29
     yao_partner_debt_points = 37
-    amy_belief_label = "amy56"
-    sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+    amy_coin_label = "amy56"
+    sue_believerunit = believerunit_shop(sue_str, amy_coin_label)
     sue_believerunit.add_partnerunit(
         sue_str, sue_partner_cred_points, sue_partner_debt_points
     )
@@ -87,8 +87,8 @@ def test_make_believerdelta_Arg_idea_format_00021_believer_partnerunit_v0_0_0():
 #     sue_str = "Sue"
 #     bob_str = "Bob"
 #     yao_str = "Yao"
-#     amy_belief_label = "amy56"
-#     sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+#     amy_coin_label = "amy56"
+#     sue_believerunit = believerunit_shop(sue_str, amy_coin_label)
 #     sue_believerunit.add_partnerunit(sue_str)
 #     sue_believerunit.add_partnerunit(bob_str)
 #     sue_believerunit.add_partnerunit(yao_str)
@@ -157,8 +157,8 @@ def test_make_believerdelta_Arg_idea_format_00013_planunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
-    amy_belief_label = "amy56"
-    sue_believerunit = believerunit_shop(sue_str, amy_belief_label)
+    amy_coin_label = "amy56"
+    sue_believerunit = believerunit_shop(sue_str, amy_coin_label)
     casa_str = "casa"
     casa_rope = sue_believerunit.make_l1_rope(casa_str)
     casa_star = 31

@@ -15,7 +15,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "believer_name": {
@@ -24,7 +24,7 @@
     },
     "idea_number": "br00021",
     "dimens": [
-        "beliefunit",
+        "coinunit",
         "believerunit",
         "believer_partnerunit"
     ]

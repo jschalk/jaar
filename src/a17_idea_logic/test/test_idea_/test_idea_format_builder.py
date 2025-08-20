@@ -2,9 +2,9 @@ from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
 from src.a06_believer_logic.test._util.a06_str import (
-    belief_label_str,
     believer_name_str,
     believer_planunit_str,
+    coin_label_str,
     gogo_want_str,
     plan_rope_str,
 )
@@ -24,7 +24,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get("idea_category") == "believer":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {belief_label_str(), believer_name_str()}
+            attributes_set = {coin_label_str(), believer_name_str()}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -49,7 +49,7 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     assert believer_planunit_dict.get(dimens_str()) == [believer_planunit_str()]
     assert believer_planunit_dict.get(attributes_str())
     believer_planunit_attributes = believer_planunit_dict.get(attributes_str())
-    assert belief_label_str() in believer_planunit_attributes
+    assert coin_label_str() in believer_planunit_attributes
     assert believer_name_str() in believer_planunit_attributes
     assert plan_rope_str() in believer_planunit_attributes
     assert gogo_want_str() in believer_planunit_attributes

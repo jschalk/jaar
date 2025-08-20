@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "believer_name": {
@@ -32,7 +32,7 @@
         }
     },
     "dimens": [
-        "beliefunit",
+        "coinunit",
         "believerunit",
         "believer_planunit",
         "believer_plan_reasonunit",

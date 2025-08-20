@@ -7,7 +7,7 @@
       "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "group_title": {},
       "believer_name": {}
     },
@@ -24,7 +24,7 @@
       "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {}
     },
     "jvalues": {
@@ -41,7 +41,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {}
     },
     "jvalues": {
@@ -58,7 +58,7 @@
       "event_int": {},
       "face_name": {},
       "fact_context": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {}
     },
     "jvalues": {
@@ -75,7 +75,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "healer_name": {},
       "believer_name": {}
     },
@@ -89,7 +89,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "party_title": {},
       "believer_name": {}
     },
@@ -105,7 +105,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {},
       "reason_state": {},
       "reason_context": {}
@@ -124,7 +124,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {},
       "reason_context": {}
     },
@@ -140,7 +140,7 @@
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {}
     },
     "jvalues": {
@@ -164,7 +164,7 @@
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {}
     },
     "jvalues": {
@@ -178,15 +178,15 @@
       "tally": {}
     }
   },
-  "belief_paybook": {
+  "coin_paybook": {
     "allowed_crud": "insert_multiple",
     "build_order": 21,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "partner_name": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {},
       "tran_time": {}
     },
@@ -194,15 +194,15 @@
       "amount": {}
     }
   },
-  "belief_budunit": {
+  "coin_budunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "bud_time": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "believer_name": {}
     },
     "jvalues": {
@@ -210,68 +210,68 @@
       "quota": {}
     }
   },
-  "belief_timeline_hour": {
+  "coin_timeline_hour": {
     "allowed_crud": "insert_one_time",
     "build_order": 6,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "cumulative_minute": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {}
+      "coin_label": {}
     },
     "jvalues": {
       "hour_label": {}
     }
   },
-  "belief_timeline_month": {
+  "coin_timeline_month": {
     "allowed_crud": "insert_one_time",
     "build_order": 7,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "cumulative_day": {},
       "event_int": {},
       "face_name": {},
-      "belief_label": {}
+      "coin_label": {}
     },
     "jvalues": {
       "month_label": {}
     }
   },
-  "belief_timeline_weekday": {
+  "coin_timeline_weekday": {
     "allowed_crud": "insert_one_time",
     "build_order": 8,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "weekday_order": {}
     },
     "jvalues": {
       "weekday_label": {}
     }
   },
-  "belief_timeoffi": {
+  "coin_timeoffi": {
     "allowed_crud": "insert_multiple",
     "build_order": 8,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "belief_label": {},
+      "coin_label": {},
       "offi_time": {}
     },
     "jvalues": {}
   },
-  "beliefunit": {
+  "coinunit": {
     "allowed_crud": "insert_one_time",
     "build_order": 5,
-    "idea_category": "belief",
+    "idea_category": "coin",
     "jkeys": {
       "event_int": {},
       "face_name": {},
-      "belief_label": {}
+      "coin_label": {}
     },
     "jvalues": {
       "knot": {},

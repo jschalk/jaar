@@ -38,7 +38,7 @@ def test_HubUnit_default_gut_believer_ReturnsObj():
     sue_default_gut = sue_hubunit.default_gut_believer()
 
     # THEN
-    assert sue_default_gut.belief_label == sue_hubunit.belief_label
+    assert sue_default_gut.coin_label == sue_hubunit.coin_label
     assert sue_default_gut.believer_name == sue_hubunit.believer_name
     assert sue_default_gut.knot == sue_hubunit.knot
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
@@ -150,7 +150,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesgutFileAndPackFile(
 
     # THEN
     gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.belief_label == "amy23"
+    assert gut_believer.coin_label == "amy23"
     assert gut_believer.believer_name == sue_str
     assert gut_believer.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
@@ -176,7 +176,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlygutFile(
 
     # THEN
     gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.belief_label == "amy23"
+    assert gut_believer.coin_label == "amy23"
     assert gut_believer.believer_name == sue_str
     assert gut_believer.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
@@ -203,7 +203,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlyPackFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    assert sue_gut_believer.belief_label == "amy23"
+    assert sue_gut_believer.coin_label == "amy23"
     assert sue_gut_believer.believer_name == sue_str
     assert sue_gut_believer.respect_bit == seven_int
     assert sue_gut_believer.partner_exists(bob_str)

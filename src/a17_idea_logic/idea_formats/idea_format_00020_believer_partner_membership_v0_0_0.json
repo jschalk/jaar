@@ -15,7 +15,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "coin_label": {
             "otx_key": true
         },
         "group_title": {
@@ -30,6 +30,6 @@
         "believer_partnerunit",
         "believer_partner_membership",
         "believerunit",
-        "beliefunit"
+        "coinunit"
     ]
 }

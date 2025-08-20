@@ -6,7 +6,7 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -71,7 +71,7 @@
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -144,7 +144,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -185,7 +185,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -217,7 +217,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -240,7 +240,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -273,7 +273,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -322,7 +322,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -363,7 +363,7 @@
                 "class_type": "RopeTerm",
                 "sqlite_datatype": "TEXT"
             },
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -480,7 +480,7 @@
     "believer_groupunit": {
         "abbreviation": "blrgrou",
         "jkeys": {
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -533,7 +533,7 @@
     "believerunit": {
         "abbreviation": "blrunit",
         "jkeys": {
-            "belief_label": {
+            "coin_label": {
                 "class_type": "LabelTerm",
                 "sqlite_datatype": "TEXT"
             },
