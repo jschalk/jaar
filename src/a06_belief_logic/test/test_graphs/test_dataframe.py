@@ -8,7 +8,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     plan_label_str,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.report import (
+from src.a06_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
     get_belief_partnerunits_dataframe,
 )
