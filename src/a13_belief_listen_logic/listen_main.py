@@ -299,8 +299,8 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
     )
     new_job = create_listen_basis(gut)
     pre_job_dict = new_job.to_dict()
-    gut.settle_belief()
-    new_job.settle_belief()
+    gut.cash_out()
+    new_job.cash_out()
 
     for x_healer_name, keep_dict in gut._healers_dict.items():
         listener_id = listener_hubunit.belief_name
@@ -348,7 +348,7 @@ def listen_to_vision_agenda(listener: BeliefUnit, vision: BeliefUnit):
             listener.set_plan(x_plan, x_plan.parent_rope)
     for x_fact_rope, x_fact_unit in vision.planroot.factunits.items():
         listener.planroot.set_factunit(x_fact_unit)
-    listener.settle_belief()
+    listener.cash_out()
 
 
 def create_vision_file_from_duty_file(healer_hubunit: HubUnit, belief_name: BeliefName):

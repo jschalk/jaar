@@ -23,7 +23,7 @@ def test_BeliefUnit_edit_plan_attr_SetsLaborUnit():
     assert run_plan.laborunit == sue_laborunit
 
 
-def test_BeliefUnit_settle_belief_Sets_planroot_laborheirFrom_planroot_laborunit():
+def test_BeliefUnit_cash_out_Sets_planroot_laborheirFrom_planroot_laborunit():
     # ESTABLISH
     sue_str = "Sue"
     sue_laborunit = laborunit_shop()
@@ -35,7 +35,7 @@ def test_BeliefUnit_settle_belief_Sets_planroot_laborheirFrom_planroot_laborunit
     assert not yao_belief.planroot._laborheir
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert yao_belief.planroot._laborheir is not None
@@ -46,7 +46,7 @@ def test_BeliefUnit_settle_belief_Sets_planroot_laborheirFrom_planroot_laborunit
     assert yao_belief.planroot._laborheir == expected_laborheir
 
 
-def test_BeliefUnit_settle_belief_Set_child_plan_laborheir_FromParent_laborunit():
+def test_BeliefUnit_cash_out_Set_child_plan_laborheir_FromParent_laborunit():
     # ESTABLISH
     bob_str = "Bob"
     x_laborunit = laborunit_shop()
@@ -61,7 +61,7 @@ def test_BeliefUnit_settle_belief_Set_child_plan_laborheir_FromParent_laborunit(
     assert not run_plan._laborheir
 
     # WHEN
-    bob_belief.settle_belief()
+    bob_belief.cash_out()
 
     # THEN
     assert run_plan._laborheir
@@ -81,7 +81,7 @@ def test_BeliefUnit_settle_belief_Set_child_plan_laborheir_FromParent_laborunit(
     assert run_plan._laborheir == x_laborheir
 
 
-def test_BeliefUnit_settle_belief_Set_grandchild_plan_laborheir_From_plankid_laborunit_Scenario0():
+def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laborunit_Scenario0():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     swim_str = "swimming"
@@ -109,7 +109,7 @@ def test_BeliefUnit_settle_belief_Set_grandchild_plan_laborheir_From_plankid_lab
     assert four_plan._laborheir is None
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     x_laborheir = laborheir_shop()
@@ -122,7 +122,7 @@ def test_BeliefUnit_settle_belief_Set_grandchild_plan_laborheir_From_plankid_lab
     assert four_plan._laborheir == x_laborheir
 
 
-def test_BeliefUnit_settle_belief_Set_grandchild_plan_laborheir_From_plankid_laborunit_Scenario1_solo_AttrIsPassed():
+def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laborunit_Scenario1_solo_AttrIsPassed():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     swim_str = "swimming"
@@ -151,7 +151,7 @@ def test_BeliefUnit_settle_belief_Set_grandchild_plan_laborheir_From_plankid_lab
     assert not four_plan._laborheir
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     expected_laborheir = laborheir_shop()

@@ -14,7 +14,7 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario0():
+def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario0():
     # ESTABLISH
     x_beliefunit = get_beliefunit_with7amCleanTableReason()
     casa_rope = x_beliefunit.make_l1_rope("casa")
@@ -39,7 +39,7 @@ def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario0(
     assert x_beliefunit.get_plan_obj(wk_rope)._fund_cease == 13
 
     # WHEN
-    x_beliefunit.settle_belief()
+    x_beliefunit.cash_out()
 
     # THEN
     assert x_beliefunit.planroot._fund_onset != 13
@@ -52,7 +52,7 @@ def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario0(
     assert x_beliefunit.get_plan_obj(wk_rope)._fund_cease != 13
 
 
-def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario1():
+def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario1():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_beliefunit = beliefunit_shop("Yao", tally=10)
@@ -96,7 +96,7 @@ def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario1(
     assert duck_before._fund_cease is None
 
     # WHEN
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     assert yao_beliefunit.planroot._fund_onset == 0.0
@@ -126,7 +126,7 @@ def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario1(
     assert lamb_after._fund_cease == default_fund_pool() * 0.7
 
 
-def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfPlans():
+def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfPlans():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_beliefunit = beliefunit_shop("Yao", tally=10)
@@ -170,7 +170,7 @@ def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario2_
     assert duck_before._fund_cease is None
 
     # WHEN
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     assert yao_beliefunit.planroot._fund_onset == 0.0
@@ -200,7 +200,7 @@ def test_BeliefUnit_settle_belief_Sets_planunit_fund_onset_fund_cease_Scenario2_
     assert lamb_after._fund_cease == default_fund_pool() * 1.0
 
 
-def test_BeliefUnit_settle_belief_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
+def test_BeliefUnit_cash_out_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     casa_str = "casa"
@@ -230,7 +230,7 @@ def test_BeliefUnit_settle_belief_Sets_fund_ratio_WithSomePlansOfZero_starScenar
     assert sue_belief.get_plan_obj(yes_rope)._fund_ratio is None
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     print(f"{sue_belief.fund_pool=}")
@@ -242,7 +242,7 @@ def test_BeliefUnit_settle_belief_Sets_fund_ratio_WithSomePlansOfZero_starScenar
     assert sue_belief.get_plan_obj(yes_rope)._fund_ratio == 0.0
 
 
-def test_BeliefUnit_settle_belief_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
+def test_BeliefUnit_cash_out_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     casa_str = "casa"
@@ -284,7 +284,7 @@ def test_BeliefUnit_settle_belief_Sets_fund_ratio_WithSomePlansOfZero_starScenar
     assert sue_belief.get_plan_obj(dirty_rope)._fund_ratio is None
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     print(f"{sue_belief.fund_pool=}")
@@ -297,7 +297,7 @@ def test_BeliefUnit_settle_belief_Sets_fund_ratio_WithSomePlansOfZero_starScenar
     assert sue_belief.get_plan_obj(dirty_rope)._fund_ratio == 0
 
 
-def test_BeliefUnit_settle_belief_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFundsToPartnerUnits_scenario0():
+def test_BeliefUnit_cash_out_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFundsToPartnerUnits_scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     yao_str = "Yao"
@@ -340,7 +340,7 @@ def test_BeliefUnit_settle_belief_WhenPlanUnitHasFundsBut_kidsHaveNostarDistribu
     assert sue_beliefunit.get_partner(yao_str)._fund_take == 0
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     print(f"{sue_beliefunit.fund_pool=}")
@@ -358,10 +358,10 @@ def test_BeliefUnit_settle_belief_WhenPlanUnitHasFundsBut_kidsHaveNostarDistribu
     assert sue_beliefunit.get_partner(yao_str)._fund_take == default_fund_pool()
 
 
-def test_BeliefUnit_settle_belief_TreeTraverseSetsAwardLine_fundFromRoot():
+def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     # plan tree has no awardunits
     assert sue_belief.planroot._awardlines == {}
     sue_str = "Sue"
@@ -374,7 +374,7 @@ def test_BeliefUnit_settle_belief_TreeTraverseSetsAwardLine_fundFromRoot():
     assert sue_belief.planroot._awardheirs.get(sue_str) is None
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief.planroot._awardheirs.get(sue_str) is not None
@@ -415,10 +415,10 @@ def test_BeliefUnit_settle_belief_TreeTraverseSetsAwardLine_fundFromRoot():
     assert sue_belief.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
-def test_BeliefUnit_settle_belief_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_RootPlanUnit():
+def test_BeliefUnit_cash_out_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_RootPlanUnit():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     sue_str = "Sue"
     sue_belief.add_partnerunit(sue_str)
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -428,7 +428,7 @@ def test_BeliefUnit_settle_belief_TreeTraverseSets_awardlines_ToRootPlanUnitFrom
     assert sue_belief.planroot._awardlines == {}
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief.planroot._awardlines != {}
@@ -444,7 +444,7 @@ def test_BeliefUnit_settle_belief_TreeTraverseSets_awardlines_ToRootPlanUnitFrom
     assert casa_planunit._awardlines == {x_awardline.awardee_title: x_awardline}
 
 
-def test_BeliefUnit_settle_belief_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_take():
+def test_BeliefUnit_cash_out_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     sue_str = "Sue"
     sue_belief = beliefunit_shop(sue_str)
@@ -465,7 +465,7 @@ def test_BeliefUnit_settle_belief_WithRootLevelAwardUnitSetsGroupUnit_fund_give_
     assert len(sue_belief.get_partnerunit_group_titles_dict()) == 3
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     yao_groupunit = sue_belief.get_groupunit(yao_str)
@@ -492,7 +492,7 @@ def test_BeliefUnit_settle_belief_WithRootLevelAwardUnitSetsGroupUnit_fund_give_
     assert len(sue_belief.get_partnerunit_group_titles_dict()) == 4
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     yao_groupunit = sue_belief.get_groupunit(yao_str)
@@ -515,7 +515,7 @@ def test_BeliefUnit_settle_belief_WithRootLevelAwardUnitSetsGroupUnit_fund_give_
     assert round(debt_sum1) == 1 * default_fund_pool()
 
 
-def test_BeliefUnit_settle_belief_WithLevel3AwardUnitSetsGroupUnit_fund_give_fund_take():
+def test_BeliefUnit_cash_out_WithLevel3AwardUnitSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     x_belief = beliefunit_shop(bob_str)
@@ -539,7 +539,7 @@ def test_BeliefUnit_settle_belief_WithLevel3AwardUnitSetsGroupUnit_fund_give_fun
     assert len(x_belief.get_partnerunit_group_titles_dict()) == 3
 
     # WHEN
-    x_belief.settle_belief()
+    x_belief.cash_out()
 
     # THEN
     yao_groupunit = x_belief.get_groupunit(yao_str)
@@ -561,7 +561,7 @@ def test_BeliefUnit_settle_belief_WithLevel3AwardUnitSetsGroupUnit_fund_give_fun
     assert groupunit_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BeliefUnit_settle_belief_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take():
+def test_BeliefUnit_cash_out_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take():
     # ESTABLISH
     yao_str = "Yao"
     x_belief = beliefunit_shop(yao_str)
@@ -585,7 +585,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitAndSetsGroup_fund_give_fund
     assert len(x_belief.get_partnerunit_group_titles_dict()) == 2
 
     # WHEN
-    x_belief.settle_belief()
+    x_belief.cash_out()
 
     # THEN
     yao_groupunit = x_belief.get_groupunit(yao_str)
@@ -610,7 +610,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitAndSetsGroup_fund_give_fund
     assert groupunit_fund_take_sum == 1 * default_fund_pool()
 
 
-def test_BeliefUnit_settle_belief_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_fund_give_fund_take():
+def test_BeliefUnit_cash_out_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_fund_give_fund_take():
     # ESTABLISH
     yao_str = "Yao"
     x_belief = beliefunit_shop(yao_str)
@@ -636,7 +636,7 @@ def test_BeliefUnit_settle_belief_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupU
     x_belief.set_l1_plan(planunit_shop("hunt", star=3))
 
     # WHEN
-    x_belief.settle_belief()
+    x_belief.cash_out()
 
     # THEN
     x_planroot = x_belief.get_plan_obj(to_rope(x_belief.coin_label))
@@ -738,7 +738,7 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
     # assert fund_take_sum == 1
 
 
-def test_BeliefUnit_settle_belief_SetsGroupLinkBeliefCredAndDebt():
+def test_BeliefUnit_cash_out_SetsGroupLinkBeliefCredAndDebt():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     sue_str = "Sue"
@@ -769,7 +769,7 @@ def test_BeliefUnit_settle_belief_SetsGroupLinkBeliefCredAndDebt():
     assert zia_zia_membership._fund_take is None
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert sue_sue_membership._fund_give == 0.5 * default_fund_pool()
@@ -798,7 +798,7 @@ def test_BeliefUnit_settle_belief_SetsGroupLinkBeliefCredAndDebt():
     yao_belief.planroot.set_awardunit(awardunit_shop(xio_str, 20, take_force=13))
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     xio_groupunit = yao_belief.get_groupunit(xio_str)
@@ -835,7 +835,7 @@ def test_BeliefUnit_settle_belief_SetsGroupLinkBeliefCredAndDebt():
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
 
-def test_BeliefUnit_settle_belief_SetsPartnerUnitBelief_fund():
+def test_BeliefUnit_cash_out_SetsPartnerUnitBelief_fund():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     swim_str = "swim"
@@ -866,7 +866,7 @@ def test_BeliefUnit_settle_belief_SetsPartnerUnitBelief_fund():
     assert zia_partnerunit._fund_take == 0
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert sue_partnerunit._fund_give == 0.5 * default_fund_pool()
@@ -893,7 +893,7 @@ def test_BeliefUnit_settle_belief_SetsPartnerUnitBelief_fund():
     xio_str = "Xio"
     yao_belief.set_partnerunit(partnerunit_shop(xio_str))
     yao_belief.planroot.set_awardunit(awardunit_shop(xio_str, 20, take_force=10))
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     xio_partnerunit = yao_belief.get_partner(xio_str)
@@ -935,7 +935,7 @@ def test_BeliefUnit_settle_belief_SetsPartnerUnitBelief_fund():
     )
 
 
-def test_BeliefUnit_settle_belief_SetsPartGroupedLWPartnerUnitBelief_fund():
+def test_BeliefUnit_cash_out_SetsPartGroupedLWPartnerUnitBelief_fund():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     swim_str = "swim"
@@ -960,7 +960,7 @@ def test_BeliefUnit_settle_belief_SetsPartGroupedLWPartnerUnitBelief_fund():
     yao_belief.set_l1_plan(planunit_shop(hunt_str, star=3))
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     sue_groupunit = yao_belief.get_groupunit(sue_str)
@@ -1006,7 +1006,7 @@ def test_BeliefUnit_settle_belief_SetsPartGroupedLWPartnerUnitBelief_fund():
     )
 
 
-def test_BeliefUnit_settle_belief_CreatesNewGroupUnitAndSetsPartner_fund_give_fund_take():
+def test_BeliefUnit_cash_out_CreatesNewGroupUnitAndSetsPartner_fund_give_fund_take():
     # ESTABLISH
     bob_str = "Bob"
     bob_belief = beliefunit_shop(bob_str)
@@ -1030,7 +1030,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitAndSetsPartner_fund_give_fu
     assert len(bob_belief.get_partnerunit_group_titles_dict()) == 2
 
     # WHEN
-    bob_belief.settle_belief()
+    bob_belief.cash_out()
 
     # THEN
     assert len(bob_belief.get_partnerunit_group_titles_dict()) != len(
@@ -1045,7 +1045,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitAndSetsPartner_fund_give_fu
     assert partnerunit_fund_take_sum == default_fund_pool()
 
 
-def test_BeliefUnit_settle_belief_SetsPartnerUnit_fund_give_fund_take():
+def test_BeliefUnit_cash_out_SetsPartnerUnit_fund_give_fund_take():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     yao_belief.set_l1_plan(planunit_shop("swim"))
@@ -1066,7 +1066,7 @@ def test_BeliefUnit_settle_belief_SetsPartnerUnit_fund_give_fund_take():
     assert zia_partnerunit._fund_take == 0
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     fund_give_sum = (
@@ -1258,7 +1258,7 @@ def are_equal(x1: float, x2: float):
     return abs(x1 - x2) < e10
 
 
-def test_BeliefUnit_settle_belief_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ratio_cred_debt():
+def test_BeliefUnit_cash_out_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_ratio_cred_debt():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     sue_str = "Sue"
@@ -1294,7 +1294,7 @@ def test_BeliefUnit_settle_belief_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_age
     assert not zia_partner._fund_agenda_ratio_take
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert yao_belief._reason_contexts == set()
@@ -1324,10 +1324,10 @@ def test_BeliefUnit_settle_belief_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_age
     assert zia_partner._fund_agenda_ratio_take == 0.5
 
 
-def test_BeliefUnit_settle_belief_CreatesGroupUnitWith_beliefunit_v001():
+def test_BeliefUnit_cash_out_CreatesGroupUnitWith_beliefunit_v001():
     # ESTABLISH / WHEN
     yao_belief = beliefunit_v001()
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert yao_belief._groupunits is not None
@@ -1338,7 +1338,7 @@ def test_BeliefUnit_settle_belief_CreatesGroupUnitWith_beliefunit_v001():
     assert everyone_partners_len == 22
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
     plan_dict = yao_belief._plan_dict
 
     # THEN

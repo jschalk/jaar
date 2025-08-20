@@ -17,7 +17,7 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_BeliefUnit_settle_belief_SetsStatus_active_WhenFactSaysNo():
+def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactSaysNo():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     wk_str = "sem_jours"
@@ -33,18 +33,17 @@ def test_BeliefUnit_settle_belief_SetsStatus_active_WhenFactSaysNo():
 
     # WHEN
     sue_beliefunit.add_fact(fact_context=wk_rope, fact_state=sun_rope)
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert sue_beliefunit._plan_dict != {}
     assert len(sue_beliefunit._plan_dict) == 17
-
     # for plan in sue_beliefunit._plan_dict.values():
     #     print(f"{casa_rope=} {plan.get_plan_rope()=}")
     assert sue_beliefunit.get_plan_obj(casa_rope)._active is False
 
 
-def test_BeliefUnit_settle_belief_SetsStatus_active_WhenFactModifies():
+def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactModifies():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     wk_str = "sem_jours"
@@ -58,7 +57,7 @@ def test_BeliefUnit_settle_belief_SetsStatus_active_WhenFactModifies():
     sue_beliefunit.add_fact(fact_context=wk_rope, fact_state=sun_rope)
 
     # THEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
     assert sue_beliefunit._plan_dict.get(casa_rope)._active is False
@@ -71,7 +70,7 @@ def test_BeliefUnit_settle_belief_SetsStatus_active_WhenFactModifies():
     sue_beliefunit.add_fact(fact_context=nation_rope, fact_state=usa_rope)
 
     # THEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
     assert sue_beliefunit._plan_dict.get(casa_rope)._active
@@ -82,13 +81,13 @@ def test_BeliefUnit_settle_belief_SetsStatus_active_WhenFactModifies():
     sue_beliefunit.add_fact(fact_context=nation_rope, fact_state=france_rope)
 
     # THEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
     assert sue_beliefunit._plan_dict.get(casa_rope)._active is False
 
 
-def test_BeliefUnit_settle_belief_Sets_plan_dict():
+def test_BeliefUnit_cash_out_Sets_plan_dict():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     wk_str = "sem_jours"
@@ -110,7 +109,7 @@ def test_BeliefUnit_settle_belief_Sets_plan_dict():
     print(f"{sue_beliefunit.belief_name=} {len(sue_beliefunit.planroot.factunits)=}")
     # print(f"{sue_beliefunit.planroot.factunits=}")
 
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
 
@@ -154,7 +153,7 @@ def test_BeliefUnit_settle_belief_Sets_plan_dict():
 
     # WHEN
     sue_beliefunit.add_fact(fact_context=nation_rope, fact_state=oregon_rope)
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     casa_plan = sue_beliefunit._plan_dict.get(casa_rope)
@@ -221,10 +220,10 @@ def test_BeliefUnit_settle_belief_Sets_plan_dict():
 #     return bool_x
 
 
-def test_BeliefUnit_settle_belief_CalculatesRangeAttributes():
+def test_BeliefUnit_cash_out_CalculatesRangeAttributes():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with7amCleanTableReason()
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     house_str = "housemanagement"
     house_rope = sue_beliefunit.make_l1_rope(house_str)
     clean_str = "clean table"
@@ -250,7 +249,7 @@ def test_BeliefUnit_settle_belief_CalculatesRangeAttributes():
     )
 
     # THEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict.get(clean_rope)._active
 
     # WHEN
@@ -269,7 +268,7 @@ def test_BeliefUnit_settle_belief_CalculatesRangeAttributes():
     # sue_beliefunit.planroot._kids["housemanagement"]._kids[clean_str]._active = None
 
     # THEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict.get(clean_rope)._active is False
 
 
@@ -286,7 +285,7 @@ def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
     assert len(task_plans) == 1
 
 
-def test_BeliefUnit_settle_belief_SetsData_beliefunit_v001():
+def test_BeliefUnit_cash_out_SetsData_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
     print(f"{yao_beliefunit.get_reason_contexts()=}")
@@ -326,7 +325,7 @@ def test_BeliefUnit_settle_belief_SetsData_beliefunit_v001():
     #     print(f"{fact=}")
 
     # WHEN
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     # print(f"{str(type(plan))=}")
@@ -354,13 +353,13 @@ def test_BeliefUnit_settle_belief_SetsData_beliefunit_v001():
     mon_str = "Mon"
     mon_rope = yao_beliefunit.make_rope(wk_rope, mon_str)
     yao_beliefunit.add_fact(fact_context=wk_rope, fact_state=mon_rope)
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     assert yao_beliefunit._plan_dict.get(laundry_rope)._active is False
 
 
-def test_BeliefUnit_settle_belief_OptionWeekJoursReturnsObj_beliefunit_v001():
+def test_BeliefUnit_cash_out_OptionWeekJoursReturnsObj_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
 
@@ -401,7 +400,7 @@ def test_BeliefUnit_settle_belief_OptionWeekJoursReturnsObj_beliefunit_v001():
         fact_context=yr_mon_rope, fact_state=yr_mon_rope, fact_lower=0, fact_upper=1000
     )
 
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
     missing_facts = yao_beliefunit.get_missing_fact_reason_contexts()
     # for missing_fact, count in missing_facts.items():
     #     print(f"{missing_fact=} {count=}")
@@ -475,7 +474,7 @@ def test_BeliefUnit_settle_belief_OptionWeekJoursReturnsObj_beliefunit_v001():
     # assert YR.get_active(rope=bird_plan, plan_dict=plan_dict) is False
 
 
-def test_BeliefUnit_settle_belief_SetsPlanUnitsActiveWithEvery6WeeksReason_beliefunit_v001():
+def test_BeliefUnit_cash_out_SetsPlanUnitsActiveWithEvery6WeeksReason_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
     hr_num_str = "hr_number"
@@ -490,7 +489,7 @@ def test_BeliefUnit_settle_belief_SetsPlanUnitsActiveWithEvery6WeeksReason_belie
     yao_beliefunit.add_fact(
         fact_context=min_rope, fact_state=min_rope, fact_lower=0, fact_upper=59
     )
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     ced_wk_reason_context = yao_beliefunit.make_l1_rope("ced_wk")
@@ -546,7 +545,7 @@ def test_BeliefUnit_settle_belief_SetsPlanUnitsActiveWithEvery6WeeksReason_belie
         f"Nation set and also fact set: {ced_wk_reason_context=} with {ced_wk_reason_lower=} and {ced_wk_reason_lower=}"
     )
     print(f"{yao_beliefunit.planroot.factunits=}")
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     wk_str = "ced_wk"
@@ -562,12 +561,12 @@ def test_BeliefUnit_settle_belief_SetsPlanUnitsActiveWithEvery6WeeksReason_belie
     assert wk_case.reason_divisor == 6 and wk_case.reason_lower == 1
 
 
-def test_BeliefUnit_settle_belief_EveryPlanHasActiveStatus_beliefunit_v001():
+def test_BeliefUnit_cash_out_EveryPlanHasActiveStatus_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
 
     # WHEN
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     print(f"{len(yao_beliefunit._plan_dict)=}")
@@ -603,7 +602,7 @@ def test_BeliefUnit_settle_belief_EveryPlanHasActiveStatus_beliefunit_v001():
     )
 
 
-def test_BeliefUnit_settle_belief_EveryTwoMonthReturnsObj_beliefunit_v001():
+def test_BeliefUnit_cash_out_EveryTwoMonthReturnsObj_beliefunit_v001():
     # ESTABLISH
     yao_beliefunit = beliefunit_v001()
     minute_str = "jour_minute"
@@ -654,7 +653,7 @@ def test_BeliefUnit_settle_belief_EveryTwoMonthReturnsObj_beliefunit_v001():
     yao_beliefunit.add_fact(
         fact_context=ced_wk, fact_state=ced_wk, fact_lower=0, fact_upper=4
     )
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # THEN
     print(f"{len(plan_dict)=}")
@@ -662,25 +661,25 @@ def test_BeliefUnit_settle_belief_EveryTwoMonthReturnsObj_beliefunit_v001():
     assert from_list_get_active(mat_rope, yao_beliefunit._plan_dict)
 
 
-def test_BeliefUnit_settle_belief_SetsEmpty_sum_healerunit_share():
+def test_BeliefUnit_cash_out_SetsEmpty_sum_healerunit_share():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     assert sue_beliefunit._sum_healerunit_share == 0
     assert sue_beliefunit._keep_dict == {}
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert sue_beliefunit._sum_healerunit_share == 0
     assert sue_beliefunit._keep_dict == {}
 
 
-def test_BeliefUnit_settle_belief_Sets_sum_healerunit_share(graphics_bool):
+def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     sue_beliefunit.add_partnerunit("Sue")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     nation_rope = sue_beliefunit.make_l1_rope("nation")
     usa_rope = sue_beliefunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_beliefunit.make_rope(usa_rope, "Oregon")
@@ -694,7 +693,7 @@ def test_BeliefUnit_settle_belief_Sets_sum_healerunit_share(graphics_bool):
     assert oregon_plan._healerunit_ratio == 0
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._sum_healerunit_share == 0.038461539 * default_fund_pool()
     assert oregon_plan._healerunit_ratio == 1
@@ -706,7 +705,7 @@ def test_BeliefUnit_settle_belief_Sets_sum_healerunit_share(graphics_bool):
     sue_beliefunit.edit_plan_attr(mon_rope, healerunit=sue_healerunit)
     mon_plan = sue_beliefunit.get_plan_obj(mon_rope)
     # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._sum_healerunit_share != 0.038461539 * default_fund_pool()
     assert sue_beliefunit._sum_healerunit_share == 0.06923077 * default_fund_pool()
@@ -721,7 +720,7 @@ def test_BeliefUnit_settle_belief_Sets_sum_healerunit_share(graphics_bool):
     # sat_rope = sue_beliefunit.make_rope(wk_rope, "Sat")
     # sat_plan = sue_beliefunit.get_plan_obj(sat_rope)
     # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert (
@@ -737,7 +736,7 @@ def test_BeliefUnit_settle_belief_Sets_sum_healerunit_share(graphics_bool):
     sue_beliefunit.edit_plan_attr(wk_rope, healerunit=sue_healerunit)
     wk_plan = sue_beliefunit.get_plan_obj(wk_rope)
     print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     display_plantree(sue_beliefunit, "Keep", graphics_bool)
     assert sue_beliefunit._sum_healerunit_share == 0
@@ -746,11 +745,11 @@ def test_BeliefUnit_settle_belief_Sets_sum_healerunit_share(graphics_bool):
     assert tue_plan._healerunit_ratio == 0
 
 
-def test_BeliefUnit_settle_belief_Sets_keep_dict_v1(graphics_bool):
+def test_BeliefUnit_cash_out_Sets_keep_dict_v1(graphics_bool):
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     sue_beliefunit.add_partnerunit("Sue")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     nation_rope = sue_beliefunit.make_l1_rope("nation")
     usa_rope = sue_beliefunit.make_rope(nation_rope, "USA")
     oregon_rope = sue_beliefunit.make_rope(usa_rope, "Oregon")
@@ -762,7 +761,7 @@ def test_BeliefUnit_settle_belief_Sets_keep_dict_v1(graphics_bool):
     assert sue_beliefunit._keep_dict.get(oregon_rope) is None
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert len(sue_beliefunit._keep_dict) == 1
     assert sue_beliefunit._keep_dict.get(oregon_rope) is not None
@@ -774,7 +773,7 @@ def test_BeliefUnit_settle_belief_Sets_keep_dict_v1(graphics_bool):
     sue_beliefunit.edit_plan_attr(mon_rope, healerunit=sue_healerunit)
     # mon_plan = sue_beliefunit.get_plan_obj(mon_rope)
     # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert len(sue_beliefunit._keep_dict) == 2
     assert sue_beliefunit._keep_dict.get(oregon_rope) is not None
@@ -788,7 +787,7 @@ def test_BeliefUnit_settle_belief_Sets_keep_dict_v1(graphics_bool):
     # sat_rope = sue_beliefunit.make_rope(wk_rope, "Sat")
     # sat_plan = sue_beliefunit.get_plan_obj(sat_rope)
     # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert len(sue_beliefunit._keep_dict) == 3
@@ -800,14 +799,14 @@ def test_BeliefUnit_settle_belief_Sets_keep_dict_v1(graphics_bool):
     sue_beliefunit.edit_plan_attr(wk_rope, healerunit=sue_healerunit)
     wk_plan = sue_beliefunit.get_plan_obj(wk_rope)
     print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     display_plantree(sue_beliefunit, "Keep", graphics_bool)
     assert len(sue_beliefunit._keep_dict) == 0
     assert sue_beliefunit._keep_dict == {}
 
 
-def test_BeliefUnit_settle_belief_Sets_healers_dict():
+def test_BeliefUnit_cash_out_Sets_healers_dict():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -817,7 +816,7 @@ def test_BeliefUnit_settle_belief_Sets_healers_dict():
     assert sue_beliefunit._healers_dict == {}
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._healers_dict == {}
 
@@ -836,7 +835,7 @@ def test_BeliefUnit_settle_belief_Sets_healers_dict():
     assert sue_beliefunit._healers_dict == {}
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert len(sue_beliefunit._healers_dict) == 2
@@ -846,7 +845,7 @@ def test_BeliefUnit_settle_belief_Sets_healers_dict():
     assert sue_beliefunit._healers_dict.get(sue_str) == {oregon_rope: oregon_plan}
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_buildable_True():
+def test_BeliefUnit_cash_out_Sets_keeps_buildable_True():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -856,7 +855,7 @@ def test_BeliefUnit_settle_belief_Sets_keeps_buildable_True():
     assert sue_beliefunit._keeps_buildable is False
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._keeps_buildable
 
@@ -874,12 +873,12 @@ def test_BeliefUnit_settle_belief_Sets_keeps_buildable_True():
     sue_beliefunit.edit_plan_attr(wk_rope, problem_bool=True, healerunit=bob_healerunit)
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._keeps_buildable
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_buildable_False():
+def test_BeliefUnit_cash_out_Sets_keeps_buildable_False():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
@@ -889,7 +888,7 @@ def test_BeliefUnit_settle_belief_Sets_keeps_buildable_False():
     assert sue_beliefunit._keeps_buildable is False
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._keeps_buildable
 
@@ -907,6 +906,6 @@ def test_BeliefUnit_settle_belief_Sets_keeps_buildable_False():
     assert sue_beliefunit._keeps_buildable
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._keeps_buildable is False

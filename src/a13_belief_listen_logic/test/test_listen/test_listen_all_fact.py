@@ -16,7 +16,7 @@ def test_get_debtors_roll_ReturnsObj():
     zia_partner_cred_points = 47
     zia_partner_debt_points = 41
     yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_duty.settle_belief()
+    yao_duty.cash_out()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
@@ -38,7 +38,7 @@ def test_get_debtors_roll_ReturnsObjIgnoresZero_partner_debt_points():
     wei_partner_debt_points = 0
     yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
     yao_duty.add_partnerunit(wei_str, wei_partner_cred_points, wei_partner_debt_points)
-    yao_duty.settle_belief()
+    yao_duty.cash_out()
 
     # WHEN
     yao_roll = get_debtors_roll(yao_duty)
@@ -244,7 +244,7 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
     yao_src.set_plan(planunit_shop(snow_str), weather_rope)
     yao_src.add_fact(weather_rope, rain_rope)
     yao_src.add_fact(status_rope, clean_rope)
-    yao_src.settle_belief()
+    yao_src.cash_out()
 
     yao_dst = beliefunit_shop(yao_str)
     assert yao_dst.plan_exists(clean_rope) is False

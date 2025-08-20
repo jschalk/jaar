@@ -15,7 +15,7 @@ def get_coin_guts_partners_dataframe(x_coin: CoinUnit) -> DataFrame:
     gut_dfs = []
     for belief_name in coin_belief_names:
         gut_belief = open_gut_file(x_coin.coin_mstr_dir, x_coin.coin_label, belief_name)
-        gut_belief.settle_belief()
+        gut_belief.cash_out()
         df = get_belief_partnerunits_dataframe(gut_belief)
         df.insert(0, "belief_name", gut_belief.belief_name)
         gut_dfs.append(df)
@@ -71,7 +71,7 @@ def get_coin_jobs_partners_dataframe(x_coin: CoinUnit) -> DataFrame:
     job_dfs = []
     for belief_name in coin_belief_names:
         job = open_job_file(x_coin.coin_mstr_dir, x_coin.coin_label, belief_name)
-        job.settle_belief()
+        job.cash_out()
         job_df = get_belief_partnerunits_dataframe(job)
         job_df.insert(0, "belief_name", job.belief_name)
         job_dfs.append(job_df)
@@ -126,7 +126,7 @@ def get_coin_guts_agenda_dataframe(x_coin: CoinUnit) -> DataFrame:
     gut_dfs = []
     for belief_name in coin_belief_names:
         gut_belief = open_gut_file(x_coin.coin_mstr_dir, x_coin.coin_label, belief_name)
-        gut_belief.settle_belief()
+        gut_belief.cash_out()
         df = get_belief_agenda_dataframe(gut_belief)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
@@ -183,7 +183,7 @@ def get_coin_jobs_agenda_dataframe(x_coin: CoinUnit) -> DataFrame:
     for x_belief_name in x_coin._get_belief_folder_names():
 
         job = open_job_file(x_coin.coin_mstr_dir, x_coin.coin_label, x_belief_name)
-        job.settle_belief()
+        job.cash_out()
         job_df = get_belief_agenda_dataframe(job)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)

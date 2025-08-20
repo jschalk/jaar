@@ -15,7 +15,7 @@ def temp_belief_name():
 def get_1label_belief() -> BeliefUnit:
     x_belief = beliefunit_shop("A")
     x_belief.set_coin_label(temp_coin_label())
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -23,7 +23,7 @@ def get_Jlabel2label_belief() -> BeliefUnit:
     x_belief = beliefunit_shop("J")
     x_belief.set_coin_label(temp_coin_label())
     x_belief.set_l1_plan(planunit_shop("A"))
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -36,7 +36,7 @@ def get_2label_belief(coin_label: CoinLabel = None) -> BeliefUnit:
     x_belief.set_coin_label(coin_label)
     plan_b = planunit_shop(b_str)
     x_belief.set_plan(plan_b, parent_rope=temp_coin_label())
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -46,7 +46,7 @@ def get_3label_belief() -> BeliefUnit:
     x_belief.set_coin_label(temp_coin_label())
     x_belief.set_l1_plan(planunit_shop("B"))
     x_belief.set_l1_plan(planunit_shop("C"))
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -56,7 +56,7 @@ def get_3label_D_E_F_belief() -> BeliefUnit:
     x_belief.set_coin_label(temp_coin_label())
     x_belief.set_l1_plan(planunit_shop("E"))
     x_belief.set_l1_plan(planunit_shop("F"))
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -69,7 +69,7 @@ def get_6label_belief() -> BeliefUnit:
     x_belief.set_plan(planunit_shop("D"), c_rope)
     x_belief.set_plan(planunit_shop("E"), c_rope)
     x_belief.set_plan(planunit_shop("F"), c_rope)
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -83,7 +83,7 @@ def get_7labelInsertH_belief() -> BeliefUnit:
     x_belief.set_plan(planunit_shop("D"), c_rope)
     x_belief.set_plan(planunit_shop("E"), c_rope)
     x_belief.set_plan(planunit_shop("F"), x_belief.make_rope(c_rope, "H"))
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -95,7 +95,7 @@ def get_5labelHG_belief() -> BeliefUnit:
     c_rope = x_belief.make_l1_rope("C")
     x_belief.set_plan(planunit_shop("H"), c_rope)
     x_belief.set_plan(planunit_shop("G"), c_rope)
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 
@@ -111,7 +111,7 @@ def get_7labelJRoot_belief() -> BeliefUnit:
     x_belief.set_plan(planunit_shop("D"), c_rope)
     x_belief.set_plan(planunit_shop("E"), c_rope)
     x_belief.set_plan(planunit_shop("F"), c_rope)
-    x_belief.settle_belief()
+    x_belief.cash_out()
     return x_belief
 
 

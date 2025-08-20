@@ -38,7 +38,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
     sue_gut_belief.set_plan(planunit_shop(dallas_str), texas_rope)
     sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.edit_plan_attr(dallas_rope, healerunit=healerunit_shop({sue_str}))
-    sue_gut_belief.settle_belief()
+    sue_gut_belief.cash_out()
     assert sue_gut_belief._keeps_justified is False
     save_gut_file(env_dir(), sue_gut_belief)
 
@@ -65,7 +65,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
-    sue_gut_belief.settle_belief()
+    sue_gut_belief.cash_out()
     assert sue_gut_belief._keeps_justified
     assert sue_gut_belief._keeps_buildable is False
     save_gut_file(env_dir(), sue_gut_belief)
@@ -98,7 +98,7 @@ def test_HubUnit_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.set_plan(dallas_plan, texas_rope)
     sue_gut_belief.set_plan(elpaso_plan, texas_rope)
-    sue_gut_belief.settle_belief()
+    sue_gut_belief.cash_out()
     display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_belief)
 
@@ -185,7 +185,7 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.set_plan(dallas_plan, texas_rope)
     sue_gut_belief.set_plan(elpaso_plan, texas_rope)
-    sue_gut_belief.settle_belief()
+    sue_gut_belief.cash_out()
     display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
     save_gut_file(env_dir(), sue_gut_belief)
 

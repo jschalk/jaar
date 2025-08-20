@@ -198,10 +198,10 @@ def belief_get_obj(x_dimen: str, x_belief: BeliefUnit, jkeys: dict[str, any]) ->
 
 
 def get_belief_partner_agenda_award_array(
-    x_belief: BeliefUnit, settle_belief: bool = None
+    x_belief: BeliefUnit, cash_out: bool = None
 ) -> list[list]:
-    if settle_belief:
-        x_belief.settle_belief()
+    if cash_out:
+        x_belief.cash_out()
 
     x_list = [
         [
@@ -216,25 +216,25 @@ def get_belief_partner_agenda_award_array(
 
 
 def get_belief_partner_agenda_award_csv(
-    x_belief: BeliefUnit, settle_belief: bool = None
+    x_belief: BeliefUnit, cash_out: bool = None
 ) -> str:
     x_partner_agenda_award_array = get_belief_partner_agenda_award_array(
-        x_belief, settle_belief
+        x_belief, cash_out
     )
     x_headers = ["partner_name", "fund_agenda_take", "fund_agenda_give"]
     return create_csv(x_headers, x_partner_agenda_award_array)
 
 
 def get_partner_mandate_ledger(
-    x_belief: BeliefUnit, settle_belief: bool = None
+    x_belief: BeliefUnit, cash_out: bool = None
 ) -> dict[PartnerName, FundNum]:
     if not x_belief:
         return {}
     if len(x_belief.partners) == 0:
         return {x_belief.belief_name: x_belief.fund_pool}
 
-    if settle_belief:
-        x_belief.settle_belief()
+    if cash_out:
+        x_belief.cash_out()
     belief_partners = x_belief.partners.values()
     mandates = {
         x_partner.partner_name: x_partner._fund_agenda_give
@@ -260,10 +260,10 @@ def reset_mandates_to_minimum(
 
 
 def get_partner_agenda_net_ledger(
-    x_belief: BeliefUnit, settle_belief: bool = None
+    x_belief: BeliefUnit, cash_out: bool = None
 ) -> dict[PartnerName, FundNum]:
-    if settle_belief:
-        x_belief.settle_belief()
+    if cash_out:
+        x_belief.cash_out()
 
     x_dict = {}
     for x_partner in x_belief.partners.values():

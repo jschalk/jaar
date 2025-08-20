@@ -547,7 +547,7 @@ class BeliefTimelinePoint:
         self._year_num += self._year_count
 
     def calc_timeline(self):
-        self.x_beliefunit.settle_belief()
+        self.x_beliefunit.cash_out()
         self._set_timeline_plan()
         self._set_weekday()
         self._set_month()

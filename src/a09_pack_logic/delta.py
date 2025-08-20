@@ -125,8 +125,8 @@ class BeliefDelta:
     def add_all_different_beliefatoms(
         self, before_belief: BeliefUnit, after_belief: BeliefUnit
     ):
-        before_belief.settle_belief()
-        after_belief.settle_belief()
+        before_belief.cash_out()
+        after_belief.cash_out()
         self.add_beliefatoms_beliefunit_simple_attrs(before_belief, after_belief)
         self.add_beliefatoms_partners(before_belief, after_belief)
         self.add_beliefatoms_plans(before_belief, after_belief)
@@ -896,7 +896,7 @@ def belief_built_from_delta_is_valid(
     x_belief = beliefunit_shop() if x_belief is None else x_belief
     x_belief = x_delta.get_edited_belief(x_belief)
     try:
-        x_belief.settle_belief()
+        x_belief.cash_out()
     except Exception:
         return False
     return True

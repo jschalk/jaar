@@ -465,7 +465,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario9_active_hx():
     # ESTABLISH
     hatter_belief = get_beliefunit_irrational_example()
     hatter_belief.set_max_tree_traverse(8)
-    hatter_belief.settle_belief()
+    hatter_belief.cash_out()
     egg_str = "egg first"
     egg_rope = hatter_belief.make_l1_rope(egg_str)
     chicken_str = "chicken first"

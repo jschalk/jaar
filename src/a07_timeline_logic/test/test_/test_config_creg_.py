@@ -517,7 +517,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_offset_PlanUnits():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope(time_str())
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     five_rope = sue_belief.make_rope(time_rope, five_str())
@@ -542,7 +542,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_offset_PlanUnits():
 def test_add_newtimeline_planunit_SetsAttr_Scenario0():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope(time_str())
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     creg_yr1_jan1_offset_rope = sue_belief.make_rope(creg_rope, yr1_jan1_offset_str())
@@ -795,7 +795,7 @@ def test_add_time_five_planunit_SetsAttr_Scenario0_AddsMultiple_timelines():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope(time_str())
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     five_rope = sue_belief.make_rope(time_rope, five_str())
@@ -850,7 +850,7 @@ def test_get_min_from_dt_ReturnsObj():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     x_datetime = datetime(2022, 10, 30, 0, 0)
     time_rope = sue_belief.make_l1_rope(time_str())
     creg_rope = sue_belief.make_rope(time_rope, creg_str())

@@ -7,7 +7,7 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_BeliefUnit_settle_belief_ChangesPlanUnit_task_chore():
+def test_BeliefUnit_cash_out_ChangesPlanUnit_task_chore():
     # ESTABLISH
     yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
     hr_str = "hr"
@@ -29,7 +29,7 @@ def test_BeliefUnit_settle_belief_ChangesPlanUnit_task_chore():
     assert mail_plan._chore is False
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     mail_plan = yao_belief.get_plan_obj(mail_rope)
@@ -37,7 +37,7 @@ def test_BeliefUnit_settle_belief_ChangesPlanUnit_task_chore():
     assert mail_plan._chore
 
 
-def test_BeliefUnit_settle_belief_ExecutesWithRangeRootFacts():
+def test_BeliefUnit_cash_out_ExecutesWithRangeRootFacts():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     casa_str = "casa"
@@ -60,7 +60,7 @@ def test_BeliefUnit_settle_belief_ExecutesWithRangeRootFacts():
     assert zia_belief.planroot._factheirs == {}
 
     # WHEN
-    zia_belief.settle_belief()
+    zia_belief.cash_out()
 
     # THEN
     assert zia_belief.planroot._factheirs != {}
@@ -70,7 +70,7 @@ def test_BeliefUnit_settle_belief_ExecutesWithRangeRootFacts():
     }
 
 
-def test_BeliefUnit_settle_belief_RaisesErrorIfNon_RangeRootHasFactUnit():
+def test_BeliefUnit_cash_out_RaisesErrorIfNon_RangeRootHasFactUnit():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     casa_str = "casa"
@@ -90,7 +90,7 @@ def test_BeliefUnit_settle_belief_RaisesErrorIfNon_RangeRootHasFactUnit():
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        zia_belief.settle_belief()
+        zia_belief.cash_out()
 
     # THEN
     assert (
@@ -99,7 +99,7 @@ def test_BeliefUnit_settle_belief_RaisesErrorIfNon_RangeRootHasFactUnit():
     )
 
 
-def test_BeliefUnit_settle_belief_FactHeirsInherited():
+def test_BeliefUnit_cash_out_FactHeirsInherited():
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
     swim_str = "swim"
@@ -127,7 +127,7 @@ def test_BeliefUnit_settle_belief_FactHeirsInherited():
     assert slow_plan._factheirs == {}
 
     # WHEN
-    zia_belief.settle_belief()
+    zia_belief.cash_out()
 
     # THEN
     assert swim_plan._factheirs != {}
@@ -158,7 +158,7 @@ def test_BeliefUnit_settle_belief_FactHeirsInherited():
     assert str(type(fact_x1)).find(".reason.FactHeir'>")
 
 
-def test_BeliefUnit_settle_belief_FactUnitMoldsFactHeir():
+def test_BeliefUnit_cash_out_FactUnitMoldsFactHeir():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     zia_belief = beliefunit_shop("Zia")
@@ -182,7 +182,7 @@ def test_BeliefUnit_settle_belief_FactUnitMoldsFactHeir():
     zia_belief.add_fact(
         fact_context=earth_rope, fact_state=earth_rope, fact_lower=1.0, fact_upper=5.0
     )
-    zia_belief.settle_belief()
+    zia_belief.cash_out()
 
     # THEN
     first_earthheir = factheir_shop(
@@ -197,7 +197,7 @@ def test_BeliefUnit_settle_belief_FactUnitMoldsFactHeir():
     zia_belief.add_fact(
         fact_context=earth_rope, fact_state=earth_rope, fact_lower=3.0, fact_upper=5.0
     )
-    zia_belief.settle_belief()
+    zia_belief.cash_out()
 
     # THEN
     after_earthheir = factheir_shop(
@@ -207,7 +207,7 @@ def test_BeliefUnit_settle_belief_FactUnitMoldsFactHeir():
     assert swim_plan._factheirs == after_earthdict
 
 
-def test_BeliefUnit_settle_belief_FactHeirDeletesFactUnit():
+def test_BeliefUnit_cash_out_FactHeirDeletesFactUnit():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
@@ -230,7 +230,7 @@ def test_BeliefUnit_settle_belief_FactHeirDeletesFactUnit():
     assert swim_plan._factheirs == {}
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert swim_plan._factheirs == first_earthdict
@@ -238,14 +238,14 @@ def test_BeliefUnit_settle_belief_FactHeirDeletesFactUnit():
     # WHEN
     earth_curb = factunit_shop(earth_rope, earth_rope, fact_lower=3.0, fact_upper=4.0)
     swim_plan.set_factunit(factunit=earth_curb)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert swim_plan._factheirs == first_earthdict
     assert swim_plan.factunits == {}
 
 
-def test_BeliefUnit_settle_belief_SetsChoreAsComplete():
+def test_BeliefUnit_cash_out_SetsChoreAsComplete():
     # ESTABLISH
     yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
     mail_str = "obtain mail"
@@ -260,7 +260,7 @@ def test_BeliefUnit_settle_belief_SetsChoreAsComplete():
     assert mail_plan._chore
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert mail_plan.task

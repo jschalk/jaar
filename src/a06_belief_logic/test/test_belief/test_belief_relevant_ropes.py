@@ -192,7 +192,7 @@ def test_BeliefUnit_get_inheritor_plan_list_ReturnsObj_Scenario0():
     mon_str = "Mon"
     mon_rope = yao_beliefunit.make_rope(wk_rope, mon_str)
     yao_beliefunit.set_plan(planunit_shop(mon_str), wk_rope)
-    yao_beliefunit.settle_belief()
+    yao_beliefunit.cash_out()
 
     # WHEN
     x_inheritor_plan_list = yao_beliefunit.get_inheritor_plan_list(wk_rope, mon_rope)

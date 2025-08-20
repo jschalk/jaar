@@ -122,7 +122,7 @@ def test_agenda_returned_WhenNoReasonsExist():
     sue_belief = get_beliefunit_with_4_levels()
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -147,7 +147,7 @@ def test_BeliefUnit_reasonheirs_AreInherited_v1():
     assert not casa_plan.get_reasonheir(wk_rope)
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert casa_plan.get_reasonheir(wk_rope)
@@ -204,7 +204,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     cost_str = "cost_quantification"
     cost_rope = a4_belief.make_rope(rla_rope, cost_str)
     a4_belief.set_plan(planunit_shop(cost_str), parent_rope=cost_rope)
-    a4_belief.settle_belief()
+    a4_belief.cash_out()
 
     # THEN
     casa_plan = a4_belief.planroot._kids[casa_str]
@@ -282,7 +282,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     assert cost_plan._reasonheirs == {}
 
     # WHEN
-    a4_belief.settle_belief()
+    a4_belief.cash_out()
 
     # THEN
     assert a4_belief.planroot._reasonheirs == {}  # casa_wk_built_reasonheir
@@ -524,7 +524,7 @@ def test_BeliefUnit_edit_plan_attr_beliefIsAbleToEdit_reason_active_requisite_An
     run_str = "run to casa"
     run_rope = sue_belief.make_l1_rope(run_str)
     sue_belief.set_plan(planunit_shop(run_str), sue_belief.coin_label)
-    sue_belief.settle_belief()  # set tree metrics
+    sue_belief.cash_out()  # set tree metrics
     run_plan = sue_belief.get_plan_obj(run_rope)
     assert len(run_plan.reasonunits) == 0
 
@@ -595,7 +595,7 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
         reason_context=sem_jours_rope,
         reason_case=thu_rope,
     )
-    sue_belief.settle_belief()  # set tree metrics
+    sue_belief.cash_out()  # set tree metrics
     casa_plan = sue_belief.get_plan_obj(casa_rope)
     assert casa_plan._active is False
 
@@ -611,12 +611,12 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
         reason_plan_active_requisite=True,
     )
     run_plan = sue_belief.get_plan_obj(run_rope)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     assert run_plan._active is False
 
     # Fact: reason_context: (...,sem_jours) fact_state: (...,sem_jours,wed)
     sue_belief.add_fact(fact_context=sem_jours_rope, fact_state=wed_rope)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     assert casa_plan._active is False
     assert run_plan._active is False
@@ -625,25 +625,25 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
     print("before changing fact")
     sue_belief.add_fact(fact_context=sem_jours_rope, fact_state=thu_rope)
     print("after changing fact")
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     assert casa_plan._active is True
 
     # THEN
     assert run_plan._active is True
 
 
-def test_BeliefUnit_settle_belief_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
+def test_BeliefUnit_cash_out_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     assert sue_belief._rational is False
-    # sue_belief.settle_belief()
+    # sue_belief.cash_out()
     sue_belief._rational = True
     assert sue_belief._rational
 
     # WHEN
     # hack belief to set _max_tree_traverse = 1 (not allowed, should be 2 or more)
     sue_belief.max_tree_traverse = 1
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert not sue_belief._rational
@@ -655,7 +655,7 @@ def test_BeliefUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsStatu
     assert sue_belief.max_tree_traverse != 2
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     # for plan_key in sue_belief._plan_dict.keys():
     #     print(f"{plan_key=}")
 
@@ -666,12 +666,12 @@ def test_BeliefUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsStatu
 def test_BeliefUnit_tree_traverse_count_CountsTreeTraversesForIrrationalBeliefs():
     # ESTABLISH irrational belief
     sue_belief = get_beliefunit_irrational_example()
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     assert sue_belief._tree_traverse_count == 3
 
     # WHEN
     sue_belief.set_max_tree_traverse(21)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._tree_traverse_count == 21

@@ -130,7 +130,7 @@ class CoinUnit:
     # belief management
     def _set_all_healer_dutys(self, belief_name: BeliefName):
         x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, belief_name)
-        x_gut.settle_belief()
+        x_gut.cash_out()
         for healer_name, healer_dict in x_gut._healers_dict.items():
             for keep_rope in healer_dict.keys():
                 create_treasury_db_file(
@@ -174,7 +174,7 @@ class CoinUnit:
 
     def rotate_job(self, belief_name: BeliefName) -> BeliefUnit:
         x_job = open_job_file(self.coin_mstr_dir, self.coin_label, belief_name)
-        x_job.settle_belief()
+        x_job.cash_out()
         # # if beliefunit has healers create job from healers.
         # create beliefunit from debtors roll
         return listen_to_debtors_roll_jobs_into_job(

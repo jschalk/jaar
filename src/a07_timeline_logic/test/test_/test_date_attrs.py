@@ -66,7 +66,7 @@ def test_BeliefTimelinePoint_set_timeline_plan_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope("time")
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10000000)
@@ -83,7 +83,7 @@ def test_BeliefTimelinePoint_set_weekday_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope("time")
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10001440)
@@ -101,7 +101,7 @@ def test_BeliefTimelinePoint_set_month_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope("time")
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10060000)
@@ -122,7 +122,7 @@ def test_BeliefTimelinePoint_set_hour_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope("time")
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10000001)
@@ -143,7 +143,7 @@ def test_BeliefTimelinePoint_set_year_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     time_rope = sue_belief.make_l1_rope("time")
     creg_rope = sue_belief.make_rope(time_rope, creg_str())
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 1030600100)

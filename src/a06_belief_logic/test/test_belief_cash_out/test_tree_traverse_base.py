@@ -74,7 +74,7 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     assert not sue_belief._healers_dict
 
 
-def test_BeliefUnit_settle_belief_ClearsDescendantAttributes():
+def test_BeliefUnit_cash_out_ClearsDescendantAttributes():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     # test root status:
@@ -117,7 +117,7 @@ def test_BeliefUnit_settle_belief_ClearsDescendantAttributes():
     assert mon_plan._all_partner_debt == -2
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief.planroot._descendant_task_count == 2
@@ -132,7 +132,7 @@ def test_BeliefUnit_settle_belief_ClearsDescendantAttributes():
     assert sue_belief.planroot._all_partner_debt is True
 
 
-def test_BeliefUnit_settle_belief_RootOnlySetsDescendantAttributes():
+def test_BeliefUnit_cash_out_RootOnlySetsDescendantAttributes():
     # ESTABLISH
     yao_belief = beliefunit_shop(belief_name="Yao")
     assert yao_belief.planroot._descendant_task_count is None
@@ -140,7 +140,7 @@ def test_BeliefUnit_settle_belief_RootOnlySetsDescendantAttributes():
     assert yao_belief.planroot._all_partner_debt is None
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert yao_belief.planroot._descendant_task_count == 0
@@ -148,7 +148,7 @@ def test_BeliefUnit_settle_belief_RootOnlySetsDescendantAttributes():
     assert yao_belief.planroot._all_partner_debt is True
 
 
-def test_BeliefUnit_settle_belief_NLevelSetsDescendantAttributes_1():
+def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     casa_str = "casa"
@@ -179,7 +179,7 @@ def test_BeliefUnit_settle_belief_NLevelSetsDescendantAttributes_1():
     assert mon_plan._all_partner_debt is None
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert x_planroot._descendant_task_count == 3
@@ -194,7 +194,7 @@ def test_BeliefUnit_settle_belief_NLevelSetsDescendantAttributes_1():
     assert mon_plan._all_partner_debt is True
 
 
-def test_BeliefUnit_settle_belief_NLevelSetsDescendantAttributes_2():
+def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
@@ -222,7 +222,7 @@ def test_BeliefUnit_settle_belief_NLevelSetsDescendantAttributes_2():
     # print(sue_belief._kids[casa_str]._kids[email_str]._awardunit)
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     # print(sue_belief._kids[casa_str]._kids[email_str])
     # print(sue_belief._kids[casa_str]._kids[email_str]._awardunit)
 
@@ -245,7 +245,7 @@ def test_BeliefUnit_settle_belief_NLevelSetsDescendantAttributes_2():
     assert wk_plan._kids[tue_str]._all_partner_debt is True
 
 
-def test_BeliefUnit_settle_belief_SetsPlanUnitAttr_awardunits():
+def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
     # ESTABLISH
     sue_str = "Sue"
     sue_belief = beliefunit_shop(sue_str)
@@ -274,7 +274,7 @@ def test_BeliefUnit_settle_belief_SetsPlanUnitAttr_awardunits():
     assert len(sue_belief.planroot._kids[swim_str].awardunits) == 3
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     print(f"{sue_belief._plan_dict.keys()=} ")
@@ -293,17 +293,17 @@ def test_BeliefUnit_settle_belief_SetsPlanUnitAttr_awardunits():
     assert len(sue_belief.planroot._kids["swim"]._awardheirs) == 3
 
 
-def test_BeliefUnit_settle_belief_TreeTraverseSetsClearsAwardLineestors():
+def test_BeliefUnit_cash_out_TreeTraverseSetsClearsAwardLineestors():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     # plan tree has no awardunits
     assert sue_belief.planroot._awardlines == {}
     sue_belief.planroot._awardlines = {1: "testtest"}
     assert sue_belief.planroot._awardlines != {}
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert not sue_belief.planroot._awardlines
@@ -314,13 +314,13 @@ def test_BeliefUnit_settle_belief_TreeTraverseSetsClearsAwardLineestors():
     casa_plan = sue_belief.planroot._kids[casa_str]
     casa_plan._awardlines = {1: "testtest"}
     assert casa_plan._awardlines != {}
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert not sue_belief.planroot._kids[casa_str]._awardlines
 
 
-def test_BeliefUnit_settle_belief_DoesNotKeepUnneeded_awardheirs():
+def test_BeliefUnit_cash_out_DoesNotKeepUnneeded_awardheirs():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
@@ -348,7 +348,7 @@ def test_BeliefUnit_settle_belief_DoesNotKeepUnneeded_awardheirs():
     assert len(swim_plan._awardheirs) == 0
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert len(swim_plan.awardunits) == 3
@@ -358,7 +358,7 @@ def test_BeliefUnit_settle_belief_DoesNotKeepUnneeded_awardheirs():
     assert len(swim_plan._awardheirs) == 3
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert len(swim_plan.awardunits) == 2
@@ -427,18 +427,18 @@ def test_BeliefUnit_get_plan_dict_ReturnsObjWhenSingle():
     assert problems_dict == {texas_rope: texas_plan}
 
 
-def test_BeliefUnit_settle_belief_CreatesFullyPopulated_plan_dict():
+def test_BeliefUnit_cash_out_CreatesFullyPopulated_plan_dict():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert len(sue_beliefunit._plan_dict) == 17
 
 
-def test_BeliefUnit_settle_belief_Resets_offtrack_kids_star_set():
+def test_BeliefUnit_cash_out_Resets_offtrack_kids_star_set():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     sue_beliefunit._offtrack_kids_star_set = set("ZZ")
@@ -447,13 +447,13 @@ def test_BeliefUnit_settle_belief_Resets_offtrack_kids_star_set():
     assert sue_beliefunit._offtrack_kids_star_set != x_set
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert sue_beliefunit._offtrack_kids_star_set == x_set
 
 
-def test_BeliefUnit_settle_belief_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set_Scenario0():
+def test_BeliefUnit_cash_out_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set_Scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     casa_str = "casa"
@@ -463,7 +463,7 @@ def test_BeliefUnit_settle_belief_WhenPlanRootHas_starButAll_kidsHaveZero_starAd
     assert sue_beliefunit._offtrack_kids_star_set == set()
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     root_rope = to_rope(sue_beliefunit.coin_label)
@@ -471,13 +471,13 @@ def test_BeliefUnit_settle_belief_WhenPlanRootHas_starButAll_kidsHaveZero_starAd
 
     # WHEN
     sue_beliefunit.edit_plan_attr(casa_rope, star=2)
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert sue_beliefunit._offtrack_kids_star_set == set()
 
 
-def test_BeliefUnit_settle_belief_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set():
+def test_BeliefUnit_cash_out_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
     casa_str = "casa"
@@ -509,13 +509,13 @@ def test_BeliefUnit_settle_belief_WhenPlanUnitHas_starButAll_kidsHaveZero_starAd
     assert sue_beliefunit._offtrack_kids_star_set == set()
 
     # WHEN
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
 
     # THEN
     assert sue_beliefunit._offtrack_kids_star_set == {clean_rope}
 
 
-def test_BeliefUnit_settle_belief_CreatesNewGroupUnitsWhenNeeded_Scenario0():
+def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -542,7 +542,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert not yao_belief.groupunit_exists(xio_str)
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert yao_belief.groupunit_exists(yao_str)
@@ -569,7 +569,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert zia_membership.group_debt_points == zia_partner_debt_points
 
 
-def test_BeliefUnit_settle_belief_CreatesNewGroupUnitsWhenNeeded_Scenario1():
+def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -590,7 +590,7 @@ def test_BeliefUnit_settle_belief_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     assert not yao_belief.groupunit_exists(xio_str)
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     assert yao_belief.groupunit_exists(yao_str)
@@ -626,7 +626,7 @@ def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     swim_plan.set_awardunit(awardunit_shop(zia_str))
     xio_str = "Xio"
     swim_plan.set_awardunit(awardunit_shop(xio_str))
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
     assert yao_belief.groupunit_exists(yao_str)
     assert yao_belief.groupunit_exists(zia_str)
     assert yao_belief.groupunit_exists(xio_str)
@@ -646,7 +646,7 @@ def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     run_str = ";Run"
     swim_plan.set_awardunit(awardunit_shop(run_str))
     assert not yao_belief.groupunit_exists(run_str)
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
     assert yao_belief.groupunit_exists(run_str)
 
     # WHEN
@@ -657,7 +657,7 @@ def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     assert symmerty_group_titles == {xio_str, run_str}
 
 
-def test_BeliefUnit_settle_belief_Sets_planroot_factheir_With_range_factheirs():
+def test_BeliefUnit_cash_out_Sets_planroot_factheir_With_range_factheirs():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -685,7 +685,7 @@ def test_BeliefUnit_settle_belief_Sets_planroot_factheir_With_range_factheirs():
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        yao_belief.settle_belief()
+        yao_belief.cash_out()
 
     # THEN
     exception_str = f"Cannot have fact for range inheritor '{tue_rope}'. A ranged fact plan must have _begin, _close"
@@ -709,7 +709,7 @@ def test_BeliefUnit_settle_belief_Sets_planroot_factheir_With_range_factheirs():
     # assert root_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
 
-def test_BeliefUnit_settle_belief_SetsPlanUnit_factheir_With_range_factheirs():
+def test_BeliefUnit_cash_out_SetsPlanUnit_factheir_With_range_factheirs():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -738,7 +738,7 @@ def test_BeliefUnit_settle_belief_SetsPlanUnit_factheir_With_range_factheirs():
     # assert ball_plan._factheirs.get(tue_rope) is None
 
     # WHEN
-    yao_belief.settle_belief()
+    yao_belief.cash_out()
 
     # THEN
     # wk_factunit = factunit_shop(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)

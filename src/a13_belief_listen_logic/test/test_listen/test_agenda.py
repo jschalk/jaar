@@ -277,7 +277,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBelief():
         reason_context=egg_rope,
         reason_plan_active_requisite=False,
     )
-    sue_beliefunit.settle_belief()
+    sue_beliefunit.cash_out()
     assert sue_beliefunit._rational is False
     assert len(sue_beliefunit.get_agenda_dict()) == 3
 
@@ -291,7 +291,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBelief():
     )
     yao_vision.set_partner_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, sue_beliefunit)
-    yao_vision.settle_belief()
+    yao_vision.cash_out()
 
     # THEN irrational belief is ignored
     assert len(yao_vision.get_agenda_dict()) != 3

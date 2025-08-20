@@ -5,44 +5,44 @@ from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenBeliefUnit_Empty():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenBeliefUnit_Empty():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenThereAreNotAny():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenThereAreNotAny():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenSinglePlanUnit_healerunit_any_group_title_exists_IsTrue():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenSinglePlanUnit_healerunit_any_group_title_exists_IsTrue():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief.set_l1_plan(planunit_shop("Texas", healerunit=healerunit_shop({"Yao"})))
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified is False
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenSingleProblemAndKeep():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenSingleProblemAndKeep():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
@@ -54,13 +54,13 @@ def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenSingleProblemAndKeep(
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenKeepIsLevelAboveProblem():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenKeepIsLevelAboveProblem():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
@@ -75,13 +75,13 @@ def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenKeepIsLevelAboveProbl
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenKeepIsLevelBelowProblem():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     texas_str = "Texas"
@@ -92,13 +92,13 @@ def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenKeepIsLevelBelowProbl
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified is False
 
 
-def test_BeliefUnit_settle_belief_RaisesErrorWhenKeepIsLevelBelowProblem():
+def test_BeliefUnit_cash_out_RaisesErrorWhenKeepIsLevelBelowProblem():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     texas_str = "Texas"
@@ -112,7 +112,7 @@ def test_BeliefUnit_settle_belief_RaisesErrorWhenKeepIsLevelBelowProblem():
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        sue_belief.settle_belief(keep_exceptions=True)
+        sue_belief.cash_out(keep_exceptions=True)
 
     # THEN
     assert (
@@ -121,7 +121,7 @@ def test_BeliefUnit_settle_belief_RaisesErrorWhenKeepIsLevelBelowProblem():
     )
 
 
-def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenTwoKeepsAre_OnTheEqualLine():
+def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenTwoKeepsAre_OnTheEqualLine():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_healerunit = healerunit_shop({"Yao"})
@@ -134,7 +134,7 @@ def test_BeliefUnit_settle_belief_Sets_keeps_justified_WhenTwoKeepsAre_OnTheEqua
     assert sue_belief._keeps_justified is False
 
     # WHEN
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
 
     # THEN
     assert sue_belief._keeps_justified is False
@@ -150,7 +150,7 @@ def test_BeliefUnit_get_plan_dict_RaisesErrorWhen_keeps_justified_IsFalse():
     sue_belief.set_l1_plan(texas_plan)
     elpaso_plan = planunit_shop("El Paso", healerunit=yao_healerunit, problem_bool=True)
     sue_belief.set_plan(elpaso_plan, texas_rope)
-    sue_belief.settle_belief()
+    sue_belief.cash_out()
     assert sue_belief._keeps_justified is False
 
     # WHEN / THEN

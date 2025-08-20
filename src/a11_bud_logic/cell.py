@@ -62,7 +62,7 @@ class CellUnit:
         self.beliefevent_facts = factunits_get_from_dict(get_facts_dict(x_belief))
         y_belief = copy_deepcopy(x_belief)
         clear_factunits_from_belief(y_belief)
-        y_belief.settle_belief()
+        y_belief.cash_out()
         self.beliefadjust = y_belief
 
     def get_beliefevents_credit_ledger(self) -> dict[BeliefName, float]:

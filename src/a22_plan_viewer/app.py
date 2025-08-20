@@ -48,7 +48,7 @@ sue_belief.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
 sue_belief.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
 sue_belief.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
 add_newtimeline_planunit(sue_belief, get_default_timeline_config_dict())
-sue_belief.settle_belief()
+sue_belief.cash_out()
 
 plan_view_dict = get_plan_view_dict(sue_belief.planroot)
 

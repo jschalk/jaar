@@ -183,7 +183,7 @@ class GroupUnit(GroupCore):
         None  # set by BeliefUnit.set_partnerunit()
     )
     knot: str = None  # calculated by BeliefUnit
-    # calculated by BeliefUnit.settle_belief()
+    # calculated by BeliefUnit.cash_out()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None

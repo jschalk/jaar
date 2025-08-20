@@ -54,7 +54,7 @@ class PartnerUnit(PartnerCore):
     _debtor_pool: RespectNum = None
     _irrational_partner_debt_points: int = None  # set by listening process
     _inallocable_partner_debt_points: int = None  # set by listening process
-    # set by Belief.settle_belief()
+    # set by Belief.cash_out()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None
