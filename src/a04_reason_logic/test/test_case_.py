@@ -749,10 +749,10 @@ def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     # THEN
     assert case_dict is not None
     static_dict = {
-        "reason_state": wk_rope,
-        "reason_lower": 1,
-        "reason_upper": 1,
-        "reason_divisor": 6,
+        reason_state_str(): wk_rope,
+        reason_lower_str(): 1,
+        reason_upper_str(): 1,
+        reason_divisor_str(): 6,
     }
     assert case_dict == static_dict
 
@@ -770,7 +770,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
 
     # THEN
     assert case_dict is not None
-    static_dict = {"reason_state": wk_rope, "reason_lower": 1, "reason_upper": 4}
+    static_dict = {reason_state_str(): wk_rope, "reason_lower": 1, "reason_upper": 4}
     assert case_dict == static_dict
 
 
@@ -787,7 +787,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
 
     # THEN
     assert case_dict is not None
-    static_dict = {"reason_state": wk_rope}
+    static_dict = {reason_state_str(): wk_rope}
     assert case_dict == static_dict
 
 
@@ -830,10 +830,10 @@ def test_CaseUnits_get_from_dict_ReturnsCompleteObj():
     wk_rope = create_rope(root_label(), wk_str)
     static_dict = {
         wk_rope: {
-            "reason_state": wk_rope,
-            "reason_lower": 1,
-            "reason_upper": 30,
-            "reason_divisor": 5,
+            reason_state_str(): wk_rope,
+            reason_lower_str(): 1,
+            reason_upper_str(): 30,
+            reason_divisor_str(): 5,
         }
     }
 
@@ -850,7 +850,7 @@ def test_CaseUnits_get_from_dict_BuildsObjFromIncompleteDict():
     # ESTABLISH
     wk_str = "wks"
     wk_rope = create_rope(root_label(), wk_str)
-    static_dict = {wk_rope: {"reason_state": wk_rope}}
+    static_dict = {wk_rope: {reason_state_str(): wk_rope}}
 
     # WHEN
     cases_dict = cases_get_from_dict(static_dict)

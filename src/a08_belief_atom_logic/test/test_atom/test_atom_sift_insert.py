@@ -20,6 +20,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     party_title_str,
     plan_rope_str,
     reason_context_str,
+    reason_state_str,
 )
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 from src.a08_belief_atom_logic.test._util.a08_str import INSERT_str
@@ -199,11 +200,11 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_reason_caseunit_Exis
     casa_week_atom = beliefatom_shop(belief_plan_reason_caseunit_str(), INSERT_str())
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
     casa_week_atom.set_arg(reason_context_str(), week_rope)
-    casa_week_atom.set_arg("reason_state", thur_rope)
+    casa_week_atom.set_arg(reason_state_str(), thur_rope)
     clean_week_atom = beliefatom_shop(belief_plan_reason_caseunit_str(), INSERT_str())
     clean_week_atom.set_arg(plan_rope_str(), clean_rope)
     clean_week_atom.set_arg(reason_context_str(), week_rope)
-    clean_week_atom.set_arg("reason_state", thur_rope)
+    clean_week_atom.set_arg(reason_state_str(), thur_rope)
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
     casa_plan = sue_belief.get_plan_obj(casa_rope)

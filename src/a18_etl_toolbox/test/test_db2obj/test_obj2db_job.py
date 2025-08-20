@@ -1,5 +1,18 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
+from src.a06_belief_logic.test._util.a06_str import (
+    _chore_str,
+    _status_str,
+    belief_name_str,
+    coin_label_str,
+    plan_rope_str,
+    reason_active_requisite_str,
+    reason_context_str,
+    reason_divisor_str,
+    reason_lower_str,
+    reason_state_str,
+    reason_upper_str,
+)
 from src.a10_belief_calc.belief_calc_config import get_belief_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
@@ -203,8 +216,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "coin_label": x_coin_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
-        "reason_context": x_reason_context,
-        "reason_active_requisite": x_reason_active_requisite,
+        reason_context_str(): x_reason_context,
+        reason_active_requisite_str(): x_reason_active_requisite,
         "_chore": x__chore,
         "_status": x__status,
         "_rplan_active_value": x__rplan_active_value,
@@ -265,16 +278,16 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x__chore = 7
     x__status = 8
     values_dict = {
-        "coin_label": x_coin_label,
-        "belief_name": x_belief_name,
-        "plan_rope": x_rope,
-        "reason_context": x_reason_context,
-        "reason_state": x_reason_state,
-        "reason_upper": x_reason_upper,
-        "reason_lower": x_reason_lower,
-        "reason_divisor": x_reason_divisor,
-        "_chore": x__chore,
-        "_status": x__status,
+        coin_label_str(): x_coin_label,
+        belief_name_str(): x_belief_name,
+        plan_rope_str(): x_rope,
+        reason_context_str(): x_reason_context,
+        reason_state_str(): x_reason_state,
+        reason_upper_str(): x_reason_upper,
+        reason_lower_str(): x_reason_lower,
+        reason_divisor_str(): x_reason_divisor,
+        _chore_str(): x__chore,
+        _status_str(): x__status,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

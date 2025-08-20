@@ -31,6 +31,11 @@ from src.a06_belief_logic.test._util.a06_str import (
     party_title_str,
     plan_rope_str,
     reason_active_requisite_str,
+    reason_context_str,
+    reason_divisor_str,
+    reason_lower_str,
+    reason_state_str,
+    reason_upper_str,
     stop_want_str,
     take_force_str,
     task_str,
@@ -740,11 +745,11 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reason_
         belief_plan_reason_caseunit_str(), UPDATE_str()
     )
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey("reason_context", knee_rope)
-    update_disc_beliefatom.set_jkey("reason_state", damaged_rope)
-    update_disc_beliefatom.set_jvalue("reason_lower", damaged_reason_lower)
-    update_disc_beliefatom.set_jvalue("reason_upper", damaged_reason_upper)
-    update_disc_beliefatom.set_jvalue("reason_divisor", damaged_reason_divisor)
+    update_disc_beliefatom.set_jkey(reason_context_str(), knee_rope)
+    update_disc_beliefatom.set_jkey(reason_state_str(), damaged_rope)
+    update_disc_beliefatom.set_jvalue(reason_lower_str(), damaged_reason_lower)
+    update_disc_beliefatom.set_jvalue(reason_upper_str(), damaged_reason_upper)
+    update_disc_beliefatom.set_jvalue(reason_divisor_str(), damaged_reason_divisor)
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
@@ -795,11 +800,11 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reason_
         belief_plan_reason_caseunit_str(), INSERT_str()
     )
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey("reason_context", knee_rope)
-    update_disc_beliefatom.set_jkey("reason_state", medical_rope)
-    update_disc_beliefatom.set_jvalue("reason_lower", medical_reason_lower)
-    update_disc_beliefatom.set_jvalue("reason_upper", medical_reason_upper)
-    update_disc_beliefatom.set_jvalue("reason_divisor", medical_reason_divisor)
+    update_disc_beliefatom.set_jkey(reason_context_str(), knee_rope)
+    update_disc_beliefatom.set_jkey(reason_state_str(), medical_rope)
+    update_disc_beliefatom.set_jvalue(reason_lower_str(), medical_reason_lower)
+    update_disc_beliefatom.set_jvalue(reason_upper_str(), medical_reason_upper)
+    update_disc_beliefatom.set_jvalue(reason_divisor_str(), medical_reason_divisor)
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
@@ -851,8 +856,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reason_
         belief_plan_reason_caseunit_str(), DELETE_str()
     )
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey("reason_context", knee_rope)
-    update_disc_beliefatom.set_jkey("reason_state", medical_rope)
+    update_disc_beliefatom.set_jkey(reason_context_str(), knee_rope)
+    update_disc_beliefatom.set_jkey(reason_state_str(), medical_rope)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
     after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)

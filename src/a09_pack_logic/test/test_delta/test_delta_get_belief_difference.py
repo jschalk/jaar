@@ -33,6 +33,11 @@ from src.a06_belief_logic.test._util.a06_str import (
     party_title_str,
     plan_rope_str,
     reason_active_requisite_str,
+    reason_context_str,
+    reason_divisor_str,
+    reason_lower_str,
+    reason_state_str,
+    reason_upper_str,
     star_str,
     take_force_str,
     task_str,
@@ -856,11 +861,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value("reason_context") == knee_rope
-    assert ball_beliefatom.get_value("reason_state") == damaged_rope
-    assert ball_beliefatom.get_value("reason_lower") == damaged_reason_lower
-    assert ball_beliefatom.get_value("reason_upper") == damaged_reason_upper
-    assert ball_beliefatom.get_value("reason_divisor") == damaged_reason_divisor
+    assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
+    assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
+    assert ball_beliefatom.get_value(reason_lower_str()) == damaged_reason_lower
+    assert ball_beliefatom.get_value(reason_upper_str()) == damaged_reason_upper
+    assert ball_beliefatom.get_value(reason_divisor_str()) == damaged_reason_divisor
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -918,8 +923,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value("reason_context") == knee_rope
-    assert ball_beliefatom.get_value("reason_state") == damaged_rope
+    assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
+    assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -984,11 +989,13 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value("reason_context") == knee_rope
-    assert ball_beliefatom.get_value("reason_state") == damaged_rope
-    assert ball_beliefatom.get_value("reason_lower") == after_damaged_reason_lower
-    assert ball_beliefatom.get_value("reason_upper") == after_damaged_reason_upper
-    assert ball_beliefatom.get_value("reason_divisor") == after_damaged_reason_divisor
+    assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
+    assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
+    assert ball_beliefatom.get_value(reason_lower_str()) == after_damaged_reason_lower
+    assert ball_beliefatom.get_value(reason_upper_str()) == after_damaged_reason_upper
+    assert (
+        ball_beliefatom.get_value(reason_divisor_str()) == after_damaged_reason_divisor
+    )
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 

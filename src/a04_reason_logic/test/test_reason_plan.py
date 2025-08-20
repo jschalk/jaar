@@ -13,9 +13,11 @@ from src.a04_reason_logic.reason_plan import (
     reasonunit_shop,
 )
 from src.a04_reason_logic.test._util.a04_str import (
+    cases_str,
     knot_str,
     reason_active_requisite_str,
     reason_context_str,
+    reason_state_str,
 )
 
 
@@ -40,7 +42,7 @@ def test_ReasonCore_Exists():
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         knot_str(),
-        "cases",
+        cases_str(),
         reason_active_requisite_str(),
         reason_context_str(),
     }
@@ -266,7 +268,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWithSinglethu_caseequireds():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        "cases": {wed_rope: {"reason_state": wed_rope}},
+        cases_str(): {wed_rope: {reason_state_str(): wed_rope}},
     }
     print(wk_reason_dict)
     assert wk_reason_dict == static_wk_reason_dict
@@ -315,9 +317,9 @@ def test_ReasonUnit_to_dict_ReturnsDictWithTwoCasesReasons():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        "cases": {
-            wed_rope: {"reason_state": wed_rope},
-            thu_rope: {"reason_state": thu_rope},
+        cases_str(): {
+            wed_rope: {reason_state_str(): wed_rope},
+            thu_rope: {reason_state_str(): thu_rope},
         },
     }
     print(wk_reason_dict)

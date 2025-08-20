@@ -14,6 +14,10 @@ def _status_str() -> str:
     return "_status"
 
 
+def cases_str() -> str:
+    return "cases"
+
+
 def coin_label_str() -> str:
     return "coin_label"
 

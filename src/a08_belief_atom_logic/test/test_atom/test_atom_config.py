@@ -42,6 +42,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     plan_rope_str,
     planroot_str,
     reason_context_str,
+    reason_state_str,
     respect_bit_str,
     solo_str,
     stop_want_str,
@@ -389,7 +390,11 @@ def test_get_sorted_jkey_keys_ReturnsObj_belief_plan_reason_caseunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [plan_rope_str(), reason_context_str(), "reason_state"]
+    assert x_sorted_jkey_keys == [
+        plan_rope_str(),
+        reason_context_str(),
+        reason_state_str(),
+    ]
 
 
 def test_get_flattened_atom_table_build_ReturnsObj():
@@ -657,7 +662,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get("reason_state") == RopeTerm_str()
+    assert x_class_types.get(reason_state_str()) == RopeTerm_str()
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("reason_lower") == "float"

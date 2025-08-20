@@ -38,6 +38,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     plan_rope_str,
     reason_active_requisite_str,
     reason_context_str,
+    reason_state_str,
     star_str,
     stop_want_str,
     take_force_str,
@@ -288,7 +289,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     thur_atom = beliefatom_shop(belief_plan_reason_caseunit_str(), INSERT_str())
     thur_atom.set_arg(plan_rope_str(), clean_rope)
     thur_atom.set_arg(reason_context_str(), week_rope)
-    thur_atom.set_arg("reason_state", thur_rope)
+    thur_atom.set_arg(reason_state_str(), thur_rope)
     assert thur_atom.is_valid()
     thur_atom.set_arg("reason_divisor", thur_reason_divisor)
     thur_jkeys = thur_atom.get_jkeys_dict()
