@@ -3,12 +3,12 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.a06_believer_logic.test._util.a06_str import partner_name_str
+from src.a06_belief_logic.test._util.a06_str import partner_name_str
 from src.a07_timeline_logic.test._util.a07_str import creg_str, time_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
     amount_str,
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     celldepth_str,
     coin_label_str,
@@ -65,7 +65,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         face_name_str(),
         event_int_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -89,16 +89,16 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     coinunit_sound_raw = prime_tbl("coinunit", "s", "raw")
     coinunit_sound_agg = prime_tbl("coinunit", "s", "agg")
     coinunit_sound_vld = prime_tbl("coinunit", "s", "vld")
-    blrunit_sound_put_raw = prime_tbl("believerunit", "s", "raw", "put")
-    blrunit_sound_put_agg = prime_tbl("believerunit", "s", "agg", "put")
-    blrunit_sound_put_vld = prime_tbl("believerunit", "s", "vld", "put")
+    blrunit_sound_put_raw = prime_tbl("beliefunit", "s", "raw", "put")
+    blrunit_sound_put_agg = prime_tbl("beliefunit", "s", "agg", "put")
+    blrunit_sound_put_vld = prime_tbl("beliefunit", "s", "vld", "put")
     blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
     blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
     blrpern_sound_put_vld = prime_tbl("blrpern", "s", "vld", "put")
     coinunit_voice_raw = prime_tbl("coinunit", "v", "raw")
     coinunit_voice_agg = prime_tbl("coinunit", "v", "agg")
-    blrunit_voice_put_raw = prime_tbl("believerunit", "v", "raw", "put")
-    blrunit_voice_put_agg = prime_tbl("believerunit", "v", "agg", "put")
+    blrunit_voice_put_raw = prime_tbl("beliefunit", "v", "raw", "put")
+    blrunit_voice_put_agg = prime_tbl("beliefunit", "v", "agg", "put")
     blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
     blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
     mstr_dir = fay_world._coin_mstr_dir
@@ -147,8 +147,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, coin_kpi001_partner_nets_str())
         assert not os_path_exists(last_run_metrics_path)
 
-        # # create believerunits
-        # self.believer_tables_to_event_believer_csvs(cursor)
+        # # create beliefunits
+        # self.belief_tables_to_event_belief_csvs(cursor)
 
         # # create all coin_job and mandate reports
         # self.calc_coin_bud_partner_mandate_net_ledgers()
@@ -158,12 +158,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
 
         # THEN
         # select_pidgin_core = f"SELECT * FROM {pidcore_sound_vld}"
-        # select_believerunit_put = f"SELECT * FROM {blrunit_sound_put_agg}"
+        # select_beliefunit_put = f"SELECT * FROM {blrunit_sound_put_agg}"
         # select_blrpern_put = f"SELECT * FROM {blrpern_sound_put_agg}"
         # select_coinunit_put_raw = f"SELECT * FROM {coinunit_sound_raw}"
         # select_coinunit_put_agg = f"SELECT * FROM {coinunit_sound_agg}"
         # print(f"{cursor.execute(select_pidgin_core).fetchall()=}")
-        # print(f"{cursor.execute(select_believerunit_put).fetchall()=}")
+        # print(f"{cursor.execute(select_beliefunit_put).fetchall()=}")
         # print(f"{cursor.execute(select_blrpern_put).fetchall()=}")
         # print(f"{cursor.execute(select_coinunit_put_raw).fetchall()=}")
         # print(f"{cursor.execute(select_coinunit_put_agg).fetchall()=}")
@@ -228,7 +228,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         face_name_str(),
         event_int_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -245,7 +245,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -271,14 +271,14 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     pidcore_sound_vld = prime_tbl("pidcore", "s", "vld")
     coinunit_sound_raw = prime_tbl("coinunit", "s", "raw")
     coinunit_sound_agg = prime_tbl("coinunit", "s", "agg")
-    blrunit_sound_put_raw = prime_tbl("believerunit", "s", "raw", "put")
-    blrunit_sound_put_agg = prime_tbl("believerunit", "s", "agg", "put")
+    blrunit_sound_put_raw = prime_tbl("beliefunit", "s", "raw", "put")
+    blrunit_sound_put_agg = prime_tbl("beliefunit", "s", "agg", "put")
     blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
     blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
     coinunit_voice_raw = prime_tbl("coinunit", "v", "raw")
     coinunit_voice_agg = prime_tbl("coinunit", "v", "agg")
-    blrunit_voice_put_raw = prime_tbl("believerunit", "v", "raw", "put")
-    blrunit_voice_put_agg = prime_tbl("believerunit", "v", "agg", "put")
+    blrunit_voice_put_raw = prime_tbl("beliefunit", "v", "raw", "put")
+    blrunit_voice_put_agg = prime_tbl("beliefunit", "v", "agg", "put")
     blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
     blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
     mstr_dir = fay_world._coin_mstr_dir
@@ -323,8 +323,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, coin_kpi001_partner_nets_str())
         # self.coin_agg_tables_to_coin_ote1_agg(cursor)
 
-        # # create believerunits
-        # self.believer_tables_to_event_believer_csvs(cursor)
+        # # create beliefunits
+        # self.belief_tables_to_event_belief_csvs(cursor)
 
         # # create all coin_job and mandate reports
         # self.calc_coin_bud_partner_mandate_net_ledgers()
@@ -385,7 +385,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateCoinTra
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         tran_time_str(),
         amount_str(),
@@ -425,7 +425,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoCoinIdeas
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -500,7 +500,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -527,7 +527,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -578,7 +578,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         face_name_str(),
         event_int_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -595,7 +595,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -628,14 +628,14 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_vld = prime_tbl("pidcore", "s", "vld")
         coinunit_sound_raw = prime_tbl("coinunit", "s", "raw")
         coinunit_sound_agg = prime_tbl("coinunit", "s", "agg")
-        blrunit_sound_put_raw = prime_tbl("believerunit", "s", "raw", "put")
-        blrunit_sound_put_agg = prime_tbl("believerunit", "s", "agg", "put")
+        blrunit_sound_put_raw = prime_tbl("beliefunit", "s", "raw", "put")
+        blrunit_sound_put_agg = prime_tbl("beliefunit", "s", "agg", "put")
         blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
         blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
         coinunit_voice_raw = prime_tbl("coinunit", "v", "raw")
         coinunit_voice_agg = prime_tbl("coinunit", "v", "agg")
-        blrunit_voice_put_raw = prime_tbl("believerunit", "v", "raw", "put")
-        blrunit_voice_put_agg = prime_tbl("believerunit", "v", "agg", "put")
+        blrunit_voice_put_raw = prime_tbl("beliefunit", "v", "raw", "put")
+        blrunit_voice_put_agg = prime_tbl("beliefunit", "v", "agg", "put")
         blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
         blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
 

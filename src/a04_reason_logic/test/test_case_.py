@@ -382,11 +382,11 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     after_str = "afternoon"
     after_rope = create_rope(wk_rope, after_str)
     case_2 = caseunit_shop(reason_state=after_rope)
-    believer_fact_2 = None
+    belief_fact_2 = None
     assert case_2._status is None
 
     # WHEN
-    case_2.set_status(x_factheir=believer_fact_2)
+    case_2.set_status(x_factheir=belief_fact_2)
 
     # THEN
     assert case_2._status is False
@@ -399,11 +399,11 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
-    believer_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
+    belief_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
     assert wed_case._status is None
 
     # WHEN
-    wed_case.set_status(x_factheir=believer_fact)
+    wed_case.set_status(x_factheir=belief_fact)
 
     # THEN
     assert wed_case._status
@@ -684,10 +684,10 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_case._status is None
 
     # WHEN
-    believer_fact = factheir_shop(
+    belief_fact = factheir_shop(
         fact_context=hr24_rope, fact_state=hr24_rope, fact_lower=8, fact_upper=10
     )
-    hr24_case.set_status(x_factheir=believer_fact)
+    hr24_case.set_status(x_factheir=belief_fact)
 
     # THEN
     assert hr24_case._status is False
@@ -721,13 +721,13 @@ def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
     wk_case = caseunit_shop(
         reason_state=wk_rope, reason_divisor=6, reason_lower=1, reason_upper=1
     )
-    believer_fact = factheir_shop(
+    belief_fact = factheir_shop(
         fact_context=wk_rope, fact_state=wk_rope, fact_lower=7, fact_upper=7
     )
     assert wk_case._status is None
 
     # WHEN
-    wk_case.set_status(x_factheir=believer_fact)
+    wk_case.set_status(x_factheir=belief_fact)
 
     # THEN
     assert wk_case._status

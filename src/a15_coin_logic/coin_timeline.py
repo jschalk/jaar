@@ -1,21 +1,21 @@
 from src.a01_term_logic.rope import create_rope
-from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
+from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a07_timeline_logic.timeline_main import (
-    BelieverTimelinePoint,
+    BeliefTimelinePoint,
     add_newtimeline_planunit,
-    believertimelinepoint_shop,
+    belieftimelinepoint_shop,
     get_timeline_rope,
     timeline_config_shop,
 )
 from src.a15_coin_logic.coin_main import CoinUnit
 
 
-def get_coin_believertimelinepoint(coinunit: CoinUnit) -> BelieverTimelinePoint:
-    """Returns BelieverTimelinePoint from CoinUnit attributes."""
+def get_coin_belieftimelinepoint(coinunit: CoinUnit) -> BeliefTimelinePoint:
+    """Returns BeliefTimelinePoint from CoinUnit attributes."""
     coinunit.set_offi_time_max(0)
-    # create empty believerunit
-    x_believerunit = believerunit_shop(
-        believer_name="for_believertimelinepoint_calculation",
+    # create empty beliefunit
+    x_beliefunit = beliefunit_shop(
+        belief_name="for_belieftimelinepoint_calculation",
         coin_label=coinunit.coin_label,
         knot=coinunit.knot,
         fund_iota=coinunit.fund_iota,
@@ -29,9 +29,7 @@ def get_coin_believertimelinepoint(coinunit: CoinUnit) -> BelieverTimelinePoint:
     )
     coin_timeline_config = coinunit.timeline.to_dict()
     # create timeline plan from coinunit.timeline_config
-    add_newtimeline_planunit(x_believerunit, coin_timeline_config)
-    x_believertimelinepoint = believertimelinepoint_shop(
-        x_believerunit, timeline_rope, 0
-    )
-    x_believertimelinepoint.calc_timeline()
-    return x_believertimelinepoint
+    add_newtimeline_planunit(x_beliefunit, coin_timeline_config)
+    x_belieftimelinepoint = belieftimelinepoint_shop(x_beliefunit, timeline_rope, 0)
+    x_belieftimelinepoint.calc_timeline()
+    return x_belieftimelinepoint

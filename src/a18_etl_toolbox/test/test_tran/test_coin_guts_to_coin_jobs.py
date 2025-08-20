@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_believer_logic.believer_main import (
-    believerunit_shop,
-    get_from_json as believerunit_get_from_json,
+from src.a06_belief_logic.belief_main import (
+    beliefunit_shop,
+    get_from_json as beliefunit_get_from_json,
 )
 from src.a12_hub_toolbox.a12_path import (
     create_coin_json_path,
@@ -29,7 +29,7 @@ def test_etl_coin_guts_to_coin_jobs_SetsFiles_Scenario0(
     credit88 = 88
     a23_str = "amy23"
     coin_mstr_dir = get_module_temp_dir()
-    bob_gut = believerunit_shop(bob_inx, a23_str)
+    bob_gut = beliefunit_shop(bob_inx, a23_str)
     bob_gut.add_partnerunit(bob_inx, credit77)
     bob_gut.add_partnerunit(yao_inx, credit44)
     bob_gut.add_partnerunit(bob_inx, credit77)
@@ -50,8 +50,8 @@ def test_etl_coin_guts_to_coin_jobs_SetsFiles_Scenario0(
 
     # THEN
     assert os_path_exists(a23_bob_job_path)
-    generated_job = believerunit_get_from_json(open_file(a23_bob_job_path))
-    expected_job = believerunit_shop(bob_inx, a23_str)
+    generated_job = beliefunit_get_from_json(open_file(a23_bob_job_path))
+    expected_job = beliefunit_shop(bob_inx, a23_str)
     expected_job.add_partnerunit(bob_inx, credit77)
     expected_job.add_partnerunit(yao_inx, credit44)
     expected_job.add_partnerunit(bob_inx, credit77)

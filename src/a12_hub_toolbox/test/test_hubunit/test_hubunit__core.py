@@ -9,7 +9,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_plan_logic.plan import get_default_coin_label as root_label
 from src.a12_hub_toolbox.a12_path import (
-    create_believer_dir_path,
+    create_belief_dir_path,
     create_keep_rope_path,
     create_treasury_db_path,
 )
@@ -27,7 +27,7 @@ def test_HubUnit_Exists():
     # THEN
     assert not x_hubunit.coin_mstr_dir
     assert not x_hubunit.coin_label
-    assert not x_hubunit.believer_name
+    assert not x_hubunit.belief_name
     assert not x_hubunit.keep_rope
     assert not x_hubunit.knot
     assert not x_hubunit.fund_pool
@@ -56,7 +56,7 @@ def test_hubunit_shop_ReturnsObj():
     x_hubunit = hubunit_shop(
         coin_mstr_dir=x_coin_mstr_dir,
         coin_label=x_coin_label,
-        believer_name=sue_str,
+        belief_name=sue_str,
         keep_rope=None,
         knot=x_knot,
         fund_pool=x_fund_pool,
@@ -69,14 +69,14 @@ def test_hubunit_shop_ReturnsObj():
     # THEN
     assert x_hubunit.coin_mstr_dir == x_coin_mstr_dir
     assert x_hubunit.coin_label == x_coin_label
-    assert x_hubunit.believer_name == sue_str
+    assert x_hubunit.belief_name == sue_str
     assert x_hubunit.knot == x_knot
     assert x_hubunit.fund_pool == x_fund_pool
     assert x_hubunit.fund_iota == x_fund_iota
     assert x_hubunit.respect_bit == x_respect_bit
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
-    sue_dir = create_believer_dir_path(x_coin_mstr_dir, x_coin_label, sue_str)
+    sue_dir = create_belief_dir_path(x_coin_mstr_dir, x_coin_label, sue_str)
     assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
@@ -106,7 +106,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
 
     assert sue_hubunit.coin_mstr_dir == coin_mstr_dir
     assert sue_hubunit.coin_label == amy23_str
-    assert sue_hubunit.believer_name == sue_str
+    assert sue_hubunit.belief_name == sue_str
     assert sue_hubunit.knot == default_knot_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
     assert sue_hubunit.fund_iota == default_fund_iota_if_None()
@@ -124,14 +124,14 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
 
 
-def test_hubunit_shop_RaisesErrorIf_believer_name_Contains_knot():
+def test_hubunit_shop_RaisesErrorIf_belief_name_Contains_knot():
     # ESTABLISH
     slash_str = "/"
     bob_str = f"Bob{slash_str}Sue"
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        hubunit_shop(None, None, believer_name=bob_str, knot=slash_str)
+        hubunit_shop(None, None, belief_name=bob_str, knot=slash_str)
     assertion_fail_str = (
         f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{slash_str}'"
     )

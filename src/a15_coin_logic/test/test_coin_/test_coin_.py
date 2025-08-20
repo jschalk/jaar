@@ -8,11 +8,11 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a11_bud_logic.bud import tranbook_shop
 from src.a12_hub_toolbox.a12_path import (
-    create_believer_dir_path,
+    create_belief_dir_path,
     create_keep_dutys_path,
     create_path,
 )
@@ -69,7 +69,7 @@ def test_CoinUnit_Exists():
     assert not amy_coin.coin_mstr_dir
     # Calculated fields
     assert not amy_coin._offi_time_max
-    assert not amy_coin._believers_dir
+    assert not amy_coin._beliefs_dir
     assert not amy_coin._packs_dir
     assert not amy_coin._all_tranbook
     assert set(amy_coin.__dict__) == {
@@ -87,7 +87,7 @@ def test_CoinUnit_Exists():
         "coin_mstr_dir",
         "_all_tranbook",
         "_offi_time_max",
-        "_believers_dir",
+        "_beliefs_dir",
         "_packs_dir",
     }
 
@@ -112,7 +112,7 @@ def test_coinunit_shop_ReturnsCoinUnit():
     assert a23_coin.coin_mstr_dir == get_module_temp_dir()
     assert a23_coin.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
-    assert a23_coin._believers_dir != None
+    assert a23_coin._beliefs_dir != None
     assert a23_coin._packs_dir != None
     assert a23_coin._all_tranbook == tranbook_shop(a23_str)
 
@@ -127,7 +127,7 @@ def test_coinunit_shop_ReturnsCoinUnitWith_coins_dir(env_dir_setup_cleanup):
     # THEN
     assert a23_coin.coin_label == a23_str
     assert a23_coin.coin_mstr_dir == get_module_temp_dir()
-    assert a23_coin._believers_dir is not None
+    assert a23_coin._beliefs_dir is not None
     assert a23_coin._packs_dir is not None
 
 
@@ -168,15 +168,15 @@ def test_CoinUnit_set_coin_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
     amy_coin = CoinUnit(a23_str, get_module_temp_dir())
     x_coins_dir = create_path(get_module_temp_dir(), "coins")
     x_coin_dir = create_path(x_coins_dir, a23_str)
-    x_believers_dir = create_path(x_coin_dir, "believers")
+    x_beliefs_dir = create_path(x_coin_dir, "beliefs")
     x_packs_dir = create_path(x_coin_dir, "packs")
 
     assert not amy_coin._coin_dir
-    assert not amy_coin._believers_dir
+    assert not amy_coin._beliefs_dir
     assert not amy_coin._packs_dir
     assert os_path_exists(x_coin_dir) is False
     assert os_path_isdir(x_coin_dir) is False
-    assert os_path_exists(x_believers_dir) is False
+    assert os_path_exists(x_beliefs_dir) is False
     assert os_path_exists(x_packs_dir) is False
 
     # WHEN
@@ -184,11 +184,11 @@ def test_CoinUnit_set_coin_dirs_SetsDirsAndFiles(env_dir_setup_cleanup):
 
     # THEN
     assert amy_coin._coin_dir == x_coin_dir
-    assert amy_coin._believers_dir == x_believers_dir
+    assert amy_coin._beliefs_dir == x_beliefs_dir
     assert amy_coin._packs_dir == x_packs_dir
     assert os_path_exists(x_coin_dir)
     assert os_path_isdir(x_coin_dir)
-    assert os_path_exists(x_believers_dir)
+    assert os_path_exists(x_beliefs_dir)
     assert os_path_exists(x_packs_dir)
 
 
@@ -203,10 +203,10 @@ def test_coinunit_shop_SetscoinsDirs(env_dir_setup_cleanup):
     assert a23_coin.coin_label == a23_str
     x_coins_dir = create_path(get_module_temp_dir(), "coins")
     assert a23_coin._coin_dir == create_path(x_coins_dir, a23_str)
-    assert a23_coin._believers_dir == create_path(a23_coin._coin_dir, "believers")
+    assert a23_coin._beliefs_dir == create_path(a23_coin._coin_dir, "beliefs")
 
 
-def test_CoinUnit_create_empty_believer_from_coin_ReturnsObj_Scenario0(
+def test_CoinUnit_create_empty_belief_from_coin_ReturnsObj_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -227,16 +227,16 @@ def test_CoinUnit_create_empty_believer_from_coin_ReturnsObj_Scenario0(
     sue_str = "Sue"
 
     # WHEN
-    generated_believer = a23_coin.create_empty_believer_from_coin(sue_str)
+    generated_belief = a23_coin.create_empty_belief_from_coin(sue_str)
 
     # THEN
-    assert generated_believer.knot == slash_str
-    assert generated_believer.fund_iota == x_fund_iota
-    assert generated_believer.respect_bit == x_respect_bit
-    assert generated_believer.penny == x_penny
+    assert generated_belief.knot == slash_str
+    assert generated_belief.fund_iota == x_fund_iota
+    assert generated_belief.respect_bit == x_respect_bit
+    assert generated_belief.penny == x_penny
 
 
-def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_believer_dir_ExistsNoFile(
+def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_belief_dir_ExistsNoFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -244,8 +244,8 @@ def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_believer_dir
     a23_str = "amy23"
     a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
     sue_str = "Sue"
-    sue_believer_dir = create_believer_dir_path(coin_mstr_dir, a23_str, sue_str)
-    assert not os_path_exists(sue_believer_dir)
+    sue_belief_dir = create_belief_dir_path(coin_mstr_dir, a23_str, sue_str)
+    assert not os_path_exists(sue_belief_dir)
     assert not gut_file_exists(coin_mstr_dir, a23_str, sue_str)
 
     # WHEN
@@ -254,11 +254,11 @@ def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_believer_dir
     # THEN
     print(f"{coin_mstr_dir=}")
     assert gut_file_exists(coin_mstr_dir, a23_str, sue_str)
-    expected_sue_gut = believerunit_shop(sue_str, a23_str)
+    expected_sue_gut = beliefunit_shop(sue_str, a23_str)
     assert open_gut_file(coin_mstr_dir, a23_str, sue_str) == expected_sue_gut
 
 
-def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_believer_dir_ExistsNoFile_Create_gut_AndConfirmCoinAttributesPassed(
+def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir_ExistsNoFile_Create_gut_AndConfirmCoinAttributesPassed(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -277,9 +277,9 @@ def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_believer_dir
         penny=x_penny,
     )
     sue_str = "Sue"
-    sue_believer_dir = create_believer_dir_path(coin_mstr_dir, a23_str, sue_str)
-    set_dir(sue_believer_dir)
-    assert os_path_exists(sue_believer_dir)
+    sue_belief_dir = create_belief_dir_path(coin_mstr_dir, a23_str, sue_str)
+    set_dir(sue_belief_dir)
+    assert os_path_exists(sue_belief_dir)
     assert not gut_file_exists(coin_mstr_dir, a23_str, sue_str)
 
     # WHEN
@@ -304,11 +304,11 @@ def test_CoinUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExistsIs
     a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_gut = believerunit_shop(sue_str, a23_str)
+    sue_gut = beliefunit_shop(sue_str, a23_str)
     sue_gut.add_partnerunit(bob_str)
     save_gut_file(coin_mstr_dir, sue_gut)
-    sue_believer_dir = create_believer_dir_path(coin_mstr_dir, a23_str, sue_str)
-    assert os_path_exists(sue_believer_dir)
+    sue_belief_dir = create_belief_dir_path(coin_mstr_dir, a23_str, sue_str)
+    assert os_path_exists(sue_belief_dir)
     assert gut_file_exists(coin_mstr_dir, a23_str, sue_str)
 
     # WHEN
@@ -365,7 +365,7 @@ def test_CoinUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     )
     bob_str = "Bob"
     sue_str = "Sue"
-    x0_sue_job = believerunit_shop(sue_str, a23_str)
+    x0_sue_job = beliefunit_shop(sue_str, a23_str)
     x0_sue_job.add_partnerunit(bob_str)
     save_job_file(coin_mstr_dir, x0_sue_job)
     assert open_job_file(coin_mstr_dir, a23_str, sue_str).get_partner(bob_str)
@@ -396,7 +396,7 @@ def test_CoinUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Partners(
     bob_str = "Bob"
     sue_str = "Sue"
     a23_coin.create_init_job_from_guts(sue_str)
-    sue_gut = believerunit_shop(sue_str, a23_str)
+    sue_gut = beliefunit_shop(sue_str, a23_str)
     sue_gut.add_partnerunit(bob_str)
     save_gut_file(coin_mstr_dir, sue_gut)
     assert not open_job_file(coin_mstr_dir, a23_str, sue_str).get_partner(bob_str)
@@ -429,11 +429,11 @@ def test_CoinUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
 
     # create Sue gut
     bob_str = "Bob"
-    sue_gut = believerunit_shop(sue_str, a23_str, knot=slash_str)
+    sue_gut = beliefunit_shop(sue_str, a23_str, knot=slash_str)
     sue_gut.add_partnerunit(bob_str)
     save_gut_file(coin_mstr_dir, sue_gut)
     # create Bob gut with agenda plan for Sue
-    bob_gut = believerunit_shop(bob_str, a23_str, knot=slash_str)
+    bob_gut = beliefunit_shop(bob_str, a23_str, knot=slash_str)
     bob_gut.add_partnerunit(sue_str)
     casa_rope = bob_gut.make_l1_rope("casa")
     clean_rope = bob_gut.make_rope(casa_rope, "clean")
@@ -463,33 +463,33 @@ def test_CoinUnit__set_all_healer_dutys_Setsdutys(
     yao_str = "Yao"
     a23_coin.create_init_job_from_guts(sue_str)
     a23_coin.create_init_job_from_guts(yao_str)
-    sue_gut_believer = open_gut_file(x_coin_mstr_dir, a23_str, sue_str)
-    yao_gut_believer = open_gut_file(x_coin_mstr_dir, a23_str, yao_str)
+    sue_gut_belief = open_gut_file(x_coin_mstr_dir, a23_str, sue_str)
+    yao_gut_belief = open_gut_file(x_coin_mstr_dir, a23_str, yao_str)
 
-    sue_gut_believer.add_partnerunit(sue_str)
-    sue_gut_believer.add_partnerunit(yao_str)
-    yao_gut_believer.add_partnerunit(sue_str)
-    yao_gut_believer.add_partnerunit(yao_str)
+    sue_gut_belief.add_partnerunit(sue_str)
+    sue_gut_belief.add_partnerunit(yao_str)
+    yao_gut_belief.add_partnerunit(sue_str)
+    yao_gut_belief.add_partnerunit(yao_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
-    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
-    yao_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    texas_rope = sue_gut_belief.make_l1_rope(texas_str)
+    sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    yao_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
+    dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
     dallas_healerunit = healerunit_shop({sue_str, yao_str})
     dallas_plan = planunit_shop(dallas_str, healerunit=dallas_healerunit)
     elpaso_str = "el paso"
-    elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
+    elpaso_rope = sue_gut_belief.make_rope(texas_rope, elpaso_str)
     elpaso_healerunit = healerunit_shop({sue_str})
     elpaso_plan = planunit_shop(elpaso_str, healerunit=elpaso_healerunit)
 
-    sue_gut_believer.set_plan(dallas_plan, texas_rope)
-    sue_gut_believer.set_plan(elpaso_plan, texas_rope)
-    yao_gut_believer.set_plan(dallas_plan, texas_rope)
-    yao_gut_believer.set_plan(elpaso_plan, texas_rope)
+    sue_gut_belief.set_plan(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
+    yao_gut_belief.set_plan(dallas_plan, texas_rope)
+    yao_gut_belief.set_plan(elpaso_plan, texas_rope)
 
-    save_gut_file(x_coin_mstr_dir, sue_gut_believer)
-    save_gut_file(x_coin_mstr_dir, yao_gut_believer)
+    save_gut_file(x_coin_mstr_dir, sue_gut_belief)
+    save_gut_file(x_coin_mstr_dir, yao_gut_belief)
     sue_filename = get_json_filename(sue_str)
     yao_filename = get_json_filename(yao_str)
 

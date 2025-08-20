@@ -24,9 +24,9 @@ from src.a18_etl_toolbox.transformers import (
     etl_create_bud_mandate_ledgers,
     etl_create_buds_root_cells,
     etl_create_coin_cell_trees,
-    etl_event_believer_csvs_to_pack_json,
-    etl_event_inherited_believerunits_to_coin_gut,
-    etl_event_pack_json_to_event_inherited_believerunits,
+    etl_event_belief_csvs_to_pack_json,
+    etl_event_inherited_beliefunits_to_coin_gut,
+    etl_event_pack_json_to_event_inherited_beliefunits,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_input_dfs_to_brick_raw_tables,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
@@ -37,7 +37,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_voice_raw_tables,
     etl_voice_agg_tables_to_coin_jsons,
-    etl_voice_agg_to_event_believer_csvs,
+    etl_voice_agg_to_event_belief_csvs,
     etl_voice_raw_tables_to_coin_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
     get_max_brick_agg_event_int,
@@ -139,13 +139,13 @@ class WorldUnit:
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
-        # voice raw to coin/believer jsons
+        # voice raw to coin/belief jsons
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
         etl_voice_agg_tables_to_coin_jsons(cursor, self._coin_mstr_dir)
-        etl_voice_agg_to_event_believer_csvs(cursor, self._coin_mstr_dir)
-        etl_event_believer_csvs_to_pack_json(self._coin_mstr_dir)
-        etl_event_pack_json_to_event_inherited_believerunits(self._coin_mstr_dir)
-        etl_event_inherited_believerunits_to_coin_gut(self._coin_mstr_dir)
+        etl_voice_agg_to_event_belief_csvs(cursor, self._coin_mstr_dir)
+        etl_event_belief_csvs_to_pack_json(self._coin_mstr_dir)
+        etl_event_pack_json_to_event_inherited_beliefunits(self._coin_mstr_dir)
+        etl_event_inherited_beliefunits_to_coin_gut(self._coin_mstr_dir)
         add_coin_timeline_to_guts(self._coin_mstr_dir)
         etl_coin_guts_to_coin_jobs(self._coin_mstr_dir)
         etl_voice_raw_tables_to_coin_ote1_agg(cursor)

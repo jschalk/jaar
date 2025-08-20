@@ -2,10 +2,7 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_believer_logic.test._util.a06_str import (
-    partner_name_str,
-    reason_context_str,
-)
+from src.a06_belief_logic.test._util.a06_str import partner_name_str, reason_context_str
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (

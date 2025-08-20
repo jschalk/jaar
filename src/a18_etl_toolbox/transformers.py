@@ -28,28 +28,28 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.a01_term_logic.term import EventInt, FaceName
-from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
-from src.a08_believer_atom_logic.atom_config import get_believer_dimens
-from src.a08_believer_atom_logic.atom_main import believeratom_shop
-from src.a09_pack_logic.delta import get_minimal_believerdelta
+from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.a08_belief_atom_logic.atom_config import get_belief_dimens
+from src.a08_belief_atom_logic.atom_main import beliefatom_shop
+from src.a09_pack_logic.delta import get_minimal_beliefdelta
 from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.a11_bud_logic.bud import TranBook
 from src.a12_hub_toolbox.a12_path import (
-    create_believer_event_dir_path,
-    create_believerevent_path,
+    create_belief_event_dir_path,
+    create_beliefevent_path,
     create_coin_json_path,
     create_event_all_pack_path,
     create_gut_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
-    collect_believer_event_dir_sets,
-    get_believers_downhill_event_ints,
-    open_believer_file,
+    collect_belief_event_dir_sets,
+    get_beliefs_downhill_event_ints,
+    open_belief_file,
     open_job_file,
 )
 from src.a15_coin_logic.coin_cell import (
     create_bud_mandate_ledgers,
-    create_coin_believers_cell_trees,
+    create_coin_beliefs_cell_trees,
     set_cell_tree_cell_mandates,
     set_cell_trees_decrees,
     set_cell_trees_found_facts,
@@ -85,7 +85,7 @@ from src.a18_etl_toolbox.a18_path import (
     create_coin_ote1_json_path,
     create_last_run_metrics_path,
 )
-from src.a18_etl_toolbox.db_obj_believer_tool import insert_job_obj
+from src.a18_etl_toolbox.db_obj_belief_tool import insert_job_obj
 from src.a18_etl_toolbox.db_obj_coin_tool import get_coin_dict_from_voice_tables
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -110,8 +110,8 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_update_pidtitl_sound_agg_knot_error_sqlstr,
     create_update_voice_raw_empty_inx_col_sqlstr,
     create_update_voice_raw_existing_inx_col_sqlstr,
-    get_believer_voice_agg_tablenames,
-    get_coin_believer_sound_agg_tablenames,
+    get_belief_voice_agg_tablenames,
+    get_coin_belief_sound_agg_tablenames,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_insert_voice_agg_sqlstrs,
@@ -369,12 +369,12 @@ def get_sound_raw_tablenames(
     valid_columns = set(get_table_columns(cursor, brick_valid_tablename))
     s_raw_tables = set()
     for dimen in dimens:
-        if dimen.lower().startswith("believer"):
-            believer_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
-            believer_del_columns = get_table_columns(cursor, believer_del_tablename)
-            delete_key = believer_del_columns[-1]
+        if dimen.lower().startswith("belief"):
+            belief_del_tablename = create_prime_tablename(dimen, "s", "raw", "del")
+            belief_del_columns = get_table_columns(cursor, belief_del_tablename)
+            delete_key = belief_del_columns[-1]
             if delete_key in valid_columns:
-                s_raw_tables.add(believer_del_tablename)
+                s_raw_tables.add(belief_del_tablename)
             else:
                 s_raw_tables.add(create_prime_tablename(dimen, "s", "raw", "put"))
         else:
@@ -471,7 +471,7 @@ def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cur
         cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
 
 
-def set_coin_believer_sound_agg_knot_errors(cursor: sqlite3_Cursor):
+def set_coin_belief_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_label_args = get_pidgin_LabelTerm_args()
     pidgin_name_args = get_pidgin_NameTerm_args()
     pidgin_title_args = get_pidgin_TitleTerm_args()
@@ -480,7 +480,7 @@ def set_coin_believer_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
     pidgin_args.update(pidgin_rope_args)
-    pidginable_tuples = get_coin_believer_sound_agg_pidginable_columns(
+    pidginable_tuples = get_coin_belief_sound_agg_pidginable_columns(
         cursor, pidgin_args
     )
     for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
@@ -497,7 +497,7 @@ def set_coin_believer_sound_agg_knot_errors(cursor: sqlite3_Cursor):
             cursor.execute(error_update_sqlstr)
 
 
-def get_coin_believer_sound_agg_pidginable_columns(
+def get_coin_belief_sound_agg_pidginable_columns(
     cursor: sqlite3_Cursor, pidgin_args: set[str]
 ) -> set[tuple[str, str]]:
     pidgin_columns = set()
@@ -511,11 +511,11 @@ def get_coin_believer_sound_agg_pidginable_columns(
 
 
 def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
-    for agg_tablename in get_coin_believer_sound_agg_tablenames():
+    for agg_tablename in get_coin_belief_sound_agg_tablenames():
         insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
             default_knot=default_knot_if_None(),
             default_unknown=default_unknown_str_if_None(),
-            coin_believer_sound_agg_tablename=agg_tablename,
+            coin_belief_sound_agg_tablename=agg_tablename,
         )
         cursor.execute(insert_sqlstr)
 
@@ -665,7 +665,7 @@ def etl_voice_raw_tables_to_coin_ote1_agg(conn_or_cursor: sqlite3_Connection):
 def etl_coin_ote1_agg_table_to_coin_ote1_agg_csvs(
     conn_or_cursor: sqlite3_Connection, coin_mstr_dir: str
 ):
-    empty_ote1_csv_str = """coin_label,believer_name,event_int,bud_time,error_message
+    empty_ote1_csv_str = """coin_label,belief_name,event_int,bud_time,error_message
 """
     coins_dir = create_path(coin_mstr_dir, "coins")
     for coin_label in get_level1_dirs(coins_dir):
@@ -684,13 +684,13 @@ def etl_coin_ote1_agg_csvs_to_jsons(coin_mstr_dir: str):
         x_dict = {}
         header_row = csv_arrays.pop(0)
         for row in csv_arrays:
-            believer_name = row[1]
+            belief_name = row[1]
             event_int = row[2]
             bud_time = row[3]
-            if x_dict.get(believer_name) is None:
-                x_dict[believer_name] = {}
-            believer_dict = x_dict.get(believer_name)
-            believer_dict[int(bud_time)] = event_int
+            if x_dict.get(belief_name) is None:
+                x_dict[belief_name] = {}
+            belief_dict = x_dict.get(belief_name)
+            belief_dict[int(bud_time)] = event_int
         json_path = create_coin_ote1_json_path(coin_mstr_dir, coin_label)
         save_json(json_path, None, x_dict)
 
@@ -709,7 +709,7 @@ def etl_create_buds_root_cells(coin_mstr_dir: str):
 def etl_create_coin_cell_trees(coin_mstr_dir: str):
     coins_dir = create_path(coin_mstr_dir, "coins")
     for coin_label in get_level1_dirs(coins_dir):
-        create_coin_believers_cell_trees(coin_mstr_dir, coin_label)
+        create_coin_beliefs_cell_trees(coin_mstr_dir, coin_label)
 
 
 def etl_set_cell_trees_found_facts(coin_mstr_dir: str):
@@ -736,151 +736,149 @@ def etl_create_bud_mandate_ledgers(coin_mstr_dir: str):
         create_bud_mandate_ledgers(coin_mstr_dir, coin_label)
 
 
-def etl_voice_agg_to_event_believer_csvs(
+def etl_voice_agg_to_event_belief_csvs(
     conn_or_cursor: sqlite3_Connection, coin_mstr_dir: str
 ):
     coins_dir = create_path(coin_mstr_dir, "coins")
-    for believer_table in get_believer_voice_agg_tablenames():
-        if get_row_count(conn_or_cursor, believer_table) > 0:
+    for belief_table in get_belief_voice_agg_tablenames():
+        if get_row_count(conn_or_cursor, belief_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
-                tablename=believer_table,
-                key_columns=["coin_label", "believer_name", "event_int"],
+                tablename=belief_table,
+                key_columns=["coin_label", "belief_name", "event_int"],
                 dst_dir=coins_dir,
-                col1_prefix="believers",
+                col1_prefix="beliefs",
                 col2_prefix="events",
             )
 
 
-def etl_event_believer_csvs_to_pack_json(coin_mstr_dir: str):
+def etl_event_belief_csvs_to_pack_json(coin_mstr_dir: str):
     coins_dir = create_path(coin_mstr_dir, "coins")
     for coin_label in get_level1_dirs(coins_dir):
         coin_path = create_path(coins_dir, coin_label)
-        believers_path = create_path(coin_path, "believers")
-        for believer_name in get_level1_dirs(believers_path):
-            believer_path = create_path(believers_path, believer_name)
-            events_path = create_path(believer_path, "events")
+        beliefs_path = create_path(coin_path, "beliefs")
+        for belief_name in get_level1_dirs(beliefs_path):
+            belief_path = create_path(beliefs_path, belief_name)
+            events_path = create_path(belief_path, "events")
             for event_int in get_level1_dirs(events_path):
                 event_pack = packunit_shop(
-                    believer_name=believer_name,
+                    belief_name=belief_name,
                     face_name=None,
                     coin_label=coin_label,
                     event_int=event_int,
                 )
                 event_dir = create_path(events_path, event_int)
-                add_believeratoms_from_csv(event_pack, event_dir)
+                add_beliefatoms_from_csv(event_pack, event_dir)
                 event_all_pack_path = create_event_all_pack_path(
-                    coin_mstr_dir, coin_label, believer_name, event_int
+                    coin_mstr_dir, coin_label, belief_name, event_int
                 )
                 save_file(event_all_pack_path, None, event_pack.get_json())
 
 
-def add_believeratoms_from_csv(event_pack: PackUnit, event_dir: str):
+def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
     idea_sqlite_types = get_idea_sqlite_types()
-    believer_dimens = get_believer_dimens()
-    believer_dimens.remove("believerunit")
-    for believer_dimen in believer_dimens:
-        believer_dimen_put_tablename = create_prime_tablename(
-            believer_dimen, "v", "agg", "put"
+    belief_dimens = get_belief_dimens()
+    belief_dimens.remove("beliefunit")
+    for belief_dimen in belief_dimens:
+        belief_dimen_put_tablename = create_prime_tablename(
+            belief_dimen, "v", "agg", "put"
         )
-        believer_dimen_del_tablename = create_prime_tablename(
-            believer_dimen, "v", "agg", "del"
+        belief_dimen_del_tablename = create_prime_tablename(
+            belief_dimen, "v", "agg", "del"
         )
-        believer_dimen_put_csv = f"{believer_dimen_put_tablename}.csv"
-        believer_dimen_del_csv = f"{believer_dimen_del_tablename}.csv"
-        put_path = create_path(event_dir, believer_dimen_put_csv)
-        del_path = create_path(event_dir, believer_dimen_del_csv)
+        belief_dimen_put_csv = f"{belief_dimen_put_tablename}.csv"
+        belief_dimen_del_csv = f"{belief_dimen_del_tablename}.csv"
+        put_path = create_path(event_dir, belief_dimen_put_csv)
+        del_path = create_path(event_dir, belief_dimen_del_csv)
         if os_path_exists(put_path):
             put_rows = open_csv_with_types(put_path, idea_sqlite_types)
             headers = put_rows.pop(0)
             for put_row in put_rows:
-                x_atom = believeratom_shop(believer_dimen, "INSERT")
+                x_atom = beliefatom_shop(belief_dimen, "INSERT")
                 for col_name, row_value in zip(headers, put_row):
                     if col_name not in {
                         "face_name",
                         "event_int",
                         "coin_label",
-                        "believer_name",
+                        "belief_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._believerdelta.set_believeratom(x_atom)
+                event_pack._beliefdelta.set_beliefatom(x_atom)
 
         if os_path_exists(del_path):
             del_rows = open_csv_with_types(del_path, idea_sqlite_types)
             headers = del_rows.pop(0)
             for del_row in del_rows:
-                x_atom = believeratom_shop(believer_dimen, "DELETE")
+                x_atom = beliefatom_shop(belief_dimen, "DELETE")
                 for col_name, row_value in zip(headers, del_row):
                     if col_name not in {
                         "face_name",
                         "event_int",
                         "coin_label",
-                        "believer_name",
+                        "belief_name",
                     }:
                         x_atom.set_arg(col_name, row_value)
-                event_pack._believerdelta.set_believeratom(x_atom)
+                event_pack._beliefdelta.set_beliefatom(x_atom)
 
 
-def etl_event_pack_json_to_event_inherited_believerunits(coin_mstr_dir: str):
+def etl_event_pack_json_to_event_inherited_beliefunits(coin_mstr_dir: str):
     coins_dir = create_path(coin_mstr_dir, "coins")
     for coin_label in get_level1_dirs(coins_dir):
         coin_path = create_path(coins_dir, coin_label)
-        believers_dir = create_path(coin_path, "believers")
-        for believer_name in get_level1_dirs(believers_dir):
-            believer_dir = create_path(believers_dir, believer_name)
-            events_dir = create_path(believer_dir, "events")
+        beliefs_dir = create_path(coin_path, "beliefs")
+        for belief_name in get_level1_dirs(beliefs_dir):
+            belief_dir = create_path(beliefs_dir, belief_name)
+            events_dir = create_path(belief_dir, "events")
             prev_event_int = None
             for event_int in get_level1_dirs(events_dir):
-                prev_believer = _get_prev_event_int_believerunit(
-                    coin_mstr_dir, coin_label, believer_name, prev_event_int
+                prev_belief = _get_prev_event_int_beliefunit(
+                    coin_mstr_dir, coin_label, belief_name, prev_event_int
                 )
-                believerevent_path = create_believerevent_path(
-                    coin_mstr_dir, coin_label, believer_name, event_int
+                beliefevent_path = create_beliefevent_path(
+                    coin_mstr_dir, coin_label, belief_name, event_int
                 )
-                event_dir = create_believer_event_dir_path(
-                    coin_mstr_dir, coin_label, believer_name, event_int
+                event_dir = create_belief_event_dir_path(
+                    coin_mstr_dir, coin_label, belief_name, event_int
                 )
 
                 event_all_pack_path = create_event_all_pack_path(
-                    coin_mstr_dir, coin_label, believer_name, event_int
+                    coin_mstr_dir, coin_label, belief_name, event_int
                 )
                 event_pack = get_packunit_from_json(open_file(event_all_pack_path))
-                sift_delta = get_minimal_believerdelta(
-                    event_pack._believerdelta, prev_believer
+                sift_delta = get_minimal_beliefdelta(
+                    event_pack._beliefdelta, prev_belief
                 )
-                curr_believer = event_pack.get_edited_believer(prev_believer)
-                save_file(believerevent_path, None, curr_believer.get_json())
+                curr_belief = event_pack.get_edited_belief(prev_belief)
+                save_file(beliefevent_path, None, curr_belief.get_json())
                 expressed_pack = copy_deepcopy(event_pack)
-                expressed_pack.set_believerdelta(sift_delta)
+                expressed_pack.set_beliefdelta(sift_delta)
                 save_file(event_dir, "expressed_pack.json", expressed_pack.get_json())
                 prev_event_int = event_int
 
 
-def _get_prev_event_int_believerunit(
-    coin_mstr_dir, coin_label, believer_name, prev_event_int
-) -> BelieverUnit:
+def _get_prev_event_int_beliefunit(
+    coin_mstr_dir, coin_label, belief_name, prev_event_int
+) -> BeliefUnit:
     if prev_event_int is None:
-        return believerunit_shop(believer_name, coin_label)
-    prev_believerevent_path = create_believerevent_path(
-        coin_mstr_dir, coin_label, believer_name, prev_event_int
+        return beliefunit_shop(belief_name, coin_label)
+    prev_beliefevent_path = create_beliefevent_path(
+        coin_mstr_dir, coin_label, belief_name, prev_event_int
     )
-    return open_believer_file(prev_believerevent_path)
+    return open_belief_file(prev_beliefevent_path)
 
 
-def etl_event_inherited_believerunits_to_coin_gut(coin_mstr_dir: str):
+def etl_event_inherited_beliefunits_to_coin_gut(coin_mstr_dir: str):
     coins_dir = create_path(coin_mstr_dir, "coins")
     for coin_label in get_level1_dirs(coins_dir):
-        believer_events = collect_believer_event_dir_sets(coin_mstr_dir, coin_label)
-        believers_max_event_int_dict = get_believers_downhill_event_ints(
-            believer_events
-        )
-        for believer_name, max_event_int in believers_max_event_int_dict.items():
-            max_believerevent_path = create_believerevent_path(
-                coin_mstr_dir, coin_label, believer_name, max_event_int
+        belief_events = collect_belief_event_dir_sets(coin_mstr_dir, coin_label)
+        beliefs_max_event_int_dict = get_beliefs_downhill_event_ints(belief_events)
+        for belief_name, max_event_int in beliefs_max_event_int_dict.items():
+            max_beliefevent_path = create_beliefevent_path(
+                coin_mstr_dir, coin_label, belief_name, max_event_int
             )
-            max_event_believer_json = open_file(max_believerevent_path)
-            gut_path = create_gut_path(coin_mstr_dir, coin_label, believer_name)
-            save_file(gut_path, None, max_event_believer_json)
+            max_event_belief_json = open_file(max_beliefevent_path)
+            gut_path = create_gut_path(coin_mstr_dir, coin_label, belief_name)
+            save_file(gut_path, None, max_event_belief_json)
 
 
 def add_coin_timeline_to_guts(coin_mstr_dir: str):
@@ -902,9 +900,9 @@ def etl_coin_job_jsons_to_job_tables(cursor: sqlite3_Cursor, coin_mstr_dir: str)
     coins_dir = create_path(coin_mstr_dir, "coins")
     for coin_label in get_level1_dirs(coins_dir):
         coin_path = create_path(coins_dir, coin_label)
-        believers_dir = create_path(coin_path, "believers")
-        for believer_name in get_level1_dirs(believers_dir):
-            job_obj = open_job_file(coin_mstr_dir, coin_label, believer_name)
+        beliefs_dir = create_path(coin_path, "beliefs")
+        for belief_name in get_level1_dirs(beliefs_dir):
+            job_obj = open_job_file(coin_mstr_dir, coin_label, belief_name)
             insert_job_obj(cursor, job_obj)
 
 
@@ -918,7 +916,7 @@ def insert_tranunit_partners_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     """
     partners_net_array = tranbook._get_partners_net_array()
     cursor.executemany(
-        f"INSERT INTO coin_partner_nets (coin_label, believer_name, believer_net_amount) VALUES ('{tranbook.coin_label}', ?, ?)",
+        f"INSERT INTO coin_partner_nets (coin_label, belief_name, belief_net_amount) VALUES ('{tranbook.coin_label}', ?, ?)",
         partners_net_array,
     )
 

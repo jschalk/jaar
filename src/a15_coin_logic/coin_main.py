@@ -13,7 +13,7 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a01_term_logic.term import (
-    BelieverName,
+    BeliefName,
     CoinLabel,
     EventInt,
     PartnerName,
@@ -28,7 +28,7 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
+from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a07_timeline_logic.timeline_main import (
     TimeLinePoint,
     TimeLineUnit,
@@ -55,9 +55,9 @@ from src.a12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.a12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_believer
-from src.a13_believer_listen_logic.basis_believers import create_listen_basis
-from src.a13_believer_listen_logic.listen_main import (
+from src.a12_hub_toolbox.keep_tool import create_treasury_db_file, save_duty_belief
+from src.a13_belief_listen_logic.basis_beliefs import create_listen_basis
+from src.a13_belief_listen_logic.listen_main import (
     listen_to_agendas_create_init_job_from_guts,
     listen_to_debtors_roll_jobs_into_job,
 )
@@ -94,7 +94,7 @@ class CoinUnit:
     coin_label: CoinLabel = None
     coin_mstr_dir: str = None
     timeline: TimeLineUnit = None
-    brokerunits: dict[BelieverName, BrokerUnit] = None
+    brokerunits: dict[BeliefName, BrokerUnit] = None
     paybook: TranBook = None
     offi_times: set[TimeLinePoint] = None
     knot: str = None
@@ -104,7 +104,7 @@ class CoinUnit:
     job_listen_rotations: int = None
     _offi_time_max: TimeLinePoint = None
     _coin_dir: str = None
-    _believers_dir: str = None
+    _beliefs_dir: str = None
     _packs_dir: str = None
     _all_tranbook: TranBook = None
 
@@ -112,49 +112,47 @@ class CoinUnit:
     def _set_coin_dirs(self):
         coins_dir = create_path(self.coin_mstr_dir, "coins")
         self._coin_dir = create_path(coins_dir, self.coin_label)
-        self._believers_dir = create_path(self._coin_dir, "believers")
+        self._beliefs_dir = create_path(self._coin_dir, "beliefs")
         self._packs_dir = create_path(self._coin_dir, "packs")
         set_dir(x_path=self._coin_dir)
-        set_dir(x_path=self._believers_dir)
+        set_dir(x_path=self._beliefs_dir)
         set_dir(x_path=self._packs_dir)
 
-    def _get_believer_dir(self, believer_name) -> str:
-        return create_path(self._believers_dir, believer_name)
+    def _get_belief_dir(self, belief_name) -> str:
+        return create_path(self._beliefs_dir, belief_name)
 
-    def _get_believer_folder_names(self) -> set:
-        believers = get_dir_file_strs(
-            self._believers_dir, include_dirs=True, include_files=False
+    def _get_belief_folder_names(self) -> set:
+        beliefs = get_dir_file_strs(
+            self._beliefs_dir, include_dirs=True, include_files=False
         )
-        return sorted(list(believers.keys()))
+        return sorted(list(beliefs.keys()))
 
-    # believer management
-    def _set_all_healer_dutys(self, believer_name: BelieverName):
-        x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, believer_name)
-        x_gut.settle_believer()
+    # belief management
+    def _set_all_healer_dutys(self, belief_name: BeliefName):
+        x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, belief_name)
+        x_gut.settle_belief()
         for healer_name, healer_dict in x_gut._healers_dict.items():
             for keep_rope in healer_dict.keys():
                 create_treasury_db_file(
                     self.coin_mstr_dir,
-                    believer_name=believer_name,
+                    belief_name=belief_name,
                     coin_label=self.coin_label,
                     keep_rope=keep_rope,
                     knot=self.knot,
                 )
-                save_duty_believer(
+                save_duty_belief(
                     coin_mstr_dir=self.coin_mstr_dir,
-                    believer_name=healer_name,
+                    belief_name=healer_name,
                     coin_label=self.coin_label,
                     keep_rope=keep_rope,
                     knot=None,
-                    duty_believer=x_gut,
+                    duty_belief=x_gut,
                 )
 
-    # job believer management
-    def create_empty_believer_from_coin(
-        self, believer_name: BelieverName
-    ) -> BelieverUnit:
-        return believerunit_shop(
-            believer_name,
+    # job belief management
+    def create_empty_belief_from_coin(self, belief_name: BeliefName) -> BeliefUnit:
+        return beliefunit_shop(
+            belief_name,
             self.coin_label,
             knot=self.knot,
             fund_iota=self.fund_iota,
@@ -162,55 +160,55 @@ class CoinUnit:
             penny=self.penny,
         )
 
-    def create_gut_file_if_none(self, believer_name: BelieverName) -> None:
-        if not gut_file_exists(self.coin_mstr_dir, self.coin_label, believer_name):
-            empty_believer = self.create_empty_believer_from_coin(believer_name)
-            save_gut_file(self.coin_mstr_dir, empty_believer)
+    def create_gut_file_if_none(self, belief_name: BeliefName) -> None:
+        if not gut_file_exists(self.coin_mstr_dir, self.coin_label, belief_name):
+            empty_belief = self.create_empty_belief_from_coin(belief_name)
+            save_gut_file(self.coin_mstr_dir, empty_belief)
 
-    def create_init_job_from_guts(self, believer_name: BelieverName) -> None:
-        self.create_gut_file_if_none(believer_name)
-        x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, believer_name)
+    def create_init_job_from_guts(self, belief_name: BeliefName) -> None:
+        self.create_gut_file_if_none(belief_name)
+        x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, belief_name)
         x_job = create_listen_basis(x_gut)
         listen_to_agendas_create_init_job_from_guts(self.coin_mstr_dir, x_job)
         save_job_file(self.coin_mstr_dir, x_job)
 
-    def rotate_job(self, believer_name: BelieverName) -> BelieverUnit:
-        x_job = open_job_file(self.coin_mstr_dir, self.coin_label, believer_name)
-        x_job.settle_believer()
-        # # if believerunit has healers create job from healers.
-        # create believerunit from debtors roll
+    def rotate_job(self, belief_name: BeliefName) -> BeliefUnit:
+        x_job = open_job_file(self.coin_mstr_dir, self.coin_label, belief_name)
+        x_job.settle_belief()
+        # # if beliefunit has healers create job from healers.
+        # create beliefunit from debtors roll
         return listen_to_debtors_roll_jobs_into_job(
-            self.coin_mstr_dir, self.coin_label, believer_name
+            self.coin_mstr_dir, self.coin_label, belief_name
         )
 
     def generate_all_jobs(self) -> None:
-        believer_names = self._get_believer_folder_names()
-        for believer_name in believer_names:
-            self.create_init_job_from_guts(believer_name)
+        belief_names = self._get_belief_folder_names()
+        for belief_name in belief_names:
+            self.create_init_job_from_guts(belief_name)
 
         for _ in range(self.job_listen_rotations):
-            for believer_name in believer_names:
-                save_job_file(self.coin_mstr_dir, self.rotate_job(believer_name))
+            for belief_name in belief_names:
+                save_job_file(self.coin_mstr_dir, self.rotate_job(belief_name))
 
-    def get_job_file_believer(self, believer_name: BelieverName) -> BelieverUnit:
-        return open_job_file(self.coin_mstr_dir, self.coin_label, believer_name)
+    def get_job_file_belief(self, belief_name: BeliefName) -> BeliefUnit:
+        return open_job_file(self.coin_mstr_dir, self.coin_label, belief_name)
 
     # brokerunits
     def set_brokerunit(self, x_brokerunit: BrokerUnit) -> None:
-        self.brokerunits[x_brokerunit.believer_name] = x_brokerunit
+        self.brokerunits[x_brokerunit.belief_name] = x_brokerunit
 
-    def brokerunit_exists(self, x_believer_name: BelieverName) -> bool:
-        return self.brokerunits.get(x_believer_name) != None
+    def brokerunit_exists(self, x_belief_name: BeliefName) -> bool:
+        return self.brokerunits.get(x_belief_name) != None
 
-    def get_brokerunit(self, x_believer_name: BelieverName) -> BrokerUnit:
-        return self.brokerunits.get(x_believer_name)
+    def get_brokerunit(self, x_belief_name: BeliefName) -> BrokerUnit:
+        return self.brokerunits.get(x_belief_name)
 
-    def del_brokerunit(self, x_believer_name: BelieverName) -> None:
-        self.brokerunits.pop(x_believer_name)
+    def del_brokerunit(self, x_belief_name: BeliefName) -> None:
+        self.brokerunits.pop(x_belief_name)
 
     def add_budunit(
         self,
-        believer_name: BelieverName,
+        belief_name: BeliefName,
         bud_time: TimeLinePoint,
         quota: int,
         allow_prev_to_offi_time_max_entry: bool = False,
@@ -220,17 +218,15 @@ class CoinUnit:
         if bud_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
             exception_str = f"Cannot set budunit because bud_time {bud_time} is less than CoinUnit._offi_time_max {self._offi_time_max}."
             raise budunit_Exception(exception_str)
-        if self.brokerunit_exists(believer_name) is False:
-            self.set_brokerunit(brokerunit_shop(believer_name))
-        x_brokerunit = self.get_brokerunit(believer_name)
+        if self.brokerunit_exists(belief_name) is False:
+            self.set_brokerunit(brokerunit_shop(belief_name))
+        x_brokerunit = self.get_brokerunit(belief_name)
         x_brokerunit.add_bud(bud_time, quota, celldepth)
 
-    def get_budunit(
-        self, believer_name: BelieverName, bud_time: TimeLinePoint
-    ) -> BudUnit:
-        if not self.get_brokerunit(believer_name):
+    def get_budunit(self, belief_name: BeliefName, bud_time: TimeLinePoint) -> BudUnit:
+        if not self.get_brokerunit(belief_name):
             return None
-        x_brokerunit = self.get_brokerunit(believer_name)
+        x_brokerunit = self.get_brokerunit(belief_name)
         return x_brokerunit.get_bud(bud_time)
 
     def to_dict(self, include_paybook: bool = True) -> dict:
@@ -252,9 +248,9 @@ class CoinUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.to_dict())
 
-    def _get_brokerunits_dict(self) -> dict[BelieverName, dict]:
+    def _get_brokerunits_dict(self) -> dict[BeliefName, dict]:
         return {
-            x_bud.believer_name: x_bud.to_dict() for x_bud in self.brokerunits.values()
+            x_bud.belief_name: x_bud.to_dict() for x_bud in self.brokerunits.values()
         }
 
     def get_brokerunits_bud_times(self) -> set[TimeLinePoint]:
@@ -272,7 +268,7 @@ class CoinUnit:
 
     def add_paypurchase(
         self,
-        believer_name: BelieverName,
+        belief_name: BeliefName,
         partner_name: PartnerName,
         tran_time: TimeLinePoint,
         amount: FundNum,
@@ -280,7 +276,7 @@ class CoinUnit:
         _offi_time_max: TimeLinePoint = None,
     ) -> None:
         self.paybook.add_tranunit(
-            believer_name=believer_name,
+            belief_name=belief_name,
             partner_name=partner_name,
             tran_time=tran_time,
             amount=amount,
@@ -289,17 +285,17 @@ class CoinUnit:
         )
 
     def paypurchase_exists(
-        self, src: BelieverName, dst: PartnerName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, x_tran_time: TimeLinePoint
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: BelieverName, dst: PartnerName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: BelieverName, dst: PartnerName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 
@@ -327,34 +323,32 @@ class CoinUnit:
     def set_all_tranbook(self) -> None:
         x_tranunits = copy_deepcopy(self.paybook.tranunits)
         x_tranbook = tranbook_shop(self.coin_label, x_tranunits)
-        for believer_name, x_brokerunit in self.brokerunits.items():
+        for belief_name, x_brokerunit in self.brokerunits.items():
             for x_bud_time, x_budunit in x_brokerunit.buds.items():
                 for partner_name, x_amount in x_budunit._bud_partner_nets.items():
                     x_tranbook.add_tranunit(
-                        believer_name, partner_name, x_bud_time, x_amount
+                        belief_name, partner_name, x_bud_time, x_amount
                     )
         self._all_tranbook = x_tranbook
 
     def create_buds_root_cells(
         self,
-        ote1_dict: dict[BelieverName, dict[TimeLinePoint, EventInt]],
+        ote1_dict: dict[BeliefName, dict[TimeLinePoint, EventInt]],
     ) -> None:
-        for believer_name, brokerunit in self.brokerunits.items():
+        for belief_name, brokerunit in self.brokerunits.items():
             for bud_time in brokerunit.buds.keys():
-                self._create_bud_root_cell(believer_name, ote1_dict, bud_time)
+                self._create_bud_root_cell(belief_name, ote1_dict, bud_time)
 
     def _create_bud_root_cell(
         self,
-        believer_name: BelieverName,
-        ote1_dict: dict[BelieverName, dict[TimeLinePoint, EventInt]],
+        belief_name: BeliefName,
+        ote1_dict: dict[BeliefName, dict[TimeLinePoint, EventInt]],
         bud_time: TimeLinePoint,
     ) -> None:
-        past_event_int = _get_ote1_max_past_event_int(
-            believer_name, ote1_dict, bud_time
-        )
-        budunit = self.get_budunit(believer_name, bud_time)
+        past_event_int = _get_ote1_max_past_event_int(belief_name, ote1_dict, bud_time)
+        budunit = self.get_budunit(belief_name, bud_time)
         cellunit = cellunit_shop(
-            bud_believer_name=believer_name,
+            bud_belief_name=belief_name,
             ancestors=[],
             event_int=past_event_int,
             celldepth=budunit.celldepth,
@@ -362,37 +356,37 @@ class CoinUnit:
             penny=self.penny,
         )
         root_cell_dir = create_cell_dir_path(
-            self.coin_mstr_dir, self.coin_label, believer_name, bud_time, []
+            self.coin_mstr_dir, self.coin_label, belief_name, bud_time, []
         )
         cellunit_save_to_dir(root_cell_dir, cellunit)
 
     def get_timeline_config(self) -> dict:
         return self.timeline.to_dict()
 
-    def add_timeline_to_gut(self, believer_name: BelieverName) -> None:
-        """Adds the timeline to the gut file for the given believer."""
-        x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, believer_name)
+    def add_timeline_to_gut(self, belief_name: BeliefName) -> None:
+        """Adds the timeline to the gut file for the given belief."""
+        x_gut = open_gut_file(self.coin_mstr_dir, self.coin_label, belief_name)
         add_newtimeline_planunit(x_gut, self.get_timeline_config())
         save_gut_file(self.coin_mstr_dir, x_gut)
 
     def add_timeline_to_guts(self) -> None:
         """Adds the timeline to all gut files."""
-        believer_names = self._get_believer_folder_names()
-        for believer_name in believer_names:
-            self.add_timeline_to_gut(believer_name)
+        belief_names = self._get_belief_folder_names()
+        for belief_name in belief_names:
+            self.add_timeline_to_gut(belief_name)
 
 
 def _get_ote1_max_past_event_int(
-    believer_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
+    belief_name: str, ote1_dict: dict[str, dict[str, int]], bud_time: int
 ) -> EventInt:
     """Using the grab most recent ote1 event int before a given bud_time"""
-    ote1_believer_dict = ote1_dict.get(believer_name)
-    if not ote1_believer_dict:
+    ote1_belief_dict = ote1_dict.get(belief_name)
+    if not ote1_belief_dict:
         return None
-    event_timepoints = set(ote1_believer_dict.keys())
+    event_timepoints = set(ote1_belief_dict.keys())
     if past_timepoints := {tp for tp in event_timepoints if int(tp) <= bud_time}:
         max_past_timepoint = max(past_timepoints)
-        return ote1_believer_dict.get(max_past_timepoint)
+        return ote1_belief_dict.get(max_past_timepoint)
 
 
 def coinunit_shop(
@@ -431,10 +425,10 @@ def coinunit_shop(
 
 def _get_brokerunits_from_dict(
     brokerunits_dict: dict,
-) -> dict[BelieverName, BrokerUnit]:
+) -> dict[BeliefName, BrokerUnit]:
     return {
-        x_believer_name: get_brokerunit_from_dict(brokerunit_dict)
-        for x_believer_name, brokerunit_dict in brokerunits_dict.items()
+        x_belief_name: get_brokerunit_from_dict(brokerunit_dict)
+        for x_belief_name, brokerunit_dict in brokerunits_dict.items()
     }
 
 

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.term import BelieverName, LabelTerm
+from src.a01_term_logic.term import BeliefName, LabelTerm
 
 
 def create_coin_mstr_path(world_dir: str):
@@ -26,12 +26,10 @@ def create_stances_dir_path(coin_mstr_dir: str) -> str:
     return create_path(coin_mstr_dir, "stances")
 
 
-def create_stances_believer_dir_path(
-    coin_mstr_dir: str, believer_name: BelieverName
-) -> str:
-    """Returns path: coin_mstr_dir\\stances\\believer_name"""
+def create_stances_belief_dir_path(coin_mstr_dir: str, belief_name: BeliefName) -> str:
+    """Returns path: coin_mstr_dir\\stances\\belief_name"""
     stances_dir = create_path(coin_mstr_dir, "stances")
-    return create_path(stances_dir, believer_name)
+    return create_path(stances_dir, belief_name)
 
 
 def create_stance0001_path(output_dir: str) -> str:

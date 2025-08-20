@@ -15,7 +15,7 @@
         "coin_label": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         },
         "tran_time": {
@@ -26,7 +26,7 @@
     "dimens": [
         "coinunit",
         "coin_paybook",
-        "believer_partnerunit",
-        "believerunit"
+        "belief_partnerunit",
+        "beliefunit"
     ]
 }

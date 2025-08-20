@@ -176,7 +176,7 @@ def test_ReasonHeir_set_rplan_active_value_SetsAttr():
     assert wk_reason._rplan_active_value
 
 
-def test_ReasonHeir_set_status_BelieverTrueSetsStatusTrue():
+def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -191,7 +191,7 @@ def test_ReasonHeir_set_status_BelieverTrueSetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BelieverFalseSetsStatusTrue():
+def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -206,7 +206,7 @@ def test_ReasonHeir_set_status_BelieverFalseSetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BelieverTrueSetsStatusFalse():
+def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
@@ -221,7 +221,7 @@ def test_ReasonHeir_set_status_BelieverTrueSetsStatusFalse():
     assert wk_reason._status is False
 
 
-def test_ReasonHeir_set_status_BelieverNoneSetsStatusFalse():
+def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)

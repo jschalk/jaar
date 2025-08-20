@@ -12,10 +12,10 @@ from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )
-from src.a12_hub_toolbox.test._util.example_hub_atoms import sue_2believeratoms_packunit
+from src.a12_hub_toolbox.test._util.example_hub_atoms import sue_2beliefatoms_packunit
 
 
-def test_HubUnit_default_gut_believer_ReturnsObj():
+def test_HubUnit_default_gut_belief_ReturnsObj():
     # ESTABLISH
     sue_str = "Sue"
     slash_str = "/"
@@ -35,11 +35,11 @@ def test_HubUnit_default_gut_believer_ReturnsObj():
     )
 
     # WHEN
-    sue_default_gut = sue_hubunit.default_gut_believer()
+    sue_default_gut = sue_hubunit.default_gut_belief()
 
     # THEN
     assert sue_default_gut.coin_label == sue_hubunit.coin_label
-    assert sue_default_gut.believer_name == sue_hubunit.believer_name
+    assert sue_default_gut.belief_name == sue_hubunit.belief_name
     assert sue_default_gut.knot == sue_hubunit.knot
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
     assert sue_default_gut.fund_iota == sue_hubunit.fund_iota
@@ -84,9 +84,9 @@ def test_HubUnit_create_gut_from_packs_CreatesgutFileFromPackFiles(
 
     # THEN
     assert gut_file_exists(env_dir(), "amy23", sue_str)
-    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_believer())
-    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.to_dict() == static_sue_gut.to_dict()
+    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_belief())
+    gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_belief.to_dict() == static_sue_gut.to_dict()
 
 
 def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
@@ -106,9 +106,9 @@ def test_HubUnit_create_initial_pack_and_gut_files_CreatesPackFilesAndgutFile(
     # THEN
     assert os_path_exists(init_pack_file_path)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
-    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_believer())
-    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.to_dict() == static_sue_gut.to_dict()
+    static_sue_gut = sue_hubunit._merge_any_packs(sue_hubunit.default_gut_belief())
+    gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_belief.to_dict() == static_sue_gut.to_dict()
 
 
 def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
@@ -117,11 +117,11 @@ def test_HubUnit_create_initial_pack_files_from_gut_SavesOnlyPackFiles(
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    sue_gut_believer = sue_hubunit.default_gut_believer()
+    sue_gut_belief = sue_hubunit.default_gut_belief()
     bob_str = "Bob"
-    sue_gut_believer.add_partnerunit(bob_str)
+    sue_gut_belief.add_partnerunit(bob_str)
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
-    save_gut_file(env_dir(), sue_gut_believer)
+    save_gut_file(env_dir(), sue_gut_belief)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_pack_file_path = create_path(sue_hubunit._packs_dir, f"{init_pack_id()}.json")
     assert os_path_exists(init_pack_file_path) is False
@@ -149,10 +149,10 @@ def test_HubUnit_initialize_pack_gut_files_SavesgutFileAndPackFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.coin_label == "amy23"
-    assert gut_believer.believer_name == sue_str
-    assert gut_believer.respect_bit == seven_int
+    gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_belief.coin_label == "amy23"
+    assert gut_belief.belief_name == sue_str
+    assert gut_belief.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
 
 
@@ -175,10 +175,10 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlygutFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    assert gut_believer.coin_label == "amy23"
-    assert gut_believer.believer_name == sue_str
-    assert gut_believer.respect_bit == seven_int
+    gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
+    assert gut_belief.coin_label == "amy23"
+    assert gut_belief.belief_name == sue_str
+    assert gut_belief.respect_bit == seven_int
     assert os_path_exists(init_pack_file_path)
 
 
@@ -190,10 +190,10 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlyPackFile(
     seven_int = 25
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_bit=seven_int)
     sue_hubunit.initialize_pack_gut_files()
-    sue_gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
+    sue_gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
     bob_str = "Bob"
-    sue_gut_believer.add_partnerunit(bob_str)
-    save_gut_file(env_dir(), sue_gut_believer)
+    sue_gut_belief.add_partnerunit(bob_str)
+    save_gut_file(env_dir(), sue_gut_belief)
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     init_pack_file_path = create_path(sue_hubunit._packs_dir, f"{init_pack_id()}.json")
     delete_dir(sue_hubunit._packs_dir)
@@ -203,10 +203,10 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlyPackFile(
     sue_hubunit.initialize_pack_gut_files()
 
     # THEN
-    assert sue_gut_believer.coin_label == "amy23"
-    assert sue_gut_believer.believer_name == sue_str
-    assert sue_gut_believer.respect_bit == seven_int
-    assert sue_gut_believer.partner_exists(bob_str)
+    assert sue_gut_belief.coin_label == "amy23"
+    assert sue_gut_belief.belief_name == sue_str
+    assert sue_gut_belief.respect_bit == seven_int
+    assert sue_gut_belief.partner_exists(bob_str)
     assert os_path_exists(init_pack_file_path)
 
 
@@ -217,20 +217,20 @@ def test_HubUnit_append_packs_to_gut_file_AddsPacksTogutFile(
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue_hubunit.initialize_pack_gut_files()
-    sue_hubunit.save_pack_file(sue_2believeratoms_packunit())
-    gut_believer = open_gut_file(env_dir(), "amy23", sue_str)
-    # gut_believer.add_plan(gut_believer.make_l1_rope("sports"))
+    sue_hubunit.save_pack_file(sue_2beliefatoms_packunit())
+    gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
+    # gut_belief.add_plan(gut_belief.make_l1_rope("sports"))
     sports_str = "sports"
-    sports_rope = gut_believer.make_l1_rope(sports_str)
+    sports_rope = gut_belief.make_l1_rope(sports_str)
     knee_str = "knee"
-    knee_rope = gut_believer.make_rope(sports_rope, knee_str)
-    assert gut_believer.plan_exists(sports_rope) is False
-    assert gut_believer.plan_exists(knee_rope) is False
+    knee_rope = gut_belief.make_rope(sports_rope, knee_str)
+    assert gut_belief.plan_exists(sports_rope) is False
+    assert gut_belief.plan_exists(knee_rope) is False
 
     # WHEN
-    new_believer = sue_hubunit.append_packs_to_gut_file()
+    new_belief = sue_hubunit.append_packs_to_gut_file()
 
     # THEN
-    assert new_believer != gut_believer
-    assert new_believer.plan_exists(sports_rope)
-    assert new_believer.plan_exists(knee_rope)
+    assert new_belief != gut_belief
+    assert new_belief.plan_exists(sports_rope)
+    assert new_belief.plan_exists(knee_rope)

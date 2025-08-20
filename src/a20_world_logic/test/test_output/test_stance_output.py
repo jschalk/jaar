@@ -3,8 +3,8 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal
 from shutil import copy2 as shutil_copy2
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_name_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_name_str,
     coin_label_str,
     partner_name_str,
 )
@@ -50,7 +50,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -88,7 +88,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -142,7 +142,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
     ]
     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
@@ -186,7 +186,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         face_name_str(),
 #         event_int_str(),
 #         coin_label_str(),
-#         believer_name_str(),
+#         belief_name_str(),
 #         bud_time(),
 #         quota_str(),
 #         celldepth_str(),
@@ -213,7 +213,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         face_name_str(),
 #         event_int_str(),
 #         coin_label_str(),
-#         believer_name_str(),
+#         belief_name_str(),
 #         partner_name_str(),
 #     ]
 #     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]

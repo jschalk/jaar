@@ -18,15 +18,15 @@
         "otx_label": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         }
     },
     "idea_number": "br00116",
     "dimens": [
         "pidgin_label",
-        "believer_partnerunit",
-        "believerunit",
+        "belief_partnerunit",
+        "beliefunit",
         "coinunit"
     ]
 }

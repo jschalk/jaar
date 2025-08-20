@@ -3,7 +3,7 @@ from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer_graphics import display_plantree
+from src.a06_belief_logic.belief_graphics import display_plantree
 from src.a12_hub_toolbox.a12_path import (
     create_keep_duty_path,
     create_keep_rope_path,
@@ -27,27 +27,27 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
     sue_str = "Sue"
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_believer.add_partnerunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
+    sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_belief.add_partnerunit(sue_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
+    texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     dallas_str = "dallas"
-    dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
-    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
-    sue_gut_believer.set_plan(planunit_shop(dallas_str), texas_rope)
-    sue_gut_believer.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.edit_plan_attr(dallas_rope, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.settle_believer()
-    assert sue_gut_believer._keeps_justified is False
-    save_gut_file(env_dir(), sue_gut_believer)
+    dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
+    sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    sue_gut_belief.set_plan(planunit_shop(dallas_str), texas_rope)
+    sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
+    sue_gut_belief.edit_plan_attr(dallas_rope, healerunit=healerunit_shop({sue_str}))
+    sue_gut_belief.settle_belief()
+    assert sue_gut_belief._keeps_justified is False
+    save_gut_file(env_dir(), sue_gut_belief)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_keep_ropes()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_ropes from '{sue_str}' gut believer because 'BelieverUnit._keeps_justified' is False."
+        == f"Cannot get_keep_ropes from '{sue_str}' gut belief because 'BeliefUnit._keeps_justified' is False."
     )
 
 
@@ -58,24 +58,24 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_str = "Sue"
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_believer.add_partnerunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
+    sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_belief.add_partnerunit(sue_str)
     texas_str = "Tex/as"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
-    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
-    sue_gut_believer.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.settle_believer()
-    assert sue_gut_believer._keeps_justified
-    assert sue_gut_believer._keeps_buildable is False
-    save_gut_file(env_dir(), sue_gut_believer)
+    texas_rope = sue_gut_belief.make_l1_rope(texas_str)
+    sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
+    sue_gut_belief.settle_belief()
+    assert sue_gut_belief._keeps_justified
+    assert sue_gut_belief._keeps_buildable is False
+    save_gut_file(env_dir(), sue_gut_belief)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_keep_ropes()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_ropes from '{sue_str}' gut believer because 'BelieverUnit._keeps_buildable' is False."
+        == f"Cannot get_keep_ropes from '{sue_str}' gut belief because 'BeliefUnit._keeps_buildable' is False."
     )
 
 
@@ -84,23 +84,23 @@ def test_HubUnit_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     sue_str = "Sue"
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_believer.add_partnerunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
+    sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_belief.add_partnerunit(sue_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
-    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    texas_rope = sue_gut_belief.make_l1_rope(texas_str)
+    sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
-    dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
-    elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
+    dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
+    elpaso_rope = sue_gut_belief.make_rope(texas_rope, elpaso_str)
     dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.set_plan(dallas_plan, texas_rope)
-    sue_gut_believer.set_plan(elpaso_plan, texas_rope)
-    sue_gut_believer.settle_believer()
-    display_plantree(sue_gut_believer, mode="Keep", graphics_bool=graphics_bool)
-    save_gut_file(env_dir(), sue_gut_believer)
+    sue_gut_belief.set_plan(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
+    sue_gut_belief.settle_belief()
+    display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_belief)
 
     # WHEN
     sue_keep_ropes = sue_hubunit.get_keep_ropes()
@@ -117,39 +117,39 @@ def test_HubUnit_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bo
     a23_str = "amy23"
     mstr_dir = env_dir()
     sue_hubunit = hubunit_shop(mstr_dir, a23_str, sue_str, None)
-    save_gut_file(mstr_dir, sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(mstr_dir, a23_str, sue_str)
-    sue_gut_believer.add_partnerunit(sue_str)
+    save_gut_file(mstr_dir, sue_hubunit.default_gut_belief())
+    sue_gut_belief = open_gut_file(mstr_dir, a23_str, sue_str)
+    sue_gut_belief.add_partnerunit(sue_str)
     bob_str = "Bob"
-    sue_gut_believer.add_partnerunit(bob_str)
+    sue_gut_belief.add_partnerunit(bob_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
-    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    texas_rope = sue_gut_belief.make_l1_rope(texas_str)
+    sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
-    dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
+    dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
     dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.set_plan(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan(dallas_plan, texas_rope)
     elpaso_str = "el paso"
-    elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
+    elpaso_rope = sue_gut_belief.make_rope(texas_rope, elpaso_str)
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.set_plan(elpaso_plan, texas_rope)
-    display_plantree(sue_gut_believer, mode="Keep", graphics_bool=graphics_bool)
-    save_gut_file(env_dir(), sue_gut_believer)
+    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
+    display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_belief)
     sue_dallas_duty_path = create_keep_duty_path(
         coin_mstr_dir=mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=dallas_rope,
         knot=None,
-        duty_believer=sue_str,
+        duty_belief=sue_str,
     )
     sue_elpaso_duty_path = create_keep_duty_path(
         coin_mstr_dir=mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=elpaso_rope,
         knot=None,
-        duty_believer=sue_str,
+        duty_belief=sue_str,
     )
     assert os_path_exists(sue_dallas_duty_path) is False
     assert os_path_exists(sue_elpaso_duty_path) is False
@@ -171,36 +171,36 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     sue_str = "Sue"
     a23_str = "amy23"
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
-    save_gut_file(env_dir(), sue_hubunit.default_gut_believer())
-    sue_gut_believer = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_believer.add_partnerunit(sue_str)
+    save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
+    sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
+    sue_gut_belief.add_partnerunit(sue_str)
     texas_str = "Texas"
-    texas_rope = sue_gut_believer.make_l1_rope(texas_str)
-    sue_gut_believer.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
+    texas_rope = sue_gut_belief.make_l1_rope(texas_str)
+    sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     dallas_str = "dallas"
     elpaso_str = "el paso"
-    dallas_rope = sue_gut_believer.make_rope(texas_rope, dallas_str)
-    elpaso_rope = sue_gut_believer.make_rope(texas_rope, elpaso_str)
+    dallas_rope = sue_gut_belief.make_rope(texas_rope, dallas_str)
+    elpaso_rope = sue_gut_belief.make_rope(texas_rope, elpaso_str)
     dallas_plan = planunit_shop(dallas_str, healerunit=healerunit_shop({sue_str}))
     elpaso_plan = planunit_shop(elpaso_str, healerunit=healerunit_shop({sue_str}))
-    sue_gut_believer.set_plan(dallas_plan, texas_rope)
-    sue_gut_believer.set_plan(elpaso_plan, texas_rope)
-    sue_gut_believer.settle_believer()
-    display_plantree(sue_gut_believer, mode="Keep", graphics_bool=graphics_bool)
-    save_gut_file(env_dir(), sue_gut_believer)
+    sue_gut_belief.set_plan(dallas_plan, texas_rope)
+    sue_gut_belief.set_plan(elpaso_plan, texas_rope)
+    sue_gut_belief.settle_belief()
+    display_plantree(sue_gut_belief, mode="Keep", graphics_bool=graphics_bool)
+    save_gut_file(env_dir(), sue_gut_belief)
 
     dallas_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, dallas_rope)
     elpaso_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, elpaso_rope)
     dallas_treasury_db_path = create_treasury_db_path(
         coin_mstr_dir=dallas_hubunit.coin_mstr_dir,
-        believer_name=dallas_hubunit.believer_name,
+        belief_name=dallas_hubunit.belief_name,
         coin_label=dallas_hubunit.coin_label,
         keep_rope=dallas_hubunit.keep_rope,
         knot=dallas_hubunit.knot,
     )
     elpaso_treasury_db_path = create_treasury_db_path(
         coin_mstr_dir=elpaso_hubunit.coin_mstr_dir,
-        believer_name=elpaso_hubunit.believer_name,
+        belief_name=elpaso_hubunit.belief_name,
         coin_label=elpaso_hubunit.coin_label,
         keep_rope=elpaso_hubunit.keep_rope,
         knot=elpaso_hubunit.knot,

@@ -2,21 +2,21 @@ from copy import deepcopy as copy_deepcopy
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardunit_shop
-from src.a06_believer_logic.believer_main import believerunit_shop
-from src.a09_pack_logic.delta import believerdelta_shop
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.pack import packunit_shop
 from src.a17_idea_logic.idea_csv_tool import (
-    add_believer_to_br00020_csv,
-    add_believer_to_br00021_csv,
-    add_believer_to_br00022_csv,
-    add_believer_to_br00023_csv,
-    add_believer_to_br00024_csv,
-    add_believer_to_br00025_csv,
-    add_believer_to_br00026_csv,
-    add_believer_to_br00027_csv,
-    add_believer_to_br00028_csv,
-    add_believer_to_br00029_csv,
-    add_believerunit_to_stance_csv_strs,
+    add_belief_to_br00020_csv,
+    add_belief_to_br00021_csv,
+    add_belief_to_br00022_csv,
+    add_belief_to_br00023_csv,
+    add_belief_to_br00024_csv,
+    add_belief_to_br00025_csv,
+    add_belief_to_br00026_csv,
+    add_belief_to_br00027_csv,
+    add_belief_to_br00028_csv,
+    add_belief_to_br00029_csv,
+    add_beliefunit_to_stance_csv_strs,
     add_coinunit_to_stance_csv_strs,
     add_coinunits_to_stance_csv_strs,
     add_pack_to_br00020_csv,
@@ -57,22 +57,22 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyCoinUnit(
     # THEN
     expected_stance_csv_strs = {
         "br00000": "coin_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations\n",
-        "br00001": "coin_label,believer_name,bud_time,quota,celldepth\n",
-        "br00002": "coin_label,believer_name,partner_name,tran_time,amount\n",
+        "br00001": "coin_label,belief_name,bud_time,quota,celldepth\n",
+        "br00002": "coin_label,belief_name,partner_name,tran_time,amount\n",
         "br00003": "coin_label,cumulative_minute,hour_label\n",
         "br00004": "coin_label,cumulative_day,month_label\n",
         "br00005": "coin_label,weekday_order,weekday_label\n",
         # "br00006": "coin_label,offi_time,_offi_time_max\n",
-        "br00020": "coin_label,believer_name,partner_name,group_title,group_cred_points,group_debt_points\n",
-        "br00021": "coin_label,believer_name,partner_name,partner_cred_points,partner_debt_points\n",
-        "br00022": "coin_label,believer_name,plan_rope,awardee_title,give_force,take_force\n",
-        "br00023": "coin_label,believer_name,plan_rope,fact_context,fact_state,fact_lower,fact_upper\n",
-        "br00024": "coin_label,believer_name,plan_rope,party_title,solo\n",
-        "br00025": "coin_label,believer_name,plan_rope,healer_name\n",
-        "br00026": "coin_label,believer_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
-        "br00027": "coin_label,believer_name,plan_rope,reason_context,reason_active_requisite\n",
-        "br00028": "coin_label,believer_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,task,problem_bool\n",
-        "br00029": "coin_label,believer_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
+        "br00020": "coin_label,belief_name,partner_name,group_title,group_cred_points,group_debt_points\n",
+        "br00021": "coin_label,belief_name,partner_name,partner_cred_points,partner_debt_points\n",
+        "br00022": "coin_label,belief_name,plan_rope,awardee_title,give_force,take_force\n",
+        "br00023": "coin_label,belief_name,plan_rope,fact_context,fact_state,fact_lower,fact_upper\n",
+        "br00024": "coin_label,belief_name,plan_rope,party_title,solo\n",
+        "br00025": "coin_label,belief_name,plan_rope,healer_name\n",
+        "br00026": "coin_label,belief_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor\n",
+        "br00027": "coin_label,belief_name,plan_rope,reason_context,reason_active_requisite\n",
+        "br00028": "coin_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,task,problem_bool\n",
+        "br00029": "coin_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit\n",
         "br00042": "otx_title,inx_title,otx_knot,inx_knot,unknown_str\n",
         "br00043": "otx_name,inx_name,otx_knot,inx_knot,unknown_str\n",
         "br00044": "otx_label,inx_label,otx_knot,inx_knot,unknown_str\n",
@@ -275,23 +275,23 @@ def test_add_coinunits_to_stance_csv_strs_ReturnsObj_Scenario1_TwoCoinUnits(
     assert generated_br00005_csv == expected_br00005_csv
 
 
-def test_add_believer_to_br00020_csv_ReturnsObj():
+def test_add_belief_to_br00020_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.add_partnerunit(yao_str)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.add_partnerunit(yao_str)
     run_str = ";Run"
     run_credit = 33
     run_debt = 55
-    bob_believer.get_partner(yao_str).add_membership(run_str, run_credit, run_debt)
+    bob_belief.get_partner(yao_str).add_membership(run_str, run_credit, run_debt)
     csv_header = x_ideas.get("br00020")
 
     # WHEN
-    x_csv = add_believer_to_br00020_csv(csv_header, bob_believer, csv_delimiter)
+    x_csv = add_belief_to_br00020_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     yao_yao_row = f",,{a23_str},{bob_str},{yao_str},{yao_str},1,1\n"
@@ -301,7 +301,7 @@ def test_add_believer_to_br00020_csv_ReturnsObj():
     assert x_csv == f"{csv_header}{yao_yao_row}{yao_run_row}"
 
 
-def test_add_believer_to_br00021_csv_ReturnsObj():
+def test_add_belief_to_br00021_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
@@ -310,135 +310,135 @@ def test_add_believer_to_br00021_csv_ReturnsObj():
     yao_credit = 33
     yao_debt = 55
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.add_partnerunit(yao_str, yao_credit, yao_debt)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.add_partnerunit(yao_str, yao_credit, yao_debt)
     csv_header = x_ideas.get("br00021")
 
     # WHEN
-    x_csv = add_believer_to_br00021_csv(csv_header, bob_believer, csv_delimiter)
+    x_csv = add_belief_to_br00021_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     yao_row = f",,{a23_str},{bob_str},{yao_str},{yao_credit},{yao_debt}\n"
     assert x_csv == f"{csv_header}{yao_row}"
 
 
-def test_add_believer_to_br00022_csv_ReturnsObj():
+def test_add_belief_to_br00022_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
     casa_awardunit = awardunit_shop(yao_str, yao_give_force, yao_take_force)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardunit=casa_awardunit)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.edit_plan_attr(casa_rope, awardunit=casa_awardunit)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
     # WHEN
-    bob_believer.settle_believer()
-    x_csv = add_believer_to_br00022_csv(csv_header, bob_believer, csv_delimiter)
+    bob_belief.settle_belief()
+    x_csv = add_belief_to_br00022_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     yao_award_row = f",,{a23_str},{bob_str},{casa_rope},{yao_str},{yao_give_force},{yao_take_force}\n"
     assert x_csv == f"{csv_header}{yao_award_row}"
 
 
-def test_add_believer_to_br00023_csv_ReturnsObj():
+def test_add_belief_to_br00023_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
     a23_rope = to_rope(a23_str)
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
-    clean_rope = bob_believer.make_rope(casa_rope, "clean")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
+    clean_rope = bob_belief.make_rope(casa_rope, "clean")
     clean_fact_lower = 55
     clean_fact_upper = 77
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.add_fact(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.add_fact(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_believer_to_br00023_csv(csv_header, bob_believer, csv_delimiter)
+    x_csv = add_belief_to_br00023_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     clean_row = f",,{a23_str},{bob_str},{a23_rope},{casa_rope},{clean_rope},{clean_fact_lower},{clean_fact_upper}\n"
     assert x_csv == f"{csv_header}{clean_row}"
 
 
-def test_add_believer_to_br00024_csv_ReturnsObj():
+def test_add_belief_to_br00024_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
-    bob_believer.add_plan(casa_rope)
-    casa_plan = bob_believer.get_plan_obj(casa_rope)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
+    bob_belief.add_plan(casa_rope)
+    casa_plan = bob_belief.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_plan.laborunit.add_party(cleaners_str)
     csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
     # WHEN
-    bob_believer.settle_believer()
-    x_csv = add_believer_to_br00024_csv(csv_header, bob_believer, csv_delimiter)
+    bob_belief.settle_belief()
+    x_csv = add_belief_to_br00024_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     cleaners_row = f",,{a23_str},{bob_str},{casa_rope},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-def test_add_believer_to_br00025_csv_ReturnsObj():
+def test_add_belief_to_br00025_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
-    bob_believer.add_plan(casa_rope)
-    casa_plan = bob_believer.get_plan_obj(casa_rope)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
+    bob_belief.add_plan(casa_rope)
+    casa_plan = bob_belief.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_plan.healerunit.set_healer_name(cleaners_str)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
     # WHEN
-    bob_believer.settle_believer()
-    x_csv = add_believer_to_br00025_csv(csv_header, bob_believer, csv_delimiter)
+    bob_belief.settle_belief()
+    x_csv = add_belief_to_br00025_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     cleaners_row = f",,{a23_str},{bob_str},{casa_rope},{cleaners_str}\n"
     assert x_csv == f"{csv_header}{cleaners_row}"
 
 
-def test_add_believer_to_br00026_csv_ReturnsObj():
+def test_add_belief_to_br00026_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
-    clean_rope = bob_believer.make_rope(casa_rope, "clean")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
+    clean_rope = bob_belief.make_rope(casa_rope, "clean")
     clean_reason_lower = 22
     clean_reason_upper = 55
     clean_reason_divisor = 77
-    bob_believer.add_plan(mop_rope)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief.add_plan(mop_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
         reason_case=clean_rope,
@@ -450,26 +450,26 @@ def test_add_believer_to_br00026_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_believer.settle_believer()
-    x_csv = add_believer_to_br00026_csv(csv_header, bob_believer, csv_delimiter)
+    bob_belief.settle_belief()
+    x_csv = add_belief_to_br00026_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     mop_row = f",,{a23_str},{bob_str},{mop_rope},{casa_rope},{clean_rope},{clean_reason_lower},{clean_reason_upper},{clean_reason_divisor}\n"
     assert x_csv == f"{csv_header}{mop_row}"
 
 
-def test_add_believer_to_br00027_csv_ReturnsObj():
+def test_add_belief_to_br00027_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
-    bob_believer.add_plan(mop_rope)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
+    bob_belief.add_plan(mop_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
         reason_plan_active_requisite=True,
@@ -478,24 +478,24 @@ def test_add_believer_to_br00027_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_believer.settle_believer()
-    x_csv = add_believer_to_br00027_csv(csv_header, bob_believer, csv_delimiter)
+    bob_belief.settle_belief()
+    x_csv = add_belief_to_br00027_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     casa_row = f",,{a23_str},{bob_str},{mop_rope},{casa_rope},True\n"
     assert x_csv == f"{csv_header}{casa_row}"
 
 
-def test_add_believer_to_br00028_csv_ReturnsObj():
+def test_add_belief_to_br00028_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
     a23_rope = to_rope(a23_str)
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
     casa_begin = 3
     casa_close = 5
     casa_addin = 7
@@ -507,9 +507,9 @@ def test_add_believer_to_br00028_csv_ReturnsObj():
     casa_star = 2
     casa_task = False
     casa_problem_bool = False
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(mop_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(mop_rope)
+    bob_belief.edit_plan_attr(
         mop_rope,
         begin=casa_begin,
         close=casa_close,
@@ -527,8 +527,8 @@ def test_add_believer_to_br00028_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_believer.settle_believer()
-    x_csv = add_believer_to_br00028_csv(csv_header, bob_believer, csv_delimiter)
+    bob_belief.settle_belief()
+    x_csv = add_belief_to_br00028_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
     root_row = f",,{a23_str},{bob_str},,{a23_rope},,,,,,,,,1,False,False\n"
@@ -541,53 +541,53 @@ def test_add_believer_to_br00028_csv_ReturnsObj():
     assert x_csv == expected_csv
 
 
-def test_add_believer_to_br00029_csv_ReturnsObj():
+def test_add_belief_to_br00029_csv_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.credor_respect = 444
-    bob_believer.debtor_respect = 555
-    bob_believer.fund_pool = 777
-    bob_believer.max_tree_traverse = 3
-    bob_believer.tally = 10
-    bob_believer.fund_iota = 12
-    bob_believer.penny = 13
-    bob_believer.respect_bit = 15
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.credor_respect = 444
+    bob_belief.debtor_respect = 555
+    bob_belief.fund_pool = 777
+    bob_belief.max_tree_traverse = 3
+    bob_belief.tally = 10
+    bob_belief.fund_iota = 12
+    bob_belief.penny = 13
+    bob_belief.respect_bit = 15
     csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
 
     # WHEN
-    x_csv = add_believer_to_br00029_csv(csv_header, bob_believer, csv_delimiter)
+    x_csv = add_belief_to_br00029_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
-    believer_row = f",,{a23_str},{bob_str},{bob_believer.credor_respect},{bob_believer.debtor_respect},{bob_believer.fund_pool},{bob_believer.max_tree_traverse},{bob_believer.tally},{bob_believer.fund_iota},{bob_believer.penny},{bob_believer.respect_bit}\n"
-    assert x_csv == f"{csv_header}{believer_row}"
+    belief_row = f",,{a23_str},{bob_str},{bob_belief.credor_respect},{bob_belief.debtor_respect},{bob_belief.fund_pool},{bob_belief.max_tree_traverse},{bob_belief.tally},{bob_belief.fund_iota},{bob_belief.penny},{bob_belief.respect_bit}\n"
+    assert x_csv == f"{csv_header}{belief_row}"
 
 
-def test_add_believerunit_to_stance_csv_strs_ReturnsObj():
+def test_add_beliefunit_to_stance_csv_strs_ReturnsObj():
     # ESTABLISH
     csv_delimiter = ","
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.add_partnerunit(yao_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
-    clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    bob_believer.add_plan(mop_rope)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.add_partnerunit(yao_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
+    clean_rope = bob_belief.make_rope(casa_rope, "clean")
+    bob_belief.add_plan(mop_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.edit_plan_attr(
         mop_rope, reason_context=casa_rope, reason_case=clean_rope
     )
-    bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(yao_str))
-    bob_believer.add_fact(casa_rope, clean_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.edit_plan_attr(casa_rope, awardunit=awardunit_shop(yao_str))
+    bob_belief.add_fact(casa_rope, clean_rope)
 
     br00020_header = x_ideas.get("br00020")
     br00021_header = x_ideas.get("br00021")
@@ -601,8 +601,8 @@ def test_add_believerunit_to_stance_csv_strs_ReturnsObj():
     br00029_header = x_ideas.get("br00029")
 
     # WHEN
-    bob_believer.settle_believer()
-    add_believerunit_to_stance_csv_strs(bob_believer, x_ideas, csv_delimiter)
+    bob_belief.settle_belief()
+    add_beliefunit_to_stance_csv_strs(bob_belief, x_ideas, csv_delimiter)
 
     # THEN
     assert x_ideas.get("br00020") != br00020_header
@@ -624,18 +624,18 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.add_partnerunit(yao_str)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.add_partnerunit(yao_str)
     run_str = ";Run"
     run_credit = 33
     run_debt = 55
-    bob_believer.get_partner(yao_str).add_membership(run_str, run_credit, run_debt)
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_belief.get_partner(yao_str).add_membership(run_str, run_credit, run_debt)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00020")
 
     # WHEN
@@ -659,14 +659,14 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     yao_credit = 33
     yao_debt = 55
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.add_partnerunit(yao_str, yao_credit, yao_debt)
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.add_partnerunit(yao_str, yao_credit, yao_debt)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00021")
 
     # WHEN
@@ -685,20 +685,20 @@ def test_add_pack_to_br00022_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
     yao_str = "Yao"
     yao_give_force = 55
     yao_take_force = 77
     casa_awardunit = awardunit_shop(yao_str, yao_give_force, yao_take_force)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardunit=casa_awardunit)
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.edit_plan_attr(casa_rope, awardunit=casa_awardunit)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00022")
     print(f"{csv_header=}")
 
@@ -717,20 +717,20 @@ def test_add_pack_to_br00023_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "amy23"
     a23_rope = to_rope(a23_str)
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
-    clean_rope = bob_believer.make_rope(casa_rope, "clean")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
+    clean_rope = bob_belief.make_rope(casa_rope, "clean")
     clean_fact_lower = 55
     clean_fact_upper = 77
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.add_fact(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.add_fact(casa_rope, clean_rope, clean_fact_lower, clean_fact_upper)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00023")
     print(f"{csv_header=}")
 
@@ -751,18 +751,18 @@ def test_add_pack_to_br00024_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
-    bob_believer.add_plan(casa_rope)
-    casa_plan = bob_believer.get_plan_obj(casa_rope)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
+    bob_belief.add_plan(casa_rope)
+    casa_plan = bob_belief.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_plan.laborunit.add_party(cleaners_str)
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00024")
     print(f"{csv_header=}")
 
@@ -785,18 +785,18 @@ def test_add_pack_to_br00025_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    casa_rope = bob_believer.make_l1_rope("casa")
-    bob_believer.add_plan(casa_rope)
-    casa_plan = bob_believer.get_plan_obj(casa_rope)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    casa_rope = bob_belief.make_l1_rope("casa")
+    bob_belief.add_plan(casa_rope)
+    casa_plan = bob_belief.get_plan_obj(casa_rope)
     cleaners_str = "cleaners"
     casa_plan.healerunit.set_healer_name(cleaners_str)
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00025")
     print(f"{csv_header=}")
 
@@ -816,17 +816,17 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
-    clean_rope = bob_believer.make_rope(casa_rope, "clean")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
+    clean_rope = bob_belief.make_rope(casa_rope, "clean")
     clean_reason_lower = 22
     clean_reason_upper = 55
     clean_reason_divisor = 77
-    bob_believer.add_plan(mop_rope)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief.add_plan(mop_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
         reason_case=clean_rope,
@@ -834,12 +834,12 @@ def test_add_pack_to_br00026_csv_ReturnsObj():
         reason_upper=clean_reason_upper,
         reason_divisor=clean_reason_divisor,
     )
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00026")
     print(f"{csv_header=}")
 
@@ -857,22 +857,22 @@ def test_add_pack_to_br00027_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
-    bob_believer.add_plan(mop_rope)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
+    bob_belief.add_plan(mop_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.edit_plan_attr(
         mop_rope,
         reason_context=casa_rope,
         reason_plan_active_requisite=True,
     )
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00027")
     print(f"{csv_header=}")
 
@@ -891,9 +891,9 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     bob_str = "Bob"
     a23_str = "amy23"
     a23_rope = to_rope(a23_str)
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
     casa_begin = 3
     casa_close = 5
     casa_addin = 7
@@ -905,9 +905,9 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     casa_star = 2
     casa_task = False
     casa_problem_bool = False
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(mop_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(mop_rope)
+    bob_belief.edit_plan_attr(
         mop_rope,
         begin=casa_begin,
         close=casa_close,
@@ -921,12 +921,12 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
         task=casa_task,
         problem_bool=casa_problem_bool,
     )
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00028")
     print(f"{csv_header=}")
 
@@ -934,8 +934,8 @@ def test_add_pack_to_br00028_csv_ReturnsObj():
     x_csv = add_pack_to_br00028_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_believer.coin_label},,,,,,,,,1,False,False\n"
-    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_believer.coin_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_star},{casa_task},{casa_problem_bool}\n"
+    # root_row = f"{sue_str},{event7},{a23_str},{bob_str},,{bob_belief.coin_label},,,,,,,,,1,False,False\n"
+    # mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_belief.coin_label},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},{casa_gogo_want},{casa_stop_want},{casa_star},{casa_task},{casa_problem_bool}\n"
     mop_row = f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},mop,{casa_begin},{casa_close},{casa_addin},{casa_numor},{casa_denom},{casa_morph},,,{casa_star},{casa_task},\n"
     casa_row = (
         f"{sue_str},{event7},{a23_str},{bob_str},{a23_rope},casa,,,,,,,,,0,False,\n"
@@ -953,21 +953,21 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     x_ideas = create_init_stance_idea_csv_strs()
     bob_str = "Bob"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.credor_respect = 444
-    bob_believer.debtor_respect = 556
-    bob_believer.fund_pool = 999
-    bob_believer.max_tree_traverse = 3
-    bob_believer.tally = 10
-    bob_believer.fund_iota = 3
-    bob_believer.penny = 13
-    bob_believer.respect_bit = 2
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.credor_respect = 444
+    bob_belief.debtor_respect = 556
+    bob_belief.fund_pool = 999
+    bob_belief.max_tree_traverse = 3
+    bob_belief.tally = 10
+    bob_belief.fund_iota = 3
+    bob_belief.penny = 13
+    bob_belief.respect_bit = 2
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
     csv_header = x_ideas.get("br00029")
     print(f"{csv_header=}")
 
@@ -975,8 +975,8 @@ def test_add_pack_to_br00029_csv_ReturnsObj():
     x_csv = add_pack_to_br00029_csv(csv_header, sue7_pack, csv_delimiter)
 
     # THEN
-    believer_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_believer.credor_respect},{bob_believer.debtor_respect},{bob_believer.fund_pool},,{bob_believer.tally},{bob_believer.fund_iota},,{bob_believer.respect_bit}\n"
-    assert x_csv == f"{csv_header}{believer_row}"
+    belief_row = f"{sue_str},{event7},{a23_str},{bob_str},{bob_belief.credor_respect},{bob_belief.debtor_respect},{bob_belief.fund_pool},,{bob_belief.tally},{bob_belief.fund_iota},,{bob_belief.respect_bit}\n"
+    assert x_csv == f"{csv_header}{belief_row}"
 
 
 def test_add_packunit_to_stance_csv_strs_ReturnsObj():
@@ -986,34 +986,34 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     bob_str = "Bob"
     yao_str = "Yao"
     a23_str = "amy23"
-    bob_believer = believerunit_shop(bob_str, a23_str)
-    bob_believer.add_partnerunit(yao_str)
-    mop_rope = bob_believer.make_l1_rope("mop")
-    casa_rope = bob_believer.make_l1_rope("casa")
-    clean_rope = bob_believer.make_rope(casa_rope, "clean")
-    bob_believer.add_plan(mop_rope)
-    bob_believer.add_plan(casa_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.edit_plan_attr(
+    bob_belief = beliefunit_shop(bob_str, a23_str)
+    bob_belief.add_partnerunit(yao_str)
+    mop_rope = bob_belief.make_l1_rope("mop")
+    casa_rope = bob_belief.make_l1_rope("casa")
+    clean_rope = bob_belief.make_rope(casa_rope, "clean")
+    bob_belief.add_plan(mop_rope)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.edit_plan_attr(
         mop_rope, reason_context=casa_rope, reason_case=clean_rope
     )
-    bob_believer.add_plan(casa_rope)
-    bob_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(yao_str))
-    bob_believer.add_fact(casa_rope, clean_rope)
-    bob_believer.credor_respect = 444
-    bob_believer.debtor_respect = 556
-    bob_believer.fund_pool = 999
-    bob_believer.max_tree_traverse = 3
-    bob_believer.tally = 10
-    bob_believer.fund_iota = 3
-    bob_believer.penny = 13
-    bob_believer.respect_bit = 2
-    bob_believerdelta = believerdelta_shop()
-    bob_believerdelta.add_all_believeratoms(bob_believer)
+    bob_belief.add_plan(casa_rope)
+    bob_belief.edit_plan_attr(casa_rope, awardunit=awardunit_shop(yao_str))
+    bob_belief.add_fact(casa_rope, clean_rope)
+    bob_belief.credor_respect = 444
+    bob_belief.debtor_respect = 556
+    bob_belief.fund_pool = 999
+    bob_belief.max_tree_traverse = 3
+    bob_belief.tally = 10
+    bob_belief.fund_iota = 3
+    bob_belief.penny = 13
+    bob_belief.respect_bit = 2
+    bob_beliefdelta = beliefdelta_shop()
+    bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
     event7 = 7
     sue7_pack = packunit_shop(bob_str, sue_str, a23_str, event_int=event7)
-    sue7_pack.set_believerdelta(bob_believerdelta)
+    sue7_pack.set_beliefdelta(bob_beliefdelta)
 
     br00020_header = x_ideas.get("br00020")
     br00021_header = x_ideas.get("br00021")

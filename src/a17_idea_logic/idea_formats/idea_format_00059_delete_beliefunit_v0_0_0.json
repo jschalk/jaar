@@ -1,0 +1,21 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "coin_label": {
+            "otx_key": true
+        },
+        "belief_name_ERASE": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00059",
+    "dimens": [
+        "beliefunit",
+        "coinunit"
+    ]
+}

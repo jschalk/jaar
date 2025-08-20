@@ -9,7 +9,7 @@ from src.a07_timeline_logic.test._util.a07_str import (
 )
 from src.a11_bud_logic.test._util.a11_str import (
     amount_str,
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     celldepth_str,
     coin_label_str,
@@ -50,11 +50,11 @@ def get_ex1_br00000_df() -> DataFrame:
 
 def get_ex1_br00001_df() -> DataFrame:
     """idea_format_00001_coin_budunit_v0_0_0
-    coin_label,believer_name,quota,bud_time,celldepth"""
+    coin_label,belief_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
             coin_label_str(),
-            believer_name_str(),
+            belief_name_str(),
             quota_str(),
             bud_time_str(),
             celldepth_str(),
@@ -66,9 +66,9 @@ def get_ex1_br00001_df() -> DataFrame:
 
 def get_ex1_br00002_df() -> DataFrame:
     """idea_format_00002_coin_paybook_v0_0_0
-    partner_name,amount,coin_label,believer_name,tran_time"""
+    partner_name,amount,coin_label,belief_name,tran_time"""
     x_df = DataFrame(
-        columns=["partner_name", "amount", "coin_label", "believer_name", "tran_time"]
+        columns=["partner_name", "amount", "coin_label", "belief_name", "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, AMY23_STR, "Zia", 777]
     return x_df
@@ -165,11 +165,11 @@ def get_ex2_br00000_df() -> DataFrame:
 
 def get_ex2_br00001_df() -> DataFrame:
     """idea_format_00001_coin_budunit_v0_0_0
-    coin_label,believer_name,quota,bud_time"""
+    coin_label,belief_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
             coin_label_str(),
-            believer_name_str(),
+            belief_name_str(),
             quota_str(),
             bud_time_str(),
             celldepth_str(),
@@ -185,13 +185,13 @@ def get_ex2_br00001_df() -> DataFrame:
 
 def get_ex2_br00002_df() -> DataFrame:
     """idea_format_00002_coin_paybook_v0_0_0
-    partner_name,amount,coin_label,believer_name,tran_time"""
+    partner_name,amount,coin_label,belief_name,tran_time"""
     x_df = DataFrame(
         columns=[
             partner_name_str(),
             amount_str(),
             coin_label_str(),
-            believer_name_str(),
+            belief_name_str(),
             tran_time_str(),
         ]
     )

@@ -15,15 +15,15 @@
         "group_title": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         }
     },
     "idea_number": "br00012",
     "dimens": [
-        "believerunit",
-        "believer_partnerunit",
-        "believer_partner_membership",
+        "beliefunit",
+        "belief_partnerunit",
+        "belief_partner_membership",
         "coinunit"
     ]
 }

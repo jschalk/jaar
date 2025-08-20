@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a02_finance_logic.test._util.a02_str import knot_str
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     coin_label_str,
     fund_iota_str,
     partner_name_str,
@@ -14,8 +14,8 @@ from src.a07_timeline_logic.test._util.a07_str import (
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.a08_believer_atom_logic.atom_config import get_allowed_class_types
-from src.a08_believer_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.atom_config import get_allowed_class_types
+from src.a08_belief_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -25,7 +25,7 @@ from src.a08_believer_atom_logic.test._util.a08_str import (
     normal_specs_str,
 )
 from src.a11_bud_logic.test._util.a11_str import (
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     celldepth_str,
     quota_str,
@@ -248,7 +248,7 @@ def test_get_coin_args_set_ReturnsObj():
         # job_listen_rotations_str(),
         "job_listen_rotations",
         penny_str(),
-        believer_name_str(),
+        belief_name_str(),
         quota_str(),
         celldepth_str(),
         respect_bit_str(),

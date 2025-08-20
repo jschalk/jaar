@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_name_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_name_str,
     coin_label_str,
     partner_name_str,
 )
@@ -48,7 +48,7 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
         event_int_str(),
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
@@ -64,5 +64,5 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
 
     # THEN
     assert os_path_exists(kpi001_csv_path)
-    expected_csv_str = "coin_label,believer_name,funds,fund_rank,tasks_count\n"
+    expected_csv_str = "coin_label,belief_name,funds,fund_rank,tasks_count\n"
     assert open(kpi001_csv_path).read() == expected_csv_str

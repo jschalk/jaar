@@ -2,14 +2,14 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a04_reason_logic.test._util.a04_str import coin_label_str
-from src.a09_pack_logic.test._util.a09_str import believer_name_str
+from src.a09_pack_logic.test._util.a09_str import belief_name_str
 from src.a18_etl_toolbox.a18_path import (
     create_coin_mstr_path,
     create_coin_ote1_csv_path,
     create_coin_ote1_json_path,
     create_last_run_metrics_path,
     create_stance0001_path,
-    create_stances_believer_dir_path,
+    create_stances_belief_dir_path,
     create_stances_dir_path,
     create_world_db_path,
 )
@@ -78,13 +78,13 @@ def test_create_stances_dir_path_ReturnsObj():
     assert gen_bob_stance_dir == expected_stances_dir
 
 
-def test_create_stances_believer_dir_path_ReturnsObj():
+def test_create_stances_belief_dir_path_ReturnsObj():
     # ESTABLISH
     x_coin_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
 
     # WHEN
-    gen_bob_stance_dir = create_stances_believer_dir_path(x_coin_mstr_dir, bob_str)
+    gen_bob_stance_dir = create_stances_belief_dir_path(x_coin_mstr_dir, bob_str)
 
     # THEN
     stances_dir = create_stances_dir_path(x_coin_mstr_dir)
@@ -123,14 +123,14 @@ def test_create_stances_dir_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_stances_dir_path) == doc_str
 
 
-def test_create_stances_believer_dir_path_HasDocString():
+def test_create_stances_belief_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_stances_believer_dir_path(
-        coin_mstr_dir="coin_mstr_dir", believer_name=believer_name_str()
+    doc_str = create_stances_belief_dir_path(
+        coin_mstr_dir="coin_mstr_dir", belief_name=belief_name_str()
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_stances_believer_dir_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_stances_belief_dir_path) == doc_str
 
 
 def test_create_stance0001_path_HasDocString():

@@ -1,10 +1,10 @@
 from src.a17_idea_logic.idea_main import (
-    coin_label_believer_name_nested_csv_dict,
-    get_csv_coin_label_believer_name_metrics,
+    coin_label_belief_name_nested_csv_dict,
+    get_csv_coin_label_belief_name_metrics,
 )
 
 
-def test_get_csv_coin_label_believer_name_metrics_ReturnsObj_Scenario2():
+def test_get_csv_coin_label_belief_name_metrics_ReturnsObj_Scenario2():
     # ESTABLISH
     amy_coin_label = "amy56"
     sue_str = "Sue"
@@ -17,7 +17,7 @@ def test_get_csv_coin_label_believer_name_metrics_ReturnsObj_Scenario2():
 """
 
     # WHEN
-    u_dict = get_csv_coin_label_believer_name_metrics(headerless_csv=headerless_csv)
+    u_dict = get_csv_coin_label_belief_name_metrics(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
@@ -26,7 +26,7 @@ def test_get_csv_coin_label_believer_name_metrics_ReturnsObj_Scenario2():
     assert u_dict == {amy_coin_label: {sue_str: 4, bob_str: 1}}
 
 
-def test_coin_label_believer_name_nested_csv_dict_ReturnsObj_Scenario0():
+def test_coin_label_belief_name_nested_csv_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     amy_coin_label = "amy56"
     sue_str = "Sue"
@@ -39,7 +39,7 @@ def test_coin_label_believer_name_nested_csv_dict_ReturnsObj_Scenario0():
 """
 
     # WHEN
-    u_dict = coin_label_believer_name_nested_csv_dict(headerless_csv=headerless_csv)
+    u_dict = coin_label_belief_name_nested_csv_dict(headerless_csv=headerless_csv)
 
     # THEN
     # print(f"{u_dict=}")
@@ -50,12 +50,12 @@ def test_coin_label_believer_name_nested_csv_dict_ReturnsObj_Scenario0():
 """
     static_bob_csv = f""",,{amy_coin_label},{bob_str},Yao,41,37
 """
-    generated_believer_name_dict = u_dict.get(amy_coin_label)
-    assert generated_believer_name_dict
-    assert list(generated_believer_name_dict.keys()) == [sue_str, bob_str]
-    generated_bob_csv = generated_believer_name_dict.get(bob_str)
+    generated_belief_name_dict = u_dict.get(amy_coin_label)
+    assert generated_belief_name_dict
+    assert list(generated_belief_name_dict.keys()) == [sue_str, bob_str]
+    generated_bob_csv = generated_belief_name_dict.get(bob_str)
     assert generated_bob_csv == static_bob_csv
-    generated_sue_csv = generated_believer_name_dict.get(sue_str)
+    generated_sue_csv = generated_belief_name_dict.get(sue_str)
     assert generated_sue_csv == static_sue_csv
-    believer_name_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
-    assert u_dict == {amy_coin_label: believer_name_csv_dict}
+    belief_name_csv_dict = {sue_str: static_sue_csv, bob_str: static_bob_csv}
+    assert u_dict == {amy_coin_label: belief_name_csv_dict}

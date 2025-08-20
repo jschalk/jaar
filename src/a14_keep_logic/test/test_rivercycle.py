@@ -1,4 +1,4 @@
-from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import (
     RiverCycle,
@@ -133,9 +133,9 @@ def test_create_init_rivercycle_ReturnsObjScenarioOne_partnerunit():
     yao_str = "Yao"
     x_coin_mstr_dir = temp_coin_mstr_dir()
     yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
-    yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_partnerunit(yao_str)
-    yao_credorledger = get_credorledger(yao_believer)
+    yao_belief = beliefunit_shop(yao_str)
+    yao_belief.add_partnerunit(yao_str)
+    yao_credorledger = get_credorledger(yao_belief)
     keep_credorledgers = {yao_str: yao_credorledger}
 
     # WHEN
@@ -157,11 +157,11 @@ def test_create_init_rivercycle_ReturnsObjScenarioThree_partnerunit():
     zia_partner_cred_points = 10
     x_coin_mstr_dir = temp_coin_mstr_dir()
     yao_hubunit = hubunit_shop(x_coin_mstr_dir, None, yao_str)
-    yao_believer = believerunit_shop(yao_str)
-    yao_believer.add_partnerunit(yao_str, yao_partner_cred_points)
-    yao_believer.add_partnerunit(bob_str, bob_partner_cred_points)
-    yao_believer.add_partnerunit(zia_str, zia_partner_cred_points)
-    yao_credorledger = get_credorledger(yao_believer)
+    yao_belief = beliefunit_shop(yao_str)
+    yao_belief.add_partnerunit(yao_str, yao_partner_cred_points)
+    yao_belief.add_partnerunit(bob_str, bob_partner_cred_points)
+    yao_belief.add_partnerunit(zia_str, zia_partner_cred_points)
+    yao_credorledger = get_credorledger(yao_belief)
     keep_credorledgers = {yao_str: yao_credorledger}
     print(f"{keep_credorledgers=}")
 

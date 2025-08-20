@@ -3,10 +3,10 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a06_believer_logic.test._util.a06_str import partner_name_str
+from src.a06_belief_logic.test._util.a06_str import partner_name_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     celldepth_str,
     coin_label_str,
@@ -44,7 +44,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00113_columns = [
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         otx_name_str(),
         inx_name_str(),
@@ -60,7 +60,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00001_columns = [
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         bud_time_str(),
         quota_str(),
         celldepth_str(),
@@ -93,22 +93,14 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         pidcore_sound_vld = create_prime_tablename("pidcore", "s", "vld")
         coinunit_sound_raw = create_prime_tablename("coinunit", "s", "raw")
         coinunit_sound_agg = create_prime_tablename("coinunit", "s", "agg")
-        blrunit_sound_put_raw = create_prime_tablename(
-            "believerunit", "s", "raw", "put"
-        )
-        blrunit_sound_put_agg = create_prime_tablename(
-            "believerunit", "s", "agg", "put"
-        )
+        blrunit_sound_put_raw = create_prime_tablename("beliefunit", "s", "raw", "put")
+        blrunit_sound_put_agg = create_prime_tablename("beliefunit", "s", "agg", "put")
         blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
         blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
         coinunit_voice_raw = create_prime_tablename("coinunit", "v", "raw")
         coinunit_voice_agg = create_prime_tablename("coinunit", "v", "agg")
-        blrunit_voice_put_raw = create_prime_tablename(
-            "believerunit", "v", "raw", "put"
-        )
-        blrunit_voice_put_agg = create_prime_tablename(
-            "believerunit", "v", "agg", "put"
-        )
+        blrunit_voice_put_raw = create_prime_tablename("beliefunit", "v", "raw", "put")
+        blrunit_voice_put_agg = create_prime_tablename("beliefunit", "v", "agg", "put")
         blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
         blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
 
@@ -184,7 +176,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     br00113_columns = [
         face_name_str(),
         coin_label_str(),
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         otx_name_str(),
         inx_name_str(),

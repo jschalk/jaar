@@ -15,7 +15,7 @@
         "coin_label": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         },
         "quota": {
@@ -26,6 +26,6 @@
     "dimens": [
         "coin_budunit",
         "coinunit",
-        "believerunit"
+        "beliefunit"
     ]
 }

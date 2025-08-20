@@ -9,7 +9,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     get_module_temp_dir,
 )
 from src.a18_etl_toolbox.test._util.a18_str import (
-    believer_net_amount_str,
+    belief_net_amount_str,
     coin_partner_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import CREATE_COIN_PARTNER_NETS_SQLSTR
@@ -48,7 +48,7 @@ def test_insert_tranunit_partners_net_PopulatesDatabase():
 
         # THEN
         assert get_row_count(cursor, coin_partner_nets_tablename) == 2
-        select_sqlstr = f"SELECT coin_label, believer_name, {believer_net_amount_str()} FROM {coin_partner_nets_tablename}"
+        select_sqlstr = f"SELECT coin_label, belief_name, {belief_net_amount_str()} FROM {coin_partner_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [
@@ -91,7 +91,7 @@ def test_etl_coin_json_partner_nets_to_coin_partner_nets_table_PopulatesDatabase
 
         # THEN
         assert get_row_count(cursor, coin_partner_nets_tablename) == 2
-        select_sqlstr = f"SELECT coin_label, believer_name, {believer_net_amount_str()} FROM {coin_partner_nets_tablename}"
+        select_sqlstr = f"SELECT coin_label, belief_name, {belief_net_amount_str()} FROM {coin_partner_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [

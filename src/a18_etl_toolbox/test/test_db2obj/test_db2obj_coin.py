@@ -122,7 +122,7 @@ def test_get_coin_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenario0
             f"INSERT INTO {coinunit_v_agg_tablename} (coin_label) VALUES ('{a23_str}');"
         )
         cursor.execute(coinunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {coinpay_v_agg_tablename} (coin_label, believer_name, partner_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {coinpay_v_agg_tablename} (coin_label, belief_name, partner_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
@@ -162,7 +162,7 @@ def test_get_coin_dict_from_voice_tables_ReturnsObj_With_blfpayy_Attrs_Scenario1
             f"INSERT INTO {coinunit_v_agg_tablename} (coin_label) VALUES ('{a23_str}');"
         )
         cursor.execute(coinunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {coinpay_v_agg_tablename} (coin_label, believer_name, partner_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {coinpay_v_agg_tablename} (coin_label, belief_name, partner_name, tran_time, amount)
 VALUES
   ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {a23_bob_sue_tp55_amount})
 , ('{a45_str}', '{bob_str}', '{sue_str}', {tp55}, {a45_bob_sue_tp55_amount})
@@ -202,7 +202,7 @@ def test_get_coin_dict_from_voice_tables_ReturnsObj_With_coinbud_Attrs_Scenario0
             f"INSERT INTO {coinunit_v_agg_tablename} (coin_label) VALUES ('{a23_str}');"
         )
         cursor.execute(coinunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {coinbud_v_agg_tablename} (coin_label, believer_name, bud_time, quota, celldepth)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {coinbud_v_agg_tablename} (coin_label, belief_name, bud_time, quota, celldepth)
 VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """
@@ -441,7 +441,7 @@ def test_get_coin_dict_from_voice_tables_ReturnsObj_IsFormatted_Scenario1_blfpay
             f"INSERT INTO {coinunit_v_agg_tablename} (coin_label) VALUES ('{a23_str}');"
         )
         cursor.execute(coinunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {coinpay_v_agg_tablename} (coin_label, believer_name, partner_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {coinpay_v_agg_tablename} (coin_label, belief_name, partner_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
@@ -474,7 +474,7 @@ def test_get_coin_dict_from_voice_tables_ReturnsObj_IsFormatted_Scenario2_coinbu
             f"INSERT INTO {coinunit_v_agg_tablename} (coin_label) VALUES ('{a23_str}');"
         )
         cursor.execute(coinunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {coinbud_v_agg_tablename} (coin_label, believer_name, bud_time, quota, celldepth)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {coinbud_v_agg_tablename} (coin_label, belief_name, bud_time, quota, celldepth)
 VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth})
 ;
 """

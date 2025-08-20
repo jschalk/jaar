@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.test._util.a11_str import (
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     coin_label_str,
 )
@@ -32,7 +32,7 @@ def test_etl_voice_raw_tables_to_coin_ote1_agg_SetsTableAttr():
         create_sound_and_voice_tables(cursor)
         coinbud_v_raw_table = create_prime_tablename(coin_budunit_str(), "v", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {coinbud_v_raw_table} ({event_int_str()}, {coin_label_str()}_inx, {believer_name_str()}_inx, {bud_time_str()})
+INSERT INTO {coinbud_v_raw_table} ({event_int_str()}, {coin_label_str()}_inx, {belief_name_str()}_inx, {bud_time_str()})
 VALUES
   ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})

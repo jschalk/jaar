@@ -1,10 +1,10 @@
 from src.a11_bud_logic.test._util.a11_str import (
     amount_str,
     ancestors_str,
-    believeradjust_str,
-    believerevent_facts_str,
+    beliefadjust_str,
+    beliefevent_facts_str,
     boss_facts_str,
-    bud_believer_name_str,
+    bud_belief_name_str,
     bud_partner_nets_str,
     bud_time_str,
     celldepth_str,
@@ -22,13 +22,13 @@ def test_str_functions_ReturnsObj():
     assert ancestors_str() == "ancestors"
     assert boss_facts_str() == "boss_facts"
     assert bud_partner_nets_str() == "bud_partner_nets"
-    assert bud_believer_name_str() == "bud_believer_name"
+    assert bud_belief_name_str() == "bud_belief_name"
     assert bud_time_str() == "bud_time"
     assert celldepth_str() == "celldepth"
     assert found_facts_str() == "found_facts"
     assert mandate_str() == "mandate"
     assert offi_time_str() == "offi_time"
-    assert believeradjust_str() == "believeradjust"
-    assert believerevent_facts_str() == "believerevent_facts"
+    assert beliefadjust_str() == "beliefadjust"
+    assert beliefevent_facts_str() == "beliefevent_facts"
     assert quota_str() == "quota"
     assert tran_time_str() == "tran_time"

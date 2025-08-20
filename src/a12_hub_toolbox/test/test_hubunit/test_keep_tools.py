@@ -2,17 +2,15 @@ from os.path import exists as os_path_exist, exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.a01_term_logic.rope import create_rope
 from src.a05_plan_logic.plan import get_default_coin_label as root_label
-from src.a06_believer_logic.test._util.example_believers import (
-    get_believerunit_with_4_levels,
-)
+from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
 from src.a12_hub_toolbox.a12_path import create_keep_rope_path
 from src.a12_hub_toolbox.keep_tool import (
     create_keep_duty_path,
     create_keep_path_dir_if_missing,
     create_treasury_db_file,
     create_treasury_db_path,
-    get_duty_believer,
-    save_duty_believer,
+    get_duty_belief,
+    save_duty_belief,
     treasury_db_file_exists,
 )
 from src.a12_hub_toolbox.test._util.a12_env import (
@@ -52,7 +50,7 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     texas_rope = create_rope(root_label(), "Texas")
     treasury_db_path = create_treasury_db_path(
         coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -60,7 +58,7 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     assert (
         treasury_db_file_exists(
             coin_mstr_dir,
-            believer_name=sue_str,
+            belief_name=sue_str,
             coin_label=a23_str,
             keep_rope=texas_rope,
             knot=None,
@@ -74,7 +72,7 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # THEN
     assert treasury_db_file_exists(
         coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -91,7 +89,7 @@ def test_create_treasury_db_file_CreatesDatabase(
     texas_rope = create_rope(a23_str, "Texas")
     treasury_db_path = create_treasury_db_path(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -101,7 +99,7 @@ def test_create_treasury_db_file_CreatesDatabase(
     # WHEN
     create_treasury_db_file(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -121,7 +119,7 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
     texas_rope = create_rope(a23_str, "Texas")
     treasury_db_path = create_treasury_db_path(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -129,7 +127,7 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
     delete_dir(treasury_db_path)  # clear out any treasury.db file
     create_treasury_db_file(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -148,7 +146,7 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
     # WHEN
     create_treasury_db_file(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
@@ -158,7 +156,7 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
     assert open_file(treasury_db_path) == x_file_str
 
 
-def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
+def test_save_duty_belief_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -170,33 +168,33 @@ def test_save_duty_believer_SavesFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     coin_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    bob_believer = get_believerunit_with_4_levels()
-    bob_believer.set_believer_name(bob_str)
+    bob_belief = get_beliefunit_with_4_levels()
+    bob_belief.set_belief_name(bob_str)
     keep_duty_path = create_keep_duty_path(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
-        duty_believer=bob_str,
+        duty_belief=bob_str,
     )
     assert os_path_exists(keep_duty_path) is False
 
     # WHEN
-    save_duty_believer(
+    save_duty_belief(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
-        duty_believer=bob_believer,
+        duty_belief=bob_belief,
     )
 
     # THEN
     assert os_path_exists(keep_duty_path)
 
 
-def test_get_duty_believer_reason_lowersFile(env_dir_setup_cleanup):
+def test_get_duty_belief_reason_lowersFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
@@ -208,26 +206,26 @@ def test_get_duty_believer_reason_lowersFile(env_dir_setup_cleanup):
     a23_str = "amy23"
     coin_mstr_dir = get_module_temp_dir()
     bob_str = "Bob"
-    bob_believer = get_believerunit_with_4_levels()
-    bob_believer.set_believer_name(bob_str)
-    save_duty_believer(
+    bob_belief = get_beliefunit_with_4_levels()
+    bob_belief.set_belief_name(bob_str)
+    save_duty_belief(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
-        duty_believer=bob_believer,
+        duty_belief=bob_belief,
     )
 
     # WHEN
-    gen_bob_duty = get_duty_believer(
+    gen_bob_duty = get_duty_belief(
         coin_mstr_dir=coin_mstr_dir,
-        believer_name=sue_str,
+        belief_name=sue_str,
         coin_label=a23_str,
         keep_rope=texas_rope,
         knot=None,
-        duty_believer_name=bob_str,
+        duty_belief_name=bob_str,
     )
 
     # THEN
-    assert gen_bob_duty.to_dict() == bob_believer.to_dict()
+    assert gen_bob_duty.to_dict() == bob_belief.to_dict()

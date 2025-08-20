@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a01_term_logic.term import BelieverName, PartnerName
+from src.a01_term_logic.term import BeliefName, PartnerName
 from src.a02_finance_logic.allot import allot_scale
 from src.a12_hub_toolbox.hubunit import HubUnit
 from src.a14_keep_logic.rivercycle import (
@@ -21,7 +21,7 @@ from src.a14_keep_logic.rivercycle import (
 class RiverRun:
     hubunit: HubUnit = None
     number: int = None
-    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]] = None
+    keep_credorledgers: dict[BeliefName : dict[PartnerName, float]] = None
     tax_dues: dict[PartnerName, float] = None
     cycle_max: int = None
     # calculated fields
@@ -41,25 +41,25 @@ class RiverRun:
 
     def set_keep_credorledger(
         self,
-        believer_name: BelieverName,
+        belief_name: BeliefName,
         partner_name: PartnerName,
         credit_ledger: float,
     ):
         set_in_nested_dict(
             x_dict=self.keep_credorledgers,
-            x_keylist=[believer_name, partner_name],
+            x_keylist=[belief_name, partner_name],
             x_obj=credit_ledger,
         )
 
-    def delete_keep_credorledgers_believer(self, believer_name: BelieverName):
-        self.keep_credorledgers.pop(believer_name)
+    def delete_keep_credorledgers_belief(self, belief_name: BeliefName):
+        self.keep_credorledgers.pop(belief_name)
 
     def get_all_keep_credorledger_partner_names(self):
         x_set = set()
-        for believer_name, believer_dict in self.keep_credorledgers.items():
-            if believer_name not in x_set:
-                x_set.add(believer_name)
-            for partner_name in believer_dict.keys():
+        for belief_name, belief_dict in self.keep_credorledgers.items():
+            if belief_name not in x_set:
+                x_set.add(belief_name)
+            for partner_name in belief_dict.keys():
                 if partner_name not in x_set:
                     x_set.add(partner_name)
         return x_set
@@ -204,12 +204,10 @@ class RiverRun:
         tax_dues_partners = set(self.tax_dues.keys())
         tax_yields_partners = set(self._tax_yields.keys())
         self._debtor_count = len(tax_dues_partners.union(tax_yields_partners))
-        self._credor_count = len(
-            self.keep_credorledgers.get(self.hubunit.believer_name)
-        )
+        self._credor_count = len(self.keep_credorledgers.get(self.hubunit.belief_name))
 
     def _set_grants(self):
-        grant_credorledger = self.keep_credorledgers.get(self.hubunit.believer_name)
+        grant_credorledger = self.keep_credorledgers.get(self.hubunit.belief_name)
         self._grants = allot_scale(
             ledger=grant_credorledger,
             scale_number=self.hubunit.keep_point_magnitude,
@@ -242,7 +240,7 @@ class RiverRun:
 def riverrun_shop(
     hubunit: HubUnit,
     number: int = None,
-    keep_credorledgers: dict[BelieverName : dict[PartnerName, float]] = None,
+    keep_credorledgers: dict[BeliefName : dict[PartnerName, float]] = None,
     tax_dues: dict[PartnerName, float] = None,
     cycle_max: int = None,
 ):

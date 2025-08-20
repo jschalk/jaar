@@ -1,10 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_partnerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_partnerunit_str,
     partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import (
-    believer_name_str,
+    belief_name_str,
     coin_label_str,
     event_int_str,
     face_name_str,
@@ -22,7 +22,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_knot_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
 )
-from src.a18_etl_toolbox.transformers import set_coin_believer_sound_agg_knot_errors
+from src.a18_etl_toolbox.transformers import set_coin_belief_sound_agg_knot_errors
 
 
 def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTable_Scenario0():
@@ -39,10 +39,10 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
-        blrpern_dimen = believer_partnerunit_str()
+        blrpern_dimen = belief_partnerunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {coin_label_str()}, {believer_name_str()}, {partner_name_str()})
+  {event_int_str()}, {face_name_str()}, {coin_label_str()}, {belief_name_str()}, {partner_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -95,10 +95,10 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
-        blrpern_dimen = believer_partnerunit_str()
+        blrpern_dimen = belief_partnerunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {coin_label_str()}, {believer_name_str()}, {partner_name_str()})
+  {event_int_str()}, {face_name_str()}, {coin_label_str()}, {belief_name_str()}, {partner_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -138,7 +138,7 @@ VALUES
         ]
 
 
-def test_set_coin_believer_sound_agg_knot_errors_PopulatesTable_Scenario0():
+def test_set_coin_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
     # ESTABLISH
     sue_str = "Sue"
     yao_str = "Yao"
@@ -154,10 +154,10 @@ def test_set_coin_believer_sound_agg_knot_errors_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
-        blrpern_dimen = believer_partnerunit_str()
+        blrpern_dimen = belief_partnerunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {coin_label_str()}, {believer_name_str()}, {partner_name_str()})
+  {event_int_str()}, {face_name_str()}, {coin_label_str()}, {belief_name_str()}, {partner_name_str()})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -179,11 +179,11 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
-        set_coin_believer_sound_agg_knot_errors(cursor)
+        set_coin_belief_sound_agg_knot_errors(cursor)
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put} ORDER BY {coin_label_str()}, {believer_name_str()}, {partner_name_str()}"
+        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put} ORDER BY {coin_label_str()}, {belief_name_str()}, {partner_name_str()}"
         cursor.execute(select_core_raw_sqlstr)
         name_knot_str = f"Knot cannot exist in NameTerm column {partner_name_str()}"
         label_knot_str = f"Knot cannot exist in LabelTerm column {coin_label_str()}"

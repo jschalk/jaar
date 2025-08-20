@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
 )
 from src.a07_timeline_logic.calendar_markdown import get_calendarmarkdown_str
 from src.a15_coin_logic.coin_main import get_default_path_coinunit
-from src.a15_coin_logic.coin_timeline import get_coin_believertimelinepoint
+from src.a15_coin_logic.coin_timeline import get_coin_belieftimelinepoint
 from src.a17_idea_logic.idea_db_tool import save_table_to_csv
 from src.a19_kpi_toolbox.kpi_sqlstrs import get_coin_kpi001_partner_nets_sqlstr
 
@@ -72,8 +72,8 @@ def create_calendar_markdown_files(coin_mstr_dir: str, output_dir: str):
     for coin_label in get_level1_dirs(coins_dir):
         coin_calendar_md_path = create_path(output_dir, f"{coin_label}_calendar.md")
         x_coinunit = get_default_path_coinunit(coin_mstr_dir, coin_label)
-        coin_believertimelinepoint = get_coin_believertimelinepoint(x_coinunit)
-        coin_year_num = coin_believertimelinepoint._year_num
+        coin_belieftimelinepoint = get_coin_belieftimelinepoint(x_coinunit)
+        coin_year_num = coin_belieftimelinepoint._year_num
         coin_timeline_config = x_coinunit.timeline.to_dict()
         x_calendarmarkdown = get_calendarmarkdown_str(
             coin_timeline_config, coin_year_num

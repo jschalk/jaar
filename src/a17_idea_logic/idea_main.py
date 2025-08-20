@@ -7,14 +7,14 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_csv_column1_column2_metrics,
     get_positional_dict,
 )
-from src.a01_term_logic.term import BelieverName, CoinLabel
-from src.a06_believer_logic.believer_main import BelieverUnit
+from src.a01_term_logic.term import BeliefName, CoinLabel
+from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a07_timeline_logic.timeline_main import timelineunit_shop
-from src.a08_believer_atom_logic.atom_main import BelieverAtom, atomrow_shop
+from src.a08_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop
 from src.a09_pack_logic.delta import (
-    BelieverDelta,
-    believerdelta_shop,
-    get_dimens_cruds_believerdelta,
+    BeliefDelta,
+    beliefdelta_shop,
+    get_dimens_cruds_beliefdelta,
 )
 from src.a15_coin_logic.coin_main import CoinUnit, coinunit_shop
 from src.a17_idea_logic.idea_config import (
@@ -80,17 +80,15 @@ def _generate_idea_dataframe(d2_list: list[list[str]], idea_name: str) -> DataFr
     return DataFrame(d2_list, columns=_get_headers_list(idea_name))
 
 
-def create_idea_df(x_believerunit: BelieverUnit, idea_name: str) -> DataFrame:
-    x_believerdelta = believerdelta_shop()
-    x_believerdelta.add_all_believeratoms(x_believerunit)
+def create_idea_df(x_beliefunit: BeliefUnit, idea_name: str) -> DataFrame:
+    x_beliefdelta = beliefdelta_shop()
+    x_beliefdelta.add_all_beliefatoms(x_beliefunit)
     x_idearef = get_idearef_obj(idea_name)
-    x_coin_label = x_believerunit.coin_label
-    x_believer_name = x_believerunit.believer_name
-    sorted_believeratoms = _get_sorted_INSERT_str_believeratoms(
-        x_believerdelta, x_idearef
-    )
+    x_coin_label = x_beliefunit.coin_label
+    x_belief_name = x_beliefunit.belief_name
+    sorted_beliefatoms = _get_sorted_INSERT_str_beliefatoms(x_beliefdelta, x_idearef)
     d2_list = _create_d2_list(
-        sorted_believeratoms, x_idearef, x_coin_label, x_believer_name
+        sorted_beliefatoms, x_idearef, x_coin_label, x_belief_name
     )
     d2_list = _delta_all_task_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
@@ -98,31 +96,31 @@ def create_idea_df(x_believerunit: BelieverUnit, idea_name: str) -> DataFrame:
     return _sort_dataframe(x_idea, sorting_columns)
 
 
-def _get_sorted_INSERT_str_believeratoms(
-    x_believerdelta: BelieverDelta, x_idearef: IdeaRef
-) -> list[BelieverAtom]:
+def _get_sorted_INSERT_str_beliefatoms(
+    x_beliefdelta: BeliefDelta, x_idearef: IdeaRef
+) -> list[BeliefAtom]:
     dimen_set = set(x_idearef.dimens)
     curd_set = {"INSERT"}
-    limited_delta = get_dimens_cruds_believerdelta(x_believerdelta, dimen_set, curd_set)
-    return limited_delta.get_dimen_sorted_believeratoms_list()
+    limited_delta = get_dimens_cruds_beliefdelta(x_beliefdelta, dimen_set, curd_set)
+    return limited_delta.get_dimen_sorted_beliefatoms_list()
 
 
 def _create_d2_list(
-    sorted_believeratoms: list[BelieverAtom],
+    sorted_beliefatoms: list[BeliefAtom],
     x_idearef: IdeaRef,
     x_coin_label: CoinLabel,
-    x_believer_name: BelieverName,
+    x_belief_name: BeliefName,
 ):
     d2_list = []
-    for x_believeratom in sorted_believeratoms:
+    for x_beliefatom in sorted_beliefatoms:
         d1_list = []
         for x_attribute in x_idearef.get_headers_list():
             if x_attribute == "coin_label":
                 d1_list.append(x_coin_label)
-            elif x_attribute == "believer_name":
-                d1_list.append(x_believer_name)
+            elif x_attribute == "belief_name":
+                d1_list.append(x_belief_name)
             else:
-                d1_list.append(x_believeratom.get_value(x_attribute))
+                d1_list.append(x_beliefatom.get_value(x_attribute))
         d2_list.append(d1_list)
     return d2_list
 
@@ -149,9 +147,9 @@ def _sort_dataframe(x_idea: DataFrame, sorting_columns: list[str]) -> DataFrame:
 
 
 def save_idea_csv(
-    x_ideaname: str, x_believerunit: BelieverUnit, x_dir: str, x_filename: str
+    x_ideaname: str, x_beliefunit: BeliefUnit, x_dir: str, x_filename: str
 ):
-    x_dataframe = create_idea_df(x_believerunit, x_ideaname)
+    x_dataframe = create_idea_df(x_beliefunit, x_ideaname)
     save_dataframe_to_csv(x_dataframe, x_dir, x_filename)
 
 
@@ -165,9 +163,9 @@ def get_csv_idearef(header_row: list[str]) -> IdeaRef:
     return get_idearef_obj(x_ideaname)
 
 
-def _remove_non_believer_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
+def _remove_non_belief_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     to_delete_dimen_set = {
-        dimen for dimen in x_idearef.dimens if not dimen.startswith("believer")
+        dimen for dimen in x_idearef.dimens if not dimen.startswith("belief")
     }
     dimens_set = set(x_idearef.dimens)
     for to_delete_dimen in to_delete_dimen_set:
@@ -177,13 +175,13 @@ def _remove_non_believer_dimens_from_idearef(x_idearef: IdeaRef) -> IdeaRef:
     return x_idearef
 
 
-def make_believerdelta(x_csv: str) -> BelieverDelta:
+def make_beliefdelta(x_csv: str) -> BeliefDelta:
     header_row, headerless_csv = extract_csv_headers(x_csv)
     x_idearef = get_csv_idearef(header_row)
-    _remove_non_believer_dimens_from_idearef(x_idearef)
+    _remove_non_belief_dimens_from_idearef(x_idearef)
     x_reader = csv_reader(headerless_csv.splitlines(), delimiter=",")
     x_dict = get_positional_dict(header_row)
-    x_believerdelta = believerdelta_shop()
+    x_beliefdelta = beliefdelta_shop()
 
     for row in x_reader:
         x_atomrow = atomrow_shop(x_idearef.dimens, "INSERT")
@@ -191,20 +189,20 @@ def make_believerdelta(x_csv: str) -> BelieverDelta:
             if header_index := x_dict.get(x_header):
                 x_atomrow.__dict__[x_header] = row[header_index]
 
-        for x_believeratom in x_atomrow.get_believeratoms():
-            x_believerdelta.set_believeratom(x_believeratom)
-    return x_believerdelta
+        for x_beliefatom in x_atomrow.get_beliefatoms():
+            x_beliefdelta.set_beliefatom(x_beliefatom)
+    return x_beliefdelta
 
 
-def get_csv_coin_label_believer_name_metrics(
+def get_csv_coin_label_belief_name_metrics(
     headerless_csv: str, delimiter: str = None
-) -> dict[CoinLabel, dict[BelieverName, int]]:
+) -> dict[CoinLabel, dict[BeliefName, int]]:
     return get_csv_column1_column2_metrics(headerless_csv, delimiter)
 
 
-def coin_label_believer_name_nested_csv_dict(
+def coin_label_belief_name_nested_csv_dict(
     headerless_csv: str, delimiter: str = None
-) -> dict[CoinLabel, dict[BelieverName, str]]:
+) -> dict[CoinLabel, dict[BeliefName, str]]:
     return create_l2nested_csv_dict(headerless_csv, delimiter)
 
 
@@ -293,7 +291,7 @@ def _add_budunits_from_df(x_coinunit: CoinUnit, br00001_df: DataFrame):
     query_str = f"coin_label == '{x_coinunit.coin_label}'"
     for index, row in br00001_df.query(query_str).iterrows():
         x_coinunit.add_budunit(
-            believer_name=row["believer_name"],
+            belief_name=row["belief_name"],
             bud_time=row["bud_time"],
             quota=row["quota"],
             celldepth=if_nan_return_None(row["celldepth"]),
@@ -305,7 +303,7 @@ def _add_paypurchases_from_df(x_coinunit: CoinUnit, br00002_df: DataFrame):
     query_str = f"coin_label == '{x_coinunit.coin_label}'"
     for index, row in br00002_df.query(query_str).iterrows():
         x_coinunit.add_paypurchase(
-            believer_name=row["believer_name"],
+            belief_name=row["belief_name"],
             partner_name=row["partner_name"],
             tran_time=row["tran_time"],
             amount=row["amount"],

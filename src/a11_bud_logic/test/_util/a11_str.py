@@ -1,7 +1,7 @@
 from src.a02_finance_logic.test._util.a02_str import magnitude_str
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     ancestors_str,
-    believer_name_str,
+    belief_name_str,
     coin_label_str,
     mandate_str,
 )
@@ -11,20 +11,20 @@ def amount_str() -> str:
     return "amount"
 
 
-def believeradjust_str() -> str:
-    return "believeradjust"
+def beliefadjust_str() -> str:
+    return "beliefadjust"
 
 
-def believerevent_facts_str() -> str:
-    return "believerevent_facts"
+def beliefevent_facts_str() -> str:
+    return "beliefevent_facts"
 
 
 def boss_facts_str() -> str:
     return "boss_facts"
 
 
-def bud_believer_name_str() -> str:
-    return "bud_believer_name"
+def bud_belief_name_str() -> str:
+    return "bud_belief_name"
 
 
 def bud_partner_nets_str() -> str:

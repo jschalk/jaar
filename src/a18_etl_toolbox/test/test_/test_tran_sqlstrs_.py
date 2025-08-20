@@ -5,23 +5,23 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_partner_membership_str,
-    believer_partnerunit_str,
-    believer_plan_awardunit_str,
-    believer_plan_factunit_str,
-    believer_plan_healerunit_str,
-    believer_plan_partyunit_str,
-    believer_plan_reason_caseunit_str,
-    believer_plan_reasonunit_str,
-    believer_planunit_str,
-    believerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_partner_membership_str,
+    belief_partnerunit_str,
+    belief_plan_awardunit_str,
+    belief_plan_factunit_str,
+    belief_plan_healerunit_str,
+    belief_plan_partyunit_str,
+    belief_plan_reason_caseunit_str,
+    belief_plan_reasonunit_str,
+    belief_planunit_str,
+    beliefunit_str,
 )
-from src.a08_believer_atom_logic.atom_config import get_delete_key_name
+from src.a08_belief_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a10_believer_calc.test._util.a10_str import believer_groupunit_str
+from src.a10_belief_calc.test._util.a10_str import belief_groupunit_str
 from src.a11_bud_logic.test._util.a11_str import (
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     coin_label_str,
     tran_time_str,
@@ -54,7 +54,7 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.test._util.a18_str import (
-    believer_net_amount_str,
+    belief_net_amount_str,
     coin_event_time_agg_str,
     coin_ote1_agg_str,
     coin_partner_nets_str,
@@ -84,17 +84,17 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    blrunit_dimen = believerunit_str()
-    blrpern_dimen = believer_partnerunit_str()
-    blrmemb_dimen = believer_partner_membership_str()
-    blrgrou_dimen = believer_groupunit_str()
-    blrplan_dimen = believer_planunit_str()
-    blrawar_dimen = believer_plan_awardunit_str()
-    blrreas_dimen = believer_plan_reasonunit_str()
-    blrprem_dimen = believer_plan_reason_caseunit_str()
-    blrlabo_dimen = believer_plan_partyunit_str()
-    blrheal_dimen = believer_plan_healerunit_str()
-    blrfact_dimen = believer_plan_factunit_str()
+    blrunit_dimen = beliefunit_str()
+    blrpern_dimen = belief_partnerunit_str()
+    blrmemb_dimen = belief_partner_membership_str()
+    blrgrou_dimen = belief_groupunit_str()
+    blrplan_dimen = belief_planunit_str()
+    blrawar_dimen = belief_plan_awardunit_str()
+    blrreas_dimen = belief_plan_reasonunit_str()
+    blrprem_dimen = belief_plan_reason_caseunit_str()
+    blrlabo_dimen = belief_plan_partyunit_str()
+    blrheal_dimen = belief_plan_healerunit_str()
+    blrfact_dimen = belief_plan_factunit_str()
     blfunit_dimen = coinunit_str()
     blfpayy_dimen = coin_paybook_str()
     blfbudd_dimen = coin_budunit_str()
@@ -114,7 +114,7 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    blrunit_s_agg_table = create_prime_tablename("believerunit", "s", agg_str, put_str)
+    blrunit_s_agg_table = create_prime_tablename("beliefunit", "s", agg_str, put_str)
     blrpern_s_agg_table = create_prime_tablename("blrpern", "s", agg_str, put_str)
     blrmemb_s_agg_table = create_prime_tablename("blrmemb", "s", agg_str, put_str)
     blrplan_s_agg_table = create_prime_tablename("blrplan", "s", agg_str, put_str)
@@ -175,7 +175,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert blrpern_job_table == f"{blrpern_dimen}_job"
     assert blrgrou_job_table == f"{blrgrou_dimen}_job"
-    assert x_blrpern_raw == "believer_partnerunit_raw"
+    assert x_blrpern_raw == "belief_partnerunit_raw"
 
 
 def test_create_all_idea_tables_CreatesCoinRawTables():
@@ -389,7 +389,7 @@ def test_CREATE_COIN_OTE1_AGG_SQLSTR_Exists():
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS {coin_ote1_agg_str()} (
   {coin_label_str()} TEXT
-, {believer_name_str()} TEXT
+, {belief_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {bud_time_str()} INTEGER
 , error_message TEXT
@@ -406,18 +406,18 @@ def test_INSERT_COIN_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
     coinbud_v_raw_tablename = create_prime_tablename(coin_budunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {coin_ote1_agg_str()} ({coin_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()})
-SELECT {coin_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()}
+INSERT INTO {coin_ote1_agg_str()} ({coin_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()})
+SELECT {coin_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
 FROM (
     SELECT 
       {coin_label_str()}_inx {coin_label_str()}
-    , {believer_name_str()}_inx {believer_name_str()}
+    , {belief_name_str()}_inx {belief_name_str()}
     , {event_int_str()}
     , {bud_time_str()}
     FROM {coinbud_v_raw_tablename}
-    GROUP BY {coin_label_str()}_inx, {believer_name_str()}_inx, {event_int_str()}, {bud_time_str()}
+    GROUP BY {coin_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {coin_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()}
+ORDER BY {coin_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
 ;
 """
     # WHEN / THEN
@@ -427,13 +427,13 @@ ORDER BY {coin_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time
 def test_CREATE_COIN_PARTNER_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
-    sqlite_types[believer_net_amount_str()] = "REAL"
+    sqlite_types[belief_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
         tablename=coin_partner_nets_str(),
         columns_list=[
             coin_label_str(),
-            believer_name_str(),
-            believer_net_amount_str(),
+            belief_name_str(),
+            belief_net_amount_str(),
         ],
         column_types=sqlite_types,
     )

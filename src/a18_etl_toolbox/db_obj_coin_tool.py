@@ -73,11 +73,11 @@ def _set_coin_dict_blfpayy(cursor: sqlite3_Cursor, coin_dict: dict, x_coin_label
     tranunits_dict = {}
     for blfpayy_row in cursor.fetchall():
         row_coin_label = blfpayy_row[0]
-        row_believer_name = blfpayy_row[1]
+        row_belief_name = blfpayy_row[1]
         row_partner_name = blfpayy_row[2]
         row_tran_time = blfpayy_row[3]
         row_amount = blfpayy_row[4]
-        keylist = [row_believer_name, row_partner_name, row_tran_time]
+        keylist = [row_belief_name, row_partner_name, row_tran_time]
         set_in_nested_dict(tranunits_dict, keylist, row_amount)
     paybook_dict = {"coin_label": x_coin_label, "tranunits": tranunits_dict}
     coin_dict["paybook"] = paybook_dict
@@ -87,13 +87,13 @@ def _set_coin_dict_coinbud(cursor: sqlite3_Cursor, coin_dict: dict):
     brokerunits_dict = {}
     for blfpayy_row in cursor.fetchall():
         row_coin_label = blfpayy_row[0]
-        row_believer_name = blfpayy_row[1]
+        row_belief_name = blfpayy_row[1]
         row_bud_time = blfpayy_row[2]
         row_quota = blfpayy_row[3]
         row_celldepth = blfpayy_row[4]
-        believer_keylist = [row_believer_name, "believer_name"]
-        set_in_nested_dict(brokerunits_dict, believer_keylist, row_believer_name)
-        keylist = [row_believer_name, "buds", row_bud_time]
+        belief_keylist = [row_belief_name, "belief_name"]
+        set_in_nested_dict(brokerunits_dict, belief_keylist, row_belief_name)
+        keylist = [row_belief_name, "buds", row_bud_time]
         bud_timepoint_dict = {
             "bud_time": row_bud_time,
             "quota": row_quota,

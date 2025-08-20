@@ -15,7 +15,7 @@
         "star": {
             "otx_key": false
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         },
         "task": {
@@ -25,7 +25,7 @@
     "idea_number": "br00013",
     "dimens": [
         "coinunit",
-        "believerunit",
-        "believer_planunit"
+        "beliefunit",
+        "belief_planunit"
     ]
 }

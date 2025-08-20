@@ -6,7 +6,7 @@ from src.a02_finance_logic.finance_config import (
     filter_penny,
 )
 from src.a02_finance_logic.test._util.a02_str import knot_str
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     coin_label_str,
     fund_iota_str,
     penny_str,
@@ -55,7 +55,7 @@ def test_CoinUnit_to_dict_ReturnsObjWith_paybook():
     amy_coin.add_budunit(sue_str, sue_x4_tran_time, sue_x4_quota)
     amy_coin.add_budunit(sue_str, sue_x7_tran_time, sue_x7_quota)
     amy_coin.add_paypurchase(
-        believer_name=bob_str,
+        belief_name=bob_str,
         partner_name=sue_str,
         tran_time=pay_tran_time,
         amount=bob_sue_amount,
@@ -170,7 +170,7 @@ def test_get_from_dict_ReturnsCoinUnit_Scenario0_WithParameters():
     amy_coin.respect_bit = sue_respect_bit
     amy_coin.penny = sue_penny
     amy_coin.add_paypurchase(
-        believer_name=bob_str,
+        belief_name=bob_str,
         partner_name=sue_str,
         tran_time=pay_tran_time,
         amount=bob_sue_amount,

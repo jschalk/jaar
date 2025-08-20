@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a08_believer_atom_logic.atom_config import get_all_believer_dimen_delete_keys
+from src.a08_belief_atom_logic.atom_config import get_all_belief_dimen_delete_keys
 
 
 def pidgin_config_path() -> str:
@@ -105,7 +105,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "morph": "bool",
         "numor": "int",
         "offi_time": "TimeLinePoint",
-        "believer_name": "NameTerm",
+        "belief_name": "NameTerm",
         "penny": "float",
         "job_listen_rotations": "int",
         "task": "bool",
@@ -184,7 +184,7 @@ def get_pidginable_args() -> set:
         "hour_label",
         "plan_rope",
         "month_label",
-        "believer_name",
+        "belief_name",
         "reason_state",
         "reason_context",
         "party_title",
@@ -196,7 +196,7 @@ def get_pidginable_args() -> set:
 def find_set_otx_inx_args(args: set) -> set:
     """Receives set of args, returns a set with all "Pidginable" args replaced with "_otx" and "_inx" """
     all_pidginable = get_pidginable_args()
-    all_pidginable.update(get_all_believer_dimen_delete_keys())
+    all_pidginable.update(get_all_belief_dimen_delete_keys())
     all_pidginable.intersection_update(args)
     transformed_args = set()
     for arg in args:
@@ -213,7 +213,7 @@ def get_pidgin_NameTerm_args() -> set[str]:
         "partner_name",
         "face_name",
         "healer_name",
-        "believer_name",
+        "belief_name",
     }
 
 

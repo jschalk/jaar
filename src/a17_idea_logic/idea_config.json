@@ -1,65 +1,65 @@
 {
-  "believer_partner_membership": {
+  "belief_partner_membership": {
     "allowed_crud": "delete_insert_update",
     "build_order": 9,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "partner_name": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
       "group_title": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "group_cred_points": {},
       "group_debt_points": {}
     }
   },
-  "believer_partnerunit": {
+  "belief_partnerunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 10,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "partner_name": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "partner_cred_points": {},
       "partner_debt_points": {}
     }
   },
-  "believer_plan_awardunit": {
+  "belief_plan_awardunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "awardee_title": {},
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "give_force": {},
       "take_force": {}
     }
   },
-  "believer_plan_factunit": {
+  "belief_plan_factunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 12,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "fact_context": {},
       "coin_label": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "fact_upper": {},
@@ -67,46 +67,46 @@
       "fact_state": {}
     }
   },
-  "believer_plan_healerunit": {
+  "belief_plan_healerunit": {
     "allowed_crud": "delete_insert",
     "build_order": 15,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
       "healer_name": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {}
   },
-  "believer_plan_partyunit": {
+  "belief_plan_partyunit": {
     "allowed_crud": "delete_insert",
     "build_order": 14,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
       "party_title": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "solo": {}
     }
   },
-  "believer_plan_reason_caseunit": {
+  "belief_plan_reason_caseunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 16,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {},
+      "belief_name": {},
       "reason_state": {},
       "reason_context": {}
     },
@@ -116,32 +116,32 @@
       "reason_lower": {}
     }
   },
-  "believer_plan_reasonunit": {
+  "belief_plan_reasonunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 17,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {},
+      "belief_name": {},
       "reason_context": {}
     },
     "jvalues": {
       "reason_active_requisite": {}
     }
   },
-  "believer_planunit": {
+  "belief_planunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 18,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "plan_rope": {},
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "addin": {},
@@ -157,15 +157,15 @@
       "stop_want": {}
     }
   },
-  "believerunit": {
+  "beliefunit": {
     "allowed_crud": "UPDATE",
     "build_order": 19,
-    "idea_category": "believer",
+    "idea_category": "belief",
     "jkeys": {
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "credor_respect": {},
@@ -187,7 +187,7 @@
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {},
+      "belief_name": {},
       "tran_time": {}
     },
     "jvalues": {
@@ -203,7 +203,7 @@
       "event_int": {},
       "face_name": {},
       "coin_label": {},
-      "believer_name": {}
+      "belief_name": {}
     },
     "jvalues": {
       "celldepth": {},

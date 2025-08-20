@@ -174,7 +174,7 @@ def test_RiverGrade_to_dict_ReturnsObj():
 
     # THEN
     assert rivergrade_dict.get(coin_label_str()) == yao_hubunit.coin_label
-    assert rivergrade_dict.get("healer_name") == yao_hubunit.believer_name
+    assert rivergrade_dict.get("healer_name") == yao_hubunit.belief_name
     assert rivergrade_dict.get("keep_rope") == yao_hubunit.keep_rope
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount
     assert rivergrade_dict.get("grant_amount") == x_grant_amount

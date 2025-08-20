@@ -40,21 +40,21 @@ class PartnerCore:
 
 @dataclass
 class PartnerUnit(PartnerCore):
-    """This represents the believer_name's opinion of the PartnerUnit.partner_name
-    PartnerUnit.partner_cred_points represents how much partner_cred_points the _believer_name projects to the partner_name
-    PartnerUnit.partner_debt_points represents how much partner_debt_points the _believer_name projects to the partner_name
+    """This represents the belief_name's opinion of the PartnerUnit.partner_name
+    PartnerUnit.partner_cred_points represents how much partner_cred_points the _belief_name projects to the partner_name
+    PartnerUnit.partner_debt_points represents how much partner_debt_points the _belief_name projects to the partner_name
     """
 
     partner_cred_points: int = None
     partner_debt_points: int = None
-    # special attribute: static in believer json, in memory it is deleted after loading and recalculated during saving.
+    # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
     _memberships: dict[PartnerName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
     _irrational_partner_debt_points: int = None  # set by listening process
     _inallocable_partner_debt_points: int = None  # set by listening process
-    # set by Believer.settle_believer()
+    # set by Belief.settle_belief()
     _fund_give: float = None
     _fund_take: float = None
     _fund_agenda_give: float = None

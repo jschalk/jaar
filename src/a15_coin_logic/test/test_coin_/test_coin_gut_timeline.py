@@ -1,6 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import set_dir
 from src.a01_term_logic.rope import create_rope
-from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
+from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a07_timeline_logic.test._util.a07_str import time_str
 from src.a07_timeline_logic.test._util.calendar_examples import (
     five_str,
@@ -11,7 +11,7 @@ from src.a07_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
-from src.a12_hub_toolbox.a12_path import create_believer_dir_path
+from src.a12_hub_toolbox.a12_path import create_belief_dir_path
 from src.a12_hub_toolbox.hub_tool import gut_file_exists, open_gut_file, save_gut_file
 from src.a15_coin_logic.coin_main import coinunit_shop
 from src.a15_coin_logic.test._util.a15_env import (
@@ -58,7 +58,7 @@ def test_CoinUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):
     a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
     a23_coin.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
-    init_sue_gut = believerunit_shop(sue_str, a23_str)
+    init_sue_gut = beliefunit_shop(sue_str, a23_str)
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(coin_mstr_dir, init_sue_gut)
@@ -79,7 +79,7 @@ def test_CoinUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup
     a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
     a23_coin.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
-    init_sue_gut = believerunit_shop(sue_str, a23_str)
+    init_sue_gut = beliefunit_shop(sue_str, a23_str)
     time_rope = init_sue_gut.make_l1_rope(time_str())
     five_rope = init_sue_gut.make_rope(time_rope, five_str())
     save_gut_file(coin_mstr_dir, init_sue_gut)

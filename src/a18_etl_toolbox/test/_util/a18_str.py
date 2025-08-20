@@ -2,9 +2,9 @@ from src.a17_idea_logic.test._util.a17_str import error_message_str
 from typing import Literal
 
 
-def believer_net_amount_str() -> Literal["believer_net_amount"]:
-    """Column name for the believer net amounts."""
-    return "believer_net_amount"
+def belief_net_amount_str() -> Literal["belief_net_amount"]:
+    """Column name for the belief net amounts."""
+    return "belief_net_amount"
 
 
 def brick_agg_str() -> str:

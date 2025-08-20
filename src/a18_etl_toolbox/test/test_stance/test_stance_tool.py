@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file, set_dir
-from src.a06_believer_logic.believer_main import believerunit_shop
-from src.a06_believer_logic.test._util.a06_str import believer_plan_awardunit_str
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.test._util.a06_str import belief_plan_awardunit_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.a12_path import create_coin_json_path, create_gut_path
 from src.a15_coin_logic.coin_main import coinunit_shop
@@ -16,7 +16,7 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     unknown_str_str,
 )
 from src.a17_idea_logic.idea_csv_tool import (
-    add_believerunit_to_stance_csv_strs,
+    add_beliefunit_to_stance_csv_strs,
     add_coinunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
@@ -57,7 +57,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoCoinUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleCoinUnit_NoBelieverUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleCoinUnit_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -77,7 +77,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleCoinUnit_NoBelieverU
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -88,8 +88,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
     a23_coin = coinunit_shop(a23_str, coin_mstr_dir)
     coin_json_path = create_coin_json_path(coin_mstr_dir, a23_str)
     save_file(coin_json_path, None, a23_coin.get_json())
-    # create believer gut file
-    bob_gut = believerunit_shop(bob_str, a23_str)
+    # create belief gut file
+    bob_gut = beliefunit_shop(bob_str, a23_str)
     bob_gut.add_partnerunit("Yao", 44, 55)
     a23_bob_gut_path = create_gut_path(coin_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
@@ -100,7 +100,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
     add_coinunit_to_stance_csv_strs(a23_coin, expected_stance_csv_strs, ",")
-    add_believerunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
+    add_beliefunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 

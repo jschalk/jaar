@@ -57,8 +57,8 @@ def awardunits_str() -> str:
     return "awardunits"
 
 
-def believer_name_str() -> str:
-    return "believer_name"
+def belief_name_str() -> str:
+    return "belief_name"
 
 
 def fund_give_str() -> str:

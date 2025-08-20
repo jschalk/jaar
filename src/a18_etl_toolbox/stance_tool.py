@@ -5,10 +5,10 @@ from src.a00_data_toolbox.csv_toolbox import (
     replace_csv_column_from_string,
 )
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a12_hub_toolbox.hub_tool import open_believer_file
+from src.a12_hub_toolbox.hub_tool import open_belief_file
 from src.a15_coin_logic.coin_main import get_default_path_coinunit
 from src.a17_idea_logic.idea_csv_tool import (
-    add_believerunit_to_stance_csv_strs,
+    add_beliefunit_to_stance_csv_strs,
     add_coinunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
@@ -173,14 +173,14 @@ def collect_stance_csv_strs(world_dir: str) -> dict[str, str]:
         x_coinunit = get_default_path_coinunit(coin_mstr_dir, coin_label)
         add_coinunit_to_stance_csv_strs(x_coinunit, x_csv_strs, ",")
         coin_dir = create_path(coins_dir, coin_label)
-        believers_dir = create_path(coin_dir, "believers")
-        for believer_name in get_level1_dirs(believers_dir):
-            believer_dir = create_path(believers_dir, believer_name)
-            gut_dir = create_path(believer_dir, "gut")
-            gut_believer_path = create_path(gut_dir, f"{believer_name}.json")
-            if os_path_exists(gut_believer_path):
-                gut_believer = open_believer_file(gut_believer_path)
-                add_believerunit_to_stance_csv_strs(gut_believer, x_csv_strs, ",")
+        beliefs_dir = create_path(coin_dir, "beliefs")
+        for belief_name in get_level1_dirs(beliefs_dir):
+            belief_dir = create_path(beliefs_dir, belief_name)
+            gut_dir = create_path(belief_dir, "gut")
+            gut_belief_path = create_path(gut_dir, f"{belief_name}.json")
+            if os_path_exists(gut_belief_path):
+                gut_belief = open_belief_file(gut_belief_path)
+                add_beliefunit_to_stance_csv_strs(gut_belief, x_csv_strs, ",")
     world_db_path = create_world_db_path(world_dir)
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()

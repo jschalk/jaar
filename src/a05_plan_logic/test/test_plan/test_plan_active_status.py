@@ -164,7 +164,7 @@ def test_PlanUnit_set_reasonheirsAcceptsNewValues():
     assert ball_plan._reasonheirs == {}
 
     # WHEN
-    ball_plan.set_reasonheirs(reasonheirs=reasonheirs, believer_plan_dict={})
+    ball_plan.set_reasonheirs(reasonheirs=reasonheirs, belief_plan_dict={})
 
     # THEN
     assert ball_plan._reasonheirs == reasonheirs
@@ -185,7 +185,7 @@ def test_PlanUnit_set_reasonheirsRefusesNewValues():
     assert ball_plan.reasonunits != {}
 
     # WHEN
-    ball_plan.set_reasonheirs(reasonheirs={}, believer_plan_dict={})
+    ball_plan.set_reasonheirs(reasonheirs={}, belief_plan_dict={})
 
     # THEN
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
@@ -199,7 +199,7 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNoParameters():
     assert ball_plan._factheirs == {}
 
     # WHEN
-    ball_plan.set_range_factheirs(believer_plan_dict={}, range_inheritors={})
+    ball_plan.set_range_factheirs(belief_plan_dict={}, range_inheritors={})
 
     # THEN
     assert ball_plan._factheirs == {}
@@ -223,11 +223,11 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_plan = planunit_shop(ball_str)
     ball_plan._set_factheir(wk_factheir)
     tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}
-    x_believer_plan_dict = {
+    x_belief_plan_dict = {
         wk_plan.get_plan_rope(): wk_plan,
         tue_plan.get_plan_rope(): tue_plan,
     }
-    ball_plan.set_reasonheirs(x_believer_plan_dict, tue_reasonheirs)
+    ball_plan.set_reasonheirs(x_belief_plan_dict, tue_reasonheirs)
 
     x_range_inheritors = {tue_rope: wk_rope}
     assert len(ball_plan._reasonheirs) == 1
@@ -237,7 +237,7 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     assert ball_plan._factheirs.get(tue_rope) is None
 
     # WHEN
-    ball_plan.set_range_factheirs(x_believer_plan_dict, x_range_inheritors)
+    ball_plan.set_range_factheirs(x_belief_plan_dict, x_range_inheritors)
 
     # THEN
     tue_reason_lower = 113
@@ -300,7 +300,7 @@ def test_PlanUnit_get_reasonheir_ReturnsObj():
     dirty_str = "dirty"
     x_reasonheir = reasonheir_shop(reason_context=dirty_str)
     x_reasonheirs = {x_reasonheir.reason_context: x_reasonheir}
-    clean_plan.set_reasonheirs(reasonheirs=x_reasonheirs, believer_plan_dict={})
+    clean_plan.set_reasonheirs(reasonheirs=x_reasonheirs, belief_plan_dict={})
 
     # WHEN
     z_reasonheir = clean_plan.get_reasonheir(reason_context=dirty_str)
@@ -317,7 +317,7 @@ def test_PlanUnit_get_reasonheir_ReturnsNone():
     dirty_str = "dirty"
     x_reasonheir = reasonheir_shop(dirty_str)
     x_reasonheirs = {x_reasonheir.reason_context: x_reasonheir}
-    clean_plan.set_reasonheirs(reasonheirs=x_reasonheirs, believer_plan_dict={})
+    clean_plan.set_reasonheirs(reasonheirs=x_reasonheirs, belief_plan_dict={})
 
     # WHEN
     test6_str = "test6"

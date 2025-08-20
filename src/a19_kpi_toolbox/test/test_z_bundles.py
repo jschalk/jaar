@@ -4,9 +4,9 @@ from src.a00_data_toolbox.db_toolbox import (
     get_db_tables,
     get_row_count,
 )
-from src.a04_reason_logic.test._util.a04_str import believer_name_str, coin_label_str
+from src.a04_reason_logic.test._util.a04_str import belief_name_str, coin_label_str
 from src.a18_etl_toolbox.test._util.a18_str import (
-    believer_net_amount_str,
+    belief_net_amount_str,
     coin_partner_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -31,7 +31,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_COIN_PARTNER_NETS_SQLSTR)
         coin_partner_nets_tablename = coin_partner_nets_str()
-        insert_sqlstr = f"""INSERT INTO {coin_partner_nets_tablename} ({coin_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {coin_partner_nets_tablename} ({coin_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_partner_net})
 , ('{a23_str}', '{yao_str}', {yao_partner_net})
@@ -67,7 +67,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_WithNoBundleID():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_COIN_PARTNER_NETS_SQLSTR)
         coin_partner_nets_tablename = coin_partner_nets_str()
-        insert_sqlstr = f"""INSERT INTO {coin_partner_nets_tablename} ({coin_label_str()}, {believer_name_str()}, {believer_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {coin_partner_nets_tablename} ({coin_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_partner_net})
 , ('{a23_str}', '{yao_str}', {yao_partner_net})

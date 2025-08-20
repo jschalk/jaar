@@ -7,7 +7,7 @@
             "coin_label": {
                 "class_type": "LabelTerm"
             },
-            "believer_name": {
+            "belief_name": {
                 "class_type": "NameTerm"
             },
             "tran_time": {
@@ -29,7 +29,7 @@
             "coin_label": {
                 "class_type": "LabelTerm"
             },
-            "believer_name": {
+            "belief_name": {
                 "class_type": "NameTerm"
             }
         },

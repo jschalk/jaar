@@ -1,40 +1,40 @@
-from src.a06_believer_logic.believer_main import believerunit_shop
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_plan_reasonunit_str,
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_plan_reasonunit_str,
     plan_rope_str,
     reason_active_requisite_str,
     reason_context_str,
 )
-from src.a08_believer_atom_logic.atom_main import believeratom_shop
-from src.a08_believer_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.atom_main import beliefatom_shop
+from src.a08_belief_atom_logic.test._util.a08_str import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
 )
-from src.a09_pack_logic.delta import believerdelta_shop
+from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.legible import create_legible_list
 
 
 def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_With_reason_active_requisite():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_reasonunit_str()
-    casa_rope = sue_believer.make_l1_rope("casa")
-    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
-    reason_context_value = f"{sue_believer.knot}Swimmers"
+    sue_belief = beliefunit_shop("Sue")
+    dimen = belief_plan_reasonunit_str()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
+    reason_context_value = f"{sue_belief.knot}Swimmers"
     reason_active_requisite_value = True
-    swim_believeratom = believeratom_shop(dimen, INSERT_str())
-    swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
-    swim_believeratom.set_arg(
+    swim_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
+    swim_beliefatom.set_arg(
         reason_active_requisite_str(), reason_active_requisite_value
     )
-    # print(f"{swim_believeratom=}")
-    x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(swim_believeratom)
+    # print(f"{swim_beliefatom=}")
+    x_beliefdelta = beliefdelta_shop()
+    x_beliefdelta.set_beliefatom(swim_beliefatom)
 
     # WHEN
-    legible_list = create_legible_list(x_believerdelta, sue_believer)
+    legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
     x_str = f"ReasonUnit created for plan '{rope_value}' with reason_context '{reason_context_value}'. reason_active_requisite={reason_active_requisite_value}."
@@ -44,20 +44,20 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_With_reason_activ
 
 def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_Without_reason_active_requisite():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_reasonunit_str()
-    casa_rope = sue_believer.make_l1_rope("casa")
-    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
-    reason_context_value = f"{sue_believer.knot}Swimmers"
-    swim_believeratom = believeratom_shop(dimen, INSERT_str())
-    swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
-    # print(f"{swim_believeratom=}")
-    x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(swim_believeratom)
+    sue_belief = beliefunit_shop("Sue")
+    dimen = belief_plan_reasonunit_str()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
+    reason_context_value = f"{sue_belief.knot}Swimmers"
+    swim_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
+    # print(f"{swim_beliefatom=}")
+    x_beliefdelta = beliefdelta_shop()
+    x_beliefdelta.set_beliefatom(swim_beliefatom)
 
     # WHEN
-    legible_list = create_legible_list(x_believerdelta, sue_believer)
+    legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
     x_str = f"ReasonUnit created for plan '{rope_value}' with reason_context '{reason_context_value}'."
@@ -67,24 +67,24 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_INSERT_Without_reason_ac
 
 def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_requisite_IsTrue():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_reasonunit_str()
-    reason_context_value = f"{sue_believer.knot}Swimmers"
-    casa_rope = sue_believer.make_l1_rope("casa")
-    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
+    sue_belief = beliefunit_shop("Sue")
+    dimen = belief_plan_reasonunit_str()
+    reason_context_value = f"{sue_belief.knot}Swimmers"
+    casa_rope = sue_belief.make_l1_rope("casa")
+    rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     reason_active_requisite_value = True
-    swim_believeratom = believeratom_shop(dimen, UPDATE_str())
-    swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
-    swim_believeratom.set_arg(
+    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
+    swim_beliefatom.set_arg(
         reason_active_requisite_str(), reason_active_requisite_value
     )
-    # print(f"{swim_believeratom=}")
-    x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(swim_believeratom)
+    # print(f"{swim_beliefatom=}")
+    x_beliefdelta = beliefdelta_shop()
+    x_beliefdelta.set_beliefatom(swim_beliefatom)
 
     # WHEN
-    legible_list = create_legible_list(x_believerdelta, sue_believer)
+    legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
     x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' set with reason_active_requisite={reason_active_requisite_value}."
@@ -94,20 +94,20 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_req
 
 def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_requisite_IsNone():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_reasonunit_str()
-    reason_context_value = f"{sue_believer.knot}Swimmers"
-    casa_rope = sue_believer.make_l1_rope("casa")
-    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
-    swim_believeratom = believeratom_shop(dimen, UPDATE_str())
-    swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
-    # print(f"{swim_believeratom=}")
-    x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(swim_believeratom)
+    sue_belief = beliefunit_shop("Sue")
+    dimen = belief_plan_reasonunit_str()
+    reason_context_value = f"{sue_belief.knot}Swimmers"
+    casa_rope = sue_belief.make_l1_rope("casa")
+    rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
+    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
+    # print(f"{swim_beliefatom=}")
+    x_beliefdelta = beliefdelta_shop()
+    x_beliefdelta.set_beliefatom(swim_beliefatom)
 
     # WHEN
-    legible_list = create_legible_list(x_believerdelta, sue_believer)
+    legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
     x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' and no longer checks reason_context active mode."
@@ -117,20 +117,20 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_req
 
 def test_create_legible_list_ReturnsObj_plan_reasonunit_DELETE():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    dimen = believer_plan_reasonunit_str()
-    casa_rope = sue_believer.make_l1_rope("casa")
-    rope_value = sue_believer.make_rope(casa_rope, "clean fridge")
-    reason_context_value = f"{sue_believer.knot}Swimmers"
-    swim_believeratom = believeratom_shop(dimen, DELETE_str())
-    swim_believeratom.set_arg(plan_rope_str(), rope_value)
-    swim_believeratom.set_arg(reason_context_str(), reason_context_value)
-    # print(f"{swim_believeratom=}")
-    x_believerdelta = believerdelta_shop()
-    x_believerdelta.set_believeratom(swim_believeratom)
+    sue_belief = beliefunit_shop("Sue")
+    dimen = belief_plan_reasonunit_str()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
+    reason_context_value = f"{sue_belief.knot}Swimmers"
+    swim_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
+    # print(f"{swim_beliefatom=}")
+    x_beliefdelta = beliefdelta_shop()
+    x_beliefdelta.set_beliefatom(swim_beliefatom)
 
     # WHEN
-    legible_list = create_legible_list(x_believerdelta, sue_believer)
+    legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
     x_str = f"ReasonUnit reason_context='{reason_context_value}' for plan '{rope_value}' has been deleted."

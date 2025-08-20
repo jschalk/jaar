@@ -8,22 +8,19 @@ from src.a00_data_toolbox.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_partner_membership_str,
-    believer_partnerunit_str,
-    believer_plan_awardunit_str,
-    believer_plan_factunit_str,
-    believer_plan_healerunit_str,
-    believer_plan_partyunit_str,
-    believer_plan_reason_caseunit_str,
-    believer_plan_reasonunit_str,
-    believer_planunit_str,
-    believerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_partner_membership_str,
+    belief_partnerunit_str,
+    belief_plan_awardunit_str,
+    belief_plan_factunit_str,
+    belief_plan_healerunit_str,
+    belief_plan_partyunit_str,
+    belief_plan_reason_caseunit_str,
+    belief_plan_reasonunit_str,
+    belief_planunit_str,
+    beliefunit_str,
 )
-from src.a08_believer_atom_logic.atom_config import (
-    get_believer_dimens,
-    get_delete_key_name,
-)
+from src.a08_belief_atom_logic.atom_config import get_belief_dimens, get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_coin_logic.coin_config import get_coin_dimens
 from src.a15_coin_logic.test._util.a15_str import coin_timeline_hour_str
@@ -58,55 +55,55 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_sound_agg_insert_sqlstrs,
     create_sound_and_voice_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
-    get_believer_voice_agg_tablenames,
-    get_coin_believer_sound_agg_tablenames,
+    get_belief_voice_agg_tablenames,
+    get_coin_belief_sound_agg_tablenames,
     get_dimen_abbv7,
     get_insert_into_sound_vld_sqlstrs,
     get_insert_into_voice_raw_sqlstrs,
     get_prime_create_table_sqlstrs,
 )
 
-BELIEVER_PRIME_TABLENAMES = {
-    f"{believer_partner_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
-    f"{believer_partner_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
-    f"{believer_partnerunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
-    f"{believer_partnerunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
-    f"{believer_plan_awardunit_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
-    f"{believer_plan_awardunit_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
-    f"{believer_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
-    f"{believer_plan_factunit_str()}_sound_put_raw": "BLRFACT_PUT_RAW",
-    f"{believer_plan_healerunit_str()}_sound_put_agg": "BLRHEAL_PUT_AGG",
-    f"{believer_plan_healerunit_str()}_sound_put_raw": "BLRHEAL_PUT_RAW",
-    f"{believer_plan_reason_caseunit_str()}_sound_put_agg": "BLRPREM_PUT_AGG",
-    f"{believer_plan_reason_caseunit_str()}_sound_put_raw": "BLRPREM_PUT_RAW",
-    f"{believer_plan_reasonunit_str()}_sound_put_agg": "BLRREAS_PUT_AGG",
-    f"{believer_plan_reasonunit_str()}_sound_put_raw": "BLRREAS_PUT_RAW",
-    f"{believer_plan_partyunit_str()}_sound_put_agg": "BLRLABO_PUT_AGG",
-    f"{believer_plan_partyunit_str()}_sound_put_raw": "BLRLABO_PUT_RAW",
-    f"{believer_planunit_str()}_sound_put_agg": "BLRPLAN_PUT_AGG",
-    f"{believer_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
-    f"{believerunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
-    f"{believerunit_str()}_sound_put_raw": "BLRUNIT_PUT_RAW",
-    f"{believer_partner_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
-    f"{believer_partner_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
-    f"{believer_partnerunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
-    f"{believer_partnerunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
-    f"{believer_plan_awardunit_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
-    f"{believer_plan_awardunit_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
-    f"{believer_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
-    f"{believer_plan_factunit_str()}_sound_del_raw": "BLRFACT_DEL_RAW",
-    f"{believer_plan_healerunit_str()}_sound_del_agg": "BLRHEAL_DEL_AGG",
-    f"{believer_plan_healerunit_str()}_sound_del_raw": "BLRHEAL_DEL_RAW",
-    f"{believer_plan_reason_caseunit_str()}_sound_del_agg": "BLRPREM_DEL_AGG",
-    f"{believer_plan_reason_caseunit_str()}_sound_del_raw": "BLRPREM_DEL_RAW",
-    f"{believer_plan_reasonunit_str()}_sound_del_agg": "BLRREAS_DEL_AGG",
-    f"{believer_plan_reasonunit_str()}_sound_del_raw": "BLRREAS_DEL_RAW",
-    f"{believer_plan_partyunit_str()}_sound_del_agg": "BLRLABO_DEL_AGG",
-    f"{believer_plan_partyunit_str()}_sound_del_raw": "BLRLABO_DEL_RAW",
-    f"{believer_planunit_str()}_sound_del_agg": "BLRPLAN_DEL_AGG",
-    f"{believer_planunit_str()}_sound_del_raw": "BLRPLAN_DEL_RAW",
-    f"{believerunit_str()}_sound_del_agg": "BLRUNIT_DEL_AGG",
-    f"{believerunit_str()}_sound_del_raw": "BLRUNIT_DEL_RAW",
+BELIEF_PRIME_TABLENAMES = {
+    f"{belief_partner_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
+    f"{belief_partner_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
+    f"{belief_partnerunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
+    f"{belief_partnerunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
+    f"{belief_plan_awardunit_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
+    f"{belief_plan_awardunit_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
+    f"{belief_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
+    f"{belief_plan_factunit_str()}_sound_put_raw": "BLRFACT_PUT_RAW",
+    f"{belief_plan_healerunit_str()}_sound_put_agg": "BLRHEAL_PUT_AGG",
+    f"{belief_plan_healerunit_str()}_sound_put_raw": "BLRHEAL_PUT_RAW",
+    f"{belief_plan_reason_caseunit_str()}_sound_put_agg": "BLRPREM_PUT_AGG",
+    f"{belief_plan_reason_caseunit_str()}_sound_put_raw": "BLRPREM_PUT_RAW",
+    f"{belief_plan_reasonunit_str()}_sound_put_agg": "BLRREAS_PUT_AGG",
+    f"{belief_plan_reasonunit_str()}_sound_put_raw": "BLRREAS_PUT_RAW",
+    f"{belief_plan_partyunit_str()}_sound_put_agg": "BLRLABO_PUT_AGG",
+    f"{belief_plan_partyunit_str()}_sound_put_raw": "BLRLABO_PUT_RAW",
+    f"{belief_planunit_str()}_sound_put_agg": "BLRPLAN_PUT_AGG",
+    f"{belief_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
+    f"{beliefunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
+    f"{beliefunit_str()}_sound_put_raw": "BLRUNIT_PUT_RAW",
+    f"{belief_partner_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
+    f"{belief_partner_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
+    f"{belief_partnerunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
+    f"{belief_partnerunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
+    f"{belief_plan_awardunit_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
+    f"{belief_plan_awardunit_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
+    f"{belief_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
+    f"{belief_plan_factunit_str()}_sound_del_raw": "BLRFACT_DEL_RAW",
+    f"{belief_plan_healerunit_str()}_sound_del_agg": "BLRHEAL_DEL_AGG",
+    f"{belief_plan_healerunit_str()}_sound_del_raw": "BLRHEAL_DEL_RAW",
+    f"{belief_plan_reason_caseunit_str()}_sound_del_agg": "BLRPREM_DEL_AGG",
+    f"{belief_plan_reason_caseunit_str()}_sound_del_raw": "BLRPREM_DEL_RAW",
+    f"{belief_plan_reasonunit_str()}_sound_del_agg": "BLRREAS_DEL_AGG",
+    f"{belief_plan_reasonunit_str()}_sound_del_raw": "BLRREAS_DEL_RAW",
+    f"{belief_plan_partyunit_str()}_sound_del_agg": "BLRLABO_DEL_AGG",
+    f"{belief_plan_partyunit_str()}_sound_del_raw": "BLRLABO_DEL_RAW",
+    f"{belief_planunit_str()}_sound_del_agg": "BLRPLAN_DEL_AGG",
+    f"{belief_planunit_str()}_sound_del_raw": "BLRPLAN_DEL_RAW",
+    f"{beliefunit_str()}_sound_del_agg": "BLRUNIT_DEL_AGG",
+    f"{beliefunit_str()}_sound_del_raw": "BLRUNIT_DEL_RAW",
 }
 
 
@@ -219,7 +216,7 @@ def create_coin_voice_agg_table_sqlstr(x_dimen: str):
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
+def create_belief_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add(idea_number_str())
@@ -228,7 +225,7 @@ def create_believer_sound_put_raw_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
+def create_belief_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns.add(error_message_str())
@@ -236,14 +233,14 @@ def create_believer_sound_put_agg_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_sound_put_vld_table_sqlstr(x_dimen: str) -> str:
+def create_belief_sound_put_vld_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
+def create_belief_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns.add(idea_number_str())
@@ -251,7 +248,7 @@ def create_believer_sound_del_raw_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
+def create_belief_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns.add(error_message_str())
@@ -259,14 +256,14 @@ def create_believer_sound_del_agg_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_sound_del_vld_table_sqlstr(x_dimen: str) -> str:
+def create_belief_sound_del_vld_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "vld", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
+def create_belief_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "put")
     columns = set()
     columns = get_all_dimen_columns_set(x_dimen)
@@ -276,14 +273,14 @@ def create_believer_voice_put_raw_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
+def create_belief_voice_put_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "put")
     columns = get_all_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
+def create_belief_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = find_set_otx_inx_args(columns)
@@ -292,7 +289,7 @@ def create_believer_voice_del_raw_table_sqlstr(x_dimen: str) -> str:
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
 
-def create_believer_voice_del_agg_table_sqlstr(x_dimen: str) -> str:
+def create_belief_voice_del_agg_table_sqlstr(x_dimen: str) -> str:
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "del")
     columns = get_del_dimen_columns_set(x_dimen)
     columns = get_default_sorted_list(columns)
@@ -402,19 +399,19 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckCoinDimens():
         assert expected_v_agg_sqlstr == create_table_sqlstrs.get(v_agg_tablename)
 
 
-def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBelieverDimens():
+def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBeliefDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     sqlstrs = get_prime_create_table_sqlstrs()
 
     # THEN
-    believer_dimens_config = {
+    belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in get_idea_config_dict().items()
-        if dimen_config.get(idea_category_str()) == "believer"
+        if dimen_config.get(idea_category_str()) == "belief"
     }
 
-    for x_dimen in believer_dimens_config:
+    for x_dimen in belief_dimens_config:
         # print(f"{x_dimen} checking...")
         s_put_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw", "put")
         s_put_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg", "put")
@@ -427,16 +424,16 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_CheckBelieverDimens():
         v_del_raw_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "raw", "del")
         v_del_agg_tablename = prime_tbl(get_dimen_abbv7(x_dimen), "v", "agg", "del")
 
-        expected_s_put_raw_sqlstr = create_believer_sound_put_raw_table_sqlstr(x_dimen)
-        expected_s_put_agg_sqlstr = create_believer_sound_put_agg_table_sqlstr(x_dimen)
-        expected_s_put_vld_sqlstr = create_believer_sound_put_vld_table_sqlstr(x_dimen)
-        expected_s_del_raw_sqlstr = create_believer_sound_del_raw_table_sqlstr(x_dimen)
-        expected_s_del_agg_sqlstr = create_believer_sound_del_agg_table_sqlstr(x_dimen)
-        expected_s_del_vld_sqlstr = create_believer_sound_del_vld_table_sqlstr(x_dimen)
-        expected_v_put_raw_sqlstr = create_believer_voice_put_raw_table_sqlstr(x_dimen)
-        expected_v_put_agg_sqlstr = create_believer_voice_put_agg_table_sqlstr(x_dimen)
-        expected_v_del_raw_sqlstr = create_believer_voice_del_raw_table_sqlstr(x_dimen)
-        expected_v_del_agg_sqlstr = create_believer_voice_del_agg_table_sqlstr(x_dimen)
+        expected_s_put_raw_sqlstr = create_belief_sound_put_raw_table_sqlstr(x_dimen)
+        expected_s_put_agg_sqlstr = create_belief_sound_put_agg_table_sqlstr(x_dimen)
+        expected_s_put_vld_sqlstr = create_belief_sound_put_vld_table_sqlstr(x_dimen)
+        expected_s_del_raw_sqlstr = create_belief_sound_del_raw_table_sqlstr(x_dimen)
+        expected_s_del_agg_sqlstr = create_belief_sound_del_agg_table_sqlstr(x_dimen)
+        expected_s_del_vld_sqlstr = create_belief_sound_del_vld_table_sqlstr(x_dimen)
+        expected_v_put_raw_sqlstr = create_belief_voice_put_raw_table_sqlstr(x_dimen)
+        expected_v_put_agg_sqlstr = create_belief_voice_put_agg_table_sqlstr(x_dimen)
+        expected_v_del_raw_sqlstr = create_belief_voice_del_raw_table_sqlstr(x_dimen)
+        expected_v_del_agg_sqlstr = create_belief_voice_del_agg_table_sqlstr(x_dimen)
         abbv7 = get_dimen_abbv7(x_dimen)
         # print(f"{x_dimen=} {abbv7=}")
         print("")
@@ -481,52 +478,50 @@ def test_get_prime_create_table_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert create_table_sqlstrs
     pidgin_dimens_count = len(get_pidgin_dimens()) * 3
     coin_dimens_count = len(get_coin_dimens()) * 5
-    believer_dimens_count = len(get_believer_dimens()) * 10
+    belief_dimens_count = len(get_belief_dimens()) * 10
     print(f"{pidgin_dimens_count=}")
     print(f"{coin_dimens_count=}")
-    print(f"{believer_dimens_count=}")
-    all_dimens_count = pidgin_dimens_count + coin_dimens_count + believer_dimens_count
+    print(f"{belief_dimens_count=}")
+    all_dimens_count = pidgin_dimens_count + coin_dimens_count + belief_dimens_count
     pidgin_core_count = 3
     all_dimens_count += pidgin_core_count
     assert len(create_table_sqlstrs) == all_dimens_count
 
 
-def test_get_coin_believer_sound_agg_tablenames_ReturnsObj():
+def test_get_coin_belief_sound_agg_tablenames_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
-    coin_believer_sound_agg_tablenames = get_coin_believer_sound_agg_tablenames()
+    coin_belief_sound_agg_tablenames = get_coin_belief_sound_agg_tablenames()
 
     # THEN
-    assert coin_believer_sound_agg_tablenames
+    assert coin_belief_sound_agg_tablenames
     expected_sound_agg_tablenames = set()
-    for believer_dimen in get_believer_dimens():
-        expected_sound_agg_tablenames.add(prime_tbl(believer_dimen, "s", "agg", "put"))
-        expected_sound_agg_tablenames.add(prime_tbl(believer_dimen, "s", "agg", "del"))
+    for belief_dimen in get_belief_dimens():
+        expected_sound_agg_tablenames.add(prime_tbl(belief_dimen, "s", "agg", "put"))
+        expected_sound_agg_tablenames.add(prime_tbl(belief_dimen, "s", "agg", "del"))
     for coin_dimen in get_coin_dimens():
         expected_sound_agg_tablenames.add(prime_tbl(coin_dimen, "s", "agg"))
     print(sorted(list(expected_sound_agg_tablenames)))
-    assert expected_sound_agg_tablenames == coin_believer_sound_agg_tablenames
-    agg_tablenames = coin_believer_sound_agg_tablenames
-    assert len(agg_tablenames) == len(get_believer_dimens()) * 2 + len(
-        get_coin_dimens()
-    )
+    assert expected_sound_agg_tablenames == coin_belief_sound_agg_tablenames
+    agg_tablenames = coin_belief_sound_agg_tablenames
+    assert len(agg_tablenames) == len(get_belief_dimens()) * 2 + len(get_coin_dimens())
     assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
-def test_get_believer_voice_agg_tablenames_ReturnsObj_BelieverDimens():
+def test_get_belief_voice_agg_tablenames_ReturnsObj_BeliefDimens():
     # ESTABLISH / WHEN
-    believer_voice_agg_tablenames = get_believer_voice_agg_tablenames()
+    belief_voice_agg_tablenames = get_belief_voice_agg_tablenames()
 
     # THEN
-    assert believer_voice_agg_tablenames
-    expected_believer_voice_agg_tablenames = {
-        prime_tbl(believer_dimen, "v", "agg", "put")
-        for believer_dimen in get_believer_dimens()
+    assert belief_voice_agg_tablenames
+    expected_belief_voice_agg_tablenames = {
+        prime_tbl(belief_dimen, "v", "agg", "put")
+        for belief_dimen in get_belief_dimens()
     }
-    print(f"{expected_believer_voice_agg_tablenames=}")
-    assert expected_believer_voice_agg_tablenames == believer_voice_agg_tablenames
-    assert len(believer_voice_agg_tablenames) == len(get_believer_dimens())
-    agg_tablenames = believer_voice_agg_tablenames
+    print(f"{expected_belief_voice_agg_tablenames=}")
+    assert expected_belief_voice_agg_tablenames == belief_voice_agg_tablenames
+    assert len(belief_voice_agg_tablenames) == len(get_belief_dimens())
+    agg_tablenames = belief_voice_agg_tablenames
     assert agg_tablenames.issubset(set(get_prime_create_table_sqlstrs().keys()))
 
 
@@ -541,7 +536,7 @@ def test_create_sound_and_voice_tables_CreatesCoinRawTables():
         vld_str = "vld"
         put_str = "put"
         del_str = "del"
-        blrunit_s_put_agg_table = prime_tbl("believerunit", "s", agg_str, put_str)
+        blrunit_s_put_agg_table = prime_tbl("beliefunit", "s", agg_str, put_str)
         blrpern_s_put_agg_table = prime_tbl("blrpern", "s", agg_str, put_str)
         blrmemb_s_put_agg_table = prime_tbl("blrmemb", "s", agg_str, put_str)
         blrfact_s_del_agg_table = prime_tbl("blrfact", "s", agg_str, del_str)
@@ -696,10 +691,10 @@ WHERE inconsistency_rows.coin_label = coin_timeline_hour_s_raw.coin_label
         assert update_sqlstr == static_example_sqlstr
 
 
-def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BelieverDimen():
+def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BeliefDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = believer_plan_awardunit_str()
+    dimen = belief_plan_awardunit_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -726,21 +721,21 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scena
         assert update_sqlstr == expected_update_sqlstr
 
         static_example_sqlstr = """WITH inconsistency_rows AS (
-SELECT event_int, face_name, coin_label, believer_name, plan_rope, awardee_title
-FROM believer_plan_awardunit_s_put_raw
-GROUP BY event_int, face_name, coin_label, believer_name, plan_rope, awardee_title
+SELECT event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
+FROM belief_plan_awardunit_s_put_raw
+GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
 HAVING MIN(give_force) != MAX(give_force)
     OR MIN(take_force) != MAX(take_force)
 )
-UPDATE believer_plan_awardunit_s_put_raw
+UPDATE belief_plan_awardunit_s_put_raw
 SET error_message = 'Inconsistent data'
 FROM inconsistency_rows
-WHERE inconsistency_rows.event_int = believer_plan_awardunit_s_put_raw.event_int
-    AND inconsistency_rows.face_name = believer_plan_awardunit_s_put_raw.face_name
-    AND inconsistency_rows.coin_label = believer_plan_awardunit_s_put_raw.coin_label
-    AND inconsistency_rows.believer_name = believer_plan_awardunit_s_put_raw.believer_name
-    AND inconsistency_rows.plan_rope = believer_plan_awardunit_s_put_raw.plan_rope
-    AND inconsistency_rows.awardee_title = believer_plan_awardunit_s_put_raw.awardee_title
+WHERE inconsistency_rows.event_int = belief_plan_awardunit_s_put_raw.event_int
+    AND inconsistency_rows.face_name = belief_plan_awardunit_s_put_raw.face_name
+    AND inconsistency_rows.coin_label = belief_plan_awardunit_s_put_raw.coin_label
+    AND inconsistency_rows.belief_name = belief_plan_awardunit_s_put_raw.belief_name
+    AND inconsistency_rows.plan_rope = belief_plan_awardunit_s_put_raw.plan_rope
+    AND inconsistency_rows.awardee_title = belief_plan_awardunit_s_put_raw.awardee_title
 ;
 """
         print(update_sqlstr)
@@ -830,10 +825,10 @@ GROUP BY event_int, face_name, coin_label, cumulative_minute
         assert update_sqlstrs[0] == static_example_sqlstr
 
 
-def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BelieverDimen():
+def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BeliefDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = believer_plan_awardunit_str()
+    dimen = belief_plan_awardunit_str()
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
@@ -858,11 +853,11 @@ def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BelieverDimen():
         # print(put_expected_insert_sqlstr)
         assert update_sqlstrs[0] == put_expected_insert_sqlstr
 
-        static_example_put_sqlstr = """INSERT INTO believer_plan_awardunit_s_put_agg (event_int, face_name, coin_label, believer_name, plan_rope, awardee_title, give_force, take_force)
-SELECT event_int, face_name, coin_label, believer_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
-FROM believer_plan_awardunit_s_put_raw
+        static_example_put_sqlstr = """INSERT INTO belief_plan_awardunit_s_put_agg (event_int, face_name, coin_label, belief_name, plan_rope, awardee_title, give_force, take_force)
+SELECT event_int, face_name, coin_label, belief_name, plan_rope, awardee_title, MAX(give_force), MAX(take_force)
+FROM belief_plan_awardunit_s_put_raw
 WHERE error_message IS NULL
-GROUP BY event_int, face_name, coin_label, believer_name, plan_rope, awardee_title
+GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title
 ;
 """
         # print(update_sqlstrs[0])
@@ -889,10 +884,10 @@ GROUP BY event_int, face_name, coin_label, believer_name, plan_rope, awardee_tit
         print(update_sqlstrs[1])
         assert update_sqlstrs[1] == del_expected_insert_sqlstr
 
-        static_example_del_sqlstr = """INSERT INTO believer_plan_awardunit_s_del_agg (event_int, face_name, coin_label, believer_name, plan_rope, awardee_title_ERASE)
-SELECT event_int, face_name, coin_label, believer_name, plan_rope, awardee_title_ERASE
-FROM believer_plan_awardunit_s_del_raw
-GROUP BY event_int, face_name, coin_label, believer_name, plan_rope, awardee_title_ERASE
+        static_example_del_sqlstr = """INSERT INTO belief_plan_awardunit_s_del_agg (event_int, face_name, coin_label, belief_name, plan_rope, awardee_title_ERASE)
+SELECT event_int, face_name, coin_label, belief_name, plan_rope, awardee_title_ERASE
+FROM belief_plan_awardunit_s_del_raw
+GROUP BY event_int, face_name, coin_label, belief_name, plan_rope, awardee_title_ERASE
 ;
 """
         assert update_sqlstrs[1] == static_example_del_sqlstr
@@ -947,7 +942,7 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # ESTABLISH
     default_knot = "|"
     default_unknown_str = "unknown2"
-    blrpern_s_agg_tablename = prime_tbl(believer_partnerunit_str(), "s", "agg")
+    blrpern_s_agg_tablename = prime_tbl(belief_partnerunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
@@ -1014,14 +1009,14 @@ GROUP BY event_int, face_name
     assert label_sqlstr == expected_label_sqlstr
 
 
-def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BelieverDimens():
+def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BeliefDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    believer_dimens_config = {
+    belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "believer"
+        if dimen_config.get(idea_category_str()) == "belief"
     }
 
     # WHEN
@@ -1032,12 +1027,12 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BelieverDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for believer_dimen in believer_dimens_config:
-            # print(f"{believer_dimen=}")
-            s_put_agg_tablename = prime_tbl(believer_dimen, "s", "agg", "put")
-            s_del_agg_tablename = prime_tbl(believer_dimen, "s", "agg", "del")
-            s_put_vld_tablename = prime_tbl(believer_dimen, "s", "vld", "put")
-            s_del_vld_tablename = prime_tbl(believer_dimen, "s", "vld", "del")
+        for belief_dimen in belief_dimens_config:
+            # print(f"{belief_dimen=}")
+            s_put_agg_tablename = prime_tbl(belief_dimen, "s", "agg", "put")
+            s_del_agg_tablename = prime_tbl(belief_dimen, "s", "agg", "del")
+            s_put_vld_tablename = prime_tbl(belief_dimen, "s", "vld", "put")
+            s_del_vld_tablename = prime_tbl(belief_dimen, "s", "vld", "del")
             s_put_agg_cols = get_table_columns(cursor, s_put_agg_tablename)
             s_del_agg_cols = get_table_columns(cursor, s_del_agg_tablename)
             s_put_agg_cols.remove(error_message_str())
@@ -1063,7 +1058,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BelieverDimens():
             s_del_vld_insert_select = f"{s_del_vld_insert_sql} {s_del_agg_select_sql}"
             # print(f"{s_put_vld_insert_sql=}")
             # create_select_query(cursor=)
-            abbv7 = get_dimen_abbv7(believer_dimen)
+            abbv7 = get_dimen_abbv7(belief_dimen)
             put_sqlstr_ref = f"INSERT_{abbv7.upper()}_SOUND_VLD_PUT_SQLSTR"
             del_sqlstr_ref = f"INSERT_{abbv7.upper()}_SOUND_VLD_DEL_SQLSTR"
             print(f'{put_sqlstr_ref}= "{s_put_vld_insert_select}"')
@@ -1116,14 +1111,14 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_CoinDimens():
             assert insert_s_vld_sqlstrs.get(s_vld_tbl) == s_vld_insert_select
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BelieverDimens():
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BeliefDimens():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    believer_dimens_config = {
+    belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "believer"
+        if dimen_config.get(idea_category_str()) == "belief"
     }
 
     # WHEN
@@ -1134,12 +1129,12 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BelieverDimens():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for believer_dimen in believer_dimens_config:
-            # print(f"{believer_dimen=}")
-            s_put_vld_tablename = prime_tbl(believer_dimen, "s", "vld", "put")
-            s_del_vld_tablename = prime_tbl(believer_dimen, "s", "vld", "del")
-            v_put_raw_tablename = prime_tbl(believer_dimen, "v", "raw", "put")
-            v_del_raw_tablename = prime_tbl(believer_dimen, "v", "raw", "del")
+        for belief_dimen in belief_dimens_config:
+            # print(f"{belief_dimen=}")
+            s_put_vld_tablename = prime_tbl(belief_dimen, "s", "vld", "put")
+            s_del_vld_tablename = prime_tbl(belief_dimen, "s", "vld", "del")
+            v_put_raw_tablename = prime_tbl(belief_dimen, "v", "raw", "put")
+            v_del_raw_tablename = prime_tbl(belief_dimen, "v", "raw", "del")
             s_put_cols = get_table_columns(cursor, s_put_vld_tablename)
             s_del_cols = get_table_columns(cursor, s_del_vld_tablename)
             # s_put_cols = set(s_put_cols).remove(error_message_str())
@@ -1167,7 +1162,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BelieverDimens():
             v_put_raw_insert_select = f"{v_put_raw_insert_sql} {s_put_vld_select_sql}"
             v_del_raw_insert_select = f"{v_del_raw_insert_sql} {s_del_vld_select_sql}"
             # create_select_query(cursor=)
-            abbv7 = get_dimen_abbv7(believer_dimen)
+            abbv7 = get_dimen_abbv7(belief_dimen)
             put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_PUT_SQLSTR"
             del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_RAW_DEL_SQLSTR"
             print(f'{put_sqlstr_ref}= "{v_put_raw_insert_select}"')

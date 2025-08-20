@@ -96,7 +96,7 @@ How a Coin is defined and made powerful enough to share.
     * CoinLabel
     * PayBook (ledger of Transactions)
     * Shared concept of time
-    * Believers' Plans of Action
+    * Beliefs' Plans of Action
 
 Every Coin starts with a central coin but that's not enough. Levinas asserts that moral community can only exist when time is a single community standard. This is intuitive for most people but it is important to explicitly state it. 
 

@@ -40,19 +40,19 @@ class NameTerm(LabelTerm):
         return self.find(default_knot_if_None(knot)) == -1
 
 
-class BelieverName(NameTerm):
-    """A NameTerm used to identify a BelieverUnit's believer"""
+class BeliefName(NameTerm):
+    """A NameTerm used to identify a BeliefUnit's belief"""
 
     pass
 
 
-class PartnerName(BelieverName):  # Created to help track the object class relations
-    """Every PartnerName object is BelieverName, must follow BelieverName format."""
+class PartnerName(BeliefName):  # Created to help track the object class relations
+    """Every PartnerName object is BeliefName, must follow BeliefName format."""
 
     pass
 
 
-class HealerName(BelieverName):
+class HealerName(BeliefName):
     """A LabelTerm used to identify a Problem's Healer"""
 
     pass

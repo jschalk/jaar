@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.rope import create_rope, default_knot_if_None
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,
     c400_clean_str,
@@ -378,42 +378,42 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
 def test_get_year_rope_ReturnsObj():
     # ESTABLISH
     fay_str = "Fay34"
-    sue_believerunit = believerunit_shop("Sue")
-    time_rope = sue_believerunit.make_l1_rope(time_str())
-    fay_rope = sue_believerunit.make_rope(time_rope, fay_str)
-    c400_leap_rope = sue_believerunit.make_rope(fay_rope, c400_leap_str())
-    c400_clean_rope = sue_believerunit.make_rope(c400_leap_rope, c400_clean_str())
-    c100_rope = sue_believerunit.make_rope(c400_clean_rope, c100_str())
-    yr4_leap_rope = sue_believerunit.make_rope(c100_rope, yr4_leap_str())
-    yr4_clean_rope = sue_believerunit.make_rope(yr4_leap_rope, yr4_clean_str())
-    year_rope = sue_believerunit.make_rope(yr4_clean_rope, year_str())
+    sue_beliefunit = beliefunit_shop("Sue")
+    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
+    c400_leap_rope = sue_beliefunit.make_rope(fay_rope, c400_leap_str())
+    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, c400_clean_str())
+    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, c100_str())
+    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, yr4_leap_str())
+    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, yr4_clean_str())
+    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, year_str())
 
     # WHEN / THEN
-    assert year_rope == get_year_rope(sue_believerunit, fay_rope)
+    assert year_rope == get_year_rope(sue_beliefunit, fay_rope)
 
 
 def test_get_week_rope_ReturnsObj():
     # ESTABLISH
     fay_str = "Fay34"
-    sue_believerunit = believerunit_shop("Sue")
-    time_rope = sue_believerunit.make_l1_rope(time_str())
-    fay_rope = sue_believerunit.make_rope(time_rope, fay_str)
-    week_rope = sue_believerunit.make_rope(fay_rope, week_str())
+    sue_beliefunit = beliefunit_shop("Sue")
+    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
+    week_rope = sue_beliefunit.make_rope(fay_rope, week_str())
 
     # WHEN / THEN
-    assert week_rope == get_week_rope(sue_believerunit, fay_rope)
+    assert week_rope == get_week_rope(sue_beliefunit, fay_rope)
 
 
 def test_get_day_rope_ReturnsObj():
     # ESTABLISH
     fay_str = "Fay34"
-    sue_believerunit = believerunit_shop("Sue")
-    time_rope = sue_believerunit.make_l1_rope(time_str())
-    fay_rope = sue_believerunit.make_rope(time_rope, fay_str)
-    day_rope = sue_believerunit.make_rope(fay_rope, day_str())
+    sue_beliefunit = beliefunit_shop("Sue")
+    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
+    day_rope = sue_beliefunit.make_rope(fay_rope, day_str())
 
     # WHEN / THEN
-    assert day_rope == get_day_rope(sue_believerunit, fay_rope)
+    assert day_rope == get_day_rope(sue_beliefunit, fay_rope)
 
 
 def test_TimeLineUnit_Exists():

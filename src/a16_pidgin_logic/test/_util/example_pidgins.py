@@ -1,6 +1,6 @@
 from pandas import DataFrame
 from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     RopeTerm_str,
     partner_name_str,
     reason_context_str,

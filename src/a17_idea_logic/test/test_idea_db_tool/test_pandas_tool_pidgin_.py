@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     NameTerm_str,
     coin_label_str,
     partner_cred_points_str,

@@ -2,7 +2,7 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a09_pack_logic.test._util.a09_str import (
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
     coin_label_str,
 )
@@ -28,8 +28,8 @@ def test_create_bud_partner_mandate_ledger_path_ReturnsObj():
     # THEN
     x_coins_dir = create_path(x_coin_mstr_dir, "coins")
     amy23_dir = create_path(x_coins_dir, a23_str)
-    believers_dir = create_path(amy23_dir, "believers")
-    sue_dir = create_path(believers_dir, sue_str)
+    beliefs_dir = create_path(amy23_dir, "beliefs")
+    sue_dir = create_path(beliefs_dir, sue_str)
     buds_dir = create_path(sue_dir, "buds")
     timepoint_dir = create_path(buds_dir, timepoint7)
     expected_bud_path_dir = create_path(timepoint_dir, BUD_MANDATE_FILENAME)
@@ -44,7 +44,7 @@ def test_create_bud_partner_mandate_ledger_path_HasDocString():
     doc_str = create_bud_partner_mandate_ledger_path(
         coin_mstr_dir="coin_mstr_dir",
         coin_label=coin_label_str(),
-        believer_name=believer_name_str(),
+        belief_name=belief_name_str(),
         bud_time=bud_time_str(),
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")

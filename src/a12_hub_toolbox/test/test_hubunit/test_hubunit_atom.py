@@ -149,7 +149,7 @@ def test_HubUnit_save_atom_file_SavesFile(env_dir_setup_cleanup):
     assert atom_num2 == 12
 
 
-def test_HubUnit_get_believer_from_atom_files_ReturnsFileWithZeroAtoms(
+def test_HubUnit_get_belief_from_atom_files_ReturnsFileWithZeroAtoms(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -157,18 +157,18 @@ def test_HubUnit_get_believer_from_atom_files_ReturnsFileWithZeroAtoms(
     yao_hubunit = hubunit_shop(coin_mstr_dir(), coin_label(), yao_str)
 
     # WHEN
-    yao_believer = yao_hubunit._get_believer_from_atom_files()
+    yao_belief = yao_hubunit._get_belief_from_atom_files()
 
     # THEN
-    assert yao_believer.believer_name == yao_str
-    assert yao_believer.coin_label == yao_hubunit.coin_label
-    assert yao_believer.knot == yao_hubunit.knot
-    assert yao_believer.fund_pool == yao_hubunit.fund_pool
-    assert yao_believer.fund_iota == yao_hubunit.fund_iota
-    assert yao_believer.respect_bit == yao_hubunit.respect_bit
+    assert yao_belief.belief_name == yao_str
+    assert yao_belief.coin_label == yao_hubunit.coin_label
+    assert yao_belief.knot == yao_hubunit.knot
+    assert yao_belief.fund_pool == yao_hubunit.fund_pool
+    assert yao_belief.fund_iota == yao_hubunit.fund_iota
+    assert yao_belief.respect_bit == yao_hubunit.respect_bit
 
 
-def test_HubUnit_get_believer_from_atom_files_ReturnsFile_SimplePlan(
+def test_HubUnit_get_belief_from_atom_files_ReturnsFile_SimplePlan(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -180,19 +180,19 @@ def test_HubUnit_get_believer_from_atom_files_ReturnsFile_SimplePlan(
     yao_hubunit.save_atom_file(sports_atom)
 
     # WHEN
-    yao_believer = yao_hubunit._get_believer_from_atom_files()
+    yao_belief = yao_hubunit._get_belief_from_atom_files()
 
     # THEN
-    assert yao_believer.believer_name == yao_str
-    assert yao_believer.coin_label == yao_hubunit.coin_label
-    assert yao_believer.knot == yao_hubunit.knot
+    assert yao_belief.belief_name == yao_str
+    assert yao_belief.coin_label == yao_hubunit.coin_label
+    assert yao_belief.knot == yao_hubunit.knot
     sports_str = "sports"
-    sports_rope = yao_believer.make_l1_rope(sports_str)
+    sports_rope = yao_belief.make_l1_rope(sports_str)
 
-    assert yao_believer.plan_exists(sports_rope)
+    assert yao_belief.plan_exists(sports_rope)
 
 
-def test_HubUnit_get_believer_from_atom_files_ReturnsFile_WithFactUnit(
+def test_HubUnit_get_belief_from_atom_files_ReturnsFile_WithFactUnit(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -208,13 +208,13 @@ def test_HubUnit_get_believer_from_atom_files_ReturnsFile_WithFactUnit(
     print(f"{get_dir_file_strs(yao_hubunit._atoms_dir).keys()=}")
 
     # WHEN
-    yao_believer = yao_hubunit._get_believer_from_atom_files()
+    yao_belief = yao_hubunit._get_belief_from_atom_files()
 
     # THEN
-    assert yao_believer.believer_name == yao_str
-    assert yao_believer.coin_label == yao_hubunit.coin_label
-    assert yao_believer.knot == yao_hubunit.knot
+    assert yao_belief.belief_name == yao_str
+    assert yao_belief.coin_label == yao_hubunit.coin_label
+    assert yao_belief.knot == yao_hubunit.knot
     sports_str = "sports"
-    sports_rope = yao_believer.make_l1_rope(sports_str)
+    sports_rope = yao_belief.make_l1_rope(sports_str)
 
-    assert yao_believer.plan_exists(sports_rope)
+    assert yao_belief.plan_exists(sports_rope)

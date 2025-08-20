@@ -1,196 +1,190 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.a06_believer_logic.believer_main import BelieverUnit
-from src.a08_believer_atom_logic.atom_main import BelieverAtom
-from src.a09_pack_logic.delta import BelieverDelta
+from src.a06_belief_logic.belief_main import BeliefUnit
+from src.a08_belief_atom_logic.atom_main import BeliefAtom
+from src.a09_pack_logic.delta import BeliefDelta
 
 
 def get_leg_obj(x_dict: dict, x_keylist) -> any:
     return get_from_nested_dict(x_dict, x_keylist, if_missing_return_None=True)
 
 
-def create_legible_list(x_delta: BelieverDelta, x_believer: BelieverUnit) -> list[str]:
-    atoms_dict = x_delta.believeratoms
-    believerunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "believerunit"])
+def create_legible_list(x_delta: BeliefDelta, x_belief: BeliefUnit) -> list[str]:
+    atoms_dict = x_delta.beliefatoms
+    beliefunit_atom = get_leg_obj(atoms_dict, ["UPDATE", "beliefunit"])
 
-    partnerunit_insert_dict = get_leg_obj(
-        atoms_dict, ["INSERT", "believer_partnerunit"]
-    )
-    partnerunit_update_dict = get_leg_obj(
-        atoms_dict, ["UPDATE", "believer_partnerunit"]
-    )
-    partnerunit_delete_dict = get_leg_obj(
-        atoms_dict, ["DELETE", "believer_partnerunit"]
-    )
+    partnerunit_insert_dict = get_leg_obj(atoms_dict, ["INSERT", "belief_partnerunit"])
+    partnerunit_update_dict = get_leg_obj(atoms_dict, ["UPDATE", "belief_partnerunit"])
+    partnerunit_delete_dict = get_leg_obj(atoms_dict, ["DELETE", "belief_partnerunit"])
 
-    x_list = ["INSERT", "believer_partner_membership"]
+    x_list = ["INSERT", "belief_partner_membership"]
     partner_membership_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_partner_membership"]
+    x_list = ["UPDATE", "belief_partner_membership"]
     partner_membership_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_partner_membership"]
+    x_list = ["DELETE", "belief_partner_membership"]
     partner_membership_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_planunit"]
-    believer_planunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_planunit"]
-    believer_planunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_planunit"]
-    believer_planunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_planunit"]
+    belief_planunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "belief_planunit"]
+    belief_planunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_planunit"]
+    belief_planunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_awardunit"]
-    believer_plan_awardunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_plan_awardunit"]
-    believer_plan_awardunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_awardunit"]
-    believer_plan_awardunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_plan_awardunit"]
+    belief_plan_awardunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "belief_plan_awardunit"]
+    belief_plan_awardunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_plan_awardunit"]
+    belief_plan_awardunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_reasonunit"]
-    believer_plan_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_plan_reasonunit"]
-    believer_plan_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_reasonunit"]
-    believer_plan_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_plan_reasonunit"]
+    belief_plan_reasonunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "belief_plan_reasonunit"]
+    belief_plan_reasonunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_plan_reasonunit"]
+    belief_plan_reasonunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_reason_caseunit"]
-    believer_plan_reason_caseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_plan_reason_caseunit"]
-    believer_plan_reason_caseunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_reason_caseunit"]
-    believer_plan_reason_caseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_plan_reason_caseunit"]
+    belief_plan_reason_caseunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "belief_plan_reason_caseunit"]
+    belief_plan_reason_caseunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_plan_reason_caseunit"]
+    belief_plan_reason_caseunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_partyunit"]
-    believer_plan_partyunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_partyunit"]
-    believer_plan_partyunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_plan_partyunit"]
+    belief_plan_partyunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_plan_partyunit"]
+    belief_plan_partyunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_healerunit"]
-    believer_plan_healerunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_healerunit"]
-    believer_plan_healerunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_plan_healerunit"]
+    belief_plan_healerunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_plan_healerunit"]
+    belief_plan_healerunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
-    x_list = ["INSERT", "believer_plan_factunit"]
-    believer_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["UPDATE", "believer_plan_factunit"]
-    believer_plan_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
-    x_list = ["DELETE", "believer_plan_factunit"]
-    believer_plan_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["INSERT", "belief_plan_factunit"]
+    belief_plan_factunit_insert_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["UPDATE", "belief_plan_factunit"]
+    belief_plan_factunit_update_dict = get_leg_obj(atoms_dict, x_list)
+    x_list = ["DELETE", "belief_plan_factunit"]
+    belief_plan_factunit_delete_dict = get_leg_obj(atoms_dict, x_list)
 
     leg_list = []
-    if believerunit_atom is not None:
-        add_believerunit_legible_list(leg_list, believerunit_atom, x_believer)
+    if beliefunit_atom is not None:
+        add_beliefunit_legible_list(leg_list, beliefunit_atom, x_belief)
     if partnerunit_insert_dict is not None:
-        add_believer_partnerunit_insert_to_legible_list(
-            leg_list, partnerunit_insert_dict, x_believer
+        add_belief_partnerunit_insert_to_legible_list(
+            leg_list, partnerunit_insert_dict, x_belief
         )
     if partnerunit_update_dict is not None:
-        add_believer_partnerunit_update_to_legible_list(
-            leg_list, partnerunit_update_dict, x_believer
+        add_belief_partnerunit_update_to_legible_list(
+            leg_list, partnerunit_update_dict, x_belief
         )
     if partnerunit_delete_dict is not None:
-        add_believer_partnerunit_delete_to_legible_list(
-            leg_list, partnerunit_delete_dict, x_believer
+        add_belief_partnerunit_delete_to_legible_list(
+            leg_list, partnerunit_delete_dict, x_belief
         )
 
     if partner_membership_insert_dict is not None:
-        add_believer_partner_membership_insert_to_legible_list(
-            leg_list, partner_membership_insert_dict, x_believer
+        add_belief_partner_membership_insert_to_legible_list(
+            leg_list, partner_membership_insert_dict, x_belief
         )
     if partner_membership_update_dict is not None:
-        add_believer_partner_membership_update_to_legible_list(
-            leg_list, partner_membership_update_dict, x_believer
+        add_belief_partner_membership_update_to_legible_list(
+            leg_list, partner_membership_update_dict, x_belief
         )
     if partner_membership_delete_dict is not None:
-        add_believer_partner_membership_delete_to_legible_list(
-            leg_list, partner_membership_delete_dict, x_believer
+        add_belief_partner_membership_delete_to_legible_list(
+            leg_list, partner_membership_delete_dict, x_belief
         )
 
-    if believer_planunit_insert_dict is not None:
-        add_believer_planunit_insert_to_legible_list(
-            leg_list, believer_planunit_insert_dict, x_believer
+    if belief_planunit_insert_dict is not None:
+        add_belief_planunit_insert_to_legible_list(
+            leg_list, belief_planunit_insert_dict, x_belief
         )
-    if believer_planunit_update_dict is not None:
-        add_believer_planunit_update_to_legible_list(
-            leg_list, believer_planunit_update_dict, x_believer
+    if belief_planunit_update_dict is not None:
+        add_belief_planunit_update_to_legible_list(
+            leg_list, belief_planunit_update_dict, x_belief
         )
-    if believer_planunit_delete_dict is not None:
-        add_believer_planunit_delete_to_legible_list(
-            leg_list, believer_planunit_delete_dict, x_believer
-        )
-
-    if believer_plan_awardunit_insert_dict is not None:
-        add_believer_plan_awardunit_insert_to_legible_list(
-            leg_list, believer_plan_awardunit_insert_dict, x_believer
-        )
-    if believer_plan_awardunit_update_dict is not None:
-        add_believer_plan_awardunit_update_to_legible_list(
-            leg_list, believer_plan_awardunit_update_dict, x_believer
-        )
-    if believer_plan_awardunit_delete_dict is not None:
-        add_believer_plan_awardunit_delete_to_legible_list(
-            leg_list, believer_plan_awardunit_delete_dict, x_believer
+    if belief_planunit_delete_dict is not None:
+        add_belief_planunit_delete_to_legible_list(
+            leg_list, belief_planunit_delete_dict, x_belief
         )
 
-    if believer_plan_reasonunit_insert_dict is not None:
-        add_believer_plan_reasonunit_insert_to_legible_list(
-            leg_list, believer_plan_reasonunit_insert_dict, x_believer
+    if belief_plan_awardunit_insert_dict is not None:
+        add_belief_plan_awardunit_insert_to_legible_list(
+            leg_list, belief_plan_awardunit_insert_dict, x_belief
         )
-    if believer_plan_reasonunit_update_dict is not None:
-        add_believer_plan_reasonunit_update_to_legible_list(
-            leg_list, believer_plan_reasonunit_update_dict, x_believer
+    if belief_plan_awardunit_update_dict is not None:
+        add_belief_plan_awardunit_update_to_legible_list(
+            leg_list, belief_plan_awardunit_update_dict, x_belief
         )
-    if believer_plan_reasonunit_delete_dict is not None:
-        add_believer_plan_reasonunit_delete_to_legible_list(
-            leg_list, believer_plan_reasonunit_delete_dict, x_believer
-        )
-
-    if believer_plan_reason_caseunit_insert_dict is not None:
-        add_believer_reason_caseunit_insert_to_legible_list(
-            leg_list, believer_plan_reason_caseunit_insert_dict, x_believer
-        )
-    if believer_plan_reason_caseunit_update_dict is not None:
-        add_believer_reason_caseunit_update_to_legible_list(
-            leg_list, believer_plan_reason_caseunit_update_dict, x_believer
-        )
-    if believer_plan_reason_caseunit_delete_dict is not None:
-        add_believer_reason_caseunit_delete_to_legible_list(
-            leg_list, believer_plan_reason_caseunit_delete_dict, x_believer
+    if belief_plan_awardunit_delete_dict is not None:
+        add_belief_plan_awardunit_delete_to_legible_list(
+            leg_list, belief_plan_awardunit_delete_dict, x_belief
         )
 
-    if believer_plan_partyunit_insert_dict is not None:
-        add_believer_plan_partyunit_insert_to_legible_list(
-            leg_list, believer_plan_partyunit_insert_dict, x_believer
+    if belief_plan_reasonunit_insert_dict is not None:
+        add_belief_plan_reasonunit_insert_to_legible_list(
+            leg_list, belief_plan_reasonunit_insert_dict, x_belief
         )
-    if believer_plan_partyunit_delete_dict is not None:
-        add_believer_plan_partyunit_delete_to_legible_list(
-            leg_list, believer_plan_partyunit_delete_dict, x_believer
+    if belief_plan_reasonunit_update_dict is not None:
+        add_belief_plan_reasonunit_update_to_legible_list(
+            leg_list, belief_plan_reasonunit_update_dict, x_belief
         )
-
-    if believer_plan_healerunit_insert_dict is not None:
-        add_believer_plan_healerunit_insert_to_legible_list(
-            leg_list, believer_plan_healerunit_insert_dict, x_believer
-        )
-    if believer_plan_healerunit_delete_dict is not None:
-        add_believer_plan_healerunit_delete_to_legible_list(
-            leg_list, believer_plan_healerunit_delete_dict, x_believer
+    if belief_plan_reasonunit_delete_dict is not None:
+        add_belief_plan_reasonunit_delete_to_legible_list(
+            leg_list, belief_plan_reasonunit_delete_dict, x_belief
         )
 
-    if believer_plan_factunit_insert_dict is not None:
-        add_believer_plan_factunit_insert_to_legible_list(
-            leg_list, believer_plan_factunit_insert_dict, x_believer
+    if belief_plan_reason_caseunit_insert_dict is not None:
+        add_belief_reason_caseunit_insert_to_legible_list(
+            leg_list, belief_plan_reason_caseunit_insert_dict, x_belief
         )
-    if believer_plan_factunit_update_dict is not None:
-        add_believer_plan_factunit_update_to_legible_list(
-            leg_list, believer_plan_factunit_update_dict, x_believer
+    if belief_plan_reason_caseunit_update_dict is not None:
+        add_belief_reason_caseunit_update_to_legible_list(
+            leg_list, belief_plan_reason_caseunit_update_dict, x_belief
         )
-    if believer_plan_factunit_delete_dict is not None:
-        add_believer_plan_factunit_delete_to_legible_list(
-            leg_list, believer_plan_factunit_delete_dict, x_believer
+    if belief_plan_reason_caseunit_delete_dict is not None:
+        add_belief_reason_caseunit_delete_to_legible_list(
+            leg_list, belief_plan_reason_caseunit_delete_dict, x_belief
+        )
+
+    if belief_plan_partyunit_insert_dict is not None:
+        add_belief_plan_partyunit_insert_to_legible_list(
+            leg_list, belief_plan_partyunit_insert_dict, x_belief
+        )
+    if belief_plan_partyunit_delete_dict is not None:
+        add_belief_plan_partyunit_delete_to_legible_list(
+            leg_list, belief_plan_partyunit_delete_dict, x_belief
+        )
+
+    if belief_plan_healerunit_insert_dict is not None:
+        add_belief_plan_healerunit_insert_to_legible_list(
+            leg_list, belief_plan_healerunit_insert_dict, x_belief
+        )
+    if belief_plan_healerunit_delete_dict is not None:
+        add_belief_plan_healerunit_delete_to_legible_list(
+            leg_list, belief_plan_healerunit_delete_dict, x_belief
+        )
+
+    if belief_plan_factunit_insert_dict is not None:
+        add_belief_plan_factunit_insert_to_legible_list(
+            leg_list, belief_plan_factunit_insert_dict, x_belief
+        )
+    if belief_plan_factunit_update_dict is not None:
+        add_belief_plan_factunit_update_to_legible_list(
+            leg_list, belief_plan_factunit_update_dict, x_belief
+        )
+    if belief_plan_factunit_delete_dict is not None:
+        add_belief_plan_factunit_delete_to_legible_list(
+            leg_list, belief_plan_factunit_delete_dict, x_belief
         )
 
     return leg_list
 
 
-def add_believerunit_legible_list(
-    legible_list: list[str], x_atom: BelieverAtom, x_believer: BelieverUnit
+def add_beliefunit_legible_list(
+    legible_list: list[str], x_atom: BeliefAtom, x_belief: BeliefUnit
 ):
     jvalues = x_atom.jvalues
     _tally_str = "tally"
@@ -201,32 +195,28 @@ def add_believerunit_legible_list(
     _tally_value = jvalues.get(_tally_str)
 
     if _max_tree_traverse_value is not None:
-        x_str = f"{x_believer.believer_name}'s maximum number of Believer evaluations set to {_max_tree_traverse_value}"
+        x_str = f"{x_belief.belief_name}'s maximum number of Belief evaluations set to {_max_tree_traverse_value}"
         legible_list.append(x_str)
     if (
         credor_respect_value is not None
         and debtor_respect_value is not None
         and credor_respect_value == debtor_respect_value
     ):
-        x_str = f"{x_believer.believer_name}'s total pool is now {credor_respect_value}"
+        x_str = f"{x_belief.belief_name}'s total pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif credor_respect_value is not None:
-        x_str = (
-            f"{x_believer.believer_name}'s credor pool is now {credor_respect_value}"
-        )
+        x_str = f"{x_belief.belief_name}'s credor pool is now {credor_respect_value}"
         legible_list.append(x_str)
     elif debtor_respect_value is not None:
-        x_str = (
-            f"{x_believer.believer_name}'s debtor pool is now {debtor_respect_value}"
-        )
+        x_str = f"{x_belief.belief_name}'s debtor pool is now {debtor_respect_value}"
         legible_list.append(x_str)
     if _tally_value is not None:
-        x_str = f"{x_believer.believer_name}'s believer tally set to {_tally_value}"
+        x_str = f"{x_belief.belief_name}'s belief tally set to {_tally_value}"
         legible_list.append(x_str)
 
 
-def add_believer_partnerunit_insert_to_legible_list(
-    legible_list: list[str], partnerunit_dict: BelieverAtom, x_believer: BelieverUnit
+def add_belief_partnerunit_insert_to_legible_list(
+    legible_list: list[str], partnerunit_dict: BeliefAtom, x_belief: BeliefUnit
 ):
     for partnerunit_atom in partnerunit_dict.values():
         partner_name = partnerunit_atom.get_value("partner_name")
@@ -236,8 +226,8 @@ def add_believer_partnerunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_partnerunit_update_to_legible_list(
-    legible_list: list[str], partnerunit_dict: BelieverAtom, x_believer: BelieverUnit
+def add_belief_partnerunit_update_to_legible_list(
+    legible_list: list[str], partnerunit_dict: BeliefAtom, x_belief: BeliefUnit
 ):
     for partnerunit_atom in partnerunit_dict.values():
         partner_name = partnerunit_atom.get_value("partner_name")
@@ -255,8 +245,8 @@ def add_believer_partnerunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_partnerunit_delete_to_legible_list(
-    legible_list: list[str], partnerunit_dict: BelieverAtom, x_believer: BelieverUnit
+def add_belief_partnerunit_delete_to_legible_list(
+    legible_list: list[str], partnerunit_dict: BeliefAtom, x_belief: BeliefUnit
 ):
     for partnerunit_atom in partnerunit_dict.values():
         partner_name = partnerunit_atom.get_value("partner_name")
@@ -264,10 +254,10 @@ def add_believer_partnerunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_partner_membership_insert_to_legible_list(
+def add_belief_partner_membership_insert_to_legible_list(
     legible_list: list[str],
     partner_membership_insert_dict: dict,
-    x_believer: BelieverUnit,
+    x_belief: BeliefUnit,
 ):
     for partner_membership_dict in partner_membership_insert_dict.values():
         for partner_membership_atom in partner_membership_dict.values():
@@ -283,10 +273,10 @@ def add_believer_partner_membership_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_partner_membership_update_to_legible_list(
+def add_belief_partner_membership_update_to_legible_list(
     legible_list: list[str],
     partner_membership_update_dict: dict,
-    x_believer: BelieverUnit,
+    x_belief: BeliefUnit,
 ):
     for partner_membership_dict in partner_membership_update_dict.values():
         for partner_membership_atom in partner_membership_dict.values():
@@ -310,10 +300,10 @@ def add_believer_partner_membership_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_partner_membership_delete_to_legible_list(
+def add_belief_partner_membership_delete_to_legible_list(
     legible_list: list[str],
     partner_membership_delete_dict: dict,
-    x_believer: BelieverUnit,
+    x_belief: BeliefUnit,
 ):
     for partner_membership_dict in partner_membership_delete_dict.values():
         for partner_membership_atom in partner_membership_dict.values():
@@ -323,8 +313,8 @@ def add_believer_partner_membership_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_planunit_insert_to_legible_list(
-    legible_list: list[str], planunit_insert_dict: dict, x_believer: BelieverUnit
+def add_belief_planunit_insert_to_legible_list(
+    legible_list: list[str], planunit_insert_dict: dict, x_belief: BeliefUnit
 ):
     _problem_bool_str = "problem_bool"
     for planunit_atom in planunit_insert_dict.values():
@@ -361,8 +351,8 @@ def add_believer_planunit_insert_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_planunit_update_to_legible_list(
-    legible_list: list[str], planunit_update_dict: dict, x_believer: BelieverUnit
+def add_belief_planunit_update_to_legible_list(
+    legible_list: list[str], planunit_update_dict: dict, x_belief: BeliefUnit
 ):
     _problem_bool_str = "problem_bool"
     for planunit_atom in planunit_update_dict.values():
@@ -399,8 +389,8 @@ def add_believer_planunit_update_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_planunit_delete_to_legible_list(
-    legible_list: list[str], planunit_delete_dict: dict, x_believer: BelieverUnit
+def add_belief_planunit_delete_to_legible_list(
+    legible_list: list[str], planunit_delete_dict: dict, x_belief: BeliefUnit
 ):
     for planunit_atom in planunit_delete_dict.values():
         rope_value = planunit_atom.get_value("plan_rope")
@@ -408,8 +398,8 @@ def add_believer_planunit_delete_to_legible_list(
         legible_list.append(x_str)
 
 
-def add_believer_plan_awardunit_insert_to_legible_list(
-    legible_list: list[str], plan_awardunit_insert_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_awardunit_insert_to_legible_list(
+    legible_list: list[str], plan_awardunit_insert_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_awardunit_insert_dict.values():
         for plan_awardunit_atom in rope_dict.values():
@@ -421,8 +411,8 @@ def add_believer_plan_awardunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_awardunit_update_to_legible_list(
-    legible_list: list[str], plan_awardunit_update_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_awardunit_update_to_legible_list(
+    legible_list: list[str], plan_awardunit_update_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_awardunit_update_dict.values():
         for plan_awardunit_atom in rope_dict.values():
@@ -439,8 +429,8 @@ def add_believer_plan_awardunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_awardunit_delete_to_legible_list(
-    legible_list: list[str], plan_awardunit_delete_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_awardunit_delete_to_legible_list(
+    legible_list: list[str], plan_awardunit_delete_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_awardunit_delete_dict.values():
         for plan_awardunit_atom in rope_dict.values():
@@ -450,8 +440,8 @@ def add_believer_plan_awardunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_reasonunit_insert_to_legible_list(
-    legible_list: list[str], plan_reasonunit_insert_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_reasonunit_insert_to_legible_list(
+    legible_list: list[str], plan_reasonunit_insert_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_reasonunit_insert_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
@@ -466,8 +456,8 @@ def add_believer_plan_reasonunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_reasonunit_update_to_legible_list(
-    legible_list: list[str], plan_reasonunit_update_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_reasonunit_update_to_legible_list(
+    legible_list: list[str], plan_reasonunit_update_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_reasonunit_update_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
@@ -483,8 +473,8 @@ def add_believer_plan_reasonunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_reasonunit_delete_to_legible_list(
-    legible_list: list[str], plan_reasonunit_delete_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_reasonunit_delete_to_legible_list(
+    legible_list: list[str], plan_reasonunit_delete_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_reasonunit_delete_dict.values():
         for plan_reasonunit_atom in rope_dict.values():
@@ -494,10 +484,10 @@ def add_believer_plan_reasonunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_reason_caseunit_insert_to_legible_list(
+def add_belief_reason_caseunit_insert_to_legible_list(
     legible_list: list[str],
     plan_reason_caseunit_insert_dict: dict,
-    x_believer: BelieverUnit,
+    x_belief: BeliefUnit,
 ):
     for rope_dict in plan_reason_caseunit_insert_dict.values():
         for reason_context_dict in rope_dict.values():
@@ -522,10 +512,10 @@ def add_believer_reason_caseunit_insert_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_believer_reason_caseunit_update_to_legible_list(
+def add_belief_reason_caseunit_update_to_legible_list(
     legible_list: list[str],
     plan_reason_caseunit_update_dict: dict,
-    x_believer: BelieverUnit,
+    x_belief: BeliefUnit,
 ):
     for rope_dict in plan_reason_caseunit_update_dict.values():
         for reason_context_dict in rope_dict.values():
@@ -550,10 +540,10 @@ def add_believer_reason_caseunit_update_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_believer_reason_caseunit_delete_to_legible_list(
+def add_belief_reason_caseunit_delete_to_legible_list(
     legible_list: list[str],
     plan_reason_caseunit_delete_dict: dict,
-    x_believer: BelieverUnit,
+    x_belief: BeliefUnit,
 ):
     for rope_dict in plan_reason_caseunit_delete_dict.values():
         for reason_context_dict in rope_dict.values():
@@ -567,8 +557,8 @@ def add_believer_reason_caseunit_delete_to_legible_list(
                 legible_list.append(x_str)
 
 
-def add_believer_plan_partyunit_insert_to_legible_list(
-    legible_list: list[str], plan_partyunit_insert_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_partyunit_insert_to_legible_list(
+    legible_list: list[str], plan_partyunit_insert_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_partyunit_insert_dict.values():
         for plan_partyunit_atom in rope_dict.values():
@@ -578,8 +568,8 @@ def add_believer_plan_partyunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_partyunit_delete_to_legible_list(
-    legible_list: list[str], plan_partyunit_delete_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_partyunit_delete_to_legible_list(
+    legible_list: list[str], plan_partyunit_delete_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_partyunit_delete_dict.values():
         for plan_partyunit_atom in rope_dict.values():
@@ -589,8 +579,8 @@ def add_believer_plan_partyunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_healerunit_insert_to_legible_list(
-    legible_list: list[str], plan_healerunit_insert_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_healerunit_insert_to_legible_list(
+    legible_list: list[str], plan_healerunit_insert_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_healerunit_insert_dict.values():
         for plan_healerunit_atom in rope_dict.values():
@@ -600,8 +590,8 @@ def add_believer_plan_healerunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_healerunit_delete_to_legible_list(
-    legible_list: list[str], plan_healerunit_delete_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_healerunit_delete_to_legible_list(
+    legible_list: list[str], plan_healerunit_delete_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_healerunit_delete_dict.values():
         for plan_healerunit_atom in rope_dict.values():
@@ -611,8 +601,8 @@ def add_believer_plan_healerunit_delete_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_factunit_insert_to_legible_list(
-    legible_list: list[str], plan_factunit_insert_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_factunit_insert_to_legible_list(
+    legible_list: list[str], plan_factunit_insert_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_factunit_insert_dict.values():
         for plan_factunit_atom in rope_dict.values():
@@ -629,8 +619,8 @@ def add_believer_plan_factunit_insert_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_factunit_update_to_legible_list(
-    legible_list: list[str], plan_factunit_update_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_factunit_update_to_legible_list(
+    legible_list: list[str], plan_factunit_update_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_factunit_update_dict.values():
         for plan_factunit_atom in rope_dict.values():
@@ -647,8 +637,8 @@ def add_believer_plan_factunit_update_to_legible_list(
             legible_list.append(x_str)
 
 
-def add_believer_plan_factunit_delete_to_legible_list(
-    legible_list: list[str], plan_factunit_delete_dict: dict, x_believer: BelieverUnit
+def add_belief_plan_factunit_delete_to_legible_list(
+    legible_list: list[str], plan_factunit_delete_dict: dict, x_belief: BeliefUnit
 ):
     for rope_dict in plan_factunit_delete_dict.values():
         for plan_factunit_atom in rope_dict.values():

@@ -1,8 +1,8 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     addin_str,
     begin_str,
-    believer_name_str,
+    belief_name_str,
     close_str,
     denom_str,
     morph_str,
@@ -42,7 +42,7 @@ def test_get_coin_guts_partners_dataframe_ReturnsObj(
 
     # THEN
     partnerunit_colums = {
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         partner_cred_points_str(),
         partner_debt_points_str(),
@@ -86,7 +86,7 @@ def test_get_coin_jobs_partners_dataframe_ReturnsObj(
 
     # THEN
     partnerunit_colums = {
-        believer_name_str(),
+        belief_name_str(),
         partner_name_str(),
         partner_cred_points_str(),
         partner_debt_points_str(),
@@ -131,7 +131,7 @@ def test_get_coin_guts_agenda_dataframe_ReturnsObj(
 
     # THEN
     agenda_colums = {
-        believer_name_str(),
+        belief_name_str(),
         "fund_ratio",
         plan_label_str(),
         parent_rope_str(),
@@ -172,7 +172,7 @@ def test_get_coin_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     agenda_colums = {
-        believer_name_str(),
+        belief_name_str(),
         "fund_ratio",
         "plan_label",
         parent_rope_str(),

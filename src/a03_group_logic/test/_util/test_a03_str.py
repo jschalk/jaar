@@ -13,7 +13,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _parent_solo_str,
     awardee_title_str,
     awardunits_str,
-    believer_name_str,
+    belief_name_str,
     fund_give_str,
     fund_take_str,
     give_force_str,
@@ -46,7 +46,7 @@ def test_str_functions_ReturnsObj():
     assert _parent_solo_str() == "_parent_solo"
     assert awardunits_str() == "awardunits"
     assert awardee_title_str() == "awardee_title"
-    assert believer_name_str() == "believer_name"
+    assert belief_name_str() == "belief_name"
     assert fund_give_str() == "fund_give"
     assert fund_take_str() == "fund_take"
     assert give_force_str() == "give_force"

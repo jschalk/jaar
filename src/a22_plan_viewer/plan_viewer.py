@@ -8,7 +8,7 @@ from src.a05_plan_logic.plan import (
     FactUnit,
     PlanUnit,
 )
-from src.a06_believer_logic.believer_main import BelieverUnit
+from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
@@ -37,14 +37,14 @@ def jaar_objs_asdict(obj: Any) -> dict:
     Convert a dataclass-like object to dict,
     including extra keys defined in a custom attribute.
     """
-    current_believer = None
+    current_belief = None
     if dataclasses.is_dataclass(obj):
         result = {}
         for field in dataclasses.fields(obj):
             value = getattr(obj, field.name)
             result[field.name] = jaar_objs_asdict(value)
-        if isinstance(obj, BelieverUnit):
-            current_believer = obj
+        if isinstance(obj, BeliefUnit):
+            current_belief = obj
         if isinstance(obj, PlanUnit):
             set_readable_plan_values(obj, result)
         elif isinstance(obj, AwardUnit):
@@ -59,7 +59,7 @@ def jaar_objs_asdict(obj: Any) -> dict:
             readable_str = f"{obj.awardee_title}: take_fund ({obj._fund_take}), give_fund ({obj._fund_give})"
             result["readable"] = add_small_dot(readable_str)
         elif isinstance(obj, (FactUnit, FactHeir)):
-            readable_str = get_fact_state_readable_str(obj, None, current_believer)
+            readable_str = get_fact_state_readable_str(obj, None, current_belief)
             result["readable"] = add_small_dot(readable_str)
         return result
     elif isinstance(obj, (list, tuple)):

@@ -16,8 +16,8 @@ from src.a04_reason_logic.reason_plan import (
 )
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_believer_logic.believer_main import believerunit_shop
-from src.a18_etl_toolbox.db_obj_believer_tool import (
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a18_etl_toolbox.db_obj_belief_tool import (
     ObjKeysHolder,
     insert_job_blrawar,
     insert_job_blrfact,
@@ -42,7 +42,7 @@ def test_ObjKeysHolder_Exists():
 
     # THEN
     assert not x_objkeyholder.coin_label
-    assert not x_objkeyholder.believer_name
+    assert not x_objkeyholder.belief_name
     assert not x_objkeyholder.rope
     assert not x_objkeyholder.reason_context
     assert not x_objkeyholder.partner_name
@@ -51,11 +51,11 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.fact_rope
 
 
-def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
+def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     # sourcery skip: extract-method
     # ESTABLISH
     x_coin_label = "amy23"
-    x_believer_name = "Sue"
+    x_belief_name = "Sue"
     x__keeps_buildable = 99
     x__keeps_justified = 77
     x__offtrack_fund = 55.5
@@ -70,33 +70,31 @@ def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
     x_penny = 4.0
     x_respect_bit = 0.2
     x_tally = 6
-    sue_believer = believerunit_shop(
-        believer_name=x_believer_name, coin_label=x_coin_label
-    )
-    sue_believer.fund_pool = x_fund_pool
-    sue_believer.fund_iota = x_fund_iota
-    sue_believer.penny = x_penny
-    sue_believer.tally = x_tally
-    sue_believer.respect_bit = x_respect_bit
-    sue_believer.max_tree_traverse = x_max_tree_traverse
-    sue_believer._keeps_buildable = x__keeps_buildable
-    sue_believer._keeps_justified = x__keeps_justified
-    sue_believer._offtrack_fund = x__offtrack_fund
-    sue_believer._rational = x__rational
-    sue_believer._sum_healerunit_share = x__sum_healerunit_share
-    sue_believer._tree_traverse_count = x__tree_traverse_count
-    sue_believer.credor_respect = x_credor_respect
-    sue_believer.debtor_respect = x_debtor_respect
+    sue_belief = beliefunit_shop(belief_name=x_belief_name, coin_label=x_coin_label)
+    sue_belief.fund_pool = x_fund_pool
+    sue_belief.fund_iota = x_fund_iota
+    sue_belief.penny = x_penny
+    sue_belief.tally = x_tally
+    sue_belief.respect_bit = x_respect_bit
+    sue_belief.max_tree_traverse = x_max_tree_traverse
+    sue_belief._keeps_buildable = x__keeps_buildable
+    sue_belief._keeps_justified = x__keeps_justified
+    sue_belief._offtrack_fund = x__offtrack_fund
+    sue_belief._rational = x__rational
+    sue_belief._sum_healerunit_share = x__sum_healerunit_share
+    sue_belief._tree_traverse_count = x__tree_traverse_count
+    sue_belief.credor_respect = x_credor_respect
+    sue_belief.debtor_respect = x_debtor_respect
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believerunit_job"
+        x_table_name = "beliefunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         objkeysholder = ObjKeysHolder()
 
         # WHEN
-        insert_job_blrunit(cursor, objkeysholder, sue_believer)
+        insert_job_blrunit(cursor, objkeysholder, sue_belief)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -105,7 +103,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
         rows = cursor.fetchall()
         expected_row1 = (
             x_coin_label,
-            x_believer_name,
+            x_belief_name,
             x_credor_respect,
             x_debtor_respect,
             x_fund_pool,
@@ -128,7 +126,7 @@ def test_insert_job_blrunit_CreatesTableRowsFor_believerunit_job():
 def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_planunit")
+    # x_args = get_belief_calc_dimen_args("belief_planunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -141,7 +139,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     #     print(f"""            x_{x_arg},""")
     # print("")
     x_coin_label = "amy23"
-    x_believer_name = 2
+    x_belief_name = 2
     casa_rope = create_rope(x_coin_label, "casa")
     x_parent_rope = casa_rope
     x_plan_label = "clean"
@@ -228,9 +226,9 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_planunit_job"
+        x_table_name = "belief_planunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
 
         # WHEN
         insert_job_blrplan(cursor, x_objkeysholder, x_plan)
@@ -243,7 +241,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
         rows = cursor.fetchall()
         expected_row1 = (
             x_coin_label,
-            str(x_believer_name),
+            str(x_belief_name),
             clean_rope,
             x_begin,
             x_close,
@@ -278,7 +276,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
 def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_reasonunit")
+    # x_args = get_belief_calc_dimen_args("belief_plan_reasonunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -292,7 +290,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     # print("")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
     x_reason_active_requisite = 5
@@ -309,9 +307,9 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_reasonunit_job"
+        x_table_name = "belief_plan_reasonunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrreas(cursor, x_objkeysholder, x_reasonheir)
@@ -323,7 +321,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
             x_reason_active_requisite,
@@ -338,7 +336,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
 def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_reason_caseunit")
+    # x_args = get_belief_calc_dimen_args("belief_plan_reason_caseunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -351,7 +349,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
     x_reason_state = 5
@@ -371,10 +369,10 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_reason_caseunit_job"
+        x_table_name = "belief_plan_reason_caseunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(
-            x_coin_label, x_believer_name, x_rope, x_reason_context
+            x_coin_label, x_belief_name, x_rope, x_reason_context
         )
 
         # WHEN
@@ -387,7 +385,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
             str(x_reason_state),
@@ -404,7 +402,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
 def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_partner_membership")
+    # x_args = get_belief_calc_dimen_args("belief_partner_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -417,7 +415,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_partner_name = 3
     x_group_title = 4
     x_group_cred_points = 5.0
@@ -446,9 +444,9 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_partner_membership_job"
+        x_table_name = "belief_partner_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
 
         # WHEN
         insert_job_blrmemb(cursor, x_objkeysholder, x_membership)
@@ -460,7 +458,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_partner_name),
             str(x_group_title),
             x_group_cred_points,
@@ -481,7 +479,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
 def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_partnerunit")
+    # x_args = get_belief_calc_dimen_args("belief_partnerunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -494,7 +492,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_partner_name = 3
     x_partner_cred_points = 4
     x_partner_debt_points = 5
@@ -526,9 +524,9 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_partnerunit_job"
+        x_table_name = "belief_partnerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
 
         # WHEN
         insert_job_blrpern(cursor, x_objkeysholder, x_partner)
@@ -540,7 +538,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_partner_name),
             x_partner_cred_points,
             x_partner_debt_points,
@@ -562,7 +560,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
 def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_groupunit")
+    # x_args = get_belief_calc_dimen_args("belief_groupunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -575,7 +573,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_group_title = 3
     x_fund_iota = 4
     x_knot = 5
@@ -599,9 +597,9 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_groupunit_job"
+        x_table_name = "belief_groupunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name)
 
         # WHEN
         insert_job_blrgrou(cursor, x_objkeysholder, x_group)
@@ -613,7 +611,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_group_title),
             x_fund_iota,
             str(x_knot),
@@ -631,7 +629,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
 def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_awardunit")
+    # x_args = get_belief_calc_dimen_args("belief_plan_awardunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -644,7 +642,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_rope = 3
     x_awardee_title = 4
     x_give_force = 5
@@ -661,9 +659,9 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_awardunit_job"
+        x_table_name = "belief_plan_awardunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrawar(cursor, x_objkeysholder, x_awardheir)
@@ -675,7 +673,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             str(x_awardee_title),
             x_give_force,
@@ -690,7 +688,7 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
 def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_factunit")
+    # x_args = get_belief_calc_dimen_args("belief_plan_factunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -703,7 +701,7 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_rope = 3
     x_reason_context = 4
     x_fact_state = 5
@@ -718,9 +716,9 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_factunit_job"
+        x_table_name = "belief_plan_factunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrfact(cursor, x_objkeysholder, x_factheir)
@@ -732,7 +730,7 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             str(x_reason_context),
             str(x_fact_state),
@@ -746,7 +744,7 @@ def test_insert_job_blrfact_CreatesTableRowsFor_blrfact_job():
 def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_healerunit")
+    # x_args = get_belief_calc_dimen_args("belief_plan_healerunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -759,7 +757,7 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_rope = 3
     bob_str = "Bob"
     sue_str = "Sue"
@@ -770,9 +768,9 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_healerunit_job"
+        x_table_name = "belief_plan_healerunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrheal(cursor, x_objkeysholder, x_healerunit)
@@ -784,13 +782,13 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             bob_str,
         )
         expected_row2 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             sue_str,
         )
@@ -801,7 +799,7 @@ def test_insert_job_blrheal_CreatesTableRowsFor_blrheal_job():
 def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_believer_calc_dimen_args("believer_plan_partyunit")
+    # x_args = get_belief_calc_dimen_args("belief_plan_partyunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -814,11 +812,11 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     #     print(f"""            x_{x_arg},""")
 
     x_coin_label = 1
-    x_believer_name = 2
+    x_belief_name = 2
     x_rope = 3
-    x__believer_name_is_labor = 5
+    x__belief_name_is_labor = 5
     x_laborheir = laborheir_shop()
-    x_laborheir._believer_name_is_labor = x__believer_name_is_labor
+    x_laborheir._belief_name_is_labor = x__belief_name_is_labor
     bob_str = "Bob"
     bob_solo_bool = 6
     sue_str = "Sue"
@@ -830,9 +828,9 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "believer_plan_partyunit_job"
+        x_table_name = "belief_plan_partyunit_job"
         assert get_row_count(cursor, x_table_name) == 0
-        x_objkeysholder = ObjKeysHolder(x_coin_label, x_believer_name, x_rope)
+        x_objkeysholder = ObjKeysHolder(x_coin_label, x_belief_name, x_rope)
 
         # WHEN
         insert_job_blrlabo(cursor, x_objkeysholder, x_laborheir)
@@ -844,19 +842,19 @@ def test_insert_job_blrlabo_CreatesTableRowsFor_blrlabo_job():
         rows = cursor.fetchall()
         expected_row1 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             bob_str,
             bob_solo_bool,
-            x__believer_name_is_labor,
+            x__belief_name_is_labor,
         )
         expected_row2 = (
             str(x_coin_label),
-            str(x_believer_name),
+            str(x_belief_name),
             str(x_rope),
             sue_str,
             sue_solo_bool,
-            x__believer_name_is_labor,
+            x__belief_name_is_labor,
         )
         expected_data = [expected_row1, expected_row2]
         assert rows == expected_data
@@ -869,41 +867,41 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     sue_str = "Sue"
     bob_str = "Bob"
     run_str = ";run"
-    sue_believer = believerunit_shop(sue_str, a23_str)
-    sue_believer.add_partnerunit(sue_str)
-    sue_believer.add_partnerunit(bob_str)
-    sue_believer.get_partner(bob_str).add_membership(run_str)
-    casa_rope = sue_believer.make_l1_rope("casa")
-    status_rope = sue_believer.make_l1_rope("status")
-    clean_rope = sue_believer.make_rope(status_rope, "clean")
-    dirty_rope = sue_believer.make_rope(status_rope, "dirty")
-    sue_believer.add_plan(casa_rope)
-    sue_believer.add_plan(clean_rope)
-    sue_believer.add_plan(dirty_rope)
-    sue_believer.edit_plan_attr(
+    sue_belief = beliefunit_shop(sue_str, a23_str)
+    sue_belief.add_partnerunit(sue_str)
+    sue_belief.add_partnerunit(bob_str)
+    sue_belief.get_partner(bob_str).add_membership(run_str)
+    casa_rope = sue_belief.make_l1_rope("casa")
+    status_rope = sue_belief.make_l1_rope("status")
+    clean_rope = sue_belief.make_rope(status_rope, "clean")
+    dirty_rope = sue_belief.make_rope(status_rope, "dirty")
+    sue_belief.add_plan(casa_rope)
+    sue_belief.add_plan(clean_rope)
+    sue_belief.add_plan(dirty_rope)
+    sue_belief.edit_plan_attr(
         casa_rope, reason_context=status_rope, reason_case=dirty_rope
     )
-    sue_believer.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
-    sue_believer.edit_plan_attr(casa_rope, healerunit=healerunit_shop({bob_str}))
+    sue_belief.edit_plan_attr(casa_rope, awardunit=awardunit_shop(run_str))
+    sue_belief.edit_plan_attr(casa_rope, healerunit=healerunit_shop({bob_str}))
     casa_laborunit = laborunit_shop()
     casa_laborunit.add_party(sue_str, True)
-    sue_believer.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
-    sue_believer.add_fact(status_rope, clean_rope)
+    sue_belief.edit_plan_attr(casa_rope, laborunit=casa_laborunit)
+    sue_belief.add_fact(status_rope, clean_rope)
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        blrmemb_job_table = "believer_partner_membership_job"
-        blrpern_job_table = "believer_partnerunit_job"
-        blrgrou_job_table = "believer_groupunit_job"
-        blrawar_job_table = "believer_plan_awardunit_job"
-        blrfact_job_table = "believer_plan_factunit_job"
-        blrheal_job_table = "believer_plan_healerunit_job"
-        blrprem_job_table = "believer_plan_reason_caseunit_job"
-        blrreas_job_table = "believer_plan_reasonunit_job"
-        blrlabo_job_table = "believer_plan_partyunit_job"
-        blrplan_job_table = "believer_planunit_job"
-        blrunit_job_table = "believerunit_job"
+        blrmemb_job_table = "belief_partner_membership_job"
+        blrpern_job_table = "belief_partnerunit_job"
+        blrgrou_job_table = "belief_groupunit_job"
+        blrawar_job_table = "belief_plan_awardunit_job"
+        blrfact_job_table = "belief_plan_factunit_job"
+        blrheal_job_table = "belief_plan_healerunit_job"
+        blrprem_job_table = "belief_plan_reason_caseunit_job"
+        blrreas_job_table = "belief_plan_reasonunit_job"
+        blrlabo_job_table = "belief_plan_partyunit_job"
+        blrplan_job_table = "belief_planunit_job"
+        blrunit_job_table = "beliefunit_job"
         assert get_row_count(cursor, blrunit_job_table) == 0
         assert get_row_count(cursor, blrplan_job_table) == 0
         assert get_row_count(cursor, blrpern_job_table) == 0
@@ -917,7 +915,7 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
         assert get_row_count(cursor, blrlabo_job_table) == 0
 
         # WHEN
-        insert_job_obj(cursor, sue_believer)
+        insert_job_obj(cursor, sue_belief)
 
         # THEN
         assert get_row_count(cursor, blrunit_job_table) == 1

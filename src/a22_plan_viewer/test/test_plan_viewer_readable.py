@@ -40,15 +40,15 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_want_str,
     task_str,
 )
-from src.a06_believer_logic.test._util.a06_str import parent_rope_str, planroot_str
+from src.a06_belief_logic.test._util.a06_str import parent_rope_str, planroot_str
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_believers import (
-    get_believerunit_irrational_example,
-    get_sue_casa_believerunit,
+from src.a22_plan_viewer.test._util.example22_beliefs import (
+    get_beliefunit_irrational_example,
+    get_sue_casa_beliefunit,
 )
 
 
@@ -141,10 +141,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     # ESTABLISH
-    sue_believerunit = get_sue_casa_believerunit()
+    sue_beliefunit = get_sue_casa_beliefunit()
 
     # WHEN
-    root_plan_view_dict = get_plan_view_dict(sue_believerunit.planroot)
+    root_plan_view_dict = get_plan_view_dict(sue_beliefunit.planroot)
 
     # THEN
     # for dict_key, value in casa_dict.items():
@@ -158,9 +158,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     # ESTABLISH
-    sue_believerunit = get_sue_casa_believerunit()
-    casa_rope = sue_believerunit.make_l1_rope("casa")
-    casa_plan = sue_believerunit.get_plan_obj(casa_rope)
+    sue_beliefunit = get_sue_casa_beliefunit()
+    casa_rope = sue_beliefunit.make_l1_rope("casa")
+    casa_plan = sue_beliefunit.get_plan_obj(casa_rope)
 
     # WHEN
     casa_dict = get_plan_view_dict(casa_plan)
@@ -180,9 +180,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     # ESTABLISH
-    sue_believerunit = get_sue_casa_believerunit()
-    casa_rope = sue_believerunit.make_l1_rope("casa")
-    casa_plan = sue_believerunit.get_plan_obj(casa_rope)
+    sue_beliefunit = get_sue_casa_beliefunit()
+    casa_rope = sue_beliefunit.make_l1_rope("casa")
+    casa_plan = sue_beliefunit.get_plan_obj(casa_rope)
 
     # WHEN
     casa_dict = get_plan_view_dict(casa_plan)
@@ -239,31 +239,31 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     # ESTABLISH
-    sue_believer = get_sue_casa_believerunit()
+    sue_belief = get_sue_casa_beliefunit()
 
     # WHEN
-    root_dict = get_plan_view_dict(sue_believer.planroot)
+    root_dict = get_plan_view_dict(sue_belief.planroot)
 
     # THEN
     # sports ropes
-    sports_rope = sue_believer.make_l1_rope("sports")
+    sports_rope = sue_belief.make_l1_rope("sports")
     best_sport_str = "best sport"
-    best_rope = sue_believer.make_rope(sports_rope, best_sport_str)
+    best_rope = sue_belief.make_rope(sports_rope, best_sport_str)
     soccer_str = "soccer"
     swim_str = "swim"
     run_str = "run"
-    best_soccer_rope = sue_believer.make_rope(best_rope, soccer_str)
-    best_swim_rope = sue_believer.make_rope(best_rope, swim_str)
-    best_run_rope = sue_believer.make_rope(best_rope, run_str)
+    best_soccer_rope = sue_belief.make_rope(best_rope, soccer_str)
+    best_swim_rope = sue_belief.make_rope(best_rope, swim_str)
+    best_run_rope = sue_belief.make_rope(best_rope, run_str)
 
     # casa ropes
-    casa_rope = sue_believer.make_l1_rope("casa")
-    clean_rope = sue_believer.make_rope(casa_rope, "clean")
-    mop_rope = sue_believer.make_rope(clean_rope, "mop")
-    sweep_rope = sue_believer.make_rope(clean_rope, "sweep")
-    tidi_rope = sue_believer.make_rope(casa_rope, "tidiness")
-    dirty_rope = sue_believer.make_rope(casa_rope, "dirty")
-    tidy_rope = sue_believer.make_rope(casa_rope, "tidy")
+    casa_rope = sue_belief.make_l1_rope("casa")
+    clean_rope = sue_belief.make_rope(casa_rope, "clean")
+    mop_rope = sue_belief.make_rope(clean_rope, "mop")
+    sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
+    tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
+    dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
+    tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
 
     # factunits
     root_factunits_dict = root_dict.get(factunits_str())
@@ -274,13 +274,13 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     # print(f"{tidi_factunit_dict=}")
     # print(f"{best_factunit_dict=}")
     readable_str = "readable"
-    tidi_factunit = sue_believer.get_fact(tidi_rope)
-    best_factunit = sue_believer.get_fact(best_rope)
+    tidi_factunit = sue_belief.get_fact(tidi_rope)
+    best_factunit = sue_belief.get_fact(best_rope)
     tidi_factunit_readable = get_fact_state_readable_str(
-        tidi_factunit, None, sue_believer
+        tidi_factunit, None, sue_belief
     )
     best_factunit_readable = get_fact_state_readable_str(
-        best_factunit, None, sue_believer
+        best_factunit, None, sue_belief
     )
     expected_tidi_factunit_str = add_small_dot(tidi_factunit_readable)
     expected_best_factunit_str = add_small_dot(best_factunit_readable)
@@ -297,14 +297,14 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     casa_best_factheir_dict = casa_factheirs_dict.get(best_rope)
     print(f"{casa_tidi_factheir_dict=}")
     print(f"{casa_best_factheir_dict=}")
-    casa_plan = sue_believer.get_plan_obj(casa_rope)
+    casa_plan = sue_belief.get_plan_obj(casa_rope)
     tidi_factheir = casa_plan._factheirs.get(tidi_rope)
     best_factheir = casa_plan._factheirs.get(best_rope)
     casa_tidi_factheir_readable = get_fact_state_readable_str(
-        tidi_factheir, None, sue_believer
+        tidi_factheir, None, sue_belief
     )
     casa_best_factheir_readable = get_fact_state_readable_str(
-        best_factheir, None, sue_believer
+        best_factheir, None, sue_belief
     )
     expected_casa_tidi_factheir_str = add_small_dot(casa_tidi_factheir_readable)
     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
@@ -386,14 +386,14 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_numeric_range_attrs():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_active_hx():
     # ESTABLISH
-    hatter_believer = get_believerunit_irrational_example()
-    hatter_believer.set_max_tree_traverse(8)
-    hatter_believer.settle_believer()
+    hatter_belief = get_beliefunit_irrational_example()
+    hatter_belief.set_max_tree_traverse(8)
+    hatter_belief.settle_belief()
     egg_str = "egg first"
-    egg_rope = hatter_believer.make_l1_rope(egg_str)
+    egg_rope = hatter_belief.make_l1_rope(egg_str)
     chicken_str = "chicken first"
-    chicken_rope = hatter_believer.make_l1_rope(chicken_str)
-    chicken_plan = hatter_believer.get_plan_obj(chicken_rope)
+    chicken_rope = hatter_belief.make_l1_rope(chicken_str)
+    chicken_plan = hatter_belief.get_plan_obj(chicken_rope)
 
     # WHEN
     chicken_dict = get_plan_view_dict(chicken_plan)

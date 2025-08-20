@@ -1,5 +1,5 @@
 from src.a18_etl_toolbox.test._util.a18_str import (
-    believer_net_amount_str,
+    belief_net_amount_str,
     brick_agg_str,
     brick_raw_str,
     brick_valid_str,
@@ -23,7 +23,7 @@ def test_str_functions_ReturnsObj():
     assert brick_valid_str() == "brick_valid"
     assert events_brick_agg_str() == "events_brick_agg"
     assert events_brick_valid_str() == "events_brick_valid"
-    assert believer_net_amount_str() == "believer_net_amount"
+    assert belief_net_amount_str() == "belief_net_amount"
     assert coin_event_time_agg_str() == "coin_event_time_agg"
     assert coin_partner_nets_str() == "coin_partner_nets"
     assert sound_raw_str() == "sound_raw"
