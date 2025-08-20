@@ -45,7 +45,7 @@ from src.a03_group_logic.labor import (
     laborunit_get_from_dict,
     laborunit_shop,
 )
-from src.a04_reason_logic.reason_plan import (
+from src.a04_reason_logic.reason import (
     FactCore,
     FactHeir,
     FactUnit,

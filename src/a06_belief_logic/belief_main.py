@@ -59,12 +59,7 @@ from src.a03_group_logic.partner import (
     partnerunit_shop,
     partnerunits_get_from_dict,
 )
-from src.a04_reason_logic.reason_plan import (
-    FactUnit,
-    ReasonUnit,
-    RopeTerm,
-    factunit_shop,
-)
+from src.a04_reason_logic.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from src.a05_plan_logic.healer import HealerUnit
 from src.a05_plan_logic.plan import (
     PlanAttrHolder,

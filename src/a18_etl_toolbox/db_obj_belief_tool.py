@@ -6,7 +6,7 @@ from src.a01_term_logic.term import BeliefName, GroupTitle, PartnerName, RopeTer
 from src.a03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.a03_group_logic.labor import LaborHeir
 from src.a03_group_logic.partner import PartnerUnit
-from src.a04_reason_logic.reason_plan import CaseUnit, FactHeir, ReasonHeir
+from src.a04_reason_logic.reason import CaseUnit, FactHeir, ReasonHeir
 from src.a05_plan_logic.plan import HealerUnit, PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a11_bud_logic.bud import MomentLabel

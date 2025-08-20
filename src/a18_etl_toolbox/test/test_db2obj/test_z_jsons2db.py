@@ -9,11 +9,7 @@ from src.a03_group_logic.group import (
 )
 from src.a03_group_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
 from src.a03_group_logic.partner import partnerunit_shop
-from src.a04_reason_logic.reason_plan import (
-    caseunit_shop,
-    factheir_shop,
-    reasonheir_shop,
-)
+from src.a04_reason_logic.reason import caseunit_shop, factheir_shop, reasonheir_shop
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop

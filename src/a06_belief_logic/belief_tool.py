@@ -4,7 +4,7 @@ from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.group import AwardUnit, MemberShip
 from src.a03_group_logic.partner import PartnerUnit
-from src.a04_reason_logic.reason_plan import (
+from src.a04_reason_logic.reason import (
     CaseUnit,
     FactUnit,
     ReasonUnit,

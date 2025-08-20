@@ -1,6 +1,6 @@
 import dataclasses
 from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
-from src.a04_reason_logic.reason_plan import ReasonUnit
+from src.a04_reason_logic.reason import ReasonUnit
 from src.a05_plan_logic.plan import (
     AwardHeir,
     AwardLine,

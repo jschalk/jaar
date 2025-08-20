@@ -5,7 +5,7 @@ from src.a01_term_logic.rope import (
     get_root_label_from_rope,
     get_tail_label,
 )
-from src.a04_reason_logic.reason_plan import CaseUnit, FactUnit
+from src.a04_reason_logic.reason import CaseUnit, FactUnit
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a07_timeline_logic.timeline_main import belieftimelinepoint_shop
 

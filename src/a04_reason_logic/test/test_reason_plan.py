@@ -3,7 +3,7 @@ from src.a01_term_logic.rope import (
     default_knot_if_None,
     get_default_central_label as root_label,
 )
-from src.a04_reason_logic.reason_plan import (
+from src.a04_reason_logic.reason import (
     ReasonCore,
     caseunit_shop,
     factheir_shop,

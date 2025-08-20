@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardunit_shop
-from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
+from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
     awardee_title_str,
