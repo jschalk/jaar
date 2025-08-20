@@ -1,0 +1,31 @@
+{
+    "attributes": {
+        "partner_name": {
+            "otx_key": true
+        },
+        "partner_cred_points": {
+            "otx_key": false
+        },
+        "partner_debt_points": {
+            "otx_key": false
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "moment_label": {
+            "otx_key": true
+        },
+        "belief_name": {
+            "otx_key": true
+        }
+    },
+    "idea_number": "br00021",
+    "dimens": [
+        "momentunit",
+        "beliefunit",
+        "belief_partnerunit"
+    ]
+}

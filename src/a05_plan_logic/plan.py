@@ -16,9 +16,9 @@ from src.a01_term_logic.rope import (
     replace_knot,
 )
 from src.a01_term_logic.term import (
-    BeliefLabel,
     GroupTitle,
     LabelTerm,
+    MomentLabel,
     PartnerName,
     RopeTerm,
     default_knot_if_None,
@@ -77,7 +77,7 @@ class PlanGetDescendantsException(Exception):
     pass
 
 
-def get_default_belief_label() -> BeliefLabel:
+def get_default_moment_label() -> MomentLabel:
     return "ZZ"
 
 
@@ -222,7 +222,7 @@ class PlanUnit:
     plan_label : LabelTerm of plan.
     parent_rope : RopeTerm that this plan stems from. Empty string for root plans.
     root : bool at Indicates whether this is a root plan.
-    belief_label : BeliefLabel that is root plan LabelTerm.
+    moment_label : MomentLabel that is root plan LabelTerm.
     knot : str Identifier or label for bridging plans.
     optional:
     star : int weight that is arbitrary used by parent plan to calculated relative importance.
@@ -245,7 +245,7 @@ class PlanUnit:
     problem_bool : bool that describes if the plan is a problem.
     _is_expanded : bool Internal flag for whether the plan is expanded.
 
-    _active : bool that describes if the plan task is active, calculated by BeliefUnit.
+    _active : bool that describes if the plan task is active, calculated by MomentUnit.
     _active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
     _all_partner_cred : bool Flag indicating there are not explicitley defined awardunits
     _all_partner_debt : bool Flag indicating there are not explicitley defined awardunits
@@ -255,8 +255,8 @@ class PlanUnit:
     _factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     _fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
-    _fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
-    _fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
+    _fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
+    _fund_cease : FundNum Point at which funding ceases inside MomentUnit funding range
     _healerunit_ratio : float
     _level : int that describes Depth level in plan hierarchy.
     _range_evaluated : bool Flag indicating whether range has been evaluated.
@@ -268,7 +268,7 @@ class PlanUnit:
     """
 
     plan_label: LabelTerm = None
-    belief_label: BeliefLabel = None
+    moment_label: MomentLabel = None
     parent_rope: RopeTerm = None
     _kids: dict[RopeTerm,] = None
     root: bool = None
@@ -558,11 +558,11 @@ class PlanUnit:
         if (
             self.root
             and plan_label is not None
-            and plan_label != self.belief_label
-            and self.belief_label is not None
+            and plan_label != self.moment_label
+            and self.moment_label is not None
         ):
             raise Plan_root_LabelNotEmptyException(
-                f"Cannot set a root Plan to string different than '{self.belief_label}'"
+                f"Cannot set a root Plan to string different than '{self.moment_label}'"
             )
         else:
             self.plan_label = plan_label
@@ -827,10 +827,10 @@ class PlanUnit:
         self,
         tree_traverse_count: int,
         groupunits: dict[GroupTitle, GroupUnit] = None,
-        believer_name: PartnerName = None,
+        belief_name: PartnerName = None,
     ):
         prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, believer_name)
+        self._active = self._create_active_bool(groupunits, belief_name)
         self._set_plan_chore()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
 
@@ -848,25 +848,25 @@ class PlanUnit:
     def _create_active_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_name: PartnerName,
+        belief_name: PartnerName,
     ) -> bool:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
-        if active_bool and groupunits != {} and believer_name is not None:
-            self._laborheir.set_believer_name_is_labor(groupunits, believer_name)
-            if self._laborheir._believer_name_is_labor is False:
+        if active_bool and groupunits != {} and belief_name is not None:
+            self._laborheir.set_belief_name_is_labor(groupunits, belief_name)
+            if self._laborheir._belief_name_is_labor is False:
                 active_bool = False
         return active_bool
 
     def set_range_factheirs(
         self,
-        believer_plan_dict: dict[RopeTerm,],
+        belief_plan_dict: dict[RopeTerm,],
         range_inheritors: dict[RopeTerm, RopeTerm],
     ):
         for reason_context in self._reasonheirs.keys():
             if range_root_rope := range_inheritors.get(reason_context):
                 all_plans = all_plans_between(
-                    believer_plan_dict, range_root_rope, reason_context, self.knot
+                    belief_plan_dict, range_root_rope, reason_context, self.knot
                 )
                 self._create_factheir(all_plans, range_root_rope, reason_context)
 
@@ -904,7 +904,7 @@ class PlanUnit:
 
     def set_reasonheirs(
         self,
-        believer_plan_dict: dict[RopeTerm,],
+        belief_plan_dict: dict[RopeTerm,],
         reasonheirs: dict[RopeTerm, ReasonCore],
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
@@ -917,10 +917,10 @@ class PlanUnit:
             )
             new_reasonheir.inherit_from_reasonheir(old_reasonheir)
 
-            if reason_context_plan := believer_plan_dict.get(
+            if reason_context_plan := belief_plan_dict.get(
                 old_reasonheir.reason_context
             ):
-                new_reasonheir.set_rplan_active_value(reason_context_plan._active)
+                new_reasonheir.set_reason_active_heir(reason_context_plan._active)
             self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
     def set_root_plan_reasonheirs(self):
@@ -1060,7 +1060,7 @@ def planunit_shop(
     morph: bool = None,
     task: bool = None,
     root: bool = None,
-    belief_label: BeliefLabel = None,
+    moment_label: MomentLabel = None,
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
@@ -1078,7 +1078,7 @@ def planunit_shop(
     knot: str = None,
     _healerunit_ratio: float = None,
 ) -> PlanUnit:
-    belief_label = get_default_belief_label() if belief_label is None else belief_label
+    moment_label = get_default_moment_label() if moment_label is None else moment_label
     x_healerunit = healerunit_shop() if healerunit is None else healerunit
 
     x_plankid = PlanUnit(
@@ -1108,7 +1108,7 @@ def planunit_shop(
         task=get_False_if_None(task),
         problem_bool=get_False_if_None(problem_bool),
         root=get_False_if_None(root),
-        belief_label=belief_label,
+        moment_label=moment_label,
         # Calculated fields
         _level=_level,
         _fund_ratio=_fund_ratio,
@@ -1126,7 +1126,7 @@ def planunit_shop(
         _healerunit_ratio=get_0_if_None(_healerunit_ratio),
     )
     if x_plankid.root:
-        x_plankid.set_plan_label(plan_label=belief_label)
+        x_plankid.set_plan_label(plan_label=moment_label)
     else:
         x_plankid.set_plan_label(plan_label=plan_label)
     x_plankid.set_laborunit_empty_if_None()
@@ -1172,13 +1172,13 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_plans_between(
-    believer_plan_dict: dict[RopeTerm, PlanUnit],
+    belief_plan_dict: dict[RopeTerm, PlanUnit],
     src_rope: RopeTerm,
     dst_reason_context: RopeTerm,
     knot: str,
 ) -> list[PlanUnit]:
     all_ropes = all_ropeterms_between(src_rope, dst_reason_context, knot)
-    return [believer_plan_dict.get(x_rope) for x_rope in all_ropes]
+    return [belief_plan_dict.get(x_rope) for x_rope in all_ropes]
 
 
 def plans_calculated_range(

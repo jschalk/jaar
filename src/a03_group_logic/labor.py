@@ -81,7 +81,7 @@ def laborunit_get_from_dict(laborunit_dict: dict) -> LaborUnit:
 @dataclass
 class LaborHeir:
     _partys: dict[GroupTitle, PartyHeir] = None
-    _believer_name_is_labor: bool = None
+    _belief_name_is_labor: bool = None
 
     def _get_all_partners(
         self,
@@ -96,19 +96,19 @@ class LaborHeir:
     def is_empty(self) -> bool:
         return self._partys == {}
 
-    def set_believer_name_is_labor(
+    def set_belief_name_is_labor(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_name: PartnerName,
+        belief_name: PartnerName,
     ):
-        self._believer_name_is_labor = self.get_believer_name_is_labor_bool(
-            groupunits, believer_name
+        self._belief_name_is_labor = self.get_belief_name_is_labor_bool(
+            groupunits, belief_name
         )
 
-    def get_believer_name_is_labor_bool(
+    def get_belief_name_is_labor_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        believer_name: PartnerName,
+        belief_name: PartnerName,
     ) -> bool:
         if self._partys == {}:
             return True
@@ -116,7 +116,7 @@ class LaborHeir:
         for x_party_title, x_groupunit in groupunits.items():
             if x_party_title in self._partys:
                 for x_partner_name in x_groupunit._memberships.keys():
-                    if x_partner_name == believer_name:
+                    if x_partner_name == belief_name:
                         return True
         return False
 
@@ -170,8 +170,8 @@ def _set_party_to_partys(partys: dict, x_party):
 
 
 def laborheir_shop(
-    _partys: dict[GroupTitle, PartyHeir] = None, _believer_name_is_labor: bool = None
+    _partys: dict[GroupTitle, PartyHeir] = None, _belief_name_is_labor: bool = None
 ) -> LaborHeir:
     _partys = get_empty_dict_if_None(_partys)
-    _believer_name_is_labor = get_False_if_None(_believer_name_is_labor)
-    return LaborHeir(_partys=_partys, _believer_name_is_labor=_believer_name_is_labor)
+    _belief_name_is_labor = get_False_if_None(_belief_name_is_labor)
+    return LaborHeir(_partys=_partys, _belief_name_is_labor=_belief_name_is_labor)

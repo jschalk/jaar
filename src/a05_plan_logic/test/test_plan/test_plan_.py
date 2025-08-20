@@ -6,7 +6,7 @@ from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.test._util.a04_str import _chore_str
 from src.a05_plan_logic.healer import healerunit_shop
-from src.a05_plan_logic.plan import PlanUnit, get_default_belief_label, planunit_shop
+from src.a05_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
@@ -31,7 +31,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
     awardunits_str,
     begin_str,
-    belief_label_str,
     close_str,
     denom_str,
     factunits_str,
@@ -39,6 +38,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    moment_label_str,
     morph_str,
     numor_str,
     plan_label_str,
@@ -50,9 +50,9 @@ from src.a05_plan_logic.test._util.a05_str import (
 )
 
 
-def test_get_default_belief_label_ReturnsObj():
+def test_get_default_moment_label_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_default_belief_label() == "ZZ"
+    assert get_default_moment_label() == "ZZ"
 
 
 def test_PlanUnit_Exists():
@@ -101,7 +101,7 @@ def test_PlanUnit_Exists():
     assert x_planunit._fund_onset is None
     assert x_planunit._fund_cease is None
     assert x_planunit.root is None
-    assert x_planunit.belief_label is None
+    assert x_planunit.moment_label is None
     assert x_planunit._healerunit_ratio is None
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -136,7 +136,7 @@ def test_PlanUnit_Exists():
         plan_label_str(),
         denom_str(),
         factunits_str(),
-        belief_label_str(),
+        moment_label_str(),
         fund_iota_str(),
         gogo_want_str(),
         healerunit_str(),
@@ -162,7 +162,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit._kids == {}
     assert x_planunit.star == 1
     assert x_planunit.plan_label is None
-    assert x_planunit.belief_label == get_default_belief_label()
+    assert x_planunit.moment_label == get_default_moment_label()
     assert x_planunit._uid is None
     assert x_planunit.begin is None
     assert x_planunit.close is None
@@ -302,7 +302,7 @@ def test_PlanUnit_set_knot_SetsAttr():
 def test_PlanUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_rope = create_rope(get_default_belief_label(), round_str)
+    round_rope = create_rope(get_default_moment_label(), round_str)
     ball_str = "ball"
 
     # WHEN
@@ -316,7 +316,7 @@ def test_PlanUnit_get_rope_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_rope = create_rope(get_default_belief_label(), round_str, knot=slash_str)
+    round_rope = create_rope(get_default_moment_label(), round_str, knot=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -331,13 +331,13 @@ def test_PlanUnit_set_parent_rope_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_rope = create_rope(get_default_belief_label(), round_str, knot=slash_str)
+    round_rope = create_rope(get_default_moment_label(), round_str, knot=slash_str)
     ball_str = "ball"
     ball_plan = planunit_shop(ball_str, parent_rope=round_rope, knot=slash_str)
     assert ball_plan.parent_rope == round_rope
 
     # WHEN
-    sports_rope = create_rope(get_default_belief_label(), "sports", knot=slash_str)
+    sports_rope = create_rope(get_default_moment_label(), "sports", knot=slash_str)
     ball_plan.set_parent_rope(parent_rope=sports_rope)
 
     # THEN

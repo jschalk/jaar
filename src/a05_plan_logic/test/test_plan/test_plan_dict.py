@@ -9,7 +9,7 @@ from src.a04_reason_logic.reason_plan import (
 )
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import (
-    get_default_belief_label as root_label,
+    get_default_moment_label as root_label,
     get_obj_from_plan_dict,
     planunit_shop,
 )
@@ -38,7 +38,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
     awardunits_str,
     begin_str,
-    belief_label_str,
     close_str,
     denom_str,
     factunits_str,
@@ -47,6 +46,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    moment_label_str,
     morph_str,
     numor_str,
     plan_label_str,

@@ -9,7 +9,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "moment_label": {
             "otx_key": true
         },
         "inx_rope": {
@@ -18,15 +18,15 @@
         "otx_rope": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         }
     },
     "idea_number": "br00117",
     "dimens": [
         "pidgin_rope",
-        "believer_partnerunit",
-        "believerunit",
-        "beliefunit"
+        "belief_partnerunit",
+        "beliefunit",
+        "momentunit"
     ]
 }

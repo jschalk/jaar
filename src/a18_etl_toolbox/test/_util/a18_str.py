@@ -2,22 +2,9 @@ from src.a17_idea_logic.test._util.a17_str import error_message_str
 from typing import Literal
 
 
-def belief_event_time_agg_str() -> Literal["belief_event_time_agg"]:
-    return "belief_event_time_agg"
-
-
-def belief_ote1_agg_str() -> Literal["belief_ote1_agg"]:
-    return "belief_ote1_agg"
-
-
-def belief_partner_nets_str() -> Literal["belief_partner_nets"]:
-    """Table name for the account net amounts."""
-    return "belief_partner_nets"
-
-
-def believer_net_amount_str() -> Literal["believer_net_amount"]:
-    """Column name for the believer net amounts."""
-    return "believer_net_amount"
+def belief_net_amount_str() -> Literal["belief_net_amount"]:
+    """Column name for the belief net amounts."""
+    return "belief_net_amount"
 
 
 def brick_agg_str() -> str:
@@ -38,6 +25,19 @@ def events_brick_agg_str() -> Literal["events_brick_agg"]:
 
 def events_brick_valid_str() -> Literal["events_brick_valid"]:
     return "events_brick_valid"
+
+
+def moment_event_time_agg_str() -> Literal["moment_event_time_agg"]:
+    return "moment_event_time_agg"
+
+
+def moment_ote1_agg_str() -> Literal["moment_ote1_agg"]:
+    return "moment_ote1_agg"
+
+
+def moment_partner_nets_str() -> Literal["moment_partner_nets"]:
+    """Table name for the account net amounts."""
+    return "moment_partner_nets"
 
 
 def sound_agg_str() -> str:

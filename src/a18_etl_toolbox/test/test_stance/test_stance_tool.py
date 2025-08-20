@@ -2,11 +2,11 @@ from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file, set_dir
-from src.a06_believer_logic.believer_main import believerunit_shop
-from src.a06_believer_logic.test._util.a06_str import believer_plan_awardunit_str
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.test._util.a06_str import belief_plan_awardunit_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a12_hub_toolbox.a12_path import create_belief_json_path, create_gut_path
-from src.a15_belief_logic.belief_main import beliefunit_shop
+from src.a12_hub_toolbox.a12_path import create_gut_path, create_moment_json_path
+from src.a15_moment_logic.moment_main import momentunit_shop
 from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
     inx_name_str,
@@ -17,12 +17,12 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
-    add_believerunit_to_stance_csv_strs,
+    add_momentunit_to_stance_csv_strs,
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_sheet_names
 from src.a18_etl_toolbox.a18_path import (
-    create_belief_mstr_path,
+    create_moment_mstr_path,
     create_stance0001_path,
     create_world_db_path,
 )
@@ -42,7 +42,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoBeliefUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -57,41 +57,41 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoBeliefUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleBeliefUnit_NoBelieverUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     world_dir = get_module_temp_dir()
-    belief_mstr_dir = create_belief_mstr_path(world_dir)
+    moment_mstr_dir = create_moment_mstr_path(world_dir)
     a23_str = "amy23"
-    a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
-    belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
-    save_file(belief_json_path, None, a23_belief.get_json())
+    a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
+    moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
+    save_file(moment_json_path, None, a23_moment.get_json())
 
     # WHEN
     gen_stance_csv_strs = collect_stance_csv_strs(world_dir)
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
-    add_beliefunit_to_stance_csv_strs(a23_belief, expected_stance_csv_strs, ",")
+    add_momentunit_to_stance_csv_strs(a23_moment, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     world_dir = get_module_temp_dir()
-    belief_mstr_dir = create_belief_mstr_path(world_dir)
+    moment_mstr_dir = create_moment_mstr_path(world_dir)
     bob_str = "Bob"
     a23_str = "amy23"
-    a23_belief = beliefunit_shop(a23_str, belief_mstr_dir)
-    belief_json_path = create_belief_json_path(belief_mstr_dir, a23_str)
-    save_file(belief_json_path, None, a23_belief.get_json())
-    # create believer gut file
-    bob_gut = believerunit_shop(bob_str, a23_str)
+    a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
+    moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
+    save_file(moment_json_path, None, a23_moment.get_json())
+    # create belief gut file
+    bob_gut = beliefunit_shop(bob_str, a23_str)
     bob_gut.add_partnerunit("Yao", 44, 55)
-    a23_bob_gut_path = create_gut_path(belief_mstr_dir, a23_str, bob_str)
+    a23_bob_gut_path = create_gut_path(moment_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
 
     # WHEN
@@ -99,8 +99,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BelieverUnits(
 
     # THEN
     expected_stance_csv_strs = create_init_stance_idea_csv_strs()
-    add_beliefunit_to_stance_csv_strs(a23_belief, expected_stance_csv_strs, ",")
-    add_believerunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
+    add_momentunit_to_stance_csv_strs(a23_moment, expected_stance_csv_strs, ",")
+    add_beliefunit_to_stance_csv_strs(bob_gut, expected_stance_csv_strs, ",")
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
@@ -188,7 +188,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
     assert br00045_csv == expected_br00045_csv
 
 
-def test_create_stance0001_file_CreatesFile_Scenario0_NoBeliefUnits(
+def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

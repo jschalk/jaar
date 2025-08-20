@@ -4,7 +4,7 @@ from src.a01_term_logic.rope import (
     get_default_central_label as root_label,
 )
 from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
-from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
@@ -78,7 +78,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario1_TwoLevel_state():
 
     # WHEN
     dirty_floors_state_str = get_reason_case_readable_str(
-        context=status_casa_rope, caseunit=dirty_floors_case
+        reason_context=status_casa_rope, caseunit=dirty_floors_case
     )
 
     # THEN
@@ -112,7 +112,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario2_CaseRange():
 
     # WHEN
     dirty_floors_state_str = get_reason_case_readable_str(
-        context=status_casa_rope, caseunit=dirty_floors_case
+        reason_context=status_casa_rope, caseunit=dirty_floors_case
     )
 
     # THEN
@@ -158,33 +158,33 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario3_CaseRangeAnd_reason_d
 
 def test_get_reason_case_readable_str_ReturnsObj_Scenario4_Time_creg():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    sue_believer = add_newtimeline_planunit(sue_believer, get_creg_config())
-    time_rope = sue_believer.make_l1_rope(time_str())
-    creg_rope = sue_believer.make_rope(time_rope, creg_str())
-    week_rope = sue_believer.make_rope(creg_rope, week_str())
-    thu_rope = sue_believer.make_rope(week_rope, get_thu())
-    thu_plan = sue_believer.get_plan_obj(thu_rope)
+    sue_belief = beliefunit_shop("Sue")
+    sue_belief = add_newtimeline_planunit(sue_belief, get_creg_config())
+    time_rope = sue_belief.make_l1_rope(time_str())
+    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    week_rope = sue_belief.make_rope(creg_rope, week_str())
+    thu_rope = sue_belief.make_rope(week_rope, get_thu())
+    thu_plan = sue_belief.get_plan_obj(thu_rope)
 
     casa_str = "casa"
-    casa_rope = sue_believer.make_l1_rope(casa_str)
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     mop_str = "mop"
-    mop_rope = sue_believer.make_rope(casa_rope, mop_str)
-    sue_believer.add_plan(mop_rope, task=True)
-    sue_believer.edit_plan_attr(
+    mop_rope = sue_belief.make_rope(casa_rope, mop_str)
+    sue_belief.add_plan(mop_rope, task=True)
+    sue_belief.edit_plan_attr(
         mop_rope,
         reason_context=week_rope,
         reason_case=week_rope,
         reason_lower=1440,
         reason_upper=2880,
     )
-    mop_plan = sue_believer.get_plan_obj(mop_rope)
+    mop_plan = sue_belief.get_plan_obj(mop_rope)
     week_reason = mop_plan.get_reasonunit(week_rope)
     week_case = week_reason.get_case(week_rope)
 
     # WHEN
     display_str = get_reason_case_readable_str(
-        week_rope, week_case, creg_str(), sue_believer
+        week_rope, week_case, creg_str(), sue_belief
     )
 
     # THEN
@@ -268,17 +268,17 @@ def test_get_fact_state_readable_str_ReturnsObj_Scenario2_CaseRange():
 
 def test_get_fact_state_readable_str_ReturnsObj_Scenario3_Time_creg():
     # ESTABLISH
-    sue_believer = believerunit_shop("Sue")
-    time_rope = sue_believer.make_l1_rope(time_str())
-    creg_rope = sue_believer.make_rope(time_rope, creg_str())
-    sue_believer = add_newtimeline_planunit(sue_believer, get_creg_config())
-    sue_believer.add_fact(creg_rope, creg_rope, 1234567890, 1334567890)
-    root_creg_fact = sue_believer.planroot.factunits.get(creg_rope)
+    sue_belief = beliefunit_shop("Sue")
+    time_rope = sue_belief.make_l1_rope(time_str())
+    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    sue_belief = add_newtimeline_planunit(sue_belief, get_creg_config())
+    sue_belief.add_fact(creg_rope, creg_rope, 1234567890, 1334567890)
+    root_creg_fact = sue_belief.planroot.factunits.get(creg_rope)
     print(f"{root_creg_fact=}")
 
     # WHEN
     timeline_fact_str = get_fact_state_readable_str(
-        root_creg_fact, creg_str(), sue_believer
+        root_creg_fact, creg_str(), sue_belief
     )
 
     # THEN

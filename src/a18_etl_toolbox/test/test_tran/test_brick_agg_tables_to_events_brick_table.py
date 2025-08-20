@@ -5,10 +5,10 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_belief_logic.test._util.a15_str import (
-    belief_label_str,
+from src.a15_moment_logic.test._util.a15_str import (
     cumulative_minute_str,
     hour_label_str,
+    moment_label_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_number_str
@@ -40,7 +40,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -50,7 +50,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 )"""
@@ -114,7 +114,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -124,7 +124,7 @@ def test_etl_brick_agg_tables_to_events_brick_agg_table_PopulatesTables_Scenario
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 )"""

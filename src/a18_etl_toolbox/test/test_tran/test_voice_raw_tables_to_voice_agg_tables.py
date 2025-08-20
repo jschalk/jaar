@@ -1,15 +1,15 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a06_believer_logic.test._util.a06_str import (
-    belief_label_str,
-    believer_name_str,
-    believer_partnerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_name_str,
+    belief_partnerunit_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_belief_logic.belief_config import get_belief_dimens
+from src.a15_moment_logic.moment_config import get_moment_dimens
 from src.a17_idea_logic.idea_config import get_default_sorted_list, get_idea_config_dict
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -21,21 +21,21 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 from src.a18_etl_toolbox.transformers import etl_voice_raw_tables_to_voice_agg_tables
 
 
-def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckBeliefDimen():
+def test_get_insert_voice_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH / WHEN
     insert_voice_agg_sqlstrs = get_insert_voice_agg_sqlstrs()
 
     # THEN
-    assert get_belief_dimens().issubset(set(insert_voice_agg_sqlstrs.keys()))
+    assert get_moment_dimens().issubset(set(insert_voice_agg_sqlstrs.keys()))
     idea_config = get_idea_config_dict()
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "belief"
+        if dimen_config.get(idea_category_str()) == "moment"
     }
-    with sqlite3_connect(":memory:") as belief_db_conn:
-        cursor = belief_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         create_sound_and_voice_tables(cursor)
 
         for x_dimen in idea_config:
@@ -69,14 +69,14 @@ GROUP BY {raw_columns_str}
             assert gen_sqlstr == expected_table2table_agg_insert_sqlstr
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BelieverDimensNeeded():
+def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     idea_config = get_idea_config_dict()
-    believer_dimens_config = {
+    belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "believer"
+        if dimen_config.get(idea_category_str()) == "belief"
     }
 
     # WHEN
@@ -87,12 +87,12 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_BelieverDimensNeeded():
         cursor = conn.cursor()
         create_sound_and_voice_tables(cursor)
 
-        for believer_dimen in believer_dimens_config:
-            # print(f"{believer_dimen=}")
-            v_raw_put_tablename = prime_tbl(believer_dimen, "v", "raw", "put")
-            v_raw_del_tablename = prime_tbl(believer_dimen, "v", "raw", "del")
-            v_agg_put_tablename = prime_tbl(believer_dimen, "v", "agg", "put")
-            v_agg_del_tablename = prime_tbl(believer_dimen, "v", "agg", "del")
+        for belief_dimen in belief_dimens_config:
+            # print(f"{belief_dimen=}")
+            v_raw_put_tablename = prime_tbl(belief_dimen, "v", "raw", "put")
+            v_raw_del_tablename = prime_tbl(belief_dimen, "v", "raw", "del")
+            v_agg_put_tablename = prime_tbl(belief_dimen, "v", "agg", "put")
+            v_agg_del_tablename = prime_tbl(belief_dimen, "v", "agg", "del")
             v_raw_put_cols = get_table_columns(cursor, v_raw_put_tablename)
             v_raw_del_cols = get_table_columns(cursor, v_raw_del_tablename)
             v_agg_put_cols = get_table_columns(cursor, v_agg_put_tablename)
@@ -120,7 +120,7 @@ SELECT {v_raw_del_columns_str}
 FROM {v_raw_del_tablename}
 GROUP BY {v_raw_del_columns_str}
 """
-            abbv7 = get_dimen_abbv7(believer_dimen)
+            abbv7 = get_dimen_abbv7(belief_dimen)
             put_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_AGG_PUT_SQLSTR"
             del_sqlstr_ref = f"INSERT_{abbv7.upper()}_VOICE_AGG_DEL_SQLSTR"
             print(f'{put_sqlstr_ref}= """{expected_agg_put_insert_sqlstr}"""')
@@ -153,14 +153,14 @@ def test_get_insert_voice_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         blrpern_v_raw_put_tablename = prime_tbl(
-            believer_partnerunit_str(), "v", "raw", "put"
+            belief_partnerunit_str(), "v", "raw", "put"
         )
         print(f"{get_table_columns(cursor, blrpern_v_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
-, {belief_label_str()}_inx
-, {believer_name_str()}_inx
+, {moment_label_str()}_inx
+, {belief_name_str()}_inx
 , {partner_name_str()}_inx
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
@@ -176,7 +176,7 @@ VALUES
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 5
         blrpern_v_agg_put_tablename = prime_tbl(
-            believer_partnerunit_str(), "v", "agg", "put"
+            belief_partnerunit_str(), "v", "agg", "put"
         )
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 0
 
@@ -189,8 +189,8 @@ VALUES
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
-, {believer_name_str()}
+, {moment_label_str()}
+, {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
@@ -227,14 +227,14 @@ def test_etl_voice_raw_tables_to_voice_agg_tables_PopulatesTable_Scenario0():
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
         blrpern_v_raw_put_tablename = prime_tbl(
-            believer_partnerunit_str(), "v", "raw", "put"
+            belief_partnerunit_str(), "v", "raw", "put"
         )
         print(f"{get_table_columns(cursor, blrpern_v_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_v_raw_put_tablename} (
   {event_int_str()}
 , {face_name_str()}_inx
-, {belief_label_str()}_inx
-, {believer_name_str()}_inx
+, {moment_label_str()}_inx
+, {belief_name_str()}_inx
 , {partner_name_str()}_inx
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
@@ -250,7 +250,7 @@ VALUES
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 5
         blrpern_v_agg_put_tablename = prime_tbl(
-            believer_partnerunit_str(), "v", "agg", "put"
+            belief_partnerunit_str(), "v", "agg", "put"
         )
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 0
 
@@ -261,8 +261,8 @@ VALUES
         assert get_row_count(cursor, blrpern_v_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
-, {believer_name_str()}
+, {moment_label_str()}
+, {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}

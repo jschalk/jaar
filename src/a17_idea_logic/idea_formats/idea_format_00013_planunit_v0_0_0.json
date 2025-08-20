@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "moment_label": {
             "otx_key": true
         },
         "plan_rope": {
@@ -15,7 +15,7 @@
         "star": {
             "otx_key": false
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         },
         "task": {
@@ -24,8 +24,8 @@
     },
     "idea_number": "br00013",
     "dimens": [
+        "momentunit",
         "beliefunit",
-        "believerunit",
-        "believer_planunit"
+        "belief_planunit"
     ]
 }

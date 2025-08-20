@@ -3,11 +3,11 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.a06_believer_logic.test._util.a06_str import (
-    belief_label_str,
-    believer_name_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_name_str,
     gogo_want_str,
     group_title_str,
+    moment_label_str,
     partner_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
@@ -36,8 +36,8 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     #     CREATE TABLE {test_table} (
     #         face_name TEXT,
     #         event_int INTEGER,
-    #         belief_label TEXT,
-    #         believer_name TEXT,
+    #         moment_label TEXT,
+    #         belief_name TEXT,
     #         partner_name TEXT,
     #         group_title TEXT,
     #         gogo_want REAL
@@ -49,7 +49,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{partner_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{partner_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("3,Sue,Amy43,Bob,Bob,;runners,6.5\n")
         csv_file.write("3,Sue,Amy43,Yao,Bob,;runners,7.5\n")
@@ -89,8 +89,8 @@ def test_create_idea_table_from_csv_ChangesDBState(
     expected_columns = [
         (0, event_int_str(), "INTEGER", 0, None, 0),
         (1, face_name_str(), "TEXT", 0, None, 0),
-        (2, belief_label_str(), "TEXT", 0, None, 0),
-        (3, believer_name_str(), "TEXT", 0, None, 0),
+        (2, moment_label_str(), "TEXT", 0, None, 0),
+        (3, belief_name_str(), "TEXT", 0, None, 0),
         (4, partner_name_str(), "TEXT", 0, None, 0),
         (5, group_title_str(), "TEXT", 0, None, 0),
         (6, gogo_want_str(), "REAL", 0, None, 0),
@@ -100,8 +100,8 @@ def test_create_idea_table_from_csv_ChangesDBState(
     get_idea_sqlite_types_columns = [
         (0, event_int_str(), column_types.get(event_int_str()), 0, None, 0),
         (1, face_name_str(), column_types.get(face_name_str()), 0, None, 0),
-        (2, belief_label_str(), column_types.get(belief_label_str()), 0, None, 0),
-        (3, believer_name_str(), column_types.get(believer_name_str()), 0, None, 0),
+        (2, moment_label_str(), column_types.get(moment_label_str()), 0, None, 0),
+        (3, belief_name_str(), column_types.get(belief_name_str()), 0, None, 0),
         (4, partner_name_str(), column_types.get(partner_name_str()), 0, None, 0),
         (5, group_title_str(), column_types.get(group_title_str()), 0, None, 0),
         (6, gogo_want_str(), column_types.get(gogo_want_str()), 0, None, 0),
@@ -144,7 +144,7 @@ def test_insert_idea_csv_ChangesDBState_Inserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{partner_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{partner_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("7,Zia,Amy55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Amy43,Zia,Bob,;runners,11.1\n")
@@ -188,7 +188,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{belief_label_str()},{believer_name_str()},{partner_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{partner_name_str()},{group_title_str()},{gogo_want_str()}\n"
         )
         csv_file.write("7,Zia,Amy55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Amy43,Zia,Bob,;runners,11.1\n")

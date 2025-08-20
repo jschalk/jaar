@@ -1,5 +1,5 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a03_group_logic.test._util.a03_str import believer_name_str, party_title_str
+from src.a03_group_logic.test._util.a03_str import belief_name_str, party_title_str
 
 
 def _active_str() -> str:
@@ -14,8 +14,8 @@ def _status_str() -> str:
     return "_status"
 
 
-def belief_label_str() -> str:
-    return "belief_label"
+def cases_str() -> str:
+    return "cases"
 
 
 def fact_context_str() -> str:
@@ -36,6 +36,10 @@ def fact_upper_str() -> str:
 
 def factunits_str() -> str:
     return "factunits"
+
+
+def moment_label_str() -> str:
+    return "moment_label"
 
 
 def reason_active_requisite_str() -> str:

@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope
 from src.a05_plan_logic.plan import (
-    get_default_belief_label as root_label,
+    get_default_moment_label as root_label,
     planunit_shop,
 )
 

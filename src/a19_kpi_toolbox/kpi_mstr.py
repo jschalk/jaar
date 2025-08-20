@@ -7,15 +7,15 @@ from src.a00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.a07_timeline_logic.calendar_markdown import get_calendarmarkdown_str
-from src.a15_belief_logic.belief_main import get_default_path_beliefunit
-from src.a15_belief_logic.belief_timeline import get_belief_believertimelinepoint
+from src.a15_moment_logic.moment_main import get_default_path_momentunit
+from src.a15_moment_logic.moment_timeline import get_moment_belieftimelinepoint
 from src.a17_idea_logic.idea_db_tool import save_table_to_csv
-from src.a19_kpi_toolbox.kpi_sqlstrs import get_belief_kpi001_partner_nets_sqlstr
+from src.a19_kpi_toolbox.kpi_sqlstrs import get_moment_kpi001_partner_nets_sqlstr
 
 
 def create_populate_kpi001_table(cursor: sqlite3_Cursor):
-    cursor.execute("DROP TABLE IF EXISTS belief_kpi001_partner_nets")
-    cursor.execute(get_belief_kpi001_partner_nets_sqlstr())
+    cursor.execute("DROP TABLE IF EXISTS moment_kpi001_partner_nets")
+    cursor.execute(get_moment_kpi001_partner_nets_sqlstr())
 
 
 def get_default_kpi_bundle() -> str:
@@ -26,14 +26,14 @@ def get_all_kpi_functions() -> dict[str,]:
     """
     Returns a dict of all KPI ids and their functions.
     """
-    return {"belief_kpi001_partner_nets": create_populate_kpi001_table}
+    return {"moment_kpi001_partner_nets": create_populate_kpi001_table}
 
 
 def get_bundles_config() -> dict[str]:
     """
     Returns a set of all KPI strings.
     """
-    return {"default_kpi_bundle": {"belief_kpi001_partner_nets"}}
+    return {"default_kpi_bundle": {"moment_kpi001_partner_nets"}}
 
 
 def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
@@ -53,7 +53,7 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
     bundle_kpi_ids = get_kpi_set_from_bundle(bundle_id)
     kpi_functions = get_all_kpi_functions()
     for kpi_id in bundle_kpi_ids:
-        if kpi_id == "belief_kpi001_partner_nets":
+        if kpi_id == "moment_kpi001_partner_nets":
             create_populate_kpi001_table(cursor)
 
 
@@ -66,18 +66,18 @@ def create_kpi_csvs(db_path: str, dst_dir: str):
     db_conn.close()
 
 
-def create_calendar_markdown_files(belief_mstr_dir: str, output_dir: str):
+def create_calendar_markdown_files(moment_mstr_dir: str, output_dir: str):
     set_dir(output_dir)
-    beliefs_dir = create_path(belief_mstr_dir, "beliefs")
-    for belief_label in get_level1_dirs(beliefs_dir):
-        belief_calendar_md_path = create_path(output_dir, f"{belief_label}_calendar.md")
-        x_beliefunit = get_default_path_beliefunit(belief_mstr_dir, belief_label)
-        belief_believertimelinepoint = get_belief_believertimelinepoint(x_beliefunit)
-        belief_year_num = belief_believertimelinepoint._year_num
-        belief_timeline_config = x_beliefunit.timeline.to_dict()
+    moments_dir = create_path(moment_mstr_dir, "moments")
+    for moment_label in get_level1_dirs(moments_dir):
+        moment_calendar_md_path = create_path(output_dir, f"{moment_label}_calendar.md")
+        x_momentunit = get_default_path_momentunit(moment_mstr_dir, moment_label)
+        moment_belieftimelinepoint = get_moment_belieftimelinepoint(x_momentunit)
+        moment_year_num = moment_belieftimelinepoint._year_num
+        moment_timeline_config = x_momentunit.timeline.to_dict()
         x_calendarmarkdown = get_calendarmarkdown_str(
-            belief_timeline_config, belief_year_num
+            moment_timeline_config, moment_year_num
         )
-        save_file(belief_calendar_md_path, None, x_calendarmarkdown)
+        save_file(moment_calendar_md_path, None, x_calendarmarkdown)
 
     # a23_calendar_md_path = create_path(output_dir, f"{a23_str}_calendar.md")

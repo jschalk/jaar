@@ -17,12 +17,12 @@ JAAR Version 0.0.0
 
 So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most accessible method is using excel sheets. 
 
-# 0.0.1 "Beliefs" The foundation of jaar
-For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the Other through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then BELIEF to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I belief to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Belief cuts the infinite into the finite and is the foundation for a world. When that Belief is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
+# 0.0.1 "Moments" The foundation of jaar
+For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the Other through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then MOMENT to change who I am to ease that suffering. The suffering is infinitly deep and beyond my complete understanding so when I moment to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Moment cuts the infinite into the finite and is the foundation for a world. When that Moment is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
 
-A Belief can create a world or change a current world. Each believer can only make one belief at a time so a world that has been built by multiple beliefs implies each belief is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
+A Moment can create a world or change a current world. Each belief can only make one moment at a time so a world that has been built by multiple moments implies each moment is from a different time. jaar describes the passage of time by *event_ints*. *event_int* is alropes an integer. 
 
-For jaar all data must have *event_int*, *face_name*, *belief_label*. These are the required keys.
+For jaar all data must have *event_int*, *face_name*, *moment_label*. These are the required keys.
 
   
 ## 0.1 Short introduction to jaar excel sheets
@@ -30,25 +30,25 @@ For jaar all data must have *event_int*, *face_name*, *belief_label*. These are 
 `jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is interpreted and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
-| event_int | face_name | belief_label | believer_name | partner_name | tran_time | amount |
+| event_int | face_name | moment_label | belief_name | partner_name | tran_time | amount |
 |-----------|-----------|-----------|------------|-----------|-----------|--------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
-When jaar processes example 0.1.0 it creates a Belief labeled "OxboxDean" that contains believers Emmanuel and Dean and a single transaction of 7000 OxboxDean from Emmanuel to Dean. Here's the status metrics:
-| belief_label | believer_name | belief_fund_amount | belief_fund_rank | belief_tasks |
+When jaar processes example 0.1.0 it creates a Moment labeled "OxboxDean" that contains beliefs Emmanuel and Dean and a single transaction of 7000 OxboxDean from Emmanuel to Dean. Here's the status metrics:
+| moment_label | belief_name | moment_fund_amount | moment_fund_rank | moment_tasks |
 |--------------|---------------|--------------------|------------------|--------------|
 |  OxboxDean   |    Emmanuel   |       -7000        |         2        |       0      |
 |  OxboxDean   |      Dean     |        7000        |         1        |       0      |
 
 
 Output stance: emmanuel_stance.xlsx, sheet "br00000"
-| event_int | face_name | belief_label | believer_name | partner_name | tran_time | amount |
+| event_int | face_name | moment_label | belief_name | partner_name | tran_time | amount |
 |-----------|-----------|--------------|---------------|-----------|-----------|--------|
 |    77     | Emmanuel  |   OxboxDean  |    Emmanuel   |    Dean   |    891    |  7000  |
 
 
 <!-- # Input Example Excel file 0.1.2: fizz2.xlsx with sheet "br00000_buzz2" 
-| event_int | face_name | belief_label | believer_name | partner_name | partner_cred_points | partner_debt_points |
+| event_int | face_name | moment_label | belief_name | partner_name | partner_cred_points | partner_debt_points |
 |-----------|-----------|-----------|------------|-----------|---------------|---------------|
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |      100      |      15       |
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |  Emmanuel |       50      |      75       |
@@ -102,31 +102,31 @@ screenshots and elucidatory text.
 <!-- TODO: Add elucidations -->
 base attributes vs reason attributess
 
-BelieverUnit objects
+BeliefUnit objects
 
-BelieverUnit PartnerUnit objects
+BeliefUnit PartnerUnit objects
 
-BelieverUnit GroupUnit objects
+BeliefUnit GroupUnit objects
 
-BelieverUnit PlanUnit objects
+BeliefUnit PlanUnit objects
 
-BelieverUnit PlanUnit hierarchical structure
+BeliefUnit PlanUnit hierarchical structure
 
-BelieverUnit PlanUnit AwardUnit objects
+BeliefUnit PlanUnit AwardUnit objects
 
-BelieverUnit PlanUnit AwardLine objects
+BeliefUnit PlanUnit AwardLine objects
 
-BelieverUnit PlanUnit AwardHeir objects
+BeliefUnit PlanUnit AwardHeir objects
 
-BelieverUnit PlanUnit AwardHeir objects
+BeliefUnit PlanUnit AwardHeir objects
 
-BelieverUnit PlanUnit Reason CaseUnit objects
+BeliefUnit PlanUnit Reason CaseUnit objects
 
-BelieverUnit PlanUnit Reason CaseHeir objects
+BeliefUnit PlanUnit Reason CaseHeir objects
 
-BelieverUnit PlanUnit FactUnit objects
+BeliefUnit PlanUnit FactUnit objects
 
-BelieverUnit PlanUnit FactHeir objects1
+BeliefUnit PlanUnit FactHeir objects1
 
 
 ## 1.3 Test-Driven-Development

@@ -1,21 +1,21 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a06_believer_logic.test._util.a06_str import (
-    belief_label_str,
-    believer_name_str,
-    believer_partner_membership_str,
-    believer_partnerunit_str,
-    believer_plan_awardunit_str,
-    believer_plan_factunit_str,
-    believer_plan_healerunit_str,
-    believer_plan_partyunit_str,
-    believer_plan_reason_caseunit_str,
-    believer_plan_reasonunit_str,
-    believer_planunit_str,
-    believerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_name_str,
+    belief_partner_membership_str,
+    belief_partnerunit_str,
+    belief_plan_awardunit_str,
+    belief_plan_factunit_str,
+    belief_plan_healerunit_str,
+    belief_plan_partyunit_str,
+    belief_plan_reason_caseunit_str,
+    belief_plan_reasonunit_str,
+    belief_planunit_str,
+    beliefunit_str,
+    moment_label_str,
 )
-from src.a10_believer_calc.believer_calc_config import get_believer_calc_config_dict
-from src.a10_believer_calc.test._util.a10_str import believer_groupunit_str
+from src.a10_belief_calc.belief_calc_config import get_belief_calc_config_dict
+from src.a10_belief_calc.test._util.a10_str import belief_groupunit_str
 from src.a12_hub_toolbox.test._util.a12_str import job_str
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
@@ -33,13 +33,13 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
 
     # THEN
     s_types = get_idea_sqlite_types()
-    believer_calc_config = get_believer_calc_config_dict()
-    for x_dimen in believer_calc_config.keys():
+    belief_calc_config = get_belief_calc_config_dict()
+    for x_dimen in belief_calc_config.keys():
         # print(f"{x_dimen} checking...")
-        x_config = believer_calc_config.get(x_dimen)
+        x_config = belief_calc_config.get(x_dimen)
 
         job_table = prime_table(x_dimen, job_str(), None)
-        job_cols = {belief_label_str(), believer_name_str()}
+        job_cols = {moment_label_str(), belief_name_str()}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
         job_cols.update(set(x_config.get("jmetrics").keys()))
@@ -55,39 +55,39 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
 
 def test_create_job_tables_CreatesTables():
     # ESTABLISH
-    with sqlite3_connect(":memory:") as belief_db_conn:
-        cursor = belief_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
         blrmemb_job_table = prime_table(
-            believer_partner_membership_str(), job_str(), None
+            belief_partner_membership_str(), job_str(), None
         )
-        blrpern_job_table = prime_table(believer_partnerunit_str(), job_str(), None)
-        blrgrou_job_table = prime_table(believer_groupunit_str(), job_str(), None)
-        blrawar_job_table = prime_table(believer_plan_awardunit_str(), job_str(), None)
-        blrfact_job_table = prime_table(believer_plan_factunit_str(), job_str(), None)
-        blrheal_job_table = prime_table(believer_plan_healerunit_str(), job_str(), None)
+        blrpern_job_table = prime_table(belief_partnerunit_str(), job_str(), None)
+        blrgrou_job_table = prime_table(belief_groupunit_str(), job_str(), None)
+        blrawar_job_table = prime_table(belief_plan_awardunit_str(), job_str(), None)
+        blrfact_job_table = prime_table(belief_plan_factunit_str(), job_str(), None)
+        blrheal_job_table = prime_table(belief_plan_healerunit_str(), job_str(), None)
         blrprem_job_table = prime_table(
-            believer_plan_reason_caseunit_str(), job_str(), None
+            belief_plan_reason_caseunit_str(), job_str(), None
         )
-        believerares_job_table = prime_table(
-            believer_plan_reasonunit_str(), job_str(), None
+        beliefares_job_table = prime_table(
+            belief_plan_reasonunit_str(), job_str(), None
         )
-        blrlabo_job_table = prime_table(believer_plan_partyunit_str(), job_str(), None)
-        blrplan_job_table = prime_table(believer_planunit_str(), job_str(), None)
-        blrunit_job_table = prime_table(believerunit_str(), job_str(), None)
-        # blrmemb_job_table = f"{believer_partner_membership_str()}_job"
-        # blrpern_job_table = f"{believer_partnerunit_str()}_job"
-        # blrgrou_job_table = f"{believer_groupunit_str()}_job"
-        # blrawar_job_table = f"{believer_plan_awardunit_str()}_job"
-        # blrfact_job_table = f"{believer_plan_factunit_str()}_job"
-        # blrheal_job_table = f"{believer_plan_healerunit_str()}_job"
-        # blrprem_job_table = f"{believer_plan_reason_caseunit_str()}_job"
-        # believerares_job_table = f"{believer_plan_reasonunit_str()}_job"
-        # blrlabo_job_table = f"{believer_plan_partyunit_str()}_job"
-        # blrplan_job_table = f"{believer_planunit_str()}_job"
-        # blrunit_job_table = f"{believerunit_str()}_job"
+        blrlabo_job_table = prime_table(belief_plan_partyunit_str(), job_str(), None)
+        blrplan_job_table = prime_table(belief_planunit_str(), job_str(), None)
+        blrunit_job_table = prime_table(beliefunit_str(), job_str(), None)
+        # blrmemb_job_table = f"{belief_partner_membership_str()}_job"
+        # blrpern_job_table = f"{belief_partnerunit_str()}_job"
+        # blrgrou_job_table = f"{belief_groupunit_str()}_job"
+        # blrawar_job_table = f"{belief_plan_awardunit_str()}_job"
+        # blrfact_job_table = f"{belief_plan_factunit_str()}_job"
+        # blrheal_job_table = f"{belief_plan_healerunit_str()}_job"
+        # blrprem_job_table = f"{belief_plan_reason_caseunit_str()}_job"
+        # beliefares_job_table = f"{belief_plan_reasonunit_str()}_job"
+        # blrlabo_job_table = f"{belief_plan_partyunit_str()}_job"
+        # blrplan_job_table = f"{belief_planunit_str()}_job"
+        # blrunit_job_table = f"{beliefunit_str()}_job"
 
         assert db_table_exists(cursor, blrmemb_job_table) is False
         assert db_table_exists(cursor, blrpern_job_table) is False
@@ -96,7 +96,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, blrfact_job_table) is False
         assert db_table_exists(cursor, blrheal_job_table) is False
         assert db_table_exists(cursor, blrprem_job_table) is False
-        assert db_table_exists(cursor, believerares_job_table) is False
+        assert db_table_exists(cursor, beliefares_job_table) is False
         assert db_table_exists(cursor, blrlabo_job_table) is False
         assert db_table_exists(cursor, blrplan_job_table) is False
         assert db_table_exists(cursor, blrunit_job_table) is False
@@ -118,7 +118,7 @@ def test_create_job_tables_CreatesTables():
         assert db_table_exists(cursor, blrfact_job_table)
         assert db_table_exists(cursor, blrheal_job_table)
         assert db_table_exists(cursor, blrprem_job_table)
-        assert db_table_exists(cursor, believerares_job_table)
+        assert db_table_exists(cursor, beliefares_job_table)
         assert db_table_exists(cursor, blrlabo_job_table)
         assert db_table_exists(cursor, blrplan_job_table)
         assert db_table_exists(cursor, blrunit_job_table)

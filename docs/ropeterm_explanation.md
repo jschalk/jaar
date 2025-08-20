@@ -1,4 +1,4 @@
-# Ropes and Beliefs
+# Ropes and Moments
 
 
 # Introduction
@@ -42,7 +42,7 @@ usa_texas_rope = ";UN;USA;Texas;"
 un_texas_rope = ";UN;Texas;"
 - **CentralLabel**: The first label in a RopeTerm. Example "UN" in ";UN;USA;Texas;"
 
-# Beliefs
+# Moments
 Consider these 3 ropes: 
 1. ;UN;USA;Texas; 
 2. ;USA;Texas;
@@ -50,7 +50,7 @@ Consider these 3 ropes:
 
 Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN central :
 
-"UN" has the central belief
+"UN" has the central moment
 1. ;UN;France;Paris;
 2. ;UN;Germany;Berlin;
 3. ;UN;USA;Texas;Dallas;
@@ -58,14 +58,14 @@ Each rope arrives at the concept of Texas in a different way and connotes someth
 
 vs 
 
-"USA" has the central belief
+"USA" has the central moment
 1. ;USA,UN;France;Paris;
 2. ;USA;UN;Germany;Berlin;
 3. ;USA;Texas;Dallas;
 4. ;USA;Texas;Paris;
 
-# Belief Definition: 
-- **BeliefLabel**: The CentralLabel of all RopeTerms connected to a BeliefUnit. Every BeliefUnit starts with a Label. Everything the BeliefUnit is is centralized by that Label. 
+# Moment Definition: 
+- **MomentLabel**: The CentralLabel of all RopeTerms connected to a MomentUnit. Every MomentUnit starts with a Label. Everything the MomentUnit is is centralized by that Label. 
 
 A way I could be if believe in Football:
 1. ;Football;Places that love football;Midwest;
@@ -90,15 +90,15 @@ If I believe in Kindness:
 5. ;kindess;at park;supervise kids;
 
 
-- **BeliefUnit**: A BeliefUnit is built around the  
+- **MomentUnit**: A MomentUnit is built around the  
 
-How a Belief is defined and made powerful enough to share.
-    * BeliefLabel
+How a Moment is defined and made powerful enough to share.
+    * MomentLabel
     * PayBook (ledger of Transactions)
     * Shared concept of time
-    * Believers' Plans of Action
+    * Beliefs' Plans of Action
 
-Every Belief starts with a central belief but that's not enough. Levinas asserts that moral community can only exist when time is a single community standard. This is intuitive for most people but it is important to explicitly state it. 
+Every Moment starts with a central moment but that's not enough. Levinas asserts that moral community can only exist when time is a single community standard. This is intuitive for most people but it is important to explicitly state it. 
 
 Once there is a shared system of time it is possible to create shared financial system: a agreed ledger of who has paid who what and how much money each has. 
 

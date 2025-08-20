@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
-from src.a06_believer_logic.test._util.a06_str import (
-    belief_label_str,
-    believer_name_str,
-    believer_partnerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_name_str,
+    belief_partnerunit_str,
+    moment_label_str,
     partner_cred_points_str,
     partner_debt_points_str,
     partner_name_str,
@@ -146,7 +146,7 @@ VALUES
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
 
-def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_believer_raw_del():
+def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_del():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"
@@ -164,15 +164,15 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_believer_raw_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_voice_tables(cursor)
-        believera_s_raw_del = create_prime_tablename(
-            believer_partnerunit_str(), "s", "raw", "del"
+        beliefa_s_raw_del = create_prime_tablename(
+            belief_partnerunit_str(), "s", "raw", "del"
         )
-        insert_into_clause = f"""INSERT INTO {believera_s_raw_del} (
+        insert_into_clause = f"""INSERT INTO {beliefa_s_raw_del} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
-, {believer_name_str()}
+, {moment_label_str()}
+, {belief_name_str()}
 , {partner_name_str()}_ERASE
 )"""
         b117 = "br00117"
@@ -187,26 +187,26 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {believera_s_raw_del}"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {beliefa_s_raw_del}"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
-        assert error_message_str() not in get_table_columns(cursor, believera_s_raw_del)
+        assert error_message_str() not in get_table_columns(cursor, beliefa_s_raw_del)
 
         # WHEN
         set_sound_raw_tables_error_message(cursor)
 
         # THEN No Error message is added and updated
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 4
-        assert error_message_str() not in get_table_columns(cursor, believera_s_raw_del)
+        assert error_message_str() not in get_table_columns(cursor, beliefa_s_raw_del)
 
 
 # TODO copy over and use these tests?
-# test_belief_raw_tables2belief_agg_tables_Scenario0_beliefunit_WithNo_error_message
-# test_belief_raw_tables2belief_agg_tables_Scenario1_beliefunit_With_error_message
-# test_belief_raw_tables2belief_agg_tables_Scenario2_blfhour_Some_error_message
-# test_belief_raw_tables2belief_agg_tables_Scenario3_blfmont_Some_error_message
-# test_belief_raw_tables2belief_agg_tables_Scenario4_blfweek_Some_error_message
-# test_belief_raw_tables2belief_agg_tables_Scenario5_beliefbud_Some_error_message
-# test_belief_raw_tables2belief_agg_tables_Scenario6_blfpayy_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario0_momentunit_WithNo_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario1_momentunit_With_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario2_blfhour_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario3_blfmont_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario4_blfweek_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario5_momentbud_Some_error_message
+# test_moment_raw_tables2moment_agg_tables_Scenario6_blfpayy_Some_error_message
 
 
 def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scenario0():
@@ -260,8 +260,8 @@ VALUES
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
-, {believer_name_str()}
+, {moment_label_str()}
+, {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
@@ -340,8 +340,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
-, {believer_name_str()}
+, {moment_label_str()}
+, {belief_name_str()}
 , {partner_name_str()}_ERASE
 )"""
         values_clause = f"""
@@ -428,8 +428,8 @@ VALUES
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
-, {believer_name_str()}
+, {moment_label_str()}
+, {belief_name_str()}
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}

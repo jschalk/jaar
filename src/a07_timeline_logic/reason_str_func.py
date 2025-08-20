@@ -6,31 +6,31 @@ from src.a01_term_logic.rope import (
     get_tail_label,
 )
 from src.a04_reason_logic.reason_plan import CaseUnit, FactUnit
-from src.a06_believer_logic.believer_main import BelieverUnit
-from src.a07_timeline_logic.timeline_main import believertimelinepoint_shop
+from src.a06_belief_logic.belief_main import BeliefUnit
+from src.a07_timeline_logic.timeline_main import belieftimelinepoint_shop
 
 
 def get_reason_case_readable_str(
-    context: RopeTerm,
+    reason_context: RopeTerm,
     caseunit: CaseUnit,
     timeline_label: LabelTerm = None,
-    believerunit: BelieverUnit = None,
+    beliefunit: BeliefUnit = None,
 ) -> str:
     """Returns a string describing reason case in readable language. Will have special cases for time."""
 
-    belief_label = get_root_label_from_rope(context)
-    time_rope = create_rope(belief_label, "time")
+    moment_label = get_root_label_from_rope(reason_context)
+    time_rope = create_rope(moment_label, "time")
     timeline_rope = create_rope(time_rope, timeline_label)
     week_rope = create_rope(timeline_rope, "week")
-    if context == week_rope:
-        week_plan = believerunit.get_plan_obj(week_rope)
+    if reason_context == week_rope:
+        week_plan = beliefunit.get_plan_obj(week_rope)
         for weekday_plan in week_plan._kids.values():
             week_lower_bool = caseunit.reason_lower == weekday_plan.gogo_want
             week_upper_bool = caseunit.reason_upper == weekday_plan.stop_want
             if week_lower_bool and week_upper_bool:
                 return f"case: every {weekday_plan.plan_label}"
 
-    x_str = f"case: {caseunit.reason_state.replace(context, "", 1)}"
+    x_str = f"case: {caseunit.reason_state.replace(reason_context, "", 1)}"
     if caseunit.reason_divisor:
         x_str += f" divided by {caseunit.reason_divisor} then"
     if caseunit.reason_lower is not None and caseunit.reason_upper is not None:
@@ -42,7 +42,7 @@ def get_reason_case_readable_str(
 def get_fact_state_readable_str(
     factunit: FactUnit,
     timeline_label: LabelTerm = None,
-    believerunit: BelieverUnit = None,
+    beliefunit: BeliefUnit = None,
 ) -> str:
     """Returns a string describing fact in readable language. Will have special cases for time."""
 
@@ -53,12 +53,12 @@ def get_fact_state_readable_str(
     context_tail = get_tail_label(context_rope)
     state_trailing = state_rope.replace(context_rope, "", 1)
     x_str = f"({context_tail}) fact: {state_trailing}"
-    belief_label = get_root_label_from_rope(context_rope)
-    time_rope = create_rope(belief_label, "time")
+    moment_label = get_root_label_from_rope(context_rope)
+    time_rope = create_rope(moment_label, "time")
     timeline_rope = create_rope(time_rope, timeline_label)
     if factunit.fact_context == timeline_rope:
-        lower_blurb = get_timelinepoint_blurb(believerunit, timeline_rope, lower_float)
-        upper_blurb = get_timelinepoint_blurb(believerunit, timeline_rope, upper_float)
+        lower_blurb = get_timelinepoint_blurb(beliefunit, timeline_rope, lower_float)
+        upper_blurb = get_timelinepoint_blurb(beliefunit, timeline_rope, upper_float)
         return f"from {lower_blurb} to {upper_blurb}"
 
     if lower_float is not None and upper_float is not None:
@@ -67,7 +67,7 @@ def get_fact_state_readable_str(
     return x_str
 
 
-def get_timelinepoint_blurb(believerunit, timeline_rope, arg2):
-    lower_btlp = believertimelinepoint_shop(believerunit, timeline_rope, arg2)
+def get_timelinepoint_blurb(beliefunit, timeline_rope, arg2):
+    lower_btlp = belieftimelinepoint_shop(beliefunit, timeline_rope, arg2)
     lower_btlp.calc_timeline()
     return lower_btlp.get_blurb()

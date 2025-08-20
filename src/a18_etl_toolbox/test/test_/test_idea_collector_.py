@@ -1,11 +1,11 @@
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a09_pack_logic.test._util.a09_str import (
-    belief_label_str,
     event_int_str,
     face_name_str,
+    moment_label_str,
 )
-from src.a15_belief_logic.test._util.a15_str import (
+from src.a15_moment_logic.test._util.a15_str import (
     cumulative_minute_str,
     hour_label_str,
 )
@@ -98,7 +98,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        belief_label_str(),
+        moment_label_str(),
         hour_label_str(),
     ]
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
@@ -137,7 +137,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        belief_label_str(),
+        moment_label_str(),
         hour_label_str(),
     ]
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
@@ -146,7 +146,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         event_int_str(),
         face_name_str(),
         cumulative_minute_str(),
-        belief_label_str(),
+        moment_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, amy23_str]
     incom_row2 = [event1, sue_str, minute_420, amy23_str]

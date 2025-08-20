@@ -10,189 +10,189 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.a01_term_logic.term import BelieverName, EventInt, LabelTerm, RopeTerm
-from src.a06_believer_logic.believer_main import (
-    BelieverUnit,
-    believerunit_shop,
-    get_from_json as believerunit_get_from_json,
+from src.a01_term_logic.term import BeliefName, EventInt, LabelTerm, RopeTerm
+from src.a06_belief_logic.belief_main import (
+    BeliefUnit,
+    beliefunit_shop,
+    get_from_json as beliefunit_get_from_json,
 )
 from src.a11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
 from src.a11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
 from src.a12_hub_toolbox.a12_path import (
     CELLNODE_FILENAME,
-    create_belief_believers_dir_path,
-    create_believerevent_path,
-    create_believerpoint_path,
+    create_beliefevent_path,
+    create_beliefpoint_path,
     create_buds_dir_path,
     create_budunit_json_path,
     create_cell_dir_path,
     create_gut_path,
     create_job_path,
+    create_moment_beliefs_dir_path,
 )
 
 
-def save_believer_file(
-    dest_dir: str, filename: str = None, believerunit: BelieverUnit = None
+def save_belief_file(
+    dest_dir: str, filename: str = None, beliefunit: BeliefUnit = None
 ):
-    save_file(dest_dir, filename, believerunit.get_json())
+    save_file(dest_dir, filename, beliefunit.get_json())
 
 
-def open_believer_file(dest_dir: str, filename: str = None) -> BelieverUnit:
+def open_belief_file(dest_dir: str, filename: str = None) -> BeliefUnit:
     if os_path_exists(create_path(dest_dir, filename)):
-        return believerunit_get_from_json(open_file(dest_dir, filename))
+        return beliefunit_get_from_json(open_file(dest_dir, filename))
 
 
-def save_gut_file(belief_mstr_dir: str, believerunit: BelieverUnit):
+def save_gut_file(moment_mstr_dir: str, beliefunit: BeliefUnit):
     gut_path = create_gut_path(
-        belief_mstr_dir, believerunit.belief_label, believerunit.believer_name
+        moment_mstr_dir, beliefunit.moment_label, beliefunit.belief_name
     )
-    save_believer_file(gut_path, None, believerunit)
+    save_belief_file(gut_path, None, beliefunit)
 
 
 def open_gut_file(
-    belief_mstr_dir: str, belief_label: str, believer_name: BelieverName
-) -> BelieverUnit:
-    gut_path = create_gut_path(belief_mstr_dir, belief_label, believer_name)
-    return open_believer_file(gut_path)
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
+) -> BeliefUnit:
+    gut_path = create_gut_path(moment_mstr_dir, moment_label, belief_name)
+    return open_belief_file(gut_path)
 
 
 def gut_file_exists(
-    belief_mstr_dir: str, belief_label: str, believer_name: BelieverName
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
 ) -> bool:
-    gut_path = create_gut_path(belief_mstr_dir, belief_label, believer_name)
+    gut_path = create_gut_path(moment_mstr_dir, moment_label, belief_name)
     return os_path_exists(gut_path)
 
 
 def job_file_exists(
-    belief_mstr_dir: str, belief_label: str, believer_name: BelieverName
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
 ) -> bool:
-    job_path = create_job_path(belief_mstr_dir, belief_label, believer_name)
+    job_path = create_job_path(moment_mstr_dir, moment_label, belief_name)
     return os_path_exists(job_path)
 
 
-def save_job_file(belief_mstr_dir: str, believerunit: BelieverUnit):
+def save_job_file(moment_mstr_dir: str, beliefunit: BeliefUnit):
     job_path = create_job_path(
-        belief_mstr_dir, believerunit.belief_label, believerunit.believer_name
+        moment_mstr_dir, beliefunit.moment_label, beliefunit.belief_name
     )
-    save_believer_file(job_path, None, believerunit)
+    save_belief_file(job_path, None, beliefunit)
 
 
 def open_job_file(
-    belief_mstr_dir: str, belief_label: str, believer_name: BelieverName
-) -> BelieverUnit:
-    job_path = create_job_path(belief_mstr_dir, belief_label, believer_name)
-    return open_believer_file(job_path)
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
+) -> BeliefUnit:
+    job_path = create_job_path(moment_mstr_dir, moment_label, belief_name)
+    return open_belief_file(job_path)
 
 
-def get_believerevent_obj(
-    belief_mstr_dir: str,
-    belief_label: LabelTerm,
-    believer_name: BelieverName,
+def get_beliefevent_obj(
+    moment_mstr_dir: str,
+    moment_label: LabelTerm,
+    belief_name: BeliefName,
     event_int: int,
-) -> BelieverUnit:
-    believerevent_json_path = create_believerevent_path(
-        belief_mstr_dir, belief_label, believer_name, event_int
+) -> BeliefUnit:
+    beliefevent_json_path = create_beliefevent_path(
+        moment_mstr_dir, moment_label, belief_name, event_int
     )
-    return open_believer_file(believerevent_json_path)
+    return open_belief_file(beliefevent_json_path)
 
 
-def collect_believer_event_dir_sets(
-    belief_mstr_dir: str, belief_label: LabelTerm
-) -> dict[BelieverName, set[EventInt]]:
+def collect_belief_event_dir_sets(
+    moment_mstr_dir: str, moment_label: LabelTerm
+) -> dict[BeliefName, set[EventInt]]:
     x_dict = {}
-    believers_dir = create_belief_believers_dir_path(belief_mstr_dir, belief_label)
-    set_dir(believers_dir)
-    for believer_name in os_listdir(believers_dir):
-        believer_dir = create_path(believers_dir, believer_name)
-        events_dir = create_path(believer_dir, "events")
+    beliefs_dir = create_moment_beliefs_dir_path(moment_mstr_dir, moment_label)
+    set_dir(beliefs_dir)
+    for belief_name in os_listdir(beliefs_dir):
+        belief_dir = create_path(beliefs_dir, belief_name)
+        events_dir = create_path(belief_dir, "events")
         set_dir(events_dir)
-        believer_events_dirs = {
+        belief_events_dirs = {
             int(event_int_folder)
             for event_int_folder in os_listdir(events_dir)
             if os_path_isdir(create_path(events_dir, event_int_folder))
         }
-        x_dict[believer_name] = believer_events_dirs
+        x_dict[belief_name] = belief_events_dirs
     return x_dict
 
 
-def get_believers_downhill_event_ints(
-    believer_events_sets: dict[BelieverName, set[EventInt]],
-    downhill_believers: set[BelieverName] = None,
+def get_beliefs_downhill_event_ints(
+    belief_events_sets: dict[BeliefName, set[EventInt]],
+    downhill_beliefs: set[BeliefName] = None,
     ref_event_int: EventInt = None,
-) -> dict[BelieverName, EventInt]:
+) -> dict[BeliefName, EventInt]:
     x_dict = {}
-    if downhill_believers:
-        for believer_name in downhill_believers:
-            if event_set := believer_events_sets.get(believer_name):
-                _add_downhill_event_int(x_dict, event_set, ref_event_int, believer_name)
+    if downhill_beliefs:
+        for belief_name in downhill_beliefs:
+            if event_set := belief_events_sets.get(belief_name):
+                _add_downhill_event_int(x_dict, event_set, ref_event_int, belief_name)
     else:
-        for believer_name, event_set in believer_events_sets.items():
-            _add_downhill_event_int(x_dict, event_set, ref_event_int, believer_name)
+        for belief_name, event_set in belief_events_sets.items():
+            _add_downhill_event_int(x_dict, event_set, ref_event_int, belief_name)
     return x_dict
 
 
 def _add_downhill_event_int(
-    x_dict: dict[BelieverName, EventInt],
+    x_dict: dict[BeliefName, EventInt],
     event_set: set[EventInt],
     ref_event_int: EventInt,
-    downhill_believer: BelieverName,
+    downhill_belief: BeliefName,
 ):
     if event_set:
         if ref_event_int:
             if downhill_event_ints := {ei for ei in event_set if ei <= ref_event_int}:
-                x_dict[downhill_believer] = max(downhill_event_ints)
+                x_dict[downhill_belief] = max(downhill_event_ints)
         else:
-            x_dict[downhill_believer] = max(event_set)
+            x_dict[downhill_belief] = max(event_set)
 
 
-def save_arbitrary_believerevent(
-    belief_mstr_dir: str,
-    belief_label: str,
-    believer_name: str,
+def save_arbitrary_beliefevent(
+    moment_mstr_dir: str,
+    moment_label: str,
+    belief_name: str,
     event_int: int,
     partners: list[list] = None,
     facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
 ) -> str:
     partners = get_empty_list_if_None(partners)
     facts = get_empty_list_if_None(facts)
-    x_believerunit = believerunit_shop(believer_name, belief_label)
+    x_beliefunit = beliefunit_shop(belief_name, moment_label)
     for partner_list in partners:
         try:
             partner_cred_points = partner_list[1]
         except Exception:
             partner_cred_points = None
-        x_believerunit.add_partnerunit(partner_list[0], partner_cred_points)
+        x_beliefunit.add_partnerunit(partner_list[0], partner_cred_points)
     for fact_tup in facts:
         x_reason_context = fact_tup[0]
         x_fact_state = fact_tup[1]
         x_fact_lower = fact_tup[2]
         x_fact_upper = fact_tup[3]
-        x_believerunit.add_fact(
+        x_beliefunit.add_fact(
             x_reason_context, x_fact_state, x_fact_lower, x_fact_upper, True
         )
-    x_believerevent_path = create_believerevent_path(
-        belief_mstr_dir, belief_label, believer_name, event_int
+    x_beliefevent_path = create_beliefevent_path(
+        moment_mstr_dir, moment_label, belief_name, event_int
     )
-    save_file(x_believerevent_path, None, x_believerunit.get_json())
-    return x_believerevent_path
+    save_file(x_beliefevent_path, None, x_beliefunit.get_json())
+    return x_beliefevent_path
 
 
 def cellunit_add_json_file(
-    belief_mstr_dir: str,
-    belief_label: str,
-    time_believer_name: str,
+    moment_mstr_dir: str,
+    moment_label: str,
+    time_belief_name: str,
     bud_time: int,
     event_int: int,
-    bud_ancestors: list[BelieverName] = None,
+    bud_ancestors: list[BeliefName] = None,
     quota: int = None,
     celldepth: int = None,
     penny: int = None,
 ):
     cell_dir = create_cell_dir_path(
-        belief_mstr_dir, belief_label, time_believer_name, bud_time, bud_ancestors
+        moment_mstr_dir, moment_label, time_belief_name, bud_time, bud_ancestors
     )
     x_cell = cellunit_shop(
-        time_believer_name, bud_ancestors, event_int, celldepth, penny, quota
+        time_belief_name, bud_ancestors, event_int, celldepth, penny, quota
     )
     cellunit_save_to_dir(cell_dir, x_cell)
 
@@ -216,94 +216,94 @@ def create_cell_partner_mandate_ledger_json(dirpath: str):
 
 
 def save_bud_file(
-    belief_mstr_dir: str,
-    belief_label: str,
-    believer_name: BelieverName,
+    moment_mstr_dir: str,
+    moment_label: str,
+    belief_name: BeliefName,
     x_bud: BudUnit = None,
 ):
     x_bud.calc_magnitude()
     bud_json_path = create_budunit_json_path(
-        belief_mstr_dir, belief_label, believer_name, x_bud.bud_time
+        moment_mstr_dir, moment_label, belief_name, x_bud.bud_time
     )
     save_json(bud_json_path, None, x_bud.to_dict(), replace=True)
 
 
 def bud_file_exists(
-    belief_mstr_dir: str,
-    belief_label: str,
-    believer_name: BelieverName,
+    moment_mstr_dir: str,
+    moment_label: str,
+    belief_name: BeliefName,
     x_bud_time: TimeLinePoint = None,
 ) -> bool:
     bud_json_path = create_budunit_json_path(
-        belief_mstr_dir, belief_label, believer_name, x_bud_time
+        moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
     return os_path_exists(bud_json_path)
 
 
 def open_bud_file(
-    belief_mstr_dir: str,
-    belief_label: str,
-    believer_name: BelieverName,
+    moment_mstr_dir: str,
+    moment_label: str,
+    belief_name: BeliefName,
     x_bud_time: TimeLinePoint = None,
 ) -> BudUnit:
     bud_json_path = create_budunit_json_path(
-        belief_mstr_dir, belief_label, believer_name, x_bud_time
+        moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    if bud_file_exists(belief_mstr_dir, belief_label, believer_name, x_bud_time):
+    if bud_file_exists(moment_mstr_dir, moment_label, belief_name, x_bud_time):
         return get_budunit_from_dict(open_json(bud_json_path))
 
 
-class _save_valid_believerpoint_Exception(Exception):
+class _save_valid_beliefpoint_Exception(Exception):
     pass
 
 
-def save_believerpoint_file(
-    belief_mstr_dir: str,
-    x_believerpoint: BelieverUnit,
+def save_beliefpoint_file(
+    moment_mstr_dir: str,
+    x_beliefpoint: BeliefUnit,
     x_bud_time: TimeLinePoint = None,
 ):
-    x_believerpoint.settle_believer()
-    if x_believerpoint._rational is False:
-        raise _save_valid_believerpoint_Exception(
-            "BelieverPoint could not be saved BelieverUnit._rational is False"
+    x_beliefpoint.cash_out()
+    if x_beliefpoint._rational is False:
+        raise _save_valid_beliefpoint_Exception(
+            "BeliefPoint could not be saved BeliefUnit._rational is False"
         )
-    believerpoint_json_path = create_believerpoint_path(
-        belief_mstr_dir,
-        x_believerpoint.belief_label,
-        x_believerpoint.believer_name,
+    beliefpoint_json_path = create_beliefpoint_path(
+        moment_mstr_dir,
+        x_beliefpoint.moment_label,
+        x_beliefpoint.belief_name,
         x_bud_time,
     )
-    save_believer_file(believerpoint_json_path, None, x_believerpoint)
+    save_belief_file(beliefpoint_json_path, None, x_beliefpoint)
 
 
-def believerpoint_file_exists(
-    belief_mstr_dir: str,
-    belief_label: str,
-    believer_name: BelieverName,
+def beliefpoint_file_exists(
+    moment_mstr_dir: str,
+    moment_label: str,
+    belief_name: BeliefName,
     x_bud_time: TimeLinePoint = None,
 ) -> bool:
-    believerpoint_json_path = create_believerpoint_path(
-        belief_mstr_dir, belief_label, believer_name, x_bud_time
+    beliefpoint_json_path = create_beliefpoint_path(
+        moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    return os_path_exists(believerpoint_json_path)
+    return os_path_exists(beliefpoint_json_path)
 
 
-def open_believerpoint_file(
-    belief_mstr_dir: str,
-    belief_label: str,
-    believer_name: BelieverName,
+def open_beliefpoint_file(
+    moment_mstr_dir: str,
+    moment_label: str,
+    belief_name: BeliefName,
     x_bud_time: TimeLinePoint = None,
 ) -> bool:
-    believerpoint_json_path = create_believerpoint_path(
-        belief_mstr_dir, belief_label, believer_name, x_bud_time
+    beliefpoint_json_path = create_beliefpoint_path(
+        moment_mstr_dir, moment_label, belief_name, x_bud_time
     )
-    # if self.believerpoint_file_exists(x_bud_time):
-    return open_believer_file(believerpoint_json_path)
+    # if self.beliefpoint_file_exists(x_bud_time):
+    return open_belief_file(beliefpoint_json_path)
 
 
 def get_timepoint_dirs(
-    belief_mstr_dir: str, belief_label: str, believer_name: BelieverName
+    moment_mstr_dir: str, moment_label: str, belief_name: BeliefName
 ) -> list[TimeLinePoint]:
-    buds_dir = create_buds_dir_path(belief_mstr_dir, belief_label, believer_name)
+    buds_dir = create_buds_dir_path(moment_mstr_dir, moment_label, belief_name)
     x_dict = get_dir_file_strs(buds_dir, include_dirs=True, include_files=False)
     return [int(x_timepoint) for x_timepoint in sorted(list(x_dict.keys()))]

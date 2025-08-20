@@ -1,19 +1,19 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
     awardee_title_str,
-    belief_label_str,
-    believer_name_str,
+    belief_name_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fund_iota_str,
     group_title_str,
     healer_name_str,
+    moment_label_str,
     partner_name_str,
     party_title_str,
     penny_str,
@@ -24,13 +24,13 @@ from src.a06_believer_logic.test._util.a06_str import (
     respect_bit_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import timeline_label_str
-from src.a08_believer_atom_logic.atom_config import (
-    get_all_believer_dimen_delete_keys,
+from src.a08_belief_atom_logic.atom_config import (
+    get_all_belief_dimen_delete_keys,
     get_atom_args_class_types,
 )
 from src.a09_pack_logic.test._util.a09_str import face_name_str
-from src.a15_belief_logic.belief_config import get_belief_args_class_types
-from src.a15_belief_logic.test._util.a15_str import (
+from src.a15_moment_logic.moment_config import get_moment_args_class_types
+from src.a15_moment_logic.test._util.a15_str import (
     hour_label_str,
     month_label_str,
     weekday_label_str,
@@ -90,7 +90,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("reason_divisor") == "int"
     assert pidgin_args_class_types.get("face_name") == NameTerm_str()
     assert pidgin_args_class_types.get("fact_context") == RopeTerm_str()
-    assert pidgin_args_class_types.get("belief_label") == LabelTerm_str()
+    assert pidgin_args_class_types.get("moment_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("fact_upper") == "float"
     assert pidgin_args_class_types.get("fact_lower") == "float"
     assert pidgin_args_class_types.get("fund_iota") == "float"
@@ -109,7 +109,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("reason_upper") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
-    assert pidgin_args_class_types.get("believer_name") == NameTerm_str()
+    assert pidgin_args_class_types.get("belief_name") == NameTerm_str()
     assert pidgin_args_class_types.get("reason_lower") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
     assert pidgin_args_class_types.get("fact_state") == RopeTerm_str()
@@ -132,20 +132,20 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("yr1_jan1_offset") == "int"
     assert pidgin_args_class_types.get("solo") == "int"
 
-    # make sure it pidgin_arg_class_types has all belief and all atom args
+    # make sure it pidgin_arg_class_types has all moment and all atom args
     pidgin_args = set(pidgin_args_class_types.keys())
     atom_args = set(get_atom_args_class_types().keys())
-    belief_args = set(get_belief_args_class_types().keys())
+    moment_args = set(get_moment_args_class_types().keys())
     assert atom_args.issubset(pidgin_args)
-    assert belief_args.issubset(pidgin_args)
-    assert atom_args.intersection(belief_args) == {
+    assert moment_args.issubset(pidgin_args)
+    assert atom_args.intersection(moment_args) == {
         partner_name_str(),
         fund_iota_str(),
         penny_str(),
         respect_bit_str(),
     }
-    assert atom_args.union(belief_args) != pidgin_args
-    assert atom_args.union(belief_args).union({"face_name"}) == pidgin_args
+    assert atom_args.union(moment_args) != pidgin_args
+    assert atom_args.union(moment_args).union({"face_name"}) == pidgin_args
     assert check_class_types_are_correct()
     # assert pidgin_args_class_types.keys() == get_atom_args_dimen_mapping().keys()
     # assert all_atom_args_class_types_are_correct(x_class_types)
@@ -154,7 +154,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
 def check_class_types_are_correct() -> bool:
     pidgin_args_class_types = get_pidgin_args_class_types()
     atom_args_class_types = get_atom_args_class_types()
-    belief_args_class_types = get_belief_args_class_types()
+    moment_args_class_types = get_moment_args_class_types()
     for pidgin_arg, pidgin_type in pidgin_args_class_types.items():
         print(f"check {pidgin_arg=} {pidgin_type=}")
         if atom_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
@@ -162,9 +162,9 @@ def check_class_types_are_correct() -> bool:
                 f"{pidgin_arg=} {pidgin_type=} {atom_args_class_types.get(pidgin_arg)=}"
             )
             return False
-        if belief_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
+        if moment_args_class_types.get(pidgin_arg) not in [None, pidgin_type]:
             print(
-                f"{pidgin_arg=} {pidgin_type=} {belief_args_class_types.get(pidgin_arg)=}"
+                f"{pidgin_arg=} {pidgin_type=} {moment_args_class_types.get(pidgin_arg)=}"
             )
             return False
     return True
@@ -209,14 +209,14 @@ def test_get_pidginable_args_ReturnsObj():
         reason_context_str(),
         face_name_str(),
         fact_context_str(),
-        belief_label_str(),
+        moment_label_str(),
         fact_state_str(),
         group_title_str(),
         healer_name_str(),
         hour_label_str(),
         month_label_str(),
         reason_state_str(),
-        believer_name_str(),
+        belief_name_str(),
         plan_rope_str(),
         party_title_str(),
         timeline_label_str(),
@@ -241,17 +241,17 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario0_All_pidginable_args():
     assert otx_inx_args == expected_otx_inx_args
 
 
-def test_find_set_otx_inx_args_ReturnsObj_Scenario1_believer_dimen_delete_keys():
+def test_find_set_otx_inx_args_ReturnsObj_Scenario1_belief_dimen_delete_keys():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
-    believer_dimen_delete_keys = get_all_believer_dimen_delete_keys()
+    belief_dimen_delete_keys = get_all_belief_dimen_delete_keys()
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(believer_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(belief_dimen_delete_keys)
 
     # THEN
     expected_otx_inx_args = set()
-    for pidginable_arg in believer_dimen_delete_keys:
+    for pidginable_arg in belief_dimen_delete_keys:
         expected_otx_inx_args.add(f"{pidginable_arg}_otx")
         expected_otx_inx_args.add(f"{pidginable_arg}_inx")
     print(f"{otx_inx_args=}")
@@ -262,15 +262,15 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     run_str = "run"
-    given_believer_dimen_delete_keys = get_all_believer_dimen_delete_keys()
-    given_believer_dimen_delete_keys.add(run_str)
+    given_belief_dimen_delete_keys = get_all_belief_dimen_delete_keys()
+    given_belief_dimen_delete_keys.add(run_str)
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(given_believer_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(given_belief_dimen_delete_keys)
 
     # THEN
     expected_otx_inx_args = set()
-    for pidginable_arg in get_all_believer_dimen_delete_keys():
+    for pidginable_arg in get_all_belief_dimen_delete_keys():
         expected_otx_inx_args.add(f"{pidginable_arg}_otx")
         expected_otx_inx_args.add(f"{pidginable_arg}_inx")
     expected_otx_inx_args.add(run_str)
@@ -282,10 +282,10 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     # ESTABLISH
     healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
     run_str = "run"
-    given_believer_dimen_delete_keys = {run_str, healer_name_ERASE_str}
+    given_belief_dimen_delete_keys = {run_str, healer_name_ERASE_str}
 
     # WHEN
-    otx_inx_args = find_set_otx_inx_args(given_believer_dimen_delete_keys)
+    otx_inx_args = find_set_otx_inx_args(given_belief_dimen_delete_keys)
 
     # THEN
     healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
@@ -307,7 +307,7 @@ def test_get_pidgin_NameTerm_args_ReturnsObj():
         partner_name_str(),
         face_name_str(),
         healer_name_str(),
-        believer_name_str(),
+        belief_name_str(),
     }
     expected_args = {
         x_arg
@@ -341,7 +341,7 @@ def test_get_pidgin_LabelTerm_args_ReturnsObj():
 
     # THEN
     assert pidgin_LabelTerm_args == {
-        belief_label_str(),
+        moment_label_str(),
         hour_label_str(),
         month_label_str(),
         timeline_label_str(),

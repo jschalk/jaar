@@ -5,36 +5,36 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a06_believer_logic.test._util.a06_str import (
-    believer_partner_membership_str,
-    believer_partnerunit_str,
-    believer_plan_awardunit_str,
-    believer_plan_factunit_str,
-    believer_plan_healerunit_str,
-    believer_plan_partyunit_str,
-    believer_plan_reason_caseunit_str,
-    believer_plan_reasonunit_str,
-    believer_planunit_str,
-    believerunit_str,
+from src.a06_belief_logic.test._util.a06_str import (
+    belief_partner_membership_str,
+    belief_partnerunit_str,
+    belief_plan_awardunit_str,
+    belief_plan_factunit_str,
+    belief_plan_healerunit_str,
+    belief_plan_partyunit_str,
+    belief_plan_reason_caseunit_str,
+    belief_plan_reasonunit_str,
+    belief_planunit_str,
+    beliefunit_str,
 )
-from src.a08_believer_atom_logic.atom_config import get_delete_key_name
+from src.a08_belief_atom_logic.atom_config import get_delete_key_name
 from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a10_believer_calc.test._util.a10_str import believer_groupunit_str
+from src.a10_belief_calc.test._util.a10_str import belief_groupunit_str
 from src.a11_bud_logic.test._util.a11_str import (
-    belief_label_str,
-    believer_name_str,
+    belief_name_str,
     bud_time_str,
+    moment_label_str,
     tran_time_str,
 )
 from src.a12_hub_toolbox.test._util.a12_str import job_str
-from src.a15_belief_logic.test._util.a15_str import (
-    belief_budunit_str,
-    belief_paybook_str,
-    belief_timeline_hour_str,
-    belief_timeline_month_str,
-    belief_timeline_weekday_str,
-    belief_timeoffi_str,
-    beliefunit_str,
+from src.a15_moment_logic.test._util.a15_str import (
+    moment_budunit_str,
+    moment_paybook_str,
+    moment_timeline_hour_str,
+    moment_timeline_month_str,
+    moment_timeline_weekday_str,
+    moment_timeoffi_str,
+    momentunit_str,
 )
 from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_core_str,
@@ -54,20 +54,20 @@ from src.a17_idea_logic.idea_db_tool import (
 )
 from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
 from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_event_time_agg_str,
-    belief_ote1_agg_str,
-    belief_partner_nets_str,
-    believer_net_amount_str,
+    belief_net_amount_str,
+    moment_event_time_agg_str,
+    moment_ote1_agg_str,
+    moment_partner_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
-    CREATE_BELIEF_EVENT_TIME_AGG_SQLSTR,
-    CREATE_BELIEF_OTE1_AGG_SQLSTR,
-    CREATE_BELIEF_PARTNER_NETS_SQLSTR,
+    CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR,
+    CREATE_MOMENT_OTE1_AGG_SQLSTR,
+    CREATE_MOMENT_PARTNER_NETS_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
-    INSERT_BELIEF_EVENT_TIME_AGG_SQLSTR,
-    INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR,
-    UPDATE_ERROR_MESSAGE_BELIEF_EVENT_TIME_AGG_SQLSTR,
+    INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR,
+    INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR,
+    UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR,
     create_all_idea_tables,
     create_prime_tablename,
     create_sound_and_voice_tables,
@@ -84,24 +84,24 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    blrunit_dimen = believerunit_str()
-    blrpern_dimen = believer_partnerunit_str()
-    blrmemb_dimen = believer_partner_membership_str()
-    blrgrou_dimen = believer_groupunit_str()
-    blrplan_dimen = believer_planunit_str()
-    blrawar_dimen = believer_plan_awardunit_str()
-    blrreas_dimen = believer_plan_reasonunit_str()
-    blrprem_dimen = believer_plan_reason_caseunit_str()
-    blrlabo_dimen = believer_plan_partyunit_str()
-    blrheal_dimen = believer_plan_healerunit_str()
-    blrfact_dimen = believer_plan_factunit_str()
-    blfunit_dimen = beliefunit_str()
-    blfpayy_dimen = belief_paybook_str()
-    blfbudd_dimen = belief_budunit_str()
-    blfhour_dimen = belief_timeline_hour_str()
-    blfmont_dimen = belief_timeline_month_str()
-    blfweek_dimen = belief_timeline_weekday_str()
-    blfoffi_dimen = belief_timeoffi_str()
+    blrunit_dimen = beliefunit_str()
+    blrpern_dimen = belief_partnerunit_str()
+    blrmemb_dimen = belief_partner_membership_str()
+    blrgrou_dimen = belief_groupunit_str()
+    blrplan_dimen = belief_planunit_str()
+    blrawar_dimen = belief_plan_awardunit_str()
+    blrreas_dimen = belief_plan_reasonunit_str()
+    blrprem_dimen = belief_plan_reason_caseunit_str()
+    blrlabo_dimen = belief_plan_partyunit_str()
+    blrheal_dimen = belief_plan_healerunit_str()
+    blrfact_dimen = belief_plan_factunit_str()
+    blfunit_dimen = momentunit_str()
+    blfpayy_dimen = moment_paybook_str()
+    blfbudd_dimen = moment_budunit_str()
+    blfhour_dimen = moment_timeline_hour_str()
+    blfmont_dimen = moment_timeline_month_str()
+    blfweek_dimen = moment_timeline_weekday_str()
+    blfoffi_dimen = moment_timeoffi_str()
     pidname_dimen = pidgin_name_str()
     pidlabe_dimen = pidgin_label_str()
     pidrope_dimen = pidgin_rope_str()
@@ -114,7 +114,7 @@ def test_create_prime_tablename_ReturnsObj():
     del_str = "del"
 
     # WHEN
-    blrunit_s_agg_table = create_prime_tablename("believerunit", "s", agg_str, put_str)
+    blrunit_s_agg_table = create_prime_tablename("beliefunit", "s", agg_str, put_str)
     blrpern_s_agg_table = create_prime_tablename("blrpern", "s", agg_str, put_str)
     blrmemb_s_agg_table = create_prime_tablename("blrmemb", "s", agg_str, put_str)
     blrplan_s_agg_table = create_prime_tablename("blrplan", "s", agg_str, put_str)
@@ -175,14 +175,14 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert blrpern_job_table == f"{blrpern_dimen}_job"
     assert blrgrou_job_table == f"{blrgrou_dimen}_job"
-    assert x_blrpern_raw == "believer_partnerunit_raw"
+    assert x_blrpern_raw == "belief_partnerunit_raw"
 
 
-def test_create_all_idea_tables_CreatesBeliefRawTables():
+def test_create_all_idea_tables_CreatesMomentRawTables():
     # ESTABLISH sourcery skip: no-loop-in-tests
     idea_numbers = get_idea_numbers()
-    with sqlite3_connect(":memory:") as belief_db_conn:
-        cursor = belief_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         for idea_number in idea_numbers:
             assert db_table_exists(cursor, f"{idea_number}_raw") is False
 
@@ -204,10 +204,10 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "belief"
+        # if dimen_config.get(idea_category_str()) == "moment"
     }
-    with sqlite3_connect(":memory:") as belief_db_conn:
-        cursor = belief_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         create_all_idea_tables(cursor)
         create_sound_and_voice_tables(cursor)
 
@@ -267,10 +267,10 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
         if dimen_config.get(idea_category_str()) != "pidgin"
-        # if dimen_config.get(idea_category_str()) == "belief"
+        # if dimen_config.get(idea_category_str()) == "moment"
     }
-    with sqlite3_connect(":memory:") as belief_db_conn:
-        cursor = belief_db_conn.cursor()
+    with sqlite3_connect(":memory:") as moment_db_conn:
+        cursor = moment_db_conn.cursor()
         create_all_idea_tables(cursor)
         create_sound_and_voice_tables(cursor)
 
@@ -324,11 +324,11 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     assert IDEA_STAGEBLE_DEL_DIMENS == expected_idea_slabelable_dimens
 
 
-def test_CREATE_BELIEF_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {belief_event_time_agg_str()} (
-  {belief_label_str()} TEXT
+CREATE TABLE IF NOT EXISTS {moment_event_time_agg_str()} (
+  {moment_label_str()} TEXT
 , {event_int_str()} INTEGER
 , agg_time INTEGER
 , {error_message_str()} TEXT
@@ -336,60 +336,60 @@ CREATE TABLE IF NOT EXISTS {belief_event_time_agg_str()} (
 ;
 """
     # WHEN / THEN
-    assert CREATE_BELIEF_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR == expected_create_table_sqlstr
 
 
-def test_INSERT_BELIEF_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO {belief_event_time_agg_str()} ({belief_label_str()}, {event_int_str()}, agg_time)
-SELECT {belief_label_str()}, {event_int_str()}, agg_time
+INSERT INTO {moment_event_time_agg_str()} ({moment_label_str()}, {event_int_str()}, agg_time)
+SELECT {moment_label_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {belief_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
-    FROM belief_paybook_raw
-    GROUP BY {belief_label_str()}, {event_int_str()}, {tran_time_str()}
+    SELECT {moment_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    FROM moment_paybook_raw
+    GROUP BY {moment_label_str()}, {event_int_str()}, {tran_time_str()}
     UNION 
-    SELECT {belief_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
-    FROM belief_budunit_raw
-    GROUP BY {belief_label_str()}, {event_int_str()}, {bud_time_str()}
+    SELECT {moment_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
+    FROM moment_budunit_raw
+    GROUP BY {moment_label_str()}, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {belief_label_str()}, {event_int_str()}, agg_time
+ORDER BY {moment_label_str()}, {event_int_str()}, agg_time
 ;
 """
     # WHEN / THEN
-    assert INSERT_BELIEF_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_UPDATE_ERROR_MESSAGE_BELIEF_EVENT_TIME_AGG_SQLSTR_Exists():
+def test_UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {belief_label_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {belief_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
-    FROM {belief_event_time_agg_str()}
+    SELECT {moment_label_str()}, {event_int_str()}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {moment_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
+    FROM {moment_event_time_agg_str()}
 )
-UPDATE {belief_event_time_agg_str()}
+UPDATE {moment_event_time_agg_str()}
 SET {error_message_str()} = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.{event_int_str()} = {belief_event_time_agg_str()}.{event_int_str()}
-    AND EventTimeOrdered.{belief_label_str()} = {belief_event_time_agg_str()}.{belief_label_str()}
-    AND EventTimeOrdered.agg_time = {belief_event_time_agg_str()}.agg_time
+WHERE EventTimeOrdered.{event_int_str()} = {moment_event_time_agg_str()}.{event_int_str()}
+    AND EventTimeOrdered.{moment_label_str()} = {moment_event_time_agg_str()}.{moment_label_str()}
+    AND EventTimeOrdered.agg_time = {moment_event_time_agg_str()}.agg_time
 ;
 """
     # WHEN / THEN
-    assert UPDATE_ERROR_MESSAGE_BELIEF_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
+    assert UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR == expected_UPDATE_sqlstr
 
 
-def test_CREATE_BELIEF_OTE1_AGG_SQLSTR_Exists():
+def test_CREATE_MOMENT_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {belief_ote1_agg_str()} (
-  {belief_label_str()} TEXT
-, {believer_name_str()} TEXT
+CREATE TABLE IF NOT EXISTS {moment_ote1_agg_str()} (
+  {moment_label_str()} TEXT
+, {belief_name_str()} TEXT
 , {event_int_str()} INTEGER
 , {bud_time_str()} INTEGER
 , error_message TEXT
@@ -397,46 +397,46 @@ CREATE TABLE IF NOT EXISTS {belief_ote1_agg_str()} (
 ;
 """
     # WHEN / THEN
-    assert CREATE_BELIEF_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_MOMENT_OTE1_AGG_SQLSTR == expected_create_table_sqlstr
 
 
 # TODO create test to prove this insert should grab minimun event_int instead of just event_int
 # TODO create test to prove this insert should never grab when error message is not null in source table
-def test_INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
+def test_INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
     # ESTABLISH
-    beliefbud_v_raw_tablename = create_prime_tablename(belief_budunit_str(), "v", "raw")
+    momentbud_v_raw_tablename = create_prime_tablename(moment_budunit_str(), "v", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {belief_ote1_agg_str()} ({belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()})
-SELECT {belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()}
+INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()})
+SELECT {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
 FROM (
     SELECT 
-      {belief_label_str()}_inx {belief_label_str()}
-    , {believer_name_str()}_inx {believer_name_str()}
+      {moment_label_str()}_inx {moment_label_str()}
+    , {belief_name_str()}_inx {belief_name_str()}
     , {event_int_str()}
     , {bud_time_str()}
-    FROM {beliefbud_v_raw_tablename}
-    GROUP BY {belief_label_str()}_inx, {believer_name_str()}_inx, {event_int_str()}, {bud_time_str()}
+    FROM {momentbud_v_raw_tablename}
+    GROUP BY {moment_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {bud_time_str()}
 )
-ORDER BY {belief_label_str()}, {believer_name_str()}, {event_int_str()}, {bud_time_str()}
+ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
 ;
 """
     # WHEN / THEN
-    assert INSERT_BELIEF_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_CREATE_BELIEF_PARTNER_NETS_SQLSTR_Exists():
+def test_CREATE_MOMENT_PARTNER_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
-    sqlite_types[believer_net_amount_str()] = "REAL"
+    sqlite_types[belief_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
-        tablename=belief_partner_nets_str(),
+        tablename=moment_partner_nets_str(),
         columns_list=[
-            belief_label_str(),
-            believer_name_str(),
-            believer_net_amount_str(),
+            moment_label_str(),
+            belief_name_str(),
+            belief_net_amount_str(),
         ],
         column_types=sqlite_types,
     )
 
     # WHEN / THEN
-    assert CREATE_BELIEF_PARTNER_NETS_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_MOMENT_PARTNER_NETS_SQLSTR == expected_create_table_sqlstr

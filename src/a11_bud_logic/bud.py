@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_term_logic.term import BeliefLabel, BelieverName, PartnerName
+from src.a01_term_logic.term import BeliefName, MomentLabel, PartnerName
 from src.a02_finance_logic.finance_config import FundNum, default_fund_pool
 from src.a07_timeline_logic.timeline_main import TimeLinePoint
 
@@ -29,25 +29,23 @@ DEFAULT_CELLDEPTH = 2
 
 @dataclass
 class TranUnit:
-    src: BelieverName = None
+    src: BeliefName = None
     dst: PartnerName = None
     tran_time: TimeLinePoint = None
     amount: FundNum = None
 
 
 def tranunit_shop(
-    src: BelieverName, dst: PartnerName, tran_time: TimeLinePoint, amount: FundNum
+    src: BeliefName, dst: PartnerName, tran_time: TimeLinePoint, amount: FundNum
 ) -> TranUnit:
     return TranUnit(src=src, dst=dst, tran_time=tran_time, amount=amount)
 
 
 @dataclass
 class TranBook:
-    belief_label: BeliefLabel = None
-    tranunits: dict[BelieverName, dict[PartnerName, dict[TimeLinePoint, FundNum]]] = (
-        None
-    )
-    _partners_net: dict[BelieverName, dict[PartnerName, FundNum]] = None
+    moment_label: MomentLabel = None
+    tranunits: dict[BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]] = None
+    _partners_net: dict[BeliefName, dict[PartnerName, FundNum]] = None
 
     def set_tranunit(
         self,
@@ -56,7 +54,7 @@ class TranBook:
         _offi_time_max: TimeLinePoint = None,
     ):
         self.add_tranunit(
-            believer_name=tranunit.src,
+            belief_name=tranunit.src,
             partner_name=tranunit.dst,
             tran_time=tranunit.tran_time,
             amount=tranunit.amount,
@@ -66,7 +64,7 @@ class TranBook:
 
     def add_tranunit(
         self,
-        believer_name: BelieverName,
+        belief_name: BeliefName,
         partner_name: PartnerName,
         tran_time: TimeLinePoint,
         amount: FundNum,
@@ -79,28 +77,28 @@ class TranBook:
         if _offi_time_max != None and tran_time >= _offi_time_max:
             exception_str = f"Cannot set tranunit for tran_time={tran_time}, TimeLinePoint is greater than current time={_offi_time_max}"
             raise tran_time_Exception(exception_str)
-        x_keylist = [believer_name, partner_name, tran_time]
+        x_keylist = [belief_name, partner_name, tran_time]
         set_in_nested_dict(self.tranunits, x_keylist, amount)
 
     def tranunit_exists(
-        self, src: BelieverName, dst: PartnerName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, tran_time: TimeLinePoint
     ) -> bool:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True) != None
 
     def get_tranunit(
-        self, src: BelieverName, dst: PartnerName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, tran_time: TimeLinePoint
     ) -> TranUnit:
         x_amount = get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
         if x_amount != None:
             return tranunit_shop(src, dst, tran_time, x_amount)
 
     def get_amount(
-        self, src: BelieverName, dst: PartnerName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, tran_time: TimeLinePoint
     ) -> TranUnit:
         return get_from_nested_dict(self.tranunits, [src, dst, tran_time], True)
 
     def del_tranunit(
-        self, src: BelieverName, dst: PartnerName, tran_time: TimeLinePoint
+        self, src: BeliefName, dst: PartnerName, tran_time: TimeLinePoint
     ) -> TranUnit:
         x_keylist = [src, dst, tran_time]
         if exists_in_nested_dict(self.tranunits, x_keylist):
@@ -113,22 +111,22 @@ class TranBook:
                 x_set.update(set(tran_time_dict.keys()))
         return x_set
 
-    def get_believers_partners_net(
+    def get_beliefs_partners_net(
         self,
-    ) -> dict[BelieverName, dict[PartnerName, FundNum]]:
-        believers_partners_net_dict = {}
-        for believer_name, believer_dict in self.tranunits.items():
-            for partner_name, partner_dict in believer_dict.items():
-                if believers_partners_net_dict.get(believer_name) is None:
-                    believers_partners_net_dict[believer_name] = {}
-                believer_net_dict = believers_partners_net_dict.get(believer_name)
-                believer_net_dict[partner_name] = sum(partner_dict.values())
-        return believers_partners_net_dict
+    ) -> dict[BeliefName, dict[PartnerName, FundNum]]:
+        beliefs_partners_net_dict = {}
+        for belief_name, belief_dict in self.tranunits.items():
+            for partner_name, partner_dict in belief_dict.items():
+                if beliefs_partners_net_dict.get(belief_name) is None:
+                    beliefs_partners_net_dict[belief_name] = {}
+                belief_net_dict = beliefs_partners_net_dict.get(belief_name)
+                belief_net_dict[partner_name] = sum(partner_dict.values())
+        return beliefs_partners_net_dict
 
     def get_partners_net_dict(self) -> dict[PartnerName, FundNum]:
         partners_net_dict = {}
-        for believer_dict in self.tranunits.values():
-            for partner_name, partner_dict in sorted(believer_dict.items()):
+        for belief_dict in self.tranunits.values():
+            for partner_name, partner_dict in sorted(belief_dict.items()):
                 if partners_net_dict.get(partner_name) is None:
                     partners_net_dict[partner_name] = sum(partner_dict.values())
                 else:
@@ -160,19 +158,19 @@ class TranBook:
     def to_dict(
         self,
     ) -> dict[
-        BeliefLabel, dict[BelieverName, dict[PartnerName, dict[TimeLinePoint, FundNum]]]
+        MomentLabel, dict[BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]]
     ]:
-        return {"belief_label": self.belief_label, "tranunits": self.tranunits}
+        return {"moment_label": self.moment_label, "tranunits": self.tranunits}
 
 
 def tranbook_shop(
-    x_belief_label: BeliefLabel,
+    x_moment_label: MomentLabel,
     x_tranunits: dict[
-        BelieverName, dict[PartnerName, dict[TimeLinePoint, FundNum]]
+        BeliefName, dict[PartnerName, dict[TimeLinePoint, FundNum]]
     ] = None,
 ):
     return TranBook(
-        belief_label=x_belief_label,
+        moment_label=x_moment_label,
         tranunits=get_empty_dict_if_None(x_tranunits),
         _partners_net={},
     )
@@ -181,12 +179,12 @@ def tranbook_shop(
 def get_tranbook_from_dict(x_dict: dict) -> TranBook:
     x_tranunits = x_dict.get("tranunits")
     new_tranunits = {}
-    for x_believer_name, x_partner_dict in x_tranunits.items():
+    for x_belief_name, x_partner_dict in x_tranunits.items():
         for x_partner_name, x_tran_time_dict in x_partner_dict.items():
             for x_tran_time, x_amount in x_tran_time_dict.items():
-                x_key_list = [x_believer_name, x_partner_name, int(x_tran_time)]
+                x_key_list = [x_belief_name, x_partner_name, int(x_tran_time)]
                 set_in_nested_dict(new_tranunits, x_key_list, x_amount)
-    return tranbook_shop(x_dict.get("belief_label"), new_tranunits)
+    return tranbook_shop(x_dict.get("moment_label"), new_tranunits)
 
 
 @dataclass
@@ -257,7 +255,7 @@ def budunit_shop(
 
 @dataclass
 class BrokerUnit:
-    believer_name: BelieverName = None
+    belief_name: BeliefName = None
     buds: dict[TimeLinePoint, BudUnit] = None
     _sum_budunit_quota: FundNum = None
     _sum_partner_bud_nets: int = None
@@ -284,15 +282,15 @@ class BrokerUnit:
 
     def get_2d_array(self) -> list[list]:
         return [
-            [self.believer_name, x_bud.bud_time, x_bud.quota]
+            [self.belief_name, x_bud.bud_time, x_bud.quota]
             for x_bud in self.buds.values()
         ]
 
     def get_headers(self) -> list:
-        return ["believer_name", "bud_time", "quota"]
+        return ["belief_name", "bud_time", "quota"]
 
     def to_dict(self) -> dict:
-        return {"believer_name": self.believer_name, "buds": self._get_buds_dict()}
+        return {"belief_name": self.belief_name, "buds": self._get_buds_dict()}
 
     def _get_buds_dict(self) -> dict:
         return {x_bud.bud_time: x_bud.to_dict() for x_bud in self.buds.values()}
@@ -300,12 +298,12 @@ class BrokerUnit:
     def get_bud_times(self) -> set[TimeLinePoint]:
         return set(self.buds.keys())
 
-    def get_tranbook(self, belief_label: BeliefLabel) -> TranBook:
-        x_tranbook = tranbook_shop(belief_label)
+    def get_tranbook(self, moment_label: MomentLabel) -> TranBook:
+        x_tranbook = tranbook_shop(moment_label)
         for x_bud_time, x_bud in self.buds.items():
             for dst_partner_name, x_quota in x_bud._bud_partner_nets.items():
                 x_tranbook.add_tranunit(
-                    believer_name=self.believer_name,
+                    belief_name=self.belief_name,
                     partner_name=dst_partner_name,
                     tran_time=x_bud_time,
                     amount=x_quota,
@@ -313,8 +311,8 @@ class BrokerUnit:
         return x_tranbook
 
 
-def brokerunit_shop(believer_name: BelieverName) -> BrokerUnit:
-    return BrokerUnit(believer_name=believer_name, buds={}, _sum_partner_bud_nets={})
+def brokerunit_shop(belief_name: BeliefName) -> BrokerUnit:
+    return BrokerUnit(belief_name=belief_name, buds={}, _sum_partner_bud_nets={})
 
 
 def get_budunit_from_dict(x_dict: dict) -> BudUnit:
@@ -333,8 +331,8 @@ def get_budunit_from_json(x_json: str) -> BudUnit:
 
 
 def get_brokerunit_from_dict(x_dict: dict) -> BrokerUnit:
-    x_believer_name = x_dict.get("believer_name")
-    x_brokerunit = brokerunit_shop(x_believer_name)
+    x_belief_name = x_dict.get("belief_name")
+    x_brokerunit = brokerunit_shop(x_belief_name)
     x_brokerunit.buds = get_buds_from_dict(x_dict.get("buds"))
     return x_brokerunit
 

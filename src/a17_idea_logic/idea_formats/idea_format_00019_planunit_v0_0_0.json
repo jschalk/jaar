@@ -18,7 +18,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "moment_label": {
             "otx_key": true
         },
         "gogo_want": {
@@ -33,7 +33,7 @@
         "numor": {
             "otx_key": false
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         },
         "stop_want": {
@@ -42,8 +42,8 @@
     },
     "idea_number": "br00019",
     "dimens": [
+        "momentunit",
         "beliefunit",
-        "believerunit",
-        "believer_planunit"
+        "belief_planunit"
     ]
 }

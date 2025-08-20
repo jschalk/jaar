@@ -1,16 +1,16 @@
-from src.a06_believer_logic.believer_main import believerunit_shop
+from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a12_hub_toolbox.hubunit import hubunit_shop
 from src.a14_keep_logic.rivercycle import get_debtorledger
 from src.a14_keep_logic.riverrun import riverrun_shop
-from src.a14_keep_logic.test._util.a14_env import temp_belief_mstr_dir
+from src.a14_keep_logic.test._util.a14_env import temp_moment_mstr_dir
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
 
 def test_RiverRun_set_partner_tax_yield_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
-    x_belief_mstr_dir = temp_belief_mstr_dir()
-    bob_hubunit = hubunit_shop(x_belief_mstr_dir, None, bob_str)
+    x_moment_mstr_dir = temp_moment_mstr_dir()
+    bob_hubunit = hubunit_shop(x_moment_mstr_dir, None, bob_str)
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
     assert bob_riverrun._tax_yields.get(yao_str) is None
@@ -213,11 +213,11 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_believer = believerunit_shop(bob_str)
-    bob_believer.add_partnerunit(bob_str, 2, bob_tax_yield)
-    bob_believer.add_partnerunit(sue_str, 2, sue_tax_yield)
-    bob_believer.add_partnerunit(yao_str, 2, yao_tax_yield)
-    bob_debtorledger = get_debtorledger(bob_believer)
+    bob_belief = beliefunit_shop(bob_str)
+    bob_belief.add_partnerunit(bob_str, 2, bob_tax_yield)
+    bob_belief.add_partnerunit(sue_str, 2, sue_tax_yield)
+    bob_belief.add_partnerunit(yao_str, 2, yao_tax_yield)
+    bob_debtorledger = get_debtorledger(bob_belief)
     bob_riverrun.set_tax_dues(bob_debtorledger)
     assert bob_riverrun.get_partner_tax_due(bob_str) == 380
     assert bob_riverrun.get_partner_tax_yield(bob_str) == 0

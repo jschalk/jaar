@@ -1,0 +1,33 @@
+{
+    "attributes": {
+        "plan_rope": {
+            "otx_key": true
+        },
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "moment_label": {
+            "otx_key": true
+        },
+        "belief_name": {
+            "otx_key": true
+        },
+        "reason_state_ERASE": {
+            "otx_key": true
+        },
+        "reason_context": {
+            "otx_key": true
+        }
+    },
+    "dimens": [
+        "momentunit",
+        "beliefunit",
+        "belief_planunit",
+        "belief_plan_reasonunit",
+        "belief_plan_reason_caseunit"
+    ],
+    "idea_number": "br00056"
+}

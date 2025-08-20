@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a09_pack_logic.delta import believerdelta_shop
+from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.a09_pack_logic.test._util.a09_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as beliefs_dir,
+    get_module_temp_dir as moments_dir,
 )
-from src.a09_pack_logic.test._util.a09_str import believer_name_str, face_name_str
+from src.a09_pack_logic.test._util.a09_str import belief_name_str, face_name_str
 from src.a09_pack_logic.test._util.example_atoms import (
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,
@@ -16,11 +16,11 @@ from src.a09_pack_logic.test._util.example_atoms import (
 
 def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_atoms_dir = create_path(sue_believer_dir, "atoms")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_atoms_dir = create_path(sue_belief_dir, "atoms")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -46,11 +46,11 @@ def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):
 
 def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_atoms_dir = create_path(sue_believer_dir, "atoms")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_atoms_dir = create_path(sue_belief_dir, "atoms")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -73,11 +73,11 @@ def test_PackUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_atoms_dir = create_path(sue_believer_dir, "atoms")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_atoms_dir = create_path(sue_belief_dir, "atoms")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -100,12 +100,12 @@ def test_PackUnit_open_atom_file_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
     sue_pack_id = 2
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_packs_dir = create_path(sue_believer_dir, "packs")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_packs_dir = create_path(sue_belief_dir, "packs")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -129,18 +129,18 @@ def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
     pack_file_dict = open_json(sue_packs_dir, two_filename)
     print(f"{pack_file_dict=}")
     assert pack_file_dict.get("delta_atom_numbers") == []
-    assert pack_file_dict.get(believer_name_str()) == sue_str
+    assert pack_file_dict.get(belief_name_str()) == sue_str
     assert pack_file_dict.get(face_name_str()) is None
     print(f"{pack_file_dict.keys()=}")
 
 
 def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_packs_dir = create_path(sue_believer_dir, "packs")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_packs_dir = create_path(sue_belief_dir, "packs")
     two_int = 2
     six_int = 6
     two_filename = f"{two_int}.json"
@@ -162,12 +162,12 @@ def test_PackUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
 
 def test_PackUnit_save_files_SavesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_atoms_dir = create_path(sue_believer_dir, "atoms")
-    sue_packs_dir = create_path(sue_believer_dir, "packs")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_atoms_dir = create_path(sue_belief_dir, "atoms")
+    sue_packs_dir = create_path(sue_belief_dir, "packs")
 
     zia_str = "Zia"
     yao_str = "Yao"
@@ -182,8 +182,8 @@ def test_PackUnit_save_files_SavesFiles(env_dir_setup_cleanup):
     int5 = 5
     sports_atom = get_atom_example_planunit_sports()
     knee_atom = get_atom_example_planunit_knee()
-    sue_packunit._believerdelta.set_believeratom(sports_atom)
-    sue_packunit._believerdelta.set_believeratom(knee_atom)
+    sue_packunit._beliefdelta.set_beliefatom(sports_atom)
+    sue_packunit._beliefdelta.set_beliefatom(knee_atom)
     assert sue_packunit.pack_file_exists() is False
     assert sue_packunit.atom_file_exists(int4) is False
     assert sue_packunit.atom_file_exists(int5) is False
@@ -197,13 +197,13 @@ def test_PackUnit_save_files_SavesFiles(env_dir_setup_cleanup):
     assert sue_packunit.atom_file_exists(int5)
 
 
-def test_PackUnit_create_believerdelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
+def test_PackUnit_create_beliefdelta_from_atom_files_SetsAttr(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_atoms_dir = create_path(sue_believer_dir, "atoms")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_atoms_dir = create_path(sue_belief_dir, "atoms")
 
     sue_packunit = packunit_shop(sue_str, _atoms_dir=sue_atoms_dir)
     int4 = 4
@@ -215,29 +215,29 @@ def test_PackUnit_create_believerdelta_from_atom_files_SetsAttr(env_dir_setup_cl
     sue_packunit._save_atom_file(int4, spor_atom)
     sue_packunit._save_atom_file(int5, knee_atom)
     sue_packunit._save_atom_file(int9, ball_atom)
-    assert sue_packunit._believerdelta == believerdelta_shop()
+    assert sue_packunit._beliefdelta == beliefdelta_shop()
 
     # WHEN
     atoms_list = [int4, int5, int9]
-    sue_packunit._create_believerdelta_from_atom_files(atoms_list)
+    sue_packunit._create_beliefdelta_from_atom_files(atoms_list)
 
     # THEN
-    static_believerdelta = believerdelta_shop()
-    static_believerdelta.set_believeratom(spor_atom)
-    static_believerdelta.set_believeratom(knee_atom)
-    static_believerdelta.set_believeratom(ball_atom)
-    assert sue_packunit._believerdelta != believerdelta_shop()
-    assert sue_packunit._believerdelta == static_believerdelta
+    static_beliefdelta = beliefdelta_shop()
+    static_beliefdelta.set_beliefatom(spor_atom)
+    static_beliefdelta.set_beliefatom(knee_atom)
+    static_beliefdelta.set_beliefatom(ball_atom)
+    assert sue_packunit._beliefdelta != beliefdelta_shop()
+    assert sue_packunit._beliefdelta == static_beliefdelta
 
 
 def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_belief_dir = create_path(beliefs_dir(), "amy23")
-    x_believers_dir = create_path(x_belief_dir, "believers")
+    x_moment_dir = create_path(moments_dir(), "amy23")
+    x_beliefs_dir = create_path(x_moment_dir, "beliefs")
     sue_str = "Sue"
-    sue_believer_dir = create_path(x_believers_dir, sue_str)
-    sue_atoms_dir = create_path(sue_believer_dir, "atoms")
-    sue_packs_dir = create_path(sue_believer_dir, "packs")
+    sue_belief_dir = create_path(x_beliefs_dir, sue_str)
+    sue_atoms_dir = create_path(sue_belief_dir, "atoms")
+    sue_packs_dir = create_path(sue_belief_dir, "packs")
 
     yao_str = "Yao"
     sue_delta_start = 4
@@ -249,9 +249,9 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     sports_atom = get_atom_example_planunit_sports()
     knee_atom = get_atom_example_planunit_knee()
     ball_atom = get_atom_example_planunit_ball()
-    src_sue_packunit._believerdelta.set_believeratom(sports_atom)
-    src_sue_packunit._believerdelta.set_believeratom(knee_atom)
-    src_sue_packunit._believerdelta.set_believeratom(ball_atom)
+    src_sue_packunit._beliefdelta.set_beliefatom(sports_atom)
+    src_sue_packunit._beliefdelta.set_beliefatom(knee_atom)
+    src_sue_packunit._beliefdelta.set_beliefatom(ball_atom)
     src_sue_packunit.save_files()
 
     # WHEN
@@ -262,6 +262,6 @@ def test_create_packunit_from_files_ReturnsObj(env_dir_setup_cleanup):
     )
 
     # THEN
-    assert src_sue_packunit.believer_name == new_sue_packunit.believer_name
+    assert src_sue_packunit.belief_name == new_sue_packunit.belief_name
     assert src_sue_packunit.face_name == new_sue_packunit.face_name
-    assert src_sue_packunit._believerdelta == new_sue_packunit._believerdelta
+    assert src_sue_packunit._beliefdelta == new_sue_packunit._beliefdelta

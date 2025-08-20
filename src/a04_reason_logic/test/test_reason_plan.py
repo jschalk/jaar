@@ -13,9 +13,11 @@ from src.a04_reason_logic.reason_plan import (
     reasonunit_shop,
 )
 from src.a04_reason_logic.test._util.a04_str import (
+    cases_str,
     knot_str,
     reason_active_requisite_str,
     reason_context_str,
+    reason_state_str,
 )
 
 
@@ -40,7 +42,7 @@ def test_ReasonCore_Exists():
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         knot_str(),
-        "cases",
+        cases_str(),
         reason_active_requisite_str(),
         reason_context_str(),
     }
@@ -94,7 +96,7 @@ def test_ReasonHeir_clear_SetsAttrs():
     casa_reason.clear_status()
     # THEN
     assert casa_reason._status is None
-    assert casa_reason._rplan_active_value is None
+    assert casa_reason._reason_active_heir is None
 
 
 def test_ReasonHeir_set_status_SetsStatus():
@@ -162,26 +164,26 @@ def test_ReasonHeir_set_status_EmptyFactSetsStatus():
     assert wk_reason._status is False
 
 
-def test_ReasonHeir_set_rplan_active_value_SetsAttr():
+def test_ReasonHeir_set_reason_active_heir_SetsAttr():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope)
-    assert wk_reason._rplan_active_value is None
+    assert wk_reason._reason_active_heir is None
 
     # WHEN
-    wk_reason.set_rplan_active_value(bool_x=True)
+    wk_reason.set_reason_active_heir(bool_x=True)
 
     # THEN
-    assert wk_reason._rplan_active_value
+    assert wk_reason._reason_active_heir
 
 
-def test_ReasonHeir_set_status_BelieverTrueSetsStatusTrue():
+def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope, reason_active_requisite=True)
-    wk_reason.set_rplan_active_value(bool_x=True)
+    wk_reason.set_reason_active_heir(bool_x=True)
     assert wk_reason._status is None
 
     # WHEN
@@ -191,12 +193,12 @@ def test_ReasonHeir_set_status_BelieverTrueSetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BelieverFalseSetsStatusTrue():
+def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=False)
-    wk_reason.set_rplan_active_value(bool_x=False)
+    wk_reason.set_reason_active_heir(bool_x=False)
     assert wk_reason._status is None
 
     # WHEN
@@ -206,12 +208,12 @@ def test_ReasonHeir_set_status_BelieverFalseSetsStatusTrue():
     assert wk_reason._status is True
 
 
-def test_ReasonHeir_set_status_BelieverTrueSetsStatusFalse():
+def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
-    wk_reason.set_rplan_active_value(bool_x=False)
+    wk_reason.set_reason_active_heir(bool_x=False)
     assert wk_reason._status is None
 
     # WHEN
@@ -221,12 +223,12 @@ def test_ReasonHeir_set_status_BelieverTrueSetsStatusFalse():
     assert wk_reason._status is False
 
 
-def test_ReasonHeir_set_status_BelieverNoneSetsStatusFalse():
+def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
-    wk_reason.set_rplan_active_value(bool_x=None)
+    wk_reason.set_reason_active_heir(bool_x=None)
     assert wk_reason._status is None
 
     # WHEN
@@ -266,7 +268,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWithSinglethu_caseequireds():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        "cases": {wed_rope: {"reason_state": wed_rope}},
+        cases_str(): {wed_rope: {reason_state_str(): wed_rope}},
     }
     print(wk_reason_dict)
     assert wk_reason_dict == static_wk_reason_dict
@@ -315,9 +317,9 @@ def test_ReasonUnit_to_dict_ReturnsDictWithTwoCasesReasons():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        "cases": {
-            wed_rope: {"reason_state": wed_rope},
-            thu_rope: {"reason_state": thu_rope},
+        cases_str(): {
+            wed_rope: {reason_state_str(): wed_rope},
+            thu_rope: {reason_state_str(): thu_rope},
         },
     }
     print(wk_reason_dict)

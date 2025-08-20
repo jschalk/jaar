@@ -1,7 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from src.a01_term_logic.term import (
-    BeliefLabel,
-    BelieverName,
+    BeliefName,
     CentralLabel,
     EporTerm,
     EventInt,
@@ -10,6 +9,7 @@ from src.a01_term_logic.term import (
     HealerName,
     KnotTerm,
     LabelTerm,
+    MomentLabel,
     NameTerm,
     PartnerName,
     RopeTerm,
@@ -88,15 +88,15 @@ def test_HealerName_Exists():
     assert inspect_getdoc(bob_healer_str) == doc_str
 
 
-def test_BelieverName_Exists():
+def test_BeliefName_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_BelieverName_str = BelieverName(bob_str)
+    bob_BeliefName_str = BeliefName(bob_str)
     # THEN
-    assert bob_BelieverName_str == bob_str
-    doc_str = "A NameTerm used to identify a BelieverUnit's believer"
-    assert inspect_getdoc(bob_BelieverName_str) == doc_str
+    assert bob_BeliefName_str == bob_str
+    doc_str = "A NameTerm used to identify a BeliefUnit's belief"
+    assert inspect_getdoc(bob_BeliefName_str) == doc_str
 
 
 def test_PartnerName_Exists():
@@ -106,9 +106,7 @@ def test_PartnerName_Exists():
     bob_PartnerName = PartnerName(bob_str)
     # THEN
     assert bob_PartnerName == bob_str
-    doc_str = (
-        "Every PartnerName object is BelieverName, must follow BelieverName format."
-    )
+    doc_str = "Every PartnerName object is BeliefName, must follow BeliefName format."
     assert inspect_getdoc(bob_PartnerName) == doc_str
 
 
@@ -211,12 +209,12 @@ def test_EventInt_Exists():
     assert EventInt(12.4) == 12
 
 
-def test_BeliefLabel_Exists():
+def test_MomentLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_belief = BeliefLabel(empty_str)
+    x_moment = MomentLabel(empty_str)
     # THEN
-    assert x_belief == empty_str
-    doc_str = f"An CentralLabel for a Belief Belief. Cannot contain {knot_str()}"
-    assert inspect_getdoc(x_belief) == doc_str
+    assert x_moment == empty_str
+    doc_str = f"An CentralLabel for a Moment Moment. Cannot contain {knot_str()}"
+    assert inspect_getdoc(x_moment) == doc_str

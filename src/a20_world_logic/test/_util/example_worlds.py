@@ -1,43 +1,43 @@
 from src.a01_term_logic.rope import create_rope
 from src.a04_reason_logic.reason_plan import FactUnit, factunit_shop
-from src.a06_believer_logic.believer_main import BelieverUnit, believerunit_shop
+from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 
-def _example_empty_bob_believerunit() -> BelieverUnit:
+def _example_empty_bob_beliefunit() -> BeliefUnit:
     a23_str = "amy23"
-    return believerunit_shop("Bob", a23_str)
+    return beliefunit_shop("Bob", a23_str)
 
 
-def get_mop_with_no_reason_believerunit_example() -> BelieverUnit:
-    bob_believer = _example_empty_bob_believerunit()
+def get_mop_with_no_reason_beliefunit_example() -> BeliefUnit:
+    bob_belief = _example_empty_bob_beliefunit()
     casa_str = "casa"
     mop_str = "mop"
-    casa_rope = bob_believer.make_l1_rope(casa_str)
-    mop_rope = bob_believer.make_rope(casa_rope, mop_str)
-    bob_believer.add_plan(mop_rope, task=True)
-    return bob_believer
+    casa_rope = bob_belief.make_l1_rope(casa_str)
+    mop_rope = bob_belief.make_rope(casa_rope, mop_str)
+    bob_belief.add_plan(mop_rope, task=True)
+    return bob_belief
 
 
-def get_bob_mop_with_reason_believerunit_example() -> BelieverUnit:
-    bob_believer = _example_empty_bob_believerunit()
+def get_bob_mop_with_reason_beliefunit_example() -> BeliefUnit:
+    bob_belief = _example_empty_bob_beliefunit()
     casa_str = "casa"
     floor_str = "floor status"
     clean_str = "clean"
     dirty_str = "dirty"
     mop_str = "mop"
-    casa_rope = bob_believer.make_l1_rope(casa_str)
-    floor_rope = bob_believer.make_rope(casa_rope, floor_str)
-    clean_rope = bob_believer.make_rope(floor_rope, clean_str)
-    dirty_rope = bob_believer.make_rope(floor_rope, dirty_str)
-    mop_rope = bob_believer.make_rope(casa_rope, mop_str)
-    bob_believer.add_plan(floor_rope)
-    bob_believer.add_plan(clean_rope)
-    bob_believer.add_plan(dirty_rope)
-    bob_believer.add_plan(mop_rope, task=True)
-    bob_believer.edit_plan_attr(
+    casa_rope = bob_belief.make_l1_rope(casa_str)
+    floor_rope = bob_belief.make_rope(casa_rope, floor_str)
+    clean_rope = bob_belief.make_rope(floor_rope, clean_str)
+    dirty_rope = bob_belief.make_rope(floor_rope, dirty_str)
+    mop_rope = bob_belief.make_rope(casa_rope, mop_str)
+    bob_belief.add_plan(floor_rope)
+    bob_belief.add_plan(clean_rope)
+    bob_belief.add_plan(dirty_rope)
+    bob_belief.add_plan(mop_rope, task=True)
+    bob_belief.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=clean_rope
     )
-    return bob_believer
+    return bob_belief
 
 
 def example_casa_clean_factunit() -> FactUnit:

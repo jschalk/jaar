@@ -117,7 +117,7 @@ def test_RiverRun_set_all_initial_rivergrades_OverWritesPrevious():
     assert x_riverrun.rivergrade_exists(sue_str)
 
     # WHEN
-    x_riverrun.delete_keep_credorledgers_believer(xio_str)
+    x_riverrun.delete_keep_credorledgers_belief(xio_str)
     x_riverrun.set_all_initial_rivergrades()
 
     # THEN

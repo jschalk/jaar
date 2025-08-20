@@ -6,7 +6,7 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "moment_label": {
             "otx_key": true
         },
         "healer_name": {
@@ -18,7 +18,7 @@
         "plan_rope": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         },
         "problem_bool": {
@@ -27,9 +27,9 @@
     },
     "idea_number": "br00036",
     "dimens": [
+        "momentunit",
         "beliefunit",
-        "believerunit",
-        "believer_planunit",
-        "believer_plan_healerunit"
+        "belief_planunit",
+        "belief_plan_healerunit"
     ]
 }

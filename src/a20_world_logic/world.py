@@ -3,32 +3,32 @@ from os.path import exists as os_path_exists
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
-from src.a01_term_logic.term import BeliefLabel, EventInt, FaceName
+from src.a01_term_logic.term import EventInt, FaceName, MomentLabel
 from src.a11_bud_logic.bud import TimeLinePoint
-from src.a15_belief_logic.belief_main import BeliefUnit
+from src.a15_moment_logic.moment_main import MomentUnit
 from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
-from src.a18_etl_toolbox.a18_path import create_belief_mstr_path, create_world_db_path
+from src.a18_etl_toolbox.a18_path import create_moment_mstr_path, create_world_db_path
 from src.a18_etl_toolbox.stance_tool import create_stance0001_file
 from src.a18_etl_toolbox.transformers import (
-    add_belief_timeline_to_guts,
+    add_moment_timeline_to_guts,
     create_last_run_metrics_json,
-    etl_belief_guts_to_belief_jobs,
-    etl_belief_job_jsons_to_job_tables,
-    etl_belief_json_partner_nets_to_belief_partner_nets_table,
-    etl_belief_ote1_agg_csvs_to_jsons,
-    etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs,
     etl_brick_agg_tables_to_brick_valid_tables,
     etl_brick_agg_tables_to_events_brick_agg_table,
     etl_brick_raw_tables_to_brick_agg_tables,
     etl_brick_valid_tables_to_sound_raw_tables,
-    etl_create_belief_cell_trees,
     etl_create_bud_mandate_ledgers,
     etl_create_buds_root_cells,
-    etl_event_believer_csvs_to_pack_json,
-    etl_event_inherited_believerunits_to_belief_gut,
-    etl_event_pack_json_to_event_inherited_believerunits,
+    etl_create_moment_cell_trees,
+    etl_event_belief_csvs_to_pack_json,
+    etl_event_inherited_beliefunits_to_moment_gut,
+    etl_event_pack_json_to_event_inherited_beliefunits,
     etl_events_brick_agg_table_to_events_brick_valid_table,
     etl_input_dfs_to_brick_raw_tables,
+    etl_moment_guts_to_moment_jobs,
+    etl_moment_job_jsons_to_job_tables,
+    etl_moment_json_partner_nets_to_moment_partner_nets_table,
+    etl_moment_ote1_agg_csvs_to_jsons,
+    etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs,
     etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
     etl_set_cell_tree_cell_mandates,
     etl_set_cell_trees_decrees,
@@ -36,9 +36,9 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_voice_raw_tables,
-    etl_voice_agg_tables_to_belief_jsons,
-    etl_voice_agg_to_event_believer_csvs,
-    etl_voice_raw_tables_to_belief_ote1_agg,
+    etl_voice_agg_tables_to_moment_jsons,
+    etl_voice_agg_to_event_belief_csvs,
+    etl_voice_raw_tables_to_moment_ote1_agg,
     etl_voice_raw_tables_to_voice_agg_tables,
     get_max_brick_agg_event_int,
 )
@@ -62,8 +62,8 @@ class WorldUnit:
     _world_dir: str = None
     _input_dir: str = None
     _brick_dir: str = None
-    _belief_mstr_dir: str = None
-    _beliefunits: set[BeliefLabel] = None
+    _moment_mstr_dir: str = None
+    _momentunits: set[MomentLabel] = None
     _events: dict[EventInt, FaceName] = None
     _pidgin_events: dict[FaceName, set[EventInt]] = None
 
@@ -90,15 +90,15 @@ class WorldUnit:
     def _set_world_dirs(self):
         self._world_dir = create_path(self.worlds_dir, self.world_name)
         self._brick_dir = create_path(self._world_dir, "brick")
-        self._belief_mstr_dir = create_belief_mstr_path(self._world_dir)
+        self._moment_mstr_dir = create_moment_mstr_path(self._world_dir)
         set_dir(self._world_dir)
         set_dir(self._brick_dir)
-        set_dir(self._belief_mstr_dir)
+        set_dir(self._moment_mstr_dir)
 
-    def calc_belief_bud_partner_mandate_net_ledgers(self):
-        mstr_dir = self._belief_mstr_dir
+    def calc_moment_bud_partner_mandate_net_ledgers(self):
+        mstr_dir = self._moment_mstr_dir
         etl_create_buds_root_cells(mstr_dir)
-        etl_create_belief_cell_trees(mstr_dir)
+        etl_create_moment_cell_trees(mstr_dir)
         etl_set_cell_trees_found_facts(mstr_dir)
         etl_set_cell_trees_decrees(mstr_dir)
         etl_set_cell_tree_cell_mandates(mstr_dir)
@@ -124,8 +124,8 @@ class WorldUnit:
         delete_dir(self._input_dir)
 
     def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
-        delete_dir(self._belief_mstr_dir)
-        set_dir(self._belief_mstr_dir)
+        delete_dir(self._moment_mstr_dir)
+        set_dir(self._moment_mstr_dir)
         # collect excel file data into central location
         etl_input_dfs_to_brick_raw_tables(cursor, self._input_dir)
         # brick raw to sound raw, check by event_ints
@@ -139,28 +139,28 @@ class WorldUnit:
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_voice_raw_tables(cursor)
-        # voice raw to belief/believer jsons
+        # voice raw to moment/belief jsons
         etl_voice_raw_tables_to_voice_agg_tables(cursor)
-        etl_voice_agg_tables_to_belief_jsons(cursor, self._belief_mstr_dir)
-        etl_voice_agg_to_event_believer_csvs(cursor, self._belief_mstr_dir)
-        etl_event_believer_csvs_to_pack_json(self._belief_mstr_dir)
-        etl_event_pack_json_to_event_inherited_believerunits(self._belief_mstr_dir)
-        etl_event_inherited_believerunits_to_belief_gut(self._belief_mstr_dir)
-        add_belief_timeline_to_guts(self._belief_mstr_dir)
-        etl_belief_guts_to_belief_jobs(self._belief_mstr_dir)
-        etl_voice_raw_tables_to_belief_ote1_agg(cursor)
-        etl_belief_ote1_agg_table_to_belief_ote1_agg_csvs(cursor, self._belief_mstr_dir)
-        etl_belief_ote1_agg_csvs_to_jsons(self._belief_mstr_dir)
-        self.calc_belief_bud_partner_mandate_net_ledgers()
-        etl_belief_job_jsons_to_job_tables(cursor, self._belief_mstr_dir)
-        etl_belief_json_partner_nets_to_belief_partner_nets_table(
-            cursor, self._belief_mstr_dir
+        etl_voice_agg_tables_to_moment_jsons(cursor, self._moment_mstr_dir)
+        etl_voice_agg_to_event_belief_csvs(cursor, self._moment_mstr_dir)
+        etl_event_belief_csvs_to_pack_json(self._moment_mstr_dir)
+        etl_event_pack_json_to_event_inherited_beliefunits(self._moment_mstr_dir)
+        etl_event_inherited_beliefunits_to_moment_gut(self._moment_mstr_dir)
+        add_moment_timeline_to_guts(self._moment_mstr_dir)
+        etl_moment_guts_to_moment_jobs(self._moment_mstr_dir)
+        etl_voice_raw_tables_to_moment_ote1_agg(cursor)
+        etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(cursor, self._moment_mstr_dir)
+        etl_moment_ote1_agg_csvs_to_jsons(self._moment_mstr_dir)
+        self.calc_moment_bud_partner_mandate_net_ledgers()
+        etl_moment_job_jsons_to_job_tables(cursor, self._moment_mstr_dir)
+        etl_moment_json_partner_nets_to_moment_partner_nets_table(
+            cursor, self._moment_mstr_dir
         )
         populate_kpi_bundle(cursor)
-        create_last_run_metrics_json(cursor, self._belief_mstr_dir)
+        create_last_run_metrics_json(cursor, self._moment_mstr_dir)
 
-        # # create all belief_job and mandate reports
-        # self.calc_belief_bud_partner_mandate_net_ledgers()
+        # # create all moment_job and mandate reports
+        # self.calc_moment_bud_partner_mandate_net_ledgers()
 
         # if store_tracing_files:
 
@@ -171,7 +171,7 @@ class WorldUnit:
         create_stance0001_file(
             self._world_dir, self.output_dir, self.world_name, prettify_excel_bool
         )
-        create_calendar_markdown_files(self._belief_mstr_dir, self.output_dir)
+        create_calendar_markdown_files(self._moment_mstr_dir, self.output_dir)
 
     def create_kpi_csvs(self):
         create_kpi_csvs(self.get_world_db_path(), self.output_dir)
@@ -189,7 +189,7 @@ def worldunit_shop(
     output_dir: str = None,
     input_dir: str = None,
     world_time_reason_upper: TimeLinePoint = None,
-    _beliefunits: set[BeliefLabel] = None,
+    _momentunits: set[MomentLabel] = None,
 ) -> WorldUnit:
     x_worldunit = WorldUnit(
         world_name=world_name,
@@ -197,7 +197,7 @@ def worldunit_shop(
         output_dir=output_dir,
         world_time_reason_upper=get_0_if_None(world_time_reason_upper),
         _events={},
-        _beliefunits=get_empty_set_if_None(_beliefunits),
+        _momentunits=get_empty_set_if_None(_momentunits),
         _input_dir=input_dir,
         _pidgin_events={},
     )
@@ -207,5 +207,5 @@ def worldunit_shop(
     return x_worldunit
 
 
-def init_beliefunits_from_dirs(x_dirs: list[str]) -> list[BeliefUnit]:
+def init_momentunits_from_dirs(x_dirs: list[str]) -> list[MomentUnit]:
     return []

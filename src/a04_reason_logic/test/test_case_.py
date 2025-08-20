@@ -382,11 +382,11 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     after_str = "afternoon"
     after_rope = create_rope(wk_rope, after_str)
     case_2 = caseunit_shop(reason_state=after_rope)
-    believer_fact_2 = None
+    belief_fact_2 = None
     assert case_2._status is None
 
     # WHEN
-    case_2.set_status(x_factheir=believer_fact_2)
+    case_2.set_status(x_factheir=belief_fact_2)
 
     # THEN
     assert case_2._status is False
@@ -399,11 +399,11 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
-    believer_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
+    belief_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
     assert wed_case._status is None
 
     # WHEN
-    wed_case.set_status(x_factheir=believer_fact)
+    wed_case.set_status(x_factheir=belief_fact)
 
     # THEN
     assert wed_case._status
@@ -684,10 +684,10 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
     assert hr24_case._status is None
 
     # WHEN
-    believer_fact = factheir_shop(
+    belief_fact = factheir_shop(
         fact_context=hr24_rope, fact_state=hr24_rope, fact_lower=8, fact_upper=10
     )
-    hr24_case.set_status(x_factheir=believer_fact)
+    hr24_case.set_status(x_factheir=belief_fact)
 
     # THEN
     assert hr24_case._status is False
@@ -721,13 +721,13 @@ def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
     wk_case = caseunit_shop(
         reason_state=wk_rope, reason_divisor=6, reason_lower=1, reason_upper=1
     )
-    believer_fact = factheir_shop(
+    belief_fact = factheir_shop(
         fact_context=wk_rope, fact_state=wk_rope, fact_lower=7, fact_upper=7
     )
     assert wk_case._status is None
 
     # WHEN
-    wk_case.set_status(x_factheir=believer_fact)
+    wk_case.set_status(x_factheir=belief_fact)
 
     # THEN
     assert wk_case._status
@@ -749,10 +749,10 @@ def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     # THEN
     assert case_dict is not None
     static_dict = {
-        "reason_state": wk_rope,
-        "reason_lower": 1,
-        "reason_upper": 1,
-        "reason_divisor": 6,
+        reason_state_str(): wk_rope,
+        reason_lower_str(): 1,
+        reason_upper_str(): 1,
+        reason_divisor_str(): 6,
     }
     assert case_dict == static_dict
 
@@ -770,7 +770,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
 
     # THEN
     assert case_dict is not None
-    static_dict = {"reason_state": wk_rope, "reason_lower": 1, "reason_upper": 4}
+    static_dict = {reason_state_str(): wk_rope, "reason_lower": 1, "reason_upper": 4}
     assert case_dict == static_dict
 
 
@@ -787,7 +787,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
 
     # THEN
     assert case_dict is not None
-    static_dict = {"reason_state": wk_rope}
+    static_dict = {reason_state_str(): wk_rope}
     assert case_dict == static_dict
 
 
@@ -830,10 +830,10 @@ def test_CaseUnits_get_from_dict_ReturnsCompleteObj():
     wk_rope = create_rope(root_label(), wk_str)
     static_dict = {
         wk_rope: {
-            "reason_state": wk_rope,
-            "reason_lower": 1,
-            "reason_upper": 30,
-            "reason_divisor": 5,
+            reason_state_str(): wk_rope,
+            reason_lower_str(): 1,
+            reason_upper_str(): 30,
+            reason_divisor_str(): 5,
         }
     }
 
@@ -850,7 +850,7 @@ def test_CaseUnits_get_from_dict_BuildsObjFromIncompleteDict():
     # ESTABLISH
     wk_str = "wks"
     wk_rope = create_rope(root_label(), wk_str)
-    static_dict = {wk_rope: {"reason_state": wk_rope}}
+    static_dict = {wk_rope: {reason_state_str(): wk_rope}}
 
     # WHEN
     cases_dict = cases_get_from_dict(static_dict)
@@ -906,18 +906,18 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
 
 def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
     # ESTABLISH
-    old_belief_label = "El Paso"
+    old_moment_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_rope = create_rope(old_belief_label, casa_str)
+    old_casa_rope = create_rope(old_moment_label, casa_str)
     old_seasons_rope = create_rope(old_casa_rope, seasons_str)
     old_caseunit = caseunit_shop(reason_state=old_seasons_rope)
     old_caseunits = {old_caseunit.reason_state: old_caseunit}
     assert old_caseunits.get(old_seasons_rope) == old_caseunit
 
     # WHEN
-    new_belief_label = "Austin"
-    new_casa_rope = create_rope(new_belief_label, casa_str)
+    new_moment_label = "Austin"
+    new_casa_rope = create_rope(new_moment_label, casa_str)
     new_seasons_rope = create_rope(new_casa_rope, seasons_str)
     new_case_ropes = find_replace_rope_key_dict(
         dict_x=old_caseunits, old_rope=old_seasons_rope, new_rope=new_seasons_rope

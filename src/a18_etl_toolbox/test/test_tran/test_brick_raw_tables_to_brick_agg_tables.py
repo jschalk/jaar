@@ -5,10 +5,10 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_belief_logic.test._util.a15_str import (
-    belief_label_str,
+from src.a15_moment_logic.test._util.a15_str import (
     cumulative_minute_str,
     hour_label_str,
+    moment_label_str,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox.test._util.a18_str import (
@@ -36,7 +36,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
         error_message_str(),
@@ -47,7 +47,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 , {error_message_str()}
@@ -113,7 +113,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
         error_message_str(),
@@ -124,7 +124,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 , {error_message_str()}
@@ -184,7 +184,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
         error_message_str(),
@@ -195,7 +195,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 , {error_message_str()}
@@ -240,7 +240,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -268,7 +268,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
-        belief_label_str(),
+        moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
     ]
@@ -278,7 +278,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {event_int_str()}
 , {face_name_str()}
-, {belief_label_str()}
+, {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
 )"""

@@ -9,17 +9,17 @@
         "face_name": {
             "otx_key": true
         },
-        "belief_label": {
+        "moment_label": {
             "otx_key": true
         },
-        "believer_name": {
+        "belief_name": {
             "otx_key": true
         }
     },
     "idea_number": "br00011",
     "dimens": [
+        "momentunit",
         "beliefunit",
-        "believerunit",
-        "believer_partnerunit"
+        "belief_partnerunit"
     ]
 }

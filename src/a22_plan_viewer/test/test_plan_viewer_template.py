@@ -23,7 +23,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     addin_str,
     awardunits_str,
     begin_str,
-    belief_label_str,
     close_str,
     denom_str,
     fund_iota_str,
@@ -31,6 +30,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    moment_label_str,
     morph_str,
     numor_str,
     plan_label_str,
@@ -40,8 +40,8 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_want_str,
     task_str,
 )
-from src.a06_believer_logic.believer_tool import believer_plan_factunit_get_obj
-from src.a06_believer_logic.test._util.a06_str import (
+from src.a06_belief_logic.belief_tool import belief_plan_factunit_get_obj
+from src.a06_belief_logic.test._util.a06_str import (
     factunits_str,
     parent_rope_str,
     planroot_str,
@@ -52,7 +52,7 @@ from src.a07_timeline_logic.reason_str_func import (
 )
 from src.a22_plan_viewer.app import get_plan_viewer_template
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_believerunit
+from src.a22_plan_viewer.test._util.example22_beliefs import get_sue_beliefunit
 
 
 def test_get_plan_viewer_template_ReturnsObj():
@@ -86,12 +86,12 @@ def test_get_plan_viewer_template_ReturnsObj():
         addin_str(),
         awardunits_str(),
         begin_str(),
-        belief_label_str(),
+        moment_label_str(),
         close_str(),
         denom_str(),
         factunits_str(),
         fund_iota_str(),
-        "fund_share",
+        fund_share_str(),
         gogo_want_str(),
         # healerunit_str(),
         # knot_str(),
