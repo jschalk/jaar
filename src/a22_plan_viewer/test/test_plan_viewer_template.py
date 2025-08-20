@@ -40,6 +40,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     task_str,
 )
 from src.a06_believer_logic.believer_tool import believer_plan_factunit_get_obj
+from src.a06_believer_logic.test._util.a06_str import parent_rope_str
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
@@ -86,19 +87,19 @@ def test_get_plan_viewer_template_ReturnsObj():
         "factunits",
         fund_iota_str(),
         "fund_share",
-        # gogo_want_str(),
+        gogo_want_str(),
         # healerunit_str(),
         # knot_str(),
         # "laborunit",
         morph_str(),
         numor_str(),
-        "parent_rope",
+        parent_rope_str(),
         # plan_label_str(),
         # problem_bool_str(),
         # "reasonunits",
         "root",
         star_str(),
-        # stop_want_str(),
+        stop_want_str(),
         task_str(),
     }
 

@@ -87,6 +87,8 @@ def get_plan_viewer_template() -> str:
             <input type="checkbox" id="show_awardlines"><label for="show_awardlines">awardlines</label>
             <input type="checkbox" id="show_all_partner_cred"><label for="show_all_partner_cred">_all_partner_cred</label>
             <input type="checkbox" id="show_all_partner_debt"><label for="show_all_partner_debt">_all_partner_debt</label>
+            <input type="checkbox" id="show_gogo_want"><label for="show_gogo_want">gogo_want</label>
+            <input type="checkbox" id="show_stop_want"><label for="show_stop_want">stop_want</label>
             <input type="checkbox" id="show_gogo_calc"><label for="show_gogo_calc">_gogo_calc</label>
             <input type="checkbox" id="show_stop_calc"><label for="show_stop_calc">_stop_calc</label>
             <input type="checkbox" id="show_addin"><label for="show_addin">addin</label>

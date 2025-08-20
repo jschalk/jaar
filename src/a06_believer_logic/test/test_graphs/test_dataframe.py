@@ -1,8 +1,18 @@
+from src.a05_plan_logic.test._util.a05_str import (
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    morph_str,
+    numor_str,
+    plan_label_str,
+)
 from src.a06_believer_logic.believer_main import believerunit_shop
 from src.a06_believer_logic.report import (
     get_believer_agenda_dataframe,
     get_believer_partnerunits_dataframe,
 )
+from src.a06_believer_logic.test._util.a06_str import parent_rope_str
 from src.a06_believer_logic.test._util.example_believers import (
     believerunit_v001_with_large_agenda,
 )
@@ -86,14 +96,14 @@ def test_get_believer_agenda_dataframe_ReturnsDataFrame():
     partnerunit_colums = {
         "believer_name",
         "fund_ratio",
-        "plan_label",
-        "parent_rope",
-        "begin",
-        "close",
-        "addin",
-        "denom",
-        "numor",
-        "morph",
+        plan_label_str(),
+        parent_rope_str(),
+        begin_str(),
+        close_str(),
+        addin_str(),
+        denom_str(),
+        numor_str(),
+        morph_str(),
     }
     print(f"{set(x_df.columns)=}")
 
@@ -114,14 +124,14 @@ def test_get_believer_agenda_dataframe_ReturnsEmptyDataFrame():
     partnerunit_colums = {
         "believer_name",
         "fund_ratio",
-        "plan_label",
-        "parent_rope",
-        "begin",
-        "close",
-        "addin",
-        "denom",
-        "numor",
-        "morph",
+        plan_label_str(),
+        parent_rope_str(),
+        begin_str(),
+        close_str(),
+        addin_str(),
+        denom_str(),
+        numor_str(),
+        morph_str(),
     }
     print(f"{set(x_df.columns)=}")
 

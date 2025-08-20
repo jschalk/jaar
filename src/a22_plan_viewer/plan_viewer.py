@@ -84,8 +84,12 @@ def set_readable_plan_values(obj: PlanUnit, result: dict):
     result["_all_partner_cred"] = _all_partner_cred_str
     result["_all_partner_debt"] = _all_partner_debt_str
     result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
+    result_gogo_want = result.get("gogo_want")
+    result_stop_want = result.get("stop_want")
     result_gogo_calc = result.get("_gogo_calc")
     result_stop_calc = result.get("_stop_calc")
+    result["gogo_want"] = add_small_dot(f"gogo_want: {result_gogo_want}")
+    result["stop_want"] = add_small_dot(f"stop_want: {result_stop_want}")
     result["_gogo_calc"] = add_small_dot(f"gogo_calc: {result_gogo_calc}")
     result["_stop_calc"] = add_small_dot(f"stop_calc: {result_stop_calc}")
     result_addin = result.get("addin")

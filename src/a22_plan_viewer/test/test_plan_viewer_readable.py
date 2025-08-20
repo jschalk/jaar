@@ -39,6 +39,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     task_str,
 )
 from src.a06_believer_logic.believer_tool import believer_plan_factunit_get_obj
+from src.a06_believer_logic.test._util.a06_str import parent_rope_str
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
@@ -64,7 +65,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     assert set(casa_dict.keys()) == {
         plan_label_str(),
         belief_label_str(),
-        "parent_rope",
+        parent_rope_str(),
         _kids_str(),
         "root",
         star_str(),
@@ -148,7 +149,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
     # }
     expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
-    assert root_plan_view_dict.get("parent_rope") == expected_parent_rope
+    assert root_plan_view_dict.get(parent_rope_str()) == expected_parent_rope
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
@@ -163,7 +164,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     # THEN
     assert casa_dict.get(fund_share_str()) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
-    assert casa_dict.get("parent_rope") == expected_parent_rope
+    assert casa_dict.get(parent_rope_str()) == expected_parent_rope
     expected_all_partner_cred = f"all_partner_cred = {casa_plan._all_partner_cred}"
     expected_all_partner_debt = f"all_partner_debt = {casa_plan._all_partner_debt}"
     expected_all_partner_cred = add_small_dot(expected_all_partner_cred)
@@ -234,8 +235,6 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     # ESTABLISH
-    # TODO create FactUnits
-    # TODO create FactHeirs
     sue_believer = get_sue_casa_believerunit()
 
     # WHEN
@@ -309,23 +308,33 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     assert casa_best_factheir_dict.get(readable_str) == expected_casa_best_factheir_str
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_calc_stop_calc():
+def test_get_plan_view_dict_ReturnsObj_Scenario6_gogo_stop():
     # ESTABLISH
     casa_plan = planunit_shop()
-    casa_gogo = 3
-    casa_stop = 7
-    casa_plan._gogo_calc = casa_gogo
-    casa_plan._stop_calc = casa_stop
+    casa_gogo_want = 13
+    casa_stop_want = 17
+    casa_gogo_calc = 53
+    casa_stop_calc = 57
+    casa_plan.gogo_want = casa_gogo_want
+    casa_plan.stop_want = casa_stop_want
+    casa_plan._gogo_calc = casa_gogo_calc
+    casa_plan._stop_calc = casa_stop_calc
     casa_plan._fund_ratio = 0
 
     # WHEN
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
+    gogo_want_readable = casa_dict.get(gogo_want_str())
+    stop_want_readable = casa_dict.get(stop_want_str())
     gogo_calc_readable = casa_dict.get(_gogo_calc_str())
     stop_calc_readable = casa_dict.get(_stop_calc_str())
+    expected_gogo_want_readable = add_small_dot(f"gogo_want: {casa_plan.gogo_want}")
+    expected_stop_want_readable = add_small_dot(f"stop_want: {casa_plan.stop_want}")
     expected_gogo_calc_readable = add_small_dot(f"gogo_calc: {casa_plan._gogo_calc}")
     expected_stop_calc_readable = add_small_dot(f"stop_calc: {casa_plan._stop_calc}")
+    assert gogo_want_readable == expected_gogo_want_readable
+    assert stop_want_readable == expected_stop_want_readable
     assert gogo_calc_readable == expected_gogo_calc_readable
     assert stop_calc_readable == expected_stop_calc_readable
 
