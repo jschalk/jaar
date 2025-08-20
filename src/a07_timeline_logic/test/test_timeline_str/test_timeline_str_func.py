@@ -78,7 +78,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario1_TwoLevel_state():
 
     # WHEN
     dirty_floors_state_str = get_reason_case_readable_str(
-        context=status_casa_rope, caseunit=dirty_floors_case
+        reason_context=status_casa_rope, caseunit=dirty_floors_case
     )
 
     # THEN
@@ -112,7 +112,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario2_CaseRange():
 
     # WHEN
     dirty_floors_state_str = get_reason_case_readable_str(
-        context=status_casa_rope, caseunit=dirty_floors_case
+        reason_context=status_casa_rope, caseunit=dirty_floors_case
     )
 
     # THEN

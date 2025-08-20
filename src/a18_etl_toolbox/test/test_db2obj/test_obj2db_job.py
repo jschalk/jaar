@@ -211,7 +211,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_reason_active_requisite = 3
     x__chore = 4
     x__status = 5
-    x__rplan_active_value = 6
+    x__reason_active_heir = 6
     values_dict = {
         "coin_label": x_coin_label,
         "belief_name": x_belief_name,
@@ -220,7 +220,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         reason_active_requisite_str(): x_reason_active_requisite,
         "_chore": x__chore,
         "_status": x__status,
-        "_rplan_active_value": x__rplan_active_value,
+        "_reason_active_heir": x__reason_active_heir,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

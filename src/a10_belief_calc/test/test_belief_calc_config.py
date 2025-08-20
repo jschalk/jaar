@@ -290,7 +290,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_blrreas_jmetrics_keys = {
         "_status",
         "_chore",
-        "_rplan_active_value",
+        "_reason_active_heir",
     }
     assert expected_blrreas_jmetrics_keys == blrreas_jmetrics_keys
     expected_blrprem_jmetrics_keys = {"_status", "_chore"}
@@ -666,8 +666,8 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jk, reason_context_str()) == "TEXT"
     assert g_class_type(cfig, blrreas, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrreas, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, blrreas, jm, "_rplan_active_value") == "int"
-    assert g_sqlitetype(cfig, blrreas, jm, "_rplan_active_value") == "INTEGER"
+    assert g_class_type(cfig, blrreas, jm, "_reason_active_heir") == "int"
+    assert g_sqlitetype(cfig, blrreas, jm, "_reason_active_heir") == "INTEGER"
     assert g_class_type(cfig, blrreas, jm, _status_str()) == "int"
     assert g_sqlitetype(cfig, blrreas, jm, _status_str()) == "INTEGER"
     assert g_class_type(cfig, blrreas, jm, _chore_str()) == "int"
@@ -875,7 +875,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(reason_divisor_str()) == "int"
     assert belief_calc_args_type_dict.get(reason_upper_str()) == "float"
     assert belief_calc_args_type_dict.get(reason_lower_str()) == "float"
-    assert belief_calc_args_type_dict.get("_rplan_active_value") == "int"
+    assert belief_calc_args_type_dict.get("_reason_active_heir") == "int"
     assert belief_calc_args_type_dict.get("reason_active_requisite") == "bool"
     assert belief_calc_args_type_dict.get(party_title_str()) == TitleTerm_str()
     assert belief_calc_args_type_dict.get("_belief_name_is_labor") == "int"

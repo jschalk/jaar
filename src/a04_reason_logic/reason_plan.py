@@ -595,7 +595,7 @@ def reasonunit_shop(
 class ReasonHeir(ReasonCore):
     _status: bool = None
     _chore: bool = None
-    _rplan_active_value: bool = None
+    _reason_active_heir: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
         x_cases = {}
@@ -626,13 +626,13 @@ class ReasonHeir(ReasonCore):
                 fact_context = y_factheir
         return fact_context
 
-    def set_rplan_active_value(self, bool_x: bool):
-        self._rplan_active_value = bool_x
+    def set_reason_active_heir(self, bool_x: bool):
+        self._reason_active_heir = bool_x
 
     def is_reason_active_requisite_operational(self) -> bool:
         return (
-            self._rplan_active_value is not None
-            and self._rplan_active_value == self.reason_active_requisite
+            self._reason_active_heir is not None
+            and self._reason_active_heir == self.reason_active_requisite
         )
 
     def is_any_case_true(self) -> tuple[bool, bool]:
@@ -667,7 +667,7 @@ def reasonheir_shop(
     reason_active_requisite: bool = None,
     _status: bool = None,
     _chore: bool = None,
-    _rplan_active_value: bool = None,
+    _reason_active_heir: bool = None,
     knot: str = None,
 ):
     return ReasonHeir(
@@ -676,7 +676,7 @@ def reasonheir_shop(
         reason_active_requisite=reason_active_requisite,
         _status=_status,
         _chore=_chore,
-        _rplan_active_value=_rplan_active_value,
+        _reason_active_heir=_reason_active_heir,
         knot=default_knot_if_None(knot),
     )
 

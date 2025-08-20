@@ -162,7 +162,7 @@ def test_BeliefUnit_reasonheirs_AreInherited_v1():
         reason_context=wk_rope,
         cases=cases,
         _status=False,
-        _rplan_active_value=True,
+        _reason_active_heir=True,
     )
     tue_chore = built_wk_reasonheir.cases.get(case_tue.reason_state)._chore
     assert case_tue._chore == tue_chore
@@ -193,7 +193,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
         reason_context=wk_rope,
         cases=cases_x,
         _status=False,
-        _rplan_active_value=True,
+        _reason_active_heir=True,
     )
     a4_belief.edit_plan_attr(casa_rope, reason=casa_wk_build_reasonunit)
 
@@ -225,8 +225,8 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
-    assert rla_wk_reasonheir._rplan_active_value
-    assert rla_wk_reasonheir._rplan_active_value != casa_wk_built_reasonheir
+    assert rla_wk_reasonheir._reason_active_heir
+    assert rla_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
 
     # 3
     cost_wk_reasonheir = cost_plan._reasonheirs[wk_rope]
@@ -238,8 +238,8 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
-    assert cost_wk_reasonheir._rplan_active_value
-    assert cost_wk_reasonheir._rplan_active_value != casa_wk_built_reasonheir
+    assert cost_wk_reasonheir._reason_active_heir
+    assert cost_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
 
 
 def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
@@ -262,7 +262,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
         reason_context=wk_rope,
         cases=cases,
         _status=False,
-        _rplan_active_value=True,
+        _reason_active_heir=True,
     )
     a4_belief.edit_plan_attr(casa_rope, reason=casa_wk_build_reasonunit)
     rla_str = "hp"
@@ -300,8 +300,8 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     )
     assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert rla_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
-    assert rla_wk_reasonheir._rplan_active_value
-    assert rla_wk_reasonheir._rplan_active_value != casa_wk_built_reasonheir
+    assert rla_wk_reasonheir._reason_active_heir
+    assert rla_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
 
     # 3
     cost_wk_reasonheir = cost_plan._reasonheirs[wk_rope]
@@ -313,8 +313,8 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     )
     assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
     assert cost_wk_reasonheir._chore == casa_wk_built_reasonheir._chore
-    assert cost_wk_reasonheir._rplan_active_value
-    assert cost_wk_reasonheir._rplan_active_value != casa_wk_built_reasonheir
+    assert cost_wk_reasonheir._reason_active_heir
+    assert cost_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
 
 
 def test_BeliefUnit_ReasonUnits_set_UnCoupledMethod():

@@ -132,14 +132,14 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
         cases={wed.reason_state: wed},
         _status=True,
         _chore=False,
-        _rplan_active_value=True,
+        _reason_active_heir=True,
     )
     sta_lh = reasonheir_shop(
         reason_context=nation_rope,
         cases={usa.reason_state: usa},
         _status=True,
         _chore=False,
-        _rplan_active_value=True,
+        _reason_active_heir=True,
     )
 
     x1_reasonunits = {

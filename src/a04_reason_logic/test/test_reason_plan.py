@@ -96,7 +96,7 @@ def test_ReasonHeir_clear_SetsAttrs():
     casa_reason.clear_status()
     # THEN
     assert casa_reason._status is None
-    assert casa_reason._rplan_active_value is None
+    assert casa_reason._reason_active_heir is None
 
 
 def test_ReasonHeir_set_status_SetsStatus():
@@ -164,18 +164,18 @@ def test_ReasonHeir_set_status_EmptyFactSetsStatus():
     assert wk_reason._status is False
 
 
-def test_ReasonHeir_set_rplan_active_value_SetsAttr():
+def test_ReasonHeir_set_reason_active_heir_SetsAttr():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope)
-    assert wk_reason._rplan_active_value is None
+    assert wk_reason._reason_active_heir is None
 
     # WHEN
-    wk_reason.set_rplan_active_value(bool_x=True)
+    wk_reason.set_reason_active_heir(bool_x=True)
 
     # THEN
-    assert wk_reason._rplan_active_value
+    assert wk_reason._reason_active_heir
 
 
 def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
@@ -183,7 +183,7 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope, reason_active_requisite=True)
-    wk_reason.set_rplan_active_value(bool_x=True)
+    wk_reason.set_reason_active_heir(bool_x=True)
     assert wk_reason._status is None
 
     # WHEN
@@ -198,7 +198,7 @@ def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=False)
-    wk_reason.set_rplan_active_value(bool_x=False)
+    wk_reason.set_reason_active_heir(bool_x=False)
     assert wk_reason._status is None
 
     # WHEN
@@ -213,7 +213,7 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
-    wk_reason.set_rplan_active_value(bool_x=False)
+    wk_reason.set_reason_active_heir(bool_x=False)
     assert wk_reason._status is None
 
     # WHEN
@@ -228,7 +228,7 @@ def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
-    wk_reason.set_rplan_active_value(bool_x=None)
+    wk_reason.set_reason_active_heir(bool_x=None)
     assert wk_reason._status is None
 
     # WHEN

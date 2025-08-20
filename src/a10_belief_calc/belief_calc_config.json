@@ -336,7 +336,7 @@
             }
         },
         "jmetrics": {
-            "_rplan_active_value": {
+            "_reason_active_heir": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

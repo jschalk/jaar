@@ -920,7 +920,7 @@ class PlanUnit:
             if reason_context_plan := belief_plan_dict.get(
                 old_reasonheir.reason_context
             ):
-                new_reasonheir.set_rplan_active_value(reason_context_plan._active)
+                new_reasonheir.set_reason_active_heir(reason_context_plan._active)
             self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
     def set_root_plan_reasonheirs(self):

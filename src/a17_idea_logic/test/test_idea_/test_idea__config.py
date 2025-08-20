@@ -374,7 +374,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[167] == "_all_partner_cred"
     assert table_sorting_priority[168] == "_keeps_justified"
     assert table_sorting_priority[169] == "_offtrack_fund"
-    assert table_sorting_priority[170] == "_rplan_active_value"
+    assert table_sorting_priority[170] == "_reason_active_heir"
     assert table_sorting_priority[171] == "_irrational_partner_debt_points"
     assert table_sorting_priority[172] == "_sum_healerunit_share"
     assert table_sorting_priority[173] == "_keeps_buildable"

@@ -11,18 +11,18 @@ from src.a07_timeline_logic.timeline_main import belieftimelinepoint_shop
 
 
 def get_reason_case_readable_str(
-    context: RopeTerm,
+    reason_context: RopeTerm,
     caseunit: CaseUnit,
     timeline_label: LabelTerm = None,
     beliefunit: BeliefUnit = None,
 ) -> str:
     """Returns a string describing reason case in readable language. Will have special cases for time."""
 
-    coin_label = get_root_label_from_rope(context)
+    coin_label = get_root_label_from_rope(reason_context)
     time_rope = create_rope(coin_label, "time")
     timeline_rope = create_rope(time_rope, timeline_label)
     week_rope = create_rope(timeline_rope, "week")
-    if context == week_rope:
+    if reason_context == week_rope:
         week_plan = beliefunit.get_plan_obj(week_rope)
         for weekday_plan in week_plan._kids.values():
             week_lower_bool = caseunit.reason_lower == weekday_plan.gogo_want
@@ -30,7 +30,7 @@ def get_reason_case_readable_str(
             if week_lower_bool and week_upper_bool:
                 return f"case: every {weekday_plan.plan_label}"
 
-    x_str = f"case: {caseunit.reason_state.replace(context, "", 1)}"
+    x_str = f"case: {caseunit.reason_state.replace(reason_context, "", 1)}"
     if caseunit.reason_divisor:
         x_str += f" divided by {caseunit.reason_divisor} then"
     if caseunit.reason_lower is not None and caseunit.reason_upper is not None:
