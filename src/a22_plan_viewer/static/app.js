@@ -29,6 +29,7 @@ let show_close = false;
 let show_denom = false;
 let show_morph = false;
 let show_numor = false;
+let show_active_hx = false;
 let show_parent_rope = false;
 let show_root_boolean = false;
 let show_uid = false;
@@ -64,6 +65,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_denomCheckbox = document.getElementById('show_denom');
     const show_morphCheckbox = document.getElementById('show_morph');
     const show_numorCheckbox = document.getElementById('show_numor');
+    const show_active_hxCheckbox = document.getElementById('show_active_hx');
     const show_parent_ropeCheckbox = document.getElementById('show_parent_rope');
     const show_root_booleanCheckbox = document.getElementById('show_root_boolean');
     const show_uidCheckbox = document.getElementById('show_uid');
@@ -98,6 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_denomCheckbox.addEventListener('change', function () { show_denom = this.checked; renderTree(); });
     show_morphCheckbox.addEventListener('change', function () { show_morph = this.checked; renderTree(); });
     show_numorCheckbox.addEventListener('change', function () { show_numor = this.checked; renderTree(); });
+    show_active_hxCheckbox.addEventListener('change', function () { show_active_hx = this.checked; renderTree(); });
     show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
     show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
     show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
@@ -169,24 +172,25 @@ function renderPlanUnit(planUnit, level) {
     ${activeIndicator}
     ${choreIndicator}
     ${root_booleanIndicator}</i>
-    ${render_new_small_dot(planUnit.parent_rope, indent, show_parent_rope)}
+    ${render_with_indent(planUnit.parent_rope, indent, show_parent_rope)}
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
-    ${render_new_small_dot(planUnit._all_partner_cred, indent, show_all_partner_cred)}
-    ${render_new_small_dot(planUnit._all_partner_debt, indent, show_all_partner_debt)}
-    ${render_new_small_dot(planUnit.gogo_want, indent, show_gogo_want)}
-    ${render_new_small_dot(planUnit.stop_want, indent, show_stop_want)}
-    ${render_new_small_dot(planUnit._gogo_calc, indent, show_gogo_calc)}
-    ${render_new_small_dot(planUnit._stop_calc, indent, show_stop_calc)}
-    ${render_new_small_dot(planUnit.addin, indent, show_addin)}
-    ${render_new_small_dot(planUnit.begin, indent, show_begin)}
-    ${render_new_small_dot(planUnit.close, indent, show_close)}
-    ${render_new_small_dot(planUnit.denom, indent, show_denom)}
-    ${render_new_small_dot(planUnit.morph, indent, show_morph)}
-    ${render_new_small_dot(planUnit.numor, indent, show_numor)}
+    ${render_with_indent(planUnit._all_partner_cred, indent, show_all_partner_cred)}
+    ${render_with_indent(planUnit._all_partner_debt, indent, show_all_partner_debt)}
+    ${render_with_indent(planUnit.gogo_want, indent, show_gogo_want)}
+    ${render_with_indent(planUnit.stop_want, indent, show_stop_want)}
+    ${render_with_indent(planUnit._gogo_calc, indent, show_gogo_calc)}
+    ${render_with_indent(planUnit._stop_calc, indent, show_stop_calc)}
+    ${render_with_indent(planUnit.addin, indent, show_addin)}
+    ${render_with_indent(planUnit.begin, indent, show_begin)}
+    ${render_with_indent(planUnit.close, indent, show_close)}
+    ${render_with_indent(planUnit.denom, indent, show_denom)}
+    ${render_with_indent(planUnit.morph, indent, show_morph)}
+    ${render_with_indent(planUnit.numor, indent, show_numor)}
+    ${render_with_indent(planUnit._active_hx, indent, show_active_hx)}
   </div>\n
 `;
     // Add children
@@ -218,7 +222,7 @@ function render_belief_label(belief_label, knot, show_belief_label) {
 
     return ` ${knot}${belief_label}...`;
 }
-function render_new_small_dot(str, indent, show_bool) {
+function render_with_indent(str, indent, show_bool) {
     if (!str || !show_bool) {
         return '';
     }

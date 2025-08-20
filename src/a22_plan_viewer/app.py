@@ -63,6 +63,7 @@ def get_plan_viewer_template() -> str:
     </head>
     <body>
         <h1>PlanUnit Display</h1>
+        <h5>Each node has a plan_label</h5>
         
         <div class="controls">
             <input type="checkbox" id="show_level"><label for="show_level">level</label>
@@ -97,6 +98,7 @@ def get_plan_viewer_template() -> str:
             <input type="checkbox" id="show_denom"><label for="show_denom">denom</label>
             <input type="checkbox" id="show_morph"><label for="show_morph">morph</label>
             <input type="checkbox" id="show_numor"><label for="show_numor">numor</label>
+            <input type="checkbox" id="show_active_hx"><label for="show_active_hx">active_hx</label>
         </div>
         
         <div id="treeContainer" class="tree-display"></div>

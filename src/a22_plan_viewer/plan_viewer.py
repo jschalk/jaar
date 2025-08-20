@@ -70,15 +70,15 @@ def jaar_objs_asdict(obj: Any) -> dict:
         return obj
 
 
-def set_readable_plan_values(obj: PlanUnit, result: dict):
+def set_readable_plan_values(x_plan: PlanUnit, result: dict):
     result["parent_rope"] = (
-        add_small_dot(obj.parent_rope)
+        add_small_dot(x_plan.parent_rope)
         if result.get("parent_rope") != ""
         else add_small_dot("Root Plan parent_rope is empty str")
     )
-    result["fund_share"] = obj.get_fund_share()
-    _all_partner_cred_str = f"all_partner_cred = {obj._all_partner_cred}"
-    _all_partner_debt_str = f"all_partner_debt = {obj._all_partner_debt}"
+    result["fund_share"] = x_plan.get_fund_share()
+    _all_partner_cred_str = f"all_partner_cred = {x_plan._all_partner_cred}"
+    _all_partner_debt_str = f"all_partner_debt = {x_plan._all_partner_debt}"
     _all_partner_cred_str = add_small_dot(_all_partner_cred_str)
     _all_partner_debt_str = add_small_dot(_all_partner_debt_str)
     result["_all_partner_cred"] = _all_partner_cred_str
@@ -104,6 +104,7 @@ def set_readable_plan_values(obj: PlanUnit, result: dict):
     result["denom"] = add_small_dot(f"denom: {result_denom}")
     result["morph"] = add_small_dot(f"morph: {result_morph}")
     result["numor"] = add_small_dot(f"numor: {result_numor}")
+    result["_active_hx"] = add_small_dot(f"active_hx: {x_plan._active_hx}")
 
 
 def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:

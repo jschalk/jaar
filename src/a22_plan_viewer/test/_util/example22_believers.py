@@ -43,3 +43,47 @@ def get_sue_casa_believerunit() -> BelieverUnit:
     sue_believer.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
     sue_believer.settle_believer()
     return sue_believer
+
+
+def get_believerunit_irrational_example() -> BelieverUnit:
+    # sourcery skip: extract-duplicate-method
+    # this believer has no definitive agenda because 2 task plans are in contradiction
+    # "egg first" is true when "chicken first" is false
+    # "chicken first" is true when "egg first" is true
+    # Step 0: if chicken._active is True, egg._active is set to False
+    # Step 1: if egg._active is False, chicken._active is set to False
+    # Step 2: if chicken._active is False, egg._active is set to True
+    # Step 3: if egg._active is True, chicken._active is set to True
+    # Step 4: back to step 0.
+    # after hatter_believer.settle_believer these should be true:
+    # 1. hatter_believer._irrational is True
+    # 2. hatter_believer._tree_traverse_count = hatter_believer.max_tree_traverse
+
+    hatter_believer = believerunit_shop("Mad Hatter")
+    hatter_believer.set_max_tree_traverse(3)
+
+    egg_str = "egg first"
+    egg_rope = hatter_believer.make_l1_rope(egg_str)
+    hatter_believer.set_l1_plan(planunit_shop(egg_str))
+
+    chicken_str = "chicken first"
+    chicken_rope = hatter_believer.make_l1_rope(chicken_str)
+    hatter_believer.set_l1_plan(planunit_shop(chicken_str))
+
+    # set egg task is True when chicken first is False
+    hatter_believer.edit_plan_attr(
+        egg_rope,
+        task=True,
+        reason_context=chicken_rope,
+        reason_plan_active_requisite=True,
+    )
+
+    # set chick task is True when egg first is False
+    hatter_believer.edit_plan_attr(
+        chicken_rope,
+        task=True,
+        reason_context=egg_rope,
+        reason_plan_active_requisite=False,
+    )
+
+    return hatter_believer

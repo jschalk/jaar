@@ -62,7 +62,7 @@ def test_get_plan_viewer_template_ReturnsObj():
     # THEN
     assert template_str
     expected_strs_in_template = {
-        # _active_hx_str(),
+        _active_hx_str(),
         _active_str(),
         _all_partner_cred_str(),
         _all_partner_debt_str(),
@@ -99,7 +99,7 @@ def test_get_plan_viewer_template_ReturnsObj():
         morph_str(),
         numor_str(),
         parent_rope_str(),
-        # plan_label_str(),
+        plan_label_str(),
         # problem_bool_str(),
         # reasonunits_str(),
         "root",

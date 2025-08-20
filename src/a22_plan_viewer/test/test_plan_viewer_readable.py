@@ -40,14 +40,16 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_want_str,
     task_str,
 )
-from src.a06_believer_logic.believer_tool import believer_plan_factunit_get_obj
 from src.a06_believer_logic.test._util.a06_str import parent_rope_str, planroot_str
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
 from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_believers import get_sue_casa_believerunit
+from src.a22_plan_viewer.test._util.example22_believers import (
+    get_believerunit_irrational_example,
+    get_sue_casa_believerunit,
+)
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
@@ -240,7 +242,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     sue_believer = get_sue_casa_believerunit()
 
     # WHEN
-    casa_dict = get_plan_view_dict(sue_believer.planroot)
+    root_dict = get_plan_view_dict(sue_believer.planroot)
 
     # THEN
     # sports ropes
@@ -264,11 +266,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     tidy_rope = sue_believer.make_rope(casa_rope, "tidy")
 
     # factunits
-    factunits_dict = casa_dict.get(factunits_str())
-    assert len(factunits_dict) == 2
+    root_factunits_dict = root_dict.get(factunits_str())
+    assert len(root_factunits_dict) == 2
     # print(f"{len(factunits_dict)=}")
-    tidi_factunit_dict = factunits_dict.get(tidi_rope)
-    best_factunit_dict = factunits_dict.get(best_rope)
+    tidi_factunit_dict = root_factunits_dict.get(tidi_rope)
+    best_factunit_dict = root_factunits_dict.get(best_rope)
     # print(f"{tidi_factunit_dict=}")
     # print(f"{best_factunit_dict=}")
     readable_str = "readable"
@@ -288,7 +290,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     assert best_factunit_dict.get(readable_str) == expected_best_factunit_str
 
     # factheirs
-    casa_factheirs_dict = casa_dict.get("_factheirs")
+    casa_factheirs_dict = root_dict.get("_factheirs")
     assert len(casa_factheirs_dict) == 2
     print(f"{len(casa_factheirs_dict)=}")
     casa_tidi_factheir_dict = casa_factheirs_dict.get(tidi_rope)
@@ -380,3 +382,26 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_numeric_range_attrs():
     assert casa_denom_readable == expected_casa_denom_readable
     assert casa_morph_readable == expected_casa_morph_readable
     assert casa_numor_readable == expected_casa_numor_readable
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario5_active_hx():
+    # ESTABLISH
+    hatter_believer = get_believerunit_irrational_example()
+    hatter_believer.set_max_tree_traverse(8)
+    hatter_believer.settle_believer()
+    egg_str = "egg first"
+    egg_rope = hatter_believer.make_l1_rope(egg_str)
+    chicken_str = "chicken first"
+    chicken_rope = hatter_believer.make_l1_rope(chicken_str)
+    chicken_plan = hatter_believer.get_plan_obj(chicken_rope)
+
+    # WHEN
+    chicken_dict = get_plan_view_dict(chicken_plan)
+
+    # THEN
+    print(f"{chicken_plan._active_hx=}")
+    # sports ropes
+    chicken_active_hx_str = chicken_dict.get(_active_hx_str())
+    expected_chicken_active_hx_str = f"active_hx: {chicken_plan._active_hx}"
+    expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
+    assert expected_chicken_active_hx_str == chicken_active_hx_str
