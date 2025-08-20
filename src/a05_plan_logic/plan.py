@@ -939,7 +939,7 @@ class PlanUnit:
             for reason_context, reason in self.reasonunits.items()
         }
 
-    def get_kids_dict(self) -> dict[GroupTitle,]:
+    def get_kids_dict(self) -> dict[RopeTerm,]:
         return {c_rope: kid.to_dict() for c_rope, kid in self._kids.items()}
 
     def get_awardunits_dict(self) -> dict[GroupTitle, dict]:

@@ -25,10 +25,9 @@ def get_reason_case_readable_str(
     if context == week_rope:
         week_plan = believerunit.get_plan_obj(week_rope)
         for weekday_plan in week_plan._kids.values():
-            if (
-                caseunit.reason_lower == weekday_plan.gogo_want
-                and caseunit.reason_upper == weekday_plan.stop_want
-            ):
+            week_lower_bool = caseunit.reason_lower == weekday_plan.gogo_want
+            week_upper_bool = caseunit.reason_upper == weekday_plan.stop_want
+            if week_lower_bool and week_upper_bool:
                 return f"case: every {weekday_plan.plan_label}"
 
     x_str = f"case: {caseunit.reason_state.replace(context, "", 1)}"
