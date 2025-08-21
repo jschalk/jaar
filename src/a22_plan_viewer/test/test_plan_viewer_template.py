@@ -15,6 +15,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
+    _laborheir_str,
     _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
@@ -30,6 +31,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    laborunit_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -40,19 +42,8 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_want_str,
     task_str,
 )
-from src.a06_belief_logic.belief_tool import belief_plan_factunit_get_obj
-from src.a06_belief_logic.test._util.a06_str import (
-    factunits_str,
-    parent_rope_str,
-    planroot_str,
-)
-from src.a07_timeline_logic.reason_str_func import (
-    get_fact_state_readable_str,
-    get_reason_case_readable_str,
-)
+from src.a06_belief_logic.test._util.a06_str import factunits_str, parent_rope_str
 from src.a22_plan_viewer.app import get_plan_viewer_template
-from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_beliefs import get_sue_beliefunit
 
 
 def test_get_plan_viewer_template_ReturnsObj():
@@ -77,10 +68,10 @@ def test_get_plan_viewer_template_ReturnsObj():
         _gogo_calc_str(),
         # _healerunit_ratio_str(),
         # _is_expanded_str(),
-        # "_laborheir",
+        _laborheir_str(),
         _level_str(),
         # _range_evaluated_str(),
-        # _reasonheirs_str(),
+        _reasonheirs_str(),
         _stop_calc_str(),
         _uid_str(),
         addin_str(),
@@ -95,13 +86,13 @@ def test_get_plan_viewer_template_ReturnsObj():
         gogo_want_str(),
         # healerunit_str(),
         # knot_str(),
-        # "laborunit",
+        laborunit_str(),
         morph_str(),
         numor_str(),
         parent_rope_str(),
         plan_label_str(),
         # problem_bool_str(),
-        # reasonunits_str(),
+        reasonunits_str(),
         "root",
         star_str(),
         stop_want_str(),

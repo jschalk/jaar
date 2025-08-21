@@ -1,15 +1,16 @@
 import dataclasses
 from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
-from src.a04_reason_logic.reason_plan import ReasonUnit
+from src.a03_group_logic.labor import PartyHeir, PartyUnit
+from src.a04_reason_logic.reason import CaseUnit, ReasonHeir, ReasonUnit
 from src.a05_plan_logic.plan import (
     AwardHeir,
     AwardLine,
     AwardUnit,
     FactHeir,
     FactUnit,
+    LaborHeir,
+    LaborUnit,
     PlanUnit,
-    ReasonHeir,
-    ReasonUnit,
 )
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a07_timeline_logic.reason_str_func import (
@@ -35,46 +36,71 @@ def readable_percent(value: float) -> str:
         return f"{pct:.5f}%".rstrip("0").rstrip(".")
 
 
-def jaar_objs_asdict(obj: Any) -> dict:
+def jaar_objs_asdict(
+    obj: Any, current_belief: BeliefUnit = None, current_reason: ReasonUnit = None
+) -> dict:
+    # sourcery skip: extract-duplicate-method
     """
     Convert a dataclass-like object to dict,
     including extra keys defined in a custom attribute.
     """
-    current_belief = None
-    current_reasonunit = None
     if dataclasses.is_dataclass(obj):
+        if isinstance(obj, BeliefUnit):
+            current_belief = obj
+        elif isinstance(obj, (ReasonUnit, ReasonHeir)):
+            current_reason = obj
         result = {}
         for field in dataclasses.fields(obj):
             value = getattr(obj, field.name)
-            result[field.name] = jaar_objs_asdict(value)
-        if isinstance(obj, BeliefUnit):
-            current_belief = obj
+            result[field.name] = jaar_objs_asdict(value, current_belief, current_reason)
         if isinstance(obj, PlanUnit):
             set_readable_plan_values(obj, result)
         elif isinstance(obj, AwardUnit):
-            readable_str = (
+            obj_readable_str = (
                 f"{obj.awardee_title}: Take {obj.take_force}, Give {obj.give_force}"
             )
-            result["readable"] = add_small_dot(readable_str)
+            result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, AwardHeir):
-            readable_str = f"{obj.awardee_title}: Take {obj.take_force} ({obj._fund_take}), Give {obj.give_force} ({obj._fund_give})"
-            result["readable"] = add_small_dot(readable_str)
+            obj_readable_str = f"{obj.awardee_title}: Take {obj.take_force} ({obj._fund_take}), Give {obj.give_force} ({obj._fund_give})"
+            result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, AwardLine):
-            readable_str = f"{obj.awardee_title}: take_fund ({obj._fund_take}), give_fund ({obj._fund_give})"
-            result["readable"] = add_small_dot(readable_str)
+            obj_readable_str = f"{obj.awardee_title}: take_fund ({obj._fund_take}), give_fund ({obj._fund_give})"
+            result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, (FactUnit, FactHeir)):
-            readable_str = get_fact_state_readable_str(obj, None, current_belief)
-            result["readable"] = add_small_dot(readable_str)
+            obj_readable_str = get_fact_state_readable_str(obj, None, current_belief)
+            result["readable"] = add_small_dot(obj_readable_str)
+        elif isinstance(obj, PartyUnit):
+            solo_str = " Solo: True" if obj.solo else ""
+            obj_readable_str = f"LaborUnit: {obj.party_title}{solo_str}"
+            result["readable"] = add_small_dot(obj_readable_str)
+        elif isinstance(obj, PartyHeir):
+            solo_str = " Solo: True" if obj.solo else ""
+            obj_readable_str = f"LaborHeir: {obj.party_title}{solo_str}"
+            result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, ReasonUnit):
-            current_reasonunit = obj
-        elif isinstance(obj, ReasonUnit):
-            current_reasonunit = obj
+            reason_case_readable_str = f"ReasonUnit: context is {obj.reason_context}"
+            result["readable"] = add_small_dot(reason_case_readable_str)
+        elif isinstance(obj, ReasonHeir):
+            reason_case_readable_str = f"ReasonHeir: context is {obj.reason_context}"
+            result["readable"] = add_small_dot(reason_case_readable_str)
+        elif isinstance(obj, CaseUnit):
+            reason_case_readable_str = get_reason_case_readable_str(
+                reason_context=current_reason.reason_context,
+                caseunit=obj,
+                timeline_label=None,
+                beliefunit=current_belief,
+            )
+            result["readable"] = f"  {add_small_dot(reason_case_readable_str)}"
 
         return result
     elif isinstance(obj, (list, tuple)):
-        return [jaar_objs_asdict(v) for v in obj]
+        b = current_belief
+        r = current_reason
+        return [jaar_objs_asdict(v, b, r) for v in obj]
     elif isinstance(obj, dict):
-        return {k: jaar_objs_asdict(v) for k, v in obj.items()}
+        b = current_belief
+        r = current_reason
+        return {k: jaar_objs_asdict(v, b, r) for k, v in obj.items()}
     else:
         return obj
 

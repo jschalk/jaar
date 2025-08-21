@@ -12,6 +12,7 @@ from src.a07_timeline_logic.test._util.a07_str import (
     hours_config_str,
     monthday_distortion_str,
     months_config_str,
+    readable_str,
     time_str,
     timeline_label_str,
     timeline_str,
@@ -40,6 +41,7 @@ def test_str_functions_ReturnsObj():
     assert hours_config_str() == "hours_config"
     assert monthday_distortion_str() == "monthday_distortion"
     assert months_config_str() == "months_config"
+    assert readable_str() == "readable"
     assert time_str() == "time"
     assert timeline_str() == "timeline"
     assert timeline_label_str() == "timeline_label"

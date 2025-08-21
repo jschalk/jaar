@@ -3,6 +3,8 @@ let treeData = null;
 let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
+let show_laborunit = false;
+let show_laborheir = false;
 let show_level = false;
 let show_moment_label = false;
 let show_task = false;
@@ -10,6 +12,8 @@ let show_descendant_task_count = false;
 let show_active = false;
 let show_chore = false;
 let show_star = false;
+let show_reasonunits = false;
+let show_reasonheirs = false;
 let show_factunits = false;
 let show_factheirs = false;
 let show_fund_share = false;
@@ -39,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
+    const show_laborunitCheckbox = document.getElementById('show_laborunit');
+    const show_laborheirCheckbox = document.getElementById('show_laborheir');
     const show_levelCheckbox = document.getElementById('show_level');
     const show_moment_labelCheckbox = document.getElementById('show_moment_label');
     const show_taskCheckbox = document.getElementById('show_task');
@@ -46,6 +52,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_activeCheckbox = document.getElementById('show_active');
     const show_choreCheckbox = document.getElementById('show_chore');
     const show_starCheckbox = document.getElementById('show_star');
+    const show_reasonunitsCheckbox = document.getElementById('show_reasonunits');
+    const show_reasonheirsCheckbox = document.getElementById('show_reasonheirs');
     const show_factunitsCheckbox = document.getElementById('show_factunits');
     const show_factheirsCheckbox = document.getElementById('show_factheirs');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
@@ -74,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
     show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
+    show_laborunitCheckbox.addEventListener('change', function () { show_laborunit = this.checked; renderTree(); });
+    show_laborheirCheckbox.addEventListener('change', function () { show_laborheir = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
     show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderTree(); });
     show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
@@ -81,6 +91,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
     show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
+    show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderTree(); });
+    show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderTree(); });
     show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderTree(); });
     show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderTree(); });
     show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
@@ -176,6 +188,10 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
+    ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
+    ${renderFlatReadableJson(planUnit._laborheir._partys, indent, show_laborheir)}
+    ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
+    ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
     ${render_with_indent(planUnit._all_partner_cred, indent, show_all_partner_cred)}
@@ -202,7 +218,6 @@ function renderPlanUnit(planUnit, level) {
     return html;
 }
 
-// Render award links for a PlanUnit
 function renderFlatReadableJson(flat_readables, indent, show_readable) {
     if (!flat_readables || Object.keys(flat_readables).length === 0 || !show_readable) {
         return '';
@@ -211,6 +226,26 @@ function renderFlatReadableJson(flat_readables, indent, show_readable) {
     let html = '';
     Object.values(flat_readables).forEach(link => {
         html += `<br>${indent}${link.readable}`;
+    });
+
+    return html;
+}
+function renderReasonReadableJson(n3_readables, indent, show_readable) {
+    if (!n3_readables || Object.keys(n3_readables).length === 0 || !show_readable) {
+        return '';
+    }
+
+    let html = '';
+    Object.values(n3_readables).forEach(link => {
+        // top-level readable
+        html += `<br>${indent}${link.readable || ''}`;
+
+        // second level (cases)
+        if (link.cases && Object.keys(link.cases).length > 0) {
+            Object.values(link.cases).forEach(child => {
+                html += `<br>${indent}${child.readable || ''}`;
+            });
+        }
     });
 
     return html;

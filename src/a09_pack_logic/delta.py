@@ -11,7 +11,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 from src.a01_term_logic.term import RopeTerm, TitleTerm
 from src.a03_group_logic.group import MemberShip
 from src.a03_group_logic.partner import MemberShip, PartnerName, PartnerUnit
-from src.a04_reason_logic.reason_plan import FactUnit, ReasonUnit
+from src.a04_reason_logic.reason import FactUnit, ReasonUnit
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a08_belief_atom_logic.atom_config import CRUD_command

@@ -59,12 +59,7 @@ from src.a03_group_logic.partner import (
     partnerunit_shop,
     partnerunits_get_from_dict,
 )
-from src.a04_reason_logic.reason_plan import (
-    FactUnit,
-    ReasonUnit,
-    RopeTerm,
-    factunit_shop,
-)
+from src.a04_reason_logic.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from src.a05_plan_logic.healer import HealerUnit
 from src.a05_plan_logic.plan import (
     PlanAttrHolder,
@@ -87,6 +82,10 @@ class InvalidLabelException(Exception):
 
 
 class NewKnotException(Exception):
+    pass
+
+
+class reason_caseException(Exception):
     pass
 
 
@@ -833,9 +832,6 @@ class BeliefUnit:
         morph: bool = None,
         task: bool = None,
         factunit: FactUnit = None,
-        descendant_task_count: int = None,
-        all_partner_cred: bool = None,
-        all_partner_debt: bool = None,
         awardunit: AwardUnit = None,
         awardunit_del: GroupTitle = None,
         is_expanded: bool = None,
@@ -846,6 +842,17 @@ class BeliefUnit:
                 if self.get_partnerunit_group_titles_dict().get(x_healer_name) is None:
                     exception_str = f"Plan cannot edit healerunit because group_title '{x_healer_name}' does not exist as group in Belief"
                     raise healerunit_group_title_Exception(exception_str)
+
+        if (
+            reason_context
+            and reason_case
+            and not is_sub_rope(reason_case, reason_context)
+        ):
+            raise reason_caseException(
+                f"""Plan cannot edit reason because reason_case is not sub_rope to reason_context 
+reason_context: {reason_context}
+reason_case:    {reason_case}"""
+            )
 
         x_planattrholder = planattrholder_shop(
             star=star,
@@ -869,9 +876,6 @@ class BeliefUnit:
             numor=numor,
             denom=denom,
             morph=morph,
-            descendant_task_count=descendant_task_count,
-            all_partner_cred=all_partner_cred,
-            all_partner_debt=all_partner_debt,
             awardunit=awardunit,
             awardunit_del=awardunit_del,
             is_expanded=is_expanded,
@@ -1247,7 +1251,7 @@ class BeliefUnit:
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_plantree_factheirs_laborheirs_awardheirs(self):
+    def _set_plantree_factheirs_laborheir_awardheirs(self):
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
             if x_plan.root:
                 x_plan.set_factheirs(x_plan.factunits)
@@ -1268,7 +1272,7 @@ class BeliefUnit:
         self._set_partnerunit_groupunit_respect_ledgers()
         self._clear_partnerunit_fund_attrs()
         self._clear_plantree_fund_and_active_status_attrs()
-        self._set_plantree_factheirs_laborheirs_awardheirs()
+        self._set_plantree_factheirs_laborheir_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:

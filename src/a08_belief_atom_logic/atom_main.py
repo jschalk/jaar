@@ -9,7 +9,7 @@ from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
 from src.a01_term_logic.term import LabelTerm, PartnerName, RopeTerm, TitleTerm
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.partner import partnerunit_shop
-from src.a04_reason_logic.reason_plan import factunit_shop
+from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a06_belief_logic.belief_tool import belief_attr_exists, belief_get_obj

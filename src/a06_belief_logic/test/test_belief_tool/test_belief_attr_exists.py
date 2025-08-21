@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import to_rope
 from src.a03_group_logic.group import awardunit_shop
-from src.a04_reason_logic.reason_plan import factunit_shop, reasonunit_shop
+from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.belief_tool import (
     belief_attr_exists,
@@ -62,6 +62,7 @@ def test_belief_partnerunit_exists_ReturnsObj():
 
 
 def test_belief_partner_membership_exists_ReturnsObj():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"

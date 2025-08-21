@@ -45,7 +45,7 @@ from src.a03_group_logic.labor import (
     laborunit_get_from_dict,
     laborunit_shop,
 )
-from src.a04_reason_logic.reason_plan import (
+from src.a04_reason_logic.reason import (
     FactCore,
     FactHeir,
     FactUnit,
@@ -114,9 +114,6 @@ class PlanAttrHolder:
     morph: bool = None
     task: bool = None
     factunit: FactUnit = None
-    descendant_task_count: int = None
-    all_partner_cred: bool = None
-    all_partner_debt: bool = None
     awardunit: AwardUnit = None
     awardunit_del: GroupTitle = None
     is_expanded: bool = None
@@ -161,9 +158,6 @@ def planattrholder_shop(
     morph: bool = None,
     task: bool = None,
     factunit: FactUnit = None,
-    descendant_task_count: int = None,
-    all_partner_cred: bool = None,
-    all_partner_debt: bool = None,
     awardunit: AwardUnit = None,
     awardunit_del: GroupTitle = None,
     is_expanded: bool = None,
@@ -193,9 +187,6 @@ def planattrholder_shop(
         morph=morph,
         task=task,
         factunit=factunit,
-        descendant_task_count=descendant_task_count,
-        all_partner_cred=all_partner_cred,
-        all_partner_debt=all_partner_debt,
         awardunit=awardunit,
         awardunit_del=awardunit_del,
         is_expanded=is_expanded,
@@ -649,12 +640,6 @@ class PlanUnit:
             self.denom = plan_attr.denom
         if plan_attr.morph is not None:
             self.morph = plan_attr.morph
-        if plan_attr.descendant_task_count is not None:
-            self._descendant_task_count = plan_attr.descendant_task_count
-        if plan_attr.all_partner_cred is not None:
-            self._all_partner_cred = plan_attr.all_partner_cred
-        if plan_attr.all_partner_debt is not None:
-            self._all_partner_debt = plan_attr.all_partner_debt
         if plan_attr.awardunit is not None:
             self.set_awardunit(awardunit=plan_attr.awardunit)
         if plan_attr.awardunit_del is not None:

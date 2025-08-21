@@ -50,6 +50,10 @@ def months_config_str() -> str:
     return "months_config"
 
 
+def readable_str() -> str:
+    return "readable"
+
+
 def time_str() -> str:
     return "time"
 

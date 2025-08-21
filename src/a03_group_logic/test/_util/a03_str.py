@@ -41,6 +41,10 @@ def _irrational_partner_debt_points_str() -> str:
     return "_irrational_partner_debt_points"
 
 
+def _laborheir_str() -> str:
+    return "_laborheir"
+
+
 def _memberships_str() -> str:
     return "_memberships"
 
@@ -83,6 +87,10 @@ def group_debt_points_str() -> str:
 
 def group_title_str() -> str:
     return "group_title"
+
+
+def laborunit_str() -> str:
+    return "laborunit"
 
 
 def partner_cred_points_str() -> str:

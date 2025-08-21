@@ -67,6 +67,7 @@ def test_str_functions_ReturnsObj():
     assert fund_share_str() == "fund_share"
     assert gogo_want_str() == "gogo_want"
     assert healerunit_str() == "healerunit"
+
     assert star_str() == "star"
     assert morph_str() == "morph"
     assert numor_str() == "numor"

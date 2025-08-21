@@ -1,52 +1,18 @@
 from flask import Flask, jsonify, render_template_string
-from src.a03_group_logic.group import awardunit_shop
-from src.a05_plan_logic.plan import planunit_shop
-from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
+)
+from src.a22_plan_viewer.example22_beliefs import (
+    get_beliefunit_irrational_example,
+    get_sue_belief_with_facts_and_reasons,
+    get_sue_beliefunit,
 )
 from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
 
 app = Flask(__name__)
 
-sue_belief = beliefunit_shop("Sue", "accord23")
-casa_rope = sue_belief.make_l1_rope("casa")
-clean_rope = sue_belief.make_rope(casa_rope, "clean")
-mop_rope = sue_belief.make_rope(clean_rope, "mop")
-sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
-tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
-dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
-tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
-sue_belief.add_plan(casa_rope, 3)
-sue_belief.add_plan(tidi_rope, 7)
-sue_belief.add_plan(dirty_rope, 1)
-sue_belief.add_plan(tidy_rope, 3)
-sue_belief.add_plan(clean_rope, 3)
-sue_belief.add_plan(mop_rope, 3, task=True)
-sue_belief.add_plan(sweep_rope, 3, task=True)
-sports_rope = sue_belief.make_l1_rope("sports")
-best_rope = sue_belief.make_rope(sports_rope, "best sport")
-best_soccer_rope = sue_belief.make_rope(best_rope, "soccer")
-best_swim_rope = sue_belief.make_rope(best_rope, "swim")
-best_run_rope = sue_belief.make_rope(best_rope, "run")
-sue_belief.add_plan(sports_rope, 5)
-sue_belief.add_plan(best_soccer_rope, 5)
-sue_belief.add_plan(best_swim_rope, 5)
-sue_belief.add_plan(best_run_rope, 5)
-sue_belief.add_fact(tidi_rope, dirty_rope, 4, 8)
-sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
-
-# Add some award links
-casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
-casa_team_awardunit = awardunit_shop("Team Lead", 0.3, 0.1)
-casa_devloper_awardunit = awardunit_shop("Sue", 1, 0.8)
-casa_jundevloper_awardunit = awardunit_shop("Bob", 0.7, 0.9)
-root_rope = sue_belief.planroot.get_plan_rope()
-sue_belief.edit_plan_attr(root_rope, awardunit=casa_manager_awardunit)
-sue_belief.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
-sue_belief.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
-sue_belief.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
+sue_belief = get_sue_belief_with_facts_and_reasons()
 add_newtimeline_planunit(sue_belief, get_default_timeline_config_dict())
 sue_belief.cash_out()
 
@@ -81,11 +47,15 @@ def get_plan_viewer_template() -> str:
             <input type="checkbox" id="show_parent_rope"><label for="show_parent_rope">parent_rope</label>
             <input type="checkbox" id="show_root_boolean"><label for="show_root_boolean">root_boolean</label>
             <input type="checkbox" id="show_uid"><label for="show_uid">uid</label>
+            <input type="checkbox" id="show_reasonunits"><label for="show_reasonunits">reasonunits</label>
+            <input type="checkbox" id="show_reasonheirs"><label for="show_reasonheirs">reasonheirs</label>
             <input type="checkbox" id="show_factunits"><label for="show_factunits">factunits</label>
             <input type="checkbox" id="show_factheirs"><label for="show_factheirs">factheirs</label>
             <input type="checkbox" id="show_awardunits"><label for="show_awardunits">awardunits</label>
             <input type="checkbox" id="show_awardheirs"><label for="show_awardheirs">awardheirs</label>
             <input type="checkbox" id="show_awardlines"><label for="show_awardlines">awardlines</label>
+            <input type="checkbox" id="show_laborunit"><label for="show_laborunit">laborunit</label>
+            <input type="checkbox" id="show_laborheir"><label for="show_laborheir">laborheir</label>
             <input type="checkbox" id="show_all_partner_cred"><label for="show_all_partner_cred">_all_partner_cred</label>
             <input type="checkbox" id="show_all_partner_debt"><label for="show_all_partner_debt">_all_partner_debt</label>
             <input type="checkbox" id="show_gogo_want"><label for="show_gogo_want">gogo_want</label>

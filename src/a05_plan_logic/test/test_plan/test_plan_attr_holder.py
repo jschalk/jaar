@@ -1,5 +1,22 @@
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
+from src.a05_plan_logic.test._util.a05_str import (
+    _is_expanded_str,
+    _uid_str,
+    addin_str,
+    begin_str,
+    close_str,
+    denom_str,
+    gogo_want_str,
+    healerunit_str,
+    laborunit_str,
+    morph_str,
+    numor_str,
+    problem_bool_str,
+    star_str,
+    stop_want_str,
+    task_str,
+)
 
 
 def test_PlanAttrHolder_Exists():
@@ -28,12 +45,38 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.morph is None
     assert new_obj.task is None
     assert new_obj.factunit is None
-    assert new_obj.descendant_task_count is None
-    assert new_obj.all_partner_cred is None
-    assert new_obj.all_partner_debt is None
     assert new_obj.awardunit is None
     assert new_obj.awardunit_del is None
     assert new_obj.is_expanded is None
+    assert set(new_obj.__dict__.keys()) == {
+        star_str(),
+        "uid",
+        "reason",
+        "reason_context",
+        "reason_case",
+        "reason_lower",
+        "reason_upper",
+        "reason_divisor",
+        "reason_del_case_reason_context",
+        "reason_del_case_reason_state",
+        "reason_plan_active_requisite",
+        laborunit_str(),
+        healerunit_str(),
+        begin_str(),
+        close_str(),
+        addin_str(),
+        numor_str(),
+        denom_str(),
+        morph_str(),
+        task_str(),
+        "factunit",
+        "awardunit",
+        "awardunit_del",
+        "is_expanded",
+        problem_bool_str(),
+        stop_want_str(),
+        gogo_want_str(),
+    }
 
 
 def test_PlanAttrHolder_CalculatesCaseRanges():

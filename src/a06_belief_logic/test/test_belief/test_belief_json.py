@@ -3,7 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.a01_term_logic.rope import default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop, partyunit_shop
-from src.a04_reason_logic.reason_plan import factunit_shop
+from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import (
@@ -13,6 +13,7 @@ from src.a06_belief_logic.belief_main import (
 )
 from src.a06_belief_logic.test._util.a06_str import (
     factunits_str,
+    laborunit_str,
     planroot_str,
     reasonunits_str,
 )
@@ -85,9 +86,11 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     planroot_dict = belief_dict.get(planroot_str())
 
     # THEN
-    assert planroot_dict["laborunit"] == x_laborunit.to_dict()
+    assert planroot_dict[laborunit_str()] == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
-    assert planroot_dict["laborunit"] == {"_partys": {run_str: run_partyunit.to_dict()}}
+    assert planroot_dict[laborunit_str()] == {
+        "_partys": {run_str: run_partyunit.to_dict()}
+    }
     assert planroot_dict.get("gogo_want") == x_gogo_want
     assert planroot_dict.get("stop_want") == x_stop_want
 

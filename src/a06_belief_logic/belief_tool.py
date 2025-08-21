@@ -4,7 +4,7 @@ from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.group import AwardUnit, MemberShip
 from src.a03_group_logic.partner import PartnerUnit
-from src.a04_reason_logic.reason_plan import (
+from src.a04_reason_logic.reason import (
     CaseUnit,
     FactUnit,
     ReasonUnit,
@@ -307,3 +307,15 @@ def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, d
 def clear_factunits_from_belief(x_belief: BeliefUnit):
     for fact_reason_context in get_belief_root_facts_dict(x_belief).keys():
         x_belief.del_fact(fact_reason_context)
+
+
+def set_case_attr(
+    belief: BeliefUnit,
+    plan_rope: RopeTerm,
+    reason_context: RopeTerm,
+    reason_case: RopeTerm,
+):
+    """Wrapper for method that edit beliefunit plan nodes reasonunits."""
+    belief.edit_plan_attr(
+        plan_rope=plan_rope, reason_context=reason_context, reason_case=reason_case
+    )
