@@ -1,7 +1,8 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.a03_group_logic.group import awardunit_shop
-from src.a04_reason_logic.reason import factunit_shop
+from src.a03_group_logic.labor import laborunit_shop
+from src.a04_reason_logic.reason import caseunit_shop, factunit_shop, reasonunit_shop
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
@@ -528,6 +529,102 @@ def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario09_problem_bool
 
     # THEN
     assert sue_belief.planroot._kids[casa_str].problem_bool == x_problem_bool
+
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario10_laborunit():
+    # ESTABLISH
+    xio_belief = beliefunit_shop("Xio")
+    run_str = "run"
+    run_rope = xio_belief.make_l1_rope(run_str)
+    xio_belief.set_l1_plan(planunit_shop(run_str))
+    run_plan = xio_belief.get_plan_obj(run_rope)
+    sue_str = "Sue"
+    sue_laborunit = laborunit_shop()
+    sue_laborunit.add_party(sue_str)
+    assert run_plan.laborunit == laborunit_shop()
+
+    # WHEN
+    xio_belief.edit_plan_attr(run_rope, laborunit=sue_laborunit)
+
+    # THEN
+    assert run_plan.laborunit == sue_laborunit
+
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario11_reasonunit():
+    # ESTABLISH
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
+    sem_jour_str = "sem_jours"
+    sem_jour_rope = sue_belief.make_l1_rope(sem_jour_str)
+    wed_str = "Wed"
+    wed_rope = sue_belief.make_rope(sem_jour_rope, wed_str)
+
+    wed_case = caseunit_shop(reason_state=wed_rope)
+    casa_wk_reason = reasonunit_shop(sem_jour_rope, {wed_case.reason_state: wed_case})
+    print(f"{type(casa_wk_reason.reason_context)=}")
+    print(f"{casa_wk_reason.reason_context=}")
+
+    # WHEN
+    sue_belief.edit_plan_attr(casa_rope, reason=casa_wk_reason)
+
+    # THEN
+    casa_plan = sue_belief.get_plan_obj(casa_rope)
+    assert casa_plan.reasonunits is not None
+    print(casa_plan.reasonunits)
+    assert casa_plan.reasonunits[sem_jour_rope] is not None
+    assert casa_plan.reasonunits[sem_jour_rope] == casa_wk_reason
+
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario12_reasonunit_knot():
+    # ESTABLISH
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    wk_rope = sue_belief.make_l1_rope("sem_jours")
+    wed_rope = sue_belief.make_rope(wk_rope, "Wed")
+
+    slash_str = "/"
+    before_wk_reason = reasonunit_shop(wk_rope, knot=slash_str)
+    before_wk_reason.set_case(wed_rope)
+    assert before_wk_reason.knot == slash_str
+
+    # WHEN
+    sue_belief.edit_plan_attr(casa_rope, reason=before_wk_reason)
+
+    # THEN
+    casa_plan = sue_belief.get_plan_obj(casa_rope)
+    wk_reasonunit = casa_plan.reasonunits.get(wk_rope)
+    assert wk_reasonunit.knot != slash_str
+    assert wk_reasonunit.knot == sue_belief.knot
+
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario13_reason_context_knot():
+    # ESTABLISH
+    slash_str = "/"
+    bob_belief = beliefunit_shop("Bob", knot=slash_str)
+    casa_str = "casa"
+    wk_str = "wk"
+    wed_str = "Wed"
+    casa_rope = bob_belief.make_l1_rope(casa_str)
+    wk_rope = bob_belief.make_l1_rope(wk_str)
+    wed_rope = bob_belief.make_rope(wk_rope, wed_str)
+    bob_belief.set_l1_plan(planunit_shop(casa_str))
+    bob_belief.set_l1_plan(planunit_shop(wk_str))
+    bob_belief.set_plan(planunit_shop(wed_str), wk_rope)
+    print(f"{bob_belief.planroot._kids.keys()=}")
+    wed_plan = bob_belief.get_plan_obj(wed_rope)
+    assert wed_plan.knot == slash_str
+    assert wed_plan.knot == bob_belief.knot
+
+    # WHEN
+    bob_belief.edit_plan_attr(casa_rope, reason_context=wk_rope, reason_case=wed_rope)
+
+    # THEN
+    casa_plan = bob_belief.get_plan_obj(casa_rope)
+    assert casa_plan.knot == slash_str
+    wk_reasonunit = casa_plan.reasonunits.get(wk_rope)
+    assert wk_reasonunit.knot != ","
+    assert wk_reasonunit.knot == bob_belief.knot
 
 
 def test_BeliefUnit_edit_plan_attr_RaisesErrorWhen_healerunit_healer_names_DoNotExist():

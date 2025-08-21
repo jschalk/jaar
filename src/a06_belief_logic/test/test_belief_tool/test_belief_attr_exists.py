@@ -62,6 +62,7 @@ def test_belief_partnerunit_exists_ReturnsObj():
 
 
 def test_belief_partner_membership_exists_ReturnsObj():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"

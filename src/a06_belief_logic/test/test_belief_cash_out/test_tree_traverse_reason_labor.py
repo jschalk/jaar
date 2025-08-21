@@ -4,25 +4,6 @@ from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 
 
-def test_BeliefUnit_edit_plan_attr_SetsLaborUnit():
-    # ESTABLISH
-    xio_belief = beliefunit_shop("Xio")
-    run_str = "run"
-    run_rope = xio_belief.make_l1_rope(run_str)
-    xio_belief.set_l1_plan(planunit_shop(run_str))
-    run_plan = xio_belief.get_plan_obj(run_rope)
-    sue_str = "Sue"
-    sue_laborunit = laborunit_shop()
-    sue_laborunit.add_party(sue_str)
-    assert run_plan.laborunit == laborunit_shop()
-
-    # WHEN
-    xio_belief.edit_plan_attr(run_rope, laborunit=sue_laborunit)
-
-    # THEN
-    assert run_plan.laborunit == sue_laborunit
-
-
 def test_BeliefUnit_cash_out_Sets_planroot_laborheirFrom_planroot_laborunit():
     # ESTABLISH
     sue_str = "Sue"
