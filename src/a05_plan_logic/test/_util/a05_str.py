@@ -68,6 +68,10 @@ def _kids_str() -> str:
     return "_kids"
 
 
+def _laborheir_str() -> str:
+    return "_laborheir"
+
+
 def _level_str() -> str:
     return "_level"
 
@@ -118,6 +122,10 @@ def healer_name_str() -> str:
 
 def healerunit_str() -> str:
     return "healerunit"
+
+
+def laborunit_str() -> str:
+    return "laborunit"
 
 
 def morph_str() -> str:

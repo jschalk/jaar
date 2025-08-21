@@ -13,6 +13,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
+    _laborheir_str,
     _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
@@ -26,6 +27,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healer_name_str,
     healerunit_str,
+    laborunit_str,
     morph_str,
     numor_str,
     plan_label_str,
@@ -52,6 +54,7 @@ def test_str_functions_ReturnsObj():
     assert _gogo_calc_str() == "_gogo_calc"
     assert _healerunit_ratio_str() == "_healerunit_ratio"
     assert _is_expanded_str() == "_is_expanded"
+    assert _laborheir_str() == "_laborheir"
     assert _level_str() == "_level"
     assert _kids_str() == "_kids"
     assert _range_evaluated_str() == "_range_evaluated"
@@ -67,6 +70,7 @@ def test_str_functions_ReturnsObj():
     assert fund_share_str() == "fund_share"
     assert gogo_want_str() == "gogo_want"
     assert healerunit_str() == "healerunit"
+    assert laborunit_str() == "laborunit"
     assert star_str() == "star"
     assert morph_str() == "morph"
     assert numor_str() == "numor"

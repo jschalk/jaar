@@ -46,6 +46,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    laborunit_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -222,10 +223,10 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[reasonunits_str()] == casa_plan.get_reasonunits_dict()
     assert casa_dict[awardunits_str()] == casa_plan.get_awardunits_dict()
     assert casa_dict[awardunits_str()] == x1_awardunits
-    assert casa_dict["laborunit"] == sue_laborunit.to_dict()
+    assert casa_dict[laborunit_str()] == sue_laborunit.to_dict()
     assert casa_dict["healerunit"] == yao_healerunit.to_dict()
-    assert casa_dict["star"] == casa_plan.star
-    assert casa_dict["plan_label"] == casa_plan.plan_label
+    assert casa_dict[star_str()] == casa_plan.star
+    assert casa_dict[plan_label_str()] == casa_plan.plan_label
     assert casa_dict["_uid"] == casa_plan._uid
     assert casa_dict[begin_str()] == casa_plan.begin
     assert casa_dict[close_str()] == casa_plan.close
@@ -286,10 +287,10 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
 
     # THEN
     assert casa_dict.get("_is_expanded") is False
-    assert casa_dict.get("task")
+    assert casa_dict.get(task_str())
     assert casa_dict.get(factunits_str()) is not None
     assert casa_dict.get(awardunits_str()) is not None
-    assert casa_dict.get("laborunit") is not None
+    assert casa_dict.get(laborunit_str()) is not None
     assert casa_dict.get("_kids") is not None
 
 
@@ -309,9 +310,9 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
 
     # THEN
     assert casa_dict.get("_is_expanded") is None
-    assert casa_dict.get("task") is None
+    assert casa_dict.get(task_str()) is None
     assert casa_dict.get(factunits_str()) is None
     assert casa_dict.get(awardunits_str()) is None
-    assert casa_dict.get("laborunit") is None
+    assert casa_dict.get(laborunit_str()) is None
     assert casa_dict.get("healerunit") is None
     assert casa_dict.get("_kids") is None
