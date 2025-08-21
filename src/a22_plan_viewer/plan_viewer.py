@@ -68,6 +68,9 @@ def jaar_objs_asdict(
         elif isinstance(obj, ReasonUnit):
             reason_case_readable_str = f"ReasonUnit: context is {obj.reason_context}"
             result["readable"] = add_small_dot(reason_case_readable_str)
+        elif isinstance(obj, ReasonHeir):
+            reason_case_readable_str = f"ReasonHeir: context is {obj.reason_context}"
+            result["readable"] = add_small_dot(reason_case_readable_str)
         elif isinstance(obj, CaseUnit):
             reason_case_readable_str = get_reason_case_readable_str(
                 reason_context=current_reason.reason_context,

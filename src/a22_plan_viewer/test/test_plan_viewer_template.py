@@ -69,7 +69,7 @@ def test_get_plan_viewer_template_ReturnsObj():
         # "_laborheir",
         _level_str(),
         # _range_evaluated_str(),
-        # _reasonheirs_str(),
+        _reasonheirs_str(),
         _stop_calc_str(),
         _uid_str(),
         addin_str(),

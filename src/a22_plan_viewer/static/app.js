@@ -11,6 +11,7 @@ let show_active = false;
 let show_chore = false;
 let show_star = false;
 let show_reasonunits = false;
+let show_reasonheirs = false;
 let show_factunits = false;
 let show_factheirs = false;
 let show_fund_share = false;
@@ -48,6 +49,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_choreCheckbox = document.getElementById('show_chore');
     const show_starCheckbox = document.getElementById('show_star');
     const show_reasonunitsCheckbox = document.getElementById('show_reasonunits');
+    const show_reasonheirsCheckbox = document.getElementById('show_reasonheirs');
     const show_factunitsCheckbox = document.getElementById('show_factunits');
     const show_factheirsCheckbox = document.getElementById('show_factheirs');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
@@ -84,6 +86,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
     show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderTree(); });
+    show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderTree(); });
     show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderTree(); });
     show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderTree(); });
     show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
@@ -180,6 +183,7 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
+    ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
     ${render_with_indent(planUnit._all_partner_cred, indent, show_all_partner_cred)}

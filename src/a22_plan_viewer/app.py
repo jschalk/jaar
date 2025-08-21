@@ -15,6 +15,8 @@ sue_belief = beliefunit_shop("Sue", "accord23")
 casa_rope = sue_belief.make_l1_rope("casa")
 clean_rope = sue_belief.make_rope(casa_rope, "clean")
 mop_rope = sue_belief.make_rope(clean_rope, "mop")
+mop_fancy_rope = sue_belief.make_rope(mop_rope, "use fancy mop")
+mop_rope = sue_belief.make_rope(clean_rope, "mop")
 sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
 tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
 dirty_rope = sue_belief.make_rope(tidi_rope, "dirty")
@@ -25,6 +27,7 @@ sue_belief.add_plan(dirty_rope, 1)
 sue_belief.add_plan(tidy_rope, 3)
 sue_belief.add_plan(clean_rope, 3)
 sue_belief.add_plan(mop_rope, 3, task=True)
+sue_belief.add_plan(mop_fancy_rope, 3, task=True)
 sue_belief.add_plan(sweep_rope, 3, task=True)
 sports_rope = sue_belief.make_l1_rope("sports")
 best_rope = sue_belief.make_rope(sports_rope, "best sport")
@@ -85,6 +88,7 @@ def get_plan_viewer_template() -> str:
             <input type="checkbox" id="show_root_boolean"><label for="show_root_boolean">root_boolean</label>
             <input type="checkbox" id="show_uid"><label for="show_uid">uid</label>
             <input type="checkbox" id="show_reasonunits"><label for="show_reasonunits">reasonunits</label>
+            <input type="checkbox" id="show_reasonheirs"><label for="show_reasonheirs">reasonheirs</label>
             <input type="checkbox" id="show_factunits"><label for="show_factunits">factunits</label>
             <input type="checkbox" id="show_factheirs"><label for="show_factheirs">factheirs</label>
             <input type="checkbox" id="show_awardunits"><label for="show_awardunits">awardunits</label>

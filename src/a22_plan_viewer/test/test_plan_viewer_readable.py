@@ -401,7 +401,85 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     print(f"{expected_tidy_case_readable=}")
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario7_gogo_stop():
+def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
+    # ESTABLISH
+    sue_belief = get_sue_belief_with_facts_and_reasons()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    clean_rope = sue_belief.make_rope(casa_rope, "clean")
+    mop_rope = sue_belief.make_rope(clean_rope, "mop")
+    sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
+    tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
+    dirty_rope = sue_belief.make_rope(tidi_rope, "dirty")
+    tidy_rope = sue_belief.make_rope(tidi_rope, "tidy")
+    sports_rope = sue_belief.make_l1_rope("sports")
+    best_rope = sue_belief.make_rope(sports_rope, best_sport_str())
+    best_soccer_rope = sue_belief.make_rope(best_rope, best_soccer_str())
+    best_swim_rope = sue_belief.make_rope(best_rope, best_swim_str())
+    best_run_rope = sue_belief.make_rope(best_rope, best_run_str())
+    play_rope = sue_belief.make_rope(sports_rope, play_str())
+    play_soccer_rope = sue_belief.make_rope(play_rope, play_soccer_str())
+    play_swim_rope = sue_belief.make_rope(play_rope, play_swim_str())
+    play_run_rope = sue_belief.make_rope(play_rope, play_run_str())
+    play_soccer_plan = sue_belief.get_plan_obj(play_soccer_rope)
+
+    # WHEN
+    play_soccer_dict = get_plan_view_dict(play_soccer_plan)
+
+    # THEN
+    # reasonheirs
+    play_soccer_reasonheirs_dict = play_soccer_dict.get(_reasonheirs_str())
+    assert len(play_soccer_reasonheirs_dict) == 2
+    # print(f"{len(play_soccer_reasonheirs_dict)=}")
+    best_reasonheir_dict = play_soccer_reasonheirs_dict.get(best_rope)
+    tidi_reasonheir_dict = play_soccer_reasonheirs_dict.get(tidi_rope)
+    print(f"{best_reasonheir_dict.keys()=}")
+    expected_reason_str = add_small_dot(f"ReasonHeir: context is {best_rope}")
+    assert best_reasonheir_dict.get(readable_str()) == expected_reason_str
+
+    best_cases_dict = best_reasonheir_dict.get(cases_str())
+    tidi_cases_dict = tidi_reasonheir_dict.get(cases_str())
+    best_soccer_case_dict = best_cases_dict.get(best_soccer_rope)
+    best_run_case_dict = best_cases_dict.get(best_run_rope)
+    tidy_case_dict = tidi_cases_dict.get(tidy_rope)
+    # print(f"{best_soccer_case_dict.get(reason_state_str())=}")
+    # print(f"{best_run_case_dict.get(reason_state_str())=}")
+    # print(f"{tidy_case_dict.get(reason_state_str())=}")
+    assert best_soccer_case_dict.get(reason_state_str()) == best_soccer_rope
+    assert best_run_case_dict.get(reason_state_str()) == best_run_rope
+    assert tidy_case_dict.get(reason_state_str()) == tidy_rope
+
+    play_best_reasonheir = play_soccer_plan.get_reasonheir(best_rope)
+    play_tidi_reasonheir = play_soccer_plan.get_reasonheir(tidi_rope)
+    # print(f"{play_best_reasonheir.cases.keys()=}")
+    # print(f"{play_tidi_reasonheir.cases.keys()=}")
+    best_soccer_caseunit = play_best_reasonheir.get_case(best_soccer_rope)
+    best_run_caseunit = play_best_reasonheir.get_case(best_run_rope)
+    tidy_caseunit = play_tidi_reasonheir.get_case(tidy_rope)
+    expected_soccer_case_readable = get_reason_case_readable_str(
+        best_rope, best_soccer_caseunit, None, sue_belief
+    )
+    expected_run_case_readable = get_reason_case_readable_str(
+        best_rope, best_run_caseunit, None, sue_belief
+    )
+    expected_tidy_case_readable = get_reason_case_readable_str(
+        tidi_rope, tidy_caseunit, None, sue_belief
+    )
+    expected_soccer_case_readable = f"  {add_small_dot(expected_soccer_case_readable)}"
+    expected_run_case_readable = f"  {add_small_dot(expected_run_case_readable)}"
+    expected_tidy_case_readable = f"  {add_small_dot(expected_tidy_case_readable)}"
+    print(f"{best_run_caseunit=}")
+    # print(f"{expected_best_reasonheir_str=}")
+    print(f"{best_soccer_case_dict.get(readable_str())=}")
+    print(f"{best_soccer_case_dict.get(readable_str())=}")
+    assert best_soccer_case_dict.get(readable_str()) == expected_soccer_case_readable
+    assert best_run_case_dict.get(readable_str()) == expected_run_case_readable
+    assert tidy_case_dict.get(readable_str()) == expected_tidy_case_readable
+    print(f"{expected_soccer_case_readable=}")
+    print(f"{expected_run_case_readable=}")
+    print(f"{expected_tidy_case_readable=}")
+
+
+def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_gogo_want = 13
@@ -432,7 +510,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_gogo_stop():
     assert stop_calc_readable == expected_stop_calc_readable
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario8_numeric_range_attrs():
+def test_get_plan_view_dict_ReturnsObj_Scenario9_numeric_range_attrs():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_addin = 11
@@ -473,7 +551,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_numeric_range_attrs():
     assert casa_numor_readable == expected_casa_numor_readable
 
 
-def test_get_plan_view_dict_ReturnsObj_Scenario9_active_hx():
+def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     # ESTABLISH
     hatter_belief = get_beliefunit_irrational_example()
     hatter_belief.set_max_tree_traverse(8)
