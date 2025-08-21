@@ -321,51 +321,98 @@ def test_BeliefUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenDeleted():
     assert str(excinfo.value) == f"get_plan_obj failed. no plan at '{usa_texas_rope}'"
 
 
-def test_BeliefUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
-    # ESTABLISH / WHEN / THEN
-    # TODO: break up this test function into smaller easier to understand test functions
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario00_Star():
+    # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     print(f"{casa_rope=}")
     old_star = sue_belief.planroot._kids[casa_str].star
     assert old_star == 30
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, star=23)
+
+    # THEN
     new_star = sue_belief.planroot._kids[casa_str].star
     assert new_star == 23
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario01_uid():
+    # ESTABLISH:
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # uid: int = None,
     sue_belief.planroot._kids[casa_str]._uid = 34
     x_uid = sue_belief.planroot._kids[casa_str]._uid
     assert x_uid == 34
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, uid=23)
+
+    # THEN
     uid_new = sue_belief.planroot._kids[casa_str]._uid
     assert uid_new == 23
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario02_begin_close():
+    # ESTABLISH
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # begin: float = None,
     # close: float = None,
     sue_belief.planroot._kids[casa_str].begin = 39
     x_begin = sue_belief.planroot._kids[casa_str].begin
     assert x_begin == 39
+
+    # WHEN
     sue_belief.planroot._kids[casa_str].close = 43
+
+    # THEN
     x_close = sue_belief.planroot._kids[casa_str].close
     assert x_close == 43
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, begin=25, close=29)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].begin == 25
     assert sue_belief.planroot._kids[casa_str].close == 29
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario03_gogo_want_stop_want():
+    # ESTABLISH
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # gogo_want: float = None,
     # stop_want: float = None,
     sue_belief.planroot._kids[casa_str].gogo_want = 439
     x_gogo_want = sue_belief.planroot._kids[casa_str].gogo_want
     assert x_gogo_want == 439
+
+    # WHEN
     sue_belief.planroot._kids[casa_str].stop_want = 443
+
+    # THEN
     x_stop_want = sue_belief.planroot._kids[casa_str].stop_want
     assert x_stop_want == 443
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, gogo_want=425, stop_want=429)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].gogo_want == 425
     assert sue_belief.planroot._kids[casa_str].stop_want == 429
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario04_factunits():
+    # ESTABLISH
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # factunit: factunit_shop = None,
     # sue_belief.planroot._kids[casa_str].factunits = None
     assert sue_belief.planroot._kids[casa_str].factunits == {}
@@ -375,28 +422,54 @@ def test_BeliefUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
 
     casa_factunits = sue_belief.planroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, factunit=x_factunit)
     casa_factunits = sue_belief.planroot._kids[casa_str].factunits
     print(f"{casa_factunits=}")
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].factunits == {
         x_factunit.fact_context: x_factunit
     }
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario05_descendant_task_count():
+    # ESTABLISH
+    # TODO get rid of this ability, no need to edit the attribute that is set by cash out.
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # _descendant_task_count: int = None,
     sue_belief.planroot._kids[casa_str]._descendant_task_count = 81
     x_descendant_task_count = sue_belief.planroot._kids[casa_str]._descendant_task_count
     assert x_descendant_task_count == 81
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, descendant_task_count=67)
+
+    # THEN
     _descendant_task_count_new = sue_belief.planroot._kids[
         casa_str
     ]._descendant_task_count
     assert _descendant_task_count_new == 67
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario06_all_partner():
+    # ESTABLISH
+    # TODO get rid of this ability, no need to edit the attribute that is set by cash out.
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # _all_partner_cred: bool = None,
     sue_belief.planroot._kids[casa_str]._all_partner_cred = 74
     x_all_partner_cred = sue_belief.planroot._kids[casa_str]._all_partner_cred
     assert x_all_partner_cred == 74
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, all_partner_cred=59)
+
+    # THEN
     _all_partner_cred_new = sue_belief.planroot._kids[casa_str]._all_partner_cred
     assert _all_partner_cred_new == 59
 
@@ -404,10 +477,21 @@ def test_BeliefUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
     sue_belief.planroot._kids[casa_str]._all_partner_debt = 74
     x_all_partner_debt = sue_belief.planroot._kids[casa_str]._all_partner_debt
     assert x_all_partner_debt == 74
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, all_partner_debt=59)
+
+    # THEN
     _all_partner_debt_new = sue_belief.planroot._kids[casa_str]._all_partner_debt
     assert _all_partner_debt_new == 59
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario07_awardunit():
+    # ESTABLISH
+    # TODO get rid of this ability, no need to edit the attribute that is set by cash out.
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # _awardunit: dict = None,
     sue_belief.planroot._kids[casa_str].awardunits = {
         "fun": awardunit_shop(awardee_title="fun", give_force=1, take_force=7)
@@ -417,42 +501,90 @@ def test_BeliefUnit_edit_plan_attr_IsAbleToEditAnyAncestor_Plan():
         "fun": awardunit_shop(awardee_title="fun", give_force=1, take_force=7)
     }
     x_awardunit = awardunit_shop(awardee_title="fun", give_force=4, take_force=8)
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, awardunit=x_awardunit)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].awardunits == {"fun": x_awardunit}
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario07_is_expanded():
+    # ESTABLISH
+    # TODO get rid of this ability, no need to edit the attribute that is set by cash out.
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # _is_expanded: dict = None,
     sue_belief.planroot._kids[casa_str]._is_expanded = "what"
     _is_expanded = sue_belief.planroot._kids[casa_str]._is_expanded
     assert _is_expanded == "what"
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, is_expanded=True)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str]._is_expanded is True
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario08_task():
+    # ESTABLISH
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # task: dict = None,
     sue_belief.planroot._kids[casa_str].task = "funfun3"
     task = sue_belief.planroot._kids[casa_str].task
     assert task == "funfun3"
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, task=True)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].task is True
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario09_healerunit():
+    # ESTABLISH
+    # TODO get rid of this ability, no need to edit the attribute that is set by cash out.
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # _healerunit:
     sue_belief.planroot._kids[casa_str].healerunit = "fun3rol"
     src_healerunit = sue_belief.planroot._kids[casa_str].healerunit
     assert src_healerunit == "fun3rol"
     sue_str = "Sue"
     yao_str = "Yao"
+
+    # WHEN
     x_healerunit = healerunit_shop({sue_str, yao_str})
     sue_belief.add_partnerunit(sue_str)
     sue_belief.add_partnerunit(yao_str)
     sue_belief.edit_plan_attr(casa_rope, healerunit=x_healerunit)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].healerunit == x_healerunit
 
+
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario10_problem_bool():
+    # ESTABLISH
+    # TODO get rid of this ability, no need to edit the attribute that is set by cash out.
+    sue_belief = get_beliefunit_with_4_levels()
+    casa_str = "casa"
+    casa_rope = sue_belief.make_l1_rope(casa_str)
     # _problem_bool: bool
     sue_belief.planroot._kids[casa_str].problem_bool = "fun3rol"
     src_problem_bool = sue_belief.planroot._kids[casa_str].problem_bool
     assert src_problem_bool == "fun3rol"
     x_problem_bool = True
+
+    # WHEN
     sue_belief.edit_plan_attr(casa_rope, problem_bool=x_problem_bool)
+
+    # THEN
     assert sue_belief.planroot._kids[casa_str].problem_bool == x_problem_bool
+    assert 1 == 2
 
 
 def test_BeliefUnit_edit_plan_attr_RaisesErrorWhen_healerunit_healer_names_DoNotExist():
