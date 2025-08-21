@@ -1,5 +1,6 @@
 import dataclasses
 from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
+from src.a03_group_logic.labor import PartyHeir, PartyUnit
 from src.a04_reason_logic.reason import CaseUnit, ReasonHeir, ReasonUnit
 from src.a05_plan_logic.plan import (
     AwardHeir,
@@ -7,6 +8,8 @@ from src.a05_plan_logic.plan import (
     AwardUnit,
     FactHeir,
     FactUnit,
+    LaborHeir,
+    LaborUnit,
     PlanUnit,
 )
 from src.a06_belief_logic.belief_main import BeliefUnit
@@ -36,6 +39,7 @@ def readable_percent(value: float) -> str:
 def jaar_objs_asdict(
     obj: Any, current_belief: BeliefUnit = None, current_reason: ReasonUnit = None
 ) -> dict:
+    # sourcery skip: extract-duplicate-method
     """
     Convert a dataclass-like object to dict,
     including extra keys defined in a custom attribute.
@@ -64,6 +68,14 @@ def jaar_objs_asdict(
             result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, (FactUnit, FactHeir)):
             obj_readable_str = get_fact_state_readable_str(obj, None, current_belief)
+            result["readable"] = add_small_dot(obj_readable_str)
+        elif isinstance(obj, PartyUnit):
+            solo_str = " Solo: True" if obj.solo else ""
+            obj_readable_str = f"LaborUnit: {obj.party_title}{solo_str}"
+            result["readable"] = add_small_dot(obj_readable_str)
+        elif isinstance(obj, PartyHeir):
+            solo_str = " Solo: True" if obj.solo else ""
+            obj_readable_str = f"LaborHeir: {obj.party_title}{solo_str}"
             result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, ReasonUnit):
             reason_case_readable_str = f"ReasonUnit: context is {obj.reason_context}"

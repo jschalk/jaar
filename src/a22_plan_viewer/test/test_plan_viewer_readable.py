@@ -16,6 +16,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
+    _laborheir_str,
     _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
@@ -33,6 +34,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    laborunit_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -50,8 +52,7 @@ from src.a07_timeline_logic.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import readable_str
-from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
-from src.a22_plan_viewer.test._util.example22_beliefs import (
+from src.a22_plan_viewer.example22_beliefs import (
     best_run_str,
     best_soccer_str,
     best_sport_str,
@@ -64,6 +65,7 @@ from src.a22_plan_viewer.test._util.example22_beliefs import (
     play_str,
     play_swim_str,
 )
+from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
@@ -90,7 +92,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _uid_str(),
         awardunits_str(),
         reasonunits_str(),
-        "laborunit",
+        laborunit_str(),
         factunits_str(),
         healerunit_str(),
         begin_str(),
@@ -122,7 +124,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _range_evaluated_str(),
         _reasonheirs_str(),
         _chore_str(),
-        "_laborheir",
+        _laborheir_str(),
         _gogo_calc_str(),
         _stop_calc_str(),
         fund_share_str(),
@@ -132,25 +134,49 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     # ESTABLISH
-    casa_plan = planunit_shop()
-    casa_plan._fund_ratio = 1
-    sue_str = "Sue"
-    casa_plan.laborunit.add_party(sue_str)
-    assert casa_plan._kids == {}
-    print(f"{type(casa_plan)=}")
+    sue_belief = get_sue_belief_with_facts_and_reasons()
+    casa_rope = sue_belief.make_l1_rope("casa")
+    clean_rope = sue_belief.make_rope(casa_rope, "clean")
+    mop_rope = sue_belief.make_rope(clean_rope, "mop")
+    mop_plan = sue_belief.get_plan_obj(mop_rope)
 
     # WHEN
-    # casa_dict = dataclasses_asdict(casa_plan)
-    casa_dict = get_plan_view_dict(casa_plan)
+    mop_dict = get_plan_view_dict(mop_plan)
 
     # THEN
-    # for dict_key, value in casa_dict.items():
-    #     print(f"{dict_key=} \t\t {value=}")
-    casa_laborunit_dict = casa_dict.get("laborunit")
-    expected_laborunit_dict = {
-        "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
-    }
-    assert casa_laborunit_dict == expected_laborunit_dict
+    # laborunit
+    mop_labor_dict = mop_dict.get(laborunit_str())
+    mop_partys_dict = mop_labor_dict.get("_partys")
+    sue_str = "Sue"
+    bob_str = "Bob"
+    mop_sue_dict = mop_partys_dict.get(sue_str)
+    mop_bob_dict = mop_partys_dict.get(bob_str)
+    mop_sue_unit_readable = mop_sue_dict.get(readable_str())
+    mop_bob_unit_readable = mop_bob_dict.get(readable_str())
+    expected_mop_sue_unit_readable = add_small_dot(f"LaborUnit: {sue_str}")
+    expected_mop_bob_unit_readable = add_small_dot(f"LaborUnit: {bob_str} Solo: True")
+    assert mop_sue_unit_readable == expected_mop_sue_unit_readable
+    assert mop_bob_unit_readable == expected_mop_bob_unit_readable
+    print(f"{mop_labor_dict=}")
+    print(f"{mop_sue_dict=}")
+    print(f"{mop_bob_dict=}")
+
+    # laborheir
+    mop_labor_dict = mop_dict.get(_laborheir_str())
+    mop_partys_dict = mop_labor_dict.get("_partys")
+    sue_str = "Sue"
+    bob_str = "Bob"
+    mop_sue_dict = mop_partys_dict.get(sue_str)
+    mop_bob_dict = mop_partys_dict.get(bob_str)
+    mop_sue_heir_readable = mop_sue_dict.get(readable_str())
+    mop_bob_heir_readable = mop_bob_dict.get(readable_str())
+    expected_mop_sue_heir_readable = add_small_dot(f"LaborHeir: {sue_str}")
+    expected_mop_bob_heir_readable = add_small_dot(f"LaborHeir: {bob_str} Solo: True")
+    assert mop_sue_heir_readable == expected_mop_sue_heir_readable
+    assert mop_bob_heir_readable == expected_mop_bob_heir_readable
+    print(f"{mop_labor_dict=}")
+    print(f"{mop_sue_dict=}")
+    print(f"{mop_bob_dict=}")
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():

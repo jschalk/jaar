@@ -1,6 +1,10 @@
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
-from src.a03_group_logic.test._util.a03_str import awardunits_str
+from src.a03_group_logic.test._util.a03_str import (
+    _laborheir_str,
+    awardunits_str,
+    laborunit_str,
+)
 from src.a04_reason_logic.test._util.a04_str import (
     _active_str,
     _chore_str,
@@ -68,10 +72,6 @@ def _kids_str() -> str:
     return "_kids"
 
 
-def _laborheir_str() -> str:
-    return "_laborheir"
-
-
 def _level_str() -> str:
     return "_level"
 
@@ -122,10 +122,6 @@ def healer_name_str() -> str:
 
 def healerunit_str() -> str:
     return "healerunit"
-
-
-def laborunit_str() -> str:
-    return "laborunit"
 
 
 def morph_str() -> str:

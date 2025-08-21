@@ -1251,7 +1251,7 @@ reason_case:    {reason_case}"""
         self._keep_dict = {}
         self._healers_dict = {}
 
-    def _set_plantree_factheirs_laborheirs_awardheirs(self):
+    def _set_plantree_factheirs_laborheir_awardheirs(self):
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
             if x_plan.root:
                 x_plan.set_factheirs(x_plan.factunits)
@@ -1272,7 +1272,7 @@ reason_case:    {reason_case}"""
         self._set_partnerunit_groupunit_respect_ledgers()
         self._clear_partnerunit_fund_attrs()
         self._clear_plantree_fund_and_active_status_attrs()
-        self._set_plantree_factheirs_laborheirs_awardheirs()
+        self._set_plantree_factheirs_laborheir_awardheirs()
 
         max_count = self.max_tree_traverse
         while not self._rational and self._tree_traverse_count < max_count:

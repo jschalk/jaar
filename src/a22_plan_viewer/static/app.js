@@ -3,6 +3,8 @@ let treeData = null;
 let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
+let show_laborunit = false;
+let show_laborheir = false;
 let show_level = false;
 let show_moment_label = false;
 let show_task = false;
@@ -41,6 +43,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
+    const show_laborunitCheckbox = document.getElementById('show_laborunit');
+    const show_laborheirCheckbox = document.getElementById('show_laborheir');
     const show_levelCheckbox = document.getElementById('show_level');
     const show_moment_labelCheckbox = document.getElementById('show_moment_label');
     const show_taskCheckbox = document.getElementById('show_task');
@@ -78,6 +82,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
     show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
+    show_laborunitCheckbox.addEventListener('change', function () { show_laborunit = this.checked; renderTree(); });
+    show_laborheirCheckbox.addEventListener('change', function () { show_laborheir = this.checked; renderTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
     show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderTree(); });
     show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
@@ -182,6 +188,8 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
+    ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
+    ${renderFlatReadableJson(planUnit._laborheir._partys, indent, show_laborheir)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
     ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}

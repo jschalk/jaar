@@ -1,4 +1,5 @@
 from src.a03_group_logic.group import awardunit_shop
+from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, RopeTerm, beliefunit_shop
 from src.a06_belief_logic.belief_tool import set_case_attr
@@ -41,6 +42,7 @@ def get_sue_beliefunit() -> BeliefUnit:
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
+    mop_fancy_rope = sue_belief.make_rope(mop_rope, "use fancy mop")
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
     dirty_rope = sue_belief.make_rope(tidi_rope, "dirty")
@@ -51,6 +53,7 @@ def get_sue_beliefunit() -> BeliefUnit:
     sue_belief.add_plan(tidy_rope, 3)
     sue_belief.add_plan(clean_rope, 3)
     sue_belief.add_plan(mop_rope, 3, task=True)
+    sue_belief.add_plan(mop_fancy_rope, 3, task=True)
     sue_belief.add_plan(sweep_rope, 3, task=True)
     sports_rope = sue_belief.make_l1_rope("sports")
     best_rope = sue_belief.make_rope(sports_rope, best_sport_str())
@@ -104,6 +107,10 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     play_run_rope = sue_belief.make_rope(play_rope, play_run_str())
     sue_belief.add_fact(tidi_rope, dirty_rope, 4, 8)
     sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
+    mop_laborunit = laborunit_shop()
+    mop_laborunit.add_party("Sue")
+    mop_laborunit.add_party("Bob", True)
+    sue_belief.edit_plan_attr(mop_rope, laborunit=mop_laborunit)
     # add reasons to mop_plan, sweep_plan, play_soccer_plan, plan_swim_plan, play_run_plan
     set_case_attr(sue_belief, mop_rope, tidi_rope, dirty_rope)
     set_case_attr(sue_belief, sweep_rope, tidi_rope, dirty_rope)
