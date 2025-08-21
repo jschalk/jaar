@@ -1,6 +1,7 @@
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_plan_logic.plan import get_default_moment_label, planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.a06_belief_logic.test._util.a06_str import partners_str
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,
@@ -331,8 +332,8 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_job.cash_out()
     assert yao_job.partners.keys() == yao_gut0.partners.keys()
     assert yao_job.get_partner(yao_str)._irrational_partner_debt_points == 0
-    yao_job_partners = yao_job.to_dict().get("partners")
-    yao_gut0_partners = yao_gut0.to_dict().get("partners")
+    yao_job_partners = yao_job.to_dict().get(partners_str())
+    yao_gut0_partners = yao_gut0.to_dict().get(partners_str())
     yao_job_bob = yao_job_partners.get("Bob")
     yao_gut0_bob = yao_gut0_partners.get("Bob")
     print(f"{yao_job_bob=}")
@@ -340,7 +341,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     assert yao_job_bob == yao_gut0_bob
     assert yao_job_partners.keys() == yao_gut0_partners.keys()
     assert yao_job_partners == yao_gut0_partners
-    assert len(yao_job.to_dict().get("partners")) == 3
+    assert len(yao_job.to_dict().get(partners_str())) == 3
     assert len(yao_job._plan_dict) == 4
     print(f"{yao_job._plan_dict.keys()=}")
     print(f"{yao_job.get_factunits_dict().keys()=}")

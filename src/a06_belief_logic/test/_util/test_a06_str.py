@@ -30,6 +30,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     partner_cred_points_str,
     partner_debt_points_str,
     partner_pool_str,
+    partners_str,
     penny_str,
     planroot_str,
     respect_bit_str,
@@ -55,6 +56,7 @@ def test_str_functions_ReturnsObj():
     assert planroot_str() == "planroot"
     assert partner_pool_str() == "partner_pool"
     assert partner_cred_points_str() == "partner_cred_points"
+    assert partners_str() == "partners"
     assert credor_respect_str() == "credor_respect"
     assert partner_debt_points_str() == "partner_debt_points"
     assert debtor_respect_str() == "debtor_respect"

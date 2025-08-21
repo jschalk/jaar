@@ -14,6 +14,7 @@ from src.a06_belief_logic.belief_main import (
 from src.a06_belief_logic.test._util.a06_str import (
     factunits_str,
     laborunit_str,
+    partners_str,
     planroot_str,
     reasonunits_str,
 )
@@ -54,8 +55,8 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict["credor_respect"] == yao_belief.credor_respect
     assert belief_dict["debtor_respect"] == yao_belief.debtor_respect
     assert belief_dict["last_pack_id"] == yao_belief.last_pack_id
-    assert len(belief_dict["partners"]) == len(yao_belief.partners)
-    assert len(belief_dict["partners"]) != 12
+    assert len(belief_dict[partners_str()]) == len(yao_belief.partners)
+    assert len(belief_dict[partners_str()]) != 12
     assert belief_dict.get("_groups") is None
 
     x_planroot = yao_belief.planroot
