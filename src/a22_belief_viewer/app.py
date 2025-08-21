@@ -3,12 +3,12 @@ from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
 )
-from src.a22_plan_viewer.example22_beliefs import (
+from src.a22_belief_viewer.belief_viewer import get_plan_view_dict
+from src.a22_belief_viewer.example22_beliefs import (
     get_beliefunit_irrational_example,
     get_sue_belief_with_facts_and_reasons,
     get_sue_beliefunit,
 )
-from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
 
 app = Flask(__name__)
 
@@ -19,7 +19,7 @@ sue_belief.cash_out()
 plan_view_dict = get_plan_view_dict(sue_belief.planroot)
 
 
-def get_plan_viewer_template() -> str:
+def get_belief_viewer_template() -> str:
     return """
     <!DOCTYPE html>
     <html>
@@ -82,7 +82,7 @@ def get_plan_viewer_template() -> str:
 @app.route("/")
 def index():
     """Serve the main HTML page"""
-    return render_template_string(get_plan_viewer_template())
+    return render_template_string(get_belief_viewer_template())
 
 
 @app.route("/api/tree")

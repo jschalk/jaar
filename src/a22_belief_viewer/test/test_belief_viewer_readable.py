@@ -52,7 +52,8 @@ from src.a07_timeline_logic.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import readable_str
-from src.a22_plan_viewer.example22_beliefs import (
+from src.a22_belief_viewer.belief_viewer import add_small_dot, get_plan_view_dict
+from src.a22_belief_viewer.example22_beliefs import (
     best_run_str,
     best_soccer_str,
     best_sport_str,
@@ -65,7 +66,6 @@ from src.a22_plan_viewer.example22_beliefs import (
     play_str,
     play_swim_str,
 )
-from src.a22_plan_viewer.plan_viewer import add_small_dot, get_plan_view_dict
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():

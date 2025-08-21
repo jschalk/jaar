@@ -23,4 +23,4 @@
 - a19_kpi_toolbox: moment_kpi001_partner_nets, moment_kpi002_belief_tasks
 - a20_world_logic: 
 - a21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys
-- a22_plan_viewer: 
+- a22_belief_viewer: 

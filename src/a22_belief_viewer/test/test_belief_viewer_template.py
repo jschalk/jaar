@@ -43,12 +43,12 @@ from src.a05_plan_logic.test._util.a05_str import (
     task_str,
 )
 from src.a06_belief_logic.test._util.a06_str import factunits_str, parent_rope_str
-from src.a22_plan_viewer.app import get_plan_viewer_template
+from src.a22_belief_viewer.app import get_belief_viewer_template
 
 
-def test_get_plan_viewer_template_ReturnsObj():
+def test_get_belief_viewer_template_ReturnsObj():
     # ESTABLISH / WHEN
-    template_str = get_plan_viewer_template()
+    template_str = get_belief_viewer_template()
 
     # THEN
     assert template_str
