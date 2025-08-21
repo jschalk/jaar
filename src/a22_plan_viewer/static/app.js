@@ -10,6 +10,7 @@ let show_descendant_task_count = false;
 let show_active = false;
 let show_chore = false;
 let show_star = false;
+let show_reasonunits = false;
 let show_factunits = false;
 let show_factheirs = false;
 let show_fund_share = false;
@@ -46,6 +47,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_activeCheckbox = document.getElementById('show_active');
     const show_choreCheckbox = document.getElementById('show_chore');
     const show_starCheckbox = document.getElementById('show_star');
+    const show_reasonunitsCheckbox = document.getElementById('show_reasonunits');
     const show_factunitsCheckbox = document.getElementById('show_factunits');
     const show_factheirsCheckbox = document.getElementById('show_factheirs');
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
@@ -81,6 +83,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
     show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
+    show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderTree(); });
     show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderTree(); });
     show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderTree(); });
     show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
@@ -176,6 +179,7 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
+    ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
     ${render_with_indent(planUnit._all_partner_cred, indent, show_all_partner_cred)}
@@ -202,7 +206,6 @@ function renderPlanUnit(planUnit, level) {
     return html;
 }
 
-// Render award links for a PlanUnit
 function renderFlatReadableJson(flat_readables, indent, show_readable) {
     if (!flat_readables || Object.keys(flat_readables).length === 0 || !show_readable) {
         return '';
@@ -211,6 +214,26 @@ function renderFlatReadableJson(flat_readables, indent, show_readable) {
     let html = '';
     Object.values(flat_readables).forEach(link => {
         html += `<br>${indent}${link.readable}`;
+    });
+
+    return html;
+}
+function renderReasonReadableJson(n3_readables, indent, show_readable) {
+    if (!n3_readables || Object.keys(n3_readables).length === 0 || !show_readable) {
+        return '';
+    }
+
+    let html = '';
+    Object.values(n3_readables).forEach(link => {
+        // top-level readable
+        html += `<br>${indent}${link.readable || ''}`;
+
+        // second level (cases)
+        if (link.cases && Object.keys(link.cases).length > 0) {
+            Object.values(link.cases).forEach(child => {
+                html += `<br>${indent}${child.readable || ''}`;
+            });
+        }
     });
 
     return html;

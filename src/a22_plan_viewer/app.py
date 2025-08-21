@@ -2,6 +2,7 @@ from flask import Flask, jsonify, render_template_string
 from src.a03_group_logic.group import awardunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.belief_tool import set_case_attr
 from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
@@ -16,8 +17,8 @@ clean_rope = sue_belief.make_rope(casa_rope, "clean")
 mop_rope = sue_belief.make_rope(clean_rope, "mop")
 sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
 tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
-dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
-tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
+dirty_rope = sue_belief.make_rope(tidi_rope, "dirty")
+tidy_rope = sue_belief.make_rope(tidi_rope, "tidy")
 sue_belief.add_plan(casa_rope, 3)
 sue_belief.add_plan(tidi_rope, 7)
 sue_belief.add_plan(dirty_rope, 1)
@@ -36,6 +37,8 @@ sue_belief.add_plan(best_swim_rope, 5)
 sue_belief.add_plan(best_run_rope, 5)
 sue_belief.add_fact(tidi_rope, dirty_rope, 4, 8)
 sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
+set_case_attr(sue_belief, mop_rope, tidi_rope, dirty_rope)
+set_case_attr(sue_belief, sweep_rope, tidi_rope, dirty_rope)
 
 # Add some award links
 casa_manager_awardunit = awardunit_shop("Manager", 0.5, 0.2)
@@ -81,6 +84,7 @@ def get_plan_viewer_template() -> str:
             <input type="checkbox" id="show_parent_rope"><label for="show_parent_rope">parent_rope</label>
             <input type="checkbox" id="show_root_boolean"><label for="show_root_boolean">root_boolean</label>
             <input type="checkbox" id="show_uid"><label for="show_uid">uid</label>
+            <input type="checkbox" id="show_reasonunits"><label for="show_reasonunits">reasonunits</label>
             <input type="checkbox" id="show_factunits"><label for="show_factunits">factunits</label>
             <input type="checkbox" id="show_factheirs"><label for="show_factheirs">factheirs</label>
             <input type="checkbox" id="show_awardunits"><label for="show_awardunits">awardunits</label>

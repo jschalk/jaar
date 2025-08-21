@@ -1,6 +1,7 @@
 from src.a03_group_logic.group import awardunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, RopeTerm, beliefunit_shop
+from src.a06_belief_logic.belief_tool import set_case_attr
 
 
 def best_sport_str() -> str:
@@ -42,8 +43,8 @@ def get_sue_beliefunit() -> BeliefUnit:
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
-    dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
-    tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
+    dirty_rope = sue_belief.make_rope(tidi_rope, "dirty")
+    tidy_rope = sue_belief.make_rope(tidi_rope, "tidy")
     sue_belief.add_plan(casa_rope, 3)
     sue_belief.add_plan(tidi_rope, 7)
     sue_belief.add_plan(dirty_rope, 1)
@@ -83,17 +84,6 @@ def get_sue_beliefunit() -> BeliefUnit:
     return sue_belief
 
 
-def set_case_attr(
-    belief: BeliefUnit,
-    plan_rope: RopeTerm,
-    reason_context: RopeTerm,
-    reason_case: RopeTerm,
-):
-    belief.edit_plan_attr(
-        plan_rope, reason_context=reason_context, reason_case=reason_case
-    )
-
-
 def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     sue_belief = get_sue_beliefunit()
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -101,8 +91,8 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
-    dirty_rope = sue_belief.make_rope(casa_rope, "dirty")
-    tidy_rope = sue_belief.make_rope(casa_rope, "tidy")
+    dirty_rope = sue_belief.make_rope(tidi_rope, "dirty")
+    tidy_rope = sue_belief.make_rope(tidi_rope, "tidy")
     sports_rope = sue_belief.make_l1_rope("sports")
     best_rope = sue_belief.make_rope(sports_rope, best_sport_str())
     best_soccer_rope = sue_belief.make_rope(best_rope, best_soccer_str())
@@ -119,10 +109,10 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     set_case_attr(sue_belief, sweep_rope, tidi_rope, dirty_rope)
     set_case_attr(sue_belief, play_soccer_rope, best_rope, best_soccer_rope)
     set_case_attr(sue_belief, play_soccer_rope, best_rope, best_run_rope)
-    set_case_attr(sue_belief, play_soccer_rope, tidi_rope, clean_rope)
-    set_case_attr(sue_belief, play_swim_rope, best_rope, play_swim_rope)
-    set_case_attr(sue_belief, play_swim_rope, tidi_rope, clean_rope)
-    set_case_attr(sue_belief, play_run_rope, best_rope, play_run_rope)
+    set_case_attr(sue_belief, play_soccer_rope, tidi_rope, tidy_rope)
+    set_case_attr(sue_belief, play_swim_rope, best_rope, best_swim_rope)
+    set_case_attr(sue_belief, play_swim_rope, tidi_rope, tidy_rope)
+    set_case_attr(sue_belief, play_run_rope, best_rope, best_run_rope)
     sue_belief.cash_out()
     return sue_belief
 
