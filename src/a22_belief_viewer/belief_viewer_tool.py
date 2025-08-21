@@ -36,7 +36,7 @@ def readable_percent(value: float) -> str:
         return f"{pct:.5f}%".rstrip("0").rstrip(".")
 
 
-def jaar_objs_asdict(
+def belief_objs_asdict(
     obj: Any, current_belief: BeliefUnit = None, current_reason: ReasonUnit = None
 ) -> dict:
     # sourcery skip: extract-duplicate-method
@@ -52,7 +52,9 @@ def jaar_objs_asdict(
         result = {}
         for field in dataclasses.fields(obj):
             value = getattr(obj, field.name)
-            result[field.name] = jaar_objs_asdict(value, current_belief, current_reason)
+            result[field.name] = belief_objs_asdict(
+                value, current_belief, current_reason
+            )
         if isinstance(obj, PlanUnit):
             set_readable_plan_values(obj, result)
         elif isinstance(obj, AwardUnit):
@@ -96,11 +98,11 @@ def jaar_objs_asdict(
     elif isinstance(obj, (list, tuple)):
         b = current_belief
         r = current_reason
-        return [jaar_objs_asdict(v, b, r) for v in obj]
+        return [belief_objs_asdict(v, b, r) for v in obj]
     elif isinstance(obj, dict):
         b = current_belief
         r = current_reason
-        return {k: jaar_objs_asdict(v, b, r) for k, v in obj.items()}
+        return {k: belief_objs_asdict(v, b, r) for k, v in obj.items()}
     else:
         return obj
 
@@ -146,4 +148,4 @@ def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
     """Returns a dictionary of only base value types and dictionarys"""
 
     # return make_dict_safe_for_json(dataclasses_asdict(x_plan))
-    return make_dict_safe_for_json(jaar_objs_asdict(x_plan))
+    return make_dict_safe_for_json(belief_objs_asdict(x_plan))
