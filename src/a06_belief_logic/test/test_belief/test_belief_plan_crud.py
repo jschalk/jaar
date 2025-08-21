@@ -1,5 +1,10 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.a01_term_logic.rope import (
+    create_rope,
+    default_knot_if_None,
+    is_sub_rope,
+    to_rope,
+)
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.reason import caseunit_shop, factunit_shop, reasonunit_shop
@@ -627,7 +632,29 @@ def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario13_reason_conte
     assert wk_reasonunit.knot == bob_belief.knot
 
 
-def test_BeliefUnit_edit_plan_attr_RaisesErrorWhen_healerunit_healer_names_DoNotExist():
+def test_BeliefUnit_edit_plan_attr_RaisesError_SetNestedPlanUnitAttr_Scenario13_reason_context_knot():
+    # ESTABLISH
+    bob_belief = beliefunit_shop("Bob")
+    casa_str = "casa"
+    wk_str = "wk"
+    wed_str = "Wed"
+    casa_rope = bob_belief.make_l1_rope(casa_str)
+    wk_rope = bob_belief.make_l1_rope(wk_str)
+    incorrect_wed_rope = bob_belief.make_l1_rope(wed_str)
+    assert not is_sub_rope(wk_rope, incorrect_wed_rope)
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        bob_belief.edit_plan_attr(
+            casa_rope, reason_context=wk_rope, reason_case=incorrect_wed_rope
+        )
+    exception_str = f"""Plan cannot edit reason because reason_case is not sub_rope to reason_context 
+reason_context: {wk_rope}
+reason_case:    {incorrect_wed_rope}"""
+    assert str(excinfo.value) == exception_str
+
+
+def test_BeliefUnit_edit_plan_attr_RaisesError_Scenario15_When_healerunit_healer_names_DoNotExist():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
     casa_str = "casa"
@@ -646,10 +673,8 @@ def test_BeliefUnit_edit_plan_attr_RaisesErrorWhen_healerunit_healer_names_DoNot
     x_healerunit = healerunit_shop({sue_str})
     with pytest_raises(Exception) as excinfo:
         yao_belief.edit_plan_attr(casa_rope, healerunit=x_healerunit)
-    assert (
-        str(excinfo.value)
-        == f"Plan cannot edit healerunit because group_title '{sue_str}' does not exist as group in Belief"
-    )
+    exception_str = f"Plan cannot edit healerunit because group_title '{sue_str}' does not exist as group in Belief"
+    assert str(excinfo.value) == exception_str
 
 
 def test_BeliefUnit_set_plan_MustReorderKidsDictToBeAlphabetical():

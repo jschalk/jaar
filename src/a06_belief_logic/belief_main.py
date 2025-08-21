@@ -85,6 +85,10 @@ class NewKnotException(Exception):
     pass
 
 
+class reason_caseException(Exception):
+    pass
+
+
 class PartnerUnitsCredorDebtorSumException(Exception):
     pass
 
@@ -838,6 +842,17 @@ class BeliefUnit:
                 if self.get_partnerunit_group_titles_dict().get(x_healer_name) is None:
                     exception_str = f"Plan cannot edit healerunit because group_title '{x_healer_name}' does not exist as group in Belief"
                     raise healerunit_group_title_Exception(exception_str)
+
+        if (
+            reason_context
+            and reason_case
+            and not is_sub_rope(reason_case, reason_context)
+        ):
+            raise reason_caseException(
+                f"""Plan cannot edit reason because reason_case is not sub_rope to reason_context 
+reason_context: {reason_context}
+reason_case:    {reason_case}"""
+            )
 
         x_planattrholder = planattrholder_shop(
             star=star,
