@@ -63,6 +63,10 @@ from src.a05_plan_logic.test._util.a05_str import (
 )
 
 
+def _groupunits_str() -> str:
+    return "_groupunits"
+
+
 def _keeps_buildable_str() -> str:
     return "_keeps_buildable"
 
