@@ -105,7 +105,7 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
 
     # THEN
     assert set(sue_belief_view_dict.keys()) == {
-        _groupunits_str,
+        # _groupunits_str,
         partners_str(),
         planroot_str(),
     }

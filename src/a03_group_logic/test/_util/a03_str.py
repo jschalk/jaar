@@ -33,6 +33,10 @@ def _fund_take_str() -> str:
     return "_fund_take"
 
 
+def _groupunits_str() -> str:
+    return "_groupunits"
+
+
 def _inallocable_partner_debt_points_str() -> str:
     return "_inallocable_partner_debt_points"
 

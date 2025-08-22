@@ -7,6 +7,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
+    _groupunits_str,
     _inallocable_partner_debt_points_str,
     _irrational_partner_debt_points_str,
     _laborheir_str,
@@ -42,6 +43,7 @@ def test_str_functions_ReturnsObj():
     assert _fund_agenda_take_str() == "_fund_agenda_take"
     assert _fund_give_str() == "_fund_give"
     assert _fund_take_str() == "_fund_take"
+    assert _groupunits_str() == "_groupunits"
     assert _inallocable_partner_debt_points_str() == "_inallocable_partner_debt_points"
     assert _irrational_partner_debt_points_str() == "_irrational_partner_debt_points"
     assert _laborheir_str() == "_laborheir"
