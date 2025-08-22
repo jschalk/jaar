@@ -63,6 +63,10 @@ from src.a05_plan_logic.test._util.a05_str import (
 )
 
 
+def _groupunits_str() -> str:
+    return "_groupunits"
+
+
 def _keeps_buildable_str() -> str:
     return "_keeps_buildable"
 
@@ -177,6 +181,10 @@ def max_tree_traverse_str() -> str:
 
 def partner_pool_str() -> str:
     return "partner_pool"
+
+
+def partners_str() -> str:
+    return "partners"
 
 
 def planroot_str() -> str:

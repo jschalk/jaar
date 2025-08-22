@@ -7,22 +7,29 @@ h1 {
     color: #333;
 }
 
-.controls {
+.partners_controls {
     margin-bottom: 20px;
     padding: 10px;
     background-color: #f5f5f5;
     border-radius: 5px;
 }
 
-.tree-display {
+.plan_controls {
+    margin-bottom: 20px;
+    padding: 10px;
+    background-color: #f5f5f5;
+    border-radius: 5px;
+}
+
+.plan_tree_display {
     font-family: monospace;
     line-height: 1.4;
 }
 
-.tree-display small {
+.plan_tree_display small {
     color: #666;
 }
 
-.tree-display div {
+.plan_tree_display div {
     margin: 2px 0;
 }

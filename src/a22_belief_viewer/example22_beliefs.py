@@ -88,7 +88,15 @@ def get_sue_beliefunit() -> BeliefUnit:
 
 
 def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_cred_points = 11
+    sue_debt_points = 13
+    bob_cred_points = 23
+    bob_debt_points = 29
     sue_belief = get_sue_beliefunit()
+    sue_belief.add_partnerunit(sue_str, sue_cred_points, sue_debt_points)
+    sue_belief.add_partnerunit(bob_str, bob_cred_points, bob_debt_points)
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
@@ -108,8 +116,8 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     sue_belief.add_fact(tidi_rope, dirty_rope, 4, 8)
     sue_belief.add_fact(best_rope, best_soccer_rope, 1, 7)
     mop_laborunit = laborunit_shop()
-    mop_laborunit.add_party("Sue")
-    mop_laborunit.add_party("Bob", True)
+    mop_laborunit.add_party(sue_str)
+    mop_laborunit.add_party(bob_str, True)
     sue_belief.edit_plan_attr(mop_rope, laborunit=mop_laborunit)
     # add reasons to mop_plan, sweep_plan, play_soccer_plan, plan_swim_plan, play_run_plan
     set_case_attr(sue_belief, mop_rope, tidi_rope, dirty_rope)

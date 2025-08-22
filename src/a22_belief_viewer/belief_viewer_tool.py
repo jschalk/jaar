@@ -1,17 +1,15 @@
 import dataclasses
 from src.a00_data_toolbox.dict_toolbox import make_dict_safe_for_json
+from src.a03_group_logic.group import AwardHeir, AwardLine, AwardUnit
 from src.a03_group_logic.labor import PartyHeir, PartyUnit
-from src.a04_reason_logic.reason import CaseUnit, ReasonHeir, ReasonUnit
-from src.a05_plan_logic.plan import (
-    AwardHeir,
-    AwardLine,
-    AwardUnit,
+from src.a04_reason_logic.reason import (
+    CaseUnit,
     FactHeir,
     FactUnit,
-    LaborHeir,
-    LaborUnit,
-    PlanUnit,
+    ReasonHeir,
+    ReasonUnit,
 )
+from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
@@ -36,7 +34,7 @@ def readable_percent(value: float) -> str:
         return f"{pct:.5f}%".rstrip("0").rstrip(".")
 
 
-def jaar_objs_asdict(
+def belief_objs_asdict(
     obj: Any, current_belief: BeliefUnit = None, current_reason: ReasonUnit = None
 ) -> dict:
     # sourcery skip: extract-duplicate-method
@@ -52,7 +50,9 @@ def jaar_objs_asdict(
         result = {}
         for field in dataclasses.fields(obj):
             value = getattr(obj, field.name)
-            result[field.name] = jaar_objs_asdict(value, current_belief, current_reason)
+            result[field.name] = belief_objs_asdict(
+                value, current_belief, current_reason
+            )
         if isinstance(obj, PlanUnit):
             set_readable_plan_values(obj, result)
         elif isinstance(obj, AwardUnit):
@@ -96,11 +96,11 @@ def jaar_objs_asdict(
     elif isinstance(obj, (list, tuple)):
         b = current_belief
         r = current_reason
-        return [jaar_objs_asdict(v, b, r) for v in obj]
+        return [belief_objs_asdict(v, b, r) for v in obj]
     elif isinstance(obj, dict):
         b = current_belief
         r = current_reason
-        return {k: jaar_objs_asdict(v, b, r) for k, v in obj.items()}
+        return {k: belief_objs_asdict(v, b, r) for k, v in obj.items()}
     else:
         return obj
 
@@ -146,4 +146,66 @@ def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
     """Returns a dictionary of only base value types and dictionarys"""
 
     # return make_dict_safe_for_json(dataclasses_asdict(x_plan))
-    return make_dict_safe_for_json(jaar_objs_asdict(x_plan))
+    return make_dict_safe_for_json(belief_objs_asdict(x_plan))
+
+
+def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
+    partners_dict = {}
+    for partner in belief.partners.values():
+        partner_cred_points_readable = (
+            f"partner_cred_points: {partner.partner_cred_points}"
+        )
+        partner_debt_points_readable = (
+            f"partner_debt_points: {partner.partner_debt_points}"
+        )
+        _memberships_readable = f"_memberships: {partner._memberships}"
+        _credor_pool_readable = f"_credor_pool: {partner._credor_pool}"
+        _debtor_pool_readable = f"_debtor_pool: {partner._debtor_pool}"
+        _irrational_partner_debt_points_readable = f"_irrational_partner_debt_points: {partner._irrational_partner_debt_points}"
+        _inallocable_partner_debt_points_readable = f"_inallocable_partner_debt_points: {partner._inallocable_partner_debt_points}"
+        _fund_give_readable = f"_fund_give: {partner._fund_give}"
+        _fund_take_readable = f"_fund_take: {partner._fund_take}"
+        _fund_agenda_give_readable = f"_fund_agenda_give: {partner._fund_agenda_give}"
+        _fund_agenda_take_readable = f"_fund_agenda_take: {partner._fund_agenda_take}"
+        _fund_agenda_ratio_give_readable = (
+            f"_fund_agenda_ratio_give: {partner._fund_agenda_ratio_give}"
+        )
+        _fund_agenda_ratio_take_readable = (
+            f"_fund_agenda_ratio_take: {partner._fund_agenda_ratio_take}"
+        )
+
+        partner_dict = {
+            "partner_cred_points": partner.partner_cred_points,
+            "partner_debt_points": partner.partner_debt_points,
+            "_memberships": partner._memberships,
+            "_credor_pool": partner._credor_pool,
+            "_debtor_pool": partner._debtor_pool,
+            "_irrational_partner_debt_points": partner._irrational_partner_debt_points,
+            "_inallocable_partner_debt_points": partner._inallocable_partner_debt_points,
+            "_fund_give": partner._fund_give,
+            "_fund_take": partner._fund_take,
+            "_fund_agenda_give": partner._fund_agenda_give,
+            "_fund_agenda_take": partner._fund_agenda_take,
+            "_fund_agenda_ratio_give": partner._fund_agenda_ratio_give,
+            "_fund_agenda_ratio_take": partner._fund_agenda_ratio_take,
+            "partner_cred_points_readable": partner_cred_points_readable,
+            "partner_debt_points_readable": partner_debt_points_readable,
+            "_memberships_readable": _memberships_readable,
+            "_credor_pool_readable": _credor_pool_readable,
+            "_debtor_pool_readable": _debtor_pool_readable,
+            "_irrational_partner_debt_points_readable": _irrational_partner_debt_points_readable,
+            "_inallocable_partner_debt_points_readable": _inallocable_partner_debt_points_readable,
+            "_fund_give_readable": _fund_give_readable,
+            "_fund_take_readable": _fund_take_readable,
+            "_fund_agenda_give_readable": _fund_agenda_give_readable,
+            "_fund_agenda_take_readable": _fund_agenda_take_readable,
+            "_fund_agenda_ratio_give_readable": _fund_agenda_ratio_give_readable,
+            "_fund_agenda_ratio_take_readable": _fund_agenda_ratio_take_readable,
+        }
+        partners_dict[partner.partner_name] = partner_dict
+
+    return partners_dict
+
+
+def get_belief_view_dict(belief: BeliefUnit) -> dict[str,]:
+    return {"planroot": get_plan_view_dict(belief.planroot)}

@@ -1,4 +1,5 @@
 from src.a06_belief_logic.test._util.a06_str import (
+    _groupunits_str,
     _keeps_buildable_str,
     _keeps_justified_str,
     _offtrack_fund_str,
@@ -30,6 +31,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     partner_cred_points_str,
     partner_debt_points_str,
     partner_pool_str,
+    partners_str,
     penny_str,
     planroot_str,
     respect_bit_str,
@@ -39,6 +41,7 @@ from src.a06_belief_logic.test._util.a06_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert _groupunits_str() == "_groupunits"
     assert _keeps_buildable_str() == "_keeps_buildable"
     assert _keeps_justified_str() == "_keeps_justified"
     assert _offtrack_fund_str() == "_offtrack_fund"
@@ -55,6 +58,7 @@ def test_str_functions_ReturnsObj():
     assert planroot_str() == "planroot"
     assert partner_pool_str() == "partner_pool"
     assert partner_cred_points_str() == "partner_cred_points"
+    assert partners_str() == "partners"
     assert credor_respect_str() == "credor_respect"
     assert partner_debt_points_str() == "partner_debt_points"
     assert debtor_respect_str() == "debtor_respect"

@@ -3,35 +3,33 @@ from src.a07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
 )
-from src.a22_plan_viewer.example22_beliefs import (
+from src.a22_belief_viewer.belief_viewer_tool import get_belief_view_dict
+from src.a22_belief_viewer.example22_beliefs import (
     get_beliefunit_irrational_example,
     get_sue_belief_with_facts_and_reasons,
     get_sue_beliefunit,
 )
-from src.a22_plan_viewer.plan_viewer import get_plan_view_dict
 
 app = Flask(__name__)
 
-sue_belief = get_sue_belief_with_facts_and_reasons()
-add_newtimeline_planunit(sue_belief, get_default_timeline_config_dict())
-sue_belief.cash_out()
 
-plan_view_dict = get_plan_view_dict(sue_belief.planroot)
-
-
-def get_plan_viewer_template() -> str:
+def get_belief_viewer_template() -> str:
     return """
     <!DOCTYPE html>
     <html>
     <head>
-        <title>PlanUnit Tree</title>
+        <title>belief_viewer</title>
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <body>
-        <h1>PlanUnit Display</h1>
+        <h1>Belief Partners and Plan Tree</h1>
         <h5>Each node has a plan_label</h5>
         
-        <div class="controls">
+        <div class="partners_controls">
+            <input type="checkbox" id="show_partners"><label for="show_partners">partners</label>
+        </div>
+        <div id="partnersTreeContainer" class="plan_tree_display"></div>
+        <div class="plan_controls">
             <input type="checkbox" id="show_level"><label for="show_level">level</label>
             <input type="checkbox" id="show_moment_label"><label for="show_moment_label">moment_label</label>
             <input type="checkbox" id="show_task"><label for="show_task">task</label>
@@ -71,7 +69,7 @@ def get_plan_viewer_template() -> str:
             <input type="checkbox" id="show_active_hx"><label for="show_active_hx">active_hx</label>
         </div>
         
-        <div id="treeContainer" class="tree-display"></div>
+        <div id="planTreeContainer" class="plan_tree_display"></div>
         
         <script src="/static/app.js"></script>
     </body>
@@ -82,14 +80,18 @@ def get_plan_viewer_template() -> str:
 @app.route("/")
 def index():
     """Serve the main HTML page"""
-    return render_template_string(get_plan_viewer_template())
+    return render_template_string(get_belief_viewer_template())
 
 
-@app.route("/api/tree")
-def get_tree():
-    """API endpoint to get the tree data as JSON"""
+@app.route("/api/beliefunit_view")
+def get_beliefunit_view():
+    """API endpoint to get the BeliefUnit data with readable strings as JSON"""
     # return jsonify(root.to_dict())
-    return jsonify(plan_view_dict)
+    sue_belief = get_sue_belief_with_facts_and_reasons()
+    add_newtimeline_planunit(sue_belief, get_default_timeline_config_dict())
+    sue_belief.cash_out()
+    belief_view_dict = get_belief_view_dict(sue_belief)
+    return jsonify(belief_view_dict)
 
 
 if __name__ == "__main__":

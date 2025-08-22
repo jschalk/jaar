@@ -83,16 +83,6 @@ class LaborHeir:
     _partys: dict[GroupTitle, PartyHeir] = None
     _belief_name_is_labor: bool = None
 
-    def _get_all_partners(
-        self,
-        groupunits: dict[GroupTitle, GroupUnit],
-        party_title_set: set[GroupTitle],
-    ) -> dict[GroupTitle, GroupUnit]:
-        dict_x = {}
-        for x_party_title in party_title_set:
-            dict_x |= groupunits.get(x_party_title)._memberships
-        return dict_x
-
     def is_empty(self) -> bool:
         return self._partys == {}
 
@@ -144,21 +134,6 @@ class LaborHeir:
             for partyunit in laborunit._partys.values():
                 if self._partys.get(partyunit.party_title) is None:
                     _set_party_to_partys(self._partys, partyunit)
-
-        #     # get all_partners of parent laborheir groupunits
-        #     all_parent_laborheir_partners = self._get_all_partners(
-        #         groupunits=groupunits,
-        #         party_title_set=parent_laborheir._partys,
-        #     )
-        #     # get all_partners of laborunit groupunits
-        #     all_laborunit_partners = self._get_all_partners(
-        #         groupunits=groupunits,
-        #         party_title_set=laborunit._partys,
-        #     )
-
-        #     # set dict_x = to laborunit groupunits
-        #     for partyunit in laborunit._partys:
-        #         x_partys.add(partyunit)
 
     def has_party(self, party_titles: set[GroupTitle]):
         return self.is_empty() or any(gn_x in self._partys for gn_x in party_titles)
