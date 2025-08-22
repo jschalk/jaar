@@ -201,5 +201,3 @@ def test_get_partners_view_dict_ReturnsObj_Scenario1_partners():
         yp_dict.get(_fund_agenda_ratio_take_readable_key)
         == expected__fund_agenda_ratio_take_readable
     )
-
-    assert 1 == 2

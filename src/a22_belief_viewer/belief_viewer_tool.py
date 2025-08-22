@@ -208,4 +208,7 @@ def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
 
 
 def get_belief_view_dict(belief: BeliefUnit) -> dict[str,]:
-    return {"planroot": get_plan_view_dict(belief.planroot)}
+    return {
+        "planroot": get_plan_view_dict(belief.planroot),
+        "partners": get_partners_view_dict(belief),
+    }
