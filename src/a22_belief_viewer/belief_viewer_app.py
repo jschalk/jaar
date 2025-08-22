@@ -24,14 +24,17 @@ def get_belief_viewer_template() -> str:
     <!DOCTYPE html>
     <html>
     <head>
-        <title>PlanUnit Tree</title>
+        <title>belief_viewer</title>
         <link rel="stylesheet" href="/static/style.css">
     </head>
     <body>
-        <h1>PlanUnit Display</h1>
+        <h1>Belief Partners and Plan Tree</h1>
         <h5>Each node has a plan_label</h5>
         
-        <div class="controls">
+        <div class="partners_controls">
+            <input type="checkbox" id="show_partners"><label for="show_partners">partners</label>
+        </div>
+        <div class="plan_controls">
             <input type="checkbox" id="show_level"><label for="show_level">level</label>
             <input type="checkbox" id="show_moment_label"><label for="show_moment_label">moment_label</label>
             <input type="checkbox" id="show_task"><label for="show_task">task</label>
@@ -71,7 +74,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_active_hx"><label for="show_active_hx">active_hx</label>
         </div>
         
-        <div id="treeContainer" class="tree-display"></div>
+        <div id="planTreeContainer" class="tree-display"></div>
         
         <script src="/static/app.js"></script>
     </body>

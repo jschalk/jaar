@@ -1,5 +1,6 @@
 // Global state
-let treeData = null;
+let planTreeData = null;
+let show_partners = true;
 let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
@@ -40,6 +41,7 @@ let show_uid = false;
 
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
+    const show_partnersCheckbox = document.getElementById('show_partners');
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
@@ -79,68 +81,69 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderTree(); });
-    show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderTree(); });
-    show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderTree(); });
-    show_laborunitCheckbox.addEventListener('change', function () { show_laborunit = this.checked; renderTree(); });
-    show_laborheirCheckbox.addEventListener('change', function () { show_laborheir = this.checked; renderTree(); });
-    show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderTree(); });
-    show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderTree(); });
-    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderTree(); });
-    show_descendant_task_countCheckbox.addEventListener('change', function () { show_descendant_task_count = this.checked; renderTree(); });
-    show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderTree(); });
-    show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderTree(); });
-    show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderTree(); });
-    show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderTree(); });
-    show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderTree(); });
-    show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderTree(); });
-    show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderTree(); });
-    show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderTree(); });
-    show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderTree(); });
-    show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderTree(); });
-    show_fund_iotaCheckbox.addEventListener('change', function () { show_fund_iota = this.checked; renderTree(); });
-    show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderTree(); });
-    show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderTree(); });
-    show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderTree(); });
-    show_gogo_wantCheckbox.addEventListener('change', function () { show_gogo_want = this.checked; renderTree(); });
-    show_stop_wantCheckbox.addEventListener('change', function () { show_stop_want = this.checked; renderTree(); });
-    show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderTree(); });
-    show_stop_calcCheckbox.addEventListener('change', function () { show_stop_calc = this.checked; renderTree(); });
-    show_addinCheckbox.addEventListener('change', function () { show_addin = this.checked; renderTree(); });
-    show_beginCheckbox.addEventListener('change', function () { show_begin = this.checked; renderTree(); });
-    show_closeCheckbox.addEventListener('change', function () { show_close = this.checked; renderTree(); });
-    show_denomCheckbox.addEventListener('change', function () { show_denom = this.checked; renderTree(); });
-    show_morphCheckbox.addEventListener('change', function () { show_morph = this.checked; renderTree(); });
-    show_numorCheckbox.addEventListener('change', function () { show_numor = this.checked; renderTree(); });
-    show_active_hxCheckbox.addEventListener('change', function () { show_active_hx = this.checked; renderTree(); });
-    show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderTree(); });
-    show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderTree(); });
-    show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderTree(); });
+    show_partnersCheckbox.addEventListener('change', function () { show_partners = this.checked; renderPlanTree(); });
+    show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
+    show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
+    show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderPlanTree(); });
+    show_laborunitCheckbox.addEventListener('change', function () { show_laborunit = this.checked; renderPlanTree(); });
+    show_laborheirCheckbox.addEventListener('change', function () { show_laborheir = this.checked; renderPlanTree(); });
+    show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderPlanTree(); });
+    show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderPlanTree(); });
+    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderPlanTree(); });
+    show_descendant_task_countCheckbox.addEventListener('change', function () { show_descendant_task_count = this.checked; renderPlanTree(); });
+    show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderPlanTree(); });
+    show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderPlanTree(); });
+    show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderPlanTree(); });
+    show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderPlanTree(); });
+    show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderPlanTree(); });
+    show_factunitsCheckbox.addEventListener('change', function () { show_factunits = this.checked; renderPlanTree(); });
+    show_factheirsCheckbox.addEventListener('change', function () { show_factheirs = this.checked; renderPlanTree(); });
+    show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderPlanTree(); });
+    show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderPlanTree(); });
+    show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
+    show_fund_iotaCheckbox.addEventListener('change', function () { show_fund_iota = this.checked; renderPlanTree(); });
+    show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderPlanTree(); });
+    show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderPlanTree(); });
+    show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderPlanTree(); });
+    show_gogo_wantCheckbox.addEventListener('change', function () { show_gogo_want = this.checked; renderPlanTree(); });
+    show_stop_wantCheckbox.addEventListener('change', function () { show_stop_want = this.checked; renderPlanTree(); });
+    show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderPlanTree(); });
+    show_stop_calcCheckbox.addEventListener('change', function () { show_stop_calc = this.checked; renderPlanTree(); });
+    show_addinCheckbox.addEventListener('change', function () { show_addin = this.checked; renderPlanTree(); });
+    show_beginCheckbox.addEventListener('change', function () { show_begin = this.checked; renderPlanTree(); });
+    show_closeCheckbox.addEventListener('change', function () { show_close = this.checked; renderPlanTree(); });
+    show_denomCheckbox.addEventListener('change', function () { show_denom = this.checked; renderPlanTree(); });
+    show_morphCheckbox.addEventListener('change', function () { show_morph = this.checked; renderPlanTree(); });
+    show_numorCheckbox.addEventListener('change', function () { show_numor = this.checked; renderPlanTree(); });
+    show_active_hxCheckbox.addEventListener('change', function () { show_active_hx = this.checked; renderPlanTree(); });
+    show_parent_ropeCheckbox.addEventListener('change', function () { show_parent_rope = this.checked; renderPlanTree(); });
+    show_root_booleanCheckbox.addEventListener('change', function () { show_root_boolean = this.checked; renderPlanTree(); });
+    show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderPlanTree(); });
 
     // Load initial tree data
-    loadTreeData();
+    loadPlanTreeData();
 });
 
 // Fetch tree data from server
-async function loadTreeData() {
+async function loadPlanTreeData() {
     try {
         const response = await fetch('/api/tree');
-        treeData = await response.json();
-        renderTree();
+        planTreeData = await response.json();
+        renderPlanTree();
     } catch (error) {
         console.error('Error loading tree data:', error);
-        document.getElementById('treeContainer').innerHTML = '<p>Error loading tree data</p>';
+        document.getElementById('planTreeContainer').innerHTML = '<p>Error loading tree data</p>';
     }
 }
 
 // Render the tree structure
-function renderTree() {
-    if (!treeData) {
+function renderPlanTree() {
+    if (!planTreeData) {
         return;
     }
 
-    const container = document.getElementById('treeContainer');
-    container.innerHTML = renderPlanUnit(treeData, 0);
+    const container = document.getElementById('planTreeContainer');
+    container.innerHTML = renderPlanUnit(planTreeData, 0);
 }
 
 // Recursively render a PlanUnit and its children
@@ -184,6 +187,7 @@ function renderPlanUnit(planUnit, level) {
     ${activeIndicator}
     ${choreIndicator}
     ${root_booleanIndicator}</i>
+    ${render_with_indent(planUnit.partners, indent, show_partners)}
     ${render_with_indent(planUnit.parent_rope, indent, show_parent_rope)}
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
@@ -227,7 +231,6 @@ function renderFlatReadableJson(flat_readables, indent, show_readable) {
     Object.values(flat_readables).forEach(link => {
         html += `<br>${indent}${link.readable}`;
     });
-
     return html;
 }
 function renderReasonReadableJson(n3_readables, indent, show_readable) {
@@ -247,14 +250,12 @@ function renderReasonReadableJson(n3_readables, indent, show_readable) {
             });
         }
     });
-
     return html;
 }
 function render_moment_label(moment_label, knot, show_moment_label) {
     if (!moment_label || !show_moment_label) {
         return '';
     }
-
     return ` ${knot}${moment_label}...`;
 }
 function render_with_indent(str, indent, show_bool) {

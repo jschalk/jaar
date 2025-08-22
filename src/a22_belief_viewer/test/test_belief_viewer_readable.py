@@ -598,3 +598,19 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     expected_chicken_active_hx_str = f"active_hx: {chicken_plan._active_hx}"
     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
     assert expected_chicken_active_hx_str == chicken_active_hx_str
+
+
+# def test_get_plan_view_dict_ReturnsObj_Scenario11_partners():
+#     # ESTABLISH
+#     sue_belief = get_sue_belief_with_facts_and_reasons()
+
+#     # WHEN
+#     chicken_dict = get_plan_view_dict(chicken_plan)
+
+#     # THEN
+#     print(f"{chicken_plan._active_hx=}")
+#     # sports ropes
+#     chicken_active_hx_str = chicken_dict.get(_active_hx_str())
+#     expected_chicken_active_hx_str = f"active_hx: {chicken_plan._active_hx}"
+#     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
+#     assert expected_chicken_active_hx_str == chicken_active_hx_str
