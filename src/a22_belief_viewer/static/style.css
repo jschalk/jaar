@@ -21,15 +21,15 @@ h1 {
     border-radius: 5px;
 }
 
-.tree-display {
+.plan_tree_display {
     font-family: monospace;
     line-height: 1.4;
 }
 
-.tree-display small {
+.plan_tree_display small {
     color: #666;
 }
 
-.tree-display div {
+.plan_tree_display div {
     margin: 2px 0;
 }

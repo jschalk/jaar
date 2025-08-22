@@ -127,8 +127,9 @@ document.addEventListener('DOMContentLoaded', function () {
 // Fetch tree data from server
 async function loadPlanTreeData() {
     try {
-        const response = await fetch('/api/tree');
-        planTreeData = await response.json();
+        const response = await fetch('/api/beliefunit_view');
+        beliefViewData = await response.json();
+        planTreeData = beliefViewData.planroot;
         renderPlanTree();
     } catch (error) {
         console.error('Error loading tree data:', error);

@@ -46,13 +46,18 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_want_str,
     task_str,
 )
-from src.a06_belief_logic.test._util.a06_str import parent_rope_str
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.test._util.a06_str import parent_rope_str, planroot_str
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import readable_str
-from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
+from src.a22_belief_viewer.belief_viewer_tool import (
+    add_small_dot,
+    get_belief_view_dict,
+    get_plan_view_dict,
+)
 from src.a22_belief_viewer.example22_beliefs import (
     best_run_str,
     best_soccer_str,
@@ -614,3 +619,22 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
 #     expected_chicken_active_hx_str = f"active_hx: {chicken_plan._active_hx}"
 #     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
 #     assert expected_chicken_active_hx_str == chicken_active_hx_str
+
+
+# def test_get_partners_view_dict_ReturnsObj_Scenario0_Empty()
+
+
+def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
+    # ESTABLISH
+    sue_str = "Sue"
+    sue_believer = beliefunit_shop(sue_str)
+    sue_believer.cash_out()
+
+    # WHEN
+    sue_belief_view_dict = get_belief_view_dict(sue_believer)
+
+    # THEN
+    assert set(sue_belief_view_dict.keys()) == {planroot_str()}
+    sue_plan_view_dict = sue_belief_view_dict.get(planroot_str())
+    expected_sue_plan_view_dict = get_plan_view_dict(sue_believer.planroot)
+    assert sue_plan_view_dict == expected_sue_plan_view_dict

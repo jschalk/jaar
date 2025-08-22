@@ -149,3 +149,7 @@ def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
 
     # return make_dict_safe_for_json(dataclasses_asdict(x_plan))
     return make_dict_safe_for_json(belief_objs_asdict(x_plan))
+
+
+def get_belief_view_dict(belief: BeliefUnit) -> dict[str,]:
+    return {"planroot": get_plan_view_dict(belief.planroot)}
