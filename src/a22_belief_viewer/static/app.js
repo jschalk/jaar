@@ -1,6 +1,19 @@
 // Global state
 let planTreeData = null;
 let show_partners = true;
+let show_partner_cred_points = false;
+let show_partner_debt_points = false;
+let show_partner_memberships = false;
+let show_partner_credor_pool = false;
+let show_partner_debtor_pool = false;
+let show_partner_irrational_partner_debt_points = false;
+let show_partner_inallocable_partner_debt_points = false;
+let show_partner_fund_give = false;
+let show_partner_fund_take = false;
+let show_partner_fund_agenda_give = false;
+let show_partner_fund_agenda_take = false;
+let show_partner_fund_agenda_ratio_give = false;
+let show_partner_fund_agenda_ratio_take = false;
 let show_planroot = true;
 let show_awardunits = false;
 let show_awardheirs = false;
@@ -43,6 +56,19 @@ let show_uid = false;
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
     const show_partnersCheckbox = document.getElementById('show_partners');
+    const show_partner_cred_pointsCheckbox = document.getElementById('show_partner_cred_points')
+    const show_partner_debt_pointsCheckbox = document.getElementById('show_partner_debt_points')
+    const show_partner_membershipsCheckbox = document.getElementById('show_partner_memberships')
+    const show_partner_credor_poolCheckbox = document.getElementById('show_partner_credor_pool')
+    const show_partner_debtor_poolCheckbox = document.getElementById('show_partner_debtor_pool')
+    const show_partner_irrational_partner_debt_pointsCheckbox = document.getElementById('show_partner_irrational_partner_debt_points')
+    const show_partner_inallocable_partner_debt_pointsCheckbox = document.getElementById('show_partner_inallocable_partner_debt_points')
+    const show_partner_fund_giveCheckbox = document.getElementById('show_partner_fund_give')
+    const show_partner_fund_takeCheckbox = document.getElementById('show_partner_fund_take')
+    const show_partner_fund_agenda_giveCheckbox = document.getElementById('show_partner_fund_agenda_give')
+    const show_partner_fund_agenda_takeCheckbox = document.getElementById('show_partner_fund_agenda_take')
+    const show_partner_fund_agenda_ratio_giveCheckbox = document.getElementById('show_partner_fund_agenda_ratio_give')
+    const show_partner_fund_agenda_ratio_takeCheckbox = document.getElementById('show_partner_fund_agenda_ratio_take')
     const show_planrootCheckbox = document.getElementById('show_planroot');
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
@@ -84,6 +110,19 @@ document.addEventListener('DOMContentLoaded', function () {
 
     // Set up checkbox event listener
     show_partnersCheckbox.addEventListener('change', function () { show_partners = this.checked; renderPartnersData(); });
+    show_partner_cred_pointsCheckbox.addEventListener('change', function () { show_partner_cred_points = this.checked; renderPartnersData(); });
+    show_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_debt_points = this.checked; renderPartnersData(); });
+    show_partner_membershipsCheckbox.addEventListener('change', function () { show_partner_memberships = this.checked; renderPartnersData(); });
+    show_partner_credor_poolCheckbox.addEventListener('change', function () { show_partner_credor_pool = this.checked; renderPartnersData(); });
+    show_partner_debtor_poolCheckbox.addEventListener('change', function () { show_partner_debtor_pool = this.checked; renderPartnersData(); });
+    show_partner_irrational_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_irrational_partner_debt_points = this.checked; renderPartnersData(); });
+    show_partner_inallocable_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_inallocable_partner_debt_points = this.checked; renderPartnersData(); });
+    show_partner_fund_giveCheckbox.addEventListener('change', function () { show_partner_fund_give = this.checked; renderPartnersData(); });
+    show_partner_fund_takeCheckbox.addEventListener('change', function () { show_partner_fund_take = this.checked; renderPartnersData(); });
+    show_partner_fund_agenda_giveCheckbox.addEventListener('change', function () { show_partner_fund_agenda_give = this.checked; renderPartnersData(); });
+    show_partner_fund_agenda_takeCheckbox.addEventListener('change', function () { show_partner_fund_agenda_take = this.checked; renderPartnersData(); });
+    show_partner_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_partner_fund_agenda_ratio_give = this.checked; renderPartnersData(); });
+    show_partner_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_partner_fund_agenda_ratio_take = this.checked; renderPartnersData(); });
     show_planrootCheckbox.addEventListener('change', function () { show_planroot = this.checked; renderPlanTree(); });
     show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
@@ -155,9 +194,24 @@ function buildPartnersHtml(partnersData) {
         return "";
     }
     const partners_indent = '&nbsp;'.repeat(2);
+
     let html = '';
     Object.values(partnersData).forEach(partner => {
-        html += `${partners_indent}${partner.partner_name}<br>`;
+        html += `<br>${partners_indent}${partner.partner_name}`;
+        if (show_partner_cred_points) { html += `<br>${partners_indent}    ${partner.partner_cred_points_readable}` };
+        if (show_partner_debt_points) { html += `<br>${partners_indent}    ${partner.partner_debt_points_readable}` };
+        if (show_partner_memberships) { html += `<br>${partners_indent}    ${partner._memberships_readable}` };
+        if (show_partner_credor_pool) { html += `<br>${partners_indent}    ${partner._credor_pool_readable}` };
+        if (show_partner_debtor_pool) { html += `<br>${partners_indent}    ${partner._debtor_pool_readable}` };
+        if (show_partner_irrational_partner_debt_points) { html += `<br>${partners_indent}    ${partner._irrational_partner_debt_points_readable}` };
+        if (show_partner_inallocable_partner_debt_points) { html += `<br>${partners_indent}    ${partner._inallocable_partner_debt_points_readable}` };
+        if (show_partner_fund_give) { html += `<br>${partners_indent}    ${partner._fund_give_readable}` };
+        if (show_partner_fund_take) { html += `<br>${partners_indent}    ${partner._fund_take_readable}` };
+        if (show_partner_fund_agenda_give) { html += `<br>${partners_indent}    ${partner._fund_agenda_give_readable}` };
+        if (show_partner_fund_agenda_take) { html += `<br>${partners_indent}    ${partner._fund_agenda_take_readable}` };
+        if (show_partner_fund_agenda_ratio_give) { html += `<br>${partners_indent}    ${partner._fund_agenda_ratio_give_readable}` };
+        if (show_partner_fund_agenda_ratio_take) { html += `<br>${partners_indent}    ${partner._fund_agenda_ratio_take_readable}` };
+
         // html += `<br>${partners_indent}${partner.partner_name}`;
     });
     return html
