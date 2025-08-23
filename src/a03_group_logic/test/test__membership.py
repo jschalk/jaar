@@ -63,6 +63,10 @@ def test_MemberShip_Exists():
     obj_attrs = set(swim_membership.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
+        partner_name_str(),
+        group_title_str(),
+        group_cred_points_str(),
+        group_debt_points_str(),
         _credor_pool_str(),
         _debtor_pool_str(),
         _fund_agenda_give_str(),
@@ -71,10 +75,6 @@ def test_MemberShip_Exists():
         _fund_agenda_take_str(),
         _fund_give_str(),
         _fund_take_str(),
-        partner_name_str(),
-        group_cred_points_str(),
-        group_debt_points_str(),
-        group_title_str(),
     }
 
 

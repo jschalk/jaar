@@ -14,6 +14,17 @@ let show_partner_fund_agenda_give = false;
 let show_partner_fund_agenda_take = false;
 let show_partner_fund_agenda_ratio_give = false;
 let show_partner_fund_agenda_ratio_take = false;
+let show_partner_membership_group_title = false;
+let show_partner_membership_group_cred_points = false;
+let show_partner_membership_group_debt_points = false;
+let show_partner_membership__credor_pool = false;
+let show_partner_membership__debtor_pool = false;
+let show_partner_membership__fund_agenda_give = false;
+let show_partner_membership__fund_agenda_ratio_give = false;
+let show_partner_membership__fund_agenda_ratio_take = false;
+let show_partner_membership__fund_agenda_take = false;
+let show_partner_membership__fund_give = false;
+let show_partner_membership__fund_take = false;
 let show_planroot = true;
 let show_awardunits = false;
 let show_awardheirs = false;
@@ -69,6 +80,17 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_partner_fund_agenda_takeCheckbox = document.getElementById('show_partner_fund_agenda_take')
     const show_partner_fund_agenda_ratio_giveCheckbox = document.getElementById('show_partner_fund_agenda_ratio_give')
     const show_partner_fund_agenda_ratio_takeCheckbox = document.getElementById('show_partner_fund_agenda_ratio_take')
+    const show_partner_membership_group_titleCheckbox = document.getElementById('show_partner_membership_group_title')
+    const show_partner_membership_group_cred_pointsCheckbox = document.getElementById('show_partner_membership_group_cred_points')
+    const show_partner_membership_group_debt_pointsCheckbox = document.getElementById('show_partner_membership_group_debt_points')
+    const show_partner_membership__credor_poolCheckbox = document.getElementById('show_partner_membership__credor_pool')
+    const show_partner_membership__debtor_poolCheckbox = document.getElementById('show_partner_membership__debtor_pool')
+    const show_partner_membership__fund_agenda_giveCheckbox = document.getElementById('show_partner_membership__fund_agenda_give')
+    const show_partner_membership__fund_agenda_ratio_giveCheckbox = document.getElementById('show_partner_membership__fund_agenda_ratio_give')
+    const show_partner_membership__fund_agenda_ratio_takeCheckbox = document.getElementById('show_partner_membership__fund_agenda_ratio_take')
+    const show_partner_membership__fund_agenda_takeCheckbox = document.getElementById('show_partner_membership__fund_agenda_take')
+    const show_partner_membership__fund_giveCheckbox = document.getElementById('show_partner_membership__fund_give')
+    const show_partner_membership__fund_takeCheckbox = document.getElementById('show_partner_membership__fund_take')
     const show_planrootCheckbox = document.getElementById('show_planroot');
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
@@ -123,6 +145,17 @@ document.addEventListener('DOMContentLoaded', function () {
     show_partner_fund_agenda_takeCheckbox.addEventListener('change', function () { show_partner_fund_agenda_take = this.checked; renderPartnersData(); });
     show_partner_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_partner_fund_agenda_ratio_give = this.checked; renderPartnersData(); });
     show_partner_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_partner_fund_agenda_ratio_take = this.checked; renderPartnersData(); });
+    show_partner_membership_group_titleCheckbox.addEventListener('change', function () { show_partner_membership_group_title = this.checked; renderPartnersData(); });
+    show_partner_membership_group_cred_pointsCheckbox.addEventListener('change', function () { show_partner_membership_group_cred_points = this.checked; renderPartnersData(); });
+    show_partner_membership_group_debt_pointsCheckbox.addEventListener('change', function () { show_partner_membership_group_debt_points = this.checked; renderPartnersData(); });
+    show_partner_membership__credor_poolCheckbox.addEventListener('change', function () { show_partner_membership__credor_pool = this.checked; renderPartnersData(); });
+    show_partner_membership__debtor_poolCheckbox.addEventListener('change', function () { show_partner_membership__debtor_pool = this.checked; renderPartnersData(); });
+    show_partner_membership__fund_agenda_giveCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_give = this.checked; renderPartnersData(); });
+    show_partner_membership__fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_ratio_give = this.checked; renderPartnersData(); });
+    show_partner_membership__fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_ratio_take = this.checked; renderPartnersData(); });
+    show_partner_membership__fund_agenda_takeCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_take = this.checked; renderPartnersData(); });
+    show_partner_membership__fund_giveCheckbox.addEventListener('change', function () { show_partner_membership__fund_give = this.checked; renderPartnersData(); });
+    show_partner_membership__fund_takeCheckbox.addEventListener('change', function () { show_partner_membership__fund_take = this.checked; renderPartnersData(); });
     show_planrootCheckbox.addEventListener('change', function () { show_planroot = this.checked; renderPlanTree(); });
     show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
@@ -194,6 +227,8 @@ function buildPartnersHtml(partnersData) {
         return "";
     }
     const partners_indent = '&nbsp;'.repeat(2);
+    const member_title_indent = '&nbsp;'.repeat(3);
+    const membership_indent = '&nbsp;'.repeat(5);
 
     let html = '';
     Object.values(partnersData).forEach(partner => {
@@ -211,8 +246,21 @@ function buildPartnersHtml(partnersData) {
         if (show_partner_fund_agenda_take) { html += `<br>${partners_indent}    ${partner._fund_agenda_take_readable}` };
         if (show_partner_fund_agenda_ratio_give) { html += `<br>${partners_indent}    ${partner._fund_agenda_ratio_give_readable}` };
         if (show_partner_fund_agenda_ratio_take) { html += `<br>${partners_indent}    ${partner._fund_agenda_ratio_take_readable}` };
-
-        // html += `<br>${partners_indent}${partner.partner_name}`;
+        console.info(partner)
+        Object.values(partner._memberships).forEach(membership => {
+            if (show_partner_membership_group_title) { html += `<br><b>${member_title_indent}${membership.group_title_readable}</b>` };
+            if (show_partner_membership_group_cred_points) { html += `<br>${membership_indent}${membership.group_cred_points_readable}` };
+            if (show_partner_membership_group_debt_points) { html += `<br>${membership_indent}${membership.group_debt_points_readable}` };
+            if (show_partner_membership__credor_pool) { html += `<br>${membership_indent}${membership._credor_pool_readable}` };
+            if (show_partner_membership__debtor_pool) { html += `<br>${membership_indent}${membership._debtor_pool_readable}` };
+            if (show_partner_membership__fund_agenda_give) { html += `<br>${membership_indent}${membership._fund_agenda_give_readable}` };
+            if (show_partner_membership__fund_agenda_ratio_give) { html += `<br>${membership_indent}${membership._fund_agenda_ratio_give_readable}` };
+            if (show_partner_membership__fund_agenda_ratio_take) { html += `<br>${membership_indent}${membership._fund_agenda_ratio_take_readable}` };
+            if (show_partner_membership__fund_agenda_take) { html += `<br>${membership_indent}${membership._fund_agenda_take_readable}` };
+            if (show_partner_membership__fund_give) { html += `<br>${membership_indent}${membership._fund_give_readable}` };
+            if (show_partner_membership__fund_take) { html += `<br>${membership_indent}${membership._fund_take_readable}` };
+            // html += `<br>${partners_indent}${partner.partner_name}`;
+        });
     });
     return html
 }

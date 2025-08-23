@@ -152,6 +152,7 @@ def get_plan_view_dict(x_plan: PlanUnit) -> dict[str,]:
 def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
     partners_dict = {}
     for partner in belief.partners.values():
+
         partner_cred_points_readable = (
             f"partner_cred_points: {partner.partner_cred_points}"
         )
@@ -173,12 +174,39 @@ def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
         _fund_agenda_ratio_take_readable = (
             f"_fund_agenda_ratio_take: {partner._fund_agenda_ratio_take}"
         )
-
+        x_members_dict = {
+            x_membership.group_title: {
+                "partner_name": x_membership.partner_name,
+                "group_title": x_membership.group_title,
+                "group_cred_points": x_membership.group_cred_points,
+                "group_debt_points": x_membership.group_debt_points,
+                "_credor_pool": x_membership._credor_pool,
+                "_debtor_pool": x_membership._debtor_pool,
+                "_fund_agenda_give": x_membership._fund_agenda_give,
+                "_fund_agenda_ratio_give": x_membership._fund_agenda_ratio_give,
+                "_fund_agenda_ratio_take": x_membership._fund_agenda_ratio_take,
+                "_fund_agenda_take": x_membership._fund_agenda_take,
+                "_fund_give": x_membership._fund_give,
+                "_fund_take": x_membership._fund_take,
+                "group_title_readable": f"group_title: {x_membership.group_title}",
+                "group_cred_points_readable": f"group_cred_points: {x_membership.group_cred_points}",
+                "group_debt_points_readable": f"group_debt_points: {x_membership.group_debt_points}",
+                "_credor_pool_readable": f"_credor_pool: {x_membership._credor_pool}",
+                "_debtor_pool_readable": f"_debtor_pool: {x_membership._debtor_pool}",
+                "_fund_agenda_give_readable": f"_fund_agenda_give: {x_membership._fund_agenda_give}",
+                "_fund_agenda_ratio_give_readable": f"_fund_agenda_ratio_give: {x_membership._fund_agenda_ratio_give}",
+                "_fund_agenda_ratio_take_readable": f"_fund_agenda_ratio_take: {x_membership._fund_agenda_ratio_take}",
+                "_fund_agenda_take_readable": f"_fund_agenda_take: {x_membership._fund_agenda_take}",
+                "_fund_give_readable": f"_fund_give: {x_membership._fund_give}",
+                "_fund_take_readable": f"_fund_take: {x_membership._fund_take}",
+            }
+            for x_membership in partner._memberships.values()
+        }
         partner_dict = {
             "partner_name": partner.partner_name,
             "partner_cred_points": partner.partner_cred_points,
             "partner_debt_points": partner.partner_debt_points,
-            "_memberships": partner._memberships,
+            "_memberships": x_members_dict,
             "_credor_pool": partner._credor_pool,
             "_debtor_pool": partner._debtor_pool,
             "_irrational_partner_debt_points": partner._irrational_partner_debt_points,

@@ -10,6 +10,9 @@ from src.a03_group_logic.test._util.a03_str import (
     _inallocable_partner_debt_points_str,
     _irrational_partner_debt_points_str,
     _memberships_str,
+    group_cred_points_str,
+    group_debt_points_str,
+    group_title_str,
     partner_cred_points_str,
     partner_debt_points_str,
 )
@@ -132,6 +135,17 @@ def test_get_belief_viewer_template_ReturnsObj():
         f"partner{_fund_agenda_take_str()}",
         f"partner{_fund_agenda_ratio_give_str()}",
         f"partner{_fund_agenda_ratio_take_str()}",
+        f"partner_membership_{group_title_str()}",
+        f"partner_membership_{group_cred_points_str()}",
+        f"partner_membership_{group_debt_points_str()}",
+        f"partner_membership_{_credor_pool_str()}",
+        f"partner_membership_{_debtor_pool_str()}",
+        f"partner_membership_{_fund_agenda_give_str()}",
+        f"partner_membership_{_fund_agenda_ratio_give_str()}",
+        f"partner_membership_{_fund_agenda_ratio_take_str()}",
+        f"partner_membership_{_fund_agenda_take_str()}",
+        f"partner_membership_{_fund_give_str()}",
+        f"partner_membership_{_fund_take_str()}",
     }
 
     for expected_str in sorted(list(expected_strs_in_template)):
