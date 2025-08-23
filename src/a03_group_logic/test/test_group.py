@@ -2,25 +2,48 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
+from src.a03_group_logic.test._util.a03_str import (
+    _credor_pool_str,
+    _debtor_pool_str,
+    _fund_agenda_give_str,
+    _fund_agenda_take_str,
+    _fund_give_str,
+    _fund_take_str,
+    _memberships_str,
+    fund_iota_str,
+    group_title_str,
+    knot_str,
+)
 
 
 def test_GroupUnit_Exists():
-    # ESTABLISH
-    swim_str = ";swimmers"
-    # WHEN
-    swim_groupunit = GroupUnit(group_title=swim_str)
+    # ESTABLISH / WHEN
+    x_groupunit = GroupUnit()
     # THEN
-    assert swim_groupunit is not None
-    assert swim_groupunit.group_title == swim_str
-    assert swim_groupunit._memberships is None
-    assert swim_groupunit._fund_give is None
-    assert swim_groupunit._fund_take is None
-    assert swim_groupunit._fund_agenda_give is None
-    assert swim_groupunit._fund_agenda_take is None
-    assert swim_groupunit._credor_pool is None
-    assert swim_groupunit._debtor_pool is None
-    assert swim_groupunit.knot is None
-    assert swim_groupunit.fund_iota is None
+    assert x_groupunit is not None
+    assert not x_groupunit.group_title
+    assert not x_groupunit._memberships
+    assert not x_groupunit._fund_give
+    assert not x_groupunit._fund_take
+    assert not x_groupunit._fund_agenda_give
+    assert not x_groupunit._fund_agenda_take
+    assert not x_groupunit._credor_pool
+    assert not x_groupunit._debtor_pool
+    assert not x_groupunit.knot
+    assert not x_groupunit.fund_iota
+    print(f"{x_groupunit.__dict__=}")
+    assert set(x_groupunit.__dict__.keys()) == {
+        group_title_str(),
+        _memberships_str(),
+        _fund_give_str(),
+        _fund_take_str(),
+        _fund_agenda_give_str(),
+        _fund_agenda_take_str(),
+        _credor_pool_str(),
+        _debtor_pool_str(),
+        knot_str(),
+        fund_iota_str(),
+    }
 
 
 def test_groupunit_shop_ReturnsObj():
