@@ -175,6 +175,7 @@ def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
         )
 
         partner_dict = {
+            "partner_name": partner.partner_name,
             "partner_cred_points": partner.partner_cred_points,
             "partner_debt_points": partner.partner_debt_points,
             "_memberships": partner._memberships,

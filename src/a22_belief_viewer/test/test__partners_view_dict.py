@@ -12,6 +12,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _memberships_str,
     partner_cred_points_str,
     partner_debt_points_str,
+    partner_name_str,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import _groupunits_str, partners_str
@@ -91,6 +92,7 @@ def test_get_partners_view_dict_ReturnsObj_Scenario1_partners():
     _fund_agenda_ratio_take_readable_key = add_readable(_fund_agenda_ratio_take_str())
 
     assert set(yao_partner_dict.keys()) == {
+        partner_name_str(),
         partner_cred_points_str(),
         partner_debt_points_str(),
         _memberships_str(),
@@ -120,6 +122,7 @@ def test_get_partners_view_dict_ReturnsObj_Scenario1_partners():
     }
     ypu = sue_believer.get_partner(yao_str)
     yp_dict = yao_partner_dict
+    assert ypu.partner_name == yp_dict.get(partner_name_str())
     assert ypu.partner_cred_points == yp_dict.get(partner_cred_points_str())
     assert ypu.partner_debt_points == yp_dict.get(partner_debt_points_str())
     assert ypu._memberships == yp_dict.get(_memberships_str())

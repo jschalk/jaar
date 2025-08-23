@@ -1,3 +1,18 @@
+from src.a03_group_logic.test._util.a03_str import (
+    _credor_pool_str,
+    _debtor_pool_str,
+    _fund_agenda_give_str,
+    _fund_agenda_ratio_give_str,
+    _fund_agenda_ratio_take_str,
+    _fund_agenda_take_str,
+    _fund_give_str,
+    _fund_take_str,
+    _inallocable_partner_debt_points_str,
+    _irrational_partner_debt_points_str,
+    _memberships_str,
+    partner_cred_points_str,
+    partner_debt_points_str,
+)
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
@@ -46,6 +61,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     factunits_str,
     parent_rope_str,
     partners_str,
+    planroot_str,
 )
 from src.a22_belief_viewer.belief_viewer_app import get_belief_viewer_template
 
@@ -96,12 +112,26 @@ def test_get_belief_viewer_template_ReturnsObj():
         parent_rope_str(),
         partners_str(),
         plan_label_str(),
+        planroot_str(),
         # problem_bool_str(),
         reasonunits_str(),
         "root",
         star_str(),
         stop_want_str(),
         task_str(),
+        partner_cred_points_str(),
+        partner_debt_points_str(),
+        f"partner{_memberships_str()}",
+        f"partner{_credor_pool_str()}",
+        f"partner{_debtor_pool_str()}",
+        f"partner{_irrational_partner_debt_points_str()}",
+        f"partner{_inallocable_partner_debt_points_str()}",
+        f"partner{_fund_give_str()}",
+        f"partner{_fund_take_str()}",
+        f"partner{_fund_agenda_give_str()}",
+        f"partner{_fund_agenda_take_str()}",
+        f"partner{_fund_agenda_ratio_give_str()}",
+        f"partner{_fund_agenda_ratio_take_str()}",
     }
 
     for expected_str in sorted(list(expected_strs_in_template)):

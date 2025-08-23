@@ -1,6 +1,7 @@
 // Global state
 let planTreeData = null;
 let show_partners = true;
+let show_planroot = true;
 let show_awardunits = false;
 let show_awardheirs = false;
 let show_awardlines = false;
@@ -42,6 +43,7 @@ let show_uid = false;
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
     const show_partnersCheckbox = document.getElementById('show_partners');
+    const show_planrootCheckbox = document.getElementById('show_planroot');
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
     const show_awardlinesCheckbox = document.getElementById('show_awardlines');
@@ -81,7 +83,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_partnersCheckbox.addEventListener('change', function () { show_partners = this.checked; renderPlanTree(); });
+    show_partnersCheckbox.addEventListener('change', function () { show_partners = this.checked; renderPartnersData(); });
+    show_planrootCheckbox.addEventListener('change', function () { show_planroot = this.checked; renderPlanTree(); });
     show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
     show_awardlinesCheckbox.addEventListener('change', function () { show_awardlines = this.checked; renderPlanTree(); });
@@ -121,20 +124,43 @@ document.addEventListener('DOMContentLoaded', function () {
     show_uidCheckbox.addEventListener('change', function () { show_uid = this.checked; renderPlanTree(); });
 
     // Load initial tree data
-    loadPlanTreeData();
+    loadBeliefData();
 });
 
 // Fetch tree data from server
-async function loadPlanTreeData() {
+async function loadBeliefData() {
     try {
         const response = await fetch('/api/beliefunit_view');
         beliefViewData = await response.json();
         planTreeData = beliefViewData.planroot;
+        partnersData = beliefViewData.partners;
         renderPlanTree();
+        renderPartnersData();
     } catch (error) {
         console.error('Error loading tree data:', error);
         document.getElementById('planTreeContainer').innerHTML = '<p>Error loading tree data</p>';
+        document.getElementById('planTreeContainer').innerHTML = '<p>Error loading tree data</p>';
     }
+}
+
+
+// Render PartnersData and its membership attributes
+function renderPartnersData() {
+    const partners_container = document.getElementById('partnersContainer');
+    partners_container.innerHTML = buildPartnersHtml(partnersData);
+}
+
+function buildPartnersHtml(partnersData) {
+    if (!partnersData || !show_partners) {
+        return "";
+    }
+    const partners_indent = '&nbsp;'.repeat(2);
+    let html = '';
+    Object.values(partnersData).forEach(partner => {
+        html += `${partners_indent}${partner.partner_name}<br>`;
+        // html += `<br>${partners_indent}${partner.partner_name}`;
+    });
+    return html
 }
 
 // Render the tree structure
@@ -149,6 +175,9 @@ function renderPlanTree() {
 
 // Recursively render a PlanUnit and its children
 function renderPlanUnit(planUnit, level) {
+    if (!show_planroot) {
+        return "";
+    }
     const indent = '&nbsp;'.repeat(level * 2);
     const levelIndicator = show_level ? ` level${planUnit._level}` : '';
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
