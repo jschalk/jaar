@@ -188,17 +188,39 @@ def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
                 "_fund_agenda_take": x_membership._fund_agenda_take,
                 "_fund_give": x_membership._fund_give,
                 "_fund_take": x_membership._fund_take,
-                "group_title_readable": f"group_title: {x_membership.group_title}",
-                "group_cred_points_readable": f"group_cred_points: {x_membership.group_cred_points}",
-                "group_debt_points_readable": f"group_debt_points: {x_membership.group_debt_points}",
-                "_credor_pool_readable": f"_credor_pool: {x_membership._credor_pool}",
-                "_debtor_pool_readable": f"_debtor_pool: {x_membership._debtor_pool}",
-                "_fund_agenda_give_readable": f"_fund_agenda_give: {x_membership._fund_agenda_give}",
-                "_fund_agenda_ratio_give_readable": f"_fund_agenda_ratio_give: {x_membership._fund_agenda_ratio_give}",
-                "_fund_agenda_ratio_take_readable": f"_fund_agenda_ratio_take: {x_membership._fund_agenda_ratio_take}",
-                "_fund_agenda_take_readable": f"_fund_agenda_take: {x_membership._fund_agenda_take}",
-                "_fund_give_readable": f"_fund_give: {x_membership._fund_give}",
-                "_fund_take_readable": f"_fund_take: {x_membership._fund_take}",
+                "group_title_readable": add_small_dot(
+                    f"group_title: {x_membership.group_title}"
+                ),
+                "group_cred_points_readable": add_small_dot(
+                    f"group_cred_points: {x_membership.group_cred_points}"
+                ),
+                "group_debt_points_readable": add_small_dot(
+                    f"group_debt_points: {x_membership.group_debt_points}"
+                ),
+                "_credor_pool_readable": add_small_dot(
+                    f"_credor_pool: {x_membership._credor_pool}"
+                ),
+                "_debtor_pool_readable": add_small_dot(
+                    f"_debtor_pool: {x_membership._debtor_pool}"
+                ),
+                "_fund_agenda_give_readable": add_small_dot(
+                    f"_fund_agenda_give: {x_membership._fund_agenda_give}"
+                ),
+                "_fund_agenda_ratio_give_readable": add_small_dot(
+                    f"_fund_agenda_ratio_give: {x_membership._fund_agenda_ratio_give}"
+                ),
+                "_fund_agenda_ratio_take_readable": add_small_dot(
+                    f"_fund_agenda_ratio_take: {x_membership._fund_agenda_ratio_take}"
+                ),
+                "_fund_agenda_take_readable": add_small_dot(
+                    f"_fund_agenda_take: {x_membership._fund_agenda_take}"
+                ),
+                "_fund_give_readable": add_small_dot(
+                    f"_fund_give: {x_membership._fund_give}"
+                ),
+                "_fund_take_readable": add_small_dot(
+                    f"_fund_take: {x_membership._fund_take}"
+                ),
             }
             for x_membership in partner._memberships.values()
         }
@@ -234,6 +256,10 @@ def get_partners_view_dict(belief: BeliefUnit) -> dict[str,]:
         partners_dict[partner.partner_name] = partner_dict
 
     return partners_dict
+
+
+def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
+    return {}
 
 
 def get_belief_view_dict(belief: BeliefUnit) -> dict[str,]:

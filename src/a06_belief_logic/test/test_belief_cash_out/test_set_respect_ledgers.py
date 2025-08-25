@@ -61,20 +61,17 @@ def test_BeliefUnit_set_partnerunit_groupunit_respect_ledgers_SetsAttr_scenario0
     assert sue_beliefunit._groupunits == {}
 
 
-def test_BeliefUnit_set_partnerunit_groupunit_respect_ledgers_Clears_groups():
+def test_BeliefUnit_set_partnerunit_groupunit_respect_ledgers_Clears_groupunits():
     # ESTABLISH
     sue_str = "Sue"
     sue_beliefunit = beliefunit_shop(sue_str)
-    sue_beliefunit._groups = "yeah"
     sue_beliefunit._groupunits = "ohio"
-    assert sue_beliefunit._groups != {}
     assert sue_beliefunit._groupunits != {}
 
     # WHEN
     sue_beliefunit._set_partnerunit_groupunit_respect_ledgers()
 
     # THEN
-    assert sue_beliefunit._groups != {}
     assert sue_beliefunit._groupunits == {}
 
 

@@ -39,6 +39,15 @@ def play_run_str() -> str:
 
 def get_sue_beliefunit() -> BeliefUnit:
     sue_belief = beliefunit_shop("Sue", "accord23")
+    sue_str = "Sue"
+    bob_str = "Bob"
+    sue_cred_points = 11
+    sue_debt_points = 13
+    bob_cred_points = 23
+    bob_debt_points = 29
+    sue_belief.add_partnerunit(sue_str, sue_cred_points, sue_debt_points)
+    sue_belief.add_partnerunit(bob_str, bob_cred_points, bob_debt_points)
+
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
     mop_rope = sue_belief.make_rope(clean_rope, "mop")
@@ -88,15 +97,9 @@ def get_sue_beliefunit() -> BeliefUnit:
 
 
 def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
+    sue_belief = get_sue_beliefunit()
     sue_str = "Sue"
     bob_str = "Bob"
-    sue_cred_points = 11
-    sue_debt_points = 13
-    bob_cred_points = 23
-    bob_debt_points = 29
-    sue_belief = get_sue_beliefunit()
-    sue_belief.add_partnerunit(sue_str, sue_cred_points, sue_debt_points)
-    sue_belief.add_partnerunit(bob_str, bob_cred_points, bob_debt_points)
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")
     mop_rope = sue_belief.make_rope(clean_rope, "mop")

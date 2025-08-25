@@ -18,24 +18,11 @@ from src.a03_group_logic.test._util.a03_str import (
     partner_name_str,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import _groupunits_str, partners_str
+from src.a06_belief_logic.test._util.a06_str import partners_str
 from src.a07_timeline_logic.test._util.a07_str import readable_str
 from src.a22_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_partners_view_dict,
-)
-from src.a22_belief_viewer.example22_beliefs import (
-    best_run_str,
-    best_soccer_str,
-    best_sport_str,
-    best_swim_str,
-    get_beliefunit_irrational_example,
-    get_sue_belief_with_facts_and_reasons,
-    get_sue_beliefunit,
-    play_run_str,
-    play_soccer_str,
-    play_str,
-    play_swim_str,
 )
 
 
@@ -269,6 +256,7 @@ def test_get_partners_view_dict_ReturnsObj_Scenario2_memberships():
         _fund_take_readable_key,
     }
     yao_swim_mu = yao_partnerunit.get_membership(swim_str)
+
     expected_group_title_readable = f"{group_title_str()}: {yao_swim_mu.group_title}"
     expected_group_cred_points_readable = (
         f"{group_cred_points_str()}: {yao_swim_mu.group_cred_points}"
@@ -292,6 +280,30 @@ def test_get_partners_view_dict_ReturnsObj_Scenario2_memberships():
     )
     expected__fund_give_readable = f"{_fund_give_str()}: {yao_swim_mu._fund_give}"
     expected__fund_take_readable = f"{_fund_take_str()}: {yao_swim_mu._fund_take}"
+
+    expected_group_title_readable = add_small_dot(expected_group_title_readable)
+    expected_group_cred_points_readable = add_small_dot(
+        expected_group_cred_points_readable
+    )
+    expected_group_debt_points_readable = add_small_dot(
+        expected_group_debt_points_readable
+    )
+    expected__credor_pool_readable = add_small_dot(expected__credor_pool_readable)
+    expected__debtor_pool_readable = add_small_dot(expected__debtor_pool_readable)
+    expected__fund_agenda_give_readable = add_small_dot(
+        expected__fund_agenda_give_readable
+    )
+    expected__fund_agenda_ratio_give_readable = add_small_dot(
+        expected__fund_agenda_ratio_give_readable
+    )
+    expected__fund_agenda_ratio_take_readable = add_small_dot(
+        expected__fund_agenda_ratio_take_readable
+    )
+    expected__fund_agenda_take_readable = add_small_dot(
+        expected__fund_agenda_take_readable
+    )
+    expected__fund_give_readable = add_small_dot(expected__fund_give_readable)
+    expected__fund_take_readable = add_small_dot(expected__fund_take_readable)
 
     assert yao_swim_dict.get(partner_name_str()) == yao_swim_mu.partner_name
     assert yao_swim_dict.get(group_title_str()) == yao_swim_mu.group_title
