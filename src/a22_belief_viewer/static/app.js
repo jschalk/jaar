@@ -3,7 +3,6 @@ let planTreeData = null;
 let show_partners = true;
 let show_partner_cred_points = false;
 let show_partner_debt_points = false;
-let show_partner_memberships = false;
 let show_partner_credor_pool = false;
 let show_partner_debtor_pool = false;
 let show_partner_irrational_partner_debt_points = false;
@@ -69,7 +68,6 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_partnersCheckbox = document.getElementById('show_partners');
     const show_partner_cred_pointsCheckbox = document.getElementById('show_partner_cred_points')
     const show_partner_debt_pointsCheckbox = document.getElementById('show_partner_debt_points')
-    const show_partner_membershipsCheckbox = document.getElementById('show_partner_memberships')
     const show_partner_credor_poolCheckbox = document.getElementById('show_partner_credor_pool')
     const show_partner_debtor_poolCheckbox = document.getElementById('show_partner_debtor_pool')
     const show_partner_irrational_partner_debt_pointsCheckbox = document.getElementById('show_partner_irrational_partner_debt_points')
@@ -134,7 +132,6 @@ document.addEventListener('DOMContentLoaded', function () {
     show_partnersCheckbox.addEventListener('change', function () { show_partners = this.checked; renderPartnersData(); });
     show_partner_cred_pointsCheckbox.addEventListener('change', function () { show_partner_cred_points = this.checked; renderPartnersData(); });
     show_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_debt_points = this.checked; renderPartnersData(); });
-    show_partner_membershipsCheckbox.addEventListener('change', function () { show_partner_memberships = this.checked; renderPartnersData(); });
     show_partner_credor_poolCheckbox.addEventListener('change', function () { show_partner_credor_pool = this.checked; renderPartnersData(); });
     show_partner_debtor_poolCheckbox.addEventListener('change', function () { show_partner_debtor_pool = this.checked; renderPartnersData(); });
     show_partner_irrational_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_irrational_partner_debt_points = this.checked; renderPartnersData(); });
@@ -235,7 +232,6 @@ function buildPartnersHtml(partnersData) {
         html += `<br>${partners_indent}${partner.partner_name}`;
         if (show_partner_cred_points) { html += `<br>${partners_indent}    ${partner.partner_cred_points_readable}` };
         if (show_partner_debt_points) { html += `<br>${partners_indent}    ${partner.partner_debt_points_readable}` };
-        if (show_partner_memberships) { html += `<br>${partners_indent}    ${partner._memberships_readable}` };
         if (show_partner_credor_pool) { html += `<br>${partners_indent}    ${partner._credor_pool_readable}` };
         if (show_partner_debtor_pool) { html += `<br>${partners_indent}    ${partner._debtor_pool_readable}` };
         if (show_partner_irrational_partner_debt_points) { html += `<br>${partners_indent}    ${partner._irrational_partner_debt_points_readable}` };
