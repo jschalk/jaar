@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
-from src.a99_module_linter.module_eval import (
+from src.a99_module_linter.linter import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
     check_if_test_HasDocString_pytests_exist,
