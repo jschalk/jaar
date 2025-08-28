@@ -2,11 +2,11 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
-    belief_partnerunit_str,
+    belief_voiceunit_str,
     moment_label_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
@@ -36,18 +36,18 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        beliefapartner_s_vld_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "s", "vld", "put"
+        beliefavoice_s_vld_put_tablename = prime_tbl(
+            belief_voiceunit_str(), "s", "vld", "put"
         )
-        print(f"{get_table_columns(cursor, beliefapartner_s_vld_put_tablename)=}")
-        insert_into_clause = f"""INSERT INTO {beliefapartner_s_vld_put_tablename} (
+        print(f"{get_table_columns(cursor, beliefavoice_s_vld_put_tablename)=}")
+        insert_into_clause = f"""INSERT INTO {beliefavoice_s_vld_put_tablename} (
   {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -58,9 +58,9 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        assert get_row_count(cursor, beliefapartner_s_vld_put_tablename) == 4
+        assert get_row_count(cursor, beliefavoice_s_vld_put_tablename) == 4
         blrawar_h_raw_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "h", "raw", "put"
+            belief_voiceunit_str(), "h", "raw", "put"
         )
         assert get_row_count(cursor, blrawar_h_raw_put_tablename) == 0
 
@@ -74,9 +74,9 @@ VALUES
 , {face_name_str()}_otx
 , {moment_label_str()}_otx
 , {belief_name_str()}_otx
-, {partner_name_str()}_otx
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}_otx
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 FROM {blrawar_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -110,7 +110,7 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario0_AddRowsToTable():
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         blrpern_s_vld_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "s", "vld", "put"
+            belief_voiceunit_str(), "s", "vld", "put"
         )
         print(f"{get_table_columns(cursor, blrpern_s_vld_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_vld_put_tablename} (
@@ -118,9 +118,9 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario0_AddRowsToTable():
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -133,7 +133,7 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_vld_put_tablename) == 4
         blrpern_h_raw_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "h", "raw", "put"
+            belief_voiceunit_str(), "h", "raw", "put"
         )
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 0
 
@@ -146,9 +146,9 @@ VALUES
 , {face_name_str()}_otx
 , {moment_label_str()}_otx
 , {belief_name_str()}_otx
-, {partner_name_str()}_otx
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}_otx
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 FROM {blrpern_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -181,7 +181,7 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario1_Populates_inx_Column
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         blrpern_s_vld_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "s", "vld", "put"
+            belief_voiceunit_str(), "s", "vld", "put"
         )
         print(f"{get_table_columns(cursor, blrpern_s_vld_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_vld_put_tablename} (
@@ -189,9 +189,9 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario1_Populates_inx_Column
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 )"""
         values_clause = f"""
 VALUES
@@ -204,7 +204,7 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_vld_put_tablename) == 4
         blrpern_h_raw_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "h", "raw", "put"
+            belief_voiceunit_str(), "h", "raw", "put"
         )
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 0
 
@@ -217,9 +217,9 @@ VALUES
 , {face_name_str()}_inx
 , {moment_label_str()}_inx
 , {belief_name_str()}_inx
-, {partner_name_str()}_inx
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}_inx
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 FROM {blrpern_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)

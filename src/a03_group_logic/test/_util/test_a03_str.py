@@ -8,8 +8,8 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_give_str,
     _fund_take_str,
     _groupunits_str,
-    _inallocable_partner_debt_points_str,
-    _irrational_partner_debt_points_str,
+    _inallocable_voice_debt_points_str,
+    _irrational_voice_debt_points_str,
     _laborheir_str,
     _memberships_str,
     _parent_solo_str,
@@ -23,13 +23,13 @@ from src.a03_group_logic.test._util.a03_str import (
     group_debt_points_str,
     group_title_str,
     laborunit_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
     party_title_str,
     respect_bit_str,
     solo_str,
     take_force_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 
 
@@ -44,8 +44,8 @@ def test_str_functions_ReturnsObj():
     assert _fund_give_str() == "_fund_give"
     assert _fund_take_str() == "_fund_take"
     assert _groupunits_str() == "_groupunits"
-    assert _inallocable_partner_debt_points_str() == "_inallocable_partner_debt_points"
-    assert _irrational_partner_debt_points_str() == "_irrational_partner_debt_points"
+    assert _inallocable_voice_debt_points_str() == "_inallocable_voice_debt_points"
+    assert _irrational_voice_debt_points_str() == "_irrational_voice_debt_points"
     assert _laborheir_str() == "_laborheir"
     assert _memberships_str() == "_memberships"
     assert _parent_solo_str() == "_parent_solo"
@@ -59,9 +59,9 @@ def test_str_functions_ReturnsObj():
     assert group_debt_points_str() == "group_debt_points"
     assert group_title_str() == "group_title"
     assert laborunit_str() == "laborunit"
-    assert partner_cred_points_str() == "partner_cred_points"
-    assert partner_debt_points_str() == "partner_debt_points"
-    assert partner_name_str() == "partner_name"
+    assert voice_cred_points_str() == "voice_cred_points"
+    assert voice_debt_points_str() == "voice_debt_points"
+    assert voice_name_str() == "voice_name"
     assert party_title_str() == "party_title"
     assert respect_bit_str() == "respect_bit"
     assert solo_str() == "solo"

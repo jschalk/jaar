@@ -121,15 +121,15 @@ def test_RopeMap_set_all_otx2inx_SetsAttr():
     xio_str = "Xio"
     sue_str = "Sue"
     zia_str = "Zia"
-    partner_name_ropemap = ropemap_shop()
+    voice_name_ropemap = ropemap_shop()
     x_otx2inx = {xio_str: sue_str, zia_str: zia_str}
-    assert partner_name_ropemap.otx2inx != x_otx2inx
+    assert voice_name_ropemap.otx2inx != x_otx2inx
 
     # WHEN
-    partner_name_ropemap.set_all_otx2inx(x_otx2inx)
+    voice_name_ropemap.set_all_otx2inx(x_otx2inx)
 
     # THEN
-    assert partner_name_ropemap.otx2inx == x_otx2inx
+    assert voice_name_ropemap.otx2inx == x_otx2inx
 
 
 def test_RopeMap_set_all_otx2inx_RaisesErrorIf_unknown_str_IsKeyIn_otx2inx():
@@ -138,13 +138,13 @@ def test_RopeMap_set_all_otx2inx_RaisesErrorIf_unknown_str_IsKeyIn_otx2inx():
     sue_str = "Sue"
     zia_str = "Zia"
     x_unknown_str = "UnknownTerm"
-    partner_name_ropemap = ropemap_shop(unknown_str=x_unknown_str)
+    voice_name_ropemap = ropemap_shop(unknown_str=x_unknown_str)
     x_otx2inx = {xio_str: sue_str, x_unknown_str: zia_str}
-    assert partner_name_ropemap.otx2inx != x_otx2inx
+    assert voice_name_ropemap.otx2inx != x_otx2inx
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        partner_name_ropemap.set_all_otx2inx(x_otx2inx, True)
+        voice_name_ropemap.set_all_otx2inx(x_otx2inx, True)
     exception_str = f"otx2inx cannot have unknown_str '{x_unknown_str}' in any str. Affected keys include ['{x_unknown_str}']."
     assert str(excinfo.value) == exception_str
 

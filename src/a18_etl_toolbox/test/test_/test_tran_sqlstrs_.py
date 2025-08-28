@@ -6,8 +6,6 @@ from src.a00_data_toolbox.db_toolbox import (
     required_columns_exist,
 )
 from src.a06_belief_logic.test._util.a06_str import (
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -15,6 +13,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
 )
 from src.a08_belief_atom_logic.atom_config import get_delete_key_name
@@ -57,13 +57,13 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     belief_net_amount_str,
     moment_event_time_agg_str,
     moment_ote1_agg_str,
-    moment_partner_nets_str,
+    moment_voice_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR,
     CREATE_MOMENT_OTE1_AGG_SQLSTR,
-    CREATE_MOMENT_PARTNER_NETS_SQLSTR,
+    CREATE_MOMENT_VOICE_NETS_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
     INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR,
     INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
@@ -85,8 +85,8 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
     blrunit_dimen = beliefunit_str()
-    blrpern_dimen = belief_partnerunit_str()
-    blrmemb_dimen = belief_partner_membership_str()
+    blrpern_dimen = belief_voiceunit_str()
+    blrmemb_dimen = belief_voice_membership_str()
     blrgrou_dimen = belief_groupunit_str()
     blrplan_dimen = belief_planunit_str()
     blrawar_dimen = belief_plan_awardunit_str()
@@ -175,7 +175,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidcore_s_agg_table == f"{pidcore_dimen}_s_agg"
     assert blrpern_job_table == f"{blrpern_dimen}_job"
     assert blrgrou_job_table == f"{blrgrou_dimen}_job"
-    assert x_blrpern_raw == "belief_partnerunit_raw"
+    assert x_blrpern_raw == "belief_voiceunit_raw"
 
 
 def test_create_all_idea_tables_CreatesMomentRawTables():
@@ -424,12 +424,12 @@ ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time
     assert INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR == expected_INSERT_sqlstr
 
 
-def test_CREATE_MOMENT_PARTNER_NETS_SQLSTR_Exists():
+def test_CREATE_MOMENT_VOICE_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
     sqlite_types[belief_net_amount_str()] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
-        tablename=moment_partner_nets_str(),
+        tablename=moment_voice_nets_str(),
         columns_list=[
             moment_label_str(),
             belief_name_str(),
@@ -439,4 +439,4 @@ def test_CREATE_MOMENT_PARTNER_NETS_SQLSTR_Exists():
     )
 
     # WHEN / THEN
-    assert CREATE_MOMENT_PARTNER_NETS_SQLSTR == expected_create_table_sqlstr
+    assert CREATE_MOMENT_VOICE_NETS_SQLSTR == expected_create_table_sqlstr

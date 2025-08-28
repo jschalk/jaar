@@ -8,7 +8,7 @@ from src.a03_group_logic.group import (
     membership_shop,
 )
 from src.a03_group_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
-from src.a03_group_logic.partner import partnerunit_shop
+from src.a03_group_logic.voice import voiceunit_shop
 from src.a04_reason_logic.reason import caseunit_shop, factheir_shop, reasonheir_shop
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -41,7 +41,7 @@ def test_ObjKeysHolder_Exists():
     assert not x_objkeyholder.belief_name
     assert not x_objkeyholder.rope
     assert not x_objkeyholder.reason_context
-    assert not x_objkeyholder.partner_name
+    assert not x_objkeyholder.voice_name
     assert not x_objkeyholder.membership
     assert not x_objkeyholder.group_title
     assert not x_objkeyholder.fact_rope
@@ -162,8 +162,8 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x__range_evaluated = 25
     x__descendant_task_count = 26
     x__healerunit_ratio = 27.0
-    x__all_partner_cred = 28
-    x__all_partner_debt = 29
+    x__all_voice_cred = 28
+    x__all_voice_debt = 29
     x_plan = planunit_shop()
     x_plan.moment_label = x_moment_label
     x_plan.parent_rope = x_parent_rope
@@ -191,8 +191,8 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan._range_evaluated = x__range_evaluated
     x_plan._descendant_task_count = x__descendant_task_count
     x_plan._healerunit_ratio = x__healerunit_ratio
-    x_plan._all_partner_cred = x__all_partner_cred
-    x_plan._all_partner_debt = x__all_partner_debt
+    x_plan._all_voice_cred = x__all_voice_cred
+    x_plan._all_voice_debt = x__all_voice_debt
     x_plan.begin = x_begin
     x_plan.close = x_close
     x_plan.addin = x_addin
@@ -216,8 +216,8 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan._range_evaluated = x__range_evaluated
     x_plan._descendant_task_count = x__descendant_task_count
     x_plan._healerunit_ratio = x__healerunit_ratio
-    x_plan._all_partner_cred = x__all_partner_cred
-    x_plan._all_partner_debt = x__all_partner_debt
+    x_plan._all_voice_cred = x__all_voice_cred
+    x_plan._all_voice_debt = x__all_voice_debt
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -262,8 +262,8 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x__range_evaluated,
             x__descendant_task_count,
             x__healerunit_ratio,
-            x__all_partner_cred,
-            x__all_partner_debt,
+            x__all_voice_cred,
+            x__all_voice_debt,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -398,7 +398,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
 def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_belief_calc_dimen_args("belief_partner_membership")
+    # x_args = get_belief_calc_dimen_args("belief_voice_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -412,7 +412,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
 
     x_moment_label = 1
     x_belief_name = 2
-    x_partner_name = 3
+    x_voice_name = 3
     x_group_title = 4
     x_group_cred_points = 5.0
     x_group_debt_points = 6.0
@@ -425,7 +425,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     x__fund_agenda_ratio_give = 13.0
     x__fund_agenda_ratio_take = 14.0
     x_membership = membership_shop(x_group_title)
-    x_membership.partner_name = x_partner_name
+    x_membership.voice_name = x_voice_name
     x_membership.group_cred_points = x_group_cred_points
     x_membership.group_debt_points = x_group_debt_points
     x_membership._credor_pool = x__credor_pool
@@ -440,7 +440,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "belief_partner_membership_job"
+        x_table_name = "belief_voice_membership_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
@@ -455,7 +455,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
         expected_row1 = (
             str(x_moment_label),
             str(x_belief_name),
-            str(x_partner_name),
+            str(x_voice_name),
             str(x_group_title),
             x_group_cred_points,
             x_group_debt_points,
@@ -475,23 +475,23 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
 def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     # sourcery skip: extract-method
     # ESTABLISH
-    # x_args = get_belief_calc_dimen_args("belief_partnerunit")
+    # x_args = get_belief_calc_dimen_args("belief_voiceunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
     #     print(f"    x_{x_arg} = {x_count}")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
-    #     print(f"""    x_partner.{x_arg} = x_{x_arg}""")
+    #     print(f"""    x_voice.{x_arg} = x_{x_arg}""")
     # print("")
     # for x_arg in get_default_sorted_list(x_args):
     #     print(f"""            x_{x_arg},""")
 
     x_moment_label = 1
     x_belief_name = 2
-    x_partner_name = 3
-    x_partner_cred_points = 4
-    x_partner_debt_points = 5
+    x_voice_name = 3
+    x_voice_cred_points = 4
+    x_voice_debt_points = 5
     x__credor_pool = 6
     x__debtor_pool = 7
     x__fund_give = 8
@@ -500,32 +500,32 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x__fund_agenda_take = 11
     x__fund_agenda_ratio_give = 12
     x__fund_agenda_ratio_take = 13
-    x__inallocable_partner_debt_points = 14
-    x__irrational_partner_debt_points = 15
-    x_partner = partnerunit_shop(x_partner_name)
-    x_partner.partner_name = x_partner_name
-    x_partner.partner_cred_points = x_partner_cred_points
-    x_partner.partner_debt_points = x_partner_debt_points
-    x_partner._credor_pool = x__credor_pool
-    x_partner._debtor_pool = x__debtor_pool
-    x_partner._fund_give = x__fund_give
-    x_partner._fund_take = x__fund_take
-    x_partner._fund_agenda_give = x__fund_agenda_give
-    x_partner._fund_agenda_take = x__fund_agenda_take
-    x_partner._fund_agenda_ratio_give = x__fund_agenda_ratio_give
-    x_partner._fund_agenda_ratio_take = x__fund_agenda_ratio_take
-    x_partner._inallocable_partner_debt_points = x__inallocable_partner_debt_points
-    x_partner._irrational_partner_debt_points = x__irrational_partner_debt_points
+    x__inallocable_voice_debt_points = 14
+    x__irrational_voice_debt_points = 15
+    x_voice = voiceunit_shop(x_voice_name)
+    x_voice.voice_name = x_voice_name
+    x_voice.voice_cred_points = x_voice_cred_points
+    x_voice.voice_debt_points = x_voice_debt_points
+    x_voice._credor_pool = x__credor_pool
+    x_voice._debtor_pool = x__debtor_pool
+    x_voice._fund_give = x__fund_give
+    x_voice._fund_take = x__fund_take
+    x_voice._fund_agenda_give = x__fund_agenda_give
+    x_voice._fund_agenda_take = x__fund_agenda_take
+    x_voice._fund_agenda_ratio_give = x__fund_agenda_ratio_give
+    x_voice._fund_agenda_ratio_take = x__fund_agenda_ratio_take
+    x_voice._inallocable_voice_debt_points = x__inallocable_voice_debt_points
+    x_voice._irrational_voice_debt_points = x__irrational_voice_debt_points
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        x_table_name = "belief_partnerunit_job"
+        x_table_name = "belief_voiceunit_job"
         assert get_row_count(cursor, x_table_name) == 0
         x_objkeysholder = ObjKeysHolder(x_moment_label, x_belief_name)
 
         # WHEN
-        insert_job_blrpern(cursor, x_objkeysholder, x_partner)
+        insert_job_blrpern(cursor, x_objkeysholder, x_voice)
 
         # THEN
         assert get_row_count(cursor, x_table_name) == 1
@@ -535,9 +535,9 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
         expected_row1 = (
             str(x_moment_label),
             str(x_belief_name),
-            str(x_partner_name),
-            x_partner_cred_points,
-            x_partner_debt_points,
+            str(x_voice_name),
+            x_voice_cred_points,
+            x_voice_debt_points,
             x__credor_pool,
             x__debtor_pool,
             x__fund_give,
@@ -546,8 +546,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             x__fund_agenda_take,
             x__fund_agenda_ratio_give,
             x__fund_agenda_ratio_take,
-            x__inallocable_partner_debt_points,
-            x__irrational_partner_debt_points,
+            x__inallocable_voice_debt_points,
+            x__irrational_voice_debt_points,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -864,9 +864,9 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     bob_str = "Bob"
     run_str = ";run"
     sue_belief = beliefunit_shop(sue_str, a23_str)
-    sue_belief.add_partnerunit(sue_str)
-    sue_belief.add_partnerunit(bob_str)
-    sue_belief.get_partner(bob_str).add_membership(run_str)
+    sue_belief.add_voiceunit(sue_str)
+    sue_belief.add_voiceunit(bob_str)
+    sue_belief.get_voice(bob_str).add_membership(run_str)
     casa_rope = sue_belief.make_l1_rope("casa")
     status_rope = sue_belief.make_l1_rope("status")
     clean_rope = sue_belief.make_rope(status_rope, "clean")
@@ -887,8 +887,8 @@ def test_insert_job_obj_CreatesTableRows_Scenario0():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        blrmemb_job_table = "belief_partner_membership_job"
-        blrpern_job_table = "belief_partnerunit_job"
+        blrmemb_job_table = "belief_voice_membership_job"
+        blrpern_job_table = "belief_voiceunit_job"
         blrgrou_job_table = "belief_groupunit_job"
         blrawar_job_table = "belief_plan_awardunit_job"
         blrfact_job_table = "belief_plan_factunit_job"

@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a06_belief_logic.test._util.a06_str import (
     credor_respect_str,
     group_title_str,
-    partner_name_str,
+    voice_name_str,
 )
 from src.a17_idea_logic.idea_db_tool import (
     get_ordered_csv,
@@ -162,7 +162,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect(
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
     # ESTABLISH
-    df1 = DataFrame([["AAA", "BBB"]], columns=[group_title_str(), partner_name_str()])
+    df1 = DataFrame([["AAA", "BBB"]], columns=[group_title_str(), voice_name_str()])
 
     # WHEN
     relevant_dataframe = get_relevant_columns_dataframe(df1)
@@ -170,8 +170,8 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     # THEN
     assert relevant_dataframe is not None
     print(f"{relevant_dataframe.columns=}")
-    assert relevant_dataframe.columns.to_list()[0] == partner_name_str()
+    assert relevant_dataframe.columns.to_list()[0] == voice_name_str()
     assert relevant_dataframe.columns.to_list() == [
-        partner_name_str(),
+        voice_name_str(),
         group_title_str(),
     ]

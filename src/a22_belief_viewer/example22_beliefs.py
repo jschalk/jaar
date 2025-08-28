@@ -45,15 +45,15 @@ def get_sue_beliefunit() -> BeliefUnit:
     sue_debt_points = 13
     bob_cred_points = 23
     bob_debt_points = 29
-    sue_belief.add_partnerunit(sue_str, sue_cred_points, sue_debt_points)
-    sue_belief.add_partnerunit(bob_str, bob_cred_points, bob_debt_points)
-    sue_partner = sue_belief.get_partner(sue_str)
+    sue_belief.add_voiceunit(sue_str, sue_cred_points, sue_debt_points)
+    sue_belief.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
+    sue_voice = sue_belief.get_voice(sue_str)
     swim_str = ";swimmers"
     team_str = ";Team Manager"
-    sue_partner.add_membership(swim_str, 77, 51)
-    bob_partner = sue_belief.get_partner(bob_str)
-    bob_partner.add_membership(swim_str, 12, 37)
-    bob_partner.add_membership(team_str, 51, 91)
+    sue_voice.add_membership(swim_str, 77, 51)
+    bob_voice = sue_belief.get_voice(bob_str)
+    bob_voice.add_membership(swim_str, 12, 37)
+    bob_voice.add_membership(team_str, 51, 91)
 
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, "clean")

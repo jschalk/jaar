@@ -276,7 +276,7 @@ def test_NameMap_unknown_str_in_otx2inx_ReturnsObj():
     assert x_namemap._unknown_str_in_otx2inx()
 
 
-def test_NameMap_reveal_inx_ReturnsObjAndSetsAttr_partner_name():
+def test_NameMap_reveal_inx_ReturnsObjAndSetsAttr_voice_name():
     # ESTABLISH
     inx_r_knot = ":"
     otx_r_knot = "/"

@@ -4,9 +4,9 @@ from src.a02_finance_logic.test._util.a02_str import knot_str
 from src.a06_belief_logic.test._util.a06_str import (
     fund_iota_str,
     moment_label_str,
-    partner_name_str,
     penny_str,
     respect_bit_str,
+    voice_name_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
@@ -234,7 +234,7 @@ def test_get_moment_args_set_ReturnsObj():
     assert moment_args_set == mapping_args_set
     assert len(moment_args_set) == 24
     expected_moment_args_set = {
-        partner_name_str(),
+        voice_name_str(),
         amount_str(),
         knot_str(),
         c400_number_str(),

@@ -1,5 +1,5 @@
 {
-  "partners": {
+  "voices": {
     "A a ron Jones": {
       "_memberships": {
         ";Everyone": {
@@ -18,9 +18,9 @@
           "group_title": "A a ron Jones"
         }
       },
-      "partner_name": "A a ron Jones",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "A a ron Jones",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "America": {
       "_memberships": {
@@ -45,9 +45,9 @@
           "group_title": "America"
         }
       },
-      "partner_name": "America",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "America",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Anna": {
       "_memberships": {
@@ -67,9 +67,9 @@
           "group_title": "Anna"
         }
       },
-      "partner_name": "Anna",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Anna",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Benjamin Stoddert": {
       "_memberships": {
@@ -94,9 +94,9 @@
           "group_title": "Benjamin Stoddert"
         }
       },
-      "partner_name": "Benjamin Stoddert",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Benjamin Stoddert",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Bob302": {
       "_memberships": {
@@ -121,9 +121,9 @@
           "group_title": "Bob302"
         }
       },
-      "partner_name": "Bob302",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Bob302",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Chuck Lee": {
       "_memberships": {
@@ -148,9 +148,9 @@
           "group_title": "Chuck Lee"
         }
       },
-      "partner_name": "Chuck Lee",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Chuck Lee",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Ernesto Chavez": {
       "_memberships": {
@@ -170,9 +170,9 @@
           "group_title": "Ernesto Chavez"
         }
       },
-      "partner_name": "Ernesto Chavez",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Ernesto Chavez",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Jacque Chirac": {
       "_memberships": {
@@ -192,9 +192,9 @@
           "group_title": "Jacque Chirac"
         }
       },
-      "partner_name": "Jacque Chirac",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Jacque Chirac",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Jane Randolph": {
       "_memberships": {
@@ -214,9 +214,9 @@
           "group_title": "Jane Randolph"
         }
       },
-      "partner_name": "Jane Randolph",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Jane Randolph",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Maria Reynolds": {
       "_memberships": {
@@ -236,9 +236,9 @@
           "group_title": "Maria Reynolds"
         }
       },
-      "partner_name": "Maria Reynolds",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Maria Reynolds",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Martha Doubs": {
       "_memberships": {
@@ -263,9 +263,9 @@
           "group_title": "Martha Doubs"
         }
       },
-      "partner_name": "Martha Doubs",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Martha Doubs",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Mikayla": {
       "_memberships": {
@@ -290,9 +290,9 @@
           "group_title": "Mikayla"
         }
       },
-      "partner_name": "Mikayla",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Mikayla",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Norberto": {
       "_memberships": {
@@ -312,9 +312,9 @@
           "group_title": "Norberto"
         }
       },
-      "partner_name": "Norberto",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Norberto",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Perrison": {
       "_memberships": {
@@ -339,9 +339,9 @@
           "group_title": "Perrison"
         }
       },
-      "partner_name": "Perrison",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Perrison",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Philipa": {
       "_memberships": {
@@ -366,9 +366,9 @@
           "group_title": "Philipa"
         }
       },
-      "partner_name": "Philipa",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Philipa",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Prashant": {
       "_memberships": {
@@ -388,9 +388,9 @@
           "group_title": "Prashant"
         }
       },
-      "partner_name": "Prashant",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Prashant",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Renee Elise Goldsberry": {
       "_memberships": {
@@ -440,9 +440,9 @@
           "group_title": "Renee Elise Goldsberry"
         }
       },
-      "partner_name": "Renee Elise Goldsberry",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Renee Elise Goldsberry",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Sam zamora": {
       "_memberships": {
@@ -467,9 +467,9 @@
           "group_title": "Sam zamora"
         }
       },
-      "partner_name": "Sam zamora",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Sam zamora",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Shadwell Harris": {
       "_memberships": {
@@ -489,9 +489,9 @@
           "group_title": "Shadwell Harris"
         }
       },
-      "partner_name": "Shadwell Harris",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Shadwell Harris",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Thomas OSU": {
       "_memberships": {
@@ -511,9 +511,9 @@
           "group_title": "Thomas OSU"
         }
       },
-      "partner_name": "Thomas OSU",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Thomas OSU",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "Travis Fox": {
       "_memberships": {
@@ -533,9 +533,9 @@
           "group_title": "Travis Fox"
         }
       },
-      "partner_name": "Travis Fox",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "Travis Fox",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     },
     "WIlliam Wellace": {
       "_memberships": {
@@ -555,9 +555,9 @@
           "group_title": "WIlliam Wellace"
         }
       },
-      "partner_name": "WIlliam Wellace",
-      "partner_cred_points": 1,
-      "partner_debt_points": 1
+      "voice_name": "WIlliam Wellace",
+      "voice_cred_points": 1,
+      "voice_debt_points": 1
     }
   },
   "knot": ";",

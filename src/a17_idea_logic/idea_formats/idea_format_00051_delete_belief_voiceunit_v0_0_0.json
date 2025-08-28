@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "partner_name": {
+        "voice_name_ERASE": {
             "otx_key": true
         },
         "event_int": {
@@ -12,18 +12,14 @@
         "moment_label": {
             "otx_key": true
         },
-        "group_title_ERASE": {
-            "otx_key": true
-        },
         "belief_name": {
             "otx_key": true
         }
     },
-    "idea_number": "br00050",
+    "idea_number": "br00051",
     "dimens": [
-        "momentunit",
         "beliefunit",
-        "belief_partnerunit",
-        "belief_partner_membership"
+        "momentunit",
+        "belief_voiceunit"
     ]
 }

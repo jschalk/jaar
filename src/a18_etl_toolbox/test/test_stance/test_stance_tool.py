@@ -90,7 +90,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     save_file(moment_json_path, None, a23_moment.get_json())
     # create belief gut file
     bob_gut = beliefunit_shop(bob_str, a23_str)
-    bob_gut.add_partnerunit("Yao", 44, 55)
+    bob_gut.add_voiceunit("Yao", 44, 55)
     a23_bob_gut_path = create_gut_path(moment_mstr_dir, a23_str, bob_str)
     save_file(a23_bob_gut_path, None, bob_gut.get_json())
 

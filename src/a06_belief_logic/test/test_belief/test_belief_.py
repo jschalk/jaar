@@ -27,11 +27,11 @@ from src.a06_belief_logic.test._util.a06_str import (
     last_pack_id_str,
     max_tree_traverse_str,
     moment_label_str,
-    partners_str,
     penny_str,
     planroot_str,
     respect_bit_str,
     tally_str,
+    voices_str,
 )
 
 
@@ -44,7 +44,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.moment_label is None
     assert x_belief.belief_name is None
     assert x_belief.tally is None
-    assert x_belief.partners is None
+    assert x_belief.voices is None
     assert x_belief.planroot is None
     assert x_belief.credor_respect is None
     assert x_belief.debtor_respect is None
@@ -84,7 +84,7 @@ def test_BeliefUnit_Exists():
         _reason_contexts_str(),
         _sum_healerunit_share_str(),
         _tree_traverse_count_str(),
-        partners_str(),
+        voices_str(),
         knot_str(),
         planroot_str(),
         credor_respect_str(),
@@ -128,7 +128,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.belief_name == sue_str
     assert x_belief.moment_label == iowa_moment_label
     assert x_belief.tally == 1
-    assert x_belief.partners == {}
+    assert x_belief.voices == {}
     assert x_belief.planroot is not None
     assert x_belief.max_tree_traverse == 3
     assert x_belief.knot == slash_knot

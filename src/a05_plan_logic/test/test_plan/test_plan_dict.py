@@ -16,8 +16,8 @@ from src.a05_plan_logic.plan import (
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
-    _all_partner_cred_str,
-    _all_partner_debt_str,
+    _all_voice_cred_str,
+    _all_voice_debt_str,
     _awardheirs_str,
     _awardlines_str,
     _chore_str,

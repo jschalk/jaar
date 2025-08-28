@@ -19,22 +19,22 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     yao_gut = beliefunit_shop(yao_str, knot=slash_str, penny=penny_float)
     yao_gut.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     zia_credor_pool = 87
     zia_debtor_pool = 81
-    yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    zia_irrational_partner_debt_points = 11
-    zia_inallocable_partner_debt_points = 22
-    duty_zia_partnerunit = yao_gut.get_partner(zia_str)
-    duty_zia_partnerunit.add_irrational_partner_debt_points(
-        zia_irrational_partner_debt_points
+    yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    zia_irrational_voice_debt_points = 11
+    zia_inallocable_voice_debt_points = 22
+    duty_zia_voiceunit = yao_gut.get_voice(zia_str)
+    duty_zia_voiceunit.add_irrational_voice_debt_points(
+        zia_irrational_voice_debt_points
     )
-    duty_zia_partnerunit.add_inallocable_partner_debt_points(
-        zia_inallocable_partner_debt_points
+    duty_zia_voiceunit.add_inallocable_voice_debt_points(
+        zia_inallocable_voice_debt_points
     )
-    zia_partnerunit = yao_gut.get_partner(zia_str)
-    zia_partnerunit.add_membership(f"{slash_str}swimmers")
+    zia_voiceunit = yao_gut.get_voice(zia_str)
+    zia_voiceunit.add_membership(f"{slash_str}swimmers")
     yao_gut.set_credor_respect(zia_credor_pool)
     yao_gut.set_debtor_respect(zia_debtor_pool)
 
@@ -46,7 +46,7 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.belief_name == zia_str
     assert yao_empty_vision.moment_label == yao_gut.moment_label
     assert yao_empty_vision.last_pack_id is None
-    assert yao_empty_vision.get_partnerunits_dict() == {}
+    assert yao_empty_vision.get_voiceunits_dict() == {}
     assert yao_empty_vision.knot == yao_gut.knot
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
     assert yao_empty_vision.fund_iota == yao_gut.fund_iota
@@ -57,7 +57,7 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.debtor_respect != yao_gut.debtor_respect
     assert yao_empty_vision.debtor_respect == validate_respect_num()
     yao_empty_vision.cash_out()
-    assert yao_empty_vision.partners == {}
+    assert yao_empty_vision.voices == {}
 
 
 def test_create_listen_basis_ReturnsObj():
@@ -67,22 +67,22 @@ def test_create_listen_basis_ReturnsObj():
     yao_duty = beliefunit_shop(yao_str, knot=slash_str)
     yao_duty.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     zia_credor_pool = 8700
     zia_debtor_pool = 8100
-    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    zia_irrational_partner_debt_points = 11
-    zia_inallocable_partner_debt_points = 22
-    duty_zia_partnerunit = yao_duty.get_partner(zia_str)
-    duty_zia_partnerunit.add_irrational_partner_debt_points(
-        zia_irrational_partner_debt_points
+    yao_duty.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    zia_irrational_voice_debt_points = 11
+    zia_inallocable_voice_debt_points = 22
+    duty_zia_voiceunit = yao_duty.get_voice(zia_str)
+    duty_zia_voiceunit.add_irrational_voice_debt_points(
+        zia_irrational_voice_debt_points
     )
-    duty_zia_partnerunit.add_inallocable_partner_debt_points(
-        zia_inallocable_partner_debt_points
+    duty_zia_voiceunit.add_inallocable_voice_debt_points(
+        zia_inallocable_voice_debt_points
     )
-    zia_partnerunit = yao_duty.get_partner(zia_str)
-    zia_partnerunit.add_membership(f"{slash_str}swimmers")
+    zia_voiceunit = yao_duty.get_voice(zia_str)
+    zia_voiceunit.add_membership(f"{slash_str}swimmers")
     yao_duty.set_credor_respect(zia_credor_pool)
     yao_duty.set_debtor_respect(zia_debtor_pool)
 
@@ -93,7 +93,7 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_vision.belief_name == yao_duty.belief_name
     assert yao_basis_vision.moment_label == yao_duty.moment_label
     assert yao_basis_vision.last_pack_id == yao_duty.last_pack_id
-    assert yao_basis_vision.get_partnerunits_dict() == yao_duty.get_partnerunits_dict()
+    assert yao_basis_vision.get_voiceunits_dict() == yao_duty.get_voiceunits_dict()
     assert yao_basis_vision.knot == yao_duty.knot
     assert yao_basis_vision.fund_pool == yao_duty.fund_pool
     assert yao_basis_vision.fund_iota == yao_duty.fund_iota
@@ -103,13 +103,13 @@ def test_create_listen_basis_ReturnsObj():
     yao_basis_vision.cash_out()
     assert len(yao_basis_vision._plan_dict) != len(yao_duty._plan_dict)
     assert len(yao_basis_vision._plan_dict) == 1
-    vision_zia_partnerunit = yao_basis_vision.get_partner(zia_str)
+    vision_zia_voiceunit = yao_basis_vision.get_voice(zia_str)
     assert (
-        yao_basis_vision.get_partnerunits_dict().keys()
-        == yao_duty.get_partnerunits_dict().keys()
+        yao_basis_vision.get_voiceunits_dict().keys()
+        == yao_duty.get_voiceunits_dict().keys()
     )
-    assert vision_zia_partnerunit._irrational_partner_debt_points == 0
-    assert vision_zia_partnerunit._inallocable_partner_debt_points == 0
+    assert vision_zia_voiceunit._irrational_voice_debt_points == 0
+    assert vision_zia_voiceunit._inallocable_voice_debt_points == 0
 
 
 def test_get_default_job_ReturnsObj():
@@ -120,7 +120,7 @@ def test_get_default_job_ReturnsObj():
     x_fund_pool = 99000
     x_fund_iota = 80
     x_respect_bit = 5
-    sue_partner_pool = 800
+    sue_voice_pool = 800
     casa_str = "casa"
     bob_str = "Bob"
     last_pack_id = 7
@@ -129,10 +129,10 @@ def test_get_default_job_ReturnsObj():
         sue_str, blue_str, slash_str, x_fund_pool, x_fund_iota, x_respect_bit
     )
     sue_beliefunit.set_last_pack_id(last_pack_id)
-    sue_beliefunit.add_partnerunit(bob_str, 3, 4)
-    bob_partnerunit = sue_beliefunit.get_partner(bob_str)
-    bob_partnerunit.add_membership(f"{slash_str}swimmers")
-    sue_beliefunit.set_partner_respect(sue_partner_pool)
+    sue_beliefunit.add_voiceunit(bob_str, 3, 4)
+    bob_voiceunit = sue_beliefunit.get_voice(bob_str)
+    bob_voiceunit.add_membership(f"{slash_str}swimmers")
+    sue_beliefunit.set_voice_respect(sue_voice_pool)
     sue_beliefunit.set_l1_plan(planunit_shop(casa_str))
     sue_beliefunit.set_max_tree_traverse(sue_max_tree_traverse)
 
@@ -146,11 +146,11 @@ def test_get_default_job_ReturnsObj():
     assert default_job.moment_label == sue_beliefunit.moment_label
     assert default_job.moment_label == blue_str
     assert default_job.knot == slash_str
-    assert default_job.fund_pool == sue_partner_pool
+    assert default_job.fund_pool == sue_voice_pool
     assert default_job.fund_iota == x_fund_iota
     assert default_job.respect_bit == x_respect_bit
     assert default_job.credor_respect == default_respect_num()
     assert default_job.debtor_respect == default_respect_num()
     assert default_job.max_tree_traverse == sue_max_tree_traverse
-    assert len(default_job.get_partnerunits_dict()) == 1
+    assert len(default_job.get_voiceunits_dict()) == 1
     assert len(default_job._plan_dict) == 1

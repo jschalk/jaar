@@ -12,7 +12,7 @@ from src.a12_hub_toolbox.a12_path import (
     create_moment_json_path,
 )
 from src.a15_moment_logic.a15_path import (
-    create_bud_partner_mandate_ledger_path as bud_mandate_path,
+    create_bud_voice_mandate_ledger_path as bud_mandate_path,
 )
 from src.a15_moment_logic.moment_main import (
     get_from_dict as momentunit_get_from_dict,
@@ -30,7 +30,7 @@ from src.a20_world_logic.test._util.example_worlds import (
 from src.a20_world_logic.world import worldunit_shop
 
 
-def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro0_BudEmpty(
+def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro0_BudEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,13 +47,13 @@ def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro0_BudEmpty
     assert count_dirs_files(a23_beliefs_path) == 0
 
     # WHEN
-    fay_world.calc_moment_bud_partner_mandate_net_ledgers()
+    fay_world.calc_moment_bud_voice_mandate_net_ledgers()
 
     # THEN
     assert count_dirs_files(a23_beliefs_path) == 0
 
 
-def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro1_SimpleBud(
+def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro1_SimpleBud(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -75,18 +75,18 @@ def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro1_SimpleBu
     assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fay_world.calc_moment_bud_partner_mandate_net_ledgers()
+    fay_world.calc_moment_bud_voice_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)
-    expected_bud_partner_nets = {bob_str: bud1_quota}
-    assert open_json(bob37_bud_mandate_path) == expected_bud_partner_nets
+    expected_bud_voice_nets = {bob_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
     gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
     gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
-    assert gen_bob37_budunit._bud_partner_nets == expected_bud_partner_nets
+    assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets
 
 
-def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro2_BudExists(
+def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -113,13 +113,13 @@ def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro2_BudExist
     event44 = 44
     event55 = 55
     bob55_beliefevent = get_bob_mop_with_reason_beliefunit_example()
-    bob55_beliefevent.add_partnerunit(sue_str, 1)
+    bob55_beliefevent.add_voiceunit(sue_str, 1)
     sue44_beliefevent = beliefunit_shop(sue_str, a23_str)
     sue44_beliefevent.set_belief_name(sue_str)
-    sue44_beliefevent.add_partnerunit(yao_str, 1)
+    sue44_beliefevent.add_voiceunit(yao_str, 1)
     yao44_beliefevent = get_bob_mop_with_reason_beliefunit_example()
     yao44_beliefevent.set_belief_name(yao_str)
-    yao44_beliefevent.add_partnerunit(zia_str, 1)
+    yao44_beliefevent.add_voiceunit(zia_str, 1)
     clean_fact = example_casa_clean_factunit()
     yao44_beliefevent.add_fact(clean_fact.fact_context, clean_fact.fact_state)
     zia33_beliefevent = get_bob_mop_with_reason_beliefunit_example()
@@ -143,17 +143,17 @@ def test_WorldUnit_calc_moment_bud_partner_mandate_net_ledgers_Scenaro2_BudExist
     a23_ote1_json_path = create_moment_ote1_json_path(mstr_dir, a23_str)
     save_json(a23_ote1_json_path, None, a23_ote1_dict)
 
-    # create result bud_partner_mandate_ledger file
+    # create result bud_voice_mandate_ledger file
     bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
     assert os_path_exists(bob37_bud_mandate_path) is False
 
     # WHEN
-    fay_world.calc_moment_bud_partner_mandate_net_ledgers()
+    fay_world.calc_moment_bud_voice_mandate_net_ledgers()
 
     # THEN
     assert os_path_exists(bob37_bud_mandate_path)
-    expected_bud_partner_nets = {zia_str: bud1_quota}
-    assert open_json(bob37_bud_mandate_path) == expected_bud_partner_nets
+    expected_bud_voice_nets = {zia_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
     gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
     gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
-    assert gen_bob37_budunit._bud_partner_nets == expected_bud_partner_nets
+    assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets

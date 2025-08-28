@@ -20,12 +20,12 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
     respect_bit_str,
     solo_str,
     take_force_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
     _active_str,
@@ -104,14 +104,6 @@ def attributes_str() -> str:
     return "attributes"
 
 
-def belief_partner_membership_str() -> str:
-    return "belief_partner_membership"
-
-
-def belief_partnerunit_str() -> str:
-    return "belief_partnerunit"
-
-
 def belief_plan_awardunit_str() -> str:
     return "belief_plan_awardunit"
 
@@ -138,6 +130,14 @@ def belief_plan_reasonunit_str() -> str:
 
 def belief_planunit_str() -> str:
     return "belief_planunit"
+
+
+def belief_voice_membership_str() -> str:
+    return "belief_voice_membership"
+
+
+def belief_voiceunit_str() -> str:
+    return "belief_voiceunit"
 
 
 def beliefunit_str() -> str:
@@ -176,17 +176,17 @@ def max_tree_traverse_str() -> str:
     return "max_tree_traverse"
 
 
-def partner_pool_str() -> str:
-    return "partner_pool"
-
-
-def partners_str() -> str:
-    return "partners"
-
-
 def planroot_str() -> str:
     return "planroot"
 
 
 def tally_str() -> str:
     return "tally"
+
+
+def voice_pool_str() -> str:
+    return "voice_pool"
+
+
+def voices_str() -> str:
+    return "voices"

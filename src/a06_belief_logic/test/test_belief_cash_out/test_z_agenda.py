@@ -467,7 +467,7 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     assert get_chores_count(task_plan_list) == 64
 
 
-def test_BeliefUnit_agenda_IsSetByLaborUnit_1PartnerGroup():
+def test_BeliefUnit_agenda_IsSetByLaborUnit_1VoiceGroup():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
@@ -477,7 +477,7 @@ def test_BeliefUnit_agenda_IsSetByLaborUnit_1PartnerGroup():
     assert len(yao_belief.get_agenda_dict()) == 1
 
     sue_str = "Sue"
-    yao_belief.add_partnerunit(sue_str)
+    yao_belief.add_voiceunit(sue_str)
     laborunit_sue = laborunit_shop()
     laborunit_sue.add_party(party_title=sue_str)
     assert len(yao_belief.get_agenda_dict()) == 1
@@ -489,7 +489,7 @@ def test_BeliefUnit_agenda_IsSetByLaborUnit_1PartnerGroup():
     assert len(yao_belief.get_agenda_dict()) == 0
 
     # WHEN
-    yao_belief.add_partnerunit(yao_str)
+    yao_belief.add_voiceunit(yao_str)
     laborunit_yao = laborunit_shop()
     laborunit_yao.add_party(party_title=yao_str)
 
@@ -503,20 +503,20 @@ def test_BeliefUnit_agenda_IsSetByLaborUnit_1PartnerGroup():
     # print(f"{agenda_dict[0].plan_label=}")
 
 
-def test_BeliefUnit_get_agenda_dict_IsSetByLaborUnit_2PartnerGroup():
+def test_BeliefUnit_get_agenda_dict_IsSetByLaborUnit_2VoiceGroup():
     # ESTABLISH
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
-    yao_belief.add_partnerunit(yao_str)
+    yao_belief.add_voiceunit(yao_str)
     casa_str = "casa"
     casa_rope = yao_belief.make_l1_rope(casa_str)
     yao_belief.set_l1_plan(planunit_shop(casa_str, task=True))
 
     sue_str = "Sue"
-    yao_belief.add_partnerunit(sue_str)
+    yao_belief.add_voiceunit(sue_str)
     run_str = ";runners"
-    sue_partnerunit = yao_belief.get_partner(sue_str)
-    sue_partnerunit.add_membership(run_str)
+    sue_voiceunit = yao_belief.get_voice(sue_str)
+    sue_voiceunit.add_membership(run_str)
 
     run_laborunit = laborunit_shop()
     run_laborunit.add_party(party_title=run_str)
@@ -529,8 +529,8 @@ def test_BeliefUnit_get_agenda_dict_IsSetByLaborUnit_2PartnerGroup():
     assert len(yao_belief.get_agenda_dict()) == 0
 
     # WHEN
-    yao_partnerunit = yao_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(run_str)
+    yao_voiceunit = yao_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(run_str)
 
     # THEN
     assert len(yao_belief.get_agenda_dict()) == 1
@@ -553,7 +553,7 @@ def test_BeliefUnit_get_all_tasks_ReturnsObj():
     zia_belief.set_plan(planunit_shop(sweep_str, task=True), clean_rope)
     sweep_plan = zia_belief.get_plan_obj(sweep_rope)
     yao_str = "Yao"
-    zia_belief.add_partnerunit(yao_str)
+    zia_belief.add_voiceunit(yao_str)
     sweep_plan.laborunit.add_party(yao_str)
     print(f"{sweep_plan}")
     agenda_dict = zia_belief.get_agenda_dict()

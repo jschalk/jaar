@@ -14,9 +14,9 @@ from src.a06_belief_logic.belief_main import (
 from src.a06_belief_logic.test._util.a06_str import (
     factunits_str,
     laborunit_str,
-    partners_str,
     planroot_str,
     reasonunits_str,
+    voices_str,
 )
 from src.a06_belief_logic.test._util.example_beliefs import (
     beliefunit_v001,
@@ -55,8 +55,8 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict["credor_respect"] == yao_belief.credor_respect
     assert belief_dict["debtor_respect"] == yao_belief.debtor_respect
     assert belief_dict["last_pack_id"] == yao_belief.last_pack_id
-    assert len(belief_dict[partners_str()]) == len(yao_belief.partners)
-    assert len(belief_dict[partners_str()]) != 12
+    assert len(belief_dict[voices_str()]) == len(yao_belief.voices)
+    assert len(belief_dict[voices_str()]) != 12
 
     x_planroot = yao_belief.planroot
     planroot_dict = belief_dict[planroot_str()]
@@ -99,10 +99,10 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
     run_str = ";runners"
-    yao_partnerunit = sue_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(run_str)
+    yao_voiceunit = sue_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(run_str)
     run_healerunit = healerunit_shop()
     run_healerunit.set_healer_name(x_healer_name=run_str)
     root_rope = to_rope(sue_belief.moment_label)
@@ -120,10 +120,10 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
     run_str = ";runners"
-    yao_partnerunit = sue_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(run_str)
+    yao_voiceunit = sue_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(run_str)
 
     morn_str = "morning"
     morn_rope = sue_belief.make_l1_rope(morn_str)
@@ -161,9 +161,9 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     override_str = "override"
     yao_str = "Yao"
     run_str = ";runners"
-    zia_belief.add_partnerunit(yao_str)
-    yao_partnerunit = zia_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(run_str)
+    zia_belief.add_voiceunit(yao_str)
+    yao_voiceunit = zia_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(run_str)
     run_healerunit = healerunit_shop({run_str})
     root_rope = to_rope(zia_belief.moment_label)
     zia_belief.edit_plan_attr(root_rope, healerunit=run_healerunit)
@@ -275,10 +275,10 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 
     anna_str = "Anna"
-    anna_partnerunit = yao_belief.get_partner(anna_str)
-    assert anna_partnerunit.get_membership(";Family").group_cred_points == 6.2
-    assert yao_belief.partners is not None
-    assert len(yao_belief.partners) == 22
+    anna_voiceunit = yao_belief.get_voice(anna_str)
+    assert anna_voiceunit.get_membership(";Family").group_cred_points == 6.2
+    assert yao_belief.voices is not None
+    assert len(yao_belief.voices) == 22
 
 
 def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
@@ -310,16 +310,16 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     # print(f"{json_shave_plan.plan_label=} {json_shave_plan.parent_rope=}")
 
     sue_str = "Sue"
-    zia_belief.add_partnerunit(
-        partner_name=sue_str, partner_cred_points=199, partner_debt_points=199
+    zia_belief.add_voiceunit(
+        voice_name=sue_str, voice_cred_points=199, voice_debt_points=199
     )
     xio_str = "Xio"
-    zia_belief.add_partnerunit(partner_name=xio_str)
+    zia_belief.add_voiceunit(voice_name=xio_str)
     run_str = ";runners"
-    sue_partnerunit = zia_belief.get_partner(sue_str)
-    xio_partnerunit = zia_belief.get_partner(xio_str)
-    sue_partnerunit.add_membership(run_str)
-    xio_partnerunit.add_membership(run_str)
+    sue_voiceunit = zia_belief.get_voice(sue_str)
+    xio_voiceunit = zia_belief.get_voice(xio_str)
+    sue_voiceunit.add_membership(run_str)
+    xio_voiceunit.add_membership(run_str)
     run_laborunit = laborunit_shop()
     run_laborunit.add_party(party_title=run_str)
     root_rope = to_rope(zia_belief.moment_label)
@@ -445,21 +445,21 @@ def test_beliefunit_get_from_json_ReturnsObj_knot_Example():
     assert after_bob_belief.knot == before_bob_belief.knot
 
 
-def test_beliefunit_get_from_json_ReturnsObj_knot_PartnerExample():
+def test_beliefunit_get_from_json_ReturnsObj_knot_VoiceExample():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
     bob_str = ",Bob"
-    before_bob_belief.add_partnerunit(bob_str)
-    assert before_bob_belief.partner_exists(bob_str)
+    before_bob_belief.add_voiceunit(bob_str)
+    assert before_bob_belief.voice_exists(bob_str)
 
     # WHEN
     bob_json = before_bob_belief.get_json()
     after_bob_belief = beliefunit_get_from_json(bob_json)
 
     # THEN
-    after_bob_partnerunit = after_bob_belief.get_partner(bob_str)
-    assert after_bob_partnerunit.knot == slash_knot
+    after_bob_voiceunit = after_bob_belief.get_voice(bob_str)
+    assert after_bob_voiceunit.knot == slash_knot
 
 
 def test_beliefunit_get_from_json_ReturnsObj_knot_GroupExample():
@@ -468,17 +468,17 @@ def test_beliefunit_get_from_json_ReturnsObj_knot_GroupExample():
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
     yao_str = "Yao"
     swim_str = f"{slash_knot}Swimmers"
-    before_bob_belief.add_partnerunit(yao_str)
-    yao_partnerunit = before_bob_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(swim_str)
+    before_bob_belief.add_voiceunit(yao_str)
+    yao_voiceunit = before_bob_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(swim_str)
 
     # WHEN
     bob_json = before_bob_belief.get_json()
     after_bob_belief = beliefunit_get_from_json(bob_json)
 
     # THEN
-    after_yao_partnerunit = after_bob_belief.get_partner(yao_str)
-    assert after_yao_partnerunit.knot == slash_knot
+    after_yao_voiceunit = after_bob_belief.get_voice(yao_str)
+    assert after_yao_voiceunit.knot == slash_knot
 
 
 def test_beliefunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied():
@@ -564,8 +564,8 @@ def test_get_dict_of_belief_from_dict_ReturnsDictOfBeliefUnits():
     ccn_belief1 = ccn_dict_of_obj.get(x1_belief.belief_name)
     assert ccn_belief1._plan_dict == x1_belief._plan_dict
     philipa_str = "Philipa"
-    ccn_philipa_partnerunit = ccn_belief1.get_partner(philipa_str)
-    x1_philipa_partnerunit = x1_belief.get_partner(philipa_str)
-    assert ccn_philipa_partnerunit._memberships == x1_philipa_partnerunit._memberships
+    ccn_philipa_voiceunit = ccn_belief1.get_voice(philipa_str)
+    x1_philipa_voiceunit = x1_belief.get_voice(philipa_str)
+    assert ccn_philipa_voiceunit._memberships == x1_philipa_voiceunit._memberships
     assert ccn_belief1 == x1_belief
     assert ccn_dict_of_obj.get(x1_belief.belief_name) == x1_belief

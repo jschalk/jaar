@@ -10,8 +10,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     addin_str,
     awardee_title_str,
     begin_str,
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -19,6 +17,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
     close_str,
     denom_str,
@@ -32,8 +32,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     morph_str,
     numor_str,
     parent_rope_str,
-    partner_debt_points_str,
-    partner_name_str,
     plan_label_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -43,6 +41,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     stop_want_str,
     take_force_str,
     task_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 from src.a08_belief_atom_logic.test._util.a08_str import INSERT_str, UPDATE_str
@@ -107,16 +107,16 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     }
 
 
-def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_partnerunit():
+def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     # ESTABLISH
     zia_str = "Zia"
-    zia_partner_debt_points = 51
+    zia_voice_debt_points = 51
     sue_belief = beliefunit_shop("Sue")
-    sue_belief.add_partnerunit(zia_str)
+    sue_belief.add_voiceunit(zia_str)
 
-    zia_atom = beliefatom_shop(belief_partnerunit_str(), INSERT_str())
-    zia_atom.set_arg(partner_name_str(), zia_str)
-    zia_atom.set_arg(partner_debt_points_str(), zia_partner_debt_points)
+    zia_atom = beliefatom_shop(belief_voiceunit_str(), INSERT_str())
+    zia_atom.set_arg(voice_name_str(), zia_str)
+    zia_atom.set_arg(voice_debt_points_str(), zia_voice_debt_points)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -126,20 +126,20 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_partnerunit():
     assert new_zia_beliefatom.crud_str == UPDATE_str()
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {partner_debt_points_str(): 51}
+    assert zia_jvalues == {voice_debt_points_str(): 51}
 
 
-def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_partner_membership():
+def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     # ESTABLISH
     zia_str = "Zia"
     run_str = ";run"
     zia_run_group_debt_points = 76
     sue_belief = beliefunit_shop("Sue")
-    sue_belief.add_partnerunit(zia_str)
-    sue_belief.get_partner(zia_str).add_membership(run_str)
+    sue_belief.add_voiceunit(zia_str)
+    sue_belief.get_voice(zia_str).add_membership(run_str)
 
-    zia_atom = beliefatom_shop(belief_partner_membership_str(), INSERT_str())
-    zia_atom.set_arg(partner_name_str(), zia_str)
+    zia_atom = beliefatom_shop(belief_voice_membership_str(), INSERT_str())
+    zia_atom.set_arg(voice_name_str(), zia_str)
     zia_atom.set_arg(group_title_str(), run_str)
     zia_atom.set_arg(group_debt_points_str(), zia_run_group_debt_points)
 

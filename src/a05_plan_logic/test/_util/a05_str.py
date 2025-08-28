@@ -20,12 +20,12 @@ def _active_hx_str() -> str:
     return "_active_hx"
 
 
-def _all_partner_cred_str() -> str:
-    return "_all_partner_cred"
+def _all_voice_cred_str() -> str:
+    return "_all_voice_cred"
 
 
-def _all_partner_debt_str() -> str:
-    return "_all_partner_debt"
+def _all_voice_debt_str() -> str:
+    return "_all_voice_debt"
 
 
 def _awardheirs_str() -> str:

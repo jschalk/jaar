@@ -1,5 +1,5 @@
 {
-    "belief_partner_membership": {
+    "belief_voice_membership": {
         "DELETE": {
             "atom_order": 23
         },
@@ -7,7 +7,7 @@
             "atom_order": 1
         },
         "jkeys": {
-            "partner_name": {
+            "voice_name": {
                 "class_type": "NameTerm",
                 "column_order": 0,
                 "nesting_order": 0,
@@ -39,7 +39,7 @@
             "atom_order": 10
         }
     },
-    "belief_partnerunit": {
+    "belief_voiceunit": {
         "DELETE": {
             "atom_order": 24
         },
@@ -47,26 +47,26 @@
             "atom_order": 0
         },
         "jkeys": {
-            "partner_name": {
+            "voice_name": {
                 "class_type": "NameTerm",
                 "column_order": 0,
                 "sqlite_datatype": "TEXT"
             }
         },
         "jvalues": {
-            "partner_cred_points": {
+            "voice_cred_points": {
                 "class_type": "float",
                 "column_order": 2,
                 "sqlite_datatype": "REAL"
             },
-            "partner_debt_points": {
+            "voice_debt_points": {
                 "class_type": "float",
                 "column_order": 1,
                 "sqlite_datatype": "REAL"
             }
         },
         "normal_specs": {
-            "normal_table_name": "partnerunit"
+            "normal_table_name": "voiceunit"
         },
         "UPDATE": {
             "atom_order": 9

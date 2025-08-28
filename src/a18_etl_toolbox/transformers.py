@@ -90,7 +90,7 @@ from src.a18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_ta
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_OTE1_AGG_SQLSTR,
-    CREATE_MOMENT_PARTNER_NETS_SQLSTR,
+    CREATE_MOMENT_VOICE_NETS_SQLSTR,
     INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
@@ -906,7 +906,7 @@ def etl_moment_job_jsons_to_job_tables(cursor: sqlite3_Cursor, moment_mstr_dir: 
             insert_job_obj(cursor, job_obj)
 
 
-def insert_tranunit_partners_net(cursor: sqlite3_Cursor, tranbook: TranBook):
+def insert_tranunit_voices_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     """
     Insert the net amounts for each account in the tranbook into the specified table.
 
@@ -914,22 +914,22 @@ def insert_tranunit_partners_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     :param tranbook: TranBook object containing transaction units
     :param dst_tablename: Name of the destination table
     """
-    partners_net_array = tranbook._get_partners_net_array()
+    voices_net_array = tranbook._get_voices_net_array()
     cursor.executemany(
-        f"INSERT INTO moment_partner_nets (moment_label, belief_name, belief_net_amount) VALUES ('{tranbook.moment_label}', ?, ?)",
-        partners_net_array,
+        f"INSERT INTO moment_voice_nets (moment_label, belief_name, belief_net_amount) VALUES ('{tranbook.moment_label}', ?, ?)",
+        voices_net_array,
     )
 
 
-def etl_moment_json_partner_nets_to_moment_partner_nets_table(
+def etl_moment_json_voice_nets_to_moment_voice_nets_table(
     cursor: sqlite3_Cursor, moment_mstr_dir: str
 ):
-    cursor.execute(CREATE_MOMENT_PARTNER_NETS_SQLSTR)
+    cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
     moments_dir = create_path(moment_mstr_dir, "moments")
     for moment_label in get_level1_dirs(moments_dir):
         x_momentunit = get_default_path_momentunit(moment_mstr_dir, moment_label)
         x_momentunit.set_all_tranbook()
-        insert_tranunit_partners_net(cursor, x_momentunit._all_tranbook)
+        insert_tranunit_voices_net(cursor, x_momentunit._all_tranbook)
 
 
 def create_last_run_metrics_json(cursor: sqlite3_Cursor, moment_mstr_dir: str):

@@ -121,14 +121,14 @@ def test_PidginUnit_set_nameterm_SetsAttr_Scenario0():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_pidginunit = pidginunit_shop(zia_str)
-    partner_name_namemap = zia_pidginunit.get_namemap()
-    assert partner_name_namemap.otx2inx_exists(sue_otx, sue_inx) is False
+    voice_name_namemap = zia_pidginunit.get_namemap()
+    assert voice_name_namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
     zia_pidginunit.set_nameterm(sue_otx, sue_inx)
 
     # THEN
-    assert partner_name_namemap.otx2inx_exists(sue_otx, sue_inx)
+    assert voice_name_namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
 def test_PidginUnit_nameterm_exists_ReturnsObj():

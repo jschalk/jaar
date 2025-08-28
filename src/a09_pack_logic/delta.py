@@ -10,7 +10,7 @@ from src.a00_data_toolbox.dict_toolbox import (
 )
 from src.a01_term_logic.term import RopeTerm, TitleTerm
 from src.a03_group_logic.group import MemberShip
-from src.a03_group_logic.partner import MemberShip, PartnerName, PartnerUnit
+from src.a03_group_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.a04_reason_logic.reason import FactUnit, ReasonUnit
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
@@ -128,7 +128,7 @@ class BeliefDelta:
         before_belief.cash_out()
         after_belief.cash_out()
         self.add_beliefatoms_beliefunit_simple_attrs(before_belief, after_belief)
-        self.add_beliefatoms_partners(before_belief, after_belief)
+        self.add_beliefatoms_voices(before_belief, after_belief)
         self.add_beliefatoms_plans(before_belief, after_belief)
 
     def add_beliefatoms_beliefunit_simple_attrs(
@@ -153,150 +153,148 @@ class BeliefDelta:
             x_beliefatom.set_jvalue("respect_bit", after_belief.respect_bit)
         self.set_beliefatom(x_beliefatom)
 
-    def add_beliefatoms_partners(
+    def add_beliefatoms_voices(
         self, before_belief: BeliefUnit, after_belief: BeliefUnit
     ):
-        before_partner_names = set(before_belief.partners.keys())
-        after_partner_names = set(after_belief.partners.keys())
+        before_voice_names = set(before_belief.voices.keys())
+        after_voice_names = set(after_belief.voices.keys())
 
-        self.add_beliefatom_partnerunit_inserts(
+        self.add_beliefatom_voiceunit_inserts(
             after_belief=after_belief,
-            insert_partner_names=after_partner_names.difference(before_partner_names),
+            insert_voice_names=after_voice_names.difference(before_voice_names),
         )
-        self.add_beliefatom_partnerunit_deletes(
+        self.add_beliefatom_voiceunit_deletes(
             before_belief=before_belief,
-            delete_partner_names=before_partner_names.difference(after_partner_names),
+            delete_voice_names=before_voice_names.difference(after_voice_names),
         )
-        self.add_beliefatom_partnerunit_updates(
+        self.add_beliefatom_voiceunit_updates(
             before_belief=before_belief,
             after_belief=after_belief,
-            update_partner_names=before_partner_names.intersection(after_partner_names),
+            update_voice_names=before_voice_names.intersection(after_voice_names),
         )
 
-    def add_beliefatom_partnerunit_inserts(
-        self, after_belief: BeliefUnit, insert_partner_names: set
+    def add_beliefatom_voiceunit_inserts(
+        self, after_belief: BeliefUnit, insert_voice_names: set
     ):
-        for insert_partner_name in insert_partner_names:
-            insert_partnerunit = after_belief.get_partner(insert_partner_name)
-            x_beliefatom = beliefatom_shop("belief_partnerunit", "INSERT")
-            x_beliefatom.set_jkey("partner_name", insert_partnerunit.partner_name)
-            if insert_partnerunit.partner_cred_points is not None:
+        for insert_voice_name in insert_voice_names:
+            insert_voiceunit = after_belief.get_voice(insert_voice_name)
+            x_beliefatom = beliefatom_shop("belief_voiceunit", "INSERT")
+            x_beliefatom.set_jkey("voice_name", insert_voiceunit.voice_name)
+            if insert_voiceunit.voice_cred_points is not None:
                 x_beliefatom.set_jvalue(
-                    "partner_cred_points", insert_partnerunit.partner_cred_points
+                    "voice_cred_points", insert_voiceunit.voice_cred_points
                 )
-            if insert_partnerunit.partner_debt_points is not None:
+            if insert_voiceunit.voice_debt_points is not None:
                 x_beliefatom.set_jvalue(
-                    "partner_debt_points", insert_partnerunit.partner_debt_points
+                    "voice_debt_points", insert_voiceunit.voice_debt_points
                 )
             self.set_beliefatom(x_beliefatom)
-            all_group_titles = set(insert_partnerunit._memberships.keys())
+            all_group_titles = set(insert_voiceunit._memberships.keys())
             self.add_beliefatom_memberships_inserts(
-                after_partnerunit=insert_partnerunit,
+                after_voiceunit=insert_voiceunit,
                 insert_membership_group_titles=all_group_titles,
             )
 
-    def add_beliefatom_partnerunit_updates(
+    def add_beliefatom_voiceunit_updates(
         self,
         before_belief: BeliefUnit,
         after_belief: BeliefUnit,
-        update_partner_names: set,
+        update_voice_names: set,
     ):
-        for partner_name in update_partner_names:
-            after_partnerunit = after_belief.get_partner(partner_name)
-            before_partnerunit = before_belief.get_partner(partner_name)
-            if jvalues_different(
-                "belief_partnerunit", after_partnerunit, before_partnerunit
-            ):
-                x_beliefatom = beliefatom_shop("belief_partnerunit", "UPDATE")
-                x_beliefatom.set_jkey("partner_name", after_partnerunit.partner_name)
+        for voice_name in update_voice_names:
+            after_voiceunit = after_belief.get_voice(voice_name)
+            before_voiceunit = before_belief.get_voice(voice_name)
+            if jvalues_different("belief_voiceunit", after_voiceunit, before_voiceunit):
+                x_beliefatom = beliefatom_shop("belief_voiceunit", "UPDATE")
+                x_beliefatom.set_jkey("voice_name", after_voiceunit.voice_name)
                 if (
-                    before_partnerunit.partner_cred_points
-                    != after_partnerunit.partner_cred_points
+                    before_voiceunit.voice_cred_points
+                    != after_voiceunit.voice_cred_points
                 ):
                     x_beliefatom.set_jvalue(
-                        "partner_cred_points", after_partnerunit.partner_cred_points
+                        "voice_cred_points", after_voiceunit.voice_cred_points
                     )
                 if (
-                    before_partnerunit.partner_debt_points
-                    != after_partnerunit.partner_debt_points
+                    before_voiceunit.voice_debt_points
+                    != after_voiceunit.voice_debt_points
                 ):
                     x_beliefatom.set_jvalue(
-                        "partner_debt_points", after_partnerunit.partner_debt_points
+                        "voice_debt_points", after_voiceunit.voice_debt_points
                     )
                 self.set_beliefatom(x_beliefatom)
-            self.add_beliefatom_partnerunit_update_memberships(
-                after_partnerunit=after_partnerunit,
-                before_partnerunit=before_partnerunit,
+            self.add_beliefatom_voiceunit_update_memberships(
+                after_voiceunit=after_voiceunit,
+                before_voiceunit=before_voiceunit,
             )
 
-    def add_beliefatom_partnerunit_deletes(
-        self, before_belief: BeliefUnit, delete_partner_names: set
+    def add_beliefatom_voiceunit_deletes(
+        self, before_belief: BeliefUnit, delete_voice_names: set
     ):
-        for delete_partner_name in delete_partner_names:
-            x_beliefatom = beliefatom_shop("belief_partnerunit", "DELETE")
-            x_beliefatom.set_jkey("partner_name", delete_partner_name)
+        for delete_voice_name in delete_voice_names:
+            x_beliefatom = beliefatom_shop("belief_voiceunit", "DELETE")
+            x_beliefatom.set_jkey("voice_name", delete_voice_name)
             self.set_beliefatom(x_beliefatom)
-            delete_partnerunit = before_belief.get_partner(delete_partner_name)
+            delete_voiceunit = before_belief.get_voice(delete_voice_name)
             non_mirror_group_titles = {
                 x_group_title
-                for x_group_title in delete_partnerunit._memberships.keys()
-                if x_group_title != delete_partner_name
+                for x_group_title in delete_voiceunit._memberships.keys()
+                if x_group_title != delete_voice_name
             }
             self.add_beliefatom_memberships_delete(
-                delete_partner_name, non_mirror_group_titles
+                delete_voice_name, non_mirror_group_titles
             )
 
-    def add_beliefatom_partnerunit_update_memberships(
-        self, after_partnerunit: PartnerUnit, before_partnerunit: PartnerUnit
+    def add_beliefatom_voiceunit_update_memberships(
+        self, after_voiceunit: VoiceUnit, before_voiceunit: VoiceUnit
     ):
         # before_non_mirror_group_titles
         before_group_titles = {
             x_group_title
-            for x_group_title in before_partnerunit._memberships.keys()
-            if x_group_title != before_partnerunit.partner_name
+            for x_group_title in before_voiceunit._memberships.keys()
+            if x_group_title != before_voiceunit.voice_name
         }
         # after_non_mirror_group_titles
         after_group_titles = {
             x_group_title
-            for x_group_title in after_partnerunit._memberships.keys()
-            if x_group_title != after_partnerunit.partner_name
+            for x_group_title in after_voiceunit._memberships.keys()
+            if x_group_title != after_voiceunit.voice_name
         }
 
         self.add_beliefatom_memberships_inserts(
-            after_partnerunit=after_partnerunit,
+            after_voiceunit=after_voiceunit,
             insert_membership_group_titles=after_group_titles.difference(
                 before_group_titles
             ),
         )
 
         self.add_beliefatom_memberships_delete(
-            before_partner_name=after_partnerunit.partner_name,
+            before_voice_name=after_voiceunit.voice_name,
             before_group_titles=before_group_titles.difference(after_group_titles),
         )
 
         update_group_titles = before_group_titles.intersection(after_group_titles)
-        for update_partner_name in update_group_titles:
-            before_membership = before_partnerunit.get_membership(update_partner_name)
-            after_membership = after_partnerunit.get_membership(update_partner_name)
+        for update_voice_name in update_group_titles:
+            before_membership = before_voiceunit.get_membership(update_voice_name)
+            after_membership = after_voiceunit.get_membership(update_voice_name)
             if jvalues_different(
-                "belief_partner_membership", before_membership, after_membership
+                "belief_voice_membership", before_membership, after_membership
             ):
                 self.add_beliefatom_membership_update(
-                    partner_name=after_partnerunit.partner_name,
+                    voice_name=after_voiceunit.voice_name,
                     before_membership=before_membership,
                     after_membership=after_membership,
                 )
 
     def add_beliefatom_memberships_inserts(
         self,
-        after_partnerunit: PartnerUnit,
+        after_voiceunit: VoiceUnit,
         insert_membership_group_titles: list[TitleTerm],
     ):
-        after_partner_name = after_partnerunit.partner_name
+        after_voice_name = after_voiceunit.voice_name
         for insert_group_title in insert_membership_group_titles:
-            after_membership = after_partnerunit.get_membership(insert_group_title)
-            x_beliefatom = beliefatom_shop("belief_partner_membership", "INSERT")
-            x_beliefatom.set_jkey("partner_name", after_partner_name)
+            after_membership = after_voiceunit.get_membership(insert_group_title)
+            x_beliefatom = beliefatom_shop("belief_voice_membership", "INSERT")
+            x_beliefatom.set_jkey("voice_name", after_voice_name)
             x_beliefatom.set_jkey("group_title", after_membership.group_title)
             if after_membership.group_cred_points is not None:
                 x_beliefatom.set_jvalue(
@@ -310,12 +308,12 @@ class BeliefDelta:
 
     def add_beliefatom_membership_update(
         self,
-        partner_name: PartnerName,
+        voice_name: VoiceName,
         before_membership: MemberShip,
         after_membership: MemberShip,
     ):
-        x_beliefatom = beliefatom_shop("belief_partner_membership", "UPDATE")
-        x_beliefatom.set_jkey("partner_name", partner_name)
+        x_beliefatom = beliefatom_shop("belief_voice_membership", "UPDATE")
+        x_beliefatom.set_jkey("voice_name", voice_name)
         x_beliefatom.set_jkey("group_title", after_membership.group_title)
         if after_membership.group_cred_points != before_membership.group_cred_points:
             x_beliefatom.set_jvalue(
@@ -328,11 +326,11 @@ class BeliefDelta:
         self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_memberships_delete(
-        self, before_partner_name: PartnerName, before_group_titles: TitleTerm
+        self, before_voice_name: VoiceName, before_group_titles: TitleTerm
     ):
         for delete_group_title in before_group_titles:
-            x_beliefatom = beliefatom_shop("belief_partner_membership", "DELETE")
-            x_beliefatom.set_jkey("partner_name", before_partner_name)
+            x_beliefatom = beliefatom_shop("belief_voice_membership", "DELETE")
+            x_beliefatom.set_jkey("voice_name", before_voice_name)
             x_beliefatom.set_jkey("group_title", delete_group_title)
             self.set_beliefatom(x_beliefatom)
 

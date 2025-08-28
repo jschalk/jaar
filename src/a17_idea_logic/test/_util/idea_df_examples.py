@@ -1,6 +1,6 @@
 from pandas import DataFrame
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str, knot_str, penny_str
-from src.a03_group_logic.test._util.a03_str import partner_name_str, respect_bit_str
+from src.a03_group_logic.test._util.a03_str import respect_bit_str, voice_name_str
 from src.a07_timeline_logic.test._util.a07_str import (
     c400_number_str,
     monthday_distortion_str,
@@ -66,9 +66,9 @@ def get_ex1_br00001_df() -> DataFrame:
 
 def get_ex1_br00002_df() -> DataFrame:
     """idea_format_00002_moment_paybook_v0_0_0
-    partner_name,amount,moment_label,belief_name,tran_time"""
+    voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
-        columns=["partner_name", "amount", "moment_label", "belief_name", "tran_time"]
+        columns=["voice_name", "amount", "moment_label", "belief_name", "tran_time"]
     )
     x_df.loc[0] = ["Bob", 888, AMY23_STR, "Zia", 777]
     return x_df
@@ -185,10 +185,10 @@ def get_ex2_br00001_df() -> DataFrame:
 
 def get_ex2_br00002_df() -> DataFrame:
     """idea_format_00002_moment_paybook_v0_0_0
-    partner_name,amount,moment_label,belief_name,tran_time"""
+    voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
         columns=[
-            partner_name_str(),
+            voice_name_str(),
             amount_str(),
             moment_label_str(),
             belief_name_str(),

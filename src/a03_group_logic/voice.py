@@ -9,7 +9,7 @@ from src.a01_term_logic.rope import (
     is_labelterm,
     validate_labelterm,
 )
-from src.a01_term_logic.term import PartnerName
+from src.a01_term_logic.term import VoiceName
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
 from src.a03_group_logic.group import (
@@ -20,40 +20,40 @@ from src.a03_group_logic.group import (
 )
 
 
-class InvalidPartnerException(Exception):
+class InvalidVoiceException(Exception):
     pass
 
 
-class Bad_partner_nameMemberShipException(Exception):
+class Bad_voice_nameMemberShipException(Exception):
     pass
 
 
 @dataclass
-class PartnerCore:
-    partner_name: PartnerName = None
+class VoiceCore:
+    voice_name: VoiceName = None
     knot: str = None
     respect_bit: float = None
 
-    def set_nameterm(self, x_partner_name: PartnerName):
-        self.partner_name = validate_labelterm(x_partner_name, self.knot)
+    def set_nameterm(self, x_voice_name: VoiceName):
+        self.voice_name = validate_labelterm(x_voice_name, self.knot)
 
 
 @dataclass
-class PartnerUnit(PartnerCore):
-    """This represents the belief_name's opinion of the PartnerUnit.partner_name
-    PartnerUnit.partner_cred_points represents how much partner_cred_points the _belief_name projects to the partner_name
-    PartnerUnit.partner_debt_points represents how much partner_debt_points the _belief_name projects to the partner_name
+class VoiceUnit(VoiceCore):
+    """This represents the belief_name's opinion of the VoiceUnit.voice_name
+    VoiceUnit.voice_cred_points represents how much voice_cred_points the _belief_name projects to the voice_name
+    VoiceUnit.voice_debt_points represents how much voice_debt_points the _belief_name projects to the voice_name
     """
 
-    partner_cred_points: int = None
-    partner_debt_points: int = None
+    voice_cred_points: int = None
+    voice_debt_points: int = None
     # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
-    _memberships: dict[PartnerName, MemberShip] = None
+    _memberships: dict[VoiceName, MemberShip] = None
     # calculated fields
     _credor_pool: RespectNum = None
     _debtor_pool: RespectNum = None
-    _irrational_partner_debt_points: int = None  # set by listening process
-    _inallocable_partner_debt_points: int = None  # set by listening process
+    _irrational_voice_debt_points: int = None  # set by listening process
+    _inallocable_voice_debt_points: int = None  # set by listening process
     # set by Belief.cash_out()
     _fund_give: float = None
     _fund_take: float = None
@@ -65,27 +65,27 @@ class PartnerUnit(PartnerCore):
     def set_respect_bit(self, x_respect_bit: float):
         self.respect_bit = x_respect_bit
 
-    def set_credor_partner_debt_points(
+    def set_credor_voice_debt_points(
         self,
-        partner_cred_points: float = None,
-        partner_debt_points: float = None,
+        voice_cred_points: float = None,
+        voice_debt_points: float = None,
     ):
-        if partner_cred_points is not None:
-            self.set_partner_cred_points(partner_cred_points)
-        if partner_debt_points is not None:
-            self.set_partner_debt_points(partner_debt_points)
+        if voice_cred_points is not None:
+            self.set_voice_cred_points(voice_cred_points)
+        if voice_debt_points is not None:
+            self.set_voice_debt_points(voice_debt_points)
 
-    def set_partner_cred_points(self, partner_cred_points: int):
-        self.partner_cred_points = partner_cred_points
+    def set_voice_cred_points(self, voice_cred_points: int):
+        self.voice_cred_points = voice_cred_points
 
-    def set_partner_debt_points(self, partner_debt_points: int):
-        self.partner_debt_points = partner_debt_points
+    def set_voice_debt_points(self, voice_debt_points: int):
+        self.voice_debt_points = voice_debt_points
 
-    def get_partner_cred_points(self):
-        return get_1_if_None(self.partner_cred_points)
+    def get_voice_cred_points(self):
+        return get_1_if_None(self.voice_cred_points)
 
-    def get_partner_debt_points(self):
-        return get_1_if_None(self.partner_debt_points)
+    def get_voice_debt_points(self):
+        return get_1_if_None(self.voice_debt_points)
 
     def clear_fund_give_take(self):
         self._fund_give = 0
@@ -95,19 +95,15 @@ class PartnerUnit(PartnerCore):
         self._fund_agenda_ratio_give = 0
         self._fund_agenda_ratio_take = 0
 
-    def add_irrational_partner_debt_points(
-        self, x_irrational_partner_debt_points: float
-    ):
-        self._irrational_partner_debt_points += x_irrational_partner_debt_points
+    def add_irrational_voice_debt_points(self, x_irrational_voice_debt_points: float):
+        self._irrational_voice_debt_points += x_irrational_voice_debt_points
 
-    def add_inallocable_partner_debt_points(
-        self, x_inallocable_partner_debt_points: float
-    ):
-        self._inallocable_partner_debt_points += x_inallocable_partner_debt_points
+    def add_inallocable_voice_debt_points(self, x_inallocable_voice_debt_points: float):
+        self._inallocable_voice_debt_points += x_inallocable_voice_debt_points
 
     def reset_listen_calculated_attrs(self):
-        self._irrational_partner_debt_points = 0
-        self._inallocable_partner_debt_points = 0
+        self._irrational_voice_debt_points = 0
+        self._inallocable_voice_debt_points = 0
 
     def add_fund_give(self, fund_give: float):
         self._fund_give += fund_give
@@ -137,20 +133,20 @@ class PartnerUnit(PartnerCore):
         self,
         fund_agenda_ratio_give_sum: float,
         fund_agenda_ratio_take_sum: float,
-        partnerunits_partner_cred_points_sum: float,
-        partnerunits_partner_debt_points_sum: float,
+        voiceunits_voice_cred_points_sum: float,
+        voiceunits_voice_debt_points_sum: float,
     ):
-        total_partner_cred_points = partnerunits_partner_cred_points_sum
+        total_voice_cred_points = voiceunits_voice_cred_points_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
         self._fund_agenda_ratio_give = (
-            self.get_partner_cred_points() / total_partner_cred_points
+            self.get_voice_cred_points() / total_voice_cred_points
             if fund_agenda_ratio_give_sum == 0
             else self._fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
-            total_partner_debt_points = partnerunits_partner_debt_points_sum
+            total_voice_debt_points = voiceunits_voice_debt_points_sum
             self._fund_agenda_ratio_take = (
-                self.get_partner_debt_points() / total_partner_debt_points
+                self.get_voice_debt_points() / total_voice_debt_points
             )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
@@ -169,13 +165,13 @@ class PartnerUnit(PartnerCore):
 
     def set_membership(self, x_membership: MemberShip):
         x_group_title = x_membership.group_title
-        group_title_is_partner_name = is_labelterm(x_group_title, self.knot)
-        if group_title_is_partner_name and self.partner_name != x_group_title:
-            raise Bad_partner_nameMemberShipException(
-                f"PartnerUnit with partner_name='{self.partner_name}' cannot have link to '{x_group_title}'."
+        group_title_is_voice_name = is_labelterm(x_group_title, self.knot)
+        if group_title_is_voice_name and self.voice_name != x_group_title:
+            raise Bad_voice_nameMemberShipException(
+                f"VoiceUnit with voice_name='{self.voice_name}' cannot have link to '{x_group_title}'."
             )
 
-        x_membership.partner_name = self.partner_name
+        x_membership.voice_name = self.voice_name
         self._memberships[x_membership.group_title] = x_membership
 
     def get_membership(self, group_title: GroupTitle) -> MemberShip:
@@ -221,18 +217,16 @@ class PartnerUnit(PartnerCore):
 
     def to_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {
-            "partner_name": self.partner_name,
-            "partner_cred_points": self.partner_cred_points,
-            "partner_debt_points": self.partner_debt_points,
+            "voice_name": self.voice_name,
+            "voice_cred_points": self.voice_cred_points,
+            "voice_debt_points": self.voice_debt_points,
             "_memberships": self.get_memberships_dict(),
         }
-        if self._irrational_partner_debt_points not in [None, 0]:
-            x_dict["_irrational_partner_debt_points"] = (
-                self._irrational_partner_debt_points
-            )
-        if self._inallocable_partner_debt_points not in [None, 0]:
-            x_dict["_inallocable_partner_debt_points"] = (
-                self._inallocable_partner_debt_points
+        if self._irrational_voice_debt_points not in [None, 0]:
+            x_dict["_irrational_voice_debt_points"] = self._irrational_voice_debt_points
+        if self._inallocable_voice_debt_points not in [None, 0]:
+            x_dict["_inallocable_voice_debt_points"] = (
+                self._inallocable_voice_debt_points
             )
 
         if all_attrs:
@@ -248,63 +242,61 @@ class PartnerUnit(PartnerCore):
         x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
 
 
-def partnerunits_get_from_json(partnerunits_json: str) -> dict[str, PartnerUnit]:
-    partnerunits_dict = get_dict_from_json(partnerunits_json)
-    return partnerunits_get_from_dict(x_dict=partnerunits_dict)
+def voiceunits_get_from_json(voiceunits_json: str) -> dict[str, VoiceUnit]:
+    voiceunits_dict = get_dict_from_json(voiceunits_json)
+    return voiceunits_get_from_dict(x_dict=voiceunits_dict)
 
 
-def partnerunits_get_from_dict(
-    x_dict: dict, _knot: str = None
-) -> dict[str, PartnerUnit]:
-    partnerunits = {}
-    for partnerunit_dict in x_dict.values():
-        x_partnerunit = partnerunit_get_from_dict(partnerunit_dict, _knot)
-        partnerunits[x_partnerunit.partner_name] = x_partnerunit
-    return partnerunits
+def voiceunits_get_from_dict(x_dict: dict, _knot: str = None) -> dict[str, VoiceUnit]:
+    voiceunits = {}
+    for voiceunit_dict in x_dict.values():
+        x_voiceunit = voiceunit_get_from_dict(voiceunit_dict, _knot)
+        voiceunits[x_voiceunit.voice_name] = x_voiceunit
+    return voiceunits
 
 
-def partnerunit_get_from_dict(partnerunit_dict: dict, _knot: str) -> PartnerUnit:
-    x_partner_name = partnerunit_dict["partner_name"]
-    x_partner_cred_points = partnerunit_dict["partner_cred_points"]
-    x_partner_debt_points = partnerunit_dict["partner_debt_points"]
-    x_memberships_dict = partnerunit_dict["_memberships"]
-    x_partnerunit = partnerunit_shop(
-        x_partner_name, x_partner_cred_points, x_partner_debt_points, _knot
+def voiceunit_get_from_dict(voiceunit_dict: dict, _knot: str) -> VoiceUnit:
+    x_voice_name = voiceunit_dict["voice_name"]
+    x_voice_cred_points = voiceunit_dict["voice_cred_points"]
+    x_voice_debt_points = voiceunit_dict["voice_debt_points"]
+    x_memberships_dict = voiceunit_dict["_memberships"]
+    x_voiceunit = voiceunit_shop(
+        x_voice_name, x_voice_cred_points, x_voice_debt_points, _knot
     )
-    x_partnerunit._memberships = memberships_get_from_dict(
-        x_memberships_dict, x_partner_name
+    x_voiceunit._memberships = memberships_get_from_dict(
+        x_memberships_dict, x_voice_name
     )
-    _irrational_partner_debt_points = partnerunit_dict.get(
-        "_irrational_partner_debt_points", 0
+    _irrational_voice_debt_points = voiceunit_dict.get(
+        "_irrational_voice_debt_points", 0
     )
-    _inallocable_partner_debt_points = partnerunit_dict.get(
-        "_inallocable_partner_debt_points", 0
+    _inallocable_voice_debt_points = voiceunit_dict.get(
+        "_inallocable_voice_debt_points", 0
     )
-    x_partnerunit.add_irrational_partner_debt_points(
-        get_0_if_None(_irrational_partner_debt_points)
+    x_voiceunit.add_irrational_voice_debt_points(
+        get_0_if_None(_irrational_voice_debt_points)
     )
-    x_partnerunit.add_inallocable_partner_debt_points(
-        get_0_if_None(_inallocable_partner_debt_points)
+    x_voiceunit.add_inallocable_voice_debt_points(
+        get_0_if_None(_inallocable_voice_debt_points)
     )
 
-    return x_partnerunit
+    return x_voiceunit
 
 
-def partnerunit_shop(
-    partner_name: PartnerName,
-    partner_cred_points: int = None,
-    partner_debt_points: int = None,
+def voiceunit_shop(
+    voice_name: VoiceName,
+    voice_cred_points: int = None,
+    voice_debt_points: int = None,
     knot: str = None,
     respect_bit: float = None,
-) -> PartnerUnit:
-    x_partnerunit = PartnerUnit(
-        partner_cred_points=get_1_if_None(partner_cred_points),
-        partner_debt_points=get_1_if_None(partner_debt_points),
+) -> VoiceUnit:
+    x_voiceunit = VoiceUnit(
+        voice_cred_points=get_1_if_None(voice_cred_points),
+        voice_debt_points=get_1_if_None(voice_debt_points),
         _memberships={},
         _credor_pool=0,
         _debtor_pool=0,
-        _irrational_partner_debt_points=0,
-        _inallocable_partner_debt_points=0,
+        _irrational_voice_debt_points=0,
+        _inallocable_voice_debt_points=0,
         _fund_give=0,
         _fund_take=0,
         _fund_agenda_give=0,
@@ -314,5 +306,5 @@ def partnerunit_shop(
         knot=default_knot_if_None(knot),
         respect_bit=default_RespectBit_if_None(respect_bit),
     )
-    x_partnerunit.set_nameterm(x_partner_name=partner_name)
-    return x_partnerunit
+    x_voiceunit.set_nameterm(x_voice_name=voice_name)
+    return x_voiceunit

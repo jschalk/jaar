@@ -5,9 +5,9 @@ from src.a01_term_logic.rope import create_rope, to_rope
 from src.a06_belief_logic.test._util.a06_str import (
     NameTerm_str,
     moment_label_str,
-    partner_cred_points_str,
-    partner_name_str,
     reason_context_str,
+    voice_cred_points_str,
+    voice_name_str,
 )
 from src.a16_pidgin_logic.map import namemap_shop
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
@@ -28,38 +28,36 @@ def test_get_dataframe_pidginable_columns_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     x_dt = DataFrame()
     assert get_dataframe_pidginable_columns(x_dt) == set()
-    x_dt = DataFrame(columns=[partner_name_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {partner_name_str()}
-    x_dt = DataFrame(columns=[partner_name_str(), partner_cred_points_str()])
-    assert get_dataframe_pidginable_columns(x_dt) == {partner_name_str()}
+    x_dt = DataFrame(columns=[voice_name_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {voice_name_str()}
+    x_dt = DataFrame(columns=[voice_name_str(), voice_cred_points_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {voice_name_str()}
     x_dt = DataFrame(
-        columns=[reason_context_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[reason_context_str(), voice_name_str(), voice_cred_points_str()]
     )
     assert get_dataframe_pidginable_columns(x_dt) == {
-        partner_name_str(),
+        voice_name_str(),
         reason_context_str(),
     }
-    x_dt = DataFrame(
-        columns=["calc_swim", partner_name_str(), partner_cred_points_str()]
-    )
-    assert get_dataframe_pidginable_columns(x_dt) == {partner_name_str()}
+    x_dt = DataFrame(columns=["calc_swim", voice_name_str(), voice_cred_points_str()])
+    assert get_dataframe_pidginable_columns(x_dt) == {voice_name_str()}
 
 
-def test_translate_single_column_dataframe_ReturnsObj_Scenario0_PartnerName_EmptyDataFrame():
+def test_translate_single_column_dataframe_ReturnsObj_Scenario0_VoiceName_EmptyDataFrame():
     # ESTABLISH
-    partner_name_mapunit = namemap_shop()
-    empty_dt = DataFrame(columns=[partner_name_str()])
+    voice_name_mapunit = namemap_shop()
+    empty_dt = DataFrame(columns=[voice_name_str()])
 
     # WHEN
     gen_dt = translate_single_column_dataframe(
-        empty_dt, partner_name_mapunit, partner_name_str()
+        empty_dt, voice_name_mapunit, voice_name_str()
     )
 
     # THEN
     pandas_assert_frame_equal(gen_dt, empty_dt)
 
 
-def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_PartnerName_5rows():
+def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_VoiceName_5rows():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -68,11 +66,11 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_PartnerN
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    partner_name_mapunit = namemap_shop()
-    partner_name_mapunit.set_otx2inx(xio_otx, xio_inx)
-    partner_name_mapunit.set_otx2inx(sue_otx, sue_inx)
-    partner_name_mapunit.set_otx2inx(bob_otx, bob_inx)
-    otx_dt = DataFrame(columns=[partner_name_str()])
+    voice_name_mapunit = namemap_shop()
+    voice_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    voice_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    voice_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    otx_dt = DataFrame(columns=[voice_name_str()])
     otx_dt.loc[0] = [zia_otx]
     otx_dt.loc[1] = [sue_otx]
     otx_dt.loc[2] = [bob_otx]
@@ -82,13 +80,13 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_PartnerN
     print(f"{otx_dt=}")
 
     # WHEN
-    translate_single_column_dataframe(otx_dt, partner_name_mapunit, partner_name_str())
+    translate_single_column_dataframe(otx_dt, voice_name_mapunit, voice_name_str())
 
     # THEN
-    assert otx_dt.iloc[0][partner_name_str()] == zia_otx
-    assert otx_dt.iloc[1][partner_name_str()] == sue_inx
+    assert otx_dt.iloc[0][voice_name_str()] == zia_otx
+    assert otx_dt.iloc[1][voice_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
-    inx_dt = DataFrame(columns=[partner_name_str()])
+    inx_dt = DataFrame(columns=[voice_name_str()])
     inx_dt.loc[0] = zia_otx
     inx_dt.loc[1] = sue_inx
     inx_dt.loc[2] = bob_inx
@@ -99,7 +97,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_PartnerN
     assert otx_dt.to_csv() == inx_dt.to_csv()
 
 
-def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_PartnerName_5rowsMultipleColumns():
+def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceName_5rowsMultipleColumns():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -108,12 +106,12 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_PartnerN
     xio_inx = "Xioita"
     sue_inx = "Suita"
     bob_inx = "Bobita"
-    partner_name_mapunit = namemap_shop()
-    partner_name_mapunit.set_otx2inx(xio_otx, xio_inx)
-    partner_name_mapunit.set_otx2inx(sue_otx, sue_inx)
-    partner_name_mapunit.set_otx2inx(bob_otx, bob_inx)
+    voice_name_mapunit = namemap_shop()
+    voice_name_mapunit.set_otx2inx(xio_otx, xio_inx)
+    voice_name_mapunit.set_otx2inx(sue_otx, sue_inx)
+    voice_name_mapunit.set_otx2inx(bob_otx, bob_inx)
     otx_dt = DataFrame(
-        columns=[moment_label_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -124,14 +122,14 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_PartnerN
     print(f"{otx_dt=}")
 
     # WHEN
-    translate_single_column_dataframe(otx_dt, partner_name_mapunit, partner_name_str())
+    translate_single_column_dataframe(otx_dt, voice_name_mapunit, voice_name_str())
 
     # THEN
-    assert otx_dt.iloc[0][partner_name_str()] == zia_otx
-    assert otx_dt.iloc[1][partner_name_str()] == sue_inx
+    assert otx_dt.iloc[0][voice_name_str()] == zia_otx
+    assert otx_dt.iloc[1][voice_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = DataFrame(
-        columns=[moment_label_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]
@@ -143,14 +141,14 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_PartnerN
     pandas_assert_frame_equal(otx_dt, inx_dt)
 
 
-def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_PartnerName():
+def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName():
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
     otx_dt = DataFrame(
-        columns=[moment_label_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -164,11 +162,11 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_PartnerNam
     translate_all_columns_dataframe(otx_dt, None)
 
     # THEN
-    assert otx_dt.iloc[0][partner_name_str()] == zia_otx
-    assert otx_dt.iloc[1][partner_name_str()] == sue_otx
+    assert otx_dt.iloc[0][voice_name_str()] == zia_otx
+    assert otx_dt.iloc[1][voice_name_str()] == sue_otx
     pandas_assert_frame_equal(otx_dt, old_otx_dt)
     inx_dt = DataFrame(
-        columns=[moment_label_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -180,7 +178,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_PartnerNam
     pandas_assert_frame_equal(otx_dt, inx_dt)
 
 
-def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_PartnerName():
+def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName():
     # ESTABLISH
     yao_str = "Yao"
     xio_otx = "Xio"
@@ -195,7 +193,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_PartnerNam
     yao_pidginunit.set_otx2inx(NameTerm_str(), sue_otx, sue_inx)
     yao_pidginunit.set_otx2inx(NameTerm_str(), bob_otx, bob_inx)
     otx_dt = DataFrame(
-        columns=[moment_label_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )
     otx_dt.loc[0] = ["ZZ", zia_otx, 12]
     otx_dt.loc[1] = ["ZZ", sue_otx, 12]
@@ -209,11 +207,11 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_PartnerNam
     translate_all_columns_dataframe(otx_dt, yao_pidginunit)
 
     # THEN
-    assert otx_dt.iloc[0][partner_name_str()] == zia_otx
-    assert otx_dt.iloc[1][partner_name_str()] == sue_inx
+    assert otx_dt.iloc[0][voice_name_str()] == zia_otx
+    assert otx_dt.iloc[1][voice_name_str()] == sue_inx
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = DataFrame(
-        columns=[moment_label_str(), partner_name_str(), partner_cred_points_str()]
+        columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )
     inx_dt.loc[0] = ["ZZ", zia_otx, 12]
     inx_dt.loc[1] = ["ZZ", sue_inx, 12]

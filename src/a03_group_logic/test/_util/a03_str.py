@@ -38,12 +38,12 @@ def _groupunits_str() -> str:
     return "_groupunits"
 
 
-def _inallocable_partner_debt_points_str() -> str:
-    return "_inallocable_partner_debt_points"
+def _inallocable_voice_debt_points_str() -> str:
+    return "_inallocable_voice_debt_points"
 
 
-def _irrational_partner_debt_points_str() -> str:
-    return "_irrational_partner_debt_points"
+def _irrational_voice_debt_points_str() -> str:
+    return "_irrational_voice_debt_points"
 
 
 def _laborheir_str() -> str:
@@ -98,18 +98,6 @@ def laborunit_str() -> str:
     return "laborunit"
 
 
-def partner_cred_points_str() -> str:
-    return "partner_cred_points"
-
-
-def partner_debt_points_str() -> str:
-    return "partner_debt_points"
-
-
-def partner_name_str() -> str:
-    return "partner_name"
-
-
 def party_title_str() -> str:
     return "party_title"
 
@@ -124,3 +112,15 @@ def solo_str() -> str:
 
 def take_force_str() -> str:
     return "take_force"
+
+
+def voice_cred_points_str() -> str:
+    return "voice_cred_points"
+
+
+def voice_debt_points_str() -> str:
+    return "voice_debt_points"
+
+
+def voice_name_str() -> str:
+    return "voice_name"

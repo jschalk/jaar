@@ -34,7 +34,7 @@ def test_BeliefUnit_cash_out_Set_child_plan_laborheir_FromParent_laborunit():
     bob_belief = beliefunit_shop(bob_str)
     run_str = "run"
     run_rope = bob_belief.make_l1_rope(run_str)
-    bob_belief.add_partnerunit(bob_str)
+    bob_belief.add_voiceunit(bob_str)
     bob_belief.set_l1_plan(planunit_shop(run_str))
     bob_belief.edit_plan_attr(run_rope, laborunit=x_laborunit)
     run_plan = bob_belief.get_plan_obj(run_rope)
@@ -76,9 +76,9 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
     x_laborunit.add_party(party_title=swimmers_str)
 
     yao_str = "Yao"
-    sue_belief.add_partnerunit(yao_str)
-    yao_partnerunit = sue_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(swimmers_str)
+    sue_belief.add_voiceunit(yao_str)
+    yao_voiceunit = sue_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(swimmers_str)
 
     sue_belief.set_l1_plan(planunit_shop(swim_str))
     sue_belief.set_plan(planunit_shop(morn_str), parent_rope=swim_rope)
@@ -118,9 +118,9 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
     swimmers_laborunit.add_party(swimmers_str, solo=swimmers_solo_bool)
 
     yao_str = "Yao"
-    sue_belief.add_partnerunit(yao_str)
-    yao_partnerunit = sue_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(swimmers_str)
+    sue_belief.add_voiceunit(yao_str)
+    yao_voiceunit = sue_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(swimmers_str)
 
     sue_belief.set_l1_plan(planunit_shop(swim_str))
     sue_belief.set_plan(planunit_shop(morn_str), parent_rope=swim_rope)
@@ -153,8 +153,8 @@ def test_BeliefUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
     sue1_belief = beliefunit_shop(sue_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    sue1_belief.add_partnerunit(xia_str)
-    sue1_belief.add_partnerunit(zoa_str)
+    sue1_belief.add_voiceunit(xia_str)
+    sue1_belief.add_voiceunit(zoa_str)
 
     casa_str = "casa"
     casa_rope = sue1_belief.make_l1_rope(casa_str)
@@ -172,7 +172,7 @@ def test_BeliefUnit__get_filtered_awardunits_plan_CleansPlan_Laborunit():
 
     # WHEN
     sue2_belief = beliefunit_shop(sue_str)
-    sue2_belief.add_partnerunit(xia_str)
+    sue2_belief.add_voiceunit(xia_str)
     cleaned_plan = sue2_belief._get_filtered_awardunits_plan(sue1_belief_swim_plan)
 
     # THEN
@@ -186,8 +186,8 @@ def test_BeliefUnit_set_plan_CleansPlan_awardunits():
     sue1_belief = beliefunit_shop("Sue")
     xia_str = "Xia"
     zoa_str = "Zoa"
-    sue1_belief.add_partnerunit(xia_str)
-    sue1_belief.add_partnerunit(zoa_str)
+    sue1_belief.add_voiceunit(xia_str)
+    sue1_belief.add_voiceunit(zoa_str)
 
     casa_str = "casa"
     casa_rope = sue1_belief.make_l1_rope(casa_str)
@@ -205,7 +205,7 @@ def test_BeliefUnit_set_plan_CleansPlan_awardunits():
 
     # WHEN
     sue2_belief = beliefunit_shop("Sue")
-    sue2_belief.add_partnerunit(xia_str)
+    sue2_belief.add_voiceunit(xia_str)
     sue2_belief.set_l1_plan(
         sue1_belief_swim_plan, get_rid_of_missing_awardunits_awardee_titles=False
     )

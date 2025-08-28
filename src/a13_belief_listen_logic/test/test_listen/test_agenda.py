@@ -20,7 +20,7 @@ def test_listen_to_speaker_agenda_RaisesErrorIfPoolIsNotSet():
         listen_to_speaker_agenda(yao_beliefunit, zia_beliefunit)
 
     # THEN
-    assertion_fail_str = f"listener '{yao_str}' belief is assumed to have {zia_beliefunit.belief_name} partnerunit."
+    assertion_fail_str = f"listener '{yao_str}' belief is assumed to have {zia_beliefunit.belief_name} voiceunit."
     assert str(excinfo.value) == assertion_fail_str
 
 
@@ -29,8 +29,8 @@ def test_listen_to_speaker_agenda_ReturnsEqualBelief():
     yao_str = "Yao"
     yao_beliefunit = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    yao_beliefunit.add_partnerunit(zia_str)
-    yao_beliefunit.set_partner_respect(100)
+    yao_beliefunit.add_voiceunit(zia_str)
+    yao_beliefunit.set_voice_respect(100)
     zia_beliefunit = beliefunit_shop(zia_str)
 
     # WHEN
@@ -45,14 +45,14 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBelief():
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_beliefunit.add_partnerunit(zia_str)
-    yao_partner_partner_debt_points = 77
-    before_yao_beliefunit.set_partner_respect(yao_partner_partner_debt_points)
+    before_yao_beliefunit.add_voiceunit(zia_str)
+    yao_voice_voice_debt_points = 77
+    before_yao_beliefunit.set_voice_respect(yao_voice_voice_debt_points)
     clean_str = "clean"
     zia_clean_planunit = planunit_shop(clean_str, task=True)
     zia_clean_planunit.laborunit.add_party(yao_str)
     zia_beliefunit = beliefunit_shop(zia_str)
-    zia_beliefunit.add_partnerunit(yao_str)
+    zia_beliefunit.add_voiceunit(yao_str)
     zia_beliefunit.set_l1_plan(zia_clean_planunit)
     assert len(zia_beliefunit.get_agenda_dict()) == 0
     zia_yao_beliefunit = copy_deepcopy(zia_beliefunit)
@@ -70,7 +70,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBelief():
     yao_clean_planunit = after_yao_beliefunit.get_plan_obj(clean_rope)
     print(f"{yao_clean_planunit.star=}")
     assert yao_clean_planunit.star != zia_clean_planunit.star
-    assert yao_clean_planunit.star == yao_partner_partner_debt_points
+    assert yao_clean_planunit.star == yao_voice_voice_debt_points
     assert after_yao_beliefunit == before_yao_beliefunit
     assert len(after_yao_beliefunit.get_agenda_dict()) == 1
 
@@ -80,11 +80,11 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBelief():
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_beliefunit.add_partnerunit(zia_str)
-    yao_partner_debt_points = 77
-    before_yao_beliefunit.set_partner_respect(yao_partner_debt_points)
+    before_yao_beliefunit.add_voiceunit(zia_str)
+    yao_voice_debt_points = 77
+    before_yao_beliefunit.set_voice_respect(yao_voice_debt_points)
     zia_beliefunit = beliefunit_shop(zia_str)
-    zia_beliefunit.add_partnerunit(yao_str)
+    zia_beliefunit.add_voiceunit(yao_str)
     clean_str = "clean"
     zia_clean_planunit = planunit_shop(clean_str, task=True)
     zia_clean_planunit.laborunit.add_party(yao_str)
@@ -106,11 +106,11 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBelief():
     yao_clean_planunit = after_yao_beliefunit.get_plan_obj(clean_rope)
     print(f"{yao_clean_planunit.star=}")
     assert yao_clean_planunit.star != zia_clean_planunit.star
-    assert yao_clean_planunit.star == yao_partner_debt_points
+    assert yao_clean_planunit.star == yao_voice_debt_points
     after_casa_planunit = after_yao_beliefunit.get_plan_obj(casa_rope)
     print(f"{after_casa_planunit.star=}")
     assert after_casa_planunit.star != 1
-    assert after_casa_planunit.star == yao_partner_debt_points
+    assert after_casa_planunit.star == yao_voice_debt_points
     assert after_yao_beliefunit == before_yao_beliefunit
     assert len(after_yao_beliefunit.get_agenda_dict()) == 1
 
@@ -120,13 +120,13 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelief():
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_beliefunit.add_partnerunit(zia_str)
-    yao_partner_debt_points = 55
-    before_yao_beliefunit.set_partner_respect(yao_partner_debt_points)
+    before_yao_beliefunit.add_voiceunit(zia_str)
+    yao_voice_debt_points = 55
+    before_yao_beliefunit.set_voice_respect(yao_voice_debt_points)
 
     zia_str = "Zia"
     zia_beliefunit = beliefunit_shop(zia_str)
-    zia_beliefunit.add_partnerunit(yao_str)
+    zia_beliefunit.add_voiceunit(yao_str)
     clean_str = "clean"
     cook_str = "cook"
     fly_str = "fly"
@@ -178,12 +178,12 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBeliefWhereAnPla
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    before_yao_beliefunit.add_partnerunit(zia_str)
-    yao_partner_debt_points = 55
-    before_yao_beliefunit.set_partner_respect(yao_partner_debt_points)
+    before_yao_beliefunit.add_voiceunit(zia_str)
+    yao_voice_debt_points = 55
+    before_yao_beliefunit.set_voice_respect(yao_voice_debt_points)
     zia_str = "Zia"
     zia_beliefunit = beliefunit_shop(zia_str)
-    zia_beliefunit.add_partnerunit(yao_str)
+    zia_beliefunit.add_voiceunit(yao_str)
     dish_str = "dish"
     cook_str = "cook"
     fly_str = "fly"
@@ -239,15 +239,15 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBelief():
     yao_str = "Yao"
     yao_duty = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     sue_str = "Sue"
-    sue_partner_cred_points = 57
-    sue_partner_debt_points = 51
-    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_duty.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
+    sue_voice_cred_points = 57
+    sue_voice_debt_points = 51
+    yao_duty.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_duty.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
     yao_pool = 92
-    yao_duty.set_partner_respect(yao_pool)
+    yao_duty.set_voice_respect(yao_pool)
 
     sue_beliefunit = beliefunit_shop(sue_str)
     sue_beliefunit.set_max_tree_traverse(6)
@@ -283,25 +283,21 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBelief():
 
     # WHEN
     yao_vision = create_empty_belief_from_belief(yao_duty, yao_str)
-    yao_vision.add_partnerunit(
-        zia_str, zia_partner_cred_points, zia_partner_debt_points
-    )
-    yao_vision.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
-    yao_vision.set_partner_respect(yao_pool)
+    yao_vision.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_vision.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
+    yao_vision.set_voice_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, sue_beliefunit)
     yao_vision.cash_out()
 
     # THEN irrational belief is ignored
     assert len(yao_vision.get_agenda_dict()) != 3
     assert len(yao_vision.get_agenda_dict()) == 0
-    zia_partnerunit = yao_vision.get_partner(zia_str)
-    sue_partnerunit = yao_vision.get_partner(sue_str)
-    print(f"{sue_partnerunit.partner_debt_points=}")
-    print(f"{sue_partnerunit._irrational_partner_debt_points=}")
-    assert zia_partnerunit._irrational_partner_debt_points == 0
-    assert sue_partnerunit._irrational_partner_debt_points == 51
+    zia_voiceunit = yao_vision.get_voice(zia_str)
+    sue_voiceunit = yao_vision.get_voice(sue_str)
+    print(f"{sue_voiceunit.voice_debt_points=}")
+    print(f"{sue_voiceunit._irrational_voice_debt_points=}")
+    assert zia_voiceunit._irrational_voice_debt_points == 0
+    assert sue_voiceunit._irrational_voice_debt_points == 51
 
 
 def test_listen_to_speaker_agenda_ProcessesBarrenBelief():
@@ -309,36 +305,32 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBelief():
     yao_str = "Yao"
     yao_duty = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     sue_str = "Sue"
-    sue_partner_cred_points = 57
-    sue_partner_debt_points = 51
-    yao_duty.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_duty.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
+    sue_voice_cred_points = 57
+    sue_voice_debt_points = 51
+    yao_duty.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_duty.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
     yao_pool = 92
-    yao_duty.set_partner_respect(yao_pool)
+    yao_duty.set_voice_respect(yao_pool)
 
     # WHEN
     sue_vision = create_empty_belief_from_belief(yao_duty, sue_str)
     yao_vision = create_empty_belief_from_belief(yao_duty, yao_str)
-    yao_vision.add_partnerunit(
-        zia_str, zia_partner_cred_points, zia_partner_debt_points
-    )
-    yao_vision.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
-    yao_vision.set_partner_respect(yao_pool)
+    yao_vision.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_vision.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
+    yao_vision.set_voice_respect(yao_pool)
     yao_vision = listen_to_speaker_agenda(yao_vision, speaker=sue_vision)
 
     # THEN irrational belief is ignored
     assert len(yao_vision.get_agenda_dict()) != 3
     assert len(yao_vision.get_agenda_dict()) == 0
-    zia_partnerunit = yao_vision.get_partner(zia_str)
-    sue_partnerunit = yao_vision.get_partner(sue_str)
-    print(f"{sue_partnerunit.partner_debt_points=}")
-    print(f"{sue_partnerunit._irrational_partner_debt_points=}")
-    assert zia_partnerunit._irrational_partner_debt_points == 0
-    assert zia_partnerunit._inallocable_partner_debt_points == 0
-    assert sue_partnerunit._irrational_partner_debt_points == 0
-    assert sue_partnerunit._inallocable_partner_debt_points == 51
+    zia_voiceunit = yao_vision.get_voice(zia_str)
+    sue_voiceunit = yao_vision.get_voice(sue_str)
+    print(f"{sue_voiceunit.voice_debt_points=}")
+    print(f"{sue_voiceunit._irrational_voice_debt_points=}")
+    assert zia_voiceunit._irrational_voice_debt_points == 0
+    assert zia_voiceunit._inallocable_voice_debt_points == 0
+    assert sue_voiceunit._irrational_voice_debt_points == 0
+    assert sue_voiceunit._inallocable_voice_debt_points == 51

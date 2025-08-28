@@ -29,7 +29,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_belief.add_partnerunit(sue_str)
+    sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Texas"
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     dallas_str = "dallas"
@@ -60,7 +60,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_belief.add_partnerunit(sue_str)
+    sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Tex/as"
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
@@ -86,7 +86,7 @@ def test_HubUnit_get_keep_ropes_ReturnsObj(env_dir_setup_cleanup, graphics_bool)
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_belief.add_partnerunit(sue_str)
+    sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Texas"
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
@@ -119,9 +119,9 @@ def test_HubUnit_save_all_gut_dutys_Setsdutys(env_dir_setup_cleanup, graphics_bo
     sue_hubunit = hubunit_shop(mstr_dir, a23_str, sue_str, None)
     save_gut_file(mstr_dir, sue_hubunit.default_gut_belief())
     sue_gut_belief = open_gut_file(mstr_dir, a23_str, sue_str)
-    sue_gut_belief.add_partnerunit(sue_str)
+    sue_gut_belief.add_voiceunit(sue_str)
     bob_str = "Bob"
-    sue_gut_belief.add_partnerunit(bob_str)
+    sue_gut_belief.add_voiceunit(bob_str)
     texas_str = "Texas"
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
@@ -173,7 +173,7 @@ def test_HubUnit_create_gut_treasury_db_files_CreatesDatabases(
     sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str, None)
     save_gut_file(env_dir(), sue_hubunit.default_gut_belief())
     sue_gut_belief = open_gut_file(env_dir(), a23_str, sue_str)
-    sue_gut_belief.add_partnerunit(sue_str)
+    sue_gut_belief.add_voiceunit(sue_str)
     texas_str = "Texas"
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))

@@ -87,34 +87,34 @@ def test_BeliefUnit_cash_out_ClearsDescendantAttributes():
     mon_rope = sue_belief.make_rope(wk_rope, mon_str)
     mon_plan = sue_belief.get_plan_obj(mon_rope)
     assert sue_belief.planroot._descendant_task_count is None
-    assert sue_belief.planroot._all_partner_cred is None
-    assert sue_belief.planroot._all_partner_debt is None
+    assert sue_belief.planroot._all_voice_cred is None
+    assert sue_belief.planroot._all_voice_debt is None
     assert casa_plan._descendant_task_count is None
-    assert casa_plan._all_partner_cred is None
-    assert casa_plan._all_partner_debt is None
+    assert casa_plan._all_voice_cred is None
+    assert casa_plan._all_voice_debt is None
     assert mon_plan._descendant_task_count is None
-    assert mon_plan._all_partner_cred is None
-    assert mon_plan._all_partner_debt is None
+    assert mon_plan._all_voice_cred is None
+    assert mon_plan._all_voice_debt is None
 
     sue_belief.planroot._descendant_task_count = -2
-    sue_belief.planroot._all_partner_cred = -2
-    sue_belief.planroot._all_partner_debt = -2
+    sue_belief.planroot._all_voice_cred = -2
+    sue_belief.planroot._all_voice_debt = -2
     casa_plan._descendant_task_count = -2
-    casa_plan._all_partner_cred = -2
-    casa_plan._all_partner_debt = -2
+    casa_plan._all_voice_cred = -2
+    casa_plan._all_voice_debt = -2
     mon_plan._descendant_task_count = -2
-    mon_plan._all_partner_cred = -2
-    mon_plan._all_partner_debt = -2
+    mon_plan._all_voice_cred = -2
+    mon_plan._all_voice_debt = -2
 
     assert sue_belief.planroot._descendant_task_count == -2
-    assert sue_belief.planroot._all_partner_cred == -2
-    assert sue_belief.planroot._all_partner_debt == -2
+    assert sue_belief.planroot._all_voice_cred == -2
+    assert sue_belief.planroot._all_voice_debt == -2
     assert casa_plan._descendant_task_count == -2
-    assert casa_plan._all_partner_cred == -2
-    assert casa_plan._all_partner_debt == -2
+    assert casa_plan._all_voice_cred == -2
+    assert casa_plan._all_voice_debt == -2
     assert mon_plan._descendant_task_count == -2
-    assert mon_plan._all_partner_cred == -2
-    assert mon_plan._all_partner_debt == -2
+    assert mon_plan._all_voice_cred == -2
+    assert mon_plan._all_voice_debt == -2
 
     # WHEN
     sue_belief.cash_out()
@@ -124,28 +124,28 @@ def test_BeliefUnit_cash_out_ClearsDescendantAttributes():
     assert casa_plan._descendant_task_count == 0
     assert mon_plan._descendant_task_count == 0
 
-    assert mon_plan._all_partner_cred is True
-    assert mon_plan._all_partner_debt is True
-    assert casa_plan._all_partner_cred is True
-    assert casa_plan._all_partner_debt is True
-    assert sue_belief.planroot._all_partner_cred is True
-    assert sue_belief.planroot._all_partner_debt is True
+    assert mon_plan._all_voice_cred is True
+    assert mon_plan._all_voice_debt is True
+    assert casa_plan._all_voice_cred is True
+    assert casa_plan._all_voice_debt is True
+    assert sue_belief.planroot._all_voice_cred is True
+    assert sue_belief.planroot._all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_RootOnlySetsDescendantAttributes():
     # ESTABLISH
     yao_belief = beliefunit_shop(belief_name="Yao")
     assert yao_belief.planroot._descendant_task_count is None
-    assert yao_belief.planroot._all_partner_cred is None
-    assert yao_belief.planroot._all_partner_debt is None
+    assert yao_belief.planroot._all_voice_cred is None
+    assert yao_belief.planroot._all_voice_debt is None
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     assert yao_belief.planroot._descendant_task_count == 0
-    assert yao_belief.planroot._all_partner_cred is True
-    assert yao_belief.planroot._all_partner_debt is True
+    assert yao_belief.planroot._all_voice_cred is True
+    assert yao_belief.planroot._all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
@@ -169,14 +169,14 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
     root_rope = to_rope(sue_belief.moment_label)
     x_planroot = sue_belief.get_plan_obj(root_rope)
     assert x_planroot._descendant_task_count is None
-    assert x_planroot._all_partner_cred is None
-    assert x_planroot._all_partner_debt is None
+    assert x_planroot._all_voice_cred is None
+    assert x_planroot._all_voice_debt is None
     assert casa_plan._descendant_task_count is None
-    assert casa_plan._all_partner_cred is None
-    assert casa_plan._all_partner_debt is None
+    assert casa_plan._all_voice_cred is None
+    assert casa_plan._all_voice_debt is None
     assert mon_plan._descendant_task_count is None
-    assert mon_plan._all_partner_cred is None
-    assert mon_plan._all_partner_debt is None
+    assert mon_plan._all_voice_cred is None
+    assert mon_plan._all_voice_debt is None
 
     # WHEN
     sue_belief.cash_out()
@@ -186,12 +186,12 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
     assert casa_plan._descendant_task_count == 1
     assert casa_plan._kids[email_str]._descendant_task_count == 0
     assert mon_plan._descendant_task_count == 0
-    assert x_planroot._all_partner_cred is True
-    assert x_planroot._all_partner_debt is True
-    assert casa_plan._all_partner_cred is True
-    assert casa_plan._all_partner_debt is True
-    assert mon_plan._all_partner_cred is True
-    assert mon_plan._all_partner_debt is True
+    assert x_planroot._all_voice_cred is True
+    assert x_planroot._all_voice_debt is True
+    assert casa_plan._all_voice_cred is True
+    assert casa_plan._all_voice_debt is True
+    assert mon_plan._all_voice_cred is True
+    assert mon_plan._all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
@@ -212,7 +212,7 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
     vacuum_plan = planunit_shop(vacuum_str, task=True)
     sue_belief.set_plan(vacuum_plan, parent_rope=casa_rope)
 
-    sue_belief.add_partnerunit(partner_name=sue_str)
+    sue_belief.add_voiceunit(voice_name=sue_str)
     x_awardunit = awardunit_shop(awardee_title=sue_str)
 
     sue_belief.planroot._kids[casa_str]._kids[email_str].set_awardunit(
@@ -227,22 +227,22 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
     # print(sue_belief._kids[casa_str]._kids[email_str]._awardunit)
 
     # THEN
-    assert sue_belief.planroot._all_partner_cred is False
-    assert sue_belief.planroot._all_partner_debt is False
+    assert sue_belief.planroot._all_voice_cred is False
+    assert sue_belief.planroot._all_voice_debt is False
     casa_plan = sue_belief.planroot._kids[casa_str]
-    assert casa_plan._all_partner_cred is False
-    assert casa_plan._all_partner_debt is False
-    assert casa_plan._kids[email_str]._all_partner_cred is False
-    assert casa_plan._kids[email_str]._all_partner_debt is False
-    assert casa_plan._kids[vacuum_str]._all_partner_cred is True
-    assert casa_plan._kids[vacuum_str]._all_partner_debt is True
+    assert casa_plan._all_voice_cred is False
+    assert casa_plan._all_voice_debt is False
+    assert casa_plan._kids[email_str]._all_voice_cred is False
+    assert casa_plan._kids[email_str]._all_voice_debt is False
+    assert casa_plan._kids[vacuum_str]._all_voice_cred is True
+    assert casa_plan._kids[vacuum_str]._all_voice_debt is True
     wk_plan = sue_belief.planroot._kids[wk_str]
-    assert wk_plan._all_partner_cred is True
-    assert wk_plan._all_partner_debt is True
-    assert wk_plan._kids[mon_str]._all_partner_cred is True
-    assert wk_plan._kids[mon_str]._all_partner_debt is True
-    assert wk_plan._kids[tue_str]._all_partner_cred is True
-    assert wk_plan._kids[tue_str]._all_partner_debt is True
+    assert wk_plan._all_voice_cred is True
+    assert wk_plan._all_voice_debt is True
+    assert wk_plan._kids[mon_str]._all_voice_cred is True
+    assert wk_plan._kids[mon_str]._all_voice_debt is True
+    assert wk_plan._kids[tue_str]._all_voice_cred is True
+    assert wk_plan._kids[tue_str]._all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
@@ -252,12 +252,12 @@ def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
     yao_str = "Yao"
     zia_str = "Zia"
     Xio_str = "Xio"
-    sue_belief.add_partnerunit(yao_str)
-    sue_belief.add_partnerunit(zia_str)
-    sue_belief.add_partnerunit(Xio_str)
+    sue_belief.add_voiceunit(yao_str)
+    sue_belief.add_voiceunit(zia_str)
+    sue_belief.add_voiceunit(Xio_str)
 
-    assert len(sue_belief.partners) == 3
-    assert len(sue_belief.get_partnerunit_group_titles_dict()) == 3
+    assert len(sue_belief.voices) == 3
+    assert len(sue_belief.get_voiceunit_group_titles_dict()) == 3
     swim_str = "swim"
     sue_belief.set_l1_plan(planunit_shop(swim_str))
     awardunit_yao = awardunit_shop(yao_str, give_force=10)
@@ -327,9 +327,9 @@ def test_BeliefUnit_cash_out_DoesNotKeepUnneeded_awardheirs():
     yao_belief = beliefunit_shop(yao_str)
     zia_str = "Zia"
     Xio_str = "Xio"
-    yao_belief.add_partnerunit(yao_str)
-    yao_belief.add_partnerunit(zia_str)
-    yao_belief.add_partnerunit(Xio_str)
+    yao_belief.add_voiceunit(yao_str)
+    yao_belief.add_voiceunit(zia_str)
+    yao_belief.add_voiceunit(Xio_str)
 
     swim_str = "swim"
     swim_rope = yao_belief.make_l1_rope(swim_str)
@@ -520,23 +520,19 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
     zia_str = "Zia"
-    yao_partner_cred_points = 3
-    yao_partner_debt_points = 2
-    zia_partner_cred_points = 4
-    zia_partner_debt_points = 5
-    yao_belief.add_partnerunit(
-        yao_str, yao_partner_cred_points, yao_partner_debt_points
-    )
-    yao_belief.add_partnerunit(
-        zia_str, zia_partner_cred_points, zia_partner_debt_points
-    )
+    yao_voice_cred_points = 3
+    yao_voice_debt_points = 2
+    zia_voice_cred_points = 4
+    zia_voice_debt_points = 5
+    yao_belief.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    yao_belief.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
     root_rope = to_rope(yao_belief.moment_label)
     x_planroot = yao_belief.get_plan_obj(root_rope)
     x_planroot.set_awardunit(awardunit_shop(yao_str))
     x_planroot.set_awardunit(awardunit_shop(zia_str))
     xio_str = "Xio"
     x_planroot.set_awardunit(awardunit_shop(xio_str))
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) == 2
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
     assert not yao_belief.groupunit_exists(yao_str)
     assert not yao_belief.groupunit_exists(zia_str)
     assert not yao_belief.groupunit_exists(xio_str)
@@ -548,8 +544,8 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert yao_belief.groupunit_exists(yao_str)
     assert yao_belief.groupunit_exists(zia_str)
     assert yao_belief.groupunit_exists(xio_str)
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) == 2
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) != len(
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) != len(
         yao_belief._groupunits
     )
     assert len(yao_belief._groupunits) == 3
@@ -563,10 +559,10 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert not xio_groupunit.membership_exists(xio_str)
     yao_membership = xio_groupunit.get_membership(yao_str)
     zia_membership = xio_groupunit.get_membership(zia_str)
-    assert yao_membership.group_cred_points == yao_partner_cred_points
-    assert zia_membership.group_cred_points == zia_partner_cred_points
-    assert yao_membership.group_debt_points == yao_partner_debt_points
-    assert zia_membership.group_debt_points == zia_partner_debt_points
+    assert yao_membership.group_cred_points == yao_voice_cred_points
+    assert zia_membership.group_cred_points == zia_voice_cred_points
+    assert yao_membership.group_debt_points == yao_voice_debt_points
+    assert zia_membership.group_debt_points == zia_voice_debt_points
 
 
 def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario1():
@@ -577,14 +573,14 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     swim_rope = yao_belief.make_l1_rope(swim_str)
     yao_belief.set_l1_plan(planunit_shop(swim_str))
     zia_str = "Zia"
-    yao_belief.add_partnerunit(yao_str)
-    yao_belief.add_partnerunit(zia_str)
+    yao_belief.add_voiceunit(yao_str)
+    yao_belief.add_voiceunit(zia_str)
     swim_plan = yao_belief.get_plan_obj(swim_rope)
     swim_plan.set_awardunit(awardunit_shop(yao_str))
     swim_plan.set_awardunit(awardunit_shop(zia_str))
     xio_str = "Xio"
     swim_plan.set_awardunit(awardunit_shop(xio_str))
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) == 2
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
     assert not yao_belief.groupunit_exists(yao_str)
     assert not yao_belief.groupunit_exists(zia_str)
     assert not yao_belief.groupunit_exists(xio_str)
@@ -596,8 +592,8 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     assert yao_belief.groupunit_exists(yao_str)
     assert yao_belief.groupunit_exists(zia_str)
     assert yao_belief.groupunit_exists(xio_str)
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) == 2
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) != len(
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) != len(
         yao_belief._groupunits
     )
     assert len(yao_belief._groupunits) == 3
@@ -619,8 +615,8 @@ def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     swim_rope = yao_belief.make_l1_rope(swim_str)
     yao_belief.set_l1_plan(planunit_shop(swim_str))
     zia_str = "Zia"
-    yao_belief.add_partnerunit(yao_str)
-    yao_belief.add_partnerunit(zia_str)
+    yao_belief.add_voiceunit(yao_str)
+    yao_belief.add_voiceunit(zia_str)
     swim_plan = yao_belief.get_plan_obj(swim_rope)
     swim_plan.set_awardunit(awardunit_shop(yao_str))
     swim_plan.set_awardunit(awardunit_shop(zia_str))
@@ -630,8 +626,8 @@ def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     assert yao_belief.groupunit_exists(yao_str)
     assert yao_belief.groupunit_exists(zia_str)
     assert yao_belief.groupunit_exists(xio_str)
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) == 2
-    assert len(yao_belief.get_partnerunit_group_titles_dict()) != len(
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
+    assert len(yao_belief.get_voiceunit_group_titles_dict()) != len(
         yao_belief._groupunits
     )
 

@@ -29,7 +29,7 @@ from src.a12_hub_toolbox.hub_tool import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
     collect_belief_event_dir_sets,
-    create_cell_partner_mandate_ledger_json,
+    create_cell_voice_mandate_ledger_json,
     get_beliefevent_obj,
     get_beliefs_downhill_event_ints,
     open_belief_file,
@@ -213,8 +213,8 @@ def set_cell_tree_decrees(
     # add all found_facts that exist in beliefevent to beliefevent
     # add all boss facts that exist in beliefevent to beliefevent
     # calculate beliefadjust
-    # grab partner_agenda_fund_agenda_give ledger
-    # add nodes to to_evalute_cellnodes based on partner_agenda_fund_give beliefs
+    # grab voice_agenda_fund_agenda_give ledger
+    # add nodes to to_evalute_cellnodes based on voice_agenda_fund_give beliefs
     root_cell = cellunit_get_from_dir(bud_time_dir)
     root_cell_dir = create_cell_dir_path(
         mstr_dir, moment_label, belief_name, bud_time, []
@@ -238,7 +238,7 @@ def set_cell_tree_decrees(
             x_cell.mandate = x_decree.cell_mandate
             parent_cell_dir = x_decree.parent_cell_dir
             _set_cell_boss_facts(x_cell, parent_cell_dir, x_decree.root_cell_bool)
-            x_cell.calc_partner_mandate_ledger()
+            x_cell.calc_voice_mandate_ledger()
             cellunit_save_to_dir(x_decree.cell_dir, x_cell)
             if x_decree.cell_celldepth > 0:
                 _add_child_decrees(
@@ -261,7 +261,7 @@ def _add_child_decrees(
     belief_name: str,
     bud_time: int,
 ):
-    for child_belief_name, child_mandate in x_cell._partner_mandate_ledger.items():
+    for child_belief_name, child_mandate in x_cell._voice_mandate_ledger.items():
         child_cell_ancestors = x_decree.get_child_cell_ancestors(child_belief_name)
         child_dir = create_cell_dir_path(
             mstr_dir, moment_label, belief_name, bud_time, child_cell_ancestors
@@ -324,7 +324,7 @@ def set_cell_tree_cell_mandates(moment_mstr_dir: str, moment_label: str):
             bud_time_dir = create_path(buds_dir, bud_time)
             for dirpath, dirnames, filenames in os_walk(bud_time_dir):
                 if CELLNODE_FILENAME in set(filenames):
-                    create_cell_partner_mandate_ledger_json(dirpath)
+                    create_cell_voice_mandate_ledger_json(dirpath)
 
 
 def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
@@ -338,7 +338,7 @@ def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
                 belief_name=brokerunit.belief_name,
                 bud_time=budunit.bud_time,
             )
-            bud_partner_mandate_ledger = allot_nested_scale(
+            bud_voice_mandate_ledger = allot_nested_scale(
                 bud_root_dir,
                 src_filename=CELL_MANDATE_FILENAME,
                 scale_number=budunit.quota,
@@ -346,6 +346,6 @@ def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
                 depth=budunit.celldepth,
                 dst_filename=BUD_MANDATE_FILENAME,
             )
-            save_json(bud_root_dir, BUD_MANDATE_FILENAME, bud_partner_mandate_ledger)
-            budunit._bud_partner_nets = bud_partner_mandate_ledger
+            save_json(bud_root_dir, BUD_MANDATE_FILENAME, bud_voice_mandate_ledger)
+            budunit._bud_voice_nets = bud_voice_mandate_ledger
     save_json(moment_json_path, None, momentunit.to_dict())

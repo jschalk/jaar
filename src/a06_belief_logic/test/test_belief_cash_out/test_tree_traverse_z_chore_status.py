@@ -674,7 +674,7 @@ def test_BeliefUnit_cash_out_SetsEmpty_sum_healerunit_share():
 def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
-    sue_beliefunit.add_partnerunit("Sue")
+    sue_beliefunit.add_voiceunit("Sue")
     sue_beliefunit.cash_out()
     nation_rope = sue_beliefunit.make_l1_rope("nation")
     usa_rope = sue_beliefunit.make_rope(nation_rope, "USA")
@@ -744,7 +744,7 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
 def test_BeliefUnit_cash_out_Sets_keep_dict_v1(graphics_bool):
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
-    sue_beliefunit.add_partnerunit("Sue")
+    sue_beliefunit.add_voiceunit("Sue")
     sue_beliefunit.cash_out()
     nation_rope = sue_beliefunit.make_l1_rope("nation")
     usa_rope = sue_beliefunit.make_rope(nation_rope, "USA")
@@ -807,8 +807,8 @@ def test_BeliefUnit_cash_out_Sets_healers_dict():
     sue_str = "Sue"
     bob_str = "Bob"
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
-    sue_beliefunit.add_partnerunit(sue_str)
-    sue_beliefunit.add_partnerunit(bob_str)
+    sue_beliefunit.add_voiceunit(sue_str)
+    sue_beliefunit.add_voiceunit(bob_str)
     assert sue_beliefunit._healers_dict == {}
 
     # WHEN
@@ -846,8 +846,8 @@ def test_BeliefUnit_cash_out_Sets_keeps_buildable_True():
     sue_str = "Sue"
     bob_str = "Bob"
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
-    sue_beliefunit.add_partnerunit(sue_str)
-    sue_beliefunit.add_partnerunit(bob_str)
+    sue_beliefunit.add_voiceunit(sue_str)
+    sue_beliefunit.add_voiceunit(bob_str)
     assert sue_beliefunit._keeps_buildable is False
 
     # WHEN
@@ -879,8 +879,8 @@ def test_BeliefUnit_cash_out_Sets_keeps_buildable_False():
     sue_str = "Sue"
     bob_str = "Bob"
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
-    sue_beliefunit.add_partnerunit(sue_str)
-    sue_beliefunit.add_partnerunit(bob_str)
+    sue_beliefunit.add_voiceunit(sue_str)
+    sue_beliefunit.add_voiceunit(bob_str)
     assert sue_beliefunit._keeps_buildable is False
 
     # WHEN

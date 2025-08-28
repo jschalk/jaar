@@ -185,26 +185,20 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
     return hatter_belief
 
 
-def get_beliefunit_3_partner() -> BeliefUnit:
+def get_beliefunit_3_voice() -> BeliefUnit:
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
     zia_str = "Zia"
-    sue_partner_cred_points = 5
-    yao_partner_cred_points = 2
-    zia_partner_cred_points = 33
-    sue_partner_debt_points = 1
-    yao_partner_debt_points = 7
-    zia_partner_debt_points = 13
+    sue_voice_cred_points = 5
+    yao_voice_cred_points = 2
+    zia_voice_cred_points = 33
+    sue_voice_debt_points = 1
+    yao_voice_debt_points = 7
+    zia_voice_debt_points = 13
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
-    bob_belief.add_partnerunit(
-        yao_str, yao_partner_cred_points, yao_partner_debt_points
-    )
-    bob_belief.add_partnerunit(
-        zia_str, zia_partner_cred_points, zia_partner_debt_points
-    )
+    bob_belief.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
+    bob_belief.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    bob_belief.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
 
     return bob_belief

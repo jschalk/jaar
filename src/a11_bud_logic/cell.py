@@ -24,7 +24,7 @@ from src.a06_belief_logic.belief_tool import (
     clear_factunits_from_belief,
     get_belief_root_facts_dict as get_facts_dict,
     get_credit_ledger,
-    get_partner_mandate_ledger,
+    get_voice_mandate_ledger,
 )
 
 CELLNODE_QUOTA_DEFAULT = 1000
@@ -44,7 +44,7 @@ class CellUnit:
     found_facts: dict[RopeTerm, FactUnit] = None
     boss_facts: dict[RopeTerm, FactUnit] = None
     _reason_contexts: set[RopeTerm] = None
-    _partner_mandate_ledger: dict[BeliefName, FundNum] = None
+    _voice_mandate_ledger: dict[BeliefName, FundNum] = None
 
     def get_cell_belief_name(self) -> BeliefName:
         return self.bud_belief_name if self.ancestors == [] else self.ancestors[-1]
@@ -133,17 +133,15 @@ class CellUnit:
                 True,
             )
 
-    def _set_partner_mandate_ledger(self):
+    def _set_voice_mandate_ledger(self):
         self.beliefadjust.set_fund_pool(self.mandate)
-        self._partner_mandate_ledger = get_partner_mandate_ledger(
-            self.beliefadjust, True
-        )
+        self._voice_mandate_ledger = get_voice_mandate_ledger(self.beliefadjust, True)
 
-    def calc_partner_mandate_ledger(self):
+    def calc_voice_mandate_ledger(self):
         self._reason_contexts = self.beliefadjust.get_reason_contexts()
         self.filter_facts_by_reason_contexts()
         self.set_beliefadjust_facts()
-        self._set_partner_mandate_ledger()
+        self._set_voice_mandate_ledger()
 
     def to_dict(self) -> dict[str, str | dict]:
         if not self.beliefadjust:
@@ -203,7 +201,7 @@ def cellunit_shop(
         found_facts=get_empty_dict_if_None(found_facts),
         boss_facts=get_empty_dict_if_None(boss_facts),
         _reason_contexts=reason_contexts,
-        _partner_mandate_ledger={},
+        _voice_mandate_ledger={},
     )
 
 
@@ -242,10 +240,10 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
 
 
 def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
-    parent_cell.calc_partner_mandate_ledger()
+    parent_cell.calc_voice_mandate_ledger()
     x_list = []
-    for child_belief_name in sorted(parent_cell._partner_mandate_ledger):
-        child_mandate = parent_cell._partner_mandate_ledger.get(child_belief_name)
+    for child_belief_name in sorted(parent_cell._voice_mandate_ledger):
+        child_mandate = parent_cell._voice_mandate_ledger.get(child_belief_name)
         if child_mandate > 0 and parent_cell.celldepth > 0:
             child_ancestors = copy_deepcopy(parent_cell.ancestors)
             child_ancestors.append(child_belief_name)

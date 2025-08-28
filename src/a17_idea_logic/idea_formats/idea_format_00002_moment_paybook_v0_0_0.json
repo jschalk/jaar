@@ -1,6 +1,6 @@
 {
     "attributes": {
-        "partner_name": {
+        "voice_name": {
             "otx_key": true
         },
         "amount": {
@@ -26,7 +26,7 @@
     "dimens": [
         "momentunit",
         "moment_paybook",
-        "belief_partnerunit",
+        "belief_voiceunit",
         "beliefunit"
     ]
 }

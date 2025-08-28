@@ -114,9 +114,9 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario6_namemap_Inherited():
 
     # THEN
     assert merged_pidginunit
-    merged_partnerbrigde = get_suita_namemap()
-    merged_partnerbrigde.event_int = event1
-    assert merged_pidginunit.namemap == merged_partnerbrigde
+    merged_voicebrigde = get_suita_namemap()
+    merged_voicebrigde.event_int = event1
+    assert merged_pidginunit.namemap == merged_voicebrigde
     merged_groupbrigde = get_swim_titlemap()
     merged_groupbrigde.event_int = event1
     assert merged_pidginunit.titlemap == merged_groupbrigde
@@ -149,10 +149,10 @@ def test_PidginUnit_inherit_pidginunit_ReturnsObj_Scenario7_namemap_Inherited():
     # THEN
     assert merged_pidginunit
     assert new_pidginunit.nameterm_exists(bob_otx, bob_inx)
-    merged_partnerbrigde = get_suita_namemap()
-    merged_partnerbrigde.event_int = event1
-    merged_partnerbrigde.set_otx2inx(bob_otx, bob_inx)
-    assert merged_pidginunit.namemap == merged_partnerbrigde
+    merged_voicebrigde = get_suita_namemap()
+    merged_voicebrigde.event_int = event1
+    merged_voicebrigde.set_otx2inx(bob_otx, bob_inx)
+    assert merged_pidginunit.namemap == merged_voicebrigde
     merged_groupbrigde = get_swim_titlemap()
     merged_groupbrigde.event_int = event1
     assert merged_pidginunit.titlemap == merged_groupbrigde

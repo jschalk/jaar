@@ -9,8 +9,6 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a06_belief_logic.test._util.a06_str import (
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -18,6 +16,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
 )
 from src.a08_belief_atom_logic.atom_config import get_belief_dimens, get_delete_key_name
@@ -64,10 +64,10 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
 )
 
 BELIEF_PRIME_TABLENAMES = {
-    f"{belief_partner_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
-    f"{belief_partner_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
-    f"{belief_partnerunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
-    f"{belief_partnerunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
+    f"{belief_voice_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
+    f"{belief_voice_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
+    f"{belief_voiceunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
+    f"{belief_voiceunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
     f"{belief_plan_awardunit_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
     f"{belief_plan_awardunit_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
     f"{belief_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
@@ -84,10 +84,10 @@ BELIEF_PRIME_TABLENAMES = {
     f"{belief_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
     f"{beliefunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
     f"{beliefunit_str()}_sound_put_raw": "BLRUNIT_PUT_RAW",
-    f"{belief_partner_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
-    f"{belief_partner_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
-    f"{belief_partnerunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
-    f"{belief_partnerunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
+    f"{belief_voice_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
+    f"{belief_voice_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
+    f"{belief_voiceunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
+    f"{belief_voiceunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
     f"{belief_plan_awardunit_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
     f"{belief_plan_awardunit_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
     f"{belief_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
@@ -944,7 +944,7 @@ def test_create_insert_missing_face_name_into_pidgin_core_vld_sqlstr_ReturnsObj(
     # ESTABLISH
     default_knot = "|"
     default_unknown_str = "unknown2"
-    blrpern_s_agg_tablename = prime_tbl(belief_partnerunit_str(), "s", "agg")
+    blrpern_s_agg_tablename = prime_tbl(belief_voiceunit_str(), "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(

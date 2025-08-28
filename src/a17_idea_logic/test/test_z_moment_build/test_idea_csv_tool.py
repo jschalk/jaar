@@ -61,13 +61,13 @@ def test_create_init_stance_idea_csv_strs_ReturnsObj_Scenario0_EmptyMomentUnit(
     expected_stance_csv_strs = {
         "br00000": "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations\n",
         "br00001": "moment_label,belief_name,bud_time,quota,celldepth\n",
-        "br00002": "moment_label,belief_name,partner_name,tran_time,amount\n",
+        "br00002": "moment_label,belief_name,voice_name,tran_time,amount\n",
         "br00003": "moment_label,cumulative_minute,hour_label\n",
         "br00004": "moment_label,cumulative_day,month_label\n",
         "br00005": "moment_label,weekday_order,weekday_label\n",
         # "br00006": "moment_label,offi_time,_offi_time_max\n",
-        "br00020": "moment_label,belief_name,partner_name,group_title,group_cred_points,group_debt_points\n",
-        "br00021": "moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points\n",
+        "br00020": "moment_label,belief_name,voice_name,group_title,group_cred_points,group_debt_points\n",
+        "br00021": "moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points\n",
         "br00022": "moment_label,belief_name,plan_rope,awardee_title,give_force,take_force\n",
         "br00023": "moment_label,belief_name,plan_rope,fact_context,fact_state,fact_lower,fact_upper\n",
         "br00024": "moment_label,belief_name,plan_rope,party_title,solo\n",
@@ -286,11 +286,11 @@ def test_add_belief_to_br00020_csv_ReturnsObj():
     yao_str = "Yao"
     a23_str = "amy23"
     bob_belief = beliefunit_shop(bob_str, a23_str)
-    bob_belief.add_partnerunit(yao_str)
+    bob_belief.add_voiceunit(yao_str)
     run_str = ";Run"
     run_credit = 33
     run_debt = 55
-    bob_belief.get_partner(yao_str).add_membership(run_str, run_credit, run_debt)
+    bob_belief.get_voice(yao_str).add_membership(run_str, run_credit, run_debt)
     csv_header = x_ideas.get("br00020")
 
     # WHEN
@@ -314,7 +314,7 @@ def test_add_belief_to_br00021_csv_ReturnsObj():
     yao_debt = 55
     a23_str = "amy23"
     bob_belief = beliefunit_shop(bob_str, a23_str)
-    bob_belief.add_partnerunit(yao_str, yao_credit, yao_debt)
+    bob_belief.add_voiceunit(yao_str, yao_credit, yao_debt)
     csv_header = x_ideas.get("br00021")
 
     # WHEN
@@ -578,7 +578,7 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj():
     yao_str = "Yao"
     a23_str = "amy23"
     bob_belief = beliefunit_shop(bob_str, a23_str)
-    bob_belief.add_partnerunit(yao_str)
+    bob_belief.add_voiceunit(yao_str)
     mop_rope = bob_belief.make_l1_rope("mop")
     casa_rope = bob_belief.make_l1_rope("casa")
     clean_rope = bob_belief.make_rope(casa_rope, "clean")
@@ -628,11 +628,11 @@ def test_add_pack_to_br00020_csv_ReturnsObj():
     yao_str = "Yao"
     a23_str = "amy23"
     bob_belief = beliefunit_shop(bob_str, a23_str)
-    bob_belief.add_partnerunit(yao_str)
+    bob_belief.add_voiceunit(yao_str)
     run_str = ";Run"
     run_credit = 33
     run_debt = 55
-    bob_belief.get_partner(yao_str).add_membership(run_str, run_credit, run_debt)
+    bob_belief.get_voice(yao_str).add_membership(run_str, run_credit, run_debt)
     bob_beliefdelta = beliefdelta_shop()
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
@@ -663,7 +663,7 @@ def test_add_pack_to_br00021_csv_ReturnsObj():
     yao_debt = 55
     a23_str = "amy23"
     bob_belief = beliefunit_shop(bob_str, a23_str)
-    bob_belief.add_partnerunit(yao_str, yao_credit, yao_debt)
+    bob_belief.add_voiceunit(yao_str, yao_credit, yao_debt)
     bob_beliefdelta = beliefdelta_shop()
     bob_beliefdelta.add_all_beliefatoms(bob_belief)
     sue_str = "Sue"
@@ -990,7 +990,7 @@ def test_add_packunit_to_stance_csv_strs_ReturnsObj():
     yao_str = "Yao"
     a23_str = "amy23"
     bob_belief = beliefunit_shop(bob_str, a23_str)
-    bob_belief.add_partnerunit(yao_str)
+    bob_belief.add_voiceunit(yao_str)
     mop_rope = bob_belief.make_l1_rope("mop")
     casa_rope = bob_belief.make_l1_rope("casa")
     clean_rope = bob_belief.make_rope(casa_rope, "clean")

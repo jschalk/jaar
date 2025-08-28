@@ -3,7 +3,7 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a06_belief_logic.test._util.a06_str import partner_name_str
+from src.a06_belief_logic.test._util.a06_str import voice_name_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
     belief_name_str,
@@ -48,7 +48,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]
@@ -180,7 +180,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]

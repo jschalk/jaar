@@ -10,7 +10,7 @@ from src.a05_plan_logic.test._util.a05_str import (
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
-    get_belief_partnerunits_dataframe,
+    get_belief_voiceunits_dataframe,
 )
 from src.a06_belief_logic.test._util.a06_str import parent_rope_str
 from src.a06_belief_logic.test._util.example_beliefs import (
@@ -18,32 +18,28 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_get_belief_partnerunits_dataframe_ReturnsDataFrame():
+def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():
     # ESTABLISH
     luca_belief = beliefunit_shop()
     luca_belief.set_credor_respect(500)
     luca_belief.set_debtor_respect(400)
     yao_str = "Yao"
-    yao_partner_cred_points = 66
-    yao_partner_debt_points = 77
-    luca_belief.add_partnerunit(
-        yao_str, yao_partner_cred_points, yao_partner_debt_points
-    )
+    yao_voice_cred_points = 66
+    yao_voice_debt_points = 77
+    luca_belief.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
     sue_str = "Sue"
-    sue_partner_cred_points = 434
-    sue_partner_debt_points = 323
-    luca_belief.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
+    sue_voice_cred_points = 434
+    sue_voice_debt_points = 323
+    luca_belief.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
 
     # WHEN
-    x_df = get_belief_partnerunits_dataframe(luca_belief)
+    x_df = get_belief_voiceunits_dataframe(luca_belief)
 
     # THEN
-    partnerunit_colums = {
-        "partner_name",
-        "partner_cred_points",
-        "partner_debt_points",
+    voiceunit_colums = {
+        "voice_name",
+        "voice_cred_points",
+        "voice_debt_points",
         "_memberships",
         "_fund_give",
         "_fund_take",
@@ -54,22 +50,22 @@ def test_get_belief_partnerunits_dataframe_ReturnsDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == partnerunit_colums
+    assert set(x_df.columns) == voiceunit_colums
     assert x_df.shape[0] == 2
 
 
-def test_get_belief_partnerunits_dataframe_ReturnsEmptyDataFrame():
+def test_get_belief_voiceunits_dataframe_ReturnsEmptyDataFrame():
     # ESTABLISH
     luca_belief = beliefunit_shop()
 
     # WHEN
-    x_df = get_belief_partnerunits_dataframe(luca_belief)
+    x_df = get_belief_voiceunits_dataframe(luca_belief)
 
     # THEN
-    partnerunit_colums = {
-        "partner_name",
-        "partner_cred_points",
-        "partner_debt_points",
+    voiceunit_colums = {
+        "voice_name",
+        "voice_cred_points",
+        "voice_debt_points",
         "_fund_give",
         "_fund_take",
         "_fund_agenda_give",
@@ -79,7 +75,7 @@ def test_get_belief_partnerunits_dataframe_ReturnsEmptyDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == partnerunit_colums
+    assert set(x_df.columns) == voiceunit_colums
     assert x_df.shape[0] == 0
 
 
@@ -93,7 +89,7 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
     print(x_df)
 
     # THEN
-    partnerunit_colums = {
+    voiceunit_colums = {
         "belief_name",
         "fund_ratio",
         plan_label_str(),
@@ -107,7 +103,7 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == partnerunit_colums
+    assert set(x_df.columns) == voiceunit_colums
     assert x_df.shape[0] == 63
 
 
@@ -121,7 +117,7 @@ def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():
     print(x_df)
 
     # THEN
-    partnerunit_colums = {
+    voiceunit_colums = {
         "belief_name",
         "fund_ratio",
         plan_label_str(),
@@ -135,4 +131,4 @@ def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():
     }
     print(f"{set(x_df.columns)=}")
 
-    assert set(x_df.columns) == partnerunit_colums
+    assert set(x_df.columns) == voiceunit_colums

@@ -347,8 +347,8 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
     yao_str = "Yao"
     yao_belief = beliefunit_shop(yao_str)
     cali_str = "Cali"
-    yao_belief.add_partnerunit(yao_str)
-    yao_belief.add_partnerunit(cali_str)
+    yao_belief.add_voiceunit(yao_str)
+    yao_belief.add_voiceunit(cali_str)
 
     casa_str = "casa"
     basket_str = "laundry basket status"

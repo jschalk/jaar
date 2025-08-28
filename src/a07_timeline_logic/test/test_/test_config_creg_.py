@@ -649,8 +649,8 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
 
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    assert len(sue_belief.partners) == 0
-    assert len(sue_belief.get_partnerunit_group_titles_dict()) == 0
+    assert len(sue_belief.voices) == 0
+    assert len(sue_belief.get_voiceunit_group_titles_dict()) == 0
 
     clean_str = "cleanings"
     clean_rope = sue_belief.make_l1_rope(clean_str)
@@ -689,8 +689,8 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     awardunit_z = awardunit_shop(awardee_title=family_str)
     sweep_plan.set_awardunit(awardunit_z)
 
-    assert len(sue_belief.partners) == 0
-    assert len(sue_belief.get_partnerunit_group_titles_dict()) == 0
+    assert len(sue_belief.voices) == 0
+    assert len(sue_belief.get_voiceunit_group_titles_dict()) == 0
     assert len(sue_belief.planroot._kids) == 1
     assert sue_belief.get_plan_obj(daytime_rope).denom == 1440
     assert sue_belief.get_plan_obj(daytime_rope).morph
@@ -711,8 +711,8 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     assert sue_belief.get_plan_obj(clean_rope) is not None
     assert sue_belief.get_plan_obj(cookery_room_rope) is not None
     assert sue_belief.get_plan_obj(cookery_dirty_rope) is not None
-    assert len(sue_belief.get_partnerunit_group_titles_dict()) == 0
-    assert sue_belief.get_partnerunit_group_titles_dict().get(family_str) is None
+    assert len(sue_belief.get_voiceunit_group_titles_dict()) == 0
+    assert sue_belief.get_voiceunit_group_titles_dict().get(family_str) is None
 
     assert len(sue_belief.planroot._kids) == 3
 

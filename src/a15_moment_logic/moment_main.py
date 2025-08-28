@@ -16,7 +16,7 @@ from src.a01_term_logic.term import (
     BeliefName,
     EventInt,
     MomentLabel,
-    PartnerName,
+    VoiceName,
     default_knot_if_None,
 )
 from src.a02_finance_logic.finance_config import (
@@ -271,7 +271,7 @@ class MomentUnit:
     def add_paypurchase(
         self,
         belief_name: BeliefName,
-        partner_name: PartnerName,
+        voice_name: VoiceName,
         tran_time: TimeLinePoint,
         amount: FundNum,
         blocked_tran_times: set[TimeLinePoint] = None,
@@ -279,7 +279,7 @@ class MomentUnit:
     ) -> None:
         self.paybook.add_tranunit(
             belief_name=belief_name,
-            partner_name=partner_name,
+            voice_name=voice_name,
             tran_time=tran_time,
             amount=amount,
             blocked_tran_times=blocked_tran_times,
@@ -287,17 +287,17 @@ class MomentUnit:
         )
 
     def paypurchase_exists(
-        self, src: BeliefName, dst: PartnerName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: TimeLinePoint
     ) -> bool:
         return self.paybook.tranunit_exists(src, dst, x_tran_time)
 
     def get_paypurchase(
-        self, src: BeliefName, dst: PartnerName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.get_tranunit(src, dst, x_tran_time)
 
     def del_paypurchase(
-        self, src: BeliefName, dst: PartnerName, x_tran_time: TimeLinePoint
+        self, src: BeliefName, dst: VoiceName, x_tran_time: TimeLinePoint
     ) -> TranUnit:
         return self.paybook.del_tranunit(src, dst, x_tran_time)
 
@@ -327,9 +327,9 @@ class MomentUnit:
         x_tranbook = tranbook_shop(self.moment_label, x_tranunits)
         for belief_name, x_brokerunit in self.brokerunits.items():
             for x_bud_time, x_budunit in x_brokerunit.buds.items():
-                for partner_name, x_amount in x_budunit._bud_partner_nets.items():
+                for voice_name, x_amount in x_budunit._bud_voice_nets.items():
                     x_tranbook.add_tranunit(
-                        belief_name, partner_name, x_bud_time, x_amount
+                        belief_name, voice_name, x_bud_time, x_amount
                     )
         self._all_tranbook = x_tranbook
 

@@ -14,19 +14,19 @@ from src.a05_plan_logic.plan import (
 )
 
 
-def test_PlanUnit_clear_all_partner_cred_debt_ClearsAttrs():
+def test_PlanUnit_clear_all_voice_cred_debt_ClearsAttrs():
     # ESTABLISH
     ball_str = "ball"
-    ball_plan = planunit_shop(ball_str, _all_partner_cred=55, _all_partner_debt=33)
-    assert ball_plan._all_partner_cred == 55
-    assert ball_plan._all_partner_debt == 33
+    ball_plan = planunit_shop(ball_str, _all_voice_cred=55, _all_voice_debt=33)
+    assert ball_plan._all_voice_cred == 55
+    assert ball_plan._all_voice_debt == 33
 
     # WHEN
-    ball_plan.clear_all_partner_cred_debt()
+    ball_plan.clear_all_voice_cred_debt()
 
     # THEN
-    assert ball_plan._all_partner_cred is None
-    assert ball_plan._all_partner_debt is None
+    assert ball_plan._all_voice_cred is None
+    assert ball_plan._all_voice_debt is None
 
 
 def test_PlanUnit_get_fund_share_ReturnsObj():

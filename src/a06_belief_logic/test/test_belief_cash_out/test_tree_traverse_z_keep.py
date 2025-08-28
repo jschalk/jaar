@@ -46,7 +46,7 @@ def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenSingleProblemAndKeep():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
     yao_healerunit = healerunit_shop({yao_str})
     sue_belief.set_l1_plan(
         planunit_shop("Texas", healerunit=yao_healerunit, problem_bool=True)
@@ -64,7 +64,7 @@ def test_BeliefUnit_cash_out_Sets_keeps_justified_WhenKeepIsLevelAboveProblem():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
     yao_healerunit = healerunit_shop({yao_str})
 
     texas_str = "Texas"

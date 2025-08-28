@@ -1,15 +1,15 @@
 from src.a01_term_logic.rope import create_rope
 from src.a01_term_logic.term import MomentLabel
 from src.a06_belief_logic.test._util.a06_str import (
-    belief_partnerunit_str,
     belief_plan_factunit_str,
     belief_planunit_str,
+    belief_voiceunit_str,
     beliefunit_str,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
-    partner_name_str,
     plan_rope_str,
+    voice_name_str,
 )
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.a08_belief_atom_logic.test._util.a08_str import (
@@ -91,9 +91,9 @@ def get_beliefdelta_sue_example() -> BeliefDelta:
     pool_beliefatom.set_jvalue(pool_attribute, 77)
     sue_beliefdelta.set_beliefatom(pool_beliefatom)
 
-    dimen = belief_partnerunit_str()
+    dimen = belief_voiceunit_str()
     sue_str = "Sue"
     sue_beliefatom = beliefatom_shop(dimen, DELETE_str())
-    sue_beliefatom.set_jkey(partner_name_str(), sue_str)
+    sue_beliefatom.set_jkey(voice_name_str(), sue_str)
     sue_beliefdelta.set_beliefatom(sue_beliefatom)
     return sue_beliefdelta

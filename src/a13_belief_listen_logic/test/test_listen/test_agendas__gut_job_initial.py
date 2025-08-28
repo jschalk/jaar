@@ -39,17 +39,17 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWhenNo_pa
     yao_str = "Yao"
     yao_gut = beliefunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     zia_pool = 87
-    yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_gut.set_partner_respect(zia_pool)
+    yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_gut.set_voice_respect(zia_pool)
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_gut = beliefunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_partnerunit(yao_str, partner_debt_points=12)
+    zia_gut.add_voiceunit(yao_str, voice_debt_points=12)
     save_gut_file(moment_mstr_dir, zia_gut)
 
     new_yao_job = create_listen_basis(yao_gut)
@@ -72,17 +72,17 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelief(
     yao_str = "Yao"
     yao_gut = beliefunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     zia_pool = 87
-    yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_gut.set_partner_respect(zia_pool)
+    yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_gut.set_voice_respect(zia_pool)
     a23_str = "amy23"
     save_gut_file(moment_mstr_dir, yao_gut)
     zia_gut = beliefunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_partnerunit(yao_str, partner_debt_points=12)
+    zia_gut.add_voiceunit(yao_str, voice_debt_points=12)
     clean_planunit = zia_gut.get_plan_obj(clean_rope())
     cook_planunit = zia_gut.get_plan_obj(cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
@@ -99,7 +99,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelief(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWithDetailsDecidedBy_partner_debt_points(
+def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWithDetailsDecidedBy_voice_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -136,16 +136,16 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWithDetai
     # THEN
     assert new_yao_gut1.plan_exists(cook_rope())
     new_cook_plan = new_yao_gut1.get_plan_obj(cook_rope())
-    zia_partnerunit = new_yao_gut1.get_partner(zia_str)
-    bob_partnerunit = new_yao_gut1.get_partner(bob_str)
-    assert zia_partnerunit.partner_debt_points < bob_partnerunit.partner_debt_points
+    zia_voiceunit = new_yao_gut1.get_voice(zia_str)
+    bob_voiceunit = new_yao_gut1.get_voice(bob_str)
+    assert zia_voiceunit.voice_debt_points < bob_voiceunit.voice_debt_points
     assert new_cook_plan.get_reasonunit(eat_rope()) is None
 
-    yao_zia_partner_debt_points = 15
-    yao_bob_partner_debt_points = 5
-    yao_gut.add_partnerunit(zia_str, None, yao_zia_partner_debt_points)
-    yao_gut.add_partnerunit(bob_str, None, yao_bob_partner_debt_points)
-    yao_gut.set_partner_respect(100)
+    yao_zia_voice_debt_points = 15
+    yao_bob_voice_debt_points = 5
+    yao_gut.add_voiceunit(zia_str, None, yao_zia_voice_debt_points)
+    yao_gut.add_voiceunit(bob_str, None, yao_bob_voice_debt_points)
+    yao_gut.set_voice_respect(100)
     new_yao_gut2 = create_listen_basis(yao_gut)
     assert new_yao_gut2.plan_exists(cook_rope()) is False
 
@@ -155,9 +155,9 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWithDetai
     # THEN
     assert new_yao_gut2.plan_exists(cook_rope())
     new_cook_plan = new_yao_gut2.get_plan_obj(cook_rope())
-    zia_partnerunit = new_yao_gut2.get_partner(zia_str)
-    bob_partnerunit = new_yao_gut2.get_partner(bob_str)
-    assert zia_partnerunit.partner_debt_points > bob_partnerunit.partner_debt_points
+    zia_voiceunit = new_yao_gut2.get_voice(zia_str)
+    bob_voiceunit = new_yao_gut2.get_voice(bob_str)
+    assert zia_voiceunit.voice_debt_points > bob_voiceunit.voice_debt_points
     zia_eat_reasonunit = zia_cook_planunit.get_reasonunit(eat_rope())
     assert new_cook_plan.get_reasonunit(eat_rope()) == zia_eat_reasonunit
 
@@ -171,15 +171,15 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
     yao_str = "Yao"
     yao_gut = beliefunit_shop(yao_str, a23_str)
     zia_str = "Zia"
-    zia_partner_cred_points = 47
-    zia_partner_debt_points = 41
+    zia_voice_cred_points = 47
+    zia_voice_debt_points = 41
     sue_str = "Sue"
-    sue_partner_cred_points = 57
-    sue_partner_debt_points = 51
-    yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_gut.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
+    sue_voice_cred_points = 57
+    sue_voice_debt_points = 51
+    yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_gut.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
     yao_pool = 92
-    yao_gut.set_partner_respect(yao_pool)
+    yao_gut.set_voice_respect(yao_pool)
     a23_str = "amy23"
     save_gut_file(moment_mstr_dir, yao_gut)
 
@@ -187,7 +187,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
     zia_gut = beliefunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_partnerunit(yao_str, partner_debt_points=12)
+    zia_gut.add_voiceunit(yao_str, voice_debt_points=12)
     clean_planunit = zia_gut.get_plan_obj(clean_rope())
     cook_planunit = zia_gut.get_plan_obj(cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
@@ -196,7 +196,7 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
 
     sue_gut = beliefunit_shop(sue_str, a23_str)
     sue_gut.set_max_tree_traverse(5)
-    zia_gut.add_partnerunit(yao_str, partner_debt_points=12)
+    zia_gut.add_voiceunit(yao_str, voice_debt_points=12)
     vacuum_str = "vacuum"
     vacuum_rope = sue_gut.make_l1_rope(vacuum_str)
     sue_gut.set_l1_plan(planunit_shop(vacuum_str, task=True))
@@ -232,12 +232,12 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
     # THEN irrational belief is ignored
     assert len(new_yao_gut.get_agenda_dict()) != 3
     assert len(new_yao_gut.get_agenda_dict()) == 2
-    zia_partnerunit = new_yao_gut.get_partner(zia_str)
-    sue_partnerunit = new_yao_gut.get_partner(sue_str)
-    print(f"{sue_partnerunit.partner_debt_points=}")
-    print(f"{sue_partnerunit._irrational_partner_debt_points=}")
-    assert zia_partnerunit._irrational_partner_debt_points == 0
-    assert sue_partnerunit._irrational_partner_debt_points == 51
+    zia_voiceunit = new_yao_gut.get_voice(zia_str)
+    sue_voiceunit = new_yao_gut.get_voice(sue_str)
+    print(f"{sue_voiceunit.voice_debt_points=}")
+    print(f"{sue_voiceunit._irrational_voice_debt_points=}")
+    assert zia_voiceunit._irrational_voice_debt_points == 0
+    assert sue_voiceunit._irrational_voice_debt_points == 51
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelief(
@@ -253,20 +253,20 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     yao_gut = beliefunit_shop(yao_str, a23_str)
     zia_str = "Zia"
     sue_str = "Sue"
-    zia_partner_cred_points = 47
-    sue_partner_cred_points = 57
-    zia_partner_debt_points = 41
-    sue_partner_debt_points = 51
-    yao_gut.add_partnerunit(zia_str, zia_partner_cred_points, zia_partner_debt_points)
-    yao_gut.add_partnerunit(sue_str, sue_partner_cred_points, sue_partner_debt_points)
+    zia_voice_cred_points = 47
+    sue_voice_cred_points = 57
+    zia_voice_debt_points = 41
+    sue_voice_debt_points = 51
+    yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
+    yao_gut.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
     yao_pool = 92
-    yao_gut.set_partner_respect(yao_pool)
+    yao_gut.set_voice_respect(yao_pool)
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_gut = beliefunit_shop(zia_str, a23_str)
     zia_gut.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
     zia_gut.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_gut.add_partnerunit(yao_str, partner_debt_points=12)
+    zia_gut.add_voiceunit(yao_str, voice_debt_points=12)
     clean_planunit = zia_gut.get_plan_obj(clean_rope())
     cook_planunit = zia_gut.get_plan_obj(cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
@@ -280,9 +280,9 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     # THEN irrational belief is ignored
     assert len(new_yao_gut.get_agenda_dict()) != 3
     assert len(new_yao_gut.get_agenda_dict()) == 2
-    zia_partnerunit = new_yao_gut.get_partner(zia_str)
-    sue_partnerunit = new_yao_gut.get_partner(sue_str)
-    print(f"{sue_partnerunit.partner_debt_points=}")
-    print(f"{sue_partnerunit._inallocable_partner_debt_points=}")
-    assert zia_partnerunit._inallocable_partner_debt_points == 0
-    assert sue_partnerunit._inallocable_partner_debt_points == 51
+    zia_voiceunit = new_yao_gut.get_voice(zia_str)
+    sue_voiceunit = new_yao_gut.get_voice(sue_str)
+    print(f"{sue_voiceunit.voice_debt_points=}")
+    print(f"{sue_voiceunit._inallocable_voice_debt_points=}")
+    assert zia_voiceunit._inallocable_voice_debt_points == 0
+    assert sue_voiceunit._inallocable_voice_debt_points == 51

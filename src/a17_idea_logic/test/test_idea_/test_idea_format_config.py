@@ -3,7 +3,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     addin_str,
     begin_str,
     belief_name_str,
-    belief_partnerunit_str,
+    belief_voiceunit_str,
     beliefunit_str,
     close_str,
     denom_str,
@@ -14,14 +14,14 @@ from src.a06_belief_logic.test._util.a06_str import (
     moment_label_str,
     morph_str,
     numor_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
-    partner_pool_str,
     plan_rope_str,
     star_str,
     stop_want_str,
     task_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
+    voice_pool_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_moment_logic.test._util.a15_str import momentunit_str
@@ -34,8 +34,8 @@ from src.a17_idea_logic.idea_config import (
     get_idearef_from_file,
     idea_format_00013_planunit_v0_0_0,
     idea_format_00019_planunit_v0_0_0,
-    idea_format_00020_belief_partner_membership_v0_0_0,
-    idea_format_00021_belief_partnerunit_v0_0_0,
+    idea_format_00020_belief_voice_membership_v0_0_0,
+    idea_format_00021_belief_voiceunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_main import (
     _generate_idea_dataframe,
@@ -48,15 +48,15 @@ from src.a17_idea_logic.test._util.a17_str import attributes_str
 
 def test_config_str_functions_ReturnsObjs():
     # ESTABLISH / WHEN / THEN
-    assert partner_pool_str() == "partner_pool"
-    assert partner_debt_points_str() == "partner_debt_points"
-    assert partner_cred_points_str() == "partner_cred_points"
+    assert voice_pool_str() == "voice_pool"
+    assert voice_debt_points_str() == "voice_debt_points"
+    assert voice_cred_points_str() == "voice_cred_points"
     assert group_debt_points_str() == "group_debt_points"
     assert group_cred_points_str() == "group_cred_points"
-    x00021_idea = "idea_format_00021_belief_partnerunit_v0_0_0"
-    assert idea_format_00021_belief_partnerunit_v0_0_0() == x00021_idea
-    x00020_idea = "idea_format_00020_belief_partner_membership_v0_0_0"
-    assert idea_format_00020_belief_partner_membership_v0_0_0() == x00020_idea
+    x00021_idea = "idea_format_00021_belief_voiceunit_v0_0_0"
+    assert idea_format_00021_belief_voiceunit_v0_0_0() == x00021_idea
+    x00020_idea = "idea_format_00020_belief_voice_membership_v0_0_0"
+    assert idea_format_00020_belief_voice_membership_v0_0_0() == x00020_idea
     x0003_idea = "idea_format_00013_planunit_v0_0_0"
     assert idea_format_00013_planunit_v0_0_0() == x0003_idea
 
@@ -73,7 +73,7 @@ def test_get_idea_formats_dir_ReturnsObj():
 
 def test_get_idearef_obj_ReturnsObj():
     # ESTABLISH
-    idea_name_00021 = idea_format_00021_belief_partnerunit_v0_0_0()
+    idea_name_00021 = idea_format_00021_belief_voiceunit_v0_0_0()
 
     # WHEN
     x_idearef = get_idearef_obj(idea_name_00021)
@@ -81,7 +81,7 @@ def test_get_idearef_obj_ReturnsObj():
     # THEN
     assert x_idearef.idea_name == idea_name_00021
     assert set(x_idearef.dimens) == {
-        belief_partnerunit_str(),
+        belief_voiceunit_str(),
         beliefunit_str(),
         momentunit_str(),
     }
@@ -92,7 +92,7 @@ def test_get_idearef_obj_ReturnsObj():
 def test_get_headers_list_ReturnsObj():
     # ESTABLISH / WHEN
     format_00021_headers = _get_headers_list(
-        idea_format_00021_belief_partnerunit_v0_0_0()
+        idea_format_00021_belief_voiceunit_v0_0_0()
     )
 
     # THEN
@@ -102,9 +102,9 @@ def test_get_headers_list_ReturnsObj():
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
-        partner_cred_points_str(),
-        partner_debt_points_str(),
+        voice_name_str(),
+        voice_cred_points_str(),
+        voice_debt_points_str(),
     ]
 
 
@@ -125,12 +125,12 @@ def get_sorted_headers_str(idea_filename):
 def test_get_sorted_headers_str_ReturnsObj():
     # ESTABLISH / WHEN
     br00021_headers = get_sorted_headers_str(
-        idea_format_00021_belief_partnerunit_v0_0_0()
+        idea_format_00021_belief_voiceunit_v0_0_0()
     )
     # THEN
     assert (
         br00021_headers
-        == "moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points"
+        == "moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points"
     )
 
     # ESTABLISH / WHEN
@@ -169,10 +169,10 @@ def test__generate_idea_dataframe_ReturnsObj():
     empty_d2 = []
     # WHEN
     x_df = _generate_idea_dataframe(
-        empty_d2, idea_format_00021_belief_partnerunit_v0_0_0()
+        empty_d2, idea_format_00021_belief_voiceunit_v0_0_0()
     )
     # THEN
-    headers_list = _get_headers_list(idea_format_00021_belief_partnerunit_v0_0_0())
+    headers_list = _get_headers_list(idea_format_00021_belief_voiceunit_v0_0_0())
     assert list(x_df.columns) == headers_list
 
 
@@ -207,9 +207,9 @@ def test_idea_FilesExist():
     assert len(idea_filenames) == len(get_idea_format_filenames())
 
 
-def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_partnerunit_v0_0_0():
+def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00021_belief_partnerunit_v0_0_0()
+    idea_name = idea_format_00021_belief_voiceunit_v0_0_0()
 
     # WHEN
     format_00001_idearef = get_idearef_obj(idea_name)
@@ -217,9 +217,9 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_partnerunit_v0_0_0():
     # THEN
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
-        "partner_name": {"otx_key": True},
-        "partner_cred_points": {"otx_key": False},
-        "partner_debt_points": {"otx_key": False},
+        "voice_name": {"otx_key": True},
+        "voice_cred_points": {"otx_key": False},
+        "voice_debt_points": {"otx_key": False},
         "event_int": {"otx_key": True},
         "face_name": {"otx_key": True},
         "moment_label": {"otx_key": True},
@@ -230,14 +230,14 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_partnerunit_v0_0_0():
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
-    assert headers_list[4] == partner_name_str()
-    assert headers_list[5] == partner_cred_points_str()
-    assert headers_list[6] == partner_debt_points_str()
+    assert headers_list[4] == voice_name_str()
+    assert headers_list[5] == voice_cred_points_str()
+    assert headers_list[6] == voice_debt_points_str()
 
 
-def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_partner_membership_v0_0_0():
+def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0_0():
     # ESTABLISH
-    idea_name = idea_format_00020_belief_partner_membership_v0_0_0()
+    idea_name = idea_format_00020_belief_voice_membership_v0_0_0()
 
     # WHEN
     format_00021_idearef = get_idearef_obj(idea_name)
@@ -249,7 +249,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_partner_membership_v0
     assert headers_list[1] == face_name_str()
     assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
-    assert headers_list[4] == partner_name_str()
+    assert headers_list[4] == voice_name_str()
     assert headers_list[5] == group_title_str()
     assert headers_list[6] == group_cred_points_str()
     assert headers_list[7] == group_debt_points_str()

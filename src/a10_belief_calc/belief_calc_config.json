@@ -1,8 +1,8 @@
 {
-    "belief_partner_membership": {
+    "belief_voice_membership": {
         "abbreviation": "blrmemb",
         "jkeys": {
-            "partner_name": {
+            "voice_name": {
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -64,10 +64,10 @@
             }
         }
     },
-    "belief_partnerunit": {
+    "belief_voiceunit": {
         "abbreviation": "blrpern",
         "jkeys": {
-            "partner_name": {
+            "voice_name": {
                 "class_type": "NameTerm",
                 "sqlite_datatype": "TEXT"
             },
@@ -113,21 +113,21 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_partner_debt_points": {
+            "_inallocable_voice_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_partner_debt_points": {
+            "_irrational_voice_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
         },
         "jvalues": {
-            "partner_cred_points": {
+            "voice_cred_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "partner_debt_points": {
+            "voice_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -377,11 +377,11 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_all_partner_cred": {
+            "_all_voice_cred": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_all_partner_debt": {
+            "_all_voice_debt": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

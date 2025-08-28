@@ -1,6 +1,6 @@
 from src.a01_term_logic.rope import create_rope_from_labels
 from src.a03_group_logic.group import awardunit_shop
-from src.a03_group_logic.partner import partnerunit_shop
+from src.a03_group_logic.voice import voiceunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.example_beliefs import beliefunit_v001
@@ -156,25 +156,25 @@ def test_BeliefUnit_3AdvocatesNoplanunit_shop():
     zia_str = "Zia"
 
     zia_beliefunit = beliefunit_shop("Zia")
-    yao_partnerunit = partnerunit_shop(partner_name=yao_str)
-    sue_partnerunit = partnerunit_shop(partner_name=sue_str)
-    zia_partnerunit = partnerunit_shop(partner_name=zia_str)
+    yao_voiceunit = voiceunit_shop(voice_name=yao_str)
+    sue_voiceunit = voiceunit_shop(voice_name=sue_str)
+    zia_voiceunit = voiceunit_shop(voice_name=zia_str)
     # print(f"{yao=}")
-    zia_beliefunit.set_partnerunit(yao_partnerunit)
-    zia_beliefunit.set_partnerunit(sue_partnerunit)
-    zia_beliefunit.set_partnerunit(zia_partnerunit)
+    zia_beliefunit.set_voiceunit(yao_voiceunit)
+    zia_beliefunit.set_voiceunit(sue_voiceunit)
+    zia_beliefunit.set_voiceunit(zia_voiceunit)
     zia_beliefunit.planroot.set_awardunit(awardunit_shop(yao_str, give_force=10))
     zia_beliefunit.planroot.set_awardunit(awardunit_shop(sue_str, give_force=10))
     zia_beliefunit.planroot.set_awardunit(awardunit_shop(zia_str, give_force=10))
 
     # WHEN
     assert zia_beliefunit.get_awardunits_metrics() is not None
-    partners_metrics = zia_beliefunit.get_awardunits_metrics()
+    voices_metrics = zia_beliefunit.get_awardunits_metrics()
 
     # THEN
-    yao_awardunit = partners_metrics[yao_str]
-    sue_awardunit = partners_metrics[sue_str]
-    zia_awardunit = partners_metrics[zia_str]
+    yao_awardunit = voices_metrics[yao_str]
+    sue_awardunit = voices_metrics[sue_str]
+    zia_awardunit = voices_metrics[zia_str]
     assert yao_awardunit.awardee_title is not None
     assert sue_awardunit.awardee_title is not None
     assert zia_awardunit.awardee_title is not None

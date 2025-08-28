@@ -85,14 +85,14 @@ def test_groupunit_shop_ReturnsObj_knot():
     assert swim_groupunit.fund_iota == x_fund_iota
 
 
-# def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_knot_And_partner_mirror_True():
+# def test_GroupUnit_set_group_title_RaisesErrorIfParameterContains_knot_And_voice_mirror_True():
 #     # ESTABLISH
 #     slash_str = "/"
 #     bob_str = f"Bob{slash_str}Texas"
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         groupunit_shop(bob_str, _partner_mirror=True, knot=slash_str)
+#         groupunit_shop(bob_str, _voice_mirror=True, knot=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{bob_str}' needs to be a LabelTerm. Cannot contain knot: '{slash_str}'"
@@ -106,8 +106,8 @@ def test_GroupUnit_set_membership_SetsAttr():
     swim_str = ";swimmers"
     yao_swim_membership = membership_shop(swim_str)
     sue_swim_membership = membership_shop(swim_str)
-    yao_swim_membership.partner_name = yao_str
-    sue_swim_membership.partner_name = sue_str
+    yao_swim_membership.voice_name = yao_str
+    sue_swim_membership.voice_name = sue_str
     swimmers_groupunit = groupunit_shop(swim_str)
 
     # WHEN
@@ -116,8 +116,8 @@ def test_GroupUnit_set_membership_SetsAttr():
 
     # THEN
     swimmers_memberships = {
-        yao_swim_membership.partner_name: yao_swim_membership,
-        sue_swim_membership.partner_name: sue_swim_membership,
+        yao_swim_membership.voice_name: yao_swim_membership,
+        sue_swim_membership.voice_name: sue_swim_membership,
     }
     assert swimmers_groupunit._memberships == swimmers_memberships
 
@@ -130,9 +130,9 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     ohio_str = ";Ohio"
     yao_ohio_membership = membership_shop(ohio_str)
     sue_ohio_membership = membership_shop(ohio_str)
-    yao_ohio_membership.partner_name = yao_str
-    yao_ohio_membership.partner_name = yao_str
-    sue_ohio_membership.partner_name = sue_str
+    yao_ohio_membership.voice_name = yao_str
+    yao_ohio_membership.voice_name = yao_str
+    sue_ohio_membership.voice_name = sue_str
     yao_ohio_membership._credor_pool = 66
     sue_ohio_membership._credor_pool = 22
     yao_ohio_membership._debtor_pool = 6600
@@ -160,8 +160,8 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_title_IsWrong()
     ohio_str = ";Ohio"
     iowa_str = ";Iowa"
     yao_ohio_membership = membership_shop(ohio_str)
-    yao_ohio_membership.partner_name = yao_str
-    yao_ohio_membership.partner_name = yao_str
+    yao_ohio_membership.voice_name = yao_str
+    yao_ohio_membership.voice_name = yao_str
     yao_ohio_membership._credor_pool = 66
     yao_ohio_membership._debtor_pool = 6600
     iowa_groupunit = groupunit_shop(iowa_str)
@@ -175,12 +175,12 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_title_IsWrong()
     assert str(excinfo.value) == exception_str
 
 
-def test_GroupUnit_set_membership_RaisesErrorIf_partner_name_IsNone():
+def test_GroupUnit_set_membership_RaisesErrorIf_voice_name_IsNone():
     # ESTABLISH
     ohio_str = ";Ohio"
     ohio_groupunit = groupunit_shop(ohio_str)
     yao_ohio_membership = membership_shop(ohio_str)
-    assert yao_ohio_membership.partner_name is None
+    assert yao_ohio_membership.voice_name is None
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
@@ -188,6 +188,6 @@ def test_GroupUnit_set_membership_RaisesErrorIf_partner_name_IsNone():
 
     # THEN
     exception_str = (
-        f"membership group_title={ohio_str} cannot be set when _partner_name is None."
+        f"membership group_title={ohio_str} cannot be set when _voice_name is None."
     )
     assert str(excinfo.value) == exception_str

@@ -139,7 +139,7 @@ def _add_paybook_to_br00002_csv(
     event_int: int = None,
 ) -> str:
     for belief_name, tranunit in x_moment.paybook.tranunits.items():
-        for partner_name, time_dict in tranunit.items():
+        for voice_name, time_dict in tranunit.items():
             for tran_time, amount in time_dict.items():
                 moment_label = x_moment.moment_label
                 x_row = [
@@ -147,7 +147,7 @@ def _add_paybook_to_br00002_csv(
                     if_none_str(event_int),
                     moment_label,
                     belief_name,
-                    partner_name,
+                    voice_name,
                     str(tran_time),
                     str(amount),
                 ]
@@ -223,14 +223,14 @@ def add_belief_to_br00020_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for partnerunit in x_belief.partners.values():
-        for membership in partnerunit._memberships.values():
+    for voiceunit in x_belief.voices.values():
+        for membership in voiceunit._memberships.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),
                 x_belief.moment_label,
                 x_belief.belief_name,
-                partnerunit.partner_name,
+                voiceunit.voice_name,
                 membership.group_title,
                 if_none_str(membership.group_cred_points),
                 if_none_str(membership.group_debt_points),
@@ -247,15 +247,15 @@ def add_belief_to_br00021_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for partnerunit in x_belief.partners.values():
+    for voiceunit in x_belief.voices.values():
         x_row = [
             if_none_str(face_name),
             if_none_str(event_int),
             x_belief.moment_label,
             x_belief.belief_name,
-            partnerunit.partner_name,
-            if_none_str(partnerunit.partner_cred_points),
-            if_none_str(partnerunit.partner_debt_points),
+            voiceunit.voice_name,
+            if_none_str(voiceunit.voice_cred_points),
+            if_none_str(voiceunit.voice_debt_points),
         ]
         x_csv += csv_delimiter.join(x_row)
         x_csv += "\n"
@@ -501,13 +501,13 @@ def add_pack_to_br00020_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
-        if beliefatom.dimen == "belief_partner_membership":
+        if beliefatom.dimen == "belief_voice_membership":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
-                beliefatom.jkeys.get("partner_name"),
+                beliefatom.jkeys.get("voice_name"),
                 beliefatom.jkeys.get("group_title"),
                 if_none_str(beliefatom.jvalues.get("group_cred_points")),
                 if_none_str(beliefatom.jvalues.get("group_debt_points")),
@@ -521,15 +521,15 @@ def add_pack_to_br00021_csv(
     x_csv: str, x_packunit: PackUnit, csv_delimiter: str
 ) -> str:
     for beliefatom in x_packunit._beliefdelta.get_ordered_beliefatoms().values():
-        if beliefatom.dimen == "belief_partnerunit":
+        if beliefatom.dimen == "belief_voiceunit":
             x_row = [
                 x_packunit.face_name,
                 str(x_packunit.event_int),
                 x_packunit.moment_label,
                 x_packunit.belief_name,
-                beliefatom.jkeys.get("partner_name"),
-                if_none_str(beliefatom.jvalues.get("partner_cred_points")),
-                if_none_str(beliefatom.jvalues.get("partner_debt_points")),
+                beliefatom.jkeys.get("voice_name"),
+                if_none_str(beliefatom.jvalues.get("voice_cred_points")),
+                if_none_str(beliefatom.jvalues.get("voice_debt_points")),
             ]
             x_csv += csv_delimiter.join(x_row)
             x_csv += "\n"

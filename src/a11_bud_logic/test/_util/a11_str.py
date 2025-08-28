@@ -27,12 +27,12 @@ def bud_belief_name_str() -> str:
     return "bud_belief_name"
 
 
-def bud_partner_nets_str() -> str:
-    return "bud_partner_nets"
-
-
 def bud_time_str() -> str:
     return "bud_time"
+
+
+def bud_voice_nets_str() -> str:
+    return "bud_voice_nets"
 
 
 def celldepth_str() -> str:

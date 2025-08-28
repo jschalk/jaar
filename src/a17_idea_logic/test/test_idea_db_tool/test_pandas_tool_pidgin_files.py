@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_belief_logic.test._util.a06_str import partner_name_str, reason_context_str
+from src.a06_belief_logic.test._util.a06_str import reason_context_str, voice_name_str
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
@@ -12,8 +12,8 @@ from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_ropemap,
     get_sue_pidginunit,
     get_suita_namemap,
-    get_suita_partner_name_inx_dt,
-    get_suita_partner_name_otx_dt,
+    get_suita_voice_name_inx_dt,
+    get_suita_voice_name_otx_dt,
     get_swim_titlemap,
 )
 from src.a17_idea_logic.idea_db_tool import (
@@ -45,12 +45,12 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     pidginunit_file_path = create_path(sue_dir, get_pidgin_filename())
     print(f"{sue_dir=}")
     save_file(sue_dir, get_pidgin_filename(), sue_pidginunit.get_json())
-    sue_otx_dt = get_suita_partner_name_otx_dt()
-    sue_inx_dt = get_suita_partner_name_inx_dt()
+    sue_otx_dt = get_suita_voice_name_otx_dt()
+    sue_inx_dt = get_suita_voice_name_inx_dt()
     otz_dir = create_path(sue_dir, "otz")
     inz_dir = create_path(sue_dir, "inz")
 
-    example_filename = "partner_name_example.csv"
+    example_filename = "voice_name_example.csv"
     otx_file_path = create_path(otz_dir, example_filename)
     inx_file_path = create_path(inz_dir, example_filename)
     save_dataframe_to_csv(sue_otx_dt, otz_dir, example_filename)
@@ -66,33 +66,29 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
     assert os_path_exists(otx_file_path)
     assert os_path_exists(inx_file_path)
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][partner_name_str()] == bob_inx
-    assert gen_inx_dt.iloc[3][partner_name_str()] == zia_otx
+    assert gen_inx_dt.iloc[0][voice_name_str()] == bob_inx
+    assert gen_inx_dt.iloc[3][voice_name_str()] == zia_otx
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
-    static_inx_dt = DataFrame(columns=[partner_name_str()])
-    static_inx_dt.loc[0, partner_name_str()] = bob_inx
-    static_inx_dt.loc[1, partner_name_str()] = sue_inx
-    static_inx_dt.loc[2, partner_name_str()] = xio_inx
-    static_inx_dt.loc[3, partner_name_str()] = zia_otx
+    static_inx_dt = DataFrame(columns=[voice_name_str()])
+    static_inx_dt.loc[0, voice_name_str()] = bob_inx
+    static_inx_dt.loc[1, voice_name_str()] = sue_inx
+    static_inx_dt.loc[2, voice_name_str()] = xio_inx
+    static_inx_dt.loc[3, voice_name_str()] = zia_otx
     assert (
-        gen_inx_dt.iloc[0][partner_name_str()]
-        == static_inx_dt.iloc[0][partner_name_str()]
+        gen_inx_dt.iloc[0][voice_name_str()] == static_inx_dt.iloc[0][voice_name_str()]
     )
     assert (
-        gen_inx_dt.iloc[1][partner_name_str()]
-        == static_inx_dt.iloc[1][partner_name_str()]
+        gen_inx_dt.iloc[1][voice_name_str()] == static_inx_dt.iloc[1][voice_name_str()]
     )
     assert (
-        gen_inx_dt.iloc[2][partner_name_str()]
-        == static_inx_dt.iloc[2][partner_name_str()]
+        gen_inx_dt.iloc[2][voice_name_str()] == static_inx_dt.iloc[2][voice_name_str()]
     )
     assert (
-        gen_inx_dt.iloc[3][partner_name_str()]
-        == static_inx_dt.iloc[3][partner_name_str()]
+        gen_inx_dt.iloc[3][voice_name_str()] == static_inx_dt.iloc[3][voice_name_str()]
     )
     print(f"{gen_inx_dt.to_csv(index=False)=}")
-    gen_csv = gen_inx_dt.sort_values(partner_name_str()).to_csv(index=False)
-    sue_inx_csv = sue_inx_dt.sort_values(partner_name_str()).to_csv(index=False)
+    gen_csv = gen_inx_dt.sort_values(voice_name_str()).to_csv(index=False)
+    sue_inx_csv = sue_inx_dt.sort_values(voice_name_str()).to_csv(index=False)
     assert gen_csv == sue_inx_csv
     assert gen_inx_dt.to_csv() == static_inx_dt.to_csv()
 
@@ -179,24 +175,24 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     pidginunit_file_path = create_path(sue_dir, get_pidgin_filename())
     print(f"{sue_dir=}")
     save_file(sue_dir, get_pidgin_filename(), sue_pidginunit.get_json())
-    sue_otx_dt = get_suita_partner_name_otx_dt()
+    sue_otx_dt = get_suita_voice_name_otx_dt()
     otz_dir = create_path(sue_dir, "otz")
     inz_dir = create_path(sue_dir, "inz")
 
-    partner_name_filename = "partner_name_example.csv"
-    partner_name_otx_file_path = create_path(otz_dir, partner_name_filename)
-    partner_name_inx_file_path = create_path(inz_dir, partner_name_filename)
+    voice_name_filename = "voice_name_example.csv"
+    voice_name_otx_file_path = create_path(otz_dir, voice_name_filename)
+    voice_name_inx_file_path = create_path(inz_dir, voice_name_filename)
     rope1_otx_dt = get_casa_maison_rope_otx_dt()
     rope1_filename = "rope1_example.csv"
     rope1_otx_file_path = create_path(otz_dir, rope1_filename)
     rope1_inx_file_path = create_path(inz_dir, rope1_filename)
     save_dataframe_to_csv(rope1_otx_dt, otz_dir, rope1_filename)
-    save_dataframe_to_csv(sue_otx_dt, otz_dir, partner_name_filename)
+    save_dataframe_to_csv(sue_otx_dt, otz_dir, voice_name_filename)
     assert os_path_exists(rope1_otx_file_path)
     assert os_path_exists(rope1_inx_file_path) is False
     assert os_path_exists(pidginunit_file_path)
-    assert os_path_exists(partner_name_otx_file_path)
-    assert os_path_exists(partner_name_inx_file_path) is False
+    assert os_path_exists(voice_name_otx_file_path)
+    assert os_path_exists(voice_name_inx_file_path) is False
 
     # WHEN
     move_otx_csvs_to_pidgin_inx(sue_dir)
@@ -205,12 +201,12 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario2_TwoFile(
     assert os_path_exists(rope1_otx_file_path)
     assert os_path_exists(rope1_inx_file_path)
     assert os_path_exists(pidginunit_file_path)
-    assert os_path_exists(partner_name_otx_file_path)
-    assert os_path_exists(partner_name_inx_file_path)
-    partner_inx_dt = open_csv(inz_dir, partner_name_filename)
-    gen_csv = partner_inx_dt.sort_values(partner_name_str()).to_csv(index=False)
-    sue_inx_dt = get_suita_partner_name_inx_dt()
-    assert gen_csv == sue_inx_dt.sort_values(partner_name_str()).to_csv(index=False)
+    assert os_path_exists(voice_name_otx_file_path)
+    assert os_path_exists(voice_name_inx_file_path)
+    voice_inx_dt = open_csv(inz_dir, voice_name_filename)
+    gen_csv = voice_inx_dt.sort_values(voice_name_str()).to_csv(index=False)
+    sue_inx_dt = get_suita_voice_name_inx_dt()
+    assert gen_csv == sue_inx_dt.sort_values(voice_name_str()).to_csv(index=False)
 
     gen_rope1_inx_dt = open_csv(inz_dir, rope1_filename)
     rope1_inx_dt = get_casa_maison_rope_inx_dt()

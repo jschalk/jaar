@@ -56,7 +56,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     amy_moment.add_budunit(sue_str, sue_x7_tran_time, sue_x7_quota)
     amy_moment.add_paypurchase(
         belief_name=bob_str,
-        partner_name=sue_str,
+        voice_name=sue_str,
         tran_time=pay_tran_time,
         amount=bob_sue_amount,
     )
@@ -171,7 +171,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     amy_moment.penny = sue_penny
     amy_moment.add_paypurchase(
         belief_name=bob_str,
-        partner_name=sue_str,
+        voice_name=sue_str,
         tran_time=pay_tran_time,
         amount=bob_sue_amount,
     )

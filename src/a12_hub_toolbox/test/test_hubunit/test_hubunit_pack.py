@@ -463,7 +463,7 @@ def test_HubUnit_create_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     before_belief = sue_hubunit.default_gut_belief()
     bob_str = "Bob"
     after_belief = copy_deepcopy(before_belief)
-    after_belief.add_partnerunit(bob_str)
+    after_belief.add_voiceunit(bob_str)
     sue_hubunit.create_save_pack_file(before_belief, after_belief)
 
     # THEN

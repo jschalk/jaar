@@ -7,18 +7,18 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
-    _inallocable_partner_debt_points_str,
-    _irrational_partner_debt_points_str,
+    _inallocable_voice_debt_points_str,
+    _irrational_voice_debt_points_str,
     _memberships_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
 )
 from src.a05_plan_logic.plan import planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
-    _all_partner_cred_str,
-    _all_partner_debt_str,
+    _all_voice_cred_str,
+    _all_voice_debt_str,
     _awardheirs_str,
     _awardlines_str,
     _chore_str,
@@ -65,8 +65,8 @@ from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
     _groupunits_str,
     parent_rope_str,
-    partners_str,
     planroot_str,
+    voices_str,
 )
 from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
@@ -76,8 +76,8 @@ from src.a07_timeline_logic.test._util.a07_str import readable_str
 from src.a22_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_belief_view_dict,
-    get_partners_view_dict,
     get_plan_view_dict,
+    get_voices_view_dict,
 )
 from src.a22_belief_viewer.example22_beliefs import (
     best_run_str,
@@ -106,7 +106,7 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
     # THEN
     assert set(sue_belief_view_dict.keys()) == {
         # _groupunits_str,
-        partners_str(),
+        voices_str(),
         planroot_str(),
     }
     sue_plan_view_dict = sue_belief_view_dict.get(planroot_str())

@@ -510,8 +510,8 @@ def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario08_healerunit()
 
     # WHEN
     x_healerunit = healerunit_shop({sue_str, yao_str})
-    sue_belief.add_partnerunit(sue_str)
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(sue_str)
+    sue_belief.add_voiceunit(yao_str)
     sue_belief.edit_plan_attr(casa_rope, healerunit=x_healerunit)
 
     # THEN
@@ -865,9 +865,9 @@ def test_BeliefUnit_edit_plan_attr_DeletesPlanUnit_awardunits():
     yao_str = "Yao"
     zia_str = "Zia"
     Xio_str = "Xio"
-    yao_belief.add_partnerunit(yao_str)
-    yao_belief.add_partnerunit(zia_str)
-    yao_belief.add_partnerunit(Xio_str)
+    yao_belief.add_voiceunit(yao_str)
+    yao_belief.add_voiceunit(zia_str)
+    yao_belief.add_voiceunit(Xio_str)
 
     swim_str = "swim"
     swim_rope = yao_belief.make_l1_rope(swim_str)
@@ -897,15 +897,15 @@ def test_BeliefUnit_edit_plan_attr_DeletesPlanUnit_awardunits():
     assert len(yao_belief.planroot._kids[swim_str].awardunits) == 2
 
 
-def test_BeliefUnit__get_filtered_awardunits_plan_RemovesPartner_awardunits():
+def test_BeliefUnit__get_filtered_awardunits_plan_RemovesVoice_awardunits():
     # ESTABLISH
     bob_str = "Bob"
     example_belief = beliefunit_shop(bob_str)
     xia_str = "Xia"
     run_str = ";runners"
     hike_str = ";hikers"
-    example_belief.add_partnerunit(xia_str)
-    example_belief.get_partner(xia_str).add_membership(run_str)
+    example_belief.add_voiceunit(xia_str)
+    example_belief.get_voice(xia_str).add_membership(run_str)
 
     sports_str = "sports"
     sports_rope = example_belief.make_l1_rope(sports_str)
@@ -915,8 +915,8 @@ def test_BeliefUnit__get_filtered_awardunits_plan_RemovesPartner_awardunits():
     example_belief_sports_plan = example_belief.get_plan_obj(sports_rope)
     assert len(example_belief_sports_plan.awardunits) == 2
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_partnerunit(xia_str)
-    bob_belief.get_partner(xia_str).add_membership(run_str)
+    bob_belief.add_voiceunit(xia_str)
+    bob_belief.get_voice(xia_str).add_membership(run_str)
     print(f"{example_belief_sports_plan.awardunits=}")
 
     # WHEN
@@ -933,8 +933,8 @@ def test_BeliefUnit__get_filtered_awardunits_plan_RemovesGroup_awardunit():
     example_belief = beliefunit_shop(bob_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    example_belief.add_partnerunit(xia_str)
-    example_belief.add_partnerunit(zoa_str)
+    example_belief.add_voiceunit(xia_str)
+    example_belief.add_voiceunit(zoa_str)
 
     swim_str = "swim"
     swim_rope = example_belief.make_l1_rope(swim_str)
@@ -944,7 +944,7 @@ def test_BeliefUnit__get_filtered_awardunits_plan_RemovesGroup_awardunit():
     example_belief_swim_plan = example_belief.get_plan_obj(swim_rope)
     assert len(example_belief_swim_plan.awardunits) == 2
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_partnerunit(xia_str)
+    bob_belief.add_voiceunit(xia_str)
 
     # WHEN
     cleaned_plan = bob_belief._get_filtered_awardunits_plan(example_belief_swim_plan)
@@ -960,8 +960,8 @@ def test_BeliefUnit_set_plan_SetsPlan_awardunits():
     example_belief = beliefunit_shop(bob_str)
     xia_str = "Xia"
     zoa_str = "Zoa"
-    example_belief.add_partnerunit(xia_str)
-    example_belief.add_partnerunit(zoa_str)
+    example_belief.add_voiceunit(xia_str)
+    example_belief.add_voiceunit(zoa_str)
 
     casa_str = "casa"
     casa_rope = example_belief.make_l1_rope(casa_str)
@@ -974,7 +974,7 @@ def test_BeliefUnit_set_plan_SetsPlan_awardunits():
     example_belief_swim_plan = example_belief.get_plan_obj(swim_rope)
     assert len(example_belief_swim_plan.awardunits) == 2
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_partnerunit(xia_str)
+    bob_belief.add_voiceunit(xia_str)
 
     # WHEN
     bob_belief.set_l1_plan(example_belief_swim_plan, create_missing_plans=False)
@@ -1128,9 +1128,9 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     yao_str = "Yao"
     sue_str = "Sue"
     bob_beliefunit = beliefunit_shop(bob_str)
-    bob_beliefunit.add_partnerunit(bob_str)
-    bob_beliefunit.add_partnerunit(yao_str, partner_cred_points=2)
-    bob_beliefunit.add_partnerunit(sue_str, partner_debt_points=2)
+    bob_beliefunit.add_voiceunit(bob_str)
+    bob_beliefunit.add_voiceunit(yao_str, voice_cred_points=2)
+    bob_beliefunit.add_voiceunit(sue_str, voice_debt_points=2)
     bob_beliefunit.set_offtrack_fund()
     assert bob_beliefunit._offtrack_fund == 0
 
@@ -1138,12 +1138,12 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_beliefunit._allot_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit.get_partner(bob_str)._fund_give == 0
-    assert bob_beliefunit.get_partner(bob_str)._fund_take == 0
-    assert bob_beliefunit.get_partner(yao_str)._fund_give == 0
-    assert bob_beliefunit.get_partner(yao_str)._fund_take == 0
-    assert bob_beliefunit.get_partner(sue_str)._fund_give == 0
-    assert bob_beliefunit.get_partner(sue_str)._fund_take == 0
+    assert bob_beliefunit.get_voice(bob_str)._fund_give == 0
+    assert bob_beliefunit.get_voice(bob_str)._fund_take == 0
+    assert bob_beliefunit.get_voice(yao_str)._fund_give == 0
+    assert bob_beliefunit.get_voice(yao_str)._fund_take == 0
+    assert bob_beliefunit.get_voice(sue_str)._fund_give == 0
+    assert bob_beliefunit.get_voice(sue_str)._fund_take == 0
 
     # WHEN
     casa_str = "casa"
@@ -1170,12 +1170,12 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_beliefunit._allot_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit.get_partner(bob_str)._fund_give == 26
-    assert bob_beliefunit.get_partner(bob_str)._fund_take == 26
-    assert bob_beliefunit.get_partner(yao_str)._fund_give == 53
-    assert bob_beliefunit.get_partner(yao_str)._fund_take == 26
-    assert bob_beliefunit.get_partner(sue_str)._fund_give == 26
-    assert bob_beliefunit.get_partner(sue_str)._fund_take == 53
+    assert bob_beliefunit.get_voice(bob_str)._fund_give == 26
+    assert bob_beliefunit.get_voice(bob_str)._fund_take == 26
+    assert bob_beliefunit.get_voice(yao_str)._fund_give == 53
+    assert bob_beliefunit.get_voice(yao_str)._fund_take == 26
+    assert bob_beliefunit.get_voice(sue_str)._fund_give == 26
+    assert bob_beliefunit.get_voice(sue_str)._fund_take == 53
 
     bob_beliefunit._offtrack_kids_star_set.add(wed_rope)
     bob_beliefunit.set_offtrack_fund()

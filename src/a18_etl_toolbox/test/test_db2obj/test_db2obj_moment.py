@@ -118,7 +118,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_blfpayy_Attrs_Scenari
         momentpay_h_agg_tablename = create_prime_tablename("blfpayy", "h", "agg")
         momentunit_insert_sqlstr = f"INSERT INTO {momentunit_h_agg_tablename} (moment_label) VALUES ('{a23_str}');"
         cursor.execute(momentunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_agg_tablename} (moment_label, belief_name, partner_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_agg_tablename} (moment_label, belief_name, voice_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """
@@ -156,7 +156,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_blfpayy_Attrs_Scenari
         momentpay_h_agg_tablename = create_prime_tablename("blfpayy", "h", "agg")
         momentunit_insert_sqlstr = f"INSERT INTO {momentunit_h_agg_tablename} (moment_label) VALUES ('{a23_str}');"
         cursor.execute(momentunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_agg_tablename} (moment_label, belief_name, partner_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_agg_tablename} (moment_label, belief_name, voice_name, tran_time, amount)
 VALUES
   ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {a23_bob_sue_tp55_amount})
 , ('{a45_str}', '{bob_str}', '{sue_str}', {tp55}, {a45_bob_sue_tp55_amount})
@@ -423,7 +423,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario1_blfp
         momentpay_h_agg_tablename = create_prime_tablename("blfpayy", "h", "agg")
         momentunit_insert_sqlstr = f"INSERT INTO {momentunit_h_agg_tablename} (moment_label) VALUES ('{a23_str}');"
         cursor.execute(momentunit_insert_sqlstr)
-        blfpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_agg_tablename} (moment_label, belief_name, partner_name, tran_time, amount)
+        blfpayy_insert_sqlstr = f"""INSERT INTO {momentpay_h_agg_tablename} (moment_label, belief_name, voice_name, tran_time, amount)
 VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
 ;
 """

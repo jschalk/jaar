@@ -43,9 +43,9 @@ def moment_ote1_agg_str() -> Literal["moment_ote1_agg"]:
     return "moment_ote1_agg"
 
 
-def moment_partner_nets_str() -> Literal["moment_partner_nets"]:
+def moment_voice_nets_str() -> Literal["moment_voice_nets"]:
     """Table name for the account net amounts."""
-    return "moment_partner_nets"
+    return "moment_voice_nets"
 
 
 def sound_agg_str() -> str:

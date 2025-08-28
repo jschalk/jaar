@@ -1,10 +1,10 @@
 {
-  "belief_partner_membership": {
+  "belief_voice_membership": {
     "allowed_crud": "delete_insert_update",
     "build_order": 9,
     "idea_category": "belief",
     "jkeys": {
-      "partner_name": {},
+      "voice_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
@@ -16,20 +16,20 @@
       "group_debt_points": {}
     }
   },
-  "belief_partnerunit": {
+  "belief_voiceunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 10,
     "idea_category": "belief",
     "jkeys": {
-      "partner_name": {},
+      "voice_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
       "belief_name": {}
     },
     "jvalues": {
-      "partner_cred_points": {},
-      "partner_debt_points": {}
+      "voice_cred_points": {},
+      "voice_debt_points": {}
     }
   },
   "belief_plan_awardunit": {
@@ -183,7 +183,7 @@
     "build_order": 21,
     "idea_category": "moment",
     "jkeys": {
-      "partner_name": {},
+      "voice_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},

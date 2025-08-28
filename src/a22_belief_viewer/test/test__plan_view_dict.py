@@ -2,8 +2,8 @@ from src.a05_plan_logic.plan import planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
     _active_hx_str,
     _active_str,
-    _all_partner_cred_str,
-    _all_partner_debt_str,
+    _all_voice_cred_str,
+    _all_voice_debt_str,
     _awardheirs_str,
     _awardlines_str,
     _chore_str,
@@ -109,8 +109,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _is_expanded_str(),
         _active_str(),
         _active_hx_str(),
-        _all_partner_cred_str(),
-        _all_partner_debt_str(),
+        _all_voice_cred_str(),
+        _all_voice_debt_str(),
         _awardheirs_str(),
         _awardlines_str(),
         _descendant_task_count_str(),
@@ -209,12 +209,12 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     assert casa_dict.get(fund_share_str()) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
     assert casa_dict.get(parent_rope_str()) == expected_parent_rope
-    expected_all_partner_cred = f"all_partner_cred = {casa_plan._all_partner_cred}"
-    expected_all_partner_debt = f"all_partner_debt = {casa_plan._all_partner_debt}"
-    expected_all_partner_cred = add_small_dot(expected_all_partner_cred)
-    expected_all_partner_debt = add_small_dot(expected_all_partner_debt)
-    assert casa_dict.get(_all_partner_cred_str()) == expected_all_partner_cred
-    assert casa_dict.get(_all_partner_debt_str()) == expected_all_partner_debt
+    expected_all_voice_cred = f"all_voice_cred = {casa_plan._all_voice_cred}"
+    expected_all_voice_debt = f"all_voice_debt = {casa_plan._all_voice_debt}"
+    expected_all_voice_cred = add_small_dot(expected_all_voice_cred)
+    expected_all_voice_debt = add_small_dot(expected_all_voice_debt)
+    assert casa_dict.get(_all_voice_cred_str()) == expected_all_voice_cred
+    assert casa_dict.get(_all_voice_debt_str()) == expected_all_voice_debt
     assert casa_dict.get(_fund_ratio_str()) == "38%"
 
 

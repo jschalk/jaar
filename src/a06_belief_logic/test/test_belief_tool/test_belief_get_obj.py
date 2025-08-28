@@ -3,17 +3,15 @@ from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.belief_tool import (
     belief_get_obj,
-    belief_partner_membership_get_obj,
-    belief_partnerunit_get_obj,
     belief_plan_awardunit_get_obj,
     belief_plan_factunit_get_obj,
     belief_plan_reason_caseunit_get_obj as caseunit_get_obj,
     belief_plan_reasonunit_get_obj,
     belief_planunit_get_obj,
+    belief_voice_membership_get_obj,
+    belief_voiceunit_get_obj,
 )
 from src.a06_belief_logic.test._util.a06_str import (
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -21,6 +19,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str as caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
     fact_context_str,
     fact_state_str,
@@ -30,34 +30,34 @@ from src.a06_belief_logic.test._util.a06_str import (
 )
 
 
-def test_belief_partnerunit_get_obj_ReturnsObj():
+def test_belief_voiceunit_get_obj_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"partner_name": yao_str}
-    sue_belief.add_partnerunit(yao_str)
+    jkeys = {"voice_name": yao_str}
+    sue_belief.add_voiceunit(yao_str)
 
     # WHEN
-    x_obj = belief_partnerunit_get_obj(sue_belief, jkeys)
+    x_obj = belief_voiceunit_get_obj(sue_belief, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_belief.get_partner(yao_str)
+    assert x_obj == sue_belief.get_voice(yao_str)
 
 
-def test_belief_partner_membership_get_obj_ReturnsObj():
+def test_belief_voice_membership_get_obj_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"partner_name": yao_str, "group_title": swim_str}
-    sue_belief.add_partnerunit(yao_str)
-    sue_belief.get_partner(yao_str).add_membership(swim_str)
+    jkeys = {"voice_name": yao_str, "group_title": swim_str}
+    sue_belief.add_voiceunit(yao_str)
+    sue_belief.get_voice(yao_str).add_membership(swim_str)
 
     # WHEN
-    x_obj = belief_partner_membership_get_obj(sue_belief, jkeys)
+    x_obj = belief_voice_membership_get_obj(sue_belief, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_belief.get_partner(yao_str).get_membership(swim_str)
+    assert x_obj == sue_belief.get_voice(yao_str).get_membership(swim_str)
 
 
 def test_belief_planunit_get_obj_ReturnsObj():
@@ -163,8 +163,8 @@ def test_belief_get_obj_ReturnsObj_BeliefUnit():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"partner_name": yao_str}
-    sue_belief.add_partnerunit(yao_str)
+    jkeys = {"voice_name": yao_str}
+    sue_belief.add_voiceunit(yao_str)
 
     # WHEN
     x_obj = belief_get_obj(beliefunit_str(), sue_belief, jkeys)
@@ -173,34 +173,34 @@ def test_belief_get_obj_ReturnsObj_BeliefUnit():
     assert x_obj == sue_belief
 
 
-def test_belief_get_obj_ReturnsObj_belief_partnerunit_get_obj():
+def test_belief_get_obj_ReturnsObj_belief_voiceunit_get_obj():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"partner_name": yao_str}
-    sue_belief.add_partnerunit(yao_str)
+    jkeys = {"voice_name": yao_str}
+    sue_belief.add_voiceunit(yao_str)
 
     # WHEN
-    x_obj = belief_get_obj(belief_partnerunit_str(), sue_belief, jkeys)
+    x_obj = belief_get_obj(belief_voiceunit_str(), sue_belief, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_belief.get_partner(yao_str)
+    assert x_obj == sue_belief.get_voice(yao_str)
 
 
-def test_belief_get_obj_ReturnsObj_belief_partner_membership_get_obj():
+def test_belief_get_obj_ReturnsObj_belief_voice_membership_get_obj():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {"partner_name": yao_str, "group_title": swim_str}
-    sue_belief.add_partnerunit(yao_str)
-    sue_belief.get_partner(yao_str).add_membership(swim_str)
+    jkeys = {"voice_name": yao_str, "group_title": swim_str}
+    sue_belief.add_voiceunit(yao_str)
+    sue_belief.get_voice(yao_str).add_membership(swim_str)
 
     # WHEN
-    x_obj = belief_get_obj(belief_partner_membership_str(), sue_belief, jkeys)
+    x_obj = belief_get_obj(belief_voice_membership_str(), sue_belief, jkeys)
     # THEN
     assert x_obj
-    assert x_obj == sue_belief.get_partner(yao_str).get_membership(swim_str)
+    assert x_obj == sue_belief.get_voice(yao_str).get_membership(swim_str)
 
 
 def test_belief_get_obj_ReturnsObj_belief_planunit_get_obj():

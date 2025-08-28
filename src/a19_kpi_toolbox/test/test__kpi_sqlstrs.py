@@ -9,41 +9,41 @@ from src.a06_belief_logic.test._util.a06_str import (
 )
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_net_amount_str,
-    moment_partner_nets_str,
+    moment_voice_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a19_kpi_toolbox.kpi_sqlstrs import (
-    get_moment_kpi001_partner_nets_sqlstr,
+    get_moment_kpi001_voice_nets_sqlstr,
     get_moment_kpi002_belief_tasks_sqlstr,
 )
 from src.a19_kpi_toolbox.test._util.a19_str import (
-    moment_kpi001_partner_nets_str,
+    moment_kpi001_voice_nets_str,
     moment_kpi002_belief_tasks_str,
 )
 
 
-def test_get_moment_kpi001_partner_nets_sqlstr_ReturnsObj():
+def test_get_moment_kpi001_voice_nets_sqlstr_ReturnsObj():
     # ESTABLISH
     blrplan_str = belief_planunit_str()
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN
-    kpi001_sqlstr = get_moment_kpi001_partner_nets_sqlstr()
+    kpi001_sqlstr = get_moment_kpi001_voice_nets_sqlstr()
 
     # THEN
     expected_kpi001_sqlstr = f"""
-CREATE TABLE {moment_kpi001_partner_nets_str()} AS
+CREATE TABLE {moment_kpi001_voice_nets_str()} AS
 SELECT
-  {moment_partner_nets_str()}.{moment_label_str()}
-, {moment_partner_nets_str()}.{belief_name_str()}
+  {moment_voice_nets_str()}.{moment_label_str()}
+, {moment_voice_nets_str()}.{belief_name_str()}
 , {belief_net_amount_str()} AS funds
 , RANK() OVER (ORDER BY {belief_net_amount_str()} DESC) AS fund_rank
 , IFNULL(SUM({blrplan_job}.{task_str()}), 0) AS tasks_count
-FROM {moment_partner_nets_str()}
+FROM {moment_voice_nets_str()}
 LEFT JOIN {blrplan_job} ON
-  {blrplan_job}.{moment_label_str()} = {moment_partner_nets_str()}.{moment_label_str()}
-  AND {blrplan_job}.{belief_name_str()} = {moment_partner_nets_str()}.{belief_name_str()}
-GROUP BY {moment_partner_nets_str()}.{moment_label_str()}, {moment_partner_nets_str()}.{belief_name_str()}
+  {blrplan_job}.{moment_label_str()} = {moment_voice_nets_str()}.{moment_label_str()}
+  AND {blrplan_job}.{belief_name_str()} = {moment_voice_nets_str()}.{belief_name_str()}
+GROUP BY {moment_voice_nets_str()}.{moment_label_str()}, {moment_voice_nets_str()}.{belief_name_str()}
 ;
 """
     assert kpi001_sqlstr == expected_kpi001_sqlstr

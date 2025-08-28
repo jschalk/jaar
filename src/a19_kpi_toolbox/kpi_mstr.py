@@ -10,12 +10,12 @@ from src.a07_timeline_logic.calendar_markdown import get_calendarmarkdown_str
 from src.a15_moment_logic.moment_main import get_default_path_momentunit
 from src.a15_moment_logic.moment_timeline import get_moment_belieftimelinepoint
 from src.a17_idea_logic.idea_db_tool import save_table_to_csv
-from src.a19_kpi_toolbox.kpi_sqlstrs import get_moment_kpi001_partner_nets_sqlstr
+from src.a19_kpi_toolbox.kpi_sqlstrs import get_moment_kpi001_voice_nets_sqlstr
 
 
 def create_populate_kpi001_table(cursor: sqlite3_Cursor):
-    cursor.execute("DROP TABLE IF EXISTS moment_kpi001_partner_nets")
-    cursor.execute(get_moment_kpi001_partner_nets_sqlstr())
+    cursor.execute("DROP TABLE IF EXISTS moment_kpi001_voice_nets")
+    cursor.execute(get_moment_kpi001_voice_nets_sqlstr())
 
 
 def get_default_kpi_bundle() -> str:
@@ -26,14 +26,14 @@ def get_all_kpi_functions() -> dict[str,]:
     """
     Returns a dict of all KPI ids and their functions.
     """
-    return {"moment_kpi001_partner_nets": create_populate_kpi001_table}
+    return {"moment_kpi001_voice_nets": create_populate_kpi001_table}
 
 
 def get_bundles_config() -> dict[str]:
     """
     Returns a set of all KPI strings.
     """
-    return {"default_kpi_bundle": {"moment_kpi001_partner_nets"}}
+    return {"default_kpi_bundle": {"moment_kpi001_voice_nets"}}
 
 
 def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
@@ -53,7 +53,7 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
     bundle_kpi_ids = get_kpi_set_from_bundle(bundle_id)
     kpi_functions = get_all_kpi_functions()
     for kpi_id in bundle_kpi_ids:
-        if kpi_id == "moment_kpi001_partner_nets":
+        if kpi_id == "moment_kpi001_voice_nets":
             create_populate_kpi001_table(cursor)
 
 
