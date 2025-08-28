@@ -109,12 +109,12 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
     bob_fund_agenda_ratio_give = 71
     bob_fund_agenda_ratio_take = 73
 
-    bob_voiceunit._fund_give = bob_fund_give
-    bob_voiceunit._fund_take = bob_fund_take
-    bob_voiceunit._fund_agenda_give = bob_fund_agenda_give
-    bob_voiceunit._fund_agenda_take = bob_fund_agenda_take
-    bob_voiceunit._fund_agenda_ratio_give = bob_fund_agenda_ratio_give
-    bob_voiceunit._fund_agenda_ratio_take = bob_fund_agenda_ratio_take
+    bob_voiceunit.fund_give = bob_fund_give
+    bob_voiceunit.fund_take = bob_fund_take
+    bob_voiceunit.fund_agenda_give = bob_fund_agenda_give
+    bob_voiceunit.fund_agenda_take = bob_fund_agenda_take
+    bob_voiceunit.fund_agenda_ratio_give = bob_fund_agenda_ratio_give
+    bob_voiceunit.fund_agenda_ratio_take = bob_fund_agenda_ratio_take
 
     bob_voiceunit.set_membership(membership_shop(bob_str))
     run_str = ";Run"
@@ -135,12 +135,12 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
         "_memberships": bob_voiceunit.get_memberships_dict(),
         "_irrational_voice_debt_points": bob_irrational_voice_debt_points,
         "_inallocable_voice_debt_points": bob_inallocable_voice_debt_points,
-        "_fund_give": bob_fund_give,
-        "_fund_take": bob_fund_take,
-        "_fund_agenda_give": bob_fund_agenda_give,
-        "_fund_agenda_take": bob_fund_agenda_take,
-        "_fund_agenda_ratio_give": bob_fund_agenda_ratio_give,
-        "_fund_agenda_ratio_take": bob_fund_agenda_ratio_take,
+        "fund_give": bob_fund_give,
+        "fund_take": bob_fund_take,
+        "fund_agenda_give": bob_fund_agenda_give,
+        "fund_agenda_take": bob_fund_agenda_take,
+        "fund_agenda_ratio_give": bob_fund_agenda_ratio_give,
+        "fund_agenda_ratio_take": bob_fund_agenda_ratio_take,
     }
 
 

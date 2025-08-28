@@ -45,12 +45,12 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_voice_membership_group_debt_points"><label for="show_voice_membership_group_debt_points">membership_group_debt_points</label>
             <input type="checkbox" id="show_voice_membership_credor_pool"><label for="show_voice_membership_credor_pool">membership_credor_pool</label>
             <input type="checkbox" id="show_voice_membership_debtor_pool"><label for="show_voice_membership_debtor_pool">membership_debtor_pool</label>
-            <input type="checkbox" id="show_voice_membership__fund_agenda_give"><label for="show_voice_membership__fund_agenda_give">membership__fund_agenda_give</label>
-            <input type="checkbox" id="show_voice_membership__fund_agenda_ratio_give"><label for="show_voice_membership__fund_agenda_ratio_give">membership__fund_agenda_ratio_give</label>
-            <input type="checkbox" id="show_voice_membership__fund_agenda_ratio_take"><label for="show_voice_membership__fund_agenda_ratio_take">membership__fund_agenda_ratio_take</label>
-            <input type="checkbox" id="show_voice_membership__fund_agenda_take"><label for="show_voice_membership__fund_agenda_take">membership__fund_agenda_take</label>
-            <input type="checkbox" id="show_voice_membership__fund_give"><label for="show_voice_membership__fund_give">membership__fund_give</label>
-            <input type="checkbox" id="show_voice_membership__fund_take"><label for="show_voice_membership__fund_take">membership__fund_take</label>
+            <input type="checkbox" id="show_voice_membership_fund_agenda_give"><label for="show_voice_membership_fund_agenda_give">membership_fund_agenda_give</label>
+            <input type="checkbox" id="show_voice_membership_fund_agenda_ratio_give"><label for="show_voice_membership_fund_agenda_ratio_give">membership_fund_agenda_ratio_give</label>
+            <input type="checkbox" id="show_voice_membership_fund_agenda_ratio_take"><label for="show_voice_membership_fund_agenda_ratio_take">membership_fund_agenda_ratio_take</label>
+            <input type="checkbox" id="show_voice_membership_fund_agenda_take"><label for="show_voice_membership_fund_agenda_take">membership_fund_agenda_take</label>
+            <input type="checkbox" id="show_voice_membership_fund_give"><label for="show_voice_membership_fund_give">membership_fund_give</label>
+            <input type="checkbox" id="show_voice_membership_fund_take"><label for="show_voice_membership_fund_take">membership_fund_take</label>
             
         </div>
         <div id="voicesContainer" class="plan_tree_display"></div>

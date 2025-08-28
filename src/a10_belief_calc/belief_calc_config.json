@@ -28,27 +28,27 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_give": {
+            "fund_agenda_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_ratio_give": {
+            "fund_agenda_ratio_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_ratio_take": {
+            "fund_agenda_ratio_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_take": {
+            "fund_agenda_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_give": {
+            "fund_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_take": {
+            "fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -89,27 +89,27 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_give": {
+            "fund_agenda_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_ratio_give": {
+            "fund_agenda_ratio_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_ratio_take": {
+            "fund_agenda_ratio_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_take": {
+            "fund_agenda_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_give": {
+            "fund_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_take": {
+            "fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -154,11 +154,11 @@
             }
         },
         "jmetrics": {
-            "_fund_give": {
+            "fund_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_take": {
+            "fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }
@@ -389,15 +389,15 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_fund_cease": {
+            "fund_cease": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_onset": {
+            "fund_onset": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_ratio": {
+            "fund_ratio": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -502,19 +502,19 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_give": {
+            "fund_agenda_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_agenda_take": {
+            "fund_agenda_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_give": {
+            "fund_give": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_fund_take": {
+            "fund_take": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

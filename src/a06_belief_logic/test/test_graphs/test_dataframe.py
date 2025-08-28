@@ -41,12 +41,12 @@ def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():
         "voice_cred_points",
         "voice_debt_points",
         "_memberships",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
 
@@ -66,12 +66,12 @@ def test_get_belief_voiceunits_dataframe_ReturnsEmptyDataFrame():
         "voice_name",
         "voice_cred_points",
         "voice_debt_points",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
 

@@ -153,9 +153,9 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x__active = 16
     x__chore = 17
     x_fund_iota = 18.0
-    x__fund_onset = 19.0
-    x__fund_cease = 20.0
-    x__fund_ratio = 21.0
+    x_fund_onset = 19.0
+    x_fund_cease = 20.0
+    x_fund_ratio = 21.0
     x__gogo_calc = 22.0
     x__stop_calc = 23.0
     x__level = 24
@@ -182,9 +182,9 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan._active = x__active
     x_plan._chore = x__chore
     x_plan.fund_iota = x_fund_iota
-    x_plan._fund_onset = x__fund_onset
-    x_plan._fund_cease = x__fund_cease
-    x_plan._fund_ratio = x__fund_ratio
+    x_plan.fund_onset = x_fund_onset
+    x_plan.fund_cease = x_fund_cease
+    x_plan.fund_ratio = x_fund_ratio
     x_plan._gogo_calc = x__gogo_calc
     x_plan._stop_calc = x__stop_calc
     x_plan._level = x__level
@@ -207,9 +207,9 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan._active = x__active
     x_plan._chore = x__chore
     x_plan.fund_iota = x_fund_iota
-    x_plan._fund_onset = x__fund_onset
-    x_plan._fund_cease = x__fund_cease
-    x_plan._fund_ratio = x__fund_ratio
+    x_plan.fund_onset = x_fund_onset
+    x_plan.fund_cease = x_fund_cease
+    x_plan.fund_ratio = x_fund_ratio
     x_plan._gogo_calc = x__gogo_calc
     x_plan._stop_calc = x__stop_calc
     x_plan._level = x__level
@@ -253,9 +253,9 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x_fund_iota,
             x__active,
             x__chore,
-            x__fund_onset,
-            x__fund_cease,
-            x__fund_ratio,
+            x_fund_onset,
+            x_fund_cease,
+            x_fund_ratio,
             x__gogo_calc,
             x__stop_calc,
             x__level,
@@ -418,24 +418,24 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     x_group_debt_points = 6.0
     x_credor_pool = 7.0
     x_debtor_pool = 8.0
-    x__fund_give = 9.0
-    x__fund_take = 10.0
-    x__fund_agenda_give = 11.0
-    x__fund_agenda_take = 12.0
-    x__fund_agenda_ratio_give = 13.0
-    x__fund_agenda_ratio_take = 14.0
+    x_fund_give = 9.0
+    x_fund_take = 10.0
+    x_fund_agenda_give = 11.0
+    x_fund_agenda_take = 12.0
+    x_fund_agenda_ratio_give = 13.0
+    x_fund_agenda_ratio_take = 14.0
     x_membership = membership_shop(x_group_title)
     x_membership.voice_name = x_voice_name
     x_membership.group_cred_points = x_group_cred_points
     x_membership.group_debt_points = x_group_debt_points
     x_membership.credor_pool = x_credor_pool
     x_membership.debtor_pool = x_debtor_pool
-    x_membership._fund_give = x__fund_give
-    x_membership._fund_take = x__fund_take
-    x_membership._fund_agenda_give = x__fund_agenda_give
-    x_membership._fund_agenda_take = x__fund_agenda_take
-    x_membership._fund_agenda_ratio_give = x__fund_agenda_ratio_give
-    x_membership._fund_agenda_ratio_take = x__fund_agenda_ratio_take
+    x_membership.fund_give = x_fund_give
+    x_membership.fund_take = x_fund_take
+    x_membership.fund_agenda_give = x_fund_agenda_give
+    x_membership.fund_agenda_take = x_fund_agenda_take
+    x_membership.fund_agenda_ratio_give = x_fund_agenda_ratio_give
+    x_membership.fund_agenda_ratio_take = x_fund_agenda_ratio_take
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -461,12 +461,12 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
             x_group_debt_points,
             x_credor_pool,
             x_debtor_pool,
-            x__fund_give,
-            x__fund_take,
-            x__fund_agenda_give,
-            x__fund_agenda_take,
-            x__fund_agenda_ratio_give,
-            x__fund_agenda_ratio_take,
+            x_fund_give,
+            x_fund_take,
+            x_fund_agenda_give,
+            x_fund_agenda_take,
+            x_fund_agenda_ratio_give,
+            x_fund_agenda_ratio_take,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -494,12 +494,12 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice_debt_points = 5
     x_credor_pool = 6
     x_debtor_pool = 7
-    x__fund_give = 8
-    x__fund_take = 9
-    x__fund_agenda_give = 10
-    x__fund_agenda_take = 11
-    x__fund_agenda_ratio_give = 12
-    x__fund_agenda_ratio_take = 13
+    x_fund_give = 8
+    x_fund_take = 9
+    x_fund_agenda_give = 10
+    x_fund_agenda_take = 11
+    x_fund_agenda_ratio_give = 12
+    x_fund_agenda_ratio_take = 13
     x__inallocable_voice_debt_points = 14
     x__irrational_voice_debt_points = 15
     x_voice = voiceunit_shop(x_voice_name)
@@ -508,12 +508,12 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice.voice_debt_points = x_voice_debt_points
     x_voice.credor_pool = x_credor_pool
     x_voice.debtor_pool = x_debtor_pool
-    x_voice._fund_give = x__fund_give
-    x_voice._fund_take = x__fund_take
-    x_voice._fund_agenda_give = x__fund_agenda_give
-    x_voice._fund_agenda_take = x__fund_agenda_take
-    x_voice._fund_agenda_ratio_give = x__fund_agenda_ratio_give
-    x_voice._fund_agenda_ratio_take = x__fund_agenda_ratio_take
+    x_voice.fund_give = x_fund_give
+    x_voice.fund_take = x_fund_take
+    x_voice.fund_agenda_give = x_fund_agenda_give
+    x_voice.fund_agenda_take = x_fund_agenda_take
+    x_voice.fund_agenda_ratio_give = x_fund_agenda_ratio_give
+    x_voice.fund_agenda_ratio_take = x_fund_agenda_ratio_take
     x_voice._inallocable_voice_debt_points = x__inallocable_voice_debt_points
     x_voice._irrational_voice_debt_points = x__irrational_voice_debt_points
 
@@ -540,12 +540,12 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             x_voice_debt_points,
             x_credor_pool,
             x_debtor_pool,
-            x__fund_give,
-            x__fund_take,
-            x__fund_agenda_give,
-            x__fund_agenda_take,
-            x__fund_agenda_ratio_give,
-            x__fund_agenda_ratio_take,
+            x_fund_give,
+            x_fund_take,
+            x_fund_agenda_give,
+            x_fund_agenda_take,
+            x_fund_agenda_ratio_give,
+            x_fund_agenda_ratio_take,
             x__inallocable_voice_debt_points,
             x__irrational_voice_debt_points,
         )
@@ -575,20 +575,20 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_knot = 5
     x_credor_pool = 6
     x_debtor_pool = 7
-    x__fund_give = 8
-    x__fund_take = 9
-    x__fund_agenda_give = 10
-    x__fund_agenda_take = 11
+    x_fund_give = 8
+    x_fund_take = 9
+    x_fund_agenda_give = 10
+    x_fund_agenda_take = 11
     x_group = groupunit_shop(x_group_title)
     x_group.group_title = x_group_title
     x_group.fund_iota = x_fund_iota
     x_group.knot = x_knot
     x_group.credor_pool = x_credor_pool
     x_group.debtor_pool = x_debtor_pool
-    x_group._fund_give = x__fund_give
-    x_group._fund_take = x__fund_take
-    x_group._fund_agenda_give = x__fund_agenda_give
-    x_group._fund_agenda_take = x__fund_agenda_take
+    x_group.fund_give = x_fund_give
+    x_group.fund_take = x_fund_take
+    x_group.fund_agenda_give = x_fund_agenda_give
+    x_group.fund_agenda_take = x_fund_agenda_take
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -613,10 +613,10 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
             str(x_knot),
             x_credor_pool,
             x_debtor_pool,
-            x__fund_give,
-            x__fund_take,
-            x__fund_agenda_give,
-            x__fund_agenda_take,
+            x_fund_give,
+            x_fund_take,
+            x_fund_agenda_give,
+            x_fund_agenda_take,
         )
         expected_data = [expected_row1]
         assert rows == expected_data
@@ -643,14 +643,14 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
     x_awardee_title = 4
     x_give_force = 5
     x_take_force = 6
-    x__fund_give = 7
-    x__fund_take = 8
+    x_fund_give = 7
+    x_fund_take = 8
     x_awardheir = awardheir_shop(x_awardee_title)
     x_awardheir.awardee_title = x_awardee_title
     x_awardheir.give_force = x_give_force
     x_awardheir.take_force = x_take_force
-    x_awardheir._fund_give = x__fund_give
-    x_awardheir._fund_take = x__fund_take
+    x_awardheir.fund_give = x_fund_give
+    x_awardheir.fund_take = x_fund_take
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -674,8 +674,8 @@ def test_insert_job_blrawar_CreatesTableRowsFor_blrawar_job():
             str(x_awardee_title),
             x_give_force,
             x_take_force,
-            x__fund_give,
-            x__fund_take,
+            x_fund_give,
+            x_fund_take,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

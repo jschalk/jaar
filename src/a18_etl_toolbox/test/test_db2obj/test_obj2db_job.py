@@ -110,10 +110,10 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x__all_voice_cred = 2
     x__all_voice_debt = 3
     x__descendant_task_count = 4
-    x__fund_cease = 5
+    x_fund_cease = 5
     x_fund_iota = 6
-    x__fund_onset = 7
-    x__fund_ratio = 8
+    x_fund_onset = 7
+    x_fund_ratio = 8
     x__gogo_calc = 9
     x__healerunit_ratio = 10
     x__level = 11
@@ -139,10 +139,10 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "_all_voice_cred": x__all_voice_cred,
         "_all_voice_debt": x__all_voice_debt,
         "_descendant_task_count": x__descendant_task_count,
-        "_fund_cease": x__fund_cease,
+        "fund_cease": x_fund_cease,
         "fund_iota": x_fund_iota,
-        "_fund_onset": x__fund_onset,
-        "_fund_ratio": x__fund_ratio,
+        "fund_onset": x_fund_onset,
+        "fund_ratio": x_fund_ratio,
         "_gogo_calc": x__gogo_calc,
         "_healerunit_ratio": x__healerunit_ratio,
         "_level": x__level,
@@ -340,8 +340,8 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     x_awardee_title = 2
     x_give_force = 3
     x_take_force = 4
-    x__fund_give = 5
-    x__fund_take = 6
+    x_fund_give = 5
+    x_fund_take = 6
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
@@ -349,8 +349,8 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
         "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -580,12 +580,12 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_voice_debt_points = 3
     x_credor_pool = 4
     x_debtor_pool = 5
-    x__fund_give = 6
-    x__fund_take = 7
-    x__fund_agenda_give = 8
-    x__fund_agenda_take = 9
-    x__fund_agenda_ratio_give = 10
-    x__fund_agenda_ratio_take = 11
+    x_fund_give = 6
+    x_fund_take = 7
+    x_fund_agenda_give = 8
+    x_fund_agenda_take = 9
+    x_fund_agenda_ratio_give = 10
+    x_fund_agenda_ratio_take = 11
     x__inallocable_voice_debt_points = 12
     x__irrational_voice_debt_points = 13
     values_dict = {
@@ -596,12 +596,12 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
         "voice_debt_points": x_voice_debt_points,
         "credor_pool": x_credor_pool,
         "debtor_pool": x_debtor_pool,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
-        "_fund_agenda_give": x__fund_agenda_give,
-        "_fund_agenda_take": x__fund_agenda_take,
-        "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
-        "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
+        "fund_agenda_give": x_fund_agenda_give,
+        "fund_agenda_take": x_fund_agenda_take,
+        "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
+        "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
         "_inallocable_voice_debt_points": x__inallocable_voice_debt_points,
         "_irrational_voice_debt_points": x__irrational_voice_debt_points,
     }
@@ -658,12 +658,12 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     x_group_debt_points = 4
     x_credor_pool = 5
     x_debtor_pool = 6
-    x__fund_give = 7
-    x__fund_take = 8
-    x__fund_agenda_give = 9
-    x__fund_agenda_take = 10
-    x__fund_agenda_ratio_give = 11
-    x__fund_agenda_ratio_take = 12
+    x_fund_give = 7
+    x_fund_take = 8
+    x_fund_agenda_give = 9
+    x_fund_agenda_take = 10
+    x_fund_agenda_ratio_give = 11
+    x_fund_agenda_ratio_take = 12
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
@@ -673,12 +673,12 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
         "group_debt_points": x_group_debt_points,
         "credor_pool": x_credor_pool,
         "debtor_pool": x_debtor_pool,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
-        "_fund_agenda_give": x__fund_agenda_give,
-        "_fund_agenda_take": x__fund_agenda_take,
-        "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
-        "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
+        "fund_agenda_give": x_fund_agenda_give,
+        "fund_agenda_take": x_fund_agenda_take,
+        "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
+        "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -731,10 +731,10 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_credor_pool = 2
     x_debtor_pool = 3
     x_fund_iota = 4
-    x__fund_give = 5
-    x__fund_take = 6
-    x__fund_agenda_give = 7
-    x__fund_agenda_take = 8
+    x_fund_give = 5
+    x_fund_take = 6
+    x_fund_agenda_give = 7
+    x_fund_agenda_take = 8
     x_knot = 9
     values_dict = {
         "moment_label": x_moment_label,
@@ -743,10 +743,10 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
         "credor_pool": x_credor_pool,
         "debtor_pool": x_debtor_pool,
         "fund_iota": x_fund_iota,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
-        "_fund_agenda_give": x__fund_agenda_give,
-        "_fund_agenda_take": x__fund_agenda_take,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
+        "fund_agenda_give": x_fund_agenda_give,
+        "fund_agenda_take": x_fund_agenda_take,
         "knot": x_knot,
     }
     # all args included in values dict

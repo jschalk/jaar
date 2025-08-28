@@ -68,7 +68,7 @@ def _add_individual_trace(
         plotly_Scatter(
             x=[kid_plan._level - 1, kid_plan._level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_plan._fund_ratio),
+            marker_size=_get_dot_diameter(kid_plan.fund_ratio),
             name=kid_plan.plan_label,
             marker_color=_get_color_for_planunit_trace(kid_plan, mode=mode),
         )
@@ -76,7 +76,7 @@ def _add_individual_trace(
     anno_list.append(
         dict(
             x=kid_plan._level,
-            y=source_y + (_get_dot_diameter(kid_plan._fund_ratio) / 150) + 0.002,
+            y=source_y + (_get_dot_diameter(kid_plan.fund_ratio) / 150) + 0.002,
             text=kid_plan.plan_label,
             showarrow=False,
         )
@@ -153,10 +153,10 @@ def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         "voice_cred_points",
         "_debtor_respect",
         "voice_debt_points",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
     ]
     df = get_belief_voiceunits_dataframe(x_belief)
     df.insert(1, "_credor_respect", x_belief.credor_respect)
@@ -173,10 +173,10 @@ def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
                 df.voice_cred_points,
                 df._debtor_respect,
                 df.voice_debt_points,
-                df._fund_give,
-                df._fund_take,
-                df._fund_agenda_give,
-                df._fund_agenda_take,
+                df.fund_give,
+                df.fund_take,
+                df.fund_agenda_give,
+                df.fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -568,25 +568,25 @@ def fund_graph0(
     add_simp_rect(fig, 9, -4.0, 9.75, -2.2, voiceunit_str, "gold")
 
     fund_t0 = "BeliefUnit.fund_pool"
-    fund_t1_0 = "PlanUnit._fund_onset"
-    fund_t1_1 = "PlanUnit._fund_cease"
-    fund_t2_0 = "AwardHeir._fund_give"
-    fund_t2_1 = "AwardHeir._fund_take"
+    fund_t1_0 = "PlanUnit.fund_onset"
+    fund_t1_1 = "PlanUnit.fund_cease"
+    fund_t2_0 = "AwardHeir.fund_give"
+    fund_t2_1 = "AwardHeir.fund_take"
 
-    fund_trace3_0 = "GroupUnit._fund_give"
-    fund_trace3_1 = "GroupUnit._fund_take"
-    fund_trace3_2 = "GroupUnit._fund_agenda_give"
-    fund_trace3_3 = "GroupUnit._fund_agenda_take"
+    fund_trace3_0 = "GroupUnit.fund_give"
+    fund_trace3_1 = "GroupUnit.fund_take"
+    fund_trace3_2 = "GroupUnit.fund_agenda_give"
+    fund_trace3_3 = "GroupUnit.fund_agenda_take"
 
-    fund_trace4_0 = "MemberShip._fund_give"
-    fund_trace4_1 = "MemberShip._fund_take"
-    fund_trace4_2 = "MemberShip._fund_agenda_give"
-    fund_trace4_3 = "MemberShip._fund_agenda_take"
+    fund_trace4_0 = "MemberShip.fund_give"
+    fund_trace4_1 = "MemberShip.fund_take"
+    fund_trace4_2 = "MemberShip.fund_agenda_give"
+    fund_trace4_3 = "MemberShip.fund_agenda_take"
 
-    fund_trace5_0 = "VoiceUnit._fund_give"
-    fund_trace5_1 = "VoiceUnit._fund_take"
-    fund_trace5_2 = "VoiceUnit._fund_agenda_give"
-    fund_trace5_3 = "VoiceUnit._fund_agenda_take"
+    fund_trace5_0 = "VoiceUnit.fund_give"
+    fund_trace5_1 = "VoiceUnit.fund_take"
+    fund_trace5_2 = "VoiceUnit.fund_agenda_give"
+    fund_trace5_3 = "VoiceUnit.fund_agenda_take"
 
     tracex_list = [fund_t0, fund_t1_0, fund_t1_1, fund_t2_0, fund_t2_1]
     fig.add_trace(

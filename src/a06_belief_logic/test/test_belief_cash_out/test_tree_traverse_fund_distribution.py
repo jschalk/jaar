@@ -20,36 +20,36 @@ def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario0():
     casa_rope = x_beliefunit.make_l1_rope("casa")
     catt_rope = x_beliefunit.make_l1_rope("cat have dinner")
     wk_rope = x_beliefunit.make_l1_rope("sem_jours")
-    x_beliefunit.planroot._fund_onset = 13
-    x_beliefunit.planroot._fund_cease = 13
-    x_beliefunit.get_plan_obj(casa_rope)._fund_onset = 13
-    x_beliefunit.get_plan_obj(casa_rope)._fund_cease = 13
-    x_beliefunit.get_plan_obj(catt_rope)._fund_onset = 13
-    x_beliefunit.get_plan_obj(catt_rope)._fund_cease = 13
-    x_beliefunit.get_plan_obj(wk_rope)._fund_onset = 13
-    x_beliefunit.get_plan_obj(wk_rope)._fund_cease = 13
+    x_beliefunit.planroot.fund_onset = 13
+    x_beliefunit.planroot.fund_cease = 13
+    x_beliefunit.get_plan_obj(casa_rope).fund_onset = 13
+    x_beliefunit.get_plan_obj(casa_rope).fund_cease = 13
+    x_beliefunit.get_plan_obj(catt_rope).fund_onset = 13
+    x_beliefunit.get_plan_obj(catt_rope).fund_cease = 13
+    x_beliefunit.get_plan_obj(wk_rope).fund_onset = 13
+    x_beliefunit.get_plan_obj(wk_rope).fund_cease = 13
 
-    assert x_beliefunit.planroot._fund_onset == 13
-    assert x_beliefunit.planroot._fund_cease == 13
-    assert x_beliefunit.get_plan_obj(casa_rope)._fund_onset == 13
-    assert x_beliefunit.get_plan_obj(casa_rope)._fund_cease == 13
-    assert x_beliefunit.get_plan_obj(catt_rope)._fund_onset == 13
-    assert x_beliefunit.get_plan_obj(catt_rope)._fund_cease == 13
-    assert x_beliefunit.get_plan_obj(wk_rope)._fund_onset == 13
-    assert x_beliefunit.get_plan_obj(wk_rope)._fund_cease == 13
+    assert x_beliefunit.planroot.fund_onset == 13
+    assert x_beliefunit.planroot.fund_cease == 13
+    assert x_beliefunit.get_plan_obj(casa_rope).fund_onset == 13
+    assert x_beliefunit.get_plan_obj(casa_rope).fund_cease == 13
+    assert x_beliefunit.get_plan_obj(catt_rope).fund_onset == 13
+    assert x_beliefunit.get_plan_obj(catt_rope).fund_cease == 13
+    assert x_beliefunit.get_plan_obj(wk_rope).fund_onset == 13
+    assert x_beliefunit.get_plan_obj(wk_rope).fund_cease == 13
 
     # WHEN
     x_beliefunit.cash_out()
 
     # THEN
-    assert x_beliefunit.planroot._fund_onset != 13
-    assert x_beliefunit.planroot._fund_cease != 13
-    assert x_beliefunit.get_plan_obj(casa_rope)._fund_onset != 13
-    assert x_beliefunit.get_plan_obj(casa_rope)._fund_cease != 13
-    assert x_beliefunit.get_plan_obj(catt_rope)._fund_onset != 13
-    assert x_beliefunit.get_plan_obj(catt_rope)._fund_cease != 13
-    assert x_beliefunit.get_plan_obj(wk_rope)._fund_onset != 13
-    assert x_beliefunit.get_plan_obj(wk_rope)._fund_cease != 13
+    assert x_beliefunit.planroot.fund_onset != 13
+    assert x_beliefunit.planroot.fund_cease != 13
+    assert x_beliefunit.get_plan_obj(casa_rope).fund_onset != 13
+    assert x_beliefunit.get_plan_obj(casa_rope).fund_cease != 13
+    assert x_beliefunit.get_plan_obj(catt_rope).fund_onset != 13
+    assert x_beliefunit.get_plan_obj(catt_rope).fund_cease != 13
+    assert x_beliefunit.get_plan_obj(wk_rope).fund_onset != 13
+    assert x_beliefunit.get_plan_obj(wk_rope).fund_cease != 13
 
 
 def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario1():
@@ -80,50 +80,50 @@ def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario1():
     coal_plan = planunit_shop(coal_str, star=30)
     yao_beliefunit.set_l1_plan(coal_plan)
 
-    assert yao_beliefunit.planroot._fund_onset is None
-    assert yao_beliefunit.planroot._fund_cease is None
-    assert yao_beliefunit.get_plan_obj(auto_rope)._fund_onset is None
-    assert yao_beliefunit.get_plan_obj(auto_rope)._fund_cease is None
-    assert yao_beliefunit.get_plan_obj(carn_rope)._fund_onset is None
-    assert yao_beliefunit.get_plan_obj(carn_rope)._fund_cease is None
-    assert yao_beliefunit.get_plan_obj(coal_rope)._fund_onset is None
-    assert yao_beliefunit.get_plan_obj(coal_rope)._fund_cease is None
+    assert yao_beliefunit.planroot.fund_onset is None
+    assert yao_beliefunit.planroot.fund_cease is None
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_onset is None
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_cease is None
+    assert yao_beliefunit.get_plan_obj(carn_rope).fund_onset is None
+    assert yao_beliefunit.get_plan_obj(carn_rope).fund_cease is None
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_onset is None
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_cease is None
     lamb_before = yao_beliefunit.get_plan_obj(rope=lamb_rope)
-    assert lamb_before._fund_onset is None
-    assert lamb_before._fund_cease is None
+    assert lamb_before.fund_onset is None
+    assert lamb_before.fund_cease is None
     duck_before = yao_beliefunit.get_plan_obj(rope=duck_rope)
-    assert duck_before._fund_onset is None
-    assert duck_before._fund_cease is None
+    assert duck_before.fund_onset is None
+    assert duck_before.fund_cease is None
 
     # WHEN
     yao_beliefunit.cash_out()
 
     # THEN
-    assert yao_beliefunit.planroot._fund_onset == 0.0
-    assert yao_beliefunit.planroot._fund_cease == default_fund_pool()
-    assert yao_beliefunit.get_plan_obj(auto_rope)._fund_onset == 0.0
+    assert yao_beliefunit.planroot.fund_onset == 0.0
+    assert yao_beliefunit.planroot.fund_cease == default_fund_pool()
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_onset == 0.0
     assert (
-        yao_beliefunit.get_plan_obj(auto_rope)._fund_cease == default_fund_pool() * 0.1
+        yao_beliefunit.get_plan_obj(auto_rope).fund_cease == default_fund_pool() * 0.1
     )
     assert (
-        yao_beliefunit.get_plan_obj(carn_rope)._fund_onset == default_fund_pool() * 0.1
+        yao_beliefunit.get_plan_obj(carn_rope).fund_onset == default_fund_pool() * 0.1
     )
     assert (
-        yao_beliefunit.get_plan_obj(carn_rope)._fund_cease == default_fund_pool() * 0.7
+        yao_beliefunit.get_plan_obj(carn_rope).fund_cease == default_fund_pool() * 0.7
     )
     assert (
-        yao_beliefunit.get_plan_obj(coal_rope)._fund_onset == default_fund_pool() * 0.7
+        yao_beliefunit.get_plan_obj(coal_rope).fund_onset == default_fund_pool() * 0.7
     )
     assert (
-        yao_beliefunit.get_plan_obj(coal_rope)._fund_cease == default_fund_pool() * 1.0
+        yao_beliefunit.get_plan_obj(coal_rope).fund_cease == default_fund_pool() * 1.0
     )
 
     duck_after = yao_beliefunit.get_plan_obj(rope=duck_rope)
-    assert duck_after._fund_onset == default_fund_pool() * 0.1
-    assert duck_after._fund_cease == default_fund_pool() * 0.5
+    assert duck_after.fund_onset == default_fund_pool() * 0.1
+    assert duck_after.fund_cease == default_fund_pool() * 0.5
     lamb_after = yao_beliefunit.get_plan_obj(rope=lamb_rope)
-    assert lamb_after._fund_onset == default_fund_pool() * 0.5
-    assert lamb_after._fund_cease == default_fund_pool() * 0.7
+    assert lamb_after.fund_onset == default_fund_pool() * 0.5
+    assert lamb_after.fund_cease == default_fund_pool() * 0.7
 
 
 def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario2_DifferentOrderOfPlans():
@@ -154,50 +154,50 @@ def test_BeliefUnit_cash_out_Sets_planunit_fund_onset_fund_cease_Scenario2_Diffe
     coal_plan = planunit_shop(coal_str, star=30)
     yao_beliefunit.set_l1_plan(coal_plan)
 
-    assert yao_beliefunit.planroot._fund_onset is None
-    assert yao_beliefunit.planroot._fund_cease is None
-    assert yao_beliefunit.get_plan_obj(auto_rope)._fund_onset is None
-    assert yao_beliefunit.get_plan_obj(auto_rope)._fund_cease is None
-    assert yao_beliefunit.get_plan_obj(yarn_rope)._fund_onset is None
-    assert yao_beliefunit.get_plan_obj(yarn_rope)._fund_cease is None
-    assert yao_beliefunit.get_plan_obj(coal_rope)._fund_onset is None
-    assert yao_beliefunit.get_plan_obj(coal_rope)._fund_cease is None
+    assert yao_beliefunit.planroot.fund_onset is None
+    assert yao_beliefunit.planroot.fund_cease is None
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_onset is None
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_cease is None
+    assert yao_beliefunit.get_plan_obj(yarn_rope).fund_onset is None
+    assert yao_beliefunit.get_plan_obj(yarn_rope).fund_cease is None
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_onset is None
+    assert yao_beliefunit.get_plan_obj(coal_rope).fund_cease is None
     lamb_before = yao_beliefunit.get_plan_obj(rope=lamb_rope)
-    assert lamb_before._fund_onset is None
-    assert lamb_before._fund_cease is None
+    assert lamb_before.fund_onset is None
+    assert lamb_before.fund_cease is None
     duck_before = yao_beliefunit.get_plan_obj(rope=duck_rope)
-    assert duck_before._fund_onset is None
-    assert duck_before._fund_cease is None
+    assert duck_before.fund_onset is None
+    assert duck_before.fund_cease is None
 
     # WHEN
     yao_beliefunit.cash_out()
 
     # THEN
-    assert yao_beliefunit.planroot._fund_onset == 0.0
-    assert yao_beliefunit.planroot._fund_cease == default_fund_pool()
-    assert yao_beliefunit.get_plan_obj(auto_rope)._fund_onset == 0.0
+    assert yao_beliefunit.planroot.fund_onset == 0.0
+    assert yao_beliefunit.planroot.fund_cease == default_fund_pool()
+    assert yao_beliefunit.get_plan_obj(auto_rope).fund_onset == 0.0
     assert (
-        yao_beliefunit.get_plan_obj(auto_rope)._fund_cease == default_fund_pool() * 0.1
+        yao_beliefunit.get_plan_obj(auto_rope).fund_cease == default_fund_pool() * 0.1
     )
     assert (
-        yao_beliefunit.get_plan_obj(coal_rope)._fund_onset == default_fund_pool() * 0.1
+        yao_beliefunit.get_plan_obj(coal_rope).fund_onset == default_fund_pool() * 0.1
     )
     assert (
-        yao_beliefunit.get_plan_obj(coal_rope)._fund_cease == default_fund_pool() * 0.4
+        yao_beliefunit.get_plan_obj(coal_rope).fund_cease == default_fund_pool() * 0.4
     )
     assert (
-        yao_beliefunit.get_plan_obj(yarn_rope)._fund_onset == default_fund_pool() * 0.4
+        yao_beliefunit.get_plan_obj(yarn_rope).fund_onset == default_fund_pool() * 0.4
     )
     assert (
-        yao_beliefunit.get_plan_obj(yarn_rope)._fund_cease == default_fund_pool() * 1.0
+        yao_beliefunit.get_plan_obj(yarn_rope).fund_cease == default_fund_pool() * 1.0
     )
 
     duck_after = yao_beliefunit.get_plan_obj(rope=duck_rope)
-    assert duck_after._fund_onset == default_fund_pool() * 0.4
-    assert duck_after._fund_cease == default_fund_pool() * 0.8
+    assert duck_after.fund_onset == default_fund_pool() * 0.4
+    assert duck_after.fund_cease == default_fund_pool() * 0.8
     lamb_after = yao_beliefunit.get_plan_obj(rope=lamb_rope)
-    assert lamb_after._fund_onset == default_fund_pool() * 0.8
-    assert lamb_after._fund_cease == default_fund_pool() * 1.0
+    assert lamb_after.fund_onset == default_fund_pool() * 0.8
+    assert lamb_after.fund_cease == default_fund_pool() * 1.0
 
 
 def test_BeliefUnit_cash_out_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
@@ -222,24 +222,24 @@ def test_BeliefUnit_cash_out_Sets_fund_ratio_WithSomePlansOfZero_starScenario0()
     sue_belief.set_plan(planunit_shop(non_str), status_rope)
     sue_belief.set_plan(planunit_shop(yes_str, star=2), status_rope)
 
-    assert sue_belief.planroot._fund_ratio is None
-    assert sue_belief.get_plan_obj(casa_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(floor_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(status_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(non_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(yes_rope)._fund_ratio is None
+    assert sue_belief.planroot.fund_ratio is None
+    assert sue_belief.get_plan_obj(casa_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(floor_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(status_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(non_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(yes_rope).fund_ratio is None
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
     print(f"{sue_belief.fund_pool=}")
-    assert sue_belief.planroot._fund_ratio == 1
-    assert sue_belief.get_plan_obj(casa_rope)._fund_ratio == 0.5
-    assert sue_belief.get_plan_obj(floor_rope)._fund_ratio == 0.5
-    assert sue_belief.get_plan_obj(status_rope)._fund_ratio == 0.0
-    assert sue_belief.get_plan_obj(non_rope)._fund_ratio == 0.0
-    assert sue_belief.get_plan_obj(yes_rope)._fund_ratio == 0.0
+    assert sue_belief.planroot.fund_ratio == 1
+    assert sue_belief.get_plan_obj(casa_rope).fund_ratio == 0.5
+    assert sue_belief.get_plan_obj(floor_rope).fund_ratio == 0.5
+    assert sue_belief.get_plan_obj(status_rope).fund_ratio == 0.0
+    assert sue_belief.get_plan_obj(non_rope).fund_ratio == 0.0
+    assert sue_belief.get_plan_obj(yes_rope).fund_ratio == 0.0
 
 
 def test_BeliefUnit_cash_out_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
@@ -275,26 +275,26 @@ def test_BeliefUnit_cash_out_Sets_fund_ratio_WithSomePlansOfZero_starScenario1()
     very_rope = sue_belief.make_rope(clean_rope, very_str)
     mod_rope = sue_belief.make_rope(clean_rope, mod_str)
     dirty_rope = sue_belief.make_rope(clean_rope, dirty_str)
-    assert sue_belief.get_plan_obj(casa_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(floor_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(status_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(clean_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(very_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(mod_rope)._fund_ratio is None
-    assert sue_belief.get_plan_obj(dirty_rope)._fund_ratio is None
+    assert sue_belief.get_plan_obj(casa_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(floor_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(status_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(clean_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(very_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(mod_rope).fund_ratio is None
+    assert sue_belief.get_plan_obj(dirty_rope).fund_ratio is None
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
     print(f"{sue_belief.fund_pool=}")
-    assert sue_belief.get_plan_obj(casa_rope)._fund_ratio == 0.5
-    assert sue_belief.get_plan_obj(floor_rope)._fund_ratio == 0.25
-    assert sue_belief.get_plan_obj(status_rope)._fund_ratio == 0.25
-    assert sue_belief.get_plan_obj(clean_rope)._fund_ratio == 0
-    assert sue_belief.get_plan_obj(very_rope)._fund_ratio == 0
-    assert sue_belief.get_plan_obj(mod_rope)._fund_ratio == 0
-    assert sue_belief.get_plan_obj(dirty_rope)._fund_ratio == 0
+    assert sue_belief.get_plan_obj(casa_rope).fund_ratio == 0.5
+    assert sue_belief.get_plan_obj(floor_rope).fund_ratio == 0.25
+    assert sue_belief.get_plan_obj(status_rope).fund_ratio == 0.25
+    assert sue_belief.get_plan_obj(clean_rope).fund_ratio == 0
+    assert sue_belief.get_plan_obj(very_rope).fund_ratio == 0
+    assert sue_belief.get_plan_obj(mod_rope).fund_ratio == 0
+    assert sue_belief.get_plan_obj(dirty_rope).fund_ratio == 0
 
 
 def test_BeliefUnit_cash_out_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFundsToVoiceUnits_scenario0():
@@ -328,16 +328,16 @@ def test_BeliefUnit_cash_out_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFun
     sue_beliefunit.set_plan(sweep_plan, clean_rope)  # _star=0
     sue_beliefunit.set_plan(vaccum_plan, clean_rope)  # _star=0
 
-    assert sue_beliefunit.get_plan_obj(casa_rope)._fund_ratio is None
-    assert sue_beliefunit.get_plan_obj(swim_rope)._fund_ratio is None
-    assert sue_beliefunit.get_plan_obj(clean_rope)._fund_ratio is None
-    assert sue_beliefunit.get_plan_obj(sweep_rope)._fund_ratio is None
-    assert sue_beliefunit.get_plan_obj(vaccum_rope)._fund_ratio is None
+    assert sue_beliefunit.get_plan_obj(casa_rope).fund_ratio is None
+    assert sue_beliefunit.get_plan_obj(swim_rope).fund_ratio is None
+    assert sue_beliefunit.get_plan_obj(clean_rope).fund_ratio is None
+    assert sue_beliefunit.get_plan_obj(sweep_rope).fund_ratio is None
+    assert sue_beliefunit.get_plan_obj(vaccum_rope).fund_ratio is None
     assert sue_beliefunit.get_groupunit(yao_str) is None
 
     assert not sue_beliefunit._offtrack_fund
-    assert sue_beliefunit.get_voice(yao_str)._fund_give == 0
-    assert sue_beliefunit.get_voice(yao_str)._fund_take == 0
+    assert sue_beliefunit.get_voice(yao_str).fund_give == 0
+    assert sue_beliefunit.get_voice(yao_str).fund_take == 0
 
     # WHEN
     sue_beliefunit.cash_out()
@@ -345,17 +345,17 @@ def test_BeliefUnit_cash_out_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFun
     # THEN
     print(f"{sue_beliefunit.fund_pool=}")
     clean_fund_ratio = 0.2
-    assert sue_beliefunit.get_plan_obj(casa_rope)._fund_ratio == 1
-    assert sue_beliefunit.get_plan_obj(swim_rope)._fund_ratio == 0.8
-    assert sue_beliefunit.get_plan_obj(clean_rope)._fund_ratio == clean_fund_ratio
-    assert sue_beliefunit.get_plan_obj(sweep_rope)._fund_ratio == 0
-    assert sue_beliefunit.get_plan_obj(vaccum_rope)._fund_ratio == 0
-    assert sue_beliefunit.get_groupunit(yao_str)._fund_give == 0
-    assert sue_beliefunit.get_groupunit(yao_str)._fund_take == 0
+    assert sue_beliefunit.get_plan_obj(casa_rope).fund_ratio == 1
+    assert sue_beliefunit.get_plan_obj(swim_rope).fund_ratio == 0.8
+    assert sue_beliefunit.get_plan_obj(clean_rope).fund_ratio == clean_fund_ratio
+    assert sue_beliefunit.get_plan_obj(sweep_rope).fund_ratio == 0
+    assert sue_beliefunit.get_plan_obj(vaccum_rope).fund_ratio == 0
+    assert sue_beliefunit.get_groupunit(yao_str).fund_give == 0
+    assert sue_beliefunit.get_groupunit(yao_str).fund_take == 0
 
     assert sue_beliefunit._offtrack_fund == clean_fund_ratio * default_fund_pool()
-    assert sue_beliefunit.get_voice(yao_str)._fund_give == default_fund_pool()
-    assert sue_beliefunit.get_voice(yao_str)._fund_take == default_fund_pool()
+    assert sue_beliefunit.get_voice(yao_str).fund_give == default_fund_pool()
+    assert sue_beliefunit.get_voice(yao_str).fund_take == default_fund_pool()
 
 
 def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
@@ -383,8 +383,8 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     root_rope = to_rope(sue_belief.planroot.plan_label)
     root_plan = sue_belief.get_plan_obj(rope=root_rope)
     sue_awardline = sue_belief.planroot._awardlines.get(sue_str)
-    print(f"{sue_awardline._fund_give=} {root_plan._fund_ratio=} ")
-    print(f"  {sue_awardline._fund_take=} {root_plan._fund_ratio=} ")
+    print(f"{sue_awardline.fund_give=} {root_plan.fund_ratio=} ")
+    print(f"  {sue_awardline.fund_take=} {root_plan.fund_ratio=} ")
     sum_x = 0
     cat_rope = sue_belief.make_l1_rope("cat have dinner")
     cat_plan = sue_belief.get_plan_obj(cat_rope)
@@ -395,22 +395,22 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     casa_plan = sue_belief.get_plan_obj(casa_rope)
     nation_rope = sue_belief.make_l1_rope(nation_str)
     nation_plan = sue_belief.get_plan_obj(nation_rope)
-    sum_x = cat_plan._fund_ratio
-    print(f"{cat_plan._fund_ratio=} {sum_x} ")
-    sum_x += wk_plan._fund_ratio
-    print(f"{wk_plan._fund_ratio=} {sum_x} ")
-    sum_x += casa_plan._fund_ratio
-    print(f"{casa_plan._fund_ratio=} {sum_x} ")
-    sum_x += nation_plan._fund_ratio
-    print(f"{nation_plan._fund_ratio=} {sum_x} ")
+    sum_x = cat_plan.fund_ratio
+    print(f"{cat_plan.fund_ratio=} {sum_x} ")
+    sum_x += wk_plan.fund_ratio
+    print(f"{wk_plan.fund_ratio=} {sum_x} ")
+    sum_x += casa_plan.fund_ratio
+    print(f"{casa_plan.fund_ratio=} {sum_x} ")
+    sum_x += nation_plan.fund_ratio
+    print(f"{nation_plan.fund_ratio=} {sum_x} ")
     tolerance = 1e-10
     assert sum_x < 1.0 + tolerance
 
     # for kid_plan in root_plan._kids.values():
-    #     sum_x += kid_plan._fund_ratio
-    #     print(f"  {kid_plan._fund_ratio=} {sum_x=} {kid_plan.get_plan_rope()=}")
-    assert round(sue_awardline._fund_give, 15) == default_fund_pool()
-    assert round(sue_awardline._fund_take, 15) == default_fund_pool()
+    #     sum_x += kid_plan.fund_ratio
+    #     print(f"  {kid_plan.fund_ratio=} {sum_x=} {kid_plan.get_plan_rope()=}")
+    assert round(sue_awardline.fund_give, 15) == default_fund_pool()
+    assert round(sue_awardline.fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
     assert sue_belief.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
 
@@ -435,8 +435,8 @@ def test_BeliefUnit_cash_out_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_R
     print(f"{sue_belief.planroot._awardlines=}")
     x_awardline = awardline_shop(
         awardee_title=sue_str,
-        _fund_give=0.230769231 * default_fund_pool(),
-        _fund_take=0.230769231 * default_fund_pool(),
+        fund_give=0.230769231 * default_fund_pool(),
+        fund_take=0.230769231 * default_fund_pool(),
     )
     assert sue_belief.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
     casa_planunit = sue_belief.get_plan_obj(casa_rope)
@@ -471,17 +471,17 @@ def test_BeliefUnit_cash_out_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_
     yao_groupunit = sue_belief.get_groupunit(yao_str)
     zia_groupunit = sue_belief.get_groupunit(zia_str)
     xio_groupunit = sue_belief.get_groupunit(xio_str)
-    assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
-    assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
-    assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
-    assert zia_groupunit._fund_take == 0.125 * default_fund_pool()
-    assert xio_groupunit._fund_give == 0.25 * default_fund_pool()
-    assert xio_groupunit._fund_take == 0.125 * default_fund_pool()
-    cred_sum1 = yao_groupunit._fund_give
-    cred_sum1 += zia_groupunit._fund_give + xio_groupunit._fund_give
+    assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
+    assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
+    assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
+    assert zia_groupunit.fund_take == 0.125 * default_fund_pool()
+    assert xio_groupunit.fund_give == 0.25 * default_fund_pool()
+    assert xio_groupunit.fund_take == 0.125 * default_fund_pool()
+    cred_sum1 = yao_groupunit.fund_give
+    cred_sum1 += zia_groupunit.fund_give + xio_groupunit.fund_give
     assert cred_sum1 == 1 * default_fund_pool()
-    debt_sum1 = yao_groupunit._fund_take
-    debt_sum1 += zia_groupunit._fund_take + xio_groupunit._fund_take
+    debt_sum1 = yao_groupunit.fund_take
+    debt_sum1 += zia_groupunit.fund_take + xio_groupunit.fund_take
     assert debt_sum1 == 1 * default_fund_pool()
 
     # ESTABLISH
@@ -499,19 +499,19 @@ def test_BeliefUnit_cash_out_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_
     zia_groupunit = sue_belief.get_groupunit(zia_str)
     xio_groupunit = sue_belief.get_groupunit(xio_str)
     sue_groupunit = sue_belief.get_groupunit(sue_str)
-    assert yao_groupunit._fund_give != 0.5 * default_fund_pool()
-    assert yao_groupunit._fund_take != 0.75 * default_fund_pool()
-    assert zia_groupunit._fund_give != 0.25 * default_fund_pool()
-    assert zia_groupunit._fund_take != 0.125 * default_fund_pool()
-    assert xio_groupunit._fund_give != 0.25 * default_fund_pool()
-    assert xio_groupunit._fund_take != 0.125 * default_fund_pool()
-    assert sue_groupunit._fund_give is not None
-    assert sue_groupunit._fund_take is not None
-    cred_sum1 = yao_groupunit._fund_give + zia_groupunit._fund_give
-    cred_sum1 += xio_groupunit._fund_give + sue_groupunit._fund_give
+    assert yao_groupunit.fund_give != 0.5 * default_fund_pool()
+    assert yao_groupunit.fund_take != 0.75 * default_fund_pool()
+    assert zia_groupunit.fund_give != 0.25 * default_fund_pool()
+    assert zia_groupunit.fund_take != 0.125 * default_fund_pool()
+    assert xio_groupunit.fund_give != 0.25 * default_fund_pool()
+    assert xio_groupunit.fund_take != 0.125 * default_fund_pool()
+    assert sue_groupunit.fund_give is not None
+    assert sue_groupunit.fund_take is not None
+    cred_sum1 = yao_groupunit.fund_give + zia_groupunit.fund_give
+    cred_sum1 += xio_groupunit.fund_give + sue_groupunit.fund_give
     assert cred_sum1 == 1 * default_fund_pool()
-    debt_sum1 = yao_groupunit._fund_take + zia_groupunit._fund_take
-    debt_sum1 += xio_groupunit._fund_take + sue_groupunit._fund_take
+    debt_sum1 = yao_groupunit.fund_take + zia_groupunit.fund_take
+    debt_sum1 += xio_groupunit.fund_take + sue_groupunit.fund_take
     assert round(debt_sum1) == 1 * default_fund_pool()
 
 
@@ -545,17 +545,17 @@ def test_BeliefUnit_cash_out_WithLevel3AwardUnitSetsGroupUnit_fund_give_fund_tak
     yao_groupunit = x_belief.get_groupunit(yao_str)
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
-    assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
-    assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
-    assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
-    assert zia_groupunit._fund_take == 0.125 * default_fund_pool()
-    assert xio_groupunit._fund_give == 0.25 * default_fund_pool()
-    assert xio_groupunit._fund_take == 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
+    assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
+    assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
+    assert zia_groupunit.fund_take == 0.125 * default_fund_pool()
+    assert xio_groupunit.fund_give == 0.25 * default_fund_pool()
+    assert xio_groupunit.fund_take == 0.125 * default_fund_pool()
     groupunit_fund_give_sum = (
-        yao_groupunit._fund_give + zia_groupunit._fund_give + xio_groupunit._fund_give
+        yao_groupunit.fund_give + zia_groupunit.fund_give + xio_groupunit.fund_give
     )
     groupunit_fund_take_sum = (
-        yao_groupunit._fund_take + zia_groupunit._fund_take + xio_groupunit._fund_take
+        yao_groupunit.fund_take + zia_groupunit.fund_take + xio_groupunit.fund_take
     )
     assert groupunit_fund_give_sum == 1 * default_fund_pool()
     assert groupunit_fund_take_sum == 1 * default_fund_pool()
@@ -592,17 +592,17 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
     assert len(x_belief.get_voiceunit_group_titles_dict()) != len(x_belief._groupunits)
-    assert yao_groupunit._fund_give == 0.5 * default_fund_pool()
-    assert yao_groupunit._fund_take == 0.75 * default_fund_pool()
-    assert zia_groupunit._fund_give == 0.25 * default_fund_pool()
-    assert zia_groupunit._fund_take == 0.125 * default_fund_pool()
-    assert xio_groupunit._fund_give == 0.25 * default_fund_pool()
-    assert xio_groupunit._fund_take == 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
+    assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
+    assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
+    assert zia_groupunit.fund_take == 0.125 * default_fund_pool()
+    assert xio_groupunit.fund_give == 0.25 * default_fund_pool()
+    assert xio_groupunit.fund_take == 0.125 * default_fund_pool()
     groupunit_fund_give_sum = (
-        yao_groupunit._fund_give + zia_groupunit._fund_give + xio_groupunit._fund_give
+        yao_groupunit.fund_give + zia_groupunit.fund_give + xio_groupunit.fund_give
     )
     groupunit_fund_take_sum = (
-        yao_groupunit._fund_take + zia_groupunit._fund_take + xio_groupunit._fund_take
+        yao_groupunit.fund_take + zia_groupunit.fund_take + xio_groupunit.fund_take
     )
     assert groupunit_fund_give_sum == 1 * default_fund_pool()
     assert groupunit_fund_take_sum == 1 * default_fund_pool()
@@ -661,18 +661,18 @@ def test_BeliefUnit_cash_out_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_f
     yao_groupunit = x_belief.get_groupunit(yao_str)
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
-    assert yao_groupunit._fund_give == 0.125 * default_fund_pool()
-    assert yao_groupunit._fund_take == 0.1875 * default_fund_pool()
-    assert zia_groupunit._fund_give == 0.0625 * default_fund_pool()
-    assert zia_groupunit._fund_take == 0.03125 * default_fund_pool()
-    assert xio_groupunit._fund_give == 0.0625 * default_fund_pool()
-    assert xio_groupunit._fund_take == 0.03125 * default_fund_pool()
+    assert yao_groupunit.fund_give == 0.125 * default_fund_pool()
+    assert yao_groupunit.fund_take == 0.1875 * default_fund_pool()
+    assert zia_groupunit.fund_give == 0.0625 * default_fund_pool()
+    assert zia_groupunit.fund_take == 0.03125 * default_fund_pool()
+    assert xio_groupunit.fund_give == 0.0625 * default_fund_pool()
+    assert xio_groupunit.fund_take == 0.03125 * default_fund_pool()
     assert (
-        yao_groupunit._fund_give + zia_groupunit._fund_give + xio_groupunit._fund_give
+        yao_groupunit.fund_give + zia_groupunit.fund_give + xio_groupunit.fund_give
         == 0.25 * default_fund_pool()
     )
     assert (
-        yao_groupunit._fund_take + zia_groupunit._fund_take + xio_groupunit._fund_take
+        yao_groupunit.fund_take + zia_groupunit.fund_take + xio_groupunit.fund_take
         == 0.25 * default_fund_pool()
     )
 
@@ -706,18 +706,18 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
     bheir_yao = plan_bob._awardheirs.get(yao_str)
     bheir_zia = plan_bob._awardheirs.get(zia_str)
     bheir_Xio = plan_bob._awardheirs.get(Xio_str)
-    assert bheir_yao._fund_give == 0.5 * default_fund_pool()
-    assert bheir_yao._fund_take == 0.75 * default_fund_pool()
-    assert bheir_zia._fund_give == 0.25 * default_fund_pool()
-    assert bheir_zia._fund_take == 0.125 * default_fund_pool()
-    assert bheir_Xio._fund_give == 0.25 * default_fund_pool()
-    assert bheir_Xio._fund_take == 0.125 * default_fund_pool()
+    assert bheir_yao.fund_give == 0.5 * default_fund_pool()
+    assert bheir_yao.fund_take == 0.75 * default_fund_pool()
+    assert bheir_zia.fund_give == 0.25 * default_fund_pool()
+    assert bheir_zia.fund_take == 0.125 * default_fund_pool()
+    assert bheir_Xio.fund_give == 0.25 * default_fund_pool()
+    assert bheir_Xio.fund_take == 0.125 * default_fund_pool()
     assert (
-        bheir_yao._fund_give + bheir_zia._fund_give + bheir_Xio._fund_give
+        bheir_yao.fund_give + bheir_zia.fund_give + bheir_Xio.fund_give
         == 1 * default_fund_pool()
     )
     assert (
-        bheir_yao._fund_take + bheir_zia._fund_take + bheir_Xio._fund_take
+        bheir_yao.fund_take + bheir_zia.fund_take + bheir_Xio.fund_take
         == 1 * default_fund_pool()
     )
 
@@ -725,12 +725,12 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
     # fund_take_sum = 0
     # for group in x_belief.planroot._awardheirs.values():
     #     print(f"{group=}")
-    #     assert group._fund_give is not None
-    #     assert group._fund_give in [0.25, 0.5]
-    #     assert group._fund_take is not None
-    #     assert group._fund_take in [0.75, 0.125]
-    #     fund_give_sum += group._fund_give
-    #     fund_take_sum += group._fund_take
+    #     assert group.fund_give is not None
+    #     assert group.fund_give in [0.25, 0.5]
+    #     assert group.fund_take is not None
+    #     assert group.fund_take in [0.75, 0.125]
+    #     fund_give_sum += group.fund_give
+    #     fund_take_sum += group.fund_take
 
     # assert fund_give_sum == 1
     # assert fund_take_sum == 1
@@ -759,34 +759,34 @@ def test_BeliefUnit_cash_out_SetsGroupLinkBeliefCredAndDebt():
     sue_sue_membership = sue_voiceunit.get_membership(sue_str)
     bob_bob_membership = bob_voiceunit.get_membership(bob_str)
     zia_zia_membership = zia_voiceunit.get_membership(zia_str)
-    assert sue_sue_membership._fund_give is None
-    assert sue_sue_membership._fund_take is None
-    assert bob_bob_membership._fund_give is None
-    assert bob_bob_membership._fund_take is None
-    assert zia_zia_membership._fund_give is None
-    assert zia_zia_membership._fund_take is None
+    assert sue_sue_membership.fund_give is None
+    assert sue_sue_membership.fund_take is None
+    assert bob_bob_membership.fund_give is None
+    assert bob_bob_membership.fund_take is None
+    assert zia_zia_membership.fund_give is None
+    assert zia_zia_membership.fund_take is None
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
-    assert sue_sue_membership._fund_give == 0.5 * default_fund_pool()
-    assert sue_sue_membership._fund_take == 0.8 * default_fund_pool()
-    assert bob_bob_membership._fund_give == 0.25 * default_fund_pool()
-    assert bob_bob_membership._fund_take == 0.1 * default_fund_pool()
-    assert zia_zia_membership._fund_give == 0.25 * default_fund_pool()
-    assert zia_zia_membership._fund_take == 0.1 * default_fund_pool()
+    assert sue_sue_membership.fund_give == 0.5 * default_fund_pool()
+    assert sue_sue_membership.fund_take == 0.8 * default_fund_pool()
+    assert bob_bob_membership.fund_give == 0.25 * default_fund_pool()
+    assert bob_bob_membership.fund_take == 0.1 * default_fund_pool()
+    assert zia_zia_membership.fund_give == 0.25 * default_fund_pool()
+    assert zia_zia_membership.fund_take == 0.1 * default_fund_pool()
 
     membership_cred_sum = (
-        sue_sue_membership._fund_give
-        + bob_bob_membership._fund_give
-        + zia_zia_membership._fund_give
+        sue_sue_membership.fund_give
+        + bob_bob_membership.fund_give
+        + zia_zia_membership.fund_give
     )
     assert membership_cred_sum == 1.0 * default_fund_pool()
     membership_debt_sum = (
-        sue_sue_membership._fund_take
-        + bob_bob_membership._fund_take
-        + zia_zia_membership._fund_take
+        sue_sue_membership.fund_take
+        + bob_bob_membership.fund_take
+        + zia_zia_membership.fund_take
     )
     assert membership_debt_sum == 1.0 * default_fund_pool()
 
@@ -807,28 +807,28 @@ def test_BeliefUnit_cash_out_SetsGroupLinkBeliefCredAndDebt():
     sue_sue_membership = sue_voiceunit.get_membership(sue_str)
     bob_bob_membership = bob_voiceunit.get_membership(bob_str)
     zia_zia_membership = zia_voiceunit.get_membership(zia_str)
-    assert sue_sue_membership._fund_give != 0.25 * default_fund_pool()
-    assert sue_sue_membership._fund_take != 0.8 * default_fund_pool()
-    assert bob_bob_membership._fund_give != 0.25 * default_fund_pool()
-    assert bob_bob_membership._fund_take != 0.1 * default_fund_pool()
-    assert zia_zia_membership._fund_give != 0.5 * default_fund_pool()
-    assert zia_zia_membership._fund_take != 0.1 * default_fund_pool()
-    assert xio_xio_membership._fund_give is not None
-    assert xio_xio_membership._fund_take is not None
+    assert sue_sue_membership.fund_give != 0.25 * default_fund_pool()
+    assert sue_sue_membership.fund_take != 0.8 * default_fund_pool()
+    assert bob_bob_membership.fund_give != 0.25 * default_fund_pool()
+    assert bob_bob_membership.fund_take != 0.1 * default_fund_pool()
+    assert zia_zia_membership.fund_give != 0.5 * default_fund_pool()
+    assert zia_zia_membership.fund_take != 0.1 * default_fund_pool()
+    assert xio_xio_membership.fund_give is not None
+    assert xio_xio_membership.fund_take is not None
 
     x_fund_give_sum = (
-        sue_sue_membership._fund_give
-        + bob_bob_membership._fund_give
-        + zia_zia_membership._fund_give
-        + xio_xio_membership._fund_give
+        sue_sue_membership.fund_give
+        + bob_bob_membership.fund_give
+        + zia_zia_membership.fund_give
+        + xio_xio_membership.fund_give
     )
     print(f"{x_fund_give_sum=}")
     assert x_fund_give_sum == 1.0 * default_fund_pool()
     x_fund_take_sum = (
-        sue_sue_membership._fund_take
-        + bob_bob_membership._fund_take
-        + zia_zia_membership._fund_take
-        + xio_xio_membership._fund_take
+        sue_sue_membership.fund_take
+        + bob_bob_membership.fund_take
+        + zia_zia_membership.fund_take
+        + xio_xio_membership.fund_take
     )
     assert x_fund_take_sum == 1.0 * default_fund_pool()
 
@@ -856,30 +856,30 @@ def test_BeliefUnit_cash_out_SetsVoiceUnitBelief_fund():
     bob_voiceunit = yao_belief.get_voice(bob_str)
     zia_voiceunit = yao_belief.get_voice(zia_str)
 
-    assert sue_voiceunit._fund_give == 0
-    assert sue_voiceunit._fund_take == 0
-    assert bob_voiceunit._fund_give == 0
-    assert bob_voiceunit._fund_take == 0
-    assert zia_voiceunit._fund_give == 0
-    assert zia_voiceunit._fund_take == 0
+    assert sue_voiceunit.fund_give == 0
+    assert sue_voiceunit.fund_take == 0
+    assert bob_voiceunit.fund_give == 0
+    assert bob_voiceunit.fund_take == 0
+    assert zia_voiceunit.fund_give == 0
+    assert zia_voiceunit.fund_take == 0
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
-    assert sue_voiceunit._fund_give == 0.5 * default_fund_pool()
-    assert sue_voiceunit._fund_take == 0.8 * default_fund_pool()
-    assert bob_voiceunit._fund_give == 0.25 * default_fund_pool()
-    assert bob_voiceunit._fund_take == 0.1 * default_fund_pool()
-    assert zia_voiceunit._fund_give == 0.25 * default_fund_pool()
-    assert zia_voiceunit._fund_take == 0.1 * default_fund_pool()
+    assert sue_voiceunit.fund_give == 0.5 * default_fund_pool()
+    assert sue_voiceunit.fund_take == 0.8 * default_fund_pool()
+    assert bob_voiceunit.fund_give == 0.25 * default_fund_pool()
+    assert bob_voiceunit.fund_take == 0.1 * default_fund_pool()
+    assert zia_voiceunit.fund_give == 0.25 * default_fund_pool()
+    assert zia_voiceunit.fund_take == 0.1 * default_fund_pool()
 
     assert (
-        sue_voiceunit._fund_give + bob_voiceunit._fund_give + zia_voiceunit._fund_give
+        sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_voiceunit._fund_take + bob_voiceunit._fund_take + zia_voiceunit._fund_take
+        sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
         == 1.0 * default_fund_pool()
     )
 
@@ -892,35 +892,35 @@ def test_BeliefUnit_cash_out_SetsVoiceUnitBelief_fund():
     # THEN
     xio_voiceunit = yao_belief.get_voice(xio_str)
 
-    assert sue_voiceunit._fund_give != 0.5 * default_fund_pool()
-    assert sue_voiceunit._fund_take != 0.8 * default_fund_pool()
-    assert bob_voiceunit._fund_give != 0.25 * default_fund_pool()
-    assert bob_voiceunit._fund_take != 0.1 * default_fund_pool()
-    assert zia_voiceunit._fund_give != 0.25 * default_fund_pool()
-    assert zia_voiceunit._fund_take != 0.1 * default_fund_pool()
-    assert xio_voiceunit._fund_give is not None
-    assert xio_voiceunit._fund_take is not None
+    assert sue_voiceunit.fund_give != 0.5 * default_fund_pool()
+    assert sue_voiceunit.fund_take != 0.8 * default_fund_pool()
+    assert bob_voiceunit.fund_give != 0.25 * default_fund_pool()
+    assert bob_voiceunit.fund_take != 0.1 * default_fund_pool()
+    assert zia_voiceunit.fund_give != 0.25 * default_fund_pool()
+    assert zia_voiceunit.fund_take != 0.1 * default_fund_pool()
+    assert xio_voiceunit.fund_give is not None
+    assert xio_voiceunit.fund_take is not None
 
     sum_voiceunit_fund_give = (
-        sue_voiceunit._fund_give + bob_voiceunit._fund_give + zia_voiceunit._fund_give
+        sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
     )
     assert sum_voiceunit_fund_give < 1.0 * default_fund_pool()
     assert (
-        sue_voiceunit._fund_give
-        + bob_voiceunit._fund_give
-        + zia_voiceunit._fund_give
-        + xio_voiceunit._fund_give
+        sue_voiceunit.fund_give
+        + bob_voiceunit.fund_give
+        + zia_voiceunit.fund_give
+        + xio_voiceunit.fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_voiceunit._fund_take + bob_voiceunit._fund_take + zia_voiceunit._fund_take
+        sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
         < 1.0 * default_fund_pool()
     )
     assert (
-        sue_voiceunit._fund_take
-        + bob_voiceunit._fund_take
-        + zia_voiceunit._fund_take
-        + xio_voiceunit._fund_take
+        sue_voiceunit.fund_take
+        + bob_voiceunit.fund_take
+        + zia_voiceunit.fund_take
+        + xio_voiceunit.fund_take
         == 1.0 * default_fund_pool()
     )
 
@@ -956,18 +956,18 @@ def test_BeliefUnit_cash_out_SetsPartGroupedLWVoiceUnitBelief_fund():
     sue_groupunit = yao_belief.get_groupunit(sue_str)
     bob_groupunit = yao_belief.get_groupunit(bob_str)
     zia_groupunit = yao_belief.get_groupunit(zia_str)
-    assert sue_groupunit._fund_give != 0.5 * default_fund_pool()
-    assert sue_groupunit._fund_take != 0.8 * default_fund_pool()
-    assert bob_groupunit._fund_give != 0.25 * default_fund_pool()
-    assert bob_groupunit._fund_take != 0.1 * default_fund_pool()
-    assert zia_groupunit._fund_give != 0.25 * default_fund_pool()
-    assert zia_groupunit._fund_take != 0.1 * default_fund_pool()
+    assert sue_groupunit.fund_give != 0.5 * default_fund_pool()
+    assert sue_groupunit.fund_take != 0.8 * default_fund_pool()
+    assert bob_groupunit.fund_give != 0.25 * default_fund_pool()
+    assert bob_groupunit.fund_take != 0.1 * default_fund_pool()
+    assert zia_groupunit.fund_give != 0.25 * default_fund_pool()
+    assert zia_groupunit.fund_take != 0.1 * default_fund_pool()
     assert (
-        sue_groupunit._fund_give + bob_groupunit._fund_give + zia_groupunit._fund_give
+        sue_groupunit.fund_give + bob_groupunit.fund_give + zia_groupunit.fund_give
         == 0.25 * default_fund_pool()
     )
     assert (
-        sue_groupunit._fund_take + bob_groupunit._fund_take + zia_groupunit._fund_take
+        sue_groupunit.fund_take + bob_groupunit.fund_take + zia_groupunit.fund_take
         == 0.25 * default_fund_pool()
     )
 
@@ -975,19 +975,19 @@ def test_BeliefUnit_cash_out_SetsPartGroupedLWVoiceUnitBelief_fund():
     bob_voiceunit = yao_belief.get_voice(bob_str)
     zia_voiceunit = yao_belief.get_voice(zia_str)
 
-    assert sue_voiceunit._fund_give == 0.375 * default_fund_pool()
-    assert sue_voiceunit._fund_take == 0.45 * default_fund_pool()
-    assert bob_voiceunit._fund_give == 0.3125 * default_fund_pool()
-    assert bob_voiceunit._fund_take == 0.275 * default_fund_pool()
-    assert zia_voiceunit._fund_give == 0.3125 * default_fund_pool()
-    assert zia_voiceunit._fund_take == 0.275 * default_fund_pool()
+    assert sue_voiceunit.fund_give == 0.375 * default_fund_pool()
+    assert sue_voiceunit.fund_take == 0.45 * default_fund_pool()
+    assert bob_voiceunit.fund_give == 0.3125 * default_fund_pool()
+    assert bob_voiceunit.fund_take == 0.275 * default_fund_pool()
+    assert zia_voiceunit.fund_give == 0.3125 * default_fund_pool()
+    assert zia_voiceunit.fund_take == 0.275 * default_fund_pool()
 
     assert (
-        sue_voiceunit._fund_give + bob_voiceunit._fund_give + zia_voiceunit._fund_give
+        sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
         == 1.0 * default_fund_pool()
     )
     assert (
-        sue_voiceunit._fund_take + bob_voiceunit._fund_take + zia_voiceunit._fund_take
+        sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
         == 1.0 * default_fund_pool()
     )
 
@@ -1025,8 +1025,8 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitAndSetsVoice_fund_give_fund_take
     assert not bob_belief.voice_exists(xio_str)
     yao_voiceunit = bob_belief.get_voice(yao_str)
     zia_voiceunit = bob_belief.get_voice(zia_str)
-    voiceunit_fund_give_sum = yao_voiceunit._fund_give + zia_voiceunit._fund_give
-    voiceunit_fund_take_sum = yao_voiceunit._fund_take + zia_voiceunit._fund_take
+    voiceunit_fund_give_sum = yao_voiceunit.fund_give + zia_voiceunit.fund_give
+    voiceunit_fund_take_sum = yao_voiceunit.fund_take + zia_voiceunit.fund_take
     assert voiceunit_fund_give_sum == default_fund_pool()
     assert voiceunit_fund_take_sum == default_fund_pool()
 
@@ -1044,23 +1044,23 @@ def test_BeliefUnit_cash_out_SetsVoiceUnit_fund_give_fund_take():
     sue_voiceunit = yao_belief.get_voice(sue_str)
     bob_voiceunit = yao_belief.get_voice(bob_str)
     zia_voiceunit = yao_belief.get_voice(zia_str)
-    assert sue_voiceunit._fund_give == 0
-    assert sue_voiceunit._fund_take == 0
-    assert bob_voiceunit._fund_give == 0
-    assert bob_voiceunit._fund_take == 0
-    assert zia_voiceunit._fund_give == 0
-    assert zia_voiceunit._fund_take == 0
+    assert sue_voiceunit.fund_give == 0
+    assert sue_voiceunit.fund_take == 0
+    assert bob_voiceunit.fund_give == 0
+    assert bob_voiceunit.fund_take == 0
+    assert zia_voiceunit.fund_give == 0
+    assert zia_voiceunit.fund_take == 0
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     fund_give_sum = (
-        sue_voiceunit._fund_give + bob_voiceunit._fund_give + zia_voiceunit._fund_give
+        sue_voiceunit.fund_give + bob_voiceunit.fund_give + zia_voiceunit.fund_give
     )
     assert fund_give_sum == 1.0 * default_fund_pool()
     fund_take_sum = (
-        sue_voiceunit._fund_take + bob_voiceunit._fund_take + zia_voiceunit._fund_take
+        sue_voiceunit.fund_take + bob_voiceunit.fund_take + zia_voiceunit.fund_take
     )
     assert fund_take_sum == 1.0 * default_fund_pool()
 
@@ -1070,7 +1070,7 @@ def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
     for groupunit_x in x_belief._groupunits.values():
         groupunit_x.clear_fund_give_take()
         # for membership_x in groupunit_x._voices.values():
-        #     print(f"{groupunit_x.} {membership_x.}  {membership_x._fund_give:.6f} {membership_x.voice_debt_points=} {membership__fund_take:t:.6f} {membership_x.} ")
+        #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_points=} {membership_fund_take:t:.6f} {membership_x.} ")
 
     # delete belief_agenda_debt and belief_agenda_cred
     for x_voiceunit in x_belief.voices.values():
@@ -1087,11 +1087,11 @@ class GroupAgendaMetrics:
 
     def set_sums(self, x_belief: BeliefUnit):
         for x_groupunit in x_belief._groupunits.values():
-            self.sum_groupunit_give += x_groupunit._fund_agenda_give
-            self.sum_groupunit_take += x_groupunit._fund_agenda_take
+            self.sum_groupunit_give += x_groupunit.fund_agenda_give
+            self.sum_groupunit_take += x_groupunit.fund_agenda_take
             for membership_x in x_groupunit._memberships.values():
-                self.sum_membership_cred += membership_x._fund_agenda_give
-                self.sum_membership_debt += membership_x._fund_agenda_take
+                self.sum_membership_cred += membership_x.fund_agenda_give
+                self.sum_membership_debt += membership_x.fund_agenda_take
                 self.membership_count += 1
 
 
@@ -1104,10 +1104,10 @@ class AcclabelendaMetrics:
 
     def set_sums(self, x_belief: BeliefUnit):
         for voiceunit in x_belief.voices.values():
-            self.sum_agenda_cred += voiceunit._fund_agenda_give
-            self.sum_agenda_debt += voiceunit._fund_agenda_take
-            self.sum_agenda_ratio_cred += voiceunit._fund_agenda_ratio_give
-            self.sum_agenda_ratio_debt += voiceunit._fund_agenda_ratio_take
+            self.sum_agenda_cred += voiceunit.fund_agenda_give
+            self.sum_agenda_debt += voiceunit.fund_agenda_take
+            self.sum_agenda_ratio_cred += voiceunit.fund_agenda_ratio_give
+            self.sum_agenda_ratio_debt += voiceunit.fund_agenda_ratio_take
 
 
 @dataclass
@@ -1226,10 +1226,10 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
 def all_voiceunits_have_legitimate_values(x_belief: BeliefUnit):
     return not any(
         (
-            voiceunit._fund_give is None
-            or voiceunit._fund_give in [0.25, 0.5]
-            or voiceunit._fund_take is None
-            or voiceunit._fund_take in [0.8, 0.1]
+            voiceunit.fund_give is None
+            or voiceunit.fund_give in [0.25, 0.5]
+            or voiceunit.fund_take is None
+            or voiceunit.fund_take in [0.8, 0.1]
         )
         for voiceunit in x_belief.voices.values()
     )
@@ -1256,54 +1256,54 @@ def test_BeliefUnit_cash_out_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_r
     bob_voice = yao_belief.get_voice(bob_str)
     zia_voice = yao_belief.get_voice(zia_str)
 
-    assert not sue_voice._fund_give
-    assert not sue_voice._fund_take
-    assert not bob_voice._fund_give
-    assert not bob_voice._fund_take
-    assert not zia_voice._fund_give
-    assert not zia_voice._fund_take
-    assert not sue_voice._fund_agenda_give
-    assert not sue_voice._fund_agenda_take
-    assert not bob_voice._fund_agenda_give
-    assert not bob_voice._fund_agenda_take
-    assert not zia_voice._fund_agenda_give
-    assert not zia_voice._fund_agenda_take
-    assert not sue_voice._fund_agenda_ratio_give
-    assert not sue_voice._fund_agenda_ratio_take
-    assert not bob_voice._fund_agenda_ratio_give
-    assert not bob_voice._fund_agenda_ratio_take
-    assert not zia_voice._fund_agenda_ratio_give
-    assert not zia_voice._fund_agenda_ratio_take
+    assert not sue_voice.fund_give
+    assert not sue_voice.fund_take
+    assert not bob_voice.fund_give
+    assert not bob_voice.fund_take
+    assert not zia_voice.fund_give
+    assert not zia_voice.fund_take
+    assert not sue_voice.fund_agenda_give
+    assert not sue_voice.fund_agenda_take
+    assert not bob_voice.fund_agenda_give
+    assert not bob_voice.fund_agenda_take
+    assert not zia_voice.fund_agenda_give
+    assert not zia_voice.fund_agenda_take
+    assert not sue_voice.fund_agenda_ratio_give
+    assert not sue_voice.fund_agenda_ratio_take
+    assert not bob_voice.fund_agenda_ratio_give
+    assert not bob_voice.fund_agenda_ratio_take
+    assert not zia_voice.fund_agenda_ratio_give
+    assert not zia_voice.fund_agenda_ratio_take
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     assert yao_belief._reason_contexts == set()
-    assert sue_voice._fund_give == 50000000
-    assert sue_voice._fund_take == 200000000
-    assert bob_voice._fund_give == 150000000
-    assert bob_voice._fund_take == 300000000
-    assert zia_voice._fund_give == 800000000
-    assert zia_voice._fund_take == 500000000
-    assert sue_voice._fund_agenda_give == 50000000
-    assert sue_voice._fund_agenda_take == 200000000
-    assert bob_voice._fund_agenda_give == 150000000
-    assert bob_voice._fund_agenda_take == 300000000
-    assert zia_voice._fund_agenda_give == 800000000
-    assert zia_voice._fund_agenda_take == 500000000
-    assert sue_voice._fund_agenda_give == sue_voice._fund_give
-    assert sue_voice._fund_agenda_take == sue_voice._fund_take
-    assert bob_voice._fund_agenda_give == bob_voice._fund_give
-    assert bob_voice._fund_agenda_take == bob_voice._fund_take
-    assert zia_voice._fund_agenda_give == zia_voice._fund_give
-    assert zia_voice._fund_agenda_take == zia_voice._fund_take
-    assert sue_voice._fund_agenda_ratio_give == 0.05
-    assert sue_voice._fund_agenda_ratio_take == 0.2
-    assert bob_voice._fund_agenda_ratio_give == 0.15
-    assert bob_voice._fund_agenda_ratio_take == 0.3
-    assert zia_voice._fund_agenda_ratio_give == 0.8
-    assert zia_voice._fund_agenda_ratio_take == 0.5
+    assert sue_voice.fund_give == 50000000
+    assert sue_voice.fund_take == 200000000
+    assert bob_voice.fund_give == 150000000
+    assert bob_voice.fund_take == 300000000
+    assert zia_voice.fund_give == 800000000
+    assert zia_voice.fund_take == 500000000
+    assert sue_voice.fund_agenda_give == 50000000
+    assert sue_voice.fund_agenda_take == 200000000
+    assert bob_voice.fund_agenda_give == 150000000
+    assert bob_voice.fund_agenda_take == 300000000
+    assert zia_voice.fund_agenda_give == 800000000
+    assert zia_voice.fund_agenda_take == 500000000
+    assert sue_voice.fund_agenda_give == sue_voice.fund_give
+    assert sue_voice.fund_agenda_take == sue_voice.fund_take
+    assert bob_voice.fund_agenda_give == bob_voice.fund_give
+    assert bob_voice.fund_agenda_take == bob_voice.fund_take
+    assert zia_voice.fund_agenda_give == zia_voice.fund_give
+    assert zia_voice.fund_agenda_take == zia_voice.fund_take
+    assert sue_voice.fund_agenda_ratio_give == 0.05
+    assert sue_voice.fund_agenda_ratio_take == 0.2
+    assert bob_voice.fund_agenda_ratio_give == 0.15
+    assert bob_voice.fund_agenda_ratio_take == 0.3
+    assert zia_voice.fund_agenda_ratio_give == 0.8
+    assert zia_voice.fund_agenda_ratio_take == 0.5
 
 
 def test_BeliefUnit_cash_out_CreatesGroupUnitWith_beliefunit_v001():

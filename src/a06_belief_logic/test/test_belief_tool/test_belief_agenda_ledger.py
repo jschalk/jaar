@@ -39,10 +39,10 @@ def test_get_belief_voice_agenda_award_array_ReturnsObj_ScenarioMultipleVoiceUni
     sue_belief.add_voiceunit(yao_str)
     sue_belief.add_voiceunit(bob_str)
     sue_belief.add_voiceunit(zia_str)
-    sue_belief.get_voice(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_belief.get_voice(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_belief.get_voice(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_belief.get_voice(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_belief.get_voice(yao_str).fund_agenda_give = yao_fund_agenda_give
+    sue_belief.get_voice(yao_str).fund_agenda_take = yao_fund_agenda_take
+    sue_belief.get_voice(bob_str).fund_agenda_give = bob_fund_agenda_give
+    sue_belief.get_voice(bob_str).fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
     belief_voice_agenda_award_array = get_belief_voice_agenda_award_array(sue_belief)
@@ -74,10 +74,10 @@ def test_get_belief_voice_agenda_award_csv_ReturnsObj_ScenarioMultipleVoiceUnit(
     sue_belief.add_voiceunit(yao_str)
     sue_belief.add_voiceunit(bob_str)
     sue_belief.add_voiceunit(zia_str)
-    sue_belief.get_voice(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_belief.get_voice(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_belief.get_voice(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_belief.get_voice(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_belief.get_voice(yao_str).fund_agenda_give = yao_fund_agenda_give
+    sue_belief.get_voice(yao_str).fund_agenda_take = yao_fund_agenda_take
+    sue_belief.get_voice(bob_str).fund_agenda_give = bob_fund_agenda_give
+    sue_belief.get_voice(bob_str).fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
     belief_voice_agenda_award_csv_str = get_belief_voice_agenda_award_csv(sue_belief)
@@ -146,10 +146,10 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario0_MultipleVoiceUnit():
     sue_belief.add_voiceunit(yao_str)
     sue_belief.add_voiceunit(bob_str)
     sue_belief.add_voiceunit(zia_str)
-    sue_belief.get_voice(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_belief.get_voice(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_belief.get_voice(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_belief.get_voice(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_belief.get_voice(yao_str).fund_agenda_give = yao_fund_agenda_give
+    sue_belief.get_voice(yao_str).fund_agenda_take = yao_fund_agenda_take
+    sue_belief.get_voice(bob_str).fund_agenda_give = bob_fund_agenda_give
+    sue_belief.get_voice(bob_str).fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
     belief_bud_net_dict = get_voice_mandate_ledger(sue_belief)
@@ -308,10 +308,10 @@ def test_get_voice_agenda_net_ledger_ReturnsObj_ScenarioMultipleVoiceUnit():
     sue_belief.add_voiceunit(yao_str)
     sue_belief.add_voiceunit(bob_str)
     sue_belief.add_voiceunit(zia_str)
-    sue_belief.get_voice(yao_str)._fund_agenda_give = yao_fund_agenda_give
-    sue_belief.get_voice(yao_str)._fund_agenda_take = yao_fund_agenda_take
-    sue_belief.get_voice(bob_str)._fund_agenda_give = bob_fund_agenda_give
-    sue_belief.get_voice(bob_str)._fund_agenda_take = bob_fund_agenda_take
+    sue_belief.get_voice(yao_str).fund_agenda_give = yao_fund_agenda_give
+    sue_belief.get_voice(yao_str).fund_agenda_take = yao_fund_agenda_take
+    sue_belief.get_voice(bob_str).fund_agenda_give = bob_fund_agenda_give
+    sue_belief.get_voice(bob_str).fund_agenda_take = bob_fund_agenda_take
 
     # WHEN
     belief_bud_net_dict = get_voice_agenda_net_ledger(sue_belief)

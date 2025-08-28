@@ -9,9 +9,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _chore_str,
     _descendant_task_count_str,
     _factheirs_str,
-    _fund_cease_str,
-    _fund_onset_str,
-    _fund_ratio_str,
     _gogo_calc_str,
     _healerunit_ratio_str,
     _is_expanded_str,
@@ -29,7 +26,10 @@ from src.a05_plan_logic.test._util.a05_str import (
     close_str,
     denom_str,
     factunits_str,
+    fund_cease_str,
     fund_iota_str,
+    fund_onset_str,
+    fund_ratio_str,
     fund_share_str,
     gogo_want_str,
     healerunit_str,
@@ -71,7 +71,7 @@ from src.a22_belief_viewer.example22_beliefs import (
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # ESTABLISH
     casa_plan = planunit_shop()
-    casa_plan._fund_ratio = 1
+    casa_plan.fund_ratio = 1
     assert casa_plan._kids == {}
     print(f"{type(casa_plan)=}")
 
@@ -115,10 +115,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _awardlines_str(),
         _descendant_task_count_str(),
         _factheirs_str(),
-        _fund_ratio_str(),
+        fund_ratio_str(),
         fund_iota_str(),
-        _fund_onset_str(),
-        _fund_cease_str(),
+        fund_onset_str(),
+        fund_cease_str(),
         _healerunit_ratio_str(),
         _level_str(),
         _range_evaluated_str(),
@@ -215,7 +215,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     expected_all_voice_debt = add_small_dot(expected_all_voice_debt)
     assert casa_dict.get(_all_voice_cred_str()) == expected_all_voice_cred
     assert casa_dict.get(_all_voice_debt_str()) == expected_all_voice_debt
-    assert casa_dict.get(_fund_ratio_str()) == "38%"
+    assert casa_dict.get(fund_ratio_str()) == "38%"
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
@@ -516,7 +516,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     casa_plan.stop_want = casa_stop_want
     casa_plan._gogo_calc = casa_gogo_calc
     casa_plan._stop_calc = casa_stop_calc
-    casa_plan._fund_ratio = 0
+    casa_plan.fund_ratio = 0
 
     # WHEN
     casa_dict = get_plan_view_dict(casa_plan)
@@ -551,7 +551,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario9_numeric_range_attrs():
     casa_plan.denom = casa_denom
     casa_plan.morph = casa_morph
     casa_plan.numor = casa_numor
-    casa_plan._fund_ratio = 0
+    casa_plan.fund_ratio = 0
 
     # WHEN
     casa_dict = get_plan_view_dict(casa_plan)

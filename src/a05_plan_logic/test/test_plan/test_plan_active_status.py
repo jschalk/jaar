@@ -38,8 +38,8 @@ def test_PlanUnit_get_fund_share_ReturnsObj():
     assert texas_plan.get_fund_share() == 0
 
     # WHEN / THEN
-    texas_plan._fund_onset = 3
-    texas_plan._fund_cease = 14
+    texas_plan.fund_onset = 3
+    texas_plan.fund_cease = 14
     assert texas_plan.get_fund_share() == 11
 
 
@@ -107,25 +107,25 @@ def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():
     assert sport_plan.fund_iota == 1
     assert len(sport_plan._awardheirs) == 2
     swim_awardheir = sport_plan._awardheirs.get(swim_str)
-    assert not swim_awardheir._fund_give
-    assert not swim_awardheir._fund_take
+    assert not swim_awardheir.fund_give
+    assert not swim_awardheir.fund_take
     biker_awardheir = sport_plan._awardheirs.get(biker_str)
-    assert not biker_awardheir._fund_give
-    assert not biker_awardheir._fund_take
+    assert not biker_awardheir.fund_give
+    assert not biker_awardheir.fund_take
 
     # WHEN
-    sport_plan._fund_onset = 91
-    sport_plan._fund_cease = 820
+    sport_plan.fund_onset = 91
+    sport_plan.fund_cease = 820
     sport_plan.set_awardheirs_fund_give_fund_take()
 
     # THEN
     print(f"{len(sport_plan._awardheirs)=}")
     swim_awardheir = sport_plan._awardheirs.get(swim_str)
-    assert swim_awardheir._fund_give == 516
-    assert swim_awardheir._fund_take == 496
+    assert swim_awardheir.fund_give == 516
+    assert swim_awardheir.fund_take == 496
     biker_awardheir = sport_plan._awardheirs.get(biker_str)
-    assert biker_awardheir._fund_give == 213
-    assert biker_awardheir._fund_take == 233
+    assert biker_awardheir.fund_give == 213
+    assert biker_awardheir.fund_take == 233
 
 
 def test_PlanUnit_awardheir_exists_ReturnsObj():

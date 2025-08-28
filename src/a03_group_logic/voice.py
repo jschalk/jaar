@@ -55,12 +55,12 @@ class VoiceUnit(VoiceCore):
     _irrational_voice_debt_points: int = None  # set by listening process
     _inallocable_voice_debt_points: int = None  # set by listening process
     # set by Belief.cash_out()
-    _fund_give: float = None
-    _fund_take: float = None
-    _fund_agenda_give: float = None
-    _fund_agenda_take: float = None
-    _fund_agenda_ratio_give: float = None
-    _fund_agenda_ratio_take: float = None
+    fund_give: float = None
+    fund_take: float = None
+    fund_agenda_give: float = None
+    fund_agenda_take: float = None
+    fund_agenda_ratio_give: float = None
+    fund_agenda_ratio_take: float = None
 
     def set_respect_bit(self, x_respect_bit: float):
         self.respect_bit = x_respect_bit
@@ -88,12 +88,12 @@ class VoiceUnit(VoiceCore):
         return get_1_if_None(self.voice_debt_points)
 
     def clear_fund_give_take(self):
-        self._fund_give = 0
-        self._fund_take = 0
-        self._fund_agenda_give = 0
-        self._fund_agenda_take = 0
-        self._fund_agenda_ratio_give = 0
-        self._fund_agenda_ratio_take = 0
+        self.fund_give = 0
+        self.fund_take = 0
+        self.fund_agenda_give = 0
+        self.fund_agenda_take = 0
+        self.fund_agenda_ratio_give = 0
+        self.fund_agenda_ratio_take = 0
 
     def add_irrational_voice_debt_points(self, x_irrational_voice_debt_points: float):
         self._irrational_voice_debt_points += x_irrational_voice_debt_points
@@ -106,16 +106,16 @@ class VoiceUnit(VoiceCore):
         self._inallocable_voice_debt_points = 0
 
     def add_fund_give(self, fund_give: float):
-        self._fund_give += fund_give
+        self.fund_give += fund_give
 
     def add_fund_take(self, fund_take: float):
-        self._fund_take += fund_take
+        self.fund_take += fund_take
 
     def add_fund_agenda_give(self, fund_agenda_give: float):
-        self._fund_agenda_give += fund_agenda_give
+        self.fund_agenda_give += fund_agenda_give
 
     def add_fund_agenda_take(self, fund_agenda_take: float):
-        self._fund_agenda_take += fund_agenda_take
+        self.fund_agenda_take += fund_agenda_take
 
     def add_fund_give_take(
         self,
@@ -138,19 +138,19 @@ class VoiceUnit(VoiceCore):
     ):
         total_voice_cred_points = voiceunits_voice_cred_points_sum
         ratio_give_sum = fund_agenda_ratio_give_sum
-        self._fund_agenda_ratio_give = (
+        self.fund_agenda_ratio_give = (
             self.get_voice_cred_points() / total_voice_cred_points
             if fund_agenda_ratio_give_sum == 0
-            else self._fund_agenda_give / ratio_give_sum
+            else self.fund_agenda_give / ratio_give_sum
         )
         if fund_agenda_ratio_take_sum == 0:
             total_voice_debt_points = voiceunits_voice_debt_points_sum
-            self._fund_agenda_ratio_take = (
+            self.fund_agenda_ratio_take = (
                 self.get_voice_debt_points() / total_voice_debt_points
             )
         else:
             ratio_take_sum = fund_agenda_ratio_take_sum
-            self._fund_agenda_ratio_take = self._fund_agenda_take / ratio_take_sum
+            self.fund_agenda_ratio_take = self.fund_agenda_take / ratio_take_sum
 
     def add_membership(
         self,
@@ -234,12 +234,12 @@ class VoiceUnit(VoiceCore):
         return x_dict
 
     def _all_attrs_necessary_in_dict(self, x_dict):
-        x_dict["_fund_give"] = self._fund_give
-        x_dict["_fund_take"] = self._fund_take
-        x_dict["_fund_agenda_give"] = self._fund_agenda_give
-        x_dict["_fund_agenda_take"] = self._fund_agenda_take
-        x_dict["_fund_agenda_ratio_give"] = self._fund_agenda_ratio_give
-        x_dict["_fund_agenda_ratio_take"] = self._fund_agenda_ratio_take
+        x_dict["fund_give"] = self.fund_give
+        x_dict["fund_take"] = self.fund_take
+        x_dict["fund_agenda_give"] = self.fund_agenda_give
+        x_dict["fund_agenda_take"] = self.fund_agenda_take
+        x_dict["fund_agenda_ratio_give"] = self.fund_agenda_ratio_give
+        x_dict["fund_agenda_ratio_take"] = self.fund_agenda_ratio_take
 
 
 def voiceunits_get_from_json(voiceunits_json: str) -> dict[str, VoiceUnit]:
@@ -297,12 +297,12 @@ def voiceunit_shop(
         debtor_pool=0,
         _irrational_voice_debt_points=0,
         _inallocable_voice_debt_points=0,
-        _fund_give=0,
-        _fund_take=0,
-        _fund_agenda_give=0,
-        _fund_agenda_take=0,
-        _fund_agenda_ratio_give=0,
-        _fund_agenda_ratio_take=0,
+        fund_give=0,
+        fund_take=0,
+        fund_agenda_give=0,
+        fund_agenda_take=0,
+        fund_agenda_ratio_give=0,
+        fund_agenda_ratio_take=0,
         knot=default_knot_if_None(knot),
         respect_bit=default_RespectBit_if_None(respect_bit),
     )

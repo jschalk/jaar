@@ -16,9 +16,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _awardlines_str,
     _descendant_task_count_str,
     _factheirs_str,
-    _fund_cease_str,
-    _fund_onset_str,
-    _fund_ratio_str,
     _gogo_calc_str,
     _healerunit_ratio_str,
     _is_expanded_str,
@@ -35,7 +32,10 @@ from src.a05_plan_logic.test._util.a05_str import (
     close_str,
     denom_str,
     factunits_str,
+    fund_cease_str,
     fund_iota_str,
+    fund_onset_str,
+    fund_ratio_str,
     gogo_want_str,
     healerunit_str,
     knot_str,
@@ -98,10 +98,10 @@ def test_PlanUnit_Exists():
     assert x_planunit._all_voice_debt is None
     assert x_planunit._level is None
     assert x_planunit._active_hx is None
-    assert x_planunit._fund_ratio is None
+    assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota is None
-    assert x_planunit._fund_onset is None
-    assert x_planunit._fund_cease is None
+    assert x_planunit.fund_onset is None
+    assert x_planunit.fund_cease is None
     assert x_planunit.root is None
     assert x_planunit.moment_label is None
     assert x_planunit._healerunit_ratio is None
@@ -116,9 +116,9 @@ def test_PlanUnit_Exists():
         _awardlines_str(),
         _descendant_task_count_str(),
         _factheirs_str(),
-        _fund_cease_str(),
-        _fund_onset_str(),
-        _fund_ratio_str(),
+        fund_cease_str(),
+        fund_onset_str(),
+        fund_ratio_str(),
         _gogo_calc_str(),
         _healerunit_ratio_str(),
         _is_expanded_str(),
@@ -186,10 +186,10 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit._stop_calc is None
     assert x_planunit._level is None
     assert x_planunit._active_hx == {}
-    assert x_planunit._fund_ratio is None
+    assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota == default_fund_iota_if_None()
-    assert x_planunit._fund_onset is None
-    assert x_planunit._fund_cease is None
+    assert x_planunit.fund_onset is None
+    assert x_planunit.fund_cease is None
     assert x_planunit.reasonunits == {}
     assert x_planunit._reasonheirs == {}
     assert x_planunit.laborunit == laborunit_shop()

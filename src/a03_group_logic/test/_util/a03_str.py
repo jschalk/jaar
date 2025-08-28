@@ -2,30 +2,6 @@ from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 
 
-def _fund_agenda_give_str() -> str:
-    return "_fund_agenda_give"
-
-
-def _fund_agenda_ratio_give_str() -> str:
-    return "_fund_agenda_ratio_give"
-
-
-def _fund_agenda_ratio_take_str() -> str:
-    return "_fund_agenda_ratio_take"
-
-
-def _fund_agenda_take_str() -> str:
-    return "_fund_agenda_take"
-
-
-def _fund_give_str() -> str:
-    return "_fund_give"
-
-
-def _fund_take_str() -> str:
-    return "_fund_take"
-
-
 def _groupunits_str() -> str:
     return "_groupunits"
 
@@ -68,6 +44,22 @@ def credor_pool_str() -> str:
 
 def debtor_pool_str() -> str:
     return "debtor_pool"
+
+
+def fund_agenda_give_str() -> str:
+    return "fund_agenda_give"
+
+
+def fund_agenda_ratio_give_str() -> str:
+    return "fund_agenda_ratio_give"
+
+
+def fund_agenda_ratio_take_str() -> str:
+    return "fund_agenda_ratio_take"
+
+
+def fund_agenda_take_str() -> str:
+    return "fund_agenda_take"
 
 
 def fund_give_str() -> str:

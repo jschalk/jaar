@@ -6,9 +6,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _awardlines_str,
     _descendant_task_count_str,
     _factheirs_str,
-    _fund_cease_str,
-    _fund_onset_str,
-    _fund_ratio_str,
     _gogo_calc_str,
     _healerunit_ratio_str,
     _is_expanded_str,
@@ -22,6 +19,9 @@ from src.a05_plan_logic.test._util.a05_str import (
     begin_str,
     close_str,
     denom_str,
+    fund_cease_str,
+    fund_onset_str,
+    fund_ratio_str,
     fund_share_str,
     gogo_want_str,
     healer_name_str,
@@ -46,9 +46,9 @@ def test_str_functions_ReturnsObj():
     assert _awardlines_str() == "_awardlines"
     assert _descendant_task_count_str() == "_descendant_task_count"
     assert _factheirs_str() == "_factheirs"
-    assert _fund_cease_str() == "_fund_cease"
-    assert _fund_onset_str() == "_fund_onset"
-    assert _fund_ratio_str() == "_fund_ratio"
+    assert fund_cease_str() == "fund_cease"
+    assert fund_onset_str() == "fund_onset"
+    assert fund_ratio_str() == "fund_ratio"
     assert _gogo_calc_str() == "_gogo_calc"
     assert _healerunit_ratio_str() == "_healerunit_ratio"
     assert _is_expanded_str() == "_is_expanded"

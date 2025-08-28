@@ -202,8 +202,8 @@ def get_belief_voice_agenda_award_array(
     x_list = [
         [
             x_voice.voice_name,
-            x_voice._fund_agenda_take,
-            x_voice._fund_agenda_give,
+            x_voice.fund_agenda_take,
+            x_voice.fund_agenda_give,
         ]
         for x_voice in x_belief.voices.values()
     ]
@@ -231,7 +231,7 @@ def get_voice_mandate_ledger(
         x_belief.cash_out()
     belief_voices = x_belief.voices.values()
     mandates = {
-        x_voice.voice_name: x_voice._fund_agenda_give for x_voice in belief_voices
+        x_voice.voice_name: x_voice.fund_agenda_give for x_voice in belief_voices
     }
     mandate_sum = sum(mandates.values())
     if mandate_sum == 0:
@@ -260,7 +260,7 @@ def get_voice_agenda_net_ledger(
 
     x_dict = {}
     for x_voice in x_belief.voices.values():
-        settle_net = get_net(x_voice._fund_agenda_give, x_voice._fund_agenda_take)
+        settle_net = get_net(x_voice.fund_agenda_give, x_voice.fund_agenda_take)
         if settle_net != 0:
             x_dict[x_voice.voice_name] = settle_net
     return x_dict

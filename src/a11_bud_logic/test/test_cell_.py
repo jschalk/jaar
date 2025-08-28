@@ -884,7 +884,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     }
     # plan_dict = sue_cell.beliefadjust.get_plan_dict()
     # for plan_rope, plan_obj in plan_dict.items():
-    #     print(f"{plan_rope=} {plan_obj._fund_onset=} {plan_obj._fund_cease}")
+    #     print(f"{plan_rope=} {plan_obj.fund_onset=} {plan_obj.fund_cease}")
     assert sue_cell._voice_mandate_ledger != {}
     assert sue_cell._voice_mandate_ledger == {yao_str: 311, sue_str: 133}
 
@@ -1081,7 +1081,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     }
     # plan_dict = sue_cell.beliefadjust.get_plan_dict()
     # for plan_rope, plan_obj in plan_dict.items():
-    #     print(f"{plan_rope=} {plan_obj._fund_onset=} {plan_obj._fund_cease}")
+    #     print(f"{plan_rope=} {plan_obj.fund_onset=} {plan_obj.fund_cease}")
     assert sue_cell._voice_mandate_ledger != {}
     assert sue_cell._voice_mandate_ledger == {yao_str: 311, sue_str: 133}
 

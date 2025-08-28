@@ -47,12 +47,12 @@ def test_get_moment_guts_voices_dataframe_ReturnsObj(
         voice_cred_points_str(),
         voice_debt_points_str(),
         "_memberships",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -91,12 +91,12 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
         voice_cred_points_str(),
         voice_debt_points_str(),
         "_memberships",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
         "_inallocable_voice_debt_points",
     }
     print(f"{set(x_df.columns)=}")

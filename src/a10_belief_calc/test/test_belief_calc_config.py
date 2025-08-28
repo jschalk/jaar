@@ -4,17 +4,15 @@ from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a03_group_logic.test._util.a03_str import (
-    _fund_agenda_give_str,
-    _fund_agenda_ratio_give_str,
-    _fund_agenda_ratio_take_str,
-    _fund_agenda_take_str,
-    _fund_give_str,
-    _fund_take_str,
     _inallocable_voice_debt_points_str,
     _irrational_voice_debt_points_str,
     awardee_title_str,
     credor_pool_str,
     debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
     fund_give_str,
     fund_take_str,
     give_force_str,
@@ -47,13 +45,13 @@ from src.a05_plan_logic.test._util.a05_str import (
     _all_voice_cred_str,
     _all_voice_debt_str,
     _descendant_task_count_str,
-    _fund_cease_str,
-    _fund_onset_str,
-    _fund_ratio_str,
     _gogo_calc_str,
     _healerunit_ratio_str,
     _range_evaluated_str,
     _stop_calc_str,
+    fund_cease_str,
+    fund_onset_str,
+    fund_ratio_str,
     problem_bool_str,
     star_str,
     task_str,
@@ -249,23 +247,23 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "debtor_pool",
         "_irrational_voice_debt_points",
         "_inallocable_voice_debt_points",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
     }
     assert expected_blrpern_jmetrics_keys == blrpern_jmetrics_keys
     expected_blrmemb_jmetrics_keys = {
         "credor_pool",
         "debtor_pool",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
     }
     assert expected_blrmemb_jmetrics_keys == blrmemb_jmetrics_keys
     expected_blrplan_jmetrics_keys = {
@@ -273,10 +271,10 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_all_voice_cred",
         "_all_voice_debt",
         "_descendant_task_count",
-        "_fund_ratio",
+        "fund_ratio",
         "fund_iota",
-        "_fund_onset",
-        "_fund_cease",
+        "fund_onset",
+        "fund_cease",
         "_healerunit_ratio",
         "_level",
         "_range_evaluated",
@@ -285,7 +283,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_stop_calc",
     }
     assert expected_blrplan_jmetrics_keys == blrplan_jmetrics_keys
-    expected_blrawar_jmetrics_keys = {"_fund_give", "_fund_take"}
+    expected_blrawar_jmetrics_keys = {"fund_give", "fund_take"}
     assert expected_blrawar_jmetrics_keys == blrawar_jmetrics_keys
     expected_blrreas_jmetrics_keys = {
         "_status",
@@ -298,10 +296,10 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_blrlabo_jmetrics_keys = {"_belief_name_is_labor"}
     assert expected_blrlabo_jmetrics_keys == blrlabo_jmetrics_keys
     expected_blrgrou_jmetrics_keys = {
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
         "credor_pool",
         "debtor_pool",
         "fund_iota",
@@ -359,8 +357,8 @@ def test_get_all_belief_calc_args_ReturnsObj():
     assert all_belief_calc_args
     assert stop_want_str() in all_belief_calc_args
     assert plan_rope_str() in all_belief_calc_args
-    assert "_fund_give" in all_belief_calc_args
-    assert all_belief_calc_args.get("_fund_give") == {
+    assert "fund_give" in all_belief_calc_args
+    assert all_belief_calc_args.get("fund_give") == {
         "belief_plan_awardunit",
         "belief_voice_membership",
         "belief_groupunit",
@@ -370,7 +368,7 @@ def test_get_all_belief_calc_args_ReturnsObj():
     # belief_calc_config = get_belief_calc_config_dict()
     # belief_voiceunit_aspects = belief_calc_config.get("belief_voiceunit")
     # blrpern_jmetrics_dict = belief_voiceunit_aspects.get("jmetrics")
-    # rope_belief_calc_aspects = blrpern_jmetrics_dict.get("_fund_give")
+    # rope_belief_calc_aspects = blrpern_jmetrics_dict.get("fund_give")
     # assert belief_plan_factunit_str() in rope_belief_calc_aspects
     # assert belief_plan_partyunit_str() in rope_belief_calc_aspects
     # assert len(rope_belief_calc_aspects) == 6
@@ -430,17 +428,17 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
     assert belief_voiceunit_args == {
         moment_label_str(),
         belief_name_str(),
-        "_fund_agenda_give",
+        "fund_agenda_give",
         "credor_pool",
-        "_fund_give",
+        "fund_give",
         voice_cred_points_str(),
         voice_name_str(),
         voice_debt_points_str(),
-        "_fund_agenda_ratio_take",
+        "fund_agenda_ratio_take",
         "_inallocable_voice_debt_points",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_take",
-        "_fund_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_take",
+        "fund_take",
         "debtor_pool",
         "_irrational_voice_debt_points",
     }
@@ -458,8 +456,8 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         "_gogo_calc",
         "_stop_calc",
         "_active",
-        "_fund_onset",
-        "_fund_cease",
+        "fund_onset",
+        "fund_cease",
         "_descendant_task_count",
         "_all_voice_cred",
         "_all_voice_debt",
@@ -467,7 +465,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         "_level",
         "_chore",
         "fund_iota",
-        "_fund_ratio",
+        "fund_ratio",
         "_range_evaluated",
         "problem_bool",
         gogo_want_str(),
@@ -479,12 +477,12 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         belief_name_str(),
         "debtor_pool",
         "credor_pool",
-        "_fund_give",
+        "fund_give",
         "group_title",
         "knot",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_take",
         "fund_iota",
     }
 
@@ -547,18 +545,18 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrmemb, jm, credor_pool_str()) == "REAL"
     assert g_class_type(cfig, blrmemb, jm, debtor_pool_str()) == "float"
     assert g_sqlitetype(cfig, blrmemb, jm, debtor_pool_str()) == "REAL"
-    assert g_class_type(cfig, blrmemb, jm, _fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, _fund_agenda_give_str()) == "REAL"
-    assert g_class_type(cfig, blrmemb, jm, _fund_agenda_ratio_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, _fund_agenda_ratio_give_str()) == "REAL"
-    assert g_class_type(cfig, blrmemb, jm, _fund_agenda_ratio_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, _fund_agenda_ratio_take_str()) == "REAL"
-    assert g_class_type(cfig, blrmemb, jm, _fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, _fund_agenda_take_str()) == "REAL"
-    assert g_class_type(cfig, blrmemb, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, blrmemb, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, blrmemb, jm, fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_give_str()) == "REAL"
+    assert g_class_type(cfig, blrmemb, jm, fund_agenda_ratio_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_ratio_give_str()) == "REAL"
+    assert g_class_type(cfig, blrmemb, jm, fund_agenda_ratio_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_ratio_take_str()) == "REAL"
+    assert g_class_type(cfig, blrmemb, jm, fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_take_str()) == "REAL"
+    assert g_class_type(cfig, blrmemb, jm, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jm, fund_give_str()) == "REAL"
+    assert g_class_type(cfig, blrmemb, jm, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jm, fund_take_str()) == "REAL"
     assert g_class_type(cfig, blrmemb, jv, group_cred_points_str()) == "float"
     assert g_sqlitetype(cfig, blrmemb, jv, group_cred_points_str()) == "REAL"
     assert g_class_type(cfig, blrmemb, jv, group_debt_points_str()) == "float"
@@ -569,18 +567,18 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrpern, jm, credor_pool_str()) == "REAL"
     assert g_class_type(cfig, blrpern, jm, debtor_pool_str()) == "float"
     assert g_sqlitetype(cfig, blrpern, jm, debtor_pool_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jm, _fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, _fund_agenda_give_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jm, _fund_agenda_ratio_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, _fund_agenda_ratio_give_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jm, _fund_agenda_ratio_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, _fund_agenda_ratio_take_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jm, _fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, _fund_agenda_take_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, blrpern, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jm, fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_give_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jm, fund_agenda_ratio_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_ratio_give_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jm, fund_agenda_ratio_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_ratio_take_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jm, fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_take_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jm, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jm, fund_give_str()) == "REAL"
+    assert g_class_type(cfig, blrpern, jm, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jm, fund_take_str()) == "REAL"
     assert (
         g_class_type(cfig, blrpern, jm, _inallocable_voice_debt_points_str()) == "float"
     )
@@ -606,14 +604,14 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrgrou, jm, debtor_pool_str()) == "REAL"
     assert g_class_type(cfig, blrgrou, jm, credor_pool_str()) == "float"
     assert g_sqlitetype(cfig, blrgrou, jm, credor_pool_str()) == "REAL"
-    assert g_class_type(cfig, blrgrou, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, blrgrou, jm, _fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, _fund_agenda_give_str()) == "REAL"
-    assert g_class_type(cfig, blrgrou, jm, _fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, _fund_agenda_take_str()) == "REAL"
-    assert g_class_type(cfig, blrgrou, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, blrgrou, jm, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jm, fund_give_str()) == "REAL"
+    assert g_class_type(cfig, blrgrou, jm, fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jm, fund_agenda_give_str()) == "REAL"
+    assert g_class_type(cfig, blrgrou, jm, fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jm, fund_agenda_take_str()) == "REAL"
+    assert g_class_type(cfig, blrgrou, jm, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jm, fund_take_str()) == "REAL"
     assert g_class_type(cfig, blrgrou, jm, fund_iota_str()) == "float"
     assert g_sqlitetype(cfig, blrgrou, jm, fund_iota_str()) == "REAL"
 
@@ -621,10 +619,10 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrawar, jk, awardee_title_str()) == "TEXT"
     assert g_class_type(cfig, blrawar, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrawar, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, blrawar, jm, _fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrawar, jm, _fund_give_str()) == "REAL"
-    assert g_class_type(cfig, blrawar, jm, _fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrawar, jm, _fund_take_str()) == "REAL"
+    assert g_class_type(cfig, blrawar, jm, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrawar, jm, fund_give_str()) == "REAL"
+    assert g_class_type(cfig, blrawar, jm, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrawar, jm, fund_take_str()) == "REAL"
     assert g_class_type(cfig, blrawar, jv, give_force_str()) == "float"
     assert g_sqlitetype(cfig, blrawar, jv, give_force_str()) == "REAL"
     assert g_class_type(cfig, blrawar, jv, take_force_str()) == "float"
@@ -685,14 +683,14 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jm, _all_voice_debt_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, _descendant_task_count_str()) == "int"
     assert g_sqlitetype(cfig, blrplan, jm, _descendant_task_count_str()) == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _fund_cease_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _fund_cease_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, fund_cease_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, fund_cease_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, fund_iota_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, fund_iota_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, _fund_onset_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _fund_onset_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, _fund_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _fund_ratio_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, fund_onset_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, fund_onset_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, fund_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, fund_ratio_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, _gogo_calc_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, _gogo_calc_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, _healerunit_ratio_str()) == "float"
@@ -829,12 +827,12 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(group_title_str()) == TitleTerm_str()
     assert belief_calc_args_type_dict.get(credor_pool_str()) == "float"
     assert belief_calc_args_type_dict.get(debtor_pool_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_agenda_give_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_agenda_ratio_give_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_agenda_ratio_take_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_agenda_take_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_give_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_take_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_agenda_give_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_agenda_ratio_give_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_agenda_ratio_take_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_agenda_take_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_give_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_take_str()) == "float"
     assert belief_calc_args_type_dict.get(group_cred_points_str()) == "int"
     assert belief_calc_args_type_dict.get(group_debt_points_str()) == "int"
     assert (
@@ -879,9 +877,9 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(_all_voice_cred_str()) == "int"
     assert belief_calc_args_type_dict.get(_all_voice_debt_str()) == "int"
     assert belief_calc_args_type_dict.get(_descendant_task_count_str()) == "int"
-    assert belief_calc_args_type_dict.get(_fund_cease_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_onset_str()) == "float"
-    assert belief_calc_args_type_dict.get(_fund_ratio_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_cease_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_onset_str()) == "float"
+    assert belief_calc_args_type_dict.get(fund_ratio_str()) == "float"
     assert belief_calc_args_type_dict.get(_gogo_calc_str()) == "float"
     assert belief_calc_args_type_dict.get("_healerunit_ratio") == "float"
     assert belief_calc_args_type_dict.get("_level") == "int"

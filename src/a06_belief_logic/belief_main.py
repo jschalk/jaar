@@ -302,8 +302,8 @@ class BeliefUnit:
     ):
         x_groupunit = self.get_groupunit(group_title)
         if x_groupunit is not None:
-            x_groupunit._fund_give += awardheir_fund_give
-            x_groupunit._fund_take += awardheir_fund_take
+            x_groupunit.fund_give += awardheir_fund_give
+            x_groupunit.fund_take += awardheir_fund_take
 
     def add_to_groupunit_fund_agenda_give_take(
         self,
@@ -313,8 +313,8 @@ class BeliefUnit:
     ):
         x_groupunit = self.get_groupunit(group_title)
         if awardline_fund_give is not None and awardline_fund_take is not None:
-            x_groupunit._fund_agenda_give += awardline_fund_give
-            x_groupunit._fund_agenda_take += awardline_fund_take
+            x_groupunit.fund_agenda_give += awardline_fund_give
+            x_groupunit.fund_agenda_take += awardline_fund_take
 
     def add_to_voiceunit_fund_give_take(
         self,
@@ -959,8 +959,8 @@ reason_case:    {reason_case}"""
                 self.set_groupunit(self.create_symmetry_groupunit(x_awardee_title))
             self.add_to_groupunit_fund_give_fund_take(
                 group_title=awardunit_obj.awardee_title,
-                awardheir_fund_give=awardunit_obj._fund_give,
-                awardheir_fund_take=awardunit_obj._fund_take,
+                awardheir_fund_give=awardunit_obj.fund_give,
+                awardheir_fund_take=awardunit_obj.fund_take,
             )
 
     def _allot_fund_belief_agenda(self):
@@ -974,8 +974,8 @@ reason_case:    {reason_case}"""
                     for x_awardline in plan._awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
                             group_title=x_awardline.awardee_title,
-                            awardline_fund_give=x_awardline._fund_give,
-                            awardline_fund_take=x_awardline._fund_take,
+                            awardline_fund_give=x_awardline.fund_give,
+                            awardline_fund_take=x_awardline.fund_take,
                         )
                 else:
                     self._add_to_voiceunits_fund_agenda_give_take(plan.get_fund_share())
@@ -986,18 +986,18 @@ reason_case:    {reason_case}"""
             for x_membership in x_groupunit._memberships.values():
                 self.add_to_voiceunit_fund_give_take(
                     voiceunit_voice_name=x_membership.voice_name,
-                    fund_give=x_membership._fund_give,
-                    fund_take=x_membership._fund_take,
-                    fund_agenda_give=x_membership._fund_agenda_give,
-                    fund_agenda_take=x_membership._fund_agenda_take,
+                    fund_give=x_membership.fund_give,
+                    fund_take=x_membership.fund_take,
+                    fund_agenda_give=x_membership.fund_agenda_give,
+                    fund_agenda_take=x_membership.fund_agenda_take,
                 )
 
     def _set_voiceunits_fund_agenda_ratios(self):
         fund_agenda_ratio_give_sum = sum(
-            x_voiceunit._fund_agenda_give for x_voiceunit in self.voices.values()
+            x_voiceunit.fund_agenda_give for x_voiceunit in self.voices.values()
         )
         fund_agenda_ratio_take_sum = sum(
-            x_voiceunit._fund_agenda_take for x_voiceunit in self.voices.values()
+            x_voiceunit.fund_agenda_take for x_voiceunit in self.voices.values()
         )
         x_voiceunits_voice_cred_points_sum = self.get_voiceunits_voice_cred_points_sum()
         x_voiceunits_voice_debt_points_sum = self.get_voiceunits_voice_debt_points_sum()
@@ -1285,14 +1285,14 @@ reason_case:    {reason_case}"""
             parent_plan = cache_plan_list.pop()
             kids_plans = parent_plan._kids.items()
             x_ledger = {x_rope: plan_kid.star for x_rope, plan_kid in kids_plans}
-            parent_fund_num = parent_plan._fund_cease - parent_plan._fund_onset
+            parent_fund_num = parent_plan.fund_cease - parent_plan.fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
 
             fund_onset = None
             fund_cease = None
             for x_plan in parent_plan._kids.values():
                 if fund_onset is None:
-                    fund_onset = parent_plan._fund_onset
+                    fund_onset = parent_plan.fund_onset
                     fund_cease = fund_onset + alloted_fund_num.get(x_plan.plan_label)
                 else:
                     fund_onset = fund_cease

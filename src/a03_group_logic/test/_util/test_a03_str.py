@@ -1,10 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _fund_agenda_give_str,
-    _fund_agenda_ratio_give_str,
-    _fund_agenda_ratio_take_str,
-    _fund_agenda_take_str,
-    _fund_give_str,
-    _fund_take_str,
     _groupunits_str,
     _inallocable_voice_debt_points_str,
     _irrational_voice_debt_points_str,
@@ -16,6 +10,10 @@ from src.a03_group_logic.test._util.a03_str import (
     belief_name_str,
     credor_pool_str,
     debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
     fund_give_str,
     fund_take_str,
     give_force_str,
@@ -37,12 +35,12 @@ def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert credor_pool_str() == "credor_pool"
     assert debtor_pool_str() == "debtor_pool"
-    assert _fund_agenda_give_str() == "_fund_agenda_give"
-    assert _fund_agenda_ratio_give_str() == "_fund_agenda_ratio_give"
-    assert _fund_agenda_ratio_take_str() == "_fund_agenda_ratio_take"
-    assert _fund_agenda_take_str() == "_fund_agenda_take"
-    assert _fund_give_str() == "_fund_give"
-    assert _fund_take_str() == "_fund_take"
+    assert fund_agenda_give_str() == "fund_agenda_give"
+    assert fund_agenda_ratio_give_str() == "fund_agenda_ratio_give"
+    assert fund_agenda_ratio_take_str() == "fund_agenda_ratio_take"
+    assert fund_agenda_take_str() == "fund_agenda_take"
+    assert fund_give_str() == "fund_give"
+    assert fund_take_str() == "fund_take"
     assert _groupunits_str() == "_groupunits"
     assert _inallocable_voice_debt_points_str() == "_inallocable_voice_debt_points"
     assert _irrational_voice_debt_points_str() == "_irrational_voice_debt_points"

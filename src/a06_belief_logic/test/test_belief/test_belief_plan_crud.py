@@ -1095,9 +1095,9 @@ def test_BeliefUnit_set_offtrack_fund_ReturnsObj():
     casa_rope = bob_beliefunit.make_l1_rope(casa_str)
     wk_rope = bob_beliefunit.make_l1_rope(wk_str)
     wed_rope = bob_beliefunit.make_rope(wk_rope, wed_str)
-    casa_plan = planunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
-    wk_plan = planunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
-    wed_plan = planunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
+    casa_plan = planunit_shop(casa_str, fund_onset=70, fund_cease=170)
+    wk_plan = planunit_shop(wk_str, fund_onset=70, fund_cease=75)
+    wed_plan = planunit_shop(wed_str, fund_onset=72, fund_cease=75)
     casa_plan.parent_rope = bob_beliefunit.moment_label
     wk_plan.parent_rope = bob_beliefunit.moment_label
     wed_plan.parent_rope = wk_rope
@@ -1138,12 +1138,12 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_beliefunit._allot_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit.get_voice(bob_str)._fund_give == 0
-    assert bob_beliefunit.get_voice(bob_str)._fund_take == 0
-    assert bob_beliefunit.get_voice(yao_str)._fund_give == 0
-    assert bob_beliefunit.get_voice(yao_str)._fund_take == 0
-    assert bob_beliefunit.get_voice(sue_str)._fund_give == 0
-    assert bob_beliefunit.get_voice(sue_str)._fund_take == 0
+    assert bob_beliefunit.get_voice(bob_str).fund_give == 0
+    assert bob_beliefunit.get_voice(bob_str).fund_take == 0
+    assert bob_beliefunit.get_voice(yao_str).fund_give == 0
+    assert bob_beliefunit.get_voice(yao_str).fund_take == 0
+    assert bob_beliefunit.get_voice(sue_str).fund_give == 0
+    assert bob_beliefunit.get_voice(sue_str).fund_take == 0
 
     # WHEN
     casa_str = "casa"
@@ -1152,9 +1152,9 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     casa_rope = bob_beliefunit.make_l1_rope(casa_str)
     wk_rope = bob_beliefunit.make_l1_rope(wk_str)
     wed_rope = bob_beliefunit.make_rope(wk_rope, wed_str)
-    casa_plan = planunit_shop(casa_str, _fund_onset=70, _fund_cease=170)
-    wk_plan = planunit_shop(wk_str, _fund_onset=70, _fund_cease=75)
-    wed_plan = planunit_shop(wed_str, _fund_onset=72, _fund_cease=75)
+    casa_plan = planunit_shop(casa_str, fund_onset=70, fund_cease=170)
+    wk_plan = planunit_shop(wk_str, fund_onset=70, fund_cease=75)
+    wed_plan = planunit_shop(wed_str, fund_onset=72, fund_cease=75)
     casa_plan.parent_rope = bob_beliefunit.moment_label
     wk_plan.parent_rope = bob_beliefunit.moment_label
     wed_plan.parent_rope = wk_rope
@@ -1170,12 +1170,12 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_beliefunit._allot_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit.get_voice(bob_str)._fund_give == 26
-    assert bob_beliefunit.get_voice(bob_str)._fund_take == 26
-    assert bob_beliefunit.get_voice(yao_str)._fund_give == 53
-    assert bob_beliefunit.get_voice(yao_str)._fund_take == 26
-    assert bob_beliefunit.get_voice(sue_str)._fund_give == 26
-    assert bob_beliefunit.get_voice(sue_str)._fund_take == 53
+    assert bob_beliefunit.get_voice(bob_str).fund_give == 26
+    assert bob_beliefunit.get_voice(bob_str).fund_take == 26
+    assert bob_beliefunit.get_voice(yao_str).fund_give == 53
+    assert bob_beliefunit.get_voice(yao_str).fund_take == 26
+    assert bob_beliefunit.get_voice(sue_str).fund_give == 26
+    assert bob_beliefunit.get_voice(sue_str).fund_take == 53
 
     bob_beliefunit._offtrack_kids_star_set.add(wed_rope)
     bob_beliefunit.set_offtrack_fund()

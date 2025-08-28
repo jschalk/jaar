@@ -64,12 +64,12 @@ def test_BeliefUnit_get_agenda_dict_WithLargeBelief_fund():
     # THEN
     assert agenda_dict
     assert len(agenda_dict) == 2
-    assert agenda_dict.get(x_belief.make_l1_rope("cat have dinner"))._fund_ratio
+    assert agenda_dict.get(x_belief.make_l1_rope("cat have dinner")).fund_ratio
 
     casa_str = "casa"
     print(f"{agenda_dict.keys()=} {x_belief.make_l1_rope(casa_str)=}")
     print(f"{agenda_dict.get(x_belief.make_l1_rope(casa_str)).plan_label=}")
-    assert agenda_dict.get(x_belief.make_l1_rope(casa_str))._fund_ratio
+    assert agenda_dict.get(x_belief.make_l1_rope(casa_str)).fund_ratio
 
 
 def test_BeliefUnit_get_agenda_dict_WithNo7amPlanExample():

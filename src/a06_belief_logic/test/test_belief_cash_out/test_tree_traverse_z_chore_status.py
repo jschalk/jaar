@@ -684,7 +684,7 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
         oregon_rope, problem_bool=True, healerunit=sue_healerunit
     )
     oregon_plan = sue_beliefunit.get_plan_obj(oregon_rope)
-    print(f"{oregon_plan._fund_ratio=}")
+    print(f"{oregon_plan.fund_ratio=}")
     assert sue_beliefunit._sum_healerunit_share == 0
     assert oregon_plan._healerunit_ratio == 0
 
@@ -700,7 +700,7 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     mon_rope = sue_beliefunit.make_rope(wk_rope, "Mon")
     sue_beliefunit.edit_plan_attr(mon_rope, healerunit=sue_healerunit)
     mon_plan = sue_beliefunit.get_plan_obj(mon_rope)
-    # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
+    # print(f"{mon_plan.problem_bool=} {mon_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
     # THEN
     assert sue_beliefunit._sum_healerunit_share != 0.038461539 * default_fund_pool()
@@ -712,10 +712,10 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     tue_rope = sue_beliefunit.make_rope(wk_rope, "Tue")
     sue_beliefunit.edit_plan_attr(tue_rope, healerunit=sue_healerunit)
     tue_plan = sue_beliefunit.get_plan_obj(tue_rope)
-    # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
+    # print(f"{tue_plan.problem_bool=} {tue_plan.fund_ratio=}")
     # sat_rope = sue_beliefunit.make_rope(wk_rope, "Sat")
     # sat_plan = sue_beliefunit.get_plan_obj(sat_rope)
-    # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
+    # print(f"{sat_plan.problem_bool=} {sat_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
 
     # THEN
@@ -731,7 +731,7 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     # WHEN
     sue_beliefunit.edit_plan_attr(wk_rope, healerunit=sue_healerunit)
     wk_plan = sue_beliefunit.get_plan_obj(wk_rope)
-    print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
+    print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
     # THEN
     display_plantree(sue_beliefunit, "Keep", graphics_bool)
@@ -768,7 +768,7 @@ def test_BeliefUnit_cash_out_Sets_keep_dict_v1(graphics_bool):
     mon_rope = sue_beliefunit.make_rope(wk_rope, "Mon")
     sue_beliefunit.edit_plan_attr(mon_rope, healerunit=sue_healerunit)
     # mon_plan = sue_beliefunit.get_plan_obj(mon_rope)
-    # print(f"{mon_plan.problem_bool=} {mon_plan._fund_ratio=}")
+    # print(f"{mon_plan.problem_bool=} {mon_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
     # THEN
     assert len(sue_beliefunit._keep_dict) == 2
@@ -779,10 +779,10 @@ def test_BeliefUnit_cash_out_Sets_keep_dict_v1(graphics_bool):
     tue_rope = sue_beliefunit.make_rope(wk_rope, "Tue")
     sue_beliefunit.edit_plan_attr(tue_rope, healerunit=sue_healerunit)
     # tue_plan = sue_beliefunit.get_plan_obj(tue_rope)
-    # print(f"{tue_plan.problem_bool=} {tue_plan._fund_ratio=}")
+    # print(f"{tue_plan.problem_bool=} {tue_plan.fund_ratio=}")
     # sat_rope = sue_beliefunit.make_rope(wk_rope, "Sat")
     # sat_plan = sue_beliefunit.get_plan_obj(sat_rope)
-    # print(f"{sat_plan.problem_bool=} {sat_plan._fund_ratio=}")
+    # print(f"{sat_plan.problem_bool=} {sat_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
 
     # THEN
@@ -794,7 +794,7 @@ def test_BeliefUnit_cash_out_Sets_keep_dict_v1(graphics_bool):
     # WHEN
     sue_beliefunit.edit_plan_attr(wk_rope, healerunit=sue_healerunit)
     wk_plan = sue_beliefunit.get_plan_obj(wk_rope)
-    print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan._fund_ratio=}")
+    print(f"{wk_plan.plan_label=} {wk_plan.problem_bool=} {wk_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
     # THEN
     display_plantree(sue_beliefunit, "Keep", graphics_bool)

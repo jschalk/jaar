@@ -244,10 +244,10 @@ class PlanUnit:
     _awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
     _descendant_task_count : int Count of descendant plans marked as tasks.
     _factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
-    _fund_ratio : float
+    fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
-    _fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
-    _fund_cease : FundNum Point at which funding ceases inside MomentUnit funding range
+    fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
+    fund_cease : FundNum Point at which funding ceases inside MomentUnit funding range
     _healerunit_ratio : float
     _level : int that describes Depth level in plan hierarchy.
     _range_evaluated : bool Flag indicating whether range has been evaluated.
@@ -291,10 +291,10 @@ class PlanUnit:
     _awardlines: dict[GroupTitle, AwardLine] = None
     _descendant_task_count: int = None
     _factheirs: dict[RopeTerm, FactHeir] = None
-    _fund_ratio: float = None
+    fund_ratio: float = None
     fund_iota: FundIota = None
-    _fund_onset: FundNum = None
-    _fund_cease: FundNum = None
+    fund_onset: FundNum = None
+    fund_cease: FundNum = None
     _healerunit_ratio: float = None
     _level: int = None
     _range_evaluated: bool = None
@@ -399,19 +399,19 @@ class PlanUnit:
         self,
         x_fund_onset: FundNum,
         x_fund_cease: FundNum,
-        _fund_pool: FundNum,
+        fund_pool: FundNum,
     ):
-        self._fund_onset = x_fund_onset
-        self._fund_cease = x_fund_cease
-        self._fund_ratio = self.get_fund_share() / _fund_pool
+        self.fund_onset = x_fund_onset
+        self.fund_cease = x_fund_cease
+        self.fund_ratio = self.get_fund_share() / fund_pool
         self.set_awardheirs_fund_give_fund_take()
 
     def get_fund_share(self) -> float:
-        """Return plan fund share from different of _fund_cease and _fund_onset"""
-        if self._fund_onset is None or self._fund_cease is None:
+        """Return plan fund share from different of fund_cease and fund_onset"""
+        if self.fund_onset is None or self.fund_cease is None:
             return 0
         else:
-            return self._fund_cease - self._fund_onset
+            return self.fund_cease - self.fund_onset
 
     def get_kids_in_range(
         self, x_gogo: float = None, x_stop: float = None
@@ -507,8 +507,8 @@ class PlanUnit:
         for bh in self._awardheirs.values():
             x_awardline = awardline_shop(
                 awardee_title=bh.awardee_title,
-                _fund_give=bh._fund_give,
-                _fund_take=bh._fund_take,
+                fund_give=bh.fund_give,
+                fund_take=bh.fund_take,
             )
             self._awardlines[x_awardline.awardee_title] = x_awardline
 
@@ -521,12 +521,12 @@ class PlanUnit:
             if self._awardlines.get(bl.awardee_title) is None:
                 self._awardlines[bl.awardee_title] = awardline_shop(
                     awardee_title=bl.awardee_title,
-                    _fund_give=0,
-                    _fund_take=0,
+                    fund_give=0,
+                    fund_take=0,
                 )
 
             self._awardlines[bl.awardee_title].add_fund_give_take(
-                fund_give=bl._fund_give, fund_take=bl._fund_take
+                fund_give=bl.fund_give, fund_take=bl.fund_take
             )
 
     def set_awardheirs_fund_give_fund_take(self):
@@ -539,8 +539,8 @@ class PlanUnit:
         give_allot = allot_scale(give_ledger, x_fund_share, self.fund_iota)
         take_allot = allot_scale(take_ledger, x_fund_share, self.fund_iota)
         for x_awardee_title, x_awardheir in self._awardheirs.items():
-            x_awardheir._fund_give = give_allot.get(x_awardee_title)
-            x_awardheir._fund_take = take_allot.get(x_awardee_title)
+            x_awardheir.fund_give = give_allot.get(x_awardee_title)
+            x_awardheir.fund_take = take_allot.get(x_awardee_title)
 
     def clear_awardlines(self):
         self._awardlines = {}
@@ -1049,10 +1049,10 @@ def planunit_shop(
     problem_bool: bool = None,
     # Calculated fields
     _level: int = None,
-    _fund_ratio: float = None,
+    fund_ratio: float = None,
     fund_iota: FundIota = None,
-    _fund_onset: FundNum = None,
-    _fund_cease: FundNum = None,
+    fund_onset: FundNum = None,
+    fund_cease: FundNum = None,
     _chore: bool = None,
     _active: bool = None,
     _descendant_task_count: int = None,
@@ -1096,10 +1096,10 @@ def planunit_shop(
         moment_label=moment_label,
         # Calculated fields
         _level=_level,
-        _fund_ratio=_fund_ratio,
+        fund_ratio=fund_ratio,
         fund_iota=default_fund_iota_if_None(fund_iota),
-        _fund_onset=_fund_onset,
-        _fund_cease=_fund_cease,
+        fund_onset=fund_onset,
+        fund_cease=fund_cease,
         _chore=_chore,
         _active=_active,
         _descendant_task_count=_descendant_task_count,

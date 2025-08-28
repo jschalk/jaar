@@ -25,12 +25,12 @@ class MemberShip(GroupCore):
     # calculated fields
     credor_pool: float = None
     debtor_pool: float = None
-    _fund_give: float = None
-    _fund_take: float = None
-    _fund_agenda_give: float = None
-    _fund_agenda_take: float = None
-    _fund_agenda_ratio_give: float = None
-    _fund_agenda_ratio_take: float = None
+    fund_give: float = None
+    fund_take: float = None
+    fund_agenda_give: float = None
+    fund_agenda_take: float = None
+    fund_agenda_ratio_give: float = None
+    fund_agenda_ratio_take: float = None
     voice_name: VoiceName = None
 
     def set_group_cred_points(self, x_group_cred_points: float):
@@ -49,12 +49,12 @@ class MemberShip(GroupCore):
         }
 
     def clear_fund_give_take(self):
-        self._fund_give = 0
-        self._fund_take = 0
-        self._fund_agenda_give = 0
-        self._fund_agenda_take = 0
-        self._fund_agenda_ratio_give = 0
-        self._fund_agenda_ratio_take = 0
+        self.fund_give = 0
+        self.fund_take = 0
+        self.fund_agenda_give = 0
+        self.fund_agenda_take = 0
+        self.fund_agenda_ratio_give = 0
+        self.fund_agenda_ratio_take = 0
 
 
 def membership_shop(
@@ -140,41 +140,41 @@ def awardunit_shop(
 class AwardHeir(AwardCore):
     give_force: float = 1.0
     take_force: float = 1.0
-    _fund_give: float = None
-    _fund_take: float = None
+    fund_give: float = None
+    fund_take: float = None
 
 
 def awardheir_shop(
     awardee_title: GroupTitle,
     give_force: float = None,
     take_force: float = None,
-    _fund_give: float = None,
-    _fund_take: float = None,
+    fund_give: float = None,
+    fund_take: float = None,
 ) -> AwardHeir:
     give_force = get_1_if_None(give_force)
     take_force = get_1_if_None(take_force)
-    return AwardHeir(awardee_title, give_force, take_force, _fund_give, _fund_take)
+    return AwardHeir(awardee_title, give_force, take_force, fund_give, fund_take)
 
 
 @dataclass
 class AwardLine(AwardCore):
-    _fund_give: float = None
-    _fund_take: float = None
+    fund_give: float = None
+    fund_take: float = None
 
     def add_fund_give_take(self, fund_give: float, fund_take: float):
         self.validate_fund_give_fund_take()
-        self._fund_give += fund_give
-        self._fund_take += fund_take
+        self.fund_give += fund_give
+        self.fund_take += fund_take
 
     def validate_fund_give_fund_take(self):
-        if self._fund_give is None:
-            self._fund_give = 0
-        if self._fund_take is None:
-            self._fund_take = 0
+        if self.fund_give is None:
+            self.fund_give = 0
+        if self.fund_take is None:
+            self.fund_take = 0
 
 
-def awardline_shop(awardee_title: GroupTitle, _fund_give: float, _fund_take: float):
-    return AwardLine(awardee_title, _fund_give=_fund_give, _fund_take=_fund_take)
+def awardline_shop(awardee_title: GroupTitle, fund_give: float, fund_take: float):
+    return AwardLine(awardee_title, fund_give=fund_give, fund_take=fund_take)
 
 
 @dataclass
@@ -184,10 +184,10 @@ class GroupUnit(GroupCore):
     )
     knot: str = None  # calculated by BeliefUnit
     # calculated by BeliefUnit.cash_out()
-    _fund_give: float = None
-    _fund_take: float = None
-    _fund_agenda_give: float = None
-    _fund_agenda_take: float = None
+    fund_give: float = None
+    fund_take: float = None
+    fund_agenda_give: float = None
+    fund_agenda_take: float = None
     credor_pool: float = None
     debtor_pool: float = None
     fund_iota: FundIota = None
@@ -222,10 +222,10 @@ class GroupUnit(GroupCore):
         self._memberships.pop(voice_name)
 
     def clear_fund_give_take(self):
-        self._fund_give = 0
-        self._fund_take = 0
-        self._fund_agenda_give = 0
-        self._fund_agenda_take = 0
+        self.fund_give = 0
+        self.fund_take = 0
+        self.fund_agenda_give = 0
+        self.fund_agenda_take = 0
         for membership in self._memberships.values():
             membership.clear_fund_give_take()
 
@@ -235,18 +235,18 @@ class GroupUnit(GroupCore):
         for x_voice_name, x_membership in self._memberships.items():
             credit_ledger[x_voice_name] = x_membership.group_cred_points
             debt_ledger[x_voice_name] = x_membership.group_debt_points
-        fund_give_allot = allot_scale(credit_ledger, self._fund_give, self.fund_iota)
-        fund_take_allot = allot_scale(debt_ledger, self._fund_take, self.fund_iota)
+        fund_give_allot = allot_scale(credit_ledger, self.fund_give, self.fund_iota)
+        fund_take_allot = allot_scale(debt_ledger, self.fund_take, self.fund_iota)
         for voice_name, x_membership in self._memberships.items():
-            x_membership._fund_give = fund_give_allot.get(voice_name)
-            x_membership._fund_take = fund_take_allot.get(voice_name)
-        x_a_give = self._fund_agenda_give
-        x_a_take = self._fund_agenda_take
+            x_membership.fund_give = fund_give_allot.get(voice_name)
+            x_membership.fund_take = fund_take_allot.get(voice_name)
+        x_a_give = self.fund_agenda_give
+        x_a_take = self.fund_agenda_take
         fund_agenda_give_allot = allot_scale(credit_ledger, x_a_give, self.fund_iota)
         fund_agenda_take_allot = allot_scale(debt_ledger, x_a_take, self.fund_iota)
         for voice_name, x_membership in self._memberships.items():
-            x_membership._fund_agenda_give = fund_agenda_give_allot.get(voice_name)
-            x_membership._fund_agenda_take = fund_agenda_take_allot.get(voice_name)
+            x_membership.fund_agenda_give = fund_agenda_give_allot.get(voice_name)
+            x_membership.fund_agenda_take = fund_agenda_take_allot.get(voice_name)
 
 
 def groupunit_shop(
@@ -255,10 +255,10 @@ def groupunit_shop(
     return GroupUnit(
         group_title=group_title,
         _memberships={},
-        _fund_give=0,
-        _fund_take=0,
-        _fund_agenda_give=0,
-        _fund_agenda_take=0,
+        fund_give=0,
+        fund_take=0,
+        fund_agenda_give=0,
+        fund_agenda_take=0,
         credor_pool=0,
         debtor_pool=0,
         knot=default_knot_if_None(knot),

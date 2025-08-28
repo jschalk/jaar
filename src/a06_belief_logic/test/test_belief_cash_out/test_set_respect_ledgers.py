@@ -185,16 +185,16 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_ResetVoiceUnitsAttrs
         voiceunits_voice_cred_points_sum=yao_3,
         voiceunits_voice_debt_points_sum=yao_4,
     )
-    assert zia_voiceunit._fund_agenda_ratio_give == 0.125
-    assert zia_voiceunit._fund_agenda_ratio_take == 0.44
-    assert yao_voiceunit._fund_agenda_ratio_give == 0.5
-    assert yao_voiceunit._fund_agenda_ratio_take == 0.44
+    assert zia_voiceunit.fund_agenda_ratio_give == 0.125
+    assert zia_voiceunit.fund_agenda_ratio_take == 0.44
+    assert yao_voiceunit.fund_agenda_ratio_give == 0.5
+    assert yao_voiceunit.fund_agenda_ratio_take == 0.44
 
     # WHEN
     sue_beliefunit._set_voiceunit_groupunit_respect_ledgers()
 
     # THEN
-    assert zia_voiceunit._fund_agenda_ratio_give == 0
-    assert zia_voiceunit._fund_agenda_ratio_take == 0
-    assert yao_voiceunit._fund_agenda_ratio_give == 0
-    assert yao_voiceunit._fund_agenda_ratio_take == 0
+    assert zia_voiceunit.fund_agenda_ratio_give == 0
+    assert zia_voiceunit.fund_agenda_ratio_take == 0
+    assert yao_voiceunit.fund_agenda_ratio_give == 0
+    assert yao_voiceunit.fund_agenda_ratio_take == 0

@@ -21,14 +21,14 @@ def create_blrmemb_metrics_insert_sqlstr(values_dict: dict[str,]):
     group_debt_points = values_dict.get("group_debt_points")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
-    _fund_give = values_dict.get("_fund_give")
-    _fund_take = values_dict.get("_fund_take")
-    _fund_agenda_give = values_dict.get("_fund_agenda_give")
-    _fund_agenda_take = values_dict.get("_fund_agenda_take")
-    _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
-    _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
+    fund_give = values_dict.get("fund_give")
+    fund_take = values_dict.get("fund_take")
+    fund_agenda_give = values_dict.get("fund_agenda_give")
+    fund_agenda_take = values_dict.get("fund_agenda_take")
+    fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
+    fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
     real_str = "REAL"
-    return f"""INSERT INTO belief_voice_membership_job (moment_label, belief_name, voice_name, group_title, group_cred_points, group_debt_points, credor_pool, debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take)
+    return f"""INSERT INTO belief_voice_membership_job (moment_label, belief_name, voice_name, group_title, group_cred_points, group_debt_points, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -38,12 +38,12 @@ VALUES (
 , {sqlite_obj_str(group_debt_points, real_str)}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
-, {sqlite_obj_str(_fund_give, real_str)}
-, {sqlite_obj_str(_fund_take, real_str)}
-, {sqlite_obj_str(_fund_agenda_give, real_str)}
-, {sqlite_obj_str(_fund_agenda_take, real_str)}
-, {sqlite_obj_str(_fund_agenda_ratio_give, real_str)}
-, {sqlite_obj_str(_fund_agenda_ratio_take, real_str)}
+, {sqlite_obj_str(fund_give, real_str)}
+, {sqlite_obj_str(fund_take, real_str)}
+, {sqlite_obj_str(fund_agenda_give, real_str)}
+, {sqlite_obj_str(fund_agenda_take, real_str)}
+, {sqlite_obj_str(fund_agenda_ratio_give, real_str)}
+, {sqlite_obj_str(fund_agenda_ratio_take, real_str)}
 )
 ;
 """
@@ -57,16 +57,16 @@ def create_blrpern_metrics_insert_sqlstr(values_dict: dict[str,]):
     voice_debt_points = values_dict.get("voice_debt_points")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
-    _fund_give = values_dict.get("_fund_give")
-    _fund_take = values_dict.get("_fund_take")
-    _fund_agenda_give = values_dict.get("_fund_agenda_give")
-    _fund_agenda_take = values_dict.get("_fund_agenda_take")
-    _fund_agenda_ratio_give = values_dict.get("_fund_agenda_ratio_give")
-    _fund_agenda_ratio_take = values_dict.get("_fund_agenda_ratio_take")
+    fund_give = values_dict.get("fund_give")
+    fund_take = values_dict.get("fund_take")
+    fund_agenda_give = values_dict.get("fund_agenda_give")
+    fund_agenda_take = values_dict.get("fund_agenda_take")
+    fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
+    fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
     _inallocable_voice_debt_points = values_dict.get("_inallocable_voice_debt_points")
     _irrational_voice_debt_points = values_dict.get("_irrational_voice_debt_points")
     real_str = "REAL"
-    return f"""INSERT INTO belief_voiceunit_job (moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points, credor_pool, debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take, _fund_agenda_ratio_give, _fund_agenda_ratio_take, _inallocable_voice_debt_points, _irrational_voice_debt_points)
+    return f"""INSERT INTO belief_voiceunit_job (moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, _inallocable_voice_debt_points, _irrational_voice_debt_points)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -75,12 +75,12 @@ VALUES (
 , {sqlite_obj_str(voice_debt_points, real_str)}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
-, {sqlite_obj_str(_fund_give, real_str)}
-, {sqlite_obj_str(_fund_take, real_str)}
-, {sqlite_obj_str(_fund_agenda_give, real_str)}
-, {sqlite_obj_str(_fund_agenda_take, real_str)}
-, {sqlite_obj_str(_fund_agenda_ratio_give, real_str)}
-, {sqlite_obj_str(_fund_agenda_ratio_take, real_str)}
+, {sqlite_obj_str(fund_give, real_str)}
+, {sqlite_obj_str(fund_take, real_str)}
+, {sqlite_obj_str(fund_agenda_give, real_str)}
+, {sqlite_obj_str(fund_agenda_take, real_str)}
+, {sqlite_obj_str(fund_agenda_ratio_give, real_str)}
+, {sqlite_obj_str(fund_agenda_ratio_take, real_str)}
 , {sqlite_obj_str(_inallocable_voice_debt_points, real_str)}
 , {sqlite_obj_str(_irrational_voice_debt_points, real_str)}
 )
@@ -95,13 +95,13 @@ def create_blrgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
     fund_iota = values_dict.get("fund_iota")
-    _fund_give = values_dict.get("_fund_give")
-    _fund_take = values_dict.get("_fund_take")
-    _fund_agenda_give = values_dict.get("_fund_agenda_give")
-    _fund_agenda_take = values_dict.get("_fund_agenda_take")
+    fund_give = values_dict.get("fund_give")
+    fund_take = values_dict.get("fund_take")
+    fund_agenda_give = values_dict.get("fund_agenda_give")
+    fund_agenda_take = values_dict.get("fund_agenda_take")
     knot = values_dict.get("knot")
     real_str = "REAL"
-    return f"""INSERT INTO belief_groupunit_job (moment_label, belief_name, group_title, fund_iota, knot, credor_pool, debtor_pool, _fund_give, _fund_take, _fund_agenda_give, _fund_agenda_take)
+    return f"""INSERT INTO belief_groupunit_job (moment_label, belief_name, group_title, fund_iota, knot, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -110,10 +110,10 @@ VALUES (
 , {sqlite_obj_str(knot, "TEXT")}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
-, {sqlite_obj_str(_fund_give, real_str)}
-, {sqlite_obj_str(_fund_take, real_str)}
-, {sqlite_obj_str(_fund_agenda_give, real_str)}
-, {sqlite_obj_str(_fund_agenda_take, real_str)}
+, {sqlite_obj_str(fund_give, real_str)}
+, {sqlite_obj_str(fund_take, real_str)}
+, {sqlite_obj_str(fund_agenda_give, real_str)}
+, {sqlite_obj_str(fund_agenda_take, real_str)}
 )
 ;
 """
@@ -126,9 +126,9 @@ def create_blrawar_metrics_insert_sqlstr(values_dict: dict[str,]):
     awardee_title = values_dict.get("awardee_title")
     give_force = values_dict.get("give_force")
     take_force = values_dict.get("take_force")
-    _fund_give = values_dict.get("_fund_give")
-    _fund_take = values_dict.get("_fund_take")
-    return f"""INSERT INTO belief_plan_awardunit_job (moment_label, belief_name, plan_rope, awardee_title, give_force, take_force, _fund_give, _fund_take)
+    fund_give = values_dict.get("fund_give")
+    fund_take = values_dict.get("fund_take")
+    return f"""INSERT INTO belief_plan_awardunit_job (moment_label, belief_name, plan_rope, awardee_title, give_force, take_force, fund_give, fund_take)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -136,8 +136,8 @@ VALUES (
 , {sqlite_obj_str(awardee_title, "TEXT")}
 , {sqlite_obj_str(give_force, "REAL")}
 , {sqlite_obj_str(take_force, "REAL")}
-, {sqlite_obj_str(_fund_give, "REAL")}
-, {sqlite_obj_str(_fund_take, "REAL")}
+, {sqlite_obj_str(fund_give, "REAL")}
+, {sqlite_obj_str(fund_take, "REAL")}
 )
 ;
 """
@@ -271,9 +271,9 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     _active = values_dict.get("_active")
     _chore = values_dict.get("_chore")
     fund_iota = values_dict.get("fund_iota")
-    _fund_onset = values_dict.get("_fund_onset")
-    _fund_cease = values_dict.get("_fund_cease")
-    _fund_ratio = values_dict.get("_fund_ratio")
+    fund_onset = values_dict.get("fund_onset")
+    fund_cease = values_dict.get("fund_cease")
+    fund_ratio = values_dict.get("fund_ratio")
     _gogo_calc = values_dict.get("_gogo_calc")
     _stop_calc = values_dict.get("_stop_calc")
     _level = values_dict.get("_level")
@@ -285,7 +285,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, _fund_onset, _fund_cease, _fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerunit_ratio, _all_voice_cred, _all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, fund_onset, fund_cease, fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerunit_ratio, _all_voice_cred, _all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -304,9 +304,9 @@ VALUES (
 , {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(_active, "INTEGER")}
 , {sqlite_obj_str(_chore, "INTEGER")}
-, {sqlite_obj_str(_fund_onset, real_str)}
-, {sqlite_obj_str(_fund_cease, real_str)}
-, {sqlite_obj_str(_fund_ratio, real_str)}
+, {sqlite_obj_str(fund_onset, real_str)}
+, {sqlite_obj_str(fund_cease, real_str)}
+, {sqlite_obj_str(fund_ratio, real_str)}
 , {sqlite_obj_str(_gogo_calc, real_str)}
 , {sqlite_obj_str(_stop_calc, real_str)}
 , {sqlite_obj_str(_level, "INTEGER")}

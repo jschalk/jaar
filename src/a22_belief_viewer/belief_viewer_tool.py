@@ -61,10 +61,10 @@ def belief_objs_asdict(
             )
             result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, AwardHeir):
-            obj_readable_str = f"{obj.awardee_title}: Take {obj.take_force} ({obj._fund_take}), Give {obj.give_force} ({obj._fund_give})"
+            obj_readable_str = f"{obj.awardee_title}: Take {obj.take_force} ({obj.fund_take}), Give {obj.give_force} ({obj.fund_give})"
             result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, AwardLine):
-            obj_readable_str = f"{obj.awardee_title}: take_fund ({obj._fund_take}), give_fund ({obj._fund_give})"
+            obj_readable_str = f"{obj.awardee_title}: take_fund ({obj.fund_take}), give_fund ({obj.fund_give})"
             result["readable"] = add_small_dot(obj_readable_str)
         elif isinstance(obj, (FactUnit, FactHeir)):
             obj_readable_str = get_fact_state_readable_str(obj, None, current_belief)
@@ -118,7 +118,7 @@ def set_readable_plan_values(x_plan: PlanUnit, result: dict):
     _all_voice_debt_str = add_small_dot(_all_voice_debt_str)
     result["_all_voice_cred"] = _all_voice_cred_str
     result["_all_voice_debt"] = _all_voice_debt_str
-    result["_fund_ratio"] = readable_percent(result.get("_fund_ratio"))
+    result["fund_ratio"] = readable_percent(result.get("fund_ratio"))
     result_gogo_want = result.get("gogo_want")
     result_stop_want = result.get("stop_want")
     result_gogo_calc = result.get("_gogo_calc")
@@ -164,15 +164,15 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
         _inallocable_voice_debt_points_readable = (
             f"_inallocable_voice_debt_points: {voice._inallocable_voice_debt_points}"
         )
-        _fund_give_readable = f"_fund_give: {voice._fund_give}"
-        _fund_take_readable = f"_fund_take: {voice._fund_take}"
-        _fund_agenda_give_readable = f"_fund_agenda_give: {voice._fund_agenda_give}"
-        _fund_agenda_take_readable = f"_fund_agenda_take: {voice._fund_agenda_take}"
-        _fund_agenda_ratio_give_readable = (
-            f"_fund_agenda_ratio_give: {voice._fund_agenda_ratio_give}"
+        fund_give_readable = f"fund_give: {voice.fund_give}"
+        fund_take_readable = f"fund_take: {voice.fund_take}"
+        fund_agenda_give_readable = f"fund_agenda_give: {voice.fund_agenda_give}"
+        fund_agenda_take_readable = f"fund_agenda_take: {voice.fund_agenda_take}"
+        fund_agenda_ratio_give_readable = (
+            f"fund_agenda_ratio_give: {voice.fund_agenda_ratio_give}"
         )
-        _fund_agenda_ratio_take_readable = (
-            f"_fund_agenda_ratio_take: {voice._fund_agenda_ratio_take}"
+        fund_agenda_ratio_take_readable = (
+            f"fund_agenda_ratio_take: {voice.fund_agenda_ratio_take}"
         )
         x_members_dict = {
             x_membership.group_title: {
@@ -182,12 +182,12 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
                 "group_debt_points": x_membership.group_debt_points,
                 "credor_pool": x_membership.credor_pool,
                 "debtor_pool": x_membership.debtor_pool,
-                "_fund_agenda_give": x_membership._fund_agenda_give,
-                "_fund_agenda_ratio_give": x_membership._fund_agenda_ratio_give,
-                "_fund_agenda_ratio_take": x_membership._fund_agenda_ratio_take,
-                "_fund_agenda_take": x_membership._fund_agenda_take,
-                "_fund_give": x_membership._fund_give,
-                "_fund_take": x_membership._fund_take,
+                "fund_agenda_give": x_membership.fund_agenda_give,
+                "fund_agenda_ratio_give": x_membership.fund_agenda_ratio_give,
+                "fund_agenda_ratio_take": x_membership.fund_agenda_ratio_take,
+                "fund_agenda_take": x_membership.fund_agenda_take,
+                "fund_give": x_membership.fund_give,
+                "fund_take": x_membership.fund_take,
                 "group_title_readable": add_small_dot(
                     f"group_title: {x_membership.group_title}"
                 ),
@@ -203,23 +203,23 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
                 "debtor_pool_readable": add_small_dot(
                     f"debtor_pool: {x_membership.debtor_pool}"
                 ),
-                "_fund_agenda_give_readable": add_small_dot(
-                    f"_fund_agenda_give: {x_membership._fund_agenda_give}"
+                "fund_agenda_give_readable": add_small_dot(
+                    f"fund_agenda_give: {x_membership.fund_agenda_give}"
                 ),
-                "_fund_agenda_ratio_give_readable": add_small_dot(
-                    f"_fund_agenda_ratio_give: {x_membership._fund_agenda_ratio_give}"
+                "fund_agenda_ratio_give_readable": add_small_dot(
+                    f"fund_agenda_ratio_give: {x_membership.fund_agenda_ratio_give}"
                 ),
-                "_fund_agenda_ratio_take_readable": add_small_dot(
-                    f"_fund_agenda_ratio_take: {x_membership._fund_agenda_ratio_take}"
+                "fund_agenda_ratio_take_readable": add_small_dot(
+                    f"fund_agenda_ratio_take: {x_membership.fund_agenda_ratio_take}"
                 ),
-                "_fund_agenda_take_readable": add_small_dot(
-                    f"_fund_agenda_take: {x_membership._fund_agenda_take}"
+                "fund_agenda_take_readable": add_small_dot(
+                    f"fund_agenda_take: {x_membership.fund_agenda_take}"
                 ),
-                "_fund_give_readable": add_small_dot(
-                    f"_fund_give: {x_membership._fund_give}"
+                "fund_give_readable": add_small_dot(
+                    f"fund_give: {x_membership.fund_give}"
                 ),
-                "_fund_take_readable": add_small_dot(
-                    f"_fund_take: {x_membership._fund_take}"
+                "fund_take_readable": add_small_dot(
+                    f"fund_take: {x_membership.fund_take}"
                 ),
             }
             for x_membership in voice._memberships.values()
@@ -233,12 +233,12 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "debtor_pool": voice.debtor_pool,
             "_irrational_voice_debt_points": voice._irrational_voice_debt_points,
             "_inallocable_voice_debt_points": voice._inallocable_voice_debt_points,
-            "_fund_give": voice._fund_give,
-            "_fund_take": voice._fund_take,
-            "_fund_agenda_give": voice._fund_agenda_give,
-            "_fund_agenda_take": voice._fund_agenda_take,
-            "_fund_agenda_ratio_give": voice._fund_agenda_ratio_give,
-            "_fund_agenda_ratio_take": voice._fund_agenda_ratio_take,
+            "fund_give": voice.fund_give,
+            "fund_take": voice.fund_take,
+            "fund_agenda_give": voice.fund_agenda_give,
+            "fund_agenda_take": voice.fund_agenda_take,
+            "fund_agenda_ratio_give": voice.fund_agenda_ratio_give,
+            "fund_agenda_ratio_take": voice.fund_agenda_ratio_take,
             "voice_cred_points_readable": voice_cred_points_readable,
             "voice_debt_points_readable": voice_debt_points_readable,
             "_memberships_readable": _memberships_readable,
@@ -246,12 +246,12 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "debtor_pool_readable": debtor_pool_readable,
             "_irrational_voice_debt_points_readable": _irrational_voice_debt_points_readable,
             "_inallocable_voice_debt_points_readable": _inallocable_voice_debt_points_readable,
-            "_fund_give_readable": _fund_give_readable,
-            "_fund_take_readable": _fund_take_readable,
-            "_fund_agenda_give_readable": _fund_agenda_give_readable,
-            "_fund_agenda_take_readable": _fund_agenda_take_readable,
-            "_fund_agenda_ratio_give_readable": _fund_agenda_ratio_give_readable,
-            "_fund_agenda_ratio_take_readable": _fund_agenda_ratio_take_readable,
+            "fund_give_readable": fund_give_readable,
+            "fund_take_readable": fund_take_readable,
+            "fund_agenda_give_readable": fund_agenda_give_readable,
+            "fund_agenda_take_readable": fund_agenda_take_readable,
+            "fund_agenda_ratio_give_readable": fund_agenda_ratio_give_readable,
+            "fund_agenda_ratio_take_readable": fund_agenda_ratio_take_readable,
         }
         voices_dict[voice.voice_name] = voice_dict
 
@@ -267,22 +267,22 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #     group_debt_points_readable_key = f"group_debt_points_readable"
     #     credor_pool_readable_key = f"credor_pool_readable"
     #     debtor_pool_readable_key = f"debtor_pool_readable"
-    #     _fund_agenda_give_readable_key = f"_fund_agenda_give_readable"
-    #     _fund_agenda_ratio_give_readable_key = f"_fund_agenda_ratio_give_readable"
-    #     _fund_agenda_ratio_take_readable_key = f"_fund_agenda_ratio_take_readable"
-    #     _fund_agenda_take_readable_key = f"_fund_agenda_take_readable"
-    #     _fund_give_readable_key = f"_fund_give_readable"
-    #     _fund_take_readable_key = f"_fund_take_readable"
+    #     fund_agenda_give_readable_key = f"fund_agenda_give_readable"
+    #     fund_agenda_ratio_give_readable_key = f"fund_agenda_ratio_give_readable"
+    #     fund_agenda_ratio_take_readable_key = f"fund_agenda_ratio_take_readable"
+    #     fund_agenda_take_readable_key = f"fund_agenda_take_readable"
+    #     fund_give_readable_key = f"fund_give_readable"
+    #     fund_take_readable_key = f"fund_take_readable"
 
     #     group_group_title_readable = f"group_title_readable: {group.group_title}"
     #     group__memberships_readable = f"_memberships_readable: {group._memberships}"
-    #     group__fund_give_readable = f"_fund_give_readable: {group._fund_give}"
-    #     group__fund_take_readable = f"_fund_take_readable: {group._fund_take}"
-    #     group__fund_agenda_give_readable = (
-    #         f"_fund_agenda_give_readable: {group._fund_agenda_give}"
+    #     group_fund_give_readable = f"fund_give_readable: {group.fund_give}"
+    #     group_fund_take_readable = f"fund_take_readable: {group.fund_take}"
+    #     group_fund_agenda_give_readable = (
+    #         f"fund_agenda_give_readable: {group.fund_agenda_give}"
     #     )
-    #     group__fund_agenda_take_readable = (
-    #         f"_fund_agenda_take_readable: {group._fund_agenda_take}"
+    #     group_fund_agenda_take_readable = (
+    #         f"fund_agenda_take_readable: {group.fund_agenda_take}"
     #     )
     #     group_credor_pool_readable = f"credor_pool_readable: {group.credor_pool}"
     #     group_debtor_pool_readable = f"debtor_pool_readable: {group.debtor_pool}"
@@ -295,12 +295,12 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         #     "group_debt_points": x_membership.group_debt_points,
     #         #     "credor_pool": x_membership.credor_pool,
     #         #     "debtor_pool": x_membership.debtor_pool,
-    #         #     "_fund_agenda_give": x_membership._fund_agenda_give,
-    #         #     "_fund_agenda_ratio_give": x_membership._fund_agenda_ratio_give,
-    #         #     "_fund_agenda_ratio_take": x_membership._fund_agenda_ratio_take,
-    #         #     "_fund_agenda_take": x_membership._fund_agenda_take,
-    #         #     "_fund_give": x_membership._fund_give,
-    #         #     "_fund_take": x_membership._fund_take,
+    #         #     "fund_agenda_give": x_membership.fund_agenda_give,
+    #         #     "fund_agenda_ratio_give": x_membership.fund_agenda_ratio_give,
+    #         #     "fund_agenda_ratio_take": x_membership.fund_agenda_ratio_take,
+    #         #     "fund_agenda_take": x_membership.fund_agenda_take,
+    #         #     "fund_give": x_membership.fund_give,
+    #         #     "fund_take": x_membership.fund_take,
     #         #     "voice_name_readable": add_small_dot(
     #         #         f"voice name: {x_membership.voice_name}"
     #         #     ),
@@ -316,23 +316,23 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         #     "debtor_pool_readable": add_small_dot(
     #         #         f"debtor_pool: {x_membership.debtor_pool}"
     #         #     ),
-    #         #     "_fund_agenda_give_readable": add_small_dot(
-    #         #         f"_fund_agenda_give: {x_membership._fund_agenda_give}"
+    #         #     "fund_agenda_give_readable": add_small_dot(
+    #         #         f"fund_agenda_give: {x_membership.fund_agenda_give}"
     #         #     ),
-    #         #     "_fund_agenda_ratio_give_readable": add_small_dot(
-    #         #         f"_fund_agenda_ratio_give: {x_membership._fund_agenda_ratio_give}"
+    #         #     "fund_agenda_ratio_give_readable": add_small_dot(
+    #         #         f"fund_agenda_ratio_give: {x_membership.fund_agenda_ratio_give}"
     #         #     ),
-    #         #     "_fund_agenda_ratio_take_readable": add_small_dot(
-    #         #         f"_fund_agenda_ratio_take: {x_membership._fund_agenda_ratio_take}"
+    #         #     "fund_agenda_ratio_take_readable": add_small_dot(
+    #         #         f"fund_agenda_ratio_take: {x_membership.fund_agenda_ratio_take}"
     #         #     ),
-    #         #     "_fund_agenda_take_readable": add_small_dot(
-    #         #         f"_fund_agenda_take: {x_membership._fund_agenda_take}"
+    #         #     "fund_agenda_take_readable": add_small_dot(
+    #         #         f"fund_agenda_take: {x_membership.fund_agenda_take}"
     #         #     ),
-    #         #     "_fund_give_readable": add_small_dot(
-    #         #         f"_fund_give: {x_membership._fund_give}"
+    #         #     "fund_give_readable": add_small_dot(
+    #         #         f"fund_give: {x_membership.fund_give}"
     #         #     ),
-    #         #     "_fund_take_readable": add_small_dot(
-    #         #         f"_fund_take: {x_membership._fund_take}"
+    #         #     "fund_take_readable": add_small_dot(
+    #         #         f"fund_take: {x_membership.fund_take}"
     #         #     ),
     #         # }
     #         # for x_membership in group._memberships.values()
@@ -345,23 +345,23 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         "group_debt_points": 1,
     #         "credor_pool": 1,
     #         "debtor_pool": 1,
-    #         "_fund_agenda_give": 1,
-    #         "_fund_agenda_ratio_give": 1,
-    #         "_fund_agenda_ratio_take": 1,
-    #         "_fund_agenda_take": 1,
-    #         "_fund_give": 1,
-    #         "_fund_take": 1,
+    #         "fund_agenda_give": 1,
+    #         "fund_agenda_ratio_give": 1,
+    #         "fund_agenda_ratio_take": 1,
+    #         "fund_agenda_take": 1,
+    #         "fund_give": 1,
+    #         "fund_take": 1,
     #         group_title_readable_key: 1,
     #         group_cred_points_readable_key: 1,
     #         group_debt_points_readable_key: 1,
     #         credor_pool_readable_key: 1,
     #         debtor_pool_readable_key: 1,
-    #         _fund_agenda_give_readable_key: 1,
-    #         _fund_agenda_ratio_give_readable_key: 1,
-    #         _fund_agenda_ratio_take_readable_key: 1,
-    #         _fund_agenda_take_readable_key: 1,
-    #         _fund_give_readable_key: 1,
-    #         _fund_take_readable_key: 1,
+    #         fund_agenda_give_readable_key: 1,
+    #         fund_agenda_ratio_give_readable_key: 1,
+    #         fund_agenda_ratio_take_readable_key: 1,
+    #         fund_agenda_take_readable_key: 1,
+    #         fund_give_readable_key: 1,
+    #         fund_take_readable_key: 1,
     #         # "_memberships": x_members_dict,
     #     }
     #     groups_dict[group.group_title] = group_dict

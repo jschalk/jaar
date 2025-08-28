@@ -44,18 +44,6 @@ def _factheirs_str() -> str:
     return "_factheirs"
 
 
-def _fund_cease_str() -> str:
-    return "_fund_cease"
-
-
-def _fund_onset_str() -> str:
-    return "_fund_onset"
-
-
-def _fund_ratio_str() -> str:
-    return "_fund_ratio"
-
-
 def _gogo_calc_str() -> str:
     return "_gogo_calc"
 
@@ -106,6 +94,18 @@ def close_str() -> str:
 
 def denom_str() -> str:
     return "denom"
+
+
+def fund_cease_str() -> str:
+    return "fund_cease"
+
+
+def fund_onset_str() -> str:
+    return "fund_onset"
+
+
+def fund_ratio_str() -> str:
+    return "fund_ratio"
 
 
 def fund_share_str() -> str:

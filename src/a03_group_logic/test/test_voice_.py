@@ -2,17 +2,17 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
 from src.a03_group_logic.test._util.a03_str import (
-    _fund_agenda_give_str,
-    _fund_agenda_ratio_give_str,
-    _fund_agenda_ratio_take_str,
-    _fund_agenda_take_str,
-    _fund_give_str,
-    _fund_take_str,
     _inallocable_voice_debt_points_str,
     _irrational_voice_debt_points_str,
     _memberships_str,
     credor_pool_str,
     debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
+    fund_give_str,
+    fund_take_str,
     knot_str,
     respect_bit_str,
     voice_cred_points_str,
@@ -42,10 +42,10 @@ def test_VoiceUnit_Exists():
     assert not bob_voiceunit._memberships
     assert not bob_voiceunit._irrational_voice_debt_points
     assert not bob_voiceunit._inallocable_voice_debt_points
-    assert not bob_voiceunit._fund_give
-    assert not bob_voiceunit._fund_take
-    assert not bob_voiceunit._fund_agenda_give
-    assert not bob_voiceunit._fund_agenda_take
+    assert not bob_voiceunit.fund_give
+    assert not bob_voiceunit.fund_take
+    assert not bob_voiceunit.fund_agenda_give
+    assert not bob_voiceunit.fund_agenda_take
     assert not bob_voiceunit.knot
     assert not bob_voiceunit.respect_bit
     obj_attrs = set(bob_voiceunit.__dict__.keys())
@@ -53,12 +53,12 @@ def test_VoiceUnit_Exists():
     assert obj_attrs == {
         credor_pool_str(),
         debtor_pool_str(),
-        _fund_agenda_give_str(),
-        _fund_agenda_ratio_give_str(),
-        _fund_agenda_ratio_take_str(),
-        _fund_agenda_take_str(),
-        _fund_give_str(),
-        _fund_take_str(),
+        fund_agenda_give_str(),
+        fund_agenda_ratio_give_str(),
+        fund_agenda_ratio_take_str(),
+        fund_agenda_take_str(),
+        fund_give_str(),
+        fund_take_str(),
         _inallocable_voice_debt_points_str(),
         _irrational_voice_debt_points_str(),
         _memberships_str(),
@@ -113,12 +113,12 @@ def test_voiceunit_shop_SetsAttributes():
     assert yao_voiceunit._memberships == {}
     assert yao_voiceunit._irrational_voice_debt_points == 0
     assert yao_voiceunit._inallocable_voice_debt_points == 0
-    assert yao_voiceunit._fund_give == 0
-    assert yao_voiceunit._fund_take == 0
-    assert yao_voiceunit._fund_agenda_give == 0
-    assert yao_voiceunit._fund_agenda_take == 0
-    assert yao_voiceunit._fund_agenda_ratio_give == 0
-    assert yao_voiceunit._fund_agenda_ratio_take == 0
+    assert yao_voiceunit.fund_give == 0
+    assert yao_voiceunit.fund_take == 0
+    assert yao_voiceunit.fund_agenda_give == 0
+    assert yao_voiceunit.fund_agenda_take == 0
+    assert yao_voiceunit.fund_agenda_ratio_give == 0
+    assert yao_voiceunit.fund_agenda_ratio_take == 0
     assert yao_voiceunit.knot == default_knot_if_None()
     assert yao_voiceunit.respect_bit == default_RespectBit_if_None()
 
@@ -291,66 +291,66 @@ def test_VoiceUnit_reset_listen_calculated_attrs_SetsAttr():
 def test_VoiceUnit_clear_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    bob_voiceunit._fund_give = 0.27
-    bob_voiceunit._fund_take = 0.37
-    bob_voiceunit._fund_agenda_give = 0.41
-    bob_voiceunit._fund_agenda_take = 0.51
-    bob_voiceunit._fund_agenda_ratio_give = 0.433
-    bob_voiceunit._fund_agenda_ratio_take = 0.533
-    assert bob_voiceunit._fund_give == 0.27
-    assert bob_voiceunit._fund_take == 0.37
-    assert bob_voiceunit._fund_agenda_give == 0.41
-    assert bob_voiceunit._fund_agenda_take == 0.51
-    assert bob_voiceunit._fund_agenda_ratio_give == 0.433
-    assert bob_voiceunit._fund_agenda_ratio_take == 0.533
+    bob_voiceunit.fund_give = 0.27
+    bob_voiceunit.fund_take = 0.37
+    bob_voiceunit.fund_agenda_give = 0.41
+    bob_voiceunit.fund_agenda_take = 0.51
+    bob_voiceunit.fund_agenda_ratio_give = 0.433
+    bob_voiceunit.fund_agenda_ratio_take = 0.533
+    assert bob_voiceunit.fund_give == 0.27
+    assert bob_voiceunit.fund_take == 0.37
+    assert bob_voiceunit.fund_agenda_give == 0.41
+    assert bob_voiceunit.fund_agenda_take == 0.51
+    assert bob_voiceunit.fund_agenda_ratio_give == 0.433
+    assert bob_voiceunit.fund_agenda_ratio_take == 0.533
 
     # WHEN
     bob_voiceunit.clear_fund_give_take()
 
     # THEN
-    assert bob_voiceunit._fund_give == 0
-    assert bob_voiceunit._fund_take == 0
-    assert bob_voiceunit._fund_agenda_give == 0
-    assert bob_voiceunit._fund_agenda_take == 0
-    assert bob_voiceunit._fund_agenda_ratio_give == 0
-    assert bob_voiceunit._fund_agenda_ratio_take == 0
+    assert bob_voiceunit.fund_give == 0
+    assert bob_voiceunit.fund_take == 0
+    assert bob_voiceunit.fund_agenda_give == 0
+    assert bob_voiceunit.fund_agenda_take == 0
+    assert bob_voiceunit.fund_agenda_ratio_give == 0
+    assert bob_voiceunit.fund_agenda_ratio_take == 0
 
 
 def test_VoiceUnit_add_fund_agenda_give_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    bob_voiceunit._fund_agenda_give = 0.41
-    assert bob_voiceunit._fund_agenda_give == 0.41
+    bob_voiceunit.fund_agenda_give = 0.41
+    assert bob_voiceunit.fund_agenda_give == 0.41
 
     # WHEN
     bob_voiceunit.add_fund_agenda_give(0.3)
 
     # THEN
-    assert bob_voiceunit._fund_agenda_give == 0.71
+    assert bob_voiceunit.fund_agenda_give == 0.71
 
 
 def test_VoiceUnit_add_fund_agenda_take_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    bob_voiceunit._fund_agenda_take = 0.41
-    assert bob_voiceunit._fund_agenda_take == 0.41
+    bob_voiceunit.fund_agenda_take = 0.41
+    assert bob_voiceunit.fund_agenda_take == 0.41
 
     # WHEN
     bob_voiceunit.add_fund_agenda_take(0.3)
 
     # THEN
-    assert bob_voiceunit._fund_agenda_take == 0.71
+    assert bob_voiceunit.fund_agenda_take == 0.71
 
 
 def test_VoiceUnit_add_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    bob_voiceunit._fund_give = 0.4106
-    bob_voiceunit._fund_take = 0.1106
-    bob_voiceunit._fund_agenda_give = 0.41
-    bob_voiceunit._fund_agenda_take = 0.51
-    assert bob_voiceunit._fund_agenda_give == 0.41
-    assert bob_voiceunit._fund_agenda_take == 0.51
+    bob_voiceunit.fund_give = 0.4106
+    bob_voiceunit.fund_take = 0.1106
+    bob_voiceunit.fund_agenda_give = 0.41
+    bob_voiceunit.fund_agenda_take = 0.51
+    assert bob_voiceunit.fund_agenda_give == 0.41
+    assert bob_voiceunit.fund_agenda_take == 0.51
 
     # WHEN
     bob_voiceunit.add_fund_give_take(
@@ -361,23 +361,23 @@ def test_VoiceUnit_add_fund_give_take_SetsAttr():
     )
 
     # THEN
-    assert bob_voiceunit._fund_give == 0.7406
-    assert bob_voiceunit._fund_take == 0.1656
-    assert bob_voiceunit._fund_agenda_give == 0.71
-    assert bob_voiceunit._fund_agenda_take == 0.56
+    assert bob_voiceunit.fund_give == 0.7406
+    assert bob_voiceunit.fund_take == 0.1656
+    assert bob_voiceunit.fund_agenda_give == 0.71
+    assert bob_voiceunit.fund_agenda_take == 0.56
 
 
 def test_VoiceUnit_set_voiceunits_fund_agenda_ratios_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob", voice_cred_points=15, voice_debt_points=7)
-    bob_voiceunit._fund_give = 0.4106
-    bob_voiceunit._fund_take = 0.1106
-    bob_voiceunit._fund_agenda_give = 0.041
-    bob_voiceunit._fund_agenda_take = 0.051
-    bob_voiceunit._fund_agenda_ratio_give = 0
-    bob_voiceunit._fund_agenda_ratio_take = 0
-    assert bob_voiceunit._fund_agenda_ratio_give == 0
-    assert bob_voiceunit._fund_agenda_ratio_take == 0
+    bob_voiceunit.fund_give = 0.4106
+    bob_voiceunit.fund_take = 0.1106
+    bob_voiceunit.fund_agenda_give = 0.041
+    bob_voiceunit.fund_agenda_take = 0.051
+    bob_voiceunit.fund_agenda_ratio_give = 0
+    bob_voiceunit.fund_agenda_ratio_take = 0
+    assert bob_voiceunit.fund_agenda_ratio_give == 0
+    assert bob_voiceunit.fund_agenda_ratio_take == 0
 
     # WHEN
     bob_voiceunit.set_fund_agenda_ratio_give_take(
@@ -388,8 +388,8 @@ def test_VoiceUnit_set_voiceunits_fund_agenda_ratios_SetsAttr():
     )
 
     # THEN
-    assert bob_voiceunit._fund_agenda_ratio_give == 0.205
-    assert bob_voiceunit._fund_agenda_ratio_take == 0.102
+    assert bob_voiceunit.fund_agenda_ratio_give == 0.205
+    assert bob_voiceunit.fund_agenda_ratio_take == 0.102
 
     # WHEN
     bob_voiceunit.set_fund_agenda_ratio_give_take(
@@ -400,5 +400,5 @@ def test_VoiceUnit_set_voiceunits_fund_agenda_ratios_SetsAttr():
     )
 
     # THEN
-    assert bob_voiceunit._fund_agenda_ratio_give == 0.75
-    assert bob_voiceunit._fund_agenda_ratio_take == 0.5
+    assert bob_voiceunit.fund_agenda_ratio_give == 0.75
+    assert bob_voiceunit.fund_agenda_ratio_take == 0.5
