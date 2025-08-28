@@ -363,7 +363,7 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     sue_belief = get_beliefunit_with_4_levels()
     sue_belief.cash_out()
     # plan tree has no awardunits
-    assert sue_belief.planroot._awardlines == {}
+    assert sue_belief.planroot.awardlines == {}
     sue_str = "Sue"
     wk_str = "sem_jours"
     nation_str = "nation"
@@ -371,18 +371,18 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     sue_belief.add_voiceunit(voice_name=sue_str)
     sue_belief.planroot.set_awardunit(awardunit=sue_awardunit)
     # plan tree has awardlines
-    assert sue_belief.planroot._awardheirs.get(sue_str) is None
+    assert sue_belief.planroot.awardheirs.get(sue_str) is None
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
-    assert sue_belief.planroot._awardheirs.get(sue_str) is not None
-    assert sue_belief.planroot._awardheirs.get(sue_str).awardee_title == sue_str
-    assert sue_belief.planroot._awardlines != {}
+    assert sue_belief.planroot.awardheirs.get(sue_str) is not None
+    assert sue_belief.planroot.awardheirs.get(sue_str).awardee_title == sue_str
+    assert sue_belief.planroot.awardlines != {}
     root_rope = to_rope(sue_belief.planroot.plan_label)
     root_plan = sue_belief.get_plan_obj(rope=root_rope)
-    sue_awardline = sue_belief.planroot._awardlines.get(sue_str)
+    sue_awardline = sue_belief.planroot.awardlines.get(sue_str)
     print(f"{sue_awardline.fund_give=} {root_plan.fund_ratio=} ")
     print(f"  {sue_awardline.fund_take=} {root_plan.fund_ratio=} ")
     sum_x = 0
@@ -412,7 +412,7 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     assert round(sue_awardline.fund_give, 15) == default_fund_pool()
     assert round(sue_awardline.fund_take, 15) == default_fund_pool()
     x_awardline = awardline_shop(sue_str, default_fund_pool(), default_fund_pool())
-    assert sue_belief.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
+    assert sue_belief.planroot.awardlines == {x_awardline.awardee_title: x_awardline}
 
 
 def test_BeliefUnit_cash_out_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_RootPlanUnit():
@@ -425,23 +425,23 @@ def test_BeliefUnit_cash_out_TreeTraverseSets_awardlines_ToRootPlanUnitFromNon_R
     sue_belief.get_plan_obj(casa_rope).set_awardunit(
         awardunit_shop(awardee_title=sue_str)
     )
-    assert sue_belief.planroot._awardlines == {}
+    assert sue_belief.planroot.awardlines == {}
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
-    assert sue_belief.planroot._awardlines != {}
-    print(f"{sue_belief.planroot._awardlines=}")
+    assert sue_belief.planroot.awardlines != {}
+    print(f"{sue_belief.planroot.awardlines=}")
     x_awardline = awardline_shop(
         awardee_title=sue_str,
         fund_give=0.230769231 * default_fund_pool(),
         fund_take=0.230769231 * default_fund_pool(),
     )
-    assert sue_belief.planroot._awardlines == {x_awardline.awardee_title: x_awardline}
+    assert sue_belief.planroot.awardlines == {x_awardline.awardee_title: x_awardline}
     casa_planunit = sue_belief.get_plan_obj(casa_rope)
-    assert casa_planunit._awardlines != {}
-    assert casa_planunit._awardlines == {x_awardline.awardee_title: x_awardline}
+    assert casa_planunit.awardlines != {}
+    assert casa_planunit.awardlines == {x_awardline.awardee_title: x_awardline}
 
 
 def test_BeliefUnit_cash_out_WithRootLevelAwardUnitSetsGroupUnit_fund_give_fund_take():
@@ -648,13 +648,13 @@ def test_BeliefUnit_cash_out_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_f
         x_planroot.awardunits[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot._kids["hunt"]._awardheirs[yao_str]
+        x_planroot._kids["hunt"].awardheirs[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot._kids["hunt"]._awardheirs[zia_str]
+        x_planroot._kids["hunt"].awardheirs[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot._kids["hunt"]._awardheirs[xio_str]
+        x_planroot._kids["hunt"].awardheirs[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
 
     # THEN
@@ -701,11 +701,11 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
     # THEN
     print(f"{plan_dict.keys()=}")
     plan_bob = plan_dict.get(to_rope(sue_belief.moment_label))
-    assert len(plan_bob._awardheirs) == 3
+    assert len(plan_bob.awardheirs) == 3
 
-    bheir_yao = plan_bob._awardheirs.get(yao_str)
-    bheir_zia = plan_bob._awardheirs.get(zia_str)
-    bheir_Xio = plan_bob._awardheirs.get(Xio_str)
+    bheir_yao = plan_bob.awardheirs.get(yao_str)
+    bheir_zia = plan_bob.awardheirs.get(zia_str)
+    bheir_Xio = plan_bob.awardheirs.get(Xio_str)
     assert bheir_yao.fund_give == 0.5 * default_fund_pool()
     assert bheir_yao.fund_take == 0.75 * default_fund_pool()
     assert bheir_zia.fund_give == 0.25 * default_fund_pool()
@@ -723,7 +723,7 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
 
     # fund_give_sum = 0
     # fund_take_sum = 0
-    # for group in x_belief.planroot._awardheirs.values():
+    # for group in x_belief.planroot.awardheirs.values():
     #     print(f"{group=}")
     #     assert group.fund_give is not None
     #     assert group.fund_give in [0.25, 0.5]
@@ -1121,7 +1121,7 @@ class AwardAgendaMetrics:
     def set_sums(self, agenda_dict: dict[RopeTerm, PlanUnit]):
         for agenda_plan in agenda_dict.values():
             self.sum_belief_agenda_share += agenda_plan.get_fund_share()
-            if agenda_plan._awardlines == {}:
+            if agenda_plan.awardlines == {}:
                 self.agenda_no_count += 1
                 self.agenda_no_belief_i_sum += agenda_plan.get_fund_share()
             else:

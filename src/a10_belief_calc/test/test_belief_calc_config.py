@@ -42,16 +42,16 @@ from src.a04_reason_logic.test._util.a04_str import (
     status_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
-    _all_voice_cred_str,
-    _all_voice_debt_str,
-    _descendant_task_count_str,
-    _gogo_calc_str,
     _healerunit_ratio_str,
     _range_evaluated_str,
     _stop_calc_str,
+    all_voice_cred_str,
+    all_voice_debt_str,
+    descendant_task_count_str,
     fund_cease_str,
     fund_onset_str,
     fund_ratio_str,
+    gogo_calc_str,
     problem_bool_str,
     star_str,
     task_str,
@@ -268,9 +268,9 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     assert expected_blrmemb_jmetrics_keys == blrmemb_jmetrics_keys
     expected_blrplan_jmetrics_keys = {
         "active",
-        "_all_voice_cred",
-        "_all_voice_debt",
-        "_descendant_task_count",
+        "all_voice_cred",
+        "all_voice_debt",
+        "descendant_task_count",
         "fund_ratio",
         "fund_iota",
         "fund_onset",
@@ -279,7 +279,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "_level",
         "_range_evaluated",
         "chore",
-        "_gogo_calc",
+        "gogo_calc",
         "_stop_calc",
     }
     assert expected_blrplan_jmetrics_keys == blrplan_jmetrics_keys
@@ -453,14 +453,14 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         numor_str(),
         "star",
         stop_want_str(),
-        "_gogo_calc",
+        "gogo_calc",
         "_stop_calc",
         "active",
         "fund_onset",
         "fund_cease",
-        "_descendant_task_count",
-        "_all_voice_cred",
-        "_all_voice_debt",
+        "descendant_task_count",
+        "all_voice_cred",
+        "all_voice_debt",
         "_healerunit_ratio",
         "_level",
         "chore",
@@ -675,12 +675,12 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrlabo, jm, "_belief_name_is_labor") == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, "active") == "int"
     assert g_sqlitetype(cfig, blrplan, jm, "active") == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _all_voice_cred_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, _all_voice_cred_str()) == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _all_voice_debt_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, _all_voice_debt_str()) == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _descendant_task_count_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, _descendant_task_count_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, all_voice_cred_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, all_voice_cred_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, all_voice_debt_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, all_voice_debt_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, descendant_task_count_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, descendant_task_count_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, fund_cease_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, fund_cease_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, fund_iota_str()) == "float"
@@ -689,8 +689,8 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jm, fund_onset_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, fund_ratio_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, fund_ratio_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, _gogo_calc_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _gogo_calc_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, gogo_calc_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, gogo_calc_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, _healerunit_ratio_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, _healerunit_ratio_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, "_level") == "int"
@@ -870,13 +870,13 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(party_title_str()) == TitleTerm_str()
     assert belief_calc_args_type_dict.get("_belief_name_is_labor") == "int"
     assert belief_calc_args_type_dict.get("active") == "int"
-    assert belief_calc_args_type_dict.get(_all_voice_cred_str()) == "int"
-    assert belief_calc_args_type_dict.get(_all_voice_debt_str()) == "int"
-    assert belief_calc_args_type_dict.get(_descendant_task_count_str()) == "int"
+    assert belief_calc_args_type_dict.get(all_voice_cred_str()) == "int"
+    assert belief_calc_args_type_dict.get(all_voice_debt_str()) == "int"
+    assert belief_calc_args_type_dict.get(descendant_task_count_str()) == "int"
     assert belief_calc_args_type_dict.get(fund_cease_str()) == "float"
     assert belief_calc_args_type_dict.get(fund_onset_str()) == "float"
     assert belief_calc_args_type_dict.get(fund_ratio_str()) == "float"
-    assert belief_calc_args_type_dict.get(_gogo_calc_str()) == "float"
+    assert belief_calc_args_type_dict.get(gogo_calc_str()) == "float"
     assert belief_calc_args_type_dict.get("_healerunit_ratio") == "float"
     assert belief_calc_args_type_dict.get("_level") == "int"
     assert belief_calc_args_type_dict.get(_range_evaluated_str()) == "int"

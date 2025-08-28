@@ -81,10 +81,10 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
 
     # THEN
     # for plan_x in wk_plan._kids.values():
-    #     print(f"{plan_x.plan_label=} {plan_x._gogo_calc=} {plan_x._stop_calc=} ")
+    #     print(f"{plan_x.plan_label=} {plan_x.gogo_calc=} {plan_x._stop_calc=} ")
     # print("")
     # for plan_x in ranged_plans.values():
-    #     print(f"{plan_x.plan_label=} {plan_x._gogo_calc=} {plan_x._stop_calc=} ")
+    #     print(f"{plan_x.plan_label=} {plan_x.gogo_calc=} {plan_x._stop_calc=} ")
     assert len(ranged_plans) == 3
 
 

@@ -1,11 +1,4 @@
 from src.a05_plan_logic.test._util.a05_str import (
-    _all_voice_cred_str,
-    _all_voice_debt_str,
-    _awardheirs_str,
-    _awardlines_str,
-    _descendant_task_count_str,
-    _factheirs_str,
-    _gogo_calc_str,
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
@@ -16,13 +9,20 @@ from src.a05_plan_logic.test._util.a05_str import (
     _uid_str,
     active_hx_str,
     addin_str,
+    all_voice_cred_str,
+    all_voice_debt_str,
+    awardheirs_str,
+    awardlines_str,
     begin_str,
     close_str,
     denom_str,
+    descendant_task_count_str,
+    factheirs_str,
     fund_cease_str,
     fund_onset_str,
     fund_ratio_str,
     fund_share_str,
+    gogo_calc_str,
     gogo_want_str,
     healer_name_str,
     healerunit_str,
@@ -40,16 +40,16 @@ from src.a05_plan_logic.test._util.a05_str import (
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert active_hx_str() == "active_hx"
-    assert _all_voice_cred_str() == "_all_voice_cred"
-    assert _all_voice_debt_str() == "_all_voice_debt"
-    assert _awardheirs_str() == "_awardheirs"
-    assert _awardlines_str() == "_awardlines"
-    assert _descendant_task_count_str() == "_descendant_task_count"
-    assert _factheirs_str() == "_factheirs"
+    assert all_voice_cred_str() == "all_voice_cred"
+    assert all_voice_debt_str() == "all_voice_debt"
+    assert awardheirs_str() == "awardheirs"
+    assert awardlines_str() == "awardlines"
+    assert descendant_task_count_str() == "descendant_task_count"
+    assert factheirs_str() == "factheirs"
     assert fund_cease_str() == "fund_cease"
     assert fund_onset_str() == "fund_onset"
     assert fund_ratio_str() == "fund_ratio"
-    assert _gogo_calc_str() == "_gogo_calc"
+    assert gogo_calc_str() == "gogo_calc"
     assert _healerunit_ratio_str() == "_healerunit_ratio"
     assert _is_expanded_str() == "_is_expanded"
     assert _level_str() == "_level"

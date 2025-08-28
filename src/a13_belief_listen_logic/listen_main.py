@@ -304,7 +304,7 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
         listener_id = listener_hubunit.belief_name
         healer_hubunit = copy_deepcopy(listener_hubunit)
         healer_hubunit.belief_name = x_healer_name
-        _fact_state_keep_visions_and_listen(
+        fact_state_keep_visions_and_listen(
             listener_id, keep_dict, healer_hubunit, new_job
         )
 
@@ -316,7 +316,7 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
     save_job_file(listener_hubunit.moment_mstr_dir, new_job)
 
 
-def _fact_state_keep_visions_and_listen(
+def fact_state_keep_visions_and_listen(
     listener_id: BeliefName,
     keep_dict: dict[RopeTerm],
     healer_hubunit: HubUnit,

@@ -51,7 +51,7 @@ def test_BeliefUnit_set_plan_dict_Scenario0():
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert not root_plan.begin
     assert not root_plan.close
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
     assert not root_plan._stop_calc
     assert yao_belief._plan_dict == {}
     assert yao_belief._reason_contexts == set()
@@ -62,7 +62,7 @@ def test_BeliefUnit_set_plan_dict_Scenario0():
     # THEN
     assert not root_plan.begin
     assert not root_plan.close
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
     assert not root_plan._stop_calc
     assert yao_belief._plan_dict == {root_plan.get_plan_rope(): root_plan}
     assert yao_belief._reason_contexts == set()
@@ -79,7 +79,7 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
     assert not root_plan._stop_calc
 
     # WHEN
@@ -88,7 +88,7 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
     assert not root_plan._stop_calc
 
 
@@ -104,13 +104,13 @@ def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     texas_str = "Texas"
     texas_rope = sue_belief.make_rope(usa_rope, texas_str)
     texas_plan = sue_belief.get_plan_obj(texas_rope)
-    texas_plan._gogo_calc = 7
+    texas_plan.gogo_calc = 7
     texas_plan._stop_calc = 11
     texas_plan._range_evaluated = True
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
     assert not root_plan._stop_calc
     assert texas_plan._range_evaluated
-    assert texas_plan._gogo_calc
+    assert texas_plan.gogo_calc
     assert texas_plan._stop_calc
 
     # WHEN
@@ -120,7 +120,7 @@ def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     assert not root_plan.begin
     assert not root_plan.close
     assert not texas_plan._range_evaluated
-    assert not texas_plan._gogo_calc
+    assert not texas_plan.gogo_calc
     assert not texas_plan._stop_calc
 
 

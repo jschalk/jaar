@@ -749,7 +749,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_plan = sue_belief.get_plan_obj(laundry_rope)
     laundry_reasonheir = laundry_plan.get_reasonheir(cregtime_rope)
     laundry_case = laundry_reasonheir.get_case(cregtime_rope)
-    laundry_factheir = laundry_plan._factheirs.get(cregtime_rope)
+    laundry_factheir = laundry_plan.factheirs.get(cregtime_rope)
     # print(
     #     f"{laundry_plan.active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
     # )
@@ -772,7 +772,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_plan = sue_belief.get_plan_obj(laundry_rope)
     laundry_reasonheir = laundry_plan.get_reasonheir(cregtime_rope)
     laundry_case = laundry_reasonheir.get_case(cregtime_rope)
-    laundry_factheir = laundry_plan._factheirs.get(cregtime_rope)
+    laundry_factheir = laundry_plan.factheirs.get(cregtime_rope)
     # print(
     #     f"{laundry_plan.active=} {laundry_case.reason_lower=} {laundry_factheir.fact_lower % 10080=}"
     # )
@@ -783,7 +783,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     #     if x_planunit.plan_label in [laundry_str]:
     #         print(f"{x_planunit.plan_label=} {x_planunit.begin=} {x_planunit.close=}")
     #         print(f"{x_planunit._kids.keys()=}")
-    #         creg_factheir = x_planunit._factheirs.get(cregtime_rope)
+    #         creg_factheir = x_planunit.factheirs.get(cregtime_rope)
     #         print(f"{creg_factheir.fact_lower % 10080=}")
     #         print(f"{creg_factheir.fact_upper % 10080=}")
 

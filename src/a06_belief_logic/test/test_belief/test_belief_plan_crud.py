@@ -445,12 +445,12 @@ def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario05_awardunit():
     sue_belief = get_beliefunit_with_4_levels()
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    # _awardunit: dict = None,
+    # awardunit: dict = None,
     sue_belief.planroot._kids[casa_str].awardunits = {
         "fun": awardunit_shop(awardee_title="fun", give_force=1, take_force=7)
     }
-    _awardunits = sue_belief.planroot._kids[casa_str].awardunits
-    assert _awardunits == {
+    awardunits = sue_belief.planroot._kids[casa_str].awardunits
+    assert awardunits == {
         "fun": awardunit_shop(awardee_title="fun", give_force=1, take_force=7)
     }
     x_awardunit = awardunit_shop(awardee_title="fun", give_force=4, take_force=8)
@@ -892,7 +892,7 @@ def test_BeliefUnit_edit_plan_attr_DeletesPlanUnit_awardunits():
     swim_plan = yao_belief.get_plan_obj(swim_rope)
     print(f"{swim_plan.plan_label=}")
     print(f"{swim_plan.awardunits=}")
-    print(f"{swim_plan._awardheirs=}")
+    print(f"{swim_plan.awardheirs=}")
 
     assert len(yao_belief.planroot._kids[swim_str].awardunits) == 2
 

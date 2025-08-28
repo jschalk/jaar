@@ -112,20 +112,20 @@ def set_readable_plan_values(x_plan: PlanUnit, result: dict):
         else add_small_dot("Root Plan parent_rope is empty str")
     )
     result["fund_share"] = x_plan.get_fund_share()
-    _all_voice_cred_str = f"all_voice_cred = {x_plan._all_voice_cred}"
-    _all_voice_debt_str = f"all_voice_debt = {x_plan._all_voice_debt}"
-    _all_voice_cred_str = add_small_dot(_all_voice_cred_str)
-    _all_voice_debt_str = add_small_dot(_all_voice_debt_str)
-    result["_all_voice_cred"] = _all_voice_cred_str
-    result["_all_voice_debt"] = _all_voice_debt_str
+    all_voice_cred_str = f"all_voice_cred = {x_plan.all_voice_cred}"
+    all_voice_debt_str = f"all_voice_debt = {x_plan.all_voice_debt}"
+    all_voice_cred_str = add_small_dot(all_voice_cred_str)
+    all_voice_debt_str = add_small_dot(all_voice_debt_str)
+    result["all_voice_cred"] = all_voice_cred_str
+    result["all_voice_debt"] = all_voice_debt_str
     result["fund_ratio"] = readable_percent(result.get("fund_ratio"))
     result_gogo_want = result.get("gogo_want")
     result_stop_want = result.get("stop_want")
-    result_gogo_calc = result.get("_gogo_calc")
+    result_gogo_calc = result.get("gogo_calc")
     result_stop_calc = result.get("_stop_calc")
     result["gogo_want"] = add_small_dot(f"gogo_want: {result_gogo_want}")
     result["stop_want"] = add_small_dot(f"stop_want: {result_stop_want}")
-    result["_gogo_calc"] = add_small_dot(f"gogo_calc: {result_gogo_calc}")
+    result["gogo_calc"] = add_small_dot(f"gogo_calc: {result_gogo_calc}")
     result["_stop_calc"] = add_small_dot(f"stop_calc: {result_stop_calc}")
     result_addin = result.get("addin")
     result_begin = result.get("begin")

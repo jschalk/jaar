@@ -17,16 +17,16 @@ from src.a05_plan_logic.plan import (
 def test_PlanUnit_clear_all_voice_cred_debt_ClearsAttrs():
     # ESTABLISH
     ball_str = "ball"
-    ball_plan = planunit_shop(ball_str, _all_voice_cred=55, _all_voice_debt=33)
-    assert ball_plan._all_voice_cred == 55
-    assert ball_plan._all_voice_debt == 33
+    ball_plan = planunit_shop(ball_str, all_voice_cred=55, all_voice_debt=33)
+    assert ball_plan.all_voice_cred == 55
+    assert ball_plan.all_voice_debt == 33
 
     # WHEN
     ball_plan.clear_all_voice_cred_debt()
 
     # THEN
-    assert ball_plan._all_voice_cred is None
-    assert ball_plan._all_voice_debt is None
+    assert ball_plan.all_voice_cred is None
+    assert ball_plan.all_voice_debt is None
 
 
 def test_PlanUnit_get_fund_share_ReturnsObj():
@@ -103,13 +103,13 @@ def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():
         biker_awardheir.awardee_title: biker_awardheir,
     }
     sport_str = "sport"
-    sport_plan = planunit_shop(sport_str, _awardheirs=x_awardheirs)
+    sport_plan = planunit_shop(sport_str, awardheirs=x_awardheirs)
     assert sport_plan.fund_iota == 1
-    assert len(sport_plan._awardheirs) == 2
-    swim_awardheir = sport_plan._awardheirs.get(swim_str)
+    assert len(sport_plan.awardheirs) == 2
+    swim_awardheir = sport_plan.awardheirs.get(swim_str)
     assert not swim_awardheir.fund_give
     assert not swim_awardheir.fund_take
-    biker_awardheir = sport_plan._awardheirs.get(biker_str)
+    biker_awardheir = sport_plan.awardheirs.get(biker_str)
     assert not biker_awardheir.fund_give
     assert not biker_awardheir.fund_take
 
@@ -119,11 +119,11 @@ def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():
     sport_plan.set_awardheirs_fund_give_fund_take()
 
     # THEN
-    print(f"{len(sport_plan._awardheirs)=}")
-    swim_awardheir = sport_plan._awardheirs.get(swim_str)
+    print(f"{len(sport_plan.awardheirs)=}")
+    swim_awardheir = sport_plan.awardheirs.get(swim_str)
     assert swim_awardheir.fund_give == 516
     assert swim_awardheir.fund_take == 496
-    biker_awardheir = sport_plan._awardheirs.get(biker_str)
+    biker_awardheir = sport_plan.awardheirs.get(biker_str)
     assert biker_awardheir.fund_give == 213
     assert biker_awardheir.fund_take == 233
 
@@ -137,7 +137,7 @@ def test_PlanUnit_awardheir_exists_ReturnsObj():
     assert not sport_planunit.awardheir_exists()
 
     # WHEN
-    sport_planunit._awardheirs[biker_str] = biker_awardheir
+    sport_planunit.awardheirs[biker_str] = biker_awardheir
 
     # THEN
     assert sport_planunit.awardheir_exists()
@@ -199,13 +199,13 @@ def test_PlanUnit_set_reasonheirsRefusesNewValues():
 def test_PlanUnit_set_range_factheirs_SetsAttrNoParameters():
     # ESTABLISH
     ball_plan = planunit_shop("ball")
-    assert ball_plan._factheirs == {}
+    assert ball_plan.factheirs == {}
 
     # WHEN
     ball_plan.set_range_factheirs(belief_plan_dict={}, range_inheritors={})
 
     # THEN
-    assert ball_plan._factheirs == {}
+    assert ball_plan.factheirs == {}
 
 
 def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
@@ -234,10 +234,10 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
 
     x_range_inheritors = {tue_rope: wk_rope}
     assert len(ball_plan._reasonheirs) == 1
-    assert ball_plan._factheirs == {wk_rope: wk_factheir}
-    assert ball_plan._factheirs.get(wk_rope)
-    assert len(ball_plan._factheirs) == 1
-    assert ball_plan._factheirs.get(tue_rope) is None
+    assert ball_plan.factheirs == {wk_rope: wk_factheir}
+    assert ball_plan.factheirs.get(wk_rope)
+    assert len(ball_plan.factheirs) == 1
+    assert ball_plan.factheirs.get(tue_rope) is None
 
     # WHEN
     ball_plan.set_range_factheirs(x_belief_plan_dict, x_range_inheritors)
@@ -246,8 +246,8 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     tue_reason_lower = 113
     tue_reason_upper = 117
     tue_factheir = factheir_shop(tue_rope, tue_rope, tue_reason_lower, tue_reason_upper)
-    assert len(ball_plan._factheirs) == 2
-    assert ball_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
+    assert len(ball_plan.factheirs) == 2
+    assert ball_plan.factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
 
 def test_PlanUnit_set_reasonunit_SetsAttr():

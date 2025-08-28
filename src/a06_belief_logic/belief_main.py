@@ -113,7 +113,7 @@ class healerunit_group_title_Exception(Exception):
     pass
 
 
-class _gogo_calc_stop_calc_Exception(Exception):
+class gogo_calc_stop_calc_Exception(Exception):
     pass
 
 
@@ -674,14 +674,14 @@ class BeliefUnit:
             self._create_missing_plans(rope=kid_rope)
 
     def _get_filtered_awardunits_plan(self, x_plan: PlanUnit) -> PlanUnit:
-        _awardunits_to_delete = [
-            _awardunit_awardee_title
-            for _awardunit_awardee_title in x_plan.awardunits.keys()
-            if self.get_voiceunit_group_titles_dict().get(_awardunit_awardee_title)
+        awardunits_to_delete = [
+            awardunit_awardee_title
+            for awardunit_awardee_title in x_plan.awardunits.keys()
+            if self.get_voiceunit_group_titles_dict().get(awardunit_awardee_title)
             is None
         ]
-        for _awardunit_awardee_title in _awardunits_to_delete:
-            x_plan.awardunits.pop(_awardunit_awardee_title)
+        for awardunit_awardee_title in awardunits_to_delete:
+            x_plan.awardunits.pop(awardunit_awardee_title)
         if x_plan.laborunit is not None:
             _partys_to_delete = [
                 _partyunit_party_title
@@ -968,10 +968,10 @@ reason_case:    {reason_case}"""
             # If there are no awardlines associated with plan
             # allot fund_share via general voiceunit
             # cred ratio and debt ratio
-            # if plan.is_agenda_plan() and plan._awardlines == {}:
+            # if plan.is_agenda_plan() and plan.awardlines == {}:
             if plan.is_agenda_plan():
                 if plan.awardheir_exists():
-                    for x_awardline in plan._awardlines.values():
+                    for x_awardline in plan.awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
                             group_title=x_awardline.awardee_title,
                             awardline_fund_give=x_awardline.fund_give,
@@ -1079,8 +1079,8 @@ reason_case:    {reason_case}"""
                 self._reason_contexts.add(x_reason_context)
 
     def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
-        exception_str = f"Error has occurred, Plan '{plan_rope}' is having _gogo_calc and _stop_calc attributes set twice"
-        raise _gogo_calc_stop_calc_Exception(exception_str)
+        exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and _stop_calc attributes set twice"
+        raise gogo_calc_stop_calc_Exception(exception_str)
 
     def _distribute_math_attrs(self, math_plan: PlanUnit):
         single_range_plan_list = [math_plan]
@@ -1089,14 +1089,14 @@ reason_case:    {reason_case}"""
             if r_plan._range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
             if r_plan.is_math():
-                r_plan._gogo_calc = r_plan.begin
+                r_plan.gogo_calc = r_plan.begin
                 r_plan._stop_calc = r_plan.close
             else:
                 parent_rope = get_parent_rope(
                     rope=r_plan.get_plan_rope(), knot=r_plan.knot
                 )
                 parent_plan = self.get_plan_obj(parent_rope)
-                r_plan._gogo_calc = parent_plan._gogo_calc
+                r_plan.gogo_calc = parent_plan.gogo_calc
                 r_plan._stop_calc = parent_plan._stop_calc
                 self._range_inheritors[r_plan.get_plan_rope()] = (
                     math_plan.get_plan_rope()
@@ -1141,7 +1141,7 @@ reason_case:    {reason_case}"""
             x_plan_obj.add_to_descendant_task_count(x_descendant_task_count)
             if x_plan_obj.is_kidless():
                 x_plan_obj.set_kidless_awardlines()
-                child_awardlines = x_plan_obj._awardlines
+                child_awardlines = x_plan_obj.awardlines
             else:
                 x_plan_obj.set_awardlines(child_awardlines)
 
@@ -1150,19 +1150,19 @@ reason_case:    {reason_case}"""
 
             if (
                 group_everyone != False
-                and x_plan_obj._all_voice_cred != False
-                and x_plan_obj._all_voice_debt != False
-                and x_plan_obj._awardheirs != {}
+                and x_plan_obj.all_voice_cred != False
+                and x_plan_obj.all_voice_debt != False
+                and x_plan_obj.awardheirs != {}
             ) or (
                 group_everyone != False
-                and x_plan_obj._all_voice_cred is False
-                and x_plan_obj._all_voice_debt is False
+                and x_plan_obj.all_voice_cred is False
+                and x_plan_obj.all_voice_debt is False
             ):
                 group_everyone = False
             elif group_everyone != False:
                 group_everyone = True
-            x_plan_obj._all_voice_cred = group_everyone
-            x_plan_obj._all_voice_debt = group_everyone
+            x_plan_obj.all_voice_cred = group_everyone
+            x_plan_obj.all_voice_debt = group_everyone
 
             if x_plan_obj.healerunit.any_healer_name_exists():
                 keep_justified_by_problem = False
@@ -1191,7 +1191,7 @@ reason_case:    {reason_case}"""
 
     def _allot_fund_share(self, plan: PlanUnit):
         if plan.awardheir_exists():
-            self._set_groupunits_fund_share(plan._awardheirs)
+            self._set_groupunits_fund_share(plan.awardheirs)
         elif plan.awardheir_exists() is False:
             self._add_to_voiceunits_fund_give_take(plan.get_fund_share())
 
@@ -1242,9 +1242,9 @@ reason_case:    {reason_case}"""
                 x_plan.inherit_awardheirs()
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
-                x_plan.set_factheirs(parent_plan._factheirs)
+                x_plan.set_factheirs(parent_plan.factheirs)
                 x_plan.set_laborheir(parent_plan.laborheir, self.groupunits)
-                x_plan.inherit_awardheirs(parent_plan._awardheirs)
+                x_plan.inherit_awardheirs(parent_plan.awardheirs)
             x_plan.set_awardheirs_fund_give_fund_take()
 
     def cash_out(self, keep_exceptions: bool = False):

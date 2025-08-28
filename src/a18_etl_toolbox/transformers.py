@@ -929,7 +929,7 @@ def etl_moment_json_voice_nets_to_moment_voice_nets_table(
     for moment_label in get_level1_dirs(moments_dir):
         x_momentunit = get_default_path_momentunit(moment_mstr_dir, moment_label)
         x_momentunit.set_all_tranbook()
-        insert_tranunit_voices_net(cursor, x_momentunit._all_tranbook)
+        insert_tranunit_voices_net(cursor, x_momentunit.all_tranbook)
 
 
 def create_last_run_metrics_json(cursor: sqlite3_Cursor, moment_mstr_dir: str):

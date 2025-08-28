@@ -107,14 +107,14 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_active = 1
-    x__all_voice_cred = 2
-    x__all_voice_debt = 3
-    x__descendant_task_count = 4
+    x_all_voice_cred = 2
+    x_all_voice_debt = 3
+    x_descendant_task_count = 4
     x_fund_cease = 5
     x_fund_iota = 6
     x_fund_onset = 7
     x_fund_ratio = 8
-    x__gogo_calc = 9
+    x_gogo_calc = 9
     x__healerunit_ratio = 10
     x__level = 11
     x__range_evaluated = 12
@@ -136,14 +136,14 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "active": x_active,
-        "_all_voice_cred": x__all_voice_cred,
-        "_all_voice_debt": x__all_voice_debt,
-        "_descendant_task_count": x__descendant_task_count,
+        "all_voice_cred": x_all_voice_cred,
+        "all_voice_debt": x_all_voice_debt,
+        "descendant_task_count": x_descendant_task_count,
         "fund_cease": x_fund_cease,
         "fund_iota": x_fund_iota,
         "fund_onset": x_fund_onset,
         "fund_ratio": x_fund_ratio,
-        "_gogo_calc": x__gogo_calc,
+        "gogo_calc": x_gogo_calc,
         "_healerunit_ratio": x__healerunit_ratio,
         "_level": x__level,
         "_range_evaluated": x__range_evaluated,

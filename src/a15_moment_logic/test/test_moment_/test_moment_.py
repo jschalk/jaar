@@ -71,7 +71,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment._offi_time_max
     assert not amy_moment._beliefs_dir
     assert not amy_moment._packs_dir
-    assert not amy_moment._all_tranbook
+    assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
         moment_label_str(),
         timeline_str(),
@@ -85,7 +85,7 @@ def test_MomentUnit_Exists():
         job_listen_rotations_str(),
         "_moment_dir",
         "moment_mstr_dir",
-        "_all_tranbook",
+        "all_tranbook",
         "_offi_time_max",
         "_beliefs_dir",
         "_packs_dir",
@@ -114,7 +114,7 @@ def test_momentunit_shop_ReturnsMomentUnit():
     # Calculated fields
     assert a23_moment._beliefs_dir != None
     assert a23_moment._packs_dir != None
-    assert a23_moment._all_tranbook == tranbook_shop(a23_str)
+    assert a23_moment.all_tranbook == tranbook_shop(a23_str)
 
 
 def test_momentunit_shop_ReturnsMomentUnitWith_moments_dir(env_dir_setup_cleanup):

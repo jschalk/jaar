@@ -19,11 +19,11 @@ def test_get_kids_in_range_GetsCorrectPlans():
     jan_plan = mon_plan.get_kid(jan_str)
     feb_plan = mon_plan.get_kid(feb_str)
     mar_plan = mon_plan.get_kid(mar_str)
-    jan_plan._gogo_calc = 0
+    jan_plan.gogo_calc = 0
     jan_plan._stop_calc = 31
-    feb_plan._gogo_calc = 31
+    feb_plan.gogo_calc = 31
     feb_plan._stop_calc = 60
-    mar_plan._gogo_calc = 60
+    mar_plan.gogo_calc = 60
     mar_plan._stop_calc = 91
 
     # WHEN / THEN

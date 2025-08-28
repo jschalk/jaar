@@ -16,32 +16,32 @@ from src.a04_reason_logic.test._util.a04_str import (
 )
 
 
-def _all_voice_cred_str() -> str:
-    return "_all_voice_cred"
+def all_voice_cred_str() -> str:
+    return "all_voice_cred"
 
 
-def _all_voice_debt_str() -> str:
-    return "_all_voice_debt"
+def all_voice_debt_str() -> str:
+    return "all_voice_debt"
 
 
-def _awardheirs_str() -> str:
-    return "_awardheirs"
+def awardheirs_str() -> str:
+    return "awardheirs"
 
 
-def _awardlines_str() -> str:
-    return "_awardlines"
+def awardlines_str() -> str:
+    return "awardlines"
 
 
-def _descendant_task_count_str() -> str:
-    return "_descendant_task_count"
+def descendant_task_count_str() -> str:
+    return "descendant_task_count"
 
 
-def _factheirs_str() -> str:
-    return "_factheirs"
+def factheirs_str() -> str:
+    return "factheirs"
 
 
-def _gogo_calc_str() -> str:
-    return "_gogo_calc"
+def gogo_calc_str() -> str:
+    return "gogo_calc"
 
 
 def _healerunit_ratio_str() -> str:

@@ -327,7 +327,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Division():
     )
 
     run_plan = zia_belief.get_plan_obj(run_rope)
-    # print(f"{run_plan._factheirs=}")
+    # print(f"{run_plan.factheirs=}")
     zia_belief.add_fact(
         fact_context=jour_rope, fact_state=jour_rope, fact_lower=1, fact_upper=2
     )
@@ -344,7 +344,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Division():
         fact_context=jour_rope, fact_state=jour_rope, fact_lower=401, fact_upper=402
     )
     assert len(zia_belief.get_agenda_dict()) == 1
-    # print(f"{run_plan._factheirs=}")
+    # print(f"{run_plan.factheirs=}")
     print(f"{run_plan.factunits=}")
 
     # WHEN
@@ -352,7 +352,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Division():
 
     # THEN
     print(f"{run_plan.factunits=}")
-    # print(f"{run_plan._factheirs=}")
+    # print(f"{run_plan.factheirs=}")
     assert len(zia_belief.get_agenda_dict()) == 0
 
 
@@ -435,7 +435,7 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     #         print(f"{plan_x.get_plan_rope()=}")
 
     print(f"\nPlan = '{evening_str}' and reason '{gregziet_rope}'")
-    factheir_gregziet = evening_plan._factheirs.get(gregziet_rope)
+    factheir_gregziet = evening_plan.factheirs.get(gregziet_rope)
     print(f"\n{factheir_gregziet=}")
 
     # for reasonheir in agenda_plan._reasonheirs.values():

@@ -238,12 +238,12 @@ class PlanUnit:
 
     active : bool that describes if the plan task is active, calculated by MomentUnit.
     active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
-    _all_voice_cred : bool Flag indicating there are not explicitley defined awardunits
-    _all_voice_debt : bool Flag indicating there are not explicitley defined awardunits
-    _awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
-    _awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
-    _descendant_task_count : int Count of descendant plans marked as tasks.
-    _factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
+    all_voice_cred : bool Flag indicating there are not explicitley defined awardunits
+    all_voice_debt : bool Flag indicating there are not explicitley defined awardunits
+    awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
+    awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
+    descendant_task_count : int Count of descendant plans marked as tasks.
+    factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
     fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
@@ -254,7 +254,7 @@ class PlanUnit:
     _reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
     chore : bool describes if a unit can be changed to inactive with fact range change.
     laborheir : LaborHeir parent plan provided labor relationships
-    _gogo_calc : float
+    gogo_calc : float
     _stop_calc : float
     """
 
@@ -285,12 +285,12 @@ class PlanUnit:
     # Calculated fields
     active: bool = None
     active_hx: dict[int, bool] = None
-    _all_voice_cred: bool = None
-    _all_voice_debt: bool = None
-    _awardheirs: dict[GroupTitle, AwardHeir] = None
-    _awardlines: dict[GroupTitle, AwardLine] = None
-    _descendant_task_count: int = None
-    _factheirs: dict[RopeTerm, FactHeir] = None
+    all_voice_cred: bool = None
+    all_voice_debt: bool = None
+    awardheirs: dict[GroupTitle, AwardHeir] = None
+    awardlines: dict[GroupTitle, AwardLine] = None
+    descendant_task_count: int = None
+    factheirs: dict[RopeTerm, FactHeir] = None
     fund_ratio: float = None
     fund_iota: FundIota = None
     fund_onset: FundNum = None
@@ -301,7 +301,7 @@ class PlanUnit:
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None
     chore: bool = None
     laborheir: LaborHeir = None
-    _gogo_calc: float = None
+    gogo_calc: float = None
     _stop_calc: float = None
 
     def is_agenda_plan(self, necessary_reason_context: RopeTerm = None) -> bool:
@@ -329,14 +329,14 @@ class PlanUnit:
 
     def set_factheirs(self, facts: dict[RopeTerm, FactCore]):
         facts_dict = get_empty_dict_if_None(facts)
-        self._factheirs = {}
+        self.factheirs = {}
         for x_factcore in facts_dict.values():
             self._set_factheir(x_factcore)
 
     def _set_factheir(self, x_fact: FactCore):
         if (
             x_fact.fact_context == self.get_plan_rope()
-            and self._gogo_calc is not None
+            and self.gogo_calc is not None
             and self._stop_calc is not None
             and self.begin is None
             and self.close is None
@@ -349,7 +349,7 @@ class PlanUnit:
         )
         self.delete_factunit_if_past(x_factheir)
         x_factheir = self.apply_factunit_moldations(x_factheir)
-        self._factheirs[x_factheir.fact_context] = x_factheir
+        self.factheirs[x_factheir.fact_context] = x_factheir
 
     def apply_factunit_moldations(self, factheir: FactHeir) -> FactHeir:
         for factunit in self.factunits.values():
@@ -382,8 +382,8 @@ class PlanUnit:
     def set_factunit_to_complete(self, fact_contextunit: FactUnit):
         # if a plan is considered a chore then a factheir.fact_lower attribute can be increased to
         # a number <= factheir.fact_upper so the plan no longer is a chore. This method finds
-        # the minimal factheir.fact_lower to modify plan.chore is False. plan_core._factheir cannot be straight up manipulated
-        # so it is mandatory that plan._factunit is different.
+        # the minimal factheir.fact_lower to modify plan.chore is False. plan_core.factheir cannot be straight up manipulated
+        # so it is mandatory that plan.factunit is different.
         # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=fact_upper)
         self.factunits[fact_contextunit.fact_context] = factunit_shop(
             fact_context=fact_contextunit.fact_context,
@@ -427,9 +427,9 @@ class PlanUnit:
 
         x_dict = {}
         for x_plan in self._kids.values():
-            x_gogo_in_range = x_gogo >= x_plan._gogo_calc and x_gogo < x_plan._stop_calc
-            x_stop_in_range = x_stop > x_plan._gogo_calc and x_stop < x_plan._stop_calc
-            both_in_range = x_gogo <= x_plan._gogo_calc and x_stop >= x_plan._stop_calc
+            x_gogo_in_range = x_gogo >= x_plan.gogo_calc and x_gogo < x_plan._stop_calc
+            x_stop_in_range = x_stop > x_plan.gogo_calc and x_stop < x_plan._stop_calc
+            both_in_range = x_gogo <= x_plan.gogo_calc and x_stop >= x_plan._stop_calc
 
             if x_gogo_in_range or x_stop_in_range or both_in_range:
                 x_dict[x_plan.plan_label] = x_plan
@@ -445,15 +445,15 @@ class PlanUnit:
             return create_rope(self.parent_rope, self.plan_label, knot=self.knot)
 
     def clear_descendant_task_count(self):
-        self._descendant_task_count = None
+        self.descendant_task_count = None
 
     def set_descendant_task_count_zero_if_None(self):
-        if self._descendant_task_count is None:
-            self._descendant_task_count = 0
+        if self.descendant_task_count is None:
+            self.descendant_task_count = 0
 
     def add_to_descendant_task_count(self, x_int: int):
         self.set_descendant_task_count_zero_if_None()
-        self._descendant_task_count += x_int
+        self.descendant_task_count += x_int
 
     def get_descendant_ropes_from_kids(self) -> dict[RopeTerm, int]:
         descendant_ropes = {}
@@ -474,8 +474,8 @@ class PlanUnit:
         return descendant_ropes
 
     def clear_all_voice_cred_debt(self):
-        self._all_voice_cred = None
-        self._all_voice_debt = None
+        self.all_voice_cred = None
+        self.all_voice_debt = None
 
     def set_level(self, parent_level):
         self._level = parent_level + 1
@@ -485,14 +485,14 @@ class PlanUnit:
 
     def inherit_awardheirs(self, parent_awardheirs: dict[GroupTitle, AwardHeir] = None):
         parent_awardheirs = {} if parent_awardheirs is None else parent_awardheirs
-        self._awardheirs = {}
+        self.awardheirs = {}
         for ib in parent_awardheirs.values():
             awardheir = awardheir_shop(
                 awardee_title=ib.awardee_title,
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.awardee_title] = awardheir
+            self.awardheirs[awardheir.awardee_title] = awardheir
 
         for ib in self.awardunits.values():
             awardheir = awardheir_shop(
@@ -500,17 +500,17 @@ class PlanUnit:
                 give_force=ib.give_force,
                 take_force=ib.take_force,
             )
-            self._awardheirs[awardheir.awardee_title] = awardheir
+            self.awardheirs[awardheir.awardee_title] = awardheir
 
     def set_kidless_awardlines(self):
         # get awardlines from self
-        for bh in self._awardheirs.values():
+        for bh in self.awardheirs.values():
             x_awardline = awardline_shop(
                 awardee_title=bh.awardee_title,
                 fund_give=bh.fund_give,
                 fund_take=bh.fund_take,
             )
-            self._awardlines[x_awardline.awardee_title] = x_awardline
+            self.awardlines[x_awardline.awardee_title] = x_awardline
 
     def set_awardlines(self, child_awardlines: dict[GroupTitle, AwardLine] = None):
         if child_awardlines is None:
@@ -518,32 +518,32 @@ class PlanUnit:
 
         # get awardlines from child
         for bl in child_awardlines.values():
-            if self._awardlines.get(bl.awardee_title) is None:
-                self._awardlines[bl.awardee_title] = awardline_shop(
+            if self.awardlines.get(bl.awardee_title) is None:
+                self.awardlines[bl.awardee_title] = awardline_shop(
                     awardee_title=bl.awardee_title,
                     fund_give=0,
                     fund_take=0,
                 )
 
-            self._awardlines[bl.awardee_title].add_fund_give_take(
+            self.awardlines[bl.awardee_title].add_fund_give_take(
                 fund_give=bl.fund_give, fund_take=bl.fund_take
             )
 
     def set_awardheirs_fund_give_fund_take(self):
         give_ledger = {}
         take_ledger = {}
-        for x_awardee_title, x_awardheir in self._awardheirs.items():
+        for x_awardee_title, x_awardheir in self.awardheirs.items():
             give_ledger[x_awardee_title] = x_awardheir.give_force
             take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
         give_allot = allot_scale(give_ledger, x_fund_share, self.fund_iota)
         take_allot = allot_scale(take_ledger, x_fund_share, self.fund_iota)
-        for x_awardee_title, x_awardheir in self._awardheirs.items():
+        for x_awardee_title, x_awardheir in self.awardheirs.items():
             x_awardheir.fund_give = give_allot.get(x_awardee_title)
             x_awardheir.fund_take = take_allot.get(x_awardee_title)
 
     def clear_awardlines(self):
-        self._awardlines = {}
+        self.awardlines = {}
 
     def set_plan_label(self, plan_label: str):
         if (
@@ -670,7 +670,7 @@ class PlanUnit:
 
     def clear_gogo_calc_stop_calc(self):
         self._range_evaluated = False
-        self._gogo_calc = None
+        self.gogo_calc = None
         self._stop_calc = None
 
     def _mold_gogo_calc_stop_calc(self):
@@ -678,27 +678,27 @@ class PlanUnit:
         r_plan_denom = get_1_if_None(self.denom)
         r_plan_addin = get_0_if_None(self.addin)
 
-        if self._gogo_calc is None or self._stop_calc is None:
+        if self.gogo_calc is None or self._stop_calc is None:
             pass
         elif self.gogo_want != None and self.stop_want != None:
-            stop_want_less_than_gogo_calc = self.stop_want < self._gogo_calc
+            stop_want_less_than_gogo_calc = self.stop_want < self.gogo_calc
             gogo_want_greater_than_stop_calc = self.gogo_want > self._stop_calc
             if stop_want_less_than_gogo_calc or gogo_want_greater_than_stop_calc:
-                self._gogo_calc = None
+                self.gogo_calc = None
                 self._stop_calc = None
             else:
-                self._gogo_calc = max(self._gogo_calc, self.gogo_want)
+                self.gogo_calc = max(self.gogo_calc, self.gogo_want)
                 self._stop_calc = min(self._stop_calc, self.stop_want)
         elif get_False_if_None(self.morph):
-            x_gogo = self._gogo_calc
+            x_gogo = self.gogo_calc
             x_stop = self._stop_calc
             x_rangeunit = get_morphed_rangeunit(x_gogo, x_stop, self.denom)
-            self._gogo_calc = x_rangeunit.gogo
+            self.gogo_calc = x_rangeunit.gogo
             self._stop_calc = x_rangeunit.stop
         else:
-            self._gogo_calc = self._gogo_calc + r_plan_addin
+            self.gogo_calc = self.gogo_calc + r_plan_addin
             self._stop_calc = self._stop_calc + r_plan_addin
-            self._gogo_calc = (self._gogo_calc * r_plan_numor) / r_plan_denom
+            self.gogo_calc = (self.gogo_calc * r_plan_numor) / r_plan_denom
             self._stop_calc = (self._stop_calc * r_plan_numor) / r_plan_denom
         self._range_evaluated = True
 
@@ -806,7 +806,7 @@ class PlanUnit:
     def set_reasonheirs_status(self):
         self.clear_reasonheirs_status()
         for x_reasonheir in self._reasonheirs.values():
-            x_reasonheir.set_status(factheirs=self._factheirs)
+            x_reasonheir.set_status(factheirs=self.factheirs)
 
     def set_active_attrs(
         self,
@@ -858,7 +858,7 @@ class PlanUnit:
     def _create_factheir(
         self, all_plans: list, range_root_rope: RopeTerm, reason_context: RopeTerm
     ):
-        range_root_factheir = self._factheirs.get(range_root_rope)
+        range_root_factheir = self.factheirs.get(range_root_rope)
         old_reason_lower = range_root_factheir.fact_lower
         old_reason_upper = range_root_factheir.fact_upper
         x_rangeunit = plans_calculated_range(
@@ -941,7 +941,7 @@ class PlanUnit:
         return self.begin is not None and self.close is not None
 
     def awardheir_exists(self) -> bool:
-        return self._awardheirs != {}
+        return self.awardheirs != {}
 
     def to_dict(self) -> dict[str, str]:
         x_dict = {"star": self.star}
@@ -1026,14 +1026,14 @@ def planunit_shop(
     _kids: dict = None,
     star: int = 1,
     awardunits: dict[GroupTitle, AwardUnit] = None,
-    _awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
-    _awardlines: dict[GroupTitle, AwardUnit] = None,  # Calculated field
+    awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
+    awardlines: dict[GroupTitle, AwardUnit] = None,  # Calculated field
     reasonunits: dict[RopeTerm, ReasonUnit] = None,
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None,  # Calculated field
     laborunit: LaborUnit = None,
     laborheir: LaborHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
-    _factheirs: dict[FactHeir] = None,  # Calculated field
+    factheirs: dict[FactHeir] = None,  # Calculated field
     healerunit: HealerUnit = None,
     begin: float = None,
     close: float = None,
@@ -1055,9 +1055,9 @@ def planunit_shop(
     fund_cease: FundNum = None,
     chore: bool = None,
     active: bool = None,
-    _descendant_task_count: int = None,
-    _all_voice_cred: bool = None,
-    _all_voice_debt: bool = None,
+    descendant_task_count: int = None,
+    all_voice_cred: bool = None,
+    all_voice_debt: bool = None,
     _is_expanded: bool = True,
     active_hx: dict[int, bool] = None,
     knot: str = None,
@@ -1073,14 +1073,14 @@ def planunit_shop(
         _kids=get_empty_dict_if_None(_kids),
         star=get_positive_int(star),
         awardunits=get_empty_dict_if_None(awardunits),
-        _awardheirs=get_empty_dict_if_None(_awardheirs),
-        _awardlines=get_empty_dict_if_None(_awardlines),
+        awardheirs=get_empty_dict_if_None(awardheirs),
+        awardlines=get_empty_dict_if_None(awardlines),
         reasonunits=get_empty_dict_if_None(reasonunits),
         _reasonheirs=get_empty_dict_if_None(_reasonheirs),
         laborunit=laborunit,
         laborheir=laborheir,
         factunits=get_empty_dict_if_None(factunits),
-        _factheirs=get_empty_dict_if_None(_factheirs),
+        factheirs=get_empty_dict_if_None(factheirs),
         healerunit=x_healerunit,
         begin=begin,
         close=close,
@@ -1102,9 +1102,9 @@ def planunit_shop(
         fund_cease=fund_cease,
         chore=chore,
         active=active,
-        _descendant_task_count=_descendant_task_count,
-        _all_voice_cred=_all_voice_cred,
-        _all_voice_debt=_all_voice_debt,
+        descendant_task_count=descendant_task_count,
+        all_voice_cred=all_voice_cred,
+        all_voice_debt=all_voice_debt,
         _is_expanded=_is_expanded,
         active_hx=get_empty_dict_if_None(active_hx),
         knot=default_knot_if_None(knot),

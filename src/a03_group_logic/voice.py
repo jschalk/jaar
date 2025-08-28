@@ -228,10 +228,10 @@ class VoiceUnit(VoiceCore):
             x_dict["inallocable_voice_debt_points"] = self.inallocable_voice_debt_points
 
         if all_attrs:
-            self._all_attrs_necessary_in_dict(x_dict)
+            self.all_attrs_necessary_in_dict(x_dict)
         return x_dict
 
-    def _all_attrs_necessary_in_dict(self, x_dict):
+    def all_attrs_necessary_in_dict(self, x_dict):
         x_dict["fund_give"] = self.fund_give
         x_dict["fund_take"] = self.fund_take
         x_dict["fund_agenda_give"] = self.fund_agenda_give

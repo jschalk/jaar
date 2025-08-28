@@ -279,7 +279,7 @@ function renderPlanUnit(planUnit, level) {
     const indent = '&nbsp;'.repeat(level * 2);
     const levelIndicator = show_level ? ` level${planUnit._level}` : '';
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
-    const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit._descendant_task_count}` : '';
+    const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit.descendant_task_count}` : '';
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
     const choreIndicator = planUnit.chore && show_chore ? '-CHORE' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
@@ -318,19 +318,19 @@ function renderPlanUnit(planUnit, level) {
     ${render_with_indent(planUnit.voices, indent, show_voices)}
     ${render_with_indent(planUnit.parent_rope, indent, show_parent_rope)}
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
-    ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
-    ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
+    ${renderFlatReadableJson(planUnit.awardheirs, indent, show_awardheirs)}
+    ${renderFlatReadableJson(planUnit.awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
     ${renderFlatReadableJson(planUnit.laborheir._partys, indent, show_laborheir)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
     ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
-    ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
-    ${render_with_indent(planUnit._all_voice_cred, indent, show_all_voice_cred)}
-    ${render_with_indent(planUnit._all_voice_debt, indent, show_all_voice_debt)}
+    ${renderFlatReadableJson(planUnit.factheirs, indent, show_factheirs)}
+    ${render_with_indent(planUnit.all_voice_cred, indent, show_all_voice_cred)}
+    ${render_with_indent(planUnit.all_voice_debt, indent, show_all_voice_debt)}
     ${render_with_indent(planUnit.gogo_want, indent, show_gogo_want)}
     ${render_with_indent(planUnit.stop_want, indent, show_stop_want)}
-    ${render_with_indent(planUnit._gogo_calc, indent, show_gogo_calc)}
+    ${render_with_indent(planUnit.gogo_calc, indent, show_gogo_calc)}
     ${render_with_indent(planUnit._stop_calc, indent, show_stop_calc)}
     ${render_with_indent(planUnit.addin, indent, show_addin)}
     ${render_with_indent(planUnit.begin, indent, show_begin)}

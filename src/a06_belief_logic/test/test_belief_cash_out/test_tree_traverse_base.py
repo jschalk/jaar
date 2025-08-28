@@ -86,66 +86,66 @@ def test_BeliefUnit_cash_out_ClearsDescendantAttributes():
     mon_str = "Mon"
     mon_rope = sue_belief.make_rope(wk_rope, mon_str)
     mon_plan = sue_belief.get_plan_obj(mon_rope)
-    assert sue_belief.planroot._descendant_task_count is None
-    assert sue_belief.planroot._all_voice_cred is None
-    assert sue_belief.planroot._all_voice_debt is None
-    assert casa_plan._descendant_task_count is None
-    assert casa_plan._all_voice_cred is None
-    assert casa_plan._all_voice_debt is None
-    assert mon_plan._descendant_task_count is None
-    assert mon_plan._all_voice_cred is None
-    assert mon_plan._all_voice_debt is None
+    assert sue_belief.planroot.descendant_task_count is None
+    assert sue_belief.planroot.all_voice_cred is None
+    assert sue_belief.planroot.all_voice_debt is None
+    assert casa_plan.descendant_task_count is None
+    assert casa_plan.all_voice_cred is None
+    assert casa_plan.all_voice_debt is None
+    assert mon_plan.descendant_task_count is None
+    assert mon_plan.all_voice_cred is None
+    assert mon_plan.all_voice_debt is None
 
-    sue_belief.planroot._descendant_task_count = -2
-    sue_belief.planroot._all_voice_cred = -2
-    sue_belief.planroot._all_voice_debt = -2
-    casa_plan._descendant_task_count = -2
-    casa_plan._all_voice_cred = -2
-    casa_plan._all_voice_debt = -2
-    mon_plan._descendant_task_count = -2
-    mon_plan._all_voice_cred = -2
-    mon_plan._all_voice_debt = -2
+    sue_belief.planroot.descendant_task_count = -2
+    sue_belief.planroot.all_voice_cred = -2
+    sue_belief.planroot.all_voice_debt = -2
+    casa_plan.descendant_task_count = -2
+    casa_plan.all_voice_cred = -2
+    casa_plan.all_voice_debt = -2
+    mon_plan.descendant_task_count = -2
+    mon_plan.all_voice_cred = -2
+    mon_plan.all_voice_debt = -2
 
-    assert sue_belief.planroot._descendant_task_count == -2
-    assert sue_belief.planroot._all_voice_cred == -2
-    assert sue_belief.planroot._all_voice_debt == -2
-    assert casa_plan._descendant_task_count == -2
-    assert casa_plan._all_voice_cred == -2
-    assert casa_plan._all_voice_debt == -2
-    assert mon_plan._descendant_task_count == -2
-    assert mon_plan._all_voice_cred == -2
-    assert mon_plan._all_voice_debt == -2
+    assert sue_belief.planroot.descendant_task_count == -2
+    assert sue_belief.planroot.all_voice_cred == -2
+    assert sue_belief.planroot.all_voice_debt == -2
+    assert casa_plan.descendant_task_count == -2
+    assert casa_plan.all_voice_cred == -2
+    assert casa_plan.all_voice_debt == -2
+    assert mon_plan.descendant_task_count == -2
+    assert mon_plan.all_voice_cred == -2
+    assert mon_plan.all_voice_debt == -2
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
-    assert sue_belief.planroot._descendant_task_count == 2
-    assert casa_plan._descendant_task_count == 0
-    assert mon_plan._descendant_task_count == 0
+    assert sue_belief.planroot.descendant_task_count == 2
+    assert casa_plan.descendant_task_count == 0
+    assert mon_plan.descendant_task_count == 0
 
-    assert mon_plan._all_voice_cred is True
-    assert mon_plan._all_voice_debt is True
-    assert casa_plan._all_voice_cred is True
-    assert casa_plan._all_voice_debt is True
-    assert sue_belief.planroot._all_voice_cred is True
-    assert sue_belief.planroot._all_voice_debt is True
+    assert mon_plan.all_voice_cred is True
+    assert mon_plan.all_voice_debt is True
+    assert casa_plan.all_voice_cred is True
+    assert casa_plan.all_voice_debt is True
+    assert sue_belief.planroot.all_voice_cred is True
+    assert sue_belief.planroot.all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_RootOnlySetsDescendantAttributes():
     # ESTABLISH
     yao_belief = beliefunit_shop(belief_name="Yao")
-    assert yao_belief.planroot._descendant_task_count is None
-    assert yao_belief.planroot._all_voice_cred is None
-    assert yao_belief.planroot._all_voice_debt is None
+    assert yao_belief.planroot.descendant_task_count is None
+    assert yao_belief.planroot.all_voice_cred is None
+    assert yao_belief.planroot.all_voice_debt is None
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
-    assert yao_belief.planroot._descendant_task_count == 0
-    assert yao_belief.planroot._all_voice_cred is True
-    assert yao_belief.planroot._all_voice_debt is True
+    assert yao_belief.planroot.descendant_task_count == 0
+    assert yao_belief.planroot.all_voice_cred is True
+    assert yao_belief.planroot.all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
@@ -168,30 +168,30 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
     # test root status:
     root_rope = to_rope(sue_belief.moment_label)
     x_planroot = sue_belief.get_plan_obj(root_rope)
-    assert x_planroot._descendant_task_count is None
-    assert x_planroot._all_voice_cred is None
-    assert x_planroot._all_voice_debt is None
-    assert casa_plan._descendant_task_count is None
-    assert casa_plan._all_voice_cred is None
-    assert casa_plan._all_voice_debt is None
-    assert mon_plan._descendant_task_count is None
-    assert mon_plan._all_voice_cred is None
-    assert mon_plan._all_voice_debt is None
+    assert x_planroot.descendant_task_count is None
+    assert x_planroot.all_voice_cred is None
+    assert x_planroot.all_voice_debt is None
+    assert casa_plan.descendant_task_count is None
+    assert casa_plan.all_voice_cred is None
+    assert casa_plan.all_voice_debt is None
+    assert mon_plan.descendant_task_count is None
+    assert mon_plan.all_voice_cred is None
+    assert mon_plan.all_voice_debt is None
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
-    assert x_planroot._descendant_task_count == 3
-    assert casa_plan._descendant_task_count == 1
-    assert casa_plan._kids[email_str]._descendant_task_count == 0
-    assert mon_plan._descendant_task_count == 0
-    assert x_planroot._all_voice_cred is True
-    assert x_planroot._all_voice_debt is True
-    assert casa_plan._all_voice_cred is True
-    assert casa_plan._all_voice_debt is True
-    assert mon_plan._all_voice_cred is True
-    assert mon_plan._all_voice_debt is True
+    assert x_planroot.descendant_task_count == 3
+    assert casa_plan.descendant_task_count == 1
+    assert casa_plan._kids[email_str].descendant_task_count == 0
+    assert mon_plan.descendant_task_count == 0
+    assert x_planroot.all_voice_cred is True
+    assert x_planroot.all_voice_debt is True
+    assert casa_plan.all_voice_cred is True
+    assert casa_plan.all_voice_debt is True
+    assert mon_plan.all_voice_cred is True
+    assert mon_plan.all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
@@ -219,30 +219,30 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
         awardunit=x_awardunit
     )
     # print(sue_belief._kids[casa_str]._kids[email_str])
-    # print(sue_belief._kids[casa_str]._kids[email_str]._awardunit)
+    # print(sue_belief._kids[casa_str]._kids[email_str].awardunit)
 
     # WHEN
     sue_belief.cash_out()
     # print(sue_belief._kids[casa_str]._kids[email_str])
-    # print(sue_belief._kids[casa_str]._kids[email_str]._awardunit)
+    # print(sue_belief._kids[casa_str]._kids[email_str].awardunit)
 
     # THEN
-    assert sue_belief.planroot._all_voice_cred is False
-    assert sue_belief.planroot._all_voice_debt is False
+    assert sue_belief.planroot.all_voice_cred is False
+    assert sue_belief.planroot.all_voice_debt is False
     casa_plan = sue_belief.planroot._kids[casa_str]
-    assert casa_plan._all_voice_cred is False
-    assert casa_plan._all_voice_debt is False
-    assert casa_plan._kids[email_str]._all_voice_cred is False
-    assert casa_plan._kids[email_str]._all_voice_debt is False
-    assert casa_plan._kids[vacuum_str]._all_voice_cred is True
-    assert casa_plan._kids[vacuum_str]._all_voice_debt is True
+    assert casa_plan.all_voice_cred is False
+    assert casa_plan.all_voice_debt is False
+    assert casa_plan._kids[email_str].all_voice_cred is False
+    assert casa_plan._kids[email_str].all_voice_debt is False
+    assert casa_plan._kids[vacuum_str].all_voice_cred is True
+    assert casa_plan._kids[vacuum_str].all_voice_debt is True
     wk_plan = sue_belief.planroot._kids[wk_str]
-    assert wk_plan._all_voice_cred is True
-    assert wk_plan._all_voice_debt is True
-    assert wk_plan._kids[mon_str]._all_voice_cred is True
-    assert wk_plan._kids[mon_str]._all_voice_debt is True
-    assert wk_plan._kids[tue_str]._all_voice_cred is True
-    assert wk_plan._kids[tue_str]._all_voice_debt is True
+    assert wk_plan.all_voice_cred is True
+    assert wk_plan.all_voice_debt is True
+    assert wk_plan._kids[mon_str].all_voice_cred is True
+    assert wk_plan._kids[mon_str].all_voice_debt is True
+    assert wk_plan._kids[tue_str].all_voice_cred is True
+    assert wk_plan._kids[tue_str].all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
@@ -282,15 +282,15 @@ def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
     street_plan = sue_belief._plan_dict.get(sue_belief.make_rope(swim_rope, street_str))
 
     assert len(swim_plan.awardunits) == 3
-    assert len(swim_plan._awardheirs) == 3
+    assert len(swim_plan.awardheirs) == 3
     assert street_plan.awardunits in (None, {})
-    assert len(street_plan._awardheirs) == 3
+    assert len(street_plan.awardheirs) == 3
 
     print(f"{len(sue_belief._plan_dict)}")
     print(f"{swim_plan.awardunits}")
-    print(f"{swim_plan._awardheirs}")
-    print(f"{swim_plan._awardheirs}")
-    assert len(sue_belief.planroot._kids["swim"]._awardheirs) == 3
+    print(f"{swim_plan.awardheirs}")
+    print(f"{swim_plan.awardheirs}")
+    assert len(sue_belief.planroot._kids["swim"].awardheirs) == 3
 
 
 def test_BeliefUnit_cash_out_TreeTraverseSetsClearsAwardLineestors():
@@ -298,26 +298,26 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsClearsAwardLineestors():
     sue_belief = get_beliefunit_with_4_levels()
     sue_belief.cash_out()
     # plan tree has no awardunits
-    assert sue_belief.planroot._awardlines == {}
-    sue_belief.planroot._awardlines = {1: "testtest"}
-    assert sue_belief.planroot._awardlines != {}
+    assert sue_belief.planroot.awardlines == {}
+    sue_belief.planroot.awardlines = {1: "testtest"}
+    assert sue_belief.planroot.awardlines != {}
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
-    assert not sue_belief.planroot._awardlines
+    assert not sue_belief.planroot.awardlines
 
     # WHEN
     # test for level 1 and level n
     casa_str = "casa"
     casa_plan = sue_belief.planroot._kids[casa_str]
-    casa_plan._awardlines = {1: "testtest"}
-    assert casa_plan._awardlines != {}
+    casa_plan.awardlines = {1: "testtest"}
+    assert casa_plan.awardlines != {}
     sue_belief.cash_out()
 
     # THEN
-    assert not sue_belief.planroot._kids[casa_str]._awardlines
+    assert not sue_belief.planroot._kids[casa_str].awardlines
 
 
 def test_BeliefUnit_cash_out_DoesNotKeepUnneeded_awardheirs():
@@ -345,24 +345,24 @@ def test_BeliefUnit_cash_out_DoesNotKeepUnneeded_awardheirs():
     yao_belief.edit_plan_attr(swim_rope, awardunit=awardunit_Xio)
 
     assert len(swim_plan.awardunits) == 3
-    assert len(swim_plan._awardheirs) == 0
+    assert len(swim_plan.awardheirs) == 0
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     assert len(swim_plan.awardunits) == 3
-    assert len(swim_plan._awardheirs) == 3
+    assert len(swim_plan.awardheirs) == 3
     yao_belief.edit_plan_attr(swim_rope, awardunit_del=yao_str)
     assert len(swim_plan.awardunits) == 2
-    assert len(swim_plan._awardheirs) == 3
+    assert len(swim_plan.awardheirs) == 3
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     assert len(swim_plan.awardunits) == 2
-    assert len(swim_plan._awardheirs) == 2
+    assert len(swim_plan.awardheirs) == 2
 
 
 def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
@@ -670,10 +670,10 @@ def test_BeliefUnit_cash_out_Sets_planroot_factheir_With_range_factheirs():
     yao_belief.add_fact(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)
 
     # assert len(ball_plan._reasonheirs) == 1
-    # assert ball_plan._factheirs == {wk_rope: wk_factheir}
-    # assert ball_plan._factheirs.get(wk_rope)
-    # assert len(ball_plan._factheirs) == 1
-    # assert ball_plan._factheirs.get(tue_rope) is None
+    # assert ball_plan.factheirs == {wk_rope: wk_factheir}
+    # assert ball_plan.factheirs.get(wk_rope)
+    # assert len(ball_plan.factheirs) == 1
+    # assert ball_plan.factheirs.get(tue_rope) is None
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
@@ -695,10 +695,10 @@ def test_BeliefUnit_cash_out_Sets_planroot_factheir_With_range_factheirs():
     # tue_reason_upper = 117
     # tue_factheir = factheir_shop(tue_rope, tue_rope, tue_reason_lower, tue_reason_upper)
     # root_plan = yao_belief.get_plan_obj(root_rope)
-    # print(f"{wk_rope=} {root_plan._factheirs.keys()=}")
-    # assert root_plan._factheirs.get(wk_rope) == wk_factheir
-    # assert len(root_plan._factheirs) == 2
-    # assert root_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
+    # print(f"{wk_rope=} {root_plan.factheirs.keys()=}")
+    # assert root_plan.factheirs.get(wk_rope) == wk_factheir
+    # assert len(root_plan.factheirs) == 2
+    # assert root_plan.factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
 
 def test_BeliefUnit_cash_out_SetsPlanUnit_factheir_With_range_factheirs():
@@ -724,10 +724,10 @@ def test_BeliefUnit_cash_out_SetsPlanUnit_factheir_With_range_factheirs():
     yao_belief.add_fact(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)
 
     # assert len(ball_plan._reasonheirs) == 1
-    # assert ball_plan._factheirs == {wk_rope: wk_factheir}
-    # assert ball_plan._factheirs.get(wk_rope)
-    # assert len(ball_plan._factheirs) == 1
-    # assert ball_plan._factheirs.get(tue_rope) is None
+    # assert ball_plan.factheirs == {wk_rope: wk_factheir}
+    # assert ball_plan.factheirs.get(wk_rope)
+    # assert len(ball_plan.factheirs) == 1
+    # assert ball_plan.factheirs.get(tue_rope) is None
 
     # WHEN
     yao_belief.cash_out()
@@ -744,7 +744,7 @@ def test_BeliefUnit_cash_out_SetsPlanUnit_factheir_With_range_factheirs():
     tue_reason_upper = 117
     tue_factheir = factheir_shop(tue_rope, tue_rope, tue_reason_lower, tue_reason_upper)
     ball_plan = yao_belief.get_plan_obj(ball_rope)
-    print(f"{wk_rope=} {ball_plan._factheirs.keys()=}")
-    assert ball_plan._factheirs.get(wk_rope) == wk_factheir
-    assert len(ball_plan._factheirs) == 2
-    assert ball_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
+    print(f"{wk_rope=} {ball_plan.factheirs.keys()=}")
+    assert ball_plan.factheirs.get(wk_rope) == wk_factheir
+    assert len(ball_plan.factheirs) == 2
+    assert ball_plan.factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}

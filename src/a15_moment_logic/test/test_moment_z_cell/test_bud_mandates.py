@@ -71,7 +71,7 @@ def test_create_bud_mandate_ledgers_Scenaro1_BudExists(env_dir_setup_cleanup):
     assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets
     expected_a23_all_tranbook = tranbook_shop(a23_str)
     expected_a23_all_tranbook.add_tranunit(bob_str, bob_str, tp37, 450)
-    assert gen_a23_momentunit._all_tranbook == expected_a23_all_tranbook
+    assert gen_a23_momentunit.all_tranbook == expected_a23_all_tranbook
 
 
 def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_voice_mandate_ledgers(
@@ -127,5 +127,5 @@ def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_voice_mandate_ledgers
     expected_a23_all_tranbook.add_tranunit(bob_str, zia_str, tp37, 28)
     expected_a23_all_tranbook.add_tranunit(bob_str, yao_str, tp37, 254)
     gen_a23_momentunit.set_all_tranbook()
-    gen_all_tranbook = gen_a23_momentunit._all_tranbook
+    gen_all_tranbook = gen_a23_momentunit.all_tranbook
     assert gen_all_tranbook.tranunits == expected_a23_all_tranbook.tranunits

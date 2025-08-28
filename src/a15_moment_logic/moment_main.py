@@ -108,7 +108,7 @@ class MomentUnit:
     _moment_dir: str = None
     _beliefs_dir: str = None
     _packs_dir: str = None
-    _all_tranbook: TranBook = None
+    all_tranbook: TranBook = None
 
     # directory setup
     def _set_moment_dirs(self):
@@ -331,7 +331,7 @@ class MomentUnit:
                     x_tranbook.add_tranunit(
                         belief_name, voice_name, x_bud_time, x_amount
                     )
-        self._all_tranbook = x_tranbook
+        self.all_tranbook = x_tranbook
 
     def create_buds_root_cells(
         self,
@@ -417,7 +417,7 @@ def momentunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         respect_bit=default_RespectBit_if_None(respect_bit),
         penny=filter_penny(penny),
-        _all_tranbook=tranbook_shop(moment_label),
+        all_tranbook=tranbook_shop(moment_label),
         job_listen_rotations=job_listen_rotations,
     )
     if x_momentunit.moment_mstr_dir:
