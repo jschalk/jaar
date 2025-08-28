@@ -331,7 +331,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     yao_job = open_job_file(moment_mstr_dir, moment_label, yao_str)
     yao_job.cash_out()
     assert yao_job.voices.keys() == yao_gut0.voices.keys()
-    assert yao_job.get_voice(yao_str)._irrational_voice_debt_points == 0
+    assert yao_job.get_voice(yao_str).irrational_voice_debt_points == 0
     yao_job_voices = yao_job.to_dict().get(voices_str())
     yao_gut0_voices = yao_gut0.to_dict().get(voices_str())
     yao_job_bob = yao_job_voices.get("Bob")

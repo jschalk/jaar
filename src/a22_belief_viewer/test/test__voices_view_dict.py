@@ -1,6 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _inallocable_voice_debt_points_str,
-    _irrational_voice_debt_points_str,
     _memberships_str,
     credor_pool_str,
     debtor_pool_str,
@@ -13,6 +11,8 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    inallocable_voice_debt_points_str,
+    irrational_voice_debt_points_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -65,11 +65,11 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     _memberships_readable_key = add_readable(_memberships_str())
     credor_pool_readable_key = add_readable(credor_pool_str())
     debtor_pool_readable_key = add_readable(debtor_pool_str())
-    _irrational_voice_debt_points_readable_key = add_readable(
-        _irrational_voice_debt_points_str()
+    irrational_voice_debt_points_readable_key = add_readable(
+        irrational_voice_debt_points_str()
     )
-    _inallocable_voice_debt_points_readable_key = add_readable(
-        _inallocable_voice_debt_points_str()
+    inallocable_voice_debt_points_readable_key = add_readable(
+        inallocable_voice_debt_points_str()
     )
     fund_give_readable_key = add_readable(fund_give_str())
     fund_take_readable_key = add_readable(fund_take_str())
@@ -85,8 +85,8 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         _memberships_str(),
         credor_pool_str(),
         debtor_pool_str(),
-        _irrational_voice_debt_points_str(),
-        _inallocable_voice_debt_points_str(),
+        irrational_voice_debt_points_str(),
+        inallocable_voice_debt_points_str(),
         fund_give_str(),
         fund_take_str(),
         fund_agenda_give_str(),
@@ -98,8 +98,8 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         _memberships_readable_key,
         credor_pool_readable_key,
         debtor_pool_readable_key,
-        _irrational_voice_debt_points_readable_key,
-        _inallocable_voice_debt_points_readable_key,
+        irrational_voice_debt_points_readable_key,
+        inallocable_voice_debt_points_readable_key,
         fund_give_readable_key,
         fund_take_readable_key,
         fund_agenda_give_readable_key,
@@ -114,11 +114,11 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     assert ypu.voice_debt_points == yp_dict.get(voice_debt_points_str())
     assert ypu.credor_pool == yp_dict.get(credor_pool_str())
     assert ypu.debtor_pool == yp_dict.get(debtor_pool_str())
-    assert ypu._irrational_voice_debt_points == yp_dict.get(
-        _irrational_voice_debt_points_str()
+    assert ypu.irrational_voice_debt_points == yp_dict.get(
+        irrational_voice_debt_points_str()
     )
-    assert ypu._inallocable_voice_debt_points == yp_dict.get(
-        _inallocable_voice_debt_points_str()
+    assert ypu.inallocable_voice_debt_points == yp_dict.get(
+        inallocable_voice_debt_points_str()
     )
     assert ypu.fund_give == yp_dict.get(fund_give_str())
     assert ypu.fund_take == yp_dict.get(fund_take_str())
@@ -132,11 +132,11 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     expected__memberships_readable = f"_memberships: {ypu._memberships}"
     expected_credor_pool_readable = f"credor_pool: {ypu.credor_pool}"
     expected_debtor_pool_readable = f"debtor_pool: {ypu.debtor_pool}"
-    expected__irrational_voice_debt_points_readable = (
-        f"_irrational_voice_debt_points: {ypu._irrational_voice_debt_points}"
+    expected_irrational_voice_debt_points_readable = (
+        f"irrational_voice_debt_points: {ypu.irrational_voice_debt_points}"
     )
-    expected__inallocable_voice_debt_points_readable = (
-        f"_inallocable_voice_debt_points: {ypu._inallocable_voice_debt_points}"
+    expected_inallocable_voice_debt_points_readable = (
+        f"inallocable_voice_debt_points: {ypu.inallocable_voice_debt_points}"
     )
     expected_fund_give_readable = f"fund_give: {ypu.fund_give}"
     expected_fund_take_readable = f"fund_take: {ypu.fund_take}"
@@ -161,12 +161,12 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     assert yp_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
     assert yp_dict.get(debtor_pool_readable_key) == expected_debtor_pool_readable
     assert (
-        yp_dict.get(_irrational_voice_debt_points_readable_key)
-        == expected__irrational_voice_debt_points_readable
+        yp_dict.get(irrational_voice_debt_points_readable_key)
+        == expected_irrational_voice_debt_points_readable
     )
     assert (
-        yp_dict.get(_inallocable_voice_debt_points_readable_key)
-        == expected__inallocable_voice_debt_points_readable
+        yp_dict.get(inallocable_voice_debt_points_readable_key)
+        == expected_inallocable_voice_debt_points_readable
     )
     assert yp_dict.get(fund_give_readable_key) == expected_fund_give_readable
     assert yp_dict.get(fund_take_readable_key) == expected_fund_take_readable

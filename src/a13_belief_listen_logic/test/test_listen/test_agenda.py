@@ -295,9 +295,9 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBelief():
     zia_voiceunit = yao_vision.get_voice(zia_str)
     sue_voiceunit = yao_vision.get_voice(sue_str)
     print(f"{sue_voiceunit.voice_debt_points=}")
-    print(f"{sue_voiceunit._irrational_voice_debt_points=}")
-    assert zia_voiceunit._irrational_voice_debt_points == 0
-    assert sue_voiceunit._irrational_voice_debt_points == 51
+    print(f"{sue_voiceunit.irrational_voice_debt_points=}")
+    assert zia_voiceunit.irrational_voice_debt_points == 0
+    assert sue_voiceunit.irrational_voice_debt_points == 51
 
 
 def test_listen_to_speaker_agenda_ProcessesBarrenBelief():
@@ -329,8 +329,8 @@ def test_listen_to_speaker_agenda_ProcessesBarrenBelief():
     zia_voiceunit = yao_vision.get_voice(zia_str)
     sue_voiceunit = yao_vision.get_voice(sue_str)
     print(f"{sue_voiceunit.voice_debt_points=}")
-    print(f"{sue_voiceunit._irrational_voice_debt_points=}")
-    assert zia_voiceunit._irrational_voice_debt_points == 0
-    assert zia_voiceunit._inallocable_voice_debt_points == 0
-    assert sue_voiceunit._irrational_voice_debt_points == 0
-    assert sue_voiceunit._inallocable_voice_debt_points == 51
+    print(f"{sue_voiceunit.irrational_voice_debt_points=}")
+    assert zia_voiceunit.irrational_voice_debt_points == 0
+    assert zia_voiceunit.inallocable_voice_debt_points == 0
+    assert sue_voiceunit.irrational_voice_debt_points == 0
+    assert sue_voiceunit.inallocable_voice_debt_points == 51

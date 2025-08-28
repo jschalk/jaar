@@ -235,9 +235,9 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesIrrationalBelief(
     zia_voiceunit = new_yao_gut.get_voice(zia_str)
     sue_voiceunit = new_yao_gut.get_voice(sue_str)
     print(f"{sue_voiceunit.voice_debt_points=}")
-    print(f"{sue_voiceunit._irrational_voice_debt_points=}")
-    assert zia_voiceunit._irrational_voice_debt_points == 0
-    assert sue_voiceunit._irrational_voice_debt_points == 51
+    print(f"{sue_voiceunit.irrational_voice_debt_points=}")
+    assert zia_voiceunit.irrational_voice_debt_points == 0
+    assert sue_voiceunit.irrational_voice_debt_points == 51
 
 
 def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelief(
@@ -283,6 +283,6 @@ def test_listen_to_agendas_create_init_job_from_guts_ProcessesMissingDebtorBelie
     zia_voiceunit = new_yao_gut.get_voice(zia_str)
     sue_voiceunit = new_yao_gut.get_voice(sue_str)
     print(f"{sue_voiceunit.voice_debt_points=}")
-    print(f"{sue_voiceunit._inallocable_voice_debt_points=}")
-    assert zia_voiceunit._inallocable_voice_debt_points == 0
-    assert sue_voiceunit._inallocable_voice_debt_points == 51
+    print(f"{sue_voiceunit.inallocable_voice_debt_points=}")
+    assert zia_voiceunit.inallocable_voice_debt_points == 0
+    assert sue_voiceunit.inallocable_voice_debt_points == 51

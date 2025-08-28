@@ -63,10 +63,10 @@ def create_blrpern_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_agenda_take = values_dict.get("fund_agenda_take")
     fund_agenda_ratio_give = values_dict.get("fund_agenda_ratio_give")
     fund_agenda_ratio_take = values_dict.get("fund_agenda_ratio_take")
-    _inallocable_voice_debt_points = values_dict.get("_inallocable_voice_debt_points")
-    _irrational_voice_debt_points = values_dict.get("_irrational_voice_debt_points")
+    inallocable_voice_debt_points = values_dict.get("inallocable_voice_debt_points")
+    irrational_voice_debt_points = values_dict.get("irrational_voice_debt_points")
     real_str = "REAL"
-    return f"""INSERT INTO belief_voiceunit_job (moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, _inallocable_voice_debt_points, _irrational_voice_debt_points)
+    return f"""INSERT INTO belief_voiceunit_job (moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take, fund_agenda_ratio_give, fund_agenda_ratio_take, inallocable_voice_debt_points, irrational_voice_debt_points)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -81,8 +81,8 @@ VALUES (
 , {sqlite_obj_str(fund_agenda_take, real_str)}
 , {sqlite_obj_str(fund_agenda_ratio_give, real_str)}
 , {sqlite_obj_str(fund_agenda_ratio_take, real_str)}
-, {sqlite_obj_str(_inallocable_voice_debt_points, real_str)}
-, {sqlite_obj_str(_irrational_voice_debt_points, real_str)}
+, {sqlite_obj_str(inallocable_voice_debt_points, real_str)}
+, {sqlite_obj_str(irrational_voice_debt_points, real_str)}
 )
 ;
 """
@@ -522,7 +522,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_belief: BeliefUnit):
     for x_plan in job_belief.get_plan_dict().values():
         x_objkeysholder.rope = x_plan.get_plan_rope()
         healerunit = x_plan.healerunit
-        laborheir = x_plan._laborheir
+        laborheir = x_plan.laborheir
         insert_job_blrplan(cursor, x_objkeysholder, x_plan)
         insert_job_blrheal(cursor, x_objkeysholder, healerunit)
         insert_job_blrlabo(cursor, x_objkeysholder, laborheir)

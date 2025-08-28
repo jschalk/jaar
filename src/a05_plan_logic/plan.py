@@ -253,7 +253,7 @@ class PlanUnit:
     _range_evaluated : bool Flag indicating whether range has been evaluated.
     _reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
     _chore : bool describes if a unit can be changed to inactive with fact range change.
-    _laborheir : LaborHeir parent plan provided labor relationships
+    laborheir : LaborHeir parent plan provided labor relationships
     _gogo_calc : float
     _stop_calc : float
     """
@@ -300,7 +300,7 @@ class PlanUnit:
     _range_evaluated: bool = None
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None
     _chore: bool = None
-    _laborheir: LaborHeir = None
+    laborheir: LaborHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
 
@@ -838,8 +838,8 @@ class PlanUnit:
         self.set_reasonheirs_status()
         active_bool = self._are_all_reasonheir_active_true()
         if active_bool and groupunits != {} and belief_name is not None:
-            self._laborheir.set_belief_name_is_labor(groupunits, belief_name)
-            if self._laborheir._belief_name_is_labor is False:
+            self.laborheir.set_belief_name_is_labor(groupunits, belief_name)
+            if self.laborheir._belief_name_is_labor is False:
                 active_bool = False
         return active_bool
 
@@ -1008,8 +1008,8 @@ class PlanUnit:
         parent_laborheir: LaborHeir,
         groupunits: dict[GroupTitle, GroupUnit],
     ):
-        self._laborheir = laborheir_shop()
-        self._laborheir.set_partys(
+        self.laborheir = laborheir_shop()
+        self.laborheir.set_partys(
             parent_laborheir=parent_laborheir,
             laborunit=self.laborunit,
             groupunits=groupunits,
@@ -1031,7 +1031,7 @@ def planunit_shop(
     reasonunits: dict[RopeTerm, ReasonUnit] = None,
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None,  # Calculated field
     laborunit: LaborUnit = None,
-    _laborheir: LaborHeir = None,  # Calculated field
+    laborheir: LaborHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
     _factheirs: dict[FactHeir] = None,  # Calculated field
     healerunit: HealerUnit = None,
@@ -1078,7 +1078,7 @@ def planunit_shop(
         reasonunits=get_empty_dict_if_None(reasonunits),
         _reasonheirs=get_empty_dict_if_None(_reasonheirs),
         laborunit=laborunit,
-        _laborheir=_laborheir,
+        laborheir=laborheir,
         factunits=get_empty_dict_if_None(factunits),
         _factheirs=get_empty_dict_if_None(_factheirs),
         healerunit=x_healerunit,

@@ -52,8 +52,8 @@ class VoiceUnit(VoiceCore):
     # calculated fields
     credor_pool: RespectNum = None
     debtor_pool: RespectNum = None
-    _irrational_voice_debt_points: int = None  # set by listening process
-    _inallocable_voice_debt_points: int = None  # set by listening process
+    irrational_voice_debt_points: int = None  # set by listening process
+    inallocable_voice_debt_points: int = None  # set by listening process
     # set by Belief.cash_out()
     fund_give: float = None
     fund_take: float = None
@@ -96,14 +96,14 @@ class VoiceUnit(VoiceCore):
         self.fund_agenda_ratio_take = 0
 
     def add_irrational_voice_debt_points(self, x_irrational_voice_debt_points: float):
-        self._irrational_voice_debt_points += x_irrational_voice_debt_points
+        self.irrational_voice_debt_points += x_irrational_voice_debt_points
 
     def add_inallocable_voice_debt_points(self, x_inallocable_voice_debt_points: float):
-        self._inallocable_voice_debt_points += x_inallocable_voice_debt_points
+        self.inallocable_voice_debt_points += x_inallocable_voice_debt_points
 
     def reset_listen_calculated_attrs(self):
-        self._irrational_voice_debt_points = 0
-        self._inallocable_voice_debt_points = 0
+        self.irrational_voice_debt_points = 0
+        self.inallocable_voice_debt_points = 0
 
     def add_fund_give(self, fund_give: float):
         self.fund_give += fund_give
@@ -222,12 +222,10 @@ class VoiceUnit(VoiceCore):
             "voice_debt_points": self.voice_debt_points,
             "_memberships": self.get_memberships_dict(),
         }
-        if self._irrational_voice_debt_points not in [None, 0]:
-            x_dict["_irrational_voice_debt_points"] = self._irrational_voice_debt_points
-        if self._inallocable_voice_debt_points not in [None, 0]:
-            x_dict["_inallocable_voice_debt_points"] = (
-                self._inallocable_voice_debt_points
-            )
+        if self.irrational_voice_debt_points not in [None, 0]:
+            x_dict["irrational_voice_debt_points"] = self.irrational_voice_debt_points
+        if self.inallocable_voice_debt_points not in [None, 0]:
+            x_dict["inallocable_voice_debt_points"] = self.inallocable_voice_debt_points
 
         if all_attrs:
             self._all_attrs_necessary_in_dict(x_dict)
@@ -266,17 +264,15 @@ def voiceunit_get_from_dict(voiceunit_dict: dict, _knot: str) -> VoiceUnit:
     x_voiceunit._memberships = memberships_get_from_dict(
         x_memberships_dict, x_voice_name
     )
-    _irrational_voice_debt_points = voiceunit_dict.get(
-        "_irrational_voice_debt_points", 0
-    )
-    _inallocable_voice_debt_points = voiceunit_dict.get(
-        "_inallocable_voice_debt_points", 0
+    irrational_voice_debt_points = voiceunit_dict.get("irrational_voice_debt_points", 0)
+    inallocable_voice_debt_points = voiceunit_dict.get(
+        "inallocable_voice_debt_points", 0
     )
     x_voiceunit.add_irrational_voice_debt_points(
-        get_0_if_None(_irrational_voice_debt_points)
+        get_0_if_None(irrational_voice_debt_points)
     )
     x_voiceunit.add_inallocable_voice_debt_points(
-        get_0_if_None(_inallocable_voice_debt_points)
+        get_0_if_None(inallocable_voice_debt_points)
     )
 
     return x_voiceunit
@@ -295,8 +291,8 @@ def voiceunit_shop(
         _memberships={},
         credor_pool=0,
         debtor_pool=0,
-        _irrational_voice_debt_points=0,
-        _inallocable_voice_debt_points=0,
+        irrational_voice_debt_points=0,
+        inallocable_voice_debt_points=0,
         fund_give=0,
         fund_take=0,
         fund_agenda_give=0,

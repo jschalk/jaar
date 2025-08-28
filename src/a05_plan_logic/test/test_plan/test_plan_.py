@@ -20,7 +20,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
-    _laborheir_str,
     _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
@@ -39,6 +38,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    laborheir_str,
     laborunit_str,
     moment_label_str,
     morph_str,
@@ -70,7 +70,7 @@ def test_PlanUnit_Exists():
     assert x_planunit.reasonunits is None
     assert x_planunit._reasonheirs is None  # calculated field
     assert x_planunit.laborunit is None
-    assert x_planunit._laborheir is None  # calculated field
+    assert x_planunit.laborheir is None  # calculated field
     assert x_planunit.factunits is None
     assert x_planunit._factheirs is None  # calculated field
     assert x_planunit.awardunits is None
@@ -123,7 +123,7 @@ def test_PlanUnit_Exists():
         _healerunit_ratio_str(),
         _is_expanded_str(),
         _kids_str(),
-        _laborheir_str(),
+        laborheir_str(),
         _level_str(),
         _range_evaluated_str(),
         _reasonheirs_str(),
@@ -193,7 +193,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.reasonunits == {}
     assert x_planunit._reasonheirs == {}
     assert x_planunit.laborunit == laborunit_shop()
-    assert x_planunit._laborheir is None
+    assert x_planunit.laborheir is None
     assert x_planunit.knot == default_knot_if_None()
     assert x_planunit.root is False
     assert x_planunit._all_voice_cred is None

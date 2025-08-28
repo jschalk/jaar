@@ -97,7 +97,7 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
         "fund_agenda_take",
         "fund_agenda_ratio_give",
         "fund_agenda_ratio_take",
-        "_inallocable_voice_debt_points",
+        "inallocable_voice_debt_points",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

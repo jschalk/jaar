@@ -13,7 +13,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
-    _laborheir_str,
     _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
@@ -34,6 +33,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    laborheir_str,
     laborunit_str,
     moment_label_str,
     morph_str,
@@ -124,7 +124,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _range_evaluated_str(),
         _reasonheirs_str(),
         _chore_str(),
-        _laborheir_str(),
+        laborheir_str(),
         _gogo_calc_str(),
         _stop_calc_str(),
         fund_share_str(),
@@ -162,7 +162,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     print(f"{mop_bob_dict=}")
 
     # laborheir
-    mop_labor_dict = mop_dict.get(_laborheir_str())
+    mop_labor_dict = mop_dict.get(laborheir_str())
     mop_partys_dict = mop_labor_dict.get("_partys")
     sue_str = "Sue"
     bob_str = "Bob"

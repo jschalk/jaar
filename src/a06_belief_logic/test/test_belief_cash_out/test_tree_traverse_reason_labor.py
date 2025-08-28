@@ -13,18 +13,18 @@ def test_BeliefUnit_cash_out_Sets_planroot_laborheirFrom_planroot_laborunit():
     root_rope = to_rope(yao_belief.moment_label)
     yao_belief.edit_plan_attr(root_rope, laborunit=sue_laborunit)
     assert yao_belief.planroot.laborunit == sue_laborunit
-    assert not yao_belief.planroot._laborheir
+    assert not yao_belief.planroot.laborheir
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
-    assert yao_belief.planroot._laborheir is not None
+    assert yao_belief.planroot.laborheir is not None
     expected_laborheir = laborheir_shop()
     expected_laborheir.set_partys(
         parent_laborheir=None, laborunit=sue_laborunit, groupunits=None
     )
-    assert yao_belief.planroot._laborheir == expected_laborheir
+    assert yao_belief.planroot.laborheir == expected_laborheir
 
 
 def test_BeliefUnit_cash_out_Set_child_plan_laborheir_FromParent_laborunit():
@@ -39,14 +39,14 @@ def test_BeliefUnit_cash_out_Set_child_plan_laborheir_FromParent_laborunit():
     bob_belief.edit_plan_attr(run_rope, laborunit=x_laborunit)
     run_plan = bob_belief.get_plan_obj(run_rope)
     assert run_plan.laborunit == x_laborunit
-    assert not run_plan._laborheir
+    assert not run_plan.laborheir
 
     # WHEN
     bob_belief.cash_out()
 
     # THEN
-    assert run_plan._laborheir
-    assert run_plan._laborheir._belief_name_is_labor
+    assert run_plan.laborheir
+    assert run_plan.laborheir._belief_name_is_labor
 
     x_laborheir = laborheir_shop()
     x_laborheir.set_partys(
@@ -56,10 +56,8 @@ def test_BeliefUnit_cash_out_Set_child_plan_laborheir_FromParent_laborunit():
     )
     x_laborheir.set_belief_name_is_labor(bob_belief.groupunits, bob_belief.belief_name)
     print(f"{x_laborheir._belief_name_is_labor=}")
-    assert (
-        run_plan._laborheir._belief_name_is_labor == x_laborheir._belief_name_is_labor
-    )
-    assert run_plan._laborheir == x_laborheir
+    assert run_plan.laborheir._belief_name_is_labor == x_laborheir._belief_name_is_labor
+    assert run_plan.laborheir == x_laborheir
 
 
 def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laborunit_Scenario0():
@@ -87,7 +85,7 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
     # print(sue_belief.make_rope(four_rope=}\n{morn_rope=))
     four_plan = sue_belief.get_plan_obj(four_rope)
     assert four_plan.laborunit == laborunit_shop()
-    assert four_plan._laborheir is None
+    assert four_plan.laborheir is None
 
     # WHEN
     sue_belief.cash_out()
@@ -99,8 +97,8 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
         laborunit=x_laborunit,
         groupunits=sue_belief.groupunits,
     )
-    assert four_plan._laborheir is not None
-    assert four_plan._laborheir == x_laborheir
+    assert four_plan.laborheir is not None
+    assert four_plan.laborheir == x_laborheir
 
 
 def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laborunit_Scenario1_solo_AttrIsPassed():
@@ -129,7 +127,7 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
     # print(sue_belief.make_rope(four_rope=}\n{morn_rope=))
     four_plan = sue_belief.get_plan_obj(four_rope)
     assert four_plan.laborunit == laborunit_shop()
-    assert not four_plan._laborheir
+    assert not four_plan.laborheir
 
     # WHEN
     sue_belief.cash_out()
@@ -141,9 +139,9 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
         laborunit=swimmers_laborunit,
         groupunits=sue_belief.groupunits,
     )
-    assert four_plan._laborheir
-    assert four_plan._laborheir == expected_laborheir
-    swimmers_party = four_plan._laborheir._partys.get(swimmers_str)
+    assert four_plan.laborheir
+    assert four_plan.laborheir == expected_laborheir
+    swimmers_party = four_plan.laborheir._partys.get(swimmers_str)
     assert swimmers_party.solo == swimmers_solo_bool
 
 

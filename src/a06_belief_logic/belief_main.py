@@ -1243,7 +1243,7 @@ reason_case:    {reason_case}"""
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
                 x_plan.set_factheirs(parent_plan._factheirs)
-                x_plan.set_laborheir(parent_plan._laborheir, self.groupunits)
+                x_plan.set_laborheir(parent_plan.laborheir, self.groupunits)
                 x_plan.inherit_awardheirs(parent_plan._awardheirs)
             x_plan.set_awardheirs_fund_give_fund_take()
 

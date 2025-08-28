@@ -586,8 +586,8 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_fund_agenda_take = 9
     x_fund_agenda_ratio_give = 10
     x_fund_agenda_ratio_take = 11
-    x__inallocable_voice_debt_points = 12
-    x__irrational_voice_debt_points = 13
+    x_inallocable_voice_debt_points = 12
+    x_irrational_voice_debt_points = 13
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
@@ -602,8 +602,8 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
         "fund_agenda_take": x_fund_agenda_take,
         "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
         "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
-        "_inallocable_voice_debt_points": x__inallocable_voice_debt_points,
-        "_irrational_voice_debt_points": x__irrational_voice_debt_points,
+        "inallocable_voice_debt_points": x_inallocable_voice_debt_points,
+        "irrational_voice_debt_points": x_irrational_voice_debt_points,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

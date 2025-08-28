@@ -108,8 +108,8 @@ def test_create_listen_basis_ReturnsObj():
         yao_basis_vision.get_voiceunits_dict().keys()
         == yao_duty.get_voiceunits_dict().keys()
     )
-    assert vision_zia_voiceunit._irrational_voice_debt_points == 0
-    assert vision_zia_voiceunit._inallocable_voice_debt_points == 0
+    assert vision_zia_voiceunit.irrational_voice_debt_points == 0
+    assert vision_zia_voiceunit.inallocable_voice_debt_points == 0
 
 
 def test_get_default_job_ReturnsObj():

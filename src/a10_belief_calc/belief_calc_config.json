@@ -113,11 +113,11 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_inallocable_voice_debt_points": {
+            "inallocable_voice_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_irrational_voice_debt_points": {
+            "irrational_voice_debt_points": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             }

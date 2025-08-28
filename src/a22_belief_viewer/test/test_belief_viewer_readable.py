@@ -1,6 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _inallocable_voice_debt_points_str,
-    _irrational_voice_debt_points_str,
     _memberships_str,
     credor_pool_str,
     debtor_pool_str,
@@ -10,6 +8,8 @@ from src.a03_group_logic.test._util.a03_str import (
     fund_agenda_take_str,
     fund_give_str,
     fund_take_str,
+    inallocable_voice_debt_points_str,
+    irrational_voice_debt_points_str,
     voice_cred_points_str,
     voice_debt_points_str,
 )
@@ -28,7 +28,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     _healerunit_ratio_str,
     _is_expanded_str,
     _kids_str,
-    _laborheir_str,
     _level_str,
     _range_evaluated_str,
     _reasonheirs_str,
@@ -49,6 +48,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_want_str,
     healerunit_str,
     knot_str,
+    laborheir_str,
     laborunit_str,
     moment_label_str,
     morph_str,

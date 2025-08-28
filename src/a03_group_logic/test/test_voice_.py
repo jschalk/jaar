@@ -2,8 +2,6 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
 from src.a03_group_logic.test._util.a03_str import (
-    _inallocable_voice_debt_points_str,
-    _irrational_voice_debt_points_str,
     _memberships_str,
     credor_pool_str,
     debtor_pool_str,
@@ -13,6 +11,8 @@ from src.a03_group_logic.test._util.a03_str import (
     fund_agenda_take_str,
     fund_give_str,
     fund_take_str,
+    inallocable_voice_debt_points_str,
+    irrational_voice_debt_points_str,
     knot_str,
     respect_bit_str,
     voice_cred_points_str,
@@ -40,8 +40,8 @@ def test_VoiceUnit_Exists():
     assert not bob_voiceunit.credor_pool
     assert not bob_voiceunit.debtor_pool
     assert not bob_voiceunit._memberships
-    assert not bob_voiceunit._irrational_voice_debt_points
-    assert not bob_voiceunit._inallocable_voice_debt_points
+    assert not bob_voiceunit.irrational_voice_debt_points
+    assert not bob_voiceunit.inallocable_voice_debt_points
     assert not bob_voiceunit.fund_give
     assert not bob_voiceunit.fund_take
     assert not bob_voiceunit.fund_agenda_give
@@ -59,8 +59,8 @@ def test_VoiceUnit_Exists():
         fund_agenda_take_str(),
         fund_give_str(),
         fund_take_str(),
-        _inallocable_voice_debt_points_str(),
-        _irrational_voice_debt_points_str(),
+        inallocable_voice_debt_points_str(),
+        irrational_voice_debt_points_str(),
         _memberships_str(),
         respect_bit_str(),
         voice_name_str(),
@@ -111,8 +111,8 @@ def test_voiceunit_shop_SetsAttributes():
     assert yao_voiceunit.credor_pool == 0
     assert yao_voiceunit.debtor_pool == 0
     assert yao_voiceunit._memberships == {}
-    assert yao_voiceunit._irrational_voice_debt_points == 0
-    assert yao_voiceunit._inallocable_voice_debt_points == 0
+    assert yao_voiceunit.irrational_voice_debt_points == 0
+    assert yao_voiceunit.inallocable_voice_debt_points == 0
     assert yao_voiceunit.fund_give == 0
     assert yao_voiceunit.fund_take == 0
     assert yao_voiceunit.fund_agenda_give == 0
@@ -233,41 +233,41 @@ def test_VoiceUnit_set_credor_voice_debt_points_IgnoresNoneArgs_Scenario1():
 def test_VoiceUnit_add_irrational_voice_debt_points_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit._irrational_voice_debt_points == 0
+    assert bob_voiceunit.irrational_voice_debt_points == 0
 
     # WHEN
     bob_int1 = 11
     bob_voiceunit.add_irrational_voice_debt_points(bob_int1)
 
     # THEN
-    assert bob_voiceunit._irrational_voice_debt_points == bob_int1
+    assert bob_voiceunit.irrational_voice_debt_points == bob_int1
 
     # WHEN
     bob_int2 = 22
     bob_voiceunit.add_irrational_voice_debt_points(bob_int2)
 
     # THEN
-    assert bob_voiceunit._irrational_voice_debt_points == bob_int1 + bob_int2
+    assert bob_voiceunit.irrational_voice_debt_points == bob_int1 + bob_int2
 
 
 def test_VoiceUnit_add_inallocable_voice_debt_points_SetsAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit._inallocable_voice_debt_points == 0
+    assert bob_voiceunit.inallocable_voice_debt_points == 0
 
     # WHEN
     bob_int1 = 11
     bob_voiceunit.add_inallocable_voice_debt_points(bob_int1)
 
     # THEN
-    assert bob_voiceunit._inallocable_voice_debt_points == bob_int1
+    assert bob_voiceunit.inallocable_voice_debt_points == bob_int1
 
     # WHEN
     bob_int2 = 22
     bob_voiceunit.add_inallocable_voice_debt_points(bob_int2)
 
     # THEN
-    assert bob_voiceunit._inallocable_voice_debt_points == bob_int1 + bob_int2
+    assert bob_voiceunit.inallocable_voice_debt_points == bob_int1 + bob_int2
 
 
 def test_VoiceUnit_reset_listen_calculated_attrs_SetsAttr():
@@ -277,15 +277,15 @@ def test_VoiceUnit_reset_listen_calculated_attrs_SetsAttr():
     bob_int2 = 22
     bob_voiceunit.add_irrational_voice_debt_points(bob_int1)
     bob_voiceunit.add_inallocable_voice_debt_points(bob_int2)
-    assert bob_voiceunit._irrational_voice_debt_points == bob_int1
-    assert bob_voiceunit._inallocable_voice_debt_points == bob_int2
+    assert bob_voiceunit.irrational_voice_debt_points == bob_int1
+    assert bob_voiceunit.inallocable_voice_debt_points == bob_int2
 
     # WHEN
     bob_voiceunit.reset_listen_calculated_attrs()
 
     # THEN
-    assert bob_voiceunit._irrational_voice_debt_points == 0
-    assert bob_voiceunit._inallocable_voice_debt_points == 0
+    assert bob_voiceunit.irrational_voice_debt_points == 0
+    assert bob_voiceunit.inallocable_voice_debt_points == 0
 
 
 def test_VoiceUnit_clear_fund_give_take_SetsAttr():

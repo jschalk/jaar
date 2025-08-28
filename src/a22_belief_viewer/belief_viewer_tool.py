@@ -158,11 +158,11 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
         _memberships_readable = f"_memberships: {voice._memberships}"
         credor_pool_readable = f"credor_pool: {voice.credor_pool}"
         debtor_pool_readable = f"debtor_pool: {voice.debtor_pool}"
-        _irrational_voice_debt_points_readable = (
-            f"_irrational_voice_debt_points: {voice._irrational_voice_debt_points}"
+        irrational_voice_debt_points_readable = (
+            f"irrational_voice_debt_points: {voice.irrational_voice_debt_points}"
         )
-        _inallocable_voice_debt_points_readable = (
-            f"_inallocable_voice_debt_points: {voice._inallocable_voice_debt_points}"
+        inallocable_voice_debt_points_readable = (
+            f"inallocable_voice_debt_points: {voice.inallocable_voice_debt_points}"
         )
         fund_give_readable = f"fund_give: {voice.fund_give}"
         fund_take_readable = f"fund_take: {voice.fund_take}"
@@ -231,8 +231,8 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "_memberships": x_members_dict,
             "credor_pool": voice.credor_pool,
             "debtor_pool": voice.debtor_pool,
-            "_irrational_voice_debt_points": voice._irrational_voice_debt_points,
-            "_inallocable_voice_debt_points": voice._inallocable_voice_debt_points,
+            "irrational_voice_debt_points": voice.irrational_voice_debt_points,
+            "inallocable_voice_debt_points": voice.inallocable_voice_debt_points,
             "fund_give": voice.fund_give,
             "fund_take": voice.fund_take,
             "fund_agenda_give": voice.fund_agenda_give,
@@ -244,8 +244,8 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "_memberships_readable": _memberships_readable,
             "credor_pool_readable": credor_pool_readable,
             "debtor_pool_readable": debtor_pool_readable,
-            "_irrational_voice_debt_points_readable": _irrational_voice_debt_points_readable,
-            "_inallocable_voice_debt_points_readable": _inallocable_voice_debt_points_readable,
+            "irrational_voice_debt_points_readable": irrational_voice_debt_points_readable,
+            "inallocable_voice_debt_points_readable": inallocable_voice_debt_points_readable,
             "fund_give_readable": fund_give_readable,
             "fund_take_readable": fund_take_readable,
             "fund_agenda_give_readable": fund_agenda_give_readable,

@@ -4,8 +4,6 @@ from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a03_group_logic.test._util.a03_str import (
-    _inallocable_voice_debt_points_str,
-    _irrational_voice_debt_points_str,
     awardee_title_str,
     credor_pool_str,
     debtor_pool_str,
@@ -19,6 +17,8 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    inallocable_voice_debt_points_str,
+    irrational_voice_debt_points_str,
     respect_bit_str,
     take_force_str,
     voice_cred_points_str,
@@ -245,8 +245,8 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_blrpern_jmetrics_keys = {
         "credor_pool",
         "debtor_pool",
-        "_irrational_voice_debt_points",
-        "_inallocable_voice_debt_points",
+        "irrational_voice_debt_points",
+        "inallocable_voice_debt_points",
         "fund_give",
         "fund_take",
         "fund_agenda_give",
@@ -435,12 +435,12 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         voice_name_str(),
         voice_debt_points_str(),
         "fund_agenda_ratio_take",
-        "_inallocable_voice_debt_points",
+        "inallocable_voice_debt_points",
         "fund_agenda_ratio_give",
         "fund_agenda_take",
         "fund_take",
         "debtor_pool",
-        "_irrational_voice_debt_points",
+        "irrational_voice_debt_points",
     }
     assert belief_planunit_args == {
         moment_label_str(),
@@ -580,17 +580,15 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_class_type(cfig, blrpern, jm, fund_take_str()) == "float"
     assert g_sqlitetype(cfig, blrpern, jm, fund_take_str()) == "REAL"
     assert (
-        g_class_type(cfig, blrpern, jm, _inallocable_voice_debt_points_str()) == "float"
+        g_class_type(cfig, blrpern, jm, inallocable_voice_debt_points_str()) == "float"
     )
     assert (
-        g_sqlitetype(cfig, blrpern, jm, _inallocable_voice_debt_points_str()) == "REAL"
+        g_sqlitetype(cfig, blrpern, jm, inallocable_voice_debt_points_str()) == "REAL"
     )
     assert (
-        g_class_type(cfig, blrpern, jm, _irrational_voice_debt_points_str()) == "float"
+        g_class_type(cfig, blrpern, jm, irrational_voice_debt_points_str()) == "float"
     )
-    assert (
-        g_sqlitetype(cfig, blrpern, jm, _irrational_voice_debt_points_str()) == "REAL"
-    )
+    assert g_sqlitetype(cfig, blrpern, jm, irrational_voice_debt_points_str()) == "REAL"
     assert g_class_type(cfig, blrpern, jv, voice_cred_points_str()) == "float"
     assert g_sqlitetype(cfig, blrpern, jv, voice_cred_points_str()) == "REAL"
     assert g_class_type(cfig, blrpern, jv, voice_debt_points_str()) == "float"
@@ -836,11 +834,9 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(group_cred_points_str()) == "int"
     assert belief_calc_args_type_dict.get(group_debt_points_str()) == "int"
     assert (
-        belief_calc_args_type_dict.get(_inallocable_voice_debt_points_str()) == "float"
+        belief_calc_args_type_dict.get(inallocable_voice_debt_points_str()) == "float"
     )
-    assert (
-        belief_calc_args_type_dict.get(_irrational_voice_debt_points_str()) == "float"
-    )
+    assert belief_calc_args_type_dict.get(irrational_voice_debt_points_str()) == "float"
     assert belief_calc_args_type_dict.get(voice_cred_points_str()) == "float"
     assert belief_calc_args_type_dict.get(voice_debt_points_str()) == "float"
     assert belief_calc_args_type_dict.get(addin_str()) == "float"

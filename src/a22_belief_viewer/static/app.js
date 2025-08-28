@@ -234,8 +234,8 @@ function buildVoicesHtml(voicesData) {
         if (show_voice_debt_points) { html += `<br>${voices_indent}    ${voice.voice_debt_points_readable}` };
         if (show_voice_credor_pool) { html += `<br>${voices_indent}    ${voice.credor_pool_readable}` };
         if (show_voice_debtor_pool) { html += `<br>${voices_indent}    ${voice.debtor_pool_readable}` };
-        if (show_voice_irrational_voice_debt_points) { html += `<br>${voices_indent}    ${voice._irrational_voice_debt_points_readable}` };
-        if (show_voice_inallocable_voice_debt_points) { html += `<br>${voices_indent}    ${voice._inallocable_voice_debt_points_readable}` };
+        if (show_voice_irrational_voice_debt_points) { html += `<br>${voices_indent}    ${voice.irrational_voice_debt_points_readable}` };
+        if (show_voice_inallocable_voice_debt_points) { html += `<br>${voices_indent}    ${voice.inallocable_voice_debt_points_readable}` };
         if (show_voice_fund_give) { html += `<br>${voices_indent}    ${voice.fund_give_readable}` };
         if (show_voice_fund_take) { html += `<br>${voices_indent}    ${voice.fund_take_readable}` };
         if (show_voice_fund_agenda_give) { html += `<br>${voices_indent}    ${voice.fund_agenda_give_readable}` };
@@ -321,7 +321,7 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
     ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
-    ${renderFlatReadableJson(planUnit._laborheir._partys, indent, show_laborheir)}
+    ${renderFlatReadableJson(planUnit.laborheir._partys, indent, show_laborheir)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
     ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}

@@ -16,13 +16,13 @@ def test_allocate_irrational_voice_debt_points_SetsBeliefAttr():
     yao_belief = beliefunit_shop(yao_str)
     yao_belief.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
     zia_voiceunit = yao_belief.get_voice(zia_str)
-    assert zia_voiceunit._irrational_voice_debt_points == 0
+    assert zia_voiceunit.irrational_voice_debt_points == 0
 
     # WHEN
     _allocate_irrational_voice_debt_points(yao_belief, zia_str)
 
     # THEN
-    assert zia_voiceunit._irrational_voice_debt_points == zia_voice_debt_points
+    assert zia_voiceunit.irrational_voice_debt_points == zia_voice_debt_points
 
 
 def test_generate_perspective_agenda_GrabsAgendaChores():

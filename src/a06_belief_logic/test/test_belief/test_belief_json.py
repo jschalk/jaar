@@ -138,9 +138,9 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
 
     # THEN
     _kids = "_kids"
-    _laborunit = "laborunit"
+    laborunit = "laborunit"
 
-    labor_dict_x = planroot_dict[_kids][morn_str][_laborunit]
+    labor_dict_x = planroot_dict[_kids][morn_str][laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
     assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}

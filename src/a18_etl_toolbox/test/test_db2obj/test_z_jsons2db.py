@@ -500,8 +500,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_fund_agenda_take = 11
     x_fund_agenda_ratio_give = 12
     x_fund_agenda_ratio_take = 13
-    x__inallocable_voice_debt_points = 14
-    x__irrational_voice_debt_points = 15
+    x_inallocable_voice_debt_points = 14
+    x_irrational_voice_debt_points = 15
     x_voice = voiceunit_shop(x_voice_name)
     x_voice.voice_name = x_voice_name
     x_voice.voice_cred_points = x_voice_cred_points
@@ -514,8 +514,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice.fund_agenda_take = x_fund_agenda_take
     x_voice.fund_agenda_ratio_give = x_fund_agenda_ratio_give
     x_voice.fund_agenda_ratio_take = x_fund_agenda_ratio_take
-    x_voice._inallocable_voice_debt_points = x__inallocable_voice_debt_points
-    x_voice._irrational_voice_debt_points = x__irrational_voice_debt_points
+    x_voice.inallocable_voice_debt_points = x_inallocable_voice_debt_points
+    x_voice.irrational_voice_debt_points = x_irrational_voice_debt_points
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -546,8 +546,8 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             x_fund_agenda_take,
             x_fund_agenda_ratio_give,
             x_fund_agenda_ratio_take,
-            x__inallocable_voice_debt_points,
-            x__irrational_voice_debt_points,
+            x_inallocable_voice_debt_points,
+            x_irrational_voice_debt_points,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

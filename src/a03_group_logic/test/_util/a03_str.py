@@ -2,18 +2,6 @@ from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 
 
-def _inallocable_voice_debt_points_str() -> str:
-    return "_inallocable_voice_debt_points"
-
-
-def _irrational_voice_debt_points_str() -> str:
-    return "_irrational_voice_debt_points"
-
-
-def _laborheir_str() -> str:
-    return "_laborheir"
-
-
 def _memberships_str() -> str:
     return "_memberships"
 
@@ -84,6 +72,18 @@ def group_title_str() -> str:
 
 def groupunits_str() -> str:
     return "groupunits"
+
+
+def inallocable_voice_debt_points_str() -> str:
+    return "inallocable_voice_debt_points"
+
+
+def irrational_voice_debt_points_str() -> str:
+    return "irrational_voice_debt_points"
+
+
+def laborheir_str() -> str:
+    return "laborheir"
 
 
 def laborunit_str() -> str:
