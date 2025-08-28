@@ -1,3 +1,5 @@
+from importlib import import_module as importlib_import_module
+from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.a98_docs_builder.module_eval import get_module_descs, get_module_str_functions
@@ -25,7 +27,6 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     excluded_strs = {"close", "_level"}
 
     # WHEN / THEN
-
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         module_files = list(get_python_files_with_flag(module_dir).keys())
@@ -48,6 +49,48 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
+
+
+# def test_Modules_StrFunctionsAreAllImported():
+#     # ESTABLISH
+#     # get max module_desc
+#     max_module_int = 0
+#     for module_desc in get_module_descs():
+#         max_module_int = max(int(module_desc[1:3]), max_module_int)
+
+#     max_module_desc = ""
+#     max_module_dir = ""
+#     for module_desc, module_dir in get_module_descs().items():
+#         if int(module_desc[1:3]) == max_module_int:
+#             max_module_desc = module_desc
+#             max_module_dir = module_dir
+#     max_module_int_str = str(max_module_int)
+#     print(f"{max_module_desc=}")
+#     print(f"{max_module_dir=}")
+#     print(f"{get_module_str_functions(max_module_dir, max_module_int_str)=}")
+#     max_module_import_str = max_module_dir.replace("\\", ".")
+#     max_module_import_str = (
+#         f"{max_module_import_str}.test._util.a{max_module_int_str}_str"
+#     )
+#     print(f"{max_module_import_str=}")
+#     print(f"{importlib_import_module(max_module_import_str)=}")
+#     mod = importlib_import_module(max_module_import_str)
+
+#     mod_funcs = {
+#         name
+#         for name, obj in inspect_getmembers(mod, inspect_isfunction)
+#         if not name.startswith("__")
+#     }
+#     print(mod_funcs)
+
+#     all_str_functions = get_all_str_functions()
+#     for str_func in sorted(all_str_functions):
+#         if str_func[:1] == "_":
+#             print(f"{str_func=}")
+#         # print(f"{str_func=}")
+#     assert len(all_str_functions) == len(mod_funcs)
+#     assert all_str_functions == mod_funcs
+#     assert 1 == 2
 
 
 def test_Modules_MostFunctionsAreUniquelyNamed():
