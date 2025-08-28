@@ -48,7 +48,7 @@ class VoiceUnit(VoiceCore):
     voice_cred_points: int = None
     voice_debt_points: int = None
     # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
-    _memberships: dict[VoiceName, MemberShip] = None
+    memberships: dict[VoiceName, MemberShip] = None
     # calculated fields
     credor_pool: RespectNum = None
     debtor_pool: RespectNum = None
@@ -172,28 +172,28 @@ class VoiceUnit(VoiceCore):
             )
 
         x_membership.voice_name = self.voice_name
-        self._memberships[x_membership.group_title] = x_membership
+        self.memberships[x_membership.group_title] = x_membership
 
     def get_membership(self, group_title: GroupTitle) -> MemberShip:
-        return self._memberships.get(group_title)
+        return self.memberships.get(group_title)
 
     def membership_exists(self, group_title: GroupTitle) -> bool:
-        return self._memberships.get(group_title) is not None
+        return self.memberships.get(group_title) is not None
 
     def delete_membership(self, group_title: GroupTitle):
-        return self._memberships.pop(group_title)
+        return self.memberships.pop(group_title)
 
     def memberships_exist(self):
-        return len(self._memberships) != 0
+        return len(self.memberships) != 0
 
     def clear_memberships(self):
-        self._memberships = {}
+        self.memberships = {}
 
     def set_credor_pool(self, credor_pool: RespectNum):
         self.credor_pool = credor_pool
         ledger_dict = {
             x_membership.group_title: x_membership.group_cred_points
-            for x_membership in self._memberships.values()
+            for x_membership in self.memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self.credor_pool, self.respect_bit)
         for x_group_title, alloted_pool in allot_dict.items():
@@ -203,7 +203,7 @@ class VoiceUnit(VoiceCore):
         self.debtor_pool = debtor_pool
         ledger_dict = {
             x_membership.group_title: x_membership.group_debt_points
-            for x_membership in self._memberships.values()
+            for x_membership in self.memberships.values()
         }
         allot_dict = allot_scale(ledger_dict, self.debtor_pool, self.respect_bit)
         for x_group_title, alloted_pool in allot_dict.items():
@@ -212,7 +212,7 @@ class VoiceUnit(VoiceCore):
     def get_memberships_dict(self) -> dict:
         return {
             x_membership.group_title: x_membership.to_dict()
-            for x_membership in self._memberships.values()
+            for x_membership in self.memberships.values()
         }
 
     def to_dict(self, all_attrs: bool = False) -> dict[str, str]:
@@ -220,7 +220,7 @@ class VoiceUnit(VoiceCore):
             "voice_name": self.voice_name,
             "voice_cred_points": self.voice_cred_points,
             "voice_debt_points": self.voice_debt_points,
-            "_memberships": self.get_memberships_dict(),
+            "memberships": self.get_memberships_dict(),
         }
         if self.irrational_voice_debt_points not in [None, 0]:
             x_dict["irrational_voice_debt_points"] = self.irrational_voice_debt_points
@@ -257,11 +257,11 @@ def voiceunit_get_from_dict(voiceunit_dict: dict, _knot: str) -> VoiceUnit:
     x_voice_name = voiceunit_dict["voice_name"]
     x_voice_cred_points = voiceunit_dict["voice_cred_points"]
     x_voice_debt_points = voiceunit_dict["voice_debt_points"]
-    x_memberships_dict = voiceunit_dict["_memberships"]
+    x_memberships_dict = voiceunit_dict["memberships"]
     x_voiceunit = voiceunit_shop(
         x_voice_name, x_voice_cred_points, x_voice_debt_points, _knot
     )
-    x_voiceunit._memberships = memberships_get_from_dict(
+    x_voiceunit.memberships = memberships_get_from_dict(
         x_memberships_dict, x_voice_name
     )
     irrational_voice_debt_points = voiceunit_dict.get("irrational_voice_debt_points", 0)
@@ -288,7 +288,7 @@ def voiceunit_shop(
     x_voiceunit = VoiceUnit(
         voice_cred_points=get_1_if_None(voice_cred_points),
         voice_debt_points=get_1_if_None(voice_debt_points),
-        _memberships={},
+        memberships={},
         credor_pool=0,
         debtor_pool=0,
         irrational_voice_debt_points=0,

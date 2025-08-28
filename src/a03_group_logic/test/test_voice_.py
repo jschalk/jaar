@@ -2,7 +2,6 @@ from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_RespectBit_if_None
 from src.a03_group_logic.test._util.a03_str import (
-    _memberships_str,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -14,6 +13,7 @@ from src.a03_group_logic.test._util.a03_str import (
     inallocable_voice_debt_points_str,
     irrational_voice_debt_points_str,
     knot_str,
+    memberships_str,
     respect_bit_str,
     voice_cred_points_str,
     voice_debt_points_str,
@@ -39,7 +39,7 @@ def test_VoiceUnit_Exists():
     # calculated fields
     assert not bob_voiceunit.credor_pool
     assert not bob_voiceunit.debtor_pool
-    assert not bob_voiceunit._memberships
+    assert not bob_voiceunit.memberships
     assert not bob_voiceunit.irrational_voice_debt_points
     assert not bob_voiceunit.inallocable_voice_debt_points
     assert not bob_voiceunit.fund_give
@@ -61,7 +61,7 @@ def test_VoiceUnit_Exists():
         fund_take_str(),
         inallocable_voice_debt_points_str(),
         irrational_voice_debt_points_str(),
-        _memberships_str(),
+        memberships_str(),
         respect_bit_str(),
         voice_name_str(),
         knot_str(),
@@ -110,7 +110,7 @@ def test_voiceunit_shop_SetsAttributes():
     # calculated fields
     assert yao_voiceunit.credor_pool == 0
     assert yao_voiceunit.debtor_pool == 0
-    assert yao_voiceunit._memberships == {}
+    assert yao_voiceunit.memberships == {}
     assert yao_voiceunit.irrational_voice_debt_points == 0
     assert yao_voiceunit.inallocable_voice_debt_points == 0
     assert yao_voiceunit.fund_give == 0

@@ -51,7 +51,7 @@ def test_sift_ReturnsObjWithoutUnecessaryINSERT_belief_voice_membership():
     run_str = ";run"
     run_str = ";run"
     yao_voiceunit.add_membership(run_str)
-    print(f"{yao_voiceunit._memberships.keys()=}")
+    print(f"{yao_voiceunit.memberships.keys()=}")
 
     voices_beliefdelta = beliefdelta_shop()
     bob_run_atom = beliefatom_shop(belief_voice_membership_str(), INSERT_str())

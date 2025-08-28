@@ -249,7 +249,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_memb
 
     # WHEN
     sue_beliefdelta = beliefdelta_shop()
-    print(f"{after_sue_belief.get_voice(zia_str)._memberships=}")
+    print(f"{after_sue_belief.get_voice(zia_str).memberships=}")
     sue_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
     # print(f"{sue_beliefdelta.beliefatoms.get(INSERT_str()).keys()=}")
     # print(

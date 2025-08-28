@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _memberships_str,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -13,6 +12,7 @@ from src.a03_group_logic.test._util.a03_str import (
     group_title_str,
     inallocable_voice_debt_points_str,
     irrational_voice_debt_points_str,
+    memberships_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -81,7 +81,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 
 #     swim_group_dict = groups_view_dict.get(swim_str)
 #     group_title_readable_key = add_readable(group_title_str())
-#     _memberships_readable_key = add_readable(_memberships_str())
+#     memberships_readable_key = add_readable(memberships_str())
 #     fund_give_readable_key = add_readable(fund_give_str())
 #     fund_take_readable_key = add_readable(fund_take_str())
 #     fund_agenda_give_readable_key = add_readable(fund_agenda_give_str())
@@ -90,7 +90,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     debtor_pool_readable_key = add_readable(debtor_pool_str())
 #     assert set(swim_group_dict.keys()) == {
 #         group_title_str(),
-#         _memberships_str(),
+#         memberships_str(),
 #         fund_give_str(),
 #         fund_take_str(),
 #         fund_agenda_give_str(),
@@ -98,7 +98,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         credor_pool_str(),
 #         debtor_pool_str(),
 #         group_title_readable_key,
-#         _memberships_readable_key,
+#         memberships_readable_key,
 #         fund_give_readable_key,
 #         fund_take_readable_key,
 #         fund_agenda_give_readable_key,
@@ -109,7 +109,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 
 #     swim_groupunit = sue_believer.get_groupunit(swim_str)
 #     swim_group_title_readable = f"group_title_readable: {swim_groupunit.group_title}"
-#     swim__memberships_readable = f"_memberships_readable: {swim_groupunit._memberships}"
+#     swim_memberships_readable = f"memberships_readable: {swim_groupunit.memberships}"
 #     swim_fund_give_readable = f"fund_give_readable: {swim_groupunit.fund_give}"
 #     swim_fund_take_readable = f"fund_take_readable: {swim_groupunit.fund_take}"
 #     swim_fund_agenda_give_readable = (
@@ -124,7 +124,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     sgu = swim_groupunit
 #     sg_dict = swim_group_dict
 #     assert sgu.group_title == sg_dict.get(group_title_str())
-#     assert sgu._memberships == sg_dict.get(_memberships_str())
+#     assert sgu.memberships == sg_dict.get(memberships_str())
 #     assert sgu.fund_give == sg_dict.get(fund_give_str())
 #     assert sgu.fund_take == sg_dict.get(fund_take_str())
 #     assert sgu.fund_agenda_give == sg_dict.get(fund_agenda_give_str())
@@ -132,7 +132,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert sgu.credor_pool == sg_dict.get(credor_pool_str())
 #     assert sgu.debtor_pool == sg_dict.get(debtor_pool_str())
 #     assert swim_group_title_readable == sg_dict.get(group_title_readable_key)
-#     assert swim__memberships_readable == sg_dict.get(_memberships_readable_key)
+#     assert swim_memberships_readable == sg_dict.get(memberships_readable_key)
 #     assert swim_fund_give_readable == sg_dict.get(fund_give_readable_key)
 #     assert swim_fund_take_readable == sg_dict.get(fund_take_readable_key)
 #     assert swim_fund_agenda_give_readable == sg_dict.get(
@@ -166,8 +166,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     # THEN
 #     assert set(groups_view_dict.keys()) == {yao_str}
 #     yao_voice_dict = groups_view_dict.get(yao_str)
-#     assert _memberships_str() in set(yao_voice_dict.keys())
-#     yao_memberships_dict = yao_voice_dict.get(_memberships_str())
+#     assert memberships_str() in set(yao_voice_dict.keys())
+#     yao_memberships_dict = yao_voice_dict.get(memberships_str())
 #     assert {swim_str, yao_str} == set(yao_memberships_dict.keys())
 #     yao_swim_dict = yao_memberships_dict.get(swim_str)
 

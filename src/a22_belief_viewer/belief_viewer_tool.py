@@ -155,7 +155,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
 
         voice_cred_points_readable = f"voice_cred_points: {voice.voice_cred_points}"
         voice_debt_points_readable = f"voice_debt_points: {voice.voice_debt_points}"
-        _memberships_readable = f"_memberships: {voice._memberships}"
+        memberships_readable = f"memberships: {voice.memberships}"
         credor_pool_readable = f"credor_pool: {voice.credor_pool}"
         debtor_pool_readable = f"debtor_pool: {voice.debtor_pool}"
         irrational_voice_debt_points_readable = (
@@ -222,13 +222,13 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
                     f"fund_take: {x_membership.fund_take}"
                 ),
             }
-            for x_membership in voice._memberships.values()
+            for x_membership in voice.memberships.values()
         }
         voice_dict = {
             "voice_name": voice.voice_name,
             "voice_cred_points": voice.voice_cred_points,
             "voice_debt_points": voice.voice_debt_points,
-            "_memberships": x_members_dict,
+            "memberships": x_members_dict,
             "credor_pool": voice.credor_pool,
             "debtor_pool": voice.debtor_pool,
             "irrational_voice_debt_points": voice.irrational_voice_debt_points,
@@ -241,7 +241,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "fund_agenda_ratio_take": voice.fund_agenda_ratio_take,
             "voice_cred_points_readable": voice_cred_points_readable,
             "voice_debt_points_readable": voice_debt_points_readable,
-            "_memberships_readable": _memberships_readable,
+            "memberships_readable": memberships_readable,
             "credor_pool_readable": credor_pool_readable,
             "debtor_pool_readable": debtor_pool_readable,
             "irrational_voice_debt_points_readable": irrational_voice_debt_points_readable,
@@ -275,7 +275,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #     fund_take_readable_key = f"fund_take_readable"
 
     #     group_group_title_readable = f"group_title_readable: {group.group_title}"
-    #     group__memberships_readable = f"_memberships_readable: {group._memberships}"
+    #     group_memberships_readable = f"memberships_readable: {group.memberships}"
     #     group_fund_give_readable = f"fund_give_readable: {group.fund_give}"
     #     group_fund_take_readable = f"fund_take_readable: {group.fund_take}"
     #     group_fund_agenda_give_readable = (
@@ -335,7 +335,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         #         f"fund_take: {x_membership.fund_take}"
     #         #     ),
     #         # }
-    #         # for x_membership in group._memberships.values()
+    #         # for x_membership in group.memberships.values()
     #     }
     #     group_dict = {
     #         "group_title": group.group_title,
@@ -362,7 +362,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         fund_agenda_take_readable_key: 1,
     #         fund_give_readable_key: 1,
     #         fund_take_readable_key: 1,
-    #         # "_memberships": x_members_dict,
+    #         # "memberships": x_members_dict,
     #     }
     #     groups_dict[group.group_title] = group_dict
 

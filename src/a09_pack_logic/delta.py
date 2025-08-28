@@ -189,7 +189,7 @@ class BeliefDelta:
                     "voice_debt_points", insert_voiceunit.voice_debt_points
                 )
             self.set_beliefatom(x_beliefatom)
-            all_group_titles = set(insert_voiceunit._memberships.keys())
+            all_group_titles = set(insert_voiceunit.memberships.keys())
             self.add_beliefatom_memberships_inserts(
                 after_voiceunit=insert_voiceunit,
                 insert_membership_group_titles=all_group_titles,
@@ -237,7 +237,7 @@ class BeliefDelta:
             delete_voiceunit = before_belief.get_voice(delete_voice_name)
             non_mirror_group_titles = {
                 x_group_title
-                for x_group_title in delete_voiceunit._memberships.keys()
+                for x_group_title in delete_voiceunit.memberships.keys()
                 if x_group_title != delete_voice_name
             }
             self.add_beliefatom_memberships_delete(
@@ -250,13 +250,13 @@ class BeliefDelta:
         # before_non_mirror_group_titles
         before_group_titles = {
             x_group_title
-            for x_group_title in before_voiceunit._memberships.keys()
+            for x_group_title in before_voiceunit.memberships.keys()
             if x_group_title != before_voiceunit.voice_name
         }
         # after_non_mirror_group_titles
         after_group_titles = {
             x_group_title
-            for x_group_title in after_voiceunit._memberships.keys()
+            for x_group_title in after_voiceunit.memberships.keys()
             if x_group_title != after_voiceunit.voice_name
         }
 

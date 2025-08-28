@@ -3,7 +3,6 @@ from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 from src.a03_group_logic.test._util.a03_str import (
-    _memberships_str,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -13,6 +12,7 @@ from src.a03_group_logic.test._util.a03_str import (
     fund_take_str,
     group_title_str,
     knot_str,
+    memberships_str,
 )
 
 
@@ -22,7 +22,7 @@ def test_GroupUnit_Exists():
     # THEN
     assert x_groupunit is not None
     assert not x_groupunit.group_title
-    assert not x_groupunit._memberships
+    assert not x_groupunit.memberships
     assert not x_groupunit.fund_give
     assert not x_groupunit.fund_take
     assert not x_groupunit.fund_agenda_give
@@ -34,7 +34,7 @@ def test_GroupUnit_Exists():
     print(f"{x_groupunit.__dict__=}")
     assert set(x_groupunit.__dict__.keys()) == {
         group_title_str(),
-        _memberships_str(),
+        memberships_str(),
         fund_give_str(),
         fund_take_str(),
         fund_agenda_give_str(),
@@ -58,7 +58,7 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit is not None
     assert swim_groupunit.group_title is not None
     assert swim_groupunit.group_title == swim_str
-    assert swim_groupunit._memberships == {}
+    assert swim_groupunit.memberships == {}
     assert swim_groupunit.fund_give == 0
     assert swim_groupunit.fund_take == 0
     assert swim_groupunit.fund_agenda_give == 0
@@ -119,7 +119,7 @@ def test_GroupUnit_set_membership_SetsAttr():
         yao_swim_membership.voice_name: yao_swim_membership,
         sue_swim_membership.voice_name: sue_swim_membership,
     }
-    assert swimmers_groupunit._memberships == swimmers_memberships
+    assert swimmers_groupunit.memberships == swimmers_memberships
 
 
 def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():

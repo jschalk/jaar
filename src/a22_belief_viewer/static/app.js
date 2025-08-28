@@ -243,7 +243,7 @@ function buildVoicesHtml(voicesData) {
         if (show_voice_fund_agenda_ratio_give) { html += `<br>${voices_indent}    ${voice.fund_agenda_ratio_give_readable}` };
         if (show_voice_fund_agenda_ratio_take) { html += `<br>${voices_indent}    ${voice.fund_agenda_ratio_take_readable}` };
         console.info(voice)
-        Object.values(voice._memberships).forEach(membership => {
+        Object.values(voice.memberships).forEach(membership => {
             if (show_voice_membership_group_title) { html += `<br><b>${member_title_indent}${membership.group_title_readable}</b>` };
             if (show_voice_membership_group_cred_points) { html += `<br>${membership_indent}${membership.group_cred_points_readable}` };
             if (show_voice_membership_group_debt_points) { html += `<br>${membership_indent}${membership.group_debt_points_readable}` };

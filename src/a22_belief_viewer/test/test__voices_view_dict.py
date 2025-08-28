@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _memberships_str,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -13,6 +12,7 @@ from src.a03_group_logic.test._util.a03_str import (
     group_title_str,
     inallocable_voice_debt_points_str,
     irrational_voice_debt_points_str,
+    memberships_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -62,7 +62,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     yao_voice_dict = voices_view_dict.get(yao_str)
     voice_cred_points_readable_key = add_readable(voice_cred_points_str())
     voice_debt_points_readable_key = add_readable(voice_debt_points_str())
-    _memberships_readable_key = add_readable(_memberships_str())
+    memberships_readable_key = add_readable(memberships_str())
     credor_pool_readable_key = add_readable(credor_pool_str())
     debtor_pool_readable_key = add_readable(debtor_pool_str())
     irrational_voice_debt_points_readable_key = add_readable(
@@ -82,7 +82,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         voice_name_str(),
         voice_cred_points_str(),
         voice_debt_points_str(),
-        _memberships_str(),
+        memberships_str(),
         credor_pool_str(),
         debtor_pool_str(),
         irrational_voice_debt_points_str(),
@@ -95,7 +95,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         fund_agenda_ratio_take_str(),
         voice_cred_points_readable_key,
         voice_debt_points_readable_key,
-        _memberships_readable_key,
+        memberships_readable_key,
         credor_pool_readable_key,
         debtor_pool_readable_key,
         irrational_voice_debt_points_readable_key,
@@ -129,7 +129,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
 
     expected_voice_cred_points_readable = f"voice_cred_points: {ypu.voice_cred_points}"
     expected_voice_debt_points_readable = f"voice_debt_points: {ypu.voice_debt_points}"
-    expected__memberships_readable = f"_memberships: {ypu._memberships}"
+    expected_memberships_readable = f"memberships: {ypu.memberships}"
     expected_credor_pool_readable = f"credor_pool: {ypu.credor_pool}"
     expected_debtor_pool_readable = f"debtor_pool: {ypu.debtor_pool}"
     expected_irrational_voice_debt_points_readable = (
@@ -157,7 +157,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         yp_dict.get(voice_debt_points_readable_key)
         == expected_voice_debt_points_readable
     )
-    assert yp_dict.get(_memberships_readable_key) == expected__memberships_readable
+    assert yp_dict.get(memberships_readable_key) == expected_memberships_readable
     assert yp_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
     assert yp_dict.get(debtor_pool_readable_key) == expected_debtor_pool_readable
     assert (
@@ -205,8 +205,8 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     # THEN
     assert set(voices_view_dict.keys()) == {yao_str}
     yao_voice_dict = voices_view_dict.get(yao_str)
-    assert _memberships_str() in set(yao_voice_dict.keys())
-    yao_memberships_dict = yao_voice_dict.get(_memberships_str())
+    assert memberships_str() in set(yao_voice_dict.keys())
+    yao_memberships_dict = yao_voice_dict.get(memberships_str())
     assert {swim_str, yao_str} == set(yao_memberships_dict.keys())
     yao_swim_dict = yao_memberships_dict.get(swim_str)
 

@@ -1089,7 +1089,7 @@ class GroupAgendaMetrics:
         for x_groupunit in x_belief.groupunits.values():
             self.sum_groupunit_give += x_groupunit.fund_agenda_give
             self.sum_groupunit_take += x_groupunit.fund_agenda_take
-            for membership_x in x_groupunit._memberships.values():
+            for membership_x in x_groupunit.memberships.values():
                 self.sum_membership_cred += membership_x.fund_agenda_give
                 self.sum_membership_debt += membership_x.fund_agenda_take
                 self.membership_count += 1
@@ -1155,7 +1155,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     # for plan_rope in yao_belief._plan_dict.keys():
     #     print(f"{plan_rope=}")
     # for x_voice in yao_belief.voices.values():
-    #     for x_membership in x_voice._memberships.values():
+    #     for x_membership in x_voice.memberships.values():
     #         print(f"{x_membership.group_title=}")
 
     # THEN
@@ -1316,7 +1316,7 @@ def test_BeliefUnit_cash_out_CreatesGroupUnitWith_beliefunit_v001():
     assert len(yao_belief.groupunits) == 34
     everyone_voices_len = None
     everyone_group = yao_belief.get_groupunit(";Everyone")
-    everyone_voices_len = len(everyone_group._memberships)
+    everyone_voices_len = len(everyone_group.memberships)
     assert everyone_voices_len == 22
 
     # WHEN

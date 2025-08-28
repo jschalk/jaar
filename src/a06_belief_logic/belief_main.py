@@ -384,7 +384,7 @@ class BeliefUnit:
     def get_voiceunit_group_titles_dict(self) -> dict[GroupTitle, set[VoiceName]]:
         x_dict = {}
         for x_voiceunit in self.voices.values():
-            for x_group_title in x_voiceunit._memberships.keys():
+            for x_group_title in x_voiceunit.memberships.keys():
                 voice_name_set = x_dict.get(x_group_title)
                 if voice_name_set is None:
                     x_dict[x_group_title] = {x_voiceunit.voice_name}
@@ -983,7 +983,7 @@ reason_case:    {reason_case}"""
     def _allot_groupunits_fund(self):
         for x_groupunit in self.groupunits.values():
             x_groupunit._set_membership_fund_give_fund_take()
-            for x_membership in x_groupunit._memberships.values():
+            for x_membership in x_groupunit.memberships.values():
                 self.add_to_voiceunit_fund_give_take(
                     voiceunit_voice_name=x_membership.voice_name,
                     fund_give=x_membership.fund_give,
@@ -1338,7 +1338,7 @@ reason_case:    {reason_case}"""
         for x_keep_rope, x_keep_plan in self._keep_dict.items():
             for x_healer_name in x_keep_plan.healerunit._healer_names:
                 x_groupunit = self.get_groupunit(x_healer_name)
-                for x_voice_name in x_groupunit._memberships.keys():
+                for x_voice_name in x_groupunit.memberships.keys():
                     if _healers_dict.get(x_voice_name) is None:
                         _healers_dict[x_voice_name] = {x_keep_rope: x_keep_plan}
                     else:

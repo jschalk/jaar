@@ -11,7 +11,7 @@ from src.a03_group_logic.labor import (
     partyunit_shop,
 )
 from src.a03_group_logic.test._util.a03_str import (
-    _parent_solo_str,
+    parent_solo_str,
     party_title_str,
     solo_str,
 )
@@ -61,10 +61,10 @@ def test_PartyHeir_Exists():
     # THEN
     assert not x_partyheir.party_title
     assert not x_partyheir.solo
-    assert not x_partyheir._parent_solo
+    assert not x_partyheir.parent_solo
     obj_attrs = set(x_partyheir.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {party_title_str(), solo_str(), _parent_solo_str()}
+    assert obj_attrs == {party_title_str(), solo_str(), parent_solo_str()}
 
 
 def test_partyheir_shop_ReturnsObj():

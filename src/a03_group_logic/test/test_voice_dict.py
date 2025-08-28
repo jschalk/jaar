@@ -66,14 +66,14 @@ def test_VoiceUnit_to_dict_ReturnsDictWithNecessaryDataForJSON():
     x_dict = bob_voiceunit.to_dict()
 
     # THEN
-    bl_dict = x_dict.get("_memberships")
+    bl_dict = x_dict.get("memberships")
     print(f"{bl_dict=}")
     assert x_dict is not None
     assert x_dict == {
         "voice_name": bob_str,
         "voice_cred_points": bob_voice_cred_points,
         "voice_debt_points": bob_voice_debt_points,
-        "_memberships": {
+        "memberships": {
             bob_str: {
                 "group_title": bob_str,
                 "group_cred_points": 1,
@@ -132,7 +132,7 @@ def test_VoiceUnit_to_dict_ReturnsDictWithAllAttrDataForJSON():
         "voice_name": bob_str,
         "voice_cred_points": bob_voice_cred_points,
         "voice_debt_points": bob_voice_debt_points,
-        "_memberships": bob_voiceunit.get_memberships_dict(),
+        "memberships": bob_voiceunit.get_memberships_dict(),
         "irrational_voice_debt_points": bob_irrational_voice_debt_points,
         "inallocable_voice_debt_points": bob_inallocable_voice_debt_points,
         "fund_give": bob_fund_give,
@@ -244,7 +244,7 @@ def test_voiceunit_get_from_dict_Returns_memberships():
     after_yao_voiceunit = voiceunit_get_from_dict(yao_dict, slash_str)
 
     # THEN
-    assert before_yao_voiceunit._memberships == after_yao_voiceunit._memberships
+    assert before_yao_voiceunit.memberships == after_yao_voiceunit.memberships
     assert before_yao_voiceunit == after_yao_voiceunit
     assert after_yao_voiceunit.knot == slash_str
 
@@ -277,7 +277,7 @@ def test_voiceunits_get_from_json_ReturnsObj_SimpleExampleWith_IncompleteData():
             "voice_name": yao_str,
             "voice_cred_points": yao_voice_cred_points,
             "voice_debt_points": yao_voice_debt_points,
-            "_memberships": {},
+            "memberships": {},
             "irrational_voice_debt_points": yao_irrational_voice_debt_points,
             "inallocable_voice_debt_points": yao_inallocable_voice_debt_points,
         }

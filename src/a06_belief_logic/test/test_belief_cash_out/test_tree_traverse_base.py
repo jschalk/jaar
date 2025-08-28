@@ -551,9 +551,7 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert len(yao_belief.groupunits) == 3
     xio_groupunit = yao_belief.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_belief.create_symmetry_groupunit(xio_str)
-    assert (
-        xio_groupunit._memberships.keys() == xio_symmerty_groupunit._memberships.keys()
-    )
+    assert xio_groupunit.memberships.keys() == xio_symmerty_groupunit.memberships.keys()
     assert xio_groupunit.membership_exists(yao_str)
     assert xio_groupunit.membership_exists(zia_str)
     assert not xio_groupunit.membership_exists(xio_str)
@@ -599,9 +597,7 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     assert len(yao_belief.groupunits) == 3
     xio_groupunit = yao_belief.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_belief.create_symmetry_groupunit(xio_str)
-    assert (
-        xio_groupunit._memberships.keys() == xio_symmerty_groupunit._memberships.keys()
-    )
+    assert xio_groupunit.memberships.keys() == xio_symmerty_groupunit.memberships.keys()
     assert xio_groupunit.membership_exists(yao_str)
     assert xio_groupunit.membership_exists(zia_str)
     assert not xio_groupunit.membership_exists(xio_str)

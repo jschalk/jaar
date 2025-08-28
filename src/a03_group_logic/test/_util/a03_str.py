@@ -2,14 +2,6 @@ from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 
 
-def _memberships_str() -> str:
-    return "_memberships"
-
-
-def _parent_solo_str() -> str:
-    return "_parent_solo"
-
-
 def awardee_title_str() -> str:
     return "awardee_title"
 
@@ -88,6 +80,14 @@ def laborheir_str() -> str:
 
 def laborunit_str() -> str:
     return "laborunit"
+
+
+def memberships_str() -> str:
+    return "memberships"
+
+
+def parent_solo_str() -> str:
+    return "parent_solo"
 
 
 def party_title_str() -> str:

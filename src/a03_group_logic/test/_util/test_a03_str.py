@@ -1,6 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _memberships_str,
-    _parent_solo_str,
     awardee_title_str,
     awardunits_str,
     belief_name_str,
@@ -21,6 +19,8 @@ from src.a03_group_logic.test._util.a03_str import (
     irrational_voice_debt_points_str,
     laborheir_str,
     laborunit_str,
+    memberships_str,
+    parent_solo_str,
     party_title_str,
     respect_bit_str,
     solo_str,
@@ -45,8 +45,8 @@ def test_str_functions_ReturnsObj():
     assert inallocable_voice_debt_points_str() == "inallocable_voice_debt_points"
     assert irrational_voice_debt_points_str() == "irrational_voice_debt_points"
     assert laborheir_str() == "laborheir"
-    assert _memberships_str() == "_memberships"
-    assert _parent_solo_str() == "_parent_solo"
+    assert memberships_str() == "memberships"
+    assert parent_solo_str() == "parent_solo"
     assert awardunits_str() == "awardunits"
     assert awardee_title_str() == "awardee_title"
     assert belief_name_str() == "belief_name"

@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _memberships_str,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -13,6 +12,7 @@ from src.a03_group_logic.test._util.a03_str import (
     group_title_str,
     inallocable_voice_debt_points_str,
     irrational_voice_debt_points_str,
+    memberships_str,
     voice_cred_points_str,
     voice_debt_points_str,
 )
@@ -124,7 +124,7 @@ def test_get_belief_viewer_template_ReturnsObj():
         task_str(),
         voice_cred_points_str(),
         voice_debt_points_str(),
-        # f"voice{_memberships_str()}",
+        # f"voice{memberships_str()}",
         f"voice_{credor_pool_str()}",
         f"voice_{debtor_pool_str()}",
         f"voice_{irrational_voice_debt_points_str()}",

@@ -224,7 +224,7 @@ def add_belief_to_br00020_csv(
     event_int: int = None,
 ) -> str:
     for voiceunit in x_belief.voices.values():
-        for membership in voiceunit._memberships.values():
+        for membership in voiceunit.memberships.values():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),

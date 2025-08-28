@@ -58,7 +58,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_voice_membership():
     sue_belief.add_voiceunit(bob_str)
     yao_voiceunit = sue_belief.get_voice(yao_str)
     yao_voiceunit.add_membership(run_str)
-    print(f"{yao_voiceunit._memberships.keys()=}")
+    print(f"{yao_voiceunit.memberships.keys()=}")
 
     bob_run_atom = beliefatom_shop(belief_voice_membership_str(), INSERT_str())
     bob_run_atom.set_arg(voice_name_str(), bob_str)

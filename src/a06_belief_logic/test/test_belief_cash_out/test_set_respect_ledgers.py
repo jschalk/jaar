@@ -149,7 +149,7 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_SetsAttr_scenario2()
     assert yao_ohio_membership.debtor_pool == 200000000
     assert len(sue_beliefunit.groupunits) == 2
     ohio_groupunit = sue_beliefunit.get_groupunit(ohio_str)
-    assert len(ohio_groupunit._memberships) == 1
+    assert len(ohio_groupunit.memberships) == 1
 
 
 def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_ResetVoiceUnitsAttrs():

@@ -32,7 +32,7 @@ def partyunit_get_from_dict(x_dict: dict) -> PartyUnit:
 class PartyHeir:
     party_title: GroupTitle = None
     solo: bool = None
-    _parent_solo: bool = None
+    parent_solo: bool = None
 
 
 def partyheir_shop(party_title: GroupTitle, solo: bool) -> PartyHeir:
@@ -105,7 +105,7 @@ class LaborHeir:
 
         for x_party_title, x_groupunit in groupunits.items():
             if x_party_title in self._partys:
-                for x_voice_name in x_groupunit._memberships.keys():
+                for x_voice_name in x_groupunit.memberships.keys():
                     if x_voice_name == belief_name:
                         return True
         return False

@@ -566,6 +566,6 @@ def test_get_dict_of_belief_from_dict_ReturnsDictOfBeliefUnits():
     philipa_str = "Philipa"
     ccn_philipa_voiceunit = ccn_belief1.get_voice(philipa_str)
     x1_philipa_voiceunit = x1_belief.get_voice(philipa_str)
-    assert ccn_philipa_voiceunit._memberships == x1_philipa_voiceunit._memberships
+    assert ccn_philipa_voiceunit.memberships == x1_philipa_voiceunit.memberships
     assert ccn_belief1 == x1_belief
     assert ccn_dict_of_obj.get(x1_belief.belief_name) == x1_belief

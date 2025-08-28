@@ -10,7 +10,7 @@ def test_VoiceUnit_set_membership_SetsAttr_memberships():
     run_group_cred_points = 66
     run_group_debt_points = 85
     yao_voiceunit = voiceunit_shop(yao_str)
-    assert yao_voiceunit._memberships == {}
+    assert yao_voiceunit.memberships == {}
 
     # WHEN
     yao_voiceunit.set_membership(
@@ -18,8 +18,8 @@ def test_VoiceUnit_set_membership_SetsAttr_memberships():
     )
 
     # THEN
-    assert len(yao_voiceunit._memberships) == 1
-    run_membership = yao_voiceunit._memberships.get(run_str)
+    assert len(yao_voiceunit.memberships) == 1
+    run_membership = yao_voiceunit.memberships.get(run_str)
     assert run_membership.group_title == run_str
     assert run_membership.group_cred_points == run_group_cred_points
     assert run_membership.group_debt_points == run_group_debt_points
@@ -33,7 +33,7 @@ def test_VoiceUnit_set_membership_SetsMultipleAttr():
     run_membership = membership_shop(run_str, group_cred_points=13, group_debt_points=7)
     fly_membership = membership_shop(fly_str, group_cred_points=23, group_debt_points=5)
     yao_voiceunit = voiceunit_shop("Yao")
-    assert yao_voiceunit._memberships == {}
+    assert yao_voiceunit.memberships == {}
 
     # WHEN
     yao_voiceunit.set_membership(run_membership)
@@ -44,7 +44,7 @@ def test_VoiceUnit_set_membership_SetsMultipleAttr():
         run_membership.group_title: run_membership,
         fly_membership.group_title: fly_membership,
     }
-    assert yao_voiceunit._memberships == yao_memberships
+    assert yao_voiceunit.memberships == yao_memberships
 
 
 def test_VoiceUnit_set_membership_RaisesErrorIf_group_titleIsVoiceNameAndNotVoiceUnit_voice_name():
@@ -136,15 +136,15 @@ def test_VoiceUnit_del_membership_SetsAttr():
     yao_voiceunit = voiceunit_shop("Yao")
     yao_voiceunit.set_membership(run_membership)
     yao_voiceunit.set_membership(fly_membership)
-    assert len(yao_voiceunit._memberships) == 2
-    assert yao_voiceunit._memberships == yao_memberships
+    assert len(yao_voiceunit.memberships) == 2
+    assert yao_voiceunit.memberships == yao_memberships
 
     # WHEN
     yao_voiceunit.delete_membership(run_str)
 
     # THEN
-    assert len(yao_voiceunit._memberships) == 1
-    assert yao_voiceunit._memberships.get(run_str) is None
+    assert len(yao_voiceunit.memberships) == 1
+    assert yao_voiceunit.memberships.get(run_str) is None
 
 
 def test_VoiceUnit_clear_memberships_SetsAttr():
@@ -160,15 +160,15 @@ def test_VoiceUnit_clear_memberships_SetsAttr():
     yao_voiceunit = voiceunit_shop("Yao")
     yao_voiceunit.set_membership(run_membership)
     yao_voiceunit.set_membership(fly_membership)
-    assert len(yao_voiceunit._memberships) == 2
-    assert yao_voiceunit._memberships == yao_memberships
+    assert len(yao_voiceunit.memberships) == 2
+    assert yao_voiceunit.memberships == yao_memberships
 
     # WHEN
     yao_voiceunit.clear_memberships()
 
     # THEN
-    assert len(yao_voiceunit._memberships) == 0
-    assert yao_voiceunit._memberships.get(run_str) is None
+    assert len(yao_voiceunit.memberships) == 0
+    assert yao_voiceunit.memberships.get(run_str) is None
 
 
 def test_VoiceUnit_add_membership_SetsAttr():
