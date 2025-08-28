@@ -29,7 +29,6 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_partners"><label for="show_partners">partners</label>
             <input type="checkbox" id="show_partner_cred_points"><label for="show_partner_cred_points">cred_points</label>
             <input type="checkbox" id="show_partner_debt_points"><label for="show_partner_debt_points">debt_points</label>
-            <input type="checkbox" id="show_partner_memberships"><label for="show_partner_memberships">memberships</label>
             <input type="checkbox" id="show_partner_credor_pool"><label for="show_partner_credor_pool">credor_pool</label>
             <input type="checkbox" id="show_partner_debtor_pool"><label for="show_partner_debtor_pool">debtor_pool</label>
             <input type="checkbox" id="show_partner_irrational_partner_debt_points"><label for="show_partner_irrational_partner_debt_points">irrational_partner_debt_points</label>

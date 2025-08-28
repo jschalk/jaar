@@ -21,7 +21,7 @@ from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_number
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_PIDROPE_SOUND_RAW_SQLSTR,
     create_prime_tablename,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
 )
 from src.a18_etl_toolbox.transformers import (
@@ -106,7 +106,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_s_raw_tablename = create_prime_tablename(pidgin_rope_str(), "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}
@@ -163,7 +163,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         beliefa_s_raw_del = create_prime_tablename(
             belief_partnerunit_str(), "s", "raw", "del"
         )
@@ -226,7 +226,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_s_raw_tablename = create_prime_tablename("PIDROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}
@@ -334,7 +334,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_s_del_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "del")
         insert_into_clause = f"""INSERT INTO {blrpern_s_del_raw_tblname} (
   {idea_number_str()}
@@ -393,7 +393,7 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_s_raw_tablename = create_prime_tablename("PIDROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {pidrope_s_raw_tablename} (
   {idea_number_str()}

@@ -5,13 +5,13 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     brick_valid_str,
     events_brick_agg_str,
     events_brick_valid_str,
+    heard_agg_str,
+    heard_raw_str,
     moment_event_time_agg_str,
     moment_ote1_agg_str,
     moment_partner_nets_str,
     sound_agg_str,
     sound_raw_str,
-    voice_agg_str,
-    voice_raw_str,
 )
 
 
@@ -28,5 +28,5 @@ def test_str_functions_ReturnsObj():
     assert moment_partner_nets_str() == "moment_partner_nets"
     assert sound_raw_str() == "sound_raw"
     assert sound_agg_str() == "sound_agg"
-    assert voice_raw_str() == "voice_raw"
-    assert voice_agg_str() == "voice_agg"
+    assert heard_raw_str() == "heard_raw"
+    assert heard_agg_str() == "heard_agg"

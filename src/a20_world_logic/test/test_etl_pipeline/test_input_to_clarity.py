@@ -98,12 +98,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
     blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
     blrpern_sound_put_vld = prime_tbl("blrpern", "s", "vld", "put")
-    momentunit_voice_raw = prime_tbl("momentunit", "v", "raw")
-    momentunit_voice_agg = prime_tbl("momentunit", "v", "agg")
-    blrunit_voice_put_raw = prime_tbl("beliefunit", "v", "raw", "put")
-    blrunit_voice_put_agg = prime_tbl("beliefunit", "v", "agg", "put")
-    blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
-    blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
+    momentunit_heard_raw = prime_tbl("momentunit", "h", "raw")
+    momentunit_heard_agg = prime_tbl("momentunit", "h", "agg")
+    blrunit_heard_put_raw = prime_tbl("beliefunit", "h", "raw", "put")
+    blrunit_heard_put_agg = prime_tbl("beliefunit", "h", "agg", "put")
+    blrpern_heard_put_raw = prime_tbl("blrpern", "h", "raw", "put")
+    blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
     mstr_dir = fay_world._moment_mstr_dir
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
@@ -132,12 +132,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
-        assert not db_table_exists(cursor, momentunit_voice_raw)
-        assert not db_table_exists(cursor, momentunit_voice_agg)
-        assert not db_table_exists(cursor, blrunit_voice_put_raw)
-        assert not db_table_exists(cursor, blrunit_voice_put_agg)
-        assert not db_table_exists(cursor, blrpern_voice_put_raw)
-        assert not db_table_exists(cursor, blrpern_voice_put_agg)
+        assert not db_table_exists(cursor, momentunit_heard_raw)
+        assert not db_table_exists(cursor, momentunit_heard_agg)
+        assert not db_table_exists(cursor, blrunit_heard_put_raw)
+        assert not db_table_exists(cursor, blrunit_heard_put_agg)
+        assert not db_table_exists(cursor, blrpern_heard_put_raw)
+        assert not db_table_exists(cursor, blrpern_heard_put_agg)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_e1_all_pack_path)
         assert not os_path_exists(a23_e1_expressed_pack_path)
@@ -191,12 +191,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert get_row_count(cursor, momentunit_sound_vld) == 1
         assert get_row_count(cursor, blrunit_sound_put_vld) == 1
         assert get_row_count(cursor, blrpern_sound_put_vld) == 1
-        assert get_row_count(cursor, momentunit_voice_raw) == 1
-        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
-        assert get_row_count(cursor, momentunit_voice_agg) == 1
-        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
+        assert get_row_count(cursor, momentunit_heard_raw) == 1
+        assert get_row_count(cursor, blrunit_heard_put_raw) == 1
+        assert get_row_count(cursor, blrpern_heard_put_raw) == 1
+        assert get_row_count(cursor, momentunit_heard_agg) == 1
+        assert get_row_count(cursor, blrunit_heard_put_agg) == 1
+        assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert os_path_exists(a23_json_path)
         print(f"{a23_e1_all_pack_path=}")
         assert os_path_exists(a23_e1_all_pack_path)
@@ -278,12 +278,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     blrunit_sound_put_agg = prime_tbl("beliefunit", "s", "agg", "put")
     blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
     blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
-    momentunit_voice_raw = prime_tbl("momentunit", "v", "raw")
-    momentunit_voice_agg = prime_tbl("momentunit", "v", "agg")
-    blrunit_voice_put_raw = prime_tbl("beliefunit", "v", "raw", "put")
-    blrunit_voice_put_agg = prime_tbl("beliefunit", "v", "agg", "put")
-    blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
-    blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
+    momentunit_heard_raw = prime_tbl("momentunit", "h", "raw")
+    momentunit_heard_agg = prime_tbl("momentunit", "h", "agg")
+    blrunit_heard_put_raw = prime_tbl("beliefunit", "h", "raw", "put")
+    blrunit_heard_put_agg = prime_tbl("beliefunit", "h", "agg", "put")
+    blrpern_heard_put_raw = prime_tbl("blrpern", "h", "raw", "put")
+    blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
     mstr_dir = fay_world._moment_mstr_dir
     a23_json_path = create_moment_json_path(mstr_dir, a23_str)
     a23_e1_all_pack_path = create_event_all_pack_path(mstr_dir, a23_str, sue_inx, e3)
@@ -309,12 +309,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, pidcore_sound_agg)
         assert not db_table_exists(cursor, pidcore_sound_vld)
         assert not db_table_exists(cursor, pidname_sound_vld)
-        assert not db_table_exists(cursor, momentunit_voice_raw)
-        assert not db_table_exists(cursor, momentunit_voice_agg)
-        assert not db_table_exists(cursor, blrunit_voice_put_raw)
-        assert not db_table_exists(cursor, blrunit_voice_put_agg)
-        assert not db_table_exists(cursor, blrpern_voice_put_raw)
-        assert not db_table_exists(cursor, blrpern_voice_put_agg)
+        assert not db_table_exists(cursor, momentunit_heard_raw)
+        assert not db_table_exists(cursor, momentunit_heard_agg)
+        assert not db_table_exists(cursor, blrunit_heard_put_raw)
+        assert not db_table_exists(cursor, blrunit_heard_put_agg)
+        assert not db_table_exists(cursor, blrpern_heard_put_raw)
+        assert not db_table_exists(cursor, blrpern_heard_put_agg)
         assert not os_path_exists(a23_json_path)
         assert not os_path_exists(a23_e1_all_pack_path)
         assert not os_path_exists(a23_e1_expressed_pack_path)
@@ -354,12 +354,12 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
-        assert get_row_count(cursor, momentunit_voice_raw) == 1
-        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
-        assert get_row_count(cursor, momentunit_voice_agg) == 1
-        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
+        assert get_row_count(cursor, momentunit_heard_raw) == 1
+        assert get_row_count(cursor, blrunit_heard_put_raw) == 1
+        assert get_row_count(cursor, blrpern_heard_put_raw) == 1
+        assert get_row_count(cursor, momentunit_heard_agg) == 1
+        assert get_row_count(cursor, blrunit_heard_put_agg) == 1
+        assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert os_path_exists(a23_json_path)
         assert os_path_exists(a23_e1_all_pack_path)
         assert os_path_exists(a23_e1_expressed_pack_path)
@@ -635,12 +635,12 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         blrunit_sound_put_agg = prime_tbl("beliefunit", "s", "agg", "put")
         blrpern_sound_put_raw = prime_tbl("blrpern", "s", "raw", "put")
         blrpern_sound_put_agg = prime_tbl("blrpern", "s", "agg", "put")
-        momentunit_voice_raw = prime_tbl("momentunit", "v", "raw")
-        momentunit_voice_agg = prime_tbl("momentunit", "v", "agg")
-        blrunit_voice_put_raw = prime_tbl("beliefunit", "v", "raw", "put")
-        blrunit_voice_put_agg = prime_tbl("beliefunit", "v", "agg", "put")
-        blrpern_voice_put_raw = prime_tbl("blrpern", "v", "raw", "put")
-        blrpern_voice_put_agg = prime_tbl("blrpern", "v", "agg", "put")
+        momentunit_heard_raw = prime_tbl("momentunit", "h", "raw")
+        momentunit_heard_agg = prime_tbl("momentunit", "h", "agg")
+        blrunit_heard_put_raw = prime_tbl("beliefunit", "h", "raw", "put")
+        blrunit_heard_put_agg = prime_tbl("beliefunit", "h", "agg", "put")
+        blrpern_heard_put_raw = prime_tbl("blrpern", "h", "raw", "put")
+        blrpern_heard_put_agg = prime_tbl("blrpern", "h", "agg", "put")
 
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
@@ -660,11 +660,11 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
-        assert get_row_count(cursor, momentunit_voice_raw) == 1
-        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
-        assert get_row_count(cursor, momentunit_voice_agg) == 1
-        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
+        assert get_row_count(cursor, momentunit_heard_raw) == 1
+        assert get_row_count(cursor, blrunit_heard_put_raw) == 1
+        assert get_row_count(cursor, blrpern_heard_put_raw) == 1
+        assert get_row_count(cursor, momentunit_heard_agg) == 1
+        assert get_row_count(cursor, blrunit_heard_put_agg) == 1
+        assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert get_row_count(cursor, moment_ote1_agg_str()) == 1
     db_conn.close()

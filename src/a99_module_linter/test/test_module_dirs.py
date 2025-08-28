@@ -2,7 +2,8 @@ from os import listdir as os_listdir, walk as os_walk
 from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
-from src.a99_module_linter.module_eval import (
+from src.a98_docs_builder.module_eval import get_module_str_functions
+from src.a99_module_linter.linter import (
     check_if_module_str_funcs_is_sorted,
     check_import_objs_are_ordered,
     check_str_func_test_file_has_needed_asserts,
@@ -10,7 +11,6 @@ from src.a99_module_linter.module_eval import (
     get_function_names_from_file,
     get_imports_from_file,
     get_module_descs,
-    get_module_str_functions,
     get_python_files_with_flag,
 )
 

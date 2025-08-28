@@ -32,7 +32,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     bob_inx = "Bobby"
     event3 = 3
     a23_str = "amy23"
-    put_agg_tablename = create_prime_tablename(beliefunit_str(), "v", "agg", "put")
+    put_agg_tablename = create_prime_tablename(beliefunit_str(), "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -74,7 +74,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     debt_empty = ""
     a23_str = "amy23"
     blrpern_str = belief_partnerunit_str()
-    put_agg_tablename = create_prime_tablename(blrpern_str, "v", "agg", "put")
+    put_agg_tablename = create_prime_tablename(blrpern_str, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_module_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)

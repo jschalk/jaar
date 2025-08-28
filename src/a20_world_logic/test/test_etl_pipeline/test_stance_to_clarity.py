@@ -100,12 +100,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         blrunit_sound_put_agg = create_prime_tablename("beliefunit", "s", "agg", "put")
         blrpern_sound_put_raw = create_prime_tablename("blrpern", "s", "raw", "put")
         blrpern_sound_put_agg = create_prime_tablename("blrpern", "s", "agg", "put")
-        momentunit_voice_raw = create_prime_tablename("momentunit", "v", "raw")
-        momentunit_voice_agg = create_prime_tablename("momentunit", "v", "agg")
-        blrunit_voice_put_raw = create_prime_tablename("beliefunit", "v", "raw", "put")
-        blrunit_voice_put_agg = create_prime_tablename("beliefunit", "v", "agg", "put")
-        blrpern_voice_put_raw = create_prime_tablename("blrpern", "v", "raw", "put")
-        blrpern_voice_put_agg = create_prime_tablename("blrpern", "v", "agg", "put")
+        momentunit_heard_raw = create_prime_tablename("momentunit", "h", "raw")
+        momentunit_heard_agg = create_prime_tablename("momentunit", "h", "agg")
+        blrunit_heard_put_raw = create_prime_tablename("beliefunit", "h", "raw", "put")
+        blrunit_heard_put_agg = create_prime_tablename("beliefunit", "h", "agg", "put")
+        blrpern_heard_put_raw = create_prime_tablename("blrpern", "h", "raw", "put")
+        blrpern_heard_put_agg = create_prime_tablename("blrpern", "h", "agg", "put")
 
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
@@ -125,12 +125,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, pidcore_sound_agg) == 1
         assert get_row_count(cursor, pidcore_sound_vld) == 1
         assert get_row_count(cursor, pidname_sound_vld) == 1
-        assert get_row_count(cursor, momentunit_voice_raw) == 1
-        assert get_row_count(cursor, blrunit_voice_put_raw) == 1
-        assert get_row_count(cursor, blrpern_voice_put_raw) == 1
-        assert get_row_count(cursor, momentunit_voice_agg) == 1
-        assert get_row_count(cursor, blrunit_voice_put_agg) == 1
-        assert get_row_count(cursor, blrpern_voice_put_agg) == 1
+        assert get_row_count(cursor, momentunit_heard_raw) == 1
+        assert get_row_count(cursor, blrunit_heard_put_raw) == 1
+        assert get_row_count(cursor, blrpern_heard_put_raw) == 1
+        assert get_row_count(cursor, momentunit_heard_agg) == 1
+        assert get_row_count(cursor, blrunit_heard_put_agg) == 1
+        assert get_row_count(cursor, blrpern_heard_put_agg) == 1
         assert get_row_count(cursor, moment_ote1_agg_str()) == 1
     db_conn.close()
 

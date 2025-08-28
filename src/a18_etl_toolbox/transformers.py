@@ -86,12 +86,12 @@ from src.a18_etl_toolbox.a18_path import (
     create_moment_ote1_json_path,
 )
 from src.a18_etl_toolbox.db_obj_belief_tool import insert_job_obj
-from src.a18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_voice_tables
+from src.a18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.a18_etl_toolbox.idea_collector import IdeaFileRef, get_all_idea_dataframes
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_OTE1_AGG_SQLSTR,
     CREATE_MOMENT_PARTNER_NETS_SQLSTR,
-    INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR,
+    INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
     create_insert_pidgin_core_agg_into_vld_sqlstr,
@@ -101,19 +101,19 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_knot_exists_in_name_error_update_sqlstr,
     create_prime_tablename,
     create_sound_agg_insert_sqlstrs,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
+    create_update_heard_raw_empty_inx_col_sqlstr,
+    create_update_heard_raw_existing_inx_col_sqlstr,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidlabe_sound_agg_knot_error_sqlstr,
     create_update_pidname_sound_agg_knot_error_sqlstr,
     create_update_pidrope_sound_agg_knot_error_sqlstr,
     create_update_pidtitl_sound_agg_knot_error_sqlstr,
-    create_update_voice_raw_empty_inx_col_sqlstr,
-    create_update_voice_raw_existing_inx_col_sqlstr,
-    get_belief_voice_agg_tablenames,
+    get_belief_heard_agg_tablenames,
+    get_insert_heard_agg_sqlstrs,
+    get_insert_into_heard_raw_sqlstrs,
     get_insert_into_sound_vld_sqlstrs,
-    get_insert_into_voice_raw_sqlstrs,
-    get_insert_voice_agg_sqlstrs,
     get_moment_belief_sound_agg_tablenames,
 )
 
@@ -383,7 +383,7 @@ def get_sound_raw_tablenames(
 
 
 def etl_brick_valid_tables_to_sound_raw_tables(cursor: sqlite3_Cursor):
-    create_sound_and_voice_tables(cursor)
+    create_sound_and_heard_tables(cursor)
     brick_valid_tablenames = get_db_tables(cursor, "_brick_valid", "br")
     for brick_valid_tablename in brick_valid_tablenames:
         idea_number = brick_valid_tablename[:7]
@@ -483,15 +483,15 @@ def set_moment_belief_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidginable_tuples = get_moment_belief_sound_agg_pidginable_columns(
         cursor, pidgin_args
     )
-    for voice_raw_tablename, pidginable_columnname in pidginable_tuples:
+    for heard_raw_tablename, pidginable_columnname in pidginable_tuples:
         error_update_sqlstr = None
         if pidginable_columnname in pidgin_label_args:
             error_update_sqlstr = create_knot_exists_in_label_error_update_sqlstr(
-                voice_raw_tablename, pidginable_columnname
+                heard_raw_tablename, pidginable_columnname
             )
         if pidginable_columnname in pidgin_name_args:
             error_update_sqlstr = create_knot_exists_in_name_error_update_sqlstr(
-                voice_raw_tablename, pidginable_columnname
+                heard_raw_tablename, pidginable_columnname
             )
         if error_update_sqlstr:
             cursor.execute(error_update_sqlstr)
@@ -501,8 +501,8 @@ def get_moment_belief_sound_agg_pidginable_columns(
     cursor: sqlite3_Cursor, pidgin_args: set[str]
 ) -> set[tuple[str, str]]:
     pidgin_columns = set()
-    for x_tablename in get_insert_into_voice_raw_sqlstrs().keys():
-        x_tablename = x_tablename.replace("_v_", "_s_")
+    for x_tablename in get_insert_into_heard_raw_sqlstrs().keys():
+        x_tablename = x_tablename.replace("_h_", "_s_")
         x_tablename = x_tablename.replace("_raw", "_agg")
         for columnname in get_table_columns(cursor, x_tablename):
             if columnname in pidgin_args:
@@ -536,37 +536,37 @@ def etl_sound_agg_tables_to_sound_vld_tables(cursor: sqlite3_Cursor):
         cursor.execute(sqlstr)
 
 
-def etl_sound_vld_tables_to_voice_raw_tables(cursor: sqlite3_Cursor):
-    for sqlstr in get_insert_into_voice_raw_sqlstrs().values():
+def etl_sound_vld_tables_to_heard_raw_tables(cursor: sqlite3_Cursor):
+    for sqlstr in get_insert_into_heard_raw_sqlstrs().values():
         cursor.execute(sqlstr)
-    set_all_voice_raw_inx_columns(cursor)
+    set_all_heard_raw_inx_columns(cursor)
 
 
-def set_all_voice_raw_inx_columns(cursor: sqlite3_Cursor):
+def set_all_heard_raw_inx_columns(cursor: sqlite3_Cursor):
     pidgin_args = get_pidgin_args_class_types()
-    for voice_raw_tablename, otx_columnname in get_all_voice_raw_otx_columns(cursor):
+    for heard_raw_tablename, otx_columnname in get_all_heard_raw_otx_columns(cursor):
         columnname_without_otx = otx_columnname[:-4]
         x_arg = copy_copy(columnname_without_otx)
         if x_arg[-5:] == "ERASE":
             x_arg = x_arg[:-6]
         arg_class_type = pidgin_args.get(x_arg)
-        set_voice_raw_inx_column(
-            cursor, voice_raw_tablename, columnname_without_otx, arg_class_type
+        set_heard_raw_inx_column(
+            cursor, heard_raw_tablename, columnname_without_otx, arg_class_type
         )
 
 
-def get_all_voice_raw_otx_columns(cursor: sqlite3_Cursor) -> set[tuple[str, str]]:
+def get_all_heard_raw_otx_columns(cursor: sqlite3_Cursor) -> set[tuple[str, str]]:
     otx_columns = set()
-    for voice_raw_tablename in get_insert_into_voice_raw_sqlstrs().keys():
-        for columnname in get_table_columns(cursor, voice_raw_tablename):
+    for heard_raw_tablename in get_insert_into_heard_raw_sqlstrs().keys():
+        for columnname in get_table_columns(cursor, heard_raw_tablename):
             if columnname[-3:] in {"otx"}:
-                otx_columns.add((voice_raw_tablename, columnname))
+                otx_columns.add((heard_raw_tablename, columnname))
     return otx_columns
 
 
-def set_voice_raw_inx_column(
+def set_heard_raw_inx_column(
     cursor: sqlite3_Cursor,
-    voice_raw_tablename: str,
+    heard_raw_tablename: str,
     column_without_otx: str,
     arg_class_type: str,
 ):
@@ -580,27 +580,27 @@ def set_voice_raw_inx_column(
             pidgin_type_abbv = "label"
         elif arg_class_type == "RopeTerm":
             pidgin_type_abbv = "rope"
-        update_calc_inx_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            pidgin_type_abbv, voice_raw_tablename, column_without_otx
+        update_calc_inx_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
+            pidgin_type_abbv, heard_raw_tablename, column_without_otx
         )
         cursor.execute(update_calc_inx_sqlstr)
-        update_empty_inx_sqlstr = create_update_voice_raw_empty_inx_col_sqlstr(
-            voice_raw_tablename, column_without_otx
+        update_empty_inx_sqlstr = create_update_heard_raw_empty_inx_col_sqlstr(
+            heard_raw_tablename, column_without_otx
         )
         cursor.execute(update_empty_inx_sqlstr)
 
 
-def etl_voice_raw_tables_to_voice_agg_tables(cursor: sqlite3_Cursor):
-    for insert_voice_agg_sqlstr in get_insert_voice_agg_sqlstrs().values():
-        cursor.execute(insert_voice_agg_sqlstr)
+def etl_heard_raw_tables_to_heard_agg_tables(cursor: sqlite3_Cursor):
+    for insert_heard_agg_sqlstr in get_insert_heard_agg_sqlstrs().values():
+        cursor.execute(insert_heard_agg_sqlstr)
 
 
-def etl_voice_agg_tables_to_moment_jsons(cursor: sqlite3_Cursor, moment_mstr_dir: str):
-    select_moment_label_sqlstr = """SELECT moment_label FROM momentunit_v_agg;"""
+def etl_heard_agg_tables_to_moment_jsons(cursor: sqlite3_Cursor, moment_mstr_dir: str):
+    select_moment_label_sqlstr = """SELECT moment_label FROM momentunit_h_agg;"""
     cursor.execute(select_moment_label_sqlstr)
     for moment_label_set in cursor.fetchall():
         moment_label = moment_label_set[0]
-        moment_dict = get_moment_dict_from_voice_tables(cursor, moment_label)
+        moment_dict = get_moment_dict_from_heard_tables(cursor, moment_label)
         moment_json_path = create_moment_json_path(moment_mstr_dir, moment_label)
         save_json(moment_json_path, None, moment_dict)
 
@@ -657,9 +657,9 @@ def get_most_recent_event_int(
     return max(recent_event_ints, default=None)
 
 
-def etl_voice_raw_tables_to_moment_ote1_agg(conn_or_cursor: sqlite3_Connection):
+def etl_heard_raw_tables_to_moment_ote1_agg(conn_or_cursor: sqlite3_Connection):
     conn_or_cursor.execute(CREATE_MOMENT_OTE1_AGG_SQLSTR)
-    conn_or_cursor.execute(INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR)
+    conn_or_cursor.execute(INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR)
 
 
 def etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(
@@ -736,11 +736,11 @@ def etl_create_bud_mandate_ledgers(moment_mstr_dir: str):
         create_bud_mandate_ledgers(moment_mstr_dir, moment_label)
 
 
-def etl_voice_agg_to_event_belief_csvs(
+def etl_heard_agg_to_event_belief_csvs(
     conn_or_cursor: sqlite3_Connection, moment_mstr_dir: str
 ):
     moments_dir = create_path(moment_mstr_dir, "moments")
-    for belief_table in get_belief_voice_agg_tablenames():
+    for belief_table in get_belief_heard_agg_tablenames():
         if get_row_count(conn_or_cursor, belief_table) > 0:
             save_to_split_csvs(
                 conn_or_cursor=conn_or_cursor,
@@ -781,10 +781,10 @@ def add_beliefatoms_from_csv(event_pack: PackUnit, event_dir: str):
     belief_dimens.remove("beliefunit")
     for belief_dimen in belief_dimens:
         belief_dimen_put_tablename = create_prime_tablename(
-            belief_dimen, "v", "agg", "put"
+            belief_dimen, "h", "agg", "put"
         )
         belief_dimen_del_tablename = create_prime_tablename(
-            belief_dimen, "v", "agg", "del"
+            belief_dimen, "h", "agg", "del"
         )
         belief_dimen_put_csv = f"{belief_dimen_put_tablename}.csv"
         belief_dimen_del_csv = f"{belief_dimen_del_tablename}.csv"

@@ -11,13 +11,13 @@ from src.a06_belief_logic.test._util.a06_str import (
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
-    create_sound_and_voice_tables,
-    get_insert_into_voice_raw_sqlstrs,
+    create_sound_and_heard_tables,
+    get_insert_into_heard_raw_sqlstrs,
 )
-from src.a18_etl_toolbox.transformers import etl_sound_vld_tables_to_voice_raw_tables
+from src.a18_etl_toolbox.transformers import etl_sound_vld_tables_to_heard_raw_tables
 
 
-def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
+def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"
@@ -35,7 +35,7 @@ def test_get_insert_into_voice_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         beliefapartner_s_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
@@ -59,17 +59,17 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, beliefapartner_s_vld_put_tablename) == 4
-        blrawar_v_raw_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "v", "raw", "put"
+        blrawar_h_raw_put_tablename = prime_tbl(
+            belief_partnerunit_str(), "h", "raw", "put"
         )
-        assert get_row_count(cursor, blrawar_v_raw_put_tablename) == 0
+        assert get_row_count(cursor, blrawar_h_raw_put_tablename) == 0
 
         # WHEN
-        sqlstr = get_insert_into_voice_raw_sqlstrs().get(blrawar_v_raw_put_tablename)
+        sqlstr = get_insert_into_heard_raw_sqlstrs().get(blrawar_h_raw_put_tablename)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, blrawar_v_raw_put_tablename) == 4
+        assert get_row_count(cursor, blrawar_h_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_otx
 , {moment_label_str()}_otx
@@ -77,7 +77,7 @@ VALUES
 , {partner_name_str()}_otx
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrawar_v_raw_put_tablename}
+FROM {blrawar_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -90,7 +90,7 @@ FROM {blrawar_v_raw_put_tablename}
         ]
 
 
-def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
+def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario0_AddRowsToTable():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"
@@ -108,7 +108,7 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario0_AddRowsToTable():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_s_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
@@ -132,16 +132,16 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_vld_put_tablename) == 4
-        blrpern_v_raw_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "v", "raw", "put"
+        blrpern_h_raw_put_tablename = prime_tbl(
+            belief_partnerunit_str(), "h", "raw", "put"
         )
-        assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 0
 
         # WHEN
-        etl_sound_vld_tables_to_voice_raw_tables(cursor)
+        etl_sound_vld_tables_to_heard_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 4
+        assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_otx
 , {moment_label_str()}_otx
@@ -149,7 +149,7 @@ VALUES
 , {partner_name_str()}_otx
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrpern_v_raw_put_tablename}
+FROM {blrpern_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -162,7 +162,7 @@ FROM {blrpern_v_raw_put_tablename}
         ]
 
 
-def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Columns():
+def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario1_Populates_inx_Columns():
     # ESTABLISH
     a23_str = "amy23"
     bob_str = "Bob"
@@ -179,7 +179,7 @@ def test_etl_sound_vld_tables_to_voice_raw_tables_Scenario1_Populates_inx_Column
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_s_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
@@ -203,16 +203,16 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_vld_put_tablename) == 4
-        blrpern_v_raw_put_tablename = prime_tbl(
-            belief_partnerunit_str(), "v", "raw", "put"
+        blrpern_h_raw_put_tablename = prime_tbl(
+            belief_partnerunit_str(), "h", "raw", "put"
         )
-        assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 0
 
         # WHEN
-        etl_sound_vld_tables_to_voice_raw_tables(cursor)
+        etl_sound_vld_tables_to_heard_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, blrpern_v_raw_put_tablename) == 4
+        assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}_inx
 , {moment_label_str()}_inx
@@ -220,7 +220,7 @@ VALUES
 , {partner_name_str()}_inx
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrpern_v_raw_put_tablename}
+FROM {blrpern_h_raw_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()

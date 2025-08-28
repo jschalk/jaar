@@ -16,7 +16,7 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     brick_raw_str,
     error_message_str,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import create_sound_and_voice_tables
+from src.a18_etl_toolbox.tran_sqlstrs import create_sound_and_heard_tables
 from src.a18_etl_toolbox.transformers import (
     etl_brick_raw_tables_to_brick_agg_tables,
     get_max_brick_agg_event_int,
@@ -308,7 +308,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario2_MultipleTable():
     event9 = 9
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         agg_br00003_tablename = f"br00003_{brick_agg_str()}"
         agg_br00003_columns = [event_int_str()]
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)

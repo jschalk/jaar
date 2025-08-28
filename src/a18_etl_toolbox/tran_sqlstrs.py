@@ -72,7 +72,7 @@ def create_prime_tablename(
     idea_dimen_or_abbv7: str, phase: str, stage: str, put_del: str = None
 ) -> str:
     """
-    phase must be one: 's', 'v', 'job'
+    phase must be one: 's', 'h', 'job'
     stage must be one: 'raw', 'agg', 'vld'
     """
 
@@ -104,7 +104,7 @@ def create_prime_tablename(
     tablename = idea_dimen_or_abbv7
     if abbv_references.get(idea_dimen_or_abbv7.upper()):
         tablename = abbv_references.get(idea_dimen_or_abbv7.upper())
-    if phase in {"s", "v", "job"}:
+    if phase in {"s", "h", "job"}:
         tablename = f"{tablename}_{phase}"
     if stage is None:
         return tablename
@@ -134,38 +134,38 @@ CREATE_PIDCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS pidgin_core_s_vl
 CREATE_BLFPAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_BLFPAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_BLFPAYY_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL)"""
-CREATE_BLFPAYY_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
-CREATE_BLFPAYY_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_v_agg (moment_label TEXT, belief_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL)"""
+CREATE_BLFPAYY_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
+CREATE_BLFPAYY_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_h_agg (moment_label TEXT, belief_name TEXT, partner_name TEXT, tran_time INTEGER, amount REAL)"""
 CREATE_BLFBUDD_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
 CREATE_BLFBUDD_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
 CREATE_BLFBUDD_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
-CREATE_BLFBUDD_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
-CREATE_BLFBUDD_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_v_agg (moment_label TEXT, belief_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
+CREATE_BLFBUDD_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER, error_message TEXT)"""
+CREATE_BLFBUDD_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_budunit_h_agg (moment_label TEXT, belief_name TEXT, bud_time INTEGER, quota REAL, celldepth INTEGER)"""
 CREATE_BLFHOUR_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, cumulative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
 CREATE_BLFHOUR_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, cumulative_minute INTEGER, hour_label TEXT, error_message TEXT)"""
 CREATE_BLFHOUR_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, cumulative_minute INTEGER, hour_label TEXT)"""
-CREATE_BLFHOUR_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, cumulative_minute INTEGER, hour_label_otx TEXT, hour_label_inx TEXT, error_message TEXT)"""
-CREATE_BLFHOUR_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_v_agg (moment_label TEXT, cumulative_minute INTEGER, hour_label TEXT)"""
+CREATE_BLFHOUR_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, cumulative_minute INTEGER, hour_label_otx TEXT, hour_label_inx TEXT, error_message TEXT)"""
+CREATE_BLFHOUR_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_hour_h_agg (moment_label TEXT, cumulative_minute INTEGER, hour_label TEXT)"""
 CREATE_BLFMONT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, cumulative_day INTEGER, month_label TEXT, error_message TEXT)"""
 CREATE_BLFMONT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, cumulative_day INTEGER, month_label TEXT, error_message TEXT)"""
 CREATE_BLFMONT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, cumulative_day INTEGER, month_label TEXT)"""
-CREATE_BLFMONT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, cumulative_day INTEGER, month_label_otx TEXT, month_label_inx TEXT, error_message TEXT)"""
-CREATE_BLFMONT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_v_agg (moment_label TEXT, cumulative_day INTEGER, month_label TEXT)"""
+CREATE_BLFMONT_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, cumulative_day INTEGER, month_label_otx TEXT, month_label_inx TEXT, error_message TEXT)"""
+CREATE_BLFMONT_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_month_h_agg (moment_label TEXT, cumulative_day INTEGER, month_label TEXT)"""
 CREATE_BLFWEEK_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, weekday_order INTEGER, weekday_label TEXT, error_message TEXT)"""
 CREATE_BLFWEEK_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, weekday_order INTEGER, weekday_label TEXT, error_message TEXT)"""
 CREATE_BLFWEEK_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
-CREATE_BLFWEEK_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, weekday_order INTEGER, weekday_label_otx TEXT, weekday_label_inx TEXT, error_message TEXT)"""
-CREATE_BLFWEEK_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_v_agg (moment_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
+CREATE_BLFWEEK_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, weekday_order INTEGER, weekday_label_otx TEXT, weekday_label_inx TEXT, error_message TEXT)"""
+CREATE_BLFWEEK_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeline_weekday_h_agg (moment_label TEXT, weekday_order INTEGER, weekday_label TEXT)"""
 CREATE_BLFOFFI_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, offi_time INTEGER, error_message TEXT)"""
 CREATE_BLFOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, offi_time INTEGER, error_message TEXT)"""
 CREATE_BLFOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, offi_time INTEGER)"""
-CREATE_BLFOFFI_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, offi_time INTEGER, error_message TEXT)"""
-CREATE_BLFOFFI_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_v_agg (moment_label TEXT, offi_time INTEGER)"""
+CREATE_BLFOFFI_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, offi_time INTEGER, error_message TEXT)"""
+CREATE_BLFOFFI_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_h_agg (moment_label TEXT, offi_time INTEGER)"""
 CREATE_BLFUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 CREATE_BLFUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
 CREATE_BLFUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
-CREATE_BLFUNIT_VOICE_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_v_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_BLFUNIT_VOICE_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_v_agg (moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
+CREATE_BLFUNIT_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_h_agg (moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
 
 CREATE_BLRMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, error_message TEXT)"
 CREATE_BLRMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, error_message TEXT)"
@@ -173,100 +173,100 @@ CREATE_BLRMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_partner_me
 CREATE_BLRMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
 CREATE_BLRMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title_ERASE TEXT, error_message TEXT)"
 CREATE_BLRMEMB_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
-CREATE_BLRMEMB_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, group_cred_points REAL, group_debt_points REAL)"
-CREATE_BLRMEMB_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL)"
-CREATE_BLRMEMB_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
-CREATE_BLRMEMB_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
+CREATE_BLRMEMB_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, group_cred_points REAL, group_debt_points REAL)"
+CREATE_BLRMEMB_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL)"
+CREATE_BLRMEMB_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
+CREATE_BLRMEMB_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partner_membership_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, group_title_ERASE TEXT)"
 CREATE_BLRPERN_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL, error_message TEXT)"
 CREATE_BLRPERN_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL, error_message TEXT)"
 CREATE_BLRPERN_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL)"
 CREATE_BLRPERN_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name_ERASE TEXT)"
 CREATE_BLRPERN_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name_ERASE TEXT, error_message TEXT)"
 CREATE_BLRPERN_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name_ERASE TEXT)"
-CREATE_BLRPERN_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, partner_cred_points REAL, partner_debt_points REAL)"
-CREATE_BLRPERN_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL)"
-CREATE_BLRPERN_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_ERASE_otx TEXT, partner_name_ERASE_inx TEXT)"
-CREATE_BLRPERN_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name_ERASE TEXT)"
+CREATE_BLRPERN_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_otx TEXT, partner_name_inx TEXT, partner_cred_points REAL, partner_debt_points REAL)"
+CREATE_BLRPERN_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name TEXT, partner_cred_points REAL, partner_debt_points REAL)"
+CREATE_BLRPERN_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, partner_name_ERASE_otx TEXT, partner_name_ERASE_inx TEXT)"
+CREATE_BLRPERN_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_partnerunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, partner_name_ERASE TEXT)"
 CREATE_BLRAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
 CREATE_BLRAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
 CREATE_BLRAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
 CREATE_BLRAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
 CREATE_BLRAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT, error_message TEXT)"
 CREATE_BLRAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
-CREATE_BLRAWAR_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
-CREATE_BLRAWAR_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BLRAWAR_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
-CREATE_BLRAWAR_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
+CREATE_BLRAWAR_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
+CREATE_BLRAWAR_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
+CREATE_BLRAWAR_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
+CREATE_BLRAWAR_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
 CREATE_BLRFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL, error_message TEXT)"
 CREATE_BLRFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL, error_message TEXT)"
 CREATE_BLRFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL)"
 CREATE_BLRFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
 CREATE_BLRFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT, error_message TEXT)"
 CREATE_BLRFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
-CREATE_BLRFACT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_otx TEXT, fact_context_inx TEXT, fact_state_otx TEXT, fact_state_inx TEXT, fact_lower REAL, fact_upper REAL)"
-CREATE_BLRFACT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL)"
-CREATE_BLRFACT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_ERASE_otx TEXT, fact_context_ERASE_inx TEXT)"
-CREATE_BLRFACT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
+CREATE_BLRFACT_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_otx TEXT, fact_context_inx TEXT, fact_state_otx TEXT, fact_state_inx TEXT, fact_lower REAL, fact_upper REAL)"
+CREATE_BLRFACT_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL)"
+CREATE_BLRFACT_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_ERASE_otx TEXT, fact_context_ERASE_inx TEXT)"
+CREATE_BLRFACT_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
 CREATE_BLRHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT, error_message TEXT)"
 CREATE_BLRHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT, error_message TEXT)"
 CREATE_BLRHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT)"
 CREATE_BLRHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
 CREATE_BLRHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT, error_message TEXT)"
 CREATE_BLRHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
-CREATE_BLRHEAL_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
-CREATE_BLRHEAL_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT)"
-CREATE_BLRHEAL_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
-CREATE_BLRHEAL_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
+CREATE_BLRHEAL_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
+CREATE_BLRHEAL_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT)"
+CREATE_BLRHEAL_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
+CREATE_BLRHEAL_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
 CREATE_BLRPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER, error_message TEXT)"
 CREATE_BLRPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER, error_message TEXT)"
 CREATE_BLRPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
 CREATE_BLRPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
 CREATE_BLRPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT, error_message TEXT)"
 CREATE_BLRPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
-CREATE_BLRPREM_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_otx TEXT, reason_state_inx TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
-CREATE_BLRPREM_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
-CREATE_BLRPREM_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_ERASE_otx TEXT, reason_state_ERASE_inx TEXT)"
-CREATE_BLRPREM_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
+CREATE_BLRPREM_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_otx TEXT, reason_state_inx TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
+CREATE_BLRPREM_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
+CREATE_BLRPREM_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_ERASE_otx TEXT, reason_state_ERASE_inx TEXT)"
+CREATE_BLRPREM_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
 CREATE_BLRREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER, error_message TEXT)"
 CREATE_BLRREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER, error_message TEXT)"
 CREATE_BLRREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER)"
 CREATE_BLRREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
 CREATE_BLRREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT, error_message TEXT)"
 CREATE_BLRREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
-CREATE_BLRREAS_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_active_requisite INTEGER)"
-CREATE_BLRREAS_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER)"
-CREATE_BLRREAS_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_ERASE_otx TEXT, reason_context_ERASE_inx TEXT)"
-CREATE_BLRREAS_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
+CREATE_BLRREAS_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_active_requisite INTEGER)"
+CREATE_BLRREAS_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER)"
+CREATE_BLRREAS_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_ERASE_otx TEXT, reason_context_ERASE_inx TEXT)"
+CREATE_BLRREAS_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
 CREATE_BLRLABO_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER, error_message TEXT)"
 CREATE_BLRLABO_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER, error_message TEXT)"
 CREATE_BLRLABO_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER)"
 CREATE_BLRLABO_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
 CREATE_BLRLABO_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT, error_message TEXT)"
 CREATE_BLRLABO_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
-CREATE_BLRLABO_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_otx TEXT, party_title_inx TEXT, solo INTEGER)"
-CREATE_BLRLABO_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER)"
-CREATE_BLRLABO_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_ERASE_otx TEXT, party_title_ERASE_inx TEXT)"
-CREATE_BLRLABO_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
+CREATE_BLRLABO_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_otx TEXT, party_title_inx TEXT, solo INTEGER)"
+CREATE_BLRLABO_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER)"
+CREATE_BLRLABO_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_ERASE_otx TEXT, party_title_ERASE_inx TEXT)"
+CREATE_BLRLABO_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
 CREATE_BLRPLAN_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
 CREATE_BLRPLAN_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
 CREATE_BLRPLAN_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
 CREATE_BLRPLAN_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
 CREATE_BLRPLAN_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT, error_message TEXT)"
 CREATE_BLRPLAN_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
-CREATE_BLRPLAN_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
-CREATE_BLRPLAN_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
-CREATE_BLRPLAN_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_ERASE_otx TEXT, plan_rope_ERASE_inx TEXT)"
-CREATE_BLRPLAN_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
+CREATE_BLRPLAN_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_BLRPLAN_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_BLRPLAN_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_ERASE_otx TEXT, plan_rope_ERASE_inx TEXT)"
+CREATE_BLRPLAN_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
 CREATE_BLRUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
 CREATE_BLRUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
 CREATE_BLRUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_put_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
 CREATE_BLRUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
 CREATE_BLRUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT, error_message TEXT)"
 CREATE_BLRUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
-CREATE_BLRUNIT_VOICE_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_v_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
-CREATE_BLRUNIT_VOICE_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_v_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
-CREATE_BLRUNIT_VOICE_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_v_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_ERASE_otx TEXT, belief_name_ERASE_inx TEXT)"
-CREATE_BLRUNIT_VOICE_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_v_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
+CREATE_BLRUNIT_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_put_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_BLRUNIT_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_BLRUNIT_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_del_raw (pidgin_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_ERASE_otx TEXT, belief_name_ERASE_inx TEXT)"
+CREATE_BLRUNIT_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
 
 
 def get_prime_create_table_sqlstrs() -> dict[str, str]:
@@ -289,138 +289,138 @@ def get_prime_create_table_sqlstrs() -> dict[str, str]:
         "moment_paybook_s_raw": CREATE_BLFPAYY_SOUND_RAW_SQLSTR,
         "moment_paybook_s_agg": CREATE_BLFPAYY_SOUND_AGG_SQLSTR,
         "moment_paybook_s_vld": CREATE_BLFPAYY_SOUND_VLD_SQLSTR,
-        "moment_paybook_v_raw": CREATE_BLFPAYY_VOICE_RAW_SQLSTR,
-        "moment_paybook_v_agg": CREATE_BLFPAYY_VOICE_AGG_SQLSTR,
+        "moment_paybook_h_raw": CREATE_BLFPAYY_HEARD_RAW_SQLSTR,
+        "moment_paybook_h_agg": CREATE_BLFPAYY_HEARD_AGG_SQLSTR,
         "moment_budunit_s_raw": CREATE_BLFBUDD_SOUND_RAW_SQLSTR,
         "moment_budunit_s_agg": CREATE_BLFBUDD_SOUND_AGG_SQLSTR,
         "moment_budunit_s_vld": CREATE_BLFBUDD_SOUND_VLD_SQLSTR,
-        "moment_budunit_v_raw": CREATE_BLFBUDD_VOICE_RAW_SQLSTR,
-        "moment_budunit_v_agg": CREATE_BLFBUDD_VOICE_AGG_SQLSTR,
+        "moment_budunit_h_raw": CREATE_BLFBUDD_HEARD_RAW_SQLSTR,
+        "moment_budunit_h_agg": CREATE_BLFBUDD_HEARD_AGG_SQLSTR,
         "moment_timeline_hour_s_raw": CREATE_BLFHOUR_SOUND_RAW_SQLSTR,
         "moment_timeline_hour_s_agg": CREATE_BLFHOUR_SOUND_AGG_SQLSTR,
         "moment_timeline_hour_s_vld": CREATE_BLFHOUR_SOUND_VLD_SQLSTR,
-        "moment_timeline_hour_v_raw": CREATE_BLFHOUR_VOICE_RAW_SQLSTR,
-        "moment_timeline_hour_v_agg": CREATE_BLFHOUR_VOICE_AGG_SQLSTR,
+        "moment_timeline_hour_h_raw": CREATE_BLFHOUR_HEARD_RAW_SQLSTR,
+        "moment_timeline_hour_h_agg": CREATE_BLFHOUR_HEARD_AGG_SQLSTR,
         "moment_timeline_month_s_raw": CREATE_BLFMONT_SOUND_RAW_SQLSTR,
         "moment_timeline_month_s_agg": CREATE_BLFMONT_SOUND_AGG_SQLSTR,
         "moment_timeline_month_s_vld": CREATE_BLFMONT_SOUND_VLD_SQLSTR,
-        "moment_timeline_month_v_raw": CREATE_BLFMONT_VOICE_RAW_SQLSTR,
-        "moment_timeline_month_v_agg": CREATE_BLFMONT_VOICE_AGG_SQLSTR,
+        "moment_timeline_month_h_raw": CREATE_BLFMONT_HEARD_RAW_SQLSTR,
+        "moment_timeline_month_h_agg": CREATE_BLFMONT_HEARD_AGG_SQLSTR,
         "moment_timeline_weekday_s_raw": CREATE_BLFWEEK_SOUND_RAW_SQLSTR,
         "moment_timeline_weekday_s_agg": CREATE_BLFWEEK_SOUND_AGG_SQLSTR,
         "moment_timeline_weekday_s_vld": CREATE_BLFWEEK_SOUND_VLD_SQLSTR,
-        "moment_timeline_weekday_v_raw": CREATE_BLFWEEK_VOICE_RAW_SQLSTR,
-        "moment_timeline_weekday_v_agg": CREATE_BLFWEEK_VOICE_AGG_SQLSTR,
+        "moment_timeline_weekday_h_raw": CREATE_BLFWEEK_HEARD_RAW_SQLSTR,
+        "moment_timeline_weekday_h_agg": CREATE_BLFWEEK_HEARD_AGG_SQLSTR,
         "moment_timeoffi_s_raw": CREATE_BLFOFFI_SOUND_RAW_SQLSTR,
         "moment_timeoffi_s_agg": CREATE_BLFOFFI_SOUND_AGG_SQLSTR,
         "moment_timeoffi_s_vld": CREATE_BLFOFFI_SOUND_VLD_SQLSTR,
-        "moment_timeoffi_v_raw": CREATE_BLFOFFI_VOICE_RAW_SQLSTR,
-        "moment_timeoffi_v_agg": CREATE_BLFOFFI_VOICE_AGG_SQLSTR,
+        "moment_timeoffi_h_raw": CREATE_BLFOFFI_HEARD_RAW_SQLSTR,
+        "moment_timeoffi_h_agg": CREATE_BLFOFFI_HEARD_AGG_SQLSTR,
         "momentunit_s_raw": CREATE_BLFUNIT_SOUND_RAW_SQLSTR,
         "momentunit_s_agg": CREATE_BLFUNIT_SOUND_AGG_SQLSTR,
         "momentunit_s_vld": CREATE_BLFUNIT_SOUND_VLD_SQLSTR,
-        "momentunit_v_raw": CREATE_BLFUNIT_VOICE_RAW_SQLSTR,
-        "momentunit_v_agg": CREATE_BLFUNIT_VOICE_AGG_SQLSTR,
+        "momentunit_h_raw": CREATE_BLFUNIT_HEARD_RAW_SQLSTR,
+        "momentunit_h_agg": CREATE_BLFUNIT_HEARD_AGG_SQLSTR,
         "belief_partner_membership_s_put_raw": CREATE_BLRMEMB_SOUND_PUT_RAW_STR,
         "belief_partner_membership_s_put_agg": CREATE_BLRMEMB_SOUND_PUT_AGG_STR,
         "belief_partner_membership_s_put_vld": CREATE_BLRMEMB_SOUND_PUT_VLD_STR,
         "belief_partner_membership_s_del_raw": CREATE_BLRMEMB_SOUND_DEL_RAW_STR,
         "belief_partner_membership_s_del_agg": CREATE_BLRMEMB_SOUND_DEL_AGG_STR,
         "belief_partner_membership_s_del_vld": CREATE_BLRMEMB_SOUND_DEL_VLD_STR,
-        "belief_partner_membership_v_put_raw": CREATE_BLRMEMB_VOICE_PUT_RAW_STR,
-        "belief_partner_membership_v_put_agg": CREATE_BLRMEMB_VOICE_PUT_AGG_STR,
-        "belief_partner_membership_v_del_raw": CREATE_BLRMEMB_VOICE_DEL_RAW_STR,
-        "belief_partner_membership_v_del_agg": CREATE_BLRMEMB_VOICE_DEL_AGG_STR,
+        "belief_partner_membership_h_put_raw": CREATE_BLRMEMB_HEARD_PUT_RAW_STR,
+        "belief_partner_membership_h_put_agg": CREATE_BLRMEMB_HEARD_PUT_AGG_STR,
+        "belief_partner_membership_h_del_raw": CREATE_BLRMEMB_HEARD_DEL_RAW_STR,
+        "belief_partner_membership_h_del_agg": CREATE_BLRMEMB_HEARD_DEL_AGG_STR,
         "belief_partnerunit_s_put_raw": CREATE_BLRPERN_SOUND_PUT_RAW_STR,
         "belief_partnerunit_s_put_agg": CREATE_BLRPERN_SOUND_PUT_AGG_STR,
         "belief_partnerunit_s_put_vld": CREATE_BLRPERN_SOUND_PUT_VLD_STR,
         "belief_partnerunit_s_del_raw": CREATE_BLRPERN_SOUND_DEL_RAW_STR,
         "belief_partnerunit_s_del_agg": CREATE_BLRPERN_SOUND_DEL_AGG_STR,
         "belief_partnerunit_s_del_vld": CREATE_BLRPERN_SOUND_DEL_VLD_STR,
-        "belief_partnerunit_v_put_raw": CREATE_BLRPERN_VOICE_PUT_RAW_STR,
-        "belief_partnerunit_v_put_agg": CREATE_BLRPERN_VOICE_PUT_AGG_STR,
-        "belief_partnerunit_v_del_raw": CREATE_BLRPERN_VOICE_DEL_RAW_STR,
-        "belief_partnerunit_v_del_agg": CREATE_BLRPERN_VOICE_DEL_AGG_STR,
+        "belief_partnerunit_h_put_raw": CREATE_BLRPERN_HEARD_PUT_RAW_STR,
+        "belief_partnerunit_h_put_agg": CREATE_BLRPERN_HEARD_PUT_AGG_STR,
+        "belief_partnerunit_h_del_raw": CREATE_BLRPERN_HEARD_DEL_RAW_STR,
+        "belief_partnerunit_h_del_agg": CREATE_BLRPERN_HEARD_DEL_AGG_STR,
         "belief_plan_awardunit_s_put_raw": CREATE_BLRAWAR_SOUND_PUT_RAW_STR,
         "belief_plan_awardunit_s_put_agg": CREATE_BLRAWAR_SOUND_PUT_AGG_STR,
         "belief_plan_awardunit_s_put_vld": CREATE_BLRAWAR_SOUND_PUT_VLD_STR,
         "belief_plan_awardunit_s_del_raw": CREATE_BLRAWAR_SOUND_DEL_RAW_STR,
         "belief_plan_awardunit_s_del_agg": CREATE_BLRAWAR_SOUND_DEL_AGG_STR,
         "belief_plan_awardunit_s_del_vld": CREATE_BLRAWAR_SOUND_DEL_VLD_STR,
-        "belief_plan_awardunit_v_put_raw": CREATE_BLRAWAR_VOICE_PUT_RAW_STR,
-        "belief_plan_awardunit_v_put_agg": CREATE_BLRAWAR_VOICE_PUT_AGG_STR,
-        "belief_plan_awardunit_v_del_raw": CREATE_BLRAWAR_VOICE_DEL_RAW_STR,
-        "belief_plan_awardunit_v_del_agg": CREATE_BLRAWAR_VOICE_DEL_AGG_STR,
+        "belief_plan_awardunit_h_put_raw": CREATE_BLRAWAR_HEARD_PUT_RAW_STR,
+        "belief_plan_awardunit_h_put_agg": CREATE_BLRAWAR_HEARD_PUT_AGG_STR,
+        "belief_plan_awardunit_h_del_raw": CREATE_BLRAWAR_HEARD_DEL_RAW_STR,
+        "belief_plan_awardunit_h_del_agg": CREATE_BLRAWAR_HEARD_DEL_AGG_STR,
         "belief_plan_factunit_s_put_raw": CREATE_BLRFACT_SOUND_PUT_RAW_STR,
         "belief_plan_factunit_s_put_agg": CREATE_BLRFACT_SOUND_PUT_AGG_STR,
         "belief_plan_factunit_s_put_vld": CREATE_BLRFACT_SOUND_PUT_VLD_STR,
         "belief_plan_factunit_s_del_raw": CREATE_BLRFACT_SOUND_DEL_RAW_STR,
         "belief_plan_factunit_s_del_agg": CREATE_BLRFACT_SOUND_DEL_AGG_STR,
         "belief_plan_factunit_s_del_vld": CREATE_BLRFACT_SOUND_DEL_VLD_STR,
-        "belief_plan_factunit_v_put_raw": CREATE_BLRFACT_VOICE_PUT_RAW_STR,
-        "belief_plan_factunit_v_put_agg": CREATE_BLRFACT_VOICE_PUT_AGG_STR,
-        "belief_plan_factunit_v_del_raw": CREATE_BLRFACT_VOICE_DEL_RAW_STR,
-        "belief_plan_factunit_v_del_agg": CREATE_BLRFACT_VOICE_DEL_AGG_STR,
+        "belief_plan_factunit_h_put_raw": CREATE_BLRFACT_HEARD_PUT_RAW_STR,
+        "belief_plan_factunit_h_put_agg": CREATE_BLRFACT_HEARD_PUT_AGG_STR,
+        "belief_plan_factunit_h_del_raw": CREATE_BLRFACT_HEARD_DEL_RAW_STR,
+        "belief_plan_factunit_h_del_agg": CREATE_BLRFACT_HEARD_DEL_AGG_STR,
         "belief_plan_healerunit_s_put_raw": CREATE_BLRHEAL_SOUND_PUT_RAW_STR,
         "belief_plan_healerunit_s_put_agg": CREATE_BLRHEAL_SOUND_PUT_AGG_STR,
         "belief_plan_healerunit_s_put_vld": CREATE_BLRHEAL_SOUND_PUT_VLD_STR,
         "belief_plan_healerunit_s_del_raw": CREATE_BLRHEAL_SOUND_DEL_RAW_STR,
         "belief_plan_healerunit_s_del_agg": CREATE_BLRHEAL_SOUND_DEL_AGG_STR,
         "belief_plan_healerunit_s_del_vld": CREATE_BLRHEAL_SOUND_DEL_VLD_STR,
-        "belief_plan_healerunit_v_put_raw": CREATE_BLRHEAL_VOICE_PUT_RAW_STR,
-        "belief_plan_healerunit_v_put_agg": CREATE_BLRHEAL_VOICE_PUT_AGG_STR,
-        "belief_plan_healerunit_v_del_raw": CREATE_BLRHEAL_VOICE_DEL_RAW_STR,
-        "belief_plan_healerunit_v_del_agg": CREATE_BLRHEAL_VOICE_DEL_AGG_STR,
+        "belief_plan_healerunit_h_put_raw": CREATE_BLRHEAL_HEARD_PUT_RAW_STR,
+        "belief_plan_healerunit_h_put_agg": CREATE_BLRHEAL_HEARD_PUT_AGG_STR,
+        "belief_plan_healerunit_h_del_raw": CREATE_BLRHEAL_HEARD_DEL_RAW_STR,
+        "belief_plan_healerunit_h_del_agg": CREATE_BLRHEAL_HEARD_DEL_AGG_STR,
         "belief_plan_reason_caseunit_s_put_raw": CREATE_BLRPREM_SOUND_PUT_RAW_STR,
         "belief_plan_reason_caseunit_s_put_agg": CREATE_BLRPREM_SOUND_PUT_AGG_STR,
         "belief_plan_reason_caseunit_s_put_vld": CREATE_BLRPREM_SOUND_PUT_VLD_STR,
         "belief_plan_reason_caseunit_s_del_raw": CREATE_BLRPREM_SOUND_DEL_RAW_STR,
         "belief_plan_reason_caseunit_s_del_agg": CREATE_BLRPREM_SOUND_DEL_AGG_STR,
         "belief_plan_reason_caseunit_s_del_vld": CREATE_BLRPREM_SOUND_DEL_VLD_STR,
-        "belief_plan_reason_caseunit_v_put_raw": CREATE_BLRPREM_VOICE_PUT_RAW_STR,
-        "belief_plan_reason_caseunit_v_put_agg": CREATE_BLRPREM_VOICE_PUT_AGG_STR,
-        "belief_plan_reason_caseunit_v_del_raw": CREATE_BLRPREM_VOICE_DEL_RAW_STR,
-        "belief_plan_reason_caseunit_v_del_agg": CREATE_BLRPREM_VOICE_DEL_AGG_STR,
+        "belief_plan_reason_caseunit_h_put_raw": CREATE_BLRPREM_HEARD_PUT_RAW_STR,
+        "belief_plan_reason_caseunit_h_put_agg": CREATE_BLRPREM_HEARD_PUT_AGG_STR,
+        "belief_plan_reason_caseunit_h_del_raw": CREATE_BLRPREM_HEARD_DEL_RAW_STR,
+        "belief_plan_reason_caseunit_h_del_agg": CREATE_BLRPREM_HEARD_DEL_AGG_STR,
         "belief_plan_reasonunit_s_put_raw": CREATE_BLRREAS_SOUND_PUT_RAW_STR,
         "belief_plan_reasonunit_s_put_agg": CREATE_BLRREAS_SOUND_PUT_AGG_STR,
         "belief_plan_reasonunit_s_put_vld": CREATE_BLRREAS_SOUND_PUT_VLD_STR,
         "belief_plan_reasonunit_s_del_raw": CREATE_BLRREAS_SOUND_DEL_RAW_STR,
         "belief_plan_reasonunit_s_del_agg": CREATE_BLRREAS_SOUND_DEL_AGG_STR,
         "belief_plan_reasonunit_s_del_vld": CREATE_BLRREAS_SOUND_DEL_VLD_STR,
-        "belief_plan_reasonunit_v_put_raw": CREATE_BLRREAS_VOICE_PUT_RAW_STR,
-        "belief_plan_reasonunit_v_put_agg": CREATE_BLRREAS_VOICE_PUT_AGG_STR,
-        "belief_plan_reasonunit_v_del_raw": CREATE_BLRREAS_VOICE_DEL_RAW_STR,
-        "belief_plan_reasonunit_v_del_agg": CREATE_BLRREAS_VOICE_DEL_AGG_STR,
+        "belief_plan_reasonunit_h_put_raw": CREATE_BLRREAS_HEARD_PUT_RAW_STR,
+        "belief_plan_reasonunit_h_put_agg": CREATE_BLRREAS_HEARD_PUT_AGG_STR,
+        "belief_plan_reasonunit_h_del_raw": CREATE_BLRREAS_HEARD_DEL_RAW_STR,
+        "belief_plan_reasonunit_h_del_agg": CREATE_BLRREAS_HEARD_DEL_AGG_STR,
         "belief_plan_partyunit_s_put_raw": CREATE_BLRLABO_SOUND_PUT_RAW_STR,
         "belief_plan_partyunit_s_put_agg": CREATE_BLRLABO_SOUND_PUT_AGG_STR,
         "belief_plan_partyunit_s_put_vld": CREATE_BLRLABO_SOUND_PUT_VLD_STR,
         "belief_plan_partyunit_s_del_raw": CREATE_BLRLABO_SOUND_DEL_RAW_STR,
         "belief_plan_partyunit_s_del_agg": CREATE_BLRLABO_SOUND_DEL_AGG_STR,
         "belief_plan_partyunit_s_del_vld": CREATE_BLRLABO_SOUND_DEL_VLD_STR,
-        "belief_plan_partyunit_v_put_raw": CREATE_BLRLABO_VOICE_PUT_RAW_STR,
-        "belief_plan_partyunit_v_put_agg": CREATE_BLRLABO_VOICE_PUT_AGG_STR,
-        "belief_plan_partyunit_v_del_raw": CREATE_BLRLABO_VOICE_DEL_RAW_STR,
-        "belief_plan_partyunit_v_del_agg": CREATE_BLRLABO_VOICE_DEL_AGG_STR,
+        "belief_plan_partyunit_h_put_raw": CREATE_BLRLABO_HEARD_PUT_RAW_STR,
+        "belief_plan_partyunit_h_put_agg": CREATE_BLRLABO_HEARD_PUT_AGG_STR,
+        "belief_plan_partyunit_h_del_raw": CREATE_BLRLABO_HEARD_DEL_RAW_STR,
+        "belief_plan_partyunit_h_del_agg": CREATE_BLRLABO_HEARD_DEL_AGG_STR,
         "belief_planunit_s_put_raw": CREATE_BLRPLAN_SOUND_PUT_RAW_STR,
         "belief_planunit_s_put_agg": CREATE_BLRPLAN_SOUND_PUT_AGG_STR,
         "belief_planunit_s_put_vld": CREATE_BLRPLAN_SOUND_PUT_VLD_STR,
         "belief_planunit_s_del_raw": CREATE_BLRPLAN_SOUND_DEL_RAW_STR,
         "belief_planunit_s_del_agg": CREATE_BLRPLAN_SOUND_DEL_AGG_STR,
         "belief_planunit_s_del_vld": CREATE_BLRPLAN_SOUND_DEL_VLD_STR,
-        "belief_planunit_v_put_raw": CREATE_BLRPLAN_VOICE_PUT_RAW_STR,
-        "belief_planunit_v_put_agg": CREATE_BLRPLAN_VOICE_PUT_AGG_STR,
-        "belief_planunit_v_del_raw": CREATE_BLRPLAN_VOICE_DEL_RAW_STR,
-        "belief_planunit_v_del_agg": CREATE_BLRPLAN_VOICE_DEL_AGG_STR,
+        "belief_planunit_h_put_raw": CREATE_BLRPLAN_HEARD_PUT_RAW_STR,
+        "belief_planunit_h_put_agg": CREATE_BLRPLAN_HEARD_PUT_AGG_STR,
+        "belief_planunit_h_del_raw": CREATE_BLRPLAN_HEARD_DEL_RAW_STR,
+        "belief_planunit_h_del_agg": CREATE_BLRPLAN_HEARD_DEL_AGG_STR,
         "beliefunit_s_put_raw": CREATE_BLRUNIT_SOUND_PUT_RAW_STR,
         "beliefunit_s_put_agg": CREATE_BLRUNIT_SOUND_PUT_AGG_STR,
         "beliefunit_s_put_vld": CREATE_BLRUNIT_SOUND_PUT_VLD_STR,
         "beliefunit_s_del_raw": CREATE_BLRUNIT_SOUND_DEL_RAW_STR,
         "beliefunit_s_del_agg": CREATE_BLRUNIT_SOUND_DEL_AGG_STR,
         "beliefunit_s_del_vld": CREATE_BLRUNIT_SOUND_DEL_VLD_STR,
-        "beliefunit_v_put_raw": CREATE_BLRUNIT_VOICE_PUT_RAW_STR,
-        "beliefunit_v_put_agg": CREATE_BLRUNIT_VOICE_PUT_AGG_STR,
-        "beliefunit_v_del_raw": CREATE_BLRUNIT_VOICE_DEL_RAW_STR,
-        "beliefunit_v_del_agg": CREATE_BLRUNIT_VOICE_DEL_AGG_STR,
+        "beliefunit_h_put_raw": CREATE_BLRUNIT_HEARD_PUT_RAW_STR,
+        "beliefunit_h_put_agg": CREATE_BLRUNIT_HEARD_PUT_AGG_STR,
+        "beliefunit_h_del_raw": CREATE_BLRUNIT_HEARD_DEL_RAW_STR,
+        "beliefunit_h_del_agg": CREATE_BLRUNIT_HEARD_DEL_AGG_STR,
     }
 
 
@@ -456,22 +456,22 @@ def get_moment_belief_sound_agg_tablenames():
     }
 
 
-def get_belief_voice_agg_tablenames() -> set[str]:
+def get_belief_heard_agg_tablenames() -> set[str]:
     return {
-        "beliefunit_v_put_agg",
-        "belief_plan_healerunit_v_put_agg",
-        "belief_partnerunit_v_put_agg",
-        "belief_plan_reason_caseunit_v_put_agg",
-        "belief_plan_partyunit_v_put_agg",
-        "belief_plan_reasonunit_v_put_agg",
-        "belief_plan_factunit_v_put_agg",
-        "belief_partner_membership_v_put_agg",
-        "belief_planunit_v_put_agg",
-        "belief_plan_awardunit_v_put_agg",
+        "beliefunit_h_put_agg",
+        "belief_plan_healerunit_h_put_agg",
+        "belief_partnerunit_h_put_agg",
+        "belief_plan_reason_caseunit_h_put_agg",
+        "belief_plan_partyunit_h_put_agg",
+        "belief_plan_reasonunit_h_put_agg",
+        "belief_plan_factunit_h_put_agg",
+        "belief_partner_membership_h_put_agg",
+        "belief_planunit_h_put_agg",
+        "belief_plan_awardunit_h_put_agg",
     }
 
 
-def create_sound_and_voice_tables(conn_or_cursor: sqlite3_Connection):
+def create_sound_and_heard_tables(conn_or_cursor: sqlite3_Connection):
     for create_table_sqlstr in get_prime_create_table_sqlstrs().values():
         conn_or_cursor.execute(create_table_sqlstr)
 
@@ -788,69 +788,69 @@ def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
     }
 
 
-INSERT_BLFPAYY_VOICE_RAW_SQLSTR = "INSERT INTO moment_paybook_v_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, tran_time, amount) SELECT event_int, face_name, moment_label, belief_name, partner_name, tran_time, amount FROM moment_paybook_s_vld "
-INSERT_BLFBUDD_VOICE_RAW_SQLSTR = "INSERT INTO moment_budunit_v_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, bud_time, quota, celldepth) SELECT event_int, face_name, moment_label, belief_name, bud_time, quota, celldepth FROM moment_budunit_s_vld "
-INSERT_BLFHOUR_VOICE_RAW_SQLSTR = "INSERT INTO moment_timeline_hour_v_raw (event_int, face_name_otx, moment_label_otx, cumulative_minute, hour_label_otx) SELECT event_int, face_name, moment_label, cumulative_minute, hour_label FROM moment_timeline_hour_s_vld "
-INSERT_BLFMONT_VOICE_RAW_SQLSTR = "INSERT INTO moment_timeline_month_v_raw (event_int, face_name_otx, moment_label_otx, cumulative_day, month_label_otx) SELECT event_int, face_name, moment_label, cumulative_day, month_label FROM moment_timeline_month_s_vld "
-INSERT_BLFWEEK_VOICE_RAW_SQLSTR = "INSERT INTO moment_timeline_weekday_v_raw (event_int, face_name_otx, moment_label_otx, weekday_order, weekday_label_otx) SELECT event_int, face_name, moment_label, weekday_order, weekday_label FROM moment_timeline_weekday_s_vld "
-INSERT_BLFOFFI_VOICE_RAW_SQLSTR = "INSERT INTO moment_timeoffi_v_raw (event_int, face_name_otx, moment_label_otx, offi_time) SELECT event_int, face_name, moment_label, offi_time FROM moment_timeoffi_s_vld "
-INSERT_BLFUNIT_VOICE_RAW_SQLSTR = "INSERT INTO momentunit_v_raw (event_int, face_name_otx, moment_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_s_vld "
+INSERT_BLFPAYY_HEARD_RAW_SQLSTR = "INSERT INTO moment_paybook_h_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, tran_time, amount) SELECT event_int, face_name, moment_label, belief_name, partner_name, tran_time, amount FROM moment_paybook_s_vld "
+INSERT_BLFBUDD_HEARD_RAW_SQLSTR = "INSERT INTO moment_budunit_h_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, bud_time, quota, celldepth) SELECT event_int, face_name, moment_label, belief_name, bud_time, quota, celldepth FROM moment_budunit_s_vld "
+INSERT_BLFHOUR_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeline_hour_h_raw (event_int, face_name_otx, moment_label_otx, cumulative_minute, hour_label_otx) SELECT event_int, face_name, moment_label, cumulative_minute, hour_label FROM moment_timeline_hour_s_vld "
+INSERT_BLFMONT_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeline_month_h_raw (event_int, face_name_otx, moment_label_otx, cumulative_day, month_label_otx) SELECT event_int, face_name, moment_label, cumulative_day, month_label FROM moment_timeline_month_s_vld "
+INSERT_BLFWEEK_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeline_weekday_h_raw (event_int, face_name_otx, moment_label_otx, weekday_order, weekday_label_otx) SELECT event_int, face_name, moment_label, weekday_order, weekday_label FROM moment_timeline_weekday_s_vld "
+INSERT_BLFOFFI_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeoffi_h_raw (event_int, face_name_otx, moment_label_otx, offi_time) SELECT event_int, face_name, moment_label, offi_time FROM moment_timeoffi_s_vld "
+INSERT_BLFUNIT_HEARD_RAW_SQLSTR = "INSERT INTO momentunit_h_raw (event_int, face_name_otx, moment_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_s_vld "
 
-INSERT_BLRMEMB_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_partner_membership_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, group_title_otx, group_cred_points, group_debt_points) SELECT event_int, face_name, moment_label, belief_name, partner_name, group_title, group_cred_points, group_debt_points FROM belief_partner_membership_s_put_vld "
-INSERT_BLRMEMB_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_partner_membership_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, partner_name, group_title_ERASE FROM belief_partner_membership_s_del_vld "
-INSERT_BLRPERN_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_partnerunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, partner_cred_points, partner_debt_points) SELECT event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points, partner_debt_points FROM belief_partnerunit_s_put_vld "
-INSERT_BLRPERN_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_partnerunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, partner_name_ERASE FROM belief_partnerunit_s_del_vld "
-INSERT_BLRAWAR_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_awardunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force FROM belief_plan_awardunit_s_put_vld "
-INSERT_BLRAWAR_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_awardunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE FROM belief_plan_awardunit_s_del_vld "
-INSERT_BLRFACT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_factunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, fact_context_otx, fact_state_otx, fact_lower, fact_upper) SELECT event_int, face_name, moment_label, belief_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper FROM belief_plan_factunit_s_put_vld "
-INSERT_BLRFACT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_factunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, fact_context_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, fact_context_ERASE FROM belief_plan_factunit_s_del_vld "
-INSERT_BLRHEAL_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_healerunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, healer_name_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, healer_name FROM belief_plan_healerunit_s_put_vld "
-INSERT_BLRHEAL_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_healerunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, healer_name_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, healer_name_ERASE FROM belief_plan_healerunit_s_del_vld "
-INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_reason_caseunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_otx, reason_state_otx, reason_upper, reason_lower, reason_divisor) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor FROM belief_plan_reason_caseunit_s_put_vld "
-INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_reason_caseunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_otx, reason_state_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state_ERASE FROM belief_plan_reason_caseunit_s_del_vld "
-INSERT_BLRREAS_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_reasonunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_otx, reason_active_requisite) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite FROM belief_plan_reasonunit_s_put_vld "
-INSERT_BLRREAS_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_reasonunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context_ERASE FROM belief_plan_reasonunit_s_del_vld "
-INSERT_BLRLABO_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_partyunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, party_title_otx, solo) SELECT event_int, face_name, moment_label, belief_name, plan_rope, party_title, solo FROM belief_plan_partyunit_s_put_vld "
-INSERT_BLRLABO_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_partyunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, party_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, party_title_ERASE FROM belief_plan_partyunit_s_del_vld "
-INSERT_BLRPLAN_VOICE_RAW_PUT_SQLSTR = "INSERT INTO belief_planunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool) SELECT event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool FROM belief_planunit_s_put_vld "
-INSERT_BLRPLAN_VOICE_RAW_DEL_SQLSTR = "INSERT INTO belief_planunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope_ERASE FROM belief_planunit_s_del_vld "
-INSERT_BLRUNIT_VOICE_RAW_PUT_SQLSTR = "INSERT INTO beliefunit_v_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM beliefunit_s_put_vld "
-INSERT_BLRUNIT_VOICE_RAW_DEL_SQLSTR = "INSERT INTO beliefunit_v_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name_ERASE FROM beliefunit_s_del_vld "
+INSERT_BLRMEMB_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_partner_membership_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, group_title_otx, group_cred_points, group_debt_points) SELECT event_int, face_name, moment_label, belief_name, partner_name, group_title, group_cred_points, group_debt_points FROM belief_partner_membership_s_put_vld "
+INSERT_BLRMEMB_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_partner_membership_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, partner_name, group_title_ERASE FROM belief_partner_membership_s_del_vld "
+INSERT_BLRPERN_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_partnerunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_otx, partner_cred_points, partner_debt_points) SELECT event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points, partner_debt_points FROM belief_partnerunit_s_put_vld "
+INSERT_BLRPERN_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_partnerunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, partner_name_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, partner_name_ERASE FROM belief_partnerunit_s_del_vld "
+INSERT_BLRAWAR_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_awardunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, awardee_title_otx, give_force, take_force) SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force FROM belief_plan_awardunit_s_put_vld "
+INSERT_BLRAWAR_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_awardunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, awardee_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE FROM belief_plan_awardunit_s_del_vld "
+INSERT_BLRFACT_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_factunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, fact_context_otx, fact_state_otx, fact_lower, fact_upper) SELECT event_int, face_name, moment_label, belief_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper FROM belief_plan_factunit_s_put_vld "
+INSERT_BLRFACT_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_factunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, fact_context_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, fact_context_ERASE FROM belief_plan_factunit_s_del_vld "
+INSERT_BLRHEAL_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_healerunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, healer_name_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, healer_name FROM belief_plan_healerunit_s_put_vld "
+INSERT_BLRHEAL_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_healerunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, healer_name_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, healer_name_ERASE FROM belief_plan_healerunit_s_del_vld "
+INSERT_BLRPREM_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_reason_caseunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_otx, reason_state_otx, reason_upper, reason_lower, reason_divisor) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor FROM belief_plan_reason_caseunit_s_put_vld "
+INSERT_BLRPREM_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_reason_caseunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_otx, reason_state_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state_ERASE FROM belief_plan_reason_caseunit_s_del_vld "
+INSERT_BLRREAS_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_reasonunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_otx, reason_active_requisite) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite FROM belief_plan_reasonunit_s_put_vld "
+INSERT_BLRREAS_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_reasonunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, reason_context_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, reason_context_ERASE FROM belief_plan_reasonunit_s_del_vld "
+INSERT_BLRLABO_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_plan_partyunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, party_title_otx, solo) SELECT event_int, face_name, moment_label, belief_name, plan_rope, party_title, solo FROM belief_plan_partyunit_s_put_vld "
+INSERT_BLRLABO_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_plan_partyunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, party_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope, party_title_ERASE FROM belief_plan_partyunit_s_del_vld "
+INSERT_BLRPLAN_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_planunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_otx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool) SELECT event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool FROM belief_planunit_s_put_vld "
+INSERT_BLRPLAN_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_planunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, plan_rope_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, plan_rope_ERASE FROM belief_planunit_s_del_vld "
+INSERT_BLRUNIT_HEARD_RAW_PUT_SQLSTR = "INSERT INTO beliefunit_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit) SELECT event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit FROM beliefunit_s_put_vld "
+INSERT_BLRUNIT_HEARD_RAW_DEL_SQLSTR = "INSERT INTO beliefunit_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name_ERASE FROM beliefunit_s_del_vld "
 
 
-def get_insert_into_voice_raw_sqlstrs() -> dict[str, str]:
+def get_insert_into_heard_raw_sqlstrs() -> dict[str, str]:
     return {
-        "moment_paybook_v_raw": INSERT_BLFPAYY_VOICE_RAW_SQLSTR,
-        "moment_budunit_v_raw": INSERT_BLFBUDD_VOICE_RAW_SQLSTR,
-        "moment_timeline_hour_v_raw": INSERT_BLFHOUR_VOICE_RAW_SQLSTR,
-        "moment_timeline_month_v_raw": INSERT_BLFMONT_VOICE_RAW_SQLSTR,
-        "moment_timeline_weekday_v_raw": INSERT_BLFWEEK_VOICE_RAW_SQLSTR,
-        "moment_timeoffi_v_raw": INSERT_BLFOFFI_VOICE_RAW_SQLSTR,
-        "momentunit_v_raw": INSERT_BLFUNIT_VOICE_RAW_SQLSTR,
-        "belief_partner_membership_v_put_raw": INSERT_BLRMEMB_VOICE_RAW_PUT_SQLSTR,
-        "belief_partner_membership_v_del_raw": INSERT_BLRMEMB_VOICE_RAW_DEL_SQLSTR,
-        "belief_partnerunit_v_put_raw": INSERT_BLRPERN_VOICE_RAW_PUT_SQLSTR,
-        "belief_partnerunit_v_del_raw": INSERT_BLRPERN_VOICE_RAW_DEL_SQLSTR,
-        "belief_plan_awardunit_v_put_raw": INSERT_BLRAWAR_VOICE_RAW_PUT_SQLSTR,
-        "belief_plan_awardunit_v_del_raw": INSERT_BLRAWAR_VOICE_RAW_DEL_SQLSTR,
-        "belief_plan_factunit_v_put_raw": INSERT_BLRFACT_VOICE_RAW_PUT_SQLSTR,
-        "belief_plan_factunit_v_del_raw": INSERT_BLRFACT_VOICE_RAW_DEL_SQLSTR,
-        "belief_plan_healerunit_v_put_raw": INSERT_BLRHEAL_VOICE_RAW_PUT_SQLSTR,
-        "belief_plan_healerunit_v_del_raw": INSERT_BLRHEAL_VOICE_RAW_DEL_SQLSTR,
-        "belief_plan_reason_caseunit_v_put_raw": INSERT_BLRPREM_VOICE_RAW_PUT_SQLSTR,
-        "belief_plan_reason_caseunit_v_del_raw": INSERT_BLRPREM_VOICE_RAW_DEL_SQLSTR,
-        "belief_plan_reasonunit_v_put_raw": INSERT_BLRREAS_VOICE_RAW_PUT_SQLSTR,
-        "belief_plan_reasonunit_v_del_raw": INSERT_BLRREAS_VOICE_RAW_DEL_SQLSTR,
-        "belief_plan_partyunit_v_put_raw": INSERT_BLRLABO_VOICE_RAW_PUT_SQLSTR,
-        "belief_plan_partyunit_v_del_raw": INSERT_BLRLABO_VOICE_RAW_DEL_SQLSTR,
-        "belief_planunit_v_put_raw": INSERT_BLRPLAN_VOICE_RAW_PUT_SQLSTR,
-        "belief_planunit_v_del_raw": INSERT_BLRPLAN_VOICE_RAW_DEL_SQLSTR,
-        "beliefunit_v_put_raw": INSERT_BLRUNIT_VOICE_RAW_PUT_SQLSTR,
-        "beliefunit_v_del_raw": INSERT_BLRUNIT_VOICE_RAW_DEL_SQLSTR,
+        "moment_paybook_h_raw": INSERT_BLFPAYY_HEARD_RAW_SQLSTR,
+        "moment_budunit_h_raw": INSERT_BLFBUDD_HEARD_RAW_SQLSTR,
+        "moment_timeline_hour_h_raw": INSERT_BLFHOUR_HEARD_RAW_SQLSTR,
+        "moment_timeline_month_h_raw": INSERT_BLFMONT_HEARD_RAW_SQLSTR,
+        "moment_timeline_weekday_h_raw": INSERT_BLFWEEK_HEARD_RAW_SQLSTR,
+        "moment_timeoffi_h_raw": INSERT_BLFOFFI_HEARD_RAW_SQLSTR,
+        "momentunit_h_raw": INSERT_BLFUNIT_HEARD_RAW_SQLSTR,
+        "belief_partner_membership_h_put_raw": INSERT_BLRMEMB_HEARD_RAW_PUT_SQLSTR,
+        "belief_partner_membership_h_del_raw": INSERT_BLRMEMB_HEARD_RAW_DEL_SQLSTR,
+        "belief_partnerunit_h_put_raw": INSERT_BLRPERN_HEARD_RAW_PUT_SQLSTR,
+        "belief_partnerunit_h_del_raw": INSERT_BLRPERN_HEARD_RAW_DEL_SQLSTR,
+        "belief_plan_awardunit_h_put_raw": INSERT_BLRAWAR_HEARD_RAW_PUT_SQLSTR,
+        "belief_plan_awardunit_h_del_raw": INSERT_BLRAWAR_HEARD_RAW_DEL_SQLSTR,
+        "belief_plan_factunit_h_put_raw": INSERT_BLRFACT_HEARD_RAW_PUT_SQLSTR,
+        "belief_plan_factunit_h_del_raw": INSERT_BLRFACT_HEARD_RAW_DEL_SQLSTR,
+        "belief_plan_healerunit_h_put_raw": INSERT_BLRHEAL_HEARD_RAW_PUT_SQLSTR,
+        "belief_plan_healerunit_h_del_raw": INSERT_BLRHEAL_HEARD_RAW_DEL_SQLSTR,
+        "belief_plan_reason_caseunit_h_put_raw": INSERT_BLRPREM_HEARD_RAW_PUT_SQLSTR,
+        "belief_plan_reason_caseunit_h_del_raw": INSERT_BLRPREM_HEARD_RAW_DEL_SQLSTR,
+        "belief_plan_reasonunit_h_put_raw": INSERT_BLRREAS_HEARD_RAW_PUT_SQLSTR,
+        "belief_plan_reasonunit_h_del_raw": INSERT_BLRREAS_HEARD_RAW_DEL_SQLSTR,
+        "belief_plan_partyunit_h_put_raw": INSERT_BLRLABO_HEARD_RAW_PUT_SQLSTR,
+        "belief_plan_partyunit_h_del_raw": INSERT_BLRLABO_HEARD_RAW_DEL_SQLSTR,
+        "belief_planunit_h_put_raw": INSERT_BLRPLAN_HEARD_RAW_PUT_SQLSTR,
+        "belief_planunit_h_del_raw": INSERT_BLRPLAN_HEARD_RAW_DEL_SQLSTR,
+        "beliefunit_h_put_raw": INSERT_BLRUNIT_HEARD_RAW_PUT_SQLSTR,
+        "beliefunit_h_del_raw": INSERT_BLRUNIT_HEARD_RAW_DEL_SQLSTR,
     }
 
 
-def create_update_voice_raw_existing_inx_col_sqlstr(
+def create_update_heard_raw_existing_inx_col_sqlstr(
     pidgin_type_abbv: str, table: str, column_prefix: str
 ) -> str:
     return f"""
@@ -879,234 +879,234 @@ pid_inx_strs AS (
         AND pid_vld.otx_{pidgin_type_abbv} = pid_foe.{column_prefix}_otx
         AND pid_vld.event_int = pid_foe.pidgin_event_int
 )
-UPDATE {table} as dim_v_raw
+UPDATE {table} as dim_h_raw
 SET {column_prefix}_inx = (
     SELECT pid_inx_strs.inx_{pidgin_type_abbv}
     FROM pid_inx_strs
-    WHERE dim_v_raw.rowid = pid_inx_strs.raw_rowid
+    WHERE dim_h_raw.rowid = pid_inx_strs.raw_rowid
 )
 ;
 """
 
 
-def create_update_voice_raw_empty_inx_col_sqlstr(table: str, column_prefix: str) -> str:
+def create_update_heard_raw_empty_inx_col_sqlstr(table: str, column_prefix: str) -> str:
     return f"""
-UPDATE {table} as dim_v_raw
+UPDATE {table} as dim_h_raw
 SET {column_prefix}_inx = {column_prefix}_otx
 WHERE {column_prefix}_inx IS NULL
 ;
 """
 
 
-BLFPAYY_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO moment_paybook_v_agg (moment_label, belief_name, partner_name, tran_time, amount)
+BLFPAYY_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO moment_paybook_h_agg (moment_label, belief_name, partner_name, tran_time, amount)
 SELECT moment_label_inx, belief_name_inx, partner_name_inx, tran_time, amount
-FROM moment_paybook_v_raw
+FROM moment_paybook_h_raw
 GROUP BY moment_label_inx, belief_name_inx, partner_name_inx, tran_time, amount
 """
-BLFBUDD_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO moment_budunit_v_agg (moment_label, belief_name, bud_time, quota, celldepth)
+BLFBUDD_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO moment_budunit_h_agg (moment_label, belief_name, bud_time, quota, celldepth)
 SELECT moment_label_inx, belief_name_inx, bud_time, quota, celldepth
-FROM moment_budunit_v_raw
+FROM moment_budunit_h_raw
 GROUP BY moment_label_inx, belief_name_inx, bud_time, quota, celldepth
 """
-BLFHOUR_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO moment_timeline_hour_v_agg (moment_label, cumulative_minute, hour_label)
+BLFHOUR_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO moment_timeline_hour_h_agg (moment_label, cumulative_minute, hour_label)
 SELECT moment_label_inx, cumulative_minute, hour_label_inx
-FROM moment_timeline_hour_v_raw
+FROM moment_timeline_hour_h_raw
 GROUP BY moment_label_inx, cumulative_minute, hour_label_inx
 """
-BLFMONT_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO moment_timeline_month_v_agg (moment_label, cumulative_day, month_label)
+BLFMONT_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO moment_timeline_month_h_agg (moment_label, cumulative_day, month_label)
 SELECT moment_label_inx, cumulative_day, month_label_inx
-FROM moment_timeline_month_v_raw
+FROM moment_timeline_month_h_raw
 GROUP BY moment_label_inx, cumulative_day, month_label_inx
 """
-BLFWEEK_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO moment_timeline_weekday_v_agg (moment_label, weekday_order, weekday_label)
+BLFWEEK_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO moment_timeline_weekday_h_agg (moment_label, weekday_order, weekday_label)
 SELECT moment_label_inx, weekday_order, weekday_label_inx
-FROM moment_timeline_weekday_v_raw
+FROM moment_timeline_weekday_h_raw
 GROUP BY moment_label_inx, weekday_order, weekday_label_inx
 """
-BLFOFFI_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO moment_timeoffi_v_agg (moment_label, offi_time)
+BLFOFFI_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO moment_timeoffi_h_agg (moment_label, offi_time)
 SELECT moment_label_inx, offi_time
-FROM moment_timeoffi_v_raw
+FROM moment_timeoffi_h_raw
 GROUP BY moment_label_inx, offi_time
 """
-BLFUNIT_VOICE_AGG_INSERT_SQLSTR = """
-INSERT INTO momentunit_v_agg (moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations)
+BLFUNIT_HEARD_AGG_INSERT_SQLSTR = """
+INSERT INTO momentunit_h_agg (moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations)
 SELECT moment_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
-FROM momentunit_v_raw
+FROM momentunit_h_raw
 GROUP BY moment_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
 """
 
-INSERT_BLRMEMB_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_partner_membership_v_put_agg (event_int, face_name, moment_label, belief_name, partner_name, group_title, group_cred_points, group_debt_points)
+INSERT_BLRMEMB_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_partner_membership_h_put_agg (event_int, face_name, moment_label, belief_name, partner_name, group_title, group_cred_points, group_debt_points)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_inx, group_title_inx, group_cred_points, group_debt_points
-FROM belief_partner_membership_v_put_raw
+FROM belief_partner_membership_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_inx, group_title_inx, group_cred_points, group_debt_points
 """
-INSERT_BLRMEMB_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_partner_membership_v_del_agg (event_int, face_name, moment_label, belief_name, partner_name, group_title_ERASE)
+INSERT_BLRMEMB_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_partner_membership_h_del_agg (event_int, face_name, moment_label, belief_name, partner_name, group_title_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_inx, group_title_ERASE_inx
-FROM belief_partner_membership_v_del_raw
+FROM belief_partner_membership_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_inx, group_title_ERASE_inx
 """
-INSERT_BLRPERN_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_partnerunit_v_put_agg (event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points, partner_debt_points)
+INSERT_BLRPERN_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_partnerunit_h_put_agg (event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points, partner_debt_points)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_inx, partner_cred_points, partner_debt_points
-FROM belief_partnerunit_v_put_raw
+FROM belief_partnerunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_inx, partner_cred_points, partner_debt_points
 """
-INSERT_BLRPERN_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_partnerunit_v_del_agg (event_int, face_name, moment_label, belief_name, partner_name_ERASE)
+INSERT_BLRPERN_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_partnerunit_h_del_agg (event_int, face_name, moment_label, belief_name, partner_name_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_ERASE_inx
-FROM belief_partnerunit_v_del_raw
+FROM belief_partnerunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, partner_name_ERASE_inx
 """
-INSERT_BLRAWAR_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_plan_awardunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force)
+INSERT_BLRAWAR_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_plan_awardunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, awardee_title, give_force, take_force)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, awardee_title_inx, give_force, take_force
-FROM belief_plan_awardunit_v_put_raw
+FROM belief_plan_awardunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, awardee_title_inx, give_force, take_force
 """
-INSERT_BLRAWAR_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_plan_awardunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE)
+INSERT_BLRAWAR_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_plan_awardunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, awardee_title_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, awardee_title_ERASE_inx
-FROM belief_plan_awardunit_v_del_raw
+FROM belief_plan_awardunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, awardee_title_ERASE_inx
 """
-INSERT_BLRFACT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_plan_factunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper)
+INSERT_BLRFACT_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_plan_factunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, fact_context, fact_state, fact_lower, fact_upper)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, fact_context_inx, fact_state_inx, fact_lower, fact_upper
-FROM belief_plan_factunit_v_put_raw
+FROM belief_plan_factunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, fact_context_inx, fact_state_inx, fact_lower, fact_upper
 """
-INSERT_BLRFACT_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_plan_factunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, fact_context_ERASE)
+INSERT_BLRFACT_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_plan_factunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, fact_context_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, fact_context_ERASE_inx
-FROM belief_plan_factunit_v_del_raw
+FROM belief_plan_factunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, fact_context_ERASE_inx
 """
-INSERT_BLRHEAL_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_plan_healerunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, healer_name)
+INSERT_BLRHEAL_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_plan_healerunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, healer_name)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, healer_name_inx
-FROM belief_plan_healerunit_v_put_raw
+FROM belief_plan_healerunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, healer_name_inx
 """
-INSERT_BLRHEAL_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_plan_healerunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, healer_name_ERASE)
+INSERT_BLRHEAL_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_plan_healerunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, healer_name_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, healer_name_ERASE_inx
-FROM belief_plan_healerunit_v_del_raw
+FROM belief_plan_healerunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, healer_name_ERASE_inx
 """
-INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_plan_reason_caseunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor)
+INSERT_BLRPREM_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_plan_reason_caseunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_inx, reason_state_inx, reason_upper, reason_lower, reason_divisor
-FROM belief_plan_reason_caseunit_v_put_raw
+FROM belief_plan_reason_caseunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_inx, reason_state_inx, reason_upper, reason_lower, reason_divisor
 """
-INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_plan_reason_caseunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state_ERASE)
+INSERT_BLRPREM_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_plan_reason_caseunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_inx, reason_state_ERASE_inx
-FROM belief_plan_reason_caseunit_v_del_raw
+FROM belief_plan_reason_caseunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_inx, reason_state_ERASE_inx
 """
-INSERT_BLRREAS_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_plan_reasonunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite)
+INSERT_BLRREAS_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_plan_reasonunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_inx, reason_active_requisite
-FROM belief_plan_reasonunit_v_put_raw
+FROM belief_plan_reasonunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_inx, reason_active_requisite
 """
-INSERT_BLRREAS_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_plan_reasonunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context_ERASE)
+INSERT_BLRREAS_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_plan_reasonunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, reason_context_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_ERASE_inx
-FROM belief_plan_reasonunit_v_del_raw
+FROM belief_plan_reasonunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, reason_context_ERASE_inx
 """
-INSERT_BLRLABO_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_plan_partyunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, party_title, solo)
+INSERT_BLRLABO_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_plan_partyunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, party_title, solo)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, party_title_inx, solo
-FROM belief_plan_partyunit_v_put_raw
+FROM belief_plan_partyunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, party_title_inx, solo
 """
-INSERT_BLRLABO_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_plan_partyunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, party_title_ERASE)
+INSERT_BLRLABO_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_plan_partyunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope, party_title_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, party_title_ERASE_inx
-FROM belief_plan_partyunit_v_del_raw
+FROM belief_plan_partyunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, party_title_ERASE_inx
 """
-INSERT_BLRPLAN_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO belief_planunit_v_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool)
+INSERT_BLRPLAN_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO belief_planunit_h_put_agg (event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool
-FROM belief_planunit_v_put_raw
+FROM belief_planunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_inx, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool
 """
-INSERT_BLRPLAN_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO belief_planunit_v_del_agg (event_int, face_name, moment_label, belief_name, plan_rope_ERASE)
+INSERT_BLRPLAN_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO belief_planunit_h_del_agg (event_int, face_name, moment_label, belief_name, plan_rope_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_ERASE_inx
-FROM belief_planunit_v_del_raw
+FROM belief_planunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, plan_rope_ERASE_inx
 """
-INSERT_BLRUNIT_VOICE_AGG_PUT_SQLSTR = """
-INSERT INTO beliefunit_v_put_agg (event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit)
+INSERT_BLRUNIT_HEARD_AGG_PUT_SQLSTR = """
+INSERT INTO beliefunit_h_put_agg (event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
-FROM beliefunit_v_put_raw
+FROM beliefunit_h_put_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_inx, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 """
-INSERT_BLRUNIT_VOICE_AGG_DEL_SQLSTR = """
-INSERT INTO beliefunit_v_del_agg (event_int, face_name, moment_label, belief_name_ERASE)
+INSERT_BLRUNIT_HEARD_AGG_DEL_SQLSTR = """
+INSERT INTO beliefunit_h_del_agg (event_int, face_name, moment_label, belief_name_ERASE)
 SELECT event_int, face_name_inx, moment_label_inx, belief_name_ERASE_inx
-FROM beliefunit_v_del_raw
+FROM beliefunit_h_del_raw
 GROUP BY event_int, face_name_inx, moment_label_inx, belief_name_ERASE_inx
 """
 
 
-def get_insert_voice_agg_sqlstrs() -> dict[str, str]:
+def get_insert_heard_agg_sqlstrs() -> dict[str, str]:
     return {
-        "moment_paybook": BLFPAYY_VOICE_AGG_INSERT_SQLSTR,
-        "moment_budunit": BLFBUDD_VOICE_AGG_INSERT_SQLSTR,
-        "moment_timeline_hour": BLFHOUR_VOICE_AGG_INSERT_SQLSTR,
-        "moment_timeline_month": BLFMONT_VOICE_AGG_INSERT_SQLSTR,
-        "moment_timeline_weekday": BLFWEEK_VOICE_AGG_INSERT_SQLSTR,
-        "moment_timeoffi": BLFOFFI_VOICE_AGG_INSERT_SQLSTR,
-        "momentunit": BLFUNIT_VOICE_AGG_INSERT_SQLSTR,
-        "belief_partner_membership_v_put_agg": INSERT_BLRMEMB_VOICE_AGG_PUT_SQLSTR,
-        "belief_partner_membership_v_del_agg": INSERT_BLRMEMB_VOICE_AGG_DEL_SQLSTR,
-        "belief_partnerunit_v_put_agg": INSERT_BLRPERN_VOICE_AGG_PUT_SQLSTR,
-        "belief_partnerunit_v_del_agg": INSERT_BLRPERN_VOICE_AGG_DEL_SQLSTR,
-        "belief_plan_awardunit_v_put_agg": INSERT_BLRAWAR_VOICE_AGG_PUT_SQLSTR,
-        "belief_plan_awardunit_v_del_agg": INSERT_BLRAWAR_VOICE_AGG_DEL_SQLSTR,
-        "belief_plan_factunit_v_put_agg": INSERT_BLRFACT_VOICE_AGG_PUT_SQLSTR,
-        "belief_plan_factunit_v_del_agg": INSERT_BLRFACT_VOICE_AGG_DEL_SQLSTR,
-        "belief_plan_healerunit_v_put_agg": INSERT_BLRHEAL_VOICE_AGG_PUT_SQLSTR,
-        "belief_plan_healerunit_v_del_agg": INSERT_BLRHEAL_VOICE_AGG_DEL_SQLSTR,
-        "belief_plan_reason_caseunit_v_put_agg": INSERT_BLRPREM_VOICE_AGG_PUT_SQLSTR,
-        "belief_plan_reason_caseunit_v_del_agg": INSERT_BLRPREM_VOICE_AGG_DEL_SQLSTR,
-        "belief_plan_reasonunit_v_put_agg": INSERT_BLRREAS_VOICE_AGG_PUT_SQLSTR,
-        "belief_plan_reasonunit_v_del_agg": INSERT_BLRREAS_VOICE_AGG_DEL_SQLSTR,
-        "belief_plan_partyunit_v_put_agg": INSERT_BLRLABO_VOICE_AGG_PUT_SQLSTR,
-        "belief_plan_partyunit_v_del_agg": INSERT_BLRLABO_VOICE_AGG_DEL_SQLSTR,
-        "belief_planunit_v_put_agg": INSERT_BLRPLAN_VOICE_AGG_PUT_SQLSTR,
-        "belief_planunit_v_del_agg": INSERT_BLRPLAN_VOICE_AGG_DEL_SQLSTR,
-        "beliefunit_v_put_agg": INSERT_BLRUNIT_VOICE_AGG_PUT_SQLSTR,
-        "beliefunit_v_del_agg": INSERT_BLRUNIT_VOICE_AGG_DEL_SQLSTR,
+        "moment_paybook": BLFPAYY_HEARD_AGG_INSERT_SQLSTR,
+        "moment_budunit": BLFBUDD_HEARD_AGG_INSERT_SQLSTR,
+        "moment_timeline_hour": BLFHOUR_HEARD_AGG_INSERT_SQLSTR,
+        "moment_timeline_month": BLFMONT_HEARD_AGG_INSERT_SQLSTR,
+        "moment_timeline_weekday": BLFWEEK_HEARD_AGG_INSERT_SQLSTR,
+        "moment_timeoffi": BLFOFFI_HEARD_AGG_INSERT_SQLSTR,
+        "momentunit": BLFUNIT_HEARD_AGG_INSERT_SQLSTR,
+        "belief_partner_membership_h_put_agg": INSERT_BLRMEMB_HEARD_AGG_PUT_SQLSTR,
+        "belief_partner_membership_h_del_agg": INSERT_BLRMEMB_HEARD_AGG_DEL_SQLSTR,
+        "belief_partnerunit_h_put_agg": INSERT_BLRPERN_HEARD_AGG_PUT_SQLSTR,
+        "belief_partnerunit_h_del_agg": INSERT_BLRPERN_HEARD_AGG_DEL_SQLSTR,
+        "belief_plan_awardunit_h_put_agg": INSERT_BLRAWAR_HEARD_AGG_PUT_SQLSTR,
+        "belief_plan_awardunit_h_del_agg": INSERT_BLRAWAR_HEARD_AGG_DEL_SQLSTR,
+        "belief_plan_factunit_h_put_agg": INSERT_BLRFACT_HEARD_AGG_PUT_SQLSTR,
+        "belief_plan_factunit_h_del_agg": INSERT_BLRFACT_HEARD_AGG_DEL_SQLSTR,
+        "belief_plan_healerunit_h_put_agg": INSERT_BLRHEAL_HEARD_AGG_PUT_SQLSTR,
+        "belief_plan_healerunit_h_del_agg": INSERT_BLRHEAL_HEARD_AGG_DEL_SQLSTR,
+        "belief_plan_reason_caseunit_h_put_agg": INSERT_BLRPREM_HEARD_AGG_PUT_SQLSTR,
+        "belief_plan_reason_caseunit_h_del_agg": INSERT_BLRPREM_HEARD_AGG_DEL_SQLSTR,
+        "belief_plan_reasonunit_h_put_agg": INSERT_BLRREAS_HEARD_AGG_PUT_SQLSTR,
+        "belief_plan_reasonunit_h_del_agg": INSERT_BLRREAS_HEARD_AGG_DEL_SQLSTR,
+        "belief_plan_partyunit_h_put_agg": INSERT_BLRLABO_HEARD_AGG_PUT_SQLSTR,
+        "belief_plan_partyunit_h_del_agg": INSERT_BLRLABO_HEARD_AGG_DEL_SQLSTR,
+        "belief_planunit_h_put_agg": INSERT_BLRPLAN_HEARD_AGG_PUT_SQLSTR,
+        "belief_planunit_h_del_agg": INSERT_BLRPLAN_HEARD_AGG_DEL_SQLSTR,
+        "beliefunit_h_put_agg": INSERT_BLRUNIT_HEARD_AGG_PUT_SQLSTR,
+        "beliefunit_h_del_agg": INSERT_BLRUNIT_HEARD_AGG_DEL_SQLSTR,
     }
 
 
-BLFPAYY_FU2_SELECT_SQLSTR = "SELECT moment_label, belief_name, partner_name, tran_time, amount FROM moment_paybook_v_agg WHERE moment_label = "
-BLFBUDD_FU2_SELECT_SQLSTR = "SELECT moment_label, belief_name, bud_time, quota, celldepth FROM moment_budunit_v_agg WHERE moment_label = "
-BLFHOUR_FU2_SELECT_SQLSTR = "SELECT moment_label, cumulative_minute, hour_label FROM moment_timeline_hour_v_agg WHERE moment_label = "
-BLFMONT_FU2_SELECT_SQLSTR = "SELECT moment_label, cumulative_day, month_label FROM moment_timeline_month_v_agg WHERE moment_label = "
-BLFWEEK_FU2_SELECT_SQLSTR = "SELECT moment_label, weekday_order, weekday_label FROM moment_timeline_weekday_v_agg WHERE moment_label = "
+BLFPAYY_FU2_SELECT_SQLSTR = "SELECT moment_label, belief_name, partner_name, tran_time, amount FROM moment_paybook_h_agg WHERE moment_label = "
+BLFBUDD_FU2_SELECT_SQLSTR = "SELECT moment_label, belief_name, bud_time, quota, celldepth FROM moment_budunit_h_agg WHERE moment_label = "
+BLFHOUR_FU2_SELECT_SQLSTR = "SELECT moment_label, cumulative_minute, hour_label FROM moment_timeline_hour_h_agg WHERE moment_label = "
+BLFMONT_FU2_SELECT_SQLSTR = "SELECT moment_label, cumulative_day, month_label FROM moment_timeline_month_h_agg WHERE moment_label = "
+BLFWEEK_FU2_SELECT_SQLSTR = "SELECT moment_label, weekday_order, weekday_label FROM moment_timeline_weekday_h_agg WHERE moment_label = "
 BLFOFFI_FU2_SELECT_SQLSTR = (
-    "SELECT moment_label, offi_time FROM moment_timeoffi_v_agg WHERE moment_label = "
+    "SELECT moment_label, offi_time FROM moment_timeoffi_h_agg WHERE moment_label = "
 )
-BLFUNIT_FU2_SELECT_SQLSTR = "SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_v_agg WHERE moment_label = "
+BLFUNIT_FU2_SELECT_SQLSTR = "SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = "
 
 
-def get_moment_voice_select1_sqlstrs(moment_label: str) -> dict[str, str]:
+def get_moment_heard_select1_sqlstrs(moment_label: str) -> dict[str, str]:
     return {
         "momentunit": f"{BLFUNIT_FU2_SELECT_SQLSTR}'{moment_label}'",
         "moment_budunit": f"{BLFBUDD_FU2_SELECT_SQLSTR}'{moment_label}'",
@@ -1282,7 +1282,7 @@ CREATE TABLE IF NOT EXISTS moment_ote1_agg (
 )
 ;
 """
-INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR = """
+INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR = """
 INSERT INTO moment_ote1_agg (moment_label, belief_name, event_int, bud_time)
 SELECT moment_label, belief_name, event_int, bud_time
 FROM (
@@ -1291,7 +1291,7 @@ FROM (
     , belief_name_inx belief_name
     , event_int
     , bud_time
-    FROM moment_budunit_v_raw
+    FROM moment_budunit_h_raw
     GROUP BY moment_label_inx, belief_name_inx, event_int, bud_time
 )
 ORDER BY moment_label, belief_name, event_int, bud_time

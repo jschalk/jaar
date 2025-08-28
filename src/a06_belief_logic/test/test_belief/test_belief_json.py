@@ -57,7 +57,6 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict["last_pack_id"] == yao_belief.last_pack_id
     assert len(belief_dict[partners_str()]) == len(yao_belief.partners)
     assert len(belief_dict[partners_str()]) != 12
-    assert belief_dict.get("_groups") is None
 
     x_planroot = yao_belief.planroot
     planroot_dict = belief_dict[planroot_str()]
@@ -369,7 +368,6 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     assert json_belief.debtor_respect == zia_debtor_respect
     assert json_belief.last_pack_id == zia_belief.last_pack_id
     assert json_belief.last_pack_id == zia_last_pack_id
-    # assert json_belief._groups == zia_belief._groups
 
     json_planroot = json_belief.planroot
     assert json_planroot.parent_rope == ""

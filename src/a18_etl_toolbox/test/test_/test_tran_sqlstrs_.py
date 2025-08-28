@@ -66,11 +66,11 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_PARTNER_NETS_SQLSTR,
     IDEA_STAGEBLE_DEL_DIMENS,
     INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR,
-    INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR,
+    INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
     UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR,
     create_all_idea_tables,
     create_prime_tablename,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
     get_idea_stageble_put_dimens,
 )
 
@@ -136,7 +136,7 @@ def test_create_prime_tablename_ReturnsObj():
     pidlabe_s_agg_table = create_prime_tablename("pidlabe", "s", agg_str)
     pidrope_s_agg_table = create_prime_tablename("pidrope", "s", agg_str)
     pidtitl_s_agg_table = create_prime_tablename("pidtitl", "s", agg_str)
-    pidtitl_v_agg_table = create_prime_tablename("pidtitl", "v", agg_str)
+    pidtitl_h_agg_table = create_prime_tablename("pidtitl", "h", agg_str)
     pidtitl_s_raw_table = create_prime_tablename("pidtitl", "s", raw_str)
     pidtitl_s_val_table = create_prime_tablename("pidtitl", "s", vld_str)
     pidcore_s_raw_table = create_prime_tablename("pidcore", "s", raw_str)
@@ -168,7 +168,7 @@ def test_create_prime_tablename_ReturnsObj():
     assert pidlabe_s_agg_table == f"{pidlabe_dimen}_s_agg"
     assert pidrope_s_agg_table == f"{pidrope_dimen}_s_agg"
     assert pidtitl_s_agg_table == f"{pidtitl_dimen}_s_agg"
-    assert pidtitl_v_agg_table == f"{pidtitl_dimen}_v_agg"
+    assert pidtitl_h_agg_table == f"{pidtitl_dimen}_h_agg"
     assert pidtitl_s_raw_table == f"{pidtitl_dimen}_s_raw"
     assert pidtitl_s_val_table == f"{pidtitl_dimen}_s_vld"
     assert pidcore_s_raw_table == f"{pidcore_dimen}_s_raw"
@@ -209,7 +209,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_all_idea_tables(cursor)
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
 
         idea_raw2dimen_count = 0
         idea_dimen_combo_checked_count = 0
@@ -272,7 +272,7 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_all_idea_tables(cursor)
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
 
         idea_raw2dimen_count = 0
         idea_dimen_combo_checked_count = 0
@@ -402,9 +402,9 @@ CREATE TABLE IF NOT EXISTS {moment_ote1_agg_str()} (
 
 # TODO create test to prove this insert should grab minimun event_int instead of just event_int
 # TODO create test to prove this insert should never grab when error message is not null in source table
-def test_INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR_Exists():
+def test_INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR_Exists():
     # ESTABLISH
-    momentbud_v_raw_tablename = create_prime_tablename(moment_budunit_str(), "v", "raw")
+    momentbud_h_raw_tablename = create_prime_tablename(moment_budunit_str(), "h", "raw")
     expected_INSERT_sqlstr = f"""
 INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()})
 SELECT {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
@@ -414,14 +414,14 @@ FROM (
     , {belief_name_str()}_inx {belief_name_str()}
     , {event_int_str()}
     , {bud_time_str()}
-    FROM {momentbud_v_raw_tablename}
+    FROM {momentbud_h_raw_tablename}
     GROUP BY {moment_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {bud_time_str()}
 )
 ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
 ;
 """
     # WHEN / THEN
-    assert INSERT_MOMENT_OTE1_AGG_FROM_VOICE_SQLSTR == expected_INSERT_sqlstr
+    assert INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR == expected_INSERT_sqlstr
 
 
 def test_CREATE_MOMENT_PARTNER_NETS_SQLSTR_Exists():

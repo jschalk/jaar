@@ -9,14 +9,14 @@ from src.a16_pidgin_logic.test._util.a16_str import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
-    create_sound_and_voice_tables,
-    create_update_voice_raw_empty_inx_col_sqlstr,
-    create_update_voice_raw_existing_inx_col_sqlstr,
+    create_sound_and_heard_tables,
+    create_update_heard_raw_empty_inx_col_sqlstr,
+    create_update_heard_raw_existing_inx_col_sqlstr,
 )
-from src.a18_etl_toolbox.transformers import set_all_voice_raw_inx_columns
+from src.a18_etl_toolbox.transformers import set_all_heard_raw_inx_columns
 
 
-def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_FullPidginTables():
+def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_FullPidginTables():
     # ESTABLISH
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -30,11 +30,11 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrawar_dimen = belief_plan_awardunit_str()
-        blrawar_v_raw_put_tablename = prime_tbl(blrawar_dimen, "v", "raw", "put")
-        # print(f"{get_table_columns(cursor, blrawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_v_raw_put_tablename} 
+        blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
+        # print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} 
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event1}, '{sue_otx}', NULL)
@@ -57,19 +57,19 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            "name", blrawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
+            "name", blrawar_h_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 3
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -81,7 +81,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         ]
 
 
-def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_PartialPidginTables():
+def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_PartialPidginTables():
     # ESTABLISH
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -95,10 +95,10 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrawar_dimen = belief_plan_awardunit_str()
-        blrawar_v_raw_put_tablename = prime_tbl(blrawar_dimen, "v", "raw", "put")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_v_raw_put_tablename}
+        blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event1}, '{sue_otx}', NULL)
@@ -119,18 +119,18 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            "name", blrawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
+            "name", blrawar_h_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -142,7 +142,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         ]
 
 
-def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_Different_event_int_PidginMappings():
+def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_Different_event_int_PidginMappings():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -162,11 +162,11 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrawar_dimen = belief_plan_awardunit_str()
-        blrawar_v_raw_put_tablename = prime_tbl(blrawar_dimen, "v", "raw", "put")
-        print(f"{get_table_columns(cursor, blrawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_v_raw_put_tablename}
+        blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
+        print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', NULL)
@@ -194,18 +194,18 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        update_sqlstr = create_update_voice_raw_existing_inx_col_sqlstr(
-            "name", blrawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
+            "name", blrawar_h_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -220,7 +220,7 @@ def test_create_update_voice_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         ]
 
 
-def test_create_update_voice_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_EmptyPidginTables():
+def test_create_update_heard_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_EmptyPidginTables():
     # ESTABLISH
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -234,15 +234,15 @@ def test_create_update_voice_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidname_s_vld_tablename = prime_tbl(pidgin_name_str(), "s", "vld")
         print(f"{pidname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, pidname_s_vld_tablename)=}")
 
         blrawar_dimen = belief_plan_awardunit_str()
-        blrawar_v_raw_put_tablename = prime_tbl(blrawar_dimen, "v", "raw", "put")
-        print(f"{get_table_columns(cursor, blrawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_v_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
+        blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
+        print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
 VALUES
   ({event1}, '{sue_otx}', '{sue_inx}')
 , ({event2}, '{yao_otx}', NULL)
@@ -251,19 +251,19 @@ VALUES
 ;
 """
         cursor.execute(insert_face_name_only_sqlstr)
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 2
 
         # WHEN
-        update_sqlstr = create_update_voice_raw_empty_inx_col_sqlstr(
-            blrawar_v_raw_put_tablename, face_name_str()
+        update_sqlstr = create_update_heard_raw_empty_inx_col_sqlstr(
+            blrawar_h_raw_put_tablename, face_name_str()
         )
         print(update_sqlstr)
         cursor.execute(update_sqlstr)
 
         # THEN
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 4
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -275,7 +275,7 @@ VALUES
         ]
 
 
-def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
+def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
     # ESTABLISH
     sue_otx = "Sue"
     sue_inx = "Suzy"
@@ -295,11 +295,11 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrawar_dimen = belief_plan_awardunit_str()
-        blrawar_v_raw_put_tablename = prime_tbl(blrawar_dimen, "v", "raw", "put")
-        print(f"{get_table_columns(cursor, blrawar_v_raw_put_tablename)=}")
-        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_v_raw_put_tablename}
+        blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
+        print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
+        insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
         ({event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx)
         VALUES
           ({event0}, '{bob_otx}', NULL)
@@ -327,14 +327,14 @@ def test_set_all_voice_raw_inx_columns_Scenario0_empty_tables():
         """
         cursor.execute(insert_pidname_sqlstr)
 
-        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_v_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
+        face_name_inx_count_sql = f"SELECT COUNT(*) FROM {blrawar_h_raw_put_tablename} WHERE {face_name_str()}_inx IS NOT NULL"
         assert cursor.execute(face_name_inx_count_sql).fetchone()[0] == 0
 
         # WHEN
-        set_all_voice_raw_inx_columns(cursor)
+        set_all_heard_raw_inx_columns(cursor)
 
         # THEN
-        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_v_raw_put_tablename}"""
+        select_face_name_only_sqlstr = f"""SELECT {event_int_str()}, {face_name_str()}_otx, {face_name_str()}_inx FROM {blrawar_h_raw_put_tablename}"""
         cursor.execute(select_face_name_only_sqlstr)
         rows = cursor.fetchall()
         print(rows)

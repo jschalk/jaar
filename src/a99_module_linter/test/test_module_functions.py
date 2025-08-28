@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
-from pathlib import Path as pathlib_Path
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
-from src.a99_module_linter.module_eval import (
+from src.a98_docs_builder.module_eval import get_module_descs, get_module_str_functions
+from src.a99_module_linter.linter import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
     check_if_test_HasDocString_pytests_exist,
@@ -10,8 +10,6 @@ from src.a99_module_linter.module_eval import (
     get_docstring,
     get_duplicated_functions,
     get_json_files,
-    get_module_descs,
-    get_module_str_functions,
     get_python_files_with_flag,
     get_top_level_functions,
 )
@@ -50,35 +48,6 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
-
-
-def test_Modules_CheckMarkdownHasAllStrFunctions():
-    # sourcery skip: no-loop-in-tests
-    # ESTALBLISH Gather lines here
-    doc_main_dir = pathlib_Path("docs")
-    doc_main_dir.mkdir(parents=True, exist_ok=True)
-
-    # WHEN
-    func_lines = ["## Str Functions by Module"]
-    for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
-        module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
-        x_list = [str_func[:-4] for str_func in module_str_funcs]
-        _line = f"- {module_desc}: " + ", ".join(x_list)
-        func_lines.append(_line)
-
-    dst_path = pathlib_Path(f"{doc_main_dir}/str_funcs.md")
-    str_func_markdown = "# String Functions by Module\n\n" + "\n".join(func_lines)
-
-    dst_path.parent.mkdir(parents=True, exist_ok=True)
-    dst_path.write_text(str_func_markdown)
-
-    # THEN
-    assert dst_path.exists(), f"Failed to write manifest to {dst_path}"
-    # print(str_func_markdown)
-    # assert dst_path.exists(), f"{dst_path} does not exist"
-    # print(open(dst_path).read())
-    assert open(dst_path).read() == str_func_markdown
 
 
 def test_Modules_MostFunctionsAreUniquelyNamed():

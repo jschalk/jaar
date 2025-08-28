@@ -40,7 +40,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_insert_into_pidgin_core_raw_sqlstr,
     create_insert_pidgin_sound_vld_table_sqlstr,
     create_prime_tablename,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
     create_update_pidgin_sound_agg_inconsist_sqlstr,
     create_update_pidlabe_sound_agg_knot_error_sqlstr,
     create_update_pidname_sound_agg_knot_error_sqlstr,
@@ -178,7 +178,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
 
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
         assert get_row_count(cursor, pidgin_rope_s_agg_tablename) == 3
         assert get_row_count(cursor, pidgin_name_s_agg_tablename) == 2
@@ -239,7 +239,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
 
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         select_error_count_sqlstr = f"SELECT COUNT(*) FROM {pidgin_core_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL;"
         assert cursor.execute(select_error_count_sqlstr).fetchone()[0] == 0
 
@@ -300,7 +300,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
 
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidgin_core_s_agg_tablename = create_prime_tablename(pidcore_dimen, "s", "agg")
         assert get_row_count(cursor, pidgin_core_s_agg_tablename) == 0
 
@@ -470,7 +470,7 @@ def test_update_pidgin_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_dimen = pidgin_rope_str()
         pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
@@ -997,7 +997,7 @@ def test_create_insert_pidgin_sound_vld_table_sqlstr_ReturnsObj_PopulatesTable_S
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_dimen = pidgin_rope_str()
         pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
@@ -1063,7 +1063,7 @@ def test_insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table_PopulatesTable
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_dimen = pidgin_rope_str()
         pidgin_rope_s_agg_tablename = create_prime_tablename(pidrope_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {pidgin_rope_s_agg_tablename} (
@@ -1126,7 +1126,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario0_Popula
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidname_dimen = pidgin_name_str()
         pidgin_name_s_agg_tablename = create_prime_tablename(pidname_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {pidgin_name_s_agg_tablename} (
@@ -1198,7 +1198,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario1_Update
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidlabe_s_agg_tablename = create_prime_tablename(pidgin_label_str(), "s", "agg")
         pidrope_s_agg_tablename = create_prime_tablename(pidgin_rope_str(), "s", "agg")
         pidname_s_agg_tablename = create_prime_tablename(pidgin_name_str(), "s", "agg")
@@ -1253,7 +1253,7 @@ def test_populate_pidgin_core_vld_with_missing_face_names_Scenario0_Populates1Mi
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_str = belief_partnerunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
@@ -1288,7 +1288,7 @@ def test_populate_pidgin_core_vld_with_missing_face_names_Scenario1_PopulatesSom
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_str = belief_partnerunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
@@ -1331,7 +1331,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario2_Popula
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_str = belief_partnerunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
@@ -1366,7 +1366,7 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario3_Popula
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_str = belief_partnerunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""

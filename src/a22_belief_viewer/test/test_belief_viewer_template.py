@@ -124,7 +124,7 @@ def test_get_belief_viewer_template_ReturnsObj():
         task_str(),
         partner_cred_points_str(),
         partner_debt_points_str(),
-        f"partner{_memberships_str()}",
+        # f"partner{_memberships_str()}",
         f"partner{_credor_pool_str()}",
         f"partner{_debtor_pool_str()}",
         f"partner{_irrational_partner_debt_points_str()}",

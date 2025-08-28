@@ -27,20 +27,20 @@ from src.a18_etl_toolbox.test._util.a18_str import moment_event_time_agg_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     get_dimen_abbv7,
-    get_moment_voice_select1_sqlstrs,
+    get_moment_heard_select1_sqlstrs,
 )
 from src.a18_etl_toolbox.transformers import (
-    create_sound_and_voice_tables,
-    etl_voice_agg_tables_to_moment_jsons,
+    create_sound_and_heard_tables,
+    etl_heard_agg_tables_to_moment_jsons,
 )
 
 
-def test_get_moment_voice_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
+def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
     # ESTABLISH
     a23_str = "amy23"
 
     # WHEN
-    fu2_select_sqlstrs = get_moment_voice_select1_sqlstrs(a23_str)
+    fu2_select_sqlstrs = get_moment_heard_select1_sqlstrs(a23_str)
 
     # THEN
     assert fu2_select_sqlstrs
@@ -48,13 +48,13 @@ def test_get_moment_voice_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():
     assert set(fu2_select_sqlstrs.keys()) == expected_fu2_select_dimens
 
 
-def test_get_moment_voice_select1_sqlstrs_ReturnsObj():
+def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
     # sourcery skip: no-loop-in-tests
     # ESTABLISH
     a23_str = "amy23"
 
     # WHEN
-    fu2_select_sqlstrs = get_moment_voice_select1_sqlstrs(moment_label=a23_str)
+    fu2_select_sqlstrs = get_moment_heard_select1_sqlstrs(moment_label=a23_str)
 
     # THEN
     gen_blfpayy_sqlstr = fu2_select_sqlstrs.get(moment_paybook_str())
@@ -66,7 +66,7 @@ def test_get_moment_voice_select1_sqlstrs_ReturnsObj():
     gen_momentunit_sqlstr = fu2_select_sqlstrs.get(momentunit_str())
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blfpayy_abbv7 = get_dimen_abbv7(moment_paybook_str())
         momentbud_abbv7 = get_dimen_abbv7(moment_budunit_str())
         blfhour_abbv7 = get_dimen_abbv7(moment_timeline_hour_str())
@@ -74,24 +74,24 @@ def test_get_moment_voice_select1_sqlstrs_ReturnsObj():
         blfweek_abbv7 = get_dimen_abbv7(moment_timeline_weekday_str())
         blfoffi_abbv7 = get_dimen_abbv7(moment_timeoffi_str())
         momentunit_abbv7 = get_dimen_abbv7(momentunit_str())
-        blfpayy_v_agg = create_prime_tablename(blfpayy_abbv7, "v", "agg")
-        momentbud_v_agg = create_prime_tablename(momentbud_abbv7, "v", "agg")
-        blfhour_v_agg = create_prime_tablename(blfhour_abbv7, "v", "agg")
-        blfmont_v_agg = create_prime_tablename(blfmont_abbv7, "v", "agg")
-        blfweek_v_agg = create_prime_tablename(blfweek_abbv7, "v", "agg")
-        blfoffi_v_agg = create_prime_tablename(blfoffi_abbv7, "v", "agg")
-        momentunit_v_agg = create_prime_tablename(momentunit_abbv7, "v", "agg")
+        blfpayy_h_agg = create_prime_tablename(blfpayy_abbv7, "h", "agg")
+        momentbud_h_agg = create_prime_tablename(momentbud_abbv7, "h", "agg")
+        blfhour_h_agg = create_prime_tablename(blfhour_abbv7, "h", "agg")
+        blfmont_h_agg = create_prime_tablename(blfmont_abbv7, "h", "agg")
+        blfweek_h_agg = create_prime_tablename(blfweek_abbv7, "h", "agg")
+        blfoffi_h_agg = create_prime_tablename(blfoffi_abbv7, "h", "agg")
+        momentunit_h_agg = create_prime_tablename(momentunit_abbv7, "h", "agg")
         where_dict = {moment_label_str(): a23_str}
-        blfpayy_sql = create_select_query(cursor, blfpayy_v_agg, [], where_dict, True)
+        blfpayy_sql = create_select_query(cursor, blfpayy_h_agg, [], where_dict, True)
         momentbud_sql = create_select_query(
-            cursor, momentbud_v_agg, [], where_dict, True
+            cursor, momentbud_h_agg, [], where_dict, True
         )
-        blfhour_sql = create_select_query(cursor, blfhour_v_agg, [], where_dict, True)
-        blfmont_sql = create_select_query(cursor, blfmont_v_agg, [], where_dict, True)
-        blfweek_sql = create_select_query(cursor, blfweek_v_agg, [], where_dict, True)
-        blfoffi_sql = create_select_query(cursor, blfoffi_v_agg, [], where_dict, True)
+        blfhour_sql = create_select_query(cursor, blfhour_h_agg, [], where_dict, True)
+        blfmont_sql = create_select_query(cursor, blfmont_h_agg, [], where_dict, True)
+        blfweek_sql = create_select_query(cursor, blfweek_h_agg, [], where_dict, True)
+        blfoffi_sql = create_select_query(cursor, blfoffi_h_agg, [], where_dict, True)
         momentunit_sql = create_select_query(
-            cursor, momentunit_v_agg, [], where_dict, True
+            cursor, momentunit_h_agg, [], where_dict, True
         )
         blfpayy_sqlstr_ref = f"{blfpayy_abbv7.upper()}_FU2_SELECT_SQLSTR"
         momentbud_sqlstr_ref = f"{momentbud_abbv7.upper()}_FU2_SELECT_SQLSTR"
@@ -120,31 +120,31 @@ def test_get_moment_voice_select1_sqlstrs_ReturnsObj():
         assert gen_blfweek_sqlstr == blfweek_sql
         assert gen_blfoffi_sqlstr == blfoffi_sql
         assert gen_momentunit_sqlstr == momentunit_sql
-        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_v_agg WHERE moment_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
         assert gen_momentunit_sqlstr == static_example_sqlstr
 
 
-def test_etl_voice_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomentLabel(
+def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomentLabel(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     amy23_str = "amy23"
     amy45_str = "amy45"
     moment_mstr_dir = get_module_temp_dir()
-    momentunit_v_agg_tablename = create_prime_tablename(momentunit_str(), "v", "agg")
-    print(f"{momentunit_v_agg_tablename=}")
+    momentunit_h_agg_tablename = create_prime_tablename(momentunit_str(), "h", "agg")
+    print(f"{momentunit_h_agg_tablename=}")
 
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
 
         insert_raw_sqlstr = f"""
-INSERT INTO {momentunit_v_agg_tablename} ({moment_label_str()})
+INSERT INTO {momentunit_h_agg_tablename} ({moment_label_str()})
 VALUES ('{amy23_str}'), ('{amy45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
-        assert get_row_count(cursor, momentunit_v_agg_tablename) == 2
+        assert get_row_count(cursor, momentunit_h_agg_tablename) == 2
         assert db_table_exists(cursor, moment_event_time_agg_str()) is False
 
         amy23_json_path = create_moment_json_path(moment_mstr_dir, amy23_str)
@@ -155,7 +155,7 @@ VALUES ('{amy23_str}'), ('{amy45_str}')
         assert os_path_exists(amy45_json_path) is False
 
         # WHEN
-        etl_voice_agg_tables_to_moment_jsons(cursor, moment_mstr_dir)
+        etl_heard_agg_tables_to_moment_jsons(cursor, moment_mstr_dir)
 
     # THEN
     assert os_path_exists(amy23_json_path)
