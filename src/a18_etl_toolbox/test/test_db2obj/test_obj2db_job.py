@@ -579,7 +579,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_voice_cred_points = 2
     x_voice_debt_points = 3
     x_credor_pool = 4
-    x__debtor_pool = 5
+    x_debtor_pool = 5
     x__fund_give = 6
     x__fund_take = 7
     x__fund_agenda_give = 8
@@ -595,7 +595,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
         "voice_cred_points": x_voice_cred_points,
         "voice_debt_points": x_voice_debt_points,
         "credor_pool": x_credor_pool,
-        "_debtor_pool": x__debtor_pool,
+        "debtor_pool": x_debtor_pool,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,
         "_fund_agenda_give": x__fund_agenda_give,
@@ -657,7 +657,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     x_group_cred_points = 3
     x_group_debt_points = 4
     x_credor_pool = 5
-    x__debtor_pool = 6
+    x_debtor_pool = 6
     x__fund_give = 7
     x__fund_take = 8
     x__fund_agenda_give = 9
@@ -672,7 +672,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
         "group_cred_points": x_group_cred_points,
         "group_debt_points": x_group_debt_points,
         "credor_pool": x_credor_pool,
-        "_debtor_pool": x__debtor_pool,
+        "debtor_pool": x_debtor_pool,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,
         "_fund_agenda_give": x__fund_agenda_give,
@@ -729,7 +729,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_belief_name = "Sue"
     x_group_title = 1
     x_credor_pool = 2
-    x__debtor_pool = 3
+    x_debtor_pool = 3
     x_fund_iota = 4
     x__fund_give = 5
     x__fund_take = 6
@@ -741,7 +741,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
         "belief_name": x_belief_name,
         "group_title": x_group_title,
         "credor_pool": x_credor_pool,
-        "_debtor_pool": x__debtor_pool,
+        "debtor_pool": x_debtor_pool,
         "fund_iota": x_fund_iota,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,

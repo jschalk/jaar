@@ -2,10 +2,6 @@ from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 
 
-def _debtor_pool_str() -> str:
-    return "_debtor_pool"
-
-
 def _fund_agenda_give_str() -> str:
     return "_fund_agenda_give"
 
@@ -68,6 +64,10 @@ def belief_name_str() -> str:
 
 def credor_pool_str() -> str:
     return "credor_pool"
+
+
+def debtor_pool_str() -> str:
+    return "debtor_pool"
 
 
 def fund_give_str() -> str:

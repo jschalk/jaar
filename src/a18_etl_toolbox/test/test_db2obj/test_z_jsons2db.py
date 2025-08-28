@@ -417,7 +417,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     x_group_cred_points = 5.0
     x_group_debt_points = 6.0
     x_credor_pool = 7.0
-    x__debtor_pool = 8.0
+    x_debtor_pool = 8.0
     x__fund_give = 9.0
     x__fund_take = 10.0
     x__fund_agenda_give = 11.0
@@ -429,7 +429,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
     x_membership.group_cred_points = x_group_cred_points
     x_membership.group_debt_points = x_group_debt_points
     x_membership.credor_pool = x_credor_pool
-    x_membership._debtor_pool = x__debtor_pool
+    x_membership.debtor_pool = x_debtor_pool
     x_membership._fund_give = x__fund_give
     x_membership._fund_take = x__fund_take
     x_membership._fund_agenda_give = x__fund_agenda_give
@@ -460,7 +460,7 @@ def test_insert_job_blrmemb_CreatesTableRowsFor_blrmemb_job():
             x_group_cred_points,
             x_group_debt_points,
             x_credor_pool,
-            x__debtor_pool,
+            x_debtor_pool,
             x__fund_give,
             x__fund_take,
             x__fund_agenda_give,
@@ -493,7 +493,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice_cred_points = 4
     x_voice_debt_points = 5
     x_credor_pool = 6
-    x__debtor_pool = 7
+    x_debtor_pool = 7
     x__fund_give = 8
     x__fund_take = 9
     x__fund_agenda_give = 10
@@ -507,7 +507,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
     x_voice.voice_cred_points = x_voice_cred_points
     x_voice.voice_debt_points = x_voice_debt_points
     x_voice.credor_pool = x_credor_pool
-    x_voice._debtor_pool = x__debtor_pool
+    x_voice.debtor_pool = x_debtor_pool
     x_voice._fund_give = x__fund_give
     x_voice._fund_take = x__fund_take
     x_voice._fund_agenda_give = x__fund_agenda_give
@@ -539,7 +539,7 @@ def test_insert_job_blrpern_CreatesTableRowsFor_blrpern_job():
             x_voice_cred_points,
             x_voice_debt_points,
             x_credor_pool,
-            x__debtor_pool,
+            x_debtor_pool,
             x__fund_give,
             x__fund_take,
             x__fund_agenda_give,
@@ -574,7 +574,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_fund_iota = 4
     x_knot = 5
     x_credor_pool = 6
-    x__debtor_pool = 7
+    x_debtor_pool = 7
     x__fund_give = 8
     x__fund_take = 9
     x__fund_agenda_give = 10
@@ -584,7 +584,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
     x_group.fund_iota = x_fund_iota
     x_group.knot = x_knot
     x_group.credor_pool = x_credor_pool
-    x_group._debtor_pool = x__debtor_pool
+    x_group.debtor_pool = x_debtor_pool
     x_group._fund_give = x__fund_give
     x_group._fund_take = x__fund_take
     x_group._fund_agenda_give = x__fund_agenda_give
@@ -612,7 +612,7 @@ def test_insert_job_blrgrou_CreatesTableRowsFor_blrgrou_job():
             x_fund_iota,
             str(x_knot),
             x_credor_pool,
-            x__debtor_pool,
+            x_debtor_pool,
             x__fund_give,
             x__fund_take,
             x__fund_agenda_give,

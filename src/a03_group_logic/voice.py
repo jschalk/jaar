@@ -51,7 +51,7 @@ class VoiceUnit(VoiceCore):
     _memberships: dict[VoiceName, MemberShip] = None
     # calculated fields
     credor_pool: RespectNum = None
-    _debtor_pool: RespectNum = None
+    debtor_pool: RespectNum = None
     _irrational_voice_debt_points: int = None  # set by listening process
     _inallocable_voice_debt_points: int = None  # set by listening process
     # set by Belief.cash_out()
@@ -200,14 +200,14 @@ class VoiceUnit(VoiceCore):
             self.get_membership(x_group_title).credor_pool = alloted_pool
 
     def set_debtor_pool(self, debtor_pool: RespectNum):
-        self._debtor_pool = debtor_pool
+        self.debtor_pool = debtor_pool
         ledger_dict = {
             x_membership.group_title: x_membership.group_debt_points
             for x_membership in self._memberships.values()
         }
-        allot_dict = allot_scale(ledger_dict, self._debtor_pool, self.respect_bit)
+        allot_dict = allot_scale(ledger_dict, self.debtor_pool, self.respect_bit)
         for x_group_title, alloted_pool in allot_dict.items():
-            self.get_membership(x_group_title)._debtor_pool = alloted_pool
+            self.get_membership(x_group_title).debtor_pool = alloted_pool
 
     def get_memberships_dict(self) -> dict:
         return {
@@ -294,7 +294,7 @@ def voiceunit_shop(
         voice_debt_points=get_1_if_None(voice_debt_points),
         _memberships={},
         credor_pool=0,
-        _debtor_pool=0,
+        debtor_pool=0,
         _irrational_voice_debt_points=0,
         _inallocable_voice_debt_points=0,
         _fund_give=0,

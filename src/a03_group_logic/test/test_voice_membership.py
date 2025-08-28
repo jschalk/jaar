@@ -205,14 +205,14 @@ def test_VoiceUnit_set_credor_pool_SetAttr():
 def test_VoiceUnit_set_debtor_pool_SetAttr():
     # ESTABLISH
     bob_voiceunit = voiceunit_shop("Bob")
-    assert bob_voiceunit._debtor_pool == 0
+    assert bob_voiceunit.debtor_pool == 0
 
     # WHEN
     bob_debtor_pool = 51
     bob_voiceunit.set_debtor_pool(bob_debtor_pool)
 
     # THEN
-    assert bob_voiceunit._debtor_pool == bob_debtor_pool
+    assert bob_voiceunit.debtor_pool == bob_debtor_pool
 
 
 def test_VoiceUnit_set_credor_pool_Sets_memberships():
@@ -249,17 +249,17 @@ def test_VoiceUnit_set_debtor_pool_Sets_memberships():
     bob_voiceunit = voiceunit_shop("Bob")
     bob_voiceunit.add_membership(ohio_str, 2, sue_group_debt_points)
     bob_voiceunit.add_membership(iowa_str, 2, yao_group_debt_points)
-    assert bob_voiceunit._debtor_pool == 0
+    assert bob_voiceunit.debtor_pool == 0
     sue_membership = bob_voiceunit.get_membership(ohio_str)
     yao_membership = bob_voiceunit.get_membership(iowa_str)
-    assert sue_membership._debtor_pool == 0
-    assert yao_membership._debtor_pool == 0
+    assert sue_membership.debtor_pool == 0
+    assert yao_membership.debtor_pool == 0
 
     # WHEN
     bob_debtor_pool = 54
     bob_voiceunit.set_debtor_pool(bob_debtor_pool)
 
     # THEN
-    assert bob_voiceunit._debtor_pool == bob_debtor_pool
-    assert sue_membership._debtor_pool == 11
-    assert yao_membership._debtor_pool == 43
+    assert bob_voiceunit.debtor_pool == bob_debtor_pool
+    assert sue_membership.debtor_pool == 11
+    assert yao_membership.debtor_pool == 43

@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _debtor_pool_str,
     _fund_agenda_give_str,
     _fund_agenda_ratio_give_str,
     _fund_agenda_ratio_take_str,
@@ -10,6 +9,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _irrational_voice_debt_points_str,
     _memberships_str,
     credor_pool_str,
+    debtor_pool_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
@@ -64,7 +64,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     voice_debt_points_readable_key = add_readable(voice_debt_points_str())
     _memberships_readable_key = add_readable(_memberships_str())
     credor_pool_readable_key = add_readable(credor_pool_str())
-    _debtor_pool_readable_key = add_readable(_debtor_pool_str())
+    debtor_pool_readable_key = add_readable(debtor_pool_str())
     _irrational_voice_debt_points_readable_key = add_readable(
         _irrational_voice_debt_points_str()
     )
@@ -84,7 +84,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         voice_debt_points_str(),
         _memberships_str(),
         credor_pool_str(),
-        _debtor_pool_str(),
+        debtor_pool_str(),
         _irrational_voice_debt_points_str(),
         _inallocable_voice_debt_points_str(),
         _fund_give_str(),
@@ -97,7 +97,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
         voice_debt_points_readable_key,
         _memberships_readable_key,
         credor_pool_readable_key,
-        _debtor_pool_readable_key,
+        debtor_pool_readable_key,
         _irrational_voice_debt_points_readable_key,
         _inallocable_voice_debt_points_readable_key,
         _fund_give_readable_key,
@@ -113,7 +113,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     assert ypu.voice_cred_points == yp_dict.get(voice_cred_points_str())
     assert ypu.voice_debt_points == yp_dict.get(voice_debt_points_str())
     assert ypu.credor_pool == yp_dict.get(credor_pool_str())
-    assert ypu._debtor_pool == yp_dict.get(_debtor_pool_str())
+    assert ypu.debtor_pool == yp_dict.get(debtor_pool_str())
     assert ypu._irrational_voice_debt_points == yp_dict.get(
         _irrational_voice_debt_points_str()
     )
@@ -131,7 +131,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     expected_voice_debt_points_readable = f"voice_debt_points: {ypu.voice_debt_points}"
     expected__memberships_readable = f"_memberships: {ypu._memberships}"
     expected_credor_pool_readable = f"credor_pool: {ypu.credor_pool}"
-    expected__debtor_pool_readable = f"_debtor_pool: {ypu._debtor_pool}"
+    expected_debtor_pool_readable = f"debtor_pool: {ypu.debtor_pool}"
     expected__irrational_voice_debt_points_readable = (
         f"_irrational_voice_debt_points: {ypu._irrational_voice_debt_points}"
     )
@@ -159,7 +159,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     )
     assert yp_dict.get(_memberships_readable_key) == expected__memberships_readable
     assert yp_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
-    assert yp_dict.get(_debtor_pool_readable_key) == expected__debtor_pool_readable
+    assert yp_dict.get(debtor_pool_readable_key) == expected_debtor_pool_readable
     assert (
         yp_dict.get(_irrational_voice_debt_points_readable_key)
         == expected__irrational_voice_debt_points_readable
@@ -216,7 +216,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     group_cred_points_readable_key = add_readable(group_cred_points_str())
     group_debt_points_readable_key = add_readable(group_debt_points_str())
     credor_pool_readable_key = add_readable(credor_pool_str())
-    _debtor_pool_readable_key = add_readable(_debtor_pool_str())
+    debtor_pool_readable_key = add_readable(debtor_pool_str())
     _fund_agenda_give_readable_key = add_readable(_fund_agenda_give_str())
     _fund_agenda_ratio_give_readable_key = add_readable(_fund_agenda_ratio_give_str())
     _fund_agenda_ratio_take_readable_key = add_readable(_fund_agenda_ratio_take_str())
@@ -229,7 +229,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
         group_cred_points_str(),
         group_debt_points_str(),
         credor_pool_str(),
-        _debtor_pool_str(),
+        debtor_pool_str(),
         _fund_agenda_give_str(),
         _fund_agenda_ratio_give_str(),
         _fund_agenda_ratio_take_str(),
@@ -240,7 +240,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
         group_cred_points_readable_key,
         group_debt_points_readable_key,
         credor_pool_readable_key,
-        _debtor_pool_readable_key,
+        debtor_pool_readable_key,
         _fund_agenda_give_readable_key,
         _fund_agenda_ratio_give_readable_key,
         _fund_agenda_ratio_take_readable_key,
@@ -258,7 +258,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
         f"{group_debt_points_str()}: {yao_swim_mu.group_debt_points}"
     )
     expected_credor_pool_readable = f"{credor_pool_str()}: {yao_swim_mu.credor_pool}"
-    expected__debtor_pool_readable = f"{_debtor_pool_str()}: {yao_swim_mu._debtor_pool}"
+    expected_debtor_pool_readable = f"{debtor_pool_str()}: {yao_swim_mu.debtor_pool}"
     expected__fund_agenda_give_readable = (
         f"{_fund_agenda_give_str()}: {yao_swim_mu._fund_agenda_give}"
     )
@@ -282,7 +282,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
         expected_group_debt_points_readable
     )
     expected_credor_pool_readable = add_small_dot(expected_credor_pool_readable)
-    expected__debtor_pool_readable = add_small_dot(expected__debtor_pool_readable)
+    expected_debtor_pool_readable = add_small_dot(expected_debtor_pool_readable)
     expected__fund_agenda_give_readable = add_small_dot(
         expected__fund_agenda_give_readable
     )
@@ -303,7 +303,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     assert yao_swim_dict.get(group_cred_points_str()) == yao_swim_mu.group_cred_points
     assert yao_swim_dict.get(group_debt_points_str()) == yao_swim_mu.group_debt_points
     assert yao_swim_dict.get(credor_pool_str()) == yao_swim_mu.credor_pool
-    assert yao_swim_dict.get(_debtor_pool_str()) == yao_swim_mu._debtor_pool
+    assert yao_swim_dict.get(debtor_pool_str()) == yao_swim_mu.debtor_pool
     assert yao_swim_dict.get(_fund_agenda_give_str()) == yao_swim_mu._fund_agenda_give
     assert (
         yao_swim_dict.get(_fund_agenda_ratio_give_str())
@@ -326,9 +326,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
         == expected_group_debt_points_readable
     )
     assert yao_swim_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
-    assert (
-        yao_swim_dict.get(_debtor_pool_readable_key) == expected__debtor_pool_readable
-    )
+    assert yao_swim_dict.get(debtor_pool_readable_key) == expected_debtor_pool_readable
     assert (
         yao_swim_dict.get(_fund_agenda_give_readable_key)
         == expected__fund_agenda_give_readable

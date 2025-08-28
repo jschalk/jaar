@@ -24,7 +24,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_debtor_pool": {
+            "debtor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -85,7 +85,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_debtor_pool": {
+            "debtor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -498,7 +498,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_debtor_pool": {
+            "debtor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

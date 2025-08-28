@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _debtor_pool_str,
     _fund_agenda_give_str,
     _fund_agenda_ratio_give_str,
     _fund_agenda_ratio_take_str,
@@ -10,6 +9,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _irrational_voice_debt_points_str,
     _memberships_str,
     credor_pool_str,
+    debtor_pool_str,
     voice_cred_points_str,
     voice_debt_points_str,
 )
