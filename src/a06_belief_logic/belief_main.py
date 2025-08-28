@@ -1145,7 +1145,7 @@ reason_case:    {reason_case}"""
             else:
                 x_plan_obj.set_awardlines(child_awardlines)
 
-            if x_plan_obj._chore:
+            if x_plan_obj.chore:
                 x_descendant_task_count += 1
 
             if (
@@ -1303,7 +1303,7 @@ reason_case:    {reason_case}"""
     def _set_rational_attr(self):
         any_plan_active_status_has_altered = False
         for plan in self._plan_dict.values():
-            if plan._active_hx.get(self._tree_traverse_count) is not None:
+            if plan.active_hx.get(self._tree_traverse_count) is not None:
                 any_plan_active_status_has_altered = True
 
         if any_plan_active_status_has_altered is False:

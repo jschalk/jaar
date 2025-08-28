@@ -6,18 +6,14 @@ from src.a03_group_logic.test._util.a03_str import (
     laborunit_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
-    _active_str,
-    _chore_str,
+    active_str,
     cases_str,
+    chore_str,
     factunits_str,
     moment_label_str,
     reason_state_str,
     reasonunits_str,
 )
-
-
-def _active_hx_str() -> str:
-    return "_active_hx"
 
 
 def _all_voice_cred_str() -> str:
@@ -78,6 +74,10 @@ def _stop_calc_str() -> str:
 
 def _uid_str() -> str:
     return "_uid"
+
+
+def active_hx_str() -> str:
+    return "active_hx"
 
 
 def addin_str() -> str:

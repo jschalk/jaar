@@ -236,8 +236,8 @@ class PlanUnit:
     problem_bool : bool that describes if the plan is a problem.
     _is_expanded : bool Internal flag for whether the plan is expanded.
 
-    _active : bool that describes if the plan task is active, calculated by MomentUnit.
-    _active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
+    active : bool that describes if the plan task is active, calculated by MomentUnit.
+    active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
     _all_voice_cred : bool Flag indicating there are not explicitley defined awardunits
     _all_voice_debt : bool Flag indicating there are not explicitley defined awardunits
     _awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
@@ -252,7 +252,7 @@ class PlanUnit:
     _level : int that describes Depth level in plan hierarchy.
     _range_evaluated : bool Flag indicating whether range has been evaluated.
     _reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
-    _chore : bool describes if a unit can be changed to inactive with fact range change.
+    chore : bool describes if a unit can be changed to inactive with fact range change.
     laborheir : LaborHeir parent plan provided labor relationships
     _gogo_calc : float
     _stop_calc : float
@@ -283,8 +283,8 @@ class PlanUnit:
     knot: str = None
     _is_expanded: bool = None
     # Calculated fields
-    _active: bool = None
-    _active_hx: dict[int, bool] = None
+    active: bool = None
+    active_hx: dict[int, bool] = None
     _all_voice_cred: bool = None
     _all_voice_debt: bool = None
     _awardheirs: dict[GroupTitle, AwardHeir] = None
@@ -299,7 +299,7 @@ class PlanUnit:
     _level: int = None
     _range_evaluated: bool = None
     _reasonheirs: dict[RopeTerm, ReasonHeir] = None
-    _chore: bool = None
+    chore: bool = None
     laborheir: LaborHeir = None
     _gogo_calc: float = None
     _stop_calc: float = None
@@ -308,7 +308,7 @@ class PlanUnit:
         reason_context_reasonunit_exists = self.reason_context_reasonunit_exists(
             necessary_reason_context
         )
-        return self.task and self._active and reason_context_reasonunit_exists
+        return self.task and self.active and reason_context_reasonunit_exists
 
     def reason_context_reasonunit_exists(
         self, necessary_reason_context: RopeTerm = None
@@ -323,9 +323,9 @@ class PlanUnit:
         self, tree_traverse_count: int, prev_active: bool, now_active: bool
     ):
         if tree_traverse_count == 0:
-            self._active_hx = {0: now_active}
+            self.active_hx = {0: now_active}
         elif prev_active != now_active:
-            self._active_hx[tree_traverse_count] = now_active
+            self.active_hx[tree_traverse_count] = now_active
 
     def set_factheirs(self, facts: dict[RopeTerm, FactCore]):
         facts_dict = get_empty_dict_if_None(facts)
@@ -382,7 +382,7 @@ class PlanUnit:
     def set_factunit_to_complete(self, fact_contextunit: FactUnit):
         # if a plan is considered a chore then a factheir.fact_lower attribute can be increased to
         # a number <= factheir.fact_upper so the plan no longer is a chore. This method finds
-        # the minimal factheir.fact_lower to modify plan._chore is False. plan_core._factheir cannot be straight up manipulated
+        # the minimal factheir.fact_lower to modify plan.chore is False. plan_core._factheir cannot be straight up manipulated
         # so it is mandatory that plan._factunit is different.
         # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=fact_upper)
         self.factunits[fact_contextunit.fact_context] = factunit_shop(
@@ -814,21 +814,21 @@ class PlanUnit:
         groupunits: dict[GroupTitle, GroupUnit] = None,
         belief_name: VoiceName = None,
     ):
-        prev_to_now_active = deepcopy(self._active)
-        self._active = self._create_active_bool(groupunits, belief_name)
+        prev_to_now_active = deepcopy(self.active)
+        self.active = self._create_active_bool(groupunits, belief_name)
         self._set_plan_chore()
-        self.record_active_hx(tree_traverse_count, prev_to_now_active, self._active)
+        self.record_active_hx(tree_traverse_count, prev_to_now_active, self.active)
 
     def _set_plan_chore(self):
-        self._chore = False
-        if self.task and self._active and self._reasonheirs_satisfied():
-            self._chore = True
+        self.chore = False
+        if self.task and self.active and self._reasonheirs_satisfied():
+            self.chore = True
 
     def _reasonheirs_satisfied(self) -> bool:
         return self._reasonheirs == {} or self._any_reasonheir_chore_true()
 
     def _any_reasonheir_chore_true(self) -> bool:
-        return any(x_reasonheir._chore for x_reasonheir in self._reasonheirs.values())
+        return any(x_reasonheir.chore for x_reasonheir in self._reasonheirs.values())
 
     def _create_active_bool(
         self,
@@ -905,7 +905,7 @@ class PlanUnit:
             if reason_context_plan := belief_plan_dict.get(
                 old_reasonheir.reason_context
             ):
-                new_reasonheir.set_reason_active_heir(reason_context_plan._active)
+                new_reasonheir.set_reason_active_heir(reason_context_plan.active)
             self._reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
     def set_root_plan_reasonheirs(self):
@@ -1053,13 +1053,13 @@ def planunit_shop(
     fund_iota: FundIota = None,
     fund_onset: FundNum = None,
     fund_cease: FundNum = None,
-    _chore: bool = None,
-    _active: bool = None,
+    chore: bool = None,
+    active: bool = None,
     _descendant_task_count: int = None,
     _all_voice_cred: bool = None,
     _all_voice_debt: bool = None,
     _is_expanded: bool = True,
-    _active_hx: dict[int, bool] = None,
+    active_hx: dict[int, bool] = None,
     knot: str = None,
     _healerunit_ratio: float = None,
 ) -> PlanUnit:
@@ -1100,13 +1100,13 @@ def planunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         fund_onset=fund_onset,
         fund_cease=fund_cease,
-        _chore=_chore,
-        _active=_active,
+        chore=chore,
+        active=active,
         _descendant_task_count=_descendant_task_count,
         _all_voice_cred=_all_voice_cred,
         _all_voice_debt=_all_voice_debt,
         _is_expanded=_is_expanded,
-        _active_hx=get_empty_dict_if_None(_active_hx),
+        active_hx=get_empty_dict_if_None(active_hx),
         knot=default_knot_if_None(knot),
         _healerunit_ratio=get_0_if_None(_healerunit_ratio),
     )

@@ -28,9 +28,9 @@ from src.a03_group_logic.test._util.a03_str import (
     voice_name_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
-    _active_str,
-    _chore_str,
     _status_str,
+    active_str,
+    chore_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,

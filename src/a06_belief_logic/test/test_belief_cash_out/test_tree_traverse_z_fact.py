@@ -26,7 +26,7 @@ def test_BeliefUnit_cash_out_ChangesPlanUnit_task_chore():
         fact_context=hr_rope, fact_state=hr_rope, fact_lower=82, fact_upper=95
     )
     assert mail_plan.task is True
-    assert mail_plan._chore is False
+    assert mail_plan.chore is False
 
     # WHEN
     yao_belief.cash_out()
@@ -34,7 +34,7 @@ def test_BeliefUnit_cash_out_ChangesPlanUnit_task_chore():
     # THEN
     mail_plan = yao_belief.get_plan_obj(mail_rope)
     assert mail_plan.task
-    assert mail_plan._chore
+    assert mail_plan.chore
 
 
 def test_BeliefUnit_cash_out_ExecutesWithRangeRootFacts():
@@ -257,11 +257,11 @@ def test_BeliefUnit_cash_out_SetsChoreAsComplete():
     hr_rope = yao_belief.make_l1_rope(hr_str)
     yao_belief.add_fact(hr_rope, hr_rope, fact_lower=82, fact_upper=85)
     assert mail_plan.task
-    assert mail_plan._chore
+    assert mail_plan.chore
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     assert mail_plan.task
-    assert not mail_plan._chore
+    assert not mail_plan.chore

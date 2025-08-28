@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a06_belief_logic.test._util.a06_str import (
-    _chore_str,
     _status_str,
     belief_name_str,
+    chore_str,
     moment_label_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -106,7 +106,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
 
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x__active = 1
+    x_active = 1
     x__all_voice_cred = 2
     x__all_voice_debt = 3
     x__descendant_task_count = 4
@@ -119,7 +119,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x__level = 11
     x__range_evaluated = 12
     x__stop_calc = 13
-    x__chore = 14
+    x_chore = 14
     x_addin = 15
     x_begin = 16
     x_close = 17
@@ -135,7 +135,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
-        "_active": x__active,
+        "active": x_active,
         "_all_voice_cred": x__all_voice_cred,
         "_all_voice_debt": x__all_voice_debt,
         "_descendant_task_count": x__descendant_task_count,
@@ -148,7 +148,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "_level": x__level,
         "_range_evaluated": x__range_evaluated,
         "_stop_calc": x__stop_calc,
-        "_chore": x__chore,
+        "chore": x_chore,
         "addin": x_addin,
         "begin": x_begin,
         "close": x_close,
@@ -209,7 +209,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_rope = 1
     x_reason_context = 2
     x_reason_active_requisite = 3
-    x__chore = 4
+    x_chore = 4
     x__status = 5
     x__reason_active_heir = 6
     values_dict = {
@@ -218,7 +218,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "plan_rope": x_rope,
         reason_context_str(): x_reason_context,
         reason_active_requisite_str(): x_reason_active_requisite,
-        "_chore": x__chore,
+        "chore": x_chore,
         "_status": x__status,
         "_reason_active_heir": x__reason_active_heir,
     }
@@ -275,7 +275,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_reason_upper = 4
     x_reason_lower = 5
     x_reason_divisor = 6
-    x__chore = 7
+    x_chore = 7
     x__status = 8
     values_dict = {
         moment_label_str(): x_moment_label,
@@ -286,7 +286,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         reason_upper_str(): x_reason_upper,
         reason_lower_str(): x_reason_lower,
         reason_divisor_str(): x_reason_divisor,
-        _chore_str(): x__chore,
+        chore_str(): x_chore,
         _status_str(): x__status,
     }
     # all args included in values dict

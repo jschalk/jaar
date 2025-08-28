@@ -232,10 +232,10 @@ def is_path_valid(path: str) -> bool:
 
 def can_usser_edit_paths(path: str = None) -> bool:
     """
-    `True` if the active usser has sufficient permissions to create the passed
+    `True` if the usser has sufficient permissions to create the passed
     path; `False` otherwise.
     """
-    # Parent directory of the passed path. If empty, we substitute the active
+    # Parent directory of the passed path. If empty, we substitute the current
     # workinng directory (CWD) instead.
     # dirname = os_path_dirname(path) or os_getcwd()
     dirname = os_getcwd()
@@ -244,8 +244,8 @@ def can_usser_edit_paths(path: str = None) -> bool:
 
 def is_path_existent_or_creatable(path: str) -> bool:
     """
-    `True` if the passed path is a valid path for the active OS _and_
-    either actively exists or is hypotheticallly creatable; `False` otherwise.
+    `True` if the passed path is a valid path for the current OS _and_
+    either currently exists or is hypotheticallly creatable; `False` otherwise.
     This function is guaranteed to _never_ raise exceptions.
     """
     try:
@@ -263,11 +263,11 @@ def is_path_existent_or_creatable(path: str) -> bool:
 
 def is_path_probably_creatable(path: str = None) -> bool:
     """
-    `True` if the active usser has sufficient permissions to create **siblings**
+    `True` if the current usser has sufficient permissions to create **siblings**
     (i.e., arbiitrary files in the parent directory) of the passed path;
     `False` otherwise.
     """
-    # Parent directory of the passed path. If empty, we substitute the active
+    # Parent directory of the passed path. If empty, we substitute the current
     # workinng directory (CWD) instead.
     dirname = os_getcwd() if path is None else os_path_dirname(path) or os_getcwd()
     try:
@@ -285,8 +285,8 @@ def is_path_probably_creatable(path: str = None) -> bool:
 
 def is_path_existent_or_probably_creatable(path: str) -> bool:
     """
-    `True` if the passed path is a valid path on the active OS _and_
-    either actively exists or is hypotheticallly creatable in a crooss-platform
+    `True` if the passed path is a valid path on the current OS _and_
+    either currently exists or is hypotheticallly creatable in a crooss-platform
     manner optimized for POSIX-unfriendly filesystems; `False` otherwise.
     This function is guaranteed to _never_ raise exceptions.
     """

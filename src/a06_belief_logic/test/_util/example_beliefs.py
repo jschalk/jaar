@@ -277,10 +277,10 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
     # this belief has no definitive agenda because 2 task plans are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
-    # Step 0: if chicken._active is True, egg._active is set to False
-    # Step 1: if egg._active is False, chicken._active is set to False
-    # Step 2: if chicken._active is False, egg._active is set to True
-    # Step 3: if egg._active is True, chicken._active is set to True
+    # Step 0: if chicken.active is True, egg.active is set to False
+    # Step 1: if egg.active is False, chicken.active is set to False
+    # Step 2: if chicken.active is False, egg.active is set to True
+    # Step 3: if egg.active is True, chicken.active is set to True
     # Step 4: back to step 0.
     # after hatter_belief.cash_out these should be true:
     # 1. hatter_belief._irrational is True
@@ -399,14 +399,14 @@ def from_list_get_active(
     for plan in plan_dict.values():
         if plan.get_plan_rope() == rope:
             temp_plan = plan
-            print(f"s for PlanUnit {temp_plan.get_plan_rope()}  {temp_plan._active=}")
+            print(f"s for PlanUnit {temp_plan.get_plan_rope()}  {temp_plan.active=}")
 
-        if plan._active:
+        if plan.active:
             active_true_count += 1
-        elif plan._active is False:
+        elif plan.active is False:
             active_false_count += 1
 
-    active = temp_plan._active
+    active = temp_plan.active
     print(
         f"Set active: {plan.plan_label=} {active} {active_true_count=} {active_false_count=}"
     )

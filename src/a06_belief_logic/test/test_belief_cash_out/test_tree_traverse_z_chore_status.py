@@ -25,7 +25,7 @@ def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactSaysNo():
     #     print(f"{casa_rope=} {plan.get_plan_rope()=}")
     casa_str = "casa"
     casa_rope = sue_beliefunit.make_l1_rope(casa_str)
-    assert sue_beliefunit.get_plan_obj(casa_rope)._active is None
+    assert sue_beliefunit.get_plan_obj(casa_rope).active is None
 
     # WHEN
     sue_beliefunit.add_fact(fact_context=wk_rope, fact_state=sun_rope)
@@ -36,7 +36,7 @@ def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactSaysNo():
     assert len(sue_beliefunit._plan_dict) == 17
     # for plan in sue_beliefunit._plan_dict.values():
     #     print(f"{casa_rope=} {plan.get_plan_rope()=}")
-    assert sue_beliefunit.get_plan_obj(casa_rope)._active is False
+    assert sue_beliefunit.get_plan_obj(casa_rope).active is False
 
 
 def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactModifies():
@@ -56,7 +56,7 @@ def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactModifies():
     sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
-    assert sue_beliefunit._plan_dict.get(casa_rope)._active is False
+    assert sue_beliefunit._plan_dict.get(casa_rope).active is False
 
     # WHEN
     nation_str = "nation"
@@ -69,7 +69,7 @@ def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactModifies():
     sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
-    assert sue_beliefunit._plan_dict.get(casa_rope)._active
+    assert sue_beliefunit._plan_dict.get(casa_rope).active
 
     # WHEN
     france_str = "France"
@@ -80,7 +80,7 @@ def test_BeliefUnit_cash_out_SetsStatus_active_WhenFactModifies():
     sue_beliefunit.cash_out()
     assert sue_beliefunit._plan_dict
     assert len(sue_beliefunit._plan_dict) == 17
-    assert sue_beliefunit._plan_dict.get(casa_rope)._active is False
+    assert sue_beliefunit._plan_dict.get(casa_rope).active is False
 
 
 def test_BeliefUnit_cash_out_Sets_plan_dict():
@@ -116,10 +116,10 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
 
     wed = caseunit_shop(reason_state=wed_rope)
     wed._status = True
-    wed._chore = False
+    wed.chore = False
     usa = caseunit_shop(reason_state=usa_rope)
     usa._status = True
-    usa._chore = False
+    usa.chore = False
 
     wed_lu = reasonunit_shop(wk_rope, cases={wed.reason_state: wed})
     sta_lu = reasonunit_shop(nation_rope, cases={usa.reason_state: usa})
@@ -127,14 +127,14 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
         reason_context=wk_rope,
         cases={wed.reason_state: wed},
         _status=True,
-        _chore=False,
+        chore=False,
         _reason_active_heir=True,
     )
     sta_lh = reasonheir_shop(
         reason_context=nation_rope,
         cases={usa.reason_state: usa},
         _status=True,
-        _chore=False,
+        chore=False,
         _reason_active_heir=True,
     )
 
@@ -159,7 +159,7 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     assert casa_plan.star == 30
     assert casa_plan.plan_label == casa_str
     assert casa_plan._level == 1
-    assert casa_plan._active
+    assert casa_plan.active
     assert casa_plan.task
     # print(f"{casa_plan._reasonheirs=}")
     nation_reasonheir = casa_plan._reasonheirs[nation_rope]
@@ -172,13 +172,13 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     # usa_case = wk_reasonheir.cases.get(usa_rope)
     print(f"    {casa_plan.plan_label=}")
     # print(f"    {usa_case.reason_context=}")
-    # print(f"    {usa_case._chore=}")
-    # print(f"    {usa_case._chore=}")
-    assert wk_reasonheir._chore is False
+    # print(f"    {usa_case.chore=}")
+    # print(f"    {usa_case.chore=}")
+    assert wk_reasonheir.chore is False
     # print(f"      cases: {w=}")
     # w_state = usa_case.cases[wed_rope].reason_state
     # print(f"      {w_state=}")
-    # assert usa_case._chore == w_state._chore
+    # assert usa_case.chore == w_state.chore
     # assert usa_case._status == w_state._status
     # assert wk_reasonheir.cases == wk_reasonheir.cases
 
@@ -187,7 +187,7 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     # print("iterate through every plan...")
     # for x_plan in plan_dict:
     #     if str(type(x_plan)).find(".plan.PlanUnit'>") > 0:
-    #         assert x_plan._active is not None
+    #         assert x_plan.active is not None
 
     #     # print("")
     #     # print(f"{x_plan.plan_label=}")
@@ -224,7 +224,7 @@ def test_BeliefUnit_cash_out_CalculatesRangeAttributes():
     house_rope = sue_beliefunit.make_l1_rope(house_str)
     clean_str = "clean table"
     clean_rope = sue_beliefunit.make_rope(house_rope, clean_str)
-    assert sue_beliefunit._plan_dict.get(clean_rope)._active is False
+    assert sue_beliefunit._plan_dict.get(clean_rope).active is False
 
     # set facts as midevening to 8am
     ziet_str = "ziettech"
@@ -246,7 +246,7 @@ def test_BeliefUnit_cash_out_CalculatesRangeAttributes():
 
     # THEN
     sue_beliefunit.cash_out()
-    assert sue_beliefunit._plan_dict.get(clean_rope)._active
+    assert sue_beliefunit._plan_dict.get(clean_rope).active
 
     # WHEN
     # set facts as 8am to 10am
@@ -261,11 +261,11 @@ def test_BeliefUnit_cash_out_CalculatesRangeAttributes():
     )
     print(sue_beliefunit.planroot.factunits[x24hr_rope])
     print(sue_beliefunit.planroot._kids[house_str]._kids[clean_str].reasonunits)
-    # sue_beliefunit.planroot._kids["housemanagement"]._kids[clean_str]._active = None
+    # sue_beliefunit.planroot._kids["housemanagement"]._kids[clean_str].active = None
 
     # THEN
     sue_beliefunit.cash_out()
-    assert sue_beliefunit._plan_dict.get(clean_rope)._active is False
+    assert sue_beliefunit._plan_dict.get(clean_rope).active is False
 
 
 def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
@@ -340,8 +340,8 @@ def test_BeliefUnit_cash_out_SetsData_beliefunit_v001():
     #     if plan.plan_label == laundry_str:
     #         for reason in plan.reasonunits.values():
     #             print(f"{plan.plan_label=} {reason.reason_context=}")  # {reason.cases=}")
-    # assert plan._active is False
-    assert yao_beliefunit._plan_dict.get(laundry_rope)._active is False
+    # assert plan.active is False
+    assert yao_beliefunit._plan_dict.get(laundry_rope).active is False
 
     # WHEN
     wk_str = "sem_jours"
@@ -352,7 +352,7 @@ def test_BeliefUnit_cash_out_SetsData_beliefunit_v001():
     yao_beliefunit.cash_out()
 
     # THEN
-    assert yao_beliefunit._plan_dict.get(laundry_rope)._active is False
+    assert yao_beliefunit._plan_dict.get(laundry_rope).active is False
 
 
 def test_BeliefUnit_cash_out_OptionWeekJoursReturnsObj_beliefunit_v001():
@@ -409,10 +409,10 @@ def test_BeliefUnit_cash_out_OptionWeekJoursReturnsObj_beliefunit_v001():
     tue_rope = yao_beliefunit.make_rope(wk_rope, tue_str)
     mon_case_x = caseunit_shop(reason_state=mon_rope)
     mon_case_x._status = False
-    mon_case_x._chore = False
+    mon_case_x.chore = False
     tue_case_x = caseunit_shop(reason_state=tue_rope)
     tue_case_x._status = False
-    tue_case_x._chore = False
+    tue_case_x.chore = False
     mt_cases = {
         mon_case_x.reason_state: mon_case_x,
         tue_case_x.reason_state: tue_case_x,
@@ -512,7 +512,7 @@ def test_BeliefUnit_cash_out_SetsPlanUnitsActiveWithEvery6WeeksReason_beliefunit
     reason_lower = ced_wk_case.reason_lower
     reason_upper = ced_wk_case.reason_upper
     # print(f"{plan.reasonunits=}")
-    assert clean_sheet_plan._active is False
+    assert clean_sheet_plan.active is False
 
     # for plan in plan_dict:
     #     # print(f"{plan.parent_rope=}")
@@ -573,11 +573,11 @@ def test_BeliefUnit_cash_out_EveryPlanHasActiveStatus_beliefunit_v001():
     # for plan in plan_list:
     #     if str(type(plan)).find(".plan.PlanUnit'>") > 0:
     #         first_plan_kid_count += 1
-    #         if plan._active is None:
+    #         if plan.active is None:
     #             first_plan_kid_none_count += 1
-    #         elif plan._active:
+    #         elif plan.active:
     #             first_plan_kid_true_count += 1
-    #         elif plan._active is False:
+    #         elif plan.active is False:
     #             first_plan_kid_false_count += 1
 
     # print(f"{first_plan_kid_count=}")
@@ -589,12 +589,12 @@ def test_BeliefUnit_cash_out_EveryPlanHasActiveStatus_beliefunit_v001():
     # for plan in plan_list_without_planroot:
     #     plan_kid_count += 1
     #     print(f"{plan.plan_label=} {plan_kid_count=}")
-    #     assert plan._active is not None
-    #     assert plan._active in (True, False)
+    #     assert plan.active is not None
+    #     assert plan.active in (True, False)
     # assert plan_kid_count == len(plan_list_without_planroot)
 
     assert len(yao_beliefunit._plan_dict) == sum(
-        plan._active is not None for plan in yao_beliefunit._plan_dict.values()
+        plan.active is not None for plan in yao_beliefunit._plan_dict.values()
     )
 
 

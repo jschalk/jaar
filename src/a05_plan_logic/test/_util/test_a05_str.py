@@ -1,5 +1,4 @@
 from src.a05_plan_logic.test._util.a05_str import (
-    _active_hx_str,
     _all_voice_cred_str,
     _all_voice_debt_str,
     _awardheirs_str,
@@ -15,6 +14,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     _reasonheirs_str,
     _stop_calc_str,
     _uid_str,
+    active_hx_str,
     addin_str,
     begin_str,
     close_str,
@@ -39,7 +39,7 @@ from src.a05_plan_logic.test._util.a05_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert _active_hx_str() == "_active_hx"
+    assert active_hx_str() == "active_hx"
     assert _all_voice_cred_str() == "_all_voice_cred"
     assert _all_voice_debt_str() == "_all_voice_debt"
     assert _awardheirs_str() == "_awardheirs"

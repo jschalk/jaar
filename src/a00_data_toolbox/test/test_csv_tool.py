@@ -134,8 +134,8 @@ def test_replace_csv_column_from_string():
 def test_delete_column_from_csv_string():
     # ESTABLISH
     csv_input = """id,name,status
-1,Alice,active
-2,Bob,inactive
+1,Alice,current
+2,Bob,incurrent
 """
 
     # WHEN

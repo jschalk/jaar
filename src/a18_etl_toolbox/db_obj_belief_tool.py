@@ -190,9 +190,9 @@ def create_blrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     reason_upper = values_dict.get("reason_upper")
     reason_lower = values_dict.get("reason_lower")
     reason_divisor = values_dict.get("reason_divisor")
-    _chore = values_dict.get("_chore")
+    chore = values_dict.get("chore")
     _status = values_dict.get("_status")
-    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, _chore, _status)
+    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, chore, _status)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -202,7 +202,7 @@ VALUES (
 , {sqlite_obj_str(reason_upper, "REAL")}
 , {sqlite_obj_str(reason_lower, "REAL")}
 , {sqlite_obj_str(reason_divisor, "REAL")}
-, {sqlite_obj_str(_chore, "INTEGER")}
+, {sqlite_obj_str(chore, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 )
 ;
@@ -215,17 +215,17 @@ def create_blrreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     rope = values_dict.get("plan_rope")
     reason_context = values_dict.get("reason_context")
     reason_active_requisite = values_dict.get("reason_active_requisite")
-    _chore = values_dict.get("_chore")
+    chore = values_dict.get("chore")
     _status = values_dict.get("_status")
     _reason_active_heir = values_dict.get("_reason_active_heir")
-    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, reason_active_requisite, _chore, _status, _reason_active_heir)
+    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, reason_active_requisite, chore, _status, _reason_active_heir)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
 , {sqlite_obj_str(rope, "TEXT")}
 , {sqlite_obj_str(reason_context, "TEXT")}
 , {sqlite_obj_str(reason_active_requisite, "INTEGER")}
-, {sqlite_obj_str(_chore, "INTEGER")}
+, {sqlite_obj_str(chore, "INTEGER")}
 , {sqlite_obj_str(_status, "INTEGER")}
 , {sqlite_obj_str(_reason_active_heir, "INTEGER")}
 )
@@ -268,8 +268,8 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     star = values_dict.get("star")
     task = values_dict.get("task")
     problem_bool = values_dict.get("problem_bool")
-    _active = values_dict.get("_active")
-    _chore = values_dict.get("_chore")
+    active = values_dict.get("active")
+    chore = values_dict.get("chore")
     fund_iota = values_dict.get("fund_iota")
     fund_onset = values_dict.get("fund_onset")
     fund_cease = values_dict.get("fund_cease")
@@ -285,7 +285,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, _active, _chore, fund_onset, fund_cease, fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerunit_ratio, _all_voice_cred, _all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, active, chore, fund_onset, fund_cease, fund_ratio, _gogo_calc, _stop_calc, _level, _range_evaluated, _descendant_task_count, _healerunit_ratio, _all_voice_cred, _all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -302,8 +302,8 @@ VALUES (
 , {sqlite_obj_str(task, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
 , {sqlite_obj_str(fund_iota, real_str)}
-, {sqlite_obj_str(_active, "INTEGER")}
-, {sqlite_obj_str(_chore, "INTEGER")}
+, {sqlite_obj_str(active, "INTEGER")}
+, {sqlite_obj_str(chore, "INTEGER")}
 , {sqlite_obj_str(fund_onset, real_str)}
 , {sqlite_obj_str(fund_cease, real_str)}
 , {sqlite_obj_str(fund_ratio, real_str)}

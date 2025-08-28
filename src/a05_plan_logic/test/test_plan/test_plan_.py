@@ -4,12 +4,10 @@ from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
-from src.a04_reason_logic.test._util.a04_str import _chore_str
+from src.a04_reason_logic.test._util.a04_str import chore_str
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
-    _active_hx_str,
-    _active_str,
     _all_voice_cred_str,
     _all_voice_debt_str,
     _awardheirs_str,
@@ -25,6 +23,8 @@ from src.a05_plan_logic.test._util.a05_str import (
     _reasonheirs_str,
     _stop_calc_str,
     _uid_str,
+    active_hx_str,
+    active_str,
     addin_str,
     awardunits_str,
     begin_str,
@@ -97,7 +97,7 @@ def test_PlanUnit_Exists():
     assert x_planunit._all_voice_cred is None
     assert x_planunit._all_voice_debt is None
     assert x_planunit._level is None
-    assert x_planunit._active_hx is None
+    assert x_planunit.active_hx is None
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota is None
     assert x_planunit.fund_onset is None
@@ -108,8 +108,8 @@ def test_PlanUnit_Exists():
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        _active_str(),
-        _active_hx_str(),
+        active_str(),
+        active_hx_str(),
         _all_voice_cred_str(),
         _all_voice_debt_str(),
         _awardheirs_str(),
@@ -128,7 +128,7 @@ def test_PlanUnit_Exists():
         _range_evaluated_str(),
         _reasonheirs_str(),
         _stop_calc_str(),
-        _chore_str(),
+        chore_str(),
         _uid_str(),
         addin_str(),
         awardunits_str(),
@@ -185,7 +185,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit._gogo_calc is None
     assert x_planunit._stop_calc is None
     assert x_planunit._level is None
-    assert x_planunit._active_hx == {}
+    assert x_planunit.active_hx == {}
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota == default_fund_iota_if_None()
     assert x_planunit.fund_onset is None

@@ -1,12 +1,9 @@
 from src.a05_plan_logic.plan import planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
-    _active_hx_str,
-    _active_str,
     _all_voice_cred_str,
     _all_voice_debt_str,
     _awardheirs_str,
     _awardlines_str,
-    _chore_str,
     _descendant_task_count_str,
     _factheirs_str,
     _gogo_calc_str,
@@ -18,10 +15,13 @@ from src.a05_plan_logic.test._util.a05_str import (
     _reasonheirs_str,
     _stop_calc_str,
     _uid_str,
+    active_hx_str,
+    active_str,
     addin_str,
     awardunits_str,
     begin_str,
     cases_str,
+    chore_str,
     close_str,
     denom_str,
     factunits_str,
@@ -107,8 +107,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         problem_bool_str(),
         knot_str(),
         _is_expanded_str(),
-        _active_str(),
-        _active_hx_str(),
+        active_str(),
+        active_hx_str(),
         _all_voice_cred_str(),
         _all_voice_debt_str(),
         _awardheirs_str(),
@@ -123,7 +123,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         _level_str(),
         _range_evaluated_str(),
         _reasonheirs_str(),
-        _chore_str(),
+        chore_str(),
         laborheir_str(),
         _gogo_calc_str(),
         _stop_calc_str(),
@@ -592,9 +592,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     chicken_dict = get_plan_view_dict(chicken_plan)
 
     # THEN
-    print(f"{chicken_plan._active_hx=}")
+    print(f"{chicken_plan.active_hx=}")
     # sports ropes
-    chicken_active_hx_str = chicken_dict.get(_active_hx_str())
-    expected_chicken_active_hx_str = f"active_hx: {chicken_plan._active_hx}"
+    chicken_active_hx_str = chicken_dict.get(active_hx_str())
+    expected_chicken_active_hx_str = f"active_hx: {chicken_plan.active_hx}"
     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
     assert expected_chicken_active_hx_str == chicken_active_hx_str

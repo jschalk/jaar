@@ -17,7 +17,7 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 
 
 def get_chores_count(agenda_dict: dict[RopeTerm, PlanUnit]) -> int:
-    return sum(bool(x_planunit._chore) for x_planunit in agenda_dict.values())
+    return sum(bool(x_planunit.chore) for x_planunit in agenda_dict.values())
 
 
 def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithTwoPlans():
@@ -115,7 +115,7 @@ def test_BeliefUnit_get_agenda_dict_With7amPlanExample():
     # THEN
     print(x_belief.planroot.factunits[x24hr_rope])
     print(x_belief.get_plan_obj(clean_rope).reasonunits)
-    print(x_belief.get_plan_obj(clean_rope)._active)
+    print(x_belief.get_plan_obj(clean_rope).active)
     agenda_dict = x_belief.get_agenda_dict()
     print(f"{len(agenda_dict)=} {agenda_dict.keys()=}")
     assert len(agenda_dict) == 6
@@ -288,12 +288,12 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Range():
     run_reasonunits = zia_belief.planroot._kids[run_str].reasonunits[jour_rope]
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.cases[jour_rope]._status=}")
-    print(f"{run_reasonunits.cases[jour_rope]._chore=}")
+    print(f"{run_reasonunits.cases[jour_rope].chore=}")
     print(f"{zia_belief.get_reason_contexts()=}")
     assert len(zia_belief.get_plan_dict()) == 4
     assert len(zia_belief.get_agenda_dict()) == 1
     print(f"{zia_belief.get_agenda_dict().keys()=}")
-    assert zia_belief.get_agenda_dict().get(run_rope)._chore is True
+    assert zia_belief.get_agenda_dict().get(run_rope).chore is True
 
     # WHEN
     zia_belief.set_agenda_chore_complete(chore_rope=run_rope, reason_context=jour_rope)
@@ -373,16 +373,16 @@ def test_beliefunit_get_from_json_LoadsTaskFromJSON():
     veg_str = "cook veggies every morning"
     veg_rope = yao_belief.make_rope(body_rope, veg_str)
     veg_plan = yao_belief.get_plan_obj(veg_rope)
-    assert not veg_plan._active
+    assert not veg_plan.active
     assert veg_plan.task
 
     # plan_list = yao_belief.get_plan_dict()
     # task_true_count = 0
     # for plan in plan_list:
     #     if str(type(plan)).find(".plan.PlanUnit'>") > 0:
-    #         assert plan._active in (True, False)
+    #         assert plan.active in (True, False)
     #     assert plan.task in (True, False)
-    #     # if plan._active:
+    #     # if plan.active:
     #     #     print(plan.plan_label)
     #     if plan.task:
     #         task_true_count += 1
@@ -428,8 +428,8 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     evening_rope = yao_belief.make_rope(db_rope, evening_str)
     evening_plan = yao_belief._plan_dict.get(evening_rope)
     # for plan_x in yao_belief.get_agenda_dict():
-    #     # if plan_x._chore != True:
-    #     #     print(f"{len(task_plan_list)=} {plan_x._chore=} {plan_x.get_plan_rope()}")
+    #     # if plan_x.chore != True:
+    #     #     print(f"{len(task_plan_list)=} {plan_x.chore=} {plan_x.get_plan_rope()}")
     #     if plan_x.plan_label == evening_plan_label:
     #         evening_plan = plan_x
     #         print(f"{plan_x.get_plan_rope()=}")
@@ -439,9 +439,9 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     print(f"\n{factheir_gregziet=}")
 
     # for reasonheir in agenda_plan._reasonheirs.values():
-    #     print(f"{reasonheir.reason_context=} {reasonheir._status=} {reasonheir._chore=}")
+    #     print(f"{reasonheir.reason_context=} {reasonheir._status=} {reasonheir.chore=}")
     reasonheir_gregziet = evening_plan._reasonheirs.get(gregziet_rope)
-    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet._status}, chore={reasonheir_gregziet._chore}"
+    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet._status}, chore={reasonheir_gregziet.chore}"
     print(reasonheir_str)
 
     caseunit = reasonheir_gregziet.cases.get(gregziet_rope)

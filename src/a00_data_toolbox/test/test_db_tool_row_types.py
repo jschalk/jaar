@@ -39,15 +39,15 @@ def test_get_nonconvertible_columns_Scenario3_MultipleInvalid():
 
 def test_get_nonconvertible_columns_Scenario4_UnsupportedType():
     # ESTABLISH
-    row = {"id": "123", "score": "90", "active": "yes"}
+    row = {"id": "123", "score": "90", "current": "yes"}
     col_types = {
         "id": "INTEGER",
         "score": "REAL",
-        "active": "Boolean",
+        "current": "Boolean",
     }
 
     # WHEN / THEN
-    assert get_nonconvertible_columns(row, col_types) == {"active": "yes"}
+    assert get_nonconvertible_columns(row, col_types) == {"current": "yes"}
 
 
 def test_get_nonconvertible_columns_Scenario5_MissingColumnsAreIgnored():
@@ -61,7 +61,7 @@ def test_get_nonconvertible_columns_Scenario5_MissingColumnsAreIgnored():
 
 def test_get_nonconvertible_columns_Scenario6_NonDeclaredTypesIgnored():
     # ESTABLISH
-    row = {"id": "123", "score": "90", "active": "yes"}
+    row = {"id": "123", "score": "90", "current": "yes"}
     col_types = {"id": "INTEGER", "score": "REAL"}
 
     # WHEN / THEN

@@ -10,8 +10,8 @@ from src.a04_reason_logic.reason import (
     factheir_shop,
 )
 from src.a04_reason_logic.test._util.a04_str import (
-    _chore_str,
     _status_str,
+    chore_str,
     knot_str,
     reason_divisor_str,
     reason_lower_str,
@@ -36,13 +36,13 @@ def test_CaseUnit_Exists():
     assert email_case.reason_upper is None
     assert email_case.reason_divisor is None
     assert email_case._status is None
-    assert email_case._chore is None
+    assert email_case.chore is None
     assert email_case.knot is None
     obj_attrs = set(email_case.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         _status_str(),
-        _chore_str(),
+        chore_str(),
         knot_str(),
         reason_divisor_str(),
         reason_upper_str(),
@@ -631,7 +631,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
     assert range_2_to_7_case._status is None
-    assert range_2_to_7_case._chore is None
+    assert range_2_to_7_case.chore is None
 
     # WHEN
     range_0_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=5)
@@ -639,7 +639,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
 
     # THEN
     assert range_2_to_7_case._status
-    assert range_2_to_7_case._chore is False
+    assert range_2_to_7_case.chore is False
 
 
 def test_CaseUnit_set_status_SetsAttrs_Scenario02():
@@ -656,7 +656,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_case.set_status(x_factheir=range_0_to_8_fact)
     # THEN
     assert range_2_to_7_case._status
-    assert range_2_to_7_case._chore
+    assert range_2_to_7_case.chore
 
     # ESTABLISH
     range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=3, fact_upper=5)
@@ -664,14 +664,14 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_case.set_status(x_factheir=range_3_to_5_fact)
     # THEN
     assert range_2_to_7_case._status
-    assert range_2_to_7_case._chore is False
+    assert range_2_to_7_case.chore is False
 
     # ESTABLISH
     range_8_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=8, fact_upper=8)
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_8_to_8_fact)
     assert range_2_to_7_case._status is False
-    assert range_2_to_7_case._chore is False
+    assert range_2_to_7_case.chore is False
 
 
 def test_CaseUnit_set_status_SetsAttrs_Scenario03():

@@ -27,8 +27,8 @@ SELECT
 , belief_planunit_job.belief_name
 , belief_planunit_job.plan_rope
 , belief_planunit_job.task
-, belief_planunit_job._active
-, belief_planunit_job._chore
+, belief_planunit_job.active
+, belief_planunit_job.chore
 FROM belief_planunit_job
 ;
 """

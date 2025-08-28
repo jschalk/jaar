@@ -295,7 +295,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_chore": {
+            "chore": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
@@ -344,7 +344,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_chore": {
+            "chore": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }
@@ -373,7 +373,7 @@
             }
         },
         "jmetrics": {
-            "_active": {
+            "active": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -421,7 +421,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_chore": {
+            "chore": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

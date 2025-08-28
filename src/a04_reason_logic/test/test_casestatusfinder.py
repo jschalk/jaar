@@ -317,7 +317,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
 
 def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
     # ESTABLISH / WHEN / THEN
-    """Check scenarios CaseUnit._active. Plotly graph can be used to identify problems."""
+    """Check scenarios CaseUnit.active. Plotly graph can be used to identify problems."""
     # # Scenario A
     assert casestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()
 

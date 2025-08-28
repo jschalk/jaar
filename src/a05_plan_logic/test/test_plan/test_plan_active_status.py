@@ -334,24 +334,24 @@ def test_PlanUnit_set_active_attrs_SetsNullactive_hxToNonEmpty():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
-    assert clean_plan._active_hx == {}
+    assert clean_plan.active_hx == {}
 
     # WHEN
     clean_plan.set_active_attrs(tree_traverse_count=3)
     # THEN
-    assert clean_plan._active_hx == {3: True}
+    assert clean_plan.active_hx == {3: True}
 
 
 def test_PlanUnit_set_active_attrs_IfFullactive_hxResetToTrue():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
-    clean_plan._active_hx = {0: True, 4: False}
-    assert clean_plan._active_hx != {0: True}
+    clean_plan.active_hx = {0: True, 4: False}
+    assert clean_plan.active_hx != {0: True}
     # WHEN
     clean_plan.set_active_attrs(tree_traverse_count=0)
     # THEN
-    assert clean_plan._active_hx == {0: True}
+    assert clean_plan.active_hx == {0: True}
 
 
 def test_PlanUnit_set_factunit_SetsAttr():
@@ -393,49 +393,49 @@ def test_PlanUnit_factunit_exists_ReturnsObj():
 #         reason_upper=None,
 #         reason_divisor=None,
 #     )
-#     clean_plan._active_hx = {0: True, 4: False}
-#     assert clean_plan._active_hx != {0: False}
+#     clean_plan.active_hx = {0: True, 4: False}
+#     assert clean_plan.active_hx != {0: False}
 #     # WHEN
 #     clean_plan.set_active_attrs(tree_traverse_count=0)
 #     # THEN
-#     assert clean_plan._active_hx == {0: False}
+#     assert clean_plan.active_hx == {0: False}
 
 
 def test_PlanUnit_record_active_hx_Sets_active_hx():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
-    assert clean_plan._active_hx == {}
+    assert clean_plan.active_hx == {}
 
     # WHEN
     clean_plan.record_active_hx(0, prev_active=None, now_active=True)
     # THEN
-    assert clean_plan._active_hx == {0: True}
+    assert clean_plan.active_hx == {0: True}
 
     # WHEN
     clean_plan.record_active_hx(1, prev_active=True, now_active=True)
     # THEN
-    assert clean_plan._active_hx == {0: True}
+    assert clean_plan.active_hx == {0: True}
 
     # WHEN
     clean_plan.record_active_hx(2, prev_active=True, now_active=False)
     # THEN
-    assert clean_plan._active_hx == {0: True, 2: False}
+    assert clean_plan.active_hx == {0: True, 2: False}
 
     # WHEN
     clean_plan.record_active_hx(3, prev_active=False, now_active=False)
     # THEN
-    assert clean_plan._active_hx == {0: True, 2: False}
+    assert clean_plan.active_hx == {0: True, 2: False}
 
     # WHEN
     clean_plan.record_active_hx(4, prev_active=False, now_active=True)
     # THEN
-    assert clean_plan._active_hx == {0: True, 2: False, 4: True}
+    assert clean_plan.active_hx == {0: True, 2: False, 4: True}
 
     # WHEN
     clean_plan.record_active_hx(0, prev_active=False, now_active=False)
     # THEN
-    assert clean_plan._active_hx == {0: False}
+    assert clean_plan.active_hx == {0: False}
 
 
 def test_PlanUnit_set_laborunit_empty_if_None():

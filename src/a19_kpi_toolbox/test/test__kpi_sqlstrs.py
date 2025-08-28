@@ -1,8 +1,8 @@
 from src.a06_belief_logic.test._util.a06_str import (
-    _active_str,
-    _chore_str,
+    active_str,
     belief_name_str,
     belief_planunit_str,
+    chore_str,
     moment_label_str,
     plan_rope_str,
     task_str,
@@ -65,8 +65,8 @@ SELECT
 , {blrplan_job}.{belief_name_str()}
 , {blrplan_job}.{plan_rope_str()}
 , {blrplan_job}.{task_str()}
-, {blrplan_job}.{_active_str()}
-, {blrplan_job}.{_chore_str()}
+, {blrplan_job}.{active_str()}
+, {blrplan_job}.{chore_str()}
 FROM {blrplan_job}
 ;
 """

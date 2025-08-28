@@ -315,7 +315,7 @@ class CaseUnit:
     reason_upper: float = None
     reason_divisor: int = None
     _status: bool = None
-    _chore: bool = None
+    chore: bool = None
     knot: str = None
 
     def get_obj_key(self):
@@ -350,7 +350,7 @@ class CaseUnit:
 
     def set_status(self, x_factheir: FactHeir):
         self._status = self._get_active(factheir=x_factheir)
-        self._chore = self._get_chore_status(factheir=x_factheir)
+        self.chore = self._get_chore_status(factheir=x_factheir)
 
     def _get_active(self, factheir: FactHeir):
         x_status = None
@@ -594,7 +594,7 @@ def reasonunit_shop(
 @dataclass
 class ReasonHeir(ReasonCore):
     _status: bool = None
-    _chore: bool = None
+    chore: bool = None
     _reason_active_heir: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
@@ -641,7 +641,7 @@ class ReasonHeir(ReasonCore):
         for x_caseunit in self.cases.values():
             if x_caseunit._status:
                 any_case_true = True
-                if x_caseunit._chore:
+                if x_caseunit.chore:
                     any_chore_true = True
         return any_case_true, any_chore_true
 
@@ -649,9 +649,9 @@ class ReasonHeir(ReasonCore):
         self._status = any_case_true or self.is_reason_active_requisite_operational()
 
     def _set_attr_chore(self, any_chore_true: bool):
-        self._chore = True if any_chore_true else None
-        if self._status and self._chore is None:
-            self._chore = False
+        self.chore = True if any_chore_true else None
+        if self._status and self.chore is None:
+            self.chore = False
 
     def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
         self.clear_status()
@@ -666,7 +666,7 @@ def reasonheir_shop(
     cases: dict[RopeTerm, CaseUnit] = None,
     reason_active_requisite: bool = None,
     _status: bool = None,
-    _chore: bool = None,
+    chore: bool = None,
     _reason_active_heir: bool = None,
     knot: str = None,
 ):
@@ -675,7 +675,7 @@ def reasonheir_shop(
         cases=get_empty_dict_if_None(cases),
         reason_active_requisite=reason_active_requisite,
         _status=_status,
-        _chore=_chore,
+        chore=chore,
         _reason_active_heir=_reason_active_heir,
         knot=default_knot_if_None(knot),
     )

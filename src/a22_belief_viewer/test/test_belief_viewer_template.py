@@ -17,13 +17,10 @@ from src.a03_group_logic.test._util.a03_str import (
     voice_debt_points_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
-    _active_hx_str,
-    _active_str,
     _all_voice_cred_str,
     _all_voice_debt_str,
     _awardheirs_str,
     _awardlines_str,
-    _chore_str,
     _descendant_task_count_str,
     _factheirs_str,
     _gogo_calc_str,
@@ -35,9 +32,12 @@ from src.a05_plan_logic.test._util.a05_str import (
     _reasonheirs_str,
     _stop_calc_str,
     _uid_str,
+    active_hx_str,
+    active_str,
     addin_str,
     awardunits_str,
     begin_str,
+    chore_str,
     close_str,
     denom_str,
     fund_cease_str,
@@ -76,13 +76,13 @@ def test_get_belief_viewer_template_ReturnsObj():
     # THEN
     assert template_str
     expected_strs_in_template = {
-        _active_hx_str(),
-        _active_str(),
+        active_hx_str(),
+        active_str(),
         _all_voice_cred_str(),
         _all_voice_debt_str(),
         _awardheirs_str(),
         _awardlines_str(),
-        _chore_str(),
+        chore_str(),
         _descendant_task_count_str(),
         _factheirs_str(),
         fund_cease_str(),
