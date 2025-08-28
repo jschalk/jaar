@@ -3,13 +3,13 @@ from src.a01_term_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 from src.a03_group_logic.test._util.a03_str import (
-    _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
     _memberships_str,
+    credor_pool_str,
     fund_iota_str,
     group_title_str,
     knot_str,
@@ -27,7 +27,7 @@ def test_GroupUnit_Exists():
     assert not x_groupunit._fund_take
     assert not x_groupunit._fund_agenda_give
     assert not x_groupunit._fund_agenda_take
-    assert not x_groupunit._credor_pool
+    assert not x_groupunit.credor_pool
     assert not x_groupunit._debtor_pool
     assert not x_groupunit.knot
     assert not x_groupunit.fund_iota
@@ -39,7 +39,7 @@ def test_GroupUnit_Exists():
         _fund_take_str(),
         _fund_agenda_give_str(),
         _fund_agenda_take_str(),
-        _credor_pool_str(),
+        credor_pool_str(),
         _debtor_pool_str(),
         knot_str(),
         fund_iota_str(),
@@ -63,7 +63,7 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit._fund_take == 0
     assert swim_groupunit._fund_agenda_give == 0
     assert swim_groupunit._fund_agenda_take == 0
-    assert swim_groupunit._credor_pool == 0
+    assert swim_groupunit.credor_pool == 0
     assert swim_groupunit._debtor_pool == 0
     assert swim_groupunit.knot == default_knot_if_None()
     assert swim_groupunit.fund_iota == default_fund_iota_if_None()
@@ -133,24 +133,24 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     yao_ohio_membership.voice_name = yao_str
     yao_ohio_membership.voice_name = yao_str
     sue_ohio_membership.voice_name = sue_str
-    yao_ohio_membership._credor_pool = 66
-    sue_ohio_membership._credor_pool = 22
+    yao_ohio_membership.credor_pool = 66
+    sue_ohio_membership.credor_pool = 22
     yao_ohio_membership._debtor_pool = 6600
     sue_ohio_membership._debtor_pool = 2200
     ohio_groupunit = groupunit_shop(ohio_str)
-    assert ohio_groupunit._credor_pool == 0
+    assert ohio_groupunit.credor_pool == 0
     assert ohio_groupunit._debtor_pool == 0
 
     # WHEN
     ohio_groupunit.set_membership(yao_ohio_membership)
     # THEN
-    assert ohio_groupunit._credor_pool == 66
+    assert ohio_groupunit.credor_pool == 66
     assert ohio_groupunit._debtor_pool == 6600
 
     # WHEN
     ohio_groupunit.set_membership(sue_ohio_membership)
     # THEN
-    assert ohio_groupunit._credor_pool == 88
+    assert ohio_groupunit.credor_pool == 88
     assert ohio_groupunit._debtor_pool == 8800
 
 
@@ -162,7 +162,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_title_IsWrong()
     yao_ohio_membership = membership_shop(ohio_str)
     yao_ohio_membership.voice_name = yao_str
     yao_ohio_membership.voice_name = yao_str
-    yao_ohio_membership._credor_pool = 66
+    yao_ohio_membership.credor_pool = 66
     yao_ohio_membership._debtor_pool = 6600
     iowa_groupunit = groupunit_shop(iowa_str)
 

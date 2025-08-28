@@ -15,7 +15,6 @@ from src.a03_group_logic.group import (
     memberships_get_from_dict,
 )
 from src.a03_group_logic.test._util.a03_str import (
-    _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,
     _fund_agenda_ratio_give_str,
@@ -23,6 +22,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _fund_agenda_take_str,
     _fund_give_str,
     _fund_take_str,
+    credor_pool_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
@@ -51,7 +51,7 @@ def test_MemberShip_Exists():
     assert swim_membership.group_title == swim_str
     assert swim_membership.group_cred_points == 1.0
     assert swim_membership.group_debt_points == 1.0
-    assert not swim_membership._credor_pool
+    assert not swim_membership.credor_pool
     assert not swim_membership._debtor_pool
     assert not swim_membership._fund_give
     assert not swim_membership._fund_take
@@ -67,7 +67,7 @@ def test_MemberShip_Exists():
         group_title_str(),
         group_cred_points_str(),
         group_debt_points_str(),
-        _credor_pool_str(),
+        credor_pool_str(),
         _debtor_pool_str(),
         _fund_agenda_give_str(),
         _fund_agenda_ratio_give_str(),
@@ -94,7 +94,7 @@ def test_membership_shop_ReturnsObj():
     # THEN
     assert swim_membership.group_cred_points == swim_group_cred_points
     assert swim_membership.group_debt_points == swim_group_debt_points
-    assert swim_membership._credor_pool == 0
+    assert swim_membership.credor_pool == 0
     assert swim_membership._debtor_pool == 0
     assert not swim_membership._fund_give
     assert not swim_membership._fund_take

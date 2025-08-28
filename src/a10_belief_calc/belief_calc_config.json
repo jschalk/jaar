@@ -20,7 +20,7 @@
             }
         },
         "jmetrics": {
-            "_credor_pool": {
+            "credor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -81,7 +81,7 @@
             }
         },
         "jmetrics": {
-            "_credor_pool": {
+            "credor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
@@ -494,7 +494,7 @@
             }
         },
         "jmetrics": {
-            "_credor_pool": {
+            "credor_pool": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

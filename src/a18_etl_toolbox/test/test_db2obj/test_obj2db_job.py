@@ -578,7 +578,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     x_voice_name = 1
     x_voice_cred_points = 2
     x_voice_debt_points = 3
-    x__credor_pool = 4
+    x_credor_pool = 4
     x__debtor_pool = 5
     x__fund_give = 6
     x__fund_take = 7
@@ -594,7 +594,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
         "voice_name": x_voice_name,
         "voice_cred_points": x_voice_cred_points,
         "voice_debt_points": x_voice_debt_points,
-        "_credor_pool": x__credor_pool,
+        "credor_pool": x_credor_pool,
         "_debtor_pool": x__debtor_pool,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,
@@ -656,7 +656,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     x_group_title = 2
     x_group_cred_points = 3
     x_group_debt_points = 4
-    x__credor_pool = 5
+    x_credor_pool = 5
     x__debtor_pool = 6
     x__fund_give = 7
     x__fund_take = 8
@@ -671,7 +671,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
         "group_title": x_group_title,
         "group_cred_points": x_group_cred_points,
         "group_debt_points": x_group_debt_points,
-        "_credor_pool": x__credor_pool,
+        "credor_pool": x_credor_pool,
         "_debtor_pool": x__debtor_pool,
         "_fund_give": x__fund_give,
         "_fund_take": x__fund_take,
@@ -728,7 +728,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_group_title = 1
-    x__credor_pool = 2
+    x_credor_pool = 2
     x__debtor_pool = 3
     x_fund_iota = 4
     x__fund_give = 5
@@ -740,7 +740,7 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "group_title": x_group_title,
-        "_credor_pool": x__credor_pool,
+        "credor_pool": x_credor_pool,
         "_debtor_pool": x__debtor_pool,
         "fund_iota": x_fund_iota,
         "_fund_give": x__fund_give,

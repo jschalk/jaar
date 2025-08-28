@@ -156,7 +156,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
         voice_cred_points_readable = f"voice_cred_points: {voice.voice_cred_points}"
         voice_debt_points_readable = f"voice_debt_points: {voice.voice_debt_points}"
         _memberships_readable = f"_memberships: {voice._memberships}"
-        _credor_pool_readable = f"_credor_pool: {voice._credor_pool}"
+        credor_pool_readable = f"credor_pool: {voice.credor_pool}"
         _debtor_pool_readable = f"_debtor_pool: {voice._debtor_pool}"
         _irrational_voice_debt_points_readable = (
             f"_irrational_voice_debt_points: {voice._irrational_voice_debt_points}"
@@ -180,7 +180,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
                 "group_title": x_membership.group_title,
                 "group_cred_points": x_membership.group_cred_points,
                 "group_debt_points": x_membership.group_debt_points,
-                "_credor_pool": x_membership._credor_pool,
+                "credor_pool": x_membership.credor_pool,
                 "_debtor_pool": x_membership._debtor_pool,
                 "_fund_agenda_give": x_membership._fund_agenda_give,
                 "_fund_agenda_ratio_give": x_membership._fund_agenda_ratio_give,
@@ -197,8 +197,8 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
                 "group_debt_points_readable": add_small_dot(
                     f"group_debt_points: {x_membership.group_debt_points}"
                 ),
-                "_credor_pool_readable": add_small_dot(
-                    f"_credor_pool: {x_membership._credor_pool}"
+                "credor_pool_readable": add_small_dot(
+                    f"credor_pool: {x_membership.credor_pool}"
                 ),
                 "_debtor_pool_readable": add_small_dot(
                     f"_debtor_pool: {x_membership._debtor_pool}"
@@ -229,7 +229,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "voice_cred_points": voice.voice_cred_points,
             "voice_debt_points": voice.voice_debt_points,
             "_memberships": x_members_dict,
-            "_credor_pool": voice._credor_pool,
+            "credor_pool": voice.credor_pool,
             "_debtor_pool": voice._debtor_pool,
             "_irrational_voice_debt_points": voice._irrational_voice_debt_points,
             "_inallocable_voice_debt_points": voice._inallocable_voice_debt_points,
@@ -242,7 +242,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
             "voice_cred_points_readable": voice_cred_points_readable,
             "voice_debt_points_readable": voice_debt_points_readable,
             "_memberships_readable": _memberships_readable,
-            "_credor_pool_readable": _credor_pool_readable,
+            "credor_pool_readable": credor_pool_readable,
             "_debtor_pool_readable": _debtor_pool_readable,
             "_irrational_voice_debt_points_readable": _irrational_voice_debt_points_readable,
             "_inallocable_voice_debt_points_readable": _inallocable_voice_debt_points_readable,
@@ -265,7 +265,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #     group_title_readable_key = f"group_title_readable"
     #     group_cred_points_readable_key = f"group_cred_points_readable"
     #     group_debt_points_readable_key = f"group_debt_points_readable"
-    #     _credor_pool_readable_key = f"_credor_pool_readable"
+    #     credor_pool_readable_key = f"credor_pool_readable"
     #     _debtor_pool_readable_key = f"_debtor_pool_readable"
     #     _fund_agenda_give_readable_key = f"_fund_agenda_give_readable"
     #     _fund_agenda_ratio_give_readable_key = f"_fund_agenda_ratio_give_readable"
@@ -284,7 +284,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #     group__fund_agenda_take_readable = (
     #         f"_fund_agenda_take_readable: {group._fund_agenda_take}"
     #     )
-    #     group__credor_pool_readable = f"_credor_pool_readable: {group._credor_pool}"
+    #     group_credor_pool_readable = f"credor_pool_readable: {group.credor_pool}"
     #     group__debtor_pool_readable = f"_debtor_pool_readable: {group._debtor_pool}"
 
     #     x_members_dict = {
@@ -293,7 +293,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         #     "group_title": x_membership.group_title,
     #         #     "group_cred_points": x_membership.group_cred_points,
     #         #     "group_debt_points": x_membership.group_debt_points,
-    #         #     "_credor_pool": x_membership._credor_pool,
+    #         #     "credor_pool": x_membership.credor_pool,
     #         #     "_debtor_pool": x_membership._debtor_pool,
     #         #     "_fund_agenda_give": x_membership._fund_agenda_give,
     #         #     "_fund_agenda_ratio_give": x_membership._fund_agenda_ratio_give,
@@ -310,8 +310,8 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         #     "group_debt_points_readable": add_small_dot(
     #         #         f"group_debt_points: {x_membership.group_debt_points}"
     #         #     ),
-    #         #     "_credor_pool_readable": add_small_dot(
-    #         #         f"_credor_pool: {x_membership._credor_pool}"
+    #         #     "credor_pool_readable": add_small_dot(
+    #         #         f"credor_pool: {x_membership.credor_pool}"
     #         #     ),
     #         #     "_debtor_pool_readable": add_small_dot(
     #         #         f"_debtor_pool: {x_membership._debtor_pool}"
@@ -343,7 +343,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         "group_title": 1,
     #         "group_cred_points": 1,
     #         "group_debt_points": 1,
-    #         "_credor_pool": 1,
+    #         "credor_pool": 1,
     #         "_debtor_pool": 1,
     #         "_fund_agenda_give": 1,
     #         "_fund_agenda_ratio_give": 1,
@@ -354,7 +354,7 @@ def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     #         group_title_readable_key: 1,
     #         group_cred_points_readable_key: 1,
     #         group_debt_points_readable_key: 1,
-    #         _credor_pool_readable_key: 1,
+    #         credor_pool_readable_key: 1,
     #         _debtor_pool_readable_key: 1,
     #         _fund_agenda_give_readable_key: 1,
     #         _fund_agenda_ratio_give_readable_key: 1,

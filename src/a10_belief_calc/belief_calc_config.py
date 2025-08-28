@@ -39,7 +39,7 @@ def get_belief_calc_args_type_dict() -> dict[str, str]:
     return {
         "voice_name": "NameTerm",
         "group_title": "TitleTerm",
-        "_credor_pool": "float",
+        "credor_pool": "float",
         "_debtor_pool": "float",
         "_fund_agenda_give": "float",
         "_fund_agenda_ratio_give": "float",
@@ -116,7 +116,7 @@ def get_belief_calc_args_sqlite_datatype_dict() -> dict[str, str]:
     return {
         "voice_name": "TEXT",
         "group_title": "TEXT",
-        "_credor_pool": "REAL",
+        "credor_pool": "REAL",
         "_debtor_pool": "REAL",
         "_fund_agenda_give": "REAL",
         "_fund_agenda_ratio_give": "REAL",

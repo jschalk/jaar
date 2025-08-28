@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,
     _fund_agenda_ratio_give_str,
@@ -16,6 +15,7 @@ from src.a03_group_logic.test._util.a03_str import (
     awardee_title_str,
     awardunits_str,
     belief_name_str,
+    credor_pool_str,
     fund_give_str,
     fund_take_str,
     give_force_str,
@@ -35,7 +35,7 @@ from src.a03_group_logic.test._util.a03_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert _credor_pool_str() == "_credor_pool"
+    assert credor_pool_str() == "credor_pool"
     assert _debtor_pool_str() == "_debtor_pool"
     assert _fund_agenda_give_str() == "_fund_agenda_give"
     assert _fund_agenda_ratio_give_str() == "_fund_agenda_ratio_give"

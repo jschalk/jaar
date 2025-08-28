@@ -43,7 +43,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_voice_membership_group_title"><label for="show_voice_membership_group_title">membership_group_title</label>
             <input type="checkbox" id="show_voice_membership_group_cred_points"><label for="show_voice_membership_group_cred_points">membership_group_cred_points</label>
             <input type="checkbox" id="show_voice_membership_group_debt_points"><label for="show_voice_membership_group_debt_points">membership_group_debt_points</label>
-            <input type="checkbox" id="show_voice_membership__credor_pool"><label for="show_voice_membership__credor_pool">membership__credor_pool</label>
+            <input type="checkbox" id="show_voice_membership_credor_pool"><label for="show_voice_membership_credor_pool">membership_credor_pool</label>
             <input type="checkbox" id="show_voice_membership__debtor_pool"><label for="show_voice_membership__debtor_pool">membership__debtor_pool</label>
             <input type="checkbox" id="show_voice_membership__fund_agenda_give"><label for="show_voice_membership__fund_agenda_give">membership__fund_agenda_give</label>
             <input type="checkbox" id="show_voice_membership__fund_agenda_ratio_give"><label for="show_voice_membership__fund_agenda_ratio_give">membership__fund_agenda_ratio_give</label>

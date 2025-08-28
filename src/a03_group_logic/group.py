@@ -23,7 +23,7 @@ class MemberShip(GroupCore):
     group_cred_points: float = 1.0
     group_debt_points: float = 1.0
     # calculated fields
-    _credor_pool: float = None
+    credor_pool: float = None
     _debtor_pool: float = None
     _fund_give: float = None
     _fund_take: float = None
@@ -67,7 +67,7 @@ def membership_shop(
         group_title=group_title,
         group_cred_points=get_1_if_None(group_cred_points),
         group_debt_points=get_1_if_None(group_debt_points),
-        _credor_pool=0,
+        credor_pool=0,
         _debtor_pool=0,
         voice_name=voice_name,
     )
@@ -188,7 +188,7 @@ class GroupUnit(GroupCore):
     _fund_take: float = None
     _fund_agenda_give: float = None
     _fund_agenda_take: float = None
-    _credor_pool: float = None
+    credor_pool: float = None
     _debtor_pool: float = None
     fund_iota: FundIota = None
 
@@ -203,11 +203,11 @@ class GroupUnit(GroupCore):
             )
 
         self._memberships[x_membership.voice_name] = x_membership
-        self._add_credor_pool(x_membership._credor_pool)
+        self._add_credor_pool(x_membership.credor_pool)
         self._add_debtor_pool(x_membership._debtor_pool)
 
     def _add_credor_pool(self, x_credor_pool: float):
-        self._credor_pool += x_credor_pool
+        self.credor_pool += x_credor_pool
 
     def _add_debtor_pool(self, x_debtor_pool: float):
         self._debtor_pool += x_debtor_pool
@@ -259,7 +259,7 @@ def groupunit_shop(
         _fund_take=0,
         _fund_agenda_give=0,
         _fund_agenda_take=0,
-        _credor_pool=0,
+        credor_pool=0,
         _debtor_pool=0,
         knot=default_knot_if_None(knot),
         fund_iota=default_fund_iota_if_None(fund_iota),

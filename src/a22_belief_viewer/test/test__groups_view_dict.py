@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _credor_pool_str,
     _debtor_pool_str,
     _fund_agenda_give_str,
     _fund_agenda_ratio_give_str,
@@ -10,6 +9,7 @@ from src.a03_group_logic.test._util.a03_str import (
     _inallocable_voice_debt_points_str,
     _irrational_voice_debt_points_str,
     _memberships_str,
+    credor_pool_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
@@ -86,7 +86,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     _fund_take_readable_key = add_readable(_fund_take_str())
 #     _fund_agenda_give_readable_key = add_readable(_fund_agenda_give_str())
 #     _fund_agenda_take_readable_key = add_readable(_fund_agenda_take_str())
-#     _credor_pool_readable_key = add_readable(_credor_pool_str())
+#     credor_pool_readable_key = add_readable(credor_pool_str())
 #     _debtor_pool_readable_key = add_readable(_debtor_pool_str())
 #     assert set(swim_group_dict.keys()) == {
 #         group_title_str(),
@@ -95,7 +95,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         _fund_take_str(),
 #         _fund_agenda_give_str(),
 #         _fund_agenda_take_str(),
-#         _credor_pool_str(),
+#         credor_pool_str(),
 #         _debtor_pool_str(),
 #         group_title_readable_key,
 #         _memberships_readable_key,
@@ -103,7 +103,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         _fund_take_readable_key,
 #         _fund_agenda_give_readable_key,
 #         _fund_agenda_take_readable_key,
-#         _credor_pool_readable_key,
+#         credor_pool_readable_key,
 #         _debtor_pool_readable_key,
 #     }
 
@@ -118,7 +118,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     swim__fund_agenda_take_readable = (
 #         f"_fund_agenda_take_readable: {swim_groupunit._fund_agenda_take}"
 #     )
-#     swim__credor_pool_readable = f"_credor_pool_readable: {swim_groupunit._credor_pool}"
+#     swim_credor_pool_readable = f"credor_pool_readable: {swim_groupunit.credor_pool}"
 #     swim__debtor_pool_readable = f"_debtor_pool_readable: {swim_groupunit._debtor_pool}"
 
 #     sgu = swim_groupunit
@@ -129,7 +129,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert sgu._fund_take == sg_dict.get(_fund_take_str())
 #     assert sgu._fund_agenda_give == sg_dict.get(_fund_agenda_give_str())
 #     assert sgu._fund_agenda_take == sg_dict.get(_fund_agenda_take_str())
-#     assert sgu._credor_pool == sg_dict.get(_credor_pool_str())
+#     assert sgu.credor_pool == sg_dict.get(credor_pool_str())
 #     assert sgu._debtor_pool == sg_dict.get(_debtor_pool_str())
 #     assert swim_group_title_readable == sg_dict.get(group_title_readable_key)
 #     assert swim__memberships_readable == sg_dict.get(_memberships_readable_key)
@@ -141,7 +141,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert swim__fund_agenda_take_readable == sg_dict.get(
 #         _fund_agenda_take_readable_key
 #     )
-#     assert swim__credor_pool_readable == sg_dict.get(_credor_pool_readable_key)
+#     assert swim_credor_pool_readable == sg_dict.get(credor_pool_readable_key)
 #     assert swim__debtor_pool_readable == sg_dict.get(_debtor_pool_readable_key)
 
 #     assert 1 == 2
@@ -174,7 +174,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     group_title_readable_key = add_readable(group_title_str())
 #     group_cred_points_readable_key = add_readable(group_cred_points_str())
 #     group_debt_points_readable_key = add_readable(group_debt_points_str())
-#     _credor_pool_readable_key = add_readable(_credor_pool_str())
+#     credor_pool_readable_key = add_readable(credor_pool_str())
 #     _debtor_pool_readable_key = add_readable(_debtor_pool_str())
 #     _fund_agenda_give_readable_key = add_readable(_fund_agenda_give_str())
 #     _fund_agenda_ratio_give_readable_key = add_readable(_fund_agenda_ratio_give_str())
@@ -187,7 +187,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         group_title_str(),
 #         group_cred_points_str(),
 #         group_debt_points_str(),
-#         _credor_pool_str(),
+#         credor_pool_str(),
 #         _debtor_pool_str(),
 #         _fund_agenda_give_str(),
 #         _fund_agenda_ratio_give_str(),
@@ -198,7 +198,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         group_title_readable_key,
 #         group_cred_points_readable_key,
 #         group_debt_points_readable_key,
-#         _credor_pool_readable_key,
+#         credor_pool_readable_key,
 #         _debtor_pool_readable_key,
 #         _fund_agenda_give_readable_key,
 #         _fund_agenda_ratio_give_readable_key,
@@ -215,7 +215,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     expected_group_debt_points_readable = (
 #         f"{group_debt_points_str()}: {yao_swim_mu.group_debt_points}"
 #     )
-#     expected__credor_pool_readable = f"{_credor_pool_str()}: {yao_swim_mu._credor_pool}"
+#     expected_credor_pool_readable = f"{credor_pool_str()}: {yao_swim_mu.credor_pool}"
 #     expected__debtor_pool_readable = f"{_debtor_pool_str()}: {yao_swim_mu._debtor_pool}"
 #     expected__fund_agenda_give_readable = (
 #         f"{_fund_agenda_give_str()}: {yao_swim_mu._fund_agenda_give}"
@@ -236,7 +236,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert yao_swim_dict.get(group_title_str()) == yao_swim_mu.group_title
 #     assert yao_swim_dict.get(group_cred_points_str()) == yao_swim_mu.group_cred_points
 #     assert yao_swim_dict.get(group_debt_points_str()) == yao_swim_mu.group_debt_points
-#     assert yao_swim_dict.get(_credor_pool_str()) == yao_swim_mu._credor_pool
+#     assert yao_swim_dict.get(credor_pool_str()) == yao_swim_mu.credor_pool
 #     assert yao_swim_dict.get(_debtor_pool_str()) == yao_swim_mu._debtor_pool
 #     assert yao_swim_dict.get(_fund_agenda_give_str()) == yao_swim_mu._fund_agenda_give
 #     assert (
@@ -260,7 +260,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         == expected_group_debt_points_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_credor_pool_readable_key) == expected__credor_pool_readable
+#         yao_swim_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
 #     )
 #     assert (
 #         yao_swim_dict.get(_debtor_pool_readable_key) == expected__debtor_pool_readable

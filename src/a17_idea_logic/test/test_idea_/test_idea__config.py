@@ -352,7 +352,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[145] == "_active"
     assert table_sorting_priority[146] == "_chore"
     assert table_sorting_priority[147] == "_status"
-    assert table_sorting_priority[148] == "_credor_pool"
+    assert table_sorting_priority[148] == "credor_pool"
     assert table_sorting_priority[149] == "_debtor_pool"
     assert table_sorting_priority[150] == "_rational"
     assert table_sorting_priority[151] == "_fund_give"
