@@ -10,12 +10,12 @@ from src.a15_moment_logic.test._util.a15_str import moment_budunit_str
 from src.a18_etl_toolbox.test._util.a18_str import moment_ote1_agg_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import (
-    create_sound_and_voice_tables,
-    etl_voice_raw_tables_to_moment_ote1_agg,
+    create_sound_and_heard_tables,
+    etl_heard_raw_tables_to_moment_ote1_agg,
 )
 
 
-def test_etl_voice_raw_tables_to_moment_ote1_agg_SetsTableAttr():
+def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():
     # ESTABLISH
     bob_str = "Bob"
     sue_str = "Sue"
@@ -29,10 +29,10 @@ def test_etl_voice_raw_tables_to_moment_ote1_agg_SetsTableAttr():
     timepoint77 = 77
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
-        momentbud_v_raw_table = create_prime_tablename(moment_budunit_str(), "v", "raw")
+        create_sound_and_heard_tables(cursor)
+        momentbud_h_raw_table = create_prime_tablename(moment_budunit_str(), "h", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {momentbud_v_raw_table} ({event_int_str()}, {moment_label_str()}_inx, {belief_name_str()}_inx, {bud_time_str()})
+INSERT INTO {momentbud_h_raw_table} ({event_int_str()}, {moment_label_str()}_inx, {belief_name_str()}_inx, {bud_time_str()})
 VALUES
   ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
@@ -41,11 +41,11 @@ VALUES
 ;
 """
         cursor.execute(insert_raw_sqlstr)
-        assert get_row_count(cursor, momentbud_v_raw_table) == 4
+        assert get_row_count(cursor, momentbud_h_raw_table) == 4
         assert db_table_exists(cursor, moment_ote1_agg_str()) is False
 
         # WHEN
-        etl_voice_raw_tables_to_moment_ote1_agg(cursor)
+        etl_heard_raw_tables_to_moment_ote1_agg(cursor)
 
         # THEN
         assert db_table_exists(cursor, moment_ote1_agg_str())

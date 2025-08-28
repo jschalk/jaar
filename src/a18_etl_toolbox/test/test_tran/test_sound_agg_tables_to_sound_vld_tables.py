@@ -12,7 +12,7 @@ from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a18_etl_toolbox.test._util.a18_str import error_message_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
     get_insert_into_sound_vld_sqlstrs,
 )
 from src.a18_etl_toolbox.transformers import etl_sound_agg_tables_to_sound_vld_tables
@@ -36,7 +36,7 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         beliefapartner_s_agg_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "agg", "put"
         )
@@ -60,18 +60,18 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, beliefapartner_s_agg_put_tablename) == 4
-        blrawar_v_vld_put_tablename = prime_tbl(
+        blrawar_h_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, blrawar_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrawar_h_vld_put_tablename) == 0
 
         # WHEN
-        sqlstr = get_insert_into_sound_vld_sqlstrs().get(blrawar_v_vld_put_tablename)
+        sqlstr = get_insert_into_sound_vld_sqlstrs().get(blrawar_h_vld_put_tablename)
         print(sqlstr)
         cursor.execute(sqlstr)
 
         # THEN
-        assert get_row_count(cursor, blrawar_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, blrawar_h_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
@@ -79,7 +79,7 @@ VALUES
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrawar_v_vld_put_tablename}
+FROM {blrawar_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -110,7 +110,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_s_agg_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "agg", "put"
         )
@@ -134,16 +134,16 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
-        blrpern_v_vld_put_tablename = prime_tbl(
+        blrpern_h_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
@@ -151,7 +151,7 @@ VALUES
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrpern_v_vld_put_tablename}
+FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -181,7 +181,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_s_agg_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "agg", "put"
         )
@@ -205,16 +205,16 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
-        blrpern_v_vld_put_tablename = prime_tbl(
+        blrpern_h_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 4
+        assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
@@ -222,7 +222,7 @@ VALUES
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrpern_v_vld_put_tablename}
+FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
@@ -252,7 +252,7 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         blrpern_s_agg_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "agg", "put"
         )
@@ -277,16 +277,16 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_agg_put_tablename) == 4
-        blrpern_v_vld_put_tablename = prime_tbl(
+        blrpern_h_vld_put_tablename = prime_tbl(
             belief_partnerunit_str(), "s", "vld", "put"
         )
-        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 0
+        assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 0
 
         # WHEN
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, blrpern_v_vld_put_tablename) == 3
+        assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 3
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
@@ -294,7 +294,7 @@ VALUES
 , {partner_name_str()}
 , {partner_cred_points_str()}
 , {partner_debt_points_str()}
-FROM {blrpern_v_vld_put_tablename}
+FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()

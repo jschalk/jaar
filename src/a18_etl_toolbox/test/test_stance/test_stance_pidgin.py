@@ -27,7 +27,7 @@ from src.a18_etl_toolbox.stance_tool import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
 )
 
 
@@ -50,7 +50,7 @@ def test_add_to_br00042_csv_ReturnsObj():
     # Create database with manually entered pidgin data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidtitl_dimen = pidgin_title_str()
         pidtitl_s_vld_tablename = prime_tbl(pidtitl_dimen, "s", "vld")
         insert_pidtitl_sqlstr = f"""INSERT INTO {pidtitl_s_vld_tablename}
@@ -110,7 +110,7 @@ def test_add_to_br00043_csv_ReturnsObj():
     # Create database with manually entered pidgin data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidname_dimen = pidgin_name_str()
         pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
         insert_pidname_sqlstr = f"""
@@ -174,7 +174,7 @@ def test_add_to_br00044_csv_ReturnsObj():
     # Create database with manually entered pidgin data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidlabe_dimen = pidgin_label_str()
         pidlabe_s_vld_tablename = prime_tbl(pidlabe_dimen, "s", "vld")
         insert_pidlabe_sqlstr = f"""
@@ -238,7 +238,7 @@ def test_add_to_br00045_csv_ReturnsObj():
     # Create database with manually entered pidgin data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidrope_dimen = pidgin_rope_str()
         pidrope_s_vld_tablename = prime_tbl(pidrope_dimen, "s", "vld")
         insert_pidrope_sqlstr = f"""
@@ -300,7 +300,7 @@ def test_add_pidgin_rows_to_stance_csv_strs_ReturnsObj():
     # Create database with manually entered pidgin data in the validated tables
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
 
         # insert pidgin_title records
         pidtitl_dimen = pidgin_title_str()

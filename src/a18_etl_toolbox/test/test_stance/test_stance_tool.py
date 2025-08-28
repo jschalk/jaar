@@ -36,9 +36,9 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
-    create_sound_and_voice_tables,
-    create_update_voice_raw_empty_inx_col_sqlstr,
-    create_update_voice_raw_existing_inx_col_sqlstr,
+    create_sound_and_heard_tables,
+    create_update_heard_raw_empty_inx_col_sqlstr,
+    create_update_heard_raw_existing_inx_col_sqlstr,
 )
 
 
@@ -127,7 +127,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
 
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidname_dimen = pidgin_name_str()
         pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
         print(f"{pidname_s_vld_tablename=}")
@@ -231,7 +231,7 @@ def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
 
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         pidname_dimen = pidgin_name_str()
         pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
         print(f"{pidname_s_vld_tablename=}")

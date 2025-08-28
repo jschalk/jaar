@@ -23,6 +23,10 @@ from src.a18_etl_toolbox.transformers import (
     etl_event_inherited_beliefunits_to_moment_gut,
     etl_event_pack_json_to_event_inherited_beliefunits,
     etl_events_brick_agg_table_to_events_brick_valid_table,
+    etl_heard_agg_tables_to_moment_jsons,
+    etl_heard_agg_to_event_belief_csvs,
+    etl_heard_raw_tables_to_heard_agg_tables,
+    etl_heard_raw_tables_to_moment_ote1_agg,
     etl_input_dfs_to_brick_raw_tables,
     etl_moment_guts_to_moment_jobs,
     etl_moment_job_jsons_to_job_tables,
@@ -35,11 +39,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_set_cell_trees_found_facts,
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
-    etl_sound_vld_tables_to_voice_raw_tables,
-    etl_voice_agg_tables_to_moment_jsons,
-    etl_voice_agg_to_event_belief_csvs,
-    etl_voice_raw_tables_to_moment_ote1_agg,
-    etl_voice_raw_tables_to_voice_agg_tables,
+    etl_sound_vld_tables_to_heard_raw_tables,
     get_max_brick_agg_event_int,
 )
 from src.a19_kpi_toolbox.kpi_mstr import (
@@ -134,21 +134,21 @@ class WorldUnit:
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
-        # sound raw to voice raw, filter through pidgins
+        # sound raw to heard raw, filter through pidgins
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
         etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
-        etl_sound_vld_tables_to_voice_raw_tables(cursor)
-        # voice raw to moment/belief jsons
-        etl_voice_raw_tables_to_voice_agg_tables(cursor)
-        etl_voice_agg_tables_to_moment_jsons(cursor, self._moment_mstr_dir)
-        etl_voice_agg_to_event_belief_csvs(cursor, self._moment_mstr_dir)
+        etl_sound_vld_tables_to_heard_raw_tables(cursor)
+        # heard raw to moment/belief jsons
+        etl_heard_raw_tables_to_heard_agg_tables(cursor)
+        etl_heard_agg_tables_to_moment_jsons(cursor, self._moment_mstr_dir)
+        etl_heard_agg_to_event_belief_csvs(cursor, self._moment_mstr_dir)
         etl_event_belief_csvs_to_pack_json(self._moment_mstr_dir)
         etl_event_pack_json_to_event_inherited_beliefunits(self._moment_mstr_dir)
         etl_event_inherited_beliefunits_to_moment_gut(self._moment_mstr_dir)
         add_moment_timeline_to_guts(self._moment_mstr_dir)
         etl_moment_guts_to_moment_jobs(self._moment_mstr_dir)
-        etl_voice_raw_tables_to_moment_ote1_agg(cursor)
+        etl_heard_raw_tables_to_moment_ote1_agg(cursor)
         etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(cursor, self._moment_mstr_dir)
         etl_moment_ote1_agg_csvs_to_jsons(self._moment_mstr_dir)
         self.calc_moment_bud_partner_mandate_net_ledgers()

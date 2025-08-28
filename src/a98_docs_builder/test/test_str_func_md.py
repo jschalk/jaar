@@ -1,4 +1,3 @@
-from pathlib import Path as pathlib_Path
 from src.a98_docs_builder.module_eval import get_str_funcs_md
 
 

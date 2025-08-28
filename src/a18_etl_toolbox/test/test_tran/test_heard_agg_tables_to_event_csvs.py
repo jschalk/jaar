@@ -16,12 +16,12 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
 )
-from src.a18_etl_toolbox.transformers import etl_voice_agg_to_event_belief_csvs
+from src.a18_etl_toolbox.transformers import etl_heard_agg_to_event_belief_csvs
 
 
-def test_etl_voice_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
+def test_etl_heard_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -34,7 +34,7 @@ def test_etl_voice_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
     yao_partner_cred_points5 = 5
     sue_partner_cred_points7 = 7
     put_agg_tablename = create_prime_tablename(
-        belief_partnerunit_str(), "v", "agg", "put"
+        belief_partnerunit_str(), "h", "agg", "put"
     )
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_moment_mstr_dir = get_module_temp_dir()
@@ -49,7 +49,7 @@ def test_etl_voice_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
 
     with sqlite3_connect(":memory:") as belief_db_conn:
         cursor = belief_db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         insert_raw_sqlstr = f"""
 INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{partner_name_str()},{partner_cred_points_str()})
 VALUES
@@ -64,7 +64,7 @@ VALUES
         assert os_path_exists(a23_e7_blrpern_put_path) is False
 
         # WHEN
-        etl_voice_agg_to_event_belief_csvs(cursor, x_moment_mstr_dir)
+        etl_heard_agg_to_event_belief_csvs(cursor, x_moment_mstr_dir)
 
         # THEN
         assert os_path_exists(a23_e3_blrpern_put_path)

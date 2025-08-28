@@ -20,7 +20,7 @@ from src.a18_etl_toolbox.a18_path import (
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
-    create_sound_and_voice_tables,
+    create_sound_and_heard_tables,
 )
 
 
@@ -184,7 +184,7 @@ def collect_stance_csv_strs(world_dir: str) -> dict[str, str]:
     world_db_path = create_world_db_path(world_dir)
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
-        create_sound_and_voice_tables(cursor)
+        create_sound_and_heard_tables(cursor)
         add_pidgin_rows_to_stance_csv_strs(cursor, x_csv_strs, ",")
     db_conn.close()
 

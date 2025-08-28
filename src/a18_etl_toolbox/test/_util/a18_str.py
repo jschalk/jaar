@@ -27,6 +27,14 @@ def events_brick_valid_str() -> Literal["events_brick_valid"]:
     return "events_brick_valid"
 
 
+def heard_agg_str() -> str:
+    return "heard_agg"
+
+
+def heard_raw_str() -> str:
+    return "heard_raw"
+
+
 def moment_event_time_agg_str() -> Literal["moment_event_time_agg"]:
     return "moment_event_time_agg"
 
@@ -46,11 +54,3 @@ def sound_agg_str() -> str:
 
 def sound_raw_str() -> str:
     return "sound_raw"
-
-
-def voice_agg_str() -> str:
-    return "voice_agg"
-
-
-def voice_raw_str() -> str:
-    return "voice_raw"

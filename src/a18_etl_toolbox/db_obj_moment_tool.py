@@ -1,13 +1,13 @@
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.a00_data_toolbox.dict_toolbox import set_in_nested_dict
 from src.a11_bud_logic.bud import MomentLabel
-from src.a18_etl_toolbox.tran_sqlstrs import get_moment_voice_select1_sqlstrs
+from src.a18_etl_toolbox.tran_sqlstrs import get_moment_heard_select1_sqlstrs
 
 
-def get_moment_dict_from_voice_tables(
+def get_moment_dict_from_heard_tables(
     cursor: sqlite3_Cursor, moment_label: MomentLabel
 ) -> dict:
-    fu1_sqlstrs = get_moment_voice_select1_sqlstrs(moment_label)
+    fu1_sqlstrs = get_moment_heard_select1_sqlstrs(moment_label)
     return get_moment_dict_from_sqlstrs(cursor, fu1_sqlstrs, moment_label)
 
 

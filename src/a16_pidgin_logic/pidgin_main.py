@@ -45,9 +45,9 @@ class PidginUnit:
     namemap: NameMap = None
     labelmap: LabelMap = None
     ropemap: RopeMap = None
-    unknown_str: str = None  # pidginunit heart
-    otx_knot: str = None  # pidginunit heart
-    inx_knot: str = None  # pidginunit heart
+    unknown_str: str = None  # pidginunit
+    otx_knot: str = None  # pidginunit
+    inx_knot: str = None  # pidginunit
 
     def set_titlemap(self, x_titlemap: TitleMap):
         self._check_all_core_attrs_match(x_titlemap)
