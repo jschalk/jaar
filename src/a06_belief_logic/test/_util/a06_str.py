@@ -52,6 +52,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     factunits_str,
     gogo_want_str,
     healer_name_str,
+    kids_str,
     laborunit_str,
     morph_str,
     numor_str,

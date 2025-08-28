@@ -157,11 +157,11 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_fund_cease = 20.0
     x_fund_ratio = 21.0
     x_gogo_calc = 22.0
-    x__stop_calc = 23.0
-    x__level = 24
-    x__range_evaluated = 25
+    x_stop_calc = 23.0
+    x_level = 24
+    x_range_evaluated = 25
     x_descendant_task_count = 26
-    x__healerunit_ratio = 27.0
+    x_healerunit_ratio = 27.0
     x_all_voice_cred = 28
     x_all_voice_debt = 29
     x_plan = planunit_shop()
@@ -186,11 +186,11 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.fund_cease = x_fund_cease
     x_plan.fund_ratio = x_fund_ratio
     x_plan.gogo_calc = x_gogo_calc
-    x_plan._stop_calc = x__stop_calc
-    x_plan._level = x__level
-    x_plan._range_evaluated = x__range_evaluated
+    x_plan.stop_calc = x_stop_calc
+    x_plan.level = x_level
+    x_plan.range_evaluated = x_range_evaluated
     x_plan.descendant_task_count = x_descendant_task_count
-    x_plan._healerunit_ratio = x__healerunit_ratio
+    x_plan.healerunit_ratio = x_healerunit_ratio
     x_plan.all_voice_cred = x_all_voice_cred
     x_plan.all_voice_debt = x_all_voice_debt
     x_plan.begin = x_begin
@@ -211,11 +211,11 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.fund_cease = x_fund_cease
     x_plan.fund_ratio = x_fund_ratio
     x_plan.gogo_calc = x_gogo_calc
-    x_plan._stop_calc = x__stop_calc
-    x_plan._level = x__level
-    x_plan._range_evaluated = x__range_evaluated
+    x_plan.stop_calc = x_stop_calc
+    x_plan.level = x_level
+    x_plan.range_evaluated = x_range_evaluated
     x_plan.descendant_task_count = x_descendant_task_count
-    x_plan._healerunit_ratio = x__healerunit_ratio
+    x_plan.healerunit_ratio = x_healerunit_ratio
     x_plan.all_voice_cred = x_all_voice_cred
     x_plan.all_voice_debt = x_all_voice_debt
 
@@ -257,11 +257,11 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x_fund_cease,
             x_fund_ratio,
             x_gogo_calc,
-            x__stop_calc,
-            x__level,
-            x__range_evaluated,
+            x_stop_calc,
+            x_level,
+            x_range_evaluated,
             x_descendant_task_count,
-            x__healerunit_ratio,
+            x_healerunit_ratio,
             x_all_voice_cred,
             x_all_voice_debt,
         )

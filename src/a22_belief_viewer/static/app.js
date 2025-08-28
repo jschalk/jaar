@@ -277,7 +277,7 @@ function renderPlanUnit(planUnit, level) {
         return "";
     }
     const indent = '&nbsp;'.repeat(level * 2);
-    const levelIndicator = show_level ? ` level${planUnit._level}` : '';
+    const levelIndicator = show_level ? ` level${planUnit.level}` : '';
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
     const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit.descendant_task_count}` : '';
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
@@ -285,7 +285,7 @@ function renderPlanUnit(planUnit, level) {
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
     const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
-    const uidIndicator = planUnit._uid && show_uid ? ` uid${planUnit._uid}` : '';
+    const uidIndicator = planUnit.uid && show_uid ? ` uid${planUnit.uid}` : '';
 
     const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit.fund_onset}` : '';
     const fund_ceaseIndicator = show_fund_cease ? ` cease-${planUnit.fund_cease}` : '';
@@ -323,7 +323,7 @@ function renderPlanUnit(planUnit, level) {
     ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
     ${renderFlatReadableJson(planUnit.laborheir._partys, indent, show_laborheir)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
-    ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
+    ${renderReasonReadableJson(planUnit.reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
     ${renderFlatReadableJson(planUnit.factheirs, indent, show_factheirs)}
     ${render_with_indent(planUnit.all_voice_cred, indent, show_all_voice_cred)}
@@ -331,7 +331,7 @@ function renderPlanUnit(planUnit, level) {
     ${render_with_indent(planUnit.gogo_want, indent, show_gogo_want)}
     ${render_with_indent(planUnit.stop_want, indent, show_stop_want)}
     ${render_with_indent(planUnit.gogo_calc, indent, show_gogo_calc)}
-    ${render_with_indent(planUnit._stop_calc, indent, show_stop_calc)}
+    ${render_with_indent(planUnit.stop_calc, indent, show_stop_calc)}
     ${render_with_indent(planUnit.addin, indent, show_addin)}
     ${render_with_indent(planUnit.begin, indent, show_begin)}
     ${render_with_indent(planUnit.close, indent, show_close)}
@@ -342,8 +342,8 @@ function renderPlanUnit(planUnit, level) {
   </div>\n
 `;
     // Add children
-    if (planUnit._kids) {
-        Object.values(planUnit._kids).forEach(child => {
+    if (planUnit.kids) {
+        Object.values(planUnit.kids).forEach(child => {
             html += renderPlanUnit(child, level + 1);
         });
     }

@@ -42,9 +42,6 @@ from src.a04_reason_logic.test._util.a04_str import (
     status_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
-    _healerunit_ratio_str,
-    _range_evaluated_str,
-    _stop_calc_str,
     all_voice_cred_str,
     all_voice_debt_str,
     descendant_task_count_str,
@@ -52,8 +49,11 @@ from src.a05_plan_logic.test._util.a05_str import (
     fund_onset_str,
     fund_ratio_str,
     gogo_calc_str,
+    healerunit_ratio_str,
     problem_bool_str,
+    range_evaluated_str,
     star_str,
+    stop_calc_str,
     task_str,
 )
 from src.a06_belief_logic.test._util.a06_str import (
@@ -275,12 +275,12 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "fund_iota",
         "fund_onset",
         "fund_cease",
-        "_healerunit_ratio",
-        "_level",
-        "_range_evaluated",
+        "healerunit_ratio",
+        "level",
+        "range_evaluated",
         "chore",
         "gogo_calc",
-        "_stop_calc",
+        "stop_calc",
     }
     assert expected_blrplan_jmetrics_keys == blrplan_jmetrics_keys
     expected_blrawar_jmetrics_keys = {"fund_give", "fund_take"}
@@ -454,19 +454,19 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         "star",
         stop_want_str(),
         "gogo_calc",
-        "_stop_calc",
+        "stop_calc",
         "active",
         "fund_onset",
         "fund_cease",
         "descendant_task_count",
         "all_voice_cred",
         "all_voice_debt",
-        "_healerunit_ratio",
-        "_level",
+        "healerunit_ratio",
+        "level",
         "chore",
         "fund_iota",
         "fund_ratio",
-        "_range_evaluated",
+        "range_evaluated",
         "problem_bool",
         gogo_want_str(),
         plan_rope_str(),
@@ -691,14 +691,14 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jm, fund_ratio_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, gogo_calc_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, gogo_calc_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, _healerunit_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _healerunit_ratio_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, "_level") == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, "_level") == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _range_evaluated_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, _range_evaluated_str()) == "INTEGER"
-    assert g_class_type(cfig, blrplan, jm, _stop_calc_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, _stop_calc_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, healerunit_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, healerunit_ratio_str()) == "REAL"
+    assert g_class_type(cfig, blrplan, jm, "level") == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, "level") == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, range_evaluated_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, range_evaluated_str()) == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, stop_calc_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jm, stop_calc_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, chore_str()) == "int"
     assert g_sqlitetype(cfig, blrplan, jm, chore_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jv, addin_str()) == "float"
@@ -877,10 +877,10 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(fund_onset_str()) == "float"
     assert belief_calc_args_type_dict.get(fund_ratio_str()) == "float"
     assert belief_calc_args_type_dict.get(gogo_calc_str()) == "float"
-    assert belief_calc_args_type_dict.get("_healerunit_ratio") == "float"
-    assert belief_calc_args_type_dict.get("_level") == "int"
-    assert belief_calc_args_type_dict.get(_range_evaluated_str()) == "int"
-    assert belief_calc_args_type_dict.get(_stop_calc_str()) == "float"
+    assert belief_calc_args_type_dict.get("healerunit_ratio") == "float"
+    assert belief_calc_args_type_dict.get("level") == "int"
+    assert belief_calc_args_type_dict.get(range_evaluated_str()) == "int"
+    assert belief_calc_args_type_dict.get(stop_calc_str()) == "float"
     assert belief_calc_args_type_dict.get("_keeps_buildable") == "int"
     assert belief_calc_args_type_dict.get("_keeps_justified") == "int"
     assert belief_calc_args_type_dict.get(_offtrack_fund_str()) == "int"

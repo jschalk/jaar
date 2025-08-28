@@ -132,7 +132,7 @@ def test_beliefunit_v001_AgendaExists():
         fact_context=min_rope, fact_state=min_rope, fact_lower=0, fact_upper=1399
     )
     assert yao_belief
-    # for plan_kid in yao_belief.planroot._kids.values():
+    # for plan_kid in yao_belief.planroot.kids.values():
     #     # print(plan_kid.plan_label)
     #     assert str(type(plan_kid)) != "<class 'str'>"
     #     assert plan_kid.task is not None
@@ -224,7 +224,7 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitHasCorrectAttributes_beliefunit_v0
     #     print(f"{reason_context=}")
 
     # for agenda_plan in plan_task_list:
-    #     print(f"{agenda_plan._uid=} {agenda_plan.parent_rope=}")
+    #     print(f"{agenda_plan.uid=} {agenda_plan.parent_rope=}")
 
     # for agenda_plan in plan_task_list:
     #     # print(f"{agenda_plan.parent_rope=}")
@@ -285,7 +285,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Range():
         fact_context=jour_rope, fact_state=jour_rope, fact_lower=30, fact_upper=87
     )
     zia_belief.get_agenda_dict()
-    run_reasonunits = zia_belief.planroot._kids[run_str].reasonunits[jour_rope]
+    run_reasonunits = zia_belief.planroot.kids[run_str].reasonunits[jour_rope]
     print(f"{run_reasonunits=}")
     print(f"{run_reasonunits.cases[jour_rope].status=}")
     print(f"{run_reasonunits.cases[jour_rope].chore=}")
@@ -438,9 +438,9 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     factheir_gregziet = evening_plan.factheirs.get(gregziet_rope)
     print(f"\n{factheir_gregziet=}")
 
-    # for reasonheir in agenda_plan._reasonheirs.values():
+    # for reasonheir in agenda_plan.reasonheirs.values():
     #     print(f"{reasonheir.reason_context=} {reasonheir.status=} {reasonheir.chore=}")
-    reasonheir_gregziet = evening_plan._reasonheirs.get(gregziet_rope)
+    reasonheir_gregziet = evening_plan.reasonheirs.get(gregziet_rope)
     reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet.status}, chore={reasonheir_gregziet.chore}"
     print(reasonheir_str)
 

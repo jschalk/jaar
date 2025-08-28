@@ -1,14 +1,13 @@
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 from src.a05_plan_logic.test._util.a05_str import (
-    _is_expanded_str,
-    _uid_str,
     addin_str,
     begin_str,
     close_str,
     denom_str,
     gogo_want_str,
     healerunit_str,
+    is_expanded_str,
     laborunit_str,
     morph_str,
     numor_str,
@@ -16,6 +15,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     star_str,
     stop_want_str,
     task_str,
+    uid_str,
 )
 
 

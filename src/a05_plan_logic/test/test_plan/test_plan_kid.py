@@ -20,11 +20,11 @@ def test_get_kids_in_range_GetsCorrectPlans():
     feb_plan = mon_plan.get_kid(feb_str)
     mar_plan = mon_plan.get_kid(mar_str)
     jan_plan.gogo_calc = 0
-    jan_plan._stop_calc = 31
+    jan_plan.stop_calc = 31
     feb_plan.gogo_calc = 31
-    feb_plan._stop_calc = 60
+    feb_plan.stop_calc = 60
     mar_plan.gogo_calc = 60
-    mar_plan._stop_calc = 91
+    mar_plan.stop_calc = 91
 
     # WHEN / THEN
     assert len(mon_plan.get_kids_in_range(x_gogo=100, x_stop=120)) == 0
@@ -118,13 +118,13 @@ def test_PlanUnit_clear_kids_SetsAttr():
     nation_plan = planunit_shop(nation_str, parent_rope=root_label())
     nation_plan.add_kid(planunit_shop("USA", parent_rope=nation_rope))
     nation_plan.add_kid(planunit_shop("France", parent_rope=nation_rope))
-    assert len(nation_plan._kids) == 2
+    assert len(nation_plan.kids) == 2
 
     # WHEN
     nation_plan.clear_kids()
 
     # THEN
-    assert len(nation_plan._kids) == 0
+    assert len(nation_plan.kids) == 0
 
 
 def test_PlanUnit_get_kid_ReturnsObj():
@@ -140,7 +140,7 @@ def test_PlanUnit_get_kid_ReturnsObj():
     france_str = "France"
     france_rope = create_rope(nation_rope, france_str)
     nation_plan.add_kid(planunit_shop(france_str, parent_rope=nation_rope))
-    assert len(nation_plan._kids) == 2
+    assert len(nation_plan.kids) == 2
 
     # WHEN
     france_plan = nation_plan.get_kid(france_str)
@@ -162,13 +162,13 @@ def test_PlanUnit_del_kid_CorrectModifiesAttr():
     france_str = "France"
     france_rope = create_rope(nation_rope, france_str)
     nation_plan.add_kid(planunit_shop(france_str, parent_rope=nation_rope))
-    assert len(nation_plan._kids) == 2
+    assert len(nation_plan.kids) == 2
 
     # WHEN
     nation_plan.del_kid(france_str)
 
     # THEN
-    assert len(nation_plan._kids) == 1
+    assert len(nation_plan.kids) == 1
 
 
 def test_PlanUnit_get_kids_star_sum_ReturnsObj_Scenario0():

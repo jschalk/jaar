@@ -171,8 +171,8 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.planroot.fund_iota == x_belief.fund_iota
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.root
-    assert x_belief.planroot._uid == 1
-    assert x_belief.planroot._level == 0
+    assert x_belief.planroot.uid == 1
+    assert x_belief.planroot.level == 0
     assert x_belief.planroot.moment_label == x_belief.moment_label
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.parent_rope == ""

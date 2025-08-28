@@ -44,36 +44,36 @@ def gogo_calc_str() -> str:
     return "gogo_calc"
 
 
-def _healerunit_ratio_str() -> str:
-    return "_healerunit_ratio"
+def healerunit_ratio_str() -> str:
+    return "healerunit_ratio"
 
 
-def _is_expanded_str() -> str:
-    return "_is_expanded"
+def is_expanded_str() -> str:
+    return "is_expanded"
 
 
-def _kids_str() -> str:
-    return "_kids"
+def kids_str() -> str:
+    return "kids"
 
 
-def _level_str() -> str:
-    return "_level"
+def level_str() -> str:
+    return "level"
 
 
-def _range_evaluated_str() -> str:
-    return "_range_evaluated"
+def range_evaluated_str() -> str:
+    return "range_evaluated"
 
 
-def _reasonheirs_str() -> str:
-    return "_reasonheirs"
+def reasonheirs_str() -> str:
+    return "reasonheirs"
 
 
-def _stop_calc_str() -> str:
-    return "_stop_calc"
+def stop_calc_str() -> str:
+    return "stop_calc"
 
 
-def _uid_str() -> str:
-    return "_uid"
+def uid_str() -> str:
+    return "uid"
 
 
 def active_hx_str() -> str:

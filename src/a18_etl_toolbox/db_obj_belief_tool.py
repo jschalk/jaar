@@ -275,17 +275,17 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_cease = values_dict.get("fund_cease")
     fund_ratio = values_dict.get("fund_ratio")
     gogo_calc = values_dict.get("gogo_calc")
-    _stop_calc = values_dict.get("_stop_calc")
-    _level = values_dict.get("_level")
-    _range_evaluated = values_dict.get("_range_evaluated")
+    stop_calc = values_dict.get("stop_calc")
+    level = values_dict.get("level")
+    range_evaluated = values_dict.get("range_evaluated")
     descendant_task_count = values_dict.get("descendant_task_count")
-    _healerunit_ratio = values_dict.get("_healerunit_ratio")
+    healerunit_ratio = values_dict.get("healerunit_ratio")
     all_voice_cred = values_dict.get("all_voice_cred")
     all_voice_debt = values_dict.get("all_voice_debt")
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, active, chore, fund_onset, fund_cease, fund_ratio, gogo_calc, _stop_calc, _level, _range_evaluated, descendant_task_count, _healerunit_ratio, all_voice_cred, all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, active, chore, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, level, range_evaluated, descendant_task_count, healerunit_ratio, all_voice_cred, all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -308,11 +308,11 @@ VALUES (
 , {sqlite_obj_str(fund_cease, real_str)}
 , {sqlite_obj_str(fund_ratio, real_str)}
 , {sqlite_obj_str(gogo_calc, real_str)}
-, {sqlite_obj_str(_stop_calc, real_str)}
-, {sqlite_obj_str(_level, "INTEGER")}
-, {sqlite_obj_str(_range_evaluated, "INTEGER")}
+, {sqlite_obj_str(stop_calc, real_str)}
+, {sqlite_obj_str(level, "INTEGER")}
+, {sqlite_obj_str(range_evaluated, "INTEGER")}
 , {sqlite_obj_str(descendant_task_count, "INTEGER")}
-, {sqlite_obj_str(_healerunit_ratio, real_str)}
+, {sqlite_obj_str(healerunit_ratio, real_str)}
 , {sqlite_obj_str(all_voice_cred, real_str)}
 , {sqlite_obj_str(all_voice_debt, real_str)}
 )
@@ -528,7 +528,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_belief: BeliefUnit):
         insert_job_blrlabo(cursor, x_objkeysholder, laborheir)
         for x_awardheir in x_plan.awardheirs.values():
             insert_job_blrawar(cursor, x_objkeysholder, x_awardheir)
-        for reason_context, reasonheir in x_plan._reasonheirs.items():
+        for reason_context, reasonheir in x_plan.reasonheirs.items():
             insert_job_blrreas(cursor, x_objkeysholder, reasonheir)
             x_objkeysholder.reason_context = reason_context
             for prem in reasonheir.cases.values():

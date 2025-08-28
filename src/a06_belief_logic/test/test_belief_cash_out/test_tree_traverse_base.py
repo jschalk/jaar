@@ -184,7 +184,7 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_1():
     # THEN
     assert x_planroot.descendant_task_count == 3
     assert casa_plan.descendant_task_count == 1
-    assert casa_plan._kids[email_str].descendant_task_count == 0
+    assert casa_plan.kids[email_str].descendant_task_count == 0
     assert mon_plan.descendant_task_count == 0
     assert x_planroot.all_voice_cred is True
     assert x_planroot.all_voice_debt is True
@@ -215,34 +215,34 @@ def test_BeliefUnit_cash_out_NLevelSetsDescendantAttributes_2():
     sue_belief.add_voiceunit(voice_name=sue_str)
     x_awardunit = awardunit_shop(awardee_title=sue_str)
 
-    sue_belief.planroot._kids[casa_str]._kids[email_str].set_awardunit(
+    sue_belief.planroot.kids[casa_str].kids[email_str].set_awardunit(
         awardunit=x_awardunit
     )
-    # print(sue_belief._kids[casa_str]._kids[email_str])
-    # print(sue_belief._kids[casa_str]._kids[email_str].awardunit)
+    # print(sue_belief.kids[casa_str].kids[email_str])
+    # print(sue_belief.kids[casa_str].kids[email_str].awardunit)
 
     # WHEN
     sue_belief.cash_out()
-    # print(sue_belief._kids[casa_str]._kids[email_str])
-    # print(sue_belief._kids[casa_str]._kids[email_str].awardunit)
+    # print(sue_belief.kids[casa_str].kids[email_str])
+    # print(sue_belief.kids[casa_str].kids[email_str].awardunit)
 
     # THEN
     assert sue_belief.planroot.all_voice_cred is False
     assert sue_belief.planroot.all_voice_debt is False
-    casa_plan = sue_belief.planroot._kids[casa_str]
+    casa_plan = sue_belief.planroot.kids[casa_str]
     assert casa_plan.all_voice_cred is False
     assert casa_plan.all_voice_debt is False
-    assert casa_plan._kids[email_str].all_voice_cred is False
-    assert casa_plan._kids[email_str].all_voice_debt is False
-    assert casa_plan._kids[vacuum_str].all_voice_cred is True
-    assert casa_plan._kids[vacuum_str].all_voice_debt is True
-    wk_plan = sue_belief.planroot._kids[wk_str]
+    assert casa_plan.kids[email_str].all_voice_cred is False
+    assert casa_plan.kids[email_str].all_voice_debt is False
+    assert casa_plan.kids[vacuum_str].all_voice_cred is True
+    assert casa_plan.kids[vacuum_str].all_voice_debt is True
+    wk_plan = sue_belief.planroot.kids[wk_str]
     assert wk_plan.all_voice_cred is True
     assert wk_plan.all_voice_debt is True
-    assert wk_plan._kids[mon_str].all_voice_cred is True
-    assert wk_plan._kids[mon_str].all_voice_debt is True
-    assert wk_plan._kids[tue_str].all_voice_cred is True
-    assert wk_plan._kids[tue_str].all_voice_debt is True
+    assert wk_plan.kids[mon_str].all_voice_cred is True
+    assert wk_plan.kids[mon_str].all_voice_debt is True
+    assert wk_plan.kids[tue_str].all_voice_cred is True
+    assert wk_plan.kids[tue_str].all_voice_debt is True
 
 
 def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
@@ -271,7 +271,7 @@ def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
     street_str = "streets"
     sue_belief.set_plan(planunit_shop(street_str), parent_rope=swim_rope)
     assert sue_belief.planroot.awardunits in (None, {})
-    assert len(sue_belief.planroot._kids[swim_str].awardunits) == 3
+    assert len(sue_belief.planroot.kids[swim_str].awardunits) == 3
 
     # WHEN
     sue_belief.cash_out()
@@ -290,7 +290,7 @@ def test_BeliefUnit_cash_out_SetsPlanUnitAttr_awardunits():
     print(f"{swim_plan.awardunits}")
     print(f"{swim_plan.awardheirs}")
     print(f"{swim_plan.awardheirs}")
-    assert len(sue_belief.planroot._kids["swim"].awardheirs) == 3
+    assert len(sue_belief.planroot.kids["swim"].awardheirs) == 3
 
 
 def test_BeliefUnit_cash_out_TreeTraverseSetsClearsAwardLineestors():
@@ -311,13 +311,13 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsClearsAwardLineestors():
     # WHEN
     # test for level 1 and level n
     casa_str = "casa"
-    casa_plan = sue_belief.planroot._kids[casa_str]
+    casa_plan = sue_belief.planroot.kids[casa_str]
     casa_plan.awardlines = {1: "testtest"}
     assert casa_plan.awardlines != {}
     sue_belief.cash_out()
 
     # THEN
-    assert not sue_belief.planroot._kids[casa_str].awardlines
+    assert not sue_belief.planroot.kids[casa_str].awardlines
 
 
 def test_BeliefUnit_cash_out_DoesNotKeepUnneeded_awardheirs():
@@ -669,7 +669,7 @@ def test_BeliefUnit_cash_out_Sets_planroot_factheir_With_range_factheirs():
     wk_reason_upper = 7
     yao_belief.add_fact(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)
 
-    # assert len(ball_plan._reasonheirs) == 1
+    # assert len(ball_plan.reasonheirs) == 1
     # assert ball_plan.factheirs == {wk_rope: wk_factheir}
     # assert ball_plan.factheirs.get(wk_rope)
     # assert len(ball_plan.factheirs) == 1
@@ -723,7 +723,7 @@ def test_BeliefUnit_cash_out_SetsPlanUnit_factheir_With_range_factheirs():
     wk_reason_upper = 7
     yao_belief.add_fact(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)
 
-    # assert len(ball_plan._reasonheirs) == 1
+    # assert len(ball_plan.reasonheirs) == 1
     # assert ball_plan.factheirs == {wk_rope: wk_factheir}
     # assert ball_plan.factheirs.get(wk_rope)
     # assert len(ball_plan.factheirs) == 1

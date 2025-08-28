@@ -516,10 +516,10 @@ class BeliefUnit:
         self.cash_out()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_label(
-            level=self.planroot._level,
+            level=self.planroot.level,
             reasons=self.planroot.reasonunits,
             awardunits=self.planroot.awardunits,
-            uid=self.planroot._uid,
+            uid=self.planroot.uid,
             task=self.planroot.task,
             plan_rope=self.planroot.get_plan_rope(),
         )
@@ -527,19 +527,19 @@ class BeliefUnit:
         x_plan_list = [self.planroot]
         while x_plan_list != []:
             parent_plan = x_plan_list.pop()
-            for plan_kid in parent_plan._kids.values():
+            for plan_kid in parent_plan.kids.values():
                 self._eval_tree_metrics(
                     parent_plan, plan_kid, tree_metrics, x_plan_list
                 )
         return tree_metrics
 
     def _eval_tree_metrics(self, parent_plan, plan_kid, tree_metrics, x_plan_list):
-        plan_kid._level = parent_plan._level + 1
+        plan_kid.level = parent_plan.level + 1
         tree_metrics.evaluate_label(
-            level=plan_kid._level,
+            level=plan_kid.level,
             reasons=plan_kid.reasonunits,
             awardunits=plan_kid.awardunits,
-            uid=plan_kid._uid,
+            uid=plan_kid.uid,
             task=plan_kid.task,
             plan_rope=plan_kid.get_plan_rope(),
         )
@@ -555,7 +555,7 @@ class BeliefUnit:
         plan_uid_dict = tree_metrics.uid_dict
 
         for x_plan in self.get_plan_dict().values():
-            if x_plan._uid is None or plan_uid_dict.get(x_plan._uid) > 1:
+            if x_plan.uid is None or plan_uid_dict.get(x_plan.uid) > 1:
                 new_plan_uid_max = plan_uid_max + 1
                 self.edit_plan_attr(
                     plan_rope=x_plan.get_plan_rope(), uid=new_plan_uid_max
@@ -720,7 +720,7 @@ class BeliefUnit:
     def _shift_plan_kids(self, x_rope: RopeTerm):
         parent_rope = get_parent_rope(x_rope)
         d_temp_plan = self.get_plan_obj(x_rope)
-        for kid in d_temp_plan._kids.values():
+        for kid in d_temp_plan.kids.values():
             self.set_plan(kid, parent_rope=parent_rope)
 
     def set_belief_name(self, new_belief_name):
@@ -753,8 +753,8 @@ class BeliefUnit:
         x_plan.set_plan_label(new_plan_label)
         x_plan.parent_rope = parent_rope
         plan_parent = self.get_plan_obj(get_parent_rope(old_rope))
-        plan_parent._kids.pop(get_tail_label(old_rope, self.knot))
-        plan_parent._kids[x_plan.plan_label] = x_plan
+        plan_parent.kids.pop(get_tail_label(old_rope, self.knot))
+        plan_parent.kids[x_plan.plan_label] = x_plan
 
     def _planroot_find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
         self.planroot.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
@@ -763,8 +763,8 @@ class BeliefUnit:
         while plan_iter_list != []:
             listed_plan = plan_iter_list.pop()
             # add all plan_children in plan list
-            if listed_plan._kids is not None:
-                for plan_kid in listed_plan._kids.values():
+            if listed_plan.kids is not None:
+                for plan_kid in listed_plan.kids.values():
                     plan_iter_list.append(plan_kid)
                     if is_sub_rope(plan_kid.parent_rope, sub_rope=old_rope):
                         plan_kid.parent_rope = rebuild_rope(
@@ -1070,39 +1070,39 @@ reason_case:    {reason_case}"""
         while plan_list != []:
             x_plan = plan_list.pop()
             x_plan.clear_gogo_calc_stop_calc()
-            for plan_kid in x_plan._kids.values():
+            for plan_kid in x_plan.kids.values():
                 plan_kid.set_parent_rope(x_plan.get_plan_rope())
-                plan_kid.set_level(x_plan._level)
+                plan_kid.set_level(x_plan.level)
                 plan_list.append(plan_kid)
             self._plan_dict[x_plan.get_plan_rope()] = x_plan
             for x_reason_context in x_plan.reasonunits.keys():
                 self._reason_contexts.add(x_reason_context)
 
     def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
-        exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and _stop_calc attributes set twice"
+        exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and stop_calc attributes set twice"
         raise gogo_calc_stop_calc_Exception(exception_str)
 
     def _distribute_math_attrs(self, math_plan: PlanUnit):
         single_range_plan_list = [math_plan]
         while single_range_plan_list != []:
             r_plan = single_range_plan_list.pop()
-            if r_plan._range_evaluated:
+            if r_plan.range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
             if r_plan.is_math():
                 r_plan.gogo_calc = r_plan.begin
-                r_plan._stop_calc = r_plan.close
+                r_plan.stop_calc = r_plan.close
             else:
                 parent_rope = get_parent_rope(
                     rope=r_plan.get_plan_rope(), knot=r_plan.knot
                 )
                 parent_plan = self.get_plan_obj(parent_rope)
                 r_plan.gogo_calc = parent_plan.gogo_calc
-                r_plan._stop_calc = parent_plan._stop_calc
+                r_plan.stop_calc = parent_plan.stop_calc
                 self._range_inheritors[r_plan.get_plan_rope()] = (
                     math_plan.get_plan_rope()
                 )
             r_plan._mold_gogo_calc_stop_calc()
-            single_range_plan_list.extend(iter(r_plan._kids.values()))
+            single_range_plan_list.extend(iter(r_plan.kids.values()))
 
     def _set_plantree_range_attrs(self):
         for x_plan in self._plan_dict.values():
@@ -1184,7 +1184,7 @@ reason_case:    {reason_case}"""
             x_plan.clear_all_voice_cred_debt()
 
     def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
-        x_plan.set_reasonheirs(self._plan_dict, parent_plan._reasonheirs)
+        x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
         x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
         x_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
@@ -1283,14 +1283,14 @@ reason_case:    {reason_case}"""
         cache_plan_list = [root_plan]
         while cache_plan_list != []:
             parent_plan = cache_plan_list.pop()
-            kids_plans = parent_plan._kids.items()
+            kids_plans = parent_plan.kids.items()
             x_ledger = {x_rope: plan_kid.star for x_rope, plan_kid in kids_plans}
             parent_fund_num = parent_plan.fund_cease - parent_plan.fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
 
             fund_onset = None
             fund_cease = None
-            for x_plan in parent_plan._kids.values():
+            for x_plan in parent_plan.kids.values():
                 if fund_onset is None:
                     fund_onset = parent_plan.fund_onset
                     fund_cease = fund_onset + alloted_fund_num.get(x_plan.plan_label)
@@ -1326,10 +1326,10 @@ reason_case:    {reason_case}"""
             self._sum_healerunit_share = 0
         for x_plan in self._plan_dict.values():
             if self._sum_healerunit_share == 0:
-                x_plan._healerunit_ratio = 0
+                x_plan.healerunit_ratio = 0
             else:
                 x_sum = self._sum_healerunit_share
-                x_plan._healerunit_ratio = x_plan.get_fund_share() / x_sum
+                x_plan.healerunit_ratio = x_plan.get_fund_share() / x_sum
             if self._keeps_justified and x_plan.healerunit.any_healer_name_exists():
                 self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
@@ -1479,8 +1479,8 @@ def beliefunit_shop(
     )
     x_belief.planroot = planunit_shop(
         root=True,
-        _uid=1,
-        _level=0,
+        uid=1,
+        level=0,
         moment_label=x_belief.moment_label,
         knot=x_belief.knot,
         fund_iota=x_belief.fund_iota,
@@ -1533,8 +1533,8 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         root=True,
         plan_label=x_belief.moment_label,
         parent_rope="",
-        _level=0,
-        _uid=get_obj_from_plan_dict(planroot_dict, "_uid"),
+        level=0,
+        uid=get_obj_from_plan_dict(planroot_dict, "uid"),
         star=get_obj_from_plan_dict(planroot_dict, "star"),
         begin=get_obj_from_plan_dict(planroot_dict, "begin"),
         close=get_obj_from_plan_dict(planroot_dict, "close"),
@@ -1549,7 +1549,7 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         healerunit=get_obj_from_plan_dict(planroot_dict, "healerunit"),
         factunits=get_obj_from_plan_dict(planroot_dict, "factunits"),
         awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
-        _is_expanded=get_obj_from_plan_dict(planroot_dict, "_is_expanded"),
+        is_expanded=get_obj_from_plan_dict(planroot_dict, "is_expanded"),
         knot=x_belief.knot,
         moment_label=x_belief.moment_label,
         fund_iota=default_fund_iota_if_None(x_belief.fund_iota),
@@ -1561,14 +1561,14 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
     to_evaluate_plan_dicts = []
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
-    for x_dict in get_obj_from_plan_dict(planroot_dict, "_kids").values():
+    for x_dict in get_obj_from_plan_dict(planroot_dict, "kids").values():
         x_dict[parent_rope_str] = x_belief.moment_label
         to_evaluate_plan_dicts.append(x_dict)
 
     while to_evaluate_plan_dicts != []:
         plan_dict = to_evaluate_plan_dicts.pop(0)
         # for every kid dict, set parent_rope in dict, add to to_evaluate_list
-        for kid_dict in get_obj_from_plan_dict(plan_dict, "_kids").values():
+        for kid_dict in get_obj_from_plan_dict(plan_dict, "kids").values():
             parent_rope = get_obj_from_plan_dict(plan_dict, parent_rope_str)
             kid_plan_label = get_obj_from_plan_dict(plan_dict, "plan_label")
             kid_dict[parent_rope_str] = x_belief.make_rope(parent_rope, kid_plan_label)
@@ -1576,7 +1576,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
         x_plankid = planunit_shop(
             plan_label=get_obj_from_plan_dict(plan_dict, "plan_label"),
             star=get_obj_from_plan_dict(plan_dict, "star"),
-            _uid=get_obj_from_plan_dict(plan_dict, "_uid"),
+            uid=get_obj_from_plan_dict(plan_dict, "uid"),
             begin=get_obj_from_plan_dict(plan_dict, "begin"),
             close=get_obj_from_plan_dict(plan_dict, "close"),
             numor=get_obj_from_plan_dict(plan_dict, "numor"),
@@ -1591,7 +1591,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
             healerunit=get_obj_from_plan_dict(plan_dict, "healerunit"),
             awardunits=get_obj_from_plan_dict(plan_dict, "awardunits"),
             factunits=get_obj_from_plan_dict(plan_dict, "factunits"),
-            _is_expanded=get_obj_from_plan_dict(plan_dict, "_is_expanded"),
+            is_expanded=get_obj_from_plan_dict(plan_dict, "is_expanded"),
         )
         x_belief.set_plan(x_plankid, parent_rope=plan_dict[parent_rope_str])
 

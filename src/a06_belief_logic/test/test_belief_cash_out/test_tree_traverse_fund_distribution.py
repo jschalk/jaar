@@ -406,7 +406,7 @@ def test_BeliefUnit_cash_out_TreeTraverseSetsAwardLine_fundFromRoot():
     tolerance = 1e-10
     assert sum_x < 1.0 + tolerance
 
-    # for kid_plan in root_plan._kids.values():
+    # for kid_plan in root_plan.kids.values():
     #     sum_x += kid_plan.fund_ratio
     #     print(f"  {kid_plan.fund_ratio=} {sum_x=} {kid_plan.get_plan_rope()=}")
     assert round(sue_awardline.fund_give, 15) == default_fund_pool()
@@ -648,13 +648,13 @@ def test_BeliefUnit_cash_out_WithLevel3AwardUnitAndEmptyAncestorsSetsGroupUnit_f
         x_planroot.awardunits[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot._kids["hunt"].awardheirs[yao_str]
+        x_planroot.kids["hunt"].awardheirs[yao_str]
     assert str(excinfo.value) == f"'{yao_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot._kids["hunt"].awardheirs[zia_str]
+        x_planroot.kids["hunt"].awardheirs[zia_str]
     assert str(excinfo.value) == f"'{zia_str}'"
     with pytest_raises(Exception) as excinfo:
-        x_planroot._kids["hunt"].awardheirs[xio_str]
+        x_planroot.kids["hunt"].awardheirs[xio_str]
     assert str(excinfo.value) == f"'{xio_str}'"
 
     # THEN

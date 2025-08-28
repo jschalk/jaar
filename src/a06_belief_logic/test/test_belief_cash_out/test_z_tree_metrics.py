@@ -68,16 +68,16 @@ def test_BeliefUnit_set_all_plan_uids_unique_SetsUIDs():
     zia_belief = beliefunit_shop(belief_name=zia_str)
     swim_str = "swim"
     sports_str = "sports"
-    zia_belief.set_l1_plan(planunit_shop(swim_str, _uid=None))
-    zia_belief.set_l1_plan(planunit_shop(sports_str, _uid=2))
+    zia_belief.set_l1_plan(planunit_shop(swim_str, uid=None))
+    zia_belief.set_l1_plan(planunit_shop(sports_str, uid=2))
     swim_rope = zia_belief.make_l1_rope(swim_str)
-    assert zia_belief.get_plan_obj(swim_rope)._uid is None
+    assert zia_belief.get_plan_obj(swim_rope).uid is None
 
     # WHEN
     zia_belief.set_all_plan_uids_unique()
 
     # THEN
-    assert zia_belief.get_plan_obj(swim_rope)._uid is not None
+    assert zia_belief.get_plan_obj(swim_rope).uid is not None
 
 
 def test_BeliefUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():

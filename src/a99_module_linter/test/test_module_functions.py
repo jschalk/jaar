@@ -24,7 +24,7 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
     # "close" is excluded because it is used to close sqlite database connections
-    excluded_strs = {"close", "_level"}
+    excluded_strs = {"close", "level"}
 
     # WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():

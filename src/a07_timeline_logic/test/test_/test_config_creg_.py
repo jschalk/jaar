@@ -431,7 +431,7 @@ def test_add_time_creg_planunit_ReturnsObjWith_hours():
 
     # THEN
     day_plan = sue_beliefunit.get_plan_obj(day_rope)
-    print(f"{day_plan._kids.keys()=}")
+    print(f"{day_plan.kids.keys()=}")
     assert sue_beliefunit.plan_exists(time_rope)
     assert sue_beliefunit.plan_exists(creg_rope)
     assert sue_beliefunit.plan_exists(day_rope)
@@ -670,7 +670,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     time_rope = sue_belief.make_l1_rope("time")
     cregtime_rope = sue_belief.make_rope(time_rope, creg_str())
     creg_plan = sue_belief.get_plan_obj(cregtime_rope)
-    print(f"{creg_plan._kids.keys()=}")
+    print(f"{creg_plan.kids.keys()=}")
     daytime_rope = sue_belief.make_rope(cregtime_rope, "day")
     reason_lower_8am = 480
     reason_upper_8am = 480
@@ -691,7 +691,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
 
     assert len(sue_belief.voices) == 0
     assert len(sue_belief.get_voiceunit_group_titles_dict()) == 0
-    assert len(sue_belief.planroot._kids) == 1
+    assert len(sue_belief.planroot.kids) == 1
     assert sue_belief.get_plan_obj(daytime_rope).denom == 1440
     assert sue_belief.get_plan_obj(daytime_rope).morph
     print(f"{sweep_plan.get_plan_rope()=}")
@@ -700,7 +700,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     sue_belief.set_dominate_task_plan(plan_kid=sweep_plan)
 
     # THEN
-    # for plan_kid in sue_belief.planroot._kids.keys():
+    # for plan_kid in sue_belief.planroot.kids.keys():
     #     print(f"  {plan_kid=}")
 
     print(f"{sweep_plan.get_plan_rope()=}")
@@ -714,7 +714,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     assert len(sue_belief.get_voiceunit_group_titles_dict()) == 0
     assert sue_belief.get_voiceunit_group_titles_dict().get(family_str) is None
 
-    assert len(sue_belief.planroot._kids) == 3
+    assert len(sue_belief.planroot.kids) == 3
 
 
 def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError():  # https://github.com/jschalk/jaar/issues/69
@@ -760,7 +760,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     # for x_planunit in sue_belief._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:
     #         print(f"{x_planunit.plan_label=} {x_planunit.begin=} {x_planunit.close=}")
-    #         print(f"{x_planunit._kids.keys()=}")
+    #         print(f"{x_planunit.kids.keys()=}")
 
     # WHEN
     print("set 2nd fact")
@@ -782,7 +782,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     # for x_planunit in sue_belief._plan_dict.values():
     #     if x_planunit.plan_label in [laundry_str]:
     #         print(f"{x_planunit.plan_label=} {x_planunit.begin=} {x_planunit.close=}")
-    #         print(f"{x_planunit._kids.keys()=}")
+    #         print(f"{x_planunit.kids.keys()=}")
     #         creg_factheir = x_planunit.factheirs.get(cregtime_rope)
     #         print(f"{creg_factheir.fact_lower % 10080=}")
     #         print(f"{creg_factheir.fact_upper % 10080=}")

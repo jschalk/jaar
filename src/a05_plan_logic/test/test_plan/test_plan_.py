@@ -8,14 +8,6 @@ from src.a04_reason_logic.test._util.a04_str import chore_str
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
-    _healerunit_ratio_str,
-    _is_expanded_str,
-    _kids_str,
-    _level_str,
-    _range_evaluated_str,
-    _reasonheirs_str,
-    _stop_calc_str,
-    _uid_str,
     active_hx_str,
     active_str,
     addin_str,
@@ -36,19 +28,27 @@ from src.a05_plan_logic.test._util.a05_str import (
     fund_ratio_str,
     gogo_calc_str,
     gogo_want_str,
+    healerunit_ratio_str,
     healerunit_str,
+    is_expanded_str,
+    kids_str,
     knot_str,
     laborheir_str,
     laborunit_str,
+    level_str,
     moment_label_str,
     morph_str,
     numor_str,
     plan_label_str,
     problem_bool_str,
+    range_evaluated_str,
+    reasonheirs_str,
     reasonunits_str,
     star_str,
+    stop_calc_str,
     stop_want_str,
     task_str,
+    uid_str,
 )
 
 
@@ -63,12 +63,12 @@ def test_PlanUnit_Exists():
 
     # WHEN / THEN
     assert x_planunit
-    assert x_planunit._kids is None
+    assert x_planunit.kids is None
     assert x_planunit.star is None
     assert x_planunit.plan_label is None
-    assert x_planunit._uid is None
+    assert x_planunit.uid is None
     assert x_planunit.reasonunits is None
-    assert x_planunit._reasonheirs is None  # calculated field
+    assert x_planunit.reasonheirs is None  # calculated field
     assert x_planunit.laborunit is None
     assert x_planunit.laborheir is None  # calculated field
     assert x_planunit.factunits is None
@@ -89,14 +89,14 @@ def test_PlanUnit_Exists():
     assert x_planunit.problem_bool is None
     assert x_planunit.healerunit is None
     # calculated_fields
-    assert x_planunit._range_evaluated is None
+    assert x_planunit.range_evaluated is None
     assert x_planunit.gogo_calc is None
-    assert x_planunit._stop_calc is None
+    assert x_planunit.stop_calc is None
     assert x_planunit.descendant_task_count is None
-    assert x_planunit._is_expanded is None
+    assert x_planunit.is_expanded is None
     assert x_planunit.all_voice_cred is None
     assert x_planunit.all_voice_debt is None
-    assert x_planunit._level is None
+    assert x_planunit.level is None
     assert x_planunit.active_hx is None
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota is None
@@ -104,7 +104,7 @@ def test_PlanUnit_Exists():
     assert x_planunit.fund_cease is None
     assert x_planunit.root is None
     assert x_planunit.moment_label is None
-    assert x_planunit._healerunit_ratio is None
+    assert x_planunit.healerunit_ratio is None
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
@@ -120,16 +120,16 @@ def test_PlanUnit_Exists():
         fund_onset_str(),
         fund_ratio_str(),
         gogo_calc_str(),
-        _healerunit_ratio_str(),
-        _is_expanded_str(),
-        _kids_str(),
+        healerunit_ratio_str(),
+        is_expanded_str(),
+        kids_str(),
         laborheir_str(),
-        _level_str(),
-        _range_evaluated_str(),
-        _reasonheirs_str(),
-        _stop_calc_str(),
+        level_str(),
+        range_evaluated_str(),
+        reasonheirs_str(),
+        stop_calc_str(),
         chore_str(),
-        _uid_str(),
+        uid_str(),
         addin_str(),
         awardunits_str(),
         begin_str(),
@@ -161,11 +161,11 @@ def test_planunit_shop_WithNoParametersReturnsObj():
 
     # THEN
     assert x_planunit
-    assert x_planunit._kids == {}
+    assert x_planunit.kids == {}
     assert x_planunit.star == 1
     assert x_planunit.plan_label is None
     assert x_planunit.moment_label == get_default_moment_label()
-    assert x_planunit._uid is None
+    assert x_planunit.uid is None
     assert x_planunit.begin is None
     assert x_planunit.close is None
     assert x_planunit.addin is None
@@ -178,27 +178,27 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.awardlines == {}
     assert x_planunit.awardunits == {}
     assert x_planunit.awardheirs == {}
-    assert x_planunit._is_expanded is True
+    assert x_planunit.is_expanded is True
     assert x_planunit.factheirs == {}
     assert x_planunit.factunits == {}
     assert x_planunit.healerunit == healerunit_shop()
     assert x_planunit.gogo_calc is None
-    assert x_planunit._stop_calc is None
-    assert x_planunit._level is None
+    assert x_planunit.stop_calc is None
+    assert x_planunit.level is None
     assert x_planunit.active_hx == {}
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota == default_fund_iota_if_None()
     assert x_planunit.fund_onset is None
     assert x_planunit.fund_cease is None
     assert x_planunit.reasonunits == {}
-    assert x_planunit._reasonheirs == {}
+    assert x_planunit.reasonheirs == {}
     assert x_planunit.laborunit == laborunit_shop()
     assert x_planunit.laborheir is None
     assert x_planunit.knot == default_knot_if_None()
     assert x_planunit.root is False
     assert x_planunit.all_voice_cred is None
     assert x_planunit.all_voice_debt is None
-    assert x_planunit._healerunit_ratio == 0
+    assert x_planunit.healerunit_ratio == 0
 
 
 def test_planunit_shop_Allows_starToBeZero():
@@ -402,20 +402,20 @@ def test_PlanUnit_clear_gogo_calc_stop_calc_SetsAttr():
     # ESTABLISH
     num_range_str = "num_range"
     num_range_plan = planunit_shop(num_range_str)
-    num_range_plan._range_evaluated = True
+    num_range_plan.range_evaluated = True
     num_range_plan.gogo_calc = 3
-    num_range_plan._stop_calc = 4
-    assert num_range_plan._range_evaluated
+    num_range_plan.stop_calc = 4
+    assert num_range_plan.range_evaluated
     assert num_range_plan.gogo_calc
-    assert num_range_plan._stop_calc
+    assert num_range_plan.stop_calc
 
     # WHEN
     num_range_plan.clear_gogo_calc_stop_calc()
 
     # THEN
-    assert not num_range_plan._range_evaluated
+    assert not num_range_plan.range_evaluated
     assert not num_range_plan.gogo_calc
-    assert not num_range_plan._stop_calc
+    assert not num_range_plan.stop_calc
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_denom():
@@ -426,21 +426,21 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_denom():
     init_gogo_calc = 21
     init_stop_calc = 42
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
-    assert not num_range_plan._range_evaluated
+    assert not num_range_plan.range_evaluated
     assert num_range_plan.gogo_calc
-    assert num_range_plan._stop_calc
+    assert num_range_plan.stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
-    assert num_range_plan._range_evaluated
+    assert num_range_plan.range_evaluated
     assert num_range_plan.gogo_calc == init_gogo_calc / num_range_denom
-    assert num_range_plan._stop_calc == init_stop_calc / num_range_denom
+    assert num_range_plan.stop_calc == init_stop_calc / num_range_denom
     assert num_range_plan.gogo_calc == 3
-    assert num_range_plan._stop_calc == 6
+    assert num_range_plan.stop_calc == 6
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRangeCovered():
@@ -451,19 +451,19 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_FullRangeCov
     init_gogo_calc = 22
     init_stop_calc = 45
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc
-    assert num_range_plan._stop_calc
+    assert num_range_plan.stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert num_range_plan.gogo_calc == 0
-    assert num_range_plan._stop_calc == num_range_denom
+    assert num_range_plan.stop_calc == num_range_denom
     assert num_range_plan.gogo_calc == 0
-    assert num_range_plan._stop_calc == 7
+    assert num_range_plan.stop_calc == 7
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_PartialRangeCovered():
@@ -474,10 +474,10 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_PartialRange
     init_gogo_calc = 21
     init_stop_calc = 24
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc
-    assert num_range_plan._stop_calc
+    assert num_range_plan.stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
@@ -485,10 +485,10 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario0_PartialRange
     # THEN
     assert num_range_plan.gogo_calc == 0
     assert (
-        num_range_plan._stop_calc == (init_stop_calc - init_gogo_calc) % num_range_denom
+        num_range_plan.stop_calc == (init_stop_calc - init_gogo_calc) % num_range_denom
     )
     assert num_range_plan.gogo_calc == 0
-    assert num_range_plan._stop_calc == 3
+    assert num_range_plan.stop_calc == 3
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_PartialRangeCovered():
@@ -499,19 +499,19 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_morph_Scenario1_PartialRange
     init_gogo_calc = 22
     init_stop_calc = 25
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc
-    assert num_range_plan._stop_calc
+    assert num_range_plan.stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert num_range_plan.gogo_calc == init_gogo_calc % num_range_denom
-    assert num_range_plan._stop_calc == init_stop_calc % num_range_denom
+    assert num_range_plan.stop_calc == init_stop_calc % num_range_denom
     assert num_range_plan.gogo_calc == 1
-    assert num_range_plan._stop_calc == 4
+    assert num_range_plan.stop_calc == 4
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario0_NoModifications():
@@ -526,19 +526,19 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert num_range_plan.gogo_calc == gogo_want
-    assert num_range_plan._stop_calc == stop_want
+    assert num_range_plan.stop_calc == stop_want
     assert num_range_plan.gogo_calc == 30
-    assert num_range_plan._stop_calc == 40
+    assert num_range_plan.stop_calc == 40
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_ModifiyBoth():
@@ -553,19 +553,19 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
     assert num_range_plan.gogo_calc == 21
-    assert num_range_plan._stop_calc == 45
+    assert num_range_plan.stop_calc == 45
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario1_ModifyLeft():
@@ -580,19 +580,19 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == stop_want
+    assert num_range_plan.stop_calc == stop_want
     assert num_range_plan.gogo_calc == 21
-    assert num_range_plan._stop_calc == 40
+    assert num_range_plan.stop_calc == 40
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario2_ModifyRight():
@@ -607,19 +607,19 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert num_range_plan.gogo_calc == gogo_want
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
     assert num_range_plan.gogo_calc == 30
-    assert num_range_plan._stop_calc == 45
+    assert num_range_plan.stop_calc == 45
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsLeft():
@@ -634,17 +634,17 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert not num_range_plan.gogo_calc
-    assert not num_range_plan._stop_calc
+    assert not num_range_plan.stop_calc
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario3_OutOfBoundsRight():
@@ -659,17 +659,17 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert not num_range_plan.gogo_calc
-    assert not num_range_plan._stop_calc
+    assert not num_range_plan.stop_calc
 
 
 def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario4_None():
@@ -684,14 +684,14 @@ def test_PlanUnit_mold_gogo_calc_stop_calc_SetsAttr_gogo_want_stop_want_Scenario
     num_range_plan.gogo_want = gogo_want
     num_range_plan.stop_want = stop_want
     num_range_plan.gogo_calc = init_gogo_calc
-    num_range_plan._stop_calc = init_stop_calc
+    num_range_plan.stop_calc = init_stop_calc
     num_range_plan.denom = num_range_denom
     assert num_range_plan.gogo_calc == init_gogo_calc
-    assert num_range_plan._stop_calc == init_stop_calc
+    assert num_range_plan.stop_calc == init_stop_calc
 
     # WHEN
     num_range_plan._mold_gogo_calc_stop_calc()
 
     # THEN
     assert not num_range_plan.gogo_calc
-    assert not num_range_plan._stop_calc
+    assert not num_range_plan.stop_calc

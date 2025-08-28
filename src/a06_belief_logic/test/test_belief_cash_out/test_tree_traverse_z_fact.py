@@ -250,7 +250,7 @@ def test_BeliefUnit_cash_out_SetsChoreAsComplete():
     yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
     mail_str = "obtain mail"
     assert yao_belief is not None
-    assert len(yao_belief.planroot._kids[mail_str].reasonunits) == 1
+    assert len(yao_belief.planroot.kids[mail_str].reasonunits) == 1
     plan_dict = yao_belief.get_plan_dict()
     mail_plan = plan_dict.get(yao_belief.make_l1_rope(mail_str))
     hr_str = "hr"

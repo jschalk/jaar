@@ -13,6 +13,7 @@ from src.a06_belief_logic.belief_main import (
 )
 from src.a06_belief_logic.test._util.a06_str import (
     factunits_str,
+    kids_str,
     laborunit_str,
     planroot_str,
     reasonunits_str,
@@ -60,11 +61,10 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
 
     x_planroot = yao_belief.planroot
     planroot_dict = belief_dict[planroot_str()]
-    _kids = "_kids"
     assert x_planroot.plan_label == yao_belief.moment_label
     assert planroot_dict["plan_label"] == x_planroot.plan_label
     assert planroot_dict["star"] == x_planroot.star
-    assert len(planroot_dict[_kids]) == len(x_planroot._kids)
+    assert len(planroot_dict[kids_str()]) == len(x_planroot.kids)
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
@@ -137,10 +137,9 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
     planroot_dict = belief_dict.get(planroot_str())
 
     # THEN
-    _kids = "_kids"
     laborunit = "laborunit"
 
-    labor_dict_x = planroot_dict[_kids][morn_str][laborunit]
+    labor_dict_x = planroot_dict[kids_str()][morn_str][laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
     assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
@@ -173,8 +172,6 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     x_json = zia_belief.get_json()
 
     # THEN
-    _kids = "_kids"
-
     assert x_json is not None
     assert True == x_is_json(x_json)
     belief_dict = get_dict_from_json(x_json)
@@ -200,14 +197,14 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     x_planroot = zia_belief.planroot
     planroot_dict = belief_dict.get(planroot_str())
 
-    assert len(planroot_dict[_kids]) == len(x_planroot._kids)
+    assert len(planroot_dict[kids_str()]) == len(x_planroot.kids)
 
     shave_str = "shave"
-    shave_dict = planroot_dict[_kids][shave_str]
+    shave_dict = planroot_dict[kids_str()][shave_str]
     shave_factunits = shave_dict[factunits_str()]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
-    assert len(shave_factunits) == len(x_planroot._kids[shave_str].factunits)
+    assert len(shave_factunits) == len(x_planroot.kids[shave_str].factunits)
     planroot_healerunit = planroot_dict["healerunit"]
     print(f"{planroot_healerunit=}")
     assert len(planroot_healerunit) == 1
@@ -243,7 +240,6 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     belief_dict = get_dict_from_json(yao_belief.get_json())
 
     # THEN
-    _kids = "_kids"
     assert belief_dict["belief_name"] == yao_belief.belief_name
     assert belief_dict["moment_label"] == yao_belief.moment_label
     assert belief_dict["tally"] == yao_belief.tally
@@ -253,10 +249,10 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
 
     x_planroot = yao_belief.planroot
     planroot_dict = belief_dict.get(planroot_str())
-    assert len(planroot_dict[_kids]) == len(x_planroot._kids)
+    assert len(planroot_dict[kids_str()]) == len(x_planroot.kids)
 
-    kids = planroot_dict[_kids]
-    jour_min_dict = kids[jour_min_str]
+    kids_dict = planroot_dict[kids_str()]
+    jour_min_dict = kids_dict[jour_min_str]
     jour_min_factunits_dict = jour_min_dict[factunits_str()]
     jour_min_plan_x = yao_belief.get_plan_obj(jour_min_rope)
     print(f"{jour_min_factunits_dict=}")
@@ -269,8 +265,8 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     ulti_rope = yao_belief.make_l1_rope(ulti_str)
     cont_plan = yao_belief.get_plan_obj(cont_rope)
     ulti_plan = yao_belief.get_plan_obj(ulti_rope)
-    cont_reasonunits_dict = planroot_dict[_kids][cont_str][reasonunits_str()]
-    ulti_reasonunits_dict = planroot_dict[_kids][ulti_str][reasonunits_str()]
+    cont_reasonunits_dict = planroot_dict[kids_str()][cont_str][reasonunits_str()]
+    ulti_reasonunits_dict = planroot_dict[kids_str()][ulti_str][reasonunits_str()]
     assert len(cont_reasonunits_dict) == len(cont_plan.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 
@@ -380,12 +376,12 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     assert len(json_planroot.factunits) == 1
     assert len(json_planroot.awardunits) == 1
 
-    assert len(json_belief.planroot._kids) == 2
+    assert len(json_belief.planroot.kids) == 2
 
     sem_jour_str = "sem_jours"
     sem_jour_rope = json_belief.make_l1_rope(sem_jour_str)
     sem_jour_plan_x = json_belief.get_plan_obj(sem_jour_rope)
-    assert len(sem_jour_plan_x._kids) == 2
+    assert len(sem_jour_plan_x.kids) == 2
 
     sun_str = "Sun"
     sun_rope = json_belief.make_rope(sem_jour_rope, sun_str)
@@ -520,7 +516,7 @@ def test_beliefunit_get_from_json_ExportsBeliefUnit_star():
     assert x1_belief.tally == x2_belief.tally
     assert x1_belief.planroot.star == 1
     assert x1_belief.planroot.star == x2_belief.planroot.star
-    assert x1_belief.planroot._kids == x2_belief.planroot._kids
+    assert x1_belief.planroot.kids == x2_belief.planroot.kids
 
 
 def test_get_dict_of_belief_from_dict_ReturnsDictOfBeliefUnits():

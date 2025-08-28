@@ -405,19 +405,19 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_healerunit_ratio": {
+            "healerunit_ratio": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_level": {
+            "level": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_range_evaluated": {
+            "range_evaluated": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_stop_calc": {
+            "stop_calc": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },

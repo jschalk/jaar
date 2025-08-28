@@ -97,16 +97,16 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     a4_belief.cash_out()
 
     # THEN
-    casa_plan = a4_belief.planroot._kids[casa_str]
-    rla_plan = casa_plan._kids[rla_str]
-    cost_plan = rla_plan._kids[cost_str]
+    casa_plan = a4_belief.planroot.kids[casa_str]
+    rla_plan = casa_plan.kids[rla_str]
+    cost_plan = rla_plan.kids[cost_str]
 
     # 1
-    casa_wk_calc_reasonheir = casa_plan._reasonheirs[wk_rope]
+    casa_wk_calc_reasonheir = casa_plan.reasonheirs[wk_rope]
     assert casa_wk_calc_reasonheir == casa_wk_built_reasonheir
 
     # 2
-    rla_wk_reasonheir = rla_plan._reasonheirs[wk_rope]
+    rla_wk_reasonheir = rla_plan.reasonheirs[wk_rope]
     assert rla_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert rla_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
@@ -119,7 +119,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     assert rla_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
 
     # 3
-    cost_wk_reasonheir = cost_plan._reasonheirs[wk_rope]
+    cost_wk_reasonheir = cost_plan.reasonheirs[wk_rope]
     assert cost_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert cost_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
@@ -166,22 +166,22 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     rla_plan = casa_plan.get_kid(rla_str)
     cost_plan = rla_plan.get_kid(cost_str)
 
-    assert a4_belief.planroot._reasonheirs == {}
-    assert casa_plan._reasonheirs == {}
-    assert rla_plan._reasonheirs == {}
-    assert cost_plan._reasonheirs == {}
+    assert a4_belief.planroot.reasonheirs == {}
+    assert casa_plan.reasonheirs == {}
+    assert rla_plan.reasonheirs == {}
+    assert cost_plan.reasonheirs == {}
 
     # WHEN
     a4_belief.cash_out()
 
     # THEN
-    assert a4_belief.planroot._reasonheirs == {}  # casa_wk_built_reasonheir
+    assert a4_belief.planroot.reasonheirs == {}  # casa_wk_built_reasonheir
 
     # 1
-    assert casa_plan._reasonheirs[wk_rope] == casa_wk_built_reasonheir
+    assert casa_plan.reasonheirs[wk_rope] == casa_wk_built_reasonheir
 
     # 2
-    rla_wk_reasonheir = rla_plan._reasonheirs[wk_rope]
+    rla_wk_reasonheir = rla_plan.reasonheirs[wk_rope]
     assert rla_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert rla_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (
@@ -194,7 +194,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     assert rla_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
 
     # 3
-    cost_wk_reasonheir = cost_plan._reasonheirs[wk_rope]
+    cost_wk_reasonheir = cost_plan.reasonheirs[wk_rope]
     assert cost_wk_reasonheir.reason_context == casa_wk_built_reasonheir.reason_context
     assert cost_wk_reasonheir.cases == casa_wk_built_reasonheir.cases
     assert (

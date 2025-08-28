@@ -164,14 +164,14 @@ def test_PlanUnit_set_reasonheirsAcceptsNewValues():
     run_cases = {run_case.reason_state: run_case}
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
     reasonheirs = {reasonheir.reason_context: reasonheir}
-    assert ball_plan._reasonheirs == {}
+    assert ball_plan.reasonheirs == {}
 
     # WHEN
     ball_plan.set_reasonheirs(reasonheirs=reasonheirs, belief_plan_dict={})
 
     # THEN
-    assert ball_plan._reasonheirs == reasonheirs
-    assert id(ball_plan._reasonheirs) != id(reasonheirs)
+    assert ball_plan.reasonheirs == reasonheirs
+    assert id(ball_plan.reasonheirs) != id(reasonheirs)
 
 
 def test_PlanUnit_set_reasonheirsRefusesNewValues():
@@ -193,7 +193,7 @@ def test_PlanUnit_set_reasonheirsRefusesNewValues():
     # THEN
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
     reasonheirs = {reasonheir.reason_context: reasonheir}
-    assert ball_plan._reasonheirs == reasonheirs
+    assert ball_plan.reasonheirs == reasonheirs
 
 
 def test_PlanUnit_set_range_factheirs_SetsAttrNoParameters():
@@ -233,7 +233,7 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_plan.set_reasonheirs(x_belief_plan_dict, tue_reasonheirs)
 
     x_range_inheritors = {tue_rope: wk_rope}
-    assert len(ball_plan._reasonheirs) == 1
+    assert len(ball_plan.reasonheirs) == 1
     assert ball_plan.factheirs == {wk_rope: wk_factheir}
     assert ball_plan.factheirs.get(wk_rope)
     assert len(ball_plan.factheirs) == 1

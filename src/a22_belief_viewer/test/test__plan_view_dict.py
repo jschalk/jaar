@@ -1,13 +1,5 @@
 from src.a05_plan_logic.plan import planunit_shop
 from src.a05_plan_logic.test._util.a05_str import (
-    _healerunit_ratio_str,
-    _is_expanded_str,
-    _kids_str,
-    _level_str,
-    _range_evaluated_str,
-    _reasonheirs_str,
-    _stop_calc_str,
-    _uid_str,
     active_hx_str,
     active_str,
     addin_str,
@@ -31,20 +23,28 @@ from src.a05_plan_logic.test._util.a05_str import (
     fund_share_str,
     gogo_calc_str,
     gogo_want_str,
+    healerunit_ratio_str,
     healerunit_str,
+    is_expanded_str,
+    kids_str,
     knot_str,
     laborheir_str,
     laborunit_str,
+    level_str,
     moment_label_str,
     morph_str,
     numor_str,
     plan_label_str,
     problem_bool_str,
+    range_evaluated_str,
     reason_state_str,
+    reasonheirs_str,
     reasonunits_str,
     star_str,
+    stop_calc_str,
     stop_want_str,
     task_str,
+    uid_str,
 )
 from src.a06_belief_logic.test._util.a06_str import parent_rope_str
 from src.a07_timeline_logic.reason_str_func import (
@@ -72,7 +72,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_plan.fund_ratio = 1
-    assert casa_plan._kids == {}
+    assert casa_plan.kids == {}
     print(f"{type(casa_plan)=}")
 
     # WHEN
@@ -86,10 +86,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         plan_label_str(),
         moment_label_str(),
         parent_rope_str(),
-        _kids_str(),
+        kids_str(),
         "root",
         star_str(),
-        _uid_str(),
+        uid_str(),
         awardunits_str(),
         reasonunits_str(),
         laborunit_str(),
@@ -106,7 +106,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         task_str(),
         problem_bool_str(),
         knot_str(),
-        _is_expanded_str(),
+        is_expanded_str(),
         active_str(),
         active_hx_str(),
         all_voice_cred_str(),
@@ -119,14 +119,14 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         fund_iota_str(),
         fund_onset_str(),
         fund_cease_str(),
-        _healerunit_ratio_str(),
-        _level_str(),
-        _range_evaluated_str(),
-        _reasonheirs_str(),
+        healerunit_ratio_str(),
+        level_str(),
+        range_evaluated_str(),
+        reasonheirs_str(),
         chore_str(),
         laborheir_str(),
         gogo_calc_str(),
-        _stop_calc_str(),
+        stop_calc_str(),
         fund_share_str(),
     }
     assert casa_dict.get("healerunit") == {"_healer_names": []}
@@ -453,7 +453,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
 
     # THEN
     # reasonheirs
-    play_soccer_reasonheirs_dict = play_soccer_dict.get(_reasonheirs_str())
+    play_soccer_reasonheirs_dict = play_soccer_dict.get(reasonheirs_str())
     assert len(play_soccer_reasonheirs_dict) == 2
     # print(f"{len(play_soccer_reasonheirs_dict)=}")
     best_reasonheir_dict = play_soccer_reasonheirs_dict.get(best_rope)
@@ -515,7 +515,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     casa_plan.gogo_want = casa_gogo_want
     casa_plan.stop_want = casa_stop_want
     casa_plan.gogo_calc = casa_gogo_calc
-    casa_plan._stop_calc = casa_stop_calc
+    casa_plan.stop_calc = casa_stop_calc
     casa_plan.fund_ratio = 0
 
     # WHEN
@@ -525,11 +525,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     gogo_want_readable = casa_dict.get(gogo_want_str())
     stop_want_readable = casa_dict.get(stop_want_str())
     gogo_calc_readable = casa_dict.get(gogo_calc_str())
-    stop_calc_readable = casa_dict.get(_stop_calc_str())
+    stop_calc_readable = casa_dict.get(stop_calc_str())
     expected_gogo_want_readable = add_small_dot(f"gogo_want: {casa_plan.gogo_want}")
     expected_stop_want_readable = add_small_dot(f"stop_want: {casa_plan.stop_want}")
     expected_gogo_calc_readable = add_small_dot(f"gogo_calc: {casa_plan.gogo_calc}")
-    expected_stop_calc_readable = add_small_dot(f"stop_calc: {casa_plan._stop_calc}")
+    expected_stop_calc_readable = add_small_dot(f"stop_calc: {casa_plan.stop_calc}")
     assert gogo_want_readable == expected_gogo_want_readable
     assert stop_want_readable == expected_stop_want_readable
     assert gogo_calc_readable == expected_gogo_calc_readable

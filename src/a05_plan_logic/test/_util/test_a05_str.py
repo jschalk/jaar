@@ -1,12 +1,4 @@
 from src.a05_plan_logic.test._util.a05_str import (
-    _healerunit_ratio_str,
-    _is_expanded_str,
-    _kids_str,
-    _level_str,
-    _range_evaluated_str,
-    _reasonheirs_str,
-    _stop_calc_str,
-    _uid_str,
     active_hx_str,
     addin_str,
     all_voice_cred_str,
@@ -25,15 +17,23 @@ from src.a05_plan_logic.test._util.a05_str import (
     gogo_calc_str,
     gogo_want_str,
     healer_name_str,
+    healerunit_ratio_str,
     healerunit_str,
+    is_expanded_str,
+    kids_str,
+    level_str,
     morph_str,
     numor_str,
     plan_label_str,
     plan_rope_str,
     problem_bool_str,
+    range_evaluated_str,
+    reasonheirs_str,
     star_str,
+    stop_calc_str,
     stop_want_str,
     task_str,
+    uid_str,
 )
 
 
@@ -50,14 +50,14 @@ def test_str_functions_ReturnsObj():
     assert fund_onset_str() == "fund_onset"
     assert fund_ratio_str() == "fund_ratio"
     assert gogo_calc_str() == "gogo_calc"
-    assert _healerunit_ratio_str() == "_healerunit_ratio"
-    assert _is_expanded_str() == "_is_expanded"
-    assert _level_str() == "_level"
-    assert _kids_str() == "_kids"
-    assert _range_evaluated_str() == "_range_evaluated"
-    assert _reasonheirs_str() == "_reasonheirs"
-    assert _stop_calc_str() == "_stop_calc"
-    assert _uid_str() == "_uid"
+    assert healerunit_ratio_str() == "healerunit_ratio"
+    assert is_expanded_str() == "is_expanded"
+    assert level_str() == "level"
+    assert kids_str() == "kids"
+    assert range_evaluated_str() == "range_evaluated"
+    assert reasonheirs_str() == "reasonheirs"
+    assert stop_calc_str() == "stop_calc"
+    assert uid_str() == "uid"
     assert addin_str() == "addin"
     assert begin_str() == "begin"
     assert close_str() == "close"
