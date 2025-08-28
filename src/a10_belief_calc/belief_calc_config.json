@@ -291,7 +291,7 @@
             }
         },
         "jmetrics": {
-            "_status": {
+            "status": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
@@ -340,7 +340,7 @@
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_status": {
+            "status": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

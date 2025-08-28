@@ -1,7 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a06_belief_logic.test._util.a06_str import (
-    _status_str,
     belief_name_str,
     chore_str,
     moment_label_str,
@@ -12,6 +11,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
+    status_str,
 )
 from src.a10_belief_calc.belief_calc_config import get_belief_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_belief_tool import (
@@ -210,7 +210,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_reason_context = 2
     x_reason_active_requisite = 3
     x_chore = 4
-    x__status = 5
+    x_status = 5
     x__reason_active_heir = 6
     values_dict = {
         "moment_label": x_moment_label,
@@ -219,7 +219,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         reason_context_str(): x_reason_context,
         reason_active_requisite_str(): x_reason_active_requisite,
         "chore": x_chore,
-        "_status": x__status,
+        "status": x_status,
         "_reason_active_heir": x__reason_active_heir,
     }
     # all args included in values dict
@@ -276,7 +276,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_reason_lower = 5
     x_reason_divisor = 6
     x_chore = 7
-    x__status = 8
+    x_status = 8
     values_dict = {
         moment_label_str(): x_moment_label,
         belief_name_str(): x_belief_name,
@@ -287,7 +287,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         reason_lower_str(): x_reason_lower,
         reason_divisor_str(): x_reason_divisor,
         chore_str(): x_chore,
-        _status_str(): x__status,
+        status_str(): x_status,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

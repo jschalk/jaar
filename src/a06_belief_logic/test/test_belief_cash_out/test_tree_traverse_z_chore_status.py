@@ -115,10 +115,10 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     oregon_rope = sue_beliefunit.make_rope(usa_rope, oregon_str)
 
     wed = caseunit_shop(reason_state=wed_rope)
-    wed._status = True
+    wed.status = True
     wed.chore = False
     usa = caseunit_shop(reason_state=usa_rope)
-    usa._status = True
+    usa.status = True
     usa.chore = False
 
     wed_lu = reasonunit_shop(wk_rope, cases={wed.reason_state: wed})
@@ -126,14 +126,14 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     wed_lh = reasonheir_shop(
         reason_context=wk_rope,
         cases={wed.reason_state: wed},
-        _status=True,
+        status=True,
         chore=False,
         _reason_active_heir=True,
     )
     sta_lh = reasonheir_shop(
         reason_context=nation_rope,
         cases={usa.reason_state: usa},
-        _status=True,
+        status=True,
         chore=False,
         _reason_active_heir=True,
     )
@@ -164,7 +164,7 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     # print(f"{casa_plan._reasonheirs=}")
     nation_reasonheir = casa_plan._reasonheirs[nation_rope]
     print(f"  {nation_reasonheir=}")
-    print(f"  {nation_reasonheir._status=}\n")
+    print(f"  {nation_reasonheir.status=}\n")
     # assert casa_plan._reasonheirs == x1_reasonheirs
 
     assert len(casa_plan._reasonheirs) == len(x1_reasonheirs)
@@ -179,7 +179,7 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     # w_state = usa_case.cases[wed_rope].reason_state
     # print(f"      {w_state=}")
     # assert usa_case.chore == w_state.chore
-    # assert usa_case._status == w_state._status
+    # assert usa_case.status == w_state.status
     # assert wk_reasonheir.cases == wk_reasonheir.cases
 
     # assert casa_plan.reasonunits == x1_reasonunits
@@ -199,9 +199,9 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     #     for reason in x_plan._reasonheirs.values():
     #         assert str(type(reason)).find(".reason.ReasonHeir'>") > 0
     #         print(f"    {reason.reason_context=}")
-    #         assert reason._status is not None
+    #         assert reason.status is not None
     #         for case_x in reason.cases.values():
-    #             assert case_x._status is not None
+    #             assert case_x.status is not None
     #         assert _check_all_objects_in_dict_are_correct_type(
     #             x_dict=reason.cases, type_str="src.s2_beliefunit.reason.CaseUnit"
     #         )
@@ -408,17 +408,17 @@ def test_BeliefUnit_cash_out_OptionWeekJoursReturnsObj_beliefunit_v001():
     tue_str = "Tue"
     tue_rope = yao_beliefunit.make_rope(wk_rope, tue_str)
     mon_case_x = caseunit_shop(reason_state=mon_rope)
-    mon_case_x._status = False
+    mon_case_x.status = False
     mon_case_x.chore = False
     tue_case_x = caseunit_shop(reason_state=tue_rope)
-    tue_case_x._status = False
+    tue_case_x.status = False
     tue_case_x.chore = False
     mt_cases = {
         mon_case_x.reason_state: mon_case_x,
         tue_case_x.reason_state: tue_case_x,
     }
     mt_reasonunit = reasonunit_shop(wk_rope, cases=mt_cases)
-    mt_reasonheir = reasonheir_shop(wk_rope, cases=mt_cases, _status=False)
+    mt_reasonheir = reasonheir_shop(wk_rope, cases=mt_cases, status=False)
     x_planroot = yao_beliefunit.get_plan_obj(to_rope(yao_beliefunit.moment_label))
     x_planroot.set_reasonunit(reason=mt_reasonunit)
     # print(f"{yao_beliefunit.reasonunits[wk_rope].reason_context=}")
@@ -440,7 +440,7 @@ def test_BeliefUnit_cash_out_OptionWeekJoursReturnsObj_beliefunit_v001():
     # THEN
     gen_wk_reasonheir = x_planroot.get_reasonheir(wk_rope)
     gen_mon_case = gen_wk_reasonheir.cases.get(mon_rope)
-    assert gen_mon_case._status == mt_reasonheir.cases.get(mon_rope)._status
+    assert gen_mon_case.status == mt_reasonheir.cases.get(mon_rope).status
     assert gen_mon_case == mt_reasonheir.cases.get(mon_rope)
     assert gen_wk_reasonheir.cases == mt_reasonheir.cases
     assert gen_wk_reasonheir == mt_reasonheir

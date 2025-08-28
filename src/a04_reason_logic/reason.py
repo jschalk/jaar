@@ -314,7 +314,7 @@ class CaseUnit:
     reason_lower: float = None
     reason_upper: float = None
     reason_divisor: int = None
-    _status: bool = None
+    status: bool = None
     chore: bool = None
     knot: str = None
 
@@ -334,7 +334,7 @@ class CaseUnit:
         return x_dict
 
     def clear_status(self):
-        self._status = None
+        self.status = None
 
     def set_knot(self, new_knot: str):
         old_knot = copy_deepcopy(self.knot)
@@ -349,7 +349,7 @@ class CaseUnit:
         ) or is_heir_rope(src=fact_fact_state, heir=self.reason_state, knot=self.knot)
 
     def set_status(self, x_factheir: FactHeir):
-        self._status = self._get_active(factheir=x_factheir)
+        self.status = self._get_active(factheir=x_factheir)
         self.chore = self._get_chore_status(factheir=x_factheir)
 
     def _get_active(self, factheir: FactHeir):
@@ -388,9 +388,9 @@ class CaseUnit:
 
     def _get_chore_status(self, factheir: FactHeir) -> bool:
         x_chore = None
-        if self._status and self._is_range():
+        if self.status and self._is_range():
             x_chore = factheir.fact_upper > self.reason_upper
-        elif self._status and self._is_segregate():
+        elif self.status and self._is_segregate():
             segr_obj = casestatusfinder_shop(
                 reason_lower=self.reason_lower,
                 reason_upper=self.reason_upper,
@@ -399,7 +399,7 @@ class CaseUnit:
                 fact_upper_full=factheir.fact_upper,
             )
             x_chore = segr_obj.get_chore_status()
-        elif self._status in [True, False]:
+        elif self.status in [True, False]:
             x_chore = False
 
         return x_chore
@@ -593,7 +593,7 @@ def reasonunit_shop(
 
 @dataclass
 class ReasonHeir(ReasonCore):
-    _status: bool = None
+    status: bool = None
     chore: bool = None
     _reason_active_heir: bool = None
 
@@ -610,7 +610,7 @@ class ReasonHeir(ReasonCore):
         self.cases = x_cases
 
     def clear_status(self):
-        self._status = None
+        self.status = None
         for case in self.cases.values():
             case.clear_status()
 
@@ -639,18 +639,18 @@ class ReasonHeir(ReasonCore):
         any_case_true = False
         any_chore_true = False
         for x_caseunit in self.cases.values():
-            if x_caseunit._status:
+            if x_caseunit.status:
                 any_case_true = True
                 if x_caseunit.chore:
                     any_chore_true = True
         return any_case_true, any_chore_true
 
     def _set_attr_status(self, any_case_true: bool):
-        self._status = any_case_true or self.is_reason_active_requisite_operational()
+        self.status = any_case_true or self.is_reason_active_requisite_operational()
 
     def _set_attr_chore(self, any_chore_true: bool):
         self.chore = True if any_chore_true else None
-        if self._status and self.chore is None:
+        if self.status and self.chore is None:
             self.chore = False
 
     def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
@@ -665,7 +665,7 @@ def reasonheir_shop(
     reason_context: RopeTerm,
     cases: dict[RopeTerm, CaseUnit] = None,
     reason_active_requisite: bool = None,
-    _status: bool = None,
+    status: bool = None,
     chore: bool = None,
     _reason_active_heir: bool = None,
     knot: str = None,
@@ -674,7 +674,7 @@ def reasonheir_shop(
         reason_context=reason_context,
         cases=get_empty_dict_if_None(cases),
         reason_active_requisite=reason_active_requisite,
-        _status=_status,
+        status=status,
         chore=chore,
         _reason_active_heir=_reason_active_heir,
         knot=default_knot_if_None(knot),

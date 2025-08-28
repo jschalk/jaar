@@ -191,8 +191,8 @@ def create_blrprem_metrics_insert_sqlstr(values_dict: dict[str,]):
     reason_lower = values_dict.get("reason_lower")
     reason_divisor = values_dict.get("reason_divisor")
     chore = values_dict.get("chore")
-    _status = values_dict.get("_status")
-    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, chore, _status)
+    status = values_dict.get("status")
+    return f"""INSERT INTO belief_plan_reason_caseunit_job (moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor, chore, status)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -203,7 +203,7 @@ VALUES (
 , {sqlite_obj_str(reason_lower, "REAL")}
 , {sqlite_obj_str(reason_divisor, "REAL")}
 , {sqlite_obj_str(chore, "INTEGER")}
-, {sqlite_obj_str(_status, "INTEGER")}
+, {sqlite_obj_str(status, "INTEGER")}
 )
 ;
 """
@@ -216,9 +216,9 @@ def create_blrreas_metrics_insert_sqlstr(values_dict: dict[str,]):
     reason_context = values_dict.get("reason_context")
     reason_active_requisite = values_dict.get("reason_active_requisite")
     chore = values_dict.get("chore")
-    _status = values_dict.get("_status")
+    status = values_dict.get("status")
     _reason_active_heir = values_dict.get("_reason_active_heir")
-    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, reason_active_requisite, chore, _status, _reason_active_heir)
+    return f"""INSERT INTO belief_plan_reasonunit_job (moment_label, belief_name, plan_rope, reason_context, reason_active_requisite, chore, status, _reason_active_heir)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -226,7 +226,7 @@ VALUES (
 , {sqlite_obj_str(reason_context, "TEXT")}
 , {sqlite_obj_str(reason_active_requisite, "INTEGER")}
 , {sqlite_obj_str(chore, "INTEGER")}
-, {sqlite_obj_str(_status, "INTEGER")}
+, {sqlite_obj_str(status, "INTEGER")}
 , {sqlite_obj_str(_reason_active_heir, "INTEGER")}
 )
 ;

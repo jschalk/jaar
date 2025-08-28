@@ -10,13 +10,13 @@ from src.a04_reason_logic.reason import (
     factheir_shop,
 )
 from src.a04_reason_logic.test._util.a04_str import (
-    _status_str,
     chore_str,
     knot_str,
     reason_divisor_str,
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
+    status_str,
 )
 
 
@@ -35,13 +35,13 @@ def test_CaseUnit_Exists():
     assert email_case.reason_lower is None
     assert email_case.reason_upper is None
     assert email_case.reason_divisor is None
-    assert email_case._status is None
+    assert email_case.status is None
     assert email_case.chore is None
     assert email_case.knot is None
     obj_attrs = set(email_case.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        _status_str(),
+        status_str(),
         chore_str(),
         knot_str(),
         reason_divisor_str(),
@@ -71,17 +71,17 @@ def test_CaseUnit_clear_status_SetsAttrs():
     casa_rope = create_rope(root_label(), casa_str)
     casa_case = caseunit_shop(reason_state=casa_rope)
     # THEN
-    assert casa_case._status is None
+    assert casa_case.status is None
 
     # ESTABLISH
-    casa_case._status = True
-    assert casa_case._status
+    casa_case.status = True
+    assert casa_case.status
 
     # WHEN
     casa_case.clear_status()
 
     # THEN
-    assert casa_case._status is None
+    assert casa_case.status is None
 
 
 def test_CaseUnit_is_range_IdentifiesStatus():
@@ -383,13 +383,13 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_WhenFactUnitIsNull():
     after_rope = create_rope(wk_rope, after_str)
     case_2 = caseunit_shop(reason_state=after_rope)
     belief_fact_2 = None
-    assert case_2._status is None
+    assert case_2.status is None
 
     # WHEN
     case_2.set_status(x_factheir=belief_fact_2)
 
     # THEN
-    assert case_2._status is False
+    assert case_2.status is False
 
 
 def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
@@ -400,13 +400,13 @@ def test_CaseUnitUnit_set_status_SetsAttr_status_OfSimple():
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
     belief_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
-    assert wed_case._status is None
+    assert wed_case.status is None
 
     # WHEN
     wed_case.set_status(x_factheir=belief_fact)
 
     # THEN
-    assert wed_case._status
+    assert wed_case.status
 
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario2():
@@ -418,14 +418,14 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario2():
     wed_after_str = "afternoon"
     wed_after_rope = create_rope(wed_rope, wed_after_str)
     wed_after_case = caseunit_shop(reason_state=wed_after_rope)
-    assert wed_after_case._status is None
+    assert wed_after_case.status is None
 
     # WHEN
     wed_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
     wed_after_case.set_status(x_factheir=wed_fact)
 
     # THEN
-    assert wed_after_case._status
+    assert wed_after_case.status
 
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario3():
@@ -437,14 +437,14 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario3():
     wed_noon_str = "noon"
     wed_noon_rope = create_rope(wed_rope, wed_noon_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
-    assert wed_case._status is None
+    assert wed_case.status is None
 
     # WHEN
     noon_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_noon_rope)
     wed_case.set_status(x_factheir=noon_fact)
 
     # THEN
-    assert wed_case._status
+    assert wed_case.status
 
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario4():
@@ -457,7 +457,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario4():
     thu_rope = create_rope(wk_rope, thu_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
     thu_fact = factheir_shop(fact_context=wk_rope, fact_state=thu_rope)
-    assert wed_case._status is None
+    assert wed_case.status is None
     assert wed_case.is_in_lineage(fact_fact_state=thu_fact.fact_state) is False
     assert thu_fact.fact_lower is None
     assert thu_fact.fact_upper is None
@@ -466,7 +466,7 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario4():
     wed_case.set_status(x_factheir=thu_fact)
 
     # THEN
-    assert wed_case._status is False
+    assert wed_case.status is False
 
 
 def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
@@ -480,14 +480,14 @@ def test_CaseUnit_set_status_SetsAttr_status_Scenario5():
     wed_rain_str = "rainy"
     wed_rain_rope = create_rope(wed_rope, wed_rain_str)
     wed_sun_case = caseunit_shop(reason_state=wed_cloudy_rope)
-    assert wed_sun_case._status is None
+    assert wed_sun_case.status is None
 
     # WHEN
     wed_rain_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_rain_rope)
     wed_sun_case.set_status(x_factheir=wed_rain_fact)
 
     # THEN
-    assert wed_sun_case._status is False
+    assert wed_sun_case.status is False
 
 
 def test_CaseUnit_set_status_SetsStatus_status_ScenarioClock():
@@ -497,14 +497,14 @@ def test_CaseUnit_set_status_SetsStatus_status_ScenarioClock():
     hr24_str = "24hr"
     hr24_rope = create_rope(clock_rope, hr24_str)
     hr24_case = caseunit_shop(reason_state=hr24_rope, reason_lower=7, reason_upper=7)
-    assert hr24_case._status is None
+    assert hr24_case.status is None
 
     # WHEN
     range_0_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=8)
     hr24_case.set_status(x_factheir=range_0_to_8_fact)
 
     # THEN
-    assert hr24_case._status
+    assert hr24_case.status
 
 
 def test_CaseUnit_get_chore_status_ReturnsObjWhen_status_IsFalse():
@@ -512,7 +512,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhen_status_IsFalse():
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
     no_range_case = caseunit_shop(reason_state=hr24_rope)
-    no_range_case._status = False
+    no_range_case.status = False
 
     # WHEN / THEN
     no_range_fact = factheir_shop(fact_context=hr24_rope, fact_state=hr24_rope)
@@ -526,7 +526,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_True():
     range_5_to_31_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=5, reason_upper=31
     )
-    range_5_to_31_case._status = True
+    range_5_to_31_case.status = True
 
     # WHEN / THEN
     range_7_to_41_fact = factheir_shop(
@@ -542,7 +542,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_False():
     range_5_to_31_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=5, reason_upper=31
     )
-    range_5_to_31_case._status = True
+    range_5_to_31_case.status = True
 
     # WHEN / THEN
     range_7_to_21_fact = factheir_shop(
@@ -558,7 +558,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_01():
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
-    o0_n0_d5_case._status = True
+    o0_n0_d5_case.status = True
 
     # WHEN / THEN
     range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=3, fact_upper=5)
@@ -572,7 +572,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_02():
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
-    o0_n0_d5_case._status = False
+    o0_n0_d5_case.status = False
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=7)
@@ -586,7 +586,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_01():
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
-    o0_n0_d5_case._status = True
+    o0_n0_d5_case.status = True
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=7)
@@ -600,7 +600,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_02():
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
-    o0_n0_d5_case._status = True
+    o0_n0_d5_case.status = True
 
     # WHEN / THEN
     range_5_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=5)
@@ -614,7 +614,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjNotNull():
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case._status = True
+    wed_case.status = True
 
     # WHEN
     factheir = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
@@ -630,7 +630,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
     range_2_to_7_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
-    assert range_2_to_7_case._status is None
+    assert range_2_to_7_case.status is None
     assert range_2_to_7_case.chore is None
 
     # WHEN
@@ -638,7 +638,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
     range_2_to_7_case.set_status(x_factheir=range_0_to_5_fact)
 
     # THEN
-    assert range_2_to_7_case._status
+    assert range_2_to_7_case.status
     assert range_2_to_7_case.chore is False
 
 
@@ -650,12 +650,12 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
     range_0_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=8)
-    assert range_2_to_7_case._status is None
+    assert range_2_to_7_case.status is None
 
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_0_to_8_fact)
     # THEN
-    assert range_2_to_7_case._status
+    assert range_2_to_7_case.status
     assert range_2_to_7_case.chore
 
     # ESTABLISH
@@ -663,14 +663,14 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_3_to_5_fact)
     # THEN
-    assert range_2_to_7_case._status
+    assert range_2_to_7_case.status
     assert range_2_to_7_case.chore is False
 
     # ESTABLISH
     range_8_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=8, fact_upper=8)
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_8_to_8_fact)
-    assert range_2_to_7_case._status is False
+    assert range_2_to_7_case.status is False
     assert range_2_to_7_case.chore is False
 
 
@@ -681,7 +681,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
     hr24_str = "24hr"
     hr24_rope = create_rope(clock_rope, hr24_str)
     hr24_case = caseunit_shop(reason_state=hr24_rope, reason_lower=7, reason_upper=7)
-    assert hr24_case._status is None
+    assert hr24_case.status is None
 
     # WHEN
     belief_fact = factheir_shop(
@@ -690,7 +690,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario03():
     hr24_case.set_status(x_factheir=belief_fact)
 
     # THEN
-    assert hr24_case._status is False
+    assert hr24_case.status is False
 
 
 def test_CaseUnit_set_status_SetCEDWeekStatusFalse():
@@ -702,14 +702,14 @@ def test_CaseUnit_set_status_SetCEDWeekStatusFalse():
     o1_n1_d6_case = caseunit_shop(
         reason_state=wk_rope, reason_divisor=6, reason_lower=1, reason_upper=1
     )
-    assert o1_n1_d6_case._status is None
+    assert o1_n1_d6_case.status is None
 
     # WHEN
     range_6_to_6_fact = factheir_shop(wk_rope, wk_rope, fact_lower=6, fact_upper=6)
     o1_n1_d6_case.set_status(x_factheir=range_6_to_6_fact)
 
     # THEN
-    assert o1_n1_d6_case._status is False
+    assert o1_n1_d6_case.status is False
 
 
 def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
@@ -724,13 +724,13 @@ def test_CaseUnit_set_status_SetCEDWeekStatusTrue():
     belief_fact = factheir_shop(
         fact_context=wk_rope, fact_state=wk_rope, fact_lower=7, fact_upper=7
     )
-    assert wk_case._status is None
+    assert wk_case.status is None
 
     # WHEN
     wk_case.set_status(x_factheir=belief_fact)
 
     # THEN
-    assert wk_case._status
+    assert wk_case.status
 
 
 def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():

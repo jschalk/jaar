@@ -287,7 +287,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Range():
     zia_belief.get_agenda_dict()
     run_reasonunits = zia_belief.planroot._kids[run_str].reasonunits[jour_rope]
     print(f"{run_reasonunits=}")
-    print(f"{run_reasonunits.cases[jour_rope]._status=}")
+    print(f"{run_reasonunits.cases[jour_rope].status=}")
     print(f"{run_reasonunits.cases[jour_rope].chore=}")
     print(f"{zia_belief.get_reason_contexts()=}")
     assert len(zia_belief.get_plan_dict()) == 4
@@ -389,7 +389,7 @@ def test_beliefunit_get_from_json_LoadsTaskFromJSON():
     #         # if plan.task is False:
     #         #     print(f"task is false {plan.plan_label}")
     #         # for reason in plan.reasonunits.values():
-    #         #     assert reason._status in (True, False)
+    #         #     assert reason.status in (True, False)
     # assert task_true_count > 0
 
     # WHEN
@@ -439,16 +439,16 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     print(f"\n{factheir_gregziet=}")
 
     # for reasonheir in agenda_plan._reasonheirs.values():
-    #     print(f"{reasonheir.reason_context=} {reasonheir._status=} {reasonheir.chore=}")
+    #     print(f"{reasonheir.reason_context=} {reasonheir.status=} {reasonheir.chore=}")
     reasonheir_gregziet = evening_plan._reasonheirs.get(gregziet_rope)
-    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet._status}, chore={reasonheir_gregziet.chore}"
+    reasonheir_str = f"\nreasonheir_gregziet= '{reasonheir_gregziet.reason_context}', status={reasonheir_gregziet.status}, chore={reasonheir_gregziet.chore}"
     print(reasonheir_str)
 
     caseunit = reasonheir_gregziet.cases.get(gregziet_rope)
     print(f"----\n {caseunit=}")
     print(f" {caseunit._get_chore_status(factheir=factheir_gregziet)=}")
-    print(f" {caseunit._status=} , {caseunit._is_range()=} caseunit fails")
-    print(f" {caseunit._status=} , {caseunit._is_segregate()=} caseunit passes")
+    print(f" {caseunit.status=} , {caseunit._is_range()=} caseunit fails")
+    print(f" {caseunit.status=} , {caseunit._is_segregate()=} caseunit passes")
     # segr_obj = casestatusfinder_shop(
     #     reason_lower=caseunit.reason_lower,
     #     reason_upper=caseunit.reason_upper,

@@ -25,7 +25,6 @@ from src.a03_group_logic.test._util.a03_str import (
     voice_debt_points_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
-    _status_str,
     belief_name_str,
     chore_str,
     fact_context_str,
@@ -40,6 +39,7 @@ from src.a04_reason_logic.test._util.a04_str import (
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
+    status_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
     _all_voice_cred_str,
@@ -286,12 +286,12 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     expected_blrawar_jmetrics_keys = {"fund_give", "fund_take"}
     assert expected_blrawar_jmetrics_keys == blrawar_jmetrics_keys
     expected_blrreas_jmetrics_keys = {
-        "_status",
+        "status",
         "chore",
         "_reason_active_heir",
     }
     assert expected_blrreas_jmetrics_keys == blrreas_jmetrics_keys
-    expected_blrprem_jmetrics_keys = {"_status", "chore"}
+    expected_blrprem_jmetrics_keys = {"status", "chore"}
     assert expected_blrprem_jmetrics_keys == blrprem_jmetrics_keys
     expected_blrlabo_jmetrics_keys = {"_belief_name_is_labor"}
     assert expected_blrlabo_jmetrics_keys == blrlabo_jmetrics_keys
@@ -645,8 +645,8 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrprem, jk, reason_state_str()) == "TEXT"
     assert g_class_type(cfig, blrprem, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrprem, jk, plan_rope_str()) == "TEXT"
-    assert g_class_type(cfig, blrprem, jm, _status_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jm, _status_str()) == "INTEGER"
+    assert g_class_type(cfig, blrprem, jm, status_str()) == "int"
+    assert g_sqlitetype(cfig, blrprem, jm, status_str()) == "INTEGER"
     assert g_class_type(cfig, blrprem, jm, chore_str()) == "int"
     assert g_sqlitetype(cfig, blrprem, jm, chore_str()) == "INTEGER"
     assert g_class_type(cfig, blrprem, jv, reason_divisor_str()) == "int"
@@ -661,8 +661,8 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jk, plan_rope_str()) == "TEXT"
     assert g_class_type(cfig, blrreas, jm, "_reason_active_heir") == "int"
     assert g_sqlitetype(cfig, blrreas, jm, "_reason_active_heir") == "INTEGER"
-    assert g_class_type(cfig, blrreas, jm, _status_str()) == "int"
-    assert g_sqlitetype(cfig, blrreas, jm, _status_str()) == "INTEGER"
+    assert g_class_type(cfig, blrreas, jm, status_str()) == "int"
+    assert g_sqlitetype(cfig, blrreas, jm, status_str()) == "INTEGER"
     assert g_class_type(cfig, blrreas, jm, chore_str()) == "int"
     assert g_sqlitetype(cfig, blrreas, jm, chore_str()) == "INTEGER"
     assert g_class_type(cfig, blrreas, jv, reason_active_requisite_str()) == "bool"
@@ -860,7 +860,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(fact_state_str()) == RopeTerm_str()
     assert belief_calc_args_type_dict.get(healer_name_str()) == NameTerm_str()
     assert belief_calc_args_type_dict.get(reason_state_str()) == RopeTerm_str()
-    assert belief_calc_args_type_dict.get("_status") == "int"
+    assert belief_calc_args_type_dict.get("status") == "int"
     assert belief_calc_args_type_dict.get("chore") == "int"
     assert belief_calc_args_type_dict.get(reason_divisor_str()) == "int"
     assert belief_calc_args_type_dict.get(reason_upper_str()) == "float"

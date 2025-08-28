@@ -874,7 +874,7 @@ class PlanUnit:
 
     def _are_all_reasonheir_active_true(self) -> bool:
         x_reasonheirs = self._reasonheirs.values()
-        return all(x_reasonheir._status != False for x_reasonheir in x_reasonheirs)
+        return all(x_reasonheir.status != False for x_reasonheir in x_reasonheirs)
 
     def clear_reasonheirs_status(self):
         for reason in self._reasonheirs.values():

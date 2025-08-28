@@ -291,13 +291,13 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     x_reason_context = 4
     x_reason_active_requisite = 5
     x_chore = 6
-    x__status = 7
+    x_status = 7
     x__reason_active_heir = 8
     x_reasonheir = reasonheir_shop(reason_context=x_reason_context)
     x_reasonheir.reason_context = x_reason_context
     x_reasonheir.reason_active_requisite = x_reason_active_requisite
     x_reasonheir.chore = x_chore
-    x_reasonheir._status = x__status
+    x_reasonheir.status = x_status
     x_reasonheir._reason_active_heir = x__reason_active_heir
 
     with sqlite3_connect(":memory:") as conn:
@@ -322,7 +322,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
             str(x_reason_context),
             x_reason_active_requisite,
             x_chore,
-            x__status,
+            x_status,
             x__reason_active_heir,
         )
         expected_data = [expected_row1]
@@ -353,14 +353,14 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     x_reason_lower = 7.0
     x_reason_divisor = 8
     x_chore = 9
-    x__status = 10
+    x_status = 10
     x_caseunit = caseunit_shop(reason_state=x_reason_state)
     x_caseunit.reason_state = x_reason_state
     x_caseunit.reason_upper = x_reason_upper
     x_caseunit.reason_lower = x_reason_lower
     x_caseunit.reason_divisor = x_reason_divisor
     x_caseunit.chore = x_chore
-    x_caseunit._status = x__status
+    x_caseunit.status = x_status
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
@@ -389,7 +389,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
             x_reason_lower,
             x_reason_divisor,
             x_chore,
-            x__status,
+            x_status,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

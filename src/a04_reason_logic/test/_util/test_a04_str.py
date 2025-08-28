@@ -1,5 +1,4 @@
 from src.a04_reason_logic.test._util.a04_str import (
-    _status_str,
     active_str,
     cases_str,
     chore_str,
@@ -16,13 +15,14 @@ from src.a04_reason_logic.test._util.a04_str import (
     reason_state_str,
     reason_upper_str,
     reasonunits_str,
+    status_str,
 )
 
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert active_str() == "active"
-    assert _status_str() == "_status"
+    assert status_str() == "status"
     assert chore_str() == "chore"
     assert cases_str() == "cases"
     assert moment_label_str() == "moment_label"

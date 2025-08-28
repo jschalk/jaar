@@ -28,7 +28,6 @@ from src.a03_group_logic.test._util.a03_str import (
     voice_name_str,
 )
 from src.a04_reason_logic.test._util.a04_str import (
-    _status_str,
     active_str,
     chore_str,
     fact_context_str,
@@ -43,6 +42,7 @@ from src.a04_reason_logic.test._util.a04_str import (
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
+    status_str,
 )
 from src.a05_plan_logic.test._util.a05_str import (
     addin_str,

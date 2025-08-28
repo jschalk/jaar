@@ -45,13 +45,13 @@ def test_BeliefUnit_reasonheirs_AreInherited_v1():
     assert casa_plan.get_reasonheir(wk_rope).get_case(tue_rope)
     case_tue = casa_plan.get_reasonheir(wk_rope).get_case(tue_rope)
     tue_case = caseunit_shop(reason_state=tue_rope)
-    tue_case._status = False
+    tue_case.status = False
     tue_case.chore = False
     cases = {tue_case.reason_state: tue_case}
     built_wk_reasonheir = reasonheir_shop(
         reason_context=wk_rope,
         cases=cases,
-        _status=False,
+        status=False,
         _reason_active_heir=True,
     )
     tue_chore = built_wk_reasonheir.cases.get(case_tue.reason_state).chore
@@ -74,7 +74,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     wed_rope = a4_belief.make_rope(wk_rope, wed_str)
 
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case._status = False
+    wed_case.status = False
     wed_case.chore = False
 
     cases_x = {wed_case.reason_state: wed_case}
@@ -82,7 +82,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
     casa_wk_built_reasonheir = reasonheir_shop(
         reason_context=wk_rope,
         cases=cases_x,
-        _status=False,
+        status=False,
         _reason_active_heir=True,
     )
     a4_belief.edit_plan_attr(casa_rope, reason=casa_wk_build_reasonunit)
@@ -113,7 +113,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
         rla_wk_reasonheir.reason_active_requisite
         == casa_wk_built_reasonheir.reason_active_requisite
     )
-    assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
+    assert rla_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert rla_wk_reasonheir.chore == casa_wk_built_reasonheir.chore
     assert rla_wk_reasonheir._reason_active_heir
     assert rla_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
@@ -126,7 +126,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromRoot():
         cost_wk_reasonheir.reason_active_requisite
         == casa_wk_built_reasonheir.reason_active_requisite
     )
-    assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
+    assert cost_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert cost_wk_reasonheir.chore == casa_wk_built_reasonheir.chore
     assert cost_wk_reasonheir._reason_active_heir
     assert cost_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
@@ -144,14 +144,14 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
     wed_rope = a4_belief.make_rope(wk_rope, wed_str)
 
     wed_case = caseunit_shop(reason_state=wed_rope)
-    wed_case._status = False
+    wed_case.status = False
     wed_case.chore = False
     cases = {wed_case.reason_state: wed_case}
     casa_wk_build_reasonunit = reasonunit_shop(wk_rope, cases=cases)
     casa_wk_built_reasonheir = reasonheir_shop(
         reason_context=wk_rope,
         cases=cases,
-        _status=False,
+        status=False,
         _reason_active_heir=True,
     )
     a4_belief.edit_plan_attr(casa_rope, reason=casa_wk_build_reasonunit)
@@ -188,7 +188,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
         rla_wk_reasonheir.reason_active_requisite
         == casa_wk_built_reasonheir.reason_active_requisite
     )
-    assert rla_wk_reasonheir._status == casa_wk_built_reasonheir._status
+    assert rla_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert rla_wk_reasonheir.chore == casa_wk_built_reasonheir.chore
     assert rla_wk_reasonheir._reason_active_heir
     assert rla_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
@@ -201,7 +201,7 @@ def test_BeliefUnit_reasonheirs_AreInheritedTo4LevelsFromLevel2():
         cost_wk_reasonheir.reason_active_requisite
         == casa_wk_built_reasonheir.reason_active_requisite
     )
-    assert cost_wk_reasonheir._status == casa_wk_built_reasonheir._status
+    assert cost_wk_reasonheir.status == casa_wk_built_reasonheir.status
     assert cost_wk_reasonheir.chore == casa_wk_built_reasonheir.chore
     assert cost_wk_reasonheir._reason_active_heir
     assert cost_wk_reasonheir._reason_active_heir != casa_wk_built_reasonheir
