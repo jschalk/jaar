@@ -142,7 +142,7 @@ class BeliefUnit:
     _keeps_justified: bool = None
     _keeps_buildable: bool = None
     _sum_healerunit_share: float = None
-    _groupunits: dict[GroupTitle, GroupUnit] = None
+    groupunits: dict[GroupTitle, GroupUnit] = None
     _offtrack_kids_star_set: set[RopeTerm] = None
     _offtrack_fund: float = None
     _reason_contexts: set[RopeTerm] = None
@@ -395,13 +395,13 @@ class BeliefUnit:
 
     def set_groupunit(self, x_groupunit: GroupUnit):
         x_groupunit.fund_iota = self.fund_iota
-        self._groupunits[x_groupunit.group_title] = x_groupunit
+        self.groupunits[x_groupunit.group_title] = x_groupunit
 
     def groupunit_exists(self, group_title: GroupTitle) -> bool:
-        return self._groupunits.get(group_title) is not None
+        return self.groupunits.get(group_title) is not None
 
     def get_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
-        return self._groupunits.get(x_group_title)
+        return self.groupunits.get(x_group_title)
 
     def create_symmetry_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
         x_groupunit = groupunit_shop(x_group_title)
@@ -417,7 +417,7 @@ class BeliefUnit:
 
     def get_tree_traverse_generated_groupunits(self) -> set[GroupTitle]:
         x_voiceunit_group_titles = set(self.get_voiceunit_group_titles_dict().keys())
-        all_group_titles = set(self._groupunits.keys())
+        all_group_titles = set(self.groupunits.keys())
         return all_group_titles.difference(x_voiceunit_group_titles)
 
     def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
@@ -949,7 +949,7 @@ reason_case:    {reason_case}"""
             self.get_voice(x_voice_name).add_fund_agenda_take(voice_fund_take)
 
     def _reset_groupunits_fund_give_take(self):
-        for groupunit_obj in self._groupunits.values():
+        for groupunit_obj in self.groupunits.values():
             groupunit_obj.clear_fund_give_take()
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardUnit]):
@@ -981,7 +981,7 @@ reason_case:    {reason_case}"""
                     self._add_to_voiceunits_fund_agenda_give_take(plan.get_fund_share())
 
     def _allot_groupunits_fund(self):
-        for x_groupunit in self._groupunits.values():
+        for x_groupunit in self.groupunits.values():
             x_groupunit._set_membership_fund_give_fund_take()
             for x_membership in x_groupunit._memberships.values():
                 self.add_to_voiceunit_fund_give_take(
@@ -1187,7 +1187,7 @@ reason_case:    {reason_case}"""
         x_plan.set_reasonheirs(self._plan_dict, parent_plan._reasonheirs)
         x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
         tt_count = self._tree_traverse_count
-        x_plan.set_active_attrs(tt_count, self._groupunits, self.belief_name)
+        x_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
 
     def _allot_fund_share(self, plan: PlanUnit):
         if plan.awardheir_exists():
@@ -1196,7 +1196,7 @@ reason_case:    {reason_case}"""
             self._add_to_voiceunits_fund_give_take(plan.get_fund_share())
 
     def _create_groupunits_metrics(self):
-        self._groupunits = {}
+        self.groupunits = {}
         for (
             group_title,
             voice_name_set,
@@ -1238,12 +1238,12 @@ reason_case:    {reason_case}"""
             if x_plan.root:
                 x_plan.set_factheirs(x_plan.factunits)
                 x_plan.set_root_plan_reasonheirs()
-                x_plan.set_laborheir(None, self._groupunits)
+                x_plan.set_laborheir(None, self.groupunits)
                 x_plan.inherit_awardheirs()
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
                 x_plan.set_factheirs(parent_plan._factheirs)
-                x_plan.set_laborheir(parent_plan._laborheir, self._groupunits)
+                x_plan.set_laborheir(parent_plan._laborheir, self.groupunits)
                 x_plan.inherit_awardheirs(parent_plan._awardheirs)
             x_plan.set_awardheirs_fund_give_fund_take()
 
@@ -1272,7 +1272,7 @@ reason_case:    {reason_case}"""
             if x_plan.root:
                 tt_count = self._tree_traverse_count
                 root_plan = self.planroot
-                root_plan.set_active_attrs(tt_count, self._groupunits, self.belief_name)
+                root_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
                 self._set_kids_active_status_attrs(x_plan, parent_plan)
@@ -1459,7 +1459,7 @@ def beliefunit_shop(
         tally=get_1_if_None(tally),
         moment_label=moment_label,
         voices=get_empty_dict_if_None(),
-        _groupunits={},
+        groupunits={},
         knot=default_knot_if_None(knot),
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),

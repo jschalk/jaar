@@ -63,7 +63,7 @@ from src.a05_plan_logic.test._util.a05_str import (
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
-    _groupunits_str,
+    groupunits_str,
     parent_rope_str,
     planroot_str,
     voices_str,
@@ -105,7 +105,7 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
 
     # THEN
     assert set(sue_belief_view_dict.keys()) == {
-        # _groupunits_str,
+        # groupunits_str,
         voices_str(),
         planroot_str(),
     }

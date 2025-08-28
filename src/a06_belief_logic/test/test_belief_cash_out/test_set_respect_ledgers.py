@@ -5,14 +5,14 @@ def test_create_groupunits_metrics_SetsAttrScenario0():
     # ESTABLISH
     sue_str = "Sue"
     sue_beliefunit = beliefunit_shop(sue_str)
-    sue_beliefunit._groupunits = None
-    assert sue_beliefunit._groupunits is None
+    sue_beliefunit.groupunits = None
+    assert sue_beliefunit.groupunits is None
 
     # WHEN
     sue_beliefunit._create_groupunits_metrics()
 
     # THEN
-    assert sue_beliefunit._groupunits == {}
+    assert sue_beliefunit.groupunits == {}
 
 
 def test_create_groupunits_metrics_SetsAttrScenario1():
@@ -32,14 +32,14 @@ def test_create_groupunits_metrics_SetsAttrScenario1():
     yao_yao_membership.debtor_pool = 44
     yao_ohio_membership.credor_pool = 77
     yao_ohio_membership.debtor_pool = 88
-    # assert sue_beliefunit._groupunits == {}
+    # assert sue_beliefunit.groupunits == {}
 
     # WHEN
     sue_beliefunit._create_groupunits_metrics()
 
     # THEN
-    assert len(sue_beliefunit._groupunits) == 2
-    assert set(sue_beliefunit._groupunits.keys()) == {yao_str, ohio_str}
+    assert len(sue_beliefunit.groupunits) == 2
+    assert set(sue_beliefunit.groupunits.keys()) == {yao_str, ohio_str}
     ohio_groupunit = sue_beliefunit.get_groupunit(ohio_str)
     assert ohio_groupunit.credor_pool == 77
     assert ohio_groupunit.debtor_pool == 88
@@ -52,27 +52,27 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_SetsAttr_scenario0()
     # ESTABLISH
     sue_str = "Sue"
     sue_beliefunit = beliefunit_shop(sue_str)
-    assert sue_beliefunit._groupunits == {}
+    assert sue_beliefunit.groupunits == {}
 
     # WHEN
     sue_beliefunit._set_voiceunit_groupunit_respect_ledgers()
 
     # THEN
-    assert sue_beliefunit._groupunits == {}
+    assert sue_beliefunit.groupunits == {}
 
 
 def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_Clears_groupunits():
     # ESTABLISH
     sue_str = "Sue"
     sue_beliefunit = beliefunit_shop(sue_str)
-    sue_beliefunit._groupunits = "ohio"
-    assert sue_beliefunit._groupunits != {}
+    sue_beliefunit.groupunits = "ohio"
+    assert sue_beliefunit.groupunits != {}
 
     # WHEN
     sue_beliefunit._set_voiceunit_groupunit_respect_ledgers()
 
     # THEN
-    assert sue_beliefunit._groupunits == {}
+    assert sue_beliefunit.groupunits == {}
 
 
 def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_SetsAttr_scenario1():
@@ -88,7 +88,7 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_SetsAttr_scenario1()
     assert yao_voiceunit.debtor_pool == 0
     assert yao_voiceunit.get_membership(yao_str).credor_pool == 0
     assert yao_voiceunit.get_membership(yao_str).debtor_pool == 0
-    # assert sue_beliefunit._groupunits == {}
+    # assert sue_beliefunit.groupunits == {}
 
     # WHEN
     sue_beliefunit._set_voiceunit_groupunit_respect_ledgers()
@@ -147,7 +147,7 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_SetsAttr_scenario2()
     assert yao_ohio_membership.debtor_pool == sue_beliefunit.debtor_respect * 0.2
     assert yao_ohio_membership.credor_pool == 750000000
     assert yao_ohio_membership.debtor_pool == 200000000
-    assert len(sue_beliefunit._groupunits) == 2
+    assert len(sue_beliefunit.groupunits) == 2
     ohio_groupunit = sue_beliefunit.get_groupunit(ohio_str)
     assert len(ohio_groupunit._memberships) == 1
 

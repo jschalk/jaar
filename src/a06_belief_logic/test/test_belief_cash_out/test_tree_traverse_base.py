@@ -546,9 +546,9 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert yao_belief.groupunit_exists(xio_str)
     assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
     assert len(yao_belief.get_voiceunit_group_titles_dict()) != len(
-        yao_belief._groupunits
+        yao_belief.groupunits
     )
-    assert len(yao_belief._groupunits) == 3
+    assert len(yao_belief.groupunits) == 3
     xio_groupunit = yao_belief.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_belief.create_symmetry_groupunit(xio_str)
     assert (
@@ -594,9 +594,9 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     assert yao_belief.groupunit_exists(xio_str)
     assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
     assert len(yao_belief.get_voiceunit_group_titles_dict()) != len(
-        yao_belief._groupunits
+        yao_belief.groupunits
     )
-    assert len(yao_belief._groupunits) == 3
+    assert len(yao_belief.groupunits) == 3
     xio_groupunit = yao_belief.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_belief.create_symmetry_groupunit(xio_str)
     assert (
@@ -628,7 +628,7 @@ def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():
     assert yao_belief.groupunit_exists(xio_str)
     assert len(yao_belief.get_voiceunit_group_titles_dict()) == 2
     assert len(yao_belief.get_voiceunit_group_titles_dict()) != len(
-        yao_belief._groupunits
+        yao_belief.groupunits
     )
 
     # WHEN

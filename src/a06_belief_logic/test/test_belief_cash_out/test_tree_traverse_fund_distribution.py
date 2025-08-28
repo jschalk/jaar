@@ -591,7 +591,7 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitAndSetsGroup_fund_give_fund_take
     yao_groupunit = x_belief.get_groupunit(yao_str)
     zia_groupunit = x_belief.get_groupunit(zia_str)
     xio_groupunit = x_belief.get_groupunit(xio_str)
-    assert len(x_belief.get_voiceunit_group_titles_dict()) != len(x_belief._groupunits)
+    assert len(x_belief.get_voiceunit_group_titles_dict()) != len(x_belief.groupunits)
     assert yao_groupunit.fund_give == 0.5 * default_fund_pool()
     assert yao_groupunit.fund_take == 0.75 * default_fund_pool()
     assert zia_groupunit.fund_give == 0.25 * default_fund_pool()
@@ -1020,7 +1020,7 @@ def test_BeliefUnit_cash_out_CreatesNewGroupUnitAndSetsVoice_fund_give_fund_take
 
     # THEN
     assert len(bob_belief.get_voiceunit_group_titles_dict()) != len(
-        bob_belief._groupunits
+        bob_belief.groupunits
     )
     assert not bob_belief.voice_exists(xio_str)
     yao_voiceunit = bob_belief.get_voice(yao_str)
@@ -1067,7 +1067,7 @@ def test_BeliefUnit_cash_out_SetsVoiceUnit_fund_give_fund_take():
 
 def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
     # delete belief_agenda_debt and belief_agenda_cred
-    for groupunit_x in x_belief._groupunits.values():
+    for groupunit_x in x_belief.groupunits.values():
         groupunit_x.clear_fund_give_take()
         # for membership_x in groupunit_x._voices.values():
         #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_points=} {membership_fund_take:t:.6f} {membership_x.} ")
@@ -1086,7 +1086,7 @@ class GroupAgendaMetrics:
     membership_count: int = 0
 
     def set_sums(self, x_belief: BeliefUnit):
-        for x_groupunit in x_belief._groupunits.values():
+        for x_groupunit in x_belief.groupunits.values():
             self.sum_groupunit_give += x_groupunit.fund_agenda_give
             self.sum_groupunit_take += x_groupunit.fund_agenda_take
             for membership_x in x_groupunit._memberships.values():
@@ -1312,8 +1312,8 @@ def test_BeliefUnit_cash_out_CreatesGroupUnitWith_beliefunit_v001():
     yao_belief.cash_out()
 
     # THEN
-    assert yao_belief._groupunits is not None
-    assert len(yao_belief._groupunits) == 34
+    assert yao_belief.groupunits is not None
+    assert len(yao_belief.groupunits) == 34
     everyone_voices_len = None
     everyone_group = yao_belief.get_groupunit(";Everyone")
     everyone_voices_len = len(everyone_group._memberships)

@@ -539,7 +539,7 @@ def insert_job_obj(cursor: sqlite3_Cursor, job_belief: BeliefUnit):
         for x_membership in x_voice._memberships.values():
             insert_job_blrmemb(cursor, x_objkeysholder, x_membership)
 
-    for x_groupunit in job_belief._groupunits.values():
+    for x_groupunit in job_belief.groupunits.values():
         insert_job_blrgrou(cursor, x_objkeysholder, x_groupunit)
 
     for x_factheir in job_belief.planroot._factheirs.values():

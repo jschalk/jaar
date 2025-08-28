@@ -18,7 +18,7 @@ from src.a03_group_logic.test._util.a03_str import (
     voice_name_str,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import _groupunits_str
+from src.a06_belief_logic.test._util.a06_str import groupunits_str
 from src.a07_timeline_logic.test._util.a07_str import readable_str
 from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_groups_view_dict
 from src.a22_belief_viewer.example22_beliefs import (

@@ -38,13 +38,13 @@ def test_BeliefUnit_set_groupunit_SetsAttr_Scenario0():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob")
     run_str = ";Run"
-    assert not bob_belief._groupunits.get(run_str)
+    assert not bob_belief.groupunits.get(run_str)
 
     # WHEN
     bob_belief.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_belief._groupunits.get(run_str)
+    assert bob_belief.groupunits.get(run_str)
 
 
 def test_BeliefUnit_set_groupunit_Sets_rope_fund_iota():
@@ -52,13 +52,13 @@ def test_BeliefUnit_set_groupunit_Sets_rope_fund_iota():
     x_fund_iota = 5
     bob_belief = beliefunit_shop("Bob", fund_iota=x_fund_iota)
     run_str = ";Run"
-    assert not bob_belief._groupunits.get(run_str)
+    assert not bob_belief.groupunits.get(run_str)
 
     # WHEN
     bob_belief.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_belief._groupunits.get(run_str).fund_iota == x_fund_iota
+    assert bob_belief.groupunits.get(run_str).fund_iota == x_fund_iota
 
 
 def test_BeliefUnit_groupunit_exists_ReturnsObj():
@@ -80,7 +80,7 @@ def test_BeliefUnit_get_groupunit_ReturnsObj():
     run_str = ";Run"
     x_run_groupunit = groupunit_shop(run_str)
     bob_belief.set_groupunit(x_run_groupunit)
-    assert bob_belief._groupunits.get(run_str)
+    assert bob_belief.groupunits.get(run_str)
 
     # WHEN / THEN
     assert bob_belief.get_groupunit(run_str) == groupunit_shop(run_str)

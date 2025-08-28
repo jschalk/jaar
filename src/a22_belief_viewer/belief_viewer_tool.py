@@ -260,7 +260,7 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
 
 def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     groups_dict = {}
-    # for group in belief._groupunits.values():
+    # for group in belief.groupunits.values():
 
     #     group_title_readable_key = f"group_title_readable"
     #     group_cred_points_readable_key = f"group_cred_points_readable"

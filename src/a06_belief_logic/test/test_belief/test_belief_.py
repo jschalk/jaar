@@ -11,7 +11,6 @@ from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
-    _groupunits_str,
     _keeps_buildable_str,
     _keeps_justified_str,
     _offtrack_fund_str,
@@ -24,6 +23,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     credor_respect_str,
     debtor_respect_str,
     fund_iota_str,
+    groupunits_str,
     last_pack_id_str,
     max_tree_traverse_str,
     moment_label_str,
@@ -89,7 +89,7 @@ def test_BeliefUnit_Exists():
         planroot_str(),
         credor_respect_str(),
         debtor_respect_str(),
-        _groupunits_str(),
+        groupunits_str(),
         moment_label_str(),
         fund_iota_str(),
         fund_pool_str(),

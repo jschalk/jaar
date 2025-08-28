@@ -1,5 +1,4 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _groupunits_str,
     _inallocable_voice_debt_points_str,
     _irrational_voice_debt_points_str,
     _laborheir_str,
@@ -20,6 +19,7 @@ from src.a03_group_logic.test._util.a03_str import (
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
+    groupunits_str,
     laborunit_str,
     party_title_str,
     respect_bit_str,
@@ -41,7 +41,7 @@ def test_str_functions_ReturnsObj():
     assert fund_agenda_take_str() == "fund_agenda_take"
     assert fund_give_str() == "fund_give"
     assert fund_take_str() == "fund_take"
-    assert _groupunits_str() == "_groupunits"
+    assert groupunits_str() == "groupunits"
     assert _inallocable_voice_debt_points_str() == "_inallocable_voice_debt_points"
     assert _irrational_voice_debt_points_str() == "_irrational_voice_debt_points"
     assert _laborheir_str() == "_laborheir"

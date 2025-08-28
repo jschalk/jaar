@@ -52,9 +52,9 @@ def test_BeliefUnit_cash_out_Set_child_plan_laborheir_FromParent_laborunit():
     x_laborheir.set_partys(
         parent_laborheir=None,
         laborunit=x_laborunit,
-        groupunits=bob_belief._groupunits,
+        groupunits=bob_belief.groupunits,
     )
-    x_laborheir.set_belief_name_is_labor(bob_belief._groupunits, bob_belief.belief_name)
+    x_laborheir.set_belief_name_is_labor(bob_belief.groupunits, bob_belief.belief_name)
     print(f"{x_laborheir._belief_name_is_labor=}")
     assert (
         run_plan._laborheir._belief_name_is_labor == x_laborheir._belief_name_is_labor
@@ -97,7 +97,7 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
     x_laborheir.set_partys(
         parent_laborheir=None,
         laborunit=x_laborunit,
-        groupunits=sue_belief._groupunits,
+        groupunits=sue_belief.groupunits,
     )
     assert four_plan._laborheir is not None
     assert four_plan._laborheir == x_laborheir
@@ -139,7 +139,7 @@ def test_BeliefUnit_cash_out_Set_grandchild_plan_laborheir_From_plankid_laboruni
     expected_laborheir.set_partys(
         parent_laborheir=None,
         laborunit=swimmers_laborunit,
-        groupunits=sue_belief._groupunits,
+        groupunits=sue_belief.groupunits,
     )
     assert four_plan._laborheir
     assert four_plan._laborheir == expected_laborheir

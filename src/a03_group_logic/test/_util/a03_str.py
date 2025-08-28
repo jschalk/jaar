@@ -2,10 +2,6 @@ from src.a01_term_logic.test._util.a01_str import knot_str
 from src.a02_finance_logic.test._util.a02_str import fund_iota_str
 
 
-def _groupunits_str() -> str:
-    return "_groupunits"
-
-
 def _inallocable_voice_debt_points_str() -> str:
     return "_inallocable_voice_debt_points"
 
@@ -84,6 +80,10 @@ def group_debt_points_str() -> str:
 
 def group_title_str() -> str:
     return "group_title"
+
+
+def groupunits_str() -> str:
+    return "groupunits"
 
 
 def laborunit_str() -> str:
