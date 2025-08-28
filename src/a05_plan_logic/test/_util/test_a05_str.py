@@ -9,7 +9,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     close_str,
     denom_str,
     descendant_task_count_str,
-    factheirs_str,
     fund_cease_str,
     fund_onset_str,
     fund_ratio_str,
@@ -45,7 +44,6 @@ def test_str_functions_ReturnsObj():
     assert awardheirs_str() == "awardheirs"
     assert awardlines_str() == "awardlines"
     assert descendant_task_count_str() == "descendant_task_count"
-    assert factheirs_str() == "factheirs"
     assert fund_cease_str() == "fund_cease"
     assert fund_onset_str() == "fund_onset"
     assert fund_ratio_str() == "fund_ratio"

@@ -6,6 +6,7 @@ from src.a04_reason_logic.test._util.a04_str import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
+    factheirs_str,
     factunits_str,
     moment_label_str,
     reason_active_requisite_str,
@@ -30,6 +31,7 @@ def test_str_functions_ReturnsObj():
     assert fact_upper_str() == "fact_upper"
     assert fact_lower_str() == "fact_lower"
     assert fact_state_str() == "fact_state"
+    assert factheirs_str() == "factheirs"
     assert factunits_str() == "factunits"
     assert reason_divisor_str() == "reason_divisor"
     assert reason_upper_str() == "reason_upper"

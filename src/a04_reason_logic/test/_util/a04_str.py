@@ -30,6 +30,10 @@ def fact_upper_str() -> str:
     return "fact_upper"
 
 
+def factheirs_str() -> str:
+    return "factheirs"
+
+
 def factunits_str() -> str:
     return "factunits"
 
