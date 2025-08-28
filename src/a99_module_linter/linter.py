@@ -8,10 +8,10 @@ from ast import (
 )
 from os import walk as os_walk
 from os.path import join as os_path_join
-from src.a00_data_toolbox.file_toolbox import (
-    create_path,
-    get_dir_filenames,
-    get_level1_dirs,
+from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
+from src.a98_docs_builder.module_eval import (
+    get_function_names_from_file,
+    get_module_descs,
 )
 from textwrap import dedent as textwrap_dedent
 
@@ -75,19 +75,6 @@ def get_json_files(directory) -> set[str]:
     return json_files
 
 
-def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
-    """
-    Parses a Python file and returns a list of all top-level function names.
-
-    :param file_path: Path to the .py file
-    :return: List of function names
-    """
-
-    with open(file_path, "r", encoding="utf-8") as file:
-        node = ast_parse(file.read(), filename=file_path)
-    return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
-
-
 def get_top_level_functions(file_path) -> dict[str, str]:
     with open(file_path, "r", encoding="utf-8") as f:
         source_code = f.read()
@@ -122,15 +109,6 @@ def get_top_level_functions(file_path) -> dict[str, str]:
     # return functions
 
 
-def get_module_descs() -> dict[str, str]:
-    src_dir = "src"
-    module_descs = get_level1_dirs(src_dir)
-    module_descs.remove("a99_module_linter")
-    return {
-        module_desc: create_path(src_dir, module_desc) for module_desc in module_descs
-    }
-
-
 def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_number):
     previous_module_number = -1
     previous_module_str = "a"
@@ -161,13 +139,6 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
             if desc_number != env_number:
                 print(f"{desc_number} {file_path} {env_number=} {module_location=}")
             assert desc_number == env_number
-
-
-def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
-    test_dir = create_path(module_dir, "test")
-    util_dir = create_path(test_dir, "_util")
-    str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
-    return get_function_names_from_file(str_util_path)
 
 
 def get_all_str_functions() -> list:

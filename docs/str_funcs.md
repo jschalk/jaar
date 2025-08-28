@@ -24,3 +24,4 @@
 - a20_world_logic: 
 - a21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys
 - a22_belief_viewer: 
+- a98_docs_builder: rationale

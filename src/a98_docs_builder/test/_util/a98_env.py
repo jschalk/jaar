@@ -4,16 +4,16 @@ from typing import Any, Generator, Literal
 
 
 def get_module_temp_dir() -> str:
-    return "src/a22_belief_viewer"
+    return "src/a98_docs_builder"
 
 
-def get_module_temp_dir() -> Literal["src\\a22_belief_viewer\\test\\_util\\temp"]:
-    return "src\\a22_belief_viewer\\test\\_util\\temp"
+def get_module_temp_dir() -> Literal["src\\a98_docs_builder\\test\\_util\\temp"]:
+    return "src\\a98_docs_builder\\test\\_util\\temp"
 
 
 @pytest_fixture()
 def env_dir_setup_cleanup() -> (
-    Generator[Literal["src\\a22_belief_viewer\\test\\_util"], Any, None]
+    Generator[Literal["src\\a98_docs_builder\\test\\_util"], Any, None]
 ):
     env_dir = get_module_temp_dir()
     delete_dir(dir=env_dir)
