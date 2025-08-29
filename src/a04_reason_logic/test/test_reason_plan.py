@@ -87,15 +87,15 @@ def test_ReasonHeir_clear_SetsAttrs():
     # WHEN
     casa_reason = reasonheir_shop(reason_context=casa_rope, cases=email_cases)
     # THEN
-    assert casa_reason._status is None
+    assert casa_reason.status is None
 
     # ESTABLISH
-    casa_reason._status = True
-    assert casa_reason._status
+    casa_reason.status = True
+    assert casa_reason.status
     # WHEN
     casa_reason.clear_status()
     # THEN
-    assert casa_reason._status is None
+    assert casa_reason.status is None
     assert casa_reason._reason_active_heir is None
 
 
@@ -115,35 +115,35 @@ def test_ReasonHeir_set_status_SetsStatus():
     wed_case = caseunit_shop(reason_state=wed_rope)
     wed_cases = {wed_case.reason_state: wed_case}
     wk_reason = reasonheir_shop(reason_context=wk_rope, cases=wed_cases)
-    assert wk_reason._status is None
+    assert wk_reason.status is None
     # WHEN
     wk_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_noon_rope)
     wk_facts = {wk_fact.fact_context: wk_fact}
     wk_reason.set_status(factheirs=wk_facts)
     # THEN
-    assert wk_reason._status is True
+    assert wk_reason.status is True
 
     # ESTABLISH
     thu_case = caseunit_shop(reason_state=thu_rope)
     two_cases = {wed_case.reason_state: wed_case, thu_case.reason_state: thu_case}
     two_reason = reasonheir_shop(reason_context=wk_rope, cases=two_cases)
-    assert two_reason._status is None
+    assert two_reason.status is None
     # WHEN
     noon_fact = factheir_shop(fact_context=wk_rope, fact_state=wed_noon_rope)
     noon_facts = {noon_fact.fact_context: noon_fact}
     two_reason.set_status(factheirs=noon_facts)
     # THEN
-    assert two_reason._status is True
+    assert two_reason.status is True
 
     # ESTABLISH
     two_reason.clear_status()
-    assert two_reason._status is None
+    assert two_reason.status is None
     # WHEN
     fri_fact = factheir_shop(fact_context=wk_rope, fact_state=fri_rope)
     fri_facts = {fri_fact.fact_context: fri_fact}
     two_reason.set_status(factheirs=fri_facts)
     # THEN
-    assert two_reason._status is False
+    assert two_reason.status is False
 
 
 def test_ReasonHeir_set_status_EmptyFactSetsStatus():
@@ -155,13 +155,13 @@ def test_ReasonHeir_set_status_EmptyFactSetsStatus():
     wed_case = caseunit_shop(reason_state=wed_rope)
     wed_cases = {wed_case.reason_state: wed_case}
     wk_reason = reasonheir_shop(reason_context=wk_rope, cases=wed_cases)
-    assert wk_reason._status is None
+    assert wk_reason.status is None
 
     # WHEN
     wk_reason.set_status(factheirs=None)
 
     # THEN
-    assert wk_reason._status is False
+    assert wk_reason.status is False
 
 
 def test_ReasonHeir_set_reason_active_heir_SetsAttr():
@@ -184,13 +184,13 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusTrue():
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(reason_context=wk_rope, reason_active_requisite=True)
     wk_reason.set_reason_active_heir(bool_x=True)
-    assert wk_reason._status is None
+    assert wk_reason.status is None
 
     # WHEN
     wk_reason.set_status(factheirs=None)
 
     # THEN
-    assert wk_reason._status is True
+    assert wk_reason.status is True
 
 
 def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
@@ -199,13 +199,13 @@ def test_ReasonHeir_set_status_BeliefFalseSetsStatusTrue():
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=False)
     wk_reason.set_reason_active_heir(bool_x=False)
-    assert wk_reason._status is None
+    assert wk_reason.status is None
 
     # WHEN
     wk_reason.set_status(factheirs=None)
 
     # THEN
-    assert wk_reason._status is True
+    assert wk_reason.status is True
 
 
 def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
@@ -214,13 +214,13 @@ def test_ReasonHeir_set_status_BeliefTrueSetsStatusFalse():
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
     wk_reason.set_reason_active_heir(bool_x=False)
-    assert wk_reason._status is None
+    assert wk_reason.status is None
 
     # WHEN
     wk_reason.set_status(factheirs=None)
 
     # THEN
-    assert wk_reason._status is False
+    assert wk_reason.status is False
 
 
 def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
@@ -229,13 +229,13 @@ def test_ReasonHeir_set_status_BeliefNoneSetsStatusFalse():
     wk_rope = create_rope(root_label(), wk_str)
     wk_reason = reasonheir_shop(wk_rope, reason_active_requisite=True)
     wk_reason.set_reason_active_heir(bool_x=None)
-    assert wk_reason._status is None
+    assert wk_reason.status is None
 
     # WHEN
     wk_reason.set_status(factheirs={})
 
     # THEN
-    assert wk_reason._status is False
+    assert wk_reason.status is False
 
 
 def test_reasonunit_shop_ReturnsObj():
@@ -362,31 +362,31 @@ def test_ReasonHeir_correctSetsTaskState():
     )
     range_3_to_6_cases = {range_3_to_6_case.reason_state: range_3_to_6_case}
     range_3_to_6_reason = reasonheir_shop(wk_rope, range_3_to_6_cases)
-    assert range_3_to_6_reason._status is None
+    assert range_3_to_6_reason.status is None
 
     # WHEN
     range_5_to_8_fact = factheir_shop(wk_rope, wk_rope, fact_lower=5, fact_upper=8)
     range_5_to_8_facts = {range_5_to_8_fact.fact_context: range_5_to_8_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
-    assert range_3_to_6_reason._status is True
-    assert range_3_to_6_reason._chore is True
+    assert range_3_to_6_reason.status is True
+    assert range_3_to_6_reason.chore is True
 
     # WHEN
     range_5_to_6_fact = factheir_shop(wk_rope, wk_rope, fact_lower=5, fact_upper=6)
     range_5_to_6_facts = {range_5_to_6_fact.fact_context: range_5_to_6_fact}
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
-    assert range_3_to_6_reason._status is True
-    assert range_3_to_6_reason._chore is False
+    assert range_3_to_6_reason.status is True
+    assert range_3_to_6_reason.chore is False
 
     # WHEN
     range_0_to_1_fact = factheir_shop(wk_rope, wk_rope, fact_lower=0, fact_upper=1)
     range_0_to_1_facts = {range_0_to_1_fact.fact_context: range_0_to_1_fact}
     range_3_to_6_reason.set_status(factheirs=range_0_to_1_facts)
     # THEN
-    assert range_3_to_6_reason._status is False
-    assert range_3_to_6_reason._chore is None
+    assert range_3_to_6_reason.status is False
+    assert range_3_to_6_reason.chore is None
 
 
 def test_ReasonCore_get_cases_count():

@@ -11,27 +11,27 @@ from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
-    _groupunits_str,
-    _keeps_buildable_str,
-    _keeps_justified_str,
-    _offtrack_fund_str,
-    _offtrack_kids_star_set_str,
-    _rational_str,
-    _reason_contexts_str,
-    _sum_healerunit_share_str,
-    _tree_traverse_count_str,
     belief_name_str,
     credor_respect_str,
     debtor_respect_str,
     fund_iota_str,
+    groupunits_str,
+    keeps_buildable_str,
+    keeps_justified_str,
     last_pack_id_str,
     max_tree_traverse_str,
     moment_label_str,
-    partners_str,
+    offtrack_fund_str,
+    offtrack_kids_star_set_str,
     penny_str,
     planroot_str,
+    rational_str,
+    reason_contexts_str,
     respect_bit_str,
+    sum_healerunit_share_str,
     tally_str,
+    tree_traverse_count_str,
+    voices_str,
 )
 
 
@@ -44,7 +44,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.moment_label is None
     assert x_belief.belief_name is None
     assert x_belief.tally is None
-    assert x_belief.partners is None
+    assert x_belief.voices is None
     assert x_belief.planroot is None
     assert x_belief.credor_respect is None
     assert x_belief.debtor_respect is None
@@ -59,14 +59,14 @@ def test_BeliefUnit_Exists():
     assert x_belief._plan_dict is None
     assert x_belief._keep_dict is None
     assert x_belief._healers_dict is None
-    assert x_belief._tree_traverse_count is None
-    assert x_belief._rational is None
-    assert x_belief._keeps_justified is None
-    assert x_belief._keeps_buildable is None
-    assert x_belief._sum_healerunit_share is None
-    assert x_belief._offtrack_kids_star_set is None
-    assert x_belief._offtrack_fund is None
-    assert x_belief._reason_contexts is None
+    assert x_belief.tree_traverse_count is None
+    assert x_belief.rational is None
+    assert x_belief.keeps_justified is None
+    assert x_belief.keeps_buildable is None
+    assert x_belief.sum_healerunit_share is None
+    assert x_belief.offtrack_kids_star_set is None
+    assert x_belief.offtrack_fund is None
+    assert x_belief.reason_contexts is None
     assert x_belief._range_inheritors is None
     assert str(type(x_belief.planroot)).find("None") == 8
     obj_attrs = set(x_belief.__dict__.keys())
@@ -75,21 +75,21 @@ def test_BeliefUnit_Exists():
         "_plan_dict",
         "_healers_dict",
         "_keep_dict",
-        _keeps_buildable_str(),
-        _keeps_justified_str(),
-        _offtrack_fund_str(),
-        _offtrack_kids_star_set_str(),
+        keeps_buildable_str(),
+        keeps_justified_str(),
+        offtrack_fund_str(),
+        offtrack_kids_star_set_str(),
         "_range_inheritors",
-        _rational_str(),
-        _reason_contexts_str(),
-        _sum_healerunit_share_str(),
-        _tree_traverse_count_str(),
-        partners_str(),
+        rational_str(),
+        reason_contexts_str(),
+        sum_healerunit_share_str(),
+        tree_traverse_count_str(),
+        voices_str(),
         knot_str(),
         planroot_str(),
         credor_respect_str(),
         debtor_respect_str(),
-        _groupunits_str(),
+        groupunits_str(),
         moment_label_str(),
         fund_iota_str(),
         fund_pool_str(),
@@ -128,7 +128,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.belief_name == sue_str
     assert x_belief.moment_label == iowa_moment_label
     assert x_belief.tally == 1
-    assert x_belief.partners == {}
+    assert x_belief.voices == {}
     assert x_belief.planroot is not None
     assert x_belief.max_tree_traverse == 3
     assert x_belief.knot == slash_knot
@@ -143,14 +143,14 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief._plan_dict == {}
     assert x_belief._keep_dict == {}
     assert x_belief._healers_dict == {}
-    assert not x_belief._tree_traverse_count
-    assert x_belief._rational is False
-    assert x_belief._keeps_justified is False
-    assert x_belief._keeps_buildable is False
-    assert x_belief._sum_healerunit_share == 0
-    assert x_belief._offtrack_kids_star_set == set()
-    assert not x_belief._offtrack_fund
-    assert x_belief._reason_contexts == set()
+    assert not x_belief.tree_traverse_count
+    assert x_belief.rational is False
+    assert x_belief.keeps_justified is False
+    assert x_belief.keeps_buildable is False
+    assert x_belief.sum_healerunit_share == 0
+    assert x_belief.offtrack_kids_star_set == set()
+    assert not x_belief.offtrack_fund
+    assert x_belief.reason_contexts == set()
     assert x_belief._range_inheritors == {}
     print(f"{type(x_belief.planroot)=}") == 0
     assert str(type(x_belief.planroot)).find(".plan.PlanUnit'>") > 0
@@ -171,8 +171,8 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.planroot.fund_iota == x_belief.fund_iota
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.root
-    assert x_belief.planroot._uid == 1
-    assert x_belief.planroot._level == 0
+    assert x_belief.planroot.uid == 1
+    assert x_belief.planroot.tree_level == 0
     assert x_belief.planroot.moment_label == x_belief.moment_label
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.parent_rope == ""

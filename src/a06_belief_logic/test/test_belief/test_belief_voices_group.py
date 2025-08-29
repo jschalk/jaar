@@ -2,25 +2,25 @@ from src.a03_group_logic.group import groupunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 
 
-def test_BeliefUnit_get_partnerunit_group_titles_dict_ReturnsObj():
+def test_BeliefUnit_get_voiceunit_group_titles_dict_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_str = "Sue"
     zia_str = "Zia"
     bob_belief = beliefunit_shop("Bob")
-    bob_belief.add_partnerunit(yao_str)
-    bob_belief.add_partnerunit(sue_str)
-    bob_belief.add_partnerunit(zia_str)
-    sue_partnerunit = bob_belief.get_partner(sue_str)
-    zia_partnerunit = bob_belief.get_partner(zia_str)
+    bob_belief.add_voiceunit(yao_str)
+    bob_belief.add_voiceunit(sue_str)
+    bob_belief.add_voiceunit(zia_str)
+    sue_voiceunit = bob_belief.get_voice(sue_str)
+    zia_voiceunit = bob_belief.get_voice(zia_str)
     run_str = ";Run"
     swim_str = ";Swim"
-    sue_partnerunit.add_membership(run_str)
-    zia_partnerunit.add_membership(run_str)
-    zia_partnerunit.add_membership(swim_str)
+    sue_voiceunit.add_membership(run_str)
+    zia_voiceunit.add_membership(run_str)
+    zia_voiceunit.add_membership(swim_str)
 
     # WHEN
-    group_titles_dict = bob_belief.get_partnerunit_group_titles_dict()
+    group_titles_dict = bob_belief.get_voiceunit_group_titles_dict()
 
     # THEN
     print(f"{group_titles_dict=}")
@@ -38,13 +38,13 @@ def test_BeliefUnit_set_groupunit_SetsAttr_Scenario0():
     # ESTABLISH
     bob_belief = beliefunit_shop("Bob")
     run_str = ";Run"
-    assert not bob_belief._groupunits.get(run_str)
+    assert not bob_belief.groupunits.get(run_str)
 
     # WHEN
     bob_belief.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_belief._groupunits.get(run_str)
+    assert bob_belief.groupunits.get(run_str)
 
 
 def test_BeliefUnit_set_groupunit_Sets_rope_fund_iota():
@@ -52,13 +52,13 @@ def test_BeliefUnit_set_groupunit_Sets_rope_fund_iota():
     x_fund_iota = 5
     bob_belief = beliefunit_shop("Bob", fund_iota=x_fund_iota)
     run_str = ";Run"
-    assert not bob_belief._groupunits.get(run_str)
+    assert not bob_belief.groupunits.get(run_str)
 
     # WHEN
     bob_belief.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_belief._groupunits.get(run_str).fund_iota == x_fund_iota
+    assert bob_belief.groupunits.get(run_str).fund_iota == x_fund_iota
 
 
 def test_BeliefUnit_groupunit_exists_ReturnsObj():
@@ -80,7 +80,7 @@ def test_BeliefUnit_get_groupunit_ReturnsObj():
     run_str = ";Run"
     x_run_groupunit = groupunit_shop(run_str)
     bob_belief.set_groupunit(x_run_groupunit)
-    assert bob_belief._groupunits.get(run_str)
+    assert bob_belief.groupunits.get(run_str)
 
     # WHEN / THEN
     assert bob_belief.get_groupunit(run_str) == groupunit_shop(run_str)
@@ -95,8 +95,8 @@ def test_BeliefUnit_create_symmetry_groupunit_ReturnsObj():
     yao_group_debt_points = 2
     zia_group_cred_points = 4
     zia_group_debt_points = 5
-    yao_belief.add_partnerunit(yao_str, yao_group_cred_points, yao_group_debt_points)
-    yao_belief.add_partnerunit(zia_str, zia_group_cred_points, zia_group_debt_points)
+    yao_belief.add_voiceunit(yao_str, yao_group_cred_points, yao_group_debt_points)
+    yao_belief.add_voiceunit(zia_str, zia_group_cred_points, zia_group_debt_points)
 
     # WHEN
     xio_str = "Xio"
@@ -106,7 +106,7 @@ def test_BeliefUnit_create_symmetry_groupunit_ReturnsObj():
     assert xio_groupunit.group_title == xio_str
     assert xio_groupunit.membership_exists(yao_str)
     assert xio_groupunit.membership_exists(zia_str)
-    assert len(xio_groupunit._memberships) == 2
+    assert len(xio_groupunit.memberships) == 2
     yao_groupunit = xio_groupunit.get_membership(yao_str)
     zia_groupunit = xio_groupunit.get_membership(zia_str)
     assert yao_groupunit.group_cred_points == yao_group_cred_points

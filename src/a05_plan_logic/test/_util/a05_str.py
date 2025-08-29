@@ -1,99 +1,28 @@
-from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a02_finance_logic.test._util.a02_str import fund_iota_str
-from src.a03_group_logic.test._util.a03_str import (
-    _laborheir_str,
-    awardunits_str,
-    laborunit_str,
-)
-from src.a04_reason_logic.test._util.a04_str import (
-    _active_str,
-    _chore_str,
-    cases_str,
-    factunits_str,
-    moment_label_str,
-    reason_state_str,
-    reasonunits_str,
-)
+from src.a04_reason_logic.test._util.a04_str import *
 
 
-def _active_hx_str() -> str:
-    return "_active_hx"
-
-
-def _all_partner_cred_str() -> str:
-    return "_all_partner_cred"
-
-
-def _all_partner_debt_str() -> str:
-    return "_all_partner_debt"
-
-
-def _awardheirs_str() -> str:
-    return "_awardheirs"
-
-
-def _awardlines_str() -> str:
-    return "_awardlines"
-
-
-def _descendant_task_count_str() -> str:
-    return "_descendant_task_count"
-
-
-def _factheirs_str() -> str:
-    return "_factheirs"
-
-
-def _fund_cease_str() -> str:
-    return "_fund_cease"
-
-
-def _fund_onset_str() -> str:
-    return "_fund_onset"
-
-
-def _fund_ratio_str() -> str:
-    return "_fund_ratio"
-
-
-def _gogo_calc_str() -> str:
-    return "_gogo_calc"
-
-
-def _healerunit_ratio_str() -> str:
-    return "_healerunit_ratio"
-
-
-def _is_expanded_str() -> str:
-    return "_is_expanded"
-
-
-def _kids_str() -> str:
-    return "_kids"
-
-
-def _level_str() -> str:
-    return "_level"
-
-
-def _range_evaluated_str() -> str:
-    return "_range_evaluated"
-
-
-def _reasonheirs_str() -> str:
-    return "_reasonheirs"
-
-
-def _stop_calc_str() -> str:
-    return "_stop_calc"
-
-
-def _uid_str() -> str:
-    return "_uid"
+def active_hx_str() -> str:
+    return "active_hx"
 
 
 def addin_str() -> str:
     return "addin"
+
+
+def all_voice_cred_str() -> str:
+    return "all_voice_cred"
+
+
+def all_voice_debt_str() -> str:
+    return "all_voice_debt"
+
+
+def awardheirs_str() -> str:
+    return "awardheirs"
+
+
+def awardlines_str() -> str:
+    return "awardlines"
 
 
 def begin_str() -> str:
@@ -108,8 +37,28 @@ def denom_str() -> str:
     return "denom"
 
 
+def descendant_task_count_str() -> str:
+    return "descendant_task_count"
+
+
+def fund_cease_str() -> str:
+    return "fund_cease"
+
+
+def fund_onset_str() -> str:
+    return "fund_onset"
+
+
+def fund_ratio_str() -> str:
+    return "fund_ratio"
+
+
 def fund_share_str() -> str:
     return "fund_share"
+
+
+def gogo_calc_str() -> str:
+    return "gogo_calc"
 
 
 def gogo_want_str() -> str:
@@ -120,8 +69,20 @@ def healer_name_str() -> str:
     return "healer_name"
 
 
+def healerunit_ratio_str() -> str:
+    return "healerunit_ratio"
+
+
 def healerunit_str() -> str:
     return "healerunit"
+
+
+def is_expanded_str() -> str:
+    return "is_expanded"
+
+
+def kids_str() -> str:
+    return "kids"
 
 
 def morph_str() -> str:
@@ -144,8 +105,20 @@ def problem_bool_str() -> str:
     return "problem_bool"
 
 
+def range_evaluated_str() -> str:
+    return "range_evaluated"
+
+
+def reasonheirs_str() -> str:
+    return "reasonheirs"
+
+
 def star_str() -> str:
     return "star"
+
+
+def stop_calc_str() -> str:
+    return "stop_calc"
 
 
 def stop_want_str() -> str:
@@ -154,3 +127,15 @@ def stop_want_str() -> str:
 
 def task_str() -> str:
     return "task"
+
+
+def tree_level_str() -> str:
+    return "tree_level"
+
+
+def tree_traverse_count_str() -> str:
+    return "tree_traverse_count"
+
+
+def uid_str() -> str:
+    return "uid"

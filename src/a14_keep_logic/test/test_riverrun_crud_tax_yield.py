@@ -6,7 +6,7 @@ from src.a14_keep_logic.test._util.a14_env import temp_moment_mstr_dir
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
 
-def test_RiverRun_set_partner_tax_yield_SetsAttr():
+def test_RiverRun_set_voice_tax_yield_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     x_moment_mstr_dir = temp_moment_mstr_dir()
@@ -17,7 +17,7 @@ def test_RiverRun_set_partner_tax_yield_SetsAttr():
 
     # WHEN
     yao_tax_yield = 7
-    bob_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
+    bob_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
 
     # THEN
     assert bob_riverrun._tax_yields.get(yao_str) == yao_tax_yield
@@ -32,7 +32,7 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     # WHEN
     yao_str = "Yao"
     yao_tax_yield = 500
-    x_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
+    x_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
     # THEN
     assert x_riverrun.tax_yields_is_empty() is False
 
@@ -44,8 +44,8 @@ def test_RiverRun_tax_yields_is_empty_ReturnsObj():
     # WHEN
     bob_str = "Yao"
     bob_tax_yield = 300
-    x_riverrun.set_partner_tax_yield(bob_str, bob_tax_yield)
-    x_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
+    x_riverrun.set_voice_tax_yield(bob_str, bob_tax_yield)
+    x_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
     # THEN
     assert x_riverrun.tax_yields_is_empty() is False
 
@@ -69,9 +69,9 @@ def test_RiverRun_reset_tax_yields_SetsAttr():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_riverrun.set_partner_tax_yield(bob_str, bob_tax_yield)
-    bob_riverrun.set_partner_tax_yield(sue_str, sue_tax_yield)
-    bob_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
+    bob_riverrun.set_voice_tax_yield(bob_str, bob_tax_yield)
+    bob_riverrun.set_voice_tax_yield(sue_str, sue_tax_yield)
+    bob_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
     assert bob_riverrun.tax_yields_is_empty() is False
 
     # WHEN
@@ -81,7 +81,7 @@ def test_RiverRun_reset_tax_yields_SetsAttr():
     assert bob_riverrun.tax_yields_is_empty()
 
 
-def test_RiverRun_partner_has_tax_yield_ReturnsBool():
+def test_RiverRun_voice_has_tax_yield_ReturnsBool():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -96,22 +96,22 @@ def test_RiverRun_partner_has_tax_yield_ReturnsBool():
     yao_tax_yield = 6
     bob_tax_yield = 38
     sue_tax_yield = 56
-    bob_riverrun.set_partner_tax_yield(bob_str, bob_tax_yield)
-    bob_riverrun.set_partner_tax_yield(sue_str, sue_tax_yield)
-    bob_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
-    assert bob_riverrun.partner_has_tax_yield(bob_str)
-    assert bob_riverrun.partner_has_tax_yield(sue_str)
-    assert bob_riverrun.partner_has_tax_yield(yao_str)
-    assert bob_riverrun.partner_has_tax_yield(zia_str) is False
+    bob_riverrun.set_voice_tax_yield(bob_str, bob_tax_yield)
+    bob_riverrun.set_voice_tax_yield(sue_str, sue_tax_yield)
+    bob_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
+    assert bob_riverrun.voice_has_tax_yield(bob_str)
+    assert bob_riverrun.voice_has_tax_yield(sue_str)
+    assert bob_riverrun.voice_has_tax_yield(yao_str)
+    assert bob_riverrun.voice_has_tax_yield(zia_str) is False
 
     # WHEN
     bob_riverrun.reset_tax_yields()
 
     # THEN
-    assert bob_riverrun.partner_has_tax_yield(bob_str) is False
-    assert bob_riverrun.partner_has_tax_yield(sue_str) is False
-    assert bob_riverrun.partner_has_tax_yield(yao_str) is False
-    assert bob_riverrun.partner_has_tax_yield(zia_str) is False
+    assert bob_riverrun.voice_has_tax_yield(bob_str) is False
+    assert bob_riverrun.voice_has_tax_yield(sue_str) is False
+    assert bob_riverrun.voice_has_tax_yield(yao_str) is False
+    assert bob_riverrun.voice_has_tax_yield(zia_str) is False
 
 
 def test_RiverRun_delete_tax_yield_SetsAttr():
@@ -124,17 +124,17 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
-    bob_riverrun.set_partner_tax_yield(yao_str, 5)
-    assert bob_riverrun.partner_has_tax_yield(yao_str)
+    bob_riverrun.set_voice_tax_yield(yao_str, 5)
+    assert bob_riverrun.voice_has_tax_yield(yao_str)
 
     # WHEN
     bob_riverrun.delete_tax_yield(yao_str)
 
     # THEN
-    assert bob_riverrun.partner_has_tax_yield(yao_str) is False
+    assert bob_riverrun.voice_has_tax_yield(yao_str) is False
 
 
-def test_RiverRun_get_partner_tax_yield_ReturnsObj():
+def test_RiverRun_get_voice_tax_yield_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -149,25 +149,25 @@ def test_RiverRun_get_partner_tax_yield_ReturnsObj():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_riverrun.set_partner_tax_yield(bob_str, bob_tax_yield)
-    bob_riverrun.set_partner_tax_yield(sue_str, sue_tax_yield)
-    bob_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
-    assert bob_riverrun.partner_has_tax_yield(bob_str)
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == bob_tax_yield
-    assert bob_riverrun.partner_has_tax_yield(zia_str) is False
-    assert bob_riverrun.get_partner_tax_yield(zia_str) == 0
+    bob_riverrun.set_voice_tax_yield(bob_str, bob_tax_yield)
+    bob_riverrun.set_voice_tax_yield(sue_str, sue_tax_yield)
+    bob_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
+    assert bob_riverrun.voice_has_tax_yield(bob_str)
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == bob_tax_yield
+    assert bob_riverrun.voice_has_tax_yield(zia_str) is False
+    assert bob_riverrun.get_voice_tax_yield(zia_str) == 0
 
     # WHEN
     bob_riverrun.reset_tax_yields()
 
     # THEN
-    assert bob_riverrun.partner_has_tax_yield(bob_str) is False
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == 0
-    assert bob_riverrun.partner_has_tax_yield(zia_str) is False
-    assert bob_riverrun.get_partner_tax_yield(zia_str) == 0
+    assert bob_riverrun.voice_has_tax_yield(bob_str) is False
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == 0
+    assert bob_riverrun.voice_has_tax_yield(zia_str) is False
+    assert bob_riverrun.get_voice_tax_yield(zia_str) == 0
 
 
-def test_RiverRun_add_partner_tax_yield_ReturnsObj():
+def test_RiverRun_add_voice_tax_yield_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
@@ -182,21 +182,21 @@ def test_RiverRun_add_partner_tax_yield_ReturnsObj():
     bob_tax_yield = 38
     sue_tax_yield = 56
     yao_tax_yield = 6
-    bob_riverrun.set_partner_tax_yield(bob_str, bob_tax_yield)
-    bob_riverrun.set_partner_tax_yield(sue_str, sue_tax_yield)
-    bob_riverrun.set_partner_tax_yield(yao_str, yao_tax_yield)
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == bob_tax_yield
-    assert bob_riverrun.get_partner_tax_yield(sue_str) == sue_tax_yield
-    assert bob_riverrun.get_partner_tax_yield(zia_str) == 0
+    bob_riverrun.set_voice_tax_yield(bob_str, bob_tax_yield)
+    bob_riverrun.set_voice_tax_yield(sue_str, sue_tax_yield)
+    bob_riverrun.set_voice_tax_yield(yao_str, yao_tax_yield)
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == bob_tax_yield
+    assert bob_riverrun.get_voice_tax_yield(sue_str) == sue_tax_yield
+    assert bob_riverrun.get_voice_tax_yield(zia_str) == 0
 
     # WHEN
-    bob_riverrun.add_partner_tax_yield(sue_str, 5)
-    bob_riverrun.add_partner_tax_yield(zia_str, 10)
+    bob_riverrun.add_voice_tax_yield(sue_str, 5)
+    bob_riverrun.add_voice_tax_yield(zia_str, 10)
 
     # THEN
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == bob_tax_yield
-    assert bob_riverrun.get_partner_tax_yield(sue_str) == sue_tax_yield + 5
-    assert bob_riverrun.get_partner_tax_yield(zia_str) == 10
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == bob_tax_yield
+    assert bob_riverrun.get_voice_tax_yield(sue_str) == sue_tax_yield + 5
+    assert bob_riverrun.get_voice_tax_yield(zia_str) == 10
 
 
 def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
@@ -214,58 +214,58 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     sue_tax_yield = 56
     yao_tax_yield = 6
     bob_belief = beliefunit_shop(bob_str)
-    bob_belief.add_partnerunit(bob_str, 2, bob_tax_yield)
-    bob_belief.add_partnerunit(sue_str, 2, sue_tax_yield)
-    bob_belief.add_partnerunit(yao_str, 2, yao_tax_yield)
+    bob_belief.add_voiceunit(bob_str, 2, bob_tax_yield)
+    bob_belief.add_voiceunit(sue_str, 2, sue_tax_yield)
+    bob_belief.add_voiceunit(yao_str, 2, yao_tax_yield)
     bob_debtorledger = get_debtorledger(bob_belief)
     bob_riverrun.set_tax_dues(bob_debtorledger)
-    assert bob_riverrun.get_partner_tax_due(bob_str) == 380
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == 0
+    assert bob_riverrun.get_voice_tax_due(bob_str) == 380
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == 0
 
     # WHEN
     excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 5)
     # THEN
     assert excess_chargeer_points == 0
-    assert bob_riverrun.get_partner_tax_due(bob_str) == 375
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == 5
+    assert bob_riverrun.get_voice_tax_due(bob_str) == 375
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == 5
 
     # WHEN
     excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(bob_str, 375)
     # THEN
     assert excess_chargeer_points == 0
-    assert bob_riverrun.get_partner_tax_due(bob_str) == 0
-    assert bob_riverrun.get_partner_tax_yield(bob_str) == 380
+    assert bob_riverrun.get_voice_tax_due(bob_str) == 0
+    assert bob_riverrun.get_voice_tax_yield(bob_str) == 380
 
     # ESTABLISH
-    assert bob_riverrun.get_partner_tax_due(sue_str) == 560
-    assert bob_riverrun.get_partner_tax_yield(sue_str) == 0
+    assert bob_riverrun.get_voice_tax_due(sue_str) == 560
+    assert bob_riverrun.get_voice_tax_yield(sue_str) == 0
     # WHEN
     excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(sue_str, 1000)
     # THEN
     assert excess_chargeer_points == 440
-    assert bob_riverrun.get_partner_tax_due(sue_str) == 0
-    assert bob_riverrun.get_partner_tax_yield(sue_str) == 560
+    assert bob_riverrun.get_voice_tax_due(sue_str) == 0
+    assert bob_riverrun.get_voice_tax_yield(sue_str) == 560
 
     # ESTABLISH
     zia_str = "Zia"
-    assert bob_riverrun.get_partner_tax_due(zia_str) == 0
-    assert bob_riverrun.get_partner_tax_yield(zia_str) == 0
+    assert bob_riverrun.get_voice_tax_due(zia_str) == 0
+    assert bob_riverrun.get_voice_tax_yield(zia_str) == 0
     # WHEN
     excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(zia_str, 1000)
     # THEN
     assert excess_chargeer_points == 1000
-    assert bob_riverrun.get_partner_tax_due(zia_str) == 0
-    assert bob_riverrun.get_partner_tax_yield(zia_str) == 0
+    assert bob_riverrun.get_voice_tax_due(zia_str) == 0
+    assert bob_riverrun.get_voice_tax_yield(zia_str) == 0
 
     # ESTABLISH
-    assert bob_riverrun.get_partner_tax_due(yao_str) == 60
-    assert bob_riverrun.get_partner_tax_yield(yao_str) == 0
+    assert bob_riverrun.get_voice_tax_due(yao_str) == 60
+    assert bob_riverrun.get_voice_tax_yield(yao_str) == 0
     # WHEN
     excess_chargeer_points, tax_got = bob_riverrun.levy_tax_due(yao_str, 81)
     # THEN
     assert excess_chargeer_points == 21
-    assert bob_riverrun.get_partner_tax_due(yao_str) == 0
-    assert bob_riverrun.get_partner_tax_yield(yao_str) == 60
+    assert bob_riverrun.get_voice_tax_due(yao_str) == 0
+    assert bob_riverrun.get_voice_tax_yield(yao_str) == 60
 
 
 def test_RiverRun_set_tax_got_attrs_SetsAttrs():

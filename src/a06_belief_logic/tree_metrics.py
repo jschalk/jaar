@@ -8,7 +8,7 @@ from src.a04_reason_logic.reason import ReasonUnit, RopeTerm
 @dataclass
 class TreeMetrics:
     label_count: int = None
-    level_count: dict[int, int] = None
+    tree_level_count: dict[int, int] = None
     reason_contexts: dict[RopeTerm, int] = None
     awardunits_metrics: dict[GroupTitle, AwardUnit] = None
     uid_max: int = None
@@ -18,7 +18,7 @@ class TreeMetrics:
 
     def evaluate_label(
         self,
-        level: int,
+        tree_level: int,
         reasons: dict[RopeTerm, ReasonUnit],
         awardunits: dict[GroupTitle, AwardUnit],
         uid: int,
@@ -27,7 +27,7 @@ class TreeMetrics:
     ):
         self.label_count += 1
         self.evaluate_task(task=task, plan_rope=plan_rope)
-        self.evaluate_level(level=level)
+        self.evaluate_level(tree_level=tree_level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardunits(awardunits=awardunits)
         self.evaluate_uid_max(uid=uid)
@@ -36,11 +36,11 @@ class TreeMetrics:
         if task:
             self.last_evaluated_task_plan_rope = plan_rope
 
-    def evaluate_level(self, level):
-        if self.level_count.get(level) is None:
-            self.level_count[level] = 1
+    def evaluate_level(self, tree_level):
+        if self.tree_level_count.get(tree_level) is None:
+            self.tree_level_count[tree_level] = 1
         else:
-            self.level_count[level] = self.level_count[level] + 1
+            self.tree_level_count[tree_level] += 1
 
     def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
         reasons = {} if reasons is None else reasons
@@ -78,7 +78,7 @@ def treemetrics_shop(
 ) -> TreeMetrics:
     x_treemetrics = TreeMetrics(
         label_count=get_0_if_None(label_count),
-        level_count=get_empty_dict_if_None(level_count),
+        tree_level_count=get_empty_dict_if_None(level_count),
         reason_contexts=get_empty_dict_if_None(reason_contexts),
         awardunits_metrics=get_empty_dict_if_None(awardunits_metrics),
         uid_dict=get_empty_dict_if_None(uid_dict),

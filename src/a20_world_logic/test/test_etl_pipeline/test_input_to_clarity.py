@@ -3,7 +3,7 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.a06_belief_logic.test._util.a06_str import partner_name_str
+from src.a06_belief_logic.test._util.a06_str import voice_name_str
 from src.a07_timeline_logic.test._util.a07_str import creg_str, time_str
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a11_bud_logic.test._util.a11_str import (
@@ -24,7 +24,7 @@ from src.a12_hub_toolbox.a12_path import (
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file
 from src.a15_moment_logic.a15_path import (
-    create_bud_partner_mandate_ledger_path as bud_mandate,
+    create_bud_voice_mandate_ledger_path as bud_mandate,
 )
 from src.a15_moment_logic.test._util.a15_str import (
     cumulative_minute_str,
@@ -41,10 +41,10 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     events_brick_valid_str,
     moment_event_time_agg_str,
     moment_ote1_agg_str,
-    moment_partner_nets_str,
+    moment_voice_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
-from src.a19_kpi_toolbox.test._util.a19_str import moment_kpi001_partner_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import moment_kpi001_voice_nets_str
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
@@ -69,7 +69,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         event_int_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]
@@ -146,15 +146,15 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, moment_event_time_agg_str())
         assert not db_table_exists(cursor, moment_ote1_agg_str())
         assert not db_table_exists(cursor, blrpern_job)
-        assert not db_table_exists(cursor, moment_partner_nets_str())
-        assert not db_table_exists(cursor, moment_kpi001_partner_nets_str())
+        assert not db_table_exists(cursor, moment_voice_nets_str())
+        assert not db_table_exists(cursor, moment_kpi001_voice_nets_str())
         assert not os_path_exists(last_run_metrics_path)
 
         # # create beliefunits
         # self.belief_tables_to_event_belief_csvs(cursor)
 
         # # create all moment_job and mandate reports
-        # self.calc_moment_bud_partner_mandate_net_ledgers()
+        # self.calc_moment_bud_voice_mandate_net_ledgers()
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(cursor)
@@ -208,10 +208,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert sue_gut.plan_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, blrpern_job) == 1
-        assert get_row_count(cursor, moment_partner_nets_str()) == 0
+        assert get_row_count(cursor, moment_voice_nets_str()) == 0
         # assert get_row_count(cursor, moment_event_time_agg_str()) == 0
         # assert get_row_count(cursor, moment_ote1_agg_tablename) == 0
-        assert get_row_count(cursor, moment_kpi001_partner_nets_str()) == 0
+        assert get_row_count(cursor, moment_kpi001_voice_nets_str()) == 0
         assert os_path_exists(last_run_metrics_path)
 
 
@@ -232,7 +232,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         event_int_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]
@@ -322,15 +322,15 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not os_path_exists(a23_sue_job_path)
         assert not db_table_exists(cursor, moment_ote1_agg_str())
         assert not os_path_exists(sue37_mandate_path)
-        assert not db_table_exists(cursor, moment_partner_nets_str())
-        assert not db_table_exists(cursor, moment_kpi001_partner_nets_str())
+        assert not db_table_exists(cursor, moment_voice_nets_str())
+        assert not db_table_exists(cursor, moment_kpi001_voice_nets_str())
         # self.moment_agg_tables_to_moment_ote1_agg(cursor)
 
         # # create beliefunits
         # self.belief_tables_to_event_belief_csvs(cursor)
 
         # # create all moment_job and mandate reports
-        # self.calc_moment_bud_partner_mandate_net_ledgers()
+        # self.calc_moment_bud_voice_mandate_net_ledgers()
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(cursor)
@@ -368,8 +368,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert get_row_count(cursor, moment_ote1_agg_str()) == 1
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
-        assert get_row_count(cursor, moment_partner_nets_str()) == 1
-        assert get_row_count(cursor, moment_kpi001_partner_nets_str()) == 1
+        assert get_row_count(cursor, moment_voice_nets_str()) == 1
+        assert get_row_count(cursor, moment_kpi001_voice_nets_str()) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentTranBook(
@@ -389,7 +389,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
         tran_time_str(),
         amount_str(),
     ]
@@ -404,13 +404,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        assert not db_table_exists(cursor, moment_partner_nets_str())
+        assert not db_table_exists(cursor, moment_voice_nets_str())
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
-        assert get_row_count(cursor, moment_partner_nets_str()) == 1
+        assert get_row_count(cursor, moment_voice_nets_str()) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIdeas_ote1_IsStillCreated(
@@ -429,7 +429,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -531,7 +531,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -582,7 +582,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         event_int_str(),
         moment_label_str(),
         belief_name_str(),
-        partner_name_str(),
+        voice_name_str(),
         otx_name_str(),
         inx_name_str(),
     ]

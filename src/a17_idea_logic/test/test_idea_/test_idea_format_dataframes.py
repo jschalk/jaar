@@ -8,12 +8,12 @@ from src.a06_belief_logic.test._util.a06_str import (
     group_debt_points_str,
     group_title_str,
     moment_label_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
     plan_rope_str,
     star_str,
     task_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
@@ -22,8 +22,8 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00019_planunit_v0_0_0,
-    idea_format_00020_belief_partner_membership_v0_0_0,
-    idea_format_00021_belief_partnerunit_v0_0_0,
+    idea_format_00020_belief_voice_membership_v0_0_0,
+    idea_format_00021_belief_voiceunit_v0_0_0,
 )
 from src.a17_idea_logic.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
 from src.a17_idea_logic.test._util.a17_env import (
@@ -32,80 +32,62 @@ from src.a17_idea_logic.test._util.a17_env import (
 )
 
 
-def test_create_idea_df_Arg_idea_format_00021_belief_partnerunit_v0_0_0():
+def test_create_idea_df_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_partner_cred_points = 11
-    bob_partner_cred_points = 13
-    yao_partner_cred_points = 41
-    sue_partner_debt_points = 23
-    bob_partner_debt_points = 29
-    yao_partner_debt_points = 37
+    sue_voice_cred_points = 11
+    bob_voice_cred_points = 13
+    yao_voice_cred_points = 41
+    sue_voice_debt_points = 23
+    bob_voice_debt_points = 29
+    yao_voice_debt_points = 37
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
-    sue_beliefunit.add_partnerunit(
-        bob_str, bob_partner_cred_points, bob_partner_debt_points
-    )
-    sue_beliefunit.add_partnerunit(
-        yao_str, yao_partner_cred_points, yao_partner_debt_points
-    )
+    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
+    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_points, bob_voice_debt_points)
+    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
 
     # WHEN
-    x_idea_name = idea_format_00021_belief_partnerunit_v0_0_0()
-    partner_dataframe = create_idea_df(sue_beliefunit, x_idea_name)
+    x_idea_name = idea_format_00021_belief_voiceunit_v0_0_0()
+    voice_dataframe = create_idea_df(sue_beliefunit, x_idea_name)
 
     # THEN
-    array_headers = list(partner_dataframe.columns)
-    partner_idearef = get_idearef_obj(x_idea_name)
-    assert array_headers == partner_idearef.get_headers_list()
-    assert partner_dataframe.loc[0, moment_label_str()] == amy_moment_label
-    assert partner_dataframe.loc[0, belief_name_str()] == sue_beliefunit.belief_name
-    assert partner_dataframe.loc[0, partner_name_str()] == bob_str
-    assert (
-        partner_dataframe.loc[0, partner_debt_points_str()] == bob_partner_debt_points
-    )
-    assert (
-        partner_dataframe.loc[0, partner_cred_points_str()] == bob_partner_cred_points
-    )
+    array_headers = list(voice_dataframe.columns)
+    voice_idearef = get_idearef_obj(x_idea_name)
+    assert array_headers == voice_idearef.get_headers_list()
+    assert voice_dataframe.loc[0, moment_label_str()] == amy_moment_label
+    assert voice_dataframe.loc[0, belief_name_str()] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[0, voice_name_str()] == bob_str
+    assert voice_dataframe.loc[0, voice_debt_points_str()] == bob_voice_debt_points
+    assert voice_dataframe.loc[0, voice_cred_points_str()] == bob_voice_cred_points
 
-    assert partner_dataframe.loc[1, moment_label_str()] == amy_moment_label
-    assert partner_dataframe.loc[1, belief_name_str()] == sue_beliefunit.belief_name
-    assert partner_dataframe.loc[1, partner_name_str()] == sue_str
-    assert (
-        partner_dataframe.loc[1, partner_debt_points_str()] == sue_partner_debt_points
-    )
-    assert (
-        partner_dataframe.loc[1, partner_cred_points_str()] == sue_partner_cred_points
-    )
+    assert voice_dataframe.loc[1, moment_label_str()] == amy_moment_label
+    assert voice_dataframe.loc[1, belief_name_str()] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[1, voice_name_str()] == sue_str
+    assert voice_dataframe.loc[1, voice_debt_points_str()] == sue_voice_debt_points
+    assert voice_dataframe.loc[1, voice_cred_points_str()] == sue_voice_cred_points
 
-    assert partner_dataframe.loc[2, moment_label_str()] == amy_moment_label
-    assert partner_dataframe.loc[2, belief_name_str()] == sue_beliefunit.belief_name
-    assert partner_dataframe.loc[2, partner_name_str()] == yao_str
-    assert (
-        partner_dataframe.loc[2, partner_debt_points_str()] == yao_partner_debt_points
-    )
-    assert (
-        partner_dataframe.loc[2, partner_cred_points_str()] == yao_partner_cred_points
-    )
+    assert voice_dataframe.loc[2, moment_label_str()] == amy_moment_label
+    assert voice_dataframe.loc[2, belief_name_str()] == sue_beliefunit.belief_name
+    assert voice_dataframe.loc[2, voice_name_str()] == yao_str
+    assert voice_dataframe.loc[2, voice_debt_points_str()] == yao_voice_debt_points
+    assert voice_dataframe.loc[2, voice_cred_points_str()] == yao_voice_cred_points
 
-    assert len(partner_dataframe) == 3
+    assert len(voice_dataframe) == 3
 
 
-def test_create_idea_df_Arg_idea_format_00020_belief_partner_membership_v0_0_0():
+def test_create_idea_df_Arg_idea_format_00020_belief_voice_membership_v0_0_0():
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_partnerunit(sue_str)
-    sue_beliefunit.add_partnerunit(bob_str)
-    sue_beliefunit.add_partnerunit(yao_str)
+    sue_beliefunit.add_voiceunit(sue_str)
+    sue_beliefunit.add_voiceunit(bob_str)
+    sue_beliefunit.add_voiceunit(yao_str)
     iowa_str = ";Iowa"
     sue_iowa_credit_w = 37
     bob_iowa_credit_w = 43
@@ -116,48 +98,48 @@ def test_create_idea_df_Arg_idea_format_00020_belief_partner_membership_v0_0_0()
     ohio_str = ";Ohio"
     yao_ohio_credit_w = 73
     yao_ohio_debt_w = 67
-    sue_partnerunit = sue_beliefunit.get_partner(sue_str)
-    bob_partnerunit = sue_beliefunit.get_partner(bob_str)
-    yao_partnerunit = sue_beliefunit.get_partner(yao_str)
-    sue_partnerunit.add_membership(iowa_str, sue_iowa_credit_w, sue_iowa_debt_w)
-    bob_partnerunit.add_membership(iowa_str, bob_iowa_credit_w, bob_iowa_debt_w)
-    yao_partnerunit.add_membership(iowa_str, yao_iowa_credit_w, yao_iowa_debt_w)
-    yao_partnerunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debt_w)
+    sue_voiceunit = sue_beliefunit.get_voice(sue_str)
+    bob_voiceunit = sue_beliefunit.get_voice(bob_str)
+    yao_voiceunit = sue_beliefunit.get_voice(yao_str)
+    sue_voiceunit.add_membership(iowa_str, sue_iowa_credit_w, sue_iowa_debt_w)
+    bob_voiceunit.add_membership(iowa_str, bob_iowa_credit_w, bob_iowa_debt_w)
+    yao_voiceunit.add_membership(iowa_str, yao_iowa_credit_w, yao_iowa_debt_w)
+    yao_voiceunit.add_membership(ohio_str, yao_ohio_credit_w, yao_ohio_debt_w)
 
     # WHEN
-    x_idea_name = idea_format_00020_belief_partner_membership_v0_0_0()
+    x_idea_name = idea_format_00020_belief_voice_membership_v0_0_0()
     membership_dataframe = create_idea_df(sue_beliefunit, x_idea_name)
 
     # THEN
     array_headers = list(membership_dataframe.columns)
-    partner_idearef = get_idearef_obj(x_idea_name)
+    voice_idearef = get_idearef_obj(x_idea_name)
     print(f"{len(membership_dataframe)=}")
     assert len(membership_dataframe) == 10
-    assert array_headers == partner_idearef.get_headers_list()
+    assert array_headers == voice_idearef.get_headers_list()
     assert membership_dataframe.loc[0, moment_label_str()] == amy_moment_label
     assert membership_dataframe.loc[0, belief_name_str()] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[0, partner_name_str()] == bob_str
+    assert membership_dataframe.loc[0, voice_name_str()] == bob_str
     assert membership_dataframe.loc[0, group_title_str()] == iowa_str
     assert membership_dataframe.loc[0, group_cred_points_str()] == bob_iowa_credit_w
     assert membership_dataframe.loc[0, group_debt_points_str()] == bob_iowa_debt_w
 
     assert membership_dataframe.loc[3, moment_label_str()] == amy_moment_label
     assert membership_dataframe.loc[3, belief_name_str()] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[3, partner_name_str()] == sue_str
+    assert membership_dataframe.loc[3, voice_name_str()] == sue_str
     assert membership_dataframe.loc[3, group_title_str()] == iowa_str
     assert membership_dataframe.loc[3, group_cred_points_str()] == sue_iowa_credit_w
     assert membership_dataframe.loc[3, group_debt_points_str()] == sue_iowa_debt_w
 
     assert membership_dataframe.loc[4, moment_label_str()] == amy_moment_label
     assert membership_dataframe.loc[4, belief_name_str()] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[4, partner_name_str()] == sue_str
+    assert membership_dataframe.loc[4, voice_name_str()] == sue_str
     assert membership_dataframe.loc[4, group_title_str()] == sue_str
     assert membership_dataframe.loc[4, group_cred_points_str()] == 1
     assert membership_dataframe.loc[4, group_debt_points_str()] == 1
 
     assert membership_dataframe.loc[7, moment_label_str()] == amy_moment_label
     assert membership_dataframe.loc[7, belief_name_str()] == sue_beliefunit.belief_name
-    assert membership_dataframe.loc[7, partner_name_str()] == yao_str
+    assert membership_dataframe.loc[7, voice_name_str()] == yao_str
     assert membership_dataframe.loc[7, group_title_str()] == ohio_str
     assert membership_dataframe.loc[7, group_cred_points_str()] == yao_ohio_credit_w
     assert membership_dataframe.loc[7, group_debt_points_str()] == yao_ohio_debt_w
@@ -219,32 +201,26 @@ def test_save_idea_csv_Arg_idea_format_00019_planunit_v0_0_0():
     #     print(f"{x_array_header=}")
 
 
-def test_save_idea_csv_Arg_idea_format_00021_belief_partnerunit_v0_0_0_SaveToCSV(
+def test_save_idea_csv_Arg_idea_format_00021_belief_voiceunit_v0_0_0_SaveToCSV(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
     sue_str = "Sue"
     bob_str = "Bob"
     yao_str = "Yao"
-    sue_partner_cred_points = 11
-    bob_partner_cred_points = 13
-    yao_partner_cred_points = 41
-    sue_partner_debt_points = 23
-    bob_partner_debt_points = 29
-    yao_partner_debt_points = 37
+    sue_voice_cred_points = 11
+    bob_voice_cred_points = 13
+    yao_voice_cred_points = 41
+    sue_voice_debt_points = 23
+    bob_voice_debt_points = 29
+    yao_voice_debt_points = 37
     amy_moment_label = "amy56"
     sue_beliefunit = beliefunit_shop(sue_str, amy_moment_label)
-    sue_beliefunit.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
-    sue_beliefunit.add_partnerunit(
-        bob_str, bob_partner_cred_points, bob_partner_debt_points
-    )
-    sue_beliefunit.add_partnerunit(
-        yao_str, yao_partner_cred_points, yao_partner_debt_points
-    )
-    j1_ideaname = idea_format_00021_belief_partnerunit_v0_0_0()
-    name_filename = f"{sue_str}_partner_example_00.csv"
+    sue_beliefunit.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
+    sue_beliefunit.add_voiceunit(bob_str, bob_voice_cred_points, bob_voice_debt_points)
+    sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
+    j1_ideaname = idea_format_00021_belief_voiceunit_v0_0_0()
+    name_filename = f"{sue_str}_voice_example_00.csv"
     csv_example_path = create_path(idea_moments_dir(), name_filename)
     print(f"{csv_example_path}")
     assert not os_path_exists(csv_example_path)
@@ -254,7 +230,7 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_partnerunit_v0_0_0_SaveToCSV
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue1_name_example_csv = """event_int,face_name,moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points
+    sue1_name_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37
@@ -266,18 +242,18 @@ def test_save_idea_csv_Arg_idea_format_00021_belief_partnerunit_v0_0_0_SaveToCSV
 
     # WHEN
     zia_str = "Zia"
-    sue_beliefunit.add_partnerunit(zia_str)
+    sue_beliefunit.add_voiceunit(zia_str)
     save_idea_csv(j1_ideaname, sue_beliefunit, idea_moments_dir(), name_filename)
 
     # THEN
     assert os_path_exists(csv_example_path)
-    sue2_partner_example_csv = """event_int,face_name,moment_label,belief_name,partner_name,partner_cred_points,partner_debt_points
+    sue2_voice_example_csv = """event_int,face_name,moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points
 ,,amy56,Sue,Bob,13,29
 ,,amy56,Sue,Sue,11,23
 ,,amy56,Sue,Yao,41,37
 ,,amy56,Sue,Zia,1,1
 """
-    assert open_file(idea_moments_dir(), name_filename) == sue2_partner_example_csv
+    assert open_file(idea_moments_dir(), name_filename) == sue2_voice_example_csv
 
 
 def test_save_idea_csv_Arg_idea_format_00013_planunit_v0_0_0(

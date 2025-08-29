@@ -1,24 +1,24 @@
 from src.a03_group_logic.test._util.a03_str import (
-    _credor_pool_str,
-    _debtor_pool_str,
-    _fund_agenda_give_str,
-    _fund_agenda_ratio_give_str,
-    _fund_agenda_ratio_take_str,
-    _fund_agenda_take_str,
-    _fund_give_str,
-    _fund_take_str,
-    _inallocable_partner_debt_points_str,
-    _irrational_partner_debt_points_str,
-    _memberships_str,
+    credor_pool_str,
+    debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
+    fund_give_str,
+    fund_take_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
+    inallocable_voice_debt_points_str,
+    irrational_voice_debt_points_str,
+    memberships_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import _groupunits_str
+from src.a06_belief_logic.test._util.a06_str import groupunits_str
 from src.a07_timeline_logic.test._util.a07_str import readable_str
 from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_groups_view_dict
 from src.a22_belief_viewer.example22_beliefs import (
@@ -34,7 +34,7 @@ from src.a22_belief_viewer.example22_beliefs import (
     play_str,
     play_swim_str,
 )
-from src.a22_belief_viewer.test.test__partners_view_dict import add_readable
+from src.a22_belief_viewer.test.test__voices_view_dict import add_readable
 
 
 def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
@@ -60,17 +60,17 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     yao_debt_points = 130
 #     bob_cred_points = 230
 #     bob_debt_points = 290
-#     sue_believer.add_partnerunit(yao_str, yao_cred_points, yao_debt_points)
-#     sue_believer.add_partnerunit(bob_str, bob_cred_points, bob_debt_points)
+#     sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
+#     sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
 #     swim_str = ";swimmers"
 #     bob_swim_cred_points = 66
 #     bob_swim_debt_points = 77
 #     yao_swim_cred_points = 88
 #     yao_swim_debt_points = 99
-#     yao_partner = sue_believer.get_partner(yao_str)
-#     bob_partner = sue_believer.get_partner(bob_str)
-#     yao_partner.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-#     bob_partner.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
+#     yao_voice = sue_believer.get_voice(yao_str)
+#     bob_voice = sue_believer.get_voice(bob_str)
+#     yao_voice.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
+#     bob_voice.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
 #     sue_believer.cash_out()
 
 #     # WHEN
@@ -81,68 +81,68 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 
 #     swim_group_dict = groups_view_dict.get(swim_str)
 #     group_title_readable_key = add_readable(group_title_str())
-#     _memberships_readable_key = add_readable(_memberships_str())
-#     _fund_give_readable_key = add_readable(_fund_give_str())
-#     _fund_take_readable_key = add_readable(_fund_take_str())
-#     _fund_agenda_give_readable_key = add_readable(_fund_agenda_give_str())
-#     _fund_agenda_take_readable_key = add_readable(_fund_agenda_take_str())
-#     _credor_pool_readable_key = add_readable(_credor_pool_str())
-#     _debtor_pool_readable_key = add_readable(_debtor_pool_str())
+#     memberships_readable_key = add_readable(memberships_str())
+#     fund_give_readable_key = add_readable(fund_give_str())
+#     fund_take_readable_key = add_readable(fund_take_str())
+#     fund_agenda_give_readable_key = add_readable(fund_agenda_give_str())
+#     fund_agenda_take_readable_key = add_readable(fund_agenda_take_str())
+#     credor_pool_readable_key = add_readable(credor_pool_str())
+#     debtor_pool_readable_key = add_readable(debtor_pool_str())
 #     assert set(swim_group_dict.keys()) == {
 #         group_title_str(),
-#         _memberships_str(),
-#         _fund_give_str(),
-#         _fund_take_str(),
-#         _fund_agenda_give_str(),
-#         _fund_agenda_take_str(),
-#         _credor_pool_str(),
-#         _debtor_pool_str(),
+#         memberships_str(),
+#         fund_give_str(),
+#         fund_take_str(),
+#         fund_agenda_give_str(),
+#         fund_agenda_take_str(),
+#         credor_pool_str(),
+#         debtor_pool_str(),
 #         group_title_readable_key,
-#         _memberships_readable_key,
-#         _fund_give_readable_key,
-#         _fund_take_readable_key,
-#         _fund_agenda_give_readable_key,
-#         _fund_agenda_take_readable_key,
-#         _credor_pool_readable_key,
-#         _debtor_pool_readable_key,
+#         memberships_readable_key,
+#         fund_give_readable_key,
+#         fund_take_readable_key,
+#         fund_agenda_give_readable_key,
+#         fund_agenda_take_readable_key,
+#         credor_pool_readable_key,
+#         debtor_pool_readable_key,
 #     }
 
 #     swim_groupunit = sue_believer.get_groupunit(swim_str)
 #     swim_group_title_readable = f"group_title_readable: {swim_groupunit.group_title}"
-#     swim__memberships_readable = f"_memberships_readable: {swim_groupunit._memberships}"
-#     swim__fund_give_readable = f"_fund_give_readable: {swim_groupunit._fund_give}"
-#     swim__fund_take_readable = f"_fund_take_readable: {swim_groupunit._fund_take}"
-#     swim__fund_agenda_give_readable = (
-#         f"_fund_agenda_give_readable: {swim_groupunit._fund_agenda_give}"
+#     swim_memberships_readable = f"memberships_readable: {swim_groupunit.memberships}"
+#     swim_fund_give_readable = f"fund_give_readable: {swim_groupunit.fund_give}"
+#     swim_fund_take_readable = f"fund_take_readable: {swim_groupunit.fund_take}"
+#     swim_fund_agenda_give_readable = (
+#         f"fund_agenda_give_readable: {swim_groupunit.fund_agenda_give}"
 #     )
-#     swim__fund_agenda_take_readable = (
-#         f"_fund_agenda_take_readable: {swim_groupunit._fund_agenda_take}"
+#     swim_fund_agenda_take_readable = (
+#         f"fund_agenda_take_readable: {swim_groupunit.fund_agenda_take}"
 #     )
-#     swim__credor_pool_readable = f"_credor_pool_readable: {swim_groupunit._credor_pool}"
-#     swim__debtor_pool_readable = f"_debtor_pool_readable: {swim_groupunit._debtor_pool}"
+#     swim_credor_pool_readable = f"credor_pool_readable: {swim_groupunit.credor_pool}"
+#     swim_debtor_pool_readable = f"debtor_pool_readable: {swim_groupunit.debtor_pool}"
 
 #     sgu = swim_groupunit
 #     sg_dict = swim_group_dict
 #     assert sgu.group_title == sg_dict.get(group_title_str())
-#     assert sgu._memberships == sg_dict.get(_memberships_str())
-#     assert sgu._fund_give == sg_dict.get(_fund_give_str())
-#     assert sgu._fund_take == sg_dict.get(_fund_take_str())
-#     assert sgu._fund_agenda_give == sg_dict.get(_fund_agenda_give_str())
-#     assert sgu._fund_agenda_take == sg_dict.get(_fund_agenda_take_str())
-#     assert sgu._credor_pool == sg_dict.get(_credor_pool_str())
-#     assert sgu._debtor_pool == sg_dict.get(_debtor_pool_str())
+#     assert sgu.memberships == sg_dict.get(memberships_str())
+#     assert sgu.fund_give == sg_dict.get(fund_give_str())
+#     assert sgu.fund_take == sg_dict.get(fund_take_str())
+#     assert sgu.fund_agenda_give == sg_dict.get(fund_agenda_give_str())
+#     assert sgu.fund_agenda_take == sg_dict.get(fund_agenda_take_str())
+#     assert sgu.credor_pool == sg_dict.get(credor_pool_str())
+#     assert sgu.debtor_pool == sg_dict.get(debtor_pool_str())
 #     assert swim_group_title_readable == sg_dict.get(group_title_readable_key)
-#     assert swim__memberships_readable == sg_dict.get(_memberships_readable_key)
-#     assert swim__fund_give_readable == sg_dict.get(_fund_give_readable_key)
-#     assert swim__fund_take_readable == sg_dict.get(_fund_take_readable_key)
-#     assert swim__fund_agenda_give_readable == sg_dict.get(
-#         _fund_agenda_give_readable_key
+#     assert swim_memberships_readable == sg_dict.get(memberships_readable_key)
+#     assert swim_fund_give_readable == sg_dict.get(fund_give_readable_key)
+#     assert swim_fund_take_readable == sg_dict.get(fund_take_readable_key)
+#     assert swim_fund_agenda_give_readable == sg_dict.get(
+#         fund_agenda_give_readable_key
 #     )
-#     assert swim__fund_agenda_take_readable == sg_dict.get(
-#         _fund_agenda_take_readable_key
+#     assert swim_fund_agenda_take_readable == sg_dict.get(
+#         fund_agenda_take_readable_key
 #     )
-#     assert swim__credor_pool_readable == sg_dict.get(_credor_pool_readable_key)
-#     assert swim__debtor_pool_readable == sg_dict.get(_debtor_pool_readable_key)
+#     assert swim_credor_pool_readable == sg_dict.get(credor_pool_readable_key)
+#     assert swim_debtor_pool_readable == sg_dict.get(debtor_pool_readable_key)
 
 #     assert 1 == 2
 
@@ -152,12 +152,12 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     sue_str = "Sue"
 #     sue_believer = beliefunit_shop(sue_str)
 #     yao_str = "Yao"
-#     sue_believer.add_partnerunit(yao_str)
+#     sue_believer.add_voiceunit(yao_str)
 #     swim_str = ";swimmers"
 #     yao_swim_cred_points = 311
 #     yao_swim_debt_points = 313
-#     yao_partnerunit = sue_believer.get_partner(yao_str)
-#     yao_partnerunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
+#     yao_voiceunit = sue_believer.get_voice(yao_str)
+#     yao_voiceunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
 #     sue_believer.cash_out()
 
 #     # WHEN
@@ -165,49 +165,49 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 
 #     # THEN
 #     assert set(groups_view_dict.keys()) == {yao_str}
-#     yao_partner_dict = groups_view_dict.get(yao_str)
-#     assert _memberships_str() in set(yao_partner_dict.keys())
-#     yao_memberships_dict = yao_partner_dict.get(_memberships_str())
+#     yao_voice_dict = groups_view_dict.get(yao_str)
+#     assert memberships_str() in set(yao_voice_dict.keys())
+#     yao_memberships_dict = yao_voice_dict.get(memberships_str())
 #     assert {swim_str, yao_str} == set(yao_memberships_dict.keys())
 #     yao_swim_dict = yao_memberships_dict.get(swim_str)
 
 #     group_title_readable_key = add_readable(group_title_str())
 #     group_cred_points_readable_key = add_readable(group_cred_points_str())
 #     group_debt_points_readable_key = add_readable(group_debt_points_str())
-#     _credor_pool_readable_key = add_readable(_credor_pool_str())
-#     _debtor_pool_readable_key = add_readable(_debtor_pool_str())
-#     _fund_agenda_give_readable_key = add_readable(_fund_agenda_give_str())
-#     _fund_agenda_ratio_give_readable_key = add_readable(_fund_agenda_ratio_give_str())
-#     _fund_agenda_ratio_take_readable_key = add_readable(_fund_agenda_ratio_take_str())
-#     _fund_agenda_take_readable_key = add_readable(_fund_agenda_take_str())
-#     _fund_give_readable_key = add_readable(_fund_give_str())
-#     _fund_take_readable_key = add_readable(_fund_take_str())
+#     credor_pool_readable_key = add_readable(credor_pool_str())
+#     debtor_pool_readable_key = add_readable(debtor_pool_str())
+#     fund_agenda_give_readable_key = add_readable(fund_agenda_give_str())
+#     fund_agenda_ratio_give_readable_key = add_readable(fund_agenda_ratio_give_str())
+#     fund_agenda_ratio_take_readable_key = add_readable(fund_agenda_ratio_take_str())
+#     fund_agenda_take_readable_key = add_readable(fund_agenda_take_str())
+#     fund_give_readable_key = add_readable(fund_give_str())
+#     fund_take_readable_key = add_readable(fund_take_str())
 #     assert set(yao_swim_dict.keys()) == {
-#         partner_name_str(),
+#         voice_name_str(),
 #         group_title_str(),
 #         group_cred_points_str(),
 #         group_debt_points_str(),
-#         _credor_pool_str(),
-#         _debtor_pool_str(),
-#         _fund_agenda_give_str(),
-#         _fund_agenda_ratio_give_str(),
-#         _fund_agenda_ratio_take_str(),
-#         _fund_agenda_take_str(),
-#         _fund_give_str(),
-#         _fund_take_str(),
+#         credor_pool_str(),
+#         debtor_pool_str(),
+#         fund_agenda_give_str(),
+#         fund_agenda_ratio_give_str(),
+#         fund_agenda_ratio_take_str(),
+#         fund_agenda_take_str(),
+#         fund_give_str(),
+#         fund_take_str(),
 #         group_title_readable_key,
 #         group_cred_points_readable_key,
 #         group_debt_points_readable_key,
-#         _credor_pool_readable_key,
-#         _debtor_pool_readable_key,
-#         _fund_agenda_give_readable_key,
-#         _fund_agenda_ratio_give_readable_key,
-#         _fund_agenda_ratio_take_readable_key,
-#         _fund_agenda_take_readable_key,
-#         _fund_give_readable_key,
-#         _fund_take_readable_key,
+#         credor_pool_readable_key,
+#         debtor_pool_readable_key,
+#         fund_agenda_give_readable_key,
+#         fund_agenda_ratio_give_readable_key,
+#         fund_agenda_ratio_take_readable_key,
+#         fund_agenda_take_readable_key,
+#         fund_give_readable_key,
+#         fund_take_readable_key,
 #     }
-#     yao_swim_mu = yao_partnerunit.get_membership(swim_str)
+#     yao_swim_mu = yao_voiceunit.get_membership(swim_str)
 #     expected_group_title_readable = f"{group_title_str()}: {yao_swim_mu.group_title}"
 #     expected_group_cred_points_readable = (
 #         f"{group_cred_points_str()}: {yao_swim_mu.group_cred_points}"
@@ -215,41 +215,41 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     expected_group_debt_points_readable = (
 #         f"{group_debt_points_str()}: {yao_swim_mu.group_debt_points}"
 #     )
-#     expected__credor_pool_readable = f"{_credor_pool_str()}: {yao_swim_mu._credor_pool}"
-#     expected__debtor_pool_readable = f"{_debtor_pool_str()}: {yao_swim_mu._debtor_pool}"
-#     expected__fund_agenda_give_readable = (
-#         f"{_fund_agenda_give_str()}: {yao_swim_mu._fund_agenda_give}"
+#     expected_credor_pool_readable = f"{credor_pool_str()}: {yao_swim_mu.credor_pool}"
+#     expected_debtor_pool_readable = f"{debtor_pool_str()}: {yao_swim_mu.debtor_pool}"
+#     expected_fund_agenda_give_readable = (
+#         f"{fund_agenda_give_str()}: {yao_swim_mu.fund_agenda_give}"
 #     )
-#     expected__fund_agenda_ratio_give_readable = (
-#         f"{_fund_agenda_ratio_give_str()}: {yao_swim_mu._fund_agenda_ratio_give}"
+#     expected_fund_agenda_ratio_give_readable = (
+#         f"{fund_agenda_ratio_give_str()}: {yao_swim_mu.fund_agenda_ratio_give}"
 #     )
-#     expected__fund_agenda_ratio_take_readable = (
-#         f"{_fund_agenda_ratio_take_str()}: {yao_swim_mu._fund_agenda_ratio_take}"
+#     expected_fund_agenda_ratio_take_readable = (
+#         f"{fund_agenda_ratio_take_str()}: {yao_swim_mu.fund_agenda_ratio_take}"
 #     )
-#     expected__fund_agenda_take_readable = (
-#         f"{_fund_agenda_take_str()}: {yao_swim_mu._fund_agenda_take}"
+#     expected_fund_agenda_take_readable = (
+#         f"{fund_agenda_take_str()}: {yao_swim_mu.fund_agenda_take}"
 #     )
-#     expected__fund_give_readable = f"{_fund_give_str()}: {yao_swim_mu._fund_give}"
-#     expected__fund_take_readable = f"{_fund_take_str()}: {yao_swim_mu._fund_take}"
+#     expected_fund_give_readable = f"{fund_give_str()}: {yao_swim_mu.fund_give}"
+#     expected_fund_take_readable = f"{fund_take_str()}: {yao_swim_mu.fund_take}"
 
-#     assert yao_swim_dict.get(partner_name_str()) == yao_swim_mu.partner_name
+#     assert yao_swim_dict.get(voice_name_str()) == yao_swim_mu.voice_name
 #     assert yao_swim_dict.get(group_title_str()) == yao_swim_mu.group_title
 #     assert yao_swim_dict.get(group_cred_points_str()) == yao_swim_mu.group_cred_points
 #     assert yao_swim_dict.get(group_debt_points_str()) == yao_swim_mu.group_debt_points
-#     assert yao_swim_dict.get(_credor_pool_str()) == yao_swim_mu._credor_pool
-#     assert yao_swim_dict.get(_debtor_pool_str()) == yao_swim_mu._debtor_pool
-#     assert yao_swim_dict.get(_fund_agenda_give_str()) == yao_swim_mu._fund_agenda_give
+#     assert yao_swim_dict.get(credor_pool_str()) == yao_swim_mu.credor_pool
+#     assert yao_swim_dict.get(debtor_pool_str()) == yao_swim_mu.debtor_pool
+#     assert yao_swim_dict.get(fund_agenda_give_str()) == yao_swim_mu.fund_agenda_give
 #     assert (
-#         yao_swim_dict.get(_fund_agenda_ratio_give_str())
-#         == yao_swim_mu._fund_agenda_ratio_give
+#         yao_swim_dict.get(fund_agenda_ratio_give_str())
+#         == yao_swim_mu.fund_agenda_ratio_give
 #     )
 #     assert (
-#         yao_swim_dict.get(_fund_agenda_ratio_take_str())
-#         == yao_swim_mu._fund_agenda_ratio_take
+#         yao_swim_dict.get(fund_agenda_ratio_take_str())
+#         == yao_swim_mu.fund_agenda_ratio_take
 #     )
-#     assert yao_swim_dict.get(_fund_agenda_take_str()) == yao_swim_mu._fund_agenda_take
-#     assert yao_swim_dict.get(_fund_give_str()) == yao_swim_mu._fund_give
-#     assert yao_swim_dict.get(_fund_take_str()) == yao_swim_mu._fund_take
+#     assert yao_swim_dict.get(fund_agenda_take_str()) == yao_swim_mu.fund_agenda_take
+#     assert yao_swim_dict.get(fund_give_str()) == yao_swim_mu.fund_give
+#     assert yao_swim_dict.get(fund_take_str()) == yao_swim_mu.fund_take
 #     assert yao_swim_dict.get(group_title_readable_key) == expected_group_title_readable
 #     assert (
 #         yao_swim_dict.get(group_cred_points_readable_key)
@@ -260,29 +260,29 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #         == expected_group_debt_points_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_credor_pool_readable_key) == expected__credor_pool_readable
+#         yao_swim_dict.get(credor_pool_readable_key) == expected_credor_pool_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_debtor_pool_readable_key) == expected__debtor_pool_readable
+#         yao_swim_dict.get(debtor_pool_readable_key) == expected_debtor_pool_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_fund_agenda_give_readable_key)
-#         == expected__fund_agenda_give_readable
+#         yao_swim_dict.get(fund_agenda_give_readable_key)
+#         == expected_fund_agenda_give_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_fund_agenda_ratio_give_readable_key)
-#         == expected__fund_agenda_ratio_give_readable
+#         yao_swim_dict.get(fund_agenda_ratio_give_readable_key)
+#         == expected_fund_agenda_ratio_give_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_fund_agenda_ratio_take_readable_key)
-#         == expected__fund_agenda_ratio_take_readable
+#         yao_swim_dict.get(fund_agenda_ratio_take_readable_key)
+#         == expected_fund_agenda_ratio_take_readable
 #     )
 #     assert (
-#         yao_swim_dict.get(_fund_agenda_take_readable_key)
-#         == expected__fund_agenda_take_readable
+#         yao_swim_dict.get(fund_agenda_take_readable_key)
+#         == expected_fund_agenda_take_readable
 #     )
-#     assert yao_swim_dict.get(_fund_give_readable_key) == expected__fund_give_readable
-#     assert yao_swim_dict.get(_fund_take_readable_key) == expected__fund_take_readable
+#     assert yao_swim_dict.get(fund_give_readable_key) == expected_fund_give_readable
+#     assert yao_swim_dict.get(fund_take_readable_key) == expected_fund_take_readable
 
 #     # sue_str = "Sue"
 #     # sue_believer = beliefunit_shop(sue_str)
@@ -292,8 +292,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     # yao_debt_points = 130
 #     # bob_cred_points = 230
 #     # bob_debt_points = 290
-#     # sue_believer.add_partnerunit(yao_str, yao_cred_points, yao_debt_points)
-#     # sue_believer.add_partnerunit(bob_str, bob_cred_points, bob_debt_points)
+#     # sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
+#     # sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
 #     # swim_str = ";swimmers"
 #     # yao_swim_cred_points = 311
 #     # yao_swim_debt_points = 313
@@ -302,9 +302,9 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     # clea_str = ";cleaners"
 #     # cleaners_cred_points = 511
 #     # cleaners_debt_points = 513
-#     # yao_partnerunit = sue_believer.get_partner(yao_str)
-#     # bob_partnerunit = sue_believer.get_partner(bob_str)
-#     # bob_partnerunit.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
-#     # yao_partnerunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-#     # yao_partnerunit.add_membership(clea_str, cleaners_cred_points, cleaners_debt_points)
-#     # sue_believer.get_partner(yao_str).add_membership()
+#     # yao_voiceunit = sue_believer.get_voice(yao_str)
+#     # bob_voiceunit = sue_believer.get_voice(bob_str)
+#     # bob_voiceunit.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
+#     # yao_voiceunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
+#     # yao_voiceunit.add_membership(clea_str, cleaners_cred_points, cleaners_debt_points)
+#     # sue_believer.get_voice(yao_str).add_membership()

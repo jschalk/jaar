@@ -1,7 +1,7 @@
 {
     "moment_paybook": {
         "jkeys": {
-            "partner_name": {
+            "voice_name": {
                 "class_type": "NameTerm"
             },
             "moment_label": {

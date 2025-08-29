@@ -279,7 +279,7 @@ def fund_graph0(
     blue_str = "blue"
     blue_str = "blue"
     d_sue1_p1 = "How fund is distributed."
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at PartnerUnits"
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at VoiceUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
     d_sue1_p4 = f"Money = {default_money_magnitude()} "
     laborunit_str = "      AwardUnits"
@@ -315,12 +315,12 @@ def fund_graph0(
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_str)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_str)
     add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
-    partnerunit_str = "partnerunit"
+    voiceunit_str = "voiceunit"
     purple_str = "purple"
-    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, partnerunit_str, purple_str)
-    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, partnerunit_str, purple_str)
-    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, partnerunit_str, purple_str)
-    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, partnerunit_str, purple_str)
-    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, partnerunit_str, purple_str)
+    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, voiceunit_str, purple_str)
+    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, voiceunit_str, purple_str)
+    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, voiceunit_str, purple_str)
+    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, voiceunit_str, purple_str)
+    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, voiceunit_str, purple_str)
 
     conditional_fig_show(fig, graphics_bool)

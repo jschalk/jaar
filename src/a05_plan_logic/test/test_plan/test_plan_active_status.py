@@ -14,19 +14,19 @@ from src.a05_plan_logic.plan import (
 )
 
 
-def test_PlanUnit_clear_all_partner_cred_debt_ClearsAttrs():
+def test_PlanUnit_clear_all_voice_cred_debt_ClearsAttrs():
     # ESTABLISH
     ball_str = "ball"
-    ball_plan = planunit_shop(ball_str, _all_partner_cred=55, _all_partner_debt=33)
-    assert ball_plan._all_partner_cred == 55
-    assert ball_plan._all_partner_debt == 33
+    ball_plan = planunit_shop(ball_str, all_voice_cred=55, all_voice_debt=33)
+    assert ball_plan.all_voice_cred == 55
+    assert ball_plan.all_voice_debt == 33
 
     # WHEN
-    ball_plan.clear_all_partner_cred_debt()
+    ball_plan.clear_all_voice_cred_debt()
 
     # THEN
-    assert ball_plan._all_partner_cred is None
-    assert ball_plan._all_partner_debt is None
+    assert ball_plan.all_voice_cred is None
+    assert ball_plan.all_voice_debt is None
 
 
 def test_PlanUnit_get_fund_share_ReturnsObj():
@@ -38,8 +38,8 @@ def test_PlanUnit_get_fund_share_ReturnsObj():
     assert texas_plan.get_fund_share() == 0
 
     # WHEN / THEN
-    texas_plan._fund_onset = 3
-    texas_plan._fund_cease = 14
+    texas_plan.fund_onset = 3
+    texas_plan.fund_cease = 14
     assert texas_plan.get_fund_share() == 11
 
 
@@ -103,29 +103,29 @@ def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():
         biker_awardheir.awardee_title: biker_awardheir,
     }
     sport_str = "sport"
-    sport_plan = planunit_shop(sport_str, _awardheirs=x_awardheirs)
+    sport_plan = planunit_shop(sport_str, awardheirs=x_awardheirs)
     assert sport_plan.fund_iota == 1
-    assert len(sport_plan._awardheirs) == 2
-    swim_awardheir = sport_plan._awardheirs.get(swim_str)
-    assert not swim_awardheir._fund_give
-    assert not swim_awardheir._fund_take
-    biker_awardheir = sport_plan._awardheirs.get(biker_str)
-    assert not biker_awardheir._fund_give
-    assert not biker_awardheir._fund_take
+    assert len(sport_plan.awardheirs) == 2
+    swim_awardheir = sport_plan.awardheirs.get(swim_str)
+    assert not swim_awardheir.fund_give
+    assert not swim_awardheir.fund_take
+    biker_awardheir = sport_plan.awardheirs.get(biker_str)
+    assert not biker_awardheir.fund_give
+    assert not biker_awardheir.fund_take
 
     # WHEN
-    sport_plan._fund_onset = 91
-    sport_plan._fund_cease = 820
+    sport_plan.fund_onset = 91
+    sport_plan.fund_cease = 820
     sport_plan.set_awardheirs_fund_give_fund_take()
 
     # THEN
-    print(f"{len(sport_plan._awardheirs)=}")
-    swim_awardheir = sport_plan._awardheirs.get(swim_str)
-    assert swim_awardheir._fund_give == 516
-    assert swim_awardheir._fund_take == 496
-    biker_awardheir = sport_plan._awardheirs.get(biker_str)
-    assert biker_awardheir._fund_give == 213
-    assert biker_awardheir._fund_take == 233
+    print(f"{len(sport_plan.awardheirs)=}")
+    swim_awardheir = sport_plan.awardheirs.get(swim_str)
+    assert swim_awardheir.fund_give == 516
+    assert swim_awardheir.fund_take == 496
+    biker_awardheir = sport_plan.awardheirs.get(biker_str)
+    assert biker_awardheir.fund_give == 213
+    assert biker_awardheir.fund_take == 233
 
 
 def test_PlanUnit_awardheir_exists_ReturnsObj():
@@ -137,7 +137,7 @@ def test_PlanUnit_awardheir_exists_ReturnsObj():
     assert not sport_planunit.awardheir_exists()
 
     # WHEN
-    sport_planunit._awardheirs[biker_str] = biker_awardheir
+    sport_planunit.awardheirs[biker_str] = biker_awardheir
 
     # THEN
     assert sport_planunit.awardheir_exists()
@@ -164,14 +164,14 @@ def test_PlanUnit_set_reasonheirsAcceptsNewValues():
     run_cases = {run_case.reason_state: run_case}
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
     reasonheirs = {reasonheir.reason_context: reasonheir}
-    assert ball_plan._reasonheirs == {}
+    assert ball_plan.reasonheirs == {}
 
     # WHEN
     ball_plan.set_reasonheirs(reasonheirs=reasonheirs, belief_plan_dict={})
 
     # THEN
-    assert ball_plan._reasonheirs == reasonheirs
-    assert id(ball_plan._reasonheirs) != id(reasonheirs)
+    assert ball_plan.reasonheirs == reasonheirs
+    assert id(ball_plan.reasonheirs) != id(reasonheirs)
 
 
 def test_PlanUnit_set_reasonheirsRefusesNewValues():
@@ -193,19 +193,19 @@ def test_PlanUnit_set_reasonheirsRefusesNewValues():
     # THEN
     reasonheir = reasonheir_shop(run_rope, cases=run_cases)
     reasonheirs = {reasonheir.reason_context: reasonheir}
-    assert ball_plan._reasonheirs == reasonheirs
+    assert ball_plan.reasonheirs == reasonheirs
 
 
 def test_PlanUnit_set_range_factheirs_SetsAttrNoParameters():
     # ESTABLISH
     ball_plan = planunit_shop("ball")
-    assert ball_plan._factheirs == {}
+    assert ball_plan.factheirs == {}
 
     # WHEN
     ball_plan.set_range_factheirs(belief_plan_dict={}, range_inheritors={})
 
     # THEN
-    assert ball_plan._factheirs == {}
+    assert ball_plan.factheirs == {}
 
 
 def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
@@ -233,11 +233,11 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     ball_plan.set_reasonheirs(x_belief_plan_dict, tue_reasonheirs)
 
     x_range_inheritors = {tue_rope: wk_rope}
-    assert len(ball_plan._reasonheirs) == 1
-    assert ball_plan._factheirs == {wk_rope: wk_factheir}
-    assert ball_plan._factheirs.get(wk_rope)
-    assert len(ball_plan._factheirs) == 1
-    assert ball_plan._factheirs.get(tue_rope) is None
+    assert len(ball_plan.reasonheirs) == 1
+    assert ball_plan.factheirs == {wk_rope: wk_factheir}
+    assert ball_plan.factheirs.get(wk_rope)
+    assert len(ball_plan.factheirs) == 1
+    assert ball_plan.factheirs.get(tue_rope) is None
 
     # WHEN
     ball_plan.set_range_factheirs(x_belief_plan_dict, x_range_inheritors)
@@ -246,8 +246,8 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     tue_reason_lower = 113
     tue_reason_upper = 117
     tue_factheir = factheir_shop(tue_rope, tue_rope, tue_reason_lower, tue_reason_upper)
-    assert len(ball_plan._factheirs) == 2
-    assert ball_plan._factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
+    assert len(ball_plan.factheirs) == 2
+    assert ball_plan.factheirs == {tue_rope: tue_factheir, wk_rope: wk_factheir}
 
 
 def test_PlanUnit_set_reasonunit_SetsAttr():
@@ -334,24 +334,24 @@ def test_PlanUnit_set_active_attrs_SetsNullactive_hxToNonEmpty():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
-    assert clean_plan._active_hx == {}
+    assert clean_plan.active_hx == {}
 
     # WHEN
     clean_plan.set_active_attrs(tree_traverse_count=3)
     # THEN
-    assert clean_plan._active_hx == {3: True}
+    assert clean_plan.active_hx == {3: True}
 
 
 def test_PlanUnit_set_active_attrs_IfFullactive_hxResetToTrue():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
-    clean_plan._active_hx = {0: True, 4: False}
-    assert clean_plan._active_hx != {0: True}
+    clean_plan.active_hx = {0: True, 4: False}
+    assert clean_plan.active_hx != {0: True}
     # WHEN
     clean_plan.set_active_attrs(tree_traverse_count=0)
     # THEN
-    assert clean_plan._active_hx == {0: True}
+    assert clean_plan.active_hx == {0: True}
 
 
 def test_PlanUnit_set_factunit_SetsAttr():
@@ -393,49 +393,49 @@ def test_PlanUnit_factunit_exists_ReturnsObj():
 #         reason_upper=None,
 #         reason_divisor=None,
 #     )
-#     clean_plan._active_hx = {0: True, 4: False}
-#     assert clean_plan._active_hx != {0: False}
+#     clean_plan.active_hx = {0: True, 4: False}
+#     assert clean_plan.active_hx != {0: False}
 #     # WHEN
 #     clean_plan.set_active_attrs(tree_traverse_count=0)
 #     # THEN
-#     assert clean_plan._active_hx == {0: False}
+#     assert clean_plan.active_hx == {0: False}
 
 
 def test_PlanUnit_record_active_hx_Sets_active_hx():
     # ESTABLISH
     clean_str = "clean"
     clean_plan = planunit_shop(clean_str)
-    assert clean_plan._active_hx == {}
+    assert clean_plan.active_hx == {}
 
     # WHEN
     clean_plan.record_active_hx(0, prev_active=None, now_active=True)
     # THEN
-    assert clean_plan._active_hx == {0: True}
+    assert clean_plan.active_hx == {0: True}
 
     # WHEN
     clean_plan.record_active_hx(1, prev_active=True, now_active=True)
     # THEN
-    assert clean_plan._active_hx == {0: True}
+    assert clean_plan.active_hx == {0: True}
 
     # WHEN
     clean_plan.record_active_hx(2, prev_active=True, now_active=False)
     # THEN
-    assert clean_plan._active_hx == {0: True, 2: False}
+    assert clean_plan.active_hx == {0: True, 2: False}
 
     # WHEN
     clean_plan.record_active_hx(3, prev_active=False, now_active=False)
     # THEN
-    assert clean_plan._active_hx == {0: True, 2: False}
+    assert clean_plan.active_hx == {0: True, 2: False}
 
     # WHEN
     clean_plan.record_active_hx(4, prev_active=False, now_active=True)
     # THEN
-    assert clean_plan._active_hx == {0: True, 2: False, 4: True}
+    assert clean_plan.active_hx == {0: True, 2: False, 4: True}
 
     # WHEN
     clean_plan.record_active_hx(0, prev_active=False, now_active=False)
     # THEN
-    assert clean_plan._active_hx == {0: False}
+    assert clean_plan.active_hx == {0: False}
 
 
 def test_PlanUnit_set_laborunit_empty_if_None():
@@ -459,17 +459,17 @@ def test_PlanUnit_set_laborheir_SetsAttr():
     sport_str = "sports"
     sport_plan = planunit_shop(sport_str)
     sport_plan.laborunit.add_party(party_title=swim_str)
-    # assert sport_plan._laborheir is None
+    # assert sport_plan.laborheir is None
 
     # WHEN
     sport_plan.set_laborheir(parent_laborheir=None, groupunits=None)
 
     # THEN
-    assert sport_plan._laborheir is not None
+    assert sport_plan.laborheir is not None
     swim_laborunit = laborunit_shop()
     swim_laborunit.add_party(party_title=swim_str)
     swim_laborheir = laborheir_shop()
     swim_laborheir.set_partys(
         laborunit=swim_laborunit, parent_laborheir=None, groupunits=None
     )
-    assert sport_plan._laborheir == swim_laborheir
+    assert sport_plan.laborheir == swim_laborheir

@@ -1,4 +1,4 @@
-from src.a03_group_logic.test._util.a03_str import fund_give_str, fund_take_str
+from src.a09_pack_logic.test._util.a09_str import *
 
 
 def belief_groupunit_str() -> str:

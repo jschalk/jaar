@@ -238,28 +238,28 @@ def test_MomentUnit_set_all_tranbook_SetsAttr():
     bob_bud_net = 445
     sue_x40000_bud = x_moment.get_brokerunit(sue_str).get_bud(x40000_tran_time)
     sue_x70000_bud = x_moment.get_brokerunit(sue_str).get_bud(x70000_tran_time)
-    sue_x40000_bud.set_bud_partner_net(bob_str, bob_bud_net)
-    sue_x70000_bud.set_bud_partner_net(zia_str, zia_bud_net)
+    sue_x40000_bud.set_bud_voice_net(bob_str, bob_bud_net)
+    sue_x70000_bud.set_bud_voice_net(zia_str, zia_bud_net)
 
-    assert x_moment._all_tranbook == tranbook_shop(x_moment.moment_label)
+    assert x_moment.all_tranbook == tranbook_shop(x_moment.moment_label)
     assert x_moment.paypurchase_exists(sue_str, bob_str, t55_t)
     assert x_moment.paypurchase_exists(yao_str, bob_str, t66_t)
     assert x_moment.paypurchase_exists(yao_str, sue_str, t77_t)
     assert x_moment.paypurchase_exists(sue_str, yao_str, t88_t)
     assert x_moment.paypurchase_exists(bob_str, sue_str, t99_t)
 
-    assert sue_x40000_bud.bud_partner_net_exists(bob_str)
-    assert sue_x70000_bud.bud_partner_net_exists(zia_str)
+    assert sue_x40000_bud.bud_voice_net_exists(bob_str)
+    assert sue_x70000_bud.bud_voice_net_exists(zia_str)
     # x_moment.add_budunit()
 
     # WHEN
     x_moment.set_all_tranbook()
 
     # THEN
-    assert x_moment._all_tranbook.tranunit_exists(sue_str, bob_str, t55_t)
-    assert x_moment._all_tranbook.tranunit_exists(yao_str, bob_str, t66_t)
-    assert x_moment._all_tranbook.tranunit_exists(yao_str, sue_str, t77_t)
-    assert x_moment._all_tranbook.tranunit_exists(sue_str, yao_str, t88_t)
-    assert x_moment._all_tranbook.tranunit_exists(bob_str, sue_str, t99_t)
-    assert x_moment._all_tranbook.tranunit_exists(sue_str, bob_str, x40000_tran_time)
-    assert x_moment._all_tranbook.tranunit_exists(sue_str, zia_str, x70000_tran_time)
+    assert x_moment.all_tranbook.tranunit_exists(sue_str, bob_str, t55_t)
+    assert x_moment.all_tranbook.tranunit_exists(yao_str, bob_str, t66_t)
+    assert x_moment.all_tranbook.tranunit_exists(yao_str, sue_str, t77_t)
+    assert x_moment.all_tranbook.tranunit_exists(sue_str, yao_str, t88_t)
+    assert x_moment.all_tranbook.tranunit_exists(bob_str, sue_str, t99_t)
+    assert x_moment.all_tranbook.tranunit_exists(sue_str, bob_str, x40000_tran_time)
+    assert x_moment.all_tranbook.tranunit_exists(sue_str, zia_str, x70000_tran_time)

@@ -4,15 +4,13 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_from_nested_dict,
 )
 from src.a03_group_logic.group import awardunit_shop
-from src.a03_group_logic.partner import partnerunit_shop
+from src.a03_group_logic.voice import voiceunit_shop
 from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
     awardee_title_str,
     begin_str,
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -20,6 +18,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
     close_str,
     fact_context_str,
@@ -29,7 +29,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     give_force_str,
     group_title_str,
     healer_name_str,
-    partner_name_str,
     party_title_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -41,6 +40,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     star_str,
     take_force_str,
     task_str,
+    voice_name_str,
 )
 from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
 from src.a08_belief_atom_logic.test._util.a08_str import (
@@ -100,18 +100,18 @@ def test_BeliefDelta_create_beliefatoms_EmptyBeliefs():
     assert sue_beliefdelta.beliefatoms == {}
 
 
-def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partnerunit_insert():
+def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voiceunit_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     after_sue_belief = copy_deepcopy(before_sue_belief)
     xio_str = "Xio"
-    xio_partner_cred_points = 33
-    xio_partner_debt_points = 44
-    xio_partnerunit = partnerunit_shop(
-        xio_str, xio_partner_cred_points, xio_partner_debt_points
+    xio_voice_cred_points = 33
+    xio_voice_debt_points = 44
+    xio_voiceunit = voiceunit_shop(
+        xio_str, xio_voice_cred_points, xio_voice_debt_points
     )
-    after_sue_belief.set_partnerunit(xio_partnerunit, auto_set_membership=False)
+    after_sue_belief.set_voiceunit(xio_voiceunit, auto_set_membership=False)
 
     # WHEN
     sue_beliefdelta = beliefdelta_shop()
@@ -119,31 +119,31 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partneruni
 
     # THEN
     assert (
-        len(sue_beliefdelta.beliefatoms.get(INSERT_str()).get(belief_partnerunit_str()))
+        len(sue_beliefdelta.beliefatoms.get(INSERT_str()).get(belief_voiceunit_str()))
         == 1
     )
     sue_insert_dict = sue_beliefdelta.beliefatoms.get(INSERT_str())
-    sue_partnerunit_dict = sue_insert_dict.get(belief_partnerunit_str())
-    xio_beliefatom = sue_partnerunit_dict.get(xio_str)
-    assert xio_beliefatom.get_value(partner_name_str()) == xio_str
-    assert xio_beliefatom.get_value("partner_cred_points") == xio_partner_cred_points
-    assert xio_beliefatom.get_value("partner_debt_points") == xio_partner_debt_points
+    sue_voiceunit_dict = sue_insert_dict.get(belief_voiceunit_str())
+    xio_beliefatom = sue_voiceunit_dict.get(xio_str)
+    assert xio_beliefatom.get_value(voice_name_str()) == xio_str
+    assert xio_beliefatom.get_value("voice_cred_points") == xio_voice_cred_points
+    assert xio_beliefatom.get_value("voice_debt_points") == xio_voice_debt_points
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
-def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partnerunit_delete():
+def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voiceunit_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
-    before_sue_belief.add_partnerunit("Yao")
-    before_sue_belief.add_partnerunit("Zia")
+    before_sue_belief.add_voiceunit("Yao")
+    before_sue_belief.add_voiceunit("Zia")
 
     after_sue_belief = copy_deepcopy(before_sue_belief)
 
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
 
     # WHEN
     sue_beliefdelta = beliefdelta_shop()
@@ -152,26 +152,26 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partneruni
     # THEN
     xio_beliefatom = get_from_nested_dict(
         sue_beliefdelta.beliefatoms,
-        [DELETE_str(), belief_partnerunit_str(), xio_str],
+        [DELETE_str(), belief_voiceunit_str(), xio_str],
     )
-    assert xio_beliefatom.get_value(partner_name_str()) == xio_str
+    assert xio_beliefatom.get_value(voice_name_str()) == xio_str
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     print_beliefatom_keys(sue_beliefdelta)
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
-def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partnerunit_update():
+def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voiceunit_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     after_sue_belief = copy_deepcopy(before_sue_belief)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
-    xio_partner_cred_points = 33
-    xio_partner_debt_points = 44
-    after_sue_belief.add_partnerunit(
-        xio_str, xio_partner_cred_points, xio_partner_debt_points
+    before_sue_belief.add_voiceunit(xio_str)
+    xio_voice_cred_points = 33
+    xio_voice_debt_points = 44
+    after_sue_belief.add_voiceunit(
+        xio_str, xio_voice_cred_points, xio_voice_debt_points
     )
 
     # WHEN
@@ -179,11 +179,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partneruni
     sue_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
 
     # THEN
-    x_keylist = [UPDATE_str(), belief_partnerunit_str(), xio_str]
+    x_keylist = [UPDATE_str(), belief_voiceunit_str(), xio_str]
     xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert xio_beliefatom.get_value(partner_name_str()) == xio_str
-    assert xio_beliefatom.get_value("partner_cred_points") == xio_partner_cred_points
-    assert xio_beliefatom.get_value("partner_debt_points") == xio_partner_debt_points
+    assert xio_beliefatom.get_value(voice_name_str()) == xio_str
+    assert xio_beliefatom.get_value("voice_cred_points") == xio_voice_cred_points
+    assert xio_beliefatom.get_value("voice_debt_points") == xio_voice_debt_points
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
@@ -228,48 +228,48 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_BeliefUnit
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
-def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partner_membership_insert():
+def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_membership_insert():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     after_sue_belief = copy_deepcopy(before_sue_belief)
     yao_str = "Yao"
     zia_str = "Zia"
-    temp_yao_partnerunit = partnerunit_shop(yao_str)
-    temp_zia_partnerunit = partnerunit_shop(zia_str)
-    after_sue_belief.set_partnerunit(temp_yao_partnerunit, auto_set_membership=False)
-    after_sue_belief.set_partnerunit(temp_zia_partnerunit, auto_set_membership=False)
-    after_yao_partnerunit = after_sue_belief.get_partner(yao_str)
-    after_zia_partnerunit = after_sue_belief.get_partner(zia_str)
+    temp_yao_voiceunit = voiceunit_shop(yao_str)
+    temp_zia_voiceunit = voiceunit_shop(zia_str)
+    after_sue_belief.set_voiceunit(temp_yao_voiceunit, auto_set_membership=False)
+    after_sue_belief.set_voiceunit(temp_zia_voiceunit, auto_set_membership=False)
+    after_yao_voiceunit = after_sue_belief.get_voice(yao_str)
+    after_zia_voiceunit = after_sue_belief.get_voice(zia_str)
     run_str = ";runners"
     zia_run_credit_w = 77
     zia_run_debt_w = 88
-    after_zia_partnerunit.add_membership(run_str, zia_run_credit_w, zia_run_debt_w)
-    print(f"{after_sue_belief.get_partnerunit_group_titles_dict()=}")
+    after_zia_voiceunit.add_membership(run_str, zia_run_credit_w, zia_run_debt_w)
+    print(f"{after_sue_belief.get_voiceunit_group_titles_dict()=}")
 
     # WHEN
     sue_beliefdelta = beliefdelta_shop()
-    print(f"{after_sue_belief.get_partner(zia_str)._memberships=}")
+    print(f"{after_sue_belief.get_voice(zia_str).memberships=}")
     sue_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
     # print(f"{sue_beliefdelta.beliefatoms.get(INSERT_str()).keys()=}")
     # print(
-    #     sue_beliefdelta.beliefatoms.get(INSERT_str()).get(belief_partner_membership_str()).keys()
+    #     sue_beliefdelta.beliefatoms.get(INSERT_str()).get(belief_voice_membership_str()).keys()
     # )
 
     # THEN
-    x_keylist = [INSERT_str(), belief_partnerunit_str(), yao_str]
+    x_keylist = [INSERT_str(), belief_voiceunit_str(), yao_str]
     yao_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert yao_beliefatom.get_value(partner_name_str()) == yao_str
+    assert yao_beliefatom.get_value(voice_name_str()) == yao_str
 
-    x_keylist = [INSERT_str(), belief_partnerunit_str(), zia_str]
+    x_keylist = [INSERT_str(), belief_voiceunit_str(), zia_str]
     zia_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert zia_beliefatom.get_value(partner_name_str()) == zia_str
+    assert zia_beliefatom.get_value(voice_name_str()) == zia_str
     print(f"\n{sue_beliefdelta.beliefatoms=}")
     # print(f"\n{zia_beliefatom=}")
 
-    x_keylist = [INSERT_str(), belief_partner_membership_str(), zia_str, run_str]
+    x_keylist = [INSERT_str(), belief_voice_membership_str(), zia_str, run_str]
     run_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert run_beliefatom.get_value(partner_name_str()) == zia_str
+    assert run_beliefatom.get_value(voice_name_str()) == zia_str
     assert run_beliefatom.get_value(group_title_str()) == run_str
     assert run_beliefatom.get_value("group_cred_points") == zia_run_credit_w
     assert run_beliefatom.get_value("group_debt_points") == zia_run_debt_w
@@ -282,39 +282,39 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partner_me
     assert get_beliefatom_total_count(sue_beliefdelta) == 3
 
 
-def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partner_membership_update():
+def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_membership_update():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
     zia_str = "Zia"
-    before_sue_belief.add_partnerunit(xio_str)
-    before_sue_belief.add_partnerunit(zia_str)
+    before_sue_belief.add_voiceunit(xio_str)
+    before_sue_belief.add_voiceunit(zia_str)
     run_str = ";runners"
     before_xio_credit_w = 77
     before_xio_debt_w = 88
-    before_xio_partner = before_sue_belief.get_partner(xio_str)
-    before_xio_partner.add_membership(run_str, before_xio_credit_w, before_xio_debt_w)
+    before_xio_voice = before_sue_belief.get_voice(xio_str)
+    before_xio_voice.add_membership(run_str, before_xio_credit_w, before_xio_debt_w)
     after_sue_belief = copy_deepcopy(before_sue_belief)
-    after_xio_partnerunit = after_sue_belief.get_partner(xio_str)
+    after_xio_voiceunit = after_sue_belief.get_voice(xio_str)
     after_xio_credit_w = 55
     after_xio_debt_w = 66
-    after_xio_partnerunit.add_membership(run_str, after_xio_credit_w, after_xio_debt_w)
+    after_xio_voiceunit.add_membership(run_str, after_xio_credit_w, after_xio_debt_w)
 
     # WHEN
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
 
     # THEN
-    # x_keylist = [UPDATE_str(), belief_partnerunit_str(), xio_str]
+    # x_keylist = [UPDATE_str(), belief_voiceunit_str(), xio_str]
     # xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    # assert xio_beliefatom.get_value(partner_name_str()) == xio_str
+    # assert xio_beliefatom.get_value(voice_name_str()) == xio_str
     # print(f"\n{sue_beliefdelta.beliefatoms=}")
     # print(f"\n{xio_beliefatom=}")
 
-    x_keylist = [UPDATE_str(), belief_partner_membership_str(), xio_str, run_str]
+    x_keylist = [UPDATE_str(), belief_voice_membership_str(), xio_str, run_str]
     xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert xio_beliefatom.get_value(partner_name_str()) == xio_str
+    assert xio_beliefatom.get_value(voice_name_str()) == xio_str
     assert xio_beliefatom.get_value(group_title_str()) == run_str
     assert xio_beliefatom.get_value("group_cred_points") == after_xio_credit_w
     assert xio_beliefatom.get_value("group_debt_points") == after_xio_debt_w
@@ -323,36 +323,36 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partner_me
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
-def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partner_membership_delete():
+def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_membership_delete():
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_belief.add_partnerunit(xio_str)
-    before_sue_belief.add_partnerunit(zia_str)
-    before_sue_belief.add_partnerunit(bob_str)
-    before_xio_partnerunit = before_sue_belief.get_partner(xio_str)
-    before_zia_partnerunit = before_sue_belief.get_partner(zia_str)
-    before_bob_partnerunit = before_sue_belief.get_partner(bob_str)
+    before_sue_belief.add_voiceunit(xio_str)
+    before_sue_belief.add_voiceunit(zia_str)
+    before_sue_belief.add_voiceunit(bob_str)
+    before_xio_voiceunit = before_sue_belief.get_voice(xio_str)
+    before_zia_voiceunit = before_sue_belief.get_voice(zia_str)
+    before_bob_voiceunit = before_sue_belief.get_voice(bob_str)
     run_str = ";runners"
-    before_xio_partnerunit.add_membership(run_str)
-    before_zia_partnerunit.add_membership(run_str)
+    before_xio_voiceunit.add_membership(run_str)
+    before_zia_voiceunit.add_membership(run_str)
     fly_str = ";flyers"
-    before_xio_partnerunit.add_membership(fly_str)
-    before_zia_partnerunit.add_membership(fly_str)
-    before_bob_partnerunit.add_membership(fly_str)
-    before_group_titles_dict = before_sue_belief.get_partnerunit_group_titles_dict()
+    before_xio_voiceunit.add_membership(fly_str)
+    before_zia_voiceunit.add_membership(fly_str)
+    before_bob_voiceunit.add_membership(fly_str)
+    before_group_titles_dict = before_sue_belief.get_voiceunit_group_titles_dict()
 
     after_sue_belief = copy_deepcopy(before_sue_belief)
-    after_xio_partnerunit = after_sue_belief.get_partner(xio_str)
-    after_zia_partnerunit = after_sue_belief.get_partner(zia_str)
-    after_bob_partnerunit = after_sue_belief.get_partner(bob_str)
-    after_xio_partnerunit.delete_membership(run_str)
-    after_zia_partnerunit.delete_membership(run_str)
-    after_bob_partnerunit.delete_membership(fly_str)
-    after_group_titles_dict = after_sue_belief.get_partnerunit_group_titles_dict()
+    after_xio_voiceunit = after_sue_belief.get_voice(xio_str)
+    after_zia_voiceunit = after_sue_belief.get_voice(zia_str)
+    after_bob_voiceunit = after_sue_belief.get_voice(bob_str)
+    after_xio_voiceunit.delete_membership(run_str)
+    after_zia_voiceunit.delete_membership(run_str)
+    after_bob_voiceunit.delete_membership(fly_str)
+    after_group_titles_dict = after_sue_belief.get_voiceunit_group_titles_dict()
     assert len(before_group_titles_dict.get(fly_str)) == 3
     assert len(before_group_titles_dict.get(run_str)) == 2
     assert len(after_group_titles_dict.get(fly_str)) == 2
@@ -363,9 +363,9 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_partner_me
     sue_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
 
     # THEN
-    x_keylist = [DELETE_str(), belief_partner_membership_str(), bob_str, fly_str]
+    x_keylist = [DELETE_str(), belief_voice_membership_str(), bob_str, fly_str]
     xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert xio_beliefatom.get_value(partner_name_str()) == bob_str
+    assert xio_beliefatom.get_value(voice_name_str()) == bob_str
     assert xio_beliefatom.get_value(group_title_str()) == fly_str
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
@@ -534,19 +534,19 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
     xio_str = "Xio"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_au.add_partnerunit(xio_str)
-    before_sue_au.add_partnerunit(zia_str)
-    before_sue_au.add_partnerunit(bob_str)
-    xio_partnerunit = before_sue_au.get_partner(xio_str)
-    zia_partnerunit = before_sue_au.get_partner(zia_str)
-    bob_partnerunit = before_sue_au.get_partner(bob_str)
+    before_sue_au.add_voiceunit(xio_str)
+    before_sue_au.add_voiceunit(zia_str)
+    before_sue_au.add_voiceunit(bob_str)
+    xio_voiceunit = before_sue_au.get_voice(xio_str)
+    zia_voiceunit = before_sue_au.get_voice(zia_str)
+    bob_voiceunit = before_sue_au.get_voice(bob_str)
     run_str = ";runners"
-    xio_partnerunit.add_membership(run_str)
-    zia_partnerunit.add_membership(run_str)
+    xio_voiceunit.add_membership(run_str)
+    zia_voiceunit.add_membership(run_str)
     fly_str = ";flyers"
-    xio_partnerunit.add_membership(fly_str)
-    zia_partnerunit.add_membership(fly_str)
-    bob_partnerunit.add_membership(fly_str)
+    xio_voiceunit.add_membership(fly_str)
+    zia_voiceunit.add_membership(fly_str)
+    bob_voiceunit.add_membership(fly_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -585,19 +585,19 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
     xio_str = "Xio"
     zia_str = "Zia"
     bob_str = "Bob"
-    before_sue_au.add_partnerunit(xio_str)
-    before_sue_au.add_partnerunit(zia_str)
-    before_sue_au.add_partnerunit(bob_str)
-    xio_partnerunit = before_sue_au.get_partner(xio_str)
-    zia_partnerunit = before_sue_au.get_partner(zia_str)
-    bob_partnerunit = before_sue_au.get_partner(bob_str)
+    before_sue_au.add_voiceunit(xio_str)
+    before_sue_au.add_voiceunit(zia_str)
+    before_sue_au.add_voiceunit(bob_str)
+    xio_voiceunit = before_sue_au.get_voice(xio_str)
+    zia_voiceunit = before_sue_au.get_voice(zia_str)
+    bob_voiceunit = before_sue_au.get_voice(bob_str)
     run_str = ";runners"
-    xio_partnerunit.add_membership(run_str)
-    zia_partnerunit.add_membership(run_str)
+    xio_voiceunit.add_membership(run_str)
+    zia_voiceunit.add_membership(run_str)
     fly_str = ";flyers"
-    xio_partnerunit.add_membership(fly_str)
-    zia_partnerunit.add_membership(fly_str)
-    bob_partnerunit.add_membership(fly_str)
+    xio_voiceunit.add_membership(fly_str)
+    zia_voiceunit.add_membership(fly_str)
+    bob_voiceunit.add_membership(fly_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -640,11 +640,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
     before_sue_au = beliefunit_shop(sue_str)
     xio_str = "Xio"
     zia_str = "Zia"
-    before_sue_au.add_partnerunit(xio_str)
-    before_sue_au.add_partnerunit(zia_str)
-    xio_partnerunit = before_sue_au.get_partner(xio_str)
+    before_sue_au.add_voiceunit(xio_str)
+    before_sue_au.add_voiceunit(zia_str)
+    xio_voiceunit = before_sue_au.get_voice(xio_str)
     run_str = ";runners"
-    xio_partnerunit.add_membership(run_str)
+    xio_voiceunit.add_membership(run_str)
     sports_str = "sports"
     sports_rope = before_sue_au.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1147,7 +1147,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_party
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
     sports_str = "sports"
     sports_rope = before_sue_belief.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1181,7 +1181,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_party
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
     sports_str = "sports"
     sports_rope = before_sue_belief.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1217,7 +1217,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
     sports_str = "sports"
     sports_rope = before_sue_belief.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1251,7 +1251,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
 
     after_sue_belief = copy_deepcopy(before_sue_belief)
     sports_str = "sports"
@@ -1286,7 +1286,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
     sports_str = "sports"
     sports_rope = before_sue_belief.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1325,7 +1325,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    before_sue_belief.add_partnerunit(xio_str)
+    before_sue_belief.add_voiceunit(xio_str)
     sports_str = "sports"
     sports_rope = before_sue_belief.make_l1_rope(sports_str)
     ball_str = "basketball"
@@ -1364,8 +1364,8 @@ def test_BeliefDelta_add_all_beliefatoms_Creates_BeliefAtoms():
 
     after_sue_belief = beliefunit_shop(sue_str)
     xio_str = "Xio"
-    temp_xio_partnerunit = partnerunit_shop(xio_str)
-    after_sue_belief.set_partnerunit(temp_xio_partnerunit, auto_set_membership=False)
+    temp_xio_voiceunit = voiceunit_shop(xio_str)
+    after_sue_belief.set_voiceunit(temp_xio_voiceunit, auto_set_membership=False)
     sports_str = "sports"
     sports_rope = after_sue_belief.make_l1_rope(sports_str)
     ball_str = "basketball"

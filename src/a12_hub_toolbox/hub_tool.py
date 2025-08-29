@@ -150,18 +150,18 @@ def save_arbitrary_beliefevent(
     moment_label: str,
     belief_name: str,
     event_int: int,
-    partners: list[list] = None,
+    voices: list[list] = None,
     facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
 ) -> str:
-    partners = get_empty_list_if_None(partners)
+    voices = get_empty_list_if_None(voices)
     facts = get_empty_list_if_None(facts)
     x_beliefunit = beliefunit_shop(belief_name, moment_label)
-    for partner_list in partners:
+    for voice_list in voices:
         try:
-            partner_cred_points = partner_list[1]
+            voice_cred_points = voice_list[1]
         except Exception:
-            partner_cred_points = None
-        x_beliefunit.add_partnerunit(partner_list[0], partner_cred_points)
+            voice_cred_points = None
+        x_beliefunit.add_voiceunit(voice_list[0], voice_cred_points)
     for fact_tup in facts:
         x_reason_context = fact_tup[0]
         x_fact_state = fact_tup[1]
@@ -207,12 +207,10 @@ def cellunit_get_from_dir(dirpath: str) -> CellUnit:
         return cellunit_get_from_dict(open_json(cell_json_path))
 
 
-def create_cell_partner_mandate_ledger_json(dirpath: str):
+def create_cell_voice_mandate_ledger_json(dirpath: str):
     if cell := cellunit_get_from_dir(dirpath):
-        cell.calc_partner_mandate_ledger()
-        save_json(
-            dirpath, "cell_partner_mandate_ledger.json", cell._partner_mandate_ledger
-        )
+        cell.calc_voice_mandate_ledger()
+        save_json(dirpath, "cell_voice_mandate_ledger.json", cell._voice_mandate_ledger)
 
 
 def save_bud_file(
@@ -263,9 +261,9 @@ def save_beliefpoint_file(
     x_bud_time: TimeLinePoint = None,
 ):
     x_beliefpoint.cash_out()
-    if x_beliefpoint._rational is False:
+    if x_beliefpoint.rational is False:
         raise _save_valid_beliefpoint_Exception(
-            "BeliefPoint could not be saved BeliefUnit._rational is False"
+            "BeliefPoint could not be saved BeliefUnit.rational is False"
         )
     beliefpoint_json_path = create_beliefpoint_path(
         moment_mstr_dir,

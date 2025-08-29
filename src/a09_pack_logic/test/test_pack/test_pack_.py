@@ -1,13 +1,13 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a03_group_logic.partner import partnerunit_shop
+from src.a03_group_logic.voice import voiceunit_shop
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
-    belief_partnerunit_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
+    belief_voiceunit_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
 from src.a08_belief_atom_logic.test._util.a08_str import (
@@ -366,9 +366,9 @@ def test_PackUnit_get_json_ReturnsObj_WithBeliefDeltaPopulated():
   "delta": {
     "0": {
       "crud": "DELETE",
-      "dimen": "belief_partnerunit",
+      "dimen": "belief_voiceunit",
       "jkeys": {
-        "partner_name": "Sue"
+        "voice_name": "Sue"
       },
       "jvalues": {}
     },
@@ -478,29 +478,29 @@ def test_PackUnit_get_deltametric_json_ReturnsObj():
     assert x_is_json(delta_json)
 
 
-def test_PackUnit_add_beliefatom_Sets_BeliefUnit_partnerunits():
+def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_partner_cred_points = 55
-    bob_partner_debt_points = 66
-    bob_partnerunit = partnerunit_shop(
-        bob_str, bob_partner_cred_points, bob_partner_debt_points
+    bob_voice_cred_points = 55
+    bob_voice_debt_points = 66
+    bob_voiceunit = voiceunit_shop(
+        bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
-    cw_str = partner_cred_points_str()
-    dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.to_dict()=}")
+    cw_str = voice_cred_points_str()
+    dw_str = voice_debt_points_str()
+    print(f"{bob_voiceunit.to_dict()=}")
     bob_required_dict = {
-        partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())
+        voice_name_str(): bob_voiceunit.to_dict().get(voice_name_str())
     }
-    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     assert bob_packunit._beliefdelta.beliefatoms == {}
 
     # WHEN
     bob_packunit.add_beliefatom(
-        dimen=belief_partnerunit_str(),
+        dimen=belief_voiceunit_str(),
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -510,13 +510,13 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_partnerunits():
     assert len(bob_packunit._beliefdelta.beliefatoms) == 1
     assert (
         bob_packunit._beliefdelta.beliefatoms.get(INSERT_str())
-        .get(belief_partnerunit_str())
+        .get(belief_voiceunit_str())
         .get(bob_str)
         is not None
     )
 
 
-def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_partner():
+def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     # ESTABLISH
     sue_str = "Sue"
     sue_packunit = packunit_shop(sue_str)
@@ -524,16 +524,16 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_partner():
     before_sue_beliefunit = beliefunit_shop(sue_str)
     yao_str = "Yao"
     zia_str = "Zia"
-    before_sue_beliefunit.add_partnerunit(yao_str)
-    assert before_sue_beliefunit.partner_exists(yao_str)
-    assert before_sue_beliefunit.partner_exists(zia_str) is False
-    dimen = belief_partnerunit_str()
+    before_sue_beliefunit.add_voiceunit(yao_str)
+    assert before_sue_beliefunit.voice_exists(yao_str)
+    assert before_sue_beliefunit.voice_exists(zia_str) is False
+    dimen = belief_voiceunit_str()
     x_beliefatom = beliefatom_shop(dimen, INSERT_str())
-    x_beliefatom.set_jkey(partner_name_str(), zia_str)
-    x_partner_cred_points = 55
-    x_partner_debt_points = 66
-    x_beliefatom.set_jvalue("partner_cred_points", x_partner_cred_points)
-    x_beliefatom.set_jvalue("partner_debt_points", x_partner_debt_points)
+    x_beliefatom.set_jkey(voice_name_str(), zia_str)
+    x_voice_cred_points = 55
+    x_voice_debt_points = 66
+    x_beliefatom.set_jvalue("voice_cred_points", x_voice_cred_points)
+    x_beliefatom.set_jvalue("voice_debt_points", x_voice_debt_points)
     sue_packunit._beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_packunit._beliefdelta.beliefatoms.keys()=}")
 
@@ -541,12 +541,12 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_partner():
     after_sue_beliefunit = sue_packunit.get_edited_belief(before_sue_beliefunit)
 
     # THEN
-    yao_partnerunit = after_sue_beliefunit.get_partner(yao_str)
-    zia_partnerunit = after_sue_beliefunit.get_partner(zia_str)
-    assert yao_partnerunit is not None
-    assert zia_partnerunit is not None
-    assert zia_partnerunit.partner_cred_points == x_partner_cred_points
-    assert zia_partnerunit.partner_debt_points == x_partner_debt_points
+    yao_voiceunit = after_sue_beliefunit.get_voice(yao_str)
+    zia_voiceunit = after_sue_beliefunit.get_voice(zia_str)
+    assert yao_voiceunit is not None
+    assert zia_voiceunit is not None
+    assert zia_voiceunit.voice_cred_points == x_voice_cred_points
+    assert zia_voiceunit.voice_debt_points == x_voice_debt_points
 
 
 def test_PackUnit_get_edited_belief_RaisesErrorWhenpackAttrsAndBeliefAttrsAreNotTheSame():
@@ -569,26 +569,26 @@ def test_PackUnit_is_empty_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_packunit = packunit_shop(bob_str)
-    bob_partner_cred_points = 55
-    bob_partner_debt_points = 66
-    bob_partnerunit = partnerunit_shop(
-        bob_str, bob_partner_cred_points, bob_partner_debt_points
+    bob_voice_cred_points = 55
+    bob_voice_debt_points = 66
+    bob_voiceunit = voiceunit_shop(
+        bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
-    cw_str = partner_cred_points_str()
-    dw_str = partner_debt_points_str()
-    print(f"{bob_partnerunit.to_dict()=}")
+    cw_str = voice_cred_points_str()
+    dw_str = voice_debt_points_str()
+    print(f"{bob_voiceunit.to_dict()=}")
     bob_required_dict = {
-        partner_name_str(): bob_partnerunit.to_dict().get(partner_name_str())
+        voice_name_str(): bob_voiceunit.to_dict().get(voice_name_str())
     }
-    bob_optional_dict = {cw_str: bob_partnerunit.to_dict().get(cw_str)}
-    bob_optional_dict[dw_str] = bob_partnerunit.to_dict().get(dw_str)
+    bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
+    bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
     assert bob_packunit._beliefdelta.beliefatoms == {}
     assert bob_packunit.is_empty()
 
     # WHEN
     bob_packunit.add_beliefatom(
-        dimen=belief_partnerunit_str(),
+        dimen=belief_voiceunit_str(),
         crud_str=INSERT_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -607,7 +607,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for UPDATE_str operation
     bob_packunit_update = packunit_shop(bob_str)
     bob_packunit_update.add_beliefatom(
-        dimen=belief_partnerunit_str(),
+        dimen=belief_voiceunit_str(),
         crud_str=UPDATE_str(),
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -618,7 +618,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for DELETE_str operation
     bob_packunit_delete = packunit_shop(bob_str)
     bob_packunit_delete.add_beliefatom(
-        dimen=belief_partnerunit_str(),
+        dimen=belief_voiceunit_str(),
         crud_str=DELETE_str(),
         jkeys=bob_required_dict,
         jvalues={},

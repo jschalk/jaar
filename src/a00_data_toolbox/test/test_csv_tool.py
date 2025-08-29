@@ -108,16 +108,18 @@ def test_export_sqlite_tables_to_csv(env_dir_setup_cleanup):
 
 def test_replace_csv_column_from_string():
     # ESTABLISH
-    csv_string = """id,name,status
+    csv_string = """id,name,classification
 1,Alice,pending
 2,Bob,in progress
 """
 
     # WHEN
-    modified_csv = replace_csv_column_from_string(csv_string, "status", "complete")
+    modified_csv = replace_csv_column_from_string(
+        csv_string, "classification", "complete"
+    )
 
     # THEN
-    expected_csv = """id,name,status
+    expected_csv = """id,name,classification
 1,Alice,complete
 2,Bob,complete
 """
@@ -126,26 +128,26 @@ def test_replace_csv_column_from_string():
     rows = list(reader)
 
     # Assertions
-    assert all(row["status"] == "complete" for row in rows)
+    assert all(row["classification"] == "complete" for row in rows)
     assert rows[0]["name"] == "Alice"
     assert rows[1]["name"] == "Bob"
 
 
 def test_delete_column_from_csv_string():
     # ESTABLISH
-    csv_input = """id,name,status
-1,Alice,active
-2,Bob,inactive
+    csv_input = """id,name,classification
+1,Alice,current
+2,Bob,incurrent
 """
 
     # WHEN
-    result = delete_column_from_csv_string(csv_input, "status")
+    result = delete_column_from_csv_string(csv_input, "classification")
 
     # THEN
     # Parse the result using csv.DictReader
     reader = csv_DictReader(io_StringIO(result))
     rows = list(reader)
-    # Expected CSV output after removing 'status'
+    # Expected CSV output after removing 'classification'
     expected_output = [{"id": "1", "name": "Alice"}, {"id": "2", "name": "Bob"}]
     assert reader.fieldnames == ["id", "name"]
     assert rows == expected_output

@@ -30,8 +30,8 @@ from src.a01_term_logic.term import (
     HealerName,
     LabelTerm,
     MomentLabel,
-    PartnerName,
     RopeTerm,
+    VoiceName,
 )
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import (
@@ -54,10 +54,10 @@ from src.a03_group_logic.group import (
     membership_shop,
 )
 from src.a03_group_logic.labor import LaborUnit
-from src.a03_group_logic.partner import (
-    PartnerUnit,
-    partnerunit_shop,
-    partnerunits_get_from_dict,
+from src.a03_group_logic.voice import (
+    VoiceUnit,
+    voiceunit_shop,
+    voiceunits_get_from_dict,
 )
 from src.a04_reason_logic.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from src.a05_plan_logic.healer import HealerUnit
@@ -89,11 +89,11 @@ class reason_caseException(Exception):
     pass
 
 
-class PartnerUnitsCredorDebtorSumException(Exception):
+class VoiceUnitsCredorDebtorSumException(Exception):
     pass
 
 
-class PartnerMissingException(Exception):
+class VoiceMissingException(Exception):
     pass
 
 
@@ -113,7 +113,7 @@ class healerunit_group_title_Exception(Exception):
     pass
 
 
-class _gogo_calc_stop_calc_Exception(Exception):
+class gogo_calc_stop_calc_Exception(Exception):
     pass
 
 
@@ -121,7 +121,7 @@ class _gogo_calc_stop_calc_Exception(Exception):
 class BeliefUnit:
     moment_label: MomentLabel = None
     belief_name: BeliefName = None
-    partners: dict[PartnerName, PartnerUnit] = None
+    voices: dict[VoiceName, VoiceUnit] = None
     planroot: PlanUnit = None
     tally: float = None
     fund_pool: FundNum = None
@@ -137,15 +137,15 @@ class BeliefUnit:
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
     _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
-    _tree_traverse_count: int = None
-    _rational: bool = None
-    _keeps_justified: bool = None
-    _keeps_buildable: bool = None
-    _sum_healerunit_share: float = None
-    _groupunits: dict[GroupTitle, GroupUnit] = None
-    _offtrack_kids_star_set: set[RopeTerm] = None
-    _offtrack_fund: float = None
-    _reason_contexts: set[RopeTerm] = None
+    tree_traverse_count: int = None
+    rational: bool = None
+    keeps_justified: bool = None
+    keeps_buildable: bool = None
+    sum_healerunit_share: float = None
+    groupunits: dict[GroupTitle, GroupUnit] = None
+    offtrack_kids_star_set: set[RopeTerm] = None
+    offtrack_fund: float = None
+    reason_contexts: set[RopeTerm] = None
     _range_inheritors: dict[RopeTerm, RopeTerm] = None
     # cash_out Calculated field end
 
@@ -165,10 +165,10 @@ class BeliefUnit:
 
         self.fund_pool = validate_fund_pool(x_fund_pool)
 
-    def set_partner_respect(self, x_partner_pool: int):
-        self.set_credor_respect(x_partner_pool)
-        self.set_debtor_respect(x_partner_pool)
-        self.set_fund_pool(x_partner_pool)
+    def set_voice_respect(self, x_voice_pool: int):
+        self.set_credor_respect(x_voice_pool)
+        self.set_debtor_respect(x_voice_pool)
+        self.set_fund_pool(x_voice_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
         if valid_finance_ratio(new_credor_respect, self.respect_bit) is False:
@@ -302,8 +302,8 @@ class BeliefUnit:
     ):
         x_groupunit = self.get_groupunit(group_title)
         if x_groupunit is not None:
-            x_groupunit._fund_give += awardheir_fund_give
-            x_groupunit._fund_take += awardheir_fund_take
+            x_groupunit.fund_give += awardheir_fund_give
+            x_groupunit.fund_take += awardheir_fund_take
 
     def add_to_groupunit_fund_agenda_give_take(
         self,
@@ -313,118 +313,112 @@ class BeliefUnit:
     ):
         x_groupunit = self.get_groupunit(group_title)
         if awardline_fund_give is not None and awardline_fund_take is not None:
-            x_groupunit._fund_agenda_give += awardline_fund_give
-            x_groupunit._fund_agenda_take += awardline_fund_take
+            x_groupunit.fund_agenda_give += awardline_fund_give
+            x_groupunit.fund_agenda_take += awardline_fund_take
 
-    def add_to_partnerunit_fund_give_take(
+    def add_to_voiceunit_fund_give_take(
         self,
-        partnerunit_partner_name: PartnerName,
+        voiceunit_voice_name: VoiceName,
         fund_give,
         fund_take: float,
         fund_agenda_give: float,
         fund_agenda_take: float,
     ):
-        x_partnerunit = self.get_partner(partnerunit_partner_name)
-        x_partnerunit.add_fund_give_take(
+        x_voiceunit = self.get_voice(voiceunit_voice_name)
+        x_voiceunit.add_fund_give_take(
             fund_give=fund_give,
             fund_take=fund_take,
             fund_agenda_give=fund_agenda_give,
             fund_agenda_take=fund_agenda_take,
         )
 
-    def del_partnerunit(self, partner_name: str):
-        self.partners.pop(partner_name)
+    def del_voiceunit(self, voice_name: str):
+        self.voices.pop(voice_name)
 
-    def add_partnerunit(
+    def add_voiceunit(
         self,
-        partner_name: PartnerName,
-        partner_cred_points: int = None,
-        partner_debt_points: int = None,
+        voice_name: VoiceName,
+        voice_cred_points: int = None,
+        voice_debt_points: int = None,
     ):
         x_knot = self.knot
-        partnerunit = partnerunit_shop(
-            partner_name, partner_cred_points, partner_debt_points, x_knot
+        voiceunit = voiceunit_shop(
+            voice_name, voice_cred_points, voice_debt_points, x_knot
         )
-        self.set_partnerunit(partnerunit)
+        self.set_voiceunit(voiceunit)
 
-    def set_partnerunit(
-        self, x_partnerunit: PartnerUnit, auto_set_membership: bool = True
-    ):
-        if x_partnerunit.knot != self.knot:
-            x_partnerunit.knot = self.knot
-        if x_partnerunit.respect_bit != self.respect_bit:
-            x_partnerunit.respect_bit = self.respect_bit
-        if auto_set_membership and x_partnerunit.memberships_exist() is False:
-            x_partnerunit.add_membership(x_partnerunit.partner_name)
-        self.partners[x_partnerunit.partner_name] = x_partnerunit
+    def set_voiceunit(self, x_voiceunit: VoiceUnit, auto_set_membership: bool = True):
+        if x_voiceunit.knot != self.knot:
+            x_voiceunit.knot = self.knot
+        if x_voiceunit.respect_bit != self.respect_bit:
+            x_voiceunit.respect_bit = self.respect_bit
+        if auto_set_membership and x_voiceunit.memberships_exist() is False:
+            x_voiceunit.add_membership(x_voiceunit.voice_name)
+        self.voices[x_voiceunit.voice_name] = x_voiceunit
 
-    def partner_exists(self, partner_name: PartnerName) -> bool:
-        return self.get_partner(partner_name) is not None
+    def voice_exists(self, voice_name: VoiceName) -> bool:
+        return self.get_voice(voice_name) is not None
 
-    def edit_partnerunit(
+    def edit_voiceunit(
         self,
-        partner_name: PartnerName,
-        partner_cred_points: int = None,
-        partner_debt_points: int = None,
+        voice_name: VoiceName,
+        voice_cred_points: int = None,
+        voice_debt_points: int = None,
     ):
-        if self.partners.get(partner_name) is None:
-            raise PartnerMissingException(
-                f"PartnerUnit '{partner_name}' does not exist."
-            )
-        x_partnerunit = self.get_partner(partner_name)
-        if partner_cred_points is not None:
-            x_partnerunit.set_partner_cred_points(partner_cred_points)
-        if partner_debt_points is not None:
-            x_partnerunit.set_partner_debt_points(partner_debt_points)
-        self.set_partnerunit(x_partnerunit)
+        if self.voices.get(voice_name) is None:
+            raise VoiceMissingException(f"VoiceUnit '{voice_name}' does not exist.")
+        x_voiceunit = self.get_voice(voice_name)
+        if voice_cred_points is not None:
+            x_voiceunit.set_voice_cred_points(voice_cred_points)
+        if voice_debt_points is not None:
+            x_voiceunit.set_voice_debt_points(voice_debt_points)
+        self.set_voiceunit(x_voiceunit)
 
-    def clear_partnerunits_memberships(self):
-        for x_partnerunit in self.partners.values():
-            x_partnerunit.clear_memberships()
+    def clear_voiceunits_memberships(self):
+        for x_voiceunit in self.voices.values():
+            x_voiceunit.clear_memberships()
 
-    def get_partner(self, partner_name: PartnerName) -> PartnerUnit:
-        return self.partners.get(partner_name)
+    def get_voice(self, voice_name: VoiceName) -> VoiceUnit:
+        return self.voices.get(voice_name)
 
-    def get_partnerunit_group_titles_dict(self) -> dict[GroupTitle, set[PartnerName]]:
+    def get_voiceunit_group_titles_dict(self) -> dict[GroupTitle, set[VoiceName]]:
         x_dict = {}
-        for x_partnerunit in self.partners.values():
-            for x_group_title in x_partnerunit._memberships.keys():
-                partner_name_set = x_dict.get(x_group_title)
-                if partner_name_set is None:
-                    x_dict[x_group_title] = {x_partnerunit.partner_name}
+        for x_voiceunit in self.voices.values():
+            for x_group_title in x_voiceunit.memberships.keys():
+                voice_name_set = x_dict.get(x_group_title)
+                if voice_name_set is None:
+                    x_dict[x_group_title] = {x_voiceunit.voice_name}
                 else:
-                    partner_name_set.add(x_partnerunit.partner_name)
-                    x_dict[x_group_title] = partner_name_set
+                    voice_name_set.add(x_voiceunit.voice_name)
+                    x_dict[x_group_title] = voice_name_set
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
         x_groupunit.fund_iota = self.fund_iota
-        self._groupunits[x_groupunit.group_title] = x_groupunit
+        self.groupunits[x_groupunit.group_title] = x_groupunit
 
     def groupunit_exists(self, group_title: GroupTitle) -> bool:
-        return self._groupunits.get(group_title) is not None
+        return self.groupunits.get(group_title) is not None
 
     def get_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
-        return self._groupunits.get(x_group_title)
+        return self.groupunits.get(x_group_title)
 
     def create_symmetry_groupunit(self, x_group_title: GroupTitle) -> GroupUnit:
         x_groupunit = groupunit_shop(x_group_title)
-        for x_partnerunit in self.partners.values():
+        for x_voiceunit in self.voices.values():
             x_membership = membership_shop(
                 group_title=x_group_title,
-                group_cred_points=x_partnerunit.partner_cred_points,
-                group_debt_points=x_partnerunit.partner_debt_points,
-                partner_name=x_partnerunit.partner_name,
+                group_cred_points=x_voiceunit.voice_cred_points,
+                group_debt_points=x_voiceunit.voice_debt_points,
+                voice_name=x_voiceunit.voice_name,
             )
             x_groupunit.set_membership(x_membership)
         return x_groupunit
 
     def get_tree_traverse_generated_groupunits(self) -> set[GroupTitle]:
-        x_partnerunit_group_titles = set(
-            self.get_partnerunit_group_titles_dict().keys()
-        )
-        all_group_titles = set(self._groupunits.keys())
-        return all_group_titles.difference(x_partnerunit_group_titles)
+        x_voiceunit_group_titles = set(self.get_voiceunit_group_titles_dict().keys())
+        all_group_titles = set(self.groupunits.keys())
+        return all_group_titles.difference(x_voiceunit_group_titles)
 
     def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
         if self.moment_label == plan_rope:
@@ -509,8 +503,8 @@ class BeliefUnit:
         self.cash_out()
         if not problem:
             return self._plan_dict
-        if self._keeps_justified is False:
-            exception_str = f"Cannot return problem set because _keeps_justified={self._keeps_justified}."
+        if self.keeps_justified is False:
+            exception_str = f"Cannot return problem set because keeps_justified={self.keeps_justified}."
             raise Exception_keeps_justified(exception_str)
 
         x_plans = self._plan_dict.values()
@@ -522,10 +516,10 @@ class BeliefUnit:
         self.cash_out()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_label(
-            level=self.planroot._level,
+            tree_level=self.planroot.tree_level,
             reasons=self.planroot.reasonunits,
             awardunits=self.planroot.awardunits,
-            uid=self.planroot._uid,
+            uid=self.planroot.uid,
             task=self.planroot.task,
             plan_rope=self.planroot.get_plan_rope(),
         )
@@ -533,19 +527,19 @@ class BeliefUnit:
         x_plan_list = [self.planroot]
         while x_plan_list != []:
             parent_plan = x_plan_list.pop()
-            for plan_kid in parent_plan._kids.values():
+            for plan_kid in parent_plan.kids.values():
                 self._eval_tree_metrics(
                     parent_plan, plan_kid, tree_metrics, x_plan_list
                 )
         return tree_metrics
 
     def _eval_tree_metrics(self, parent_plan, plan_kid, tree_metrics, x_plan_list):
-        plan_kid._level = parent_plan._level + 1
+        plan_kid.tree_level = parent_plan.tree_level + 1
         tree_metrics.evaluate_label(
-            level=plan_kid._level,
+            tree_level=plan_kid.tree_level,
             reasons=plan_kid.reasonunits,
             awardunits=plan_kid.awardunits,
-            uid=plan_kid._uid,
+            uid=plan_kid.uid,
             task=plan_kid.task,
             plan_rope=plan_kid.get_plan_rope(),
         )
@@ -561,18 +555,18 @@ class BeliefUnit:
         plan_uid_dict = tree_metrics.uid_dict
 
         for x_plan in self.get_plan_dict().values():
-            if x_plan._uid is None or plan_uid_dict.get(x_plan._uid) > 1:
+            if x_plan.uid is None or plan_uid_dict.get(x_plan.uid) > 1:
                 new_plan_uid_max = plan_uid_max + 1
                 self.edit_plan_attr(
                     plan_rope=x_plan.get_plan_rope(), uid=new_plan_uid_max
                 )
                 plan_uid_max = new_plan_uid_max
 
-    def get_level_count(self, level) -> int:
+    def get_level_count(self, tree_level) -> int:
         tree_metrics = self.get_tree_metrics()
         level_count = None
         try:
-            level_count = tree_metrics.level_count[level]
+            level_count = tree_metrics.tree_level_count[level]
         except KeyError:
             level_count = 0
         return level_count
@@ -680,19 +674,19 @@ class BeliefUnit:
             self._create_missing_plans(rope=kid_rope)
 
     def _get_filtered_awardunits_plan(self, x_plan: PlanUnit) -> PlanUnit:
-        _awardunits_to_delete = [
-            _awardunit_awardee_title
-            for _awardunit_awardee_title in x_plan.awardunits.keys()
-            if self.get_partnerunit_group_titles_dict().get(_awardunit_awardee_title)
+        awardunits_to_delete = [
+            awardunit_awardee_title
+            for awardunit_awardee_title in x_plan.awardunits.keys()
+            if self.get_voiceunit_group_titles_dict().get(awardunit_awardee_title)
             is None
         ]
-        for _awardunit_awardee_title in _awardunits_to_delete:
-            x_plan.awardunits.pop(_awardunit_awardee_title)
+        for awardunit_awardee_title in awardunits_to_delete:
+            x_plan.awardunits.pop(awardunit_awardee_title)
         if x_plan.laborunit is not None:
             _partys_to_delete = [
                 _partyunit_party_title
                 for _partyunit_party_title in x_plan.laborunit._partys
-                if self.get_partnerunit_group_titles_dict().get(_partyunit_party_title)
+                if self.get_voiceunit_group_titles_dict().get(_partyunit_party_title)
                 is None
             ]
             for _partyunit_party_title in _partys_to_delete:
@@ -726,7 +720,7 @@ class BeliefUnit:
     def _shift_plan_kids(self, x_rope: RopeTerm):
         parent_rope = get_parent_rope(x_rope)
         d_temp_plan = self.get_plan_obj(x_rope)
-        for kid in d_temp_plan._kids.values():
+        for kid in d_temp_plan.kids.values():
             self.set_plan(kid, parent_rope=parent_rope)
 
     def set_belief_name(self, new_belief_name):
@@ -759,8 +753,8 @@ class BeliefUnit:
         x_plan.set_plan_label(new_plan_label)
         x_plan.parent_rope = parent_rope
         plan_parent = self.get_plan_obj(get_parent_rope(old_rope))
-        plan_parent._kids.pop(get_tail_label(old_rope, self.knot))
-        plan_parent._kids[x_plan.plan_label] = x_plan
+        plan_parent.kids.pop(get_tail_label(old_rope, self.knot))
+        plan_parent.kids[x_plan.plan_label] = x_plan
 
     def _planroot_find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
         self.planroot.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
@@ -769,8 +763,8 @@ class BeliefUnit:
         while plan_iter_list != []:
             listed_plan = plan_iter_list.pop()
             # add all plan_children in plan list
-            if listed_plan._kids is not None:
-                for plan_kid in listed_plan._kids.values():
+            if listed_plan.kids is not None:
+                for plan_kid in listed_plan.kids.values():
                     plan_iter_list.append(plan_kid)
                     if is_sub_rope(plan_kid.parent_rope, sub_rope=old_rope):
                         plan_kid.parent_rope = rebuild_rope(
@@ -839,7 +833,7 @@ class BeliefUnit:
     ):
         if healerunit is not None:
             for x_healer_name in healerunit._healer_names:
-                if self.get_partnerunit_group_titles_dict().get(x_healer_name) is None:
+                if self.get_voiceunit_group_titles_dict().get(x_healer_name) is None:
                     exception_str = f"Plan cannot edit healerunit because group_title '{x_healer_name}' does not exist as group in Belief"
                     raise healerunit_group_title_Exception(exception_str)
 
@@ -912,54 +906,50 @@ reason_case:    {reason_case}"""
     ) -> tuple[dict[str, float], dict[str, float]]:
         credit_ledger = {}
         debt_ledger = {}
-        for x_partnerunit in self.partners.values():
-            credit_ledger[x_partnerunit.partner_name] = (
-                x_partnerunit.partner_cred_points
-            )
-            debt_ledger[x_partnerunit.partner_name] = x_partnerunit.partner_debt_points
+        for x_voiceunit in self.voices.values():
+            credit_ledger[x_voiceunit.voice_name] = x_voiceunit.voice_cred_points
+            debt_ledger[x_voiceunit.voice_name] = x_voiceunit.voice_debt_points
         return credit_ledger, debt_ledger
 
     def _allot_offtrack_fund(self):
-        self._add_to_partnerunits_fund_give_take(self._offtrack_fund)
+        self._add_to_voiceunits_fund_give_take(self.offtrack_fund)
 
-    def get_partnerunits_partner_cred_points_sum(self) -> float:
+    def get_voiceunits_voice_cred_points_sum(self) -> float:
         return sum(
-            partnerunit.get_partner_cred_points()
-            for partnerunit in self.partners.values()
+            voiceunit.get_voice_cred_points() for voiceunit in self.voices.values()
         )
 
-    def get_partnerunits_partner_debt_points_sum(self) -> float:
+    def get_voiceunits_voice_debt_points_sum(self) -> float:
         return sum(
-            partnerunit.get_partner_debt_points()
-            for partnerunit in self.partners.values()
+            voiceunit.get_voice_debt_points() for voiceunit in self.voices.values()
         )
 
-    def _add_to_partnerunits_fund_give_take(self, plan_fund_share: float):
+    def _add_to_voiceunits_fund_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
         fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
         fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
-        for x_partner_name, partner_fund_give in fund_give_allot.items():
-            self.get_partner(x_partner_name).add_fund_give(partner_fund_give)
+        for x_voice_name, voice_fund_give in fund_give_allot.items():
+            self.get_voice(x_voice_name).add_fund_give(voice_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_contexts:
-                self.get_partner(x_partner_name).add_fund_agenda_give(partner_fund_give)
-        for x_partner_name, partner_fund_take in fund_take_allot.items():
-            self.get_partner(x_partner_name).add_fund_take(partner_fund_take)
+            if not self.reason_contexts:
+                self.get_voice(x_voice_name).add_fund_agenda_give(voice_fund_give)
+        for x_voice_name, voice_fund_take in fund_take_allot.items():
+            self.get_voice(x_voice_name).add_fund_take(voice_fund_take)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_contexts:
-                self.get_partner(x_partner_name).add_fund_agenda_take(partner_fund_take)
+            if not self.reason_contexts:
+                self.get_voice(x_voice_name).add_fund_agenda_take(voice_fund_take)
 
-    def _add_to_partnerunits_fund_agenda_give_take(self, plan_fund_share: float):
+    def _add_to_voiceunits_fund_agenda_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
         fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
         fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
-        for x_partner_name, partner_fund_give in fund_give_allot.items():
-            self.get_partner(x_partner_name).add_fund_agenda_give(partner_fund_give)
-        for x_partner_name, partner_fund_take in fund_take_allot.items():
-            self.get_partner(x_partner_name).add_fund_agenda_take(partner_fund_take)
+        for x_voice_name, voice_fund_give in fund_give_allot.items():
+            self.get_voice(x_voice_name).add_fund_agenda_give(voice_fund_give)
+        for x_voice_name, voice_fund_take in fund_take_allot.items():
+            self.get_voice(x_voice_name).add_fund_agenda_take(voice_fund_take)
 
     def _reset_groupunits_fund_give_take(self):
-        for groupunit_obj in self._groupunits.values():
+        for groupunit_obj in self.groupunits.values():
             groupunit_obj.clear_fund_give_take()
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardUnit]):
@@ -969,65 +959,59 @@ reason_case:    {reason_case}"""
                 self.set_groupunit(self.create_symmetry_groupunit(x_awardee_title))
             self.add_to_groupunit_fund_give_fund_take(
                 group_title=awardunit_obj.awardee_title,
-                awardheir_fund_give=awardunit_obj._fund_give,
-                awardheir_fund_take=awardunit_obj._fund_take,
+                awardheir_fund_give=awardunit_obj.fund_give,
+                awardheir_fund_take=awardunit_obj.fund_take,
             )
 
     def _allot_fund_belief_agenda(self):
         for plan in self._plan_dict.values():
             # If there are no awardlines associated with plan
-            # allot fund_share via general partnerunit
+            # allot fund_share via general voiceunit
             # cred ratio and debt ratio
-            # if plan.is_agenda_plan() and plan._awardlines == {}:
+            # if plan.is_agenda_plan() and plan.awardlines == {}:
             if plan.is_agenda_plan():
                 if plan.awardheir_exists():
-                    for x_awardline in plan._awardlines.values():
+                    for x_awardline in plan.awardlines.values():
                         self.add_to_groupunit_fund_agenda_give_take(
                             group_title=x_awardline.awardee_title,
-                            awardline_fund_give=x_awardline._fund_give,
-                            awardline_fund_take=x_awardline._fund_take,
+                            awardline_fund_give=x_awardline.fund_give,
+                            awardline_fund_take=x_awardline.fund_take,
                         )
                 else:
-                    self._add_to_partnerunits_fund_agenda_give_take(
-                        plan.get_fund_share()
-                    )
+                    self._add_to_voiceunits_fund_agenda_give_take(plan.get_fund_share())
 
     def _allot_groupunits_fund(self):
-        for x_groupunit in self._groupunits.values():
+        for x_groupunit in self.groupunits.values():
             x_groupunit._set_membership_fund_give_fund_take()
-            for x_membership in x_groupunit._memberships.values():
-                self.add_to_partnerunit_fund_give_take(
-                    partnerunit_partner_name=x_membership.partner_name,
-                    fund_give=x_membership._fund_give,
-                    fund_take=x_membership._fund_take,
-                    fund_agenda_give=x_membership._fund_agenda_give,
-                    fund_agenda_take=x_membership._fund_agenda_take,
+            for x_membership in x_groupunit.memberships.values():
+                self.add_to_voiceunit_fund_give_take(
+                    voiceunit_voice_name=x_membership.voice_name,
+                    fund_give=x_membership.fund_give,
+                    fund_take=x_membership.fund_take,
+                    fund_agenda_give=x_membership.fund_agenda_give,
+                    fund_agenda_take=x_membership.fund_agenda_take,
                 )
 
-    def _set_partnerunits_fund_agenda_ratios(self):
+    def _set_voiceunits_fund_agenda_ratios(self):
         fund_agenda_ratio_give_sum = sum(
-            x_partnerunit._fund_agenda_give for x_partnerunit in self.partners.values()
+            x_voiceunit.fund_agenda_give for x_voiceunit in self.voices.values()
         )
         fund_agenda_ratio_take_sum = sum(
-            x_partnerunit._fund_agenda_take for x_partnerunit in self.partners.values()
+            x_voiceunit.fund_agenda_take for x_voiceunit in self.voices.values()
         )
-        x_partnerunits_partner_cred_points_sum = (
-            self.get_partnerunits_partner_cred_points_sum()
-        )
-        x_partnerunits_partner_debt_points_sum = (
-            self.get_partnerunits_partner_debt_points_sum()
-        )
-        for x_partnerunit in self.partners.values():
-            x_partnerunit.set_fund_agenda_ratio_give_take(
+        x_voiceunits_voice_cred_points_sum = self.get_voiceunits_voice_cred_points_sum()
+        x_voiceunits_voice_debt_points_sum = self.get_voiceunits_voice_debt_points_sum()
+        for x_voiceunit in self.voices.values():
+            x_voiceunit.set_fund_agenda_ratio_give_take(
                 fund_agenda_ratio_give_sum=fund_agenda_ratio_give_sum,
                 fund_agenda_ratio_take_sum=fund_agenda_ratio_take_sum,
-                partnerunits_partner_cred_points_sum=x_partnerunits_partner_cred_points_sum,
-                partnerunits_partner_debt_points_sum=x_partnerunits_partner_debt_points_sum,
+                voiceunits_voice_cred_points_sum=x_voiceunits_voice_cred_points_sum,
+                voiceunits_voice_debt_points_sum=x_voiceunits_voice_debt_points_sum,
             )
 
-    def _reset_partnerunit_fund_give_take(self):
-        for partnerunit in self.partners.values():
-            partnerunit.clear_fund_give_take()
+    def _reset_voiceunit_fund_give_take(self):
+        for voiceunit in self.voices.values():
+            voiceunit.clear_fund_give_take()
 
     def plan_exists(self, rope: RopeTerm) -> bool:
         if rope in {"", None}:
@@ -1086,39 +1070,39 @@ reason_case:    {reason_case}"""
         while plan_list != []:
             x_plan = plan_list.pop()
             x_plan.clear_gogo_calc_stop_calc()
-            for plan_kid in x_plan._kids.values():
+            for plan_kid in x_plan.kids.values():
                 plan_kid.set_parent_rope(x_plan.get_plan_rope())
-                plan_kid.set_level(x_plan._level)
+                plan_kid.set_tree_level(x_plan.tree_level)
                 plan_list.append(plan_kid)
             self._plan_dict[x_plan.get_plan_rope()] = x_plan
             for x_reason_context in x_plan.reasonunits.keys():
-                self._reason_contexts.add(x_reason_context)
+                self.reason_contexts.add(x_reason_context)
 
     def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
-        exception_str = f"Error has occurred, Plan '{plan_rope}' is having _gogo_calc and _stop_calc attributes set twice"
-        raise _gogo_calc_stop_calc_Exception(exception_str)
+        exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and stop_calc attributes set twice"
+        raise gogo_calc_stop_calc_Exception(exception_str)
 
     def _distribute_math_attrs(self, math_plan: PlanUnit):
         single_range_plan_list = [math_plan]
         while single_range_plan_list != []:
             r_plan = single_range_plan_list.pop()
-            if r_plan._range_evaluated:
+            if r_plan.range_evaluated:
                 self._raise_gogo_calc_stop_calc_exception(r_plan.get_plan_rope())
             if r_plan.is_math():
-                r_plan._gogo_calc = r_plan.begin
-                r_plan._stop_calc = r_plan.close
+                r_plan.gogo_calc = r_plan.begin
+                r_plan.stop_calc = r_plan.close
             else:
                 parent_rope = get_parent_rope(
                     rope=r_plan.get_plan_rope(), knot=r_plan.knot
                 )
                 parent_plan = self.get_plan_obj(parent_rope)
-                r_plan._gogo_calc = parent_plan._gogo_calc
-                r_plan._stop_calc = parent_plan._stop_calc
+                r_plan.gogo_calc = parent_plan.gogo_calc
+                r_plan.stop_calc = parent_plan.stop_calc
                 self._range_inheritors[r_plan.get_plan_rope()] = (
                     math_plan.get_plan_rope()
                 )
             r_plan._mold_gogo_calc_stop_calc()
-            single_range_plan_list.extend(iter(r_plan._kids.values()))
+            single_range_plan_list.extend(iter(r_plan.kids.values()))
 
     def _set_plantree_range_attrs(self):
         for x_plan in self._plan_dict.values():
@@ -1130,9 +1114,9 @@ reason_case:    {reason_case}"""
                 and x_plan.get_kids_star_sum() == 0
                 and x_plan.star != 0
             ):
-                self._offtrack_kids_star_set.add(x_plan.get_plan_rope())
+                self.offtrack_kids_star_set.add(x_plan.get_plan_rope())
 
-    def _set_groupunit_partnerunit_funds(self, keep_exceptions):
+    def _set_groupunit_voiceunit_funds(self, keep_exceptions):
         for x_plan in self._plan_dict.values():
             x_plan.set_awardheirs_fund_give_fund_take()
             if x_plan.is_kidless():
@@ -1157,33 +1141,33 @@ reason_case:    {reason_case}"""
             x_plan_obj.add_to_descendant_task_count(x_descendant_task_count)
             if x_plan_obj.is_kidless():
                 x_plan_obj.set_kidless_awardlines()
-                child_awardlines = x_plan_obj._awardlines
+                child_awardlines = x_plan_obj.awardlines
             else:
                 x_plan_obj.set_awardlines(child_awardlines)
 
-            if x_plan_obj._chore:
+            if x_plan_obj.chore:
                 x_descendant_task_count += 1
 
             if (
                 group_everyone != False
-                and x_plan_obj._all_partner_cred != False
-                and x_plan_obj._all_partner_debt != False
-                and x_plan_obj._awardheirs != {}
+                and x_plan_obj.all_voice_cred != False
+                and x_plan_obj.all_voice_debt != False
+                and x_plan_obj.awardheirs != {}
             ) or (
                 group_everyone != False
-                and x_plan_obj._all_partner_cred is False
-                and x_plan_obj._all_partner_debt is False
+                and x_plan_obj.all_voice_cred is False
+                and x_plan_obj.all_voice_debt is False
             ):
                 group_everyone = False
             elif group_everyone != False:
                 group_everyone = True
-            x_plan_obj._all_partner_cred = group_everyone
-            x_plan_obj._all_partner_debt = group_everyone
+            x_plan_obj.all_voice_cred = group_everyone
+            x_plan_obj.all_voice_debt = group_everyone
 
             if x_plan_obj.healerunit.any_healer_name_exists():
                 keep_justified_by_problem = False
                 healerunit_count += 1
-                self._sum_healerunit_share += x_plan_obj.get_fund_share()
+                self.sum_healerunit_share += x_plan_obj.get_fund_share()
             if x_plan_obj.problem_bool:
                 keep_justified_by_problem = True
 
@@ -1191,63 +1175,61 @@ reason_case:    {reason_case}"""
             if keep_exceptions:
                 exception_str = f"PlanUnit '{rope}' cannot sponsor ancestor keeps."
                 raise Exception_keeps_justified(exception_str)
-            self._keeps_justified = False
+            self.keeps_justified = False
 
     def _clear_plantree_fund_and_active_status_attrs(self):
         for x_plan in self._plan_dict.values():
             x_plan.clear_awardlines()
             x_plan.clear_descendant_task_count()
-            x_plan.clear_all_partner_cred_debt()
+            x_plan.clear_all_voice_cred_debt()
 
     def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
-        x_plan.set_reasonheirs(self._plan_dict, parent_plan._reasonheirs)
+        x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
         x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
-        tt_count = self._tree_traverse_count
-        x_plan.set_active_attrs(tt_count, self._groupunits, self.belief_name)
+        tt_count = self.tree_traverse_count
+        x_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
 
     def _allot_fund_share(self, plan: PlanUnit):
         if plan.awardheir_exists():
-            self._set_groupunits_fund_share(plan._awardheirs)
+            self._set_groupunits_fund_share(plan.awardheirs)
         elif plan.awardheir_exists() is False:
-            self._add_to_partnerunits_fund_give_take(plan.get_fund_share())
+            self._add_to_voiceunits_fund_give_take(plan.get_fund_share())
 
     def _create_groupunits_metrics(self):
-        self._groupunits = {}
+        self.groupunits = {}
         for (
             group_title,
-            partner_name_set,
-        ) in self.get_partnerunit_group_titles_dict().items():
+            voice_name_set,
+        ) in self.get_voiceunit_group_titles_dict().items():
             x_groupunit = groupunit_shop(group_title, knot=self.knot)
-            for x_partner_name in partner_name_set:
-                x_membership = self.get_partner(x_partner_name).get_membership(
-                    group_title
-                )
+            for x_voice_name in voice_name_set:
+                x_membership = self.get_voice(x_voice_name).get_membership(group_title)
                 x_groupunit.set_membership(x_membership)
                 self.set_groupunit(x_groupunit)
 
-    def _set_partnerunit_groupunit_respect_ledgers(self):
+    def _set_voiceunit_groupunit_respect_ledgers(self):
         self.credor_respect = validate_respect_num(self.credor_respect)
         self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
         credor_allot = allot_scale(credor_ledger, self.credor_respect, self.respect_bit)
         debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.respect_bit)
-        for x_partner_name, partner_credor_pool in credor_allot.items():
-            self.get_partner(x_partner_name).set_credor_pool(partner_credor_pool)
-        for x_partner_name, partner_debtor_pool in debtor_allot.items():
-            self.get_partner(x_partner_name).set_debtor_pool(partner_debtor_pool)
+        for x_voice_name, voice_credor_pool in credor_allot.items():
+            self.get_voice(x_voice_name).set_credor_pool(voice_credor_pool)
+        for x_voice_name, voice_debtor_pool in debtor_allot.items():
+            self.get_voice(x_voice_name).set_debtor_pool(voice_debtor_pool)
         self._create_groupunits_metrics()
-        self._reset_partnerunit_fund_give_take()
+        self._reset_voiceunit_fund_give_take()
 
     def _clear_plan_dict_and_belief_obj_settle_attrs(self):
         self._plan_dict = {self.planroot.get_plan_rope(): self.planroot}
-        self._rational = False
-        self._tree_traverse_count = 0
-        self._offtrack_kids_star_set = set()
-        self._reason_contexts = set()
+        self.rational = False
+        self.tree_traverse_count = 0
+        self.offtrack_kids_star_set = set()
+        self.reason_contexts = set()
         self._range_inheritors = {}
-        self._keeps_justified = True
-        self._keeps_buildable = False
-        self._sum_healerunit_share = 0
+        self.keeps_justified = True
+        self.keeps_buildable = False
+        self.sum_healerunit_share = 0
         self._keep_dict = {}
         self._healers_dict = {}
 
@@ -1256,41 +1238,41 @@ reason_case:    {reason_case}"""
             if x_plan.root:
                 x_plan.set_factheirs(x_plan.factunits)
                 x_plan.set_root_plan_reasonheirs()
-                x_plan.set_laborheir(None, self._groupunits)
+                x_plan.set_laborheir(None, self.groupunits)
                 x_plan.inherit_awardheirs()
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
-                x_plan.set_factheirs(parent_plan._factheirs)
-                x_plan.set_laborheir(parent_plan._laborheir, self._groupunits)
-                x_plan.inherit_awardheirs(parent_plan._awardheirs)
+                x_plan.set_factheirs(parent_plan.factheirs)
+                x_plan.set_laborheir(parent_plan.laborheir, self.groupunits)
+                x_plan.inherit_awardheirs(parent_plan.awardheirs)
             x_plan.set_awardheirs_fund_give_fund_take()
 
     def cash_out(self, keep_exceptions: bool = False):
         self._clear_plan_dict_and_belief_obj_settle_attrs()
         self._set_plan_dict()
         self._set_plantree_range_attrs()
-        self._set_partnerunit_groupunit_respect_ledgers()
-        self._clear_partnerunit_fund_attrs()
+        self._set_voiceunit_groupunit_respect_ledgers()
+        self._clear_voiceunit_fund_attrs()
         self._clear_plantree_fund_and_active_status_attrs()
         self._set_plantree_factheirs_laborheir_awardheirs()
 
         max_count = self.max_tree_traverse
-        while not self._rational and self._tree_traverse_count < max_count:
+        while not self.rational and self.tree_traverse_count < max_count:
             self._set_plantree_active_status_attrs()
             self._set_rational_attr()
-            self._tree_traverse_count += 1
+            self.tree_traverse_count += 1
 
         self._set_plantree_fund_attrs(self.planroot)
-        self._set_groupunit_partnerunit_funds(keep_exceptions)
-        self._set_partnerunit_fund_related_attrs()
+        self._set_groupunit_voiceunit_funds(keep_exceptions)
+        self._set_voiceunit_fund_related_attrs()
         self._set_belief_keep_attrs()
 
     def _set_plantree_active_status_attrs(self):
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
             if x_plan.root:
-                tt_count = self._tree_traverse_count
+                tt_count = self.tree_traverse_count
                 root_plan = self.planroot
-                root_plan.set_active_attrs(tt_count, self._groupunits, self.belief_name)
+                root_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
             else:
                 parent_plan = self.get_plan_obj(x_plan.parent_rope)
                 self._set_kids_active_status_attrs(x_plan, parent_plan)
@@ -1301,16 +1283,16 @@ reason_case:    {reason_case}"""
         cache_plan_list = [root_plan]
         while cache_plan_list != []:
             parent_plan = cache_plan_list.pop()
-            kids_plans = parent_plan._kids.items()
+            kids_plans = parent_plan.kids.items()
             x_ledger = {x_rope: plan_kid.star for x_rope, plan_kid in kids_plans}
-            parent_fund_num = parent_plan._fund_cease - parent_plan._fund_onset
+            parent_fund_num = parent_plan.fund_cease - parent_plan.fund_onset
             alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
 
             fund_onset = None
             fund_cease = None
-            for x_plan in parent_plan._kids.values():
+            for x_plan in parent_plan.kids.values():
                 if fund_onset is None:
-                    fund_onset = parent_plan._fund_onset
+                    fund_onset = parent_plan.fund_onset
                     fund_cease = fund_onset + alloted_fund_num.get(x_plan.plan_label)
                 else:
                     fund_onset = fund_cease
@@ -1321,34 +1303,34 @@ reason_case:    {reason_case}"""
     def _set_rational_attr(self):
         any_plan_active_status_has_altered = False
         for plan in self._plan_dict.values():
-            if plan._active_hx.get(self._tree_traverse_count) is not None:
+            if plan.active_hx.get(self.tree_traverse_count) is not None:
                 any_plan_active_status_has_altered = True
 
         if any_plan_active_status_has_altered is False:
-            self._rational = True
+            self.rational = True
 
-    def _set_partnerunit_fund_related_attrs(self):
+    def _set_voiceunit_fund_related_attrs(self):
         self.set_offtrack_fund()
         self._allot_offtrack_fund()
         self._allot_fund_belief_agenda()
         self._allot_groupunits_fund()
-        self._set_partnerunits_fund_agenda_ratios()
+        self._set_voiceunits_fund_agenda_ratios()
 
     def _set_belief_keep_attrs(self):
         self._set_keep_dict()
         self._healers_dict = self._get_healers_dict()
-        self._keeps_buildable = self._get_buildable_keeps()
+        self.keeps_buildable = self._get_buildable_keeps()
 
     def _set_keep_dict(self):
-        if self._keeps_justified is False:
-            self._sum_healerunit_share = 0
+        if self.keeps_justified is False:
+            self.sum_healerunit_share = 0
         for x_plan in self._plan_dict.values():
-            if self._sum_healerunit_share == 0:
-                x_plan._healerunit_ratio = 0
+            if self.sum_healerunit_share == 0:
+                x_plan.healerunit_ratio = 0
             else:
-                x_sum = self._sum_healerunit_share
-                x_plan._healerunit_ratio = x_plan.get_fund_share() / x_sum
-            if self._keeps_justified and x_plan.healerunit.any_healer_name_exists():
+                x_sum = self.sum_healerunit_share
+                x_plan.healerunit_ratio = x_plan.get_fund_share() / x_sum
+            if self.keeps_justified and x_plan.healerunit.any_healer_name_exists():
                 self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
     def _get_healers_dict(self) -> dict[HealerName, dict[RopeTerm, PlanUnit]]:
@@ -1356,11 +1338,11 @@ reason_case:    {reason_case}"""
         for x_keep_rope, x_keep_plan in self._keep_dict.items():
             for x_healer_name in x_keep_plan.healerunit._healer_names:
                 x_groupunit = self.get_groupunit(x_healer_name)
-                for x_partner_name in x_groupunit._memberships.keys():
-                    if _healers_dict.get(x_partner_name) is None:
-                        _healers_dict[x_partner_name] = {x_keep_rope: x_keep_plan}
+                for x_voice_name in x_groupunit.memberships.keys():
+                    if _healers_dict.get(x_voice_name) is None:
+                        _healers_dict[x_voice_name] = {x_keep_rope: x_keep_plan}
                     else:
-                        healer_dict = _healers_dict.get(x_partner_name)
+                        healer_dict = _healers_dict.get(x_voice_name)
                         healer_dict[x_keep_rope] = x_keep_plan
         return _healers_dict
 
@@ -1370,9 +1352,9 @@ reason_case:    {reason_case}"""
             for keep_rope in self._keep_dict.keys()
         )
 
-    def _clear_partnerunit_fund_attrs(self):
+    def _clear_voiceunit_fund_attrs(self):
         self._reset_groupunits_fund_give_take()
-        self._reset_partnerunit_fund_give_take()
+        self._reset_voiceunit_fund_give_take()
 
     def get_plan_tree_ordered_rope_list(
         self, no_range_descendants: bool = False
@@ -1411,16 +1393,16 @@ reason_case:    {reason_case}"""
                 x_dict[fact_rope] = fact_obj.to_dict()
         return x_dict
 
-    def get_partnerunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
+    def get_voiceunits_dict(self, all_attrs: bool = False) -> dict[str, str]:
         x_dict = {}
-        if self.partners is not None:
-            for partner_name, partner_obj in self.partners.items():
-                x_dict[partner_name] = partner_obj.to_dict(all_attrs)
+        if self.voices is not None:
+            for voice_name, voice_obj in self.voices.items():
+                x_dict[voice_name] = voice_obj.to_dict(all_attrs)
         return x_dict
 
     def to_dict(self) -> dict[str, str]:
         x_dict = {
-            "partners": self.get_partnerunits_dict(),
+            "voices": self.get_voiceunits_dict(),
             "tally": self.tally,
             "fund_pool": self.fund_pool,
             "fund_iota": self.fund_iota,
@@ -1454,8 +1436,8 @@ reason_case:    {reason_case}"""
         )
 
     def set_offtrack_fund(self) -> float:
-        star_set = self._offtrack_kids_star_set
-        self._offtrack_fund = sum(
+        star_set = self.offtrack_kids_star_set
+        self.offtrack_fund = sum(
             self.get_plan_obj(x_ropeterm).get_fund_share() for x_ropeterm in star_set
         )
 
@@ -1476,8 +1458,8 @@ def beliefunit_shop(
         belief_name=belief_name,
         tally=get_1_if_None(tally),
         moment_label=moment_label,
-        partners=get_empty_dict_if_None(),
-        _groupunits={},
+        voices=get_empty_dict_if_None(),
+        groupunits={},
         knot=default_knot_if_None(knot),
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),
@@ -1488,24 +1470,24 @@ def beliefunit_shop(
         _plan_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
         _healers_dict=get_empty_dict_if_None(),
-        _keeps_justified=get_False_if_None(),
-        _keeps_buildable=get_False_if_None(),
-        _sum_healerunit_share=get_0_if_None(),
-        _offtrack_kids_star_set=set(),
-        _reason_contexts=set(),
+        keeps_justified=get_False_if_None(),
+        keeps_buildable=get_False_if_None(),
+        sum_healerunit_share=get_0_if_None(),
+        offtrack_kids_star_set=set(),
+        reason_contexts=set(),
         _range_inheritors={},
     )
     x_belief.planroot = planunit_shop(
         root=True,
-        _uid=1,
-        _level=0,
+        uid=1,
+        tree_level=0,
         moment_label=x_belief.moment_label,
         knot=x_belief.knot,
         fund_iota=x_belief.fund_iota,
         parent_rope="",
     )
     x_belief.set_max_tree_traverse(3)
-    x_belief._rational = False
+    x_belief.rational = False
     return x_belief
 
 
@@ -1538,9 +1520,9 @@ def get_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.debtor_respect = obj_from_belief_dict(belief_dict, "debtor_respect")
     x_belief.last_pack_id = obj_from_belief_dict(belief_dict, "last_pack_id")
     x_knot = x_belief.knot
-    x_partners = obj_from_belief_dict(belief_dict, "partners", x_knot).values()
-    for x_partnerunit in x_partners:
-        x_belief.set_partnerunit(x_partnerunit)
+    x_voices = obj_from_belief_dict(belief_dict, "voices", x_knot).values()
+    for x_voiceunit in x_voices:
+        x_belief.set_voiceunit(x_voiceunit)
     create_planroot_from_belief_dict(x_belief, belief_dict)
     return x_belief
 
@@ -1551,8 +1533,8 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         root=True,
         plan_label=x_belief.moment_label,
         parent_rope="",
-        _level=0,
-        _uid=get_obj_from_plan_dict(planroot_dict, "_uid"),
+        tree_level=0,
+        uid=get_obj_from_plan_dict(planroot_dict, "uid"),
         star=get_obj_from_plan_dict(planroot_dict, "star"),
         begin=get_obj_from_plan_dict(planroot_dict, "begin"),
         close=get_obj_from_plan_dict(planroot_dict, "close"),
@@ -1567,7 +1549,7 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         healerunit=get_obj_from_plan_dict(planroot_dict, "healerunit"),
         factunits=get_obj_from_plan_dict(planroot_dict, "factunits"),
         awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
-        _is_expanded=get_obj_from_plan_dict(planroot_dict, "_is_expanded"),
+        is_expanded=get_obj_from_plan_dict(planroot_dict, "is_expanded"),
         knot=x_belief.knot,
         moment_label=x_belief.moment_label,
         fund_iota=default_fund_iota_if_None(x_belief.fund_iota),
@@ -1579,14 +1561,14 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
     to_evaluate_plan_dicts = []
     parent_rope_str = "parent_rope"
     # for every kid dict, set parent_rope in dict, add to to_evaluate_list
-    for x_dict in get_obj_from_plan_dict(planroot_dict, "_kids").values():
+    for x_dict in get_obj_from_plan_dict(planroot_dict, "kids").values():
         x_dict[parent_rope_str] = x_belief.moment_label
         to_evaluate_plan_dicts.append(x_dict)
 
     while to_evaluate_plan_dicts != []:
         plan_dict = to_evaluate_plan_dicts.pop(0)
         # for every kid dict, set parent_rope in dict, add to to_evaluate_list
-        for kid_dict in get_obj_from_plan_dict(plan_dict, "_kids").values():
+        for kid_dict in get_obj_from_plan_dict(plan_dict, "kids").values():
             parent_rope = get_obj_from_plan_dict(plan_dict, parent_rope_str)
             kid_plan_label = get_obj_from_plan_dict(plan_dict, "plan_label")
             kid_dict[parent_rope_str] = x_belief.make_rope(parent_rope, kid_plan_label)
@@ -1594,7 +1576,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
         x_plankid = planunit_shop(
             plan_label=get_obj_from_plan_dict(plan_dict, "plan_label"),
             star=get_obj_from_plan_dict(plan_dict, "star"),
-            _uid=get_obj_from_plan_dict(plan_dict, "_uid"),
+            uid=get_obj_from_plan_dict(plan_dict, "uid"),
             begin=get_obj_from_plan_dict(plan_dict, "begin"),
             close=get_obj_from_plan_dict(plan_dict, "close"),
             numor=get_obj_from_plan_dict(plan_dict, "numor"),
@@ -1609,7 +1591,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
             healerunit=get_obj_from_plan_dict(plan_dict, "healerunit"),
             awardunits=get_obj_from_plan_dict(plan_dict, "awardunits"),
             factunits=get_obj_from_plan_dict(plan_dict, "factunits"),
-            _is_expanded=get_obj_from_plan_dict(plan_dict, "_is_expanded"),
+            is_expanded=get_obj_from_plan_dict(plan_dict, "is_expanded"),
         )
         x_belief.set_plan(x_plankid, parent_rope=plan_dict[parent_rope_str])
 
@@ -1617,8 +1599,8 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
 def obj_from_belief_dict(
     x_dict: dict[str, dict], dict_key: str, _knot: str = None
 ) -> any:
-    if dict_key == "partners":
-        return partnerunits_get_from_dict(x_dict[dict_key], _knot)
+    if dict_key == "voices":
+        return voiceunits_get_from_dict(x_dict[dict_key], _knot)
     elif dict_key == "_max_tree_traverse":
         return (
             x_dict[dict_key]

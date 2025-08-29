@@ -3,8 +3,7 @@ from src.a99_module_linter.linter import get_module_descs
 
 
 def test_check_Modules_filenames_FollowFileNameConventions_NoNamingCollision():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     all_level1_py_files = set()
     for module_desc, module_dir in get_module_descs().items():

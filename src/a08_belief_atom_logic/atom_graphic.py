@@ -18,15 +18,15 @@ class AtomPlotlyShape:
     def set_attrs(self):
         self.base_width = 0.1
         self.base_h = 0.2
-        self.level = 0
-        self.level_width0 = 0.1
-        self.level_width1 = 0.9
+        self.tree_level = 0
+        self.tree_level_width0 = 0.1
+        self.tree_level_width1 = 0.9
         self.display_str = f"{get_normal_table_name(self.x_beliefatom.dimen)} {self.x_beliefatom.crud_str} Order: {self.x_beliefatom.atom_order}"
 
     def set_level(self, x_level, x_width0, x_width1, color=None):
-        self.level = x_level
-        self.level_width0 = x_width0
-        self.level_width1 = x_width1
+        self.tree_level = x_level
+        self.tree_level_width0 = x_width0
+        self.tree_level_width1 = x_width1
         self.color = color
 
 
@@ -66,12 +66,12 @@ def add_rect_str(fig, x, y, text):
 
 
 def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
-    level_bump = atomplotyshape.level * 0.05
+    level_bump = atomplotyshape.tree_level * 0.05
     home_form_x0 = atomplotyshape.base_width
     home_form_x1 = 1 - atomplotyshape.base_width
     home_width = home_form_x1 - home_form_x0
-    shape_x0 = home_form_x0 + (home_width * atomplotyshape.level_width0)
-    shape_x1 = home_form_x0 + (home_width * atomplotyshape.level_width1)
+    shape_x0 = home_form_x0 + (home_width * atomplotyshape.tree_level_width0)
+    shape_x1 = home_form_x0 + (home_width * atomplotyshape.tree_level_width1)
     shape_y0 = level_bump + atomplotyshape.base_h
     shape_y1 = level_bump + atomplotyshape.base_h + 0.05
     x_color = "RoyalBlue" if atomplotyshape.color is None else atomplotyshape.color
@@ -161,8 +161,8 @@ def beliefatom_periodic_table0() -> plotly_Figure:
     fig = get_beliefatom_base_fig()
 
     case_str = "belief_plan_reason_caseunit"
-    belief_partnerunit_insert = get_insert_rect("belief_partnerunit")
-    belief_partner_membership_insert = get_insert_rect("belief_partner_membership")
+    belief_voiceunit_insert = get_insert_rect("belief_voiceunit")
+    belief_voice_membership_insert = get_insert_rect("belief_voice_membership")
     belief_planunit_insert = get_insert_rect("belief_planunit")
     belief_plan_awardunit_insert = get_insert_rect("belief_plan_awardunit")
     belief_plan_partyunit_insert = get_insert_rect("belief_plan_partyunit")
@@ -170,8 +170,8 @@ def beliefatom_periodic_table0() -> plotly_Figure:
     belief_plan_factunit_insert = get_insert_rect("belief_plan_factunit")
     belief_plan_reasonunit_insert = get_insert_rect("belief_plan_reasonunit")
     belief_plan_reason_caseunit_insert = get_insert_rect(case_str)
-    belief_partnerunit_update = get_update_rect("belief_partnerunit")
-    belief_partner_membership_update = get_update_rect("belief_partner_membership")
+    belief_voiceunit_update = get_update_rect("belief_voiceunit")
+    belief_voice_membership_update = get_update_rect("belief_voice_membership")
     belief_planunit_update = get_update_rect("belief_planunit")
     belief_plan_awardunit_update = get_update_rect("belief_plan_awardunit")
     belief_plan_factunit_update = get_update_rect("belief_plan_factunit")
@@ -184,17 +184,17 @@ def beliefatom_periodic_table0() -> plotly_Figure:
     belief_plan_healerunit_delete = get_delete_rect("belief_plan_healerunit")
     belief_plan_awardunit_delete = get_delete_rect("belief_plan_awardunit")
     belief_planunit_delete = get_delete_rect("belief_planunit")
-    belief_partner_membership_delete = get_delete_rect("belief_partner_membership")
-    belief_partnerunit_delete = get_delete_rect("belief_partnerunit")
+    belief_voice_membership_delete = get_delete_rect("belief_voice_membership")
+    belief_voiceunit_delete = get_delete_rect("belief_voiceunit")
     beliefunit_update = get_update_rect("beliefunit")
 
     green_str = "Green"
-    belief_partnerunit_insert.set_level(0, 0, 0.25, green_str)
-    belief_partnerunit_update.set_level(0, 0.25, 0.75, green_str)
-    belief_partnerunit_delete.set_level(0, 0.75, 1, green_str)
-    belief_partner_membership_insert.set_level(1, 0, 0.3, green_str)
-    belief_partner_membership_update.set_level(1, 0.3, 0.7, green_str)
-    belief_partner_membership_delete.set_level(1, 0.7, 1, green_str)
+    belief_voiceunit_insert.set_level(0, 0, 0.25, green_str)
+    belief_voiceunit_update.set_level(0, 0.25, 0.75, green_str)
+    belief_voiceunit_delete.set_level(0, 0.75, 1, green_str)
+    belief_voice_membership_insert.set_level(1, 0, 0.3, green_str)
+    belief_voice_membership_update.set_level(1, 0.3, 0.7, green_str)
+    belief_voice_membership_delete.set_level(1, 0.7, 1, green_str)
     belief_plan_healerunit_insert.set_level(3, 0.2, 0.4)
     belief_plan_healerunit_delete.set_level(3, 0.6, 0.8)
     belief_plan_partyunit_insert.set_level(4, 0.2, 0.4)
@@ -240,15 +240,15 @@ def beliefatom_periodic_table0() -> plotly_Figure:
     # WHEN / THEN
 
     # Add shapes
-    add_atom_rect(fig, belief_partnerunit_insert)
-    add_atom_rect(fig, belief_partner_membership_insert)
+    add_atom_rect(fig, belief_voiceunit_insert)
+    add_atom_rect(fig, belief_voice_membership_insert)
     add_atom_rect(fig, belief_plan_partyunit_insert)
     add_atom_rect(fig, belief_plan_healerunit_insert)
     add_atom_rect(fig, belief_plan_factunit_insert)
     add_atom_rect(fig, belief_plan_reasonunit_insert)
     add_atom_rect(fig, belief_plan_reason_caseunit_insert)
-    add_atom_rect(fig, belief_partnerunit_update)
-    add_atom_rect(fig, belief_partner_membership_update)
+    add_atom_rect(fig, belief_voiceunit_update)
+    add_atom_rect(fig, belief_voice_membership_update)
     add_atom_rect(fig, belief_plan_factunit_update)
     add_atom_rect(fig, belief_plan_reason_caseunit_update)
     add_atom_rect(fig, belief_plan_reasonunit_update)
@@ -263,8 +263,8 @@ def beliefatom_periodic_table0() -> plotly_Figure:
     add_atom_rect(fig, belief_planunit_insert)
     add_atom_rect(fig, belief_planunit_update)
     add_atom_rect(fig, belief_planunit_delete)
-    add_atom_rect(fig, belief_partner_membership_delete)
-    add_atom_rect(fig, belief_partnerunit_delete)
+    add_atom_rect(fig, belief_voice_membership_delete)
+    add_atom_rect(fig, belief_voiceunit_delete)
     add_atom_rect(fig, beliefunit_update)
     add_groupunits_circle(fig)
     add_different_plans_circle(fig)

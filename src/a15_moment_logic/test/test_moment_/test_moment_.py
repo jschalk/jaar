@@ -71,7 +71,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment._offi_time_max
     assert not amy_moment._beliefs_dir
     assert not amy_moment._packs_dir
-    assert not amy_moment._all_tranbook
+    assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
         moment_label_str(),
         timeline_str(),
@@ -85,7 +85,7 @@ def test_MomentUnit_Exists():
         job_listen_rotations_str(),
         "_moment_dir",
         "moment_mstr_dir",
-        "_all_tranbook",
+        "all_tranbook",
         "_offi_time_max",
         "_beliefs_dir",
         "_packs_dir",
@@ -114,7 +114,7 @@ def test_momentunit_shop_ReturnsMomentUnit():
     # Calculated fields
     assert a23_moment._beliefs_dir != None
     assert a23_moment._packs_dir != None
-    assert a23_moment._all_tranbook == tranbook_shop(a23_str)
+    assert a23_moment.all_tranbook == tranbook_shop(a23_str)
 
 
 def test_momentunit_shop_ReturnsMomentUnitWith_moments_dir(env_dir_setup_cleanup):
@@ -305,7 +305,7 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExists
     sue_str = "Sue"
     bob_str = "Bob"
     sue_gut = beliefunit_shop(sue_str, a23_str)
-    sue_gut.add_partnerunit(bob_str)
+    sue_gut.add_voiceunit(bob_str)
     save_gut_file(moment_mstr_dir, sue_gut)
     sue_belief_dir = create_belief_dir_path(moment_mstr_dir, a23_str, sue_str)
     assert os_path_exists(sue_belief_dir)
@@ -366,18 +366,18 @@ def test_MomentUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     bob_str = "Bob"
     sue_str = "Sue"
     x0_sue_job = beliefunit_shop(sue_str, a23_str)
-    x0_sue_job.add_partnerunit(bob_str)
+    x0_sue_job.add_voiceunit(bob_str)
     save_job_file(moment_mstr_dir, x0_sue_job)
-    assert open_job_file(moment_mstr_dir, a23_str, sue_str).get_partner(bob_str)
+    assert open_job_file(moment_mstr_dir, a23_str, sue_str).get_voice(bob_str)
 
     # WHEN
     a23_moment.create_init_job_from_guts(sue_str)
 
     # THEN
-    assert not open_job_file(moment_mstr_dir, a23_str, sue_str).get_partner(bob_str)
+    assert not open_job_file(moment_mstr_dir, a23_str, sue_str).get_voice(bob_str)
 
 
-def test_MomentUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Partners(
+def test_MomentUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Voices(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -397,15 +397,15 @@ def test_MomentUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Partners(
     sue_str = "Sue"
     a23_moment.create_init_job_from_guts(sue_str)
     sue_gut = beliefunit_shop(sue_str, a23_str)
-    sue_gut.add_partnerunit(bob_str)
+    sue_gut.add_voiceunit(bob_str)
     save_gut_file(moment_mstr_dir, sue_gut)
-    assert not open_job_file(moment_mstr_dir, a23_str, sue_str).get_partner(bob_str)
+    assert not open_job_file(moment_mstr_dir, a23_str, sue_str).get_voice(bob_str)
 
     # WHEN
     a23_moment.create_init_job_from_guts(sue_str)
 
     # THEN
-    assert open_job_file(moment_mstr_dir, a23_str, sue_str).get_partner(bob_str)
+    assert open_job_file(moment_mstr_dir, a23_str, sue_str).get_voice(bob_str)
 
 
 def test_MomentUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
@@ -430,11 +430,11 @@ def test_MomentUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     # create Sue gut
     bob_str = "Bob"
     sue_gut = beliefunit_shop(sue_str, a23_str, knot=slash_str)
-    sue_gut.add_partnerunit(bob_str)
+    sue_gut.add_voiceunit(bob_str)
     save_gut_file(moment_mstr_dir, sue_gut)
     # create Bob gut with agenda plan for Sue
     bob_gut = beliefunit_shop(bob_str, a23_str, knot=slash_str)
-    bob_gut.add_partnerunit(sue_str)
+    bob_gut.add_voiceunit(sue_str)
     casa_rope = bob_gut.make_l1_rope("casa")
     clean_rope = bob_gut.make_rope(casa_rope, "clean")
     bob_gut.add_plan(clean_rope, task=True)
@@ -466,10 +466,10 @@ def test_MomentUnit__set_all_healer_dutys_Setsdutys(
     sue_gut_belief = open_gut_file(x_moment_mstr_dir, a23_str, sue_str)
     yao_gut_belief = open_gut_file(x_moment_mstr_dir, a23_str, yao_str)
 
-    sue_gut_belief.add_partnerunit(sue_str)
-    sue_gut_belief.add_partnerunit(yao_str)
-    yao_gut_belief.add_partnerunit(sue_str)
-    yao_gut_belief.add_partnerunit(yao_str)
+    sue_gut_belief.add_voiceunit(sue_str)
+    sue_gut_belief.add_voiceunit(yao_str)
+    yao_gut_belief.add_voiceunit(sue_str)
+    yao_gut_belief.add_voiceunit(yao_str)
     texas_str = "Texas"
     texas_rope = sue_gut_belief.make_l1_rope(texas_str)
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))

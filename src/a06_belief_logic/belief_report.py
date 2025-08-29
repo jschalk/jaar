@@ -3,23 +3,23 @@ from src.a01_term_logic.rope import RopeTerm
 from src.a06_belief_logic.belief_main import BeliefUnit
 
 
-def get_belief_partnerunits_dataframe(x_belief: BeliefUnit) -> DataFrame:
-    if x_belief.partners == {}:
+def get_belief_voiceunits_dataframe(x_belief: BeliefUnit) -> DataFrame:
+    if x_belief.voices == {}:
         return DataFrame(
             columns=[
-                "partner_name",
-                "partner_cred_points",
-                "partner_debt_points",
-                "_fund_give",
-                "_fund_take",
-                "_fund_agenda_give",
-                "_fund_agenda_take",
-                "_fund_agenda_ratio_give",
-                "_fund_agenda_ratio_take",
+                "voice_name",
+                "voice_cred_points",
+                "voice_debt_points",
+                "fund_give",
+                "fund_take",
+                "fund_agenda_give",
+                "fund_agenda_take",
+                "fund_agenda_ratio_give",
+                "fund_agenda_ratio_take",
             ]
         )
-    x_partnerunits_list = list(x_belief.get_partnerunits_dict(all_attrs=True).values())
-    return DataFrame(x_partnerunits_list)
+    x_voiceunits_list = list(x_belief.get_voiceunits_dict(all_attrs=True).values())
+    return DataFrame(x_voiceunits_list)
 
 
 def get_belief_agenda_dataframe(
@@ -45,7 +45,7 @@ def get_belief_agenda_dataframe(
     for x_plan in agenda_dict.values():
         plan_dict = {
             "belief_name": x_belief.belief_name,
-            "fund_ratio": x_plan._fund_ratio,
+            "fund_ratio": x_plan.fund_ratio,
             "plan_label": x_plan.plan_label,
             "parent_rope": x_plan.parent_rope,
             "begin": x_plan.begin,

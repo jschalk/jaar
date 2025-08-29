@@ -6,8 +6,8 @@ from src.a11_bud_logic.bud import (
 )
 from src.a11_bud_logic.test._util.a11_str import (
     belief_name_str,
-    bud_partner_nets_str,
     bud_time_str,
+    bud_voice_nets_str,
     celldepth_str,
     quota_str,
 )
@@ -22,7 +22,7 @@ def test_BrokerUnit_Exists():
     assert not x_brokerunit.belief_name
     assert not x_brokerunit.buds
     assert not x_brokerunit._sum_budunit_quota
-    assert not x_brokerunit._sum_partner_bud_nets
+    assert not x_brokerunit._sum_voice_bud_nets
     assert not x_brokerunit._bud_time_min
     assert not x_brokerunit._bud_time_max
 
@@ -39,7 +39,7 @@ def test_brokerunit_shop_ReturnsObj():
     assert x_brokerunit.belief_name == sue_str
     assert x_brokerunit.buds == {}
     assert not x_brokerunit._sum_budunit_quota
-    assert x_brokerunit._sum_partner_bud_nets == {}
+    assert x_brokerunit._sum_voice_bud_nets == {}
     assert not x_brokerunit._bud_time_min
     assert not x_brokerunit._bud_time_max
 
@@ -294,14 +294,10 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
     sue_brokerunit.add_bud(x4_bud_time, x4_quota)
     sue_brokerunit.add_bud(x7_bud_time, x7_quota)
     zia_str = "Zia"
-    zia_bud_partner_net = 887
-    sue_bud_partner_net = 445
-    sue_brokerunit.get_bud(x7_bud_time).set_bud_partner_net(
-        sue_str, sue_bud_partner_net
-    )
-    sue_brokerunit.get_bud(x7_bud_time).set_bud_partner_net(
-        zia_str, zia_bud_partner_net
-    )
+    zia_bud_voice_net = 887
+    sue_bud_voice_net = 445
+    sue_brokerunit.get_bud(x7_bud_time).set_bud_voice_net(sue_str, sue_bud_voice_net)
+    sue_brokerunit.get_bud(x7_bud_time).set_bud_voice_net(zia_str, zia_bud_voice_net)
     sue_buds_dict = sue_brokerunit.to_dict()
     assert sue_buds_dict == {
         belief_name_str(): sue_str,
@@ -310,9 +306,9 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
             x7_bud_time: {
                 bud_time_str(): x7_bud_time,
                 quota_str(): x7_quota,
-                bud_partner_nets_str(): {
-                    sue_str: sue_bud_partner_net,
-                    zia_str: zia_bud_partner_net,
+                bud_voice_nets_str(): {
+                    sue_str: sue_bud_voice_net,
+                    zia_str: zia_bud_voice_net,
                 },
             },
         },
@@ -326,8 +322,8 @@ def test_get_brokerunit_from_dict_ReturnsObj_Scenario2():
     assert x_brokerunit.belief_name == sue_str
     assert x_brokerunit.get_bud(x4_bud_time) != None
     assert x_brokerunit.get_bud(x7_bud_time) != None
-    assert x_brokerunit.get_bud(x7_bud_time)._bud_partner_nets != {}
-    assert len(x_brokerunit.get_bud(x7_bud_time)._bud_partner_nets) == 2
+    assert x_brokerunit.get_bud(x7_bud_time)._bud_voice_nets != {}
+    assert len(x_brokerunit.get_bud(x7_bud_time)._bud_voice_nets) == 2
     assert x_brokerunit.buds == sue_brokerunit.buds
     assert x_brokerunit == sue_brokerunit
 
@@ -344,14 +340,10 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     sue_brokerunit.add_bud(x7_bud_time, x7_quota)
     bob_str = "Bob"
     zia_str = "Zia"
-    zia_bud_partner_net = 887
-    bob_bud_partner_net = 445
-    sue_brokerunit.get_bud(x4_bud_time).set_bud_partner_net(
-        bob_str, bob_bud_partner_net
-    )
-    sue_brokerunit.get_bud(x7_bud_time).set_bud_partner_net(
-        zia_str, zia_bud_partner_net
-    )
+    zia_bud_voice_net = 887
+    bob_bud_voice_net = 445
+    sue_brokerunit.get_bud(x4_bud_time).set_bud_voice_net(bob_str, bob_bud_voice_net)
+    sue_brokerunit.get_bud(x7_bud_time).set_bud_voice_net(zia_str, zia_bud_voice_net)
     sue_buds_dict = sue_brokerunit.to_dict()
     assert sue_buds_dict == {
         belief_name_str(): sue_str,
@@ -359,12 +351,12 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
             x4_bud_time: {
                 bud_time_str(): x4_bud_time,
                 quota_str(): x4_quota,
-                bud_partner_nets_str(): {bob_str: bob_bud_partner_net},
+                bud_voice_nets_str(): {bob_str: bob_bud_voice_net},
             },
             x7_bud_time: {
                 bud_time_str(): x7_bud_time,
                 quota_str(): x7_quota,
-                bud_partner_nets_str(): {zia_str: zia_bud_partner_net},
+                bud_voice_nets_str(): {zia_str: zia_bud_voice_net},
             },
         },
     }
@@ -378,5 +370,5 @@ def test_BrokerUnit_get_tranbook_ReturnsObj():
     assert sue_tranbook.moment_label == x_moment_label
     assert sue_tranbook.tranunit_exists(sue_str, zia_str, x7_bud_time)
     assert sue_tranbook.tranunit_exists(sue_str, bob_str, x4_bud_time)
-    assert sue_tranbook.get_amount(sue_str, zia_str, x7_bud_time) == zia_bud_partner_net
-    assert sue_tranbook.get_amount(sue_str, bob_str, x4_bud_time) == bob_bud_partner_net
+    assert sue_tranbook.get_amount(sue_str, zia_str, x7_bud_time) == zia_bud_voice_net
+    assert sue_tranbook.get_amount(sue_str, bob_str, x4_bud_time) == bob_bud_voice_net

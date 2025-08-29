@@ -4,8 +4,6 @@ from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
     awardee_title_str,
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -13,30 +11,32 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     fact_context_str,
     group_title_str,
     healer_name_str,
-    partner_name_str,
     party_title_str,
     plan_rope_str,
     reason_context_str,
     reason_state_str,
+    voice_name_str,
 )
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 from src.a08_belief_atom_logic.test._util.a08_str import INSERT_str
 
 
-def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_partnerunit():
+def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_voiceunit():
     # ESTABLISH
     bob_str = "Bob"
     zia_str = "Zia"
     sue_belief = beliefunit_shop("Sue")
-    sue_belief.add_partnerunit(zia_str)
+    sue_belief.add_voiceunit(zia_str)
 
-    bob_atom = beliefatom_shop(belief_partnerunit_str(), INSERT_str())
-    bob_atom.set_arg(partner_name_str(), bob_str)
-    zia_atom = beliefatom_shop(belief_partnerunit_str(), INSERT_str())
-    zia_atom.set_arg(partner_name_str(), zia_str)
+    bob_atom = beliefatom_shop(belief_voiceunit_str(), INSERT_str())
+    bob_atom.set_arg(voice_name_str(), bob_str)
+    zia_atom = beliefatom_shop(belief_voiceunit_str(), INSERT_str())
+    zia_atom.set_arg(voice_name_str(), zia_str)
 
     # WHEN
     new_bob_beliefatom = sift_beliefatom(sue_belief, bob_atom)
@@ -48,23 +48,23 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_partnerunit():
     assert not new_zia_beliefatom
 
 
-def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_partner_membership():
+def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_voice_membership():
     # ESTABLISH
     bob_str = "Bob"
     yao_str = "Yao"
     run_str = ";run"
     sue_belief = beliefunit_shop("Sue")
-    sue_belief.add_partnerunit(yao_str)
-    sue_belief.add_partnerunit(bob_str)
-    yao_partnerunit = sue_belief.get_partner(yao_str)
-    yao_partnerunit.add_membership(run_str)
-    print(f"{yao_partnerunit._memberships.keys()=}")
+    sue_belief.add_voiceunit(yao_str)
+    sue_belief.add_voiceunit(bob_str)
+    yao_voiceunit = sue_belief.get_voice(yao_str)
+    yao_voiceunit.add_membership(run_str)
+    print(f"{yao_voiceunit.memberships.keys()=}")
 
-    bob_run_atom = beliefatom_shop(belief_partner_membership_str(), INSERT_str())
-    bob_run_atom.set_arg(partner_name_str(), bob_str)
+    bob_run_atom = beliefatom_shop(belief_voice_membership_str(), INSERT_str())
+    bob_run_atom.set_arg(voice_name_str(), bob_str)
     bob_run_atom.set_arg(group_title_str(), run_str)
-    yao_run_atom = beliefatom_shop(belief_partner_membership_str(), INSERT_str())
-    yao_run_atom.set_arg(partner_name_str(), yao_str)
+    yao_run_atom = beliefatom_shop(belief_voice_membership_str(), INSERT_str())
+    yao_run_atom.set_arg(voice_name_str(), yao_str)
     yao_run_atom.set_arg(group_title_str(), run_str)
 
     # WHEN

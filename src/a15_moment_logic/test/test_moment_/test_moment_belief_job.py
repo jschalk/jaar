@@ -35,7 +35,7 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     assert sue_job.belief_name == example_belief.belief_name
 
 
-def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyPartnersCause_inallocable_partner_debt_points(
+def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyVoicesCause_inallocable_voice_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -47,9 +47,9 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyPartnersCause_inallocab
     bob_str = "Bob"
     zia_str = "Zia"
     init_sue_job = beliefunit_shop(sue_str, a23_str)
-    init_sue_job.add_partnerunit(yao_str)
-    init_sue_job.add_partnerunit(bob_str)
-    init_sue_job.add_partnerunit(zia_str)
+    init_sue_job.add_voiceunit(yao_str)
+    init_sue_job.add_voiceunit(bob_str)
+    init_sue_job.add_voiceunit(zia_str)
     save_job_file(moment_mstr_dir, init_sue_job)
     assert job_file_exists(moment_mstr_dir, a23_str, sue_str)
     assert job_file_exists(moment_mstr_dir, a23_str, yao_str) is False
@@ -60,10 +60,10 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario2_EmptyPartnersCause_inallocab
     rotated_sue_job = a23_moment.rotate_job(sue_str)
 
     # THEN method should wipe over job belief
-    assert rotated_sue_job.partner_exists(bob_str)
+    assert rotated_sue_job.voice_exists(bob_str)
     assert rotated_sue_job.to_dict() != init_sue_job.to_dict()
-    assert init_sue_job.get_partner(bob_str)._inallocable_partner_debt_points == 0
-    assert rotated_sue_job.get_partner(bob_str)._inallocable_partner_debt_points == 1
+    assert init_sue_job.get_voice(bob_str).inallocable_voice_debt_points == 0
+    assert rotated_sue_job.get_voice(bob_str).inallocable_voice_debt_points == 1
 
 
 def a23_job(belief_name: str) -> BeliefUnit:
@@ -82,9 +82,9 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario3_job_ChangesFromRotation(
     yao_str = "Yao"
     bob_str = "Bob"
     init_sue_job = beliefunit_shop(sue_str, a23_str)
-    init_sue_job.add_partnerunit(yao_str)
+    init_sue_job.add_voiceunit(yao_str)
     init_yao_job = beliefunit_shop(yao_str, a23_str)
-    init_yao_job.add_partnerunit(bob_str)
+    init_yao_job.add_voiceunit(bob_str)
     init_bob_job = beliefunit_shop(bob_str, a23_str)
     casa_rope = init_bob_job.make_l1_rope("casa")
     clean_rope = init_bob_job.make_rope(casa_rope, "clean")
@@ -113,11 +113,11 @@ def test_MomentUnit_rotate_job_ReturnsObj_Scenario4_job_SelfReferenceWorks(
     sue_str = "Sue"
     yao_str = "Yao"
     init_bob_job = beliefunit_shop(bob_str, a23_str)
-    init_bob_job.add_partnerunit(bob_str)
+    init_bob_job.add_voiceunit(bob_str)
     init_sue_job = beliefunit_shop(sue_str, a23_str)
-    init_sue_job.add_partnerunit(yao_str)
+    init_sue_job.add_voiceunit(yao_str)
     init_yao_job = beliefunit_shop(yao_str, a23_str)
-    init_yao_job.add_partnerunit(bob_str)
+    init_yao_job.add_voiceunit(bob_str)
     casa_rope = init_bob_job.make_l1_rope("casa")
     clean_rope = init_bob_job.make_rope(casa_rope, "clean")
     init_bob_job.add_plan(clean_rope, task=True)
@@ -173,17 +173,17 @@ def test_MomentUnit_generate_all_jobs_Scenario1_jobs_rotated(
     sue_str = "Sue"
     yao_str = "Yao"
     bob_gut = beliefunit_shop(bob_str, a23_str)
-    bob_gut.add_partnerunit(bob_str)
-    bob_gut.add_partnerunit(sue_str)
+    bob_gut.add_voiceunit(bob_str)
+    bob_gut.add_voiceunit(sue_str)
     casa_rope = bob_gut.make_l1_rope("casa")
     clean_rope = bob_gut.make_rope(casa_rope, "clean")
     bob_gut.add_plan(clean_rope, task=True)
 
     sue_gut = beliefunit_shop(sue_str, a23_str)
-    sue_gut.add_partnerunit(sue_str)
-    sue_gut.add_partnerunit(bob_str)
+    sue_gut.add_voiceunit(sue_str)
+    sue_gut.add_voiceunit(bob_str)
     yao_gut = beliefunit_shop(yao_str, a23_str)
-    yao_gut.add_partnerunit(sue_str)
+    yao_gut.add_voiceunit(sue_str)
     save_gut_file(moment_mstr_dir, bob_gut)
     save_gut_file(moment_mstr_dir, sue_gut)
     save_gut_file(moment_mstr_dir, yao_gut)
@@ -212,21 +212,21 @@ def test_MomentUnit_generate_all_jobs_Scenario2_jobs_rotated_InSortedOrder(
     yao_str = "Yao"
     zia_str = "Zia"
     bob_gut = beliefunit_shop(bob_str, a23_str)
-    bob_gut.add_partnerunit(bob_str)
-    bob_gut.add_partnerunit(sue_str)
+    bob_gut.add_voiceunit(bob_str)
+    bob_gut.add_voiceunit(sue_str)
 
     sue_gut = beliefunit_shop(sue_str, a23_str)
-    sue_gut.add_partnerunit(sue_str)
-    sue_gut.add_partnerunit(bob_str)
-    sue_gut.add_partnerunit(yao_str)
+    sue_gut.add_voiceunit(sue_str)
+    sue_gut.add_voiceunit(bob_str)
+    sue_gut.add_voiceunit(yao_str)
 
     yao_gut = beliefunit_shop(yao_str, a23_str)
-    yao_gut.add_partnerunit(sue_str)
-    yao_gut.add_partnerunit(yao_str)
-    yao_gut.add_partnerunit(zia_str)
+    yao_gut.add_voiceunit(sue_str)
+    yao_gut.add_voiceunit(yao_str)
+    yao_gut.add_voiceunit(zia_str)
 
     zia_gut = beliefunit_shop(zia_str, a23_str)
-    zia_gut.add_partnerunit(zia_str)
+    zia_gut.add_voiceunit(zia_str)
     casa_rope = zia_gut.make_l1_rope("casa")
     clean_rope = zia_gut.make_rope(casa_rope, "clean")
     zia_gut.add_plan(clean_rope, task=True)
@@ -261,21 +261,21 @@ def test_MomentUnit_generate_all_jobs_Scenario3_job_listen_rotation_AffectsJobs(
     yao_str = "Yao"
     zia_str = "Zia"
     bob_gut = beliefunit_shop(bob_str, a23_str)
-    bob_gut.add_partnerunit(bob_str)
-    bob_gut.add_partnerunit(sue_str)
+    bob_gut.add_voiceunit(bob_str)
+    bob_gut.add_voiceunit(sue_str)
 
     sue_gut = beliefunit_shop(sue_str, a23_str)
-    sue_gut.add_partnerunit(sue_str)
-    sue_gut.add_partnerunit(bob_str)
-    sue_gut.add_partnerunit(yao_str)
+    sue_gut.add_voiceunit(sue_str)
+    sue_gut.add_voiceunit(bob_str)
+    sue_gut.add_voiceunit(yao_str)
 
     yao_gut = beliefunit_shop(yao_str, a23_str)
-    yao_gut.add_partnerunit(sue_str)
-    yao_gut.add_partnerunit(yao_str)
-    yao_gut.add_partnerunit(zia_str)
+    yao_gut.add_voiceunit(sue_str)
+    yao_gut.add_voiceunit(yao_str)
+    yao_gut.add_voiceunit(zia_str)
 
     zia_gut = beliefunit_shop(zia_str, a23_str)
-    zia_gut.add_partnerunit(zia_str)
+    zia_gut.add_voiceunit(zia_str)
     casa_rope = zia_gut.make_l1_rope("casa")
     clean_rope = zia_gut.make_rope(casa_rope, "clean")
     zia_gut.add_plan(clean_rope, task=True)

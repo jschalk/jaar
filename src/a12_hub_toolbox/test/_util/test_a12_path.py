@@ -6,10 +6,10 @@ from src.a01_term_logic.rope import create_rope, create_rope_from_labels
 from src.a06_belief_logic.test._util.a06_str import planroot_str
 from src.a09_pack_logic.test._util.a09_str import (
     belief_name_str,
-    bud_time_str,
     event_int_str,
     moment_label_str,
 )
+from src.a11_bud_logic.test._util.a11_str import bud_time_str
 from src.a12_hub_toolbox.a12_path import (
     BELIEFEVENT_FILENAME,
     BELIEFPOINT_FILENAME,
@@ -29,7 +29,7 @@ from src.a12_hub_toolbox.a12_path import (
     create_budunit_json_path,
     create_cell_dir_path,
     create_cell_json_path,
-    create_cell_partner_mandate_ledger_path,
+    create_cell_voice_mandate_ledger_path,
     create_event_all_pack_path,
     create_event_expressed_pack_path,
     create_gut_path,
@@ -608,7 +608,7 @@ def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     assert gen_cell_json_path == expected_cell_json_path
 
 
-def test_create_cell_partner_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_ancestors():
+def test_create_cell_voice_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     # ESTABLISH
     x_moment_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
@@ -619,7 +619,7 @@ def test_create_cell_partner_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_
     bud_ancestors = [yao_str, bob_str]
 
     # WHEN
-    gen_cell_json_path = create_cell_partner_mandate_ledger_path(
+    gen_cell_json_path = create_cell_voice_mandate_ledger_path(
         x_moment_mstr_dir, a23_str, sue_str, tp7, bud_ancestors=bud_ancestors
     )
 
@@ -999,9 +999,9 @@ def test_create_cell_json_path_HasDocString():
     assert LINUX_OS or inspect_getdoc(create_cell_json_path) == doc_str
 
 
-def test_create_cell_partner_mandate_ledger_path_HasDocString():
+def test_create_cell_voice_mandate_ledger_path_HasDocString():
     # ESTABLISH
-    doc_str = create_cell_partner_mandate_ledger_path(
+    doc_str = create_cell_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
@@ -1012,9 +1012,7 @@ def test_create_cell_partner_mandate_ledger_path_HasDocString():
     doc_str = f"Returns path: {doc_str}"
     print(f"{doc_str=}")
     # WHEN / THEN
-    assert (
-        LINUX_OS or inspect_getdoc(create_cell_partner_mandate_ledger_path) == doc_str
-    )
+    assert LINUX_OS or inspect_getdoc(create_cell_voice_mandate_ledger_path) == doc_str
 
 
 def test_create_budunit_json_path_HasDocString():

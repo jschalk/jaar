@@ -63,17 +63,17 @@ def get_allowed_class_types() -> set[str]:
 
 def get_atom_args_class_types() -> dict[str, str]:
     return {
-        "partner_name": "NameTerm",
+        "voice_name": "NameTerm",
         "addin": "float",
         "awardee_title": "TitleTerm",
         "reason_context": "RopeTerm",
         "reason_active_requisite": "bool",
         "begin": "float",
         "close": "float",
-        "partner_cred_points": "float",
+        "voice_cred_points": "float",
         "group_cred_points": "float",
         "credor_respect": "float",
-        "partner_debt_points": "float",
+        "voice_debt_points": "float",
         "group_debt_points": "float",
         "debtor_respect": "float",
         "denom": "int",
@@ -230,8 +230,8 @@ def save_atom_config_file(atom_config_dict):
 def get_belief_dimens() -> set:
     return {
         "beliefunit",
-        "belief_partnerunit",
-        "belief_partner_membership",
+        "belief_voiceunit",
+        "belief_voice_membership",
         "belief_planunit",
         "belief_plan_awardunit",
         "belief_plan_reasonunit",
@@ -244,7 +244,7 @@ def get_belief_dimens() -> set:
 
 def get_all_belief_dimen_keys() -> set:
     return {
-        "partner_name",
+        "voice_name",
         "awardee_title",
         "reason_context",
         "fact_context",
@@ -263,7 +263,7 @@ def get_delete_key_name(key: str) -> str:
 
 def get_all_belief_dimen_delete_keys() -> set:
     return {
-        "partner_name_ERASE",
+        "voice_name_ERASE",
         "awardee_title_ERASE",
         "reason_context_ERASE",
         "fact_context_ERASE",

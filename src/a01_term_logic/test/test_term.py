@@ -11,9 +11,9 @@ from src.a01_term_logic.term import (
     LabelTerm,
     MomentLabel,
     NameTerm,
-    PartnerName,
     RopeTerm,
     TitleTerm,
+    VoiceName,
     default_knot_if_None,
 )
 from src.a01_term_logic.test._util.a01_str import knot_str
@@ -99,15 +99,15 @@ def test_BeliefName_Exists():
     assert inspect_getdoc(bob_BeliefName_str) == doc_str
 
 
-def test_PartnerName_Exists():
+def test_VoiceName_Exists():
     # ESTABLISH
     bob_str = "Bob"
     # WHEN
-    bob_PartnerName = PartnerName(bob_str)
+    bob_VoiceName = VoiceName(bob_str)
     # THEN
-    assert bob_PartnerName == bob_str
-    doc_str = "Every PartnerName object is BeliefName, must follow BeliefName format."
-    assert inspect_getdoc(bob_PartnerName) == doc_str
+    assert bob_VoiceName == bob_str
+    doc_str = "Every VoiceName object is BeliefName, must follow BeliefName format."
+    assert inspect_getdoc(bob_VoiceName) == doc_str
 
 
 def test_TitleTerm_Exists():
@@ -117,7 +117,7 @@ def test_TitleTerm_Exists():
     bob_nameterm = TitleTerm(bob_str)
     # THEN
     assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise it's a single member group of an PartnerName."""
+    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise it's a single member group of an VoiceName."""
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 

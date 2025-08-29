@@ -2,11 +2,11 @@ from sqlite3 import connect as sqlite3_connect
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     moment_label_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
     party_title_str,
     plan_rope_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a15_moment_logic.test._util.a15_str import amount_str
@@ -29,7 +29,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
             plan_rope_str(),
             party_title_str(),
             belief_name_str(),
-            partner_name_str(),
+            voice_name_str(),
             amount_str(),
         ]
         blrlabo_cat = "belief_plan_partyunit"
@@ -70,7 +70,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_partnerunit():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -81,12 +81,12 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_partnerunit()
             plan_rope_str(),
             party_title_str(),
             belief_name_str(),
-            partner_name_str(),
-            partner_cred_points_str(),
-            partner_debt_points_str(),
+            voice_name_str(),
+            voice_cred_points_str(),
+            voice_debt_points_str(),
             amount_str(),
         ]
-        blrpern_cat = "belief_partnerunit"
+        blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
         blrpern_table = f"{blrpern_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -105,11 +105,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_partnerunit()
         )
 
         # THEN
-        columns_str = "event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points, partner_debt_points"
+        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND partner_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """
@@ -120,7 +120,7 @@ GROUP BY {columns_str}
         assert gen_sqlstr == expected_sqlstr
 
 
-def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_partnerunit():
+def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
     # ESTABLISH
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
@@ -131,11 +131,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_partnerunit()
             plan_rope_str(),
             party_title_str(),
             belief_name_str(),
-            partner_name_str(),
-            partner_cred_points_str(),
+            voice_name_str(),
+            voice_cred_points_str(),
             amount_str(),
         ]
-        blrpern_cat = "belief_partnerunit"
+        blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
         blrpern_table = f"{blrpern_cat}_raw"
         idea_config = get_idea_config_dict()
@@ -154,11 +154,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_partnerunit()
         )
 
         # THEN
-        columns_str = "event_int, face_name, moment_label, belief_name, partner_name, partner_cred_points"
+        columns_str = "event_int, face_name, moment_label, belief_name, voice_name, voice_cred_points"
         expected_sqlstr = f"""INSERT INTO {blrpern_cat}_raw (idea_number, {columns_str})
 SELECT '{idea_number}' as idea_number, {columns_str}
 FROM {idea_number}_raw
-WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND partner_name IS NOT NULL
+WHERE event_int IS NOT NULL AND face_name IS NOT NULL AND moment_label IS NOT NULL AND belief_name IS NOT NULL AND voice_name IS NOT NULL
 GROUP BY {columns_str}
 ;
 """

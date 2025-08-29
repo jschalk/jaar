@@ -14,7 +14,7 @@ from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a06_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
-    get_belief_partnerunits_dataframe,
+    get_belief_voiceunits_dataframe,
 )
 
 
@@ -29,17 +29,17 @@ def _get_parent_y(x_plan: PlanUnit, planunit_y_coordinate_dict: dict) -> RopeTer
 
 def _get_color_for_planunit_trace(x_planunit: PlanUnit, mode: str) -> str:
     if mode is None:
-        if x_planunit._level == 0:
+        if x_planunit.tree_level == 0:
             return "Red"
-        elif x_planunit._level == 1:
+        elif x_planunit.tree_level == 1:
             return "Pink"
-        elif x_planunit._level == 2:
+        elif x_planunit.tree_level == 2:
             return "Green"
-        elif x_planunit._level == 3:
+        elif x_planunit.tree_level == 3:
             return "Blue"
-        elif x_planunit._level == 4:
+        elif x_planunit.tree_level == 4:
             return "Purple"
-        elif x_planunit._level == 5:
+        elif x_planunit.tree_level == 5:
             return "Gold"
         else:
             return "Black"
@@ -66,17 +66,17 @@ def _add_individual_trace(
 ):
     trace_list.append(
         plotly_Scatter(
-            x=[kid_plan._level - 1, kid_plan._level],
+            x=[kid_plan.tree_level - 1, kid_plan.tree_level],
             y=[parent_y, source_y],
-            marker_size=_get_dot_diameter(kid_plan._fund_ratio),
+            marker_size=_get_dot_diameter(kid_plan.fund_ratio),
             name=kid_plan.plan_label,
             marker_color=_get_color_for_planunit_trace(kid_plan, mode=mode),
         )
     )
     anno_list.append(
         dict(
-            x=kid_plan._level,
-            y=source_y + (_get_dot_diameter(kid_plan._fund_ratio) / 150) + 0.002,
+            x=kid_plan.tree_level,
+            y=source_y + (_get_dot_diameter(kid_plan.fund_ratio) / 150) + 0.002,
             text=kid_plan.plan_label,
             showarrow=False,
         )
@@ -102,7 +102,7 @@ def _create_planunit_traces(
             kid_plan=x_plan,
             mode=mode,
         )
-        plans.extend(iter(x_plan._kids.values()))
+        plans.extend(iter(x_plan.kids.values()))
         y_planunit_y_coordinate_dict[x_plan.get_plan_rope()] = source_y
         prev_rope = x_plan.get_plan_rope()
 
@@ -112,8 +112,8 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_belief: BeliefUnit):
     if mode == "Chore":
         fig_label = "Plan Tree with chore plans in Red."
     fig_label += f" (Plans: {len(x_belief._plan_dict)})"
-    fig_label += f" (_sum_healerunit_share: {x_belief._sum_healerunit_share})"
-    fig_label += f" (_keeps_justified: {x_belief._keeps_justified})"
+    fig_label += f" (sum_healerunit_share: {x_belief.sum_healerunit_share})"
+    fig_label += f" (keeps_justified: {x_belief.keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 
 
@@ -146,19 +146,19 @@ def display_plantree(
         return x_fig
 
 
-def get_belief_partners_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
+def get_belief_voices_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     column_header_list = [
-        "partner_name",
+        "voice_name",
         "_credor_respect",
-        "partner_cred_points",
+        "voice_cred_points",
         "_debtor_respect",
-        "partner_debt_points",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
+        "voice_debt_points",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
     ]
-    df = get_belief_partnerunits_dataframe(x_belief)
+    df = get_belief_voiceunits_dataframe(x_belief)
     df.insert(1, "_credor_respect", x_belief.credor_respect)
     df.insert(4, "_debtor_respect", x_belief.debtor_respect)
     header_dict = dict(
@@ -168,15 +168,15 @@ def get_belief_partners_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
         header=header_dict,
         cells=dict(
             values=[
-                df.partner_name,
+                df.voice_name,
                 df._credor_respect,
-                df.partner_cred_points,
+                df.voice_cred_points,
                 df._debtor_respect,
-                df.partner_debt_points,
-                df._fund_give,
-                df._fund_take,
-                df._fund_agenda_give,
-                df._fund_agenda_take,
+                df.voice_debt_points,
+                df.fund_give,
+                df.fund_take,
+                df.fund_agenda_give,
+                df.fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -184,7 +184,7 @@ def get_belief_partners_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_label = f"BeliefName '{x_belief.belief_name}' belief partners metrics"
+    fig_label = f"BeliefName '{x_belief.belief_name}' belief voices metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
@@ -388,10 +388,10 @@ def beliefunit_graph1(graphics_bool) -> plotly_Figure:
     add_group_rect(fig, base_w, base_h, 2, 0.2, 0.4, "group2")
     add_group_rect(fig, base_w, base_h, 2, 0.4, 0.6, "group3")
     add_group_rect(fig, base_w, base_h, 2, 0.6, 1, "group4")
-    add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "partner0")
-    add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "partner1")
-    add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "partner2")
-    add_people_rect(fig, base_w, base_h, 0, 0.7, 1, "partner3")
+    add_people_rect(fig, base_w, base_h, 0, 0, 0.3, "voice0")
+    add_people_rect(fig, base_w, base_h, 0, 0.3, 0.5, "voice1")
+    add_people_rect(fig, base_w, base_h, 0, 0.5, 0.7, "voice2")
+    add_people_rect(fig, base_w, base_h, 0, 0.7, 1, "voice3")
 
     fig.add_trace(
         plotly_Scatter(
@@ -525,7 +525,7 @@ def fund_graph0(
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_label, "", "", "")
     d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by star "
     d_sue1_p1 = "PlanRoot Fund ranges: Black arrows. Sum of childless Plan's funds equal planroot's fund "
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at PartnerUnits"
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at VoiceUnits"
     d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
     d_sue1_p4 = f"fund_pool = {x_belief.fund_pool} "
     fig.add_trace(
@@ -559,34 +559,34 @@ def fund_graph0(
     add_rect_arrow(fig, 7, -0.6, 6.25, -0.6, green_str)
     add_rect_arrow(fig, 9, -0.4, 7.75, -0.4, blue_str)
     add_rect_arrow(fig, 9, -0.6, 7.75, -0.6, green_str)
-    partnerunit_str = "partnerunit"
+    voiceunit_str = "voiceunit"
     purple_str = "purple"
-    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, partnerunit_str, "gold")
-    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, partnerunit_str, "gold")
-    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, partnerunit_str, "gold")
-    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, partnerunit_str, "gold")
-    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, partnerunit_str, "gold")
+    add_simp_rect(fig, 9, -0.4, 9.75, 0.2, voiceunit_str, "gold")
+    add_simp_rect(fig, 9, -1.0, 9.75, -0.4, voiceunit_str, "gold")
+    add_simp_rect(fig, 9, -1.6, 9.75, -1.0, voiceunit_str, "gold")
+    add_simp_rect(fig, 9, -2.2, 9.75, -1.6, voiceunit_str, "gold")
+    add_simp_rect(fig, 9, -4.0, 9.75, -2.2, voiceunit_str, "gold")
 
     fund_t0 = "BeliefUnit.fund_pool"
-    fund_t1_0 = "PlanUnit._fund_onset"
-    fund_t1_1 = "PlanUnit._fund_cease"
-    fund_t2_0 = "AwardHeir._fund_give"
-    fund_t2_1 = "AwardHeir._fund_take"
+    fund_t1_0 = "PlanUnit.fund_onset"
+    fund_t1_1 = "PlanUnit.fund_cease"
+    fund_t2_0 = "AwardHeir.fund_give"
+    fund_t2_1 = "AwardHeir.fund_take"
 
-    fund_trace3_0 = "GroupUnit._fund_give"
-    fund_trace3_1 = "GroupUnit._fund_take"
-    fund_trace3_2 = "GroupUnit._fund_agenda_give"
-    fund_trace3_3 = "GroupUnit._fund_agenda_take"
+    fund_trace3_0 = "GroupUnit.fund_give"
+    fund_trace3_1 = "GroupUnit.fund_take"
+    fund_trace3_2 = "GroupUnit.fund_agenda_give"
+    fund_trace3_3 = "GroupUnit.fund_agenda_take"
 
-    fund_trace4_0 = "MemberShip._fund_give"
-    fund_trace4_1 = "MemberShip._fund_take"
-    fund_trace4_2 = "MemberShip._fund_agenda_give"
-    fund_trace4_3 = "MemberShip._fund_agenda_take"
+    fund_trace4_0 = "MemberShip.fund_give"
+    fund_trace4_1 = "MemberShip.fund_take"
+    fund_trace4_2 = "MemberShip.fund_agenda_give"
+    fund_trace4_3 = "MemberShip.fund_agenda_take"
 
-    fund_trace5_0 = "PartnerUnit._fund_give"
-    fund_trace5_1 = "PartnerUnit._fund_take"
-    fund_trace5_2 = "PartnerUnit._fund_agenda_give"
-    fund_trace5_3 = "PartnerUnit._fund_agenda_take"
+    fund_trace5_0 = "VoiceUnit.fund_give"
+    fund_trace5_1 = "VoiceUnit.fund_take"
+    fund_trace5_2 = "VoiceUnit.fund_agenda_give"
+    fund_trace5_3 = "VoiceUnit.fund_agenda_take"
 
     tracex_list = [fund_t0, fund_t1_0, fund_t1_1, fund_t2_0, fund_t2_1]
     fig.add_trace(

@@ -2,13 +2,13 @@ from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
 from src.a06_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
-    get_belief_partnerunits_dataframe,
+    get_belief_voiceunits_dataframe,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file, open_job_file
 from src.a15_moment_logic.moment_main import MomentUnit
 
 
-def get_moment_guts_partners_dataframe(x_moment: MomentUnit) -> DataFrame:
+def get_moment_guts_voices_dataframe(x_moment: MomentUnit) -> DataFrame:
     # get list of all belief paths
     moment_belief_names = x_moment._get_belief_folder_names()
     # for all beliefs get gut
@@ -18,24 +18,24 @@ def get_moment_guts_partners_dataframe(x_moment: MomentUnit) -> DataFrame:
             x_moment.moment_mstr_dir, x_moment.moment_label, belief_name
         )
         gut_belief.cash_out()
-        df = get_belief_partnerunits_dataframe(gut_belief)
+        df = get_belief_voiceunits_dataframe(gut_belief)
         df.insert(0, "belief_name", gut_belief.belief_name)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
 
 
-def get_moment_guts_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
+def get_moment_guts_voices_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     column_header_list = [
         "belief_name",
-        "partner_name",
-        "partner_cred_points",
-        "partner_debt_points",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
+        "voice_name",
+        "voice_cred_points",
+        "voice_debt_points",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
     ]
-    df = get_moment_guts_partners_dataframe(x_moment)
+    df = get_moment_guts_voices_dataframe(x_moment)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -44,13 +44,13 @@ def get_moment_guts_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.belief_name,
-                df.partner_name,
-                df.partner_cred_points,
-                df.partner_debt_points,
-                df._fund_give,
-                df._fund_take,
-                df._fund_agenda_give,
-                df._fund_agenda_take,
+                df.voice_name,
+                df.voice_cred_points,
+                df.voice_debt_points,
+                df.fund_give,
+                df.fund_take,
+                df.fund_agenda_give,
+                df.fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -58,7 +58,7 @@ def get_moment_guts_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_label = f"moment '{x_moment.moment_label}', gut partners metrics"
+    fig_label = f"moment '{x_moment.moment_label}', gut voices metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)
@@ -66,7 +66,7 @@ def get_moment_guts_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     return fig
 
 
-def get_moment_jobs_partners_dataframe(x_moment: MomentUnit) -> DataFrame:
+def get_moment_jobs_voices_dataframe(x_moment: MomentUnit) -> DataFrame:
     # get list of all belief paths
     moment_belief_names = x_moment._get_belief_folder_names()
     # for all beliefs get gut
@@ -76,24 +76,24 @@ def get_moment_jobs_partners_dataframe(x_moment: MomentUnit) -> DataFrame:
             x_moment.moment_mstr_dir, x_moment.moment_label, belief_name
         )
         job.cash_out()
-        job_df = get_belief_partnerunits_dataframe(job)
+        job_df = get_belief_voiceunits_dataframe(job)
         job_df.insert(0, "belief_name", job.belief_name)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)
 
 
-def get_moment_jobs_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
+def get_moment_jobs_voices_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     column_header_list = [
         "belief_name",
-        "partner_name",
-        "partner_cred_points",
-        "partner_debt_points",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
+        "voice_name",
+        "voice_cred_points",
+        "voice_debt_points",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
     ]
-    df = get_moment_jobs_partners_dataframe(x_moment)
+    df = get_moment_jobs_voices_dataframe(x_moment)
     header_dict = dict(
         values=column_header_list, fill_color="paleturquoise", align="left"
     )
@@ -102,13 +102,13 @@ def get_moment_jobs_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
         cells=dict(
             values=[
                 df.belief_name,
-                df.partner_name,
-                df.partner_cred_points,
-                df.partner_debt_points,
-                df._fund_give,
-                df._fund_take,
-                df._fund_agenda_give,
-                df._fund_agenda_take,
+                df.voice_name,
+                df.voice_cred_points,
+                df.voice_debt_points,
+                df.fund_give,
+                df.fund_take,
+                df.fund_agenda_give,
+                df.fund_agenda_take,
             ],
             fill_color="lavender",
             align="left",
@@ -116,7 +116,7 @@ def get_moment_jobs_partners_plotly_fig(x_moment: MomentUnit) -> plotly_Figure:
     )
 
     fig = plotly_Figure(data=[x_table])
-    fig_label = f"moment '{x_moment.moment_label}', job partners metrics"
+    fig_label = f"moment '{x_moment.moment_label}', job voices metrics"
     fig.update_xaxes(showgrid=False)
     fig.update_yaxes(showgrid=False, zeroline=True, showticklabels=False)
     fig.update_layout(plot_bgcolor="white", title=fig_label, title_font_size=20)

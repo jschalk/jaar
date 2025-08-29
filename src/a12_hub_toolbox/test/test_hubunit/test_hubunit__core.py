@@ -35,7 +35,7 @@ def test_HubUnit_Exists():
     assert not x_hubunit.respect_bit
     assert not x_hubunit.penny
     assert not x_hubunit.keep_point_magnitude
-    assert not x_hubunit._keeps_dir
+    assert not x_hubunit.keeps_dir
     assert not x_hubunit._atoms_dir
     assert not x_hubunit._packs_dir
 
@@ -77,7 +77,7 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
     sue_dir = create_belief_dir_path(x_moment_mstr_dir, x_moment_label, sue_str)
-    assert x_hubunit._keeps_dir == create_path(sue_dir, "keeps")
+    assert x_hubunit.keeps_dir == create_path(sue_dir, "keeps")
     assert x_hubunit._atoms_dir == create_path(sue_dir, "atoms")
     assert x_hubunit._packs_dir == create_path(sue_dir, "packs")
 

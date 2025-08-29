@@ -41,11 +41,11 @@ def test_etl_event_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
     belief_filename = "belief.json"
     e3_bob_belief = beliefunit_shop(bob_inx, a23_str)
     e7_bob_belief = beliefunit_shop(bob_inx, a23_str)
-    e3_bob_belief.add_partnerunit(bob_inx, credit77)
-    e3_bob_belief.add_partnerunit(yao_inx, credit44)
-    e7_bob_belief.add_partnerunit(bob_inx, credit77)
-    e7_bob_belief.add_partnerunit(sue_inx, credit88)
-    e7_bob_belief.add_partnerunit(yao_inx, credit44)
+    e3_bob_belief.add_voiceunit(bob_inx, credit77)
+    e3_bob_belief.add_voiceunit(yao_inx, credit44)
+    e7_bob_belief.add_voiceunit(bob_inx, credit77)
+    e7_bob_belief.add_voiceunit(sue_inx, credit88)
+    e7_bob_belief.add_voiceunit(yao_inx, credit44)
     save_file(a23_bob_e3_dir, belief_filename, e3_bob_belief.get_json())
     save_file(a23_bob_e7_dir, belief_filename, e7_bob_belief.get_json())
     e3_belief_path = create_path(a23_bob_e3_dir, belief_filename)
@@ -63,6 +63,6 @@ def test_etl_event_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
     # THEN
     assert os_path_exists(a23_bob_gut_path)
     generated_gut_belief = beliefunit_get_from_json(open_file(a23_bob_gut_path))
-    assert generated_gut_belief.partners == e7_bob_belief.partners
+    assert generated_gut_belief.voices == e7_bob_belief.voices
     assert generated_gut_belief == e7_bob_belief
     assert generated_gut_belief.to_dict() == e7_bob_belief.to_dict()

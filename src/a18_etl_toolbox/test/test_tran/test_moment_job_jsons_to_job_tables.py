@@ -29,9 +29,9 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     bob_str = "Bob"
     run_str = ";run"
     sue_belief = beliefunit_shop(sue_str, a23_str)
-    sue_belief.add_partnerunit(sue_str)
-    sue_belief.add_partnerunit(bob_str)
-    sue_belief.get_partner(bob_str).add_membership(run_str)
+    sue_belief.add_voiceunit(sue_str)
+    sue_belief.add_voiceunit(bob_str)
+    sue_belief.get_voice(bob_str).add_membership(run_str)
     casa_rope = sue_belief.make_l1_rope("casa")
     status_rope = sue_belief.make_l1_rope("status")
     clean_rope = sue_belief.make_rope(status_rope, "clean")
@@ -107,11 +107,11 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     a23_str = "amy23"
     moment_mstr_dir = get_module_temp_dir()
     bob_job = beliefunit_shop(bob_inx, a23_str)
-    bob_job.add_partnerunit(bob_inx, credit77)
-    bob_job.add_partnerunit(yao_inx, credit44)
-    bob_job.add_partnerunit(bob_inx, credit77)
-    bob_job.add_partnerunit(sue_inx, credit88)
-    bob_job.add_partnerunit(yao_inx, credit44)
+    bob_job.add_voiceunit(bob_inx, credit77)
+    bob_job.add_voiceunit(yao_inx, credit44)
+    bob_job.add_voiceunit(bob_inx, credit77)
+    bob_job.add_voiceunit(sue_inx, credit88)
+    bob_job.add_voiceunit(yao_inx, credit44)
     save_job_file(moment_mstr_dir, bob_job)
     moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
     save_file(

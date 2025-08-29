@@ -10,16 +10,16 @@ from src.a18_etl_toolbox.test._util.a18_env import (
 )
 from src.a18_etl_toolbox.test._util.a18_str import (
     belief_net_amount_str,
-    moment_partner_nets_str,
+    moment_voice_nets_str,
 )
-from src.a18_etl_toolbox.tran_sqlstrs import CREATE_MOMENT_PARTNER_NETS_SQLSTR
+from src.a18_etl_toolbox.tran_sqlstrs import CREATE_MOMENT_VOICE_NETS_SQLSTR
 from src.a18_etl_toolbox.transformers import (
-    etl_moment_json_partner_nets_to_moment_partner_nets_table,
-    insert_tranunit_partners_net,
+    etl_moment_json_voice_nets_to_moment_voice_nets_table,
+    insert_tranunit_voices_net,
 )
 
 
-def test_insert_tranunit_partners_net_PopulatesDatabase():
+def test_insert_tranunit_voices_net_PopulatesDatabase():
     # ESTABLISH
     a23_str = "amy23"
     a23_tranbook = tranbook_shop(a23_str)
@@ -39,16 +39,16 @@ def test_insert_tranunit_partners_net_PopulatesDatabase():
     a23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        moment_partner_nets_tablename = moment_partner_nets_str()
-        cursor.execute(CREATE_MOMENT_PARTNER_NETS_SQLSTR)
-        assert get_row_count(cursor, moment_partner_nets_tablename) == 0
+        moment_voice_nets_tablename = moment_voice_nets_str()
+        cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
+        assert get_row_count(cursor, moment_voice_nets_tablename) == 0
 
         # WHEN
-        insert_tranunit_partners_net(cursor, a23_tranbook)
+        insert_tranunit_voices_net(cursor, a23_tranbook)
 
         # THEN
-        assert get_row_count(cursor, moment_partner_nets_tablename) == 2
-        select_sqlstr = f"SELECT moment_label, belief_name, {belief_net_amount_str()} FROM {moment_partner_nets_tablename}"
+        assert get_row_count(cursor, moment_voice_nets_tablename) == 2
+        select_sqlstr = f"SELECT moment_label, belief_name, {belief_net_amount_str()} FROM {moment_voice_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [
@@ -57,7 +57,7 @@ def test_insert_tranunit_partners_net_PopulatesDatabase():
         ]
 
 
-def test_etl_moment_json_partner_nets_to_moment_partner_nets_table_PopulatesDatabase(
+def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -83,15 +83,15 @@ def test_etl_moment_json_partner_nets_to_moment_partner_nets_table_PopulatesData
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        moment_partner_nets_tablename = moment_partner_nets_str()
-        assert not db_table_exists(cursor, moment_partner_nets_tablename)
+        moment_voice_nets_tablename = moment_voice_nets_str()
+        assert not db_table_exists(cursor, moment_voice_nets_tablename)
 
         # WHEN
-        etl_moment_json_partner_nets_to_moment_partner_nets_table(cursor, mstr_dir)
+        etl_moment_json_voice_nets_to_moment_voice_nets_table(cursor, mstr_dir)
 
         # THEN
-        assert get_row_count(cursor, moment_partner_nets_tablename) == 2
-        select_sqlstr = f"SELECT moment_label, belief_name, {belief_net_amount_str()} FROM {moment_partner_nets_tablename}"
+        assert get_row_count(cursor, moment_voice_nets_tablename) == 2
+        select_sqlstr = f"SELECT moment_label, belief_name, {belief_net_amount_str()} FROM {moment_voice_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [

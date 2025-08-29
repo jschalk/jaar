@@ -14,7 +14,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     group_title_str,
     healer_name_str,
     moment_label_str,
-    partner_name_str,
     party_title_str,
     penny_str,
     plan_label_str,
@@ -22,6 +21,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     reason_context_str,
     reason_state_str,
     respect_bit_str,
+    voice_name_str,
 )
 from src.a07_timeline_logic.test._util.a07_str import timeline_label_str
 from src.a08_belief_atom_logic.atom_config import (
@@ -69,7 +69,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     pidgin_args_class_types = get_pidgin_args_class_types()
 
     # THEN
-    assert pidgin_args_class_types.get("partner_name") == NameTerm_str()
+    assert pidgin_args_class_types.get("voice_name") == NameTerm_str()
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == TitleTerm_str()
@@ -78,12 +78,12 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
     assert pidgin_args_class_types.get("close") == "float"
-    assert pidgin_args_class_types.get("partner_cred_points") == "float"
+    assert pidgin_args_class_types.get("voice_cred_points") == "float"
     assert pidgin_args_class_types.get("group_cred_points") == "float"
     assert pidgin_args_class_types.get("credor_respect") == "float"
     assert pidgin_args_class_types.get("cumulative_day") == "int"
     assert pidgin_args_class_types.get("cumulative_minute") == "int"
-    assert pidgin_args_class_types.get("partner_debt_points") == "float"
+    assert pidgin_args_class_types.get("voice_debt_points") == "float"
     assert pidgin_args_class_types.get("group_debt_points") == "float"
     assert pidgin_args_class_types.get("debtor_respect") == "float"
     assert pidgin_args_class_types.get("denom") == "int"
@@ -139,7 +139,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert atom_args.issubset(pidgin_args)
     assert moment_args.issubset(pidgin_args)
     assert atom_args.intersection(moment_args) == {
-        partner_name_str(),
+        voice_name_str(),
         fund_iota_str(),
         penny_str(),
         respect_bit_str(),
@@ -204,7 +204,7 @@ def test_get_pidginable_args_ReturnsObj():
 
     assert len(get_pidginable_args()) == 17
     assert get_pidginable_args() == {
-        partner_name_str(),
+        voice_name_str(),
         awardee_title_str(),
         reason_context_str(),
         face_name_str(),
@@ -304,7 +304,7 @@ def test_get_pidgin_NameTerm_args_ReturnsObj():
 
     # THEN
     assert pidgin_NameTerm_args == {
-        partner_name_str(),
+        voice_name_str(),
         face_name_str(),
         healer_name_str(),
         belief_name_str(),

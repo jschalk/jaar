@@ -3,7 +3,7 @@ from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
     moment_label_str,
-    partner_name_str,
+    voice_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
@@ -48,7 +48,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             face_name_str(),
             moment_label_str(),
             belief_name_str(),
-            partner_name_str(),
+            voice_name_str(),
             otx_rope_str(),
             inx_rope_str(),
         ]
@@ -58,7 +58,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}
+, {voice_name_str()}
 , {otx_rope_str()}
 , {inx_rope_str()}
 )"""

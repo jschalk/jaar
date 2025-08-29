@@ -1,9 +1,9 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
-from src.a01_term_logic.term import MomentLabel, PartnerName, RopeTerm
+from src.a01_term_logic.term import MomentLabel, RopeTerm, VoiceName
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.group import AwardUnit, MemberShip
-from src.a03_group_logic.partner import PartnerUnit
+from src.a03_group_logic.voice import VoiceUnit
 from src.a04_reason_logic.reason import (
     CaseUnit,
     FactUnit,
@@ -18,19 +18,17 @@ def beliefunit_exists(x_belief: BeliefUnit) -> bool:
     return x_belief is not None
 
 
-def belief_partnerunit_exists(x_belief: BeliefUnit, jkeys: dict[str, any]) -> bool:
-    x_partner_name = jkeys.get("partner_name")
-    return False if x_belief is None else x_belief.partner_exists(x_partner_name)
+def belief_voiceunit_exists(x_belief: BeliefUnit, jkeys: dict[str, any]) -> bool:
+    x_voice_name = jkeys.get("voice_name")
+    return False if x_belief is None else x_belief.voice_exists(x_voice_name)
 
 
-def belief_partner_membership_exists(
-    x_belief: BeliefUnit, jkeys: dict[str, any]
-) -> bool:
-    x_partner_name = jkeys.get("partner_name")
+def belief_voice_membership_exists(x_belief: BeliefUnit, jkeys: dict[str, any]) -> bool:
+    x_voice_name = jkeys.get("voice_name")
     x_group_title = jkeys.get("group_title")
     return bool(
-        belief_partnerunit_exists(x_belief, jkeys)
-        and x_belief.get_partner(x_partner_name).membership_exists(x_group_title)
+        belief_voiceunit_exists(x_belief, jkeys)
+        and x_belief.get_voice(x_voice_name).membership_exists(x_group_title)
     )
 
 
@@ -101,10 +99,10 @@ def belief_plan_factunit_exists(x_belief: BeliefUnit, jkeys: dict[str, any]) -> 
 def belief_attr_exists(
     x_dimen: str, x_belief: BeliefUnit, jkeys: dict[str, any]
 ) -> bool:
-    if x_dimen == "belief_partner_membership":
-        return belief_partner_membership_exists(x_belief, jkeys)
-    elif x_dimen == "belief_partnerunit":
-        return belief_partnerunit_exists(x_belief, jkeys)
+    if x_dimen == "belief_voice_membership":
+        return belief_voice_membership_exists(x_belief, jkeys)
+    elif x_dimen == "belief_voiceunit":
+        return belief_voiceunit_exists(x_belief, jkeys)
     elif x_dimen == "belief_plan_awardunit":
         return belief_plan_awardunit_exists(x_belief, jkeys)
     elif x_dimen == "belief_plan_factunit":
@@ -124,18 +122,16 @@ def belief_attr_exists(
     return True
 
 
-def belief_partnerunit_get_obj(
-    x_belief: BeliefUnit, jkeys: dict[str, any]
-) -> PartnerUnit:
-    return x_belief.get_partner(jkeys.get("partner_name"))
+def belief_voiceunit_get_obj(x_belief: BeliefUnit, jkeys: dict[str, any]) -> VoiceUnit:
+    return x_belief.get_voice(jkeys.get("voice_name"))
 
 
-def belief_partner_membership_get_obj(
+def belief_voice_membership_get_obj(
     x_belief: BeliefUnit, jkeys: dict[str, any]
 ) -> MemberShip:
-    x_partner_name = jkeys.get("partner_name")
+    x_voice_name = jkeys.get("voice_name")
     x_group_title = jkeys.get("group_title")
-    return x_belief.get_partner(x_partner_name).get_membership(x_group_title)
+    return x_belief.get_voice(x_voice_name).get_membership(x_group_title)
 
 
 def belief_planunit_get_obj(x_belief: BeliefUnit, jkeys: dict[str, any]) -> PlanUnit:
@@ -185,8 +181,8 @@ def belief_get_obj(x_dimen: str, x_belief: BeliefUnit, jkeys: dict[str, any]) ->
         return x_belief
 
     x_dimens = {
-        "belief_partnerunit": belief_partnerunit_get_obj,
-        "belief_partner_membership": belief_partner_membership_get_obj,
+        "belief_voiceunit": belief_voiceunit_get_obj,
+        "belief_voice_membership": belief_voice_membership_get_obj,
         "belief_planunit": belief_planunit_get_obj,
         "belief_plan_awardunit": belief_plan_awardunit_get_obj,
         "belief_plan_reasonunit": belief_plan_reasonunit_get_obj,
@@ -197,7 +193,7 @@ def belief_get_obj(x_dimen: str, x_belief: BeliefUnit, jkeys: dict[str, any]) ->
         return x_func(x_belief, jkeys)
 
 
-def get_belief_partner_agenda_award_array(
+def get_belief_voice_agenda_award_array(
     x_belief: BeliefUnit, cash_out: bool = None
 ) -> list[list]:
     if cash_out:
@@ -205,40 +201,37 @@ def get_belief_partner_agenda_award_array(
 
     x_list = [
         [
-            x_partner.partner_name,
-            x_partner._fund_agenda_take,
-            x_partner._fund_agenda_give,
+            x_voice.voice_name,
+            x_voice.fund_agenda_take,
+            x_voice.fund_agenda_give,
         ]
-        for x_partner in x_belief.partners.values()
+        for x_voice in x_belief.voices.values()
     ]
     x_list.sort(key=lambda y: y[0], reverse=False)
     return x_list
 
 
-def get_belief_partner_agenda_award_csv(
+def get_belief_voice_agenda_award_csv(
     x_belief: BeliefUnit, cash_out: bool = None
 ) -> str:
-    x_partner_agenda_award_array = get_belief_partner_agenda_award_array(
-        x_belief, cash_out
-    )
-    x_headers = ["partner_name", "fund_agenda_take", "fund_agenda_give"]
-    return create_csv(x_headers, x_partner_agenda_award_array)
+    x_voice_agenda_award_array = get_belief_voice_agenda_award_array(x_belief, cash_out)
+    x_headers = ["voice_name", "fund_agenda_take", "fund_agenda_give"]
+    return create_csv(x_headers, x_voice_agenda_award_array)
 
 
-def get_partner_mandate_ledger(
+def get_voice_mandate_ledger(
     x_belief: BeliefUnit, cash_out: bool = None
-) -> dict[PartnerName, FundNum]:
+) -> dict[VoiceName, FundNum]:
     if not x_belief:
         return {}
-    if len(x_belief.partners) == 0:
+    if len(x_belief.voices) == 0:
         return {x_belief.belief_name: x_belief.fund_pool}
 
     if cash_out:
         x_belief.cash_out()
-    belief_partners = x_belief.partners.values()
+    belief_voices = x_belief.voices.values()
     mandates = {
-        x_partner.partner_name: x_partner._fund_agenda_give
-        for x_partner in belief_partners
+        x_voice.voice_name: x_voice.fund_agenda_give for x_voice in belief_voices
     }
     mandate_sum = sum(mandates.values())
     if mandate_sum == 0:
@@ -249,31 +242,31 @@ def get_partner_mandate_ledger(
 
 
 def reset_mandates_to_minimum(
-    mandates: dict[PartnerName, FundNum], penny: FundNum
-) -> dict[PartnerName, FundNum]:
+    mandates: dict[VoiceName, FundNum], penny: FundNum
+) -> dict[VoiceName, FundNum]:
     """Reset all mandates to the minimum value (penny)."""
 
-    partner_names = set(mandates.keys())
-    for partner_name in partner_names:
-        mandates[partner_name] = penny
+    voice_names = set(mandates.keys())
+    for voice_name in voice_names:
+        mandates[voice_name] = penny
     return mandates
 
 
-def get_partner_agenda_net_ledger(
+def get_voice_agenda_net_ledger(
     x_belief: BeliefUnit, cash_out: bool = None
-) -> dict[PartnerName, FundNum]:
+) -> dict[VoiceName, FundNum]:
     if cash_out:
         x_belief.cash_out()
 
     x_dict = {}
-    for x_partner in x_belief.partners.values():
-        settle_net = get_net(x_partner._fund_agenda_give, x_partner._fund_agenda_take)
+    for x_voice in x_belief.voices.values():
+        settle_net = get_net(x_voice.fund_agenda_give, x_voice.fund_agenda_take)
         if settle_net != 0:
-            x_dict[x_partner.partner_name] = settle_net
+            x_dict[x_voice.voice_name] = settle_net
     return x_dict
 
 
-def get_credit_ledger(x_belief: BeliefUnit) -> dict[PartnerUnit, RespectNum]:
+def get_credit_ledger(x_belief: BeliefUnit) -> dict[VoiceUnit, RespectNum]:
     credit_ledger, debt_ledger = x_belief.get_credit_ledger_debt_ledger()
     return credit_ledger
 

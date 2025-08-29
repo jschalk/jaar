@@ -494,7 +494,7 @@ class BeliefTimelinePoint:
             month_plan = month_plan
 
         self._monthday = (
-            reason_lower_rangeunit.gogo - month_plan._gogo_calc + month_plan.addin
+            reason_lower_rangeunit.gogo - month_plan.gogo_calc + month_plan.addin
         )
         self._monthday = self._monthday // 1440
 
@@ -508,7 +508,7 @@ class BeliefTimelinePoint:
             self._hour = x_hour
             hour_plan = hour_plan
 
-        self._minute = rangeunit.gogo - hour_plan._gogo_calc
+        self._minute = rangeunit.gogo - hour_plan.gogo_calc
 
     def _set_year(self):
         c400_constants = get_c400_constants()

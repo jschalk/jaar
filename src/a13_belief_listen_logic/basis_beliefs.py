@@ -24,14 +24,14 @@ def create_empty_belief_from_belief(
 
 def create_listen_basis(x_belief: BeliefUnit) -> BeliefUnit:
     x_listen = create_empty_belief_from_belief(x_belief, x_belief.belief_name)
-    x_listen.partners = x_belief.partners
+    x_listen.voices = x_belief.voices
     x_listen.set_max_tree_traverse(x_belief.max_tree_traverse)
     if x_belief.credor_respect is not None:
         x_listen.set_credor_respect(x_belief.credor_respect)
     if x_belief.debtor_respect is not None:
         x_listen.set_debtor_respect(x_belief.debtor_respect)
-    for x_partnerunit in x_listen.partners.values():
-        x_partnerunit.reset_listen_calculated_attrs()
+    for x_voiceunit in x_listen.voices.values():
+        x_voiceunit.reset_listen_calculated_attrs()
     return x_listen
 
 

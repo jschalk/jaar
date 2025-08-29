@@ -2,8 +2,6 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -11,6 +9,8 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
     moment_label_str,
 )
@@ -60,10 +60,8 @@ def test_create_job_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        blrmemb_job_table = prime_table(
-            belief_partner_membership_str(), job_str(), None
-        )
-        blrpern_job_table = prime_table(belief_partnerunit_str(), job_str(), None)
+        blrmemb_job_table = prime_table(belief_voice_membership_str(), job_str(), None)
+        blrpern_job_table = prime_table(belief_voiceunit_str(), job_str(), None)
         blrgrou_job_table = prime_table(belief_groupunit_str(), job_str(), None)
         blrawar_job_table = prime_table(belief_plan_awardunit_str(), job_str(), None)
         blrfact_job_table = prime_table(belief_plan_factunit_str(), job_str(), None)
@@ -77,8 +75,8 @@ def test_create_job_tables_CreatesTables():
         blrlabo_job_table = prime_table(belief_plan_partyunit_str(), job_str(), None)
         blrplan_job_table = prime_table(belief_planunit_str(), job_str(), None)
         blrunit_job_table = prime_table(beliefunit_str(), job_str(), None)
-        # blrmemb_job_table = f"{belief_partner_membership_str()}_job"
-        # blrpern_job_table = f"{belief_partnerunit_str()}_job"
+        # blrmemb_job_table = f"{belief_voice_membership_str()}_job"
+        # blrpern_job_table = f"{belief_voiceunit_str()}_job"
         # blrgrou_job_table = f"{belief_groupunit_str()}_job"
         # blrawar_job_table = f"{belief_plan_awardunit_str()}_job"
         # blrfact_job_table = f"{belief_plan_factunit_str()}_job"

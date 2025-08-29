@@ -6,9 +6,9 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
 )
 from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
-from src.a01_term_logic.term import LabelTerm, PartnerName, RopeTerm, TitleTerm
+from src.a01_term_logic.term import LabelTerm, RopeTerm, TitleTerm, VoiceName
 from src.a03_group_logic.group import awardunit_shop
-from src.a03_group_logic.partner import partnerunit_shop
+from src.a03_group_logic.voice import voiceunit_shop
 from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit
@@ -201,32 +201,30 @@ def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
         x_belief.penny = x_atom.get_value(x_arg)
 
 
-def _modify_belief_partner_membership_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
-    x_partner_name = x_atom.get_value("partner_name")
+def _modify_belief_voice_membership_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
+    x_voice_name = x_atom.get_value("voice_name")
     x_group_title = x_atom.get_value("group_title")
-    x_belief.get_partner(x_partner_name).delete_membership(x_group_title)
+    x_belief.get_voice(x_voice_name).delete_membership(x_group_title)
 
 
-def _modify_belief_partner_membership_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
-    x_partner_name = x_atom.get_value("partner_name")
+def _modify_belief_voice_membership_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
+    x_voice_name = x_atom.get_value("voice_name")
     x_group_title = x_atom.get_value("group_title")
-    x_partnerunit = x_belief.get_partner(x_partner_name)
-    x_membership = x_partnerunit.get_membership(x_group_title)
+    x_voiceunit = x_belief.get_voice(x_voice_name)
+    x_membership = x_voiceunit.get_membership(x_group_title)
     x_group_cred_points = x_atom.get_value("group_cred_points")
     x_group_debt_points = x_atom.get_value("group_debt_points")
     x_membership.set_group_cred_points(x_group_cred_points)
     x_membership.set_group_debt_points(x_group_debt_points)
 
 
-def _modify_belief_partner_membership_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
-    x_partner_name = x_atom.get_value("partner_name")
+def _modify_belief_voice_membership_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
+    x_voice_name = x_atom.get_value("voice_name")
     x_group_title = x_atom.get_value("group_title")
     x_group_cred_points = x_atom.get_value("group_cred_points")
     x_group_debt_points = x_atom.get_value("group_debt_points")
-    x_partnerunit = x_belief.get_partner(x_partner_name)
-    x_partnerunit.add_membership(
-        x_group_title, x_group_cred_points, x_group_debt_points
-    )
+    x_voiceunit = x_belief.get_voice(x_voice_name)
+    x_voiceunit.add_membership(x_group_title, x_group_cred_points, x_group_debt_points)
 
 
 def _modify_belief_planunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -406,24 +404,24 @@ def _modify_belief_plan_healerunit_insert(x_belief: BeliefUnit, x_atom: BeliefAt
     x_planunit.healerunit.set_healer_name(x_atom.get_value("healer_name"))
 
 
-def _modify_belief_partnerunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
-    x_belief.del_partnerunit(x_atom.get_value("partner_name"))
+def _modify_belief_voiceunit_delete(x_belief: BeliefUnit, x_atom: BeliefAtom):
+    x_belief.del_voiceunit(x_atom.get_value("voice_name"))
 
 
-def _modify_belief_partnerunit_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
-    x_belief.edit_partnerunit(
-        partner_name=x_atom.get_value("partner_name"),
-        partner_cred_points=x_atom.get_value("partner_cred_points"),
-        partner_debt_points=x_atom.get_value("partner_debt_points"),
+def _modify_belief_voiceunit_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
+    x_belief.edit_voiceunit(
+        voice_name=x_atom.get_value("voice_name"),
+        voice_cred_points=x_atom.get_value("voice_cred_points"),
+        voice_debt_points=x_atom.get_value("voice_debt_points"),
     )
 
 
-def _modify_belief_partnerunit_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
-    x_belief.set_partnerunit(
-        partnerunit_shop(
-            partner_name=x_atom.get_value("partner_name"),
-            partner_cred_points=x_atom.get_value("partner_cred_points"),
-            partner_debt_points=x_atom.get_value("partner_debt_points"),
+def _modify_belief_voiceunit_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
+    x_belief.set_voiceunit(
+        voiceunit_shop(
+            voice_name=x_atom.get_value("voice_name"),
+            voice_cred_points=x_atom.get_value("voice_cred_points"),
+            voice_debt_points=x_atom.get_value("voice_debt_points"),
         )
     )
 
@@ -433,13 +431,13 @@ def _modify_belief_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
         _modify_belief_update_beliefunit(x_belief, x_atom)
 
 
-def _modify_belief_partner_membership(x_belief: BeliefUnit, x_atom: BeliefAtom):
+def _modify_belief_voice_membership(x_belief: BeliefUnit, x_atom: BeliefAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_belief_partner_membership_delete(x_belief, x_atom)
+        _modify_belief_voice_membership_delete(x_belief, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_belief_partner_membership_update(x_belief, x_atom)
+        _modify_belief_voice_membership_update(x_belief, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_belief_partner_membership_insert(x_belief, x_atom)
+        _modify_belief_voice_membership_insert(x_belief, x_atom)
 
 
 def _modify_belief_planunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
@@ -501,20 +499,20 @@ def _modify_belief_plan_healerunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
         _modify_belief_plan_healerunit_insert(x_belief, x_atom)
 
 
-def _modify_belief_partnerunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
+def _modify_belief_voiceunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
     if x_atom.crud_str == "DELETE":
-        _modify_belief_partnerunit_delete(x_belief, x_atom)
+        _modify_belief_voiceunit_delete(x_belief, x_atom)
     elif x_atom.crud_str == "UPDATE":
-        _modify_belief_partnerunit_update(x_belief, x_atom)
+        _modify_belief_voiceunit_update(x_belief, x_atom)
     elif x_atom.crud_str == "INSERT":
-        _modify_belief_partnerunit_insert(x_belief, x_atom)
+        _modify_belief_voiceunit_insert(x_belief, x_atom)
 
 
 def modify_belief_with_beliefatom(x_belief: BeliefUnit, x_atom: BeliefAtom):
     if x_atom.dimen == "beliefunit":
         _modify_belief_beliefunit(x_belief, x_atom)
-    elif x_atom.dimen == "belief_partner_membership":
-        _modify_belief_partner_membership(x_belief, x_atom)
+    elif x_atom.dimen == "belief_voice_membership":
+        _modify_belief_voice_membership(x_belief, x_atom)
     elif x_atom.dimen == "belief_planunit":
         _modify_belief_planunit(x_belief, x_atom)
     elif x_atom.dimen == "belief_plan_awardunit":
@@ -529,8 +527,8 @@ def modify_belief_with_beliefatom(x_belief: BeliefUnit, x_atom: BeliefAtom):
         _modify_belief_plan_healerunit(x_belief, x_atom)
     elif x_atom.dimen == "belief_plan_partyunit":
         _modify_belief_plan_partyunit(x_belief, x_atom)
-    elif x_atom.dimen == "belief_partnerunit":
-        _modify_belief_partnerunit(x_belief, x_atom)
+    elif x_atom.dimen == "belief_voiceunit":
+        _modify_belief_voiceunit(x_belief, x_atom)
 
 
 def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
@@ -544,7 +542,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.fund_pool != y_obj.fund_pool
             or x_obj.fund_iota != y_obj.fund_iota
         )
-    elif dimen in {"belief_partner_membership"}:
+    elif dimen in {"belief_voice_membership"}:
         return (x_obj.group_cred_points != y_obj.group_cred_points) or (
             x_obj.group_debt_points != y_obj.group_debt_points
         )
@@ -577,9 +575,9 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.reason_upper != y_obj.reason_upper
             or x_obj.reason_divisor != y_obj.reason_divisor
         )
-    elif dimen == "belief_partnerunit":
-        return (x_obj.partner_cred_points != y_obj.partner_cred_points) or (
-            x_obj.partner_debt_points != y_obj.partner_debt_points
+    elif dimen == "belief_voiceunit":
+        return (x_obj.voice_cred_points != y_obj.voice_cred_points) or (
+            x_obj.voice_debt_points != y_obj.voice_debt_points
         )
 
 
@@ -601,7 +599,7 @@ def get_beliefatom_from_rowdata(x_rowdata: RowData) -> BeliefAtom:
 class AtomRow:
     _atom_dimens: set[str] = None
     _crud_command: CRUD_command = None
-    partner_name: PartnerName = None
+    voice_name: VoiceName = None
     addin: float = None
     awardee_title: TitleTerm = None
     reason_context: RopeTerm = None
@@ -609,10 +607,10 @@ class AtomRow:
     begin: float = None
     respect_bit: float = None
     close: float = None
-    partner_cred_points: int = None
+    voice_cred_points: int = None
     group_cred_points: int = None
     credor_respect: int = None
-    partner_debt_points: int = None
+    voice_debt_points: int = None
     group_debt_points: int = None
     debtor_respect: int = None
     denom: int = None
@@ -658,7 +656,7 @@ class AtomRow:
             x_value = self.__dict__.get(x_arg)
             if x_value != None:
                 if class_type == "NameTerm":
-                    self.__dict__[x_arg] = PartnerName(x_value)
+                    self.__dict__[x_arg] = VoiceName(x_value)
                 elif class_type == "TitleTerm":
                     self.__dict__[x_arg] = TitleTerm(x_value)
                 elif class_type == "RopeTerm":

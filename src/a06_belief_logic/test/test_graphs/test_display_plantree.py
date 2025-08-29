@@ -3,7 +3,7 @@ from src.a06_belief_logic.belief_graphics import (
     display_plantree,
     fund_graph0,
     get_belief_agenda_plotly_fig,
-    get_belief_partners_plotly_fig,
+    get_belief_voices_plotly_fig,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.example_beliefs import (
@@ -47,26 +47,22 @@ def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
     display_plantree(a_belief, mode="Chore", graphics_bool=graphics_bool)
 
 
-def test_get_belief_partners_plotly_fig_DisplaysInfo(graphics_bool):
+def test_get_belief_voices_plotly_fig_DisplaysInfo(graphics_bool):
     # ESTABLISH
     luca_belief = beliefunit_shop()
     luca_belief.set_credor_respect(500)
     luca_belief.set_debtor_respect(400)
     yao_str = "Yao"
-    yao_partner_cred_points = 66
-    yao_partner_debt_points = 77
-    luca_belief.add_partnerunit(
-        yao_str, yao_partner_cred_points, yao_partner_debt_points
-    )
+    yao_voice_cred_points = 66
+    yao_voice_debt_points = 77
+    luca_belief.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
     sue_str = "Sue"
-    sue_partner_cred_points = 434
-    sue_partner_debt_points = 323
-    luca_belief.add_partnerunit(
-        sue_str, sue_partner_cred_points, sue_partner_debt_points
-    )
+    sue_voice_cred_points = 434
+    sue_voice_debt_points = 323
+    luca_belief.add_voiceunit(sue_str, sue_voice_cred_points, sue_voice_debt_points)
 
     # WHEN
-    x_fig = get_belief_partners_plotly_fig(luca_belief)
+    x_fig = get_belief_voices_plotly_fig(luca_belief)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

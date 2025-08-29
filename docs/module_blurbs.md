@@ -17,7 +17,7 @@ What does each one do?
 - **a12_hub_tools**: These tools are used to handle complex operations involving belief files, will be deprecated.
 - **a13_belief_listen_logic**: These tools describe how one beliefunit listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
-- **a15_moment_logic**: A MomentUnit is a Moment system with the basic requirements: common system of time, partner tranactions ledger, etc. Importantly a Moment system must know the state of a belief's beliefunit at any time in the past. 
+- **a15_moment_logic**: A MomentUnit is a Moment system with the basic requirements: common system of time, voice tranactions ledger, etc. Importantly a Moment system must know the state of a belief's beliefunit at any time in the past. 
 - **a16_pidgin_logic**: A tool that translates words from outside language to inside language.  
 - **a17_idea_logic**: idea bricks are tables of data that build moment systems and the beliefunits within them.
 - **a18_etl_toolbox**: 

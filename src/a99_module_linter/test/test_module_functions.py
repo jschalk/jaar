@@ -1,3 +1,5 @@
+from importlib import import_module as importlib_import_module
+from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.a98_docs_builder.module_eval import get_module_descs, get_module_str_functions
@@ -10,22 +12,21 @@ from src.a99_module_linter.linter import (
     get_docstring,
     get_duplicated_functions,
     get_json_files,
+    get_max_module_import_str,
     get_python_files_with_flag,
     get_top_level_functions,
 )
 
 
 def test_Modules_StrFunctionsAppearWhereTheyShould():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
     # "close" is excluded because it is used to close sqlite database connections
-    excluded_strs = {"close", "_level"}
+    excluded_strs = {"close", "tree_level"}
 
     # WHEN / THEN
-
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         module_files = list(get_python_files_with_flag(module_dir).keys())
@@ -48,6 +49,23 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
+
+
+def test_Modules_StrFunctionsAreAllImported():
+    # ESTABLISH / WHEN
+    all_str_functions = get_all_str_functions()
+
+    # THEN confirm all str functions are imported to max module
+    max_module_import_str = get_max_module_import_str()
+    print(f"{max_module_import_str=}")
+    max_mod_obj = importlib_import_module(max_module_import_str)
+    mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
+    mod_str_funcs = {name for name, obj in mod_all_funcs if not name.startswith("__")}
+
+    print(f"{len(mod_all_funcs)=}")
+    assert len(all_str_functions) == len(mod_str_funcs)
+    all_str_func_set = set(all_str_functions)
+    assert all_str_func_set == mod_str_funcs
 
 
 def test_Modules_MostFunctionsAreUniquelyNamed():
@@ -192,8 +210,7 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
 
 
 def test_Modules_path_FunctionStructureAndFormat():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}

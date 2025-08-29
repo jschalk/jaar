@@ -15,18 +15,18 @@ from src.a03_group_logic.group import (
     memberships_get_from_dict,
 )
 from src.a03_group_logic.test._util.a03_str import (
-    _credor_pool_str,
-    _debtor_pool_str,
-    _fund_agenda_give_str,
-    _fund_agenda_ratio_give_str,
-    _fund_agenda_ratio_take_str,
-    _fund_agenda_take_str,
-    _fund_give_str,
-    _fund_take_str,
+    credor_pool_str,
+    debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
+    fund_give_str,
+    fund_take_str,
     group_cred_points_str,
     group_debt_points_str,
     group_title_str,
-    partner_name_str,
+    voice_name_str,
 )
 
 
@@ -51,30 +51,30 @@ def test_MemberShip_Exists():
     assert swim_membership.group_title == swim_str
     assert swim_membership.group_cred_points == 1.0
     assert swim_membership.group_debt_points == 1.0
-    assert not swim_membership._credor_pool
-    assert not swim_membership._debtor_pool
-    assert not swim_membership._fund_give
-    assert not swim_membership._fund_take
-    assert not swim_membership._fund_agenda_give
-    assert not swim_membership._fund_agenda_take
-    assert not swim_membership._fund_agenda_ratio_give
-    assert not swim_membership._fund_agenda_ratio_take
-    assert not swim_membership.partner_name
+    assert not swim_membership.credor_pool
+    assert not swim_membership.debtor_pool
+    assert not swim_membership.fund_give
+    assert not swim_membership.fund_take
+    assert not swim_membership.fund_agenda_give
+    assert not swim_membership.fund_agenda_take
+    assert not swim_membership.fund_agenda_ratio_give
+    assert not swim_membership.fund_agenda_ratio_take
+    assert not swim_membership.voice_name
     obj_attrs = set(swim_membership.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        partner_name_str(),
+        voice_name_str(),
         group_title_str(),
         group_cred_points_str(),
         group_debt_points_str(),
-        _credor_pool_str(),
-        _debtor_pool_str(),
-        _fund_agenda_give_str(),
-        _fund_agenda_ratio_give_str(),
-        _fund_agenda_ratio_take_str(),
-        _fund_agenda_take_str(),
-        _fund_give_str(),
-        _fund_take_str(),
+        credor_pool_str(),
+        debtor_pool_str(),
+        fund_agenda_give_str(),
+        fund_agenda_ratio_give_str(),
+        fund_agenda_ratio_take_str(),
+        fund_agenda_take_str(),
+        fund_give_str(),
+        fund_take_str(),
     }
 
 
@@ -94,30 +94,30 @@ def test_membership_shop_ReturnsObj():
     # THEN
     assert swim_membership.group_cred_points == swim_group_cred_points
     assert swim_membership.group_debt_points == swim_group_debt_points
-    assert swim_membership._credor_pool == 0
-    assert swim_membership._debtor_pool == 0
-    assert not swim_membership._fund_give
-    assert not swim_membership._fund_take
-    assert not swim_membership._fund_agenda_give
-    assert not swim_membership._fund_agenda_take
-    assert not swim_membership._fund_agenda_ratio_give
-    assert not swim_membership._fund_agenda_ratio_take
-    assert not swim_membership.partner_name
+    assert swim_membership.credor_pool == 0
+    assert swim_membership.debtor_pool == 0
+    assert not swim_membership.fund_give
+    assert not swim_membership.fund_take
+    assert not swim_membership.fund_agenda_give
+    assert not swim_membership.fund_agenda_take
+    assert not swim_membership.fund_agenda_ratio_give
+    assert not swim_membership.fund_agenda_ratio_take
+    assert not swim_membership.voice_name
 
 
-def test_membership_shop_ReturnsObjAttr_partner_name():
+def test_membership_shop_ReturnsObjAttr_voice_name():
     # ESTABLISH
     swim_str = ",swim"
     yao_str = "Yao"
 
     # WHEN
-    swim_membership = membership_shop(swim_str, partner_name=yao_str)
+    swim_membership = membership_shop(swim_str, voice_name=yao_str)
 
     # THEN
-    assert swim_membership.partner_name == yao_str
+    assert swim_membership.voice_name == yao_str
 
 
-# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotPartnerNameAndIsLabelTerm():
+# def test_MemberShip_set_group_title_RaisesErrorIf_group_title_IsNotVoiceNameAndIsLabelTerm():
 #     # ESTABLISH
 #     slash_str = "/"
 #     # bob_str = f"Bob{slash_str}Texas"
@@ -127,7 +127,7 @@ def test_membership_shop_ReturnsObjAttr_partner_name():
 
 #     # WHEN / THEN
 #     with pytest_raises(Exception) as excinfo:
-#         membership_shop(swim_str, partner_name=bob_str, knot=slash_str)
+#         membership_shop(swim_str, voice_name=bob_str, knot=slash_str)
 #     assert (
 #         str(excinfo.value)
 #         == f"'{swim_str}' needs to not be a LabelTerm. Must contain knot: '{slash_str}'"
@@ -247,7 +247,7 @@ def test_membership_get_from_dict_ReturnsObj():
         group_title=swim_str,
         group_cred_points=swim_group_cred_points,
         group_debt_points=swim_group_debt_points,
-        partner_name=yao_str,
+        voice_name=yao_str,
     )
     swim_membership_dict = before_swim_membership.to_dict()
 
@@ -269,7 +269,7 @@ def test_memberships_get_from_dict_ReturnsObj():
         group_title=swim_str,
         group_cred_points=swim_group_cred_points,
         group_debt_points=swim_group_debt_points,
-        partner_name=yao_str,
+        voice_name=yao_str,
     )
     before_swim_memberships_objs = {swim_str: before_swim_membership}
     swim_memberships_dict = {swim_str: before_swim_membership.to_dict()}
@@ -287,29 +287,29 @@ def test_memberships_get_from_dict_ReturnsObj():
 def test_MemberShip_clear_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_membership = membership_shop("Bob")
-    bob_membership._fund_give = 0.27
-    bob_membership._fund_take = 0.37
-    bob_membership._fund_agenda_give = 0.41
-    bob_membership._fund_agenda_take = 0.51
-    bob_membership._fund_agenda_ratio_give = 0.433
-    bob_membership._fund_agenda_ratio_take = 0.533
-    assert bob_membership._fund_give == 0.27
-    assert bob_membership._fund_take == 0.37
-    assert bob_membership._fund_agenda_give == 0.41
-    assert bob_membership._fund_agenda_take == 0.51
-    assert bob_membership._fund_agenda_ratio_give == 0.433
-    assert bob_membership._fund_agenda_ratio_take == 0.533
+    bob_membership.fund_give = 0.27
+    bob_membership.fund_take = 0.37
+    bob_membership.fund_agenda_give = 0.41
+    bob_membership.fund_agenda_take = 0.51
+    bob_membership.fund_agenda_ratio_give = 0.433
+    bob_membership.fund_agenda_ratio_take = 0.533
+    assert bob_membership.fund_give == 0.27
+    assert bob_membership.fund_take == 0.37
+    assert bob_membership.fund_agenda_give == 0.41
+    assert bob_membership.fund_agenda_take == 0.51
+    assert bob_membership.fund_agenda_ratio_give == 0.433
+    assert bob_membership.fund_agenda_ratio_take == 0.533
 
     # WHEN
     bob_membership.clear_fund_give_take()
 
     # THEN
-    assert bob_membership._fund_give == 0
-    assert bob_membership._fund_take == 0
-    assert bob_membership._fund_agenda_give == 0
-    assert bob_membership._fund_agenda_take == 0
-    assert bob_membership._fund_agenda_ratio_give == 0
-    assert bob_membership._fund_agenda_ratio_take == 0
+    assert bob_membership.fund_give == 0
+    assert bob_membership.fund_take == 0
+    assert bob_membership.fund_agenda_give == 0
+    assert bob_membership.fund_agenda_take == 0
+    assert bob_membership.fund_agenda_ratio_give == 0
+    assert bob_membership.fund_agenda_ratio_take == 0
 
 
 def test_AwardUnit_Exists():
@@ -351,8 +351,8 @@ def test_AwardHeir_Exists():
     assert not x_awardheir.awardee_title
     assert x_awardheir.give_force == 1.0
     assert x_awardheir.take_force == 1.0
-    assert not x_awardheir._fund_give
-    assert not x_awardheir._fund_take
+    assert not x_awardheir.fund_give
+    assert not x_awardheir.fund_take
 
 
 def test_awardheir_shop_ReturnsObj():
@@ -432,14 +432,14 @@ def test_AwardLine_Exists():
     # WHEN
     bikers_awardline = AwardLine(
         awardee_title=bikers_str,
-        _fund_give=bikers_fund_give,
-        _fund_take=bikers_fund_take,
+        fund_give=bikers_fund_give,
+        fund_take=bikers_fund_take,
     )
 
     # THEN
     assert bikers_awardline.awardee_title == bikers_str
-    assert bikers_awardline._fund_give == bikers_fund_give
-    assert bikers_awardline._fund_take == bikers_fund_take
+    assert bikers_awardline.fund_give == bikers_fund_give
+    assert bikers_awardline.fund_take == bikers_fund_take
 
 
 def test_awardline_shop_ReturnsObj_Exists():
@@ -452,30 +452,30 @@ def test_awardline_shop_ReturnsObj_Exists():
     # WHEN
     biker_awardline = awardline_shop(
         awardee_title=bikers_str,
-        _fund_give=bikers_fund_give,
-        _fund_take=bikers_fund_take,
+        fund_give=bikers_fund_give,
+        fund_take=bikers_fund_take,
     )
 
     # THEN
     assert biker_awardline is not None
     assert biker_awardline.awardee_title == bikers_str
-    assert biker_awardline._fund_give == bikers_fund_give
-    assert biker_awardline._fund_take == bikers_fund_take
+    assert biker_awardline.fund_give == bikers_fund_give
+    assert biker_awardline.fund_take == bikers_fund_take
 
 
 def test_AwardLine_add_fund_give_take_ModifiesAttr():
     # ESTABLISH
     bikers_str = "bikers"
     bikers_awardline = awardline_shop(
-        awardee_title=bikers_str, _fund_give=0.33, _fund_take=0.55
+        awardee_title=bikers_str, fund_give=0.33, fund_take=0.55
     )
     assert bikers_awardline.awardee_title == bikers_str
-    assert bikers_awardline._fund_give == 0.33
-    assert bikers_awardline._fund_take == 0.55
+    assert bikers_awardline.fund_give == 0.33
+    assert bikers_awardline.fund_take == 0.55
 
     # WHEN
     bikers_awardline.add_fund_give_take(fund_give=0.11, fund_take=0.2)
 
     # THEN
-    assert bikers_awardline._fund_give == 0.44
-    assert bikers_awardline._fund_take == 0.75
+    assert bikers_awardline.fund_give == 0.44
+    assert bikers_awardline.fund_take == 0.75

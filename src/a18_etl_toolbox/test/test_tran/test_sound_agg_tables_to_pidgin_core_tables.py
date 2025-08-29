@@ -2,8 +2,8 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
-    belief_partnerunit_str,
-    partner_name_str,
+    belief_voiceunit_str,
+    voice_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.pidgin_main import (
@@ -1254,10 +1254,10 @@ def test_populate_pidgin_core_vld_with_missing_face_names_Scenario0_Populates1Mi
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_partnerunit_str()
+        blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {partner_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1289,10 +1289,10 @@ def test_populate_pidgin_core_vld_with_missing_face_names_Scenario1_PopulatesSom
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_partnerunit_str()
+        blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {partner_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1332,10 +1332,10 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario2_Popula
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_partnerunit_str()
+        blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {partner_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1367,10 +1367,10 @@ def test_etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables_Scenario3_Popula
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_partnerunit_str()
+        blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {partner_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 

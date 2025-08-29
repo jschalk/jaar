@@ -82,7 +82,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
     )
     expected_amy23_momentunit.add_paypurchase(
         belief_name="Zia",
-        partner_name="Bob",
+        voice_name="Bob",
         tran_time=777,
         amount=888,
     )

@@ -113,10 +113,10 @@ def test_BeliefUnit_find_replace_rope_Modifies_kids_Scenario1():
     r_plan_roses = yao_belief.get_plan_obj(old_roses_rope)
     r_plan_bloomers = yao_belief.get_plan_obj(old_bloomers_rope)
 
-    assert r_plan_bloomers._kids.get(roses_str)
+    assert r_plan_bloomers.kids.get(roses_str)
     assert r_plan_roses.parent_rope == old_bloomers_rope
-    assert r_plan_roses._kids.get(red_str)
-    r_plan_red = r_plan_roses._kids.get(red_str)
+    assert r_plan_roses.kids.get(red_str)
+    r_plan_red = r_plan_roses.kids.get(red_str)
     assert r_plan_red.parent_rope == old_roses_rope
 
     # WHEN
@@ -125,17 +125,17 @@ def test_BeliefUnit_find_replace_rope_Modifies_kids_Scenario1():
     yao_belief.edit_plan_label(old_rope=old_casa_rope, new_plan_label=new_casa_str)
 
     # THEN
-    assert yao_belief.planroot._kids.get(new_casa_str) is not None
-    assert yao_belief.planroot._kids.get(old_casa_str) is None
+    assert yao_belief.planroot.kids.get(new_casa_str) is not None
+    assert yao_belief.planroot.kids.get(old_casa_str) is None
 
     assert r_plan_bloomers.parent_rope == new_casa_rope
-    assert r_plan_bloomers._kids.get(roses_str) is not None
+    assert r_plan_bloomers.kids.get(roses_str) is not None
 
-    r_plan_roses = r_plan_bloomers._kids.get(roses_str)
+    r_plan_roses = r_plan_bloomers.kids.get(roses_str)
     new_bloomers_rope = yao_belief.make_rope(new_casa_rope, bloomers_str)
     assert r_plan_roses.parent_rope == new_bloomers_rope
-    assert r_plan_roses._kids.get(red_str) is not None
-    r_plan_red = r_plan_roses._kids.get(red_str)
+    assert r_plan_roses.kids.get(red_str) is not None
+    r_plan_red = r_plan_roses.kids.get(red_str)
     new_roses_rope = yao_belief.make_rope(new_bloomers_rope, roses_str)
     assert r_plan_red.parent_rope == new_roses_rope
 

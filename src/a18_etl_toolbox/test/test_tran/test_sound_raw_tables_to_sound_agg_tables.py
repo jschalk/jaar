@@ -2,11 +2,11 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a06_belief_logic.test._util.a06_str import (
     belief_name_str,
-    belief_partnerunit_str,
+    belief_voiceunit_str,
     moment_label_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.test._util.a16_str import (
@@ -165,7 +165,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         beliefa_s_raw_del = create_prime_tablename(
-            belief_partnerunit_str(), "s", "raw", "del"
+            belief_voiceunit_str(), "s", "raw", "del"
         )
         insert_into_clause = f"""INSERT INTO {beliefa_s_raw_del} (
   {idea_number_str()}
@@ -173,7 +173,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}_ERASE
+, {voice_name_str()}_ERASE
 )"""
         b117 = "br00117"
         b045 = "br00045"
@@ -262,9 +262,9 @@ VALUES
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 , {error_message_str()}
 )"""
         values_clause = f"""
@@ -342,7 +342,7 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}_ERASE
+, {voice_name_str()}_ERASE
 )"""
         values_clause = f"""
 VALUES
@@ -430,9 +430,9 @@ VALUES
 , {face_name_str()}
 , {moment_label_str()}
 , {belief_name_str()}
-, {partner_name_str()}
-, {partner_cred_points_str()}
-, {partner_debt_points_str()}
+, {voice_name_str()}
+, {voice_cred_points_str()}
+, {voice_debt_points_str()}
 , {error_message_str()}
 )"""
         values_clause = f"""

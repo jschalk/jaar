@@ -83,8 +83,8 @@ A way I could be if believe in Football:
 
 
 If I believe in Kindness:
-1. ;kindess;at park;listen to partner;
-2. ;kindess;at park;give money to partner;
+1. ;kindess;at park;listen to voice;
+2. ;kindess;at park;give money to voice;
 3. ;kindess;at park;say hi to people;
 4. ;kindess;at park;pick up trash;
 5. ;kindess;at park;supervise kids;

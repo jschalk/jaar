@@ -1,4 +1,4 @@
-from src.a06_belief_logic.test._util.a06_str import attributes_str, dimens_str
+from src.a16_pidgin_logic.test._util.a16_str import *
 
 
 def allowed_crud_str() -> str:

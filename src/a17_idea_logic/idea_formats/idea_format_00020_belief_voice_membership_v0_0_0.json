@@ -1,12 +1,12 @@
 {
     "attributes": {
-        "partner_name": {
+        "voice_name": {
             "otx_key": true
         },
-        "partner_cred_points": {
+        "group_cred_points": {
             "otx_key": false
         },
-        "partner_debt_points": {
+        "group_debt_points": {
             "otx_key": false
         },
         "event_int": {
@@ -18,14 +18,18 @@
         "moment_label": {
             "otx_key": true
         },
+        "group_title": {
+            "otx_key": true
+        },
         "belief_name": {
             "otx_key": true
         }
     },
-    "idea_number": "br00021",
+    "idea_number": "br00020",
     "dimens": [
-        "momentunit",
+        "belief_voiceunit",
+        "belief_voice_membership",
         "beliefunit",
-        "belief_partnerunit"
+        "momentunit"
     ]
 }

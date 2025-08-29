@@ -4,8 +4,6 @@ from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.belief_tool import (
     belief_attr_exists,
-    belief_partner_membership_exists,
-    belief_partnerunit_exists,
     belief_plan_awardunit_exists,
     belief_plan_factunit_exists,
     belief_plan_healerunit_exists,
@@ -13,12 +11,12 @@ from src.a06_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_exists as caseunit_exists,
     belief_plan_reasonunit_exists,
     belief_planunit_exists,
+    belief_voice_membership_exists,
+    belief_voiceunit_exists,
     beliefunit_exists,
 )
 from src.a06_belief_logic.test._util.a06_str import (
     awardee_title_str,
-    belief_partner_membership_str,
-    belief_partnerunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -26,15 +24,17 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_plan_reason_caseunit_str,
     belief_plan_reasonunit_str,
     belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
     beliefunit_str,
     fact_context_str,
     group_title_str,
     healer_name_str,
-    partner_name_str,
     party_title_str,
     plan_rope_str,
     reason_context_str,
     reason_state_str,
+    voice_name_str,
 )
 
 
@@ -44,51 +44,51 @@ def test_beliefunit_exists_ReturnsObj():
     assert beliefunit_exists(beliefunit_shop("Sue"))
 
 
-def test_belief_partnerunit_exists_ReturnsObj():
+def test_belief_voiceunit_exists_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {partner_name_str(): yao_str}
+    jkeys = {voice_name_str(): yao_str}
 
     # WHEN / THEN
-    assert not belief_partnerunit_exists(None, {})
-    assert not belief_partnerunit_exists(sue_belief, jkeys)
+    assert not belief_voiceunit_exists(None, {})
+    assert not belief_voiceunit_exists(sue_belief, jkeys)
 
     # WHEN
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
 
     # THEN
-    assert belief_partnerunit_exists(sue_belief, jkeys)
+    assert belief_voiceunit_exists(sue_belief, jkeys)
 
 
-def test_belief_partner_membership_exists_ReturnsObj():
+def test_belief_voice_membership_exists_ReturnsObj():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
-    jkeys = {partner_name_str(): yao_str, group_title_str(): swim_str}
+    jkeys = {voice_name_str(): yao_str, group_title_str(): swim_str}
 
     # WHEN / THEN
-    assert not belief_partner_membership_exists(None, {})
-    assert not belief_partner_membership_exists(sue_belief, jkeys)
+    assert not belief_voice_membership_exists(None, {})
+    assert not belief_voice_membership_exists(sue_belief, jkeys)
 
     # WHEN
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
     # THEN
-    assert not belief_partner_membership_exists(sue_belief, jkeys)
+    assert not belief_voice_membership_exists(sue_belief, jkeys)
 
     # WHEN
-    yao_plan = sue_belief.get_partner(yao_str)
+    yao_plan = sue_belief.get_voice(yao_str)
     yao_plan.add_membership(";run")
     # THEN
-    assert not belief_partner_membership_exists(sue_belief, jkeys)
+    assert not belief_voice_membership_exists(sue_belief, jkeys)
 
     # WHEN
-    yao_plan = sue_belief.get_partner(yao_str)
+    yao_plan = sue_belief.get_voice(yao_str)
     yao_plan.add_membership(swim_str)
     # THEN
-    assert belief_partner_membership_exists(sue_belief, jkeys)
+    assert belief_voice_membership_exists(sue_belief, jkeys)
 
 
 def test_belief_planunit_exists_ReturnsObj():
@@ -348,48 +348,48 @@ def test_belief_attr_exists_ReturnsObj_beliefunit():
     assert belief_attr_exists(beliefunit_str(), beliefunit_shop("Sue"), {})
 
 
-def test_belief_attr_exists_ReturnsObj_belief_partnerunit():
+def test_belief_attr_exists_ReturnsObj_belief_voiceunit():
     # ESTABLISH
     yao_str = "Yao"
     sue_belief = beliefunit_shop("Sue")
-    x_jkeys = {partner_name_str(): yao_str}
+    x_jkeys = {voice_name_str(): yao_str}
 
     # WHEN / THEN
-    assert not belief_attr_exists(belief_partnerunit_str(), None, {})
-    assert not belief_attr_exists(belief_partnerunit_str(), sue_belief, x_jkeys)
+    assert not belief_attr_exists(belief_voiceunit_str(), None, {})
+    assert not belief_attr_exists(belief_voiceunit_str(), sue_belief, x_jkeys)
 
     # WHEN
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
 
     # THEN
-    assert belief_attr_exists(belief_partnerunit_str(), sue_belief, x_jkeys)
+    assert belief_attr_exists(belief_voiceunit_str(), sue_belief, x_jkeys)
 
 
-def test_belief_attr_exists_ReturnsObj_belief_partner_membership():
+def test_belief_attr_exists_ReturnsObj_belief_voice_membership():
     # ESTABLISH
     yao_str = "Yao"
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
-    x_jkeys = {partner_name_str(): yao_str, group_title_str(): swim_str}
-    x_dimen = belief_partner_membership_str()
+    x_jkeys = {voice_name_str(): yao_str, group_title_str(): swim_str}
+    x_dimen = belief_voice_membership_str()
 
     # WHEN / THEN
     assert not belief_attr_exists(x_dimen, None, {})
     assert not belief_attr_exists(x_dimen, sue_belief, x_jkeys)
 
     # WHEN
-    sue_belief.add_partnerunit(yao_str)
+    sue_belief.add_voiceunit(yao_str)
     # THEN
     assert not belief_attr_exists(x_dimen, sue_belief, x_jkeys)
 
     # WHEN
-    yao_plan = sue_belief.get_partner(yao_str)
+    yao_plan = sue_belief.get_voice(yao_str)
     yao_plan.add_membership(";run")
     # THEN
     assert not belief_attr_exists(x_dimen, sue_belief, x_jkeys)
 
     # WHEN
-    yao_plan = sue_belief.get_partner(yao_str)
+    yao_plan = sue_belief.get_voice(yao_str)
     yao_plan.add_membership(swim_str)
     # THEN
     assert belief_attr_exists(x_dimen, sue_belief, x_jkeys)

@@ -13,7 +13,7 @@ def test_planunit_shop_With_root_TrueReturnsObj():
     assert root_plan
     assert root_plan.root
     assert root_plan.plan_label == root_label()
-    assert root_plan._kids == {}
+    assert root_plan.kids == {}
     assert root_plan.root is True
 
 

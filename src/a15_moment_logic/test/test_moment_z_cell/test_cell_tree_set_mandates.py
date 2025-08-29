@@ -5,7 +5,7 @@ from src.a11_bud_logic.cell import cellunit_shop
 from src.a12_hub_toolbox.a12_path import (
     create_beliefevent_path,
     create_cell_dir_path as cell_dir,
-    create_cell_partner_mandate_ledger_path as mandate_path,
+    create_cell_voice_mandate_ledger_path as mandate_path,
 )
 from src.a12_hub_toolbox.hub_tool import (
     cellunit_get_from_dir,
@@ -129,7 +129,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_sue_ancs = [sue_str]
 #     e7 = 7
 #     bob_beliefadjust = get_bob_mop_without_reason_beliefunit_example()
-#     bob_beliefadjust.add_partnerunit(sue_str, 1)
+#     bob_beliefadjust.add_voiceunit(sue_str, 1)
 #     bob_sue_beliefadjust = beliefunit_shop(sue_str, a23_str)
 #     # create cell file
 #     bob_cell = cellunit_shop(
@@ -166,7 +166,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bob_sue_ancs = [sue_str]
 #     e7 = 7
 #     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
-#     bob_beliefadjust.add_partnerunit(sue_str, 1)
+#     bob_beliefadjust.add_voiceunit(sue_str, 1)
 #     bob_sue_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
 #     bob_sue_beliefadjust.set_belief_name(sue_str)
 #     # create cell file
@@ -215,13 +215,13 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ancs = [sue_str, yao_str, zia_str]
 #     e7 = 7
 #     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
-#     bob_beliefadjust.add_partnerunit(sue_str, 1)
+#     bob_beliefadjust.add_voiceunit(sue_str, 1)
 #     b_sue_ba = get_bob_mop_with_reason_beliefunit_example()
 #     b_sue_ba.set_belief_name(sue_str)
-#     b_sue_ba.add_partnerunit(yao_str, 1)
+#     b_sue_ba.add_voiceunit(yao_str, 1)
 #     bs_yao_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bs_yao_ba.set_belief_name(yao_str)
-#     bs_yao_ba.add_partnerunit(zia_str, 1)
+#     bs_yao_ba.add_voiceunit(zia_str, 1)
 #     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bsy_zia_ba.set_belief_name(zia_str)
 #     # create cell file
@@ -278,13 +278,13 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ancs = [sue_str, yao_str, zia_str]
 #     e7 = 7
 #     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
-#     bob_beliefadjust.add_partnerunit(sue_str, 1)
+#     bob_beliefadjust.add_voiceunit(sue_str, 1)
 #     b_sue_ba = get_bob_mop_with_reason_beliefunit_example()
 #     b_sue_ba.set_belief_name(sue_str)
-#     b_sue_ba.add_partnerunit(yao_str, 1)
+#     b_sue_ba.add_voiceunit(yao_str, 1)
 #     bs_yao_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bs_yao_ba.set_belief_name(yao_str)
-#     bs_yao_ba.add_partnerunit(zia_str, 1)
+#     bs_yao_ba.add_voiceunit(zia_str, 1)
 #     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bsy_zia_ba.set_belief_name(zia_str)
 #     # create cell file
@@ -341,13 +341,13 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ancs = [sue_str, yao_str, zia_str]
 #     e7 = 7
 #     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
-#     bob_beliefadjust.add_partnerunit(sue_str, 1)
+#     bob_beliefadjust.add_voiceunit(sue_str, 1)
 #     b_sue_ba = beliefunit_shop(sue_str, a23_str)
 #     b_sue_ba.set_belief_name(sue_str)
-#     b_sue_ba.add_partnerunit(yao_str, 1)
+#     b_sue_ba.add_voiceunit(yao_str, 1)
 #     bs_yao_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bs_yao_ba.set_belief_name(yao_str)
-#     bs_yao_ba.add_partnerunit(zia_str, 1)
+#     bs_yao_ba.add_voiceunit(zia_str, 1)
 #     clean_fact = example_casa_clean_factunit()
 #     bs_yao_ba.add_fact(clean_fact.fact_context, clean_fact.fact_state)
 #     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
@@ -408,13 +408,13 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     bsy_zia_ancs = [sue_str, yao_str, zia_str]
 #     e7 = 7
 #     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
-#     bob_beliefadjust.add_partnerunit(sue_str, 1)
+#     bob_beliefadjust.add_voiceunit(sue_str, 1)
 #     b_sue_ba = get_bob_mop_with_reason_beliefunit_example()
 #     b_sue_ba.set_belief_name(sue_str)
-#     b_sue_ba.add_partnerunit(yao_str, 1)
+#     b_sue_ba.add_voiceunit(yao_str, 1)
 #     bs_yao_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bs_yao_ba.set_belief_name(yao_str)
-#     bs_yao_ba.add_partnerunit(zia_str, 1)
+#     bs_yao_ba.add_voiceunit(zia_str, 1)
 #     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
 #     bsy_zia_ba.set_belief_name(zia_str)
 #     # create cell file

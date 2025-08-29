@@ -46,8 +46,8 @@ class BeliefName(NameTerm):
     pass
 
 
-class PartnerName(BeliefName):  # Created to help track the object class relations
-    """Every PartnerName object is BeliefName, must follow BeliefName format."""
+class VoiceName(BeliefName):  # Created to help track the object class relations
+    """Every VoiceName object is BeliefName, must follow BeliefName format."""
 
     pass
 
@@ -71,7 +71,7 @@ class EporTerm(str):
 
 
 class TitleTerm(str):
-    """If a TitleTerm contains knots it represents a group otherwise it's a single member group of an PartnerName."""
+    """If a TitleTerm contains knots it represents a group otherwise it's a single member group of an VoiceName."""
 
 
 class GroupTitle(TitleTerm):  # Created to help track the object class relations

@@ -14,8 +14,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert not root_plan.begin
     assert not root_plan.close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -23,8 +23,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     # THEN
     assert not root_plan.begin
     assert not root_plan.close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_DoesNotErrorWhenNoMathLabels():
@@ -32,13 +32,13 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     yao_belief = get_beliefunit_with_4_levels_and_2reasons()
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
 
     # THEN
-    assert not root_plan._gogo_calc
+    assert not root_plan.gogo_calc
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_SimpleLabel():
@@ -52,8 +52,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -61,8 +61,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert root_plan._gogo_calc == ziet0_begin
-    assert root_plan._stop_calc == ziet0_close
+    assert root_plan.gogo_calc == ziet0_begin
+    assert root_plan.stop_calc == ziet0_close
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_LabelWith_denom():
@@ -83,8 +83,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
     assert root_plan.denom == ziet0_denom
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -92,10 +92,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert root_plan._gogo_calc == ziet0_begin / ziet0_denom
-    assert root_plan._stop_calc == ziet0_close / ziet0_denom
-    assert root_plan._gogo_calc == 2
-    assert root_plan._stop_calc == 7
+    assert root_plan.gogo_calc == ziet0_begin / ziet0_denom
+    assert root_plan.stop_calc == ziet0_close / ziet0_denom
+    assert root_plan.gogo_calc == 2
+    assert root_plan.stop_calc == 7
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_LabelWith_denom_numor():
@@ -119,8 +119,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     assert root_plan.close == ziet0_close
     assert root_plan.numor == ziet0_numor
     assert root_plan.denom == ziet0_denom
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -128,10 +128,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert root_plan._gogo_calc == (ziet0_begin * ziet0_numor) / ziet0_denom
-    assert root_plan._stop_calc == (ziet0_close * ziet0_numor) / ziet0_denom
-    assert root_plan._gogo_calc == 14
-    assert root_plan._stop_calc == 42
+    assert root_plan.gogo_calc == (ziet0_begin * ziet0_numor) / ziet0_denom
+    assert root_plan.stop_calc == (ziet0_close * ziet0_numor) / ziet0_denom
+    assert root_plan.gogo_calc == 14
+    assert root_plan.stop_calc == 42
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_LabelWith_addin():
@@ -152,8 +152,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
     assert root_plan.addin == ziet0_addin
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -161,10 +161,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert root_plan._gogo_calc == ziet0_begin + ziet0_addin
-    assert root_plan._stop_calc == ziet0_close + ziet0_addin
-    assert root_plan._gogo_calc == 13
-    assert root_plan._stop_calc == 25
+    assert root_plan.gogo_calc == ziet0_begin + ziet0_addin
+    assert root_plan.stop_calc == ziet0_close + ziet0_addin
+    assert root_plan.gogo_calc == 13
+    assert root_plan.stop_calc == 25
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc_LabelWith_denom_addin():
@@ -188,8 +188,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     assert root_plan.close == ziet0_close
     assert root_plan.denom == ziet0_denom
     assert root_plan.addin == ziet0_addin
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -197,10 +197,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsInitialPlan_gogo_calc_stop_calc
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert root_plan._gogo_calc == (ziet0_begin + ziet0_addin) / ziet0_denom
-    assert root_plan._stop_calc == (ziet0_close + ziet0_addin) / ziet0_denom
-    assert root_plan._gogo_calc == 22
-    assert root_plan._stop_calc == 26
+    assert root_plan.gogo_calc == (ziet0_begin + ziet0_addin) / ziet0_denom
+    assert root_plan.stop_calc == (ziet0_close + ziet0_addin) / ziet0_denom
+    assert root_plan.gogo_calc == 22
+    assert root_plan.stop_calc == 26
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_calc_Simple0():
@@ -220,14 +220,14 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet1_plan.begin != ziet0_begin
     assert ziet1_plan.close != ziet0_close
-    assert not ziet1_plan._gogo_calc
-    assert not ziet1_plan._stop_calc
+    assert not ziet1_plan.gogo_calc
+    assert not ziet1_plan.stop_calc
     assert yao_belief._range_inheritors == {}
 
     # WHEN
@@ -238,8 +238,8 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     assert ziet1_plan.close != ziet0_close
     assert not ziet1_plan.begin
     assert not ziet1_plan.close
-    assert ziet1_plan._gogo_calc == ziet0_begin
-    assert ziet1_plan._stop_calc == ziet0_close
+    assert ziet1_plan.gogo_calc == ziet0_begin
+    assert ziet1_plan.stop_calc == ziet0_close
     assert yao_belief._range_inheritors == {ziet1_rope: ziet0_rope}
 
 
@@ -261,14 +261,14 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet1_plan.begin != ziet0_begin
     assert ziet1_plan.close != ziet0_close
-    assert not ziet1_plan._gogo_calc
-    assert not ziet1_plan._stop_calc
+    assert not ziet1_plan.gogo_calc
+    assert not ziet1_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -276,10 +276,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     # THEN
     assert not ziet1_plan.begin
     assert not ziet1_plan.close
-    assert ziet1_plan._gogo_calc == ziet0_begin / ziet1_denom
-    assert ziet1_plan._stop_calc == ziet0_close / ziet1_denom
-    assert ziet1_plan._gogo_calc == 2
-    assert ziet1_plan._stop_calc == 5
+    assert ziet1_plan.gogo_calc == ziet0_begin / ziet1_denom
+    assert ziet1_plan.stop_calc == ziet0_close / ziet1_denom
+    assert ziet1_plan.gogo_calc == 2
+    assert ziet1_plan.stop_calc == 5
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_calc_LabelWith_denom_numor():
@@ -302,14 +302,14 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet1_plan.begin != ziet0_begin
     assert ziet1_plan.close != ziet0_close
-    assert not ziet1_plan._gogo_calc
-    assert not ziet1_plan._stop_calc
+    assert not ziet1_plan.gogo_calc
+    assert not ziet1_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -317,10 +317,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     # THEN
     assert not ziet1_plan.begin
     assert not ziet1_plan.close
-    assert ziet1_plan._gogo_calc == (ziet0_begin * ziet1_numor) / ziet1_denom
-    assert ziet1_plan._stop_calc == (ziet0_close * ziet1_numor) / ziet1_denom
-    assert ziet1_plan._gogo_calc == 6
-    assert ziet1_plan._stop_calc == 15
+    assert ziet1_plan.gogo_calc == (ziet0_begin * ziet1_numor) / ziet1_denom
+    assert ziet1_plan.stop_calc == (ziet0_close * ziet1_numor) / ziet1_denom
+    assert ziet1_plan.gogo_calc == 6
+    assert ziet1_plan.stop_calc == 15
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_calc_LabelWith_addin():
@@ -342,15 +342,15 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet1_plan.begin != ziet0_begin
     assert ziet1_plan.close != ziet0_close
     assert ziet1_plan.addin == ziet1_addin
-    assert not ziet1_plan._gogo_calc
-    assert not ziet1_plan._stop_calc
+    assert not ziet1_plan.gogo_calc
+    assert not ziet1_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -358,10 +358,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     # THEN
     assert not ziet1_plan.begin
     assert not ziet1_plan.close
-    assert ziet1_plan._gogo_calc == ziet0_plan._gogo_calc + ziet1_addin
-    assert ziet1_plan._stop_calc == ziet0_plan._stop_calc + ziet1_addin
-    assert ziet1_plan._gogo_calc == 8
-    assert ziet1_plan._stop_calc == 12
+    assert ziet1_plan.gogo_calc == ziet0_plan.gogo_calc + ziet1_addin
+    assert ziet1_plan.stop_calc == ziet0_plan.stop_calc + ziet1_addin
+    assert ziet1_plan.gogo_calc == 8
+    assert ziet1_plan.stop_calc == 12
 
 
 def test_BeliefUnit_set_plantree_range_attrs_Sets2LevelsDescendentPlan_gogo_calc_stop_calc_LabelWith_addin():
@@ -386,15 +386,15 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets2LevelsDescendentPlan_gogo_calc
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet2_plan.begin != ziet0_begin
     assert ziet2_plan.close != ziet0_close
     assert ziet2_plan.addin == ziet2_addin
-    assert not ziet2_plan._gogo_calc
-    assert not ziet2_plan._stop_calc
+    assert not ziet2_plan.gogo_calc
+    assert not ziet2_plan.stop_calc
     assert yao_belief._range_inheritors == {}
 
     # WHEN
@@ -403,10 +403,10 @@ def test_BeliefUnit_set_plantree_range_attrs_Sets2LevelsDescendentPlan_gogo_calc
     # THEN
     assert not ziet2_plan.begin
     assert not ziet2_plan.close
-    assert ziet2_plan._gogo_calc == ziet0_plan._gogo_calc + ziet2_addin
-    assert ziet2_plan._stop_calc == ziet0_plan._stop_calc + ziet2_addin
-    assert ziet2_plan._gogo_calc == 8
-    assert ziet2_plan._stop_calc == 12
+    assert ziet2_plan.gogo_calc == ziet0_plan.gogo_calc + ziet2_addin
+    assert ziet2_plan.stop_calc == ziet0_plan.stop_calc + ziet2_addin
+    assert ziet2_plan.gogo_calc == 8
+    assert ziet2_plan.stop_calc == 12
     assert yao_belief._range_inheritors == {
         ziet1_rope: ziet0_rope,
         ziet2_rope: ziet0_rope,
@@ -433,15 +433,15 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     root_rope = to_rope(yao_belief.moment_label)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet1_plan.begin != ziet0_begin
     assert ziet1_plan.close != ziet0_close
     assert ziet1_plan.addin == ziet1_addin
-    assert not ziet1_plan._gogo_calc
-    assert not ziet1_plan._stop_calc
+    assert not ziet1_plan.gogo_calc
+    assert not ziet1_plan.stop_calc
 
     # WHEN
     yao_belief._set_plantree_range_attrs()
@@ -449,10 +449,10 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_gogo_calc_stop_c
     # THEN
     assert not ziet1_plan.begin
     assert not ziet1_plan.close
-    assert ziet1_plan._gogo_calc == (ziet0_plan._gogo_calc + ziet1_addin) / ziet1_denom
-    assert ziet1_plan._stop_calc == (ziet0_plan._stop_calc + ziet1_addin) / ziet1_denom
-    assert ziet1_plan._gogo_calc == 13
-    assert ziet1_plan._stop_calc == 15
+    assert ziet1_plan.gogo_calc == (ziet0_plan.gogo_calc + ziet1_addin) / ziet1_denom
+    assert ziet1_plan.stop_calc == (ziet0_plan.stop_calc + ziet1_addin) / ziet1_denom
+    assert ziet1_plan.gogo_calc == 13
+    assert ziet1_plan.stop_calc == 15
 
 
 def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_When_knot_IsNonDefault():
@@ -475,14 +475,14 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_When_knot_IsNonD
     ziet1_plan = yao_belief.get_plan_obj(ziet1_rope)
     root_plan = yao_belief.get_plan_obj(root_rope)
     yao_belief._set_plan_dict()
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert ziet0_plan.begin == ziet0_begin
     assert ziet0_plan.close == ziet0_close
     assert ziet1_plan.begin != ziet0_begin
     assert ziet1_plan.close != ziet0_close
-    assert not ziet1_plan._gogo_calc
-    assert not ziet1_plan._stop_calc
+    assert not ziet1_plan.gogo_calc
+    assert not ziet1_plan.stop_calc
     assert yao_belief._range_inheritors == {}
 
     # WHEN
@@ -493,6 +493,6 @@ def test_BeliefUnit_set_plantree_range_attrs_SetsDescendentPlan_When_knot_IsNonD
     assert ziet1_plan.close != ziet0_close
     assert not ziet1_plan.begin
     assert not ziet1_plan.close
-    assert ziet1_plan._gogo_calc == ziet0_begin
-    assert ziet1_plan._stop_calc == ziet0_close
+    assert ziet1_plan.gogo_calc == ziet0_begin
+    assert ziet1_plan.stop_calc == ziet0_close
     assert yao_belief._range_inheritors == {ziet1_rope: ziet0_rope}

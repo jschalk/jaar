@@ -317,7 +317,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
 
 def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
     # ESTABLISH / WHEN / THEN
-    """Check scenarios CaseUnit._active. Plotly graph can be used to identify problems."""
+    """Check scenarios CaseUnit.active. Plotly graph can be used to identify problems."""
     # # Scenario A
     assert casestatusfinder_shop(0.3, 0.7, 1, 0.1, 1.2).get_active()
 
@@ -665,7 +665,7 @@ def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_01():
     print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
 
     # THEN
-    # assert segr_obj._fact_range_len == 9000
+    # assert segr_obj.fact_range_len == 9000
     # assert segr_obj.get_fact_upper_mod_div() == 200
     assert segr_obj.get_active()
     assert segr_obj.get_chore_status()

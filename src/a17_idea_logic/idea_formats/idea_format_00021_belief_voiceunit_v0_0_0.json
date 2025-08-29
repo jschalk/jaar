@@ -1,7 +1,13 @@
 {
     "attributes": {
-        "partner_name": {
+        "voice_name": {
             "otx_key": true
+        },
+        "voice_cred_points": {
+            "otx_key": false
+        },
+        "voice_debt_points": {
+            "otx_key": false
         },
         "event_int": {
             "otx_key": true
@@ -12,21 +18,14 @@
         "moment_label": {
             "otx_key": true
         },
-        "inx_name": {
-            "otx_key": false
-        },
-        "otx_name": {
-            "otx_key": true
-        },
         "belief_name": {
             "otx_key": true
         }
     },
-    "idea_number": "br00113",
+    "idea_number": "br00021",
     "dimens": [
-        "pidgin_name",
-        "belief_partnerunit",
         "momentunit",
-        "beliefunit"
+        "beliefunit",
+        "belief_voiceunit"
     ]
 }

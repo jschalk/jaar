@@ -1,29 +1,29 @@
 // Global state
 let planTreeData = null;
-let show_partners = true;
-let show_partner_cred_points = false;
-let show_partner_debt_points = false;
-let show_partner_credor_pool = false;
-let show_partner_debtor_pool = false;
-let show_partner_irrational_partner_debt_points = false;
-let show_partner_inallocable_partner_debt_points = false;
-let show_partner_fund_give = false;
-let show_partner_fund_take = false;
-let show_partner_fund_agenda_give = false;
-let show_partner_fund_agenda_take = false;
-let show_partner_fund_agenda_ratio_give = false;
-let show_partner_fund_agenda_ratio_take = false;
-let show_partner_membership_group_title = true;
-let show_partner_membership_group_cred_points = false;
-let show_partner_membership_group_debt_points = false;
-let show_partner_membership__credor_pool = false;
-let show_partner_membership__debtor_pool = false;
-let show_partner_membership__fund_agenda_give = false;
-let show_partner_membership__fund_agenda_ratio_give = false;
-let show_partner_membership__fund_agenda_ratio_take = false;
-let show_partner_membership__fund_agenda_take = false;
-let show_partner_membership__fund_give = false;
-let show_partner_membership__fund_take = false;
+let show_voices = true;
+let show_voice_cred_points = false;
+let show_voice_debt_points = false;
+let show_voice_credor_pool = false;
+let show_voice_debtor_pool = false;
+let show_voice_irrational_voice_debt_points = false;
+let show_voice_inallocable_voice_debt_points = false;
+let show_voice_fund_give = false;
+let show_voice_fund_take = false;
+let show_voice_fund_agenda_give = false;
+let show_voice_fund_agenda_take = false;
+let show_voice_fund_agenda_ratio_give = false;
+let show_voice_fund_agenda_ratio_take = false;
+let show_voice_membership_group_title = true;
+let show_voice_membership_group_cred_points = false;
+let show_voice_membership_group_debt_points = false;
+let show_voice_membership_credor_pool = false;
+let show_voice_membership_debtor_pool = false;
+let show_voice_membership_fund_agenda_give = false;
+let show_voice_membership_fund_agenda_ratio_give = false;
+let show_voice_membership_fund_agenda_ratio_take = false;
+let show_voice_membership_fund_agenda_take = false;
+let show_voice_membership_fund_give = false;
+let show_voice_membership_fund_take = false;
 let show_planroot = true;
 let show_awardunits = false;
 let show_awardheirs = false;
@@ -46,8 +46,8 @@ let show_fund_onset = false;
 let show_fund_cease = false;
 let show_fund_iota = false;
 let show_fund_ratio = false;
-let show_all_partner_cred = false;
-let show_all_partner_debt = false;
+let show_all_voice_cred = false;
+let show_all_voice_debt = false;
 let show_gogo_want = false;
 let show_stop_want = false;
 let show_gogo_calc = false;
@@ -65,30 +65,30 @@ let show_uid = false;
 
 // Initialize the app when DOM loads
 document.addEventListener('DOMContentLoaded', function () {
-    const show_partnersCheckbox = document.getElementById('show_partners');
-    const show_partner_cred_pointsCheckbox = document.getElementById('show_partner_cred_points')
-    const show_partner_debt_pointsCheckbox = document.getElementById('show_partner_debt_points')
-    const show_partner_credor_poolCheckbox = document.getElementById('show_partner_credor_pool')
-    const show_partner_debtor_poolCheckbox = document.getElementById('show_partner_debtor_pool')
-    const show_partner_irrational_partner_debt_pointsCheckbox = document.getElementById('show_partner_irrational_partner_debt_points')
-    const show_partner_inallocable_partner_debt_pointsCheckbox = document.getElementById('show_partner_inallocable_partner_debt_points')
-    const show_partner_fund_giveCheckbox = document.getElementById('show_partner_fund_give')
-    const show_partner_fund_takeCheckbox = document.getElementById('show_partner_fund_take')
-    const show_partner_fund_agenda_giveCheckbox = document.getElementById('show_partner_fund_agenda_give')
-    const show_partner_fund_agenda_takeCheckbox = document.getElementById('show_partner_fund_agenda_take')
-    const show_partner_fund_agenda_ratio_giveCheckbox = document.getElementById('show_partner_fund_agenda_ratio_give')
-    const show_partner_fund_agenda_ratio_takeCheckbox = document.getElementById('show_partner_fund_agenda_ratio_take')
-    const show_partner_membership_group_titleCheckbox = document.getElementById('show_partner_membership_group_title')
-    const show_partner_membership_group_cred_pointsCheckbox = document.getElementById('show_partner_membership_group_cred_points')
-    const show_partner_membership_group_debt_pointsCheckbox = document.getElementById('show_partner_membership_group_debt_points')
-    const show_partner_membership__credor_poolCheckbox = document.getElementById('show_partner_membership__credor_pool')
-    const show_partner_membership__debtor_poolCheckbox = document.getElementById('show_partner_membership__debtor_pool')
-    const show_partner_membership__fund_agenda_giveCheckbox = document.getElementById('show_partner_membership__fund_agenda_give')
-    const show_partner_membership__fund_agenda_ratio_giveCheckbox = document.getElementById('show_partner_membership__fund_agenda_ratio_give')
-    const show_partner_membership__fund_agenda_ratio_takeCheckbox = document.getElementById('show_partner_membership__fund_agenda_ratio_take')
-    const show_partner_membership__fund_agenda_takeCheckbox = document.getElementById('show_partner_membership__fund_agenda_take')
-    const show_partner_membership__fund_giveCheckbox = document.getElementById('show_partner_membership__fund_give')
-    const show_partner_membership__fund_takeCheckbox = document.getElementById('show_partner_membership__fund_take')
+    const show_voicesCheckbox = document.getElementById('show_voices');
+    const show_voice_cred_pointsCheckbox = document.getElementById('show_voice_cred_points')
+    const show_voice_debt_pointsCheckbox = document.getElementById('show_voice_debt_points')
+    const show_voice_credor_poolCheckbox = document.getElementById('show_voice_credor_pool')
+    const show_voice_debtor_poolCheckbox = document.getElementById('show_voice_debtor_pool')
+    const show_voice_irrational_voice_debt_pointsCheckbox = document.getElementById('show_voice_irrational_voice_debt_points')
+    const show_voice_inallocable_voice_debt_pointsCheckbox = document.getElementById('show_voice_inallocable_voice_debt_points')
+    const show_voice_fund_giveCheckbox = document.getElementById('show_voice_fund_give')
+    const show_voice_fund_takeCheckbox = document.getElementById('show_voice_fund_take')
+    const show_voice_fund_agenda_giveCheckbox = document.getElementById('show_voice_fund_agenda_give')
+    const show_voice_fund_agenda_takeCheckbox = document.getElementById('show_voice_fund_agenda_take')
+    const show_voice_fund_agenda_ratio_giveCheckbox = document.getElementById('show_voice_fund_agenda_ratio_give')
+    const show_voice_fund_agenda_ratio_takeCheckbox = document.getElementById('show_voice_fund_agenda_ratio_take')
+    const show_voice_membership_group_titleCheckbox = document.getElementById('show_voice_membership_group_title')
+    const show_voice_membership_group_cred_pointsCheckbox = document.getElementById('show_voice_membership_group_cred_points')
+    const show_voice_membership_group_debt_pointsCheckbox = document.getElementById('show_voice_membership_group_debt_points')
+    const show_voice_membership_credor_poolCheckbox = document.getElementById('show_voice_membership_credor_pool')
+    const show_voice_membership_debtor_poolCheckbox = document.getElementById('show_voice_membership_debtor_pool')
+    const show_voice_membership_fund_agenda_giveCheckbox = document.getElementById('show_voice_membership_fund_agenda_give')
+    const show_voice_membership_fund_agenda_ratio_giveCheckbox = document.getElementById('show_voice_membership_fund_agenda_ratio_give')
+    const show_voice_membership_fund_agenda_ratio_takeCheckbox = document.getElementById('show_voice_membership_fund_agenda_ratio_take')
+    const show_voice_membership_fund_agenda_takeCheckbox = document.getElementById('show_voice_membership_fund_agenda_take')
+    const show_voice_membership_fund_giveCheckbox = document.getElementById('show_voice_membership_fund_give')
+    const show_voice_membership_fund_takeCheckbox = document.getElementById('show_voice_membership_fund_take')
     const show_planrootCheckbox = document.getElementById('show_planroot');
     const show_awardunitsCheckbox = document.getElementById('show_awardunits');
     const show_awardheirsCheckbox = document.getElementById('show_awardheirs');
@@ -111,8 +111,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
     const show_fund_iotaCheckbox = document.getElementById('show_fund_iota');
     const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
-    const show_all_partner_credCheckbox = document.getElementById('show_all_partner_cred');
-    const show_all_partner_debtCheckbox = document.getElementById('show_all_partner_debt');
+    const show_all_voice_credCheckbox = document.getElementById('show_all_voice_cred');
+    const show_all_voice_debtCheckbox = document.getElementById('show_all_voice_debt');
     const show_gogo_wantCheckbox = document.getElementById('show_gogo_want');
     const show_stop_wantCheckbox = document.getElementById('show_stop_want');
     const show_gogo_calcCheckbox = document.getElementById('show_gogo_calc');
@@ -129,30 +129,30 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_uidCheckbox = document.getElementById('show_uid');
 
     // Set up checkbox event listener
-    show_partnersCheckbox.addEventListener('change', function () { show_partners = this.checked; renderPartnersData(); });
-    show_partner_cred_pointsCheckbox.addEventListener('change', function () { show_partner_cred_points = this.checked; renderPartnersData(); });
-    show_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_debt_points = this.checked; renderPartnersData(); });
-    show_partner_credor_poolCheckbox.addEventListener('change', function () { show_partner_credor_pool = this.checked; renderPartnersData(); });
-    show_partner_debtor_poolCheckbox.addEventListener('change', function () { show_partner_debtor_pool = this.checked; renderPartnersData(); });
-    show_partner_irrational_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_irrational_partner_debt_points = this.checked; renderPartnersData(); });
-    show_partner_inallocable_partner_debt_pointsCheckbox.addEventListener('change', function () { show_partner_inallocable_partner_debt_points = this.checked; renderPartnersData(); });
-    show_partner_fund_giveCheckbox.addEventListener('change', function () { show_partner_fund_give = this.checked; renderPartnersData(); });
-    show_partner_fund_takeCheckbox.addEventListener('change', function () { show_partner_fund_take = this.checked; renderPartnersData(); });
-    show_partner_fund_agenda_giveCheckbox.addEventListener('change', function () { show_partner_fund_agenda_give = this.checked; renderPartnersData(); });
-    show_partner_fund_agenda_takeCheckbox.addEventListener('change', function () { show_partner_fund_agenda_take = this.checked; renderPartnersData(); });
-    show_partner_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_partner_fund_agenda_ratio_give = this.checked; renderPartnersData(); });
-    show_partner_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_partner_fund_agenda_ratio_take = this.checked; renderPartnersData(); });
-    show_partner_membership_group_titleCheckbox.addEventListener('change', function () { show_partner_membership_group_title = this.checked; renderPartnersData(); });
-    show_partner_membership_group_cred_pointsCheckbox.addEventListener('change', function () { show_partner_membership_group_cred_points = this.checked; renderPartnersData(); });
-    show_partner_membership_group_debt_pointsCheckbox.addEventListener('change', function () { show_partner_membership_group_debt_points = this.checked; renderPartnersData(); });
-    show_partner_membership__credor_poolCheckbox.addEventListener('change', function () { show_partner_membership__credor_pool = this.checked; renderPartnersData(); });
-    show_partner_membership__debtor_poolCheckbox.addEventListener('change', function () { show_partner_membership__debtor_pool = this.checked; renderPartnersData(); });
-    show_partner_membership__fund_agenda_giveCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_give = this.checked; renderPartnersData(); });
-    show_partner_membership__fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_ratio_give = this.checked; renderPartnersData(); });
-    show_partner_membership__fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_ratio_take = this.checked; renderPartnersData(); });
-    show_partner_membership__fund_agenda_takeCheckbox.addEventListener('change', function () { show_partner_membership__fund_agenda_take = this.checked; renderPartnersData(); });
-    show_partner_membership__fund_giveCheckbox.addEventListener('change', function () { show_partner_membership__fund_give = this.checked; renderPartnersData(); });
-    show_partner_membership__fund_takeCheckbox.addEventListener('change', function () { show_partner_membership__fund_take = this.checked; renderPartnersData(); });
+    show_voicesCheckbox.addEventListener('change', function () { show_voices = this.checked; renderVoicesData(); });
+    show_voice_cred_pointsCheckbox.addEventListener('change', function () { show_voice_cred_points = this.checked; renderVoicesData(); });
+    show_voice_debt_pointsCheckbox.addEventListener('change', function () { show_voice_debt_points = this.checked; renderVoicesData(); });
+    show_voice_credor_poolCheckbox.addEventListener('change', function () { show_voice_credor_pool = this.checked; renderVoicesData(); });
+    show_voice_debtor_poolCheckbox.addEventListener('change', function () { show_voice_debtor_pool = this.checked; renderVoicesData(); });
+    show_voice_irrational_voice_debt_pointsCheckbox.addEventListener('change', function () { show_voice_irrational_voice_debt_points = this.checked; renderVoicesData(); });
+    show_voice_inallocable_voice_debt_pointsCheckbox.addEventListener('change', function () { show_voice_inallocable_voice_debt_points = this.checked; renderVoicesData(); });
+    show_voice_fund_giveCheckbox.addEventListener('change', function () { show_voice_fund_give = this.checked; renderVoicesData(); });
+    show_voice_fund_takeCheckbox.addEventListener('change', function () { show_voice_fund_take = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_giveCheckbox.addEventListener('change', function () { show_voice_fund_agenda_give = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_takeCheckbox.addEventListener('change', function () { show_voice_fund_agenda_take = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_voice_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
+    show_voice_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_voice_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
+    show_voice_membership_group_titleCheckbox.addEventListener('change', function () { show_voice_membership_group_title = this.checked; renderVoicesData(); });
+    show_voice_membership_group_cred_pointsCheckbox.addEventListener('change', function () { show_voice_membership_group_cred_points = this.checked; renderVoicesData(); });
+    show_voice_membership_group_debt_pointsCheckbox.addEventListener('change', function () { show_voice_membership_group_debt_points = this.checked; renderVoicesData(); });
+    show_voice_membership_credor_poolCheckbox.addEventListener('change', function () { show_voice_membership_credor_pool = this.checked; renderVoicesData(); });
+    show_voice_membership_debtor_poolCheckbox.addEventListener('change', function () { show_voice_membership_debtor_pool = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_give = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_ratio_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_ratio_give = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_ratio_takeCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_ratio_take = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_agenda_takeCheckbox.addEventListener('change', function () { show_voice_membership_fund_agenda_take = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_giveCheckbox.addEventListener('change', function () { show_voice_membership_fund_give = this.checked; renderVoicesData(); });
+    show_voice_membership_fund_takeCheckbox.addEventListener('change', function () { show_voice_membership_fund_take = this.checked; renderVoicesData(); });
     show_planrootCheckbox.addEventListener('change', function () { show_planroot = this.checked; renderPlanTree(); });
     show_awardunitsCheckbox.addEventListener('change', function () { show_awardunits = this.checked; renderPlanTree(); });
     show_awardheirsCheckbox.addEventListener('change', function () { show_awardheirs = this.checked; renderPlanTree(); });
@@ -175,8 +175,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
     show_fund_iotaCheckbox.addEventListener('change', function () { show_fund_iota = this.checked; renderPlanTree(); });
     show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderPlanTree(); });
-    show_all_partner_credCheckbox.addEventListener('change', function () { show_all_partner_cred = this.checked; renderPlanTree(); });
-    show_all_partner_debtCheckbox.addEventListener('change', function () { show_all_partner_debt = this.checked; renderPlanTree(); });
+    show_all_voice_credCheckbox.addEventListener('change', function () { show_all_voice_cred = this.checked; renderPlanTree(); });
+    show_all_voice_debtCheckbox.addEventListener('change', function () { show_all_voice_debt = this.checked; renderPlanTree(); });
     show_gogo_wantCheckbox.addEventListener('change', function () { show_gogo_want = this.checked; renderPlanTree(); });
     show_stop_wantCheckbox.addEventListener('change', function () { show_stop_want = this.checked; renderPlanTree(); });
     show_gogo_calcCheckbox.addEventListener('change', function () { show_gogo_calc = this.checked; renderPlanTree(); });
@@ -202,9 +202,9 @@ async function loadBeliefData() {
         const response = await fetch('/api/beliefunit_view');
         beliefViewData = await response.json();
         planTreeData = beliefViewData.planroot;
-        partnersData = beliefViewData.partners;
+        voicesData = beliefViewData.voices;
         renderPlanTree();
-        renderPartnersData();
+        renderVoicesData();
     } catch (error) {
         console.error('Error loading tree data:', error);
         document.getElementById('planTreeContainer').innerHTML = '<p>Error loading tree data</p>';
@@ -213,49 +213,49 @@ async function loadBeliefData() {
 }
 
 
-// Render PartnersData and its membership attributes
-function renderPartnersData() {
-    const partners_container = document.getElementById('partnersContainer');
-    partners_container.innerHTML = buildPartnersHtml(partnersData);
+// Render VoicesData and its membership attributes
+function renderVoicesData() {
+    const voices_container = document.getElementById('voicesContainer');
+    voices_container.innerHTML = buildVoicesHtml(voicesData);
 }
 
-function buildPartnersHtml(partnersData) {
-    if (!partnersData || !show_partners) {
+function buildVoicesHtml(voicesData) {
+    if (!voicesData || !show_voices) {
         return "";
     }
-    const partners_indent = '&nbsp;'.repeat(2);
+    const voices_indent = '&nbsp;'.repeat(2);
     const member_title_indent = '&nbsp;'.repeat(3);
     const membership_indent = '&nbsp;'.repeat(5);
 
     let html = '';
-    Object.values(partnersData).forEach(partner => {
-        html += `<br>${partners_indent}${partner.partner_name}`;
-        if (show_partner_cred_points) { html += `<br>${partners_indent}    ${partner.partner_cred_points_readable}` };
-        if (show_partner_debt_points) { html += `<br>${partners_indent}    ${partner.partner_debt_points_readable}` };
-        if (show_partner_credor_pool) { html += `<br>${partners_indent}    ${partner._credor_pool_readable}` };
-        if (show_partner_debtor_pool) { html += `<br>${partners_indent}    ${partner._debtor_pool_readable}` };
-        if (show_partner_irrational_partner_debt_points) { html += `<br>${partners_indent}    ${partner._irrational_partner_debt_points_readable}` };
-        if (show_partner_inallocable_partner_debt_points) { html += `<br>${partners_indent}    ${partner._inallocable_partner_debt_points_readable}` };
-        if (show_partner_fund_give) { html += `<br>${partners_indent}    ${partner._fund_give_readable}` };
-        if (show_partner_fund_take) { html += `<br>${partners_indent}    ${partner._fund_take_readable}` };
-        if (show_partner_fund_agenda_give) { html += `<br>${partners_indent}    ${partner._fund_agenda_give_readable}` };
-        if (show_partner_fund_agenda_take) { html += `<br>${partners_indent}    ${partner._fund_agenda_take_readable}` };
-        if (show_partner_fund_agenda_ratio_give) { html += `<br>${partners_indent}    ${partner._fund_agenda_ratio_give_readable}` };
-        if (show_partner_fund_agenda_ratio_take) { html += `<br>${partners_indent}    ${partner._fund_agenda_ratio_take_readable}` };
-        console.info(partner)
-        Object.values(partner._memberships).forEach(membership => {
-            if (show_partner_membership_group_title) { html += `<br><b>${member_title_indent}${membership.group_title_readable}</b>` };
-            if (show_partner_membership_group_cred_points) { html += `<br>${membership_indent}${membership.group_cred_points_readable}` };
-            if (show_partner_membership_group_debt_points) { html += `<br>${membership_indent}${membership.group_debt_points_readable}` };
-            if (show_partner_membership__credor_pool) { html += `<br>${membership_indent}${membership._credor_pool_readable}` };
-            if (show_partner_membership__debtor_pool) { html += `<br>${membership_indent}${membership._debtor_pool_readable}` };
-            if (show_partner_membership__fund_agenda_give) { html += `<br>${membership_indent}${membership._fund_agenda_give_readable}` };
-            if (show_partner_membership__fund_agenda_ratio_give) { html += `<br>${membership_indent}${membership._fund_agenda_ratio_give_readable}` };
-            if (show_partner_membership__fund_agenda_ratio_take) { html += `<br>${membership_indent}${membership._fund_agenda_ratio_take_readable}` };
-            if (show_partner_membership__fund_agenda_take) { html += `<br>${membership_indent}${membership._fund_agenda_take_readable}` };
-            if (show_partner_membership__fund_give) { html += `<br>${membership_indent}${membership._fund_give_readable}` };
-            if (show_partner_membership__fund_take) { html += `<br>${membership_indent}${membership._fund_take_readable}` };
-            // html += `<br>${partners_indent}${partner.partner_name}`;
+    Object.values(voicesData).forEach(voice => {
+        html += `<br>${voices_indent}${voice.voice_name}`;
+        if (show_voice_cred_points) { html += `<br>${voices_indent}    ${voice.voice_cred_points_readable}` };
+        if (show_voice_debt_points) { html += `<br>${voices_indent}    ${voice.voice_debt_points_readable}` };
+        if (show_voice_credor_pool) { html += `<br>${voices_indent}    ${voice.credor_pool_readable}` };
+        if (show_voice_debtor_pool) { html += `<br>${voices_indent}    ${voice.debtor_pool_readable}` };
+        if (show_voice_irrational_voice_debt_points) { html += `<br>${voices_indent}    ${voice.irrational_voice_debt_points_readable}` };
+        if (show_voice_inallocable_voice_debt_points) { html += `<br>${voices_indent}    ${voice.inallocable_voice_debt_points_readable}` };
+        if (show_voice_fund_give) { html += `<br>${voices_indent}    ${voice.fund_give_readable}` };
+        if (show_voice_fund_take) { html += `<br>${voices_indent}    ${voice.fund_take_readable}` };
+        if (show_voice_fund_agenda_give) { html += `<br>${voices_indent}    ${voice.fund_agenda_give_readable}` };
+        if (show_voice_fund_agenda_take) { html += `<br>${voices_indent}    ${voice.fund_agenda_take_readable}` };
+        if (show_voice_fund_agenda_ratio_give) { html += `<br>${voices_indent}    ${voice.fund_agenda_ratio_give_readable}` };
+        if (show_voice_fund_agenda_ratio_take) { html += `<br>${voices_indent}    ${voice.fund_agenda_ratio_take_readable}` };
+        console.info(voice)
+        Object.values(voice.memberships).forEach(membership => {
+            if (show_voice_membership_group_title) { html += `<br><b>${member_title_indent}${membership.group_title_readable}</b>` };
+            if (show_voice_membership_group_cred_points) { html += `<br>${membership_indent}${membership.group_cred_points_readable}` };
+            if (show_voice_membership_group_debt_points) { html += `<br>${membership_indent}${membership.group_debt_points_readable}` };
+            if (show_voice_membership_credor_pool) { html += `<br>${membership_indent}${membership.credor_pool_readable}` };
+            if (show_voice_membership_debtor_pool) { html += `<br>${membership_indent}${membership.debtor_pool_readable}` };
+            if (show_voice_membership_fund_agenda_give) { html += `<br>${membership_indent}${membership.fund_agenda_give_readable}` };
+            if (show_voice_membership_fund_agenda_ratio_give) { html += `<br>${membership_indent}${membership.fund_agenda_ratio_give_readable}` };
+            if (show_voice_membership_fund_agenda_ratio_take) { html += `<br>${membership_indent}${membership.fund_agenda_ratio_take_readable}` };
+            if (show_voice_membership_fund_agenda_take) { html += `<br>${membership_indent}${membership.fund_agenda_take_readable}` };
+            if (show_voice_membership_fund_give) { html += `<br>${membership_indent}${membership.fund_give_readable}` };
+            if (show_voice_membership_fund_take) { html += `<br>${membership_indent}${membership.fund_take_readable}` };
+            // html += `<br>${voices_indent}${voice.voice_name}`;
         });
     });
     return html
@@ -277,20 +277,20 @@ function renderPlanUnit(planUnit, level) {
         return "";
     }
     const indent = '&nbsp;'.repeat(level * 2);
-    const levelIndicator = show_level ? ` level${planUnit._level}` : '';
+    const levelIndicator = show_level ? ` level${planUnit.tree_level}` : '';
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
-    const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit._descendant_task_count}` : '';
-    const activeIndicator = planUnit._active && show_active ? '-ACTIVE' : '';
-    const choreIndicator = planUnit._chore && show_chore ? '-CHORE' : '';
+    const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit.descendant_task_count}` : '';
+    const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
+    const choreIndicator = planUnit.chore && show_chore ? '-CHORE' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
     const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
-    const uidIndicator = planUnit._uid && show_uid ? ` uid${planUnit._uid}` : '';
+    const uidIndicator = planUnit.uid && show_uid ? ` uid${planUnit.uid}` : '';
 
-    const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit._fund_onset}` : '';
-    const fund_ceaseIndicator = show_fund_cease ? ` cease-${planUnit._fund_cease}` : '';
+    const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit.fund_onset}` : '';
+    const fund_ceaseIndicator = show_fund_cease ? ` cease-${planUnit.fund_cease}` : '';
     const fund_iotaIndicator = show_fund_iota ? ` (iota: ${planUnit.fund_iota})` : '';
-    const fund_ratioIndicator = show_fund_ratio ? ` ratio-${planUnit._fund_ratio}` : '';
+    const fund_ratioIndicator = show_fund_ratio ? ` ratio-${planUnit.fund_ratio}` : '';
 
 
     // Build award links HTML using separate function
@@ -315,35 +315,35 @@ function renderPlanUnit(planUnit, level) {
     ${activeIndicator}
     ${choreIndicator}
     ${root_booleanIndicator}</i>
-    ${render_with_indent(planUnit.partners, indent, show_partners)}
+    ${render_with_indent(planUnit.voices, indent, show_voices)}
     ${render_with_indent(planUnit.parent_rope, indent, show_parent_rope)}
     ${renderFlatReadableJson(planUnit.awardunits, indent, show_awardunits)}
-    ${renderFlatReadableJson(planUnit._awardheirs, indent, show_awardheirs)}
-    ${renderFlatReadableJson(planUnit._awardlines, indent, show_awardlines)}
+    ${renderFlatReadableJson(planUnit.awardheirs, indent, show_awardheirs)}
+    ${renderFlatReadableJson(planUnit.awardlines, indent, show_awardlines)}
     ${renderFlatReadableJson(planUnit.laborunit._partys, indent, show_laborunit)}
-    ${renderFlatReadableJson(planUnit._laborheir._partys, indent, show_laborheir)}
+    ${renderFlatReadableJson(planUnit.laborheir._partys, indent, show_laborheir)}
     ${renderReasonReadableJson(planUnit.reasonunits, indent, show_reasonunits)}
-    ${renderReasonReadableJson(planUnit._reasonheirs, indent, show_reasonheirs)}
+    ${renderReasonReadableJson(planUnit.reasonheirs, indent, show_reasonheirs)}
     ${renderFlatReadableJson(planUnit.factunits, indent, show_factunits)}
-    ${renderFlatReadableJson(planUnit._factheirs, indent, show_factheirs)}
-    ${render_with_indent(planUnit._all_partner_cred, indent, show_all_partner_cred)}
-    ${render_with_indent(planUnit._all_partner_debt, indent, show_all_partner_debt)}
+    ${renderFlatReadableJson(planUnit.factheirs, indent, show_factheirs)}
+    ${render_with_indent(planUnit.all_voice_cred, indent, show_all_voice_cred)}
+    ${render_with_indent(planUnit.all_voice_debt, indent, show_all_voice_debt)}
     ${render_with_indent(planUnit.gogo_want, indent, show_gogo_want)}
     ${render_with_indent(planUnit.stop_want, indent, show_stop_want)}
-    ${render_with_indent(planUnit._gogo_calc, indent, show_gogo_calc)}
-    ${render_with_indent(planUnit._stop_calc, indent, show_stop_calc)}
+    ${render_with_indent(planUnit.gogo_calc, indent, show_gogo_calc)}
+    ${render_with_indent(planUnit.stop_calc, indent, show_stop_calc)}
     ${render_with_indent(planUnit.addin, indent, show_addin)}
     ${render_with_indent(planUnit.begin, indent, show_begin)}
     ${render_with_indent(planUnit.close, indent, show_close)}
     ${render_with_indent(planUnit.denom, indent, show_denom)}
     ${render_with_indent(planUnit.morph, indent, show_morph)}
     ${render_with_indent(planUnit.numor, indent, show_numor)}
-    ${render_with_indent(planUnit._active_hx, indent, show_active_hx)}
+    ${render_with_indent(planUnit.active_hx, indent, show_active_hx)}
   </div>\n
 `;
     // Add children
-    if (planUnit._kids) {
-        Object.values(planUnit._kids).forEach(child => {
+    if (planUnit.kids) {
+        Object.values(planUnit.kids).forEach(child => {
             html += renderPlanUnit(child, level + 1);
         });
     }

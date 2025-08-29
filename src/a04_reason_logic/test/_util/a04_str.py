@@ -1,21 +1,16 @@
-from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a03_group_logic.test._util.a03_str import belief_name_str, party_title_str
+from src.a03_group_logic.test._util.a03_str import *
 
 
-def _active_str() -> str:
-    return "_active"
-
-
-def _chore_str() -> str:
-    return "_chore"
-
-
-def _status_str() -> str:
-    return "_status"
+def active_str() -> str:
+    return "active"
 
 
 def cases_str() -> str:
     return "cases"
+
+
+def chore_str() -> str:
+    return "chore"
 
 
 def fact_context_str() -> str:
@@ -32,6 +27,10 @@ def fact_state_str() -> str:
 
 def fact_upper_str() -> str:
     return "fact_upper"
+
+
+def factheirs_str() -> str:
+    return "factheirs"
 
 
 def factunits_str() -> str:
@@ -68,3 +67,7 @@ def reason_upper_str() -> str:
 
 def reasonunits_str() -> str:
     return "reasonunits"
+
+
+def status_str() -> str:
+    return "status"

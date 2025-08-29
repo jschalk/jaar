@@ -78,8 +78,8 @@ def test_RiverRun_set_all_initial_rivergrades_SetsAttr():
     x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
     x_riverrun.set_keep_credorledger(zia_str, bob_str, 1)
     x_riverrun.set_keep_credorledger(xio_str, sue_str, 1)
-    all_partners_ids = x_riverrun.get_all_keep_credorledger_partner_names()
-    assert all_partners_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}
+    all_voices_ids = x_riverrun.get_all_keep_credorledger_voice_names()
+    assert all_voices_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}
     assert x_riverrun._rivergrades_is_empty()
     assert x_riverrun.rivergrade_exists(yao_str) is False
     assert x_riverrun.rivergrade_exists(bob_str) is False

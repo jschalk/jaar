@@ -26,7 +26,7 @@ def test_BeliefUnit_cash_out_ChangesPlanUnit_task_chore():
         fact_context=hr_rope, fact_state=hr_rope, fact_lower=82, fact_upper=95
     )
     assert mail_plan.task is True
-    assert mail_plan._chore is False
+    assert mail_plan.chore is False
 
     # WHEN
     yao_belief.cash_out()
@@ -34,7 +34,7 @@ def test_BeliefUnit_cash_out_ChangesPlanUnit_task_chore():
     # THEN
     mail_plan = yao_belief.get_plan_obj(mail_rope)
     assert mail_plan.task
-    assert mail_plan._chore
+    assert mail_plan.chore
 
 
 def test_BeliefUnit_cash_out_ExecutesWithRangeRootFacts():
@@ -57,15 +57,15 @@ def test_BeliefUnit_cash_out_ExecutesWithRangeRootFacts():
     zia_belief.add_fact(
         fact_context=clean_rope, fact_state=clean_rope, fact_lower=1, fact_upper=5
     )
-    assert zia_belief.planroot._factheirs == {}
+    assert zia_belief.planroot.factheirs == {}
 
     # WHEN
     zia_belief.cash_out()
 
     # THEN
-    assert zia_belief.planroot._factheirs != {}
+    assert zia_belief.planroot.factheirs != {}
     clean_factheir = factheir_shop(clean_rope, clean_rope, 1.0, 5.0)
-    assert zia_belief.planroot._factheirs == {
+    assert zia_belief.planroot.factheirs == {
         clean_factheir.fact_context: clean_factheir
     }
 
@@ -122,37 +122,37 @@ def test_BeliefUnit_cash_out_FactHeirsInherited():
     zia_belief.add_fact(
         fact_context=earth_rope, fact_state=earth_rope, fact_lower=1.0, fact_upper=5.0
     )
-    assert swim_plan._factheirs == {}
-    assert fast_plan._factheirs == {}
-    assert slow_plan._factheirs == {}
+    assert swim_plan.factheirs == {}
+    assert fast_plan.factheirs == {}
+    assert slow_plan.factheirs == {}
 
     # WHEN
     zia_belief.cash_out()
 
     # THEN
-    assert swim_plan._factheirs != {}
-    assert fast_plan._factheirs != {}
-    assert slow_plan._factheirs != {}
+    assert swim_plan.factheirs != {}
+    assert fast_plan.factheirs != {}
+    assert slow_plan.factheirs != {}
     factheir_set_range = factheir_shop(earth_rope, earth_rope, 1.0, 5.0)
     factheirs_set_range = {factheir_set_range.fact_context: factheir_set_range}
-    assert swim_plan._factheirs == factheirs_set_range
-    assert fast_plan._factheirs == factheirs_set_range
-    assert slow_plan._factheirs == factheirs_set_range
-    print(f"{swim_plan._factheirs=}")
-    assert len(swim_plan._factheirs) == 1
+    assert swim_plan.factheirs == factheirs_set_range
+    assert fast_plan.factheirs == factheirs_set_range
+    assert slow_plan.factheirs == factheirs_set_range
+    print(f"{swim_plan.factheirs=}")
+    assert len(swim_plan.factheirs) == 1
 
     # WHEN
-    swim_earth_factheir = swim_plan._factheirs.get(earth_rope)
+    swim_earth_factheir = swim_plan.factheirs.get(earth_rope)
     swim_earth_factheir.set_range_null()
 
     # THEN
     fact_none_range = factheir_shop(earth_rope, earth_rope, None, None)
     facts_none_range = {fact_none_range.fact_context: fact_none_range}
-    assert swim_plan._factheirs == facts_none_range
-    assert fast_plan._factheirs == factheirs_set_range
-    assert slow_plan._factheirs == factheirs_set_range
+    assert swim_plan.factheirs == facts_none_range
+    assert fast_plan.factheirs == factheirs_set_range
+    assert slow_plan.factheirs == factheirs_set_range
 
-    fact_x1 = swim_plan._factheirs.get(earth_rope)
+    fact_x1 = swim_plan.factheirs.get(earth_rope)
     fact_x1.set_range_null()
     print(type(fact_x1))
     assert str(type(fact_x1)).find(".reason.FactHeir'>")
@@ -176,7 +176,7 @@ def test_BeliefUnit_cash_out_FactUnitMoldsFactHeir():
     earth_rope = zia_belief.make_l1_rope(earth_str)
     zia_belief.set_l1_plan(planunit_shop(earth_str))
 
-    assert swim_plan._factheirs == {}
+    assert swim_plan.factheirs == {}
 
     # WHEN
     zia_belief.add_fact(
@@ -189,7 +189,7 @@ def test_BeliefUnit_cash_out_FactUnitMoldsFactHeir():
         earth_rope, earth_rope, fact_lower=1.0, fact_upper=5.0
     )
     first_earthdict = {first_earthheir.fact_context: first_earthheir}
-    assert swim_plan._factheirs == first_earthdict
+    assert swim_plan.factheirs == first_earthdict
 
     # WHEN
     # earth_curb = factunit_shop(fact_context=earth_rope, fact_state=earth_rope, reason_lower=3.0, reason_upper=4.0)
@@ -204,7 +204,7 @@ def test_BeliefUnit_cash_out_FactUnitMoldsFactHeir():
         earth_rope, earth_rope, fact_lower=3.0, fact_upper=5.0
     )
     after_earthdict = {after_earthheir.fact_context: after_earthheir}
-    assert swim_plan._factheirs == after_earthdict
+    assert swim_plan.factheirs == after_earthdict
 
 
 def test_BeliefUnit_cash_out_FactHeirDeletesFactUnit():
@@ -227,13 +227,13 @@ def test_BeliefUnit_cash_out_FactHeirDeletesFactUnit():
     )
     first_earthdict = {first_earthheir.fact_context: first_earthheir}
     sue_belief.add_fact(earth_rope, earth_rope, fact_lower=200.0, fact_upper=500.0)
-    assert swim_plan._factheirs == {}
+    assert swim_plan.factheirs == {}
 
     # WHEN
     sue_belief.cash_out()
 
     # THEN
-    assert swim_plan._factheirs == first_earthdict
+    assert swim_plan.factheirs == first_earthdict
 
     # WHEN
     earth_curb = factunit_shop(earth_rope, earth_rope, fact_lower=3.0, fact_upper=4.0)
@@ -241,7 +241,7 @@ def test_BeliefUnit_cash_out_FactHeirDeletesFactUnit():
     sue_belief.cash_out()
 
     # THEN
-    assert swim_plan._factheirs == first_earthdict
+    assert swim_plan.factheirs == first_earthdict
     assert swim_plan.factunits == {}
 
 
@@ -250,18 +250,18 @@ def test_BeliefUnit_cash_out_SetsChoreAsComplete():
     yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
     mail_str = "obtain mail"
     assert yao_belief is not None
-    assert len(yao_belief.planroot._kids[mail_str].reasonunits) == 1
+    assert len(yao_belief.planroot.kids[mail_str].reasonunits) == 1
     plan_dict = yao_belief.get_plan_dict()
     mail_plan = plan_dict.get(yao_belief.make_l1_rope(mail_str))
     hr_str = "hr"
     hr_rope = yao_belief.make_l1_rope(hr_str)
     yao_belief.add_fact(hr_rope, hr_rope, fact_lower=82, fact_upper=85)
     assert mail_plan.task
-    assert mail_plan._chore
+    assert mail_plan.chore
 
     # WHEN
     yao_belief.cash_out()
 
     # THEN
     assert mail_plan.task
-    assert not mail_plan._chore
+    assert not mail_plan.chore

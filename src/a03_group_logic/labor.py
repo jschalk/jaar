@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None, get_False_if_None
 from src.a03_group_logic.group import GroupTitle, GroupUnit
-from src.a03_group_logic.partner import PartnerName
+from src.a03_group_logic.voice import VoiceName
 
 
 class InvalidLaborHeirPopulateException(Exception):
@@ -32,7 +32,7 @@ def partyunit_get_from_dict(x_dict: dict) -> PartyUnit:
 class PartyHeir:
     party_title: GroupTitle = None
     solo: bool = None
-    _parent_solo: bool = None
+    parent_solo: bool = None
 
 
 def partyheir_shop(party_title: GroupTitle, solo: bool) -> PartyHeir:
@@ -89,7 +89,7 @@ class LaborHeir:
     def set_belief_name_is_labor(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        belief_name: PartnerName,
+        belief_name: VoiceName,
     ):
         self._belief_name_is_labor = self.get_belief_name_is_labor_bool(
             groupunits, belief_name
@@ -98,15 +98,15 @@ class LaborHeir:
     def get_belief_name_is_labor_bool(
         self,
         groupunits: dict[GroupTitle, GroupUnit],
-        belief_name: PartnerName,
+        belief_name: VoiceName,
     ) -> bool:
         if self._partys == {}:
             return True
 
         for x_party_title, x_groupunit in groupunits.items():
             if x_party_title in self._partys:
-                for x_partner_name in x_groupunit._memberships.keys():
-                    if x_partner_name == belief_name:
+                for x_voice_name in x_groupunit.memberships.keys():
+                    if x_voice_name == belief_name:
                         return True
         return False
 

@@ -1,9 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
 from src.a06_belief_logic.test._util.a06_str import (
-    _chore_str,
-    _status_str,
     belief_name_str,
+    chore_str,
     moment_label_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -12,6 +11,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
+    status_str,
 )
 from src.a10_belief_calc.belief_calc_config import get_belief_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_belief_tool import (
@@ -39,12 +39,12 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
 
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x__keeps_buildable = True
-    x__keeps_justified = False
-    x__offtrack_fund = 55.5
-    x__rational = True
-    x__sum_healerunit_share = 66.6
-    x__tree_traverse_count = 7
+    x_keeps_buildable = True
+    x_keeps_justified = False
+    x_offtrack_fund = 55.5
+    x_rational = True
+    x_sum_healerunit_share = 66.6
+    x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
     x_fund_iota = 3
@@ -56,12 +56,12 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
-        "_keeps_buildable": x__keeps_buildable,
-        "_keeps_justified": x__keeps_justified,
-        "_offtrack_fund": x__offtrack_fund,
-        "_rational": x__rational,
-        "_sum_healerunit_share": x__sum_healerunit_share,
-        "_tree_traverse_count": x__tree_traverse_count,
+        "keeps_buildable": x_keeps_buildable,
+        "keeps_justified": x_keeps_justified,
+        "offtrack_fund": x_offtrack_fund,
+        "rational": x_rational,
+        "sum_healerunit_share": x_sum_healerunit_share,
+        "tree_traverse_count": x_tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,
         "fund_iota": x_fund_iota,
@@ -106,20 +106,20 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
 
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x__active = 1
-    x__all_partner_cred = 2
-    x__all_partner_debt = 3
-    x__descendant_task_count = 4
-    x__fund_cease = 5
+    x_active = 1
+    x_all_voice_cred = 2
+    x_all_voice_debt = 3
+    x_descendant_task_count = 4
+    x_fund_cease = 5
     x_fund_iota = 6
-    x__fund_onset = 7
-    x__fund_ratio = 8
-    x__gogo_calc = 9
-    x__healerunit_ratio = 10
-    x__level = 11
-    x__range_evaluated = 12
-    x__stop_calc = 13
-    x__chore = 14
+    x_fund_onset = 7
+    x_fund_ratio = 8
+    x_gogo_calc = 9
+    x_healerunit_ratio = 10
+    x_tree_level = 11
+    x_range_evaluated = 12
+    x_stop_calc = 13
+    x_chore = 14
     x_addin = 15
     x_begin = 16
     x_close = 17
@@ -135,20 +135,20 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
-        "_active": x__active,
-        "_all_partner_cred": x__all_partner_cred,
-        "_all_partner_debt": x__all_partner_debt,
-        "_descendant_task_count": x__descendant_task_count,
-        "_fund_cease": x__fund_cease,
+        "active": x_active,
+        "all_voice_cred": x_all_voice_cred,
+        "all_voice_debt": x_all_voice_debt,
+        "descendant_task_count": x_descendant_task_count,
+        "fund_cease": x_fund_cease,
         "fund_iota": x_fund_iota,
-        "_fund_onset": x__fund_onset,
-        "_fund_ratio": x__fund_ratio,
-        "_gogo_calc": x__gogo_calc,
-        "_healerunit_ratio": x__healerunit_ratio,
-        "_level": x__level,
-        "_range_evaluated": x__range_evaluated,
-        "_stop_calc": x__stop_calc,
-        "_chore": x__chore,
+        "fund_onset": x_fund_onset,
+        "fund_ratio": x_fund_ratio,
+        "gogo_calc": x_gogo_calc,
+        "healerunit_ratio": x_healerunit_ratio,
+        "tree_level": x_tree_level,
+        "range_evaluated": x_range_evaluated,
+        "stop_calc": x_stop_calc,
+        "chore": x_chore,
         "addin": x_addin,
         "begin": x_begin,
         "close": x_close,
@@ -209,8 +209,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_rope = 1
     x_reason_context = 2
     x_reason_active_requisite = 3
-    x__chore = 4
-    x__status = 5
+    x_chore = 4
+    x_status = 5
     x__reason_active_heir = 6
     values_dict = {
         "moment_label": x_moment_label,
@@ -218,8 +218,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "plan_rope": x_rope,
         reason_context_str(): x_reason_context,
         reason_active_requisite_str(): x_reason_active_requisite,
-        "_chore": x__chore,
-        "_status": x__status,
+        "chore": x_chore,
+        "status": x_status,
         "_reason_active_heir": x__reason_active_heir,
     }
     # all args included in values dict
@@ -275,8 +275,8 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_reason_upper = 4
     x_reason_lower = 5
     x_reason_divisor = 6
-    x__chore = 7
-    x__status = 8
+    x_chore = 7
+    x_status = 8
     values_dict = {
         moment_label_str(): x_moment_label,
         belief_name_str(): x_belief_name,
@@ -286,8 +286,8 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         reason_upper_str(): x_reason_upper,
         reason_lower_str(): x_reason_lower,
         reason_divisor_str(): x_reason_divisor,
-        _chore_str(): x__chore,
-        _status_str(): x__status,
+        chore_str(): x_chore,
+        status_str(): x_status,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -340,8 +340,8 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
     x_awardee_title = 2
     x_give_force = 3
     x_take_force = 4
-    x__fund_give = 5
-    x__fund_take = 6
+    x_fund_give = 5
+    x_fund_take = 6
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
@@ -349,8 +349,8 @@ def test_create_blrawar_metrics_insert_sqlstr_ReturnsObj():
         "awardee_title": x_awardee_title,
         "give_force": x_give_force,
         "take_force": x_take_force,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -550,7 +550,7 @@ def test_create_blrlabo_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_belief_calc_dimen_args("belief_partnerunit")
+    x_args = get_belief_calc_dimen_args("belief_voiceunit")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -575,35 +575,35 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
 
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x_partner_name = 1
-    x_partner_cred_points = 2
-    x_partner_debt_points = 3
-    x__credor_pool = 4
-    x__debtor_pool = 5
-    x__fund_give = 6
-    x__fund_take = 7
-    x__fund_agenda_give = 8
-    x__fund_agenda_take = 9
-    x__fund_agenda_ratio_give = 10
-    x__fund_agenda_ratio_take = 11
-    x__inallocable_partner_debt_points = 12
-    x__irrational_partner_debt_points = 13
+    x_voice_name = 1
+    x_voice_cred_points = 2
+    x_voice_debt_points = 3
+    x_credor_pool = 4
+    x_debtor_pool = 5
+    x_fund_give = 6
+    x_fund_take = 7
+    x_fund_agenda_give = 8
+    x_fund_agenda_take = 9
+    x_fund_agenda_ratio_give = 10
+    x_fund_agenda_ratio_take = 11
+    x_inallocable_voice_debt_points = 12
+    x_irrational_voice_debt_points = 13
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
-        "partner_name": x_partner_name,
-        "partner_cred_points": x_partner_cred_points,
-        "partner_debt_points": x_partner_debt_points,
-        "_credor_pool": x__credor_pool,
-        "_debtor_pool": x__debtor_pool,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
-        "_fund_agenda_give": x__fund_agenda_give,
-        "_fund_agenda_take": x__fund_agenda_take,
-        "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
-        "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
-        "_inallocable_partner_debt_points": x__inallocable_partner_debt_points,
-        "_irrational_partner_debt_points": x__irrational_partner_debt_points,
+        "voice_name": x_voice_name,
+        "voice_cred_points": x_voice_cred_points,
+        "voice_debt_points": x_voice_debt_points,
+        "credor_pool": x_credor_pool,
+        "debtor_pool": x_debtor_pool,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
+        "fund_agenda_give": x_fund_agenda_give,
+        "fund_agenda_take": x_fund_agenda_take,
+        "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
+        "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
+        "inallocable_voice_debt_points": x_inallocable_voice_debt_points,
+        "irrational_voice_debt_points": x_irrational_voice_debt_points,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -616,7 +616,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "belief_partnerunit_job"
+        table_name = "belief_voiceunit_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -627,7 +627,7 @@ def test_create_blrpern_metrics_insert_sqlstr_ReturnsObj():
 def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     # sourcery skip: extract-method
     # ESTABLISH
-    x_args = get_belief_calc_dimen_args("belief_partner_membership")
+    x_args = get_belief_calc_dimen_args("belief_voice_membership")
     # x_count = 0
     # for x_arg in get_default_sorted_list(x_args):
     #     x_count += 1
@@ -652,33 +652,33 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
 
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x_partner_name = 1
+    x_voice_name = 1
     x_group_title = 2
     x_group_cred_points = 3
     x_group_debt_points = 4
-    x__credor_pool = 5
-    x__debtor_pool = 6
-    x__fund_give = 7
-    x__fund_take = 8
-    x__fund_agenda_give = 9
-    x__fund_agenda_take = 10
-    x__fund_agenda_ratio_give = 11
-    x__fund_agenda_ratio_take = 12
+    x_credor_pool = 5
+    x_debtor_pool = 6
+    x_fund_give = 7
+    x_fund_take = 8
+    x_fund_agenda_give = 9
+    x_fund_agenda_take = 10
+    x_fund_agenda_ratio_give = 11
+    x_fund_agenda_ratio_take = 12
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
-        "partner_name": x_partner_name,
+        "voice_name": x_voice_name,
         "group_title": x_group_title,
         "group_cred_points": x_group_cred_points,
         "group_debt_points": x_group_debt_points,
-        "_credor_pool": x__credor_pool,
-        "_debtor_pool": x__debtor_pool,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
-        "_fund_agenda_give": x__fund_agenda_give,
-        "_fund_agenda_take": x__fund_agenda_take,
-        "_fund_agenda_ratio_give": x__fund_agenda_ratio_give,
-        "_fund_agenda_ratio_take": x__fund_agenda_ratio_take,
+        "credor_pool": x_credor_pool,
+        "debtor_pool": x_debtor_pool,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
+        "fund_agenda_give": x_fund_agenda_give,
+        "fund_agenda_take": x_fund_agenda_take,
+        "fund_agenda_ratio_give": x_fund_agenda_ratio_give,
+        "fund_agenda_ratio_take": x_fund_agenda_ratio_take,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())
@@ -691,7 +691,7 @@ def test_create_blrmemb_metrics_insert_sqlstr_ReturnsObj():
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_job_tables(cursor)
-        table_name = "belief_partner_membership_job"
+        table_name = "belief_voice_membership_job"
         expected_sqlstr = create_insert_query(cursor, table_name, values_dict)
         print("")
         print(expected_sqlstr)
@@ -728,25 +728,25 @@ def test_create_blrgrou_metrics_insert_sqlstr_ReturnsObj():
     x_moment_label = "amy23"
     x_belief_name = "Sue"
     x_group_title = 1
-    x__credor_pool = 2
-    x__debtor_pool = 3
+    x_credor_pool = 2
+    x_debtor_pool = 3
     x_fund_iota = 4
-    x__fund_give = 5
-    x__fund_take = 6
-    x__fund_agenda_give = 7
-    x__fund_agenda_take = 8
+    x_fund_give = 5
+    x_fund_take = 6
+    x_fund_agenda_give = 7
+    x_fund_agenda_take = 8
     x_knot = 9
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "group_title": x_group_title,
-        "_credor_pool": x__credor_pool,
-        "_debtor_pool": x__debtor_pool,
+        "credor_pool": x_credor_pool,
+        "debtor_pool": x_debtor_pool,
         "fund_iota": x_fund_iota,
-        "_fund_give": x__fund_give,
-        "_fund_take": x__fund_take,
-        "_fund_agenda_give": x__fund_agenda_give,
-        "_fund_agenda_take": x__fund_agenda_take,
+        "fund_give": x_fund_give,
+        "fund_take": x_fund_take,
+        "fund_agenda_give": x_fund_agenda_give,
+        "fund_agenda_take": x_fund_agenda_take,
         "knot": x_knot,
     }
     # all args included in values dict

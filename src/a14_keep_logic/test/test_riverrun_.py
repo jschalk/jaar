@@ -107,21 +107,19 @@ def test_RiverRun_set_keep_credorledger_SetsAttr():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
-    yao_partner_cred_points = 500
+    yao_voice_cred_points = 500
     x_riverrun = riverrun_shop(yao_hubunit)
     assert x_riverrun.keep_credorledgers == {}
 
     # WHEN
     x_riverrun.set_keep_credorledger(
         belief_name=yao_str,
-        partner_name=yao_str,
-        credit_ledger=yao_partner_cred_points,
+        voice_name=yao_str,
+        credit_ledger=yao_voice_cred_points,
     )
 
     # THEN
-    assert x_riverrun.keep_credorledgers == {
-        yao_str: {yao_str: yao_partner_cred_points}
-    }
+    assert x_riverrun.keep_credorledgers == {yao_str: {yao_str: yao_voice_cred_points}}
 
 
 def test_RiverRun_delete_keep_credorledgers_belief_SetsAttr():
@@ -146,7 +144,7 @@ def test_RiverRun_delete_keep_credorledgers_belief_SetsAttr():
     assert x_riverrun.keep_credorledgers == {yao_str: {yao_str: 1}}
 
 
-def test_RiverRun_get_all_keep_credorledger_partner_names_ReturnsObj():
+def test_RiverRun_get_all_keep_credorledger_voice_names_ReturnsObj():
     # ESTABLISH
     yao_hubunit = example_yao_hubunit()
     yao_str = "Yao"
@@ -157,25 +155,25 @@ def test_RiverRun_get_all_keep_credorledger_partner_names_ReturnsObj():
     x_riverrun = riverrun_shop(yao_hubunit)
 
     # WHEN
-    all_partners_ids = x_riverrun.get_all_keep_credorledger_partner_names()
+    all_voices_ids = x_riverrun.get_all_keep_credorledger_voice_names()
     # THEN
-    assert all_partners_ids == set()
+    assert all_voices_ids == set()
 
     # WHEN
     x_riverrun.set_keep_credorledger(yao_str, yao_str, 1)
     x_riverrun.set_keep_credorledger(yao_str, bob_str, 1)
-    all_partners_ids = x_riverrun.get_all_keep_credorledger_partner_names()
+    all_voices_ids = x_riverrun.get_all_keep_credorledger_voice_names()
     # THEN
-    assert all_partners_ids == {yao_str, bob_str}
+    assert all_voices_ids == {yao_str, bob_str}
 
     # WHEN
     x_riverrun.set_keep_credorledger(zia_str, bob_str, 1)
-    all_partners_ids = x_riverrun.get_all_keep_credorledger_partner_names()
+    all_voices_ids = x_riverrun.get_all_keep_credorledger_voice_names()
     # THEN
-    assert all_partners_ids == {yao_str, bob_str, zia_str}
+    assert all_voices_ids == {yao_str, bob_str, zia_str}
 
     # WHEN
     x_riverrun.set_keep_credorledger(xio_str, sue_str, 1)
-    all_partners_ids = x_riverrun.get_all_keep_credorledger_partner_names()
+    all_voices_ids = x_riverrun.get_all_keep_credorledger_voice_names()
     # THEN
-    assert all_partners_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}
+    assert all_voices_ids == {yao_str, bob_str, zia_str, xio_str, sue_str}

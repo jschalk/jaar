@@ -13,7 +13,7 @@ def test_TreeMetrics_Exists():
     # THEN
     assert x_tree_metrics is not None
     assert x_tree_metrics.label_count is None
-    assert x_tree_metrics.level_count is None
+    assert x_tree_metrics.tree_level_count is None
     assert x_tree_metrics.reason_contexts is None
     assert x_tree_metrics.awardunits_metrics is None
     assert x_tree_metrics.uid_max is None
@@ -28,7 +28,7 @@ def test_treemetrics_shop_ReturnsObj():
     # THEN
     assert x_tree_metrics is not None
     assert x_tree_metrics.label_count == 0
-    assert x_tree_metrics.level_count == {}
+    assert x_tree_metrics.tree_level_count == {}
     assert x_tree_metrics.reason_contexts == {}
     assert x_tree_metrics.awardunits_metrics == {}
     assert x_tree_metrics.uid_max == 0
@@ -38,7 +38,7 @@ def test_treemetrics_shop_ReturnsObj():
     # # could create tests for these methods?
     # def evaluate_label(
     # def evaluate_task(self, task: bool, plan_rope: RopeTerm):
-    # def evaluate_level(self, level):
+    # def evaluate_level(self, tree_level):
     # def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
     # def evaluate_awardunits(self, awardunits: dict[GroupTitle, AwardUnit]):
     # def evaluate_uid_max(self, uid):
@@ -51,10 +51,10 @@ def test_BeliefUnit_set_plan_dict_Scenario0():
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert not root_plan.begin
     assert not root_plan.close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert yao_belief._plan_dict == {}
-    assert yao_belief._reason_contexts == set()
+    assert yao_belief.reason_contexts == set()
 
     # WHEN
     yao_belief._set_plan_dict()
@@ -62,10 +62,10 @@ def test_BeliefUnit_set_plan_dict_Scenario0():
     # THEN
     assert not root_plan.begin
     assert not root_plan.close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
     assert yao_belief._plan_dict == {root_plan.get_plan_rope(): root_plan}
-    assert yao_belief._reason_contexts == set()
+    assert yao_belief.reason_contexts == set()
 
 
 def test_BeliefUnit_set_plan_dict_Scenario1():
@@ -79,8 +79,8 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
     root_plan = yao_belief.get_plan_obj(root_rope)
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
     # WHEN
     yao_belief._set_plan_dict()
@@ -88,8 +88,8 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
     # THEN
     assert root_plan.begin == ziet0_begin
     assert root_plan.close == ziet0_close
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
 
 
 def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
@@ -104,14 +104,14 @@ def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     texas_str = "Texas"
     texas_rope = sue_belief.make_rope(usa_rope, texas_str)
     texas_plan = sue_belief.get_plan_obj(texas_rope)
-    texas_plan._gogo_calc = 7
-    texas_plan._stop_calc = 11
-    texas_plan._range_evaluated = True
-    assert not root_plan._gogo_calc
-    assert not root_plan._stop_calc
-    assert texas_plan._range_evaluated
-    assert texas_plan._gogo_calc
-    assert texas_plan._stop_calc
+    texas_plan.gogo_calc = 7
+    texas_plan.stop_calc = 11
+    texas_plan.range_evaluated = True
+    assert not root_plan.gogo_calc
+    assert not root_plan.stop_calc
+    assert texas_plan.range_evaluated
+    assert texas_plan.gogo_calc
+    assert texas_plan.stop_calc
 
     # WHEN
     sue_belief._set_plan_dict()
@@ -119,9 +119,9 @@ def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     # THEN
     assert not root_plan.begin
     assert not root_plan.close
-    assert not texas_plan._range_evaluated
-    assert not texas_plan._gogo_calc
-    assert not texas_plan._stop_calc
+    assert not texas_plan.range_evaluated
+    assert not texas_plan.gogo_calc
+    assert not texas_plan.stop_calc
 
 
 def test_BeliefUnit_set_plan_dict_Sets_reason_contexts():
@@ -138,13 +138,13 @@ def test_BeliefUnit_set_plan_dict_Sets_reason_contexts():
     )
     nation_plan = sue_belief.get_plan_obj(nation_rope)
     assert nation_plan.reason_context_reasonunit_exists(polis_rope)
-    assert sue_belief._reason_contexts == set()
+    assert sue_belief.reason_contexts == set()
 
     # WHEN
     sue_belief._set_plan_dict()
 
     # THEN
-    assert sue_belief._reason_contexts == {polis_rope}
+    assert sue_belief.reason_contexts == {polis_rope}
 
 
 def test_BeliefUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():

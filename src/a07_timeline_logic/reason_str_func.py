@@ -24,7 +24,7 @@ def get_reason_case_readable_str(
     week_rope = create_rope(timeline_rope, "week")
     if reason_context == week_rope:
         week_plan = beliefunit.get_plan_obj(week_rope)
-        for weekday_plan in week_plan._kids.values():
+        for weekday_plan in week_plan.kids.values():
             week_lower_bool = caseunit.reason_lower == weekday_plan.gogo_want
             week_upper_bool = caseunit.reason_upper == weekday_plan.stop_want
             if week_lower_bool and week_upper_bool:

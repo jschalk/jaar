@@ -1,10 +1,4 @@
-from src.a02_finance_logic.test._util.a02_str import magnitude_str
-from src.a06_belief_logic.test._util.a06_str import (
-    ancestors_str,
-    belief_name_str,
-    mandate_str,
-    moment_label_str,
-)
+from src.a10_belief_calc.test._util.a10_str import *
 
 
 def amount_str() -> str:
@@ -27,12 +21,12 @@ def bud_belief_name_str() -> str:
     return "bud_belief_name"
 
 
-def bud_partner_nets_str() -> str:
-    return "bud_partner_nets"
-
-
 def bud_time_str() -> str:
     return "bud_time"
+
+
+def bud_voice_nets_str() -> str:
+    return "bud_voice_nets"
 
 
 def celldepth_str() -> str:

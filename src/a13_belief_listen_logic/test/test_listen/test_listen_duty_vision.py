@@ -1,7 +1,7 @@
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_plan_logic.plan import get_default_moment_label, planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import partners_str
+from src.a06_belief_logic.test._util.a06_str import voices_str
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,
@@ -107,10 +107,10 @@ def get_example_yao_belief() -> BeliefUnit:
     bob_str = "Bob"
     yao_speaker = beliefunit_shop(yao_str, get_default_moment_label())
     yao_speaker.set_plan(planunit_shop(run_str()), casa_rope())
-    yao_speaker.add_partnerunit(yao_str, partner_debt_points=10)
-    yao_speaker.add_partnerunit(zia_str, partner_debt_points=30)
-    yao_speaker.add_partnerunit(bob_str, partner_debt_points=40)
-    yao_speaker.set_partner_respect(80)
+    yao_speaker.add_voiceunit(yao_str, voice_debt_points=10)
+    yao_speaker.add_voiceunit(zia_str, voice_debt_points=30)
+    yao_speaker.add_voiceunit(bob_str, voice_debt_points=40)
+    yao_speaker.set_voice_respect(80)
     return yao_speaker
 
 
@@ -118,7 +118,7 @@ def get_example_yao_vision1_speaker() -> BeliefUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_belief()
     yao_speaker.del_plan_obj(run_rope())
-    yao_speaker.set_partner_respect(40)
+    yao_speaker.set_voice_respect(40)
     yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
@@ -133,7 +133,7 @@ def get_example_yao_vision2_speaker() -> BeliefUnit:
     yao_str = "Yao"
     yao_speaker = get_example_yao_belief()
     yao_speaker.del_plan_obj(run_rope())
-    yao_speaker.set_partner_respect(30)
+    yao_speaker.set_voice_respect(30)
     yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
@@ -153,7 +153,7 @@ def get_example_yao_vision2_speaker() -> BeliefUnit:
 def get_example_yao_vision3_speaker() -> BeliefUnit:
     yao_speaker = get_example_yao_belief()
     yao_speaker.del_plan_obj(run_rope())
-    yao_speaker.set_partner_respect(10)
+    yao_speaker.set_voice_respect(10)
     yao_speaker.set_plan(planunit_shop(sweep_str(), task=True), casa_rope())
     yao_speaker.set_plan(planunit_shop(dirty_str()), sanitation_rope())
     yao_speaker.set_plan(planunit_shop(clean_str()), sanitation_rope())
@@ -257,9 +257,9 @@ def get_zia_utah_hubunit() -> HubUnit:
 
 def get_example_yao_gut_with_3_healers():
     yao_gut = get_example_yao_belief()
-    yao_str = yao_gut.get_partner("Yao").partner_name
-    bob_str = yao_gut.get_partner("Bob").partner_name
-    zia_str = yao_gut.get_partner("Zia").partner_name
+    yao_str = yao_gut.get_voice("Yao").voice_name
+    bob_str = yao_gut.get_voice("Bob").voice_name
+    zia_str = yao_gut.get_voice("Zia").voice_name
     iowa_plan = planunit_shop(get_iowa_str(), problem_bool=True)
     ohio_plan = planunit_shop(get_ohio_str(), problem_bool=True)
     utah_plan = planunit_shop(get_utah_str(), problem_bool=True)
@@ -278,7 +278,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
 ):
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
-    # yao0_gut with 3 debotors of different partner_cred_pointss
+    # yao0_gut with 3 debotors of different voice_cred_pointss
     # yao_vision1 with 1 chore, fact that doesn't make that chore active
     # yao_vision2 with 2 chores, one is equal fact that makes chore active
     # yao_vision3 with 1 new chore, fact stays with it
@@ -330,18 +330,18 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
 
     yao_job = open_job_file(moment_mstr_dir, moment_label, yao_str)
     yao_job.cash_out()
-    assert yao_job.partners.keys() == yao_gut0.partners.keys()
-    assert yao_job.get_partner(yao_str)._irrational_partner_debt_points == 0
-    yao_job_partners = yao_job.to_dict().get(partners_str())
-    yao_gut0_partners = yao_gut0.to_dict().get(partners_str())
-    yao_job_bob = yao_job_partners.get("Bob")
-    yao_gut0_bob = yao_gut0_partners.get("Bob")
+    assert yao_job.voices.keys() == yao_gut0.voices.keys()
+    assert yao_job.get_voice(yao_str).irrational_voice_debt_points == 0
+    yao_job_voices = yao_job.to_dict().get(voices_str())
+    yao_gut0_voices = yao_gut0.to_dict().get(voices_str())
+    yao_job_bob = yao_job_voices.get("Bob")
+    yao_gut0_bob = yao_gut0_voices.get("Bob")
     print(f"{yao_job_bob=}")
     print(f"{yao_gut0_bob=}")
     assert yao_job_bob == yao_gut0_bob
-    assert yao_job_partners.keys() == yao_gut0_partners.keys()
-    assert yao_job_partners == yao_gut0_partners
-    assert len(yao_job.to_dict().get(partners_str())) == 3
+    assert yao_job_voices.keys() == yao_gut0_voices.keys()
+    assert yao_job_voices == yao_gut0_voices
+    assert len(yao_job.to_dict().get(voices_str())) == 3
     assert len(yao_job._plan_dict) == 4
     print(f"{yao_job._plan_dict.keys()=}")
     print(f"{yao_job.get_factunits_dict().keys()=}")

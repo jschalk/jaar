@@ -1,19 +1,16 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a09_pack_logic.test._util.a09_str import (
-    belief_name_str,
-    bud_time_str,
-    moment_label_str,
-)
+from src.a09_pack_logic.test._util.a09_str import belief_name_str, moment_label_str
+from src.a11_bud_logic.test._util.a11_str import bud_time_str
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
 from src.a15_moment_logic.a15_path import (
     BUD_MANDATE_FILENAME,
-    create_bud_partner_mandate_ledger_path,
+    create_bud_voice_mandate_ledger_path,
 )
 
 
-def test_create_bud_partner_mandate_ledger_path_ReturnsObj():
+def test_create_bud_voice_mandate_ledger_path_ReturnsObj():
     # ESTABLISH
     x_moment_mstr_dir = get_module_temp_dir()
     a23_str = "amy23"
@@ -21,7 +18,7 @@ def test_create_bud_partner_mandate_ledger_path_ReturnsObj():
     timepoint7 = 7
 
     # WHEN
-    gen_bud_path = create_bud_partner_mandate_ledger_path(
+    gen_bud_path = create_bud_voice_mandate_ledger_path(
         x_moment_mstr_dir, a23_str, sue_str, timepoint7
     )
 
@@ -39,9 +36,9 @@ def test_create_bud_partner_mandate_ledger_path_ReturnsObj():
 LINUX_OS = platform_system() == "Linux"
 
 
-def test_create_bud_partner_mandate_ledger_path_HasDocString():
+def test_create_bud_voice_mandate_ledger_path_HasDocString():
     # ESTABLISH
-    doc_str = create_bud_partner_mandate_ledger_path(
+    doc_str = create_bud_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
@@ -50,4 +47,4 @@ def test_create_bud_partner_mandate_ledger_path_HasDocString():
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
-    assert LINUX_OS or inspect_getdoc(create_bud_partner_mandate_ledger_path) == doc_str
+    assert LINUX_OS or inspect_getdoc(create_bud_voice_mandate_ledger_path) == doc_str

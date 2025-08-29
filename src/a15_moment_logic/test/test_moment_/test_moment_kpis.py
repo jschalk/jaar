@@ -8,20 +8,20 @@ from src.a06_belief_logic.test._util.a06_str import (
     morph_str,
     numor_str,
     parent_rope_str,
-    partner_cred_points_str,
-    partner_debt_points_str,
-    partner_name_str,
     plan_label_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a15_moment_logic.moment_report import (
     get_moment_guts_agenda_dataframe,
     get_moment_guts_agenda_plotly_fig,
-    get_moment_guts_partners_dataframe,
-    get_moment_guts_partners_plotly_fig,
+    get_moment_guts_voices_dataframe,
+    get_moment_guts_voices_plotly_fig,
     get_moment_jobs_agenda_dataframe,
     get_moment_jobs_agenda_plotly_fig,
-    get_moment_jobs_partners_dataframe,
-    get_moment_jobs_partners_plotly_fig,
+    get_moment_jobs_voices_dataframe,
+    get_moment_jobs_voices_plotly_fig,
 )
 from src.a15_moment_logic.test._util.a15_env import env_dir_setup_cleanup
 from src.a15_moment_logic.test._util.example_moments import (
@@ -31,50 +31,50 @@ from src.a15_moment_logic.test._util.example_moments import (
 )
 
 
-def test_get_moment_guts_partners_dataframe_ReturnsObj(
+def test_get_moment_guts_voices_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     amy_moment = create_example_moment2()
 
     # WHEN
-    x_df = get_moment_guts_partners_dataframe(amy_moment)
+    x_df = get_moment_guts_voices_dataframe(amy_moment)
 
     # THEN
-    partnerunit_colums = {
+    voiceunit_colums = {
         belief_name_str(),
-        partner_name_str(),
-        partner_cred_points_str(),
-        partner_debt_points_str(),
-        "_memberships",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
+        voice_name_str(),
+        voice_cred_points_str(),
+        voice_debt_points_str(),
+        "memberships",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
 
-    assert set(x_df.columns) == partnerunit_colums
+    assert set(x_df.columns) == voiceunit_colums
     assert x_df.shape[0] == 8
 
 
-def test_get_moment_guts_partners_plotly_fig_DisplaysInfo(
+def test_get_moment_guts_voices_plotly_fig_DisplaysInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
     amy_moment = create_example_moment2()
 
     # WHEN
-    x_fig = get_moment_guts_partners_plotly_fig(amy_moment)
+    x_fig = get_moment_guts_voices_plotly_fig(amy_moment)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)
 
 
-def test_get_moment_jobs_partners_dataframe_ReturnsObj(
+def test_get_moment_jobs_voices_dataframe_ReturnsObj(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -82,31 +82,31 @@ def test_get_moment_jobs_partners_dataframe_ReturnsObj(
     amy_moment.generate_all_jobs()
 
     # WHEN
-    x_df = get_moment_jobs_partners_dataframe(amy_moment)
+    x_df = get_moment_jobs_voices_dataframe(amy_moment)
 
     # THEN
-    partnerunit_colums = {
+    voiceunit_colums = {
         belief_name_str(),
-        partner_name_str(),
-        partner_cred_points_str(),
-        partner_debt_points_str(),
-        "_memberships",
-        "_fund_give",
-        "_fund_take",
-        "_fund_agenda_give",
-        "_fund_agenda_take",
-        "_fund_agenda_ratio_give",
-        "_fund_agenda_ratio_take",
-        "_inallocable_partner_debt_points",
+        voice_name_str(),
+        voice_cred_points_str(),
+        voice_debt_points_str(),
+        "memberships",
+        "fund_give",
+        "fund_take",
+        "fund_agenda_give",
+        "fund_agenda_take",
+        "fund_agenda_ratio_give",
+        "fund_agenda_ratio_take",
+        "inallocable_voice_debt_points",
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
 
     assert x_df.shape[0] == 8
-    assert set(x_df.columns) == partnerunit_colums
+    assert set(x_df.columns) == voiceunit_colums
 
 
-def test_get_moment_jobs_partners_plotly_fig_DisplaysInfo(
+def test_get_moment_jobs_voices_plotly_fig_DisplaysInfo(
     env_dir_setup_cleanup, graphics_bool
 ):
     # ESTABLISH
@@ -114,7 +114,7 @@ def test_get_moment_jobs_partners_plotly_fig_DisplaysInfo(
     amy_moment.generate_all_jobs()
 
     # WHEN
-    x_fig = get_moment_jobs_partners_plotly_fig(amy_moment)
+    x_fig = get_moment_jobs_voices_plotly_fig(amy_moment)
 
     # THEN
     conditional_fig_show(x_fig, graphics_bool)

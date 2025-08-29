@@ -29,7 +29,7 @@ from src.a12_hub_toolbox.a12_path import (
     create_budunit_json_path,
     create_cell_dir_path,
     create_cell_json_path as node_path,
-    create_cell_partner_mandate_ledger_path,
+    create_cell_voice_mandate_ledger_path,
     create_gut_path,
     create_job_path,
 )
@@ -40,7 +40,7 @@ from src.a12_hub_toolbox.hub_tool import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
     collect_belief_event_dir_sets,
-    create_cell_partner_mandate_ledger_json,
+    create_cell_voice_mandate_ledger_json,
     get_beliefevent_obj,
     get_beliefs_downhill_event_ints,
     get_timepoint_dirs,
@@ -628,7 +628,7 @@ def test_cellunit_save_to_dir_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     assert cellunit_get_from_dir(cell_dir) == sue_cell
 
 
-def test_create_cell_partner_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
+def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario0_NoCellFile(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -638,20 +638,20 @@ def test_create_cell_partner_mandate_ledger_json_CreatesFile_Scenario0_NoCellFil
     a23_str = "amy23"
     bob_str = "Bob"
     tp6 = 6
-    sue_partner_mandate_ledger_path = create_cell_partner_mandate_ledger_path(
+    sue_voice_mandate_ledger_path = create_cell_voice_mandate_ledger_path(
         mstr_dir, a23_str, bob_str, tp6, sue_ancestors
     )
     sue_cell_dir = create_cell_dir_path(mstr_dir, a23_str, bob_str, tp6, sue_ancestors)
-    assert os_path_exists(sue_partner_mandate_ledger_path) is False
+    assert os_path_exists(sue_voice_mandate_ledger_path) is False
 
     # WHEN
-    create_cell_partner_mandate_ledger_json(sue_cell_dir)
+    create_cell_voice_mandate_ledger_json(sue_cell_dir)
 
     # THEN
-    assert os_path_exists(sue_partner_mandate_ledger_path) is False
+    assert os_path_exists(sue_voice_mandate_ledger_path) is False
 
 
-def test_create_cell_partner_mandate_ledger_json_CreatesFile_Scenario1(
+def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -666,8 +666,8 @@ def test_create_cell_partner_mandate_ledger_json_CreatesFile_Scenario1(
     sue_mandate = 444
     a23_str = "amy23"
     sue_belief = beliefunit_shop(sue_str, a23_str)
-    sue_belief.add_partnerunit(sue_str, 3, 5)
-    sue_belief.add_partnerunit(yao_str, 7, 2)
+    sue_belief.add_voiceunit(sue_str, 3, 5)
+    sue_belief.add_voiceunit(yao_str, 7, 2)
     clean_fact = clean_factunit()
     dirty_fact = dirty_factunit()
     sue_belief.add_plan(clean_fact.fact_state)
@@ -696,22 +696,22 @@ def test_create_cell_partner_mandate_ledger_json_CreatesFile_Scenario1(
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
     )
-    sue_cell._reason_contexts = set()
+    sue_cell.reason_contexts = set()
     bob_str = "Bob"
     tp6 = 6
-    sue_partner_mandate_ledger_path = create_cell_partner_mandate_ledger_path(
+    sue_voice_mandate_ledger_path = create_cell_voice_mandate_ledger_path(
         mstr_dir, a23_str, bob_str, tp6, sue_ancestors
     )
     sue_cell_dir = create_cell_dir_path(mstr_dir, a23_str, bob_str, tp6, sue_ancestors)
     cellunit_save_to_dir(sue_cell_dir, sue_cell)
-    assert os_path_exists(sue_partner_mandate_ledger_path) is False
+    assert os_path_exists(sue_voice_mandate_ledger_path) is False
 
     # WHEN
-    create_cell_partner_mandate_ledger_json(sue_cell_dir)
+    create_cell_voice_mandate_ledger_json(sue_cell_dir)
 
     # THEN
-    assert os_path_exists(sue_partner_mandate_ledger_path)
-    assert open_json(sue_partner_mandate_ledger_path) == {yao_str: 311, sue_str: 133}
+    assert os_path_exists(sue_voice_mandate_ledger_path)
+    assert open_json(sue_voice_mandate_ledger_path) == {yao_str: 311, sue_str: 133}
 
 
 def test_save_valid_bud_file_Scenario0_SavesFile(env_dir_setup_cleanup):
@@ -741,7 +741,9 @@ def test_save_valid_bud_file_Scenario1_RaisesError(env_dir_setup_cleanup):
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         save_bud_file(mstr_dir, a23_str, yao_str, invalid_bud)
-    exception_str = "magnitude cannot be calculated: debt_bud_partner_net=-5, cred_bud_partner_net=3"
+    exception_str = (
+        "magnitude cannot be calculated: debt_bud_voice_net=-5, cred_bud_voice_net=3"
+    )
     assert str(excinfo.value) == exception_str
 
 
@@ -818,7 +820,7 @@ def test_save_beliefpoint_file_RaisesError(env_dir_setup_cleanup):
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         save_beliefpoint_file(mstr_dir, irrational_beliefpoint, t55_bud_time)
-    exception_str = "BeliefPoint could not be saved BeliefUnit._rational is False"
+    exception_str = "BeliefPoint could not be saved BeliefUnit.rational is False"
     assert str(excinfo.value) == exception_str
 
 

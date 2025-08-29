@@ -5,8 +5,8 @@ from src.a11_bud_logic.test._util.a11_str import (
     beliefevent_facts_str,
     boss_facts_str,
     bud_belief_name_str,
-    bud_partner_nets_str,
     bud_time_str,
+    bud_voice_nets_str,
     celldepth_str,
     found_facts_str,
     mandate_str,
@@ -21,7 +21,7 @@ def test_str_functions_ReturnsObj():
     assert amount_str() == "amount"
     assert ancestors_str() == "ancestors"
     assert boss_facts_str() == "boss_facts"
-    assert bud_partner_nets_str() == "bud_partner_nets"
+    assert bud_voice_nets_str() == "bud_voice_nets"
     assert bud_belief_name_str() == "bud_belief_name"
     assert bud_time_str() == "bud_time"
     assert celldepth_str() == "celldepth"
