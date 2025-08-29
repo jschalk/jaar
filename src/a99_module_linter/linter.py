@@ -326,6 +326,7 @@ def get_max_module_import_str() -> str:
             max_module_dir = module_dir
     max_module_int_str = str(max_module_int)
     max_module_import_str = max_module_dir.replace("\\", ".")
+    max_module_import_str = max_module_import_str.replace("""src/""", """src.""")
     max_module_import_str = (
         f"{max_module_import_str}.test._util.a{max_module_int_str}_str"
     )
