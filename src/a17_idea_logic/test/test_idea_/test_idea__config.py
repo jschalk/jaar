@@ -367,7 +367,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[160] == "inallocable_voice_debt_points"
     assert table_sorting_priority[161] == "gogo_calc"
     assert table_sorting_priority[162] == "stop_calc"
-    assert table_sorting_priority[163] == "level"
+    assert table_sorting_priority[163] == "tree_level"
     assert table_sorting_priority[164] == "range_evaluated"
     assert table_sorting_priority[165] == "descendant_task_count"
     assert table_sorting_priority[166] == "healerunit_ratio"

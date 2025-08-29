@@ -45,7 +45,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     knot_str,
     laborheir_str,
     laborunit_str,
-    level_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -59,6 +58,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_level_str,
     uid_str,
 )
 from src.a06_belief_logic.belief_main import beliefunit_shop

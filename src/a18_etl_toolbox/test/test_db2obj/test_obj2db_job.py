@@ -116,7 +116,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_fund_ratio = 8
     x_gogo_calc = 9
     x_healerunit_ratio = 10
-    x_level = 11
+    x_tree_level = 11
     x_range_evaluated = 12
     x_stop_calc = 13
     x_chore = 14
@@ -145,7 +145,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "fund_ratio": x_fund_ratio,
         "gogo_calc": x_gogo_calc,
         "healerunit_ratio": x_healerunit_ratio,
-        "level": x_level,
+        "tree_level": x_tree_level,
         "range_evaluated": x_range_evaluated,
         "stop_calc": x_stop_calc,
         "chore": x_chore,

@@ -30,7 +30,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     knot_str,
     laborheir_str,
     laborunit_str,
-    level_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -44,6 +43,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_level_str,
     uid_str,
 )
 from src.a06_belief_logic.test._util.a06_str import parent_rope_str
@@ -120,7 +120,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         fund_onset_str(),
         fund_cease_str(),
         healerunit_ratio_str(),
-        level_str(),
+        tree_level_str(),
         range_evaluated_str(),
         reasonheirs_str(),
         chore_str(),

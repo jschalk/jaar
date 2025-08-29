@@ -45,7 +45,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     knot_str,
     laborheir_str,
     laborunit_str,
-    level_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -58,6 +57,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_level_str,
     uid_str,
 )
 from src.a06_belief_logic.test._util.a06_str import (
@@ -92,7 +92,7 @@ def test_get_belief_viewer_template_ReturnsObj():
         # healerunit_ratio_str(),
         # is_expanded_str(),
         laborheir_str(),
-        level_str(),
+        # tree_level_str(),
         # range_evaluated_str(),
         reasonheirs_str(),
         stop_calc_str(),

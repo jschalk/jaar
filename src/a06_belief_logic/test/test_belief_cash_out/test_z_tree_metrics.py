@@ -16,7 +16,7 @@ def test_BeliefUnit_get_tree_metrics_Exists():
     # THEN
     assert zia_belief_tree_metrics.label_count is not None
     assert zia_belief_tree_metrics.reason_contexts is not None
-    assert zia_belief_tree_metrics.level_count is not None
+    assert zia_belief_tree_metrics.tree_level_count is not None
     assert zia_belief_tree_metrics.awardunits_metrics is not None
 
 
@@ -118,7 +118,7 @@ def test_BeliefUnit_get_tree_metrics_TracksReasonsThatHaveNoFactreason_contexts(
     yao_tree_metrics = yao_beliefunit.get_tree_metrics()
 
     # THEN
-    print(f"{yao_tree_metrics.level_count=}")
+    print(f"{yao_tree_metrics.tree_level_count=}")
     print(f"{yao_tree_metrics.reason_contexts=}")
     assert yao_tree_metrics is not None
     reason_contexts_x = yao_tree_metrics.reason_contexts

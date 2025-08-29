@@ -277,7 +277,7 @@ function renderPlanUnit(planUnit, level) {
         return "";
     }
     const indent = '&nbsp;'.repeat(level * 2);
-    const levelIndicator = show_level ? ` level${planUnit.level}` : '';
+    const levelIndicator = show_level ? ` level${planUnit.tree_level}` : '';
     const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
     const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit.descendant_task_count}` : '';
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';

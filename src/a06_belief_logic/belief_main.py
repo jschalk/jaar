@@ -516,7 +516,7 @@ class BeliefUnit:
         self.cash_out()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_label(
-            level=self.planroot.level,
+            tree_level=self.planroot.tree_level,
             reasons=self.planroot.reasonunits,
             awardunits=self.planroot.awardunits,
             uid=self.planroot.uid,
@@ -534,9 +534,9 @@ class BeliefUnit:
         return tree_metrics
 
     def _eval_tree_metrics(self, parent_plan, plan_kid, tree_metrics, x_plan_list):
-        plan_kid.level = parent_plan.level + 1
+        plan_kid.tree_level = parent_plan.tree_level + 1
         tree_metrics.evaluate_label(
-            level=plan_kid.level,
+            tree_level=plan_kid.tree_level,
             reasons=plan_kid.reasonunits,
             awardunits=plan_kid.awardunits,
             uid=plan_kid.uid,
@@ -562,11 +562,11 @@ class BeliefUnit:
                 )
                 plan_uid_max = new_plan_uid_max
 
-    def get_level_count(self, level) -> int:
+    def get_level_count(self, tree_level) -> int:
         tree_metrics = self.get_tree_metrics()
         level_count = None
         try:
-            level_count = tree_metrics.level_count[level]
+            level_count = tree_metrics.tree_level_count[level]
         except KeyError:
             level_count = 0
         return level_count
@@ -1072,7 +1072,7 @@ reason_case:    {reason_case}"""
             x_plan.clear_gogo_calc_stop_calc()
             for plan_kid in x_plan.kids.values():
                 plan_kid.set_parent_rope(x_plan.get_plan_rope())
-                plan_kid.set_level(x_plan.level)
+                plan_kid.set_tree_level(x_plan.tree_level)
                 plan_list.append(plan_kid)
             self._plan_dict[x_plan.get_plan_rope()] = x_plan
             for x_reason_context in x_plan.reasonunits.keys():
@@ -1480,7 +1480,7 @@ def beliefunit_shop(
     x_belief.planroot = planunit_shop(
         root=True,
         uid=1,
-        level=0,
+        tree_level=0,
         moment_label=x_belief.moment_label,
         knot=x_belief.knot,
         fund_iota=x_belief.fund_iota,
@@ -1533,7 +1533,7 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         root=True,
         plan_label=x_belief.moment_label,
         parent_rope="",
-        level=0,
+        tree_level=0,
         uid=get_obj_from_plan_dict(planroot_dict, "uid"),
         star=get_obj_from_plan_dict(planroot_dict, "star"),
         begin=get_obj_from_plan_dict(planroot_dict, "begin"),

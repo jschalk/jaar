@@ -276,7 +276,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
         "fund_onset",
         "fund_cease",
         "healerunit_ratio",
-        "level",
+        "tree_level",
         "range_evaluated",
         "chore",
         "gogo_calc",
@@ -462,7 +462,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         "all_voice_cred",
         "all_voice_debt",
         "healerunit_ratio",
-        "level",
+        "tree_level",
         "chore",
         "fund_iota",
         "fund_ratio",
@@ -693,8 +693,8 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jm, gogo_calc_str()) == "REAL"
     assert g_class_type(cfig, blrplan, jm, healerunit_ratio_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jm, healerunit_ratio_str()) == "REAL"
-    assert g_class_type(cfig, blrplan, jm, "level") == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, "level") == "INTEGER"
+    assert g_class_type(cfig, blrplan, jm, "tree_level") == "int"
+    assert g_sqlitetype(cfig, blrplan, jm, "tree_level") == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, range_evaluated_str()) == "int"
     assert g_sqlitetype(cfig, blrplan, jm, range_evaluated_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jm, stop_calc_str()) == "float"
@@ -878,7 +878,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(fund_ratio_str()) == "float"
     assert belief_calc_args_type_dict.get(gogo_calc_str()) == "float"
     assert belief_calc_args_type_dict.get("healerunit_ratio") == "float"
-    assert belief_calc_args_type_dict.get("level") == "int"
+    assert belief_calc_args_type_dict.get("tree_level") == "int"
     assert belief_calc_args_type_dict.get(range_evaluated_str()) == "int"
     assert belief_calc_args_type_dict.get(stop_calc_str()) == "float"
     assert belief_calc_args_type_dict.get("keeps_buildable") == "int"

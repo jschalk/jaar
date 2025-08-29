@@ -187,7 +187,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.fund_ratio = x_fund_ratio
     x_plan.gogo_calc = x_gogo_calc
     x_plan.stop_calc = x_stop_calc
-    x_plan.level = x_level
+    x_plan.tree_level = x_level
     x_plan.range_evaluated = x_range_evaluated
     x_plan.descendant_task_count = x_descendant_task_count
     x_plan.healerunit_ratio = x_healerunit_ratio
@@ -212,7 +212,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.fund_ratio = x_fund_ratio
     x_plan.gogo_calc = x_gogo_calc
     x_plan.stop_calc = x_stop_calc
-    x_plan.level = x_level
+    x_plan.tree_level = x_level
     x_plan.range_evaluated = x_range_evaluated
     x_plan.descendant_task_count = x_descendant_task_count
     x_plan.healerunit_ratio = x_healerunit_ratio

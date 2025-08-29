@@ -249,7 +249,7 @@ class PlanUnit:
     fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
     fund_cease : FundNum Point at which funding ceases inside MomentUnit funding range
     healerunit_ratio : float
-    level : int that describes Depth level in plan hierarchy.
+    tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.
     reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
     chore : bool describes if a unit can be changed to inactive with fact range change.
@@ -296,7 +296,7 @@ class PlanUnit:
     fund_onset: FundNum = None
     fund_cease: FundNum = None
     healerunit_ratio: float = None
-    level: int = None
+    tree_level: int = None
     range_evaluated: bool = None
     reasonheirs: dict[RopeTerm, ReasonHeir] = None
     chore: bool = None
@@ -477,8 +477,8 @@ class PlanUnit:
         self.all_voice_cred = None
         self.all_voice_debt = None
 
-    def set_level(self, parent_level):
-        self.level = parent_level + 1
+    def set_tree_level(self, parent_tree_level):
+        self.tree_level = parent_tree_level + 1
 
     def set_parent_rope(self, parent_rope):
         self.parent_rope = parent_rope
@@ -1048,7 +1048,7 @@ def planunit_shop(
     moment_label: MomentLabel = None,
     problem_bool: bool = None,
     # Calculated fields
-    level: int = None,
+    tree_level: int = None,
     fund_ratio: float = None,
     fund_iota: FundIota = None,
     fund_onset: FundNum = None,
@@ -1095,7 +1095,7 @@ def planunit_shop(
         root=get_False_if_None(root),
         moment_label=moment_label,
         # Calculated fields
-        level=level,
+        tree_level=tree_level,
         fund_ratio=fund_ratio,
         fund_iota=default_fund_iota_if_None(fund_iota),
         fund_onset=fund_onset,

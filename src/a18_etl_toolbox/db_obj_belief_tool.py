@@ -276,7 +276,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     fund_ratio = values_dict.get("fund_ratio")
     gogo_calc = values_dict.get("gogo_calc")
     stop_calc = values_dict.get("stop_calc")
-    level = values_dict.get("level")
+    tree_level = values_dict.get("tree_level")
     range_evaluated = values_dict.get("range_evaluated")
     descendant_task_count = values_dict.get("descendant_task_count")
     healerunit_ratio = values_dict.get("healerunit_ratio")
@@ -285,7 +285,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, active, chore, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, level, range_evaluated, descendant_task_count, healerunit_ratio, all_voice_cred, all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool, fund_iota, active, chore, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_task_count, healerunit_ratio, all_voice_cred, all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -309,7 +309,7 @@ VALUES (
 , {sqlite_obj_str(fund_ratio, real_str)}
 , {sqlite_obj_str(gogo_calc, real_str)}
 , {sqlite_obj_str(stop_calc, real_str)}
-, {sqlite_obj_str(level, "INTEGER")}
+, {sqlite_obj_str(tree_level, "INTEGER")}
 , {sqlite_obj_str(range_evaluated, "INTEGER")}
 , {sqlite_obj_str(descendant_task_count, "INTEGER")}
 , {sqlite_obj_str(healerunit_ratio, real_str)}

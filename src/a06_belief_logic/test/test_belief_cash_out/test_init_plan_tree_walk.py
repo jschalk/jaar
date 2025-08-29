@@ -13,7 +13,7 @@ def test_TreeMetrics_Exists():
     # THEN
     assert x_tree_metrics is not None
     assert x_tree_metrics.label_count is None
-    assert x_tree_metrics.level_count is None
+    assert x_tree_metrics.tree_level_count is None
     assert x_tree_metrics.reason_contexts is None
     assert x_tree_metrics.awardunits_metrics is None
     assert x_tree_metrics.uid_max is None
@@ -28,7 +28,7 @@ def test_treemetrics_shop_ReturnsObj():
     # THEN
     assert x_tree_metrics is not None
     assert x_tree_metrics.label_count == 0
-    assert x_tree_metrics.level_count == {}
+    assert x_tree_metrics.tree_level_count == {}
     assert x_tree_metrics.reason_contexts == {}
     assert x_tree_metrics.awardunits_metrics == {}
     assert x_tree_metrics.uid_max == 0
@@ -38,7 +38,7 @@ def test_treemetrics_shop_ReturnsObj():
     # # could create tests for these methods?
     # def evaluate_label(
     # def evaluate_task(self, task: bool, plan_rope: RopeTerm):
-    # def evaluate_level(self, level):
+    # def evaluate_level(self, tree_level):
     # def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
     # def evaluate_awardunits(self, awardunits: dict[GroupTitle, AwardUnit]):
     # def evaluate_uid_max(self, uid):

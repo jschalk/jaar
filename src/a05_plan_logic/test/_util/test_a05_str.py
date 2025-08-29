@@ -20,7 +20,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     healerunit_str,
     is_expanded_str,
     kids_str,
-    level_str,
     morph_str,
     numor_str,
     plan_label_str,
@@ -32,6 +31,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_level_str,
     tree_traverse_count_str,
     uid_str,
 )
@@ -51,7 +51,7 @@ def test_str_functions_ReturnsObj():
     assert gogo_calc_str() == "gogo_calc"
     assert healerunit_ratio_str() == "healerunit_ratio"
     assert is_expanded_str() == "is_expanded"
-    assert level_str() == "level"
+    assert tree_level_str() == "tree_level"
     assert kids_str() == "kids"
     assert range_evaluated_str() == "range_evaluated"
     assert reasonheirs_str() == "reasonheirs"

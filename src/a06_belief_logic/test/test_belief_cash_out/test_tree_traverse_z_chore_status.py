@@ -158,7 +158,7 @@ def test_BeliefUnit_cash_out_Sets_plan_dict():
     assert casa_plan.kids == {}
     assert casa_plan.star == 30
     assert casa_plan.plan_label == casa_str
-    assert casa_plan.level == 1
+    assert casa_plan.tree_level == 1
     assert casa_plan.active
     assert casa_plan.task
     # print(f"{casa_plan.reasonheirs=}")

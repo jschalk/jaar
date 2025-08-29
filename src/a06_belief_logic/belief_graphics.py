@@ -29,17 +29,17 @@ def _get_parent_y(x_plan: PlanUnit, planunit_y_coordinate_dict: dict) -> RopeTer
 
 def _get_color_for_planunit_trace(x_planunit: PlanUnit, mode: str) -> str:
     if mode is None:
-        if x_planunit.level == 0:
+        if x_planunit.tree_level == 0:
             return "Red"
-        elif x_planunit.level == 1:
+        elif x_planunit.tree_level == 1:
             return "Pink"
-        elif x_planunit.level == 2:
+        elif x_planunit.tree_level == 2:
             return "Green"
-        elif x_planunit.level == 3:
+        elif x_planunit.tree_level == 3:
             return "Blue"
-        elif x_planunit.level == 4:
+        elif x_planunit.tree_level == 4:
             return "Purple"
-        elif x_planunit.level == 5:
+        elif x_planunit.tree_level == 5:
             return "Gold"
         else:
             return "Black"
@@ -66,7 +66,7 @@ def _add_individual_trace(
 ):
     trace_list.append(
         plotly_Scatter(
-            x=[kid_plan.level - 1, kid_plan.level],
+            x=[kid_plan.tree_level - 1, kid_plan.tree_level],
             y=[parent_y, source_y],
             marker_size=_get_dot_diameter(kid_plan.fund_ratio),
             name=kid_plan.plan_label,
@@ -75,7 +75,7 @@ def _add_individual_trace(
     )
     anno_list.append(
         dict(
-            x=kid_plan.level,
+            x=kid_plan.tree_level,
             y=source_y + (_get_dot_diameter(kid_plan.fund_ratio) / 150) + 0.002,
             text=kid_plan.plan_label,
             showarrow=False,

@@ -35,7 +35,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     knot_str,
     laborheir_str,
     laborunit_str,
-    level_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -48,6 +47,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_level_str,
     uid_str,
 )
 
@@ -96,7 +96,7 @@ def test_PlanUnit_Exists():
     assert x_planunit.is_expanded is None
     assert x_planunit.all_voice_cred is None
     assert x_planunit.all_voice_debt is None
-    assert x_planunit.level is None
+    assert x_planunit.tree_level is None
     assert x_planunit.active_hx is None
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota is None
@@ -124,7 +124,7 @@ def test_PlanUnit_Exists():
         is_expanded_str(),
         kids_str(),
         laborheir_str(),
-        level_str(),
+        tree_level_str(),
         range_evaluated_str(),
         reasonheirs_str(),
         stop_calc_str(),
@@ -184,7 +184,7 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.healerunit == healerunit_shop()
     assert x_planunit.gogo_calc is None
     assert x_planunit.stop_calc is None
-    assert x_planunit.level is None
+    assert x_planunit.tree_level is None
     assert x_planunit.active_hx == {}
     assert x_planunit.fund_ratio is None
     assert x_planunit.fund_iota == default_fund_iota_if_None()

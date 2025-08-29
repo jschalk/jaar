@@ -42,7 +42,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     kids_str,
     knot_str,
     laborunit_str,
-    level_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -55,6 +54,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_level_str,
     uid_str,
 )
 
@@ -181,7 +181,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         awardunits=biker_and_flyer_awardunits,
         star=30,
         plan_label=casa_str,
-        level=1,
+        tree_level=1,
         reasonunits=x1_reasonunits,
         reasonheirs=x1_reasonheirs,
         laborunit=sue_laborunit,

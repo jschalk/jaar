@@ -85,10 +85,6 @@ def kids_str() -> str:
     return "kids"
 
 
-def level_str() -> str:
-    return "level"
-
-
 def morph_str() -> str:
     return "morph"
 
@@ -131,6 +127,10 @@ def stop_want_str() -> str:
 
 def task_str() -> str:
     return "task"
+
+
+def tree_level_str() -> str:
+    return "tree_level"
 
 
 def tree_traverse_count_str() -> str:

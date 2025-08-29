@@ -409,7 +409,7 @@
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "level": {
+            "tree_level": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },

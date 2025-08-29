@@ -18,15 +18,15 @@ class AtomPlotlyShape:
     def set_attrs(self):
         self.base_width = 0.1
         self.base_h = 0.2
-        self.level = 0
-        self.level_width0 = 0.1
-        self.level_width1 = 0.9
+        self.tree_level = 0
+        self.tree_level_width0 = 0.1
+        self.tree_level_width1 = 0.9
         self.display_str = f"{get_normal_table_name(self.x_beliefatom.dimen)} {self.x_beliefatom.crud_str} Order: {self.x_beliefatom.atom_order}"
 
     def set_level(self, x_level, x_width0, x_width1, color=None):
-        self.level = x_level
-        self.level_width0 = x_width0
-        self.level_width1 = x_width1
+        self.tree_level = x_level
+        self.tree_level_width0 = x_width0
+        self.tree_level_width1 = x_width1
         self.color = color
 
 
@@ -66,12 +66,12 @@ def add_rect_str(fig, x, y, text):
 
 
 def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
-    level_bump = atomplotyshape.level * 0.05
+    level_bump = atomplotyshape.tree_level * 0.05
     home_form_x0 = atomplotyshape.base_width
     home_form_x1 = 1 - atomplotyshape.base_width
     home_width = home_form_x1 - home_form_x0
-    shape_x0 = home_form_x0 + (home_width * atomplotyshape.level_width0)
-    shape_x1 = home_form_x0 + (home_width * atomplotyshape.level_width1)
+    shape_x0 = home_form_x0 + (home_width * atomplotyshape.tree_level_width0)
+    shape_x1 = home_form_x0 + (home_width * atomplotyshape.tree_level_width1)
     shape_y0 = level_bump + atomplotyshape.base_h
     shape_y1 = level_bump + atomplotyshape.base_h + 0.05
     x_color = "RoyalBlue" if atomplotyshape.color is None else atomplotyshape.color

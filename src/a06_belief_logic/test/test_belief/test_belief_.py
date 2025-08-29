@@ -172,7 +172,7 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.root
     assert x_belief.planroot.uid == 1
-    assert x_belief.planroot.level == 0
+    assert x_belief.planroot.tree_level == 0
     assert x_belief.planroot.moment_label == x_belief.moment_label
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.parent_rope == ""
