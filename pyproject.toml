@@ -8,6 +8,7 @@ dependencies = [
   "xlsxwriter",
   "flask",
   "flask_cors",
+  "importlib",
 ]
 description = ""
 license = {text = "MIT"}
