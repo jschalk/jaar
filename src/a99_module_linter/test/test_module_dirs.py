@@ -16,8 +16,7 @@ from src.a99_module_linter.linter import (
 
 
 def test_Module_util_FilesExist():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
 
     # WHEN / THEN
@@ -63,8 +62,7 @@ def path_contains_subpath(full_path: str, sub_path: str):
 
 
 def test_Modules_DoNotHaveEmptyDirectories():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     exclude_dir = "src/a20_world_logic/test/test_world_examples/worlds"
 
@@ -82,8 +80,7 @@ def test_Modules_DoNotHaveEmptyDirectories():
 
 
 def test_Modules_NonTestFilesDoNotHavePrintStatments():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     print_str = "print"
 
@@ -102,8 +99,7 @@ def test_Modules_NonTestFilesDoNotHavePrintStatments():
 def test_Modules_NonTestFilesDoNotHaveImportStringFunctions():
     """Check all non-test python files do not import str functions"""
 
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         for file_path, file_imports in get_python_files_with_flag(module_dir).items():
@@ -130,8 +126,7 @@ def test_Modules_util_AssestsExistForEveryStrFunction():
         AssertionError: If any of the above conditions are not met.
     """
 
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
@@ -158,8 +153,7 @@ def test_Modules_util_AssestsExistForEveryStrFunction():
 
 
 def test_Modules_test_TestsAreInCorrectFolderStructure():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
         desc_number = int(module_desc[1:3])

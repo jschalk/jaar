@@ -19,8 +19,7 @@ from src.a99_module_linter.linter import (
 
 
 def test_Modules_StrFunctionsAppearWhereTheyShould():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
@@ -211,8 +210,7 @@ def test_Modules_MostFunctionsAreUniquelyNamed():
 
 
 def test_Modules_path_FunctionStructureAndFormat():
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN
     x_count = 0
     path_functions = {}

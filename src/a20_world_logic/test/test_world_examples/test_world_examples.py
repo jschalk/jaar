@@ -12,8 +12,7 @@ from src.a20_world_logic.world import worldunit_shop
 
 def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_tests):
     """Find examples in a example directory and run them through the pipeline."""
-    # sourcery skip: no-loop-in-tests
-    # sourcery skip: no-conditionals-in-tests
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
 
     if not run_big_tests:
