@@ -24,18 +24,23 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     all_str_functions = get_all_str_functions()
     str_first_ref = {str_function: None for str_function in all_str_functions}
     # "close" is excluded because it is used to close sqlite database connections
-    excluded_strs = {"close", "tree_level"}
+    excluded_strs = {"close"}
 
     # WHEN / THEN
+    # all_file_count = 0
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         module_files = list(get_python_files_with_flag(module_dir).keys())
         module_files.extend(list(get_json_files(module_dir)))
         module_files = sorted(module_files)
         str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
-        print(f"{desc_number_str} {str_funcs_set=}")
+        # print(f"{desc_number_str} {len(str_funcs_set)=}")
+        # module_file_count = 0
         for file_path in module_files:
             if file_path.find("_util") == -1:
+                # module_file_count += 1
+                # all_file_count += 1
+                # print(f"{all_file_count} Module: {module_file_count} {file_path}")
                 first_ref_missing_strs = {
                     str_function[:-4]
                     for str_function in str_first_ref
@@ -49,6 +54,43 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
+
+
+# def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
+#     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+#     # ESTABLISH
+#     module_descs = get_module_descs()
+
+
+#     # WHEN / THEN
+#     all_file_count = 0
+#     for module_desc, module_dir in get_module_descs().items():
+#         desc_number_str = module_desc[1:3]
+#         module_files = list(get_python_files_with_flag(module_dir).keys())
+#         module_files.extend(list(get_json_files(module_dir)))
+#         module_files = sorted(module_files)
+#         str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
+#         print(f"{desc_number_str} {len(str_funcs_set)=}")
+#         module_file_count = 0
+#         for file_path in module_files:
+#             if file_path.find("_util") == -1:
+#                 module_file_count += 1
+#                 all_file_count += 1
+#                 print(f"{all_file_count} Module: {module_file_count} {file_path}")
+#                 first_ref_missing_strs = {
+#                     str_function[:-4]
+#                     for str_function in str_first_ref
+#                     if str_first_ref.get(str_function) is None
+#                 }
+#                 file_str = open(file_path).read()
+#                 for x_str in first_ref_missing_strs:
+#                     if file_str.find(x_str) > -1 and x_str not in excluded_strs:
+#                         x_str_func_name = f"{x_str}_str"
+#                         str_first_ref[x_str_func_name] = file_path
+#                         if x_str_func_name not in str_funcs_set:
+#                             print(f"missing {x_str=} {file_path=}")
+#                         assert x_str_func_name in str_funcs_set
+#     assert 1 == 2
 
 
 def test_Modules_StrFunctionsAreAllImported():
