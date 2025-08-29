@@ -108,7 +108,6 @@ def test_Modules_StrFunctionsAreAllImported():
     assert len(all_str_functions) == len(mod_str_funcs)
     all_str_func_set = set(all_str_functions)
     assert all_str_func_set == mod_str_funcs
-    assert 1 == 2
 
 
 def test_Modules_MostFunctionsAreUniquelyNamed():
