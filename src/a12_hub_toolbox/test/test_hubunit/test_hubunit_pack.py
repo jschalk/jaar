@@ -220,8 +220,8 @@ def test_HubUnit_validate_packunit_ReturnsObjWithAttributesFixed(
     invalid_sue_packunit = packunit_shop(
         belief_name="Bob",
         _pack_id=sue_hubunit._get_next_pack_file_number() - 5,
-        _atoms_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
-        _packs_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
+        _atoms_dir=create_path(sue_hubunit.keeps_dir, "swimming"),
+        _packs_dir=create_path(sue_hubunit.keeps_dir, "swimming"),
     )
     valid_packunit = sue_hubunit.validate_packunit(invalid_sue_packunit)
 
@@ -254,8 +254,8 @@ def test_HubUnit_save_pack_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     invalid_sue_packunit = packunit_shop(
         belief_name="Bob",
         _pack_id=sue_hubunit._get_next_pack_file_number() - 5,
-        _atoms_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
-        _packs_dir=create_path(sue_hubunit._keeps_dir, "swimming"),
+        _atoms_dir=create_path(sue_hubunit.keeps_dir, "swimming"),
+        _packs_dir=create_path(sue_hubunit.keeps_dir, "swimming"),
     )
     sue_hubunit.save_pack_file(invalid_sue_packunit)
 
@@ -424,8 +424,8 @@ def test_HubUnit_save_pack_file_ReturnsValidObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue2_packunit = sue_2beliefatoms_packunit()
-    sue2_packunit._atoms_dir = create_path(sue_hubunit._keeps_dir, "swimming")
-    sue2_packunit._packs_dir = create_path(sue_hubunit._keeps_dir, "swimming")
+    sue2_packunit._atoms_dir = create_path(sue_hubunit.keeps_dir, "swimming")
+    sue2_packunit._packs_dir = create_path(sue_hubunit.keeps_dir, "swimming")
     sue2_packunit.belief_name = "Bob"
     sue2_packunit._pack_id = sue_hubunit._get_next_pack_file_number() - 5
     prev_sue2_packunit = copy_deepcopy(sue2_packunit)

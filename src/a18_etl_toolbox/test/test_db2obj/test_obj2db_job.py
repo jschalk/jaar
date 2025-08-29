@@ -39,12 +39,12 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
 
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x__keeps_buildable = True
-    x__keeps_justified = False
-    x__offtrack_fund = 55.5
-    x__rational = True
-    x__sum_healerunit_share = 66.6
-    x__tree_traverse_count = 7
+    x_keeps_buildable = True
+    x_keeps_justified = False
+    x_offtrack_fund = 55.5
+    x_rational = True
+    x_sum_healerunit_share = 66.6
+    x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
     x_fund_iota = 3
@@ -56,12 +56,12 @@ def test_create_beliefunit_metrics_insert_sqlstr_ReturnsObj():
     values_dict = {
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
-        "_keeps_buildable": x__keeps_buildable,
-        "_keeps_justified": x__keeps_justified,
-        "_offtrack_fund": x__offtrack_fund,
-        "_rational": x__rational,
-        "_sum_healerunit_share": x__sum_healerunit_share,
-        "_tree_traverse_count": x__tree_traverse_count,
+        "keeps_buildable": x_keeps_buildable,
+        "keeps_justified": x_keeps_justified,
+        "offtrack_fund": x_offtrack_fund,
+        "rational": x_rational,
+        "sum_healerunit_share": x_sum_healerunit_share,
+        "tree_traverse_count": x_tree_traverse_count,
         "credor_respect": x_credor_respect,
         "debtor_respect": x_debtor_respect,
         "fund_iota": x_fund_iota,

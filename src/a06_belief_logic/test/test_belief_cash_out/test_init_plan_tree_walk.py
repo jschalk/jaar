@@ -54,7 +54,7 @@ def test_BeliefUnit_set_plan_dict_Scenario0():
     assert not root_plan.gogo_calc
     assert not root_plan.stop_calc
     assert yao_belief._plan_dict == {}
-    assert yao_belief._reason_contexts == set()
+    assert yao_belief.reason_contexts == set()
 
     # WHEN
     yao_belief._set_plan_dict()
@@ -65,7 +65,7 @@ def test_BeliefUnit_set_plan_dict_Scenario0():
     assert not root_plan.gogo_calc
     assert not root_plan.stop_calc
     assert yao_belief._plan_dict == {root_plan.get_plan_rope(): root_plan}
-    assert yao_belief._reason_contexts == set()
+    assert yao_belief.reason_contexts == set()
 
 
 def test_BeliefUnit_set_plan_dict_Scenario1():
@@ -138,13 +138,13 @@ def test_BeliefUnit_set_plan_dict_Sets_reason_contexts():
     )
     nation_plan = sue_belief.get_plan_obj(nation_rope)
     assert nation_plan.reason_context_reasonunit_exists(polis_rope)
-    assert sue_belief._reason_contexts == set()
+    assert sue_belief.reason_contexts == set()
 
     # WHEN
     sue_belief._set_plan_dict()
 
     # THEN
-    assert sue_belief._reason_contexts == {polis_rope}
+    assert sue_belief.reason_contexts == {polis_rope}
 
 
 def test_BeliefUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():

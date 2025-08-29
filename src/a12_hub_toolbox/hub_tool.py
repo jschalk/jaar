@@ -261,9 +261,9 @@ def save_beliefpoint_file(
     x_bud_time: TimeLinePoint = None,
 ):
     x_beliefpoint.cash_out()
-    if x_beliefpoint._rational is False:
+    if x_beliefpoint.rational is False:
         raise _save_valid_beliefpoint_Exception(
-            "BeliefPoint could not be saved BeliefUnit._rational is False"
+            "BeliefPoint could not be saved BeliefUnit.rational is False"
         )
     beliefpoint_json_path = create_beliefpoint_path(
         moment_mstr_dir,

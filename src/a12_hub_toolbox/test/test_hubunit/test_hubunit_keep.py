@@ -19,7 +19,7 @@ from src.a12_hub_toolbox.test._util.a12_env import (
 from src.a12_hub_toolbox.test._util.example_hub_atoms import get_texas_rope
 
 
-def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
+def test_HubUnit_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(
     env_dir_setup_cleanup,
 ):
 
@@ -39,7 +39,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
     sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.edit_plan_attr(dallas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.cash_out()
-    assert sue_gut_belief._keeps_justified is False
+    assert sue_gut_belief.keeps_justified is False
     save_gut_file(env_dir(), sue_gut_belief)
 
     # WHEN / THEN
@@ -47,11 +47,11 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_justified_IsFalse(
         sue_hubunit.get_keep_ropes()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_ropes from '{sue_str}' gut belief because 'BeliefUnit._keeps_justified' is False."
+        == f"Cannot get_keep_ropes from '{sue_str}' gut belief because 'BeliefUnit.keeps_justified' is False."
     )
 
 
-def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
+def test_HubUnit_get_keep_ropes_RaisesErrorWhen_keeps_buildable_IsFalse(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -66,8 +66,8 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
     sue_gut_belief.set_l1_plan(planunit_shop(texas_str, problem_bool=True))
     sue_gut_belief.edit_plan_attr(texas_rope, healerunit=healerunit_shop({sue_str}))
     sue_gut_belief.cash_out()
-    assert sue_gut_belief._keeps_justified
-    assert sue_gut_belief._keeps_buildable is False
+    assert sue_gut_belief.keeps_justified
+    assert sue_gut_belief.keeps_buildable is False
     save_gut_file(env_dir(), sue_gut_belief)
 
     # WHEN / THEN
@@ -75,7 +75,7 @@ def test_HubUnit_get_keep_ropes_RaisesErrorWhen__keeps_buildable_IsFalse(
         sue_hubunit.get_keep_ropes()
     assert (
         str(excinfo.value)
-        == f"Cannot get_keep_ropes from '{sue_str}' gut belief because 'BeliefUnit._keeps_buildable' is False."
+        == f"Cannot get_keep_ropes from '{sue_str}' gut belief because 'BeliefUnit.keeps_buildable' is False."
     )
 
 

@@ -171,7 +171,7 @@ def listen_to_speaker_agenda(listener: BeliefUnit, speaker: BeliefUnit) -> Belie
             f"listener '{listener.belief_name}' belief is assumed to have {speaker.belief_name} voiceunit."
         )
     perspective_belief = get_speaker_perspective(speaker, listener.belief_name)
-    if perspective_belief._rational is False:
+    if perspective_belief.rational is False:
         return _allocate_irrational_voice_debt_points(listener, speaker.belief_name)
     if listener.debtor_respect is None:
         return _allocate_inallocable_voice_debt_points(listener, speaker.belief_name)

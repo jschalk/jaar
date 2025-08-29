@@ -32,6 +32,7 @@ from src.a05_plan_logic.test._util.a05_str import (
     stop_calc_str,
     stop_want_str,
     task_str,
+    tree_traverse_count_str,
     uid_str,
 )
 
@@ -65,7 +66,6 @@ def test_str_functions_ReturnsObj():
     assert fund_share_str() == "fund_share"
     assert gogo_want_str() == "gogo_want"
     assert healerunit_str() == "healerunit"
-
     assert star_str() == "star"
     assert morph_str() == "morph"
     assert numor_str() == "numor"
@@ -73,3 +73,4 @@ def test_str_functions_ReturnsObj():
     assert problem_bool_str() == "problem_bool"
     assert stop_want_str() == "stop_want"
     assert healer_name_str() == "healer_name"
+    assert tree_traverse_count_str() == "tree_traverse_count"

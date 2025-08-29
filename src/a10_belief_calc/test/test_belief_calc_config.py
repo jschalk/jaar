@@ -61,10 +61,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
-    _offtrack_fund_str,
-    _rational_str,
-    _sum_healerunit_share_str,
-    _tree_traverse_count_str,
     addin_str,
     awardee_title_str,
     begin_str,
@@ -96,14 +92,18 @@ from src.a06_belief_logic.test._util.a06_str import (
     max_tree_traverse_str,
     morph_str,
     numor_str,
+    offtrack_fund_str,
     penny_str,
     plan_rope_str,
+    rational_str,
     reason_context_str,
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
     stop_want_str,
+    sum_healerunit_share_str,
     tally_str,
+    tree_traverse_count_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -234,12 +234,12 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     blrgrou_jmetrics_keys = set(blrgrou_aspect.get(jmetrics_str()))
 
     expected_blrunit_jmetrics_keys = {
-        "_tree_traverse_count",
-        "_rational",
-        "_keeps_justified",
-        "_keeps_buildable",
-        "_sum_healerunit_share",
-        "_offtrack_fund",
+        "tree_traverse_count",
+        "rational",
+        "keeps_justified",
+        "keeps_buildable",
+        "sum_healerunit_share",
+        "offtrack_fund",
     }
     assert expected_blrunit_jmetrics_keys == blrunit_jmetrics_keys
     expected_blrpern_jmetrics_keys = {
@@ -723,18 +723,18 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, problem_bool_str()) == "INTEGER"
     assert g_class_type(cfig, blrplan, jv, stop_want_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, stop_want_str()) == "REAL"
-    assert g_class_type(cfig, beliefunit, jm, "_keeps_buildable") == "int"
-    assert g_sqlitetype(cfig, beliefunit, jm, "_keeps_buildable") == "INTEGER"
-    assert g_class_type(cfig, beliefunit, jm, "_keeps_justified") == "int"
-    assert g_sqlitetype(cfig, beliefunit, jm, "_keeps_justified") == "INTEGER"
-    assert g_class_type(cfig, beliefunit, jm, _offtrack_fund_str()) == "float"
-    assert g_sqlitetype(cfig, beliefunit, jm, _offtrack_fund_str()) == "REAL"
-    assert g_class_type(cfig, beliefunit, jm, _rational_str()) == "bool"
-    assert g_sqlitetype(cfig, beliefunit, jm, _rational_str()) == "INTEGER"
-    assert g_class_type(cfig, beliefunit, jm, _sum_healerunit_share_str()) == "float"
-    assert g_sqlitetype(cfig, beliefunit, jm, _sum_healerunit_share_str()) == "REAL"
-    assert g_class_type(cfig, beliefunit, jm, _tree_traverse_count_str()) == "int"
-    assert g_sqlitetype(cfig, beliefunit, jm, _tree_traverse_count_str()) == "INTEGER"
+    assert g_class_type(cfig, beliefunit, jm, "keeps_buildable") == "int"
+    assert g_sqlitetype(cfig, beliefunit, jm, "keeps_buildable") == "INTEGER"
+    assert g_class_type(cfig, beliefunit, jm, "keeps_justified") == "int"
+    assert g_sqlitetype(cfig, beliefunit, jm, "keeps_justified") == "INTEGER"
+    assert g_class_type(cfig, beliefunit, jm, offtrack_fund_str()) == "float"
+    assert g_sqlitetype(cfig, beliefunit, jm, offtrack_fund_str()) == "REAL"
+    assert g_class_type(cfig, beliefunit, jm, rational_str()) == "bool"
+    assert g_sqlitetype(cfig, beliefunit, jm, rational_str()) == "INTEGER"
+    assert g_class_type(cfig, beliefunit, jm, sum_healerunit_share_str()) == "float"
+    assert g_sqlitetype(cfig, beliefunit, jm, sum_healerunit_share_str()) == "REAL"
+    assert g_class_type(cfig, beliefunit, jm, tree_traverse_count_str()) == "int"
+    assert g_sqlitetype(cfig, beliefunit, jm, tree_traverse_count_str()) == "INTEGER"
     assert g_class_type(cfig, beliefunit, jv, credor_respect_str()) == "float"
     assert g_sqlitetype(cfig, beliefunit, jv, credor_respect_str()) == "REAL"
     assert g_class_type(cfig, beliefunit, jv, debtor_respect_str()) == "float"
@@ -881,12 +881,12 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get("level") == "int"
     assert belief_calc_args_type_dict.get(range_evaluated_str()) == "int"
     assert belief_calc_args_type_dict.get(stop_calc_str()) == "float"
-    assert belief_calc_args_type_dict.get("_keeps_buildable") == "int"
-    assert belief_calc_args_type_dict.get("_keeps_justified") == "int"
-    assert belief_calc_args_type_dict.get(_offtrack_fund_str()) == "int"
-    assert belief_calc_args_type_dict.get(_rational_str()) == "bool"
-    assert belief_calc_args_type_dict.get(_sum_healerunit_share_str()) == "float"
-    assert belief_calc_args_type_dict.get(_tree_traverse_count_str()) == "int"
+    assert belief_calc_args_type_dict.get("keeps_buildable") == "int"
+    assert belief_calc_args_type_dict.get("keeps_justified") == "int"
+    assert belief_calc_args_type_dict.get(offtrack_fund_str()) == "int"
+    assert belief_calc_args_type_dict.get(rational_str()) == "bool"
+    assert belief_calc_args_type_dict.get(sum_healerunit_share_str()) == "float"
+    assert belief_calc_args_type_dict.get(tree_traverse_count_str()) == "int"
     assert belief_calc_args_type_dict.get(credor_respect_str()) == "float"
     assert belief_calc_args_type_dict.get(debtor_respect_str()) == "float"
     assert belief_calc_args_type_dict.get(fund_iota_str()) == "float"

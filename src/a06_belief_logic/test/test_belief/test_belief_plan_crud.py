@@ -1080,13 +1080,13 @@ def test_BeliefUnit_plan_exists_ReturnsBool():
 def test_BeliefUnit_set_offtrack_fund_ReturnsObj():
     # ESTABLISH
     bob_beliefunit = beliefunit_shop("Bob")
-    assert not bob_beliefunit._offtrack_fund
+    assert not bob_beliefunit.offtrack_fund
 
     # WHEN
     bob_beliefunit.set_offtrack_fund() == 0
 
     # THEN
-    assert bob_beliefunit._offtrack_fund == 0
+    assert bob_beliefunit.offtrack_fund == 0
 
     # ESTABLISH
     casa_str = "casa"
@@ -1104,22 +1104,22 @@ def test_BeliefUnit_set_offtrack_fund_ReturnsObj():
     bob_beliefunit.set_l1_plan(casa_plan)
     bob_beliefunit.set_l1_plan(wk_plan)
     bob_beliefunit.set_plan(wed_plan, wk_rope)
-    bob_beliefunit._offtrack_kids_star_set.add(casa_rope)
-    bob_beliefunit._offtrack_kids_star_set.add(wk_rope)
-    assert bob_beliefunit._offtrack_fund == 0
+    bob_beliefunit.offtrack_kids_star_set.add(casa_rope)
+    bob_beliefunit.offtrack_kids_star_set.add(wk_rope)
+    assert bob_beliefunit.offtrack_fund == 0
 
     # WHEN
     bob_beliefunit.set_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit._offtrack_fund == 105
+    assert bob_beliefunit.offtrack_fund == 105
 
     # WHEN
-    bob_beliefunit._offtrack_kids_star_set.add(wed_rope)
+    bob_beliefunit.offtrack_kids_star_set.add(wed_rope)
     bob_beliefunit.set_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit._offtrack_fund == 108
+    assert bob_beliefunit.offtrack_fund == 108
 
 
 def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
@@ -1132,7 +1132,7 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_beliefunit.add_voiceunit(yao_str, voice_cred_points=2)
     bob_beliefunit.add_voiceunit(sue_str, voice_debt_points=2)
     bob_beliefunit.set_offtrack_fund()
-    assert bob_beliefunit._offtrack_fund == 0
+    assert bob_beliefunit.offtrack_fund == 0
 
     # WHEN
     bob_beliefunit._allot_offtrack_fund()
@@ -1161,10 +1161,10 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     bob_beliefunit.set_l1_plan(casa_plan)
     bob_beliefunit.set_l1_plan(wk_plan)
     bob_beliefunit.set_plan(wed_plan, wk_rope)
-    bob_beliefunit._offtrack_kids_star_set.add(casa_rope)
-    bob_beliefunit._offtrack_kids_star_set.add(wk_rope)
+    bob_beliefunit.offtrack_kids_star_set.add(casa_rope)
+    bob_beliefunit.offtrack_kids_star_set.add(wk_rope)
     bob_beliefunit.set_offtrack_fund()
-    assert bob_beliefunit._offtrack_fund == 105
+    assert bob_beliefunit.offtrack_fund == 105
 
     # WHEN
     bob_beliefunit._allot_offtrack_fund()
@@ -1177,8 +1177,8 @@ def test_BeliefUnit_allot_offtrack_fund_SetsCharUnit_fund_take_fund_give():
     assert bob_beliefunit.get_voice(sue_str).fund_give == 26
     assert bob_beliefunit.get_voice(sue_str).fund_take == 53
 
-    bob_beliefunit._offtrack_kids_star_set.add(wed_rope)
+    bob_beliefunit.offtrack_kids_star_set.add(wed_rope)
     bob_beliefunit.set_offtrack_fund()
 
     # THEN
-    assert bob_beliefunit._offtrack_fund == 108
+    assert bob_beliefunit.offtrack_fund == 108

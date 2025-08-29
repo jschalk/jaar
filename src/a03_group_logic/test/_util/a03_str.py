@@ -94,6 +94,10 @@ def party_title_str() -> str:
     return "party_title"
 
 
+def rational_str() -> str:
+    return "rational"
+
+
 def respect_bit_str() -> str:
     return "respect_bit"
 

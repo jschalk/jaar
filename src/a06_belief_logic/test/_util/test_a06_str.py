@@ -1,12 +1,4 @@
 from src.a06_belief_logic.test._util.a06_str import (
-    _keeps_buildable_str,
-    _keeps_justified_str,
-    _offtrack_fund_str,
-    _offtrack_kids_star_set_str,
-    _rational_str,
-    _reason_contexts_str,
-    _sum_healerunit_share_str,
-    _tree_traverse_count_str,
     ancestors_str,
     attributes_str,
     belief_plan_awardunit_str,
@@ -24,12 +16,18 @@ from src.a06_belief_logic.test._util.a06_str import (
     dimen_str,
     dimens_str,
     jkeys_str,
+    keeps_buildable_str,
+    keeps_justified_str,
     last_pack_id_str,
     mandate_str,
     max_tree_traverse_str,
+    offtrack_fund_str,
+    offtrack_kids_star_set_str,
     penny_str,
     planroot_str,
+    reason_contexts_str,
     respect_bit_str,
+    sum_healerunit_share_str,
     tally_str,
     voice_cred_points_str,
     voice_debt_points_str,
@@ -40,14 +38,12 @@ from src.a06_belief_logic.test._util.a06_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert _keeps_buildable_str() == "_keeps_buildable"
-    assert _keeps_justified_str() == "_keeps_justified"
-    assert _offtrack_fund_str() == "_offtrack_fund"
-    assert _offtrack_kids_star_set_str() == "_offtrack_kids_star_set"
-    assert _rational_str() == "_rational"
-    assert _reason_contexts_str() == "_reason_contexts"
-    assert _sum_healerunit_share_str() == "_sum_healerunit_share"
-    assert _tree_traverse_count_str() == "_tree_traverse_count"
+    assert keeps_buildable_str() == "keeps_buildable"
+    assert keeps_justified_str() == "keeps_justified"
+    assert offtrack_fund_str() == "offtrack_fund"
+    assert offtrack_kids_star_set_str() == "offtrack_kids_star_set"
+    assert reason_contexts_str() == "reason_contexts"
+    assert sum_healerunit_share_str() == "sum_healerunit_share"
     assert last_pack_id_str() == "last_pack_id"
     assert max_tree_traverse_str() == "max_tree_traverse"
     assert penny_str() == "penny"

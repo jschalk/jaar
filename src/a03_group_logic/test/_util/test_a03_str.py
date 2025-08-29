@@ -22,6 +22,7 @@ from src.a03_group_logic.test._util.a03_str import (
     memberships_str,
     parent_solo_str,
     party_title_str,
+    rational_str,
     respect_bit_str,
     solo_str,
     take_force_str,
@@ -60,6 +61,7 @@ def test_str_functions_ReturnsObj():
     assert voice_cred_points_str() == "voice_cred_points"
     assert voice_debt_points_str() == "voice_debt_points"
     assert voice_name_str() == "voice_name"
+    assert rational_str() == "rational"
     assert party_title_str() == "party_title"
     assert respect_bit_str() == "respect_bit"
     assert solo_str() == "solo"

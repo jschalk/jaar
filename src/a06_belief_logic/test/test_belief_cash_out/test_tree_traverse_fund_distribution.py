@@ -335,7 +335,7 @@ def test_BeliefUnit_cash_out_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFun
     assert sue_beliefunit.get_plan_obj(vaccum_rope).fund_ratio is None
     assert sue_beliefunit.get_groupunit(yao_str) is None
 
-    assert not sue_beliefunit._offtrack_fund
+    assert not sue_beliefunit.offtrack_fund
     assert sue_beliefunit.get_voice(yao_str).fund_give == 0
     assert sue_beliefunit.get_voice(yao_str).fund_take == 0
 
@@ -353,7 +353,7 @@ def test_BeliefUnit_cash_out_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFun
     assert sue_beliefunit.get_groupunit(yao_str).fund_give == 0
     assert sue_beliefunit.get_groupunit(yao_str).fund_take == 0
 
-    assert sue_beliefunit._offtrack_fund == clean_fund_ratio * default_fund_pool()
+    assert sue_beliefunit.offtrack_fund == clean_fund_ratio * default_fund_pool()
     assert sue_beliefunit.get_voice(yao_str).fund_give == default_fund_pool()
     assert sue_beliefunit.get_voice(yao_str).fund_take == default_fund_pool()
 
@@ -1279,7 +1279,7 @@ def test_BeliefUnit_cash_out_SetsAttrsWhenNoFactUnitsNoReasonUnitsEmpty_agenda_r
     yao_belief.cash_out()
 
     # THEN
-    assert yao_belief._reason_contexts == set()
+    assert yao_belief.reason_contexts == set()
     assert sue_voice.fund_give == 50000000
     assert sue_voice.fund_take == 200000000
     assert bob_voice.fund_give == 150000000

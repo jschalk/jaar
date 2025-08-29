@@ -137,15 +137,15 @@ class BeliefUnit:
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
     _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
-    _tree_traverse_count: int = None
-    _rational: bool = None
-    _keeps_justified: bool = None
-    _keeps_buildable: bool = None
-    _sum_healerunit_share: float = None
+    tree_traverse_count: int = None
+    rational: bool = None
+    keeps_justified: bool = None
+    keeps_buildable: bool = None
+    sum_healerunit_share: float = None
     groupunits: dict[GroupTitle, GroupUnit] = None
-    _offtrack_kids_star_set: set[RopeTerm] = None
-    _offtrack_fund: float = None
-    _reason_contexts: set[RopeTerm] = None
+    offtrack_kids_star_set: set[RopeTerm] = None
+    offtrack_fund: float = None
+    reason_contexts: set[RopeTerm] = None
     _range_inheritors: dict[RopeTerm, RopeTerm] = None
     # cash_out Calculated field end
 
@@ -503,8 +503,8 @@ class BeliefUnit:
         self.cash_out()
         if not problem:
             return self._plan_dict
-        if self._keeps_justified is False:
-            exception_str = f"Cannot return problem set because _keeps_justified={self._keeps_justified}."
+        if self.keeps_justified is False:
+            exception_str = f"Cannot return problem set because keeps_justified={self.keeps_justified}."
             raise Exception_keeps_justified(exception_str)
 
         x_plans = self._plan_dict.values()
@@ -912,7 +912,7 @@ reason_case:    {reason_case}"""
         return credit_ledger, debt_ledger
 
     def _allot_offtrack_fund(self):
-        self._add_to_voiceunits_fund_give_take(self._offtrack_fund)
+        self._add_to_voiceunits_fund_give_take(self.offtrack_fund)
 
     def get_voiceunits_voice_cred_points_sum(self) -> float:
         return sum(
@@ -931,12 +931,12 @@ reason_case:    {reason_case}"""
         for x_voice_name, voice_fund_give in fund_give_allot.items():
             self.get_voice(x_voice_name).add_fund_give(voice_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_contexts:
+            if not self.reason_contexts:
                 self.get_voice(x_voice_name).add_fund_agenda_give(voice_fund_give)
         for x_voice_name, voice_fund_take in fund_take_allot.items():
             self.get_voice(x_voice_name).add_fund_take(voice_fund_take)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
-            if not self._reason_contexts:
+            if not self.reason_contexts:
                 self.get_voice(x_voice_name).add_fund_agenda_take(voice_fund_take)
 
     def _add_to_voiceunits_fund_agenda_give_take(self, plan_fund_share: float):
@@ -1076,7 +1076,7 @@ reason_case:    {reason_case}"""
                 plan_list.append(plan_kid)
             self._plan_dict[x_plan.get_plan_rope()] = x_plan
             for x_reason_context in x_plan.reasonunits.keys():
-                self._reason_contexts.add(x_reason_context)
+                self.reason_contexts.add(x_reason_context)
 
     def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
         exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and stop_calc attributes set twice"
@@ -1114,7 +1114,7 @@ reason_case:    {reason_case}"""
                 and x_plan.get_kids_star_sum() == 0
                 and x_plan.star != 0
             ):
-                self._offtrack_kids_star_set.add(x_plan.get_plan_rope())
+                self.offtrack_kids_star_set.add(x_plan.get_plan_rope())
 
     def _set_groupunit_voiceunit_funds(self, keep_exceptions):
         for x_plan in self._plan_dict.values():
@@ -1167,7 +1167,7 @@ reason_case:    {reason_case}"""
             if x_plan_obj.healerunit.any_healer_name_exists():
                 keep_justified_by_problem = False
                 healerunit_count += 1
-                self._sum_healerunit_share += x_plan_obj.get_fund_share()
+                self.sum_healerunit_share += x_plan_obj.get_fund_share()
             if x_plan_obj.problem_bool:
                 keep_justified_by_problem = True
 
@@ -1175,7 +1175,7 @@ reason_case:    {reason_case}"""
             if keep_exceptions:
                 exception_str = f"PlanUnit '{rope}' cannot sponsor ancestor keeps."
                 raise Exception_keeps_justified(exception_str)
-            self._keeps_justified = False
+            self.keeps_justified = False
 
     def _clear_plantree_fund_and_active_status_attrs(self):
         for x_plan in self._plan_dict.values():
@@ -1186,7 +1186,7 @@ reason_case:    {reason_case}"""
     def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
         x_plan.set_reasonheirs(self._plan_dict, parent_plan.reasonheirs)
         x_plan.set_range_factheirs(self._plan_dict, self._range_inheritors)
-        tt_count = self._tree_traverse_count
+        tt_count = self.tree_traverse_count
         x_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
 
     def _allot_fund_share(self, plan: PlanUnit):
@@ -1222,14 +1222,14 @@ reason_case:    {reason_case}"""
 
     def _clear_plan_dict_and_belief_obj_settle_attrs(self):
         self._plan_dict = {self.planroot.get_plan_rope(): self.planroot}
-        self._rational = False
-        self._tree_traverse_count = 0
-        self._offtrack_kids_star_set = set()
-        self._reason_contexts = set()
+        self.rational = False
+        self.tree_traverse_count = 0
+        self.offtrack_kids_star_set = set()
+        self.reason_contexts = set()
         self._range_inheritors = {}
-        self._keeps_justified = True
-        self._keeps_buildable = False
-        self._sum_healerunit_share = 0
+        self.keeps_justified = True
+        self.keeps_buildable = False
+        self.sum_healerunit_share = 0
         self._keep_dict = {}
         self._healers_dict = {}
 
@@ -1257,10 +1257,10 @@ reason_case:    {reason_case}"""
         self._set_plantree_factheirs_laborheir_awardheirs()
 
         max_count = self.max_tree_traverse
-        while not self._rational and self._tree_traverse_count < max_count:
+        while not self.rational and self.tree_traverse_count < max_count:
             self._set_plantree_active_status_attrs()
             self._set_rational_attr()
-            self._tree_traverse_count += 1
+            self.tree_traverse_count += 1
 
         self._set_plantree_fund_attrs(self.planroot)
         self._set_groupunit_voiceunit_funds(keep_exceptions)
@@ -1270,7 +1270,7 @@ reason_case:    {reason_case}"""
     def _set_plantree_active_status_attrs(self):
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
             if x_plan.root:
-                tt_count = self._tree_traverse_count
+                tt_count = self.tree_traverse_count
                 root_plan = self.planroot
                 root_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
             else:
@@ -1303,11 +1303,11 @@ reason_case:    {reason_case}"""
     def _set_rational_attr(self):
         any_plan_active_status_has_altered = False
         for plan in self._plan_dict.values():
-            if plan.active_hx.get(self._tree_traverse_count) is not None:
+            if plan.active_hx.get(self.tree_traverse_count) is not None:
                 any_plan_active_status_has_altered = True
 
         if any_plan_active_status_has_altered is False:
-            self._rational = True
+            self.rational = True
 
     def _set_voiceunit_fund_related_attrs(self):
         self.set_offtrack_fund()
@@ -1319,18 +1319,18 @@ reason_case:    {reason_case}"""
     def _set_belief_keep_attrs(self):
         self._set_keep_dict()
         self._healers_dict = self._get_healers_dict()
-        self._keeps_buildable = self._get_buildable_keeps()
+        self.keeps_buildable = self._get_buildable_keeps()
 
     def _set_keep_dict(self):
-        if self._keeps_justified is False:
-            self._sum_healerunit_share = 0
+        if self.keeps_justified is False:
+            self.sum_healerunit_share = 0
         for x_plan in self._plan_dict.values():
-            if self._sum_healerunit_share == 0:
+            if self.sum_healerunit_share == 0:
                 x_plan.healerunit_ratio = 0
             else:
-                x_sum = self._sum_healerunit_share
+                x_sum = self.sum_healerunit_share
                 x_plan.healerunit_ratio = x_plan.get_fund_share() / x_sum
-            if self._keeps_justified and x_plan.healerunit.any_healer_name_exists():
+            if self.keeps_justified and x_plan.healerunit.any_healer_name_exists():
                 self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
     def _get_healers_dict(self) -> dict[HealerName, dict[RopeTerm, PlanUnit]]:
@@ -1436,8 +1436,8 @@ reason_case:    {reason_case}"""
         )
 
     def set_offtrack_fund(self) -> float:
-        star_set = self._offtrack_kids_star_set
-        self._offtrack_fund = sum(
+        star_set = self.offtrack_kids_star_set
+        self.offtrack_fund = sum(
             self.get_plan_obj(x_ropeterm).get_fund_share() for x_ropeterm in star_set
         )
 
@@ -1470,11 +1470,11 @@ def beliefunit_shop(
         _plan_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
         _healers_dict=get_empty_dict_if_None(),
-        _keeps_justified=get_False_if_None(),
-        _keeps_buildable=get_False_if_None(),
-        _sum_healerunit_share=get_0_if_None(),
-        _offtrack_kids_star_set=set(),
-        _reason_contexts=set(),
+        keeps_justified=get_False_if_None(),
+        keeps_buildable=get_False_if_None(),
+        sum_healerunit_share=get_0_if_None(),
+        offtrack_kids_star_set=set(),
+        reason_contexts=set(),
         _range_inheritors={},
     )
     x_belief.planroot = planunit_shop(
@@ -1487,7 +1487,7 @@ def beliefunit_shop(
         parent_rope="",
     )
     x_belief.set_max_tree_traverse(3)
-    x_belief._rational = False
+    x_belief.rational = False
     return x_belief
 
 

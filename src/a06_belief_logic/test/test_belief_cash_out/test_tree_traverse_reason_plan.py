@@ -525,10 +525,10 @@ def test_BeliefUnit_ReasonUnits_PlanUnit_active_InfluencesReasonUnitStatus():
 def test_BeliefUnit_cash_out_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    assert sue_belief._rational is False
+    assert sue_belief.rational is False
     # sue_belief.cash_out()
-    sue_belief._rational = True
-    assert sue_belief._rational
+    sue_belief.rational = True
+    assert sue_belief.rational
 
     # WHEN
     # hack belief to set _max_tree_traverse = 1 (not allowed, should be 2 or more)
@@ -536,7 +536,7 @@ def test_BeliefUnit_cash_out_SetsRationalAttrToFalseWhen_max_tree_traverse_Is1()
     sue_belief.cash_out()
 
     # THEN
-    assert not sue_belief._rational
+    assert not sue_belief.rational
 
 
 def test_BeliefUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsStatusIsDetected():
@@ -550,18 +550,18 @@ def test_BeliefUnit_tree_traverse_count_SetByTotalNumberOfTreeTraversesEndsStatu
     #     print(f"{plan_key=}")
 
     # THEN
-    assert sue_belief._tree_traverse_count == 2
+    assert sue_belief.tree_traverse_count == 2
 
 
 def test_BeliefUnit_tree_traverse_count_CountsTreeTraversesForIrrationalBeliefs():
     # ESTABLISH irrational belief
     sue_belief = get_beliefunit_irrational_example()
     sue_belief.cash_out()
-    assert sue_belief._tree_traverse_count == 3
+    assert sue_belief.tree_traverse_count == 3
 
     # WHEN
     sue_belief.set_max_tree_traverse(21)
     sue_belief.cash_out()
 
     # THEN
-    assert sue_belief._tree_traverse_count == 21
+    assert sue_belief.tree_traverse_count == 21

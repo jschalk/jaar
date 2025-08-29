@@ -86,7 +86,7 @@ class HubUnit:
     respect_bit: float = None
     penny: float = None
     keep_point_magnitude: float = None
-    _keeps_dir: str = None
+    keeps_dir: str = None
     _atoms_dir: str = None
     _packs_dir: str = None
 
@@ -94,7 +94,7 @@ class HubUnit:
         mstr_dir = self.moment_mstr_dir
         moment_label = self.moment_label
         belief_name = self.belief_name
-        self._keeps_dir = create_keeps_dir_path(mstr_dir, moment_label, belief_name)
+        self.keeps_dir = create_keeps_dir_path(mstr_dir, moment_label, belief_name)
         self._atoms_dir = create_atoms_dir_path(mstr_dir, moment_label, belief_name)
         self._packs_dir = create_packs_dir_path(mstr_dir, moment_label, belief_name)
 
@@ -392,11 +392,11 @@ class HubUnit:
             self.moment_mstr_dir, self.moment_label, self.belief_name
         )
         x_gut_belief.cash_out()
-        if x_gut_belief._keeps_justified is False:
-            x_str = f"Cannot get_keep_ropes from '{self.belief_name}' gut belief because 'BeliefUnit._keeps_justified' is False."
+        if x_gut_belief.keeps_justified is False:
+            x_str = f"Cannot get_keep_ropes from '{self.belief_name}' gut belief because 'BeliefUnit.keeps_justified' is False."
             raise get_keep_ropesException(x_str)
-        if x_gut_belief._keeps_buildable is False:
-            x_str = f"Cannot get_keep_ropes from '{self.belief_name}' gut belief because 'BeliefUnit._keeps_buildable' is False."
+        if x_gut_belief.keeps_buildable is False:
+            x_str = f"Cannot get_keep_ropes from '{self.belief_name}' gut belief because 'BeliefUnit.keeps_buildable' is False."
             raise get_keep_ropesException(x_str)
         belief_healer_dict = x_gut_belief._healers_dict.get(self.belief_name)
         if belief_healer_dict is None:

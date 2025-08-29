@@ -52,12 +52,12 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     # ESTABLISH
     x_moment_label = "amy23"
     x_belief_name = "Sue"
-    x__keeps_buildable = 99
-    x__keeps_justified = 77
-    x__offtrack_fund = 55.5
-    x__rational = 92
-    x__sum_healerunit_share = 66.6
-    x__tree_traverse_count = 7
+    x_keeps_buildable = 99
+    x_keeps_justified = 77
+    x_offtrack_fund = 55.5
+    x_rational = 92
+    x_sum_healerunit_share = 66.6
+    x_tree_traverse_count = 7
     x_credor_respect = 88.2
     x_debtor_respect = 88.4
     x_fund_iota = 3.0
@@ -73,12 +73,12 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
     sue_belief.tally = x_tally
     sue_belief.respect_bit = x_respect_bit
     sue_belief.max_tree_traverse = x_max_tree_traverse
-    sue_belief._keeps_buildable = x__keeps_buildable
-    sue_belief._keeps_justified = x__keeps_justified
-    sue_belief._offtrack_fund = x__offtrack_fund
-    sue_belief._rational = x__rational
-    sue_belief._sum_healerunit_share = x__sum_healerunit_share
-    sue_belief._tree_traverse_count = x__tree_traverse_count
+    sue_belief.keeps_buildable = x_keeps_buildable
+    sue_belief.keeps_justified = x_keeps_justified
+    sue_belief.offtrack_fund = x_offtrack_fund
+    sue_belief.rational = x_rational
+    sue_belief.sum_healerunit_share = x_sum_healerunit_share
+    sue_belief.tree_traverse_count = x_tree_traverse_count
     sue_belief.credor_respect = x_credor_respect
     sue_belief.debtor_respect = x_debtor_respect
 
@@ -108,12 +108,12 @@ def test_insert_job_blrunit_CreatesTableRowsFor_beliefunit_job():
             x_fund_iota,
             x_penny,
             x_respect_bit,
-            x__rational,
-            x__keeps_justified,
-            x__offtrack_fund,
-            x__sum_healerunit_share,
-            x__keeps_buildable,
-            x__tree_traverse_count,
+            x_rational,
+            x_keeps_justified,
+            x_offtrack_fund,
+            x_sum_healerunit_share,
+            x_keeps_buildable,
+            x_tree_traverse_count,
         )
         expected_data = [expected_row1]
         assert rows == expected_data

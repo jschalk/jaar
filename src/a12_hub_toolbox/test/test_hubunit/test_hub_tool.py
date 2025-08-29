@@ -696,7 +696,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
         boss_facts=sue_boss_factunits,
         mandate=sue_mandate,
     )
-    sue_cell._reason_contexts = set()
+    sue_cell.reason_contexts = set()
     bob_str = "Bob"
     tp6 = 6
     sue_voice_mandate_ledger_path = create_cell_voice_mandate_ledger_path(
@@ -820,7 +820,7 @@ def test_save_beliefpoint_file_RaisesError(env_dir_setup_cleanup):
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         save_beliefpoint_file(mstr_dir, irrational_beliefpoint, t55_bud_time)
-    exception_str = "BeliefPoint could not be saved BeliefUnit._rational is False"
+    exception_str = "BeliefPoint could not be saved BeliefUnit.rational is False"
     assert str(excinfo.value) == exception_str
 
 

@@ -543,27 +543,27 @@
             }
         },
         "jmetrics": {
-            "_keeps_buildable": {
+            "keeps_buildable": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_keeps_justified": {
+            "keeps_justified": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             },
-            "_offtrack_fund": {
+            "offtrack_fund": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_rational": {
+            "rational": {
                 "class_type": "bool",
                 "sqlite_datatype": "INTEGER"
             },
-            "_sum_healerunit_share": {
+            "sum_healerunit_share": {
                 "class_type": "float",
                 "sqlite_datatype": "REAL"
             },
-            "_tree_traverse_count": {
+            "tree_traverse_count": {
                 "class_type": "int",
                 "sqlite_datatype": "INTEGER"
             }

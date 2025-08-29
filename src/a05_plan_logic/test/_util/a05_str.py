@@ -149,5 +149,9 @@ def task_str() -> str:
     return "task"
 
 
+def tree_traverse_count_str() -> str:
+    return "tree_traverse_count"
+
+
 def uid_str() -> str:
     return "uid"

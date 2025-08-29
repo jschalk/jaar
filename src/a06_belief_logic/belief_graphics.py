@@ -112,8 +112,8 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_belief: BeliefUnit):
     if mode == "Chore":
         fig_label = "Plan Tree with chore plans in Red."
     fig_label += f" (Plans: {len(x_belief._plan_dict)})"
-    fig_label += f" (_sum_healerunit_share: {x_belief._sum_healerunit_share})"
-    fig_label += f" (_keeps_justified: {x_belief._keeps_justified})"
+    fig_label += f" (sum_healerunit_share: {x_belief.sum_healerunit_share})"
+    fig_label += f" (keeps_justified: {x_belief.keeps_justified})"
     x_fig.update_layout(title_text=fig_label, font_size=12)
 
 

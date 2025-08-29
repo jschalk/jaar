@@ -278,7 +278,7 @@ def test_listen_to_speaker_agenda_ProcessesIrrationalBelief():
         reason_plan_active_requisite=False,
     )
     sue_beliefunit.cash_out()
-    assert sue_beliefunit._rational is False
+    assert sue_beliefunit.rational is False
     assert len(sue_beliefunit.get_agenda_dict()) == 3
 
     # WHEN

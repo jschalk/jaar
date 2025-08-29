@@ -153,7 +153,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
     # Step 4: back to step 0.
     # after hatter_belief.cash_out these should be true:
     # 1. hatter_belief._irrational is True
-    # 2. hatter_belief._tree_traverse_count = hatter_belief.max_tree_traverse
+    # 2. hatter_belief.tree_traverse_count = hatter_belief.max_tree_traverse
 
     hatter_belief = beliefunit_shop("Mad Hatter")
     hatter_belief.set_max_tree_traverse(3)

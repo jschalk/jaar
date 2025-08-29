@@ -660,14 +660,14 @@ def test_BeliefUnit_cash_out_EveryTwoMonthReturnsObj_beliefunit_v001():
 def test_BeliefUnit_cash_out_SetsEmpty_sum_healerunit_share():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    assert sue_beliefunit._sum_healerunit_share == 0
+    assert sue_beliefunit.sum_healerunit_share == 0
     assert sue_beliefunit._keep_dict == {}
 
     # WHEN
     sue_beliefunit.cash_out()
 
     # THEN
-    assert sue_beliefunit._sum_healerunit_share == 0
+    assert sue_beliefunit.sum_healerunit_share == 0
     assert sue_beliefunit._keep_dict == {}
 
 
@@ -685,13 +685,13 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     )
     oregon_plan = sue_beliefunit.get_plan_obj(oregon_rope)
     print(f"{oregon_plan.fund_ratio=}")
-    assert sue_beliefunit._sum_healerunit_share == 0
+    assert sue_beliefunit.sum_healerunit_share == 0
     assert oregon_plan.healerunit_ratio == 0
 
     # WHEN
     sue_beliefunit.cash_out()
     # THEN
-    assert sue_beliefunit._sum_healerunit_share == 0.038461539 * default_fund_pool()
+    assert sue_beliefunit.sum_healerunit_share == 0.038461539 * default_fund_pool()
     assert oregon_plan.healerunit_ratio == 1
 
     # WHEN
@@ -703,8 +703,8 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     # print(f"{mon_plan.problem_bool=} {mon_plan.fund_ratio=}")
     sue_beliefunit.cash_out()
     # THEN
-    assert sue_beliefunit._sum_healerunit_share != 0.038461539 * default_fund_pool()
-    assert sue_beliefunit._sum_healerunit_share == 0.06923077 * default_fund_pool()
+    assert sue_beliefunit.sum_healerunit_share != 0.038461539 * default_fund_pool()
+    assert sue_beliefunit.sum_healerunit_share == 0.06923077 * default_fund_pool()
     assert oregon_plan.healerunit_ratio == 0.5555555571604938
     assert mon_plan.healerunit_ratio == 0.4444444428395062
 
@@ -720,10 +720,9 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
 
     # THEN
     assert (
-        sue_beliefunit._sum_healerunit_share
-        != 0.06923076923076923 * default_fund_pool()
+        sue_beliefunit.sum_healerunit_share != 0.06923076923076923 * default_fund_pool()
     )
-    assert sue_beliefunit._sum_healerunit_share == 0.100000001 * default_fund_pool()
+    assert sue_beliefunit.sum_healerunit_share == 0.100000001 * default_fund_pool()
     assert oregon_plan.healerunit_ratio == 0.38461538615384616
     assert mon_plan.healerunit_ratio == 0.3076923069230769
     assert tue_plan.healerunit_ratio == 0.3076923069230769
@@ -735,7 +734,7 @@ def test_BeliefUnit_cash_out_Sets_sum_healerunit_share(graphics_bool):
     sue_beliefunit.cash_out()
     # THEN
     display_plantree(sue_beliefunit, "Keep", graphics_bool)
-    assert sue_beliefunit._sum_healerunit_share == 0
+    assert sue_beliefunit.sum_healerunit_share == 0
     assert oregon_plan.healerunit_ratio == 0
     assert mon_plan.healerunit_ratio == 0
     assert tue_plan.healerunit_ratio == 0
@@ -848,12 +847,12 @@ def test_BeliefUnit_cash_out_Sets_keeps_buildable_True():
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     sue_beliefunit.add_voiceunit(sue_str)
     sue_beliefunit.add_voiceunit(bob_str)
-    assert sue_beliefunit._keeps_buildable is False
+    assert sue_beliefunit.keeps_buildable is False
 
     # WHEN
     sue_beliefunit.cash_out()
     # THEN
-    assert sue_beliefunit._keeps_buildable
+    assert sue_beliefunit.keeps_buildable
 
     # ESTABLISH
     nation_rope = sue_beliefunit.make_l1_rope("nation")
@@ -871,7 +870,7 @@ def test_BeliefUnit_cash_out_Sets_keeps_buildable_True():
     # WHEN
     sue_beliefunit.cash_out()
     # THEN
-    assert sue_beliefunit._keeps_buildable
+    assert sue_beliefunit.keeps_buildable
 
 
 def test_BeliefUnit_cash_out_Sets_keeps_buildable_False():
@@ -881,12 +880,12 @@ def test_BeliefUnit_cash_out_Sets_keeps_buildable_False():
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
     sue_beliefunit.add_voiceunit(sue_str)
     sue_beliefunit.add_voiceunit(bob_str)
-    assert sue_beliefunit._keeps_buildable is False
+    assert sue_beliefunit.keeps_buildable is False
 
     # WHEN
     sue_beliefunit.cash_out()
     # THEN
-    assert sue_beliefunit._keeps_buildable
+    assert sue_beliefunit.keeps_buildable
 
     # ESTABLISH
     nation_rope = sue_beliefunit.make_l1_rope("nation")
@@ -899,9 +898,9 @@ def test_BeliefUnit_cash_out_Sets_keeps_buildable_False():
     sue_beliefunit.edit_plan_attr(
         bend_rope, problem_bool=True, healerunit=sue_healerunit
     )
-    assert sue_beliefunit._keeps_buildable
+    assert sue_beliefunit.keeps_buildable
 
     # WHEN
     sue_beliefunit.cash_out()
     # THEN
-    assert sue_beliefunit._keeps_buildable is False
+    assert sue_beliefunit.keeps_buildable is False

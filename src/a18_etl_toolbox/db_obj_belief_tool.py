@@ -325,12 +325,12 @@ def create_beliefunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     belief_name = values_dict.get("belief_name")
     integer_str = "INTEGER"
     real_str = "REAL"
-    _keeps_buildable = values_dict.get("_keeps_buildable")
-    _keeps_justified = values_dict.get("_keeps_justified")
-    _offtrack_fund = values_dict.get("_offtrack_fund")
-    _rational = values_dict.get("_rational")
-    _sum_healerunit_share = values_dict.get("_sum_healerunit_share")
-    _tree_traverse_count = values_dict.get("_tree_traverse_count")
+    keeps_buildable = values_dict.get("keeps_buildable")
+    keeps_justified = values_dict.get("keeps_justified")
+    offtrack_fund = values_dict.get("offtrack_fund")
+    rational = values_dict.get("rational")
+    sum_healerunit_share = values_dict.get("sum_healerunit_share")
+    tree_traverse_count = values_dict.get("tree_traverse_count")
     credor_respect = values_dict.get("credor_respect")
     debtor_respect = values_dict.get("debtor_respect")
     fund_iota = values_dict.get("fund_iota")
@@ -340,7 +340,7 @@ def create_beliefunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     respect_bit = values_dict.get("respect_bit")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, _rational, _keeps_justified, _offtrack_fund, _sum_healerunit_share, _keeps_buildable, _tree_traverse_count)
+    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, rational, keeps_justified, offtrack_fund, sum_healerunit_share, keeps_buildable, tree_traverse_count)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -352,12 +352,12 @@ VALUES (
 , {sqlite_obj_str(fund_iota, real_str)}
 , {sqlite_obj_str(penny, real_str)}
 , {sqlite_obj_str(respect_bit, real_str)}
-, {sqlite_obj_str(_rational, integer_str)}
-, {sqlite_obj_str(_keeps_justified, integer_str)}
-, {sqlite_obj_str(_offtrack_fund, real_str)}
-, {sqlite_obj_str(_sum_healerunit_share, real_str)}
-, {sqlite_obj_str(_keeps_buildable, integer_str)}
-, {sqlite_obj_str(_tree_traverse_count, integer_str)}
+, {sqlite_obj_str(rational, integer_str)}
+, {sqlite_obj_str(keeps_justified, integer_str)}
+, {sqlite_obj_str(offtrack_fund, real_str)}
+, {sqlite_obj_str(sum_healerunit_share, real_str)}
+, {sqlite_obj_str(keeps_buildable, integer_str)}
+, {sqlite_obj_str(tree_traverse_count, integer_str)}
 )
 ;
 """

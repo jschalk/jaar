@@ -16,33 +16,33 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     x_rational = True
     x_tree_traverse_count = 555
     x_plan_dict = {1: 2, 2: 4}
-    sue_belief._rational = x_rational
-    sue_belief._tree_traverse_count = x_tree_traverse_count
+    sue_belief.rational = x_rational
+    sue_belief.tree_traverse_count = x_tree_traverse_count
     sue_belief._plan_dict = x_plan_dict
-    sue_belief._offtrack_kids_star_set = "example"
-    sue_belief._reason_contexts = {"example2"}
+    sue_belief.offtrack_kids_star_set = "example"
+    sue_belief.reason_contexts = {"example2"}
     sue_belief._range_inheritors = {"example2": 1}
-    assert sue_belief._rational == x_rational
-    assert sue_belief._tree_traverse_count == x_tree_traverse_count
+    assert sue_belief.rational == x_rational
+    assert sue_belief.tree_traverse_count == x_tree_traverse_count
     assert sue_belief._plan_dict == x_plan_dict
-    assert sue_belief._offtrack_kids_star_set != set()
-    assert sue_belief._reason_contexts != set()
+    assert sue_belief.offtrack_kids_star_set != set()
+    assert sue_belief.reason_contexts != set()
     assert sue_belief._range_inheritors != {}
 
     # WHEN
     sue_belief._clear_plan_dict_and_belief_obj_settle_attrs()
 
     # THEN
-    assert sue_belief._rational != x_rational
-    assert not sue_belief._rational
-    assert sue_belief._tree_traverse_count != x_tree_traverse_count
-    assert sue_belief._tree_traverse_count == 0
+    assert sue_belief.rational != x_rational
+    assert not sue_belief.rational
+    assert sue_belief.tree_traverse_count != x_tree_traverse_count
+    assert sue_belief.tree_traverse_count == 0
     assert sue_belief._plan_dict != x_plan_dict
     assert sue_belief._plan_dict == {
         sue_belief.planroot.get_plan_rope(): sue_belief.planroot
     }
-    assert sue_belief._offtrack_kids_star_set == set()
-    assert not sue_belief._reason_contexts
+    assert sue_belief.offtrack_kids_star_set == set()
+    assert not sue_belief.reason_contexts
     assert not sue_belief._range_inheritors
 
 
@@ -51,14 +51,14 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     sue_belief = beliefunit_shop("Sue")
     x_keep_justifed = False
     x_sum_healerunit_share = 140
-    sue_belief._keeps_justified = x_keep_justifed
-    sue_belief._keeps_buildable = "swimmers"
-    sue_belief._sum_healerunit_share = x_sum_healerunit_share
+    sue_belief.keeps_justified = x_keep_justifed
+    sue_belief.keeps_buildable = "swimmers"
+    sue_belief.sum_healerunit_share = x_sum_healerunit_share
     sue_belief._keep_dict = {"run": "run"}
     sue_belief._healers_dict = {"run": "run"}
-    assert sue_belief._keeps_justified == x_keep_justifed
-    assert sue_belief._keeps_buildable
-    assert sue_belief._sum_healerunit_share == x_sum_healerunit_share
+    assert sue_belief.keeps_justified == x_keep_justifed
+    assert sue_belief.keeps_buildable
+    assert sue_belief.sum_healerunit_share == x_sum_healerunit_share
     assert sue_belief._keep_dict != {}
     assert sue_belief._healers_dict != {}
 
@@ -66,10 +66,10 @@ def test_BeliefUnit_clear_plan_dict_and_belief_obj_settle_attrs_SetsAttrs_Scenar
     sue_belief._clear_plan_dict_and_belief_obj_settle_attrs()
 
     # THEN
-    assert sue_belief._keeps_justified != x_keep_justifed
-    assert sue_belief._keeps_justified
-    assert sue_belief._keeps_buildable is False
-    assert sue_belief._sum_healerunit_share == 0
+    assert sue_belief.keeps_justified != x_keep_justifed
+    assert sue_belief.keeps_justified
+    assert sue_belief.keeps_buildable is False
+    assert sue_belief.sum_healerunit_share == 0
     assert not sue_belief._keep_dict
     assert not sue_belief._healers_dict
 
@@ -420,7 +420,7 @@ def test_BeliefUnit_get_plan_dict_ReturnsObjWhenSingle():
     problems_dict = sue_belief.get_plan_dict(problem=True)
 
     # THEN
-    assert sue_belief._keeps_justified
+    assert sue_belief.keeps_justified
     texas_rope = sue_belief.make_l1_rope(texas_str)
     texas_plan = sue_belief.get_plan_obj(texas_rope)
     assert len(problems_dict) == 1
@@ -441,16 +441,16 @@ def test_BeliefUnit_cash_out_CreatesFullyPopulated_plan_dict():
 def test_BeliefUnit_cash_out_Resets_offtrack_kids_star_set():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    sue_beliefunit._offtrack_kids_star_set = set("ZZ")
+    sue_beliefunit.offtrack_kids_star_set = set("ZZ")
     x_set = set()
 
-    assert sue_beliefunit._offtrack_kids_star_set != x_set
+    assert sue_beliefunit.offtrack_kids_star_set != x_set
 
     # WHEN
     sue_beliefunit.cash_out()
 
     # THEN
-    assert sue_beliefunit._offtrack_kids_star_set == x_set
+    assert sue_beliefunit.offtrack_kids_star_set == x_set
 
 
 def test_BeliefUnit_cash_out_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set_Scenario0():
@@ -460,21 +460,21 @@ def test_BeliefUnit_cash_out_WhenPlanRootHas_starButAll_kidsHaveZero_starAddTo_o
     casa_rope = sue_beliefunit.make_l1_rope(casa_str)
     casa_plan = planunit_shop(casa_str, star=0)
     sue_beliefunit.set_l1_plan(casa_plan)
-    assert sue_beliefunit._offtrack_kids_star_set == set()
+    assert sue_beliefunit.offtrack_kids_star_set == set()
 
     # WHEN
     sue_beliefunit.cash_out()
 
     # THEN
     root_rope = to_rope(sue_beliefunit.moment_label)
-    assert sue_beliefunit._offtrack_kids_star_set == {root_rope}
+    assert sue_beliefunit.offtrack_kids_star_set == {root_rope}
 
     # WHEN
     sue_beliefunit.edit_plan_attr(casa_rope, star=2)
     sue_beliefunit.cash_out()
 
     # THEN
-    assert sue_beliefunit._offtrack_kids_star_set == set()
+    assert sue_beliefunit.offtrack_kids_star_set == set()
 
 
 def test_BeliefUnit_cash_out_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_offtrack_kids_star_set():
@@ -506,13 +506,13 @@ def test_BeliefUnit_cash_out_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_o
     sue_beliefunit.set_plan(sweep_plan, clean_rope)  # _star=0
     sue_beliefunit.set_plan(vaccum_plan, clean_rope)  # _star=0
 
-    assert sue_beliefunit._offtrack_kids_star_set == set()
+    assert sue_beliefunit.offtrack_kids_star_set == set()
 
     # WHEN
     sue_beliefunit.cash_out()
 
     # THEN
-    assert sue_beliefunit._offtrack_kids_star_set == {clean_rope}
+    assert sue_beliefunit.offtrack_kids_star_set == {clean_rope}
 
 
 def test_BeliefUnit_cash_out_CreatesNewGroupUnitsWhenNeeded_Scenario0():
