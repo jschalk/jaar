@@ -1,5 +1,4 @@
-from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a02_finance_logic.test._util.a02_str import fund_iota_str
+from src.a02_finance_logic.test._util.a02_str import *
 
 
 def awardee_title_str() -> str:

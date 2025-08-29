@@ -6,10 +6,10 @@ from src.a01_term_logic.rope import create_rope, create_rope_from_labels
 from src.a06_belief_logic.test._util.a06_str import planroot_str
 from src.a09_pack_logic.test._util.a09_str import (
     belief_name_str,
-    bud_time_str,
     event_int_str,
     moment_label_str,
 )
+from src.a11_bud_logic.test._util.a11_str import bud_time_str
 from src.a12_hub_toolbox.a12_path import (
     BELIEFEVENT_FILENAME,
     BELIEFPOINT_FILENAME,

@@ -311,3 +311,20 @@ def check_all_test_functions_are_formatted(
         assert (
             establish_str_exists and when_str_exists and then_str_exists
         ), f"'ESTABLISH'/'WHEN'/'THEN' missing from {test_function_str[:300]}"
+
+
+def get_max_module_import_str() -> str:
+    max_module_int = 0
+    for module_desc in get_module_descs():
+        max_module_int = max(int(module_desc[1:3]), max_module_int)
+
+    max_module_dir = ""
+    for module_desc, module_dir in get_module_descs().items():
+        if int(module_desc[1:3]) == max_module_int:
+            max_module_dir = module_dir
+    max_module_int_str = str(max_module_int)
+    max_module_import_str = max_module_dir.replace("\\", ".")
+    max_module_import_str = (
+        f"{max_module_import_str}.test._util.a{max_module_int_str}_str"
+    )
+    return max_module_import_str

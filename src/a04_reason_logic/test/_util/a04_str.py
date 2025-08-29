@@ -1,5 +1,4 @@
-from src.a01_term_logic.test._util.a01_str import knot_str
-from src.a03_group_logic.test._util.a03_str import belief_name_str, party_title_str
+from src.a03_group_logic.test._util.a03_str import *
 
 
 def active_str() -> str:

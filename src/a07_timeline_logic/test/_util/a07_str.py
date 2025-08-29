@@ -1,3 +1,6 @@
+from src.a06_belief_logic.test._util.a06_str import *
+
+
 def c100_str() -> str:
     return "c100"
 

@@ -1,9 +1,4 @@
-from src.a00_data_toolbox.test._util.a00_str import (
-    INSERT_str,
-    UPDATE_str,
-    sqlite_datatype_str,
-)
-from src.a06_belief_logic.test._util.a06_str import dimen_str, jkeys_str
+from src.a07_timeline_logic.test._util.a07_str import *
 
 
 def DELETE_str() -> str:
