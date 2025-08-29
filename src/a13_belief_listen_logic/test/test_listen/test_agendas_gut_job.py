@@ -295,7 +295,6 @@ def test_listen_to_agendas_jobs_into_job_ListensToBelief_gut_AndNotBelief_job(
     a23_str = "amy23"
     yao_str = "Yao"
     yao_gut = beliefunit_shop(yao_str, a23_str)
-    yao_str = "Yao"
     yao_voice_cred_points = 57
     yao_voice_debt_points = 51
     yao_gut.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
