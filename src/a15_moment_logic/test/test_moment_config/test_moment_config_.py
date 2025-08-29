@@ -1,36 +1,6 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a02_finance_logic.test._util.a02_str import knot_str
-from src.a06_belief_logic.test._util.a06_str import (
-    fund_iota_str,
-    moment_label_str,
-    penny_str,
-    respect_bit_str,
-    voice_name_str,
-)
-from src.a07_timeline_logic.test._util.a07_str import (
-    c400_number_str,
-    monthday_distortion_str,
-    timeline_label_str,
-    yr1_jan1_offset_str,
-)
 from src.a08_belief_atom_logic.atom_config import get_allowed_class_types
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-    class_type_str,
-    jkeys_str,
-    jvalues_str,
-    normal_specs_str,
-)
-from src.a11_bud_logic.test._util.a11_str import (
-    belief_name_str,
-    bud_time_str,
-    celldepth_str,
-    quota_str,
-    tran_time_str,
-)
 from src.a15_moment_logic.moment_config import (
     get_moment_args_class_types,
     get_moment_args_dimen_mapping,
@@ -40,11 +10,24 @@ from src.a15_moment_logic.moment_config import (
     moment_config_path,
 )
 from src.a15_moment_logic.test._util.a15_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     amount_str,
+    belief_name_str,
+    bud_time_str,
+    c400_number_str,
+    celldepth_str,
+    class_type_str,
     cumulative_day_str,
     cumulative_minute_str,
+    fund_iota_str,
     hour_label_str,
+    jkeys_str,
+    jvalues_str,
+    knot_str,
     moment_budunit_str,
+    moment_label_str,
     moment_paybook_str,
     moment_timeline_hour_str,
     moment_timeline_month_str,
@@ -52,9 +35,18 @@ from src.a15_moment_logic.test._util.a15_str import (
     moment_timeoffi_str,
     momentunit_str,
     month_label_str,
+    monthday_distortion_str,
+    normal_specs_str,
     offi_time_str,
+    penny_str,
+    quota_str,
+    respect_bit_str,
+    timeline_label_str,
+    tran_time_str,
+    voice_name_str,
     weekday_label_str,
     weekday_order_str,
+    yr1_jan1_offset_str,
 )
 
 

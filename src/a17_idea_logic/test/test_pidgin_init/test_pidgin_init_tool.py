@@ -1,18 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.a06_belief_logic.test._util.a06_str import (
-    LabelTerm_str,
-    NameTerm_str,
-    RopeTerm_str,
-    TitleTerm_str,
-)
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_str import (
-    inx_knot_str,
-    otx_knot_str,
-    unknown_str_str,
-)
 from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_casa_maison_label_dt,
     get_casa_maison_pidginunit_set_by_label,
@@ -47,6 +35,17 @@ from src.a17_idea_logic.pidgin_toolbox import (
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
+)
+from src.a17_idea_logic.test._util.a17_str import (
+    LabelTerm_str,
+    NameTerm_str,
+    RopeTerm_str,
+    TitleTerm_str,
+    event_int_str,
+    face_name_str,
+    inx_knot_str,
+    otx_knot_str,
+    unknown_str_str,
 )
 
 

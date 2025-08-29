@@ -8,6 +8,7 @@ from src.a99_module_linter.linter import (
     check_all_test_functions_have_proper_naming_format,
     check_if_test_HasDocString_pytests_exist,
     check_if_test_ReturnsObj_pytests_exist,
+    find_incorrect_imports,
     get_all_str_functions,
     get_docstring,
     get_duplicated_functions,
@@ -19,6 +20,8 @@ from src.a99_module_linter.linter import (
 
 
 def test_Modules_StrFunctionsAppearWhereTheyShould():
+    """Test that checks no str function is created before it is needed or after the term is used."""
+
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     all_str_functions = get_all_str_functions()
@@ -56,41 +59,28 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
                         assert x_str_func_name in str_funcs_set
 
 
-# def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
-#     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-#     # ESTABLISH
-#     module_descs = get_module_descs()
+def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH
+    module_descs = get_module_descs()
+    mod_descs_sorted = sorted(list(module_descs.keys()))
 
+    # WHEN / THEN
+    all_file_count = 0
+    for module_desc in mod_descs_sorted:
+        module_dir = module_descs.get(module_desc)
+        desc_number_str = module_desc[1:3]
+        desc_number_int = int(desc_number_str)
+        module_files = sorted(list(get_python_files_with_flag(module_dir).keys()))
+        # print(f"{desc_number_str} src.{module_desc}")
+        for module_file_count, file_path in enumerate(module_files, start=1):
+            all_file_count += 1
+            incorrect_imports = find_incorrect_imports(file_path, desc_number_int)
+            if len(incorrect_imports) == 1 and file_path.find("_str.py") > 0:
+                incorrect_imports = []
 
-#     # WHEN / THEN
-#     all_file_count = 0
-#     for module_desc, module_dir in get_module_descs().items():
-#         desc_number_str = module_desc[1:3]
-#         module_files = list(get_python_files_with_flag(module_dir).keys())
-#         module_files.extend(list(get_json_files(module_dir)))
-#         module_files = sorted(module_files)
-#         str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
-#         print(f"{desc_number_str} {len(str_funcs_set)=}")
-#         module_file_count = 0
-#         for file_path in module_files:
-#             if file_path.find("_util") == -1:
-#                 module_file_count += 1
-#                 all_file_count += 1
-#                 print(f"{all_file_count} Module: {module_file_count} {file_path}")
-#                 first_ref_missing_strs = {
-#                     str_function[:-4]
-#                     for str_function in str_first_ref
-#                     if str_first_ref.get(str_function) is None
-#                 }
-#                 file_str = open(file_path).read()
-#                 for x_str in first_ref_missing_strs:
-#                     if file_str.find(x_str) > -1 and x_str not in excluded_strs:
-#                         x_str_func_name = f"{x_str}_str"
-#                         str_first_ref[x_str_func_name] = file_path
-#                         if x_str_func_name not in str_funcs_set:
-#                             print(f"missing {x_str=} {file_path=}")
-#                         assert x_str_func_name in str_funcs_set
-#     assert 1 == 2
+            assertion_fail_str = f"File #{all_file_count} a{desc_number_str} file #{module_file_count} Imports: {len(incorrect_imports)} {file_path}"
+            assert not incorrect_imports, assertion_fail_str
 
 
 def test_Modules_StrFunctionsAreAllImported():

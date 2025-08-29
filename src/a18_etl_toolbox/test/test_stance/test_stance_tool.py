@@ -3,18 +3,8 @@ from pandas import read_excel as pandas_read_excel
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file, set_dir
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import belief_plan_awardunit_str
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.a12_path import create_gut_path, create_moment_json_path
 from src.a15_moment_logic.moment_main import momentunit_shop
-from src.a16_pidgin_logic.test._util.a16_str import (
-    inx_knot_str,
-    inx_name_str,
-    otx_knot_str,
-    otx_name_str,
-    pidgin_name_str,
-    unknown_str_str,
-)
 from src.a17_idea_logic.idea_csv_tool import (
     add_beliefunit_to_stance_csv_strs,
     add_momentunit_to_stance_csv_strs,
@@ -34,11 +24,19 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+from src.a18_etl_toolbox.test._util.a18_str import (
+    event_int_str,
+    face_name_str,
+    inx_knot_str,
+    inx_name_str,
+    otx_knot_str,
+    otx_name_str,
+    pidgin_name_str,
+    unknown_str_str,
+)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
-    create_update_heard_raw_empty_inx_col_sqlstr,
-    create_update_heard_raw_existing_inx_col_sqlstr,
 )
 
 

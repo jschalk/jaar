@@ -1,17 +1,16 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a06_belief_logic.test._util.a06_str import belief_voiceunit_str, voice_name_str
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a18_etl_toolbox.test._util.a18_str import (
     belief_name_str,
+    belief_voiceunit_str,
+    error_message_str,
     event_int_str,
     face_name_str,
-    moment_label_str,
-)
-from src.a16_pidgin_logic.test._util.a16_str import (
     inx_knot_str,
+    moment_label_str,
     otx_knot_str,
     unknown_str_str,
+    voice_name_str,
 )
-from src.a18_etl_toolbox.test._util.a18_str import error_message_str
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_BLRPERN_SOUND_PUT_AGG_STR,
     CREATE_PIDCORE_SOUND_VLD_SQLSTR,

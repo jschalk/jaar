@@ -1,9 +1,13 @@
-from src.a01_term_logic.rope import get_parent_rope, get_tail_label
 from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a08_belief_atom_logic.atom_main import beliefatom_shop
+from src.a09_pack_logic.delta import beliefdelta_shop
+from src.a09_pack_logic.test._util.a09_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     awardee_title_str,
     begin_str,
     belief_plan_awardunit_str,
@@ -40,13 +44,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     task_str,
     voice_name_str,
 )
-from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
-from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.test._util.example_deltas import get_beliefdelta_example1
 
 

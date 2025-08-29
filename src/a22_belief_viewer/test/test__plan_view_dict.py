@@ -1,5 +1,23 @@
 from src.a05_plan_logic.plan import planunit_shop
-from src.a05_plan_logic.test._util.a05_str import (
+from src.a07_timeline_logic.reason_str_func import (
+    get_fact_state_readable_str,
+    get_reason_case_readable_str,
+)
+from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
+from src.a22_belief_viewer.example22_beliefs import (
+    best_run_str,
+    best_soccer_str,
+    best_sport_str,
+    best_swim_str,
+    get_beliefunit_irrational_example,
+    get_sue_belief_with_facts_and_reasons,
+    get_sue_beliefunit,
+    play_run_str,
+    play_soccer_str,
+    play_str,
+    play_swim_str,
+)
+from src.a22_belief_viewer.test._util.a22_str import (
     active_hx_str,
     active_str,
     addin_str,
@@ -33,9 +51,11 @@ from src.a05_plan_logic.test._util.a05_str import (
     moment_label_str,
     morph_str,
     numor_str,
+    parent_rope_str,
     plan_label_str,
     problem_bool_str,
     range_evaluated_str,
+    readable_str,
     reason_state_str,
     reasonheirs_str,
     reasonunits_str,
@@ -45,26 +65,6 @@ from src.a05_plan_logic.test._util.a05_str import (
     task_str,
     tree_level_str,
     uid_str,
-)
-from src.a06_belief_logic.test._util.a06_str import parent_rope_str
-from src.a07_timeline_logic.reason_str_func import (
-    get_fact_state_readable_str,
-    get_reason_case_readable_str,
-)
-from src.a07_timeline_logic.test._util.a07_str import readable_str
-from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
-from src.a22_belief_viewer.example22_beliefs import (
-    best_run_str,
-    best_soccer_str,
-    best_sport_str,
-    best_swim_str,
-    get_beliefunit_irrational_example,
-    get_sue_belief_with_facts_and_reasons,
-    get_sue_beliefunit,
-    play_run_str,
-    play_soccer_str,
-    play_str,
-    play_swim_str,
 )
 
 

@@ -1,16 +1,4 @@
 from sqlalchemy import inspect
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-)
 from src.a08_belief_atom_logic.atom_config import get_normalized_belief_table_build
 from src.a08_belief_atom_logic.normal_models import (
     AwardUnitTable,
@@ -25,6 +13,16 @@ from src.a08_belief_atom_logic.normal_models import (
     VoiceUnitTable,
 )
 from src.a08_belief_atom_logic.test._util.a08_str import (
+    belief_plan_awardunit_str,
+    belief_plan_factunit_str,
+    belief_plan_healerunit_str,
+    belief_plan_partyunit_str,
+    belief_plan_reason_caseunit_str,
+    belief_plan_reasonunit_str,
+    belief_planunit_str,
+    belief_voice_membership_str,
+    belief_voiceunit_str,
+    beliefunit_str,
     normal_specs_str,
     normal_table_name_str,
     sqlite_datatype_str,

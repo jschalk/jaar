@@ -1,20 +1,19 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
+from src.a18_etl_toolbox.test._util.a18_str import (
     belief_name_str,
-    moment_label_str,
-    voice_name_str,
-)
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.test._util.a16_str import (
+    brick_valid_str,
+    event_int_str,
+    face_name_str,
     inx_knot_str,
     inx_rope_str,
+    moment_label_str,
     otx_knot_str,
     otx_rope_str,
     unknown_str_str,
+    voice_name_str,
 )
-from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a18_etl_toolbox.test._util.a18_str import brick_valid_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 

@@ -7,7 +7,6 @@ from src.a02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.a02_finance_logic.test._util.a02_str import fund_pool_str, knot_str
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a06_belief_logic.test._util.a06_str import (
@@ -15,9 +14,11 @@ from src.a06_belief_logic.test._util.a06_str import (
     credor_respect_str,
     debtor_respect_str,
     fund_iota_str,
+    fund_pool_str,
     groupunits_str,
     keeps_buildable_str,
     keeps_justified_str,
+    knot_str,
     last_pack_id_str,
     max_tree_traverse_str,
     moment_label_str,

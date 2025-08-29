@@ -2,19 +2,6 @@ from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_name_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    moment_label_str,
-    plan_rope_str,
-    star_str,
-    task_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
 from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
@@ -29,6 +16,19 @@ from src.a17_idea_logic.idea_main import create_idea_df, get_idearef_obj, save_i
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir,
+)
+from src.a17_idea_logic.test._util.a17_str import (
+    belief_name_str,
+    group_cred_points_str,
+    group_debt_points_str,
+    group_title_str,
+    moment_label_str,
+    plan_rope_str,
+    star_str,
+    task_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 
 

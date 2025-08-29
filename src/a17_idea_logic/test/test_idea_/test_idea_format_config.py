@@ -1,30 +1,4 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a06_belief_logic.test._util.a06_str import (
-    addin_str,
-    begin_str,
-    belief_name_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    close_str,
-    denom_str,
-    gogo_want_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    moment_label_str,
-    morph_str,
-    numor_str,
-    plan_rope_str,
-    star_str,
-    stop_want_str,
-    task_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-    voice_pool_str,
-)
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_moment_logic.test._util.a15_str import momentunit_str
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_elements_sort_order,
@@ -43,7 +17,35 @@ from src.a17_idea_logic.idea_main import (
     get_idearef_obj,
 )
 from src.a17_idea_logic.test._util.a17_env import src_module_dir
-from src.a17_idea_logic.test._util.a17_str import attributes_str
+from src.a17_idea_logic.test._util.a17_str import (
+    addin_str,
+    attributes_str,
+    begin_str,
+    belief_name_str,
+    belief_voiceunit_str,
+    beliefunit_str,
+    close_str,
+    denom_str,
+    event_int_str,
+    face_name_str,
+    gogo_want_str,
+    group_cred_points_str,
+    group_debt_points_str,
+    group_title_str,
+    moment_label_str,
+    momentunit_str,
+    morph_str,
+    numor_str,
+    plan_rope_str,
+    reason_context_str,
+    star_str,
+    stop_want_str,
+    task_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
+    voice_pool_str,
+)
 
 
 def test_config_str_functions_ReturnsObjs():

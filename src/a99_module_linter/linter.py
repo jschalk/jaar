@@ -1,3 +1,5 @@
+# your_module.py
+import ast
 from ast import (
     FunctionDef as ast_FunctionDef,
     ImportFrom as ast_ImportFrom,
@@ -9,6 +11,7 @@ from ast import (
 from os import walk as os_walk
 from os.path import join as os_path_join
 from pathlib import Path as pathlib_Path
+import re
 from re import compile as re_compile
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.a98_docs_builder.module_eval import (
@@ -16,6 +19,7 @@ from src.a98_docs_builder.module_eval import (
     get_module_descs,
 )
 from textwrap import dedent as textwrap_dedent
+from typing import List
 
 
 def get_imports_from_file(file_path):
@@ -333,30 +337,73 @@ def get_max_module_import_str() -> str:
     return max_module_import_str
 
 
-def find_later_imports(py_file_path: str, min_number: int):
-    """
-    Return all import lines from src.aXX where int(XX) > min_number.
+_A_PATTERN = re.compile(r"^src\.a(\d+)(?:[._]|$)")
+_A_STR_PATTERN = re.compile(r"a(\d{2})_str(?:[._]|$)")
 
-    Args:
-        py_file_path (str): Path to the .py file.
-        min_number (int): The threshold number for aXX.
 
-    Returns:
-        list[str]: Matching import lines.
-    """
-    pattern = re_compile(r"\bsrc\.a(\d{2})")
-    results = []
+def _extract_series_number(module: str) -> int | None:
+    if not module:
+        return None
+    m = _A_PATTERN.match(module)
+    return int(m.group(1)) if m else None
 
-    py_file = pathlib_Path(py_file_path)
-    if not py_file.exists():
-        raise FileNotFoundError(f"File not found: {py_file_path}")
 
-    with py_file.open("r", encoding="utf-8") as f:
-        for line in f:
-            print(f"{py_file_path} {line=}")
-            if match := pattern.search(line):
-                number = int(match.group(1))
-                if number > min_number:
-                    results.append(line.strip())
+def _extract_aXX_str_number(module: str) -> int | None:
+    if not module:
+        return None
+    m = _A_STR_PATTERN.search(module)
+    return int(m.group(1)) if m else None
 
-    return results
+
+class _ImportCollector(ast.NodeVisitor):
+    def __init__(self, min_number: int):
+        self.min_number = min_number
+        self.matches: list[str] = []
+
+    def visit_Import(self, node: ast.Import):
+        for alias in node.names:
+            module = alias.name
+            # Check src.aXX
+            n = _extract_series_number(module)
+            if n is not None and n > self.min_number:
+                s = f"import {module}"
+                if alias.asname:
+                    s += f" as {alias.asname}"
+                self.matches.append(s)
+            # Check aXX_str
+            n2 = _extract_aXX_str_number(module)
+            if n2 is not None and n2 != self.min_number:
+                s = f"import {module}"
+                if alias.asname:
+                    s += f" as {alias.asname}"
+                self.matches.append(s)
+        self.generic_visit(node)
+
+    def visit_ImportFrom(self, node: ast.ImportFrom):
+        module = node.module
+        # Check src.aXX
+        n = _extract_series_number(module) if module else None
+        if n is not None and n > self.min_number:
+            parts = [
+                f"{a.name} as {a.asname}" if a.asname else a.name for a in node.names
+            ]
+            self.matches.append(f"from {module} import {', '.join(parts)}")
+        # Check aXX_str
+        n2 = _extract_aXX_str_number(module) if module else None
+        if n2 is not None and n2 != self.min_number:
+            parts = [
+                f"{a.name} as {a.asname}" if a.asname else a.name for a in node.names
+            ]
+            self.matches.append(f"from {module} import {', '.join(parts)}")
+        self.generic_visit(node)
+
+
+def find_incorrect_imports(
+    py_file_path: str | pathlib_Path, min_number: int
+) -> list[str]:
+    p = pathlib_Path(py_file_path)
+    src = p.read_text(encoding="utf-8")
+    tree = ast.parse(src, filename=str(p))
+    collector = _ImportCollector(min_number)
+    collector.visit(tree)
+    return collector.matches

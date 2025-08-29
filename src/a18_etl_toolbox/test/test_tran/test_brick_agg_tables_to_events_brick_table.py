@@ -4,18 +4,18 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_moment_logic.test._util.a15_str import (
-    cumulative_minute_str,
-    hour_label_str,
-    moment_label_str,
-)
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_number_str
 from src.a18_etl_toolbox.test._util.a18_str import (
     brick_agg_str,
+    cumulative_minute_str,
+    error_message_str,
+    event_int_str,
     events_brick_agg_str,
     events_brick_valid_str,
+    face_name_str,
+    hour_label_str,
+    idea_number_str,
+    moment_label_str,
 )
 from src.a18_etl_toolbox.transformers import (
     etl_brick_agg_tables_to_events_brick_agg_table,

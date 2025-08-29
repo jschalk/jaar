@@ -1,14 +1,15 @@
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a08_belief_atom_logic.atom_config import get_atom_args_class_types
+from src.a08_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
+from src.a08_belief_atom_logic.test._util.a08_str import (
+    DELETE_str,
+    INSERT_str,
     belief_plan_healerunit_str,
     belief_planunit_str,
     belief_voice_membership_str,
     belief_voiceunit_str,
     voice_name_str,
 )
-from src.a08_belief_atom_logic.atom_config import get_atom_args_class_types
-from src.a08_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import DELETE_str, INSERT_str
 
 
 def test_AtomRow_Exists():

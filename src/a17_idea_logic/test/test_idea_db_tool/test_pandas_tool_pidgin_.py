@@ -2,13 +2,6 @@ from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_belief_logic.test._util.a06_str import (
-    NameTerm_str,
-    moment_label_str,
-    reason_context_str,
-    voice_cred_points_str,
-    voice_name_str,
-)
 from src.a16_pidgin_logic.map import namemap_shop
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
@@ -21,6 +14,16 @@ from src.a17_idea_logic.idea_db_tool import (
     get_dataframe_pidginable_columns,
     translate_all_columns_dataframe,
     translate_single_column_dataframe,
+)
+from src.a17_idea_logic.test._util.a17_str import (
+    NameTerm_str,
+    credor_respect_str,
+    group_title_str,
+    moment_label_str,
+    reason_context_str,
+    voice_cred_points_str,
+    voice_name_str,
+    voice_pool_str,
 )
 
 

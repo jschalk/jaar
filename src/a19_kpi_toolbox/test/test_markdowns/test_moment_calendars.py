@@ -1,10 +1,5 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_name_str,
-    moment_label_str,
-    voice_name_str,
-)
 from src.a07_timeline_logic.test._util.calendar_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
@@ -12,7 +7,6 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
 from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a12_hub_toolbox.a12_path import create_moment_json_path
 from src.a15_moment_logic.moment_main import momentunit_shop
-from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a19_kpi_toolbox.kpi_mstr import create_calendar_markdown_files
 from src.a19_kpi_toolbox.test._util.a19_env import (
     env_dir_setup_cleanup,

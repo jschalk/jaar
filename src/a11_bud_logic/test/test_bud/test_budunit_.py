@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
 from src.a02_finance_logic.finance_config import default_fund_pool
-from src.a02_finance_logic.test._util.a02_str import magnitude_str
 from src.a11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,
     BudUnit,

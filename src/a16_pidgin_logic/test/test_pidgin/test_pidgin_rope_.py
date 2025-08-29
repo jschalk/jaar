@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.map import (
     RopeMap,
     get_ropemap_from_dict,
@@ -11,6 +10,8 @@ from src.a16_pidgin_logic.map import (
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.test._util.a16_str import (
+    event_int_str,
+    face_name_str,
     inx_knot_str,
     otx2inx_str,
     otx_knot_str,

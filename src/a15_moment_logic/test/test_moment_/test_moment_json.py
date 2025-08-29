@@ -5,13 +5,6 @@ from src.a02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.a02_finance_logic.test._util.a02_str import knot_str
-from src.a06_belief_logic.test._util.a06_str import (
-    fund_iota_str,
-    moment_label_str,
-    penny_str,
-    respect_bit_str,
-)
 from src.a07_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.a12_hub_toolbox.a12_path import create_moment_json_path
 from src.a15_moment_logic.moment_main import (
@@ -26,9 +19,14 @@ from src.a15_moment_logic.test._util.a15_env import (
 )
 from src.a15_moment_logic.test._util.a15_str import (
     brokerunits_str,
+    fund_iota_str,
+    knot_str,
+    moment_label_str,
     moment_mstr_dir_str,
     offi_time_str,
     paybook_str,
+    penny_str,
+    respect_bit_str,
     timeline_str,
 )
 

@@ -1,6 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a10_belief_calc.belief_calc_config import get_belief_calc_config_dict
+from src.a17_idea_logic.idea_config import get_idea_sqlite_types
+from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
+from src.a18_etl_toolbox.test._util.a18_str import (
+    belief_groupunit_str,
     belief_name_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -12,13 +16,9 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
+    job_str,
     moment_label_str,
 )
-from src.a10_belief_calc.belief_calc_config import get_belief_calc_config_dict
-from src.a10_belief_calc.test._util.a10_str import belief_groupunit_str
-from src.a12_hub_toolbox.test._util.a12_str import job_str
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_job_tables,
     create_prime_tablename as prime_table,

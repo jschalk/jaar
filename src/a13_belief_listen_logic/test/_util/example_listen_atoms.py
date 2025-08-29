@@ -1,6 +1,11 @@
 from src.a01_term_logic.rope import create_rope
 from src.a01_term_logic.term import MomentLabel
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
+from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
+from src.a13_belief_listen_logic.test._util.a13_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     belief_plan_factunit_str,
     belief_planunit_str,
     belief_voiceunit_str,
@@ -11,13 +16,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     plan_rope_str,
     voice_name_str,
 )
-from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
-from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
 
 def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:

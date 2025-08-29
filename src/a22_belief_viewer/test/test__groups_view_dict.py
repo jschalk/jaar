@@ -1,25 +1,4 @@
-from src.a03_group_logic.test._util.a03_str import (
-    credor_pool_str,
-    debtor_pool_str,
-    fund_agenda_give_str,
-    fund_agenda_ratio_give_str,
-    fund_agenda_ratio_take_str,
-    fund_agenda_take_str,
-    fund_give_str,
-    fund_take_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    inallocable_voice_debt_points_str,
-    irrational_voice_debt_points_str,
-    memberships_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import groupunits_str
-from src.a07_timeline_logic.test._util.a07_str import readable_str
 from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_groups_view_dict
 from src.a22_belief_viewer.example22_beliefs import (
     best_run_str,
@@ -33,6 +12,27 @@ from src.a22_belief_viewer.example22_beliefs import (
     play_soccer_str,
     play_str,
     play_swim_str,
+)
+from src.a22_belief_viewer.test._util.a22_str import (
+    credor_pool_str,
+    debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
+    fund_give_str,
+    fund_take_str,
+    group_cred_points_str,
+    group_debt_points_str,
+    group_title_str,
+    groupunits_str,
+    inallocable_voice_debt_points_str,
+    irrational_voice_debt_points_str,
+    memberships_str,
+    readable_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a22_belief_viewer.test.test__voices_view_dict import add_readable
 

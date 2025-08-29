@@ -3,18 +3,7 @@ from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a03_group_logic.voice import voiceunit_shop
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_voiceunit_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
 from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.pack import (
     PackUnit,
@@ -24,10 +13,17 @@ from src.a09_pack_logic.pack import (
     packunit_shop,
 )
 from src.a09_pack_logic.test._util.a09_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     belief_name_str,
+    belief_voiceunit_str,
     event_int_str,
     face_name_str,
     moment_label_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a09_pack_logic.test._util.example_atoms import get_atom_example_planunit_sports
 from src.a09_pack_logic.test._util.example_deltas import get_beliefdelta_sue_example
