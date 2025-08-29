@@ -1,13 +1,5 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-    jkeys_str,
-    jvalues_str,
-    normal_specs_str,
-)
 from src.a16_pidgin_logic.pidgin_config import (
     default_unknown_str,
     default_unknown_str_if_None,
@@ -19,12 +11,17 @@ from src.a16_pidgin_logic.pidgin_config import (
     pidgin_config_path,
 )
 from src.a16_pidgin_logic.test._util.a16_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     inx_knot_str,
     inx_label_str,
     inx_name_str,
     inx_rope_str,
     inx_title_str,
-    map_otx2inx_str,
+    jkeys_str,
+    jvalues_str,
+    normal_specs_str,
     otx2inx_str,
     otx_knot_str,
     otx_label_str,
@@ -37,7 +34,9 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_rope_str,
     pidgin_title_str,
     pidginunit_str,
+    reason_context_str,
     unknown_str_str,
+    voice_name_str,
 )
 
 

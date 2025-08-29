@@ -4,7 +4,6 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     inx_name_str,
     inx_rope_str,
     inx_title_str,
-    map_otx2inx_str,
     otx2inx_str,
     otx_key_str,
     otx_knot_str,
@@ -43,4 +42,3 @@ def test_str_functions_ReturnsObj():
     assert pidgin_label_str() == "pidgin_label"
     assert pidgin_rope_str() == "pidgin_rope"
     assert pidgin_core_str() == "pidgin_core"
-    assert map_otx2inx_str() == "map_otx2inx"

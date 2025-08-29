@@ -1,22 +1,20 @@
 from src.a00_data_toolbox.dict_toolbox import x_is_json
 from src.a01_term_logic.rope import create_rope
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_plan_factunit_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_upper_str,
-    plan_rope_str,
-)
 from src.a08_belief_atom_logic.atom_main import (
     beliefatom_shop,
     get_from_json as beliefatom_get_from_json,
 )
 from src.a08_belief_atom_logic.test._util.a08_str import (
     INSERT_str,
+    belief_plan_factunit_str,
     crud_str,
     dimen_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_upper_str,
     jkeys_str,
     jvalues_str,
+    plan_rope_str,
 )
 
 

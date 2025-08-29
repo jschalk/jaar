@@ -1,40 +1,10 @@
 from pytest import raises as pytest_raises
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a06_belief_logic.test._util.a06_str import (
-    LabelTerm_str,
-    NameTerm_str,
-    RopeTerm_str,
-    TitleTerm_str,
-    awardee_title_str,
-    belief_name_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fund_iota_str,
-    group_title_str,
-    healer_name_str,
-    moment_label_str,
-    party_title_str,
-    penny_str,
-    plan_label_str,
-    plan_rope_str,
-    reason_context_str,
-    reason_state_str,
-    respect_bit_str,
-    voice_name_str,
-)
-from src.a07_timeline_logic.test._util.a07_str import timeline_label_str
 from src.a08_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_atom_args_class_types,
 )
-from src.a09_pack_logic.test._util.a09_str import face_name_str
 from src.a15_moment_logic.moment_config import get_moment_args_class_types
-from src.a15_moment_logic.test._util.a15_str import (
-    hour_label_str,
-    month_label_str,
-    weekday_label_str,
-)
 from src.a16_pidgin_logic.map import (
     labelmap_shop,
     namemap_shop,
@@ -53,6 +23,34 @@ from src.a16_pidgin_logic.pidgin_config import (
     pidginable_class_types,
 )
 from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
+from src.a16_pidgin_logic.test._util.a16_str import (
+    LabelTerm_str,
+    NameTerm_str,
+    RopeTerm_str,
+    TitleTerm_str,
+    awardee_title_str,
+    belief_name_str,
+    face_name_str,
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fund_iota_str,
+    group_title_str,
+    healer_name_str,
+    hour_label_str,
+    moment_label_str,
+    month_label_str,
+    party_title_str,
+    penny_str,
+    plan_label_str,
+    plan_rope_str,
+    reason_context_str,
+    reason_state_str,
+    respect_bit_str,
+    timeline_label_str,
+    voice_name_str,
+    weekday_label_str,
+)
 from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,

@@ -1,5 +1,4 @@
 from src.a01_term_logic.rope import default_knot_if_None
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.pidgin_main import (
     get_pidginunit_from_dict,
@@ -7,6 +6,8 @@ from src.a16_pidgin_logic.pidgin_main import (
     pidginunit_shop,
 )
 from src.a16_pidgin_logic.test._util.a16_str import (
+    event_int_str,
+    face_name_str,
     inx_knot_str,
     otx_knot_str,
     unknown_str_str,

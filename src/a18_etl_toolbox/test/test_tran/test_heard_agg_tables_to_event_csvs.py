@@ -1,18 +1,19 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_name_str,
-    belief_voiceunit_str,
-    moment_label_str,
-    voice_cred_points_str,
-    voice_name_str,
-)
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.a12_path import create_belief_event_dir_path
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
+    belief_name_str,
+    belief_voiceunit_str,
+    event_int_str,
+    face_name_str,
+    moment_label_str,
+    voice_cred_points_str,
+    voice_name_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,

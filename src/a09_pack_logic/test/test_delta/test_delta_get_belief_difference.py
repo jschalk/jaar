@@ -8,7 +8,12 @@ from src.a03_group_logic.voice import voiceunit_shop
 from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
+from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
+from src.a09_pack_logic.test._util.a09_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     awardee_title_str,
     begin_str,
     belief_plan_awardunit_str,
@@ -27,6 +32,9 @@ from src.a06_belief_logic.test._util.a06_str import (
     fact_state_str,
     fact_upper_str,
     give_force_str,
+    gogo_want_str,
+    group_cred_points_str,
+    group_debt_points_str,
     group_title_str,
     healer_name_str,
     party_title_str,
@@ -38,17 +46,13 @@ from src.a06_belief_logic.test._util.a06_str import (
     reason_state_str,
     reason_upper_str,
     star_str,
+    stop_want_str,
     take_force_str,
     task_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
     voice_name_str,
 )
-from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
-from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
 
 def print_beliefatom_keys(x_beliefdelta: BeliefDelta):

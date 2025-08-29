@@ -1,5 +1,11 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a08_belief_atom_logic.atom_main import beliefatom_shop
+from src.a09_pack_logic.delta import beliefdelta_shop
+from src.a09_pack_logic.legible import create_legible_list
+from src.a09_pack_logic.test._util.a09_str import (
+    DELETE_str,
+    INSERT_str,
+    UPDATE_str,
     belief_plan_factunit_str,
     fact_context_str,
     fact_lower_str,
@@ -7,14 +13,6 @@ from src.a06_belief_logic.test._util.a06_str import (
     fact_upper_str,
     plan_rope_str,
 )
-from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-)
-from src.a09_pack_logic.delta import beliefdelta_shop
-from src.a09_pack_logic.legible import create_legible_list
 
 
 def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithOutNumberArgs():

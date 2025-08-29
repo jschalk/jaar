@@ -4,18 +4,25 @@ from src.a00_data_toolbox.db_toolbox import (
     get_db_tables,
     get_row_count,
 )
-from src.a04_reason_logic.test._util.a04_str import belief_name_str, moment_label_str
-from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_net_amount_str,
-    moment_voice_nets_str,
-)
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
-from src.a19_kpi_toolbox.test._util.a19_str import moment_kpi001_voice_nets_str
+from src.a19_kpi_toolbox.test._util.a19_str import (
+    active_str,
+    belief_name_str,
+    belief_net_amount_str,
+    belief_planunit_str,
+    chore_str,
+    moment_kpi001_voice_nets_str,
+    moment_kpi002_belief_tasks_str,
+    moment_label_str,
+    moment_voice_nets_str,
+    plan_rope_str,
+    task_str,
+)
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():

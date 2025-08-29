@@ -338,30 +338,41 @@ def get_max_module_import_str() -> str:
 
 
 _A_PATTERN = re.compile(r"^src\.a(\d+)(?:[._]|$)")
+_A_STR_PATTERN = re.compile(r"a(\d{2})_str(?:[._]|$)")
 
 
 def _extract_series_number(module: str) -> int | None:
-    """
-    If module starts with src.aXX... return int(XX); else None.
-    Accepts any digit length (a2, a23, a123), and allows dot/underscore or end.
-    """
     if not module:
         return None
     m = _A_PATTERN.match(module)
     return int(m.group(1)) if m else None
 
 
+def _extract_aXX_str_number(module: str) -> int | None:
+    if not module:
+        return None
+    m = _A_STR_PATTERN.search(module)
+    return int(m.group(1)) if m else None
+
+
 class _ImportCollector(ast.NodeVisitor):
     def __init__(self, min_number: int):
         self.min_number = min_number
-        self.matches: List[str] = []
+        self.matches: list[str] = []
 
     def visit_Import(self, node: ast.Import):
-        # collect each alias separately; preserve order
         for alias in node.names:
             module = alias.name
+            # Check src.aXX
             n = _extract_series_number(module)
             if n is not None and n > self.min_number:
+                s = f"import {module}"
+                if alias.asname:
+                    s += f" as {alias.asname}"
+                self.matches.append(s)
+            # Check aXX_str
+            n2 = _extract_aXX_str_number(module)
+            if n2 is not None and n2 != self.min_number:
                 s = f"import {module}"
                 if alias.asname:
                     s += f" as {alias.asname}"
@@ -369,32 +380,29 @@ class _ImportCollector(ast.NodeVisitor):
         self.generic_visit(node)
 
     def visit_ImportFrom(self, node: ast.ImportFrom):
-        # ignore relative imports that aren't rooted at src.*
-        module = node.module  # None for weird cases; skip them
+        module = node.module
+        # Check src.aXX
         n = _extract_series_number(module) if module else None
         if n is not None and n > self.min_number:
-            parts = []
-            for a in node.names:
-                if a.name == "*":
-                    parts.append("*")
-                elif a.asname:
-                    parts.append(f"{a.name} as {a.asname}")
-                else:
-                    parts.append(a.name)
+            parts = [
+                f"{a.name} as {a.asname}" if a.asname else a.name for a in node.names
+            ]
+            self.matches.append(f"from {module} import {', '.join(parts)}")
+        # Check aXX_str
+        n2 = _extract_aXX_str_number(module) if module else None
+        if n2 is not None and n2 != self.min_number:
+            parts = [
+                f"{a.name} as {a.asname}" if a.asname else a.name for a in node.names
+            ]
             self.matches.append(f"from {module} import {', '.join(parts)}")
         self.generic_visit(node)
 
 
 def find_incorrect_imports(
     py_file_path: str | pathlib_Path, min_number: int
-) -> List[str]:
-    """
-    Parse the Python file's AST and return normalized import statements
-    whose module path starts with src.aXX and int(XX) > min_number.
-    Includes imports anywhere (top-level or inside functions/classes).
-    """
+) -> list[str]:
     p = pathlib_Path(py_file_path)
-    src = p.read_text(encoding="utf-8")  # raises FileNotFoundError if missing
+    src = p.read_text(encoding="utf-8")
     tree = ast.parse(src, filename=str(p))
     collector = _ImportCollector(min_number)
     collector.visit(tree)

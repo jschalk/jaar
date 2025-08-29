@@ -1,18 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_name_str,
-    chore_str,
-    moment_label_str,
-    plan_rope_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_divisor_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
-    status_str,
-)
 from src.a10_belief_calc.belief_calc_config import get_belief_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
@@ -26,6 +13,19 @@ from src.a18_etl_toolbox.db_obj_belief_tool import (
     create_blrplan_metrics_insert_sqlstr,
     create_blrprem_metrics_insert_sqlstr,
     create_blrreas_metrics_insert_sqlstr,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
+    belief_name_str,
+    chore_str,
+    moment_label_str,
+    plan_rope_str,
+    reason_active_requisite_str,
+    reason_context_str,
+    reason_divisor_str,
+    reason_lower_str,
+    reason_state_str,
+    reason_upper_str,
+    status_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_job_tables
 

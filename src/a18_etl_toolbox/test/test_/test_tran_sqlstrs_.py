@@ -5,7 +5,20 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     required_columns_exist,
 )
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a08_belief_atom_logic.atom_config import get_delete_key_name
+from src.a17_idea_logic.idea_config import (
+    get_idea_config_dict,
+    get_idea_numbers,
+    get_idea_sqlite_types,
+)
+from src.a17_idea_logic.idea_db_tool import (
+    get_default_sorted_list,
+    get_idea_into_dimen_raw_query,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
+    belief_groupunit_str,
+    belief_name_str,
+    belief_net_amount_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -16,48 +29,31 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-)
-from src.a08_belief_atom_logic.atom_config import get_delete_key_name
-from src.a09_pack_logic.test._util.a09_str import event_int_str
-from src.a10_belief_calc.test._util.a10_str import belief_groupunit_str
-from src.a11_bud_logic.test._util.a11_str import (
-    belief_name_str,
     bud_time_str,
-    moment_label_str,
-    tran_time_str,
-)
-from src.a12_hub_toolbox.test._util.a12_str import job_str
-from src.a15_moment_logic.test._util.a15_str import (
+    cumulative_minute_str,
+    error_message_str,
+    event_int_str,
+    face_name_str,
+    hour_label_str,
+    idea_category_str,
+    job_str,
     moment_budunit_str,
+    moment_event_time_agg_str,
+    moment_label_str,
+    moment_ote1_agg_str,
     moment_paybook_str,
     moment_timeline_hour_str,
     moment_timeline_month_str,
     moment_timeline_weekday_str,
     moment_timeoffi_str,
+    moment_voice_nets_str,
     momentunit_str,
-)
-from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_core_str,
     pidgin_label_str,
     pidgin_name_str,
     pidgin_rope_str,
     pidgin_title_str,
-)
-from src.a17_idea_logic.idea_config import (
-    get_idea_config_dict,
-    get_idea_numbers,
-    get_idea_sqlite_types,
-)
-from src.a17_idea_logic.idea_db_tool import (
-    get_default_sorted_list,
-    get_idea_into_dimen_raw_query,
-)
-from src.a17_idea_logic.test._util.a17_str import error_message_str, idea_category_str
-from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_net_amount_str,
-    moment_event_time_agg_str,
-    moment_ote1_agg_str,
-    moment_voice_nets_str,
+    tran_time_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,

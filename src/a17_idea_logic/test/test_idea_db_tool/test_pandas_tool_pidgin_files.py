@@ -2,7 +2,6 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
 from src.a01_term_logic.rope import create_rope, to_rope
-from src.a06_belief_logic.test._util.a06_str import reason_context_str, voice_name_str
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
@@ -26,6 +25,7 @@ from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
 )
+from src.a17_idea_logic.test._util.a17_str import reason_context_str, voice_name_str
 
 
 def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(

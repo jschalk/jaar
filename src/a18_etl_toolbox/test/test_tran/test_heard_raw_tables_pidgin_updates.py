@@ -1,8 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_table_columns
-from src.a06_belief_logic.test._util.a06_str import belief_plan_awardunit_str
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a18_etl_toolbox.test._util.a18_str import (
+    belief_plan_awardunit_str,
+    event_int_str,
+    face_name_str,
     inx_name_str,
     otx_name_str,
     pidgin_name_str,

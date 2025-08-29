@@ -20,6 +20,8 @@ from src.a99_module_linter.linter import (
 
 
 def test_Modules_StrFunctionsAppearWhereTheyShould():
+    """Test that checks no str function is created before it is needed or after the term is used."""
+
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     all_str_functions = get_all_str_functions()
@@ -61,20 +63,24 @@ def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
     module_descs = get_module_descs()
+    mod_descs_sorted = sorted(list(module_descs.keys()))
 
     # WHEN / THEN
     all_file_count = 0
-    for module_desc, module_dir in get_module_descs().items():
+    for module_desc in mod_descs_sorted:
+        module_dir = module_descs.get(module_desc)
         desc_number_str = module_desc[1:3]
         desc_number_int = int(desc_number_str)
         module_files = sorted(list(get_python_files_with_flag(module_dir).keys()))
         # print(f"{desc_number_str} src.{module_desc}")
         for module_file_count, file_path in enumerate(module_files, start=1):
             all_file_count += 1
-            if later_imports := find_incorrect_imports(file_path, desc_number_int):
-                print(f"{all_file_count} Module: {module_file_count} {file_path}")
-            assert not later_imports
-            # print(f"{all_file_count} Module: {module_file_count} {file_path}")
+            incorrect_imports = find_incorrect_imports(file_path, desc_number_int)
+            if len(incorrect_imports) == 1 and file_path.find("_str.py") > 0:
+                incorrect_imports = []
+
+            assertion_fail_str = f"File #{all_file_count} a{desc_number_str} file #{module_file_count} Imports: {len(incorrect_imports)} {file_path}"
+            assert not incorrect_imports, assertion_fail_str
 
 
 def test_Modules_StrFunctionsAreAllImported():

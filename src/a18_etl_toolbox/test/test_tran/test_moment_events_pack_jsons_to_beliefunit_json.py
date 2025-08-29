@@ -4,13 +4,6 @@ from src.a06_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,
 )
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_voiceunit_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
-from src.a08_belief_atom_logic.test._util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
 from src.a12_hub_toolbox.a12_path import (
     create_belief_event_dir_path,
@@ -20,6 +13,13 @@ from src.a12_hub_toolbox.a12_path import (
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
+    INSERT_str,
+    belief_voiceunit_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_beliefunits,

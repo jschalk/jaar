@@ -8,7 +8,15 @@ from src.a00_data_toolbox.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a08_belief_atom_logic.atom_config import get_belief_dimens, get_delete_key_name
+from src.a15_moment_logic.moment_config import get_moment_dimens
+from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
+from src.a17_idea_logic.idea_config import (
+    get_default_sorted_list,
+    get_idea_config_dict,
+    get_idea_sqlite_types,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -19,31 +27,19 @@ from src.a06_belief_logic.test._util.a06_str import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-)
-from src.a08_belief_atom_logic.atom_config import get_belief_dimens, get_delete_key_name
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a15_moment_logic.moment_config import get_moment_dimens
-from src.a15_moment_logic.test._util.a15_str import moment_timeline_hour_str
-from src.a16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
-from src.a16_pidgin_logic.test._util.a16_str import (
+    error_message_str,
+    event_int_str,
+    face_name_str,
+    idea_category_str,
+    idea_number_str,
     inx_knot_str,
+    moment_timeline_hour_str,
     otx_knot_str,
     pidgin_core_str,
     pidgin_label_str,
-    pidgin_name_str,
     pidgin_rope_str,
     pidgin_title_str,
     unknown_str_str,
-)
-from src.a17_idea_logic.idea_config import (
-    get_default_sorted_list,
-    get_idea_config_dict,
-    get_idea_sqlite_types,
-)
-from src.a17_idea_logic.test._util.a17_str import (
-    error_message_str,
-    idea_category_str,
-    idea_number_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,

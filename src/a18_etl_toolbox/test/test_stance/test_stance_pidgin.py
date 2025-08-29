@@ -1,6 +1,15 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a17_idea_logic.idea_csv_tool import create_init_stance_idea_csv_strs
+from src.a18_etl_toolbox.stance_tool import (
+    add_pidgin_rows_to_stance_csv_strs,
+    add_to_br00042_csv,
+    add_to_br00043_csv,
+    add_to_br00044_csv,
+    add_to_br00045_csv,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
+    event_int_str,
+    face_name_str,
     inx_knot_str,
     inx_label_str,
     inx_name_str,
@@ -16,14 +25,6 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     pidgin_rope_str,
     pidgin_title_str,
     unknown_str_str,
-)
-from src.a17_idea_logic.idea_csv_tool import create_init_stance_idea_csv_strs
-from src.a18_etl_toolbox.stance_tool import (
-    add_pidgin_rows_to_stance_csv_strs,
-    add_to_br00042_csv,
-    add_to_br00043_csv,
-    add_to_br00044_csv,
-    add_to_br00045_csv,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,

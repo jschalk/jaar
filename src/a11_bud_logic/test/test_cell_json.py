@@ -1,6 +1,4 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import penny_str
-from src.a09_pack_logic.test._util.a09_str import event_int_str
 from src.a11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
 from src.a11_bud_logic.test._util.a11_str import (
     ancestors_str,
@@ -9,8 +7,10 @@ from src.a11_bud_logic.test._util.a11_str import (
     boss_facts_str,
     bud_belief_name_str,
     celldepth_str,
+    event_int_str,
     found_facts_str,
     mandate_str,
+    penny_str,
     quota_str,
 )
 from src.a11_bud_logic.test._util.example_factunits import (

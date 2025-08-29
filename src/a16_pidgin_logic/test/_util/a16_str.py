@@ -21,10 +21,6 @@ def inx_title_str() -> str:
     return "inx_title"
 
 
-def map_otx2inx_str() -> str:
-    return "map_otx2inx"
-
-
 def otx2inx_str() -> str:
     return "otx2inx"
 

@@ -1,6 +1,5 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_json
-from src.a11_bud_logic.test._util.a11_str import beliefevent_facts_str
 from src.a12_hub_toolbox.a12_path import create_beliefevent_path, create_cell_json_path
 from src.a12_hub_toolbox.hub_tool import (
     cellunit_add_json_file,
@@ -11,6 +10,7 @@ from src.a15_moment_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
+from src.a15_moment_logic.test._util.a15_str import beliefevent_facts_str
 from src.a15_moment_logic.test._util.example_moments import example_casa_clean_factunit
 
 

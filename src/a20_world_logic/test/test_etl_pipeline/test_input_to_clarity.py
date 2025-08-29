@@ -3,18 +3,6 @@ from pandas import DataFrame
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, save_file
-from src.a06_belief_logic.test._util.a06_str import voice_name_str
-from src.a07_timeline_logic.test._util.a07_str import creg_str, time_str
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
-from src.a11_bud_logic.test._util.a11_str import (
-    amount_str,
-    belief_name_str,
-    bud_time_str,
-    celldepth_str,
-    moment_label_str,
-    quota_str,
-    tran_time_str,
-)
 from src.a12_hub_toolbox.a12_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path as expressed_path,
@@ -26,28 +14,39 @@ from src.a12_hub_toolbox.hub_tool import open_gut_file
 from src.a15_moment_logic.a15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate,
 )
-from src.a15_moment_logic.test._util.a15_str import (
-    cumulative_minute_str,
-    hour_label_str,
-)
-from src.a16_pidgin_logic.test._util.a16_str import inx_name_str, otx_name_str
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
 from src.a18_etl_toolbox.a18_path import (
     create_last_run_metrics_path,
     create_moment_ote1_csv_path,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
-    events_brick_agg_str,
-    events_brick_valid_str,
-    moment_event_time_agg_str,
-    moment_ote1_agg_str,
-    moment_voice_nets_str,
-)
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
-from src.a19_kpi_toolbox.test._util.a19_str import moment_kpi001_voice_nets_str
 from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
+)
+from src.a20_world_logic.test._util.a20_str import (
+    amount_str,
+    belief_name_str,
+    bud_time_str,
+    celldepth_str,
+    creg_str,
+    cumulative_minute_str,
+    event_int_str,
+    events_brick_agg_str,
+    events_brick_valid_str,
+    face_name_str,
+    hour_label_str,
+    inx_name_str,
+    moment_event_time_agg_str,
+    moment_kpi001_voice_nets_str,
+    moment_label_str,
+    moment_ote1_agg_str,
+    moment_voice_nets_str,
+    otx_name_str,
+    quota_str,
+    time_str,
+    tran_time_str,
+    voice_name_str,
 )
 from src.a20_world_logic.world import worldunit_shop
 

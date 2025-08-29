@@ -1,23 +1,7 @@
-from src.a01_term_logic.rope import to_rope
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    plan_rope_str,
-    star_str,
-    task_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
 from src.a06_belief_logic.test._util.example_beliefs import beliefunit_v001
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import INSERT_str
 from src.a17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
     idea_format_00020_belief_voice_membership_v0_0_0,
@@ -27,6 +11,18 @@ from src.a17_idea_logic.idea_main import (
     create_idea_df,
     get_idearef_obj,
     make_beliefdelta,
+)
+from src.a17_idea_logic.test._util.a17_str import (
+    INSERT_str,
+    belief_planunit_str,
+    belief_voiceunit_str,
+    plan_rope_str,
+    star_str,
+    task_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
+    voice_pool_str,
 )
 
 

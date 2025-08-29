@@ -1,17 +1,6 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_belief_logic.test._util.a06_str import (
-    belief_name_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
-from src.a08_belief_atom_logic.test._util.a08_str import INSERT_str
 from src.a09_pack_logic.pack import get_packunit_from_json, packunit_shop
-from src.a09_pack_logic.test._util.a09_str import event_int_str, face_name_str
 from src.a12_hub_toolbox.a12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
@@ -19,6 +8,18 @@ from src.a12_hub_toolbox.a12_path import (
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
+)
+from src.a18_etl_toolbox.test._util.a18_str import (
+    INSERT_str,
+    belief_name_str,
+    belief_voiceunit_str,
+    beliefunit_str,
+    event_int_str,
+    face_name_str,
+    moment_label_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import etl_event_belief_csvs_to_pack_json

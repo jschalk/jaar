@@ -1,7 +1,6 @@
 from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_plan_logic.plan import get_default_moment_label, planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import voices_str
 from src.a12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,
@@ -18,6 +17,7 @@ from src.a13_belief_listen_logic.test._util.a13_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )
+from src.a13_belief_listen_logic.test._util.a13_str import voices_str
 from src.a13_belief_listen_logic.test._util.example_listen_hub import get_texas_hubunit
 
 
