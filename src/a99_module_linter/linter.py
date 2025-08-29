@@ -8,6 +8,8 @@ from ast import (
 )
 from os import walk as os_walk
 from os.path import join as os_path_join
+from pathlib import Path as pathlib_Path
+from re import compile as re_compile
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.a98_docs_builder.module_eval import (
     get_function_names_from_file,
@@ -324,7 +326,37 @@ def get_max_module_import_str() -> str:
             max_module_dir = module_dir
     max_module_int_str = str(max_module_int)
     max_module_import_str = max_module_dir.replace("\\", ".")
+    max_module_import_str = max_module_import_str.replace("""src/""", """src.""")
     max_module_import_str = (
         f"{max_module_import_str}.test._util.a{max_module_int_str}_str"
     )
     return max_module_import_str
+
+
+def find_later_imports(py_file_path: str, min_number: int):
+    """
+    Return all import lines from src.aXX where int(XX) > min_number.
+
+    Args:
+        py_file_path (str): Path to the .py file.
+        min_number (int): The threshold number for aXX.
+
+    Returns:
+        list[str]: Matching import lines.
+    """
+    pattern = re_compile(r"\bsrc\.a(\d{2})")
+    results = []
+
+    py_file = pathlib_Path(py_file_path)
+    if not py_file.exists():
+        raise FileNotFoundError(f"File not found: {py_file_path}")
+
+    with py_file.open("r", encoding="utf-8") as f:
+        for line in f:
+            print(f"{py_file_path} {line=}")
+            if match := pattern.search(line):
+                number = int(match.group(1))
+                if number > min_number:
+                    results.append(line.strip())
+
+    return results
