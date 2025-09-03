@@ -143,6 +143,7 @@ def get_fund_breakdown_belief() -> BeliefUnit:
 
 
 def get_beliefunit_irrational_example() -> BeliefUnit:
+    # sourcery skip: extract-duplicate-method
     # this belief has no definitive agenda because 2 task plans are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true

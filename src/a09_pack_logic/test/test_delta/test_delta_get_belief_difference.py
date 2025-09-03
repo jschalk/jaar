@@ -233,6 +233,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_BeliefUnit
 
 
 def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_membership_insert():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     before_sue_belief = beliefunit_shop(sue_str)

@@ -304,6 +304,7 @@ VALUES
 
 
 def test_get_max_brick_events_event_int_ReturnsObj_Scenario2_MultipleTable():
+    # sourcery skip: extract-duplicate-method, extract-method
     # ESTABLISH
     event1 = 1
     event3 = 3
