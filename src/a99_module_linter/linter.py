@@ -203,7 +203,7 @@ def check_if_module_str_funcs_is_sorted(module_str_funcs: list[str]):
                     f"{module_str_funcs[x]} should be {sorted_module_str_funcs[x]}"
                 )
 
-        print(f"{first_wrong_index=}")
+        # print(f"{first_wrong_index=}")
         # print(f"Bad Order     {module_str_funcs}")
         # print(f"Correct order {sorted(module_str_funcs)}")
     assert module_str_funcs == sorted(module_str_funcs)
