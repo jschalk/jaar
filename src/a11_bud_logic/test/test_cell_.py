@@ -238,7 +238,7 @@ def test_CellUnit_eval_beliefevent_SetsAttr_Scenario1():
     assert len(yao_cellunit.reason_contexts) == 1
     expected_adjust_belief = copy_deepcopy(yao_belief)
     expected_adjust_belief.del_fact(clean_fact.fact_context)
-    expected_adjust_belief.cash_out()
+    expected_adjust_belief.cashout()
     expected_planroot = expected_adjust_belief.planroot
     generated_planroot = yao_cellunit.beliefadjust.planroot
     assert yao_cellunit.beliefadjust.to_dict() != yao_belief.to_dict()

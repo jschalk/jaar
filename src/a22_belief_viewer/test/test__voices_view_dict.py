@@ -26,7 +26,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = beliefunit_shop(sue_str)
-    sue_believer.cash_out()
+    sue_believer.cashout()
 
     # WHEN
     voices_view_dict = get_voices_view_dict(sue_believer)
@@ -51,7 +51,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     bob_debt_points = 290
     sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
     sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
-    sue_believer.cash_out()
+    sue_believer.cashout()
 
     # WHEN
     voices_view_dict = get_voices_view_dict(sue_believer)
@@ -196,7 +196,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     yao_swim_debt_points = 313
     yao_voiceunit = sue_believer.get_voice(yao_str)
     yao_voiceunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-    sue_believer.cash_out()
+    sue_believer.cashout()
 
     # WHEN
     voices_view_dict = get_voices_view_dict(sue_believer)

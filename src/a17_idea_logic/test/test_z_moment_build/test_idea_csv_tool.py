@@ -343,7 +343,7 @@ def test_add_belief_to_br00022_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     x_csv = add_belief_to_br00022_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
@@ -393,7 +393,7 @@ def test_add_belief_to_br00024_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     x_csv = add_belief_to_br00024_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
@@ -417,7 +417,7 @@ def test_add_belief_to_br00025_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     x_csv = add_belief_to_br00025_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
@@ -453,7 +453,7 @@ def test_add_belief_to_br00026_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     x_csv = add_belief_to_br00026_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
@@ -481,7 +481,7 @@ def test_add_belief_to_br00027_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     x_csv = add_belief_to_br00027_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
@@ -530,7 +530,7 @@ def test_add_belief_to_br00028_csv_ReturnsObj():
     print(f"{csv_header=}")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     x_csv = add_belief_to_br00028_csv(csv_header, bob_belief, csv_delimiter)
 
     # THEN
@@ -604,7 +604,7 @@ def test_add_beliefunit_to_stance_csv_strs_ReturnsObj():
     br00029_header = x_ideas.get("br00029")
 
     # WHEN
-    bob_belief.cash_out()
+    bob_belief.cashout()
     add_beliefunit_to_stance_csv_strs(bob_belief, x_ideas, csv_delimiter)
 
     # THEN

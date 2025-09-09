@@ -32,7 +32,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsAllChildren():
     yao_beliefunit.set_plan(fri_plan, wk_rope)
     yao_beliefunit.set_plan(sat_plan, wk_rope)
     yao_beliefunit.set_plan(sun_plan, wk_rope)
-    yao_beliefunit.cash_out()
+    yao_beliefunit.cashout()
 
     # WHEN
     ranged_plans = yao_beliefunit.get_plan_ranged_kids(plan_rope=wk_rope)
@@ -71,7 +71,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario1():
     yao_beliefunit.set_plan(fri_plan, wk_rope)
     yao_beliefunit.set_plan(sat_plan, wk_rope)
     yao_beliefunit.set_plan(sun_plan, wk_rope)
-    yao_beliefunit.cash_out()
+    yao_beliefunit.cashout()
 
     # WHEN
     x_begin = 1440
@@ -118,7 +118,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario2():
     yao_beliefunit.set_plan(fri_plan, wk_rope)
     yao_beliefunit.set_plan(sat_plan, wk_rope)
     yao_beliefunit.set_plan(sun_plan, wk_rope)
-    yao_beliefunit.cash_out()
+    yao_beliefunit.cashout()
 
     # WHEN / THEN
     assert len(yao_beliefunit.get_plan_ranged_kids(wk_rope, 0, 1440)) == 1
@@ -156,7 +156,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     yao_beliefunit.set_plan(fri_plan, wk_rope)
     yao_beliefunit.set_plan(sat_plan, wk_rope)
     yao_beliefunit.set_plan(sun_plan, wk_rope)
-    yao_beliefunit.cash_out()
+    yao_beliefunit.cashout()
 
     # WHEN / THEN
     assert len(yao_beliefunit.get_plan_ranged_kids(wk_rope, 0)) == 1
@@ -168,7 +168,7 @@ def test_BeliefUnit_get_plan_ranged_kids_ReturnsSomeChildrenScenario3():
     yao_beliefunit.set_plan(wks_plan, wk_rope)
 
     # WHEN
-    yao_beliefunit.cash_out()
+    yao_beliefunit.cashout()
 
     # THEN
     assert len(yao_beliefunit.get_plan_ranged_kids(wk_rope, 1440)) == 2

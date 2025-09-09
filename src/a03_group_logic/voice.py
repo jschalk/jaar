@@ -54,7 +54,7 @@ class VoiceUnit(VoiceCore):
     debtor_pool: RespectNum = None
     irrational_voice_debt_points: int = None  # set by listening process
     inallocable_voice_debt_points: int = None  # set by listening process
-    # set by Belief.cash_out()
+    # set by Belief.cashout()
     fund_give: float = None
     fund_take: float = None
     fund_agenda_give: float = None

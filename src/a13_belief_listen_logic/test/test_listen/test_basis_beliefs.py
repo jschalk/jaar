@@ -56,7 +56,7 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.credor_respect == validate_respect_num()
     assert yao_empty_vision.debtor_respect != yao_gut.debtor_respect
     assert yao_empty_vision.debtor_respect == validate_respect_num()
-    yao_empty_vision.cash_out()
+    yao_empty_vision.cashout()
     assert yao_empty_vision.voices == {}
 
 
@@ -100,7 +100,7 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_vision.respect_bit == yao_duty.respect_bit
     assert yao_basis_vision.credor_respect == yao_duty.credor_respect
     assert yao_basis_vision.debtor_respect == yao_duty.debtor_respect
-    yao_basis_vision.cash_out()
+    yao_basis_vision.cashout()
     assert len(yao_basis_vision._plan_dict) != len(yao_duty._plan_dict)
     assert len(yao_basis_vision._plan_dict) == 1
     vision_zia_voiceunit = yao_basis_vision.get_voice(zia_str)
@@ -140,7 +140,7 @@ def test_get_default_job_ReturnsObj():
     default_job = get_default_job(sue_beliefunit)
 
     # THEN
-    default_job.cash_out()
+    default_job.cashout()
     assert default_job.belief_name == sue_beliefunit.belief_name
     assert default_job.belief_name == sue_str
     assert default_job.moment_label == sue_beliefunit.moment_label

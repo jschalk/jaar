@@ -260,7 +260,7 @@ def save_beliefpoint_file(
     x_beliefpoint: BeliefUnit,
     x_bud_time: TimeLinePoint = None,
 ):
-    x_beliefpoint.cash_out()
+    x_beliefpoint.cashout()
     if x_beliefpoint.rational is False:
         raise _save_valid_beliefpoint_Exception(
             "BeliefPoint could not be saved BeliefUnit.rational is False"

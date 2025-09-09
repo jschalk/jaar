@@ -151,14 +151,15 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel1Keys():
 
     # THEN
     # sourcery skip: no-loop-in-tests
-    for level1_key, aspect_dict in belief_calc_config.items():
-        aspect_keys = set(aspect_dict.keys())
-        print(f"{level1_key=} {aspect_keys=}")
-        assert "abbreviation" in aspect_keys
-        assert jkeys_str() in aspect_keys
-        assert jvalues_str() in aspect_keys
-        assert jmetrics_str() in aspect_keys
-        assert len(aspect_keys) == 4
+    for level1_key, attribute_dict in belief_calc_config.items():
+        attribute_keys = set(attribute_dict.keys())
+        print(f"{level1_key=} {attribute_keys=}")
+        assert "abbreviation" in attribute_keys
+        assert jkeys_str() in attribute_keys
+        assert jvalues_str() in attribute_keys
+        assert jmetrics_str() in attribute_keys
+        assert "populate_by_cashout" in attribute_keys
+        assert len(attribute_keys) == 5
 
 
 def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
@@ -168,49 +169,49 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
     # THEN
     atom_config = get_atom_config_dict()
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for level1_key, aspect_dict in belief_calc_config.items():
+    for level1_key, attribute_dict in belief_calc_config.items():
         if level1_key in atom_config.keys():
             atom_dimen = atom_config.get(level1_key)
-            for level2_key, fm_aspect_dict in aspect_dict.items():
+            for level2_key, fm_attribute_dict in attribute_dict.items():
                 if level2_key == jkeys_str():
                     atom_args = atom_dimen.get(jkeys_str())
                     dimen_keys = set(atom_args)
                     dimen_keys.add(moment_label_str())
                     dimen_keys.add(belief_name_str())
-                    fm_aspect_keys = set(fm_aspect_dict.keys())
+                    fm_attribute_keys = set(fm_attribute_dict.keys())
                     print(
-                        f"{level1_key=} {level2_key=} {fm_aspect_keys=} {dimen_keys=}"
+                        f"{level1_key=} {level2_key=} {fm_attribute_keys=} {dimen_keys=}"
                     )
-                    assert fm_aspect_keys == dimen_keys
+                    assert fm_attribute_keys == dimen_keys
                 elif level2_key == jvalues_str():
                     atom_args = atom_dimen.get(jvalues_str())
                     dimen_keys = set(atom_args)
-                    fm_aspect_keys = set(fm_aspect_dict.keys())
-                    assert fm_aspect_keys == dimen_keys
+                    fm_attribute_keys = set(fm_attribute_dict.keys())
+                    assert fm_attribute_keys == dimen_keys
 
-    blrunit_aspect = belief_calc_config.get(beliefunit_str())
-    blrpern_aspect = belief_calc_config.get(belief_voiceunit_str())
-    blrmemb_aspect = belief_calc_config.get(belief_voice_membership_str())
-    blrplan_aspect = belief_calc_config.get(belief_planunit_str())
-    blrawar_aspect = belief_calc_config.get(belief_plan_awardunit_str())
-    blrreas_aspect = belief_calc_config.get(belief_plan_reasonunit_str())
-    blrprem_aspect = belief_calc_config.get(belief_plan_reason_caseunit_str())
-    blrlabo_aspect = belief_calc_config.get(belief_plan_partyunit_str())
-    blrheal_aspect = belief_calc_config.get(belief_plan_healerunit_str())
-    blrfact_aspect = belief_calc_config.get(belief_plan_factunit_str())
-    blrgrou_aspect = belief_calc_config.get(belief_groupunit_str())
+    blrunit_attribute = belief_calc_config.get(beliefunit_str())
+    blrpern_attribute = belief_calc_config.get(belief_voiceunit_str())
+    blrmemb_attribute = belief_calc_config.get(belief_voice_membership_str())
+    blrplan_attribute = belief_calc_config.get(belief_planunit_str())
+    blrawar_attribute = belief_calc_config.get(belief_plan_awardunit_str())
+    blrreas_attribute = belief_calc_config.get(belief_plan_reasonunit_str())
+    blrprem_attribute = belief_calc_config.get(belief_plan_reason_caseunit_str())
+    blrlabo_attribute = belief_calc_config.get(belief_plan_partyunit_str())
+    blrheal_attribute = belief_calc_config.get(belief_plan_healerunit_str())
+    blrfact_attribute = belief_calc_config.get(belief_plan_factunit_str())
+    blrgrou_attribute = belief_calc_config.get(belief_groupunit_str())
 
-    blrunit_jmetrics_keys = set(blrunit_aspect.get(jmetrics_str()))
-    blrpern_jmetrics_keys = set(blrpern_aspect.get(jmetrics_str()))
-    blrmemb_jmetrics_keys = set(blrmemb_aspect.get(jmetrics_str()))
-    blrplan_jmetrics_keys = set(blrplan_aspect.get(jmetrics_str()))
-    blrawar_jmetrics_keys = set(blrawar_aspect.get(jmetrics_str()))
-    blrreas_jmetrics_keys = set(blrreas_aspect.get(jmetrics_str()))
-    blrprem_jmetrics_keys = set(blrprem_aspect.get(jmetrics_str()))
-    blrlabo_jmetrics_keys = set(blrlabo_aspect.get(jmetrics_str()))
-    blrheal_jmetrics_keys = set(blrheal_aspect.get(jmetrics_str()))
-    blrfact_jmetrics_keys = set(blrfact_aspect.get(jmetrics_str()))
-    blrgrou_jmetrics_keys = set(blrgrou_aspect.get(jmetrics_str()))
+    blrunit_jmetrics_keys = set(blrunit_attribute.get(jmetrics_str()))
+    blrpern_jmetrics_keys = set(blrpern_attribute.get(jmetrics_str()))
+    blrmemb_jmetrics_keys = set(blrmemb_attribute.get(jmetrics_str()))
+    blrplan_jmetrics_keys = set(blrplan_attribute.get(jmetrics_str()))
+    blrawar_jmetrics_keys = set(blrawar_attribute.get(jmetrics_str()))
+    blrreas_jmetrics_keys = set(blrreas_attribute.get(jmetrics_str()))
+    blrprem_jmetrics_keys = set(blrprem_attribute.get(jmetrics_str()))
+    blrlabo_jmetrics_keys = set(blrlabo_attribute.get(jmetrics_str()))
+    blrheal_jmetrics_keys = set(blrheal_attribute.get(jmetrics_str()))
+    blrfact_jmetrics_keys = set(blrfact_attribute.get(jmetrics_str()))
+    blrgrou_jmetrics_keys = set(blrgrou_attribute.get(jmetrics_str()))
 
     expected_blrunit_jmetrics_keys = {
         "tree_traverse_count",
@@ -303,29 +304,29 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckAbbreviations():
     belief_calc_config = get_belief_calc_config_dict()
 
     # THEN
-    blrunit_aspect = belief_calc_config.get(beliefunit_str())
-    blrpern_aspect = belief_calc_config.get(belief_voiceunit_str())
-    blrmemb_aspect = belief_calc_config.get(belief_voice_membership_str())
-    blrplan_aspect = belief_calc_config.get(belief_planunit_str())
-    blrawar_aspect = belief_calc_config.get(belief_plan_awardunit_str())
-    blrreas_aspect = belief_calc_config.get(belief_plan_reasonunit_str())
-    blrprem_aspect = belief_calc_config.get(belief_plan_reason_caseunit_str())
-    blrlabo_aspect = belief_calc_config.get(belief_plan_partyunit_str())
-    blrheal_aspect = belief_calc_config.get(belief_plan_healerunit_str())
-    blrfact_aspect = belief_calc_config.get(belief_plan_factunit_str())
-    blrgrou_aspect = belief_calc_config.get(belief_groupunit_str())
+    blrunit_attribute = belief_calc_config.get(beliefunit_str())
+    blrpern_attribute = belief_calc_config.get(belief_voiceunit_str())
+    blrmemb_attribute = belief_calc_config.get(belief_voice_membership_str())
+    blrplan_attribute = belief_calc_config.get(belief_planunit_str())
+    blrawar_attribute = belief_calc_config.get(belief_plan_awardunit_str())
+    blrreas_attribute = belief_calc_config.get(belief_plan_reasonunit_str())
+    blrprem_attribute = belief_calc_config.get(belief_plan_reason_caseunit_str())
+    blrlabo_attribute = belief_calc_config.get(belief_plan_partyunit_str())
+    blrheal_attribute = belief_calc_config.get(belief_plan_healerunit_str())
+    blrfact_attribute = belief_calc_config.get(belief_plan_factunit_str())
+    blrgrou_attribute = belief_calc_config.get(belief_groupunit_str())
     abbr_str = "abbreviation"
-    assert blrunit_aspect.get(abbr_str) == "blrunit"
-    assert blrpern_aspect.get(abbr_str) == "blrpern"
-    assert blrmemb_aspect.get(abbr_str) == "blrmemb"
-    assert blrplan_aspect.get(abbr_str) == "blrplan"
-    assert blrawar_aspect.get(abbr_str) == "blrawar"
-    assert blrreas_aspect.get(abbr_str) == "blrreas"
-    assert blrprem_aspect.get(abbr_str) == "blrprem"
-    assert blrlabo_aspect.get(abbr_str) == "blrlabo"
-    assert blrheal_aspect.get(abbr_str) == "blrheal"
-    assert blrfact_aspect.get(abbr_str) == "blrfact"
-    assert blrgrou_aspect.get(abbr_str) == "blrgrou"
+    assert blrunit_attribute.get(abbr_str) == "blrunit"
+    assert blrpern_attribute.get(abbr_str) == "blrpern"
+    assert blrmemb_attribute.get(abbr_str) == "blrmemb"
+    assert blrplan_attribute.get(abbr_str) == "blrplan"
+    assert blrawar_attribute.get(abbr_str) == "blrawar"
+    assert blrreas_attribute.get(abbr_str) == "blrreas"
+    assert blrprem_attribute.get(abbr_str) == "blrprem"
+    assert blrlabo_attribute.get(abbr_str) == "blrlabo"
+    assert blrheal_attribute.get(abbr_str) == "blrheal"
+    assert blrfact_attribute.get(abbr_str) == "blrfact"
+    assert blrgrou_attribute.get(abbr_str) == "blrgrou"
 
 
 def test_get_all_belief_calc_args_ReturnsObj():
@@ -345,12 +346,12 @@ def test_get_all_belief_calc_args_ReturnsObj():
     }
 
     # belief_calc_config = get_belief_calc_config_dict()
-    # belief_voiceunit_aspects = belief_calc_config.get("belief_voiceunit")
-    # blrpern_jmetrics_dict = belief_voiceunit_aspects.get("jmetrics")
-    # rope_belief_calc_aspects = blrpern_jmetrics_dict.get("fund_give")
-    # assert belief_plan_factunit_str() in rope_belief_calc_aspects
-    # assert belief_plan_partyunit_str() in rope_belief_calc_aspects
-    # assert len(rope_belief_calc_aspects) == 6
+    # belief_voiceunit_attributes = belief_calc_config.get("belief_voiceunit")
+    # blrpern_jmetrics_dict = belief_voiceunit_attributes.get("jmetrics")
+    # rope_belief_calc_attributes = blrpern_jmetrics_dict.get("fund_give")
+    # assert belief_plan_factunit_str() in rope_belief_calc_attributes
+    # assert belief_plan_partyunit_str() in rope_belief_calc_attributes
+    # assert len(rope_belief_calc_attributes) == 6
     assert len(all_belief_calc_args) == 77
 
 
@@ -360,10 +361,10 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
 
     # THEN
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for level1_key, aspect_dict in belief_calc_config.items():
-        for level2_key, fm_aspect_dict in aspect_dict.items():
+    for level1_key, attribute_dict in belief_calc_config.items():
+        for level2_key, fm_attribute_dict in attribute_dict.items():
             if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
-                for level3_key, attr_dict in fm_aspect_dict.items():
+                for level3_key, attr_dict in fm_attribute_dict.items():
                     print(
                         f"{level1_key=} {level2_key=} {level3_key=} {set(attr_dict.keys())=}"
                     )
@@ -488,11 +489,11 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH / WHEN / THEN
     cfig = get_belief_calc_config_dict()
-    # for level1_key, aspect_dict in config.items():
-    #     for level2_key, fm_aspect_dict in aspect_dict.items():
+    # for level1_key, attribute_dict in config.items():
+    #     for level2_key, fm_attribute_dict in attribute_dict.items():
     #         if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
-    #             for level3_key, attr_dict in fm_aspect_dict.items():
-    #                 dimem = aspect_dict.get("abbreviation")
+    #             for level3_key, attr_dict in fm_attribute_dict.items():
+    #                 dimem = attribute_dict.get("abbreviation")
     #                 x_class_type = attr_dict.get(class_type_str())
     #                 x_sqlite_datatype = attr_dict.get(sqlite_datatype_str())
     #                 print(

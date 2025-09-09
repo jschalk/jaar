@@ -99,7 +99,7 @@ def get_sue_beliefunit() -> BeliefUnit:
     sue_belief.edit_plan_attr(root_rope, awardunit=casa_team_awardunit)
     sue_belief.edit_plan_attr(casa_rope, awardunit=casa_devloper_awardunit)
     sue_belief.edit_plan_attr(casa_rope, awardunit=casa_jundevloper_awardunit)
-    sue_belief.cash_out()
+    sue_belief.cashout()
     return sue_belief
 
 
@@ -138,7 +138,7 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     set_case_attr(sue_belief, play_swim_rope, best_rope, best_swim_rope)
     set_case_attr(sue_belief, play_swim_rope, tidi_rope, tidy_rope)
     set_case_attr(sue_belief, play_run_rope, best_rope, best_run_rope)
-    sue_belief.cash_out()
+    sue_belief.cashout()
     return sue_belief
 
 
@@ -152,7 +152,7 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
     # Step 2: if chicken.active is False, egg.active is set to True
     # Step 3: if egg.active is True, chicken.active is set to True
     # Step 4: back to step 0.
-    # after hatter_belief.cash_out these should be true:
+    # after hatter_belief.cashout these should be true:
     # 1. hatter_belief._irrational is True
     # 2. hatter_belief.tree_traverse_count = hatter_belief.max_tree_traverse
 

@@ -94,7 +94,7 @@ def test_get_belief_voice_agenda_award_csv_ReturnsObj_ScenarioMultipleVoiceUnit(
     assert belief_voice_agenda_award_csv_str == example_csv_str
 
 
-def test_get_belief_voice_agenda_award_csv_ReturnsObj_cash_out_True():
+def test_get_belief_voice_agenda_award_csv_ReturnsObj_cashout_True():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
@@ -115,7 +115,7 @@ def test_get_belief_voice_agenda_award_csv_ReturnsObj_cash_out_True():
 
     # WHEN
     belief_voice_agenda_award_csv_str = get_belief_voice_agenda_award_csv(
-        sue_belief, cash_out=True
+        sue_belief, cashout=True
     )
 
     # THEN
@@ -166,7 +166,7 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario0_MultipleVoiceUnit():
     assert example_bud_net_dict == belief_bud_net_dict
 
 
-def test_get_voice_mandate_ledger_ReturnsObj_Scenario1_cash_out_True():
+def test_get_voice_mandate_ledger_ReturnsObj_Scenario1_cashout_True():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
@@ -187,7 +187,7 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario1_cash_out_True():
     assert get_voice_mandate_ledger(sue_belief) == pre_settle_voice_mandate_ledger
 
     # WHEN
-    sue_belief_settle_net_dict = get_voice_mandate_ledger(sue_belief, cash_out=True)
+    sue_belief_settle_net_dict = get_voice_mandate_ledger(sue_belief, cashout=True)
 
     # THEN
     assert sue_belief_settle_net_dict != pre_settle_voice_mandate_ledger
@@ -243,7 +243,7 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario4_MandateSumEqual_fund_pool
     assert get_voice_mandate_ledger(sue_belief) == pre_settle_voice_mandate_ledger
 
     # WHEN
-    sue_belief_settle_net_dict = get_voice_mandate_ledger(sue_belief, cash_out=True)
+    sue_belief_settle_net_dict = get_voice_mandate_ledger(sue_belief, cashout=True)
 
     # THEN
     assert sue_belief_settle_net_dict != pre_settle_voice_mandate_ledger
@@ -289,7 +289,7 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     sue_belief.add_voiceunit(yao_str, 13, 5)
 
     # WHEN
-    sue_belief_settle_net_dict = get_voice_mandate_ledger(sue_belief, cash_out=True)
+    sue_belief_settle_net_dict = get_voice_mandate_ledger(sue_belief, cashout=True)
 
     # THEN
     assert sue_belief_settle_net_dict == {yao_str: sue_fund_pool}
@@ -327,7 +327,7 @@ def test_get_voice_agenda_net_ledger_ReturnsObj_ScenarioMultipleVoiceUnit():
     assert example_bud_net_dict == belief_bud_net_dict
 
 
-def test_get_voice_agenda_net_ledger_ReturnsObj_cash_out_True():
+def test_get_voice_agenda_net_ledger_ReturnsObj_cashout_True():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     yao_str = "Yao"
@@ -341,7 +341,7 @@ def test_get_voice_agenda_net_ledger_ReturnsObj_cash_out_True():
     assert get_voice_agenda_net_ledger(sue_belief) == {}
 
     # WHEN
-    sue_belief_settle_net_dict = get_voice_agenda_net_ledger(sue_belief, cash_out=True)
+    sue_belief_settle_net_dict = get_voice_agenda_net_ledger(sue_belief, cashout=True)
 
     # THEN
     print(f"{sue_belief_settle_net_dict=}")

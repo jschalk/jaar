@@ -115,7 +115,7 @@ def get_beliefunit_view():
     # return jsonify(root.to_dict())
     sue_belief = get_sue_belief_with_facts_and_reasons()
     add_newtimeline_planunit(sue_belief, get_default_timeline_config_dict())
-    sue_belief.cash_out()
+    sue_belief.cashout()
     belief_view_dict = get_belief_view_dict(sue_belief)
     return jsonify(belief_view_dict)
 

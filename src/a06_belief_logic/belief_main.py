@@ -133,7 +133,7 @@ class BeliefUnit:
     knot: str = None
     max_tree_traverse: int = None
     last_pack_id: int = None
-    # cash_out Calculated field begin
+    # cashout Calculated field begin
     _plan_dict: dict[RopeTerm, PlanUnit] = None
     _keep_dict: dict[RopeTerm, PlanUnit] = None
     _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
@@ -147,7 +147,7 @@ class BeliefUnit:
     offtrack_fund: float = None
     reason_contexts: set[RopeTerm] = None
     _range_inheritors: dict[RopeTerm, RopeTerm] = None
-    # cash_out Calculated field end
+    # cashout Calculated field end
 
     def del_last_pack_id(self):
         self.last_pack_id = None
@@ -197,7 +197,7 @@ class BeliefUnit:
         return self.make_rope(self.moment_label, l1_label)
 
     def set_knot(self, new_knot: str):
-        self.cash_out()
+        self.cashout()
         if self.knot != new_knot:
             for x_plan_rope in self._plan_dict.keys():
                 if is_string_in_rope(new_knot, x_plan_rope):
@@ -211,14 +211,14 @@ class BeliefUnit:
 
     def set_moment_label(self, moment_label: str):
         old_moment_label = copy_deepcopy(self.moment_label)
-        self.cash_out()
+        self.cashout()
         for plan_obj in self._plan_dict.values():
             plan_obj.moment_label = moment_label
         self.moment_label = moment_label
         self.edit_plan_label(
             old_rope=to_rope(old_moment_label), new_plan_label=self.moment_label
         )
-        self.cash_out()
+        self.cashout()
 
     def set_max_tree_traverse(self, x_int: int):
         if x_int < 2 or not float(x_int).is_integer():
@@ -500,7 +500,7 @@ class BeliefUnit:
         self.planroot.del_factunit(fact_context)
 
     def get_plan_dict(self, problem: bool = None) -> dict[RopeTerm, PlanUnit]:
-        self.cash_out()
+        self.cashout()
         if not problem:
             return self._plan_dict
         if self.keeps_justified is False:
@@ -513,7 +513,7 @@ class BeliefUnit:
         }
 
     def get_tree_metrics(self) -> TreeMetrics:
-        self.cash_out()
+        self.cashout()
         tree_metrics = treemetrics_shop()
         tree_metrics.evaluate_label(
             tree_level=self.planroot.tree_level,
@@ -715,7 +715,7 @@ class BeliefUnit:
                 self._shift_plan_kids(x_rope=rope)
             parent_plan = self.get_plan_obj(parent_rope)
             parent_plan.del_kid(get_tail_label(rope, self.knot))
-        self.cash_out()
+        self.cashout()
 
     def _shift_plan_kids(self, x_rope: RopeTerm):
         parent_rope = get_parent_rope(x_rope)
@@ -885,7 +885,7 @@ reason_case:    {reason_case}"""
     def get_agenda_dict(
         self, necessary_reason_context: RopeTerm = None
     ) -> dict[RopeTerm, PlanUnit]:
-        self.cash_out()
+        self.cashout()
         return {
             x_plan.get_plan_rope(): x_plan
             for x_plan in self._plan_dict.values()
@@ -893,7 +893,7 @@ reason_case:    {reason_case}"""
         }
 
     def get_all_tasks(self) -> dict[RopeTerm, PlanUnit]:
-        self.cash_out()
+        self.cashout()
         all_plans = self._plan_dict.values()
         return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.task}
 
@@ -1247,7 +1247,7 @@ reason_case:    {reason_case}"""
                 x_plan.inherit_awardheirs(parent_plan.awardheirs)
             x_plan.set_awardheirs_fund_give_fund_take()
 
-    def cash_out(self, keep_exceptions: bool = False):
+    def cashout(self, keep_exceptions: bool = False):
         self._clear_plan_dict_and_belief_obj_settle_attrs()
         self._set_plan_dict()
         self._set_plantree_range_attrs()
