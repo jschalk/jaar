@@ -9,6 +9,10 @@ def atom_hx_str() -> str:
     return "atom_hx"
 
 
+def atom_str() -> str:
+    return "atom"
+
+
 def column_order_str() -> str:
     return "column_order"
 

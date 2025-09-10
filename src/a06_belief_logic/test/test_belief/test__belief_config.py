@@ -145,12 +145,6 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel0Keys():
     assert belief_plan_factunit_str() in belief_calc_config_keys
     assert belief_groupunit_str() in belief_calc_config_keys
     assert len(get_belief_calc_config_dict()) == 11
-    # atom_config_dict = get_atom_config_dict()
-    # atom_config_dimens = set(atom_config_dict.keys())
-    # assert atom_config_dimens.issubset(belief_calc_config_keys)
-    # assert belief_calc_config_keys.difference(atom_config_dimens) == {
-    #     belief_groupunit_str()
-    # }
 
 
 def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel1Keys():

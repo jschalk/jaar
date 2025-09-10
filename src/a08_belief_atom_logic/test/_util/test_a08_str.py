@@ -1,6 +1,7 @@
 from src.a08_belief_atom_logic.test._util.a08_str import (
     DELETE_str,
     atom_hx_str,
+    atom_str,
     column_order_str,
     crud_str,
     nesting_order_str,
@@ -11,6 +12,7 @@ from src.a08_belief_atom_logic.test._util.a08_str import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert atom_str() == "atom"
     assert atom_hx_str() == "atom_hx"
     assert DELETE_str() == "DELETE"
     assert column_order_str() == "column_order"

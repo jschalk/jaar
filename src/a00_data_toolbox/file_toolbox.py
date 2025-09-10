@@ -348,7 +348,7 @@ def get_max_file_number(x_dir: str) -> int:
         return None
     files_dict = get_dir_file_strs(x_dir, True, include_files=True)
     filenames = files_dict.keys()
-    file_numbers = {int(atom_filename) for atom_filename in filenames}
+    file_numbers = {int(number_filename) for number_filename in filenames}
     return max(file_numbers, default=None)
 
 
