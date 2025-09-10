@@ -70,7 +70,6 @@ from src.a10_belief_calc.test._util.a10_str import (
     inallocable_voice_debt_points_str,
     irrational_voice_debt_points_str,
     jkeys_str,
-    jmetrics_str,
     jvalues_str,
     keeps_buildable_str,
     keeps_justified_str,
@@ -161,145 +160,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel1Keys():
         assert "abbreviation" in attribute_keys
         assert jkeys_str() in attribute_keys
         assert jvalues_str() in attribute_keys
-        assert jmetrics_str() in attribute_keys
-        assert len(attribute_keys) == 4
-
-
-def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel2_And_Level3_Keys():
-    # ESTABLISH / WHEN
-    belief_calc_config = get_belief_calc_config_dict()
-
-    # THEN
-    atom_config = get_atom_config_dict()
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for level1_key, attribute_dict in belief_calc_config.items():
-        if level1_key in atom_config.keys():
-            atom_dimen = atom_config.get(level1_key)
-            for level2_key, fm_attribute_dict in attribute_dict.items():
-                if level2_key == jkeys_str():
-                    atom_args = atom_dimen.get(jkeys_str())
-                    dimen_keys = set(atom_args)
-                    dimen_keys.add(moment_label_str())
-                    dimen_keys.add(belief_name_str())
-                    fm_attribute_keys = set(fm_attribute_dict.keys())
-                    print(
-                        f"{level1_key=} {level2_key=} {fm_attribute_keys=} {dimen_keys=}"
-                    )
-                    assert fm_attribute_keys == dimen_keys
-                elif level2_key == jvalues_str():
-                    atom_args = atom_dimen.get(jvalues_str())
-                    dimen_keys = set(atom_args)
-                    fm_attribute_keys = set(fm_attribute_dict.keys())
-                    assert fm_attribute_keys == dimen_keys
-
-    blrunit_attribute = belief_calc_config.get(beliefunit_str())
-    blrpern_attribute = belief_calc_config.get(belief_voiceunit_str())
-    blrmemb_attribute = belief_calc_config.get(belief_voice_membership_str())
-    blrplan_attribute = belief_calc_config.get(belief_planunit_str())
-    blrawar_attribute = belief_calc_config.get(belief_plan_awardunit_str())
-    blrreas_attribute = belief_calc_config.get(belief_plan_reasonunit_str())
-    blrprem_attribute = belief_calc_config.get(belief_plan_reason_caseunit_str())
-    blrlabo_attribute = belief_calc_config.get(belief_plan_partyunit_str())
-    blrheal_attribute = belief_calc_config.get(belief_plan_healerunit_str())
-    blrfact_attribute = belief_calc_config.get(belief_plan_factunit_str())
-    blrgrou_attribute = belief_calc_config.get(belief_groupunit_str())
-
-    blrunit_jmetrics_keys = set(blrunit_attribute.get(jmetrics_str()))
-    blrpern_jmetrics_keys = set(blrpern_attribute.get(jmetrics_str()))
-    blrmemb_jmetrics_keys = set(blrmemb_attribute.get(jmetrics_str()))
-    blrplan_jmetrics_keys = set(blrplan_attribute.get(jmetrics_str()))
-    blrawar_jmetrics_keys = set(blrawar_attribute.get(jmetrics_str()))
-    blrreas_jmetrics_keys = set(blrreas_attribute.get(jmetrics_str()))
-    blrprem_jmetrics_keys = set(blrprem_attribute.get(jmetrics_str()))
-    blrlabo_jmetrics_keys = set(blrlabo_attribute.get(jmetrics_str()))
-    blrheal_jmetrics_keys = set(blrheal_attribute.get(jmetrics_str()))
-    blrfact_jmetrics_keys = set(blrfact_attribute.get(jmetrics_str()))
-    blrgrou_jmetrics_keys = set(blrgrou_attribute.get(jmetrics_str()))
-
-    expected_blrunit_jmetrics_keys = {
-        "tree_traverse_count",
-        "rational",
-        "keeps_justified",
-        "keeps_buildable",
-        "sum_healerunit_share",
-        "offtrack_fund",
-    }
-    assert expected_blrunit_jmetrics_keys == blrunit_jmetrics_keys
-    expected_blrpern_jmetrics_keys = {
-        "credor_pool",
-        "debtor_pool",
-        "irrational_voice_debt_points",
-        "inallocable_voice_debt_points",
-        "fund_give",
-        "fund_take",
-        "fund_agenda_give",
-        "fund_agenda_take",
-        "fund_agenda_ratio_give",
-        "fund_agenda_ratio_take",
-    }
-    assert expected_blrpern_jmetrics_keys == blrpern_jmetrics_keys
-    expected_blrmemb_jmetrics_keys = {
-        "credor_pool",
-        "debtor_pool",
-        "fund_give",
-        "fund_take",
-        "fund_agenda_give",
-        "fund_agenda_take",
-        "fund_agenda_ratio_give",
-        "fund_agenda_ratio_take",
-    }
-    assert expected_blrmemb_jmetrics_keys == blrmemb_jmetrics_keys
-    expected_blrplan_jmetrics_keys = {
-        "active",
-        "all_voice_cred",
-        "all_voice_debt",
-        "descendant_task_count",
-        "fund_ratio",
-        "fund_iota",
-        "fund_onset",
-        "fund_cease",
-        "healerunit_ratio",
-        "tree_level",
-        "range_evaluated",
-        "chore",
-        "gogo_calc",
-        "stop_calc",
-    }
-    assert expected_blrplan_jmetrics_keys == blrplan_jmetrics_keys
-    expected_blrawar_jmetrics_keys = {"fund_give", "fund_take"}
-    assert expected_blrawar_jmetrics_keys == blrawar_jmetrics_keys
-    expected_blrreas_jmetrics_keys = {
-        "status",
-        "chore",
-        "_reason_active_heir",
-    }
-    assert expected_blrreas_jmetrics_keys == blrreas_jmetrics_keys
-    expected_blrprem_jmetrics_keys = {"status", "chore"}
-    assert expected_blrprem_jmetrics_keys == blrprem_jmetrics_keys
-    expected_blrlabo_jmetrics_keys = {"_belief_name_is_labor"}
-    assert expected_blrlabo_jmetrics_keys == blrlabo_jmetrics_keys
-    expected_blrgrou_jmetrics_keys = {
-        "fund_give",
-        "fund_take",
-        "fund_agenda_give",
-        "fund_agenda_take",
-        "credor_pool",
-        "debtor_pool",
-        "fund_iota",
-    }
-    assert expected_blrgrou_jmetrics_keys == blrgrou_jmetrics_keys
-
-    assert blrunit_jmetrics_keys  # Non-empty
-    assert blrpern_jmetrics_keys  # Non-empty
-    assert blrmemb_jmetrics_keys  # Non-empty
-    assert blrplan_jmetrics_keys  # Non-empty
-    assert blrawar_jmetrics_keys  # Non-empty
-    assert blrreas_jmetrics_keys  # Non-empty
-    assert blrprem_jmetrics_keys  # Non-empty
-    assert blrlabo_jmetrics_keys  # Non-empty
-    assert not blrheal_jmetrics_keys  # empty
-    assert not blrfact_jmetrics_keys  # empty
-    assert blrgrou_jmetrics_keys  # Non-empty
+        assert len(attribute_keys) == 3
 
 
 def test_get_belief_calc_config_dict_ReturnsObj_Check_populate_by_cashout():
@@ -367,13 +228,6 @@ def test_get_all_belief_calc_args_ReturnsObj():
         "belief_voiceunit",
     }
 
-    # belief_calc_config = get_belief_calc_config_dict()
-    # belief_voiceunit_attributes = belief_calc_config.get("belief_voiceunit")
-    # blrpern_jmetrics_dict = belief_voiceunit_attributes.get("jmetrics")
-    # rope_belief_calc_attributes = blrpern_jmetrics_dict.get("fund_give")
-    # assert belief_plan_factunit_str() in rope_belief_calc_attributes
-    # assert belief_plan_partyunit_str() in rope_belief_calc_attributes
-    # assert len(rope_belief_calc_attributes) == 6
     assert len(all_belief_calc_args) == 77
 
 
@@ -385,7 +239,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     for level1_key, attribute_dict in belief_calc_config.items():
         for level2_key, fm_attribute_dict in attribute_dict.items():
-            if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
+            if level2_key in {jkeys_str(), jvalues_str()}:
                 for level3_key, attr_dict in fm_attribute_dict.items():
                     print(
                         f"{level1_key=} {level2_key=} {level3_key=} {set(attr_dict.keys())=}"
@@ -525,7 +379,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     # THEN
     # for level1_key, attribute_dict in config.items():
     #     for level2_key, fm_attribute_dict in attribute_dict.items():
-    #         if level2_key in {jkeys_str(), jvalues_str(), jmetrics_str()}:
+    #         if level2_key in {jkeys_str(), jvalues_str()}:
     #             for level3_key, attr_dict in fm_attribute_dict.items():
     #                 dimem = attribute_dict.get("abbreviation")
     #                 x_class_type = attr_dict.get(class_type_str())
@@ -539,7 +393,6 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     jk = "jkeys"
     jv = "jvalues"
-    jm = "jmetrics"
     blfunit = beliefunit_str()
     blrpern = belief_voiceunit_str()
     blrmemb = belief_voice_membership_str()
@@ -559,37 +412,37 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrmemb, jk, group_title_str()) == "TEXT"
     assert g_popcashout(cfig, blrmemb, jk, group_title_str()) == False
 
-    assert g_class_type(cfig, blrmemb, jm, credor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, credor_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, credor_pool_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, credor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, credor_pool_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, credor_pool_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, debtor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, debtor_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, debtor_pool_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, debtor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, debtor_pool_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, debtor_pool_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, fund_agenda_give_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, fund_agenda_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, fund_agenda_give_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, fund_agenda_ratio_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_ratio_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, fund_agenda_ratio_give_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, fund_agenda_ratio_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, fund_agenda_ratio_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, fund_agenda_ratio_give_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, fund_agenda_ratio_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_ratio_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, fund_agenda_ratio_take_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, fund_agenda_ratio_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, fund_agenda_ratio_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, fund_agenda_ratio_take_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, fund_agenda_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, fund_agenda_take_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, fund_agenda_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, fund_agenda_take_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, fund_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, fund_give_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, fund_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, fund_give_str()) == True
 
-    assert g_class_type(cfig, blrmemb, jm, fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrmemb, jm, fund_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrmemb, jm, fund_take_str()) == True
+    assert g_class_type(cfig, blrmemb, jv, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrmemb, jv, fund_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrmemb, jv, fund_take_str()) == True
 
     assert g_class_type(cfig, blrmemb, jv, group_cred_points_str()) == "float"
     assert g_sqlitetype(cfig, blrmemb, jv, group_cred_points_str()) == "REAL"
@@ -603,51 +456,51 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrpern, jk, voice_name_str()) == "TEXT"
     assert g_popcashout(cfig, blrpern, jk, voice_name_str()) == False
 
-    assert g_class_type(cfig, blrpern, jm, credor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, credor_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, credor_pool_str()) == True
+    assert g_class_type(cfig, blrpern, jv, credor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, credor_pool_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, credor_pool_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, debtor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, debtor_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, debtor_pool_str()) == True
+    assert g_class_type(cfig, blrpern, jv, debtor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, debtor_pool_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, debtor_pool_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, fund_agenda_give_str()) == True
+    assert g_class_type(cfig, blrpern, jv, fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, fund_agenda_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, fund_agenda_give_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, fund_agenda_ratio_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_ratio_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, fund_agenda_ratio_give_str()) == True
+    assert g_class_type(cfig, blrpern, jv, fund_agenda_ratio_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, fund_agenda_ratio_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, fund_agenda_ratio_give_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, fund_agenda_ratio_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_ratio_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, fund_agenda_ratio_take_str()) == True
+    assert g_class_type(cfig, blrpern, jv, fund_agenda_ratio_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, fund_agenda_ratio_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, fund_agenda_ratio_take_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, fund_agenda_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, fund_agenda_take_str()) == True
+    assert g_class_type(cfig, blrpern, jv, fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, fund_agenda_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, fund_agenda_take_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, fund_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, fund_give_str()) == True
+    assert g_class_type(cfig, blrpern, jv, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, fund_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, fund_give_str()) == True
 
-    assert g_class_type(cfig, blrpern, jm, fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrpern, jm, fund_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, fund_take_str()) == True
-
-    assert (
-        g_class_type(cfig, blrpern, jm, inallocable_voice_debt_points_str()) == "float"
-    )
-    assert (
-        g_sqlitetype(cfig, blrpern, jm, inallocable_voice_debt_points_str()) == "REAL"
-    )
-    assert g_popcashout(cfig, blrpern, jm, inallocable_voice_debt_points_str()) == True
+    assert g_class_type(cfig, blrpern, jv, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrpern, jv, fund_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, fund_take_str()) == True
 
     assert (
-        g_class_type(cfig, blrpern, jm, irrational_voice_debt_points_str()) == "float"
+        g_class_type(cfig, blrpern, jv, inallocable_voice_debt_points_str()) == "float"
     )
-    assert g_sqlitetype(cfig, blrpern, jm, irrational_voice_debt_points_str()) == "REAL"
-    assert g_popcashout(cfig, blrpern, jm, irrational_voice_debt_points_str()) == True
+    assert (
+        g_sqlitetype(cfig, blrpern, jv, inallocable_voice_debt_points_str()) == "REAL"
+    )
+    assert g_popcashout(cfig, blrpern, jv, inallocable_voice_debt_points_str()) == True
+
+    assert (
+        g_class_type(cfig, blrpern, jv, irrational_voice_debt_points_str()) == "float"
+    )
+    assert g_sqlitetype(cfig, blrpern, jv, irrational_voice_debt_points_str()) == "REAL"
+    assert g_popcashout(cfig, blrpern, jv, irrational_voice_debt_points_str()) == True
 
     assert g_class_type(cfig, blrpern, jv, voice_cred_points_str()) == "float"
     assert g_sqlitetype(cfig, blrpern, jv, voice_cred_points_str()) == "REAL"
@@ -665,33 +518,33 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrgrou, jv, knot_str()) == "TEXT"
     assert g_popcashout(cfig, blrgrou, jv, knot_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, debtor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, debtor_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, debtor_pool_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, debtor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, debtor_pool_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, debtor_pool_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, credor_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, credor_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, credor_pool_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, credor_pool_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, credor_pool_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, credor_pool_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, fund_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, fund_give_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, fund_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, fund_give_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, fund_agenda_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, fund_agenda_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, fund_agenda_give_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, fund_agenda_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, fund_agenda_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, fund_agenda_give_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, fund_agenda_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, fund_agenda_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, fund_agenda_take_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, fund_agenda_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, fund_agenda_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, fund_agenda_take_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, fund_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, fund_take_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, fund_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, fund_take_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jm, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jm, fund_iota_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jm, fund_iota_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, fund_iota_str()) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, fund_iota_str()) == True
 
     assert g_class_type(cfig, blrawar, jk, awardee_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, blrawar, jk, awardee_title_str()) == "TEXT"
@@ -701,13 +554,13 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrawar, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrawar, jk, plan_rope_str()) == False
 
-    assert g_class_type(cfig, blrawar, jm, fund_give_str()) == "float"
-    assert g_sqlitetype(cfig, blrawar, jm, fund_give_str()) == "REAL"
-    assert g_popcashout(cfig, blrawar, jm, fund_give_str()) == True
+    assert g_class_type(cfig, blrawar, jv, fund_give_str()) == "float"
+    assert g_sqlitetype(cfig, blrawar, jv, fund_give_str()) == "REAL"
+    assert g_popcashout(cfig, blrawar, jv, fund_give_str()) == True
 
-    assert g_class_type(cfig, blrawar, jm, fund_take_str()) == "float"
-    assert g_sqlitetype(cfig, blrawar, jm, fund_take_str()) == "REAL"
-    assert g_popcashout(cfig, blrawar, jm, fund_take_str()) == True
+    assert g_class_type(cfig, blrawar, jv, fund_take_str()) == "float"
+    assert g_sqlitetype(cfig, blrawar, jv, fund_take_str()) == "REAL"
+    assert g_popcashout(cfig, blrawar, jv, fund_take_str()) == True
 
     assert g_class_type(cfig, blrawar, jv, give_force_str()) == "float"
     assert g_sqlitetype(cfig, blrawar, jv, give_force_str()) == "REAL"
@@ -757,13 +610,13 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrprem, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrprem, jk, plan_rope_str()) == False
 
-    assert g_class_type(cfig, blrprem, jm, status_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jm, status_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jm, status_str()) == True
+    assert g_class_type(cfig, blrprem, jv, status_str()) == "int"
+    assert g_sqlitetype(cfig, blrprem, jv, status_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrprem, jv, status_str()) == True
 
-    assert g_class_type(cfig, blrprem, jm, chore_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jm, chore_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jm, chore_str()) == True
+    assert g_class_type(cfig, blrprem, jv, chore_str()) == "int"
+    assert g_sqlitetype(cfig, blrprem, jv, chore_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrprem, jv, chore_str()) == True
 
     assert g_class_type(cfig, blrprem, jv, reason_divisor_str()) == "int"
     assert g_sqlitetype(cfig, blrprem, jv, reason_divisor_str()) == "INTEGER"
@@ -785,17 +638,17 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrreas, jk, plan_rope_str()) == False
 
-    assert g_class_type(cfig, blrreas, jm, "_reason_active_heir") == "int"
-    assert g_sqlitetype(cfig, blrreas, jm, "_reason_active_heir") == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jm, "_reason_active_heir") == True
+    assert g_class_type(cfig, blrreas, jv, "_reason_active_heir") == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, "_reason_active_heir") == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, "_reason_active_heir") == True
 
-    assert g_class_type(cfig, blrreas, jm, status_str()) == "int"
-    assert g_sqlitetype(cfig, blrreas, jm, status_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jm, status_str()) == True
+    assert g_class_type(cfig, blrreas, jv, status_str()) == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, status_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, status_str()) == True
 
-    assert g_class_type(cfig, blrreas, jm, chore_str()) == "int"
-    assert g_sqlitetype(cfig, blrreas, jm, chore_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jm, chore_str()) == True
+    assert g_class_type(cfig, blrreas, jv, chore_str()) == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, chore_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, chore_str()) == True
 
     assert g_class_type(cfig, blrreas, jv, reason_active_requisite_str()) == "bool"
     assert g_sqlitetype(cfig, blrreas, jv, reason_active_requisite_str()) == "INTEGER"
@@ -809,65 +662,65 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrlabo, jk, party_title_str()) == "TEXT"
     assert g_popcashout(cfig, blrlabo, jk, party_title_str()) == False
 
-    assert g_class_type(cfig, blrlabo, jm, "_belief_name_is_labor") == "int"
-    assert g_sqlitetype(cfig, blrlabo, jm, "_belief_name_is_labor") == "INTEGER"
-    assert g_popcashout(cfig, blrlabo, jm, "_belief_name_is_labor") == True
+    assert g_class_type(cfig, blrlabo, jv, "_belief_name_is_labor") == "int"
+    assert g_sqlitetype(cfig, blrlabo, jv, "_belief_name_is_labor") == "INTEGER"
+    assert g_popcashout(cfig, blrlabo, jv, "_belief_name_is_labor") == True
 
-    assert g_class_type(cfig, blrplan, jm, "active") == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, "active") == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, "active") == True
+    assert g_class_type(cfig, blrplan, jv, "active") == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, "active") == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, "active") == True
 
-    assert g_class_type(cfig, blrplan, jm, all_voice_cred_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, all_voice_cred_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, all_voice_cred_str()) == True
+    assert g_class_type(cfig, blrplan, jv, all_voice_cred_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, all_voice_cred_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, all_voice_cred_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, all_voice_debt_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, all_voice_debt_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, all_voice_debt_str()) == True
+    assert g_class_type(cfig, blrplan, jv, all_voice_debt_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, all_voice_debt_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, all_voice_debt_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, descendant_task_count_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, descendant_task_count_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, descendant_task_count_str()) == True
+    assert g_class_type(cfig, blrplan, jv, descendant_task_count_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, descendant_task_count_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, descendant_task_count_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, fund_cease_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, fund_cease_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, fund_cease_str()) == True
+    assert g_class_type(cfig, blrplan, jv, fund_cease_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, fund_cease_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, fund_cease_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, fund_iota_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, fund_iota_str()) == True
+    assert g_class_type(cfig, blrplan, jv, fund_iota_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, fund_iota_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, fund_iota_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, fund_onset_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, fund_onset_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, fund_onset_str()) == True
+    assert g_class_type(cfig, blrplan, jv, fund_onset_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, fund_onset_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, fund_onset_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, fund_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, fund_ratio_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, fund_ratio_str()) == True
+    assert g_class_type(cfig, blrplan, jv, fund_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, fund_ratio_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, fund_ratio_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, gogo_calc_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, gogo_calc_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, gogo_calc_str()) == True
+    assert g_class_type(cfig, blrplan, jv, gogo_calc_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, gogo_calc_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, gogo_calc_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, healerunit_ratio_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, healerunit_ratio_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, healerunit_ratio_str()) == True
+    assert g_class_type(cfig, blrplan, jv, healerunit_ratio_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, healerunit_ratio_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, healerunit_ratio_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, "tree_level") == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, "tree_level") == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, "tree_level") == True
+    assert g_class_type(cfig, blrplan, jv, tree_level_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, tree_level_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, tree_level_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, range_evaluated_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, range_evaluated_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, range_evaluated_str()) == True
+    assert g_class_type(cfig, blrplan, jv, range_evaluated_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, range_evaluated_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, range_evaluated_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, stop_calc_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jm, stop_calc_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jm, stop_calc_str()) == True
+    assert g_class_type(cfig, blrplan, jv, stop_calc_str()) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, stop_calc_str()) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, stop_calc_str()) == True
 
-    assert g_class_type(cfig, blrplan, jm, chore_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jm, chore_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jm, chore_str()) == True
+    assert g_class_type(cfig, blrplan, jv, chore_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, chore_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, chore_str()) == True
 
     assert g_class_type(cfig, blrplan, jv, addin_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, addin_str()) == "REAL"
@@ -913,29 +766,29 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, stop_want_str()) == "REAL"
     assert g_popcashout(cfig, blrplan, jv, stop_want_str()) == False
 
-    assert g_class_type(cfig, blfunit, jm, "keeps_buildable") == "int"
-    assert g_sqlitetype(cfig, blfunit, jm, "keeps_buildable") == "INTEGER"
-    assert g_popcashout(cfig, blfunit, jm, "keeps_buildable") == True
+    assert g_class_type(cfig, blfunit, jv, "keeps_buildable") == "int"
+    assert g_sqlitetype(cfig, blfunit, jv, "keeps_buildable") == "INTEGER"
+    assert g_popcashout(cfig, blfunit, jv, "keeps_buildable") == True
 
-    assert g_class_type(cfig, blfunit, jm, "keeps_justified") == "int"
-    assert g_sqlitetype(cfig, blfunit, jm, "keeps_justified") == "INTEGER"
-    assert g_popcashout(cfig, blfunit, jm, "keeps_justified") == True
+    assert g_class_type(cfig, blfunit, jv, "keeps_justified") == "int"
+    assert g_sqlitetype(cfig, blfunit, jv, "keeps_justified") == "INTEGER"
+    assert g_popcashout(cfig, blfunit, jv, "keeps_justified") == True
 
-    assert g_class_type(cfig, blfunit, jm, offtrack_fund_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jm, offtrack_fund_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jm, offtrack_fund_str()) == True
+    assert g_class_type(cfig, blfunit, jv, offtrack_fund_str()) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, offtrack_fund_str()) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, offtrack_fund_str()) == True
 
-    assert g_class_type(cfig, blfunit, jm, rational_str()) == "bool"
-    assert g_sqlitetype(cfig, blfunit, jm, rational_str()) == "INTEGER"
-    assert g_popcashout(cfig, blfunit, jm, rational_str()) == True
+    assert g_class_type(cfig, blfunit, jv, rational_str()) == "bool"
+    assert g_sqlitetype(cfig, blfunit, jv, rational_str()) == "INTEGER"
+    assert g_popcashout(cfig, blfunit, jv, rational_str()) == True
 
-    assert g_class_type(cfig, blfunit, jm, sum_healerunit_share_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jm, sum_healerunit_share_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jm, sum_healerunit_share_str()) == True
+    assert g_class_type(cfig, blfunit, jv, sum_healerunit_share_str()) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, sum_healerunit_share_str()) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, sum_healerunit_share_str()) == True
 
-    assert g_class_type(cfig, blfunit, jm, tree_traverse_count_str()) == "int"
-    assert g_sqlitetype(cfig, blfunit, jm, tree_traverse_count_str()) == "INTEGER"
-    assert g_popcashout(cfig, blfunit, jm, tree_traverse_count_str()) == True
+    assert g_class_type(cfig, blfunit, jv, tree_traverse_count_str()) == "int"
+    assert g_sqlitetype(cfig, blfunit, jv, tree_traverse_count_str()) == "INTEGER"
+    assert g_popcashout(cfig, blfunit, jv, tree_traverse_count_str()) == True
 
     assert g_class_type(cfig, blfunit, jv, credor_respect_str()) == "float"
     assert g_sqlitetype(cfig, blfunit, jv, credor_respect_str()) == "REAL"
@@ -977,7 +830,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_EachArgHasOneClassType():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
-            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+            if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
                     arg_type = arg_dict.get(class_type_str())
                     if all_args.get(x_arg) is None:
@@ -997,7 +850,7 @@ def test_get_belief_calc_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
-            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+            if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
                     arg_type = arg_dict.get(sqlite_datatype_str())
                     if all_args.get(x_arg) is None:
@@ -1027,7 +880,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
-            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+            if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
                     arg_type = arg_dict.get(class_type_str())
                     if all_args.get(x_arg) is None:

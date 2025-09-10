@@ -42,7 +42,6 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         job_cols = {moment_label_str(), belief_name_str()}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
-        job_cols.update(set(x_config.get("jmetrics").keys()))
         job_cols = get_default_sorted_list(job_cols)
         expected_create_sqlstr = get_create_table_sqlstr(job_table, job_cols, s_types)
         job_dimen_abbr = x_config.get("abbreviation").upper()

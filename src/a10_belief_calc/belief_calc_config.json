@@ -18,7 +18,7 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "credor_pool": {
                 "class_type": "float",
                 "populate_by_cashout": true,
@@ -53,9 +53,7 @@
                 "class_type": "float",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "REAL"
-            }
-        },
-        "jvalues": {
+            },
             "knot": {
                 "class_type": "str",
                 "populate_by_cashout": true,
@@ -87,7 +85,7 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "fund_give": {
                 "class_type": "float",
                 "populate_by_cashout": true,
@@ -97,9 +95,7 @@
                 "class_type": "float",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "REAL"
-            }
-        },
-        "jvalues": {
+            },
             "give_force": {
                 "class_type": "float",
                 "populate_by_cashout": false,
@@ -136,7 +132,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {},
         "jvalues": {
             "fact_lower": {
                 "class_type": "float",
@@ -179,7 +174,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {},
         "jvalues": {}
     },
     "belief_plan_partyunit": {
@@ -206,14 +200,12 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "_belief_name_is_labor": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
-            }
-        },
-        "jvalues": {
+            },
             "solo": {
                 "class_type": "int",
                 "populate_by_cashout": false,
@@ -250,19 +242,12 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "chore": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             },
-            "status": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            }
-        },
-        "jvalues": {
             "reason_divisor": {
                 "class_type": "int",
                 "populate_by_cashout": false,
@@ -277,6 +262,11 @@
                 "class_type": "float",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "REAL"
+            },
+            "status": {
+                "class_type": "int",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "INTEGER"
             }
         }
     },
@@ -304,7 +294,7 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "_reason_active_heir": {
                 "class_type": "int",
                 "populate_by_cashout": true,
@@ -315,16 +305,14 @@
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             },
-            "status": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            }
-        },
-        "jvalues": {
             "reason_active_requisite": {
                 "class_type": "bool",
                 "populate_by_cashout": false,
+                "sqlite_datatype": "INTEGER"
+            },
+            "status": {
+                "class_type": "int",
+                "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             }
         }
@@ -348,11 +336,16 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "active": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
+            },
+            "addin": {
+                "class_type": "float",
+                "populate_by_cashout": false,
+                "sqlite_datatype": "REAL"
             },
             "all_voice_cred": {
                 "class_type": "int",
@@ -364,9 +357,24 @@
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             },
+            "begin": {
+                "class_type": "float",
+                "populate_by_cashout": false,
+                "sqlite_datatype": "REAL"
+            },
             "chore": {
                 "class_type": "int",
                 "populate_by_cashout": true,
+                "sqlite_datatype": "INTEGER"
+            },
+            "close": {
+                "class_type": "float",
+                "populate_by_cashout": false,
+                "sqlite_datatype": "REAL"
+            },
+            "denom": {
+                "class_type": "int",
+                "populate_by_cashout": false,
                 "sqlite_datatype": "INTEGER"
             },
             "descendant_task_count": {
@@ -399,51 +407,14 @@
                 "populate_by_cashout": true,
                 "sqlite_datatype": "REAL"
             },
-            "healerunit_ratio": {
-                "class_type": "float",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "REAL"
-            },
-            "range_evaluated": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            },
-            "stop_calc": {
-                "class_type": "float",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "REAL"
-            },
-            "tree_level": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            }
-        },
-        "jvalues": {
-            "addin": {
-                "class_type": "float",
-                "populate_by_cashout": false,
-                "sqlite_datatype": "REAL"
-            },
-            "begin": {
-                "class_type": "float",
-                "populate_by_cashout": false,
-                "sqlite_datatype": "REAL"
-            },
-            "close": {
-                "class_type": "float",
-                "populate_by_cashout": false,
-                "sqlite_datatype": "REAL"
-            },
-            "denom": {
-                "class_type": "int",
-                "populate_by_cashout": false,
-                "sqlite_datatype": "INTEGER"
-            },
             "gogo_want": {
                 "class_type": "float",
                 "populate_by_cashout": false,
+                "sqlite_datatype": "REAL"
+            },
+            "healerunit_ratio": {
+                "class_type": "float",
+                "populate_by_cashout": true,
                 "sqlite_datatype": "REAL"
             },
             "morph": {
@@ -461,10 +432,20 @@
                 "populate_by_cashout": false,
                 "sqlite_datatype": "INTEGER"
             },
+            "range_evaluated": {
+                "class_type": "int",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "INTEGER"
+            },
             "star": {
                 "class_type": "int",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "INTEGER"
+            },
+            "stop_calc": {
+                "class_type": "float",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "REAL"
             },
             "stop_want": {
                 "class_type": "float",
@@ -474,6 +455,11 @@
             "task": {
                 "class_type": "bool",
                 "populate_by_cashout": false,
+                "sqlite_datatype": "INTEGER"
+            },
+            "tree_level": {
+                "class_type": "int",
+                "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             }
         }
@@ -502,7 +488,7 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "credor_pool": {
                 "class_type": "float",
                 "populate_by_cashout": true,
@@ -542,9 +528,7 @@
                 "class_type": "float",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "REAL"
-            }
-        },
-        "jvalues": {
+            },
             "group_cred_points": {
                 "class_type": "float",
                 "populate_by_cashout": false,
@@ -576,7 +560,7 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
+        "jvalues": {
             "credor_pool": {
                 "class_type": "float",
                 "populate_by_cashout": true,
@@ -626,9 +610,7 @@
                 "class_type": "float",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "REAL"
-            }
-        },
-        "jvalues": {
+            },
             "voice_cred_points": {
                 "class_type": "float",
                 "populate_by_cashout": false,
@@ -655,38 +637,6 @@
                 "sqlite_datatype": "TEXT"
             }
         },
-        "jmetrics": {
-            "keeps_buildable": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            },
-            "keeps_justified": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            },
-            "offtrack_fund": {
-                "class_type": "float",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "REAL"
-            },
-            "rational": {
-                "class_type": "bool",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            },
-            "sum_healerunit_share": {
-                "class_type": "float",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "REAL"
-            },
-            "tree_traverse_count": {
-                "class_type": "int",
-                "populate_by_cashout": true,
-                "sqlite_datatype": "INTEGER"
-            }
-        },
         "jvalues": {
             "credor_respect": {
                 "class_type": "float",
@@ -708,24 +658,54 @@
                 "populate_by_cashout": false,
                 "sqlite_datatype": "REAL"
             },
+            "keeps_buildable": {
+                "class_type": "int",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "INTEGER"
+            },
+            "keeps_justified": {
+                "class_type": "int",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "INTEGER"
+            },
             "max_tree_traverse": {
                 "class_type": "int",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "INTEGER"
+            },
+            "offtrack_fund": {
+                "class_type": "float",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "REAL"
             },
             "penny": {
                 "class_type": "float",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "REAL"
             },
+            "rational": {
+                "class_type": "bool",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "INTEGER"
+            },
             "respect_bit": {
                 "class_type": "float",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "REAL"
             },
+            "sum_healerunit_share": {
+                "class_type": "float",
+                "populate_by_cashout": true,
+                "sqlite_datatype": "REAL"
+            },
             "tally": {
                 "class_type": "int",
                 "populate_by_cashout": false,
+                "sqlite_datatype": "INTEGER"
+            },
+            "tree_traverse_count": {
+                "class_type": "int",
+                "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             }
         }

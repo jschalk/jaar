@@ -18,7 +18,6 @@ def get_belief_calc_dimen_args(dimen: str) -> set:
     dimen_dict = config_dict.get(dimen)
     all_args = set(dimen_dict.get("jkeys").keys())
     all_args = all_args.union(set(dimen_dict.get("jvalues").keys()))
-    all_args = all_args.union(set(dimen_dict.get("jmetrics").keys()))
     return all_args
 
 
@@ -27,7 +26,7 @@ def get_all_belief_calc_args() -> dict[str, set[str]]:
     all_args = {}
     for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
         for dimen_key, arg_dict in dimen_dict.items():
-            if dimen_key in {"jkeys", "jvalues", "jmetrics"}:
+            if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg in arg_dict.keys():
                     if all_args.get(x_arg) is None:
                         all_args[x_arg] = set()

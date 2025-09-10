@@ -11,7 +11,7 @@
 - a07_timeline_logic: c100, c400_clean, c400_leap, c400_number, creg, cumulative_day, day, days, five, hour, hours_config, monthday_distortion, months_config, readable, time, timeline_label, timeline, week, weekdays_config, weeks, year, yr1_jan1_offset, yr4_clean, yr4_leap
 - a08_belief_atom_logic: DELETE, atom_hx, class_type, column_order, crud, jvalues, nesting_order, normal_specs, normal_table_name
 - a09_pack_logic: event_int, face_name
-- a10_belief_calc: belief_groupunit, jmetrics
+- a10_belief_calc: belief_groupunit
 - a11_bud_logic: amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_voice_nets, bud_time, celldepth, found_facts, offi_time, quota, tran_time
 - a12_hub_toolbox: gut, job, moment_mstr_dir
 - a13_belief_listen_logic: 
