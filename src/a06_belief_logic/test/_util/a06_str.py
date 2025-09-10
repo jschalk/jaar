@@ -9,6 +9,11 @@ def attributes_str() -> str:
     return "attributes"
 
 
+def belief_groupunit_str() -> str:
+    """Is not saved to raw data beliefunit json"""
+    return "belief_groupunit"
+
+
 def belief_plan_awardunit_str() -> str:
     return "belief_plan_awardunit"
 
@@ -49,6 +54,10 @@ def beliefunit_str() -> str:
     return "beliefunit"
 
 
+def class_type_str() -> str:
+    return "class_type"
+
+
 def credor_respect_str() -> str:
     return "credor_respect"
 
@@ -67,6 +76,10 @@ def dimens_str() -> str:
 
 def jkeys_str() -> str:
     return "jkeys"
+
+
+def jvalues_str() -> str:
+    return "jvalues"
 
 
 def keeps_buildable_str() -> str:

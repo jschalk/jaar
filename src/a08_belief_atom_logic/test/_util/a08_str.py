@@ -9,20 +9,12 @@ def atom_hx_str() -> str:
     return "atom_hx"
 
 
-def class_type_str() -> str:
-    return "class_type"
-
-
 def column_order_str() -> str:
     return "column_order"
 
 
 def crud_str() -> str:
     return "crud"
-
-
-def jvalues_str() -> str:
-    return "jvalues"
 
 
 def nesting_order_str() -> str:

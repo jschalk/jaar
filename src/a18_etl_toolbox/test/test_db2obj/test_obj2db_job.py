@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import create_insert_query
-from src.a10_belief_calc.belief_calc_config import get_belief_calc_dimen_args
+from src.a06_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.a18_etl_toolbox.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
     create_blrawar_metrics_insert_sqlstr,

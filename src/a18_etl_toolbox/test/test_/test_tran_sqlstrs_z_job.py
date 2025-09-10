@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a10_belief_calc.belief_calc_config import get_belief_calc_config_dict
+from src.a06_belief_logic.belief_config import get_belief_calc_config_dict
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.test._util.a18_str import (
