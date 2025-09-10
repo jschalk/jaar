@@ -1,4 +1,4 @@
-from src.a10_belief_calc.test._util.a10_str import *
+from src.a09_pack_logic.test._util.a09_str import *
 
 
 def amount_str() -> str:
