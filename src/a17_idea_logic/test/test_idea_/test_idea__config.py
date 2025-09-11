@@ -1,16 +1,16 @@
 from copy import copy as copy_copy
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path, save_json
+from src.a06_belief_logic.belief_config import (
+    get_all_belief_calc_args,
+    get_belief_calc_args_sqlite_datatype_dict,
+)
 from src.a08_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_atom_args_dimen_mapping,
     get_atom_config_dict,
     get_belief_dimens,
     get_delete_key_name,
-)
-from src.a10_belief_calc.belief_calc_config import (
-    get_all_belief_calc_args,
-    get_belief_calc_args_sqlite_datatype_dict,
 )
 from src.a15_moment_logic.moment_config import (
     get_moment_args_dimen_mapping,

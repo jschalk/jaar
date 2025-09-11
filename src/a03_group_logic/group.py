@@ -181,7 +181,7 @@ def awardline_shop(awardee_title: GroupTitle, fund_give: float, fund_take: float
 class GroupUnit(GroupCore):
     memberships: dict[VoiceName, MemberShip] = None  # set by BeliefUnit.set_voiceunit()
     knot: str = None  # calculated by BeliefUnit
-    # calculated by BeliefUnit.cash_out()
+    # calculated by BeliefUnit.cashout()
     fund_give: float = None
     fund_take: float = None
     fund_agenda_give: float = None

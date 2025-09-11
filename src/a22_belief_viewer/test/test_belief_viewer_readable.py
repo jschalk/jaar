@@ -16,7 +16,7 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = beliefunit_shop(sue_str)
-    sue_believer.cash_out()
+    sue_believer.cashout()
 
     # WHEN
     sue_belief_view_dict = get_belief_view_dict(sue_believer)

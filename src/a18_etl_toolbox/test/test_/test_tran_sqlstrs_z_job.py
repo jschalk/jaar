@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import db_table_exists, get_create_table_sqlstr
-from src.a10_belief_calc.belief_calc_config import get_belief_calc_config_dict
+from src.a06_belief_logic.belief_config import get_belief_config_dict
 from src.a17_idea_logic.idea_config import get_idea_sqlite_types
 from src.a17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.a18_etl_toolbox.test._util.a18_str import (
@@ -33,16 +33,15 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
 
     # THEN
     s_types = get_idea_sqlite_types()
-    belief_calc_config = get_belief_calc_config_dict()
-    for x_dimen in belief_calc_config.keys():
+    belief_config = get_belief_config_dict()
+    for x_dimen in belief_config.keys():
         # print(f"{x_dimen} checking...")
-        x_config = belief_calc_config.get(x_dimen)
+        x_config = belief_config.get(x_dimen)
 
         job_table = prime_table(x_dimen, job_str(), None)
         job_cols = {moment_label_str(), belief_name_str()}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
-        job_cols.update(set(x_config.get("jmetrics").keys()))
         job_cols = get_default_sorted_list(job_cols)
         expected_create_sqlstr = get_create_table_sqlstr(job_table, job_cols, s_types)
         job_dimen_abbr = x_config.get("abbreviation").upper()

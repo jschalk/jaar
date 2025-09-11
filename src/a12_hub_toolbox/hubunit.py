@@ -361,7 +361,7 @@ class HubUnit:
         # get copy of belief without any metrics
         perspective_belief = beliefunit_get_from_json(speaker.get_json())
         perspective_belief.set_belief_name(self.belief_name)
-        perspective_belief.cash_out()
+        perspective_belief.cashout()
         return perspective_belief
 
     def get_dw_perspective_belief(self, speaker_id: BeliefName) -> BeliefUnit:
@@ -391,7 +391,7 @@ class HubUnit:
         x_gut_belief = open_gut_file(
             self.moment_mstr_dir, self.moment_label, self.belief_name
         )
-        x_gut_belief.cash_out()
+        x_gut_belief.cashout()
         if x_gut_belief.keeps_justified is False:
             x_str = f"Cannot get_keep_ropes from '{self.belief_name}' gut belief because 'BeliefUnit.keeps_justified' is False."
             raise get_keep_ropesException(x_str)

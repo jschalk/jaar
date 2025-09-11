@@ -41,7 +41,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
     # ESTABLISH
     sue_str = "Sue"
     sue_believer = beliefunit_shop(sue_str)
-    sue_believer.cash_out()
+    sue_believer.cashout()
 
     # WHEN
     groups_view_dict = get_groups_view_dict(sue_believer)
@@ -71,7 +71,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     bob_voice = sue_believer.get_voice(bob_str)
 #     yao_voice.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
 #     bob_voice.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
-#     sue_believer.cash_out()
+#     sue_believer.cashout()
 
 #     # WHEN
 #     groups_view_dict = get_groups_view_dict(sue_believer)
@@ -158,7 +158,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     yao_swim_debt_points = 313
 #     yao_voiceunit = sue_believer.get_voice(yao_str)
 #     yao_voiceunit.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-#     sue_believer.cash_out()
+#     sue_believer.cashout()
 
 #     # WHEN
 #     groups_view_dict = get_groups_view_dict(sue_believer)

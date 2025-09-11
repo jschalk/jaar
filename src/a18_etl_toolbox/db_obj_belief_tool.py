@@ -516,7 +516,7 @@ def insert_job_blrunit(
 
 
 def insert_job_obj(cursor: sqlite3_Cursor, job_belief: BeliefUnit):
-    job_belief.cash_out()
+    job_belief.cashout()
     x_objkeysholder = ObjKeysHolder(job_belief.moment_label, job_belief.belief_name)
     insert_job_blrunit(cursor, x_objkeysholder, job_belief)
     for x_plan in job_belief.get_plan_dict().values():

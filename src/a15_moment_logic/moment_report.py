@@ -17,7 +17,7 @@ def get_moment_guts_voices_dataframe(x_moment: MomentUnit) -> DataFrame:
         gut_belief = open_gut_file(
             x_moment.moment_mstr_dir, x_moment.moment_label, belief_name
         )
-        gut_belief.cash_out()
+        gut_belief.cashout()
         df = get_belief_voiceunits_dataframe(gut_belief)
         df.insert(0, "belief_name", gut_belief.belief_name)
         gut_dfs.append(df)
@@ -75,7 +75,7 @@ def get_moment_jobs_voices_dataframe(x_moment: MomentUnit) -> DataFrame:
         job = open_job_file(
             x_moment.moment_mstr_dir, x_moment.moment_label, belief_name
         )
-        job.cash_out()
+        job.cashout()
         job_df = get_belief_voiceunits_dataframe(job)
         job_df.insert(0, "belief_name", job.belief_name)
         job_dfs.append(job_df)
@@ -132,7 +132,7 @@ def get_moment_guts_agenda_dataframe(x_moment: MomentUnit) -> DataFrame:
         gut_belief = open_gut_file(
             x_moment.moment_mstr_dir, x_moment.moment_label, belief_name
         )
-        gut_belief.cash_out()
+        gut_belief.cashout()
         df = get_belief_agenda_dataframe(gut_belief)
         gut_dfs.append(df)
     return pandas_concat(gut_dfs, ignore_index=True)
@@ -191,7 +191,7 @@ def get_moment_jobs_agenda_dataframe(x_moment: MomentUnit) -> DataFrame:
         job = open_job_file(
             x_moment.moment_mstr_dir, x_moment.moment_label, x_belief_name
         )
-        job.cash_out()
+        job.cashout()
         job_df = get_belief_agenda_dataframe(job)
         job_dfs.append(job_df)
     return pandas_concat(job_dfs, ignore_index=True)

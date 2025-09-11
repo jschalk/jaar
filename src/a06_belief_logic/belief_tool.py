@@ -194,10 +194,10 @@ def belief_get_obj(x_dimen: str, x_belief: BeliefUnit, jkeys: dict[str, any]) ->
 
 
 def get_belief_voice_agenda_award_array(
-    x_belief: BeliefUnit, cash_out: bool = None
+    x_belief: BeliefUnit, cashout: bool = None
 ) -> list[list]:
-    if cash_out:
-        x_belief.cash_out()
+    if cashout:
+        x_belief.cashout()
 
     x_list = [
         [
@@ -212,23 +212,23 @@ def get_belief_voice_agenda_award_array(
 
 
 def get_belief_voice_agenda_award_csv(
-    x_belief: BeliefUnit, cash_out: bool = None
+    x_belief: BeliefUnit, cashout: bool = None
 ) -> str:
-    x_voice_agenda_award_array = get_belief_voice_agenda_award_array(x_belief, cash_out)
+    x_voice_agenda_award_array = get_belief_voice_agenda_award_array(x_belief, cashout)
     x_headers = ["voice_name", "fund_agenda_take", "fund_agenda_give"]
     return create_csv(x_headers, x_voice_agenda_award_array)
 
 
 def get_voice_mandate_ledger(
-    x_belief: BeliefUnit, cash_out: bool = None
+    x_belief: BeliefUnit, cashout: bool = None
 ) -> dict[VoiceName, FundNum]:
     if not x_belief:
         return {}
     if len(x_belief.voices) == 0:
         return {x_belief.belief_name: x_belief.fund_pool}
 
-    if cash_out:
-        x_belief.cash_out()
+    if cashout:
+        x_belief.cashout()
     belief_voices = x_belief.voices.values()
     mandates = {
         x_voice.voice_name: x_voice.fund_agenda_give for x_voice in belief_voices
@@ -253,10 +253,10 @@ def reset_mandates_to_minimum(
 
 
 def get_voice_agenda_net_ledger(
-    x_belief: BeliefUnit, cash_out: bool = None
+    x_belief: BeliefUnit, cashout: bool = None
 ) -> dict[VoiceName, FundNum]:
-    if cash_out:
-        x_belief.cash_out()
+    if cashout:
+        x_belief.cashout()
 
     x_dict = {}
     for x_voice in x_belief.voices.values():

@@ -435,14 +435,14 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
     print(f"{wed_gogo_want()+1440=}")
     clean_plan = sue_beliefunit.get_plan_obj(clean_rope)
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(year_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(year_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -452,7 +452,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar7day, yr2000_mar8day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -462,7 +462,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar1day, yr2000_mar2day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -472,7 +472,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -482,7 +482,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar3day, yr2000_mar4day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -492,7 +492,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar4day, yr2000_mar5day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -502,7 +502,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar5day, yr2000_mar6day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -562,14 +562,14 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
     print(f"{wed_gogo_want()+1440=}")
     clean_plan = sue_beliefunit.get_plan_obj(clean_rope)
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(year_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(year_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(year_rope).status=} \n")
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar6day, yr2000_mar7day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -579,7 +579,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar7day, yr2000_mar8day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -589,7 +589,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar1day, yr2000_mar2day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -601,7 +601,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar2day, yr2000_mar3day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -611,7 +611,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar3day, yr2000_mar4day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -621,7 +621,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar4day, yr2000_mar5day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")
@@ -631,7 +631,7 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2
 
     # WHEN / THEN
     sue_beliefunit.add_fact(creg_rope, creg_rope, yr2000_mar5day, yr2000_mar6day)
-    sue_beliefunit.cash_out()
+    sue_beliefunit.cashout()
     print(f"{clean_plan.factheirs.get(wed_rope).fact_lower=}")
     print(f"{clean_plan.factheirs.get(wed_rope).fact_upper=}")
     print(f"{clean_plan.get_reasonheir(wed_rope).status=}")

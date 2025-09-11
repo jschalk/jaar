@@ -122,7 +122,7 @@ def display_plantree(
 ) -> plotly_Figure:
     """Mode can be None, Chore, Keep"""
 
-    x_belief.cash_out()
+    x_belief.cashout()
     x_fig = plotly_Figure()
     source_y = 0
     trace_list = []
