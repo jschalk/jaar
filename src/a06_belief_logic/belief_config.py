@@ -6,19 +6,19 @@ def max_tree_traverse_default() -> int:
     return 20
 
 
-def belief_calc_config_path() -> str:
+def belief_config_path() -> str:
     """src/a06_belief_logic/belief_config.json"""
     src_dir = create_path(os_getcwd(), "src")
     module_dir = create_path(src_dir, "a06_belief_logic")
     return create_path(module_dir, "belief_config.json")
 
 
-def get_belief_calc_config_dict() -> dict[str, dict]:
-    return open_json(belief_calc_config_path())
+def get_belief_config_dict() -> dict[str, dict]:
+    return open_json(belief_config_path())
 
 
 def get_belief_calc_dimen_args(dimen: str) -> set:
-    config_dict = get_belief_calc_config_dict()
+    config_dict = get_belief_config_dict()
     dimen_dict = config_dict.get(dimen)
     all_args = set(dimen_dict.get("jkeys").keys())
     all_args = all_args.union(set(dimen_dict.get("jvalues").keys()))
@@ -26,9 +26,9 @@ def get_belief_calc_dimen_args(dimen: str) -> set:
 
 
 def get_all_belief_calc_args() -> dict[str, set[str]]:
-    belief_calc_config_dict = get_belief_calc_config_dict()
+    belief_config_dict = get_belief_config_dict()
     all_args = {}
-    for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
+    for belief_calc_dimen, dimen_dict in belief_config_dict.items():
         for dimen_key, arg_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg in arg_dict.keys():

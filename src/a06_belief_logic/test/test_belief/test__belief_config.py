@@ -3,13 +3,13 @@ from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a06_belief_logic.belief_config import (
-    belief_calc_config_path,
+    belief_config_path,
     get_all_belief_calc_args,
     get_belief_calc_args_sqlite_datatype_dict,
     get_belief_calc_args_type_dict,
-    get_belief_calc_config_dict,
     get_belief_calc_dimen_args,
     get_belief_calc_dimens,
+    get_belief_config_dict,
     max_tree_traverse_default,
 )
 from src.a06_belief_logic.test._util.a06_str import (
@@ -114,46 +114,46 @@ def test_max_tree_traverse_default_ReturnsObj() -> str:
     assert max_tree_traverse_default() == 20
 
 
-def test_get_belief_calc_config_dict_Exists():
+def test_get_belief_config_dict_Exists():
     # ESTABLISH
     src_dir = create_path(os_getcwd(), "src")
     expected_dir = create_path(src_dir, "a06_belief_logic")
 
     # WHEN
-    config_path = belief_calc_config_path()
+    config_path = belief_config_path()
     # THEN
     expected_path = create_path(expected_dir, "belief_config.json")
     assert config_path == expected_path
-    assert os_path_exists(belief_calc_config_path())
+    assert os_path_exists(belief_config_path())
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel0Keys():
+def test_get_belief_config_dict_ReturnsObj_CheckLevel0Keys():
     # ESTABLISH / WHEN
-    belief_calc_config = get_belief_calc_config_dict()
-    belief_calc_config_keys = set(belief_calc_config.keys())
+    belief_config = get_belief_config_dict()
+    belief_config_keys = set(belief_config.keys())
 
     # THEN
-    assert beliefunit_str() in belief_calc_config_keys
-    assert belief_voiceunit_str() in belief_calc_config_keys
-    assert belief_voice_membership_str() in belief_calc_config_keys
-    assert belief_planunit_str() in belief_calc_config_keys
-    assert belief_plan_awardunit_str() in belief_calc_config_keys
-    assert belief_plan_reasonunit_str() in belief_calc_config_keys
-    assert belief_plan_reason_caseunit_str() in belief_calc_config_keys
-    assert belief_plan_partyunit_str() in belief_calc_config_keys
-    assert belief_plan_healerunit_str() in belief_calc_config_keys
-    assert belief_plan_factunit_str() in belief_calc_config_keys
-    assert belief_groupunit_str() in belief_calc_config_keys
-    assert len(get_belief_calc_config_dict()) == 11
+    assert beliefunit_str() in belief_config_keys
+    assert belief_voiceunit_str() in belief_config_keys
+    assert belief_voice_membership_str() in belief_config_keys
+    assert belief_planunit_str() in belief_config_keys
+    assert belief_plan_awardunit_str() in belief_config_keys
+    assert belief_plan_reasonunit_str() in belief_config_keys
+    assert belief_plan_reason_caseunit_str() in belief_config_keys
+    assert belief_plan_partyunit_str() in belief_config_keys
+    assert belief_plan_healerunit_str() in belief_config_keys
+    assert belief_plan_factunit_str() in belief_config_keys
+    assert belief_groupunit_str() in belief_config_keys
+    assert len(get_belief_config_dict()) == 11
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel1Keys():
+def test_get_belief_config_dict_ReturnsObj_CheckLevel1Keys():
     # ESTABLISH / WHEN
-    belief_calc_config = get_belief_calc_config_dict()
+    belief_config = get_belief_config_dict()
 
     # THEN
     # sourcery skip: no-loop-in-tests
-    for level1_key, attribute_dict in belief_calc_config.items():
+    for level1_key, attribute_dict in belief_config.items():
         attribute_keys = set(attribute_dict.keys())
         print(f"{level1_key=} {attribute_keys=}")
         assert "abbreviation" in attribute_keys
@@ -162,14 +162,14 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckLevel1Keys():
         assert len(attribute_keys) == 3
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_Check_populate_by_cashout():
+def test_get_belief_config_dict_ReturnsObj_Check_populate_by_cashout():
     # ESTABLISH / WHEN
-    belief_calc_config = get_belief_calc_config_dict()
+    belief_config = get_belief_config_dict()
 
     # THEN
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     abbr_str = "abbreviation"
-    for level1_key, attribute_dict in belief_calc_config.items():
+    for level1_key, attribute_dict in belief_config.items():
         for level2_key, fm_attribute_dict in attribute_dict.items():
             if level2_key != abbr_str:
                 for fm_attr_key, fm_attr_value in fm_attribute_dict.items():
@@ -181,22 +181,22 @@ def test_get_belief_calc_config_dict_ReturnsObj_Check_populate_by_cashout():
                     ], assertion_fail_str
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_CheckAbbreviations():
+def test_get_belief_config_dict_ReturnsObj_CheckAbbreviations():
     # ESTABLISH / WHEN
-    belief_calc_config = get_belief_calc_config_dict()
+    belief_config = get_belief_config_dict()
 
     # THEN
-    blrunit_attribute = belief_calc_config.get(beliefunit_str())
-    blrpern_attribute = belief_calc_config.get(belief_voiceunit_str())
-    blrmemb_attribute = belief_calc_config.get(belief_voice_membership_str())
-    blrplan_attribute = belief_calc_config.get(belief_planunit_str())
-    blrawar_attribute = belief_calc_config.get(belief_plan_awardunit_str())
-    blrreas_attribute = belief_calc_config.get(belief_plan_reasonunit_str())
-    blrprem_attribute = belief_calc_config.get(belief_plan_reason_caseunit_str())
-    blrlabo_attribute = belief_calc_config.get(belief_plan_partyunit_str())
-    blrheal_attribute = belief_calc_config.get(belief_plan_healerunit_str())
-    blrfact_attribute = belief_calc_config.get(belief_plan_factunit_str())
-    blrgrou_attribute = belief_calc_config.get(belief_groupunit_str())
+    blrunit_attribute = belief_config.get(beliefunit_str())
+    blrpern_attribute = belief_config.get(belief_voiceunit_str())
+    blrmemb_attribute = belief_config.get(belief_voice_membership_str())
+    blrplan_attribute = belief_config.get(belief_planunit_str())
+    blrawar_attribute = belief_config.get(belief_plan_awardunit_str())
+    blrreas_attribute = belief_config.get(belief_plan_reasonunit_str())
+    blrprem_attribute = belief_config.get(belief_plan_reason_caseunit_str())
+    blrlabo_attribute = belief_config.get(belief_plan_partyunit_str())
+    blrheal_attribute = belief_config.get(belief_plan_healerunit_str())
+    blrfact_attribute = belief_config.get(belief_plan_factunit_str())
+    blrgrou_attribute = belief_config.get(belief_groupunit_str())
     abbr_str = "abbreviation"
     assert blrunit_attribute.get(abbr_str) == "blrunit"
     assert blrpern_attribute.get(abbr_str) == "blrpern"
@@ -230,13 +230,13 @@ def test_get_all_belief_calc_args_ReturnsObj():
     assert len(all_belief_calc_args) == 77
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
+def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
     # ESTABLISH / WHEN
-    belief_calc_config = get_belief_calc_config_dict()
+    belief_config = get_belief_config_dict()
 
     # THEN
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for level1_key, attribute_dict in belief_calc_config.items():
+    for level1_key, attribute_dict in belief_config.items():
         for level2_key, fm_attribute_dict in attribute_dict.items():
             if level2_key in {jkeys_str(), jvalues_str()}:
                 for level3_key, attr_dict in fm_attribute_dict.items():
@@ -269,7 +269,7 @@ def test_get_belief_calc_dimens_ReturnsObj():
         belief_groupunit_str(),
     }
     assert belief_calc_dimens == expected_belief_calc_dimens
-    assert belief_calc_dimens == set(get_belief_calc_config_dict().keys())
+    assert belief_calc_dimens == set(get_belief_config_dict().keys())
 
 
 def test_get_belief_calc_dimen_args_ReturnsObj():
@@ -370,10 +370,10 @@ def g_popcashout(
     return j_arg.get("populate_by_cashout")
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
+def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH / WHEN
-    cfig = get_belief_calc_config_dict()
+    cfig = get_belief_config_dict()
 
     # THEN
     # for level1_key, attribute_dict in config.items():
@@ -822,12 +822,12 @@ def test_get_belief_calc_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_popcashout(cfig, blfunit, jv, tally_str()) == False
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_EachArgHasOneClassType():
+def test_get_belief_config_dict_ReturnsObj_EachArgHasOneClassType():
     # ESTABLISH
-    belief_calc_config_dict = get_belief_calc_config_dict()
+    belief_config_dict = get_belief_config_dict()
     all_args = {}
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
+    for belief_calc_dimen, dimen_dict in belief_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
@@ -842,12 +842,12 @@ def test_get_belief_calc_config_dict_ReturnsObj_EachArgHasOneClassType():
         assert len(arg_types) == 1
 
 
-def test_get_belief_calc_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
+def test_get_belief_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
     # ESTABLISH
-    belief_calc_config_dict = get_belief_calc_config_dict()
+    belief_config_dict = get_belief_config_dict()
     all_args = {}
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
+    for belief_calc_dimen, dimen_dict in belief_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
@@ -874,10 +874,10 @@ def test_get_belief_calc_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
 
 def test_get_belief_calc_args_type_dict_ReturnsObj():
     # ESTABLISH
-    belief_calc_config_dict = get_belief_calc_config_dict()
+    belief_config_dict = get_belief_config_dict()
     all_args = {}
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    for belief_calc_dimen, dimen_dict in belief_calc_config_dict.items():
+    for belief_calc_dimen, dimen_dict in belief_config_dict.items():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():

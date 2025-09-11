@@ -1,4 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
+from src.a06_belief_logic.belief_config import get_belief_config_dict
 from src.a08_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_all_belief_dimen_keys,
@@ -26,6 +27,7 @@ from src.a08_belief_atom_logic.test._util.a08_str import (
     addin_str,
     awardee_title_str,
     begin_str,
+    belief_groupunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -122,6 +124,37 @@ def test_get_all_belief_dimen_delete_keys_ReturnsObj():
     }
     print(f"{expected_belief_delete_keys=}")
     assert all_belief_dimen_delete_keys == expected_belief_delete_keys
+
+
+def test_get_atom_config_dict_ReturnsObj_Mirrors_belief_config():
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH / WHEN
+    atom_config_dict = get_atom_config_dict()
+
+    # THEN
+    belief_config_dict = get_belief_config_dict()
+    atom_config_dimens = set(atom_config_dict.keys())
+    belief_config_dimens = set(belief_config_dict.keys())
+    assert atom_config_dimens.issubset(belief_config_dimens)
+    assert belief_config_dimens.difference(atom_config_dimens) == {
+        belief_groupunit_str()
+    }
+    for atom_dimen, dimen_dict in atom_config_dict.items():
+        for attr_key, atom_attr_dict in dimen_dict.items():
+            if attr_key in jkeys_str():
+                atom_attr_keys = set(atom_attr_dict.keys())
+                print(f"{atom_dimen=} {attr_key=} {len(atom_attr_keys)=}")
+                belief_jkeys_dict = belief_config_dict.get(atom_dimen).get(jkeys_str())
+                belief_jkeys_keys = set(belief_jkeys_dict.keys())
+                print(f"{atom_dimen=} {attr_key=} {len(belief_jkeys_keys)=}")
+                assert atom_attr_keys.issubset(belief_jkeys_keys)
+            elif attr_key in jvalues_str():
+                atom_attr_keys = set(atom_attr_dict.keys())
+                print(f"{atom_dimen=} {attr_key=} {len(atom_attr_keys)=}")
+                belief_dict = belief_config_dict.get(atom_dimen).get(jvalues_str())
+                belief_keys = set(belief_dict.keys())
+                print(f"{atom_dimen=} {attr_key=} {len(belief_keys)=}")
+                assert atom_attr_keys.issubset(belief_keys)
 
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
