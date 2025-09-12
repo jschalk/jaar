@@ -1,8 +1,9 @@
 # your_module.py
-import ast
 from ast import (
     FunctionDef as ast_FunctionDef,
+    Import as ast_Import,
     ImportFrom as ast_ImportFrom,
+    NodeVisitor as ast_NodeVisitor,
     get_docstring as ast_get_docstring,
     get_source_segment as ast_get_source_segment,
     parse as ast_parse,
@@ -11,10 +12,9 @@ from ast import (
 from os import walk as os_walk
 from os.path import join as os_path_join
 from pathlib import Path as pathlib_Path
-import re
 from re import compile as re_compile
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
-from src.a98_docs_builder.module_eval import (
+from src.a98_docs_builder.doc_builder import (
     get_function_names_from_file,
     get_module_descs,
 )
@@ -337,8 +337,8 @@ def get_max_module_import_str() -> str:
     return max_module_import_str
 
 
-_A_PATTERN = re.compile(r"^src\.a(\d+)(?:[._]|$)")
-_A_STR_PATTERN = re.compile(r"a(\d{2})_str(?:[._]|$)")
+_A_PATTERN = re_compile(r"^src\.a(\d+)(?:[._]|$)")
+_A_STR_PATTERN = re_compile(r"a(\d{2})_str(?:[._]|$)")
 
 
 def _extract_series_number(module: str) -> int | None:
@@ -355,12 +355,12 @@ def _extract_aXX_str_number(module: str) -> int | None:
     return int(m.group(1)) if m else None
 
 
-class _ImportCollector(ast.NodeVisitor):
+class _ImportCollector(ast_NodeVisitor):
     def __init__(self, min_number: int):
         self.min_number = min_number
         self.matches: list[str] = []
 
-    def visit_Import(self, node: ast.Import):
+    def visit_Import(self, node: ast_Import):
         for alias in node.names:
             module = alias.name
             # Check src.aXX
@@ -379,7 +379,7 @@ class _ImportCollector(ast.NodeVisitor):
                 self.matches.append(s)
         self.generic_visit(node)
 
-    def visit_ImportFrom(self, node: ast.ImportFrom):
+    def visit_ImportFrom(self, node: ast_ImportFrom):
         module = node.module
         # Check src.aXX
         n = _extract_series_number(module) if module else None
@@ -403,7 +403,7 @@ def find_incorrect_imports(
 ) -> list[str]:
     p = pathlib_Path(py_file_path)
     src = p.read_text(encoding="utf-8")
-    tree = ast.parse(src, filename=str(p))
+    tree = ast_parse(src, filename=str(p))
     collector = _ImportCollector(min_number)
     collector.visit(tree)
     return collector.matches

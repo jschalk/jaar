@@ -2,7 +2,7 @@ from importlib import import_module as importlib_import_module
 from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
-from src.a98_docs_builder.module_eval import get_module_descs, get_module_str_functions
+from src.a98_docs_builder.doc_builder import get_module_descs, get_module_str_functions
 from src.a99_module_linter.linter import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
