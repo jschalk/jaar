@@ -1,4 +1,4 @@
 {
-    "module_blurb": "TODO replace me",
+    "module_blurb": "A belief is a beliefunit, made of accounts and plans. All plans are connected to the central plan, which is given all the funds in a beliefunit.",
     "module_description": "a06_belief_logic"
 }

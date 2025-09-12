@@ -1,5 +1,10 @@
 from ast import FunctionDef as ast_FunctionDef, parse as ast_parse, walk as ast_walk
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs, save_file
+from src.a00_data_toolbox.file_toolbox import (
+    create_path,
+    get_level1_dirs,
+    open_json,
+    save_file,
+)
 
 
 def get_module_descs() -> dict[str, str]:
@@ -45,3 +50,24 @@ def get_str_funcs_md() -> str:
 def save_str_funcs_md(x_dir: str):
     str_funcs_md_path = create_path(x_dir, "str_funcs.md")
     save_file(str_funcs_md_path, None, get_str_funcs_md())
+
+
+def get_module_blurbs_md() -> str:
+    lines = ["# Module Overview\n", "What does each one do?\n", ""]
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        docs_dir = create_path(module_dir, "_ref")
+        module_ref_path = create_path(docs_dir, f"a{desc_number_str}_ref.json")
+        module_ref_dict = open_json(module_ref_path)
+        module_description_str = "module_description"
+        module_blurb_str = "module_blurb"
+        mod_blurb = module_ref_dict.get(module_blurb_str)
+        ref_module_desc = module_ref_dict.get(module_description_str)
+
+        lines.append(f"- **{ref_module_desc}**: {mod_blurb}")
+
+    return "\n".join(lines)
+
+
+def save_module_blurbs_md(x_dir: str):
+    save_file(x_dir, "module_blurbs.md", get_module_blurbs_md())

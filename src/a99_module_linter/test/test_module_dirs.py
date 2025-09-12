@@ -1,8 +1,13 @@
 from os import listdir as os_listdir, walk as os_walk
 from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs, open_json
-from src.a98_docs_builder.module_eval import get_module_str_functions
+from src.a00_data_toolbox.file_toolbox import (
+    create_path,
+    get_level1_dirs,
+    open_file,
+    open_json,
+)
+from src.a98_docs_builder.doc_builder import get_module_str_functions
 from src.a99_module_linter.linter import (
     check_if_module_str_funcs_is_sorted,
     check_import_objs_are_ordered,
@@ -149,7 +154,7 @@ def test_Modules_NonTestFilesDoNotHaveStringFunctionsImports():
                     assert not str(file_import[0]).endswith("_str")
 
 
-def test_Modules_DocumentationBuilderFolder_ref_ExistsForEveryModule():
+def test_Modules_ModuleReferenceFolder_ref_ExistsForEveryModule():
     """
     Test that all string-related functions in each module directory are asserted and tested.
     This test performs the following checks for each module:
@@ -159,15 +164,14 @@ def test_Modules_DocumentationBuilderFolder_ref_ExistsForEveryModule():
 
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
-    running_module_descriptions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
         docs_dir = create_path(module_dir, "_ref")
-        print(f"{docs_dir}")
         assert os_path_exists(docs_dir)
         module_ref_path = create_path(docs_dir, f"a{desc_number_str}_ref.json")
         assert os_path_exists(module_ref_path)
         module_ref_dict = open_json(module_ref_path)
+        # print(f"{module_ref_path} \t Items: {len(module_ref_dict)}")
         ref_keys = set(module_ref_dict.keys())
         module_description_str = "module_description"
         module_blurb_str = "module_blurb"

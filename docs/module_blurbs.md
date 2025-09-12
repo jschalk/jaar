@@ -2,24 +2,27 @@
 
 What does each one do?
 
-- **a00_data_toolbox**: Creates a set of tools for data manipulation and analysis.
-- **a01_term_logic**: Defines the terms and plans used in the system for consistent understanding and processing.
-- **a02_finance_logic**: Defines financial rules and calculations to ensure accurate financial operations.
-- **a03_group_logic**: Defines accounts, account memberships, and groups. Groups will be produced from memberships.
-- **a04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, then a task can be kept.
-- **a05_plan_logic**: A plan can be a task, and if its reasons match its facts, it should be kept.
+
+- **a00_data_toolbox**: Create some standard tools files files, python dictionaries, databases, and other basic programming objects.
+- **a01_term_logic**: Defines what a Rope is and required format for groups names and individual names.
+- **a02_finance_logic**: Defines tools for financial allotment to ledgers.
+- **a03_group_logic**: Defines a voice, and it's group memberships. Groups will be produced from memberships.
+- **a04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True
+- **a05_plan_logic**: Defines PlanUnits. Plans are complicated. A plan can have sub plans, define itself as a task, define Awardees, assigned Labor, required Reasons, etc.
 - **a06_belief_logic**: A belief is a beliefunit, made of accounts and plans. All plans are connected to the central plan, which is given all the funds in a beliefunit.
 - **a07_timeline_logic**: Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.
 - **a08_belief_atom_logic**: Defines the structure and behavior of beliefunit atoms, which are single units of beliefunit and plans used in a beliefunit.
 - **a09_pack_logic**: Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.
-- **a10_belief_calc**: Expresses the calculations performed when a beliefunit is "settled" to determine final amounts for each plan and account.
-- **a11_bud_logic**: When a moment system decides to empower a beliefunit the funds must be distributed
-- **a12_hub_tools**: These tools are used to handle complex operations involving belief files, will be deprecated.
+- **a11_bud_logic**: Defines a budget and the tools necessary to create one. Budges are created when a moment system decides to empower a beliefunit with funds that must be distributed
+- **a12_hub_toolbox**: These tools are used to handle complex operations involving belief files, will be deprecated.
 - **a13_belief_listen_logic**: These tools describe how one beliefunit listens to another
 - **a14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
-- **a15_moment_logic**: A MomentUnit is a Moment system with the basic requirements: common system of time, voice tranactions ledger, etc. Importantly a Moment system must know the state of a belief's beliefunit at any time in the past. 
-- **a16_pidgin_logic**: A tool that translates words from outside language to inside language.  
+- **a15_moment_logic**: A MomentUnit is a Moment system with the basic requirements: common system of time, voice tranactions ledger, etc. Importantly a Moment system must know the state of a belief's beliefunit at any time in the past.
+- **a16_pidgin_logic**: A tool that translates words from outside language to inside language.
 - **a17_idea_logic**: idea bricks are tables of data that build moment systems and the beliefunits within them.
-- **a18_etl_toolbox**: 
-- **a19_world_logic**: *(description needed)*
-- **a20_lobby_logic**: *(description needed)*
+- **a18_etl_toolbox**: All the tools used by WorldUnits to create MomentUnits.
+- **a19_kpi_toolbox**: a18_etl_toolbox manages the base required data. This toolbox manages the analytics outcomes.
+- **a20_world_logic**: WorldUnits create and manage MomentUnits
+- **a21_lobby_logic**: Tools for comparing how changes can create different WorldUnits.
+- **a22_belief_viewer**: Tools for Visualizing BeliefUnits
+- **a98_docs_builder**: TODO replace me

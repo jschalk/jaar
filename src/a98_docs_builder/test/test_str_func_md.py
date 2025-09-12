@@ -1,7 +1,6 @@
 from os.path import exists as os_path_exists
-from pathlib import Path as pathlib_Path
-from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
-from src.a98_docs_builder.module_eval import get_str_funcs_md, save_str_funcs_md
+from src.a00_data_toolbox.file_toolbox import create_path, open_file
+from src.a98_docs_builder.doc_builder import get_str_funcs_md, save_str_funcs_md
 from src.a98_docs_builder.test._util.a98_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

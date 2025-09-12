@@ -1,4 +1,4 @@
 {
-    "module_blurb": "TODO replace me",
+    "module_blurb": "Defines the structure and behavior of beliefunit atoms, which are single units of beliefunit and plans used in a beliefunit.",
     "module_description": "a08_belief_atom_logic"
 }
