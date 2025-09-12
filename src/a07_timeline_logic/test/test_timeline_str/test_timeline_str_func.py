@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     create_rope,
     default_knot_if_None,
     get_default_central_label as root_label,

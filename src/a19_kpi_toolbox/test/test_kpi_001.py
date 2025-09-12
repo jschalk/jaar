@@ -4,7 +4,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     CREATE_MOMENT_VOICE_NETS_SQLSTR,

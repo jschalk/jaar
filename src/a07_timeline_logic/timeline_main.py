@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.dict_toolbox import get_1_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, open_json
-from src.a01_term_logic.rope import LabelTerm, RopeTerm, create_rope
+from src.a01_rope_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.a05_plan_logic.plan import (
     PlanUnit,
     all_plans_between,

@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.a01_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.a16_pidgin_logic.map import (
     LabelMap,
     NameMap,

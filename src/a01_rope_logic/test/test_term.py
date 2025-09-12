@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.a01_term_logic.term import (
+from src.a01_rope_logic.term import (
     BeliefName,
     CentralLabel,
     EporTerm,
@@ -16,7 +16,7 @@ from src.a01_term_logic.term import (
     VoiceName,
     default_knot_if_None,
 )
-from src.a01_term_logic.test._util.a01_str import knot_str
+from src.a01_rope_logic.test._util.a01_str import knot_str
 
 
 def test_KnotTerm_Exists():
@@ -127,7 +127,7 @@ def test_GroupTitle_Exists():
 
     # THEN
     assert bikers_GroupTitle is not None
-    assert str(type(bikers_GroupTitle)).find("src.a01_term_logic.term.GroupTitle") > 0
+    assert str(type(bikers_GroupTitle)).find("src.a01_rope_logic.term.GroupTitle") > 0
 
 
 def test_LabelTerm_Exists():

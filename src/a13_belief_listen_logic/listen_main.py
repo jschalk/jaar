@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.a01_term_logic.rope import get_ancestor_ropes, get_root_label_from_rope
-from src.a01_term_logic.term import BeliefName, RopeTerm
+from src.a01_rope_logic.rope import get_ancestor_ropes, get_root_label_from_rope
+from src.a01_rope_logic.term import BeliefName, RopeTerm
 from src.a02_finance_logic.allot import allot_scale
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit, VoiceUnit

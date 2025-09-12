@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import create_rope, default_knot_if_None
+from src.a01_rope_logic.rope import create_rope, default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop

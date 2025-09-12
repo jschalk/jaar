@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import RopeTerm, create_rope
+from src.a01_rope_logic.rope import RopeTerm, create_rope
 from src.a04_reason_logic.reason import FactUnit, factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop

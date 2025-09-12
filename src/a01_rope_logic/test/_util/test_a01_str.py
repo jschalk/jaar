@@ -1,4 +1,4 @@
-from src.a01_term_logic.test._util.a01_str import (
+from src.a01_rope_logic.test._util.a01_str import (
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,

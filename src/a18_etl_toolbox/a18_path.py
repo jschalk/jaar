@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.term import BeliefName, LabelTerm
+from src.a01_rope_logic.term import BeliefName, LabelTerm
 
 
 def create_moment_mstr_path(world_dir: str):

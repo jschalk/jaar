@@ -5,8 +5,8 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.rope import create_rope, get_parent_rope, get_tail_label
-from src.a01_term_logic.term import LabelTerm, RopeTerm, TitleTerm, VoiceName
+from src.a01_rope_logic.rope import create_rope, get_parent_rope, get_tail_label
+from src.a01_rope_logic.term import LabelTerm, RopeTerm, TitleTerm, VoiceName
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.voice import voiceunit_shop
 from src.a04_reason_logic.reason import factunit_shop

@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_max_key
-from src.a01_term_logic.term import BeliefName, RopeTerm
+from src.a01_rope_logic.term import BeliefName, RopeTerm
 from src.a04_reason_logic.reason import FactUnit, get_factunit_from_tuple
 
 

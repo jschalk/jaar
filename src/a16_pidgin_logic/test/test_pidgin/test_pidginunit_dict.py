@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import default_knot_if_None
+from src.a01_rope_logic.rope import default_knot_if_None
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.pidgin_main import (
     get_pidginunit_from_dict,

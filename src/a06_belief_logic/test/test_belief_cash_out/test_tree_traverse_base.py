@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.rope import to_rope
+from src.a01_rope_logic.rope import to_rope
 from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason import factheir_shop
 from src.a05_plan_logic.plan import planunit_shop

@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
-from src.a01_term_logic.rope import create_rope, default_knot_if_None
+from src.a01_rope_logic.rope import create_rope, default_knot_if_None
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a07_timeline_logic.test._util.a07_str import (
     c100_str,

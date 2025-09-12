@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import RopeTerm, create_rope_from_labels
+from src.a01_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a13_belief_listen_logic.test._util.a13_env import get_module_temp_dir

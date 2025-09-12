@@ -1,6 +1,6 @@
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
-from src.a01_term_logic.rope import default_knot_if_None
+from src.a01_rope_logic.rope import default_knot_if_None
 from src.a16_pidgin_logic.map import (
     NameMap,
     get_namemap_from_dict,

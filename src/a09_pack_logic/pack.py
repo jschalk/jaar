@@ -8,7 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.a01_term_logic.term import BeliefName, FaceName, MomentLabel
+from src.a01_rope_logic.term import BeliefName, FaceName, MomentLabel
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a08_belief_atom_logic.atom_main import (

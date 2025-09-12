@@ -1,5 +1,5 @@
 from copy import deepcopy as copy_deepcopy
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.belief_tool import (
     clear_factunits_from_belief,

@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import RopeTerm, create_rope_from_labels
+from src.a01_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.a06_belief_logic.belief_main import (
     BeliefUnit,
     MomentLabel,

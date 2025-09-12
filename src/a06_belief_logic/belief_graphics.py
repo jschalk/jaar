@@ -9,7 +9,7 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from src.a01_term_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
+from src.a01_rope_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a06_belief_logic.belief_report import (

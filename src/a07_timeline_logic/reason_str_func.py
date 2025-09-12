@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     LabelTerm,
     RopeTerm,
     create_rope,

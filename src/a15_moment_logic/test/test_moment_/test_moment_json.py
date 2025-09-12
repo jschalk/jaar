@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
-from src.a01_term_logic.rope import default_knot_if_None
+from src.a01_rope_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,

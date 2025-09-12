@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     default_knot_if_None,
     get_epor_from_rope,
     get_rope_from_epor,

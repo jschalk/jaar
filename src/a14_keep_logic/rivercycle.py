@@ -4,7 +4,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.a01_term_logic.term import BeliefName, VoiceName
+from src.a01_rope_logic.term import BeliefName, VoiceName
 from src.a02_finance_logic.allot import allot_scale
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a12_hub_toolbox.hubunit import HubUnit

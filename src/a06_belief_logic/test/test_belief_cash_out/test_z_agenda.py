@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import RopeTerm
+from src.a01_rope_logic.rope import RopeTerm
 from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_belief_logic.belief_main import (

@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.a01_term_logic.rope import RopeTerm
+from src.a01_rope_logic.rope import RopeTerm
 from src.a06_belief_logic.belief_main import BeliefUnit
 
 

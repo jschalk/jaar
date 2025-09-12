@@ -4,7 +4,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.a01_term_logic.term import BeliefName, EventInt, default_knot_if_None
+from src.a01_rope_logic.term import BeliefName, EventInt, default_knot_if_None
 from src.a16_pidgin_logic.map import (
     LabelMap,
     MapCore,

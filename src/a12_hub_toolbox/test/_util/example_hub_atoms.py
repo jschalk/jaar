@@ -1,5 +1,5 @@
-from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.a01_term_logic.term import MomentLabel
+from src.a01_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.a01_rope_logic.term import MomentLabel
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop

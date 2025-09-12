@@ -1,4 +1,4 @@
-from src.a01_term_logic.term import GroupTitle
+from src.a01_rope_logic.term import GroupTitle
 from src.a03_group_logic.group import groupunit_shop, membership_shop
 from src.a03_group_logic.labor import (
     LaborHeir,

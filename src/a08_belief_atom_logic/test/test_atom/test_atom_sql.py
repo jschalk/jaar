@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_rowdata
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a08_belief_atom_logic.atom_main import (
     beliefatom_shop,
     get_beliefatom_from_rowdata,

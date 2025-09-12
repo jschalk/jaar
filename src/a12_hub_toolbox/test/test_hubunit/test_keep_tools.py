@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exist, exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
 from src.a12_hub_toolbox.a12_path import create_keep_rope_path

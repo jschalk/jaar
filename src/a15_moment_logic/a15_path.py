@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a01_term_logic.term import BeliefName, LabelTerm
+from src.a01_rope_logic.term import BeliefName, LabelTerm
 from src.a12_hub_toolbox.a12_path import create_bud_dir_path
 
 BUD_MANDATE_FILENAME = "bud_voice_mandate_ledger.json"
