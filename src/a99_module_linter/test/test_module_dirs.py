@@ -1,7 +1,7 @@
 from os import listdir as os_listdir, walk as os_walk
 from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
+from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs, open_json
 from src.a98_docs_builder.module_eval import get_module_str_functions
 from src.a99_module_linter.linter import (
     check_if_module_str_funcs_is_sorted,
@@ -61,58 +61,6 @@ def path_contains_subpath(full_path: str, sub_path: str):
         return False
 
 
-def test_Modules_DoNotHaveEmptyDirectories():
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH
-    exclude_dir = "src/a20_world_logic/test/test_world_examples/worlds"
-
-    # WHEN / THEN
-    for module_desc, module_dir in get_module_descs().items():
-        for dirpath, dirnames, filenames in os_walk(module_dir):
-            if not path_contains_subpath(dirpath, exclude_dir):
-                assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
-                if dirnames == ["__pycache__"] and filenames == []:
-                    print(f"{dirnames} {dirpath}")
-                    dirnames = []
-                # print(f"{dirnames=}")
-                # print(f"{filenames=}")
-                assert dirnames or filenames, assert_fail_str
-
-
-def test_Modules_NonTestFilesDoNotHavePrintStatments():
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH
-    print_str = "print"
-
-    # WHEN / THEN
-    for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
-        py_files = [f for f in os_listdir(module_dir) if f.endswith(".py")]
-        for py_file in py_files:
-            py_file_path = create_path(module_dir, py_file)
-            py_file_str = open(py_file_path).read()
-            if py_file_str.find(print_str) > -1:
-                print(f"Module {module_desc} file {py_file_path} has print statement")
-            assert py_file_str.find(print_str) == -1
-
-
-def test_Modules_NonTestFilesDoNotHaveImportStringFunctions():
-    """Check all non-test python files do not import str functions"""
-
-    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH / WHEN / THEN
-    for module_desc, module_dir in get_module_descs().items():
-        for file_path, file_imports in get_python_files_with_flag(module_dir).items():
-            filename = str(os_path_basename(file_path))
-            file_path = str(file_path)
-            print(f"{file_path=}")
-            if not filename.startswith("test") and "_util" not in file_path:
-                for file_import in file_imports:
-                    if str(file_import[0]).endswith("_str"):
-                        print(f"{module_desc} {filename} {file_import[0]=}")
-                    assert not str(file_import[0]).endswith("_str")
-
-
 def test_Modules_util_AssestsExistForEveryStrFunction():
     """
     Test that all string-related functions in each module directory are asserted and tested.
@@ -165,3 +113,83 @@ def test_Modules_test_TestsAreInCorrectFolderStructure():
                 if level1_dir != test_str:
                     print(f"{desc_number=} {level1_dir=}")
                 assert level1_dir == test_str
+
+
+def test_Modules_NonTestFilesDoNotHavePrintStatments():
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH
+    print_str = "print"
+
+    # WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        py_files = [f for f in os_listdir(module_dir) if f.endswith(".py")]
+        for py_file in py_files:
+            py_file_path = create_path(module_dir, py_file)
+            py_file_str = open(py_file_path).read()
+            if py_file_str.find(print_str) > -1:
+                print(f"Module {module_desc} file {py_file_path} has print statement")
+            assert py_file_str.find(print_str) == -1
+
+
+def test_Modules_NonTestFilesDoNotHaveStringFunctionsImports():
+    """Check all non-test python files do not import str functions"""
+
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH / WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        for file_path, file_imports in get_python_files_with_flag(module_dir).items():
+            filename = str(os_path_basename(file_path))
+            file_path = str(file_path)
+            print(f"{file_path=}")
+            if not filename.startswith("test") and "_util" not in file_path:
+                for file_import in file_imports:
+                    if str(file_import[0]).endswith("_str"):
+                        print(f"{module_desc} {filename} {file_import[0]=}")
+                    assert not str(file_import[0]).endswith("_str")
+
+
+def test_Modules_DocumentationBuilderFolder_ref_ExistsForEveryModule():
+    """
+    Test that all string-related functions in each module directory are asserted and tested.
+    This test performs the following checks for each module:
+    Raises:
+        AssertionError: If any of the above conditions are not met.
+    """
+
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH / WHEN / THEN
+    running_module_descriptions = set()
+    for module_desc, module_dir in get_module_descs().items():
+        desc_number_str = module_desc[1:3]
+        docs_dir = create_path(module_dir, "_ref")
+        print(f"{docs_dir}")
+        assert os_path_exists(docs_dir)
+        module_ref_path = create_path(docs_dir, f"a{desc_number_str}_ref.json")
+        assert os_path_exists(module_ref_path)
+        module_ref_dict = open_json(module_ref_path)
+        ref_keys = set(module_ref_dict.keys())
+        module_description_str = "module_description"
+        module_blurb_str = "module_blurb"
+        assert ref_keys == {module_blurb_str, module_description_str}
+        assert module_ref_dict.get(module_description_str) == module_desc
+        assert module_ref_dict.get(module_blurb_str)
+    assert 1 == 2
+
+
+def test_Modules_DoNotHaveEmptyDirectories():
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH
+    exclude_dir = "src/a20_world_logic/test/test_world_examples/worlds"
+
+    # WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        for dirpath, dirnames, filenames in os_walk(module_dir):
+            if not path_contains_subpath(dirpath, exclude_dir):
+                assert_fail_str = f"{module_desc} Empty directory found: {dirpath}"
+                if dirnames == ["__pycache__"] and filenames == []:
+                    print(f"{dirnames} {dirpath}")
+                    dirnames = []
+                # print(f"{dirnames=}")
+                # print(f"{filenames=}")
+                assert dirnames or filenames, assert_fail_str
