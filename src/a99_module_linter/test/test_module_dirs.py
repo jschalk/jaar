@@ -174,7 +174,6 @@ def test_Modules_DocumentationBuilderFolder_ref_ExistsForEveryModule():
         assert ref_keys == {module_blurb_str, module_description_str}
         assert module_ref_dict.get(module_description_str) == module_desc
         assert module_ref_dict.get(module_blurb_str)
-    assert 1 == 2
 
 
 def test_Modules_DoNotHaveEmptyDirectories():
