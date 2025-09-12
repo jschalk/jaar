@@ -1,4 +1,11 @@
-from src.a98_docs_builder.module_eval import get_str_funcs_md
+from os.path import exists as os_path_exists
+from pathlib import Path as pathlib_Path
+from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_file
+from src.a98_docs_builder.module_eval import get_str_funcs_md, save_str_funcs_md
+from src.a98_docs_builder.test._util.a98_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
+)
 
 
 def test_get_str_funcs_md_SetsFile_CheckMarkdownHasAllStrFunctions():
@@ -13,7 +20,19 @@ def test_get_str_funcs_md_SetsFile_CheckMarkdownHasAllStrFunctions():
     assert event_int_index > 0
     assert a09_pack_logic_index < event_int_index
 
-    # # write to production
-    # doc_main_dir = pathlib_Path("docs")
-    # doc_main_dir.mkdir(parents=True, exist_ok=True)
-    # doc_main_dir.write_text(str_funcs_md)
+
+def test_save_str_funcs_md_SavesFile_get_str_funcs_md_ToGivenDirectory(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    temp_dir = get_module_temp_dir()
+    str_funcs_md_path = create_path(temp_dir, "str_funcs.md")
+    assert not os_path_exists(str_funcs_md_path)
+
+    # WHEN
+    str_funcs_md = save_str_funcs_md(temp_dir)
+
+    # THEN
+    assert os_path_exists(str_funcs_md_path)
+    str_funcs_md = get_str_funcs_md()
+    assert open_file(str_funcs_md_path) == str_funcs_md

@@ -1,5 +1,5 @@
 from ast import FunctionDef as ast_FunctionDef, parse as ast_parse, walk as ast_walk
-from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs
+from src.a00_data_toolbox.file_toolbox import create_path, get_level1_dirs, save_file
 
 
 def get_module_descs() -> dict[str, str]:
@@ -40,3 +40,8 @@ def get_str_funcs_md() -> str:
         _line = f"- {module_desc}: " + ", ".join(x_list)
         func_lines.append(_line)
     return "# String Functions by Module\n\n" + "\n".join(func_lines)
+
+
+def save_str_funcs_md(x_dir: str):
+    str_funcs_md_path = create_path(x_dir, "str_funcs.md")
+    save_file(str_funcs_md_path, None, get_str_funcs_md())
