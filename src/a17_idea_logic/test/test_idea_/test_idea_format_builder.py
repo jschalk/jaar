@@ -2,13 +2,7 @@ from json import loads as json_loads
 from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import count_files, save_json
 from src.a08_belief_atom_logic.atom_config import get_atom_config_args
-from src.a17_idea_logic.idea_config import (
-    get_default_sorted_list,
-    get_idea_config_dict,
-    get_idea_formats_dir,
-    get_idea_numbers,
-)
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     attributes_str,
     belief_name_str,
     belief_planunit_str,
@@ -16,6 +10,12 @@ from src.a17_idea_logic.test._util.a17_terms import (
     gogo_want_str,
     moment_label_str,
     plan_rope_str,
+)
+from src.a17_idea_logic.idea_config import (
+    get_default_sorted_list,
+    get_idea_config_dict,
+    get_idea_formats_dir,
+    get_idea_numbers,
 )
 
 

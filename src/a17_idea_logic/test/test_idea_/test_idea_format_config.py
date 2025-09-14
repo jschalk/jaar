@@ -1,23 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a17_idea_logic.idea_config import (
-    get_default_sorted_list,
-    get_idea_elements_sort_order,
-    get_idea_format_filenames,
-    get_idea_format_headers,
-    get_idea_formats_dir,
-    get_idearef_from_file,
-    idea_format_00013_planunit_v0_0_0,
-    idea_format_00019_planunit_v0_0_0,
-    idea_format_00020_belief_voice_membership_v0_0_0,
-    idea_format_00021_belief_voiceunit_v0_0_0,
-)
-from src.a17_idea_logic.idea_main import (
-    _generate_idea_dataframe,
-    _get_headers_list,
-    get_idearef_obj,
-)
-from src.a17_idea_logic.test._util.a17_env import src_module_dir
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     addin_str,
     attributes_str,
     begin_str,
@@ -46,6 +28,24 @@ from src.a17_idea_logic.test._util.a17_terms import (
     voice_name_str,
     voice_pool_str,
 )
+from src.a17_idea_logic.idea_config import (
+    get_default_sorted_list,
+    get_idea_elements_sort_order,
+    get_idea_format_filenames,
+    get_idea_format_headers,
+    get_idea_formats_dir,
+    get_idearef_from_file,
+    idea_format_00013_planunit_v0_0_0,
+    idea_format_00019_planunit_v0_0_0,
+    idea_format_00020_belief_voice_membership_v0_0_0,
+    idea_format_00021_belief_voiceunit_v0_0_0,
+)
+from src.a17_idea_logic.idea_main import (
+    _generate_idea_dataframe,
+    _get_headers_list,
+    get_idearef_obj,
+)
+from src.a17_idea_logic.test._util.a17_env import src_module_dir
 
 
 def test_config_str_functions_ReturnsObjs():

@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a18_etl_toolbox.test._util.a18_terms import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     belief_name_str,
     belief_voiceunit_str,
     error_message_str,

@@ -1,4 +1,4 @@
-from src.a05_plan_logic.test._util.a05_terms import *
+from src.a05_plan_logic._ref.a05_terms import *
 
 
 def ancestors_str() -> str:

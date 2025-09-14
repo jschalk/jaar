@@ -1,4 +1,4 @@
-from src.a21_lobby_logic.test._util.a21_terms import (
+from src.a21_lobby_logic._ref.a21_terms import (
     lobby_id_str,
     lobby_mstr_dir_str,
     lobbys_str,

@@ -1,6 +1,12 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, open_file
+from src.a17_idea_logic._ref.a17_terms import (
+    credor_respect_str,
+    group_title_str,
+    voice_name_str,
+    voice_pool_str,
+)
 from src.a17_idea_logic.idea_db_tool import (
     get_ordered_csv,
     get_relevant_columns_dataframe,
@@ -9,12 +15,6 @@ from src.a17_idea_logic.idea_db_tool import (
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a17_idea_logic.test._util.a17_terms import (
-    credor_respect_str,
-    group_title_str,
-    voice_name_str,
-    voice_pool_str,
 )
 from src.a17_idea_logic.test._util.example_pandas import (
     get_empty_dataframe,

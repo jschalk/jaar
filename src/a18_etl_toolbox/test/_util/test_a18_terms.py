@@ -1,4 +1,4 @@
-from src.a18_etl_toolbox.test._util.a18_terms import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     belief_net_amount_str,
     brick_agg_str,
     brick_raw_str,

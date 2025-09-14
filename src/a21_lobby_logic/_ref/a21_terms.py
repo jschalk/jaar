@@ -1,4 +1,4 @@
-from src.a20_world_logic.test._util.a20_terms import *
+from src.a20_world_logic._ref.a20_terms import *
 
 
 def lobby_id_str() -> str:

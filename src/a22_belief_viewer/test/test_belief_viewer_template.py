@@ -1,5 +1,4 @@
-from src.a22_belief_viewer.belief_viewer_app import get_belief_viewer_template
-from src.a22_belief_viewer.test._util.a22_terms import (
+from src.a22_belief_viewer._ref.a22_terms import (
     active_hx_str,
     active_str,
     addin_str,
@@ -54,6 +53,7 @@ from src.a22_belief_viewer.test._util.a22_terms import (
     voice_debt_points_str,
     voices_str,
 )
+from src.a22_belief_viewer.belief_viewer_app import get_belief_viewer_template
 
 
 def test_get_belief_viewer_template_ReturnsObj():

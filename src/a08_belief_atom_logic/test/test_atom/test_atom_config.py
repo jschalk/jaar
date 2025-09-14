@@ -1,22 +1,6 @@
 from src.a00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.a06_belief_logic.belief_config import get_belief_config_dict
-from src.a08_belief_atom_logic.atom_config import (
-    get_all_belief_dimen_delete_keys,
-    get_all_belief_dimen_keys,
-    get_allowed_class_types,
-    get_atom_args_class_types,
-    get_atom_args_dimen_mapping,
-    get_atom_config_dict,
-    get_atom_order as q_order,
-    get_belief_dimens,
-    get_delete_key_name,
-    get_flattened_atom_table_build,
-    get_normalized_belief_table_build,
-    get_sorted_jkey_keys,
-    is_belief_dimen,
-    set_mog,
-)
-from src.a08_belief_atom_logic.test._util.a08_terms import (
+from src.a08_belief_atom_logic._ref.a08_terms import (
     DELETE_str,
     INSERT_str,
     LabelTerm_str,
@@ -77,6 +61,22 @@ from src.a08_belief_atom_logic.test._util.a08_terms import (
     voice_debt_points_str,
     voice_name_str,
     voice_pool_str,
+)
+from src.a08_belief_atom_logic.atom_config import (
+    get_all_belief_dimen_delete_keys,
+    get_all_belief_dimen_keys,
+    get_allowed_class_types,
+    get_atom_args_class_types,
+    get_atom_args_dimen_mapping,
+    get_atom_config_dict,
+    get_atom_order as q_order,
+    get_belief_dimens,
+    get_delete_key_name,
+    get_flattened_atom_table_build,
+    get_normalized_belief_table_build,
+    get_sorted_jkey_keys,
+    is_belief_dimen,
+    set_mog,
 )
 
 

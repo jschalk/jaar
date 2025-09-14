@@ -1,9 +1,5 @@
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.a19_kpi_toolbox.kpi_sqlstrs import (
-    get_moment_kpi001_voice_nets_sqlstr,
-    get_moment_kpi002_belief_tasks_sqlstr,
-)
-from src.a19_kpi_toolbox.test._util.a19_terms import (
+from src.a19_kpi_toolbox._ref.a19_terms import (
     active_str,
     belief_name_str,
     belief_net_amount_str,
@@ -15,6 +11,10 @@ from src.a19_kpi_toolbox.test._util.a19_terms import (
     moment_voice_nets_str,
     plan_rope_str,
     task_str,
+)
+from src.a19_kpi_toolbox.kpi_sqlstrs import (
+    get_moment_kpi001_voice_nets_sqlstr,
+    get_moment_kpi002_belief_tasks_sqlstr,
 )
 
 

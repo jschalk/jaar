@@ -10,6 +10,17 @@ from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_slash_namemap,
     get_sue_pidginunit,
 )
+from src.a17_idea_logic._ref.a17_terms import (
+    LabelTerm_str,
+    NameTerm_str,
+    RopePointer_str,
+    TitleTerm_str,
+    event_int_str,
+    face_name_str,
+    inx_knot_str,
+    otx_knot_str,
+    unknown_str_str,
+)
 from src.a17_idea_logic.idea_db_tool import (
     get_idea_elements_sort_order as sorting_columns,
     get_ordered_csv,
@@ -35,17 +46,6 @@ from src.a17_idea_logic.pidgin_toolbox import (
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
-)
-from src.a17_idea_logic.test._util.a17_terms import (
-    LabelTerm_str,
-    NameTerm_str,
-    RopePointer_str,
-    TitleTerm_str,
-    event_int_str,
-    face_name_str,
-    inx_knot_str,
-    otx_knot_str,
-    unknown_str_str,
 )
 
 

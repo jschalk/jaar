@@ -1,4 +1,4 @@
-from src.a03_group_logic.test._util.a03_terms import (
+from src.a03_group_logic._ref.a03_terms import (
     awardee_title_str,
     awardunits_str,
     belief_name_str,

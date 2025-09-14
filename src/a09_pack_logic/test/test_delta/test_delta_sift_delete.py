@@ -1,14 +1,14 @@
 # from src.a06_belief_logic.belief_tool import pass
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import beliefdelta_shop, get_minimal_beliefdelta
-from src.a09_pack_logic.test._util.a09_terms import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     belief_voice_membership_str,
     belief_voiceunit_str,
     group_title_str,
     voice_name_str,
 )
+from src.a09_pack_logic.delta import beliefdelta_shop, get_minimal_beliefdelta
 
 
 def test_get_minimal_beliefdelta_ReturnsObjWithoutUnecessaryDELETE_belief_voiceunit():

@@ -1,4 +1,4 @@
-from src.a08_belief_atom_logic.test._util.a08_terms import *
+from src.a08_belief_atom_logic._ref.a08_terms import *
 
 
 def event_int_str() -> str:

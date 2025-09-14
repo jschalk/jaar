@@ -23,24 +23,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidginable_args,
 )
-from src.a17_idea_logic.idea_config import (
-    get_allowed_curds,
-    get_default_sorted_list,
-    get_idea_config_dict,
-    get_idea_dimen_ref,
-    get_idea_elements_sort_order,
-    get_idea_format_filename,
-    get_idea_format_filenames,
-    get_idea_numbers,
-    get_idea_sqlite_types,
-    get_idearef_from_file,
-    get_quick_ideas_column_ref,
-    idea_config_path,
-    idea_format_00013_planunit_v0_0_0,
-    idea_format_00020_belief_voice_membership_v0_0_0,
-    idea_format_00021_belief_voiceunit_v0_0_0,
-)
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -156,6 +139,23 @@ from src.a17_idea_logic.test._util.a17_terms import (
     weekday_order_str,
     world_name_str,
     yr1_jan1_offset_str,
+)
+from src.a17_idea_logic.idea_config import (
+    get_allowed_curds,
+    get_default_sorted_list,
+    get_idea_config_dict,
+    get_idea_dimen_ref,
+    get_idea_elements_sort_order,
+    get_idea_format_filename,
+    get_idea_format_filenames,
+    get_idea_numbers,
+    get_idea_sqlite_types,
+    get_idearef_from_file,
+    get_quick_ideas_column_ref,
+    idea_config_path,
+    idea_format_00013_planunit_v0_0_0,
+    idea_format_00020_belief_voice_membership_v0_0_0,
+    idea_format_00021_belief_voiceunit_v0_0_0,
 )
 
 

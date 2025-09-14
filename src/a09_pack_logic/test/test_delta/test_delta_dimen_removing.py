@@ -1,11 +1,11 @@
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a09_pack_logic.delta import beliefdelta_shop, get_dimens_cruds_beliefdelta
-from src.a09_pack_logic.test._util.a09_terms import (
+from src.a09_pack_logic._ref.a09_terms import (
     INSERT_str,
     belief_voiceunit_str,
     voice_name_str,
 )
+from src.a09_pack_logic.delta import beliefdelta_shop, get_dimens_cruds_beliefdelta
 
 
 def test_BeliefDelta_get_dimens_cruds_beliefdelta_ReturnsObjWithCorrectDimensAndCRUDsBy_voiceunit_insert():

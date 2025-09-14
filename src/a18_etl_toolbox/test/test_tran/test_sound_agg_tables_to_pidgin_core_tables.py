@@ -4,7 +4,7 @@ from src.a16_pidgin_logic.pidgin_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )
-from src.a18_etl_toolbox.test._util.a18_terms import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     belief_name_str,
     belief_voiceunit_str,
     error_message_str,

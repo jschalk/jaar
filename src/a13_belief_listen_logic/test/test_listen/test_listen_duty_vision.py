@@ -9,6 +9,7 @@ from src.a12_hub_toolbox.hub_tool import (
 )
 from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.a12_hub_toolbox.keep_tool import save_duty_belief
+from src.a13_belief_listen_logic._ref.a13_terms import voices_str
 from src.a13_belief_listen_logic.listen_main import (
     create_vision_file_from_duty_file,
     listen_to_belief_visions,
@@ -17,7 +18,6 @@ from src.a13_belief_listen_logic.test._util.a13_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as env_dir,
 )
-from src.a13_belief_listen_logic.test._util.a13_terms import voices_str
 from src.a13_belief_listen_logic.test._util.example_listen_hub import get_texas_hubunit
 
 

@@ -2,10 +2,7 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.a17_idea_logic.idea_config import get_idea_sqlite_types
-from src.a17_idea_logic.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
-from src.a17_idea_logic.test._util.a17_env import env_dir_setup_cleanup
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     belief_name_str,
     event_int_str,
     face_name_str,
@@ -14,6 +11,9 @@ from src.a17_idea_logic.test._util.a17_terms import (
     moment_label_str,
     voice_name_str,
 )
+from src.a17_idea_logic.idea_config import get_idea_sqlite_types
+from src.a17_idea_logic.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
+from src.a17_idea_logic.test._util.a17_env import env_dir_setup_cleanup
 
 
 @pytest_fixture

@@ -1,4 +1,4 @@
-from src.a09_pack_logic.test._util.a09_terms import event_int_str, face_name_str
+from src.a09_pack_logic._ref.a09_terms import event_int_str, face_name_str
 
 
 def test_str_functions_ReturnsObj():

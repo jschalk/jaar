@@ -3,6 +3,13 @@ from src.a01_rope_logic.rope import (
     default_knot_if_None,
     get_default_central_label as root_label,
 )
+from src.a04_reason_logic._ref.a04_terms import (
+    cases_str,
+    knot_str,
+    reason_active_requisite_str,
+    reason_context_str,
+    reason_state_str,
+)
 from src.a04_reason_logic.reason import (
     ReasonCore,
     caseunit_shop,
@@ -11,13 +18,6 @@ from src.a04_reason_logic.reason import (
     reasonheir_shop,
     reasons_get_from_dict,
     reasonunit_shop,
-)
-from src.a04_reason_logic.test._util.a04_terms import (
-    cases_str,
-    knot_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_state_str,
 )
 
 

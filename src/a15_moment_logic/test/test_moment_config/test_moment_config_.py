@@ -1,15 +1,7 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a08_belief_atom_logic.atom_config import get_allowed_class_types
-from src.a15_moment_logic.moment_config import (
-    get_moment_args_class_types,
-    get_moment_args_dimen_mapping,
-    get_moment_args_set,
-    get_moment_config_dict,
-    get_moment_dimens,
-    moment_config_path,
-)
-from src.a15_moment_logic.test._util.a15_terms import (
+from src.a15_moment_logic._ref.a15_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -47,6 +39,14 @@ from src.a15_moment_logic.test._util.a15_terms import (
     weekday_label_str,
     weekday_order_str,
     yr1_jan1_offset_str,
+)
+from src.a15_moment_logic.moment_config import (
+    get_moment_args_class_types,
+    get_moment_args_dimen_mapping,
+    get_moment_args_set,
+    get_moment_config_dict,
+    get_moment_dimens,
+    moment_config_path,
 )
 
 

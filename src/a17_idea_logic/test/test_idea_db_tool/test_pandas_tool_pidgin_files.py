@@ -15,6 +15,7 @@ from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_suita_voice_name_otx_dt,
     get_swim_titlemap,
 )
+from src.a17_idea_logic._ref.a17_terms import reason_context_str, voice_name_str
 from src.a17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     move_otx_csvs_to_pidgin_inx,
@@ -25,7 +26,6 @@ from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
 )
-from src.a17_idea_logic.test._util.a17_terms import reason_context_str, voice_name_str
 
 
 def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(

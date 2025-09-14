@@ -10,12 +10,7 @@ from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_casa_maison_rope_inx_dt,
     get_casa_maison_rope_otx_dt,
 )
-from src.a17_idea_logic.idea_db_tool import (
-    get_dataframe_pidginable_columns,
-    translate_all_columns_dataframe,
-    translate_single_column_dataframe,
-)
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     NameTerm_str,
     credor_respect_str,
     group_title_str,
@@ -24,6 +19,11 @@ from src.a17_idea_logic.test._util.a17_terms import (
     voice_cred_points_str,
     voice_name_str,
     voice_pool_str,
+)
+from src.a17_idea_logic.idea_db_tool import (
+    get_dataframe_pidginable_columns,
+    translate_all_columns_dataframe,
+    translate_single_column_dataframe,
 )
 
 

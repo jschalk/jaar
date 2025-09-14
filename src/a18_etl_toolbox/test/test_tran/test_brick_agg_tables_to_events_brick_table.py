@@ -5,7 +5,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
 )
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.a18_etl_toolbox.test._util.a18_terms import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     brick_agg_str,
     cumulative_minute_str,
     error_message_str,

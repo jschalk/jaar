@@ -8,12 +8,12 @@ from src.a07_timeline_logic.timeline_main import (
     timelineunit_shop,
 )
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.a15_moment_logic._ref.a15_terms import time_str
 from src.a15_moment_logic.moment_main import momentunit_shop
 from src.a15_moment_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a15_moment_logic.test._util.a15_terms import time_str
 
 
 def test_MomentUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_cleanup):

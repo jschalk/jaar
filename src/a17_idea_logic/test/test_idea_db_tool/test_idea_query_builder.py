@@ -1,11 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a17_idea_logic.idea_config import get_idea_config_dict
-from src.a17_idea_logic.idea_db_tool import (
-    create_idea_sorted_table,
-    get_default_sorted_list,
-    get_idea_into_dimen_raw_query,
-)
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     amount_str,
     belief_name_str,
     event_int_str,
@@ -16,6 +10,12 @@ from src.a17_idea_logic.test._util.a17_terms import (
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a17_idea_logic.idea_config import get_idea_config_dict
+from src.a17_idea_logic.idea_db_tool import (
+    create_idea_sorted_table,
+    get_default_sorted_list,
+    get_idea_into_dimen_raw_query,
 )
 
 

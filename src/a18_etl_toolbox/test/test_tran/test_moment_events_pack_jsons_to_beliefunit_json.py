@@ -10,16 +10,16 @@ from src.a12_hub_toolbox.a12_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
 )
-from src.a18_etl_toolbox.test._util.a18_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
-from src.a18_etl_toolbox.test._util.a18_terms import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     INSERT_str,
     belief_voiceunit_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a18_etl_toolbox.test._util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
 )
 from src.a18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_beliefunits,

@@ -1,5 +1,6 @@
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a18_etl_toolbox.a18_path import create_stances_dir_path
+from src.a19_kpi_toolbox._ref.a19_terms import moment_kpi001_voice_nets_str
 from src.a19_kpi_toolbox.kpi_mstr import (
     create_populate_kpi001_table,
     get_all_kpi_functions,
@@ -7,7 +8,6 @@ from src.a19_kpi_toolbox.kpi_mstr import (
     get_default_kpi_bundle,
     get_kpi_set_from_bundle,
 )
-from src.a19_kpi_toolbox.test._util.a19_terms import moment_kpi001_voice_nets_str
 
 
 def test_get_default_kpi_bundle_ReturnsObj():

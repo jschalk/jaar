@@ -1,6 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
+from src.a18_etl_toolbox._ref.a18_terms import belief_name_str, moment_label_str
 from src.a18_etl_toolbox.a18_path import (
     create_last_run_metrics_path,
     create_moment_mstr_path,
@@ -15,7 +16,6 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_terms import belief_name_str, moment_label_str
 
 STANCE0001_FILENAME = "stance0001.xlsx"
 MOMENT_OTE1_AGG_CSV_FILENAME = "moment_ote1_agg.csv"

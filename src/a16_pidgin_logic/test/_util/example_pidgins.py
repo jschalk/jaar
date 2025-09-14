@@ -1,5 +1,10 @@
 from pandas import DataFrame
 from src.a01_rope_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.a16_pidgin_logic._ref.a16_terms import (
+    RopePointer_str,
+    reason_context_str,
+    voice_name_str,
+)
 from src.a16_pidgin_logic.map import (
     LabelMap,
     NameMap,
@@ -12,11 +17,6 @@ from src.a16_pidgin_logic.map import (
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_terms import (
-    RopePointer_str,
-    reason_context_str,
-    voice_name_str,
-)
 
 
 def get_clean_labelmap() -> LabelMap:

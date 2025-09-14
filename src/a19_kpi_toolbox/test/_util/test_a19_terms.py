@@ -1,4 +1,4 @@
-from src.a19_kpi_toolbox.test._util.a19_terms import (
+from src.a19_kpi_toolbox._ref.a19_terms import (
     moment_kpi001_voice_nets_str,
     moment_kpi002_belief_tasks_str,
 )

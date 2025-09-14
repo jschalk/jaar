@@ -1,16 +1,5 @@
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.a15_moment_logic.moment_report import (
-    get_moment_guts_agenda_dataframe,
-    get_moment_guts_agenda_plotly_fig,
-    get_moment_guts_voices_dataframe,
-    get_moment_guts_voices_plotly_fig,
-    get_moment_jobs_agenda_dataframe,
-    get_moment_jobs_agenda_plotly_fig,
-    get_moment_jobs_voices_dataframe,
-    get_moment_jobs_voices_plotly_fig,
-)
-from src.a15_moment_logic.test._util.a15_env import env_dir_setup_cleanup
-from src.a15_moment_logic.test._util.a15_terms import (
+from src.a15_moment_logic._ref.a15_terms import (
     addin_str,
     begin_str,
     belief_name_str,
@@ -24,6 +13,17 @@ from src.a15_moment_logic.test._util.a15_terms import (
     voice_debt_points_str,
     voice_name_str,
 )
+from src.a15_moment_logic.moment_report import (
+    get_moment_guts_agenda_dataframe,
+    get_moment_guts_agenda_plotly_fig,
+    get_moment_guts_voices_dataframe,
+    get_moment_guts_voices_plotly_fig,
+    get_moment_jobs_agenda_dataframe,
+    get_moment_jobs_agenda_plotly_fig,
+    get_moment_jobs_voices_dataframe,
+    get_moment_jobs_voices_plotly_fig,
+)
+from src.a15_moment_logic.test._util.a15_env import env_dir_setup_cleanup
 from src.a15_moment_logic.test._util.example_moments import (
     create_example_moment2,
     create_example_moment3,

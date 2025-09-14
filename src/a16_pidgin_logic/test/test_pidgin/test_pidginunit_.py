@@ -5,25 +5,7 @@ from src.a08_belief_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.a15_moment_logic.moment_config import get_moment_args_class_types
-from src.a16_pidgin_logic.map import (
-    labelmap_shop,
-    namemap_shop,
-    ropemap_shop,
-    titlemap_shop,
-)
-from src.a16_pidgin_logic.pidgin_config import (
-    default_unknown_str_if_None,
-    find_set_otx_inx_args,
-    get_pidgin_args_class_types,
-    get_pidgin_LabelTerm_args,
-    get_pidgin_NameTerm_args,
-    get_pidgin_RopePointer_args,
-    get_pidgin_TitleTerm_args,
-    get_pidginable_args,
-    pidginable_class_types,
-)
-from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_terms import (
+from src.a16_pidgin_logic._ref.a16_terms import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,
@@ -51,6 +33,24 @@ from src.a16_pidgin_logic.test._util.a16_terms import (
     voice_name_str,
     weekday_label_str,
 )
+from src.a16_pidgin_logic.map import (
+    labelmap_shop,
+    namemap_shop,
+    ropemap_shop,
+    titlemap_shop,
+)
+from src.a16_pidgin_logic.pidgin_config import (
+    default_unknown_str_if_None,
+    find_set_otx_inx_args,
+    get_pidgin_args_class_types,
+    get_pidgin_LabelTerm_args,
+    get_pidgin_NameTerm_args,
+    get_pidgin_RopePointer_args,
+    get_pidgin_TitleTerm_args,
+    get_pidginable_args,
+    pidginable_class_types,
+)
+from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,

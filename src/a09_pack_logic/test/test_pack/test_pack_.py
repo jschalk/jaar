@@ -4,15 +4,7 @@ from src.a03_group_logic.voice import voiceunit_shop
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import beliefdelta_shop
-from src.a09_pack_logic.pack import (
-    PackUnit,
-    get_init_pack_id_if_None,
-    get_packunit_from_json,
-    init_pack_id,
-    packunit_shop,
-)
-from src.a09_pack_logic.test._util.a09_terms import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -24,6 +16,14 @@ from src.a09_pack_logic.test._util.a09_terms import (
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a09_pack_logic.delta import beliefdelta_shop
+from src.a09_pack_logic.pack import (
+    PackUnit,
+    get_init_pack_id_if_None,
+    get_packunit_from_json,
+    init_pack_id,
+    packunit_shop,
 )
 from src.a09_pack_logic.test._util.example_atoms import get_atom_example_planunit_sports
 from src.a09_pack_logic.test._util.example_deltas import get_beliefdelta_sue_example

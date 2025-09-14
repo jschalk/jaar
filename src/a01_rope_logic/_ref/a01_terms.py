@@ -1,4 +1,4 @@
-from src.a00_data_toolbox.test._util.a00_terms import *
+from src.a00_data_toolbox._ref.a00_terms import *
 
 
 def LabelTerm_str() -> str:

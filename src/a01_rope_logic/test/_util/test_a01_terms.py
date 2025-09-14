@@ -1,4 +1,4 @@
-from src.a01_rope_logic.test._util.a01_terms import (
+from src.a01_rope_logic._ref.a01_terms import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,

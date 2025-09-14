@@ -1,4 +1,4 @@
-from src.a17_idea_logic.test._util.a17_terms import (
+from src.a17_idea_logic._ref.a17_terms import (
     allowed_crud_str,
     build_order_str,
     delete_insert_str,

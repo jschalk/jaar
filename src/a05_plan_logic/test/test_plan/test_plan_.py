@@ -2,9 +2,7 @@ from src.a01_rope_logic.rope import create_rope, default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
-from src.a05_plan_logic.healer import healerunit_shop
-from src.a05_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
-from src.a05_plan_logic.test._util.a05_terms import (
+from src.a05_plan_logic._ref.a05_terms import (
     active_hx_str,
     active_str,
     addin_str,
@@ -49,6 +47,8 @@ from src.a05_plan_logic.test._util.a05_terms import (
     tree_level_str,
     uid_str,
 )
+from src.a05_plan_logic.healer import healerunit_shop
+from src.a05_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
 
 
 def test_get_default_moment_label_ReturnsObj():

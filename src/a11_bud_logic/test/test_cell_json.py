@@ -1,6 +1,5 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
-from src.a11_bud_logic.test._util.a11_terms import (
+from src.a11_bud_logic._ref.a11_terms import (
     ancestors_str,
     beliefadjust_str,
     beliefevent_facts_str,
@@ -13,6 +12,7 @@ from src.a11_bud_logic.test._util.a11_terms import (
     penny_str,
     quota_str,
 )
+from src.a11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
 from src.a11_bud_logic.test._util.example_factunits import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,

@@ -1,4 +1,4 @@
-from src.a02_finance_logic.test._util.a02_terms import (
+from src.a02_finance_logic._ref.a02_terms import (
     fund_iota_str,
     fund_pool_str,
     knot_str,

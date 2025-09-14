@@ -1,4 +1,4 @@
-from src.a06_belief_logic.test._util.a06_terms import *
+from src.a06_belief_logic._ref.a06_terms import *
 
 
 def c100_str() -> str:

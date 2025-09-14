@@ -1,4 +1,4 @@
-from src.a16_pidgin_logic.test._util.a16_terms import (
+from src.a16_pidgin_logic._ref.a16_terms import (
     inx_knot_str,
     inx_label_str,
     inx_name_str,

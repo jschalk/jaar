@@ -1,4 +1,4 @@
-from src.a02_finance_logic.test._util.a02_terms import *
+from src.a02_finance_logic._ref.a02_terms import *
 
 
 def awardee_title_str() -> str:

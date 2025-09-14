@@ -3,21 +3,7 @@ from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
-from src.a22_belief_viewer.example22_beliefs import (
-    best_run_str,
-    best_soccer_str,
-    best_sport_str,
-    best_swim_str,
-    get_beliefunit_irrational_example,
-    get_sue_belief_with_facts_and_reasons,
-    get_sue_beliefunit,
-    play_run_str,
-    play_soccer_str,
-    play_str,
-    play_swim_str,
-)
-from src.a22_belief_viewer.test._util.a22_terms import (
+from src.a22_belief_viewer._ref.a22_terms import (
     active_hx_str,
     active_str,
     addin_str,
@@ -65,6 +51,20 @@ from src.a22_belief_viewer.test._util.a22_terms import (
     task_str,
     tree_level_str,
     uid_str,
+)
+from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
+from src.a22_belief_viewer.example22_beliefs import (
+    best_run_str,
+    best_soccer_str,
+    best_sport_str,
+    best_swim_str,
+    get_beliefunit_irrational_example,
+    get_sue_belief_with_facts_and_reasons,
+    get_sue_beliefunit,
+    play_run_str,
+    play_soccer_str,
+    play_str,
+    play_swim_str,
 )
 
 

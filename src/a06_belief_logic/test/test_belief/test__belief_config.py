@@ -2,17 +2,7 @@
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a06_belief_logic.belief_config import (
-    belief_config_path,
-    get_all_belief_calc_args,
-    get_belief_calc_args_sqlite_datatype_dict,
-    get_belief_calc_args_type_dict,
-    get_belief_calc_dimen_args,
-    get_belief_calc_dimens,
-    get_belief_config_dict,
-    max_tree_traverse_default,
-)
-from src.a06_belief_logic.test._util.a06_terms import (
+from src.a06_belief_logic._ref.a06_terms import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,
@@ -106,6 +96,16 @@ from src.a06_belief_logic.test._util.a06_terms import (
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a06_belief_logic.belief_config import (
+    belief_config_path,
+    get_all_belief_calc_args,
+    get_belief_calc_args_sqlite_datatype_dict,
+    get_belief_calc_args_type_dict,
+    get_belief_calc_dimen_args,
+    get_belief_calc_dimens,
+    get_belief_config_dict,
+    max_tree_traverse_default,
 )
 
 

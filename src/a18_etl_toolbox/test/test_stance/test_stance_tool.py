@@ -11,6 +11,16 @@ from src.a17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.a17_idea_logic.idea_db_tool import get_sheet_names
+from src.a18_etl_toolbox._ref.a18_terms import (
+    event_int_str,
+    face_name_str,
+    inx_knot_str,
+    inx_name_str,
+    otx_knot_str,
+    otx_name_str,
+    pidgin_name_str,
+    unknown_str_str,
+)
 from src.a18_etl_toolbox.a18_path import (
     create_moment_mstr_path,
     create_stance0001_path,
@@ -23,16 +33,6 @@ from src.a18_etl_toolbox.stance_tool import (
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a18_etl_toolbox.test._util.a18_terms import (
-    event_int_str,
-    face_name_str,
-    inx_knot_str,
-    inx_name_str,
-    otx_knot_str,
-    otx_name_str,
-    pidgin_name_str,
-    unknown_str_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
