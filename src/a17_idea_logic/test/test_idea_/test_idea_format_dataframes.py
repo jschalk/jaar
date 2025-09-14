@@ -17,7 +17,7 @@ from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     belief_name_str,
     group_cred_points_str,
     group_debt_points_str,

@@ -9,7 +9,7 @@ from src.a22_belief_viewer.belief_viewer_tool import (
     get_plan_view_dict,
     get_voices_view_dict,
 )
-from src.a22_belief_viewer.test._util.a22_str import planroot_str, voices_str
+from src.a22_belief_viewer.test._util.a22_terms import planroot_str, voices_str
 
 
 def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():

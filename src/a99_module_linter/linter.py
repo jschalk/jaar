@@ -153,7 +153,7 @@ def get_all_str_functions() -> list:
         desc_number_str = module_desc[1:3]
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
-        str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
+        str_util_path = create_path(util_dir, f"a{desc_number_str}_terms.py")
         str_functions = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:
             str_functions = get_function_names_from_file(str_util_path)
@@ -242,7 +242,7 @@ def check_str_func_test_file_has_needed_asserts(
         str_func_assert_str = f"""assert {str_function}() == "{str_function[:-4]}"""
         test_file_str = open(test_file_path).read()
         if test_file_str.find(str_func_assert_str) <= 0:
-            str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
+            str_util_path = create_path(util_dir, f"a{desc_number_str}_terms.py")
             print(f"{str_util_path} {str_func_assert_str=}")
         assert test_file_str.find(str_func_assert_str) > 0
 
@@ -332,7 +332,7 @@ def get_max_module_import_str() -> str:
     max_module_import_str = max_module_dir.replace("\\", ".")
     max_module_import_str = max_module_import_str.replace("""src/""", """src.""")
     max_module_import_str = (
-        f"{max_module_import_str}.test._util.a{max_module_int_str}_str"
+        f"{max_module_import_str}.test._util.a{max_module_int_str}_terms"
     )
     return max_module_import_str
 

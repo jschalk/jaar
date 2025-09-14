@@ -1,6 +1,6 @@
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
 from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic.test._util.a09_terms import (
     DELETE_str,
     UPDATE_str,
     belief_voiceunit_str,

@@ -6,7 +6,7 @@ from src.a15_moment_logic.a15_path import (
     BUD_MANDATE_FILENAME,
     create_bud_voice_mandate_ledger_path,
 )
-from src.a15_moment_logic.test._util.a15_str import (
+from src.a15_moment_logic.test._util.a15_terms import (
     belief_name_str,
     bud_time_str,
     moment_label_str,

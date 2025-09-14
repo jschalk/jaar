@@ -15,7 +15,7 @@ from src.a06_belief_logic.belief_tool import (
     belief_voiceunit_exists,
     beliefunit_exists,
 )
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_terms import (
     awardee_title_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,

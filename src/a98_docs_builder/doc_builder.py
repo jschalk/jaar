@@ -32,7 +32,7 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
 def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
     test_dir = create_path(module_dir, "test")
     util_dir = create_path(test_dir, "_util")
-    str_util_path = create_path(util_dir, f"a{desc_number_str}_str.py")
+    str_util_path = create_path(util_dir, f"a{desc_number_str}_terms.py")
     return get_function_names_from_file(str_util_path)
 
 

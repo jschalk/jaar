@@ -12,7 +12,7 @@ from src.a09_pack_logic.pack import (
     init_pack_id,
     packunit_shop,
 )
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic.test._util.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

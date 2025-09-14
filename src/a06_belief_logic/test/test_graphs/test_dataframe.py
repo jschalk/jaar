@@ -3,7 +3,7 @@ from src.a06_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
     get_belief_voiceunits_dataframe,
 )
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_terms import (
     addin_str,
     begin_str,
     close_str,

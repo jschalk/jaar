@@ -1,6 +1,6 @@
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
-from src.a05_plan_logic.test._util.a05_str import (
+from src.a05_plan_logic.test._util.a05_terms import (
     addin_str,
     begin_str,
     close_str,

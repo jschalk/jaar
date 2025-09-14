@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import open_json
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.a18_etl_toolbox.a18_path import create_last_run_metrics_path
 from src.a18_etl_toolbox.test._util.a18_env import get_module_temp_dir
-from src.a18_etl_toolbox.test._util.a18_str import brick_agg_str, event_int_str
+from src.a18_etl_toolbox.test._util.a18_terms import brick_agg_str, event_int_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_sound_and_heard_tables
 from src.a18_etl_toolbox.transformers import create_last_run_metrics_json
 

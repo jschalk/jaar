@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.a16_pidgin_logic.pidgin_main import inherit_pidginunit, pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_str import NameTerm_str
+from src.a16_pidgin_logic.test._util.a16_terms import NameTerm_str
 from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,
     get_clean_ropemap,

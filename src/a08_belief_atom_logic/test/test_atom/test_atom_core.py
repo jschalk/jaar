@@ -1,6 +1,6 @@
 from src.a03_group_logic.voice import voiceunit_shop
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.a08_belief_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.test._util.a08_terms import (
     DELETE_str,
     INSERT_str,
     belief_voice_membership_str,

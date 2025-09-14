@@ -11,7 +11,7 @@ from src.a06_belief_logic.belief_main import (
     get_dict_of_belief_from_dict,
     get_from_json as beliefunit_get_from_json,
 )
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_terms import (
     factunits_str,
     kids_str,
     laborunit_str,

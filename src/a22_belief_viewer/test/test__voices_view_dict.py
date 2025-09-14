@@ -1,6 +1,6 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_voices_view_dict
-from src.a22_belief_viewer.test._util.a22_str import (
+from src.a22_belief_viewer.test._util.a22_terms import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,

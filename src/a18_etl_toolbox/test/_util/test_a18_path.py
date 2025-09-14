@@ -15,7 +15,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import belief_name_str, moment_label_str
+from src.a18_etl_toolbox.test._util.a18_terms import belief_name_str, moment_label_str
 
 STANCE0001_FILENAME = "stance0001.xlsx"
 MOMENT_OTE1_AGG_CSV_FILENAME = "moment_ote1_agg.csv"

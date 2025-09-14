@@ -13,7 +13,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import time_str
+from src.a18_etl_toolbox.test._util.a18_terms import time_str
 from src.a18_etl_toolbox.transformers import add_moment_timeline_to_guts
 
 

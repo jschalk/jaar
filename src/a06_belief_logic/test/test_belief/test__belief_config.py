@@ -12,7 +12,7 @@ from src.a06_belief_logic.belief_config import (
     get_belief_config_dict,
     max_tree_traverse_default,
 )
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_terms import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,

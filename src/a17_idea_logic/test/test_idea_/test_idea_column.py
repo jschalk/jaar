@@ -1,5 +1,5 @@
 from src.a17_idea_logic.idea_main import IdeaRef, idearef_shop
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     belief_voiceunit_str,
     group_title_str,
     plan_rope_str,

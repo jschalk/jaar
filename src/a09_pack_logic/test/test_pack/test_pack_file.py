@@ -6,7 +6,7 @@ from src.a09_pack_logic.test._util.a09_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as moments_dir,
 )
-from src.a09_pack_logic.test._util.a09_str import belief_name_str, face_name_str
+from src.a09_pack_logic.test._util.a09_terms import belief_name_str, face_name_str
 from src.a09_pack_logic.test._util.example_atoms import (
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,

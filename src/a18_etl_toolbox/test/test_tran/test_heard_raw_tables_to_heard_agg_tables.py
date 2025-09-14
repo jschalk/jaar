@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.a15_moment_logic.moment_config import get_moment_dimens
 from src.a17_idea_logic.idea_config import get_default_sorted_list, get_idea_config_dict
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox.test._util.a18_terms import (
     belief_name_str,
     belief_voiceunit_str,
     error_message_str,

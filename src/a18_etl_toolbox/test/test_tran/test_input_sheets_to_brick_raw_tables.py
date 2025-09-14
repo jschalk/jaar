@@ -11,7 +11,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox.test._util.a18_terms import (
     brick_raw_str,
     cumulative_minute_str,
     error_message_str,

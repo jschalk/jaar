@@ -8,7 +8,7 @@ from src.a21_lobby_logic.a21_path import (
     create_world_dir_path,
 )
 from src.a21_lobby_logic.test._util.a21_env import get_module_temp_dir
-from src.a21_lobby_logic.test._util.a21_str import (
+from src.a21_lobby_logic.test._util.a21_terms import (
     lobby_id_str,
     lobby_mstr_dir_str,
     lobbys_str,

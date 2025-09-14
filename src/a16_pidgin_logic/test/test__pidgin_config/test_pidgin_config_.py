@@ -10,7 +10,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_quick_pidgens_column_ref,
     pidgin_config_path,
 )
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a16_pidgin_logic.test._util.a16_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

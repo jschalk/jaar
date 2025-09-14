@@ -7,7 +7,7 @@ from src.a18_etl_toolbox.stance_tool import (
     add_to_br00044_csv,
     add_to_br00045_csv,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox.test._util.a18_terms import (
     event_int_str,
     face_name_str,
     inx_knot_str,

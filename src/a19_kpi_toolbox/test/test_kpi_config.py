@@ -7,7 +7,7 @@ from src.a19_kpi_toolbox.kpi_mstr import (
     get_default_kpi_bundle,
     get_kpi_set_from_bundle,
 )
-from src.a19_kpi_toolbox.test._util.a19_str import moment_kpi001_voice_nets_str
+from src.a19_kpi_toolbox.test._util.a19_terms import moment_kpi001_voice_nets_str
 
 
 def test_get_default_kpi_bundle_ReturnsObj():

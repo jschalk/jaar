@@ -54,7 +54,7 @@ from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a12_hub_toolbox.test._util.a12_str import (
+from src.a12_hub_toolbox.test._util.a12_terms import (
     ancestors_str,
     bud_belief_name_str,
     celldepth_str,

@@ -4,7 +4,7 @@ from src.a11_bud_logic.bud import (
     budunit_shop,
     get_brokerunit_from_dict,
 )
-from src.a11_bud_logic.test._util.a11_str import (
+from src.a11_bud_logic.test._util.a11_terms import (
     belief_name_str,
     bud_time_str,
     bud_voice_nets_str,

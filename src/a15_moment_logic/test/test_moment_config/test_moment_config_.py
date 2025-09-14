@@ -9,7 +9,7 @@ from src.a15_moment_logic.moment_config import (
     get_moment_dimens,
     moment_config_path,
 )
-from src.a15_moment_logic.test._util.a15_str import (
+from src.a15_moment_logic.test._util.a15_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

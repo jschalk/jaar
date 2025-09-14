@@ -8,7 +8,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox.test._util.a18_terms import (
     belief_net_amount_str,
     moment_voice_nets_str,
 )

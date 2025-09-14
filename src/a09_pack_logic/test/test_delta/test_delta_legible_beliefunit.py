@@ -2,7 +2,7 @@ from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
 from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.legible import create_legible_list
-from src.a09_pack_logic.test._util.a09_str import UPDATE_str, beliefunit_str
+from src.a09_pack_logic.test._util.a09_terms import UPDATE_str, beliefunit_str
 
 
 def test_create_legible_list_ReturnsObjEstablishWithEmptyBeliefDelta():

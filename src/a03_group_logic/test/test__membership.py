@@ -14,7 +14,7 @@ from src.a03_group_logic.group import (
     membership_shop,
     memberships_get_from_dict,
 )
-from src.a03_group_logic.test._util.a03_str import (
+from src.a03_group_logic.test._util.a03_terms import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,

@@ -41,7 +41,7 @@ from src.a12_hub_toolbox.a12_path import (
     treasury_filename,
 )
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
-from src.a12_hub_toolbox.test._util.a12_str import (
+from src.a12_hub_toolbox.test._util.a12_terms import (
     belief_name_str,
     bud_time_str,
     event_int_str,

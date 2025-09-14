@@ -14,7 +14,7 @@ from src.a18_etl_toolbox.db_obj_belief_tool import (
     create_blrprem_metrics_insert_sqlstr,
     create_blrreas_metrics_insert_sqlstr,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox.test._util.a18_terms import (
     belief_name_str,
     chore_str,
     moment_label_str,

@@ -7,7 +7,7 @@ from src.a04_reason_logic.reason import (
     factunits_get_from_dict,
     get_factunit_from_tuple,
 )
-from src.a04_reason_logic.test._util.a04_str import (
+from src.a04_reason_logic.test._util.a04_terms import (
     fact_context_str,
     fact_lower_str,
     fact_state_str,

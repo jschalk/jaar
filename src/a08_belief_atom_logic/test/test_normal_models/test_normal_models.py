@@ -12,7 +12,7 @@ from src.a08_belief_atom_logic.normal_models import (
     ReasonTable,
     VoiceUnitTable,
 )
-from src.a08_belief_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.test._util.a08_terms import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,

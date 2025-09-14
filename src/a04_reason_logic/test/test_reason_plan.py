@@ -12,7 +12,7 @@ from src.a04_reason_logic.reason import (
     reasons_get_from_dict,
     reasonunit_shop,
 )
-from src.a04_reason_logic.test._util.a04_str import (
+from src.a04_reason_logic.test._util.a04_terms import (
     cases_str,
     knot_str,
     reason_active_requisite_str,

@@ -13,7 +13,7 @@ from src.a22_belief_viewer.example22_beliefs import (
     play_str,
     play_swim_str,
 )
-from src.a22_belief_viewer.test._util.a22_str import (
+from src.a22_belief_viewer.test._util.a22_terms import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,

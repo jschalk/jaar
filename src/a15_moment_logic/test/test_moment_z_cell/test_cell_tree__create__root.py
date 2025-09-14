@@ -14,7 +14,7 @@ from src.a15_moment_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a15_moment_logic.test._util.a15_str import (
+from src.a15_moment_logic.test._util.a15_terms import (
     ancestors_str,
     bud_belief_name_str,
     celldepth_str,

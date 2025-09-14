@@ -12,7 +12,7 @@ from src.a17_idea_logic.idea_main import (
     get_idearef_obj,
     make_beliefdelta,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     INSERT_str,
     belief_planunit_str,
     belief_voiceunit_str,

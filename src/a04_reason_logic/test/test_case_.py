@@ -9,7 +9,7 @@ from src.a04_reason_logic.reason import (
     caseunit_shop,
     factheir_shop,
 )
-from src.a04_reason_logic.test._util.a04_str import (
+from src.a04_reason_logic.test._util.a04_terms import (
     chore_str,
     knot_str,
     reason_divisor_str,

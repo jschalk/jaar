@@ -8,7 +8,7 @@ from src.a11_bud_logic.cell import (
     cellunit_shop,
     create_child_cellunits,
 )
-from src.a11_bud_logic.test._util.a11_str import (
+from src.a11_bud_logic.test._util.a11_terms import (
     ancestors_str,
     beliefadjust_str,
     beliefevent_facts_str,

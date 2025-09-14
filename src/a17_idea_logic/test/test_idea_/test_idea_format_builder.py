@@ -8,7 +8,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_formats_dir,
     get_idea_numbers,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     attributes_str,
     belief_name_str,
     belief_planunit_str,

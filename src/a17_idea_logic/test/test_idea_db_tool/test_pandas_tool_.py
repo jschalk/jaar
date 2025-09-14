@@ -10,7 +10,7 @@ from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     credor_respect_str,
     group_title_str,
     voice_name_str,

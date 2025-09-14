@@ -15,7 +15,7 @@ from src.a01_rope_logic.term import (
     VoiceName,
     default_knot_if_None,
 )
-from src.a01_rope_logic.test._util.a01_str import knot_str
+from src.a01_rope_logic.test._util.a01_terms import knot_str
 
 
 def test_KnotTerm_Exists():

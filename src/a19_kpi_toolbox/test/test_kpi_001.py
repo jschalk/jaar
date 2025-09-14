@@ -11,7 +11,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
-from src.a19_kpi_toolbox.test._util.a19_str import (
+from src.a19_kpi_toolbox.test._util.a19_terms import (
     belief_name_str,
     belief_net_amount_str,
     moment_kpi001_voice_nets_str,

@@ -9,7 +9,7 @@ from src.a16_pidgin_logic.map import (
     namemap_shop,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a16_pidgin_logic.test._util.a16_terms import (
     event_int_str,
     face_name_str,
     inx_knot_str,

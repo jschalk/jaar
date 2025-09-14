@@ -1,5 +1,5 @@
 from src.a22_belief_viewer.belief_viewer_app import get_belief_viewer_template
-from src.a22_belief_viewer.test._util.a22_str import (
+from src.a22_belief_viewer.test._util.a22_terms import (
     active_hx_str,
     active_str,
     addin_str,

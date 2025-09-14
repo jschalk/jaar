@@ -40,7 +40,7 @@ from src.a17_idea_logic.idea_config import (
     idea_format_00020_belief_voice_membership_v0_0_0,
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

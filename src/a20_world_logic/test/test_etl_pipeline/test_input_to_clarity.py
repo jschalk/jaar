@@ -24,7 +24,7 @@ from src.a20_world_logic.test._util.a20_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir as worlds_dir,
 )
-from src.a20_world_logic.test._util.a20_str import (
+from src.a20_world_logic.test._util.a20_terms import (
     amount_str,
     belief_name_str,
     bud_time_str,

@@ -10,7 +10,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
-from src.a19_kpi_toolbox.test._util.a19_str import (
+from src.a19_kpi_toolbox.test._util.a19_terms import (
     active_str,
     belief_name_str,
     belief_net_amount_str,

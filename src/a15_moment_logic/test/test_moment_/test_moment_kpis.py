@@ -10,7 +10,7 @@ from src.a15_moment_logic.moment_report import (
     get_moment_jobs_voices_plotly_fig,
 )
 from src.a15_moment_logic.test._util.a15_env import env_dir_setup_cleanup
-from src.a15_moment_logic.test._util.a15_str import (
+from src.a15_moment_logic.test._util.a15_terms import (
     addin_str,
     begin_str,
     belief_name_str,

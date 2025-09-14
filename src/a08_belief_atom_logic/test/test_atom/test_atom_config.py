@@ -16,7 +16,7 @@ from src.a08_belief_atom_logic.atom_config import (
     is_belief_dimen,
     set_mog,
 )
-from src.a08_belief_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.test._util.a08_terms import (
     DELETE_str,
     INSERT_str,
     LabelTerm_str,

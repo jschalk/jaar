@@ -5,7 +5,7 @@ from src.a16_pidgin_logic.pidgin_main import (
     get_pidginunit_from_json,
     pidginunit_shop,
 )
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a16_pidgin_logic.test._util.a16_terms import (
     event_int_str,
     face_name_str,
     inx_knot_str,

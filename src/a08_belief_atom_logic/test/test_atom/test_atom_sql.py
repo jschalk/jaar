@@ -6,7 +6,7 @@ from src.a08_belief_atom_logic.atom_main import (
     beliefatom_shop,
     get_beliefatom_from_rowdata,
 )
-from src.a08_belief_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.test._util.a08_terms import (
     INSERT_str,
     UPDATE_str,
     atom_hx_str,

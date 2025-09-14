@@ -25,7 +25,7 @@ from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
 )
-from src.a17_idea_logic.test._util.a17_str import reason_context_str, voice_name_str
+from src.a17_idea_logic.test._util.a17_terms import reason_context_str, voice_name_str
 
 
 def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(

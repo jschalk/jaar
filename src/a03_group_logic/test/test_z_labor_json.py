@@ -5,7 +5,7 @@ from src.a03_group_logic.labor import (
     partyunit_get_from_dict,
     partyunit_shop,
 )
-from src.a03_group_logic.test._util.a03_str import party_title_str, solo_str
+from src.a03_group_logic.test._util.a03_terms import party_title_str, solo_str
 
 
 def test_PartyUnit_to_dict_ReturnsObj_Scenario0_solo_IsTrue():

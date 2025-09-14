@@ -15,7 +15,7 @@ from src.a17_idea_logic.idea_db_tool import (
     translate_all_columns_dataframe,
     translate_single_column_dataframe,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     NameTerm_str,
     credor_respect_str,
     group_title_str,

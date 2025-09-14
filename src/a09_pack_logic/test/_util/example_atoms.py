@@ -1,7 +1,7 @@
 from src.a01_rope_logic.rope import create_rope
 from src.a01_rope_logic.term import MomentLabel
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic.test._util.a09_terms import (
     INSERT_str,
     belief_planunit_str,
     plan_rope_str,

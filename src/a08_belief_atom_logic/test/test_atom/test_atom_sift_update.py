@@ -7,7 +7,7 @@ from src.a06_belief_logic.belief_tool import (
     belief_plan_reasonunit_get_obj,
 )
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
-from src.a08_belief_atom_logic.test._util.a08_str import (
+from src.a08_belief_atom_logic.test._util.a08_terms import (
     INSERT_str,
     UPDATE_str,
     addin_str,

@@ -10,7 +10,7 @@ from src.a03_group_logic.labor import (
     partyheir_shop,
     partyunit_shop,
 )
-from src.a03_group_logic.test._util.a03_str import (
+from src.a03_group_logic.test._util.a03_terms import (
     parent_solo_str,
     party_title_str,
     solo_str,

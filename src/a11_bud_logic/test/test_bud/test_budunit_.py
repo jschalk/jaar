@@ -7,7 +7,7 @@ from src.a11_bud_logic.bud import (
     get_budunit_from_dict,
     get_budunit_from_json,
 )
-from src.a11_bud_logic.test._util.a11_str import (
+from src.a11_bud_logic.test._util.a11_terms import (
     bud_time_str,
     bud_voice_nets_str,
     celldepth_str,

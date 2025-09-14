@@ -17,7 +17,7 @@ from src.a17_idea_logic.idea_main import (
     get_idearef_obj,
 )
 from src.a17_idea_logic.test._util.a17_env import src_module_dir
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     addin_str,
     attributes_str,
     begin_str,

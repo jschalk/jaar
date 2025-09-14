@@ -17,7 +17,7 @@ from src.a22_belief_viewer.example22_beliefs import (
     play_str,
     play_swim_str,
 )
-from src.a22_belief_viewer.test._util.a22_str import (
+from src.a22_belief_viewer.test._util.a22_terms import (
     active_hx_str,
     active_str,
     addin_str,

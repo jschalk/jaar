@@ -13,7 +13,7 @@ from src.a05_plan_logic.plan import (
     get_obj_from_plan_dict,
     planunit_shop,
 )
-from src.a05_plan_logic.test._util.a05_str import (
+from src.a05_plan_logic.test._util.a05_terms import (
     active_hx_str,
     active_str,
     addin_str,

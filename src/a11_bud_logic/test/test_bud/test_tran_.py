@@ -6,7 +6,7 @@ from src.a11_bud_logic.bud import (
     tranbook_shop,
     tranunit_shop,
 )
-from src.a11_bud_logic.test._util.a11_str import moment_label_str
+from src.a11_bud_logic.test._util.a11_terms import moment_label_str
 
 
 def test_TranUnit_Exists():

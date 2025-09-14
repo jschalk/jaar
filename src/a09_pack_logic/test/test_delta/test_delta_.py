@@ -11,7 +11,7 @@ from src.a09_pack_logic.delta import (
     beliefdelta_shop,
     get_beliefdelta_from_ordered_dict,
 )
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic.test._util.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

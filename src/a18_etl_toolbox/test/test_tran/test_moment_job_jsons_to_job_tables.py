@@ -13,7 +13,7 @@ from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import job_str
+from src.a18_etl_toolbox.test._util.a18_terms import job_str
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_table
 from src.a18_etl_toolbox.transformers import etl_moment_job_jsons_to_job_tables
 

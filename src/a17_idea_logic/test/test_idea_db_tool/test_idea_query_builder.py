@@ -5,7 +5,7 @@ from src.a17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic.test._util.a17_terms import (
     amount_str,
     belief_name_str,
     event_int_str,

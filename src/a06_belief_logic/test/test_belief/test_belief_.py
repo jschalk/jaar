@@ -9,7 +9,7 @@ from src.a02_finance_logic.finance_config import (
 )
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic.test._util.a06_terms import (
     belief_name_str,
     credor_respect_str,
     debtor_respect_str,

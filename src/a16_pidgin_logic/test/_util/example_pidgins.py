@@ -12,7 +12,7 @@ from src.a16_pidgin_logic.map import (
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a16_pidgin_logic.test._util.a16_terms import (
     RopePointer_str,
     reason_context_str,
     voice_name_str,

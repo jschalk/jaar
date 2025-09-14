@@ -13,7 +13,7 @@ from src.a15_moment_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a15_moment_logic.test._util.a15_str import time_str
+from src.a15_moment_logic.test._util.a15_terms import time_str
 
 
 def test_MomentUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_cleanup):

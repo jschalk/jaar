@@ -9,7 +9,7 @@ from src.a07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.a07_timeline_logic.test._util.a07_str import (
+from src.a07_timeline_logic.test._util.a07_terms import (
     creg_str,
     time_str,
     week_str,

@@ -4,7 +4,7 @@ from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.healer import healerunit_shop
 from src.a05_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
-from src.a05_plan_logic.test._util.a05_str import (
+from src.a05_plan_logic.test._util.a05_terms import (
     active_hx_str,
     active_str,
     addin_str,

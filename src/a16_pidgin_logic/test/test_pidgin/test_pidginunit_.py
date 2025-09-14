@@ -23,7 +23,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     pidginable_class_types,
 )
 from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a16_pidgin_logic.test._util.a16_terms import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,
