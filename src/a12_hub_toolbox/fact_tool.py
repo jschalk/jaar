@@ -1,12 +1,12 @@
 from src.a00_data_toolbox.dict_toolbox import get_max_key
-from src.a01_term_logic.term import BeliefName, RopeTerm
+from src.a01_rope_logic.term import BeliefName, RopePointer
 from src.a04_reason_logic.reason import FactUnit, get_factunit_from_tuple
 
 
 def get_nodes_with_weighted_facts(
-    nodes_facts_dict: dict[tuple[BeliefName], dict[RopeTerm, FactUnit]],
+    nodes_facts_dict: dict[tuple[BeliefName], dict[RopePointer, FactUnit]],
     nodes_quota_ledger_dict: dict[tuple[BeliefName], dict[BeliefName, float]],
-) -> dict[tuple[BeliefName], dict[RopeTerm, FactUnit]]:
+) -> dict[tuple[BeliefName], dict[RopePointer, FactUnit]]:
 
     sorted_node_addrs = sorted(nodes_facts_dict.keys(), key=len)
     while sorted_node_addrs != []:
@@ -44,7 +44,9 @@ def get_nodes_with_weighted_facts(
 
 
 def _add_to_tuple_quota_sum(
-    to_eval_temp: dict[RopeTerm, dict[tuple[RopeTerm, RopeTerm, float, float], float]],
+    to_eval_temp: dict[
+        RopePointer, dict[tuple[RopePointer, RopePointer, float, float], float]
+    ],
     child_fact: FactUnit,
     child_quota: float,
 ):

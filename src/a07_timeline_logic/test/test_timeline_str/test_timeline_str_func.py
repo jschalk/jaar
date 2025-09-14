@@ -1,19 +1,19 @@
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     create_rope,
     default_knot_if_None,
     get_default_central_label as root_label,
 )
 from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a07_timeline_logic.reason_str_func import (
-    get_fact_state_readable_str,
-    get_reason_case_readable_str,
-)
-from src.a07_timeline_logic.test._util.a07_str import (
+from src.a07_timeline_logic._ref.a07_terms import (
     creg_str,
     time_str,
     week_str,
     yr1_jan1_offset_str,
+)
+from src.a07_timeline_logic.reason_str_func import (
+    get_fact_state_readable_str,
+    get_reason_case_readable_str,
 )
 from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,

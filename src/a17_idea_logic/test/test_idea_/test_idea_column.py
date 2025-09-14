@@ -1,11 +1,11 @@
-from src.a17_idea_logic.idea_main import IdeaRef, idearef_shop
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic._ref.a17_terms import (
     belief_voiceunit_str,
     group_title_str,
     plan_rope_str,
     reason_context_str,
     voice_name_str,
 )
+from src.a17_idea_logic.idea_main import IdeaRef, idearef_shop
 
 
 def test_IdeaRef_Exists():

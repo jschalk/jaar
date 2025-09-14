@@ -6,11 +6,7 @@ from src.a00_data_toolbox.file_toolbox import create_path
 from src.a17_idea_logic.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.a18_etl_toolbox.transformers import get_max_brick_agg_event_int
-from src.a20_world_logic.test._util.a20_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
-)
-from src.a20_world_logic.test._util.a20_str import (
+from src.a20_world_logic._ref.a20_terms import (
     belief_name_str,
     brick_agg_str,
     bud_time_str,
@@ -27,6 +23,10 @@ from src.a20_world_logic.test._util.a20_str import (
     otx_name_str,
     quota_str,
     voice_name_str,
+)
+from src.a20_world_logic.test._util.a20_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir as worlds_dir,
 )
 from src.a20_world_logic.world import WorldUnit, worldunit_shop
 

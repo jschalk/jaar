@@ -1,5 +1,10 @@
 from pandas import DataFrame
-from src.a01_term_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.a01_rope_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.a16_pidgin_logic._ref.a16_terms import (
+    RopePointer_str,
+    reason_context_str,
+    voice_name_str,
+)
 from src.a16_pidgin_logic.map import (
     LabelMap,
     NameMap,
@@ -12,11 +17,6 @@ from src.a16_pidgin_logic.map import (
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
-from src.a16_pidgin_logic.test._util.a16_str import (
-    RopeTerm_str,
-    reason_context_str,
-    voice_name_str,
-)
 
 
 def get_clean_labelmap() -> LabelMap:
@@ -225,7 +225,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    rx = RopeTerm_str()
+    rx = RopePointer_str()
     sue_pidginunit.set_otx2inx(rx, otx_amy45_rope, inx_amy87_rope)
     sue_pidginunit.set_otx2inx(rx, casa_otx_rope, casa_inx_rope)
     sue_pidginunit.set_otx2inx(rx, clean_otx_rope, clean_inx_rope)

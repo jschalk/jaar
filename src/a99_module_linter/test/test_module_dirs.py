@@ -20,7 +20,7 @@ from src.a99_module_linter.linter import (
 )
 
 
-def test_Module_util_FilesExist():
+def test_Module_ref_util_FilesExist():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
 
@@ -31,12 +31,13 @@ def test_Module_util_FilesExist():
         module_number = int(module_desc[1:3])
         # assert module_number == previous_module_number + 1
         # print(f"{module_desc=} {module_number=}")
+        ref_dir = create_path(module_dir, "_ref")
+        str_func_path = create_path(ref_dir, f"a{module_desc[1:3]}_terms.py")
+        assert os_path_exists(str_func_path)
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         assert os_path_exists(util_dir)
-        str_func_path = create_path(util_dir, f"a{module_desc[1:3]}_str.py")
-        assert os_path_exists(str_func_path)
-        # str_func_test_path = create_path(utils_dir, f"test_a{module_desc[1:3]}_str.py")
+        # str_func_test_path = create_path(utils_dir, f"test_a{module_desc[1:3]}_terms.py")
         # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
@@ -66,7 +67,7 @@ def path_contains_subpath(full_path: str, sub_path: str):
         return False
 
 
-def test_Modules_util_AssestsExistForEveryStrFunction():
+def test_Modules_util_AssestsExistForEverytermFunction():
     """
     Test that all string-related functions in each module directory are asserted and tested.
     This test performs the following checks for each module:
@@ -84,6 +85,7 @@ def test_Modules_util_AssestsExistForEveryStrFunction():
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
         desc_number_str = module_desc[1:3]
+        ref_dir = create_path(module_dir, "ref")
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
@@ -93,7 +95,7 @@ def test_Modules_util_AssestsExistForEveryStrFunction():
         running_str_functions.update(set(module_str_funcs))
 
         if len(module_str_funcs) > 0:
-            test_file_path = create_path(util_dir, f"test_a{desc_number_str}_str.py")
+            test_file_path = create_path(util_dir, f"test_a{desc_number_str}_terms.py")
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1

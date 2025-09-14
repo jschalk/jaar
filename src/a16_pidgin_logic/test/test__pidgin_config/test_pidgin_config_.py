@@ -1,16 +1,6 @@
 from os import getcwd as os_getcwd
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a16_pidgin_logic.pidgin_config import (
-    default_unknown_str,
-    default_unknown_str_if_None,
-    get_pidgin_args_dimen_mapping,
-    get_pidgin_config_dict,
-    get_pidgin_dimens,
-    get_pidgin_filename,
-    get_quick_pidgens_column_ref,
-    pidgin_config_path,
-)
-from src.a16_pidgin_logic.test._util.a16_str import (
+from src.a16_pidgin_logic._ref.a16_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -37,6 +27,16 @@ from src.a16_pidgin_logic.test._util.a16_str import (
     reason_context_str,
     unknown_str_str,
     voice_name_str,
+)
+from src.a16_pidgin_logic.pidgin_config import (
+    default_unknown_str,
+    default_unknown_str_if_None,
+    get_pidgin_args_dimen_mapping,
+    get_pidgin_config_dict,
+    get_pidgin_dimens,
+    get_pidgin_filename,
+    get_quick_pidgens_column_ref,
+    pidgin_config_path,
 )
 
 

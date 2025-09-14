@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, open_json, set_dir
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.example_beliefs import (
     get_beliefunit_irrational_example,
@@ -13,6 +13,14 @@ from src.a11_bud_logic.test._util.example_factunits import (
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
+)
+from src.a12_hub_toolbox._ref.a12_terms import (
+    ancestors_str,
+    bud_belief_name_str,
+    celldepth_str,
+    event_int_str,
+    penny_str,
+    quota_str,
 )
 from src.a12_hub_toolbox.a12_path import (
     create_belief_event_dir_path,
@@ -53,14 +61,6 @@ from src.a12_hub_toolbox.hub_tool import (
 from src.a12_hub_toolbox.test._util.a12_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a12_hub_toolbox.test._util.a12_str import (
-    ancestors_str,
-    bud_belief_name_str,
-    celldepth_str,
-    event_int_str,
-    penny_str,
-    quota_str,
 )
 from src.a12_hub_toolbox.test._util.example_hub_atoms import (
     get_budunit_55_example,

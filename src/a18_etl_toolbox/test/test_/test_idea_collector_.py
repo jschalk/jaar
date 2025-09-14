@@ -1,6 +1,14 @@
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.a18_etl_toolbox._ref.a18_terms import (
+    belief_name_str,
+    cumulative_minute_str,
+    event_int_str,
+    face_name_str,
+    hour_label_str,
+    moment_label_str,
+)
 from src.a18_etl_toolbox.idea_collector import (
     IdeaFileRef,
     get_all_excel_ideasheets,
@@ -9,14 +17,6 @@ from src.a18_etl_toolbox.idea_collector import (
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_name_str,
-    cumulative_minute_str,
-    event_int_str,
-    face_name_str,
-    hour_label_str,
-    moment_label_str,
 )
 
 

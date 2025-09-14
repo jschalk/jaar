@@ -1,8 +1,6 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import beliefdelta_shop
-from src.a09_pack_logic.legible import create_legible_list
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -13,6 +11,8 @@ from src.a09_pack_logic.test._util.a09_str import (
     reason_state_str,
     reason_upper_str,
 )
+from src.a09_pack_logic.delta import beliefdelta_shop
+from src.a09_pack_logic.legible import create_legible_list
 
 
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumberArgs():

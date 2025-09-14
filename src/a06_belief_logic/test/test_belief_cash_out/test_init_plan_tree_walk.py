@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import to_rope
+from src.a01_rope_logic.rope import to_rope
 from src.a04_reason_logic.reason import reasonunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop, get_sorted_plan_list
@@ -37,9 +37,9 @@ def test_treemetrics_shop_ReturnsObj():
 
     # # could create tests for these methods?
     # def evaluate_label(
-    # def evaluate_task(self, task: bool, plan_rope: RopeTerm):
+    # def evaluate_task(self, task: bool, plan_rope: RopePointer):
     # def evaluate_level(self, tree_level):
-    # def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
+    # def evaluate_reasonunits(self, reasons: dict[RopePointer, ReasonUnit]):
     # def evaluate_awardunits(self, awardunits: dict[GroupTitle, AwardUnit]):
     # def evaluate_uid_max(self, uid):
 

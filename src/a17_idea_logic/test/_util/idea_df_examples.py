@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic._ref.a17_terms import (
     amount_str,
     belief_name_str,
     bud_time_str,

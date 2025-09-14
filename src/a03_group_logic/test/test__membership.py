@@ -1,4 +1,18 @@
 from src.a00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
+from src.a03_group_logic._ref.a03_terms import (
+    credor_pool_str,
+    debtor_pool_str,
+    fund_agenda_give_str,
+    fund_agenda_ratio_give_str,
+    fund_agenda_ratio_take_str,
+    fund_agenda_take_str,
+    fund_give_str,
+    fund_take_str,
+    group_cred_points_str,
+    group_debt_points_str,
+    group_title_str,
+    voice_name_str,
+)
 from src.a03_group_logic.group import (
     AwardHeir,
     AwardLine,
@@ -13,20 +27,6 @@ from src.a03_group_logic.group import (
     membership_get_from_dict,
     membership_shop,
     memberships_get_from_dict,
-)
-from src.a03_group_logic.test._util.a03_str import (
-    credor_pool_str,
-    debtor_pool_str,
-    fund_agenda_give_str,
-    fund_agenda_ratio_give_str,
-    fund_agenda_ratio_take_str,
-    fund_agenda_take_str,
-    fund_give_str,
-    fund_take_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    voice_name_str,
 )
 
 

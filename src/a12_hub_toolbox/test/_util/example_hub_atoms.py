@@ -1,13 +1,11 @@
-from src.a01_term_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.a01_term_logic.term import MomentLabel
+from src.a01_rope_logic.rope import RopePointer, create_rope, create_rope_from_labels
+from src.a01_rope_logic.term import MomentLabel
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
 from src.a09_pack_logic.pack import PackUnit, packunit_shop
 from src.a11_bud_logic.bud import BudUnit, budunit_shop
-from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
-from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
-from src.a12_hub_toolbox.test._util.a12_str import (
+from src.a12_hub_toolbox._ref.a12_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -21,6 +19,8 @@ from src.a12_hub_toolbox.test._util.a12_str import (
     plan_rope_str,
     voice_name_str,
 )
+from src.a12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
 
 
 def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:
@@ -102,7 +102,7 @@ def get_beliefdelta_sue_example() -> BeliefDelta:
     return sue_beliefdelta
 
 
-def get_texas_rope() -> RopeTerm:
+def get_texas_rope() -> RopePointer:
     moment_label = get_default_moment_label()
     nation_str = "nation"
     usa_str = "USA"

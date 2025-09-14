@@ -4,14 +4,13 @@ from src.a00_data_toolbox.db_toolbox import (
     get_row_count,
     get_table_columns,
 )
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.a19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
-from src.a19_kpi_toolbox.test._util.a19_str import (
+from src.a19_kpi_toolbox._ref.a19_terms import (
     belief_name_str,
     belief_net_amount_str,
     moment_kpi001_voice_nets_str,
@@ -20,6 +19,7 @@ from src.a19_kpi_toolbox.test._util.a19_str import (
     plan_rope_str,
     task_str,
 )
+from src.a19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
 
 
 def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():

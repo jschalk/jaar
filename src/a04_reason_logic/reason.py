@@ -1,8 +1,8 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_empty_dict_if_None
-from src.a01_term_logic.rope import (
-    RopeTerm,
+from src.a01_rope_logic.rope import (
+    RopePointer,
     default_knot_if_None,
     find_replace_rope_key_dict,
     is_heir_rope,
@@ -17,8 +17,8 @@ class InvalidReasonException(Exception):
 
 @dataclass
 class FactCore:
-    fact_context: RopeTerm = None
-    fact_state: RopeTerm = None
+    fact_context: RopePointer = None
+    fact_state: RopePointer = None
     fact_lower: float = None
     fact_upper: float = None
 
@@ -39,7 +39,7 @@ class FactCore:
 
     def set_attr(
         self,
-        fact_state: RopeTerm = None,
+        fact_state: RopePointer = None,
         fact_lower: float = None,
         fact_upper: float = None,
     ):
@@ -55,14 +55,14 @@ class FactCore:
         self.fact_lower = None
         self.fact_upper = None
 
-    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+    def find_replace_rope(self, old_rope: RopePointer, new_rope: RopePointer):
         self.fact_context = rebuild_rope(self.fact_context, old_rope, new_rope)
         self.fact_state = rebuild_rope(self.fact_state, old_rope, new_rope)
 
-    def get_obj_key(self) -> RopeTerm:
+    def get_obj_key(self) -> RopePointer:
         return self.fact_context
 
-    def get_tuple(self) -> tuple[RopeTerm, RopeTerm, float, float]:
+    def get_tuple(self) -> tuple[RopePointer, RopePointer, float, float]:
         return (self.fact_context, self.fact_state, self.fact_lower, self.fact_upper)
 
 
@@ -72,8 +72,8 @@ class FactUnit(FactCore):
 
 
 def factunit_shop(
-    fact_context: RopeTerm = None,
-    fact_state: RopeTerm = None,
+    fact_context: RopePointer = None,
+    fact_state: RopePointer = None,
     fact_lower: float = None,
     fact_upper: float = None,
 ) -> FactUnit:
@@ -85,7 +85,7 @@ def factunit_shop(
     )
 
 
-def factunits_get_from_dict(x_dict: dict) -> dict[RopeTerm, FactUnit]:
+def factunits_get_from_dict(x_dict: dict) -> dict[RopePointer, FactUnit]:
     facts = {}
     for fact_dict in x_dict.values():
         x_fact_context = fact_dict["fact_context"]
@@ -112,14 +112,14 @@ def factunits_get_from_dict(x_dict: dict) -> dict[RopeTerm, FactUnit]:
 
 
 def get_factunit_from_tuple(
-    fact_tuple: tuple[RopeTerm, RopeTerm, float, float],
+    fact_tuple: tuple[RopePointer, RopePointer, float, float],
 ) -> FactUnit:
     return factunit_shop(fact_tuple[0], fact_tuple[1], fact_tuple[2], fact_tuple[3])
 
 
 def get_dict_from_factunits(
-    factunits: dict[RopeTerm, FactUnit],
-) -> dict[RopeTerm, dict[str,]]:
+    factunits: dict[RopePointer, FactUnit],
+) -> dict[RopePointer, dict[str,]]:
     return {fact.fact_context: fact.to_dict() for fact in factunits.values()}
 
 
@@ -139,8 +139,8 @@ class FactHeir(FactCore):
 
 
 def factheir_shop(
-    fact_context: RopeTerm = None,
-    fact_state: RopeTerm = None,
+    fact_context: RopePointer = None,
+    fact_state: RopePointer = None,
     fact_lower: float = None,
     fact_upper: float = None,
 ) -> FactHeir:
@@ -310,7 +310,7 @@ def casestatusfinder_shop(
 
 @dataclass
 class CaseUnit:
-    reason_state: RopeTerm
+    reason_state: RopePointer
     reason_lower: float = None
     reason_upper: float = None
     reason_divisor: int = None
@@ -343,7 +343,7 @@ class CaseUnit:
             rope=self.reason_state, old_knot=old_knot, new_knot=self.knot
         )
 
-    def is_in_lineage(self, fact_fact_state: RopeTerm):
+    def is_in_lineage(self, fact_fact_state: RopePointer):
         return is_heir_rope(
             src=self.reason_state, heir=fact_fact_state, knot=self.knot
         ) or is_heir_rope(src=fact_fact_state, heir=self.reason_state, knot=self.knot)
@@ -439,13 +439,13 @@ class CaseUnit:
             )
         )
 
-    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+    def find_replace_rope(self, old_rope: RopePointer, new_rope: RopePointer):
         self.reason_state = rebuild_rope(self.reason_state, old_rope, new_rope)
 
 
 # class casesshop:
 def caseunit_shop(
-    reason_state: RopeTerm,
+    reason_state: RopePointer,
     reason_lower: float = None,
     reason_upper: float = None,
     reason_divisor: float = None,
@@ -488,8 +488,8 @@ def cases_get_from_dict(x_dict: dict) -> dict[str, CaseUnit]:
 
 @dataclass
 class ReasonCore:
-    reason_context: RopeTerm
-    cases: dict[RopeTerm, CaseUnit]
+    reason_context: RopePointer
+    cases: dict[RopePointer, CaseUnit]
     reason_active_requisite: bool = None
     knot: str = None
 
@@ -517,7 +517,7 @@ class ReasonCore:
 
     def set_case(
         self,
-        case: RopeTerm,
+        case: RopePointer,
         reason_lower: float = None,
         reason_upper: float = None,
         reason_divisor: int = None,
@@ -530,19 +530,19 @@ class ReasonCore:
             knot=self.knot,
         )
 
-    def case_exists(self, reason_state: RopeTerm) -> bool:
+    def case_exists(self, reason_state: RopePointer) -> bool:
         return self.cases.get(reason_state) != None
 
-    def get_case(self, case: RopeTerm) -> CaseUnit:
+    def get_case(self, case: RopePointer) -> CaseUnit:
         return self.cases.get(case)
 
-    def del_case(self, case: RopeTerm):
+    def del_case(self, case: RopePointer):
         try:
             self.cases.pop(case)
         except KeyError as e:
             raise InvalidReasonException(f"Reason unable to delete case {e}") from e
 
-    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
+    def find_replace_rope(self, old_rope: RopePointer, new_rope: RopePointer):
         self.reason_context = rebuild_rope(self.reason_context, old_rope, new_rope)
         self.cases = find_replace_rope_key_dict(
             dict_x=self.cases, old_rope=old_rope, new_rope=new_rope
@@ -550,8 +550,8 @@ class ReasonCore:
 
 
 def reasoncore_shop(
-    reason_context: RopeTerm,
-    cases: dict[RopeTerm, CaseUnit] = None,
+    reason_context: RopePointer,
+    cases: dict[RopePointer, CaseUnit] = None,
     reason_active_requisite: bool = None,
     knot: str = None,
 ):
@@ -578,8 +578,8 @@ class ReasonUnit(ReasonCore):
 
 
 def reasonunit_shop(
-    reason_context: RopeTerm,
-    cases: dict[RopeTerm, CaseUnit] = None,
+    reason_context: RopePointer,
+    cases: dict[RopePointer, CaseUnit] = None,
     reason_active_requisite: bool = None,
     knot: str = None,
 ):
@@ -618,7 +618,7 @@ class ReasonHeir(ReasonCore):
         for case in self.cases.values():
             case.set_status(factheir)
 
-    def _get_fact_context(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
+    def _get_fact_context(self, factheirs: dict[RopePointer, FactHeir]) -> FactHeir:
         fact_context = None
         factheirs = get_empty_dict_if_None(factheirs)
         for y_factheir in factheirs.values():
@@ -653,7 +653,7 @@ class ReasonHeir(ReasonCore):
         if self.status and self.chore is None:
             self.chore = False
 
-    def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
+    def set_status(self, factheirs: dict[RopePointer, FactHeir]):
         self.clear_status()
         self._set_case_status(self._get_fact_context(factheirs))
         any_case_true, any_chore_true = self.is_any_case_true()
@@ -662,8 +662,8 @@ class ReasonHeir(ReasonCore):
 
 
 def reasonheir_shop(
-    reason_context: RopeTerm,
-    cases: dict[RopeTerm, CaseUnit] = None,
+    reason_context: RopePointer,
+    cases: dict[RopePointer, CaseUnit] = None,
     reason_active_requisite: bool = None,
     status: bool = None,
     chore: bool = None,
@@ -682,7 +682,7 @@ def reasonheir_shop(
 
 
 # class Reasonsshop:
-def reasons_get_from_dict(reasons_dict: dict) -> dict[RopeTerm, ReasonUnit]:
+def reasons_get_from_dict(reasons_dict: dict) -> dict[RopePointer, ReasonUnit]:
     x_dict = {}
     for reason_dict in reasons_dict.values():
         x_reasonunit = reasonunit_shop(reason_context=reason_dict["reason_context"])

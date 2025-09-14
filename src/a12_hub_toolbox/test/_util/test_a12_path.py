@@ -2,7 +2,16 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.file_toolbox import create_path, get_json_filename
-from src.a01_term_logic.rope import create_rope, create_rope_from_labels
+from src.a01_rope_logic.rope import create_rope, create_rope_from_labels
+from src.a12_hub_toolbox._ref.a12_terms import (
+    belief_name_str,
+    bud_time_str,
+    event_int_str,
+    gut_str,
+    job_str,
+    moment_label_str,
+    planroot_str,
+)
 from src.a12_hub_toolbox.a12_path import (
     BELIEFEVENT_FILENAME,
     BELIEFPOINT_FILENAME,
@@ -41,15 +50,6 @@ from src.a12_hub_toolbox.a12_path import (
     treasury_filename,
 )
 from src.a12_hub_toolbox.test._util.a12_env import get_module_temp_dir
-from src.a12_hub_toolbox.test._util.a12_str import (
-    belief_name_str,
-    bud_time_str,
-    event_int_str,
-    gut_str,
-    job_str,
-    moment_label_str,
-    planroot_str,
-)
 
 
 def test_treasury_filename_ReturnsObj():

@@ -4,7 +4,7 @@ from src.a16_pidgin_logic.pidgin_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     belief_name_str,
     belief_voiceunit_str,
     error_message_str,
@@ -637,7 +637,7 @@ def test_create_update_pidrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     event5 = 5
     event7 = 7
     event9 = 9
-    error_rope_str = "Knot must exist in RopeTerm"
+    error_rope_str = "Knot must exist in RopePointer"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()

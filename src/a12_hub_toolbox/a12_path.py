@@ -3,8 +3,8 @@ from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_json_filename,
 )
-from src.a01_term_logic.rope import get_all_rope_labels, rebuild_rope
-from src.a01_term_logic.term import BeliefName, LabelTerm, MomentLabel
+from src.a01_rope_logic.rope import get_all_rope_labels, rebuild_rope
+from src.a01_rope_logic.term import BeliefName, LabelTerm, MomentLabel
 
 MOMENT_FILENAME = "moment.json"
 BUDUNIT_FILENAME = "budunit.json"

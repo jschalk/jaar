@@ -3,8 +3,7 @@ from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import beliefdelta_shop
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -44,6 +43,7 @@ from src.a09_pack_logic.test._util.a09_str import (
     task_str,
     voice_name_str,
 )
+from src.a09_pack_logic.delta import beliefdelta_shop
 from src.a09_pack_logic.test._util.example_deltas import get_beliefdelta_example1
 
 

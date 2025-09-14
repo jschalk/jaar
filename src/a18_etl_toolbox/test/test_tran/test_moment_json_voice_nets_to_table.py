@@ -4,13 +4,13 @@ from src.a00_data_toolbox.file_toolbox import save_json
 from src.a11_bud_logic.bud import tranbook_shop
 from src.a12_hub_toolbox.a12_path import create_moment_json_path
 from src.a15_moment_logic.moment_main import momentunit_shop
+from src.a18_etl_toolbox._ref.a18_terms import (
+    belief_net_amount_str,
+    moment_voice_nets_str,
+)
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a18_etl_toolbox.test._util.a18_str import (
-    belief_net_amount_str,
-    moment_voice_nets_str,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import CREATE_MOMENT_VOICE_NETS_SQLSTR
 from src.a18_etl_toolbox.transformers import (

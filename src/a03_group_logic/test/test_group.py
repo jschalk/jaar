@@ -1,8 +1,7 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.rope import default_knot_if_None
+from src.a01_rope_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import default_fund_iota_if_None
-from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
-from src.a03_group_logic.test._util.a03_str import (
+from src.a03_group_logic._ref.a03_terms import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -14,6 +13,7 @@ from src.a03_group_logic.test._util.a03_str import (
     knot_str,
     memberships_str,
 )
+from src.a03_group_logic.group import GroupUnit, groupunit_shop, membership_shop
 
 
 def test_GroupUnit_Exists():

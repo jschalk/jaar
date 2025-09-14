@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.a00_data_toolbox.file_toolbox import save_file
-from src.a01_term_logic.term import BeliefName, VoiceName
+from src.a01_rope_logic.term import BeliefName, VoiceName
 from src.a02_finance_logic.allot import allot_scale
 from src.a12_hub_toolbox.hubunit import HubUnit
 from src.a14_keep_logic.rivercycle import (

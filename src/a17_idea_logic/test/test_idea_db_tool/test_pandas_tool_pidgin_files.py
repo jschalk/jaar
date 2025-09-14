@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path, save_file
-from src.a01_term_logic.rope import create_rope, to_rope
+from src.a01_rope_logic.rope import create_rope, to_rope
 from src.a16_pidgin_logic.pidgin_config import get_pidgin_filename
 from src.a16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.a16_pidgin_logic.test._util.example_pidgins import (
@@ -15,6 +15,7 @@ from src.a16_pidgin_logic.test._util.example_pidgins import (
     get_suita_voice_name_otx_dt,
     get_swim_titlemap,
 )
+from src.a17_idea_logic._ref.a17_terms import reason_context_str, voice_name_str
 from src.a17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     move_otx_csvs_to_pidgin_inx,
@@ -25,7 +26,6 @@ from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir as get_example_face_dir,
 )
-from src.a17_idea_logic.test._util.a17_str import reason_context_str, voice_name_str
 
 
 def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
@@ -94,7 +94,7 @@ def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario0_SingleFile(
 
 
 # save two dataframes to be pidgined: two files in otx, two files in inx
-def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_RopeTerm(
+def test_move_otx_csvs_to_pidgin_inx_CreatesPidginedFiles_Scenario1_SingleFile_RopePointer(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

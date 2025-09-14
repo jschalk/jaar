@@ -12,7 +12,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     create_rope,
     create_rope_from_labels,
     get_all_rope_labels,
@@ -20,11 +20,11 @@ from src.a01_term_logic.rope import (
     get_tail_label,
     is_labelterm,
 )
-from src.a01_term_logic.term import (
+from src.a01_rope_logic.term import (
     EventInt,
     FaceName,
     LabelTerm,
-    RopeTerm,
+    RopePointer,
     default_knot_if_None,
 )
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
@@ -335,12 +335,12 @@ class RopeMap:
     def reveal_inx(self, otx_rope: str, missing_add: bool = True) -> str:
         if missing_add and self.otx_exists(otx_rope) is False:
             inx_rope = copy_copy(otx_rope)
-            inx_rope = self._reveal_ropeterm_inx(otx_rope)
+            inx_rope = self._reveal_rope_inx(otx_rope)
             self.set_otx2inx(otx_rope, inx_rope)
 
         return self._get_inx_value(otx_rope)
 
-    def _reveal_ropeterm_inx(self, otx_rope) -> RopeTerm:
+    def _reveal_rope_inx(self, otx_rope) -> RopePointer:
         otx_parent_rope = get_parent_rope(otx_rope, self.otx_knot)
         if self.otx_exists(otx_parent_rope) is False and otx_parent_rope != "":
             return None

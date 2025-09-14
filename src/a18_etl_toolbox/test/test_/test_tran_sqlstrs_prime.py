@@ -16,7 +16,7 @@ from src.a17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,

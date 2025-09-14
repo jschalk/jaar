@@ -1,4 +1,10 @@
-from src.a01_term_logic.rope import create_rope, get_default_central_label as root_label
+from src.a01_rope_logic.rope import create_rope, get_default_central_label as root_label
+from src.a04_reason_logic._ref.a04_terms import (
+    fact_context_str,
+    fact_lower_str,
+    fact_state_str,
+    fact_upper_str,
+)
 from src.a04_reason_logic.reason import (
     FactCore,
     FactUnit,
@@ -6,12 +12,6 @@ from src.a04_reason_logic.reason import (
     factunit_shop,
     factunits_get_from_dict,
     get_factunit_from_tuple,
-)
-from src.a04_reason_logic.test._util.a04_str import (
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fact_upper_str,
 )
 
 

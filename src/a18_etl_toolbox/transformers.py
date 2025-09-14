@@ -27,7 +27,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.a01_term_logic.term import EventInt, FaceName
+from src.a01_rope_logic.term import EventInt, FaceName
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a08_belief_atom_logic.atom_config import get_belief_dimens
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
@@ -59,7 +59,7 @@ from src.a16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
     get_pidgin_NameTerm_args,
-    get_pidgin_RopeTerm_args,
+    get_pidgin_RopePointer_args,
     get_pidgin_TitleTerm_args,
     get_quick_pidgens_column_ref,
 )
@@ -475,7 +475,7 @@ def set_moment_belief_sound_agg_knot_errors(cursor: sqlite3_Cursor):
     pidgin_label_args = get_pidgin_LabelTerm_args()
     pidgin_name_args = get_pidgin_NameTerm_args()
     pidgin_title_args = get_pidgin_TitleTerm_args()
-    pidgin_rope_args = get_pidgin_RopeTerm_args()
+    pidgin_rope_args = get_pidgin_RopePointer_args()
     pidgin_args = copy_copy(pidgin_label_args)
     pidgin_args.update(pidgin_name_args)
     pidgin_args.update(pidgin_title_args)
@@ -570,7 +570,7 @@ def set_heard_raw_inx_column(
     column_without_otx: str,
     arg_class_type: str,
 ):
-    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}:
+    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "RopePointer"}:
         pidgin_type_abbv = ""
         if arg_class_type == "NameTerm":
             pidgin_type_abbv = "name"
@@ -578,7 +578,7 @@ def set_heard_raw_inx_column(
             pidgin_type_abbv = "title"
         elif arg_class_type == "LabelTerm":
             pidgin_type_abbv = "label"
-        elif arg_class_type == "RopeTerm":
+        elif arg_class_type == "RopePointer":
             pidgin_type_abbv = "rope"
         update_calc_inx_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
             pidgin_type_abbv, heard_raw_tablename, column_without_otx

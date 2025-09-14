@@ -1,21 +1,7 @@
-from src.a01_term_logic.rope import to_rope
+from src.a01_rope_logic.rope import to_rope
 from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
-from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.belief_tool import (
-    belief_attr_exists,
-    belief_plan_awardunit_exists,
-    belief_plan_factunit_exists,
-    belief_plan_healerunit_exists,
-    belief_plan_partyunit_exists,
-    belief_plan_reason_caseunit_exists as caseunit_exists,
-    belief_plan_reasonunit_exists,
-    belief_planunit_exists,
-    belief_voice_membership_exists,
-    belief_voiceunit_exists,
-    beliefunit_exists,
-)
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic._ref.a06_terms import (
     awardee_title_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -35,6 +21,20 @@ from src.a06_belief_logic.test._util.a06_str import (
     reason_context_str,
     reason_state_str,
     voice_name_str,
+)
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.belief_tool import (
+    belief_attr_exists,
+    belief_plan_awardunit_exists,
+    belief_plan_factunit_exists,
+    belief_plan_healerunit_exists,
+    belief_plan_partyunit_exists,
+    belief_plan_reason_caseunit_exists as caseunit_exists,
+    belief_plan_reasonunit_exists,
+    belief_planunit_exists,
+    belief_voice_membership_exists,
+    belief_voiceunit_exists,
+    beliefunit_exists,
 )
 
 

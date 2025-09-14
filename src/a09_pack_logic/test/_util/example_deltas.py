@@ -1,12 +1,12 @@
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     UPDATE_str,
     belief_voiceunit_str,
     beliefunit_str,
     voice_name_str,
 )
+from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
 
 def get_beliefdelta_sue_example() -> BeliefDelta:

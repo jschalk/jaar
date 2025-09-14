@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import to_rope
+from src.a01_rope_logic.rope import to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a04_reason_logic.reason import caseunit_shop, reasonheir_shop, reasonunit_shop
 from src.a05_plan_logic.healer import healerunit_shop

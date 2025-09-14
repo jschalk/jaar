@@ -9,11 +9,11 @@ from src.a07_timeline_logic.timeline_main import timelineunit_shop
 from src.a12_hub_toolbox.a12_path import create_moment_json_path
 from src.a12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.a15_moment_logic.moment_main import momentunit_shop
+from src.a18_etl_toolbox._ref.a18_terms import time_str
 from src.a18_etl_toolbox.test._util.a18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a18_etl_toolbox.test._util.a18_str import time_str
 from src.a18_etl_toolbox.transformers import add_moment_timeline_to_guts
 
 

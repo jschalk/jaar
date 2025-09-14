@@ -7,11 +7,7 @@ from src.a00_data_toolbox.db_toolbox import (
 )
 from src.a00_data_toolbox.file_toolbox import create_path
 from src.a17_idea_logic.idea_db_tool import upsert_sheet
-from src.a18_etl_toolbox.test._util.a18_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     brick_raw_str,
     cumulative_minute_str,
     error_message_str,
@@ -19,6 +15,10 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     face_name_str,
     hour_label_str,
     moment_label_str,
+)
+from src.a18_etl_toolbox.test._util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
 )
 from src.a18_etl_toolbox.transformers import etl_input_dfs_to_brick_raw_tables
 

@@ -1,17 +1,17 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a17_idea_logic._ref.a17_terms import (
+    belief_name_str,
+    moment_label_str,
+    voice_cred_points_str,
+    voice_debt_points_str,
+    voice_name_str,
+)
 from src.a17_idea_logic.idea_config import idea_format_00021_belief_voiceunit_v0_0_0
 from src.a17_idea_logic.idea_db_tool import open_csv
 from src.a17_idea_logic.idea_main import get_idearef_obj, save_idea_csv
 from src.a17_idea_logic.test._util.a17_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a17_idea_logic.test._util.a17_str import (
-    belief_name_str,
-    moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 
 

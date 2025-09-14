@@ -9,8 +9,7 @@ from src.a18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
-from src.a19_kpi_toolbox.test._util.a19_str import (
+from src.a19_kpi_toolbox._ref.a19_terms import (
     active_str,
     belief_name_str,
     belief_net_amount_str,
@@ -23,6 +22,7 @@ from src.a19_kpi_toolbox.test._util.a19_str import (
     plan_rope_str,
     task_str,
 )
+from src.a19_kpi_toolbox.kpi_mstr import get_default_kpi_bundle, populate_kpi_bundle
 
 
 def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():

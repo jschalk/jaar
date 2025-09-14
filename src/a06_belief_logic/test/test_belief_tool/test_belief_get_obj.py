@@ -1,17 +1,6 @@
 from src.a03_group_logic.group import awardunit_shop
 from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
-from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a06_belief_logic.belief_tool import (
-    belief_get_obj,
-    belief_plan_awardunit_get_obj,
-    belief_plan_factunit_get_obj,
-    belief_plan_reason_caseunit_get_obj as caseunit_get_obj,
-    belief_plan_reasonunit_get_obj,
-    belief_planunit_get_obj,
-    belief_voice_membership_get_obj,
-    belief_voiceunit_get_obj,
-)
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic._ref.a06_terms import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -27,6 +16,17 @@ from src.a06_belief_logic.test._util.a06_str import (
     plan_rope_str,
     reason_context_str,
     reason_state_str,
+)
+from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.a06_belief_logic.belief_tool import (
+    belief_get_obj,
+    belief_plan_awardunit_get_obj,
+    belief_plan_factunit_get_obj,
+    belief_plan_reason_caseunit_get_obj as caseunit_get_obj,
+    belief_plan_reasonunit_get_obj,
+    belief_planunit_get_obj,
+    belief_voice_membership_get_obj,
+    belief_voiceunit_get_obj,
 )
 
 

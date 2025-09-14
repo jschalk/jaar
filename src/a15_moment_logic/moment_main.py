@@ -12,7 +12,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_file,
     set_dir,
 )
-from src.a01_term_logic.term import (
+from src.a01_rope_logic.term import (
     BeliefName,
     EventInt,
     MomentLabel,

@@ -1,19 +1,5 @@
 from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_groups_view_dict
-from src.a22_belief_viewer.example22_beliefs import (
-    best_run_str,
-    best_soccer_str,
-    best_sport_str,
-    best_swim_str,
-    get_beliefunit_irrational_example,
-    get_sue_belief_with_facts_and_reasons,
-    get_sue_beliefunit,
-    play_run_str,
-    play_soccer_str,
-    play_str,
-    play_swim_str,
-)
-from src.a22_belief_viewer.test._util.a22_str import (
+from src.a22_belief_viewer._ref.a22_terms import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -33,6 +19,20 @@ from src.a22_belief_viewer.test._util.a22_str import (
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a22_belief_viewer.belief_viewer_tool import add_small_dot, get_groups_view_dict
+from src.a22_belief_viewer.example22_beliefs import (
+    best_run_str,
+    best_soccer_str,
+    best_sport_str,
+    best_swim_str,
+    get_beliefunit_irrational_example,
+    get_sue_belief_with_facts_and_reasons,
+    get_sue_beliefunit,
+    play_run_str,
+    play_soccer_str,
+    play_str,
+    play_swim_str,
 )
 from src.a22_belief_viewer.test.test__voices_view_dict import add_readable
 

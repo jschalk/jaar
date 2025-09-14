@@ -1,12 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a15_moment_logic.moment_main import get_from_dict as momentunit_get_from_dict
-from src.a18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     brokerunits_str,
     moment_label_str,
     paybook_str,
     timeline_str,
 )
+from src.a18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
     create_sound_and_heard_tables,

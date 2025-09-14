@@ -20,11 +20,7 @@ from src.a18_etl_toolbox.a18_path import (
     create_moment_ote1_csv_path,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
-from src.a20_world_logic.test._util.a20_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
-)
-from src.a20_world_logic.test._util.a20_str import (
+from src.a20_world_logic._ref.a20_terms import (
     amount_str,
     belief_name_str,
     bud_time_str,
@@ -47,6 +43,10 @@ from src.a20_world_logic.test._util.a20_str import (
     time_str,
     tran_time_str,
     voice_name_str,
+)
+from src.a20_world_logic.test._util.a20_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir as worlds_dir,
 )
 from src.a20_world_logic.world import worldunit_shop
 

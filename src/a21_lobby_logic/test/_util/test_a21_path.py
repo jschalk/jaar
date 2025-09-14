@@ -1,6 +1,12 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.a00_data_toolbox.file_toolbox import create_path
+from src.a21_lobby_logic._ref.a21_terms import (
+    lobby_id_str,
+    lobby_mstr_dir_str,
+    lobbys_str,
+    world_name_str,
+)
 from src.a21_lobby_logic.a21_path import (
     LobbyID,
     create_lobby_dir_path,
@@ -8,12 +14,6 @@ from src.a21_lobby_logic.a21_path import (
     create_world_dir_path,
 )
 from src.a21_lobby_logic.test._util.a21_env import get_module_temp_dir
-from src.a21_lobby_logic.test._util.a21_str import (
-    lobby_id_str,
-    lobby_mstr_dir_str,
-    lobbys_str,
-    world_name_str,
-)
 
 
 def test_str_functions_ReturnsObjs():

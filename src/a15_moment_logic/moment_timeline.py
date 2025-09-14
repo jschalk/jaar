@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import create_rope
+from src.a01_rope_logic.rope import create_rope
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a07_timeline_logic.timeline_main import (
     BeliefTimelinePoint,

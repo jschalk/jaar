@@ -6,6 +6,14 @@ from src.a12_hub_toolbox.a12_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
+from src.a15_moment_logic._ref.a15_terms import (
+    ancestors_str,
+    bud_belief_name_str,
+    celldepth_str,
+    event_int_str,
+    penny_str,
+    quota_str,
+)
 from src.a15_moment_logic.moment_main import (
     _get_ote1_max_past_event_int,
     momentunit_shop,
@@ -13,14 +21,6 @@ from src.a15_moment_logic.moment_main import (
 from src.a15_moment_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
-)
-from src.a15_moment_logic.test._util.a15_str import (
-    ancestors_str,
-    bud_belief_name_str,
-    celldepth_str,
-    event_int_str,
-    penny_str,
-    quota_str,
 )
 
 

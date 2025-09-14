@@ -1,15 +1,9 @@
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     create_rope,
     find_replace_rope_key_dict,
     get_default_central_label as root_label,
 )
-from src.a04_reason_logic.reason import (
-    CaseUnit,
-    cases_get_from_dict,
-    caseunit_shop,
-    factheir_shop,
-)
-from src.a04_reason_logic.test._util.a04_str import (
+from src.a04_reason_logic._ref.a04_terms import (
     chore_str,
     knot_str,
     reason_divisor_str,
@@ -17,6 +11,12 @@ from src.a04_reason_logic.test._util.a04_str import (
     reason_state_str,
     reason_upper_str,
     status_str,
+)
+from src.a04_reason_logic.reason import (
+    CaseUnit,
+    cases_get_from_dict,
+    caseunit_shop,
+    factheir_shop,
 )
 
 
@@ -774,7 +774,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
+def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopePointer():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)

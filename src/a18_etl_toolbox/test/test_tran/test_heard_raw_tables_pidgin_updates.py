@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.a00_data_toolbox.db_toolbox import get_table_columns
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     belief_plan_awardunit_str,
     event_int_str,
     face_name_str,

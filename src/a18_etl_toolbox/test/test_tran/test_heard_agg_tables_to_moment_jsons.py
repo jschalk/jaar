@@ -9,11 +9,7 @@ from src.a00_data_toolbox.file_toolbox import open_file
 from src.a12_hub_toolbox.a12_path import create_moment_json_path
 from src.a15_moment_logic.moment_config import get_moment_dimens
 from src.a15_moment_logic.moment_main import get_from_json as momentunit_get_from_json
-from src.a18_etl_toolbox.test._util.a18_env import (
-    env_dir_setup_cleanup,
-    get_module_temp_dir,
-)
-from src.a18_etl_toolbox.test._util.a18_str import (
+from src.a18_etl_toolbox._ref.a18_terms import (
     moment_budunit_str,
     moment_event_time_agg_str,
     moment_label_str,
@@ -23,6 +19,10 @@ from src.a18_etl_toolbox.test._util.a18_str import (
     moment_timeline_weekday_str,
     moment_timeoffi_str,
     momentunit_str,
+)
+from src.a18_etl_toolbox.test._util.a18_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
 )
 from src.a18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,

@@ -3,7 +3,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
-from src.a01_term_logic.term import EventInt, FaceName, MomentLabel
+from src.a01_rope_logic.term import EventInt, FaceName, MomentLabel
 from src.a11_bud_logic.bud import TimeLinePoint
 from src.a15_moment_logic.moment_main import MomentUnit
 from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files

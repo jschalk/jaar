@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.rope import (
+from src.a01_rope_logic.rope import (
     create_rope,
     default_knot_if_None,
     is_sub_rope,

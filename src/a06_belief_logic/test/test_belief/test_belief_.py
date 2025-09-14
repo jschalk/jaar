@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a01_term_logic.rope import default_knot_if_None
+from src.a01_rope_logic.rope import default_knot_if_None
 from src.a02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,
@@ -8,8 +8,7 @@ from src.a02_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
-from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.a06_belief_logic.test._util.a06_str import (
+from src.a06_belief_logic._ref.a06_terms import (
     belief_name_str,
     credor_respect_str,
     debtor_respect_str,
@@ -34,6 +33,7 @@ from src.a06_belief_logic.test._util.a06_str import (
     tree_traverse_count_str,
     voices_str,
 )
+from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 
 def test_BeliefUnit_Exists():

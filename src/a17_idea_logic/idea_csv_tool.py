@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
-from src.a01_term_logic.term import FaceName, MomentLabel
+from src.a01_rope_logic.term import FaceName, MomentLabel
 from src.a06_belief_logic.belief_main import BeliefUnit
 from src.a09_pack_logic.pack import PackUnit
 from src.a15_moment_logic.moment_main import MomentUnit

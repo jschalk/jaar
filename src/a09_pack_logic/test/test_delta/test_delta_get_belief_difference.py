@@ -9,8 +9,7 @@ from src.a04_reason_logic.reason import factunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a06_belief_logic.test._util.example_beliefs import get_beliefunit_with_4_levels
-from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -53,6 +52,7 @@ from src.a09_pack_logic.test._util.a09_str import (
     voice_debt_points_str,
     voice_name_str,
 )
+from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
 
 def print_beliefatom_keys(x_beliefdelta: BeliefDelta):

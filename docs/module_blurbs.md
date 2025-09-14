@@ -4,7 +4,7 @@ What does each one do?
 
 
 - **a00_data_toolbox**: Create some standard tools files files, python dictionaries, databases, and other basic programming objects.
-- **a01_term_logic**: Defines what a Rope is and required format for groups names and individual names.
+- **a01_rope_logic**: Defines what a Rope is and required format for groups names and individual names.
 - **a02_finance_logic**: Defines tools for financial allotment to ledgers.
 - **a03_group_logic**: Defines a voice, and it's group memberships. Groups will be produced from memberships.
 - **a04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True

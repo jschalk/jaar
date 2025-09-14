@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import open_file
-from src.a01_term_logic.rope import RopeTerm
+from src.a01_rope_logic.rope import RopePointer
 from src.a03_group_logic.labor import laborunit_shop
 from src.a04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.a05_plan_logic.plan import planunit_shop
@@ -389,7 +389,7 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
 
 
 def from_list_get_active(
-    rope: RopeTerm, plan_dict: dict, asse_bool: bool = None
+    rope: RopePointer, plan_dict: dict, asse_bool: bool = None
 ) -> bool:
     active = None
     temp_plan = None

@@ -5,12 +5,12 @@ from src.a12_hub_toolbox.hub_tool import (
     cellunit_add_json_file,
     save_arbitrary_beliefevent,
 )
+from src.a15_moment_logic._ref.a15_terms import beliefevent_facts_str
 from src.a15_moment_logic.moment_cell import load_cells_beliefevent
 from src.a15_moment_logic.test._util.a15_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )
-from src.a15_moment_logic.test._util.a15_str import beliefevent_facts_str
 from src.a15_moment_logic.test._util.example_moments import example_casa_clean_factunit
 
 

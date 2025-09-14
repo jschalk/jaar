@@ -1,11 +1,11 @@
-from src.a01_term_logic.term import GroupTitle
+from src.a01_rope_logic.term import GroupTitle
+from src.a03_group_logic._ref.a03_terms import party_title_str, solo_str
 from src.a03_group_logic.labor import (
     laborunit_get_from_dict,
     laborunit_shop,
     partyunit_get_from_dict,
     partyunit_shop,
 )
-from src.a03_group_logic.test._util.a03_str import party_title_str, solo_str
 
 
 def test_PartyUnit_to_dict_ReturnsObj_Scenario0_solo_IsTrue():

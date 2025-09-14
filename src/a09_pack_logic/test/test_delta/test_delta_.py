@@ -1,17 +1,11 @@
 from pytest import raises as pytest_raises
 from src.a00_data_toolbox.dict_toolbox import x_is_json
-from src.a01_term_logic.rope import create_rope, to_rope
+from src.a01_rope_logic.rope import create_rope, to_rope
 from src.a03_group_logic.voice import voiceunit_shop
 from src.a05_plan_logic.plan import get_default_moment_label as root_label
 from src.a06_belief_logic.belief_main import beliefunit_shop
 from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import (
-    BeliefDelta,
-    belief_built_from_delta_is_valid,
-    beliefdelta_shop,
-    get_beliefdelta_from_ordered_dict,
-)
-from src.a09_pack_logic.test._util.a09_str import (
+from src.a09_pack_logic._ref.a09_terms import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
@@ -26,6 +20,12 @@ from src.a09_pack_logic.test._util.a09_str import (
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a09_pack_logic.delta import (
+    BeliefDelta,
+    belief_built_from_delta_is_valid,
+    beliefdelta_shop,
+    get_beliefdelta_from_ordered_dict,
 )
 from src.a09_pack_logic.test._util.example_deltas import (
     get_beliefdelta_example1,

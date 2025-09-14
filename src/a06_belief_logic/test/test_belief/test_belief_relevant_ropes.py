@@ -1,4 +1,4 @@
-from src.a01_term_logic.rope import to_rope
+from src.a01_rope_logic.rope import to_rope
 from src.a04_reason_logic.reason import reasonunit_shop
 from src.a05_plan_logic.plan import planunit_shop
 from src.a06_belief_logic.belief_main import beliefunit_shop
@@ -8,7 +8,7 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_BeliefUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():
+def test_BeliefUnit_get_relevant_ropes_EmptyRopePointerReturnsEmpty():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
 
@@ -21,7 +21,7 @@ def test_BeliefUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():
     assert relevant_ropes == set()
 
 
-def test_BeliefUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
+def test_BeliefUnit_get_relevant_ropes_RootRopePointerReturnsOnlyItself():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     root_rope = to_rope(sue_belief.moment_label)

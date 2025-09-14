@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.dict_toolbox import create_csv
-from src.a01_term_logic.term import MomentLabel, RopeTerm, VoiceName
+from src.a01_rope_logic.term import MomentLabel, RopePointer, VoiceName
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.a03_group_logic.group import AwardUnit, MemberShip
@@ -273,11 +273,13 @@ def get_credit_ledger(x_belief: BeliefUnit) -> dict[VoiceUnit, RespectNum]:
 
 def get_belief_root_facts_dict(
     x_belief: BeliefUnit,
-) -> dict[RopeTerm, dict[str,]]:
+) -> dict[RopePointer, dict[str,]]:
     return x_belief.get_factunits_dict()
 
 
-def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, dict]):
+def set_factunits_to_belief(
+    x_belief: BeliefUnit, x_facts_dict: dict[RopePointer, dict]
+):
     factunits_dict = factunits_get_from_dict(x_facts_dict)
     missing_fact_reason_contexts = set(
         x_belief.get_missing_fact_reason_contexts().keys()
@@ -304,9 +306,9 @@ def clear_factunits_from_belief(x_belief: BeliefUnit):
 
 def set_case_attr(
     belief: BeliefUnit,
-    plan_rope: RopeTerm,
-    reason_context: RopeTerm,
-    reason_case: RopeTerm,
+    plan_rope: RopePointer,
+    reason_context: RopePointer,
+    reason_case: RopePointer,
 ):
     """Wrapper for method that edit beliefunit plan nodes reasonunits."""
     belief.edit_plan_attr(

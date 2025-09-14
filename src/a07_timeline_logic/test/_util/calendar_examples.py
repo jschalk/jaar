@@ -4,7 +4,7 @@ from src.a00_data_toolbox.file_toolbox import open_json
 from src.a00_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.a05_plan_logic.plan import PlanUnit
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.a07_timeline_logic.test._util.a07_str import (
+from src.a07_timeline_logic._ref.a07_terms import (
     c400_number_str,
     creg_str,
     five_str,

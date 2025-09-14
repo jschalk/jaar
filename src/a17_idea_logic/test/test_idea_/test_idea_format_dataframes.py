@@ -6,18 +6,7 @@ from src.a07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
 )
-from src.a17_idea_logic.idea_config import (
-    idea_format_00013_planunit_v0_0_0,
-    idea_format_00019_planunit_v0_0_0,
-    idea_format_00020_belief_voice_membership_v0_0_0,
-    idea_format_00021_belief_voiceunit_v0_0_0,
-)
-from src.a17_idea_logic.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
-from src.a17_idea_logic.test._util.a17_env import (
-    env_dir_setup_cleanup,
-    idea_moments_dir,
-)
-from src.a17_idea_logic.test._util.a17_str import (
+from src.a17_idea_logic._ref.a17_terms import (
     belief_name_str,
     group_cred_points_str,
     group_debt_points_str,
@@ -29,6 +18,17 @@ from src.a17_idea_logic.test._util.a17_str import (
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
+)
+from src.a17_idea_logic.idea_config import (
+    idea_format_00013_planunit_v0_0_0,
+    idea_format_00019_planunit_v0_0_0,
+    idea_format_00020_belief_voice_membership_v0_0_0,
+    idea_format_00021_belief_voiceunit_v0_0_0,
+)
+from src.a17_idea_logic.idea_main import create_idea_df, get_idearef_obj, save_idea_csv
+from src.a17_idea_logic.test._util.a17_env import (
+    env_dir_setup_cleanup,
+    idea_moments_dir,
 )
 
 

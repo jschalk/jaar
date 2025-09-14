@@ -1,5 +1,5 @@
+from src.a14_keep_logic._ref.a14_terms import moment_label_str
 from src.a14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
-from src.a14_keep_logic.test._util.a14_str import moment_label_str
 from src.a14_keep_logic.test._util.example_credorledgers import example_yao_hubunit
 
 
