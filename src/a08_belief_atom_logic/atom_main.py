@@ -6,7 +6,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
 )
 from src.a01_rope_logic.rope import create_rope, get_parent_rope, get_tail_label
-from src.a01_rope_logic.term import LabelTerm, RopeTerm, TitleTerm, VoiceName
+from src.a01_rope_logic.term import LabelTerm, RopePointer, TitleTerm, VoiceName
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.voice import voiceunit_shop
 from src.a04_reason_logic.reason import factunit_shop
@@ -602,7 +602,7 @@ class AtomRow:
     voice_name: VoiceName = None
     addin: float = None
     awardee_title: TitleTerm = None
-    reason_context: RopeTerm = None
+    reason_context: RopePointer = None
     reason_active_requisite: bool = None
     begin: float = None
     respect_bit: float = None
@@ -615,7 +615,7 @@ class AtomRow:
     debtor_respect: int = None
     denom: int = None
     reason_divisor: int = None
-    fact_context: RopeTerm = None
+    fact_context: RopePointer = None
     fact_upper: float = None
     fact_lower: float = None
     fund_iota: float = None
@@ -627,15 +627,15 @@ class AtomRow:
     star: int = None
     max_tree_traverse: int = None
     morph: bool = None
-    reason_state: RopeTerm = None
+    reason_state: RopePointer = None
     reason_upper: float = None
     numor: int = None
     reason_lower: float = None
     penny: float = None
-    fact_state: RopeTerm = None
+    fact_state: RopePointer = None
     task: bool = None
     problem_bool: bool = None
-    plan_rope: RopeTerm = None
+    plan_rope: RopePointer = None
     solo: int = None
     stop_want: float = None
     take_force: float = None
@@ -659,8 +659,8 @@ class AtomRow:
                     self.__dict__[x_arg] = VoiceName(x_value)
                 elif class_type == "TitleTerm":
                     self.__dict__[x_arg] = TitleTerm(x_value)
-                elif class_type == "RopeTerm":
-                    self.__dict__[x_arg] = RopeTerm(x_value)
+                elif class_type == "RopePointer":
+                    self.__dict__[x_arg] = RopePointer(x_value)
                 elif class_type == "LabelTerm":
                     self.__dict__[x_arg] = LabelTerm(x_value)
                 elif class_type == "str":

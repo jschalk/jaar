@@ -2,7 +2,6 @@ from inspect import getdoc as inspect_getdoc
 from src.a01_rope_logic.term import (
     BeliefName,
     CentralLabel,
-    EporTerm,
     EventInt,
     FaceName,
     GroupTitle,
@@ -11,7 +10,7 @@ from src.a01_rope_logic.term import (
     LabelTerm,
     MomentLabel,
     NameTerm,
-    RopeTerm,
+    RopePointer,
     TitleTerm,
     VoiceName,
     default_knot_if_None,
@@ -26,7 +25,7 @@ def test_KnotTerm_Exists():
     x_knot = KnotTerm(empty_str)
     # THEN
     assert x_knot == empty_str
-    doc_str = "A string to used as a delimiter in RopeTerms."
+    doc_str = "A string to used as a delimiter in RopePointers."
     assert inspect_getdoc(x_knot) == doc_str
 
 
@@ -137,7 +136,7 @@ def test_LabelTerm_Exists():
     x_rope = LabelTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree node. Nodes cannot contain RopeTerm {knot_str()}"
+    doc_str = f"A string representation of a tree node. Nodes cannot contain RopePointer {knot_str()}"
     assert inspect_getdoc(x_rope) == doc_str
 
 
@@ -173,25 +172,14 @@ def test_CentralLabel_Exists():
     assert inspect_getdoc(x_central) == doc_str
 
 
-def test_RopeTerm_Exists():
+def test_RopePointer_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_rope = RopeTerm(empty_str)
+    x_rope = RopePointer(empty_str)
     # THEN
     assert x_rope == empty_str
     doc_str = f"A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}"
-    assert inspect_getdoc(x_rope) == doc_str
-
-
-def test_EporTerm_Exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_rope = EporTerm(empty_str)
-    # THEN
-    assert x_rope == empty_str
-    doc_str = f"EporTerm is a RopeTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}."
     assert inspect_getdoc(x_rope) == doc_str
 
 

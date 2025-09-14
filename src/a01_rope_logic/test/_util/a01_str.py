@@ -9,8 +9,8 @@ def NameTerm_str() -> str:
     return "NameTerm"
 
 
-def RopeTerm_str() -> str:
-    return "RopeTerm"
+def RopePointer_str() -> str:
+    return "RopePointer"
 
 
 def TitleTerm_str() -> str:

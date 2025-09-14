@@ -1,4 +1,4 @@
-from src.a01_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
+from src.a01_rope_logic.rope import RopePointer, create_rope, create_rope_from_labels
 from src.a01_rope_logic.term import MomentLabel
 from src.a05_plan_logic.plan import get_default_moment_label
 from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
@@ -102,7 +102,7 @@ def get_beliefdelta_sue_example() -> BeliefDelta:
     return sue_beliefdelta
 
 
-def get_texas_rope() -> RopeTerm:
+def get_texas_rope() -> RopePointer:
     moment_label = get_default_moment_label()
     nation_str = "nation"
     usa_str = "USA"

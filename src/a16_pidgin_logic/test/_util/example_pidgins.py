@@ -13,7 +13,7 @@ from src.a16_pidgin_logic.map import (
 from src.a16_pidgin_logic.pidgin_config import default_unknown_str_if_None
 from src.a16_pidgin_logic.pidgin_main import PidginUnit, pidginunit_shop
 from src.a16_pidgin_logic.test._util.a16_str import (
-    RopeTerm_str,
+    RopePointer_str,
     reason_context_str,
     voice_name_str,
 )
@@ -225,7 +225,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    rx = RopeTerm_str()
+    rx = RopePointer_str()
     sue_pidginunit.set_otx2inx(rx, otx_amy45_rope, inx_amy87_rope)
     sue_pidginunit.set_otx2inx(rx, casa_otx_rope, casa_inx_rope)
     sue_pidginunit.set_otx2inx(rx, clean_otx_rope, clean_inx_rope)

@@ -36,7 +36,7 @@ class PidginUnit:
     """Per face object that translates any translatable str.
     otx is the reference for the outside, what the face says
     inx is the reference for the inside, what the same inteprets from the face
-    Contains a mapunit for each translatable type: RopeTerm, NameTerm, TitleTerm...
+    Contains a mapunit for each translatable type: RopePointer, NameTerm, TitleTerm...
     """
 
     event_int: EventInt = None
@@ -75,7 +75,7 @@ class PidginUnit:
             return self.titlemap
         elif x_class_type == "LabelTerm":
             return self.labelmap
-        elif x_class_type == "RopeTerm":
+        elif x_class_type == "RopePointer":
             return self.ropemap
 
     def set_namemap(self, x_namemap: NameMap):
@@ -157,47 +157,47 @@ class PidginUnit:
         )
 
     def set_otx2inx(self, x_class_type: str, x_otx: str, x_inx: str):
-        """class_type: NameTerm, TitleTerm, LabelTerm, RopeTerm"""
+        """class_type: NameTerm, TitleTerm, LabelTerm, RopePointer"""
         if x_class_type == "NameTerm":
             self.namemap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "TitleTerm":
             self.titlemap.set_otx2inx(x_otx, x_inx)
         elif x_class_type == "LabelTerm":
             self.labelmap.set_otx2inx(x_otx, x_inx)
-        elif x_class_type == "RopeTerm":
+        elif x_class_type == "RopePointer":
             self.ropemap.set_otx2inx(x_otx, x_inx)
 
     def _get_inx_value(self, x_class_type: str, x_otx: str) -> str:
-        """class_type: NameTerm, TitleTerm, LabelTerm, RopeTerm"""
+        """class_type: NameTerm, TitleTerm, LabelTerm, RopePointer"""
         if x_class_type == "NameTerm":
             return self.namemap._get_inx_value(x_otx)
         elif x_class_type == "TitleTerm":
             return self.titlemap._get_inx_value(x_otx)
         elif x_class_type == "LabelTerm":
             return self.labelmap._get_inx_value(x_otx)
-        elif x_class_type == "RopeTerm":
+        elif x_class_type == "RopePointer":
             return self.ropemap._get_inx_value(x_otx)
 
     def otx2inx_exists(self, x_class_type: str, x_otx: str, x_inx: str) -> bool:
-        """class_type: NameTerm, TitleTerm, LabelTerm, RopeTerm"""
+        """class_type: NameTerm, TitleTerm, LabelTerm, RopePointer"""
         if x_class_type == "NameTerm":
             return self.namemap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "TitleTerm":
             return self.titlemap.otx2inx_exists(x_otx, x_inx)
         elif x_class_type == "LabelTerm":
             return self.labelmap.otx2inx_exists(x_otx, x_inx)
-        elif x_class_type == "RopeTerm":
+        elif x_class_type == "RopePointer":
             return self.ropemap.otx2inx_exists(x_otx, x_inx)
 
     def del_otx2inx(self, x_class_type: str, x_otx: str):
-        """class_type: NameTerm, TitleTerm, LabelTerm, RopeTerm"""
+        """class_type: NameTerm, TitleTerm, LabelTerm, RopePointer"""
         if x_class_type == "NameTerm":
             self.namemap.del_otx2inx(x_otx)
         elif x_class_type == "TitleTerm":
             self.titlemap.del_otx2inx(x_otx)
         elif x_class_type == "LabelTerm":
             self.labelmap.del_otx2inx(x_otx)
-        elif x_class_type == "RopeTerm":
+        elif x_class_type == "RopePointer":
             self.ropemap.del_otx2inx(x_otx)
 
     def set_label(self, x_otx: str, x_inx: str):

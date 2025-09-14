@@ -95,7 +95,7 @@ def test_RopeMap_reveal_inx_ReturnsObjAndSetsAttr_rope_Scenario2_With_label():
     assert gen_inx_rope == f"{inx_amy87_rope}{clean_inx_str}{inx_r_knot}"
 
 
-def test_RopeMap_reveal_inx_AddsMissingObjsTo_otx2inx_RopeTerm():
+def test_RopeMap_reveal_inx_AddsMissingObjsTo_otx2inx_RopePointer():
     # ESTABLISH
     otx_a45_str = "amy45"
     inx_a87_str = "amy87"

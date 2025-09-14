@@ -37,9 +37,9 @@ def test_treemetrics_shop_ReturnsObj():
 
     # # could create tests for these methods?
     # def evaluate_label(
-    # def evaluate_task(self, task: bool, plan_rope: RopeTerm):
+    # def evaluate_task(self, task: bool, plan_rope: RopePointer):
     # def evaluate_level(self, tree_level):
-    # def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
+    # def evaluate_reasonunits(self, reasons: dict[RopePointer, ReasonUnit]):
     # def evaluate_awardunits(self, awardunits: dict[GroupTitle, AwardUnit]):
     # def evaluate_uid_max(self, uid):
 

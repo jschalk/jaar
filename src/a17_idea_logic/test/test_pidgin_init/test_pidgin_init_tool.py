@@ -39,7 +39,7 @@ from src.a17_idea_logic.test._util.a17_env import (
 from src.a17_idea_logic.test._util.a17_str import (
     LabelTerm_str,
     NameTerm_str,
-    RopeTerm_str,
+    RopePointer_str,
     TitleTerm_str,
     event_int_str,
     face_name_str,
@@ -327,7 +327,7 @@ def test_load_ropemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_pidginunit(map_dir, sue_pidginunit)
     assert os_path_exists(rope_csv_path)
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_ropemap = empty_pidginunit.get_mapunit(RopeTerm_str())
+    sue_ropemap = empty_pidginunit.get_mapunit(RopePointer_str())
     sue_ropemap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_ropemap=}")
     assert len(sue_ropemap.otx2inx) == 0
@@ -337,7 +337,7 @@ def test_load_ropemap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_ropemap.otx2inx) == 2
-    ex_ropemap = sue_pidginunit.get_mapunit(RopeTerm_str())
+    ex_ropemap = sue_pidginunit.get_mapunit(RopePointer_str())
     assert ex_ropemap.event_int == sue_ropemap.event_int
     assert ex_ropemap.face_name == sue_ropemap.face_name
     assert ex_ropemap.otx2inx == sue_ropemap.otx2inx
@@ -353,7 +353,7 @@ def test_load_ropemap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     rope_csv_path = create_path(map_dir, rope_filename)
     assert os_path_exists(rope_csv_path) is False
     empty_pidginunit = pidginunit_shop("Sue")
-    sue_ropemap = empty_pidginunit.get_mapunit(RopeTerm_str())
+    sue_ropemap = empty_pidginunit.get_mapunit(RopePointer_str())
     sue_ropemap.face_name = "Sue"
     print(f"{empty_pidginunit=} {sue_ropemap=}")
     assert len(sue_ropemap.otx2inx) == 0

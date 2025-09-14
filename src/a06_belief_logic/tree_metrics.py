@@ -2,28 +2,28 @@ from dataclasses import dataclass
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_dict_if_None
 from src.a01_rope_logic.term import GroupTitle
 from src.a03_group_logic.group import AwardUnit
-from src.a04_reason_logic.reason import ReasonUnit, RopeTerm
+from src.a04_reason_logic.reason import ReasonUnit, RopePointer
 
 
 @dataclass
 class TreeMetrics:
     label_count: int = None
     tree_level_count: dict[int, int] = None
-    reason_contexts: dict[RopeTerm, int] = None
+    reason_contexts: dict[RopePointer, int] = None
     awardunits_metrics: dict[GroupTitle, AwardUnit] = None
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_plan_uids_are_unique: bool = None
-    last_evaluated_task_plan_rope: RopeTerm = None
+    last_evaluated_task_plan_rope: RopePointer = None
 
     def evaluate_label(
         self,
         tree_level: int,
-        reasons: dict[RopeTerm, ReasonUnit],
+        reasons: dict[RopePointer, ReasonUnit],
         awardunits: dict[GroupTitle, AwardUnit],
         uid: int,
         task: bool,
-        plan_rope: RopeTerm,
+        plan_rope: RopePointer,
     ):
         self.label_count += 1
         self.evaluate_task(task=task, plan_rope=plan_rope)
@@ -32,7 +32,7 @@ class TreeMetrics:
         self.evaluate_awardunits(awardunits=awardunits)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_task(self, task: bool, plan_rope: RopeTerm):
+    def evaluate_task(self, task: bool, plan_rope: RopePointer):
         if task:
             self.last_evaluated_task_plan_rope = plan_rope
 
@@ -42,7 +42,7 @@ class TreeMetrics:
         else:
             self.tree_level_count[tree_level] += 1
 
-    def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
+    def evaluate_reasonunits(self, reasons: dict[RopePointer, ReasonUnit]):
         reasons = {} if reasons is None else reasons
         for reason in reasons.values():
             if self.reason_contexts.get(reason.reason_context) is None:
@@ -71,7 +71,7 @@ class TreeMetrics:
 def treemetrics_shop(
     label_count: int = None,
     level_count: dict[int, int] = None,
-    reason_contexts: dict[RopeTerm, int] = None,
+    reason_contexts: dict[RopePointer, int] = None,
     awardunits_metrics: dict[GroupTitle, AwardUnit] = None,
     uid_max: int = None,
     uid_dict: dict[int, int] = None,

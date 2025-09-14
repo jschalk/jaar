@@ -637,7 +637,7 @@ def test_create_update_pidrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
     event5 = 5
     event7 = 7
     event9 = 9
-    error_rope_str = "Knot must exist in RopeTerm"
+    error_rope_str = "Knot must exist in RopePointer"
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()

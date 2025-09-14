@@ -7,7 +7,7 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.a01_rope_logic.term import BeliefName, EventInt, RopeTerm
+from src.a01_rope_logic.term import BeliefName, EventInt, RopePointer
 from src.a02_finance_logic.allot import allot_scale
 from src.a02_finance_logic.finance_config import FundNum, PennyNum
 from src.a04_reason_logic.reason import (
@@ -40,10 +40,10 @@ class CellUnit:
     quota: float = None
     mandate: float = None
     beliefadjust: BeliefUnit = None
-    beliefevent_facts: dict[RopeTerm, FactUnit] = None
-    found_facts: dict[RopeTerm, FactUnit] = None
-    boss_facts: dict[RopeTerm, FactUnit] = None
-    reason_contexts: set[RopeTerm] = None
+    beliefevent_facts: dict[RopePointer, FactUnit] = None
+    found_facts: dict[RopePointer, FactUnit] = None
+    boss_facts: dict[RopePointer, FactUnit] = None
+    reason_contexts: set[RopePointer] = None
     _voice_mandate_ledger: dict[BeliefName, FundNum] = None
 
     def get_cell_belief_name(self) -> BeliefName:
@@ -74,10 +74,10 @@ class CellUnit:
         credit_ledger = self.get_beliefevents_credit_ledger()
         return allot_scale(credit_ledger, self.quota, self.penny)
 
-    def set_beliefevent_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
+    def set_beliefevent_facts_from_dict(self, fact_dict: dict[RopePointer, dict]):
         self.beliefevent_facts = factunits_get_from_dict(fact_dict)
 
-    def set_found_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
+    def set_found_facts_from_dict(self, fact_dict: dict[RopePointer, dict]):
         self.found_facts = factunits_get_from_dict(fact_dict)
 
     def set_boss_facts_from_other_facts(self):
@@ -172,9 +172,9 @@ def cellunit_shop(
     penny: PennyNum = None,
     quota: float = None,
     beliefadjust: BeliefUnit = None,
-    beliefevent_facts: dict[RopeTerm, FactUnit] = None,
-    found_facts: dict[RopeTerm, FactUnit] = None,
-    boss_facts: dict[RopeTerm, FactUnit] = None,
+    beliefevent_facts: dict[RopePointer, FactUnit] = None,
+    found_facts: dict[RopePointer, FactUnit] = None,
+    boss_facts: dict[RopePointer, FactUnit] = None,
     mandate: float = None,
 ) -> CellUnit:
     if quota is None:

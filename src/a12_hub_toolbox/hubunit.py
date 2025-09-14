@@ -17,7 +17,7 @@ from src.a01_rope_logic.rope import validate_labelterm
 from src.a01_rope_logic.term import (
     BeliefName,
     MomentLabel,
-    RopeTerm,
+    RopePointer,
     default_knot_if_None,
 )
 from src.a02_finance_logic.finance_config import (
@@ -79,7 +79,7 @@ class HubUnit:
     belief_name: BeliefName = None
     moment_mstr_dir: str = None
     moment_label: str = None
-    keep_rope: RopeTerm = None
+    keep_rope: RopePointer = None
     knot: str = None
     fund_pool: float = None
     fund_iota: float = None
@@ -387,7 +387,7 @@ class HubUnit:
         speaker_vision = self.rj_speaker_belief(healer_name, speaker_id)
         return self.get_perspective_belief(speaker_vision)
 
-    def get_keep_ropes(self) -> set[RopeTerm]:
+    def get_keep_ropes(self) -> set[RopePointer]:
         x_gut_belief = open_gut_file(
             self.moment_mstr_dir, self.moment_label, self.belief_name
         )
@@ -434,7 +434,7 @@ def hubunit_shop(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName = None,
-    keep_rope: RopeTerm = None,
+    keep_rope: RopePointer = None,
     knot: str = None,
     fund_pool: float = None,
     fund_iota: float = None,

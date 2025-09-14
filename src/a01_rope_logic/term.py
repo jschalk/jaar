@@ -1,5 +1,5 @@
 class KnotTerm(str):
-    """A string to used as a delimiter in RopeTerms."""
+    """A string to used as a delimiter in RopePointers."""
 
 
 def default_knot_if_None(knot: any = None) -> str:
@@ -9,7 +9,7 @@ def default_knot_if_None(knot: any = None) -> str:
 
 
 class LabelTerm(str):
-    """A string representation of a tree node. Nodes cannot contain RopeTerm knot"""
+    """A string representation of a tree node. Nodes cannot contain RopePointer knot"""
 
     def is_label(self, knot: str = None) -> bool:
         return len(self) > 0 and self.contains_knot(knot)
@@ -58,14 +58,8 @@ class HealerName(BeliefName):
     pass
 
 
-class RopeTerm(str):
+class RopePointer(str):
     """A string representation of a tree path. LabelTerms are seperated by rope knot"""
-
-    pass
-
-
-class EporTerm(str):
-    """EporTerm is a RopeTerm in reverse direction. A string representation of a tree path. LabelTerms are seperated by rope knot."""
 
     pass
 

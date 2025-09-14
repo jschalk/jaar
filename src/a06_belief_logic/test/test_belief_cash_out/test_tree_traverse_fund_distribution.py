@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from pytest import raises as pytest_raises
-from src.a01_rope_logic.rope import RopeTerm, to_rope
+from src.a01_rope_logic.rope import RopePointer, to_rope
 from src.a02_finance_logic.finance_config import default_fund_pool
 from src.a03_group_logic.group import awardline_shop, awardunit_shop
 from src.a03_group_logic.voice import voiceunit_shop
@@ -1118,7 +1118,7 @@ class AwardAgendaMetrics:
     agenda_no_belief_i_sum = 0
     agenda_yes_belief_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[RopeTerm, PlanUnit]):
+    def set_sums(self, agenda_dict: dict[RopePointer, PlanUnit]):
         for agenda_plan in agenda_dict.values():
             self.sum_belief_agenda_share += agenda_plan.get_fund_share()
             if agenda_plan.awardlines == {}:

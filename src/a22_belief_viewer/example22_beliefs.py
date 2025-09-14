@@ -1,7 +1,7 @@
 from src.a03_group_logic.group import awardunit_shop
 from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.plan import planunit_shop
-from src.a06_belief_logic.belief_main import BeliefUnit, RopeTerm, beliefunit_shop
+from src.a06_belief_logic.belief_main import BeliefUnit, RopePointer, beliefunit_shop
 from src.a06_belief_logic.belief_tool import set_case_attr
 
 

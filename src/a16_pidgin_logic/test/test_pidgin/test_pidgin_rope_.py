@@ -544,7 +544,7 @@ def test_get_ropemap_from_json_ReturnsObj():
     assert x_ropemap == x_ropemap
 
 
-def test_RopeMap_all_otx_parent_ropes_exist_ReturnsObj_RopeTerm():
+def test_RopeMap_all_otx_parent_ropes_exist_ReturnsObj_RopePointer():
     # ESTABLISH
     otx_r_knot = "/"
     clean_otx_parent_rope = to_rope("amy45", otx_r_knot)
@@ -619,7 +619,7 @@ def test_RopeMap_is_valid_ReturnsObj_Scenario1_rope_str():
     assert x_ropemap.otx2inx_exists(clean_otx_rope, clean_inx_rope)
 
 
-def test_RopeMap_is_valid_ReturnsObj_Scenario3_RopeTerm():
+def test_RopeMap_is_valid_ReturnsObj_Scenario3_RopePointer():
     # ESTABLISH
     otx_r_knot = "/"
     clean_otx_parent_rope = to_rope("amy45", otx_r_knot)

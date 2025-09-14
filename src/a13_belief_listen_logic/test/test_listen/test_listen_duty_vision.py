@@ -1,4 +1,4 @@
-from src.a01_rope_logic.rope import LabelTerm, RopeTerm, create_rope
+from src.a01_rope_logic.rope import LabelTerm, RopePointer, create_rope
 from src.a05_plan_logic.plan import get_default_moment_label, planunit_shop
 from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.a12_hub_toolbox.hub_tool import (
@@ -61,43 +61,43 @@ def run_str() -> str:
     return "run"
 
 
-def casa_rope() -> RopeTerm:
+def casa_rope() -> RopePointer:
     return create_rope(get_default_moment_label(), casa_str())
 
 
-def cook_rope() -> RopeTerm:
+def cook_rope() -> RopePointer:
     return create_rope(casa_rope(), cook_str())
 
 
-def eat_rope() -> RopeTerm:
+def eat_rope() -> RopePointer:
     return create_rope(casa_rope(), eat_str())
 
 
-def hungry_rope() -> RopeTerm:
+def hungry_rope() -> RopePointer:
     return create_rope(eat_rope(), hungry_str())
 
 
-def full_rope() -> RopeTerm:
+def full_rope() -> RopePointer:
     return create_rope(eat_rope(), full_str())
 
 
-def sanitation_rope() -> RopeTerm:
+def sanitation_rope() -> RopePointer:
     return create_rope(casa_rope(), sanitation_str())
 
 
-def clean_rope() -> RopeTerm:
+def clean_rope() -> RopePointer:
     return create_rope(sanitation_rope(), clean_str())
 
 
-def dirty_rope() -> RopeTerm:
+def dirty_rope() -> RopePointer:
     return create_rope(sanitation_rope(), dirty_str())
 
 
-def sweep_rope() -> RopeTerm:
+def sweep_rope() -> RopePointer:
     return create_rope(casa_rope(), sweep_str())
 
 
-def run_rope() -> RopeTerm:
+def run_rope() -> RopePointer:
     return create_rope(casa_rope(), run_str())
 
 
@@ -162,7 +162,7 @@ def get_example_yao_vision3_speaker() -> BeliefUnit:
     return yao_speaker
 
 
-def get_usa_rope() -> RopeTerm:
+def get_usa_rope() -> RopePointer:
     return create_rope(get_default_moment_label(), "USA")
 
 
@@ -194,31 +194,31 @@ def get_on_land_str() -> LabelTerm:
     return "on_land"
 
 
-def get_iowa_rope() -> RopeTerm:
+def get_iowa_rope() -> RopePointer:
     return create_rope(get_usa_rope(), get_iowa_str())
 
 
-def get_ohio_rope() -> RopeTerm:
+def get_ohio_rope() -> RopePointer:
     return create_rope(get_usa_rope(), get_ohio_str())
 
 
-def get_utah_rope() -> RopeTerm:
+def get_utah_rope() -> RopePointer:
     return create_rope(get_usa_rope(), get_utah_str())
 
 
-def get_swim_rope() -> RopeTerm:
+def get_swim_rope() -> RopePointer:
     return create_rope(get_default_moment_label(), get_swim_str())
 
 
-def get_location_rope() -> RopeTerm:
+def get_location_rope() -> RopePointer:
     return create_rope(get_default_moment_label(), get_location_str())
 
 
-def get_in_mer_rope() -> RopeTerm:
+def get_in_mer_rope() -> RopePointer:
     return create_rope(get_location_rope(), get_in_mer_str())
 
 
-def get_on_land_rope() -> RopeTerm:
+def get_on_land_rope() -> RopePointer:
     return create_rope(get_location_rope(), get_on_land_str())
 
 

@@ -252,7 +252,7 @@ def test_Modules_path_FunctionStructureAndFormat():
     filterout_path_funcs = {
         "create_path",
         "create_directory_path",
-        "ropeterm_valid_dir_path",
+        "rope_is_valid_dir_path",
     }
     for module_desc, module_dir in get_module_descs().items():
         filenames_set = get_dir_filenames(module_dir, include_extensions={"py"})

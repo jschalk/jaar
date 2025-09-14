@@ -1,4 +1,4 @@
-from src.a01_rope_logic.rope import RopeTerm
+from src.a01_rope_logic.rope import RopePointer
 from src.a03_group_logic.labor import laborunit_shop
 from src.a05_plan_logic.plan import PlanUnit, planunit_shop
 from src.a06_belief_logic.belief_main import (
@@ -16,7 +16,7 @@ from src.a06_belief_logic.test._util.example_beliefs import (
 )
 
 
-def get_chores_count(agenda_dict: dict[RopeTerm, PlanUnit]) -> int:
+def get_chores_count(agenda_dict: dict[RopePointer, PlanUnit]) -> int:
     return sum(bool(x_planunit.chore) for x_planunit in agenda_dict.values())
 
 

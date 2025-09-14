@@ -51,7 +51,7 @@ def test_get_kids_in_range_EmptyParametersReturnsAll_kids():
     assert len(mon_plan.get_kids_in_range()) == 3
 
 
-def test_PlanUnit_get_descendants_ReturnsNoRopeTerms():
+def test_PlanUnit_get_descendants_ReturnsNoRopePointers():
     # ESTABLISH
     nation_str = "nation"
     nation_plan = planunit_shop(nation_str, parent_rope=root_label())
@@ -63,7 +63,7 @@ def test_PlanUnit_get_descendants_ReturnsNoRopeTerms():
     assert nation_descendants == {}
 
 
-def test_PlanUnit_get_descendants_Returns3DescendantsRopeTerms():
+def test_PlanUnit_get_descendants_Returns3DescendantsRopePointers():
     # ESTABLISH
     nation_str = "nation"
     nation_rope = create_rope(root_label(), nation_str)

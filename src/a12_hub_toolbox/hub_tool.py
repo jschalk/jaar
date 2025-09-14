@@ -10,7 +10,7 @@ from src.a00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.a01_rope_logic.term import BeliefName, EventInt, LabelTerm, RopeTerm
+from src.a01_rope_logic.term import BeliefName, EventInt, LabelTerm, RopePointer
 from src.a06_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
@@ -151,7 +151,7 @@ def save_arbitrary_beliefevent(
     belief_name: str,
     event_int: int,
     voices: list[list] = None,
-    facts: list[tuple[RopeTerm, RopeTerm, float, float]] = None,
+    facts: list[tuple[RopePointer, RopePointer, float, float]] = None,
 ) -> str:
     voices = get_empty_list_if_None(voices)
     facts = get_empty_list_if_None(facts)

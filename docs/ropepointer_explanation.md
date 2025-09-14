@@ -32,15 +32,15 @@ The first step to making connections is to define the knot. Then label things th
 # Definitions: 
 - **Term**: Any sequence of letters. "a" or "apple" of "Apple is good"
 - **LabelTerm**: A Term describing a thing. Examples: "apple", "December", "My grandmother", "Romeo, where art thou Romeo?" 
-- **KnotTerm**: A special Term used to separate LabelTerms in a RopeTerm. Examples: ",", ";", "/", "\", "sep"
-- **RopeTerm**: A Term that has Labels seperated by Knots. 
-Example RopeTerms with knot ";":
+- **KnotTerm**: A special Term used to separate LabelTerms in a RopePointer. Examples: ",", ";", "/", "\", "sep"
+- **RopePointer**: A Term that has Labels seperated by Knots. 
+Example RopePointers with knot ";":
 apple_moon_rope = ";apple;orchard;things Sue loves;moon;"
 vacuum_rope = ";amy;casa;clean;vacuum;"
 dirty_rope = ";amy;casa;appearance;dirty;"
 usa_texas_rope = ";UN;USA;Texas;"
 un_texas_rope = ";UN;Texas;"
-- **CentralLabel**: The first label in a RopeTerm. Example "UN" in ";UN;USA;Texas;"
+- **CentralLabel**: The first label in a RopePointer. Example "UN" in ";UN;USA;Texas;"
 
 # Moments
 Consider these 3 ropes: 

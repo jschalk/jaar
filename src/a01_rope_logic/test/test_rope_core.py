@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.a01_rope_logic.rope import (
-    RopeTerm,
-    all_ropeterms_between,
+    RopePointer,
+    all_ropes_between,
     create_rope,
     create_rope_from_labels,
     find_replace_rope_key_dict,
@@ -21,7 +21,7 @@ from src.a01_rope_logic.rope import (
     is_sub_rope,
     rebuild_rope,
     replace_knot,
-    ropeterm_valid_dir_path,
+    rope_is_valid_dir_path,
     to_rope,
     validate_labelterm,
 )
@@ -192,7 +192,7 @@ def test_rope_is_sub_rope_ReturnsObj_Scenario1_WhenNone_default_knot_if_None():
     assert is_sub_rope(slash_cleaning_rope, default_laundrys_rope) is False
 
 
-def test_rope_rebuild_rope_ReturnsRopeTerm():
+def test_rope_rebuild_rope_ReturnsRopePointer():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_rope(), casa_str)
@@ -323,12 +323,12 @@ def test_rope_get_parent_rope_ReturnsObj_Scenario1():
 
 @dataclass
 class TempTestingObj:
-    x_rope: RopeTerm = ""
+    x_rope: RopePointer = ""
 
     def find_replace_rope(self, old_rope, new_rope):
         self.x_rope = rebuild_rope(self.x_rope, old_rope=old_rope, new_rope=new_rope)
 
-    def get_obj_key(self) -> RopeTerm:
+    def get_obj_key(self) -> RopePointer:
         return self.x_rope
 
 
@@ -411,7 +411,7 @@ def test_rope_get_ancestor_ropes_ReturnsObj_Scenario1_nondefault_knot():
     assert texas_anc_ropes == texas_ancestor_ropes
 
 
-def test_rope_get_forefather_ropes_ReturnsAncestorRopeTermsWithoutClean():
+def test_rope_get_forefather_ropes_ReturnsAncestorRopePointersWithoutClean():
     # ESTABLISH
     x_s = default_knot_if_None()
     nation_str = "nation"
@@ -469,8 +469,8 @@ def test_is_labelterm_ReturnsObj():
     assert is_labelterm("", x_knot=x_s) is False
     assert is_labelterm("casa", x_knot=x_s)
     assert not is_labelterm(f"ZZ{x_s}casa", x_s)
-    assert not is_labelterm(RopeTerm(f"ZZ{x_s}casa"), x_s)
-    assert is_labelterm(RopeTerm("ZZ"), x_s)
+    assert not is_labelterm(RopePointer(f"ZZ{x_s}casa"), x_s)
+    assert is_labelterm(RopePointer("ZZ"), x_s)
 
 
 def test_is_heir_rope_IdentifiesHeirs():
@@ -545,7 +545,7 @@ def test_replace_knot_RaisesError():
     )
 
 
-def test_replace_knot_WhenNewknotIsFirstInRopeTermRaisesError():
+def test_replace_knot_WhenNewknotIsFirstInRopePointerRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"
@@ -607,20 +607,20 @@ def test_validate_labelterm_RaisesErrorWhenLabelTerm():
     )
 
 
-def test_ropeterm_valid_dir_path_ReturnsObj_simple_knot():
+def test_rope_is_valid_dir_path_ReturnsObj_simple_knot():
     # ESTABLISH
     comma_str = ","
     # WHEN / THEN
-    assert ropeterm_valid_dir_path(",run,", knot=comma_str)
-    assert ropeterm_valid_dir_path(",run,sport,", knot=comma_str)
+    assert rope_is_valid_dir_path(",run,", knot=comma_str)
+    assert rope_is_valid_dir_path(",run,sport,", knot=comma_str)
     print(f"{platform_system()=}")
-    sport_question_valid_bool = ropeterm_valid_dir_path("run,sport?,", comma_str)
+    sport_question_valid_bool = rope_is_valid_dir_path("run,sport?,", comma_str)
     assert (
         platform_system() == "Windows" and sport_question_valid_bool is False
     ) or platform_system() == "Linux"
 
 
-def test_ropeterm_valid_dir_path_ReturnsObj_complicated_knot():
+def test_rope_is_valid_dir_path_ReturnsObj_complicated_knot():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -633,16 +633,16 @@ def test_ropeterm_valid_dir_path_ReturnsObj_complicated_knot():
     assert lap_rope == f"{sport_rope}{run_str}?{lap_str}?"
 
     # WHEN / THEN
-    assert ropeterm_valid_dir_path(sport_rope, knot=question_str)
-    assert ropeterm_valid_dir_path(run_rope, knot=question_str)
-    assert ropeterm_valid_dir_path(lap_rope, knot=question_str)
+    assert rope_is_valid_dir_path(sport_rope, knot=question_str)
+    assert rope_is_valid_dir_path(run_rope, knot=question_str)
+    assert rope_is_valid_dir_path(lap_rope, knot=question_str)
     assert (
         platform_system() == "Windows"
-        and ropeterm_valid_dir_path(lap_rope, knot=",") is False
+        and rope_is_valid_dir_path(lap_rope, knot=",") is False
     ) or platform_system() == "Linux"
 
 
-def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
+def test_rope_is_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
     # ESTABLISH
     question_str = "?"
     sport_str = "sport"
@@ -654,13 +654,13 @@ def test_ropeterm_valid_dir_path_ReturnsObjWhereSlashNotknotEdgeSituations():
     assert lap_rope == f"{sport_rope}{run_str}?{lap_str}?"
 
     # WHEN / THEN
-    assert ropeterm_valid_dir_path(sport_rope, knot=question_str)
-    assert ropeterm_valid_dir_path(run_rope, knot=question_str) is False
-    assert ropeterm_valid_dir_path(lap_rope, knot=question_str) is False
-    assert ropeterm_valid_dir_path(lap_rope, knot=",") is False
+    assert rope_is_valid_dir_path(sport_rope, knot=question_str)
+    assert rope_is_valid_dir_path(run_rope, knot=question_str) is False
+    assert rope_is_valid_dir_path(lap_rope, knot=question_str) is False
+    assert rope_is_valid_dir_path(lap_rope, knot=",") is False
 
 
-def test_all_ropeterms_between_ReturnsObj_Scenario0_Default_knot():
+def test_all_ropes_between_ReturnsObj_Scenario0_Default_knot():
     # ESTABLISH
     casa_str = "casa"
     sport_str = "sport"
@@ -671,16 +671,16 @@ def test_all_ropeterms_between_ReturnsObj_Scenario0_Default_knot():
     lap_rope = create_rope(run_rope, lap_str)
 
     # WHEN / THEN
-    assert all_ropeterms_between(sport_rope, sport_rope) == [sport_rope]
-    assert all_ropeterms_between(sport_rope, run_rope) == [sport_rope, run_rope]
-    assert all_ropeterms_between(sport_rope, lap_rope) == [
+    assert all_ropes_between(sport_rope, sport_rope) == [sport_rope]
+    assert all_ropes_between(sport_rope, run_rope) == [sport_rope, run_rope]
+    assert all_ropes_between(sport_rope, lap_rope) == [
         sport_rope,
         run_rope,
         lap_rope,
     ]
 
 
-def test_all_ropeterms_between_ReturnsObj_Scenario1_NonDefault_knot():
+def test_all_ropes_between_ReturnsObj_Scenario1_NonDefault_knot():
     # ESTABLISH
     casa_str = "casa"
     sport_str = "sport"
@@ -692,12 +692,12 @@ def test_all_ropeterms_between_ReturnsObj_Scenario1_NonDefault_knot():
     lap_rope = create_rope(run_rope, lap_str, knot=slash_str)
 
     # WHEN / THEN
-    assert all_ropeterms_between(sport_rope, sport_rope, slash_str) == [sport_rope]
-    assert all_ropeterms_between(sport_rope, run_rope, slash_str) == [
+    assert all_ropes_between(sport_rope, sport_rope, slash_str) == [sport_rope]
+    assert all_ropes_between(sport_rope, run_rope, slash_str) == [
         sport_rope,
         run_rope,
     ]
-    assert all_ropeterms_between(sport_rope, lap_rope, slash_str) == [
+    assert all_ropes_between(sport_rope, lap_rope, slash_str) == [
         sport_rope,
         run_rope,
         lap_rope,
