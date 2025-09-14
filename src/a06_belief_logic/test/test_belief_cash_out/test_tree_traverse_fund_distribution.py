@@ -318,21 +318,21 @@ def test_BeliefUnit_cashout_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFund
     sweep_str = "sweep"
     sweep_rope = sue_beliefunit.make_rope(clean_rope, sweep_str)
     sweep_plan = planunit_shop(sweep_str, star=0)
-    vaccum_str = "vaccum"
-    vaccum_rope = sue_beliefunit.make_rope(clean_rope, vaccum_str)
-    vaccum_plan = planunit_shop(vaccum_str, star=0)
+    vacuum_str = "vacuum"
+    vacuum_rope = sue_beliefunit.make_rope(clean_rope, vacuum_str)
+    vacuum_plan = planunit_shop(vacuum_str, star=0)
 
     sue_beliefunit.set_l1_plan(casa_plan)
     sue_beliefunit.set_plan(swim_plan, casa_rope)
     sue_beliefunit.set_plan(clean_plan, casa_rope)
     sue_beliefunit.set_plan(sweep_plan, clean_rope)  # _star=0
-    sue_beliefunit.set_plan(vaccum_plan, clean_rope)  # _star=0
+    sue_beliefunit.set_plan(vacuum_plan, clean_rope)  # _star=0
 
     assert sue_beliefunit.get_plan_obj(casa_rope).fund_ratio is None
     assert sue_beliefunit.get_plan_obj(swim_rope).fund_ratio is None
     assert sue_beliefunit.get_plan_obj(clean_rope).fund_ratio is None
     assert sue_beliefunit.get_plan_obj(sweep_rope).fund_ratio is None
-    assert sue_beliefunit.get_plan_obj(vaccum_rope).fund_ratio is None
+    assert sue_beliefunit.get_plan_obj(vacuum_rope).fund_ratio is None
     assert sue_beliefunit.get_groupunit(yao_str) is None
 
     assert not sue_beliefunit.offtrack_fund
@@ -349,7 +349,7 @@ def test_BeliefUnit_cashout_WhenPlanUnitHasFundsBut_kidsHaveNostarDistributeFund
     assert sue_beliefunit.get_plan_obj(swim_rope).fund_ratio == 0.8
     assert sue_beliefunit.get_plan_obj(clean_rope).fund_ratio == clean_fund_ratio
     assert sue_beliefunit.get_plan_obj(sweep_rope).fund_ratio == 0
-    assert sue_beliefunit.get_plan_obj(vaccum_rope).fund_ratio == 0
+    assert sue_beliefunit.get_plan_obj(vacuum_rope).fund_ratio == 0
     assert sue_beliefunit.get_groupunit(yao_str).fund_give == 0
     assert sue_beliefunit.get_groupunit(yao_str).fund_take == 0
 

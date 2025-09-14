@@ -496,15 +496,15 @@ def test_BeliefUnit_cashout_WhenPlanUnitHas_starButAll_kidsHaveZero_starAddTo_of
     sweep_str = "sweep"
     sweep_rope = sue_beliefunit.make_rope(clean_rope, sweep_str)
     sweep_plan = planunit_shop(sweep_str, star=0)
-    vaccum_str = "vaccum"
-    vaccum_rope = sue_beliefunit.make_rope(clean_rope, vaccum_str)
-    vaccum_plan = planunit_shop(vaccum_str, star=0)
+    vacuum_str = "vacuum"
+    vacuum_rope = sue_beliefunit.make_rope(clean_rope, vacuum_str)
+    vacuum_plan = planunit_shop(vacuum_str, star=0)
 
     sue_beliefunit.set_l1_plan(casa_plan)
     sue_beliefunit.set_plan(swim_plan, casa_rope)
     sue_beliefunit.set_plan(clean_plan, casa_rope)
     sue_beliefunit.set_plan(sweep_plan, clean_rope)  # _star=0
-    sue_beliefunit.set_plan(vaccum_plan, clean_rope)  # _star=0
+    sue_beliefunit.set_plan(vacuum_plan, clean_rope)  # _star=0
 
     assert sue_beliefunit.offtrack_kids_star_set == set()
 
