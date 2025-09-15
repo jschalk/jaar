@@ -5,6 +5,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
+from src.a01_rope_logic._ref.a01_doc_builder import get_ropepointer_explanation_md
 
 
 def get_module_descs() -> dict[str, str]:
@@ -70,3 +71,7 @@ def get_module_blurbs_md() -> str:
 
 def save_module_blurbs_md(x_dir: str):
     save_file(x_dir, "module_blurbs.md", get_module_blurbs_md())
+
+
+def save_ropepointer_explanation_md(x_dir: str):
+    save_file(x_dir, "ropepointer_explanation.md", get_ropepointer_explanation_md())
