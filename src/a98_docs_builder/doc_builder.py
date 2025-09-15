@@ -1,9 +1,15 @@
 from ast import FunctionDef as ast_FunctionDef, parse as ast_parse, walk as ast_walk
+from pathlib import Path
 from src.a00_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,
     open_json,
     save_file,
+)
+from src.a01_rope_logic._ref.a01_doc_builder import get_ropepointer_explanation_md
+from src.a17_idea_logic._ref.a17_doc_builder import (
+    get_brick_formats_md,
+    get_idea_brick_mds,
 )
 
 
@@ -70,3 +76,20 @@ def get_module_blurbs_md() -> str:
 
 def save_module_blurbs_md(x_dir: str):
     save_file(x_dir, "module_blurbs.md", get_module_blurbs_md())
+
+
+def save_ropepointer_explanation_md(x_dir: str):
+    save_file(x_dir, "ropepointer_explanation.md", get_ropepointer_explanation_md())
+
+
+def save_idea_brick_mds(dest_dir: str):
+    idea_brick_mds = get_idea_brick_mds()
+    dest_dir = create_path(dest_dir, "a17_idea_brick_formats")
+
+    for idea_number, idea_brick_md in idea_brick_mds.items():
+        save_file(dest_dir, f"{idea_number}.md", idea_brick_md)
+
+
+def save_brick_formats_md(dest_dir: str):
+    brick_formats_md = get_brick_formats_md()
+    save_file(dest_dir, "idea_brick_formats.md", brick_formats_md)
