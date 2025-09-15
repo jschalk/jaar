@@ -1,21 +1,43 @@
 from json import loads as json_loads
 from pathlib import Path
-from src.a00_data_toolbox.file_toolbox import count_files, save_json
+from src.a00_data_toolbox.file_toolbox import count_files, open_file, save_json
 from src.a08_belief_atom_logic.atom_config import get_atom_config_args
+from src.a17_idea_logic._ref.a17_doc_builder import (
+    get_brick_formats_md,
+    get_idea_brick_md,
+    get_idea_brick_mds,
+)
 from src.a17_idea_logic._ref.a17_terms import (
     attributes_str,
     belief_name_str,
     belief_planunit_str,
+    c400_number_str,
     dimens_str,
+    event_int_str,
+    face_name_str,
+    fund_iota_str,
     gogo_want_str,
+    idea_number_str,
+    job_listen_rotations_str,
+    knot_str,
     moment_label_str,
+    monthday_distortion_str,
+    otx_key_str,
+    penny_str,
     plan_rope_str,
+    respect_bit_str,
+    timeline_label_str,
+    yr1_jan1_offset_str,
 )
 from src.a17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
     get_idea_formats_dir,
     get_idea_numbers,
+)
+from src.a17_idea_logic.test._util.a17_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir,
 )
 
 
@@ -62,51 +84,107 @@ def rebuild_format_jsons(x_rebuild_format_jsons: bool):
             save_json(get_idea_formats_dir(), x_filename, idea_format)
 
 
-def test_idea_brick_formats_MarkdownFileExists():
+def test_get_idea_brick_md_ReturnsObj():
     # ESTABLISH
-    # Gather lines here
-    doc_main_dir = "docs"
-    doc_ideas_dir = Path(f"{doc_main_dir}/a17_idea_brick_formats")
-    doc_ideas_dir.mkdir(parents=True, exist_ok=True)
-
-    manifest_lines = []
-    idea_formats_dir = Path(get_idea_formats_dir())
+    idea_brick_config = {
+        "attributes": {
+            knot_str(): {otx_key_str(): False},
+            c400_number_str(): {otx_key_str(): False},
+            event_int_str(): {otx_key_str(): True},
+            face_name_str(): {otx_key_str(): True},
+            moment_label_str(): {otx_key_str(): True},
+            fund_iota_str(): {otx_key_str(): False},
+            job_listen_rotations_str(): {otx_key_str(): False},
+            monthday_distortion_str(): {otx_key_str(): False},
+            penny_str(): {otx_key_str(): False},
+            respect_bit_str(): {otx_key_str(): False},
+            timeline_label_str(): {otx_key_str(): False},
+            yr1_jan1_offset_str(): {otx_key_str(): False},
+        },
+        idea_number_str(): "br00000",
+        dimens_str(): ["momentunit"],
+    }
 
     # WHEN
-    for json_path in sorted(idea_formats_dir.glob("*.json")):
-        data = json_loads(json_path.read_text())
-        # print(f"{data=}")
-
-        # Basic validation
-        assert "idea_number" in data, f"{json_path.name} missing 'idea_number'"
-        assert "attributes" in data, f"{json_path.name} missing 'attributes'"
-        assertion_fail_str = f"{json_path.name} has malformed 'attributes'"
-        assert isinstance(data["attributes"], dict), assertion_fail_str
-
-        idea = data["idea_number"]
-        attr_names = list(data["attributes"].keys())
-        dimens = list(data["dimens"])
-        sorted_attrs = get_default_sorted_list(attr_names)
-        manifest_line = f"- [`{idea}`](ideas/{idea}.md): " + ", ".join(sorted_attrs)
-        manifest_lines.append(manifest_line)
-
-        # Create per-idea Markdown file
-        idea_md_path = doc_ideas_dir / f"{idea}.md"
-        idea_md_lines = [
-            f"# Idea `{idea}`\n",
-            f"## Dimens `{dimens}`\n",
-            "## Attributes",
-            *(f"- `{attr}`" for attr in sorted_attrs),
-        ]
-        idea_md_path.write_text("\n".join(idea_md_lines) + "\n")
-
-    # Where the Markdown manifest will be written
-    dst_path = Path(f"{doc_main_dir}/idea_brick_formats.md")
-    dst_path.parent.mkdir(parents=True, exist_ok=True)
-    dst_path.write_text("# Idea Manifest\n\n" + "\n".join(manifest_lines))
+    idea_brick_md = get_idea_brick_md(idea_brick_config)
 
     # THEN
-    assert dst_path.exists(), f"Failed to write manifest to {dst_path}"
+    print(idea_brick_md)
+    expected_idea_brick_md = f"""# Idea `br00000`
 
-    assertion_fail_str = f"Expected {len(get_idea_numbers())} idea files, found {count_files(doc_ideas_dir)}"
-    assert count_files(doc_ideas_dir) == len(get_idea_numbers()), assertion_fail_str
+## Dimens `['momentunit']`
+
+## Attributes
+- `{event_int_str()}`
+- `{face_name_str()}`
+- `{moment_label_str()}`
+- `{timeline_label_str()}`
+- `{c400_number_str()}`
+- `{yr1_jan1_offset_str()}`
+- `{monthday_distortion_str()}`
+- `{fund_iota_str()}`
+- `{penny_str()}`
+- `{respect_bit_str()}`
+- `{knot_str()}`
+- `{job_listen_rotations_str()}`
+"""
+    assert (idea_brick_md) == expected_idea_brick_md
+
+
+def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
+    # ESTABLISH
+    temp_dir = get_module_temp_dir()
+    br00000_str = "br00000"
+    idea_brick_config = {
+        "attributes": {
+            knot_str(): {otx_key_str(): False},
+            c400_number_str(): {otx_key_str(): False},
+            event_int_str(): {otx_key_str(): True},
+            face_name_str(): {otx_key_str(): True},
+            moment_label_str(): {otx_key_str(): True},
+            fund_iota_str(): {otx_key_str(): False},
+            job_listen_rotations_str(): {otx_key_str(): False},
+            monthday_distortion_str(): {otx_key_str(): False},
+            penny_str(): {otx_key_str(): False},
+            respect_bit_str(): {otx_key_str(): False},
+            timeline_label_str(): {otx_key_str(): False},
+            yr1_jan1_offset_str(): {otx_key_str(): False},
+        },
+        idea_number_str(): br00000_str,
+        dimens_str(): ["momentunit"],
+    }
+    save_json(temp_dir, f"{br00000_str}.json", idea_brick_config)
+
+    # WHEN
+    idea_brick_mds = get_idea_brick_mds(temp_dir)
+
+    # THEN
+    expected_idea_brick_md = f"""# Idea `br00000`
+
+## Dimens `['momentunit']`
+
+## Attributes
+- `{event_int_str()}`
+- `{face_name_str()}`
+- `{moment_label_str()}`
+- `{timeline_label_str()}`
+- `{c400_number_str()}`
+- `{yr1_jan1_offset_str()}`
+- `{monthday_distortion_str()}`
+- `{fund_iota_str()}`
+- `{penny_str()}`
+- `{respect_bit_str()}`
+- `{knot_str()}`
+- `{job_listen_rotations_str()}`
+"""
+    assert set(idea_brick_mds.keys()) == {br00000_str}
+    assert idea_brick_mds == {br00000_str: expected_idea_brick_md}
+
+
+def test_get_brick_formats_md_ReturnsObj():
+    # ESTABLISH / WHEN
+    idea_brick_formats_md = get_brick_formats_md()
+
+    # THEN
+    assert idea_brick_formats_md
+    assert idea_brick_formats_md.find("br00004") > 0

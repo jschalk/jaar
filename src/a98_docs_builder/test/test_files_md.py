@@ -1,8 +1,10 @@
 from os.path import exists as os_path_exists
-from src.a00_data_toolbox.file_toolbox import create_path, open_file
+from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, open_file
 from src.a01_rope_logic._ref.a01_doc_builder import get_ropepointer_explanation_md
 from src.a98_docs_builder.doc_builder import (
     get_module_blurbs_md,
+    save_brick_formats_md,
+    save_idea_brick_mds,
     save_module_blurbs_md,
     save_ropepointer_explanation_md,
 )
@@ -48,3 +50,30 @@ def test_save_ropepointer_explanation_md_CreatesFile(env_dir_setup_cleanup):
     # THEN
     assert os_path_exists(file_path)
     assert open_file(file_path) == get_ropepointer_explanation_md()
+
+
+def test_save_idea_brick_mds_CreatesFiles(env_dir_setup_cleanup):
+    # ESTABLISH
+    temp_dir = get_module_temp_dir()
+    assert count_dirs_files(temp_dir) == 0
+
+    # WHEN
+    save_idea_brick_mds(temp_dir)
+
+    # THEN
+    assert count_dirs_files(temp_dir) == 41
+
+
+def test_save_idea_brick_formats_CreatesFile(env_dir_setup_cleanup):
+    # ESTABLISH
+    doc_main_dir = get_module_temp_dir()
+    idea_brick_formats_path = create_path(doc_main_dir, "idea_brick_formats.md")
+    assert not os_path_exists(idea_brick_formats_path)
+
+    # WHEN
+    save_brick_formats_md(doc_main_dir)
+
+    # THEN
+    assert os_path_exists(idea_brick_formats_path)
+    idea_brick_formats_md = open_file(idea_brick_formats_path)
+    assert idea_brick_formats_md.find("br00004") > 0
