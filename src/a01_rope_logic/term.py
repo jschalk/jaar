@@ -65,7 +65,7 @@ class RopePointer(str):
 
 
 class TitleTerm(str):
-    """If a TitleTerm contains knots it represents a group otherwise it's a single member group of an VoiceName."""
+    """If a TitleTerm contains knots it represents a group otherwise its a single member group of an VoiceName."""
 
 
 class GroupTitle(TitleTerm):  # Created to help track the object class relations
