@@ -645,7 +645,7 @@ def test_BeliefUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
 
 
 def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
-    # WHEN "I am cleaning the cookery since I'm in the flat and it's 8am and it's dirty and it's for my family"
+    # WHEN "I am cleaning the cookery since I'm in the flat and its 8am and its dirty and its for my family"
 
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")

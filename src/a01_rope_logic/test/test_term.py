@@ -116,7 +116,7 @@ def test_TitleTerm_Exists():
     bob_nameterm = TitleTerm(bob_str)
     # THEN
     assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise it's a single member group of an VoiceName."""
+    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise its a single member group of an VoiceName."""
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 
