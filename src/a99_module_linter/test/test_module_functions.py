@@ -2,7 +2,11 @@ from importlib import import_module as importlib_import_module
 from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
-from src.a98_docs_builder.doc_builder import get_module_descs, get_module_str_functions
+from src.a98_docs_builder.doc_builder import (
+    get_module_desc_str_number,
+    get_module_descs,
+    get_module_str_functions,
+)
 from src.a99_module_linter.linter import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
@@ -32,11 +36,13 @@ def test_Modules_StrFunctionsAppearWhereTheyShould():
     # WHEN / THEN
     # all_file_count = 0
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
+        module_desc_str_number = get_module_desc_str_number(module_desc)
         module_files = list(get_python_files_with_flag(module_dir).keys())
         module_files.extend(list(get_json_files(module_dir)))
         module_files = sorted(module_files)
-        str_funcs_set = set(get_module_str_functions(module_dir, desc_number_str))
+        str_funcs_set = set(
+            get_module_str_functions(module_dir, module_desc_str_number)
+        )
         # print(f"{desc_number_str} {len(str_funcs_set)=}")
         # module_file_count = 0
         for file_path in module_files:
@@ -69,8 +75,8 @@ def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
     all_file_count = 0
     for module_desc in mod_descs_sorted:
         module_dir = module_descs.get(module_desc)
-        desc_number_str = module_desc[1:3]
-        desc_number_int = int(desc_number_str)
+        module_desc_str_number = get_module_desc_str_number(module_desc)
+        desc_number_int = int(module_desc_str_number)
         module_files = sorted(list(get_python_files_with_flag(module_dir).keys()))
         # print(f"{desc_number_str} src.{module_desc}")
         for module_file_count, file_path in enumerate(module_files, start=1):
@@ -79,7 +85,7 @@ def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
             if len(incorrect_imports) == 1 and file_path.find("_terms.py") > 0:
                 incorrect_imports = []
 
-            assertion_fail_str = f"File #{all_file_count} a{desc_number_str} file #{module_file_count} Imports: {len(incorrect_imports)} {file_path}"
+            assertion_fail_str = f"File #{all_file_count} a{module_desc_str_number} file #{module_file_count} Imports: {len(incorrect_imports)} {file_path}"
             assert not incorrect_imports, assertion_fail_str
 
 
@@ -298,7 +304,8 @@ def test_Modules_path_FunctionStructureAndFormat():
 
     for module_desc, module_dir in get_module_descs().items():
         if len(filtered_modules_path_funcs.get(module_desc)) > 0:
-            path_func_filename = f"a{module_desc[1:3]}_path.py"
+            module_desc_str_number = get_module_desc_str_number(module_desc)
+            path_func_filename = f"a{module_desc_str_number}_path.py"
             path_func_library = create_path(module_dir, path_func_filename)
             path_funcs = filtered_modules_path_funcs.get(module_desc)
             assert os_path_exists(path_func_library)

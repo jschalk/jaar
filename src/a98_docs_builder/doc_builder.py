@@ -41,10 +41,15 @@ def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
     return get_function_names_from_file(str_util_path)
 
 
+def get_module_desc_str_number(module_desc: str) -> str:
+    """Returns module number in 2 character string."""
+    return module_desc[1:3]
+
+
 def get_str_funcs_md() -> str:
     func_lines = ["## Str Functions by Module"]
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
+        desc_number_str = get_module_desc_str_number(module_desc)
         module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
         x_list = [str_func[:-4] for str_func in module_str_funcs]
         _line = f"- {module_desc}: " + ", ".join(x_list)
@@ -60,7 +65,7 @@ def save_str_funcs_md(x_dir: str):
 def get_module_blurbs_md() -> str:
     lines = ["# Module Overview\n", "What does each one do?\n", ""]
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
+        desc_number_str = get_module_desc_str_number(module_desc)
         docs_dir = create_path(module_dir, "_ref")
         module_ref_path = create_path(docs_dir, f"a{desc_number_str}_ref.json")
         module_ref_dict = open_json(module_ref_path)

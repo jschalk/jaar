@@ -16,6 +16,7 @@ from re import compile as re_compile
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.a98_docs_builder.doc_builder import (
     get_function_names_from_file,
+    get_module_desc_str_number,
     get_module_descs,
 )
 from textwrap import dedent as textwrap_dedent
@@ -150,7 +151,7 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
 def get_all_str_functions() -> list:
     all_str_functions = []
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = module_desc[1:3]
+        desc_number_str = get_module_desc_str_number(module_desc)
         ref_dir = create_path(module_dir, "_ref")
         str_util_path = create_path(ref_dir, f"a{desc_number_str}_terms.py")
         str_functions = get_function_names_from_file(str_util_path)
@@ -321,11 +322,13 @@ def check_all_test_functions_are_formatted(
 def get_max_module_import_str() -> str:
     max_module_int = 0
     for module_desc in get_module_descs():
-        max_module_int = max(int(module_desc[1:3]), max_module_int)
+        module_desc_str_number = get_module_desc_str_number(module_desc)
+        max_module_int = max(int(module_desc_str_number), max_module_int)
 
     max_module_dir = ""
     for module_desc, module_dir in get_module_descs().items():
-        if int(module_desc[1:3]) == max_module_int:
+        module_desc_str_number = get_module_desc_str_number(module_desc)
+        if int(module_desc_str_number) == max_module_int:
             max_module_dir = module_dir
     max_module_int_str = str(max_module_int)
     max_module_import_str = max_module_dir.replace("\\", ".")
