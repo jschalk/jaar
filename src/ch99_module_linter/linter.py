@@ -338,21 +338,21 @@ def get_max_module_import_str() -> str:
     return max_module_import_str
 
 
-_A_PATTERN = re_compile(r"^src\.a(\d+)(?:[._]|$)")
-_A_STR_PATTERN = re_compile(r"a(\d{2})_str(?:[._]|$)")
+_CH_PATTERN = re_compile(r"^src\.ch(\d+)(?:[._]|$)")
+_CH_STR_PATTERN = re_compile(r"ch(\d{2})_str(?:[._]|$)")
 
 
 def _extract_series_number(module: str) -> int | None:
     if not module:
         return None
-    m = _A_PATTERN.match(module)
+    m = _CH_PATTERN.match(module)
     return int(m.group(1)) if m else None
 
 
 def _extract_aXX_str_number(module: str) -> int | None:
     if not module:
         return None
-    m = _A_STR_PATTERN.search(module)
+    m = _CH_STR_PATTERN.search(module)
     return int(m.group(1)) if m else None
 
 
