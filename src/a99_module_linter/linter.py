@@ -16,6 +16,7 @@ from re import compile as re_compile
 from src.a00_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.a98_docs_builder.doc_builder import (
     get_function_names_from_file,
+    get_module_desc_prefix,
     get_module_desc_str_number,
     get_module_descs,
 )
@@ -151,9 +152,9 @@ def check_module_imports_are_ordered(imports: list[list], file_path: str, desc_n
 def get_all_str_functions() -> list:
     all_str_functions = []
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = get_module_desc_str_number(module_desc)
+        module_prefix = get_module_desc_prefix(module_desc)
         ref_dir = create_path(module_dir, "_ref")
-        str_util_path = create_path(ref_dir, f"a{desc_number_str}_terms.py")
+        str_util_path = create_path(ref_dir, f"{module_prefix}_terms.py")
         str_functions = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:
             str_functions = get_function_names_from_file(str_util_path)

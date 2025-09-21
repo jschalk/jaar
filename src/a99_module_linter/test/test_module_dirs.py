@@ -8,6 +8,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_json,
 )
 from src.a98_docs_builder.doc_builder import (
+    get_module_desc_prefix,
     get_module_desc_str_number,
     get_module_str_functions,
 )
@@ -32,11 +33,12 @@ def test_Module_ref_util_FilesExist():
     for module_desc, module_dir in get_module_descs().items():
         print(f"Evaluating {module_desc=} {module_dir=}")
         module_desc_str_number = get_module_desc_str_number(module_desc)
+        module_prefix = get_module_desc_prefix(module_desc)
         module_number = int(module_desc_str_number)
         # assert module_number == previous_module_number + 1
         # print(f"{module_desc=} {module_number=}")
         ref_dir = create_path(module_dir, "_ref")
-        str_func_path = create_path(ref_dir, f"a{module_desc_str_number}_terms.py")
+        str_func_path = create_path(ref_dir, f"{module_prefix}_terms.py")
         assert os_path_exists(str_func_path)
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
@@ -49,7 +51,7 @@ def test_Module_ref_util_FilesExist():
             assert len(env_files) == 1
             env_filename = str(list(env_files.keys())[0])
             # print(f"{env_filename=}")
-            assert env_filename.endswith(f"a{module_desc_str_number}_env.py")
+            assert env_filename.endswith(f"{module_prefix}_env.py")
             assertion_fail_str = (
                 f"{module_number=} {get_function_names_from_file(env_filename)}"
             )

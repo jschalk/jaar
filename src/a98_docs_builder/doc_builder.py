@@ -43,7 +43,18 @@ def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
 
 def get_module_desc_str_number(module_desc: str) -> str:
     """Returns module number in 2 character string."""
-    return module_desc[1:3]
+    if module_desc.startswith("a"):
+        return module_desc[1:3]
+    elif module_desc.startswith("ch"):
+        return module_desc[2:4]
+
+
+def get_module_desc_prefix(module_desc: str) -> str:
+    """Returns module number in 2 character string."""
+    if module_desc.startswith("a"):
+        return module_desc[:3]
+    elif module_desc.startswith("ch"):
+        return module_desc[:4]
 
 
 def get_str_funcs_md() -> str:
@@ -65,9 +76,9 @@ def save_str_funcs_md(x_dir: str):
 def get_module_blurbs_md() -> str:
     lines = ["# Module Overview\n", "What does each one do?\n", ""]
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = get_module_desc_str_number(module_desc)
+        module_prefix = get_module_desc_prefix(module_desc)
         docs_dir = create_path(module_dir, "_ref")
-        module_ref_path = create_path(docs_dir, f"a{desc_number_str}_ref.json")
+        module_ref_path = create_path(docs_dir, f"{module_prefix}_ref.json")
         module_ref_dict = open_json(module_ref_path)
         module_description_str = "module_description"
         module_blurb_str = "module_blurb"
