@@ -22,7 +22,7 @@ What does each one do?
 - **a17_idea_logic**: idea bricks are tables of data that build moment systems and the beliefunits within them.
 - **a18_etl_toolbox**: All the tools used by WorldUnits to create MomentUnits.
 - **a19_kpi_toolbox**: a18_etl_toolbox manages the base required data. This toolbox manages the analytics outcomes.
-- **a20_world_logic**: WorldUnits create and manage MomentUnits
-- **a21_lobby_logic**: Tools for comparing how changes can create different WorldUnits.
-- **a22_belief_viewer**: Tools for Visualizing BeliefUnits
+- **ch20_world_logic**: WorldUnits create and manage MomentUnits
+- **ch21_lobby_logic**: Tools for comparing how changes can create different WorldUnits.
+- **ch22_belief_viewer**: Tools for Visualizing BeliefUnits
 - **ch98_docs_builder**: TODO replace me

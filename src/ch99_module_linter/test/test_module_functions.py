@@ -303,8 +303,8 @@ def test_Modules_path_FunctionStructureAndFormat():
 
     for module_desc, module_dir in get_module_descs().items():
         if len(filtered_modules_path_funcs.get(module_desc)) > 0:
-            module_desc_str_number = get_module_desc_str_number(module_desc)
-            path_func_filename = f"a{module_desc_str_number}_path.py"
+            module_desc_prefix = get_module_desc_prefix(module_desc)
+            path_func_filename = f"{module_desc_prefix}_path.py"
             path_func_library = create_path(module_dir, path_func_filename)
             path_funcs = filtered_modules_path_funcs.get(module_desc)
             assert os_path_exists(path_func_library)

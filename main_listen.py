@@ -5,7 +5,7 @@ from src.a00_data_toolbox.file_toolbox import (
     delete_dir,
     set_dir,
 )
-from src.a20_world_logic.world import WorldUnit, worldunit_shop
+from src.ch20_world_logic.world import WorldUnit, worldunit_shop
 from sys import argv as sys_argv
 
 if __name__ == "__main__":
