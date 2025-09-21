@@ -16,7 +16,7 @@ from src.a17_idea_logic._ref.a17_doc_builder import (
 def get_module_descs() -> dict[str, str]:
     src_dir = "src"
     module_descs = get_level1_dirs(src_dir)
-    module_descs.remove("a99_module_linter")
+    module_descs.remove("ch99_module_linter")
     return {
         module_desc: create_path(src_dir, module_desc) for module_desc in module_descs
     }

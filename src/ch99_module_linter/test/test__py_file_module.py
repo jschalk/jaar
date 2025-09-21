@@ -1,6 +1,6 @@
 from pathlib import Path as pathlib_Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
-from src.a99_module_linter.linter import find_incorrect_imports
+from src.ch99_module_linter.linter import find_incorrect_imports
 
 
 @pytest_fixture

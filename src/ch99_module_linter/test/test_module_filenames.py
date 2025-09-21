@@ -1,5 +1,5 @@
 from src.a00_data_toolbox.file_toolbox import get_dir_file_strs
-from src.a99_module_linter.linter import get_module_descs
+from src.ch99_module_linter.linter import get_module_descs
 
 
 def test_check_Modules_filenames_FollowFileNameConventions_NoNamingCollision():

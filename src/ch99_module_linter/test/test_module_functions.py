@@ -7,7 +7,7 @@ from src.a98_docs_builder.doc_builder import (
     get_module_descs,
     get_module_str_functions,
 )
-from src.a99_module_linter.linter import (
+from src.ch99_module_linter.linter import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
     check_if_test_HasDocString_pytests_exist,
