@@ -1,5 +1,5 @@
-from src.a05_plan_logic.plan import planunit_shop
-from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 
 def get_beliefunit_with_4_levels() -> BeliefUnit:

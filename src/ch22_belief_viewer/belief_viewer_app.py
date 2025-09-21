@@ -1,5 +1,5 @@
 from flask import Flask, jsonify, render_template_string
-from src.a07_timeline_logic.timeline_main import (
+from src.ch07_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
 )

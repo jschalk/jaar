@@ -1,6 +1,6 @@
 from pandas import DataFrame, concat as pandas_concat
 from plotly.graph_objects import Figure as plotly_Figure, Table as plotly_Table
-from src.a06_belief_logic.belief_report import (
+from src.ch06_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
     get_belief_voiceunits_dataframe,
 )

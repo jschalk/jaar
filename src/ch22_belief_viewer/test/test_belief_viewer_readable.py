@@ -1,5 +1,5 @@
-from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a07_timeline_logic.reason_str_func import (
+from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )

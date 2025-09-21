@@ -1,5 +1,5 @@
 from pathlib import Path
-from src.a00_data_toolbox.file_toolbox import open_json
+from src.ch00_data_toolbox.file_toolbox import open_json
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_formats_dir,

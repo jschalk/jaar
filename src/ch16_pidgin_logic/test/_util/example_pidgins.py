@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.a01_rope_logic.rope import create_rope, default_knot_if_None, to_rope
+from src.ch01_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_pidgin_logic._ref.ch16_terms import (
     RopePointer_str,
     reason_context_str,

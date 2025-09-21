@@ -2,8 +2,8 @@ from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
-from src.a00_data_toolbox.csv_toolbox import open_csv_with_types
-from src.a00_data_toolbox.db_toolbox import (
+from src.ch00_data_toolbox.csv_toolbox import open_csv_with_types
+from src.ch00_data_toolbox.db_toolbox import (
     _get_grouping_groupby_clause,
     create_insert_into_clause_str,
     create_select_query,
@@ -19,7 +19,7 @@ from src.a00_data_toolbox.db_toolbox import (
     get_table_columns,
     save_to_split_csvs,
 )
-from src.a00_data_toolbox.file_toolbox import (
+from src.ch00_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,
     open_file,
@@ -27,12 +27,12 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.a01_rope_logic.term import EventInt, FaceName
-from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.a08_belief_atom_logic.atom_config import get_belief_dimens
-from src.a08_belief_atom_logic.atom_main import beliefatom_shop
-from src.a09_pack_logic.delta import get_minimal_beliefdelta
-from src.a09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
+from src.ch01_rope_logic.term import EventInt, FaceName
+from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch08_belief_atom_logic.atom_config import get_belief_dimens
+from src.ch08_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_pack_logic.delta import get_minimal_beliefdelta
+from src.ch09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.ch11_bud_logic.bud import TranBook
 from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path,

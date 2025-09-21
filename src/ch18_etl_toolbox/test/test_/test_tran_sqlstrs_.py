@@ -1,11 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import (
+from src.ch00_data_toolbox.db_toolbox import (
     db_table_exists,
     get_create_table_sqlstr,
     get_table_columns,
     required_columns_exist,
 )
-from src.a08_belief_atom_logic.atom_config import get_delete_key_name
+from src.ch08_belief_atom_logic.atom_config import get_delete_key_name
 from src.ch17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_numbers,

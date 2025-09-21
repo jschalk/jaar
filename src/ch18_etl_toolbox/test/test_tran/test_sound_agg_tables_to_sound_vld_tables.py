@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import get_row_count, get_table_columns
+from src.ch00_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_terms import (
     belief_name_str,
     belief_voiceunit_str,

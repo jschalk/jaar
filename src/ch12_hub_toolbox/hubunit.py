@@ -1,8 +1,8 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
-from src.a00_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.a00_data_toolbox.file_toolbox import (
+from src.ch00_data_toolbox.dict_toolbox import get_empty_set_if_None
+from src.ch00_data_toolbox.file_toolbox import (
     create_path,
     delete_dir,
     get_dir_file_strs,
@@ -13,31 +13,31 @@ from src.a00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.a01_rope_logic.rope import validate_labelterm
-from src.a01_rope_logic.term import (
+from src.ch01_rope_logic.rope import validate_labelterm
+from src.ch01_rope_logic.term import (
     BeliefName,
     MomentLabel,
     RopePointer,
     default_knot_if_None,
 )
-from src.a02_finance_logic.finance_config import (
+from src.ch02_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_money_magnitude_if_None,
     default_RespectBit_if_None,
     filter_penny,
     validate_fund_pool,
 )
-from src.a06_belief_logic.belief_main import (
+from src.ch06_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,
 )
-from src.a08_belief_atom_logic.atom_main import (
+from src.ch08_belief_atom_logic.atom_main import (
     BeliefAtom,
     get_from_json as beliefatom_get_from_json,
     modify_belief_with_beliefatom,
 )
-from src.a09_pack_logic.pack import (
+from src.ch09_pack_logic.pack import (
     PackUnit,
     create_packunit_from_files,
     get_init_pack_id_if_None,

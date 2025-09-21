@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.a00_data_toolbox.dict_toolbox import (
+from src.ch00_data_toolbox.dict_toolbox import (
     create_csv,
     del_in_nested_dict,
     exists_in_nested_dict,
@@ -11,9 +11,9 @@ from src.a00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.a01_rope_logic.term import BeliefName, MomentLabel, VoiceName
-from src.a02_finance_logic.finance_config import FundNum, default_fund_pool
-from src.a07_timeline_logic.timeline_main import TimeLinePoint
+from src.ch01_rope_logic.term import BeliefName, MomentLabel, VoiceName
+from src.ch02_finance_logic.finance_config import FundNum, default_fund_pool
+from src.ch07_timeline_logic.timeline_main import TimeLinePoint
 
 
 class calc_magnitudeException(Exception):

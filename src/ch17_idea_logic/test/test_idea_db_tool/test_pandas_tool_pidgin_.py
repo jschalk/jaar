@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from pandas import DataFrame
 from pandas.testing import assert_frame_equal as pandas_assert_frame_equal
-from src.a01_rope_logic.rope import create_rope, to_rope
+from src.ch01_rope_logic.rope import create_rope, to_rope
 from src.ch16_pidgin_logic.map import namemap_shop
 from src.ch16_pidgin_logic.pidgin_main import pidginunit_shop
 from src.ch16_pidgin_logic.test._util.example_pidgins import (

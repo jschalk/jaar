@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
-from src.a00_data_toolbox.plotly_toolbox import (
+from src.ch00_data_toolbox.plotly_toolbox import (
     add_2_curve,
     add_direc_rect,
     add_keep__rect,
@@ -7,9 +7,9 @@ from src.a00_data_toolbox.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from src.a02_finance_logic.finance_config import default_money_magnitude
-from src.a06_belief_logic.belief_graphics import display_plantree
-from src.a06_belief_logic.belief_main import BeliefUnit
+from src.ch02_finance_logic.finance_config import default_money_magnitude
+from src.ch06_belief_logic.belief_graphics import display_plantree
+from src.ch06_belief_logic.belief_main import BeliefUnit
 
 
 def get_hubunit_base_fig() -> plotly_Figure:

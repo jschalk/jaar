@@ -1,7 +1,7 @@
 from json import loads as json_loads
 from pathlib import Path
-from src.a00_data_toolbox.file_toolbox import count_files, open_file, save_json
-from src.a08_belief_atom_logic.atom_config import get_atom_config_args
+from src.ch00_data_toolbox.file_toolbox import count_files, open_file, save_json
+from src.ch08_belief_atom_logic.atom_config import get_atom_config_args
 from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_brick_formats_md,
     get_idea_brick_md,

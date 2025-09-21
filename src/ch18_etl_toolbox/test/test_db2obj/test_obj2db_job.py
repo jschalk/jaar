@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import create_insert_query
-from src.a06_belief_logic.belief_config import get_belief_calc_dimen_args
+from src.ch00_data_toolbox.db_toolbox import create_insert_query
+from src.ch06_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.ch18_etl_toolbox._ref.ch18_terms import (
     belief_name_str,
     chore_str,

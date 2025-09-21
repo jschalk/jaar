@@ -1,5 +1,5 @@
-from src.a05_plan_logic.plan import planunit_shop
-from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.keep_tool import save_duty_belief
 from src.ch13_belief_listen_logic.listen_main import (
     create_listen_basis,

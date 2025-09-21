@@ -1,4 +1,4 @@
-from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.ch06_belief_logic.belief_main import beliefunit_shop
 from src.ch17_idea_logic._ref.ch17_terms import (
     belief_name_str,
     moment_label_str,

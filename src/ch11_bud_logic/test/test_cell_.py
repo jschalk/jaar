@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
-from src.a01_rope_logic.rope import create_rope
-from src.a04_reason_logic.reason import factunit_shop
-from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.ch01_rope_logic.rope import create_rope
+from src.ch04_reason_logic.reason import factunit_shop
+from src.ch06_belief_logic.belief_main import beliefunit_shop
 from src.ch11_bud_logic._ref.ch11_terms import (
     ancestors_str,
     beliefadjust_str,

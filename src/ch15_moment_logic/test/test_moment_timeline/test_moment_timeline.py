@@ -1,9 +1,9 @@
-from src.a06_belief_logic.belief_main import beliefunit_shop
-from src.a07_timeline_logic.test._util.calendar_examples import (
+from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     get_creg_config,
 )
-from src.a07_timeline_logic.timeline_main import (
+from src.ch07_timeline_logic.timeline_main import (
     belieftimelinepoint_shop,
     timelineunit_shop,
 )

@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
-from src.a00_data_toolbox.file_toolbox import open_file, save_file
-from src.a06_belief_logic.belief_main import (
+from src.ch00_data_toolbox.file_toolbox import open_file, save_file
+from src.ch06_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,
 )

@@ -1,10 +1,10 @@
 from dataclasses import dataclass
-from src.a00_data_toolbox.dict_toolbox import (
+from src.ch00_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.a01_rope_logic.term import BeliefName, EventInt, default_knot_if_None
+from src.ch01_rope_logic.term import BeliefName, EventInt, default_knot_if_None
 from src.ch16_pidgin_logic.map import (
     LabelMap,
     MapCore,

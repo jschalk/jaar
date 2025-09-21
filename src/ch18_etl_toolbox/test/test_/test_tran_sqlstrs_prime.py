@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.db_toolbox import (
+from src.ch00_data_toolbox.db_toolbox import (
     create_insert_into_clause_str as get_insert_sql,
     create_select_query as get_select_sql,
     create_table2table_agg_insert_query,
@@ -8,7 +8,10 @@ from src.a00_data_toolbox.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.a08_belief_atom_logic.atom_config import get_belief_dimens, get_delete_key_name
+from src.ch08_belief_atom_logic.atom_config import (
+    get_belief_dimens,
+    get_delete_key_name,
+)
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch16_pidgin_logic.pidgin_config import find_set_otx_inx_args, get_pidgin_dimens
 from src.ch17_idea_logic.idea_config import (

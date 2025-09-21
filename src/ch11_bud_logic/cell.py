@@ -1,26 +1,26 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.a00_data_toolbox.dict_toolbox import (
+from src.ch00_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_1_if_None,
     get_empty_dict_if_None,
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.a01_rope_logic.term import BeliefName, EventInt, RopePointer
-from src.a02_finance_logic.allot import allot_scale
-from src.a02_finance_logic.finance_config import FundNum, PennyNum
-from src.a04_reason_logic.reason import (
+from src.ch01_rope_logic.term import BeliefName, EventInt, RopePointer
+from src.ch02_finance_logic.allot import allot_scale
+from src.ch02_finance_logic.finance_config import FundNum, PennyNum
+from src.ch04_reason_logic.reason import (
     FactUnit,
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
-from src.a06_belief_logic.belief_main import (
+from src.ch06_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_from_dict as beliefunit_get_from_dict,
 )
-from src.a06_belief_logic.belief_tool import (
+from src.ch06_belief_logic.belief_tool import (
     clear_factunits_from_belief,
     get_belief_root_facts_dict as get_facts_dict,
     get_credit_ledger,

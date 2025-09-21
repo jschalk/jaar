@@ -1,8 +1,8 @@
-from src.a01_rope_logic.rope import create_rope
-from src.a04_reason_logic.reason import FactUnit, factunit_shop
-from src.a05_plan_logic.healer import healerunit_shop
-from src.a05_plan_logic.plan import planunit_shop
-from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch01_rope_logic.rope import create_rope
+from src.ch04_reason_logic.reason import FactUnit, factunit_shop
+from src.ch05_plan_logic.healer import healerunit_shop
+from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.ch15_moment_logic.moment_main import MomentUnit, momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import get_module_temp_dir

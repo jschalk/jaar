@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.file_toolbox import create_path, open_file
+from src.ch00_data_toolbox.file_toolbox import create_path, open_file
 from src.ch12_hub_toolbox.ch12_path import create_belief_event_dir_path
 from src.ch18_etl_toolbox._ref.ch18_terms import (
     belief_name_str,

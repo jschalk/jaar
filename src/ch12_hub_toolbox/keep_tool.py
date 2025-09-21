@@ -1,8 +1,13 @@
 from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
-from src.a00_data_toolbox.file_toolbox import create_path, open_file, save_json, set_dir
-from src.a01_rope_logic.term import BeliefName, LabelTerm, MomentLabel
-from src.a06_belief_logic.belief_main import (
+from src.ch00_data_toolbox.file_toolbox import (
+    create_path,
+    open_file,
+    save_json,
+    set_dir,
+)
+from src.ch01_rope_logic.term import BeliefName, LabelTerm, MomentLabel
+from src.ch06_belief_logic.belief_main import (
     BeliefUnit,
     get_from_json as beliefunit_get_from_json,
 )

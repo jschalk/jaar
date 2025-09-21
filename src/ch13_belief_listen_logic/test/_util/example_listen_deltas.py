@@ -1,6 +1,6 @@
-from src.a01_rope_logic.term import MomentLabel
-from src.a08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.a09_pack_logic.delta import BeliefDelta, beliefdelta_shop
+from src.ch01_rope_logic.term import MomentLabel
+from src.ch08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
+from src.ch09_pack_logic.delta import BeliefDelta, beliefdelta_shop
 from src.ch13_belief_listen_logic._ref.ch13_terms import (
     DELETE_str,
     INSERT_str,

@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.a02_finance_logic.finance_config import default_fund_pool
+from src.ch02_finance_logic.finance_config import default_fund_pool
 from src.ch11_bud_logic._ref.ch11_terms import (
     bud_time_str,
     bud_voice_nets_str,

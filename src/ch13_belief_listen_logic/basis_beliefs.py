@@ -1,5 +1,5 @@
-from src.a01_rope_logic.term import BeliefName
-from src.a06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch01_rope_logic.term import BeliefName
+from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 
 def create_empty_belief_from_belief(

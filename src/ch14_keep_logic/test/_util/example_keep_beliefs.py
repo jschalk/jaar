@@ -1,5 +1,5 @@
-from src.a01_rope_logic.rope import RopePointer, create_rope_from_labels
-from src.a06_belief_logic.belief_main import (
+from src.ch01_rope_logic.rope import RopePointer, create_rope_from_labels
+from src.ch06_belief_logic.belief_main import (
     BeliefUnit,
     MomentLabel,
     beliefunit_shop,

@@ -1,5 +1,5 @@
-from src.a01_rope_logic.term import BeliefName, VoiceName
-from src.a06_belief_logic.belief_main import beliefunit_shop
+from src.ch01_rope_logic.term import BeliefName, VoiceName
+from src.ch06_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch14_keep_logic.rivercycle import get_credorledger
 from src.ch14_keep_logic.test._util.ch14_env import (

@@ -1,4 +1,4 @@
-from src.a01_rope_logic.rope import create_rope, to_rope
+from src.ch01_rope_logic.rope import create_rope, to_rope
 from src.ch16_pidgin_logic.map import ropemap_shop
 
 

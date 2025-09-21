@@ -1,4 +1,4 @@
-from src.a01_rope_logic.rope import default_knot_if_None
+from src.ch01_rope_logic.rope import default_knot_if_None
 from src.ch16_pidgin_logic._ref.ch16_terms import (
     event_int_str,
     face_name_str,
