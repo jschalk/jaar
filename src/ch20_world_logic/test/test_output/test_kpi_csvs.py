@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.a00_data_toolbox.file_toolbox import create_path
-from src.a17_idea_logic.idea_db_tool import upsert_sheet
+from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch20_world_logic._ref.ch20_terms import (
     belief_name_str,
     event_int_str,

@@ -4,12 +4,12 @@ from sqlite3 import Cursor as sqlite3_Cursor, connect as sqlite3_connect
 from src.a00_data_toolbox.dict_toolbox import get_0_if_None, get_empty_set_if_None
 from src.a00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.a01_rope_logic.term import EventInt, FaceName, MomentLabel
-from src.a11_bud_logic.bud import TimeLinePoint
-from src.a15_moment_logic.moment_main import MomentUnit
-from src.a17_idea_logic.idea_db_tool import update_event_int_in_excel_files
-from src.a18_etl_toolbox.a18_path import create_moment_mstr_path, create_world_db_path
-from src.a18_etl_toolbox.stance_tool import create_stance0001_file
-from src.a18_etl_toolbox.transformers import (
+from src.ch11_bud_logic.bud import TimeLinePoint
+from src.ch15_moment_logic.moment_main import MomentUnit
+from src.ch17_idea_logic.idea_db_tool import update_event_int_in_excel_files
+from src.ch18_etl_toolbox.ch18_path import create_moment_mstr_path, create_world_db_path
+from src.ch18_etl_toolbox.stance_tool import create_stance0001_file
+from src.ch18_etl_toolbox.transformers import (
     add_moment_timeline_to_guts,
     create_last_run_metrics_json,
     etl_brick_agg_tables_to_brick_valid_tables,
@@ -42,7 +42,7 @@ from src.a18_etl_toolbox.transformers import (
     etl_sound_vld_tables_to_heard_raw_tables,
     get_max_brick_agg_event_int,
 )
-from src.a19_kpi_toolbox.kpi_mstr import (
+from src.ch19_kpi_toolbox.kpi_mstr import (
     create_calendar_markdown_files,
     create_kpi_csvs,
     populate_kpi_bundle,

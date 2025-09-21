@@ -11,15 +11,15 @@
 - a07_timeline_logic: c100, c400_clean, c400_leap, c400_number, creg, cumulative_day, day, days, five, hour, hours_config, monthday_distortion, months_config, readable, time, timeline_label, timeline, week, weekdays_config, weeks, year, yr1_jan1_offset, yr4_clean, yr4_leap
 - a08_belief_atom_logic: DELETE, atom_hx, atom, column_order, crud, nesting_order, normal_specs, normal_table_name
 - a09_pack_logic: event_int, face_name
-- a11_bud_logic: amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, offi_time, quota, tran_time
-- a12_hub_toolbox: gut, job, moment_mstr_dir
-- a13_belief_listen_logic: 
-- a14_keep_logic: 
-- a15_moment_logic: brokerunits, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_paybook, moment_timeline_hour, moment_timeline_month, moment_timeline_weekday, moment_timeoffi, momentunit, month_label, paybook, weekday_label, weekday_order
-- a16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
-- a17_idea_logic: allowed_crud, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_name
-- a18_etl_toolbox: belief_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, heard_agg, heard_raw, moment_event_time_agg, moment_ote1_agg, moment_voice_nets, sound_agg, sound_raw
-- a19_kpi_toolbox: moment_kpi001_voice_nets, moment_kpi002_belief_tasks
+- ch11_bud_logic: amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, offi_time, quota, tran_time
+- ch12_hub_toolbox: gut, job, moment_mstr_dir
+- ch13_belief_listen_logic: 
+- ch14_keep_logic: 
+- ch15_moment_logic: brokerunits, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_paybook, moment_timeline_hour, moment_timeline_month, moment_timeline_weekday, moment_timeoffi, momentunit, month_label, paybook, weekday_label, weekday_order
+- ch16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
+- ch17_idea_logic: allowed_crud, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_name
+- ch18_etl_toolbox: belief_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, heard_agg, heard_raw, moment_event_time_agg, moment_ote1_agg, moment_voice_nets, sound_agg, sound_raw
+- ch19_kpi_toolbox: moment_kpi001_voice_nets, moment_kpi002_belief_tasks
 - ch20_world_logic: 
 - ch21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys
 - ch22_belief_viewer: 

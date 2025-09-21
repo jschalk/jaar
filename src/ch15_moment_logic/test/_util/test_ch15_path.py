@@ -1,0 +1,53 @@
+from inspect import getdoc as inspect_getdoc
+from platform import system as platform_system
+from src.a00_data_toolbox.file_toolbox import create_path
+from src.ch12_hub_toolbox.test._util.ch12_env import get_module_temp_dir
+from src.ch15_moment_logic._ref.ch15_terms import (
+    belief_name_str,
+    bud_time_str,
+    moment_label_str,
+)
+from src.ch15_moment_logic.ch15_path import (
+    BUD_MANDATE_FILENAME,
+    create_bud_voice_mandate_ledger_path,
+)
+
+
+def test_create_bud_voice_mandate_ledger_path_ReturnsObj():
+    # ESTABLISH
+    x_moment_mstr_dir = get_module_temp_dir()
+    a23_str = "amy23"
+    sue_str = "Sue"
+    timepoint7 = 7
+
+    # WHEN
+    gen_bud_path = create_bud_voice_mandate_ledger_path(
+        x_moment_mstr_dir, a23_str, sue_str, timepoint7
+    )
+
+    # THEN
+    x_moments_dir = create_path(x_moment_mstr_dir, "moments")
+    amy23_dir = create_path(x_moments_dir, a23_str)
+    beliefs_dir = create_path(amy23_dir, "beliefs")
+    sue_dir = create_path(beliefs_dir, sue_str)
+    buds_dir = create_path(sue_dir, "buds")
+    timepoint_dir = create_path(buds_dir, timepoint7)
+    expected_bud_path_dir = create_path(timepoint_dir, BUD_MANDATE_FILENAME)
+    assert gen_bud_path == expected_bud_path_dir
+
+
+LINUX_OS = platform_system() == "Linux"
+
+
+def test_create_bud_voice_mandate_ledger_path_HasDocString():
+    # ESTABLISH
+    doc_str = create_bud_voice_mandate_ledger_path(
+        moment_mstr_dir="moment_mstr_dir",
+        moment_label=moment_label_str(),
+        belief_name=belief_name_str(),
+        bud_time=bud_time_str(),
+    )
+    doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
+    doc_str = f"Returns path: {doc_str}"
+    # WHEN / THEN
+    assert LINUX_OS or inspect_getdoc(create_bud_voice_mandate_ledger_path) == doc_str

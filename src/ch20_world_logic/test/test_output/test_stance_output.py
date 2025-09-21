@@ -3,8 +3,11 @@ from pandas import DataFrame, read_excel as pandas_read_excel
 from pandas.testing import assert_frame_equal
 from shutil import copy2 as shutil_copy2
 from src.a00_data_toolbox.file_toolbox import create_path, set_dir
-from src.a17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
-from src.a18_etl_toolbox.a18_path import create_stance0001_path, create_stances_dir_path
+from src.ch17_idea_logic.idea_db_tool import get_sheet_names, upsert_sheet
+from src.ch18_etl_toolbox.ch18_path import (
+    create_stance0001_path,
+    create_stances_dir_path,
+)
 from src.ch20_world_logic._ref.ch20_terms import (
     belief_name_str,
     event_int_str,
