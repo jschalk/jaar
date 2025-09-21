@@ -1,11 +1,11 @@
-from src.a00_data_toolbox.csv_toolbox import export_sqlite_tables_to_csv
-from src.a00_data_toolbox.file_toolbox import (
+from src.ch00_data_toolbox.csv_toolbox import export_sqlite_tables_to_csv
+from src.ch00_data_toolbox.file_toolbox import (
     count_dirs_files,
     create_path,
     delete_dir,
     set_dir,
 )
-from src.a20_world_logic.world import WorldUnit, worldunit_shop
+from src.ch20_world_logic.world import WorldUnit, worldunit_shop
 from sys import argv as sys_argv
 
 if __name__ == "__main__":

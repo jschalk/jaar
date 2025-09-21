@@ -1,0 +1,159 @@
+from os.path import exists as os_path_exists
+from src.ch00_data_toolbox.file_toolbox import (
+    count_dirs_files,
+    open_json,
+    save_file,
+    save_json,
+)
+from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch12_hub_toolbox.ch12_path import (
+    create_beliefevent_path,
+    create_moment_beliefs_dir_path,
+    create_moment_json_path,
+)
+from src.ch15_moment_logic.ch15_path import (
+    create_bud_voice_mandate_ledger_path as bud_mandate_path,
+)
+from src.ch15_moment_logic.moment_main import (
+    get_from_dict as momentunit_get_from_dict,
+    momentunit_shop,
+)
+from src.ch18_etl_toolbox.ch18_path import create_moment_ote1_json_path
+from src.ch20_world_logic.test._util.ch20_env import (
+    env_dir_setup_cleanup,
+    get_module_temp_dir as worlds_dir,
+)
+from src.ch20_world_logic.test._util.example_worlds import (
+    example_casa_clean_factunit,
+    get_bob_mop_with_reason_beliefunit_example,
+)
+from src.ch20_world_logic.world import worldunit_shop
+
+
+def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro0_BudEmpty(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fay_world = worldunit_shop("Fay", worlds_dir())
+    a23_str = "amy23"
+    moment_mstr_dir = fay_world._moment_mstr_dir
+    amy23_moment = momentunit_shop(a23_str, moment_mstr_dir)
+    a23_json_path = create_moment_json_path(fay_world._moment_mstr_dir, a23_str)
+    save_file(a23_json_path, None, amy23_moment.get_json())
+    print(f"{a23_json_path=}")
+    a23_beliefs_path = create_moment_beliefs_dir_path(
+        fay_world._moment_mstr_dir, a23_str
+    )
+    assert count_dirs_files(a23_beliefs_path) == 0
+
+    # WHEN
+    fay_world.calc_moment_bud_voice_mandate_net_ledgers()
+
+    # THEN
+    assert count_dirs_files(a23_beliefs_path) == 0
+
+
+def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro1_SimpleBud(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fay_world = worldunit_shop("Fay", worlds_dir())
+    mstr_dir = fay_world._moment_mstr_dir
+    a23_str = "amy23"
+    amy23_moment = momentunit_shop(a23_str, mstr_dir)
+    bob_str = "Bob"
+    tp37 = 37
+    bud1_quota = 450
+    x_celldepth = 2
+    amy23_moment.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
+    a23_json_path = create_moment_json_path(mstr_dir, a23_str)
+    save_file(a23_json_path, None, amy23_moment.get_json())
+    # Create empty ote1 file
+    a23_ote1_json_path = create_moment_ote1_json_path(mstr_dir, a23_str)
+    save_json(a23_ote1_json_path, None, {})
+    bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
+    assert os_path_exists(bob37_bud_mandate_path) is False
+
+    # WHEN
+    fay_world.calc_moment_bud_voice_mandate_net_ledgers()
+
+    # THEN
+    assert os_path_exists(bob37_bud_mandate_path)
+    expected_bud_voice_nets = {bob_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
+    gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
+    gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
+    assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets
+
+
+def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
+    env_dir_setup_cleanup,
+):
+    # ESTABLISH
+    fay_world = worldunit_shop("Fay", worlds_dir())
+    mstr_dir = fay_world._moment_mstr_dir
+    a23_str = "amy23"
+
+    # Create MomentUnit with bob bud at time 37
+    amy23_moment = momentunit_shop(a23_str, mstr_dir)
+    a23_str = "amy23"
+    sue_str = "Sue"
+    bob_str = "Bob"
+    yao_str = "Yao"
+    zia_str = "Zia"
+    tp37 = 37
+    bud1_quota = 450
+    x_celldepth = 2
+    amy23_moment.add_budunit(bob_str, tp37, bud1_quota, celldepth=x_celldepth)
+    a23_json_path = create_moment_json_path(mstr_dir, a23_str)
+    save_file(a23_json_path, None, amy23_moment.get_json())
+
+    # Create event time mapping belief_time_agg for time 37
+    event33 = 33
+    event44 = 44
+    event55 = 55
+    bob55_beliefevent = get_bob_mop_with_reason_beliefunit_example()
+    bob55_beliefevent.add_voiceunit(sue_str, 1)
+    sue44_beliefevent = beliefunit_shop(sue_str, a23_str)
+    sue44_beliefevent.set_belief_name(sue_str)
+    sue44_beliefevent.add_voiceunit(yao_str, 1)
+    yao44_beliefevent = get_bob_mop_with_reason_beliefunit_example()
+    yao44_beliefevent.set_belief_name(yao_str)
+    yao44_beliefevent.add_voiceunit(zia_str, 1)
+    clean_fact = example_casa_clean_factunit()
+    yao44_beliefevent.add_fact(clean_fact.fact_context, clean_fact.fact_state)
+    zia33_beliefevent = get_bob_mop_with_reason_beliefunit_example()
+    zia33_beliefevent.set_belief_name(zia_str)
+    bob55_path = create_beliefevent_path(mstr_dir, a23_str, bob_str, event55)
+    sue44_path = create_beliefevent_path(mstr_dir, a23_str, sue_str, event44)
+    yao44_path = create_beliefevent_path(mstr_dir, a23_str, yao_str, event44)
+    zia33_path = create_beliefevent_path(mstr_dir, a23_str, zia_str, event33)
+    save_json(bob55_path, None, bob55_beliefevent.to_dict())
+    save_json(sue44_path, None, sue44_beliefevent.to_dict())
+    save_json(yao44_path, None, yao44_beliefevent.to_dict())
+    save_json(zia33_path, None, zia33_beliefevent.to_dict())
+
+    # Create empty ote1 file
+    a23_ote1_dict = {
+        bob_str: {str(tp37): event55},
+        sue_str: {str(tp37): event44},
+        yao_str: {str(tp37): event44},
+        zia_str: {str(tp37): event33},
+    }
+    a23_ote1_json_path = create_moment_ote1_json_path(mstr_dir, a23_str)
+    save_json(a23_ote1_json_path, None, a23_ote1_dict)
+
+    # create result bud_voice_mandate_ledger file
+    bob37_bud_mandate_path = bud_mandate_path(mstr_dir, a23_str, bob_str, tp37)
+    assert os_path_exists(bob37_bud_mandate_path) is False
+
+    # WHEN
+    fay_world.calc_moment_bud_voice_mandate_net_ledgers()
+
+    # THEN
+    assert os_path_exists(bob37_bud_mandate_path)
+    expected_bud_voice_nets = {zia_str: bud1_quota}
+    assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
+    gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
+    gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
+    assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets

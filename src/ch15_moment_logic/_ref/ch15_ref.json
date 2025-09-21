@@ -1,0 +1,4 @@
+{
+    "module_blurb": "A MomentUnit is a Moment system with the basic requirements: common system of time, voice tranactions ledger, etc. Importantly a Moment system must know the state of a belief's beliefunit at any time in the past.",
+    "module_description": "ch15_moment_logic"
+}

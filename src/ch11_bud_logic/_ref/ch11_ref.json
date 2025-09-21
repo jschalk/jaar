@@ -1,0 +1,4 @@
+{
+    "module_blurb": "Defines a budget and the tools necessary to create one. Budges are created when a moment system decides to empower a beliefunit with funds that must be distributed",
+    "module_description": "ch11_bud_logic"
+}
