@@ -36,11 +36,11 @@ def test_threshold_22(sample_file):
     assert all("ch21" not in r and "ch22" not in r for r in result)
 
 
-# def test_high_threshold_only_top_matches(sample_file):
-#     result = find_incorrect_imports(sample_file, 29)
-#     assert "import src.ch30_internal" in result
-#     assert "from src.ch31_more import thing" in result
-#     assert all("a23" not in r and "a25" not in r for r in result)
+def test_high_threshold_only_top_matches(sample_file):
+    result = find_incorrect_imports(sample_file, 29)
+    assert "import src.ch30_internal" in result
+    assert "from src.ch31_more import thing" in result
+    assert all("ch23" not in r and "ch25" not in r for r in result)
 
 
 def test_no_matches(sample_file):

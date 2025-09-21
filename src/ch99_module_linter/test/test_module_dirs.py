@@ -165,30 +165,30 @@ def test_Modules_NonTestFilesDoNotHaveStringFunctionsImports():
                     assert not str(file_import[0]).endswith("_str")
 
 
-# def test_Modules_ModuleReferenceFolder_ref_ExistsForEveryModule():
-#     """
-#     Test that all string-related functions in each module directory are asserted and tested.
-#     This test performs the following checks for each module:
-#     Raises:
-#         AssertionError: If any of the above conditions are not met.
-#     """
+def test_Modules_ModuleReferenceFolder_ref_ExistsForEveryModule():
+    """
+    Test that all string-related functions in each module directory are asserted and tested.
+    This test performs the following checks for each module:
+    Raises:
+        AssertionError: If any of the above conditions are not met.
+    """
 
-#     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-#     # ESTABLISH / WHEN / THEN
-#     for module_desc, module_dir in get_module_descs().items():
-#         module_desc_prefix = get_module_desc_prefix(module_desc)
-#         docs_dir = create_path(module_dir, "_ref")
-#         assert os_path_exists(docs_dir)
-#         module_ref_path = create_path(docs_dir, f"{module_desc_prefix}_ref.json")
-#         assert os_path_exists(module_ref_path)
-#         module_ref_dict = open_json(module_ref_path)
-#         # print(f"{module_ref_path} \t Items: {len(module_ref_dict)}")
-#         ref_keys = set(module_ref_dict.keys())
-#         module_description_str = "module_description"
-#         module_blurb_str = "module_blurb"
-#         assert ref_keys == {module_blurb_str, module_description_str}
-#         assert module_ref_dict.get(module_description_str) == module_desc
-#         assert module_ref_dict.get(module_blurb_str)
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH / WHEN / THEN
+    for module_desc, module_dir in get_module_descs().items():
+        module_desc_prefix = get_module_desc_prefix(module_desc)
+        docs_dir = create_path(module_dir, "_ref")
+        assert os_path_exists(docs_dir)
+        module_ref_path = create_path(docs_dir, f"{module_desc_prefix}_ref.json")
+        assert os_path_exists(module_ref_path)
+        module_ref_dict = open_json(module_ref_path)
+        # print(f"{module_ref_path} \t Items: {len(module_ref_dict)}")
+        ref_keys = set(module_ref_dict.keys())
+        module_description_str = "module_description"
+        module_blurb_str = "module_blurb"
+        assert ref_keys == {module_blurb_str, module_description_str}
+        assert module_ref_dict.get(module_description_str) == module_desc
+        assert module_ref_dict.get(module_blurb_str)
 
 
 def test_Modules_DoNotHaveEmptyDirectories():
