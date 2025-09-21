@@ -88,21 +88,21 @@ def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
             assert not incorrect_imports, assertion_fail_str
 
 
-# def test_Modules_StrFunctionsAreAllImported():
-#     # ESTABLISH / WHEN
-#     all_str_functions = get_all_str_functions()
+def test_Modules_StrFunctionsAreAllImported():
+    # ESTABLISH / WHEN
+    all_str_functions = get_all_str_functions()
 
-#     # THEN confirm all str functions are imported to max module
-#     max_module_import_str = get_max_module_import_str()
-#     print(f"{max_module_import_str=}")
-#     max_mod_obj = importlib_import_module(max_module_import_str)
-#     mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
-#     mod_str_funcs = {name for name, obj in mod_all_funcs if not name.startswith("__")}
+    # THEN confirm all str functions are imported to max module
+    max_module_import_str = get_max_module_import_str()
+    print(f"{max_module_import_str=}")
+    max_mod_obj = importlib_import_module(max_module_import_str)
+    mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
+    mod_str_funcs = {name for name, obj in mod_all_funcs if not name.startswith("__")}
 
-#     print(f"{len(mod_all_funcs)=}")
-#     assert len(all_str_functions) == len(mod_str_funcs)
-#     all_str_func_set = set(all_str_functions)
-#     assert all_str_func_set == mod_str_funcs
+    print(f"{len(mod_all_funcs)=}")
+    assert len(all_str_functions) == len(mod_str_funcs)
+    all_str_func_set = set(all_str_functions)
+    assert all_str_func_set == mod_str_funcs
 
 
 def test_Modules_MostFunctionsAreUniquelyNamed():
