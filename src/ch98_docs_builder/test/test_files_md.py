@@ -1,14 +1,14 @@
 from os.path import exists as os_path_exists
 from src.a00_data_toolbox.file_toolbox import count_dirs_files, create_path, open_file
 from src.a01_rope_logic._ref.a01_doc_builder import get_ropepointer_explanation_md
-from src.a98_docs_builder.doc_builder import (
+from src.ch98_docs_builder.doc_builder import (
     get_module_blurbs_md,
     save_brick_formats_md,
     save_idea_brick_mds,
     save_module_blurbs_md,
     save_ropepointer_explanation_md,
 )
-from src.a98_docs_builder.test._util.a98_env import (
+from src.ch98_docs_builder.test._util.ch98_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

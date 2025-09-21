@@ -1,4 +1,4 @@
-from src.a98_docs_builder._ref.a98_terms import rationale_str
+from src.ch98_docs_builder._ref.ch98_terms import rationale_str
 
 
 def test_str_functions_ReturnsObj():

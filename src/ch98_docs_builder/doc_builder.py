@@ -35,9 +35,9 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
     return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
 
 
-def get_module_str_functions(module_dir, desc_number_str) -> list[str]:
+def get_module_str_functions(module_dir: str, module_desc_prefix: str) -> list[str]:
     ref_dir = create_path(module_dir, "_ref")
-    str_util_path = create_path(ref_dir, f"a{desc_number_str}_terms.py")
+    str_util_path = create_path(ref_dir, f"{module_desc_prefix}_terms.py")
     return get_function_names_from_file(str_util_path)
 
 
@@ -60,8 +60,8 @@ def get_module_desc_prefix(module_desc: str) -> str:
 def get_str_funcs_md() -> str:
     func_lines = ["## Str Functions by Module"]
     for module_desc, module_dir in get_module_descs().items():
-        desc_number_str = get_module_desc_str_number(module_desc)
-        module_str_funcs = get_module_str_functions(module_dir, desc_number_str)
+        module_prefix = get_module_desc_prefix(module_desc)
+        module_str_funcs = get_module_str_functions(module_dir, module_prefix)
         x_list = [str_func[:-4] for str_func in module_str_funcs]
         _line = f"- {module_desc}: " + ", ".join(x_list)
         func_lines.append(_line)

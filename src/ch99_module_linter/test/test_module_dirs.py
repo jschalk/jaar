@@ -7,7 +7,7 @@ from src.a00_data_toolbox.file_toolbox import (
     open_file,
     open_json,
 )
-from src.a98_docs_builder.doc_builder import (
+from src.ch98_docs_builder.doc_builder import (
     get_module_desc_prefix,
     get_module_desc_str_number,
     get_module_str_functions,
@@ -43,7 +43,7 @@ def test_Module_ref_util_FilesExist():
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         assert os_path_exists(util_dir)
-        # str_func_test_path = create_path(utils_dir, f"test_a{module_desc_str_number}_terms.py")
+        # str_func_test_path = create_path(utils_dir, f"test_{module_prefix}_terms.py")
         # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
@@ -90,19 +90,20 @@ def test_Modules_util_AssestsExistForEverytermFunction():
     # ESTABLISH / WHEN / THEN
     running_str_functions = set()
     for module_desc, module_dir in get_module_descs().items():
+        module_desc_prefix = get_module_desc_prefix(module_desc)
         module_desc_str_number = get_module_desc_str_number(module_desc)
         ref_dir = create_path(module_dir, "ref")
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
-        module_str_funcs = get_module_str_functions(module_dir, module_desc_str_number)
+        module_str_funcs = get_module_str_functions(module_dir, module_desc_prefix)
         check_if_module_str_funcs_is_sorted(module_str_funcs)
         check_str_funcs_are_not_duplicated(module_str_funcs, running_str_functions)
         running_str_functions.update(set(module_str_funcs))
 
         if len(module_str_funcs) > 0:
             test_file_path = create_path(
-                util_dir, f"test_a{module_desc_str_number}_terms.py"
+                util_dir, f"test_{module_desc_prefix}_terms.py"
             )
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
@@ -175,10 +176,10 @@ def test_Modules_ModuleReferenceFolder_ref_ExistsForEveryModule():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH / WHEN / THEN
     for module_desc, module_dir in get_module_descs().items():
-        module_desc_str_number = get_module_desc_str_number(module_desc)
+        module_desc_prefix = get_module_desc_prefix(module_desc)
         docs_dir = create_path(module_dir, "_ref")
         assert os_path_exists(docs_dir)
-        module_ref_path = create_path(docs_dir, f"a{module_desc_str_number}_ref.json")
+        module_ref_path = create_path(docs_dir, f"{module_desc_prefix}_ref.json")
         assert os_path_exists(module_ref_path)
         module_ref_dict = open_json(module_ref_path)
         # print(f"{module_ref_path} \t Items: {len(module_ref_dict)}")

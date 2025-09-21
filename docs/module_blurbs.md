@@ -25,4 +25,4 @@ What does each one do?
 - **a20_world_logic**: WorldUnits create and manage MomentUnits
 - **a21_lobby_logic**: Tools for comparing how changes can create different WorldUnits.
 - **a22_belief_viewer**: Tools for Visualizing BeliefUnits
-- **a98_docs_builder**: TODO replace me
+- **ch98_docs_builder**: TODO replace me

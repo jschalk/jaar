@@ -1,4 +1,4 @@
-from src.a98_docs_builder.doc_builder import (
+from src.ch98_docs_builder.doc_builder import (
     save_brick_formats_md,
     save_idea_brick_mds,
     save_module_blurbs_md,

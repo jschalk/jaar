@@ -1,4 +1,4 @@
-from src.a98_docs_builder.doc_builder import (
+from src.ch98_docs_builder.doc_builder import (
     get_module_desc_prefix,
     get_module_desc_str_number,
 )
