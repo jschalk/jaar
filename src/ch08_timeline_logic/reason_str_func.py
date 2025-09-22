@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     LabelTerm,
     RopePointer,
     create_rope,

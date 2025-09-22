@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch01_rope_logic.rope import create_rope, to_rope
+from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch06_plan_logic.plan import (
     get_default_moment_label as root_label,

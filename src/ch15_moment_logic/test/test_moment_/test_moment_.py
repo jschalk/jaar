@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.ch00_data_toolbox.file_toolbox import create_path, get_json_filename, set_dir
-from src.ch01_rope_logic.rope import default_knot_if_None
+from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,

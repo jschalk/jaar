@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch01_rope_logic._ref.ch01_terms import knot_str
-from src.ch01_rope_logic.term import (
+from src.ch02_rope_logic._ref.ch02_terms import knot_str
+from src.ch02_rope_logic.term import (
     BeliefName,
     CentralLabel,
     EventInt,
@@ -126,7 +126,7 @@ def test_GroupTitle_Exists():
 
     # THEN
     assert bikers_GroupTitle is not None
-    assert str(type(bikers_GroupTitle)).find("src.ch01_rope_logic.term.GroupTitle") > 0
+    assert str(type(bikers_GroupTitle)).find("src.ch02_rope_logic.term.GroupTitle") > 0
 
 
 def test_LabelTerm_Exists():

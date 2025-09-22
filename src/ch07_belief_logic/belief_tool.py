@@ -1,5 +1,5 @@
 from src.ch00_data_toolbox.dict_toolbox import create_csv
-from src.ch01_rope_logic.term import MomentLabel, RopePointer, VoiceName
+from src.ch02_rope_logic.term import MomentLabel, RopePointer, VoiceName
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.ch04_group_logic.group import AwardUnit, MemberShip

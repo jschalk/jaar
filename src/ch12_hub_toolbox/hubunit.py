@@ -13,8 +13,8 @@ from src.ch00_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.ch01_rope_logic.rope import validate_labelterm
-from src.ch01_rope_logic.term import (
+from src.ch02_rope_logic.rope import validate_labelterm
+from src.ch02_rope_logic.term import (
     BeliefName,
     MomentLabel,
     RopePointer,

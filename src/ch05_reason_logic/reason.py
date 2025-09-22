@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.ch00_data_toolbox.dict_toolbox import get_empty_dict_if_None
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     RopePointer,
     default_knot_if_None,
     find_replace_rope_key_dict,

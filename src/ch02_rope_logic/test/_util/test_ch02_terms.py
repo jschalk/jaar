@@ -1,4 +1,4 @@
-from src.ch01_rope_logic._ref.ch01_terms import (
+from src.ch02_rope_logic._ref.ch02_terms import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,

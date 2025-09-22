@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.rope import create_rope, to_rope
+from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,
     INSERT_str,

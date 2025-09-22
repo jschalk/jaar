@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.rope import create_rope
+from src.ch02_rope_logic.rope import create_rope
 from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 
 

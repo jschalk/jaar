@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.ch00_data_toolbox.dict_toolbox import get_empty_set_if_None
-from src.ch01_rope_logic.term import GroupTitle
+from src.ch02_rope_logic.term import GroupTitle
 
 
 @dataclass

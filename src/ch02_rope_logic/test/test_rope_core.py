@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     RopePointer,
     all_ropes_between,
     create_rope,
@@ -25,7 +25,7 @@ from src.ch01_rope_logic.rope import (
     to_rope,
     validate_labelterm,
 )
-from src.ch01_rope_logic.term import default_knot_if_None
+from src.ch02_rope_logic.term import default_knot_if_None
 
 
 def test_to_rope_ReturnsObj_WithDefault_knot():

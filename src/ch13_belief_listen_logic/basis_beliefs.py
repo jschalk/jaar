@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.term import BeliefName
+from src.ch02_rope_logic.term import BeliefName
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 

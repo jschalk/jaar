@@ -1,4 +1,4 @@
-from src.ch01_rope_logic._ref.ch01_terms import *
+from src.ch02_rope_logic._ref.ch02_terms import *
 
 
 def fund_iota_str() -> str:

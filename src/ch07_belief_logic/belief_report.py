@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.ch01_rope_logic.rope import RopePointer
+from src.ch02_rope_logic.rope import RopePointer
 from src.ch07_belief_logic.belief_main import BeliefUnit
 
 

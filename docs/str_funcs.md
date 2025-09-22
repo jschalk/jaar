@@ -2,7 +2,7 @@
 
 ## Str Functions by Module
 - ch00_data_toolbox: INSERT, UPDATE, sqlite_datatype
-- ch01_rope_logic: LabelTerm, NameTerm, RopePointer, TitleTerm, knot, parent_rope
+- ch02_rope_logic: LabelTerm, NameTerm, RopePointer, TitleTerm, knot, parent_rope
 - ch03_finance_logic: fund_iota, fund_pool, magnitude, penny
 - ch04_group_logic: awardee_title, awardunits, belief_name, credor_pool, debtor_pool, fund_agenda_give, fund_agenda_ratio_give, fund_agenda_ratio_take, fund_agenda_take, fund_give, fund_take, give_force, group_cred_points, group_debt_points, group_title, groupunits, inallocable_voice_debt_points, irrational_voice_debt_points, laborheir, laborunit, memberships, parent_solo, party_title, rational, respect_bit, solo, take_force, voice_cred_points, voice_debt_points, voice_name
 - ch05_reason_logic: active, cases, chore, fact_context, fact_lower, fact_state, fact_upper, factheirs, factunits, moment_label, reason_active_requisite, reason_context, reason_divisor, reason_lower, reason_state, reason_upper, reasonunits, status

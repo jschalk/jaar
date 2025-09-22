@@ -6,7 +6,7 @@ from src.ch00_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.ch01_rope_logic._ref.ch01_doc_builder import get_ropepointer_explanation_md
+from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
 from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_brick_formats_md,
     get_idea_brick_mds,

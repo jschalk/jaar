@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.rope import to_rope
+from src.ch02_rope_logic.rope import to_rope
 from src.ch04_group_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic._ref.ch07_terms import (

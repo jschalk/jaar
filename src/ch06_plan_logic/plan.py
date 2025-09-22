@@ -7,7 +7,7 @@ from src.ch00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     all_ropes_between,
     create_rope,
     find_replace_rope_key_dict,
@@ -15,7 +15,7 @@ from src.ch01_rope_logic.rope import (
     rebuild_rope,
     replace_knot,
 )
-from src.ch01_rope_logic.term import (
+from src.ch02_rope_logic.term import (
     GroupTitle,
     LabelTerm,
     MomentLabel,

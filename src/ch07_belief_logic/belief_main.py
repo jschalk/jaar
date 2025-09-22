@@ -8,7 +8,7 @@ from src.ch00_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_json_from_dict,
 )
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     all_ropes_between,
     create_rope,
     default_knot_if_None,
@@ -24,7 +24,7 @@ from src.ch01_rope_logic.rope import (
     rope_is_valid_dir_path,
     to_rope,
 )
-from src.ch01_rope_logic.term import (
+from src.ch02_rope_logic.term import (
     BeliefName,
     GroupTitle,
     HealerName,

@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.rope import RopePointer, create_rope_from_labels
+from src.ch02_rope_logic.rope import RopePointer, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     MomentLabel,

@@ -1,5 +1,5 @@
 from src.ch00_data_toolbox.file_toolbox import open_file
-from src.ch01_rope_logic._ref.ch01_doc_builder import get_ropepointer_explanation_md
+from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
 
 
 def test_get_ropepointer_explanation_md_ReturnsObj():

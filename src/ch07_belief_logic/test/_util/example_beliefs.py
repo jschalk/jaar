@@ -1,5 +1,5 @@
 from src.ch00_data_toolbox.file_toolbox import open_file
-from src.ch01_rope_logic.rope import RopePointer
+from src.ch02_rope_logic.rope import RopePointer
 from src.ch04_group_logic.labor import laborunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch06_plan_logic.plan import planunit_shop

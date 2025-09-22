@@ -1,4 +1,4 @@
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     create_rope,
     get_default_central_label as root_label,
 )
