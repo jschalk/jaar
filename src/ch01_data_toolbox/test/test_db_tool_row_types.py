@@ -1,4 +1,4 @@
-from src.ch00_data_toolbox.db_toolbox import get_nonconvertible_columns
+from src.ch01_data_toolbox.db_toolbox import get_nonconvertible_columns
 
 
 def test_get_nonconvertible_columns_Scenario0_AllValid():

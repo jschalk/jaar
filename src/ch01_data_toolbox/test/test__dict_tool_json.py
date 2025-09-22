@@ -1,4 +1,4 @@
-from src.ch00_data_toolbox.dict_toolbox import make_dict_safe_for_json
+from src.ch01_data_toolbox.dict_toolbox import make_dict_safe_for_json
 
 
 def test_make_dict_safe_for_json_ScenarioSimpleDict():

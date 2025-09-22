@@ -1,4 +1,4 @@
-from src.ch00_data_toolbox.dict_toolbox import get_from_nested_dict
+from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
 from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,

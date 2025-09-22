@@ -1,4 +1,4 @@
-from src.ch00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
+from src.ch01_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
 from src.ch02_rope_logic.term import FaceName, MomentLabel
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch10_pack_logic.pack import PackUnit

@@ -3,7 +3,7 @@
 What does each one do?
 
 
-- **ch00_data_toolbox**: Create some standard tools files files, python dictionaries, databases, and other basic programming objects.
+- **ch01_data_toolbox**: Create some standard tools files files, python dictionaries, databases, and other basic programming objects.
 - **ch02_rope_logic**: Defines what a Rope is and required format for groups names and individual names.
 - **ch03_finance_logic**: Defines tools for financial allotment to ledgers.
 - **ch04_group_logic**: Defines a voice, and its group memberships. Groups will be produced from memberships.

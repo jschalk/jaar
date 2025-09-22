@@ -4,7 +4,7 @@ from sqlite3 import (
     connect as sqlite3_connect,
     sqlite_version as sqlite3_sqlite_version,
 )
-from src.ch00_data_toolbox.db_toolbox import (
+from src.ch01_data_toolbox.db_toolbox import (
     RowData,
     _get_grouping_groupby_clause,
     _get_grouping_select_clause,
@@ -29,8 +29,8 @@ from src.ch00_data_toolbox.db_toolbox import (
     rowdata_shop,
     sqlite_obj_str,
 )
-from src.ch00_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
-from src.ch00_data_toolbox.test._util.ch00_env import (
+from src.ch01_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
+from src.ch01_data_toolbox.test._util.ch01_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

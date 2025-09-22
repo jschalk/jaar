@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
-from src.ch00_data_toolbox.dict_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import (
     add_headers_to_csv,
     add_nested_dict_if_missing,
     change_nested_key,

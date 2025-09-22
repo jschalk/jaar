@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from os.path import exists as os_path_exists
-from src.ch00_data_toolbox.dict_toolbox import get_dict_from_json, get_json_from_dict
-from src.ch00_data_toolbox.file_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import get_dict_from_json, get_json_from_dict
+from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_json_filename,
     open_file,

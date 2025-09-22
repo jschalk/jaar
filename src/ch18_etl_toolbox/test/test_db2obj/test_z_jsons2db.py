@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch00_data_toolbox.db_toolbox import get_row_count
+from src.ch01_data_toolbox.db_toolbox import get_row_count
 from src.ch02_rope_logic.rope import create_rope
 from src.ch04_group_logic.group import (
     awardheir_shop,

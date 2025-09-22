@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
+from src.ch01_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.ch02_rope_logic.rope import default_knot_if_None, to_rope
 from src.ch04_group_logic.group import awardunit_shop
 from src.ch04_group_logic.labor import laborunit_shop, partyunit_shop

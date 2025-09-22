@@ -1,6 +1,6 @@
 from os import getcwd as os_getcwd
-from src.ch00_data_toolbox.dict_toolbox import get_from_nested_dict
-from src.ch00_data_toolbox.file_toolbox import create_path, open_json
+from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
+from src.ch01_data_toolbox.file_toolbox import create_path, open_json
 
 
 def moment_config_path() -> str:

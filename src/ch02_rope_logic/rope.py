@@ -1,5 +1,5 @@
 from pathlib import Path as pathlib_Path
-from src.ch00_data_toolbox.file_toolbox import is_path_valid
+from src.ch01_data_toolbox.file_toolbox import is_path_valid
 from src.ch02_rope_logic.term import (
     CentralLabel,
     LabelTerm,

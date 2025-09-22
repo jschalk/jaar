@@ -2,8 +2,8 @@ from copy import copy as copy_copy, deepcopy as copy_deepcopy
 from os.path import exists as os_path_exists
 from pandas import read_excel as pandas_read_excel
 from sqlite3 import Connection as sqlite3_Connection, Cursor as sqlite3_Cursor
-from src.ch00_data_toolbox.csv_toolbox import open_csv_with_types
-from src.ch00_data_toolbox.db_toolbox import (
+from src.ch01_data_toolbox.csv_toolbox import open_csv_with_types
+from src.ch01_data_toolbox.db_toolbox import (
     _get_grouping_groupby_clause,
     create_insert_into_clause_str,
     create_select_query,
@@ -19,7 +19,7 @@ from src.ch00_data_toolbox.db_toolbox import (
     get_table_columns,
     save_to_split_csvs,
 )
-from src.ch00_data_toolbox.file_toolbox import (
+from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,
     open_file,

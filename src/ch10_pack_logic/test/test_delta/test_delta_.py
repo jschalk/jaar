@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch00_data_toolbox.dict_toolbox import x_is_json
+from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import get_default_moment_label as root_label

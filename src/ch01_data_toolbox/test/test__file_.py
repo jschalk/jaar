@@ -2,8 +2,8 @@ from os.path import exists as os_path_exist, join as os_path_join
 from pathlib import Path as pathlib_Path
 from platform import system as platform_system
 from pytest import raises as pytest_raises
-from src.ch00_data_toolbox.dict_toolbox import get_dict_from_json
-from src.ch00_data_toolbox.file_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import get_dict_from_json
+from src.ch01_data_toolbox.file_toolbox import (
     can_usser_edit_paths,
     count_files,
     create_directory_path,
@@ -25,7 +25,7 @@ from src.ch00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch00_data_toolbox.test._util.ch00_env import (
+from src.ch01_data_toolbox.test._util.ch01_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

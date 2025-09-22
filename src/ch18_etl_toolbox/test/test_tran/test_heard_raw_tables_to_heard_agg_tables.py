@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch00_data_toolbox.db_toolbox import get_row_count, get_table_columns
+from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,

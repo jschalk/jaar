@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
-from src.ch00_data_toolbox.db_toolbox import sqlite_obj_str
+from src.ch01_data_toolbox.db_toolbox import sqlite_obj_str
 from src.ch02_rope_logic.term import BeliefName, GroupTitle, RopePointer, VoiceName
 from src.ch04_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.ch04_group_logic.labor import LaborHeir

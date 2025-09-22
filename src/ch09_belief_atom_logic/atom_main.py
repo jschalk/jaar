@@ -1,9 +1,9 @@
 from dataclasses import dataclass
-from src.ch00_data_toolbox.db_toolbox import (
+from src.ch01_data_toolbox.db_toolbox import (
     RowData,
     create_type_reference_insert_sqlstr,
 )
-from src.ch00_data_toolbox.dict_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_empty_dict_if_None,
     get_json_from_dict,

@@ -1,4 +1,4 @@
-from src.ch00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
+from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
 from src.ch04_group_logic._ref.ch04_terms import (
     credor_pool_str,
     debtor_pool_str,

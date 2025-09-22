@@ -1,7 +1,7 @@
-# from src.ch00_data_toolbox.dict_toolbox import get_from_nested_dict
+# from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
-from src.ch00_data_toolbox.file_toolbox import create_path
+from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch07_belief_logic._ref.ch07_terms import (
     LabelTerm_str,
     NameTerm_str,

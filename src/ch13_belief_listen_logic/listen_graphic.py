@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
-from src.ch00_data_toolbox.plotly_toolbox import (
+from src.ch01_data_toolbox.plotly_toolbox import (
     add_2_curve,
     add_direc_rect,
     add_keep__rect,

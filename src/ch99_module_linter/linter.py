@@ -13,7 +13,7 @@ from os import walk as os_walk
 from os.path import join as os_path_join
 from pathlib import Path as pathlib_Path
 from re import compile as re_compile
-from src.ch00_data_toolbox.file_toolbox import create_path, get_dir_filenames
+from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames
 from src.ch98_docs_builder.doc_builder import (
     get_function_names_from_file,
     get_module_desc_prefix,
