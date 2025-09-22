@@ -1,7 +1,7 @@
 from plotly.graph_objects import Figure as plotly_figure, Scatter as plotly_Scatter
 from pytest import raises as pytest_raises
 from src.ch00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.ch04_reason_logic.reason import CaseStatusFinder, casestatusfinder_shop
+from src.ch05_reason_logic.reason import CaseStatusFinder, casestatusfinder_shop
 
 
 def test_CaseStatusFinder_Exists():

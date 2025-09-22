@@ -1,5 +1,5 @@
 from src.ch03_group_logic.group import awardunit_shop
-from src.ch04_reason_logic.reason import factunit_shop, reasonunit_shop
+from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic._ref.ch07_terms import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,

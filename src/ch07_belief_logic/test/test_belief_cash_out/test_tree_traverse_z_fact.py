@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch04_reason_logic.reason import factheir_shop, factunit_shop
+from src.ch05_reason_logic.reason import factheir_shop, factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.example_beliefs import (

@@ -6,7 +6,7 @@ from src.ch01_rope_logic.term import BeliefName, GroupTitle, RopePointer, VoiceN
 from src.ch03_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.ch03_group_logic.labor import LaborHeir
 from src.ch03_group_logic.voice import VoiceUnit
-from src.ch04_reason_logic.reason import CaseUnit, FactHeir, ReasonHeir
+from src.ch05_reason_logic.reason import CaseUnit, FactHeir, ReasonHeir
 from src.ch06_plan_logic.plan import HealerUnit, PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch11_bud_logic.bud import MomentLabel

@@ -3,14 +3,14 @@ from src.ch01_rope_logic.rope import (
     default_knot_if_None,
     get_default_central_label as root_label,
 )
-from src.ch04_reason_logic._ref.ch04_terms import (
+from src.ch05_reason_logic._ref.ch05_terms import (
     cases_str,
     knot_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_state_str,
 )
-from src.ch04_reason_logic.reason import (
+from src.ch05_reason_logic.reason import (
     ReasonCore,
     caseunit_shop,
     factheir_shop,

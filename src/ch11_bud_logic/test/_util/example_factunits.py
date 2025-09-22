@@ -1,5 +1,5 @@
 from src.ch01_rope_logic.rope import create_rope
-from src.ch04_reason_logic.reason import FactUnit, factunit_shop
+from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 
 
 def example_casa_clean_factunit() -> FactUnit:

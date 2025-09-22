@@ -12,7 +12,7 @@ from src.ch01_rope_logic.rope import create_rope, get_parent_rope, get_tail_labe
 from src.ch01_rope_logic.term import LabelTerm, RopePointer, TitleTerm, VoiceName
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch03_group_logic.voice import voiceunit_shop
-from src.ch04_reason_logic.reason import factunit_shop
+from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj

@@ -59,7 +59,7 @@ from src.ch03_group_logic.voice import (
     voiceunit_shop,
     voiceunits_get_from_dict,
 )
-from src.ch04_reason_logic.reason import (
+from src.ch05_reason_logic.reason import (
     FactUnit,
     ReasonUnit,
     RopePointer,

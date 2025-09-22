@@ -2,13 +2,13 @@ from src.ch01_rope_logic.rope import (
     create_rope,
     get_default_central_label as root_label,
 )
-from src.ch04_reason_logic._ref.ch04_terms import (
+from src.ch05_reason_logic._ref.ch05_terms import (
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
 )
-from src.ch04_reason_logic.reason import (
+from src.ch05_reason_logic.reason import (
     FactCore,
     FactUnit,
     factheir_shop,

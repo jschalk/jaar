@@ -7,7 +7,7 @@ What does each one do?
 - **ch01_rope_logic**: Defines what a Rope is and required format for groups names and individual names.
 - **ch02_finance_logic**: Defines tools for financial allotment to ledgers.
 - **ch03_group_logic**: Defines a voice, and its group memberships. Groups will be produced from memberships.
-- **ch04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True
+- **ch05_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True
 - **ch06_plan_logic**: Defines PlanUnits. Plans are complicated. A plan can have sub plans, define itself as a task, define Awardees, assigned Labor, required Reasons, etc.
 - **ch07_belief_logic**: A belief is a beliefunit, made of accounts and plans. All plans are connected to the central plan, which is given all the funds in a beliefunit.
 - **ch08_timeline_logic**: Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.

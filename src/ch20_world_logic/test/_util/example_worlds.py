@@ -1,5 +1,5 @@
 from src.ch01_rope_logic.rope import create_rope
-from src.ch04_reason_logic.reason import FactUnit, factunit_shop
+from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 
