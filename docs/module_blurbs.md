@@ -19,7 +19,7 @@ What does each one do?
 - **ch13_belief_listen_logic**: These tools describe how one beliefunit listens to another
 - **ch14_keep_logic**: Builds a simulation that describes how much credit a healer has earned 
 - **ch15_moment_logic**: A MomentUnit is a Moment system with the basic requirements: common system of time, voice tranactions ledger, etc. Importantly a Moment system must know the state of a belief's beliefunit at any time in the past.
-- **ch16_pidgin_logic**: A tool that translates words from outside language to inside language.
+- **ch16_pidgin_logic**: A tool that translates beliefs from outside language to inside language.
 - **ch17_idea_logic**: idea bricks are tables of data that build moment systems and the beliefunits within them.
 - **ch18_etl_toolbox**: All the tools used by WorldUnits to create MomentUnits.
 - **ch19_kpi_toolbox**: ch18_etl_toolbox manages the base required data. This toolbox manages the analytics outcomes.
