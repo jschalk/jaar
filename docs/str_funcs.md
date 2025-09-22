@@ -1,6 +1,7 @@
 # String Functions by Module
 
 ## Str Functions by Module
+- ch00_purpose: 
 - ch01_data_toolbox: INSERT, UPDATE, sqlite_datatype
 - ch02_rope_logic: LabelTerm, NameTerm, RopePointer, TitleTerm, knot, parent_rope
 - ch03_finance_logic: fund_iota, fund_pool, magnitude, penny

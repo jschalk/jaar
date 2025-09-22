@@ -1,3 +1,6 @@
+# from src.ch00_purpose._ref.ch00_terms import *
+
+
 def INSERT_str() -> str:
     return "INSERT"
 

@@ -593,7 +593,7 @@ def test_sqlite_version():
     # Retrieve the SQLite version
     sqlite_version = sqlite3_sqlite_version
 
-    # Log the version for debugging purposes
+    # Log the version for debugging
     print(f"SQLite version being used: {sqlite_version}")
 
     # Check if the version meets requirements (example: 3.30.0 or later)

@@ -3,6 +3,7 @@
 What does each one do?
 
 
+- **ch00_purpose**: The first chapter
 - **ch01_data_toolbox**: Create some standard tools files files, python dictionaries, databases, and other basic programming objects.
 - **ch02_rope_logic**: Defines what a Rope is and required format for groups names and individual names.
 - **ch03_finance_logic**: Defines tools for financial allotment to ledgers.
