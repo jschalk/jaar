@@ -31,8 +31,8 @@ from src.ch01_rope_logic.term import EventInt, FaceName
 from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_belief_atom_logic.atom_config import get_belief_dimens
 from src.ch08_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch09_pack_logic.delta import get_minimal_beliefdelta
-from src.ch09_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
+from src.ch10_pack_logic.delta import get_minimal_beliefdelta
+from src.ch10_pack_logic.pack import PackUnit, get_packunit_from_json, packunit_shop
 from src.ch11_bud_logic.bud import TranBook
 from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path,

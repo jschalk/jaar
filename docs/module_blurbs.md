@@ -12,7 +12,7 @@ What does each one do?
 - **ch06_belief_logic**: A belief is a beliefunit, made of accounts and plans. All plans are connected to the central plan, which is given all the funds in a beliefunit.
 - **ch07_timeline_logic**: Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.
 - **ch08_belief_atom_logic**: Defines the structure and behavior of beliefunit atoms, which are single units of beliefunit and plans used in a beliefunit.
-- **ch09_pack_logic**: Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.
+- **ch10_pack_logic**: Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.
 - **ch11_bud_logic**: Defines a budget and the tools necessary to create one. Budges are created when a moment system decides to empower a beliefunit with funds that must be distributed
 - **ch12_hub_toolbox**: These tools are used to handle complex operations involving belief files, will be deprecated.
 - **ch13_belief_listen_logic**: These tools describe how one beliefunit listens to another

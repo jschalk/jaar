@@ -2,8 +2,8 @@ from src.ch01_rope_logic.rope import RopePointer, create_rope, create_rope_from_
 from src.ch01_rope_logic.term import MomentLabel
 from src.ch05_plan_logic.plan import get_default_moment_label
 from src.ch08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch09_pack_logic.delta import BeliefDelta, beliefdelta_shop
-from src.ch09_pack_logic.pack import PackUnit, packunit_shop
+from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
+from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
 from src.ch12_hub_toolbox._ref.ch12_terms import (
     DELETE_str,

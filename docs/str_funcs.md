@@ -10,7 +10,7 @@
 - ch06_belief_logic: ancestors, attributes, belief_groupunit, belief_plan_awardunit, belief_plan_factunit, belief_plan_healerunit, belief_plan_partyunit, belief_plan_reason_caseunit, belief_plan_reasonunit, belief_planunit, belief_voice_membership, belief_voiceunit, beliefunit, class_type, credor_respect, debtor_respect, dimen, dimens, jkeys, jvalues, keeps_buildable, keeps_justified, last_pack_id, mandate, max_tree_traverse, offtrack_fund, offtrack_kids_star_set, planroot, reason_contexts, sum_healerunit_share, tally, voice_pool, voices
 - ch07_timeline_logic: c100, c400_clean, c400_leap, c400_number, creg, cumulative_day, day, days, five, hour, hours_config, monthday_distortion, months_config, readable, time, timeline_label, timeline, week, weekdays_config, weeks, year, yr1_jan1_offset, yr4_clean, yr4_leap
 - ch08_belief_atom_logic: DELETE, atom_hx, atom, column_order, crud, nesting_order, normal_specs, normal_table_name
-- ch09_pack_logic: event_int, face_name
+- ch10_pack_logic: event_int, face_name
 - ch11_bud_logic: amount, beliefadjust, beliefevent_facts, boss_facts, bud_belief_name, bud_time, bud_voice_nets, celldepth, found_facts, offi_time, quota, tran_time
 - ch12_hub_toolbox: gut, job, moment_mstr_dir
 - ch13_belief_listen_logic: 

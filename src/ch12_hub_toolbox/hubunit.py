@@ -37,7 +37,7 @@ from src.ch08_belief_atom_logic.atom_main import (
     get_from_json as beliefatom_get_from_json,
     modify_belief_with_beliefatom,
 )
-from src.ch09_pack_logic.pack import (
+from src.ch10_pack_logic.pack import (
     PackUnit,
     create_packunit_from_files,
     get_init_pack_id_if_None,

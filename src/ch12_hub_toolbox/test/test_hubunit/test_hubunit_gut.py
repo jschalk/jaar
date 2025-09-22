@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch00_data_toolbox.file_toolbox import create_path, delete_dir
-from src.ch09_pack_logic.pack import init_pack_id
+from src.ch10_pack_logic.pack import init_pack_id
 from src.ch12_hub_toolbox.hub_tool import (
     create_gut_path,
     gut_file_exists,

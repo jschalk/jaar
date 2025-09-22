@@ -9,7 +9,7 @@ from src.ch00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.ch09_pack_logic.pack import init_pack_id, packunit_shop
+from src.ch10_pack_logic.pack import init_pack_id, packunit_shop
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
