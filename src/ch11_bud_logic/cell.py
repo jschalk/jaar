@@ -8,8 +8,8 @@ from src.ch00_data_toolbox.dict_toolbox import (
     get_json_from_dict,
 )
 from src.ch01_rope_logic.term import BeliefName, EventInt, RopePointer
-from src.ch02_finance_logic.allot import allot_scale
-from src.ch02_finance_logic.finance_config import FundNum, PennyNum
+from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_finance_logic.finance_config import FundNum, PennyNum
 from src.ch05_reason_logic.reason import (
     FactUnit,
     factunits_get_from_dict,

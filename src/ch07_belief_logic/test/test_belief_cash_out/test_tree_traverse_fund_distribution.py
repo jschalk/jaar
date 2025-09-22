@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from pytest import raises as pytest_raises
 from src.ch01_rope_logic.rope import RopePointer, to_rope
-from src.ch02_finance_logic.finance_config import default_fund_pool
+from src.ch03_finance_logic.finance_config import default_fund_pool
 from src.ch04_group_logic.group import awardline_shop, awardunit_shop
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop

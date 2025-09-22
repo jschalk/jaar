@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from src.ch00_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
 from src.ch01_rope_logic.term import GroupTitle, VoiceName, default_knot_if_None
-from src.ch02_finance_logic.allot import allot_scale
-from src.ch02_finance_logic.finance_config import FundIota, default_fund_iota_if_None
+from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_finance_logic.finance_config import FundIota, default_fund_iota_if_None
 
 
 class InvalidGroupException(Exception):

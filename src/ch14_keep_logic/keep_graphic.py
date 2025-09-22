@@ -1,6 +1,6 @@
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.ch00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.ch02_finance_logic.finance_config import (
+from src.ch03_finance_logic.finance_config import (
     default_money_magnitude as default_point_magnitude,
 )
 

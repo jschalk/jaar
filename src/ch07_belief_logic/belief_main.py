@@ -33,8 +33,8 @@ from src.ch01_rope_logic.term import (
     RopePointer,
     VoiceName,
 )
-from src.ch02_finance_logic.allot import allot_scale
-from src.ch02_finance_logic.finance_config import (
+from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_finance_logic.finance_config import (
     BitNum,
     FundIota,
     FundNum,

@@ -1,4 +1,4 @@
-from src.ch02_finance_logic._ref.ch02_terms import (
+from src.ch03_finance_logic._ref.ch03_terms import (
     fund_iota_str,
     fund_pool_str,
     knot_str,

@@ -23,8 +23,8 @@ from src.ch01_rope_logic.term import (
     VoiceName,
     default_knot_if_None,
 )
-from src.ch02_finance_logic.allot import allot_scale
-from src.ch02_finance_logic.finance_config import (
+from src.ch03_finance_logic.allot import allot_scale
+from src.ch03_finance_logic.finance_config import (
     FundIota,
     FundNum,
     default_fund_iota_if_None,

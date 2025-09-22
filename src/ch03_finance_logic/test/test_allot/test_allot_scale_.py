@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
-from src.ch02_finance_logic.allot import (
+from src.ch03_finance_logic.allot import (
     GrainFloat,
     _allot_missing_scale,
     _create_allot_dict,

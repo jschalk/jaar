@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch00_data_toolbox.file_toolbox import create_path, open_json, save_json
-from src.ch02_finance_logic.allot import allot_nested_scale
-from src.ch02_finance_logic.test._util.ch02_env import (
+from src.ch03_finance_logic.allot import allot_nested_scale
+from src.ch03_finance_logic.test._util.ch03_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
 )

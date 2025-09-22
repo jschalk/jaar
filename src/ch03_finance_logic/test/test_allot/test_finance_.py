@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
-from src.ch02_finance_logic.finance_config import (
+from src.ch03_finance_logic.finance_config import (
     BitNum,
     FundIota,
     FundNum,

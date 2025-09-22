@@ -19,7 +19,7 @@ from src.ch01_rope_logic.term import (
     VoiceName,
     default_knot_if_None,
 )
-from src.ch02_finance_logic.finance_config import (
+from src.ch03_finance_logic.finance_config import (
     BitNum,
     FundIota,
     FundNum,
