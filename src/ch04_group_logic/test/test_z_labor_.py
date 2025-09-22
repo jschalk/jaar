@@ -1,5 +1,5 @@
 from src.ch02_rope_logic.term import GroupTitle
-from src.ch04_group_logic._ref.ch04_terms import (
+from src.ch04_group_logic._ref.ch04_keywords import (
     parent_solo_str,
     party_title_str,
     solo_str,

@@ -15,7 +15,7 @@ from src.ch17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_groupunit_str,
     belief_name_str,
     belief_net_amount_str,

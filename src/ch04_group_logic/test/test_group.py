@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
-from src.ch04_group_logic._ref.ch04_terms import (
+from src.ch04_group_logic._ref.ch04_keywords import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,

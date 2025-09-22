@@ -9,7 +9,7 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_job_path, create_moment_json_path
 from src.ch12_hub_toolbox.hub_tool import save_job_file
 from src.ch15_moment_logic.moment_main import momentunit_shop
-from src.ch18_etl_toolbox._ref.ch18_terms import job_str
+from src.ch18_etl_toolbox._ref.ch18_keywords import job_str
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,

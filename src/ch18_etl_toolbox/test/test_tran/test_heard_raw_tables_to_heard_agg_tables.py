@@ -5,7 +5,7 @@ from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
 )
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_name_str,
     belief_voiceunit_str,
     error_message_str,

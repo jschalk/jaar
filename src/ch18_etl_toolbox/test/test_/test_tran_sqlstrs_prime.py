@@ -19,7 +19,7 @@ from src.ch17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,

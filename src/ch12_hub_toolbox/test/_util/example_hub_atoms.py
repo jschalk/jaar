@@ -5,7 +5,7 @@ from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
-from src.ch12_hub_toolbox._ref.ch12_terms import (
+from src.ch12_hub_toolbox._ref.ch12_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

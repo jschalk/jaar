@@ -14,7 +14,7 @@ from src.ch11_bud_logic.test._util.example_factunits import (
     example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ch12_hub_toolbox._ref.ch12_terms import (
+from src.ch12_hub_toolbox._ref.ch12_keywords import (
     ancestors_str,
     bud_belief_name_str,
     celldepth_str,

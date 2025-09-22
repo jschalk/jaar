@@ -1,5 +1,5 @@
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
-from src.ch19_kpi_toolbox._ref.ch19_terms import (
+from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     active_str,
     belief_name_str,
     belief_net_amount_str,

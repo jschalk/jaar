@@ -1,5 +1,5 @@
 from sqlalchemy import inspect
-from src.ch09_belief_atom_logic._ref.ch09_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,

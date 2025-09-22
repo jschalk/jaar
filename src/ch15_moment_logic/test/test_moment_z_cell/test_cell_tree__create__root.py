@@ -6,7 +6,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
-from src.ch15_moment_logic._ref.ch15_terms import (
+from src.ch15_moment_logic._ref.ch15_keywords import (
     ancestors_str,
     bud_belief_name_str,
     celldepth_str,

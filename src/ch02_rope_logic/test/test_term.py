@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch02_rope_logic._ref.ch02_terms import knot_str
+from src.ch02_rope_logic._ref.ch02_keywords import knot_str
 from src.ch02_rope_logic.term import (
     BeliefName,
     CentralLabel,

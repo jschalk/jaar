@@ -8,7 +8,7 @@ from src.ch12_hub_toolbox.hub_tool import (
     cellunit_add_json_file,
     save_arbitrary_beliefevent,
 )
-from src.ch15_moment_logic._ref.ch15_terms import beliefevent_facts_str
+from src.ch15_moment_logic._ref.ch15_keywords import beliefevent_facts_str
 from src.ch15_moment_logic.moment_cell import load_cells_beliefevent
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,

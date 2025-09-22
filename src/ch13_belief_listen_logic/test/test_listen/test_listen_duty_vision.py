@@ -9,7 +9,7 @@ from src.ch12_hub_toolbox.hub_tool import (
 )
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.keep_tool import save_duty_belief
-from src.ch13_belief_listen_logic._ref.ch13_terms import voices_str
+from src.ch13_belief_listen_logic._ref.ch13_keywords import voices_str
 from src.ch13_belief_listen_logic.listen_main import (
     create_vision_file_from_duty_file,
     listen_to_belief_visions,

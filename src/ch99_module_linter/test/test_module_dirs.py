@@ -38,12 +38,12 @@ def test_Module_ref_util_FilesExist():
         # assert module_number == previous_module_number + 1
         # print(f"{module_desc=} {module_number=}")
         ref_dir = create_path(module_dir, "_ref")
-        str_func_path = create_path(ref_dir, f"{module_prefix}_terms.py")
+        str_func_path = create_path(ref_dir, f"{module_prefix}_keywords.py")
         assert os_path_exists(str_func_path)
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         assert os_path_exists(util_dir)
-        # str_func_test_path = create_path(utils_dir, f"test_{module_prefix}_terms.py")
+        # str_func_test_path = create_path(utils_dir, f"test_{module_prefix}_keywords.py")
         # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
@@ -103,7 +103,7 @@ def test_Modules_util_AssestsExistForEverytermFunction():
 
         if len(module_str_funcs) > 0:
             test_file_path = create_path(
-                util_dir, f"test_{module_desc_prefix}_terms.py"
+                util_dir, f"test_{module_desc_prefix}_keywords.py"
             )
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)

@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch15_moment_logic.moment_main import get_from_dict as momentunit_get_from_dict
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     brokerunits_str,
     moment_label_str,
     paybook_str,

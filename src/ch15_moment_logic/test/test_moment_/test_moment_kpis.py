@@ -1,5 +1,5 @@
 from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.ch15_moment_logic._ref.ch15_terms import (
+from src.ch15_moment_logic._ref.ch15_keywords import (
     addin_str,
     begin_str,
     belief_name_str,

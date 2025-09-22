@@ -3,7 +3,7 @@ from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_create_table_s
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
 from src.ch17_idea_logic.idea_config import get_idea_sqlite_types
 from src.ch17_idea_logic.idea_db_tool import get_default_sorted_list
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_groupunit_str,
     belief_name_str,
     belief_plan_awardunit_str,

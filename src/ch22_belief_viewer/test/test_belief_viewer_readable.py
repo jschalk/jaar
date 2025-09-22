@@ -3,7 +3,7 @@ from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.ch22_belief_viewer._ref.ch22_terms import planroot_str, voices_str
+from src.ch22_belief_viewer._ref.ch22_keywords import planroot_str, voices_str
 from src.ch22_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_belief_view_dict,

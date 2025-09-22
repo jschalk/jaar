@@ -8,7 +8,7 @@ from src.ch03_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.ch06_plan_logic.plan import get_default_moment_label as root_label
-from src.ch07_belief_logic._ref.ch07_terms import (
+from src.ch07_belief_logic._ref.ch07_keywords import (
     belief_name_str,
     credor_respect_str,
     debtor_respect_str,

@@ -10,7 +10,7 @@ from src.ch16_pidgin_logic.test._util.example_pidgins import (
     get_casa_maison_rope_inx_dt,
     get_casa_maison_rope_otx_dt,
 )
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     NameTerm_str,
     credor_respect_str,
     group_title_str,

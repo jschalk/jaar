@@ -1,5 +1,5 @@
 from src.ch04_group_logic.voice import voiceunit_shop
-from src.ch09_belief_atom_logic._ref.ch09_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     DELETE_str,
     INSERT_str,
     belief_voice_membership_str,

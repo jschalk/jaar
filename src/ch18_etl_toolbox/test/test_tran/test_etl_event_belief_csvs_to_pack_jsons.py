@@ -5,7 +5,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     INSERT_str,
     belief_name_str,
     belief_voiceunit_str,

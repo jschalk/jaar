@@ -37,7 +37,7 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
 
 def get_module_str_functions(module_dir: str, module_desc_prefix: str) -> list[str]:
     ref_dir = create_path(module_dir, "_ref")
-    str_util_path = create_path(ref_dir, f"{module_desc_prefix}_terms.py")
+    str_util_path = create_path(ref_dir, f"{module_desc_prefix}_keywords.py")
     return get_function_names_from_file(str_util_path)
 
 

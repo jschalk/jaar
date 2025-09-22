@@ -20,7 +20,7 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_moment_ote1_csv_path,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
-from src.ch20_world_logic._ref.ch20_terms import (
+from src.ch20_world_logic._ref.ch20_keywords import (
     amount_str,
     belief_name_str,
     bud_time_str,

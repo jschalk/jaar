@@ -1,4 +1,4 @@
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_voiceunit_str,
     group_title_str,
     plan_rope_str,

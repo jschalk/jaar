@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch10_pack_logic._ref.ch10_terms import belief_name_str, face_name_str
+from src.ch10_pack_logic._ref.ch10_keywords import belief_name_str, face_name_str
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.ch10_pack_logic.test._util.ch10_env import (

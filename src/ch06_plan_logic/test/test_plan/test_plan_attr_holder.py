@@ -1,4 +1,4 @@
-from src.ch06_plan_logic._ref.ch06_terms import (
+from src.ch06_plan_logic._ref.ch06_keywords import (
     addin_str,
     begin_str,
     close_str,

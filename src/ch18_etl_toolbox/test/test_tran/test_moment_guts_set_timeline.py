@@ -9,7 +9,7 @@ from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.ch15_moment_logic.moment_main import momentunit_shop
-from src.ch18_etl_toolbox._ref.ch18_terms import time_str
+from src.ch18_etl_toolbox._ref.ch18_keywords import time_str
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_module_temp_dir,
