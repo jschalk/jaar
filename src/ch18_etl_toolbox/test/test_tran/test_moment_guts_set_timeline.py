@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch00_data_toolbox.file_toolbox import save_json
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_five_config,

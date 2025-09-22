@@ -1,7 +1,7 @@
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch04_reason_logic.reason import factunit_shop, reasonunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch06_belief_logic.belief_tool import (
+from src.ch07_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_tool import (
     belief_plan_factunit_get_obj,
     belief_plan_reason_caseunit_get_obj as caseunit_get_obj,
     belief_plan_reasonunit_get_obj,

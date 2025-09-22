@@ -1,4 +1,4 @@
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic._ref.ch08_terms import (
     c100_str,
     c400_clean_str,

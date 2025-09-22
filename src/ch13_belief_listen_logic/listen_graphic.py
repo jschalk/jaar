@@ -8,8 +8,8 @@ from src.ch00_data_toolbox.plotly_toolbox import (
     conditional_fig_show,
 )
 from src.ch02_finance_logic.finance_config import default_money_magnitude
-from src.ch06_belief_logic.belief_graphics import display_plantree
-from src.ch06_belief_logic.belief_main import BeliefUnit
+from src.ch07_belief_logic.belief_graphics import display_plantree
+from src.ch07_belief_logic.belief_main import BeliefUnit
 
 
 def get_hubunit_base_fig() -> plotly_Figure:

@@ -1,4 +1,4 @@
-from src.ch06_belief_logic._ref.ch06_terms import *
+from src.ch07_belief_logic._ref.ch07_terms import *
 
 
 def c100_str() -> str:

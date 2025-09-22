@@ -8,7 +8,7 @@ from src.ch02_finance_logic.finance_config import (
 )
 from src.ch05_plan_logic.healer import healerunit_shop
 from src.ch05_plan_logic.plan import planunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch11_bud_logic.bud import tranbook_shop
 from src.ch12_hub_toolbox.ch12_path import (

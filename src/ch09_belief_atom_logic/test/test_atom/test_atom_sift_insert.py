@@ -1,7 +1,7 @@
 from src.ch01_rope_logic.rope import to_rope
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch04_reason_logic.reason import factunit_shop, reasonunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic._ref.ch09_terms import (
     INSERT_str,
     awardee_title_str,

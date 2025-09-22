@@ -27,7 +27,7 @@ from src.ch02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.ch06_belief_logic.belief_main import (
+from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,

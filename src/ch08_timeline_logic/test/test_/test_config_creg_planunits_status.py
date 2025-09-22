@@ -1,6 +1,6 @@
 from datetime import datetime
 from src.ch05_plan_logic.plan import planunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic._ref.ch08_terms import (
     day_str,
     days_str,

@@ -5,7 +5,7 @@ from src.ch00_data_toolbox.file_toolbox import save_file
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch03_group_logic.labor import laborunit_shop
 from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_job_path, create_moment_json_path
 from src.ch12_hub_toolbox.hub_tool import save_job_file
 from src.ch15_moment_logic.moment_main import momentunit_shop

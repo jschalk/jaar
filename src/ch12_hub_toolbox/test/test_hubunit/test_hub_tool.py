@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
 from src.ch00_data_toolbox.file_toolbox import create_path, open_json, set_dir
 from src.ch01_rope_logic.rope import create_rope
-from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch06_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.test._util.example_beliefs import (
     get_beliefunit_irrational_example,
     get_beliefunit_with_4_levels,
 )

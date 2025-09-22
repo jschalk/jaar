@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
 from src.ch05_plan_logic.plan import planunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch13_belief_listen_logic.listen_main import (
     create_empty_belief_from_belief,
     listen_to_speaker_agenda,

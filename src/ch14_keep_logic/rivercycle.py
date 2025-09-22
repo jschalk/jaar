@@ -6,7 +6,7 @@ from src.ch00_data_toolbox.dict_toolbox import (
 )
 from src.ch01_rope_logic.term import BeliefName, VoiceName
 from src.ch02_finance_logic.allot import allot_scale
-from src.ch06_belief_logic.belief_main import BeliefUnit
+from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch12_hub_toolbox.hubunit import HubUnit
 
 

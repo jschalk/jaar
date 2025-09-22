@@ -10,7 +10,7 @@ from src.ch05_plan_logic.plan import (
     plans_calculated_range as calc_range,
     planunit_shop,
 )
-from src.ch06_belief_logic.belief_main import BeliefUnit
+from src.ch07_belief_logic.belief_main import BeliefUnit
 
 
 class TimeLineLabel(LabelTerm):
@@ -579,7 +579,7 @@ def belieftimelinepoint_shop(
 
 
 def timeline_config_path() -> str:
-    "Returns path: a07_timeline_logic/default_timeline_config.json"
+    "Returns path: ch08_timeline_logic/default_timeline_config.json"
 
     src_dir = create_path(os_getcwd(), "src")
     module_dir = create_path(src_dir, "ch08_timeline_logic")

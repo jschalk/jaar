@@ -11,7 +11,7 @@ from src.ch00_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.ch01_rope_logic.term import BeliefName, EventInt, LabelTerm, RopePointer
-from src.ch06_belief_logic.belief_main import (
+from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,

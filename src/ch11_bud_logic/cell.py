@@ -15,12 +15,12 @@ from src.ch04_reason_logic.reason import (
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
-from src.ch06_belief_logic.belief_main import (
+from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_from_dict as beliefunit_get_from_dict,
 )
-from src.ch06_belief_logic.belief_tool import (
+from src.ch07_belief_logic.belief_tool import (
     clear_factunits_from_belief,
     get_belief_root_facts_dict as get_facts_dict,
     get_credit_ledger,

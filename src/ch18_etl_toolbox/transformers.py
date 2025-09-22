@@ -28,7 +28,7 @@ from src.ch00_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.ch01_rope_logic.term import EventInt, FaceName
-from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import get_belief_dimens
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic.delta import get_minimal_beliefdelta
