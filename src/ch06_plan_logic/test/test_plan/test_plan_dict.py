@@ -7,7 +7,7 @@ from src.ch04_reason_logic.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ch05_plan_logic._ref.ch05_terms import (
+from src.ch06_plan_logic._ref.ch06_terms import (
     active_hx_str,
     active_str,
     addin_str,
@@ -51,8 +51,8 @@ from src.ch05_plan_logic._ref.ch05_terms import (
     tree_level_str,
     uid_str,
 )
-from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch05_plan_logic.plan import (
+from src.ch06_plan_logic.healer import healerunit_shop
+from src.ch06_plan_logic.plan import (
     get_default_moment_label as root_label,
     get_obj_from_plan_dict,
     planunit_shop,

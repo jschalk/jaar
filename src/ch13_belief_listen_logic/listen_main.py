@@ -3,7 +3,7 @@ from dataclasses import dataclass
 from src.ch01_rope_logic.rope import get_ancestor_ropes, get_root_label_from_rope
 from src.ch01_rope_logic.term import BeliefName, RopePointer
 from src.ch02_finance_logic.allot import allot_scale
-from src.ch05_plan_logic.plan import PlanUnit
+from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop

@@ -7,7 +7,7 @@ from src.ch02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.ch05_plan_logic.plan import get_default_moment_label as root_label
+from src.ch06_plan_logic.plan import get_default_moment_label as root_label
 from src.ch07_belief_logic._ref.ch07_terms import (
     belief_name_str,
     credor_respect_str,

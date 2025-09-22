@@ -9,7 +9,7 @@ from src.ch04_reason_logic.reason import (
     ReasonHeir,
     ReasonUnit,
 )
-from src.ch05_plan_logic.plan import PlanUnit
+from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,

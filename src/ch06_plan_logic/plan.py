@@ -61,12 +61,12 @@ from src.ch04_reason_logic.reason import (
     reasons_get_from_dict,
     reasonunit_shop,
 )
-from src.ch05_plan_logic.healer import (
+from src.ch06_plan_logic.healer import (
     HealerUnit,
     healerunit_get_from_dict,
     healerunit_shop,
 )
-from src.ch05_plan_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
+from src.ch06_plan_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
 
 
 class InvalidPlanException(Exception):

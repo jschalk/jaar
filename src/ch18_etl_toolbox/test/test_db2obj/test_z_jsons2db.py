@@ -10,8 +10,8 @@ from src.ch03_group_logic.group import (
 from src.ch03_group_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
 from src.ch03_group_logic.voice import voiceunit_shop
 from src.ch04_reason_logic.reason import caseunit_shop, factheir_shop, reasonheir_shop
-from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.healer import healerunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch18_etl_toolbox.db_obj_belief_tool import (
     ObjKeysHolder,

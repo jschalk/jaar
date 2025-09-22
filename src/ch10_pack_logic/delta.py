@@ -12,7 +12,7 @@ from src.ch01_rope_logic.term import RopePointer, TitleTerm
 from src.ch03_group_logic.group import MemberShip
 from src.ch03_group_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch04_reason_logic.reason import FactUnit, ReasonUnit
-from src.ch05_plan_logic.plan import PlanUnit
+from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import CRUD_command
 from src.ch09_belief_atom_logic.atom_main import (

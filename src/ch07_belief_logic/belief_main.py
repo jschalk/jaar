@@ -65,8 +65,8 @@ from src.ch04_reason_logic.reason import (
     RopePointer,
     factunit_shop,
 )
-from src.ch05_plan_logic.healer import HealerUnit
-from src.ch05_plan_logic.plan import (
+from src.ch06_plan_logic.healer import HealerUnit
+from src.ch06_plan_logic.plan import (
     PlanAttrHolder,
     PlanUnit,
     get_default_moment_label,

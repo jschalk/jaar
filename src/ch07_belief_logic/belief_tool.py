@@ -10,7 +10,7 @@ from src.ch04_reason_logic.reason import (
     ReasonUnit,
     factunits_get_from_dict,
 )
-from src.ch05_plan_logic.plan import PlanUnit
+from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 
 

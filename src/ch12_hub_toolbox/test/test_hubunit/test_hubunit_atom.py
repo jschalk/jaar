@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch00_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.ch05_plan_logic.plan import get_default_moment_label as moment_label
+from src.ch06_plan_logic.plan import get_default_moment_label as moment_label
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,

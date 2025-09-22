@@ -7,7 +7,7 @@ from src.ch02_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.ch05_plan_logic.plan import get_default_moment_label as root_label
+from src.ch06_plan_logic.plan import get_default_moment_label as root_label
 from src.ch12_hub_toolbox.ch12_path import (
     create_belief_dir_path,
     create_keep_rope_path,

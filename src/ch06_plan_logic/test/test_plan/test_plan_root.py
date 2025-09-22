@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch05_plan_logic.plan import (
+from src.ch06_plan_logic.plan import (
     get_default_moment_label as root_label,
     planunit_shop,
 )

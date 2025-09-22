@@ -8,7 +8,7 @@ What does each one do?
 - **ch02_finance_logic**: Defines tools for financial allotment to ledgers.
 - **ch03_group_logic**: Defines a voice, and its group memberships. Groups will be produced from memberships.
 - **ch04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True
-- **ch05_plan_logic**: Defines PlanUnits. Plans are complicated. A plan can have sub plans, define itself as a task, define Awardees, assigned Labor, required Reasons, etc.
+- **ch06_plan_logic**: Defines PlanUnits. Plans are complicated. A plan can have sub plans, define itself as a task, define Awardees, assigned Labor, required Reasons, etc.
 - **ch07_belief_logic**: A belief is a beliefunit, made of accounts and plans. All plans are connected to the central plan, which is given all the funds in a beliefunit.
 - **ch08_timeline_logic**: Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.
 - **ch09_belief_atom_logic**: Defines the structure and behavior of beliefunit atoms, which are single units of beliefunit and plans used in a beliefunit.

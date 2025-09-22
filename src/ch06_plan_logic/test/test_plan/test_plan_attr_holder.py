@@ -1,4 +1,4 @@
-from src.ch05_plan_logic._ref.ch05_terms import (
+from src.ch06_plan_logic._ref.ch06_terms import (
     addin_str,
     begin_str,
     close_str,
@@ -15,8 +15,8 @@ from src.ch05_plan_logic._ref.ch05_terms import (
     task_str,
     uid_str,
 )
-from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch05_plan_logic.plan import PlanAttrHolder, planattrholder_shop
+from src.ch06_plan_logic.healer import healerunit_shop
+from src.ch06_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 
 
 def test_PlanAttrHolder_Exists():

@@ -2,7 +2,7 @@ from src.ch02_finance_logic.finance_config import (
     default_respect_num,
     validate_respect_num,
 )
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch13_belief_listen_logic.basis_beliefs import (
     create_empty_belief_from_belief,

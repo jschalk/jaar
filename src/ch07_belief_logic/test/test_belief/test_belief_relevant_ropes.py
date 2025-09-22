@@ -1,6 +1,6 @@
 from src.ch01_rope_logic.rope import to_rope
 from src.ch04_reason_logic.reason import reasonunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.example_beliefs import (
     get_beliefunit_with_4_levels,

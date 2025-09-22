@@ -1,5 +1,5 @@
-from src.ch05_plan_logic.plan import plans_calculated_range, planunit_shop
-from src.ch05_plan_logic.range_toolbox import RangeUnit
+from src.ch06_plan_logic.plan import plans_calculated_range, planunit_shop
+from src.ch06_plan_logic.range_toolbox import RangeUnit
 
 
 def test_plans_calculated_range_ReturnsObj_EmptyList():

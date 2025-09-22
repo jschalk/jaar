@@ -1,6 +1,6 @@
 from src.ch01_rope_logic.rope import RopePointer
 from src.ch03_group_logic.labor import laborunit_shop
-from src.ch05_plan_logic.plan import PlanUnit, planunit_shop
+from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,

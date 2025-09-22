@@ -2,7 +2,7 @@ from datetime import datetime
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
 from src.ch00_data_toolbox.file_toolbox import open_json
 from src.ch00_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.ch05_plan_logic.plan import PlanUnit
+from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_timeline_logic._ref.ch08_terms import (
     c400_number_str,

@@ -1,4 +1,4 @@
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.keep_tool import save_duty_belief

@@ -8,8 +8,8 @@ from src.ch01_rope_logic.rope import (
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch03_group_logic.labor import laborunit_shop
 from src.ch04_reason_logic.reason import caseunit_shop, factunit_shop, reasonunit_shop
-from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.healer import healerunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.example_beliefs import (
     get_beliefunit_with_4_levels,

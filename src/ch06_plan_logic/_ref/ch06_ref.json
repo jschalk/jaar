@@ -1,4 +1,4 @@
 {
     "module_blurb": "Defines PlanUnits. Plans are complicated. A plan can have sub plans, define itself as a task, define Awardees, assigned Labor, required Reasons, etc.",
-    "module_description": "ch05_plan_logic"
+    "module_description": "ch06_plan_logic"
 }

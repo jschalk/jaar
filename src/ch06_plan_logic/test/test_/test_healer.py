@@ -1,4 +1,4 @@
-from src.ch05_plan_logic.healer import (
+from src.ch06_plan_logic.healer import (
     HealerUnit,
     healerunit_get_from_dict,
     healerunit_shop,

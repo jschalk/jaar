@@ -1,6 +1,6 @@
 from src.ch01_rope_logic.rope import create_rope
 from src.ch04_reason_logic.reason import caseunit_shop, factunit_shop, reasonunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 
 
 def test_PlanUnit_find_replace_rope_Modifies_parent_rope():

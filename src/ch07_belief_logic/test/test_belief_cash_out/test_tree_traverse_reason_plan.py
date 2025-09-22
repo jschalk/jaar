@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch04_reason_logic.reason import caseunit_shop, reasonheir_shop, reasonunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.test._util.example_beliefs import (
     get_beliefunit_irrational_example,
     get_beliefunit_with_4_levels,

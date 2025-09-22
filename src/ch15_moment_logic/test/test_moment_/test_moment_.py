@@ -6,8 +6,8 @@ from src.ch02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.healer import healerunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch11_bud_logic.bud import tranbook_shop

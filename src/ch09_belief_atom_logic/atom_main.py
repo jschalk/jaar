@@ -13,7 +13,7 @@ from src.ch01_rope_logic.term import LabelTerm, RopePointer, TitleTerm, VoiceNam
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch03_group_logic.voice import voiceunit_shop
 from src.ch04_reason_logic.reason import factunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj
 from src.ch09_belief_atom_logic.atom_config import (
