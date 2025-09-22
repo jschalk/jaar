@@ -1,0 +1,4 @@
+{
+    "module_blurb": "Defines a voice, and its group memberships. Groups will be produced from memberships.",
+    "module_description": "ch04_group_logic"
+}

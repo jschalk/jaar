@@ -1,25 +1,25 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.ch00_data_toolbox.dict_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,
     get_empty_set_if_None,
     get_json_from_dict,
 )
-from src.ch00_data_toolbox.file_toolbox import (
+from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_dir_file_strs,
     open_file,
     set_dir,
 )
-from src.ch01_rope_logic.term import (
+from src.ch02_rope_logic.term import (
     BeliefName,
     EventInt,
     MomentLabel,
     VoiceName,
     default_knot_if_None,
 )
-from src.ch02_finance_logic.finance_config import (
+from src.ch03_finance_logic.finance_config import (
     BitNum,
     FundIota,
     FundNum,
@@ -28,8 +28,8 @@ from src.ch02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch07_timeline_logic.timeline_main import (
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch08_timeline_logic.timeline_main import (
     TimeLinePoint,
     TimeLineUnit,
     add_newtimeline_planunit,

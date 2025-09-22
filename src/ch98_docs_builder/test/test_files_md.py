@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
-from src.ch00_data_toolbox.file_toolbox import count_dirs_files, create_path, open_file
-from src.ch01_rope_logic._ref.ch01_doc_builder import get_ropepointer_explanation_md
+from src.ch01_data_toolbox.file_toolbox import count_dirs_files, create_path, open_file
+from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
 from src.ch98_docs_builder.doc_builder import (
     get_module_blurbs_md,
     save_brick_formats_md,
@@ -20,7 +20,7 @@ def test_get_module_blurbs_md_ReturnsObj():
 
     # THEN
     assert module_blurbs_md
-    assert module_blurbs_md.find("ch03") > 0
+    assert module_blurbs_md.find("ch04") > 0
 
 
 def test_save_module_blurbs_md_CreatesFile(env_dir_setup_cleanup):

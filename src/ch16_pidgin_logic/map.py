@@ -1,6 +1,6 @@
 from copy import copy as copy_copy
 from dataclasses import dataclass
-from src.ch00_data_toolbox.dict_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import (
     get_0_if_None,
     get_dict_from_json,
     get_empty_dict_if_None,
@@ -12,7 +12,7 @@ from src.ch00_data_toolbox.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from src.ch01_rope_logic.rope import (
+from src.ch02_rope_logic.rope import (
     create_rope,
     create_rope_from_labels,
     get_all_rope_labels,
@@ -20,7 +20,7 @@ from src.ch01_rope_logic.rope import (
     get_tail_label,
     is_labelterm,
 )
-from src.ch01_rope_logic.term import (
+from src.ch02_rope_logic.term import (
     EventInt,
     FaceName,
     LabelTerm,

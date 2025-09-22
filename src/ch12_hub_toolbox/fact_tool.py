@@ -1,6 +1,6 @@
-from src.ch00_data_toolbox.dict_toolbox import get_max_key
-from src.ch01_rope_logic.term import BeliefName, RopePointer
-from src.ch04_reason_logic.reason import FactUnit, get_factunit_from_tuple
+from src.ch01_data_toolbox.dict_toolbox import get_max_key
+from src.ch02_rope_logic.term import BeliefName, RopePointer
+from src.ch05_reason_logic.reason import FactUnit, get_factunit_from_tuple
 
 
 def get_nodes_with_weighted_facts(

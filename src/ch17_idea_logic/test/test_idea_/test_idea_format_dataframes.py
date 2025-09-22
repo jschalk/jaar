@@ -1,8 +1,8 @@
 from os.path import exists as os_path_exists
-from src.ch00_data_toolbox.file_toolbox import create_path, open_file
-from src.ch05_plan_logic.plan import planunit_shop
-from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch07_timeline_logic.test._util.calendar_examples import (
+from src.ch01_data_toolbox.file_toolbox import create_path, open_file
+from src.ch06_plan_logic.plan import planunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
+from src.ch08_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
 )

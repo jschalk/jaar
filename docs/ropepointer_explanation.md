@@ -19,7 +19,7 @@ The way those ropes are made creates context that changes what exactly is being 
 2. My cat, all fancy cat food, and her food bowl. 
 In the first situation my cat's food has a conext of "basic" food., in the second situation the food context is "fancy". But its not explicit that the food bowl has any food in it or what type it is. 
 
-In the example of "My cat, all basic cat food, and her food bowl." it is intuitive that there are three things (My cat) (all basic cat food) (her food bowl) but its also reasonable to say there are two things: (My cat) (all basic cat food, her bowl). To clearly express what things the rope is connecting to and through we must use seperator characters. I call them "knots". (In computer science they are call delimiters or seperators) Every rope that connects two things can tie itself a knot and that knot defines the seperation and connection between two things. 
+In the example of "My cat, all basic cat food, and her food bowl." it is intuitive that there are three things (My cat) (all basic cat food) (her food bowl) but its also reasonable to say there are two things: (My cat) (all basic cat food, her bowl). To clearly express what things the rope is connecting to and through we must use separator characters. I call them "knots". (In computer science they are call delimiters or separators) Every rope that connects two things can tie itself a knot and that knot defines the seperation and connection between two things. 
 - Example with knot ";" and three things: ;My Cat;all basic cat food;her food bowl;
 - Example with knot ";" and two things: ;My Cat all basic cat food;her food bowl;
 

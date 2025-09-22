@@ -1,9 +1,9 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
-from src.ch00_data_toolbox.file_toolbox import delete_dir, open_file, save_file
-from src.ch05_plan_logic.healer import healerunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
-from src.ch06_belief_logic.belief_graphics import display_plantree
+from src.ch01_data_toolbox.file_toolbox import delete_dir, open_file, save_file
+from src.ch06_plan_logic.healer import healerunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
+from src.ch07_belief_logic.belief_graphics import display_plantree
 from src.ch12_hub_toolbox.ch12_path import (
     create_keep_duty_path,
     create_keep_rope_path,

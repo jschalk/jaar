@@ -1,5 +1,5 @@
-from src.ch01_rope_logic.rope import RopePointer, create_rope_from_labels
-from src.ch05_plan_logic.plan import get_default_moment_label
+from src.ch02_rope_logic.rope import RopePointer, create_rope_from_labels
+from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch13_belief_listen_logic.test._util.ch13_env import get_module_temp_dir
 

@@ -1,4 +1,4 @@
-from src.ch09_pack_logic.pack import PackUnit, packunit_shop
+from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch13_belief_listen_logic.test._util.example_listen_atoms import (
     get_atom_example_factunit_knee,
     get_atom_example_planunit_ball,

@@ -1,5 +1,5 @@
-from src.ch00_data_toolbox.file_toolbox import set_dir
-from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch01_data_toolbox.file_toolbox import set_dir
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_belief_dir_path
 from src.ch12_hub_toolbox.hub_tool import (
     gut_file_exists,

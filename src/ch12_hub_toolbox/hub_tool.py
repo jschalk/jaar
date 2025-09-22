@@ -1,7 +1,7 @@
 from os import listdir as os_listdir
 from os.path import exists as os_path_exists, isdir as os_path_isdir
-from src.ch00_data_toolbox.dict_toolbox import get_empty_list_if_None
-from src.ch00_data_toolbox.file_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import get_empty_list_if_None
+from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_dir_file_strs,
     open_file,
@@ -10,8 +10,8 @@ from src.ch00_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch01_rope_logic.term import BeliefName, EventInt, LabelTerm, RopePointer
-from src.ch06_belief_logic.belief_main import (
+from src.ch02_rope_logic.term import BeliefName, EventInt, LabelTerm, RopePointer
+from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,

@@ -1,5 +1,5 @@
-from src.ch05_plan_logic.plan import planunit_shop
-from src.ch07_timeline_logic.reason_str_func import (
+from src.ch06_plan_logic.plan import planunit_shop
+from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )

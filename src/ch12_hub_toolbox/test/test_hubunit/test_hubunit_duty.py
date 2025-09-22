@@ -1,6 +1,6 @@
-from src.ch01_rope_logic.rope import create_rope
-from src.ch05_plan_logic.plan import get_default_moment_label as root_label
-from src.ch06_belief_logic.test._util.example_beliefs import (
+from src.ch02_rope_logic.rope import create_rope
+from src.ch06_plan_logic.plan import get_default_moment_label as root_label
+from src.ch07_belief_logic.test._util.example_beliefs import (
     get_beliefunit_with_4_levels,
 )
 from src.ch12_hub_toolbox.hubunit import hubunit_shop

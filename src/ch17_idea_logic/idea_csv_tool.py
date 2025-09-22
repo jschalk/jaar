@@ -1,7 +1,7 @@
-from src.ch00_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
-from src.ch01_rope_logic.term import FaceName, MomentLabel
-from src.ch06_belief_logic.belief_main import BeliefUnit
-from src.ch09_pack_logic.pack import PackUnit
+from src.ch01_data_toolbox.dict_toolbox import get_empty_str_if_None as if_none_str
+from src.ch02_rope_logic.term import FaceName, MomentLabel
+from src.ch07_belief_logic.belief_main import BeliefUnit
+from src.ch10_pack_logic.pack import PackUnit
 from src.ch15_moment_logic.moment_main import MomentUnit
 from src.ch17_idea_logic.idea_config import (
     get_idea_format_filename,

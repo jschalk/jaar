@@ -15,15 +15,15 @@ from pandas import (
 )
 from pandas.api.types import is_numeric_dtype as pandas_api_types_is_numeric_dtype
 from sqlite3 import Connection as sqlite3_Connection
-from src.ch00_data_toolbox.db_toolbox import (
+from src.ch01_data_toolbox.db_toolbox import (
     create_table_from_columns,
     create_table_from_csv,
     db_table_exists,
     get_table_columns,
     insert_csv,
 )
-from src.ch00_data_toolbox.dict_toolbox import set_in_nested_dict
-from src.ch00_data_toolbox.file_toolbox import (
+from src.ch01_data_toolbox.dict_toolbox import set_in_nested_dict
+from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_dir_file_strs,
     get_dir_filenames,
@@ -31,7 +31,7 @@ from src.ch00_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.ch01_rope_logic.term import EventInt, FaceName
+from src.ch02_rope_logic.term import EventInt, FaceName
 from src.ch16_pidgin_logic.map import MapCore
 from src.ch16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,

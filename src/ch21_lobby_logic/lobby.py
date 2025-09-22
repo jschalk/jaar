@@ -1,5 +1,5 @@
 from dataclasses import dataclass
-from src.ch09_pack_logic.pack import PackUnit
+from src.ch10_pack_logic.pack import PackUnit
 from src.ch20_world_logic.world import WorldName, WorldUnit
 
 

@@ -1,8 +1,8 @@
-from src.ch03_group_logic.group import awardunit_shop
-from src.ch03_group_logic.labor import laborunit_shop
-from src.ch05_plan_logic.plan import planunit_shop
-from src.ch06_belief_logic.belief_main import BeliefUnit, RopePointer, beliefunit_shop
-from src.ch06_belief_logic.belief_tool import set_case_attr
+from src.ch04_group_logic.group import awardunit_shop
+from src.ch04_group_logic.labor import laborunit_shop
+from src.ch06_plan_logic.plan import planunit_shop
+from src.ch07_belief_logic.belief_main import BeliefUnit, RopePointer, beliefunit_shop
+from src.ch07_belief_logic.belief_tool import set_case_attr
 
 
 def best_sport_str() -> str:
