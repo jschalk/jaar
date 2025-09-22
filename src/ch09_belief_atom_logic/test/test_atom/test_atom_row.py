@@ -1,5 +1,5 @@
 from src.ch01_rope_logic.rope import create_rope, to_rope
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,
     INSERT_str,
     belief_plan_healerunit_str,
@@ -8,8 +8,8 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     belief_voiceunit_str,
     voice_name_str,
 )
-from src.ch08_belief_atom_logic.atom_config import get_atom_args_class_types
-from src.ch08_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
+from src.ch09_belief_atom_logic.atom_config import get_atom_args_class_types
+from src.ch09_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
 
 
 def test_AtomRow_Exists():

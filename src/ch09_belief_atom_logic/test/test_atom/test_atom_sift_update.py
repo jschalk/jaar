@@ -6,7 +6,7 @@ from src.ch06_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_get_obj as caseunit_get_obj,
     belief_plan_reasonunit_get_obj,
 )
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     INSERT_str,
     UPDATE_str,
     addin_str,
@@ -46,7 +46,7 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     voice_debt_points_str,
     voice_name_str,
 )
-from src.ch08_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
+from src.ch09_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 
 
 def test_sift_atom_ReturnsNoneIfGivenBeliefAtomIsUPDATE():

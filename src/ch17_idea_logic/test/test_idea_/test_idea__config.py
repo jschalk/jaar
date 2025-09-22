@@ -5,7 +5,7 @@ from src.ch06_belief_logic.belief_config import (
     get_all_belief_calc_args,
     get_belief_calc_args_sqlite_datatype_dict,
 )
-from src.ch08_belief_atom_logic.atom_config import (
+from src.ch09_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_atom_args_dimen_mapping,
     get_atom_config_dict,

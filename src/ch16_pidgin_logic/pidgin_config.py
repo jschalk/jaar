@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.ch00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch00_data_toolbox.file_toolbox import create_path, open_json
-from src.ch08_belief_atom_logic.atom_config import get_all_belief_dimen_delete_keys
+from src.ch09_belief_atom_logic.atom_config import get_all_belief_dimen_delete_keys
 
 
 def pidgin_config_path() -> str:

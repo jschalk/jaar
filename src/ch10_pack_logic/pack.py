@@ -11,7 +11,7 @@ from src.ch00_data_toolbox.file_toolbox import (
 from src.ch01_rope_logic.term import BeliefName, FaceName, MomentLabel
 from src.ch05_plan_logic.plan import get_default_moment_label
 from src.ch06_belief_logic.belief_main import BeliefUnit
-from src.ch08_belief_atom_logic.atom_main import (
+from src.ch09_belief_atom_logic.atom_main import (
     BeliefAtom,
     get_from_json as beliefatom_get_from_json,
 )

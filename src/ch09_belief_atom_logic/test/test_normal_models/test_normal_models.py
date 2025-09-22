@@ -1,5 +1,5 @@
 from sqlalchemy import inspect
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -14,8 +14,8 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     normal_table_name_str,
     sqlite_datatype_str,
 )
-from src.ch08_belief_atom_logic.atom_config import get_normalized_belief_table_build
-from src.ch08_belief_atom_logic.normal_models import (
+from src.ch09_belief_atom_logic.atom_config import get_normalized_belief_table_build
+from src.ch09_belief_atom_logic.normal_models import (
     AwardUnitTable,
     BeliefTable,
     CaseTable,

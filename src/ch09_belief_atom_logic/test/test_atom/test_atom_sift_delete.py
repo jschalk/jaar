@@ -2,7 +2,7 @@ from src.ch01_rope_logic.rope import to_rope
 from src.ch03_group_logic.group import awardunit_shop
 from src.ch04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,
     awardee_title_str,
     belief_plan_awardunit_str,
@@ -24,7 +24,7 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     reason_state_str,
     voice_name_str,
 )
-from src.ch08_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
+from src.ch09_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_DELETE_belief_voiceunit():

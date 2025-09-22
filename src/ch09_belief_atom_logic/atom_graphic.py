@@ -1,7 +1,7 @@
 from dataclasses import dataclass
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
-from src.ch08_belief_atom_logic.atom_config import get_normal_table_name
-from src.ch08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
+from src.ch09_belief_atom_logic.atom_config import get_normal_table_name
+from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 
 
 @dataclass

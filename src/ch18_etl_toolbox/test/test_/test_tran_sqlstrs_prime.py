@@ -8,7 +8,7 @@ from src.ch00_data_toolbox.db_toolbox import (
     get_create_table_sqlstr,
     get_table_columns,
 )
-from src.ch08_belief_atom_logic.atom_config import (
+from src.ch09_belief_atom_logic.atom_config import (
     get_belief_dimens,
     get_delete_key_name,
 )

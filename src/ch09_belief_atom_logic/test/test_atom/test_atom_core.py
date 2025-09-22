@@ -1,5 +1,5 @@
 from src.ch03_group_logic.voice import voiceunit_shop
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,
     INSERT_str,
     belief_voice_membership_str,
@@ -10,7 +10,7 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     voice_debt_points_str,
     voice_name_str,
 )
-from src.ch08_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
+from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 
 
 def test_BeliefAtom_Exists():

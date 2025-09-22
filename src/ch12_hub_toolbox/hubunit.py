@@ -32,7 +32,7 @@ from src.ch06_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,
 )
-from src.ch08_belief_atom_logic.atom_main import (
+from src.ch09_belief_atom_logic.atom_main import (
     BeliefAtom,
     get_from_json as beliefatom_get_from_json,
     modify_belief_with_beliefatom,

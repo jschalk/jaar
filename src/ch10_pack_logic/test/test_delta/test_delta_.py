@@ -4,7 +4,7 @@ from src.ch01_rope_logic.rope import create_rope, to_rope
 from src.ch03_group_logic.voice import voiceunit_shop
 from src.ch05_plan_logic.plan import get_default_moment_label as root_label
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch08_belief_atom_logic.atom_main import beliefatom_shop
+from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_terms import (
     DELETE_str,
     INSERT_str,

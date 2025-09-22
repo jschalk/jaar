@@ -2,7 +2,7 @@ from pytest import raises as pytest_raises
 from sqlite3 import connect as sqlite3_connect
 from src.ch00_data_toolbox.db_toolbox import get_rowdata
 from src.ch01_rope_logic.rope import create_rope
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     INSERT_str,
     UPDATE_str,
     atom_hx_str,
@@ -12,7 +12,7 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     fact_lower_str,
     plan_rope_str,
 )
-from src.ch08_belief_atom_logic.atom_main import (
+from src.ch09_belief_atom_logic.atom_main import (
     beliefatom_shop,
     get_beliefatom_from_rowdata,
 )

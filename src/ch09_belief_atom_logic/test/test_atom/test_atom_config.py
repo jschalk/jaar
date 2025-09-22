@@ -1,6 +1,6 @@
 from src.ch00_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch06_belief_logic.belief_config import get_belief_config_dict
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,
     INSERT_str,
     LabelTerm_str,
@@ -62,7 +62,7 @@ from src.ch08_belief_atom_logic._ref.ch08_terms import (
     voice_name_str,
     voice_pool_str,
 )
-from src.ch08_belief_atom_logic.atom_config import (
+from src.ch09_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_all_belief_dimen_keys,
     get_allowed_class_types,

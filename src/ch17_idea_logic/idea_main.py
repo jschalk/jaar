@@ -10,7 +10,7 @@ from src.ch00_data_toolbox.dict_toolbox import (
 from src.ch01_rope_logic.term import BeliefName, MomentLabel
 from src.ch06_belief_logic.belief_main import BeliefUnit
 from src.ch07_timeline_logic.timeline_main import timelineunit_shop
-from src.ch08_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop
+from src.ch09_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop
 from src.ch10_pack_logic.delta import (
     BeliefDelta,
     beliefdelta_shop,

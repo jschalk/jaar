@@ -1,4 +1,4 @@
-from src.ch08_belief_atom_logic._ref.ch08_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_terms import (
     DELETE_str,
     atom_hx_str,
     atom_str,
