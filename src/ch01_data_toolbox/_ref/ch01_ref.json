@@ -1,4 +1,5 @@
 {
+    "chapter_number": 1,
     "module_blurb": "Create some standard tools files files, python dictionaries, databases, and other basic programming objects.",
     "module_description": "ch01_data_toolbox"
 }

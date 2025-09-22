@@ -1,4 +1,5 @@
 {
+    "chapter_number": 5,
     "module_blurb": "Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True",
     "module_description": "ch05_reason_logic"
 }

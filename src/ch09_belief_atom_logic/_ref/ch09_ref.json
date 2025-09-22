@@ -1,4 +1,5 @@
 {
+    "chapter_number": 9,
     "module_blurb": "Defines the structure and behavior of beliefunit atoms, which are single units of beliefunit and plans used in a beliefunit.",
     "module_description": "ch09_belief_atom_logic"
 }

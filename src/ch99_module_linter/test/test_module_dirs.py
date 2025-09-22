@@ -186,9 +186,20 @@ def test_Modules_ModuleReferenceFolder_ref_ExistsForEveryModule():
         ref_keys = set(module_ref_dict.keys())
         module_description_str = "module_description"
         module_blurb_str = "module_blurb"
-        assert ref_keys == {module_blurb_str, module_description_str}
+        chapter_number_str = "chapter_number"
+        keys_assertion_fail_str = f"ref json for {module_desc} missing required key(s)"
+        expected_ref_keys = {
+            module_blurb_str,
+            module_description_str,
+            chapter_number_str,
+        }
+        assert ref_keys == expected_ref_keys, keys_assertion_fail_str
         assert module_ref_dict.get(module_description_str) == module_desc
         assert module_ref_dict.get(module_blurb_str)
+        module_desc_ch_int = int(get_module_desc_str_number(module_desc))
+        module_ref_ch_int = module_ref_dict.get(chapter_number_str)
+        assertion_fail_str = f"{module_desc} expecting key {chapter_number_str} with value {module_desc_ch_int}"
+        assert module_ref_ch_int == module_desc_ch_int, assertion_fail_str
 
 
 def test_Modules_DoNotHaveEmptyDirectories():
