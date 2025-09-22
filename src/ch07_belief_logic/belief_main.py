@@ -47,14 +47,14 @@ from src.ch02_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.ch03_group_logic.group import (
+from src.ch04_group_logic.group import (
     AwardUnit,
     GroupUnit,
     groupunit_shop,
     membership_shop,
 )
-from src.ch03_group_logic.labor import LaborUnit
-from src.ch03_group_logic.voice import (
+from src.ch04_group_logic.labor import LaborUnit
+from src.ch04_group_logic.voice import (
     VoiceUnit,
     voiceunit_shop,
     voiceunits_get_from_dict,

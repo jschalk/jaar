@@ -20,7 +20,7 @@ def test_get_module_blurbs_md_ReturnsObj():
 
     # THEN
     assert module_blurbs_md
-    assert module_blurbs_md.find("ch03") > 0
+    assert module_blurbs_md.find("ch04") > 0
 
 
 def test_save_module_blurbs_md_CreatesFile(env_dir_setup_cleanup):

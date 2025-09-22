@@ -1,7 +1,7 @@
 import dataclasses
 from src.ch00_data_toolbox.dict_toolbox import make_dict_safe_for_json
-from src.ch03_group_logic.group import AwardHeir, AwardLine, AwardUnit
-from src.ch03_group_logic.labor import PartyHeir, PartyUnit
+from src.ch04_group_logic.group import AwardHeir, AwardLine, AwardUnit
+from src.ch04_group_logic.labor import PartyHeir, PartyUnit
 from src.ch05_reason_logic.reason import (
     CaseUnit,
     FactHeir,

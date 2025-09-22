@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.ch00_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.ch01_rope_logic.rope import default_knot_if_None, to_rope
-from src.ch03_group_logic.group import awardunit_shop
-from src.ch03_group_logic.labor import laborunit_shop, partyunit_shop
+from src.ch04_group_logic.group import awardunit_shop
+from src.ch04_group_logic.labor import laborunit_shop, partyunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop

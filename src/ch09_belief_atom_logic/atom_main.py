@@ -10,8 +10,8 @@ from src.ch00_data_toolbox.dict_toolbox import (
 )
 from src.ch01_rope_logic.rope import create_rope, get_parent_rope, get_tail_label
 from src.ch01_rope_logic.term import LabelTerm, RopePointer, TitleTerm, VoiceName
-from src.ch03_group_logic.group import awardunit_shop
-from src.ch03_group_logic.voice import voiceunit_shop
+from src.ch04_group_logic.group import awardunit_shop
+from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit

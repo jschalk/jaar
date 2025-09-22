@@ -9,8 +9,8 @@ from src.ch00_data_toolbox.dict_toolbox import (
     set_in_nested_dict,
 )
 from src.ch01_rope_logic.term import RopePointer, TitleTerm
-from src.ch03_group_logic.group import MemberShip
-from src.ch03_group_logic.voice import MemberShip, VoiceName, VoiceUnit
+from src.ch04_group_logic.group import MemberShip
+from src.ch04_group_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch05_reason_logic.reason import FactUnit, ReasonUnit
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop

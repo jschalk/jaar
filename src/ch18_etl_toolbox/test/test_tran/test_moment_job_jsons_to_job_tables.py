@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.ch00_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch00_data_toolbox.file_toolbox import save_file
-from src.ch03_group_logic.group import awardunit_shop
-from src.ch03_group_logic.labor import laborunit_shop
+from src.ch04_group_logic.group import awardunit_shop
+from src.ch04_group_logic.labor import laborunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_job_path, create_moment_json_path

@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from pytest import raises as pytest_raises
-from src.ch03_group_logic.voice import voiceunit_shop
+from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 
 

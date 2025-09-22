@@ -1,5 +1,5 @@
 from src.ch00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
-from src.ch03_group_logic._ref.ch03_terms import (
+from src.ch04_group_logic._ref.ch04_terms import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -13,7 +13,7 @@ from src.ch03_group_logic._ref.ch03_terms import (
     group_title_str,
     voice_name_str,
 )
-from src.ch03_group_logic.group import (
+from src.ch04_group_logic.group import (
     AwardHeir,
     AwardLine,
     AwardUnit,

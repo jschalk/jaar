@@ -12,7 +12,7 @@ from src.ch01_rope_logic.rope import (
 from src.ch01_rope_logic.term import VoiceName
 from src.ch02_finance_logic.allot import allot_scale
 from src.ch02_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
-from src.ch03_group_logic.group import (
+from src.ch04_group_logic.group import (
     GroupTitle,
     MemberShip,
     membership_shop,

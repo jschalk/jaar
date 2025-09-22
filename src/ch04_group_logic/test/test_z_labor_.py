@@ -1,11 +1,11 @@
 from src.ch01_rope_logic.term import GroupTitle
-from src.ch03_group_logic._ref.ch03_terms import (
+from src.ch04_group_logic._ref.ch04_terms import (
     parent_solo_str,
     party_title_str,
     solo_str,
 )
-from src.ch03_group_logic.group import groupunit_shop, membership_shop
-from src.ch03_group_logic.labor import (
+from src.ch04_group_logic.group import groupunit_shop, membership_shop
+from src.ch04_group_logic.labor import (
     LaborHeir,
     LaborUnit,
     PartyHeir,

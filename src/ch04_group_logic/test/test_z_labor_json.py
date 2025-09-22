@@ -1,6 +1,6 @@
 from src.ch01_rope_logic.term import GroupTitle
-from src.ch03_group_logic._ref.ch03_terms import party_title_str, solo_str
-from src.ch03_group_logic.labor import (
+from src.ch04_group_logic._ref.ch04_terms import party_title_str, solo_str
+from src.ch04_group_logic.labor import (
     laborunit_get_from_dict,
     laborunit_shop,
     partyunit_get_from_dict,

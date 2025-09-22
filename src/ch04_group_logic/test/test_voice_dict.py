@@ -1,6 +1,6 @@
 from src.ch00_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
-from src.ch03_group_logic.group import membership_shop
-from src.ch03_group_logic.voice import (
+from src.ch04_group_logic.group import membership_shop
+from src.ch04_group_logic.voice import (
     voiceunit_get_from_dict,
     voiceunit_shop,
     voiceunits_get_from_dict,
