@@ -5,7 +5,7 @@ from src.ch02_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
 )
-from src.ch07_timeline_logic.timeline_main import get_default_timeline_config_dict
+from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic._ref.ch15_terms import (
     brokerunits_str,

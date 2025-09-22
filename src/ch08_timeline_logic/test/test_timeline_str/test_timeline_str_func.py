@@ -5,17 +5,17 @@ from src.ch01_rope_logic.rope import (
 )
 from src.ch04_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch07_timeline_logic._ref.ch07_terms import (
+from src.ch08_timeline_logic._ref.ch08_terms import (
     creg_str,
     time_str,
     week_str,
     yr1_jan1_offset_str,
 )
-from src.ch07_timeline_logic.reason_str_func import (
+from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.ch07_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
     creg_hour_int_label,
@@ -36,7 +36,7 @@ from src.ch07_timeline_logic.test._util.calendar_examples import (
     get_tue,
     get_wed,
 )
-from src.ch07_timeline_logic.timeline_main import (
+from src.ch08_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_year_rope,
 )

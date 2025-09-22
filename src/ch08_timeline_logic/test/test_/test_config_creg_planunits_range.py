@@ -1,5 +1,5 @@
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch07_timeline_logic._ref.ch07_terms import (
+from src.ch08_timeline_logic._ref.ch08_terms import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -12,7 +12,7 @@ from src.ch07_timeline_logic._ref.ch07_terms import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.ch07_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     get_cregtime_str,
     get_fri,

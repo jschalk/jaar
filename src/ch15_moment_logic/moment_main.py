@@ -29,7 +29,7 @@ from src.ch02_finance_logic.finance_config import (
     filter_penny,
 )
 from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch07_timeline_logic.timeline_main import (
+from src.ch08_timeline_logic.timeline_main import (
     TimeLinePoint,
     TimeLineUnit,
     add_newtimeline_planunit,

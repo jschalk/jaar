@@ -10,7 +10,7 @@ What does each one do?
 - **ch04_reason_logic**: Describes what a reason and a fact is; if the reasons match the facts, the Reason.status = True
 - **ch05_plan_logic**: Defines PlanUnits. Plans are complicated. A plan can have sub plans, define itself as a task, define Awardees, assigned Labor, required Reasons, etc.
 - **ch06_belief_logic**: A belief is a beliefunit, made of accounts and plans. All plans are connected to the central plan, which is given all the funds in a beliefunit.
-- **ch07_timeline_logic**: Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.
+- **ch08_timeline_logic**: Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.
 - **ch09_belief_atom_logic**: Defines the structure and behavior of beliefunit atoms, which are single units of beliefunit and plans used in a beliefunit.
 - **ch10_pack_logic**: Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.
 - **ch11_bud_logic**: Defines a budget and the tools necessary to create one. Budges are created when a moment system decides to empower a beliefunit with funds that must be distributed

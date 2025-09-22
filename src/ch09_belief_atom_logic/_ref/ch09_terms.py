@@ -1,4 +1,4 @@
-from src.ch07_timeline_logic._ref.ch07_terms import *
+from src.ch08_timeline_logic._ref.ch08_terms import *
 
 
 def DELETE_str() -> str:

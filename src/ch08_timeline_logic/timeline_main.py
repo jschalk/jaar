@@ -31,7 +31,7 @@ class C400Constants:
 
 
 def get_c400_constants() -> C400Constants:
-    c400_constants_path = create_path("src/ch07_timeline_logic", "c400_constants.json")
+    c400_constants_path = create_path("src/ch08_timeline_logic", "c400_constants.json")
     c400_dict = open_json(c400_constants_path)
     return C400Constants(
         day_length=c400_dict.get("day_length"),
@@ -582,7 +582,7 @@ def timeline_config_path() -> str:
     "Returns path: a07_timeline_logic/default_timeline_config.json"
 
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch07_timeline_logic")
+    module_dir = create_path(src_dir, "ch08_timeline_logic")
     return create_path(module_dir, "default_timeline_config.json")
 
 

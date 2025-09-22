@@ -1,6 +1,6 @@
 from src.ch01_rope_logic.rope import create_rope
 from src.ch06_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch07_timeline_logic.timeline_main import (
+from src.ch08_timeline_logic.timeline_main import (
     BeliefTimelinePoint,
     add_newtimeline_planunit,
     belieftimelinepoint_shop,

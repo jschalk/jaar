@@ -1,9 +1,9 @@
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch07_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_five_config,
 )
-from src.ch07_timeline_logic.timeline_main import (
+from src.ch08_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )

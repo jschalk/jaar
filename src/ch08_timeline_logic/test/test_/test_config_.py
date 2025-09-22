@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
 from src.ch01_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch07_timeline_logic._ref.ch07_terms import (
+from src.ch08_timeline_logic._ref.ch08_terms import (
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -21,13 +21,13 @@ from src.ch07_timeline_logic._ref.ch07_terms import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.ch07_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.calendar_examples import (
     five_str,
     get_creg_config,
     get_example_timeline_config,
     get_squirt_config,
 )
-from src.ch07_timeline_logic.timeline_main import (
+from src.ch08_timeline_logic.timeline_main import (
     C400Constants,
     TimeLineLabel,
     TimeLineUnit,

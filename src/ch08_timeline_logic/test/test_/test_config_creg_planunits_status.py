@@ -1,14 +1,14 @@
 from datetime import datetime
 from src.ch05_plan_logic.plan import planunit_shop
 from src.ch06_belief_logic.belief_main import beliefunit_shop
-from src.ch07_timeline_logic._ref.ch07_terms import (
+from src.ch08_timeline_logic._ref.ch08_terms import (
     day_str,
     days_str,
     time_str,
     week_str,
     weeks_str,
 )
-from src.ch07_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     creg_weekday_planunits,
     get_creg_min_from_dt,
@@ -16,7 +16,7 @@ from src.ch07_timeline_logic.test._util.calendar_examples import (
     get_thu,
     get_wed,
 )
-from src.ch07_timeline_logic.timeline_main import get_year_rope
+from src.ch08_timeline_logic.timeline_main import get_year_rope
 
 
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():

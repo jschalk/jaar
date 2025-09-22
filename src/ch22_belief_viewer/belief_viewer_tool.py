@@ -11,7 +11,7 @@ from src.ch04_reason_logic.reason import (
 )
 from src.ch05_plan_logic.plan import PlanUnit
 from src.ch06_belief_logic.belief_main import BeliefUnit
-from src.ch07_timeline_logic.reason_str_func import (
+from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
