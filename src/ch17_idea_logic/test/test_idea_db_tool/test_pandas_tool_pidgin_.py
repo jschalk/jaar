@@ -101,6 +101,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario0_VoiceNam
 
 
 def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceName_5rowsMultipleColumns():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -145,6 +146,7 @@ def test_translate_single_column_dataframe_SetsParameterAttrs_Scenario1_VoiceNam
 
 
 def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     xio_otx = "Xio"
     sue_otx = "Sue"
@@ -182,6 +184,7 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario0_VoiceName(
 
 
 def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName():
+    # sourcery skip: extract-duplicate-method
     # ESTABLISH
     yao_str = "Yao"
     xio_otx = "Xio"

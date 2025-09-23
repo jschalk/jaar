@@ -197,7 +197,6 @@ def find_set_otx_inx_args(args: set) -> set:
     """Receives set of args, returns a set with all "Pidginable" args replaced with "_otx" and "_inx" """
     all_pidginable = get_pidginable_args()
     all_pidginable.update(get_all_belief_dimen_delete_keys())
-    all_pidginable.intersection_update(args)
     transformed_args = set()
     for arg in args:
         if arg in all_pidginable:
