@@ -304,9 +304,9 @@ def test_BeliefUnit_cashout_SetsData_beliefunit_v001():
     yr_mon_str = "yr_month"
     yr_mon_rope = yao_beliefunit.make_l1_rope(yr_mon_str)
     yao_beliefunit.add_fact(fact_context=yr_mon_rope, fact_state=yr_mon_rope)
-    inter_str = "Interweb"
-    inter_rope = yao_beliefunit.make_l1_rope(inter_str)
-    yao_beliefunit.add_fact(fact_context=inter_rope, fact_state=inter_rope)
+    websites_str = "Websites"
+    web_rope = yao_beliefunit.make_l1_rope(websites_str)
+    yao_beliefunit.add_fact(fact_context=web_rope, fact_state=web_rope)
     assert yao_beliefunit is not None
     # print(f"{yao_beliefunit.belief_name=}")
     # print(f"{len(yao_beliefunit.planroot.kids)=}")
@@ -387,9 +387,9 @@ def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     aaron_str = "Aaron Donald objects effected by him"
     aaron_rope = yao_beliefunit.make_l1_rope(aaron_str)
     yao_beliefunit.add_fact(fact_context=aaron_rope, fact_state=aaron_rope)
-    inter_str = "Interweb"
-    inter_rope = yao_beliefunit.make_l1_rope(inter_str)
-    yao_beliefunit.add_fact(fact_context=inter_rope, fact_state=inter_rope)
+    websites_str = "Websites"
+    web_rope = yao_beliefunit.make_l1_rope(websites_str)
+    yao_beliefunit.add_fact(fact_context=web_rope, fact_state=web_rope)
     yr_mon_str = "yr_month"
     yr_mon_rope = yao_beliefunit.make_l1_rope(yr_mon_str)
     yao_beliefunit.add_fact(
@@ -618,9 +618,9 @@ def test_BeliefUnit_cashout_EveryTwoMonthReturnsObj_beliefunit_v001():
     aaron_str = "Aaron Donald objects effected by him"
     aaron_rope = yao_beliefunit.make_l1_rope(aaron_str)
     yao_beliefunit.add_fact(fact_context=aaron_rope, fact_state=aaron_rope)
-    interweb_str = "Interweb"
-    interweb_rope = yao_beliefunit.make_l1_rope(interweb_str)
-    yao_beliefunit.add_fact(fact_context=interweb_rope, fact_state=interweb_rope)
+    websites_str = "Websites"
+    websites_rope = yao_beliefunit.make_l1_rope(websites_str)
+    yao_beliefunit.add_fact(fact_context=websites_rope, fact_state=websites_rope)
     sem_jours_str = "sem_jours"
     sem_jours_rope = yao_beliefunit.make_l1_rope(sem_jours_str)
     yao_beliefunit.add_fact(fact_context=sem_jours_rope, fact_state=sem_jours_rope)

@@ -217,7 +217,7 @@ class PlanUnit:
     knot : str Identifier or label for bridging plans.
     optional:
     star : int weight that is arbitrary used by parent plan to calculated relative importance.
-    kids : dict[RopeTerm], Internal mapping of child plans by their LabelTerm
+    kids : dict[RopeTerm], mapping of child plans by their LabelTerm
     uid : int Unique identifier, forgot how I use this.
     awardunits : dict[GroupTitle, AwardUnit] that describe who funds and who is funded
     reasonunits : dict[RopeTerm, ReasonUnit] that stores all reasons
@@ -234,7 +234,7 @@ class PlanUnit:
     stop_want : bool
     task : bool that describes if the plan is a task.
     problem_bool : bool that describes if the plan is a problem.
-    is_expanded : bool Internal flag for whether the plan is expanded.
+    is_expanded : bool flag for whether the plan is expanded.
 
     active : bool that describes if the plan task is active, calculated by MomentUnit.
     active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured

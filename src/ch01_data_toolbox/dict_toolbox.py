@@ -426,7 +426,7 @@ def mark_keys(
         marking_key (str): The key to detect in nested dictionaries.
         mark_text (str or None): Optional override for the mark text. Defaults to value of `marking_key`.
         max_depth (int or None): How deep to go. None means unlimited.
-        _depth (int): Used internally for recursion tracking.
+        _depth (int): Used for recursion tracking.
 
     Returns:
         dict: The transformed dictionary.

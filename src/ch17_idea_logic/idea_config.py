@@ -1,5 +1,5 @@
 from os import getcwd as os_getcwd
-from src.ch01_data_toolbox.db_toolbox import get_sorted_intersection_list
+from src.ch01_data_toolbox.db_toolbox import get_sorted_cols_only_list
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename, open_json
 
 
@@ -225,7 +225,7 @@ def get_default_sorted_list(
 ) -> list[str]:
     if sorting_columns is None:
         sorting_columns = get_idea_elements_sort_order()
-    return get_sorted_intersection_list(existing_columns, sorting_columns)
+    return get_sorted_cols_only_list(existing_columns, sorting_columns)
 
 
 def get_idea_sqlite_types() -> dict[str, str]:

@@ -169,15 +169,15 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitHasCorrectAttributes_beliefunit_v0
     mood_rope = yao_belief.make_l1_rope(mood_str)
     aaron_str = "Aaron Donald objects effected by him"
     aaron_rope = yao_belief.make_l1_rope(aaron_str)
-    # interweb_str = "Interweb"
-    # interweb_rope = yao_belief.make_l1_rope(interweb_str)
+    # websites_str = "Websites"
+    # websites_rope = yao_belief.make_l1_rope(websites_str)
     yr_month_str = "yr_month"
     yr_month_rope = yao_belief.make_l1_rope(yr_month_str)
     yao_belief.add_fact(fact_context=month_wk_rope, fact_state=month_wk_rope)
     yao_belief.add_fact(fact_context=nations_rope, fact_state=nations_rope)
     yao_belief.add_fact(fact_context=mood_rope, fact_state=mood_rope)
     yao_belief.add_fact(fact_context=aaron_rope, fact_state=aaron_rope)
-    # yao_belief.add_fact(fact_context=interweb_rope, fact_state=interweb_rope)
+    # yao_belief.add_fact(fact_context=websites_rope, fact_state=websites_rope)
     yao_belief.add_fact(fact_context=yr_month_rope, fact_state=yr_month_rope)
     # season_str = "Seasons"
     # season_rope = yao_belief.make_l1_rope(season_str)

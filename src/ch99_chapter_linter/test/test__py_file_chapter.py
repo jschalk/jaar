@@ -14,7 +14,7 @@ from src.ch25_utils import helper
 from src.ch25_utils import helper as h
 from src.ch23.tools import alpha, beta as b
 def inside_func():
-    import src.ch30_internal
+    import src.ch30_bikehouse
     from src.ch31_more import thing
 # relative import that should NOT match:
 from .ch32_local import nope
@@ -30,7 +30,7 @@ def test_threshold_22(sample_file):
     assert "from src.ch25_utils import helper" in result
     assert "from src.ch25_utils import helper as h" in result
     assert "from src.ch23.tools import alpha, beta as b" in result
-    assert "import src.ch30_internal" in result
+    assert "import src.ch30_bikehouse" in result
     assert "from src.ch31_more import thing" in result
     # ensure lower/equal series are excluded
     assert all("ch21" not in r and "ch22" not in r for r in result)
@@ -38,7 +38,7 @@ def test_threshold_22(sample_file):
 
 def test_high_threshold_only_top_matches(sample_file):
     result = find_incorrect_imports(sample_file, 29)
-    assert "import src.ch30_internal" in result
+    assert "import src.ch30_bikehouse" in result
     assert "from src.ch31_more import thing" in result
     assert all("ch23" not in r and "ch25" not in r for r in result)
 

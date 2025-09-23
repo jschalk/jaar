@@ -183,8 +183,8 @@ def test_pidginable_class_types_ReturnsObj():
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
     all_atom_class_types.add(LabelTerm_str())
-    inter_x = set(all_atom_class_types).intersection(x_pidginable_class_types)
-    assert inter_x == x_pidginable_class_types
+    x_cL_tyep = set(all_atom_class_types).intersection(x_pidginable_class_types)
+    assert x_cL_tyep == x_pidginable_class_types
 
 
 def test_get_pidginable_args_ReturnsObj():

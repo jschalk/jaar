@@ -45,7 +45,7 @@ def check_connection(conn: sqlite3_Connection) -> bool:
         return False
 
 
-def get_sorted_intersection_list(
+def get_sorted_cols_only_list(
     existing_columns: set[str], sorting_columns: list[str]
 ) -> list[str]:
     sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
@@ -460,7 +460,7 @@ def create_table2table_agg_insert_query(
         focus_cols = set(get_table_columns(conn_or_cursor, dst_table))
     focus_cols_set = set(focus_cols)
     dst_columns = get_table_columns(conn_or_cursor, dst_table)
-    focus_col_list = get_sorted_intersection_list(focus_cols, dst_columns)
+    focus_col_list = get_sorted_cols_only_list(focus_cols, dst_columns)
     dst_columns = [dst_col for dst_col in dst_columns if dst_col not in exclude_cols]
     dst_columns_str = ", ".join(list(dst_columns))
     select_columns_str = None
@@ -494,7 +494,7 @@ def create_select_query(
     if not select_columns:
         select_columns = table_columns
     else:
-        select_columns = get_sorted_intersection_list(select_columns, table_columns)
+        select_columns = get_sorted_cols_only_list(select_columns, table_columns)
     select_columns_str = ", ".join(list(select_columns))
     where_str = ""
     for where_column, where_value in where_dict.items():
@@ -516,7 +516,7 @@ def create_insert_into_clause_str(
     columns_set: set[str],
 ) -> str:
     table_columns = get_table_columns(cursor, x_tablename)
-    columns_list = get_sorted_intersection_list(columns_set, table_columns)
+    columns_list = get_sorted_cols_only_list(columns_set, table_columns)
     into_columns_str = ", ".join(columns_list)
     return f"INSERT INTO {x_tablename} ({into_columns_str})"
 
@@ -529,7 +529,7 @@ def create_insert_query(
 ) -> str:
     columns_set = set(values_dict.keys())
     table_columns = get_table_columns(cursor, x_tablename)
-    columns_list = get_sorted_intersection_list(columns_set, table_columns)
+    columns_list = get_sorted_cols_only_list(columns_set, table_columns)
     values_str = ""
     for x_column in columns_list:
         column_type = get_column_data_type(cursor, x_tablename, x_column)

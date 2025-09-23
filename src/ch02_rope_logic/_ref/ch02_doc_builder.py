@@ -45,16 +45,16 @@ def get_ropeterm_explanation_md() -> str:
     fb_no_love_rope = create_rope(football_str, "Places that do not love football")
     fb_no_love_france_rope = create_rope(fb_no_love_rope, france_str)
     fb_no_love_berlin_rope = create_rope(fb_no_love_rope, berlin_str)
-    interesting_str = "Interesting things"
-    not_interesting_str = "Non-interesting things"
+    compelling_str = "Compelling things"
+    not_compelling_str = "Non-compelling things"
     i_formation_str = "i formation"
     metaethics_str = "metaethics philosophy"
     baking_str = "baking"
-    fb_interesting_rope = create_rope(football_str, interesting_str)
-    fb_not_interesting_rope = create_rope(football_str, not_interesting_str)
-    fb_i_formation_rope = create_rope(fb_interesting_rope, i_formation_str)
-    fb_metaethics_rope = create_rope(fb_not_interesting_rope, metaethics_str)
-    fb_baking_rope = create_rope(fb_not_interesting_rope, baking_str)
+    fb_compelling_rope = create_rope(football_str, compelling_str)
+    fb_not_compelling_rope = create_rope(football_str, not_compelling_str)
+    fb_i_formation_rope = create_rope(fb_compelling_rope, i_formation_str)
+    fb_metaethics_rope = create_rope(fb_not_compelling_rope, metaethics_str)
+    fb_baking_rope = create_rope(fb_not_compelling_rope, baking_str)
     fb_like_things_rope = create_rope(football_str, "Things I like to do")
     fb_recruit_rope = create_rope(
         fb_like_things_rope, "tell players to play at my favorite team"

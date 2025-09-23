@@ -367,7 +367,7 @@ def get_moment_structures0_fig(graphics_bool: bool = False) -> plotly_Figure:
             text=[
                 "momentity Structure",
                 "Flow of guting to Doing",
-                "We all have an interior life where we gut. And then there is what we do.",
+                "We all have an life where we clam chowder gut. And then there is what we do.",
             ],
             mode="text",
         )

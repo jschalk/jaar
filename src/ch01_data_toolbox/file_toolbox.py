@@ -277,7 +277,7 @@ def is_path_probably_creatable(path: str = None) -> bool:
             pass
         return True
     # While the exact type of exception raised by the above function depends on
-    # the currrent version of the Python interpreter, all such types subclass the
+    # the currrent version of the Python, all such types subclass the
     # follow ing exception superclass.
     except EnvironmentError:
         return False

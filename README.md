@@ -27,7 +27,7 @@ For jaar all data must have *event_int*, *face_name*, *moment_label*. These are 
   
 ## 0.1 Short introduction to jaar excel sheets
 
-`jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is interpreted and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
+`jaar` is a python library for listening to the needs of my neighbors and in turn letting them know what I need. Needs can be expressed in Excel sheets that range in complexity from a simple five column single row (example below) to 10+ columns that include configuration options that are usually set to defaults. Each row is translated and used to build the "clarity" data set. Even sheet with a single row like the example 0.1.0 below can be processed by jaar. 
 
 # Input Example Excel file 0.1.0: fizz0.xlsx with sheet "br00000_buzz" 
 | event_int | face_name | moment_label | belief_name | voice_name | tran_time | amount |
@@ -80,7 +80,7 @@ Future enhancement: `jaar` can be installed using `pip`
 
     pip install jaar
 
-If you have installed `jaar` before, and you should ensure `pip` downloads the latest version (rather than using its internal cache) you can use the follow ing commands:
+If you have installed `jaar` before, and you should ensure `pip` downloads the latest version (rather than using cache) you can use the follow ing commands:
 
     pip uninstall jaar
     pip install --no-cache jaar
