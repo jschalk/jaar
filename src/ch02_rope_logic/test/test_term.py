@@ -190,6 +190,7 @@ def test_FaceName_Exists():
     assert not FaceName(f"cookie{default_knot_if_None()}").is_name()
 
 
+# Move to Bud chapter
 def test_EventInt_Exists():
     # ESTABLISH / WHEN / THEN
     assert EventInt() == 0

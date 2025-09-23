@@ -3,7 +3,7 @@ from typing import Literal
 
 
 def moment_kpi001_voice_nets_str() -> Literal["moment_kpi001_voice_nets"]:
-    """Table name for KPI001: The net funds per account per moment."""
+    """Table name for KPI001: The net funds per voice per moment."""
     return "moment_kpi001_voice_nets"
 
 

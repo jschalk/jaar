@@ -1,5 +1,6 @@
 {
+    "chapter_content": "WorldUnits create and manage MomentUnits",
     "chapter_number": 20,
-    "module_blurb": "WorldUnits create and manage MomentUnits",
+    "module_blurb": "Defines WorldUnits that admin MomentUnits input data and outcomes",
     "module_description": "ch20_world_logic"
 }

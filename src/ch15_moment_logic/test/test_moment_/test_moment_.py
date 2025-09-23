@@ -24,7 +24,6 @@ from src.ch12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch15_moment_logic._ref.ch15_keywords import (
     brokerunits_str,
     fund_iota_str,
