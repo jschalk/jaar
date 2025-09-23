@@ -10,7 +10,7 @@ from src.ch16_pidgin_logic.test._util.example_pidgins import (
     get_slash_namemap,
     get_sue_pidginunit,
 )
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,

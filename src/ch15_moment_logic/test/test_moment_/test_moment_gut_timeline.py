@@ -8,7 +8,7 @@ from src.ch08_timeline_logic.timeline_main import (
     timelineunit_shop,
 )
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.ch15_moment_logic._ref.ch15_terms import time_str
+from src.ch15_moment_logic._ref.ch15_keywords import time_str
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,

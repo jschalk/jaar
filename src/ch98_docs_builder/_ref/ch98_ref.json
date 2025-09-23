@@ -1,4 +1,6 @@
 {
-    "module_blurb": "TODO replace me",
+    "chapter_content": "Defines Tools that create Jaar documentation.",
+    "chapter_number": 98,
+    "module_blurb": "Defines Tools that create Jaar documentation.",
     "module_description": "ch98_docs_builder"
 }

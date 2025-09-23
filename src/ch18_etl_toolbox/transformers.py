@@ -908,7 +908,7 @@ def etl_moment_job_jsons_to_job_tables(cursor: sqlite3_Cursor, moment_mstr_dir: 
 
 def insert_tranunit_voices_net(cursor: sqlite3_Cursor, tranbook: TranBook):
     """
-    Insert the net amounts for each account in the tranbook into the specified table.
+    Insert the net amounts for each voice in the tranbook into the specified table.
 
     :param cursor: SQLite cursor object
     :param tranbook: TranBook object containing transaction units

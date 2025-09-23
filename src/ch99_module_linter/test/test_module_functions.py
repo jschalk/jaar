@@ -81,7 +81,7 @@ def test_Modules_AllImportsAreFromLibrariesInLessThanEqual_aXX():
         for module_file_count, file_path in enumerate(module_files, start=1):
             all_file_count += 1
             incorrect_imports = find_incorrect_imports(file_path, desc_number_int)
-            if len(incorrect_imports) == 1 and file_path.find("_terms.py") > 0:
+            if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
                 incorrect_imports = []
 
             assertion_fail_str = f"File #{all_file_count} a{module_desc_str_number} file #{module_file_count} Imports: {len(incorrect_imports)} {file_path}"

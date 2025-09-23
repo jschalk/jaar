@@ -1,4 +1,6 @@
 {
-    "module_blurb": "Defines a voice, and its group memberships. Groups will be produced from memberships.",
+    "chapter_content": "Defines a voice, and its group memberships. Groups will be produced from memberships.",
+    "chapter_number": 4,
+    "module_blurb": "Defines debt and cred to Voices and Memberships to Groups.",
     "module_description": "ch04_group_logic"
 }

@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch22_belief_viewer._ref.ch22_terms import (
+from src.ch22_belief_viewer._ref.ch22_keywords import (
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,

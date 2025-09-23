@@ -1,5 +1,5 @@
 from src.ch02_rope_logic.rope import create_rope, to_rope
-from src.ch09_belief_atom_logic._ref.ch09_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     DELETE_str,
     INSERT_str,
     belief_plan_healerunit_str,

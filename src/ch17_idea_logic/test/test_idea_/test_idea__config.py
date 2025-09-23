@@ -23,7 +23,7 @@ from src.ch16_pidgin_logic.pidgin_config import (
     get_pidgin_dimens,
     get_pidginable_args,
 )
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

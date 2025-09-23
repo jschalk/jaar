@@ -7,7 +7,7 @@ from src.ch05_reason_logic.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ch06_plan_logic._ref.ch06_terms import (
+from src.ch06_plan_logic._ref.ch06_keywords import (
     active_hx_str,
     active_str,
     addin_str,

@@ -154,7 +154,7 @@ def get_all_str_functions() -> list:
     for module_desc, module_dir in get_module_descs().items():
         module_prefix = get_module_desc_prefix(module_desc)
         ref_dir = create_path(module_dir, "_ref")
-        str_util_path = create_path(ref_dir, f"{module_prefix}_terms.py")
+        str_util_path = create_path(ref_dir, f"{module_prefix}_keywords.py")
         str_functions = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:
             str_functions = get_function_names_from_file(str_util_path)
@@ -243,7 +243,7 @@ def check_str_func_test_file_has_needed_asserts(
         str_func_assert_str = f"""assert {str_function}() == "{str_function[:-4]}"""
         test_file_str = open(test_file_path).read()
         if test_file_str.find(str_func_assert_str) <= 0:
-            str_util_path = create_path(util_dir, f"a{desc_number_str}_terms.py")
+            str_util_path = create_path(util_dir, f"a{desc_number_str}_keywords.py")
             print(f"{str_util_path} {str_func_assert_str=}")
         assert test_file_str.find(str_func_assert_str) > 0
 
@@ -334,7 +334,9 @@ def get_max_module_import_str() -> str:
     max_module_int_str = str(max_module_int)
     max_module_import_str = max_module_dir.replace("\\", ".")
     max_module_import_str = max_module_import_str.replace("""src/""", """src.""")
-    max_module_import_str = f"{max_module_import_str}._ref.ch{max_module_int_str}_terms"
+    max_module_import_str = (
+        f"{max_module_import_str}._ref.ch{max_module_int_str}_keywords"
+    )
     return max_module_import_str
 
 

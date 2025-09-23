@@ -15,7 +15,7 @@ from src.ch16_pidgin_logic.test._util.example_pidgins import (
     get_suita_voice_name_otx_dt,
     get_swim_titlemap,
 )
-from src.ch17_idea_logic._ref.ch17_terms import reason_context_str, voice_name_str
+from src.ch17_idea_logic._ref.ch17_keywords import reason_context_str, voice_name_str
 from src.ch17_idea_logic.idea_db_tool import (
     _get_pidgen_idea_format_filenames,
     move_otx_csvs_to_pidgin_inx,

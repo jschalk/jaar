@@ -1,4 +1,4 @@
-from src.ch11_bud_logic._ref.ch11_terms import (
+from src.ch11_bud_logic._ref.ch11_keywords import (
     belief_name_str,
     bud_time_str,
     bud_voice_nets_str,

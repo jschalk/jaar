@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     credor_respect_str,
     group_title_str,
     voice_name_str,

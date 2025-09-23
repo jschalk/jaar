@@ -3,7 +3,7 @@ from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_terms import (
+from src.ch10_pack_logic._ref.ch10_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

@@ -1,6 +1,6 @@
 from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch02_rope_logic.rope import create_rope
-from src.ch09_belief_atom_logic._ref.ch09_terms import (
+from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     INSERT_str,
     belief_plan_factunit_str,
     crud_str,

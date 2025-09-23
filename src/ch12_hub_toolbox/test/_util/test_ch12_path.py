@@ -3,7 +3,7 @@ from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
-from src.ch12_hub_toolbox._ref.ch12_terms import (
+from src.ch12_hub_toolbox._ref.ch12_keywords import (
     belief_name_str,
     bud_time_str,
     event_int_str,

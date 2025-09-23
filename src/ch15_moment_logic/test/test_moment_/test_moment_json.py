@@ -7,7 +7,7 @@ from src.ch03_finance_logic.finance_config import (
 )
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
-from src.ch15_moment_logic._ref.ch15_terms import (
+from src.ch15_moment_logic._ref.ch15_keywords import (
     brokerunits_str,
     fund_iota_str,
     knot_str,

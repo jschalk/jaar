@@ -2,7 +2,7 @@ from src.ch08_timeline_logic.calendar_markdown import (
     CalendarMarkDown,
     MonthMarkDownRow,
     MonthMarkDownUnit,
-    center_word,
+    centered_to_len,
     get_calendarmarkdown_str,
 )
 from src.ch08_timeline_logic.test._util.calendar_examples import (
@@ -17,12 +17,12 @@ from src.ch08_timeline_logic.timeline_main import (
 )
 
 
-def test_center_word_ReturnsObj():
+def test_centered_to_len_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert center_word(10, "fay") == "   fay    "
-    assert center_word(15, "fay") == "      fay      "
-    assert center_word(6, "fay") == " fay  "
-    assert center_word(5, "faybob") == "faybo"
+    assert centered_to_len(10, "fay") == "   fay    "
+    assert centered_to_len(15, "fay") == "      fay      "
+    assert centered_to_len(6, "fay") == " fay  "
+    assert centered_to_len(5, "faybob") == "faybo"
 
 
 def test_MonthMarkDownUnit_Exists():

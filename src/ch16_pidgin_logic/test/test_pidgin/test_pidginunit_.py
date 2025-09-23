@@ -5,7 +5,7 @@ from src.ch09_belief_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.ch15_moment_logic.moment_config import get_moment_args_class_types
-from src.ch16_pidgin_logic._ref.ch16_terms import (
+from src.ch16_pidgin_logic._ref.ch16_keywords import (
     LabelTerm_str,
     NameTerm_str,
     RopePointer_str,

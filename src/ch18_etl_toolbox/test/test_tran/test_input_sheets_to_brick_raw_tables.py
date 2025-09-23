@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.db_toolbox import (
 )
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     brick_raw_str,
     cumulative_minute_str,
     error_message_str,

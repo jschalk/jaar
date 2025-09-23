@@ -1,4 +1,4 @@
-from src.ch22_belief_viewer._ref.ch22_terms import (
+from src.ch22_belief_viewer._ref.ch22_keywords import (
     active_hx_str,
     active_str,
     addin_str,

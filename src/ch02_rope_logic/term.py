@@ -25,7 +25,7 @@ class CentralLabel(LabelTerm):
 
 
 class MomentLabel(CentralLabel):  # Created to help track the object class relations
-    """An CentralLabel for a Moment Moment. Cannot contain knot"""
+    """A CentralLabel for a Moment. Cannot contain knot."""
 
     pass
 

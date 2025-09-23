@@ -8,7 +8,7 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_stance0001_path,
     create_stances_dir_path,
 )
-from src.ch20_world_logic._ref.ch20_terms import (
+from src.ch20_world_logic._ref.ch20_keywords import (
     belief_name_str,
     event_int_str,
     face_name_str,

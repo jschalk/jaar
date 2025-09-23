@@ -1,4 +1,6 @@
 {
-    "module_blurb": "Defines a budget and the tools necessary to create one. Budges are created when a moment system decides to empower a beliefunit with funds that must be distributed",
+    "chapter_content": "Defines a budget and the tools necessary to create one. Budges are created when a moment system decides to empower a beliefunit with funds that must be distributed",
+    "chapter_number": 11,
+    "module_blurb": "Defines BudgetUnit by timelinepoint, quota, celldepth. BrokerUnit: BeliefName, BudUnits",
     "module_description": "ch11_bud_logic"
 }

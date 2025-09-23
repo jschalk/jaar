@@ -1,4 +1,4 @@
-from src.ch07_belief_logic._ref.ch07_terms import (
+from src.ch07_belief_logic._ref.ch07_keywords import (
     addin_str,
     begin_str,
     close_str,

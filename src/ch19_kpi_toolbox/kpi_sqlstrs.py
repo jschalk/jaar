@@ -1,6 +1,6 @@
 def get_moment_kpi001_voice_nets_sqlstr() -> str:
     """
-    Returns the SQL string for creating the KPI001 account nets table.
+    Returns the SQL string for creating the KPI001 voice nets table.
     """
     return """
 CREATE TABLE moment_kpi001_voice_nets AS

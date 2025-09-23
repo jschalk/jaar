@@ -10,7 +10,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.ch19_kpi_toolbox._ref.ch19_terms import (
+from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     belief_name_str,
     belief_net_amount_str,
     moment_kpi001_voice_nets_str,

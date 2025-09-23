@@ -2,7 +2,7 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch12_hub_toolbox.test._util.ch12_env import get_module_temp_dir
-from src.ch15_moment_logic._ref.ch15_terms import (
+from src.ch15_moment_logic._ref.ch15_keywords import (
     belief_name_str,
     bud_time_str,
     moment_label_str,

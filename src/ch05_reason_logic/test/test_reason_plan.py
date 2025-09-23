@@ -3,7 +3,7 @@ from src.ch02_rope_logic.rope import (
     default_knot_if_None,
     get_default_central_label as root_label,
 )
-from src.ch05_reason_logic._ref.ch05_terms import (
+from src.ch05_reason_logic._ref.ch05_keywords import (
     cases_str,
     knot_str,
     reason_active_requisite_str,

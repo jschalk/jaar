@@ -2,7 +2,7 @@ from src.ch02_rope_logic.rope import create_rope
 from src.ch02_rope_logic.term import MomentLabel
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
-from src.ch13_belief_listen_logic._ref.ch13_terms import (
+from src.ch13_belief_listen_logic._ref.ch13_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

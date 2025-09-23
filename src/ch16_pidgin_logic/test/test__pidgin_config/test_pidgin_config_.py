@@ -1,6 +1,6 @@
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch16_pidgin_logic._ref.ch16_terms import (
+from src.ch16_pidgin_logic._ref.ch16_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

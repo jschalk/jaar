@@ -1485,7 +1485,7 @@
                 "star": 1.0,
                 "morph": false
             },
-            "Bob Dylan Root": {
+            "Bob Dylan": {
                 "kids": {
                     "Aint me Babe": {
                         "uid": 270,
@@ -1499,7 +1499,7 @@
                     }
                 },
                 "uid": 269,
-                "plan_label": "Bob Dylan Root",
+                "plan_label": "Bob Dylan",
                 "star": 1
             },
             "casa": {

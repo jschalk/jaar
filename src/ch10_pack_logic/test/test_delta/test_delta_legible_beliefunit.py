@@ -1,6 +1,6 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_terms import UPDATE_str, beliefunit_str
+from src.ch10_pack_logic._ref.ch10_keywords import UPDATE_str, beliefunit_str
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
 

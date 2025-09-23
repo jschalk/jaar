@@ -2,7 +2,7 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_name_str,
     event_int_str,
     face_name_str,

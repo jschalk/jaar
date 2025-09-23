@@ -10,7 +10,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     INSERT_str,
     belief_voiceunit_str,
     voice_cred_points_str,

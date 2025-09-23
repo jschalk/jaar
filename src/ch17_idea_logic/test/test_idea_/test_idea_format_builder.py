@@ -7,7 +7,7 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_idea_brick_md,
     get_idea_brick_mds,
 )
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     attributes_str,
     belief_name_str,
     belief_planunit_str,

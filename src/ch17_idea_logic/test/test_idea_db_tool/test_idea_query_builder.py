@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     amount_str,
     belief_name_str,
     event_int_str,

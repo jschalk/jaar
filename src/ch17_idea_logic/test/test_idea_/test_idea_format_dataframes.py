@@ -6,7 +6,7 @@ from src.ch08_timeline_logic.test._util.calendar_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
 )
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_name_str,
     group_cred_points_str,
     group_debt_points_str,

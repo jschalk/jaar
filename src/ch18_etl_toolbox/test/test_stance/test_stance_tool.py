@@ -16,7 +16,7 @@ from src.ch17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.ch17_idea_logic.idea_db_tool import get_sheet_names
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     event_int_str,
     face_name_str,
     inx_knot_str,

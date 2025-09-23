@@ -1,4 +1,6 @@
 {
-    "module_blurb": "Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.",
+    "chapter_content": "Manages the creation and organization of packs, which are collections of beliefunit atoms for building complex beliefunits.",
+    "chapter_number": 10,
+    "module_blurb": "Defines packs which are collections of BeliefAtoms by FaceName",
     "module_description": "ch10_pack_logic"
 }

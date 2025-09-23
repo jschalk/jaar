@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch16_pidgin_logic._ref.ch16_terms import NameTerm_str
+from src.ch16_pidgin_logic._ref.ch16_keywords import NameTerm_str
 from src.ch16_pidgin_logic.pidgin_main import inherit_pidginunit, pidginunit_shop
 from src.ch16_pidgin_logic.test._util.example_pidgins import (
     get_clean_labelmap,

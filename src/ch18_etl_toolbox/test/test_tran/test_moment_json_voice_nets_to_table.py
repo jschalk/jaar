@@ -4,7 +4,7 @@ from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch11_bud_logic.bud import tranbook_shop
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
-from src.ch18_etl_toolbox._ref.ch18_terms import (
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_net_amount_str,
     moment_voice_nets_str,
 )

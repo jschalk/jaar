@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.ch17_idea_logic._ref.ch17_terms import (
+from src.ch17_idea_logic._ref.ch17_keywords import (
     amount_str,
     belief_name_str,
     bud_time_str,

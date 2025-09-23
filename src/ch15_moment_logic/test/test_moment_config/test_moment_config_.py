@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch09_belief_atom_logic.atom_config import get_allowed_class_types
-from src.ch15_moment_logic._ref.ch15_terms import (
+from src.ch15_moment_logic._ref.ch15_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,

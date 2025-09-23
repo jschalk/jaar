@@ -7,8 +7,8 @@ from src.ch08_timeline_logic.timeline_main import (
 )
 
 
-def center_word(length, word):
-    return word[:length] if len(word) > length else word.center(length)
+def centered_to_len(length, x_str: str):
+    return x_str[:length] if len(x_str) > length else x_str.center(length)
 
 
 @dataclass
@@ -27,10 +27,10 @@ class MonthMarkDownUnit:
     def markdown_label(self) -> str:
         char_width = (self.week_length * 3) - 1
         if not self.offset_year:
-            return center_word(char_width, self.label)
+            return centered_to_len(char_width, self.label)
         add1year = self.year + 1
         x_str = f"{self.label} ({add1year})"
-        return center_word(char_width, x_str)
+        return centered_to_len(char_width, x_str)
 
     def markdown_weekdays(self) -> str:
         x_str = "".join(f"{abv} " for abv in self.weekday_2char_abvs)
@@ -167,7 +167,7 @@ class CalendarMarkDown:
         first_weekday_str = self.timelineunit.weekdays_config[first_weekday_index]
         self.set_monthmarkdownrows(first_weekday_str, year)
         markdown_str = f"""
-{center_word(self.display_md_width, f"Year {year}")}
+{centered_to_len(self.display_md_width, f"Year {year}")}
 """
         for monthmarkdownrow in self.monthmarkdownrows:
             markdown_str += monthmarkdownrow.markdown_str()

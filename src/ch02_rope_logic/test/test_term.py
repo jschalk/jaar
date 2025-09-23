@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch02_rope_logic._ref.ch02_terms import knot_str
+from src.ch02_rope_logic._ref.ch02_keywords import knot_str
 from src.ch02_rope_logic.term import (
     BeliefName,
     CentralLabel,
@@ -190,6 +190,7 @@ def test_FaceName_Exists():
     assert not FaceName(f"cookie{default_knot_if_None()}").is_name()
 
 
+# Move to Bud chapter
 def test_EventInt_Exists():
     # ESTABLISH / WHEN / THEN
     assert EventInt() == 0
@@ -204,5 +205,5 @@ def test_MomentLabel_Exists():
     x_moment = MomentLabel(empty_str)
     # THEN
     assert x_moment == empty_str
-    doc_str = f"An CentralLabel for a Moment Moment. Cannot contain {knot_str()}"
+    doc_str = f"A CentralLabel for a Moment. Cannot contain {knot_str()}."
     assert inspect_getdoc(x_moment) == doc_str

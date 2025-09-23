@@ -38,12 +38,12 @@ def test_Module_ref_util_FilesExist():
         # assert module_number == previous_module_number + 1
         # print(f"{module_desc=} {module_number=}")
         ref_dir = create_path(module_dir, "_ref")
-        str_func_path = create_path(ref_dir, f"{module_prefix}_terms.py")
+        str_func_path = create_path(ref_dir, f"{module_prefix}_keywords.py")
         assert os_path_exists(str_func_path)
         test_dir = create_path(module_dir, "test")
         util_dir = create_path(test_dir, "_util")
         assert os_path_exists(util_dir)
-        # str_func_test_path = create_path(utils_dir, f"test_{module_prefix}_terms.py")
+        # str_func_test_path = create_path(utils_dir, f"test_{module_prefix}_keywords.py")
         # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
@@ -103,7 +103,7 @@ def test_Modules_util_AssestsExistForEverytermFunction():
 
         if len(module_str_funcs) > 0:
             test_file_path = create_path(
-                util_dir, f"test_{module_desc_prefix}_terms.py"
+                util_dir, f"test_{module_desc_prefix}_keywords.py"
             )
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
@@ -182,13 +182,32 @@ def test_Modules_ModuleReferenceFolder_ref_ExistsForEveryModule():
         module_ref_path = create_path(docs_dir, f"{module_desc_prefix}_ref.json")
         assert os_path_exists(module_ref_path)
         module_ref_dict = open_json(module_ref_path)
+        print(f"{module_desc=}")
         # print(f"{module_ref_path} \t Items: {len(module_ref_dict)}")
         ref_keys = set(module_ref_dict.keys())
         module_description_str = "module_description"
         module_blurb_str = "module_blurb"
-        assert ref_keys == {module_blurb_str, module_description_str}
+        chapter_number_str = "chapter_number"
+        chapter_content_str = "chapter_content"
+        keys_assertion_fail_str = f"ref json for {module_desc} missing required key(s)"
+        expected_ref_keys = {
+            module_blurb_str,
+            module_description_str,
+            chapter_number_str,
+            chapter_content_str,
+        }
+        assert ref_keys == expected_ref_keys, keys_assertion_fail_str
         assert module_ref_dict.get(module_description_str) == module_desc
-        assert module_ref_dict.get(module_blurb_str)
+        ref_module_blurb = module_ref_dict.get(module_blurb_str)
+        assert len(ref_module_blurb) > 0
+        assert len(ref_module_blurb) <= 88  # arbitrarily choosen
+        ref_chapter_content = module_ref_dict.get(chapter_content_str)
+        content_assertion_fail_str = f"{module_desc} {chapter_content_str} is invalid"
+        assert len(ref_chapter_content) > 0, content_assertion_fail_str
+        module_desc_ch_int = int(get_module_desc_str_number(module_desc))
+        module_ref_ch_int = module_ref_dict.get(chapter_number_str)
+        assertion_fail_str = f"{module_desc} expecting key {chapter_number_str} with value {module_desc_ch_int}"
+        assert module_ref_ch_int == module_desc_ch_int, assertion_fail_str
 
 
 def test_Modules_DoNotHaveEmptyDirectories():

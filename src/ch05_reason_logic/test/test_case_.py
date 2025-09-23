@@ -3,7 +3,7 @@ from src.ch02_rope_logic.rope import (
     find_replace_rope_key_dict,
     get_default_central_label as root_label,
 )
-from src.ch05_reason_logic._ref.ch05_terms import (
+from src.ch05_reason_logic._ref.ch05_keywords import (
     chore_str,
     knot_str,
     reason_divisor_str,

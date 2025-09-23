@@ -1,4 +1,6 @@
 {
-    "module_blurb": "All the tools used by WorldUnits to create MomentUnits.",
+    "chapter_content": "All the tools used by WorldUnits to create MomentUnits.",
+    "chapter_number": 18,
+    "module_blurb": "Defines the tools that use Idea Bricks to build MomentUnits.",
     "module_description": "ch18_etl_toolbox"
 }

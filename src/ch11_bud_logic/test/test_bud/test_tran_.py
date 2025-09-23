@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch11_bud_logic._ref.ch11_terms import moment_label_str
+from src.ch11_bud_logic._ref.ch11_keywords import moment_label_str
 from src.ch11_bud_logic.bud import (
     TranBook,
     TranUnit,
