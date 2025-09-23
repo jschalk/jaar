@@ -288,7 +288,7 @@ class BeliefUnit:
     def all_plans_relevant_to_task_plan(self, rope: RopeTerm) -> bool:
         task_plan_assoc_set = set(self._get_relevant_ropes({rope}))
         all_plans_set = set(self.get_plan_tree_ordered_rope_list())
-        return all_plans_set == all_plans_set.intersection(task_plan_assoc_set)
+        return all_plans_set == all_plans_set & (task_plan_assoc_set)
 
     def get_awardunits_metrics(self) -> dict[GroupTitle, AwardUnit]:
         tree_metrics = self.get_tree_metrics()

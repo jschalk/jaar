@@ -217,11 +217,11 @@ def check_if_chapter_str_funcs_is_sorted(chapter_str_funcs: list[str]):
 def check_str_funcs_are_not_duplicated(
     chapter_str_funcs: list[str], running_str_functions_set: set[str]
 ):
-    if set(chapter_str_funcs).intersection(set(running_str_functions_set)):
+    if set(chapter_str_funcs) & (set(running_str_functions_set)):
         print(
-            f"Duplicate functions: {set(chapter_str_funcs).intersection(set(running_str_functions_set))}"
+            f"Duplicate functions: {set(chapter_str_funcs) & (set(running_str_functions_set))}"
         )
-    assert not set(chapter_str_funcs).intersection(set(running_str_functions_set))
+    assert not set(chapter_str_funcs) & (set(running_str_functions_set))
 
 
 def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str):

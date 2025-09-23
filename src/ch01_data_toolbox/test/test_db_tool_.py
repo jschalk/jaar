@@ -989,7 +989,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario0():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=["name", "age"],
+            focus_cols={"name", "age"},
             exclude_cols={hair_str},
             where_block="WHERE error_holder IS NULL",
         )
@@ -1024,7 +1024,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario1():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=["name"],
+            focus_cols={"name"},
             exclude_cols={hair_str},
             where_block="WHERE error_holder IS NULL",
         )
@@ -1062,7 +1062,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario3():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=[style_str, "name"],
+            focus_cols={style_str, "name"},
             exclude_cols={age_str},
             where_block="WHERE error_holder IS NULL",
         )
@@ -1100,7 +1100,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario4():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=[style_str, "name"],
+            focus_cols={style_str, "name"},
             exclude_cols={age_str},
             where_block="",
         )

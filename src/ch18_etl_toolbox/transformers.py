@@ -613,11 +613,12 @@ def etl_brick_valid_table_into_prime_table(
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
     valid_columns = set(get_table_columns(cursor, brick_valid_table))
-    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = lab_columns & (valid_columns)
     common_cols = get_default_sorted_list(common_cols)
     select_str = create_select_query(cursor, brick_valid_table, common_cols)
     select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
-    common_cols.append("idea_number")
+    common_cols = set(common_cols)
+    common_cols.add("idea_number")
     common_cols = get_default_sorted_list(common_cols)
     x_dict = {common_col: None for common_col in common_cols}
     insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
@@ -633,11 +634,12 @@ def etl_brick_valid_table_into_old_prime_table(
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
     valid_columns = set(get_table_columns(cursor, brick_valid_table))
-    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = lab_columns & (valid_columns)
     common_cols = get_default_sorted_list(common_cols)
     select_str = create_select_query(cursor, brick_valid_table, common_cols)
     select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
     group_by_clause_str = _get_grouping_groupby_clause(common_cols)
+    # tension
     common_cols.append("idea_number")
     common_cols = get_default_sorted_list(common_cols)
     x_dict = {common_col: None for common_col in common_cols}

@@ -535,7 +535,7 @@ def create_sound_agg_insert_sqlstrs(
     if dimen.lower().startswith("belief"):
         del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
         del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
-        dimen_focus_columns = get_default_sorted_list(dimen_focus_columns)
+        dimen_focus_columns = get_default_sorted_list(set(dimen_focus_columns))
         last_element = dimen_focus_columns.pop(-1)
         dimen_focus_columns.append(f"{last_element}_ERASE")
         belief_del_sqlstr = create_table2table_agg_insert_query(

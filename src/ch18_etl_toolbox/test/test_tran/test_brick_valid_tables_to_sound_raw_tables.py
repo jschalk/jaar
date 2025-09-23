@@ -51,7 +51,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             otx_rope_str(),
             inx_rope_str(),
         ]
-        create_idea_sorted_table(cursor, br00117_valid_tablename, br00117_columns)
+        create_idea_sorted_table(cursor, br00117_valid_tablename, set(br00117_columns))
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
   {event_int_str()}
 , {face_name_str()}

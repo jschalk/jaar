@@ -231,7 +231,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
                     expected_idea_slabelable_dimens.get(idea_number).append(x_dimen)
                     idea_raw2dimen_count += 1
                     src_cols_set = set(src_columns)
-                    existing_value_col = src_cols_set.intersection(dimen_value_columns)
+                    existing_value_col = src_cols_set & (dimen_value_columns)
                     # print(
                     #     f"{x_dimen} {idea_number} checking... {dimen_key_columns=} {dimen_value_columns=} {src_cols_set=}"
                     # )

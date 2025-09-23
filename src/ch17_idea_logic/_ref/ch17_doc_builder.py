@@ -9,7 +9,7 @@ from src.ch17_idea_logic.idea_config import (
 def get_idea_brick_md(idea_brick_config) -> str:
     # Create per-idea Markdown file
     idea = idea_brick_config["idea_number"]
-    attr_names = list(idea_brick_config["attributes"].keys())
+    attr_names = set(idea_brick_config["attributes"].keys())
     dimens = list(idea_brick_config["dimens"])
     sorted_attrs = get_default_sorted_list(attr_names)
 
@@ -44,7 +44,7 @@ def get_brick_formats_md():
         data = open_json(json_path)
 
         idea = data["idea_number"]
-        attr_names = list(data["attributes"].keys())
+        attr_names = set(data["attributes"].keys())
         sorted_attrs = get_default_sorted_list(attr_names)
         manifest_line = f"- [`{idea}`](ideas/{idea}.md): " + ", ".join(sorted_attrs)
         manifest_lines.append(manifest_line)

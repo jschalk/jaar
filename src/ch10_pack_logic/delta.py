@@ -170,7 +170,7 @@ class BeliefDelta:
         self.add_beliefatom_voiceunit_updates(
             before_belief=before_belief,
             after_belief=after_belief,
-            update_voice_names=before_voice_names.intersection(after_voice_names),
+            update_voice_names=before_voice_names & (after_voice_names),
         )
 
     def add_beliefatom_voiceunit_inserts(
@@ -272,7 +272,7 @@ class BeliefDelta:
             before_group_titles=before_group_titles.difference(after_group_titles),
         )
 
-        update_group_titles = before_group_titles.intersection(after_group_titles)
+        update_group_titles = before_group_titles & (after_group_titles)
         for update_voice_name in update_group_titles:
             before_membership = before_voiceunit.get_membership(update_voice_name)
             after_membership = after_voiceunit.get_membership(update_voice_name)
@@ -351,7 +351,7 @@ class BeliefDelta:
         self.add_beliefatom_plan_updates(
             before_belief=before_belief,
             after_belief=after_belief,
-            update_ropes=before_plan_ropes.intersection(after_plan_ropes),
+            update_ropes=before_plan_ropes & (after_plan_ropes),
         )
 
     def add_beliefatom_plan_inserts(
@@ -436,9 +436,8 @@ class BeliefDelta:
             self.add_beliefatom_plan_factunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_factunit_reason_contexts=before_factunit_reason_contexts.intersection(
-                    after_factunit_reason_contexts
-                ),
+                update_factunit_reason_contexts=before_factunit_reason_contexts
+                & (after_factunit_reason_contexts),
             )
             self.add_beliefatom_plan_factunit_deletes(
                 plan_rope=plan_rope,
@@ -459,9 +458,8 @@ class BeliefDelta:
             self.add_beliefatom_plan_awardunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_awardunit_awardee_titles=before_awardunits_awardee_titles.intersection(
-                    after_awardunits_awardee_titles
-                ),
+                update_awardunit_awardee_titles=before_awardunits_awardee_titles
+                & (after_awardunits_awardee_titles),
             )
             self.add_beliefatom_plan_awardunit_deletes(
                 plan_rope=plan_rope,
@@ -482,9 +480,8 @@ class BeliefDelta:
             self.add_beliefatom_plan_reasonunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_reasonunit_reason_contexts=before_reasonunit_reason_contexts.intersection(
-                    after_reasonunit_reason_contexts
-                ),
+                update_reasonunit_reason_contexts=before_reasonunit_reason_contexts
+                & (after_reasonunit_reason_contexts),
             )
             self.add_beliefatom_plan_reasonunit_deletes(
                 before_planunit=before_planunit,
@@ -631,9 +628,8 @@ class BeliefDelta:
                 plan_rope=before_planunit.get_plan_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
-                update_case_reason_states=after_case_reason_states.intersection(
-                    before_case_reason_states
-                ),
+                update_case_reason_states=after_case_reason_states
+                & (before_case_reason_states),
             )
             self.add_beliefatom_plan_reason_caseunit_deletes(
                 plan_rope=before_planunit.get_plan_rope(),

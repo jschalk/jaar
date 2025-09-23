@@ -321,7 +321,7 @@ def is_2d_with_unique_keys(x_dict: dict) -> bool:
         return False
     prev_keys = set()
     for x_set in get_nested_keys_by_level(x_dict).values():
-        if prev_keys.intersection(x_set) != set():
+        if prev_keys & (x_set) != set():
             return False
         prev_keys = prev_keys.union(x_set)
     return True

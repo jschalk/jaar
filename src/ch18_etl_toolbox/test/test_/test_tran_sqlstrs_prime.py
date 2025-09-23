@@ -1038,8 +1038,10 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_BeliefDimens():
             s_del_agg_cols = get_table_columns(cursor, s_del_agg_tablename)
             s_put_agg_cols.remove(error_message_str())
             s_del_agg_cols.remove(error_message_str())
-            s_put_vld_cols = get_table_columns(cursor, s_put_vld_tablename)
-            s_del_vld_cols = get_table_columns(cursor, s_del_vld_tablename)
+            s_put_agg_cols = set(s_put_agg_cols)
+            s_del_agg_cols = set(s_del_agg_cols)
+            s_put_vld_cols = set(get_table_columns(cursor, s_put_vld_tablename))
+            s_del_vld_cols = set(get_table_columns(cursor, s_del_vld_tablename))
             s_put_vld_tbl = s_put_vld_tablename
             s_del_vld_tbl = s_del_vld_tablename
             s_put_agg_tbl = s_put_agg_tablename
@@ -1094,7 +1096,8 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_MomentDimens():
             s_vld_tablename = prime_tbl(moment_dimen, "s", "vld")
             s_agg_cols = get_table_columns(cursor, s_agg_tablename)
             s_agg_cols.remove(error_message_str())
-            s_vld_cols = get_table_columns(cursor, s_vld_tablename)
+            s_agg_cols = set(s_agg_cols)
+            s_vld_cols = set(get_table_columns(cursor, s_vld_tablename))
             s_vld_tbl = s_vld_tablename
             s_agg_tbl = s_agg_tablename
             s_vld_insert_sql = get_insert_sql(cursor, s_vld_tbl, s_vld_cols)
@@ -1136,12 +1139,12 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimens():
             s_del_vld_tablename = prime_tbl(belief_dimen, "s", "vld", "del")
             v_put_raw_tablename = prime_tbl(belief_dimen, "h", "raw", "put")
             v_del_raw_tablename = prime_tbl(belief_dimen, "h", "raw", "del")
-            s_put_cols = get_table_columns(cursor, s_put_vld_tablename)
-            s_del_cols = get_table_columns(cursor, s_del_vld_tablename)
+            s_put_cols = set(get_table_columns(cursor, s_put_vld_tablename))
+            s_del_cols = set(get_table_columns(cursor, s_del_vld_tablename))
             # s_put_cols = set(s_put_cols).remove(error_message_str())
             # s_del_cols = set(s_del_cols).remove(error_message_str())
-            v_put_raw_cols = get_table_columns(cursor, v_put_raw_tablename)
-            v_del_raw_cols = get_table_columns(cursor, v_del_raw_tablename)
+            v_put_raw_cols = set(get_table_columns(cursor, v_put_raw_tablename))
+            v_del_raw_cols = set(get_table_columns(cursor, v_del_raw_tablename))
             v_put_cols = find_set_otx_inx_args(v_put_raw_cols)
             v_del_cols = find_set_otx_inx_args(v_del_raw_cols)
             v_put_cols.remove("pidgin_event_int")
@@ -1196,7 +1199,7 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_MomentDimens():
             # print(f"{moment_dimen=}")
             s_vld_tablename = prime_tbl(moment_dimen, "s", "vld")
             v_raw_tablename = prime_tbl(moment_dimen, "h", "raw")
-            s_cols = get_table_columns(cursor, s_vld_tablename)
+            s_cols = set(get_table_columns(cursor, s_vld_tablename))
             v_raw_cols = get_table_columns(cursor, v_raw_tablename)
             v_raw_cols.remove(error_message_str())
             v_cols = find_set_otx_inx_args(v_raw_cols)

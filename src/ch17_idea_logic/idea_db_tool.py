@@ -97,7 +97,7 @@ def get_relevant_columns_dataframe(
         relevant_columns = get_idea_elements_sort_order()
     current_columns = set(src_df.columns.to_list())
     relevant_columns_set = set(relevant_columns)
-    current_relevant_columns = current_columns.intersection(relevant_columns_set)
+    current_relevant_columns = current_columns & (relevant_columns_set)
     relevant_cols_in_order = [
         r_col for r_col in relevant_columns if r_col in current_relevant_columns
     ]
@@ -125,7 +125,7 @@ def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
         return None
 
     column_names = set(x_df.columns)
-    pidginable_columns = column_names.intersection(get_pidginable_args())
+    pidginable_columns = column_names & (get_pidginable_args())
     for pidginable_column in pidginable_columns:
         class_type = get_pidgin_args_class_types().get(pidginable_column)
         x_mapunit = x_pidginunit.get_mapunit(class_type)
@@ -342,7 +342,7 @@ def save_table_to_csv(conn_or_cursor: sqlite3_Connection, dst_dir: str, tablenam
 def create_idea_sorted_table(
     conn: sqlite3_Connection, tablename: str, columns_list: list[str]
 ):
-    columns_list = get_default_sorted_list(columns_list)
+    columns_list = get_default_sorted_list(set(columns_list))
     create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
 
 
@@ -357,7 +357,7 @@ def get_idea_into_dimen_raw_query(
     src_columns = get_table_columns(conn_or_cursor, src_table)
     dst_table = f"{x_dimen}_put_raw" if action_str else f"{x_dimen}_raw"
     dst_columns = get_table_columns(conn_or_cursor, dst_table)
-    common_columns_set = set(dst_columns).intersection(set(src_columns))
+    common_columns_set = set(dst_columns) & (set(src_columns))
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
     common_columns_header = ", ".join(common_columns_list)
     values_cols = set(common_columns_set)

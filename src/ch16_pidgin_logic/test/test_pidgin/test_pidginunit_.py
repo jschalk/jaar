@@ -136,7 +136,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     moment_args = set(get_moment_args_class_types().keys())
     assert atom_args.issubset(pidgin_args)
     assert moment_args.issubset(pidgin_args)
-    assert atom_args.intersection(moment_args) == {
+    assert atom_args & (moment_args) == {
         voice_name_str(),
         fund_iota_str(),
         penny_str(),
@@ -183,7 +183,7 @@ def test_pidginable_class_types_ReturnsObj():
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
     all_atom_class_types.add(LabelTerm_str())
-    x_cL_tyep = set(all_atom_class_types).intersection(x_pidginable_class_types)
+    x_cL_tyep = set(all_atom_class_types) & (x_pidginable_class_types)
     assert x_cL_tyep == x_pidginable_class_types
 
 
