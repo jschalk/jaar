@@ -1,6 +1,4 @@
-from json import loads as json_loads
-from pathlib import Path
-from src.ch01_data_toolbox.file_toolbox import count_files, open_file, save_json
+from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch09_belief_atom_logic.atom_config import get_atom_config_args
 from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_brick_formats_md,
@@ -17,6 +15,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     face_name_str,
     fund_iota_str,
     gogo_want_str,
+    idea_category_str,
     idea_number_str,
     job_listen_rotations_str,
     knot_str,
@@ -29,12 +28,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     timeline_label_str,
     yr1_jan1_offset_str,
 )
-from src.ch17_idea_logic.idea_config import (
-    get_default_sorted_list,
-    get_idea_config_dict,
-    get_idea_formats_dir,
-    get_idea_numbers,
-)
+from src.ch17_idea_logic.idea_config import get_idea_config_dict, get_idea_formats_dir
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -45,7 +39,7 @@ def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
-        if dimen_dict.get("idea_category") == "belief":
+        if dimen_dict.get(idea_category_str()) == "belief":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
             attributes_set = {moment_label_str(), belief_name_str()}
             args_dict = get_atom_config_args(idea_dimen)

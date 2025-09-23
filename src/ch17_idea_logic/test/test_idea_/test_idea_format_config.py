@@ -18,15 +18,14 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     momentunit_str,
     morph_str,
     numor_str,
+    otx_key_str,
     plan_rope_str,
-    reason_context_str,
     star_str,
     stop_want_str,
     task_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
-    voice_pool_str,
 )
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
@@ -50,11 +49,6 @@ from src.ch17_idea_logic.test._util.ch17_env import src_chapter_dir
 
 def test_config_str_functions_ReturnsObjs():
     # ESTABLISH / WHEN / THEN
-    assert voice_pool_str() == "voice_pool"
-    assert voice_debt_points_str() == "voice_debt_points"
-    assert voice_cred_points_str() == "voice_cred_points"
-    assert group_debt_points_str() == "group_debt_points"
-    assert group_cred_points_str() == "group_cred_points"
     x00021_idea = "idea_format_00021_belief_voiceunit_v0_0_0"
     assert idea_format_00021_belief_voiceunit_v0_0_0() == x00021_idea
     x00020_idea = "idea_format_00020_belief_voice_membership_v0_0_0"
@@ -130,18 +124,18 @@ def test_get_sorted_headers_str_ReturnsObj():
         idea_format_00021_belief_voiceunit_v0_0_0()
     )
     # THEN
-    assert (
-        br00021_headers
-        == "moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points"
+    expected_br00021_headers_str = (
+        "moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points"
     )
+    assert br00021_headers == expected_br00021_headers_str
 
     # ESTABLISH / WHEN
     br00019_headers = get_sorted_headers_str(idea_format_00019_planunit_v0_0_0())
 
     # THEN
     print(f"{br00019_headers=}")
-    plan_headers_str = "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
-    assert br00019_headers == plan_headers_str
+    expected_plan_headers_str = "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want"
+    assert br00019_headers == expected_plan_headers_str
 
 
 def check_sorted_headers_exist(idea_format_filename: str, x_headers: dict):
@@ -219,13 +213,13 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
     # THEN
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
-        "voice_name": {"otx_key": True},
-        "voice_cred_points": {"otx_key": False},
-        "voice_debt_points": {"otx_key": False},
-        "event_int": {"otx_key": True},
-        "face_name": {"otx_key": True},
-        "moment_label": {"otx_key": True},
-        "belief_name": {"otx_key": True},
+        voice_name_str(): {otx_key_str(): True},
+        voice_cred_points_str(): {otx_key_str(): False},
+        voice_debt_points_str(): {otx_key_str(): False},
+        event_int_str(): {otx_key_str(): True},
+        face_name_str(): {otx_key_str(): True},
+        moment_label_str(): {otx_key_str(): True},
+        belief_name_str(): {otx_key_str(): True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()
