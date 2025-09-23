@@ -21,9 +21,9 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     face_name_str,
     inx_knot_str,
     inx_name_str,
+    lire_name_str,
     otx_knot_str,
     otx_name_str,
-    pidgin_name_str,
     unknown_str_str,
 )
 from src.ch18_etl_toolbox.ch18_path import (
@@ -107,10 +107,10 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_LireRowsInDB(
     env_dir_setup_cleanup,
 ):
-    # ESTABLISH database with pidgin data
+    # ESTABLISH database with lire data
     yao_str = "Yao"
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -131,27 +131,27 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        pidname_dimen = pidgin_name_str()
-        pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
-        print(f"{pidname_s_vld_tablename=}")
-        insert_pidname_sqlstr = f"""INSERT INTO {pidname_s_vld_tablename}
+        lirname_dimen = lire_name_str()
+        lirname_s_vld_tablename = prime_tbl(lirname_dimen, "s", "vld")
+        print(f"{lirname_s_vld_tablename=}")
+        insert_lirname_sqlstr = f"""INSERT INTO {lirname_s_vld_tablename}
         ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
-        cursor.execute(insert_pidname_sqlstr)
+        cursor.execute(insert_lirname_sqlstr)
 
-        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
-        insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename}
+        lircore_s_vld_tablename = prime_tbl("lircore", "s", "vld")
+        insert_lircore_sqlstr = f"""INSERT INTO {lircore_s_vld_tablename}
         ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
         ;
         """
-        cursor.execute(insert_pidcore_sqlstr)
+        cursor.execute(insert_lircore_sqlstr)
     db_conn.close()
 
     # WHEN
@@ -211,10 +211,10 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
     assert set(bob_stance0001_sheetnames) == set(stance_csv_strs.keys())
 
 
-def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
+def test_create_stance0001_file_CreatesFile_Scenario1_LireRowsInDB(
     env_dir_setup_cleanup,
 ):
-    # ESTABLISH database with pidgin data
+    # ESTABLISH database with lire data
     yao_str = "Yao"
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -235,27 +235,27 @@ def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        pidname_dimen = pidgin_name_str()
-        pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
-        print(f"{pidname_s_vld_tablename=}")
-        insert_pidname_sqlstr = f"""INSERT INTO {pidname_s_vld_tablename}
+        lirname_dimen = lire_name_str()
+        lirname_s_vld_tablename = prime_tbl(lirname_dimen, "s", "vld")
+        print(f"{lirname_s_vld_tablename=}")
+        insert_lirname_sqlstr = f"""INSERT INTO {lirname_s_vld_tablename}
         ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
-        cursor.execute(insert_pidname_sqlstr)
+        cursor.execute(insert_lirname_sqlstr)
 
-        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
-        insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename}
+        lircore_s_vld_tablename = prime_tbl("lircore", "s", "vld")
+        insert_lircore_sqlstr = f"""INSERT INTO {lircore_s_vld_tablename}
         ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
         ;
         """
-        cursor.execute(insert_pidcore_sqlstr)
+        cursor.execute(insert_lircore_sqlstr)
     db_conn.close()
 
     stance0001_path = create_stance0001_path(output_dir)

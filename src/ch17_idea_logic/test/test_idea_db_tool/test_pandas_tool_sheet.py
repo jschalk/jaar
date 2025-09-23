@@ -155,7 +155,7 @@ def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_datafram
     pandas_testing_assert_frame_equal(df_new, sample_dataframe)
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoLire(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -180,7 +180,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoPidgin(
     assert len(x_sheet_names) == 2
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_PidginSheetNames(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_LireSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

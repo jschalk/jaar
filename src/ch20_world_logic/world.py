@@ -28,12 +28,12 @@ from src.ch18_etl_toolbox.transformers import (
     etl_heard_raw_tables_to_heard_agg_tables,
     etl_heard_raw_tables_to_moment_ote1_agg,
     etl_input_dfs_to_brick_raw_tables,
+    etl_lire_sound_agg_tables_to_lire_sound_vld_tables,
     etl_moment_guts_to_moment_jobs,
     etl_moment_job_jsons_to_job_tables,
     etl_moment_json_voice_nets_to_moment_voice_nets_table,
     etl_moment_ote1_agg_csvs_to_jsons,
     etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs,
-    etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
     etl_set_cell_tree_cell_mandates,
     etl_set_cell_trees_decrees,
     etl_set_cell_trees_found_facts,
@@ -65,7 +65,7 @@ class WorldUnit:
     _moment_mstr_dir: str = None
     _momentunits: set[MomentLabel] = None
     _events: dict[EventInt, FaceName] = None
-    _pidgin_events: dict[FaceName, set[EventInt]] = None
+    _lire_events: dict[FaceName, set[EventInt]] = None
 
     def get_world_db_path(self) -> str:
         "Returns path: world_dir/world.db"
@@ -135,9 +135,9 @@ class WorldUnit:
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
-        # sound raw to heard raw, filter through pidgins
+        # sound raw to heard raw, filter through lires
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
-        etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
+        etl_lire_sound_agg_tables_to_lire_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_heard_raw_tables(cursor)
         # heard raw to moment/belief jsons
@@ -198,7 +198,7 @@ def worldunit_shop(
         _events={},
         _momentunits=get_empty_set_if_None(_momentunits),
         _input_dir=input_dir,
-        _pidgin_events={},
+        _lire_events={},
     )
     x_worldunit._set_world_dirs()
     if not x_worldunit._input_dir:

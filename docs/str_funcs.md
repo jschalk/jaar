@@ -17,7 +17,7 @@
 - ch13_belief_listen_logic: 
 - ch14_keep_logic: 
 - ch15_moment_logic: beliefbudhistorys, cumulative_minute, hour_label, job_listen_rotations, moment_budunit, moment_paybook, moment_timeline_hour, moment_timeline_month, moment_timeline_weekday, moment_timeoffi, momentunit, month_label, paybook, weekday_label, weekday_order
-- ch16_pidgin_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, pidgin_core, pidgin_label, pidgin_name, pidgin_rope, pidgin_title, pidginunit, unknown_str
+- ch16_lire_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, lire_core, lire_label, lire_name, lire_rope, lire_title, lireunit, unknown_str
 - ch17_idea_logic: allowed_crud, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_name
 - ch18_etl_toolbox: belief_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, heard_agg, heard_raw, moment_event_time_agg, moment_ote1_agg, moment_voice_nets, sound_agg, sound_raw
 - ch19_kpi_toolbox: moment_kpi001_voice_nets, moment_kpi002_belief_tasks

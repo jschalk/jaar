@@ -25,28 +25,28 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 
 
 def add_to_br00042_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    pidtitl_s_vld_tablename = prime_tbl("PIDTITL", "s", "vld")
-    pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
+    lirtitl_s_vld_tablename = prime_tbl("LIRTITL", "s", "vld")
+    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
 
     select_sqlstr = f"""
 SELECT
   "" event_int
-, pidtitl.face_name
-, pidtitl.otx_title
-, pidtitl.inx_title
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
-FROM {pidtitl_s_vld_tablename} pidtitl
-JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidtitl.face_name
+, lirtitl.face_name
+, lirtitl.otx_title
+, lirtitl.inx_title
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
+FROM {lirtitl_s_vld_tablename} lirtitl
+JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirtitl.face_name
 ORDER BY 
   event_int
-, pidtitl.face_name
-, pidtitl.otx_title
-, pidtitl.inx_title
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
+, lirtitl.face_name
+, lirtitl.otx_title
+, lirtitl.inx_title
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -57,26 +57,26 @@ ORDER BY
 
 
 def add_to_br00043_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    pidname_s_vld_tablename = prime_tbl("PIDNAME", "s", "vld")
-    pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
+    lirname_s_vld_tablename = prime_tbl("LIRNAME", "s", "vld")
+    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
     select_sqlstr = f"""
 SELECT
   "" event_int
-, pidname.face_name
-, pidname.otx_name
-, pidname.inx_name
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
-FROM {pidname_s_vld_tablename} pidname
-JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidname.face_name
+, lirname.face_name
+, lirname.otx_name
+, lirname.inx_name
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
+FROM {lirname_s_vld_tablename} lirname
+JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirname.face_name
 ORDER BY 
-  pidname.face_name
-, pidname.otx_name
-, pidname.inx_name
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
+  lirname.face_name
+, lirname.otx_name
+, lirname.inx_name
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -87,27 +87,27 @@ ORDER BY
 
 
 def add_to_br00044_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    pidlabe_s_vld_tablename = prime_tbl("PIDLABE", "s", "vld")
-    pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
+    lirlabe_s_vld_tablename = prime_tbl("LIRLABE", "s", "vld")
+    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
 
     select_sqlstr = f"""
 SELECT
   "" event_int
-, pidlabe.face_name
-, pidlabe.otx_label
-, pidlabe.inx_label
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
-FROM {pidlabe_s_vld_tablename} pidlabe
-JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidlabe.face_name
+, lirlabe.face_name
+, lirlabe.otx_label
+, lirlabe.inx_label
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
+FROM {lirlabe_s_vld_tablename} lirlabe
+JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirlabe.face_name
 ORDER BY 
-  pidlabe.face_name
-, pidlabe.otx_label
-, pidlabe.inx_label
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
+  lirlabe.face_name
+, lirlabe.otx_label
+, lirlabe.inx_label
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -118,27 +118,27 @@ ORDER BY
 
 
 def add_to_br00045_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    pidrope_s_vld_tablename = prime_tbl("PIDROPE", "s", "vld")
-    pidcore_s_vld_tablename = prime_tbl("PIDCORE", "s", "vld")
+    lirrope_s_vld_tablename = prime_tbl("LIRROPE", "s", "vld")
+    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
 
     select_sqlstr = f"""
 SELECT
   "" event_int
-, pidrope.face_name
-, pidrope.otx_rope
-, pidrope.inx_rope
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
-FROM {pidrope_s_vld_tablename} pidrope
-JOIN {pidcore_s_vld_tablename} pidcore ON pidcore.face_name = pidrope.face_name
+, lirrope.face_name
+, lirrope.otx_rope
+, lirrope.inx_rope
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
+FROM {lirrope_s_vld_tablename} lirrope
+JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirrope.face_name
 ORDER BY 
-  pidrope.face_name
-, pidrope.otx_rope
-, pidrope.inx_rope
-, pidcore.otx_knot
-, pidcore.inx_knot
-, pidcore.unknown_str
+  lirrope.face_name
+, lirrope.otx_rope
+, lirrope.inx_rope
+, lircore.otx_knot
+, lircore.inx_knot
+, lircore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -148,7 +148,7 @@ ORDER BY
     return x_csv
 
 
-def add_pidgin_rows_to_stance_csv_strs(
+def add_lire_rows_to_stance_csv_strs(
     cursor: sqlite3_Cursor, moment_csv_strs: dict[str, str], csv_delimiter: str
 ):
     br00042_csv = moment_csv_strs.get("br00042")
@@ -185,7 +185,7 @@ def collect_stance_csv_strs(world_dir: str) -> dict[str, str]:
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        add_pidgin_rows_to_stance_csv_strs(cursor, x_csv_strs, ",")
+        add_lire_rows_to_stance_csv_strs(cursor, x_csv_strs, ",")
     db_conn.close()
 
     return x_csv_strs

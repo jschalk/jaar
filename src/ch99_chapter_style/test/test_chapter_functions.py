@@ -111,7 +111,7 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
         "_example_empty_bob_beliefunit",
         "_get_inx_label",
         "_get_inx_value",
-        "_get_rid_of_pidgin_core_keys",
+        "_get_rid_of_lire_core_keys",
         "_is_inx_knot_inclusion_correct",
         "_is_otx_knot_inclusion_correct",
         "_unknown_str_in_otx2inx",

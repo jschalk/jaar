@@ -19,7 +19,7 @@ What does each one do?
 - **ch13_belief_listen_logic**: These tools describe how one BeliefUnit listens to another.
 - **ch14_keep_logic**: Builds a simulation that describes how much credit a healer has earned.
 - **ch15_moment_logic**: Defines MomentUnits: common time tech, ledger, VoiceNames, history of BeliefUnits.
-- **ch16_pidgin_logic**: Defines PidginUnit tools that translate MomentUnits into inside language.
+- **ch16_lire_logic**: Defines LireUnit tools that translate MomentUnits into inside language.
 - **ch17_idea_logic**: Defines Idea Bricks: Spreadsheet data formats of any MomentUnit data.
 - **ch18_etl_toolbox**: Defines the tools that use Idea Bricks to build MomentUnits.
 - **ch19_kpi_toolbox**: Defines the analytics outcomes of completed MomentUnits.
