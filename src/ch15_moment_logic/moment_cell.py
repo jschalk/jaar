@@ -330,12 +330,12 @@ def set_cell_tree_cell_mandates(moment_mstr_dir: str, moment_label: str):
 def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
     moment_json_path = create_moment_json_path(moment_mstr_dir, moment_label)
     momentunit = momentunit_get_from_dict(open_json(moment_json_path))
-    for brokerunit in momentunit.brokerunits.values():
-        for budunit in brokerunit.buds.values():
+    for beliefbudhistory in momentunit.beliefbudhistorys.values():
+        for budunit in beliefbudhistory.buds.values():
             bud_root_dir = create_bud_dir_path(
                 moment_mstr_dir,
                 moment_label,
-                belief_name=brokerunit.belief_name,
+                belief_name=beliefbudhistory.belief_name,
                 bud_time=budunit.bud_time,
             )
             bud_voice_mandate_ledger = allot_nested_scale(

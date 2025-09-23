@@ -249,9 +249,8 @@ def budunit_shop(
     )
 
 
-# TODO replace "BrokerUnit" with "BudHistory"
 @dataclass
-class BrokerUnit:
+class BeliefBudHistory:
     belief_name: BeliefName = None
     buds: dict[TimeLinePoint, BudUnit] = None
     _sum_budunit_quota: FundNum = None
@@ -308,8 +307,8 @@ class BrokerUnit:
         return x_tranbook
 
 
-def brokerunit_shop(belief_name: BeliefName) -> BrokerUnit:
-    return BrokerUnit(belief_name=belief_name, buds={}, _sum_voice_bud_nets={})
+def beliefbudhistory_shop(belief_name: BeliefName) -> BeliefBudHistory:
+    return BeliefBudHistory(belief_name=belief_name, buds={}, _sum_voice_bud_nets={})
 
 
 def get_budunit_from_dict(x_dict: dict) -> BudUnit:
@@ -327,11 +326,11 @@ def get_budunit_from_json(x_json: str) -> BudUnit:
     return get_budunit_from_dict(get_dict_from_json(x_json))
 
 
-def get_brokerunit_from_dict(x_dict: dict) -> BrokerUnit:
+def get_beliefbudhistory_from_dict(x_dict: dict) -> BeliefBudHistory:
     x_belief_name = x_dict.get("belief_name")
-    x_brokerunit = brokerunit_shop(x_belief_name)
-    x_brokerunit.buds = get_buds_from_dict(x_dict.get("buds"))
-    return x_brokerunit
+    x_beliefbudhistory = beliefbudhistory_shop(x_belief_name)
+    x_beliefbudhistory.buds = get_buds_from_dict(x_dict.get("buds"))
+    return x_beliefbudhistory
 
 
 def get_buds_from_dict(buds_dict: dict) -> dict[TimeLinePoint, BudUnit]:

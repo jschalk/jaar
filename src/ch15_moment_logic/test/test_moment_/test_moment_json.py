@@ -8,7 +8,7 @@ from src.ch03_finance_logic.finance_config import (
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic._ref.ch15_keywords import (
-    brokerunits_str,
+    beliefbudhistorys_str,
     fund_iota_str,
     knot_str,
     moment_label_str,
@@ -64,7 +64,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
 
     # THEN
     offi_times_str = f"{offi_time_str()}s"
-    print(f"{ amy_moment._get_brokerunits_dict()=}")
+    print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
     assert x_dict.get(moment_label_str()) == a45_str
     assert x_dict.get(moment_mstr_dir_str()) == moment_mstr_dir
@@ -74,14 +74,16 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(fund_iota_str()) == default_fund_iota_if_None()
     assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
-    assert x_dict.get(brokerunits_str()) == amy_moment._get_brokerunits_dict()
+    assert (
+        x_dict.get(beliefbudhistorys_str()) == amy_moment._get_beliefbudhistorys_dict()
+    )
     assert x_dict.get(paybook_str()) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
         moment_label_str(),
         moment_mstr_dir_str(),
         timeline_str(),
         offi_times_str,
-        brokerunits_str(),
+        beliefbudhistorys_str(),
         knot_str(),
         fund_iota_str(),
         respect_bit_str(),
@@ -105,7 +107,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
         moment_mstr_dir_str(),
         timeline_str(),
         f"{offi_time_str()}s",
-        brokerunits_str(),
+        beliefbudhistorys_str(),
         knot_str(),
         fund_iota_str(),
         respect_bit_str(),
@@ -187,7 +189,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment.fund_iota == sue_fund_iota
     assert x_moment.respect_bit == sue_respect_bit
     assert x_moment.penny == sue_penny
-    assert x_moment.brokerunits == amy_moment.brokerunits
+    assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
@@ -219,7 +221,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     assert generated_moment.fund_iota == default_fund_iota_if_None()
     assert generated_moment.respect_bit == default_RespectBit_if_None()
     assert generated_moment.penny == 1
-    assert generated_moment.brokerunits == amy_moment.brokerunits
+    assert generated_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert generated_moment.paybook == amy_moment.paybook
     assert generated_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert generated_moment == amy_moment
@@ -265,7 +267,7 @@ def test_get_from_json_ReturnsMomentUnit():
     assert x_moment.fund_iota == sue_fund_iota
     assert x_moment.respect_bit == sue_respect_bit
     assert x_moment.penny == sue_penny
-    assert x_moment.brokerunits == amy_moment.brokerunits
+    assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
     x_moment._offi_time_max = 0

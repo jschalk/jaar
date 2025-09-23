@@ -115,8 +115,8 @@ def _add_budunit_to_br00001_csv(
     face_name: FaceName = None,
     event_int: int = None,
 ) -> str:
-    for broker_belief_name, brokerunits in x_moment.brokerunits.items():
-        for bud_time, budunit in brokerunits.buds.items():
+    for broker_belief_name, beliefbudhistorys in x_moment.beliefbudhistorys.items():
+        for bud_time, budunit in beliefbudhistorys.buds.items():
             x_row = [
                 if_none_str(face_name),
                 if_none_str(event_int),

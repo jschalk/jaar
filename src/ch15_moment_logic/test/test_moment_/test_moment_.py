@@ -25,7 +25,7 @@ from src.ch12_hub_toolbox.hub_tool import (
     save_job_file,
 )
 from src.ch15_moment_logic._ref.ch15_keywords import (
-    brokerunits_str,
+    beliefbudhistorys_str,
     fund_iota_str,
     job_listen_rotations_str,
     knot_str,
@@ -57,7 +57,7 @@ def test_MomentUnit_Exists():
     # THEN
     assert not amy_moment.moment_label
     assert not amy_moment.timeline
-    assert not amy_moment.brokerunits
+    assert not amy_moment.beliefbudhistorys
     assert not amy_moment.paybook
     assert not amy_moment.offi_times
     assert not amy_moment.knot
@@ -74,7 +74,7 @@ def test_MomentUnit_Exists():
     assert set(amy_moment.__dict__) == {
         moment_label_str(),
         timeline_str(),
-        brokerunits_str(),
+        beliefbudhistorys_str(),
         paybook_str(),
         "offi_times",
         knot_str(),
@@ -101,7 +101,7 @@ def test_momentunit_shop_ReturnsMomentUnit():
     # THEN
     assert a23_moment.moment_label == a23_str
     assert a23_moment.timeline == timelineunit_shop()
-    assert a23_moment.brokerunits == {}
+    assert a23_moment.beliefbudhistorys == {}
     assert a23_moment.paybook == tranbook_shop(a23_str)
     assert a23_moment.offi_times == set()
     assert a23_moment.knot == default_knot_if_None()

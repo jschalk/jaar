@@ -14,7 +14,7 @@ What does each one do?
 - **ch08_timeline_logic**: Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.
 - **ch09_belief_atom_logic**: Defines BeliefAtoms: Irreducible units of change for a BeliefUnit.
 - **ch10_pack_logic**: Defines packs which are collections of BeliefAtoms by FaceName
-- **ch11_bud_logic**: Defines BudgetUnit by timelinepoint, quota, celldepth. BrokerUnit: BeliefName, BudUnits
+- **ch11_bud_logic**: Defines BeliefBudHistory: BeliefName, BudUnits (timelinepoint, quota, celldepth)
 - **ch12_hub_toolbox**: Tools for handling complex operations. Should be distributed and deprecated.
 - **ch13_belief_listen_logic**: These tools describe how one BeliefUnit listens to another.
 - **ch14_keep_logic**: Builds a simulation that describes how much credit a healer has earned.

@@ -93,11 +93,13 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
     assert gen_momentunit.moment_label == amy23_str
     assert gen_momentunit.moment_mstr_dir == x_moments_dir
     assert gen_momentunit.timeline == expected_amy23_momentunit.timeline
-    assert gen_momentunit.brokerunits == expected_amy23_momentunit.brokerunits
+    assert (
+        gen_momentunit.beliefbudhistorys == expected_amy23_momentunit.beliefbudhistorys
+    )
     a23_tranunits = expected_amy23_momentunit.paybook.tranunits
     assert gen_momentunit.paybook.tranunits == a23_tranunits
-    # print(f"{gen_momentunit.brokerunits=}")
-    assert len(gen_momentunit.brokerunits) == 1
+    # print(f"{gen_momentunit.beliefbudhistorys=}")
+    assert len(gen_momentunit.beliefbudhistorys) == 1
     assert len(gen_momentunit.paybook.tranunits) == 1
     assert gen_momentunit == expected_amy23_momentunit
 
@@ -164,7 +166,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     assert creg_momentunit.moment_label == amy23_str
     assert creg_momentunit.moment_mstr_dir == x_moments_dir
     assert creg_momentunit.timeline == amy23_momentunit.timeline
-    assert len(creg_momentunit.brokerunits) == 3
+    assert len(creg_momentunit.beliefbudhistorys) == 3
     assert len(creg_momentunit.paybook.tranunits) == 4
     # assert creg_momentunit == amy23_momentunit
 
@@ -174,7 +176,7 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     assert five_momentunit.penny == x_penny
     assert five_momentunit.moment_label == "jeffy45"
     assert five_momentunit.moment_mstr_dir == x_moments_dir
-    assert len(five_momentunit.brokerunits) == 2
+    assert len(five_momentunit.beliefbudhistorys) == 2
     assert len(five_momentunit.paybook.tranunits) == 1
     jeffy45_timeline = jeffy45_momentunit.timeline
     assert five_momentunit.timeline.hours_config == jeffy45_timeline.hours_config
