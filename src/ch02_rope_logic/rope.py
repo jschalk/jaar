@@ -3,7 +3,7 @@ from src.ch01_data_toolbox.file_toolbox import is_path_valid
 from src.ch02_rope_logic.term import (
     CentralLabel,
     LabelTerm,
-    RopePointer,
+    RopeTerm,
     default_knot_if_None,
 )
 
@@ -37,11 +37,11 @@ class knot_in_label_Exception(Exception):
 
 
 def create_rope(
-    parent_rope: RopePointer,
+    parent_rope: RopeTerm,
     tail_label: LabelTerm = None,
     knot: str = None,
     auto_add_first_knot: bool = True,
-) -> RopePointer:
+) -> RopeTerm:
     knot = default_knot_if_None(knot)
     if tail_label in {"", None}:
         return to_rope(parent_rope, knot)
@@ -59,7 +59,7 @@ def create_rope(
     if tail_label.is_label(knot) is False:
         raise knot_in_label_Exception(f"knot '{knot}' is in {tail_label}")
     if tail_label is None:
-        return RopePointer(parent_rope)
+        return RopeTerm(parent_rope)
     if tail_label.is_label(knot) is False:
         raise knot_in_label_Exception(f"knot '{knot}' is in {tail_label}")
     if parent_rope in {"", None}:
@@ -72,8 +72,8 @@ def create_rope(
 
 
 def rebuild_rope(
-    subj_rope: RopePointer, old_rope: RopePointer, new_rope: RopePointer
-) -> RopePointer:
+    subj_rope: RopeTerm, old_rope: RopeTerm, new_rope: RopeTerm
+) -> RopeTerm:
     if subj_rope is None:
         return subj_rope
     elif is_sub_rope(subj_rope, old_rope):
@@ -82,17 +82,17 @@ def rebuild_rope(
         return subj_rope
 
 
-def is_sub_rope(ref_rope: RopePointer, sub_rope: RopePointer) -> bool:
+def is_sub_rope(ref_rope: RopeTerm, sub_rope: RopeTerm) -> bool:
     ref_rope = "" if ref_rope is None else ref_rope
     return ref_rope.find(sub_rope) == 0
 
 
-def is_heir_rope(src: RopePointer, heir: RopePointer, knot: str = None) -> bool:
+def is_heir_rope(src: RopeTerm, heir: RopeTerm, knot: str = None) -> bool:
     return src == heir or heir.find(src) == 0
 
 
 def find_replace_rope_key_dict(
-    dict_x: dict, old_rope: RopePointer, new_rope: RopePointer
+    dict_x: dict, old_rope: RopeTerm, new_rope: RopeTerm
 ) -> dict:
     keys_to_delete = []
     objs_to_add = []
@@ -111,11 +111,11 @@ def find_replace_rope_key_dict(
     return dict_x
 
 
-def get_all_rope_labels(rope: RopePointer, knot: str = None) -> list[LabelTerm]:
+def get_all_rope_labels(rope: RopeTerm, knot: str = None) -> list[LabelTerm]:
     return rope.split(default_knot_if_None(knot))[1:-1]
 
 
-def get_tail_label(rope: RopePointer, knot: str = None) -> LabelTerm:
+def get_tail_label(rope: RopeTerm, knot: str = None) -> LabelTerm:
     knot = default_knot_if_None(knot)
     if rope in ["", knot]:
         return ""
@@ -124,17 +124,17 @@ def get_tail_label(rope: RopePointer, knot: str = None) -> LabelTerm:
 
 
 def get_parent_rope(
-    rope: RopePointer, knot: str = None
-) -> RopePointer:  # rope without tail label
+    rope: RopeTerm, knot: str = None
+) -> RopeTerm:  # rope without tail label
     parent_labels = get_all_rope_labels(rope=rope, knot=knot)[:-1]
     return create_rope_from_labels(parent_labels, knot=knot)
 
 
-def get_root_label_from_rope(rope: RopePointer, knot: str = None) -> LabelTerm:
+def get_root_label_from_rope(rope: RopeTerm, knot: str = None) -> LabelTerm:
     return get_all_rope_labels(rope=rope, knot=knot)[0]
 
 
-def get_ancestor_ropes(rope: RopePointer, knot: str = None) -> list[RopePointer]:
+def get_ancestor_ropes(rope: RopeTerm, knot: str = None) -> list[RopeTerm]:
     knot = default_knot_if_None(knot)
     if not rope:
         return []
@@ -153,9 +153,7 @@ def get_ancestor_ropes(rope: RopePointer, knot: str = None) -> list[RopePointer]
     return x_ropes
 
 
-def all_ropes_between(
-    src_rope: str, dst_rope: str, knot: str = None
-) -> list[RopePointer]:
+def all_ropes_between(src_rope: str, dst_rope: str, knot: str = None) -> list[RopeTerm]:
     x_list = []
     anc_ropes = get_ancestor_ropes(dst_rope, knot)
     while anc_ropes != []:
@@ -169,7 +167,7 @@ class ForeFatherException(Exception):
     pass
 
 
-def get_forefather_ropes(rope: RopePointer) -> dict[RopePointer]:
+def get_forefather_ropes(rope: RopeTerm) -> dict[RopeTerm]:
     ancestor_ropes = get_ancestor_ropes(rope=rope)
     popped_rope = ancestor_ropes.pop(0)
     if popped_rope != rope:
@@ -179,7 +177,7 @@ def get_forefather_ropes(rope: RopePointer) -> dict[RopePointer]:
     return {a_rope: None for a_rope in ancestor_ropes}
 
 
-def create_rope_from_labels(labels: list[LabelTerm], knot: str = None) -> RopePointer:
+def create_rope_from_labels(labels: list[LabelTerm], knot: str = None) -> RopeTerm:
     return to_rope(default_knot_if_None(knot).join(labels), knot) if labels else ""
 
 
@@ -187,11 +185,11 @@ class InvalidknotReplaceException(Exception):
     pass
 
 
-def is_string_in_rope(string: str, rope: RopePointer) -> bool:
+def is_string_in_rope(string: str, rope: RopeTerm) -> bool:
     return rope.find(string) >= 0
 
 
-def replace_knot(rope: RopePointer, old_knot: str, new_knot: str) -> str:
+def replace_knot(rope: RopeTerm, old_knot: str, new_knot: str) -> str:
     if is_string_in_rope(string=new_knot, rope=rope):
         raise InvalidknotReplaceException(
             f"Cannot replace_knot '{old_knot}' with '{new_knot}' because the new one exists in rope '{rope}'."
@@ -222,8 +220,8 @@ def validate_labelterm(
     return x_labelterm
 
 
-def rope_is_valid_dir_path(x_rope: RopePointer, knot: str) -> bool:
-    """Returns path built from RopePointer if it is a valid directory path."""
+def rope_is_valid_dir_path(x_rope: RopeTerm, knot: str) -> bool:
+    """Returns path built from RopeTerm if it is a valid directory path."""
     x_rope_labels = get_all_rope_labels(x_rope, knot)
     slash_str = "/"
     x_rope_os_path = create_rope_from_labels(x_rope_labels, knot=slash_str)

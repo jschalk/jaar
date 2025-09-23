@@ -1,7 +1,7 @@
 from pandas import DataFrame
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_pidgin_logic._ref.ch16_keywords import (
-    RopePointer_str,
+    RopeTerm_str,
     reason_context_str,
     voice_name_str,
 )
@@ -225,7 +225,7 @@ def get_casa_maison_pidginunit_set_by_otx2inx() -> PidginUnit:
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
 
     sue_pidginunit = pidginunit_shop("Sue", 7)
-    rx = RopePointer_str()
+    rx = RopeTerm_str()
     sue_pidginunit.set_otx2inx(rx, otx_amy45_rope, inx_amy87_rope)
     sue_pidginunit.set_otx2inx(rx, casa_otx_rope, casa_inx_rope)
     sue_pidginunit.set_otx2inx(rx, clean_otx_rope, clean_inx_rope)

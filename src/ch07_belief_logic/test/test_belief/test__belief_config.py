@@ -5,7 +5,7 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch07_belief_logic._ref.ch07_keywords import (
     LabelTerm_str,
     NameTerm_str,
-    RopePointer_str,
+    RopeTerm_str,
     TitleTerm_str,
     active_str,
     addin_str,
@@ -549,7 +549,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrawar, jk, awardee_title_str()) == "TEXT"
     assert g_popcashout(cfig, blrawar, jk, awardee_title_str()) == False
 
-    assert g_class_type(cfig, blrawar, jk, plan_rope_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrawar, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrawar, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrawar, jk, plan_rope_str()) == False
 
@@ -569,11 +569,11 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrawar, jv, take_force_str()) == "REAL"
     assert g_popcashout(cfig, blrawar, jv, take_force_str()) == False
 
-    assert g_class_type(cfig, blrfact, jk, fact_context_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrfact, jk, fact_context_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrfact, jk, fact_context_str()) == "TEXT"
     assert g_popcashout(cfig, blrfact, jk, fact_context_str()) == False
 
-    assert g_class_type(cfig, blrfact, jk, plan_rope_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrfact, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrfact, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrfact, jk, plan_rope_str()) == False
 
@@ -585,7 +585,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrfact, jv, fact_lower_str()) == "REAL"
     assert g_popcashout(cfig, blrfact, jv, fact_lower_str()) == False
 
-    assert g_class_type(cfig, blrfact, jv, fact_state_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrfact, jv, fact_state_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrfact, jv, fact_state_str()) == "TEXT"
     assert g_popcashout(cfig, blrfact, jv, fact_state_str()) == False
 
@@ -593,19 +593,19 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrheal, jk, healer_name_str()) == "TEXT"
     assert g_popcashout(cfig, blrheal, jk, healer_name_str()) == False
 
-    assert g_class_type(cfig, blrheal, jk, plan_rope_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrheal, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrheal, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrheal, jk, plan_rope_str()) == False
 
-    assert g_class_type(cfig, blrprem, jk, reason_context_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrprem, jk, reason_context_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrprem, jk, reason_context_str()) == "TEXT"
     assert g_popcashout(cfig, blrprem, jk, reason_context_str()) == False
 
-    assert g_class_type(cfig, blrprem, jk, reason_state_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrprem, jk, reason_state_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrprem, jk, reason_state_str()) == "TEXT"
     assert g_popcashout(cfig, blrprem, jk, reason_state_str()) == False
 
-    assert g_class_type(cfig, blrprem, jk, plan_rope_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrprem, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrprem, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrprem, jk, plan_rope_str()) == False
 
@@ -629,11 +629,11 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrprem, jv, reason_lower_str()) == "REAL"
     assert g_popcashout(cfig, blrprem, jv, reason_lower_str()) == False
 
-    assert g_class_type(cfig, blrreas, jk, reason_context_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrreas, jk, reason_context_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrreas, jk, reason_context_str()) == "TEXT"
     assert g_popcashout(cfig, blrreas, jk, reason_context_str()) == False
 
-    assert g_class_type(cfig, blrreas, jk, plan_rope_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrreas, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrreas, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrreas, jk, plan_rope_str()) == False
 
@@ -653,7 +653,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jv, reason_active_requisite_str()) == "INTEGER"
     assert g_popcashout(cfig, blrreas, jv, reason_active_requisite_str()) == False
 
-    assert g_class_type(cfig, blrlabo, jk, plan_rope_str()) == RopePointer_str()
+    assert g_class_type(cfig, blrlabo, jk, plan_rope_str()) == RopeTerm_str()
     assert g_sqlitetype(cfig, blrlabo, jk, plan_rope_str()) == "TEXT"
     assert g_popcashout(cfig, blrlabo, jk, plan_rope_str()) == False
 
@@ -920,15 +920,15 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(problem_bool_str()) == "bool"
     assert belief_calc_args_type_dict.get(stop_want_str()) == "float"
     assert belief_calc_args_type_dict.get(awardee_title_str()) == TitleTerm_str()
-    assert belief_calc_args_type_dict.get(plan_rope_str()) == RopePointer_str()
+    assert belief_calc_args_type_dict.get(plan_rope_str()) == RopeTerm_str()
     assert belief_calc_args_type_dict.get(give_force_str()) == "float"
     assert belief_calc_args_type_dict.get(take_force_str()) == "float"
-    assert belief_calc_args_type_dict.get(reason_context_str()) == RopePointer_str()
+    assert belief_calc_args_type_dict.get(reason_context_str()) == RopeTerm_str()
     assert belief_calc_args_type_dict.get(fact_upper_str()) == "float"
     assert belief_calc_args_type_dict.get(fact_lower_str()) == "float"
-    assert belief_calc_args_type_dict.get(fact_state_str()) == RopePointer_str()
+    assert belief_calc_args_type_dict.get(fact_state_str()) == RopeTerm_str()
     assert belief_calc_args_type_dict.get(healer_name_str()) == NameTerm_str()
-    assert belief_calc_args_type_dict.get(reason_state_str()) == RopePointer_str()
+    assert belief_calc_args_type_dict.get(reason_state_str()) == RopeTerm_str()
     assert belief_calc_args_type_dict.get(status_str()) == "int"
     assert belief_calc_args_type_dict.get(chore_str()) == "int"
     assert belief_calc_args_type_dict.get(reason_divisor_str()) == "int"

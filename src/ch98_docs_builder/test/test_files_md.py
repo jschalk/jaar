@@ -1,12 +1,12 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import count_dirs_files, create_path, open_file
-from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
+from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropeterm_explanation_md
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_blurbs_md,
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
-    save_ropepointer_explanation_md,
+    save_ropeterm_explanation_md,
 )
 from src.ch98_docs_builder.test._util.ch98_env import (
     env_dir_setup_cleanup,
@@ -38,18 +38,18 @@ def test_save_chapter_blurbs_md_CreatesFile(env_dir_setup_cleanup):
     assert open_file(chapter_blurbs_path) == expected_chapter_blurbs_md
 
 
-def test_save_ropepointer_explanation_md_CreatesFile(env_dir_setup_cleanup):
+def test_save_ropeterm_explanation_md_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
     temp_dir = get_chapter_temp_dir()
-    file_path = create_path(temp_dir, "ropepointer_explanation.md")
+    file_path = create_path(temp_dir, "ropeterm_explanation.md")
     assert not os_path_exists(file_path)
 
     # WHEN
-    save_ropepointer_explanation_md(temp_dir)
+    save_ropeterm_explanation_md(temp_dir)
 
     # THEN
     assert os_path_exists(file_path)
-    assert open_file(file_path) == get_ropepointer_explanation_md()
+    assert open_file(file_path) == get_ropeterm_explanation_md()
 
 
 def test_save_idea_brick_mds_CreatesFiles(env_dir_setup_cleanup):

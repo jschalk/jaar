@@ -9,7 +9,7 @@ from src.ch01_data_toolbox.plotly_toolbox import (
     add_simp_rect,
     conditional_fig_show,
 )
-from src.ch02_rope_logic.rope import RopePointer, get_parent_rope, is_sub_rope
+from src.ch02_rope_logic.rope import RopeTerm, get_parent_rope, is_sub_rope
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_report import (
@@ -22,7 +22,7 @@ def _get_dot_diameter(x_ratio: float):
     return ((x_ratio**0.4)) * 100
 
 
-def _get_parent_y(x_plan: PlanUnit, planunit_y_coordinate_dict: dict) -> RopePointer:
+def _get_parent_y(x_plan: PlanUnit, planunit_y_coordinate_dict: dict) -> RopeTerm:
     parent_rope = get_parent_rope(x_plan.get_plan_rope())
     return planunit_y_coordinate_dict.get(parent_rope)
 

@@ -80,7 +80,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }
@@ -117,7 +117,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "fact_context": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             },
@@ -127,7 +127,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }
@@ -139,7 +139,7 @@
                 "sqlite_datatype": "REAL"
             },
             "fact_state": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             },
@@ -169,7 +169,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }
@@ -195,7 +195,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }
@@ -227,17 +227,17 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             },
             "reason_context": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             },
             "reason_state": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }
@@ -284,12 +284,12 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             },
             "reason_context": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }
@@ -331,7 +331,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "TEXT"
             }

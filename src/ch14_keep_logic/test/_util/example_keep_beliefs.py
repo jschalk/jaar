@@ -1,4 +1,4 @@
-from src.ch02_rope_logic.rope import RopePointer, create_rope_from_labels
+from src.ch02_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     MomentLabel,
@@ -115,7 +115,7 @@ def get_7labelJRoot_belief() -> BeliefUnit:
     return x_belief
 
 
-def get_texas_rope() -> RopePointer:
+def get_texas_rope() -> RopeTerm:
     naton_str = "nation"
     usa_str = "usa"
     texas_str = "texas"

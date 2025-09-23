@@ -628,7 +628,7 @@ def create_update_pidrope_sound_agg_knot_error_sqlstr() -> str:
     pidcore_s_vld_tablename = create_prime_tablename("pidcore", "s", "vld")
     pidrope_s_agg_tablename = create_prime_tablename("pidrope", "s", "agg")
     return f"""UPDATE {pidrope_s_agg_tablename}
-SET error_message = 'Knot must exist in RopePointer'
+SET error_message = 'Knot must exist in RopeTerm'
 WHERE rowid IN (
     SELECT rope_agg.rowid
     FROM {pidrope_s_agg_tablename} rope_agg

@@ -85,9 +85,9 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "debtor_respect": "float",
         "denom": "int",
         "face_name": "NameTerm",
-        "fact_context": "RopePointer",
+        "fact_context": "RopeTerm",
         "moment_label": "LabelTerm",
-        "fact_state": "RopePointer",
+        "fact_state": "RopeTerm",
         "fact_upper": "float",
         "fact_lower": "float",
         "fund_iota": "float",
@@ -97,7 +97,7 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "group_title": "TitleTerm",
         "healer_name": "NameTerm",
         "hour_label": "LabelTerm",
-        "plan_rope": "RopePointer",
+        "plan_rope": "RopeTerm",
         "star": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
@@ -111,11 +111,11 @@ def get_pidgin_args_class_types() -> dict[str, str]:
         "task": "bool",
         "problem_bool": "bool",
         "quota": "int",
-        "reason_state": "RopePointer",
+        "reason_state": "RopeTerm",
         "reason_divisor": "int",
         "reason_lower": "float",
         "reason_upper": "float",
-        "reason_context": "RopePointer",
+        "reason_context": "RopeTerm",
         "reason_active_requisite": "bool",
         "respect_bit": "float",
         "solo": "int",
@@ -168,7 +168,7 @@ def get_quick_pidgens_column_ref() -> dict[str, set[str]]:
 
 
 def pidginable_class_types() -> set:
-    return {"NameTerm", "TitleTerm", "LabelTerm", "RopePointer"}
+    return {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}
 
 
 def get_pidginable_args() -> set:
@@ -235,7 +235,7 @@ def get_pidgin_LabelTerm_args() -> set[str]:
     }
 
 
-def get_pidgin_RopePointer_args() -> set[str]:
+def get_pidgin_RopeTerm_args() -> set[str]:
     return {
         "fact_state",
         "fact_context",

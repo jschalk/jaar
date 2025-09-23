@@ -8,7 +8,7 @@ from src.ch07_belief_logic.test._util.example_beliefs import (
 )
 
 
-def test_BeliefUnit_get_relevant_ropes_EmptyRopePointerReturnsEmpty():
+def test_BeliefUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
 
@@ -21,7 +21,7 @@ def test_BeliefUnit_get_relevant_ropes_EmptyRopePointerReturnsEmpty():
     assert relevant_ropes == set()
 
 
-def test_BeliefUnit_get_relevant_ropes_RootRopePointerReturnsOnlyItself():
+def test_BeliefUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     root_rope = to_rope(sue_belief.moment_label)

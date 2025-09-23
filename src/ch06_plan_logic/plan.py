@@ -19,7 +19,7 @@ from src.ch02_rope_logic.term import (
     GroupTitle,
     LabelTerm,
     MomentLabel,
-    RopePointer,
+    RopeTerm,
     VoiceName,
     default_knot_if_None,
 )
@@ -52,7 +52,7 @@ from src.ch05_reason_logic.reason import (
     ReasonCore,
     ReasonHeir,
     ReasonUnit,
-    RopePointer,
+    RopeTerm,
     factheir_shop,
     factunit_shop,
     factunits_get_from_dict,
@@ -94,13 +94,13 @@ class PlanAttrHolder:
     star: int = None
     uid: int = None
     reason: ReasonUnit = None
-    reason_context: RopePointer = None
-    reason_case: RopePointer = None
+    reason_context: RopeTerm = None
+    reason_case: RopeTerm = None
     reason_lower: float = None
     reason_upper: float = None
     reason_divisor: int = None
-    reason_del_case_reason_context: RopePointer = None
-    reason_del_case_reason_state: RopePointer = None
+    reason_del_case_reason_context: RopeTerm = None
+    reason_del_case_reason_state: RopeTerm = None
     reason_plan_active_requisite: str = None
     laborunit: LaborUnit = None
     healerunit: HealerUnit = None
@@ -138,13 +138,13 @@ def planattrholder_shop(
     star: int = None,
     uid: int = None,
     reason: ReasonUnit = None,
-    reason_context: RopePointer = None,
-    reason_case: RopePointer = None,
+    reason_context: RopeTerm = None,
+    reason_case: RopeTerm = None,
     reason_lower: float = None,
     reason_upper: float = None,
     reason_divisor: int = None,
-    reason_del_case_reason_context: RopePointer = None,
-    reason_del_case_reason_state: RopePointer = None,
+    reason_del_case_reason_context: RopeTerm = None,
+    reason_del_case_reason_state: RopeTerm = None,
     reason_plan_active_requisite: str = None,
     laborunit: LaborUnit = None,
     healerunit: HealerUnit = None,
@@ -211,18 +211,18 @@ class PlanUnit:
     Attributes
     ----------
     plan_label : LabelTerm of plan.
-    parent_rope : RopePointer that this plan stems from. Empty string for root plans.
+    parent_rope : RopeTerm that this plan stems from. Empty string for root plans.
     root : bool at Indicates whether this is a root plan.
     moment_label : MomentLabel that is root plan LabelTerm.
     knot : str Identifier or label for bridging plans.
     optional:
     star : int weight that is arbitrary used by parent plan to calculated relative importance.
-    kids : dict[RopePointer], Internal mapping of child plans by their LabelTerm
+    kids : dict[RopeTerm], Internal mapping of child plans by their LabelTerm
     uid : int Unique identifier, forgot how I use this.
     awardunits : dict[GroupTitle, AwardUnit] that describe who funds and who is funded
-    reasonunits : dict[RopePointer, ReasonUnit] that stores all reasons
+    reasonunits : dict[RopeTerm, ReasonUnit] that stores all reasons
     laborunit : LaborUnit that describes whom this task is for
-    factunits : dict[RopePointer, FactUnit] that stores all facts
+    factunits : dict[RopeTerm, FactUnit] that stores all facts
     healerunit : HealerUnit, if a ancestor plan is a problem, this can donote a healing plan.
     begin : float that describes the begin of a numberical range if it exists
     close : float that describes the close of a numberical range if it exists
@@ -243,7 +243,7 @@ class PlanUnit:
     awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
     awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
     descendant_task_count : int Count of descendant plans marked as tasks.
-    factheirs : dict[RopePointer, FactHeir] parent plan provided facts.
+    factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
     fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
@@ -251,7 +251,7 @@ class PlanUnit:
     healerunit_ratio : float
     tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.
-    reasonheirs : dict[RopePointer, ReasonHeir] parent plan provided reasoning branches.
+    reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
     chore : bool describes if a unit can be changed to inactive with fact range change.
     laborheir : LaborHeir parent plan provided labor relationships
     gogo_calc : float
@@ -260,15 +260,15 @@ class PlanUnit:
 
     plan_label: LabelTerm = None
     moment_label: MomentLabel = None
-    parent_rope: RopePointer = None
-    kids: dict[RopePointer,] = None
+    parent_rope: RopeTerm = None
+    kids: dict[RopeTerm,] = None
     root: bool = None
     star: int = None
     uid: int = None  # Calculated field?
     awardunits: dict[GroupTitle, AwardUnit] = None
-    reasonunits: dict[RopePointer, ReasonUnit] = None
+    reasonunits: dict[RopeTerm, ReasonUnit] = None
     laborunit: LaborUnit = None
-    factunits: dict[RopePointer, FactUnit] = None
+    factunits: dict[RopeTerm, FactUnit] = None
     healerunit: HealerUnit = None
     begin: float = None
     close: float = None
@@ -290,7 +290,7 @@ class PlanUnit:
     awardheirs: dict[GroupTitle, AwardHeir] = None
     awardlines: dict[GroupTitle, AwardLine] = None
     descendant_task_count: int = None
-    factheirs: dict[RopePointer, FactHeir] = None
+    factheirs: dict[RopeTerm, FactHeir] = None
     fund_ratio: float = None
     fund_iota: FundIota = None
     fund_onset: FundNum = None
@@ -298,20 +298,20 @@ class PlanUnit:
     healerunit_ratio: float = None
     tree_level: int = None
     range_evaluated: bool = None
-    reasonheirs: dict[RopePointer, ReasonHeir] = None
+    reasonheirs: dict[RopeTerm, ReasonHeir] = None
     chore: bool = None
     laborheir: LaborHeir = None
     gogo_calc: float = None
     stop_calc: float = None
 
-    def is_agenda_plan(self, necessary_reason_context: RopePointer = None) -> bool:
+    def is_agenda_plan(self, necessary_reason_context: RopeTerm = None) -> bool:
         reason_context_reasonunit_exists = self.reason_context_reasonunit_exists(
             necessary_reason_context
         )
         return self.task and self.active and reason_context_reasonunit_exists
 
     def reason_context_reasonunit_exists(
-        self, necessary_reason_context: RopePointer = None
+        self, necessary_reason_context: RopeTerm = None
     ) -> bool:
         x_reasons = self.reasonunits.values()
         x_reason_context = necessary_reason_context
@@ -327,7 +327,7 @@ class PlanUnit:
         elif prev_active != now_active:
             self.active_hx[tree_traverse_count] = now_active
 
-    def set_factheirs(self, facts: dict[RopePointer, FactCore]):
+    def set_factheirs(self, facts: dict[RopeTerm, FactCore]):
         facts_dict = get_empty_dict_if_None(facts)
         self.factheirs = {}
         for x_factcore in facts_dict.values():
@@ -373,10 +373,10 @@ class PlanUnit:
     def set_factunit(self, factunit: FactUnit):
         self.factunits[factunit.fact_context] = factunit
 
-    def factunit_exists(self, x_fact_context: RopePointer) -> bool:
+    def factunit_exists(self, x_fact_context: RopeTerm) -> bool:
         return self.factunits.get(x_fact_context) != None
 
-    def get_factunits_dict(self) -> dict[RopePointer, str]:
+    def get_factunits_dict(self) -> dict[RopeTerm, str]:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, fact_contextunit: FactUnit):
@@ -392,7 +392,7 @@ class PlanUnit:
             fact_upper=fact_contextunit.fact_upper,
         )
 
-    def del_factunit(self, fact_context: RopePointer):
+    def del_factunit(self, fact_context: RopeTerm):
         self.factunits.pop(fact_context)
 
     def set_fund_attr(
@@ -438,7 +438,7 @@ class PlanUnit:
     def get_obj_key(self) -> LabelTerm:
         return self.plan_label
 
-    def get_plan_rope(self) -> RopePointer:
+    def get_plan_rope(self) -> RopeTerm:
         if self.parent_rope in (None, ""):
             return create_rope(self.plan_label, knot=self.knot)
         else:
@@ -455,7 +455,7 @@ class PlanUnit:
         self.set_descendant_task_count_zero_if_None()
         self.descendant_task_count += x_int
 
-    def get_descendant_ropes_from_kids(self) -> dict[RopePointer, int]:
+    def get_descendant_ropes_from_kids(self) -> dict[RopeTerm, int]:
         descendant_ropes = {}
         to_evaluate_plans = list(self.kids.values())
         count_x = 0
@@ -702,14 +702,14 @@ class PlanUnit:
             self.stop_calc = (self.stop_calc * r_plan_numor) / r_plan_denom
         self.range_evaluated = True
 
-    def _del_reasonunit_all_cases(self, reason_context: RopePointer, case: RopePointer):
+    def _del_reasonunit_all_cases(self, reason_context: RopeTerm, case: RopeTerm):
         if reason_context is not None and case is not None:
             self.del_reasonunit_case(reason_context=reason_context, case=case)
             if len(self.reasonunits[reason_context].cases) == 0:
                 self.del_reasonunit_reason_context(reason_context=reason_context)
 
     def set_reason_plan_active_requisite(
-        self, reason_context: RopePointer, reason_active_requisite: str
+        self, reason_context: RopeTerm, reason_active_requisite: str
     ):
         x_reasonunit = self._get_or_create_reasonunit(reason_context=reason_context)
         if reason_active_requisite is False:
@@ -719,7 +719,7 @@ class PlanUnit:
         elif reason_active_requisite:
             x_reasonunit.reason_active_requisite = True
 
-    def _get_or_create_reasonunit(self, reason_context: RopePointer) -> ReasonUnit:
+    def _get_or_create_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         x_reasonunit = None
         try:
             x_reasonunit = self.reasonunits[reason_context]
@@ -730,8 +730,8 @@ class PlanUnit:
 
     def set_reason_case(
         self,
-        reason_context: RopePointer,
-        case: RopePointer,
+        reason_context: RopeTerm,
+        case: RopeTerm,
         reason_lower: float,
         reason_upper: float,
         reason_divisor: int,
@@ -744,13 +744,13 @@ class PlanUnit:
             reason_divisor=reason_divisor,
         )
 
-    def del_reasonunit_reason_context(self, reason_context: RopePointer):
+    def del_reasonunit_reason_context(self, reason_context: RopeTerm):
         try:
             self.reasonunits.pop(reason_context)
         except KeyError as e:
             raise InvalidPlanException(f"No ReasonUnit at '{reason_context}'") from e
 
-    def del_reasonunit_case(self, reason_context: RopePointer, case: RopePointer):
+    def del_reasonunit_case(self, reason_context: RopeTerm, case: RopeTerm):
         reason_unit = self.reasonunits[reason_context]
         reason_unit.del_case(case=case)
 
@@ -797,10 +797,10 @@ class PlanUnit:
         reason.knot = self.knot
         self.reasonunits[reason.reason_context] = reason
 
-    def reasonunit_exists(self, x_reason_context: RopePointer) -> bool:
+    def reasonunit_exists(self, x_reason_context: RopeTerm) -> bool:
         return self.reasonunits.get(x_reason_context) != None
 
-    def get_reasonunit(self, reason_context: RopePointer) -> ReasonUnit:
+    def get_reasonunit(self, reason_context: RopeTerm) -> ReasonUnit:
         return self.reasonunits.get(reason_context)
 
     def set_reasonheirs_status(self):
@@ -845,8 +845,8 @@ class PlanUnit:
 
     def set_range_factheirs(
         self,
-        belief_plan_dict: dict[RopePointer,],
-        range_inheritors: dict[RopePointer, RopePointer],
+        belief_plan_dict: dict[RopeTerm,],
+        range_inheritors: dict[RopeTerm, RopeTerm],
     ):
         for reason_context in self.reasonheirs.keys():
             if range_root_rope := range_inheritors.get(reason_context):
@@ -856,7 +856,7 @@ class PlanUnit:
                 self._create_factheir(all_plans, range_root_rope, reason_context)
 
     def _create_factheir(
-        self, all_plans: list, range_root_rope: RopePointer, reason_context: RopePointer
+        self, all_plans: list, range_root_rope: RopeTerm, reason_context: RopeTerm
     ):
         range_root_factheir = self.factheirs.get(range_root_rope)
         old_reason_lower = range_root_factheir.fact_lower
@@ -881,16 +881,16 @@ class PlanUnit:
             reason.clear_status()
 
     def _coalesce_with_reasonunits(
-        self, reasonheirs: dict[RopePointer, ReasonHeir]
-    ) -> dict[RopePointer, ReasonHeir]:
+        self, reasonheirs: dict[RopeTerm, ReasonHeir]
+    ) -> dict[RopeTerm, ReasonHeir]:
         new_reasonheirs = deepcopy(reasonheirs)
         new_reasonheirs |= self.reasonunits
         return new_reasonheirs
 
     def set_reasonheirs(
         self,
-        belief_plan_dict: dict[RopePointer,],
-        reasonheirs: dict[RopePointer, ReasonCore],
+        belief_plan_dict: dict[RopeTerm,],
+        reasonheirs: dict[RopeTerm, ReasonCore],
     ):
         coalesced_reasons = self._coalesce_with_reasonunits(reasonheirs)
         self.reasonheirs = {}
@@ -915,7 +915,7 @@ class PlanUnit:
             new_reasonheir.inherit_from_reasonheir(x_reasonunit)
             self.reasonheirs[new_reasonheir.reason_context] = new_reasonheir
 
-    def get_reasonheir(self, reason_context: RopePointer) -> ReasonHeir:
+    def get_reasonheir(self, reason_context: RopeTerm) -> ReasonHeir:
         return self.reasonheirs.get(reason_context)
 
     def get_reasonunits_dict(self):
@@ -924,7 +924,7 @@ class PlanUnit:
             for reason_context, reason in self.reasonunits.items()
         }
 
-    def get_kids_dict(self) -> dict[RopePointer,]:
+    def get_kids_dict(self) -> dict[RopeTerm,]:
         return {c_rope: kid.to_dict() for c_rope, kid in self.kids.items()}
 
     def get_awardunits_dict(self) -> dict[GroupTitle, dict]:
@@ -987,7 +987,7 @@ class PlanUnit:
 
         return x_dict
 
-    def find_replace_rope(self, old_rope: RopePointer, new_rope: RopePointer):
+    def find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
         if is_sub_rope(ref_rope=self.parent_rope, sub_rope=old_rope):
             self.parent_rope = rebuild_rope(self.parent_rope, old_rope, new_rope)
 
@@ -1022,14 +1022,14 @@ class PlanUnit:
 def planunit_shop(
     plan_label: LabelTerm = None,
     uid: int = None,  # Calculated field?
-    parent_rope: RopePointer = None,
+    parent_rope: RopeTerm = None,
     kids: dict = None,
     star: int = 1,
     awardunits: dict[GroupTitle, AwardUnit] = None,
     awardheirs: dict[GroupTitle, AwardHeir] = None,  # Calculated field
     awardlines: dict[GroupTitle, AwardUnit] = None,  # Calculated field
-    reasonunits: dict[RopePointer, ReasonUnit] = None,
-    reasonheirs: dict[RopePointer, ReasonHeir] = None,  # Calculated field
+    reasonunits: dict[RopeTerm, ReasonUnit] = None,
+    reasonheirs: dict[RopeTerm, ReasonHeir] = None,  # Calculated field
     laborunit: LaborUnit = None,
     laborheir: LaborHeir = None,  # Calculated field
     factunits: dict[FactUnit] = None,
@@ -1157,9 +1157,9 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
 
 
 def all_plans_between(
-    belief_plan_dict: dict[RopePointer, PlanUnit],
-    src_rope: RopePointer,
-    dst_reason_context: RopePointer,
+    belief_plan_dict: dict[RopeTerm, PlanUnit],
+    src_rope: RopeTerm,
+    dst_reason_context: RopeTerm,
     knot: str,
 ) -> list[PlanUnit]:
     all_ropes = all_ropes_between(src_rope, dst_reason_context, knot)

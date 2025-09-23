@@ -1,4 +1,4 @@
-from src.ch02_rope_logic.rope import RopePointer, create_rope
+from src.ch02_rope_logic.rope import RopeTerm, create_rope
 from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
@@ -32,31 +32,31 @@ def run_str() -> str:
     return "run"
 
 
-def casa_rope() -> RopePointer:
+def casa_rope() -> RopeTerm:
     return create_rope("amy23", casa_str())
 
 
-def cook_rope() -> RopePointer:
+def cook_rope() -> RopeTerm:
     return create_rope(casa_rope(), cook_str())
 
 
-def eat_rope() -> RopePointer:
+def eat_rope() -> RopeTerm:
     return create_rope(casa_rope(), eat_str())
 
 
-def hungry_rope() -> RopePointer:
+def hungry_rope() -> RopeTerm:
     return create_rope(eat_rope(), hungry_str())
 
 
-def full_rope() -> RopePointer:
+def full_rope() -> RopeTerm:
     return create_rope(eat_rope(), full_str())
 
 
-def clean_rope() -> RopePointer:
+def clean_rope() -> RopeTerm:
     return create_rope(casa_rope(), clean_str())
 
 
-def run_rope() -> RopePointer:
+def run_rope() -> RopeTerm:
     return create_rope(casa_rope(), run_str())
 
 

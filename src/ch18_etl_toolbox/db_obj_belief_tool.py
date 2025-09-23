@@ -2,7 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from sqlite3 import Cursor as sqlite3_Cursor
 from src.ch01_data_toolbox.db_toolbox import sqlite_obj_str
-from src.ch02_rope_logic.term import BeliefName, GroupTitle, RopePointer, VoiceName
+from src.ch02_rope_logic.term import BeliefName, GroupTitle, RopeTerm, VoiceName
 from src.ch04_group_logic.group import AwardHeir, GroupUnit, MemberShip
 from src.ch04_group_logic.labor import LaborHeir
 from src.ch04_group_logic.voice import VoiceUnit
@@ -367,12 +367,12 @@ VALUES (
 class ObjKeysHolder:
     moment_label: MomentLabel = None
     belief_name: BeliefName = None
-    rope: RopePointer = None
-    reason_context: RopePointer = None
+    rope: RopeTerm = None
+    reason_context: RopeTerm = None
     voice_name: VoiceName = None
     membership: GroupTitle = None
     group_title: GroupTitle = None
-    fact_rope: RopePointer = None
+    fact_rope: RopeTerm = None
 
 
 def insert_job_blrmemb(

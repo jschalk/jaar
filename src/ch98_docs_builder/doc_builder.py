@@ -6,7 +6,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
+from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropeterm_explanation_md
 from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_brick_formats_md,
     get_idea_brick_mds,
@@ -95,8 +95,8 @@ def save_chapter_blurbs_md(x_dir: str):
     save_file(x_dir, "chapter_blurbs.md", get_chapter_blurbs_md())
 
 
-def save_ropepointer_explanation_md(x_dir: str):
-    save_file(x_dir, "ropepointer_explanation.md", get_ropepointer_explanation_md())
+def save_ropeterm_explanation_md(x_dir: str):
+    save_file(x_dir, "ropeterm_explanation.md", get_ropeterm_explanation_md())
 
 
 def save_idea_brick_mds(dest_dir: str):

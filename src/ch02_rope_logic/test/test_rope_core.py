@@ -2,7 +2,7 @@ from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import (
-    RopePointer,
+    RopeTerm,
     all_ropes_between,
     create_rope,
     create_rope_from_labels,
@@ -192,7 +192,7 @@ def test_rope_is_sub_rope_ReturnsObj_Scenario1_WhenNone_default_knot_if_None():
     assert is_sub_rope(slash_cleaning_rope, default_laundrys_rope) is False
 
 
-def test_rope_rebuild_rope_ReturnsRopePointer():
+def test_rope_rebuild_rope_ReturnsRopeTerm():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_rope(), casa_str)
@@ -323,12 +323,12 @@ def test_rope_get_parent_rope_ReturnsObj_Scenario1():
 
 @dataclass
 class TempTestingObj:
-    x_rope: RopePointer = ""
+    x_rope: RopeTerm = ""
 
     def find_replace_rope(self, old_rope, new_rope):
         self.x_rope = rebuild_rope(self.x_rope, old_rope=old_rope, new_rope=new_rope)
 
-    def get_obj_key(self) -> RopePointer:
+    def get_obj_key(self) -> RopeTerm:
         return self.x_rope
 
 
@@ -411,7 +411,7 @@ def test_rope_get_ancestor_ropes_ReturnsObj_Scenario1_nondefault_knot():
     assert texas_anc_ropes == texas_ancestor_ropes
 
 
-def test_rope_get_forefather_ropes_ReturnsAncestorRopePointersWithoutClean():
+def test_rope_get_forefather_ropes_ReturnsAncestorRopeTermsWithoutClean():
     # ESTABLISH
     x_s = default_knot_if_None()
     nation_str = "nation"
@@ -469,8 +469,8 @@ def test_is_labelterm_ReturnsObj():
     assert is_labelterm("", x_knot=x_s) is False
     assert is_labelterm("casa", x_knot=x_s)
     assert not is_labelterm(f"ZZ{x_s}casa", x_s)
-    assert not is_labelterm(RopePointer(f"ZZ{x_s}casa"), x_s)
-    assert is_labelterm(RopePointer("ZZ"), x_s)
+    assert not is_labelterm(RopeTerm(f"ZZ{x_s}casa"), x_s)
+    assert is_labelterm(RopeTerm("ZZ"), x_s)
 
 
 def test_is_heir_rope_IdentifiesHeirs():
@@ -545,7 +545,7 @@ def test_replace_knot_RaisesError():
     )
 
 
-def test_replace_knot_WhenNewknotIsFirstInRopePointerRaisesError():
+def test_replace_knot_WhenNewknotIsFirstInRopeTermRaisesError():
     # ESTABLISH
     cooker_str = "/cooker"
     cleaner_str = "cleaner"

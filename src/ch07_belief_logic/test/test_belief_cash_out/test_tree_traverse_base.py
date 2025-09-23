@@ -390,7 +390,7 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     assert y_1st_rope_in_ordered_list == root_rope
 
 
-def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopePointers():
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopeTerms():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
 

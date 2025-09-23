@@ -11,7 +11,7 @@ from src.ch02_rope_logic.term import (
     LabelTerm,
     MomentLabel,
     NameTerm,
-    RopePointer,
+    RopeTerm,
     TitleTerm,
     VoiceName,
     default_knot_if_None,
@@ -25,7 +25,7 @@ def test_KnotTerm_Exists():
     x_knot = KnotTerm(empty_str)
     # THEN
     assert x_knot == empty_str
-    doc_str = "A string to used as a delimiter in RopePointers."
+    doc_str = "A string to used as a delimiter in RopeTerms."
     assert inspect_getdoc(x_knot) == doc_str
 
 
@@ -136,7 +136,7 @@ def test_LabelTerm_Exists():
     x_rope = LabelTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree node. Nodes cannot contain RopePointer {knot_str()}"
+    doc_str = f"A string representation of a tree node. Nodes cannot contain RopeTerm {knot_str()}"
     assert inspect_getdoc(x_rope) == doc_str
 
 
@@ -172,11 +172,11 @@ def test_CentralLabel_Exists():
     assert inspect_getdoc(x_central) == doc_str
 
 
-def test_RopePointer_Exists():
+def test_RopeTerm_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_rope = RopePointer(empty_str)
+    x_rope = RopeTerm(empty_str)
     # THEN
     assert x_rope == empty_str
     doc_str = f"A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}"

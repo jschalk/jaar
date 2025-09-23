@@ -1,6 +1,6 @@
 from src.ch02_rope_logic.rope import (
     LabelTerm,
-    RopePointer,
+    RopeTerm,
     create_rope,
     get_root_label_from_rope,
     get_tail_label,
@@ -11,7 +11,7 @@ from src.ch08_timeline_logic.timeline_main import belieftimelinepoint_shop
 
 
 def get_reason_case_readable_str(
-    reason_context: RopePointer,
+    reason_context: RopeTerm,
     caseunit: CaseUnit,
     timeline_label: LabelTerm = None,
     beliefunit: BeliefUnit = None,

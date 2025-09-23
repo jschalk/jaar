@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.dict_toolbox import get_1_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch02_rope_logic.rope import LabelTerm, RopePointer, create_rope
+from src.ch02_rope_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.ch06_plan_logic.plan import (
     PlanUnit,
     all_plans_between,
@@ -151,7 +151,7 @@ def new_timeline_planunit(timeline_label: TimeLineLabel, c400_number: int) -> Pl
     return planunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
-def get_timeline_rope(moment_label: str, timeline_label: str, knot: str) -> RopePointer:
+def get_timeline_rope(moment_label: str, timeline_label: str, knot: str) -> RopeTerm:
     time_rope = create_rope(moment_label, "time", knot)
     return create_rope(time_rope, timeline_label, knot)
 
@@ -186,7 +186,7 @@ def add_newtimeline_planunit(x_beliefunit: BeliefUnit, timeline_config: dict):
 
 def add_planunits(
     x_beliefunit: BeliefUnit,
-    parent_rope: RopePointer,
+    parent_rope: RopeTerm,
     config_dict: dict[str, PlanUnit],
 ):
     for x_time_planunit in config_dict.values():
@@ -225,43 +225,35 @@ def add_stan_planunits(
 
 
 def get_c400_clean_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopePointer
-) -> RopePointer:
+    x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm
+) -> RopeTerm:
     c400_leap_rope = x_beliefunit.make_rope(time_range_root_rope, "c400_leap")
     return x_beliefunit.make_rope(c400_leap_rope, "c400_clean")
 
 
-def get_c100_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopePointer
-) -> RopePointer:
+def get_c100_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
     c400_clean_rope = get_c400_clean_rope(x_beliefunit, time_range_root_rope)
     return x_beliefunit.make_rope(c400_clean_rope, "c100")
 
 
 def get_yr4_clean_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopePointer
-) -> RopePointer:
+    x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm
+) -> RopeTerm:
     c100_rope = get_c100_rope(x_beliefunit, time_range_root_rope)
     yr4_leap_rope = x_beliefunit.make_rope(c100_rope, "yr4_leap")
     return x_beliefunit.make_rope(yr4_leap_rope, "yr4_clean")
 
 
-def get_year_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopePointer
-) -> RopePointer:
+def get_year_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
     yr4_clean_rope = get_yr4_clean_rope(x_beliefunit, time_range_root_rope)
     return x_beliefunit.make_rope(yr4_clean_rope, "year")
 
 
-def get_week_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopePointer
-) -> RopePointer:
+def get_week_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
     return x_beliefunit.make_rope(time_range_root_rope, "week")
 
 
-def get_day_rope(
-    x_beliefunit: BeliefUnit, time_range_root_rope: RopePointer
-) -> RopePointer:
+def get_day_rope(x_beliefunit: BeliefUnit, time_range_root_rope: RopeTerm) -> RopeTerm:
     return x_beliefunit.make_rope(time_range_root_rope, "day")
 
 
@@ -420,7 +412,7 @@ def get_min_from_dt_offset(dt: datetime, yr1_jan1_offset: int) -> int:
 
 
 def get_min_from_dt(
-    x_belief: BeliefUnit, timeline_rope: RopePointer, x_datetime: datetime
+    x_belief: BeliefUnit, timeline_rope: RopeTerm, x_datetime: datetime
 ) -> int:
     offset_rope = x_belief.make_rope(timeline_rope, "yr1_jan1_offset")
     offset_plan = x_belief.get_plan_obj(offset_rope)
@@ -455,7 +447,7 @@ class BeliefTimelinePoint:
     readable time blurb from BeliefUnit, time_range_root_rope, and minute integer."""
 
     x_beliefunit: BeliefUnit = None
-    time_range_root_rope: RopePointer = None
+    time_range_root_rope: RopeTerm = None
     x_min: TimeLinePoint = None
     # calculated fields
     _timeline_plan: PlanUnit = None

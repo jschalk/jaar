@@ -774,7 +774,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
     assert case_dict == static_dict
 
 
-def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopePointer():
+def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
     # ESTABLISH
     clock_str = "clock"
     clock_rope = create_rope(root_label(), clock_str)

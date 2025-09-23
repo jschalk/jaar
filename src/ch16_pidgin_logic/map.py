@@ -24,7 +24,7 @@ from src.ch02_rope_logic.term import (
     EventInt,
     FaceName,
     LabelTerm,
-    RopePointer,
+    RopeTerm,
     default_knot_if_None,
 )
 from src.ch16_pidgin_logic.pidgin_config import default_unknown_str_if_None
@@ -340,7 +340,7 @@ class RopeMap:
 
         return self._get_inx_value(otx_rope)
 
-    def _reveal_rope_inx(self, otx_rope) -> RopePointer:
+    def _reveal_rope_inx(self, otx_rope) -> RopeTerm:
         otx_parent_rope = get_parent_rope(otx_rope, self.otx_knot)
         if self.otx_exists(otx_parent_rope) is False and otx_parent_rope != "":
             return None

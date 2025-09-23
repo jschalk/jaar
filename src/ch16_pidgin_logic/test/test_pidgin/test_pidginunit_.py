@@ -8,7 +8,7 @@ from src.ch15_moment_logic.moment_config import get_moment_args_class_types
 from src.ch16_pidgin_logic._ref.ch16_keywords import (
     LabelTerm_str,
     NameTerm_str,
-    RopePointer_str,
+    RopeTerm_str,
     TitleTerm_str,
     awardee_title_str,
     belief_name_str,
@@ -45,7 +45,7 @@ from src.ch16_pidgin_logic.pidgin_config import (
     get_pidgin_args_class_types,
     get_pidgin_LabelTerm_args,
     get_pidgin_NameTerm_args,
-    get_pidgin_RopePointer_args,
+    get_pidgin_RopeTerm_args,
     get_pidgin_TitleTerm_args,
     get_pidginable_args,
     pidginable_class_types,
@@ -71,7 +71,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("addin") == "float"
     assert pidgin_args_class_types.get("amount") == "float"
     assert pidgin_args_class_types.get("awardee_title") == TitleTerm_str()
-    assert pidgin_args_class_types.get("reason_context") == RopePointer_str()
+    assert pidgin_args_class_types.get("reason_context") == RopeTerm_str()
     assert pidgin_args_class_types.get("reason_active_requisite") == "bool"
     assert pidgin_args_class_types.get("begin") == "float"
     assert pidgin_args_class_types.get("c400_number") == "int"
@@ -87,7 +87,7 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("denom") == "int"
     assert pidgin_args_class_types.get("reason_divisor") == "int"
     assert pidgin_args_class_types.get("face_name") == NameTerm_str()
-    assert pidgin_args_class_types.get("fact_context") == RopePointer_str()
+    assert pidgin_args_class_types.get("fact_context") == RopeTerm_str()
     assert pidgin_args_class_types.get("moment_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("fact_upper") == "float"
     assert pidgin_args_class_types.get("fact_lower") == "float"
@@ -103,19 +103,19 @@ def test_get_pidgin_args_class_types_ReturnsObj():
     assert pidgin_args_class_types.get("month_label") == LabelTerm_str()
     assert pidgin_args_class_types.get("monthday_distortion") == "int"
     assert pidgin_args_class_types.get("morph") == "bool"
-    assert pidgin_args_class_types.get("reason_state") == RopePointer_str()
+    assert pidgin_args_class_types.get("reason_state") == RopeTerm_str()
     assert pidgin_args_class_types.get("reason_upper") == "float"
     assert pidgin_args_class_types.get("numor") == "int"
     assert pidgin_args_class_types.get("offi_time") == "TimeLinePoint"
     assert pidgin_args_class_types.get("belief_name") == NameTerm_str()
     assert pidgin_args_class_types.get("reason_lower") == "float"
     assert pidgin_args_class_types.get("penny") == "float"
-    assert pidgin_args_class_types.get("fact_state") == RopePointer_str()
+    assert pidgin_args_class_types.get("fact_state") == RopeTerm_str()
     assert pidgin_args_class_types.get("task") == "bool"
     assert pidgin_args_class_types.get("problem_bool") == "bool"
     assert pidgin_args_class_types.get("quota") == "int"
     assert pidgin_args_class_types.get("respect_bit") == "float"
-    assert pidgin_args_class_types.get("plan_rope") == RopePointer_str()
+    assert pidgin_args_class_types.get("plan_rope") == RopeTerm_str()
     assert pidgin_args_class_types.get("celldepth") == "int"
     assert pidgin_args_class_types.get("stop_want") == "float"
     assert pidgin_args_class_types.get("take_force") == "float"
@@ -178,7 +178,7 @@ def test_pidginable_class_types_ReturnsObj():
         NameTerm_str(),
         TitleTerm_str(),
         LabelTerm_str(),
-        RopePointer_str(),
+        RopeTerm_str(),
     }
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
@@ -353,12 +353,12 @@ def test_get_pidgin_LabelTerm_args_ReturnsObj():
     assert pidgin_LabelTerm_args == expected_args
 
 
-def test_get_pidgin_RopePointer_args_ReturnsObj():
+def test_get_pidgin_RopeTerm_args_ReturnsObj():
     # ESTABLISH / WHEN
-    pidgin_RopePointer_args = get_pidgin_RopePointer_args()
+    pidgin_RopeTerm_args = get_pidgin_RopeTerm_args()
 
     # THEN
-    assert pidgin_RopePointer_args == {
+    assert pidgin_RopeTerm_args == {
         fact_state_str(),
         fact_context_str(),
         plan_rope_str(),
@@ -368,9 +368,9 @@ def test_get_pidgin_RopePointer_args_ReturnsObj():
     expected_args = {
         x_arg
         for x_arg, class_type in get_pidgin_args_class_types().items()
-        if class_type == RopePointer_str()
+        if class_type == RopeTerm_str()
     }
-    assert pidgin_RopePointer_args == expected_args
+    assert pidgin_RopeTerm_args == expected_args
 
 
 def test_PidginUnit_Exists():
@@ -519,7 +519,7 @@ def test_PidginUnit_set_mapunit_SetsAttr():
     assert sue_pidginunit.namemap == namemap
 
 
-def test_PidginUnit_set_mapunit_SetsAttr_SpecialSituation_RopePointer():
+def test_PidginUnit_set_mapunit_SetsAttr_SpecialSituation_RopeTerm():
     # ESTABLISH
     sue_str = "Sue"
     sue_pidginunit = pidginunit_shop(sue_str)
@@ -610,7 +610,7 @@ def test_PidginUnit_get_mapunit_ReturnsObj():
     assert sue_pu.get_mapunit(NameTerm_str()) == sue_pu.namemap
     assert sue_pu.get_mapunit(TitleTerm_str()) == sue_pu.titlemap
     assert sue_pu.get_mapunit(LabelTerm_str()) == sue_pu.labelmap
-    assert sue_pu.get_mapunit(RopePointer_str()) == sue_pu.ropemap
+    assert sue_pu.get_mapunit(RopeTerm_str()) == sue_pu.ropemap
 
     assert sue_pu.get_mapunit(NameTerm_str()) != sue_pu.ropemap
     assert sue_pu.get_mapunit(TitleTerm_str()) != sue_pu.ropemap
@@ -675,7 +675,7 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario0_NameTerm_str():
     assert namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_RopePointer_str():
+def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_RopeTerm_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -685,7 +685,7 @@ def test_PidginUnit_set_otx2inx_SetsAttr_Scenario1_RopePointer_str():
     assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_pidginunit.set_otx2inx(RopePointer_str(), sue_otx, sue_inx)
+    zia_pidginunit.set_otx2inx(RopeTerm_str(), sue_otx, sue_inx)
 
     # THEN
     assert ropemap.otx2inx_exists(sue_otx, sue_inx)
@@ -758,7 +758,7 @@ def test_PidginUnit_del_otx2inx_ReturnsObj():
     assert zia_pidginunit.otx2inx_exists(rope_type, zia_str, zia_str)
 
 
-def test_PidginUnit_set_label_SetsAttr_Scenario1_RopePointer_str():
+def test_PidginUnit_set_label_SetsAttr_Scenario1_RopeTerm_str():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
