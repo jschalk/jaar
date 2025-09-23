@@ -10,8 +10,8 @@ class CRUD_command(str):
 def atom_config_path() -> str:
     "Returns Path: ch09_belief_atom_logic/atom_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch09_belief_atom_logic")
-    return create_path(module_dir, "atom_config.json")
+    chapter_dir = create_path(src_dir, "ch09_belief_atom_logic")
+    return create_path(chapter_dir, "atom_config.json")
 
 
 def get_atom_config_dict() -> dict:

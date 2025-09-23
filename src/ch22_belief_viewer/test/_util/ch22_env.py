@@ -3,11 +3,11 @@ from src.ch01_data_toolbox.file_toolbox import delete_dir
 from typing import Any, Generator, Literal
 
 
-def get_module_temp_dir() -> str:
+def get_chapter_temp_dir() -> str:
     return "src/ch22_belief_viewer"
 
 
-def get_module_temp_dir() -> Literal["src\\ch22_belief_viewer\\test\\_util\\temp"]:
+def get_chapter_temp_dir() -> Literal["src\\ch22_belief_viewer\\test\\_util\\temp"]:
     return "src\\ch22_belief_viewer\\test\\_util\\temp"
 
 
@@ -15,7 +15,7 @@ def get_module_temp_dir() -> Literal["src\\ch22_belief_viewer\\test\\_util\\temp
 def env_dir_setup_cleanup() -> (
     Generator[Literal["src\\ch22_belief_viewer\\test\\_util"], Any, None]
 ):
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     delete_dir(dir=env_dir)
     yield env_dir
     delete_dir(dir=env_dir)

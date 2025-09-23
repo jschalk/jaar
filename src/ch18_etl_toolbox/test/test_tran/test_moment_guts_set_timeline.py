@@ -12,7 +12,7 @@ from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch18_etl_toolbox._ref.ch18_keywords import time_str
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.transformers import add_moment_timeline_to_guts
 
@@ -20,7 +20,7 @@ from src.ch18_etl_toolbox.transformers import add_moment_timeline_to_guts
 def test_add_moment_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.timeline = timelineunit_shop(get_five_config())
     moment_json_path = create_moment_json_path(moment_mstr_dir, a23_str)

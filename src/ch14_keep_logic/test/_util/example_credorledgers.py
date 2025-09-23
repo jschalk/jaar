@@ -3,18 +3,18 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch14_keep_logic.rivercycle import get_credorledger
 from src.ch14_keep_logic.test._util.ch14_env import (
-    get_module_temp_dir,
+    get_chapter_temp_dir,
     temp_moment_label,
 )
 from src.ch14_keep_logic.test._util.example_keep_beliefs import get_texas_rope
 
 
 def example_yao_hubunit() -> HubUnit:
-    return hubunit_shop(get_module_temp_dir(), temp_moment_label(), "Yao")
+    return hubunit_shop(get_chapter_temp_dir(), temp_moment_label(), "Yao")
 
 
 def example_yao_texas_hubunit() -> HubUnit:
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     return hubunit_shop(moment_mstr_dir, temp_moment_label(), "Yao", get_texas_rope())
 
 

@@ -16,7 +16,7 @@ from src.ch12_hub_toolbox.ch12_path import (
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -91,7 +91,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
 
     # WHEN

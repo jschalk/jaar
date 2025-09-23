@@ -16,7 +16,7 @@ from src.ch18_etl_toolbox.idea_collector import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -24,7 +24,7 @@ def test_get_all_excel_ideasheets_ReturnsObj_Scenario0_SheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
@@ -82,7 +82,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     event1 = 1
@@ -121,7 +121,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_PidginSheetNames(
 
 def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x_dir = create_path(env_dir, "examples_folder")
     sue_str = "Sue"
     event1 = 1

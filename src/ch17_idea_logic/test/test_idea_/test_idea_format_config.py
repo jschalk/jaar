@@ -45,7 +45,7 @@ from src.ch17_idea_logic.idea_main import (
     _get_headers_list,
     get_idearef_obj,
 )
-from src.ch17_idea_logic.test._util.ch17_env import src_module_dir
+from src.ch17_idea_logic.test._util.ch17_env import src_chapter_dir
 
 
 def test_config_str_functions_ReturnsObjs():
@@ -68,9 +68,9 @@ def test_get_idea_formats_dir_ReturnsObj():
     idea_dir = get_idea_formats_dir()
     # THEN
     print(f"{idea_dir=}")
-    print(f"{src_module_dir()=}")
-    # assert idea_dir == create_path(src_module_dir(), "idea_formats")
-    assert idea_dir == f"{src_module_dir()}/idea_formats"
+    print(f"{src_chapter_dir()=}")
+    # assert idea_dir == create_path(src_chapter_dir(), "idea_formats")
+    assert idea_dir == f"{src_chapter_dir()}/idea_formats"
 
 
 def test_get_idearef_obj_ReturnsObj():

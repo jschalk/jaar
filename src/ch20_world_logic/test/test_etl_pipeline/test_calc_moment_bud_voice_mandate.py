@@ -21,7 +21,7 @@ from src.ch15_moment_logic.moment_main import (
 from src.ch18_etl_toolbox.ch18_path import create_moment_ote1_json_path
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
+    get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.test._util.example_worlds import (
     example_casa_clean_factunit,

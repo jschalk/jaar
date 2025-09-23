@@ -17,7 +17,7 @@ from src.ch12_hub_toolbox.keep_tool import (
 )
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -33,7 +33,7 @@ def test_create_keep_path_dir_if_missing_CreatesDirectory(
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     keep_path = create_keep_rope_path(
         moment_mstr_dir, sue_str, a23_str, texas_rope, None
     )
@@ -50,7 +50,7 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     texas_rope = create_rope(root_label(), "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir,
@@ -89,7 +89,7 @@ def test_create_treasury_db_file_CreatesDatabase(
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     texas_rope = create_rope(a23_str, "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir=moment_mstr_dir,
@@ -119,7 +119,7 @@ def test_create_treasury_db_DoesNotOverWriteDBIfExists(
     # ESTABLISH create keep
     sue_str = "Sue"
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     texas_rope = create_rope(a23_str, "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir=moment_mstr_dir,
@@ -170,7 +170,7 @@ def test_save_duty_belief_SavesFile(env_dir_setup_cleanup):
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)
@@ -208,7 +208,7 @@ def test_get_duty_belief_reason_lowersFile(env_dir_setup_cleanup):
     texas_str = "Texas"
     texas_rope = create_rope(usa_rope, texas_str)
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     bob_belief = get_beliefunit_with_4_levels()
     bob_belief.set_belief_name(bob_str)

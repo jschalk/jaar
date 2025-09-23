@@ -12,7 +12,7 @@ from src.ch15_moment_logic._ref.ch15_keywords import beliefevent_facts_str
 from src.ch15_moment_logic.moment_cell import load_cells_beliefevent
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch15_moment_logic.test._util.example_moments import example_casa_clean_factunit
 
@@ -21,7 +21,7 @@ def test_load_cells_beliefevent_SetsFiles_Scenario0_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     event300 = 300
@@ -47,7 +47,7 @@ def test_load_cells_beliefevent_SetsFiles_Scenario1_WithFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     event300 = 300
@@ -80,7 +80,7 @@ def test_load_cells_beliefevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     event300 = 300

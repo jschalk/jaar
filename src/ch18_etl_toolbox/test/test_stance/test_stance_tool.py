@@ -37,7 +37,7 @@ from src.ch18_etl_toolbox.stance_tool import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
@@ -49,7 +49,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -64,7 +64,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefU
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     moment_mstr_dir = create_moment_mstr_path(world_dir)
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
@@ -84,7 +84,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     moment_mstr_dir = create_moment_mstr_path(world_dir)
     bob_str = "Bob"
     a23_str = "amy23"
@@ -122,8 +122,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
     bob_unknown_str = "BobUnknown"
-    world_dir = get_module_temp_dir()
-    output_dir = create_path(get_module_temp_dir(), "output")
+    world_dir = get_chapter_temp_dir()
+    output_dir = create_path(get_chapter_temp_dir(), "output")
     world_db_path = create_world_db_path(world_dir)
     print(f"{world_db_path=}")
     set_dir(world_dir)
@@ -196,7 +196,7 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     output_dir = create_path(world_dir, "output")
     stance0001_path = create_stance0001_path(output_dir)
     assert os_path_exists(stance0001_path) is False
@@ -226,8 +226,8 @@ def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
     bob_unknown_str = "BobUnknown"
-    world_dir = get_module_temp_dir()
-    output_dir = create_path(get_module_temp_dir(), "output")
+    world_dir = get_chapter_temp_dir()
+    output_dir = create_path(get_chapter_temp_dir(), "output")
     world_db_path = create_world_db_path(world_dir)
     print(f"{world_db_path=}")
     set_dir(world_dir)

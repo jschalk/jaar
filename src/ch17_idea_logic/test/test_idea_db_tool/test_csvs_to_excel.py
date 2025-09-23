@@ -14,14 +14,14 @@ from src.ch17_idea_logic.idea_db_tool import (
 )
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_csv_dict_to_excel_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     test_data = {"TestSheet": "A,B\n5,6\n7,8"}
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     x_filename = "test_data.xlsx"
     file_path = f"{x_dir}/{x_filename}"
     assert os_path_exists(file_path) is False
@@ -42,7 +42,7 @@ def test_csv_dict_to_excel_SavesFile(env_dir_setup_cleanup):
 def test_prettify_excel(env_dir_setup_cleanup):
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     file_path = os_path_join(temp_dir, "test_huh.xlsx")
 
     df1 = DataFrame({"Name": ["Alice", "Bob"], "Salary": [50000, 60000]})
@@ -92,7 +92,7 @@ def test_prettify_excel(env_dir_setup_cleanup):
 def test_update_event_int_in_excel_files(env_dir_setup_cleanup):
     # ESTABLISH
     # Setup: Create test directory and Excel file
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     file_path = os_path_join(temp_dir, "example_stance.xlsx")
 
     # Create Excel file with two sheets

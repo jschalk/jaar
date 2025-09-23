@@ -12,7 +12,7 @@ from src.ch12_hub_toolbox.hub_tool import (
 from src.ch15_moment_logic.moment_cell import DecreeUnit, set_cell_trees_decrees
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch15_moment_logic.test._util.example_moments import (
     example_casa_clean_factunit,
@@ -58,7 +58,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -83,7 +83,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefevent_
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -116,7 +116,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -149,7 +149,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_fact
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -190,7 +190,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -239,7 +239,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -302,7 +302,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -365,7 +365,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -432,7 +432,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"

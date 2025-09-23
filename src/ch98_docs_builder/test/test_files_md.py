@@ -2,45 +2,45 @@ from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import count_dirs_files, create_path, open_file
 from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
 from src.ch98_docs_builder.doc_builder import (
-    get_module_blurbs_md,
+    get_chapter_blurbs_md,
     save_brick_formats_md,
+    save_chapter_blurbs_md,
     save_idea_brick_mds,
-    save_module_blurbs_md,
     save_ropepointer_explanation_md,
 )
 from src.ch98_docs_builder.test._util.ch98_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
-def test_get_module_blurbs_md_ReturnsObj():
+def test_get_chapter_blurbs_md_ReturnsObj():
     # ESTABLISH / WHEN
-    module_blurbs_md = get_module_blurbs_md()
+    chapter_blurbs_md = get_chapter_blurbs_md()
 
     # THEN
-    assert module_blurbs_md
-    assert module_blurbs_md.find("ch04") > 0
+    assert chapter_blurbs_md
+    assert chapter_blurbs_md.find("ch04") > 0
 
 
-def test_save_module_blurbs_md_CreatesFile(env_dir_setup_cleanup):
+def test_save_chapter_blurbs_md_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
-    module_blurbs_path = create_path(temp_dir, "module_blurbs.md")
-    assert not os_path_exists(module_blurbs_path)
+    temp_dir = get_chapter_temp_dir()
+    chapter_blurbs_path = create_path(temp_dir, "chapter_blurbs.md")
+    assert not os_path_exists(chapter_blurbs_path)
 
     # WHEN
-    save_module_blurbs_md(temp_dir)
+    save_chapter_blurbs_md(temp_dir)
 
     # THEN
-    assert os_path_exists(module_blurbs_path)
-    expected_module_blurbs_md = get_module_blurbs_md()
-    assert open_file(module_blurbs_path) == expected_module_blurbs_md
+    assert os_path_exists(chapter_blurbs_path)
+    expected_chapter_blurbs_md = get_chapter_blurbs_md()
+    assert open_file(chapter_blurbs_path) == expected_chapter_blurbs_md
 
 
 def test_save_ropepointer_explanation_md_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     file_path = create_path(temp_dir, "ropepointer_explanation.md")
     assert not os_path_exists(file_path)
 
@@ -54,7 +54,7 @@ def test_save_ropepointer_explanation_md_CreatesFile(env_dir_setup_cleanup):
 
 def test_save_idea_brick_mds_CreatesFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     assert count_dirs_files(temp_dir) == 0
 
     # WHEN
@@ -66,7 +66,7 @@ def test_save_idea_brick_mds_CreatesFiles(env_dir_setup_cleanup):
 
 def test_save_idea_brick_formats_CreatesFile(env_dir_setup_cleanup):
     # ESTABLISH
-    doc_main_dir = get_module_temp_dir()
+    doc_main_dir = get_chapter_temp_dir()
     idea_brick_formats_path = create_path(doc_main_dir, "idea_brick_formats.md")
     assert not os_path_exists(idea_brick_formats_path)
 

@@ -37,7 +37,7 @@ from src.ch17_idea_logic.idea_config import (
 )
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -133,7 +133,7 @@ def test_get_idea_brick_md_ReturnsObj():
 
 def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     br00000_str = "br00000"
     idea_brick_config = {
         "attributes": {

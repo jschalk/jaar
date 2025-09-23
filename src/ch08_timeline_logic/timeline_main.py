@@ -582,8 +582,8 @@ def timeline_config_path() -> str:
     "Returns path: ch08_timeline_logic/default_timeline_config.json"
 
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch08_timeline_logic")
-    return create_path(module_dir, "default_timeline_config.json")
+    chapter_dir = create_path(src_dir, "ch08_timeline_logic")
+    return create_path(chapter_dir, "default_timeline_config.json")
 
 
 def get_default_timeline_config_dict() -> dict:

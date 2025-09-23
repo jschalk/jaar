@@ -6,8 +6,8 @@ from src.ch01_data_toolbox.file_toolbox import create_path, open_json
 def moment_config_path() -> str:
     "Returns Path: a15_moment_logic/moment_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch15_moment_logic")
-    return create_path(module_dir, "moment_config.json")
+    chapter_dir = create_path(src_dir, "ch15_moment_logic")
+    return create_path(chapter_dir, "moment_config.json")
 
 
 def get_moment_config_dict() -> dict:

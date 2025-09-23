@@ -20,7 +20,7 @@ from src.ch15_moment_logic.moment_main import (
 )
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -41,7 +41,7 @@ def test_MomentUnit_create_buds_root_cells_Scenaro0_BudEmpty(
 ):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     amy23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_json_path = create_moment_json_path(moment_mstr_dir, a23_str)
     save_file(a23_json_path, None, amy23_moment.get_json())
@@ -60,7 +60,7 @@ def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # Create MomentUnit with bob bud at time 37
@@ -100,7 +100,7 @@ def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsIn
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # Create MomentUnit with bob bud at time 37
@@ -140,7 +140,7 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     a23_penny = 2
 

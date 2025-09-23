@@ -10,7 +10,7 @@ from src.ch12_hub_toolbox.hub_tool import (
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as env_dir,
+    get_chapter_temp_dir as env_dir,
 )
 from src.ch12_hub_toolbox.test._util.example_hub_atoms import sue_2beliefatoms_packunit
 

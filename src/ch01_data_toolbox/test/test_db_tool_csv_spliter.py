@@ -5,7 +5,7 @@ from src.ch01_data_toolbox.db_toolbox import save_to_split_csvs
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch01_data_toolbox.test._util.ch01_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -32,7 +32,7 @@ VALUES
 ;
 """
         )
-        x_dir = get_module_temp_dir()
+        x_dir = get_chapter_temp_dir()
         A_dir = create_path(x_dir, "A")
         B_dir = create_path(x_dir, "B")
         C_dir = create_path(x_dir, "C")
@@ -108,7 +108,7 @@ VALUES
 ;
 """
         )
-        x_dir = get_module_temp_dir()
+        x_dir = get_chapter_temp_dir()
         hairs_str = "hairs"
         A_dir = create_path(x_dir, "A")
         B_dir = create_path(x_dir, "B")
@@ -178,7 +178,7 @@ def test_save_to_split_csvs_CreatesFiles_Scenario1_add_col2_prefix(
         cursor.execute(
             f"""INSERT INTO {x_tablename} (hair, user, y_int, run) VALUES (1, "A", 200, "yes") ;"""
         )
-        x_dir = get_module_temp_dir()
+        x_dir = get_chapter_temp_dir()
         hairs_str = "hairs"
         y_ints_str = "y_ints"
         A_dir = create_path(x_dir, "A")

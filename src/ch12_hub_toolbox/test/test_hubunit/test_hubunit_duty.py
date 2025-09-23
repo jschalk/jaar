@@ -6,7 +6,7 @@ from src.ch07_belief_logic.test._util.example_beliefs import (
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as env_dir,
+    get_chapter_temp_dir as env_dir,
 )
 
 

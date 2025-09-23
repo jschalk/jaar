@@ -10,7 +10,7 @@ from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch19_kpi_toolbox.kpi_mstr import create_calendar_markdown_files
 from src.ch19_kpi_toolbox.test._util.ch19_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -18,7 +18,7 @@ def test_create_calendar_markdown_files_Senario0_NoFileIfWorldIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     moment_mstr_dir = create_path(temp_dir, "moment_mstr")
     output_dir = create_path(temp_dir, "output")
     assert not os_path_exists(output_dir)
@@ -36,7 +36,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
 ):
     # ESTABLISH
     fay_str = "Fay"
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     moment_mstr_dir = create_path(temp_dir, "moment_mstr")
     output_dir = create_path(temp_dir, "output")
     a23_str = "amy23"

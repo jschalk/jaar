@@ -1,13 +1,13 @@
 from pathlib import Path as pathlib_Path
 from pytest import fixture as pytest_fixture, raises as pytest_raises
-from src.ch99_module_linter.linter import find_incorrect_imports
+from src.ch99_chapter_linter.linter import find_incorrect_imports
 
 
 @pytest_fixture
 def sample_file(tmp_path: pathlib_Path):
     content = """\
 import os
-import src.ch21_old_module
+import src.ch21_old_chapter
 from src.ch22_helpers import func
 import src.ch23_calendar_viewer
 from src.ch25_utils import helper

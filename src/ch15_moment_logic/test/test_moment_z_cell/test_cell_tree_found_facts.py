@@ -5,7 +5,7 @@ from src.ch12_hub_toolbox.hub_tool import cellunit_get_from_dir, cellunit_save_t
 from src.ch15_moment_logic.moment_cell import set_cell_trees_found_facts
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch15_moment_logic.test._util.example_moments import example_casa_clean_factunit
 
@@ -14,7 +14,7 @@ def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     a23_str = "amy23"
     time5 = 5
@@ -36,7 +36,7 @@ def test_set_cell_trees_found_facts_Scenario1_ChildNode_NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"
@@ -67,7 +67,7 @@ def test_set_cell_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAn
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     yao_str = "Yao"
     sue_str = "Sue"

@@ -6,8 +6,8 @@ from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename, o
 def idea_config_path() -> str:
     "Returns path: a17_idea_logic/idea_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch17_idea_logic")
-    return create_path(module_dir, "idea_config.json")
+    chapter_dir = create_path(src_dir, "ch17_idea_logic")
+    return create_path(chapter_dir, "idea_config.json")
 
 
 def get_idea_config_dict() -> dict:

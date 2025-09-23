@@ -9,8 +9,8 @@ def max_tree_traverse_default() -> int:
 def belief_config_path() -> str:
     """src/ch07_belief_logic/belief_config.json"""
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch07_belief_logic")
-    return create_path(module_dir, "belief_config.json")
+    chapter_dir = create_path(src_dir, "ch07_belief_logic")
+    return create_path(chapter_dir, "belief_config.json")
 
 
 def get_belief_config_dict() -> dict[str, dict]:

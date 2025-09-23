@@ -249,7 +249,7 @@ def is_path_existent_or_creatable(path: str) -> bool:
     This function is guaranteed to _never_ raise exceptions.
     """
     try:
-        # To circumvent "os" module calls from raising undesirable exceptions on
+        # To circumvent "os" chapter calls from raising undesirable exceptions on
         # invalid path, is_path_valid() is explicitly called first.
         return is_path_valid(path) and (
             os_path_exists(path) or can_usser_edit_paths(path)
@@ -291,7 +291,7 @@ def is_path_existent_or_probably_creatable(path: str) -> bool:
     This function is guaranteed to _never_ raise exceptions.
     """
     try:
-        # To circumvent "os" module calls from raising undesirable exceptions on
+        # To circumvent "os" chapter calls from raising undesirable exceptions on
         # invalid path, is_path_valid() is explicitly called first.
         return is_path_valid(path) and (
             os_path_exists(path) or is_path_probably_creatable(path)

@@ -12,7 +12,7 @@ from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch18_etl_toolbox._ref.ch18_keywords import job_str
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_table
 from src.ch18_etl_toolbox.transformers import etl_moment_job_jsons_to_job_tables
@@ -22,7 +22,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    m23_moment_mstr_dir = get_module_temp_dir()
+    m23_moment_mstr_dir = get_chapter_temp_dir()
     m23_str = "music23"
     a23_str = "amy23"
     sue_str = "Sue"
@@ -105,7 +105,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_job = beliefunit_shop(bob_inx, a23_str)
     bob_job.add_voiceunit(bob_inx, credit77)
     bob_job.add_voiceunit(yao_inx, credit44)

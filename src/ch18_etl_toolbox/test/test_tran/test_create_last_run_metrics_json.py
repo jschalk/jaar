@@ -4,7 +4,7 @@ from src.ch01_data_toolbox.file_toolbox import open_json
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.ch18_etl_toolbox._ref.ch18_keywords import brick_agg_str, event_int_str
 from src.ch18_etl_toolbox.ch18_path import create_last_run_metrics_path
-from src.ch18_etl_toolbox.test._util.ch18_env import get_module_temp_dir
+from src.ch18_etl_toolbox.test._util.ch18_env import get_chapter_temp_dir
 from src.ch18_etl_toolbox.tran_sqlstrs import create_sound_and_heard_tables
 from src.ch18_etl_toolbox.transformers import create_last_run_metrics_json
 
@@ -14,7 +14,7 @@ def test_create_last_run_metrics_json_CreatesFile():
     event1 = 1
     event3 = 3
     event9 = 9
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     last_run_metrics_path = create_last_run_metrics_path(moment_mstr_dir)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()

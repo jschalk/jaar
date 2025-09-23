@@ -27,14 +27,14 @@ from src.ch01_data_toolbox.file_toolbox import (
 )
 from src.ch01_data_toolbox.test._util.ch01_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_create_path_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     obj_filename = "obj.json"
-    x_dir = os_path_join(get_module_temp_dir(), "_instrument")
+    x_dir = os_path_join(get_chapter_temp_dir(), "_instrument")
     x_filename = "examples"
 
     # WHEN / THEN
@@ -48,7 +48,7 @@ def test_create_path_ReturnsObj(env_dir_setup_cleanup):
 
 def test_is_subdirectory_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     sub = os_path_join(env_dir, "subdir")
 
     # WHEN / THEN
@@ -59,7 +59,7 @@ def test_is_subdirectory_ReturnsObj(env_dir_setup_cleanup):
 
 def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     level1 = os_path_join(env_dir, "level1")
     level2 = os_path_join(level1, "level2")
     expected_path = str(pathlib_Path(level1).resolve())
@@ -74,7 +74,7 @@ def test_get_immediate_subdir_ReturnsObj(env_dir_setup_cleanup):
 
 def test_set_dir_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     fay_name = "Fay_bob"
     fay_dir = f"{env_dir}/{fay_name}"
     assert not os_path_exist(fay_dir)
@@ -94,7 +94,7 @@ def test_set_dir_SetsFile(env_dir_setup_cleanup):
 
 def test_save_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x_name = "Fay_bob"
     x_file_ext = "txt"
     x_filename = f"{x_name}.{x_file_ext}"
@@ -113,7 +113,7 @@ def test_open_file_OpensFilesWith_dest_dirAnd_filename(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -135,7 +135,7 @@ def test_open_file_OpensFilesWithOnly_dest_dir(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -160,7 +160,7 @@ def test_open_file_OpensFilesWithOnly_dest_dir(
 
 def test_save_json_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     bob_str = "bob"
     yao_str = "Yao"
     x_filename = "Fay_bob.json"
@@ -183,7 +183,7 @@ def test_open_json_ReturnsObj(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     bob_str = "bob"
     yao_str = "Yao"
     x_filename = "Fay_bob.json"
@@ -202,7 +202,7 @@ def test_open_json_ReturnsObj(
 
 def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     swim_str = "swim"
     swim_file_ext = "txt"
     swim_filename = f"{swim_str}.{swim_file_ext}"
@@ -226,7 +226,7 @@ def test_save_file_ReplacesFileAsDefault(env_dir_setup_cleanup):
 
 def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     swim_str = "swim"
     swim_file_ext = "txt"
     swim_filename = f"{swim_str}.{swim_file_ext}"
@@ -250,7 +250,7 @@ def test_save_file_DoesNotReplaceFile(env_dir_setup_cleanup):
 
 def test_save_file_DoesNotRequireSeperateFilename(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     swim_str = "swim"
     swim_file_ext = "txt"
     swim_filename = f"{swim_str}.{swim_file_ext}"
@@ -268,7 +268,7 @@ def test_save_file_DoesNotRequireSeperateFilename(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_GrabsFileData(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.txt"
     x1_file_str = "trying this"
@@ -287,7 +287,7 @@ def test_get_dir_file_strs_GrabsFileData(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_delete_extensions_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -309,7 +309,7 @@ def test_get_dir_file_strs_delete_extensions_ReturnsObj(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_returnsSubDirs(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_name = "x1"
     x2_name = "x2"
     x1_file_ext = "txt"
@@ -341,7 +341,7 @@ def test_get_dir_file_strs_returnsSubDirs(env_dir_setup_cleanup):
 
 def test_get_dir_file_strs_doesNotReturnsFiles(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_name = "x1"
     x1_file_ext = "txt"
     x1_filename = f"{x1_name}.{x1_file_ext}"
@@ -373,7 +373,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     temp_dir = f"{env_dir}\\temp_does_not_exist"
     assert os_path_exist(temp_dir) is False
 
@@ -387,7 +387,7 @@ def test_get_integer_filenames_ReturnsCoorectObjIfDirectoryDoesNotExist(
 
 def test_get_integer_filenames_GrabsFileNamesWith_Integers_v0(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_filename = "1.json"
     x2_filename = "2.json"
     x_file_str = "file strs"
@@ -406,7 +406,7 @@ def test_get_integer_filenames_GrabsFileNamesWith_IntegersWithCorrectExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     z_filename = "z.json"
     x1_filename = "1.json"
     x2_filename = "2.json"
@@ -435,7 +435,7 @@ def test_get_integer_filenames_GrabsFileNamesWith_IntegersGreaterThan_min_intege
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     z_filename = "z.json"
     x1_filename = "1.json"
     x2_filename = "2.json"
@@ -459,7 +459,7 @@ def test_count_files_ReturnsNoneIfDirectoryDoesNotExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     does_not_exist_dir = f"{env_dir}/swim"
 
     # WHEN
@@ -539,7 +539,7 @@ def test_is_path_existent_or_probably_creatable_ReturnsObj():
 
 def test_get_all_dirs_with_file_ReturnsDirectories(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_filename = "x1.txt"
     x1_file_str = "trying this"
     iowa_rel_dir = "iowa/dallas"
@@ -558,7 +558,7 @@ def test_get_all_dirs_with_file_ReturnsDirectories(env_dir_setup_cleanup):
 
 def test_get_dir_filenames_ReturnsObj_Scenario0_NoFilter(env_dir_setup_cleanup):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.txt"
     iowa_rel_dir = "iowa/dallas"
@@ -583,7 +583,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario1_FilterByExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_filename = "x1.txt"
     x2_filename = "x2.json"
     iowa_rel_dir = "iowa/dallas"
@@ -609,7 +609,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario2_FilterByExtension(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     x1_filename = "br.txt"
     x2_filename = "x2.json"
     x3_filename = "x3.json"
@@ -640,7 +640,7 @@ def test_get_dir_filenames_ReturnsObj_Scenario2_FilterByExtension(
 
 def test_get_max_file_number_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     six_int = 6
     ten_int = 10
     save_file(x_dir, f"{six_int}.json", "Faybob")
@@ -654,7 +654,7 @@ def test_get_max_file_number_ReturnsObjWhenDirIsEmpty(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
 
     # WHEN / THEN
     assert get_max_file_number(x_dir) is None

@@ -5,7 +5,7 @@ from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.ch10_pack_logic.test._util.ch10_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as moments_dir,
+    get_chapter_temp_dir as moments_dir,
 )
 from src.ch10_pack_logic.test._util.example_atoms import (
     get_atom_example_planunit_ball,

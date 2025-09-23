@@ -20,7 +20,7 @@ from src.ch12_hub_toolbox._ref.ch12_keywords import (
     voice_name_str,
 )
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
-from src.ch12_hub_toolbox.test._util.ch12_env import get_module_temp_dir
+from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 
 
 def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:
@@ -113,7 +113,7 @@ def get_texas_rope() -> RopePointer:
 def get_texas_hubunit() -> HubUnit:
     moment_label = get_default_moment_label()
     return hubunit_shop(
-        get_module_temp_dir(),
+        get_chapter_temp_dir(),
         moment_label,
         belief_name="Sue",
         keep_rope=get_texas_rope(),

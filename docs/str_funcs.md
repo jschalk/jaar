@@ -1,6 +1,6 @@
-# String Functions by Module
+# String Functions by Chapterr
 
-## Str Functions by Module
+## Str Functions by Chapter
 - ch00_purpose: 
 - ch01_data_toolbox: INSERT, UPDATE, sqlite_datatype
 - ch02_rope_logic: LabelTerm, NameTerm, RopePointer, TitleTerm, knot, parent_rope

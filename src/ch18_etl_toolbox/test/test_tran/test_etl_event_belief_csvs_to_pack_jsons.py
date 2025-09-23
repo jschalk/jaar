@@ -19,7 +19,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import etl_event_belief_csvs_to_pack_json
@@ -35,7 +35,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     a23_str = "amy23"
     put_agg_tablename = create_prime_tablename(beliefunit_str(), "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
@@ -77,7 +77,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     blrpern_str = belief_voiceunit_str()
     put_agg_tablename = create_prime_tablename(blrpern_str, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)

@@ -12,7 +12,7 @@ from src.ch12_hub_toolbox.ch12_path import (
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.transformers import etl_moment_guts_to_moment_jobs
 
@@ -28,7 +28,7 @@ def test_etl_moment_guts_to_moment_jobs_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     bob_gut = beliefunit_shop(bob_inx, a23_str)
     bob_gut.add_voiceunit(bob_inx, credit77)
     bob_gut.add_voiceunit(yao_inx, credit44)

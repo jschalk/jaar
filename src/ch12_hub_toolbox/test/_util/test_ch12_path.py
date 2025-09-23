@@ -49,7 +49,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_treasury_db_path,
     treasury_filename,
 )
-from src.ch12_hub_toolbox.test._util.ch12_env import get_module_temp_dir
+from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 
 
 def test_treasury_filename_ReturnsObj():
@@ -59,7 +59,7 @@ def test_treasury_filename_ReturnsObj():
 
 def test_create_moment_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # WHEN
@@ -73,7 +73,7 @@ def test_create_moment_dir_path_ReturnsObj():
 
 def test_create_moment_json_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # WHEN
@@ -88,7 +88,7 @@ def test_create_moment_json_path_ReturnsObj():
 
 def test_create_moment_beliefs_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
 
     # WHEN
@@ -103,7 +103,7 @@ def test_create_moment_beliefs_dir_path_ReturnsObj():
 
 def test_create_belief_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -120,7 +120,7 @@ def test_create_belief_dir_path_ReturnsObj():
 
 def test_create_keeps_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -138,7 +138,7 @@ def test_create_keeps_dir_path_ReturnsObj():
 
 def test_create_keep_rope_path_ReturnsObj_Scenario0_SimpleRope():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -160,7 +160,7 @@ def test_create_keep_rope_path_ReturnsObj_Scenario1_MoreTestsForRopePathCreation
     # ESTABLISH
     sue_str = "Sue"
     peru_str = "peru"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     texas_str = "texas"
     dallas_str = "dallas"
     elpaso_str = "el paso"
@@ -256,7 +256,7 @@ def test_create_keep_rope_path_RaisesError_Scenarion2_keep_rope_DoesNotExist():
 
 def test_create_keep_dutys_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -281,7 +281,7 @@ def test_create_keep_dutys_path_ReturnsObj() -> None:
 
 def test_create_keep_duty_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -309,7 +309,7 @@ def test_create_keep_duty_path_ReturnsObj() -> None:
 
 def test_create_keep_grades_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -334,7 +334,7 @@ def test_create_keep_grades_path_ReturnsObj() -> None:
 
 def test_create_keep_visions_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -359,7 +359,7 @@ def test_create_keep_visions_path_ReturnsObj() -> None:
 
 def test_create_treasury_db_path_ReturnsObj() -> None:
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     casa_str = "casa"
@@ -384,7 +384,7 @@ def test_create_treasury_db_path_ReturnsObj() -> None:
 
 def test_create_atoms_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -402,7 +402,7 @@ def test_create_atoms_dir_path_ReturnsObj():
 
 def test_create_packs_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -420,7 +420,7 @@ def test_create_packs_dir_path_ReturnsObj():
 
 def test_create_buds_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
 
@@ -438,7 +438,7 @@ def test_create_buds_dir_path_ReturnsObj():
 
 def test_create_bud_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -460,7 +460,7 @@ def test_create_bud_dir_path_ReturnsObj():
 
 def test_create_budunit_json_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -483,7 +483,7 @@ def test_create_budunit_json_path_ReturnsObj():
 
 def test_create_beliefpoint_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -506,7 +506,7 @@ def test_create_beliefpoint_path_ReturnsObj():
 
 def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -521,7 +521,7 @@ def test_create_cell_dir_path_ReturnsObj_Scenario0_No_bud_ancestors():
 
 def test_create_cell_dir_path_ReturnsObj_Scenario1_One_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -541,7 +541,7 @@ def test_create_cell_dir_path_ReturnsObj_Scenario1_One_bud_ancestors():
 
 def test_create_cell_dir_path_ReturnsObj_Scenario2_Three_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -565,7 +565,7 @@ def test_create_cell_dir_path_ReturnsObj_Scenario2_Three_bud_ancestors():
 
 def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     timepoint7 = 7
@@ -588,7 +588,7 @@ def test_create_cell_json_path_ReturnsObj_Scenario0_Empty_bud_ancestors():
 
 def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -611,7 +611,7 @@ def test_create_cell_json_path_ReturnsObj_Scenario1_Three_bud_ancestors():
 
 def test_create_cell_voice_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_ancestors():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     sue_str = "Sue"
     tp7 = 7
@@ -634,7 +634,7 @@ def test_create_cell_voice_mandate_ledger_path_ReturnsObj_Scenario1_Three_bud_an
 
 def test_create_belief_event_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     event3 = 3
@@ -656,7 +656,7 @@ def test_create_belief_event_dir_path_ReturnsObj():
 
 def test_create_beliefevent_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     event3 = 3
@@ -679,7 +679,7 @@ def test_create_beliefevent_path_ReturnsObj():
 
 def test_create_event_all_pack_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     event3 = 3
@@ -704,7 +704,7 @@ def test_create_event_all_pack_path_ReturnsObj():
 
 def test_create_event_expressed_pack_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     amy23_str = "amy23"
     bob_str = "Bob"
     event3 = 3
@@ -729,7 +729,7 @@ def test_create_event_expressed_pack_path_ReturnsObj():
 
 def test_create_gut_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
 
@@ -750,7 +750,7 @@ def test_create_gut_path_ReturnsObj():
 
 def test_create_job_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     bob_str = "Bob"
 

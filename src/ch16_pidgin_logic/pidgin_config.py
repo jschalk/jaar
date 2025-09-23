@@ -7,8 +7,8 @@ from src.ch09_belief_atom_logic.atom_config import get_all_belief_dimen_delete_k
 def pidgin_config_path() -> str:
     "Returns path: a16_pidgin_logic/pidgin_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch16_pidgin_logic")
-    return create_path(module_dir, "pidgin_config.json")
+    chapter_dir = create_path(src_dir, "ch16_pidgin_logic")
+    return create_path(chapter_dir, "pidgin_config.json")
 
 
 def get_pidgin_filename() -> str:

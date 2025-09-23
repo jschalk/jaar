@@ -11,7 +11,7 @@ from src.ch17_idea_logic.idea_db_tool import open_csv
 from src.ch17_idea_logic.idea_main import get_idearef_obj, save_idea_csv
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -33,10 +33,10 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     sue_beliefunit.add_voiceunit(yao_str, yao_voice_cred_points, yao_voice_debt_points)
     j1_ideaname = idea_format_00021_belief_voiceunit_v0_0_0()
     name_filename = f"{sue_str}_voice_example_01.csv"
-    save_idea_csv(j1_ideaname, sue_beliefunit, get_module_temp_dir(), name_filename)
+    save_idea_csv(j1_ideaname, sue_beliefunit, get_chapter_temp_dir(), name_filename)
 
     # WHEN
-    voice_dataframe = open_csv(get_module_temp_dir(), name_filename)
+    voice_dataframe = open_csv(get_chapter_temp_dir(), name_filename)
 
     # THEN
     array_headers = list(voice_dataframe.columns)
@@ -69,7 +69,7 @@ def test_open_csv_ReturnsObjWhenNoFileExists(env_dir_setup_cleanup):
     name_filename = f"{sue_str}_voice_example_77.csv"
 
     # WHEN
-    voice_dataframe = open_csv(get_module_temp_dir(), name_filename)
+    voice_dataframe = open_csv(get_chapter_temp_dir(), name_filename)
 
     # THEN
     assert voice_dataframe is None

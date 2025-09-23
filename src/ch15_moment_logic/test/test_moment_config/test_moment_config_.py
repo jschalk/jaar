@@ -53,8 +53,8 @@ from src.ch15_moment_logic.moment_config import (
 def test_moment_config_path_ReturnsObj_Moment() -> str:
     # ESTABLISH / WHEN / THEN
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch15_moment_logic")
-    assert moment_config_path() == create_path(module_dir, "moment_config.json")
+    chapter_dir = create_path(src_dir, "ch15_moment_logic")
+    assert moment_config_path() == create_path(chapter_dir, "moment_config.json")
 
 
 def test_get_moment_config_dict_ReturnsObj():

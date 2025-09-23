@@ -7,13 +7,13 @@ from src.ch17_idea_logic.idea_db_tool import open_csv
 from src.ch19_kpi_toolbox.kpi_mstr import create_kpi_csvs
 from src.ch19_kpi_toolbox.test._util.ch19_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cleanup):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     db_path = create_path(temp_dir, "example3.db")
     set_dir(temp_dir)
     with sqlite3_connect(db_path) as db_conn:
@@ -34,7 +34,7 @@ def test_create_kpi_csvs_Scenario0_NotCreateFileWhenNoKPITables(env_dir_setup_cl
 
 def test_create_kpi_csvs_Scenario1_CreateFile(env_dir_setup_cleanup):
     # ESTABLISH
-    temp_dir = get_module_temp_dir()
+    temp_dir = get_chapter_temp_dir()
     set_dir(temp_dir)
     db_path = create_path(temp_dir, "example2.db")
     kpi_tablename = "test_kpi_table"

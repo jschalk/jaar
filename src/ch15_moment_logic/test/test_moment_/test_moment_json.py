@@ -27,13 +27,13 @@ from src.ch15_moment_logic.moment_main import (
 )
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
     a45_str = "amy45"
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(a45_str, moment_mstr_dir, offi_times=a45_offi_times)
@@ -93,7 +93,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
 def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
 
     # WHEN
     x_dict = amy_moment.to_dict(include_paybook=False)
@@ -116,7 +116,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
 def test_MomentUnit_get_json_ReturnsObj():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -141,7 +141,7 @@ def test_MomentUnit_get_json_ReturnsObj():
 def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    moment_mstr_dir = create_path(get_module_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(amy45_str, moment_mstr_dir, offi_times=a45_offi_times)
     sue_timeline_label = "sue casa"
@@ -198,7 +198,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
 def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     x_dict = amy_moment.to_dict()
     x_dict["timeline"] = {}
     x_dict.pop("knot")
@@ -228,7 +228,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
 def test_get_from_json_ReturnsMomentUnit():
     # ESTABLISH
     amy45_str = "amy45"
-    temp_moment_mstr_dir = create_path(get_module_temp_dir(), "temp")
+    temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
     amy_moment = momentunit_shop(amy45_str, temp_moment_mstr_dir)
     sue_timeline_label = "sue casa"
     amy_moment.timeline.timeline_label = sue_timeline_label
@@ -275,12 +275,12 @@ def test_get_from_json_ReturnsMomentUnit():
 def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_cleanup):
     # ESTABLISH
     amy45_str = "amy45"
-    amy45_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy45_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     sue_timeline_label = "sue casa"
     amy45_moment.timeline.timeline_label = sue_timeline_label
     sue_respect_bit = 2
     amy45_moment.respect_bit = sue_respect_bit
-    x_moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_bob")
+    x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
     save_file(amy45_json_path, None, amy45_moment.get_json())
     assert amy45_moment.moment_mstr_dir != x_moment_mstr_dir
