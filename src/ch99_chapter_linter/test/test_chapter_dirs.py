@@ -12,7 +12,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_str_number,
     get_chapter_str_functions,
 )
-from src.ch99_chapter_linter.linter import (
+from src.ch99_chapter_sytle.sytle import (
     check_if_chapter_str_funcs_is_sorted,
     check_import_objs_are_ordered,
     check_str_func_test_file_has_needed_asserts,

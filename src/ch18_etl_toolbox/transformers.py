@@ -241,9 +241,9 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
                 columns_list=agg_columns,
                 column_types=idea_sqlite_types,
             )
-            agg_cols_dict = {agg_col: None for agg_col in agg_columns}
+            agg_cols_set = {agg_col for agg_col in agg_columns}
             insert_clause_str = create_insert_into_clause_str(
-                conn_or_cursor, valid_tablename, agg_cols_dict
+                conn_or_cursor, valid_tablename, agg_cols_set
             )
             select_sqlstr = create_select_query(
                 conn_or_cursor, x_tablename, agg_columns
@@ -620,8 +620,8 @@ def etl_brick_valid_table_into_prime_table(
     common_cols = set(common_cols)
     common_cols.add("idea_number")
     common_cols = get_default_sorted_list(common_cols)
-    x_dict = {common_col: None for common_col in common_cols}
-    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
+    c_cols = set(common_cols)
+    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, c_cols)
     insert_select_sqlstr = f"{insert_clause_str}\n{select_str};"
     cursor.execute(insert_select_sqlstr)
 

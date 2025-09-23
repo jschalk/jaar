@@ -16,7 +16,7 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
 def get_chapter_descs() -> dict[str, str]:
     src_dir = "src"
     chapter_descs = get_level1_dirs(src_dir)
-    chapter_descs.remove("ch99_chapter_linter")
+    chapter_descs.remove("ch99_chapter_sytle")
     return {
         chapter_desc: create_path(src_dir, chapter_desc)
         for chapter_desc in chapter_descs

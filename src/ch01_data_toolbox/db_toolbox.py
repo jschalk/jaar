@@ -48,7 +48,7 @@ def check_connection(conn: sqlite3_Connection) -> bool:
 def get_sorted_cols_only_list(
     existing_columns: set[str], sorting_columns: list[str]
 ) -> list[str]:
-    sort_columns_in_existing = set(sorting_columns).intersection(existing_columns)
+    sort_columns_in_existing = set(sorting_columns) & existing_columns
     return [x_col for x_col in sorting_columns if x_col in sort_columns_in_existing]
 
 

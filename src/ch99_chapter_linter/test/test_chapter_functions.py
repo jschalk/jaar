@@ -8,7 +8,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_descs,
     get_chapter_str_functions,
 )
-from src.ch99_chapter_linter.linter import (
+from src.ch99_chapter_sytle.sytle import (
     check_all_test_functions_are_formatted,
     check_all_test_functions_have_proper_naming_format,
     check_if_test_HasDocString_pytests_exist,
