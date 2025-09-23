@@ -8,7 +8,7 @@ What does each one do?
 - **ch02_rope_logic**: Defines Term Classes: Knots, Labels, RopePointers, FaceNames, GroupNames, MomentLabels
 - **ch03_finance_logic**: Defines tools for financial allotment to ledgers.
 - **ch04_group_logic**: Defines debt and cred to Voices and Memberships to Groups.
-- **ch05_reason_logic**: Defines ReasonUnits, FactUnits, and Facts decide is a Reason status is True
+- **ch05_reason_logic**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason status is True
 - **ch06_plan_logic**: Defines PlanUnits with sub-plans, Awardees, Labor, Reasons, Facts, etc.
 - **ch07_belief_logic**: Defines a BeliefUnit as a PlanUnit and VoiceUnits capable of producing an agenda.
 - **ch08_timeline_logic**: Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.

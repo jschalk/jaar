@@ -199,8 +199,10 @@ def test_Chapters_ChapterReferenceFolder_ref_ExistsForEveryChapter():
         assert ref_keys == expected_ref_keys, keys_assertion_fail_str
         assert chapter_ref_dict.get(chapter_description_str) == chapter_desc
         ref_chapter_blurb = chapter_ref_dict.get(chapter_blurb_str)
+        MAX_CHAPTER_BLURB_LENGTH = 88  # arbitrarily choosen
+
         assert len(ref_chapter_blurb) > 0
-        assert len(ref_chapter_blurb) <= 88  # arbitrarily choosen
+        assert len(ref_chapter_blurb) <= MAX_CHAPTER_BLURB_LENGTH
         ref_chapter_content = chapter_ref_dict.get(chapter_content_str)
         content_assertion_fail_str = f"{chapter_desc} {chapter_content_str} is invalid"
         assert len(ref_chapter_content) > 0, content_assertion_fail_str
