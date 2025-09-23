@@ -4,7 +4,7 @@ What does each one do?
 
 
 - **ch00_purpose**: Introduces why Jaar has been created.
-- **ch01_data_toolbox**: Creates boring tools for computer data manipulation. time
+- **ch01_data_toolbox**: Creates boring tools for computer data manipulation.
 - **ch02_rope_logic**: Defines Term Classes: Knots, Labels, RopePointers, FaceNames, GroupNames, MomentLabels
 - **ch03_finance_logic**: Defines tools for financial allotment to ledgers.
 - **ch04_group_logic**: Defines debt and cred to Voices and Memberships to Groups.

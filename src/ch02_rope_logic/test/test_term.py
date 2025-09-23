@@ -205,5 +205,5 @@ def test_MomentLabel_Exists():
     x_moment = MomentLabel(empty_str)
     # THEN
     assert x_moment == empty_str
-    doc_str = f"An CentralLabel for a Moment Moment. Cannot contain {knot_str()}"
+    doc_str = f"A CentralLabel for a Moment. Cannot contain {knot_str()}."
     assert inspect_getdoc(x_moment) == doc_str
