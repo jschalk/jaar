@@ -241,7 +241,7 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
                 columns_list=agg_columns,
                 column_types=idea_sqlite_types,
             )
-            agg_cols_set = {agg_col for agg_col in agg_columns}
+            agg_cols_set = set(agg_columns)
             insert_clause_str = create_insert_into_clause_str(
                 conn_or_cursor, valid_tablename, agg_cols_set
             )
