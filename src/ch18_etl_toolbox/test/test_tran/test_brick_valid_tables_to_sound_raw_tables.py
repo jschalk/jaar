@@ -17,10 +17,10 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 
-# get examples from tests from etl_brick_agg_dfs_to_lire_title_raw
-# get examples from tests from etl_brick_agg_dfs_to_lire_rope_raw
-# get examples from tests from etl_brick_agg_dfs_to_lire__raw
-# get examples from tests from etl_brick_agg_dfs_to_lire_rope_raw
+# get examples from tests from etl_brick_agg_dfs_to_translate_title_raw
+# get examples from tests from etl_brick_agg_dfs_to_translate_rope_raw
+# get examples from tests from etl_brick_agg_dfs_to_translate__raw
+# get examples from tests from etl_brick_agg_dfs_to_translate_rope_raw
 
 
 def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario0_Only_valid_events():
@@ -99,16 +99,16 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, br00117_valid_tablename) == 2
         assert get_row_count(cursor, br00045_valid_tablename) == 3
-        lirrope_s_raw_tablename = create_prime_tablename("LIRROPE", "s", "raw")
+        trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
-        assert not db_table_exists(cursor, lirrope_s_raw_tablename)
+        assert not db_table_exists(cursor, trlrope_s_raw_tablename)
         assert not db_table_exists(cursor, blrpern_s_put_raw_tblname)
 
         # WHEN
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, lirrope_s_raw_tablename) == 5
+        assert get_row_count(cursor, trlrope_s_raw_tablename) == 5
         assert get_row_count(cursor, blrpern_s_put_raw_tblname) == 2
         b117 = "br00117"
         b045 = "br00045"
@@ -117,7 +117,7 @@ VALUES
         ex_rope2 = (b045, event2, sue_str, sue_str, sue_str, rdx, rdx, ukx, None)
         ex_rope3 = (b045, event5, sue_str, bob_str, bob_inx, rdx, rdx, ukx, None)
         ex_rope4 = (b045, event7, yao_str, yao_str, yao_inx, rdx, rdx, ukx, None)
-        select_agg_sqlstr = f"""SELECT * FROM {lirrope_s_raw_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {trlrope_s_raw_tablename};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()

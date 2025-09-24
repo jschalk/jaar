@@ -1,0 +1,29 @@
+{
+    "attributes": {
+        "event_int": {
+            "otx_key": true
+        },
+        "face_name": {
+            "otx_key": true
+        },
+        "inx_knot": {
+            "otx_key": false
+        },
+        "inx_name": {
+            "otx_key": false
+        },
+        "otx_knot": {
+            "otx_key": false
+        },
+        "otx_name": {
+            "otx_key": true
+        },
+        "unknown_str": {
+            "otx_key": false
+        }
+    },
+    "idea_number": "br00043",
+    "dimens": [
+        "translate_name"
+    ]
+}

@@ -41,7 +41,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "world_name",
         "idea_number",
         "source_dimen",
-        "lire_event_int",
+        "translate_event_int",
         "event_int",
         "face_name",
         "face_name_otx",
@@ -238,7 +238,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "face_name_otx": "TEXT",
         "face_name_inx": "TEXT",
         "source_dimen": "TEXT",
-        "lire_event_int": "INTEGER",
+        "translate_event_int": "INTEGER",
         "event_int": "INTEGER",
         "moment_label": "TEXT",
         "moment_label_otx": "TEXT",
@@ -526,20 +526,20 @@ def idea_format_00040_map_otx2inx_v0_0_0() -> str:
     return "idea_format_00040_map_otx2inx_v0_0_0"
 
 
-def idea_format_00042_lire_title_v0_0_0() -> str:
-    return "idea_format_00042_lire_title_v0_0_0"
+def idea_format_00042_translate_title_v0_0_0() -> str:
+    return "idea_format_00042_translate_title_v0_0_0"
 
 
-def idea_format_00043_lire_name_v0_0_0() -> str:
-    return "idea_format_00043_lire_name_v0_0_0"
+def idea_format_00043_translate_name_v0_0_0() -> str:
+    return "idea_format_00043_translate_name_v0_0_0"
 
 
-def idea_format_00044_lire_label_v0_0_0() -> str:
-    return "idea_format_00044_lire_label_v0_0_0"
+def idea_format_00044_translate_label_v0_0_0() -> str:
+    return "idea_format_00044_translate_label_v0_0_0"
 
 
-def idea_format_00045_lire_rope_v0_0_0() -> str:
-    return "idea_format_00045_lire_rope_v0_0_0"
+def idea_format_00045_translate_rope_v0_0_0() -> str:
+    return "idea_format_00045_translate_rope_v0_0_0"
 
 
 def idea_format_00050_delete_belief_voice_membership_v0_0_0() -> str:
@@ -622,10 +622,10 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00028_belief_planunit_v0_0_0(),
         idea_format_00029_beliefunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
-        idea_format_00042_lire_title_v0_0_0(),
-        idea_format_00043_lire_name_v0_0_0(),
-        idea_format_00044_lire_label_v0_0_0(),
-        idea_format_00045_lire_rope_v0_0_0(),
+        idea_format_00042_translate_title_v0_0_0(),
+        idea_format_00043_translate_name_v0_0_0(),
+        idea_format_00044_translate_label_v0_0_0(),
+        idea_format_00045_translate_rope_v0_0_0(),
         idea_format_00050_delete_belief_voice_membership_v0_0_0(),
         idea_format_00051_delete_belief_voiceunit_v0_0_0(),
         idea_format_00052_delete_belief_plan_awardunit_v0_0_0(),
@@ -719,10 +719,10 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,task,problem_bool": idea_format_00028_belief_planunit_v0_0_0(),
         "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_beliefunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
-        "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_lire_title_v0_0_0(),
-        "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_lire_name_v0_0_0(),
-        "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_lire_label_v0_0_0(),
-        "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_lire_rope_v0_0_0(),
+        "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_translate_title_v0_0_0(),
+        "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_translate_name_v0_0_0(),
+        "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_translate_label_v0_0_0(),
+        "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_translate_rope_v0_0_0(),
         "moment_label,belief_name,voice_name,group_title_ERASE": idea_format_00050_delete_belief_voice_membership_v0_0_0(),
         "moment_label,belief_name,voice_name_ERASE": idea_format_00051_delete_belief_voiceunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_belief_plan_awardunit_v0_0_0(),
@@ -873,8 +873,8 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "lire_title": {"br00042", "br00115"},
-        "lire_name": {"br00043", "br00113"},
-        "lire_rope": {"br00045", "br00117"},
-        "lire_label": {"br00044", "br00116"},
+        "translate_title": {"br00042", "br00115"},
+        "translate_name": {"br00043", "br00113"},
+        "translate_rope": {"br00045", "br00117"},
+        "translate_label": {"br00044", "br00116"},
     }

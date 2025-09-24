@@ -37,11 +37,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     hour_label_str,
     idea_category_str,
     job_str,
-    lire_core_str,
-    lire_label_str,
-    lire_name_str,
-    lire_rope_str,
-    lire_title_str,
     moment_budunit_str,
     moment_event_time_agg_str,
     moment_label_str,
@@ -54,6 +49,11 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     moment_voice_nets_str,
     momentunit_str,
     tran_time_str,
+    translate_core_str,
+    translate_label_str,
+    translate_name_str,
+    translate_rope_str,
+    translate_title_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
@@ -98,11 +98,11 @@ def test_create_prime_tablename_ReturnsObj():
     blfmont_dimen = moment_timeline_month_str()
     blfweek_dimen = moment_timeline_weekday_str()
     blfoffi_dimen = moment_timeoffi_str()
-    lirname_dimen = lire_name_str()
-    lirlabe_dimen = lire_label_str()
-    lirrope_dimen = lire_rope_str()
-    lirtitl_dimen = lire_title_str()
-    lircore_dimen = lire_core_str()
+    trlname_dimen = translate_name_str()
+    trllabe_dimen = translate_label_str()
+    trlrope_dimen = translate_rope_str()
+    trltitl_dimen = translate_title_str()
+    trlcore_dimen = translate_core_str()
     raw_str = "raw"
     agg_str = "agg"
     vld_str = "vld"
@@ -128,15 +128,15 @@ def test_create_prime_tablename_ReturnsObj():
     blfmont_s_agg_table = create_prime_tablename("blfmont", "s", agg_str)
     blfweek_s_agg_table = create_prime_tablename("blfweek", "s", agg_str)
     blfoffi_s_agg_table = create_prime_tablename("blfoffi", "s", agg_str)
-    lirname_s_agg_table = create_prime_tablename("lirname", "s", agg_str)
-    lirlabe_s_agg_table = create_prime_tablename("lirlabe", "s", agg_str)
-    lirrope_s_agg_table = create_prime_tablename("lirrope", "s", agg_str)
-    lirtitl_s_agg_table = create_prime_tablename("lirtitl", "s", agg_str)
-    lirtitl_h_agg_table = create_prime_tablename("lirtitl", "h", agg_str)
-    lirtitl_s_raw_table = create_prime_tablename("lirtitl", "s", raw_str)
-    lirtitl_s_val_table = create_prime_tablename("lirtitl", "s", vld_str)
-    lircore_s_raw_table = create_prime_tablename("lircore", "s", raw_str)
-    lircore_s_agg_table = create_prime_tablename("lircore", "s", agg_str)
+    trlname_s_agg_table = create_prime_tablename("trlname", "s", agg_str)
+    trllabe_s_agg_table = create_prime_tablename("trllabe", "s", agg_str)
+    trlrope_s_agg_table = create_prime_tablename("trlrope", "s", agg_str)
+    trltitl_s_agg_table = create_prime_tablename("trltitl", "s", agg_str)
+    trltitl_h_agg_table = create_prime_tablename("trltitl", "h", agg_str)
+    trltitl_s_raw_table = create_prime_tablename("trltitl", "s", raw_str)
+    trltitl_s_val_table = create_prime_tablename("trltitl", "s", vld_str)
+    trlcore_s_raw_table = create_prime_tablename("trlcore", "s", raw_str)
+    trlcore_s_agg_table = create_prime_tablename("trlcore", "s", agg_str)
     blrpern_job_table = create_prime_tablename("blrpern", job_str(), None)
     x_blrpern_raw = create_prime_tablename("blrpern", "k", raw_str)
     blrgrou_job_table = create_prime_tablename("blrgrou", job_str(), None)
@@ -160,15 +160,15 @@ def test_create_prime_tablename_ReturnsObj():
     assert blfmont_s_agg_table == f"{blfmont_dimen}_s_agg"
     assert blfweek_s_agg_table == f"{blfweek_dimen}_s_agg"
     assert blfoffi_s_agg_table == f"{blfoffi_dimen}_s_agg"
-    assert lirname_s_agg_table == f"{lirname_dimen}_s_agg"
-    assert lirlabe_s_agg_table == f"{lirlabe_dimen}_s_agg"
-    assert lirrope_s_agg_table == f"{lirrope_dimen}_s_agg"
-    assert lirtitl_s_agg_table == f"{lirtitl_dimen}_s_agg"
-    assert lirtitl_h_agg_table == f"{lirtitl_dimen}_h_agg"
-    assert lirtitl_s_raw_table == f"{lirtitl_dimen}_s_raw"
-    assert lirtitl_s_val_table == f"{lirtitl_dimen}_s_vld"
-    assert lircore_s_raw_table == f"{lircore_dimen}_s_raw"
-    assert lircore_s_agg_table == f"{lircore_dimen}_s_agg"
+    assert trlname_s_agg_table == f"{trlname_dimen}_s_agg"
+    assert trllabe_s_agg_table == f"{trllabe_dimen}_s_agg"
+    assert trlrope_s_agg_table == f"{trlrope_dimen}_s_agg"
+    assert trltitl_s_agg_table == f"{trltitl_dimen}_s_agg"
+    assert trltitl_h_agg_table == f"{trltitl_dimen}_h_agg"
+    assert trltitl_s_raw_table == f"{trltitl_dimen}_s_raw"
+    assert trltitl_s_val_table == f"{trltitl_dimen}_s_vld"
+    assert trlcore_s_raw_table == f"{trlcore_dimen}_s_raw"
+    assert trlcore_s_agg_table == f"{trlcore_dimen}_s_agg"
     assert blrpern_job_table == f"{blrpern_dimen}_job"
     assert blrgrou_job_table == f"{blrgrou_dimen}_job"
     assert x_blrpern_raw == "belief_voiceunit_raw"
@@ -199,7 +199,7 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) != "lire"
+        if dimen_config.get(idea_category_str()) != "translate"
         # if dimen_config.get(idea_category_str()) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:
@@ -262,7 +262,7 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) != "lire"
+        if dimen_config.get(idea_category_str()) != "translate"
         # if dimen_config.get(idea_category_str()) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:

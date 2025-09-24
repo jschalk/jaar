@@ -25,28 +25,28 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 
 
 def add_to_br00042_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    lirtitl_s_vld_tablename = prime_tbl("LIRTITL", "s", "vld")
-    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
+    trltitl_s_vld_tablename = prime_tbl("TRLTITL", "s", "vld")
+    trlcore_s_vld_tablename = prime_tbl("TRLCORE", "s", "vld")
 
     select_sqlstr = f"""
 SELECT
   "" event_int
-, lirtitl.face_name
-, lirtitl.otx_title
-, lirtitl.inx_title
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
-FROM {lirtitl_s_vld_tablename} lirtitl
-JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirtitl.face_name
+, trltitl.face_name
+, trltitl.otx_title
+, trltitl.inx_title
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
+FROM {trltitl_s_vld_tablename} trltitl
+JOIN {trlcore_s_vld_tablename} trlcore ON trlcore.face_name = trltitl.face_name
 ORDER BY 
   event_int
-, lirtitl.face_name
-, lirtitl.otx_title
-, lirtitl.inx_title
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
+, trltitl.face_name
+, trltitl.otx_title
+, trltitl.inx_title
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -57,26 +57,26 @@ ORDER BY
 
 
 def add_to_br00043_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    lirname_s_vld_tablename = prime_tbl("LIRNAME", "s", "vld")
-    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
+    trlname_s_vld_tablename = prime_tbl("TRLNAME", "s", "vld")
+    trlcore_s_vld_tablename = prime_tbl("TRLCORE", "s", "vld")
     select_sqlstr = f"""
 SELECT
   "" event_int
-, lirname.face_name
-, lirname.otx_name
-, lirname.inx_name
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
-FROM {lirname_s_vld_tablename} lirname
-JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirname.face_name
+, trlname.face_name
+, trlname.otx_name
+, trlname.inx_name
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
+FROM {trlname_s_vld_tablename} trlname
+JOIN {trlcore_s_vld_tablename} trlcore ON trlcore.face_name = trlname.face_name
 ORDER BY 
-  lirname.face_name
-, lirname.otx_name
-, lirname.inx_name
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
+  trlname.face_name
+, trlname.otx_name
+, trlname.inx_name
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -87,27 +87,27 @@ ORDER BY
 
 
 def add_to_br00044_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    lirlabe_s_vld_tablename = prime_tbl("LIRLABE", "s", "vld")
-    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
+    trllabe_s_vld_tablename = prime_tbl("TRLLABE", "s", "vld")
+    trlcore_s_vld_tablename = prime_tbl("TRLCORE", "s", "vld")
 
     select_sqlstr = f"""
 SELECT
   "" event_int
-, lirlabe.face_name
-, lirlabe.otx_label
-, lirlabe.inx_label
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
-FROM {lirlabe_s_vld_tablename} lirlabe
-JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirlabe.face_name
+, trllabe.face_name
+, trllabe.otx_label
+, trllabe.inx_label
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
+FROM {trllabe_s_vld_tablename} trllabe
+JOIN {trlcore_s_vld_tablename} trlcore ON trlcore.face_name = trllabe.face_name
 ORDER BY 
-  lirlabe.face_name
-, lirlabe.otx_label
-, lirlabe.inx_label
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
+  trllabe.face_name
+, trllabe.otx_label
+, trllabe.inx_label
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -118,27 +118,27 @@ ORDER BY
 
 
 def add_to_br00045_csv(x_csv: str, cursor: sqlite3_Cursor, csv_delimiter: str) -> str:
-    lirrope_s_vld_tablename = prime_tbl("LIRROPE", "s", "vld")
-    lircore_s_vld_tablename = prime_tbl("LIRCORE", "s", "vld")
+    trlrope_s_vld_tablename = prime_tbl("TRLROPE", "s", "vld")
+    trlcore_s_vld_tablename = prime_tbl("TRLCORE", "s", "vld")
 
     select_sqlstr = f"""
 SELECT
   "" event_int
-, lirrope.face_name
-, lirrope.otx_rope
-, lirrope.inx_rope
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
-FROM {lirrope_s_vld_tablename} lirrope
-JOIN {lircore_s_vld_tablename} lircore ON lircore.face_name = lirrope.face_name
+, trlrope.face_name
+, trlrope.otx_rope
+, trlrope.inx_rope
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
+FROM {trlrope_s_vld_tablename} trlrope
+JOIN {trlcore_s_vld_tablename} trlcore ON trlcore.face_name = trlrope.face_name
 ORDER BY 
-  lirrope.face_name
-, lirrope.otx_rope
-, lirrope.inx_rope
-, lircore.otx_knot
-, lircore.inx_knot
-, lircore.unknown_str
+  trlrope.face_name
+, trlrope.otx_rope
+, trlrope.inx_rope
+, trlcore.otx_knot
+, trlcore.inx_knot
+, trlcore.unknown_str
 ;
 """
     cursor.execute(select_sqlstr)
@@ -148,7 +148,7 @@ ORDER BY
     return x_csv
 
 
-def add_lire_rows_to_stance_csv_strs(
+def add_translate_rows_to_stance_csv_strs(
     cursor: sqlite3_Cursor, moment_csv_strs: dict[str, str], csv_delimiter: str
 ):
     br00042_csv = moment_csv_strs.get("br00042")
@@ -185,7 +185,7 @@ def collect_stance_csv_strs(world_dir: str) -> dict[str, str]:
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        add_lire_rows_to_stance_csv_strs(cursor, x_csv_strs, ",")
+        add_translate_rows_to_stance_csv_strs(cursor, x_csv_strs, ",")
     db_conn.close()
 
     return x_csv_strs

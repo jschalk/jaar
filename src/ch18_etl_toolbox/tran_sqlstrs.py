@@ -30,10 +30,10 @@ ALL_DIMEN_ABBV7 = {
     "BLRLABO",
     "BLRPLAN",
     "BLRUNIT",
-    "LIRTITL",
-    "LIRNAME",
-    "LIRROPE",
-    "LIRLABE",
+    "TRLTITL",
+    "TRLNAME",
+    "TRLROPE",
+    "TRLLABE",
 }
 
 
@@ -56,11 +56,11 @@ def get_dimen_abbv7(dimen: str) -> str:
         "belief_plan_partyunit": "BLRLABO",
         "belief_planunit": "BLRPLAN",
         "beliefunit": "BLRUNIT",
-        "lire_title": "LIRTITL",
-        "lire_name": "LIRNAME",
-        "lire_rope": "LIRROPE",
-        "lire_label": "LIRLABE",
-        "lire_core": "LIRCORE",
+        "translate_title": "TRLTITL",
+        "translate_name": "TRLNAME",
+        "translate_rope": "TRLROPE",
+        "translate_label": "TRLLABE",
+        "translate_core": "TRLCORE",
     }.get(dimen)
 
 
@@ -95,11 +95,11 @@ def create_prime_tablename(
         "BLRLABO": "belief_plan_partyunit",
         "BLRPLAN": "belief_planunit",
         "BLRUNIT": "beliefunit",
-        "LIRTITL": "lire_title",
-        "LIRNAME": "lire_name",
-        "LIRROPE": "lire_rope",
-        "LIRLABE": "lire_label",
-        "LIRCORE": "lire_core",
+        "TRLTITL": "translate_title",
+        "TRLNAME": "translate_name",
+        "TRLROPE": "translate_rope",
+        "TRLLABE": "translate_label",
+        "TRLCORE": "translate_core",
     }
     tablename = idea_dimen_or_abbv7
     if abbv_references.get(idea_dimen_or_abbv7.upper()):
@@ -114,22 +114,22 @@ def create_prime_tablename(
     return f"{tablename}_{put_del}_{stage}" if put_del else f"{tablename}_{stage}"
 
 
-CREATE_LIRTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRTITL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_title_s_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRTITL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_title_s_vld (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT)"""
-CREATE_LIRNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT)"""
-CREATE_LIRROPE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_rope_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRROPE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_rope_s_agg (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRROPE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_rope_s_vld (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT)"""
-CREATE_LIRLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_label_s_vld (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT)"""
+CREATE_TRLTITL_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_title_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLTITL_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_title_s_agg (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLTITL_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_title_s_vld (event_int INTEGER, face_name TEXT, otx_title TEXT, inx_title TEXT)"""
+CREATE_TRLNAME_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_name_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLNAME_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_name_s_agg (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLNAME_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_name_s_vld (event_int INTEGER, face_name TEXT, otx_name TEXT, inx_name TEXT)"""
+CREATE_TRLROPE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_rope_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLROPE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_rope_s_agg (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLROPE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_rope_s_vld (event_int INTEGER, face_name TEXT, otx_rope TEXT, inx_rope TEXT)"""
+CREATE_TRLLABE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_label_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLLABE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_label_s_agg (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLLABE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_label_s_vld (event_int INTEGER, face_name TEXT, otx_label TEXT, inx_label TEXT)"""
 
-CREATE_LIRCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_core_s_raw (source_dimen TEXT, face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
-CREATE_LIRCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_core_s_agg (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
-CREATE_LIRCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS lire_core_s_vld (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
+CREATE_TRLCORE_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_core_s_raw (source_dimen TEXT, face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT, error_message TEXT)"""
+CREATE_TRLCORE_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_core_s_agg (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
+CREATE_TRLCORE_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS translate_core_s_vld (face_name TEXT, otx_knot TEXT, inx_knot TEXT, unknown_str TEXT)"""
 
 CREATE_BLFPAYY_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
 CREATE_BLFPAYY_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_paybook_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, tran_time INTEGER, amount REAL, error_message TEXT)"""
@@ -173,9 +173,9 @@ CREATE_BLRMEMB_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_voice_memb
 CREATE_BLRMEMB_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title_ERASE TEXT)"
 CREATE_BLRMEMB_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title_ERASE TEXT, error_message TEXT)"
 CREATE_BLRMEMB_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title_ERASE TEXT)"
-CREATE_BLRMEMB_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_otx TEXT, voice_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, group_cred_points REAL, group_debt_points REAL)"
+CREATE_BLRMEMB_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_otx TEXT, voice_name_inx TEXT, group_title_otx TEXT, group_title_inx TEXT, group_cred_points REAL, group_debt_points REAL)"
 CREATE_BLRMEMB_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL)"
-CREATE_BLRMEMB_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_otx TEXT, voice_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
+CREATE_BLRMEMB_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_otx TEXT, voice_name_inx TEXT, group_title_ERASE_otx TEXT, group_title_ERASE_inx TEXT)"
 CREATE_BLRMEMB_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title_ERASE TEXT)"
 CREATE_BLRPERN_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, voice_cred_points REAL, voice_debt_points REAL, error_message TEXT)"
 CREATE_BLRPERN_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, voice_cred_points REAL, voice_debt_points REAL, error_message TEXT)"
@@ -183,9 +183,9 @@ CREATE_BLRPERN_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_
 CREATE_BLRPERN_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name_ERASE TEXT)"
 CREATE_BLRPERN_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name_ERASE TEXT, error_message TEXT)"
 CREATE_BLRPERN_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name_ERASE TEXT)"
-CREATE_BLRPERN_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_otx TEXT, voice_name_inx TEXT, voice_cred_points REAL, voice_debt_points REAL)"
+CREATE_BLRPERN_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_otx TEXT, voice_name_inx TEXT, voice_cred_points REAL, voice_debt_points REAL)"
 CREATE_BLRPERN_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, voice_cred_points REAL, voice_debt_points REAL)"
-CREATE_BLRPERN_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_ERASE_otx TEXT, voice_name_ERASE_inx TEXT)"
+CREATE_BLRPERN_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, voice_name_ERASE_otx TEXT, voice_name_ERASE_inx TEXT)"
 CREATE_BLRPERN_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voiceunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name_ERASE TEXT)"
 CREATE_BLRAWAR_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
 CREATE_BLRAWAR_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL, error_message TEXT)"
@@ -193,9 +193,9 @@ CREATE_BLRAWAR_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_award
 CREATE_BLRAWAR_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
 CREATE_BLRAWAR_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT, error_message TEXT)"
 CREATE_BLRAWAR_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
-CREATE_BLRAWAR_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
+CREATE_BLRAWAR_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_otx TEXT, awardee_title_inx TEXT, give_force REAL, take_force REAL)"
 CREATE_BLRAWAR_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title TEXT, give_force REAL, take_force REAL)"
-CREATE_BLRAWAR_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
+CREATE_BLRAWAR_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, awardee_title_ERASE_otx TEXT, awardee_title_ERASE_inx TEXT)"
 CREATE_BLRAWAR_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_awardunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, awardee_title_ERASE TEXT)"
 CREATE_BLRFACT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL, error_message TEXT)"
 CREATE_BLRFACT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL, error_message TEXT)"
@@ -203,9 +203,9 @@ CREATE_BLRFACT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factu
 CREATE_BLRFACT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
 CREATE_BLRFACT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT, error_message TEXT)"
 CREATE_BLRFACT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
-CREATE_BLRFACT_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_otx TEXT, fact_context_inx TEXT, fact_state_otx TEXT, fact_state_inx TEXT, fact_lower REAL, fact_upper REAL)"
+CREATE_BLRFACT_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_otx TEXT, fact_context_inx TEXT, fact_state_otx TEXT, fact_state_inx TEXT, fact_lower REAL, fact_upper REAL)"
 CREATE_BLRFACT_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context TEXT, fact_state TEXT, fact_lower REAL, fact_upper REAL)"
-CREATE_BLRFACT_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_ERASE_otx TEXT, fact_context_ERASE_inx TEXT)"
+CREATE_BLRFACT_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, fact_context_ERASE_otx TEXT, fact_context_ERASE_inx TEXT)"
 CREATE_BLRFACT_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_factunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, fact_context_ERASE TEXT)"
 CREATE_BLRHEAL_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT, error_message TEXT)"
 CREATE_BLRHEAL_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT, error_message TEXT)"
@@ -213,9 +213,9 @@ CREATE_BLRHEAL_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_heale
 CREATE_BLRHEAL_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
 CREATE_BLRHEAL_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT, error_message TEXT)"
 CREATE_BLRHEAL_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
-CREATE_BLRHEAL_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
+CREATE_BLRHEAL_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_otx TEXT, healer_name_inx TEXT)"
 CREATE_BLRHEAL_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name TEXT)"
-CREATE_BLRHEAL_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
+CREATE_BLRHEAL_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, healer_name_ERASE_otx TEXT, healer_name_ERASE_inx TEXT)"
 CREATE_BLRHEAL_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_healerunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, healer_name_ERASE TEXT)"
 CREATE_BLRPREM_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER, error_message TEXT)"
 CREATE_BLRPREM_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER, error_message TEXT)"
@@ -223,9 +223,9 @@ CREATE_BLRPREM_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reaso
 CREATE_BLRPREM_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
 CREATE_BLRPREM_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT, error_message TEXT)"
 CREATE_BLRPREM_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
-CREATE_BLRPREM_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_otx TEXT, reason_state_inx TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
+CREATE_BLRPREM_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_otx TEXT, reason_state_inx TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
 CREATE_BLRPREM_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state TEXT, reason_upper REAL, reason_lower REAL, reason_divisor INTEGER)"
-CREATE_BLRPREM_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_ERASE_otx TEXT, reason_state_ERASE_inx TEXT)"
+CREATE_BLRPREM_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_state_ERASE_otx TEXT, reason_state_ERASE_inx TEXT)"
 CREATE_BLRPREM_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reason_caseunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_state_ERASE TEXT)"
 CREATE_BLRREAS_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER, error_message TEXT)"
 CREATE_BLRREAS_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER, error_message TEXT)"
@@ -233,9 +233,9 @@ CREATE_BLRREAS_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reaso
 CREATE_BLRREAS_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
 CREATE_BLRREAS_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT, error_message TEXT)"
 CREATE_BLRREAS_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
-CREATE_BLRREAS_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_active_requisite INTEGER)"
+CREATE_BLRREAS_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_otx TEXT, reason_context_inx TEXT, reason_active_requisite INTEGER)"
 CREATE_BLRREAS_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context TEXT, reason_active_requisite INTEGER)"
-CREATE_BLRREAS_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_ERASE_otx TEXT, reason_context_ERASE_inx TEXT)"
+CREATE_BLRREAS_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, reason_context_ERASE_otx TEXT, reason_context_ERASE_inx TEXT)"
 CREATE_BLRREAS_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_reasonunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, reason_context_ERASE TEXT)"
 CREATE_BLRLABO_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER, error_message TEXT)"
 CREATE_BLRLABO_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER, error_message TEXT)"
@@ -243,9 +243,9 @@ CREATE_BLRLABO_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_party
 CREATE_BLRLABO_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
 CREATE_BLRLABO_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT, error_message TEXT)"
 CREATE_BLRLABO_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
-CREATE_BLRLABO_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_otx TEXT, party_title_inx TEXT, solo INTEGER)"
+CREATE_BLRLABO_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_otx TEXT, party_title_inx TEXT, solo INTEGER)"
 CREATE_BLRLABO_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title TEXT, solo INTEGER)"
-CREATE_BLRLABO_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_ERASE_otx TEXT, party_title_ERASE_inx TEXT)"
+CREATE_BLRLABO_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, party_title_ERASE_otx TEXT, party_title_ERASE_inx TEXT)"
 CREATE_BLRLABO_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_plan_partyunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, party_title_ERASE TEXT)"
 CREATE_BLRPLAN_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
 CREATE_BLRPLAN_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER, error_message TEXT)"
@@ -253,9 +253,9 @@ CREATE_BLRPLAN_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s
 CREATE_BLRPLAN_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
 CREATE_BLRPLAN_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT, error_message TEXT)"
 CREATE_BLRPLAN_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
-CREATE_BLRPLAN_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
+CREATE_BLRPLAN_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_otx TEXT, plan_rope_inx TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
 CREATE_BLRPLAN_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope TEXT, begin REAL, close REAL, addin REAL, numor INTEGER, denom INTEGER, morph INTEGER, gogo_want REAL, stop_want REAL, star INTEGER, task INTEGER, problem_bool INTEGER)"
-CREATE_BLRPLAN_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_ERASE_otx TEXT, plan_rope_ERASE_inx TEXT)"
+CREATE_BLRPLAN_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, plan_rope_ERASE_otx TEXT, plan_rope_ERASE_inx TEXT)"
 CREATE_BLRPLAN_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_planunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, plan_rope_ERASE TEXT)"
 CREATE_BLRUNIT_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
 CREATE_BLRUNIT_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, error_message TEXT)"
@@ -263,29 +263,29 @@ CREATE_BLRUNIT_SOUND_PUT_VLD_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_put_
 CREATE_BLRUNIT_SOUND_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_del_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
 CREATE_BLRUNIT_SOUND_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT, error_message TEXT)"
 CREATE_BLRUNIT_SOUND_DEL_VLD_STR = "CREATE TABLE IF NOT EXISTS beliefunit_s_del_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
-CREATE_BLRUNIT_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_put_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
+CREATE_BLRUNIT_HEARD_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_put_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_otx TEXT, belief_name_inx TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
 CREATE_BLRUNIT_HEARD_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, credor_respect REAL, debtor_respect REAL, fund_pool REAL, max_tree_traverse INTEGER, tally INTEGER, fund_iota REAL, penny REAL, respect_bit REAL)"
-CREATE_BLRUNIT_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_del_raw (lire_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_ERASE_otx TEXT, belief_name_ERASE_inx TEXT)"
+CREATE_BLRUNIT_HEARD_DEL_RAW_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_del_raw (translate_event_int INTEGER, event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, belief_name_ERASE_otx TEXT, belief_name_ERASE_inx TEXT)"
 CREATE_BLRUNIT_HEARD_DEL_AGG_STR = "CREATE TABLE IF NOT EXISTS beliefunit_h_del_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name_ERASE TEXT)"
 
 
 def get_prime_create_table_sqlstrs() -> dict[str, str]:
     return {
-        "lire_title_s_raw": CREATE_LIRTITL_SOUND_RAW_SQLSTR,
-        "lire_title_s_agg": CREATE_LIRTITL_SOUND_AGG_SQLSTR,
-        "lire_title_s_vld": CREATE_LIRTITL_SOUND_VLD_SQLSTR,
-        "lire_name_s_raw": CREATE_LIRNAME_SOUND_RAW_SQLSTR,
-        "lire_name_s_agg": CREATE_LIRNAME_SOUND_AGG_SQLSTR,
-        "lire_name_s_vld": CREATE_LIRNAME_SOUND_VLD_SQLSTR,
-        "lire_rope_s_raw": CREATE_LIRROPE_SOUND_RAW_SQLSTR,
-        "lire_rope_s_agg": CREATE_LIRROPE_SOUND_AGG_SQLSTR,
-        "lire_rope_s_vld": CREATE_LIRROPE_SOUND_VLD_SQLSTR,
-        "lire_label_s_raw": CREATE_LIRLABE_SOUND_RAW_SQLSTR,
-        "lire_label_s_agg": CREATE_LIRLABE_SOUND_AGG_SQLSTR,
-        "lire_label_s_vld": CREATE_LIRLABE_SOUND_VLD_SQLSTR,
-        "lire_core_s_raw": CREATE_LIRCORE_SOUND_RAW_SQLSTR,
-        "lire_core_s_agg": CREATE_LIRCORE_SOUND_AGG_SQLSTR,
-        "lire_core_s_vld": CREATE_LIRCORE_SOUND_VLD_SQLSTR,
+        "translate_title_s_raw": CREATE_TRLTITL_SOUND_RAW_SQLSTR,
+        "translate_title_s_agg": CREATE_TRLTITL_SOUND_AGG_SQLSTR,
+        "translate_title_s_vld": CREATE_TRLTITL_SOUND_VLD_SQLSTR,
+        "translate_name_s_raw": CREATE_TRLNAME_SOUND_RAW_SQLSTR,
+        "translate_name_s_agg": CREATE_TRLNAME_SOUND_AGG_SQLSTR,
+        "translate_name_s_vld": CREATE_TRLNAME_SOUND_VLD_SQLSTR,
+        "translate_rope_s_raw": CREATE_TRLROPE_SOUND_RAW_SQLSTR,
+        "translate_rope_s_agg": CREATE_TRLROPE_SOUND_AGG_SQLSTR,
+        "translate_rope_s_vld": CREATE_TRLROPE_SOUND_VLD_SQLSTR,
+        "translate_label_s_raw": CREATE_TRLLABE_SOUND_RAW_SQLSTR,
+        "translate_label_s_agg": CREATE_TRLLABE_SOUND_AGG_SQLSTR,
+        "translate_label_s_vld": CREATE_TRLLABE_SOUND_VLD_SQLSTR,
+        "translate_core_s_raw": CREATE_TRLCORE_SOUND_RAW_SQLSTR,
+        "translate_core_s_agg": CREATE_TRLCORE_SOUND_AGG_SQLSTR,
+        "translate_core_s_vld": CREATE_TRLCORE_SOUND_VLD_SQLSTR,
         "moment_paybook_s_raw": CREATE_BLFPAYY_SOUND_RAW_SQLSTR,
         "moment_paybook_s_agg": CREATE_BLFPAYY_SOUND_AGG_SQLSTR,
         "moment_paybook_s_vld": CREATE_BLFPAYY_SOUND_VLD_SQLSTR,
@@ -523,7 +523,7 @@ def create_sound_agg_insert_sqlstrs(
         raw_tablename = create_prime_tablename(dimen, "s", "raw")
         agg_tablename = create_prime_tablename(dimen, "s", "agg")
 
-    lire_moment_belief_put_sqlstr = create_table2table_agg_insert_query(
+    translate_moment_belief_put_sqlstr = create_table2table_agg_insert_query(
         conn_or_cursor,
         src_table=raw_tablename,
         dst_table=agg_tablename,
@@ -531,7 +531,7 @@ def create_sound_agg_insert_sqlstrs(
         exclude_cols=exclude_cols,
         where_block="WHERE error_message IS NULL",
     )
-    sqlstrs = [lire_moment_belief_put_sqlstr]
+    sqlstrs = [translate_moment_belief_put_sqlstr]
     if dimen.lower().startswith("belief"):
         del_raw_tablename = create_prime_tablename(dimen, "s", "raw", "del")
         del_agg_tablename = create_prime_tablename(dimen, "s", "agg", "del")
@@ -551,72 +551,72 @@ def create_sound_agg_insert_sqlstrs(
     return sqlstrs
 
 
-def create_insert_into_lire_core_raw_sqlstr(dimen: str) -> str:
-    lire_core_s_raw_tablename = create_prime_tablename("lircore", "s", "raw")
-    lire_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    return f"""INSERT INTO {lire_core_s_raw_tablename} (source_dimen, face_name, otx_knot, inx_knot, unknown_str)
-SELECT '{lire_s_agg_tablename}', face_name, otx_knot, inx_knot, unknown_str
-FROM {lire_s_agg_tablename}
+def create_insert_into_translate_core_raw_sqlstr(dimen: str) -> str:
+    translate_core_s_raw_tablename = create_prime_tablename("trlcore", "s", "raw")
+    translate_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    return f"""INSERT INTO {translate_core_s_raw_tablename} (source_dimen, face_name, otx_knot, inx_knot, unknown_str)
+SELECT '{translate_s_agg_tablename}', face_name, otx_knot, inx_knot, unknown_str
+FROM {translate_s_agg_tablename}
 GROUP BY face_name, otx_knot, inx_knot, unknown_str
 ;
 """
 
 
-def create_insert_lire_core_agg_into_vld_sqlstr(
+def create_insert_translate_core_agg_into_vld_sqlstr(
     default_knot: str, default_unknown: str
 ):
-    return f"""INSERT INTO lire_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
+    return f"""INSERT INTO translate_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   face_name
 , IFNULL(otx_knot, '{default_knot}')
 , IFNULL(inx_knot, '{default_knot}')
 , IFNULL(unknown_str, '{default_unknown}')
-FROM lire_core_s_agg
+FROM translate_core_s_agg
 ;
 """
 
 
-def create_insert_missing_face_name_into_lire_core_vld_sqlstr(
+def create_insert_missing_face_name_into_translate_core_vld_sqlstr(
     default_knot: str, default_unknown: str, moment_belief_sound_agg_tablename: str
 ):
-    return f"""INSERT INTO lire_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
+    return f"""INSERT INTO translate_core_s_vld (face_name, otx_knot, inx_knot, unknown_str)
 SELECT
   {moment_belief_sound_agg_tablename}.face_name
 , '{default_knot}'
 , '{default_knot}'
 , '{default_unknown}'
 FROM {moment_belief_sound_agg_tablename} 
-LEFT JOIN lire_core_s_vld ON lire_core_s_vld.face_name = {moment_belief_sound_agg_tablename}.face_name
-WHERE lire_core_s_vld.face_name IS NULL
+LEFT JOIN translate_core_s_vld ON translate_core_s_vld.face_name = {moment_belief_sound_agg_tablename}.face_name
+WHERE translate_core_s_vld.face_name IS NULL
 GROUP BY {moment_belief_sound_agg_tablename}.face_name
 ;
 """
 
 
-def create_update_lire_sound_agg_inconsist_sqlstr(dimen: str) -> str:
-    lire_core_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
-    lire_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    return f"""UPDATE {lire_s_agg_tablename}
-SET error_message = 'Inconsistent lire core data'
+def create_update_translate_sound_agg_inconsist_sqlstr(dimen: str) -> str:
+    translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
+    translate_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    return f"""UPDATE {translate_s_agg_tablename}
+SET error_message = 'Inconsistent translate core data'
 WHERE face_name IN (
-    SELECT {lire_s_agg_tablename}.face_name
-    FROM {lire_s_agg_tablename} 
-    LEFT JOIN {lire_core_s_vld_tablename} ON {lire_core_s_vld_tablename}.face_name = {lire_s_agg_tablename}.face_name
-    WHERE {lire_core_s_vld_tablename}.face_name IS NULL
+    SELECT {translate_s_agg_tablename}.face_name
+    FROM {translate_s_agg_tablename} 
+    LEFT JOIN {translate_core_s_vld_tablename} ON {translate_core_s_vld_tablename}.face_name = {translate_s_agg_tablename}.face_name
+    WHERE {translate_core_s_vld_tablename}.face_name IS NULL
 )
 ;
 """
 
 
-def create_update_lirlabe_sound_agg_knot_error_sqlstr() -> str:
-    lircore_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
-    lirlabe_s_agg_tablename = create_prime_tablename("lirlabe", "s", "agg")
-    return f"""UPDATE {lirlabe_s_agg_tablename}
+def create_update_trllabe_sound_agg_knot_error_sqlstr() -> str:
+    trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
+    trllabe_s_agg_tablename = create_prime_tablename("trllabe", "s", "agg")
+    return f"""UPDATE {trllabe_s_agg_tablename}
 SET error_message = 'Knot cannot exist in LabelTerm'
 WHERE rowid IN (
     SELECT label_agg.rowid
-    FROM {lirlabe_s_agg_tablename} label_agg
-    JOIN {lircore_s_vld_tablename} core_vld ON core_vld.face_name = label_agg.face_name
+    FROM {trllabe_s_agg_tablename} label_agg
+    JOIN {trlcore_s_vld_tablename} core_vld ON core_vld.face_name = label_agg.face_name
     WHERE label_agg.otx_label LIKE '%' || core_vld.otx_knot || '%'
       OR label_agg.inx_label LIKE '%' || core_vld.inx_knot || '%'
 )
@@ -624,15 +624,15 @@ WHERE rowid IN (
 """
 
 
-def create_update_lirrope_sound_agg_knot_error_sqlstr() -> str:
-    lircore_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
-    lirrope_s_agg_tablename = create_prime_tablename("lirrope", "s", "agg")
-    return f"""UPDATE {lirrope_s_agg_tablename}
+def create_update_trlrope_sound_agg_knot_error_sqlstr() -> str:
+    trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
+    trlrope_s_agg_tablename = create_prime_tablename("trlrope", "s", "agg")
+    return f"""UPDATE {trlrope_s_agg_tablename}
 SET error_message = 'Knot must exist in RopeTerm'
 WHERE rowid IN (
     SELECT rope_agg.rowid
-    FROM {lirrope_s_agg_tablename} rope_agg
-    JOIN {lircore_s_vld_tablename} core_vld ON core_vld.face_name = rope_agg.face_name
+    FROM {trlrope_s_agg_tablename} rope_agg
+    JOIN {trlcore_s_vld_tablename} core_vld ON core_vld.face_name = rope_agg.face_name
     WHERE NOT rope_agg.otx_rope LIKE core_vld.otx_knot || '%'
         OR NOT rope_agg.inx_rope LIKE core_vld.inx_knot || '%'
 )
@@ -640,15 +640,15 @@ WHERE rowid IN (
 """
 
 
-def create_update_lirname_sound_agg_knot_error_sqlstr() -> str:
-    lircore_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
-    lirname_s_agg_tablename = create_prime_tablename("lirname", "s", "agg")
-    return f"""UPDATE {lirname_s_agg_tablename}
+def create_update_trlname_sound_agg_knot_error_sqlstr() -> str:
+    trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
+    trlname_s_agg_tablename = create_prime_tablename("trlname", "s", "agg")
+    return f"""UPDATE {trlname_s_agg_tablename}
 SET error_message = 'Knot cannot exist in NameTerm'
 WHERE rowid IN (
     SELECT name_agg.rowid
-    FROM {lirname_s_agg_tablename} name_agg
-    JOIN {lircore_s_vld_tablename} core_vld ON core_vld.face_name = name_agg.face_name
+    FROM {trlname_s_agg_tablename} name_agg
+    JOIN {trlcore_s_vld_tablename} core_vld ON core_vld.face_name = name_agg.face_name
     WHERE name_agg.otx_name LIKE '%' || core_vld.otx_knot || '%'
       OR name_agg.inx_name LIKE '%' || core_vld.inx_knot || '%'
 )
@@ -656,15 +656,15 @@ WHERE rowid IN (
 """
 
 
-def create_update_lirtitl_sound_agg_knot_error_sqlstr() -> str:
-    lircore_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
-    lirtitl_s_agg_tablename = create_prime_tablename("lirtitl", "s", "agg")
-    return f"""UPDATE {lirtitl_s_agg_tablename}
+def create_update_trltitl_sound_agg_knot_error_sqlstr() -> str:
+    trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
+    trltitl_s_agg_tablename = create_prime_tablename("trltitl", "s", "agg")
+    return f"""UPDATE {trltitl_s_agg_tablename}
 SET error_message = 'Otx and inx titles must match knot.'
 WHERE rowid IN (
   SELECT title_agg.rowid
-  FROM {lirtitl_s_agg_tablename} title_agg
-  JOIN {lircore_s_vld_tablename} core_vld ON core_vld.face_name = title_agg.face_name
+  FROM {trltitl_s_agg_tablename} title_agg
+  JOIN {trlcore_s_vld_tablename} core_vld ON core_vld.face_name = title_agg.face_name
   WHERE NOT ((
             title_agg.otx_title LIKE core_vld.otx_knot || '%' 
         AND title_agg.inx_title LIKE core_vld.inx_knot || '%') 
@@ -677,21 +677,21 @@ WHERE rowid IN (
 """
 
 
-def create_insert_lire_sound_vld_table_sqlstr(dimen: str) -> str:
-    lire_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
-    lire_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
+def create_insert_translate_sound_vld_table_sqlstr(dimen: str) -> str:
+    translate_s_agg_tablename = create_prime_tablename(dimen, "s", "agg")
+    translate_s_vld_tablename = create_prime_tablename(dimen, "s", "vld")
     dimen_otx_inx_obj_names = {
-        "lire_name": "name",
-        "lire_title": "title",
-        "lire_label": "label",
-        "lire_rope": "rope",
+        "translate_name": "name",
+        "translate_title": "title",
+        "translate_label": "label",
+        "translate_rope": "rope",
     }
     otx_str = f"otx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
     inx_str = f"inx_{dimen_otx_inx_obj_names.get(dimen, dimen)}"
     return f"""
-INSERT INTO {lire_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
+INSERT INTO {translate_s_vld_tablename} (event_int, face_name, {otx_str}, {inx_str})
 SELECT event_int, face_name, MAX({otx_str}), MAX({inx_str})
-FROM {lire_s_agg_tablename}
+FROM {translate_s_agg_tablename}
 WHERE error_message IS NULL
 GROUP BY event_int, face_name
 ;
@@ -699,13 +699,13 @@ GROUP BY event_int, face_name
 
 
 def create_knot_exists_in_name_error_update_sqlstr(table: str, column: str) -> str:
-    lircore_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
+    trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
     return f"""UPDATE {table}
 SET error_message = 'Knot cannot exist in NameTerm column {column}'
 WHERE rowid IN (
     SELECT sound_agg.rowid
     FROM {table} sound_agg
-    JOIN {lircore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
+    JOIN {trlcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
     WHERE sound_agg.{column} LIKE '%' || core_vld.otx_knot || '%'
 )
 ;
@@ -713,13 +713,13 @@ WHERE rowid IN (
 
 
 def create_knot_exists_in_label_error_update_sqlstr(table: str, column: str) -> str:
-    lircore_s_vld_tablename = create_prime_tablename("lircore", "s", "vld")
+    trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
     return f"""UPDATE {table}
 SET error_message = 'Knot cannot exist in LabelTerm column {column}'
 WHERE rowid IN (
     SELECT sound_agg.rowid
     FROM {table} sound_agg
-    JOIN {lircore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
+    JOIN {trlcore_s_vld_tablename} core_vld ON core_vld.face_name = sound_agg.face_name
     WHERE sound_agg.{column} LIKE '%' || core_vld.otx_knot || '%'
 )
 ;
@@ -851,39 +851,39 @@ def get_insert_into_heard_raw_sqlstrs() -> dict[str, str]:
 
 
 def create_update_heard_raw_existing_inx_col_sqlstr(
-    lire_type_abbv: str, table: str, column_prefix: str
+    translate_type_abbv: str, table: str, column_prefix: str
 ) -> str:
     return f"""
-WITH lir_face_otx_event AS (
+WITH trl_face_otx_event AS (
     SELECT 
       raw_dim.rowid raw_rowid
     , raw_dim.event_int
     , raw_dim.face_name_otx
     , raw_dim.{column_prefix}_otx
-    , MAX(lir.event_int) lire_event_int
+    , MAX(trl.event_int) translate_event_int
     FROM {table} raw_dim
-    LEFT JOIN lire_{lire_type_abbv}_s_vld lir ON lir.face_name = raw_dim.face_name_otx
-        AND lir.otx_{lire_type_abbv} = raw_dim.{column_prefix}_otx
-        AND raw_dim.event_int >= lir.event_int
+    LEFT JOIN translate_{translate_type_abbv}_s_vld trl ON trl.face_name = raw_dim.face_name_otx
+        AND trl.otx_{translate_type_abbv} = raw_dim.{column_prefix}_otx
+        AND raw_dim.event_int >= trl.event_int
     GROUP BY 
       raw_dim.rowid
     , raw_dim.event_int
     , raw_dim.face_name_otx
     , raw_dim.{column_prefix}_otx
 ),
-lir_inx_strs AS (
-    SELECT lir_foe.raw_rowid, lir_vld.inx_{lire_type_abbv}
-    FROM lir_face_otx_event lir_foe
-    LEFT JOIN lire_{lire_type_abbv}_s_vld lir_vld
-        ON lir_vld.face_name = lir_foe.face_name_otx
-        AND lir_vld.otx_{lire_type_abbv} = lir_foe.{column_prefix}_otx
-        AND lir_vld.event_int = lir_foe.lire_event_int
+trl_inx_strs AS (
+    SELECT trl_foe.raw_rowid, trl_vld.inx_{translate_type_abbv}
+    FROM trl_face_otx_event trl_foe
+    LEFT JOIN translate_{translate_type_abbv}_s_vld trl_vld
+        ON trl_vld.face_name = trl_foe.face_name_otx
+        AND trl_vld.otx_{translate_type_abbv} = trl_foe.{column_prefix}_otx
+        AND trl_vld.event_int = trl_foe.translate_event_int
 )
 UPDATE {table} as dim_h_raw
 SET {column_prefix}_inx = (
-    SELECT lir_inx_strs.inx_{lire_type_abbv}
-    FROM lir_inx_strs
-    WHERE dim_h_raw.rowid = lir_inx_strs.raw_rowid
+    SELECT trl_inx_strs.inx_{translate_type_abbv}
+    FROM trl_inx_strs
+    WHERE dim_h_raw.rowid = trl_inx_strs.raw_rowid
 )
 ;
 """

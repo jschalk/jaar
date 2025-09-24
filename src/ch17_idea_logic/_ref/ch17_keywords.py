@@ -1,4 +1,4 @@
-from src.ch16_lire_logic._ref.ch16_keywords import *
+from src.ch16_translate_logic._ref.ch16_keywords import *
 
 
 def allowed_crud_str() -> str:

@@ -11,7 +11,6 @@ from src.ch01_data_toolbox.file_toolbox import (
     get_max_file_number,
     open_file,
     save_file,
-    save_json,
 )
 from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch02_rope_logic.term import (
@@ -46,12 +45,10 @@ from src.ch10_pack_logic.pack import (
 )
 from src.ch12_hub_toolbox.ch12_path import (
     create_atoms_dir_path,
-    create_keep_duty_path,
     create_keep_grades_path,
     create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
-    create_treasury_db_path,
 )
 from src.ch12_hub_toolbox.hub_tool import (
     gut_file_exists,

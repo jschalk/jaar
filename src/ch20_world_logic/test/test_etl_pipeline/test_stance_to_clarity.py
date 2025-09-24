@@ -86,12 +86,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
         events_brick_valid_tablename = events_brick_valid_str()
-        lirname_sound_raw = create_prime_tablename("lirname", "s", "raw")
-        lirname_sound_agg = create_prime_tablename("lirname", "s", "agg")
-        lirname_sound_vld = create_prime_tablename("lirname", "s", "vld")
-        lircore_sound_raw = create_prime_tablename("lircore", "s", "raw")
-        lircore_sound_agg = create_prime_tablename("lircore", "s", "agg")
-        lircore_sound_vld = create_prime_tablename("lircore", "s", "vld")
+        trlname_sound_raw = create_prime_tablename("trlname", "s", "raw")
+        trlname_sound_agg = create_prime_tablename("trlname", "s", "agg")
+        trlname_sound_vld = create_prime_tablename("trlname", "s", "vld")
+        trlcore_sound_raw = create_prime_tablename("trlcore", "s", "raw")
+        trlcore_sound_agg = create_prime_tablename("trlcore", "s", "agg")
+        trlcore_sound_vld = create_prime_tablename("trlcore", "s", "vld")
         momentunit_sound_raw = create_prime_tablename("momentunit", "s", "raw")
         momentunit_sound_agg = create_prime_tablename("momentunit", "s", "agg")
         blrunit_sound_put_raw = create_prime_tablename("beliefunit", "s", "raw", "put")
@@ -111,18 +111,18 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, events_brick_agg_str()) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
-        assert get_row_count(cursor, lirname_sound_raw) == 2
+        assert get_row_count(cursor, trlname_sound_raw) == 2
         assert get_row_count(cursor, momentunit_sound_raw) == 4
         assert get_row_count(cursor, blrunit_sound_put_raw) == 4
         assert get_row_count(cursor, blrpern_sound_put_raw) == 2
-        assert get_row_count(cursor, lirname_sound_agg) == 1
+        assert get_row_count(cursor, trlname_sound_agg) == 1
         assert get_row_count(cursor, momentunit_sound_agg) == 1
         assert get_row_count(cursor, blrunit_sound_put_agg) == 1
         assert get_row_count(cursor, blrpern_sound_put_agg) == 1
-        assert get_row_count(cursor, lircore_sound_raw) == 1
-        assert get_row_count(cursor, lircore_sound_agg) == 1
-        assert get_row_count(cursor, lircore_sound_vld) == 1
-        assert get_row_count(cursor, lirname_sound_vld) == 1
+        assert get_row_count(cursor, trlcore_sound_raw) == 1
+        assert get_row_count(cursor, trlcore_sound_agg) == 1
+        assert get_row_count(cursor, trlcore_sound_vld) == 1
+        assert get_row_count(cursor, trlname_sound_vld) == 1
         assert get_row_count(cursor, momentunit_heard_raw) == 1
         assert get_row_count(cursor, blrunit_heard_put_raw) == 1
         assert get_row_count(cursor, blrpern_heard_put_raw) == 1

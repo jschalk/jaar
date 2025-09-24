@@ -1,14 +1,11 @@
 from os.path import exists as os_path_exists
 from pytest import raises as pytest_raises
-from src.ch01_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_graphics import display_plantree
 from src.ch12_hub_toolbox.ch12_path import (
     create_keep_duty_path,
-    create_keep_rope_path,
     create_treasury_db_path,
-    treasury_filename,
 )
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
@@ -16,13 +13,11 @@ from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch12_hub_toolbox.test._util.example_hub_atoms import get_texas_rope
 
 
 def test_HubUnit_get_keep_ropes_RaisesErrorWhen_keeps_justified_IsFalse(
     env_dir_setup_cleanup,
 ):
-
     # ESTABLISH
     sue_str = "Sue"
     a23_str = "amy23"

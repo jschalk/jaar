@@ -155,7 +155,7 @@ def test_upsert_sheet_AddNewSheetToExistingFile(temp_excel_file, sample_datafram
     pandas_testing_assert_frame_equal(df_new, sample_dataframe)
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoLire(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoTranslate(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -180,7 +180,7 @@ def test_get_all_excel_sheet_names_ReturnsObj_Scenario0_NoLire(
     assert len(x_sheet_names) == 2
 
 
-def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_LireSheetNames(
+def test_get_all_excel_sheet_names_ReturnsObj_Scenario1_TranslateSheetNames(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

@@ -9,17 +9,17 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     idea_number_str,
     inx_knot_str,
     inx_rope_str,
-    lire_rope_str,
     moment_label_str,
     otx_knot_str,
     otx_rope_str,
+    translate_rope_str,
     unknown_str_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
-    CREATE_LIRROPE_SOUND_RAW_SQLSTR,
+    CREATE_TRLROPE_SOUND_RAW_SQLSTR,
     create_prime_tablename,
     create_sound_and_heard_tables,
     create_sound_raw_update_inconsist_error_message_sqlstr,
@@ -48,10 +48,10 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        cursor.execute(CREATE_LIRROPE_SOUND_RAW_SQLSTR)
-        lirrope_str = "lire_rope"
-        lirrope_s_raw_tablename = create_prime_tablename(lirrope_str, "s", "raw")
-        insert_into_clause = f"""INSERT INTO {lirrope_s_raw_tablename} (
+        cursor.execute(CREATE_TRLROPE_SOUND_RAW_SQLSTR)
+        trlrope_str = "translate_rope"
+        trlrope_s_raw_tablename = create_prime_tablename(trlrope_str, "s", "raw")
+        insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -76,12 +76,12 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {lirrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {trlrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
         sqlstr = create_sound_raw_update_inconsist_error_message_sqlstr(
-            cursor, lirrope_str
+            cursor, trlrope_str
         )
         cursor.execute(sqlstr)
 
@@ -107,8 +107,10 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        lirrope_s_raw_tablename = create_prime_tablename(lire_rope_str(), "s", "raw")
-        insert_into_clause = f"""INSERT INTO {lirrope_s_raw_tablename} (
+        trlrope_s_raw_tablename = create_prime_tablename(
+            translate_rope_str(), "s", "raw"
+        )
+        insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -133,7 +135,7 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {lirrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {trlrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -141,7 +143,7 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        error_select_sqlstr = f"SELECT idea_number, event_int FROM {lirrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
+        error_select_sqlstr = f"SELECT idea_number, event_int FROM {trlrope_s_raw_tablename} WHERE {error_message_str()} IS NOT NULL"
         cursor.execute(error_select_sqlstr)
         assert cursor.fetchall() == [("br00117", 1), ("br00077", 1)]
 
@@ -227,8 +229,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        lirrope_s_raw_tablename = create_prime_tablename("LIRROPE", "s", "raw")
-        insert_into_clause = f"""INSERT INTO {lirrope_s_raw_tablename} (
+        trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -278,21 +280,21 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        lirrope_s_agg_tablename = create_prime_tablename("LIRROPE", "s", "agg")
+        trlrope_s_agg_tablename = create_prime_tablename("TRLROPE", "s", "agg")
         blrpern_s_put_agg_tblname = create_prime_tablename("BLRPERN", "s", "agg", "put")
-        assert get_row_count(cursor, lirrope_s_raw_tablename) == 7
+        assert get_row_count(cursor, trlrope_s_raw_tablename) == 7
         assert get_row_count(cursor, blrpern_s_put_raw_tblname) == 6
-        assert get_row_count(cursor, lirrope_s_agg_tablename) == 0
+        assert get_row_count(cursor, trlrope_s_agg_tablename) == 0
         assert get_row_count(cursor, blrpern_s_put_agg_tblname) == 0
 
         # WHEN
         insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, lirrope_s_agg_tablename) == 2
+        assert get_row_count(cursor, trlrope_s_agg_tablename) == 2
         assert get_row_count(cursor, blrpern_s_put_agg_tblname) == 2
 
-        select_agg_sqlstr = f"""SELECT * FROM {lirrope_s_agg_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {trlrope_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
@@ -394,8 +396,8 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        lirrope_s_raw_tablename = create_prime_tablename("LIRROPE", "s", "raw")
-        insert_into_clause = f"""INSERT INTO {lirrope_s_raw_tablename} (
+        trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
+        insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {idea_number_str()}
 , {event_int_str()}
 , {face_name_str()}
@@ -447,21 +449,21 @@ VALUES
 ;
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
-        lirrope_s_agg_tablename = create_prime_tablename("LIRROPE", "s", "agg")
+        trlrope_s_agg_tablename = create_prime_tablename("TRLROPE", "s", "agg")
         blrpern_s_put_agg_tblname = create_prime_tablename("BLRPERN", "s", "agg", "put")
-        assert get_row_count(cursor, lirrope_s_raw_tablename) == 8
+        assert get_row_count(cursor, trlrope_s_raw_tablename) == 8
         assert get_row_count(cursor, blrpern_s_put_raw_tblname) == 7
-        assert get_row_count(cursor, lirrope_s_agg_tablename) == 0
+        assert get_row_count(cursor, trlrope_s_agg_tablename) == 0
         assert get_row_count(cursor, blrpern_s_put_agg_tblname) == 0
 
         # WHEN
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
 
         # THEN
-        assert get_row_count(cursor, lirrope_s_agg_tablename) == 4
+        assert get_row_count(cursor, trlrope_s_agg_tablename) == 4
         assert get_row_count(cursor, blrpern_s_put_agg_tblname) == 3
 
-        select_agg_sqlstr = f"""SELECT * FROM {lirrope_s_agg_tablename};"""
+        select_agg_sqlstr = f"""SELECT * FROM {trlrope_s_agg_tablename};"""
         cursor.execute(select_agg_sqlstr)
         rows = cursor.fetchall()
         print(rows)
