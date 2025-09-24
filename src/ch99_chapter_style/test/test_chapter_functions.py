@@ -238,7 +238,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
     assert not duplicated_functions, assertion_fail_str
     print(f"{unecessarily_excluded_funcs=}")
     assert not unecessarily_excluded_funcs
-    assert 1 == 2
 
 
 def test_Chapters_path_FunctionStructureAndFormat():
