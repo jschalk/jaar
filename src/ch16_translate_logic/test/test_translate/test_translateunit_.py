@@ -39,7 +39,7 @@ from src.ch16_translate_logic.map import (
     ropemap_shop,
     titlemap_shop,
 )
-from src.ch16_translate_logic.test._util.example_translates import (
+from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
     get_clean_ropemap,
     get_invalid_namemap,

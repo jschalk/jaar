@@ -1,6 +1,6 @@
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import beliefunit_v001
+from src.ch07_belief_logic.test._util.ch07_examples import beliefunit_v001
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
     INSERT_str,
@@ -16,7 +16,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
 )
 from src.ch17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
-    idea_format_00020_belief_voice_membership_v0_0_0,
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
 from src.ch17_idea_logic.idea_main import (

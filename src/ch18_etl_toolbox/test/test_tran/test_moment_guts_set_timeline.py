@@ -1,10 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic.test._util.calendar_examples import (
-    five_str,
-    get_five_config,
-)
+from src.ch08_timeline_logic.test._util.ch08_examples import five_str, get_five_config
 from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file

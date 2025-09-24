@@ -16,7 +16,7 @@ from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ch17_idea_logic.test._util.example_pandas import (
+from src.ch17_idea_logic.test._util.ch17_examples import (
     get_empty_dataframe,
     get_ex01_dataframe,
     get_ex01_ordered_by_count_bob_csv,

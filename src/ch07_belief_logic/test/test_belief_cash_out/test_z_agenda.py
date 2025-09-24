@@ -5,7 +5,7 @@ from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,
 )
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,
     beliefunit_v001_with_large_agenda,
     beliefunit_v002,

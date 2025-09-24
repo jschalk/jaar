@@ -6,7 +6,7 @@ from src.ch07_belief_logic.belief_graphics import (
     get_belief_voices_plotly_fig,
 )
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001_with_large_agenda,
     get_beliefunit_laundry_example1,
     get_beliefunit_with_4_levels,

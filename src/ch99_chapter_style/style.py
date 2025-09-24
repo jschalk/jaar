@@ -166,28 +166,43 @@ def get_all_str_functions() -> list:
     return all_str_functions
 
 
+def add_or_count_function_name_occurance(all_functions: dict, function_name: str):
+    if all_functions.get(function_name):
+        all_functions[function_name] += 1
+    else:
+        all_functions[function_name] = 1
+
+
 def get_duplicated_functions(excluded_functions) -> set[str]:
     x_count = 0
     duplicate_functions = set()
-    all_functions = set()
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
+    non_excluded_functions = set()
+    all_functions = {}
+    for chapter_dir in get_chapter_descs().values():
         filenames_set = get_dir_filenames(chapter_dir, include_extensions={"py"})
         for filenames in filenames_set:
             file_dir = create_path(chapter_dir, filenames[0])
             file_path = create_path(file_dir, filenames[1])
             file_functions = get_function_names_from_file(file_path)
             for function_name in file_functions:
+                add_or_count_function_name_occurance(all_functions, function_name)
                 x_count += 1
-                if function_name in all_functions:
+                if function_name in non_excluded_functions:
                     print(
                         f"Function #{x_count}: Duplicate function {function_name} in {file_path}"
                     )
                     duplicate_functions.add(function_name)
                 if function_name not in excluded_functions:
-                    all_functions.add(function_name)
+                    non_excluded_functions.add(function_name)
     print(f"{duplicate_functions=}")
+    print(f"{len(non_excluded_functions)=}")
     print(f"{len(all_functions)=}")
-    return duplicate_functions
+    unecessarily_excluded_funcs = {
+        function_name: f"{func_count} does not need to be in excluded_functions set"
+        for function_name, func_count in all_functions.items()
+        if func_count == 1 and function_name in excluded_functions
+    }
+    return duplicate_functions, unecessarily_excluded_funcs
 
 
 def check_if_chapter_str_funcs_is_sorted(chapter_str_funcs: list[str]):

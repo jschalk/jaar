@@ -8,9 +8,7 @@ from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import (
-    get_beliefunit_with_4_levels,
-)
+from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch10_pack_logic._ref.ch10_keywords import (
     DELETE_str,
     INSERT_str,

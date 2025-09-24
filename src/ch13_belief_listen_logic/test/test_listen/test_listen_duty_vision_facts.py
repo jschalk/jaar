@@ -7,7 +7,7 @@ from src.ch13_belief_listen_logic.listen_main import (
     listen_to_facts_duty_vision,
 )
 from src.ch13_belief_listen_logic.test._util.ch13_env import env_dir_setup_cleanup
-from src.ch13_belief_listen_logic.test._util.example_listen import (
+from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     casa_rope,
     clean_rope,
     clean_str,
@@ -16,9 +16,9 @@ from src.ch13_belief_listen_logic.test._util.example_listen import (
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
+    get_texas_hubunit,
     hungry_rope,
 )
-from src.ch13_belief_listen_logic.test._util.example_listen_hub import get_texas_hubunit
 
 
 def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup):

@@ -23,7 +23,7 @@ from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
 )
-from src.ch20_world_logic.test._util.example_worlds import (
+from src.ch20_world_logic.test._util.ch20_examples import (
     example_casa_clean_factunit,
     get_bob_mop_with_reason_beliefunit_example,
 )

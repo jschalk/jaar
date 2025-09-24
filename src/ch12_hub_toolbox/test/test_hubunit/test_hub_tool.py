@@ -3,15 +3,14 @@ from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json, set_dir
 from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_irrational_example,
     get_beliefunit_with_4_levels,
 )
 from src.ch11_bud_logic.cell import CELLNODE_QUOTA_DEFAULT, cellunit_shop
-from src.ch11_bud_logic.test._util.example_factunits import (
+from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
-    example_casa_grimy_factunit as grimy_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
@@ -62,7 +61,7 @@ from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ch12_hub_toolbox.test._util.example_hub_atoms import (
+from src.ch12_hub_toolbox.test._util.ch12_examples import (
     get_budunit_55_example,
     get_budunit_invalid_example,
 )

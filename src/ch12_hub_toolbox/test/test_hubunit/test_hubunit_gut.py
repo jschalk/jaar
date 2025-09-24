@@ -12,7 +12,7 @@ from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch12_hub_toolbox.test._util.example_hub_atoms import sue_2beliefatoms_packunit
+from src.ch12_hub_toolbox.test._util.ch12_examples import sue_2beliefatoms_packunit
 
 
 def test_HubUnit_default_gut_belief_ReturnsObj():

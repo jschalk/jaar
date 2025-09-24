@@ -8,7 +8,7 @@ from src.ch08_timeline_logic._ref.ch08_keywords import (
     week_str,
     weeks_str,
 )
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     creg_weekday_planunits,
     get_creg_min_from_dt,

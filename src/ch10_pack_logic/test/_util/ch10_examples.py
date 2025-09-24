@@ -1,21 +1,17 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch02_rope_logic.term import MomentLabel
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
-from src.ch13_belief_listen_logic._ref.ch13_keywords import (
+from src.ch10_pack_logic._ref.ch10_keywords import (
     DELETE_str,
     INSERT_str,
     UPDATE_str,
-    belief_plan_factunit_str,
     belief_planunit_str,
     belief_voiceunit_str,
     beliefunit_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_upper_str,
     plan_rope_str,
     voice_name_str,
 )
+from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
 
 def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:
@@ -36,9 +32,9 @@ def get_atom_example_planunit_ball(moment_label: MomentLabel = None) -> BeliefAt
     sports_rope = create_rope(moment_label, sports_str)
     ball_str = "basketball"
     x_dimen = belief_planunit_str()
-    bball_rope = create_rope(sports_rope, ball_str)
+    ball_rope = create_rope(sports_rope, ball_str)
     insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
-    insert_planunit_beliefatom.set_jkey(plan_rope_str(), bball_rope)
+    insert_planunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     return insert_planunit_beliefatom
 
 
@@ -61,26 +57,6 @@ def get_atom_example_planunit_knee(moment_label: MomentLabel = None) -> BeliefAt
     return insert_planunit_beliefatom
 
 
-def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAtom:
-    if not moment_label:
-        moment_label = "amy23"
-    sports_str = "sports"
-    sports_rope = create_rope(moment_label, sports_str)
-    ball_str = "basketball"
-    ball_rope = create_rope(sports_rope, ball_str)
-    knee_str = "knee"
-    knee_rope = create_rope(moment_label, knee_str)
-    knee_fact_lower = 7
-    knee_fact_upper = 23
-    x_dimen = belief_plan_factunit_str()
-    insert_factunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
-    insert_factunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    insert_factunit_beliefatom.set_jkey(fact_context_str(), knee_rope)
-    insert_factunit_beliefatom.set_jvalue(fact_lower_str(), knee_fact_lower)
-    insert_factunit_beliefatom.set_jvalue(fact_upper_str(), knee_fact_upper)
-    return insert_factunit_beliefatom
-
-
 def get_beliefdelta_sue_example() -> BeliefDelta:
     sue_beliefdelta = beliefdelta_shop()
 
@@ -94,4 +70,26 @@ def get_beliefdelta_sue_example() -> BeliefDelta:
     sue_beliefatom = beliefatom_shop(dimen, DELETE_str())
     sue_beliefatom.set_jkey(voice_name_str(), sue_str)
     sue_beliefdelta.set_beliefatom(sue_beliefatom)
+    return sue_beliefdelta
+
+
+def get_beliefdelta_example1() -> BeliefDelta:
+    sue_beliefdelta = beliefdelta_shop()
+
+    tally_name = "tally"
+    x_beliefatom = beliefatom_shop(beliefunit_str(), UPDATE_str())
+    x_beliefatom.set_jvalue(tally_name, 55)
+    x_attribute = "max_tree_traverse"
+    x_beliefatom.set_jvalue(x_attribute, 66)
+    x_attribute = "credor_respect"
+    x_beliefatom.set_jvalue(x_attribute, 77)
+    x_attribute = "debtor_respect"
+    x_beliefatom.set_jvalue(x_attribute, 88)
+    sue_beliefdelta.set_beliefatom(x_beliefatom)
+
+    dimen = belief_voiceunit_str()
+    zia_str = "Zia"
+    x_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    x_beliefatom.set_jkey(voice_name_str(), zia_str)
+    sue_beliefdelta.set_beliefatom(x_beliefatom)
     return sue_beliefdelta

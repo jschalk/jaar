@@ -1,11 +1,7 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-
-
-def _example_empty_bob_beliefunit() -> BeliefUnit:
-    a23_str = "amy23"
-    return beliefunit_shop("Bob", a23_str)
+from src.ch15_moment_logic.test._util.ch15_examples import _example_empty_bob_beliefunit
 
 
 def get_mop_with_no_reason_beliefunit_example() -> BeliefUnit:

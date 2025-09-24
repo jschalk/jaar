@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import count_files, create_path, save_json
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     get_creg_config,
     get_expected_creg_year0_markdown,
 )

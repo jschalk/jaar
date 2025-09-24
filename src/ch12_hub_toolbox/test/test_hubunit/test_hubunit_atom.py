@@ -6,7 +6,7 @@ from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as moment_mstr_dir,
 )
-from src.ch12_hub_toolbox.test._util.example_hub_atoms import (
+from src.ch12_hub_toolbox.test._util.ch12_examples import (
     get_atom_example_factunit_knee,
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,

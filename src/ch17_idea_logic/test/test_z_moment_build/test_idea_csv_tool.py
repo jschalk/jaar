@@ -38,7 +38,7 @@ from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir,
 )
-from src.ch17_idea_logic.test._util.idea_df_examples import (  # get_ex2_br00006_df,
+from src.ch17_idea_logic.test._util.ch17_examples import (  # get_ex2_br00006_df,
     get_ex2_br00000_df,
     get_ex2_br00001_df,
     get_ex2_br00002_df,

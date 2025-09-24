@@ -18,7 +18,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch13_belief_listen_logic.test._util.example_listen_hub import get_texas_hubunit
+from src.ch13_belief_listen_logic.test._util.ch13_examples import get_texas_hubunit
 
 
 def casa_str() -> str:

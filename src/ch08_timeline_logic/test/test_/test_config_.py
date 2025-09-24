@@ -21,7 +21,7 @@ from src.ch08_timeline_logic._ref.ch08_keywords import (
     yr4_clean_str,
     yr4_leap_str,
 )
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     five_str,
     get_creg_config,
     get_example_timeline_config,

@@ -44,7 +44,7 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     voice_name_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
-from src.ch10_pack_logic.test._util.example_deltas import get_beliefdelta_example1
+from src.ch10_pack_logic.test._util.ch10_examples import get_beliefdelta_example1
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_SimplestScenario():

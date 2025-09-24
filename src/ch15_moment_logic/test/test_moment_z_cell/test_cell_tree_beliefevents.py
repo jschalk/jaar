@@ -14,7 +14,7 @@ from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ch15_moment_logic.test._util.example_moments import example_casa_clean_factunit
+from src.ch15_moment_logic.test._util.ch15_examples import example_casa_clean_factunit
 
 
 def test_load_cells_beliefevent_SetsFiles_Scenario0_NoFacts(

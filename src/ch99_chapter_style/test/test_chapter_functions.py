@@ -108,7 +108,6 @@ def test_Chapters_StrFunctionsAreAllImported():
 def test_Chapters_MostFunctionsAreUniquelyNamed():
     # ESTABLISH
     excluded_functions = {
-        "_example_empty_bob_beliefunit",
         "_get_inx_label",
         "_get_inx_value",
         "_get_rid_of_translate_core_keys",
@@ -167,10 +166,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
         "get_atom_example_planunit_sports",
         "get_atom_example_factunit_knee",
         "get_bob_mop_with_reason_beliefunit_example",
-        "get_budunit_55_example",
-        "get_budunit_66_example",
-        "get_budunit_88_example",
-        "get_budunit_invalid_example",
         "get_class_type",
         "get_dict",
         "get_edited_belief",
@@ -181,10 +176,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
         "get_membership",
         "get_chapter_temp_dir",
         "get_obj_key",
-        "get_beliefdelta_example1",
-        "get_beliefdelta_sue_example",
-        "get_beliefunit_irrational_example",
-        "get_beliefunit_with_4_levels",
         "get_slash_namemap",
         "get_slash_ropemap",
         "get_slash_titlemap",
@@ -219,7 +210,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
         "set_all_otx2inx",
         "set_knot",
         "set_label",
-        "set_level",
         "set_membership",
         "set_nameterm",
         "set_otx2inx",
@@ -239,11 +229,16 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
     }
 
     # WHEN
-    duplicated_functions = get_duplicated_functions(excluded_functions)
+    duplicated_functions, unecessarily_excluded_funcs = get_duplicated_functions(
+        excluded_functions
+    )
 
     # THEN
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
     assert not duplicated_functions, assertion_fail_str
+    print(f"{unecessarily_excluded_funcs=}")
+    assert not unecessarily_excluded_funcs
+    assert 1 == 2
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

@@ -5,7 +5,7 @@ from src.ch13_belief_listen_logic.listen_graphic import (
     get_listen_structures2_fig,
     get_listen_structures3_fig,
 )
-from src.ch13_belief_listen_logic.test._util.example_listen_beliefs import (
+from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     get_fund_breakdown_belief,
 )
 

@@ -3,8 +3,8 @@ from os.path import basename as os_path_basename, exists as os_path_exists
 from pathlib import Path as pathlib_Path
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
+    get_dir_file_strs,
     get_level1_dirs,
-    open_file,
     open_json,
 )
 from src.ch98_docs_builder.doc_builder import (
@@ -32,13 +32,12 @@ def test_Chapter_ref_util_FilesExist():
     # previous_chapter_number = -1
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         print(f"Evaluating {chapter_desc=} {chapter_dir=}")
-        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_number = int(chapter_desc_str_number)
         # assert chapter_number == previous_chapter_number + 1
         # print(f"{chapter_desc=} {chapter_number=}")
         ref_dir = create_path(chapter_dir, "_ref")
-        str_func_path = create_path(ref_dir, f"{chapter_prefix}_keywords.py")
+        keywords_filename = f"{chapter_prefix}_keywords.py"
+        str_func_path = create_path(ref_dir, keywords_filename)
         assert os_path_exists(str_func_path)
         test_dir = create_path(chapter_dir, "test")
         util_dir = create_path(test_dir, "_util")
@@ -47,20 +46,46 @@ def test_Chapter_ref_util_FilesExist():
         # assert os_path_exists(str_func_test_path)
         env_files = get_python_files_with_flag(util_dir, "env")
         if len(env_files) > 0:
-            # print(f"{env_files=}")
             assert len(env_files) == 1
             env_filename = str(list(env_files.keys())[0])
-            # print(f"{env_filename=}")
-            assert env_filename.endswith(f"{chapter_prefix}_env.py")
-            assertion_fail_str = (
-                f"{chapter_number=} {get_function_names_from_file(env_filename)}"
+            chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
+            ch_num = int(chapter_desc_str_number)
+            check_env_file_has_necessary_elements(env_filename, chapter_prefix, ch_num)
+        util_files = get_dir_file_strs(util_dir, include_dirs=False)
+        for util_file in util_files.keys():
+            is_test_file = util_file[:4] == "test"
+            is_json_file = util_file.endswith("json")
+            is_env_file = util_file == f"{chapter_prefix}_env.py"
+            is_example_file = util_file == f"{chapter_prefix}_examples.py"
+            is_keywords_file = util_file == keywords_filename
+            assert_fail_str = f"{util_file} should not be in {util_dir=}"
+            # print(f"{util_file=}")
+            # print(f"{is_json_file=} {util_file.endswith("json")=}")
+            # print(f"{is_test_file=} {util_file[:4]=}")
+            # print(f"{is_example_file=}")
+            # print(f"{is_keywords_file=}")
+            acceptable_filename = (
+                is_test_file
+                or is_example_file
+                or is_env_file
+                or is_keywords_file
+                or is_json_file
             )
-            env_functions = set(get_function_names_from_file(env_filename))
-            assert "env_dir_setup_cleanup" in env_functions, assertion_fail_str
-            assert "get_chapter_temp_dir" in env_functions, assertion_fail_str
-            # print(f"{chapter_number=} {get_function_names_from_file(env_filename)}")
+            assert acceptable_filename, assert_fail_str
 
-        # previous_chapter_number = chapter_number
+
+def check_env_file_has_necessary_elements(
+    env_filename: str, chapter_prefix: str, chapter_number: int
+):
+    # print(f"{env_files=}")
+    # print(f"{env_filename=}")
+    assert env_filename.endswith(f"{chapter_prefix}_env.py")
+    assertion_fail_str = (
+        f"{chapter_number=} {get_function_names_from_file(env_filename)}"
+    )
+    env_functions = set(get_function_names_from_file(env_filename))
+    assert "env_dir_setup_cleanup" in env_functions, assertion_fail_str
+    assert "get_chapter_temp_dir" in env_functions, assertion_fail_str
 
 
 def path_contains_subpath(full_path: str, sub_path: str):
@@ -73,7 +98,7 @@ def path_contains_subpath(full_path: str, sub_path: str):
         return False
 
 
-def test_Chapters_util_AssestsExistForEverytermFunction():
+def test_Chapters_util_AssertsExistForEverytermFunction():
     """
     Test that all string-related functions in each chapter directory are asserted and tested.
     This test performs the following checks for each chapter:

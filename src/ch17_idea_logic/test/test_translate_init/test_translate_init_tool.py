@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.ch16_translate_logic.test._util.example_translates import (
+from src.ch16_translate_logic.test._util.ch16_examples import (
     get_casa_maison_label_dt,
     get_casa_maison_rope_otx2inx_dt,
     get_casa_maison_translateunit_set_by_label,

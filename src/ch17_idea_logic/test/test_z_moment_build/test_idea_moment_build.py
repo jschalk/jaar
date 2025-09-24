@@ -1,5 +1,5 @@
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch08_timeline_logic.test._util.calendar_examples import get_five_config
+from src.ch08_timeline_logic.test._util.ch08_examples import get_five_config
 from src.ch08_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
@@ -10,7 +10,7 @@ from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
     idea_moments_dir,
 )
-from src.ch17_idea_logic.test._util.idea_df_examples import (
+from src.ch17_idea_logic.test._util.ch17_examples import (
     get_ex1_br00000_df,
     get_ex1_br00001_df,
     get_ex1_br00002_df,

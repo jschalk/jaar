@@ -7,7 +7,7 @@ from src.ch10_pack_logic.test._util.ch10_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as moments_dir,
 )
-from src.ch10_pack_logic.test._util.example_atoms import (
+from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,

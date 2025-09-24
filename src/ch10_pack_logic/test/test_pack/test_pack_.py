@@ -25,10 +25,10 @@ from src.ch10_pack_logic.pack import (
     init_pack_id,
     packunit_shop,
 )
-from src.ch10_pack_logic.test._util.example_atoms import (
+from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_sports,
+    get_beliefdelta_sue_example,
 )
-from src.ch10_pack_logic.test._util.example_deltas import get_beliefdelta_sue_example
 
 
 def test_init_pack_id_ReturnsObj():

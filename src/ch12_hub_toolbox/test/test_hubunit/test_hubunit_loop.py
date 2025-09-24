@@ -1,7 +1,5 @@
 from src.ch02_rope_logic.rope import create_rope
-from src.ch07_belief_logic.test._util.example_beliefs import (
-    get_beliefunit_with_4_levels,
-)
+from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_hub_toolbox.hub_tool import save_job_file
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (

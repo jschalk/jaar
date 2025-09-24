@@ -9,7 +9,7 @@ from src.ch14_keep_logic.rivercycle import (
     rivercycle_shop,
 )
 from src.ch14_keep_logic.test._util.ch14_env import temp_moment_mstr_dir
-from src.ch14_keep_logic.test._util.example_credorledgers import (
+from src.ch14_keep_logic.test._util.ch14_examples import (
     example_bob_credorledger,
     example_yao_credorledger,
     example_zia_credorledger,

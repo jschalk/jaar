@@ -10,7 +10,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch13_belief_listen_logic.test._util.example_listen import (
+from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     casa_rope,
     clean_rope,
     clean_str,
@@ -18,16 +18,14 @@ from src.ch13_belief_listen_logic.test._util.example_listen import (
     cook_str,
     eat_rope,
     full_rope,
+    get_dakota_hubunit,
+    get_dakota_rope,
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
     hungry_rope,
     run_rope,
     run_str,
-)
-from src.ch13_belief_listen_logic.test._util.example_listen_hub import (
-    get_dakota_hubunit,
-    get_dakota_rope,
 )
 
 

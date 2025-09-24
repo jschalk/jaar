@@ -13,7 +13,7 @@ from src.ch07_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
     get_belief_voiceunits_dataframe,
 )
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001_with_large_agenda,
 )
 

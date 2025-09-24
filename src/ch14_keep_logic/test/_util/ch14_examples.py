@@ -1,3 +1,4 @@
+from src.ch02_rope_logic.rope import RopeTerm, create_rope_from_labels
 from src.ch02_rope_logic.term import BeliefName, VoiceName
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
@@ -6,7 +7,13 @@ from src.ch14_keep_logic.test._util.ch14_env import (
     get_chapter_temp_dir,
     temp_moment_label,
 )
-from src.ch14_keep_logic.test._util.example_keep_beliefs import get_texas_rope
+
+
+def get_texas_rope() -> RopeTerm:
+    naton_str = "nation"
+    usa_str = "usa"
+    texas_str = "texas"
+    return create_rope_from_labels([naton_str, usa_str, texas_str])
 
 
 def example_yao_hubunit() -> HubUnit:

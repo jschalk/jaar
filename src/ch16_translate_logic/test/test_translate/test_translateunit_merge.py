@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch16_translate_logic._ref.ch16_keywords import NameTerm_str
-from src.ch16_translate_logic.test._util.example_translates import (
+from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
     get_clean_ropemap,
     get_suita_namemap,

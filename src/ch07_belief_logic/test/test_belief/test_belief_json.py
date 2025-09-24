@@ -19,7 +19,7 @@ from src.ch07_belief_logic.belief_main import (
     get_dict_of_belief_from_dict,
     get_from_json as beliefunit_get_from_json,
 )
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,
     get_beliefunit_laundry_example1,
     get_beliefunit_reason_context_ziet_example,

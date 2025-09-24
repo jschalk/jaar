@@ -86,22 +86,6 @@ def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAt
     return insert_factunit_beliefatom
 
 
-def get_beliefdelta_sue_example() -> BeliefDelta:
-    sue_beliefdelta = beliefdelta_shop()
-
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), UPDATE_str())
-    pool_attribute = "credor_respect"
-    pool_beliefatom.set_jvalue(pool_attribute, 77)
-    sue_beliefdelta.set_beliefatom(pool_beliefatom)
-
-    dimen = belief_voiceunit_str()
-    sue_str = "Sue"
-    sue_beliefatom = beliefatom_shop(dimen, DELETE_str())
-    sue_beliefatom.set_jkey(voice_name_str(), sue_str)
-    sue_beliefdelta.set_beliefatom(sue_beliefatom)
-    return sue_beliefdelta
-
-
 def get_texas_rope() -> RopeTerm:
     moment_label = get_default_moment_label()
     nation_str = "nation"
