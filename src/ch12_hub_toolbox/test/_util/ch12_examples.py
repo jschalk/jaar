@@ -2,68 +2,24 @@ from src.ch02_rope_logic.rope import RopeTerm, create_rope, create_rope_from_lab
 from src.ch02_rope_logic.term import MomentLabel
 from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 from src.ch10_pack_logic.pack import PackUnit, packunit_shop
+from src.ch10_pack_logic.test._util.ch10_examples import (
+    get_atom_example_planunit_ball,
+    get_atom_example_planunit_knee,
+    get_atom_example_planunit_sports,
+)
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
-    DELETE_str,
     INSERT_str,
-    UPDATE_str,
     belief_plan_factunit_str,
     belief_planunit_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
     plan_rope_str,
-    voice_name_str,
 )
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
-
-
-def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:
-    if not moment_label:
-        moment_label = "amy23"
-    sports_str = "sports"
-    x_dimen = belief_planunit_str()
-    sports_rope = create_rope(moment_label, sports_str)
-    insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
-    insert_planunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
-    return insert_planunit_beliefatom
-
-
-def get_atom_example_planunit_ball(moment_label: MomentLabel = None) -> BeliefAtom:
-    if not moment_label:
-        moment_label = "amy23"
-    sports_str = "sports"
-    sports_rope = create_rope(moment_label, sports_str)
-    ball_str = "basketball"
-    x_dimen = belief_planunit_str()
-    bball_rope = create_rope(sports_rope, ball_str)
-    insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
-    insert_planunit_beliefatom.set_jkey(plan_rope_str(), bball_rope)
-    return insert_planunit_beliefatom
-
-
-def get_atom_example_planunit_knee(moment_label: MomentLabel = None) -> BeliefAtom:
-    if not moment_label:
-        moment_label = "amy23"
-    sports_str = "sports"
-    sports_rope = create_rope(moment_label, sports_str)
-    knee_str = "knee"
-    knee_begin = 1
-    knee_close = 71
-    x_dimen = belief_planunit_str()
-    begin_str = "begin"
-    close_str = "close"
-    knee_rope = create_rope(sports_rope, knee_str)
-    insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
-    insert_planunit_beliefatom.set_jkey(plan_rope_str(), knee_rope)
-    insert_planunit_beliefatom.set_jvalue(begin_str, knee_begin)
-    insert_planunit_beliefatom.set_jvalue(close_str, knee_close)
-    return insert_planunit_beliefatom
 
 
 def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAtom:

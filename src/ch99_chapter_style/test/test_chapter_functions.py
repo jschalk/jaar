@@ -134,17 +134,8 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
-        "example_casa_clean_factunit",
-        "example_casa_dirty_factunit",
-        "example_casa_grimy_factunit",
-        "example_sky_blue_factunit",
         "find_replace_rope",
         "fund_graph0",
-        "get_atom_example_planunit_ball",
-        "get_atom_example_planunit_knee",
-        "get_atom_example_planunit_sports",
-        "get_atom_example_factunit_knee",
-        "get_bob_mop_with_reason_beliefunit_example",
         "get_edited_belief",
         "get_factunits_dict",
         "get_from_dict",
@@ -182,8 +173,8 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
     # THEN
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
     assert not duplicated_functions, assertion_fail_str
-    print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
-    assert not unnecessarily_excluded_funcs
+    # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
+    assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

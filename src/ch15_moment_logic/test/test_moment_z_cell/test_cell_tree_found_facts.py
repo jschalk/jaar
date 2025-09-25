@@ -7,7 +7,9 @@ from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ch15_moment_logic.test._util.ch15_examples import example_casa_clean_factunit
+from src.ch15_moment_logic.test._util.ch15_examples import (
+    example_casa_floor_clean_factunit,
+)
 
 
 def test_set_cell_trees_found_facts_Scenario0_RootOnly_NoFacts(
@@ -73,7 +75,7 @@ def test_set_cell_trees_found_facts_Scenario2_ChildNodeWithOneFactIsAssignedToAn
     sue_str = "Sue"
     a23_str = "amy23"
     time5 = 5
-    clean_fact = example_casa_clean_factunit()
+    clean_fact = example_casa_floor_clean_factunit()
     das = []
     das_y = [yao_str]
     das_ys = [yao_str, sue_str]

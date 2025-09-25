@@ -1,6 +1,4 @@
-from src.ch02_rope_logic.rope import create_rope
-from src.ch05_reason_logic.reason import FactUnit, factunit_shop
-from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch15_moment_logic.test._util.ch15_examples import _example_empty_bob_beliefunit
 
 
@@ -14,7 +12,7 @@ def get_mop_with_no_reason_beliefunit_example() -> BeliefUnit:
     return bob_belief
 
 
-def get_bob_mop_with_reason_beliefunit_example() -> BeliefUnit:
+def get_bob_mop_reason_beliefunit_example() -> BeliefUnit:
     bob_belief = _example_empty_bob_beliefunit()
     casa_str = "casa"
     floor_str = "floor status"
@@ -34,19 +32,3 @@ def get_bob_mop_with_reason_beliefunit_example() -> BeliefUnit:
         mop_rope, reason_context=floor_rope, reason_case=clean_rope
     )
     return bob_belief
-
-
-def example_casa_clean_factunit() -> FactUnit:
-    a23_str = "amy23"
-    casa_rope = create_rope(a23_str, "casa")
-    floor_rope = create_rope(casa_rope, "floor status")
-    clean_rope = create_rope(floor_rope, "clean")
-    return factunit_shop(floor_rope, clean_rope)
-
-
-def example_casa_dirty_factunit() -> FactUnit:
-    a23_str = "amy23"
-    casa_rope = create_rope(a23_str, "casa")
-    floor_rope = create_rope(casa_rope, "floor status")
-    dirty_rope = create_rope(floor_rope, "dirty")
-    return factunit_shop(floor_rope, dirty_rope)

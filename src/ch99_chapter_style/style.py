@@ -206,9 +206,9 @@ def get_duplicated_functions(excluded_functions) -> set[str]:
         if excluded_function not in all_functions:
             does_not_exist_str = f"'{excluded_function}' is not used in codebase"
             unnecessarily_excluded_funcs[excluded_function] = does_not_exist_str
-    for func_name in sorted(list(all_functions.keys()), reverse=True):
+    for func_name in sorted(list(all_functions.keys()), reverse=False):
         func_count = all_functions.get(func_name)
-        if func_count > 1 and func_name.endswith("rope"):
+        if func_count > 1:
             print(f"{func_name} {func_count=}")
     print(f"{len(excluded_functions)=}")
     return duplicate_functions, unnecessarily_excluded_funcs

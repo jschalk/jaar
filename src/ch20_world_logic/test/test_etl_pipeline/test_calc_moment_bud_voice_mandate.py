@@ -18,14 +18,16 @@ from src.ch15_moment_logic.moment_main import (
     get_from_dict as momentunit_get_from_dict,
     momentunit_shop,
 )
+from src.ch15_moment_logic.test._util.ch15_examples import (
+    example_casa_floor_clean_factunit,
+)
 from src.ch18_etl_toolbox.ch18_path import create_moment_ote1_json_path
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.test._util.ch20_examples import (
-    example_casa_clean_factunit,
-    get_bob_mop_with_reason_beliefunit_example,
+    get_bob_mop_reason_beliefunit_example,
 )
 from src.ch20_world_logic.world import worldunit_shop
 
@@ -112,17 +114,17 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
     event33 = 33
     event44 = 44
     event55 = 55
-    bob55_beliefevent = get_bob_mop_with_reason_beliefunit_example()
+    bob55_beliefevent = get_bob_mop_reason_beliefunit_example()
     bob55_beliefevent.add_voiceunit(sue_str, 1)
     sue44_beliefevent = beliefunit_shop(sue_str, a23_str)
     sue44_beliefevent.set_belief_name(sue_str)
     sue44_beliefevent.add_voiceunit(yao_str, 1)
-    yao44_beliefevent = get_bob_mop_with_reason_beliefunit_example()
+    yao44_beliefevent = get_bob_mop_reason_beliefunit_example()
     yao44_beliefevent.set_belief_name(yao_str)
     yao44_beliefevent.add_voiceunit(zia_str, 1)
-    clean_fact = example_casa_clean_factunit()
+    clean_fact = example_casa_floor_clean_factunit()
     yao44_beliefevent.add_fact(clean_fact.fact_context, clean_fact.fact_state)
-    zia33_beliefevent = get_bob_mop_with_reason_beliefunit_example()
+    zia33_beliefevent = get_bob_mop_reason_beliefunit_example()
     zia33_beliefevent.set_belief_name(zia_str)
     bob55_path = create_beliefevent_path(mstr_dir, a23_str, bob_str, event55)
     sue44_path = create_beliefevent_path(mstr_dir, a23_str, sue_str, event44)

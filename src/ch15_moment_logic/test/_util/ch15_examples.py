@@ -174,7 +174,7 @@ def create_example_moment4() -> MomentUnit:
     return amy_moment
 
 
-def example_casa_clean_factunit() -> FactUnit:
+def example_casa_floor_clean_factunit() -> FactUnit:
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     floor_rope = create_rope(casa_rope, "floor status")
@@ -182,7 +182,7 @@ def example_casa_clean_factunit() -> FactUnit:
     return factunit_shop(floor_rope, clean_rope)
 
 
-def example_casa_dirty_factunit() -> FactUnit:
+def example_casa_floor_dirty_factunit() -> FactUnit:
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     floor_rope = create_rope(casa_rope, "floor status")
