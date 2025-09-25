@@ -9,7 +9,7 @@ SELECT
 , moment_voice_nets.belief_name
 , belief_net_amount AS funds
 , RANK() OVER (ORDER BY belief_net_amount DESC) AS fund_rank
-, IFNULL(SUM(belief_planunit_job.task), 0) AS tasks_count
+, IFNULL(SUM(belief_planunit_job.pledge), 0) AS pledges_count
 FROM moment_voice_nets
 LEFT JOIN belief_planunit_job ON
   belief_planunit_job.moment_label = moment_voice_nets.moment_label
@@ -21,15 +21,15 @@ GROUP BY moment_voice_nets.moment_label, moment_voice_nets.belief_name
 
 def get_create_kpi002_sqlstr() -> str:
     return """
-CREATE TABLE moment_kpi002_belief_tasks AS
+CREATE TABLE moment_kpi002_belief_pledges AS
 SELECT
   moment_label
 , belief_name
 , plan_rope
-, task
+, pledge
 , active
 , chore
 FROM belief_planunit_job
-WHERE task == 1 AND active == 1
+WHERE pledge == 1 AND active == 1
 ;
 """

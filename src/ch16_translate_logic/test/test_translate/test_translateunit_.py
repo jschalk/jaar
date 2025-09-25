@@ -111,7 +111,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("reason_lower") == "float"
     assert translate_args_class_types.get("penny") == "float"
     assert translate_args_class_types.get("fact_state") == RopeTerm_str()
-    assert translate_args_class_types.get("task") == "bool"
+    assert translate_args_class_types.get("pledge") == "bool"
     assert translate_args_class_types.get("problem_bool") == "bool"
     assert translate_args_class_types.get("quota") == "int"
     assert translate_args_class_types.get("respect_bit") == "float"

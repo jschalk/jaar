@@ -18,7 +18,7 @@
         "belief_name": {
             "otx_key": true
         },
-        "task": {
+        "pledge": {
             "otx_key": false
         }
     },

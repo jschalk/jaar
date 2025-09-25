@@ -207,7 +207,7 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario0():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
-    floor_plan = planunit_shop(floor_str, task=True)
+    floor_plan = planunit_shop(floor_str, pledge=True)
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
@@ -249,7 +249,7 @@ def test_BeliefUnit_cashout_Sets_fund_ratio_WithSomePlansOfZero_starScenario1():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
-    floor_plan = planunit_shop(floor_str, task=True)
+    floor_plan = planunit_shop(floor_str, pledge=True)
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
@@ -790,7 +790,7 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
     )
     assert membership_debt_sum == 1.0 * default_fund_pool()
 
-    # ESTABLISH another task, check metrics are as expected
+    # ESTABLISH another pledge, check metrics are as expected
     xio_str = "Xio"
     yao_belief.set_voiceunit(voiceunit_shop(xio_str))
     yao_belief.planroot.set_awardunit(awardunit_shop(xio_str, 20, take_force=13))
@@ -883,7 +883,7 @@ def test_BeliefUnit_cashout_SetsVoiceUnitBelief_fund():
         == 1.0 * default_fund_pool()
     )
 
-    # WHEN another task, check metrics are as expected
+    # WHEN another pledge, check metrics are as expected
     xio_str = "Xio"
     yao_belief.set_voiceunit(voiceunit_shop(xio_str))
     yao_belief.planroot.set_awardunit(awardunit_shop(xio_str, 20, take_force=10))

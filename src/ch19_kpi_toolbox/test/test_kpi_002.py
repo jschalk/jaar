@@ -13,21 +13,21 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     active_str,
     belief_name_str,
     chore_str,
-    moment_kpi002_belief_tasks_str,
+    moment_kpi002_belief_pledges_str,
     moment_label_str,
     plan_rope_str,
-    task_str,
+    pledge_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi002_table
 
 
-def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoTasks():
+def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
     casa_rope = create_rope(a23_str, "casa")
-    casa_task = 0
+    casa_pledge = 0
     casa_active = 0
     casa_chore = 0
 
@@ -39,46 +39,46 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoTasks():
   {moment_label_str()}
 , {belief_name_str()}
 , {plan_rope_str()}
-, {task_str()}
+, {pledge_str()}
 , {active_str()}
 , {chore_str()}
 )
 VALUES 
-  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_task}, {casa_active}, {casa_chore})
-, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_task}, {casa_active}, {casa_chore})
+  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
+, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 2
-        moment_kpi002_belief_tasks_tablename = moment_kpi002_belief_tasks_str()
-        assert not db_table_exists(cursor, moment_kpi002_belief_tasks_tablename)
+        moment_kpi002_belief_pledges_tablename = moment_kpi002_belief_pledges_str()
+        assert not db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
 
         # WHEN
         create_populate_kpi002_table(cursor)
 
         # THEN
-        assert db_table_exists(cursor, moment_kpi002_belief_tasks_tablename)
-        assert get_table_columns(cursor, moment_kpi002_belief_tasks_tablename) == [
+        assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
+        assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
             moment_label_str(),
             belief_name_str(),
             plan_rope_str(),
-            task_str(),
+            pledge_str(),
             active_str(),
             chore_str(),
         ]
-        assert get_row_count(cursor, moment_kpi002_belief_tasks_tablename) == 0
+        assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 0
 
 
-def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoTasks():
+def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"
     bob_str = "Bob"
     casa_rope = create_rope(a23_str, "casa")
-    casa_task = 0
+    casa_pledge = 0
     casa_active = 0
     casa_chore = 0
     clean_rope = create_rope(casa_rope, "clean")
-    clean_task = 1
+    clean_pledge = 1
     clean_active = 1
     clean_chore = 1
 
@@ -90,32 +90,32 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoTasks():
   {moment_label_str()}
 , {belief_name_str()}
 , {plan_rope_str()}
-, {task_str()}
+, {pledge_str()}
 , {active_str()}
 , {chore_str()}
 )
 VALUES 
-  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_task}, {casa_active}, {casa_chore})
-, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_task}, {casa_active}, {casa_chore})
-, ('{a23_str}', '{bob_str}', '{clean_rope}', {clean_task}, {clean_active}, {clean_chore})
-, ('{a23_str}', '{yao_str}', '{clean_rope}', {clean_task}, {clean_active}, {clean_chore})
+  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
+, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
+, ('{a23_str}', '{bob_str}', '{clean_rope}', {clean_pledge}, {clean_active}, {clean_chore})
+, ('{a23_str}', '{yao_str}', '{clean_rope}', {clean_pledge}, {clean_active}, {clean_chore})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 4
-        moment_kpi002_belief_tasks_tablename = moment_kpi002_belief_tasks_str()
-        assert not db_table_exists(cursor, moment_kpi002_belief_tasks_tablename)
+        moment_kpi002_belief_pledges_tablename = moment_kpi002_belief_pledges_str()
+        assert not db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
 
         # WHEN
         create_populate_kpi002_table(cursor)
 
         # THEN
-        assert db_table_exists(cursor, moment_kpi002_belief_tasks_tablename)
-        assert get_table_columns(cursor, moment_kpi002_belief_tasks_tablename) == [
+        assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
+        assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
             moment_label_str(),
             belief_name_str(),
             plan_rope_str(),
-            task_str(),
+            pledge_str(),
             active_str(),
             chore_str(),
         ]
-        assert get_row_count(cursor, moment_kpi002_belief_tasks_tablename) == 2
+        assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 2

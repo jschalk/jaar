@@ -20,7 +20,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     chore_str,
     close_str,
     denom_str,
-    descendant_task_count_str,
+    descendant_pledge_count_str,
     factheirs_str,
     factunits_str,
     fund_cease_str,
@@ -40,6 +40,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     morph_str,
     numor_str,
     plan_label_str,
+    pledge_str,
     problem_bool_str,
     range_evaluated_str,
     reasonheirs_str,
@@ -47,7 +48,6 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     star_str,
     stop_calc_str,
     stop_want_str,
-    task_str,
     tree_level_str,
     uid_str,
 )
@@ -68,7 +68,7 @@ def test_get_obj_from_plan_dict_ReturnsObj():
     assert get_obj_from_plan_dict({field_str: False}, field_str) is False
 
     # ESTABLISH
-    field_str = task_str()
+    field_str = pledge_str()
     # WHEN / THEN
     assert get_obj_from_plan_dict({field_str: True}, field_str)
     assert get_obj_from_plan_dict({}, field_str) is False
@@ -187,7 +187,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
         laborunit=sue_laborunit,
         healerunit=yao_healerunit,
         active=True,
-        task=True,
+        pledge=True,
         problem_bool=x_problem_bool,
     )
     x_factunit = factunit_shop(
@@ -235,7 +235,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[morph_str()] == casa_plan.morph
     assert casa_dict[gogo_want_str()] == casa_plan.gogo_want
     assert casa_dict[stop_want_str()] == casa_plan.stop_want
-    assert casa_dict[task_str()] == casa_plan.task
+    assert casa_dict[pledge_str()] == casa_plan.pledge
     assert casa_dict[problem_bool_str()] == casa_plan.problem_bool
     assert casa_dict[problem_bool_str()] == x_problem_bool
     assert casa_plan.is_expanded
@@ -259,7 +259,7 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     # ESTABLISH
     casa_plan = planunit_shop()
     casa_plan.is_expanded = False
-    casa_plan.task = True
+    casa_plan.pledge = True
     ignore_str = "ignore"
 
     a_str = "a"
@@ -276,7 +276,7 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     casa_plan.add_kid(planunit_shop(clean_str))
 
     assert not casa_plan.is_expanded
-    assert casa_plan.task
+    assert casa_plan.pledge
     assert casa_plan.factunits is not None
     assert casa_plan.awardunits is not None
     assert casa_plan.laborunit is not None
@@ -287,7 +287,7 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
 
     # THEN
     assert casa_dict.get("is_expanded") is False
-    assert casa_dict.get(task_str())
+    assert casa_dict.get(pledge_str())
     assert casa_dict.get(factunits_str()) is not None
     assert casa_dict.get(awardunits_str()) is not None
     assert casa_dict.get(laborunit_str()) is not None
@@ -298,7 +298,7 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     # ESTABLISH
     casa_plan = planunit_shop()
     assert casa_plan.is_expanded
-    assert casa_plan.task is False
+    assert casa_plan.pledge is False
     assert casa_plan.factunits == {}
     assert casa_plan.awardunits == {}
     assert casa_plan.laborunit == laborunit_shop()
@@ -310,7 +310,7 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
 
     # THEN
     assert casa_dict.get("is_expanded") is None
-    assert casa_dict.get(task_str()) is None
+    assert casa_dict.get(pledge_str()) is None
     assert casa_dict.get(factunits_str()) is None
     assert casa_dict.get(awardunits_str()) is None
     assert casa_dict.get(laborunit_str()) is None

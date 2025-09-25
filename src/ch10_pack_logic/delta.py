@@ -368,7 +368,7 @@ class BeliefDelta:
             x_beliefatom.set_jvalue("numor", insert_planunit.numor)
             x_beliefatom.set_jvalue("morph", insert_planunit.morph)
             x_beliefatom.set_jvalue("star", insert_planunit.star)
-            x_beliefatom.set_jvalue("task", insert_planunit.task)
+            x_beliefatom.set_jvalue("pledge", insert_planunit.pledge)
             self.set_beliefatom(x_beliefatom)
 
             self.add_beliefatom_plan_factunit_inserts(
@@ -420,8 +420,8 @@ class BeliefDelta:
                     x_beliefatom.set_jvalue("morph", after_planunit.morph)
                 if before_planunit.star != after_planunit.star:
                     x_beliefatom.set_jvalue("star", after_planunit.star)
-                if before_planunit.task != after_planunit.task:
-                    x_beliefatom.set_jvalue("task", after_planunit.task)
+                if before_planunit.pledge != after_planunit.pledge:
+                    x_beliefatom.set_jvalue("pledge", after_planunit.pledge)
                 self.set_beliefatom(x_beliefatom)
 
             # insert / update / delete factunits

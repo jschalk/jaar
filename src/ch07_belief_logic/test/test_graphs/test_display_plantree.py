@@ -102,11 +102,11 @@ def test_BeliefUnit_fund_flow(graphics_bool):
     sue_belief.add_plan(hun_n_rope, star=30)
     sue_belief.add_plan(hun_y_rope, star=30)
     sue_belief.add_plan(clean_rope, star=30)
-    sue_belief.add_plan(sweep_rope, star=30, task=True)
-    sue_belief.add_plan(dish_rope, star=30, task=True)
+    sue_belief.add_plan(sweep_rope, star=30, pledge=True)
+    sue_belief.add_plan(dish_rope, star=30, pledge=True)
     dinner_str = "cat have dinner"
     dinner_rope = sue_belief.make_l1_rope(dinner_str)
-    sue_belief.add_plan(dinner_rope, star=30, task=True)
+    sue_belief.add_plan(dinner_rope, star=30, pledge=True)
 
     # WHEN / THEN
     fund_graph0(sue_belief, "Chore", graphics_bool)

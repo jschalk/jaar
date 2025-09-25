@@ -11,6 +11,6 @@ def moment_kpi001_voice_nets_str() -> Literal["moment_kpi001_voice_nets"]:
     return "moment_kpi001_voice_nets"
 
 
-def moment_kpi002_belief_tasks_str() -> Literal["moment_kpi002_belief_tasks"]:
-    """Table name for KPI002: List of tasks per moment ."""
-    return "moment_kpi002_belief_tasks"
+def moment_kpi002_belief_pledges_str() -> Literal["moment_kpi002_belief_pledges"]:
+    """Table name for KPI002: List of pledges per moment ."""
+    return "moment_kpi002_belief_pledges"

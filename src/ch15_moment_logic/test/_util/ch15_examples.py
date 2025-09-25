@@ -93,16 +93,16 @@ def create_example_moment3() -> MomentUnit:
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    yao_gut_belief.set_plan(planunit_shop(bath_str, task=True), clean_rope)
-    yao_gut_belief.set_plan(planunit_shop(hall_str, task=True), clean_rope)
+    yao_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    yao_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
+    yao_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
 
-    wei_gut_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    wei_gut_belief.set_plan(planunit_shop(bath_str, task=True), clean_rope)
+    wei_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    wei_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
 
-    zia_gut_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    zia_gut_belief.set_plan(planunit_shop(bath_str, task=True), clean_rope)
-    zia_gut_belief.set_plan(planunit_shop(hall_str, task=True), clean_rope)
+    zia_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    zia_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
+    zia_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
 
     save_gut_file(x_moment_mstr_dir, yao_gut_belief)
     save_gut_file(x_moment_mstr_dir, wei_gut_belief)
@@ -136,16 +136,16 @@ def create_example_moment4() -> MomentUnit:
     bath_str = "clean bathroom"
     hall_str = "clean hall"
 
-    yao_gut_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    yao_gut_belief.set_plan(planunit_shop(bath_str, task=True), clean_rope)
-    yao_gut_belief.set_plan(planunit_shop(hall_str, task=True), clean_rope)
+    yao_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    yao_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
+    yao_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
 
-    wei_gut_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    wei_gut_belief.set_plan(planunit_shop(bath_str, task=True), clean_rope)
+    wei_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    wei_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
 
-    zia_gut_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    zia_gut_belief.set_plan(planunit_shop(bath_str, task=True), clean_rope)
-    zia_gut_belief.set_plan(planunit_shop(hall_str, task=True), clean_rope)
+    zia_gut_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    zia_gut_belief.set_plan(planunit_shop(bath_str, pledge=True), clean_rope)
+    zia_gut_belief.set_plan(planunit_shop(hall_str, pledge=True), clean_rope)
 
     yao_gut_belief.set_credor_respect(101)
     wei_gut_belief.set_credor_respect(75)
@@ -211,7 +211,7 @@ def get_bob_mop_without_reason_beliefunit_example() -> BeliefUnit:
     bob_belief.add_plan(floor_rope, 1)
     bob_belief.add_plan(clean_rope, 1)
     bob_belief.add_plan(dirty_rope, 1)
-    bob_belief.add_plan(mop_rope, 1, task=True)
+    bob_belief.add_plan(mop_rope, 1, pledge=True)
     return bob_belief
 
 
@@ -259,8 +259,8 @@ def get_yao_run_with_reason_beliefunit_example() -> BeliefUnit:
     rain_rope = yao_belief.make_rope(weather_rope, raining_str)
     snow_rope = yao_belief.make_rope(weather_rope, snowng_str)
     yao_belief.add_plan(participate_rope)
-    yao_belief.add_plan(ski_rope, 5, task=True)
-    yao_belief.add_plan(run_rope, 1, task=True)
+    yao_belief.add_plan(ski_rope, 5, pledge=True)
+    yao_belief.add_plan(run_rope, 1, pledge=True)
     yao_belief.add_plan(weather_rope)
     yao_belief.add_plan(rain_rope)
     yao_belief.add_plan(snow_rope)

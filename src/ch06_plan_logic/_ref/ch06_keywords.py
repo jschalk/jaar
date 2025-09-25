@@ -37,8 +37,8 @@ def denom_str() -> str:
     return "denom"
 
 
-def descendant_task_count_str() -> str:
-    return "descendant_task_count"
+def descendant_pledge_count_str() -> str:
+    return "descendant_pledge_count"
 
 
 def fund_cease_str() -> str:
@@ -101,6 +101,10 @@ def plan_rope_str() -> str:
     return "plan_rope"
 
 
+def pledge_str() -> str:
+    return "pledge"
+
+
 def problem_bool_str() -> str:
     return "problem_bool"
 
@@ -123,10 +127,6 @@ def stop_calc_str() -> str:
 
 def stop_want_str() -> str:
     return "stop_want"
-
-
-def task_str() -> str:
-    return "task"
 
 
 def tree_level_str() -> str:

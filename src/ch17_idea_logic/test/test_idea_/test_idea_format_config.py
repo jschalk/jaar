@@ -20,9 +20,9 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     numor_str,
     otx_key_str,
     plan_rope_str,
+    pledge_str,
     star_str,
     stop_want_str,
-    task_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -267,7 +267,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
     assert headers_list[3] == belief_name_str()
     assert headers_list[4] == plan_rope_str()
     assert headers_list[5] == star_str()
-    assert headers_list[6] == task_str()
+    assert headers_list[6] == pledge_str()
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():

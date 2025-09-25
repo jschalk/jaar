@@ -108,7 +108,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario1_Belief1FactsChanged():
     bob_belief.add_plan(floor_rope)
     bob_belief.add_plan(clean_rope)
     bob_belief.add_plan(dirty_rope)
-    bob_belief.add_plan(mop_rope, task=True)
+    bob_belief.add_plan(mop_rope, pledge=True)
     bob_belief.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
@@ -144,7 +144,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario2_FactUnit_reason_context_Do
     bob_belief.add_plan(floor_rope)
     # bob_belief.add_plan(clean_rope)
     bob_belief.add_plan(dirty_rope)
-    bob_belief.add_plan(mop_rope, task=True)
+    bob_belief.add_plan(mop_rope, pledge=True)
     bob_belief.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
@@ -181,7 +181,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario3_FactUnit_reason_context_Wi
     bob_belief.add_plan(floor_rope)
     # bob_belief.add_plan(clean_rope)
     bob_belief.add_plan(dirty_rope)
-    bob_belief.add_plan(mop_rope, task=True)
+    bob_belief.add_plan(mop_rope, pledge=True)
     bob_belief.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )
@@ -225,7 +225,7 @@ def test_clear_factunits_from_belief_ReturnsObj_Scenario1_FactUnit_Exist():
     bob_belief.add_plan(floor_rope)
     # bob_belief.add_plan(clean_rope)
     bob_belief.add_plan(dirty_rope)
-    bob_belief.add_plan(mop_rope, task=True)
+    bob_belief.add_plan(mop_rope, pledge=True)
     bob_belief.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=dirty_rope
     )

@@ -281,7 +281,7 @@ def test_get_voice_mandate_ledger_ReturnsObj_Scenario5_Zero_fund_agenda_give():
     sue_belief.add_plan(floor_rope)
     sue_belief.add_plan(clean_rope)
     sue_belief.add_plan(dirty_rope)
-    sue_belief.add_plan(mop_rope, task=True)
+    sue_belief.add_plan(mop_rope, pledge=True)
     sue_belief.edit_plan_attr(
         mop_rope, reason_context=floor_rope, reason_case=clean_rope
     )

@@ -53,7 +53,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.reason_lower is None
     assert x_atomrow.penny is None
     assert x_atomrow.fact_state is None
-    assert x_atomrow.task is None
+    assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None
     assert x_atomrow.plan_rope is None
     assert x_atomrow.stop_want is None
@@ -231,11 +231,11 @@ def test_AtomRow_get_beliefatoms_ReturnsObjIfDimenIsCorrect():
     assert len(x_atomrow.get_beliefatoms()) == 1
 
 
-def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_task_False_Scenario0():
+def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_Scenario0():
     # ESTABLISH
     x_atomrow = atomrow_shop({belief_planunit_str()}, INSERT_str())
     x_atomrow.plan_rope = create_rope("amy78", "casa")
-    x_atomrow.task = False
+    x_atomrow.pledge = False
     assert len(x_atomrow.get_beliefatoms()) == 1
 
     # WHEN / THEN
@@ -244,18 +244,18 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_task_False_Sc
     # THEN
     static_beliefatom = beliefatom_shop(belief_planunit_str(), INSERT_str())
     static_beliefatom.set_arg("plan_rope", create_rope("amy78", "casa"))
-    static_beliefatom.set_arg("task", False)
+    static_beliefatom.set_arg("pledge", False)
     print(static_beliefatom)
     print(x_beliefatom)
     assert x_beliefatom == static_beliefatom
 
 
-def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_task_False_Scenario1():
+def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_Scenario1():
     # ESTABLISH
     x_dimens = {belief_planunit_str(), belief_plan_healerunit_str()}
     x_atomrow = atomrow_shop(x_dimens, INSERT_str())
     x_atomrow.plan_rope = create_rope("amy78", "casa")
-    x_atomrow.task = False
+    x_atomrow.pledge = False
     x_atomrow.healer_name = "Bob"
 
     # WHEN / THEN
@@ -266,7 +266,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_task_False_Sc
     y_plan_beliefatom = beliefatom_shop(belief_planunit_str(), INSERT_str())
     casa_rope = create_rope("amy78", "casa")
     y_plan_beliefatom.set_arg("plan_rope", casa_rope)
-    y_plan_beliefatom.set_arg("task", False)
+    y_plan_beliefatom.set_arg("pledge", False)
     assert y_plan_beliefatom in x_beliefatoms
     healerunit_beliefatom = beliefatom_shop(belief_plan_healerunit_str(), INSERT_str())
     healerunit_beliefatom.set_arg("plan_rope", casa_rope)

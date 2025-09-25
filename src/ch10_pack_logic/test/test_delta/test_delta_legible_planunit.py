@@ -12,8 +12,8 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     morph_str,
     numor_str,
     plan_rope_str,
+    pledge_str,
     star_str,
-    task_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -35,7 +35,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     problem_bool_value = False
     morph_value = 37
     star_value = 43
-    task_value = False
+    pledge_value = False
     clean_beliefatom = beliefatom_shop(dimen, INSERT_str())
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
     clean_beliefatom.set_arg(addin_str(), addin_value)
@@ -46,7 +46,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     clean_beliefatom.set_arg(_problem_bool_str, problem_bool_value)
     clean_beliefatom.set_arg(morph_str(), morph_value)
     clean_beliefatom.set_arg(star_str(), star_value)
-    clean_beliefatom.set_arg(task_str(), task_value)
+    clean_beliefatom.set_arg(pledge_str(), pledge_value)
 
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(clean_beliefatom)
@@ -55,7 +55,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"Created Plan '{clean_rope}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.star={star_value}.task={task_value}."
+    x_str = f"Created Plan '{clean_rope}'. addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.star={star_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 
@@ -76,7 +76,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     problem_bool_value = False
     morph_value = 37
     star_value = 43
-    task_value = False
+    pledge_value = False
     clean_beliefatom = beliefatom_shop(dimen, UPDATE_str())
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
     clean_beliefatom.set_arg(addin_str(), addin_value)
@@ -87,7 +87,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     clean_beliefatom.set_arg(_problem_bool_str, problem_bool_value)
     clean_beliefatom.set_arg(morph_str(), morph_value)
     clean_beliefatom.set_arg(star_str(), star_value)
-    clean_beliefatom.set_arg(task_str(), task_value)
+    clean_beliefatom.set_arg(pledge_str(), pledge_value)
 
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(clean_beliefatom)
@@ -96,7 +96,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"Plan '{clean_rope}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.star={star_value}.task={task_value}."
+    x_str = f"Plan '{clean_rope}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.star={star_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

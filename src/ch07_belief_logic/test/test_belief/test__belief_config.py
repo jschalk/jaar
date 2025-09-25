@@ -33,7 +33,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     debtor_pool_str,
     debtor_respect_str,
     denom_str,
-    descendant_task_count_str,
+    descendant_pledge_count_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
@@ -72,6 +72,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     party_title_str,
     penny_str,
     plan_rope_str,
+    pledge_str,
     problem_bool_str,
     range_evaluated_str,
     rational_str,
@@ -90,7 +91,6 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     sum_healerunit_share_str,
     take_force_str,
     tally_str,
-    task_str,
     tree_level_str,
     tree_traverse_count_str,
     voice_cred_points_str,
@@ -303,7 +303,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         belief_name_str(),
         morph_str(),
         denom_str(),
-        task_str(),
+        pledge_str(),
         close_str(),
         addin_str(),
         numor_str(),
@@ -314,7 +314,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         active_str(),
         fund_onset_str(),
         fund_cease_str(),
-        descendant_task_count_str(),
+        descendant_pledge_count_str(),
         all_voice_cred_str(),
         all_voice_debt_str(),
         healerunit_ratio_str(),
@@ -677,9 +677,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, all_voice_debt_str()) == "INTEGER"
     assert g_popcashout(cfig, blrplan, jv, all_voice_debt_str()) == True
 
-    assert g_class_type(cfig, blrplan, jv, descendant_task_count_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jv, descendant_task_count_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jv, descendant_task_count_str()) == True
+    assert g_class_type(cfig, blrplan, jv, descendant_pledge_count_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, descendant_pledge_count_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, descendant_pledge_count_str()) == True
 
     assert g_class_type(cfig, blrplan, jv, fund_cease_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, fund_cease_str()) == "REAL"
@@ -753,9 +753,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, numor_str()) == "INTEGER"
     assert g_popcashout(cfig, blrplan, jv, numor_str()) == False
 
-    assert g_class_type(cfig, blrplan, jv, task_str()) == "bool"
-    assert g_sqlitetype(cfig, blrplan, jv, task_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jv, task_str()) == False
+    assert g_class_type(cfig, blrplan, jv, pledge_str()) == "bool"
+    assert g_sqlitetype(cfig, blrplan, jv, pledge_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, pledge_str()) == False
 
     assert g_class_type(cfig, blrplan, jv, problem_bool_str()) == "bool"
     assert g_sqlitetype(cfig, blrplan, jv, problem_bool_str()) == "INTEGER"
@@ -916,7 +916,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(star_str()) == "int"
     assert belief_calc_args_type_dict.get(morph_str()) == "bool"
     assert belief_calc_args_type_dict.get(numor_str()) == "int"
-    assert belief_calc_args_type_dict.get(task_str()) == "bool"
+    assert belief_calc_args_type_dict.get(pledge_str()) == "bool"
     assert belief_calc_args_type_dict.get(problem_bool_str()) == "bool"
     assert belief_calc_args_type_dict.get(stop_want_str()) == "float"
     assert belief_calc_args_type_dict.get(awardee_title_str()) == TitleTerm_str()
@@ -941,7 +941,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(active_str()) == "int"
     assert belief_calc_args_type_dict.get(all_voice_cred_str()) == "int"
     assert belief_calc_args_type_dict.get(all_voice_debt_str()) == "int"
-    assert belief_calc_args_type_dict.get(descendant_task_count_str()) == "int"
+    assert belief_calc_args_type_dict.get(descendant_pledge_count_str()) == "int"
     assert belief_calc_args_type_dict.get(fund_cease_str()) == "float"
     assert belief_calc_args_type_dict.get(fund_onset_str()) == "float"
     assert belief_calc_args_type_dict.get(fund_ratio_str()) == "float"

@@ -377,7 +377,7 @@
                 "populate_by_cashout": false,
                 "sqlite_datatype": "INTEGER"
             },
-            "descendant_task_count": {
+            "descendant_pledge_count": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
@@ -452,7 +452,7 @@
                 "populate_by_cashout": false,
                 "sqlite_datatype": "REAL"
             },
-            "task": {
+            "pledge": {
                 "class_type": "bool",
                 "populate_by_cashout": false,
                 "sqlite_datatype": "INTEGER"

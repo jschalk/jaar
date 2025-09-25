@@ -592,7 +592,7 @@
                 "uid": 123,
                 "plan_label": "Employee Intruction manuel.",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -623,7 +623,7 @@
                     "uid": 116,
                     "plan_label": "Accomplish Fall 2021 traaining",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -695,7 +695,7 @@
                     "uid": 119,
                     "plan_label": "Accomplish Fall 2021 traaining",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -745,7 +745,7 @@
                     "uid": 118,
                     "plan_label": "Accomplish Fall 2021 traaining",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -782,7 +782,7 @@
                     "uid": 121,
                     "plan_label": "Accomplish Fall 2021 traaining",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -819,7 +819,7 @@
                     "uid": 120,
                     "plan_label": "Accomplish Fall 2021 traaining",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -899,7 +899,7 @@
                         "uid": 138,
                         "plan_label": "check emails",
                         "star": 1,
-                        "task": true,
+                        "pledge": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
                             "cases": {
@@ -939,7 +939,7 @@
                         "uid": 139,
                         "plan_label": "check mechanisms",
                         "star": 1,
-                        "task": true,
+                        "pledge": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
                             "cases": {
@@ -974,7 +974,7 @@
                     "uid": 158,
                     "plan_label": "dress to slightly impress",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -993,7 +993,7 @@
                     "uid": 231,
                     "plan_label": "go to employment",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -1030,7 +1030,7 @@
                     "uid": 156,
                     "plan_label": "Add to Azure DevOps",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -1048,7 +1048,7 @@
                     "uid": 155,
                     "plan_label": "consider management perspective",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -1068,7 +1068,7 @@
                         "uid": 142,
                         "plan_label": "Datawarehouse Expertise acquisition",
                         "star": 1,
-                        "task": true,
+                        "pledge": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
                             "cases": {
@@ -1108,7 +1108,7 @@
                         "uid": 157,
                         "plan_label": "dev quantification script \"TIMOTHY\"",
                         "star": 1,
-                        "task": true,
+                        "pledge": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
                             "cases": {
@@ -1126,7 +1126,7 @@
                         "uid": 232,
                         "plan_label": "go to daily meeting ",
                         "star": 1,
-                        "task": true,
+                        "pledge": true,
                         "reasonunits": {
                           ";amy45;jour_minute;": {
                             "cases": {
@@ -1166,7 +1166,7 @@
                     "uid": 151,
                     "plan_label": "Keep track of Chatroom conversations",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -1220,7 +1220,7 @@
                 "uid": 133,
                 "plan_label": "IT DEPT regular hrs responsiblities",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1548,7 +1548,7 @@
             },
             "plan_label": "call high school friend",
             "star": 1,
-            "task": true,
+            "pledge": true,
             "reasonunits": {
               ";amy45;jour_minute;": {
                 "cases": {
@@ -1602,7 +1602,7 @@
                 },
                 "plan_label": "check cat water",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1636,7 +1636,7 @@
                 "uid": 159,
                 "plan_label": "check humidifer",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1669,7 +1669,7 @@
                 },
                 "plan_label": "clean baby seats",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1713,7 +1713,7 @@
                 },
                 "plan_label": "clean bathroom",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1746,7 +1746,7 @@
                 },
                 "plan_label": "clean cat poo",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1787,7 +1787,7 @@
                 },
                 "plan_label": "clean humidifiers",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1828,7 +1828,7 @@
                 },
                 "plan_label": "clean sheets couch blankets",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;ced_wk;": {
                     "cases": {
@@ -1880,7 +1880,7 @@
                 },
                 "plan_label": "clean table",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1921,7 +1921,7 @@
                 },
                 "plan_label": "deep clean play mat",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -1973,7 +1973,7 @@
                 },
                 "plan_label": "empty roomba",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2014,7 +2014,7 @@
                 },
                 "plan_label": "empty roomba Fri",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2055,7 +2055,7 @@
                 },
                 "plan_label": "laundry mon",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2096,7 +2096,7 @@
                 },
                 "plan_label": "laundry sat",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2137,7 +2137,7 @@
                 },
                 "plan_label": "laundry wed",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2203,7 +2203,7 @@
                 },
                 "plan_label": "prepare_bed clean bedroom",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2236,7 +2236,7 @@
                 },
                 "plan_label": "roomba bedroom",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2277,7 +2277,7 @@
                 },
                 "plan_label": "roomba bedroom Fri",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2318,7 +2318,7 @@
                 },
                 "plan_label": "roomba living area",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2359,7 +2359,7 @@
                 },
                 "plan_label": "roomba living area thur",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2400,7 +2400,7 @@
                 },
                 "plan_label": "roomba maintenance",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2441,7 +2441,7 @@
                 },
                 "plan_label": "wipe down play mat2",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2499,7 +2499,7 @@
                 },
                 "plan_label": "5 push-ups",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2524,7 +2524,7 @@
                 },
                 "plan_label": "check protein for wk is adequate",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2549,7 +2549,7 @@
                 },
                 "plan_label": "clean ears",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2585,7 +2585,7 @@
                 },
                 "plan_label": "clip nails",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2618,7 +2618,7 @@
                 },
                 "plan_label": "cook veggies every morning",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2663,7 +2663,7 @@
                 },
                 "plan_label": "daily exercise 20min",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2705,7 +2705,7 @@
                 },
                 "plan_label": "flossing teeth",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -2743,7 +2743,7 @@
                     },
                     "plan_label": "bike or stuff",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2791,7 +2791,7 @@
                     },
                     "plan_label": "chest and arms (mon)",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2849,7 +2849,7 @@
                     },
                     "plan_label": "core all back",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2920,7 +2920,7 @@
                     },
                     "plan_label": "shoulders and back",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2953,7 +2953,7 @@
                     },
                     "plan_label": "squats hamstrings and calves",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;jour_minute;": {
                         "cases": {
@@ -2991,7 +2991,7 @@
                 },
                 "plan_label": "morning multivitamin",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3016,7 +3016,7 @@
                 },
                 "plan_label": "shampooing",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3049,7 +3049,7 @@
                 },
                 "plan_label": "straight back for 45 secs",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3074,7 +3074,7 @@
                 },
                 "plan_label": "trim beard",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3115,7 +3115,7 @@
                 },
                 "plan_label": "be reponsible for rent",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3148,7 +3148,7 @@
                 },
                 "plan_label": "be responsible for expenses card",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3181,7 +3181,7 @@
                 },
                 "plan_label": "be responsible for utilities",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3214,7 +3214,7 @@
                 },
                 "plan_label": "set resturant bucks for the wk",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3391,7 +3391,7 @@
                 },
                 "plan_label": "clip fingernails",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;ced_wk;": {
                     "cases": {
@@ -3443,7 +3443,7 @@
                 },
                 "plan_label": "get rid of toy get new toy",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3480,7 +3480,7 @@
                 "uid": 145,
                 "plan_label": "going to get them",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;jour_minute;": {
                     "cases": {
@@ -3528,7 +3528,7 @@
             },
             "plan_label": "say hi to birds",
             "star": 1,
-            "task": true,
+            "pledge": true,
             "reasonunits": {
               ";amy45;jour_minute;": {
                 "cases": {
@@ -3629,7 +3629,7 @@
                 "uid": 178,
                 "plan_label": "test program",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
                     "cases": {
@@ -3695,7 +3695,7 @@
                 },
                 "plan_label": "donate to influential people that are pro-Climate Death",
                 "star": 1,
-                "task": true,
+                "pledge": true,
                 "reasonunits": {
                   ";amy45;Aaron Donald objects effected by him;": {
                     "cases": {
@@ -3755,7 +3755,7 @@
             "uid": 149,
             "plan_label": "late_evening_go_to_sleep",
             "star": 1,
-            "task": true,
+            "pledge": true,
             "reasonunits": {
               ";amy45;Aaron Donald objects effected by him;": {
                 "cases": {
@@ -3783,7 +3783,7 @@
                     },
                     "plan_label": "be available for phone call",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;Aaron Donald objects effected by him;": {
                         "cases": {
@@ -3821,7 +3821,7 @@
                     },
                     "plan_label": "call David and discuss methodology",
                     "star": 1,
-                    "task": true,
+                    "pledge": true,
                     "reasonunits": {
                       ";amy45;Aaron Donald objects effected by him;": {
                         "cases": {
@@ -3999,7 +3999,7 @@
             "uid": 104,
             "plan_label": "Submit hrs on website",
             "star": 1,
-            "task": true,
+            "pledge": true,
             "reasonunits": {
               ";amy45;jour_minute;": {
                 "cases": {

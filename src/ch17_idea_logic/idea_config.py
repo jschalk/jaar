@@ -158,7 +158,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "reason_upper",
         "reason_lower",
         "reason_divisor",
-        "task",
+        "pledge",
         "problem_bool",
         "take_force",
         "tally",
@@ -203,7 +203,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "stop_calc",
         "tree_level",
         "range_evaluated",
-        "descendant_task_count",
+        "descendant_pledge_count",
         "healerunit_ratio",
         "all_voice_cred",
         "keeps_justified",
@@ -216,7 +216,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "tree_traverse_count",
         "funds",
         "fund_rank",
-        "tasks_count",
+        "pledges_count",
     ]
 
 
@@ -334,7 +334,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "reason_upper": "REAL",
         "reason_lower": "REAL",
         "reason_divisor": "INTEGER",
-        "task": "INTEGER",
+        "pledge": "INTEGER",
         "problem_bool": "INTEGER",
         "take_force": "REAL",
         "tally": "INTEGER",
@@ -398,7 +398,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "chore": "INTEGER",
         "_belief_name_is_labor": "INTEGER",
         "active": "INTEGER",
-        "descendant_task_count": "INTEGER",
+        "descendant_pledge_count": "INTEGER",
         "healerunit_ratio": "REAL",
         "tree_level": "INTEGER",
         "range_evaluated": "INTEGER",
@@ -410,7 +410,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "tree_traverse_count": "INTEGER",
         "funds": "REAL",
         "fund_rank": "INTEGER",
-        "tasks_count": "INTEGER",
+        "pledges_count": "INTEGER",
     }
 
 
@@ -706,7 +706,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "moment_label,offi_time": idea_format_00006_moment_timeoffi_v0_0_0(),
         "moment_label,belief_name,voice_name": idea_format_00011_voice_v0_0_0(),
         "moment_label,belief_name,voice_name,group_title": idea_format_00012_membership_v0_0_0(),
-        "moment_label,belief_name,plan_rope,star,task": idea_format_00013_planunit_v0_0_0(),
+        "moment_label,belief_name,plan_rope,star,pledge": idea_format_00013_planunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want": idea_format_00019_planunit_v0_0_0(),
         "moment_label,belief_name,voice_name,group_title,group_cred_points,group_debt_points": idea_format_00020_belief_voice_membership_v0_0_0(),
         "moment_label,belief_name,voice_name,voice_cred_points,voice_debt_points": idea_format_00021_belief_voiceunit_v0_0_0(),
@@ -716,7 +716,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "moment_label,belief_name,plan_rope,healer_name": idea_format_00025_belief_plan_healerunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor": idea_format_00026_belief_plan_reason_caseunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,reason_context,reason_active_requisite": idea_format_00027_belief_plan_reasonunit_v0_0_0(),
-        "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,task,problem_bool": idea_format_00028_belief_planunit_v0_0_0(),
+        "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,pledge,problem_bool": idea_format_00028_belief_planunit_v0_0_0(),
         "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_beliefunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_translate_title_v0_0_0(),

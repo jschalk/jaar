@@ -135,7 +135,7 @@ def test_beliefunit_v001_AgendaExists():
     # for plan_kid in yao_belief.planroot.kids.values():
     #     # print(plan_kid.plan_label)
     #     assert str(type(plan_kid)) != "<class 'str'>"
-    #     assert plan_kid.task is not None
+    #     assert plan_kid.pledge is not None
 
     # WHEN
     agenda_dict = yao_belief.get_agenda_dict()
@@ -143,7 +143,7 @@ def test_beliefunit_v001_AgendaExists():
     # THEN
     assert len(agenda_dict) > 0
     assert len(agenda_dict) == 17
-    # assert agenda_dict[0].task is not None
+    # assert agenda_dict[0].pledge is not None
     # assert str(type(agenda_dict[0])) != "<class 'str'>"
     # assert str(type(agenda_dict[9])) != "<class 'str'>"
     # assert str(type(agenda_dict[12])) != "<class 'str'>"
@@ -193,15 +193,15 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitHasCorrectAttributes_beliefunit_v0
     # yao_belief.add_fact(fact_context=movie_rope, fact_state=movie_str)
 
     # WHEN
-    plan_task_list = yao_belief.get_agenda_dict()
+    plan_pledge_list = yao_belief.get_agenda_dict()
 
     # THEN
-    assert len(plan_task_list) == 27
+    assert len(plan_pledge_list) == 27
 
     wk1_rope = yao_belief.make_rope(month_wk_rope, "1st wk")
     yao_belief.add_fact(month_wk_rope, wk1_rope)
-    plan_task_list = yao_belief.get_agenda_dict()
-    assert len(plan_task_list) == 27
+    plan_pledge_list = yao_belief.get_agenda_dict()
+    assert len(plan_pledge_list) == 27
 
     sem_jour_str = "sem_jours"
     sem_jour_rope = yao_belief.make_l1_rope(sem_jour_str)
@@ -209,28 +209,28 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitHasCorrectAttributes_beliefunit_v0
     mon_rope = yao_belief.make_rope(sem_jour_rope, mon_str)
 
     yao_belief.add_fact(fact_context=sem_jour_rope, fact_state=mon_rope)
-    plan_task_list = yao_belief.get_agenda_dict()
-    assert len(plan_task_list) == 39
+    plan_pledge_list = yao_belief.get_agenda_dict()
+    assert len(plan_pledge_list) == 39
 
     yao_belief.add_fact(fact_context=sem_jour_rope, fact_state=sem_jour_rope)
-    plan_task_list = yao_belief.get_agenda_dict()
-    assert len(plan_task_list) == 53
+    plan_pledge_list = yao_belief.get_agenda_dict()
+    assert len(plan_pledge_list) == 53
 
     # yao_belief.add_fact(fact_context=nations_rope, fact_state=nations_rope)
-    # plan_task_list = yao_belief.get_agenda_dict()
-    # assert len(plan_task_list) == 53
+    # plan_pledge_list = yao_belief.get_agenda_dict()
+    # assert len(plan_pledge_list) == 53
 
     # for reason_context in yao_belief.get_missing_fact_reason_contexts():
     #     print(f"{reason_context=}")
 
-    # for agenda_plan in plan_task_list:
+    # for agenda_plan in plan_pledge_list:
     #     print(f"{agenda_plan.uid=} {agenda_plan.parent_rope=}")
 
-    # for agenda_plan in plan_task_list:
+    # for agenda_plan in plan_pledge_list:
     #     # print(f"{agenda_plan.parent_rope=}")
     #     pass
 
-    print(len(plan_task_list))
+    print(len(plan_pledge_list))
 
 
 def test_BeliefUnit_get_agenda_dict_BeliefUnitCanCleanOn_reason_context_beliefunit_v001_with_large_agenda():
@@ -254,12 +254,12 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitCanCleanOn_reason_context_beliefun
     assert len(yao_belief.get_agenda_dict()) == 63
 
     # WHEN
-    task_list = yao_belief.get_agenda_dict(necessary_reason_context=wk_rope)
+    pledge_list = yao_belief.get_agenda_dict(necessary_reason_context=wk_rope)
 
     # THEN
-    assert len(task_list) != 63
+    assert len(pledge_list) != 63
     # this list went from 28 to 29 when the method of identifying activees was improved.
-    assert len(task_list) == 29
+    assert len(pledge_list) == 29
 
 
 def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Range():
@@ -272,7 +272,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Range():
     jour_str = "jour"
     jour_rope = zia_belief.make_rope(ziet_rope, jour_str)
 
-    zia_belief.set_l1_plan(planunit_shop(run_str, task=True))
+    zia_belief.set_l1_plan(planunit_shop(run_str, pledge=True))
     zia_belief.set_plan(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
     zia_belief.edit_plan_attr(
         run_rope,
@@ -315,7 +315,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Division():
     jour_str = "jour"
     jour_rope = zia_belief.make_rope(ziet_rope, jour_str)
 
-    zia_belief.set_l1_plan(planunit_shop(run_str, task=True))
+    zia_belief.set_l1_plan(planunit_shop(run_str, pledge=True))
     zia_belief.set_plan(planunit_shop(jour_str, begin=0, close=500), ziet_rope)
     zia_belief.edit_plan_attr(
         run_rope,
@@ -356,7 +356,7 @@ def test_BeliefUnit_set_agenda_chore_as_complete_SetsAttr_Division():
     assert len(zia_belief.get_agenda_dict()) == 0
 
 
-def test_beliefunit_get_from_json_LoadsTaskFromJSON():
+def test_beliefunit_get_from_json_LoadsPledgeFromJSON():
     # ESTABLISH
     yao_belief_json = beliefunit_v001().get_json()
 
@@ -374,23 +374,23 @@ def test_beliefunit_get_from_json_LoadsTaskFromJSON():
     veg_rope = yao_belief.make_rope(body_rope, veg_str)
     veg_plan = yao_belief.get_plan_obj(veg_rope)
     assert not veg_plan.active
-    assert veg_plan.task
+    assert veg_plan.pledge
 
     # plan_list = yao_belief.get_plan_dict()
-    # task_true_count = 0
+    # pledge_true_count = 0
     # for plan in plan_list:
     #     if str(type(plan)).find(".plan.PlanUnit'>") > 0:
     #         assert plan.active in (True, False)
-    #     assert plan.task in (True, False)
+    #     assert plan.pledge in (True, False)
     #     # if plan.active:
     #     #     print(plan.plan_label)
-    #     if plan.task:
-    #         task_true_count += 1
-    #         # if plan.task is False:
-    #         #     print(f"task is false {plan.plan_label}")
+    #     if plan.pledge:
+    #         pledge_true_count += 1
+    #         # if plan.pledge is False:
+    #         #     print(f"pledge is false {plan.plan_label}")
     #         # for reason in plan.reasonunits.values():
     #         #     assert reason.status in (True, False)
-    # assert task_true_count > 0
+    # assert pledge_true_count > 0
 
     # WHEN
     jour_min_str = "jour_minute"
@@ -419,17 +419,17 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     yao_belief.add_fact(
         gregziet_rope, gregziet_rope, fact_lower=1063998720, fact_upper=1064130373
     )
-    task_plan_list = yao_belief.get_agenda_dict()
+    pledge_plan_list = yao_belief.get_agenda_dict()
 
     # THEN
-    assert len(task_plan_list) == 66
+    assert len(pledge_plan_list) == 66
     db_rope = yao_belief.make_l1_rope("D&B")
     evening_str = "late_evening_go_to_sleep"
     evening_rope = yao_belief.make_rope(db_rope, evening_str)
     evening_plan = yao_belief._plan_dict.get(evening_rope)
     # for plan_x in yao_belief.get_agenda_dict():
     #     # if plan_x.chore != True:
-    #     #     print(f"{len(task_plan_list)=} {plan_x.chore=} {plan_x.get_plan_rope()}")
+    #     #     print(f"{len(pledge_plan_list)=} {plan_x.chore=} {plan_x.get_plan_rope()}")
     #     if plan_x.plan_label == evening_plan_label:
     #         evening_plan = plan_x
     #         print(f"{plan_x.get_plan_rope()=}")
@@ -464,7 +464,7 @@ def test_BeliefUnit_set_fact_Isue116Resolved_SetsChoreAsTrue():
     # )
 
     # print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
-    assert get_chores_count(task_plan_list) == 64
+    assert get_chores_count(pledge_plan_list) == 64
 
 
 def test_BeliefUnit_agenda_IsSetByLaborUnit_1VoiceGroup():
@@ -473,7 +473,7 @@ def test_BeliefUnit_agenda_IsSetByLaborUnit_1VoiceGroup():
     yao_belief = beliefunit_shop(yao_str)
     casa_str = "casa"
     casa_rope = yao_belief.make_l1_rope(casa_str)
-    yao_belief.set_l1_plan(planunit_shop(casa_str, task=True))
+    yao_belief.set_l1_plan(planunit_shop(casa_str, pledge=True))
     assert len(yao_belief.get_agenda_dict()) == 1
 
     sue_str = "Sue"
@@ -510,7 +510,7 @@ def test_BeliefUnit_get_agenda_dict_IsSetByLaborUnit_2VoiceGroup():
     yao_belief.add_voiceunit(yao_str)
     casa_str = "casa"
     casa_rope = yao_belief.make_l1_rope(casa_str)
-    yao_belief.set_l1_plan(planunit_shop(casa_str, task=True))
+    yao_belief.set_l1_plan(planunit_shop(casa_str, pledge=True))
 
     sue_str = "Sue"
     yao_belief.add_voiceunit(sue_str)
@@ -536,7 +536,7 @@ def test_BeliefUnit_get_agenda_dict_IsSetByLaborUnit_2VoiceGroup():
     assert len(yao_belief.get_agenda_dict()) == 1
 
 
-def test_BeliefUnit_get_all_tasks_ReturnsObj():
+def test_BeliefUnit_get_all_pledges_ReturnsObj():
     # ESTABLISH
     zia_str = "Zia"
     zia_belief = beliefunit_shop(zia_str)
@@ -549,8 +549,8 @@ def test_BeliefUnit_get_all_tasks_ReturnsObj():
     couch_str = "couch"
     couch_rope = zia_belief.make_rope(casa_rope, couch_str)
     zia_belief.set_plan(planunit_shop(couch_str), casa_rope)
-    zia_belief.set_plan(planunit_shop(clean_str, task=True), casa_rope)
-    zia_belief.set_plan(planunit_shop(sweep_str, task=True), clean_rope)
+    zia_belief.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
+    zia_belief.set_plan(planunit_shop(sweep_str, pledge=True), clean_rope)
     sweep_plan = zia_belief.get_plan_obj(sweep_rope)
     yao_str = "Yao"
     zia_belief.add_voiceunit(yao_str)
@@ -562,9 +562,9 @@ def test_BeliefUnit_get_all_tasks_ReturnsObj():
     assert agenda_dict.get(couch_rope) is None
 
     # WHEN
-    all_tasks_dict = zia_belief.get_all_tasks()
+    all_pledges_dict = zia_belief.get_all_pledges()
 
     # THEN
-    assert all_tasks_dict.get(sweep_rope) == zia_belief.get_plan_obj(sweep_rope)
-    assert all_tasks_dict.get(clean_rope) == zia_belief.get_plan_obj(clean_rope)
-    assert all_tasks_dict.get(couch_rope) is None
+    assert all_pledges_dict.get(sweep_rope) == zia_belief.get_plan_obj(sweep_rope)
+    assert all_pledges_dict.get(clean_rope) == zia_belief.get_plan_obj(clean_rope)
+    assert all_pledges_dict.get(couch_rope) is None

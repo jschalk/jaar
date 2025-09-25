@@ -32,7 +32,7 @@ def get_all_kpi_functions() -> dict[str, set[str]]:
     """
     return {
         "moment_kpi001_voice_nets": create_populate_kpi001_table,
-        "moment_kpi002_belief_tasks": create_populate_kpi002_table,
+        "moment_kpi002_belief_pledges": create_populate_kpi002_table,
     }
 
 
@@ -41,7 +41,10 @@ def get_bundles_config() -> dict[str]:
     Returns a set of all KPI strings.
     """
     return {
-        "default_kpi_bundle": {"moment_kpi001_voice_nets", "moment_kpi002_belief_tasks"}
+        "default_kpi_bundle": {
+            "moment_kpi001_voice_nets",
+            "moment_kpi002_belief_pledges",
+        }
     }
 
 
@@ -63,7 +66,7 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
     for kpi_id in bundle_kpi_ids:
         if kpi_id == "moment_kpi001_voice_nets":
             create_populate_kpi001_table(cursor)
-        if kpi_id == "moment_kpi002_belief_tasks":
+        if kpi_id == "moment_kpi002_belief_pledges":
             create_populate_kpi002_table(cursor)
 
 

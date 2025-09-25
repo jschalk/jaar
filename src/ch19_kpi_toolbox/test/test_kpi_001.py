@@ -17,12 +17,12 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     moment_label_str,
     moment_voice_nets_str,
     plan_rope_str,
-    task_str,
+    pledge_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
 
 
-def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoTasks():
+def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoPledges():
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"
@@ -54,7 +54,7 @@ VALUES
             belief_name_str(),
             "funds",
             "fund_rank",
-            "tasks_count",
+            "pledges_count",
         ]
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename)
         select_sqlstr = f"""
@@ -63,7 +63,7 @@ VALUES
 , {belief_name_str()}
 , funds
 , fund_rank
-, tasks_count
+, pledges_count
 FROM {moment_kpi001_voice_nets_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -75,7 +75,7 @@ FROM {moment_kpi001_voice_nets_tablename}
         ]
 
 
-def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1task():
+def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1pledge():
     # ESTABLISH
     a23_str = "amy23"
     yao_str = "Yao"
@@ -99,7 +99,7 @@ VALUES
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("blrplan", "job", None)
         insert_sqlstr = f"""
-INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {belief_name_str()}, {plan_rope_str()}, {task_str()})
+INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {belief_name_str()}, {plan_rope_str()}, {pledge_str()})
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)
@@ -111,7 +111,7 @@ VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 
         # THEN
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename)
-        select_sqlstr = f"""SELECT {moment_label_str()}, {belief_name_str()}, funds, fund_rank, tasks_count FROM {moment_kpi001_voice_nets_tablename}"""
+        select_sqlstr = f"""SELECT {moment_label_str()}, {belief_name_str()}, funds, fund_rank, pledges_count FROM {moment_kpi001_voice_nets_tablename}"""
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(rows)

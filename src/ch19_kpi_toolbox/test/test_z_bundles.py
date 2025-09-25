@@ -17,11 +17,11 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     chore_str,
     default_kpi_bundle_str,
     moment_kpi001_voice_nets_str,
-    moment_kpi002_belief_tasks_str,
+    moment_kpi002_belief_pledges_str,
     moment_label_str,
     moment_voice_nets_str,
     plan_rope_str,
-    task_str,
+    pledge_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import populate_kpi_bundle
 
@@ -47,7 +47,7 @@ VALUES
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
         moment_kpi001_tablename = moment_kpi001_voice_nets_str()
-        moment_kpi002_tablename = moment_kpi002_belief_tasks_str()
+        moment_kpi002_tablename = moment_kpi002_belief_pledges_str()
         assert not db_table_exists(cursor, moment_kpi001_tablename)
         assert not db_table_exists(cursor, moment_kpi002_tablename)
 
@@ -62,7 +62,7 @@ VALUES
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
             moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_tasks_str(),
+            moment_kpi002_belief_pledges_str(),
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }
@@ -99,7 +99,7 @@ VALUES
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
             moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_tasks_str(),
+            moment_kpi002_belief_pledges_str(),
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }

@@ -7,8 +7,8 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_planunit_str,
     belief_voiceunit_str,
     plan_rope_str,
+    pledge_str,
     star_str,
-    task_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -154,7 +154,7 @@ def test_make_beliefdelta_Arg_idea_format_00013_planunit_v0_0_0():
     sue_beliefunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
-    sue_beliefunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_beliefunit.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
     x_idea_name = idea_format_00013_planunit_v0_0_0()
     planunit_dataframe = create_idea_df(sue_beliefunit, x_idea_name)
     planunit_csv = planunit_dataframe.to_csv(index=False)
@@ -165,13 +165,13 @@ def test_make_beliefdelta_Arg_idea_format_00013_planunit_v0_0_0():
     # THEN
     casa_beliefatom = beliefatom_shop(belief_planunit_str(), INSERT_str())
     casa_beliefatom.set_arg(plan_rope_str(), casa_rope)
-    casa_beliefatom.set_arg(task_str(), False)
+    casa_beliefatom.set_arg(pledge_str(), False)
     casa_beliefatom.set_arg(star_str(), casa_star)
     print(f"{casa_beliefatom=}")
     assert casa_beliefatom.get_value(star_str()) == casa_star
     clean_beliefatom = beliefatom_shop(belief_planunit_str(), INSERT_str())
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
-    clean_beliefatom.set_arg(task_str(), True)
+    clean_beliefatom.set_arg(pledge_str(), True)
     clean_beliefatom.set_arg(star_str(), 1)
     assert planunit_changunit.beliefatom_exists(casa_beliefatom)
     assert planunit_changunit.beliefatom_exists(clean_beliefatom)

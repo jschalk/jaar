@@ -136,7 +136,7 @@ def test_set_listen_to_speaker_fact_SetsFact():
     yao_listener.set_voice_respect(20)
     yao_listener.set_plan(planunit_shop(clean_str), status_rope)
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
-    yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_listener.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_listener.edit_plan_attr(
         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
     )
@@ -179,7 +179,7 @@ def test_set_listen_to_speaker_fact_DoesNotOverrideFact():
     yao_listener.set_plan(planunit_shop(running_str), fridge_rope)
     yao_listener.set_plan(planunit_shop(clean_str), status_rope)
     yao_listener.set_plan(planunit_shop(dirty_str), status_rope)
-    yao_listener.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_listener.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_listener.edit_plan_attr(
         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
     )
@@ -233,7 +233,7 @@ def test_migrate_all_facts_AddsPlanUnitsAndSetsFactUnits():
     yao_src.set_voice_respect(20)
     yao_src.set_plan(planunit_shop(clean_str), status_rope)
     yao_src.set_plan(planunit_shop(dirty_str), status_rope)
-    yao_src.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_src.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_src.edit_reason(sweep_rope, status_rope, dirty_rope)
     # missing_fact_fact_contexts = list(yao_src.get_missing_fact_reason_contexts().keys())
     yao_src.set_plan(planunit_shop(rain_str), weather_rope)

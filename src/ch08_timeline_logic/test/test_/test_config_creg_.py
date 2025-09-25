@@ -591,14 +591,14 @@ def test_add_newtimeline_planunit_SetsAttr_Scenario0():
 #     assert len(sue_beliefunit.get_plan_ranged_kids(plan_rope=week_rope, begin=1440)) == 1
 
 
-def test_BeliefUnit_get_agenda_dict_DoesNotReturnTaskPlansOutsideRange():
+def test_BeliefUnit_get_agenda_dict_DoesNotReturnPledgePlansOutsideRange():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_str = "Sue"
     sue_belief = add_time_creg_planunit(beliefunit_shop(sue_str))
     clean_str = "clean"
     clean_rope = sue_belief.make_l1_rope(clean_str)
-    sue_belief.set_l1_plan(planunit_shop(clean_str, task=True))
+    sue_belief.set_l1_plan(planunit_shop(clean_str, pledge=True))
     time_rope = sue_belief.make_l1_rope("time")
     cregtime_rope = sue_belief.make_rope(time_rope, creg_str())
     day_rope = sue_belief.make_rope(cregtime_rope, "day")
@@ -697,7 +697,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     print(f"{sweep_plan.get_plan_rope()=}")
 
     # ESTABLISH
-    sue_belief.set_dominate_task_plan(plan_kid=sweep_plan)
+    sue_belief.set_dominate_pledge_plan(plan_kid=sweep_plan)
 
     # THEN
     # for plan_kid in sue_belief.planroot.kids.keys():
@@ -706,7 +706,7 @@ def test_BeliefUnit_create_agenda_plan_CreatesAllBeliefAttributes():
     print(f"{sweep_plan.get_plan_rope()=}")
     assert sue_belief.get_plan_obj(sweep_rope) is not None
     assert sue_belief.get_plan_obj(sweep_rope).plan_label == sweep_str
-    assert sue_belief.get_plan_obj(sweep_rope).task
+    assert sue_belief.get_plan_obj(sweep_rope).pledge
     assert len(sue_belief.get_plan_obj(sweep_rope).reasonunits) == 2
     assert sue_belief.get_plan_obj(clean_rope) is not None
     assert sue_belief.get_plan_obj(cookery_room_rope) is not None
@@ -727,7 +727,7 @@ def test_PlanCore_get_agenda_dict_ReturnsObj_BugFindAndFix_active_SettingError()
     laundry_str = "do_laundry"
     laundry_rope = sue_belief.make_rope(casa_rope, laundry_str)
     sue_belief.set_l1_plan(planunit_shop(casa_str))
-    sue_belief.set_plan(planunit_shop(laundry_str, task=True), casa_rope)
+    sue_belief.set_plan(planunit_shop(laundry_str, pledge=True), casa_rope)
     time_rope = sue_belief.make_l1_rope("time")
     cregtime_rope = sue_belief.make_rope(time_rope, creg_str())
     sue_belief.edit_plan_attr(

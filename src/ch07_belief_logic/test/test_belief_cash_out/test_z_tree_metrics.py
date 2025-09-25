@@ -80,7 +80,7 @@ def test_BeliefUnit_set_all_plan_uids_unique_SetsUIDs():
     assert zia_belief.get_plan_obj(swim_rope).uid is not None
 
 
-def test_BeliefUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():
+def test_BeliefUnit_get_tree_metrics_ReturnsANone_pledge_PlanRopeTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_belief = beliefunit_shop(nia_str, tally=10)
@@ -89,10 +89,10 @@ def test_BeliefUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():
     tree_metrics_before = nia_belief.get_tree_metrics()
 
     # WHEN / THEN
-    assert tree_metrics_before.last_evaluated_task_plan_rope is None
+    assert tree_metrics_before.last_evaluated_pledge_plan_rope is None
 
 
-def test_BeliefUnit_get_tree_metrics_Returns_task_PlanRopeTerm():
+def test_BeliefUnit_get_tree_metrics_Returns_pledge_PlanRopeTerm():
     # ESTABLISH
     yao_belief = beliefunit_v001()
     yao_tree_metrics = yao_belief.get_tree_metrics()
@@ -107,7 +107,7 @@ def test_BeliefUnit_get_tree_metrics_Returns_task_PlanRopeTerm():
             "Accomplish Fall 2021 traaining",
         ]
     )
-    assert yao_tree_metrics.last_evaluated_task_plan_rope == traain_rope
+    assert yao_tree_metrics.last_evaluated_pledge_plan_rope == traain_rope
 
 
 def test_BeliefUnit_get_tree_metrics_TracksReasonsThatHaveNoFactreason_contexts():

@@ -32,8 +32,8 @@ let show_laborunit = false;
 let show_laborheir = false;
 let show_level = false;
 let show_moment_label = false;
-let show_task = false;
-let show_descendant_task_count = false;
+let show_pledge = false;
+let show_descendant_pledge_count = false;
 let show_active = false;
 let show_chore = false;
 let show_star = false;
@@ -97,8 +97,8 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_laborheirCheckbox = document.getElementById('show_laborheir');
     const show_levelCheckbox = document.getElementById('show_level');
     const show_moment_labelCheckbox = document.getElementById('show_moment_label');
-    const show_taskCheckbox = document.getElementById('show_task');
-    const show_descendant_task_countCheckbox = document.getElementById('show_descendant_task_count');
+    const show_pledgeCheckbox = document.getElementById('show_pledge');
+    const show_descendant_pledge_countCheckbox = document.getElementById('show_descendant_pledge_count');
     const show_activeCheckbox = document.getElementById('show_active');
     const show_choreCheckbox = document.getElementById('show_chore');
     const show_starCheckbox = document.getElementById('show_star');
@@ -161,8 +161,8 @@ document.addEventListener('DOMContentLoaded', function () {
     show_laborheirCheckbox.addEventListener('change', function () { show_laborheir = this.checked; renderPlanTree(); });
     show_levelCheckbox.addEventListener('change', function () { show_level = this.checked; renderPlanTree(); });
     show_moment_labelCheckbox.addEventListener('change', function () { show_moment_label = this.checked; renderPlanTree(); });
-    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderPlanTree(); });
-    show_descendant_task_countCheckbox.addEventListener('change', function () { show_descendant_task_count = this.checked; renderPlanTree(); });
+    show_pledgeCheckbox.addEventListener('change', function () { show_pledge = this.checked; renderPlanTree(); });
+    show_descendant_pledge_countCheckbox.addEventListener('change', function () { show_descendant_pledge_count = this.checked; renderPlanTree(); });
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderPlanTree(); });
     show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderPlanTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderPlanTree(); });
@@ -278,8 +278,8 @@ function renderPlanUnit(planUnit, level) {
     }
     const indent = '&nbsp;'.repeat(level * 2);
     const levelIndicator = show_level ? ` level${planUnit.tree_level}` : '';
-    const taskIndicator = planUnit.task && show_task ? ' TASK' : '';
-    const descendant_task_countIndicator = show_descendant_task_count ? ` tasks: ${planUnit.descendant_task_count}` : '';
+    const pledgeIndicator = planUnit.pledge && show_pledge ? ' PLEDGE' : '';
+    const descendant_pledge_countIndicator = show_descendant_pledge_count ? ` pledges: ${planUnit.descendant_pledge_count}` : '';
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
     const choreIndicator = planUnit.chore && show_chore ? '-CHORE' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
@@ -305,8 +305,8 @@ function renderPlanUnit(planUnit, level) {
     <i>${levelIndicator}
     ${starIndicator}
     ${uidIndicator}
-    ${taskIndicator}
-    ${descendant_task_countIndicator}
+    ${pledgeIndicator}
+    ${descendant_pledge_countIndicator}
     ${fund_shareIndicator}
     ${fund_onsetIndicator}
     ${fund_ceaseIndicator}

@@ -9,10 +9,10 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     laborunit_str,
     morph_str,
     numor_str,
+    pledge_str,
     problem_bool_str,
     star_str,
     stop_want_str,
-    task_str,
     uid_str,
 )
 from src.ch06_plan_logic.healer import healerunit_shop
@@ -43,7 +43,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.numor is None
     assert new_obj.denom is None
     assert new_obj.morph is None
-    assert new_obj.task is None
+    assert new_obj.pledge is None
     assert new_obj.factunit is None
     assert new_obj.awardunit is None
     assert new_obj.awardunit_del is None
@@ -68,7 +68,7 @@ def test_PlanAttrHolder_Exists():
         numor_str(),
         denom_str(),
         morph_str(),
-        task_str(),
+        pledge_str(),
         "factunit",
         "awardunit",
         "awardunit_del",

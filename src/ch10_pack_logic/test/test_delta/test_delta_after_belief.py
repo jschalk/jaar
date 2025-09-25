@@ -32,6 +32,7 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     healer_name_str,
     party_title_str,
     plan_rope_str,
+    pledge_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_divisor_str,
@@ -40,7 +41,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     reason_upper_str,
     stop_want_str,
     take_force_str,
-    task_str,
     voice_name_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
@@ -369,7 +369,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_planunit():
     x_stop_want = 1700
     # x_denom = 17
     # x_numor = 10
-    x_task = True
+    x_pledge = True
     insert_disc_beliefatom = beliefatom_shop(belief_planunit_str(), INSERT_str())
     insert_disc_beliefatom.set_jkey(plan_rope_str(), disc_rope)
     # insert_disc_beliefatom.set_jvalue(addin_str(), x_addin)
@@ -377,7 +377,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_planunit():
     # insert_disc_beliefatom.set_jvalue(close_str(), x_close)
     # insert_disc_beliefatom.set_jvalue(denom_str(), x_denom)
     # insert_disc_beliefatom.set_jvalue(numor_str(), x_numor)
-    insert_disc_beliefatom.set_jvalue(task_str(), x_task)
+    insert_disc_beliefatom.set_jvalue(pledge_str(), x_pledge)
     insert_disc_beliefatom.set_jvalue(gogo_want_str(), x_gogo_want)
     insert_disc_beliefatom.set_jvalue(stop_want_str(), x_stop_want)
 
@@ -411,7 +411,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     # x_numor = 10
     x_gogo_want = 1222
     x_stop_want = 1333
-    x_task = True
+    x_pledge = True
     insert_disc_beliefatom = beliefatom_shop(belief_planunit_str(), UPDATE_str())
     insert_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     # insert_disc_beliefatom.set_jvalue(addin_str(), x_addin)
@@ -419,7 +419,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     insert_disc_beliefatom.set_jvalue(close_str(), x_close)
     # insert_disc_beliefatom.set_jvalue(denom_str(), x_denom)
     # insert_disc_beliefatom.set_jvalue(numor_str(), x_numor)
-    insert_disc_beliefatom.set_jvalue(task_str(), x_task)
+    insert_disc_beliefatom.set_jvalue(pledge_str(), x_pledge)
     insert_disc_beliefatom.set_jvalue(gogo_want_str(), x_gogo_want)
     insert_disc_beliefatom.set_jvalue(stop_want_str(), x_stop_want)
 
@@ -428,7 +428,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     sue_beliefdelta.set_beliefatom(insert_disc_beliefatom)
     assert before_sue_beliefunit.get_plan_obj(ball_rope).begin is None
     assert before_sue_beliefunit.get_plan_obj(ball_rope).close is None
-    assert before_sue_beliefunit.get_plan_obj(ball_rope).task is False
+    assert before_sue_beliefunit.get_plan_obj(ball_rope).pledge is False
     assert before_sue_beliefunit.get_plan_obj(ball_rope).gogo_want is None
     assert before_sue_beliefunit.get_plan_obj(ball_rope).stop_want is None
 
@@ -440,7 +440,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     assert after_sue_beliefunit.get_plan_obj(ball_rope).close == x_close
     assert after_sue_beliefunit.get_plan_obj(ball_rope).gogo_want == x_gogo_want
     assert after_sue_beliefunit.get_plan_obj(ball_rope).stop_want == x_stop_want
-    assert after_sue_beliefunit.get_plan_obj(ball_rope).task
+    assert after_sue_beliefunit.get_plan_obj(ball_rope).pledge
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_awardunit():

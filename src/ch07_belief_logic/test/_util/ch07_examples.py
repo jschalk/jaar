@@ -62,9 +62,9 @@ def get_beliefunit_with_4_levels() -> BeliefUnit:
     a23_str = "amy23"
     sue_belief = beliefunit_shop("Sue", a23_str)
     casa_str = "casa"
-    sue_belief.set_l1_plan(planunit_shop(casa_str, star=30, task=True))
+    sue_belief.set_l1_plan(planunit_shop(casa_str, star=30, pledge=True))
     cat_str = "cat have dinner"
-    sue_belief.set_l1_plan(planunit_shop(cat_str, star=30, task=True))
+    sue_belief.set_l1_plan(planunit_shop(cat_str, star=30, pledge=True))
 
     wk_str = "sem_jours"
     wk_rope = sue_belief.make_l1_rope(wk_str)
@@ -188,10 +188,10 @@ def get_beliefunit_with7amCleanTableReason() -> BeliefUnit:
     grab_str = "grab soap"
     grab_rope = sue_belief.make_rope(soap_rope, grab_str)
     house_plan = planunit_shop(house_str)
-    clean_plan = planunit_shop(clean_str, task=True)
-    dish_plan = planunit_shop(dish_str, task=True)
-    soap_plan = planunit_shop(soap_str, task=True)
-    grab_plan = planunit_shop(grab_str, task=True)
+    clean_plan = planunit_shop(clean_str, pledge=True)
+    dish_plan = planunit_shop(dish_str, pledge=True)
+    soap_plan = planunit_shop(soap_str, pledge=True)
+    grab_plan = planunit_shop(grab_str, pledge=True)
 
     sue_belief.set_l1_plan(house_plan)
     sue_belief.set_plan(clean_plan, house_rope)
@@ -227,7 +227,7 @@ def get_beliefunit_1Chore_1CE0MinutesReason_1Fact() -> BeliefUnit:
     yao_belief.add_fact(hr_rope, hr_rope, 85, 95)
     mail_str = "obtain mail"
     mail_rope = yao_belief.make_l1_rope(mail_str)
-    mail_plan = planunit_shop(mail_str, task=True)
+    mail_plan = planunit_shop(mail_str, pledge=True)
     yao_belief.set_l1_plan(mail_plan)
     yao_belief.edit_plan_attr(mail_rope, reason=hr_reasonunit)
     return yao_belief
@@ -238,7 +238,7 @@ def get_beliefunit_x1_3levels_1reason_1facts() -> BeliefUnit:
     zia_belief = beliefunit_shop("Zia", moment_label=tiger_str)
     shave_str = "shave"
     shave_rope = zia_belief.make_l1_rope(shave_str)
-    plan_kid_shave = planunit_shop(shave_str, star=30, task=True)
+    plan_kid_shave = planunit_shop(shave_str, star=30, pledge=True)
     zia_belief.set_l1_plan(plan_kid_shave)
     wk_str = "sem_jours"
     wk_rope = zia_belief.make_l1_rope(wk_str)
@@ -274,7 +274,7 @@ def get_beliefunit_reason_context_ziet_example() -> BeliefUnit:
 
 def get_beliefunit_irrational_example() -> BeliefUnit:
     # sourcery skip: extract-duplicate-method
-    # this belief has no definitive agenda because 2 task plans are in contradiction
+    # this belief has no definitive agenda because 2 pledge plans are in contradiction
     # "egg first" is true when "chicken first" is false
     # "chicken first" is true when "egg first" is true
     # Step 0: if chicken.active is True, egg.active is set to False
@@ -297,18 +297,18 @@ def get_beliefunit_irrational_example() -> BeliefUnit:
     chicken_rope = hatter_belief.make_l1_rope(chicken_str)
     hatter_belief.set_l1_plan(planunit_shop(chicken_str))
 
-    # set egg task is True when chicken first is False
+    # set egg pledge is True when chicken first is False
     hatter_belief.edit_plan_attr(
         egg_rope,
-        task=True,
+        pledge=True,
         reason_context=chicken_rope,
         reason_plan_active_requisite=True,
     )
 
-    # set chick task is True when egg first is False
+    # set chick pledge is True when egg first is False
     hatter_belief.edit_plan_attr(
         chicken_rope,
-        task=True,
+        pledge=True,
         reason_context=egg_rope,
         reason_plan_active_requisite=False,
     )
@@ -322,7 +322,7 @@ def get_mop_with_reason_beliefunit_example1():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     floor_str = "mop floor"
     floor_rope = sue_belief.make_rope(casa_rope, floor_str)
-    floor_plan = planunit_shop(floor_str, task=True)
+    floor_plan = planunit_shop(floor_str, pledge=True)
     sue_belief.set_plan(floor_plan, casa_rope)
     sue_belief.set_l1_plan(planunit_shop("unimportant"))
 
@@ -370,7 +370,7 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
     yao_belief.set_plan(planunit_shop(b_bare_str), basket_rope)
     yao_belief.set_plan(planunit_shop(b_fine_str), basket_rope)
     yao_belief.set_plan(planunit_shop(b_half_str), basket_rope)
-    yao_belief.set_plan(planunit_shop(do_laundry_str, task=True), casa_rope)
+    yao_belief.set_plan(planunit_shop(do_laundry_str, pledge=True), casa_rope)
 
     # laundry requirement
     yao_belief.edit_plan_attr(

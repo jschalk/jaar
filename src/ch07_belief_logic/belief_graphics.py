@@ -44,7 +44,7 @@ def _get_color_for_planunit_trace(x_planunit: PlanUnit, mode: str) -> str:
         else:
             return "Black"
     elif mode == "Chore":
-        return "Red" if x_planunit.task else "Pink"
+        return "Red" if x_planunit.pledge else "Pink"
     elif mode == "Keep":
         if x_planunit.problem_bool and x_planunit.healerunit.any_healer_name_exists():
             return "Purple"
@@ -424,7 +424,7 @@ def beliefunit_graph2(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Beliefs Are Made Of: Graph 1",
-                "Tasks are from Plans",
+                "Pledges are from Plans",
                 "All plans build from one",
             ],
             mode="text",
@@ -454,7 +454,7 @@ def beliefunit_graph3(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Beliefs Are Made Of: Graph 1",
-                "Tasks are from Plans",
+                "Pledges are from Plans",
                 "All plans build from one",
             ],
             mode="text",
@@ -469,12 +469,12 @@ def beliefunit_graph4(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Case against Task")
-    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Case for Task")
+    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Case against Pledge")
+    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Case for Pledge")
     create_plan_rect(fig, base_w, base_h, 1, 0, 0.1, "Plan")
-    create_plan_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Task Reason Base")
+    create_plan_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
     create_plan_rect(fig, base_w, base_h, 0, 0, 1, "Root Plan")
-    create_plan_rect(fig, base_w, base_h, 1, 0.7, 1, "Task Itself", True)
+    create_plan_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -484,7 +484,7 @@ def beliefunit_graph4(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Beliefs Are Made Of: Graph 1",
-                "Some Plans are tasks, others are reasons for tasks",
+                "Some Plans are pledges, others are reasons for pledges",
                 "All plans build from one",
             ],
             mode="text",

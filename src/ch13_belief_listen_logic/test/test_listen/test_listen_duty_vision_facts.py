@@ -84,7 +84,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
     )
 
     zia_vision = get_example_zia_speaker()
-    zia_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_vision.set_plan(planunit_shop(clean_str(), pledge=True), a23_casa_rope())
     clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
     clean_planunit.laborunit.add_party(yao_str)
     sue_texas_hubunit.save_vision_belief(zia_vision)
@@ -325,7 +325,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     sue_speaker.set_voice_respect(20)
 #     sue_speaker.set_plan(planunit_shop(clean_str), status_rope)
 #     sue_speaker.set_plan(planunit_shop(dirty_str), status_rope)
-#     sue_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+#     sue_speaker.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
 #     sue_speaker.edit_plan_attr(
 #         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
 #     )
@@ -379,7 +379,7 @@ def test_listen_to_facts_duty_vision_ConfirmNoFactfact_stateedFromBeliefsSpeaker
 #     yao_duty.set_plan(planunit_shop(running_str), fridge_rope)
 #     yao_duty.set_plan(planunit_shop(clean_str), status_rope)
 #     yao_duty.set_plan(planunit_shop(dirty_str), status_rope)
-#     yao_duty.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+#     yao_duty.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
 #     yao_duty.edit_plan_attr(
 #         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
 #     )

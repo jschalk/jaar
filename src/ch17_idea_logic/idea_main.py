@@ -90,7 +90,7 @@ def create_idea_df(x_beliefunit: BeliefUnit, idea_name: str) -> DataFrame:
     d2_list = _create_d2_list(
         sorted_beliefatoms, x_idearef, x_moment_label, x_belief_name
     )
-    d2_list = _delta_all_task_values(d2_list, x_idearef)
+    d2_list = _delta_all_pledge_values(d2_list, x_idearef)
     x_idea = _generate_idea_dataframe(d2_list, idea_name)
     sorting_columns = x_idearef.get_headers_list()
     return _sort_dataframe(x_idea, sorting_columns)
@@ -125,16 +125,16 @@ def _create_d2_list(
     return d2_list
 
 
-def _delta_all_task_values(d2_list: list[list], x_idearef: IdeaRef) -> list[list]:
-    if "task" in x_idearef._attributes:
+def _delta_all_pledge_values(d2_list: list[list], x_idearef: IdeaRef) -> list[list]:
+    if "pledge" in x_idearef._attributes:
         for x_count, x_header in enumerate(x_idearef.get_headers_list()):
-            if x_header == "task":
-                task_column_number = x_count
+            if x_header == "pledge":
+                pledge_column_number = x_count
         for x_row in d2_list:
-            if x_row[task_column_number] is True:
-                x_row[task_column_number] = "Yes"
+            if x_row[pledge_column_number] is True:
+                x_row[pledge_column_number] = "Yes"
             else:
-                x_row[task_column_number] = ""
+                x_row[pledge_column_number] = ""
     return d2_list
 
 

@@ -7,7 +7,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
 )
 
 
-def test_BeliefUnit_cashout_ChangesPlanUnit_task_chore():
+def test_BeliefUnit_cashout_ChangesPlanUnit_pledge_chore():
     # ESTABLISH
     yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
     hr_str = "hr"
@@ -25,7 +25,7 @@ def test_BeliefUnit_cashout_ChangesPlanUnit_task_chore():
     yao_belief.add_fact(
         fact_context=hr_rope, fact_state=hr_rope, fact_lower=82, fact_upper=95
     )
-    assert mail_plan.task is True
+    assert mail_plan.pledge is True
     assert mail_plan.chore is False
 
     # WHEN
@@ -33,7 +33,7 @@ def test_BeliefUnit_cashout_ChangesPlanUnit_task_chore():
 
     # THEN
     mail_plan = yao_belief.get_plan_obj(mail_rope)
-    assert mail_plan.task
+    assert mail_plan.pledge
     assert mail_plan.chore
 
 
@@ -256,12 +256,12 @@ def test_BeliefUnit_cashout_SetsChoreAsComplete():
     hr_str = "hr"
     hr_rope = yao_belief.make_l1_rope(hr_str)
     yao_belief.add_fact(hr_rope, hr_rope, fact_lower=82, fact_upper=85)
-    assert mail_plan.task
+    assert mail_plan.pledge
     assert mail_plan.chore
 
     # WHEN
     yao_belief.cashout()
 
     # THEN
-    assert mail_plan.task
+    assert mail_plan.pledge
     assert not mail_plan.chore

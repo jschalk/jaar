@@ -160,7 +160,7 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
     assert casa_plan.plan_label == casa_str
     assert casa_plan.tree_level == 1
     assert casa_plan.active
-    assert casa_plan.task
+    assert casa_plan.pledge
     # print(f"{casa_plan.reasonheirs=}")
     nation_reasonheir = casa_plan.reasonheirs[nation_rope]
     print(f"  {nation_reasonheir=}")
@@ -268,17 +268,17 @@ def test_BeliefUnit_cashout_CalculatesRangeAttributes():
     assert sue_beliefunit._plan_dict.get(clean_rope).active is False
 
 
-def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
+def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithSinglePledge():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
 
     # WHEN
-    task_plans = sue_beliefunit.get_agenda_dict()
+    pledge_plans = sue_beliefunit.get_agenda_dict()
 
     # THEN
-    assert task_plans is not None
-    assert len(task_plans) > 0
-    assert len(task_plans) == 1
+    assert pledge_plans is not None
+    assert len(pledge_plans) > 0
+    assert len(pledge_plans) == 1
 
 
 def test_BeliefUnit_cashout_SetsData_beliefunit_v001():

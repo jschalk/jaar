@@ -324,7 +324,7 @@ def add_belief_planunit_insert_to_legible_list(
         _problem_bool_value = planunit_atom.get_value(_problem_bool_str)
         _morph_value = planunit_atom.get_value("morph")
         _star_value = planunit_atom.get_value("star")
-        task_value = planunit_atom.get_value("task")
+        pledge_value = planunit_atom.get_value("pledge")
         x_str = f"Created Plan '{rope_value}'. "
         if _addin_value is not None:
             x_str += f"addin={_addin_value}."
@@ -342,8 +342,8 @@ def add_belief_planunit_insert_to_legible_list(
             x_str += f"morph={_morph_value}."
         if _star_value is not None:
             x_str += f"star={_star_value}."
-        if task_value is not None:
-            x_str += f"task={task_value}."
+        if pledge_value is not None:
+            x_str += f"pledge={pledge_value}."
 
         legible_list.append(x_str)
 
@@ -362,7 +362,7 @@ def add_belief_planunit_update_to_legible_list(
         problem_bool_value = planunit_atom.get_value(_problem_bool_str)
         morph_value = planunit_atom.get_value("morph")
         star_value = planunit_atom.get_value("star")
-        task_value = planunit_atom.get_value("task")
+        pledge_value = planunit_atom.get_value("pledge")
         x_str = f"Plan '{rope_value}' set these attributes: "
         if addin_value is not None:
             x_str += f"addin={addin_value}."
@@ -380,8 +380,8 @@ def add_belief_planunit_update_to_legible_list(
             x_str += f"morph={morph_value}."
         if star_value is not None:
             x_str += f"star={star_value}."
-        if task_value is not None:
-            x_str += f"task={task_value}."
+        if pledge_value is not None:
+            x_str += f"pledge={pledge_value}."
 
         legible_list.append(x_str)
 

@@ -353,7 +353,7 @@ def test_reasons_get_from_dict_ReturnsObj():
     assert reasonunits_dict.get(wk_reasonunit.reason_context) == wk_reasonunit
 
 
-def test_ReasonHeir_correctSetsTaskState():
+def test_ReasonHeir_correctSetsPledgeState():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope(root_label(), wk_str)

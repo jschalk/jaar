@@ -109,7 +109,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_active = 1
     x_all_voice_cred = 2
     x_all_voice_debt = 3
-    x_descendant_task_count = 4
+    x_descendant_pledge_count = 4
     x_fund_cease = 5
     x_fund_iota = 6
     x_fund_onset = 7
@@ -129,7 +129,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_morph = 22
     x_numor = 23
     x_rope = 24
-    x_task = 25
+    x_pledge = 25
     x_problem_bool = 26
     x_stop_want = 27
     values_dict = {
@@ -138,7 +138,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "active": x_active,
         "all_voice_cred": x_all_voice_cred,
         "all_voice_debt": x_all_voice_debt,
-        "descendant_task_count": x_descendant_task_count,
+        "descendant_pledge_count": x_descendant_pledge_count,
         "fund_cease": x_fund_cease,
         "fund_iota": x_fund_iota,
         "fund_onset": x_fund_onset,
@@ -158,7 +158,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "morph": x_morph,
         "numor": x_numor,
         "plan_rope": x_rope,
-        "task": x_task,
+        "pledge": x_pledge,
         "problem_bool": x_problem_bool,
         "stop_want": x_stop_want,
     }

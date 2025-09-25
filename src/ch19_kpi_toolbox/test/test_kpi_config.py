@@ -1,7 +1,7 @@
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     default_kpi_bundle_str,
     moment_kpi001_voice_nets_str,
-    moment_kpi002_belief_tasks_str,
+    moment_kpi002_belief_pledges_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import (
     create_populate_kpi001_table,
@@ -18,7 +18,7 @@ def test_get_all_kpi_functions_ReturnsObj():
     assert len(get_all_kpi_functions()) == 2
     assert get_all_kpi_functions() == {
         moment_kpi001_voice_nets_str(): create_populate_kpi001_table,
-        moment_kpi002_belief_tasks_str(): create_populate_kpi002_table,
+        moment_kpi002_belief_pledges_str(): create_populate_kpi002_table,
     }
 
 
@@ -29,7 +29,7 @@ def test_get_bundles_config_ReturnsObj():
     assert get_bundles_config() == {
         default_kpi_bundle_str(): {
             moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_tasks_str(),
+            moment_kpi002_belief_pledges_str(),
         }
     }
 

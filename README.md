@@ -15,7 +15,7 @@ JAAR Version 0.0.0
 
 'jaar' is based on the philosohpy of Emmanuel Levinas (1906-1995) as expressed in his book "Totality and Infinity: An Essay on Exteriority" (translated by Lingis, 1969) and taught to me by Jules Simon PhD (born 1959) Professor at The University of Texas at El Paso (UTEP). I took Jules's course "Levinas: Phenomenology of the Ethical" in 2014 and am still working through the implications. The most important idea that motivated jaar was how Levinas describes murder as the act of not listening. It is painful to really listen, to listen in such a rope as to not know what is going to be said. To take in the suffering of the Other and bring them into myself and change myself in ropes that are by definition imaginable. Because if I could imagine them then they would not be a change. By definition I'm only listening if it changes me in ropes I can't predict. 
 
-So how do I listen? jaar has an engine for converting the declarations (as data) into task lists. How to input the data? The most accessible method is using excel sheets. 
+So how do I listen? jaar has an engine for converting the declarations (as data) into pledge lists. How to input the data? The most accessible method is using excel sheets. 
 
 # 0.0.1 "Moments" The foundation of jaar
 For Levinas all of reality is born from the face to face encounter. The same (me) welcomes the Other through the Face. The Face of the other tells me it's suffering and it's suffering becomes my suffering. I then MOMENT to change who I am to ease that suffering. The suffering is infinitely deep and beyond my complete understanding so when I moment to respond to that suffering I am acting with confidence that I understand what the suffering is and that I know how to respond. That confidence stops the listening process, the Moment cuts the infinite into the finite and is the foundation for a world. When that Moment is created it can create a world. Worlds can hold a infinite amount of human experience. A small subset of that is logical systems. jaar is uses computers to build logic.
@@ -35,7 +35,7 @@ For jaar all data must have *event_int*, *face_name*, *moment_label*. These are 
 |    77     | Emmanuel  | OxboxDean |  Emmanuel  |    Dean   |    891    |  7000  |
 
 When jaar processes example 0.1.0 it creates a Moment labeled "OxboxDean" that contains beliefs Emmanuel and Dean and a single transaction of 7000 OxboxDean from Emmanuel to Dean. Here's the status metrics:
-| moment_label | belief_name | moment_fund_amount | moment_fund_rank | moment_tasks |
+| moment_label | belief_name | moment_fund_amount | moment_fund_rank | moment_pledges |
 |--------------|---------------|--------------------|------------------|--------------|
 |  OxboxDean   |    Emmanuel   |       -7000        |         2        |       0      |
 |  OxboxDean   |      Dean     |        7000        |         1        |       0      |
@@ -58,8 +58,8 @@ Output stance: emmanuel_stance.xlsx, sheet "br00000"
  -->
 
 `jaar` is a python library for listening to the climate of a community. Individual 
-positions are aggregated by a listener into a coherant agenda that can include tasks 
-to do and tasks of  of existence. Listening and acting on it.
+positions are aggregated by a listener into a coherant agenda that can include pledges 
+to do and pledges of  of existence. Listening and acting on it.
 
 A person's agenda in the community is built by the the stared intreprtation of
 1. Voice persons agendas 
