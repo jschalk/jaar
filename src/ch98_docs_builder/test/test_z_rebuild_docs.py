@@ -1,4 +1,8 @@
+from os.path import exists as os_path_exists
+from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
 from src.ch98_docs_builder.doc_builder import (
+    get_chapter_desc_prefix,
+    get_chapter_descs,
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
@@ -8,6 +12,10 @@ from src.ch98_docs_builder.doc_builder import (
 
 
 def test_SpecialTestThatBuildsDocs():
+    """
+    Intended to be the last test before the style checker (linter) tests.
+    Should only create documentation and/or sort json files
+    """
     # ESTABLISH / WHEN / THEN
     destination_dir = "docs"
     # This is a special test in that instead of asserting anything it just writes
@@ -17,3 +25,13 @@ def test_SpecialTestThatBuildsDocs():
     save_chapter_blurbs_md(destination_dir)
     save_ropeterm_explanation_md(destination_dir)
     save_str_funcs_md(destination_dir)  # docs\str_funcs.md
+
+    # resave json files so that they are ordered alphabetically
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
+        docs_dir = create_path(chapter_dir, "_ref")
+        chapter_ref_path = create_path(docs_dir, f"{chapter_desc_prefix}_ref.json")
+        # if os_path_exists(chapter_ref_path):
+        save_json(chapter_ref_path, None, open_json(chapter_ref_path))
+
+    assert 1 == 2
