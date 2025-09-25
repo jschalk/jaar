@@ -34,7 +34,7 @@ class VoiceCore:
     knot: str = None
     respect_bit: float = None
 
-    def set_nameterm(self, x_voice_name: VoiceName):
+    def set_name(self, x_voice_name: VoiceName):
         self.voice_name = validate_labelterm(x_voice_name, self.knot)
 
 
@@ -302,5 +302,5 @@ def voiceunit_shop(
         knot=default_knot_if_None(knot),
         respect_bit=default_RespectBit_if_None(respect_bit),
     )
-    x_voiceunit.set_nameterm(x_voice_name=voice_name)
+    x_voiceunit.set_name(x_voice_name=voice_name)
     return x_voiceunit

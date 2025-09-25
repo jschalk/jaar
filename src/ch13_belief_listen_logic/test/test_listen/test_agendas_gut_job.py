@@ -14,19 +14,16 @@ from src.ch13_belief_listen_logic.test._util.ch13_env import (
     get_chapter_temp_dir as env_dir,
 )
 from src.ch13_belief_listen_logic.test._util.ch13_examples import (
-    casa_rope,
-    clean_rope,
+    a23_casa_rope,
+    a23_clean_rope,
+    a23_cook_rope,
+    a23_eat_rope,
+    a23_hungry_rope,
     clean_str,
-    cook_rope,
     cook_str,
-    eat_rope,
-    full_rope,
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
-    hungry_rope,
-    run_rope,
-    run_str,
 )
 
 
@@ -47,8 +44,8 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWhenNo_partyunitIsSet
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_job.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_job.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_points=12)
     save_job_file(moment_mstr_dir, zia_job)
 
@@ -79,11 +76,11 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBelief(env_dir_setup_cleanu
     save_job_file(moment_mstr_dir, yao_gut)
 
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_job.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_job.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_job.get_plan_obj(clean_rope())
-    cook_planunit = zia_job.get_plan_obj(cook_rope())
+    clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     save_job_file(moment_mstr_dir, zia_job)
@@ -106,12 +103,12 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWithDetailsDecidedBy_
     zia_job = get_example_zia_speaker()
     bob_job = get_example_bob_speaker()
     bob_job.edit_plan_attr(
-        cook_rope(),
-        reason_del_case_reason_context=eat_rope(),
-        reason_del_case_reason_state=hungry_rope(),
+        a23_cook_rope(),
+        reason_del_case_reason_context=a23_eat_rope(),
+        reason_del_case_reason_state=a23_hungry_rope(),
     )
-    bob_cook_planunit = bob_job.get_plan_obj(cook_rope())
-    zia_cook_planunit = zia_job.get_plan_obj(cook_rope())
+    bob_cook_planunit = bob_job.get_plan_obj(a23_cook_rope())
+    zia_cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
     assert bob_cook_planunit != zia_cook_planunit
     assert len(zia_cook_planunit.reasonunits) == 1
     assert len(bob_cook_planunit.reasonunits) == 0
@@ -126,19 +123,19 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWithDetailsDecidedBy_
     save_gut_file(moment_mstr_dir, yao_gut)
 
     new_yao_job1 = create_listen_basis(yao_gut)
-    assert new_yao_job1.plan_exists(cook_rope()) is False
+    assert new_yao_job1.plan_exists(a23_cook_rope()) is False
 
     # WHEN
     yao_hubunit = hubunit_shop(moment_mstr_dir, a23_str, yao_str)
     listen_to_agendas_jobs_into_job(moment_mstr_dir, new_yao_job1)
 
     # THEN
-    assert new_yao_job1.plan_exists(cook_rope())
-    new_cook_plan = new_yao_job1.get_plan_obj(cook_rope())
+    assert new_yao_job1.plan_exists(a23_cook_rope())
+    new_cook_plan = new_yao_job1.get_plan_obj(a23_cook_rope())
     zia_voiceunit = new_yao_job1.get_voice(zia_str)
     bob_voiceunit = new_yao_job1.get_voice(bob_str)
     assert zia_voiceunit.voice_debt_points < bob_voiceunit.voice_debt_points
-    assert new_cook_plan.get_reasonunit(eat_rope()) is None
+    assert new_cook_plan.get_reasonunit(a23_eat_rope()) is None
 
     yao_zia_voice_debt_points = 15
     yao_bob_voice_debt_points = 5
@@ -146,19 +143,19 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWithDetailsDecidedBy_
     yao_gut.add_voiceunit(bob_str, None, yao_bob_voice_debt_points)
     yao_gut.set_voice_respect(100)
     new_yao_job2 = create_listen_basis(yao_gut)
-    assert new_yao_job2.plan_exists(cook_rope()) is False
+    assert new_yao_job2.plan_exists(a23_cook_rope()) is False
 
     # WHEN
     listen_to_agendas_jobs_into_job(moment_mstr_dir, new_yao_job2)
 
     # THEN
-    assert new_yao_job2.plan_exists(cook_rope())
-    new_cook_plan = new_yao_job2.get_plan_obj(cook_rope())
+    assert new_yao_job2.plan_exists(a23_cook_rope())
+    new_cook_plan = new_yao_job2.get_plan_obj(a23_cook_rope())
     zia_voiceunit = new_yao_job2.get_voice(zia_str)
     bob_voiceunit = new_yao_job2.get_voice(bob_str)
     assert zia_voiceunit.voice_debt_points > bob_voiceunit.voice_debt_points
-    zia_eat_reasonunit = zia_cook_planunit.get_reasonunit(eat_rope())
-    assert new_cook_plan.get_reasonunit(eat_rope()) == zia_eat_reasonunit
+    zia_eat_reasonunit = zia_cook_planunit.get_reasonunit(a23_eat_rope())
+    assert new_cook_plan.get_reasonunit(a23_eat_rope()) == zia_eat_reasonunit
 
 
 def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBelief(
@@ -184,11 +181,11 @@ def test_listen_to_agendas_jobs_into_job_ProcessesIrrationalBelief(
 
     zia_str = "Zia"
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_job.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_job.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_job.get_plan_obj(clean_rope())
-    cook_planunit = zia_job.get_plan_obj(cook_rope())
+    clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     save_job_file(moment_mstr_dir, zia_job)
@@ -263,11 +260,11 @@ def test_listen_to_agendas_jobs_into_job_ProcessesMissingDebtorBelief(
     save_gut_file(moment_mstr_dir, yao_gut)
 
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_job.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_job.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_job.get_plan_obj(clean_rope())
-    cook_planunit = zia_job.get_plan_obj(cook_rope())
+    clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     save_job_file(moment_mstr_dir, zia_job)
@@ -310,11 +307,11 @@ def test_listen_to_agendas_jobs_into_job_ListensToBelief_gut_AndNotBelief_job(
     # Save Zia to job
     zia_str = "Zia"
     zia_job = beliefunit_shop(zia_str, a23_str)
-    zia_job.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_job.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_job.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_job.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_job.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_job.get_plan_obj(clean_rope())
-    cook_planunit = zia_job.get_plan_obj(cook_rope())
+    clean_planunit = zia_job.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_job.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     save_job_file(moment_mstr_dir, zia_job)

@@ -9,7 +9,7 @@ from src.ch14_keep_logic.test._util.ch14_env import (
 )
 
 
-def get_texas_rope() -> RopeTerm:
+def get_nation_texas_rope() -> RopeTerm:
     naton_str = "nation"
     usa_str = "usa"
     texas_str = "texas"
@@ -22,7 +22,9 @@ def example_yao_hubunit() -> HubUnit:
 
 def example_yao_texas_hubunit() -> HubUnit:
     moment_mstr_dir = get_chapter_temp_dir()
-    return hubunit_shop(moment_mstr_dir, temp_moment_label(), "Yao", get_texas_rope())
+    return hubunit_shop(
+        moment_mstr_dir, temp_moment_label(), "Yao", get_nation_texas_rope()
+    )
 
 
 def example_yao_credorledger() -> dict[str, float]:

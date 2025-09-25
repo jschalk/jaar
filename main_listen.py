@@ -51,7 +51,7 @@ if __name__ == "__main__":
     print(f"before output_dir file/dir count= {count_dirs_files(output_directory)}")
     x_worldunit.mud_to_clarity_mstr()
     x_worldunit.create_stances()
-    x_worldunit.create_kpi_csvs()
+    x_worldunit.create_world_kpi_csvs()
     output_db_dir = create_path(output_directory, "db")
     export_sqlite_tables_to_csv(x_worldunit.get_world_db_path(), output_db_dir)
     print(f"after  output_dir file/dir count= {count_dirs_files(output_directory)}")

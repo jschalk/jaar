@@ -11,20 +11,19 @@ from src.ch13_belief_listen_logic.test._util.ch13_env import (
     get_chapter_temp_dir as env_dir,
 )
 from src.ch13_belief_listen_logic.test._util.ch13_examples import (
-    casa_rope,
-    clean_rope,
+    a23_casa_rope,
+    a23_clean_rope,
+    a23_cook_rope,
+    a23_eat_rope,
+    a23_hungry_rope,
+    a23_run_rope,
     clean_str,
-    cook_rope,
     cook_str,
-    eat_rope,
-    full_rope,
     get_dakota_hubunit,
     get_dakota_rope,
     get_example_bob_speaker,
     get_example_yao_speaker,
     get_example_zia_speaker,
-    hungry_rope,
-    run_rope,
     run_str,
 )
 
@@ -44,8 +43,8 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_BeliefWhenNo_par
     yao_duty.set_voice_respect(zia_pool)
 
     zia_vision = beliefunit_shop(zia_str, a23_str)
-    zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_vision.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_points=12)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     yao_dakota_hubunit.save_vision_belief(zia_vision)
@@ -75,11 +74,11 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Belief(
     yao_duty.set_voice_respect(zia_pool)
 
     zia_vision = beliefunit_shop(zia_str, a23_str)
-    zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_vision.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_vision.get_plan_obj(clean_rope())
-    cook_planunit = zia_vision.get_plan_obj(cook_rope())
+    clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
@@ -106,12 +105,12 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBeliefWithDetails
     zia_vision = get_example_zia_speaker()
     bob_vision = get_example_bob_speaker()
     bob_vision.edit_plan_attr(
-        cook_rope(),
-        reason_del_case_reason_context=eat_rope(),
-        reason_del_case_reason_state=hungry_rope(),
+        a23_cook_rope(),
+        reason_del_case_reason_context=a23_eat_rope(),
+        reason_del_case_reason_state=a23_hungry_rope(),
     )
-    bob_cook_planunit = bob_vision.get_plan_obj(cook_rope())
-    zia_cook_planunit = zia_vision.get_plan_obj(cook_rope())
+    bob_cook_planunit = bob_vision.get_plan_obj(a23_cook_rope())
+    zia_cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     assert bob_cook_planunit != zia_cook_planunit
     assert len(zia_cook_planunit.reasonunits) == 1
     assert len(bob_cook_planunit.reasonunits) == 0
@@ -131,18 +130,18 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBeliefWithDetails
         duty_belief=yao_duty,
     )
     new_yao_job1 = create_listen_basis(yao_duty)
-    assert new_yao_job1.plan_exists(cook_rope()) is False
+    assert new_yao_job1.plan_exists(a23_cook_rope()) is False
 
     # WHEN
     listen_to_agendas_duty_vision(new_yao_job1, sue_dakota_hubunit)
 
     # THEN
-    assert new_yao_job1.plan_exists(cook_rope())
-    new_cook_plan = new_yao_job1.get_plan_obj(cook_rope())
+    assert new_yao_job1.plan_exists(a23_cook_rope())
+    new_cook_plan = new_yao_job1.get_plan_obj(a23_cook_rope())
     zia_voiceunit = new_yao_job1.get_voice(zia_str)
     bob_voiceunit = new_yao_job1.get_voice(bob_str)
     assert zia_voiceunit.voice_debt_points < bob_voiceunit.voice_debt_points
-    assert new_cook_plan.get_reasonunit(eat_rope()) is None
+    assert new_cook_plan.get_reasonunit(a23_eat_rope()) is None
 
     yao_zia_voice_debt_points = 15
     yao_bob_voice_debt_points = 5
@@ -150,19 +149,19 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBeliefWithDetails
     yao_duty.add_voiceunit(bob_str, None, yao_bob_voice_debt_points)
     yao_duty.set_voice_respect(100)
     new_yao_job2 = create_listen_basis(yao_duty)
-    assert new_yao_job2.plan_exists(cook_rope()) is False
+    assert new_yao_job2.plan_exists(a23_cook_rope()) is False
 
     # WHEN
     listen_to_agendas_duty_vision(new_yao_job2, sue_dakota_hubunit)
 
     # THEN
-    assert new_yao_job2.plan_exists(cook_rope())
-    new_cook_plan = new_yao_job2.get_plan_obj(cook_rope())
+    assert new_yao_job2.plan_exists(a23_cook_rope())
+    new_cook_plan = new_yao_job2.get_plan_obj(a23_cook_rope())
     zia_voiceunit = new_yao_job2.get_voice(zia_str)
     bob_voiceunit = new_yao_job2.get_voice(bob_str)
     assert zia_voiceunit.voice_debt_points > bob_voiceunit.voice_debt_points
-    zia_eat_reasonunit = zia_cook_planunit.get_reasonunit(eat_rope())
-    assert new_cook_plan.get_reasonunit(eat_rope()) == zia_eat_reasonunit
+    zia_eat_reasonunit = zia_cook_planunit.get_reasonunit(a23_eat_rope())
+    assert new_cook_plan.get_reasonunit(a23_eat_rope()) == zia_eat_reasonunit
 
 
 def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
@@ -194,11 +193,11 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesIrrationalBelief(
 
     zia_str = "Zia"
     zia_vision = beliefunit_shop(zia_str, a23_str)
-    zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_vision.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_vision.get_plan_obj(clean_rope())
-    cook_planunit = zia_vision.get_plan_obj(cook_rope())
+    clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit.save_vision_belief(zia_vision)
@@ -277,11 +276,11 @@ def test_listen_to_agenda_duty_vision_agenda_ProcessesMissingDebtorvisionBelief(
     )
 
     zia_vision = beliefunit_shop(zia_str, a23_str)
-    zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_vision.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_vision.get_plan_obj(clean_rope())
-    cook_planunit = zia_vision.get_plan_obj(cook_rope())
+    clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
@@ -333,11 +332,11 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     # Save Zia to visions
     zia_str = "Zia"
     zia_vision = beliefunit_shop(zia_str, a23_str)
-    zia_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
-    zia_vision.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
+    zia_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
+    zia_vision.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
     zia_vision.add_voiceunit(yao_str, voice_debt_points=12)
-    clean_planunit = zia_vision.get_plan_obj(clean_rope())
-    cook_planunit = zia_vision.get_plan_obj(cook_rope())
+    clean_planunit = zia_vision.get_plan_obj(a23_clean_rope())
+    cook_planunit = zia_vision.get_plan_obj(a23_cook_rope())
     clean_planunit.laborunit.add_party(yao_str)
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit.save_vision_belief(zia_vision)
@@ -365,12 +364,12 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
 ):
     # ESTABLISH
     # yao_duty has chore run_rope
-    # yao_vision has chore clean_rope
-    # yao_new_vision fact_states yao_duty chore run_rope and not clean_rope
+    # yao_vision has chore a23_clean_rope
+    # yao_new_vision fact_states yao_duty chore run_rope and not a23_clean_rope
     yao_duty = get_example_yao_speaker()
-    assert yao_duty.plan_exists(run_rope()) is False
-    assert yao_duty.plan_exists(clean_rope()) is False
-    yao_duty.set_plan(planunit_shop(run_str(), task=True), casa_rope())
+    assert yao_duty.plan_exists(a23_run_rope()) is False
+    assert yao_duty.plan_exists(a23_clean_rope()) is False
+    yao_duty.set_plan(planunit_shop(run_str(), task=True), a23_casa_rope())
     sue_dakota_hubunit = get_dakota_hubunit()
     save_duty_belief(
         moment_mstr_dir=sue_dakota_hubunit.moment_mstr_dir,
@@ -381,18 +380,18 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
         duty_belief=yao_duty,
     )
     yao_old_vision = get_example_yao_speaker()
-    assert yao_old_vision.plan_exists(run_rope()) is False
-    assert yao_old_vision.plan_exists(clean_rope()) is False
-    yao_old_vision.set_plan(planunit_shop(clean_str(), task=True), casa_rope())
+    assert yao_old_vision.plan_exists(a23_run_rope()) is False
+    assert yao_old_vision.plan_exists(a23_clean_rope()) is False
+    yao_old_vision.set_plan(planunit_shop(clean_str(), task=True), a23_casa_rope())
     sue_dakota_hubunit.save_vision_belief(yao_old_vision)
 
     yao_new_vision = create_listen_basis(yao_duty)
-    assert yao_new_vision.plan_exists(run_rope()) is False
-    assert yao_new_vision.plan_exists(clean_rope()) is False
+    assert yao_new_vision.plan_exists(a23_run_rope()) is False
+    assert yao_new_vision.plan_exists(a23_clean_rope()) is False
 
     # WHEN
     listen_to_agendas_duty_vision(yao_new_vision, sue_dakota_hubunit)
 
     # THEN
-    assert yao_new_vision.plan_exists(clean_rope()) is False
-    assert yao_new_vision.plan_exists(run_rope())
+    assert yao_new_vision.plan_exists(a23_clean_rope()) is False
+    assert yao_new_vision.plan_exists(a23_run_rope())

@@ -172,7 +172,7 @@ class WorldUnit:
         )
         create_calendar_markdown_files(self._moment_mstr_dir, self.output_dir)
 
-    def create_kpi_csvs(self):
+    def create_world_kpi_csvs(self):
         create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
     def to_dict(self) -> dict:

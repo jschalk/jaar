@@ -76,7 +76,7 @@ def test_VoiceUnit_set_nameterm_SetsAttr():
 
     # WHEN
     bob_str = "Bob"
-    x_voiceunit.set_nameterm(bob_str)
+    x_voiceunit.set_name(bob_str)
 
     # THEN
     assert x_voiceunit.voice_name == bob_str

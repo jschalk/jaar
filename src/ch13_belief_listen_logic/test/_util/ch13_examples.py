@@ -4,24 +4,19 @@ from src.ch05_reason_logic.reason import FactUnit, factunit_shop
 from src.ch06_plan_logic.plan import get_default_moment_label, planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.ch12_hub_toolbox.test._util.ch12_examples import get_texas_rope
 from src.ch13_belief_listen_logic._ref.ch13_keywords import (
-    DELETE_str,
     INSERT_str,
-    UPDATE_str,
     belief_plan_factunit_str,
     belief_planunit_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
     parent_rope_str,
     plan_label_str,
     plan_rope_str,
-    voice_name_str,
 )
 from src.ch13_belief_listen_logic.test._util.ch13_env import get_chapter_temp_dir
 
@@ -54,49 +49,49 @@ def run_str() -> str:
     return "run"
 
 
-def casa_rope() -> RopeTerm:
+def a23_casa_rope() -> RopeTerm:
     return create_rope("amy23", casa_str())
 
 
-def cook_rope() -> RopeTerm:
-    return create_rope(casa_rope(), cook_str())
+def a23_cook_rope() -> RopeTerm:
+    return create_rope(a23_casa_rope(), cook_str())
 
 
-def eat_rope() -> RopeTerm:
-    return create_rope(casa_rope(), eat_str())
+def a23_eat_rope() -> RopeTerm:
+    return create_rope(a23_casa_rope(), eat_str())
 
 
-def hungry_rope() -> RopeTerm:
-    return create_rope(eat_rope(), hungry_str())
+def a23_hungry_rope() -> RopeTerm:
+    return create_rope(a23_eat_rope(), hungry_str())
 
 
-def full_rope() -> RopeTerm:
-    return create_rope(eat_rope(), full_str())
+def a23_full_rope() -> RopeTerm:
+    return create_rope(a23_eat_rope(), full_str())
 
 
-def clean_rope() -> RopeTerm:
-    return create_rope(casa_rope(), clean_str())
+def a23_clean_rope() -> RopeTerm:
+    return create_rope(a23_casa_rope(), clean_str())
 
 
-def run_rope() -> RopeTerm:
-    return create_rope(casa_rope(), run_str())
+def a23_run_rope() -> RopeTerm:
+    return create_rope(a23_casa_rope(), run_str())
 
 
 def get_example_zia_speaker() -> BeliefUnit:
     zia_str = "Zia"
     a23_str = "amy23"
     zia_speaker = beliefunit_shop(zia_str, a23_str)
-    zia_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    zia_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
-    zia_speaker.set_plan(planunit_shop(full_str()), eat_rope())
+    zia_speaker.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
+    zia_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
+    zia_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
     yao_str = "Yao"
     zia_speaker.add_voiceunit(yao_str, voice_debt_points=12)
-    cook_planunit = zia_speaker.get_plan_obj(cook_rope())
+    cook_planunit = zia_speaker.get_plan_obj(a23_cook_rope())
     cook_planunit.laborunit.add_party(yao_str)
     zia_speaker.edit_plan_attr(
-        cook_rope(), reason_context=eat_rope(), reason_case=hungry_rope()
+        a23_cook_rope(), reason_context=a23_eat_rope(), reason_case=a23_hungry_rope()
     )
-    zia_speaker.add_fact(eat_rope(), full_rope())
+    zia_speaker.add_fact(a23_eat_rope(), a23_full_rope())
     zia_speaker.set_voice_respect(100)
     return zia_speaker
 
@@ -105,17 +100,17 @@ def get_example_bob_speaker() -> BeliefUnit:
     bob_str = "Bob"
     a23_str = "amy23"
     bob_speaker = beliefunit_shop(bob_str, a23_str)
-    bob_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    bob_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
-    bob_speaker.set_plan(planunit_shop(full_str()), eat_rope())
+    bob_speaker.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
+    bob_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
+    bob_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
     yao_str = "Yao"
     bob_speaker.add_voiceunit(yao_str, voice_debt_points=12)
-    cook_planunit = bob_speaker.get_plan_obj(cook_rope())
+    cook_planunit = bob_speaker.get_plan_obj(a23_cook_rope())
     cook_planunit.laborunit.add_party(yao_str)
     bob_speaker.edit_plan_attr(
-        cook_rope(), reason_context=eat_rope(), reason_case=hungry_rope()
+        a23_cook_rope(), reason_context=a23_eat_rope(), reason_case=a23_hungry_rope()
     )
-    bob_speaker.add_fact(eat_rope(), hungry_rope())
+    bob_speaker.add_fact(a23_eat_rope(), a23_hungry_rope())
     bob_speaker.set_voice_respect(100)
     return bob_speaker
 
@@ -130,15 +125,15 @@ def get_example_yao_speaker() -> BeliefUnit:
     yao_speaker.add_voiceunit(zia_str, voice_debt_points=36)
     yao_speaker.add_voiceunit(bob_str, voice_debt_points=48)
     yao_speaker.set_voice_respect(100)
-    yao_speaker.set_plan(planunit_shop(cook_str(), task=True), casa_rope())
-    yao_speaker.set_plan(planunit_shop(hungry_str()), eat_rope())
-    yao_speaker.set_plan(planunit_shop(full_str()), eat_rope())
-    cook_planunit = yao_speaker.get_plan_obj(cook_rope())
+    yao_speaker.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
+    yao_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
+    yao_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
+    cook_planunit = yao_speaker.get_plan_obj(a23_cook_rope())
     cook_planunit.laborunit.add_party(yao_str)
     yao_speaker.edit_plan_attr(
-        cook_rope(), reason_context=eat_rope(), reason_case=hungry_rope()
+        a23_cook_rope(), reason_context=a23_eat_rope(), reason_case=a23_hungry_rope()
     )
-    yao_speaker.add_fact(eat_rope(), hungry_rope())
+    yao_speaker.add_fact(a23_eat_rope(), a23_hungry_rope())
     return yao_speaker
 
 
@@ -239,44 +234,6 @@ def yao_sue_packunit() -> PackUnit:
 
 def get_sue_packunit() -> PackUnit:
     return packunit_shop(belief_name="Sue", _pack_id=37, face_name="Yao")
-
-
-def sue_1beliefatoms_packunit() -> PackUnit:
-    x_packunit = packunit_shop(belief_name="Sue", _pack_id=53, face_name="Yao")
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_sports())
-    return x_packunit
-
-
-def sue_2beliefatoms_packunit() -> PackUnit:
-    x_packunit = packunit_shop(belief_name="Sue", _pack_id=53, face_name="Yao")
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_sports())
-    return x_packunit
-
-
-def sue_3beliefatoms_packunit() -> PackUnit:
-    x_packunit = packunit_shop(belief_name="Sue", _pack_id=37, face_name="Yao")
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_factunit_knee())
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_ball())
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
-    return x_packunit
-
-
-def sue_4beliefatoms_packunit() -> PackUnit:
-    x_packunit = packunit_shop(belief_name="Sue", _pack_id=47, face_name="Yao")
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_factunit_knee())
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_ball())
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
-    x_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_sports())
-    return x_packunit
-
-
-def get_texas_rope() -> RopeTerm:
-    moment_label = get_default_moment_label()
-    nation_str = "nation"
-    usa_str = "USA"
-    texas_str = "Texas"
-    return create_rope_from_labels([moment_label, nation_str, usa_str, texas_str])
 
 
 def get_texas_hubunit() -> HubUnit:

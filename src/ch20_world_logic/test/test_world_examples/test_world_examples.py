@@ -49,7 +49,7 @@ def test_sheets_input_to_clarity_mstr_Examples(env_dir_setup_cleanup, run_big_te
         # WHEN
         example_worldunit.sheets_input_to_clarity_mstr()
         example_worldunit.create_stances()
-        example_worldunit.create_kpi_csvs()
+        example_worldunit.create_world_kpi_csvs()
 
         # THEN
         print(f"after WHEN {os_path_exists(input_dir)=}")

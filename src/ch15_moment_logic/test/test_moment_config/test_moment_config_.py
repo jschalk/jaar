@@ -176,7 +176,7 @@ def test_get_moment_args_dimen_mapping_ReturnsObj():
     assert len(x_moment_args_dimen_mapping) == 24
 
 
-def get_class_type(x_dimen: str, x_arg: str) -> str:
+def get_moment_class_type(x_dimen: str, x_arg: str) -> str:
     moment_config_dict = get_moment_config_dict()
     dimen_dict = moment_config_dict.get(x_dimen)
     optional_dict = dimen_dict.get(jvalues_str())
@@ -195,7 +195,7 @@ def all_args_class_types_are_correct(x_class_types) -> bool:
     for x_moment_arg in x_sorted_class_types:
         x_dimens = list(x_moment_args_dimen_mapping.get(x_moment_arg))
         x_dimen = x_dimens[0]
-        x_class_type = get_class_type(x_dimen, x_moment_arg)
+        x_class_type = get_moment_class_type(x_dimen, x_moment_arg)
         print(
             f"assert x_class_types.get({x_moment_arg}) == {x_class_type} {x_class_types.get(x_moment_arg)=}"
         )

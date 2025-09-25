@@ -197,12 +197,21 @@ def get_duplicated_functions(excluded_functions) -> set[str]:
     print(f"{duplicate_functions=}")
     print(f"{len(non_excluded_functions)=}")
     print(f"{len(all_functions)=}")
-    unecessarily_excluded_funcs = {
-        function_name: f"{func_count} does not need to be in excluded_functions set"
+    unnecessarily_excluded_funcs = {
+        function_name: f"{func_count=}. '{function_name}' does not need to be in excluded_functions set"
         for function_name, func_count in all_functions.items()
         if func_count == 1 and function_name in excluded_functions
     }
-    return duplicate_functions, unecessarily_excluded_funcs
+    for excluded_function in excluded_functions:
+        if excluded_function not in all_functions:
+            does_not_exist_str = f"'{excluded_function}' is not used in codebase"
+            unnecessarily_excluded_funcs[excluded_function] = does_not_exist_str
+    for func_name in sorted(list(all_functions.keys()), reverse=True):
+        func_count = all_functions.get(func_name)
+        if func_count > 1 and func_name.endswith("rope"):
+            print(f"{func_name} {func_count=}")
+    print(f"{len(excluded_functions)=}")
+    return duplicate_functions, unnecessarily_excluded_funcs
 
 
 def check_if_chapter_str_funcs_is_sorted(chapter_str_funcs: list[str]):

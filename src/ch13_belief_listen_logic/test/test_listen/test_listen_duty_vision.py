@@ -18,35 +18,20 @@ from src.ch13_belief_listen_logic.test._util.ch13_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch13_belief_listen_logic.test._util.ch13_examples import get_texas_hubunit
-
-
-def casa_str() -> str:
-    return "casa"
-
-
-def cook_str() -> str:
-    return "cook"
-
-
-def eat_str() -> str:
-    return "eat"
-
-
-def hungry_str() -> str:
-    return "hungry"
-
-
-def full_str() -> str:
-    return "full"
+from src.ch13_belief_listen_logic.test._util.ch13_examples import (
+    casa_str,
+    clean_str,
+    cook_str,
+    eat_str,
+    full_str,
+    get_texas_hubunit,
+    hungry_str,
+    run_str,
+)
 
 
 def sanitation_str() -> str:
     return "sanitation"
-
-
-def clean_str() -> str:
-    return "clean"
 
 
 def dirty_str() -> str:
@@ -55,10 +40,6 @@ def dirty_str() -> str:
 
 def sweep_str() -> str:
     return "sweep"
-
-
-def run_str() -> str:
-    return "run"
 
 
 def casa_rope() -> RopeTerm:
