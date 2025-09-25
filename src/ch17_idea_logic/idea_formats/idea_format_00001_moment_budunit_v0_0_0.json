@@ -1,31 +1,31 @@
 {
-    "attributes": {
-        "celldepth": {
-            "otx_key": false
-        },
-        "bud_time": {
-            "otx_key": true
-        },
-        "event_int": {
-            "otx_key": true
-        },
-        "face_name": {
-            "otx_key": true
-        },
-        "moment_label": {
-            "otx_key": true
-        },
-        "belief_name": {
-            "otx_key": true
-        },
-        "quota": {
-            "otx_key": false
-        }
+  "attributes": {
+    "belief_name": {
+      "otx_key": true
     },
-    "idea_number": "br00001",
-    "dimens": [
-        "moment_budunit",
-        "momentunit",
-        "beliefunit"
-    ]
+    "bud_time": {
+      "otx_key": true
+    },
+    "celldepth": {
+      "otx_key": false
+    },
+    "event_int": {
+      "otx_key": true
+    },
+    "face_name": {
+      "otx_key": true
+    },
+    "moment_label": {
+      "otx_key": true
+    },
+    "quota": {
+      "otx_key": false
+    }
+  },
+  "dimens": [
+    "moment_budunit",
+    "momentunit",
+    "beliefunit"
+  ],
+  "idea_number": "br00001"
 }

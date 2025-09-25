@@ -1,7 +1,7 @@
 {
-    "_mode": "enrich",
-    "data": {
-        "id": 42,
-        "category": "demo"
-    }
+  "_mode": "enrich",
+  "data": {
+    "category": "demo",
+    "id": 42
+  }
 }

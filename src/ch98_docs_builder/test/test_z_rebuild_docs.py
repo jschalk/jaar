@@ -1,5 +1,9 @@
-from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
+from src.ch01_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_filenames,
+    open_json,
+    save_json,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_descs,
@@ -27,11 +31,11 @@ def test_SpecialTestThatBuildsDocs():
     save_str_funcs_md(destination_dir)  # docs\str_funcs.md
 
     # resave json files so that they are ordered alphabetically
-    for chapter_desc, chapter_dir in get_chapter_descs().items():
-        chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
-        docs_dir = create_path(chapter_dir, "_ref")
-        chapter_ref_path = create_path(docs_dir, f"{chapter_desc_prefix}_ref.json")
-        # if os_path_exists(chapter_ref_path):
-        save_json(chapter_ref_path, None, open_json(chapter_ref_path))
-
-    assert 1 == 2
+    for chapter_dir in get_chapter_descs().values():
+        json_file_tuples = get_dir_filenames(chapter_dir, {"json"})
+        for x_dir, x_filename in json_file_tuples:
+            json_filepath = create_path(x_dir, x_filename)
+            print(f"{json_filepath=}")
+            print(f"{x_dir} {x_filename=}")
+            json_dir = create_path(chapter_dir, x_dir)
+            save_json(json_dir, x_filename, open_json(json_dir, x_filename))

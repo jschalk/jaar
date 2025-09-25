@@ -1,35 +1,35 @@
 {
-    "attributes": {
-        "event_int": {
-            "otx_key": true
-        },
-        "face_name": {
-            "otx_key": true
-        },
-        "moment_label": {
-            "otx_key": true
-        },
-        "healer_name": {
-            "otx_key": true
-        },
-        "plan_label": {
-            "otx_key": true
-        },
-        "plan_rope": {
-            "otx_key": true
-        },
-        "belief_name": {
-            "otx_key": true
-        },
-        "problem_bool": {
-            "otx_key": false
-        }
+  "attributes": {
+    "belief_name": {
+      "otx_key": true
     },
-    "idea_number": "br00036",
-    "dimens": [
-        "momentunit",
-        "beliefunit",
-        "belief_planunit",
-        "belief_plan_healerunit"
-    ]
+    "event_int": {
+      "otx_key": true
+    },
+    "face_name": {
+      "otx_key": true
+    },
+    "healer_name": {
+      "otx_key": true
+    },
+    "moment_label": {
+      "otx_key": true
+    },
+    "plan_label": {
+      "otx_key": true
+    },
+    "plan_rope": {
+      "otx_key": true
+    },
+    "problem_bool": {
+      "otx_key": false
+    }
+  },
+  "dimens": [
+    "momentunit",
+    "beliefunit",
+    "belief_planunit",
+    "belief_plan_healerunit"
+  ],
+  "idea_number": "br00036"
 }

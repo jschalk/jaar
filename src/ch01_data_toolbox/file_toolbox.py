@@ -325,6 +325,7 @@ def get_parts_dir(x_dir: pathlib_Path) -> list[str]:
 def get_dir_filenames(
     x_dir: str, include_extensions: set[str] = None, matchs: set[str] = set()
 ) -> set[tuple[str, str]]:
+    """Example of include_extensions: {json, py, txt}"""
     if include_extensions is None:
         include_extensions = set()
     filenames_set = set()

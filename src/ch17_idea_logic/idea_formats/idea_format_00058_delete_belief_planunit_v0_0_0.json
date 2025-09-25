@@ -1,25 +1,25 @@
 {
-    "attributes": {
-        "event_int": {
-            "otx_key": true
-        },
-        "face_name": {
-            "otx_key": true
-        },
-        "moment_label": {
-            "otx_key": true
-        },
-        "plan_rope_ERASE": {
-            "otx_key": true
-        },
-        "belief_name": {
-            "otx_key": true
-        }
+  "attributes": {
+    "belief_name": {
+      "otx_key": true
     },
-    "idea_number": "br00058",
-    "dimens": [
-        "belief_planunit",
-        "beliefunit",
-        "momentunit"
-    ]
+    "event_int": {
+      "otx_key": true
+    },
+    "face_name": {
+      "otx_key": true
+    },
+    "moment_label": {
+      "otx_key": true
+    },
+    "plan_rope_ERASE": {
+      "otx_key": true
+    }
+  },
+  "dimens": [
+    "belief_planunit",
+    "beliefunit",
+    "momentunit"
+  ],
+  "idea_number": "br00058"
 }
