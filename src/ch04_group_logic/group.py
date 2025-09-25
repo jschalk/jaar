@@ -210,11 +210,11 @@ class GroupUnit(GroupCore):
     def _add_debtor_pool(self, x_debtor_pool: float):
         self.debtor_pool += x_debtor_pool
 
-    def get_membership(self, x_voice_name: VoiceName) -> MemberShip:
+    def get_voice_membership(self, x_voice_name: VoiceName) -> MemberShip:
         return self.memberships.get(x_voice_name)
 
     def group_membership_exists(self, x_voice_name: VoiceName) -> bool:
-        return self.get_membership(x_voice_name) is not None
+        return self.get_voice_membership(x_voice_name) is not None
 
     def del_membership(self, voice_name):
         self.memberships.pop(voice_name)

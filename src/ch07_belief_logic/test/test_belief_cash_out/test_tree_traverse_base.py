@@ -555,8 +555,8 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     assert xio_groupunit.group_membership_exists(yao_str)
     assert xio_groupunit.group_membership_exists(zia_str)
     assert not xio_groupunit.group_membership_exists(xio_str)
-    yao_membership = xio_groupunit.get_membership(yao_str)
-    zia_membership = xio_groupunit.get_membership(zia_str)
+    yao_membership = xio_groupunit.get_voice_membership(yao_str)
+    zia_membership = xio_groupunit.get_voice_membership(zia_str)
     assert yao_membership.group_cred_points == yao_voice_cred_points
     assert zia_membership.group_cred_points == zia_voice_cred_points
     assert yao_membership.group_debt_points == yao_voice_debt_points

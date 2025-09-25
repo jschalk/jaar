@@ -106,7 +106,7 @@ def test_BeliefUnit_set_voiceunit_groupunit_respect_ledgers_SetsAttr_scenario1()
     assert yao_membership.credor_pool == 1000000000
     assert yao_membership.debtor_pool == 1000000000
     yao_groupunit = sue_beliefunit.get_groupunit(yao_str)
-    groupunit_yao_membership = yao_groupunit.get_membership(yao_str)
+    groupunit_yao_membership = yao_groupunit.get_voice_membership(yao_str)
     assert yao_membership == groupunit_yao_membership
 
 

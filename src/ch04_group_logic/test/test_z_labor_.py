@@ -250,7 +250,7 @@ def test_LaborHeir_set_belief_name_is_labor_SetsAttribute_NonEmptyx_partys_v2():
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     x_partys = {sue_str}
     x_laborheir = laborheir_shop(_partys=x_partys)
-    assert yao_groupunit.get_membership(yao_str) is not None
+    assert yao_groupunit.get_voice_membership(yao_str) is not None
     assert x_laborheir._belief_name_is_labor is False
 
     # WHEN

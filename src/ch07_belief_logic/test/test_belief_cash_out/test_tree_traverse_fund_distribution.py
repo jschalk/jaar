@@ -800,7 +800,7 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
 
     # THEN
     xio_groupunit = yao_belief.get_groupunit(xio_str)
-    xio_xio_membership = xio_groupunit.get_membership(xio_str)
+    xio_xio_membership = xio_groupunit.get_voice_membership(xio_str)
     sue_voiceunit = yao_belief.get_voice(sue_str)
     bob_voiceunit = yao_belief.get_voice(bob_str)
     zia_voiceunit = yao_belief.get_voice(zia_str)

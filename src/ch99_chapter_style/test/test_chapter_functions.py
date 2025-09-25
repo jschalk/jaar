@@ -140,7 +140,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamed():
         "get_from_dict",
         "get_from_json",
         "get_json",
-        "get_membership",
         "get_chapter_temp_dir",
         "get_obj_key",
         "is_empty",
