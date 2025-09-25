@@ -25,7 +25,7 @@ def test_allocate_irrational_voice_debt_points_SetsBeliefAttr():
     assert zia_voiceunit.irrational_voice_debt_points == zia_voice_debt_points
 
 
-def test_generate_perspective_agenda_GrabsAgendaChores():
+def test_generate_perspective_agenda_GrabsAgendatasks():
     # ESTABLISH
     yao_str = "Yao"
     yao_speaker = beliefunit_shop(yao_str)

@@ -28,7 +28,7 @@ SELECT
 , plan_rope
 , pledge
 , active
-, chore
+, task
 FROM belief_planunit_job
 WHERE pledge == 1 AND active == 1
 ;

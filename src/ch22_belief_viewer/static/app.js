@@ -35,7 +35,7 @@ let show_moment_label = false;
 let show_pledge = false;
 let show_descendant_pledge_count = false;
 let show_active = false;
-let show_chore = false;
+let show_task = false;
 let show_star = false;
 let show_reasonunits = false;
 let show_reasonheirs = false;
@@ -100,7 +100,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_pledgeCheckbox = document.getElementById('show_pledge');
     const show_descendant_pledge_countCheckbox = document.getElementById('show_descendant_pledge_count');
     const show_activeCheckbox = document.getElementById('show_active');
-    const show_choreCheckbox = document.getElementById('show_chore');
+    const show_taskCheckbox = document.getElementById('show_task');
     const show_starCheckbox = document.getElementById('show_star');
     const show_reasonunitsCheckbox = document.getElementById('show_reasonunits');
     const show_reasonheirsCheckbox = document.getElementById('show_reasonheirs');
@@ -164,7 +164,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_pledgeCheckbox.addEventListener('change', function () { show_pledge = this.checked; renderPlanTree(); });
     show_descendant_pledge_countCheckbox.addEventListener('change', function () { show_descendant_pledge_count = this.checked; renderPlanTree(); });
     show_activeCheckbox.addEventListener('change', function () { show_active = this.checked; renderPlanTree(); });
-    show_choreCheckbox.addEventListener('change', function () { show_chore = this.checked; renderPlanTree(); });
+    show_taskCheckbox.addEventListener('change', function () { show_task = this.checked; renderPlanTree(); });
     show_starCheckbox.addEventListener('change', function () { show_star = this.checked; renderPlanTree(); });
     show_reasonunitsCheckbox.addEventListener('change', function () { show_reasonunits = this.checked; renderPlanTree(); });
     show_reasonheirsCheckbox.addEventListener('change', function () { show_reasonheirs = this.checked; renderPlanTree(); });
@@ -281,7 +281,7 @@ function renderPlanUnit(planUnit, level) {
     const pledgeIndicator = planUnit.pledge && show_pledge ? ' PLEDGE' : '';
     const descendant_pledge_countIndicator = show_descendant_pledge_count ? ` pledges: ${planUnit.descendant_pledge_count}` : '';
     const activeIndicator = planUnit.active && show_active ? '-ACTIVE' : '';
-    const choreIndicator = planUnit.chore && show_chore ? '-CHORE' : '';
+    const taskIndicator = planUnit.task && show_task ? '-task' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
     const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
@@ -313,7 +313,7 @@ function renderPlanUnit(planUnit, level) {
     ${fund_iotaIndicator}
     ${fund_ratioIndicator}
     ${activeIndicator}
-    ${choreIndicator}
+    ${taskIndicator}
     ${root_booleanIndicator}</i>
     ${render_with_indent(planUnit.voices, indent, show_voices)}
     ${render_with_indent(planUnit.parent_rope, indent, show_parent_rope)}

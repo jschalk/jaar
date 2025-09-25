@@ -17,7 +17,6 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     awardlines_str,
     awardunits_str,
     begin_str,
-    chore_str,
     close_str,
     denom_str,
     descendant_pledge_count_str,
@@ -48,6 +47,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     star_str,
     stop_calc_str,
     stop_want_str,
+    task_str,
     tree_level_str,
     uid_str,
 )

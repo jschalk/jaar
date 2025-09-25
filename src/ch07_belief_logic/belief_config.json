@@ -243,7 +243,7 @@
             }
         },
         "jvalues": {
-            "chore": {
+            "task": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
@@ -300,7 +300,7 @@
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
             },
-            "chore": {
+            "task": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"
@@ -362,7 +362,7 @@
                 "populate_by_cashout": false,
                 "sqlite_datatype": "REAL"
             },
-            "chore": {
+            "task": {
                 "class_type": "int",
                 "populate_by_cashout": true,
                 "sqlite_datatype": "INTEGER"

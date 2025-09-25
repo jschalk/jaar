@@ -14,7 +14,6 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     belief_name_str,
     belief_net_amount_str,
     belief_planunit_str,
-    chore_str,
     default_kpi_bundle_str,
     moment_kpi001_voice_nets_str,
     moment_kpi002_belief_pledges_str,
@@ -22,6 +21,7 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     moment_voice_nets_str,
     plan_rope_str,
     pledge_str,
+    task_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import populate_kpi_bundle
 

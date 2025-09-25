@@ -216,7 +216,7 @@ def get_beliefunit_with7amCleanTableReason() -> BeliefUnit:
     return sue_belief
 
 
-def get_beliefunit_1Chore_1CE0MinutesReason_1Fact() -> BeliefUnit:
+def get_beliefunit_1task_1CE0MinutesReason_1Fact() -> BeliefUnit:
     yao_belief = beliefunit_shop("Yao")
     hr_min_str = "hr"
     hr_min_plan = planunit_shop(hr_min_str)
@@ -362,7 +362,7 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
     basket_rope = yao_belief.make_rope(casa_rope, basket_str)
     b_full_rope = yao_belief.make_rope(basket_rope, b_full_str)
     b_smel_rope = yao_belief.make_rope(basket_rope, b_smel_str)
-    laundry_chore_rope = yao_belief.make_rope(casa_rope, do_laundry_str)
+    laundry_task_rope = yao_belief.make_rope(casa_rope, do_laundry_str)
     yao_belief.set_l1_plan(planunit_shop(casa_str))
     yao_belief.set_plan(planunit_shop(basket_str), casa_rope)
     yao_belief.set_plan(planunit_shop(b_full_str), basket_rope)
@@ -374,15 +374,15 @@ def get_beliefunit_laundry_example1() -> BeliefUnit:
 
     # laundry requirement
     yao_belief.edit_plan_attr(
-        laundry_chore_rope, reason_context=basket_rope, reason_case=b_full_rope
+        laundry_task_rope, reason_context=basket_rope, reason_case=b_full_rope
     )
     # laundry requirement
     yao_belief.edit_plan_attr(
-        laundry_chore_rope, reason_context=basket_rope, reason_case=b_smel_rope
+        laundry_task_rope, reason_context=basket_rope, reason_case=b_smel_rope
     )
     cali_laborunit = laborunit_shop()
     cali_laborunit.add_party(cali_str)
-    yao_belief.edit_plan_attr(laundry_chore_rope, laborunit=cali_laborunit)
+    yao_belief.edit_plan_attr(laundry_task_rope, laborunit=cali_laborunit)
     yao_belief.add_fact(fact_context=basket_rope, fact_state=b_full_rope)
 
     return yao_belief

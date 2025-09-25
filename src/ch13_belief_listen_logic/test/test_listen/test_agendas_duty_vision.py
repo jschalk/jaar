@@ -28,7 +28,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
 )
 
 
-def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_BeliefWhenNo_partyunitIsSet(
+def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_BeliefWhenNo_partyunitIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -59,7 +59,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_BeliefWhenNo_par
     assert len(new_yao_vision.get_agenda_dict()) == 2
 
 
-def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Belief(
+def test_listen_to_agenda_duty_vision_agenda_AddstasksTovision_Belief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -97,7 +97,7 @@ def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovision_Belief(
     assert len(new_yao_vision.get_agenda_dict()) == 2
 
 
-def test_listen_to_agenda_duty_vision_agenda_AddsChoresTovisionBeliefWithDetailsDecidedBy_voice_debt_points(
+def test_listen_to_agenda_duty_vision_agenda_AddstasksTovisionBeliefWithDetailsDecidedBy_voice_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -318,7 +318,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     yao_duty.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
     yao_pool = 87
     yao_duty.set_voice_respect(yao_pool)
-    # save yao without chore to dutys
+    # save yao without task to dutys
     yao_dakota_hubunit = hubunit_shop(env_dir(), a23_str, yao_str, get_dakota_rope())
     save_duty_belief(
         moment_mstr_dir=yao_dakota_hubunit.moment_mstr_dir,
@@ -341,7 +341,7 @@ def test_listen_to_agenda_duty_vision_agenda_ListensToBelief_duty_AndNotBelief_v
     cook_planunit.laborunit.add_party(yao_str)
     yao_dakota_hubunit.save_vision_belief(zia_vision)
 
-    # save yao with chore to visions
+    # save yao with task to visions
     yao_old_vision = beliefunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_rope = yao_old_vision.make_l1_rope(vacuum_str)
@@ -363,9 +363,9 @@ def test_listen_to_agenda_duty_vision_agenda_GetsAgendaFromSrcBeliefNotSpeakerSe
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    # yao_duty has chore run_rope
-    # yao_vision has chore a23_clean_rope
-    # yao_new_vision fact_states yao_duty chore run_rope and not a23_clean_rope
+    # yao_duty has task run_rope
+    # yao_vision has task a23_clean_rope
+    # yao_new_vision fact_states yao_duty task run_rope and not a23_clean_rope
     yao_duty = get_example_yao_speaker()
     assert yao_duty.plan_exists(a23_run_rope()) is False
     assert yao_duty.plan_exists(a23_clean_rope()) is False

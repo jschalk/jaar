@@ -12,11 +12,11 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     active_str,
     belief_name_str,
-    chore_str,
     moment_kpi002_belief_pledges_str,
     moment_label_str,
     plan_rope_str,
     pledge_str,
+    task_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi002_table
 
@@ -29,7 +29,7 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
     casa_rope = create_rope(a23_str, "casa")
     casa_pledge = 0
     casa_active = 0
-    casa_chore = 0
+    casa_task = 0
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -41,11 +41,11 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
 , {plan_rope_str()}
 , {pledge_str()}
 , {active_str()}
-, {chore_str()}
+, {task_str()}
 )
 VALUES 
-  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
-, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
+  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
+, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 2
@@ -63,7 +63,7 @@ VALUES
             plan_rope_str(),
             pledge_str(),
             active_str(),
-            chore_str(),
+            task_str(),
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 0
 
@@ -76,11 +76,11 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
     casa_rope = create_rope(a23_str, "casa")
     casa_pledge = 0
     casa_active = 0
-    casa_chore = 0
+    casa_task = 0
     clean_rope = create_rope(casa_rope, "clean")
     clean_pledge = 1
     clean_active = 1
-    clean_chore = 1
+    clean_task = 1
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -92,13 +92,13 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
 , {plan_rope_str()}
 , {pledge_str()}
 , {active_str()}
-, {chore_str()}
+, {task_str()}
 )
 VALUES 
-  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
-, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_chore})
-, ('{a23_str}', '{bob_str}', '{clean_rope}', {clean_pledge}, {clean_active}, {clean_chore})
-, ('{a23_str}', '{yao_str}', '{clean_rope}', {clean_pledge}, {clean_active}, {clean_chore})
+  ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
+, ('{a23_str}', '{yao_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
+, ('{a23_str}', '{bob_str}', '{clean_rope}', {clean_pledge}, {clean_active}, {clean_task})
+, ('{a23_str}', '{yao_str}', '{clean_rope}', {clean_pledge}, {clean_active}, {clean_task})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 4
@@ -116,6 +116,6 @@ VALUES
             plan_rope_str(),
             pledge_str(),
             active_str(),
-            chore_str(),
+            task_str(),
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 2

@@ -197,7 +197,7 @@ def planattrholder_shop(
 @dataclass
 class PlanUnit:
     """
-    Represents a planual unit within jaar. Can represent a pledge, a chore, a different plan's
+    Represents a planual unit within jaar. Can represent a pledge, a task, a different plan's
     reason or fact, a parent plan of other plans.
     Funds: Funds come from the parent plan and go to the child plans.
     Awards: Desribes whom the funding comes from and whome it goes to.
@@ -252,7 +252,7 @@ class PlanUnit:
     tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.
     reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
-    chore : bool describes if a unit can be changed to inactive with fact range change.
+    task : bool describes if a unit can be changed to inactive with fact range change.
     laborheir : LaborHeir parent plan provided labor relationships
     gogo_calc : float
     stop_calc : float
@@ -299,7 +299,7 @@ class PlanUnit:
     tree_level: int = None
     range_evaluated: bool = None
     reasonheirs: dict[RopeTerm, ReasonHeir] = None
-    chore: bool = None
+    task: bool = None
     laborheir: LaborHeir = None
     gogo_calc: float = None
     stop_calc: float = None
@@ -380,9 +380,9 @@ class PlanUnit:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, fact_contextunit: FactUnit):
-        # if a plan is considered a chore then a factheir.fact_lower attribute can be increased to
-        # a number <= factheir.fact_upper so the plan no longer is a chore. This method finds
-        # the minimal factheir.fact_lower to modify plan.chore is False. plan_core.factheir cannot be straight up manipulated
+        # if a plan is considered a task then a factheir.fact_lower attribute can be increased to
+        # a number <= factheir.fact_upper so the plan no longer is a task. This method finds
+        # the minimal factheir.fact_lower to modify plan.task is False. plan_core.factheir cannot be straight up manipulated
         # so it is mandatory that plan.factunit is different.
         # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=fact_upper)
         self.factunits[fact_contextunit.fact_context] = factunit_shop(
@@ -816,19 +816,19 @@ class PlanUnit:
     ):
         prev_to_now_active = deepcopy(self.active)
         self.active = self._create_active_bool(groupunits, belief_name)
-        self._set_plan_chore()
+        self._set_plan_task()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self.active)
 
-    def _set_plan_chore(self):
-        self.chore = False
+    def _set_plan_task(self):
+        self.task = False
         if self.pledge and self.active and self.reasonheirs_satisfied():
-            self.chore = True
+            self.task = True
 
     def reasonheirs_satisfied(self) -> bool:
-        return self.reasonheirs == {} or self._any_reasonheir_chore_true()
+        return self.reasonheirs == {} or self._any_reasonheir_task_true()
 
-    def _any_reasonheir_chore_true(self) -> bool:
-        return any(x_reasonheir.chore for x_reasonheir in self.reasonheirs.values())
+    def _any_reasonheir_task_true(self) -> bool:
+        return any(x_reasonheir.task for x_reasonheir in self.reasonheirs.values())
 
     def _create_active_bool(
         self,
@@ -1053,7 +1053,7 @@ def planunit_shop(
     fund_iota: FundIota = None,
     fund_onset: FundNum = None,
     fund_cease: FundNum = None,
-    chore: bool = None,
+    task: bool = None,
     active: bool = None,
     descendant_pledge_count: int = None,
     all_voice_cred: bool = None,
@@ -1100,7 +1100,7 @@ def planunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         fund_onset=fund_onset,
         fund_cease=fund_cease,
-        chore=chore,
+        task=task,
         active=active,
         descendant_pledge_count=descendant_pledge_count,
         all_voice_cred=all_voice_cred,

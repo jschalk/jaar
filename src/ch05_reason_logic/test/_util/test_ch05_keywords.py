@@ -1,7 +1,6 @@
 from src.ch05_reason_logic._ref.ch05_keywords import (
     active_str,
     cases_str,
-    chore_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
@@ -17,6 +16,7 @@ from src.ch05_reason_logic._ref.ch05_keywords import (
     reason_upper_str,
     reasonunits_str,
     status_str,
+    task_str,
 )
 
 
@@ -24,7 +24,7 @@ def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert active_str() == "active"
     assert status_str() == "status"
-    assert chore_str() == "chore"
+    assert task_str() == "task"
     assert cases_str() == "cases"
     assert moment_label_str() == "moment_label"
     assert fact_context_str() == "fact_context"

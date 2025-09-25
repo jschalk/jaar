@@ -370,7 +370,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_5_to_8_facts)
     # THEN
     assert range_3_to_6_reason.status is True
-    assert range_3_to_6_reason.chore is True
+    assert range_3_to_6_reason.task is True
 
     # WHEN
     range_5_to_6_fact = factheir_shop(wk_rope, wk_rope, fact_lower=5, fact_upper=6)
@@ -378,7 +378,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_5_to_6_facts)
     # THEN
     assert range_3_to_6_reason.status is True
-    assert range_3_to_6_reason.chore is False
+    assert range_3_to_6_reason.task is False
 
     # WHEN
     range_0_to_1_fact = factheir_shop(wk_rope, wk_rope, fact_lower=0, fact_upper=1)
@@ -386,7 +386,7 @@ def test_ReasonHeir_correctSetsPledgeState():
     range_3_to_6_reason.set_status(factheirs=range_0_to_1_facts)
     # THEN
     assert range_3_to_6_reason.status is False
-    assert range_3_to_6_reason.chore is None
+    assert range_3_to_6_reason.task is None
 
 
 def test_ReasonCore_get_cases_count():

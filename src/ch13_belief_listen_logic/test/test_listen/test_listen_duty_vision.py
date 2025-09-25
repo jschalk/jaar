@@ -260,9 +260,9 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     # yao0_gut with 3 debotors of different voice_cred_pointss
-    # yao_vision1 with 1 chore, fact that doesn't make that chore active
-    # yao_vision2 with 2 chores, one is equal fact that makes chore active
-    # yao_vision3 with 1 new chore, fact stays with it
+    # yao_vision1 with 1 task, fact that doesn't make that task active
+    # yao_vision2 with 2 tasks, one is equal fact that makes task active
+    # yao_vision3 with 1 new task, fact stays with it
     moment_mstr_dir = env_dir()
     moment_label = get_default_moment_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()

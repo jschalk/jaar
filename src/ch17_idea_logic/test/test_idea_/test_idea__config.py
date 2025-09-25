@@ -339,7 +339,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[143] == error_message_str()
     assert table_sorting_priority[144] == "_belief_name_is_labor"
     assert table_sorting_priority[145] == "active"
-    assert table_sorting_priority[146] == "chore"
+    assert table_sorting_priority[146] == "task"
     assert table_sorting_priority[147] == "status"
     assert table_sorting_priority[148] == "credor_pool"
     assert table_sorting_priority[149] == "debtor_pool"

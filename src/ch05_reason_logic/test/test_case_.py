@@ -4,13 +4,13 @@ from src.ch02_rope_logic.rope import (
     get_default_central_label as root_label,
 )
 from src.ch05_reason_logic._ref.ch05_keywords import (
-    chore_str,
     knot_str,
     reason_divisor_str,
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
     status_str,
+    task_str,
 )
 from src.ch05_reason_logic.reason import (
     CaseUnit,
@@ -36,13 +36,13 @@ def test_CaseUnit_Exists():
     assert email_case.reason_upper is None
     assert email_case.reason_divisor is None
     assert email_case.status is None
-    assert email_case.chore is None
+    assert email_case.task is None
     assert email_case.knot is None
     obj_attrs = set(email_case.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         status_str(),
-        chore_str(),
+        task_str(),
         knot_str(),
         reason_divisor_str(),
         reason_upper_str(),
@@ -507,7 +507,7 @@ def test_CaseUnit_set_status_SetsStatus_status_ScenarioClock():
     assert hr24_case.status
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhen_status_IsFalse():
+def test_CaseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -516,10 +516,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhen_status_IsFalse():
 
     # WHEN / THEN
     no_range_fact = factheir_shop(fact_context=hr24_rope, fact_state=hr24_rope)
-    assert no_range_case._get_chore_status(factheir=no_range_fact) is False
+    assert no_range_case._get_task_status(factheir=no_range_fact) is False
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_True():
+def test_CaseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -532,10 +532,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_True():
     range_7_to_41_fact = factheir_shop(
         hr24_rope, hr24_rope, fact_lower=7, fact_upper=41
     )
-    assert range_5_to_31_case._get_chore_status(range_7_to_41_fact)
+    assert range_5_to_31_case._get_task_status(range_7_to_41_fact)
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_False():
+def test_CaseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -548,10 +548,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBool_is_range_False():
     range_7_to_21_fact = factheir_shop(
         hr24_rope, hr24_rope, fact_lower=7, fact_upper=21
     )
-    assert range_5_to_31_case._get_chore_status(range_7_to_21_fact) is False
+    assert range_5_to_31_case._get_task_status(range_7_to_21_fact) is False
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_01():
+def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -562,10 +562,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_01():
 
     # WHEN / THEN
     range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=3, fact_upper=5)
-    assert o0_n0_d5_case._get_chore_status(range_3_to_5_fact) is False
+    assert o0_n0_d5_case._get_task_status(range_3_to_5_fact) is False
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_02():
+def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -576,10 +576,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateFalse_02():
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=7)
-    assert o0_n0_d5_case._get_chore_status(range_5_to_7_fact) is False
+    assert o0_n0_d5_case._get_task_status(range_5_to_7_fact) is False
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_01():
+def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -590,10 +590,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_01():
 
     # WHEN / THEN
     range_5_to_7_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=7)
-    assert o0_n0_d5_case._get_chore_status(range_5_to_7_fact)
+    assert o0_n0_d5_case._get_task_status(range_5_to_7_fact)
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_02():
+def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
     # ESTABLISH
     hr24_str = "24hr"
     hr24_rope = create_rope(root_label(), hr24_str)
@@ -604,10 +604,10 @@ def test_CaseUnit_get_chore_status_ReturnsObjWhenBoolSegregateTrue_02():
 
     # WHEN / THEN
     range_5_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=5, fact_upper=5)
-    assert o0_n0_d5_case._get_chore_status(factheir=range_5_to_5_fact) is False
+    assert o0_n0_d5_case._get_task_status(factheir=range_5_to_5_fact) is False
 
 
-def test_CaseUnit_get_chore_status_ReturnsObjNotNull():
+def test_CaseUnit_get_task_status_ReturnsObjNotNull():
     # ESTABLISH
     wk_str = "wks"
     wk_rope = create_rope(root_label(), wk_str)
@@ -620,7 +620,7 @@ def test_CaseUnit_get_chore_status_ReturnsObjNotNull():
     factheir = factheir_shop(fact_context=wk_rope, fact_state=wed_rope)
 
     # THEN
-    assert wed_case._get_chore_status(factheir=factheir) is False
+    assert wed_case._get_task_status(factheir=factheir) is False
 
 
 def test_CaseUnit_set_status_SetsAttrs_Scenario01():
@@ -631,7 +631,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
     assert range_2_to_7_case.status is None
-    assert range_2_to_7_case.chore is None
+    assert range_2_to_7_case.task is None
 
     # WHEN
     range_0_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=0, fact_upper=5)
@@ -639,7 +639,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario01():
 
     # THEN
     assert range_2_to_7_case.status
-    assert range_2_to_7_case.chore is False
+    assert range_2_to_7_case.task is False
 
 
 def test_CaseUnit_set_status_SetsAttrs_Scenario02():
@@ -656,7 +656,7 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_case.set_status(x_factheir=range_0_to_8_fact)
     # THEN
     assert range_2_to_7_case.status
-    assert range_2_to_7_case.chore
+    assert range_2_to_7_case.task
 
     # ESTABLISH
     range_3_to_5_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=3, fact_upper=5)
@@ -664,14 +664,14 @@ def test_CaseUnit_set_status_SetsAttrs_Scenario02():
     range_2_to_7_case.set_status(x_factheir=range_3_to_5_fact)
     # THEN
     assert range_2_to_7_case.status
-    assert range_2_to_7_case.chore is False
+    assert range_2_to_7_case.task is False
 
     # ESTABLISH
     range_8_to_8_fact = factheir_shop(hr24_rope, hr24_rope, fact_lower=8, fact_upper=8)
     # WHEN
     range_2_to_7_case.set_status(x_factheir=range_8_to_8_fact)
     assert range_2_to_7_case.status is False
-    assert range_2_to_7_case.chore is False
+    assert range_2_to_7_case.task is False
 
 
 def test_CaseUnit_set_status_SetsAttrs_Scenario03():

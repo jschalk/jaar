@@ -219,7 +219,7 @@ class CaseStatusFinder:
 
         return False
 
-    def get_chore_status(self) -> bool:
+    def get_task_status(self) -> bool:
         return bool(
             (
                 self.get_active()
@@ -315,7 +315,7 @@ class CaseUnit:
     reason_upper: float = None
     reason_divisor: int = None
     status: bool = None
-    chore: bool = None
+    task: bool = None
     knot: str = None
 
     def get_obj_key(self):
@@ -350,7 +350,7 @@ class CaseUnit:
 
     def set_status(self, x_factheir: FactHeir):
         self.status = self._get_active(factheir=x_factheir)
-        self.chore = self._get_chore_status(factheir=x_factheir)
+        self.task = self._get_task_status(factheir=x_factheir)
 
     def _get_active(self, factheir: FactHeir):
         x_status = None
@@ -386,10 +386,10 @@ class CaseUnit:
             and self.reason_upper is not None
         )
 
-    def _get_chore_status(self, factheir: FactHeir) -> bool:
-        x_chore = None
+    def _get_task_status(self, factheir: FactHeir) -> bool:
+        x_task = None
         if self.status and self._is_range():
-            x_chore = factheir.fact_upper > self.reason_upper
+            x_task = factheir.fact_upper > self.reason_upper
         elif self.status and self._is_segregate():
             segr_obj = casestatusfinder_shop(
                 reason_lower=self.reason_lower,
@@ -398,11 +398,11 @@ class CaseUnit:
                 fact_lower_full=factheir.fact_lower,
                 fact_upper_full=factheir.fact_upper,
             )
-            x_chore = segr_obj.get_chore_status()
+            x_task = segr_obj.get_task_status()
         elif self.status in [True, False]:
-            x_chore = False
+            x_task = False
 
-        return x_chore
+        return x_task
 
     def _get_range_segregate_status(self, factheir: FactHeir) -> bool:
         x_status = None
@@ -594,7 +594,7 @@ def reasonunit_shop(
 @dataclass
 class ReasonHeir(ReasonCore):
     status: bool = None
-    chore: bool = None
+    task: bool = None
     _reason_active_heir: bool = None
 
     def inherit_from_reasonheir(self, x_reasonunit: ReasonUnit):
@@ -637,28 +637,28 @@ class ReasonHeir(ReasonCore):
 
     def is_any_case_true(self) -> tuple[bool, bool]:
         any_case_true = False
-        any_chore_true = False
+        any_task_true = False
         for x_caseunit in self.cases.values():
             if x_caseunit.status:
                 any_case_true = True
-                if x_caseunit.chore:
-                    any_chore_true = True
-        return any_case_true, any_chore_true
+                if x_caseunit.task:
+                    any_task_true = True
+        return any_case_true, any_task_true
 
     def _set_attr_status(self, any_case_true: bool):
         self.status = any_case_true or self.is_reason_active_requisite_operational()
 
-    def _set_attr_chore(self, any_chore_true: bool):
-        self.chore = True if any_chore_true else None
-        if self.status and self.chore is None:
-            self.chore = False
+    def _set_attr_task(self, any_task_true: bool):
+        self.task = True if any_task_true else None
+        if self.status and self.task is None:
+            self.task = False
 
     def set_status(self, factheirs: dict[RopeTerm, FactHeir]):
         self.clear_status()
         self._set_case_status(self._get_fact_context(factheirs))
-        any_case_true, any_chore_true = self.is_any_case_true()
+        any_case_true, any_task_true = self.is_any_case_true()
         self._set_attr_status(any_case_true)
-        self._set_attr_chore(any_chore_true)
+        self._set_attr_task(any_task_true)
 
 
 def reasonheir_shop(
@@ -666,7 +666,7 @@ def reasonheir_shop(
     cases: dict[RopeTerm, CaseUnit] = None,
     reason_active_requisite: bool = None,
     status: bool = None,
-    chore: bool = None,
+    task: bool = None,
     _reason_active_heir: bool = None,
     knot: str = None,
 ):
@@ -675,7 +675,7 @@ def reasonheir_shop(
         cases=get_empty_dict_if_None(cases),
         reason_active_requisite=reason_active_requisite,
         status=status,
-        chore=chore,
+        task=task,
         _reason_active_heir=_reason_active_heir,
         knot=default_knot_if_None(knot),
     )

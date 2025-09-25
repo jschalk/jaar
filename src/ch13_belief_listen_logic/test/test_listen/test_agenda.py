@@ -40,7 +40,7 @@ def test_listen_to_speaker_agenda_ReturnsEqualBelief():
     assert after_yao_beliefunit == yao_beliefunit
 
 
-def test_listen_to_speaker_agenda_ReturnsSingleChoreBelief():
+def test_listen_to_speaker_agenda_ReturnsSingletaskBelief():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
@@ -75,7 +75,7 @@ def test_listen_to_speaker_agenda_ReturnsSingleChoreBelief():
     assert len(after_yao_beliefunit.get_agenda_dict()) == 1
 
 
-def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBelief():
+def test_listen_to_speaker_agenda_ReturnsLevel2taskBelief():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
@@ -115,7 +115,7 @@ def test_listen_to_speaker_agenda_ReturnsLevel2ChoreBelief():
     assert len(after_yao_beliefunit.get_agenda_dict()) == 1
 
 
-def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelief():
+def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2taskBelief():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)
@@ -173,7 +173,7 @@ def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBelief():
     assert after_fly_planunit.star == 18
 
 
-def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2ChoreBeliefWhereAnPlanUnitExistsInAdvance():
+def test_listen_to_speaker_agenda_Returns2AgendaPlansLevel2taskBeliefWhereAnPlanUnitExistsInAdvance():
     # ESTABLISH
     yao_str = "Yao"
     before_yao_beliefunit = beliefunit_shop(yao_str)

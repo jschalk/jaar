@@ -3,7 +3,6 @@ from src.ch01_data_toolbox.db_toolbox import create_insert_query
 from src.ch07_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_name_str,
-    chore_str,
     moment_label_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -13,6 +12,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     reason_state_str,
     reason_upper_str,
     status_str,
+    task_str,
 )
 from src.ch18_etl_toolbox.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
@@ -119,7 +119,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
     x_tree_level = 11
     x_range_evaluated = 12
     x_stop_calc = 13
-    x_chore = 14
+    x_task = 14
     x_addin = 15
     x_begin = 16
     x_close = 17
@@ -148,7 +148,7 @@ def test_create_blrplan_metrics_insert_sqlstr_ReturnsObj():
         "tree_level": x_tree_level,
         "range_evaluated": x_range_evaluated,
         "stop_calc": x_stop_calc,
-        "chore": x_chore,
+        "task": x_task,
         "addin": x_addin,
         "begin": x_begin,
         "close": x_close,
@@ -209,7 +209,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
     x_rope = 1
     x_reason_context = 2
     x_reason_active_requisite = 3
-    x_chore = 4
+    x_task = 4
     x_status = 5
     x__reason_active_heir = 6
     values_dict = {
@@ -218,7 +218,7 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "plan_rope": x_rope,
         reason_context_str(): x_reason_context,
         reason_active_requisite_str(): x_reason_active_requisite,
-        "chore": x_chore,
+        "task": x_task,
         "status": x_status,
         "_reason_active_heir": x__reason_active_heir,
     }
@@ -275,7 +275,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_reason_upper = 4
     x_reason_lower = 5
     x_reason_divisor = 6
-    x_chore = 7
+    x_task = 7
     x_status = 8
     values_dict = {
         moment_label_str(): x_moment_label,
@@ -286,7 +286,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         reason_upper_str(): x_reason_upper,
         reason_lower_str(): x_reason_lower,
         reason_divisor_str(): x_reason_divisor,
-        chore_str(): x_chore,
+        task_str(): x_task,
         status_str(): x_status,
     }
     # all args included in values dict

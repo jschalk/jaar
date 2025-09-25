@@ -897,8 +897,8 @@ reason_case:    {reason_case}"""
         all_plans = self._plan_dict.values()
         return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.pledge}
 
-    def set_agenda_chore_complete(self, chore_rope: RopeTerm, reason_context: RopeTerm):
-        pledge_plan = self.get_plan_obj(chore_rope)
+    def set_agenda_task_complete(self, task_rope: RopeTerm, reason_context: RopeTerm):
+        pledge_plan = self.get_plan_obj(task_rope)
         pledge_plan.set_factunit_to_complete(self.planroot.factunits[reason_context])
 
     def get_credit_ledger_debt_ledger(
@@ -1145,7 +1145,7 @@ reason_case:    {reason_case}"""
             else:
                 x_plan_obj.set_awardlines(child_awardlines)
 
-            if x_plan_obj.chore:
+            if x_plan_obj.task:
                 x_descendant_pledge_count += 1
 
             if (

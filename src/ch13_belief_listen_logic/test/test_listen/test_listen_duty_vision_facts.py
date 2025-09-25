@@ -60,7 +60,7 @@ def test_listen_to_facts_duty_vision_SetsSingleFactUnit_v1(env_dir_setup_cleanup
     assert new_yao_vision.get_missing_fact_reason_contexts().get(a23_eat_rope()) is None
 
 
-def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferentChore(
+def test_listen_to_facts_duty_vision_SetsSingleFactUnitWithDifferenttask(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

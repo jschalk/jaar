@@ -25,7 +25,6 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    chore_str,
     class_type_str,
     close_str,
     credor_pool_str,
@@ -91,6 +90,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     sum_healerunit_share_str,
     take_force_str,
     tally_str,
+    task_str,
     tree_level_str,
     tree_traverse_count_str,
     voice_cred_points_str,
@@ -319,7 +319,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         all_voice_debt_str(),
         healerunit_ratio_str(),
         tree_level_str(),
-        chore_str(),
+        task_str(),
         fund_iota_str(),
         fund_ratio_str(),
         range_evaluated_str(),
@@ -613,9 +613,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrprem, jv, status_str()) == "INTEGER"
     assert g_popcashout(cfig, blrprem, jv, status_str()) == True
 
-    assert g_class_type(cfig, blrprem, jv, chore_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, chore_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, chore_str()) == True
+    assert g_class_type(cfig, blrprem, jv, task_str()) == "int"
+    assert g_sqlitetype(cfig, blrprem, jv, task_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrprem, jv, task_str()) == True
 
     assert g_class_type(cfig, blrprem, jv, reason_divisor_str()) == "int"
     assert g_sqlitetype(cfig, blrprem, jv, reason_divisor_str()) == "INTEGER"
@@ -645,9 +645,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jv, status_str()) == "INTEGER"
     assert g_popcashout(cfig, blrreas, jv, status_str()) == True
 
-    assert g_class_type(cfig, blrreas, jv, chore_str()) == "int"
-    assert g_sqlitetype(cfig, blrreas, jv, chore_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jv, chore_str()) == True
+    assert g_class_type(cfig, blrreas, jv, task_str()) == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, task_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, task_str()) == True
 
     assert g_class_type(cfig, blrreas, jv, reason_active_requisite_str()) == "bool"
     assert g_sqlitetype(cfig, blrreas, jv, reason_active_requisite_str()) == "INTEGER"
@@ -717,9 +717,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, stop_calc_str()) == "REAL"
     assert g_popcashout(cfig, blrplan, jv, stop_calc_str()) == True
 
-    assert g_class_type(cfig, blrplan, jv, chore_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jv, chore_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jv, chore_str()) == True
+    assert g_class_type(cfig, blrplan, jv, task_str()) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, task_str()) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, task_str()) == True
 
     assert g_class_type(cfig, blrplan, jv, addin_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, addin_str()) == "REAL"
@@ -930,7 +930,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(healer_name_str()) == NameTerm_str()
     assert belief_calc_args_type_dict.get(reason_state_str()) == RopeTerm_str()
     assert belief_calc_args_type_dict.get(status_str()) == "int"
-    assert belief_calc_args_type_dict.get(chore_str()) == "int"
+    assert belief_calc_args_type_dict.get(task_str()) == "int"
     assert belief_calc_args_type_dict.get(reason_divisor_str()) == "int"
     assert belief_calc_args_type_dict.get(reason_upper_str()) == "float"
     assert belief_calc_args_type_dict.get(reason_lower_str()) == "float"

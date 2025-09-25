@@ -151,7 +151,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_pledge = 14
     x_problem_bool = 15
     x_active = 16
-    x_chore = 17
+    x_task = 17
     x_fund_iota = 18.0
     x_fund_onset = 19.0
     x_fund_cease = 20.0
@@ -180,7 +180,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.pledge = x_pledge
     x_plan.problem_bool = x_problem_bool
     x_plan.active = x_active
-    x_plan.chore = x_chore
+    x_plan.task = x_task
     x_plan.fund_iota = x_fund_iota
     x_plan.fund_onset = x_fund_onset
     x_plan.fund_cease = x_fund_cease
@@ -205,7 +205,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_plan.pledge = x_pledge
     x_plan.problem_bool = x_problem_bool
     x_plan.active = x_active
-    x_plan.chore = x_chore
+    x_plan.task = x_task
     x_plan.fund_iota = x_fund_iota
     x_plan.fund_onset = x_fund_onset
     x_plan.fund_cease = x_fund_cease
@@ -252,7 +252,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
             x_problem_bool,
             x_fund_iota,
             x_active,
-            x_chore,
+            x_task,
             x_fund_onset,
             x_fund_cease,
             x_fund_ratio,
@@ -290,13 +290,13 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
     x_rope = 3
     x_reason_context = 4
     x_reason_active_requisite = 5
-    x_chore = 6
+    x_task = 6
     x_status = 7
     x__reason_active_heir = 8
     x_reasonheir = reasonheir_shop(reason_context=x_reason_context)
     x_reasonheir.reason_context = x_reason_context
     x_reasonheir.reason_active_requisite = x_reason_active_requisite
-    x_reasonheir.chore = x_chore
+    x_reasonheir.task = x_task
     x_reasonheir.status = x_status
     x_reasonheir._reason_active_heir = x__reason_active_heir
 
@@ -321,7 +321,7 @@ def test_insert_job_blrreas_CreatesTableRowsFor_blrreas_job():
             str(x_rope),
             str(x_reason_context),
             x_reason_active_requisite,
-            x_chore,
+            x_task,
             x_status,
             x__reason_active_heir,
         )
@@ -352,14 +352,14 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
     x_reason_upper = 6.0
     x_reason_lower = 7.0
     x_reason_divisor = 8
-    x_chore = 9
+    x_task = 9
     x_status = 10
     x_caseunit = caseunit_shop(reason_state=x_reason_state)
     x_caseunit.reason_state = x_reason_state
     x_caseunit.reason_upper = x_reason_upper
     x_caseunit.reason_lower = x_reason_lower
     x_caseunit.reason_divisor = x_reason_divisor
-    x_caseunit.chore = x_chore
+    x_caseunit.task = x_task
     x_caseunit.status = x_status
 
     with sqlite3_connect(":memory:") as conn:
@@ -388,7 +388,7 @@ def test_insert_job_blrprem_CreatesTableRowsFor_blrprem_job():
             x_reason_upper,
             x_reason_lower,
             x_reason_divisor,
-            x_chore,
+            x_task,
             x_status,
         )
         expected_data = [expected_row1]

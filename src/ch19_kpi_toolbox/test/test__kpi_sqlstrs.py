@@ -4,13 +4,13 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     belief_name_str,
     belief_net_amount_str,
     belief_planunit_str,
-    chore_str,
     moment_kpi001_voice_nets_str,
     moment_kpi002_belief_pledges_str,
     moment_label_str,
     moment_voice_nets_str,
     plan_rope_str,
     pledge_str,
+    task_str,
 )
 from src.ch19_kpi_toolbox.kpi_sqlstrs import (
     get_create_kpi001_sqlstr,
@@ -62,7 +62,7 @@ SELECT
 , {plan_rope_str()}
 , {pledge_str()}
 , {active_str()}
-, {chore_str()}
+, {task_str()}
 FROM {blrplan_job}
 WHERE {pledge_str()} == 1 AND {active_str()} == 1
 ;

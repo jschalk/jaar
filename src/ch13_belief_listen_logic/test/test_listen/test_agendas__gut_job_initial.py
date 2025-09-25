@@ -27,7 +27,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
 )
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWhenNo_partyunitIsSet(
+def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWhenNo_partyunitIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -60,7 +60,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWhenNo_pa
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelief(
+def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBelief(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -96,7 +96,7 @@ def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBelief(
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_create_init_job_from_guts_AddsChoresToBeliefWithDetailsDecidedBy_voice_debt_points(
+def test_listen_to_agendas_create_init_job_from_guts_AddstasksToBeliefWithDetailsDecidedBy_voice_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH

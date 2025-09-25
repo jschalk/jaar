@@ -27,7 +27,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
 )
 
 
-def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWhenNo_partyunitIsSet(
+def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWhenNo_partyunitIsSet(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -60,7 +60,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWhenNo_partyunitIsSet
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_jobs_into_job_AddsChoresToBelief(env_dir_setup_cleanup):
+def test_listen_to_agendas_jobs_into_job_AddstasksToBelief(env_dir_setup_cleanup):
     # ESTABLISH
     moment_mstr_dir = env_dir()
     a23_str = "amy23"
@@ -95,7 +95,7 @@ def test_listen_to_agendas_jobs_into_job_AddsChoresToBelief(env_dir_setup_cleanu
     assert len(new_yao_job.get_agenda_dict()) == 2
 
 
-def test_listen_to_agendas_jobs_into_job_AddsChoresToBeliefWithDetailsDecidedBy_voice_debt_points(
+def test_listen_to_agendas_jobs_into_job_AddstasksToBeliefWithDetailsDecidedBy_voice_debt_points(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
@@ -301,7 +301,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToBelief_gut_AndNotBelief_job(
     yao_gut.add_voiceunit(zia_str, zia_voice_cred_points, zia_voice_debt_points)
     yao_pool = 87
     yao_gut.set_voice_respect(yao_pool)
-    # save yao without chore to dutys
+    # save yao without task to dutys
     save_gut_file(moment_mstr_dir, yao_gut)
 
     # Save Zia to job
@@ -316,7 +316,7 @@ def test_listen_to_agendas_jobs_into_job_ListensToBelief_gut_AndNotBelief_job(
     cook_planunit.laborunit.add_party(yao_str)
     save_job_file(moment_mstr_dir, zia_job)
 
-    # save yao with chore to dutys
+    # save yao with task to dutys
     yao_old_job = beliefunit_shop(yao_str, a23_str)
     vacuum_str = "vacuum"
     vacuum_rope = yao_old_job.make_l1_rope(vacuum_str)

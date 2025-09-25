@@ -23,4 +23,4 @@ def test_fund_graph_ShowsGraph(graphics_bool):
     x_beliefunit = get_fund_breakdown_belief()
 
     # THEN
-    fund_graph0(x_beliefunit, "Chore", graphics_bool)
+    fund_graph0(x_beliefunit, "task", graphics_bool)

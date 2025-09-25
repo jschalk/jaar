@@ -3,13 +3,13 @@ from src.ch05_reason_logic.reason import factheir_shop, factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import (
-    get_beliefunit_1Chore_1CE0MinutesReason_1Fact,
+    get_beliefunit_1task_1CE0MinutesReason_1Fact,
 )
 
 
-def test_BeliefUnit_cashout_ChangesPlanUnit_pledge_chore():
+def test_BeliefUnit_cashout_ChangesPlanUnit_pledge_task():
     # ESTABLISH
-    yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
+    yao_belief = get_beliefunit_1task_1CE0MinutesReason_1Fact()
     hr_str = "hr"
     hr_rope = yao_belief.make_l1_rope(hr_str)
 
@@ -26,7 +26,7 @@ def test_BeliefUnit_cashout_ChangesPlanUnit_pledge_chore():
         fact_context=hr_rope, fact_state=hr_rope, fact_lower=82, fact_upper=95
     )
     assert mail_plan.pledge is True
-    assert mail_plan.chore is False
+    assert mail_plan.task is False
 
     # WHEN
     yao_belief.cashout()
@@ -34,7 +34,7 @@ def test_BeliefUnit_cashout_ChangesPlanUnit_pledge_chore():
     # THEN
     mail_plan = yao_belief.get_plan_obj(mail_rope)
     assert mail_plan.pledge
-    assert mail_plan.chore
+    assert mail_plan.task
 
 
 def test_BeliefUnit_cashout_ExecutesWithRangeRootFacts():
@@ -245,9 +245,9 @@ def test_BeliefUnit_cashout_FactHeirDeletesFactUnit():
     assert swim_plan.factunits == {}
 
 
-def test_BeliefUnit_cashout_SetsChoreAsComplete():
+def test_BeliefUnit_cashout_SetstaskAsComplete():
     # ESTABLISH
-    yao_belief = get_beliefunit_1Chore_1CE0MinutesReason_1Fact()
+    yao_belief = get_beliefunit_1task_1CE0MinutesReason_1Fact()
     mail_str = "obtain mail"
     assert yao_belief is not None
     assert len(yao_belief.planroot.kids[mail_str].reasonunits) == 1
@@ -257,11 +257,11 @@ def test_BeliefUnit_cashout_SetsChoreAsComplete():
     hr_rope = yao_belief.make_l1_rope(hr_str)
     yao_belief.add_fact(hr_rope, hr_rope, fact_lower=82, fact_upper=85)
     assert mail_plan.pledge
-    assert mail_plan.chore
+    assert mail_plan.task
 
     # WHEN
     yao_belief.cashout()
 
     # THEN
     assert mail_plan.pledge
-    assert not mail_plan.chore
+    assert not mail_plan.task
