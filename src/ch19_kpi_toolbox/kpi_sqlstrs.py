@@ -1,4 +1,4 @@
-def get_moment_kpi001_voice_nets_sqlstr() -> str:
+def get_create_kpi001_sqlstr() -> str:
     """
     Returns the SQL string for creating the KPI001 voice nets table.
     """
@@ -19,16 +19,17 @@ GROUP BY moment_voice_nets.moment_label, moment_voice_nets.belief_name
 """
 
 
-def get_moment_kpi002_belief_tasks_sqlstr() -> str:
+def get_create_kpi002_sqlstr() -> str:
     return """
 CREATE TABLE moment_kpi002_belief_tasks AS
 SELECT
-  belief_planunit_job.moment_label
-, belief_planunit_job.belief_name
-, belief_planunit_job.plan_rope
-, belief_planunit_job.task
-, belief_planunit_job.active
-, belief_planunit_job.chore
+  moment_label
+, belief_name
+, plan_rope
+, task
+, active
+, chore
 FROM belief_planunit_job
+WHERE task == 1 AND active == 1
 ;
 """

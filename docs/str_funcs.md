@@ -20,7 +20,7 @@
 - ch16_translate_logic: inx_knot, inx_label, inx_name, inx_rope, inx_title, otx2inx, otx_key, otx_knot, otx_label, otx_name, otx_rope, otx_title, translate_core, translate_label, translate_name, translate_rope, translate_title, translateunit, unknown_str
 - ch17_idea_logic: allowed_crud, build_order, delete_insert, delete_insert_update, delete_update, error_message, idea_category, idea_number, insert_multiple, insert_one_time, insert_update, world_name
 - ch18_etl_toolbox: belief_net_amount, brick_agg, brick_raw, brick_valid, events_brick_agg, events_brick_valid, heard_agg, heard_raw, moment_event_time_agg, moment_ote1_agg, moment_voice_nets, sound_agg, sound_raw
-- ch19_kpi_toolbox: moment_kpi001_voice_nets, moment_kpi002_belief_tasks
+- ch19_kpi_toolbox: default_kpi_bundle, moment_kpi001_voice_nets, moment_kpi002_belief_tasks
 - ch20_world_logic: 
 - ch21_lobby_logic: lobby_id, lobby_mstr_dir, lobbys
 - ch22_belief_viewer: 

@@ -13,18 +13,18 @@ from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     task_str,
 )
 from src.ch19_kpi_toolbox.kpi_sqlstrs import (
-    get_moment_kpi001_voice_nets_sqlstr,
-    get_moment_kpi002_belief_tasks_sqlstr,
+    get_create_kpi001_sqlstr,
+    get_create_kpi002_sqlstr,
 )
 
 
-def test_get_moment_kpi001_voice_nets_sqlstr_ReturnsObj():
+def test_get_create_kpi001_sqlstr_ReturnsObj():
     # ESTABLISH
     blrplan_str = belief_planunit_str()
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN
-    kpi001_sqlstr = get_moment_kpi001_voice_nets_sqlstr()
+    kpi001_sqlstr = get_create_kpi001_sqlstr()
 
     # THEN
     expected_kpi001_sqlstr = f"""
@@ -45,25 +45,26 @@ GROUP BY {moment_voice_nets_str()}.{moment_label_str()}, {moment_voice_nets_str(
     assert kpi001_sqlstr == expected_kpi001_sqlstr
 
 
-def test_get_moment_kpi002_belief_tasks_sqlstr_ReturnsObj():
+def test_get_create_kpi002_sqlstr_ReturnsObj():
     # ESTABLISH
     blrplan_str = belief_planunit_str()
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN
-    kpi002_sqlstr = get_moment_kpi002_belief_tasks_sqlstr()
+    kpi002_sqlstr = get_create_kpi002_sqlstr()
 
     # THEN
     expected_kpi002_sqlstr = f"""
 CREATE TABLE {moment_kpi002_belief_tasks_str()} AS
 SELECT
-  {blrplan_job}.{moment_label_str()}
-, {blrplan_job}.{belief_name_str()}
-, {blrplan_job}.{plan_rope_str()}
-, {blrplan_job}.{task_str()}
-, {blrplan_job}.{active_str()}
-, {blrplan_job}.{chore_str()}
+  {moment_label_str()}
+, {belief_name_str()}
+, {plan_rope_str()}
+, {task_str()}
+, {active_str()}
+, {chore_str()}
 FROM {blrplan_job}
+WHERE {task_str()} == 1 AND {active_str()} == 1
 ;
 """
     print(expected_kpi002_sqlstr)
