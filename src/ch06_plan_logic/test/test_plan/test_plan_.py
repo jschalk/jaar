@@ -12,10 +12,9 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     awardlines_str,
     awardunits_str,
     begin_str,
-    chore_str,
     close_str,
     denom_str,
-    descendant_task_count_str,
+    descendant_pledge_count_str,
     factheirs_str,
     factunits_str,
     fund_cease_str,
@@ -36,6 +35,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     numor_str,
     parent_rope_str,
     plan_label_str,
+    pledge_str,
     problem_bool_str,
     range_evaluated_str,
     reasonheirs_str,
@@ -84,14 +84,14 @@ def test_PlanUnit_Exists():
     assert x_planunit.morph is None
     assert x_planunit.gogo_want is None
     assert x_planunit.stop_want is None
-    assert x_planunit.task is None
+    assert x_planunit.pledge is None
     assert x_planunit.problem_bool is None
     assert x_planunit.healerunit is None
     # calculated_fields
     assert x_planunit.range_evaluated is None
     assert x_planunit.gogo_calc is None
     assert x_planunit.stop_calc is None
-    assert x_planunit.descendant_task_count is None
+    assert x_planunit.descendant_pledge_count is None
     assert x_planunit.is_expanded is None
     assert x_planunit.all_voice_cred is None
     assert x_planunit.all_voice_debt is None
@@ -113,7 +113,7 @@ def test_PlanUnit_Exists():
         all_voice_debt_str(),
         awardheirs_str(),
         awardlines_str(),
-        descendant_task_count_str(),
+        descendant_pledge_count_str(),
         factheirs_str(),
         fund_cease_str(),
         fund_onset_str(),
@@ -127,7 +127,7 @@ def test_PlanUnit_Exists():
         range_evaluated_str(),
         reasonheirs_str(),
         stop_calc_str(),
-        chore_str(),
+        task_str(),
         uid_str(),
         addin_str(),
         awardunits_str(),
@@ -146,7 +146,7 @@ def test_PlanUnit_Exists():
         morph_str(),
         numor_str(),
         parent_rope_str(),
-        task_str(),
+        pledge_str(),
         problem_bool_str(),
         reasonunits_str(),
         "root",
@@ -171,9 +171,9 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.numor is None
     assert x_planunit.denom is None
     assert x_planunit.morph is None
-    assert x_planunit.task is False
+    assert x_planunit.pledge is False
     assert x_planunit.problem_bool is False
-    assert x_planunit.descendant_task_count is None
+    assert x_planunit.descendant_pledge_count is None
     assert x_planunit.awardlines == {}
     assert x_planunit.awardunits == {}
     assert x_planunit.awardheirs == {}
@@ -345,37 +345,37 @@ def test_PlanUnit_set_parent_rope_SetsAttr():
     assert ball_plan.parent_rope == sports_rope
 
 
-def test_PlanUnit_clear_descendant_task_count_ClearsAttrs():
+def test_PlanUnit_clear_descendant_pledge_count_ClearsAttrs():
     # ESTABLISH
     ball_str = "ball"
-    ball_plan = planunit_shop(ball_str, descendant_task_count=55)
-    assert ball_plan.descendant_task_count == 55
+    ball_plan = planunit_shop(ball_str, descendant_pledge_count=55)
+    assert ball_plan.descendant_pledge_count == 55
 
     # WHEN
-    ball_plan.clear_descendant_task_count()
+    ball_plan.clear_descendant_pledge_count()
 
     # THEN
-    assert ball_plan.descendant_task_count is None
+    assert ball_plan.descendant_pledge_count is None
 
 
-def test_PlanUnit_add_to_descendant_task_count_AddsToCount():
+def test_PlanUnit_add_to_descendant_pledge_count_AddsToCount():
     # ESTABLISH
     ball_str = "ball"
-    ball_plan = planunit_shop(ball_str, descendant_task_count=55)
-    ball_plan.clear_descendant_task_count()
-    assert not ball_plan.descendant_task_count
+    ball_plan = planunit_shop(ball_str, descendant_pledge_count=55)
+    ball_plan.clear_descendant_pledge_count()
+    assert not ball_plan.descendant_pledge_count
 
     # WHEN
-    ball_plan.add_to_descendant_task_count(44)
+    ball_plan.add_to_descendant_pledge_count(44)
 
     # THEN
-    assert ball_plan.descendant_task_count == 44
+    assert ball_plan.descendant_pledge_count == 44
 
     # WHEN
-    ball_plan.add_to_descendant_task_count(33)
+    ball_plan.add_to_descendant_pledge_count(33)
 
     # THEN
-    assert ball_plan.descendant_task_count == 77
+    assert ball_plan.descendant_pledge_count == 77
 
 
 def test_PlanUnit_is_math_ReturnsObj():

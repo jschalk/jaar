@@ -178,7 +178,7 @@ def listen_to_speaker_agenda(listener: BeliefUnit, speaker: BeliefUnit) -> Belie
     if listener.belief_name != speaker.belief_name:
         agenda = generate_perspective_agenda(perspective_belief)
     else:
-        agenda = list(perspective_belief.get_all_tasks().values())
+        agenda = list(perspective_belief.get_all_pledges().values())
     if len(agenda) == 0:
         return _allocate_inallocable_voice_debt_points(listener, speaker.belief_name)
     return _ingest_perspective_agenda(listener, agenda)

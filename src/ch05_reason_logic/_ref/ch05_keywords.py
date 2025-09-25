@@ -9,10 +9,6 @@ def cases_str() -> str:
     return "cases"
 
 
-def chore_str() -> str:
-    return "chore"
-
-
 def fact_context_str() -> str:
     return "fact_context"
 
@@ -71,3 +67,7 @@ def reasonunits_str() -> str:
 
 def status_str() -> str:
     return "status"
+
+
+def task_str() -> str:
+    return "task"

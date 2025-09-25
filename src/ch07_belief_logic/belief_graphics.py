@@ -43,8 +43,8 @@ def _get_color_for_planunit_trace(x_planunit: PlanUnit, mode: str) -> str:
             return "Gold"
         else:
             return "Black"
-    elif mode == "Chore":
-        return "Red" if x_planunit.task else "Pink"
+    elif mode == "task":
+        return "Red" if x_planunit.pledge else "Pink"
     elif mode == "Keep":
         if x_planunit.problem_bool and x_planunit.healerunit.any_healer_name_exists():
             return "Purple"
@@ -109,8 +109,8 @@ def _create_planunit_traces(
 
 def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_belief: BeliefUnit):
     fig_label = "Tree with lines Layout"
-    if mode == "Chore":
-        fig_label = "Plan Tree with chore plans in Red."
+    if mode == "task":
+        fig_label = "Plan Tree with task plans in Red."
     fig_label += f" (Plans: {len(x_belief._plan_dict)})"
     fig_label += f" (sum_healerunit_share: {x_belief.sum_healerunit_share})"
     fig_label += f" (keeps_justified: {x_belief.keeps_justified})"
@@ -120,7 +120,7 @@ def _update_layout_fig(x_fig: plotly_Figure, mode: str, x_belief: BeliefUnit):
 def display_plantree(
     x_belief: BeliefUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
-    """Mode can be None, Chore, Keep"""
+    """Mode can be None, task, Keep"""
 
     x_belief.cashout()
     x_fig = plotly_Figure()
@@ -424,7 +424,7 @@ def beliefunit_graph2(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Beliefs Are Made Of: Graph 1",
-                "Tasks are from Plans",
+                "Pledges are from Plans",
                 "All plans build from one",
             ],
             mode="text",
@@ -454,7 +454,7 @@ def beliefunit_graph3(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Beliefs Are Made Of: Graph 1",
-                "Tasks are from Plans",
+                "Pledges are from Plans",
                 "All plans build from one",
             ],
             mode="text",
@@ -469,12 +469,12 @@ def beliefunit_graph4(graphics_bool) -> plotly_Figure:
     # Add shapes
     base_w = 0.1
     base_h = 0.125
-    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Case against Task")
-    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Case for Task")
+    create_plan_rect(fig, base_w, base_h, 2, 0.4, 0.7, "Case against Pledge")
+    create_plan_rect(fig, base_w, base_h, 2, 0.1, 0.4, "Case for Pledge")
     create_plan_rect(fig, base_w, base_h, 1, 0, 0.1, "Plan")
-    create_plan_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Task Reason Base")
+    create_plan_rect(fig, base_w, base_h, 1, 0.1, 0.7, "Pledge Reason Base")
     create_plan_rect(fig, base_w, base_h, 0, 0, 1, "Root Plan")
-    create_plan_rect(fig, base_w, base_h, 1, 0.7, 1, "Task Itself", True)
+    create_plan_rect(fig, base_w, base_h, 1, 0.7, 1, "Pledge Itself", True)
     add_group_rect(fig, base_w, base_h, 1, 0, 1, "groups")
     add_people_rect(fig, base_w, base_h, 0, 0, 1, "people")
 
@@ -484,7 +484,7 @@ def beliefunit_graph4(graphics_bool) -> plotly_Figure:
             y=[3.75, 3.5, 3.25],
             text=[
                 "What Beliefs Are Made Of: Graph 1",
-                "Some Plans are tasks, others are reasons for tasks",
+                "Some Plans are pledges, others are reasons for pledges",
                 "All plans build from one",
             ],
             mode="text",
@@ -526,7 +526,7 @@ def fund_graph0(
     d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by star "
     d_sue1_p1 = "PlanRoot Fund ranges: Black arrows. Sum of childless Plan's funds equal planroot's fund "
     d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at VoiceUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active chores"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active tasks"
     d_sue1_p4 = f"fund_pool = {x_belief.fund_pool} "
     fig.add_trace(
         plotly_Scatter(

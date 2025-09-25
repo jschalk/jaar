@@ -1,10 +1,10 @@
 {
-    "_mode": "flatten",
-    "data": {
-        "user": {
-            "id": 1,
-            "name": "Jo"
-        },
-        "status": "active"
+  "_mode": "flatten",
+  "data": {
+    "status": "active",
+    "user": {
+      "id": 1,
+      "name": "Jo"
     }
+  }
 }

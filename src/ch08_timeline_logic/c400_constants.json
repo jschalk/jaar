@@ -1,9 +1,9 @@
 {
-    "c100_length": 52594560,
-    "c400_clean_length": 210378240,
-    "c400_leap_length": 210379680,
-    "day_length": 1440,
-    "year_length": 525600,
-    "yr4_clean_length": 2102400,
-    "yr4_leap_length": 2103840
+  "c100_length": 52594560,
+  "c400_clean_length": 210378240,
+  "c400_leap_length": 210379680,
+  "day_length": 1440,
+  "year_length": 525600,
+  "yr4_clean_length": 2102400,
+  "yr4_leap_length": 2103840
 }

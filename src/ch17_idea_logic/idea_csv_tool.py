@@ -428,7 +428,7 @@ def add_belief_to_br00028_csv(
                 if_none_str(planunit.gogo_want),
                 if_none_str(planunit.stop_want),
                 if_none_str(planunit.star),
-                if_none_str(planunit.task),
+                if_none_str(planunit.pledge),
                 if_none_str(planunit.problem_bool),
             ]
             x_csv += csv_delimiter.join(x_row)
@@ -674,7 +674,7 @@ def add_pack_to_br00028_csv(
                 if_none_str(beliefatom.jvalues.get("gogo_want")),
                 if_none_str(beliefatom.jvalues.get("stop_want")),
                 if_none_str(beliefatom.jvalues.get("star")),
-                if_none_str(beliefatom.jvalues.get("task")),
+                if_none_str(beliefatom.jvalues.get("pledge")),
                 if_none_str(beliefatom.jvalues.get("problem_bool")),
             ]
             x_csv += csv_delimiter.join(x_row)

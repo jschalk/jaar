@@ -50,7 +50,7 @@ class PlanTable(Base):
     problem_bool = Column(Integer)
     morph = Column(Integer)
     star = Column(Integer)
-    task = Column(Integer)
+    pledge = Column(Integer)
     stop_want = Column(Float)
 
 

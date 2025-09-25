@@ -81,7 +81,7 @@ def get_example_zia_speaker() -> BeliefUnit:
     zia_str = "Zia"
     a23_str = "amy23"
     zia_speaker = beliefunit_shop(zia_str, a23_str)
-    zia_speaker.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
+    zia_speaker.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     zia_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
     zia_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
     yao_str = "Yao"
@@ -100,7 +100,7 @@ def get_example_bob_speaker() -> BeliefUnit:
     bob_str = "Bob"
     a23_str = "amy23"
     bob_speaker = beliefunit_shop(bob_str, a23_str)
-    bob_speaker.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
+    bob_speaker.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     bob_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
     bob_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
     yao_str = "Yao"
@@ -125,7 +125,7 @@ def get_example_yao_speaker() -> BeliefUnit:
     yao_speaker.add_voiceunit(zia_str, voice_debt_points=36)
     yao_speaker.add_voiceunit(bob_str, voice_debt_points=48)
     yao_speaker.set_voice_respect(100)
-    yao_speaker.set_plan(planunit_shop(cook_str(), task=True), a23_casa_rope())
+    yao_speaker.set_plan(planunit_shop(cook_str(), pledge=True), a23_casa_rope())
     yao_speaker.set_plan(planunit_shop(hungry_str()), a23_eat_rope())
     yao_speaker.set_plan(planunit_shop(full_str()), a23_eat_rope())
     cook_planunit = yao_speaker.get_plan_obj(a23_cook_rope())
@@ -185,11 +185,11 @@ def get_fund_breakdown_belief() -> BeliefUnit:
     sue_belief.set_plan(planunit_shop(hun_n_str, star=30), cat_rope)
     sue_belief.set_plan(planunit_shop(hun_y_str, star=30), cat_rope)
     sue_belief.set_plan(planunit_shop(clean_str, star=30), casa_rope)
-    sue_belief.set_plan(planunit_shop(sweep_str, star=30, task=True), clean_rope)
-    sue_belief.set_plan(planunit_shop(dish_str, star=30, task=True), clean_rope)
+    sue_belief.set_plan(planunit_shop(sweep_str, star=30, pledge=True), clean_rope)
+    sue_belief.set_plan(planunit_shop(dish_str, star=30, pledge=True), clean_rope)
 
     cat_str = "cat have dinner"
-    sue_belief.set_l1_plan(planunit_shop(cat_str, star=30, task=True))
+    sue_belief.set_l1_plan(planunit_shop(cat_str, star=30, pledge=True))
 
     # week_str = "weekdays"
     # week_rope = sue_belief.make_l1_rope(week_str)

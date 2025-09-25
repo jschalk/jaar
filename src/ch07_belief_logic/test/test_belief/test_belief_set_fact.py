@@ -162,7 +162,7 @@ def test_BeliefUnit_get_rangeroot_factunits_ReturnsObjsScenario0():
     sue_belief.set_l1_plan(ziet_plan)
 
     clean_str = "clean"
-    clean_plan = planunit_shop(clean_str, task=True)
+    clean_plan = planunit_shop(clean_str, pledge=True)
     sue_belief.set_l1_plan(clean_plan)
     c_rope = sue_belief.make_l1_rope(clean_str)
     ziet_rope = sue_belief.make_l1_rope(ziet_str)

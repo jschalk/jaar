@@ -267,7 +267,7 @@ def add_traces(
 # for CaseStatusFinder tests
 def show_x(
     sought_active: bool,
-    sought_chore_status: bool,
+    sought_task_status: bool,
     x_pbsd: CaseStatusFinder,
     fig: plotly_figure,
     trace_y: float,
@@ -278,13 +278,13 @@ def show_x(
     if not graphics_bool:
         return
     sought_str = "TRUE" if sought_active else "FALSE"
-    sought_status_str = "TRUE" if sought_chore_status else "FALSE"
+    sought_status_str = "TRUE" if sought_task_status else "FALSE"
     add_traces(
         fig, x_pbsd, trace_y, showlegend, case_str, sought_str, sought_status_str, 1
     )
     if (
         x_pbsd.get_active() != sought_active
-        or x_pbsd.get_chore_status() != sought_chore_status
+        or x_pbsd.get_task_status() != sought_task_status
     ):
         fig.show()
     return 0.1
@@ -305,7 +305,7 @@ def get_fig(pd: float, graphics_bool: bool) -> plotly_figure:
         showlegend=True,
         case_str="Scenario",
         sought_str="active",
-        sought_status_str="Chore Status",
+        sought_status_str="task Status",
         reason_divisor=pd,
     )
     fig_label = "When Fact.range < reason_divisor: Case.active Checks."
@@ -337,83 +337,67 @@ def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
     caseb1_10 = casestatusfinder_shop(0.0, 0.0, pd, 0.0, 0.0)
 
     sought_active = True
-    sought_chore = True
+    sought_task = True
     linel = -0.1
-    show_x(sought_active, sought_chore, caseb1_1, fig, linel, "caseb1_1", True, graph_b)
+    show_x(sought_active, sought_task, caseb1_1, fig, linel, "caseb1_1", True, graph_b)
     assert caseb1_1.get_active() == sought_active
-    assert caseb1_1.get_chore_status() == sought_chore
+    assert caseb1_1.get_task_status() == sought_task
     sought_active = True
-    sought_chore = False
+    sought_task = False
     linel -= 0.1
-    show_x(
-        sought_active, sought_chore, caseb1_2, fig, linel, "caseb1_2", False, graph_b
-    )
+    show_x(sought_active, sought_task, caseb1_2, fig, linel, "caseb1_2", False, graph_b)
     assert caseb1_2.get_active() == sought_active
-    assert caseb1_2.get_chore_status() == sought_chore
+    assert caseb1_2.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb1_3, fig, linel, "caseb1_3", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb1_3, fig, linel, "caseb1_3", False, graph_b)
     assert caseb1_3.get_active() == sought_active
-    assert caseb1_3.get_chore_status() == sought_chore
+    assert caseb1_3.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb1_4, fig, linel, "caseb1_4", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb1_4, fig, linel, "caseb1_4", False, graph_b)
     assert caseb1_4.get_active() == sought_active
-    assert caseb1_4.get_chore_status() == sought_chore
+    assert caseb1_4.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb1_5, fig, linel, "caseb1_5", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb1_5, fig, linel, "caseb1_5", False, graph_b)
     assert caseb1_5.get_active() == sought_active
-    assert caseb1_5.get_chore_status() == sought_chore
+    assert caseb1_5.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb1_6, fig, linel, "caseb1_6", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb1_6, fig, linel, "caseb1_6", False, graph_b)
     assert caseb1_6.get_active() == sought_active
-    assert caseb1_6.get_chore_status() == sought_chore
+    assert caseb1_6.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb1_7, fig, linel, "caseb1_7", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb1_7, fig, linel, "caseb1_7", False, graph_b)
     assert caseb1_7.get_active() == sought_active
-    assert caseb1_7.get_chore_status() == sought_chore
+    assert caseb1_7.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb1_8, fig, linel, "caseb1_8", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb1_8, fig, linel, "caseb1_8", False, graph_b)
     assert caseb1_8.get_active() == sought_active
-    assert caseb1_8.get_chore_status() == sought_chore
+    assert caseb1_8.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb1_9, fig, linel, "caseb1_9", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb1_9, fig, linel, "caseb1_9", False, graph_b)
     assert caseb1_9.get_active() == sought_active
-    assert caseb1_9.get_chore_status() == sought_chore
+    assert caseb1_9.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
+    sought_task = False
     show_x(
-        sought_active, sought_chore, caseb1_10, fig, linel, "caseb1_10", False, graph_b
+        sought_active, sought_task, caseb1_10, fig, linel, "caseb1_10", False, graph_b
     )
     assert caseb1_10.get_active() == sought_active
-    assert caseb1_10.get_chore_status() == sought_chore
+    assert caseb1_10.get_task_status() == sought_task
 
     # Scenario B2
     linel -= 0.1
@@ -429,81 +413,63 @@ def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
 
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb2_1, fig, linel, "caseb2_1", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb2_1, fig, linel, "caseb2_1", False, graph_b)
     assert caseb2_1.get_active() == sought_active
-    assert caseb2_1.get_chore_status() == sought_chore
+    assert caseb2_1.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb2_2, fig, linel, "caseb2_2", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb2_2, fig, linel, "caseb2_2", False, graph_b)
     assert caseb2_2.get_active() == sought_active
-    assert caseb2_2.get_chore_status() == sought_chore
+    assert caseb2_2.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb2_3, fig, linel, "caseb2_3", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb2_3, fig, linel, "caseb2_3", False, graph_b)
     assert caseb2_3.get_active() == sought_active
-    assert caseb2_3.get_chore_status() == sought_chore
+    assert caseb2_3.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb2_4, fig, linel, "caseb2_4", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb2_4, fig, linel, "caseb2_4", False, graph_b)
     assert caseb2_4.get_active() == sought_active
-    assert caseb2_4.get_chore_status() == sought_chore
+    assert caseb2_4.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb2_5, fig, linel, "caseb2_5", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb2_5, fig, linel, "caseb2_5", False, graph_b)
     assert caseb2_5.get_active() == sought_active
-    assert caseb2_5.get_chore_status() == sought_chore
+    assert caseb2_5.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb2_6, fig, linel, "caseb2_6", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb2_6, fig, linel, "caseb2_6", False, graph_b)
     assert caseb2_6.get_active() == sought_active
-    assert caseb2_6.get_chore_status() == sought_chore
+    assert caseb2_6.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb2_7, fig, linel, "caseb2_7", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb2_7, fig, linel, "caseb2_7", False, graph_b)
     assert caseb2_7.get_active() == sought_active
-    assert caseb2_7.get_chore_status() == sought_chore
+    assert caseb2_7.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb2_8, fig, linel, "caseb2_8", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb2_8, fig, linel, "caseb2_8", False, graph_b)
     assert caseb2_8.get_active() == sought_active
-    assert caseb2_8.get_chore_status() == sought_chore
+    assert caseb2_8.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb2_9, fig, linel, "caseb2_9", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb2_9, fig, linel, "caseb2_9", False, graph_b)
     assert caseb2_9.get_active() == sought_active
-    assert caseb2_9.get_chore_status() == sought_chore
+    assert caseb2_9.get_task_status() == sought_task
 
     # Scenario B3
     linel -= 0.1
     sought_active = True
-    sought_chore = True
+    sought_task = True
     caseb3_1 = casestatusfinder_shop(0.7, 0.3, pd, 0.2, 0.5)
     caseb3_2 = casestatusfinder_shop(0.7, 0.3, pd, 0.5, 0.8)
     caseb3_3 = casestatusfinder_shop(0.7, 0.3, pd, 0.2, 0.8)
@@ -514,73 +480,57 @@ def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
     caseb3_8 = casestatusfinder_shop(0.7, 0.3, pd, 0.7, 0.7)
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb3_1, fig, linel, "caseb3_1", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb3_1, fig, linel, "caseb3_1", False, graph_b)
     assert caseb3_1.get_active() == sought_active
-    assert caseb3_1.get_chore_status() == sought_chore
+    assert caseb3_1.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_2, fig, linel, "caseb3_2", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_2, fig, linel, "caseb3_2", False, graph_b)
     assert caseb3_2.get_active() == sought_active
-    assert caseb3_2.get_chore_status() == sought_chore
+    assert caseb3_2.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_3, fig, linel, "caseb3_3", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_3, fig, linel, "caseb3_3", False, graph_b)
     assert caseb3_3.get_active() == sought_active
-    assert caseb3_3.get_chore_status() == sought_chore
+    assert caseb3_3.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_4, fig, linel, "caseb3_4", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_4, fig, linel, "caseb3_4", False, graph_b)
     assert caseb3_4.get_active() == sought_active
-    assert caseb3_4.get_chore_status() == sought_chore
+    assert caseb3_4.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_5, fig, linel, "caseb3_5", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_5, fig, linel, "caseb3_5", False, graph_b)
     assert caseb3_5.get_active() == sought_active
-    assert caseb3_5.get_chore_status() == sought_chore
+    assert caseb3_5.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_6, fig, linel, "caseb3_6", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_6, fig, linel, "caseb3_6", False, graph_b)
     assert caseb3_6.get_active() == sought_active
-    assert caseb3_6.get_chore_status() == sought_chore
+    assert caseb3_6.get_task_status() == sought_task
     linel -= 0.1
     sought_active = False
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_7, fig, linel, "caseb3_7", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_7, fig, linel, "caseb3_7", False, graph_b)
     assert caseb3_7.get_active() == sought_active
-    assert caseb3_7.get_chore_status() == sought_chore
+    assert caseb3_7.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb3_8, fig, linel, "caseb3_8", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb3_8, fig, linel, "caseb3_8", False, graph_b)
     assert caseb3_8.get_active() == sought_active
-    assert caseb3_8.get_chore_status() == sought_chore
+    assert caseb3_8.get_task_status() == sought_task
 
     # Scenario B4
     linel -= 0.1
     sought_active = True
-    sought_chore = True
+    sought_task = True
     caseb4_1 = casestatusfinder_shop(0.7, 0.3, pd, 0.6, 1.2)
     caseb4_2 = casestatusfinder_shop(0.7, 0.3, pd, 0.8, 1.4)
     caseb4_3 = casestatusfinder_shop(0.7, 0.3, pd, 0.6, 1.4)
@@ -589,52 +539,40 @@ def test_CaseStatusFinder_get_active_ReturnsObj(graphics_bool):
     caseb4_6 = casestatusfinder_shop(0.7, 0.3, pd, 0.9, 1.8)
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb4_1, fig, linel, "caseb4_1", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb4_1, fig, linel, "caseb4_1", False, graph_b)
     assert caseb4_1.get_active() == sought_active
-    assert caseb4_1.get_chore_status() == sought_chore
+    assert caseb4_1.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb4_2, fig, linel, "caseb4_2", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb4_2, fig, linel, "caseb4_2", False, graph_b)
     assert caseb4_2.get_active() == sought_active
-    assert caseb4_2.get_chore_status() == sought_chore
+    assert caseb4_2.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = True
-    show_x(
-        sought_active, sought_chore, caseb4_3, fig, linel, "caseb4_3", False, graph_b
-    )
+    sought_task = True
+    show_x(sought_active, sought_task, caseb4_3, fig, linel, "caseb4_3", False, graph_b)
     assert caseb4_3.get_active() == sought_active
-    assert caseb4_3.get_chore_status() == sought_chore
+    assert caseb4_3.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb4_4, fig, linel, "caseb4_4", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb4_4, fig, linel, "caseb4_4", False, graph_b)
     assert caseb4_4.get_active() == sought_active
-    assert caseb4_4.get_chore_status() == sought_chore
+    assert caseb4_4.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb4_5, fig, linel, "caseb4_5", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb4_5, fig, linel, "caseb4_5", False, graph_b)
     assert caseb4_5.get_active() == sought_active
-    assert caseb4_5.get_chore_status() == sought_chore
+    assert caseb4_5.get_task_status() == sought_task
     linel -= 0.1
     sought_active = True
-    sought_chore = False
-    show_x(
-        sought_active, sought_chore, caseb4_6, fig, linel, "caseb4_6", False, graph_b
-    )
+    sought_task = False
+    show_x(sought_active, sought_task, caseb4_6, fig, linel, "caseb4_6", False, graph_b)
     assert caseb4_6.get_active() == sought_active
-    assert caseb4_6.get_chore_status() == sought_chore
+    assert caseb4_6.get_task_status() == sought_task
 
     # Bottom reason_divisor line
     _add_last_trace_and_show(fig, pd, linel, graph_b)
@@ -646,7 +584,7 @@ def _add_last_trace_and_show(fig: plotly_figure, pd, linel, graphics_bool: bool)
         conditional_fig_show(fig, graphics_bool)
 
 
-def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_01():
+def test_casefactstatusdata_Calculates_active_AndtaskStatusExample_01():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
         reason_lower=1305.0,
@@ -662,16 +600,16 @@ def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_01():
     print(
         f"  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     )
-    print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
+    print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
 
     # THEN
     # assert segr_obj.fact_range_len == 9000
     # assert segr_obj.get_fact_upper_mod_div() == 200
     assert segr_obj.get_active()
-    assert segr_obj.get_chore_status()
+    assert segr_obj.get_task_status()
 
 
-def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_02():
+def test_casefactstatusdata_Calculates_active_AndtaskStatusExample_02():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
         reason_lower=1305.0,
@@ -687,14 +625,14 @@ def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_02():
     print(
         f"  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     )
-    print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
+    print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
 
     # THEN
     assert segr_obj.get_active()
-    assert segr_obj.get_chore_status()
+    assert segr_obj.get_task_status()
 
 
-def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_03():
+def test_casefactstatusdata_Calculates_active_AndtaskStatusExample_03():
     # ESTABLISH / WHEN
     segr_obj = casestatusfinder_shop(
         reason_lower=1305.0,
@@ -710,8 +648,8 @@ def test_casefactstatusdata_Calculates_active_AndChoreStatusExample_03():
     print(
         f"  {segr_obj.fact_lower_full=}  {segr_obj.fact_upper_full=} \tdifference:{segr_obj.fact_upper_full-segr_obj.fact_lower_full}"
     )
-    print(f"  {segr_obj.get_active()=}  {segr_obj.get_chore_status()=}")
+    print(f"  {segr_obj.get_active()=}  {segr_obj.get_task_status()=}")
 
     # THEN
     assert segr_obj.get_active() is False
-    assert segr_obj.get_chore_status() is False
+    assert segr_obj.get_task_status() is False

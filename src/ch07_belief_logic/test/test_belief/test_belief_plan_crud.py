@@ -124,7 +124,7 @@ def test_BeliefUnit_add_plan_SetsAttr_Scenario0():
     assert bob_beliefunit.plan_exists(casa_rope)
     casa_planunit = bob_beliefunit.get_plan_obj(casa_rope)
     assert casa_planunit.knot == bob_beliefunit.knot
-    assert not casa_planunit.task
+    assert not casa_planunit.pledge
 
 
 def test_BeliefUnit_add_plan_SetsAttr_Scenario1():
@@ -133,15 +133,15 @@ def test_BeliefUnit_add_plan_SetsAttr_Scenario1():
     bob_beliefunit = beliefunit_shop(bob_str)
     casa_rope = bob_beliefunit.make_l1_rope("casa")
     casa_star = 13
-    casa_task = True
+    casa_pledge = True
 
     # WHEN
-    bob_beliefunit.add_plan(casa_rope, star=casa_star, task=casa_task)
+    bob_beliefunit.add_plan(casa_rope, star=casa_star, pledge=casa_pledge)
 
     # THEN
     casa_planunit = bob_beliefunit.get_plan_obj(casa_rope)
     assert casa_planunit.star == casa_star
-    assert casa_planunit.task
+    assert casa_planunit.pledge
 
 
 def test_BeliefUnit_add_plan_ReturnsObj():
@@ -479,21 +479,21 @@ def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario06_is_expanded(
     assert sue_belief.planroot.kids[casa_str].is_expanded is True
 
 
-def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario07_task():
+def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario07_pledge():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    # task: dict = None,
-    sue_belief.planroot.kids[casa_str].task = "funfun3"
-    task = sue_belief.planroot.kids[casa_str].task
-    assert task == "funfun3"
+    # pledge: dict = None,
+    sue_belief.planroot.kids[casa_str].pledge = "funfun3"
+    pledge = sue_belief.planroot.kids[casa_str].pledge
+    assert pledge == "funfun3"
 
     # WHEN
-    sue_belief.edit_plan_attr(casa_rope, task=True)
+    sue_belief.edit_plan_attr(casa_rope, pledge=True)
 
     # THEN
-    assert sue_belief.planroot.kids[casa_str].task is True
+    assert sue_belief.planroot.kids[casa_str].pledge is True
 
 
 def test_BeliefUnit_edit_plan_attr_SetNestedPlanUnitAttr_Scenario08_healerunit():

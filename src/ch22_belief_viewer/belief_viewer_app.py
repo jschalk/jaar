@@ -58,10 +58,10 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_planroot"><label for="show_planroot">planroot</label>
             <input type="checkbox" id="show_level"><label for="show_level">level</label>
             <input type="checkbox" id="show_moment_label"><label for="show_moment_label">moment_label</label>
-            <input type="checkbox" id="show_task"><label for="show_task">task</label>
-            <input type="checkbox" id="show_descendant_task_count"><label for="show_descendant_task_count">descendant_task_count</label>
+            <input type="checkbox" id="show_pledge"><label for="show_pledge">pledge</label>
+            <input type="checkbox" id="show_descendant_pledge_count"><label for="show_descendant_pledge_count">descendant_pledge_count</label>
             <input type="checkbox" id="show_active"><label for="show_active">active</label>
-            <input type="checkbox" id="show_chore"><label for="show_chore">chore</label>
+            <input type="checkbox" id="show_task"><label for="show_task">task</label>
             <input type="checkbox" id="show_star"><label for="show_star">star</label>
             <input type="checkbox" id="show_fund_share"><label for="show_fund_share">fund_share</label>
             <input type="checkbox" id="show_fund_onset"><label for="show_fund_onset">fund_onset</label>

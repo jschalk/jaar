@@ -111,6 +111,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     party_title_str,
     penny_str,
     plan_rope_str,
+    pledge_str,
     quota_str,
     reason_active_requisite_str,
     reason_context_str,
@@ -122,7 +123,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     star_str,
     stop_want_str,
     take_force_str,
-    task_str,
     timeline_label_str,
     tran_time_str,
     translate_label_str,
@@ -313,7 +313,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[117] == "reason_upper"
     assert table_sorting_priority[118] == "reason_lower"
     assert table_sorting_priority[119] == "reason_divisor"
-    assert table_sorting_priority[120] == "task"
+    assert table_sorting_priority[120] == "pledge"
     assert table_sorting_priority[121] == "problem_bool"
     assert table_sorting_priority[122] == "take_force"
     assert table_sorting_priority[123] == "tally"
@@ -339,7 +339,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[143] == error_message_str()
     assert table_sorting_priority[144] == "_belief_name_is_labor"
     assert table_sorting_priority[145] == "active"
-    assert table_sorting_priority[146] == "chore"
+    assert table_sorting_priority[146] == "task"
     assert table_sorting_priority[147] == "status"
     assert table_sorting_priority[148] == "credor_pool"
     assert table_sorting_priority[149] == "debtor_pool"
@@ -358,7 +358,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[162] == "stop_calc"
     assert table_sorting_priority[163] == "tree_level"
     assert table_sorting_priority[164] == "range_evaluated"
-    assert table_sorting_priority[165] == "descendant_task_count"
+    assert table_sorting_priority[165] == "descendant_pledge_count"
     assert table_sorting_priority[166] == "healerunit_ratio"
     assert table_sorting_priority[167] == "all_voice_cred"
     assert table_sorting_priority[168] == "keeps_justified"
@@ -371,7 +371,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[175] == "tree_traverse_count"
     assert table_sorting_priority[176] == "funds"
     assert table_sorting_priority[177] == "fund_rank"
-    assert table_sorting_priority[178] == "tasks_count"
+    assert table_sorting_priority[178] == "pledges_count"
 
     assert len(table_sorting_priority) == 179
     all_args = copy_copy(atom_args)
@@ -392,7 +392,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.add(world_name_str())
     all_args.add("funds")  # kpi columns
     all_args.add("fund_rank")  # kpi columns
-    all_args.add("tasks_count")  # kpi columns
+    all_args.add("pledges_count")  # kpi columns
     assert all_args == set(table_sorting_priority)
 
     x_no_underscoore_set = {x_arg.replace("_", "") for x_arg in table_sorting_priority}
@@ -459,7 +459,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("tally") == "INTEGER"
     assert sqlite_types.get(fund_iota_str()) == "REAL"
     assert sqlite_types.get(penny_str()) == "REAL"
-    assert sqlite_types.get(task_str()) == "INTEGER"
+    assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_label_str()) == "TEXT"

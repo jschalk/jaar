@@ -673,7 +673,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     sue_belief.add_plan(dirty_fact.fact_state)
     casa_rope = sue_belief.make_l1_rope("casa")
     mop_rope = sue_belief.make_rope(casa_rope, "mop")
-    sue_belief.add_plan(mop_rope, 1, task=True)
+    sue_belief.add_plan(mop_rope, 1, pledge=True)
     sue_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     sue_belief.add_fact(
         dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True

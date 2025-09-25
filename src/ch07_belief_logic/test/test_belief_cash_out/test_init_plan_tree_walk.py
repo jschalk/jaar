@@ -37,7 +37,7 @@ def test_treemetrics_shop_ReturnsObj():
 
     # # could create tests for these methods?
     # def evaluate_label(
-    # def evaluate_task(self, task: bool, plan_rope: RopeTerm):
+    # def evaluate_pledge(self, pledge: bool, plan_rope: RopeTerm):
     # def evaluate_level(self, tree_level):
     # def evaluate_reasonunits(self, reasons: dict[RopeTerm, ReasonUnit]):
     # def evaluate_awardunits(self, awardunits: dict[GroupTitle, AwardUnit]):
@@ -153,7 +153,7 @@ def test_BeliefUnit_set_plan_CreatesPlanUnitsUsedBy_reasonunits():
     casa_rope = sue_belief.make_l1_rope("casa")
     cleaning_rope = sue_belief.make_rope(casa_rope, "cleaning")
     clean_cookery_str = "clean_cookery"
-    clean_cookery_plan = planunit_shop(clean_cookery_str, star=40, task=True)
+    clean_cookery_plan = planunit_shop(clean_cookery_str, star=40, pledge=True)
 
     buildings_str = "buildings"
     buildings_rope = sue_belief.make_l1_rope(buildings_str)

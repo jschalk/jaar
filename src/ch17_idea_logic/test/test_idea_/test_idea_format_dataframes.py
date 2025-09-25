@@ -13,8 +13,8 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     group_title_str,
     moment_label_str,
     plan_rope_str,
+    pledge_str,
     star_str,
-    task_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -157,7 +157,7 @@ def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0():
     sue_beliefunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
-    sue_beliefunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_beliefunit.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
 
     # WHEN
     x_idea_name = idea_format_00013_planunit_v0_0_0()
@@ -168,13 +168,13 @@ def test_create_idea_df_Arg_idea_format_00013_planunit_v0_0_0():
     assert array_headers == get_idearef_obj(x_idea_name).get_headers_list()
 
     assert planunit_format.loc[0, belief_name_str()] == sue_beliefunit.belief_name
-    assert planunit_format.loc[0, task_str()] == ""
+    assert planunit_format.loc[0, pledge_str()] == ""
     assert planunit_format.loc[0, moment_label_str()] == amy_moment_label
     assert planunit_format.loc[0, plan_rope_str()] == casa_rope
     assert planunit_format.loc[0, star_str()] == casa_star
 
     assert planunit_format.loc[1, belief_name_str()] == sue_beliefunit.belief_name
-    assert planunit_format.loc[1, task_str()] == "Yes"
+    assert planunit_format.loc[1, pledge_str()] == "Yes"
     assert planunit_format.loc[1, moment_label_str()] == amy_moment_label
     assert planunit_format.loc[1, plan_rope_str()] == clean_rope
     assert planunit_format.loc[1, star_str()] == 1
@@ -270,7 +270,7 @@ def test_save_idea_csv_Arg_idea_format_00013_planunit_v0_0_0(
     sue_beliefunit.set_l1_plan(planunit_shop(casa_str, star=casa_star))
     clean_str = "clean"
     clean_rope = sue_beliefunit.make_rope(casa_rope, clean_str)
-    sue_beliefunit.set_plan(planunit_shop(clean_str, task=True), casa_rope)
+    sue_beliefunit.set_plan(planunit_shop(clean_str, pledge=True), casa_rope)
     x_idea_name = idea_format_00013_planunit_v0_0_0()
     planunit_format = create_idea_df(sue_beliefunit, x_idea_name)
     name_filename = f"{sue_str}_planunit_example_000.csv"

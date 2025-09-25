@@ -54,11 +54,12 @@ def create_dimens_idea_format_dict() -> dict:
 def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     # ESTABLISH / WHEN
     dimens_idea_format_dict = create_dimens_idea_format_dict()
-    print(f"{dimens_idea_format_dict.keys()=}")
+    for idea_format in sorted(dimens_idea_format_dict.keys()):
+        print(f"{idea_format=}")
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    belief_planunit_filename = f"idea_format_00028_{belief_planunit_str()}_v0_0_0.json"
+    belief_planunit_filename = f"idea_format_00026_{belief_planunit_str()}_v0_0_0.json"
     assert dimens_idea_format_dict.get(belief_planunit_filename)
     belief_planunit_dict = dimens_idea_format_dict.get(belief_planunit_filename)
     assert belief_planunit_dict.get(dimens_str()) == [belief_planunit_str()]

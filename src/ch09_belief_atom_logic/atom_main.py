@@ -248,7 +248,7 @@ def _modify_belief_planunit_update(x_belief: BeliefUnit, x_atom: BeliefAtom):
         numor=x_atom.get_value("numor"),
         morph=x_atom.get_value("morph"),
         star=x_atom.get_value("star"),
-        task=x_atom.get_value("task"),
+        pledge=x_atom.get_value("pledge"),
     )
 
 
@@ -266,7 +266,7 @@ def _modify_belief_planunit_insert(x_belief: BeliefUnit, x_atom: BeliefAtom):
             stop_want=x_atom.get_value("stop_want"),
             denom=x_atom.get_value("denom"),
             numor=x_atom.get_value("numor"),
-            task=x_atom.get_value("task"),
+            pledge=x_atom.get_value("pledge"),
         ),
         parent_rope=plan_parent_rope,
         create_missing_plans=False,
@@ -562,7 +562,7 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.numor != y_obj.numor
             or x_obj.morph != y_obj.morph
             or x_obj.star != y_obj.star
-            or x_obj.task != y_obj.task
+            or x_obj.pledge != y_obj.pledge
         )
     elif dimen == "belief_plan_factunit":
         return (
@@ -636,7 +636,7 @@ class AtomRow:
     reason_lower: float = None
     penny: float = None
     fact_state: RopeTerm = None
-    task: bool = None
+    pledge: bool = None
     problem_bool: bool = None
     plan_rope: RopeTerm = None
     solo: int = None

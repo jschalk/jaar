@@ -8,7 +8,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     begin_str,
     close_str,
     denom_str,
-    descendant_task_count_str,
+    descendant_pledge_count_str,
     fund_cease_str,
     fund_onset_str,
     fund_ratio_str,
@@ -24,13 +24,13 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     numor_str,
     plan_label_str,
     plan_rope_str,
+    pledge_str,
     problem_bool_str,
     range_evaluated_str,
     reasonheirs_str,
     star_str,
     stop_calc_str,
     stop_want_str,
-    task_str,
     tree_level_str,
     tree_traverse_count_str,
     uid_str,
@@ -44,7 +44,7 @@ def test_str_functions_ReturnsObj():
     assert all_voice_debt_str() == "all_voice_debt"
     assert awardheirs_str() == "awardheirs"
     assert awardlines_str() == "awardlines"
-    assert descendant_task_count_str() == "descendant_task_count"
+    assert descendant_pledge_count_str() == "descendant_pledge_count"
     assert fund_cease_str() == "fund_cease"
     assert fund_onset_str() == "fund_onset"
     assert fund_ratio_str() == "fund_ratio"
@@ -69,7 +69,7 @@ def test_str_functions_ReturnsObj():
     assert star_str() == "star"
     assert morph_str() == "morph"
     assert numor_str() == "numor"
-    assert task_str() == "task"
+    assert pledge_str() == "pledge"
     assert problem_bool_str() == "problem_bool"
     assert stop_want_str() == "stop_want"
     assert healer_name_str() == "healer_name"

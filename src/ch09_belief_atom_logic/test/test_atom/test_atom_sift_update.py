@@ -36,13 +36,13 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     parent_rope_str,
     plan_label_str,
     plan_rope_str,
+    pledge_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_state_str,
     star_str,
     stop_want_str,
     take_force_str,
-    task_str,
     voice_debt_points_str,
     voice_name_str,
 )
@@ -170,7 +170,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     sue_star = 67
     sue_morph = 79
     sue_numor = 83
-    sue_task = 97
+    sue_pledge = 97
     sue_problem_bool = True
     sue_stop_want = 107
     old_casa_atom = beliefatom_shop(belief_planunit_str(), INSERT_str())
@@ -183,7 +183,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     old_casa_atom.set_arg(star_str(), sue_star)
     old_casa_atom.set_arg(morph_str(), sue_morph)
     old_casa_atom.set_arg(numor_str(), sue_numor)
-    old_casa_atom.set_arg(task_str(), sue_task)
+    old_casa_atom.set_arg(pledge_str(), sue_pledge)
     old_casa_atom.set_arg("problem_bool", sue_problem_bool)
     old_casa_atom.set_arg(stop_want_str(), sue_stop_want)
 
@@ -203,7 +203,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     assert zia_jvalues.get(star_str()) == sue_star
     assert zia_jvalues.get(morph_str()) == sue_morph
     assert zia_jvalues.get(numor_str()) == sue_numor
-    assert zia_jvalues.get(task_str()) == sue_task
+    assert zia_jvalues.get(pledge_str()) == sue_pledge
     assert zia_jvalues.get("problem_bool") == sue_problem_bool
     assert zia_jvalues.get(stop_want_str()) == sue_stop_want
 

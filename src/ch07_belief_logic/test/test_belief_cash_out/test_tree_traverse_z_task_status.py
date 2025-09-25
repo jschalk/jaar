@@ -116,10 +116,10 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
 
     wed = caseunit_shop(reason_state=wed_rope)
     wed.status = True
-    wed.chore = False
+    wed.task = False
     usa = caseunit_shop(reason_state=usa_rope)
     usa.status = True
-    usa.chore = False
+    usa.task = False
 
     wed_lu = reasonunit_shop(wk_rope, cases={wed.reason_state: wed})
     sta_lu = reasonunit_shop(nation_rope, cases={usa.reason_state: usa})
@@ -127,14 +127,14 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
         reason_context=wk_rope,
         cases={wed.reason_state: wed},
         status=True,
-        chore=False,
+        task=False,
         _reason_active_heir=True,
     )
     sta_lh = reasonheir_shop(
         reason_context=nation_rope,
         cases={usa.reason_state: usa},
         status=True,
-        chore=False,
+        task=False,
         _reason_active_heir=True,
     )
 
@@ -160,7 +160,7 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
     assert casa_plan.plan_label == casa_str
     assert casa_plan.tree_level == 1
     assert casa_plan.active
-    assert casa_plan.task
+    assert casa_plan.pledge
     # print(f"{casa_plan.reasonheirs=}")
     nation_reasonheir = casa_plan.reasonheirs[nation_rope]
     print(f"  {nation_reasonheir=}")
@@ -172,13 +172,13 @@ def test_BeliefUnit_cashout_Sets_plan_dict():
     # usa_case = wk_reasonheir.cases.get(usa_rope)
     print(f"    {casa_plan.plan_label=}")
     # print(f"    {usa_case.reason_context=}")
-    # print(f"    {usa_case.chore=}")
-    # print(f"    {usa_case.chore=}")
-    assert wk_reasonheir.chore is False
+    # print(f"    {usa_case.task=}")
+    # print(f"    {usa_case.task=}")
+    assert wk_reasonheir.task is False
     # print(f"      cases: {w=}")
     # w_state = usa_case.cases[wed_rope].reason_state
     # print(f"      {w_state=}")
-    # assert usa_case.chore == w_state.chore
+    # assert usa_case.task == w_state.task
     # assert usa_case.status == w_state.status
     # assert wk_reasonheir.cases == wk_reasonheir.cases
 
@@ -268,17 +268,17 @@ def test_BeliefUnit_cashout_CalculatesRangeAttributes():
     assert sue_beliefunit._plan_dict.get(clean_rope).active is False
 
 
-def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithSingleTask():
+def test_BeliefUnit_get_agenda_dict_ReturnsObj_WithSinglePledge():
     # ESTABLISH
     sue_beliefunit = get_beliefunit_with_4_levels_and_2reasons()
 
     # WHEN
-    task_plans = sue_beliefunit.get_agenda_dict()
+    pledge_plans = sue_beliefunit.get_agenda_dict()
 
     # THEN
-    assert task_plans is not None
-    assert len(task_plans) > 0
-    assert len(task_plans) == 1
+    assert pledge_plans is not None
+    assert len(pledge_plans) > 0
+    assert len(pledge_plans) == 1
 
 
 def test_BeliefUnit_cashout_SetsData_beliefunit_v001():
@@ -409,10 +409,10 @@ def test_BeliefUnit_cashout_OptionWeekJoursReturnsObj_beliefunit_v001():
     tue_rope = yao_beliefunit.make_rope(wk_rope, tue_str)
     mon_case_x = caseunit_shop(reason_state=mon_rope)
     mon_case_x.status = False
-    mon_case_x.chore = False
+    mon_case_x.task = False
     tue_case_x = caseunit_shop(reason_state=tue_rope)
     tue_case_x.status = False
-    tue_case_x.chore = False
+    tue_case_x.task = False
     mt_cases = {
         mon_case_x.reason_state: mon_case_x,
         tue_case_x.reason_state: tue_case_x,

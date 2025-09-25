@@ -121,7 +121,7 @@ def test_cellunit_shop_ReturnsObj_Scenario2_Withreason_contexts():
     mop_rope = sue_belief.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     sue_belief.add_plan(clean_factunit().fact_state)
-    sue_belief.add_plan(mop_rope, task=True)
+    sue_belief.add_plan(mop_rope, pledge=True)
     sue_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
 
     # WHEN
@@ -142,7 +142,7 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     mop_rope = sue_belief.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     sue_belief.add_plan(clean_factunit().fact_state)
-    sue_belief.add_plan(mop_rope, task=True)
+    sue_belief.add_plan(mop_rope, pledge=True)
     sue_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
     sue_belief.add_fact(clean_fact.fact_context, clean_fact.fact_state)
     assert len(sue_belief.get_factunits_dict()) == 1
@@ -209,7 +209,7 @@ def test_CellUnit_eval_beliefevent_SetsAttr_Scenario1():
     mop_rope = yao_belief.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     yao_belief.add_plan(clean_fact.fact_state)
-    yao_belief.add_plan(mop_rope, task=True)
+    yao_belief.add_plan(mop_rope, pledge=True)
     yao_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
     yao_belief.add_fact(
         clean_fact.fact_context, clean_fact.fact_state, create_missing_plans=True
@@ -834,7 +834,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_belief.add_plan(dirty_fact.fact_state)
     casa_rope = sue_belief.make_l1_rope("casa")
     mop_rope = sue_belief.make_rope(casa_rope, "mop")
-    sue_belief.add_plan(mop_rope, 1, task=True)
+    sue_belief.add_plan(mop_rope, 1, pledge=True)
     sue_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     sue_belief.add_fact(
         dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True
@@ -985,7 +985,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario2_boss_facts():
     mop_rope = yao_belief.make_rope(casa_rope, "mop")
     clean_fact = clean_factunit()
     yao_belief.add_plan(casa_rope, 1)
-    yao_belief.add_plan(mop_rope, 1, task=True)
+    yao_belief.add_plan(mop_rope, 1, pledge=True)
     yao_belief.add_plan(clean_fact.fact_state)
     yao_belief.add_plan(dirty_fact.fact_state)
     yao_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
@@ -1029,7 +1029,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_belief.add_plan(dirty_fact.fact_state)
     casa_rope = sue_belief.make_l1_rope("casa")
     mop_rope = sue_belief.make_rope(casa_rope, "mop")
-    sue_belief.add_plan(mop_rope, 1, task=True)
+    sue_belief.add_plan(mop_rope, 1, pledge=True)
     sue_belief.edit_reason(mop_rope, dirty_fact.fact_context, dirty_fact.fact_state)
     sue_belief.add_fact(
         dirty_fact.fact_context, dirty_fact.fact_state, create_missing_plans=True

@@ -14,7 +14,7 @@ class TreeMetrics:
     uid_max: int = None
     uid_dict: dict[int, int] = None
     all_plan_uids_are_unique: bool = None
-    last_evaluated_task_plan_rope: RopeTerm = None
+    last_evaluated_pledge_plan_rope: RopeTerm = None
 
     def evaluate_label(
         self,
@@ -22,19 +22,19 @@ class TreeMetrics:
         reasons: dict[RopeTerm, ReasonUnit],
         awardunits: dict[GroupTitle, AwardUnit],
         uid: int,
-        task: bool,
+        pledge: bool,
         plan_rope: RopeTerm,
     ):
         self.label_count += 1
-        self.evaluate_task(task=task, plan_rope=plan_rope)
+        self.evaluate_pledge(pledge=pledge, plan_rope=plan_rope)
         self.evaluate_level(tree_level=tree_level)
         self.evaluate_reasonunits(reasons=reasons)
         self.evaluate_awardunits(awardunits=awardunits)
         self.evaluate_uid_max(uid=uid)
 
-    def evaluate_task(self, task: bool, plan_rope: RopeTerm):
-        if task:
-            self.last_evaluated_task_plan_rope = plan_rope
+    def evaluate_pledge(self, pledge: bool, plan_rope: RopeTerm):
+        if pledge:
+            self.last_evaluated_pledge_plan_rope = plan_rope
 
     def evaluate_level(self, tree_level):
         if self.tree_level_count.get(tree_level) is None:

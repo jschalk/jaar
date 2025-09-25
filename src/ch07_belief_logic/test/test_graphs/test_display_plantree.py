@@ -31,7 +31,7 @@ def test_display_plantree_Scenario0(graphics_bool):
     x_fig = display_plantree(a_belief, graphics_bool)
 
 
-def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
+def test_display_plantree_Scenario1_shows_tasks(graphics_bool):
     # ESTABLISH
     # a_belief = get_1label_belief()
     # a_belief = get_2label_belief()
@@ -44,7 +44,7 @@ def test_display_plantree_Scenario1_shows_Chores(graphics_bool):
     print(f"Belief {a_belief.moment_label}: Labels ({len(a_belief._plan_dict)})")
 
     # WHEN / THEN
-    display_plantree(a_belief, mode="Chore", graphics_bool=graphics_bool)
+    display_plantree(a_belief, mode="task", graphics_bool=graphics_bool)
 
 
 def test_get_belief_voices_plotly_fig_DisplaysInfo(graphics_bool):
@@ -102,11 +102,11 @@ def test_BeliefUnit_fund_flow(graphics_bool):
     sue_belief.add_plan(hun_n_rope, star=30)
     sue_belief.add_plan(hun_y_rope, star=30)
     sue_belief.add_plan(clean_rope, star=30)
-    sue_belief.add_plan(sweep_rope, star=30, task=True)
-    sue_belief.add_plan(dish_rope, star=30, task=True)
+    sue_belief.add_plan(sweep_rope, star=30, pledge=True)
+    sue_belief.add_plan(dish_rope, star=30, pledge=True)
     dinner_str = "cat have dinner"
     dinner_rope = sue_belief.make_l1_rope(dinner_str)
-    sue_belief.add_plan(dinner_rope, star=30, task=True)
+    sue_belief.add_plan(dinner_rope, star=30, pledge=True)
 
     # WHEN / THEN
-    fund_graph0(sue_belief, "Chore", graphics_bool)
+    fund_graph0(sue_belief, "task", graphics_bool)

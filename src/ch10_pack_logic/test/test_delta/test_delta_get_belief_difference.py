@@ -38,6 +38,7 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     healer_name_str,
     party_title_str,
     plan_rope_str,
+    pledge_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_divisor_str,
@@ -47,7 +48,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     star_str,
     stop_want_str,
     take_force_str,
-    task_str,
     voice_cred_points_str,
     voice_debt_points_str,
     voice_name_str,
@@ -443,7 +443,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_inser
     amy_begin = 34
     amy_close = 78
     amy_star = 55
-    amy_task = True
+    amy_pledge = True
     amy_rope = after_sue_belief.make_l1_rope(amy45_str)
     after_sue_belief.set_l1_plan(
         planunit_shop(
@@ -451,7 +451,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_inser
             begin=amy_begin,
             close=amy_close,
             star=amy_star,
-            task=amy_task,
+            pledge=amy_pledge,
         )
     )
 
@@ -473,7 +473,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_inser
     assert ball_beliefatom.get_value(begin_str()) == amy_begin
     assert ball_beliefatom.get_value(close_str()) == amy_close
     assert ball_beliefatom.get_value(star_str()) == amy_star
-    assert ball_beliefatom.get_value(task_str()) == amy_task
+    assert ball_beliefatom.get_value(pledge_str()) == amy_pledge
 
     assert get_beliefatom_total_count(sue_beliefdelta) == 2
 
@@ -489,7 +489,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_updat
     before_amy_begin = 34
     before_amy_close = 78
     before_amy_star = 55
-    before_amy_task = True
+    before_amy_pledge = True
     amy_rope = before_sue_belief.make_l1_rope(amy45_str)
     before_sue_belief.set_l1_plan(
         planunit_shop(
@@ -497,7 +497,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_updat
             begin=before_amy_begin,
             close=before_amy_close,
             star=before_amy_star,
-            task=before_amy_task,
+            pledge=before_amy_pledge,
         )
     )
 
@@ -505,13 +505,13 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_updat
     after_amy_begin = 99
     after_amy_close = 111
     after_amy_star = 22
-    after_amy_task = False
+    after_amy_pledge = False
     after_sue_belief.edit_plan_attr(
         amy_rope,
         begin=after_amy_begin,
         close=after_amy_close,
         star=after_amy_star,
-        task=after_amy_task,
+        pledge=after_amy_pledge,
     )
 
     # WHEN
@@ -527,7 +527,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_updat
     assert ball_beliefatom.get_value(begin_str()) == after_amy_begin
     assert ball_beliefatom.get_value(close_str()) == after_amy_close
     assert ball_beliefatom.get_value(star_str()) == after_amy_star
-    assert ball_beliefatom.get_value(task_str()) == after_amy_task
+    assert ball_beliefatom.get_value(pledge_str()) == after_amy_pledge
 
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 

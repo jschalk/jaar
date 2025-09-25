@@ -1,24 +1,24 @@
 {
-    "attributes": {
-        "cumulative_day": {
-            "otx_key": true
-        },
-        "event_int": {
-            "otx_key": true
-        },
-        "face_name": {
-            "otx_key": true
-        },
-        "moment_label": {
-            "otx_key": true
-        },
-        "month_label": {
-            "otx_key": false
-        }
+  "attributes": {
+    "cumulative_day": {
+      "otx_key": true
     },
-    "idea_number": "br00004",
-    "dimens": [
-        "momentunit",
-        "moment_timeline_month"
-    ]
+    "event_int": {
+      "otx_key": true
+    },
+    "face_name": {
+      "otx_key": true
+    },
+    "moment_label": {
+      "otx_key": true
+    },
+    "month_label": {
+      "otx_key": false
+    }
+  },
+  "dimens": [
+    "momentunit",
+    "moment_timeline_month"
+  ],
+  "idea_number": "br00004"
 }

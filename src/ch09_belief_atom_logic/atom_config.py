@@ -95,7 +95,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "reason_lower": "float",
         "penny": "float",
         "fact_state": "RopeTerm",
-        "task": "bool",
+        "pledge": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
         "plan_rope": "RopeTerm",

@@ -1,48 +1,15 @@
 {
-  "belief_voice_membership": {
-    "allowed_crud": "delete_insert_update",
-    "build_order": 9,
-    "idea_category": "belief",
-    "jkeys": {
-      "voice_name": {},
-      "event_int": {},
-      "face_name": {},
-      "moment_label": {},
-      "group_title": {},
-      "belief_name": {}
-    },
-    "jvalues": {
-      "group_cred_points": {},
-      "group_debt_points": {}
-    }
-  },
-  "belief_voiceunit": {
-    "allowed_crud": "delete_insert_update",
-    "build_order": 10,
-    "idea_category": "belief",
-    "jkeys": {
-      "voice_name": {},
-      "event_int": {},
-      "face_name": {},
-      "moment_label": {},
-      "belief_name": {}
-    },
-    "jvalues": {
-      "voice_cred_points": {},
-      "voice_debt_points": {}
-    }
-  },
   "belief_plan_awardunit": {
     "allowed_crud": "delete_insert_update",
     "build_order": 11,
     "idea_category": "belief",
     "jkeys": {
       "awardee_title": {},
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
-      "belief_name": {}
+      "plan_rope": {}
     },
     "jvalues": {
       "give_force": {},
@@ -54,17 +21,17 @@
     "build_order": 12,
     "idea_category": "belief",
     "jkeys": {
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
       "fact_context": {},
       "moment_label": {},
-      "belief_name": {}
+      "plan_rope": {}
     },
     "jvalues": {
-      "fact_upper": {},
       "fact_lower": {},
-      "fact_state": {}
+      "fact_state": {},
+      "fact_upper": {}
     }
   },
   "belief_plan_healerunit": {
@@ -72,12 +39,12 @@
     "build_order": 15,
     "idea_category": "belief",
     "jkeys": {
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
-      "moment_label": {},
       "healer_name": {},
-      "belief_name": {}
+      "moment_label": {},
+      "plan_rope": {}
     },
     "jvalues": {}
   },
@@ -86,12 +53,12 @@
     "build_order": 14,
     "idea_category": "belief",
     "jkeys": {
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
       "party_title": {},
-      "belief_name": {}
+      "plan_rope": {}
     },
     "jvalues": {
       "solo": {}
@@ -102,18 +69,18 @@
     "build_order": 16,
     "idea_category": "belief",
     "jkeys": {
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
-      "belief_name": {},
-      "reason_state": {},
-      "reason_context": {}
+      "plan_rope": {},
+      "reason_context": {},
+      "reason_state": {}
     },
     "jvalues": {
       "reason_divisor": {},
-      "reason_upper": {},
-      "reason_lower": {}
+      "reason_lower": {},
+      "reason_upper": {}
     }
   },
   "belief_plan_reasonunit": {
@@ -121,11 +88,11 @@
     "build_order": 17,
     "idea_category": "belief",
     "jkeys": {
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
-      "belief_name": {},
+      "plan_rope": {},
       "reason_context": {}
     },
     "jvalues": {
@@ -137,11 +104,11 @@
     "build_order": 18,
     "idea_category": "belief",
     "jkeys": {
-      "plan_rope": {},
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
       "moment_label": {},
-      "belief_name": {}
+      "plan_rope": {}
     },
     "jvalues": {
       "addin": {},
@@ -149,12 +116,45 @@
       "close": {},
       "denom": {},
       "gogo_want": {},
-      "star": {},
       "morph": {},
       "numor": {},
-      "task": {},
+      "pledge": {},
       "problem_bool": {},
+      "star": {},
       "stop_want": {}
+    }
+  },
+  "belief_voice_membership": {
+    "allowed_crud": "delete_insert_update",
+    "build_order": 9,
+    "idea_category": "belief",
+    "jkeys": {
+      "belief_name": {},
+      "event_int": {},
+      "face_name": {},
+      "group_title": {},
+      "moment_label": {},
+      "voice_name": {}
+    },
+    "jvalues": {
+      "group_cred_points": {},
+      "group_debt_points": {}
+    }
+  },
+  "belief_voiceunit": {
+    "allowed_crud": "delete_insert_update",
+    "build_order": 10,
+    "idea_category": "belief",
+    "jkeys": {
+      "belief_name": {},
+      "event_int": {},
+      "face_name": {},
+      "moment_label": {},
+      "voice_name": {}
+    },
+    "jvalues": {
+      "voice_cred_points": {},
+      "voice_debt_points": {}
     }
   },
   "beliefunit": {
@@ -162,10 +162,10 @@
     "build_order": 19,
     "idea_category": "belief",
     "jkeys": {
+      "belief_name": {},
       "event_int": {},
       "face_name": {},
-      "moment_label": {},
-      "belief_name": {}
+      "moment_label": {}
     },
     "jvalues": {
       "credor_respect": {},
@@ -178,36 +178,36 @@
       "tally": {}
     }
   },
-  "moment_paybook": {
-    "allowed_crud": "insert_multiple",
-    "build_order": 21,
-    "idea_category": "moment",
-    "jkeys": {
-      "voice_name": {},
-      "event_int": {},
-      "face_name": {},
-      "moment_label": {},
-      "belief_name": {},
-      "tran_time": {}
-    },
-    "jvalues": {
-      "amount": {}
-    }
-  },
   "moment_budunit": {
     "allowed_crud": "insert_multiple",
     "build_order": 20,
     "idea_category": "moment",
     "jkeys": {
+      "belief_name": {},
       "bud_time": {},
       "event_int": {},
       "face_name": {},
-      "moment_label": {},
-      "belief_name": {}
+      "moment_label": {}
     },
     "jvalues": {
       "celldepth": {},
       "quota": {}
+    }
+  },
+  "moment_paybook": {
+    "allowed_crud": "insert_multiple",
+    "build_order": 21,
+    "idea_category": "moment",
+    "jkeys": {
+      "belief_name": {},
+      "event_int": {},
+      "face_name": {},
+      "moment_label": {},
+      "tran_time": {},
+      "voice_name": {}
+    },
+    "jvalues": {
+      "amount": {}
     }
   },
   "moment_timeline_hour": {
@@ -274,10 +274,10 @@
       "moment_label": {}
     },
     "jvalues": {
-      "knot": {},
       "c400_number": {},
       "fund_iota": {},
       "job_listen_rotations": {},
+      "knot": {},
       "monthday_distortion": {},
       "penny": {},
       "respect_bit": {},
@@ -317,22 +317,6 @@
       "unknown_str": {}
     }
   },
-  "translate_title": {
-    "allowed_crud": "insert_one_time",
-    "build_order": 1,
-    "idea_category": "translate",
-    "jkeys": {
-      "event_int": {},
-      "face_name": {},
-      "otx_title": {}
-    },
-    "jvalues": {
-      "inx_knot": {},
-      "inx_title": {},
-      "otx_knot": {},
-      "unknown_str": {}
-    }
-  },
   "translate_rope": {
     "allowed_crud": "insert_one_time",
     "build_order": 3,
@@ -345,6 +329,22 @@
     "jvalues": {
       "inx_knot": {},
       "inx_rope": {},
+      "otx_knot": {},
+      "unknown_str": {}
+    }
+  },
+  "translate_title": {
+    "allowed_crud": "insert_one_time",
+    "build_order": 1,
+    "idea_category": "translate",
+    "jkeys": {
+      "event_int": {},
+      "face_name": {},
+      "otx_title": {}
+    },
+    "jvalues": {
+      "inx_knot": {},
+      "inx_title": {},
       "otx_knot": {},
       "unknown_str": {}
     }

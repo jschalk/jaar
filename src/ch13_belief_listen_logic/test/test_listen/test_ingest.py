@@ -25,7 +25,7 @@ def test_allocate_irrational_voice_debt_points_SetsBeliefAttr():
     assert zia_voiceunit.irrational_voice_debt_points == zia_voice_debt_points
 
 
-def test_generate_perspective_agenda_GrabsAgendaChores():
+def test_generate_perspective_agenda_GrabsAgendatasks():
     # ESTABLISH
     yao_str = "Yao"
     yao_speaker = beliefunit_shop(yao_str)
@@ -43,7 +43,7 @@ def test_generate_perspective_agenda_GrabsAgendaChores():
     sweep_rope = yao_speaker.make_rope(casa_rope, sweep_str)
     yao_speaker.set_plan(planunit_shop(clean_str), status_rope)
     yao_speaker.set_plan(planunit_shop(dirty_str), status_rope)
-    yao_speaker.set_plan(planunit_shop(sweep_str, task=True), casa_rope)
+    yao_speaker.set_plan(planunit_shop(sweep_str, pledge=True), casa_rope)
     yao_speaker.edit_plan_attr(
         sweep_rope, reason_context=status_rope, reason_case=dirty_rope
     )
@@ -62,7 +62,7 @@ def test_generate_ingest_list_ReturnsList_v1():
     zia_str = "Zia"
     zia_beliefunit = beliefunit_shop(zia_str)
     clean_str = "clean"
-    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, task=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, pledge=True))
     zia_debtor_pool = 78
     zia_resepect_bit = 2
     assert len(zia_beliefunit.get_agenda_dict()) == 1
@@ -88,8 +88,8 @@ def test_generate_ingest_list_ReturnsList_v2():
     zia_beliefunit = beliefunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, task=True))
-    zia_beliefunit.set_l1_plan(planunit_shop(cook_str, task=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, pledge=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(cook_str, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_beliefunit.get_agenda_dict()) == 2
@@ -119,8 +119,8 @@ def test_generate_ingest_list_ReturnsList_v3():
     zia_beliefunit = beliefunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, task=True))
-    zia_beliefunit.set_l1_plan(planunit_shop(cook_str, star=3, task=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, pledge=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(cook_str, star=3, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_beliefunit.get_agenda_dict()) == 2
@@ -148,8 +148,8 @@ def test_generate_ingest_list_ReturnsList_v4():
     zia_beliefunit = beliefunit_shop(zia_str)
     clean_str = "clean"
     cook_str = "cook"
-    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, task=True))
-    zia_beliefunit.set_l1_plan(planunit_shop(cook_str, star=2, task=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(clean_str, pledge=True))
+    zia_beliefunit.set_l1_plan(planunit_shop(cook_str, star=2, pledge=True))
     zia_debtor_pool = 32
     zia_resepect_bit = 2
     assert len(zia_beliefunit.get_agenda_dict()) == 2

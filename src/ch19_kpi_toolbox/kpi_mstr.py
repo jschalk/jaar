@@ -10,30 +10,42 @@ from src.ch08_timeline_logic.calendar_markdown import get_calendarmarkdown_str
 from src.ch15_moment_logic.moment_main import get_default_path_momentunit
 from src.ch15_moment_logic.moment_timeline import get_moment_belieftimelinepoint
 from src.ch17_idea_logic.idea_db_tool import save_table_to_csv
-from src.ch19_kpi_toolbox.kpi_sqlstrs import get_moment_kpi001_voice_nets_sqlstr
+from src.ch19_kpi_toolbox.kpi_sqlstrs import (
+    get_create_kpi001_sqlstr,
+    get_create_kpi002_sqlstr,
+)
 
 
 def create_populate_kpi001_table(cursor: sqlite3_Cursor):
     cursor.execute("DROP TABLE IF EXISTS moment_kpi001_voice_nets")
-    cursor.execute(get_moment_kpi001_voice_nets_sqlstr())
+    cursor.execute(get_create_kpi001_sqlstr())
 
 
-def get_default_kpi_bundle() -> str:
-    return "default_kpi_bundle"
+def create_populate_kpi002_table(cursor: sqlite3_Cursor):
+    cursor.execute("DROP TABLE IF EXISTS moment_kpi001_voice_nets")
+    cursor.execute(get_create_kpi002_sqlstr())
 
 
 def get_all_kpi_functions() -> dict[str, set[str]]:
     """
     Returns a dict of all KPI ids and their functions.
     """
-    return {"moment_kpi001_voice_nets": create_populate_kpi001_table}
+    return {
+        "moment_kpi001_voice_nets": create_populate_kpi001_table,
+        "moment_kpi002_belief_pledges": create_populate_kpi002_table,
+    }
 
 
 def get_bundles_config() -> dict[str]:
     """
     Returns a set of all KPI strings.
     """
-    return {"default_kpi_bundle": {"moment_kpi001_voice_nets"}}
+    return {
+        "default_kpi_bundle": {
+            "moment_kpi001_voice_nets",
+            "moment_kpi002_belief_pledges",
+        }
+    }
 
 
 def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
@@ -42,7 +54,7 @@ def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
     """
     bundles_config = get_bundles_config()
     if bundle_id is None:
-        bundle_id = get_default_kpi_bundle()
+        bundle_id = "default_kpi_bundle"
 
     return bundles_config.get(bundle_id, set())
 
@@ -51,10 +63,11 @@ def populate_kpi_bundle(cursor: sqlite3_Cursor, bundle_id: str = None):
     """If bundle_id is None, create default kpis"""
 
     bundle_kpi_ids = get_kpi_set_from_bundle(bundle_id)
-    kpi_functions = get_all_kpi_functions()
     for kpi_id in bundle_kpi_ids:
         if kpi_id == "moment_kpi001_voice_nets":
             create_populate_kpi001_table(cursor)
+        if kpi_id == "moment_kpi002_belief_pledges":
+            create_populate_kpi002_table(cursor)
 
 
 def create_kpi_csvs(db_path: str, dst_dir: str):

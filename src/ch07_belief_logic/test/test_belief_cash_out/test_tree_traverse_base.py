@@ -86,33 +86,33 @@ def test_BeliefUnit_cashout_ClearsDescendantAttributes():
     mon_str = "Mon"
     mon_rope = sue_belief.make_rope(wk_rope, mon_str)
     mon_plan = sue_belief.get_plan_obj(mon_rope)
-    assert sue_belief.planroot.descendant_task_count is None
+    assert sue_belief.planroot.descendant_pledge_count is None
     assert sue_belief.planroot.all_voice_cred is None
     assert sue_belief.planroot.all_voice_debt is None
-    assert casa_plan.descendant_task_count is None
+    assert casa_plan.descendant_pledge_count is None
     assert casa_plan.all_voice_cred is None
     assert casa_plan.all_voice_debt is None
-    assert mon_plan.descendant_task_count is None
+    assert mon_plan.descendant_pledge_count is None
     assert mon_plan.all_voice_cred is None
     assert mon_plan.all_voice_debt is None
 
-    sue_belief.planroot.descendant_task_count = -2
+    sue_belief.planroot.descendant_pledge_count = -2
     sue_belief.planroot.all_voice_cred = -2
     sue_belief.planroot.all_voice_debt = -2
-    casa_plan.descendant_task_count = -2
+    casa_plan.descendant_pledge_count = -2
     casa_plan.all_voice_cred = -2
     casa_plan.all_voice_debt = -2
-    mon_plan.descendant_task_count = -2
+    mon_plan.descendant_pledge_count = -2
     mon_plan.all_voice_cred = -2
     mon_plan.all_voice_debt = -2
 
-    assert sue_belief.planroot.descendant_task_count == -2
+    assert sue_belief.planroot.descendant_pledge_count == -2
     assert sue_belief.planroot.all_voice_cred == -2
     assert sue_belief.planroot.all_voice_debt == -2
-    assert casa_plan.descendant_task_count == -2
+    assert casa_plan.descendant_pledge_count == -2
     assert casa_plan.all_voice_cred == -2
     assert casa_plan.all_voice_debt == -2
-    assert mon_plan.descendant_task_count == -2
+    assert mon_plan.descendant_pledge_count == -2
     assert mon_plan.all_voice_cred == -2
     assert mon_plan.all_voice_debt == -2
 
@@ -120,9 +120,9 @@ def test_BeliefUnit_cashout_ClearsDescendantAttributes():
     sue_belief.cashout()
 
     # THEN
-    assert sue_belief.planroot.descendant_task_count == 2
-    assert casa_plan.descendant_task_count == 0
-    assert mon_plan.descendant_task_count == 0
+    assert sue_belief.planroot.descendant_pledge_count == 2
+    assert casa_plan.descendant_pledge_count == 0
+    assert mon_plan.descendant_pledge_count == 0
 
     assert mon_plan.all_voice_cred is True
     assert mon_plan.all_voice_debt is True
@@ -135,7 +135,7 @@ def test_BeliefUnit_cashout_ClearsDescendantAttributes():
 def test_BeliefUnit_cashout_RootOnlySetsDescendantAttributes():
     # ESTABLISH
     yao_belief = beliefunit_shop(belief_name="Yao")
-    assert yao_belief.planroot.descendant_task_count is None
+    assert yao_belief.planroot.descendant_pledge_count is None
     assert yao_belief.planroot.all_voice_cred is None
     assert yao_belief.planroot.all_voice_debt is None
 
@@ -143,7 +143,7 @@ def test_BeliefUnit_cashout_RootOnlySetsDescendantAttributes():
     yao_belief.cashout()
 
     # THEN
-    assert yao_belief.planroot.descendant_task_count == 0
+    assert yao_belief.planroot.descendant_pledge_count == 0
     assert yao_belief.planroot.all_voice_cred is True
     assert yao_belief.planroot.all_voice_debt is True
 
@@ -162,19 +162,19 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_1():
     mon_plan = sue_belief.get_plan_obj(mon_rope)
 
     email_str = "email"
-    email_plan = planunit_shop(email_str, task=True)
+    email_plan = planunit_shop(email_str, pledge=True)
     sue_belief.set_plan(email_plan, parent_rope=casa_rope)
 
     # test root status:
     root_rope = to_rope(sue_belief.moment_label)
     x_planroot = sue_belief.get_plan_obj(root_rope)
-    assert x_planroot.descendant_task_count is None
+    assert x_planroot.descendant_pledge_count is None
     assert x_planroot.all_voice_cred is None
     assert x_planroot.all_voice_debt is None
-    assert casa_plan.descendant_task_count is None
+    assert casa_plan.descendant_pledge_count is None
     assert casa_plan.all_voice_cred is None
     assert casa_plan.all_voice_debt is None
-    assert mon_plan.descendant_task_count is None
+    assert mon_plan.descendant_pledge_count is None
     assert mon_plan.all_voice_cred is None
     assert mon_plan.all_voice_debt is None
 
@@ -182,10 +182,10 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_1():
     sue_belief.cashout()
 
     # THEN
-    assert x_planroot.descendant_task_count == 3
-    assert casa_plan.descendant_task_count == 1
-    assert casa_plan.kids[email_str].descendant_task_count == 0
-    assert mon_plan.descendant_task_count == 0
+    assert x_planroot.descendant_pledge_count == 3
+    assert casa_plan.descendant_pledge_count == 1
+    assert casa_plan.kids[email_str].descendant_pledge_count == 0
+    assert mon_plan.descendant_pledge_count == 0
     assert x_planroot.all_voice_cred is True
     assert x_planroot.all_voice_debt is True
     assert casa_plan.all_voice_cred is True
@@ -207,9 +207,9 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_2():
     sue_str = "Sue"
 
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    email_plan = planunit_shop(email_str, task=True)
+    email_plan = planunit_shop(email_str, pledge=True)
     sue_belief.set_plan(email_plan, parent_rope=casa_rope)
-    vacuum_plan = planunit_shop(vacuum_str, task=True)
+    vacuum_plan = planunit_shop(vacuum_str, pledge=True)
     sue_belief.set_plan(vacuum_plan, parent_rope=casa_rope)
 
     sue_belief.add_voiceunit(voice_name=sue_str)

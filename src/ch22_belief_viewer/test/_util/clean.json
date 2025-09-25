@@ -1,11 +1,11 @@
 {
-    "_mode": "clean",
-    "data": {
-        "name": "Example",
-        "description": "",
-        "tags": [],
-        "metadata": {},
-        "status": null,
-        "valid": true
-    }
+  "_mode": "clean",
+  "data": {
+    "description": "",
+    "metadata": {},
+    "name": "Example",
+    "status": null,
+    "tags": [],
+    "valid": true
+  }
 }

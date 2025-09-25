@@ -9,7 +9,7 @@
 - [`br00006`](ideas/br00006.md): event_int, face_name, moment_label, offi_time
 - [`br00011`](ideas/br00011.md): event_int, face_name, moment_label, belief_name, voice_name
 - [`br00012`](ideas/br00012.md): event_int, face_name, moment_label, belief_name, voice_name, group_title
-- [`br00013`](ideas/br00013.md): event_int, face_name, moment_label, belief_name, plan_rope, star, task
+- [`br00013`](ideas/br00013.md): event_int, face_name, moment_label, belief_name, plan_rope, star, pledge
 - [`br00019`](ideas/br00019.md): event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want
 - [`br00020`](ideas/br00020.md): event_int, face_name, moment_label, belief_name, voice_name, group_title, group_cred_points, group_debt_points
 - [`br00021`](ideas/br00021.md): event_int, face_name, moment_label, belief_name, voice_name, voice_cred_points, voice_debt_points
@@ -19,7 +19,7 @@
 - [`br00025`](ideas/br00025.md): event_int, face_name, moment_label, belief_name, plan_rope, healer_name
 - [`br00026`](ideas/br00026.md): event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor
 - [`br00027`](ideas/br00027.md): event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite
-- [`br00028`](ideas/br00028.md): event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, task, problem_bool
+- [`br00028`](ideas/br00028.md): event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool
 - [`br00029`](ideas/br00029.md): event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
 - [`br00036`](ideas/br00036.md): event_int, face_name, moment_label, belief_name, plan_rope, healer_name, problem_bool
 - [`br00042`](ideas/br00042.md): event_int, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str

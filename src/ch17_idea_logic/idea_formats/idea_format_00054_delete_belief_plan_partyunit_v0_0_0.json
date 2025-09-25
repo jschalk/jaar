@@ -1,29 +1,29 @@
 {
-    "attributes": {
-        "event_int": {
-            "otx_key": true
-        },
-        "face_name": {
-            "otx_key": true
-        },
-        "moment_label": {
-            "otx_key": true
-        },
-        "plan_rope": {
-            "otx_key": true
-        },
-        "belief_name": {
-            "otx_key": true
-        },
-        "party_title_ERASE": {
-            "otx_key": true
-        }
+  "attributes": {
+    "belief_name": {
+      "otx_key": true
     },
-    "idea_number": "br00054",
-    "dimens": [
-        "momentunit",
-        "beliefunit",
-        "belief_planunit",
-        "belief_plan_partyunit"
-    ]
+    "event_int": {
+      "otx_key": true
+    },
+    "face_name": {
+      "otx_key": true
+    },
+    "moment_label": {
+      "otx_key": true
+    },
+    "party_title_ERASE": {
+      "otx_key": true
+    },
+    "plan_rope": {
+      "otx_key": true
+    }
+  },
+  "dimens": [
+    "momentunit",
+    "beliefunit",
+    "belief_planunit",
+    "belief_plan_partyunit"
+  ],
+  "idea_number": "br00054"
 }

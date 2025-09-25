@@ -112,7 +112,7 @@ class PlanAttrHolder:
     numor: float = None
     denom: float = None
     morph: bool = None
-    task: bool = None
+    pledge: bool = None
     factunit: FactUnit = None
     awardunit: AwardUnit = None
     awardunit_del: GroupTitle = None
@@ -156,7 +156,7 @@ def planattrholder_shop(
     numor: float = None,
     denom: float = None,
     morph: bool = None,
-    task: bool = None,
+    pledge: bool = None,
     factunit: FactUnit = None,
     awardunit: AwardUnit = None,
     awardunit_del: GroupTitle = None,
@@ -185,7 +185,7 @@ def planattrholder_shop(
         numor=numor,
         denom=denom,
         morph=morph,
-        task=task,
+        pledge=pledge,
         factunit=factunit,
         awardunit=awardunit,
         awardunit_del=awardunit_del,
@@ -197,13 +197,13 @@ def planattrholder_shop(
 @dataclass
 class PlanUnit:
     """
-    Represents a planual unit within jaar. Can represent a task, a chore, a different plan's
+    Represents a planual unit within jaar. Can represent a pledge, a task, a different plan's
     reason or fact, a parent plan of other plans.
     Funds: Funds come from the parent plan and go to the child plans.
     Awards: Desribes whom the funding comes from and whome it goes to.
-    Tasks: A plan can declare itself a task. It can be active or not active.
-      Task Reason: A plan can require that all reasons be active to be active. (No reasons=active)
-      Task Fact: Each reason checks facts to determine if it is active.
+    Pledges: A plan can declare itself a pledge. It can be active or not active.
+      Pledge Reason: A plan can require that all reasons be active to be active. (No reasons=active)
+      Pledge Fact: Each reason checks facts to determine if it is active.
 
 
     funding, and hierarchical relationships.
@@ -221,7 +221,7 @@ class PlanUnit:
     uid : int Unique identifier, forgot how I use this.
     awardunits : dict[GroupTitle, AwardUnit] that describe who funds and who is funded
     reasonunits : dict[RopeTerm, ReasonUnit] that stores all reasons
-    laborunit : LaborUnit that describes whom this task is for
+    laborunit : LaborUnit that describes whom this pledge is for
     factunits : dict[RopeTerm, FactUnit] that stores all facts
     healerunit : HealerUnit, if a ancestor plan is a problem, this can donote a healing plan.
     begin : float that describes the begin of a numberical range if it exists
@@ -232,17 +232,17 @@ class PlanUnit:
     morph : bool that describes how to change parent range in calculations.
     gogo_want : bool
     stop_want : bool
-    task : bool that describes if the plan is a task.
+    pledge : bool that describes if the plan is a pledge.
     problem_bool : bool that describes if the plan is a problem.
     is_expanded : bool flag for whether the plan is expanded.
 
-    active : bool that describes if the plan task is active, calculated by MomentUnit.
+    active : bool that describes if the plan pledge is active, calculated by MomentUnit.
     active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
     all_voice_cred : bool Flag indicating there are not explicitley defined awardunits
     all_voice_debt : bool Flag indicating there are not explicitley defined awardunits
     awardheirs : dict[GroupTitle, AwardHeir] parent plan provided awards.
     awardlines : dict[GroupTitle, AwardLine] child plan provided awards.
-    descendant_task_count : int Count of descendant plans marked as tasks.
+    descendant_pledge_count : int Count of descendant plans marked as pledges.
     factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
@@ -252,7 +252,7 @@ class PlanUnit:
     tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.
     reasonheirs : dict[RopeTerm, ReasonHeir] parent plan provided reasoning branches.
-    chore : bool describes if a unit can be changed to inactive with fact range change.
+    task : bool describes if a unit can be changed to inactive with fact range change.
     laborheir : LaborHeir parent plan provided labor relationships
     gogo_calc : float
     stop_calc : float
@@ -278,7 +278,7 @@ class PlanUnit:
     morph: bool = None
     gogo_want: float = None
     stop_want: float = None
-    task: bool = None
+    pledge: bool = None
     problem_bool: bool = None
     knot: str = None
     is_expanded: bool = None
@@ -289,7 +289,7 @@ class PlanUnit:
     all_voice_debt: bool = None
     awardheirs: dict[GroupTitle, AwardHeir] = None
     awardlines: dict[GroupTitle, AwardLine] = None
-    descendant_task_count: int = None
+    descendant_pledge_count: int = None
     factheirs: dict[RopeTerm, FactHeir] = None
     fund_ratio: float = None
     fund_iota: FundIota = None
@@ -299,7 +299,7 @@ class PlanUnit:
     tree_level: int = None
     range_evaluated: bool = None
     reasonheirs: dict[RopeTerm, ReasonHeir] = None
-    chore: bool = None
+    task: bool = None
     laborheir: LaborHeir = None
     gogo_calc: float = None
     stop_calc: float = None
@@ -308,7 +308,7 @@ class PlanUnit:
         reason_context_reasonunit_exists = self.reason_context_reasonunit_exists(
             necessary_reason_context
         )
-        return self.task and self.active and reason_context_reasonunit_exists
+        return self.pledge and self.active and reason_context_reasonunit_exists
 
     def reason_context_reasonunit_exists(
         self, necessary_reason_context: RopeTerm = None
@@ -380,9 +380,9 @@ class PlanUnit:
         return get_dict_from_factunits(self.factunits)
 
     def set_factunit_to_complete(self, fact_contextunit: FactUnit):
-        # if a plan is considered a chore then a factheir.fact_lower attribute can be increased to
-        # a number <= factheir.fact_upper so the plan no longer is a chore. This method finds
-        # the minimal factheir.fact_lower to modify plan.chore is False. plan_core.factheir cannot be straight up manipulated
+        # if a plan is considered a task then a factheir.fact_lower attribute can be increased to
+        # a number <= factheir.fact_upper so the plan no longer is a task. This method finds
+        # the minimal factheir.fact_lower to modify plan.task is False. plan_core.factheir cannot be straight up manipulated
         # so it is mandatory that plan.factunit is different.
         # self.set_factunits(reason_context=fact, fact=reason_context, reason_lower=reason_upper, reason_upper=fact_upper)
         self.factunits[fact_contextunit.fact_context] = factunit_shop(
@@ -444,16 +444,16 @@ class PlanUnit:
         else:
             return create_rope(self.parent_rope, self.plan_label, knot=self.knot)
 
-    def clear_descendant_task_count(self):
-        self.descendant_task_count = None
+    def clear_descendant_pledge_count(self):
+        self.descendant_pledge_count = None
 
-    def set_descendant_task_count_zero_if_None(self):
-        if self.descendant_task_count is None:
-            self.descendant_task_count = 0
+    def set_descendant_pledge_count_zero_if_None(self):
+        if self.descendant_pledge_count is None:
+            self.descendant_pledge_count = 0
 
-    def add_to_descendant_task_count(self, x_int: int):
-        self.set_descendant_task_count_zero_if_None()
-        self.descendant_task_count += x_int
+    def add_to_descendant_pledge_count(self, x_int: int):
+        self.set_descendant_pledge_count_zero_if_None()
+        self.descendant_pledge_count += x_int
 
     def get_descendant_ropes_from_kids(self) -> dict[RopeTerm, int]:
         descendant_ropes = {}
@@ -646,8 +646,8 @@ class PlanUnit:
             self.del_awardunit(awardee_title=plan_attr.awardunit_del)
         if plan_attr.is_expanded is not None:
             self.is_expanded = plan_attr.is_expanded
-        if plan_attr.task is not None:
-            self.task = plan_attr.task
+        if plan_attr.pledge is not None:
+            self.pledge = plan_attr.pledge
         if plan_attr.factunit is not None:
             self.set_factunit(plan_attr.factunit)
         if plan_attr.problem_bool is not None:
@@ -816,19 +816,19 @@ class PlanUnit:
     ):
         prev_to_now_active = deepcopy(self.active)
         self.active = self._create_active_bool(groupunits, belief_name)
-        self._set_plan_chore()
+        self._set_plan_task()
         self.record_active_hx(tree_traverse_count, prev_to_now_active, self.active)
 
-    def _set_plan_chore(self):
-        self.chore = False
-        if self.task and self.active and self.reasonheirs_satisfied():
-            self.chore = True
+    def _set_plan_task(self):
+        self.task = False
+        if self.pledge and self.active and self.reasonheirs_satisfied():
+            self.task = True
 
     def reasonheirs_satisfied(self) -> bool:
-        return self.reasonheirs == {} or self._any_reasonheir_chore_true()
+        return self.reasonheirs == {} or self._any_reasonheir_task_true()
 
-    def _any_reasonheir_chore_true(self) -> bool:
-        return any(x_reasonheir.chore for x_reasonheir in self.reasonheirs.values())
+    def _any_reasonheir_task_true(self) -> bool:
+        return any(x_reasonheir.task for x_reasonheir in self.reasonheirs.values())
 
     def _create_active_bool(
         self,
@@ -976,8 +976,8 @@ class PlanUnit:
             x_dict["gogo_want"] = self.gogo_want
         if self.stop_want is not None:
             x_dict["stop_want"] = self.stop_want
-        if self.task:
-            x_dict["task"] = self.task
+        if self.pledge:
+            x_dict["pledge"] = self.pledge
         if self.problem_bool:
             x_dict["problem_bool"] = self.problem_bool
         if self.factunits not in [{}, None]:
@@ -1043,7 +1043,7 @@ def planunit_shop(
     denom: int = None,
     numor: int = None,
     morph: bool = None,
-    task: bool = None,
+    pledge: bool = None,
     root: bool = None,
     moment_label: MomentLabel = None,
     problem_bool: bool = None,
@@ -1053,9 +1053,9 @@ def planunit_shop(
     fund_iota: FundIota = None,
     fund_onset: FundNum = None,
     fund_cease: FundNum = None,
-    chore: bool = None,
+    task: bool = None,
     active: bool = None,
-    descendant_task_count: int = None,
+    descendant_pledge_count: int = None,
     all_voice_cred: bool = None,
     all_voice_debt: bool = None,
     is_expanded: bool = True,
@@ -1090,7 +1090,7 @@ def planunit_shop(
         denom=denom,
         numor=numor,
         morph=morph,
-        task=get_False_if_None(task),
+        pledge=get_False_if_None(pledge),
         problem_bool=get_False_if_None(problem_bool),
         root=get_False_if_None(root),
         moment_label=moment_label,
@@ -1100,9 +1100,9 @@ def planunit_shop(
         fund_iota=default_fund_iota_if_None(fund_iota),
         fund_onset=fund_onset,
         fund_cease=fund_cease,
-        chore=chore,
+        task=task,
         active=active,
-        descendant_task_count=descendant_task_count,
+        descendant_pledge_count=descendant_pledge_count,
         all_voice_cred=all_voice_cred,
         all_voice_debt=all_voice_debt,
         is_expanded=is_expanded,
@@ -1148,7 +1148,7 @@ def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
         )
     elif dict_key in {"kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
-    elif dict_key in {"task", "problem_bool"}:
+    elif dict_key in {"pledge", "problem_bool"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else False
     elif dict_key in {"is_expanded"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else True

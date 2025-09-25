@@ -1,6 +1,6 @@
 {
-    "chapter_content": "Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.",
-    "chapter_number": 8,
-    "chapter_blurb": "Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.",
-    "chapter_description": "ch08_timeline_logic"
+  "chapter_blurb": "Defines how time is handled by BeliefUnits. Allows for arbitrary time structures.",
+  "chapter_content": "Allows arbitrary calendars to be defined for each beliefunit with minimal configuration.",
+  "chapter_description": "ch08_timeline_logic",
+  "chapter_number": 8
 }

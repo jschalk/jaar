@@ -285,10 +285,10 @@ class BeliefUnit:
                         rope_type="reasonunit_descendant",
                     )
 
-    def all_plans_relevant_to_task_plan(self, rope: RopeTerm) -> bool:
-        task_plan_assoc_set = set(self._get_relevant_ropes({rope}))
+    def all_plans_relevant_to_pledge_plan(self, rope: RopeTerm) -> bool:
+        pledge_plan_assoc_set = set(self._get_relevant_ropes({rope}))
         all_plans_set = set(self.get_plan_tree_ordered_rope_list())
-        return all_plans_set == all_plans_set & (task_plan_assoc_set)
+        return all_plans_set == all_plans_set & (pledge_plan_assoc_set)
 
     def get_awardunits_metrics(self) -> dict[GroupTitle, AwardUnit]:
         tree_metrics = self.get_tree_metrics()
@@ -520,7 +520,7 @@ class BeliefUnit:
             reasons=self.planroot.reasonunits,
             awardunits=self.planroot.awardunits,
             uid=self.planroot.uid,
-            task=self.planroot.task,
+            pledge=self.planroot.pledge,
             plan_rope=self.planroot.get_plan_rope(),
         )
 
@@ -540,7 +540,7 @@ class BeliefUnit:
             reasons=plan_kid.reasonunits,
             awardunits=plan_kid.awardunits,
             uid=plan_kid.uid,
-            task=plan_kid.task,
+            pledge=plan_kid.pledge,
             plan_rope=plan_kid.get_plan_rope(),
         )
         x_plan_list.append(plan_kid)
@@ -586,13 +586,13 @@ class BeliefUnit:
         return missing_reason_contexts
 
     def add_plan(
-        self, plan_rope: RopeTerm, star: float = None, task: bool = None
+        self, plan_rope: RopeTerm, star: float = None, pledge: bool = None
     ) -> PlanUnit:
         x_plan_label = get_tail_label(plan_rope, self.knot)
         x_parent_rope = get_parent_rope(plan_rope, self.knot)
         x_planunit = planunit_shop(x_plan_label, star=star)
-        if task:
-            x_planunit.task = True
+        if pledge:
+            x_planunit.pledge = True
         self.set_plan(x_planunit, x_parent_rope)
         return x_planunit
 
@@ -824,7 +824,7 @@ class BeliefUnit:
         numor: float = None,
         denom: float = None,
         morph: bool = None,
-        task: bool = None,
+        pledge: bool = None,
         factunit: FactUnit = None,
         awardunit: AwardUnit = None,
         awardunit_del: GroupTitle = None,
@@ -873,7 +873,7 @@ reason_case:    {reason_case}"""
             awardunit=awardunit,
             awardunit_del=awardunit_del,
             is_expanded=is_expanded,
-            task=task,
+            pledge=pledge,
             factunit=factunit,
             problem_bool=problem_bool,
         )
@@ -892,14 +892,14 @@ reason_case:    {reason_case}"""
             if x_plan.is_agenda_plan(necessary_reason_context)
         }
 
-    def get_all_tasks(self) -> dict[RopeTerm, PlanUnit]:
+    def get_all_pledges(self) -> dict[RopeTerm, PlanUnit]:
         self.cashout()
         all_plans = self._plan_dict.values()
-        return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.task}
+        return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.pledge}
 
-    def set_agenda_chore_complete(self, chore_rope: RopeTerm, reason_context: RopeTerm):
-        task_plan = self.get_plan_obj(chore_rope)
-        task_plan.set_factunit_to_complete(self.planroot.factunits[reason_context])
+    def set_agenda_task_complete(self, task_rope: RopeTerm, reason_context: RopeTerm):
+        pledge_plan = self.get_plan_obj(task_rope)
+        pledge_plan.set_factunit_to_complete(self.planroot.factunits[reason_context])
 
     def get_credit_ledger_debt_ledger(
         self,
@@ -1120,15 +1120,15 @@ reason_case:    {reason_case}"""
         for x_plan in self._plan_dict.values():
             x_plan.set_awardheirs_fund_give_fund_take()
             if x_plan.is_kidless():
-                self._set_ancestors_task_fund_keep_attrs(
+                self._set_ancestors_pledge_fund_keep_attrs(
                     x_plan.get_plan_rope(), keep_exceptions
                 )
                 self._allot_fund_share(x_plan)
 
-    def _set_ancestors_task_fund_keep_attrs(
+    def _set_ancestors_pledge_fund_keep_attrs(
         self, rope: RopeTerm, keep_exceptions: bool = False
     ):
-        x_descendant_task_count = 0
+        x_descendant_pledge_count = 0
         child_awardlines = None
         group_everyone = None
         ancestor_ropes = get_ancestor_ropes(rope, self.knot)
@@ -1138,15 +1138,15 @@ reason_case:    {reason_case}"""
         while ancestor_ropes != []:
             youngest_rope = ancestor_ropes.pop(0)
             x_plan_obj = self.get_plan_obj(youngest_rope)
-            x_plan_obj.add_to_descendant_task_count(x_descendant_task_count)
+            x_plan_obj.add_to_descendant_pledge_count(x_descendant_pledge_count)
             if x_plan_obj.is_kidless():
                 x_plan_obj.set_kidless_awardlines()
                 child_awardlines = x_plan_obj.awardlines
             else:
                 x_plan_obj.set_awardlines(child_awardlines)
 
-            if x_plan_obj.chore:
-                x_descendant_task_count += 1
+            if x_plan_obj.task:
+                x_descendant_pledge_count += 1
 
             if (
                 group_everyone != False
@@ -1180,7 +1180,7 @@ reason_case:    {reason_case}"""
     def _clear_plantree_fund_and_active_status_attrs(self):
         for x_plan in self._plan_dict.values():
             x_plan.clear_awardlines()
-            x_plan.clear_descendant_task_count()
+            x_plan.clear_descendant_pledge_count()
             x_plan.clear_all_voice_cred_debt()
 
     def _set_kids_active_status_attrs(self, x_plan: PlanUnit, parent_plan: PlanUnit):
@@ -1426,8 +1426,8 @@ reason_case:    {reason_case}"""
     def get_json(self) -> str:
         return get_json_from_dict(self.to_dict())
 
-    def set_dominate_task_plan(self, plan_kid: PlanUnit):
-        plan_kid.task = True
+    def set_dominate_pledge_plan(self, plan_kid: PlanUnit):
+        plan_kid.pledge = True
         self.set_plan(
             plan_kid=plan_kid,
             parent_rope=self.make_rope(plan_kid.parent_rope),
@@ -1584,7 +1584,7 @@ def create_planroot_kids_from_dict(x_belief: BeliefUnit, planroot_dict: dict):
             morph=get_obj_from_plan_dict(plan_dict, "morph"),
             gogo_want=get_obj_from_plan_dict(plan_dict, "gogo_want"),
             stop_want=get_obj_from_plan_dict(plan_dict, "stop_want"),
-            task=get_obj_from_plan_dict(plan_dict, "task"),
+            pledge=get_obj_from_plan_dict(plan_dict, "pledge"),
             problem_bool=get_obj_from_plan_dict(plan_dict, "problem_bool"),
             reasonunits=get_obj_from_plan_dict(plan_dict, "reasonunits"),
             laborunit=get_obj_from_plan_dict(plan_dict, "laborunit"),
