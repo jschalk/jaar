@@ -137,14 +137,6 @@ def get_example_yao_speaker() -> BeliefUnit:
     return yao_speaker
 
 
-def yao_sue_packunit() -> PackUnit:
-    return packunit_shop(belief_name="Yao", _pack_id=37, face_name="Sue")
-
-
-def get_sue_packunit() -> PackUnit:
-    return packunit_shop(belief_name="Sue", _pack_id=37, face_name="Yao")
-
-
 def get_texas_hubunit() -> HubUnit:
     moment_label = get_default_moment_label()
     return hubunit_shop(

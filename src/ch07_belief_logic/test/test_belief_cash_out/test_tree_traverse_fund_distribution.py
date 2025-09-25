@@ -1067,8 +1067,8 @@ def test_BeliefUnit_cashout_SetsVoiceUnit_fund_give_fund_take():
 
 def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
     # delete belief_agenda_debt and belief_agenda_cred
-    for groupunit_x in x_belief.groupunits.values():
-        groupunit_x.clear_fund_give_take()
+    for x_groupunit in x_belief.groupunits.values():
+        x_groupunit.clear_group_fund_give_take()
         # for membership_x in groupunit_x._voices.values():
         #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_points=} {membership_fund_take:t:.6f} {membership_x.} ")
 

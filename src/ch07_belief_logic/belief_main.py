@@ -950,7 +950,7 @@ reason_case:    {reason_case}"""
 
     def _reset_groupunits_fund_give_take(self):
         for groupunit_obj in self.groupunits.values():
-            groupunit_obj.clear_fund_give_take()
+            groupunit_obj.clear_group_fund_give_take()
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardUnit]):
         for awardunit_obj in awardheirs.values():

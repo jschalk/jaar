@@ -104,8 +104,8 @@ def test_BeliefUnit_create_symmetry_groupunit_ReturnsObj():
 
     # THEN
     assert xio_groupunit.group_title == xio_str
-    assert xio_groupunit.membership_exists(yao_str)
-    assert xio_groupunit.membership_exists(zia_str)
+    assert xio_groupunit.group_membership_exists(yao_str)
+    assert xio_groupunit.group_membership_exists(zia_str)
     assert len(xio_groupunit.memberships) == 2
     yao_groupunit = xio_groupunit.get_membership(yao_str)
     zia_groupunit = xio_groupunit.get_membership(zia_str)

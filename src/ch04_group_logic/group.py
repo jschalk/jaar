@@ -48,7 +48,7 @@ class MemberShip(GroupCore):
             "group_debt_points": self.group_debt_points,
         }
 
-    def clear_fund_give_take(self):
+    def clear_membership_fund_give_take(self):
         self.fund_give = 0
         self.fund_take = 0
         self.fund_agenda_give = 0
@@ -213,19 +213,19 @@ class GroupUnit(GroupCore):
     def get_membership(self, x_voice_name: VoiceName) -> MemberShip:
         return self.memberships.get(x_voice_name)
 
-    def membership_exists(self, x_voice_name: VoiceName) -> bool:
+    def group_membership_exists(self, x_voice_name: VoiceName) -> bool:
         return self.get_membership(x_voice_name) is not None
 
     def del_membership(self, voice_name):
         self.memberships.pop(voice_name)
 
-    def clear_fund_give_take(self):
+    def clear_group_fund_give_take(self):
         self.fund_give = 0
         self.fund_take = 0
         self.fund_agenda_give = 0
         self.fund_agenda_take = 0
         for membership in self.memberships.values():
-            membership.clear_fund_give_take()
+            membership.clear_membership_fund_give_take()
 
     def _set_membership_fund_give_fund_take(self):
         credit_ledger = {}

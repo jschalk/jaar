@@ -50,17 +50,6 @@ def get_texas_rope() -> RopeTerm:
     return create_rope_from_labels([moment_label, nation_str, usa_str, texas_str])
 
 
-def get_texas_hubunit() -> HubUnit:
-    moment_label = get_default_moment_label()
-    return hubunit_shop(
-        get_chapter_temp_dir(),
-        moment_label,
-        belief_name="Sue",
-        keep_rope=get_texas_rope(),
-        # pipeline_duty_vision_str(),
-    )
-
-
 def get_sue_packunit() -> PackUnit:
     return packunit_shop(belief_name="Sue", _pack_id=37, face_name="Yao")
 
