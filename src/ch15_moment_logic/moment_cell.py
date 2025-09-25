@@ -15,6 +15,7 @@ from src.ch05_reason_logic.reason import get_dict_from_factunits
 from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 from src.ch11_bud_logic.bud import MomentLabel
 from src.ch11_bud_logic.cell import CellUnit, cellunit_shop
+from src.ch11_bud_logic.weighted_facts_tool import get_nodes_with_weighted_facts
 from src.ch12_hub_toolbox.ch12_path import (
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
@@ -24,7 +25,6 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_cell_json_path,
     create_moment_json_path,
 )
-from src.ch12_hub_toolbox.fact_tool import get_nodes_with_weighted_facts
 from src.ch12_hub_toolbox.hub_tool import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
