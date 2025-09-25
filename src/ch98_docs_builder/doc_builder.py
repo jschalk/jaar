@@ -6,19 +6,21 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropepointer_explanation_md
+from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropeterm_explanation_md
 from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_brick_formats_md,
     get_idea_brick_mds,
 )
 
 
-def get_module_descs() -> dict[str, str]:
+def get_chapter_descs() -> dict[str, str]:
     src_dir = "src"
-    module_descs = get_level1_dirs(src_dir)
-    module_descs.remove("ch99_module_linter")
+    """ch99_chapter_style is a new game for me"""
+    chapter_descs = get_level1_dirs(src_dir)
+    chapter_descs.remove("ch99_chapter_style")
     return {
-        module_desc: create_path(src_dir, module_desc) for module_desc in module_descs
+        chapter_desc: create_path(src_dir, chapter_desc)
+        for chapter_desc in chapter_descs
     }
 
 
@@ -35,37 +37,37 @@ def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
     return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
 
 
-def get_module_str_functions(module_dir: str, module_desc_prefix: str) -> list[str]:
-    ref_dir = create_path(module_dir, "_ref")
-    str_util_path = create_path(ref_dir, f"{module_desc_prefix}_keywords.py")
+def get_chapter_str_functions(chapter_dir: str, chapter_desc_prefix: str) -> list[str]:
+    ref_dir = create_path(chapter_dir, "_ref")
+    str_util_path = create_path(ref_dir, f"{chapter_desc_prefix}_keywords.py")
     return get_function_names_from_file(str_util_path)
 
 
-def get_module_desc_str_number(module_desc: str) -> str:
-    """Returns module number in 2 character string."""
-    if module_desc.startswith("a"):
-        return module_desc[1:3]
-    elif module_desc.startswith("ch"):
-        return module_desc[2:4]
+def get_chapter_desc_str_number(chapter_desc: str) -> str:
+    """Returns chapter number in 2 character string."""
+    if chapter_desc.startswith("a"):
+        return chapter_desc[1:3]
+    elif chapter_desc.startswith("ch"):
+        return chapter_desc[2:4]
 
 
-def get_module_desc_prefix(module_desc: str) -> str:
-    """Returns module number in 2 character string."""
-    if module_desc.startswith("a"):
-        return module_desc[:3]
-    elif module_desc.startswith("ch"):
-        return module_desc[:4]
+def get_chapter_desc_prefix(chapter_desc: str) -> str:
+    """Returns chapter number in 2 character string."""
+    if chapter_desc.startswith("a"):
+        return chapter_desc[:3]
+    elif chapter_desc.startswith("ch"):
+        return chapter_desc[:4]
 
 
 def get_str_funcs_md() -> str:
-    func_lines = ["## Str Functions by Module"]
-    for module_desc, module_dir in get_module_descs().items():
-        module_prefix = get_module_desc_prefix(module_desc)
-        module_str_funcs = get_module_str_functions(module_dir, module_prefix)
-        x_list = [str_func[:-4] for str_func in module_str_funcs]
-        _line = f"- {module_desc}: " + ", ".join(x_list)
+    func_lines = ["## Str Functions by Chapter"]
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_str_funcs = get_chapter_str_functions(chapter_dir, chapter_prefix)
+        x_list = [str_func[:-4] for str_func in chapter_str_funcs]
+        _line = f"- {chapter_desc}: " + ", ".join(x_list)
         func_lines.append(_line)
-    return "# String Functions by Module\n\n" + "\n".join(func_lines)
+    return "# String Functions by Chapterr\n\n" + "\n".join(func_lines)
 
 
 def save_str_funcs_md(x_dir: str):
@@ -73,29 +75,29 @@ def save_str_funcs_md(x_dir: str):
     save_file(str_funcs_md_path, None, get_str_funcs_md())
 
 
-def get_module_blurbs_md() -> str:
-    lines = ["# Module Overview\n", "What does each one do?\n", ""]
-    for module_desc, module_dir in get_module_descs().items():
-        module_prefix = get_module_desc_prefix(module_desc)
-        docs_dir = create_path(module_dir, "_ref")
-        module_ref_path = create_path(docs_dir, f"{module_prefix}_ref.json")
-        module_ref_dict = open_json(module_ref_path)
-        module_description_str = "module_description"
-        module_blurb_str = "module_blurb"
-        mod_blurb = module_ref_dict.get(module_blurb_str)
-        ref_module_desc = module_ref_dict.get(module_description_str)
+def get_chapter_blurbs_md() -> str:
+    lines = ["# Chapterr Overview\n", "What does each one do?\n", ""]
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        docs_dir = create_path(chapter_dir, "_ref")
+        chapter_ref_path = create_path(docs_dir, f"{chapter_prefix}_ref.json")
+        chapter_ref_dict = open_json(chapter_ref_path)
+        chapter_description_str = "chapter_description"
+        chapter_blurb_str = "chapter_blurb"
+        mod_blurb = chapter_ref_dict.get(chapter_blurb_str)
+        ref_chapter_desc = chapter_ref_dict.get(chapter_description_str)
 
-        lines.append(f"- **{ref_module_desc}**: {mod_blurb}")
+        lines.append(f"- **{ref_chapter_desc}**: {mod_blurb}")
 
     return "\n".join(lines)
 
 
-def save_module_blurbs_md(x_dir: str):
-    save_file(x_dir, "module_blurbs.md", get_module_blurbs_md())
+def save_chapter_blurbs_md(x_dir: str):
+    save_file(x_dir, "chapter_blurbs.md", get_chapter_blurbs_md())
 
 
-def save_ropepointer_explanation_md(x_dir: str):
-    save_file(x_dir, "ropepointer_explanation.md", get_ropepointer_explanation_md())
+def save_ropeterm_explanation_md(x_dir: str):
+    save_file(x_dir, "ropeterm_explanation.md", get_ropeterm_explanation_md())
 
 
 def save_idea_brick_mds(dest_dir: str):

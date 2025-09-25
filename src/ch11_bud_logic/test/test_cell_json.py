@@ -13,7 +13,7 @@ from src.ch11_bud_logic._ref.ch11_keywords import (
     quota_str,
 )
 from src.ch11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
-from src.ch11_bud_logic.test._util.example_factunits import (
+from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,

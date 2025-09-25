@@ -6,7 +6,7 @@ from src.ch07_belief_logic.belief_graphics import (
     beliefunit_graph4,
     display_plantree,
 )
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_with_4_levels,
     get_beliefunit_with_4_levels_and_2reasons,
     get_beliefunit_x1_3levels_1reason_1facts,

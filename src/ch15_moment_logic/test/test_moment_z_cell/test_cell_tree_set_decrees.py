@@ -12,11 +12,11 @@ from src.ch12_hub_toolbox.hub_tool import (
 from src.ch15_moment_logic.moment_cell import DecreeUnit, set_cell_trees_decrees
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
-from src.ch15_moment_logic.test._util.example_moments import (
-    example_casa_clean_factunit,
-    example_casa_dirty_factunit,
+from src.ch15_moment_logic.test._util.ch15_examples import (
+    example_casa_floor_clean_factunit,
+    example_casa_floor_dirty_factunit,
     get_bob_mop_with_reason_beliefunit_example,
     get_bob_mop_without_reason_beliefunit_example,
 )
@@ -58,7 +58,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -83,7 +83,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefevent_
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -91,7 +91,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario1_Depth0AndOne_beliefevent_
     event7 = 7
     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
     # create cell file
-    clean_fact = example_casa_clean_factunit()
+    clean_fact = example_casa_floor_clean_factunit()
     clean_facts = {clean_fact.fact_context: clean_fact}
     bob_cell = cellunit_shop(
         bob_str,
@@ -116,7 +116,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -124,7 +124,7 @@ def test_set_cell_trees_decrees_SetsRootAttr_Scenario2_Depth0AndOne_found_fact(
     event7 = 7
     bob_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
     # create cell file
-    clean_fact = example_casa_clean_factunit()
+    clean_fact = example_casa_floor_clean_factunit()
     clean_facts = {clean_fact.fact_context: clean_fact}
     bob_cell = cellunit_shop(
         bob_str,
@@ -149,7 +149,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1AndZero_boss_fact
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -190,7 +190,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -203,7 +203,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario3_Depth1And_boss_facts(
     bob_sue_beliefadjust = get_bob_mop_with_reason_beliefunit_example()
     bob_sue_beliefadjust.set_belief_name(sue_str)
     # create cell file
-    dirty_fact = example_casa_dirty_factunit()
+    dirty_fact = example_casa_floor_dirty_factunit()
     dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
@@ -239,7 +239,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -262,7 +262,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario4_Depth3And_boss_facts(
     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
     bsy_zia_ba.set_belief_name(zia_str)
     # create cell file
-    dirty_fact = example_casa_dirty_factunit()
+    dirty_fact = example_casa_floor_dirty_factunit()
     dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
@@ -302,7 +302,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -325,7 +325,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario5_Depth2And_boss_facts(
     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
     bsy_zia_ba.set_belief_name(zia_str)
     # create cell file
-    dirty_fact = example_casa_dirty_factunit()
+    dirty_fact = example_casa_floor_dirty_factunit()
     dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
@@ -365,7 +365,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -385,12 +385,12 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario6_boss_facts_ResetAtEachC
     bs_yao_ba = get_bob_mop_with_reason_beliefunit_example()
     bs_yao_ba.set_belief_name(yao_str)
     bs_yao_ba.add_voiceunit(zia_str, 1)
-    clean_fact = example_casa_clean_factunit()
+    clean_fact = example_casa_floor_clean_factunit()
     bs_yao_ba.add_fact(clean_fact.fact_context, clean_fact.fact_state)
     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
     bsy_zia_ba.set_belief_name(zia_str)
     # create cell file
-    dirty_fact = example_casa_dirty_factunit()
+    dirty_fact = example_casa_floor_dirty_factunit()
     dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,
@@ -432,7 +432,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     tp5 = 5
     bob_str = "Bob"
@@ -455,7 +455,7 @@ def test_set_cell_trees_decrees_SetsChildCells_Scenario7_NoCell_GetBeliefEvent(
     bsy_zia_ba = get_bob_mop_with_reason_beliefunit_example()
     bsy_zia_ba.set_belief_name(zia_str)
     # create cell file
-    dirty_fact = example_casa_dirty_factunit()
+    dirty_fact = example_casa_floor_dirty_factunit()
     dirty_facts = {dirty_fact.fact_context: dirty_fact}
     bob_cell = cellunit_shop(
         bob_str,

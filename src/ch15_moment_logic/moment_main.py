@@ -36,12 +36,12 @@ from src.ch08_timeline_logic.timeline_main import (
     timelineunit_shop,
 )
 from src.ch11_bud_logic.bud import (
-    BrokerUnit,
+    BeliefBudHistory,
     BudUnit,
     TranBook,
     TranUnit,
-    brokerunit_shop,
-    get_brokerunit_from_dict,
+    beliefbudhistory_shop,
+    get_beliefbudhistory_from_dict,
     get_tranbook_from_dict,
     tranbook_shop,
 )
@@ -96,7 +96,7 @@ class MomentUnit:
     moment_label: MomentLabel = None
     moment_mstr_dir: str = None
     timeline: TimeLineUnit = None
-    brokerunits: dict[BeliefName, BrokerUnit] = None
+    beliefbudhistorys: dict[BeliefName, BeliefBudHistory] = None
     paybook: TranBook = None
     offi_times: set[TimeLinePoint] = None
     knot: str = None
@@ -195,18 +195,18 @@ class MomentUnit:
     def get_job_file_belief(self, belief_name: BeliefName) -> BeliefUnit:
         return open_job_file(self.moment_mstr_dir, self.moment_label, belief_name)
 
-    # brokerunits
-    def set_brokerunit(self, x_brokerunit: BrokerUnit) -> None:
-        self.brokerunits[x_brokerunit.belief_name] = x_brokerunit
+    # beliefbudhistorys
+    def set_beliefbudhistory(self, x_beliefbudhistory: BeliefBudHistory) -> None:
+        self.beliefbudhistorys[x_beliefbudhistory.belief_name] = x_beliefbudhistory
 
-    def brokerunit_exists(self, x_belief_name: BeliefName) -> bool:
-        return self.brokerunits.get(x_belief_name) != None
+    def beliefbudhistory_exists(self, x_belief_name: BeliefName) -> bool:
+        return self.beliefbudhistorys.get(x_belief_name) != None
 
-    def get_brokerunit(self, x_belief_name: BeliefName) -> BrokerUnit:
-        return self.brokerunits.get(x_belief_name)
+    def get_beliefbudhistory(self, x_belief_name: BeliefName) -> BeliefBudHistory:
+        return self.beliefbudhistorys.get(x_belief_name)
 
-    def del_brokerunit(self, x_belief_name: BeliefName) -> None:
-        self.brokerunits.pop(x_belief_name)
+    def del_beliefbudhistory(self, x_belief_name: BeliefName) -> None:
+        self.beliefbudhistorys.pop(x_belief_name)
 
     def add_budunit(
         self,
@@ -220,16 +220,16 @@ class MomentUnit:
         if bud_time < self._offi_time_max and not allow_prev_to_offi_time_max_entry:
             exception_str = f"Cannot set budunit because bud_time {bud_time} is less than MomentUnit._offi_time_max {self._offi_time_max}."
             raise budunit_Exception(exception_str)
-        if self.brokerunit_exists(belief_name) is False:
-            self.set_brokerunit(brokerunit_shop(belief_name))
-        x_brokerunit = self.get_brokerunit(belief_name)
-        x_brokerunit.add_bud(bud_time, quota, celldepth)
+        if self.beliefbudhistory_exists(belief_name) is False:
+            self.set_beliefbudhistory(beliefbudhistory_shop(belief_name))
+        x_beliefbudhistory = self.get_beliefbudhistory(belief_name)
+        x_beliefbudhistory.add_bud(bud_time, quota, celldepth)
 
     def get_budunit(self, belief_name: BeliefName, bud_time: TimeLinePoint) -> BudUnit:
-        if not self.get_brokerunit(belief_name):
+        if not self.get_beliefbudhistory(belief_name):
             return None
-        x_brokerunit = self.get_brokerunit(belief_name)
-        return x_brokerunit.get_bud(bud_time)
+        x_beliefbudhistory = self.get_beliefbudhistory(belief_name)
+        return x_beliefbudhistory.get_bud(bud_time)
 
     def to_dict(self, include_paybook: bool = True) -> dict:
         x_dict = {
@@ -238,7 +238,7 @@ class MomentUnit:
             "knot": self.knot,
             "fund_iota": self.fund_iota,
             "penny": self.penny,
-            "brokerunits": self._get_brokerunits_dict(),
+            "beliefbudhistorys": self._get_beliefbudhistorys_dict(),
             "respect_bit": self.respect_bit,
             "timeline": self.timeline.to_dict(),
             "offi_times": list(self.offi_times),
@@ -250,21 +250,22 @@ class MomentUnit:
     def get_json(self) -> str:
         return get_json_from_dict(self.to_dict())
 
-    def _get_brokerunits_dict(self) -> dict[BeliefName, dict]:
+    def _get_beliefbudhistorys_dict(self) -> dict[BeliefName, dict]:
         return {
-            x_bud.belief_name: x_bud.to_dict() for x_bud in self.brokerunits.values()
+            x_bud.belief_name: x_bud.to_dict()
+            for x_bud in self.beliefbudhistorys.values()
         }
 
-    def get_brokerunits_bud_times(self) -> set[TimeLinePoint]:
+    def get_beliefbudhistorys_bud_times(self) -> set[TimeLinePoint]:
         all_budunit_bud_times = set()
-        for x_brokerunit in self.brokerunits.values():
-            all_budunit_bud_times.update(x_brokerunit.get_bud_times())
+        for x_beliefbudhistory in self.beliefbudhistorys.values():
+            all_budunit_bud_times.update(x_beliefbudhistory.get_bud_times())
         return all_budunit_bud_times
 
     def set_paypurchase(self, x_paypurchase: TranUnit):
         self.paybook.set_tranunit(
             tranunit=x_paypurchase,
-            blocked_tran_times=self.get_brokerunits_bud_times(),
+            blocked_tran_times=self.get_beliefbudhistorys_bud_times(),
             _offi_time_max=self._offi_time_max,
         )
 
@@ -325,8 +326,8 @@ class MomentUnit:
     def set_all_tranbook(self) -> None:
         x_tranunits = copy_deepcopy(self.paybook.tranunits)
         x_tranbook = tranbook_shop(self.moment_label, x_tranunits)
-        for belief_name, x_brokerunit in self.brokerunits.items():
-            for x_bud_time, x_budunit in x_brokerunit.buds.items():
+        for belief_name, x_beliefbudhistory in self.beliefbudhistorys.items():
+            for x_bud_time, x_budunit in x_beliefbudhistory.buds.items():
                 for voice_name, x_amount in x_budunit._bud_voice_nets.items():
                     x_tranbook.add_tranunit(
                         belief_name, voice_name, x_bud_time, x_amount
@@ -337,8 +338,8 @@ class MomentUnit:
         self,
         ote1_dict: dict[BeliefName, dict[TimeLinePoint, EventInt]],
     ) -> None:
-        for belief_name, brokerunit in self.brokerunits.items():
-            for bud_time in brokerunit.buds.keys():
+        for belief_name, beliefbudhistory in self.beliefbudhistorys.items():
+            for bud_time in beliefbudhistory.buds.keys():
                 self._create_bud_root_cell(belief_name, ote1_dict, bud_time)
 
     def _create_bud_root_cell(
@@ -410,7 +411,7 @@ def momentunit_shop(
         moment_label=moment_label,
         moment_mstr_dir=moment_mstr_dir,
         timeline=timeline,
-        brokerunits={},
+        beliefbudhistorys={},
         paybook=tranbook_shop(moment_label),
         offi_times=get_empty_set_if_None(offi_times),
         knot=default_knot_if_None(knot),
@@ -425,12 +426,12 @@ def momentunit_shop(
     return x_momentunit
 
 
-def _get_brokerunits_from_dict(
-    brokerunits_dict: dict,
-) -> dict[BeliefName, BrokerUnit]:
+def _get_beliefbudhistorys_from_dict(
+    beliefbudhistorys_dict: dict,
+) -> dict[BeliefName, BeliefBudHistory]:
     return {
-        x_belief_name: get_brokerunit_from_dict(brokerunit_dict)
-        for x_belief_name, brokerunit_dict in brokerunits_dict.items()
+        x_belief_name: get_beliefbudhistory_from_dict(beliefbudhistory_dict)
+        for x_belief_name, beliefbudhistory_dict in beliefbudhistorys_dict.items()
     }
 
 
@@ -450,7 +451,9 @@ def get_from_dict(moment_dict: dict) -> MomentUnit:
         x_moment.timeline = timelineunit_shop(moment_dict_timeline_value)
     else:
         x_moment.timeline = timelineunit_shop(None)
-    x_moment.brokerunits = _get_brokerunits_from_dict(moment_dict.get("brokerunits"))
+    x_moment.beliefbudhistorys = _get_beliefbudhistorys_from_dict(
+        moment_dict.get("beliefbudhistorys")
+    )
     x_moment.paybook = get_tranbook_from_dict(moment_dict.get("paybook"))
     return x_moment
 

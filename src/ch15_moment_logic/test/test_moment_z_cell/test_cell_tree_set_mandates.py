@@ -9,7 +9,7 @@ from src.ch12_hub_toolbox.hub_tool import cellunit_save_to_dir
 from src.ch15_moment_logic.moment_cell import set_cell_tree_cell_mandates
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -17,7 +17,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_str = "amy"
     tp5 = 5
     bob_str = "Bob"
@@ -48,7 +48,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -76,7 +76,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -109,7 +109,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy23"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -146,7 +146,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy23"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -191,7 +191,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy23"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -254,7 +254,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy23"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -317,7 +317,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy23"
 #     tp5 = 5
 #     bob_str = "Bob"
@@ -384,7 +384,7 @@ def test_set_cell_tree_cell_mandates_SetsRootAttr_Scenario0_Depth0NoFacts(
 #     env_dir_setup_cleanup,
 # ):
 #     # ESTABLISH
-#     mstr_dir = get_module_temp_dir()
+#     mstr_dir = get_chapter_temp_dir()
 #     a23_str = "amy23"
 #     tp5 = 5
 #     bob_str = "Bob"

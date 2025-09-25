@@ -13,7 +13,7 @@ from src.ch18_etl_toolbox.ch18_path import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.transformers import etl_moment_ote1_agg_csvs_to_jsons
 
@@ -30,7 +30,7 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     amy45_str = "amy45"
     timepoint55 = 55
     timepoint66 = 66
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_event_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy23_str)
     a45_event_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy45_str)
     a23_event_time_csv = f"""{moment_label_str()},{belief_name_str()},{event_int_str()},{bud_time_str()},{error_message_str()}

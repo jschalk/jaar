@@ -14,9 +14,9 @@ from src.ch17_idea_logic.idea_db_tool import (
 )
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
-from src.ch17_idea_logic.test._util.example_pandas import (
+from src.ch17_idea_logic.test._util.ch17_examples import (
     get_empty_dataframe,
     get_ex01_dataframe,
     get_ex01_ordered_by_count_bob_csv,
@@ -66,7 +66,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario0_SmallDataFrame(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     small_dt = get_small_example01_dataframe()
     ex_filename = "Faybob.csv"
     ex_file_path = create_path(env_dir, ex_filename)
@@ -86,7 +86,7 @@ def test_save_dataframe_to_csv_SavesFile_Scenario1_OrdersColumns(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    env_dir = get_module_temp_dir()
+    env_dir = get_chapter_temp_dir()
     atom_example_dt = get_ex02_atom_dataframe()
     ex_filename = "atom_example.csv"
 

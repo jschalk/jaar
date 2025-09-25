@@ -3,7 +3,7 @@ from src.ch04_group_logic.group import awardunit_shop
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import beliefunit_v001
+from src.ch07_belief_logic.test._util.ch07_examples import beliefunit_v001
 
 
 def test_BeliefUnit_get_tree_metrics_Exists():
@@ -80,7 +80,7 @@ def test_BeliefUnit_set_all_plan_uids_unique_SetsUIDs():
     assert zia_belief.get_plan_obj(swim_rope).uid is not None
 
 
-def test_BeliefUnit_get_tree_metrics_ReturnsANone_task_PlanRopePointer():
+def test_BeliefUnit_get_tree_metrics_ReturnsANone_task_PlanRopeTerm():
     # ESTABLISH
     nia_str = "Nia"
     nia_belief = beliefunit_shop(nia_str, tally=10)
@@ -92,7 +92,7 @@ def test_BeliefUnit_get_tree_metrics_ReturnsANone_task_PlanRopePointer():
     assert tree_metrics_before.last_evaluated_task_plan_rope is None
 
 
-def test_BeliefUnit_get_tree_metrics_Returns_task_PlanRopePointer():
+def test_BeliefUnit_get_tree_metrics_Returns_task_PlanRopeTerm():
     # ESTABLISH
     yao_belief = beliefunit_v001()
     yao_tree_metrics = yao_belief.get_tree_metrics()

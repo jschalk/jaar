@@ -1,4 +1,4 @@
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     get_creg_config,
     get_five_config,
 )

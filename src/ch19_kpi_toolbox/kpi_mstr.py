@@ -22,7 +22,7 @@ def get_default_kpi_bundle() -> str:
     return "default_kpi_bundle"
 
 
-def get_all_kpi_functions() -> dict[str,]:
+def get_all_kpi_functions() -> dict[str, set[str]]:
     """
     Returns a dict of all KPI ids and their functions.
     """
@@ -42,7 +42,7 @@ def get_kpi_set_from_bundle(bundle_id: str = None) -> set[str]:
     """
     bundles_config = get_bundles_config()
     if bundle_id is None:
-        bundle_id = "default_kpi_bundle"
+        bundle_id = get_default_kpi_bundle()
 
     return bundles_config.get(bundle_id, set())
 

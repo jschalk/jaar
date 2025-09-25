@@ -1,5 +1,5 @@
 from pandas import DataFrame
-from src.ch02_rope_logic.rope import RopePointer
+from src.ch02_rope_logic.rope import RopeTerm
 from src.ch07_belief_logic.belief_main import BeliefUnit
 
 
@@ -23,7 +23,7 @@ def get_belief_voiceunits_dataframe(x_belief: BeliefUnit) -> DataFrame:
 
 
 def get_belief_agenda_dataframe(
-    x_belief: BeliefUnit, reason_context: RopePointer = None
+    x_belief: BeliefUnit, reason_context: RopeTerm = None
 ) -> DataFrame:
     agenda_dict = x_belief.get_agenda_dict(necessary_reason_context=reason_context)
     if agenda_dict == {}:

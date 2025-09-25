@@ -11,13 +11,12 @@ from src.ch01_data_toolbox.file_toolbox import (
     get_max_file_number,
     open_file,
     save_file,
-    save_json,
 )
 from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch02_rope_logic.term import (
     BeliefName,
     MomentLabel,
-    RopePointer,
+    RopeTerm,
     default_knot_if_None,
 )
 from src.ch03_finance_logic.finance_config import (
@@ -46,12 +45,10 @@ from src.ch10_pack_logic.pack import (
 )
 from src.ch12_hub_toolbox.ch12_path import (
     create_atoms_dir_path,
-    create_keep_duty_path,
     create_keep_grades_path,
     create_keep_visions_path,
     create_keeps_dir_path,
     create_packs_dir_path,
-    create_treasury_db_path,
 )
 from src.ch12_hub_toolbox.hub_tool import (
     gut_file_exists,
@@ -79,7 +76,7 @@ class HubUnit:
     belief_name: BeliefName = None
     moment_mstr_dir: str = None
     moment_label: str = None
-    keep_rope: RopePointer = None
+    keep_rope: RopeTerm = None
     knot: str = None
     fund_pool: float = None
     fund_iota: float = None
@@ -387,7 +384,7 @@ class HubUnit:
         speaker_vision = self.rj_speaker_belief(healer_name, speaker_id)
         return self.get_perspective_belief(speaker_vision)
 
-    def get_keep_ropes(self) -> set[RopePointer]:
+    def get_keep_ropes(self) -> set[RopeTerm]:
         x_gut_belief = open_gut_file(
             self.moment_mstr_dir, self.moment_label, self.belief_name
         )
@@ -434,7 +431,7 @@ def hubunit_shop(
     moment_mstr_dir: str,
     moment_label: MomentLabel,
     belief_name: BeliefName = None,
-    keep_rope: RopePointer = None,
+    keep_rope: RopeTerm = None,
     knot: str = None,
     fund_pool: float = None,
     fund_iota: float = None,

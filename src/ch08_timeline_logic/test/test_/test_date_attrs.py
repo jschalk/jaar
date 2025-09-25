@@ -1,6 +1,6 @@
 from datetime import datetime
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
     creg_str,

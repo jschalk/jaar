@@ -24,7 +24,7 @@ from src.ch15_moment_logic.moment_report import (
     get_moment_jobs_voices_plotly_fig,
 )
 from src.ch15_moment_logic.test._util.ch15_env import env_dir_setup_cleanup
-from src.ch15_moment_logic.test._util.example_moments import (
+from src.ch15_moment_logic.test._util.ch15_examples import (
     create_example_moment2,
     create_example_moment3,
     create_example_moment4,

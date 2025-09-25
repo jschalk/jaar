@@ -13,7 +13,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
@@ -38,7 +38,7 @@ def test_etl_heard_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
         belief_voiceunit_str(), "h", "agg", "put"
     )
     put_agg_csv = f"{put_agg_tablename}.csv"
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_dir = create_belief_event_dir_path(
         x_moment_mstr_dir, amy23_str, bob_inx, event3
     )

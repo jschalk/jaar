@@ -1,8 +1,10 @@
 from src.ch04_group_logic.group import awardunit_shop
 from src.ch04_group_logic.labor import laborunit_shop
-from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic.belief_main import BeliefUnit, RopePointer, beliefunit_shop
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch07_belief_logic.belief_tool import set_case_attr
+from src.ch07_belief_logic.test._util.ch07_examples import (
+    get_beliefunit_irrational_example,
+)
 
 
 def best_sport_str() -> str:
@@ -140,47 +142,3 @@ def get_sue_belief_with_facts_and_reasons() -> BeliefUnit:
     set_case_attr(sue_belief, play_run_rope, best_rope, best_run_rope)
     sue_belief.cashout()
     return sue_belief
-
-
-def get_beliefunit_irrational_example() -> BeliefUnit:
-    # sourcery skip: extract-duplicate-method
-    # this belief has no definitive agenda because 2 task plans are in contradiction
-    # "egg first" is true when "chicken first" is false
-    # "chicken first" is true when "egg first" is true
-    # Step 0: if chicken.active is True, egg.active is set to False
-    # Step 1: if egg.active is False, chicken.active is set to False
-    # Step 2: if chicken.active is False, egg.active is set to True
-    # Step 3: if egg.active is True, chicken.active is set to True
-    # Step 4: back to step 0.
-    # after hatter_belief.cashout these should be true:
-    # 1. hatter_belief._irrational is True
-    # 2. hatter_belief.tree_traverse_count = hatter_belief.max_tree_traverse
-
-    hatter_belief = beliefunit_shop("Mad Hatter")
-    hatter_belief.set_max_tree_traverse(3)
-
-    egg_str = "egg first"
-    egg_rope = hatter_belief.make_l1_rope(egg_str)
-    hatter_belief.set_l1_plan(planunit_shop(egg_str))
-
-    chicken_str = "chicken first"
-    chicken_rope = hatter_belief.make_l1_rope(chicken_str)
-    hatter_belief.set_l1_plan(planunit_shop(chicken_str))
-
-    # set egg task is True when chicken first is False
-    hatter_belief.edit_plan_attr(
-        egg_rope,
-        task=True,
-        reason_context=chicken_rope,
-        reason_plan_active_requisite=True,
-    )
-
-    # set chick task is True when egg first is False
-    hatter_belief.edit_plan_attr(
-        chicken_rope,
-        task=True,
-        reason_context=egg_rope,
-        reason_plan_active_requisite=False,
-    )
-
-    return hatter_belief

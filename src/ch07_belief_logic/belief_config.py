@@ -9,8 +9,8 @@ def max_tree_traverse_default() -> int:
 def belief_config_path() -> str:
     """src/ch07_belief_logic/belief_config.json"""
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch07_belief_logic")
-    return create_path(module_dir, "belief_config.json")
+    chapter_dir = create_path(src_dir, "ch07_belief_logic")
+    return create_path(chapter_dir, "belief_config.json")
 
 
 def get_belief_config_dict() -> dict[str, dict]:
@@ -68,15 +68,15 @@ def get_belief_calc_args_type_dict() -> dict[str, str]:
         "problem_bool": "bool",
         "stop_want": "float",
         "awardee_title": "TitleTerm",
-        "plan_rope": "RopePointer",
+        "plan_rope": "RopeTerm",
         "give_force": "float",
         "take_force": "float",
-        "reason_context": "RopePointer",
+        "reason_context": "RopeTerm",
         "fact_upper": "float",
         "fact_lower": "float",
-        "fact_state": "RopePointer",
+        "fact_state": "RopeTerm",
         "healer_name": "NameTerm",
-        "reason_state": "RopePointer",
+        "reason_state": "RopeTerm",
         "status": "int",
         "chore": "int",
         "reason_divisor": "int",

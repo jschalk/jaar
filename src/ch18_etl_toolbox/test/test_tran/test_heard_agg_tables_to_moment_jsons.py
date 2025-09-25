@@ -22,7 +22,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
@@ -130,7 +130,7 @@ def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomen
     # ESTABLISH
     amy23_str = "amy23"
     amy45_str = "amy45"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     momentunit_h_agg_tablename = create_prime_tablename(momentunit_str(), "h", "agg")
     print(f"{momentunit_h_agg_tablename=}")
 

@@ -8,7 +8,7 @@ from src.ch03_finance_logic.finance_config import (
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic._ref.ch15_keywords import (
-    brokerunits_str,
+    beliefbudhistorys_str,
     fund_iota_str,
     knot_str,
     moment_label_str,
@@ -27,13 +27,13 @@ from src.ch15_moment_logic.moment_main import (
 )
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
     a45_str = "amy45"
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(a45_str, moment_mstr_dir, offi_times=a45_offi_times)
@@ -64,7 +64,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
 
     # THEN
     offi_times_str = f"{offi_time_str()}s"
-    print(f"{ amy_moment._get_brokerunits_dict()=}")
+    print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
     assert x_dict.get(moment_label_str()) == a45_str
     assert x_dict.get(moment_mstr_dir_str()) == moment_mstr_dir
@@ -74,14 +74,16 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(fund_iota_str()) == default_fund_iota_if_None()
     assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
     assert x_dict.get(penny_str()) == filter_penny()
-    assert x_dict.get(brokerunits_str()) == amy_moment._get_brokerunits_dict()
+    assert (
+        x_dict.get(beliefbudhistorys_str()) == amy_moment._get_beliefbudhistorys_dict()
+    )
     assert x_dict.get(paybook_str()) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
         moment_label_str(),
         moment_mstr_dir_str(),
         timeline_str(),
         offi_times_str,
-        brokerunits_str(),
+        beliefbudhistorys_str(),
         knot_str(),
         fund_iota_str(),
         respect_bit_str(),
@@ -93,7 +95,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
 def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
 
     # WHEN
     x_dict = amy_moment.to_dict(include_paybook=False)
@@ -105,7 +107,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
         moment_mstr_dir_str(),
         timeline_str(),
         f"{offi_time_str()}s",
-        brokerunits_str(),
+        beliefbudhistorys_str(),
         knot_str(),
         fund_iota_str(),
         respect_bit_str(),
@@ -116,7 +118,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
 def test_MomentUnit_get_json_ReturnsObj():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -141,7 +143,7 @@ def test_MomentUnit_get_json_ReturnsObj():
 def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    moment_mstr_dir = create_path(get_module_temp_dir(), "temp1")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
     a45_offi_times = {17, 37}
     amy_moment = momentunit_shop(amy45_str, moment_mstr_dir, offi_times=a45_offi_times)
     sue_timeline_label = "sue casa"
@@ -187,7 +189,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment.fund_iota == sue_fund_iota
     assert x_moment.respect_bit == sue_respect_bit
     assert x_moment.penny == sue_penny
-    assert x_moment.brokerunits == amy_moment.brokerunits
+    assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
@@ -198,7 +200,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
 def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
-    amy_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     x_dict = amy_moment.to_dict()
     x_dict["timeline"] = {}
     x_dict.pop("knot")
@@ -219,7 +221,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     assert generated_moment.fund_iota == default_fund_iota_if_None()
     assert generated_moment.respect_bit == default_RespectBit_if_None()
     assert generated_moment.penny == 1
-    assert generated_moment.brokerunits == amy_moment.brokerunits
+    assert generated_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert generated_moment.paybook == amy_moment.paybook
     assert generated_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert generated_moment == amy_moment
@@ -228,7 +230,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
 def test_get_from_json_ReturnsMomentUnit():
     # ESTABLISH
     amy45_str = "amy45"
-    temp_moment_mstr_dir = create_path(get_module_temp_dir(), "temp")
+    temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
     amy_moment = momentunit_shop(amy45_str, temp_moment_mstr_dir)
     sue_timeline_label = "sue casa"
     amy_moment.timeline.timeline_label = sue_timeline_label
@@ -265,7 +267,7 @@ def test_get_from_json_ReturnsMomentUnit():
     assert x_moment.fund_iota == sue_fund_iota
     assert x_moment.respect_bit == sue_respect_bit
     assert x_moment.penny == sue_penny
-    assert x_moment.brokerunits == amy_moment.brokerunits
+    assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment
     x_moment._offi_time_max = 0
@@ -275,12 +277,12 @@ def test_get_from_json_ReturnsMomentUnit():
 def test_get_from_file_ReturnsMomentUnitWith_moment_mstr_dir(env_dir_setup_cleanup):
     # ESTABLISH
     amy45_str = "amy45"
-    amy45_moment = momentunit_shop(amy45_str, get_module_temp_dir())
+    amy45_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
     sue_timeline_label = "sue casa"
     amy45_moment.timeline.timeline_label = sue_timeline_label
     sue_respect_bit = 2
     amy45_moment.respect_bit = sue_respect_bit
-    x_moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_bob")
+    x_moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_bob")
     amy45_json_path = create_moment_json_path(x_moment_mstr_dir, amy45_str)
     save_file(amy45_json_path, None, amy45_moment.get_json())
     assert amy45_moment.moment_mstr_dir != x_moment_mstr_dir

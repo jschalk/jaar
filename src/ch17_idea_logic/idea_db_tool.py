@@ -32,12 +32,15 @@ from src.ch01_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.ch02_rope_logic.term import EventInt, FaceName
-from src.ch16_pidgin_logic.map import MapCore
-from src.ch16_pidgin_logic.pidgin_config import (
-    get_pidgin_args_class_types,
-    get_pidginable_args,
+from src.ch16_translate_logic.map import MapCore
+from src.ch16_translate_logic.translate_config import (
+    get_translate_args_class_types,
+    get_translateable_args,
 )
-from src.ch16_pidgin_logic.pidgin_main import PidginUnit, get_pidginunit_from_json
+from src.ch16_translate_logic.translate_main import (
+    TranslateUnit,
+    get_translateunit_from_json,
+)
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_dimen_ref,
@@ -97,15 +100,17 @@ def get_relevant_columns_dataframe(
         relevant_columns = get_idea_elements_sort_order()
     current_columns = set(src_df.columns.to_list())
     relevant_columns_set = set(relevant_columns)
-    current_relevant_columns = current_columns.intersection(relevant_columns_set)
+    current_relevant_columns = current_columns & (relevant_columns_set)
     relevant_cols_in_order = [
         r_col for r_col in relevant_columns if r_col in current_relevant_columns
     ]
     return src_df[relevant_cols_in_order]
 
 
-def get_dataframe_pidginable_columns(x_df: DataFrame) -> set[str]:
-    return {x_column for x_column in x_df.columns if x_column in get_pidginable_args()}
+def get_dataframe_translateable_columns(x_df: DataFrame) -> set[str]:
+    return {
+        x_column for x_column in x_df.columns if x_column in get_translateable_args()
+    }
 
 
 def translate_single_column_dataframe(
@@ -120,36 +125,36 @@ def translate_single_column_dataframe(
     return x_df
 
 
-def translate_all_columns_dataframe(x_df: DataFrame, x_pidginunit: PidginUnit):
-    if x_pidginunit is None:
+def translate_all_columns_dataframe(x_df: DataFrame, x_translateunit: TranslateUnit):
+    if x_translateunit is None:
         return None
 
     column_names = set(x_df.columns)
-    pidginable_columns = column_names.intersection(get_pidginable_args())
-    for pidginable_column in pidginable_columns:
-        class_type = get_pidgin_args_class_types().get(pidginable_column)
-        x_mapunit = x_pidginunit.get_mapunit(class_type)
-        translate_single_column_dataframe(x_df, x_mapunit, pidginable_column)
+    translateable_columns = column_names & (get_translateable_args())
+    for translateable_column in translateable_columns:
+        class_type = get_translate_args_class_types().get(translateable_column)
+        x_mapunit = x_translateunit.get_mapunit(class_type)
+        translate_single_column_dataframe(x_df, x_mapunit, translateable_column)
 
 
-def move_otx_csvs_to_pidgin_inx(face_dir: str):
+def move_otx_csvs_to_translate_inx(face_dir: str):
     otz_dir = create_path(face_dir, "otz")
     inz_dir = create_path(face_dir, "inz")
-    pidgin_filename = "pidgin.json"
-    pidginunit_json = open_file(face_dir, pidgin_filename)
-    face_pidginunit = get_pidginunit_from_json(pidginunit_json)
+    translate_filename = "translate.json"
+    translateunit_json = open_file(face_dir, translate_filename)
+    face_translateunit = get_translateunit_from_json(translateunit_json)
     otz_dir_files = get_dir_file_strs(otz_dir, delete_extensions=False)
     for x_filename in otz_dir_files.keys():
         x_df = open_csv(otz_dir, x_filename)
-        translate_all_columns_dataframe(x_df, face_pidginunit)
+        translate_all_columns_dataframe(x_df, face_translateunit)
         save_dataframe_to_csv(x_df, inz_dir, x_filename)
 
 
-def _get_pidgen_idea_format_filenames() -> set[str]:
-    idea_numbers = set(get_idea_dimen_ref().get("pidgin_name"))
-    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_title")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_label")))
-    idea_numbers.update(set(get_idea_dimen_ref().get("pidgin_rope")))
+def _get_translate_idea_format_filenames() -> set[str]:
+    idea_numbers = set(get_idea_dimen_ref().get("translate_name"))
+    idea_numbers.update(set(get_idea_dimen_ref().get("translate_title")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("translate_label")))
+    idea_numbers.update(set(get_idea_dimen_ref().get("translate_rope")))
     return {f"{idea_number}.xlsx" for idea_number in idea_numbers}
 
 
@@ -342,7 +347,7 @@ def save_table_to_csv(conn_or_cursor: sqlite3_Connection, dst_dir: str, tablenam
 def create_idea_sorted_table(
     conn: sqlite3_Connection, tablename: str, columns_list: list[str]
 ):
-    columns_list = get_default_sorted_list(columns_list)
+    columns_list = get_default_sorted_list(set(columns_list))
     create_table_from_columns(conn, tablename, columns_list, get_idea_sqlite_types())
 
 
@@ -357,7 +362,7 @@ def get_idea_into_dimen_raw_query(
     src_columns = get_table_columns(conn_or_cursor, src_table)
     dst_table = f"{x_dimen}_put_raw" if action_str else f"{x_dimen}_raw"
     dst_columns = get_table_columns(conn_or_cursor, dst_table)
-    common_columns_set = set(dst_columns).intersection(set(src_columns))
+    common_columns_set = set(dst_columns) & (set(src_columns))
     common_columns_list = [col for col in dst_columns if col in common_columns_set]
     common_columns_header = ", ".join(common_columns_list)
     values_cols = set(common_columns_set)

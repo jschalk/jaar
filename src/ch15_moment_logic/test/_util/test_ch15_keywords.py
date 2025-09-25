@@ -1,5 +1,5 @@
 from src.ch15_moment_logic._ref.ch15_keywords import (
-    brokerunits_str,
+    beliefbudhistorys_str,
     cumulative_minute_str,
     hour_label_str,
     job_listen_rotations_str,
@@ -26,7 +26,7 @@ def test_str_functions_ReturnsObj():
     assert moment_timeline_month_str() == "moment_timeline_month"
     assert moment_timeline_weekday_str() == "moment_timeline_weekday"
     assert moment_timeoffi_str() == "moment_timeoffi"
-    assert brokerunits_str() == "brokerunits"
+    assert beliefbudhistorys_str() == "beliefbudhistorys"
     assert cumulative_minute_str() == "cumulative_minute"
     assert hour_label_str() == "hour_label"
     assert paybook_str() == "paybook"

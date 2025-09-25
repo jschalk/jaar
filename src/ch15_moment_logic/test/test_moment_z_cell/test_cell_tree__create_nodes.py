@@ -13,13 +13,13 @@ from src.ch12_hub_toolbox.hub_tool import (
 from src.ch15_moment_logic.moment_cell import create_cell_tree
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     tp37 = 37
@@ -37,7 +37,7 @@ def test_create_cell_tree_Scenaro0_timepoint_Empty(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -64,7 +64,7 @@ def test_create_cell_tree_Scenaro1_LedgerDepth0(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -155,7 +155,7 @@ def test_create_cell_tree_Scenaro2_LedgerDepth1(env_dir_setup_cleanup):
 
 def test_create_cell_tree_Scenaro3_LedgerDepth1_MostRecentEvent(env_dir_setup_cleanup):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -252,7 +252,7 @@ def test_create_cell_tree_Scenaro4_LedgerDepth1_OneBeliefHasNoPast_beliefevent(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"
@@ -335,7 +335,7 @@ def test_create_cell_tree_Scenaro5_LedgerDepth1_ZeroQuotaDoesNotGetCreated(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    moment_mstr_dir = create_path(get_module_temp_dir(), "Fay_mstr")
+    moment_mstr_dir = create_path(get_chapter_temp_dir(), "Fay_mstr")
     a23_str = "amy23"
     bob_str = "Bob"
     yao_str = "Yao"

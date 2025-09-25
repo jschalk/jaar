@@ -1,7 +1,7 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
 from src.ch02_rope_logic.rope import get_ancestor_ropes, get_root_label_from_rope
-from src.ch02_rope_logic.term import BeliefName, RopePointer
+from src.ch02_rope_logic.term import BeliefName, RopeTerm
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
@@ -89,7 +89,7 @@ class starReplaceOrAddData:
     replace_star_list: list = None
 
 
-def _create_star_data(listener: BeliefUnit, x_rope: RopePointer) -> list:
+def _create_star_data(listener: BeliefUnit, x_rope: RopeTerm) -> list:
     star_data = starReplaceOrAddData()
     star_data.add_to_star_list = []
     star_data.replace_star_list = []
@@ -106,8 +106,8 @@ def _create_star_data(listener: BeliefUnit, x_rope: RopePointer) -> list:
 
 def _add_and_replace_planunit_stars(
     listener: BeliefUnit,
-    replace_star_list: list[RopePointer],
-    add_to_star_list: list[RopePointer],
+    replace_star_list: list[RopeTerm],
+    add_to_star_list: list[RopeTerm],
     x_star: float,
 ) -> None:
     for plan_rope in replace_star_list:
@@ -149,7 +149,7 @@ def migrate_all_facts(src_listener: BeliefUnit, dst_listener: BeliefUnit):
 def listen_to_speaker_fact(
     listener: BeliefUnit,
     speaker: BeliefUnit,
-    missing_fact_reason_contexts: list[RopePointer] = None,
+    missing_fact_reason_contexts: list[RopeTerm] = None,
 ) -> BeliefUnit:
     if missing_fact_reason_contexts is None:
         missing_fact_reason_contexts = list(listener.get_missing_fact_reason_contexts())
@@ -318,7 +318,7 @@ def listen_to_belief_visions(listener_hubunit: HubUnit) -> None:
 
 def fact_state_keep_visions_and_listen(
     listener_id: BeliefName,
-    keep_dict: dict[RopePointer],
+    keep_dict: dict[RopeTerm],
     healer_hubunit: HubUnit,
     new_job: BeliefUnit,
 ):

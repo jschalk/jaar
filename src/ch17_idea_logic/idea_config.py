@@ -1,13 +1,13 @@
 from os import getcwd as os_getcwd
-from src.ch01_data_toolbox.db_toolbox import get_sorted_intersection_list
+from src.ch01_data_toolbox.db_toolbox import get_sorted_cols_only_list
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename, open_json
 
 
 def idea_config_path() -> str:
     "Returns path: a17_idea_logic/idea_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch17_idea_logic")
-    return create_path(module_dir, "idea_config.json")
+    chapter_dir = create_path(src_dir, "ch17_idea_logic")
+    return create_path(chapter_dir, "idea_config.json")
 
 
 def get_idea_config_dict() -> dict:
@@ -41,7 +41,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "world_name",
         "idea_number",
         "source_dimen",
-        "pidgin_event_int",
+        "translate_event_int",
         "event_int",
         "face_name",
         "face_name_otx",
@@ -225,7 +225,7 @@ def get_default_sorted_list(
 ) -> list[str]:
     if sorting_columns is None:
         sorting_columns = get_idea_elements_sort_order()
-    return get_sorted_intersection_list(existing_columns, sorting_columns)
+    return get_sorted_cols_only_list(existing_columns, sorting_columns)
 
 
 def get_idea_sqlite_types() -> dict[str, str]:
@@ -238,7 +238,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "face_name_otx": "TEXT",
         "face_name_inx": "TEXT",
         "source_dimen": "TEXT",
-        "pidgin_event_int": "INTEGER",
+        "translate_event_int": "INTEGER",
         "event_int": "INTEGER",
         "moment_label": "TEXT",
         "moment_label_otx": "TEXT",
@@ -526,20 +526,20 @@ def idea_format_00040_map_otx2inx_v0_0_0() -> str:
     return "idea_format_00040_map_otx2inx_v0_0_0"
 
 
-def idea_format_00042_pidgin_title_v0_0_0() -> str:
-    return "idea_format_00042_pidgin_title_v0_0_0"
+def idea_format_00042_translate_title_v0_0_0() -> str:
+    return "idea_format_00042_translate_title_v0_0_0"
 
 
-def idea_format_00043_pidgin_name_v0_0_0() -> str:
-    return "idea_format_00043_pidgin_name_v0_0_0"
+def idea_format_00043_translate_name_v0_0_0() -> str:
+    return "idea_format_00043_translate_name_v0_0_0"
 
 
-def idea_format_00044_pidgin_label_v0_0_0() -> str:
-    return "idea_format_00044_pidgin_label_v0_0_0"
+def idea_format_00044_translate_label_v0_0_0() -> str:
+    return "idea_format_00044_translate_label_v0_0_0"
 
 
-def idea_format_00045_pidgin_rope_v0_0_0() -> str:
-    return "idea_format_00045_pidgin_rope_v0_0_0"
+def idea_format_00045_translate_rope_v0_0_0() -> str:
+    return "idea_format_00045_translate_rope_v0_0_0"
 
 
 def idea_format_00050_delete_belief_voice_membership_v0_0_0() -> str:
@@ -622,10 +622,10 @@ def get_idea_format_filenames() -> set[str]:
         idea_format_00028_belief_planunit_v0_0_0(),
         idea_format_00029_beliefunit_v0_0_0(),
         idea_format_00036_problem_healer_v0_0_0(),
-        idea_format_00042_pidgin_title_v0_0_0(),
-        idea_format_00043_pidgin_name_v0_0_0(),
-        idea_format_00044_pidgin_label_v0_0_0(),
-        idea_format_00045_pidgin_rope_v0_0_0(),
+        idea_format_00042_translate_title_v0_0_0(),
+        idea_format_00043_translate_name_v0_0_0(),
+        idea_format_00044_translate_label_v0_0_0(),
+        idea_format_00045_translate_rope_v0_0_0(),
         idea_format_00050_delete_belief_voice_membership_v0_0_0(),
         idea_format_00051_delete_belief_voiceunit_v0_0_0(),
         idea_format_00052_delete_belief_plan_awardunit_v0_0_0(),
@@ -719,10 +719,10 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,task,problem_bool": idea_format_00028_belief_planunit_v0_0_0(),
         "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit": idea_format_00029_beliefunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
-        "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_pidgin_title_v0_0_0(),
-        "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_pidgin_name_v0_0_0(),
-        "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_pidgin_label_v0_0_0(),
-        "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_pidgin_rope_v0_0_0(),
+        "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_translate_title_v0_0_0(),
+        "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_translate_name_v0_0_0(),
+        "otx_label,inx_label,otx_knot,inx_knot,unknown_str": idea_format_00044_translate_label_v0_0_0(),
+        "otx_rope,inx_rope,otx_knot,inx_knot,unknown_str": idea_format_00045_translate_rope_v0_0_0(),
         "moment_label,belief_name,voice_name,group_title_ERASE": idea_format_00050_delete_belief_voice_membership_v0_0_0(),
         "moment_label,belief_name,voice_name_ERASE": idea_format_00051_delete_belief_voiceunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,awardee_title_ERASE": idea_format_00052_delete_belief_plan_awardunit_v0_0_0(),
@@ -873,8 +873,8 @@ def get_idea_dimen_ref() -> dict[str, set[str]]:
             "br00116",
             "br00117",
         },
-        "pidgin_title": {"br00042", "br00115"},
-        "pidgin_name": {"br00043", "br00113"},
-        "pidgin_rope": {"br00045", "br00117"},
-        "pidgin_label": {"br00044", "br00116"},
+        "translate_title": {"br00042", "br00115"},
+        "translate_name": {"br00043", "br00113"},
+        "translate_rope": {"br00045", "br00117"},
+        "translate_label": {"br00044", "br00116"},
     }

@@ -2,23 +2,13 @@ from copy import deepcopy as copy_deepcopy
 from src.ch02_rope_logic.rope import create_rope
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    ancestors_str,
-    beliefadjust_str,
-    beliefevent_facts_str,
-    boss_facts_str,
-    bud_belief_name_str,
-    celldepth_str,
-    found_facts_str,
-    mandate_str,
-)
 from src.ch11_bud_logic.cell import (
     CELLNODE_QUOTA_DEFAULT,
     CellUnit,
     cellunit_shop,
     create_child_cellunits,
 )
-from src.ch11_bud_logic.test._util.example_factunits import (
+from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_clean_factunit as clean_factunit,
     example_casa_dirty_factunit as dirty_factunit,
     example_casa_grimy_factunit as grimy_factunit,

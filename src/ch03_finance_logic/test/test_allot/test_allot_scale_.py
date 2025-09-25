@@ -593,10 +593,8 @@ def test_get_missing_scale_list_RaisesErrorIfWhileLoopFails_Scenario1():
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
         _get_missing_scale_list(x_missing_scale, x_grain_unit, x_list_length)
-    assert (
-        str(excinfo.value)
-        == f"missing_base_residual calculation failed probably due to missing_scale not being a multiple of grain_unit. missing_scale={x_missing_scale} grain_unit={x_grain_unit}."
-    )
+    assertion_fail_error_str = f"missing_base_residual calculation failed probably due to missing_scale not being a multiple of grain_unit. missing_scale={x_missing_scale} grain_unit={x_grain_unit}."
+    assert str(excinfo.value) == assertion_fail_error_str
 
 
 def test__create_allot_dict_SummationFailsInConsistentOrder():
@@ -608,7 +606,7 @@ def test__create_allot_dict_SummationFailsInConsistentOrder():
         "Bob Dylan": 1,
         "D&B": 1,
         "Freelancing": 1,
-        "Interweb": 1,
+        "Websites": 1,
         "Moods": 1,
         "Nation-States": 1,
         "No Movie playing": 1,
@@ -637,7 +635,7 @@ def test__create_allot_dict_SummationFailsInConsistentOrder():
     #     "Bob Dylan": 2192982,
     #     "D&B": 2192982,
     #     "Freelancing": 2192982,
-    #     "Interweb": 2192982,
+    #     "Websites": 2192982,
     #     "Moods": 2192982,
     #     "Nation-States": 2192982,
     #     "No Movie playing": 2192982,
@@ -666,7 +664,7 @@ def test_allot_scale_Summation():
         "Bob Dylan": 1,
         "D&B": 1,
         "Freelancing": 1,
-        "Interweb": 1,
+        "Websites": 1,
         "Moods": 1,
         "Nation-States": 1,
         "No Movie playing": 1,
@@ -699,7 +697,7 @@ def test_allot_scale_Summation():
     #     "Bob Dylan": 2192983,
     #     "D&B": 2192983,
     #     "Freelancing": 2192983,
-    #     "Interweb": 2192983,
+    #     "Websites": 2192983,
     #     "Moods": 2192983,
     #     "Nation-States": 2192983,
     #     "No Movie playing": 2192983,

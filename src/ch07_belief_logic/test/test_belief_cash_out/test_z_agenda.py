@@ -1,11 +1,11 @@
-from src.ch02_rope_logic.rope import RopePointer
+from src.ch02_rope_logic.rope import RopeTerm
 from src.ch04_group_logic.labor import laborunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_from_json as beliefunit_get_from_json,
 )
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,
     beliefunit_v001_with_large_agenda,
     beliefunit_v002,
@@ -16,7 +16,7 @@ from src.ch07_belief_logic.test._util.example_beliefs import (
 )
 
 
-def get_chores_count(agenda_dict: dict[RopePointer, PlanUnit]) -> int:
+def get_chores_count(agenda_dict: dict[RopeTerm, PlanUnit]) -> int:
     return sum(bool(x_planunit.chore) for x_planunit in agenda_dict.values())
 
 
@@ -169,15 +169,15 @@ def test_BeliefUnit_get_agenda_dict_BeliefUnitHasCorrectAttributes_beliefunit_v0
     mood_rope = yao_belief.make_l1_rope(mood_str)
     aaron_str = "Aaron Donald objects effected by him"
     aaron_rope = yao_belief.make_l1_rope(aaron_str)
-    # interweb_str = "Interweb"
-    # interweb_rope = yao_belief.make_l1_rope(interweb_str)
+    # websites_str = "Websites"
+    # websites_rope = yao_belief.make_l1_rope(websites_str)
     yr_month_str = "yr_month"
     yr_month_rope = yao_belief.make_l1_rope(yr_month_str)
     yao_belief.add_fact(fact_context=month_wk_rope, fact_state=month_wk_rope)
     yao_belief.add_fact(fact_context=nations_rope, fact_state=nations_rope)
     yao_belief.add_fact(fact_context=mood_rope, fact_state=mood_rope)
     yao_belief.add_fact(fact_context=aaron_rope, fact_state=aaron_rope)
-    # yao_belief.add_fact(fact_context=interweb_rope, fact_state=interweb_rope)
+    # yao_belief.add_fact(fact_context=websites_rope, fact_state=websites_rope)
     yao_belief.add_fact(fact_context=yr_month_rope, fact_state=yr_month_rope)
     # season_str = "Seasons"
     # season_rope = yao_belief.make_l1_rope(season_str)

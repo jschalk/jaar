@@ -30,7 +30,7 @@ from src.ch02_rope_logic.term import (
     HealerName,
     LabelTerm,
     MomentLabel,
-    RopePointer,
+    RopeTerm,
     VoiceName,
 )
 from src.ch03_finance_logic.allot import allot_scale
@@ -59,12 +59,7 @@ from src.ch04_group_logic.voice import (
     voiceunit_shop,
     voiceunits_get_from_dict,
 )
-from src.ch05_reason_logic.reason import (
-    FactUnit,
-    ReasonUnit,
-    RopePointer,
-    factunit_shop,
-)
+from src.ch05_reason_logic.reason import FactUnit, ReasonUnit, RopeTerm, factunit_shop
 from src.ch06_plan_logic.healer import HealerUnit
 from src.ch06_plan_logic.plan import (
     PlanAttrHolder,
@@ -139,19 +134,19 @@ class BeliefUnit:
     max_tree_traverse: int = None
     last_pack_id: int = None
     # cashout Calculated field begin
-    _plan_dict: dict[RopePointer, PlanUnit] = None
-    _keep_dict: dict[RopePointer, PlanUnit] = None
-    _healers_dict: dict[HealerName, dict[RopePointer, PlanUnit]] = None
+    _plan_dict: dict[RopeTerm, PlanUnit] = None
+    _keep_dict: dict[RopeTerm, PlanUnit] = None
+    _healers_dict: dict[HealerName, dict[RopeTerm, PlanUnit]] = None
     tree_traverse_count: int = None
     rational: bool = None
     keeps_justified: bool = None
     keeps_buildable: bool = None
     sum_healerunit_share: float = None
     groupunits: dict[GroupTitle, GroupUnit] = None
-    offtrack_kids_star_set: set[RopePointer] = None
+    offtrack_kids_star_set: set[RopeTerm] = None
     offtrack_fund: float = None
-    reason_contexts: set[RopePointer] = None
-    _range_inheritors: dict[RopePointer, RopePointer] = None
+    reason_contexts: set[RopeTerm] = None
+    _range_inheritors: dict[RopeTerm, RopeTerm] = None
     # cashout Calculated field end
 
     def del_last_pack_id(self):
@@ -189,9 +184,9 @@ class BeliefUnit:
 
     def make_rope(
         self,
-        parent_rope: RopePointer = None,
+        parent_rope: RopeTerm = None,
         tail_label: LabelTerm = None,
-    ) -> RopePointer:
+    ) -> RopeTerm:
         return create_rope(
             parent_rope=parent_rope,
             tail_label=tail_label,
@@ -233,7 +228,7 @@ class BeliefUnit:
         else:
             self.max_tree_traverse = x_int
 
-    def _get_relevant_ropes(self, ropes: dict[RopePointer,]) -> set[RopePointer]:
+    def _get_relevant_ropes(self, ropes: dict[RopeTerm,]) -> set[RopeTerm]:
         to_evaluate_list = []
         to_evaluate_hx_dict = {}
         for x_rope in ropes:
@@ -269,9 +264,9 @@ class BeliefUnit:
 
     def _evaluate_relevancy(
         self,
-        to_evaluate_list: list[RopePointer],
-        to_evaluate_hx_dict: dict[RopePointer, int],
-        to_evaluate_rope: RopePointer,
+        to_evaluate_list: list[RopeTerm],
+        to_evaluate_hx_dict: dict[RopeTerm, int],
+        to_evaluate_rope: RopeTerm,
         rope_type: str,
     ):
         if to_evaluate_hx_dict.get(to_evaluate_rope) is None:
@@ -290,10 +285,10 @@ class BeliefUnit:
                         rope_type="reasonunit_descendant",
                     )
 
-    def all_plans_relevant_to_task_plan(self, rope: RopePointer) -> bool:
+    def all_plans_relevant_to_task_plan(self, rope: RopeTerm) -> bool:
         task_plan_assoc_set = set(self._get_relevant_ropes({rope}))
         all_plans_set = set(self.get_plan_tree_ordered_rope_list())
-        return all_plans_set == all_plans_set.intersection(task_plan_assoc_set)
+        return all_plans_set == all_plans_set & (task_plan_assoc_set)
 
     def get_awardunits_metrics(self) -> dict[GroupTitle, AwardUnit]:
         tree_metrics = self.get_tree_metrics()
@@ -425,7 +420,7 @@ class BeliefUnit:
         all_group_titles = set(self.groupunits.keys())
         return all_group_titles.difference(x_voiceunit_group_titles)
 
-    def _is_plan_rangeroot(self, plan_rope: RopePointer) -> bool:
+    def _is_plan_rangeroot(self, plan_rope: RopeTerm) -> bool:
         if self.moment_label == plan_rope:
             raise InvalidBeliefException(
                 "its difficult to foresee a scenario where planroot is rangeroot"
@@ -445,8 +440,8 @@ class BeliefUnit:
 
     def add_fact(
         self,
-        fact_context: RopePointer,
-        fact_state: RopePointer = None,
+        fact_context: RopeTerm,
+        fact_state: RopeTerm = None,
         fact_lower: float = None,
         fact_upper: float = None,
         create_missing_plans: bool = None,
@@ -498,13 +493,13 @@ class BeliefUnit:
             # that has that reason_context.
             x_planroot.set_factunit(x_factunit)
 
-    def get_fact(self, fact_context: RopePointer) -> FactUnit:
+    def get_fact(self, fact_context: RopeTerm) -> FactUnit:
         return self.planroot.factunits.get(fact_context)
 
-    def del_fact(self, fact_context: RopePointer):
+    def del_fact(self, fact_context: RopeTerm):
         self.planroot.del_factunit(fact_context)
 
-    def get_plan_dict(self, problem: bool = None) -> dict[RopePointer, PlanUnit]:
+    def get_plan_dict(self, problem: bool = None) -> dict[RopeTerm, PlanUnit]:
         self.cashout()
         if not problem:
             return self._plan_dict
@@ -576,10 +571,10 @@ class BeliefUnit:
             level_count = 0
         return level_count
 
-    def get_reason_contexts(self) -> set[RopePointer]:
+    def get_reason_contexts(self) -> set[RopeTerm]:
         return set(self.get_tree_metrics().reason_contexts.keys())
 
-    def get_missing_fact_reason_contexts(self) -> dict[RopePointer, int]:
+    def get_missing_fact_reason_contexts(self) -> dict[RopeTerm, int]:
         tree_metrics = self.get_tree_metrics()
         reason_contexts = tree_metrics.reason_contexts
         missing_reason_contexts = {}
@@ -591,7 +586,7 @@ class BeliefUnit:
         return missing_reason_contexts
 
     def add_plan(
-        self, plan_rope: RopePointer, star: float = None, task: bool = None
+        self, plan_rope: RopeTerm, star: float = None, task: bool = None
     ) -> PlanUnit:
         x_plan_label = get_tail_label(plan_rope, self.knot)
         x_parent_rope = get_parent_rope(plan_rope, self.knot)
@@ -623,7 +618,7 @@ class BeliefUnit:
     def set_plan(
         self,
         plan_kid: PlanUnit,
-        parent_rope: RopePointer,
+        parent_rope: RopeTerm,
         get_rid_of_missing_awardunits_awardee_titles: bool = None,
         create_missing_plans: bool = None,
         adoptees: list[str] = None,
@@ -707,11 +702,11 @@ class BeliefUnit:
             for case_x in x_reason.cases.values():
                 self._create_plankid_if_empty(rope=case_x.reason_state)
 
-    def _create_plankid_if_empty(self, rope: RopePointer):
+    def _create_plankid_if_empty(self, rope: RopeTerm):
         if self.plan_exists(rope) is False:
             self.add_plan(rope)
 
-    def del_plan_obj(self, rope: RopePointer, del_children: bool = True):
+    def del_plan_obj(self, rope: RopeTerm, del_children: bool = True):
         if rope == self.planroot.get_plan_rope():
             raise InvalidBeliefException("Planroot cannot be deleted")
         parent_rope = get_parent_rope(rope)
@@ -722,7 +717,7 @@ class BeliefUnit:
             parent_plan.del_kid(get_tail_label(rope, self.knot))
         self.cashout()
 
-    def _shift_plan_kids(self, x_rope: RopePointer):
+    def _shift_plan_kids(self, x_rope: RopeTerm):
         parent_rope = get_parent_rope(x_rope)
         d_temp_plan = self.get_plan_obj(x_rope)
         for kid in d_temp_plan.kids.values():
@@ -731,7 +726,7 @@ class BeliefUnit:
     def set_belief_name(self, new_belief_name):
         self.belief_name = new_belief_name
 
-    def edit_plan_label(self, old_rope: RopePointer, new_plan_label: LabelTerm):
+    def edit_plan_label(self, old_rope: RopeTerm, new_plan_label: LabelTerm):
         if self.knot in new_plan_label:
             exception_str = f"Cannot modify '{old_rope}' because new_plan_label {new_plan_label} contains knot {self.knot}"
             raise InvalidLabelException(exception_str)
@@ -752,7 +747,7 @@ class BeliefUnit:
             self._planroot_find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
     def _non_root_plan_label_edit(
-        self, old_rope: RopePointer, new_plan_label: LabelTerm, parent_rope: RopePointer
+        self, old_rope: RopeTerm, new_plan_label: LabelTerm, parent_rope: RopeTerm
     ):
         x_plan = self.get_plan_obj(old_rope)
         x_plan.set_plan_label(new_plan_label)
@@ -761,7 +756,7 @@ class BeliefUnit:
         plan_parent.kids.pop(get_tail_label(old_rope, self.knot))
         plan_parent.kids[x_plan.plan_label] = x_plan
 
-    def _planroot_find_replace_rope(self, old_rope: RopePointer, new_rope: RopePointer):
+    def _planroot_find_replace_rope(self, old_rope: RopeTerm, new_rope: RopeTerm):
         self.planroot.find_replace_rope(old_rope=old_rope, new_rope=new_rope)
 
         plan_iter_list = [self.planroot]
@@ -789,9 +784,9 @@ class BeliefUnit:
 
     def edit_reason(
         self,
-        plan_rope: RopePointer,
-        reason_context: RopePointer = None,
-        reason_case: RopePointer = None,
+        plan_rope: RopeTerm,
+        reason_context: RopeTerm = None,
+        reason_case: RopeTerm = None,
         reason_lower: float = None,
         reason_upper: float = None,
         reason_divisor: int = None,
@@ -807,17 +802,17 @@ class BeliefUnit:
 
     def edit_plan_attr(
         self,
-        plan_rope: RopePointer,
+        plan_rope: RopeTerm,
         star: int = None,
         uid: int = None,
         reason: ReasonUnit = None,
-        reason_context: RopePointer = None,
-        reason_case: RopePointer = None,
+        reason_context: RopeTerm = None,
+        reason_case: RopeTerm = None,
         reason_lower: float = None,
         reason_upper: float = None,
         reason_divisor: int = None,
-        reason_del_case_reason_context: RopePointer = None,
-        reason_del_case_reason_state: RopePointer = None,
+        reason_del_case_reason_context: RopeTerm = None,
+        reason_del_case_reason_state: RopeTerm = None,
         reason_plan_active_requisite: str = None,
         laborunit: LaborUnit = None,
         healerunit: HealerUnit = None,
@@ -888,8 +883,8 @@ reason_case:    {reason_case}"""
         x_plan._set_attrs_to_planunit(plan_attr=x_planattrholder)
 
     def get_agenda_dict(
-        self, necessary_reason_context: RopePointer = None
-    ) -> dict[RopePointer, PlanUnit]:
+        self, necessary_reason_context: RopeTerm = None
+    ) -> dict[RopeTerm, PlanUnit]:
         self.cashout()
         return {
             x_plan.get_plan_rope(): x_plan
@@ -897,14 +892,12 @@ reason_case:    {reason_case}"""
             if x_plan.is_agenda_plan(necessary_reason_context)
         }
 
-    def get_all_tasks(self) -> dict[RopePointer, PlanUnit]:
+    def get_all_tasks(self) -> dict[RopeTerm, PlanUnit]:
         self.cashout()
         all_plans = self._plan_dict.values()
         return {x_plan.get_plan_rope(): x_plan for x_plan in all_plans if x_plan.task}
 
-    def set_agenda_chore_complete(
-        self, chore_rope: RopePointer, reason_context: RopePointer
-    ):
+    def set_agenda_chore_complete(self, chore_rope: RopeTerm, reason_context: RopeTerm):
         task_plan = self.get_plan_obj(chore_rope)
         task_plan.set_factunit_to_complete(self.planroot.factunits[reason_context])
 
@@ -957,7 +950,7 @@ reason_case:    {reason_case}"""
 
     def _reset_groupunits_fund_give_take(self):
         for groupunit_obj in self.groupunits.values():
-            groupunit_obj.clear_fund_give_take()
+            groupunit_obj.clear_group_fund_give_take()
 
     def _set_groupunits_fund_share(self, awardheirs: dict[GroupTitle, AwardUnit]):
         for awardunit_obj in awardheirs.values():
@@ -1020,7 +1013,7 @@ reason_case:    {reason_case}"""
         for voiceunit in self.voices.values():
             voiceunit.clear_fund_give_take()
 
-    def plan_exists(self, rope: RopePointer) -> bool:
+    def plan_exists(self, rope: RopeTerm) -> bool:
         if rope in {"", None}:
             return False
         root_rope_plan_label = get_root_label_from_rope(rope, self.knot)
@@ -1043,9 +1036,7 @@ reason_case:    {reason_case}"""
                 return False
         return True
 
-    def get_plan_obj(
-        self, rope: RopePointer, if_missing_create: bool = False
-    ) -> PlanUnit:
+    def get_plan_obj(self, rope: RopeTerm, if_missing_create: bool = False) -> PlanUnit:
         if rope is None:
             raise InvalidBeliefException("get_plan_obj received rope=None")
         if self.plan_exists(rope) is False and not if_missing_create:
@@ -1069,7 +1060,7 @@ reason_case:    {reason_case}"""
         return x_plan.get_kids_in_range(x_gogo_calc, x_stop_calc)
 
     def get_inheritor_plan_list(
-        self, math_rope: RopePointer, inheritor_rope: RopePointer
+        self, math_rope: RopeTerm, inheritor_rope: RopeTerm
     ) -> list[PlanUnit]:
         plan_ropes = all_ropes_between(math_rope, inheritor_rope)
         return [self.get_plan_obj(x_plan_rope) for x_plan_rope in plan_ropes]
@@ -1087,7 +1078,7 @@ reason_case:    {reason_case}"""
             for x_reason_context in x_plan.reasonunits.keys():
                 self.reason_contexts.add(x_reason_context)
 
-    def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopePointer):
+    def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
         exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and stop_calc attributes set twice"
         raise gogo_calc_stop_calc_Exception(exception_str)
 
@@ -1135,7 +1126,7 @@ reason_case:    {reason_case}"""
                 self._allot_fund_share(x_plan)
 
     def _set_ancestors_task_fund_keep_attrs(
-        self, rope: RopePointer, keep_exceptions: bool = False
+        self, rope: RopeTerm, keep_exceptions: bool = False
     ):
         x_descendant_task_count = 0
         child_awardlines = None
@@ -1342,7 +1333,7 @@ reason_case:    {reason_case}"""
             if self.keeps_justified and x_plan.healerunit.any_healer_name_exists():
                 self._keep_dict[x_plan.get_plan_rope()] = x_plan
 
-    def _get_healers_dict(self) -> dict[HealerName, dict[RopePointer, PlanUnit]]:
+    def _get_healers_dict(self) -> dict[HealerName, dict[RopeTerm, PlanUnit]]:
         _healers_dict = {}
         for x_keep_rope, x_keep_plan in self._keep_dict.items():
             for x_healer_name in x_keep_plan.healerunit._healer_names:
@@ -1367,7 +1358,7 @@ reason_case:    {reason_case}"""
 
     def get_plan_tree_ordered_rope_list(
         self, no_range_descendants: bool = False
-    ) -> list[RopePointer]:
+    ) -> list[RopeTerm]:
         plan_list = list(self.get_plan_dict().values())
         label_dict = {
             plan.get_plan_rope().lower(): plan.get_plan_rope() for plan in plan_list

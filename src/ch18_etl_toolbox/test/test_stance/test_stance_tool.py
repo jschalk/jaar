@@ -23,7 +23,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     inx_name_str,
     otx_knot_str,
     otx_name_str,
-    pidgin_name_str,
+    translate_name_str,
     unknown_str_str,
 )
 from src.ch18_etl_toolbox.ch18_path import (
@@ -37,7 +37,7 @@ from src.ch18_etl_toolbox.stance_tool import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
@@ -49,7 +49,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -64,7 +64,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario1_SingleMomentUnit_NoBeliefU
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     moment_mstr_dir = create_moment_mstr_path(world_dir)
     a23_str = "amy23"
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
@@ -84,7 +84,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     moment_mstr_dir = create_moment_mstr_path(world_dir)
     bob_str = "Bob"
     a23_str = "amy23"
@@ -107,10 +107,10 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_gut_BeliefUnits(
     assert gen_stance_csv_strs == expected_stance_csv_strs
 
 
-def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
+def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
     env_dir_setup_cleanup,
 ):
-    # ESTABLISH database with pidgin data
+    # ESTABLISH database with translate data
     yao_str = "Yao"
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -122,8 +122,8 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
     bob_unknown_str = "BobUnknown"
-    world_dir = get_module_temp_dir()
-    output_dir = create_path(get_module_temp_dir(), "output")
+    world_dir = get_chapter_temp_dir()
+    output_dir = create_path(get_chapter_temp_dir(), "output")
     world_db_path = create_world_db_path(world_dir)
     print(f"{world_db_path=}")
     set_dir(world_dir)
@@ -131,27 +131,27 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_PidginRowsInDB(
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        pidname_dimen = pidgin_name_str()
-        pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
-        print(f"{pidname_s_vld_tablename=}")
-        insert_pidname_sqlstr = f"""INSERT INTO {pidname_s_vld_tablename}
+        trlname_dimen = translate_name_str()
+        trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
+        print(f"{trlname_s_vld_tablename=}")
+        insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
         ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
-        cursor.execute(insert_pidname_sqlstr)
+        cursor.execute(insert_trlname_sqlstr)
 
-        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
-        insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename}
+        trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
+        insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
         ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
         ;
         """
-        cursor.execute(insert_pidcore_sqlstr)
+        cursor.execute(insert_trlcore_sqlstr)
     db_conn.close()
 
     # WHEN
@@ -196,7 +196,7 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
 ):
     # ESTABLISH
     sue_str = "Sue"
-    world_dir = get_module_temp_dir()
+    world_dir = get_chapter_temp_dir()
     output_dir = create_path(world_dir, "output")
     stance0001_path = create_stance0001_path(output_dir)
     assert os_path_exists(stance0001_path) is False
@@ -211,10 +211,10 @@ def test_create_stance0001_file_CreatesFile_Scenario0_NoMomentUnits(
     assert set(bob_stance0001_sheetnames) == set(stance_csv_strs.keys())
 
 
-def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
+def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
     env_dir_setup_cleanup,
 ):
-    # ESTABLISH database with pidgin data
+    # ESTABLISH database with translate data
     yao_str = "Yao"
     bob_otx = "Bob"
     bob_inx = "Bobby"
@@ -226,8 +226,8 @@ def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
     colon_str = ":"
     sue_unknown_str = "SueUnknown"
     bob_unknown_str = "BobUnknown"
-    world_dir = get_module_temp_dir()
-    output_dir = create_path(get_module_temp_dir(), "output")
+    world_dir = get_chapter_temp_dir()
+    output_dir = create_path(get_chapter_temp_dir(), "output")
     world_db_path = create_world_db_path(world_dir)
     print(f"{world_db_path=}")
     set_dir(world_dir)
@@ -235,27 +235,27 @@ def test_create_stance0001_file_CreatesFile_Scenario1_PidginRowsInDB(
     with sqlite3_connect(world_db_path) as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        pidname_dimen = pidgin_name_str()
-        pidname_s_vld_tablename = prime_tbl(pidname_dimen, "s", "vld")
-        print(f"{pidname_s_vld_tablename=}")
-        insert_pidname_sqlstr = f"""INSERT INTO {pidname_s_vld_tablename}
+        trlname_dimen = translate_name_str()
+        trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
+        print(f"{trlname_s_vld_tablename=}")
+        insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
         ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
         ;
         """
-        cursor.execute(insert_pidname_sqlstr)
+        cursor.execute(insert_trlname_sqlstr)
 
-        pidcore_s_vld_tablename = prime_tbl("pidcore", "s", "vld")
-        insert_pidcore_sqlstr = f"""INSERT INTO {pidcore_s_vld_tablename}
+        trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
+        insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
         ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
         ;
         """
-        cursor.execute(insert_pidcore_sqlstr)
+        cursor.execute(insert_trlcore_sqlstr)
     db_conn.close()
 
     stance0001_path = create_stance0001_path(output_dir)

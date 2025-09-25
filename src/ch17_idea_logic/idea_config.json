@@ -285,10 +285,10 @@
       "yr1_jan1_offset": {}
     }
   },
-  "pidgin_label": {
+  "translate_label": {
     "allowed_crud": "insert_one_time",
     "build_order": 2,
-    "idea_category": "pidgin",
+    "idea_category": "translate",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -301,10 +301,10 @@
       "unknown_str": {}
     }
   },
-  "pidgin_name": {
+  "translate_name": {
     "allowed_crud": "insert_one_time",
     "build_order": 0,
-    "idea_category": "pidgin",
+    "idea_category": "translate",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -317,10 +317,10 @@
       "unknown_str": {}
     }
   },
-  "pidgin_title": {
+  "translate_title": {
     "allowed_crud": "insert_one_time",
     "build_order": 1,
-    "idea_category": "pidgin",
+    "idea_category": "translate",
     "jkeys": {
       "event_int": {},
       "face_name": {},
@@ -333,10 +333,10 @@
       "unknown_str": {}
     }
   },
-  "pidgin_rope": {
+  "translate_rope": {
     "allowed_crud": "insert_one_time",
     "build_order": 3,
-    "idea_category": "pidgin",
+    "idea_category": "translate",
     "jkeys": {
       "event_int": {},
       "face_name": {},

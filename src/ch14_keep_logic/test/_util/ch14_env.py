@@ -10,7 +10,7 @@ def temp_moment_mstr_dir():
     return "src\\ch14_keep_logic\\test\\_util\\moment_mstr"
 
 
-def get_module_temp_dir():
+def get_chapter_temp_dir():
     return "src\\ch14_keep_logic\\test\\_util\\moment_mstr\\moments"
 
 

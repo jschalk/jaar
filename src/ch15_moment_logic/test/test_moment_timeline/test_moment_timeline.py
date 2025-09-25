@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     get_creg_config,
 )
@@ -11,14 +11,14 @@ from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch15_moment_logic.moment_timeline import get_moment_belieftimelinepoint
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_get_moment_belieftimelinepoint_ReturnsObj_Scenario0_Empty_offi_time():
     # ESTABLISH
     fay_str = "Fay"
-    fay_momentunit = momentunit_shop(fay_str, get_module_temp_dir())
+    fay_momentunit = momentunit_shop(fay_str, get_chapter_temp_dir())
     assert fay_momentunit.timeline == timelineunit_shop(get_creg_config())
     assert not fay_momentunit._offi_time_max
 
@@ -55,7 +55,7 @@ def test_get_moment_belieftimelinepoint_ReturnsObj_Scenario1_MomentUnit_NonDefau
     fay_penny = 7
     fay_momentunit = momentunit_shop(
         fay_str,
-        get_module_temp_dir(),
+        get_chapter_temp_dir(),
         knot=slash_str,
         fund_iota=fay_fund_iota,
         respect_bit=fay_respect_bit,

@@ -55,15 +55,15 @@ from src.ch15_moment_logic.moment_cell import (
     set_cell_trees_found_facts,
 )
 from src.ch15_moment_logic.moment_main import get_default_path_momentunit
-from src.ch16_pidgin_logic.pidgin_config import (
-    get_pidgin_args_class_types,
-    get_pidgin_LabelTerm_args,
-    get_pidgin_NameTerm_args,
-    get_pidgin_RopePointer_args,
-    get_pidgin_TitleTerm_args,
-    get_quick_pidgens_column_ref,
+from src.ch16_translate_logic.translate_config import (
+    get_quick_translates_column_ref,
+    get_translate_args_class_types,
+    get_translate_LabelTerm_args,
+    get_translate_NameTerm_args,
+    get_translate_RopeTerm_args,
+    get_translate_TitleTerm_args,
 )
-from src.ch16_pidgin_logic.pidgin_main import (
+from src.ch16_translate_logic.translate_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )
@@ -92,10 +92,10 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_OTE1_AGG_SQLSTR,
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR,
-    create_insert_into_pidgin_core_raw_sqlstr,
-    create_insert_missing_face_name_into_pidgin_core_vld_sqlstr,
-    create_insert_pidgin_core_agg_into_vld_sqlstr,
-    create_insert_pidgin_sound_vld_table_sqlstr,
+    create_insert_into_translate_core_raw_sqlstr,
+    create_insert_missing_face_name_into_translate_core_vld_sqlstr,
+    create_insert_translate_core_agg_into_vld_sqlstr,
+    create_insert_translate_sound_vld_table_sqlstr,
     create_job_tables,
     create_knot_exists_in_label_error_update_sqlstr,
     create_knot_exists_in_name_error_update_sqlstr,
@@ -105,11 +105,11 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_sound_raw_update_inconsist_error_message_sqlstr,
     create_update_heard_raw_empty_inx_col_sqlstr,
     create_update_heard_raw_existing_inx_col_sqlstr,
-    create_update_pidgin_sound_agg_inconsist_sqlstr,
-    create_update_pidlabe_sound_agg_knot_error_sqlstr,
-    create_update_pidname_sound_agg_knot_error_sqlstr,
-    create_update_pidrope_sound_agg_knot_error_sqlstr,
-    create_update_pidtitl_sound_agg_knot_error_sqlstr,
+    create_update_translate_sound_agg_inconsist_sqlstr,
+    create_update_trllabe_sound_agg_knot_error_sqlstr,
+    create_update_trlname_sound_agg_knot_error_sqlstr,
+    create_update_trlrope_sound_agg_knot_error_sqlstr,
+    create_update_trltitl_sound_agg_knot_error_sqlstr,
     get_belief_heard_agg_tablenames,
     get_insert_heard_agg_sqlstrs,
     get_insert_into_heard_raw_sqlstrs,
@@ -241,9 +241,9 @@ def etl_brick_agg_tables_to_brick_valid_tables(conn_or_cursor: sqlite3_Connectio
                 columns_list=agg_columns,
                 column_types=idea_sqlite_types,
             )
-            agg_cols_dict = {agg_col: None for agg_col in agg_columns}
+            agg_cols_set = set(agg_columns)
             insert_clause_str = create_insert_into_clause_str(
-                conn_or_cursor, valid_tablename, agg_cols_dict
+                conn_or_cursor, valid_tablename, agg_cols_set
             )
             select_sqlstr = create_select_query(
                 conn_or_cursor, x_tablename, agg_columns
@@ -342,21 +342,21 @@ def get_brick_valid_tables(cursor: sqlite3_Cursor) -> dict[str, str]:
     }
 
 
-def brick_valid_tables_to_pidgin_prime_raw_tables(cursor: sqlite3_Cursor):
+def brick_valid_tables_to_translate_prime_raw_tables(cursor: sqlite3_Cursor):
     brick_valid_tables = get_brick_valid_tables(cursor)
     idea_dimen_ref = {
-        pidgin_dimen: idea_numbers
-        for pidgin_dimen, idea_numbers in get_idea_dimen_ref().items()
-        if pidgin_dimen[:6] == "pidgin"
+        translate_dimen: idea_numbers
+        for translate_dimen, idea_numbers in get_idea_dimen_ref().items()
+        if translate_dimen[:6] == "translate"
     }
-    pidgin_raw_tables = {}
-    for pidgin_dimen in idea_dimen_ref:
-        idea_numbers = idea_dimen_ref.get(pidgin_dimen)
-        raw_tablename = f"{pidgin_dimen}_raw"
-        pidgin_raw_tables[raw_tablename] = idea_numbers
+    translate_raw_tables = {}
+    for translate_dimen in idea_dimen_ref:
+        idea_numbers = idea_dimen_ref.get(translate_dimen)
+        raw_tablename = f"{translate_dimen}_raw"
+        translate_raw_tables[raw_tablename] = idea_numbers
 
     for brick_valid_table, idea_number in brick_valid_tables.items():
-        for raw_tablename, idea_numbers in pidgin_raw_tables.items():
+        for raw_tablename, idea_numbers in translate_raw_tables.items():
             if idea_number in idea_numbers:
                 etl_brick_valid_table_into_old_prime_table(
                     cursor, brick_valid_table, raw_tablename, idea_number
@@ -415,23 +415,23 @@ def etl_sound_raw_tables_to_sound_agg_tables(cursor: sqlite3_Cursor):
     insert_sound_raw_selects_into_sound_agg_tables(cursor)
 
 
-def insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor: sqlite3_Cursor):
-    for dimen in get_quick_pidgens_column_ref():
-        cursor.execute(create_insert_into_pidgin_core_raw_sqlstr(dimen))
+def insert_translate_sound_agg_into_translate_core_raw_table(cursor: sqlite3_Cursor):
+    for dimen in get_quick_translates_column_ref():
+        cursor.execute(create_insert_into_translate_core_raw_sqlstr(dimen))
 
 
-def insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor: sqlite3_Cursor):
+def insert_translate_core_agg_to_translate_core_vld_table(cursor: sqlite3_Cursor):
     knot = default_knot_if_None()
     unknown = default_unknown_str_if_None()
-    insert_sqlstr = create_insert_pidgin_core_agg_into_vld_sqlstr(knot, unknown)
+    insert_sqlstr = create_insert_translate_core_agg_into_vld_sqlstr(knot, unknown)
     cursor.execute(insert_sqlstr)
 
 
-def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
-    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
+def update_inconsistency_translate_core_raw_table(cursor: sqlite3_Cursor):
+    translate_core_s_raw_tablename = create_prime_tablename("trlcore", "s", "raw")
     sqlstr = create_update_inconsistency_error_query(
         cursor,
-        x_tablename=pidgin_core_s_raw_tablename,
+        x_tablename=translate_core_s_raw_tablename,
         focus_columns={"face_name"},
         exclude_columns={"source_dimen"},
         error_holder_column="error_message",
@@ -441,78 +441,80 @@ def update_inconsistency_pidgin_core_raw_table(cursor: sqlite3_Cursor):
     cursor.execute(sqlstr)
 
 
-def insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor: sqlite3_Cursor):
-    pidgin_core_s_raw_tablename = create_prime_tablename("pidcore", "s", "raw")
-    pidgin_core_s_agg_tablename = create_prime_tablename("pidcore", "s", "agg")
+def insert_translate_core_raw_to_translate_core_agg_table(cursor: sqlite3_Cursor):
+    translate_core_s_raw_tablename = create_prime_tablename("trlcore", "s", "raw")
+    translate_core_s_agg_tablename = create_prime_tablename("trlcore", "s", "agg")
     sqlstr = f"""
-INSERT INTO {pidgin_core_s_agg_tablename} (face_name, otx_knot, inx_knot, unknown_str)
+INSERT INTO {translate_core_s_agg_tablename} (face_name, otx_knot, inx_knot, unknown_str)
 SELECT face_name, MAX(otx_knot), MAX(inx_knot), MAX(unknown_str)
-FROM {pidgin_core_s_raw_tablename}
+FROM {translate_core_s_raw_tablename}
 WHERE error_message IS NULL
 GROUP BY face_name
 """
     cursor.execute(sqlstr)
 
 
-def update_pidgin_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
-    for dimen in get_quick_pidgens_column_ref():
-        cursor.execute(create_update_pidgin_sound_agg_inconsist_sqlstr(dimen))
+def update_translate_sound_agg_inconsist_errors(cursor: sqlite3_Cursor):
+    for dimen in get_quick_translates_column_ref():
+        cursor.execute(create_update_translate_sound_agg_inconsist_sqlstr(dimen))
 
 
-def update_pidgin_sound_agg_knot_errors(cursor: sqlite3_Cursor):
-    cursor.execute(create_update_pidlabe_sound_agg_knot_error_sqlstr())
-    cursor.execute(create_update_pidrope_sound_agg_knot_error_sqlstr())
-    cursor.execute(create_update_pidname_sound_agg_knot_error_sqlstr())
-    cursor.execute(create_update_pidtitl_sound_agg_knot_error_sqlstr())
+def update_translate_sound_agg_knot_errors(cursor: sqlite3_Cursor):
+    cursor.execute(create_update_trllabe_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_trlrope_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_trlname_sound_agg_knot_error_sqlstr())
+    cursor.execute(create_update_trltitl_sound_agg_knot_error_sqlstr())
 
 
-def insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor: sqlite3_Cursor):
-    for dimen in get_quick_pidgens_column_ref():
-        cursor.execute(create_insert_pidgin_sound_vld_table_sqlstr(dimen))
+def insert_translate_sound_agg_tables_to_translate_sound_vld_table(
+    cursor: sqlite3_Cursor,
+):
+    for dimen in get_quick_translates_column_ref():
+        cursor.execute(create_insert_translate_sound_vld_table_sqlstr(dimen))
 
 
 def set_moment_belief_sound_agg_knot_errors(cursor: sqlite3_Cursor):
-    pidgin_label_args = get_pidgin_LabelTerm_args()
-    pidgin_name_args = get_pidgin_NameTerm_args()
-    pidgin_title_args = get_pidgin_TitleTerm_args()
-    pidgin_rope_args = get_pidgin_RopePointer_args()
-    pidgin_args = copy_copy(pidgin_label_args)
-    pidgin_args.update(pidgin_name_args)
-    pidgin_args.update(pidgin_title_args)
-    pidgin_args.update(pidgin_rope_args)
-    pidginable_tuples = get_moment_belief_sound_agg_pidginable_columns(
-        cursor, pidgin_args
+    translate_label_args = get_translate_LabelTerm_args()
+    translate_name_args = get_translate_NameTerm_args()
+    translate_title_args = get_translate_TitleTerm_args()
+    translate_rope_args = get_translate_RopeTerm_args()
+    translate_args = copy_copy(translate_label_args)
+    translate_args.update(translate_name_args)
+    translate_args.update(translate_title_args)
+    translate_args.update(translate_rope_args)
+    translateable_tuples = get_moment_belief_sound_agg_translateable_columns(
+        cursor, translate_args
     )
-    for heard_raw_tablename, pidginable_columnname in pidginable_tuples:
+    for heard_raw_tablename, translateable_columnname in translateable_tuples:
         error_update_sqlstr = None
-        if pidginable_columnname in pidgin_label_args:
+        if translateable_columnname in translate_label_args:
             error_update_sqlstr = create_knot_exists_in_label_error_update_sqlstr(
-                heard_raw_tablename, pidginable_columnname
+                heard_raw_tablename, translateable_columnname
             )
-        if pidginable_columnname in pidgin_name_args:
+        if translateable_columnname in translate_name_args:
             error_update_sqlstr = create_knot_exists_in_name_error_update_sqlstr(
-                heard_raw_tablename, pidginable_columnname
+                heard_raw_tablename, translateable_columnname
             )
         if error_update_sqlstr:
             cursor.execute(error_update_sqlstr)
 
 
-def get_moment_belief_sound_agg_pidginable_columns(
-    cursor: sqlite3_Cursor, pidgin_args: set[str]
+def get_moment_belief_sound_agg_translateable_columns(
+    cursor: sqlite3_Cursor, translate_args: set[str]
 ) -> set[tuple[str, str]]:
-    pidgin_columns = set()
+    translate_columns = set()
     for x_tablename in get_insert_into_heard_raw_sqlstrs().keys():
         x_tablename = x_tablename.replace("_h_", "_s_")
         x_tablename = x_tablename.replace("_raw", "_agg")
         for columnname in get_table_columns(cursor, x_tablename):
-            if columnname in pidgin_args:
-                pidgin_columns.add((x_tablename, columnname))
-    return pidgin_columns
+            if columnname in translate_args:
+                translate_columns.add((x_tablename, columnname))
+    return translate_columns
 
 
-def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
+def populate_translate_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
     for agg_tablename in get_moment_belief_sound_agg_tablenames():
-        insert_sqlstr = create_insert_missing_face_name_into_pidgin_core_vld_sqlstr(
+        insert_sqlstr = create_insert_missing_face_name_into_translate_core_vld_sqlstr(
             default_knot=default_knot_if_None(),
             default_unknown=default_unknown_str_if_None(),
             moment_belief_sound_agg_tablename=agg_tablename,
@@ -520,15 +522,17 @@ def populate_pidgin_core_vld_with_missing_face_names(cursor: sqlite3_Cursor):
         cursor.execute(insert_sqlstr)
 
 
-def etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor: sqlite3_Cursor):
-    insert_pidgin_sound_agg_into_pidgin_core_raw_table(cursor)
-    update_inconsistency_pidgin_core_raw_table(cursor)
-    insert_pidgin_core_raw_to_pidgin_core_agg_table(cursor)
-    insert_pidgin_core_agg_to_pidgin_core_vld_table(cursor)
-    populate_pidgin_core_vld_with_missing_face_names(cursor)
-    update_pidgin_sound_agg_inconsist_errors(cursor)
-    update_pidgin_sound_agg_knot_errors(cursor)
-    insert_pidgin_sound_agg_tables_to_pidgin_sound_vld_table(cursor)
+def etl_translate_sound_agg_tables_to_translate_sound_vld_tables(
+    cursor: sqlite3_Cursor,
+):
+    insert_translate_sound_agg_into_translate_core_raw_table(cursor)
+    update_inconsistency_translate_core_raw_table(cursor)
+    insert_translate_core_raw_to_translate_core_agg_table(cursor)
+    insert_translate_core_agg_to_translate_core_vld_table(cursor)
+    populate_translate_core_vld_with_missing_face_names(cursor)
+    update_translate_sound_agg_inconsist_errors(cursor)
+    update_translate_sound_agg_knot_errors(cursor)
+    insert_translate_sound_agg_tables_to_translate_sound_vld_table(cursor)
 
 
 def etl_sound_agg_tables_to_sound_vld_tables(cursor: sqlite3_Cursor):
@@ -543,13 +547,13 @@ def etl_sound_vld_tables_to_heard_raw_tables(cursor: sqlite3_Cursor):
 
 
 def set_all_heard_raw_inx_columns(cursor: sqlite3_Cursor):
-    pidgin_args = get_pidgin_args_class_types()
+    translate_args = get_translate_args_class_types()
     for heard_raw_tablename, otx_columnname in get_all_heard_raw_otx_columns(cursor):
         columnname_without_otx = otx_columnname[:-4]
         x_arg = copy_copy(columnname_without_otx)
         if x_arg[-5:] == "ERASE":
             x_arg = x_arg[:-6]
-        arg_class_type = pidgin_args.get(x_arg)
+        arg_class_type = translate_args.get(x_arg)
         set_heard_raw_inx_column(
             cursor, heard_raw_tablename, columnname_without_otx, arg_class_type
         )
@@ -570,18 +574,18 @@ def set_heard_raw_inx_column(
     column_without_otx: str,
     arg_class_type: str,
 ):
-    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "RopePointer"}:
-        pidgin_type_abbv = ""
+    if arg_class_type in {"NameTerm", "TitleTerm", "LabelTerm", "RopeTerm"}:
+        translate_type_abbv = ""
         if arg_class_type == "NameTerm":
-            pidgin_type_abbv = "name"
+            translate_type_abbv = "name"
         elif arg_class_type == "TitleTerm":
-            pidgin_type_abbv = "title"
+            translate_type_abbv = "title"
         elif arg_class_type == "LabelTerm":
-            pidgin_type_abbv = "label"
-        elif arg_class_type == "RopePointer":
-            pidgin_type_abbv = "rope"
+            translate_type_abbv = "label"
+        elif arg_class_type == "RopeTerm":
+            translate_type_abbv = "rope"
         update_calc_inx_sqlstr = create_update_heard_raw_existing_inx_col_sqlstr(
-            pidgin_type_abbv, heard_raw_tablename, column_without_otx
+            translate_type_abbv, heard_raw_tablename, column_without_otx
         )
         cursor.execute(update_calc_inx_sqlstr)
         update_empty_inx_sqlstr = create_update_heard_raw_empty_inx_col_sqlstr(
@@ -613,14 +617,15 @@ def etl_brick_valid_table_into_prime_table(
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
     valid_columns = set(get_table_columns(cursor, brick_valid_table))
-    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = lab_columns & (valid_columns)
     common_cols = get_default_sorted_list(common_cols)
     select_str = create_select_query(cursor, brick_valid_table, common_cols)
     select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
-    common_cols.append("idea_number")
+    common_cols = set(common_cols)
+    common_cols.add("idea_number")
     common_cols = get_default_sorted_list(common_cols)
-    x_dict = {common_col: None for common_col in common_cols}
-    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, x_dict)
+    c_cols = set(common_cols)
+    insert_clause_str = create_insert_into_clause_str(cursor, raw_tablename, c_cols)
     insert_select_sqlstr = f"{insert_clause_str}\n{select_str};"
     cursor.execute(insert_select_sqlstr)
 
@@ -633,11 +638,12 @@ def etl_brick_valid_table_into_old_prime_table(
 ):
     lab_columns = set(get_table_columns(cursor, raw_tablename))
     valid_columns = set(get_table_columns(cursor, brick_valid_table))
-    common_cols = lab_columns.intersection(valid_columns)
+    common_cols = lab_columns & (valid_columns)
     common_cols = get_default_sorted_list(common_cols)
     select_str = create_select_query(cursor, brick_valid_table, common_cols)
     select_str = select_str.replace("SELECT", f"SELECT '{idea_number}',")
     group_by_clause_str = _get_grouping_groupby_clause(common_cols)
+    # tension
     common_cols.append("idea_number")
     common_cols = get_default_sorted_list(common_cols)
     x_dict = {common_col: None for common_col in common_cols}
@@ -646,8 +652,10 @@ def etl_brick_valid_table_into_old_prime_table(
     cursor.execute(insert_select_sqlstr)
 
 
-def split_excel_into_events_dirs(pidgin_file: str, face_dir: str, sheet_name: str):
-    split_excel_into_dirs(pidgin_file, face_dir, "event_int", "pidgin", sheet_name)
+def split_excel_into_events_dirs(translate_file: str, face_dir: str, sheet_name: str):
+    split_excel_into_dirs(
+        translate_file, face_dir, "event_int", "translate", sheet_name
+    )
 
 
 def get_most_recent_event_int(

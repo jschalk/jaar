@@ -284,7 +284,7 @@ def test_memberships_get_from_dict_ReturnsObj():
     assert after_swim_memberships_objs.get(swim_str) == before_swim_membership
 
 
-def test_MemberShip_clear_fund_give_take_SetsAttr():
+def test_MemberShip_clear_membership_fund_give_take_SetsAttr():
     # ESTABLISH
     bob_membership = membership_shop("Bob")
     bob_membership.fund_give = 0.27
@@ -301,7 +301,7 @@ def test_MemberShip_clear_fund_give_take_SetsAttr():
     assert bob_membership.fund_agenda_ratio_take == 0.533
 
     # WHEN
-    bob_membership.clear_fund_give_take()
+    bob_membership.clear_membership_fund_give_take()
 
     # THEN
     assert bob_membership.fund_give == 0

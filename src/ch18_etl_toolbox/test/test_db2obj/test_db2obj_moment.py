@@ -1,7 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch15_moment_logic.moment_main import get_from_dict as momentunit_get_from_dict
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    brokerunits_str,
+    beliefbudhistorys_str,
     moment_label_str,
     paybook_str,
     timeline_str,
@@ -99,7 +99,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
         "offi_times",
         timeline_str(),
         paybook_str(),
-        brokerunits_str(),
+        beliefbudhistorys_str(),
     }
 
 
@@ -204,21 +204,24 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # THEN
-    a23_brokerunit_dict = a23_dict.get("brokerunits")
-    print(f"{a23_brokerunit_dict=}")
-    assert a23_brokerunit_dict
-    a23_brokerunit_bob_dict = a23_brokerunit_dict.get(bob_str)
-    assert a23_brokerunit_bob_dict
-    a23_bob_buds_dict = a23_brokerunit_bob_dict.get("buds")
+    a23_beliefbudhistory_dict = a23_dict.get("beliefbudhistorys")
+    print(f"{a23_beliefbudhistory_dict=}")
+    assert a23_beliefbudhistory_dict
+    a23_beliefbudhistory_bob_dict = a23_beliefbudhistory_dict.get(bob_str)
+    assert a23_beliefbudhistory_bob_dict
+    a23_bob_buds_dict = a23_beliefbudhistory_bob_dict.get("buds")
     assert a23_bob_buds_dict
-    a23_brokerunit_bob_tp55_dict = a23_bob_buds_dict.get(tp55)
-    assert a23_brokerunit_bob_tp55_dict
-    expected_a23_brokerunit_bob_tp55_dict = {
+    a23_beliefbudhistory_bob_tp55_dict = a23_bob_buds_dict.get(tp55)
+    assert a23_beliefbudhistory_bob_tp55_dict
+    expected_a23_beliefbudhistory_bob_tp55_dict = {
         "bud_time": 55,
         "quota": bob_tp55_quota,
         "celldepth": bob_tp55_celldepth,
     }
-    assert a23_brokerunit_bob_tp55_dict == expected_a23_brokerunit_bob_tp55_dict
+    assert (
+        a23_beliefbudhistory_bob_tp55_dict
+        == expected_a23_beliefbudhistory_bob_tp55_dict
+    )
 
 
 def test_get_moment_dict_from_heard_tables_ReturnsObj_With_blfhour_Attrs_Scenario0():
@@ -465,10 +468,10 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
     a23_momentunit = momentunit_get_from_dict(a23_dict)
 
     # THEN
-    a23_bob_brokerunit = a23_momentunit.get_brokerunit(bob_str)
-    print(f"{a23_bob_brokerunit=}")
-    assert a23_bob_brokerunit
-    a23_bob_55_bud = a23_bob_brokerunit.get_bud(tp55)
+    a23_bob_beliefbudhistory = a23_momentunit.get_beliefbudhistory(bob_str)
+    print(f"{a23_bob_beliefbudhistory=}")
+    assert a23_bob_beliefbudhistory
+    a23_bob_55_bud = a23_bob_beliefbudhistory.get_bud(tp55)
     assert a23_bob_55_bud.bud_time == tp55
     assert a23_bob_55_bud.quota == bob_tp55_quota
     assert a23_bob_55_bud.celldepth == bob_tp55_celldepth

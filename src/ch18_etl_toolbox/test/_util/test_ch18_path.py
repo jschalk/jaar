@@ -14,7 +14,7 @@ from src.ch18_etl_toolbox.ch18_path import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 STANCE0001_FILENAME = "stance0001.xlsx"
@@ -35,7 +35,7 @@ def test_a18_path_constants_are_values():
 
 def test_create_moment_mstr_path_ReturnsObj():
     # ESTABLISH
-    x_world_dir = get_module_temp_dir()
+    x_world_dir = get_chapter_temp_dir()
 
     # WHEN
     gen_last_run_metrics_path = create_moment_mstr_path(x_world_dir)
@@ -55,7 +55,7 @@ def test_create_moment_mstr_path_HasDocString():
 
 def test_create_last_run_metrics_path_ReturnsObj():
     # ESTABLISH
-    x_world_dir = get_module_temp_dir()
+    x_world_dir = get_chapter_temp_dir()
 
     # WHEN
     gen_last_run_metrics_path = create_last_run_metrics_path(x_world_dir)
@@ -67,7 +67,7 @@ def test_create_last_run_metrics_path_ReturnsObj():
 
 def test_create_stances_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
 
     # WHEN
     gen_bob_stance_dir = create_stances_dir_path(x_moment_mstr_dir)
@@ -79,7 +79,7 @@ def test_create_stances_dir_path_ReturnsObj():
 
 def test_create_stances_belief_dir_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     bob_str = "Bob"
 
     # WHEN
@@ -93,7 +93,7 @@ def test_create_stances_belief_dir_path_ReturnsObj():
 
 def test_create_stance0001_path_ReturnsObj():
     # ESTABLISH
-    output_dir = get_module_temp_dir()
+    output_dir = get_chapter_temp_dir()
 
     # WHEN
     gen_stance0001_xlsx_path = create_stance0001_path(output_dir)
@@ -142,7 +142,7 @@ def test_create_stance0001_path_HasDocString():
 
 def test_create_moment_ote1_csv_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # WHEN
@@ -157,7 +157,7 @@ def test_create_moment_ote1_csv_path_ReturnsObj():
 
 def test_create_moment_ote1_json_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # WHEN
@@ -172,7 +172,7 @@ def test_create_moment_ote1_json_path_ReturnsObj():
 
 def test_create_world_db_path_ReturnsObj():
     # ESTABLISH
-    x_moment_mstr_dir = get_module_temp_dir()
+    x_moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
 
     # WHEN

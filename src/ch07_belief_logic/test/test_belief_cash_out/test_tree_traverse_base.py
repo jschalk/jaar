@@ -4,7 +4,7 @@ from src.ch04_group_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factheir_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_with_4_levels,
     get_beliefunit_with_4_levels_and_2reasons,
 )
@@ -390,7 +390,7 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     assert y_1st_rope_in_ordered_list == root_rope
 
 
-def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopePointers():
+def test_BeliefUnit_get_plan_tree_ordered_rope_list_CleansRangedPlanRopeTerms():
     # ESTABLISH
     yao_belief = beliefunit_shop("Yao")
 
@@ -552,11 +552,11 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario0():
     xio_groupunit = yao_belief.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_belief.create_symmetry_groupunit(xio_str)
     assert xio_groupunit.memberships.keys() == xio_symmerty_groupunit.memberships.keys()
-    assert xio_groupunit.membership_exists(yao_str)
-    assert xio_groupunit.membership_exists(zia_str)
-    assert not xio_groupunit.membership_exists(xio_str)
-    yao_membership = xio_groupunit.get_membership(yao_str)
-    zia_membership = xio_groupunit.get_membership(zia_str)
+    assert xio_groupunit.group_membership_exists(yao_str)
+    assert xio_groupunit.group_membership_exists(zia_str)
+    assert not xio_groupunit.group_membership_exists(xio_str)
+    yao_membership = xio_groupunit.get_voice_membership(yao_str)
+    zia_membership = xio_groupunit.get_voice_membership(zia_str)
     assert yao_membership.group_cred_points == yao_voice_cred_points
     assert zia_membership.group_cred_points == zia_voice_cred_points
     assert yao_membership.group_debt_points == yao_voice_debt_points
@@ -598,9 +598,9 @@ def test_BeliefUnit_cashout_CreatesNewGroupUnitsWhenNeeded_Scenario1():
     xio_groupunit = yao_belief.get_groupunit(xio_str)
     xio_symmerty_groupunit = yao_belief.create_symmetry_groupunit(xio_str)
     assert xio_groupunit.memberships.keys() == xio_symmerty_groupunit.memberships.keys()
-    assert xio_groupunit.membership_exists(yao_str)
-    assert xio_groupunit.membership_exists(zia_str)
-    assert not xio_groupunit.membership_exists(xio_str)
+    assert xio_groupunit.group_membership_exists(yao_str)
+    assert xio_groupunit.group_membership_exists(zia_str)
+    assert not xio_groupunit.group_membership_exists(xio_str)
 
 
 def test_BeliefUnit_get_tree_traverse_generated_groupunits_ReturnsObj():

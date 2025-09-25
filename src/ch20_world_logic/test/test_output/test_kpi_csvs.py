@@ -12,7 +12,7 @@ from src.ch20_world_logic._ref.ch20_keywords import (
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
+    get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.world import worldunit_shop
 
@@ -29,7 +29,7 @@ def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
     assert not os_path_exists(kpi001_csv_path)
 
     # WHEN
-    fay_world.create_kpi_csvs()
+    fay_world.create_world_kpi_csvs()
 
     # THEN
     assert os_path_exists(kpi001_csv_path)
@@ -61,7 +61,7 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     assert not os_path_exists(kpi001_csv_path)
 
     # WHEN
-    fay_world.create_kpi_csvs()
+    fay_world.create_world_kpi_csvs()
 
     # THEN
     assert os_path_exists(kpi001_csv_path)

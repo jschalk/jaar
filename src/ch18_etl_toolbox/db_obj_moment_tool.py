@@ -86,7 +86,7 @@ def _set_moment_dict_blfpayy(
 
 
 def _set_moment_dict_momentbud(cursor: sqlite3_Cursor, moment_dict: dict):
-    brokerunits_dict = {}
+    beliefbudhistorys_dict = {}
     for blfpayy_row in cursor.fetchall():
         row_moment_label = blfpayy_row[0]
         row_belief_name = blfpayy_row[1]
@@ -94,15 +94,15 @@ def _set_moment_dict_momentbud(cursor: sqlite3_Cursor, moment_dict: dict):
         row_quota = blfpayy_row[3]
         row_celldepth = blfpayy_row[4]
         belief_keylist = [row_belief_name, "belief_name"]
-        set_in_nested_dict(brokerunits_dict, belief_keylist, row_belief_name)
+        set_in_nested_dict(beliefbudhistorys_dict, belief_keylist, row_belief_name)
         keylist = [row_belief_name, "buds", row_bud_time]
         bud_timepoint_dict = {
             "bud_time": row_bud_time,
             "quota": row_quota,
             "celldepth": row_celldepth,
         }
-        set_in_nested_dict(brokerunits_dict, keylist, bud_timepoint_dict)
-    moment_dict["brokerunits"] = brokerunits_dict
+        set_in_nested_dict(beliefbudhistorys_dict, keylist, bud_timepoint_dict)
+    moment_dict["beliefbudhistorys"] = beliefbudhistorys_dict
 
 
 def _set_moment_dict_blfhour(cursor: sqlite3_Cursor, moment_dict: dict):

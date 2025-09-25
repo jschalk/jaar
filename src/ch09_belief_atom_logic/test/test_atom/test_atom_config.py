@@ -5,7 +5,7 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     INSERT_str,
     LabelTerm_str,
     NameTerm_str,
-    RopePointer_str,
+    RopeTerm_str,
     TitleTerm_str,
     UPDATE_str,
     addin_str,
@@ -606,7 +606,7 @@ def test_get_allowed_class_types_ReturnsObj():
         NameTerm_str(),
         TitleTerm_str(),
         LabelTerm_str(),
-        RopePointer_str(),
+        RopeTerm_str(),
         "float",
         "bool",
         "TimeLinePoint",
@@ -666,7 +666,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(voice_name_str()) == NameTerm_str()
     assert x_class_types.get(addin_str()) == "float"
     assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
-    assert x_class_types.get(reason_context_str()) == RopePointer_str()
+    assert x_class_types.get(reason_context_str()) == RopeTerm_str()
     assert x_class_types.get("reason_active_requisite") == "bool"
     assert x_class_types.get(begin_str()) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
@@ -679,7 +679,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("reason_divisor") == "int"
-    assert x_class_types.get(fact_context_str()) == RopePointer_str()
+    assert x_class_types.get(fact_context_str()) == RopeTerm_str()
     assert x_class_types.get(fact_upper_str()) == "float"
     assert x_class_types.get(fact_lower_str()) == "float"
     assert x_class_types.get(fund_iota_str()) == "float"
@@ -691,15 +691,15 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get(reason_state_str()) == RopePointer_str()
+    assert x_class_types.get(reason_state_str()) == RopeTerm_str()
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fact_state") == RopePointer_str()
+    assert x_class_types.get("fact_state") == RopeTerm_str()
     assert x_class_types.get("task") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(plan_rope_str()) == RopePointer_str()
+    assert x_class_types.get(plan_rope_str()) == RopeTerm_str()
     assert x_class_types.get(solo_str()) == "int"
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"

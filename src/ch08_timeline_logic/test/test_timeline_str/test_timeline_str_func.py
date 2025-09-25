@@ -5,41 +5,13 @@ from src.ch02_rope_logic.rope import (
 )
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import (
-    creg_str,
-    time_str,
-    week_str,
-    yr1_jan1_offset_str,
-)
+from src.ch08_timeline_logic._ref.ch08_keywords import creg_str, time_str, week_str
 from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.ch08_timeline_logic.test._util.calendar_examples import (
-    add_time_creg_planunit,
-    add_time_five_planunit,
-    creg_hour_int_label,
-    creg_weekday_planunits,
-    cregtime_planunit,
-    display_current_creg_five_min,
-    five_str,
-    get_creg_config,
-    get_creg_min_from_dt,
-    get_cregtime_str,
-    get_five_config,
-    get_five_min_from_dt,
-    get_fri,
-    get_mon,
-    get_sat,
-    get_sun,
-    get_thu,
-    get_tue,
-    get_wed,
-)
-from src.ch08_timeline_logic.timeline_main import (
-    add_newtimeline_planunit,
-    get_year_rope,
-)
+from src.ch08_timeline_logic.test._util.ch08_examples import get_creg_config, get_thu
+from src.ch08_timeline_logic.timeline_main import add_newtimeline_planunit
 
 
 def test_get_reason_case_readable_str_ReturnsObj_Scenario0_Level1():

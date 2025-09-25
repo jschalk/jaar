@@ -33,13 +33,13 @@ from src.ch18_etl_toolbox.transformers import (
     etl_moment_json_voice_nets_to_moment_voice_nets_table,
     etl_moment_ote1_agg_csvs_to_jsons,
     etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs,
-    etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables,
     etl_set_cell_tree_cell_mandates,
     etl_set_cell_trees_decrees,
     etl_set_cell_trees_found_facts,
     etl_sound_agg_tables_to_sound_vld_tables,
     etl_sound_raw_tables_to_sound_agg_tables,
     etl_sound_vld_tables_to_heard_raw_tables,
+    etl_translate_sound_agg_tables_to_translate_sound_vld_tables,
     get_max_brick_agg_event_int,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import (
@@ -65,7 +65,7 @@ class WorldUnit:
     _moment_mstr_dir: str = None
     _momentunits: set[MomentLabel] = None
     _events: dict[EventInt, FaceName] = None
-    _pidgin_events: dict[FaceName, set[EventInt]] = None
+    _translate_events: dict[FaceName, set[EventInt]] = None
 
     def get_world_db_path(self) -> str:
         "Returns path: world_dir/world.db"
@@ -124,8 +124,9 @@ class WorldUnit:
         delete_dir(self._input_dir)
 
     def sheets_input_to_clarity_with_cursor(self, cursor: sqlite3_Cursor):
-        delete_dir(self._moment_mstr_dir)
-        set_dir(self._moment_mstr_dir)
+        mstr_dir = self._moment_mstr_dir
+        delete_dir(mstr_dir)
+        set_dir(mstr_dir)
         # collect excel file data into central location
         etl_input_dfs_to_brick_raw_tables(cursor, self._input_dir)
         # brick raw to sound raw, check by event_ints
@@ -134,30 +135,28 @@ class WorldUnit:
         etl_events_brick_agg_table_to_events_brick_valid_table(cursor)
         etl_brick_agg_tables_to_brick_valid_tables(cursor)
         etl_brick_valid_tables_to_sound_raw_tables(cursor)
-        # sound raw to heard raw, filter through pidgins
+        # sound raw to heard raw, filter through translates
         etl_sound_raw_tables_to_sound_agg_tables(cursor)
-        etl_pidgin_sound_agg_tables_to_pidgin_sound_vld_tables(cursor)
+        etl_translate_sound_agg_tables_to_translate_sound_vld_tables(cursor)
         etl_sound_agg_tables_to_sound_vld_tables(cursor)
         etl_sound_vld_tables_to_heard_raw_tables(cursor)
         # heard raw to moment/belief jsons
         etl_heard_raw_tables_to_heard_agg_tables(cursor)
-        etl_heard_agg_tables_to_moment_jsons(cursor, self._moment_mstr_dir)
-        etl_heard_agg_to_event_belief_csvs(cursor, self._moment_mstr_dir)
-        etl_event_belief_csvs_to_pack_json(self._moment_mstr_dir)
-        etl_event_pack_json_to_event_inherited_beliefunits(self._moment_mstr_dir)
-        etl_event_inherited_beliefunits_to_moment_gut(self._moment_mstr_dir)
-        add_moment_timeline_to_guts(self._moment_mstr_dir)
-        etl_moment_guts_to_moment_jobs(self._moment_mstr_dir)
+        etl_heard_agg_tables_to_moment_jsons(cursor, mstr_dir)
+        etl_heard_agg_to_event_belief_csvs(cursor, mstr_dir)
+        etl_event_belief_csvs_to_pack_json(mstr_dir)
+        etl_event_pack_json_to_event_inherited_beliefunits(mstr_dir)
+        etl_event_inherited_beliefunits_to_moment_gut(mstr_dir)
+        add_moment_timeline_to_guts(mstr_dir)
+        etl_moment_guts_to_moment_jobs(mstr_dir)
         etl_heard_raw_tables_to_moment_ote1_agg(cursor)
-        etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(cursor, self._moment_mstr_dir)
-        etl_moment_ote1_agg_csvs_to_jsons(self._moment_mstr_dir)
+        etl_moment_ote1_agg_table_to_moment_ote1_agg_csvs(cursor, mstr_dir)
+        etl_moment_ote1_agg_csvs_to_jsons(mstr_dir)
         self.calc_moment_bud_voice_mandate_net_ledgers()
-        etl_moment_job_jsons_to_job_tables(cursor, self._moment_mstr_dir)
-        etl_moment_json_voice_nets_to_moment_voice_nets_table(
-            cursor, self._moment_mstr_dir
-        )
+        etl_moment_job_jsons_to_job_tables(cursor, mstr_dir)
+        etl_moment_json_voice_nets_to_moment_voice_nets_table(cursor, mstr_dir)
         populate_kpi_bundle(cursor)
-        create_last_run_metrics_json(cursor, self._moment_mstr_dir)
+        create_last_run_metrics_json(cursor, mstr_dir)
 
         # # create all moment_job and mandate reports
         # self.calc_moment_bud_voice_mandate_net_ledgers()
@@ -173,7 +172,7 @@ class WorldUnit:
         )
         create_calendar_markdown_files(self._moment_mstr_dir, self.output_dir)
 
-    def create_kpi_csvs(self):
+    def create_world_kpi_csvs(self):
         create_kpi_csvs(self.get_world_db_path(), self.output_dir)
 
     def to_dict(self) -> dict:
@@ -199,7 +198,7 @@ def worldunit_shop(
         _events={},
         _momentunits=get_empty_set_if_None(_momentunits),
         _input_dir=input_dir,
-        _pidgin_events={},
+        _translate_events={},
     )
     x_worldunit._set_world_dirs()
     if not x_worldunit._input_dir:

@@ -10,8 +10,8 @@ class CRUD_command(str):
 def atom_config_path() -> str:
     "Returns Path: ch09_belief_atom_logic/atom_config.json"
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch09_belief_atom_logic")
-    return create_path(module_dir, "atom_config.json")
+    chapter_dir = create_path(src_dir, "ch09_belief_atom_logic")
+    return create_path(chapter_dir, "atom_config.json")
 
 
 def get_atom_config_dict() -> dict:
@@ -56,7 +56,7 @@ def get_allowed_class_types() -> set[str]:
         "TitleTerm",
         "int",
         "LabelTerm",
-        "RopePointer",
+        "RopeTerm",
         "TimeLinePoint",
     }
 
@@ -66,7 +66,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "voice_name": "NameTerm",
         "addin": "float",
         "awardee_title": "TitleTerm",
-        "reason_context": "RopePointer",
+        "reason_context": "RopeTerm",
         "reason_active_requisite": "bool",
         "begin": "float",
         "close": "float",
@@ -78,7 +78,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "debtor_respect": "float",
         "denom": "int",
         "reason_divisor": "int",
-        "fact_context": "RopePointer",
+        "fact_context": "RopeTerm",
         "fact_upper": "float",
         "fact_lower": "float",
         "fund_iota": "float",
@@ -89,16 +89,16 @@ def get_atom_args_class_types() -> dict[str, str]:
         "healer_name": "NameTerm",
         "max_tree_traverse": "int",
         "morph": "bool",
-        "reason_state": "RopePointer",
+        "reason_state": "RopeTerm",
         "reason_upper": "float",
         "numor": "int",
         "reason_lower": "float",
         "penny": "float",
-        "fact_state": "RopePointer",
+        "fact_state": "RopeTerm",
         "task": "bool",
         "problem_bool": "bool",
         "respect_bit": "float",
-        "plan_rope": "RopePointer",
+        "plan_rope": "RopeTerm",
         "star": "int",
         "stop_want": "float",
         "solo": "int",

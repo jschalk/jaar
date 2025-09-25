@@ -1,8 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic.test._util.calendar_examples import (
-    five_str,
-    get_five_config,
-)
+from src.ch08_timeline_logic.test._util.ch08_examples import five_str, get_five_config
 from src.ch08_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
@@ -12,14 +9,14 @@ from src.ch15_moment_logic._ref.ch15_keywords import time_str
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
 def test_MomentUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
 
     # WHEN
@@ -34,7 +31,7 @@ def test_MomentUnit_get_timeline_config_ReturnsObj_Scenario0(env_dir_setup_clean
 def test_MomentUnit_get_timeline_config_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.timeline = timelineunit_shop(get_five_config())
 
@@ -50,7 +47,7 @@ def test_MomentUnit_get_timeline_config_ReturnsObj_Scenario1(env_dir_setup_clean
 def test_MomentUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
@@ -71,7 +68,7 @@ def test_MomentUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup
 def test_MomentUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_moment = momentunit_shop(a23_str, moment_mstr_dir)
     a23_moment.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"

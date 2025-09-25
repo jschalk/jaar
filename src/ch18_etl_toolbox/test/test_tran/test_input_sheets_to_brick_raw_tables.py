@@ -18,7 +18,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.transformers import etl_input_dfs_to_brick_raw_tables
 
@@ -36,7 +36,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "Faybob.xlsx"
-    input_dir = create_path(get_module_temp_dir(), "input")
+    input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
         event_int_str(),
@@ -118,7 +118,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     hour6am = "6am"
     hour7am = "7am"
     ex_filename = "Faybob.xlsx"
-    input_dir = create_path(get_module_temp_dir(), "input")
+    input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
         event_int_str(),
@@ -210,7 +210,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #     hour6am = "6am"
 #     hour7am = "7am"
 #     ex_filename = "Faybob.xlsx"
-#     input_dir = create_path(get_module_temp_dir(), "input")
+#     input_dir = create_path(get_chapter_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
 #         event_int_str(),

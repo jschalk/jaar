@@ -87,7 +87,7 @@
                 "sqlite_datatype": "TEXT"
             },
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -121,13 +121,13 @@
         },
         "jkeys": {
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "fact_context": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -145,7 +145,7 @@
                 "sqlite_datatype": "REAL"
             },
             "fact_state": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 2,
                 "sqlite_datatype": "TEXT"
             }
@@ -166,7 +166,7 @@
         },
         "jkeys": {
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -192,7 +192,7 @@
         },
         "jkeys": {
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
@@ -225,19 +225,19 @@
         },
         "jkeys": {
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "reason_state": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 2,
                 "nesting_order": 2,
                 "sqlite_datatype": "TEXT"
             },
             "reason_context": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -276,13 +276,13 @@
         },
         "jkeys": {
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"
             },
             "reason_context": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 1,
                 "nesting_order": 1,
                 "sqlite_datatype": "TEXT"
@@ -311,7 +311,7 @@
         },
         "jkeys": {
             "plan_rope": {
-                "class_type": "RopePointer",
+                "class_type": "RopeTerm",
                 "column_order": 0,
                 "nesting_order": 0,
                 "sqlite_datatype": "TEXT"

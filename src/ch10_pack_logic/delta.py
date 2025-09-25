@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.ch02_rope_logic.term import RopePointer, TitleTerm
+from src.ch02_rope_logic.term import RopeTerm, TitleTerm
 from src.ch04_group_logic.group import MemberShip
 from src.ch04_group_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch05_reason_logic.reason import FactUnit, ReasonUnit
@@ -170,7 +170,7 @@ class BeliefDelta:
         self.add_beliefatom_voiceunit_updates(
             before_belief=before_belief,
             after_belief=after_belief,
-            update_voice_names=before_voice_names.intersection(after_voice_names),
+            update_voice_names=before_voice_names & (after_voice_names),
         )
 
     def add_beliefatom_voiceunit_inserts(
@@ -272,7 +272,7 @@ class BeliefDelta:
             before_group_titles=before_group_titles.difference(after_group_titles),
         )
 
-        update_group_titles = before_group_titles.intersection(after_group_titles)
+        update_group_titles = before_group_titles & (after_group_titles)
         for update_voice_name in update_group_titles:
             before_membership = before_voiceunit.get_membership(update_voice_name)
             after_membership = after_voiceunit.get_membership(update_voice_name)
@@ -351,7 +351,7 @@ class BeliefDelta:
         self.add_beliefatom_plan_updates(
             before_belief=before_belief,
             after_belief=after_belief,
-            update_ropes=before_plan_ropes.intersection(after_plan_ropes),
+            update_ropes=before_plan_ropes & (after_plan_ropes),
         )
 
     def add_beliefatom_plan_inserts(
@@ -436,9 +436,8 @@ class BeliefDelta:
             self.add_beliefatom_plan_factunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_factunit_reason_contexts=before_factunit_reason_contexts.intersection(
-                    after_factunit_reason_contexts
-                ),
+                update_factunit_reason_contexts=before_factunit_reason_contexts
+                & (after_factunit_reason_contexts),
             )
             self.add_beliefatom_plan_factunit_deletes(
                 plan_rope=plan_rope,
@@ -459,9 +458,8 @@ class BeliefDelta:
             self.add_beliefatom_plan_awardunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_awardunit_awardee_titles=before_awardunits_awardee_titles.intersection(
-                    after_awardunits_awardee_titles
-                ),
+                update_awardunit_awardee_titles=before_awardunits_awardee_titles
+                & (after_awardunits_awardee_titles),
             )
             self.add_beliefatom_plan_awardunit_deletes(
                 plan_rope=plan_rope,
@@ -482,9 +480,8 @@ class BeliefDelta:
             self.add_beliefatom_plan_reasonunit_updates(
                 before_planunit=before_planunit,
                 after_planunit=after_planunit,
-                update_reasonunit_reason_contexts=before_reasonunit_reason_contexts.intersection(
-                    after_reasonunit_reason_contexts
-                ),
+                update_reasonunit_reason_contexts=before_reasonunit_reason_contexts
+                & (after_reasonunit_reason_contexts),
             )
             self.add_beliefatom_plan_reasonunit_deletes(
                 before_planunit=before_planunit,
@@ -631,9 +628,8 @@ class BeliefDelta:
                 plan_rope=before_planunit.get_plan_rope(),
                 before_reasonunit=before_reasonunit,
                 after_reasonunit=after_reasonunit,
-                update_case_reason_states=after_case_reason_states.intersection(
-                    before_case_reason_states
-                ),
+                update_case_reason_states=after_case_reason_states
+                & (before_case_reason_states),
             )
             self.add_beliefatom_plan_reason_caseunit_deletes(
                 plan_rope=before_planunit.get_plan_rope(),
@@ -663,7 +659,7 @@ class BeliefDelta:
 
     def add_beliefatom_plan_reason_caseunit_inserts(
         self,
-        plan_rope: RopePointer,
+        plan_rope: RopeTerm,
         after_reasonunit: ReasonUnit,
         insert_case_reason_states: set,
     ):
@@ -683,7 +679,7 @@ class BeliefDelta:
 
     def add_beliefatom_plan_reason_caseunit_updates(
         self,
-        plan_rope: RopePointer,
+        plan_rope: RopeTerm,
         before_reasonunit: ReasonUnit,
         after_reasonunit: ReasonUnit,
         update_case_reason_states: set,
@@ -714,8 +710,8 @@ class BeliefDelta:
 
     def add_beliefatom_plan_reason_caseunit_deletes(
         self,
-        plan_rope: RopePointer,
-        reasonunit_reason_context: RopePointer,
+        plan_rope: RopeTerm,
+        reasonunit_reason_context: RopeTerm,
         delete_case_reason_states: set,
     ):
         for delete_case_reason_state in delete_case_reason_states:
@@ -726,7 +722,7 @@ class BeliefDelta:
             self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_plan_partyunit_insert(
-        self, plan_rope: RopePointer, insert_partyunit_party_titles: set
+        self, plan_rope: RopeTerm, insert_partyunit_party_titles: set
     ):
         for insert_partyunit_party_title in insert_partyunit_party_titles:
             x_beliefatom = beliefatom_shop("belief_plan_partyunit", "INSERT")
@@ -735,7 +731,7 @@ class BeliefDelta:
             self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_plan_partyunit_deletes(
-        self, plan_rope: RopePointer, delete_partyunit_party_titles: set
+        self, plan_rope: RopeTerm, delete_partyunit_party_titles: set
     ):
         for delete_partyunit_party_title in delete_partyunit_party_titles:
             x_beliefatom = beliefatom_shop("belief_plan_partyunit", "DELETE")
@@ -744,7 +740,7 @@ class BeliefDelta:
             self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_plan_healerunit_insert(
-        self, plan_rope: RopePointer, insert_healerunit_healer_names: set
+        self, plan_rope: RopeTerm, insert_healerunit_healer_names: set
     ):
         for insert_healerunit_healer_name in insert_healerunit_healer_names:
             x_beliefatom = beliefatom_shop("belief_plan_healerunit", "INSERT")
@@ -753,7 +749,7 @@ class BeliefDelta:
             self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_plan_healerunit_deletes(
-        self, plan_rope: RopePointer, delete_healerunit_healer_names: set
+        self, plan_rope: RopeTerm, delete_healerunit_healer_names: set
     ):
         for delete_healerunit_healer_name in delete_healerunit_healer_names:
             x_beliefatom = beliefatom_shop("belief_plan_healerunit", "DELETE")
@@ -801,7 +797,7 @@ class BeliefDelta:
                 self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_plan_awardunit_deletes(
-        self, plan_rope: RopePointer, delete_awardunit_awardee_titles: set
+        self, plan_rope: RopeTerm, delete_awardunit_awardee_titles: set
     ):
         for delete_awardunit_awardee_title in delete_awardunit_awardee_titles:
             x_beliefatom = beliefatom_shop("belief_plan_awardunit", "DELETE")
@@ -853,7 +849,7 @@ class BeliefDelta:
                 self.set_beliefatom(x_beliefatom)
 
     def add_beliefatom_plan_factunit_deletes(
-        self, plan_rope: RopePointer, delete_factunit_reason_contexts: FactUnit
+        self, plan_rope: RopeTerm, delete_factunit_reason_contexts: FactUnit
     ):
         for delete_factunit_reason_context in delete_factunit_reason_contexts:
             x_beliefatom = beliefatom_shop("belief_plan_factunit", "DELETE")

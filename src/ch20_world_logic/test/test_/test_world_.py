@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, save_file
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as worlds_dir,
+    get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.world import (
     WorldName,
@@ -33,7 +33,7 @@ def test_WorldUnit_Exists():
     assert not x_world._brick_dir
     assert not x_world._moment_mstr_dir
     assert not x_world._momentunits
-    assert not x_world._pidgin_events
+    assert not x_world._translate_events
 
 
 def test_WorldUnit_set_input_dir_SetsDirsAndFiles(env_dir_setup_cleanup):
@@ -118,7 +118,7 @@ def test_worldunit_shop_ReturnsObj_Scenario0_WithParameters(env_dir_setup_cleanu
     assert x_world.world_time_reason_upper == world2_time_reason_upper
     assert x_world._events == {}
     assert x_world._momentunits == world2_momentunits
-    assert x_world._pidgin_events == {}
+    assert x_world._translate_events == {}
 
 
 def test_worldunit_shop_ReturnsObj_Scenario1_WithoutParameters(env_dir_setup_cleanup):

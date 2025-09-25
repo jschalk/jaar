@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
 )
@@ -191,7 +191,7 @@ def test_save_idea_csv_Arg_idea_format_00019_planunit_v0_0_0():
     # WHEN
     # name_filename = f"{sue_str}_planunit_example_00019.csv"
     # csv_example_path = create_path(idea_moments_dir(), name_filename)
-    # save_idea_csv(x_idea_name, sue_beliefunit, get_module_temp_dir(), name_filename)
+    # save_idea_csv(x_idea_name, sue_beliefunit, get_chapter_temp_dir(), name_filename)
     idea_df = create_idea_df(sue_beliefunit, x_idea_name)
 
     # THEN

@@ -15,6 +15,7 @@ from src.ch05_reason_logic.reason import get_dict_from_factunits
 from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 from src.ch11_bud_logic.bud import MomentLabel
 from src.ch11_bud_logic.cell import CellUnit, cellunit_shop
+from src.ch11_bud_logic.weighted_facts_tool import get_nodes_with_weighted_facts
 from src.ch12_hub_toolbox.ch12_path import (
     CELL_MANDATE_FILENAME,
     CELLNODE_FILENAME,
@@ -24,7 +25,6 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_cell_json_path,
     create_moment_json_path,
 )
-from src.ch12_hub_toolbox.fact_tool import get_nodes_with_weighted_facts
 from src.ch12_hub_toolbox.hub_tool import (
     cellunit_get_from_dir,
     cellunit_save_to_dir,
@@ -330,12 +330,12 @@ def set_cell_tree_cell_mandates(moment_mstr_dir: str, moment_label: str):
 def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
     moment_json_path = create_moment_json_path(moment_mstr_dir, moment_label)
     momentunit = momentunit_get_from_dict(open_json(moment_json_path))
-    for brokerunit in momentunit.brokerunits.values():
-        for budunit in brokerunit.buds.values():
+    for beliefbudhistory in momentunit.beliefbudhistorys.values():
+        for budunit in beliefbudhistory.buds.values():
             bud_root_dir = create_bud_dir_path(
                 moment_mstr_dir,
                 moment_label,
-                belief_name=brokerunit.belief_name,
+                belief_name=beliefbudhistory.belief_name,
                 bud_time=budunit.bud_time,
             )
             bud_voice_mandate_ledger = allot_nested_scale(

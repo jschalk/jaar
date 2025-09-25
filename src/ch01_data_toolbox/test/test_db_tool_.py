@@ -32,7 +32,7 @@ from src.ch01_data_toolbox.db_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import create_path, delete_dir, set_dir
 from src.ch01_data_toolbox.test._util.ch01_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -378,8 +378,8 @@ def test_get_grouping_with_all_values_equal_sql_query_ReturnsObj_Scenario1_Inclu
 
 
 def get_example_test_database11_path_literal() -> str:
-    """get_module_temp_dir/test_database11.db"""
-    return create_path(get_module_temp_dir(), "test_database11.db")
+    """get_chapter_temp_dir/test_database11.db"""
+    return create_path(get_chapter_temp_dir(), "test_database11.db")
 
 
 def get_example_test_tablename() -> str:
@@ -387,8 +387,8 @@ def get_example_test_tablename() -> str:
 
 
 def save_test_csv_file():
-    set_dir(get_module_temp_dir())
-    test_csv_filepath = create_path(get_module_temp_dir(), "test_data.csv")
+    set_dir(get_chapter_temp_dir())
+    test_csv_filepath = create_path(get_chapter_temp_dir(), "test_data.csv")
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write("id,name,age,email\n")
         csv_file.write("1,John Doe,30,john@example.com\n")
@@ -468,7 +468,7 @@ def test_insert_csv_ChangesNotCommitted(
 
     # THEN
     # reopen the connection to verify persistence
-    test_database7_path = create_path(get_module_temp_dir(), "test_database7.db")
+    test_database7_path = create_path(get_chapter_temp_dir(), "test_database7.db")
     with sqlite3_connect(test_database7_path) as conn2:
         cursor2 = conn2.cursor()
         cursor2.execute(get_create_test_table_sqlstr())
@@ -522,7 +522,7 @@ def test_create_table_from_csv_DoesNotEmptyTable(
     # ESTABLISH
     test_csv_filepath = save_test_csv_file()
     test_table = get_example_test_tablename()
-    set_dir(get_module_temp_dir())
+    set_dir(get_chapter_temp_dir())
     with sqlite3_connect(get_example_test_database11_path_literal()) as conn:
         cursor = conn.cursor()
         cursor.execute(get_create_test_table_sqlstr())
@@ -989,7 +989,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario0():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=["name", "age"],
+            focus_cols={"name", "age"},
             exclude_cols={hair_str},
             where_block="WHERE error_holder IS NULL",
         )
@@ -1024,7 +1024,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario1():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=["name"],
+            focus_cols={"name"},
             exclude_cols={hair_str},
             where_block="WHERE error_holder IS NULL",
         )
@@ -1062,7 +1062,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario3():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=[style_str, "name"],
+            focus_cols={style_str, "name"},
             exclude_cols={age_str},
             where_block="WHERE error_holder IS NULL",
         )
@@ -1100,7 +1100,7 @@ def test_create_table2table_agg_insert_query_ReturnsObj_Scenario4():
             cursor,
             dst_table=dst_tablename,
             src_table=src_tablename,
-            focus_cols=[style_str, "name"],
+            focus_cols={style_str, "name"},
             exclude_cols={age_str},
             where_block="",
         )

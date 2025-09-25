@@ -17,11 +17,11 @@ from src.ch15_moment_logic.moment_config import (
     get_moment_config_dict,
     get_moment_dimens,
 )
-from src.ch16_pidgin_logic.pidgin_config import (
-    get_pidgin_args_dimen_mapping,
-    get_pidgin_config_dict,
-    get_pidgin_dimens,
-    get_pidginable_args,
+from src.ch16_translate_logic.translate_config import (
+    get_translate_args_dimen_mapping,
+    get_translate_config_dict,
+    get_translate_dimens,
+    get_translateable_args,
 )
 from src.ch17_idea_logic._ref.ch17_keywords import (
     DELETE_str,
@@ -110,11 +110,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     otx_title_str,
     party_title_str,
     penny_str,
-    pidgin_label_str,
-    pidgin_name_str,
-    pidgin_rope_str,
-    pidgin_title_str,
-    pidginunit_str,
     plan_rope_str,
     quota_str,
     reason_active_requisite_str,
@@ -130,6 +125,11 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     task_str,
     timeline_label_str,
     tran_time_str,
+    translate_label_str,
+    translate_name_str,
+    translate_rope_str,
+    translate_title_str,
+    translateunit_str,
     unknown_str_str,
     voice_cred_points_str,
     voice_debt_points_str,
@@ -170,8 +170,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     print(f"{moment_args=}")
     print(f"{moment_args.difference(set(table_sorting_priority))=}")
     assert moment_args.issubset(set(table_sorting_priority))
-    pidgin_args = set(get_pidgin_args_dimen_mapping().keys())
-    assert pidgin_args.issubset(set(table_sorting_priority))
+    translate_args = set(get_translate_args_dimen_mapping().keys())
+    assert translate_args.issubset(set(table_sorting_priority))
     all_belief_dimen_delete_keys = get_all_belief_dimen_delete_keys()
     print(f"missing {all_belief_dimen_delete_keys.difference(table_sorting_priority)}")
     assert all_belief_dimen_delete_keys.issubset(table_sorting_priority)
@@ -180,23 +180,23 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     #     print(f"{belief_calc_arg=}")
     print(f"{belief_calc_args.difference(table_sorting_priority)=}")
     assert belief_calc_args.issubset(table_sorting_priority)
-    pidginable_otx_cols = {f"{pid_arg}_otx" for pid_arg in get_pidginable_args()}
-    pidginable_inx_cols = {f"{pid_arg}_inx" for pid_arg in get_pidginable_args()}
+    translateable_otx_cols = {f"{trl_arg}_otx" for trl_arg in get_translateable_args()}
+    translateable_inx_cols = {f"{trl_arg}_inx" for trl_arg in get_translateable_args()}
     x_delete_keys = all_belief_dimen_delete_keys
-    pidginable_delete_otx_cols = {f"{pid_arg}_otx" for pid_arg in x_delete_keys}
-    pidginable_delete_inx_cols = {f"{pid_arg}_inx" for pid_arg in x_delete_keys}
-    print(f"{pidginable_delete_otx_cols=}")
-    print(f"{pidginable_delete_inx_cols=}")
-    assert pidginable_otx_cols.issubset(table_sorting_priority)
-    assert pidginable_inx_cols.issubset(table_sorting_priority)
-    assert pidginable_delete_otx_cols.issubset(table_sorting_priority)
-    assert pidginable_delete_inx_cols.issubset(table_sorting_priority)
+    translateable_delete_otx_cols = {f"{trl_arg}_otx" for trl_arg in x_delete_keys}
+    translateable_delete_inx_cols = {f"{trl_arg}_inx" for trl_arg in x_delete_keys}
+    print(f"{translateable_delete_otx_cols=}")
+    print(f"{translateable_delete_inx_cols=}")
+    assert translateable_otx_cols.issubset(table_sorting_priority)
+    assert translateable_inx_cols.issubset(table_sorting_priority)
+    assert translateable_delete_otx_cols.issubset(table_sorting_priority)
+    assert translateable_delete_inx_cols.issubset(table_sorting_priority)
 
     # all the suffix otx/inx columns are only used in one table
     assert table_sorting_priority[0] == "world_name"
     assert table_sorting_priority[1] == "idea_number"
     assert table_sorting_priority[2] == "source_dimen"
-    assert table_sorting_priority[3] == "pidgin_event_int"
+    assert table_sorting_priority[3] == "translate_event_int"
     assert table_sorting_priority[4] == "event_int"
     assert table_sorting_priority[5] == "face_name"
     assert table_sorting_priority[6] == "face_name_otx"
@@ -377,17 +377,17 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args = copy_copy(atom_args)
     all_args.update(all_belief_dimen_delete_keys)
     all_args.update(moment_args)
-    all_args.update(pidgin_args)
+    all_args.update(translate_args)
     all_args.update(belief_calc_args)
-    all_args.update(pidginable_otx_cols)
-    all_args.update(pidginable_inx_cols)
-    all_args.update(pidginable_delete_otx_cols)
-    all_args.update(pidginable_delete_inx_cols)
+    all_args.update(translateable_otx_cols)
+    all_args.update(translateable_inx_cols)
+    all_args.update(translateable_delete_otx_cols)
+    all_args.update(translateable_delete_inx_cols)
     all_args.add(idea_number_str())
     all_args.add(event_int_str())
     all_args.add(face_name_str())
     all_args.add("source_dimen")
-    all_args.add("pidgin_event_int")
+    all_args.add("translate_event_int")
     all_args.add(error_message_str())
     all_args.add(world_name_str())
     all_args.add("funds")  # kpi columns
@@ -414,7 +414,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert set(sqlite_types.keys()) == set(get_idea_elements_sort_order())
     assert sqlite_types.get(idea_number_str()) == "TEXT"
     assert sqlite_types.get(face_name_str()) == "TEXT"
-    assert sqlite_types.get("pidgin_event_int") == "INTEGER"
+    assert sqlite_types.get("translate_event_int") == "INTEGER"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(moment_label_str()) == "TEXT"
     assert sqlite_types.get(belief_name_str()) == "TEXT"
@@ -507,8 +507,8 @@ def test_get_allowed_curds_ReturnsObj():
 def test_idea_config_path_ReturnsObj_Idea() -> str:
     # ESTABLISH / WHEN / THEN
     src_dir = create_path(os_getcwd(), "src")
-    module_dir = create_path(src_dir, "ch17_idea_logic")
-    assert idea_config_path() == create_path(module_dir, "idea_config.json")
+    chapter_dir = create_path(src_dir, "ch17_idea_logic")
+    assert idea_config_path() == create_path(chapter_dir, "idea_config.json")
 
 
 def test_get_idea_config_dict_ReturnsObj():
@@ -535,25 +535,25 @@ def test_get_idea_config_dict_ReturnsObj():
     assert belief_plan_reasonunit_str() in idea_config_dimens
     assert belief_planunit_str() in idea_config_dimens
     assert beliefunit_str() in idea_config_dimens
-    assert pidgin_name_str() in idea_config_dimens
-    assert pidgin_title_str() in idea_config_dimens
-    assert pidgin_label_str() in idea_config_dimens
-    assert pidgin_rope_str() in idea_config_dimens
+    assert translate_name_str() in idea_config_dimens
+    assert translate_title_str() in idea_config_dimens
+    assert translate_label_str() in idea_config_dimens
+    assert translate_rope_str() in idea_config_dimens
     assert get_belief_dimens().issubset(idea_config_dimens)
     assert get_moment_dimens().issubset(idea_config_dimens)
-    assert get_pidgin_dimens().issubset(idea_config_dimens)
+    assert get_translate_dimens().issubset(idea_config_dimens)
     assert len(x_idea_config) == 21
     _validate_idea_config(x_idea_config)
 
 
 def get_idea_categorys():
-    return {"belief", "moment", "pidgin"}
+    return {"belief", "moment", "translate"}
 
 
 def _validate_idea_config(x_idea_config: dict):
     atom_config_dict = get_atom_config_dict()
     moment_config_dict = get_moment_config_dict()
-    pidgin_config_dict = get_pidgin_config_dict()
+    translate_config_dict = get_translate_config_dict()
     # for every idea_format file there exists a unique idea_number with leading zeros to make 5 digits
     for idea_dimen, idea_dict in x_idea_config.items():
         print(f"{idea_dimen=}")
@@ -569,8 +569,8 @@ def _validate_idea_config(x_idea_config: dict):
             sub_dimen = atom_config_dict.get(idea_dimen)
         elif idea_dict.get(idea_category_str()) == "moment":
             sub_dimen = moment_config_dict.get(idea_dimen)
-        elif idea_dict.get(idea_category_str()) == "pidgin":
-            sub_dimen = pidgin_config_dict.get(idea_dimen)
+        elif idea_dict.get(idea_category_str()) == "translate":
+            sub_dimen = translate_config_dict.get(idea_dimen)
 
         assert idea_dict.get(allowed_crud_str()) in get_allowed_curds()
 
@@ -580,10 +580,10 @@ def _validate_idea_config(x_idea_config: dict):
             moment_timeline_weekday_str(),
             momentunit_str(),
             "map_otx2inx",
-            pidgin_title_str(),
-            pidgin_name_str(),
-            pidgin_label_str(),
-            pidgin_rope_str(),
+            translate_title_str(),
+            translate_name_str(),
+            translate_label_str(),
+            translate_rope_str(),
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_one_time_str()
         elif idea_dimen in {
@@ -644,7 +644,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"  {idea_jkeys_keys=}")
         assert face_name_str() in idea_jkeys_keys
         assert event_int_str() in idea_jkeys_keys
-        if idea_dict.get(idea_category_str()) != "pidgin":
+        if idea_dict.get(idea_category_str()) != "translate":
             assert moment_label_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) == "belief":
             idea_jkeys_keys.remove(moment_label_str())
@@ -719,7 +719,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
     valid_idea_dimens = set()
     valid_idea_dimens.update(get_belief_dimens())
     valid_idea_dimens.update(get_moment_dimens())
-    valid_idea_dimens.update(get_pidgin_dimens())
+    valid_idea_dimens.update(get_translate_dimens())
     print("get_idea_config_dict")
     config_dict = get_idea_config_dict()
 
@@ -829,10 +829,10 @@ def set_idea_config_json(dimen: str, build_order: int):
 def test_get_idea_config_dict_ReturnsObj_build_order():
     # ESTABLISH / WHEN
     bo = build_order_str()
-    # set_idea_config_json(pidgin_name_str(), 0)
-    # set_idea_config_json(pidgin_title_str(), 1)
-    # set_idea_config_json(pidgin_label_str(), 2)
-    # set_idea_config_json(pidgin_rope_str(), 3)
+    # set_idea_config_json(translate_name_str(), 0)
+    # set_idea_config_json(translate_title_str(), 1)
+    # set_idea_config_json(translate_label_str(), 2)
+    # set_idea_config_json(translate_rope_str(), 3)
     # set_idea_config_json(momentunit_str(), 5)
     # set_idea_config_json(moment_timeline_hour_str(), 6)
     # set_idea_config_json(moment_timeline_month_str(), 7)
@@ -853,10 +853,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     x_idea_config = get_idea_config_dict()
 
     # THEN
-    assert x_idea_config.get(pidgin_name_str()).get(bo) == 0
-    assert x_idea_config.get(pidgin_title_str()).get(bo) == 1
-    assert x_idea_config.get(pidgin_label_str()).get(bo) == 2
-    assert x_idea_config.get(pidgin_rope_str()).get(bo) == 3
+    assert x_idea_config.get(translate_name_str()).get(bo) == 0
+    assert x_idea_config.get(translate_title_str()).get(bo) == 1
+    assert x_idea_config.get(translate_label_str()).get(bo) == 2
+    assert x_idea_config.get(translate_rope_str()).get(bo) == 3
     assert x_idea_config.get(momentunit_str()).get(bo) == 5
     assert x_idea_config.get(moment_timeline_hour_str()).get(bo) == 6
     assert x_idea_config.get(moment_timeline_month_str()).get(bo) == 7

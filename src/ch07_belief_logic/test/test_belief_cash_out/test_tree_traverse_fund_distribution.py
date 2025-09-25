@@ -1,12 +1,12 @@
 from dataclasses import dataclass
 from pytest import raises as pytest_raises
-from src.ch02_rope_logic.rope import RopePointer, to_rope
+from src.ch02_rope_logic.rope import RopeTerm, to_rope
 from src.ch03_finance_logic.finance_config import default_fund_pool
 from src.ch04_group_logic.group import awardline_shop, awardunit_shop
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch07_belief_logic.test._util.example_beliefs import (
+from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,
     beliefunit_v001_with_large_agenda,
     get_beliefunit_with7amCleanTableReason,
@@ -800,7 +800,7 @@ def test_BeliefUnit_cashout_SetsGroupLinkBeliefCredAndDebt():
 
     # THEN
     xio_groupunit = yao_belief.get_groupunit(xio_str)
-    xio_xio_membership = xio_groupunit.get_membership(xio_str)
+    xio_xio_membership = xio_groupunit.get_voice_membership(xio_str)
     sue_voiceunit = yao_belief.get_voice(sue_str)
     bob_voiceunit = yao_belief.get_voice(bob_str)
     zia_voiceunit = yao_belief.get_voice(zia_str)
@@ -1067,8 +1067,8 @@ def test_BeliefUnit_cashout_SetsVoiceUnit_fund_give_fund_take():
 
 def clear_all_voiceunits_groupunits_fund_agenda_give_take(x_belief: BeliefUnit):
     # delete belief_agenda_debt and belief_agenda_cred
-    for groupunit_x in x_belief.groupunits.values():
-        groupunit_x.clear_fund_give_take()
+    for x_groupunit in x_belief.groupunits.values():
+        x_groupunit.clear_group_fund_give_take()
         # for membership_x in groupunit_x._voices.values():
         #     print(f"{groupunit_x.} {membership_x.}  {membership_x.fund_give:.6f} {membership_x.voice_debt_points=} {membership_fund_take:t:.6f} {membership_x.} ")
 
@@ -1085,7 +1085,7 @@ class GroupAgendaMetrics:
     sum_membership_debt: float = 0
     membership_count: int = 0
 
-    def set_sums(self, x_belief: BeliefUnit):
+    def set_groupagendametrics_sums(self, x_belief: BeliefUnit):
         for x_groupunit in x_belief.groupunits.values():
             self.sum_groupunit_give += x_groupunit.fund_agenda_give
             self.sum_groupunit_take += x_groupunit.fund_agenda_take
@@ -1096,13 +1096,13 @@ class GroupAgendaMetrics:
 
 
 @dataclass
-class AcclabelendaMetrics:
+class VoiceAgendaMetrics:
     sum_agenda_cred: float = 0
     sum_agenda_debt: float = 0
     sum_agenda_ratio_cred: float = 0
     sum_agenda_ratio_debt: float = 0
 
-    def set_sums(self, x_belief: BeliefUnit):
+    def set_voiceagendametrics_sums(self, x_belief: BeliefUnit):
         for voiceunit in x_belief.voices.values():
             self.sum_agenda_cred += voiceunit.fund_agenda_give
             self.sum_agenda_debt += voiceunit.fund_agenda_take
@@ -1118,7 +1118,7 @@ class AwardAgendaMetrics:
     agenda_no_belief_i_sum = 0
     agenda_yes_belief_i_sum = 0
 
-    def set_sums(self, agenda_dict: dict[RopePointer, PlanUnit]):
+    def set_awardagendametrics_sums(self, agenda_dict: dict[RopeTerm, PlanUnit]):
         for agenda_plan in agenda_dict.values():
             self.sum_belief_agenda_share += agenda_plan.get_fund_share()
             if agenda_plan.awardlines == {}:
@@ -1136,19 +1136,19 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
 
     # TEST belief_agenda_debt and belief_agenda_cred are empty
     x_groupagendametrics = GroupAgendaMetrics()
-    x_groupagendametrics.set_sums(yao_belief)
+    x_groupagendametrics.set_groupagendametrics_sums(yao_belief)
     assert x_groupagendametrics.sum_groupunit_give == 0
     assert x_groupagendametrics.sum_groupunit_take == 0
     assert x_groupagendametrics.sum_membership_cred == 0
     assert x_groupagendametrics.sum_membership_debt == 0
 
     # TEST belief_agenda_debt and belief_agenda_cred are empty
-    x_acclabelendametrics = AcclabelendaMetrics()
-    x_acclabelendametrics.set_sums(yao_belief)
-    assert x_acclabelendametrics.sum_agenda_cred == 0
-    assert x_acclabelendametrics.sum_agenda_debt == 0
-    assert x_acclabelendametrics.sum_agenda_ratio_cred == 0
-    assert x_acclabelendametrics.sum_agenda_ratio_debt == 0
+    x_voiceagendametrics = VoiceAgendaMetrics()
+    x_voiceagendametrics.set_voiceagendametrics_sums(yao_belief)
+    assert x_voiceagendametrics.sum_agenda_cred == 0
+    assert x_voiceagendametrics.sum_agenda_debt == 0
+    assert x_voiceagendametrics.sum_agenda_ratio_cred == 0
+    assert x_voiceagendametrics.sum_agenda_ratio_debt == 0
 
     # WHEN
     agenda_dict = yao_belief.get_agenda_dict()
@@ -1162,7 +1162,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     print(f"{yao_belief.get_reason_contexts()=}")
     assert len(agenda_dict) == 63
     x_awardagendametrics = AwardAgendaMetrics()
-    x_awardagendametrics.set_sums(agenda_dict=agenda_dict)
+    x_awardagendametrics.set_awardagendametrics_sums(agenda_dict=agenda_dict)
     # print(f"{sum_belief_agenda_share=}")
     # assert x_awardagendametrics.agenda_no_count == 14
     assert x_awardagendametrics.agenda_yes_count == 49
@@ -1187,7 +1187,7 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
     )
 
     x_groupagendametrics = GroupAgendaMetrics()
-    x_groupagendametrics.set_sums(yao_belief)
+    x_groupagendametrics.set_groupagendametrics_sums(yao_belief)
     assert x_groupagendametrics.membership_count == 81
     x_sum = 3065400
     print(f"{x_groupagendametrics.sum_groupunit_give=}")
@@ -1202,18 +1202,18 @@ def test_BeliefUnit_agenda_cred_debt_SetAttrs():
 
     assert all_voiceunits_have_legitimate_values(yao_belief)
 
-    x_acclabelendametrics = AcclabelendaMetrics()
-    x_acclabelendametrics.set_sums(yao_belief)
+    x_voiceagendametrics = VoiceAgendaMetrics()
+    x_voiceagendametrics.set_voiceagendametrics_sums(yao_belief)
     assert are_equal(
-        x_acclabelendametrics.sum_agenda_cred,
+        x_voiceagendametrics.sum_agenda_cred,
         x_awardagendametrics.sum_belief_agenda_share,
     )
     assert are_equal(
-        x_acclabelendametrics.sum_agenda_debt,
+        x_voiceagendametrics.sum_agenda_debt,
         x_awardagendametrics.sum_belief_agenda_share,
     )
-    assert are_equal(x_acclabelendametrics.sum_agenda_ratio_cred, 1)
-    assert are_equal(x_acclabelendametrics.sum_agenda_ratio_debt, 1)
+    assert are_equal(x_voiceagendametrics.sum_agenda_ratio_cred, 1)
+    assert are_equal(x_voiceagendametrics.sum_agenda_ratio_debt, 1)
 
     # voiceunit_fund_give_sum = 0.0
     # voiceunit_fund_take_sum = 0.0

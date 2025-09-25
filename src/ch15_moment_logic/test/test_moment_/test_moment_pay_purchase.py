@@ -236,8 +236,8 @@ def test_MomentUnit_set_all_tranbook_SetsAttr():
     zia_str = "Zia"
     zia_bud_net = 887
     bob_bud_net = 445
-    sue_x40000_bud = x_moment.get_brokerunit(sue_str).get_bud(x40000_tran_time)
-    sue_x70000_bud = x_moment.get_brokerunit(sue_str).get_bud(x70000_tran_time)
+    sue_x40000_bud = x_moment.get_beliefbudhistory(sue_str).get_bud(x40000_tran_time)
+    sue_x70000_bud = x_moment.get_beliefbudhistory(sue_str).get_bud(x70000_tran_time)
     sue_x40000_bud.set_bud_voice_net(bob_str, bob_bud_net)
     sue_x70000_bud.set_bud_voice_net(zia_str, zia_bud_net)
 

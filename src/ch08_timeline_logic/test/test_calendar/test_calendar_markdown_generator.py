@@ -5,7 +5,7 @@ from src.ch08_timeline_logic.calendar_markdown import (
     centered_to_len,
     get_calendarmarkdown_str,
 )
-from src.ch08_timeline_logic.test._util.calendar_examples import (
+from src.ch08_timeline_logic.test._util.ch08_examples import (
     get_expected_creg_2024_markdown,
     get_expected_creg_year0_markdown,
     get_expected_five_5524_markdown,

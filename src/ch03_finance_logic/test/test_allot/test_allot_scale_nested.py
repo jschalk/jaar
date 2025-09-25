@@ -3,7 +3,7 @@ from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
 from src.ch03_finance_logic.allot import allot_nested_scale
 from src.ch03_finance_logic.test._util.ch03_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 
 
@@ -11,7 +11,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari0_depth0(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     root_ledger = {bob_str: 10, sue_str: 40}
@@ -37,7 +37,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari1_depth0_NestedFilesExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -70,7 +70,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari2_depth1_NestedFilesExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -105,7 +105,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari3_depth1_NoNestedFiles(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     root_ledger = {bob_str: 10, sue_str: 40}
@@ -131,7 +131,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari4_depth1_NestedFilesExist(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -172,7 +172,7 @@ def test_allot_nested_scale_ReturnsObj_Scenari4_depth1_NestedFilesExist(
 
 def test_allot_nested_scale_SetsFiles_Scenario0(env_dir_setup_cleanup):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"
@@ -238,7 +238,7 @@ def test_allot_nested_scale_SetsFiles_Scenario1_Custom_dst_filename(
     env_dir_setup_cleanup,
 ):
     # ESTABLISH
-    x_dir = get_module_temp_dir()
+    x_dir = get_chapter_temp_dir()
     bob_str = "Bob"
     sue_str = "Sue"
     yao_str = "Yao"

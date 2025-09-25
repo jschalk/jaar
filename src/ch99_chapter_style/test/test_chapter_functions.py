@@ -1,0 +1,256 @@
+from importlib import import_module as importlib_import_module
+from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
+from os.path import exists as os_path_exists
+from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames
+from src.ch98_docs_builder.doc_builder import (
+    get_chapter_desc_prefix,
+    get_chapter_desc_str_number,
+    get_chapter_descs,
+    get_chapter_str_functions,
+)
+from src.ch99_chapter_style.style import (
+    check_all_test_functions_are_formatted,
+    check_all_test_functions_have_proper_naming_format,
+    check_if_test_HasDocString_pytests_exist,
+    check_if_test_ReturnsObj_pytests_exist,
+    find_incorrect_imports,
+    get_all_str_functions,
+    get_docstring,
+    get_duplicated_functions,
+    get_json_files,
+    get_max_chapter_import_str,
+    get_python_files_with_flag,
+    get_top_level_functions,
+)
+
+
+def test_Chapters_StrFunctionsAppearWhereTheyShould():
+    """Test that checks no str function is created before it is needed or after the term is used."""
+
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH
+    all_str_functions = get_all_str_functions()
+    str_first_ref = {str_function: None for str_function in all_str_functions}
+    # "close" is excluded because it is used to close sqlite database connections
+    excluded_strs = {"close"}
+
+    # WHEN / THEN
+    # all_file_count = 0
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_files = list(get_python_files_with_flag(chapter_dir).keys())
+        chapter_files.extend(list(get_json_files(chapter_dir)))
+        chapter_files = sorted(chapter_files)
+        str_funcs_set = set(get_chapter_str_functions(chapter_dir, chapter_prefix))
+        # print(f"{desc_number_str} {len(str_funcs_set)=}")
+        # chapter_file_count = 0
+        for file_path in chapter_files:
+            if file_path.find("_util") == -1:
+                # chapter_file_count += 1
+                # all_file_count += 1
+                # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
+                first_ref_missing_strs = {
+                    str_function[:-4]
+                    for str_function in str_first_ref
+                    if str_first_ref.get(str_function) is None
+                }
+                file_str = open(file_path).read()
+                for x_str in first_ref_missing_strs:
+                    if file_str.find(x_str) > -1 and x_str not in excluded_strs:
+                        x_str_func_name = f"{x_str}_str"
+                        str_first_ref[x_str_func_name] = file_path
+                        if x_str_func_name not in str_funcs_set:
+                            print(f"missing {x_str=} {file_path=}")
+                        assert x_str_func_name in str_funcs_set
+
+
+def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH
+    chapter_descs = get_chapter_descs()
+    mod_descs_sorted = sorted(list(chapter_descs.keys()))
+
+    # WHEN / THEN
+    all_file_count = 0
+    for chapter_desc in mod_descs_sorted:
+        chapter_dir = chapter_descs.get(chapter_desc)
+        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
+        desc_number_int = int(chapter_desc_str_number)
+        chapter_files = sorted(list(get_python_files_with_flag(chapter_dir).keys()))
+        # print(f"{desc_number_str} src.{chapter_desc}")
+        for chapter_file_count, file_path in enumerate(chapter_files, start=1):
+            all_file_count += 1
+            incorrect_imports = find_incorrect_imports(file_path, desc_number_int)
+            if len(incorrect_imports) == 1 and file_path.find("_keywords.py") > 0:
+                incorrect_imports = []
+
+            assertion_fail_str = f"File #{all_file_count} a{chapter_desc_str_number} file #{chapter_file_count} Imports: {len(incorrect_imports)} {file_path}"
+            assert not incorrect_imports, assertion_fail_str
+
+
+def test_Chapters_StrFunctionsAreAllImported():
+    # ESTABLISH / WHEN
+    all_str_functions = get_all_str_functions()
+
+    # THEN confirm all str functions are imported to max chapter
+    max_chapter_import_str = get_max_chapter_import_str()
+    print(f"{max_chapter_import_str=}")
+    max_mod_obj = importlib_import_module(max_chapter_import_str)
+    mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
+    mod_str_funcs = {name for name, obj in mod_all_funcs if not name.startswith("__")}
+
+    print(f"{len(mod_all_funcs)=}")
+    assert len(all_str_functions) == len(mod_str_funcs)
+    all_str_func_set = set(all_str_functions)
+    assert all_str_func_set == mod_str_funcs
+
+
+def test_Chapters_MostFunctionsAreUniquelyNamed():
+    # ESTABLISH
+    excluded_functions = {
+        "_get_inx_label",
+        "_get_inx_value",
+        "_get_rid_of_translate_core_keys",
+        "_is_inx_knot_inclusion_correct",
+        "_is_otx_knot_inclusion_correct",
+        "_unknown_str_in_otx2inx",
+        "add_2_curve",
+        "add_column_rect",
+        "add_cycle_to_tax_arrows",
+        "add_fund_give_take",
+        "add_grants_top",
+        "add_keep__rect",
+        "add_beliefatom",
+        "add_rect_arrow",
+        "add_rect_str",
+        "add_river_row",
+        "add_rivercycle",
+        "add_taxs_bottom",
+        "add_taxs_column",
+        "atom_file_exists",
+        "clear_status",
+        "contains_knot",
+        "del_label",
+        "del_otx2inx",
+        "env_dir_setup_cleanup",
+        "find_replace_rope",
+        "fund_graph0",
+        "get_edited_belief",
+        "get_factunits_dict",
+        "get_from_dict",
+        "get_from_json",
+        "get_json",
+        "get_chapter_temp_dir",
+        "get_obj_key",
+        "is_empty",
+        "is_valid",
+        "label_exists",
+        "otx_exists",
+        "otx2inx_exists",
+        "pack_file_exists",
+        "beliefatom_exists",
+        "reveal_inx",
+        "set_all_otx2inx",
+        "set_knot",
+        "set_label",
+        "set_membership",
+        "set_otx2inx",
+        "set_status",
+        "test_str_functions_ReturnsObj",
+        "to_dict",
+    }
+
+    # WHEN
+    duplicated_functions, unnecessarily_excluded_funcs = get_duplicated_functions(
+        excluded_functions
+    )
+
+    # THEN
+    assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
+    assert not duplicated_functions, assertion_fail_str
+    # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
+    assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
+
+
+def test_Chapters_path_FunctionStructureAndFormat():
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+    # ESTABLISH / WHEN
+    x_count = 0
+    path_functions = {}
+    all_test_functions = {}
+    chapters_path_funcs = {}
+    filtered_chapters_path_funcs = {}
+    filterout_path_funcs = {
+        "create_path",
+        "create_directory_path",
+        "rope_is_valid_dir_path",
+    }
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        filenames_set = get_dir_filenames(chapter_dir, include_extensions={"py"})
+        filtered_path_funcs = set()
+        path_func_set = set()
+        chapters_path_funcs[chapter_desc] = path_func_set
+        filtered_chapters_path_funcs[chapter_desc] = filtered_path_funcs
+        for filepath_set in filenames_set:
+            file_dir = create_path(chapter_dir, filepath_set[0])
+            file_path = create_path(file_dir, filepath_set[1])
+            file_functions = get_top_level_functions(file_path)
+            for function_name in file_functions.keys():
+                x_count += 1
+                if str(function_name).endswith("_path"):
+                    # print(
+                    #     f"Function #{x_count}: Path function {function_name} in {file_path}"
+                    # )
+                    path_functions[function_name] = file_path
+                    path_func_set.add(function_name)
+                    if (
+                        not str(function_name).endswith("config_path")
+                        and function_name not in filterout_path_funcs
+                    ):
+                        filtered_path_funcs.add(function_name)
+                if str(function_name).startswith("test_"):
+                    function_str = file_functions.get(function_name)
+                    all_test_functions[function_name] = function_str
+
+    print(f"Total path functions found: {len(path_functions)}")
+    for function_name, file_path in path_functions.items():
+        func_docstring = get_docstring(file_path, function_name)
+        # if not func_docstring:
+        #     print(f"docstring for {function_name} is None")
+        # else:
+        #     print(
+        #         f"docstring for {function_name}: \t{func_docstring.replace("\n", "")}"
+        #     )
+        assert func_docstring is not None, function_name
+
+    # print(f"Path functions: {path_functions.keys()=}")
+    # for chapter_desc, path_funcs in chapters_path_funcs.items():
+    #     print(f"{chapter_desc=} {path_funcs=}")
+
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        if len(filtered_chapters_path_funcs.get(chapter_desc)) > 0:
+            chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
+            path_func_filename = f"{chapter_desc_prefix}_path.py"
+            path_func_library = create_path(chapter_dir, path_func_filename)
+            path_funcs = filtered_chapters_path_funcs.get(chapter_desc)
+            assert os_path_exists(path_func_library)
+
+            test_dir = create_path(chapter_dir, "test")
+            util_dir = create_path(test_dir, "_util")
+            pytest_path_func_filename = f"test_{path_func_filename}"
+            pytest_path_func_path = create_path(util_dir, pytest_path_func_filename)
+            assert os_path_exists(pytest_path_func_path)
+            test_path_func_names = set(
+                get_top_level_functions(pytest_path_func_path).keys()
+            )
+            # print(f"{chapter_desc} {test_path_func_names=}")
+            check_if_test_ReturnsObj_pytests_exist(
+                path_funcs, chapter_desc, test_path_func_names
+            )
+            check_if_test_HasDocString_pytests_exist(
+                path_funcs, chapter_desc, test_path_func_names
+            )
+
+    all_test_function_names = all_test_functions.keys()
+    check_all_test_functions_have_proper_naming_format(all_test_function_names)
+    check_all_test_functions_are_formatted(all_test_functions)

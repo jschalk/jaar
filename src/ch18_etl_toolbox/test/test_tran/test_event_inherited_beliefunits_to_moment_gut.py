@@ -7,7 +7,7 @@ from src.ch07_belief_logic.belief_main import (
 from src.ch12_hub_toolbox.ch12_path import create_belief_event_dir_path, create_gut_path
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.transformers import (
     etl_event_inherited_beliefunits_to_moment_gut,
@@ -31,7 +31,7 @@ def test_etl_event_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
     credit77 = 77
     credit88 = 88
     a23_str = "amy23"
-    moment_mstr_dir = get_module_temp_dir()
+    moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_dir = create_belief_event_dir_path(
         moment_mstr_dir, a23_str, bob_inx, event3
     )

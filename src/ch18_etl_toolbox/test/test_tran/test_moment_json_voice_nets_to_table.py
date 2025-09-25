@@ -10,7 +10,7 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir,
+    get_chapter_temp_dir,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import CREATE_MOMENT_VOICE_NETS_SQLSTR
 from src.ch18_etl_toolbox.transformers import (
@@ -62,7 +62,7 @@ def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase
 ):
     # ESTABLISH
     a23_str = "amy23"
-    mstr_dir = get_module_temp_dir()
+    mstr_dir = get_chapter_temp_dir()
     a23_moment = momentunit_shop(a23_str, mstr_dir)
     sue_str = "Sue"
     yao_str = "Yao"

@@ -38,7 +38,7 @@ class IdeaRef:
         self._attributes[x_attribute] = {"otx_key": otx_key}
 
     def get_headers_list(self) -> list[str]:
-        return get_default_sorted_list(self._attributes)
+        return get_default_sorted_list(set(self._attributes.keys()))
 
     def get_otx_keys_list(self) -> list[str]:
         x_set = {
@@ -154,7 +154,7 @@ def save_idea_csv(
 
 
 def get_csv_idearef(header_row: list[str]) -> IdeaRef:
-    header_row = get_default_sorted_list(header_row)
+    header_row = get_default_sorted_list(set(header_row))
     headers_str = "".join(f",{x_header}" for x_header in header_row)
     headers_str = headers_str[1:]
     headers_str = headers_str.replace("face_name,", "")

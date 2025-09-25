@@ -1,4 +1,4 @@
-from src.ch02_rope_logic.rope import LabelTerm, RopePointer, create_rope
+from src.ch02_rope_logic.rope import LabelTerm, RopeTerm, create_rope
 from src.ch06_plan_logic.plan import get_default_moment_label, planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch12_hub_toolbox.hub_tool import (
@@ -16,37 +16,22 @@ from src.ch13_belief_listen_logic.listen_main import (
 )
 from src.ch13_belief_listen_logic.test._util.ch13_env import (
     env_dir_setup_cleanup,
-    get_module_temp_dir as env_dir,
+    get_chapter_temp_dir as env_dir,
 )
-from src.ch13_belief_listen_logic.test._util.example_listen_hub import get_texas_hubunit
-
-
-def casa_str() -> str:
-    return "casa"
-
-
-def cook_str() -> str:
-    return "cook"
-
-
-def eat_str() -> str:
-    return "eat"
-
-
-def hungry_str() -> str:
-    return "hungry"
-
-
-def full_str() -> str:
-    return "full"
+from src.ch13_belief_listen_logic.test._util.ch13_examples import (
+    casa_str,
+    clean_str,
+    cook_str,
+    eat_str,
+    full_str,
+    get_texas_hubunit,
+    hungry_str,
+    run_str,
+)
 
 
 def sanitation_str() -> str:
     return "sanitation"
-
-
-def clean_str() -> str:
-    return "clean"
 
 
 def dirty_str() -> str:
@@ -57,47 +42,43 @@ def sweep_str() -> str:
     return "sweep"
 
 
-def run_str() -> str:
-    return "run"
-
-
-def casa_rope() -> RopePointer:
+def casa_rope() -> RopeTerm:
     return create_rope(get_default_moment_label(), casa_str())
 
 
-def cook_rope() -> RopePointer:
+def cook_rope() -> RopeTerm:
     return create_rope(casa_rope(), cook_str())
 
 
-def eat_rope() -> RopePointer:
+def eat_rope() -> RopeTerm:
     return create_rope(casa_rope(), eat_str())
 
 
-def hungry_rope() -> RopePointer:
+def hungry_rope() -> RopeTerm:
     return create_rope(eat_rope(), hungry_str())
 
 
-def full_rope() -> RopePointer:
+def full_rope() -> RopeTerm:
     return create_rope(eat_rope(), full_str())
 
 
-def sanitation_rope() -> RopePointer:
+def sanitation_rope() -> RopeTerm:
     return create_rope(casa_rope(), sanitation_str())
 
 
-def clean_rope() -> RopePointer:
+def clean_rope() -> RopeTerm:
     return create_rope(sanitation_rope(), clean_str())
 
 
-def dirty_rope() -> RopePointer:
+def dirty_rope() -> RopeTerm:
     return create_rope(sanitation_rope(), dirty_str())
 
 
-def sweep_rope() -> RopePointer:
+def sweep_rope() -> RopeTerm:
     return create_rope(casa_rope(), sweep_str())
 
 
-def run_rope() -> RopePointer:
+def run_rope() -> RopeTerm:
     return create_rope(casa_rope(), run_str())
 
 
@@ -162,7 +143,7 @@ def get_example_yao_vision3_speaker() -> BeliefUnit:
     return yao_speaker
 
 
-def get_usa_rope() -> RopePointer:
+def get_usa_rope() -> RopeTerm:
     return create_rope(get_default_moment_label(), "USA")
 
 
@@ -194,31 +175,31 @@ def get_on_land_str() -> LabelTerm:
     return "on_land"
 
 
-def get_iowa_rope() -> RopePointer:
+def get_iowa_rope() -> RopeTerm:
     return create_rope(get_usa_rope(), get_iowa_str())
 
 
-def get_ohio_rope() -> RopePointer:
+def get_ohio_rope() -> RopeTerm:
     return create_rope(get_usa_rope(), get_ohio_str())
 
 
-def get_utah_rope() -> RopePointer:
+def get_utah_rope() -> RopeTerm:
     return create_rope(get_usa_rope(), get_utah_str())
 
 
-def get_swim_rope() -> RopePointer:
+def get_swim_rope() -> RopeTerm:
     return create_rope(get_default_moment_label(), get_swim_str())
 
 
-def get_location_rope() -> RopePointer:
+def get_location_rope() -> RopeTerm:
     return create_rope(get_default_moment_label(), get_location_str())
 
 
-def get_in_mer_rope() -> RopePointer:
+def get_in_mer_rope() -> RopeTerm:
     return create_rope(get_location_rope(), get_in_mer_str())
 
 
-def get_on_land_rope() -> RopePointer:
+def get_on_land_rope() -> RopeTerm:
     return create_rope(get_location_rope(), get_on_land_str())
 
 
