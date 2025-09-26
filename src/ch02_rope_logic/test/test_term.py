@@ -1,10 +1,10 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic._ref.ch02_keywords import knot_str
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    CentralLabel,
     KnotTerm,
     LabelTerm,
     MomentLabel,
+    NexusLabel,
     RopeTerm,
     default_knot_if_None,
 )
@@ -68,17 +68,17 @@ def test_LabelTerm_is_label_ReturnsObj_Scenario1():
     assert x_labelterm.is_label(slash_str) is False
 
 
-def test_CentralLabel_Exists():
+def test_NexusLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_central = CentralLabel(empty_str)
+    x_nexus = NexusLabel(empty_str)
     # THEN
-    assert x_central == empty_str
+    assert x_nexus == empty_str
     doc_str = (
         f"A string representation of a tree root node. Node cannot contain {knot_str()}"
     )
-    assert inspect_getdoc(x_central) == doc_str
+    assert inspect_getdoc(x_nexus) == doc_str
 
 
 def test_RopeTerm_Exists():
@@ -99,5 +99,5 @@ def test_MomentLabel_Exists():
     x_moment = MomentLabel(empty_str)
     # THEN
     assert x_moment == empty_str
-    doc_str = f"A CentralLabel for a Moment. Cannot contain {knot_str()}."
+    doc_str = f"A NexusLabel for a Moment. Cannot contain {knot_str()}."
     assert inspect_getdoc(x_moment) == doc_str

@@ -1,7 +1,4 @@
-from src.ch02_rope_logic.rope import (
-    create_rope,
-    get_default_central_label as root_label,
-)
+from src.ch02_rope_logic.rope import create_rope, get_default_nexus_label as root_label
 from src.ch05_reason_logic._ref.ch05_keywords import (
     fact_context_str,
     fact_lower_str,

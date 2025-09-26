@@ -1,9 +1,9 @@
 from src.ch02_rope_logic._ref.ch02_keywords import (
-    CentralLabel_str,
     KnotTerm_str,
     LabelTerm_str,
     MomentLabel_str,
     NameTerm_str,
+    NexusLabel_str,
     RopeTerm_str,
     TitleTerm_str,
     knot_str,
@@ -13,7 +13,7 @@ from src.ch02_rope_logic._ref.ch02_keywords import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert CentralLabel_str() == "CentralLabel"
+    assert NexusLabel_str() == "NexusLabel"
     assert LabelTerm_str() == "LabelTerm"
     assert KnotTerm_str() == "KnotTerm"
     assert knot_str() == "knot"

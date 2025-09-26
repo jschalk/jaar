@@ -1,8 +1,8 @@
 from src.ch01_data_toolbox._ref.ch01_keywords import *
 
 
-def CentralLabel_str() -> str:
-    return "CentralLabel"
+def NexusLabel_str() -> str:
+    return "NexusLabel"
 
 
 def KnotTerm_str() -> str:

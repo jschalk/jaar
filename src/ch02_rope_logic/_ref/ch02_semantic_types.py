@@ -18,14 +18,14 @@ class LabelTerm(str):
         return self.find(default_knot_if_None(knot)) == -1
 
 
-class CentralLabel(LabelTerm):
+class NexusLabel(LabelTerm):
     """A string representation of a tree root node. Node cannot contain knot"""
 
     pass
 
 
-class MomentLabel(CentralLabel):  # Created to help track the object class relations
-    """A CentralLabel for a Moment. Cannot contain knot."""
+class MomentLabel(NexusLabel):  # Created to help track the object class relations
+    """A NexusLabel for a Moment. Cannot contain knot."""
 
     pass
 

@@ -31,7 +31,7 @@ def expected_semantic_types() -> set:
         "BeliefName",
         "BitNum",
         "CRUD_command",
-        "CentralLabel",
+        "NexusLabel",
         "EventInt",
         "FaceName",
         "FundIota",

@@ -1,7 +1,7 @@
 from src.ch02_rope_logic.rope import (
     create_rope,
     find_replace_rope_key_dict,
-    get_default_central_label as root_label,
+    get_default_nexus_label as root_label,
 )
 from src.ch05_reason_logic._ref.ch05_keywords import (
     knot_str,
@@ -860,15 +860,15 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
 
 def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
     # ESTABLISH
-    old_central_label = "El Paso"
+    old_nexus_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_rope = create_rope(old_central_label, casa_str)
+    old_casa_rope = create_rope(old_nexus_label, casa_str)
     old_seasons_rope = create_rope(old_casa_rope, seasons_str)
     old_caseunit = caseunit_shop(reason_state=old_seasons_rope)
     old_caseunits = {old_caseunit.reason_state: old_caseunit}
-    new_central_label = "Austin"
-    new_casa_rope = create_rope(new_central_label, casa_str)
+    new_nexus_label = "Austin"
+    new_casa_rope = create_rope(new_nexus_label, casa_str)
     new_seasons_rope = create_rope(new_casa_rope, seasons_str)
 
     # WHEN
