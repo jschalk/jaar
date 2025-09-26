@@ -1,5 +1,5 @@
 from src.ch01_data_toolbox.dict_toolbox import get_max_key
-from src.ch02_rope_logic.term import BeliefName, RopeTerm
+from src.ch02_rope_logic._ref.ch02_semantic_types import BeliefName, RopeTerm
 from src.ch05_reason_logic.reason import FactUnit, get_factunit_from_tuple
 
 

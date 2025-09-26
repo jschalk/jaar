@@ -12,13 +12,13 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_file,
     save_file,
 )
-from src.ch02_rope_logic.rope import validate_labelterm
-from src.ch02_rope_logic.term import (
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
     BeliefName,
     MomentLabel,
     RopeTerm,
     default_knot_if_None,
 )
+from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch03_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_money_magnitude_if_None,

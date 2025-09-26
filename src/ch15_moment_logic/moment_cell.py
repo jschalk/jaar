@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_json,
     save_json,
 )
-from src.ch02_rope_logic.term import BeliefName, LabelTerm
+from src.ch02_rope_logic._ref.ch02_semantic_types import BeliefName, LabelTerm
 from src.ch03_finance_logic.allot import allot_nested_scale
 from src.ch03_finance_logic.finance_config import FundNum
 from src.ch05_reason_logic.reason import get_dict_from_factunits

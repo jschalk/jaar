@@ -80,10 +80,9 @@ def check_env_file_has_necessary_elements(
     # print(f"{env_files=}")
     # print(f"{env_filename=}")
     assert env_filename.endswith(f"{chapter_prefix}_env.py")
-    assertion_fail_str = (
-        f"{chapter_number=} {get_function_names_from_file(env_filename)}"
-    )
-    env_functions = set(get_function_names_from_file(env_filename))
+    file_funcs, class_bases = get_function_names_from_file(env_filename)
+    assertion_fail_str = f"{chapter_number=} {file_funcs}"
+    env_functions = set(file_funcs)
     assert "env_dir_setup_cleanup" in env_functions, assertion_fail_str
     assert "get_chapter_temp_dir" in env_functions, assertion_fail_str
 
@@ -117,7 +116,6 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
         chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
-        ref_dir = create_path(chapter_dir, "ref")
         test_dir = create_path(chapter_dir, "test")
         util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
@@ -134,8 +132,8 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1
             check_import_objs_are_ordered(test_file_imports, test_file_path)
-            test_functions = get_function_names_from_file(test_file_path)
-            assert test_functions == ["test_str_functions_ReturnsObj"]
+            file_funcs, class_bases = get_function_names_from_file(test_file_path)
+            assert file_funcs == ["test_str_functions_ReturnsObj"]
             check_str_func_test_file_has_needed_asserts(
                 chapter_str_funcs, test_file_path, util_dir, chapter_desc_str_number
             )
@@ -203,9 +201,13 @@ def test_Chapters_ChapterReferenceFolder_ref_ExistsForEveryChapter():
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
         docs_dir = create_path(chapter_dir, "_ref")
-        assert os_path_exists(docs_dir)
         chapter_ref_path = create_path(docs_dir, f"{chapter_desc_prefix}_ref.json")
+        semantics_path = create_path(
+            docs_dir, f"{chapter_desc_prefix}_semantic_types.py"
+        )
+        assert os_path_exists(docs_dir)
         assert os_path_exists(chapter_ref_path)
+        assert os_path_exists(semantics_path)
         chapter_ref_dict = open_json(chapter_ref_path)
         print(f"{chapter_desc=}")
         # print(f"{chapter_ref_path} \t Items: {len(chapter_ref_dict)}")

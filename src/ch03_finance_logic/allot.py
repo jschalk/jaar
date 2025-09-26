@@ -3,15 +3,10 @@ from os.path import exists as os_path_exists
 from pathlib import Path
 from src.ch01_data_toolbox.dict_toolbox import get_0_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
+from src.ch03_finance_logic._ref.ch03_semantic_types import GrainFloat
 
 
 class missing_base_residual_Exception(Exception):
-    pass
-
-
-class GrainFloat(float):
-    """float Class that is supposed to be divisable by a float"""
-
     pass
 
 

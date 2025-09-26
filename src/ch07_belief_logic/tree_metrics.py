@@ -1,6 +1,6 @@
 from dataclasses import dataclass
 from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_empty_dict_if_None
-from src.ch02_rope_logic.term import GroupTitle
+from src.ch02_rope_logic._ref.ch02_semantic_types import GroupTitle
 from src.ch04_group_logic.group import AwardUnit
 from src.ch05_reason_logic.reason import ReasonUnit, RopeTerm
 

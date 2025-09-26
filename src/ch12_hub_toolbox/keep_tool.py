@@ -6,7 +6,11 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch02_rope_logic.term import BeliefName, LabelTerm, MomentLabel
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    BeliefName,
+    LabelTerm,
+    MomentLabel,
+)
 from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_json
 from src.ch12_hub_toolbox.ch12_path import (
     create_keep_duty_path,

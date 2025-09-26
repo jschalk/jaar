@@ -1,40 +1,12 @@
 from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_1_if_None
-
-
-class MoneyUnit(float):
-    """MoneyUnit inherits from float class"""
-
-    pass
-
-
-class PennyNum(float):
-    """Smallest Unit of Money"""
-
-    pass
-
-
-class RespectNum(float):
-    """RespectNum inherits from float class"""
-
-    pass
-
-
-class BitNum(float):
-    """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
-
-    pass
-
-
-class FundNum(float):
-    """FundNum inherits from float class"""
-
-    pass
-
-
-class FundIota(float):
-    """Smallest Unit of fund_num"""
-
-    pass
+from src.ch03_finance_logic._ref.ch03_semantic_types import (
+    BitNum,
+    FundIota,
+    FundNum,
+    MoneyUnit,
+    PennyNum,
+    RespectNum,
+)
 
 
 class missing_base_residual_Exception(Exception):

@@ -153,15 +153,27 @@ def check_chapter_imports_are_ordered(imports: list[list], file_path: str, desc_
             assert desc_number == env_number
 
 
+def get_all_semantic_types_from_ref_files() -> set[str]:
+    all_ref_files_semantic_types = set()
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        ref_dir = create_path(chapter_dir, "_ref")
+        str_util_path = create_path(ref_dir, f"{chapter_prefix}_semantic_types.py")
+        functions, class_bases = get_function_names_from_file(str_util_path)
+        print(f"{chapter_desc} {class_bases=}")
+        all_ref_files_semantic_types.update(class_bases)
+    print(all_ref_files_semantic_types)
+    return all_ref_files_semantic_types
+
+
 def get_all_str_functions() -> list:
     all_str_functions = []
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
         ref_dir = create_path(chapter_dir, "_ref")
         str_util_path = create_path(ref_dir, f"{chapter_prefix}_keywords.py")
-        str_functions = get_function_names_from_file(str_util_path)
+        str_functions, class_bases = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:
-            str_functions = get_function_names_from_file(str_util_path)
             all_str_functions.extend(iter(str_functions))
     return all_str_functions
 
@@ -178,12 +190,29 @@ def get_duplicated_functions(excluded_functions) -> set[str]:
     duplicate_functions = set()
     non_excluded_functions = set()
     all_functions = {}
+    all_classes = {}
+    semantic_type_candidates = {}
     for chapter_dir in get_chapter_descs().values():
         filenames_set = get_dir_filenames(chapter_dir, include_extensions={"py"})
         for filenames in filenames_set:
             file_dir = create_path(chapter_dir, filenames[0])
             file_path = create_path(file_dir, filenames[1])
-            file_functions = get_function_names_from_file(file_path)
+            file_functions, class_bases = get_function_names_from_file(file_path)
+            for x_class, x_bases in class_bases.items():
+                if len(x_bases) > 1:
+                    all_classes[x_class] = (
+                        f"A class with more than one inheritance. {filenames[1]} {x_bases}"
+                    )
+                elif len(x_bases) == 0:
+                    no_bases_str = f"A class with no inheritance. {filenames[1]}"
+                    all_classes[x_class] = no_bases_str
+                elif x_bases == ["Exception"]:
+                    exception_base_str = f"An Exception inheritance. {filenames[1]}"
+                    all_classes[x_class] = exception_base_str
+                elif len(x_bases) == 1:
+                    one_base_str = f"A single inheritance {filenames[1]} {x_bases}"
+                    all_classes[x_class] = one_base_str
+                    semantic_type_candidates[x_class] = x_bases
             for function_name in file_functions:
                 add_or_count_function_name_occurance(all_functions, function_name)
                 x_count += 1
@@ -194,9 +223,9 @@ def get_duplicated_functions(excluded_functions) -> set[str]:
                     duplicate_functions.add(function_name)
                 if function_name not in excluded_functions:
                     non_excluded_functions.add(function_name)
-    print(f"{duplicate_functions=}")
-    print(f"{len(non_excluded_functions)=}")
-    print(f"{len(all_functions)=}")
+    # print(f"{duplicate_functions=}")
+    # print(f"{len(non_excluded_functions)=}")
+    # print(f"{len(all_functions)=}")
     unnecessarily_excluded_funcs = {
         function_name: f"{func_count=}. '{function_name}' does not need to be in excluded_functions set"
         for function_name, func_count in all_functions.items()
@@ -208,10 +237,38 @@ def get_duplicated_functions(excluded_functions) -> set[str]:
             unnecessarily_excluded_funcs[excluded_function] = does_not_exist_str
     for func_name in sorted(list(all_functions.keys()), reverse=False):
         func_count = all_functions.get(func_name)
-        if func_count > 1:
-            print(f"{func_name} {func_count=}")
+        # if func_count > 1:
+        #     print(f"{func_name} {func_count=}")
     print(f"{len(excluded_functions)=}")
-    return duplicate_functions, unnecessarily_excluded_funcs
+
+    # figure out which classes are semantic types
+    semantic_types = get_semantic_types(semantic_type_candidates)
+    return duplicate_functions, unnecessarily_excluded_funcs, semantic_types
+
+
+def get_semantic_types(semantic_type_candidates) -> set:
+    semantic_type_confirmed = set()
+    base_types = (int, float, bool, str, list, tuple, range, dict, set)
+    # Check if any base is in base_types by name
+    candidates_list = list(semantic_type_candidates.keys())
+
+    while candidates_list != []:
+        x_class = candidates_list.pop()
+        bases = semantic_type_candidates.get(x_class)
+        is_subclass = any(base in [t.__name__ for t in base_types] for base in bases)
+        if is_subclass:
+            semantic_type_confirmed.add(x_class)
+        else:
+            x_base = bases[0]
+            new_bases = semantic_type_candidates.get(x_base)
+            if new_bases:
+                # if x_base exists in semantic_type_candidates change classes bases reference to parent class
+                semantic_type_candidates[x_class] = new_bases
+                candidates_list.append(x_class)
+                # print(f"{x_class} popped {x_base=} {new_bases=}")
+
+    print(f"{sorted(list(semantic_type_confirmed))=}")
+    return semantic_type_confirmed
 
 
 def check_if_chapter_str_funcs_is_sorted(chapter_str_funcs: list[str]):

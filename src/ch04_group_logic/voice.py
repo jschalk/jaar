@@ -4,12 +4,12 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_1_if_None,
     get_dict_from_json,
 )
+from src.ch02_rope_logic._ref.ch02_semantic_types import VoiceName
 from src.ch02_rope_logic.rope import (
     default_knot_if_None,
     is_labelterm,
     validate_labelterm,
 )
-from src.ch02_rope_logic.term import VoiceName
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import RespectNum, default_RespectBit_if_None
 from src.ch04_group_logic.group import (

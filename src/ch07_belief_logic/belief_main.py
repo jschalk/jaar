@@ -8,6 +8,15 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_json_from_dict,
 )
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    BeliefName,
+    GroupTitle,
+    HealerName,
+    LabelTerm,
+    MomentLabel,
+    RopeTerm,
+    VoiceName,
+)
 from src.ch02_rope_logic.rope import (
     all_ropes_between,
     create_rope,
@@ -23,15 +32,6 @@ from src.ch02_rope_logic.rope import (
     rebuild_rope,
     rope_is_valid_dir_path,
     to_rope,
-)
-from src.ch02_rope_logic.term import (
-    BeliefName,
-    GroupTitle,
-    HealerName,
-    LabelTerm,
-    MomentLabel,
-    RopeTerm,
-    VoiceName,
 )
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import (

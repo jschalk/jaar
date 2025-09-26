@@ -27,7 +27,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.ch02_rope_logic.term import EventInt, FaceName
+from src.ch02_rope_logic._ref.ch02_semantic_types import EventInt, FaceName
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import get_belief_dimens
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop

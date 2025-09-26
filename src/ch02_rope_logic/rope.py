@@ -1,6 +1,6 @@
 from pathlib import Path as pathlib_Path
 from src.ch01_data_toolbox.file_toolbox import is_path_valid
-from src.ch02_rope_logic.term import (
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
     CentralLabel,
     LabelTerm,
     RopeTerm,

@@ -1,9 +1,6 @@
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch20_world_logic.world import WorldName
-
-
-class LobbyID(str):
-    pass
+from src.ch21_lobby_logic._ref.ch21_semantic_types import LobbyID
 
 
 def create_lobby_dir_path(lobby_mstr_dir: str, lobby_id: LobbyID) -> str:
