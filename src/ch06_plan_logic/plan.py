@@ -7,14 +7,6 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_positive_int,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    GroupTitle,
-    LabelTerm,
-    MomentLabel,
-    RopeTerm,
-    VoiceName,
-    default_knot_if_None,
-)
 from src.ch02_rope_logic.rope import (
     all_ropes_between,
     create_rope,
@@ -60,6 +52,14 @@ from src.ch05_reason_logic.reason import (
     reasonheir_shop,
     reasons_get_from_dict,
     reasonunit_shop,
+)
+from src.ch06_plan_logic._ref.ch06_semantic_types import (
+    GroupTitle,
+    LabelTerm,
+    MomentLabel,
+    RopeTerm,
+    VoiceName,
+    default_knot_if_None,
 )
 from src.ch06_plan_logic.healer import (
     HealerUnit,

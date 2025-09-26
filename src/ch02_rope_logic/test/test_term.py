@@ -2,16 +2,10 @@ from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic._ref.ch02_keywords import knot_str
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
     CentralLabel,
-    FaceName,
-    GroupTitle,
-    HealerName,
     KnotTerm,
     LabelTerm,
     MomentLabel,
-    NameTerm,
     RopeTerm,
-    TitleTerm,
-    VoiceName,
     default_knot_if_None,
 )
 
@@ -42,77 +36,6 @@ def test_default_knot_if_None_ReturnsObj():
     assert default_knot_if_None(slash_str) == slash_str
     assert default_knot_if_None(colon_str) == colon_str
     assert default_knot_if_None(bob_str) == bob_str
-
-
-def test_NameTerm_Exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_nameterm = NameTerm(bob_str)
-    # THEN
-    assert bob_nameterm == bob_str
-    doc_str = "All Name string classes should inherit from this class"
-    assert inspect_getdoc(bob_nameterm) == doc_str
-
-
-def test_NameTerm_is_name_ReturnsObj_Scenario0():
-    # ESTABLISH / WHEN / THEN
-    assert NameTerm("").is_name() is False
-    assert NameTerm("A").is_name()
-
-    # WHEN / THEN
-    x_s = default_knot_if_None()
-    x_nameterm = NameTerm(f"casa{x_s}kitchen")
-    assert x_nameterm.is_name() is False
-
-
-def test_NameTerm_is_name_ReturnsObj_Scenario1():
-    # ESTABLISH / WHEN / THEN
-    slash_str = "/"
-    x_nameterm = NameTerm(f"casa{slash_str}kitchen")
-    assert x_nameterm.is_name()
-    assert x_nameterm.is_name(slash_str) is False
-
-
-def test_HealerName_Exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_healer_str = HealerName(bob_str)
-    # THEN
-    assert bob_healer_str == bob_str
-    doc_str = "A LabelTerm used to identify a Problem's Healer"
-    assert inspect_getdoc(bob_healer_str) == doc_str
-
-
-def test_VoiceName_Exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_VoiceName = VoiceName(bob_str)
-    # THEN
-    assert bob_VoiceName == bob_str
-    doc_str = "Every VoiceName object is NameTerm, must follow NameTerm format."
-    assert inspect_getdoc(bob_VoiceName) == doc_str
-
-
-def test_TitleTerm_Exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_nameterm = TitleTerm(bob_str)
-    # THEN
-    assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise its a single member group of an VoiceName."""
-    assert inspect_getdoc(bob_nameterm) == doc_str
-
-
-def test_GroupTitle_Exists():
-    # ESTABLISH / WHEN
-    bikers_GroupTitle = GroupTitle(";bikers")
-
-    # THEN
-    assert bikers_GroupTitle is not None
 
 
 def test_LabelTerm_Exists():
@@ -167,13 +90,6 @@ def test_RopeTerm_Exists():
     assert x_rope == empty_str
     doc_str = f"A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}"
     assert inspect_getdoc(x_rope) == doc_str
-
-
-def test_FaceName_Exists():
-    # ESTABLISH / WHEN / THEN
-    assert FaceName() == ""
-    assert FaceName("cookie") == "cookie"
-    assert not FaceName(f"cookie{default_knot_if_None()}").is_name()
 
 
 def test_MomentLabel_Exists():
