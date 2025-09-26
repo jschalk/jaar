@@ -1,6 +1,14 @@
 from src.ch01_data_toolbox._ref.ch01_keywords import *
 
 
+def CentralLabel_str() -> str:
+    return "CentralLabel"
+
+
+def KnotTerm_str() -> str:
+    return "KnotTerm"
+
+
 def LabelTerm_str() -> str:
     return "LabelTerm"
 

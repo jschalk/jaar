@@ -1,5 +1,6 @@
 from src.ch07_belief_logic._ref.ch07_keywords import (
     BeliefName_str,
+    FaceName_str,
     ancestors_str,
     attributes_str,
     belief_groupunit_str,
@@ -42,6 +43,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert FaceName_str() == "FaceName"
     assert attributes_str() == "attributes"
     assert ancestors_str() == "ancestors"
     assert beliefunit_str() == "beliefunit"

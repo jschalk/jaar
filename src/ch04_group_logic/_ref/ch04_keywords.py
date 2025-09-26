@@ -1,6 +1,18 @@
 from src.ch03_finance_logic._ref.ch03_keywords import *
 
 
+def GroupTitle_str() -> str:
+    return "GroupTitle"
+
+
+def HealerName_str() -> str:
+    return "HealerName"
+
+
+def VoiceName_str() -> str:
+    return "VoiceName"
+
+
 def awardee_title_str() -> str:
     return "awardee_title"
 

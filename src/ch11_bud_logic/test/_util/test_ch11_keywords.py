@@ -1,4 +1,5 @@
 from src.ch11_bud_logic._ref.ch11_keywords import (
+    EventInt_str,
     amount_str,
     ancestors_str,
     beliefadjust_str,
@@ -18,6 +19,7 @@ from src.ch11_bud_logic._ref.ch11_keywords import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert EventInt_str() == "EventInt"
     assert amount_str() == "amount"
     assert ancestors_str() == "ancestors"
     assert boss_facts_str() == "boss_facts"

@@ -1,6 +1,14 @@
 from src.ch07_belief_logic._ref.ch07_keywords import *
 
 
+def TimeLineLabel_str() -> str:
+    return "TimeLineLabel"
+
+
+def TimeLinePoint_str() -> str:
+    return "TimeLinePoint"
+
+
 def c100_str() -> str:
     return "c100"
 

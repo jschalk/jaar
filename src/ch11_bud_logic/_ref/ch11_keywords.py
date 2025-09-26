@@ -1,6 +1,10 @@
 from src.ch10_pack_logic._ref.ch10_keywords import *
 
 
+def EventInt_str() -> str:
+    return "EventInt"
+
+
 def amount_str() -> str:
     return "amount"
 

@@ -221,13 +221,16 @@ def test_Chapters_StrFunctionsAreAllImported():
     assert len(all_str_functions) == len(mod_str_funcs)
     all_str_func_set = set(all_str_functions)
     assert all_str_func_set == mod_str_funcs
-    # TODO make semantic_type names required keyword str functions
-    # semantic_types = expected_semantic_types()
-    # semantic_str_funcs = set()
-    # for semantic_typ in semantic_types:
-    #     semantic_str_funcs.add(f"{semantic_typ}_str")
-    # print(f"{sorted(list(semantic_str_funcs.difference(all_str_functions)))=}")
-    # assert semantic_str_funcs.issubset(all_str_func_set)
+
+    # make semantic_type names required keyword str functions
+    semantic_types = expected_semantic_types()
+    semantic_str_funcs = set()
+    for semantic_typ in semantic_types:
+        semantic_str_funcs.add(f"{semantic_typ}_str")
+    print(
+        f"semantic_types without str function: {sorted(list(semantic_str_funcs.difference(all_str_functions)))}"
+    )
+    assert semantic_str_funcs.issubset(all_str_func_set)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():
