@@ -16,8 +16,8 @@ from src.ch99_chapter_style.style import (
     find_incorrect_imports,
     get_all_semantic_types_from_ref_files,
     get_all_str_functions,
+    get_chapters_func_class_metrics,
     get_docstring,
-    get_duplicated_functions,
     get_json_files,
     get_max_chapter_import_str,
     get_python_files_with_flag,
@@ -104,9 +104,13 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     }
 
     # WHEN
-    duplicated_functions, unnecessarily_excluded_funcs, semantic_types = (
-        get_duplicated_functions(excluded_functions)
+    chapters_func_class_metrics = get_chapters_func_class_metrics(excluded_functions)
+    duplicated_functions = chapters_func_class_metrics.get("duplicated_functions")
+    unnecessarily_excluded_funcs = chapters_func_class_metrics.get(
+        "unnecessarily_excluded_funcs"
     )
+    semantic_types = chapters_func_class_metrics.get("semantic_types")
+    all_functions = chapters_func_class_metrics.get("all_functions")
 
     # THEN
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
@@ -114,6 +118,11 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
     assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
     assert semantic_types == expected_semantic_types()
+    print(f"{len(all_functions)=}")
+    for semantic_type in sorted(list(semantic_types)):
+        expected_semantic_type_exists_test_str = f"test_{semantic_type}_Exists"
+        print(expected_semantic_type_exists_test_str)
+        assert expected_semantic_type_exists_test_str in all_functions
 
 
 def test_Chapters_Semantic_Types_HasCorrectFormating():

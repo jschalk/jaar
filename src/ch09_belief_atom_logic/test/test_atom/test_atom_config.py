@@ -62,6 +62,7 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     voice_name_str,
     voice_pool_str,
 )
+from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 from src.ch09_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
     get_all_belief_dimen_keys,
@@ -78,6 +79,13 @@ from src.ch09_belief_atom_logic.atom_config import (
     is_belief_dimen,
     set_mog,
 )
+
+
+def test_CRUD_command_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert CRUD_command(UPDATE_str()) == UPDATE_str()
+    assert CRUD_command(DELETE_str()) == DELETE_str()
+    assert CRUD_command(INSERT_str()) == INSERT_str()
 
 
 def test_get_belief_dimens_ReturnsObj():

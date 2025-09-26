@@ -5,10 +5,6 @@ def BeliefName_str() -> str:
     return "BeliefName"
 
 
-def FaceName_str() -> str:
-    return "FaceName"
-
-
 def ancestors_str() -> str:
     return "ancestors"
 

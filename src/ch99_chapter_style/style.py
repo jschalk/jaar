@@ -192,7 +192,7 @@ def add_or_count_function_name_occurance(all_functions: dict, function_name: str
         all_functions[function_name] = 1
 
 
-def get_duplicated_functions(excluded_functions) -> set[str]:
+def get_chapters_func_class_metrics(excluded_functions) -> dict:
     x_count = 0
     duplicate_functions = set()
     non_excluded_functions = set()
@@ -242,15 +242,19 @@ def get_duplicated_functions(excluded_functions) -> set[str]:
         if excluded_function not in all_functions:
             does_not_exist_str = f"'{excluded_function}' is not used in codebase"
             unnecessarily_excluded_funcs[excluded_function] = does_not_exist_str
-    for func_name in sorted(list(all_functions.keys()), reverse=False):
-        func_count = all_functions.get(func_name)
-        # if func_count > 1:
-        #     print(f"{func_name} {func_count=}")
+    # for func_name in sorted(list(all_functions.keys()), reverse=False):
+    #     func_count = all_functions.get(func_name)
+    # if func_count > 1:
+    #     print(f"{func_name} {func_count=}")
     print(f"{len(excluded_functions)=}")
 
-    # figure out which classes are semantic types
     semantic_types = get_semantic_types(semantic_type_candidates)
-    return duplicate_functions, unnecessarily_excluded_funcs, semantic_types
+    return {
+        "all_functions": all_functions,
+        "duplicate_functions": duplicate_functions,
+        "unnecessarily_excluded_funcs": unnecessarily_excluded_funcs,
+        "semantic_types": semantic_types,
+    }
 
 
 def get_semantic_types(semantic_type_candidates) -> set:
@@ -274,7 +278,7 @@ def get_semantic_types(semantic_type_candidates) -> set:
                 candidates_list.append(x_class)
                 # print(f"{x_class} popped {x_base=} {new_bases=}")
 
-    print(f"{sorted(list(semantic_type_confirmed))=}")
+    # print(f"{sorted(list(semantic_type_confirmed))=}")
     return semantic_type_confirmed
 
 

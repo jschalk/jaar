@@ -1,4 +1,4 @@
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
+from src.ch10_pack_logic._ref.ch10_semantic_types import (
     BeliefName,
     FaceName,
     GroupTitle,
