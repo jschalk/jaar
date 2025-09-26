@@ -1,4 +1,5 @@
 from src.ch07_belief_logic._ref.ch07_keywords import (
+    BeliefName_str,
     ancestors_str,
     attributes_str,
     belief_groupunit_str,
@@ -54,6 +55,7 @@ def test_str_functions_ReturnsObj():
     assert belief_plan_partyunit_str() == "belief_plan_partyunit"
     assert belief_plan_healerunit_str() == "belief_plan_healerunit"
     assert belief_plan_factunit_str() == "belief_plan_factunit"
+    assert BeliefName_str() == "BeliefName"
     assert class_type_str() == "class_type"
     assert credor_respect_str() == "credor_respect"
     assert debtor_respect_str() == "debtor_respect"

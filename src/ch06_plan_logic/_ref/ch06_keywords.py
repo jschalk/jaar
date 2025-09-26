@@ -85,6 +85,10 @@ def kids_str() -> str:
     return "kids"
 
 
+def moment_label_str() -> str:
+    return "moment_label"
+
+
 def morph_str() -> str:
     return "morph"
 

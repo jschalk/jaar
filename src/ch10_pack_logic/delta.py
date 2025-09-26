@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import RopeTerm, TitleTerm
+from src.ch07_belief_logic._ref.ch07_semantic_types import RopeTerm, TitleTerm
 from src.ch04_group_logic.group import MemberShip
 from src.ch04_group_logic.voice import MemberShip, VoiceName, VoiceUnit
 from src.ch05_reason_logic.reason import FactUnit, ReasonUnit

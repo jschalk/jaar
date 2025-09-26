@@ -1,7 +1,7 @@
 from importlib import import_module as importlib_import_module
 from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames
+from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames, open_file
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
@@ -16,11 +16,12 @@ from src.ch99_chapter_style.style import (
     find_incorrect_imports,
     get_all_semantic_types_from_ref_files,
     get_all_str_functions,
+    get_chapters_func_class_metrics,
     get_docstring,
-    get_duplicated_functions,
     get_json_files,
     get_max_chapter_import_str,
     get_python_files_with_flag,
+    get_semantic_types_filename,
     get_top_level_functions,
 )
 
@@ -30,7 +31,7 @@ def expected_semantic_types() -> set:
         "BeliefName",
         "BitNum",
         "CRUD_command",
-        "CentralLabel",
+        "NexusLabel",
         "EventInt",
         "FaceName",
         "FundIota",
@@ -103,9 +104,13 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     }
 
     # WHEN
-    duplicated_functions, unnecessarily_excluded_funcs, semantic_types = (
-        get_duplicated_functions(excluded_functions)
+    chapters_func_class_metrics = get_chapters_func_class_metrics(excluded_functions)
+    duplicated_functions = chapters_func_class_metrics.get("duplicated_functions")
+    unnecessarily_excluded_funcs = chapters_func_class_metrics.get(
+        "unnecessarily_excluded_funcs"
     )
+    semantic_types = chapters_func_class_metrics.get("semantic_types")
+    all_functions = chapters_func_class_metrics.get("all_functions")
 
     # THEN
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
@@ -113,6 +118,24 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
     assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
     assert semantic_types == expected_semantic_types()
+    print(f"{len(all_functions)=}")
+    for semantic_type in sorted(list(semantic_types)):
+        expected_semantic_type_exists_test_str = f"test_{semantic_type}_Exists"
+        print(expected_semantic_type_exists_test_str)
+        assert expected_semantic_type_exists_test_str in all_functions
+
+
+def test_Chapters_Semantic_Types_HasCorrectFormating():
+    # ESTABLISH / WHEN
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
+        docs_dir = create_path(chapter_dir, "_ref")
+        semantic_types_filename = get_semantic_types_filename(chapter_desc_prefix)
+        semantics_path = create_path(docs_dir, semantic_types_filename)
+        print(f"{chapter_desc=}")
+        # THEN
+        # semantic_types_file never has import *
+        assert open_file(semantics_path).find("import *") == -1
 
 
 def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
@@ -207,12 +230,16 @@ def test_Chapters_StrFunctionsAreAllImported():
     assert len(all_str_functions) == len(mod_str_funcs)
     all_str_func_set = set(all_str_functions)
     assert all_str_func_set == mod_str_funcs
-    # TODO make semantic_type names required keyword str functions
-    # semantic_types = expected_semantic_types()
-    # semantic_str_funcs = set()
-    # for semantic_typ in semantic_types:
-    #     semantic_str_funcs.add(f"{semantic_typ}_str")
-    # assert semantic_str_funcs.issubset(all_str_func_set)
+
+    # make semantic_type names required keyword str functions
+    semantic_types = expected_semantic_types()
+    semantic_str_funcs = set()
+    for semantic_typ in semantic_types:
+        semantic_str_funcs.add(f"{semantic_typ}_str")
+    print(
+        f"semantic_types without str function: {sorted(list(semantic_str_funcs.difference(all_str_functions)))}"
+    )
+    assert semantic_str_funcs.issubset(all_str_func_set)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

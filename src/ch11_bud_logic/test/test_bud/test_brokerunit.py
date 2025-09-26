@@ -5,12 +5,19 @@ from src.ch11_bud_logic._ref.ch11_keywords import (
     celldepth_str,
     quota_str,
 )
+from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt
 from src.ch11_bud_logic.bud import (
     BeliefBudHistory,
     beliefbudhistory_shop,
     budunit_shop,
     get_beliefbudhistory_from_dict,
 )
+
+
+def test_EventInt_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert EventInt(13) == 13
+    assert EventInt(13.5) == 13
 
 
 def test_BeliefBudHistory_Exists():

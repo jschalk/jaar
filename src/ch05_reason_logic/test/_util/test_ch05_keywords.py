@@ -7,7 +7,6 @@ from src.ch05_reason_logic._ref.ch05_keywords import (
     fact_upper_str,
     factheirs_str,
     factunits_str,
-    moment_label_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_divisor_str,
@@ -26,7 +25,6 @@ def test_str_functions_ReturnsObj():
     assert status_str() == "status"
     assert task_str() == "task"
     assert cases_str() == "cases"
-    assert moment_label_str() == "moment_label"
     assert fact_context_str() == "fact_context"
     assert fact_upper_str() == "fact_upper"
     assert fact_lower_str() == "fact_lower"

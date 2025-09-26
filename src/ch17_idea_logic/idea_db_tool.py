@@ -31,7 +31,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
     set_dir,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import EventInt, FaceName
+from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt, FaceName
 from src.ch16_translate_logic.map import MapCore
 from src.ch16_translate_logic.translate_config import (
     get_translate_args_class_types,

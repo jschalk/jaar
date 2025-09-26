@@ -1,4 +1,5 @@
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    CRUD_command_str,
     DELETE_str,
     atom_hx_str,
     atom_str,
@@ -12,6 +13,7 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert CRUD_command_str() == "CRUD_command"
     assert atom_str() == "atom"
     assert atom_hx_str() == "atom_hx"
     assert DELETE_str() == "DELETE"

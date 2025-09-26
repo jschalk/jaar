@@ -18,39 +18,14 @@ class LabelTerm(str):
         return self.find(default_knot_if_None(knot)) == -1
 
 
-class CentralLabel(LabelTerm):
+class NexusLabel(LabelTerm):
     """A string representation of a tree root node. Node cannot contain knot"""
 
     pass
 
 
-class MomentLabel(CentralLabel):  # Created to help track the object class relations
-    """A CentralLabel for a Moment. Cannot contain knot."""
-
-    pass
-
-
-class NameTerm(LabelTerm):
-    """All Name string classes should inherit from this class"""
-
-    def is_name(self, knot: str = None) -> bool:
-        return self.is_label(knot)
-
-
-class BeliefName(NameTerm):
-    """A NameTerm used to identify a BeliefUnit's belief"""
-
-    pass
-
-
-class VoiceName(BeliefName):  # Created to help track the object class relations
-    """Every VoiceName object is BeliefName, must follow BeliefName format."""
-
-    pass
-
-
-class HealerName(BeliefName):
-    """A LabelTerm used to identify a Problem's Healer"""
+class MomentLabel(NexusLabel):  # Created to help track the object class relations
+    """A NexusLabel for a Moment. Cannot contain knot."""
 
     pass
 
@@ -58,20 +33,4 @@ class HealerName(BeliefName):
 class RopeTerm(str):
     """A string representation of a tree path. LabelTerms are seperated by rope knot"""
 
-    pass
-
-
-class TitleTerm(str):
-    """If a TitleTerm contains knots it represents a group otherwise its a single member group of an VoiceName."""
-
-
-class GroupTitle(TitleTerm):  # Created to help track the object class relations
-    pass
-
-
-class FaceName(NameTerm):
-    pass
-
-
-class EventInt(int):
     pass

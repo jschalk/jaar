@@ -53,9 +53,13 @@ def get_function_names_from_file(
     return file_funcs, class_bases
 
 
+def get_keywords_filename(chapter_desc_prefix: str) -> str:
+    return f"{chapter_desc_prefix}_keywords.py"
+
+
 def get_chapter_str_functions(chapter_dir: str, chapter_desc_prefix: str) -> list[str]:
     ref_dir = create_path(chapter_dir, "_ref")
-    str_util_path = create_path(ref_dir, f"{chapter_desc_prefix}_keywords.py")
+    str_util_path = create_path(ref_dir, get_keywords_filename(chapter_desc_prefix))
     file_funcs, class_bases = get_function_names_from_file(str_util_path)
     return file_funcs
 

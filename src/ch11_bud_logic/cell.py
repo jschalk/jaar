@@ -7,7 +7,6 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import BeliefName, EventInt, RopeTerm
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import FundNum, PennyNum
 from src.ch05_reason_logic.reason import (
@@ -26,6 +25,7 @@ from src.ch07_belief_logic.belief_tool import (
     get_credit_ledger,
     get_voice_mandate_ledger,
 )
+from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, EventInt, RopeTerm
 
 CELLNODE_QUOTA_DEFAULT = 1000
 

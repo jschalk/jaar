@@ -1,4 +1,6 @@
 from src.ch08_timeline_logic._ref.ch08_keywords import (
+    TimeLineLabel_str,
+    TimeLinePoint_str,
     c100_str,
     c400_clean_str,
     c400_leap_str,
@@ -28,6 +30,8 @@ from src.ch08_timeline_logic._ref.ch08_keywords import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert TimeLineLabel_str() == "TimeLineLabel"
+    assert TimeLinePoint_str() == "TimeLinePoint"
     assert c100_str() == "c100"
     assert c400_leap_str() == "c400_leap"
     assert c400_clean_str() == "c400_clean"

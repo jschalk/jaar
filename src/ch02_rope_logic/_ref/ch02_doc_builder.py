@@ -104,7 +104,7 @@ vacuum_rope = "{vacuum_rope}"
 dirty_rope = "{dirty_rope}"
 usa_texas_rope = "{un_usa_texas_rope}"
 un_texas_rope = "{un_texas_rope}"
-- **CentralLabel**: The first label in a RopeTerm. Example "UN" in "{un_usa_texas_rope}"
+- **NexusLabel**: The first label in a RopeTerm. Example "UN" in "{un_usa_texas_rope}"
 
 # Moments
 Consider these 3 ropes: 
@@ -112,9 +112,9 @@ Consider these 3 ropes:
 2. {usa_texas_rope}
 3. {usa_south_texas_rope}
 
-Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN central :
+Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN nexus :
 
-"UN" has the central moment
+"UN" has the nexus moment
 1. {un_france_paris_rope}
 2. {un_germany_berlin_rope}
 3. {un_usa_texas_dallas_rope}
@@ -122,7 +122,7 @@ Each rope arrives at the concept of Texas in a different way and connotes someth
 
 vs 
 
-"USA" has the central moment
+"USA" has the nexus moment
 1. {usa_un_france_paris_rope}
 2. {usa_un_germany_berlin_rope}
 3. {usa_texas_dallas_rope}

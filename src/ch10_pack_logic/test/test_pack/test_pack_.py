@@ -17,6 +17,7 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     voice_debt_points_str,
     voice_name_str,
 )
+from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import (
     PackUnit,
@@ -29,6 +30,13 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_sports,
     get_beliefdelta_sue_example,
 )
+
+
+def test_FaceName_Exists():
+    # ESTABLISH / WHEN / THEN
+    assert FaceName() == ""
+    assert FaceName("cookie") == "cookie"
+    assert not FaceName(f"cookie{default_knot_if_None()}").is_name()
 
 
 def test_init_pack_id_ReturnsObj():

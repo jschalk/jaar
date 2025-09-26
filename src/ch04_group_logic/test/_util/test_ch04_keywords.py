@@ -1,4 +1,7 @@
 from src.ch04_group_logic._ref.ch04_keywords import (
+    GroupTitle_str,
+    HealerName_str,
+    VoiceName_str,
     awardee_title_str,
     awardunits_str,
     belief_name_str,
@@ -34,6 +37,9 @@ from src.ch04_group_logic._ref.ch04_keywords import (
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
+    assert GroupTitle_str() == "GroupTitle"
+    assert HealerName_str() == "HealerName"
+    assert VoiceName_str() == "VoiceName"
     assert credor_pool_str() == "credor_pool"
     assert debtor_pool_str() == "debtor_pool"
     assert fund_agenda_give_str() == "fund_agenda_give"

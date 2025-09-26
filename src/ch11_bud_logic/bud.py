@@ -11,13 +11,13 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_json_from_dict,
     set_in_nested_dict,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
+from src.ch03_finance_logic.finance_config import FundNum, default_fund_pool
+from src.ch08_timeline_logic.timeline_main import TimeLinePoint
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
     MomentLabel,
     VoiceName,
 )
-from src.ch03_finance_logic.finance_config import FundNum, default_fund_pool
-from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 
 
 class calc_magnitudeException(Exception):

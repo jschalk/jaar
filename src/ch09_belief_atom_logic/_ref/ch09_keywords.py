@@ -1,6 +1,10 @@
 from src.ch08_timeline_logic._ref.ch08_keywords import *
 
 
+def CRUD_command_str() -> str:
+    return "CRUD_command"
+
+
 def DELETE_str() -> str:
     return "DELETE"
 

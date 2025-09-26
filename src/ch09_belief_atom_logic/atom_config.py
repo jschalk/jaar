@@ -1,7 +1,7 @@
 from os import getcwd as os_getcwd
-from src.ch01_data_toolbox._ref.ch01_semantic_types import CRUD_command
 from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
+from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 
 
 def atom_config_path() -> str:

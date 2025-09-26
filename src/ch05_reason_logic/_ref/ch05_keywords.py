@@ -33,10 +33,6 @@ def factunits_str() -> str:
     return "factunits"
 
 
-def moment_label_str() -> str:
-    return "moment_label"
-
-
 def reason_active_requisite_str() -> str:
     return "reason_active_requisite"
 

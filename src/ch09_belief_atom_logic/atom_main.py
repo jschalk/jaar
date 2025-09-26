@@ -8,17 +8,17 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    LabelTerm,
-    RopeTerm,
-    TitleTerm,
-    VoiceName,
-)
 from src.ch02_rope_logic.rope import create_rope, get_parent_rope, get_tail_label
 from src.ch04_group_logic.group import awardunit_shop
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
+    LabelTerm,
+    RopeTerm,
+    TitleTerm,
+    VoiceName,
+)
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch07_belief_logic.belief_tool import belief_attr_exists, belief_get_obj
 from src.ch09_belief_atom_logic.atom_config import (
