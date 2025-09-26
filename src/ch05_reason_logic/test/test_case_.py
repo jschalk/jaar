@@ -860,15 +860,15 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
 
 def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
     # ESTABLISH
-    old_moment_label = "El Paso"
+    old_central_label = "El Paso"
     casa_str = "casa"
     seasons_str = "seasons"
-    old_casa_rope = create_rope(old_moment_label, casa_str)
+    old_casa_rope = create_rope(old_central_label, casa_str)
     old_seasons_rope = create_rope(old_casa_rope, seasons_str)
     old_caseunit = caseunit_shop(reason_state=old_seasons_rope)
     old_caseunits = {old_caseunit.reason_state: old_caseunit}
-    new_moment_label = "Austin"
-    new_casa_rope = create_rope(new_moment_label, casa_str)
+    new_central_label = "Austin"
+    new_casa_rope = create_rope(new_central_label, casa_str)
     new_seasons_rope = create_rope(new_casa_rope, seasons_str)
 
     # WHEN

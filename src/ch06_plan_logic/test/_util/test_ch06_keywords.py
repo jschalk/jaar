@@ -20,6 +20,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     healerunit_str,
     is_expanded_str,
     kids_str,
+    moment_label_str,
     morph_str,
     numor_str,
     plan_label_str,
@@ -67,6 +68,7 @@ def test_str_functions_ReturnsObj():
     assert gogo_want_str() == "gogo_want"
     assert healerunit_str() == "healerunit"
     assert star_str() == "star"
+    assert moment_label_str() == "moment_label"
     assert morph_str() == "morph"
     assert numor_str() == "numor"
     assert pledge_str() == "pledge"
