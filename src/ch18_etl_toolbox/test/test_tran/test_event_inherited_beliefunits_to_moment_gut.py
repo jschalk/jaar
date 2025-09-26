@@ -1,9 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file, save_file
-from src.ch07_belief_logic.belief_main import (
-    beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
-)
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_json
 from src.ch12_hub_toolbox.ch12_path import create_belief_event_dir_path, create_gut_path
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
@@ -62,7 +59,7 @@ def test_etl_event_inherited_beliefunits_to_moment_gut_SetsFiles_Scenario0(
 
     # THEN
     assert os_path_exists(a23_bob_gut_path)
-    generated_gut_belief = beliefunit_get_from_json(open_file(a23_bob_gut_path))
+    generated_gut_belief = get_beliefunit_from_json(open_file(a23_bob_gut_path))
     assert generated_gut_belief.voices == e7_bob_belief.voices
     assert generated_gut_belief == e7_bob_belief
     assert generated_gut_belief.to_dict() == e7_bob_belief.to_dict()

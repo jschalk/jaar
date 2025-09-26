@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.dict_toolbox import get_1_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch02_rope_logic.rope import LabelTerm, RopeTerm, create_rope
+from src.ch02_rope_logic.rope import create_rope
 from src.ch06_plan_logic.plan import (
     PlanUnit,
     all_plans_between,
@@ -11,12 +11,11 @@ from src.ch06_plan_logic.plan import (
     planunit_shop,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit
-
-
-class TimeLineLabel(LabelTerm):
-    "TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the knot."
-
-    pass
+from src.ch08_timeline_logic._ref.ch08_semantic_types import (
+    RopeTerm,
+    TimeLineLabel,
+    TimeLinePoint,
+)
 
 
 @dataclass
@@ -424,10 +423,6 @@ def get_timeline_min_difference(timeline_config0: dict, timeline_config1: dict) 
     offset_x0 = timeline_config0.get("yr1_jan1_offset")
     offset_x1 = timeline_config1.get("yr1_jan1_offset")
     return offset_x0 - offset_x1
-
-
-class TimeLinePoint(int):
-    pass
 
 
 @dataclass

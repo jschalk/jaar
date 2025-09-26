@@ -8,13 +8,14 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.ch02_rope_logic.term import BeliefName, FaceName, MomentLabel
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    BeliefName,
+    FaceName,
+    MomentLabel,
+)
 from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch07_belief_logic.belief_main import BeliefUnit
-from src.ch09_belief_atom_logic.atom_main import (
-    BeliefAtom,
-    get_from_json as beliefatom_get_from_json,
-)
+from src.ch09_belief_atom_logic.atom_main import BeliefAtom, get_beliefatom_from_json
 from src.ch10_pack_logic.delta import (
     BeliefDelta,
     beliefdelta_shop,
@@ -111,7 +112,7 @@ class PackUnit:
 
     def _open_atom_file(self, atom_number: int) -> BeliefAtom:
         x_json = open_file(self._atoms_dir, self._get_num_filename(atom_number))
-        return beliefatom_get_from_json(x_json)
+        return get_beliefatom_from_json(x_json)
 
     def _save_pack_file(self):
         x_filename = self._get_num_filename(self._pack_id)
@@ -149,7 +150,7 @@ class PackUnit:
     ):
         self._beliefdelta.add_beliefatom(dimen, crud_str, jkeys=jkeys, jvalues=jvalues)
 
-    def get_edited_belief(self, before_belief: BeliefUnit) -> BeliefUnit:
+    def get_pack_edited_belief(self, before_belief: BeliefUnit) -> BeliefUnit:
         if (
             self.moment_label != before_belief.moment_label
             or self.belief_name != before_belief.belief_name
@@ -157,7 +158,7 @@ class PackUnit:
             raise pack_belief_conflict_Exception(
                 f"pack belief conflict {self.moment_label} != {before_belief.moment_label} or {self.belief_name} != {before_belief.belief_name}"
             )
-        return self._beliefdelta.get_edited_belief(before_belief)
+        return self._beliefdelta.get_atom_edited_belief(before_belief)
 
     def is_empty(self) -> bool:
         return self._beliefdelta.is_empty()

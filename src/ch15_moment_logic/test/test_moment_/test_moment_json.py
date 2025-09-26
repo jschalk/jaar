@@ -21,8 +21,8 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
 )
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
-    get_from_dict as momentunit_get_from_dict,
-    get_from_json as momentunit_get_from_json,
+    get_momentunit_from_dict,
+    get_momentunit_from_json,
     momentunit_shop,
 )
 from src.ch15_moment_logic.test._util.ch15_env import (
@@ -140,7 +140,7 @@ def test_MomentUnit_get_json_ReturnsObj():
     assert x_json.find(moment_label_str()) > 0
 
 
-def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
+def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     # ESTABLISH
     amy45_str = "amy45"
     moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp1")
@@ -178,7 +178,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     x_dict = amy_moment.to_dict()
 
     # WHEN
-    x_moment = momentunit_get_from_dict(x_dict)
+    x_moment = get_momentunit_from_dict(x_dict)
 
     # THEN
     assert x_moment.moment_label == amy45_str
@@ -197,7 +197,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment == amy_moment
 
 
-def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
+def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     # ESTABLISH
     amy45_str = "amy45"
     amy_moment = momentunit_shop(amy45_str, get_chapter_temp_dir())
@@ -209,7 +209,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     x_dict.pop("penny")
 
     # WHEN
-    generated_moment = momentunit_get_from_dict(x_dict)
+    generated_moment = get_momentunit_from_dict(x_dict)
 
     # THEN
     assert generated_moment.moment_label == amy45_str
@@ -227,7 +227,7 @@ def test_get_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters():
     assert generated_moment == amy_moment
 
 
-def test_get_from_json_ReturnsMomentUnit():
+def test_get_momentunit_from_json_ReturnsMomentUnit():
     # ESTABLISH
     amy45_str = "amy45"
     temp_moment_mstr_dir = create_path(get_chapter_temp_dir(), "temp")
@@ -257,7 +257,7 @@ def test_get_from_json_ReturnsMomentUnit():
     amy_json = amy_moment.get_json()
 
     # WHEN
-    x_moment = momentunit_get_from_json(amy_json)
+    x_moment = get_momentunit_from_json(amy_json)
 
     # THEN
     assert x_moment.moment_label == amy45_str

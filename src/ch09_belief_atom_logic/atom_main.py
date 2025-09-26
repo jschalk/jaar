@@ -8,8 +8,13 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_dict_if_None,
     get_json_from_dict,
 )
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    LabelTerm,
+    RopeTerm,
+    TitleTerm,
+    VoiceName,
+)
 from src.ch02_rope_logic.rope import create_rope, get_parent_rope, get_tail_label
-from src.ch02_rope_logic.term import LabelTerm, RopeTerm, TitleTerm, VoiceName
 from src.ch04_group_logic.group import awardunit_shop
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
@@ -164,7 +169,7 @@ def beliefatom_shop(
         )
 
 
-def get_from_dict(x_dict: dict) -> BeliefAtom:
+def get_beliefatom_from_dict(x_dict: dict) -> BeliefAtom:
     x_atom = beliefatom_shop(x_dict["dimen"], x_dict["crud"])
     for x_key, x_value in x_dict["jkeys"].items():
         x_atom.set_jkey(x_key, x_value)
@@ -173,8 +178,8 @@ def get_from_dict(x_dict: dict) -> BeliefAtom:
     return x_atom
 
 
-def get_from_json(x_str: str) -> BeliefAtom:
-    return get_from_dict(get_dict_from_json(x_str))
+def get_beliefatom_from_json(x_str: str) -> BeliefAtom:
+    return get_beliefatom_from_dict(get_dict_from_json(x_str))
 
 
 def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):

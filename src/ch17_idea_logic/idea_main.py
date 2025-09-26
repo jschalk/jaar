@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_csv_column1_column2_metrics,
     get_positional_dict,
 )
-from src.ch02_rope_logic.term import BeliefName, MomentLabel
+from src.ch02_rope_logic._ref.ch02_semantic_types import BeliefName, MomentLabel
 from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch08_timeline_logic.timeline_main import timelineunit_shop
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, atomrow_shop

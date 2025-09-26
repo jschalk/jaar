@@ -536,7 +536,7 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     print(f"{sue_packunit._beliefdelta.beliefatoms.keys()=}")
 
     # WHEN
-    after_sue_beliefunit = sue_packunit.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_packunit.get_pack_edited_belief(before_sue_beliefunit)
 
     # THEN
     yao_voiceunit = after_sue_beliefunit.get_voice(yao_str)
@@ -559,7 +559,7 @@ def test_PackUnit_get_edited_belief_RaisesErrorWhenpackAttrsAndBeliefAttrsAreNot
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        bob_packunit.get_edited_belief(before_sue_beliefunit)
+        bob_packunit.get_pack_edited_belief(before_sue_beliefunit)
     assert str(excinfo.value) == "pack belief conflict amy23 != amy45 or Yao != Sue"
 
 

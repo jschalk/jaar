@@ -1,4 +1,10 @@
-from ast import FunctionDef as ast_FunctionDef, parse as ast_parse, walk as ast_walk
+from ast import (
+    ClassDef as ast_ClassDef,
+    FunctionDef as ast_FunctionDef,
+    Name as ast_Name,
+    parse as ast_parse,
+    walk as ast_walk,
+)
 from pathlib import Path
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
@@ -24,23 +30,34 @@ def get_chapter_descs() -> dict[str, str]:
     }
 
 
-def get_function_names_from_file(file_path: str, suffix: str = None) -> list:
+def get_function_names_from_file(
+    file_path: str, suffix: str = None
+) -> tuple[list, dict[str, bool]]:
     """
     Parses a Python file and returns a list of all top-level function names.
 
     :param file_path: Path to the .py file
-    :return: List of function names
+    :return: List of function names, dict key: Class Name, value: list of class bases
     """
 
     with open(file_path, "r", encoding="utf-8") as file:
         node = ast_parse(file.read(), filename=file_path)
-    return [n.name for n in ast_walk(node) if isinstance(n, ast_FunctionDef)]
+    file_funcs = []
+    class_bases = {}
+    for n in ast_walk(node):
+        if isinstance(n, ast_FunctionDef):
+            file_funcs.append(n.name)
+        if isinstance(n, ast_ClassDef):
+            bases = [b.id for b in n.bases if isinstance(b, ast_Name)]
+            class_bases[n.name] = bases
+    return file_funcs, class_bases
 
 
 def get_chapter_str_functions(chapter_dir: str, chapter_desc_prefix: str) -> list[str]:
     ref_dir = create_path(chapter_dir, "_ref")
     str_util_path = create_path(ref_dir, f"{chapter_desc_prefix}_keywords.py")
-    return get_function_names_from_file(str_util_path)
+    file_funcs, class_bases = get_function_names_from_file(str_util_path)
+    return file_funcs
 
 
 def get_chapter_desc_str_number(chapter_desc: str) -> str:

@@ -14,6 +14,7 @@ from src.ch99_chapter_style.style import (
     check_if_test_HasDocString_pytests_exist,
     check_if_test_ReturnsObj_pytests_exist,
     find_incorrect_imports,
+    get_all_semantic_types_from_ref_files,
     get_all_str_functions,
     get_docstring,
     get_duplicated_functions,
@@ -22,6 +23,109 @@ from src.ch99_chapter_style.style import (
     get_python_files_with_flag,
     get_top_level_functions,
 )
+
+
+def expected_semantic_types() -> set:
+    return {
+        "BeliefName",
+        "BitNum",
+        "CRUD_command",
+        "CentralLabel",
+        "EventInt",
+        "FaceName",
+        "FundIota",
+        "FundNum",
+        "GrainFloat",
+        "GroupTitle",
+        "HealerName",
+        "KnotTerm",
+        "LabelTerm",
+        "LobbyID",
+        "MomentLabel",
+        "MoneyUnit",
+        "NameTerm",
+        "PennyNum",
+        "RespectNum",
+        "RopeTerm",
+        "TimeLineLabel",
+        "TimeLinePoint",
+        "TitleTerm",
+        "VoiceName",
+        "WorldName",
+    }
+
+
+def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
+    # ESTABLISH
+    excluded_functions = {
+        "_get_inx_label",
+        "_get_inx_value",
+        "_get_rid_of_translate_core_keys",
+        "_is_inx_knot_inclusion_correct",
+        "_is_otx_knot_inclusion_correct",
+        "_unknown_str_in_otx2inx",
+        "add_column_rect",
+        "add_cycle_to_tax_arrows",
+        "add_fund_give_take",
+        "add_grants_top",
+        "add_keep__rect",
+        "add_beliefatom",
+        "add_rect_arrow",
+        "add_rect_str",
+        "add_river_row",
+        "add_rivercycle",
+        "add_taxs_bottom",
+        "add_taxs_column",
+        "atom_file_exists",
+        "del_label",
+        "del_otx2inx",
+        "env_dir_setup_cleanup",
+        "find_replace_rope",
+        "fund_graph0",
+        "get_factunits_dict",
+        "get_json",
+        "get_chapter_temp_dir",
+        "get_obj_key",
+        "is_empty",
+        "is_valid",
+        "label_exists",
+        "otx_exists",
+        "otx2inx_exists",
+        "beliefatom_exists",
+        "reveal_inx",
+        "set_all_otx2inx",
+        "set_knot",
+        "set_label",
+        "set_membership",
+        "set_otx2inx",
+        "test_str_functions_ReturnsObj",
+        "to_dict",
+    }
+
+    # WHEN
+    duplicated_functions, unnecessarily_excluded_funcs, semantic_types = (
+        get_duplicated_functions(excluded_functions)
+    )
+
+    # THEN
+    assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
+    assert not duplicated_functions, assertion_fail_str
+    # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
+    assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
+    assert semantic_types == expected_semantic_types()
+
+
+def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
+    # ESTABLISH / WHEN
+    ref_files_semantic_types = get_all_semantic_types_from_ref_files()
+
+    # THEN
+    print(f"{len(ref_files_semantic_types)=}")
+    expected_types = expected_semantic_types()
+    print(f"{len(expected_types)=}")
+    print(f"missing {expected_types.difference(ref_files_semantic_types)}")
+
+    assert ref_files_semantic_types == expected_types
 
 
 def test_Chapters_StrFunctionsAppearWhereTheyShould():
@@ -103,73 +207,12 @@ def test_Chapters_StrFunctionsAreAllImported():
     assert len(all_str_functions) == len(mod_str_funcs)
     all_str_func_set = set(all_str_functions)
     assert all_str_func_set == mod_str_funcs
-
-
-def test_Chapters_MostFunctionsAreUniquelyNamed():
-    # ESTABLISH
-    excluded_functions = {
-        "_get_inx_label",
-        "_get_inx_value",
-        "_get_rid_of_translate_core_keys",
-        "_is_inx_knot_inclusion_correct",
-        "_is_otx_knot_inclusion_correct",
-        "_unknown_str_in_otx2inx",
-        "add_2_curve",
-        "add_column_rect",
-        "add_cycle_to_tax_arrows",
-        "add_fund_give_take",
-        "add_grants_top",
-        "add_keep__rect",
-        "add_beliefatom",
-        "add_rect_arrow",
-        "add_rect_str",
-        "add_river_row",
-        "add_rivercycle",
-        "add_taxs_bottom",
-        "add_taxs_column",
-        "atom_file_exists",
-        "clear_status",
-        "contains_knot",
-        "del_label",
-        "del_otx2inx",
-        "env_dir_setup_cleanup",
-        "find_replace_rope",
-        "fund_graph0",
-        "get_edited_belief",
-        "get_factunits_dict",
-        "get_from_dict",
-        "get_from_json",
-        "get_json",
-        "get_chapter_temp_dir",
-        "get_obj_key",
-        "is_empty",
-        "is_valid",
-        "label_exists",
-        "otx_exists",
-        "otx2inx_exists",
-        "pack_file_exists",
-        "beliefatom_exists",
-        "reveal_inx",
-        "set_all_otx2inx",
-        "set_knot",
-        "set_label",
-        "set_membership",
-        "set_otx2inx",
-        "set_status",
-        "test_str_functions_ReturnsObj",
-        "to_dict",
-    }
-
-    # WHEN
-    duplicated_functions, unnecessarily_excluded_funcs = get_duplicated_functions(
-        excluded_functions
-    )
-
-    # THEN
-    assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
-    assert not duplicated_functions, assertion_fail_str
-    # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
-    assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
+    # TODO make semantic_type names required keyword str functions
+    # semantic_types = expected_semantic_types()
+    # semantic_str_funcs = set()
+    # for semantic_typ in semantic_types:
+    #     semantic_str_funcs.add(f"{semantic_typ}_str")
+    # assert semantic_str_funcs.issubset(all_str_func_set)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

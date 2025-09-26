@@ -21,6 +21,7 @@ from src.ch08_timeline_logic._ref.ch08_keywords import (
     yr4_clean_str,
     yr4_leap_str,
 )
+from src.ch08_timeline_logic._ref.ch08_semantic_types import TimeLineLabel
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     five_str,
     get_creg_config,
@@ -29,7 +30,6 @@ from src.ch08_timeline_logic.test._util.ch08_examples import (
 )
 from src.ch08_timeline_logic.timeline_main import (
     C400Constants,
-    TimeLineLabel,
     TimeLineUnit,
     day_length,
     get_c400_constants,

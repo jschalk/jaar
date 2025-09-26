@@ -55,7 +55,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_SimplestScenario():
     sue_str = "Sue"
     sue_tally = 55
     before_sue_beliefunit = beliefunit_shop(sue_str, tally=sue_tally)
-    after_sue_beliefunit = ex1_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = ex1_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     assert after_sue_beliefunit.tally == sue_tally
@@ -101,7 +101,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
     # WHEN
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     print(f"{sue_beliefdelta.beliefatoms.keys()=}")
@@ -137,7 +137,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_voice():
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
     # WHEN
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     print(f"{sue_beliefdelta.beliefatoms=}")
@@ -168,7 +168,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     x_beliefatom.set_jvalue("voice_debt_points", x_voice_debt_points)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_beliefdelta.beliefatoms.keys()=}")
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     yao_voiceunit = after_sue_beliefunit.get_voice(yao_str)
@@ -197,7 +197,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_voice():
     x_beliefatom.set_jvalue("voice_cred_points", yao_voice_cred_points)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{sue_beliefdelta.beliefatoms.keys()=}")
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     yao_voice = after_sue_beliefunit.get_voice(yao_str)
@@ -241,7 +241,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_membership()
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
     sue_beliefdelta.set_beliefatom(zia_beliefatom)
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     after_group_titles_dict = after_sue_beliefunit.get_voiceunit_group_titles_dict()
@@ -274,7 +274,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_membership()
     print(f"{yao_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     after_group_titles = after_sue_beliefunit.get_voiceunit_group_titles_dict()
@@ -310,7 +310,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_membership()
     yao_beliefatom.set_jvalue(group_debt_points_str(), new_yao_run_group_debt_points)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     after_yao_voiceunit = after_sue_beliefunit.get_voice(yao_str)
@@ -342,7 +342,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_planunit():
     assert before_sue_beliefunit.plan_exists(disc_rope)
 
     # WHEN
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     assert after_sue_beliefunit.plan_exists(ball_rope)
@@ -384,7 +384,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_planunit():
     print(f"{insert_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(insert_disc_beliefatom)
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     assert after_sue_beliefunit.plan_exists(ball_rope)
@@ -433,7 +433,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     assert before_sue_beliefunit.get_plan_obj(ball_rope).stop_want is None
 
     # WHEN
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     assert after_sue_beliefunit.get_plan_obj(ball_rope).begin == x_begin
@@ -487,7 +487,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_awardun
     print(f"{delete_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(delete_disc_beliefatom)
-    after_sue_beliefunit = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     assert len(after_sue_beliefunit.get_plan_obj(ball_rope).awardunits) == 2
@@ -529,7 +529,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_awardun
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     run_awardunit = after_sue_au.get_plan_obj(ball_rope).awardunits.get(run_str)
@@ -568,7 +568,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_awardun
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -605,7 +605,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_factuni
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -647,7 +647,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_factuni
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -694,7 +694,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_factuni
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -750,7 +750,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reason_
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -805,7 +805,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reason_
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -857,7 +857,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reason_
     update_disc_beliefatom.set_jkey(reason_state_str(), medical_rope)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -896,7 +896,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reasonu
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -950,7 +950,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonu
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -990,7 +990,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reasonu
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_plan = after_sue_au.get_plan_obj(ball_rope)
@@ -1017,7 +1017,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_partyun
     update_disc_beliefatom.set_jkey(party_title_str(), yao_str)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
@@ -1048,7 +1048,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_partyun
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
     print(f"{before_sue_au.get_plan_obj(ball_rope).laborunit=}")
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
@@ -1077,7 +1077,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_healeru
     print(f"{x_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(x_beliefatom)
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
@@ -1108,7 +1108,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_healeru
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     print(f"{before_sue_au.get_plan_obj(ball_rope).laborunit=}")
-    after_sue_au = sue_beliefdelta.get_edited_belief(before_sue_au)
+    after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
 
     # THEN
     after_ball_planunit = after_sue_au.get_plan_obj(ball_rope)
@@ -1147,7 +1147,7 @@ def test_BeliefDelta_get_beliefdelta_example1_ContainsBeliefAtoms():
 
     # WHEN
     ex1_beliefdelta = get_beliefdelta_example1()
-    after_sue_beliefunit = ex1_beliefdelta.get_edited_belief(before_sue_beliefunit)
+    after_sue_beliefunit = ex1_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
 
     # THEN
     assert after_sue_beliefunit.tally == 55

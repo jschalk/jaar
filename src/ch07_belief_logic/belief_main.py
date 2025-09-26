@@ -8,6 +8,15 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_json_from_dict,
 )
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    BeliefName,
+    GroupTitle,
+    HealerName,
+    LabelTerm,
+    MomentLabel,
+    RopeTerm,
+    VoiceName,
+)
 from src.ch02_rope_logic.rope import (
     all_ropes_between,
     create_rope,
@@ -23,15 +32,6 @@ from src.ch02_rope_logic.rope import (
     rebuild_rope,
     rope_is_valid_dir_path,
     to_rope,
-)
-from src.ch02_rope_logic.term import (
-    BeliefName,
-    GroupTitle,
-    HealerName,
-    LabelTerm,
-    MomentLabel,
-    RopeTerm,
-    VoiceName,
 )
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import (
@@ -561,15 +561,6 @@ class BeliefUnit:
                     plan_rope=x_plan.get_plan_rope(), uid=new_plan_uid_max
                 )
                 plan_uid_max = new_plan_uid_max
-
-    def get_level_count(self, tree_level) -> int:
-        tree_metrics = self.get_tree_metrics()
-        level_count = None
-        try:
-            level_count = tree_metrics.tree_level_count[level]
-        except KeyError:
-            level_count = 0
-        return level_count
 
     def get_reason_contexts(self) -> set[RopeTerm]:
         return set(self.get_tree_metrics().reason_contexts.keys())
@@ -1491,11 +1482,11 @@ def beliefunit_shop(
     return x_belief
 
 
-def get_from_json(x_belief_json: str) -> BeliefUnit:
-    return get_from_dict(get_dict_from_json(x_belief_json))
+def get_beliefunit_from_json(x_belief_json: str) -> BeliefUnit:
+    return get_beliefunit_from_dict(get_dict_from_json(x_belief_json))
 
 
-def get_from_dict(belief_dict: dict) -> BeliefUnit:
+def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief = beliefunit_shop()
     x_belief.set_belief_name(obj_from_belief_dict(belief_dict, "belief_name"))
     x_belief.tally = obj_from_belief_dict(belief_dict, "tally")
@@ -1614,7 +1605,7 @@ def obj_from_belief_dict(
 def get_dict_of_belief_from_dict(x_dict: dict[str, dict]) -> dict[str, BeliefUnit]:
     beliefunits = {}
     for beliefunit_dict in x_dict.values():
-        x_belief = get_from_dict(belief_dict=beliefunit_dict)
+        x_belief = get_beliefunit_from_dict(belief_dict=beliefunit_dict)
         beliefunits[x_belief.belief_name] = x_belief
     return beliefunits
 

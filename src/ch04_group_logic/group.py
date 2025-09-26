@@ -1,6 +1,10 @@
 from dataclasses import dataclass
 from src.ch01_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.ch02_rope_logic.term import GroupTitle, VoiceName, default_knot_if_None
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    GroupTitle,
+    VoiceName,
+    default_knot_if_None,
+)
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import FundIota, default_fund_iota_if_None
 

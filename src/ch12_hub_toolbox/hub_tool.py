@@ -10,11 +10,16 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch02_rope_logic.term import BeliefName, EventInt, LabelTerm, RopeTerm
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    BeliefName,
+    EventInt,
+    LabelTerm,
+    RopeTerm,
+)
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
+    get_beliefunit_from_json,
 )
 from src.ch11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
 from src.ch11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
@@ -39,7 +44,7 @@ def save_belief_file(
 
 def open_belief_file(dest_dir: str, filename: str = None) -> BeliefUnit:
     if os_path_exists(create_path(dest_dir, filename)):
-        return beliefunit_get_from_json(open_file(dest_dir, filename))
+        return get_beliefunit_from_json(open_file(dest_dir, filename))
 
 
 def save_gut_file(moment_mstr_dir: str, beliefunit: BeliefUnit):

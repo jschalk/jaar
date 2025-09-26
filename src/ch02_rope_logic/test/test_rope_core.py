@@ -1,6 +1,7 @@
 from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
+from src.ch02_rope_logic._ref.ch02_semantic_types import default_knot_if_None
 from src.ch02_rope_logic.rope import (
     RopeTerm,
     all_ropes_between,
@@ -25,7 +26,6 @@ from src.ch02_rope_logic.rope import (
     to_rope,
     validate_labelterm,
 )
-from src.ch02_rope_logic.term import default_knot_if_None
 
 
 def test_to_rope_ReturnsObj_WithDefault_knot():

@@ -12,13 +12,13 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_file,
     save_file,
 )
-from src.ch02_rope_logic.rope import validate_labelterm
-from src.ch02_rope_logic.term import (
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
     BeliefName,
     MomentLabel,
     RopeTerm,
     default_knot_if_None,
 )
+from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch03_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_money_magnitude_if_None,
@@ -29,11 +29,11 @@ from src.ch03_finance_logic.finance_config import (
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
+    get_beliefunit_from_json,
 )
 from src.ch09_belief_atom_logic.atom_main import (
     BeliefAtom,
-    get_from_json as beliefatom_get_from_json,
+    get_beliefatom_from_json,
     modify_belief_with_beliefatom,
 )
 from src.ch10_pack_logic.pack import (
@@ -150,7 +150,7 @@ class HubUnit:
 
             for x_atom_filename in sorted_atom_filenames:
                 x_file_str = x_atom_files.get(x_atom_filename)
-                x_atom = beliefatom_get_from_json(x_file_str)
+                x_atom = get_beliefatom_from_json(x_file_str)
                 modify_belief_with_beliefatom(x_belief, x_atom)
         return x_belief
 
@@ -171,7 +171,7 @@ class HubUnit:
         pack_filename = self.pack_filename(pack_id)
         return create_path(self._packs_dir, pack_filename)
 
-    def pack_file_exists(self, pack_id: int) -> bool:
+    def hub_pack_file_exists(self, pack_id: int) -> bool:
         return os_path_exists(self.pack_file_path(pack_id))
 
     def validate_packunit(self, x_packunit: PackUnit) -> PackUnit:
@@ -209,7 +209,7 @@ class HubUnit:
                 f"PackUnit file cannot be saved because packunit.belief_name is incorrect: {x_pack.belief_name}. It must be {self.belief_name}."
             )
         pack_filename = self.pack_filename(x_pack._pack_id)
-        if not replace and self.pack_file_exists(x_pack._pack_id):
+        if not replace and self.hub_pack_file_exists(x_pack._pack_id):
             raise SavePackFileException(
                 f"PackUnit file {pack_filename} exists and cannot be saved over."
             )
@@ -236,7 +236,7 @@ class HubUnit:
         self.save_pack_file(new_packunit)
 
     def get_packunit(self, pack_id: int) -> PackUnit:
-        if self.pack_file_exists(pack_id) is False:
+        if self.hub_pack_file_exists(pack_id) is False:
             raise PackFileMissingException(
                 f"PackUnit file_number {pack_id} does not exist."
             )
@@ -252,7 +252,7 @@ class HubUnit:
 
         for pack_int in pack_ints:
             x_pack = self.get_packunit(pack_int)
-            new_belief = x_pack._beliefdelta.get_edited_belief(x_belief)
+            new_belief = x_pack._beliefdelta.get_atom_edited_belief(x_belief)
         return new_belief
 
     def _create_initial_pack_files_from_default(self):
@@ -290,7 +290,7 @@ class HubUnit:
         x_gut_file_exists = gut_file_exists(
             self.moment_mstr_dir, self.moment_label, self.belief_name
         )
-        pack_file_exists = self.pack_file_exists(init_pack_id())
+        pack_file_exists = self.hub_pack_file_exists(init_pack_id())
         if x_gut_file_exists is False and pack_file_exists is False:
             self._create_initial_pack_and_gut_files()
         elif x_gut_file_exists is False and pack_file_exists:
@@ -352,11 +352,11 @@ class HubUnit:
         if self.vision_file_exists(belief_name) is False:
             return None
         file_content = open_file(self.visions_path(), get_json_filename(belief_name))
-        return beliefunit_get_from_json(file_content)
+        return get_beliefunit_from_json(file_content)
 
     def get_perspective_belief(self, speaker: BeliefUnit) -> BeliefUnit:
         # get copy of belief without any metrics
-        perspective_belief = beliefunit_get_from_json(speaker.get_json())
+        perspective_belief = get_beliefunit_from_json(speaker.get_json())
         perspective_belief.set_belief_name(self.belief_name)
         perspective_belief.cashout()
         return perspective_belief

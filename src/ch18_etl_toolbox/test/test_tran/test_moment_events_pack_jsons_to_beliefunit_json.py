@@ -1,9 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file, save_file
-from src.ch07_belief_logic.belief_main import (
-    beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
-)
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_json
 from src.ch10_pack_logic.pack import get_packunit_from_json, packunit_shop
 from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path,
@@ -88,8 +85,8 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     expected_e7_bob_belief.add_voiceunit(bob_inx, credit77)
     expected_e7_bob_belief.add_voiceunit(sue_inx, credit88)
     expected_e7_bob_belief.add_voiceunit(yao_inx, credit44)
-    generated_e3_belief = beliefunit_get_from_json(open_file(e3_belief_path))
-    generated_e7_belief = beliefunit_get_from_json(open_file(e7_belief_path))
+    generated_e3_belief = get_beliefunit_from_json(open_file(e3_belief_path))
+    generated_e7_belief = get_beliefunit_from_json(open_file(e7_belief_path))
     assert generated_e3_belief.voices == expected_e3_bob_belief.voices
     assert generated_e3_belief == expected_e3_bob_belief
     assert generated_e3_belief.to_dict() == expected_e3_bob_belief.to_dict()

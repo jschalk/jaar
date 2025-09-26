@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_empty_list_if_None,
     get_json_from_dict,
 )
-from src.ch02_rope_logic.term import BeliefName, EventInt, RopeTerm
+from src.ch02_rope_logic._ref.ch02_semantic_types import BeliefName, EventInt, RopeTerm
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import FundNum, PennyNum
 from src.ch05_reason_logic.reason import (
@@ -18,7 +18,7 @@ from src.ch05_reason_logic.reason import (
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_from_dict as beliefunit_get_from_dict,
+    get_beliefunit_from_dict,
 )
 from src.ch07_belief_logic.belief_tool import (
     clear_factunits_from_belief,
@@ -215,7 +215,7 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     mandate = x_dict.get("mandate")
     beliefadjust_dict = x_dict.get("beliefadjust")
     if beliefadjust_dict:
-        beliefadjust_obj = beliefunit_get_from_dict(beliefadjust_dict)
+        beliefadjust_obj = get_beliefunit_from_dict(beliefadjust_dict)
     else:
         beliefadjust_obj = None
     beliefevent_fact_dict = get_empty_dict_if_None(x_dict.get("beliefevent_facts"))

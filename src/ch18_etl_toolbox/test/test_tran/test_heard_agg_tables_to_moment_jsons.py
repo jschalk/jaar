@@ -8,7 +8,7 @@ from src.ch01_data_toolbox.db_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import open_file
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
-from src.ch15_moment_logic.moment_main import get_from_json as momentunit_get_from_json
+from src.ch15_moment_logic.moment_main import get_momentunit_from_json
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     moment_budunit_str,
     moment_event_time_agg_str,
@@ -160,7 +160,7 @@ VALUES ('{amy23_str}'), ('{amy45_str}')
     # THEN
     assert os_path_exists(amy23_json_path)
     assert os_path_exists(amy45_json_path)
-    amy23_moment = momentunit_get_from_json(open_file(amy23_json_path))
-    amy45_moment = momentunit_get_from_json(open_file(amy45_json_path))
+    amy23_moment = get_momentunit_from_json(open_file(amy23_json_path))
+    amy45_moment = get_momentunit_from_json(open_file(amy45_json_path))
     assert amy23_moment.moment_label == amy23_str
     assert amy45_moment.moment_label == amy45_str

@@ -27,7 +27,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
     save_json,
 )
-from src.ch02_rope_logic.term import EventInt, FaceName
+from src.ch02_rope_logic._ref.ch02_semantic_types import EventInt, FaceName
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch09_belief_atom_logic.atom_config import get_belief_dimens
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
@@ -856,7 +856,7 @@ def etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir: str):
                 sift_delta = get_minimal_beliefdelta(
                     event_pack._beliefdelta, prev_belief
                 )
-                curr_belief = event_pack.get_edited_belief(prev_belief)
+                curr_belief = event_pack.get_pack_edited_belief(prev_belief)
                 save_file(beliefevent_path, None, curr_belief.get_json())
                 expressed_pack = copy_deepcopy(event_pack)
                 expressed_pack.set_beliefdelta(sift_delta)

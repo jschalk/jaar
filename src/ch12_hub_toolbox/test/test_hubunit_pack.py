@@ -50,19 +50,19 @@ def test_HubUnit_pack_file_exists_ReturnsObj(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
-    assert sue_hubunit.pack_file_exists(None) is False
-    assert sue_hubunit.pack_file_exists(0) is False
+    assert sue_hubunit.hub_pack_file_exists(None) is False
+    assert sue_hubunit.hub_pack_file_exists(0) is False
     six_int = 6
     print(f"{sue_hubunit.pack_file_path(six_int)=}")
-    assert sue_hubunit.pack_file_exists(six_int) is False
+    assert sue_hubunit.hub_pack_file_exists(six_int) is False
 
     # WHEN
     save_file(sue_hubunit._packs_dir, sue_hubunit.pack_filename(six_int), "x")
 
     # THEN
-    assert sue_hubunit.pack_file_exists(None) is False
-    assert sue_hubunit.pack_file_exists(0) is False
-    assert sue_hubunit.pack_file_exists(six_int)
+    assert sue_hubunit.hub_pack_file_exists(None) is False
+    assert sue_hubunit.hub_pack_file_exists(0) is False
+    assert sue_hubunit.hub_pack_file_exists(six_int)
 
 
 def test_HubUnit_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
@@ -83,15 +83,15 @@ def test_HubUnit_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
         _atoms_dir=sue_hubunit._atoms_dir,
         _packs_dir=sue_hubunit._packs_dir,
     )
-    assert sue_hubunit.pack_file_exists(two_int) is False
-    assert sue_hubunit.pack_file_exists(six_int) is False
+    assert sue_hubunit.hub_pack_file_exists(two_int) is False
+    assert sue_hubunit.hub_pack_file_exists(six_int) is False
 
     # WHEN
     sue_hubunit.save_pack_file(sue_packunit, correct_invalid_attrs=False)
 
     # THEN
-    assert sue_hubunit.pack_file_exists(two_int)
-    assert sue_hubunit.pack_file_exists(six_int) is False
+    assert sue_hubunit.hub_pack_file_exists(two_int)
+    assert sue_hubunit.hub_pack_file_exists(six_int) is False
     two_file_json = open_file(sue_hubunit._packs_dir, two_filename)
     assert two_file_json == sue_packunit.get_deltametric_json()
 
@@ -192,7 +192,7 @@ def test_HubUnit_save_pack_file_RaisesErrorIf_replace_IsFalse(
     saved_packunit = sue_hubunit.save_pack_file(sue_packunit)
 
     print(f"{sue_hubunit.pack_file_path(x_pack_id)=}")
-    assert sue_hubunit.pack_file_exists(x_pack_id)
+    assert sue_hubunit.hub_pack_file_exists(x_pack_id)
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -248,7 +248,7 @@ def test_HubUnit_save_pack_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     next_filename = get_json_filename(next_int)
     sue_pack2_path = create_path(sue_hubunit._packs_dir, next_filename)
     print(f"{sue_pack2_path=}")
-    assert sue_hubunit.pack_file_exists(next_int) is False
+    assert sue_hubunit.hub_pack_file_exists(next_int) is False
 
     # WHEN
     invalid_sue_packunit = packunit_shop(
@@ -260,7 +260,7 @@ def test_HubUnit_save_pack_file_SaveCorrectObj_correct_invalid_attrs_IsTrue(
     sue_hubunit.save_pack_file(invalid_sue_packunit)
 
     # THEN
-    assert sue_hubunit.pack_file_exists(next_int)
+    assert sue_hubunit.hub_pack_file_exists(next_int)
     two_file_json = open_file(sue_hubunit._packs_dir, next_filename)
 
 
@@ -378,21 +378,21 @@ def test_HubUnit_del_pack_file_DeletespackjsonAndNotBeliefAtomjsons(
     )
     sue_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
     zero_int = 0
-    assert sue_hubunit.pack_file_exists(six_int) is False
+    assert sue_hubunit.hub_pack_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int) is False
 
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue_hubunit.save_pack_file(sue_packunit, correct_invalid_attrs=False)
 
     print(f"{get_dir_file_strs(sue_hubunit._atoms_dir)}")
-    assert sue_hubunit.pack_file_exists(six_int)
+    assert sue_hubunit.hub_pack_file_exists(six_int)
     assert sue_hubunit.atom_file_exists(zero_int)
 
     # WHEN
     sue_hubunit._del_pack_file(sue_packunit._pack_id)
 
     # THEN
-    assert sue_hubunit.pack_file_exists(six_int) is False
+    assert sue_hubunit.hub_pack_file_exists(six_int) is False
     assert sue_hubunit.atom_file_exists(zero_int)
 
 
@@ -456,8 +456,8 @@ def test_HubUnit_create_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     )
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue_hubunit.save_pack_file(sue_packunit, correct_invalid_attrs=False)
-    assert sue_hubunit.pack_file_exists(two_int)
-    assert sue_hubunit.pack_file_exists(three_int) is False
+    assert sue_hubunit.hub_pack_file_exists(two_int)
+    assert sue_hubunit.hub_pack_file_exists(three_int) is False
 
     # WHEN
     before_belief = sue_hubunit.default_gut_belief()
@@ -467,7 +467,7 @@ def test_HubUnit_create_save_pack_file_SaveCorrectObj(env_dir_setup_cleanup):
     sue_hubunit.create_save_pack_file(before_belief, after_belief)
 
     # THEN
-    assert sue_hubunit.pack_file_exists(three_int)
+    assert sue_hubunit.hub_pack_file_exists(three_int)
 
 
 def test_HubUnit_merge_any_packs_ReturnsObjThatIsEqual(env_dir_setup_cleanup):
