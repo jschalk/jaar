@@ -1,10 +1,6 @@
 from src.ch01_data_toolbox._ref.ch01_keywords import *
 
 
-def NexusLabel_str() -> str:
-    return "NexusLabel"
-
-
 def KnotTerm_str() -> str:
     return "KnotTerm"
 
@@ -19,6 +15,10 @@ def MomentLabel_str() -> str:
 
 def NameTerm_str() -> str:
     return "NameTerm"
+
+
+def NexusLabel_str() -> str:
+    return "NexusLabel"
 
 
 def RopeTerm_str() -> str:
