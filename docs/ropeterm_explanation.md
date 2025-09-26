@@ -40,7 +40,7 @@ vacuum_rope = ";amy;casa;clean;vacuum;"
 dirty_rope = ";amy;casa;appearance;dirty;"
 usa_texas_rope = ";UN;USA;Texas;"
 un_texas_rope = ";UN;Texas;"
-- **CentralLabel**: The first label in a RopeTerm. Example "UN" in ";UN;USA;Texas;"
+- **NexusLabel**: The first label in a RopeTerm. Example "UN" in ";UN;USA;Texas;"
 
 # Moments
 Consider these 3 ropes: 
@@ -48,9 +48,9 @@ Consider these 3 ropes:
 2. ;USA;Texas;
 3. ;USA;The South;Texas;
 
-Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN central :
+Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN nexus :
 
-"UN" has the central moment
+"UN" has the nexus moment
 1. ;UN;France;Paris;
 2. ;UN;Germany;Berlin;
 3. ;UN;USA;Texas;Dallas;
@@ -58,7 +58,7 @@ Each rope arrives at the concept of Texas in a different way and connotes someth
 
 vs 
 
-"USA" has the central moment
+"USA" has the nexus moment
 1. ;USA;UN;France;Paris;
 2. ;USA;UN;Germany;Berlin;
 3. ;USA;Texas;Dallas;
