@@ -12,13 +12,6 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_file,
     set_dir,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    BeliefName,
-    EventInt,
-    MomentLabel,
-    VoiceName,
-    default_knot_if_None,
-)
 from src.ch03_finance_logic.finance_config import (
     BitNum,
     FundIota,
@@ -27,6 +20,13 @@ from src.ch03_finance_logic.finance_config import (
     default_fund_iota_if_None,
     default_RespectBit_if_None,
     filter_penny,
+)
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
+    BeliefName,
+    EventInt,
+    MomentLabel,
+    VoiceName,
+    default_knot_if_None,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch08_timeline_logic.timeline_main import (

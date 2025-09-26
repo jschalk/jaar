@@ -10,7 +10,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
     EventInt,
     LabelTerm,

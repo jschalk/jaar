@@ -12,12 +12,6 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_file,
     save_file,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    BeliefName,
-    MomentLabel,
-    RopeTerm,
-    default_knot_if_None,
-)
 from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch03_finance_logic.finance_config import (
     default_fund_iota_if_None,
@@ -25,6 +19,12 @@ from src.ch03_finance_logic.finance_config import (
     default_RespectBit_if_None,
     filter_penny,
     validate_fund_pool,
+)
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
+    BeliefName,
+    MomentLabel,
+    RopeTerm,
+    default_knot_if_None,
 )
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,

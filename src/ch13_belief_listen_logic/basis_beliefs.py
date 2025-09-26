@@ -1,4 +1,4 @@
-from src.ch02_rope_logic._ref.ch02_semantic_types import BeliefName
+from src.ch07_belief_logic._ref.ch07_semantic_types import BeliefName
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 

@@ -1,6 +1,10 @@
 from src.ch06_plan_logic._ref.ch06_keywords import *
 
 
+def BeliefName_str() -> str:
+    return "BeliefName"
+
+
 def ancestors_str() -> str:
     return "ancestors"
 

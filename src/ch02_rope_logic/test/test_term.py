@@ -1,7 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic._ref.ch02_keywords import knot_str
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    BeliefName,
     CentralLabel,
     EventInt,
     FaceName,
@@ -87,17 +86,6 @@ def test_HealerName_Exists():
     assert inspect_getdoc(bob_healer_str) == doc_str
 
 
-def test_BeliefName_Exists():
-    # ESTABLISH
-    bob_str = "Bob"
-    # WHEN
-    bob_BeliefName_str = BeliefName(bob_str)
-    # THEN
-    assert bob_BeliefName_str == bob_str
-    doc_str = "A NameTerm used to identify a BeliefUnit's belief"
-    assert inspect_getdoc(bob_BeliefName_str) == doc_str
-
-
 def test_VoiceName_Exists():
     # ESTABLISH
     bob_str = "Bob"
@@ -105,7 +93,7 @@ def test_VoiceName_Exists():
     bob_VoiceName = VoiceName(bob_str)
     # THEN
     assert bob_VoiceName == bob_str
-    doc_str = "Every VoiceName object is BeliefName, must follow BeliefName format."
+    doc_str = "Every VoiceName object is NameTerm, must follow NameTerm format."
     assert inspect_getdoc(bob_VoiceName) == doc_str
 
 

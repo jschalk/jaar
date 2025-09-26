@@ -8,15 +8,6 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_False_if_None,
     get_json_from_dict,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    BeliefName,
-    GroupTitle,
-    HealerName,
-    LabelTerm,
-    MomentLabel,
-    RopeTerm,
-    VoiceName,
-)
 from src.ch02_rope_logic.rope import (
     all_ropes_between,
     create_rope,
@@ -68,6 +59,15 @@ from src.ch06_plan_logic.plan import (
     get_obj_from_plan_dict,
     planattrholder_shop,
     planunit_shop,
+)
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
+    BeliefName,
+    GroupTitle,
+    HealerName,
+    LabelTerm,
+    MomentLabel,
+    RopeTerm,
+    VoiceName,
 )
 from src.ch07_belief_logic.belief_config import max_tree_traverse_default
 from src.ch07_belief_logic.tree_metrics import TreeMetrics, treemetrics_shop

@@ -11,6 +11,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_str_functions,
+    get_keywords_filename,
 )
 from src.ch99_chapter_style.style import (
     check_if_chapter_str_funcs_is_sorted,
@@ -37,7 +38,7 @@ def test_Chapter_ref_util_FilesExist():
         # assert chapter_number == previous_chapter_number + 1
         # print(f"{chapter_desc=} {chapter_number=}")
         ref_dir = create_path(chapter_dir, "_ref")
-        keywords_filename = f"{chapter_prefix}_keywords.py"
+        keywords_filename = get_keywords_filename(chapter_prefix)
         str_func_path = create_path(ref_dir, keywords_filename)
         assert os_path_exists(str_func_path)
         test_dir = create_path(chapter_dir, "test")
@@ -126,9 +127,8 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
         running_str_functions.update(set(chapter_str_funcs))
 
         if len(chapter_str_funcs) > 0:
-            test_file_path = create_path(
-                util_dir, f"test_{chapter_desc_prefix}_keywords.py"
-            )
+            keywords_filename = get_keywords_filename(chapter_desc_prefix)
+            test_file_path = create_path(util_dir, f"test_{keywords_filename}")
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) == 1
@@ -136,7 +136,7 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
             file_funcs, class_bases = get_function_names_from_file(test_file_path)
             assert file_funcs == ["test_str_functions_ReturnsObj"]
             check_str_func_test_file_has_needed_asserts(
-                chapter_str_funcs, test_file_path, util_dir, chapter_desc_str_number
+                chapter_str_funcs, test_file_path, util_dir, chapter_desc
             )
 
 

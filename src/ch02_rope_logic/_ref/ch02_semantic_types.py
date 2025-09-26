@@ -37,19 +37,13 @@ class NameTerm(LabelTerm):
         return self.is_label(knot)
 
 
-class BeliefName(NameTerm):
-    """A NameTerm used to identify a BeliefUnit's belief"""
+class VoiceName(NameTerm):  # Created to help track the object class relations
+    """Every VoiceName object is NameTerm, must follow NameTerm format."""
 
     pass
 
 
-class VoiceName(BeliefName):  # Created to help track the object class relations
-    """Every VoiceName object is BeliefName, must follow BeliefName format."""
-
-    pass
-
-
-class HealerName(BeliefName):
+class HealerName(NameTerm):
     """A LabelTerm used to identify a Problem's Healer"""
 
     pass

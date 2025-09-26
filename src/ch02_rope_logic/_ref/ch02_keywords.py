@@ -5,6 +5,10 @@ def LabelTerm_str() -> str:
     return "LabelTerm"
 
 
+def MomentLabel_str() -> str:
+    return "MomentLabel"
+
+
 def NameTerm_str() -> str:
     return "NameTerm"
 

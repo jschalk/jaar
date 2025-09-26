@@ -226,6 +226,7 @@ def test_Chapters_StrFunctionsAreAllImported():
     # semantic_str_funcs = set()
     # for semantic_typ in semantic_types:
     #     semantic_str_funcs.add(f"{semantic_typ}_str")
+    # print(f"{sorted(list(semantic_str_funcs.difference(all_str_functions)))=}")
     # assert semantic_str_funcs.issubset(all_str_func_set)
 
 

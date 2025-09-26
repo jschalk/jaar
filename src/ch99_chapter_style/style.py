@@ -19,6 +19,7 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_str_number,
     get_chapter_descs,
     get_function_names_from_file,
+    get_keywords_filename,
 )
 from textwrap import dedent as textwrap_dedent
 from typing import List
@@ -176,7 +177,8 @@ def get_all_str_functions() -> list:
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
         ref_dir = create_path(chapter_dir, "_ref")
-        str_util_path = create_path(ref_dir, f"{chapter_prefix}_keywords.py")
+        keywords_filename = get_keywords_filename(chapter_prefix)
+        str_util_path = create_path(ref_dir, keywords_filename)
         str_functions, class_bases = get_function_names_from_file(str_util_path)
         if len(str_functions) > 0:
             all_str_functions.extend(iter(str_functions))
@@ -325,7 +327,7 @@ def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str)
 
 
 def check_str_func_test_file_has_needed_asserts(
-    chapter_str_funcs, test_file_path, util_dir, desc_number_str
+    chapter_str_funcs, test_file_path, util_dir, chapter_desc
 ):
     for str_function in chapter_str_funcs:
         # print(f"{str_util_path} {str_function=}")
@@ -333,7 +335,9 @@ def check_str_func_test_file_has_needed_asserts(
         str_func_assert_str = f"""assert {str_function}() == "{str_function[:-4]}"""
         test_file_str = open(test_file_path).read()
         if test_file_str.find(str_func_assert_str) <= 0:
-            str_util_path = create_path(util_dir, f"a{desc_number_str}_keywords.py")
+            chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
+            keywords_filename = get_keywords_filename(chapter_desc_prefix)
+            str_util_path = create_path(util_dir, keywords_filename)
             print(f"{str_util_path} {str_func_assert_str=}")
         assert test_file_str.find(str_func_assert_str) > 0
 

@@ -3,12 +3,12 @@ from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_json_filename,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
+from src.ch02_rope_logic.rope import get_all_rope_labels, rebuild_rope
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
     LabelTerm,
     MomentLabel,
 )
-from src.ch02_rope_logic.rope import get_all_rope_labels, rebuild_rope
 
 MOMENT_FILENAME = "moment.json"
 BUDUNIT_FILENAME = "budunit.json"

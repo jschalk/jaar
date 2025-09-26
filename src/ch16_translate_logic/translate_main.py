@@ -4,7 +4,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
     get_dict_from_json,
     get_json_from_dict,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
     EventInt,
     default_knot_if_None,
