@@ -10,16 +10,16 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
-    BeliefName,
-    EventInt,
-    LabelTerm,
-    RopeTerm,
-)
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
     get_beliefunit_from_json,
+)
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
+    BeliefName,
+    EventInt,
+    LabelTerm,
+    RopeTerm,
 )
 from src.ch11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
 from src.ch11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop

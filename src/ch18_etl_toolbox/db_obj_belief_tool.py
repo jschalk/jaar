@@ -7,13 +7,13 @@ from src.ch04_group_logic.labor import LaborHeir
 from src.ch04_group_logic.voice import VoiceUnit
 from src.ch05_reason_logic.reason import CaseUnit, FactHeir, ReasonHeir
 from src.ch06_plan_logic.plan import HealerUnit, PlanUnit
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
+from src.ch07_belief_logic.belief_main import BeliefUnit
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
     GroupTitle,
     RopeTerm,
     VoiceName,
 )
-from src.ch07_belief_logic.belief_main import BeliefUnit
 from src.ch11_bud_logic.bud import MomentLabel
 
 

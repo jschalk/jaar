@@ -6,12 +6,12 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
     set_dir,
 )
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
+from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_json
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
     BeliefName,
     LabelTerm,
     MomentLabel,
 )
-from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_json
 from src.ch12_hub_toolbox.ch12_path import (
     create_keep_duty_path,
     create_keep_rope_path,

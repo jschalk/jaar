@@ -14,11 +14,6 @@ from src.ch05_reason_logic.reason import (
     factunits_get_from_dict,
     get_dict_from_factunits,
 )
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
-    BeliefName,
-    EventInt,
-    RopeTerm,
-)
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
@@ -30,6 +25,7 @@ from src.ch07_belief_logic.belief_tool import (
     get_credit_ledger,
     get_voice_mandate_ledger,
 )
+from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, EventInt, RopeTerm
 
 CELLNODE_QUOTA_DEFAULT = 1000
 

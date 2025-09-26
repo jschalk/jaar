@@ -1,5 +1,4 @@
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    EventInt,
     FaceName,
     GroupTitle,
     HealerName,

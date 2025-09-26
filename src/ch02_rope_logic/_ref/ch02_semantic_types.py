@@ -65,7 +65,3 @@ class GroupTitle(TitleTerm):  # Created to help track the object class relations
 
 class FaceName(NameTerm):
     pass
-
-
-class EventInt(int):
-    pass

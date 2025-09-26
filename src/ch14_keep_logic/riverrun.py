@@ -7,7 +7,7 @@ from src.ch01_data_toolbox.dict_toolbox import (
 )
 from src.ch01_data_toolbox.file_toolbox import save_file
 from src.ch03_finance_logic.allot import allot_scale
-from src.ch07_belief_logic._ref.ch07_semantic_types import BeliefName, VoiceName
+from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, VoiceName
 from src.ch12_hub_toolbox.hubunit import HubUnit
 from src.ch14_keep_logic.rivercycle import (
     RiverGrade,

@@ -1,4 +1,3 @@
-from src.ch02_rope_logic._ref.ch02_semantic_types import MomentLabel
 from src.ch02_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
@@ -8,6 +7,7 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
+from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
     INSERT_str,

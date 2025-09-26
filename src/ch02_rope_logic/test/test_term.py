@@ -2,7 +2,6 @@ from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic._ref.ch02_keywords import knot_str
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
     CentralLabel,
-    EventInt,
     FaceName,
     GroupTitle,
     HealerName,
@@ -175,14 +174,6 @@ def test_FaceName_Exists():
     assert FaceName() == ""
     assert FaceName("cookie") == "cookie"
     assert not FaceName(f"cookie{default_knot_if_None()}").is_name()
-
-
-# Move to Bud chapter
-def test_EventInt_Exists():
-    # ESTABLISH / WHEN / THEN
-    assert EventInt() == 0
-    assert EventInt(12) == 12
-    assert EventInt(12.4) == 12
 
 
 def test_MomentLabel_Exists():

@@ -12,13 +12,6 @@ from src.ch01_data_toolbox.dict_toolbox import (
     str_in_dict_keys,
     str_in_dict_values,
 )
-from src.ch02_rope_logic._ref.ch02_semantic_types import (
-    EventInt,
-    FaceName,
-    LabelTerm,
-    RopeTerm,
-    default_knot_if_None,
-)
 from src.ch02_rope_logic.rope import (
     create_rope,
     create_rope_from_labels,
@@ -26,6 +19,13 @@ from src.ch02_rope_logic.rope import (
     get_parent_rope,
     get_tail_label,
     is_labelterm,
+)
+from src.ch11_bud_logic._ref.ch11_semantic_types import (
+    EventInt,
+    FaceName,
+    LabelTerm,
+    RopeTerm,
+    default_knot_if_None,
 )
 from src.ch16_translate_logic.translate_config import default_unknown_str_if_None
 
