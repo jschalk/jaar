@@ -6,7 +6,7 @@ from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
+    get_beliefunit_from_json,
 )
 
 # from src.ch01_data_toolbox.file_toolbox import save_file
@@ -20,7 +20,7 @@ from src.ch07_belief_logic.belief_main import (
 def beliefunit_v001() -> BeliefUnit:
     belief1_path = "src/ch07_belief_logic/test/_util/example_belief1.json"
     belief1_json = open_file(belief1_path)
-    return beliefunit_get_from_json(belief1_json)
+    return get_beliefunit_from_json(belief1_json)
 
 
 def beliefunit_v001_with_large_agenda() -> BeliefUnit:
@@ -54,7 +54,7 @@ def beliefunit_v001_with_large_agenda() -> BeliefUnit:
 
 def beliefunit_v002() -> BeliefUnit:
     belief2_path = "src/ch07_belief_logic/test/_util/example_belief2.json"
-    return beliefunit_get_from_json(open_file(belief2_path))
+    return get_beliefunit_from_json(open_file(belief2_path))
 
 
 def get_beliefunit_with_4_levels() -> BeliefUnit:

@@ -237,7 +237,7 @@ def test_MemberShip_to_dict_ReturnsDictWithNecessaryDataForJSON():
     }
 
 
-def test_membership_get_from_dict_ReturnsObj():
+def test_membership_to_dict_ReturnsObj():
     # ESTABLISH
     swim_str = ",swim"
     swim_group_cred_points = 3.0

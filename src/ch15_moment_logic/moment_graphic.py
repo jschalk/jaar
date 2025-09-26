@@ -1,5 +1,5 @@
 from plotly.graph_objects import Figure as plotly_Figure, Scatter as plotly_Scatter
-from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
+from src.ch01_data_toolbox.plotly_toolbox import add_2_curve, conditional_fig_show
 from src.ch14_keep_logic.keep_graphic import (
     LightSeaGreen_str,
     add_keep_str,
@@ -165,10 +165,6 @@ def add_rect_str(fig, x0, y0, text):
     fig.add_annotation(
         x=x0 + x_margin, y=y0 - x_margin, text=text, showarrow=False, align="center"
     )
-
-
-def add_2_curve(fig: plotly_Figure, path: str, color: str):
-    fig.add_shape(dict(type="path", path=path, line_color=color))
 
 
 def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None, width=None):

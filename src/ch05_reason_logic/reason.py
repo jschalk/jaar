@@ -333,7 +333,7 @@ class CaseUnit:
 
         return x_dict
 
-    def clear_status(self):
+    def clear_case_status(self):
         self.status = None
 
     def set_knot(self, new_knot: str):
@@ -348,7 +348,7 @@ class CaseUnit:
             src=self.reason_state, heir=fact_fact_state, knot=self.knot
         ) or is_heir_rope(src=fact_fact_state, heir=self.reason_state, knot=self.knot)
 
-    def set_status(self, x_factheir: FactHeir):
+    def set_case_status(self, x_factheir: FactHeir):
         self.status = self._get_active(factheir=x_factheir)
         self.task = self._get_task_status(factheir=x_factheir)
 
@@ -612,11 +612,11 @@ class ReasonHeir(ReasonCore):
     def clear_status(self):
         self.status = None
         for case in self.cases.values():
-            case.clear_status()
+            case.clear_case_status()
 
     def _set_case_status(self, factheir: FactHeir):
         for case in self.cases.values():
-            case.set_status(factheir)
+            case.set_case_status(factheir)
 
     def _get_fact_context(self, factheirs: dict[RopeTerm, FactHeir]) -> FactHeir:
         fact_context = None

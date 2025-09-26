@@ -1,9 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import open_file, save_file
-from src.ch07_belief_logic.belief_main import (
-    beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
-)
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_json
 from src.ch12_hub_toolbox.ch12_path import (
     create_gut_path,
     create_job_path,
@@ -52,7 +49,7 @@ def test_etl_moment_guts_to_moment_jobs_SetsFiles_Scenario0(
 
     # THEN
     assert os_path_exists(a23_bob_job_path)
-    generated_job = beliefunit_get_from_json(open_file(a23_bob_job_path))
+    generated_job = get_beliefunit_from_json(open_file(a23_bob_job_path))
     expected_job = beliefunit_shop(bob_inx, a23_str)
     expected_job.add_voiceunit(bob_inx, credit77)
     expected_job.add_voiceunit(yao_inx, credit44)

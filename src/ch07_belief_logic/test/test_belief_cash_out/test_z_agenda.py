@@ -1,10 +1,7 @@
 from src.ch02_rope_logic.rope import RopeTerm
 from src.ch04_group_logic.labor import laborunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
-from src.ch07_belief_logic.belief_main import (
-    beliefunit_shop,
-    get_from_json as beliefunit_get_from_json,
-)
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_beliefunit_from_json
 from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,
     beliefunit_v001_with_large_agenda,
@@ -356,12 +353,12 @@ def test_BeliefUnit_set_agenda_task_as_complete_SetsAttr_Division():
     assert len(zia_belief.get_agenda_dict()) == 0
 
 
-def test_beliefunit_get_from_json_LoadsPledgeFromJSON():
+def test_get_beliefunit_from_json_LoadsPledgeFromJSON():
     # ESTABLISH
     yao_belief_json = beliefunit_v001().get_json()
 
     # WHEN
-    yao_belief = beliefunit_get_from_json(x_belief_json=yao_belief_json)
+    yao_belief = get_beliefunit_from_json(x_belief_json=yao_belief_json)
 
     # THEN
     assert len(yao_belief.get_plan_dict()) == 252

@@ -1,5 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch15_moment_logic.moment_main import get_from_dict as momentunit_get_from_dict
+from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     beliefbudhistorys_str,
     moment_label_str,
@@ -398,7 +398,7 @@ VALUES (
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     assert a23_momentunit.moment_label == a23_str
@@ -434,7 +434,7 @@ VALUES ('{a23_str}', '{bob_str}', '{sue_str}', {tp55}, {bob_sue_tp55_amount})
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     assert a23_momentunit.moment_label == a23_str
@@ -465,7 +465,7 @@ VALUES ('{a23_str}', '{bob_str}', {tp55}, {bob_tp55_quota}, {bob_tp55_celldepth}
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     a23_bob_beliefbudhistory = a23_momentunit.get_beliefbudhistory(bob_str)
@@ -501,7 +501,7 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     a23_momentunit.timeline.hours_config == [
@@ -534,7 +534,7 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     assert a23_momentunit.timeline.months_config == [
@@ -567,7 +567,7 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     assert a23_momentunit.timeline.weekdays_config == [ana_label, bee_label]
@@ -596,7 +596,7 @@ VALUES
         a23_dict = get_moment_dict_from_heard_tables(cursor, a23_str)
 
     # WHEN
-    a23_momentunit = momentunit_get_from_dict(a23_dict)
+    a23_momentunit = get_momentunit_from_dict(a23_dict)
 
     # THEN
     assert a23_momentunit.offi_times == {offi_time5, offi_time7}

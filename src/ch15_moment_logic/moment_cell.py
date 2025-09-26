@@ -35,7 +35,7 @@ from src.ch12_hub_toolbox.hub_tool import (
     open_belief_file,
 )
 from src.ch15_moment_logic.ch15_path import BUD_MANDATE_FILENAME
-from src.ch15_moment_logic.moment_main import get_from_dict as momentunit_get_from_dict
+from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 
 
 def create_moment_beliefs_cell_trees(moment_mstr_dir, moment_label):
@@ -329,7 +329,7 @@ def set_cell_tree_cell_mandates(moment_mstr_dir: str, moment_label: str):
 
 def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
     moment_json_path = create_moment_json_path(moment_mstr_dir, moment_label)
-    momentunit = momentunit_get_from_dict(open_json(moment_json_path))
+    momentunit = get_momentunit_from_dict(open_json(moment_json_path))
     for beliefbudhistory in momentunit.beliefbudhistorys.values():
         for budunit in beliefbudhistory.buds.values():
             bud_root_dir = create_bud_dir_path(

@@ -14,7 +14,7 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
 )
 from src.ch09_belief_atom_logic.atom_main import (
     beliefatom_shop,
-    get_from_json as beliefatom_get_from_json,
+    get_beliefatom_from_json,
 )
 
 
@@ -74,7 +74,7 @@ def test_BeliefAtom_get_json_ReturnsObj():
     assert x_is_json(atom_json)
 
 
-def test_beliefatom_get_from_json_ReturnsObj():
+def test_get_beliefatom_from_json_ReturnsObj():
     # ESTABLISH
     sports_str = "sports"
     sports_rope = create_rope("a", sports_str)
@@ -93,7 +93,7 @@ def test_beliefatom_get_from_json_ReturnsObj():
     atom_json = gen_beliefatom.get_json()
 
     # WHEN
-    json_beliefatom = beliefatom_get_from_json(atom_json)
+    json_beliefatom = get_beliefatom_from_json(atom_json)
 
     # THEN
     assert json_beliefatom.dimen == gen_beliefatom.dimen

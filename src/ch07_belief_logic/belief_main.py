@@ -562,15 +562,6 @@ class BeliefUnit:
                 )
                 plan_uid_max = new_plan_uid_max
 
-    def get_level_count(self, tree_level) -> int:
-        tree_metrics = self.get_tree_metrics()
-        level_count = None
-        try:
-            level_count = tree_metrics.tree_level_count[level]
-        except KeyError:
-            level_count = 0
-        return level_count
-
     def get_reason_contexts(self) -> set[RopeTerm]:
         return set(self.get_tree_metrics().reason_contexts.keys())
 
@@ -1491,11 +1482,11 @@ def beliefunit_shop(
     return x_belief
 
 
-def get_from_json(x_belief_json: str) -> BeliefUnit:
-    return get_from_dict(get_dict_from_json(x_belief_json))
+def get_beliefunit_from_json(x_belief_json: str) -> BeliefUnit:
+    return get_beliefunit_from_dict(get_dict_from_json(x_belief_json))
 
 
-def get_from_dict(belief_dict: dict) -> BeliefUnit:
+def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief = beliefunit_shop()
     x_belief.set_belief_name(obj_from_belief_dict(belief_dict, "belief_name"))
     x_belief.tally = obj_from_belief_dict(belief_dict, "tally")
@@ -1614,7 +1605,7 @@ def obj_from_belief_dict(
 def get_dict_of_belief_from_dict(x_dict: dict[str, dict]) -> dict[str, BeliefUnit]:
     beliefunits = {}
     for beliefunit_dict in x_dict.values():
-        x_belief = get_from_dict(belief_dict=beliefunit_dict)
+        x_belief = get_beliefunit_from_dict(belief_dict=beliefunit_dict)
         beliefunits[x_belief.belief_name] = x_belief
     return beliefunits
 

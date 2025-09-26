@@ -14,10 +14,7 @@ from src.ch12_hub_toolbox.ch12_path import (
 from src.ch15_moment_logic.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate_path,
 )
-from src.ch15_moment_logic.moment_main import (
-    get_from_dict as momentunit_get_from_dict,
-    momentunit_shop,
-)
+from src.ch15_moment_logic.moment_main import get_momentunit_from_dict, momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_examples import (
     example_casa_floor_clean_factunit,
 )
@@ -83,7 +80,7 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro1_SimpleBud(
     assert os_path_exists(bob37_bud_mandate_path)
     expected_bud_voice_nets = {bob_str: bud1_quota}
     assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
-    gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
+    gen_a23_momentunit = get_momentunit_from_dict(open_json(a23_json_path))
     gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
     assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets
 
@@ -156,6 +153,6 @@ def test_WorldUnit_calc_moment_bud_voice_mandate_net_ledgers_Scenaro2_BudExists(
     assert os_path_exists(bob37_bud_mandate_path)
     expected_bud_voice_nets = {zia_str: bud1_quota}
     assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
-    gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
+    gen_a23_momentunit = get_momentunit_from_dict(open_json(a23_json_path))
     gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
     assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets

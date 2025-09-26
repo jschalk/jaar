@@ -16,8 +16,8 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
 )
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
+    get_beliefunit_from_json,
     get_dict_of_belief_from_dict,
-    get_from_json as beliefunit_get_from_json,
 )
 from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001,
@@ -277,7 +277,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     assert len(yao_belief.voices) == 22
 
 
-def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
+def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     zia_belief.set_max_tree_traverse(23)
@@ -340,7 +340,7 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     # WHEN
     x_json = zia_belief.get_json()
     assert x_is_json(x_json) is True
-    json_belief = beliefunit_get_from_json(x_belief_json=x_json)
+    json_belief = get_beliefunit_from_json(x_belief_json=x_json)
 
     # THEN
     assert str(type(json_belief)).find(".belief_main.BeliefUnit'>") > 0
@@ -403,7 +403,7 @@ def test_beliefunit_get_from_json_ReturnsObjSimpleExample():
     assert json_shave_plan.stop_want == zia_shave_plan.stop_want
 
 
-def test_beliefunit_get_from_json_ReturnsPlanRoot():
+def test_get_beliefunit_from_json_ReturnsPlanRoot():
     # ESTABLISH
     zia_belief = get_beliefunit_x1_3levels_1reason_1facts()
     zia_belief.set_max_tree_traverse(23)
@@ -417,7 +417,7 @@ def test_beliefunit_get_from_json_ReturnsPlanRoot():
     # WHEN
     x_json = zia_belief.get_json()
     assert x_is_json(x_json) is True
-    json_belief = beliefunit_get_from_json(x_belief_json=x_json)
+    json_belief = get_beliefunit_from_json(x_belief_json=x_json)
 
     # THEN
     json_planroot = json_belief.get_plan_obj(to_rope(zia_belief.moment_label))
@@ -425,7 +425,7 @@ def test_beliefunit_get_from_json_ReturnsPlanRoot():
     assert json_planroot.stop_want == zia_stop_want
 
 
-def test_beliefunit_get_from_json_ReturnsObj_knot_Example():
+def test_get_beliefunit_from_json_ReturnsObj_knot_Example():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
@@ -433,7 +433,7 @@ def test_beliefunit_get_from_json_ReturnsObj_knot_Example():
 
     # WHEN
     bob_json = before_bob_belief.get_json()
-    after_bob_belief = beliefunit_get_from_json(bob_json)
+    after_bob_belief = get_beliefunit_from_json(bob_json)
 
     # THEN
     assert after_bob_belief.knot != default_knot_if_None()
@@ -441,7 +441,7 @@ def test_beliefunit_get_from_json_ReturnsObj_knot_Example():
     assert after_bob_belief.knot == before_bob_belief.knot
 
 
-def test_beliefunit_get_from_json_ReturnsObj_knot_VoiceExample():
+def test_get_beliefunit_from_json_ReturnsObj_knot_VoiceExample():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
@@ -451,14 +451,14 @@ def test_beliefunit_get_from_json_ReturnsObj_knot_VoiceExample():
 
     # WHEN
     bob_json = before_bob_belief.get_json()
-    after_bob_belief = beliefunit_get_from_json(bob_json)
+    after_bob_belief = get_beliefunit_from_json(bob_json)
 
     # THEN
     after_bob_voiceunit = after_bob_belief.get_voice(bob_str)
     assert after_bob_voiceunit.knot == slash_knot
 
 
-def test_beliefunit_get_from_json_ReturnsObj_knot_GroupExample():
+def test_get_beliefunit_from_json_ReturnsObj_knot_GroupExample():
     # ESTABLISH
     slash_knot = "/"
     before_bob_belief = beliefunit_shop("Bob", knot=slash_knot)
@@ -470,14 +470,14 @@ def test_beliefunit_get_from_json_ReturnsObj_knot_GroupExample():
 
     # WHEN
     bob_json = before_bob_belief.get_json()
-    after_bob_belief = beliefunit_get_from_json(bob_json)
+    after_bob_belief = get_beliefunit_from_json(bob_json)
 
     # THEN
     after_yao_voiceunit = after_bob_belief.get_voice(yao_str)
     assert after_yao_voiceunit.knot == slash_knot
 
 
-def test_beliefunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied():
+def test_get_beliefunit_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     slash_str = "/"
@@ -492,7 +492,7 @@ def test_beliefunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied()
     assert sue_belief.get_plan_obj(hr_number_rope).knot == slash_str
 
     # WHEN
-    after_bob_belief = beliefunit_get_from_json(sue_belief.get_json())
+    after_bob_belief = get_beliefunit_from_json(sue_belief.get_json())
 
     # THEN
     assert after_bob_belief.knot == slash_str
@@ -500,7 +500,7 @@ def test_beliefunit_get_from_json_ReturnsObj_Scenario7_planroot_knot_IsApplied()
     assert after_bob_belief.get_plan_obj(hr_number_rope).knot == slash_str
 
 
-def test_beliefunit_get_from_json_ExportsBeliefUnit_star():
+def test_get_beliefunit_from_json_ExportsBeliefUnit_star():
     # ESTABLISH
     x1_belief = beliefunit_v001()
     x1_belief.tally = 15
@@ -509,7 +509,7 @@ def test_beliefunit_get_from_json_ExportsBeliefUnit_star():
     assert x1_belief.planroot.star == 1
 
     # WHEN
-    x2_belief = beliefunit_get_from_json(x1_belief.get_json())
+    x2_belief = get_beliefunit_from_json(x1_belief.get_json())
 
     # THEN
     assert x1_belief.tally == 15

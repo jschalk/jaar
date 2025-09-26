@@ -36,9 +36,6 @@ class NameTerm(LabelTerm):
     def is_name(self, knot: str = None) -> bool:
         return self.is_label(knot)
 
-    def contains_knot(self, knot: str = None) -> bool:
-        return self.find(default_knot_if_None(knot)) == -1
-
 
 class BeliefName(NameTerm):
     """A NameTerm used to identify a BeliefUnit's belief"""

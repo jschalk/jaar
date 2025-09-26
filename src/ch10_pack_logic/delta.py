@@ -19,7 +19,7 @@ from src.ch09_belief_atom_logic.atom_main import (
     BeliefAtom,
     InvalidBeliefAtomException,
     beliefatom_shop,
-    get_from_dict as get_beliefatom_from_dict,
+    get_beliefatom_from_dict,
     jvalues_different,
     modify_belief_with_beliefatom,
     sift_beliefatom,
@@ -58,7 +58,7 @@ class BeliefDelta:
         beliefatoms_list = self.get_dimen_sorted_beliefatoms_list()
         return sorted(beliefatoms_list, key=lambda x: x.atom_order)
 
-    def get_edited_belief(self, before_belief: BeliefUnit) -> BeliefUnit:
+    def get_atom_edited_belief(self, before_belief: BeliefUnit) -> BeliefUnit:
         edited_belief = copy_deepcopy(before_belief)
         for x_beliefatom in self.get_sorted_beliefatoms():
             modify_belief_with_beliefatom(edited_belief, x_beliefatom)
@@ -888,7 +888,7 @@ def belief_built_from_delta_is_valid(
     x_delta: BeliefDelta, x_belief: BeliefUnit = None
 ) -> bool:
     x_belief = beliefunit_shop() if x_belief is None else x_belief
-    x_belief = x_delta.get_edited_belief(x_belief)
+    x_belief = x_delta.get_atom_edited_belief(x_belief)
     try:
         x_belief.cashout()
     except Exception:

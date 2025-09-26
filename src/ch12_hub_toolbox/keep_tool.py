@@ -7,10 +7,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.ch02_rope_logic.term import BeliefName, LabelTerm, MomentLabel
-from src.ch07_belief_logic.belief_main import (
-    BeliefUnit,
-    get_from_json as beliefunit_get_from_json,
-)
+from src.ch07_belief_logic.belief_main import BeliefUnit, get_beliefunit_from_json
 from src.ch12_hub_toolbox.ch12_path import (
     create_keep_duty_path,
     create_keep_rope_path,
@@ -115,4 +112,4 @@ def get_duty_belief(
     if os_path_exists(keep_duty_path) is False:
         return None
     file_content = open_file(keep_duty_path)
-    return beliefunit_get_from_json(file_content)
+    return get_beliefunit_from_json(file_content)

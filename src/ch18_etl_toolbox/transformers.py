@@ -856,7 +856,7 @@ def etl_event_pack_json_to_event_inherited_beliefunits(moment_mstr_dir: str):
                 sift_delta = get_minimal_beliefdelta(
                     event_pack._beliefdelta, prev_belief
                 )
-                curr_belief = event_pack.get_edited_belief(prev_belief)
+                curr_belief = event_pack.get_pack_edited_belief(prev_belief)
                 save_file(beliefevent_path, None, curr_belief.get_json())
                 expressed_pack = copy_deepcopy(event_pack)
                 expressed_pack.set_beliefdelta(sift_delta)

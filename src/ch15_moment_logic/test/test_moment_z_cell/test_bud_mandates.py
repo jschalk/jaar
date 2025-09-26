@@ -9,10 +9,7 @@ from src.ch15_moment_logic.ch15_path import (
     create_bud_voice_mandate_ledger_path as bud_mandate_path,
 )
 from src.ch15_moment_logic.moment_cell import create_bud_mandate_ledgers
-from src.ch15_moment_logic.moment_main import (
-    get_from_dict as momentunit_get_from_dict,
-    momentunit_shop,
-)
+from src.ch15_moment_logic.moment_main import get_momentunit_from_dict, momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -65,7 +62,7 @@ def test_create_bud_mandate_ledgers_Scenaro1_BudExists(env_dir_setup_cleanup):
     assert os_path_exists(bob37_bud_mandate_path)
     expected_bud_voice_nets = {bob_str: bud1_quota}
     assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
-    gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
+    gen_a23_momentunit = get_momentunit_from_dict(open_json(a23_json_path))
     gen_a23_momentunit.set_all_tranbook()
     gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
     assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets
@@ -118,7 +115,7 @@ def test_create_bud_mandate_ledgers_Scenaro2_Mutliple_cell_voice_mandate_ledgers
     }
     print(f"{open_json(bob37_bud_mandate_path)=}")
     assert open_json(bob37_bud_mandate_path) == expected_bud_voice_nets
-    gen_a23_momentunit = momentunit_get_from_dict(open_json(a23_json_path))
+    gen_a23_momentunit = get_momentunit_from_dict(open_json(a23_json_path))
     gen_bob37_budunit = gen_a23_momentunit.get_budunit(bob_str, tp37)
     assert gen_bob37_budunit._bud_voice_nets == expected_bud_voice_nets
     expected_a23_all_tranbook = tranbook_shop(a23_str)
