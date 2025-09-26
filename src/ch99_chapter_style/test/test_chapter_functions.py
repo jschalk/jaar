@@ -1,7 +1,7 @@
 from importlib import import_module as importlib_import_module
 from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames
+from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames, open_file
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
@@ -21,6 +21,7 @@ from src.ch99_chapter_style.style import (
     get_json_files,
     get_max_chapter_import_str,
     get_python_files_with_flag,
+    get_semantic_types_filename,
     get_top_level_functions,
 )
 
@@ -113,6 +114,19 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
     assert not unnecessarily_excluded_funcs, sorted(unnecessarily_excluded_funcs.keys())
     assert semantic_types == expected_semantic_types()
+
+
+def test_Chapters_Semantic_Types_HasCorrectFormating():
+    # ESTABLISH / WHEN
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
+        docs_dir = create_path(chapter_dir, "_ref")
+        semantic_types_filename = get_semantic_types_filename(chapter_desc_prefix)
+        semantics_path = create_path(docs_dir, semantic_types_filename)
+        print(f"{chapter_desc=}")
+        # THEN
+        # semantic_types_file never has import *
+        assert open_file(semantics_path).find("import *") == -1
 
 
 def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():

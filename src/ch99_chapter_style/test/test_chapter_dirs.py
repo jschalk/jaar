@@ -21,6 +21,7 @@ from src.ch99_chapter_style.style import (
     get_function_names_from_file,
     get_imports_from_file,
     get_python_files_with_flag,
+    get_semantic_types_filename,
 )
 
 
@@ -202,14 +203,12 @@ def test_Chapters_ChapterReferenceFolder_ref_ExistsForEveryChapter():
         chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
         docs_dir = create_path(chapter_dir, "_ref")
         chapter_ref_path = create_path(docs_dir, f"{chapter_desc_prefix}_ref.json")
-        semantics_path = create_path(
-            docs_dir, f"{chapter_desc_prefix}_semantic_types.py"
-        )
+        semantic_types_filename = get_semantic_types_filename(chapter_desc_prefix)
+        semantics_path = create_path(docs_dir, semantic_types_filename)
         assert os_path_exists(docs_dir)
         assert os_path_exists(chapter_ref_path)
         assert os_path_exists(semantics_path)
         chapter_ref_dict = open_json(chapter_ref_path)
-        print(f"{chapter_desc=}")
         # print(f"{chapter_ref_path} \t Items: {len(chapter_ref_dict)}")
         ref_keys = set(chapter_ref_dict.keys())
         chapter_description_str = "chapter_description"

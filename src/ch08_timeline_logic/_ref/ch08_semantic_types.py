@@ -1,4 +1,4 @@
-from src.ch07_belief_logic._ref.ch07_semantic_types import *
+from src.ch02_rope_logic._ref.ch02_semantic_types import LabelTerm, RopeTerm
 
 
 class TimeLineLabel(LabelTerm):

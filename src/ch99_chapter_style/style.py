@@ -153,12 +153,17 @@ def check_chapter_imports_are_ordered(imports: list[list], file_path: str, desc_
             assert desc_number == env_number
 
 
+def get_semantic_types_filename(chapter_desc_prefix: str) -> str:
+    return f"{chapter_desc_prefix}_semantic_types.py"
+
+
 def get_all_semantic_types_from_ref_files() -> set[str]:
     all_ref_files_semantic_types = set()
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
         ref_dir = create_path(chapter_dir, "_ref")
-        str_util_path = create_path(ref_dir, f"{chapter_prefix}_semantic_types.py")
+        semantic_types_filename = get_semantic_types_filename(chapter_prefix)
+        str_util_path = create_path(ref_dir, semantic_types_filename)
         functions, class_bases = get_function_names_from_file(str_util_path)
         print(f"{chapter_desc} {class_bases=}")
         all_ref_files_semantic_types.update(class_bases)
