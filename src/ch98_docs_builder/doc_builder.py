@@ -30,6 +30,16 @@ def get_chapter_descs() -> dict[str, str]:
     }
 
 
+def get_chapter_num_descs() -> dict[int, str]:
+    """Returns dict [Chapter_num as Int, chapter_desc]"""
+    chapter_descs = get_chapter_descs()
+    chapter_num_descs = {}
+    for chapter_desc in chapter_descs:
+        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
+        chapter_num_descs[chapter_num] = chapter_desc
+    return chapter_num_descs
+
+
 def get_function_names_from_file(
     file_path: str, suffix: str = None
 ) -> tuple[list, dict[str, bool]]:

@@ -1,11 +1,20 @@
+from copy import copy as copy_copy
+from enum import Enum
 from importlib import import_module as importlib_import_module
 from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames, open_file
+from src.ch01_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_filenames,
+    open_file,
+    open_json,
+    save_json,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
+    get_chapter_num_descs,
     get_chapter_str_functions,
 )
 from src.ch99_chapter_style.style import (
@@ -189,6 +198,79 @@ def test_Chapters_StrFunctionsAppearWhereTheyShould():
                         if x_str_func_name not in str_funcs_set:
                             print(f"missing {x_str=} {file_path=}")
                         assert x_str_func_name in str_funcs_set
+
+    # save all_str_functions
+    print(f"{len(all_str_functions)=}")
+    # all_keywords = {}
+    # for str_func_name, ref_dict in all_str_functions.items():
+    #     all_keywords[str_func_name[:-4]] = ref_dict
+    # save_json("src/ch99_chapter_style/keywords.json", None, all_keywords)
+    keywords_dict = open_json("src/ch99_chapter_style/keywords.json")
+    keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
+    cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
+    chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
+    chapter_num_descs = get_chapter_num_descs()
+
+    for chapter_num, ExpectedEnumClass in chXX_keyword_classes.items():
+        chapter_desc = chapter_num_descs.get(chapter_num)
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_ref_keywords_path = f"src.{chapter_desc}._ref.{chapter_prefix}_keywords"
+        print(f"{chapter_ref_keywords_path=}")
+
+        # dynamically import the module
+        mod = importlib_import_module(chapter_ref_keywords_path)
+        enum_class_name = f"Ch{chapter_num:02}Keywords"
+        try:
+            getattr(mod, enum_class_name)
+        except:
+            print(f"class {enum_class_name}(str, Enum):")
+            for keyword in sorted(list(cumlative_ch_keywords_dict.get(chapter_num))):
+                print(f"    {keyword} = '{keyword}'")
+        # print(f"{len(mod.__dict__)=}")
+        ChKeywordsClass = getattr(mod, enum_class_name)
+        assert ChKeywordsClass
+        expected_enum_keys = set(ExpectedEnumClass.__dict__.keys())
+        current_enum_keys = set(ChKeywordsClass.__dict__.keys())
+        # print(expected_enum_keys.difference(current_enum_keys))
+        assert expected_enum_keys.difference(current_enum_keys) == set()
+        # assert ChKeywordsClass == ExpectedEnumClass
+
+        # get the class from it
+        # print(f"{chapter_num=} {len(ExpectedEnumClass.__dict__)=}")
+
+    # for str_function_name in sorted(all_str_functions.keys()):
+    #     print(f"{str_function_name=}")
+
+
+def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
+    chXX_keyword_classes = {}
+    for chapter_num in sorted(list(cumlative_ch_keywords_dict.keys())):
+        ch_keywords = cumlative_ch_keywords_dict.get(chapter_num)
+        class_name = f"Ch{chapter_num:02}Keywords"
+        ExpectedClass = Enum(class_name, {t: t for t in ch_keywords}, type=str)
+        chXX_keyword_classes[chapter_num] = ExpectedClass
+    return chXX_keyword_classes
+
+
+def get_keywords_by_chapter(keywords_dict: dict) -> dict:
+    chapters_keywords = {}
+    for chapter_num in get_chapter_num_descs().keys():
+        chapters_keywords[chapter_num] = set()
+    for x_keyword, ref_dict in keywords_dict.items():
+        keyworld_init_chapter_num = ref_dict.get("chapter_num")
+        chapter_set = chapters_keywords.get(keyworld_init_chapter_num)
+        chapter_set.add(x_keyword)
+    return chapters_keywords
+
+
+def get_cumlative_ch_keywords_dict(keywords_by_chapter: dict) -> dict:
+    allowed_keywords_set = set()
+    cumlative_ch_keywords_dict = {}
+    for chapter_num in sorted(list(keywords_by_chapter.keys())):
+        ch_keywords_set = keywords_by_chapter.get(chapter_num)
+        allowed_keywords_set.update(ch_keywords_set)
+        cumlative_ch_keywords_dict[chapter_num] = copy_copy(allowed_keywords_set)
+    return cumlative_ch_keywords_dict
 
 
 def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():

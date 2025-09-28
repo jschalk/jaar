@@ -172,16 +172,18 @@ def get_all_semantic_types_from_ref_files() -> set[str]:
     return all_ref_files_semantic_types
 
 
-def get_all_str_functions() -> list:
-    all_str_functions = []
+def get_all_str_functions() -> dict[str, int]:
+    """Returns a dict [str_function_name, chapter_num]"""
+    all_str_functions = {}
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
         ref_dir = create_path(chapter_dir, "_ref")
         keywords_filename = get_keywords_filename(chapter_prefix)
         str_util_path = create_path(ref_dir, keywords_filename)
         str_functions, class_bases = get_function_names_from_file(str_util_path)
-        if len(str_functions) > 0:
-            all_str_functions.extend(iter(str_functions))
+        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
+        for str_function_name in str_functions:
+            all_str_functions[str_function_name] = {"chapter_num": chapter_num}
     return all_str_functions
 
 
