@@ -8,9 +8,9 @@ from src.ch12_hub_toolbox.ch12_path import (
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch10Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
@@ -78,10 +78,10 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
     a23_bob_e7_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{wx.event_int},{wx.face_name},{moment_label_str()},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points},{wx.voice_debt_points}
+    e3_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points},{wx.voice_debt_points}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{wx.event_int},{wx.face_name},{moment_label_str()},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points},{wx.voice_debt_points}
+    e7_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points},{wx.voice_debt_points}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """

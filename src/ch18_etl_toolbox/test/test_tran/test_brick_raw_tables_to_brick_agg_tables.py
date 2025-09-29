@@ -6,11 +6,11 @@ from src.ch01_data_toolbox.db_toolbox import (
 )
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch17Keywords as wx,
     Ch18Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_sound_and_heard_tables
 from src.ch18_etl_toolbox.transformers import (
@@ -32,7 +32,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     raw_br00003_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.cumulative_minute,
         wx.hour_label,
         wx.error_message,
@@ -43,7 +43,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 , {wx.error_message}
@@ -109,7 +109,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
     raw_br00003_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.cumulative_minute,
         wx.hour_label,
         wx.error_message,
@@ -120,7 +120,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 , {wx.error_message}
@@ -180,7 +180,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
     raw_br00003_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.cumulative_minute,
         wx.hour_label,
         wx.error_message,
@@ -191,7 +191,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
         insert_into_clause = f"""INSERT INTO {raw_br00003_tablename} (
   {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 , {wx.error_message}
@@ -236,7 +236,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
     agg_br00003_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.cumulative_minute,
         wx.hour_label,
     ]
@@ -264,7 +264,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
     agg_br00003_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.cumulative_minute,
         wx.hour_label,
     ]
@@ -274,7 +274,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 )"""

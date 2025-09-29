@@ -2,10 +2,10 @@ from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import open_json, save_file
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
     Ch17Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.ch18_path import (
     create_moment_ote1_csv_path,
@@ -33,10 +33,10 @@ def test_etl_moment_ote1_agg_csvs_to_jsons_CreatesFile_Scenaro0(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_event_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy23_str)
     a45_event_time_p = create_moment_ote1_csv_path(moment_mstr_dir, amy45_str)
-    a23_event_time_csv = f"""{moment_label_str()},{wx.belief_name},{wx.event_int},{wx.bud_time},{wx.error_message}
+    a23_event_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.event_int},{wx.bud_time},{wx.error_message}
 {amy23_str},{bob_str},{event3},{timepoint55},
 """
-    a45_event_time_csv = f"""{moment_label_str()},{wx.belief_name},{wx.event_int},{wx.bud_time},{wx.error_message}
+    a45_event_time_csv = f"""{wx.moment_label},{wx.belief_name},{wx.event_int},{wx.bud_time},{wx.error_message}
 {amy45_str},{sue_str},{event3},{timepoint55},
 {amy45_str},{sue_str},{event7},{timepoint66},
 """

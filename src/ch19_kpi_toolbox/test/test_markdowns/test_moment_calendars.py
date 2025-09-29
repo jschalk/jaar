@@ -72,7 +72,7 @@ def test_create_calendar_markdown_files_Senario1_CreatesFileFromMomentUnitJSON(
 #     br00011_columns = [
 #         wx.event_int,
 #         wx.face_name,
-#         moment_label_str(),
+#         wx.moment_label,
 #         wx.belief_name,
 #         wx.voice_name
 #     ]

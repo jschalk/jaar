@@ -7,10 +7,10 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
     Ch10Keywords as wx,
-    moment_label_str,
 )
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
@@ -243,8 +243,8 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_packunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(moment_label_str()) is not None
-    assert x_dict.get(moment_label_str()) == amy45_str
+    assert x_dict.get(wx.moment_label) is not None
+    assert x_dict.get(wx.moment_label) == amy45_str
     assert x_dict.get(wx.belief_name) is not None
     assert x_dict.get(wx.belief_name) == bob_str
     assert x_dict.get(wx.face_name) is not None
@@ -322,8 +322,8 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(moment_label_str()) is not None
-    assert total_dict.get(moment_label_str()) == amy45_str
+    assert total_dict.get(wx.moment_label) is not None
+    assert total_dict.get(wx.moment_label) == amy45_str
     assert total_dict.get(wx.belief_name) is not None
     assert total_dict.get(wx.belief_name) == bob_str
     assert total_dict.get(wx.face_name) is not None

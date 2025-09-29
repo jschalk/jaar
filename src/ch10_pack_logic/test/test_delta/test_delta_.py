@@ -8,9 +8,9 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    plan_rope_str,
 )
 from src.ch10_pack_logic.delta import (
     BeliefDelta,
@@ -333,9 +333,9 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_PlanUnitsSorted():
     knee_rope = create_rope(x_moment_label, knee_str)
     x_dimen = wx.belief_planunit
     sports_insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
-    sports_insert_planunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
+    sports_insert_planunit_beliefatom.set_jkey(wx.plan_rope, sports_rope)
     knee_insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
-    knee_insert_planunit_beliefatom.set_jkey(plan_rope_str(), knee_rope)
+    knee_insert_planunit_beliefatom.set_jkey(wx.plan_rope, knee_rope)
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(knee_insert_planunit_beliefatom)
     x_beliefdelta.set_beliefatom(sports_insert_planunit_beliefatom)
@@ -368,10 +368,10 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_Rope_Sorted():
     swimmers_str = ",Swimmers"
     sports_awardunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     sports_awardunit_beliefatom.set_jkey(wx.awardee_title, swimmers_str)
-    sports_awardunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
+    sports_awardunit_beliefatom.set_jkey(wx.plan_rope, sports_rope)
     knee_awardunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     knee_awardunit_beliefatom.set_jkey(wx.awardee_title, swimmers_str)
-    knee_awardunit_beliefatom.set_jkey(plan_rope_str(), knee_rope)
+    knee_awardunit_beliefatom.set_jkey(wx.plan_rope, knee_rope)
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(knee_awardunit_beliefatom)
     x_beliefdelta.set_beliefatom(sports_awardunit_beliefatom)

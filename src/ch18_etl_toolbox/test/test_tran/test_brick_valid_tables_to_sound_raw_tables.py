@@ -3,10 +3,10 @@ from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch18Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
@@ -39,7 +39,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
         br00117_columns = [
             wx.event_int,
             wx.face_name,
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
             wx.voice_name,
             wx.otx_rope,
@@ -49,7 +49,7 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
   {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
 , {wx.otx_rope}

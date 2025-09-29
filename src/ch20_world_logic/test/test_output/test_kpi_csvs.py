@@ -4,9 +4,9 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch19Keywords as wx,
-    moment_label_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -46,7 +46,7 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     br00011_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]

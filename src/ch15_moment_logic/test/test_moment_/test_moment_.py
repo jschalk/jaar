@@ -28,9 +28,9 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch08Keywords as wx,
     Ch15Keywords as wx,
-    moment_label_str,
 )
 from src.ch15_moment_logic.moment_main import (
     MomentUnit,
@@ -69,7 +69,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment._packs_dir
     assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
-        moment_label_str(),
+        wx.moment_label,
         wx.timeline,
         wx.beliefbudhistorys,
         wx.paybook,

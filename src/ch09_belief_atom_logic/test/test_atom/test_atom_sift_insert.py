@@ -3,11 +3,10 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
     fact_context_str,
-    healer_name_str,
-    plan_rope_str,
     reason_context_str,
     reason_state_str,
 )
@@ -77,13 +76,13 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_planunit():
     sweep_rope = sue_belief.make_rope(clean_rope, sweep_str)
 
     root_atom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    root_atom.set_arg(plan_rope_str(), root_rope)
+    root_atom.set_arg(wx.plan_rope, root_rope)
     casa_atom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    casa_atom.set_arg(plan_rope_str(), casa_rope)
+    casa_atom.set_arg(wx.plan_rope, casa_rope)
     clean_atom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    clean_atom.set_arg(plan_rope_str(), clean_rope)
+    clean_atom.set_arg(wx.plan_rope, clean_rope)
     sweep_atom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    sweep_atom.set_arg(plan_rope_str(), sweep_rope)
+    sweep_atom.set_arg(wx.plan_rope, sweep_rope)
     assert not sift_beliefatom(sue_belief, root_atom)
     assert sift_beliefatom(sue_belief, casa_atom)
     assert sift_beliefatom(sue_belief, clean_atom)
@@ -114,10 +113,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_awardunit():
     swim_str = "Swim"
 
     casa_swim_atom = beliefatom_shop(wx.belief_plan_awardunit, wx.INSERT)
-    casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
+    casa_swim_atom.set_arg(wx.plan_rope, casa_rope)
     casa_swim_atom.set_arg(wx.awardee_title, swim_str)
     clean_swim_atom = beliefatom_shop(wx.belief_plan_awardunit, wx.INSERT)
-    clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
+    clean_swim_atom.set_arg(wx.plan_rope, clean_rope)
     clean_swim_atom.set_arg(wx.awardee_title, swim_str)
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
@@ -148,10 +147,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_reasonunit():
     week_rope = sue_belief.make_l1_rope(wx.week)
 
     casa_week_atom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
-    casa_week_atom.set_arg(plan_rope_str(), casa_rope)
+    casa_week_atom.set_arg(wx.plan_rope, casa_rope)
     casa_week_atom.set_arg(reason_context_str(), week_rope)
     clean_week_atom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
-    clean_week_atom.set_arg(plan_rope_str(), clean_rope)
+    clean_week_atom.set_arg(wx.plan_rope, clean_rope)
     clean_week_atom.set_arg(reason_context_str(), week_rope)
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
@@ -184,11 +183,11 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_reason_caseunit_Exis
     thur_rope = sue_belief.make_rope(week_rope, thur_str)
 
     casa_week_atom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.INSERT)
-    casa_week_atom.set_arg(plan_rope_str(), casa_rope)
+    casa_week_atom.set_arg(wx.plan_rope, casa_rope)
     casa_week_atom.set_arg(reason_context_str(), week_rope)
     casa_week_atom.set_arg(reason_state_str(), thur_rope)
     clean_week_atom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.INSERT)
-    clean_week_atom.set_arg(plan_rope_str(), clean_rope)
+    clean_week_atom.set_arg(wx.plan_rope, clean_rope)
     clean_week_atom.set_arg(reason_context_str(), week_rope)
     clean_week_atom.set_arg(reason_state_str(), thur_rope)
     sue_belief.add_plan(casa_rope)
@@ -225,10 +224,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_partyunit():
     swim_str = "Swim"
 
     casa_swim_atom = beliefatom_shop(wx.belief_plan_partyunit, wx.INSERT)
-    casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
+    casa_swim_atom.set_arg(wx.plan_rope, casa_rope)
     casa_swim_atom.set_arg(wx.party_title, swim_str)
     clean_swim_atom = beliefatom_shop(wx.belief_plan_partyunit, wx.INSERT)
-    clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
+    clean_swim_atom.set_arg(wx.plan_rope, clean_rope)
     clean_swim_atom.set_arg(wx.party_title, swim_str)
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
@@ -259,11 +258,11 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_healerunit():
     swim_str = "Swim"
 
     casa_swim_atom = beliefatom_shop(wx.belief_plan_healerunit, wx.INSERT)
-    casa_swim_atom.set_arg(plan_rope_str(), casa_rope)
-    casa_swim_atom.set_arg(healer_name_str(), swim_str)
+    casa_swim_atom.set_arg(wx.plan_rope, casa_rope)
+    casa_swim_atom.set_arg(wx.healer_name, swim_str)
     clean_swim_atom = beliefatom_shop(wx.belief_plan_healerunit, wx.INSERT)
-    clean_swim_atom.set_arg(plan_rope_str(), clean_rope)
-    clean_swim_atom.set_arg(healer_name_str(), swim_str)
+    clean_swim_atom.set_arg(wx.plan_rope, clean_rope)
+    clean_swim_atom.set_arg(wx.healer_name, swim_str)
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)
     assert sift_beliefatom(sue_belief, casa_swim_atom)
@@ -293,10 +292,10 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_factunit():
     week_rope = sue_belief.make_l1_rope(wx.week)
 
     casa_week_atom = beliefatom_shop(wx.belief_plan_factunit, wx.INSERT)
-    casa_week_atom.set_arg(plan_rope_str(), casa_rope)
+    casa_week_atom.set_arg(wx.plan_rope, casa_rope)
     casa_week_atom.set_arg(fact_context_str(), week_rope)
     clean_week_atom = beliefatom_shop(wx.belief_plan_factunit, wx.INSERT)
-    clean_week_atom.set_arg(plan_rope_str(), clean_rope)
+    clean_week_atom.set_arg(wx.plan_rope, clean_rope)
     clean_week_atom.set_arg(fact_context_str(), week_rope)
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(clean_rope)

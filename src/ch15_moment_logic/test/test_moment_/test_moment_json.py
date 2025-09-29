@@ -11,11 +11,11 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch08Keywords as wx,
     Ch11Keywords as wx,
     Ch12Keywords as wx,
     Ch15Keywords as wx,
-    moment_label_str,
 )
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
@@ -64,7 +64,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     offi_times_str = f"{wx.offi_time}s"
     print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
-    assert x_dict.get(moment_label_str()) == a45_str
+    assert x_dict.get(wx.moment_label) == a45_str
     assert x_dict.get(wx.moment_mstr_dir) == moment_mstr_dir
     assert x_dict.get(wx.timeline) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
@@ -75,7 +75,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(wx.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
     assert x_dict.get(wx.paybook) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
-        moment_label_str(),
+        wx.moment_label,
         wx.moment_mstr_dir,
         wx.timeline,
         offi_times_str,
@@ -99,7 +99,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     # THEN
     assert not x_dict.get(wx.paybook)
     assert set(x_dict.keys()) == {
-        moment_label_str(),
+        wx.moment_label,
         wx.moment_mstr_dir,
         wx.timeline,
         f"{wx.offi_time}s",
@@ -133,7 +133,7 @@ def test_MomentUnit_get_json_ReturnsObj():
     # THEN
     print(f"{x_json=}")
     assert x_json
-    assert x_json.find(moment_label_str()) > 0
+    assert x_json.find(wx.moment_label) > 0
 
 
 def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():

@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch06Keywords as wx,
     Ch08Keywords as wx,
     Ch15Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -94,7 +94,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     assert a23_dict.get("respect_bit") is None
     assert a23_dict.get("knot") is None
     assert set(a23_dict.keys()) == {
-        moment_label_str(),
+        wx.moment_label,
         "offi_times",
         wx.timeline,
         wx.paybook,

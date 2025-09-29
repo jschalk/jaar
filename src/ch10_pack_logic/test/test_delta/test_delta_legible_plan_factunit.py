@@ -2,13 +2,13 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    plan_rope_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -24,7 +24,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithOutNumberArgs()
     fact_context_value = sue_belief.make_rope(casa_rope, "fridge status")
     fact_state_value = sue_belief.make_rope(fact_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(fact_context_str(), fact_context_value)
     swim_beliefatom.set_arg(fact_state_str(), fact_state_value)
     # print(f"{swim_beliefatom=}")
@@ -52,7 +52,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_INSERT_WithNumberArgs():
     fact_upper_value = 13
     fact_lower_value = 17
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(fact_context_str(), reason_context_value)
     swim_beliefatom.set_arg(fact_state_str(), fact_state_value)
     swim_beliefatom.set_arg(fact_upper_str(), fact_upper_value)
@@ -80,7 +80,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_UPDATE_WithOutNumberArgs()
     reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
     fact_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(fact_context_str(), reason_context_value)
     swim_beliefatom.set_arg(fact_state_str(), fact_state_value)
     # print(f"{swim_beliefatom=}")
@@ -108,7 +108,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_UPDATE_WithNumberArgs():
     fact_upper_value = 13
     fact_lower_value = 17
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(fact_context_str(), reason_context_value)
     swim_beliefatom.set_arg(fact_state_str(), fact_state_value)
     swim_beliefatom.set_arg(fact_upper_str(), fact_upper_value)
@@ -135,7 +135,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_DELETE():
     casa_rope = sue_belief.make_l1_rope("casa")
     reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
     swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(fact_context_str(), reason_context_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()

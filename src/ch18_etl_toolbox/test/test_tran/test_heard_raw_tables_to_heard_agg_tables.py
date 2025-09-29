@@ -7,10 +7,10 @@ from src.ch17_idea_logic.idea_config import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch17Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
@@ -157,7 +157,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
   {wx.event_int}
 , {wx.face_name}_inx
-, {moment_label_str()}_inx
+, {wx.moment_label}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
 , {wx.voice_cred_points}
@@ -185,7 +185,7 @@ VALUES
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
 , {wx.voice_cred_points}
@@ -227,7 +227,7 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
   {wx.event_int}
 , {wx.face_name}_inx
-, {moment_label_str()}_inx
+, {wx.moment_label}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
 , {wx.voice_cred_points}
@@ -253,7 +253,7 @@ VALUES
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
         select_sqlstr = f"""SELECT {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.belief_name}
 , {wx.voice_name}
 , {wx.voice_cred_points}

@@ -10,9 +10,9 @@ from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch15_moment_logic.moment_main import get_momentunit_from_json
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch06Keywords as wx,
     Ch15Keywords as wx,
     Ch18Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
@@ -75,7 +75,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         blfweek_h_agg = create_prime_tablename(blfweek_abbv7, "h", "agg")
         blfoffi_h_agg = create_prime_tablename(blfoffi_abbv7, "h", "agg")
         momentunit_h_agg = create_prime_tablename(momentunit_abbv7, "h", "agg")
-        where_dict = {moment_label_str(): a23_str}
+        where_dict = {wx.moment_label: a23_str}
         blfpayy_sql = create_select_query(cursor, blfpayy_h_agg, [], where_dict, True)
         momentbud_sql = create_select_query(
             cursor, momentbud_h_agg, [], where_dict, True
@@ -133,7 +133,7 @@ def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomen
         create_sound_and_heard_tables(cursor)
 
         insert_raw_sqlstr = f"""
-INSERT INTO {momentunit_h_agg_tablename} ({moment_label_str()})
+INSERT INTO {momentunit_h_agg_tablename} ({wx.moment_label})
 VALUES ('{amy23_str}'), ('{amy45_str}')
 ;
 """

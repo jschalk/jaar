@@ -11,13 +11,11 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch18Keywords as wx,
     Ch19Keywords as wx,
     active_str,
-    moment_label_str,
-    plan_rope_str,
-    pledge_str,
     task_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import populate_kpi_bundle
@@ -37,7 +35,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         moment_voice_nets_tablename = wx.moment_voice_nets
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {wx.belief_net_amount})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -79,7 +77,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_WithNoBundleID():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         moment_voice_nets_tablename = wx.moment_voice_nets
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {wx.belief_net_amount})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})

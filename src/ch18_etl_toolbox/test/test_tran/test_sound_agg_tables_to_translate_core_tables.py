@@ -6,11 +6,11 @@ from src.ch16_translate_logic.translate_main import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_TRLCORE_SOUND_AGG_SQLSTR,

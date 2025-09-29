@@ -9,6 +9,7 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch10Keywords as wx,
@@ -16,10 +17,6 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     fact_context_str,
     fact_lower_str,
     fact_state_str,
-    healer_name_str,
-    moment_label_str,
-    plan_label_str,
-    plan_rope_str,
     reason_context_str,
     reason_state_str,
 )
@@ -197,15 +194,15 @@ def test_get_translateable_args_ReturnsObj():
         reason_context_str(),
         wx.face_name,
         fact_context_str(),
-        moment_label_str(),
+        wx.moment_label,
         fact_state_str(),
         wx.group_title,
-        healer_name_str(),
+        wx.healer_name,
         wx.hour_label,
         wx.month_label,
         reason_state_str(),
         wx.belief_name,
-        plan_rope_str(),
+        wx.plan_rope,
         wx.party_title,
         wx.timeline_label,
         wx.weekday_label,
@@ -268,7 +265,7 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
 
 def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     # ESTABLISH
-    healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
+    healer_name_ERASE_str = f"{wx.healer_name}_ERASE"
     run_str = "run"
     given_belief_dimen_delete_keys = {run_str, healer_name_ERASE_str}
 
@@ -276,7 +273,7 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     otx_inx_args = find_set_otx_inx_args(given_belief_dimen_delete_keys)
 
     # THEN
-    healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
+    healer_name_ERASE_str = f"{wx.healer_name}_ERASE"
     expected_otx_inx_args = {
         f"{healer_name_ERASE_str}_otx",
         f"{healer_name_ERASE_str}_inx",
@@ -294,7 +291,7 @@ def test_get_translate_NameTerm_args_ReturnsObj():
     assert translate_NameTerm_args == {
         wx.voice_name,
         wx.face_name,
-        healer_name_str(),
+        wx.healer_name,
         wx.belief_name,
     }
     expected_args = {
@@ -329,7 +326,7 @@ def test_get_translate_LabelTerm_args_ReturnsObj():
 
     # THEN
     assert translate_LabelTerm_args == {
-        moment_label_str(),
+        wx.moment_label,
         wx.hour_label,
         wx.month_label,
         wx.timeline_label,
@@ -351,7 +348,7 @@ def test_get_translate_RopeTerm_args_ReturnsObj():
     assert translate_RopeTerm_args == {
         fact_state_str(),
         fact_context_str(),
-        plan_rope_str(),
+        wx.plan_rope,
         reason_context_str(),
         reason_state_str(),
     }

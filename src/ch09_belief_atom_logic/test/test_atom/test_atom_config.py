@@ -8,18 +8,11 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    denom_str,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
-    gogo_want_str,
-    healer_name_str,
-    morph_str,
-    numor_str,
-    plan_rope_str,
     reason_context_str,
     reason_state_str,
-    stop_want_str,
 )
 from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 from src.ch09_belief_atom_logic.atom_config import (
@@ -344,8 +337,8 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if plan_rope_str() in new_jkey_keys:
-            new_jkey_keys.remove(plan_rope_str())
+        if wx.plan_rope in new_jkey_keys:
+            new_jkey_keys.remove(wx.plan_rope)
         if reason_context_str() in new_jkey_keys:
             new_jkey_keys.remove(reason_context_str())
         if wx.voice_name in new_jkey_keys:
@@ -387,7 +380,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_belief_plan_reason_caseunit():
 
     # THEN
     assert x_sorted_jkey_keys == [
-        plan_rope_str(),
+        wx.plan_rope,
         reason_context_str(),
         reason_state_str(),
     ]
@@ -515,12 +508,12 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     plan_columns = cat_plan.get(columns_str)
     assert len(plan_columns) == 13
     assert plan_columns.get("uid") is not None
-    assert plan_columns.get(plan_rope_str()) is not None
+    assert plan_columns.get(wx.plan_rope) is not None
     assert plan_columns.get(wx.begin) is not None
     assert plan_columns.get(wx.close) is not None
 
-    gogo_want_dict = plan_columns.get(gogo_want_str())
-    stop_want_dict = plan_columns.get(stop_want_str())
+    gogo_want_dict = plan_columns.get(wx.gogo_want)
+    stop_want_dict = plan_columns.get(wx.stop_want)
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
     assert gogo_want_dict.get(wx.sqlite_datatype) == "REAL"
@@ -535,10 +528,10 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_atom_args_dimen_mapping
-    assert x_atom_args_dimen_mapping.get(stop_want_str())
-    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {wx.belief_planunit}
-    assert x_atom_args_dimen_mapping.get(plan_rope_str())
-    rope_dimens = x_atom_args_dimen_mapping.get(plan_rope_str())
+    assert x_atom_args_dimen_mapping.get(wx.stop_want)
+    assert x_atom_args_dimen_mapping.get(wx.stop_want) == {wx.belief_planunit}
+    assert x_atom_args_dimen_mapping.get(wx.plan_rope)
+    rope_dimens = x_atom_args_dimen_mapping.get(wx.plan_rope)
     assert wx.belief_plan_factunit in rope_dimens
     assert wx.belief_plan_partyunit in rope_dimens
     assert len(rope_dimens) == 7
@@ -561,7 +554,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_class_type(wx.belief_voiceunit, wx.voice_name) == wx.NameTerm
-    assert get_class_type(wx.belief_planunit, gogo_want_str()) == "float"
+    assert get_class_type(wx.belief_planunit, wx.gogo_want) == "float"
 
 
 def test_get_allowed_class_types_ReturnsObj():
@@ -642,7 +635,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.voice_debt_points) == "float"
     assert x_class_types.get(wx.group_debt_points) == "float"
     assert x_class_types.get(wx.debtor_respect) == "float"
-    assert x_class_types.get(denom_str()) == "int"
+    assert x_class_types.get(wx.denom) == "int"
     assert x_class_types.get("reason_divisor") == "int"
     assert x_class_types.get(fact_context_str()) == wx.RopeTerm
     assert x_class_types.get(fact_upper_str()) == "float"
@@ -650,23 +643,23 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.fund_iota) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
-    assert x_class_types.get(gogo_want_str()) == "float"
+    assert x_class_types.get(wx.gogo_want) == "float"
     assert x_class_types.get(wx.group_title) == wx.TitleTerm
-    assert x_class_types.get(healer_name_str()) == wx.NameTerm
+    assert x_class_types.get(wx.healer_name) == wx.NameTerm
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
-    assert x_class_types.get(morph_str()) == "bool"
+    assert x_class_types.get(wx.morph) == "bool"
     assert x_class_types.get(reason_state_str()) == wx.RopeTerm
     assert x_class_types.get("reason_upper") == "float"
-    assert x_class_types.get(numor_str()) == "int"
+    assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(wx.penny) == "float"
     assert x_class_types.get("fact_state") == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(plan_rope_str()) == wx.RopeTerm
+    assert x_class_types.get(wx.plan_rope) == wx.RopeTerm
     assert x_class_types.get(wx.solo) == "int"
-    assert x_class_types.get(stop_want_str()) == "float"
+    assert x_class_types.get(wx.stop_want) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
     assert x_class_types.get(wx.party_title) == wx.TitleTerm

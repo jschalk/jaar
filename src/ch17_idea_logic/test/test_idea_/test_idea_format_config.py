@@ -6,15 +6,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
-    denom_str,
-    gogo_want_str,
-    moment_label_str,
-    morph_str,
-    numor_str,
-    plan_rope_str,
-    pledge_str,
-    star_str,
-    stop_want_str,
 )
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
@@ -85,7 +76,7 @@ def test_get_headers_list_ReturnsObj():
     assert format_00021_headers == [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.voice_cred_points,
@@ -207,13 +198,13 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
         wx.voice_debt_points: {wx.otx_key: False},
         wx.event_int: {wx.otx_key: True},
         wx.face_name: {wx.otx_key: True},
-        moment_label_str(): {wx.otx_key: True},
+        wx.moment_label: {wx.otx_key: True},
         wx.belief_name: {wx.otx_key: True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == wx.event_int
     assert headers_list[1] == wx.face_name
-    assert headers_list[2] == moment_label_str()
+    assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
     assert headers_list[4] == wx.voice_name
     assert headers_list[5] == wx.voice_cred_points
@@ -232,7 +223,7 @@ def test_get_idearef_obj_HasAttrs_idea_format_00020_belief_voice_membership_v0_0
     headers_list = format_00021_idearef.get_headers_list()
     assert headers_list[0] == wx.event_int
     assert headers_list[1] == wx.face_name
-    assert headers_list[2] == moment_label_str()
+    assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
     assert headers_list[4] == wx.voice_name
     assert headers_list[5] == wx.group_title
@@ -252,11 +243,11 @@ def test_get_idearef_obj_HasAttrs_idea_format_00013_planunit_v0_0_0():
     headers_list = format_00003_idearef.get_headers_list()
     assert headers_list[0] == wx.event_int
     assert headers_list[1] == wx.face_name
-    assert headers_list[2] == moment_label_str()
+    assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
-    assert headers_list[4] == plan_rope_str()
-    assert headers_list[5] == star_str()
-    assert headers_list[6] == pledge_str()
+    assert headers_list[4] == wx.plan_rope
+    assert headers_list[5] == wx.star
+    assert headers_list[6] == wx.pledge
 
 
 def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
@@ -271,14 +262,14 @@ def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
     headers_list = format_00019_idearef.get_headers_list()
     assert headers_list[0] == wx.event_int
     assert headers_list[1] == wx.face_name
-    assert headers_list[2] == moment_label_str()
+    assert headers_list[2] == wx.moment_label
     assert headers_list[3] == wx.belief_name
-    assert headers_list[4] == plan_rope_str()
+    assert headers_list[4] == wx.plan_rope
     assert headers_list[5] == wx.begin
     assert headers_list[6] == wx.close
     assert headers_list[7] == wx.addin
-    assert headers_list[8] == numor_str()
-    assert headers_list[9] == denom_str()
-    assert headers_list[10] == morph_str()
-    assert headers_list[11] == gogo_want_str()
-    assert headers_list[12] == stop_want_str()
+    assert headers_list[8] == wx.numor
+    assert headers_list[9] == wx.denom
+    assert headers_list[10] == wx.morph
+    assert headers_list[11] == wx.gogo_want
+    assert headers_list[12] == wx.stop_want

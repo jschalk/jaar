@@ -8,11 +8,11 @@ from src.ch01_data_toolbox.db_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch17Keywords as wx,
     Ch18Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
@@ -40,7 +40,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
         wx.hour_label,
     ]
     a23_str = "amy23"
@@ -124,7 +124,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
         wx.hour_label,
     ]
     a23_str = "amy23"
@@ -135,7 +135,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
     ]
     incom_row1 = [event1, sue_str, minute_360, a23_str]
     incom_row2 = [event1, sue_str, minute_420, a23_str]
@@ -216,7 +216,7 @@ ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
 #         wx.event_int,
 #         wx.face_name,
 #         wx.cumulative_minute,
-#         moment_label_str(),
+#         wx.moment_label,
 #         wx.hour_label,
 #     ]
 #     a23_str = "amy23"

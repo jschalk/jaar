@@ -4,8 +4,8 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch11Keywords as wx,
-    moment_label_str,
 )
 from src.ch15_moment_logic.ch15_path import (
     BUD_MANDATE_FILENAME,
@@ -43,7 +43,7 @@ def test_create_bud_voice_mandate_ledger_path_HasDocString():
     # ESTABLISH
     doc_str = create_bud_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
-        moment_label=moment_label_str(),
+        moment_label=wx.moment_label,
         belief_name=wx.belief_name,
         bud_time=wx.bud_time,
     )

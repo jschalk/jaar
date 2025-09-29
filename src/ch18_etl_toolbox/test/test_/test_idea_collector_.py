@@ -3,9 +3,9 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.idea_collector import (
     IdeaFileRef,
@@ -95,7 +95,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
         wx.hour_label,
     ]
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
@@ -134,7 +134,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
         wx.hour_label,
     ]
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
@@ -143,7 +143,7 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
     ]
     incom_row1 = [event1, sue_str, minute_360, amy23_str]
     incom_row2 = [event1, sue_str, minute_420, amy23_str]

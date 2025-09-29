@@ -2,10 +2,9 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    healer_name_str,
-    plan_rope_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -19,8 +18,8 @@ def test_create_legible_list_ReturnsObj_plan_healerunit_INSERT():
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     healer_name_value = f"{sue_belief.knot}Swimmers"
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(healer_name_str(), healer_name_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.healer_name, healer_name_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -42,8 +41,8 @@ def test_create_legible_list_ReturnsObj_plan_healerunit_DELETE():
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     healer_name_value = f"{sue_belief.knot}Swimmers"
     swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(healer_name_str(), healer_name_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.healer_name, healer_name_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)

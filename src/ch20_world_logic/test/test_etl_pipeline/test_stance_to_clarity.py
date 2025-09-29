@@ -8,12 +8,12 @@ from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch18Keywords as wx,
-    moment_label_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -35,7 +35,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.otx_name,
@@ -51,7 +51,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
 
     br00001_columns = [
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.bud_time,
         wx.quota,
@@ -132,7 +132,7 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
     agg_br00003_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.cumulative_minute,
         wx.hour_label,
     ]
@@ -142,7 +142,7 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
   {wx.event_int}
 , {wx.face_name}
-, {moment_label_str()}
+, {wx.moment_label}
 , {wx.cumulative_minute}
 , {wx.hour_label}
 )"""
@@ -167,7 +167,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.otx_name,

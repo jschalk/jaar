@@ -6,12 +6,12 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch09Keywords as wx,
     Ch11Keywords as wx,
     Ch15Keywords as wx,
-    moment_label_str,
 )
 from src.ch15_moment_logic.moment_config import (
     get_moment_args_class_types,
@@ -142,7 +142,7 @@ def test_get_moment_args_dimen_mapping_ReturnsObj():
     x_hour = {wx.moment_timeline_hour}
     assert x_moment_args_dimen_mapping.get(wx.cumulative_minute) == x_hour
     assert x_moment_args_dimen_mapping.get(wx.fund_iota)
-    moment_label_dimens = x_moment_args_dimen_mapping.get(moment_label_str())
+    moment_label_dimens = x_moment_args_dimen_mapping.get(wx.moment_label)
     assert wx.moment_timeline_hour in moment_label_dimens
     assert wx.momentunit in moment_label_dimens
     assert len(moment_label_dimens) == 7
@@ -206,7 +206,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.cumulative_day,
         wx.cumulative_minute,
         wx.hour_label,
-        moment_label_str(),
+        wx.moment_label,
         wx.fund_iota,
         wx.month_label,
         wx.monthday_distortion,

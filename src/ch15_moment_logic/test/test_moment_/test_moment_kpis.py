@@ -3,10 +3,6 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
-    denom_str,
-    morph_str,
-    numor_str,
-    plan_label_str,
 )
 from src.ch15_moment_logic.moment_report import (
     get_moment_guts_agenda_dataframe,
@@ -128,14 +124,14 @@ def test_get_moment_guts_agenda_dataframe_ReturnsObj(
     agenda_colums = {
         wx.belief_name,
         "fund_ratio",
-        plan_label_str(),
+        wx.plan_label,
         wx.parent_rope,
         wx.begin,
         wx.close,
         wx.addin,
-        denom_str(),
-        numor_str(),
-        morph_str(),
+        wx.denom,
+        wx.numor,
+        wx.morph,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)
@@ -174,9 +170,9 @@ def test_get_moment_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
         wx.begin,
         wx.close,
         wx.addin,
-        denom_str(),
-        numor_str(),
-        morph_str(),
+        wx.denom,
+        wx.numor,
+        wx.morph,
     }
     print(f"{set(x_df.columns)=}")
     print(x_df)

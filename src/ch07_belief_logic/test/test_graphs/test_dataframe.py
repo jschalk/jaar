@@ -1,10 +1,6 @@
 from src.ch07_belief_logic._ref.ch07_keywords import (
     Ch02Keywords as wx,
     Ch06Keywords as wx,
-    denom_str,
-    morph_str,
-    numor_str,
-    plan_label_str,
 )
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_report import (
@@ -90,14 +86,14 @@ def test_get_belief_agenda_dataframe_ReturnsDataFrame():
     voiceunit_colums = {
         "belief_name",
         "fund_ratio",
-        plan_label_str(),
+        wx.plan_label,
         wx.parent_rope,
         wx.begin,
         wx.close,
         wx.addin,
-        denom_str(),
-        numor_str(),
-        morph_str(),
+        wx.denom,
+        wx.numor,
+        wx.morph,
     }
     print(f"{set(x_df.columns)=}")
 
@@ -118,14 +114,14 @@ def test_get_belief_agenda_dataframe_ReturnsEmptyDataFrame():
     voiceunit_colums = {
         "belief_name",
         "fund_ratio",
-        plan_label_str(),
+        wx.plan_label,
         wx.parent_rope,
         wx.begin,
         wx.close,
         wx.addin,
-        denom_str(),
-        numor_str(),
-        morph_str(),
+        wx.denom,
+        wx.numor,
+        wx.morph,
     }
     print(f"{set(x_df.columns)=}")
 

@@ -9,15 +9,13 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    gogo_want_str,
-    moment_label_str,
-    plan_rope_str,
 )
 from src.ch17_idea_logic.idea_config import get_idea_config_dict, get_idea_formats_dir
 from src.ch17_idea_logic.test._util.ch17_env import (
@@ -32,7 +30,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get(wx.idea_category) == "belief":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {moment_label_str(), wx.belief_name}
+            attributes_set = {wx.moment_label, wx.belief_name}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -56,10 +54,10 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     assert belief_planunit_dict.get(wx.dimens) == [wx.belief_planunit]
     assert belief_planunit_dict.get(wx.attributes)
     belief_planunit_attributes = belief_planunit_dict.get(wx.attributes)
-    assert moment_label_str() in belief_planunit_attributes
+    assert wx.moment_label in belief_planunit_attributes
     assert wx.belief_name in belief_planunit_attributes
-    assert plan_rope_str() in belief_planunit_attributes
-    assert gogo_want_str() in belief_planunit_attributes
+    assert wx.plan_rope in belief_planunit_attributes
+    assert wx.gogo_want in belief_planunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 
@@ -78,7 +76,7 @@ def test_get_idea_brick_md_ReturnsObj():
             wx.c400_number: {wx.otx_key: False},
             wx.event_int: {wx.otx_key: True},
             wx.face_name: {wx.otx_key: True},
-            moment_label_str(): {wx.otx_key: True},
+            wx.moment_label: {wx.otx_key: True},
             wx.fund_iota: {wx.otx_key: False},
             wx.job_listen_rotations: {wx.otx_key: False},
             wx.monthday_distortion: {wx.otx_key: False},
@@ -103,7 +101,7 @@ def test_get_idea_brick_md_ReturnsObj():
 ## Attributes
 - `{wx.event_int}`
 - `{wx.face_name}`
-- `{moment_label_str()}`
+- `{wx.moment_label}`
 - `{wx.timeline_label}`
 - `{wx.c400_number}`
 - `{wx.yr1_jan1_offset}`
@@ -127,7 +125,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
             wx.c400_number: {wx.otx_key: False},
             wx.event_int: {wx.otx_key: True},
             wx.face_name: {wx.otx_key: True},
-            moment_label_str(): {wx.otx_key: True},
+            wx.moment_label: {wx.otx_key: True},
             wx.fund_iota: {wx.otx_key: False},
             wx.job_listen_rotations: {wx.otx_key: False},
             wx.monthday_distortion: {wx.otx_key: False},
@@ -152,7 +150,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 ## Attributes
 - `{wx.event_int}`
 - `{wx.face_name}`
-- `{moment_label_str()}`
+- `{wx.moment_label}`
 - `{wx.timeline_label}`
 - `{wx.c400_number}`
 - `{wx.yr1_jan1_offset}`

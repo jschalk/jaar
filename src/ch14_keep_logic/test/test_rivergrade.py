@@ -1,4 +1,4 @@
-from src.ch14_keep_logic._ref.ch14_keywords import moment_label_str
+from src.ch14_keep_logic._ref.ch14_keywords import Ch06Keywords as wx
 from src.ch14_keep_logic.rivercycle import RiverGrade, rivergrade_shop
 from src.ch14_keep_logic.test._util.ch14_examples import example_yao_hubunit
 
@@ -173,7 +173,7 @@ def test_RiverGrade_to_dict_ReturnsObj():
     rivergrade_dict = x_rivergrade.to_dict()
 
     # THEN
-    assert rivergrade_dict.get(moment_label_str()) == yao_hubunit.moment_label
+    assert rivergrade_dict.get(wx.moment_label) == yao_hubunit.moment_label
     assert rivergrade_dict.get("healer_name") == yao_hubunit.belief_name
     assert rivergrade_dict.get("keep_rope") == yao_hubunit.keep_rope
     assert rivergrade_dict.get("tax_bill_amount") == x_tax_bill_amount

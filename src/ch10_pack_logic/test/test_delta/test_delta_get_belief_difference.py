@@ -19,18 +19,12 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    gogo_want_str,
-    healer_name_str,
-    plan_rope_str,
-    pledge_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_divisor_str,
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
-    star_str,
-    stop_want_str,
 )
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
@@ -389,11 +383,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_delet
 
     x_keylist = [wx.DELETE, wx.belief_planunit, street_rope]
     street_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert street_beliefatom.get_value(plan_rope_str()) == street_rope
+    assert street_beliefatom.get_value(wx.plan_rope) == street_rope
 
     x_keylist = [wx.DELETE, wx.belief_planunit, ball_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     assert get_beliefatom_total_count(sue_beliefdelta) == 2
@@ -441,16 +435,16 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_inser
 
     x_keylist = [wx.INSERT, wx.belief_planunit, disc_rope]
     street_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert street_beliefatom.get_value(plan_rope_str()) == disc_rope
+    assert street_beliefatom.get_value(wx.plan_rope) == disc_rope
 
     a45_rope = after_sue_belief.make_l1_rope(amy45_str)
     x_keylist = [wx.INSERT, wx.belief_planunit, a45_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == a45_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == a45_rope
     assert ball_beliefatom.get_value(wx.begin) == amy_begin
     assert ball_beliefatom.get_value(wx.close) == amy_close
-    assert ball_beliefatom.get_value(star_str()) == amy_star
-    assert ball_beliefatom.get_value(pledge_str()) == amy_pledge
+    assert ball_beliefatom.get_value(wx.star) == amy_star
+    assert ball_beliefatom.get_value(wx.pledge) == amy_pledge
 
     assert get_beliefatom_total_count(sue_beliefdelta) == 2
 
@@ -500,11 +494,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_updat
 
     x_keylist = [wx.UPDATE, wx.belief_planunit, amy45_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == amy45_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == amy45_rope
     assert ball_beliefatom.get_value(wx.begin) == after_amy_begin
     assert ball_beliefatom.get_value(wx.close) == after_amy_close
-    assert ball_beliefatom.get_value(star_str()) == after_amy_star
-    assert ball_beliefatom.get_value(pledge_str()) == after_amy_pledge
+    assert ball_beliefatom.get_value(wx.star) == after_amy_star
+    assert ball_beliefatom.get_value(wx.pledge) == after_amy_pledge
 
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -554,7 +548,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
 
     x_keylist = [wx.DELETE, wx.belief_plan_awardunit, disc_rope, run_str]
     run_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert run_beliefatom.get_value(plan_rope_str()) == disc_rope
+    assert run_beliefatom.get_value(wx.plan_rope) == disc_rope
     assert run_beliefatom.get_value(wx.awardee_title) == run_str
 
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
@@ -606,9 +600,9 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
 
     x_keylist = [wx.INSERT, wx.belief_plan_awardunit, disc_rope, run_str]
     run_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert run_beliefatom.get_value(plan_rope_str()) == disc_rope
+    assert run_beliefatom.get_value(wx.plan_rope) == disc_rope
     assert run_beliefatom.get_value(wx.awardee_title) == run_str
-    assert run_beliefatom.get_value(plan_rope_str()) == disc_rope
+    assert run_beliefatom.get_value(wx.plan_rope) == disc_rope
     assert run_beliefatom.get_value(wx.awardee_title) == run_str
     assert run_beliefatom.get_value(wx.give_force) == after_run_give_force
     assert run_beliefatom.get_value(wx.take_force) == after_run_take_force
@@ -655,7 +649,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
 
     x_keylist = [wx.UPDATE, wx.belief_plan_awardunit, ball_rope, run_str]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(wx.awardee_title) == run_str
     assert ball_beliefatom.get_value(wx.give_force) == after_give_force
     assert ball_beliefatom.get_value(wx.take_force) == after_take_force
@@ -704,7 +698,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
 
     x_keylist = [wx.UPDATE, wx.belief_plan_factunit, ball_rope, knee_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
     assert ball_beliefatom.get_value(fact_state_str()) == damaged_rope
     assert ball_beliefatom.get_value(fact_lower_str()) == after_fact_lower
@@ -745,7 +739,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
     x_keylist = [wx.INSERT, wx.belief_plan_factunit, ball_rope, knee_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     print(f"{ball_beliefatom=}")
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
     assert ball_beliefatom.get_value(fact_state_str()) == damaged_rope
     assert ball_beliefatom.get_value(fact_lower_str()) == after_fact_lower
@@ -788,7 +782,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
     x_keylist = [wx.DELETE, wx.belief_plan_factunit, ball_rope, knee_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -842,7 +836,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
         damaged_rope,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
     assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
     assert ball_beliefatom.get_value(reason_lower_str()) == damaged_reason_lower
@@ -904,7 +898,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
         damaged_rope,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
     assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
@@ -970,7 +964,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
         damaged_rope,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
     assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
     assert ball_beliefatom.get_value(reason_lower_str()) == after_damaged_reason_lower
@@ -1019,7 +1013,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
 
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert (
         ball_beliefatom.get_value(reason_active_requisite_str())
@@ -1071,7 +1065,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
         medical_rope,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert (
         ball_beliefatom.get_value(reason_active_requisite_str())
@@ -1119,7 +1113,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
         medical_rope,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -1153,7 +1147,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_party
         xio_str,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(wx.party_title) == xio_str
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -1189,7 +1183,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_party
         xio_str,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value(wx.party_title) == xio_str
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
@@ -1223,8 +1217,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
         xio_str,
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value(healer_name_str()) == xio_str
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
+    assert ball_beliefatom.get_value(wx.healer_name) == xio_str
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -1258,8 +1252,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist, True)
     assert ball_beliefatom
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value(healer_name_str()) == xio_str
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
+    assert ball_beliefatom.get_value(wx.healer_name) == xio_str
     assert get_beliefatom_total_count(sue_beliefdelta) == 3
 
 
@@ -1297,8 +1291,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
         sue_beliefdelta.beliefatoms, x_keylist, if_missing_return_None=True
     )
     assert ball_beliefatom
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value(healer_name_str()) == xio_str
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
+    assert ball_beliefatom.get_value(wx.healer_name) == xio_str
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -1335,8 +1329,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
         sue_beliefdelta.beliefatoms, x_keylist, if_missing_return_None=True
     )
     assert ball_beliefatom
-    assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
-    assert ball_beliefatom.get_value(healer_name_str()) == xio_str
+    assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
+    assert ball_beliefatom.get_value(wx.healer_name) == xio_str
     assert get_beliefatom_total_count(sue_beliefdelta) == 2
 
 

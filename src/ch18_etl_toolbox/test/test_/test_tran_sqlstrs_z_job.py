@@ -5,9 +5,9 @@ from src.ch17_idea_logic.idea_config import get_idea_sqlite_types
 from src.ch17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch12Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_job_tables,
@@ -29,7 +29,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         x_config = belief_config.get(x_dimen)
 
         job_table = prime_table(x_dimen, wx.job, None)
-        job_cols = {moment_label_str(), wx.belief_name}
+        job_cols = {wx.moment_label, wx.belief_name}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
         job_cols = get_default_sorted_list(job_cols)

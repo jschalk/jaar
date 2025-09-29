@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch11_bud_logic._ref.ch11_keywords import moment_label_str
+from src.ch11_bud_logic._ref.ch11_keywords import Ch06Keywords as wx
 from src.ch11_bud_logic.bud import (
     TranBook,
     TranUnit,
@@ -619,8 +619,8 @@ def test_TranBook_to_dict_ReturnsObj():
     # THEN
     tranunits_str = "tranunits"
     assert x_dict
-    assert moment_label_str() in x_dict.keys()
-    assert x_dict.get(moment_label_str()) == amy23_str
+    assert wx.moment_label in x_dict.keys()
+    assert x_dict.get(wx.moment_label) == amy23_str
     assert tranunits_str in x_dict.keys()
     tranunits_dict = x_dict.get(tranunits_str)
     assert tranunits_dict.get(sue_str)

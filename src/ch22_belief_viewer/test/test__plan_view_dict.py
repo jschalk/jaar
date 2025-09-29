@@ -9,43 +9,13 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch08Keywords as wx,
-    active_hx_str,
     active_str,
-    all_voice_cred_str,
-    all_voice_debt_str,
-    awardheirs_str,
-    awardlines_str,
     cases_str,
-    denom_str,
-    descendant_pledge_count_str,
     factheirs_str,
     factunits_str,
-    fund_cease_str,
-    fund_onset_str,
-    fund_ratio_str,
-    fund_share_str,
-    gogo_calc_str,
-    gogo_want_str,
-    healerunit_ratio_str,
-    healerunit_str,
-    is_expanded_str,
-    kids_str,
-    moment_label_str,
-    morph_str,
-    numor_str,
-    plan_label_str,
-    pledge_str,
-    problem_bool_str,
-    range_evaluated_str,
     reason_state_str,
-    reasonheirs_str,
     reasonunits_str,
-    star_str,
-    stop_calc_str,
-    stop_want_str,
     task_str,
-    tree_level_str,
-    uid_str,
 )
 from src.ch22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
 from src.ch22_belief_viewer.example22_beliefs import (
@@ -78,51 +48,51 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # for dict_key, value in casa_dict.items():
     #     print(f"{dict_key=} \t\t {value=}")
     assert set(casa_dict.keys()) == {
-        plan_label_str(),
-        moment_label_str(),
+        wx.plan_label,
+        wx.moment_label,
         wx.parent_rope,
-        kids_str(),
+        wx.kids,
         "root",
-        star_str(),
-        uid_str(),
+        wx.star,
+        wx.uid,
         wx.awardunits,
         reasonunits_str(),
         wx.laborunit,
         factunits_str(),
-        healerunit_str(),
+        wx.healerunit,
         wx.begin,
         wx.close,
         wx.addin,
-        denom_str(),
-        numor_str(),
-        morph_str(),
-        gogo_want_str(),
-        stop_want_str(),
-        pledge_str(),
-        problem_bool_str(),
+        wx.denom,
+        wx.numor,
+        wx.morph,
+        wx.gogo_want,
+        wx.stop_want,
+        wx.pledge,
+        wx.problem_bool,
         wx.knot,
-        is_expanded_str(),
+        wx.is_expanded,
         active_str(),
-        active_hx_str(),
-        all_voice_cred_str(),
-        all_voice_debt_str(),
-        awardheirs_str(),
-        awardlines_str(),
-        descendant_pledge_count_str(),
+        wx.active_hx,
+        wx.all_voice_cred,
+        wx.all_voice_debt,
+        wx.awardheirs,
+        wx.awardlines,
+        wx.descendant_pledge_count,
         factheirs_str(),
-        fund_ratio_str(),
+        wx.fund_ratio,
         wx.fund_iota,
-        fund_onset_str(),
-        fund_cease_str(),
-        healerunit_ratio_str(),
-        tree_level_str(),
-        range_evaluated_str(),
-        reasonheirs_str(),
+        wx.fund_onset,
+        wx.fund_cease,
+        wx.healerunit_ratio,
+        wx.tree_level,
+        wx.range_evaluated,
+        wx.reasonheirs,
         task_str(),
         wx.laborheir,
-        gogo_calc_str(),
-        stop_calc_str(),
-        fund_share_str(),
+        wx.gogo_calc,
+        wx.stop_calc,
+        wx.fund_share,
     }
     assert casa_dict.get("healerunit") == {"_healer_names": []}
 
@@ -201,16 +171,16 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    assert casa_dict.get(fund_share_str()) > 0
+    assert casa_dict.get(wx.fund_share) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
     assert casa_dict.get(wx.parent_rope) == expected_parent_rope
     expected_all_voice_cred = f"all_voice_cred = {casa_plan.all_voice_cred}"
     expected_all_voice_debt = f"all_voice_debt = {casa_plan.all_voice_debt}"
     expected_all_voice_cred = add_small_dot(expected_all_voice_cred)
     expected_all_voice_debt = add_small_dot(expected_all_voice_debt)
-    assert casa_dict.get(all_voice_cred_str()) == expected_all_voice_cred
-    assert casa_dict.get(all_voice_debt_str()) == expected_all_voice_debt
-    assert casa_dict.get(fund_ratio_str()) == "38%"
+    assert casa_dict.get(wx.all_voice_cred) == expected_all_voice_cred
+    assert casa_dict.get(wx.all_voice_debt) == expected_all_voice_debt
+    assert casa_dict.get(wx.fund_ratio) == "38%"
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
@@ -239,7 +209,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     assert bob_awardunit_dict.get(wx.readable) == expected_bob_readable
 
     # awardheirs
-    awardheirs_dict = casa_dict.get(awardheirs_str())
+    awardheirs_dict = casa_dict.get(wx.awardheirs)
     assert len(awardheirs_dict) == 4
     # print(f"{len(awardheirs_dict)=}")
     sue_str = "Sue"
@@ -254,7 +224,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     assert bob_awardheir_dict.get(wx.readable) == add_small_dot(expected_bob_readable)
 
     # awardlines
-    awardlines_dict = casa_dict.get(awardlines_str())
+    awardlines_dict = casa_dict.get(wx.awardlines)
     assert len(awardlines_dict) == 4
     print(f"{len(awardlines_dict)=}")
     sue_str = "Sue"
@@ -436,7 +406,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
 
     # THEN
     # reasonheirs
-    play_soccer_reasonheirs_dict = play_soccer_dict.get(reasonheirs_str())
+    play_soccer_reasonheirs_dict = play_soccer_dict.get(wx.reasonheirs)
     assert len(play_soccer_reasonheirs_dict) == 2
     # print(f"{len(play_soccer_reasonheirs_dict)=}")
     best_reasonheir_dict = play_soccer_reasonheirs_dict.get(best_rope)
@@ -505,10 +475,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    gogo_want_readable = casa_dict.get(gogo_want_str())
-    stop_want_readable = casa_dict.get(stop_want_str())
-    gogo_calc_readable = casa_dict.get(gogo_calc_str())
-    stop_calc_readable = casa_dict.get(stop_calc_str())
+    gogo_want_readable = casa_dict.get(wx.gogo_want)
+    stop_want_readable = casa_dict.get(wx.stop_want)
+    gogo_calc_readable = casa_dict.get(wx.gogo_calc)
+    stop_calc_readable = casa_dict.get(wx.stop_calc)
     expected_gogo_want_readable = add_small_dot(f"gogo_want: {casa_plan.gogo_want}")
     expected_stop_want_readable = add_small_dot(f"stop_want: {casa_plan.stop_want}")
     expected_gogo_calc_readable = add_small_dot(f"gogo_calc: {casa_plan.gogo_calc}")
@@ -543,9 +513,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario9_numeric_range_attrs():
     casa_addin_readable = casa_dict.get(wx.addin)
     casa_begin_readable = casa_dict.get(wx.begin)
     casa_close_readable = casa_dict.get(wx.close)
-    casa_denom_readable = casa_dict.get(denom_str())
-    casa_morph_readable = casa_dict.get(morph_str())
-    casa_numor_readable = casa_dict.get(numor_str())
+    casa_denom_readable = casa_dict.get(wx.denom)
+    casa_morph_readable = casa_dict.get(wx.morph)
+    casa_numor_readable = casa_dict.get(wx.numor)
     expected_casa_addin_readable = add_small_dot(f"addin: {casa_plan.addin}")
     expected_casa_begin_readable = add_small_dot(f"begin: {casa_plan.begin}")
     expected_casa_close_readable = add_small_dot(f"close: {casa_plan.close}")
@@ -577,7 +547,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     # THEN
     print(f"{chicken_plan.active_hx=}")
     # sports ropes
-    chicken_active_hx_str = chicken_dict.get(active_hx_str())
+    chicken_active_hx_str = chicken_dict.get(wx.active_hx)
     expected_chicken_active_hx_str = f"active_hx: {chicken_plan.active_hx}"
     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
     assert expected_chicken_active_hx_str == chicken_active_hx_str

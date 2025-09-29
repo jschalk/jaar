@@ -37,25 +37,15 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    denom_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    gogo_want_str,
-    healer_name_str,
-    moment_label_str,
-    morph_str,
-    numor_str,
-    plan_rope_str,
-    pledge_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
-    star_str,
-    stop_want_str,
 )
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
@@ -333,28 +323,28 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.face_name) == "TEXT"
     assert sqlite_types.get("translate_event_int") == "INTEGER"
     assert sqlite_types.get(wx.event_int) == "INTEGER"
-    assert sqlite_types.get(moment_label_str()) == "TEXT"
+    assert sqlite_types.get(wx.moment_label) == "TEXT"
     assert sqlite_types.get(wx.belief_name) == "TEXT"
     assert sqlite_types.get(wx.voice_name) == "TEXT"
     assert sqlite_types.get(wx.group_title) == "TEXT"
-    assert sqlite_types.get(plan_rope_str()) == "TEXT"
+    assert sqlite_types.get(wx.plan_rope) == "TEXT"
     assert sqlite_types.get(reason_context_str()) == "TEXT"
     assert sqlite_types.get("reason_state") == "TEXT"
     assert sqlite_types.get("fact_state") == "TEXT"
     assert sqlite_types.get(wx.party_title) == "TEXT"
     assert sqlite_types.get(wx.awardee_title) == "TEXT"
-    assert sqlite_types.get(healer_name_str()) == "TEXT"
+    assert sqlite_types.get(wx.healer_name) == "TEXT"
     assert sqlite_types.get(wx.offi_time) == "INTEGER"
     assert sqlite_types.get(wx.bud_time) == "INTEGER"
     assert sqlite_types.get(wx.tran_time) == "INTEGER"
     assert sqlite_types.get(wx.begin) == "REAL"
     assert sqlite_types.get(wx.close) == "REAL"
     assert sqlite_types.get(wx.addin) == "REAL"
-    assert sqlite_types.get(numor_str()) == "INTEGER"
-    assert sqlite_types.get(denom_str()) == "INTEGER"
-    assert sqlite_types.get(morph_str()) == "INTEGER"
-    assert sqlite_types.get(gogo_want_str()) == "REAL"
-    assert sqlite_types.get(stop_want_str()) == "REAL"
+    assert sqlite_types.get(wx.numor) == "INTEGER"
+    assert sqlite_types.get(wx.denom) == "INTEGER"
+    assert sqlite_types.get(wx.morph) == "INTEGER"
+    assert sqlite_types.get(wx.gogo_want) == "REAL"
+    assert sqlite_types.get(wx.stop_want) == "REAL"
     assert sqlite_types.get(reason_active_requisite_str()) == "INTEGER"
     assert sqlite_types.get(wx.voice_cred_points) == "REAL"
     assert sqlite_types.get(wx.voice_debt_points) == "REAL"
@@ -366,7 +356,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(fact_upper_str()) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
     assert sqlite_types.get(wx.give_force) == "REAL"
-    assert sqlite_types.get(star_str()) == "INTEGER"
+    assert sqlite_types.get(wx.star) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
     assert sqlite_types.get("reason_upper") == "REAL"
     assert sqlite_types.get("reason_lower") == "REAL"
@@ -376,7 +366,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("tally") == "INTEGER"
     assert sqlite_types.get(wx.fund_iota) == "REAL"
     assert sqlite_types.get(wx.penny) == "REAL"
-    assert sqlite_types.get(pledge_str()) == "INTEGER"
+    assert sqlite_types.get(wx.pledge) == "INTEGER"
     assert sqlite_types.get(wx.respect_bit) == "REAL"
     assert sqlite_types.get(wx.amount) == "REAL"
     assert sqlite_types.get(wx.month_label) == "TEXT"
@@ -562,9 +552,9 @@ def _validate_idea_config(x_idea_config: dict):
         assert wx.face_name in idea_jkeys_keys
         assert wx.event_int in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) != "translate":
-            assert moment_label_str() in idea_jkeys_keys
+            assert wx.moment_label in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) == "belief":
-            idea_jkeys_keys.remove(moment_label_str())
+            idea_jkeys_keys.remove(wx.moment_label)
             idea_jkeys_keys.remove(wx.belief_name)
         idea_jkeys_keys.remove(wx.face_name)
         idea_jkeys_keys.remove(wx.event_int)
@@ -572,8 +562,8 @@ def _validate_idea_config(x_idea_config: dict):
 
         sub_jvalues_keys = set(sub_dimen.get(wx.jvalues).keys())
         print(f"  {sub_jvalues_keys=}")
-        if moment_label_str() in sub_jvalues_keys:
-            sub_jvalues_keys.remove(moment_label_str())
+        if wx.moment_label in sub_jvalues_keys:
+            sub_jvalues_keys.remove(wx.moment_label)
 
         idea_jvalues_dict = idea_dict.get(wx.jvalues)
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
@@ -581,7 +571,7 @@ def _validate_idea_config(x_idea_config: dict):
         # print(f"{idea_jvalues_keys=}")
         assert sub_jvalues_keys == idea_jvalues_keys
 
-        assert moment_label_str() not in idea_jvalues_keys
+        assert wx.moment_label not in idea_jvalues_keys
 
         # sort_list = get_idea_elements_sort_order()
         # x_count = 0
@@ -802,7 +792,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.event_int,
         wx.face_name,
         wx.c400_number,
-        moment_label_str(),
+        wx.moment_label,
         wx.fund_iota,
         wx.monthday_distortion,
         wx.penny,

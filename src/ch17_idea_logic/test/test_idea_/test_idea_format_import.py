@@ -1,5 +1,8 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch17_idea_logic._ref.ch17_keywords import Ch04Keywords as wx, moment_label_str
+from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch04Keywords as wx,
+    Ch06Keywords as wx,
+)
 from src.ch17_idea_logic.idea_config import idea_format_00021_belief_voiceunit_v0_0_0
 from src.ch17_idea_logic.idea_db_tool import open_csv
 from src.ch17_idea_logic.idea_main import get_idearef_obj, save_idea_csv
@@ -36,19 +39,19 @@ def test_open_csv_ReturnsObjWhenFileExists(env_dir_setup_cleanup):
     array_headers = list(voice_dataframe.columns)
     voice_idearef = get_idearef_obj(j1_ideaname)
     assert array_headers == voice_idearef.get_headers_list()
-    assert voice_dataframe.loc[0, moment_label_str()] == amy_moment_label
+    assert voice_dataframe.loc[0, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[0, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[0, wx.voice_name] == bob_str
     assert voice_dataframe.loc[0, wx.voice_cred_points] == bob_voice_cred_points
     assert voice_dataframe.loc[0, wx.voice_debt_points] == bob_voice_debt_points
 
-    assert voice_dataframe.loc[1, moment_label_str()] == amy_moment_label
+    assert voice_dataframe.loc[1, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[1, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[1, wx.voice_name] == sue_str
     assert voice_dataframe.loc[1, wx.voice_cred_points] == sue_voice_cred_points
     assert voice_dataframe.loc[1, wx.voice_debt_points] == sue_voice_debt_points
 
-    assert voice_dataframe.loc[2, moment_label_str()] == amy_moment_label
+    assert voice_dataframe.loc[2, wx.moment_label] == amy_moment_label
     assert voice_dataframe.loc[2, wx.belief_name] == sue_beliefunit.belief_name
     assert voice_dataframe.loc[2, wx.voice_name] == yao_str
     assert voice_dataframe.loc[2, wx.voice_cred_points] == yao_voice_cred_points

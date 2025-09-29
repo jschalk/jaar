@@ -5,10 +5,8 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
-    plan_rope_str,
-    pledge_str,
-    star_str,
 )
 from src.ch17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
@@ -160,15 +158,15 @@ def test_make_beliefdelta_Arg_idea_format_00013_planunit_v0_0_0():
 
     # THEN
     casa_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    casa_beliefatom.set_arg(plan_rope_str(), casa_rope)
-    casa_beliefatom.set_arg(pledge_str(), False)
-    casa_beliefatom.set_arg(star_str(), casa_star)
+    casa_beliefatom.set_arg(wx.plan_rope, casa_rope)
+    casa_beliefatom.set_arg(wx.pledge, False)
+    casa_beliefatom.set_arg(wx.star, casa_star)
     print(f"{casa_beliefatom=}")
-    assert casa_beliefatom.get_value(star_str()) == casa_star
+    assert casa_beliefatom.get_value(wx.star) == casa_star
     clean_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
-    clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
-    clean_beliefatom.set_arg(pledge_str(), True)
-    clean_beliefatom.set_arg(star_str(), 1)
+    clean_beliefatom.set_arg(wx.plan_rope, clean_rope)
+    clean_beliefatom.set_arg(wx.pledge, True)
+    clean_beliefatom.set_arg(wx.star, 1)
     assert planunit_changunit.beliefatom_exists(casa_beliefatom)
     assert planunit_changunit.beliefatom_exists(clean_beliefatom)
     assert len(planunit_changunit.get_ordered_beliefatoms()) == 2

@@ -22,6 +22,7 @@ from src.ch18_etl_toolbox.ch18_path import (
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch08Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
@@ -29,7 +30,6 @@ from src.ch20_world_logic._ref.ch20_keywords import (
     Ch16Keywords as wx,
     Ch18Keywords as wx,
     Ch19Keywords as wx,
-    moment_label_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -53,7 +53,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     br00113_columns = [
         wx.face_name,
         wx.event_int,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.otx_name,
@@ -216,7 +216,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     br00113_columns = [
         wx.face_name,
         wx.event_int,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.otx_name,
@@ -233,7 +233,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     br00001_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.bud_time,
         wx.quota,
@@ -373,7 +373,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
     br00002_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.tran_time,
@@ -413,7 +413,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
     br00011_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
@@ -482,13 +482,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         wx.event_int,
         wx.face_name,
         wx.cumulative_minute,
-        moment_label_str(),
+        wx.moment_label,
         wx.hour_label,
     ]
     br00001_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.bud_time,
         wx.quota,
@@ -515,7 +515,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     br00011_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
@@ -566,7 +566,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00113_columns = [
         wx.face_name,
         wx.event_int,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
         wx.otx_name,
@@ -583,7 +583,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     br00001_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.bud_time,
         wx.quota,

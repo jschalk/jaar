@@ -1,7 +1,10 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch04Keywords as wx, moment_label_str
+from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch04Keywords as wx,
+    Ch06Keywords as wx,
+)
 from src.ch18_etl_toolbox.ch18_path import (
     create_last_run_metrics_path,
     create_moment_mstr_path,
@@ -185,7 +188,7 @@ def test_create_world_db_path_ReturnsObj():
 
 def test_create_moment_ote1_csv_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_ote1_csv_path("moment_mstr_dir", moment_label_str())
+    doc_str = create_moment_ote1_csv_path("moment_mstr_dir", wx.moment_label)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_ote1_csv_path) == doc_str
@@ -193,7 +196,7 @@ def test_create_moment_ote1_csv_path_HasDocString():
 
 def test_create_moment_ote1_json_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_ote1_json_path("moment_mstr_dir", moment_label_str())
+    doc_str = create_moment_ote1_json_path("moment_mstr_dir", wx.moment_label)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_ote1_json_path) == doc_str

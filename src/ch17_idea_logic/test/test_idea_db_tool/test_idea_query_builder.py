@@ -1,10 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
-    moment_label_str,
-    plan_rope_str,
 )
 from src.ch17_idea_logic.idea_config import get_idea_config_dict
 from src.ch17_idea_logic.idea_db_tool import (
@@ -21,8 +20,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
         idea_cols = [
             wx.event_int,
             wx.face_name,
-            moment_label_str(),
-            plan_rope_str(),
+            wx.moment_label,
+            wx.plan_rope,
             wx.party_title,
             wx.belief_name,
             wx.voice_name,
@@ -73,8 +72,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
         idea_cols = [
             wx.event_int,
             wx.face_name,
-            moment_label_str(),
-            plan_rope_str(),
+            wx.moment_label,
+            wx.plan_rope,
             wx.party_title,
             wx.belief_name,
             wx.voice_name,
@@ -123,8 +122,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
         idea_cols = [
             wx.event_int,
             wx.face_name,
-            moment_label_str(),
-            plan_rope_str(),
+            wx.moment_label,
+            wx.plan_rope,
             wx.party_title,
             wx.belief_name,
             wx.voice_name,

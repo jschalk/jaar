@@ -10,8 +10,8 @@ from src.ch18_etl_toolbox.ch18_path import (
 )
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch10Keywords as wx,
-    moment_label_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -51,7 +51,7 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     br00011_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
@@ -89,7 +89,7 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     br00011_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
@@ -143,7 +143,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     br00011_columns = [
         wx.event_int,
         wx.face_name,
-        moment_label_str(),
+        wx.moment_label,
         wx.belief_name,
         wx.voice_name,
     ]
@@ -181,13 +181,13 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         wx.face_name,
 #         wx.event_int,
 #         wx.cumulative_minute,
-#         moment_label_str(),
+#         wx.moment_label,
 #         wx.hour_label,
 #     ]
 #     br00001_columns = [
 #         wx.face_name,
 #         wx.event_int,
-#         moment_label_str(),
+#         wx.moment_label,
 #         wx.belief_name,
 #         bud_time(),
 #         wx.quota,
@@ -214,7 +214,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     br00011_columns = [
 #         wx.face_name,
 #         wx.event_int,
-#         moment_label_str(),
+#         wx.moment_label,
 #         wx.belief_name,
 #         wx.voice_name,
 #     ]

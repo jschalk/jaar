@@ -9,9 +9,8 @@ from src.ch03_finance_logic.finance_config import (
 )
 from src.ch06_plan_logic.plan import get_default_moment_label as root_label
 from src.ch07_belief_logic._ref.ch07_keywords import (
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
-    moment_label_str,
-    tree_traverse_count_str,
 )
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
@@ -64,14 +63,14 @@ def test_BeliefUnit_Exists():
         wx.rational,
         wx.reason_contexts,
         wx.sum_healerunit_share,
-        tree_traverse_count_str(),
+        wx.tree_traverse_count,
         wx.voices,
         wx.knot,
         wx.planroot,
         wx.credor_respect,
         wx.debtor_respect,
         wx.groupunits,
-        moment_label_str(),
+        wx.moment_label,
         wx.fund_iota,
         wx.fund_pool,
         wx.last_pack_id,

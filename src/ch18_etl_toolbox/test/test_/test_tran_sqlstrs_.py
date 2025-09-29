@@ -17,6 +17,7 @@ from src.ch17_idea_logic.idea_db_tool import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
@@ -25,7 +26,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch16Keywords as wx,
     Ch17Keywords as wx,
     Ch18Keywords as wx,
-    moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
@@ -296,7 +296,7 @@ def test_CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS {wx.moment_event_time_agg} (
-  {moment_label_str()} TEXT
+  {wx.moment_label} TEXT
 , {wx.event_int} INTEGER
 , agg_time INTEGER
 , {wx.error_message} TEXT
@@ -310,18 +310,18 @@ CREATE TABLE IF NOT EXISTS {wx.moment_event_time_agg} (
 def test_INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO {wx.moment_event_time_agg} ({moment_label_str()}, {wx.event_int}, agg_time)
-SELECT {moment_label_str()}, {wx.event_int}, agg_time
+INSERT INTO {wx.moment_event_time_agg} ({wx.moment_label}, {wx.event_int}, agg_time)
+SELECT {wx.moment_label}, {wx.event_int}, agg_time
 FROM (
-    SELECT {moment_label_str()}, {wx.event_int}, {wx.tran_time} as agg_time
+    SELECT {wx.moment_label}, {wx.event_int}, {wx.tran_time} as agg_time
     FROM moment_paybook_raw
-    GROUP BY {moment_label_str()}, {wx.event_int}, {wx.tran_time}
+    GROUP BY {wx.moment_label}, {wx.event_int}, {wx.tran_time}
     UNION 
-    SELECT {moment_label_str()}, {wx.event_int}, {wx.bud_time} as agg_time
+    SELECT {wx.moment_label}, {wx.event_int}, {wx.bud_time} as agg_time
     FROM moment_budunit_raw
-    GROUP BY {moment_label_str()}, {wx.event_int}, {wx.bud_time}
+    GROUP BY {wx.moment_label}, {wx.event_int}, {wx.bud_time}
 )
-ORDER BY {moment_label_str()}, {wx.event_int}, agg_time
+ORDER BY {wx.moment_label}, {wx.event_int}, agg_time
 ;
 """
     # WHEN / THEN
@@ -332,8 +332,8 @@ def test_UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {moment_label_str()}, {wx.event_int}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {moment_label_str()} ORDER BY {wx.event_int}) AS prev_agg_time
+    SELECT {wx.moment_label}, {wx.event_int}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {wx.moment_label} ORDER BY {wx.event_int}) AS prev_agg_time
     FROM {wx.moment_event_time_agg}
 )
 UPDATE {wx.moment_event_time_agg}
@@ -344,7 +344,7 @@ SET {wx.error_message} = CASE
        END 
 FROM EventTimeOrdered
 WHERE EventTimeOrdered.{wx.event_int} = {wx.moment_event_time_agg}.{wx.event_int}
-    AND EventTimeOrdered.{moment_label_str()} = {wx.moment_event_time_agg}.{moment_label_str()}
+    AND EventTimeOrdered.{wx.moment_label} = {wx.moment_event_time_agg}.{wx.moment_label}
     AND EventTimeOrdered.agg_time = {wx.moment_event_time_agg}.agg_time
 ;
 """
@@ -356,7 +356,7 @@ def test_CREATE_MOMENT_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS {wx.moment_ote1_agg} (
-  {moment_label_str()} TEXT
+  {wx.moment_label} TEXT
 , {wx.belief_name} TEXT
 , {wx.event_int} INTEGER
 , {wx.bud_time} INTEGER
@@ -374,18 +374,18 @@ def test_INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR_Exists():
     # ESTABLISH
     momentbud_h_raw_tablename = create_prime_tablename(wx.moment_budunit, "h", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {wx.moment_ote1_agg} ({moment_label_str()}, {wx.belief_name}, {wx.event_int}, {wx.bud_time})
-SELECT {moment_label_str()}, {wx.belief_name}, {wx.event_int}, {wx.bud_time}
+INSERT INTO {wx.moment_ote1_agg} ({wx.moment_label}, {wx.belief_name}, {wx.event_int}, {wx.bud_time})
+SELECT {wx.moment_label}, {wx.belief_name}, {wx.event_int}, {wx.bud_time}
 FROM (
     SELECT 
-      {moment_label_str()}_inx {moment_label_str()}
+      {wx.moment_label}_inx {wx.moment_label}
     , {wx.belief_name}_inx {wx.belief_name}
     , {wx.event_int}
     , {wx.bud_time}
     FROM {momentbud_h_raw_tablename}
-    GROUP BY {moment_label_str()}_inx, {wx.belief_name}_inx, {wx.event_int}, {wx.bud_time}
+    GROUP BY {wx.moment_label}_inx, {wx.belief_name}_inx, {wx.event_int}, {wx.bud_time}
 )
-ORDER BY {moment_label_str()}, {wx.belief_name}, {wx.event_int}, {wx.bud_time}
+ORDER BY {wx.moment_label}, {wx.belief_name}, {wx.event_int}, {wx.bud_time}
 ;
 """
     # WHEN / THEN
@@ -399,7 +399,7 @@ def test_CREATE_MOMENT_VOICE_NETS_SQLSTR_Exists():
     expected_create_table_sqlstr = get_create_table_sqlstr(
         tablename=wx.moment_voice_nets,
         columns_list=[
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
             wx.belief_net_amount,
         ],

@@ -3,9 +3,9 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    plan_rope_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -19,7 +19,7 @@ def test_create_legible_list_ReturnsObj_plan_partyunit_INSERT():
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     party_title_value = f"{sue_belief.knot}Swimmers"
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(wx.party_title, party_title_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
@@ -42,7 +42,7 @@ def test_create_legible_list_ReturnsObj_plan_partyunit_DELETE():
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     party_title_value = f"{sue_belief.knot}Swimmers"
     swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
     swim_beliefatom.set_arg(wx.party_title, party_title_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()

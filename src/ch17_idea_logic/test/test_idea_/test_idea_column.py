@@ -1,7 +1,7 @@
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch07Keywords as wx,
-    plan_rope_str,
     reason_context_str,
 )
 from src.ch17_idea_logic.idea_main import IdeaRef, idearef_shop
@@ -73,7 +73,7 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", wx.belief_voiceunit)
-    x3_idearef.set_attribute(plan_rope_str(), True)
+    x3_idearef.set_attribute(wx.plan_rope, True)
     x3_idearef.set_attribute(wx.group_title, False)
     x3_idearef.set_attribute(wx.voice_name, True)
 
@@ -81,7 +81,7 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
     x_headers_list = x3_idearef.get_headers_list()
 
     # THEN
-    assert x_headers_list == [wx.voice_name, wx.group_title, plan_rope_str()]
+    assert x_headers_list == [wx.voice_name, wx.group_title, wx.plan_rope]
 
 
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario0():
@@ -112,7 +112,7 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", wx.belief_voiceunit)
-    x3_idearef.set_attribute(plan_rope_str(), True)
+    x3_idearef.set_attribute(wx.plan_rope, True)
     x3_idearef.set_attribute(wx.group_title, False)
     x3_idearef.set_attribute(wx.voice_name, True)
 
@@ -120,7 +120,7 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
     x_otx_keys_list = x3_idearef.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [wx.voice_name, plan_rope_str()]
+    assert x_otx_keys_list == [wx.voice_name, wx.plan_rope]
 
 
 def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario0():
@@ -151,7 +151,7 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", wx.belief_voiceunit)
-    x3_idearef.set_attribute(plan_rope_str(), True)
+    x3_idearef.set_attribute(wx.plan_rope, True)
     x3_idearef.set_attribute(wx.group_title, False)
     x3_idearef.set_attribute(reason_context_str(), False)
     x3_idearef.set_attribute(wx.voice_name, False)

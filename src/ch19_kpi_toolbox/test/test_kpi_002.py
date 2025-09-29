@@ -11,11 +11,9 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch19Keywords as wx,
     active_str,
-    moment_label_str,
-    plan_rope_str,
-    pledge_str,
     task_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi002_table
@@ -36,10 +34,10 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("BLRPLAN", "job", None)
         insert_sqlstr = f"""INSERT INTO {job_blrplan_tablename} (
-  {moment_label_str()}
+  {wx.moment_label}
 , {wx.belief_name}
-, {plan_rope_str()}
-, {pledge_str()}
+, {wx.plan_rope}
+, {wx.pledge}
 , {active_str()}
 , {task_str()}
 )
@@ -58,10 +56,10 @@ VALUES
         # THEN
         assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
         assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
-            plan_rope_str(),
-            pledge_str(),
+            wx.plan_rope,
+            wx.pledge,
             active_str(),
             task_str(),
         ]
@@ -87,10 +85,10 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("BLRPLAN", "job", None)
         insert_sqlstr = f"""INSERT INTO {job_blrplan_tablename} (
-  {moment_label_str()}
+  {wx.moment_label}
 , {wx.belief_name}
-, {plan_rope_str()}
-, {pledge_str()}
+, {wx.plan_rope}
+, {wx.pledge}
 , {active_str()}
 , {task_str()}
 )
@@ -111,10 +109,10 @@ VALUES
         # THEN
         assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
         assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
-            plan_rope_str(),
-            pledge_str(),
+            wx.plan_rope,
+            wx.pledge,
             active_str(),
             task_str(),
         ]

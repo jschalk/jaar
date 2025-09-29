@@ -3,10 +3,10 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch06Keywords as wx,
     Ch08Keywords as wx,
     Ch11Keywords as wx,
     Ch15Keywords as wx,
-    moment_label_str,
 )
 
 AMY23_STR = "amy23"
@@ -20,7 +20,7 @@ def get_ex1_br00000_df() -> DataFrame:
     x_df = DataFrame(
         columns=[
             wx.c400_number,
-            moment_label_str(),
+            wx.moment_label,
             wx.fund_iota,
             wx.monthday_distortion,
             wx.penny,
@@ -40,7 +40,7 @@ def get_ex1_br00001_df() -> DataFrame:
     moment_label,belief_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
             wx.quota,
             wx.bud_time,
@@ -114,7 +114,7 @@ def get_ex1_br00004_df() -> DataFrame:
 def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_moment_timeline_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
-    x_df = DataFrame(columns=[moment_label_str(), wx.weekday_label, wx.weekday_order])
+    x_df = DataFrame(columns=[wx.moment_label, wx.weekday_label, wx.weekday_order])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -132,7 +132,7 @@ def get_ex2_br00000_df() -> DataFrame:
     x_df = DataFrame(
         columns=[
             wx.c400_number,
-            moment_label_str(),
+            wx.moment_label,
             wx.fund_iota,
             wx.monthday_distortion,
             wx.penny,
@@ -153,7 +153,7 @@ def get_ex2_br00001_df() -> DataFrame:
     moment_label,belief_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
             wx.quota,
             wx.bud_time,
@@ -175,7 +175,7 @@ def get_ex2_br00002_df() -> DataFrame:
         columns=[
             wx.voice_name,
             wx.amount,
-            moment_label_str(),
+            wx.moment_label,
             wx.belief_name,
             wx.tran_time,
         ]
