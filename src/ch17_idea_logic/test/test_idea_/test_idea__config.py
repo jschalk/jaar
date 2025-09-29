@@ -29,6 +29,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch08Keywords as wx,
     Ch09Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
@@ -46,9 +47,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    c400_number_str,
     credor_respect_str,
-    cumulative_day_str,
     debtor_respect_str,
     denom_str,
     dimens_str,
@@ -61,7 +60,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     jkeys_str,
     jvalues_str,
     moment_label_str,
-    monthday_distortion_str,
     morph_str,
     numor_str,
     plan_rope_str,
@@ -73,9 +71,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     reason_upper_str,
     star_str,
     stop_want_str,
-    timeline_label_str,
     voice_pool_str,
-    yr1_jan1_offset_str,
 )
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
@@ -402,19 +398,19 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.month_label) == "TEXT"
     assert sqlite_types.get(wx.hour_label) == "TEXT"
     assert sqlite_types.get(wx.cumulative_minute) == "INTEGER"
-    assert sqlite_types.get(cumulative_day_str()) == "INTEGER"
+    assert sqlite_types.get(wx.cumulative_day) == "INTEGER"
     assert sqlite_types.get(wx.weekday_label) == "TEXT"
     assert sqlite_types.get(wx.weekday_order) == "INTEGER"
     assert sqlite_types.get(wx.otx_knot) == "TEXT"
     assert sqlite_types.get(wx.inx_knot) == "TEXT"
     assert sqlite_types.get(wx.unknown_str) == "TEXT"
     assert sqlite_types.get(wx.knot) == "TEXT"
-    assert sqlite_types.get(c400_number_str()) == "INTEGER"
-    assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
+    assert sqlite_types.get(wx.c400_number) == "INTEGER"
+    assert sqlite_types.get(wx.yr1_jan1_offset) == "INTEGER"
     assert sqlite_types.get(wx.quota) == "REAL"
     assert sqlite_types.get(wx.celldepth) == "INTEGER"
-    assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
-    assert sqlite_types.get(timeline_label_str()) == "TEXT"
+    assert sqlite_types.get(wx.monthday_distortion) == "INTEGER"
+    assert sqlite_types.get(wx.timeline_label) == "TEXT"
     assert sqlite_types.get(wx.error_message) == "TEXT"
     assert sqlite_types.get(wx.solo) == "INTEGER"
 
@@ -821,15 +817,15 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     assert x_idea_quick_column_ref.get("br00000") == {
         wx.event_int,
         wx.face_name,
-        c400_number_str(),
+        wx.c400_number,
         moment_label_str(),
         wx.fund_iota,
-        monthday_distortion_str(),
+        wx.monthday_distortion,
         wx.penny,
         wx.respect_bit,
         wx.knot,
-        timeline_label_str(),
-        yr1_jan1_offset_str(),
+        wx.timeline_label,
+        wx.yr1_jan1_offset,
         wx.job_listen_rotations,
     }
 

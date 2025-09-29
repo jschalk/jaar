@@ -11,11 +11,11 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch08Keywords as wx,
     Ch11Keywords as wx,
     Ch12Keywords as wx,
     Ch15Keywords as wx,
     moment_label_str,
-    timeline_str,
 )
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
@@ -66,7 +66,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     print(f"{ amy_moment.paybook.to_dict()=}")
     assert x_dict.get(moment_label_str()) == a45_str
     assert x_dict.get(wx.moment_mstr_dir) == moment_mstr_dir
-    assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
+    assert x_dict.get(wx.timeline) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
     assert x_dict.get(wx.fund_iota) == default_fund_iota_if_None()
@@ -77,7 +77,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert set(x_dict.keys()) == {
         moment_label_str(),
         wx.moment_mstr_dir,
-        timeline_str(),
+        wx.timeline,
         offi_times_str,
         wx.beliefbudhistorys,
         wx.knot,
@@ -101,7 +101,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     assert set(x_dict.keys()) == {
         moment_label_str(),
         wx.moment_mstr_dir,
-        timeline_str(),
+        wx.timeline,
         f"{wx.offi_time}s",
         wx.beliefbudhistorys,
         wx.knot,

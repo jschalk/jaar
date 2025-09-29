@@ -22,15 +22,14 @@ from src.ch18_etl_toolbox.ch18_path import (
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch08Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch18Keywords as wx,
     Ch19Keywords as wx,
-    creg_str,
     moment_label_str,
-    time_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -190,8 +189,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
         sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
-        time_rope = sue_gut.make_l1_rope(time_str())
-        creg_rope = sue_gut.make_rope(time_rope, creg_str())
+        time_rope = sue_gut.make_l1_rope(wx.time)
+        creg_rope = sue_gut.make_rope(time_rope, wx.creg)
         assert sue_gut.plan_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, blrpern_job) == 1

@@ -5,7 +5,7 @@ from src.ch02_rope_logic.rope import (
 )
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import creg_str, time_str, week_str
+from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
@@ -135,9 +135,9 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario4_Time_creg():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_newtimeline_planunit(sue_belief, get_creg_config())
-    time_rope = sue_belief.make_l1_rope(time_str())
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
-    week_rope = sue_belief.make_rope(creg_rope, week_str())
+    time_rope = sue_belief.make_l1_rope(wx.time)
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
+    week_rope = sue_belief.make_rope(creg_rope, wx.week)
     thu_rope = sue_belief.make_rope(week_rope, get_thu())
     thu_plan = sue_belief.get_plan_obj(thu_rope)
 
@@ -159,7 +159,7 @@ def test_get_reason_case_readable_str_ReturnsObj_Scenario4_Time_creg():
 
     # WHEN
     display_str = get_reason_case_readable_str(
-        week_rope, week_case, creg_str(), sue_belief
+        week_rope, week_case, wx.creg, sue_belief
     )
 
     # THEN
@@ -244,17 +244,15 @@ def test_get_fact_state_readable_str_ReturnsObj_Scenario2_CaseRange():
 def test_get_fact_state_readable_str_ReturnsObj_Scenario3_Time_creg():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    time_rope = sue_belief.make_l1_rope(time_str())
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    time_rope = sue_belief.make_l1_rope(wx.time)
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     sue_belief = add_newtimeline_planunit(sue_belief, get_creg_config())
     sue_belief.add_fact(creg_rope, creg_rope, 1234567890, 1334567890)
     root_creg_fact = sue_belief.planroot.factunits.get(creg_rope)
     print(f"{root_creg_fact=}")
 
     # WHEN
-    timeline_fact_str = get_fact_state_readable_str(
-        root_creg_fact, creg_str(), sue_belief
-    )
+    timeline_fact_str = get_fact_state_readable_str(root_creg_fact, wx.creg, sue_belief)
 
     # THEN
     assert timeline_fact_str

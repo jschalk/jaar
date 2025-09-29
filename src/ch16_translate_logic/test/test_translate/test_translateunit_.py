@@ -10,6 +10,7 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch07Keywords as wx,
+    Ch08Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     fact_context_str,
@@ -21,7 +22,6 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     plan_rope_str,
     reason_context_str,
     reason_state_str,
-    timeline_label_str,
 )
 from src.ch16_translate_logic.map import (
     labelmap_shop,
@@ -207,7 +207,7 @@ def test_get_translateable_args_ReturnsObj():
         wx.belief_name,
         plan_rope_str(),
         wx.party_title,
-        timeline_label_str(),
+        wx.timeline_label,
         wx.weekday_label,
     }
 
@@ -332,7 +332,7 @@ def test_get_translate_LabelTerm_args_ReturnsObj():
         moment_label_str(),
         wx.hour_label,
         wx.month_label,
-        timeline_label_str(),
+        wx.timeline_label,
         wx.weekday_label,
     }
     expected_args = {

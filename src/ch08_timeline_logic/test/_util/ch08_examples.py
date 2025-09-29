@@ -4,15 +4,7 @@ from src.ch01_data_toolbox.file_toolbox import open_json
 from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import (
-    c400_number_str,
-    creg_str,
-    five_str,
-    hours_config_str,
-    timeline_label_str,
-    weekdays_config_str,
-    yr1_jan1_offset_str,
-)
+from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     belieftimelinepoint_shop,
@@ -23,11 +15,11 @@ from src.ch08_timeline_logic.timeline_main import (
 
 
 def get_five_config() -> dict:
-    return get_example_timeline_config(five_str())
+    return get_example_timeline_config(wx.five)
 
 
 def get_creg_config() -> dict:
-    return get_example_timeline_config(creg_str())
+    return get_example_timeline_config(wx.creg)
 
 
 def get_squirt_config() -> dict:
@@ -41,7 +33,7 @@ def get_example_timeline_config(timeline_label: str) -> dict:
 
 
 def cregtime_planunit() -> PlanUnit:
-    c400_number = get_creg_config().get(c400_number_str())
+    c400_number = get_creg_config().get(wx.c400_number)
     return new_timeline_planunit(get_cregtime_str(), c400_number)
 
 
@@ -74,11 +66,11 @@ def get_tue():
 
 
 def creg_hours_list() -> list[list[str, int]]:
-    return get_creg_config().get(hours_config_str())
+    return get_creg_config().get(wx.hours_config)
 
 
 def creg_weekdays_list() -> list[str]:
-    return get_creg_config().get(weekdays_config_str())
+    return get_creg_config().get(wx.weekdays_config)
 
 
 def creg_weekday_planunits() -> dict[str, PlanUnit]:
@@ -86,7 +78,7 @@ def creg_weekday_planunits() -> dict[str, PlanUnit]:
 
 
 def get_cregtime_str() -> str:
-    return get_creg_config().get(timeline_label_str())
+    return get_creg_config().get(wx.timeline_label)
 
 
 def creg_hour_int_label(x_int: int) -> str:
@@ -109,15 +101,15 @@ def add_time_squirt_planunit(x_beliefunit: BeliefUnit) -> BeliefUnit:
 
 
 def get_creg_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_creg_config().get(yr1_jan1_offset_str()))
+    return get_min_from_dt_offset(dt, get_creg_config().get(wx.yr1_jan1_offset))
 
 
 def get_five_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_five_config().get(yr1_jan1_offset_str()))
+    return get_min_from_dt_offset(dt, get_five_config().get(wx.yr1_jan1_offset))
 
 
 def get_squirt_min_from_dt(dt: datetime) -> int:
-    return get_min_from_dt_offset(dt, get_squirt_config().get(yr1_jan1_offset_str()))
+    return get_min_from_dt_offset(dt, get_squirt_config().get(wx.yr1_jan1_offset))
 
 
 def display_current_creg_five_min(graphics_bool: bool):
@@ -155,8 +147,8 @@ def display_current_creg_five_time_attrs(graphics_bool: bool):
         sue_belief = add_time_creg_planunit(sue_belief)
         sue_belief = add_time_five_planunit(sue_belief)
         time_rope = sue_belief.make_l1_rope("time")
-        creg_rope = sue_belief.make_rope(time_rope, creg_str())
-        five_rope = sue_belief.make_rope(time_rope, five_str())
+        creg_rope = sue_belief.make_rope(time_rope, wx.creg)
+        five_rope = sue_belief.make_rope(time_rope, wx.five)
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)
         creg_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, creg_min)
@@ -193,8 +185,8 @@ def display_creg_five_squirt_time_attrs(graphics_bool: bool):
         sue_belief = add_time_five_planunit(sue_belief)
         sue_belief = add_time_squirt_planunit(sue_belief)
         time_rope = sue_belief.make_l1_rope("time")
-        creg_rope = sue_belief.make_rope(time_rope, creg_str())
-        five_rope = sue_belief.make_rope(time_rope, five_str())
+        creg_rope = sue_belief.make_rope(time_rope, wx.creg)
+        five_rope = sue_belief.make_rope(time_rope, wx.five)
         squirt_rope = sue_belief.make_rope(time_rope, "squirt")
         creg_min = get_creg_min_from_dt(current_datetime)
         five_min = get_five_min_from_dt(current_datetime)

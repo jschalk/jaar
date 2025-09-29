@@ -3,8 +3,7 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    Ch01Keywords as wx,
-    Ch04Keywords as wx,
+    Ch09Keywords as wx,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -154,8 +153,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_reasonunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
 
     casa_week_atom = beliefatom_shop(belief_plan_reasonunit_str(), wx.INSERT)
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
@@ -189,8 +187,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_reason_caseunit_Exis
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
     thur_str = "thur"
     thur_rope = sue_belief.make_rope(week_rope, thur_str)
 
@@ -301,8 +298,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_INSERT_belief_plan_factunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
 
     casa_week_atom = beliefatom_shop(belief_plan_factunit_str(), wx.INSERT)
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)

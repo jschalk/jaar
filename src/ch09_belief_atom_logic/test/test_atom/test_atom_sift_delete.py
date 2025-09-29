@@ -196,8 +196,7 @@ def test_sift_atom_SetsBeliefDeltaBeliefAtom_belief_plan_reasonunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
 
     casa_week_atom = beliefatom_shop(belief_plan_reasonunit_str(), wx.DELETE)
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)
@@ -232,8 +231,7 @@ def test_sift_atom_SetsBeliefDeltaBeliefAtom_belief_plan_reason_caseunit_Exists(
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
     thur_str = "thur"
     thur_rope = sue_belief.make_rope(week_rope, thur_str)
 
@@ -347,8 +345,7 @@ def test_sift_atom_SetsBeliefDeltaBeliefAtom_belief_plan_factunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
 
     casa_week_atom = beliefatom_shop(belief_plan_factunit_str(), wx.DELETE)
     casa_week_atom.set_arg(plan_rope_str(), casa_rope)

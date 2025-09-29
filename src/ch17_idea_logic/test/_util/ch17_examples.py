@@ -3,13 +3,10 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch08Keywords as wx,
     Ch11Keywords as wx,
     Ch15Keywords as wx,
-    c400_number_str,
     moment_label_str,
-    monthday_distortion_str,
-    timeline_label_str,
-    yr1_jan1_offset_str,
 )
 
 AMY23_STR = "amy23"
@@ -22,15 +19,15 @@ def get_ex1_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            c400_number_str(),
+            wx.c400_number,
             moment_label_str(),
             wx.fund_iota,
-            monthday_distortion_str(),
+            wx.monthday_distortion,
             wx.penny,
             wx.respect_bit,
             wx.knot,
-            timeline_label_str(),
-            yr1_jan1_offset_str(),
+            wx.timeline_label,
+            wx.yr1_jan1_offset,
             wx.job_listen_rotations,
         ]
     )
@@ -134,15 +131,15 @@ def get_ex2_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            c400_number_str(),
+            wx.c400_number,
             moment_label_str(),
             wx.fund_iota,
-            monthday_distortion_str(),
+            wx.monthday_distortion,
             wx.penny,
             wx.respect_bit,
             wx.knot,
-            timeline_label_str(),
-            yr1_jan1_offset_str(),
+            wx.timeline_label,
+            wx.yr1_jan1_offset,
             wx.job_listen_rotations,
         ]
     )

@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch22_belief_viewer._ref.ch22_keywords import Ch04Keywords as wx, readable_str
+from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_voices_view_dict,
@@ -20,7 +20,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario0_Empty():
 
 
 def add_readable(str: str) -> str:
-    return f"{str}_{readable_str()}"
+    return f"{str}_{wx.readable}"
 
 
 def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():

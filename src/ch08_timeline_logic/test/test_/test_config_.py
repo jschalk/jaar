@@ -4,26 +4,10 @@ from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic._ref.ch08_keywords import (
     Ch02Keywords as wx,
-    c100_str,
-    c400_clean_str,
-    c400_leap_str,
-    c400_number_str,
-    day_str,
-    hours_config_str,
-    monthday_distortion_str,
-    months_config_str,
-    time_str,
-    timeline_label_str,
-    week_str,
-    weekdays_config_str,
-    year_str,
-    yr1_jan1_offset_str,
-    yr4_clean_str,
-    yr4_leap_str,
+    Ch08Keywords as wx,
 )
 from src.ch08_timeline_logic._ref.ch08_semantic_types import TimeLineLabel
 from src.ch08_timeline_logic.test._util.ch08_examples import (
-    five_str,
     get_creg_config,
     get_example_timeline_config,
     get_squirt_config,
@@ -135,59 +119,59 @@ def test_validate_timeline_config_ReturnsObj_CheckEachElementIsNecessary():
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
     assert validate_timeline_config(creg_config)
-    creg_config.pop(hours_config_str())
+    creg_config.pop(wx.hours_config)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(weekdays_config_str())
+    creg_config.pop(wx.weekdays_config)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(months_config_str())
+    creg_config.pop(wx.months_config)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(monthday_distortion_str())
+    creg_config.pop(wx.monthday_distortion)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(timeline_label_str())
+    creg_config.pop(wx.timeline_label)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(c400_number_str())
+    creg_config.pop(wx.c400_number)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(yr1_jan1_offset_str())
+    creg_config.pop(wx.yr1_jan1_offset)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[hours_config_str()] = []
+    creg_config[wx.hours_config] = []
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[months_config_str()] = []
+    creg_config[wx.months_config] = []
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[weekdays_config_str()] = []
+    creg_config[wx.weekdays_config] = []
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[yr1_jan1_offset_str()] = None
+    creg_config[wx.yr1_jan1_offset] = None
     assert not validate_timeline_config(creg_config)
-    creg_config[yr1_jan1_offset_str()] = 0
+    creg_config[wx.yr1_jan1_offset] = 0
     assert validate_timeline_config(creg_config)
 
 
@@ -205,23 +189,23 @@ def test_is_timeline_config_valid_ReturnsObj_CheckObjsRepeat():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[months_config_str()] = [["x_str", 30], ["y_str", 180], ["x_str", 365]]
+    creg_config[wx.months_config] = [["x_str", 30], ["y_str", 180], ["x_str", 365]]
     assert not validate_timeline_config(creg_config)
-    creg_config[months_config_str()] = [["x_str", 30], ["y_str", 180], ["z_str", 365]]
+    creg_config[wx.months_config] = [["x_str", 30], ["y_str", 180], ["z_str", 365]]
     assert validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[hours_config_str()] = [["x_str", 30], ["y_str", 180], ["x_str", 1440]]
+    creg_config[wx.hours_config] = [["x_str", 30], ["y_str", 180], ["x_str", 1440]]
     assert not validate_timeline_config(creg_config)
-    creg_config[hours_config_str()] = [["x_str", 30], ["y_str", 180], ["z_str", 1440]]
+    creg_config[wx.hours_config] = [["x_str", 30], ["y_str", 180], ["z_str", 1440]]
     assert validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config[weekdays_config_str()] = ["x_str", "y_str", "x_str"]
+    creg_config[wx.weekdays_config] = ["x_str", "y_str", "x_str"]
     assert not validate_timeline_config(creg_config)
-    creg_config[weekdays_config_str()] = ["x_str", "y_str", "z_str"]
+    creg_config[wx.weekdays_config] = ["x_str", "y_str", "z_str"]
     assert validate_timeline_config(creg_config)
 
 
@@ -258,7 +242,7 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
 
     # WHEN
     five_dict = timeline_config_shop(
-        timeline_label=five_str(),
+        timeline_label=wx.five,
         c400_number=five_c400_number,
         hour_length=five_hour_length,
         month_length=five_month_length,
@@ -270,10 +254,10 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
 
     # THEN
     assert validate_timeline_config(five_dict)
-    assert five_dict.get(timeline_label_str()) == five_str()
-    assert five_dict.get(c400_number_str()) == five_c400_number
-    assert five_dict.get(weekdays_config_str()) == five_weekday_list
-    x_months_config = five_dict.get(months_config_str())
+    assert five_dict.get(wx.timeline_label) == wx.five
+    assert five_dict.get(wx.c400_number) == five_c400_number
+    assert five_dict.get(wx.weekdays_config) == five_weekday_list
+    x_months_config = five_dict.get(wx.months_config)
     gen_months = [mon_config[0] for mon_config in x_months_config]
     assert gen_months == five_months_list
     assert x_months_config[0][0] == "Fredrick"
@@ -284,17 +268,17 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
     assert x_months_config[13][1] == 350
     assert x_months_config[14][0] == "Trump"
     assert x_months_config[14][1] == 365
-    x_hours_config = five_dict.get(hours_config_str())
+    x_hours_config = five_dict.get(wx.hours_config)
     assert len(x_hours_config) == 20
     assert x_hours_config[0] == ["0hr", 72]
     assert x_hours_config[4] == ["4hr", 360]
-    assert five_dict.get(yr1_jan1_offset_str()) == five_yr1_jan1_offset
+    assert five_dict.get(wx.yr1_jan1_offset) == five_yr1_jan1_offset
 
-    # five_filename = f"timeline_config_{five_str()}.json"
+    # five_filename = f"timeline_config_{wx.five}.json"
     # five_file_str = get_json_from_dict(five_dict)
-    expected_config = get_example_timeline_config(five_str())
+    expected_config = get_example_timeline_config(wx.five)
     assert validate_timeline_config(expected_config)
-    assert expected_config.get(hours_config_str()) == x_hours_config
+    assert expected_config.get(wx.hours_config) == x_hours_config
     assert expected_config == five_dict
 
 
@@ -360,18 +344,18 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
     # THEN
     print(f"{generated_dict=}")
     print(f"{set(generated_dict.keys())=}")
-    print(f"{timeline_label_str()=}")
-    print(f"{generated_dict.get(timeline_label_str())=}")
-    assert generated_dict.get(c400_number_str()) == h_c400_number
+    print(f"{wx.timeline_label=}")
+    print(f"{generated_dict.get(wx.timeline_label)=}")
+    assert generated_dict.get(wx.c400_number) == h_c400_number
 
-    assert generated_dict.get(timeline_label_str()) == h_timeline_label
-    assert generated_dict.get(c400_number_str()) == h_c400_number
-    assert generated_dict.get(hours_config_str()) == h_hours_config
-    assert generated_dict.get(months_config_str()) == h_months_config
-    assert generated_dict.get(monthday_distortion_str()) == h_monthday_distortion
-    assert generated_dict.get(timeline_label_str()) == h_timeline_label
-    assert generated_dict.get(weekdays_config_str()) == h_weekdays_config
-    assert generated_dict.get(yr1_jan1_offset_str()) == h_yr1_jan1_offset
+    assert generated_dict.get(wx.timeline_label) == h_timeline_label
+    assert generated_dict.get(wx.c400_number) == h_c400_number
+    assert generated_dict.get(wx.hours_config) == h_hours_config
+    assert generated_dict.get(wx.months_config) == h_months_config
+    assert generated_dict.get(wx.monthday_distortion) == h_monthday_distortion
+    assert generated_dict.get(wx.timeline_label) == h_timeline_label
+    assert generated_dict.get(wx.weekdays_config) == h_weekdays_config
+    assert generated_dict.get(wx.yr1_jan1_offset) == h_yr1_jan1_offset
     assert validate_timeline_config(generated_dict)
 
 
@@ -379,14 +363,14 @@ def test_get_year_rope_ReturnsObj():
     # ESTABLISH
     fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
-    c400_leap_rope = sue_beliefunit.make_rope(fay_rope, c400_leap_str())
-    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, c400_clean_str())
-    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, c100_str())
-    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, yr4_leap_str())
-    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, yr4_clean_str())
-    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, year_str())
+    c400_leap_rope = sue_beliefunit.make_rope(fay_rope, wx.c400_leap)
+    c400_clean_rope = sue_beliefunit.make_rope(c400_leap_rope, wx.c400_clean)
+    c100_rope = sue_beliefunit.make_rope(c400_clean_rope, wx.c100)
+    yr4_leap_rope = sue_beliefunit.make_rope(c100_rope, wx.yr4_leap)
+    yr4_clean_rope = sue_beliefunit.make_rope(yr4_leap_rope, wx.yr4_clean)
+    year_rope = sue_beliefunit.make_rope(yr4_clean_rope, wx.year)
 
     # WHEN / THEN
     assert year_rope == get_year_rope(sue_beliefunit, fay_rope)
@@ -396,9 +380,9 @@ def test_get_week_rope_ReturnsObj():
     # ESTABLISH
     fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
-    week_rope = sue_beliefunit.make_rope(fay_rope, week_str())
+    week_rope = sue_beliefunit.make_rope(fay_rope, wx.week)
 
     # WHEN / THEN
     assert week_rope == get_week_rope(sue_beliefunit, fay_rope)
@@ -408,9 +392,9 @@ def test_get_day_rope_ReturnsObj():
     # ESTABLISH
     fay_str = "Fay34"
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     fay_rope = sue_beliefunit.make_rope(time_rope, fay_str)
-    day_rope = sue_beliefunit.make_rope(fay_rope, day_str())
+    day_rope = sue_beliefunit.make_rope(fay_rope, wx.day)
 
     # WHEN / THEN
     assert day_rope == get_day_rope(sue_beliefunit, fay_rope)
@@ -439,13 +423,13 @@ def test_timelineunit_shop_ReturnsObj_Scenario0_Default():
     x_timelineunit = timelineunit_shop()
 
     # THEN
-    creg_c400_number = creg_config.get(c400_number_str())
-    creg_hours_config = creg_config.get(hours_config_str())
-    creg_months_config = creg_config.get(months_config_str())
-    creg_timeline_label = creg_config.get(timeline_label_str())
-    creg_weekdays_config = creg_config.get(weekdays_config_str())
-    creg_monthday_distortion = creg_config.get(monthday_distortion_str())
-    creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
+    creg_c400_number = creg_config.get(wx.c400_number)
+    creg_hours_config = creg_config.get(wx.hours_config)
+    creg_months_config = creg_config.get(wx.months_config)
+    creg_timeline_label = creg_config.get(wx.timeline_label)
+    creg_weekdays_config = creg_config.get(wx.weekdays_config)
+    creg_monthday_distortion = creg_config.get(wx.monthday_distortion)
+    creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
 
     assert x_timelineunit
     assert x_timelineunit.c400_number == creg_c400_number
@@ -460,12 +444,12 @@ def test_timelineunit_shop_ReturnsObj_Scenario0_Default():
 def test_timelineunit_shop_ReturnsObj_Scenario1_WhenTimeLineUnitAttributesAreNone():
     # ESTABLISH
     incomplete_creg_config = get_creg_config()
-    incomplete_creg_config.pop(c400_number_str())
-    incomplete_creg_config.pop(hours_config_str())
-    incomplete_creg_config.pop(months_config_str())
-    incomplete_creg_config.pop(monthday_distortion_str())
-    incomplete_creg_config.pop(weekdays_config_str())
-    incomplete_creg_config.pop(yr1_jan1_offset_str())
+    incomplete_creg_config.pop(wx.c400_number)
+    incomplete_creg_config.pop(wx.hours_config)
+    incomplete_creg_config.pop(wx.months_config)
+    incomplete_creg_config.pop(wx.monthday_distortion)
+    incomplete_creg_config.pop(wx.weekdays_config)
+    incomplete_creg_config.pop(wx.yr1_jan1_offset)
     assert incomplete_creg_config
 
     # WHEN
@@ -473,13 +457,13 @@ def test_timelineunit_shop_ReturnsObj_Scenario1_WhenTimeLineUnitAttributesAreNon
 
     # THEN
     creg_config = get_creg_config()
-    creg_c400_number = creg_config.get(c400_number_str())
-    creg_hours_config = creg_config.get(hours_config_str())
-    creg_months_config = creg_config.get(months_config_str())
-    creg_timeline_label = creg_config.get(timeline_label_str())
-    creg_weekdays_config = creg_config.get(weekdays_config_str())
-    creg_monthday_distortion = creg_config.get(monthday_distortion_str())
-    creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
+    creg_c400_number = creg_config.get(wx.c400_number)
+    creg_hours_config = creg_config.get(wx.hours_config)
+    creg_months_config = creg_config.get(wx.months_config)
+    creg_timeline_label = creg_config.get(wx.timeline_label)
+    creg_weekdays_config = creg_config.get(wx.weekdays_config)
+    creg_monthday_distortion = creg_config.get(wx.monthday_distortion)
+    creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
 
     assert x_timelineunit
     assert x_timelineunit.c400_number == creg_c400_number
@@ -494,8 +478,8 @@ def test_timelineunit_shop_ReturnsObj_Scenario1_WhenTimeLineUnitAttributesAreNon
 def test_timelineunit_shop_ReturnsObj_Scenario2_timeline_label_Missing():
     # ESTABLISH
     incomplete_creg_config = get_creg_config()
-    incomplete_creg_config.pop(timeline_label_str())
-    incomplete_creg_config.pop(hours_config_str())
+    incomplete_creg_config.pop(wx.timeline_label)
+    incomplete_creg_config.pop(wx.hours_config)
     assert incomplete_creg_config
 
     # WHEN
@@ -503,13 +487,13 @@ def test_timelineunit_shop_ReturnsObj_Scenario2_timeline_label_Missing():
 
     # THEN
     creg_config = get_creg_config()
-    creg_c400_number = creg_config.get(c400_number_str())
-    creg_hours_config = creg_config.get(hours_config_str())
-    creg_months_config = creg_config.get(months_config_str())
-    creg_timeline_label = creg_config.get(timeline_label_str())
-    creg_weekdays_config = creg_config.get(weekdays_config_str())
-    creg_monthday_distortion = creg_config.get(monthday_distortion_str())
-    creg_yr1_jan1_offset = creg_config.get(yr1_jan1_offset_str())
+    creg_c400_number = creg_config.get(wx.c400_number)
+    creg_hours_config = creg_config.get(wx.hours_config)
+    creg_months_config = creg_config.get(wx.months_config)
+    creg_timeline_label = creg_config.get(wx.timeline_label)
+    creg_weekdays_config = creg_config.get(wx.weekdays_config)
+    creg_monthday_distortion = creg_config.get(wx.monthday_distortion)
+    creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
 
     assert x_timelineunit
     assert x_timelineunit.c400_number == creg_c400_number

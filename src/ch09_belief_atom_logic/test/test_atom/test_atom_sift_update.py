@@ -234,7 +234,6 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
     sue_belief = beliefunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    week_str = "week"
     week_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
     sue_belief.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
@@ -268,8 +267,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(week_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
     thur_str = "thur"
     thur_rope = sue_belief.make_rope(week_rope, thur_str)
     sue_belief.add_plan(clean_rope)
@@ -306,8 +304,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_factunit():
     sue_belief = beliefunit_shop("Sue")
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
-    week_str = "week"
-    week_rope = sue_belief.make_l1_rope(casa_str)
+    week_rope = sue_belief.make_l1_rope(wx.week)
     sue_belief.add_plan(casa_rope)
     sue_belief.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 

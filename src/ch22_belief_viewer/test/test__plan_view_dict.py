@@ -8,6 +8,7 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch08Keywords as wx,
     active_hx_str,
     active_str,
     all_voice_cred_str,
@@ -36,7 +37,6 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     pledge_str,
     problem_bool_str,
     range_evaluated_str,
-    readable_str,
     reason_state_str,
     reasonheirs_str,
     reasonunits_str,
@@ -146,8 +146,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     bob_str = "Bob"
     mop_sue_dict = mop_partys_dict.get(sue_str)
     mop_bob_dict = mop_partys_dict.get(bob_str)
-    mop_sue_unit_readable = mop_sue_dict.get(readable_str())
-    mop_bob_unit_readable = mop_bob_dict.get(readable_str())
+    mop_sue_unit_readable = mop_sue_dict.get(wx.readable)
+    mop_bob_unit_readable = mop_bob_dict.get(wx.readable)
     expected_mop_sue_unit_readable = add_small_dot(f"LaborUnit: {sue_str}")
     expected_mop_bob_unit_readable = add_small_dot(f"LaborUnit: {bob_str} Solo: True")
     assert mop_sue_unit_readable == expected_mop_sue_unit_readable
@@ -163,8 +163,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     bob_str = "Bob"
     mop_sue_dict = mop_partys_dict.get(sue_str)
     mop_bob_dict = mop_partys_dict.get(bob_str)
-    mop_sue_heir_readable = mop_sue_dict.get(readable_str())
-    mop_bob_heir_readable = mop_bob_dict.get(readable_str())
+    mop_sue_heir_readable = mop_sue_dict.get(wx.readable)
+    mop_bob_heir_readable = mop_bob_dict.get(wx.readable)
     expected_mop_sue_heir_readable = add_small_dot(f"LaborHeir: {sue_str}")
     expected_mop_bob_heir_readable = add_small_dot(f"LaborHeir: {bob_str} Solo: True")
     assert mop_sue_heir_readable == expected_mop_sue_heir_readable
@@ -233,10 +233,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     bob_awardunit_dict = awardunits_dict.get(bob_str)
     expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
     expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
-    # print(f"{sue_awardunit_dict.get(readable_str())=}")
-    # print(f"{bob_awardunit_dict.get(readable_str())=}")
-    assert sue_awardunit_dict.get(readable_str()) == expected_sue_readable
-    assert bob_awardunit_dict.get(readable_str()) == expected_bob_readable
+    # print(f"{sue_awardunit_dict.get(wx.readable)=}")
+    # print(f"{bob_awardunit_dict.get(wx.readable)=}")
+    assert sue_awardunit_dict.get(wx.readable) == expected_sue_readable
+    assert bob_awardunit_dict.get(wx.readable) == expected_bob_readable
 
     # awardheirs
     awardheirs_dict = casa_dict.get(awardheirs_str())
@@ -248,14 +248,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     bob_awardheir_dict = awardheirs_dict.get(bob_str)
     expected_sue_readable = f"{sue_str}: Take 0.8 (150000000), Give 1 (150000000)"
     expected_bob_readable = f"{bob_str}: Take 0.9 (168750000), Give 0.7 (105000000)"
-    # print(f"{sue_awardheir_dict.get(readable_str())=}")
-    # print(f"{bob_awardheir_dict.get(readable_str())=}")
-    assert sue_awardheir_dict.get(readable_str()) == add_small_dot(
-        expected_sue_readable
-    )
-    assert bob_awardheir_dict.get(readable_str()) == add_small_dot(
-        expected_bob_readable
-    )
+    # print(f"{sue_awardheir_dict.get(wx.readable)=}")
+    # print(f"{bob_awardheir_dict.get(wx.readable)=}")
+    assert sue_awardheir_dict.get(wx.readable) == add_small_dot(expected_sue_readable)
+    assert bob_awardheir_dict.get(wx.readable) == add_small_dot(expected_bob_readable)
 
     # awardlines
     awardlines_dict = casa_dict.get(awardlines_str())
@@ -267,14 +263,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     bob_awardline_dict = awardlines_dict.get(bob_str)
     expected_sue_readable = f"{sue_str}: take_fund (150000000), give_fund (150000000)"
     expected_bob_readable = f"{bob_str}: take_fund (168750000), give_fund (105000000)"
-    print(f"{sue_awardline_dict.get(readable_str())=}")
-    print(f"{bob_awardline_dict.get(readable_str())=}")
-    assert sue_awardline_dict.get(readable_str()) == add_small_dot(
-        expected_sue_readable
-    )
-    assert bob_awardline_dict.get(readable_str()) == add_small_dot(
-        expected_bob_readable
-    )
+    print(f"{sue_awardline_dict.get(wx.readable)=}")
+    print(f"{bob_awardline_dict.get(wx.readable)=}")
+    assert sue_awardline_dict.get(wx.readable) == add_small_dot(expected_sue_readable)
+    assert bob_awardline_dict.get(wx.readable) == add_small_dot(expected_bob_readable)
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
@@ -314,8 +306,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     expected_best_factunit_str = add_small_dot(best_factunit_readable)
     # print(f"{expected_tidi_factunit_str=}")
     # print(f"{expected_best_factunit_str=}")
-    assert tidi_factunit_dict.get(readable_str()) == expected_tidi_factunit_str
-    assert best_factunit_dict.get(readable_str()) == expected_best_factunit_str
+    assert tidi_factunit_dict.get(wx.readable) == expected_tidi_factunit_str
+    assert best_factunit_dict.get(wx.readable) == expected_best_factunit_str
 
     # factheirs
     casa_factheirs_dict = root_dict.get("factheirs")
@@ -336,12 +328,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     )
     expected_casa_tidi_factheir_str = add_small_dot(casa_tidi_factheir_readable)
     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
-    assert (
-        casa_tidi_factheir_dict.get(readable_str()) == expected_casa_tidi_factheir_str
-    )
-    assert (
-        casa_best_factheir_dict.get(readable_str()) == expected_casa_best_factheir_str
-    )
+    assert casa_tidi_factheir_dict.get(wx.readable) == expected_casa_tidi_factheir_str
+    assert casa_best_factheir_dict.get(wx.readable) == expected_casa_best_factheir_str
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
@@ -377,7 +365,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     tidi_reasonunit_dict = play_soccer_reasonunits_dict.get(tidi_rope)
     print(f"{best_reasonunit_dict.keys()=}")
     expected_reason_str = add_small_dot(f"ReasonUnit: context is {best_rope}")
-    assert best_reasonunit_dict.get(readable_str()) == expected_reason_str
+    assert best_reasonunit_dict.get(wx.readable) == expected_reason_str
 
     best_cases_dict = best_reasonunit_dict.get(cases_str())
     tidi_cases_dict = tidi_reasonunit_dict.get(cases_str())
@@ -412,11 +400,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     expected_tidy_case_readable = f"  {add_small_dot(expected_tidy_case_readable)}"
     print(f"{best_run_caseunit=}")
     # print(f"{expected_best_reasonunit_str=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    assert best_soccer_case_dict.get(readable_str()) == expected_soccer_case_readable
-    assert best_run_case_dict.get(readable_str()) == expected_run_case_readable
-    assert tidy_case_dict.get(readable_str()) == expected_tidy_case_readable
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    assert best_soccer_case_dict.get(wx.readable) == expected_soccer_case_readable
+    assert best_run_case_dict.get(wx.readable) == expected_run_case_readable
+    assert tidy_case_dict.get(wx.readable) == expected_tidy_case_readable
     print(f"{expected_soccer_case_readable=}")
     print(f"{expected_run_case_readable=}")
     print(f"{expected_tidy_case_readable=}")
@@ -455,7 +443,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
     tidi_reasonheir_dict = play_soccer_reasonheirs_dict.get(tidi_rope)
     print(f"{best_reasonheir_dict.keys()=}")
     expected_reason_str = add_small_dot(f"ReasonHeir: context is {best_rope}")
-    assert best_reasonheir_dict.get(readable_str()) == expected_reason_str
+    assert best_reasonheir_dict.get(wx.readable) == expected_reason_str
 
     best_cases_dict = best_reasonheir_dict.get(cases_str())
     tidi_cases_dict = tidi_reasonheir_dict.get(cases_str())
@@ -490,11 +478,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
     expected_tidy_case_readable = f"  {add_small_dot(expected_tidy_case_readable)}"
     print(f"{best_run_caseunit=}")
     # print(f"{expected_best_reasonheir_str=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    assert best_soccer_case_dict.get(readable_str()) == expected_soccer_case_readable
-    assert best_run_case_dict.get(readable_str()) == expected_run_case_readable
-    assert tidy_case_dict.get(readable_str()) == expected_tidy_case_readable
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    assert best_soccer_case_dict.get(wx.readable) == expected_soccer_case_readable
+    assert best_run_case_dict.get(wx.readable) == expected_run_case_readable
+    assert tidy_case_dict.get(wx.readable) == expected_tidy_case_readable
     print(f"{expected_soccer_case_readable=}")
     print(f"{expected_run_case_readable=}")
     print(f"{expected_tidy_case_readable=}")
