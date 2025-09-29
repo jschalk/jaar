@@ -1,8 +1,8 @@
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords, Ch18Keywords as wx
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords
 
 
 def test_Ch18Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch18Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch18Keywords:

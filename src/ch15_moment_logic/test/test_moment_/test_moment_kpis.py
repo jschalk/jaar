@@ -1,9 +1,5 @@
 from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.ch15_moment_logic._ref.ch15_keywords import (
-    Ch02Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-)
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_report import (
     get_moment_guts_agenda_dataframe,
     get_moment_guts_agenda_plotly_fig,

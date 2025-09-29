@@ -1,10 +1,5 @@
 from src.ch02_rope_logic.rope import create_rope, to_rope
-from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    Ch01Keywords as wx,
-    Ch04Keywords as wx,
-    Ch07Keywords as wx,
-    Ch09Keywords as wx,
-)
+from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic.atom_config import get_atom_args_class_types
 from src.ch09_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
 

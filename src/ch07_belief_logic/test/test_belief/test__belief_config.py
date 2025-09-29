@@ -2,11 +2,7 @@
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch07_belief_logic._ref.ch07_keywords import (
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_config import (
     belief_config_path,
     get_all_belief_calc_args,

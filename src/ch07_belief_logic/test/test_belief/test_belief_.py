@@ -8,10 +8,7 @@ from src.ch03_finance_logic.finance_config import (
     validate_respect_num,
 )
 from src.ch06_plan_logic.plan import get_default_moment_label as root_label
-from src.ch07_belief_logic._ref.ch07_keywords import (
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 
 

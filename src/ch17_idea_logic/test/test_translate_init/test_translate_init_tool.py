@@ -10,12 +10,7 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
     get_translate_core_attrs_are_none_namemap,
 )
 from src.ch16_translate_logic.translate_main import translateunit_shop
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch02Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_db_tool import (
     get_idea_elements_sort_order as sorting_columns,
     get_ordered_csv,

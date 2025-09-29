@@ -1,10 +1,6 @@
 from pandas import DataFrame
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     LabelMap,
     NameMap,

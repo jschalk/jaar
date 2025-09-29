@@ -5,13 +5,7 @@ from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,

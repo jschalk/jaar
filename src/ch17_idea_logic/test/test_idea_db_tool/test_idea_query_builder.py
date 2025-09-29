@@ -1,10 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch10Keywords as wx,
-    Ch11Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_config_dict
 from src.ch17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,

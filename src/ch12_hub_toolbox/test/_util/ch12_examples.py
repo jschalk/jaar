@@ -9,12 +9,7 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
 )
 from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
-from src.ch12_hub_toolbox._ref.ch12_keywords import (
-    Ch01Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords as wx
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 

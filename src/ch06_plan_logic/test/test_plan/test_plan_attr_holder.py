@@ -1,7 +1,4 @@
-from src.ch06_plan_logic._ref.ch06_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-)
+from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 

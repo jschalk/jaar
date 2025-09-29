@@ -9,12 +9,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_JOB_BLRPLAN_SQLSTR,
     create_prime_tablename,
 )
-from src.ch19_kpi_toolbox._ref.ch19_keywords import (
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch19Keywords as wx,
-)
+from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords as wx
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi002_table
 
 

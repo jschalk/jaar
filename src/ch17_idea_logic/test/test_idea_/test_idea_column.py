@@ -1,9 +1,4 @@
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_main import IdeaRef, idearef_shop
 
 

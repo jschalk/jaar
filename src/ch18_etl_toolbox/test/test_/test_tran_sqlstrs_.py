@@ -15,18 +15,7 @@ from src.ch17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch11Keywords as wx,
-    Ch12Keywords as wx,
-    Ch15Keywords as wx,
-    Ch16Keywords as wx,
-    Ch17Keywords as wx,
-    Ch18Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR,

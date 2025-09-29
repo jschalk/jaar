@@ -1,12 +1,8 @@
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    Ch07Keywords as wx,
-    Ch11Keywords,
-    Ch11Keywords as wx,
-)
+from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords
 
 
 def test_Ch11Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch11Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch11Keywords:

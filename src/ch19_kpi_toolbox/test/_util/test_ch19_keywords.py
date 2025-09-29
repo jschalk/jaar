@@ -1,8 +1,8 @@
-from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords, Ch19Keywords as wx
+from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords
 
 
 def test_Ch19Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch19Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch19Keywords:

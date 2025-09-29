@@ -4,14 +4,7 @@ from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import (
-    Ch01Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch09Keywords as wx,
-    Ch10Keywords as wx,
-)
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import (

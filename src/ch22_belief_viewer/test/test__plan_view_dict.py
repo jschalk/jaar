@@ -3,14 +3,7 @@ from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.ch22_belief_viewer._ref.ch22_keywords import (
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch08Keywords as wx,
-)
+from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
 from src.ch22_belief_viewer.example22_beliefs import (
     best_run_str,

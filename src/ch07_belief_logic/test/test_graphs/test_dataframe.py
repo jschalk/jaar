@@ -1,7 +1,4 @@
-from src.ch07_belief_logic._ref.ch07_keywords import (
-    Ch02Keywords as wx,
-    Ch06Keywords as wx,
-)
+from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_report import (
     get_belief_agenda_dataframe,

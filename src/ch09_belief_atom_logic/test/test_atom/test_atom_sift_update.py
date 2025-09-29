@@ -6,15 +6,7 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reason_caseunit_get_obj as caseunit_get_obj,
     belief_plan_reasonunit_get_obj,
 )
-from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    Ch01Keywords as wx,
-    Ch02Keywords as wx,
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch09Keywords as wx,
-)
+from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 
 

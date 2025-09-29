@@ -23,22 +23,7 @@ from src.ch16_translate_logic.translate_config import (
     get_translate_dimens,
     get_translateable_args,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch01Keywords as wx,
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch08Keywords as wx,
-    Ch09Keywords as wx,
-    Ch10Keywords as wx,
-    Ch11Keywords as wx,
-    Ch15Keywords as wx,
-    Ch16Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
     get_default_sorted_list,

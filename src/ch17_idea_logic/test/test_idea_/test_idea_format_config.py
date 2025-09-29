@@ -1,12 +1,5 @@
 from src.ch01_data_toolbox.file_toolbox import get_dir_file_strs
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch15Keywords as wx,
-    Ch16Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_elements_sort_order,

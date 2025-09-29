@@ -2,7 +2,7 @@ from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords
 
 
 def test_Ch08Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch08Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch08Keywords:

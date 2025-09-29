@@ -1,8 +1,8 @@
-from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords, Ch12Keywords as wx
+from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords
 
 
 def test_Ch12Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch12Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch12Keywords:

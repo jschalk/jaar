@@ -5,13 +5,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch01Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,

@@ -1,11 +1,4 @@
-from src.ch22_belief_viewer._ref.ch22_keywords import (
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_app import get_belief_viewer_template
 
 

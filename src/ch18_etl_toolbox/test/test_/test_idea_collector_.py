@@ -1,12 +1,7 @@
 from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch10Keywords as wx,
-    Ch15Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.idea_collector import (
     IdeaFileRef,
     get_all_excel_ideasheets,

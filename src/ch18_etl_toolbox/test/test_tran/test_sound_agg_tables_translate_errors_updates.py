@@ -1,12 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_BLRPERN_SOUND_PUT_AGG_STR,
     CREATE_TRLCORE_SOUND_VLD_SQLSTR,

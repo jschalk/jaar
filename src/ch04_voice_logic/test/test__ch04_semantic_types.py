@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch04_voice_logic._ref.ch04_keywords import Ch02Keywords as wx
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
     GroupTitle,
     HealerName,

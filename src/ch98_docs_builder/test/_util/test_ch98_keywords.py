@@ -2,7 +2,7 @@ from src.ch98_docs_builder._ref.ch98_keywords import Ch98Keywords
 
 
 def test_Ch98Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch98Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch98Keywords:

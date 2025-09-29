@@ -16,10 +16,7 @@ from src.ch17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.ch17_idea_logic.idea_db_tool import get_sheet_names
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.ch18_path import (
     create_moment_mstr_path,
     create_stance0001_path,

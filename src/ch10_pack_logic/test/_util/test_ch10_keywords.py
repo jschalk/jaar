@@ -1,8 +1,8 @@
-from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords, Ch10Keywords as wx
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords
 
 
 def test_Ch10Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch10Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch10Keywords:

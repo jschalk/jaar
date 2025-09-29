@@ -4,14 +4,7 @@ from src.ch16_translate_logic.translate_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_TRLCORE_SOUND_AGG_SQLSTR,
     CREATE_TRLCORE_SOUND_RAW_SQLSTR,

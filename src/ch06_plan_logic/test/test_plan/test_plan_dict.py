@@ -7,13 +7,7 @@ from src.ch05_reason_logic.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ch06_plan_logic._ref.ch06_keywords import (
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-)
+from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import (
     get_default_moment_label as root_label,

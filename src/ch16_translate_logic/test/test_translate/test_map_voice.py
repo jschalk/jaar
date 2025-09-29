@@ -1,10 +1,7 @@
 from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     NameMap,
     get_namemap_from_dict,

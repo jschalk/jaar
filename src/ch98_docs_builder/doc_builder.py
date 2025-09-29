@@ -6,7 +6,6 @@ from ast import (
     walk as ast_walk,
 )
 from copy import copy as copy_copy
-from pathlib import Path
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,
@@ -110,7 +109,8 @@ def get_chapter_desc_prefix(chapter_desc: str) -> str:
 
 
 def get_keywords_by_chapter_md() -> str:
-    func_lines = ["## Keywords by Chapter"]
+    keywords_title_str = "Keywords by Chapter"
+    func_lines = [f"## {keywords_title_str}"]
     keywords_src_config = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)
     for chapter_desc in get_chapter_descs().keys():
@@ -120,7 +120,7 @@ def get_keywords_by_chapter_md() -> str:
         x_list = [str_func for str_func in chapter_keywords]
         _line = f"- {chapter_desc}: " + ", ".join(x_list)
         func_lines.append(_line)
-    return "# Keywords by Chapter\n\n" + "\n".join(func_lines)
+    return f"# {keywords_title_str}\n\n" + "\n".join(func_lines)
 
 
 def save_keywords_by_chapter_md(x_dir: str):

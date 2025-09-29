@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch03_finance_logic.finance_config import default_fund_pool
-from src.ch11_bud_logic._ref.ch11_keywords import Ch03Keywords as wx, Ch11Keywords as wx
+from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords as wx
 from src.ch11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,
     BudUnit,

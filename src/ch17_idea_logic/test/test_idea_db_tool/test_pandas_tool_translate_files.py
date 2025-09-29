@@ -15,10 +15,7 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
 )
 from src.ch16_translate_logic.translate_config import get_translate_filename
 from src.ch16_translate_logic.translate_main import translateunit_shop
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch05Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_db_tool import (
     _get_translate_idea_format_filenames,
     move_otx_csvs_to_translate_inx,

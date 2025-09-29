@@ -2,7 +2,7 @@ from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords
 
 
 def test_Ch06Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch06Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch06Keywords:

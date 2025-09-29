@@ -1,13 +1,7 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic._ref.ch07_semantic_types import MomentLabel
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import (
-    Ch01Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch09Keywords as wx,
-)
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
 

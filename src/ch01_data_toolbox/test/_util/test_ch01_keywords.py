@@ -2,7 +2,7 @@ from src.ch01_data_toolbox._ref.ch01_keywords import Ch01Keywords
 
 
 def test_Ch01Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch01Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch01Keywords:

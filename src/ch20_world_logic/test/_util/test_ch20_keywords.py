@@ -2,7 +2,7 @@ from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords
 
 
 def test_Ch20Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch20Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch20Keywords:

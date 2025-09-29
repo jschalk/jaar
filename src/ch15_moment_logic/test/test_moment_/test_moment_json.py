@@ -7,16 +7,7 @@ from src.ch03_finance_logic.finance_config import (
 )
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
-from src.ch15_moment_logic._ref.ch15_keywords import (
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch08Keywords as wx,
-    Ch11Keywords as wx,
-    Ch12Keywords as wx,
-    Ch15Keywords as wx,
-)
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_main import (
     get_default_path_momentunit,
     get_momentunit_from_dict,

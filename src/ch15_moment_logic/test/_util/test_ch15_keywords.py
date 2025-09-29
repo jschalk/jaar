@@ -1,8 +1,8 @@
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords, Ch15Keywords as wx
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords
 
 
 def test_Ch15Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch15Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch15Keywords:

@@ -20,17 +20,7 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_moment_ote1_csv_path,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
-from src.ch20_world_logic._ref.ch20_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch08Keywords as wx,
-    Ch10Keywords as wx,
-    Ch11Keywords as wx,
-    Ch15Keywords as wx,
-    Ch16Keywords as wx,
-    Ch18Keywords as wx,
-    Ch19Keywords as wx,
-)
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,

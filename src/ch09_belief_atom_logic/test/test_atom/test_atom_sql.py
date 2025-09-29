@@ -2,13 +2,7 @@ from pytest import raises as pytest_raises
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_rowdata
 from src.ch02_rope_logic.rope import create_rope
-from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    Ch01Keywords as wx,
-    Ch05Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch09Keywords as wx,
-)
+from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic.atom_main import (
     beliefatom_shop,
     get_beliefatom_from_rowdata,

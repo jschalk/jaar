@@ -1,7 +1,4 @@
-from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    Ch09Keywords,
-    Ch09Keywords as wx,
-)
+from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords
 
 
 def test_Ch09Keywords_AttributeNamesEqualValues():

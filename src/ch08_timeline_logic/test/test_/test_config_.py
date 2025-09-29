@@ -2,10 +2,7 @@ from copy import deepcopy as copy_deepcopy
 from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import (
-    Ch02Keywords as wx,
-    Ch08Keywords as wx,
-)
+from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic._ref.ch08_semantic_types import TimeLineLabel
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     get_creg_config,

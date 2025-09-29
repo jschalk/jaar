@@ -9,11 +9,7 @@ from src.ch01_data_toolbox.file_toolbox import open_file
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch15_moment_logic.moment_main import get_momentunit_from_json
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch06Keywords as wx,
-    Ch15Keywords as wx,
-    Ch18Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,

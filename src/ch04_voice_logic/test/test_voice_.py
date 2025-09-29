@@ -1,10 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_RespectBit_if_None
-from src.ch04_voice_logic._ref.ch04_keywords import (
-    Ch02Keywords as wx,
-    Ch04Keywords as wx,
-)
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic.voice import VoiceUnit, voiceunit_shop
 
 

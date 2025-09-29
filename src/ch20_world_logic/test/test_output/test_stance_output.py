@@ -8,11 +8,7 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_stance0001_path,
     create_stances_dir_path,
 )
-from src.ch20_world_logic._ref.ch20_keywords import (
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch10Keywords as wx,
-)
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,

@@ -2,7 +2,7 @@ from src.ch02_rope_logic._ref.ch02_keywords import Ch02Keywords
 
 
 def test_Ch02Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch02Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch02Keywords:

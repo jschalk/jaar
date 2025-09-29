@@ -158,7 +158,7 @@ def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
     assert ref_files_semantic_types == expected_types
 
 
-def test_Chapters_StrFunctionsAppearWhereTheyShould():
+def test_Chapters_KeywordsAppearWhereTheyShould():
     """Test that checks no str function is created before it is needed or after the term is used."""
 
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
@@ -179,7 +179,7 @@ def test_Chapters_StrFunctionsAppearWhereTheyShould():
         allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_num)
         not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
         not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
-        print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
+        # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
 
         chapter_files = list(get_python_files_with_flag(chapter_dir).keys())
         chapter_files.extend(list(get_json_files(chapter_dir)))
@@ -191,8 +191,28 @@ def test_Chapters_StrFunctionsAppearWhereTheyShould():
             # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
             file_str = open(file_path).read()
             for keyword in not_allowed_keywords:
-                assertion_failure_str = f"keyword {keyword} is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
-                assert file_str.find(keyword) == -1, assertion_failure_str
+                notallowed_keyword_failure_str = f"keyword {keyword} is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
+                assert file_str.find(keyword) == -1, notallowed_keyword_failure_str
+            print(f"{file_path=}")
+            excessive_imports_str = f"{file_path} has too many Keywords class imports"
+            ch_class_name = f"Ch{chapter_num:02}Keywords"
+            is_doc_builder_file = "doc_builder.py" in file_path
+            if file_path.find(f"test_ch{chapter_num:02}_keywords.py") == -1:
+                assert file_str.count("Keywords") <= 1, excessive_imports_str
+            elif is_doc_builder_file:
+                pass
+            else:
+                assert file_str.count(ch_class_name) in {0, 4}, ""
+            enum_x = f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
+            if "Keywords" in file_str and not is_doc_builder_file:
+                assert ch_class_name in file_str, enum_x
+
+
+def test_Chapters_StrEnumClassesAreCorrectlyTested():
+    """Test that checks no str function is created before it is needed or after the term is used."""
+    keywords_dict = get_keywords_src_config()
+    keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
+    cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
     chapter_num_descs = get_chapter_num_descs()

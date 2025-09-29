@@ -1,9 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     RopeMap,
     get_ropemap_from_dict,

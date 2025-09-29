@@ -2,7 +2,7 @@ from src.ch03_finance_logic._ref.ch03_keywords import Ch03Keywords
 
 
 def test_Ch03Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch03Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch03Keywords:

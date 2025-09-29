@@ -2,7 +2,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords
 
 
 def test_Ch07Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch07Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch07Keywords:

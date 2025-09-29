@@ -22,13 +22,7 @@ from src.ch17_idea_logic.idea_config import (
     get_idea_config_dict,
     get_idea_sqlite_types,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch07Keywords as wx,
-    Ch10Keywords as wx,
-    Ch15Keywords as wx,
-    Ch16Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     create_insert_into_translate_core_raw_sqlstr,

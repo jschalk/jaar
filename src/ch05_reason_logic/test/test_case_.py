@@ -3,10 +3,7 @@ from src.ch02_rope_logic.rope import (
     find_replace_rope_key_dict,
     get_default_nexus_label as root_label,
 )
-from src.ch05_reason_logic._ref.ch05_keywords import (
-    Ch02Keywords as wx,
-    Ch05Keywords as wx,
-)
+from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
 from src.ch05_reason_logic.reason import (
     CaseUnit,
     cases_get_from_dict,

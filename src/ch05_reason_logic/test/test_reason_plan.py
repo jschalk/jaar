@@ -3,10 +3,7 @@ from src.ch02_rope_logic.rope import (
     default_knot_if_None,
     get_default_nexus_label as root_label,
 )
-from src.ch05_reason_logic._ref.ch05_keywords import (
-    Ch02Keywords as wx,
-    Ch05Keywords as wx,
-)
+from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
 from src.ch05_reason_logic.reason import (
     ReasonCore,
     caseunit_shop,

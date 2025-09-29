@@ -5,18 +5,7 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_idea_brick_md,
     get_idea_brick_mds,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
-    Ch07Keywords as wx,
-    Ch08Keywords as wx,
-    Ch10Keywords as wx,
-    Ch15Keywords as wx,
-    Ch16Keywords as wx,
-    Ch17Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_config_dict, get_idea_formats_dir
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,

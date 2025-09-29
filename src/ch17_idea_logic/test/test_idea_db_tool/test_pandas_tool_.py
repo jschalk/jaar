@@ -1,10 +1,7 @@
 from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch04Keywords as wx,
-    Ch07Keywords as wx,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_db_tool import (
     get_ordered_csv,
     get_relevant_columns_dataframe,

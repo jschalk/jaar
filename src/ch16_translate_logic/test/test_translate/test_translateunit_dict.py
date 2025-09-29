@@ -1,8 +1,5 @@
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    Ch10Keywords as wx,
-    Ch16Keywords as wx,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
     get_clean_ropemap,

@@ -1,10 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch06Keywords as wx,
-    Ch08Keywords as wx,
-    Ch15Keywords as wx,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,

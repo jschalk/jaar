@@ -2,7 +2,7 @@ from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords
 
 
 def test_Ch04Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch04Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch04Keywords:

@@ -1,8 +1,8 @@
-from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords, Ch05Keywords as wx
+from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords
 
 
 def test_Ch05Keywords_AttributeNamesEqualValues():
-    """Test that all Ch09Keywords enum member names equal their values."""
+    """Test that all Ch05Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
     for member in Ch05Keywords:
