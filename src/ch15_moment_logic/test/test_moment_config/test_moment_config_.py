@@ -2,9 +2,9 @@ from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch09_belief_atom_logic.atom_config import get_allowed_class_types
 from src.ch15_moment_logic._ref.ch15_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     amount_str,
     belief_name_str,
     bud_time_str,
@@ -125,7 +125,7 @@ def _validate_moment_config(moment_config: dict):
             assert dimen_dict.get("moment_static") == "False"
         else:
             assert dimen_dict.get("moment_static") == "True"
-        assert dimen_dict.get(UPDATE_str()) is None
+        assert dimen_dict.get(wx.UPDATE) is None
         assert dimen_dict.get(INSERT_str()) is None
         assert dimen_dict.get(DELETE_str()) is None
         assert dimen_dict.get(normal_specs_str()) is None

@@ -24,9 +24,9 @@ from src.ch16_translate_logic.translate_config import (
     get_translateable_args,
 )
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     addin_str,
     allowed_crud_str,
     amount_str,
@@ -500,7 +500,7 @@ def test_get_allowed_curds_ReturnsObj():
         delete_update_str(),
         INSERT_str(),
         DELETE_str(),
-        UPDATE_str(),
+        wx.UPDATE,
     }
 
 
@@ -561,7 +561,7 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(jkeys_str()) is not None
         assert idea_dict.get(jvalues_str()) is not None
         assert idea_dict.get(allowed_crud_str()) is not None
-        assert idea_dict.get(UPDATE_str()) is None
+        assert idea_dict.get(wx.UPDATE) is None
         assert idea_dict.get(INSERT_str()) is None
         assert idea_dict.get(DELETE_str()) is None
         assert idea_dict.get(normal_specs_str()) is None
@@ -593,43 +593,43 @@ def _validate_idea_config(x_idea_config: dict):
         }:
             assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
         elif (
-            sub_dimen.get(UPDATE_str()) != None
+            sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(INSERT_str()) != None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_insert_update_str()
         elif (
-            sub_dimen.get(UPDATE_str()) != None
+            sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(INSERT_str()) != None
             and sub_dimen.get(DELETE_str()) is None
         ):
             assert idea_dict.get(allowed_crud_str()) == insert_update_str()
         elif (
-            sub_dimen.get(UPDATE_str()) is None
+            sub_dimen.get(wx.UPDATE) is None
             and sub_dimen.get(INSERT_str()) != None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_insert_str()
         elif (
-            sub_dimen.get(UPDATE_str()) != None
+            sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(INSERT_str()) is None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_update_str()
         elif (
-            sub_dimen.get(UPDATE_str()) != None
+            sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(INSERT_str()) is None
             and sub_dimen.get(DELETE_str()) is None
         ):
-            assert idea_dict.get(allowed_crud_str()) == UPDATE_str()
+            assert idea_dict.get(allowed_crud_str()) == wx.UPDATE
         elif (
-            sub_dimen.get(UPDATE_str()) is None
+            sub_dimen.get(wx.UPDATE) is None
             and sub_dimen.get(INSERT_str()) != None
             and sub_dimen.get(DELETE_str()) is None
         ):
             assert idea_dict.get(allowed_crud_str()) == INSERT_str()
         elif (
-            sub_dimen.get(UPDATE_str()) is None
+            sub_dimen.get(wx.UPDATE) is None
             and sub_dimen.get(INSERT_str()) is None
             and sub_dimen.get(DELETE_str()) != None
         ):

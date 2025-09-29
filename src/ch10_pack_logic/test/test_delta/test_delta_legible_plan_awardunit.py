@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     awardee_title_str,
     belief_plan_awardunit_str,
     give_force_str,
@@ -51,7 +51,7 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_UPDATE_give_force_take_fo
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     give_force_value = 81
     take_force_value = 43
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_beliefatom.set_arg(give_force_str(), give_force_value)
@@ -77,7 +77,7 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_UPDATE_give_force():
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     give_force_value = 81
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_beliefatom.set_arg(give_force_str(), give_force_value)
@@ -103,7 +103,7 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_UPDATE_take_force():
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
 
     take_force_value = 81
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_beliefatom.set_arg(take_force_str(), take_force_value)

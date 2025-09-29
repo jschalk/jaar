@@ -71,7 +71,11 @@ def get_chapter_str_functions(chapter_dir: str, chapter_desc_prefix: str) -> lis
     ref_dir = create_path(chapter_dir, "_ref")
     str_util_path = create_path(ref_dir, get_keywords_filename(chapter_desc_prefix))
     file_funcs, class_bases = get_function_names_from_file(str_util_path)
-    return file_funcs
+    filtered_file_funcs = []
+    for file_func in file_funcs:
+        if file_func != "__str__":
+            filtered_file_funcs.append(file_func)
+    return filtered_file_funcs
 
 
 def get_chapter_desc_str_number(chapter_desc: str) -> str:

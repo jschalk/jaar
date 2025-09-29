@@ -143,3 +143,6 @@ class Ch05Keywords(str, Enum):
     voice_cred_points = "voice_cred_points"
     voice_debt_points = "voice_debt_points"
     voice_name = "voice_name"
+
+    def __str__(self):
+        return self.value

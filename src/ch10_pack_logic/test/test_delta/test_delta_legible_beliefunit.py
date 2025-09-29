@@ -1,6 +1,6 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import UPDATE_str, beliefunit_str
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx, beliefunit_str
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
 
@@ -19,7 +19,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_tally():
     dimen = beliefunit_str()
     tally_str = "tally"
     tally_int = 55
-    tally_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    tally_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     tally_beliefatom.set_arg(tally_str, tally_int)
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(tally_beliefatom)
@@ -38,7 +38,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_credor_respect(
     dimen = beliefunit_str()
     voice_credor_pool_str = "credor_respect"
     voice_credor_pool_int = 71
-    voice_credor_pool_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    voice_credor_pool_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     voice_credor_pool_beliefatom.set_arg(voice_credor_pool_str, voice_credor_pool_int)
 
     print(f"{voice_credor_pool_beliefatom=}")
@@ -59,7 +59,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_debtor_respect(
     dimen = beliefunit_str()
     voice_debtor_pool_str = "debtor_respect"
     voice_debtor_pool_int = 78
-    voice_debtor_pool_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    voice_debtor_pool_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     voice_debtor_pool_beliefatom.set_arg(voice_debtor_pool_str, voice_debtor_pool_int)
 
     print(f"{voice_debtor_pool_beliefatom=}")
@@ -82,7 +82,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_credor_respect_
     voice_credor_pool_str = "credor_respect"
     voice_debtor_pool_str = "debtor_respect"
     voice_pool_int = 83
-    beliefunit_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    beliefunit_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     beliefunit_beliefatom.set_arg(voice_credor_pool_str, voice_pool_int)
     beliefunit_beliefatom.set_arg(voice_debtor_pool_str, voice_pool_int)
     x_beliefdelta.set_beliefatom(beliefunit_beliefatom)
@@ -102,7 +102,7 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_max_tree_traver
     dimen = beliefunit_str()
     max_tree_traverse_str = "max_tree_traverse"
     max_tree_traverse_int = 71
-    max_tree_traverse_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    max_tree_traverse_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     max_tree_traverse_beliefatom.set_arg(max_tree_traverse_str, max_tree_traverse_int)
 
     print(f"{max_tree_traverse_beliefatom=}")

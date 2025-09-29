@@ -282,3 +282,6 @@ class Ch07Keywords(str, Enum):
     voice_name = "voice_name"
     voice_pool = "voice_pool"
     voices = "voices"
+
+    def __str__(self):
+        return self.value

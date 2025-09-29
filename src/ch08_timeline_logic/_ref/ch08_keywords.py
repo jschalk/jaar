@@ -275,3 +275,6 @@ class Ch08Keywords(str, Enum):
     yr1_jan1_offset = "yr1_jan1_offset"
     yr4_clean = "yr4_clean"
     yr4_leap = "yr4_leap"
+
+    def __str__(self):
+        return self.value

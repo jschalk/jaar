@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     belief_plan_reasonunit_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -71,7 +71,7 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_req
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     reason_active_requisite_value = True
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
     swim_beliefatom.set_arg(
@@ -97,7 +97,7 @@ def test_create_legible_list_ReturnsObj_plan_reasonunit_UPDATE_reason_active_req
     reason_context_value = f"{sue_belief.knot}Swimmers"
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
     # print(f"{swim_beliefatom=}")

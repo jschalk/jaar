@@ -74,10 +74,35 @@ class is_2d_with_unique_keys_Exception(Exception):
     pass
 
 
+from enum import Enum
+from typing import Any, List, Union
+
+
+def convert_enum_keys_to_strings(keys: List[Any]) -> List[str]:
+    """
+    Takes a list of keys and converts any enum objects to their string values.
+
+    Args:
+        keys: List that may contain enum objects, strings, or other types
+
+    Returns:
+        List with enum objects converted to their .value strings
+    """
+    result = []
+    for key in keys:
+        if isinstance(key, Enum):
+            result.append(key.value)  # Use .value instead of str()
+        else:
+            result.append(key)
+    return result
+
+
 def get_from_nested_dict(
     x_dict: dict, x_keylist: list, if_missing_return_None: bool = False
 ) -> any:
     z_keylist = copy_deepcopy(x_keylist)
+    z_keylist = convert_enum_keys_to_strings(z_keylist)
+
     if not if_missing_return_None:
         return _sub_get_from_nested_dict(x_dict, z_keylist)
     try:

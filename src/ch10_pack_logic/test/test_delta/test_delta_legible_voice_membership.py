@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     belief_voice_membership_str,
     group_cred_points_str,
     group_debt_points_str,
@@ -50,7 +50,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_point
     yao_str = "Yao"
     group_cred_points_value = 81
     group_debt_points_value = 43
-    yao_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     yao_beliefatom.set_arg(group_title_str(), swim_str)
     yao_beliefatom.set_arg(voice_name_str(), yao_str)
     yao_beliefatom.set_arg(group_cred_points_str, group_cred_points_value)
@@ -76,7 +76,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_point
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     group_cred_points_value = 81
-    yao_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     yao_beliefatom.set_arg(group_title_str(), swim_str)
     yao_beliefatom.set_arg(voice_name_str(), yao_str)
     yao_beliefatom.set_arg(group_cred_points_str, group_cred_points_value)
@@ -101,7 +101,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_debt_point
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     group_debt_points_value = 43
-    yao_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     yao_beliefatom.set_arg(group_title_str(), swim_str)
     yao_beliefatom.set_arg(voice_name_str(), yao_str)
     yao_beliefatom.set_arg(group_debt_points_str, group_debt_points_value)

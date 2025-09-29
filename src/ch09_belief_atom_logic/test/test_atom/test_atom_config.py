@@ -1,13 +1,13 @@
 from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
     LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
-    UPDATE_str,
     addin_str,
     awardee_title_str,
     begin_str,
@@ -83,9 +83,9 @@ from src.ch09_belief_atom_logic.atom_config import (
 
 def test_CRUD_command_Exists():
     # ESTABLISH / WHEN / THEN
-    assert CRUD_command(UPDATE_str()) == UPDATE_str()
-    assert CRUD_command(DELETE_str()) == DELETE_str()
-    assert CRUD_command(INSERT_str()) == INSERT_str()
+    assert CRUD_command(wx.UPDATE) == str(wx.UPDATE)
+    assert CRUD_command(DELETE_str()) == str(DELETE_str())
+    assert CRUD_command(INSERT_str()) == str(INSERT_str())
 
 
 def test_get_belief_dimens_ReturnsObj():
@@ -174,10 +174,10 @@ def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
                 print(x_str)
                 return False
 
-        if dimen_dict.get(UPDATE_str()) is not None:
-            dimen_update = dimen_dict.get(UPDATE_str())
+        if dimen_dict.get(wx.UPDATE) is not None:
+            dimen_update = dimen_dict.get(wx.UPDATE)
             if dimen_update.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {UPDATE_str()} {dimen_update.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {wx.UPDATE} {dimen_update.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
@@ -211,13 +211,13 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     # set_mog(INSERT_str(), belief_plan_factunit_str(), 6)
     # set_mog(INSERT_str(), belief_plan_reasonunit_str(), 7)
     # set_mog(INSERT_str(), belief_plan_reason_caseunit_str(), 8)
-    # set_mog(UPDATE_str(), belief_voiceunit_str(), 9)
-    # set_mog(UPDATE_str(), belief_voice_membership_str(), 10)
-    # set_mog(UPDATE_str(), belief_planunit_str(), 11)
-    # set_mog(UPDATE_str(), belief_plan_awardunit_str(), 12)
-    # set_mog(UPDATE_str(), belief_plan_factunit_str(), 13)
-    # set_mog(UPDATE_str(), belief_plan_reason_caseunit_str(), 14)
-    # set_mog(UPDATE_str(), belief_plan_reasonunit_str(), 15)
+    # set_mog(wx.UPDATE, belief_voiceunit_str(), 9)
+    # set_mog(wx.UPDATE, belief_voice_membership_str(), 10)
+    # set_mog(wx.UPDATE, belief_planunit_str(), 11)
+    # set_mog(wx.UPDATE, belief_plan_awardunit_str(), 12)
+    # set_mog(wx.UPDATE, belief_plan_factunit_str(), 13)
+    # set_mog(wx.UPDATE, belief_plan_reason_caseunit_str(), 14)
+    # set_mog(wx.UPDATE, belief_plan_reasonunit_str(), 15)
     # set_mog(DELETE_str(), belief_plan_reason_caseunit_str(), 16)
     # set_mog(DELETE_str(), belief_plan_reasonunit_str(), 17)
     # set_mog(DELETE_str(), belief_plan_factunit_str(), 18)
@@ -227,7 +227,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     # set_mog(DELETE_str(), belief_planunit_str(), 22)
     # set_mog(DELETE_str(), belief_voice_membership_str(), 23)
     # set_mog(DELETE_str(), belief_voiceunit_str(), 24)
-    # set_mog(UPDATE_str(), beliefunit_str(), 25)
+    # set_mog(wx.UPDATE, beliefunit_str(), 25)
 
     assert 0 == q_order(INSERT_str(), belief_voiceunit_str())
     assert 1 == q_order(INSERT_str(), belief_voice_membership_str())
@@ -238,13 +238,13 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     assert 6 == q_order(INSERT_str(), belief_plan_factunit_str())
     assert 7 == q_order(INSERT_str(), belief_plan_reasonunit_str())
     assert 8 == q_order(INSERT_str(), belief_plan_reason_caseunit_str())
-    assert 9 == q_order(UPDATE_str(), belief_voiceunit_str())
-    assert 10 == q_order(UPDATE_str(), belief_voice_membership_str())
-    assert 11 == q_order(UPDATE_str(), belief_planunit_str())
-    assert 12 == q_order(UPDATE_str(), belief_plan_awardunit_str())
-    assert 13 == q_order(UPDATE_str(), belief_plan_factunit_str())
-    assert 14 == q_order(UPDATE_str(), belief_plan_reason_caseunit_str())
-    assert 15 == q_order(UPDATE_str(), belief_plan_reasonunit_str())
+    assert 9 == q_order(wx.UPDATE, belief_voiceunit_str())
+    assert 10 == q_order(wx.UPDATE, belief_voice_membership_str())
+    assert 11 == q_order(wx.UPDATE, belief_planunit_str())
+    assert 12 == q_order(wx.UPDATE, belief_plan_awardunit_str())
+    assert 13 == q_order(wx.UPDATE, belief_plan_factunit_str())
+    assert 14 == q_order(wx.UPDATE, belief_plan_reason_caseunit_str())
+    assert 15 == q_order(wx.UPDATE, belief_plan_reasonunit_str())
     assert 16 == q_order(DELETE_str(), belief_plan_reason_caseunit_str())
     assert 17 == q_order(DELETE_str(), belief_plan_reasonunit_str())
     assert 18 == q_order(DELETE_str(), belief_plan_factunit_str())
@@ -254,7 +254,7 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     assert 22 == q_order(DELETE_str(), belief_planunit_str())
     assert 23 == q_order(DELETE_str(), belief_voice_membership_str())
     assert 24 == q_order(DELETE_str(), belief_voiceunit_str())
-    assert 25 == q_order(UPDATE_str(), beliefunit_str())
+    assert 25 == q_order(wx.UPDATE, beliefunit_str())
 
 
 def _get_atom_config_jkeys_len(x_dimen: str) -> int:

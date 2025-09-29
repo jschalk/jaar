@@ -1,8 +1,8 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     INSERT_str,
-    UPDATE_str,
     belief_voiceunit_str,
     voice_cred_points_str,
     voice_name_str,
@@ -37,6 +37,6 @@ def test_get_minimal_beliefdelta_ReturnsObjUPDATEBeliefAtom_belief_voiceunit():
     # THEN
     assert len(new_beliefdelta.get_sorted_beliefatoms()) == 1
     new_beliefatom = new_beliefdelta.get_sorted_beliefatoms()[0]
-    assert new_beliefatom.crud_str == UPDATE_str()
+    assert new_beliefatom.crud_str == wx.UPDATE
     new_jvalues = new_beliefatom.get_jvalues_dict()
     assert new_jvalues == {voice_cred_points_str(): new_bob_voice_cred_points}

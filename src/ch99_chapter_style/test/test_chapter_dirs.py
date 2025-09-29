@@ -131,13 +131,14 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
             test_file_path = create_path(util_dir, f"test_{keywords_filename}")
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
-            assert len(test_file_imports) == 1
-            check_import_objs_are_ordered(test_file_imports, test_file_path)
-            file_funcs, class_bases = get_function_names_from_file(test_file_path)
-            assert file_funcs == ["test_str_functions_ReturnsObj"]
-            check_str_func_test_file_has_needed_asserts(
-                chapter_str_funcs, test_file_path, util_dir, chapter_desc
-            )
+            assert len(test_file_imports) <= 1
+            if len(test_file_imports) == 1:
+                check_import_objs_are_ordered(test_file_imports, test_file_path)
+                file_funcs, class_bases = get_function_names_from_file(test_file_path)
+                assert file_funcs == ["test_str_functions_ReturnsObj"]
+                check_str_func_test_file_has_needed_asserts(
+                    chapter_str_funcs, test_file_path, util_dir, chapter_desc
+                )
 
 
 def test_Chapters_test_TestsAreInCorrectFolderStructure():

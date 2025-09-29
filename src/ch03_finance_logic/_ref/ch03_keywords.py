@@ -69,3 +69,6 @@ class Ch03Keywords(str, Enum):
     parent_rope = "parent_rope"
     penny = "penny"
     sqlite_datatype = "sqlite_datatype"
+
+    def __str__(self):
+        return self.value

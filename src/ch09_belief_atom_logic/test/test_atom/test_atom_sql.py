@@ -3,8 +3,8 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_rowdata
 from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch09Keywords as wx,
     INSERT_str,
-    UPDATE_str,
     atom_hx_str,
     belief_plan_factunit_str,
     beliefunit_str,
@@ -27,7 +27,7 @@ def test_BeliefAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     x_dimen = belief_plan_factunit_str()
-    update_disc_beliefatom = beliefatom_shop(x_dimen, UPDATE_str())
+    update_disc_beliefatom = beliefatom_shop(x_dimen, wx.UPDATE)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
 
     # WHEN / THEN
@@ -44,12 +44,12 @@ def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_BeliefUnitSimpleAttrs():
     new2_value = 66
     dimen = beliefunit_str()
     opt_arg2 = "max_tree_traverse"
-    x_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     x_beliefatom.set_jvalue(opt_arg2, new2_value)
     x_table = "atom_hx"
     example_sqlstr = f"""
 INSERT INTO {x_table} (
-  {dimen}_{UPDATE_str()}_{opt_arg2}
+  {dimen}_{wx.UPDATE}_{opt_arg2}
 )
 VALUES (
   {new2_value}

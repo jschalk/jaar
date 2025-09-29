@@ -50,3 +50,6 @@ class Ch02Keywords(str, Enum):
     knot = "knot"
     parent_rope = "parent_rope"
     sqlite_datatype = "sqlite_datatype"
+
+    def __str__(self):
+        return self.value

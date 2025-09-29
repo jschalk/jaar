@@ -1,9 +1,9 @@
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     inx_knot_str,
     inx_label_str,
     inx_name_str,
@@ -102,7 +102,7 @@ def _validate_translate_config(translate_config: dict):
         print(f"_validate_translate_config {translate_dimens=}")
         assert dimen_dict.get(jkeys_str()) is not None
         assert dimen_dict.get(jvalues_str()) is not None
-        assert dimen_dict.get(UPDATE_str()) is None
+        assert dimen_dict.get(wx.UPDATE) is None
         assert dimen_dict.get(INSERT_str()) is None
         assert dimen_dict.get(DELETE_str()) is None
         assert dimen_dict.get(normal_specs_str()) is None

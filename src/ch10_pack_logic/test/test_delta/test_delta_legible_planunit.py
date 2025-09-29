@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     addin_str,
     begin_str,
     belief_planunit_str,
@@ -77,7 +77,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     morph_value = 37
     star_value = 43
     pledge_value = False
-    clean_beliefatom = beliefatom_shop(dimen, UPDATE_str())
+    clean_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
     clean_beliefatom.set_arg(addin_str(), addin_value)
     clean_beliefatom.set_arg(begin_str(), begin_value)

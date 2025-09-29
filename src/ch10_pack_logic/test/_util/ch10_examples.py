@@ -1,10 +1,10 @@
-from src.ch07_belief_logic._ref.ch07_semantic_types import MomentLabel
 from src.ch02_rope_logic.rope import create_rope
+from src.ch07_belief_logic._ref.ch07_semantic_types import MomentLabel
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     belief_planunit_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -60,7 +60,7 @@ def get_atom_example_planunit_knee(moment_label: MomentLabel = None) -> BeliefAt
 def get_beliefdelta_sue_example() -> BeliefDelta:
     sue_beliefdelta = beliefdelta_shop()
 
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), UPDATE_str())
+    pool_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
     pool_attribute = "credor_respect"
     pool_beliefatom.set_jvalue(pool_attribute, 77)
     sue_beliefdelta.set_beliefatom(pool_beliefatom)
@@ -77,7 +77,7 @@ def get_beliefdelta_example1() -> BeliefDelta:
     sue_beliefdelta = beliefdelta_shop()
 
     tally_name = "tally"
-    x_beliefatom = beliefatom_shop(beliefunit_str(), UPDATE_str())
+    x_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
     x_beliefatom.set_jvalue(tally_name, 55)
     x_attribute = "max_tree_traverse"
     x_beliefatom.set_jvalue(x_attribute, 66)

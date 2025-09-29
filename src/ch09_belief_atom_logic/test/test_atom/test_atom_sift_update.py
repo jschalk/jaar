@@ -7,8 +7,8 @@ from src.ch07_belief_logic.belief_tool import (
     belief_plan_reasonunit_get_obj,
 )
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch09Keywords as wx,
     INSERT_str,
-    UPDATE_str,
     addin_str,
     awardee_title_str,
     begin_str,
@@ -55,7 +55,7 @@ def test_sift_atom_ReturnsNoneIfGivenBeliefAtomIsUPDATE():
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
-    casa_atom = beliefatom_shop(belief_planunit_str(), UPDATE_str())
+    casa_atom = beliefatom_shop(belief_planunit_str(), wx.UPDATE)
     casa_atom.set_arg(parent_rope_str(), sue_belief.moment_label)
     casa_atom.set_arg(plan_label_str(), casa_str)
     casa_atom.set_arg(star_str(), 8)
@@ -93,7 +93,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues == {
@@ -124,7 +124,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues == {voice_debt_points_str(): 51}
@@ -149,7 +149,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues == {group_debt_points_str(): zia_run_group_debt_points}
@@ -192,7 +192,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
 
     # THEN
     assert new_casa_atom
-    assert new_casa_atom.crud_str == UPDATE_str()
+    assert new_casa_atom.crud_str == wx.UPDATE
     assert new_casa_atom.get_jvalues_dict()
     zia_jvalues = new_casa_atom.get_jvalues_dict()
     assert zia_jvalues.get(addin_str()) == sue_addin
@@ -230,7 +230,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_awardunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues.get(give_force_str()) == zia_run_give_force
@@ -262,7 +262,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     zia_requisite_value = zia_jvalues.get(reason_active_requisite_str())
@@ -303,7 +303,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues.get("reason_divisor") == thur_reason_divisor
@@ -334,7 +334,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_factunit():
 
     # THEN
     assert new_zia_beliefatom
-    assert new_zia_beliefatom.crud_str == UPDATE_str()
+    assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
     assert zia_jvalues.get(fact_lower_str()) == casa_fact_lower

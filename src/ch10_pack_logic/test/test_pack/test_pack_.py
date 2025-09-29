@@ -5,9 +5,9 @@ from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch09Keywords as wx,
     DELETE_str,
     INSERT_str,
-    UPDATE_str,
     belief_name_str,
     belief_voiceunit_str,
     event_int_str,
@@ -614,7 +614,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     bob_packunit_update = packunit_shop(bob_str)
     bob_packunit_update.add_beliefatom(
         dimen=belief_voiceunit_str(),
-        crud_str=UPDATE_str(),
+        crud_str=wx.UPDATE,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
