@@ -3,6 +3,7 @@ from src.ch01_data_toolbox.file_toolbox import count_dirs_files, create_path, op
 from src.ch02_rope_logic._ref.ch02_doc_builder import get_ropeterm_explanation_md
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_blurbs_md,
+    get_keywords_src_config,
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
@@ -12,6 +13,18 @@ from src.ch98_docs_builder.test._util.ch98_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+
+
+def test_get_keywords_src_config_ReturnsObj():
+    # ESTABLISH / WHEN
+    keywords_config = get_keywords_src_config()
+
+    # THEN
+    assert keywords_config
+    assert keywords_config.get("fund_pool")
+    for keyword, ref_dict in keywords_config.items():
+        assert set(ref_dict.keys()) == {"chapter_num"}
+        print(f"{keyword=} {ref_dict=}")
 
 
 def test_get_chapter_blurbs_md_ReturnsObj():

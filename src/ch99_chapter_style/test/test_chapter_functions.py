@@ -7,19 +7,15 @@ from inspect import (
     isfunction as inspect_isfunction,
 )
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import (
-    create_path,
-    get_dir_filenames,
-    open_file,
-    open_json,
-    save_json,
-)
+from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames, open_file
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
     get_chapter_num_descs,
-    get_chapter_str_functions,
+    get_cumlative_ch_keywords_dict,
+    get_keywords_by_chapter,
+    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
     check_all_test_functions_are_formatted,
@@ -169,50 +165,37 @@ def test_Chapters_StrFunctionsAppearWhereTheyShould():
 
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
-    all_str_functions = get_all_str_functions()
-    str_first_ref = {str_function: None for str_function in all_str_functions}
     # "close" is excluded because it is used to close sqlite database connections
     excluded_strs = {"close"}
+    # new method references from keywords config file
+    keywords_dict = get_keywords_src_config()
+    keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
+    all_keywords_set = set(keywords_dict.keys())
+    cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     # WHEN / THEN
     # all_file_count = 0
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
+        allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_num)
+        not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
+        not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
+        print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
+
         chapter_files = list(get_python_files_with_flag(chapter_dir).keys())
         chapter_files.extend(list(get_json_files(chapter_dir)))
         chapter_files = sorted(chapter_files)
-        str_funcs_set = set(get_chapter_str_functions(chapter_dir, chapter_prefix))
-        # print(f"{desc_number_str} {len(str_funcs_set)=}")
         # chapter_file_count = 0
         for file_path in chapter_files:
-            if file_path.find("_util") == -1:
-                # chapter_file_count += 1
-                # all_file_count += 1
-                # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
-                first_ref_missing_strs = {
-                    str_function[:-4]
-                    for str_function in str_first_ref
-                    if str_first_ref.get(str_function) is None
-                }
-                file_str = open(file_path).read()
-                for x_str in first_ref_missing_strs:
-                    if file_str.find(x_str) > -1 and x_str not in excluded_strs:
-                        x_str_func_name = f"{x_str}_str"
-                        str_first_ref[x_str_func_name] = file_path
-                        # TODO reactivate (change if needed)
-                        # if x_str_func_name not in str_funcs_set:
-                        #     print(f"missing {x_str=} {file_path=}")
-                        # assert x_str_func_name in str_funcs_set
+            # chapter_file_count += 1
+            # all_file_count += 1
+            # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
+            file_str = open(file_path).read()
+            for keyword in not_allowed_keywords:
+                assertion_failure_str = f"keyword {keyword} is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
+                assert file_str.find(keyword) == -1, assertion_failure_str
 
-    # save all_str_functions
-    print(f"{len(all_str_functions)=}")
-    # all_keywords = {}
-    # for str_func_name, ref_dict in all_str_functions.items():
-    #     all_keywords[str_func_name[:-4]] = ref_dict
-    # save_json("src/ch99_chapter_style/keywords.json", None, all_keywords)
-    keywords_dict = open_json("src/ch99_chapter_style/keywords.json")
-    keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
-    cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
     chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
     chapter_num_descs = get_chapter_num_descs()
 
@@ -263,27 +246,6 @@ def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
     return chXX_keyword_classes
 
 
-def get_keywords_by_chapter(keywords_dict: dict) -> dict:
-    chapters_keywords = {}
-    for chapter_num in get_chapter_num_descs().keys():
-        chapters_keywords[chapter_num] = set()
-    for x_keyword, ref_dict in keywords_dict.items():
-        keyworld_init_chapter_num = ref_dict.get("chapter_num")
-        chapter_set = chapters_keywords.get(keyworld_init_chapter_num)
-        chapter_set.add(x_keyword)
-    return chapters_keywords
-
-
-def get_cumlative_ch_keywords_dict(keywords_by_chapter: dict) -> dict:
-    allowed_keywords_set = set()
-    cumlative_ch_keywords_dict = {}
-    for chapter_num in sorted(list(keywords_by_chapter.keys())):
-        ch_keywords_set = keywords_by_chapter.get(chapter_num)
-        allowed_keywords_set.update(ch_keywords_set)
-        cumlative_ch_keywords_dict[chapter_num] = copy_copy(allowed_keywords_set)
-    return cumlative_ch_keywords_dict
-
-
 def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
@@ -317,25 +279,26 @@ def test_Chapters_StrFunctionsAreAllImported():
     print(f"{max_chapter_import_str=}")
     max_mod_obj = importlib_import_module(max_chapter_import_str)
     mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
-    mod_str_funcs = {name for name, obj in mod_all_funcs if not name.startswith("__")}
+    mod_keywords_by_chapter = {
+        name for name, obj in mod_all_funcs if not name.startswith("__")
+    }
 
     print(f"{len(mod_all_funcs)=}")
     all_str_func_set = set(all_str_functions)
-    all_str_func_set.remove("__str__")
-    print(f"{all_str_func_set.difference(mod_str_funcs)=}")
-    print(f"{mod_str_funcs.difference(all_str_func_set)=}")
-    assert len(all_str_func_set) == len(mod_str_funcs)
-    assert all_str_func_set == mod_str_funcs
+    print(f"{all_str_func_set.difference(mod_keywords_by_chapter)=}")
+    print(f"{mod_keywords_by_chapter.difference(all_str_func_set)=}")
+    assert len(all_str_func_set) == len(mod_keywords_by_chapter)
+    assert all_str_func_set == mod_keywords_by_chapter
 
     # make semantic_type names required keyword str functions
     semantic_types = expected_semantic_types()
-    semantic_str_funcs = set()
+    semantic_keywords_by_chapter = set()
     for semantic_typ in semantic_types:
-        semantic_str_funcs.add(f"{semantic_typ}_str")
+        semantic_keywords_by_chapter.add(f"{semantic_typ}_str")
     print(
-        f"semantic_types without str function: {sorted(list(semantic_str_funcs.difference(all_str_functions)))}"
+        f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_str_functions)))}"
     )
-    assert semantic_str_funcs.issubset(all_str_func_set)
+    assert semantic_keywords_by_chapter.issubset(all_str_func_set)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

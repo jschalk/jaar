@@ -1,12 +1,12 @@
-from src.ch01_data_toolbox._ref.ch01_keywords import (
-    INSERT_str,
-    UPDATE_str,
-    sqlite_datatype_str,
-)
+from src.ch01_data_toolbox._ref.ch01_keywords import Ch01Keywords
 
 
-def test_str_functions_ReturnsObj():
+def test_Ch01Keywords_attribute_names_equal_values():
+    """Test that all Ch09Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
-    assert INSERT_str() == "INSERT"
-    assert UPDATE_str() == "UPDATE"
-    assert sqlite_datatype_str() == "sqlite_datatype"
+
+    for member in Ch01Keywords:
+        assertion_failure_str = (
+            f"Enum member name '{member.name}' does not match value '{member.value}'"
+        )
+        assert member.name == member.value, assertion_failure_str

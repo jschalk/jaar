@@ -1,4 +1,4 @@
-# Chapterr Overview
+# Chapter Overview
 
 What does each one do?
 
@@ -7,7 +7,7 @@ What does each one do?
 - **ch01_data_toolbox**: Creates boring tools for computer data manipulation.
 - **ch02_rope_logic**: Defines Term Classes: Knots, Labels, RopeTerms, GroupNames, MomentLabels
 - **ch03_finance_logic**: Defines tools for financial allotment to ledgers.
-- **ch04_group_logic**: Defines debt and cred to Voices and Memberships to Groups.
+- **ch04_voice_logic**: Defines debt and cred to Voices and Memberships to Groups.
 - **ch05_reason_logic**: Defines ReasonUnits, FactUnits, and Facts decide if a Reason status is True
 - **ch06_plan_logic**: Defines PlanUnits with sub-plans, Awardees, Labor, Reasons, Facts, etc.
 - **ch07_belief_logic**: Defines a BeliefUnit as a PlanUnit and VoiceUnits capable of producing an agenda.

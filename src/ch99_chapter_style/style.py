@@ -183,7 +183,8 @@ def get_all_str_functions() -> dict[str, int]:
         str_functions, class_bases = get_function_names_from_file(str_util_path)
         chapter_num = int(get_chapter_desc_str_number(chapter_desc))
         for str_function_name in str_functions:
-            all_str_functions[str_function_name] = {"chapter_num": chapter_num}
+            if str_function_name != "__str__":
+                all_str_functions[str_function_name] = {"chapter_num": chapter_num}
     return all_str_functions
 
 
@@ -284,9 +285,11 @@ def get_semantic_types(semantic_type_candidates) -> set:
     return semantic_type_confirmed
 
 
-def check_if_chapter_str_funcs_is_sorted(chapter_str_funcs: list[str]):
+def check_if_chapter_keywords_by_chapter_is_sorted(
+    chapter_keywords_by_chapter: list[str],
+):
     filtered_ch_str_func = []
-    for str_func in chapter_str_funcs:
+    for str_func in chapter_keywords_by_chapter:
         if str_func != "__str__":
             filtered_ch_str_func.append(str_func)
 
@@ -311,14 +314,16 @@ def check_if_chapter_str_funcs_is_sorted(chapter_str_funcs: list[str]):
     assert filtered_ch_str_func == sorted(filtered_ch_str_func)
 
 
-def check_str_funcs_are_not_duplicated(
-    chapter_str_funcs: list[str], running_str_functions_set: set[str]
+def check_keywords_by_chapter_are_not_duplicated(
+    chapter_keywords_by_chapter: list[str], running_str_functions_set: set[str]
 ):
     running_str_functions_set = set(running_str_functions_set)
-    chapter_str_funcs = set(chapter_str_funcs)
-    if chapter_str_funcs & running_str_functions_set:
-        print(f"Duplicate functions: {chapter_str_funcs & running_str_functions_set}")
-    assert not chapter_str_funcs & running_str_functions_set
+    chapter_keywords_by_chapter = set(chapter_keywords_by_chapter)
+    if chapter_keywords_by_chapter & running_str_functions_set:
+        print(
+            f"Duplicate functions: {chapter_keywords_by_chapter & running_str_functions_set}"
+        )
+    assert not chapter_keywords_by_chapter & running_str_functions_set
 
 
 def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str):
@@ -336,9 +341,9 @@ def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str)
 
 
 def check_str_func_test_file_has_needed_asserts(
-    chapter_str_funcs, test_file_path, util_dir, chapter_desc
+    chapter_keywords_by_chapter, test_file_path, util_dir, chapter_desc
 ):
-    for str_function in chapter_str_funcs:
+    for str_function in chapter_keywords_by_chapter:
         # print(f" {str_function=}")
         assert str(str_function).endswith("_str")
         str_func_assert_str = f"""assert {str_function}() == "{str_function[:-4]}"""

@@ -14,10 +14,10 @@ from src.ch98_docs_builder.doc_builder import (
     get_keywords_filename,
 )
 from src.ch99_chapter_style.style import (
-    check_if_chapter_str_funcs_is_sorted,
+    check_if_chapter_keywords_by_chapter_is_sorted,
     check_import_objs_are_ordered,
+    check_keywords_by_chapter_are_not_duplicated,
     check_str_func_test_file_has_needed_asserts,
-    check_str_funcs_are_not_duplicated,
     get_chapter_descs,
     get_function_names_from_file,
     get_imports_from_file,
@@ -121,12 +121,16 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
         test_dir = create_path(chapter_dir, "test")
         util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
-        chapter_str_funcs = get_chapter_str_functions(chapter_dir, chapter_desc_prefix)
-        check_if_chapter_str_funcs_is_sorted(chapter_str_funcs)
-        check_str_funcs_are_not_duplicated(chapter_str_funcs, running_str_functions)
-        running_str_functions.update(set(chapter_str_funcs))
+        chapter_keywords_by_chapter = get_chapter_str_functions(
+            chapter_dir, chapter_desc_prefix
+        )
+        check_if_chapter_keywords_by_chapter_is_sorted(chapter_keywords_by_chapter)
+        check_keywords_by_chapter_are_not_duplicated(
+            chapter_keywords_by_chapter, running_str_functions
+        )
+        running_str_functions.update(set(chapter_keywords_by_chapter))
 
-        if len(chapter_str_funcs) > 0:
+        if len(chapter_keywords_by_chapter) > 0:
             keywords_filename = get_keywords_filename(chapter_desc_prefix)
             test_file_path = create_path(util_dir, f"test_{keywords_filename}")
             assert os_path_exists(test_file_path)
@@ -137,7 +141,7 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
                 file_funcs, class_bases = get_function_names_from_file(test_file_path)
                 assert file_funcs == ["test_str_functions_ReturnsObj"]
                 check_str_func_test_file_has_needed_asserts(
-                    chapter_str_funcs, test_file_path, util_dir, chapter_desc
+                    chapter_keywords_by_chapter, test_file_path, util_dir, chapter_desc
                 )
 
 
