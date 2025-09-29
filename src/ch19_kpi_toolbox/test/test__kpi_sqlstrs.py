@@ -1,10 +1,10 @@
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch18Keywords as wx,
     Ch19Keywords as wx,
     active_str,
-    belief_planunit_str,
     moment_label_str,
     plan_rope_str,
     pledge_str,
@@ -18,7 +18,7 @@ from src.ch19_kpi_toolbox.kpi_sqlstrs import (
 
 def test_get_create_kpi001_sqlstr_ReturnsObj():
     # ESTABLISH
-    blrplan_str = belief_planunit_str()
+    blrplan_str = wx.belief_planunit
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN
@@ -45,7 +45,7 @@ GROUP BY {wx.moment_voice_nets}.{moment_label_str()}, {wx.moment_voice_nets}.{wx
 
 def test_get_create_kpi002_sqlstr_ReturnsObj():
     # ESTABLISH
-    blrplan_str = belief_planunit_str()
+    blrplan_str = wx.belief_planunit
     blrplan_job = create_prime_tablename(blrplan_str, "job", None)
 
     # WHEN

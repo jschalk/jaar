@@ -3,8 +3,7 @@ from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
-    credor_respect_str,
-    voice_pool_str,
+    Ch07Keywords as wx,
 )
 from src.ch17_idea_logic.idea_db_tool import (
     get_ordered_csv,

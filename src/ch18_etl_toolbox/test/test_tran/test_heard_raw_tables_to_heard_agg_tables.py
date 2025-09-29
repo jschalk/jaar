@@ -7,9 +7,9 @@ from src.ch17_idea_logic.idea_config import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch17Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -152,9 +152,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
   {wx.event_int}
@@ -175,9 +173,7 @@ VALUES
 """
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 5
-        blrpern_h_agg_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "agg", "put"
-        )
+        blrpern_h_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "agg", "put")
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 0
 
         # WHEN
@@ -226,9 +222,7 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
   {wx.event_int}
@@ -249,9 +243,7 @@ VALUES
 """
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 5
-        blrpern_h_agg_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "agg", "put"
-        )
+        blrpern_h_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "agg", "put")
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 0
 
         # WHEN

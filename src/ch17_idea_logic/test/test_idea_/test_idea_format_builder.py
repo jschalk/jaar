@@ -9,14 +9,12 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    attributes_str,
-    belief_planunit_str,
-    dimens_str,
     gogo_want_str,
     moment_label_str,
     plan_rope_str,
@@ -52,12 +50,12 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    belief_planunit_filename = f"idea_format_00026_{belief_planunit_str()}_v0_0_0.json"
+    belief_planunit_filename = f"idea_format_00026_{wx.belief_planunit}_v0_0_0.json"
     assert dimens_idea_format_dict.get(belief_planunit_filename)
     belief_planunit_dict = dimens_idea_format_dict.get(belief_planunit_filename)
-    assert belief_planunit_dict.get(dimens_str()) == [belief_planunit_str()]
-    assert belief_planunit_dict.get(attributes_str())
-    belief_planunit_attributes = belief_planunit_dict.get(attributes_str())
+    assert belief_planunit_dict.get(wx.dimens) == [wx.belief_planunit]
+    assert belief_planunit_dict.get(wx.attributes)
+    belief_planunit_attributes = belief_planunit_dict.get(wx.attributes)
     assert moment_label_str() in belief_planunit_attributes
     assert wx.belief_name in belief_planunit_attributes
     assert plan_rope_str() in belief_planunit_attributes
@@ -90,7 +88,7 @@ def test_get_idea_brick_md_ReturnsObj():
             wx.yr1_jan1_offset: {wx.otx_key: False},
         },
         wx.idea_number: "br00000",
-        dimens_str(): ["momentunit"],
+        wx.dimens: ["momentunit"],
     }
 
     # WHEN
@@ -139,7 +137,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
             wx.yr1_jan1_offset: {wx.otx_key: False},
         },
         wx.idea_number: br00000_str,
-        dimens_str(): ["momentunit"],
+        wx.dimens: ["momentunit"],
     }
     save_json(temp_dir, f"{br00000_str}.json", idea_brick_config)
 

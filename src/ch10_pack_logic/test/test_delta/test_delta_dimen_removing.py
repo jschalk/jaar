@@ -3,7 +3,7 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
-    belief_voiceunit_str,
+    Ch07Keywords as wx,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop, get_dimens_cruds_beliefdelta
 
@@ -25,7 +25,7 @@ def test_BeliefDelta_get_dimens_cruds_beliefdelta_ReturnsObjWithCorrectDimensAnd
     old_beliefdelta = beliefdelta_shop()
     old_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
 
-    dimen_set = [belief_voiceunit_str()]
+    dimen_set = [wx.belief_voiceunit]
     curd_set = {wx.INSERT}
 
     # WHEN
@@ -35,7 +35,7 @@ def test_BeliefDelta_get_dimens_cruds_beliefdelta_ReturnsObjWithCorrectDimensAnd
     new_beliefdelta.get_dimen_sorted_beliefatoms_list()
     assert len(new_beliefdelta.get_dimen_sorted_beliefatoms_list()) == 1
     sue_insert_dict = new_beliefdelta.beliefatoms.get(wx.INSERT)
-    sue_voiceunit_dict = sue_insert_dict.get(belief_voiceunit_str())
+    sue_voiceunit_dict = sue_insert_dict.get(wx.belief_voiceunit)
     bob_beliefatom = sue_voiceunit_dict.get(bob_str)
     assert bob_beliefatom.get_value(wx.voice_name) == bob_str
     assert bob_beliefatom.get_value("voice_cred_points") == bob_voice_cred_points

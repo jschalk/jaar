@@ -3,6 +3,7 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     active_hx_str,
     active_str,
     all_voice_cred_str,
@@ -23,7 +24,6 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     morph_str,
     numor_str,
     plan_label_str,
-    planroot_str,
     pledge_str,
     reasonheirs_str,
     reasonunits_str,
@@ -32,7 +32,6 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     stop_want_str,
     task_str,
     uid_str,
-    voices_str,
 )
 from src.ch22_belief_viewer.belief_viewer_app import get_belief_viewer_template
 
@@ -81,9 +80,9 @@ def test_get_belief_viewer_template_ReturnsObj():
         morph_str(),
         numor_str(),
         wx.parent_rope,
-        voices_str(),
+        wx.voices,
         plan_label_str(),
-        planroot_str(),
+        wx.planroot,
         # problem_bool_str(),
         reasonunits_str(),
         "root",

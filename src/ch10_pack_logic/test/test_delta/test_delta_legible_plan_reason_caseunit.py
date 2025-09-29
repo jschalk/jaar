@@ -2,8 +2,8 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_reason_caseunit_str,
     plan_rope_str,
     reason_context_str,
     reason_lower_str,
@@ -17,7 +17,7 @@ from src.ch10_pack_logic.legible import create_legible_list
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -43,7 +43,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumbe
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -75,7 +75,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -101,7 +101,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumbe
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -133,7 +133,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_DELETE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")

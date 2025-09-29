@@ -10,7 +10,7 @@ from src.ch12_hub_toolbox.ch12_path import (
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
-    belief_voiceunit_str,
+    Ch07Keywords as wx,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
@@ -43,7 +43,7 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     )
     a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    blrpern_dimen = belief_voiceunit_str()
+    blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
     bob_jvalues = {wx.voice_cred_points: credit77, wx.voice_debt_points: None}
     yao_jkeys = {wx.voice_name: yao_inx}
@@ -109,7 +109,7 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
-    blrpern_dimen = belief_voiceunit_str()
+    blrpern_dimen = wx.belief_voiceunit
     bob_jkeys = {wx.voice_name: bob_inx}
     bob_jvalues = {wx.voice_cred_points: credit77}
     yao_jkeys = {wx.voice_name: yao_inx}

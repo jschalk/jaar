@@ -3,10 +3,9 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
     Ch16Keywords as wx,
-    jkeys_str,
-    jvalues_str,
     reason_context_str,
 )
 from src.ch16_translate_logic.translate_config import (
@@ -49,18 +48,18 @@ def test_get_translate_config_dict_ReturnsObj():
     _validate_translate_config(translate_config)
     translate_rope_dict = translate_config.get(wx.translate_rope)
     translate_label_dict = translate_config.get(wx.translate_label)
-    assert len(translate_rope_dict.get(jkeys_str())) == 1
-    assert len(translate_label_dict.get(jkeys_str())) == 1
-    assert len(translate_rope_dict.get(jvalues_str())) == 4
-    assert len(translate_label_dict.get(jvalues_str())) == 4
+    assert len(translate_rope_dict.get(wx.jkeys)) == 1
+    assert len(translate_label_dict.get(wx.jkeys)) == 1
+    assert len(translate_rope_dict.get(wx.jvalues)) == 4
+    assert len(translate_label_dict.get(wx.jvalues)) == 4
 
     # assert gen_jvalues == x_translateunit_jvalues
-    # assert len(translateunit_dict.get(jvalues_str())) == 9
-    # assert len(translate_budunit_dict.get(jvalues_str())) == 1
-    # assert len(translate_paybook_dict.get(jvalues_str())) == 1
-    # assert len(translate_timeline_hour_dict.get(jvalues_str())) == 0
-    # assert len(translate_timeline_month_dict.get(jvalues_str())) == 0
-    # assert len(translate_timeline_weekday_dict.get(jvalues_str())) == 0
+    # assert len(translateunit_dict.get(wx.jvalues)) == 9
+    # assert len(translate_budunit_dict.get(wx.jvalues)) == 1
+    # assert len(translate_paybook_dict.get(wx.jvalues)) == 1
+    # assert len(translate_timeline_hour_dict.get(wx.jvalues)) == 0
+    # assert len(translate_timeline_month_dict.get(wx.jvalues)) == 0
+    # assert len(translate_timeline_weekday_dict.get(wx.jvalues)) == 0
 
 
 def _validate_translate_config(translate_config: dict):
@@ -81,18 +80,18 @@ def _validate_translate_config(translate_config: dict):
     # for every translate_format file there exists a unique translate_number with leading zeros to make 5 digits
     for translate_dimens, dimen_dict in translate_config.items():
         print(f"_validate_translate_config {translate_dimens=}")
-        assert dimen_dict.get(jkeys_str()) is not None
-        assert dimen_dict.get(jvalues_str()) is not None
+        assert dimen_dict.get(wx.jkeys) is not None
+        assert dimen_dict.get(wx.jvalues) is not None
         assert dimen_dict.get(wx.UPDATE) is None
         assert dimen_dict.get(wx.INSERT) is None
         assert dimen_dict.get(wx.DELETE) is None
         assert dimen_dict.get(wx.normal_specs) is None
 
-        translate_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
+        translate_jkeys_keys = set(dimen_dict.get(wx.jkeys).keys())
         for jkey_key in translate_jkeys_keys:
             print(f"_validate_translate_config {translate_dimens=} {jkey_key=} ")
             assert jkey_key in x_possible_args
-        translate_jvalues_keys = set(dimen_dict.get(jvalues_str()).keys())
+        translate_jvalues_keys = set(dimen_dict.get(wx.jvalues).keys())
         for jvalue_key in translate_jvalues_keys:
             print(f"_validate_translate_config {translate_dimens=} {jvalue_key=} ")
             assert jvalue_key in x_possible_args

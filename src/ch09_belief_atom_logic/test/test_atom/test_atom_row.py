@@ -2,11 +2,8 @@ from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_healerunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
 )
 from src.ch09_belief_atom_logic.atom_config import get_atom_args_class_types
 from src.ch09_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
@@ -71,7 +68,7 @@ def test_AtomRow_Exists():
 
 def test_atomrow_shop_ReturnsObj():
     # ESTABLISH
-    x_atom_dimens = {belief_voiceunit_str()}
+    x_atom_dimens = {wx.belief_voiceunit}
 
     # WHEN
     x_atomrow = atomrow_shop(x_atom_dimens, wx.INSERT)
@@ -83,44 +80,44 @@ def test_atomrow_shop_ReturnsObj():
 
 def test_AtomRow_set_atom_dimen_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({belief_voiceunit_str()}, wx.INSERT)
-    assert belief_voice_membership_str() not in x_atomrow._atom_dimens
+    x_atomrow = atomrow_shop({wx.belief_voiceunit}, wx.INSERT)
+    assert wx.belief_voice_membership not in x_atomrow._atom_dimens
 
     # WHEN
-    x_atomrow.set_atom_dimen(belief_voice_membership_str())
+    x_atomrow.set_atom_dimen(wx.belief_voice_membership)
 
     # THEN
-    assert belief_voice_membership_str() in x_atomrow._atom_dimens
+    assert wx.belief_voice_membership in x_atomrow._atom_dimens
 
 
 def test_AtomRow_atom_dimen_exists_ReturnsObj():
     # ESTABLISH
     x_atomrow = atomrow_shop(set(), wx.INSERT)
-    assert not x_atomrow.atom_dimen_exists(belief_voiceunit_str())
-    assert not x_atomrow.atom_dimen_exists(belief_voice_membership_str())
+    assert not x_atomrow.atom_dimen_exists(wx.belief_voiceunit)
+    assert not x_atomrow.atom_dimen_exists(wx.belief_voice_membership)
 
     # WHEN
-    x_atomrow.set_atom_dimen(belief_voice_membership_str())
+    x_atomrow.set_atom_dimen(wx.belief_voice_membership)
 
     # THEN
-    assert not x_atomrow.atom_dimen_exists(belief_voiceunit_str())
-    assert x_atomrow.atom_dimen_exists(belief_voice_membership_str())
+    assert not x_atomrow.atom_dimen_exists(wx.belief_voiceunit)
+    assert x_atomrow.atom_dimen_exists(wx.belief_voice_membership)
 
 
 def test_AtomRow_delete_atom_dimen_SetsAttr():
     # ESTABLISH
-    x_atomrow = atomrow_shop({belief_voiceunit_str()}, wx.INSERT)
-    x_atomrow.set_atom_dimen(belief_voiceunit_str())
-    x_atomrow.set_atom_dimen(belief_voice_membership_str())
-    assert x_atomrow.atom_dimen_exists(belief_voiceunit_str())
-    assert x_atomrow.atom_dimen_exists(belief_voice_membership_str())
+    x_atomrow = atomrow_shop({wx.belief_voiceunit}, wx.INSERT)
+    x_atomrow.set_atom_dimen(wx.belief_voiceunit)
+    x_atomrow.set_atom_dimen(wx.belief_voice_membership)
+    assert x_atomrow.atom_dimen_exists(wx.belief_voiceunit)
+    assert x_atomrow.atom_dimen_exists(wx.belief_voice_membership)
 
     # WHEN
-    x_atomrow.delete_atom_dimen(belief_voice_membership_str())
+    x_atomrow.delete_atom_dimen(wx.belief_voice_membership)
 
     # THEN
-    assert x_atomrow.atom_dimen_exists(belief_voiceunit_str())
-    assert not x_atomrow.atom_dimen_exists(belief_voice_membership_str())
+    assert x_atomrow.atom_dimen_exists(wx.belief_voiceunit)
+    assert not x_atomrow.atom_dimen_exists(wx.belief_voice_membership)
 
 
 def test_AtomRow_set_class_types_SetsAttr():
@@ -150,7 +147,7 @@ def test_AtomRow_set_class_types_SetsAttr():
 
 def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario0():
     # ESTABLISH
-    x_dimen = belief_voiceunit_str()
+    x_dimen = wx.belief_voiceunit
     x_atomrow = atomrow_shop({x_dimen}, wx.INSERT)
     x_atomrow.voice_name = "Bob"
 
@@ -166,7 +163,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario
 
 def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario1():
     # ESTABLISH
-    x_dimen = belief_voiceunit_str()
+    x_dimen = wx.belief_voiceunit
     x_atomrow = atomrow_shop({x_dimen}, wx.INSERT)
     x_atomrow.voice_name = "Bob"
     x_atomrow.voice_cred_points = 5
@@ -184,7 +181,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario
 
 def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_NSERT_Fails():
     # ESTABLISH
-    x_dimen = belief_voiceunit_str()
+    x_dimen = wx.belief_voiceunit
     x_atomrow = atomrow_shop({x_dimen}, wx.INSERT)
 
     # WHEN
@@ -196,7 +193,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_NSERT_Fails():
 
 def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_INSERT_Scenario2():
     # ESTABLISH
-    x_dimen = belief_voiceunit_str()
+    x_dimen = wx.belief_voiceunit
     x_atomrow = atomrow_shop({x_dimen}, wx.INSERT)
     x_atomrow.voice_name = "Bob"
     four_str = "4"
@@ -223,17 +220,17 @@ def test_AtomRow_get_beliefatoms_ReturnsObjIfDimenIsCorrect():
     assert len(x_atomrow.get_beliefatoms()) == 0
 
     # WHEN / THEN
-    x_atomrow.set_atom_dimen(belief_voice_membership_str())
+    x_atomrow.set_atom_dimen(wx.belief_voice_membership)
     assert len(x_atomrow.get_beliefatoms()) == 0
 
     # THEN
-    x_atomrow.set_atom_dimen(belief_voiceunit_str())
+    x_atomrow.set_atom_dimen(wx.belief_voiceunit)
     assert len(x_atomrow.get_beliefatoms()) == 1
 
 
 def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_Scenario0():
     # ESTABLISH
-    x_atomrow = atomrow_shop({belief_planunit_str()}, wx.INSERT)
+    x_atomrow = atomrow_shop({wx.belief_planunit}, wx.INSERT)
     x_atomrow.plan_rope = create_rope("amy78", "casa")
     x_atomrow.pledge = False
     assert len(x_atomrow.get_beliefatoms()) == 1
@@ -242,7 +239,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_
     x_beliefatom = x_atomrow.get_beliefatoms()[0]
 
     # THEN
-    static_beliefatom = beliefatom_shop(belief_planunit_str(), wx.INSERT)
+    static_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
     static_beliefatom.set_arg("plan_rope", create_rope("amy78", "casa"))
     static_beliefatom.set_arg("pledge", False)
     print(static_beliefatom)
@@ -252,7 +249,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_
 
 def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_Scenario1():
     # ESTABLISH
-    x_dimens = {belief_planunit_str(), belief_plan_healerunit_str()}
+    x_dimens = {wx.belief_planunit, wx.belief_plan_healerunit}
     x_atomrow = atomrow_shop(x_dimens, wx.INSERT)
     x_atomrow.plan_rope = create_rope("amy78", "casa")
     x_atomrow.pledge = False
@@ -263,12 +260,12 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_planunit_INSERT_pledge_False_
 
     # THEN
     assert len(x_beliefatoms) == 2
-    y_plan_beliefatom = beliefatom_shop(belief_planunit_str(), wx.INSERT)
+    y_plan_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
     casa_rope = create_rope("amy78", "casa")
     y_plan_beliefatom.set_arg("plan_rope", casa_rope)
     y_plan_beliefatom.set_arg("pledge", False)
     assert y_plan_beliefatom in x_beliefatoms
-    healerunit_beliefatom = beliefatom_shop(belief_plan_healerunit_str(), wx.INSERT)
+    healerunit_beliefatom = beliefatom_shop(wx.belief_plan_healerunit, wx.INSERT)
     healerunit_beliefatom.set_arg("plan_rope", casa_rope)
     healerunit_beliefatom.set_arg("healer_name", "Bob")
     assert healerunit_beliefatom in x_beliefatoms

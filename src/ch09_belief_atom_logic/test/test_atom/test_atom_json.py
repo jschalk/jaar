@@ -2,14 +2,11 @@ from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_factunit_str,
-    dimen_str,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
-    jkeys_str,
-    jvalues_str,
     plan_rope_str,
 )
 from src.ch09_belief_atom_logic.atom_main import (
@@ -26,7 +23,7 @@ def test_BeliefAtom_to_dict_ReturnsObj():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     knee_reason_lower = 7
     knee_reason_upper = 13
     insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
@@ -40,10 +37,10 @@ def test_BeliefAtom_to_dict_ReturnsObj():
 
     # THEN
     assert atom_dict == {
-        dimen_str(): x_dimen,
+        wx.dimen: x_dimen,
         wx.crud: wx.INSERT,
-        jkeys_str(): {plan_rope_str(): ball_rope, fact_context_str(): knee_rope},
-        jvalues_str(): {
+        wx.jkeys: {plan_rope_str(): ball_rope, fact_context_str(): knee_rope},
+        wx.jvalues: {
             fact_lower_str(): knee_reason_lower,
             fact_upper_str(): knee_reason_upper,
         },
@@ -58,7 +55,7 @@ def test_BeliefAtom_get_json_ReturnsObj():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     knee_reason_lower = 7
     knee_reason_upper = 13
     insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
@@ -82,7 +79,7 @@ def test_get_beliefatom_from_json_ReturnsObj():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     knee_reason_lower = 7
     knee_reason_upper = 13
     gen_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)

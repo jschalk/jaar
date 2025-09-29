@@ -3,8 +3,8 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_planunit_str,
     denom_str,
     morph_str,
     numor_str,
@@ -19,7 +19,7 @@ from src.ch10_pack_logic.legible import create_legible_list
 def test_create_legible_list_ReturnsObj_planunit_INSERT():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_planunit_str()
+    dimen = wx.belief_planunit
     _problem_bool_str = "problem_bool"
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -60,7 +60,7 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
 def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_planunit_str()
+    dimen = wx.belief_planunit
     _problem_bool_str = "problem_bool"
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -101,7 +101,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
 def test_create_legible_list_ReturnsObj_planunit_DELETE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_planunit_str()
+    dimen = wx.belief_planunit
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, clean_label)

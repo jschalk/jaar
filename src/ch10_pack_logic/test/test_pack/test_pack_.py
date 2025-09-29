@@ -7,9 +7,9 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
     Ch10Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
@@ -499,7 +499,7 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
 
     # WHEN
     bob_packunit.add_beliefatom(
-        dimen=belief_voiceunit_str(),
+        dimen=wx.belief_voiceunit,
         crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -509,7 +509,7 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     assert len(bob_packunit._beliefdelta.beliefatoms) == 1
     assert (
         bob_packunit._beliefdelta.beliefatoms.get(wx.INSERT)
-        .get(belief_voiceunit_str())
+        .get(wx.belief_voiceunit)
         .get(bob_str)
         is not None
     )
@@ -526,7 +526,7 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     before_sue_beliefunit.add_voiceunit(yao_str)
     assert before_sue_beliefunit.voice_exists(yao_str)
     assert before_sue_beliefunit.voice_exists(zia_str) is False
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
     x_voice_cred_points = 55
@@ -585,7 +585,7 @@ def test_PackUnit_is_empty_ReturnsObj():
 
     # WHEN
     bob_packunit.add_beliefatom(
-        dimen=belief_voiceunit_str(),
+        dimen=wx.belief_voiceunit,
         crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -604,7 +604,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for UPDATE_str operation
     bob_packunit_update = packunit_shop(bob_str)
     bob_packunit_update.add_beliefatom(
-        dimen=belief_voiceunit_str(),
+        dimen=wx.belief_voiceunit,
         crud_str=wx.UPDATE,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
@@ -615,7 +615,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for DELETE_str operation
     bob_packunit_delete = packunit_shop(bob_str)
     bob_packunit_delete.add_beliefatom(
-        dimen=belief_voiceunit_str(),
+        dimen=wx.belief_voiceunit,
         crud_str=wx.DELETE,
         jkeys=bob_required_dict,
         jvalues={},

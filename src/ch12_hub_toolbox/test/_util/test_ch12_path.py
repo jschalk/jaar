@@ -5,11 +5,11 @@ from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
     Ch12Keywords as wx,
     moment_label_str,
-    planroot_str,
 )
 from src.ch12_hub_toolbox.ch12_path import (
     BELIEFEVENT_FILENAME,
@@ -826,7 +826,7 @@ def test_create_keeps_dir_path_HasDocString():
 def test_create_keep_rope_path_HasDocString() -> None:
     # ESTABLISH
     level1_label_str = "level1_label"
-    level1_rope = create_rope(planroot_str(), level1_label_str)
+    level1_rope = create_rope(wx.planroot, level1_label_str)
     doc_str = create_keep_rope_path(
         moment_mstr_dir="moment_mstr_dir",
         belief_name=wx.belief_name,

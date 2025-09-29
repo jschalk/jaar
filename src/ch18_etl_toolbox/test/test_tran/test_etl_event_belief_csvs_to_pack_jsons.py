@@ -8,9 +8,8 @@ from src.ch12_hub_toolbox.ch12_path import (
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
-    belief_voiceunit_str,
-    beliefunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
@@ -29,7 +28,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     bob_inx = "Bobby"
     event3 = 3
     a23_str = "amy23"
-    put_agg_tablename = create_prime_tablename(beliefunit_str(), "h", "agg", "put")
+    put_agg_tablename = create_prime_tablename(wx.beliefunit, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
@@ -70,7 +69,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     credit88 = 88
     debt_empty = ""
     a23_str = "amy23"
-    blrpern_str = belief_voiceunit_str()
+    blrpern_str = wx.belief_voiceunit
     put_agg_tablename = create_prime_tablename(blrpern_str, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
@@ -111,7 +110,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    blrpern_dimen = belief_voiceunit_str()
+    blrpern_dimen = wx.belief_voiceunit
     expected_e3_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
         wx.INSERT,

@@ -17,6 +17,7 @@ from src.ch17_idea_logic.idea_db_tool import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch11Keywords as wx,
     Ch12Keywords as wx,
@@ -24,17 +25,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch16Keywords as wx,
     Ch17Keywords as wx,
     Ch18Keywords as wx,
-    belief_groupunit_str,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -62,17 +52,17 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    blrunit_dimen = beliefunit_str()
-    blrpern_dimen = belief_voiceunit_str()
-    blrmemb_dimen = belief_voice_membership_str()
-    blrgrou_dimen = belief_groupunit_str()
-    blrplan_dimen = belief_planunit_str()
-    blrawar_dimen = belief_plan_awardunit_str()
-    blrreas_dimen = belief_plan_reasonunit_str()
-    blrprem_dimen = belief_plan_reason_caseunit_str()
-    blrlabo_dimen = belief_plan_partyunit_str()
-    blrheal_dimen = belief_plan_healerunit_str()
-    blrfact_dimen = belief_plan_factunit_str()
+    blrunit_dimen = wx.beliefunit
+    blrpern_dimen = wx.belief_voiceunit
+    blrmemb_dimen = wx.belief_voice_membership
+    blrgrou_dimen = wx.belief_groupunit
+    blrplan_dimen = wx.belief_planunit
+    blrawar_dimen = wx.belief_plan_awardunit
+    blrreas_dimen = wx.belief_plan_reasonunit
+    blrprem_dimen = wx.belief_plan_reason_caseunit
+    blrlabo_dimen = wx.belief_plan_partyunit
+    blrheal_dimen = wx.belief_plan_healerunit
+    blrfact_dimen = wx.belief_plan_factunit
     blfunit_dimen = wx.momentunit
     blfpayy_dimen = wx.moment_paybook
     blfbudd_dimen = wx.moment_budunit

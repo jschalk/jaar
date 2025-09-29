@@ -3,29 +3,10 @@ from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch07_belief_logic._ref.ch07_keywords import (
-    Ch01Keywords as wx,
-    Ch02Keywords as wx,
-    Ch03Keywords as wx,
-    Ch04Keywords as wx,
-    Ch06Keywords as wx,
     Ch07Keywords as wx,
     active_str,
     all_voice_cred_str,
     all_voice_debt_str,
-    belief_groupunit_str,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    class_type_str,
-    credor_respect_str,
-    debtor_respect_str,
     denom_str,
     descendant_pledge_count_str,
     fact_context_str,
@@ -39,15 +20,9 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     gogo_want_str,
     healer_name_str,
     healerunit_ratio_str,
-    jkeys_str,
-    jvalues_str,
-    keeps_buildable_str,
-    keeps_justified_str,
-    max_tree_traverse_str,
     moment_label_str,
     morph_str,
     numor_str,
-    offtrack_fund_str,
     plan_rope_str,
     pledge_str,
     problem_bool_str,
@@ -62,8 +37,6 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     status_str,
     stop_calc_str,
     stop_want_str,
-    sum_healerunit_share_str,
-    tally_str,
     task_str,
     tree_level_str,
     tree_traverse_count_str,
@@ -104,17 +77,17 @@ def test_get_belief_config_dict_ReturnsObj_CheckLevel0Keys():
     belief_config_keys = set(belief_config.keys())
 
     # THEN
-    assert beliefunit_str() in belief_config_keys
-    assert belief_voiceunit_str() in belief_config_keys
-    assert belief_voice_membership_str() in belief_config_keys
-    assert belief_planunit_str() in belief_config_keys
-    assert belief_plan_awardunit_str() in belief_config_keys
-    assert belief_plan_reasonunit_str() in belief_config_keys
-    assert belief_plan_reason_caseunit_str() in belief_config_keys
-    assert belief_plan_partyunit_str() in belief_config_keys
-    assert belief_plan_healerunit_str() in belief_config_keys
-    assert belief_plan_factunit_str() in belief_config_keys
-    assert belief_groupunit_str() in belief_config_keys
+    assert wx.beliefunit in belief_config_keys
+    assert wx.belief_voiceunit in belief_config_keys
+    assert wx.belief_voice_membership in belief_config_keys
+    assert wx.belief_planunit in belief_config_keys
+    assert wx.belief_plan_awardunit in belief_config_keys
+    assert wx.belief_plan_reasonunit in belief_config_keys
+    assert wx.belief_plan_reason_caseunit in belief_config_keys
+    assert wx.belief_plan_partyunit in belief_config_keys
+    assert wx.belief_plan_healerunit in belief_config_keys
+    assert wx.belief_plan_factunit in belief_config_keys
+    assert wx.belief_groupunit in belief_config_keys
     assert len(get_belief_config_dict()) == 11
 
 
@@ -128,8 +101,8 @@ def test_get_belief_config_dict_ReturnsObj_CheckLevel1Keys():
         attribute_keys = set(attribute_dict.keys())
         print(f"{level1_key=} {attribute_keys=}")
         assert "abbreviation" in attribute_keys
-        assert jkeys_str() in attribute_keys
-        assert jvalues_str() in attribute_keys
+        assert wx.jkeys in attribute_keys
+        assert wx.jvalues in attribute_keys
         assert len(attribute_keys) == 3
 
 
@@ -157,17 +130,17 @@ def test_get_belief_config_dict_ReturnsObj_CheckAbbreviations():
     belief_config = get_belief_config_dict()
 
     # THEN
-    blrunit_attribute = belief_config.get(beliefunit_str())
-    blrpern_attribute = belief_config.get(belief_voiceunit_str())
-    blrmemb_attribute = belief_config.get(belief_voice_membership_str())
-    blrplan_attribute = belief_config.get(belief_planunit_str())
-    blrawar_attribute = belief_config.get(belief_plan_awardunit_str())
-    blrreas_attribute = belief_config.get(belief_plan_reasonunit_str())
-    blrprem_attribute = belief_config.get(belief_plan_reason_caseunit_str())
-    blrlabo_attribute = belief_config.get(belief_plan_partyunit_str())
-    blrheal_attribute = belief_config.get(belief_plan_healerunit_str())
-    blrfact_attribute = belief_config.get(belief_plan_factunit_str())
-    blrgrou_attribute = belief_config.get(belief_groupunit_str())
+    blrunit_attribute = belief_config.get(wx.beliefunit)
+    blrpern_attribute = belief_config.get(wx.belief_voiceunit)
+    blrmemb_attribute = belief_config.get(wx.belief_voice_membership)
+    blrplan_attribute = belief_config.get(wx.belief_planunit)
+    blrawar_attribute = belief_config.get(wx.belief_plan_awardunit)
+    blrreas_attribute = belief_config.get(wx.belief_plan_reasonunit)
+    blrprem_attribute = belief_config.get(wx.belief_plan_reason_caseunit)
+    blrlabo_attribute = belief_config.get(wx.belief_plan_partyunit)
+    blrheal_attribute = belief_config.get(wx.belief_plan_healerunit)
+    blrfact_attribute = belief_config.get(wx.belief_plan_factunit)
+    blrgrou_attribute = belief_config.get(wx.belief_groupunit)
     abbr_str = "abbreviation"
     assert blrunit_attribute.get(abbr_str) == "blrunit"
     assert blrpern_attribute.get(abbr_str) == "blrpern"
@@ -209,13 +182,13 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     for level1_key, attribute_dict in belief_config.items():
         for level2_key, fm_attribute_dict in attribute_dict.items():
-            if level2_key in {jkeys_str(), jvalues_str()}:
+            if level2_key in {wx.jkeys, wx.jvalues}:
                 for level3_key, attr_dict in fm_attribute_dict.items():
                     print(
                         f"{level1_key=} {level2_key=} {level3_key=} {set(attr_dict.keys())=}"
                     )
                     assert set(attr_dict.keys()) == {
-                        class_type_str(),
+                        wx.class_type,
                         wx.sqlite_datatype,
                         "populate_by_cashout",
                     }
@@ -227,17 +200,17 @@ def test_get_belief_calc_dimens_ReturnsObj():
 
     # THEN
     expected_belief_calc_dimens = {
-        beliefunit_str(),
-        belief_voiceunit_str(),
-        belief_voice_membership_str(),
-        belief_planunit_str(),
-        belief_plan_awardunit_str(),
-        belief_plan_reasonunit_str(),
-        belief_plan_reason_caseunit_str(),
-        belief_plan_partyunit_str(),
-        belief_plan_healerunit_str(),
-        belief_plan_factunit_str(),
-        belief_groupunit_str(),
+        wx.beliefunit,
+        wx.belief_voiceunit,
+        wx.belief_voice_membership,
+        wx.belief_planunit,
+        wx.belief_plan_awardunit,
+        wx.belief_plan_reasonunit,
+        wx.belief_plan_reason_caseunit,
+        wx.belief_plan_partyunit,
+        wx.belief_plan_healerunit,
+        wx.belief_plan_factunit,
+        wx.belief_groupunit,
     }
     assert belief_calc_dimens == expected_belief_calc_dimens
     assert belief_calc_dimens == set(get_belief_config_dict().keys())
@@ -245,9 +218,9 @@ def test_get_belief_calc_dimens_ReturnsObj():
 
 def test_get_belief_calc_dimen_args_ReturnsObj():
     # ESTABLISH / WHEN
-    belief_voiceunit_args = get_belief_calc_dimen_args(belief_voiceunit_str())
-    belief_planunit_args = get_belief_calc_dimen_args(belief_planunit_str())
-    belief_groupunit_args = get_belief_calc_dimen_args(belief_groupunit_str())
+    belief_voiceunit_args = get_belief_calc_dimen_args(wx.belief_voiceunit)
+    belief_planunit_args = get_belief_calc_dimen_args(wx.belief_planunit)
+    belief_groupunit_args = get_belief_calc_dimen_args(wx.belief_groupunit)
 
     #  THEN
     print(f"{belief_voiceunit_args=}")
@@ -320,7 +293,7 @@ def g_class_type(
     dimen = config.get(key1)
     j_dict = dimen.get(key2)
     j_arg = j_dict.get(key3)
-    return j_arg.get(class_type_str())
+    return j_arg.get(wx.class_type)
 
 
 def g_sqlitetype(
@@ -349,10 +322,10 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     # THEN
     # for level1_key, attribute_dict in config.items():
     #     for level2_key, fm_attribute_dict in attribute_dict.items():
-    #         if level2_key in {jkeys_str(), jvalues_str()}:
+    #         if level2_key in {wx.jkeys, wx.jvalues}:
     #             for level3_key, attr_dict in fm_attribute_dict.items():
     #                 dimem = attribute_dict.get("abbreviation")
-    #                 x_class_type = attr_dict.get(class_type_str())
+    #                 x_class_type = attr_dict.get(wx.class_type)
     #                 x_sqlite_datatype = attr_dict.get(wx.sqlite_datatype)
     #                 print(
     #                     f"""    assert g_class_type(config, {dimem}, {level2_key[0:2]}, "{level3_key}") == "{x_class_type}" """
@@ -363,17 +336,17 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
 
     jk = "jkeys"
     jv = "jvalues"
-    blfunit = beliefunit_str()
-    blrpern = belief_voiceunit_str()
-    blrmemb = belief_voice_membership_str()
-    blrplan = belief_planunit_str()
-    blrawar = belief_plan_awardunit_str()
-    blrreas = belief_plan_reasonunit_str()
-    blrprem = belief_plan_reason_caseunit_str()
-    blrlabo = belief_plan_partyunit_str()
-    blrheal = belief_plan_healerunit_str()
-    blrfact = belief_plan_factunit_str()
-    blrgrou = belief_groupunit_str()
+    blfunit = wx.beliefunit
+    blrpern = wx.belief_voiceunit
+    blrmemb = wx.belief_voice_membership
+    blrplan = wx.belief_planunit
+    blrawar = wx.belief_plan_awardunit
+    blrreas = wx.belief_plan_reasonunit
+    blrprem = wx.belief_plan_reason_caseunit
+    blrlabo = wx.belief_plan_partyunit
+    blrheal = wx.belief_plan_healerunit
+    blrfact = wx.belief_plan_factunit
+    blrgrou = wx.belief_groupunit
     assert g_class_type(cfig, blrmemb, jk, wx.voice_name) == wx.NameTerm
     assert g_sqlitetype(cfig, blrmemb, jk, wx.voice_name) == "TEXT"
     assert g_popcashout(cfig, blrmemb, jk, wx.voice_name) == False
@@ -738,29 +711,29 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blfunit, jv, "keeps_justified") == "INTEGER"
     assert g_popcashout(cfig, blfunit, jv, "keeps_justified") == True
 
-    assert g_class_type(cfig, blfunit, jv, offtrack_fund_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, offtrack_fund_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, offtrack_fund_str()) == True
+    assert g_class_type(cfig, blfunit, jv, wx.offtrack_fund) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.offtrack_fund) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.offtrack_fund) == True
 
     assert g_class_type(cfig, blfunit, jv, wx.rational) == "bool"
     assert g_sqlitetype(cfig, blfunit, jv, wx.rational) == "INTEGER"
     assert g_popcashout(cfig, blfunit, jv, wx.rational) == True
 
-    assert g_class_type(cfig, blfunit, jv, sum_healerunit_share_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, sum_healerunit_share_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, sum_healerunit_share_str()) == True
+    assert g_class_type(cfig, blfunit, jv, wx.sum_healerunit_share) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.sum_healerunit_share) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.sum_healerunit_share) == True
 
     assert g_class_type(cfig, blfunit, jv, tree_traverse_count_str()) == "int"
     assert g_sqlitetype(cfig, blfunit, jv, tree_traverse_count_str()) == "INTEGER"
     assert g_popcashout(cfig, blfunit, jv, tree_traverse_count_str()) == True
 
-    assert g_class_type(cfig, blfunit, jv, credor_respect_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, credor_respect_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, credor_respect_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.credor_respect) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.credor_respect) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.credor_respect) == False
 
-    assert g_class_type(cfig, blfunit, jv, debtor_respect_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, debtor_respect_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, debtor_respect_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.debtor_respect) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.debtor_respect) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.debtor_respect) == False
 
     assert g_class_type(cfig, blfunit, jv, wx.fund_iota) == "float"
     assert g_sqlitetype(cfig, blfunit, jv, wx.fund_iota) == "REAL"
@@ -770,9 +743,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blfunit, jv, wx.fund_pool) == "REAL"
     assert g_popcashout(cfig, blfunit, jv, wx.fund_pool) == False
 
-    assert g_class_type(cfig, blfunit, jv, max_tree_traverse_str()) == "int"
-    assert g_sqlitetype(cfig, blfunit, jv, max_tree_traverse_str()) == "INTEGER"
-    assert g_popcashout(cfig, blfunit, jv, max_tree_traverse_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.max_tree_traverse) == "int"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.max_tree_traverse) == "INTEGER"
+    assert g_popcashout(cfig, blfunit, jv, wx.max_tree_traverse) == False
 
     assert g_class_type(cfig, blfunit, jv, wx.penny) == "float"
     assert g_sqlitetype(cfig, blfunit, jv, wx.penny) == "REAL"
@@ -782,9 +755,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blfunit, jv, wx.respect_bit) == "REAL"
     assert g_popcashout(cfig, blfunit, jv, wx.respect_bit) == False
 
-    assert g_class_type(cfig, blfunit, jv, tally_str()) == "int"
-    assert g_sqlitetype(cfig, blfunit, jv, tally_str()) == "INTEGER"
-    assert g_popcashout(cfig, blfunit, jv, tally_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.tally) == "int"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.tally) == "INTEGER"
+    assert g_popcashout(cfig, blfunit, jv, wx.tally) == False
 
 
 def test_get_belief_config_dict_ReturnsObj_EachArgHasOneClassType():
@@ -796,7 +769,7 @@ def test_get_belief_config_dict_ReturnsObj_EachArgHasOneClassType():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
-                    arg_type = arg_dict.get(class_type_str())
+                    arg_type = arg_dict.get(wx.class_type)
                     if all_args.get(x_arg) is None:
                         all_args[x_arg] = set()
                     all_args.get(x_arg).add(arg_type)
@@ -846,7 +819,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
-                    arg_type = arg_dict.get(class_type_str())
+                    arg_type = arg_dict.get(wx.class_type)
                     if all_args.get(x_arg) is None:
                         all_args[x_arg] = set()
                     all_args.get(x_arg).add(arg_type)
@@ -913,18 +886,18 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(tree_level_str()) == "int"
     assert belief_calc_args_type_dict.get(range_evaluated_str()) == "int"
     assert belief_calc_args_type_dict.get(stop_calc_str()) == "float"
-    assert belief_calc_args_type_dict.get(keeps_buildable_str()) == "int"
-    assert belief_calc_args_type_dict.get(keeps_justified_str()) == "int"
-    assert belief_calc_args_type_dict.get(offtrack_fund_str()) == "int"
+    assert belief_calc_args_type_dict.get(wx.keeps_buildable) == "int"
+    assert belief_calc_args_type_dict.get(wx.keeps_justified) == "int"
+    assert belief_calc_args_type_dict.get(wx.offtrack_fund) == "int"
     assert belief_calc_args_type_dict.get(wx.rational) == "bool"
-    assert belief_calc_args_type_dict.get(sum_healerunit_share_str()) == "float"
+    assert belief_calc_args_type_dict.get(wx.sum_healerunit_share) == "float"
     assert belief_calc_args_type_dict.get(tree_traverse_count_str()) == "int"
-    assert belief_calc_args_type_dict.get(credor_respect_str()) == "float"
-    assert belief_calc_args_type_dict.get(debtor_respect_str()) == "float"
+    assert belief_calc_args_type_dict.get(wx.credor_respect) == "float"
+    assert belief_calc_args_type_dict.get(wx.debtor_respect) == "float"
     assert belief_calc_args_type_dict.get(wx.fund_iota) == "float"
     assert belief_calc_args_type_dict.get(wx.fund_pool) == "float"
-    assert belief_calc_args_type_dict.get(max_tree_traverse_str()) == "int"
+    assert belief_calc_args_type_dict.get(wx.max_tree_traverse) == "int"
     assert belief_calc_args_type_dict.get(wx.penny) == "float"
     assert belief_calc_args_type_dict.get(wx.respect_bit) == "float"
-    assert belief_calc_args_type_dict.get(tally_str()) == "int"
+    assert belief_calc_args_type_dict.get(wx.tally) == "int"
     assert len(belief_calc_args_type_dict) == 72

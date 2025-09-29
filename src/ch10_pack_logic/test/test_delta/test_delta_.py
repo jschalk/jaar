@@ -8,12 +8,8 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_awardunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     plan_rope_str,
 )
 from src.ch10_pack_logic.delta import (
@@ -47,7 +43,7 @@ def test_BeliefDelta_set_beliefatom_Sets_BeliefUnitSimpleAttrs():
     # ESTABLISH
     ex1_beliefdelta = beliefdelta_shop()
     attribute_value = 55
-    dimen = beliefunit_str()
+    dimen = wx.beliefunit
     opt1_arg = "tally"
     jvalues = {opt1_arg: attribute_value}
     jkeys = {}
@@ -76,7 +72,7 @@ def test_BeliefDelta_set_beliefatom_Sets_BeliefUnitSimpleAttrs():
 def test_BeliefDelta_set_beliefatom_RaisesErrorWhen_is_valid_IsFalse():
     # ESTABLISH
     ex1_beliefdelta = beliefdelta_shop()
-    x_dimen = belief_voiceunit_str()
+    x_dimen = wx.belief_voiceunit
     belief_star_beliefatom = beliefatom_shop(x_dimen, wx.UPDATE)
 
     # WHEN
@@ -94,7 +90,7 @@ def test_ChangUnit_beliefatom_exists_ReturnsObj_belief_voiceunit_str():
     # ESTABLISH
     bob_str = "Bob"
     x_beliefdelta = beliefdelta_shop()
-    bob_beliefatom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
+    bob_beliefatom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     bob_beliefatom.set_arg(wx.voice_name, bob_str)
     assert not x_beliefdelta.beliefatom_exists(bob_beliefatom)
 
@@ -110,7 +106,7 @@ def test_ChangUnit_beliefatom_exists_ReturnsObj_belief_voice_membership_str():
     bob_str = "Bob"
     iowa_str = ";Iowa"
     x_beliefdelta = beliefdelta_shop()
-    bob_iowa_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
+    bob_iowa_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
     bob_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
     bob_iowa_beliefatom.set_arg(wx.voice_name, bob_str)
     assert not x_beliefdelta.beliefatom_exists(bob_iowa_beliefatom)
@@ -127,13 +123,13 @@ def test_BeliefDelta_get_atom_ReturnsObj():
     ex1_beliefdelta = beliefdelta_shop()
     opt_arg1 = "tally"
     opt_value = 55
-    beliefunit_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    beliefunit_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     beliefunit_beliefatom.set_jvalue(x_key=opt_arg1, x_value=opt_value)
     ex1_beliefdelta.set_beliefatom(beliefunit_beliefatom)
 
     # WHEN
     gen_beliefatom = ex1_beliefdelta.get_beliefatom(
-        wx.UPDATE, dimen=beliefunit_str(), jkeys=[]
+        wx.UPDATE, dimen=wx.beliefunit, jkeys=[]
     )
 
     # THEN
@@ -151,7 +147,7 @@ def test_BeliefDelta_add_beliefatom_Sets_BeliefUnitSimpleAttrs():
     jkeys = {}
     jvalues = {op2_arg: op2_value}
     ex1_beliefdelta.add_beliefatom(
-        beliefunit_str(),
+        wx.beliefunit,
         wx.UPDATE,
         jkeys,
         jvalues=jvalues,
@@ -160,9 +156,9 @@ def test_BeliefDelta_add_beliefatom_Sets_BeliefUnitSimpleAttrs():
     # THEN
     assert len(ex1_beliefdelta.beliefatoms) == 1
     x_update_dict = ex1_beliefdelta.beliefatoms.get(wx.UPDATE)
-    x_beliefatom = x_update_dict.get(beliefunit_str())
+    x_beliefatom = x_update_dict.get(wx.beliefunit)
     assert x_beliefatom is not None
-    assert x_beliefatom.dimen == beliefunit_str()
+    assert x_beliefatom.dimen == wx.beliefunit
 
 
 def test_BeliefDelta_add_beliefatom_Sets_BeliefUnit_voiceunits():
@@ -184,7 +180,7 @@ def test_BeliefDelta_add_beliefatom_Sets_BeliefUnit_voiceunits():
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
-    voiceunit_str = belief_voiceunit_str()
+    voiceunit_str = wx.belief_voiceunit
     ex1_beliefdelta.add_beliefatom(
         dimen=voiceunit_str,
         crud_str=wx.INSERT,
@@ -237,11 +233,11 @@ def test_BeliefDelta_get_dimen_sorted_beliefatoms_list_ReturnsObj_Scenario0_rope
 
     # THEN
     assert len(sue_atoms_list) == 2
-    assert sue_atoms_list[0] == update_dict.get(beliefunit_str())
+    assert sue_atoms_list[0] == update_dict.get(wx.beliefunit)
     z_atom = sue_atoms_list[1]
     print(f"{z_atom=}")
-    print(delete_dict.get(belief_voiceunit_str()).keys())
-    zia_voiceunit_delete = delete_dict.get(belief_voiceunit_str()).get("Zia")
+    print(delete_dict.get(wx.belief_voiceunit).keys())
+    zia_voiceunit_delete = delete_dict.get(wx.belief_voiceunit).get("Zia")
     assert sue_atoms_list[1] == zia_voiceunit_delete
 
 
@@ -252,7 +248,7 @@ def test_BeliefDelta_get_dimen_sorted_beliefatoms_list_ReturnsObj_Scenario0_rope
 
 #     # WHEN
 #     opt2_value = 55
-#     dimen = beliefunit_str()
+#     dimen = wx.beliefunit
 #     opt2_arg = "star"
 #     star_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
 #     star_beliefatom.set_jvalue(opt2_arg, opt2_value)
@@ -302,11 +298,11 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj():
     ex1_beliefdelta = get_beliefdelta_example1()
     update_dict = ex1_beliefdelta.beliefatoms.get(wx.UPDATE)
     assert len(update_dict.keys()) == 1
-    assert update_dict.get(beliefunit_str()) is not None
+    assert update_dict.get(wx.beliefunit) is not None
     print(f"atom_order 28 {ex1_beliefdelta.beliefatoms.get(wx.UPDATE).keys()=}")
     delete_dict = ex1_beliefdelta.beliefatoms.get(wx.DELETE)
     assert len(delete_dict.keys()) == 1
-    assert delete_dict.get(belief_voiceunit_str()) is not None
+    assert delete_dict.get(wx.belief_voiceunit) is not None
     print(f"atom_order 26 {ex1_beliefdelta.beliefatoms.get(wx.DELETE).keys()=}")
 
     # WHEN
@@ -314,12 +310,12 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj():
 
     # THEN
     assert len(sue_atom_order_list) == 2
-    print(delete_dict.get(belief_voiceunit_str()).keys())
-    zia_voiceunit_delete = delete_dict.get(belief_voiceunit_str()).get("Zia")
+    print(delete_dict.get(wx.belief_voiceunit).keys())
+    zia_voiceunit_delete = delete_dict.get(wx.belief_voiceunit).get("Zia")
     # for beliefatom in sue_atom_order_list:
     #     print(f"{beliefatom.atom_order=}")
     assert sue_atom_order_list[0] == zia_voiceunit_delete
-    assert sue_atom_order_list[1] == update_dict.get(beliefunit_str())
+    assert sue_atom_order_list[1] == update_dict.get(wx.beliefunit)
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
@@ -335,7 +331,7 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_PlanUnitsSorted():
     sports_rope = create_rope(x_moment_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(x_moment_label, knee_str)
-    x_dimen = belief_planunit_str()
+    x_dimen = wx.belief_planunit
     sports_insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     sports_insert_planunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
     knee_insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
@@ -368,7 +364,7 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj_Rope_Sorted():
     sports_rope = create_rope(x_moment_label, sports_str)
     knee_str = "knee"
     knee_rope = create_rope(sports_rope, knee_str)
-    x_dimen = belief_plan_awardunit_str()
+    x_dimen = wx.belief_plan_awardunit
     swimmers_str = ",Swimmers"
     sports_awardunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     sports_awardunit_beliefatom.set_jkey(wx.awardee_title, swimmers_str)
@@ -400,12 +396,12 @@ def test_belief_built_from_delta_is_valid_ReturnsObjEstablishWithNoBelief_scenar
     # ESTABLISH
     sue_beliefdelta = beliefdelta_shop()
 
-    x_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    x_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     x_attribute = "credor_respect"
     x_beliefatom.set_jvalue(x_attribute, 100)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -421,7 +417,7 @@ def test_belief_built_from_delta_is_valid_ReturnsObjEstablishWithNoBelief_scenar
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     sue_beliefdelta = beliefdelta_shop()
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     # WHEN
     yao_str = "Yao"
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
@@ -447,11 +443,11 @@ def test_BeliefDelta_get_ordered_beliefatoms_ReturnsObj_EstablishWithNoStartingN
     # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_beliefdelta = beliefdelta_shop()
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    pool_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     pool_attribute = "credor_respect"
     pool_beliefatom.set_jvalue(pool_attribute, 100)
     sue_beliefdelta.set_beliefatom(pool_beliefatom)
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -487,11 +483,11 @@ def test_BeliefDelta_get_ordered_beliefatoms_ReturnsObj_EstablishWithStartingNum
     # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_beliefdelta = beliefdelta_shop()
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    pool_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     pool_attribute = "credor_respect"
     pool_beliefatom.set_jvalue(pool_attribute, 100)
     sue_beliefdelta.set_beliefatom(pool_beliefatom)
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -527,11 +523,11 @@ def test_BeliefDelta_get_ordered_dict_ReturnsObj_EstablishWithStartingNumber():
     # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     sue_beliefdelta = beliefdelta_shop()
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    pool_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     pool_attribute = "credor_respect"
     pool_beliefatom.set_jvalue(pool_attribute, 100)
     sue_beliefdelta.set_beliefatom(pool_beliefatom)
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -567,11 +563,11 @@ def test_get_beliefdelta_from_ordered_dict_ReturnsObj():
     # sourcery skip: extract-duplicate-method
     # ESTABLISH
     expected_beliefdelta = beliefdelta_shop()
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    pool_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     pool_attribute = "credor_respect"
     pool_beliefatom.set_jvalue(pool_attribute, 100)
     expected_beliefdelta.set_beliefatom(pool_beliefatom)
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -606,11 +602,11 @@ def test_BeliefDelta_get_json_ReturnsObj():
     # sourcery skip: extract-duplicate-method, inline-variable
     # ESTABLISH
     sue_beliefdelta = beliefdelta_shop()
-    pool_beliefatom = beliefatom_shop(beliefunit_str(), wx.UPDATE)
+    pool_beliefatom = beliefatom_shop(wx.beliefunit, wx.UPDATE)
     pool_attribute = "credor_respect"
     pool_beliefatom.set_jvalue(pool_attribute, 100)
     sue_beliefdelta.set_beliefatom(pool_beliefatom)
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -635,7 +631,7 @@ def test_BeliefDelta_beliefatom_exists_ReturnsObj():
     x_beliefdelta = beliefdelta_shop()
 
     # WHEN / THEN
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
@@ -654,7 +650,7 @@ def test_BeliefDelta_is_empty_ReturnsObj():
     x_beliefdelta = beliefdelta_shop()
 
     # WHEN / THEN
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     zia_str = "Zia"
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)

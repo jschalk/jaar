@@ -29,6 +29,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch09Keywords as wx,
     Ch10Keywords as wx,
@@ -36,29 +37,13 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    attributes_str,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    credor_respect_str,
-    debtor_respect_str,
     denom_str,
-    dimens_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
     gogo_want_str,
     healer_name_str,
-    jkeys_str,
-    jvalues_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -71,7 +56,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     reason_upper_str,
     star_str,
     stop_want_str,
-    voice_pool_str,
 )
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
@@ -376,8 +360,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.voice_debt_points) == "REAL"
     assert sqlite_types.get(wx.group_cred_points) == "REAL"
     assert sqlite_types.get(wx.group_debt_points) == "REAL"
-    assert sqlite_types.get(credor_respect_str()) == "REAL"
-    assert sqlite_types.get(debtor_respect_str()) == "REAL"
+    assert sqlite_types.get(wx.credor_respect) == "REAL"
+    assert sqlite_types.get(wx.debtor_respect) == "REAL"
     assert sqlite_types.get(fact_lower_str()) == "REAL"
     assert sqlite_types.get(fact_upper_str()) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
@@ -458,16 +442,16 @@ def test_get_idea_config_dict_ReturnsObj():
     assert wx.moment_timeline_month in idea_config_dimens
     assert wx.moment_timeline_weekday in idea_config_dimens
     assert wx.moment_timeoffi in idea_config_dimens
-    assert belief_voice_membership_str() in idea_config_dimens
-    assert belief_voiceunit_str() in idea_config_dimens
-    assert belief_plan_awardunit_str() in idea_config_dimens
-    assert belief_plan_factunit_str() in idea_config_dimens
-    assert belief_plan_partyunit_str() in idea_config_dimens
-    assert belief_plan_healerunit_str() in idea_config_dimens
-    assert belief_plan_reason_caseunit_str() in idea_config_dimens
-    assert belief_plan_reasonunit_str() in idea_config_dimens
-    assert belief_planunit_str() in idea_config_dimens
-    assert beliefunit_str() in idea_config_dimens
+    assert wx.belief_voice_membership in idea_config_dimens
+    assert wx.belief_voiceunit in idea_config_dimens
+    assert wx.belief_plan_awardunit in idea_config_dimens
+    assert wx.belief_plan_factunit in idea_config_dimens
+    assert wx.belief_plan_partyunit in idea_config_dimens
+    assert wx.belief_plan_healerunit in idea_config_dimens
+    assert wx.belief_plan_reason_caseunit in idea_config_dimens
+    assert wx.belief_plan_reasonunit in idea_config_dimens
+    assert wx.belief_planunit in idea_config_dimens
+    assert wx.beliefunit in idea_config_dimens
     assert wx.translate_name in idea_config_dimens
     assert wx.translate_title in idea_config_dimens
     assert wx.translate_label in idea_config_dimens
@@ -491,8 +475,8 @@ def _validate_idea_config(x_idea_config: dict):
     for idea_dimen, idea_dict in x_idea_config.items():
         print(f"{idea_dimen=}")
         assert idea_dict.get(wx.idea_category) in get_idea_categorys()
-        assert idea_dict.get(jkeys_str()) is not None
-        assert idea_dict.get(jvalues_str()) is not None
+        assert idea_dict.get(wx.jkeys) is not None
+        assert idea_dict.get(wx.jvalues) is not None
         assert idea_dict.get(wx.allowed_crud) is not None
         assert idea_dict.get(wx.UPDATE) is None
         assert idea_dict.get(wx.INSERT) is None
@@ -571,8 +555,8 @@ def _validate_idea_config(x_idea_config: dict):
             test_str = f"{wx.allowed_crud} not checked by test"
             assert idea_dict.get(wx.allowed_crud) == test_str
 
-        sub_jkeys_keys = set(sub_dimen.get(jkeys_str()).keys())
-        idea_jkeys_keys = set(idea_dict.get(jkeys_str()).keys())
+        sub_jkeys_keys = set(sub_dimen.get(wx.jkeys).keys())
+        idea_jkeys_keys = set(idea_dict.get(wx.jkeys).keys())
         # print(f"    {sub_jkeys_keys=}")
         # print(f"  {idea_jkeys_keys=}")
         assert wx.face_name in idea_jkeys_keys
@@ -586,12 +570,12 @@ def _validate_idea_config(x_idea_config: dict):
         idea_jkeys_keys.remove(wx.event_int)
         assert sub_jkeys_keys == idea_jkeys_keys
 
-        sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
+        sub_jvalues_keys = set(sub_dimen.get(wx.jvalues).keys())
         print(f"  {sub_jvalues_keys=}")
         if moment_label_str() in sub_jvalues_keys:
             sub_jvalues_keys.remove(moment_label_str())
 
-        idea_jvalues_dict = idea_dict.get(jvalues_str())
+        idea_jvalues_dict = idea_dict.get(wx.jvalues)
         idea_jvalues_keys = set(idea_jvalues_dict.keys())
         # print(f"  {sub_jvalues_keys=}")
         # print(f"{idea_jvalues_keys=}")
@@ -645,7 +629,7 @@ def test_get_idea_format_filenames_ReturnsObj():
 
 def _validate_idea_format_files(idea_filenames: set[str]):
     all_dimen_keys_dict = {
-        dimen: set(dict.get(jkeys_str()).keys())
+        dimen: set(dict.get(wx.jkeys).keys())
         for dimen, dict in get_idea_config_dict().items()
     }
 
@@ -666,22 +650,22 @@ def _validate_idea_format_files(idea_filenames: set[str]):
         assert idea_number_value[2:8] == idea_filename[12:17]
         idea_numbers_set.add(idea_number_value)
 
-        format_dimens = ref_dict.get(dimens_str())
+        format_dimens = ref_dict.get(wx.dimens)
         assert format_dimens is not None
         assert len(format_dimens) > 0
         for idea_format_dimen in format_dimens:
             assert idea_format_dimen in valid_idea_dimens
 
-        assert ref_dict.get(attributes_str())
-        idea_format_attributes = ref_dict.get(attributes_str())
+        assert ref_dict.get(wx.attributes)
+        idea_format_attributes = ref_dict.get(wx.attributes)
         for idea_attribute, attr_dict in idea_format_attributes.items():
             # print(f"{idea_attribute=}")
             assert wx.otx_key in set(attr_dict.keys())
             otx_key_value = attr_dict.get(wx.otx_key)
             for idea_format_dimen in format_dimens:
                 format_config = config_dict.get(idea_format_dimen)
-                dimen_required_attrs = set(format_config.get(jkeys_str()).keys())
-                dimen_optional_attrs = set(format_config.get(jvalues_str()).keys())
+                dimen_required_attrs = set(format_config.get(wx.jkeys).keys())
+                dimen_optional_attrs = set(format_config.get(wx.jvalues).keys())
                 attr_in_required = idea_attribute in dimen_required_attrs
                 attr_in_optional = idea_attribute in dimen_optional_attrs
                 attr_in_keys = attr_in_required or attr_in_optional
@@ -693,7 +677,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
                 elif attr_in_keys:
                     assert attr_in_optional, assert_fail_str
         # check all implied dimens are there
-        idea_attrs = set(ref_dict.get(attributes_str()).keys())
+        idea_attrs = set(ref_dict.get(wx.attributes).keys())
         idea_attrs_list = get_default_sorted_list(idea_attrs)
         if idea_attrs_list[-1].find("_ERASE") > 0:
             delete_attr_with_erase = idea_attrs_list[-1]
@@ -702,7 +686,7 @@ def _validate_idea_format_files(idea_filenames: set[str]):
             idea_attrs.add(delete_attr_without_erase)
 
         for x_dimen, dimen_keys in all_dimen_keys_dict.items():
-            # if x_dimen == belief_plan_factunit_str() and x_dimen in format_dimens:
+            # if x_dimen == wx.belief_plan_factunit and x_dimen in format_dimens:
             #     print(f"{idea_number_value}  {x_dimen=} {idea_attrs_list=}")
             if dimen_keys.issubset(idea_attrs):
                 if x_dimen not in format_dimens:
@@ -770,16 +754,16 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(wx.moment_timeline_hour, 6)
     # set_idea_config_json(wx.moment_timeline_month, 7)
     # set_idea_config_json(wx.moment_timeline_weekday, 8)
-    # set_idea_config_json(belief_voice_membership_str(), 9)
-    # set_idea_config_json(belief_voiceunit_str(), 10)
-    # set_idea_config_json(belief_plan_awardunit_str(), 11)
-    # set_idea_config_json(belief_plan_factunit_str(), 12)
-    # set_idea_config_json(belief_plan_partyunit_str(), 14)
-    # set_idea_config_json(belief_plan_healerunit_str(), 15)
-    # set_idea_config_json(belief_plan_reason_caseunit_str(), 16)
-    # set_idea_config_json(belief_plan_reasonunit_str(), 17)
-    # set_idea_config_json(belief_planunit_str(), 18)
-    # set_idea_config_json(beliefunit_str(), 19)
+    # set_idea_config_json(wx.belief_voice_membership, 9)
+    # set_idea_config_json(wx.belief_voiceunit, 10)
+    # set_idea_config_json(wx.belief_plan_awardunit, 11)
+    # set_idea_config_json(wx.belief_plan_factunit, 12)
+    # set_idea_config_json(wx.belief_plan_partyunit, 14)
+    # set_idea_config_json(wx.belief_plan_healerunit, 15)
+    # set_idea_config_json(wx.belief_plan_reason_caseunit, 16)
+    # set_idea_config_json(wx.belief_plan_reasonunit, 17)
+    # set_idea_config_json(wx.belief_planunit, 18)
+    # set_idea_config_json(wx.beliefunit, 19)
     # set_idea_config_json(wx.moment_budunit, 20)
     # set_idea_config_json(wx.moment_paybook, 21)
 
@@ -794,16 +778,16 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(wx.moment_timeline_hour).get(bo) == 6
     assert x_idea_config.get(wx.moment_timeline_month).get(bo) == 7
     assert x_idea_config.get(wx.moment_timeline_weekday).get(bo) == 8
-    assert x_idea_config.get(belief_voice_membership_str()).get(bo) == 9
-    assert x_idea_config.get(belief_voiceunit_str()).get(bo) == 10
-    assert x_idea_config.get(belief_plan_awardunit_str()).get(bo) == 11
-    assert x_idea_config.get(belief_plan_factunit_str()).get(bo) == 12
-    assert x_idea_config.get(belief_plan_partyunit_str()).get(bo) == 14
-    assert x_idea_config.get(belief_plan_healerunit_str()).get(bo) == 15
-    assert x_idea_config.get(belief_plan_reason_caseunit_str()).get(bo) == 16
-    assert x_idea_config.get(belief_plan_reasonunit_str()).get(bo) == 17
-    assert x_idea_config.get(belief_planunit_str()).get(bo) == 18
-    assert x_idea_config.get(beliefunit_str()).get(bo) == 19
+    assert x_idea_config.get(wx.belief_voice_membership).get(bo) == 9
+    assert x_idea_config.get(wx.belief_voiceunit).get(bo) == 10
+    assert x_idea_config.get(wx.belief_plan_awardunit).get(bo) == 11
+    assert x_idea_config.get(wx.belief_plan_factunit).get(bo) == 12
+    assert x_idea_config.get(wx.belief_plan_partyunit).get(bo) == 14
+    assert x_idea_config.get(wx.belief_plan_healerunit).get(bo) == 15
+    assert x_idea_config.get(wx.belief_plan_reason_caseunit).get(bo) == 16
+    assert x_idea_config.get(wx.belief_plan_reasonunit).get(bo) == 17
+    assert x_idea_config.get(wx.belief_planunit).get(bo) == 18
+    assert x_idea_config.get(wx.beliefunit).get(bo) == 19
     assert x_idea_config.get(wx.moment_budunit).get(bo) == 20
     assert x_idea_config.get(wx.moment_paybook).get(bo) == 21
 
@@ -837,7 +821,7 @@ def _create_expected_idea_dimen_ref() -> dict[str, list[str]]:
     for idea_number in idea_numbers_sorted:
         idea_format_filename = get_idea_format_filename(idea_number)
         x_idearef = get_idearef_from_file(idea_format_filename)
-        dimens_list = x_idearef.get(dimens_str())
+        dimens_list = x_idearef.get(wx.dimens)
         for x_dimen in dimens_list:
             if expected_idea_dimen_ref.get(x_dimen) is None:
                 expected_idea_dimen_ref[x_dimen] = {idea_number}

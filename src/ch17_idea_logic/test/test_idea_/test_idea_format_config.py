@@ -2,12 +2,10 @@ from src.ch01_data_toolbox.file_toolbox import get_dir_file_strs
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
-    attributes_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     denom_str,
     gogo_want_str,
     moment_label_str,
@@ -68,8 +66,8 @@ def test_get_idearef_obj_ReturnsObj():
     # THEN
     assert x_idearef.idea_name == idea_name_00021
     assert set(x_idearef.dimens) == {
-        belief_voiceunit_str(),
-        beliefunit_str(),
+        wx.belief_voiceunit,
+        wx.beliefunit,
         wx.momentunit,
     }
     assert x_idearef._attributes != {}
@@ -97,7 +95,7 @@ def test_get_headers_list_ReturnsObj():
 
 def get_sorted_headers_str(idea_filename):
     x_idearef = get_idearef_from_file(idea_filename)
-    idea_attributes = set(x_idearef.get(attributes_str()).keys())
+    idea_attributes = set(x_idearef.get(wx.attributes).keys())
     idea_attributes.remove(wx.face_name)
     idea_attributes.remove(wx.event_int)
     print(f"{idea_attributes=}")

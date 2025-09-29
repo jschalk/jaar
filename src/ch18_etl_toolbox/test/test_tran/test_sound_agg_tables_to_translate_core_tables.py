@@ -6,10 +6,10 @@ from src.ch16_translate_logic.translate_main import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -1277,7 +1277,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario0_Populates
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_voiceunit_str()
+        blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
 INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
@@ -1312,7 +1312,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario1_Populates
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_voiceunit_str()
+        blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
 INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
@@ -1355,7 +1355,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_voiceunit_str()
+        blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
 INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
@@ -1390,7 +1390,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario3_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_str = belief_voiceunit_str()
+        blrpern_str = wx.belief_voiceunit
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
 INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})

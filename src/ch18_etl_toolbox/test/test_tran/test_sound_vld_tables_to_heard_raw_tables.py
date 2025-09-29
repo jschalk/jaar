@@ -2,8 +2,8 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -34,7 +34,7 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         beliefavoice_s_vld_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "s", "vld", "put"
+            wx.belief_voiceunit, "s", "vld", "put"
         )
         print(f"{get_table_columns(cursor, beliefavoice_s_vld_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {beliefavoice_s_vld_put_tablename} (
@@ -56,9 +56,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, beliefavoice_s_vld_put_tablename) == 4
-        blrawar_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrawar_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         assert get_row_count(cursor, blrawar_h_raw_put_tablename) == 0
 
         # WHEN
@@ -106,9 +104,7 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario0_AddRowsToTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_s_vld_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "s", "vld", "put"
-        )
+        blrpern_s_vld_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "vld", "put")
         print(f"{get_table_columns(cursor, blrpern_s_vld_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_vld_put_tablename} (
   {wx.event_int}
@@ -129,9 +125,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_vld_put_tablename) == 4
-        blrpern_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 0
 
         # WHEN
@@ -177,9 +171,7 @@ def test_etl_sound_vld_tables_to_heard_raw_tables_Scenario1_Populates_inx_Column
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_s_vld_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "s", "vld", "put"
-        )
+        blrpern_s_vld_put_tablename = prime_tbl(wx.belief_voiceunit, "s", "vld", "put")
         print(f"{get_table_columns(cursor, blrpern_s_vld_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_vld_put_tablename} (
   {wx.event_int}
@@ -200,9 +192,7 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
         assert get_row_count(cursor, blrpern_s_vld_put_tablename) == 4
-        blrpern_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 0
 
         # WHEN

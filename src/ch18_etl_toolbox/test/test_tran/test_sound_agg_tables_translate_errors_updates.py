@@ -1,10 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -31,7 +31,7 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
-        blrpern_dimen = belief_voiceunit_str()
+        blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
   {wx.event_int}, {wx.face_name}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
@@ -87,7 +87,7 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
-        blrpern_dimen = belief_voiceunit_str()
+        blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
   {wx.event_int}, {wx.face_name}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
@@ -146,7 +146,7 @@ def test_set_moment_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_BLRPERN_SOUND_PUT_AGG_STR)
-        blrpern_dimen = belief_voiceunit_str()
+        blrpern_dimen = wx.belief_voiceunit
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
   {wx.event_int}, {wx.face_name}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})

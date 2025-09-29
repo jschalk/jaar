@@ -3,8 +3,8 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_voiceunit_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -12,7 +12,7 @@ from src.ch10_pack_logic.legible import create_legible_list
 
 def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
     # ESTABLISH
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     voice_cred_points_value = 81
     voice_debt_points_value = 43
     yao_str = "Yao"
@@ -36,7 +36,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
 
 def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
     # ESTABLISH
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     voice_cred_points_value = 81
     voice_debt_points_value = 43
     yao_str = "Yao"
@@ -60,7 +60,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
 
 def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points_voice_debt_points():
     # ESTABLISH
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     voice_cred_points_value = 81
     voice_debt_points_value = 43
     yao_str = "Yao"
@@ -84,7 +84,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points_voice
 
 def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points():
     # ESTABLISH
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     voice_cred_points_value = 81
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
@@ -106,7 +106,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_cred_points():
 
 def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_points():
     # ESTABLISH
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     voice_debt_points_value = 43
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
@@ -128,7 +128,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_UPDATE_voice_debt_points():
 
 def test_create_legible_list_ReturnsObj_voiceunit_DELETE():
     # ESTABLISH
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)

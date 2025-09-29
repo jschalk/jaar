@@ -7,17 +7,8 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
@@ -61,7 +52,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     sue_tally = 44
     before_sue_beliefunit = beliefunit_shop(sue_str, tally=sue_tally)
 
-    dimen = beliefunit_str()
+    dimen = wx.beliefunit
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     new1_value = 55
     new1_arg = "tally"
@@ -122,7 +113,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_voice():
     before_sue_beliefunit.add_voiceunit(yao_str)
     before_sue_beliefunit.add_voiceunit(zia_str)
 
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
@@ -150,7 +141,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     assert before_sue_beliefunit.voice_exists(zia_str) is False
 
     # WHEN
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
     x_voice_cred_points = 55
@@ -181,7 +172,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_voice():
     assert before_sue_beliefunit.get_voice(yao_str).voice_cred_points == 1
 
     # WHEN
-    dimen = belief_voiceunit_str()
+    dimen = wx.belief_voiceunit
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     x_beliefatom.set_jkey(wx.voice_name, yao_str)
     yao_voice_cred_points = 55
@@ -221,11 +212,11 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_membership()
     assert len(before_group_titles_dict.get(fly_str)) == 3
 
     # WHEN
-    yao_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.DELETE)
+    yao_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.DELETE)
     yao_beliefatom.set_jkey(wx.group_title, run_str)
     yao_beliefatom.set_jkey(wx.voice_name, yao_str)
     # print(f"{yao_beliefatom=}")
-    zia_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.DELETE)
+    zia_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.DELETE)
     zia_beliefatom.set_jkey(wx.group_title, fly_str)
     zia_beliefatom.set_jkey(wx.voice_name, zia_str)
     # print(f"{zia_beliefatom=}")
@@ -257,7 +248,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_membership()
     assert len(before_group_titles.get(run_str)) == 1
 
     # WHEN
-    yao_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
+    yao_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
     yao_beliefatom.set_jkey(wx.group_title, run_str)
     yao_beliefatom.set_jkey(wx.voice_name, yao_str)
     yao_run_group_cred_points = 17
@@ -292,7 +283,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_membership()
     assert yao_run_membership.group_debt_points == 1
 
     # WHEN
-    yao_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.UPDATE)
+    yao_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.UPDATE)
     yao_beliefatom.set_jkey(wx.group_title, run_str)
     yao_beliefatom.set_jkey(wx.voice_name, yao_str)
     new_yao_run_group_cred_points = 7
@@ -322,7 +313,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_planunit():
     disc_rope = before_sue_beliefunit.make_rope(sports_rope, disc_str)
     before_sue_beliefunit.set_plan(planunit_shop(ball_str), sports_rope)
     before_sue_beliefunit.set_plan(planunit_shop(disc_str), sports_rope)
-    delete_disc_beliefatom = beliefatom_shop(belief_planunit_str(), wx.DELETE)
+    delete_disc_beliefatom = beliefatom_shop(wx.belief_planunit, wx.DELETE)
     delete_disc_beliefatom.set_jkey(plan_rope_str(), disc_rope)
     print(f"{disc_rope=}")
     delete_disc_beliefatom.set_jkey(plan_rope_str(), disc_rope)
@@ -361,7 +352,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_planunit():
     # x_denom = 17
     # x_numor = 10
     x_pledge = True
-    insert_disc_beliefatom = beliefatom_shop(belief_planunit_str(), wx.INSERT)
+    insert_disc_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
     insert_disc_beliefatom.set_jkey(plan_rope_str(), disc_rope)
     # insert_disc_beliefatom.set_jvalue(wx.addin, x_addin)
     # insert_disc_beliefatom.set_jvalue(wx.begin, x_begin)
@@ -403,7 +394,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_planunit_Sim
     x_gogo_want = 1222
     x_stop_want = 1333
     x_pledge = True
-    insert_disc_beliefatom = beliefatom_shop(belief_planunit_str(), wx.UPDATE)
+    insert_disc_beliefatom = beliefatom_shop(wx.belief_planunit, wx.UPDATE)
     insert_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     # insert_disc_beliefatom.set_jvalue(wx.addin, x_addin)
     insert_disc_beliefatom.set_jvalue(wx.begin, x_begin)
@@ -472,7 +463,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_awardun
     assert len(before_sue_beliefunit.get_plan_obj(disc_rope).awardunits) == 2
 
     # WHEN
-    delete_disc_beliefatom = beliefatom_shop(belief_plan_awardunit_str(), wx.DELETE)
+    delete_disc_beliefatom = beliefatom_shop(wx.belief_plan_awardunit, wx.DELETE)
     delete_disc_beliefatom.set_jkey(plan_rope_str(), disc_rope)
     delete_disc_beliefatom.set_jkey(wx.awardee_title, fly_str)
     print(f"{delete_disc_beliefatom=}")
@@ -512,7 +503,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_awardun
     # WHEN
     x_give_force = 55
     x_take_force = 66
-    update_disc_beliefatom = beliefatom_shop(belief_plan_awardunit_str(), wx.UPDATE)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_awardunit, wx.UPDATE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(wx.awardee_title, run_str)
     update_disc_beliefatom.set_jvalue(wx.give_force, x_give_force)
@@ -551,7 +542,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_awardun
     # WHEN
     x_give_force = 55
     x_take_force = 66
-    update_disc_beliefatom = beliefatom_shop(belief_plan_awardunit_str(), wx.INSERT)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_awardunit, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(wx.awardee_title, run_str)
     update_disc_beliefatom.set_jvalue(wx.give_force, x_give_force)
@@ -587,7 +578,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_factuni
     # WHEN
     damaged_fact_lower = 55
     damaged_fact_upper = 66
-    update_disc_beliefatom = beliefatom_shop(belief_plan_factunit_str(), wx.INSERT)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_factunit, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(fact_context_str(), knee_rope)
     update_disc_beliefatom.set_jvalue(fact_state_str(), damaged_rope)
@@ -632,7 +623,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_factuni
     assert before_ball_plan.factunits.get(knee_rope) is not None
 
     # WHEN
-    update_disc_beliefatom = beliefatom_shop(belief_plan_factunit_str(), wx.DELETE)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_factunit, wx.DELETE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(fact_context_str(), knee_rope)
     # print(f"{update_disc_beliefatom=}")
@@ -676,7 +667,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_factuni
     # WHEN
     medical_fact_lower = 45
     medical_fact_upper = 77
-    update_disc_beliefatom = beliefatom_shop(belief_plan_factunit_str(), wx.UPDATE)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_factunit, wx.UPDATE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(fact_context_str(), knee_rope)
     update_disc_beliefatom.set_jvalue(fact_state_str(), medical_rope)
@@ -729,9 +720,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reason_
     damaged_reason_lower = 45
     damaged_reason_upper = 77
     damaged_reason_divisor = 3
-    update_disc_beliefatom = beliefatom_shop(
-        belief_plan_reason_caseunit_str(), wx.UPDATE
-    )
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.UPDATE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(reason_context_str(), knee_rope)
     update_disc_beliefatom.set_jkey(reason_state_str(), damaged_rope)
@@ -784,9 +773,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reason_
     medical_reason_lower = 45
     medical_reason_upper = 77
     medical_reason_divisor = 3
-    update_disc_beliefatom = beliefatom_shop(
-        belief_plan_reason_caseunit_str(), wx.INSERT
-    )
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(reason_context_str(), knee_rope)
     update_disc_beliefatom.set_jkey(reason_state_str(), medical_rope)
@@ -840,9 +827,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reason_
     assert before_knee_reasonunit.get_case(medical_rope) is not None
 
     # WHEN
-    update_disc_beliefatom = beliefatom_shop(
-        belief_plan_reason_caseunit_str(), wx.DELETE
-    )
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.DELETE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(reason_context_str(), knee_rope)
     update_disc_beliefatom.set_jkey(reason_state_str(), medical_rope)
@@ -877,7 +862,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_reasonu
 
     # WHEN
     medical_reason_active_requisite = True
-    update_disc_beliefatom = beliefatom_shop(belief_plan_reasonunit_str(), wx.INSERT)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
     update_disc_beliefatom.set_jvalue(
@@ -931,7 +916,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_reasonu
 
     # WHEN
     after_medical_reason_active_requisite = True
-    update_disc_beliefatom = beliefatom_shop(belief_plan_reasonunit_str(), wx.UPDATE)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reasonunit, wx.UPDATE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
     update_disc_beliefatom.set_jvalue(
@@ -976,7 +961,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_reasonu
     assert before_ball_plan.get_reasonunit(knee_rope) is not None
 
     # WHEN
-    update_disc_beliefatom = beliefatom_shop(belief_plan_reasonunit_str(), wx.DELETE)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_reasonunit, wx.DELETE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
     sue_beliefdelta = beliefdelta_shop()
@@ -1003,7 +988,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_partyun
     assert before_ball_planunit.laborunit._partys == {}
 
     # WHEN
-    update_disc_beliefatom = beliefatom_shop(belief_plan_partyunit_str(), wx.INSERT)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_partyunit, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(wx.party_title, yao_str)
     sue_beliefdelta = beliefdelta_shop()
@@ -1033,7 +1018,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_partyun
     assert before_ball_planunit.laborunit.get_partyunit(yao_str) is not None
 
     # WHEN
-    update_disc_beliefatom = beliefatom_shop(belief_plan_partyunit_str(), wx.DELETE)
+    update_disc_beliefatom = beliefatom_shop(wx.belief_plan_partyunit, wx.DELETE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(wx.party_title, yao_str)
     sue_beliefdelta = beliefdelta_shop()
@@ -1062,7 +1047,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_healeru
     assert not before_ball_planunit.healerunit.healer_name_exists(yao_str)
 
     # WHEN
-    x_beliefatom = beliefatom_shop(belief_plan_healerunit_str(), wx.INSERT)
+    x_beliefatom = beliefatom_shop(wx.belief_plan_healerunit, wx.INSERT)
     x_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     x_beliefatom.set_jkey(healer_name_str(), yao_str)
     print(f"{x_beliefatom=}")
@@ -1093,7 +1078,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_healeru
     assert before_ball_planunit.healerunit.healer_name_exists(yao_str)
 
     # WHEN
-    x_beliefatom = beliefatom_shop(belief_plan_healerunit_str(), wx.DELETE)
+    x_beliefatom = beliefatom_shop(wx.belief_plan_healerunit, wx.DELETE)
     x_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     x_beliefatom.set_jkey(healer_name_str(), yao_str)
     sue_beliefdelta = beliefdelta_shop()

@@ -1,9 +1,9 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch16Keywords as wx,
-    belief_plan_awardunit_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
@@ -29,7 +29,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = belief_plan_awardunit_str()
+        blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         # print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} 
@@ -94,7 +94,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = belief_plan_awardunit_str()
+        blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
         ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
@@ -161,7 +161,7 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = belief_plan_awardunit_str()
+        blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}
@@ -237,7 +237,7 @@ def test_create_update_heard_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
         print(f"{trlname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, trlname_s_vld_tablename)=}")
 
-        blrawar_dimen = belief_plan_awardunit_str()
+        blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename} ({wx.event_int}, {wx.face_name}_otx, {wx.face_name}_inx)
@@ -294,7 +294,7 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrawar_dimen = belief_plan_awardunit_str()
+        blrawar_dimen = wx.belief_plan_awardunit
         blrawar_h_raw_put_tablename = prime_tbl(blrawar_dimen, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrawar_h_raw_put_tablename)=}")
         insert_face_name_only_sqlstr = f"""INSERT INTO {blrawar_h_raw_put_tablename}

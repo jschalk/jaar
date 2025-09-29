@@ -6,13 +6,11 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch09Keywords as wx,
     Ch11Keywords as wx,
     Ch15Keywords as wx,
-    class_type_str,
-    jkeys_str,
-    jvalues_str,
     moment_label_str,
 )
 from src.ch15_moment_logic.moment_config import (
@@ -55,13 +53,13 @@ def test_get_moment_config_dict_ReturnsObj():
     moment_timeline_month_dict = moment_config.get(wx.moment_timeline_month)
     moment_timeline_weekday_dict = moment_config.get(wx.moment_timeline_weekday)
     # moment_timeoffi_dict = moment_config.get(wx.moment_timeoffi)
-    assert len(momentunit_dict.get(jkeys_str())) == 1
-    assert len(moment_budunit_dict.get(jkeys_str())) == 3
-    assert len(moment_paybook_dict.get(jkeys_str())) == 4
-    assert len(moment_timeline_hour_dict.get(jkeys_str())) == 2
-    assert len(moment_timeline_month_dict.get(jkeys_str())) == 2
-    assert len(moment_timeline_weekday_dict.get(jkeys_str())) == 2
-    # assert len(moment_timeoffi_dict.get(jkeys_str())) == 2
+    assert len(momentunit_dict.get(wx.jkeys)) == 1
+    assert len(moment_budunit_dict.get(wx.jkeys)) == 3
+    assert len(moment_paybook_dict.get(wx.jkeys)) == 4
+    assert len(moment_timeline_hour_dict.get(wx.jkeys)) == 2
+    assert len(moment_timeline_month_dict.get(wx.jkeys)) == 2
+    assert len(moment_timeline_weekday_dict.get(wx.jkeys)) == 2
+    # assert len(moment_timeoffi_dict.get(wx.jkeys)) == 2
 
     x_momentunit_jvalues = {
         wx.c400_number,
@@ -75,16 +73,16 @@ def test_get_moment_config_dict_ReturnsObj():
         "job_listen_rotations",
         # wx.job_listen_rotations,
     }
-    print(f"{momentunit_dict.get(jvalues_str()).keys()=}")
-    gen_jvalues = set(momentunit_dict.get(jvalues_str()).keys())
+    print(f"{momentunit_dict.get(wx.jvalues).keys()=}")
+    gen_jvalues = set(momentunit_dict.get(wx.jvalues).keys())
     assert gen_jvalues == x_momentunit_jvalues
-    assert len(momentunit_dict.get(jvalues_str())) == 9
-    assert len(moment_budunit_dict.get(jvalues_str())) == 2
-    assert len(moment_paybook_dict.get(jvalues_str())) == 1
-    assert len(moment_timeline_hour_dict.get(jvalues_str())) == 1
-    assert len(moment_timeline_month_dict.get(jvalues_str())) == 1
-    assert len(moment_timeline_weekday_dict.get(jvalues_str())) == 1
-    # assert len(moment_timeoffi_dict.get(jvalues_str())) == 1
+    assert len(momentunit_dict.get(wx.jvalues)) == 9
+    assert len(moment_budunit_dict.get(wx.jvalues)) == 2
+    assert len(moment_paybook_dict.get(wx.jvalues)) == 1
+    assert len(moment_timeline_hour_dict.get(wx.jvalues)) == 1
+    assert len(moment_timeline_month_dict.get(wx.jvalues)) == 1
+    assert len(moment_timeline_weekday_dict.get(wx.jvalues)) == 1
+    # assert len(moment_timeoffi_dict.get(wx.jvalues)) == 1
 
 
 def _validate_moment_config(moment_config: dict):
@@ -94,8 +92,8 @@ def _validate_moment_config(moment_config: dict):
     # for every moment_format file there exists a unique moment_number with leading zeros to make 5 digits
     for moment_dimen, dimen_dict in moment_config.items():
         print(f"_validate_moment_config {moment_dimen=}")
-        assert dimen_dict.get(jkeys_str()) is not None
-        assert dimen_dict.get(jvalues_str()) is not None
+        assert dimen_dict.get(wx.jkeys) is not None
+        assert dimen_dict.get(wx.jvalues) is not None
         if moment_dimen == wx.moment_timeoffi:
             assert dimen_dict.get("moment_static") == "False"
         else:
@@ -105,18 +103,18 @@ def _validate_moment_config(moment_config: dict):
         assert dimen_dict.get(wx.DELETE) is None
         assert dimen_dict.get(wx.normal_specs) is None
 
-        moment_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
+        moment_jkeys_keys = set(dimen_dict.get(wx.jkeys).keys())
         for jkey_key in moment_jkeys_keys:
-            jkey_dict = dimen_dict.get(jkeys_str())
+            jkey_dict = dimen_dict.get(wx.jkeys)
             print(f"_validate_moment_config {moment_dimen=} {jkey_key=} ")
             arg_dict = jkey_dict.get(jkey_key)
-            assert arg_dict.get(class_type_str()) in accepted_class_typees
-        moment_jvalues_keys = set(dimen_dict.get(jvalues_str()).keys())
+            assert arg_dict.get(wx.class_type) in accepted_class_typees
+        moment_jvalues_keys = set(dimen_dict.get(wx.jvalues).keys())
         for jvalue_key in moment_jvalues_keys:
-            jvalue_dict = dimen_dict.get(jvalues_str())
+            jvalue_dict = dimen_dict.get(wx.jvalues)
             print(f"_validate_moment_config {moment_dimen=} {jvalue_key=} ")
             arg_dict = jvalue_dict.get(jvalue_key)
-            assert arg_dict.get(class_type_str()) in accepted_class_typees
+            assert arg_dict.get(wx.class_type) in accepted_class_typees
 
 
 def test_get_moment_dimens_ReturnsObj():
@@ -154,14 +152,14 @@ def test_get_moment_args_dimen_mapping_ReturnsObj():
 def get_moment_class_type(x_dimen: str, x_arg: str) -> str:
     moment_config_dict = get_moment_config_dict()
     dimen_dict = moment_config_dict.get(x_dimen)
-    optional_dict = dimen_dict.get(jvalues_str())
-    required_dict = dimen_dict.get(jkeys_str())
+    optional_dict = dimen_dict.get(wx.jvalues)
+    required_dict = dimen_dict.get(wx.jkeys)
     arg_dict = {}
     if optional_dict.get(x_arg):
-        arg_dict = dimen_dict.get(jvalues_str()).get(x_arg)
+        arg_dict = dimen_dict.get(wx.jvalues).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
-    return arg_dict.get(class_type_str())
+    return arg_dict.get(wx.class_type)
 
 
 def all_args_class_types_are_correct(x_class_types) -> bool:

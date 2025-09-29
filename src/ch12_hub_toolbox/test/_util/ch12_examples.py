@@ -11,8 +11,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
     Ch01Keywords as wx,
-    belief_plan_factunit_str,
-    belief_planunit_str,
+    Ch07Keywords as wx,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
@@ -33,7 +32,7 @@ def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAt
     knee_rope = create_rope(moment_label, knee_str)
     knee_fact_lower = 7
     knee_fact_upper = 23
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     insert_factunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     insert_factunit_beliefatom.set_jkey(fact_context_str(), knee_rope)

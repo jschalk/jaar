@@ -2,10 +2,10 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -155,7 +155,7 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         beliefa_s_raw_del = create_prime_tablename(
-            belief_voiceunit_str(), "s", "raw", "del"
+            wx.belief_voiceunit, "s", "raw", "del"
         )
         insert_into_clause = f"""INSERT INTO {beliefa_s_raw_del} (
   {wx.idea_number}

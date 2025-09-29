@@ -1,17 +1,8 @@
 from sqlalchemy import inspect
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
 )
 from src.ch09_belief_atom_logic.atom_config import get_normalized_belief_table_build
 from src.ch09_belief_atom_logic.normal_models import (
@@ -70,7 +61,7 @@ def print_out_expected_class_attribute_declarations(config_dimen):
 
 def test_normalized_table_BeliefTable_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(beliefunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.beliefunit)
     mapper = inspect(BeliefTable)
 
     # WHEN / THEN
@@ -82,7 +73,7 @@ def test_normalized_table_BeliefTable_Exists():
 
 def test_normalized_table_VoiceUnitTable_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_voiceunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_voiceunit)
     mapper = inspect(VoiceUnitTable)
     # print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -95,9 +86,7 @@ def test_normalized_table_VoiceUnitTable_Exists():
 
 def test_normalized_table_MemberShipTable_membership_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(
-        belief_voice_membership_str()
-    )
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_voice_membership)
     mapper = inspect(MemberShipTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -110,7 +99,7 @@ def test_normalized_table_MemberShipTable_membership_Exists():
 
 def test_normalized_table_PlanTable_plan_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_planunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_planunit)
     mapper = inspect(PlanTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -123,7 +112,7 @@ def test_normalized_table_PlanTable_plan_Exists():
 
 def test_normalized_table_AwardUnitTable_awardunit_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_plan_awardunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_plan_awardunit)
     mapper = inspect(AwardUnitTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -136,7 +125,7 @@ def test_normalized_table_AwardUnitTable_awardunit_Exists():
 
 def test_normalized_table_ReasonTable_reason_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_plan_reasonunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_plan_reasonunit)
     mapper = inspect(ReasonTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -150,7 +139,7 @@ def test_normalized_table_ReasonTable_reason_Exists():
 def test_normalized_table_CaseTable_case_Exists():
     # ESTABLISH
     config_dimen = get_normalized_belief_table_build().get(
-        belief_plan_reason_caseunit_str()
+        wx.belief_plan_reason_caseunit
     )
     mapper = inspect(CaseTable)
     print_out_expected_class_attribute_declarations(config_dimen)
@@ -164,7 +153,7 @@ def test_normalized_table_CaseTable_case_Exists():
 
 def test_normalized_table_LaborLinkTable_partyunit_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_plan_partyunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_plan_partyunit)
     mapper = inspect(LaborLinkTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -177,7 +166,7 @@ def test_normalized_table_LaborLinkTable_partyunit_Exists():
 
 def test_normalized_table_HealerUnitTable_healerunit_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_plan_healerunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_plan_healerunit)
     mapper = inspect(HealerUnitTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 
@@ -190,7 +179,7 @@ def test_normalized_table_HealerUnitTable_healerunit_Exists():
 
 def test_normalized_table_FactTable_fact_Exists():
     # ESTABLISH
-    config_dimen = get_normalized_belief_table_build().get(belief_plan_factunit_str())
+    config_dimen = get_normalized_belief_table_build().get(wx.belief_plan_factunit)
     mapper = inspect(FactTable)
     print_out_expected_class_attribute_declarations(config_dimen)
 

@@ -11,17 +11,8 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch02Keywords as wx,
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
     denom_str,
     fact_context_str,
     fact_lower_str,
@@ -47,7 +38,7 @@ def test_sift_atom_ReturnsNoneIfGivenBeliefAtomIsUPDATE():
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     sue_belief.add_plan(casa_rope)
-    casa_atom = beliefatom_shop(belief_planunit_str(), wx.UPDATE)
+    casa_atom = beliefatom_shop(wx.belief_planunit, wx.UPDATE)
     casa_atom.set_arg(wx.parent_rope, sue_belief.moment_label)
     casa_atom.set_arg(plan_label_str(), casa_str)
     casa_atom.set_arg(star_str(), 8)
@@ -70,7 +61,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     sue_max_tree_traverse = 72
     sue_penny = 2
     sue_tally = 100
-    zia_atom = beliefatom_shop(beliefunit_str(), wx.INSERT)
+    zia_atom = beliefatom_shop(wx.beliefunit, wx.INSERT)
     zia_atom.set_arg("respect_bit", sue_bit)
     zia_atom.set_arg("credor_respect", sue_credor_respect)
     zia_atom.set_arg("debtor_respect", sue_debtor_respect)
@@ -107,7 +98,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     sue_belief = beliefunit_shop("Sue")
     sue_belief.add_voiceunit(zia_str)
 
-    zia_atom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
+    zia_atom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     zia_atom.set_arg(wx.voice_name, zia_str)
     zia_atom.set_arg(wx.voice_debt_points, zia_voice_debt_points)
 
@@ -131,7 +122,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     sue_belief.add_voiceunit(zia_str)
     sue_belief.get_voice(zia_str).add_membership(run_str)
 
-    zia_atom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
+    zia_atom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
     zia_atom.set_arg(wx.voice_name, zia_str)
     zia_atom.set_arg(wx.group_title, run_str)
     zia_atom.set_arg(wx.group_debt_points, zia_run_group_debt_points)
@@ -165,7 +156,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
     sue_pledge = 97
     sue_problem_bool = True
     sue_stop_want = 107
-    old_casa_atom = beliefatom_shop(belief_planunit_str(), wx.INSERT)
+    old_casa_atom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
     old_casa_atom.set_arg(plan_rope_str(), casa_rope)
     old_casa_atom.set_arg(wx.addin, sue_addin)
     old_casa_atom.set_arg(wx.begin, sue_begin)
@@ -211,7 +202,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_awardunit():
     zia_run_take_force = 76
     sue_belief.get_plan_obj(casa_rope).set_awardunit(awardunit_shop(run_str, 2, 3))
 
-    zia_atom = beliefatom_shop(belief_plan_awardunit_str(), wx.INSERT)
+    zia_atom = beliefatom_shop(wx.belief_plan_awardunit, wx.INSERT)
     zia_atom.set_arg(plan_rope_str(), casa_rope)
     zia_atom.set_arg(wx.awardee_title, run_str)
     zia_atom.set_arg(wx.give_force, zia_run_give_force)
@@ -239,7 +230,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():
     sue_belief.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(week_rope))
 
     new_reason_active_requisite = True
-    casa_atom = beliefatom_shop(belief_plan_reasonunit_str(), wx.INSERT)
+    casa_atom = beliefatom_shop(wx.belief_plan_reasonunit, wx.INSERT)
     casa_atom.set_arg(plan_rope_str(), casa_rope)
     casa_atom.set_arg(reason_context_str(), week_rope)
     casa_atom.set_arg(reason_active_requisite_str(), new_reason_active_requisite)
@@ -277,7 +268,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reason_caseunit():
     clean_plan.get_reasonunit(week_rope).set_case(thur_rope)
 
     thur_reason_divisor = 39
-    thur_atom = beliefatom_shop(belief_plan_reason_caseunit_str(), wx.INSERT)
+    thur_atom = beliefatom_shop(wx.belief_plan_reason_caseunit, wx.INSERT)
     thur_atom.set_arg(plan_rope_str(), clean_rope)
     thur_atom.set_arg(reason_context_str(), week_rope)
     thur_atom.set_arg(reason_state_str(), thur_rope)
@@ -309,7 +300,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_factunit():
     sue_belief.get_plan_obj(casa_rope).set_factunit(factunit_shop(week_rope))
 
     casa_fact_lower = 32
-    casa_atom = beliefatom_shop(belief_plan_factunit_str(), wx.INSERT)
+    casa_atom = beliefatom_shop(wx.belief_plan_factunit, wx.INSERT)
     casa_atom.set_arg(plan_rope_str(), casa_rope)
     casa_atom.set_arg(fact_context_str(), week_rope)
     casa_atom.set_arg(fact_lower_str(), casa_fact_lower)

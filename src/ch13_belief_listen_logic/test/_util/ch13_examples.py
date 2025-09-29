@@ -10,8 +10,7 @@ from src.ch12_hub_toolbox.test._util.ch12_examples import get_texas_rope
 from src.ch13_belief_listen_logic._ref.ch13_keywords import (
     Ch01Keywords as wx,
     Ch02Keywords as wx,
-    belief_plan_factunit_str,
-    belief_planunit_str,
+    Ch07Keywords as wx,
     fact_context_str,
     fact_lower_str,
     fact_upper_str,

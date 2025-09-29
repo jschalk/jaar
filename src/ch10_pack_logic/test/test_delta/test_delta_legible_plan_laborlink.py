@@ -3,8 +3,8 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_partyunit_str,
     plan_rope_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
@@ -14,7 +14,7 @@ from src.ch10_pack_logic.legible import create_legible_list
 def test_create_legible_list_ReturnsObj_plan_partyunit_INSERT():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_partyunit_str()
+    dimen = wx.belief_plan_partyunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     party_title_value = f"{sue_belief.knot}Swimmers"
@@ -37,7 +37,7 @@ def test_create_legible_list_ReturnsObj_plan_partyunit_INSERT():
 def test_create_legible_list_ReturnsObj_plan_partyunit_DELETE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_partyunit_str()
+    dimen = wx.belief_plan_partyunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     party_title_value = f"{sue_belief.knot}Swimmers"

@@ -23,20 +23,11 @@ from src.ch17_idea_logic.idea_config import (
     get_idea_sqlite_types,
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
@@ -57,46 +48,46 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 
 BELIEF_PRIME_TABLENAMES = {
-    f"{belief_voice_membership_str()}_sound_put_agg": "BLRMEMB_PUT_AGG",
-    f"{belief_voice_membership_str()}_sound_put_raw": "BLRMEMB_PUT_RAW",
-    f"{belief_voiceunit_str()}_sound_put_agg": "BLRPERN_PUT_AGG",
-    f"{belief_voiceunit_str()}_sound_put_raw": "BLRPERN_PUT_RAW",
-    f"{belief_plan_awardunit_str()}_sound_put_agg": "BLRAWAR_PUT_AGG",
-    f"{belief_plan_awardunit_str()}_sound_put_raw": "BLRAWAR_PUT_RAW",
-    f"{belief_plan_factunit_str()}_sound_put_agg": "BLRFACT_PUT_AGG",
-    f"{belief_plan_factunit_str()}_sound_put_raw": "BLRFACT_PUT_RAW",
-    f"{belief_plan_healerunit_str()}_sound_put_agg": "BLRHEAL_PUT_AGG",
-    f"{belief_plan_healerunit_str()}_sound_put_raw": "BLRHEAL_PUT_RAW",
-    f"{belief_plan_reason_caseunit_str()}_sound_put_agg": "BLRPREM_PUT_AGG",
-    f"{belief_plan_reason_caseunit_str()}_sound_put_raw": "BLRPREM_PUT_RAW",
-    f"{belief_plan_reasonunit_str()}_sound_put_agg": "BLRREAS_PUT_AGG",
-    f"{belief_plan_reasonunit_str()}_sound_put_raw": "BLRREAS_PUT_RAW",
-    f"{belief_plan_partyunit_str()}_sound_put_agg": "BLRLABO_PUT_AGG",
-    f"{belief_plan_partyunit_str()}_sound_put_raw": "BLRLABO_PUT_RAW",
-    f"{belief_planunit_str()}_sound_put_agg": "BLRPLAN_PUT_AGG",
-    f"{belief_planunit_str()}_sound_put_raw": "BLRPLAN_PUT_RAW",
-    f"{beliefunit_str()}_sound_put_agg": "BLRUNIT_PUT_AGG",
-    f"{beliefunit_str()}_sound_put_raw": "BLRUNIT_PUT_RAW",
-    f"{belief_voice_membership_str()}_sound_del_agg": "BLRMEMB_DEL_AGG",
-    f"{belief_voice_membership_str()}_sound_del_raw": "BLRMEMB_DEL_RAW",
-    f"{belief_voiceunit_str()}_sound_del_agg": "BLRPERN_DEL_AGG",
-    f"{belief_voiceunit_str()}_sound_del_raw": "BLRPERN_DEL_RAW",
-    f"{belief_plan_awardunit_str()}_sound_del_agg": "BLRAWAR_DEL_AGG",
-    f"{belief_plan_awardunit_str()}_sound_del_raw": "BLRAWAR_DEL_RAW",
-    f"{belief_plan_factunit_str()}_sound_del_agg": "BLRFACT_DEL_AGG",
-    f"{belief_plan_factunit_str()}_sound_del_raw": "BLRFACT_DEL_RAW",
-    f"{belief_plan_healerunit_str()}_sound_del_agg": "BLRHEAL_DEL_AGG",
-    f"{belief_plan_healerunit_str()}_sound_del_raw": "BLRHEAL_DEL_RAW",
-    f"{belief_plan_reason_caseunit_str()}_sound_del_agg": "BLRPREM_DEL_AGG",
-    f"{belief_plan_reason_caseunit_str()}_sound_del_raw": "BLRPREM_DEL_RAW",
-    f"{belief_plan_reasonunit_str()}_sound_del_agg": "BLRREAS_DEL_AGG",
-    f"{belief_plan_reasonunit_str()}_sound_del_raw": "BLRREAS_DEL_RAW",
-    f"{belief_plan_partyunit_str()}_sound_del_agg": "BLRLABO_DEL_AGG",
-    f"{belief_plan_partyunit_str()}_sound_del_raw": "BLRLABO_DEL_RAW",
-    f"{belief_planunit_str()}_sound_del_agg": "BLRPLAN_DEL_AGG",
-    f"{belief_planunit_str()}_sound_del_raw": "BLRPLAN_DEL_RAW",
-    f"{beliefunit_str()}_sound_del_agg": "BLRUNIT_DEL_AGG",
-    f"{beliefunit_str()}_sound_del_raw": "BLRUNIT_DEL_RAW",
+    f"{wx.belief_voice_membership}_sound_put_agg": "BLRMEMB_PUT_AGG",
+    f"{wx.belief_voice_membership}_sound_put_raw": "BLRMEMB_PUT_RAW",
+    f"{wx.belief_voiceunit}_sound_put_agg": "BLRPERN_PUT_AGG",
+    f"{wx.belief_voiceunit}_sound_put_raw": "BLRPERN_PUT_RAW",
+    f"{wx.belief_plan_awardunit}_sound_put_agg": "BLRAWAR_PUT_AGG",
+    f"{wx.belief_plan_awardunit}_sound_put_raw": "BLRAWAR_PUT_RAW",
+    f"{wx.belief_plan_factunit}_sound_put_agg": "BLRFACT_PUT_AGG",
+    f"{wx.belief_plan_factunit}_sound_put_raw": "BLRFACT_PUT_RAW",
+    f"{wx.belief_plan_healerunit}_sound_put_agg": "BLRHEAL_PUT_AGG",
+    f"{wx.belief_plan_healerunit}_sound_put_raw": "BLRHEAL_PUT_RAW",
+    f"{wx.belief_plan_reason_caseunit}_sound_put_agg": "BLRPREM_PUT_AGG",
+    f"{wx.belief_plan_reason_caseunit}_sound_put_raw": "BLRPREM_PUT_RAW",
+    f"{wx.belief_plan_reasonunit}_sound_put_agg": "BLRREAS_PUT_AGG",
+    f"{wx.belief_plan_reasonunit}_sound_put_raw": "BLRREAS_PUT_RAW",
+    f"{wx.belief_plan_partyunit}_sound_put_agg": "BLRLABO_PUT_AGG",
+    f"{wx.belief_plan_partyunit}_sound_put_raw": "BLRLABO_PUT_RAW",
+    f"{wx.belief_planunit}_sound_put_agg": "BLRPLAN_PUT_AGG",
+    f"{wx.belief_planunit}_sound_put_raw": "BLRPLAN_PUT_RAW",
+    f"{wx.beliefunit}_sound_put_agg": "BLRUNIT_PUT_AGG",
+    f"{wx.beliefunit}_sound_put_raw": "BLRUNIT_PUT_RAW",
+    f"{wx.belief_voice_membership}_sound_del_agg": "BLRMEMB_DEL_AGG",
+    f"{wx.belief_voice_membership}_sound_del_raw": "BLRMEMB_DEL_RAW",
+    f"{wx.belief_voiceunit}_sound_del_agg": "BLRPERN_DEL_AGG",
+    f"{wx.belief_voiceunit}_sound_del_raw": "BLRPERN_DEL_RAW",
+    f"{wx.belief_plan_awardunit}_sound_del_agg": "BLRAWAR_DEL_AGG",
+    f"{wx.belief_plan_awardunit}_sound_del_raw": "BLRAWAR_DEL_RAW",
+    f"{wx.belief_plan_factunit}_sound_del_agg": "BLRFACT_DEL_AGG",
+    f"{wx.belief_plan_factunit}_sound_del_raw": "BLRFACT_DEL_RAW",
+    f"{wx.belief_plan_healerunit}_sound_del_agg": "BLRHEAL_DEL_AGG",
+    f"{wx.belief_plan_healerunit}_sound_del_raw": "BLRHEAL_DEL_RAW",
+    f"{wx.belief_plan_reason_caseunit}_sound_del_agg": "BLRPREM_DEL_AGG",
+    f"{wx.belief_plan_reason_caseunit}_sound_del_raw": "BLRPREM_DEL_RAW",
+    f"{wx.belief_plan_reasonunit}_sound_del_agg": "BLRREAS_DEL_AGG",
+    f"{wx.belief_plan_reasonunit}_sound_del_raw": "BLRREAS_DEL_RAW",
+    f"{wx.belief_plan_partyunit}_sound_del_agg": "BLRLABO_DEL_AGG",
+    f"{wx.belief_plan_partyunit}_sound_del_raw": "BLRLABO_DEL_RAW",
+    f"{wx.belief_planunit}_sound_del_agg": "BLRPLAN_DEL_AGG",
+    f"{wx.belief_planunit}_sound_del_raw": "BLRPLAN_DEL_RAW",
+    f"{wx.beliefunit}_sound_del_agg": "BLRUNIT_DEL_AGG",
+    f"{wx.beliefunit}_sound_del_raw": "BLRUNIT_DEL_RAW",
 }
 
 
@@ -691,7 +682,7 @@ WHERE inconsistency_rows.moment_label = moment_timeline_hour_s_raw.moment_label
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario2_BeliefDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = belief_plan_awardunit_str()
+    dimen = wx.belief_plan_awardunit
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_heard_tables(cursor)
@@ -825,7 +816,7 @@ GROUP BY event_int, face_name, moment_label, cumulative_minute
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario2_BeliefDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = belief_plan_awardunit_str()
+    dimen = wx.belief_plan_awardunit
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_heard_tables(cursor)
@@ -939,7 +930,7 @@ def test_create_insert_missing_face_name_into_translate_core_vld_sqlstr_ReturnsO
     # ESTABLISH
     default_knot = "|"
     default_unknown_str = "unknown2"
-    blrpern_s_agg_tablename = prime_tbl(belief_voiceunit_str(), "s", "agg")
+    blrpern_s_agg_tablename = prime_tbl(wx.belief_voiceunit, "s", "agg")
 
     # WHEN
     insert_sqlstr = create_insert_missing_face_name_into_translate_core_vld_sqlstr(

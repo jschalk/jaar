@@ -3,16 +3,7 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import (
     Ch04Keywords as wx,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
+    Ch07Keywords as wx,
     fact_context_str,
     healer_name_str,
     plan_rope_str,
@@ -341,8 +332,8 @@ def test_belief_plan_factunit_exists_ReturnsObj():
 
 def test_belief_attr_exists_ReturnsObj_beliefunit():
     # ESTABLISH / WHEN / THEN
-    assert not belief_attr_exists(beliefunit_str(), None, {})
-    assert belief_attr_exists(beliefunit_str(), beliefunit_shop("Sue"), {})
+    assert not belief_attr_exists(wx.beliefunit, None, {})
+    assert belief_attr_exists(wx.beliefunit, beliefunit_shop("Sue"), {})
 
 
 def test_belief_attr_exists_ReturnsObj_belief_voiceunit():
@@ -352,14 +343,14 @@ def test_belief_attr_exists_ReturnsObj_belief_voiceunit():
     x_jkeys = {wx.voice_name: yao_str}
 
     # WHEN / THEN
-    assert not belief_attr_exists(belief_voiceunit_str(), None, {})
-    assert not belief_attr_exists(belief_voiceunit_str(), sue_belief, x_jkeys)
+    assert not belief_attr_exists(wx.belief_voiceunit, None, {})
+    assert not belief_attr_exists(wx.belief_voiceunit, sue_belief, x_jkeys)
 
     # WHEN
     sue_belief.add_voiceunit(yao_str)
 
     # THEN
-    assert belief_attr_exists(belief_voiceunit_str(), sue_belief, x_jkeys)
+    assert belief_attr_exists(wx.belief_voiceunit, sue_belief, x_jkeys)
 
 
 def test_belief_attr_exists_ReturnsObj_belief_voice_membership():
@@ -368,7 +359,7 @@ def test_belief_attr_exists_ReturnsObj_belief_voice_membership():
     swim_str = ";swim"
     sue_belief = beliefunit_shop("Sue")
     x_jkeys = {wx.voice_name: yao_str, wx.group_title: swim_str}
-    x_dimen = belief_voice_membership_str()
+    x_dimen = wx.belief_voice_membership
 
     # WHEN / THEN
     assert not belief_attr_exists(x_dimen, None, {})
@@ -405,7 +396,7 @@ def test_belief_attr_exists_ReturnsObj_belief_planunit():
     casa_jkeys = {plan_rope_str(): casa_rope}
     clean_jkeys = {plan_rope_str(): clean_rope}
     sweep_jkeys = {plan_rope_str(): sweep_rope}
-    x_dimen = belief_planunit_str()
+    x_dimen = wx.belief_planunit
 
     # WHEN / THEN
     assert not belief_attr_exists(x_dimen, None, {})
@@ -443,7 +434,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_awardunit():
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_belief.moment_label)
     swim_str = "Swim"
-    x_dimen = belief_plan_awardunit_str()
+    x_dimen = wx.belief_plan_awardunit
     root_jkeys = {plan_rope_str(): root_rope, wx.awardee_title: swim_str}
     casa_jkeys = {plan_rope_str(): casa_rope, wx.awardee_title: swim_str}
     clean_jkeys = {plan_rope_str(): clean_rope, wx.awardee_title: swim_str}
@@ -475,7 +466,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_reasonunit():
     root_rope = to_rope(sue_belief.moment_label)
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
-    x_dimen = belief_plan_reasonunit_str()
+    x_dimen = wx.belief_plan_reasonunit
     root_jkeys = {plan_rope_str(): root_rope, reason_context_str(): wk_rope}
     casa_jkeys = {plan_rope_str(): casa_rope, reason_context_str(): wk_rope}
     clean_jkeys = {plan_rope_str(): clean_rope, reason_context_str(): wk_rope}
@@ -508,7 +499,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_reason_caseunit():
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     thur_rope = sue_belief.make_rope(wk_rope, "thur")
-    x_dimen = belief_plan_reason_caseunit_str()
+    x_dimen = wx.belief_plan_reason_caseunit
     root_jkeys = {
         plan_rope_str(): root_rope,
         reason_context_str(): wk_rope,
@@ -560,7 +551,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_partyunit():
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_belief.moment_label)
     swim_str = "Swim"
-    x_dimen = belief_plan_partyunit_str()
+    x_dimen = wx.belief_plan_partyunit
     root_jkeys = {plan_rope_str(): root_rope, wx.party_title: swim_str}
     casa_jkeys = {plan_rope_str(): casa_rope, wx.party_title: swim_str}
     clean_jkeys = {plan_rope_str(): clean_rope, wx.party_title: swim_str}
@@ -591,7 +582,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_healerunit():
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
     root_rope = to_rope(sue_belief.moment_label)
     swim_str = "Swim"
-    x_dimen = belief_plan_healerunit_str()
+    x_dimen = wx.belief_plan_healerunit
     root_jkeys = {plan_rope_str(): root_rope, healer_name_str(): swim_str}
     casa_jkeys = {plan_rope_str(): casa_rope, healer_name_str(): swim_str}
     clean_jkeys = {plan_rope_str(): clean_rope, healer_name_str(): swim_str}
@@ -623,7 +614,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_factunit():
     root_rope = to_rope(sue_belief.moment_label)
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     root_jkeys = {plan_rope_str(): root_rope, fact_context_str(): wk_rope}
     casa_jkeys = {plan_rope_str(): casa_rope, fact_context_str(): wk_rope}
     clean_jkeys = {plan_rope_str(): clean_rope, fact_context_str(): wk_rope}

@@ -12,10 +12,8 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
 from src.ch16_translate_logic.translate_main import translateunit_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch07Keywords as wx,
-    credor_respect_str,
     moment_label_str,
     reason_context_str,
-    voice_pool_str,
 )
 from src.ch17_idea_logic.idea_db_tool import (
     get_dataframe_translateable_columns,

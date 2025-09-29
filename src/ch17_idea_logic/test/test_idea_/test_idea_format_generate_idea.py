@@ -5,12 +5,10 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
-    belief_planunit_str,
-    belief_voiceunit_str,
+    Ch07Keywords as wx,
     plan_rope_str,
     pledge_str,
     star_str,
-    voice_pool_str,
 )
 from src.ch17_idea_logic.idea_config import (
     idea_format_00013_planunit_v0_0_0,
@@ -49,19 +47,19 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
 
     # THEN
     assert sue_voice_beliefdelta
-    sue_beliefatom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
+    sue_beliefatom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     sue_beliefatom.set_arg(wx.voice_name, sue_str)
     sue_beliefatom.set_arg(wx.voice_cred_points, sue_voice_cred_points)
     sue_beliefatom.set_arg(wx.voice_debt_points, sue_voice_debt_points)
     sue_beliefatom.set_atom_order()
-    bob_beliefatom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
+    bob_beliefatom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     bob_beliefatom.set_arg(wx.voice_name, bob_str)
     bob_beliefatom.set_arg(wx.voice_cred_points, bob_voice_cred_points)
     bob_beliefatom.set_arg(wx.voice_debt_points, bob_voice_debt_points)
     bob_beliefatom.set_atom_order()
     # print(f"{sue_voice_beliefdelta.get_ordered_dict()=}")
     # print(
-    #     f"{sue_voice_beliefdelta.beliefatoms.get(wx.INSERT).get(belief_voiceunit_str()).get(sue_str)=}"
+    #     f"{sue_voice_beliefdelta.beliefatoms.get(wx.INSERT).get(wx.belief_voiceunit).get(sue_str)=}"
     # )
     print(f"{sue_beliefatom=}")
     assert sue_voice_beliefdelta.beliefatom_exists(sue_beliefatom)
@@ -108,10 +106,10 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
 
 #     # THEN
 #     assert membership_changunit
-#     sue_iowa_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
-#     bob_iowa_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
-#     yao_iowa_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
-#     yao_ohio_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
+#     sue_iowa_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
+#     bob_iowa_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
+#     yao_iowa_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
+#     yao_ohio_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
 #     sue_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
 #     bob_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
 #     yao_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
@@ -161,13 +159,13 @@ def test_make_beliefdelta_Arg_idea_format_00013_planunit_v0_0_0():
     planunit_changunit = make_beliefdelta(planunit_csv)
 
     # THEN
-    casa_beliefatom = beliefatom_shop(belief_planunit_str(), wx.INSERT)
+    casa_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
     casa_beliefatom.set_arg(plan_rope_str(), casa_rope)
     casa_beliefatom.set_arg(pledge_str(), False)
     casa_beliefatom.set_arg(star_str(), casa_star)
     print(f"{casa_beliefatom=}")
     assert casa_beliefatom.get_value(star_str()) == casa_star
-    clean_beliefatom = beliefatom_shop(belief_planunit_str(), wx.INSERT)
+    clean_beliefatom = beliefatom_shop(wx.belief_planunit, wx.INSERT)
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
     clean_beliefatom.set_arg(pledge_str(), True)
     clean_beliefatom.set_arg(star_str(), 1)

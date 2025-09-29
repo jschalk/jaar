@@ -4,8 +4,8 @@ from src.ch01_data_toolbox.file_toolbox import create_path, open_file
 from src.ch12_hub_toolbox.ch12_path import create_belief_event_dir_path
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch10Keywords as wx,
-    belief_voiceunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
@@ -31,9 +31,7 @@ def test_etl_heard_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
     amy23_str = "amy23"
     yao_voice_cred_points5 = 5
     sue_voice_cred_points7 = 7
-    put_agg_tablename = create_prime_tablename(
-        belief_voiceunit_str(), "h", "agg", "put"
-    )
+    put_agg_tablename = create_prime_tablename(wx.belief_voiceunit, "h", "agg", "put")
     put_agg_csv = f"{put_agg_tablename}.csv"
     x_moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_dir = create_belief_event_dir_path(

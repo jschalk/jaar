@@ -3,8 +3,8 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_voice_membership_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -13,7 +13,7 @@ from src.ch10_pack_logic.legible import create_legible_list
 def test_create_legible_list_ReturnsObj_voice_membership_INSERT():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_voice_membership_str()
+    dimen = wx.belief_voice_membership
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     group_cred_points_value = 81
@@ -39,7 +39,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_INSERT():
 def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_points_group_debt_points():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_voice_membership_str()
+    dimen = wx.belief_voice_membership
     group_cred_points_str = "group_cred_points"
     group_debt_points_str = "group_debt_points"
     swim_str = f"{sue_belief.knot}Swimmers"
@@ -67,7 +67,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_point
 def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_points():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_voice_membership_str()
+    dimen = wx.belief_voice_membership
     group_cred_points_str = "group_cred_points"
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
@@ -92,7 +92,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_cred_point
 def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_debt_points():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_voice_membership_str()
+    dimen = wx.belief_voice_membership
     group_debt_points_str = "group_debt_points"
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
@@ -117,7 +117,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_UPDATE_group_debt_point
 def test_create_legible_list_ReturnsObj_voice_membership_DELETE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_voice_membership_str()
+    dimen = wx.belief_voice_membership
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
     yao_beliefatom = beliefatom_shop(dimen, wx.DELETE)

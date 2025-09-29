@@ -4,9 +4,8 @@ from src.ch01_data_toolbox.db_toolbox import get_rowdata
 from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
-    belief_plan_factunit_str,
-    beliefunit_str,
     fact_context_str,
     fact_lower_str,
     plan_rope_str,
@@ -25,7 +24,7 @@ def test_BeliefAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     update_disc_beliefatom = beliefatom_shop(x_dimen, wx.UPDATE)
     update_disc_beliefatom.set_jkey("reason_context", knee_rope)
 
@@ -41,7 +40,7 @@ def test_BeliefAtom_get_insert_sqlstr_RaisesErrorWhen_is_valid_False():
 def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_BeliefUnitSimpleAttrs():
     # ESTABLISH
     new2_value = 66
-    dimen = beliefunit_str()
+    dimen = wx.beliefunit
     opt_arg2 = "max_tree_traverse"
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     x_beliefatom.set_jvalue(opt_arg2, new2_value)
@@ -68,7 +67,7 @@ def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     knee_reason_lower = 7
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     update_disc_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(fact_context_str(), knee_rope)
@@ -103,7 +102,7 @@ def test_get_beliefatom_from_rowdata_ReturnsObj_plan_factunit():
     knee_str = "knee"
     knee_rope = create_rope("a", knee_str)
     knee_fact_lower = 7
-    x_dimen = belief_plan_factunit_str()
+    x_dimen = wx.belief_plan_factunit
     x_sqlstr = f"""SELECT
   '{ball_rope}' as {x_dimen}_{wx.INSERT}_{plan_rope_str()}
 , '{knee_rope}' as {x_dimen}_{wx.INSERT}_{fact_context_str()}
