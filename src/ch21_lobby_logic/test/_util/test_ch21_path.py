@@ -2,9 +2,9 @@ from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch21_lobby_logic._ref.ch21_keywords import (
+    Ch17Keywords as wx,
     Ch21Keywords,
     Ch21Keywords as wx,
-    world_name_str,
 )
 from src.ch21_lobby_logic.ch21_path import (
     LobbyID,
@@ -100,7 +100,7 @@ def test_create_lobby_dir_path_HasDocString():
 
 def test_create_world_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_world_dir_path(wx.lobby_mstr_dir, wx.lobby_id, world_name_str())
+    doc_str = create_world_dir_path(wx.lobby_mstr_dir, wx.lobby_id, wx.world_name)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_world_dir_path) == doc_str
@@ -108,9 +108,7 @@ def test_create_world_dir_path_HasDocString():
 
 def test_create_moment_mstr_dir_path_HasDocString():
     # ESTABLISH
-    doc_str = create_moment_mstr_dir_path(
-        wx.lobby_mstr_dir, wx.lobby_id, world_name_str()
-    )
+    doc_str = create_moment_mstr_dir_path(wx.lobby_mstr_dir, wx.lobby_id, wx.world_name)
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
     assert LINUX_OS or inspect_getdoc(create_moment_mstr_dir_path) == doc_str

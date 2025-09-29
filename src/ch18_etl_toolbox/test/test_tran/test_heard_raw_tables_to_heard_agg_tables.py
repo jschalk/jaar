@@ -7,11 +7,10 @@ from src.ch17_idea_logic.idea_config import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch17Keywords as wx,
     belief_voiceunit_str,
-    error_message_str,
     event_int_str,
     face_name_str,
-    idea_category_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -34,7 +33,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "moment"
+        if dimen_config.get(wx.idea_category) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
@@ -49,7 +48,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
             raw_columns.remove(f"{face_name_str()}_inx")
             raw_columns.remove(event_int_str())
-            raw_columns.remove(error_message_str())
+            raw_columns.remove(wx.error_message)
             raw_columns = get_default_sorted_list(raw_columns)
 
             raw_columns_str = ", ".join(raw_columns)
@@ -78,7 +77,7 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
     belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "belief"
+        if dimen_config.get(wx.idea_category) == "belief"
     }
 
     # WHEN

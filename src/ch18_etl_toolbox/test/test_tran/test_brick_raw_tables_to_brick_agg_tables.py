@@ -6,16 +6,12 @@ from src.ch01_data_toolbox.db_toolbox import (
 )
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    brick_agg_str,
-    brick_raw_str,
+    Ch17Keywords as wx,
+    Ch18Keywords as wx,
     cumulative_minute_str,
-    error_message_str,
     event_int_str,
-    events_brick_agg_str,
-    events_brick_valid_str,
     face_name_str,
     hour_label_str,
-    idea_number_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_sound_and_heard_tables
@@ -34,14 +30,14 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
+    raw_br00003_tablename = f"br00003_{wx.brick_raw}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
         moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
-        error_message_str(),
+        wx.error_message,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -52,7 +48,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario0_Gr
 , {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
-, {error_message_str()}
+, {wx.error_message}
 )"""
         values_clause = f"""
 VALUES     
@@ -63,7 +59,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -111,14 +107,14 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
     hour7am = "7am"
     hour8am = "8am"
 
-    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
+    raw_br00003_tablename = f"br00003_{wx.brick_raw}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
         moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
-        error_message_str(),
+        wx.error_message,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -129,7 +125,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario1_Gr
 , {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
-, {error_message_str()}
+, {wx.error_message}
 )"""
         values_clause = f"""
 VALUES     
@@ -140,7 +136,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
         assert get_row_count(cursor, raw_br00003_tablename) == 3
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -182,14 +178,14 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
     hour6am = "6am"
     hour7am = "7am"
     hour8am = "8am"
-    raw_br00003_tablename = f"br00003_{brick_raw_str()}"
+    raw_br00003_tablename = f"br00003_{wx.brick_raw}"
     raw_br00003_columns = [
         event_int_str(),
         face_name_str(),
         moment_label_str(),
         cumulative_minute_str(),
         hour_label_str(),
-        error_message_str(),
+        wx.error_message,
     ]
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
@@ -200,7 +196,7 @@ def test_etl_brick_raw_tables_to_brick_agg_tables_PopulatesAggTable_Scenario2_Gr
 , {moment_label_str()}
 , {cumulative_minute_str()}
 , {hour_label_str()}
-, {error_message_str()}
+, {wx.error_message}
 )"""
         values_clause = f"""
 VALUES     
@@ -212,7 +208,7 @@ VALUES
 """
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
         cursor.execute(insert_sqlstr)
-        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
         assert get_row_count(cursor, raw_br00003_tablename) == 4
         assert not db_table_exists(cursor, agg_br00003_tablename)
 
@@ -238,7 +234,7 @@ ORDER BY {event_int_str()}, {cumulative_minute_str()};"""
 
 def test_get_max_brick_events_event_int_ReturnsObj_Scenario0_NoTables():
     # ESTABLISH
-    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+    agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -266,7 +262,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario1_OneTable():
     minute_420 = 420
     hour6am = "6am"
     hour7am = "7am"
-    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+    agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -312,7 +308,7 @@ def test_get_max_brick_events_event_int_ReturnsObj_Scenario2_MultipleTable():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+        agg_br00003_tablename = f"br00003_{wx.brick_agg}"
         agg_br00003_columns = [event_int_str()]
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         agg_br00003_insert_sqlstr = f"""
@@ -320,7 +316,7 @@ INSERT INTO {agg_br00003_tablename} ({event_int_str()})
 VALUES ('{event1}'), ('{event1}'), ('{event9}');"""
         cursor.execute(agg_br00003_insert_sqlstr)
 
-        agg_br00044_tablename = f"br00044_{brick_agg_str()}"
+        agg_br00044_tablename = f"br00044_{wx.brick_agg}"
         agg_br00044_columns = [event_int_str()]
         create_idea_sorted_table(cursor, agg_br00044_tablename, agg_br00044_columns)
         agg_br00044_insert_sqlstr = f"""

@@ -23,22 +23,17 @@ from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tb
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
     Ch11Keywords as wx,
+    Ch16Keywords as wx,
+    Ch18Keywords as wx,
     Ch19Keywords as wx,
     amount_str,
     celldepth_str,
     creg_str,
     cumulative_minute_str,
     event_int_str,
-    events_brick_agg_str,
-    events_brick_valid_str,
     face_name_str,
     hour_label_str,
-    inx_name_str,
-    moment_event_time_agg_str,
     moment_label_str,
-    moment_ote1_agg_str,
-    moment_voice_nets_str,
-    otx_name_str,
     time_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
@@ -66,8 +61,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
-        otx_name_str(),
-        inx_name_str(),
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy23"
     br00113_str = "br00113"
@@ -78,7 +73,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
-    events_brick_valid_tablename = events_brick_valid_str()
+    events_brick_valid_tablename = wx.events_brick_valid
     trlname_sound_raw = prime_tbl("trlname", "s", "raw")
     trlname_sound_agg = prime_tbl("trlname", "s", "agg")
     trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -113,7 +108,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, br00113_raw)
         assert not db_table_exists(cursor, br00113_agg)
-        assert not db_table_exists(cursor, events_brick_agg_str())
+        assert not db_table_exists(cursor, wx.events_brick_agg)
         assert not db_table_exists(cursor, events_brick_valid_tablename)
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, trlname_sound_raw)
@@ -139,10 +134,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, moment_event_time_agg_str())
-        assert not db_table_exists(cursor, moment_ote1_agg_str())
+        assert not db_table_exists(cursor, wx.moment_event_time_agg)
+        assert not db_table_exists(cursor, wx.moment_ote1_agg)
         assert not db_table_exists(cursor, blrpern_job)
-        assert not db_table_exists(cursor, moment_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_voice_nets)
         assert not db_table_exists(cursor, wx.moment_kpi001_voice_nets)
         assert not os_path_exists(last_run_metrics_path)
 
@@ -169,7 +164,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
 
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, events_brick_agg_str()) == 1
+        assert get_row_count(cursor, wx.events_brick_agg) == 1
         assert get_row_count(cursor, events_brick_valid_tablename) == 1
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, trlname_sound_raw) == 1
@@ -204,8 +199,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert sue_gut.plan_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, blrpern_job) == 1
-        assert get_row_count(cursor, moment_voice_nets_str()) == 0
-        # assert get_row_count(cursor, moment_event_time_agg_str()) == 0
+        assert get_row_count(cursor, wx.moment_voice_nets) == 0
+        # assert get_row_count(cursor, wx.moment_event_time_agg) == 0
         # assert get_row_count(cursor, moment_ote1_agg_tablename) == 0
         assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 0
         assert os_path_exists(last_run_metrics_path)
@@ -229,8 +224,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
-        otx_name_str(),
-        inx_name_str(),
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy23"
     tp37 = 37
@@ -261,7 +256,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
-    events_brick_valid_tablename = events_brick_valid_str()
+    events_brick_valid_tablename = wx.events_brick_valid
     trlname_sound_raw = prime_tbl("trlname", "s", "raw")
     trlname_sound_agg = prime_tbl("trlname", "s", "agg")
     trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -292,7 +287,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, br00113_raw)
         assert not db_table_exists(cursor, br00113_agg)
-        assert not db_table_exists(cursor, events_brick_agg_str())
+        assert not db_table_exists(cursor, wx.events_brick_agg)
         assert not db_table_exists(cursor, events_brick_valid_tablename)
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, trlname_sound_raw)
@@ -316,9 +311,9 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, moment_ote1_agg_str())
+        assert not db_table_exists(cursor, wx.moment_ote1_agg)
         assert not os_path_exists(sue37_mandate_path)
-        assert not db_table_exists(cursor, moment_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_voice_nets)
         assert not db_table_exists(cursor, wx.moment_kpi001_voice_nets)
         # self.moment_agg_tables_to_moment_ote1_agg(cursor)
 
@@ -334,8 +329,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        print(cursor.execute(f"SELECT * FROM {events_brick_agg_str()}").fetchall())
-        assert get_row_count(cursor, events_brick_agg_str()) == 2
+        print(cursor.execute(f"SELECT * FROM {wx.events_brick_agg}").fetchall())
+        assert get_row_count(cursor, wx.events_brick_agg) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
@@ -361,10 +356,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 1
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
-        assert get_row_count(cursor, moment_voice_nets_str()) == 1
+        assert get_row_count(cursor, wx.moment_voice_nets) == 1
         assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 1
 
 
@@ -400,13 +395,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        assert not db_table_exists(cursor, moment_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_voice_nets)
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
-        assert get_row_count(cursor, moment_voice_nets_str()) == 1
+        assert get_row_count(cursor, wx.moment_voice_nets) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIdeas_ote1_IsStillCreated(
@@ -579,8 +574,8 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
-        otx_name_str(),
-        inx_name_str(),
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy23"
     tp37 = 37
@@ -618,7 +613,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
-        events_brick_valid_tablename = events_brick_valid_str()
+        events_brick_valid_tablename = wx.events_brick_valid
         trlname_sound_raw = prime_tbl("trlname", "s", "raw")
         trlname_sound_agg = prime_tbl("trlname", "s", "agg")
         trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -641,7 +636,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, events_brick_agg_str()) == 2
+        assert get_row_count(cursor, wx.events_brick_agg) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
@@ -662,5 +657,5 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, momentunit_heard_agg) == 1
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 1
     db_conn.close()

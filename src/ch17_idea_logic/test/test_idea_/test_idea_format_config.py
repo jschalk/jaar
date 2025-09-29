@@ -2,6 +2,7 @@ from src.ch01_data_toolbox.file_toolbox import get_dir_file_strs
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
     Ch06Keywords as wx,
+    Ch16Keywords as wx,
     attributes_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -13,7 +14,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     momentunit_str,
     morph_str,
     numor_str,
-    otx_key_str,
     plan_rope_str,
     pledge_str,
     star_str,
@@ -205,13 +205,13 @@ def test_get_idearef_obj_HasAttrs_idea_format_00021_belief_voiceunit_v0_0_0():
     # THEN
     assert len(format_00001_idearef._attributes) == 7
     assert format_00001_idearef._attributes == {
-        wx.voice_name: {otx_key_str(): True},
-        wx.voice_cred_points: {otx_key_str(): False},
-        wx.voice_debt_points: {otx_key_str(): False},
-        event_int_str(): {otx_key_str(): True},
-        face_name_str(): {otx_key_str(): True},
-        moment_label_str(): {otx_key_str(): True},
-        wx.belief_name: {otx_key_str(): True},
+        wx.voice_name: {wx.otx_key: True},
+        wx.voice_cred_points: {wx.otx_key: False},
+        wx.voice_debt_points: {wx.otx_key: False},
+        event_int_str(): {wx.otx_key: True},
+        face_name_str(): {wx.otx_key: True},
+        moment_label_str(): {wx.otx_key: True},
+        wx.belief_name: {wx.otx_key: True},
     }
     headers_list = format_00001_idearef.get_headers_list()
     assert headers_list[0] == event_int_str()

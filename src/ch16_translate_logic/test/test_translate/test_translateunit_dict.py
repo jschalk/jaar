@@ -1,10 +1,8 @@
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch16Keywords as wx,
     event_int_str,
     face_name_str,
-    inx_knot_str,
-    otx_knot_str,
-    unknown_str_str,
 )
 from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
@@ -27,9 +25,9 @@ from src.ch16_translate_logic.translate_main import (
 def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:
     map_dict.pop(event_int_str())
     map_dict.pop(face_name_str())
-    map_dict.pop(otx_knot_str())
-    map_dict.pop(inx_knot_str())
-    map_dict.pop(unknown_str_str())
+    map_dict.pop(wx.otx_knot)
+    map_dict.pop(wx.inx_knot)
+    map_dict.pop(wx.unknown_str)
     return map_dict
 
 
@@ -46,9 +44,9 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():
     assert sue_dict
     assert sue_dict.get(face_name_str()) == sue_str
     assert sue_dict.get(event_int_str()) == sue_translateunit.event_int
-    assert sue_dict.get(otx_knot_str()) == default_knot_if_None()
-    assert sue_dict.get(inx_knot_str()) == default_knot_if_None()
-    assert sue_dict.get(unknown_str_str()) == default_unknown_str_if_None()
+    assert sue_dict.get(wx.otx_knot) == default_knot_if_None()
+    assert sue_dict.get(wx.inx_knot) == default_knot_if_None()
+    assert sue_dict.get(wx.unknown_str) == default_unknown_str_if_None()
     sue_namemap = sue_translateunit.namemap.to_dict()
     sue_titlemap = sue_translateunit.titlemap.to_dict()
     sue_labelmap = sue_translateunit.labelmap.to_dict()
@@ -78,9 +76,9 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario1():
 
     # THEN
     assert sue_dict.get(face_name_str()) == sue_str
-    assert sue_dict.get(otx_knot_str()) == slash_otx_knot
-    assert sue_dict.get(inx_knot_str()) == colon_inx_knot
-    assert sue_dict.get(unknown_str_str()) == x_unknown_str
+    assert sue_dict.get(wx.otx_knot) == slash_otx_knot
+    assert sue_dict.get(wx.inx_knot) == colon_inx_knot
+    assert sue_dict.get(wx.unknown_str) == x_unknown_str
     sue_namemap = sue_translateunit.namemap.to_dict()
     sue_titlemap = sue_translateunit.titlemap.to_dict()
     sue_labelmap = sue_translateunit.labelmap.to_dict()
@@ -106,7 +104,7 @@ def test_TranslateUnit_get_json_ReturnsObj():
     # THEN
     # print(f"{sue_json=}")
     assert sue_json.find("labelmap") == 64
-    assert sue_json.find(otx_knot_str()) == 266
+    assert sue_json.find(wx.otx_knot) == 266
 
 
 def test_get_translateunit_from_dict_ReturnsObj():

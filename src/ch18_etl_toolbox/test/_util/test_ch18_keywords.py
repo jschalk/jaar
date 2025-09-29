@@ -1,19 +1,4 @@
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    Ch18Keywords,
-    belief_net_amount_str,
-    brick_agg_str,
-    brick_raw_str,
-    brick_valid_str,
-    events_brick_agg_str,
-    events_brick_valid_str,
-    heard_agg_str,
-    heard_raw_str,
-    moment_event_time_agg_str,
-    moment_ote1_agg_str,
-    moment_voice_nets_str,
-    sound_agg_str,
-    sound_raw_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords, Ch18Keywords as wx
 
 
 def test_Ch18Keywords_AttributeNamesEqualValues():
@@ -29,16 +14,16 @@ def test_Ch18Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert moment_ote1_agg_str() == "moment_ote1_agg"
-    assert brick_agg_str() == "brick_agg"
-    assert brick_raw_str() == "brick_raw"
-    assert brick_valid_str() == "brick_valid"
-    assert events_brick_agg_str() == "events_brick_agg"
-    assert events_brick_valid_str() == "events_brick_valid"
-    assert belief_net_amount_str() == "belief_net_amount"
-    assert moment_event_time_agg_str() == "moment_event_time_agg"
-    assert moment_voice_nets_str() == "moment_voice_nets"
-    assert sound_raw_str() == "sound_raw"
-    assert sound_agg_str() == "sound_agg"
-    assert heard_raw_str() == "heard_raw"
-    assert heard_agg_str() == "heard_agg"
+    assert wx.moment_ote1_agg == "moment_ote1_agg"
+    assert wx.brick_agg == "brick_agg"
+    assert wx.brick_raw == "brick_raw"
+    assert wx.brick_valid == "brick_valid"
+    assert wx.events_brick_agg == "events_brick_agg"
+    assert wx.events_brick_valid == "events_brick_valid"
+    assert wx.belief_net_amount == "belief_net_amount"
+    assert wx.moment_event_time_agg == "moment_event_time_agg"
+    assert wx.moment_voice_nets == "moment_voice_nets"
+    assert wx.sound_raw == "sound_raw"
+    assert wx.sound_agg == "sound_agg"
+    assert wx.heard_raw == "heard_raw"
+    assert wx.heard_agg == "heard_agg"

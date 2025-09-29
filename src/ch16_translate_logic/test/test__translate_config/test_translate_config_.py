@@ -4,29 +4,12 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
+    Ch16Keywords as wx,
     DELETE_str,
-    inx_knot_str,
-    inx_label_str,
-    inx_name_str,
-    inx_rope_str,
-    inx_title_str,
     jkeys_str,
     jvalues_str,
     normal_specs_str,
-    otx2inx_str,
-    otx_knot_str,
-    otx_label_str,
-    otx_name_str,
-    otx_rope_str,
-    otx_title_str,
     reason_context_str,
-    translate_core_str,
-    translate_label_str,
-    translate_name_str,
-    translate_rope_str,
-    translate_title_str,
-    translateunit_str,
-    unknown_str_str,
 )
 from src.ch16_translate_logic.translate_config import (
     default_unknown_str,
@@ -59,15 +42,15 @@ def test_get_translate_config_dict_ReturnsObj():
     # THEN
     assert translate_config
     translate_config_dimens = set(translate_config.keys())
-    assert translate_name_str() in translate_config_dimens
-    assert translate_title_str() in translate_config_dimens
-    assert translate_label_str() in translate_config_dimens
-    assert translate_rope_str() in translate_config_dimens
+    assert wx.translate_name in translate_config_dimens
+    assert wx.translate_title in translate_config_dimens
+    assert wx.translate_label in translate_config_dimens
+    assert wx.translate_rope in translate_config_dimens
     assert len(translate_config) == 4
 
     _validate_translate_config(translate_config)
-    translate_rope_dict = translate_config.get(translate_rope_str())
-    translate_label_dict = translate_config.get(translate_label_str())
+    translate_rope_dict = translate_config.get(wx.translate_rope)
+    translate_label_dict = translate_config.get(wx.translate_label)
     assert len(translate_rope_dict.get(jkeys_str())) == 1
     assert len(translate_label_dict.get(jkeys_str())) == 1
     assert len(translate_rope_dict.get(jvalues_str())) == 4
@@ -84,17 +67,17 @@ def test_get_translate_config_dict_ReturnsObj():
 
 def _validate_translate_config(translate_config: dict):
     x_possible_args = {
-        inx_knot_str(),
-        otx_knot_str(),
-        inx_title_str(),
-        otx_title_str(),
-        inx_name_str(),
-        otx_name_str(),
-        inx_label_str(),
-        otx_label_str(),
-        inx_rope_str(),
-        otx_rope_str(),
-        unknown_str_str(),
+        wx.inx_knot,
+        wx.otx_knot,
+        wx.inx_title,
+        wx.otx_title,
+        wx.inx_name,
+        wx.otx_name,
+        wx.inx_label,
+        wx.otx_label,
+        wx.inx_rope,
+        wx.otx_rope,
+        wx.unknown_str,
     }
 
     # for every translate_format file there exists a unique translate_number with leading zeros to make 5 digits
@@ -122,10 +105,10 @@ def test_get_translate_dimens_ReturnsObj():
     translate_config_dimens = get_translate_dimens()
 
     # THEN
-    assert translate_name_str() in translate_config_dimens
-    assert translate_title_str() in translate_config_dimens
-    assert translate_label_str() in translate_config_dimens
-    assert translate_rope_str() in translate_config_dimens
+    assert wx.translate_name in translate_config_dimens
+    assert wx.translate_title in translate_config_dimens
+    assert wx.translate_label in translate_config_dimens
+    assert wx.translate_rope in translate_config_dimens
     assert len(translate_config_dimens) == 4
 
 
@@ -136,11 +119,11 @@ def test_get_translate_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_translate_args_dimen_mapping
-    assert x_translate_args_dimen_mapping.get(otx_rope_str())
-    x_dimens = {translate_rope_str()}
-    assert x_translate_args_dimen_mapping.get(otx_rope_str()) == x_dimens
-    assert x_translate_args_dimen_mapping.get(inx_knot_str())
-    translate_id_dimens = x_translate_args_dimen_mapping.get(inx_knot_str())
+    assert x_translate_args_dimen_mapping.get(wx.otx_rope)
+    x_dimens = {wx.translate_rope}
+    assert x_translate_args_dimen_mapping.get(wx.otx_rope) == x_dimens
+    assert x_translate_args_dimen_mapping.get(wx.inx_knot)
+    translate_id_dimens = x_translate_args_dimen_mapping.get(wx.inx_knot)
     assert len(translate_id_dimens) == 4
     assert len(x_translate_args_dimen_mapping) == 11
 
@@ -162,7 +145,7 @@ def test_get_quick_translates_column_ref_ReturnsObj():
     # print(f"{all_translate_config_attrs=}")
 
     # WHEN / THEN
-    assert translate_rope_str() in set(get_quick_translates_column_ref().keys())
+    assert wx.translate_rope in set(get_quick_translates_column_ref().keys())
     assert len(get_quick_translates_column_ref().keys()) == 4
     assert get_quick_translates_column_ref() == all_translate_config_attrs
 

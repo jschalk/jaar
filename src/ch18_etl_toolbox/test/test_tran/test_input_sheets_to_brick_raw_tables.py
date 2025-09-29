@@ -8,9 +8,9 @@ from src.ch01_data_toolbox.db_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    brick_raw_str,
+    Ch17Keywords as wx,
+    Ch18Keywords as wx,
     cumulative_minute_str,
-    error_message_str,
     event_int_str,
     face_name_str,
     hour_label_str,
@@ -57,7 +57,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     upsert_sheet(input_file_path, br00003_ex1_str, df1)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"br00003_{brick_raw_str()}"
+        br00003_tablename = f"br00003_{wx.brick_raw}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
@@ -72,7 +72,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert error_message_str() == br00003_table_cols[-1]
+        assert wx.error_message == br00003_table_cols[-1]
         assert get_row_count(cursor, br00003_tablename) == 5
         select_agg_sqlstr = f"""
 SELECT * 
@@ -151,7 +151,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     upsert_sheet(input_file_path, br00003_ex3_str, df3)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        br00003_tablename = f"br00003_{brick_raw_str()}"
+        br00003_tablename = f"br00003_{wx.brick_raw}"
         assert not db_table_exists(cursor, br00003_tablename)
 
         # WHEN
@@ -167,7 +167,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         assert file_dir_str == br00003_table_cols[0]
         assert filename_str == br00003_table_cols[1]
         assert sheet_name_str == br00003_table_cols[2]
-        assert error_message_str() == br00003_table_cols[-1]
+        assert wx.error_message == br00003_table_cols[-1]
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
@@ -229,7 +229,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #     upsert_sheet(input_file_path, br00003_ex1_str, df1)
 #     with sqlite3_connect(":memory:") as db_conn:
 #         cursor = db_conn.cursor()
-#         br00003_tablename = f"br00003_{brick_raw_str()}"
+#         br00003_tablename = f"br00003_{wx.brick_raw}"
 #         assert not db_table_exists(cursor, br00003_tablename)
 
 #         # WHEN
@@ -245,7 +245,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #         assert file_dir_str == br00003_table_cols[0]
 #         assert filename_str == br00003_table_cols[1]
 #         assert sheet_name_str == br00003_table_cols[2]
-#         assert error_message_str() != br00003_table_cols[-1]
+#         assert wx.error_message != br00003_table_cols[-1]
 #         select_agg_sqlstr = f"""
 # SELECT *
 # FROM {br00003_tablename}

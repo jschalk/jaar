@@ -13,11 +13,9 @@ from src.ch16_translate_logic.translate_main import translateunit_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch07Keywords as wx,
+    Ch16Keywords as wx,
     event_int_str,
     face_name_str,
-    inx_knot_str,
-    otx_knot_str,
-    unknown_str_str,
 )
 from src.ch17_idea_logic.idea_db_tool import (
     get_idea_elements_sort_order as sorting_columns,
@@ -54,9 +52,9 @@ def test_get_translate_name_dt_columns_ReturnsObj():
     static_list = [
         event_int_str(),
         face_name_str(),
-        otx_knot_str(),
-        inx_knot_str(),
-        unknown_str_str(),
+        wx.otx_knot,
+        wx.inx_knot,
+        wx.unknown_str,
         "otx_name",
         "inx_name",
     ]
@@ -71,9 +69,9 @@ def test_get_translate_title_dt_columns_ReturnsObj():
     static_list = [
         event_int_str(),
         face_name_str(),
-        otx_knot_str(),
-        inx_knot_str(),
-        unknown_str_str(),
+        wx.otx_knot,
+        wx.inx_knot,
+        wx.unknown_str,
         "otx_title",
         "inx_title",
     ]
@@ -88,9 +86,9 @@ def test_get_translate_label_dt_columns_ReturnsObj():
     static_list = [
         event_int_str(),
         face_name_str(),
-        otx_knot_str(),
-        inx_knot_str(),
-        unknown_str_str(),
+        wx.otx_knot,
+        wx.inx_knot,
+        wx.unknown_str,
         "otx_label",
         "inx_label",
     ]
@@ -105,9 +103,9 @@ def test_get_translate_rope_dt_columns_ReturnsObj():
     static_list = [
         event_int_str(),
         face_name_str(),
-        otx_knot_str(),
-        inx_knot_str(),
-        unknown_str_str(),
+        wx.otx_knot,
+        wx.inx_knot,
+        wx.unknown_str,
         "otx_rope",
         "inx_rope",
     ]

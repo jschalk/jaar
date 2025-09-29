@@ -1,14 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch16Keywords as wx,
+    Ch17Keywords as wx,
     belief_voiceunit_str,
-    error_message_str,
     event_int_str,
     face_name_str,
-    inx_knot_str,
     moment_label_str,
-    otx_knot_str,
-    unknown_str_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_BLRPERN_SOUND_PUT_AGG_STR,
@@ -47,14 +45,14 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-  {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+  {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
 ;
 """
         cursor.execute(insert_trlcore_sqlstr)
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {wx.error_message} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -104,14 +102,14 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-  {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+  {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
 ;
 """
         cursor.execute(insert_trlcore_sqlstr)
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {wx.error_message} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN
@@ -163,14 +161,14 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-  {face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+  {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
 ;
 """
         cursor.execute(insert_trlcore_sqlstr)
-        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {error_message_str()} IS NOT NULL"
+        error_count_sqlstr = f"SELECT COUNT(*) FROM {blrpern_s_agg_put} WHERE {wx.error_message} IS NOT NULL"
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 0
 
         # WHEN

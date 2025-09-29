@@ -1,18 +1,4 @@
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    Ch17Keywords,
-    allowed_crud_str,
-    build_order_str,
-    delete_insert_str,
-    delete_insert_update_str,
-    delete_update_str,
-    error_message_str,
-    idea_category_str,
-    idea_number_str,
-    insert_multiple_str,
-    insert_one_time_str,
-    insert_update_str,
-    world_name_str,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords, Ch17Keywords as wx
 
 
 def test_Ch17Keywords_AttributeNamesEqualValues():
@@ -29,15 +15,15 @@ def test_Ch17Keywords_AttributeNamesEqualValues():
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
 
-    assert allowed_crud_str() == "allowed_crud"
-    assert build_order_str() == "build_order"
-    assert delete_insert_str() == "delete_insert"
-    assert delete_insert_update_str() == "delete_insert_update"
-    assert delete_update_str() == "delete_update"
-    assert error_message_str() == "error_message"
-    assert idea_number_str() == "idea_number"
-    assert idea_category_str() == "idea_category"
-    assert insert_one_time_str() == "insert_one_time"
-    assert insert_multiple_str() == "insert_multiple"
-    assert insert_update_str() == "insert_update"
-    assert world_name_str() == "world_name"
+    assert wx.allowed_crud == "allowed_crud"
+    assert wx.build_order == "build_order"
+    assert wx.delete_insert == "delete_insert"
+    assert wx.delete_insert_update == "delete_insert_update"
+    assert wx.delete_update == "delete_update"
+    assert wx.error_message == "error_message"
+    assert wx.idea_number == "idea_number"
+    assert wx.idea_category == "idea_category"
+    assert wx.insert_one_time == "insert_one_time"
+    assert wx.insert_multiple == "insert_multiple"
+    assert wx.insert_update == "insert_update"
+    assert wx.world_name == "world_name"

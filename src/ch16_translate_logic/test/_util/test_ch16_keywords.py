@@ -1,25 +1,4 @@
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    Ch16Keywords,
-    inx_knot_str,
-    inx_label_str,
-    inx_name_str,
-    inx_rope_str,
-    inx_title_str,
-    otx2inx_str,
-    otx_key_str,
-    otx_knot_str,
-    otx_label_str,
-    otx_name_str,
-    otx_rope_str,
-    otx_title_str,
-    translate_core_str,
-    translate_label_str,
-    translate_name_str,
-    translate_rope_str,
-    translate_title_str,
-    translateunit_str,
-    unknown_str_str,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords, Ch16Keywords as wx
 
 
 def test_Ch16Keywords_AttributeNamesEqualValues():
@@ -35,22 +14,22 @@ def test_Ch16Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert translateunit_str() == "translateunit"
-    assert otx_knot_str() == "otx_knot"
-    assert inx_knot_str() == "inx_knot"
-    assert inx_title_str() == "inx_title"
-    assert otx_title_str() == "otx_title"
-    assert inx_name_str() == "inx_name"
-    assert otx_name_str() == "otx_name"
-    assert inx_label_str() == "inx_label"
-    assert otx_label_str() == "otx_label"
-    assert otx_key_str() == "otx_key"
-    assert inx_rope_str() == "inx_rope"
-    assert otx_rope_str() == "otx_rope"
-    assert unknown_str_str() == "unknown_str"
-    assert otx2inx_str() == "otx2inx"
-    assert translate_name_str() == "translate_name"
-    assert translate_title_str() == "translate_title"
-    assert translate_label_str() == "translate_label"
-    assert translate_rope_str() == "translate_rope"
-    assert translate_core_str() == "translate_core"
+    assert wx.translateunit == "translateunit"
+    assert wx.otx_knot == "otx_knot"
+    assert wx.inx_knot == "inx_knot"
+    assert wx.inx_title == "inx_title"
+    assert wx.otx_title == "otx_title"
+    assert wx.inx_name == "inx_name"
+    assert wx.otx_name == "otx_name"
+    assert wx.inx_label == "inx_label"
+    assert wx.otx_label == "otx_label"
+    assert wx.otx_key == "otx_key"
+    assert wx.inx_rope == "inx_rope"
+    assert wx.otx_rope == "otx_rope"
+    assert wx.unknown_str == "unknown_str"
+    assert wx.otx2inx == "otx2inx"
+    assert wx.translate_name == "translate_name"
+    assert wx.translate_title == "translate_title"
+    assert wx.translate_label == "translate_label"
+    assert wx.translate_rope == "translate_rope"
+    assert wx.translate_core == "translate_core"

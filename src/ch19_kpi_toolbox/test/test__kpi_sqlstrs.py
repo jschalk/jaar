@@ -1,12 +1,11 @@
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch18Keywords as wx,
     Ch19Keywords as wx,
     active_str,
-    belief_net_amount_str,
     belief_planunit_str,
     moment_label_str,
-    moment_voice_nets_str,
     plan_rope_str,
     pledge_str,
     task_str,
@@ -29,16 +28,16 @@ def test_get_create_kpi001_sqlstr_ReturnsObj():
     expected_kpi001_sqlstr = f"""
 CREATE TABLE {wx.moment_kpi001_voice_nets} AS
 SELECT
-  {moment_voice_nets_str()}.{moment_label_str()}
-, {moment_voice_nets_str()}.{wx.belief_name}
-, {belief_net_amount_str()} AS funds
-, RANK() OVER (ORDER BY {belief_net_amount_str()} DESC) AS fund_rank
+  {wx.moment_voice_nets}.{moment_label_str()}
+, {wx.moment_voice_nets}.{wx.belief_name}
+, {wx.belief_net_amount} AS funds
+, RANK() OVER (ORDER BY {wx.belief_net_amount} DESC) AS fund_rank
 , IFNULL(SUM({blrplan_job}.{pledge_str()}), 0) AS pledges_count
-FROM {moment_voice_nets_str()}
+FROM {wx.moment_voice_nets}
 LEFT JOIN {blrplan_job} ON
-  {blrplan_job}.{moment_label_str()} = {moment_voice_nets_str()}.{moment_label_str()}
-  AND {blrplan_job}.{wx.belief_name} = {moment_voice_nets_str()}.{wx.belief_name}
-GROUP BY {moment_voice_nets_str()}.{moment_label_str()}, {moment_voice_nets_str()}.{wx.belief_name}
+  {blrplan_job}.{moment_label_str()} = {wx.moment_voice_nets}.{moment_label_str()}
+  AND {blrplan_job}.{wx.belief_name} = {wx.moment_voice_nets}.{wx.belief_name}
+GROUP BY {wx.moment_voice_nets}.{moment_label_str()}, {wx.moment_voice_nets}.{wx.belief_name}
 ;
 """
     assert kpi001_sqlstr == expected_kpi001_sqlstr

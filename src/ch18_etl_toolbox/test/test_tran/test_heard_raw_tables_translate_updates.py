@@ -1,12 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch16Keywords as wx,
     belief_plan_awardunit_str,
     event_int_str,
     face_name_str,
-    inx_name_str,
-    otx_name_str,
-    translate_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
@@ -46,11 +44,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario0_
         """
         cursor.execute(insert_face_name_only_sqlstr)
 
-        trlname_dimen = translate_name_str()
+        trlname_dimen = wx.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename} 
-        ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+        ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -108,11 +106,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario1_
         ;
         """
         cursor.execute(insert_face_name_only_sqlstr)
-        trlname_dimen = translate_name_str()
+        trlname_dimen = wx.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+        ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -180,11 +178,11 @@ def test_create_update_heard_raw_existing_inx_col_sqlstr_UpdatesTable_Scenario2_
         """
         cursor.execute(insert_face_name_only_sqlstr)
 
-        trlname_dimen = translate_name_str()
+        trlname_dimen = wx.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+        ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{bob_otx}', '{bob_otx}', '{bob_inx0}')
         , ({event2}, '{yao_otx}', '{yao_otx}', '{yao_inx}')
@@ -236,7 +234,7 @@ def test_create_update_heard_raw_empty_inx_col_sqlstr_UpdatesTable_Scenario0_Emp
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trlname_s_vld_tablename = prime_tbl(translate_name_str(), "s", "vld")
+        trlname_s_vld_tablename = prime_tbl(wx.translate_name, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         print(f"{get_table_columns(cursor, trlname_s_vld_tablename)=}")
 
@@ -313,11 +311,11 @@ def test_set_all_heard_raw_inx_columns_Scenario0_empty_tables():
         """
         cursor.execute(insert_face_name_only_sqlstr)
 
-        trlname_dimen = translate_name_str()
+        trlname_dimen = wx.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+        ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{bob_otx}', '{bob_otx}', '{bob_inx0}')
         , ({event2}, '{yao_otx}', '{yao_otx}', '{yao_inx}')

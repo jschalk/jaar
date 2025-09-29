@@ -9,18 +9,14 @@ from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
     Ch11Keywords as wx,
-    brick_agg_str,
+    Ch16Keywords as wx,
+    Ch18Keywords as wx,
     celldepth_str,
     cumulative_minute_str,
     event_int_str,
-    events_brick_agg_str,
-    events_brick_valid_str,
     face_name_str,
     hour_label_str,
-    inx_name_str,
     moment_label_str,
-    moment_ote1_agg_str,
-    otx_name_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -45,8 +41,8 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
-        otx_name_str(),
-        inx_name_str(),
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy2345"
     tp37 = 37
@@ -83,7 +79,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
-        events_brick_valid_tablename = events_brick_valid_str()
+        events_brick_valid_tablename = wx.events_brick_valid
         trlname_sound_raw = create_prime_tablename("trlname", "s", "raw")
         trlname_sound_agg = create_prime_tablename("trlname", "s", "agg")
         trlname_sound_vld = create_prime_tablename("trlname", "s", "vld")
@@ -106,7 +102,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, events_brick_agg_str()) == 2
+        assert get_row_count(cursor, wx.events_brick_agg) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
@@ -127,7 +123,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, momentunit_heard_agg) == 1
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 1
     db_conn.close()
 
 
@@ -135,7 +131,7 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
     sue_str = "Sue"
     minute_360 = 360
     hour6am = "6am"
-    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+    agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
         event_int_str(),
         face_name_str(),
@@ -177,8 +173,8 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
-        otx_name_str(),
-        inx_name_str(),
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy2345"
     br00113_str = "br00113"
@@ -203,7 +199,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
         cursor1 = db_conn1.cursor()
         assert get_max_brick_agg_event_int(cursor1) != event5
         assert get_max_brick_agg_event_int(cursor1) == event5 + 1
-        select_sqlstr = f"SELECT * FROM {events_brick_agg_str()}"
+        select_sqlstr = f"SELECT * FROM {wx.events_brick_agg}"
         cursor1.execute(select_sqlstr)
         rows = cursor1.fetchall()
         assert len(rows) == 2

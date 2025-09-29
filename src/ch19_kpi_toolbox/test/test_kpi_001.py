@@ -12,10 +12,9 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch18Keywords as wx,
     Ch19Keywords as wx,
-    belief_net_amount_str,
     moment_label_str,
-    moment_voice_nets_str,
     plan_rope_str,
     pledge_str,
 )
@@ -34,8 +33,8 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoPledges():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {belief_net_amount_str()}) 
+        moment_voice_nets_tablename = wx.moment_voice_nets
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {wx.belief_net_amount}) 
 VALUES 
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -87,8 +86,8 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1pledge():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {belief_net_amount_str()})
+        moment_voice_nets_tablename = wx.moment_voice_nets
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {wx.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})

@@ -10,8 +10,8 @@ from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch15_moment_logic.moment_main import get_momentunit_from_json
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch18Keywords as wx,
     moment_budunit_str,
-    moment_event_time_agg_str,
     moment_label_str,
     moment_paybook_str,
     moment_timeline_hour_str,
@@ -145,7 +145,7 @@ VALUES ('{amy23_str}'), ('{amy45_str}')
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, momentunit_h_agg_tablename) == 2
-        assert db_table_exists(cursor, moment_event_time_agg_str()) is False
+        assert db_table_exists(cursor, wx.moment_event_time_agg) is False
 
         amy23_json_path = create_moment_json_path(moment_mstr_dir, amy23_str)
         amy45_json_path = create_moment_json_path(moment_mstr_dir, amy45_str)
