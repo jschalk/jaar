@@ -10,8 +10,9 @@ from src.ch01_data_toolbox.file_toolbox import (
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
-    get_chapter_str_functions,
+    get_keywords_by_chapter,
     get_keywords_filename,
+    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
     check_if_chapter_keywords_by_chapter_is_sorted,
@@ -112,17 +113,20 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
     """
 
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH / WHEN / THEN
+    # ESTABLISH
+    keywords_src_config = get_keywords_src_config()
+    keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)
+
+    # WHEN / THEN
     running_str_functions = set()
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
+        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
         test_dir = create_path(chapter_dir, "test")
         util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
-        chapter_keywords_by_chapter = get_chapter_str_functions(
-            chapter_dir, chapter_desc_prefix
-        )
+        chapter_keywords_by_chapter = keywords_by_chapter.get(chapter_num)
+        chapter_keywords_by_chapter = sorted(list(chapter_keywords_by_chapter))
         check_if_chapter_keywords_by_chapter_is_sorted(chapter_keywords_by_chapter)
         check_keywords_by_chapter_are_not_duplicated(
             chapter_keywords_by_chapter, running_str_functions
@@ -143,6 +147,7 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
                 chXX_test_name = (
                     f"test_{class_prefix}Keywords_AttributeNamesEqualValues"
                 )
+                # TODO get rid of all test_str_functions_ReturnsObj functions
                 assert set(file_funcs) == {
                     chXX_test_name,
                     "test_str_functions_ReturnsObj",

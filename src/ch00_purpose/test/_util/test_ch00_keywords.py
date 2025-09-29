@@ -1,7 +1,7 @@
 from src.ch00_purpose._ref.ch00_keywords import Ch00Keywords
 
 
-def test_Ch00Keywords_attribute_names_equal_values():
+def test_Ch00Keywords_AttributeNamesEqualValues():
     """Test that all Ch09Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
 
