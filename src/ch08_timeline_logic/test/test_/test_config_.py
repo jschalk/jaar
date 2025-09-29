@@ -3,13 +3,13 @@ from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic._ref.ch08_keywords import (
+    Ch02Keywords as wx,
     c100_str,
     c400_clean_str,
     c400_leap_str,
     c400_number_str,
     day_str,
     hours_config_str,
-    knot_str,
     monthday_distortion_str,
     months_config_str,
     time_str,
@@ -51,7 +51,7 @@ def test_TimeLineLabel_Exists():
     x_timelinelabel = TimeLineLabel(empty_str)
     # THEN
     assert x_timelinelabel == empty_str
-    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the {knot_str()}."
+    doc_str = f"TimeLineLabel is required for every TimeLineUnit. It is a LabelTerm that must not contain the {wx.knot}."
     assert inspect_getdoc(x_timelinelabel) == doc_str
 
 

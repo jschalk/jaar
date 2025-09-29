@@ -3,8 +3,8 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_rowdata
 from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
-    INSERT_str,
     atom_hx_str,
     belief_plan_factunit_str,
     beliefunit_str,
@@ -70,7 +70,7 @@ def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     knee_rope = create_rope("a", knee_str)
     knee_reason_lower = 7
     x_dimen = belief_plan_factunit_str()
-    update_disc_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    update_disc_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(fact_context_str(), knee_rope)
     update_disc_beliefatom.set_jvalue(fact_lower_str(), knee_reason_lower)
@@ -81,9 +81,9 @@ def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
     # THEN
     example_sqlstr = f"""
 INSERT INTO {atom_hx_str()} (
-  {x_dimen}_{INSERT_str()}_{plan_rope_str()}
-, {x_dimen}_{INSERT_str()}_{fact_context_str()}
-, {x_dimen}_{INSERT_str()}_{fact_lower_str()}
+  {x_dimen}_{wx.INSERT}_{plan_rope_str()}
+, {x_dimen}_{wx.INSERT}_{fact_context_str()}
+, {x_dimen}_{wx.INSERT}_{fact_lower_str()}
 )
 VALUES (
   '{ball_rope}'
@@ -106,9 +106,9 @@ def test_get_beliefatom_from_rowdata_ReturnsObj_plan_factunit():
     knee_fact_lower = 7
     x_dimen = belief_plan_factunit_str()
     x_sqlstr = f"""SELECT
-  '{ball_rope}' as {x_dimen}_{INSERT_str()}_{plan_rope_str()}
-, '{knee_rope}' as {x_dimen}_{INSERT_str()}_{fact_context_str()}
-, {knee_fact_lower} as {x_dimen}_{INSERT_str()}_{fact_lower_str()}
+  '{ball_rope}' as {x_dimen}_{wx.INSERT}_{plan_rope_str()}
+, '{knee_rope}' as {x_dimen}_{wx.INSERT}_{fact_context_str()}
+, {knee_fact_lower} as {x_dimen}_{wx.INSERT}_{fact_lower_str()}
 """
     with sqlite3_connect(":memory:") as x_conn:
         x_rowdata = get_rowdata(atom_hx_str(), x_conn, x_sqlstr)
@@ -117,7 +117,7 @@ def test_get_beliefatom_from_rowdata_ReturnsObj_plan_factunit():
     x_beliefatom = get_beliefatom_from_rowdata(x_rowdata)
 
     # THEN
-    update_disc_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    update_disc_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     update_disc_beliefatom.set_jkey(fact_context_str(), knee_rope)
     update_disc_beliefatom.set_jvalue(fact_lower_str(), knee_fact_lower)

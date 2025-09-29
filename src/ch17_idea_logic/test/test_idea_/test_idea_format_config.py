@@ -1,12 +1,10 @@
 from src.ch01_data_toolbox.file_toolbox import get_dir_file_strs
 from src.ch17_idea_logic._ref.ch17_keywords import (
-    addin_str,
+    Ch06Keywords as wx,
     attributes_str,
-    begin_str,
     belief_name_str,
     belief_voiceunit_str,
     beliefunit_str,
-    close_str,
     denom_str,
     event_int_str,
     face_name_str,
@@ -285,9 +283,9 @@ def test_get_idearef_obj_HasAttrs_idea_format_00019_planunit_v0_0_0():
     assert headers_list[2] == moment_label_str()
     assert headers_list[3] == belief_name_str()
     assert headers_list[4] == plan_rope_str()
-    assert headers_list[5] == begin_str()
-    assert headers_list[6] == close_str()
-    assert headers_list[7] == addin_str()
+    assert headers_list[5] == wx.begin
+    assert headers_list[6] == wx.close
+    assert headers_list[7] == wx.addin
     assert headers_list[8] == numor_str()
     assert headers_list[9] == denom_str()
     assert headers_list[10] == morph_str()

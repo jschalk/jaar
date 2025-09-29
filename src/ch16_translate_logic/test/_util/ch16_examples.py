@@ -101,7 +101,7 @@ def get_suita_namemap() -> NameMap:
 #     clean_inx = "propre"
 #     casa_otx = f"casa{default_knot_if_None()}"
 #     casa_inx = "casa"
-#     labelmap = mapunit_shop(LabelTerm_str(), face_name="Sue")
+#     labelmap = mapunit_shop(wx.LabelTerm, face_name="Sue")
 #     labelmap.set_otx2inx(clean_str, clean_inx)
 #     labelmap.set_otx2inx(casa_otx, casa_inx)
 #     return labelmap

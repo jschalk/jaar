@@ -8,22 +8,21 @@ from src.ch05_reason_logic.reason import (
     reasonunit_shop,
 )
 from src.ch06_plan_logic._ref.ch06_keywords import (
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
+    Ch06Keywords as wx,
     active_hx_str,
     active_str,
-    addin_str,
     all_voice_cred_str,
     all_voice_debt_str,
     awardheirs_str,
     awardlines_str,
     awardunits_str,
-    begin_str,
-    close_str,
     denom_str,
     descendant_pledge_count_str,
     factheirs_str,
     factunits_str,
     fund_cease_str,
-    fund_iota_str,
     fund_onset_str,
     fund_ratio_str,
     fund_share_str,
@@ -33,7 +32,6 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     healerunit_str,
     is_expanded_str,
     kids_str,
-    knot_str,
     laborunit_str,
     moment_label_str,
     morph_str,
@@ -228,8 +226,8 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[star_str()] == casa_plan.star
     assert casa_dict[plan_label_str()] == casa_plan.plan_label
     assert casa_dict["uid"] == casa_plan.uid
-    assert casa_dict[begin_str()] == casa_plan.begin
-    assert casa_dict[close_str()] == casa_plan.close
+    assert casa_dict[wx.begin] == casa_plan.begin
+    assert casa_dict[wx.close] == casa_plan.close
     assert casa_dict[numor_str()] == casa_plan.numor
     assert casa_dict[denom_str()] == casa_plan.denom
     assert casa_dict[morph_str()] == casa_plan.morph

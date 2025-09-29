@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
     belief_voiceunit_str,
     voice_name_str,
 )
@@ -19,7 +19,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT():
     voice_cred_points_value = 81
     voice_debt_points_value = 43
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     yao_beliefatom.set_arg(voice_name_str(), yao_str)
     yao_beliefatom.set_arg(voice_cred_points_str, voice_cred_points_value)
     yao_beliefatom.set_arg(voice_debt_points_str, voice_debt_points_value)
@@ -45,7 +45,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_INSERT_score():
     voice_cred_points_value = 81
     voice_debt_points_value = 43
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     yao_beliefatom.set_arg(voice_name_str(), yao_str)
     yao_beliefatom.set_arg(voice_cred_points_str, voice_cred_points_value)
     yao_beliefatom.set_arg(voice_debt_points_str, voice_debt_points_value)

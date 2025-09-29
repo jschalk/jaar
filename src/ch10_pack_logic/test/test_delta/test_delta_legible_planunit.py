@@ -1,13 +1,11 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
+    Ch06Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
-    addin_str,
-    begin_str,
     belief_planunit_str,
-    close_str,
     denom_str,
     morph_str,
     numor_str,
@@ -36,11 +34,11 @@ def test_create_legible_list_ReturnsObj_planunit_INSERT():
     morph_value = 37
     star_value = 43
     pledge_value = False
-    clean_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    clean_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
-    clean_beliefatom.set_arg(addin_str(), addin_value)
-    clean_beliefatom.set_arg(begin_str(), begin_value)
-    clean_beliefatom.set_arg(close_str(), close_value)
+    clean_beliefatom.set_arg(wx.addin, addin_value)
+    clean_beliefatom.set_arg(wx.begin, begin_value)
+    clean_beliefatom.set_arg(wx.close, close_value)
     clean_beliefatom.set_arg(denom_str(), denom_value)
     clean_beliefatom.set_arg(numor_str(), numor_value)
     clean_beliefatom.set_arg(_problem_bool_str, problem_bool_value)
@@ -79,9 +77,9 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     pledge_value = False
     clean_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
-    clean_beliefatom.set_arg(addin_str(), addin_value)
-    clean_beliefatom.set_arg(begin_str(), begin_value)
-    clean_beliefatom.set_arg(close_str(), close_value)
+    clean_beliefatom.set_arg(wx.addin, addin_value)
+    clean_beliefatom.set_arg(wx.begin, begin_value)
+    clean_beliefatom.set_arg(wx.close, close_value)
     clean_beliefatom.set_arg(denom_str(), denom_value)
     clean_beliefatom.set_arg(numor_str(), numor_value)
     clean_beliefatom.set_arg(_problem_bool_str, problem_bool_value)

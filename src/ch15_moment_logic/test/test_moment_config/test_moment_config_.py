@@ -2,22 +2,22 @@ from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch09_belief_atom_logic.atom_config import get_allowed_class_types
 from src.ch15_moment_logic._ref.ch15_keywords import (
+    Ch01Keywords as wx,
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
     Ch09Keywords as wx,
+    Ch11Keywords as wx,
     DELETE_str,
-    INSERT_str,
     amount_str,
     belief_name_str,
-    bud_time_str,
     c400_number_str,
     celldepth_str,
     class_type_str,
     cumulative_day_str,
     cumulative_minute_str,
-    fund_iota_str,
     hour_label_str,
     jkeys_str,
     jvalues_str,
-    knot_str,
     moment_budunit_str,
     moment_label_str,
     moment_paybook_str,
@@ -30,11 +30,8 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     monthday_distortion_str,
     normal_specs_str,
     offi_time_str,
-    penny_str,
-    quota_str,
     respect_bit_str,
     timeline_label_str,
-    tran_time_str,
     voice_name_str,
     weekday_label_str,
     weekday_order_str,
@@ -90,11 +87,11 @@ def test_get_moment_config_dict_ReturnsObj():
 
     x_momentunit_jvalues = {
         c400_number_str(),
-        fund_iota_str(),
+        wx.fund_iota,
         monthday_distortion_str(),
-        penny_str(),
+        wx.penny,
         respect_bit_str(),
-        knot_str(),
+        wx.knot,
         timeline_label_str(),
         yr1_jan1_offset_str(),
         "job_listen_rotations",
@@ -126,7 +123,7 @@ def _validate_moment_config(moment_config: dict):
         else:
             assert dimen_dict.get("moment_static") == "True"
         assert dimen_dict.get(wx.UPDATE) is None
-        assert dimen_dict.get(INSERT_str()) is None
+        assert dimen_dict.get(wx.INSERT) is None
         assert dimen_dict.get(DELETE_str()) is None
         assert dimen_dict.get(normal_specs_str()) is None
 
@@ -168,7 +165,7 @@ def test_get_moment_args_dimen_mapping_ReturnsObj():
     assert x_moment_args_dimen_mapping
     x_hour = {moment_timeline_hour_str()}
     assert x_moment_args_dimen_mapping.get(cumulative_minute_str()) == x_hour
-    assert x_moment_args_dimen_mapping.get(fund_iota_str())
+    assert x_moment_args_dimen_mapping.get(wx.fund_iota)
     moment_label_dimens = x_moment_args_dimen_mapping.get(moment_label_str())
     assert moment_timeline_hour_str() in moment_label_dimens
     assert momentunit_str() in moment_label_dimens
@@ -228,24 +225,24 @@ def test_get_moment_args_set_ReturnsObj():
     expected_moment_args_set = {
         voice_name_str(),
         amount_str(),
-        knot_str(),
+        wx.knot,
         c400_number_str(),
         cumulative_day_str(),
         cumulative_minute_str(),
         hour_label_str(),
         moment_label_str(),
-        fund_iota_str(),
+        wx.fund_iota,
         month_label_str(),
         monthday_distortion_str(),
         # job_listen_rotations_str(),
         "job_listen_rotations",
-        penny_str(),
+        wx.penny,
         belief_name_str(),
-        quota_str(),
+        wx.quota,
         celldepth_str(),
         respect_bit_str(),
-        bud_time_str(),
-        tran_time_str(),
+        wx.bud_time,
+        wx.tran_time,
         offi_time_str(),
         timeline_label_str(),
         weekday_label_str(),

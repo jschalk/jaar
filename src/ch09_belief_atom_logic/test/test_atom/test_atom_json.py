@@ -1,7 +1,7 @@
 from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    INSERT_str,
+    Ch01Keywords as wx,
     belief_plan_factunit_str,
     crud_str,
     dimen_str,
@@ -29,7 +29,7 @@ def test_BeliefAtom_to_dict_ReturnsObj():
     x_dimen = belief_plan_factunit_str()
     knee_reason_lower = 7
     knee_reason_upper = 13
-    insert_factunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     insert_factunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     insert_factunit_beliefatom.set_jkey(fact_context_str(), knee_rope)
     insert_factunit_beliefatom.set_jvalue(fact_lower_str(), knee_reason_lower)
@@ -41,7 +41,7 @@ def test_BeliefAtom_to_dict_ReturnsObj():
     # THEN
     assert atom_dict == {
         dimen_str(): x_dimen,
-        crud_str(): INSERT_str(),
+        crud_str(): wx.INSERT,
         jkeys_str(): {plan_rope_str(): ball_rope, fact_context_str(): knee_rope},
         jvalues_str(): {
             fact_lower_str(): knee_reason_lower,
@@ -61,7 +61,7 @@ def test_BeliefAtom_get_json_ReturnsObj():
     x_dimen = belief_plan_factunit_str()
     knee_reason_lower = 7
     knee_reason_upper = 13
-    insert_factunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     insert_factunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     insert_factunit_beliefatom.set_jkey(fact_context_str(), knee_rope)
     insert_factunit_beliefatom.set_jvalue(fact_lower_str(), knee_reason_lower)
@@ -85,7 +85,7 @@ def test_get_beliefatom_from_json_ReturnsObj():
     x_dimen = belief_plan_factunit_str()
     knee_reason_lower = 7
     knee_reason_upper = 13
-    gen_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    gen_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     gen_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     gen_beliefatom.set_jkey(fact_context_str(), knee_rope)
     gen_beliefatom.set_jvalue(fact_lower_str(), knee_reason_lower)

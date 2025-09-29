@@ -192,7 +192,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         moment_label_str(),
 #         belief_name_str(),
 #         bud_time(),
-#         quota_str(),
+#         wx.quota,
 #         celldepth_str(),
 #     ]
 #     amy23_str = "amy23"

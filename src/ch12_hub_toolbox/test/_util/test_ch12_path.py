@@ -4,8 +4,8 @@ from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
+    Ch11Keywords as wx,
     belief_name_str,
-    bud_time_str,
     event_int_str,
     gut_str,
     job_str,
@@ -960,7 +960,7 @@ def test_create_bud_dir_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
-        bud_time=bud_time_str(),
+        bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
@@ -974,7 +974,7 @@ def test_create_cell_dir_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
-        bud_time=bud_time_str(),
+        bud_time=wx.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -990,7 +990,7 @@ def test_create_cell_json_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
-        bud_time=bud_time_str(),
+        bud_time=wx.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -1006,7 +1006,7 @@ def test_create_cell_voice_mandate_ledger_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
-        bud_time=bud_time_str(),
+        bud_time=wx.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -1022,7 +1022,7 @@ def test_create_budunit_json_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
-        bud_time=bud_time_str(),
+        bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"
@@ -1036,7 +1036,7 @@ def test_create_beliefpoint_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=belief_name_str(),
-        bud_time=bud_time_str(),
+        bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
     doc_str = f"Returns path: {doc_str}"

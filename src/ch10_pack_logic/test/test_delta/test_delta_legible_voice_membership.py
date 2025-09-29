@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
     belief_voice_membership_str,
     group_cred_points_str,
     group_debt_points_str,
@@ -22,7 +22,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_INSERT():
     yao_str = "Yao"
     group_cred_points_value = 81
     group_debt_points_value = 43
-    yao_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     yao_beliefatom.set_arg(group_title_str(), swim_str)
     yao_beliefatom.set_arg(voice_name_str(), yao_str)
     yao_beliefatom.set_arg(group_cred_points_str(), group_cred_points_value)

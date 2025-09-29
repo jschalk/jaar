@@ -1,7 +1,7 @@
 from src.ch04_group_logic.voice import voiceunit_shop
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch01Keywords as wx,
     DELETE_str,
-    INSERT_str,
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -43,7 +43,7 @@ def test_beliefatom_shop_ReturnsObj():
     # WHEN
     x_beliefatom = beliefatom_shop(
         dimen=voiceunit_str,
-        crud_str=INSERT_str(),
+        crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -51,7 +51,7 @@ def test_beliefatom_shop_ReturnsObj():
     # THEN
     print(f"{x_beliefatom=}")
     assert x_beliefatom.dimen == voiceunit_str
-    assert x_beliefatom.crud_str == INSERT_str()
+    assert x_beliefatom.crud_str == wx.INSERT
     assert x_beliefatom.jkeys == bob_required_dict
     assert x_beliefatom.jvalues == bob_optional_dict
 
@@ -60,7 +60,7 @@ def test_BeliefAtom_set_jkey_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     voiceunit_str = belief_voiceunit_str()
-    voiceunit_beliefatom = beliefatom_shop(voiceunit_str, INSERT_str())
+    voiceunit_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
     assert voiceunit_beliefatom.jkeys == {}
 
     # WHEN
@@ -74,7 +74,7 @@ def test_BeliefAtom_set_jvalue_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     voiceunit_str = belief_voiceunit_str()
-    voiceunit_beliefatom = beliefatom_shop(voiceunit_str, INSERT_str())
+    voiceunit_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
     assert voiceunit_beliefatom.jvalues == {}
 
     # WHEN
@@ -88,7 +88,7 @@ def test_BeliefAtom_get_value_ReturnsObj_Scenario0():
     # ESTABLISH
     bob_str = "Bob"
     voiceunit_str = belief_voiceunit_str()
-    voiceunit_beliefatom = beliefatom_shop(voiceunit_str, INSERT_str())
+    voiceunit_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
     voiceunit_beliefatom.set_jkey(x_key=voice_name_str(), x_value=bob_str)
 
     # WHEN / THEN
@@ -98,7 +98,7 @@ def test_BeliefAtom_get_value_ReturnsObj_Scenario0():
 def test_BeliefAtom_is_jvalues_valid_ReturnsBoolean():
     # ESTABLISH / WHEN
     voiceunit_str = belief_voiceunit_str()
-    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, crud_str=INSERT_str())
+    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, crud_str=wx.INSERT)
     assert bob_insert_beliefatom.is_jvalues_valid()
 
     # WHEN
@@ -131,7 +131,7 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_INSERT():
     voiceunit_str = belief_voiceunit_str()
 
     # WHEN
-    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, crud_str=INSERT_str())
+    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, crud_str=wx.INSERT)
 
     # THEN
     assert bob_insert_beliefatom.is_jkeys_valid() is False
@@ -174,7 +174,7 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_INSERT():
     assert bob_insert_beliefatom.is_valid() is False
 
     # WHEN
-    bob_insert_beliefatom.crud_str = INSERT_str()
+    bob_insert_beliefatom.crud_str = wx.INSERT
 
     # THEN
     assert bob_insert_beliefatom.is_jkeys_valid()
@@ -190,7 +190,7 @@ def test_BeliefAtom_get_value_ReturnsObj_Scenario1():
         bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
     voiceunit_str = belief_voiceunit_str()
-    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, INSERT_str())
+    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
     cw_str = voice_cred_points_str()
     dw_str = voice_debt_points_str()
     print(f"{bob_voiceunit.to_dict()=}")
@@ -229,7 +229,7 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_DELETE():
 
 def test_BeliefAtom_is_valid_ReturnsBoolean_beliefunit():
     # ESTABLISH / WHEN
-    bob_update_beliefatom = beliefatom_shop(beliefunit_str(), INSERT_str())
+    bob_update_beliefatom = beliefatom_shop(beliefunit_str(), wx.INSERT)
 
     # THEN
     assert bob_update_beliefatom.is_jkeys_valid()
@@ -249,7 +249,7 @@ def test_BeliefAtom_set_atom_order_SetsAttr():
     bob_voice_cred_points = 55
     bob_voice_debt_points = 66
     voiceunit_str = belief_voiceunit_str()
-    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, INSERT_str())
+    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
     cw_str = voice_cred_points_str()
     dw_str = voice_debt_points_str()
     bob_insert_beliefatom.set_jkey(voice_name_str(), bob_str)
@@ -268,7 +268,7 @@ def test_BeliefAtom_set_arg_SetsAny_jkey_jvalue():
     bob_voice_cred_points = 55
     bob_voice_debt_points = 66
     voiceunit_str = belief_voiceunit_str()
-    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, INSERT_str())
+    bob_insert_beliefatom = beliefatom_shop(voiceunit_str, wx.INSERT)
     cw_str = voice_cred_points_str()
     dw_str = voice_debt_points_str()
 
@@ -288,7 +288,7 @@ def test_BeliefAtom_set_arg_SetsAny_jkey_jvalue():
 def test_BeliefAtom_get_nesting_order_args_ReturnsObj_belief_voiceunit():
     # ESTABLISH
     sue_str = "Sue"
-    sue_insert_beliefatom = beliefatom_shop(belief_voiceunit_str(), INSERT_str())
+    sue_insert_beliefatom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
     sue_insert_beliefatom.set_arg(voice_name_str(), sue_str)
     print(f"{sue_insert_beliefatom.jkeys=}")
 
@@ -301,7 +301,7 @@ def test_BeliefAtom_get_nesting_order_args_ReturnsObj_belief_voice_membership():
     # ESTABLISH
     sue_str = "Sue"
     iowa_str = ";Iowa"
-    sue_insert_beliefatom = beliefatom_shop(belief_voice_membership_str(), INSERT_str())
+    sue_insert_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
     sue_insert_beliefatom.set_arg(group_title_str(), iowa_str)
     sue_insert_beliefatom.set_arg(voice_name_str(), sue_str)
     print(f"{sue_insert_beliefatom.jkeys=}")

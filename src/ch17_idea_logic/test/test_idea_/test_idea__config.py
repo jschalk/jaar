@@ -24,15 +24,17 @@ from src.ch16_translate_logic.translate_config import (
     get_translateable_args,
 )
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch01Keywords as wx,
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
+    Ch06Keywords as wx,
     Ch09Keywords as wx,
+    Ch11Keywords as wx,
     DELETE_str,
-    INSERT_str,
-    addin_str,
     allowed_crud_str,
     amount_str,
     attributes_str,
     awardee_title_str,
-    begin_str,
     belief_name_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -44,11 +46,9 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    bud_time_str,
     build_order_str,
     c400_number_str,
     celldepth_str,
-    close_str,
     column_order_str,
     credor_respect_str,
     cumulative_day_str,
@@ -66,7 +66,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    fund_iota_str,
     give_force_str,
     gogo_want_str,
     group_cred_points_str,
@@ -87,7 +86,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     jkeys_str,
     job_listen_rotations_str,
     jvalues_str,
-    knot_str,
     moment_budunit_str,
     moment_label_str,
     moment_paybook_str,
@@ -109,10 +107,8 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     otx_rope_str,
     otx_title_str,
     party_title_str,
-    penny_str,
     plan_rope_str,
     pledge_str,
-    quota_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_lower_str,
@@ -124,7 +120,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     stop_want_str,
     take_force_str,
     timeline_label_str,
-    tran_time_str,
     translate_label_str,
     translate_name_str,
     translate_rope_str,
@@ -428,11 +423,11 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(awardee_title_str()) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
-    assert sqlite_types.get(bud_time_str()) == "INTEGER"
-    assert sqlite_types.get(tran_time_str()) == "INTEGER"
-    assert sqlite_types.get(begin_str()) == "REAL"
-    assert sqlite_types.get(close_str()) == "REAL"
-    assert sqlite_types.get(addin_str()) == "REAL"
+    assert sqlite_types.get(wx.bud_time) == "INTEGER"
+    assert sqlite_types.get(wx.tran_time) == "INTEGER"
+    assert sqlite_types.get(wx.begin) == "REAL"
+    assert sqlite_types.get(wx.close) == "REAL"
+    assert sqlite_types.get(wx.addin) == "REAL"
     assert sqlite_types.get(numor_str()) == "INTEGER"
     assert sqlite_types.get(denom_str()) == "INTEGER"
     assert sqlite_types.get(morph_str()) == "INTEGER"
@@ -457,8 +452,8 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("problem_bool") == "INTEGER"
     assert sqlite_types.get(take_force_str()) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"
-    assert sqlite_types.get(fund_iota_str()) == "REAL"
-    assert sqlite_types.get(penny_str()) == "REAL"
+    assert sqlite_types.get(wx.fund_iota) == "REAL"
+    assert sqlite_types.get(wx.penny) == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get(respect_bit_str()) == "REAL"
     assert sqlite_types.get(amount_str()) == "REAL"
@@ -471,10 +466,10 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(otx_knot_str()) == "TEXT"
     assert sqlite_types.get(inx_knot_str()) == "TEXT"
     assert sqlite_types.get(unknown_str_str()) == "TEXT"
-    assert sqlite_types.get(knot_str()) == "TEXT"
+    assert sqlite_types.get(wx.knot) == "TEXT"
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
-    assert sqlite_types.get(quota_str()) == "REAL"
+    assert sqlite_types.get(wx.quota) == "REAL"
     assert sqlite_types.get(celldepth_str()) == "INTEGER"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_label_str()) == "TEXT"
@@ -498,7 +493,7 @@ def test_get_allowed_curds_ReturnsObj():
         insert_update_str(),
         delete_insert_str(),
         delete_update_str(),
-        INSERT_str(),
+        wx.INSERT,
         DELETE_str(),
         wx.UPDATE,
     }
@@ -562,7 +557,7 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(jvalues_str()) is not None
         assert idea_dict.get(allowed_crud_str()) is not None
         assert idea_dict.get(wx.UPDATE) is None
-        assert idea_dict.get(INSERT_str()) is None
+        assert idea_dict.get(wx.INSERT) is None
         assert idea_dict.get(DELETE_str()) is None
         assert idea_dict.get(normal_specs_str()) is None
         if idea_dict.get(idea_category_str()) == "belief":
@@ -594,43 +589,43 @@ def _validate_idea_config(x_idea_config: dict):
             assert idea_dict.get(allowed_crud_str()) == insert_multiple_str()
         elif (
             sub_dimen.get(wx.UPDATE) != None
-            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(wx.INSERT) != None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_insert_update_str()
         elif (
             sub_dimen.get(wx.UPDATE) != None
-            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(wx.INSERT) != None
             and sub_dimen.get(DELETE_str()) is None
         ):
             assert idea_dict.get(allowed_crud_str()) == insert_update_str()
         elif (
             sub_dimen.get(wx.UPDATE) is None
-            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(wx.INSERT) != None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_insert_str()
         elif (
             sub_dimen.get(wx.UPDATE) != None
-            and sub_dimen.get(INSERT_str()) is None
+            and sub_dimen.get(wx.INSERT) is None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == delete_update_str()
         elif (
             sub_dimen.get(wx.UPDATE) != None
-            and sub_dimen.get(INSERT_str()) is None
+            and sub_dimen.get(wx.INSERT) is None
             and sub_dimen.get(DELETE_str()) is None
         ):
             assert idea_dict.get(allowed_crud_str()) == wx.UPDATE
         elif (
             sub_dimen.get(wx.UPDATE) is None
-            and sub_dimen.get(INSERT_str()) != None
+            and sub_dimen.get(wx.INSERT) != None
             and sub_dimen.get(DELETE_str()) is None
         ):
-            assert idea_dict.get(allowed_crud_str()) == INSERT_str()
+            assert idea_dict.get(allowed_crud_str()) == wx.INSERT
         elif (
             sub_dimen.get(wx.UPDATE) is None
-            and sub_dimen.get(INSERT_str()) is None
+            and sub_dimen.get(wx.INSERT) is None
             and sub_dimen.get(DELETE_str()) != None
         ):
             assert idea_dict.get(allowed_crud_str()) == DELETE_str()
@@ -886,11 +881,11 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         face_name_str(),
         c400_number_str(),
         moment_label_str(),
-        fund_iota_str(),
+        wx.fund_iota,
         monthday_distortion_str(),
-        penny_str(),
+        wx.penny,
         respect_bit_str(),
-        knot_str(),
+        wx.knot,
         timeline_label_str(),
         yr1_jan1_offset_str(),
         job_listen_rotations_str(),

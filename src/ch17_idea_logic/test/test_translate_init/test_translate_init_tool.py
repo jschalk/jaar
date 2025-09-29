@@ -11,7 +11,7 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
 )
 from src.ch16_translate_logic.translate_main import translateunit_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
-    LabelTerm_str,
+    Ch02Keywords as wx,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
@@ -283,7 +283,7 @@ def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
     save_all_csvs_from_translateunit(map_dir, sue_translateunit)
     assert os_path_exists(label_csv_path)
     empty_translateunit = translateunit_shop("Sue")
-    sue_labelmap = empty_translateunit.get_mapunit(LabelTerm_str())
+    sue_labelmap = empty_translateunit.get_mapunit(wx.LabelTerm)
     sue_labelmap.face_name = "Sue"
     print(f"{empty_translateunit=} {sue_labelmap=}")
     assert len(sue_labelmap.otx2inx) == 0
@@ -293,7 +293,7 @@ def test_load_labelmap_from_csv_SetsAttrWhenFileExists(env_dir_setup_cleanup):
 
     # THEN
     assert len(sue_labelmap.otx2inx) == 2
-    ex_labelmap = sue_translateunit.get_mapunit(LabelTerm_str())
+    ex_labelmap = sue_translateunit.get_mapunit(wx.LabelTerm)
     assert ex_labelmap == sue_labelmap
 
 
@@ -306,7 +306,7 @@ def test_load_labelmap_from_csv_DoesNotChangeWhenFileDoesNotExist(
     label_csv_path = create_path(map_dir, label_filename)
     assert os_path_exists(label_csv_path) is False
     empty_translateunit = translateunit_shop("Sue")
-    sue_labelmap = empty_translateunit.get_mapunit(LabelTerm_str())
+    sue_labelmap = empty_translateunit.get_mapunit(wx.LabelTerm)
     sue_labelmap.face_name = "Sue"
     print(f"{empty_translateunit=} {sue_labelmap=}")
     assert len(sue_labelmap.otx2inx) == 0

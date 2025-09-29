@@ -1,8 +1,8 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
-    INSERT_str,
     belief_voiceunit_str,
     voice_cred_points_str,
     voice_name_str,
@@ -22,10 +22,10 @@ def test_get_minimal_beliefdelta_ReturnsObjUPDATEBeliefAtom_belief_voiceunit():
     sue_belief.add_voiceunit(yao_str)
 
     voices_beliefdelta = beliefdelta_shop()
-    bob_atom = beliefatom_shop(belief_voiceunit_str(), INSERT_str())
+    bob_atom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
     bob_atom.set_arg(voice_name_str(), bob_str)
     bob_atom.set_arg(voice_cred_points_str(), new_bob_voice_cred_points)
-    yao_atom = beliefatom_shop(belief_voiceunit_str(), INSERT_str())
+    yao_atom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
     yao_atom.set_arg(voice_name_str(), yao_str)
     voices_beliefdelta.set_beliefatom(bob_atom)
     voices_beliefdelta.set_beliefatom(yao_atom)

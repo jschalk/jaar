@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch02_rope_logic._ref.ch02_keywords import knot_str
+from src.ch02_rope_logic._ref.ch02_keywords import Ch02Keywords as wx
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
     KnotTerm,
     LabelTerm,
@@ -45,7 +45,7 @@ def test_LabelTerm_Exists():
     x_rope = LabelTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree node. Nodes cannot contain RopeTerm {knot_str()}"
+    doc_str = f"A string representation of a tree node. Nodes cannot contain RopeTerm {wx.knot}"
     assert inspect_getdoc(x_rope) == doc_str
 
 
@@ -76,7 +76,7 @@ def test_NexusLabel_Exists():
     # THEN
     assert x_nexus == empty_str
     doc_str = (
-        f"A string representation of a tree root node. Node cannot contain {knot_str()}"
+        f"A string representation of a tree root node. Node cannot contain {wx.knot}"
     )
     assert inspect_getdoc(x_nexus) == doc_str
 
@@ -88,7 +88,7 @@ def test_RopeTerm_Exists():
     x_rope = RopeTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree path. LabelTerms are seperated by rope {knot_str()}"
+    doc_str = f"A string representation of a tree path. LabelTerms are seperated by rope {wx.knot}"
     assert inspect_getdoc(x_rope) == doc_str
 
 
@@ -99,5 +99,5 @@ def test_MomentLabel_Exists():
     x_moment = MomentLabel(empty_str)
     # THEN
     assert x_moment == empty_str
-    doc_str = f"A NexusLabel for a Moment. Cannot contain {knot_str()}."
+    doc_str = f"A NexusLabel for a Moment. Cannot contain {wx.knot}."
     assert inspect_getdoc(x_moment) == doc_str

@@ -1,5 +1,6 @@
 from sqlalchemy import inspect
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch01Keywords as wx,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -12,7 +13,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     beliefunit_str,
     normal_specs_str,
     normal_table_name_str,
-    sqlite_datatype_str,
 )
 from src.ch09_belief_atom_logic.atom_config import get_normalized_belief_table_build
 from src.ch09_belief_atom_logic.normal_models import (
@@ -42,7 +42,7 @@ def all_columns_are_as_config_requires(mapper, config_dimen):
         table_column = mapper.columns.get(config_column)
         failed_assert_str = f"{config_column=} is missing from {config_table_name=}"
         assert table_column is not None, failed_assert_str
-        config_type = column_dict.get(sqlite_datatype_str())
+        config_type = column_dict.get(wx.sqlite_datatype)
         if config_type == "TEXT":
             config_type = "VARCHAR"
         elif config_type == "REAL":
@@ -57,7 +57,7 @@ def print_out_expected_class_attribute_declarations(config_dimen):
 
     print(f"Table {config_table_name}")
     for config_column, column_dict in config_columns.items():
-        declare_type = column_dict.get(sqlite_datatype_str())
+        declare_type = column_dict.get(wx.sqlite_datatype)
         if declare_type == "TEXT":
             declare_type = "String"
         elif declare_type == "INTEGER":

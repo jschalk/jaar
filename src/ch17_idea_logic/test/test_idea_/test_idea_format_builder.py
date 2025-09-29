@@ -6,6 +6,8 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_idea_brick_mds,
 )
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
     attributes_str,
     belief_name_str,
     belief_planunit_str,
@@ -13,16 +15,13 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     dimens_str,
     event_int_str,
     face_name_str,
-    fund_iota_str,
     gogo_want_str,
     idea_category_str,
     idea_number_str,
     job_listen_rotations_str,
-    knot_str,
     moment_label_str,
     monthday_distortion_str,
     otx_key_str,
-    penny_str,
     plan_rope_str,
     respect_bit_str,
     timeline_label_str,
@@ -83,15 +82,15 @@ def test_get_idea_brick_md_ReturnsObj():
     # ESTABLISH
     idea_brick_config = {
         "attributes": {
-            knot_str(): {otx_key_str(): False},
+            wx.knot: {otx_key_str(): False},
             c400_number_str(): {otx_key_str(): False},
             event_int_str(): {otx_key_str(): True},
             face_name_str(): {otx_key_str(): True},
             moment_label_str(): {otx_key_str(): True},
-            fund_iota_str(): {otx_key_str(): False},
+            wx.fund_iota: {otx_key_str(): False},
             job_listen_rotations_str(): {otx_key_str(): False},
             monthday_distortion_str(): {otx_key_str(): False},
-            penny_str(): {otx_key_str(): False},
+            wx.penny: {otx_key_str(): False},
             respect_bit_str(): {otx_key_str(): False},
             timeline_label_str(): {otx_key_str(): False},
             yr1_jan1_offset_str(): {otx_key_str(): False},
@@ -117,10 +116,10 @@ def test_get_idea_brick_md_ReturnsObj():
 - `{c400_number_str()}`
 - `{yr1_jan1_offset_str()}`
 - `{monthday_distortion_str()}`
-- `{fund_iota_str()}`
-- `{penny_str()}`
+- `{wx.fund_iota}`
+- `{wx.penny}`
 - `{respect_bit_str()}`
-- `{knot_str()}`
+- `{wx.knot}`
 - `{job_listen_rotations_str()}`
 """
     assert (idea_brick_md) == expected_idea_brick_md
@@ -132,15 +131,15 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
     br00000_str = "br00000"
     idea_brick_config = {
         "attributes": {
-            knot_str(): {otx_key_str(): False},
+            wx.knot: {otx_key_str(): False},
             c400_number_str(): {otx_key_str(): False},
             event_int_str(): {otx_key_str(): True},
             face_name_str(): {otx_key_str(): True},
             moment_label_str(): {otx_key_str(): True},
-            fund_iota_str(): {otx_key_str(): False},
+            wx.fund_iota: {otx_key_str(): False},
             job_listen_rotations_str(): {otx_key_str(): False},
             monthday_distortion_str(): {otx_key_str(): False},
-            penny_str(): {otx_key_str(): False},
+            wx.penny: {otx_key_str(): False},
             respect_bit_str(): {otx_key_str(): False},
             timeline_label_str(): {otx_key_str(): False},
             yr1_jan1_offset_str(): {otx_key_str(): False},
@@ -166,10 +165,10 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 - `{c400_number_str()}`
 - `{yr1_jan1_offset_str()}`
 - `{monthday_distortion_str()}`
-- `{fund_iota_str()}`
-- `{penny_str()}`
+- `{wx.fund_iota}`
+- `{wx.penny}`
 - `{respect_bit_str()}`
-- `{knot_str()}`
+- `{wx.knot}`
 - `{job_listen_rotations_str()}`
 """
     assert set(idea_brick_mds.keys()) == {br00000_str}

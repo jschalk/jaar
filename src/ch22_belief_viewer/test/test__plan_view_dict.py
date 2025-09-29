@@ -4,23 +4,22 @@ from src.ch08_timeline_logic.reason_str_func import (
     get_reason_case_readable_str,
 )
 from src.ch22_belief_viewer._ref.ch22_keywords import (
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
+    Ch06Keywords as wx,
     active_hx_str,
     active_str,
-    addin_str,
     all_voice_cred_str,
     all_voice_debt_str,
     awardheirs_str,
     awardlines_str,
     awardunits_str,
-    begin_str,
     cases_str,
-    close_str,
     denom_str,
     descendant_pledge_count_str,
     factheirs_str,
     factunits_str,
     fund_cease_str,
-    fund_iota_str,
     fund_onset_str,
     fund_ratio_str,
     fund_share_str,
@@ -30,13 +29,11 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     healerunit_str,
     is_expanded_str,
     kids_str,
-    knot_str,
     laborheir_str,
     laborunit_str,
     moment_label_str,
     morph_str,
     numor_str,
-    parent_rope_str,
     plan_label_str,
     pledge_str,
     problem_bool_str,
@@ -85,7 +82,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     assert set(casa_dict.keys()) == {
         plan_label_str(),
         moment_label_str(),
-        parent_rope_str(),
+        wx.parent_rope,
         kids_str(),
         "root",
         star_str(),
@@ -95,9 +92,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         laborunit_str(),
         factunits_str(),
         healerunit_str(),
-        begin_str(),
-        close_str(),
-        addin_str(),
+        wx.begin,
+        wx.close,
+        wx.addin,
         denom_str(),
         numor_str(),
         morph_str(),
@@ -105,7 +102,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         stop_want_str(),
         pledge_str(),
         problem_bool_str(),
-        knot_str(),
+        wx.knot,
         is_expanded_str(),
         active_str(),
         active_hx_str(),
@@ -116,7 +113,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         descendant_pledge_count_str(),
         factheirs_str(),
         fund_ratio_str(),
-        fund_iota_str(),
+        wx.fund_iota,
         fund_onset_str(),
         fund_cease_str(),
         healerunit_ratio_str(),
@@ -193,7 +190,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
     # }
     expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
-    assert root_plan_view_dict.get(parent_rope_str()) == expected_parent_rope
+    assert root_plan_view_dict.get(wx.parent_rope) == expected_parent_rope
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
@@ -208,7 +205,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     # THEN
     assert casa_dict.get(fund_share_str()) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
-    assert casa_dict.get(parent_rope_str()) == expected_parent_rope
+    assert casa_dict.get(wx.parent_rope) == expected_parent_rope
     expected_all_voice_cred = f"all_voice_cred = {casa_plan.all_voice_cred}"
     expected_all_voice_debt = f"all_voice_debt = {casa_plan.all_voice_debt}"
     expected_all_voice_cred = add_small_dot(expected_all_voice_cred)
@@ -557,9 +554,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario9_numeric_range_attrs():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    casa_addin_readable = casa_dict.get(addin_str())
-    casa_begin_readable = casa_dict.get(begin_str())
-    casa_close_readable = casa_dict.get(close_str())
+    casa_addin_readable = casa_dict.get(wx.addin)
+    casa_begin_readable = casa_dict.get(wx.begin)
+    casa_close_readable = casa_dict.get(wx.close)
     casa_denom_readable = casa_dict.get(denom_str())
     casa_morph_readable = casa_dict.get(morph_str())
     casa_numor_readable = casa_dict.get(numor_str())

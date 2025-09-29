@@ -1,9 +1,9 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
     awardee_title_str,
     belief_plan_awardunit_str,
     give_force_str,
@@ -23,7 +23,7 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_INSERT():
     awardee_title_value = f"{sue_belief.knot}Swimmers"
     give_force_value = 81
     take_force_value = 43
-    swim_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
     swim_beliefatom.set_arg(give_force_str(), give_force_value)

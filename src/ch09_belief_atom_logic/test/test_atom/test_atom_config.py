@@ -1,16 +1,16 @@
 from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
+    Ch01Keywords as wx,
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
+    Ch06Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
-    LabelTerm_str,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
-    addin_str,
     awardee_title_str,
-    begin_str,
     belief_groupunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -23,7 +23,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     belief_voiceunit_str,
     beliefunit_str,
     class_type_str,
-    close_str,
     column_order_str,
     credor_respect_str,
     crud_str,
@@ -33,7 +32,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     fact_context_str,
     fact_lower_str,
     fact_upper_str,
-    fund_iota_str,
     gogo_want_str,
     group_cred_points_str,
     group_debt_points_str,
@@ -46,16 +44,13 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     normal_specs_str,
     normal_table_name_str,
     numor_str,
-    parent_rope_str,
     party_title_str,
-    penny_str,
     plan_rope_str,
     planroot_str,
     reason_context_str,
     reason_state_str,
     respect_bit_str,
     solo_str,
-    sqlite_datatype_str,
     stop_want_str,
     voice_cred_points_str,
     voice_debt_points_str,
@@ -85,7 +80,7 @@ def test_CRUD_command_Exists():
     # ESTABLISH / WHEN / THEN
     assert CRUD_command(wx.UPDATE) == str(wx.UPDATE)
     assert CRUD_command(DELETE_str()) == str(DELETE_str())
-    assert CRUD_command(INSERT_str()) == str(INSERT_str())
+    assert CRUD_command(wx.INSERT) == str(wx.INSERT)
 
 
 def test_get_belief_dimens_ReturnsObj():
@@ -167,10 +162,10 @@ def test_get_atom_config_dict_ReturnsObj_Mirrors_belief_config():
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
     for dimen, dimen_dict in atom_config_dict.items():
-        if dimen_dict.get(INSERT_str()) is not None:
-            dimen_insert = dimen_dict.get(INSERT_str())
+        if dimen_dict.get(wx.INSERT) is not None:
+            dimen_insert = dimen_dict.get(wx.INSERT)
             if dimen_insert.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {INSERT_str()} {dimen_insert.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {wx.INSERT} {dimen_insert.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
@@ -202,15 +197,15 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     # WHEN / THEN
     assert _check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
     # # Simple script for editing atom_config.json
-    # set_mog(INSERT_str(), belief_voiceunit_str(), 0)
-    # set_mog(INSERT_str(), belief_voice_membership_str(), 1)
-    # set_mog(INSERT_str(), belief_planunit_str(), 2)
-    # set_mog(INSERT_str(), belief_plan_awardunit_str(), 3)
-    # set_mog(INSERT_str(), belief_plan_partyunit_str(), 4)
-    # set_mog(INSERT_str(), belief_plan_healerunit_str(), 5)
-    # set_mog(INSERT_str(), belief_plan_factunit_str(), 6)
-    # set_mog(INSERT_str(), belief_plan_reasonunit_str(), 7)
-    # set_mog(INSERT_str(), belief_plan_reason_caseunit_str(), 8)
+    # set_mog(wx.INSERT, belief_voiceunit_str(), 0)
+    # set_mog(wx.INSERT, belief_voice_membership_str(), 1)
+    # set_mog(wx.INSERT, belief_planunit_str(), 2)
+    # set_mog(wx.INSERT, belief_plan_awardunit_str(), 3)
+    # set_mog(wx.INSERT, belief_plan_partyunit_str(), 4)
+    # set_mog(wx.INSERT, belief_plan_healerunit_str(), 5)
+    # set_mog(wx.INSERT, belief_plan_factunit_str(), 6)
+    # set_mog(wx.INSERT, belief_plan_reasonunit_str(), 7)
+    # set_mog(wx.INSERT, belief_plan_reason_caseunit_str(), 8)
     # set_mog(wx.UPDATE, belief_voiceunit_str(), 9)
     # set_mog(wx.UPDATE, belief_voice_membership_str(), 10)
     # set_mog(wx.UPDATE, belief_planunit_str(), 11)
@@ -229,15 +224,15 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     # set_mog(DELETE_str(), belief_voiceunit_str(), 24)
     # set_mog(wx.UPDATE, beliefunit_str(), 25)
 
-    assert 0 == q_order(INSERT_str(), belief_voiceunit_str())
-    assert 1 == q_order(INSERT_str(), belief_voice_membership_str())
-    assert 2 == q_order(INSERT_str(), belief_planunit_str())
-    assert 3 == q_order(INSERT_str(), belief_plan_awardunit_str())
-    assert 4 == q_order(INSERT_str(), belief_plan_partyunit_str())
-    assert 5 == q_order(INSERT_str(), belief_plan_healerunit_str())
-    assert 6 == q_order(INSERT_str(), belief_plan_factunit_str())
-    assert 7 == q_order(INSERT_str(), belief_plan_reasonunit_str())
-    assert 8 == q_order(INSERT_str(), belief_plan_reason_caseunit_str())
+    assert 0 == q_order(wx.INSERT, belief_voiceunit_str())
+    assert 1 == q_order(wx.INSERT, belief_voice_membership_str())
+    assert 2 == q_order(wx.INSERT, belief_planunit_str())
+    assert 3 == q_order(wx.INSERT, belief_plan_awardunit_str())
+    assert 4 == q_order(wx.INSERT, belief_plan_partyunit_str())
+    assert 5 == q_order(wx.INSERT, belief_plan_healerunit_str())
+    assert 6 == q_order(wx.INSERT, belief_plan_factunit_str())
+    assert 7 == q_order(wx.INSERT, belief_plan_reasonunit_str())
+    assert 8 == q_order(wx.INSERT, belief_plan_reason_caseunit_str())
     assert 9 == q_order(wx.UPDATE, belief_voiceunit_str())
     assert 10 == q_order(wx.UPDATE, belief_voice_membership_str())
     assert 11 == q_order(wx.UPDATE, belief_planunit_str())
@@ -293,7 +288,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {class_type_str(), sqlite_datatype_str(), column_order_str()}
+    arg_elements = {class_type_str(), wx.sqlite_datatype, column_order_str()}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -532,9 +527,9 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert beliefunit_columns.get(credor_respect_str()) is not None
     assert beliefunit_columns.get(debtor_respect_str()) is not None
     assert beliefunit_columns.get("fund_pool") is not None
-    assert beliefunit_columns.get(fund_iota_str()) is not None
+    assert beliefunit_columns.get(wx.fund_iota) is not None
     assert beliefunit_columns.get(respect_bit_str()) is not None
-    assert beliefunit_columns.get(penny_str()) is not None
+    assert beliefunit_columns.get(wx.penny) is not None
     assert beliefunit_columns.get("tally") is not None
 
     assert len(cat_voiceunit) == 2
@@ -547,11 +542,11 @@ def test_get_normalized_belief_table_build_ReturnsObj():
 
     voice_name_dict = voiceunit_columns.get(voice_name_str())
     assert len(voice_name_dict) == 2
-    assert voice_name_dict.get(sqlite_datatype_str()) == "TEXT"
+    assert voice_name_dict.get(wx.sqlite_datatype) == "TEXT"
     assert voice_name_dict.get("nullable") is False
     voice_debt_points_dict = voiceunit_columns.get("voice_debt_points")
     assert len(voice_name_dict) == 2
-    assert voice_debt_points_dict.get(sqlite_datatype_str()) == "REAL"
+    assert voice_debt_points_dict.get(wx.sqlite_datatype) == "REAL"
     assert voice_debt_points_dict.get("nullable") is True
 
     assert len(cat_plan) == 2
@@ -559,15 +554,15 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert len(plan_columns) == 13
     assert plan_columns.get("uid") is not None
     assert plan_columns.get(plan_rope_str()) is not None
-    assert plan_columns.get(begin_str()) is not None
-    assert plan_columns.get(close_str()) is not None
+    assert plan_columns.get(wx.begin) is not None
+    assert plan_columns.get(wx.close) is not None
 
     gogo_want_dict = plan_columns.get(gogo_want_str())
     stop_want_dict = plan_columns.get(stop_want_str())
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
-    assert gogo_want_dict.get(sqlite_datatype_str()) == "REAL"
-    assert stop_want_dict.get(sqlite_datatype_str()) == "REAL"
+    assert gogo_want_dict.get(wx.sqlite_datatype) == "REAL"
+    assert stop_want_dict.get(wx.sqlite_datatype) == "REAL"
     assert gogo_want_dict.get("nullable") is True
     assert stop_want_dict.get("nullable") is True
 
@@ -613,7 +608,7 @@ def test_get_allowed_class_types_ReturnsObj():
         "int",
         NameTerm_str(),
         TitleTerm_str(),
-        LabelTerm_str(),
+        wx.LabelTerm,
         RopeTerm_str(),
         "float",
         "bool",
@@ -672,13 +667,13 @@ def test_get_atom_args_class_types_ReturnsObj():
 
     # THEN
     assert x_class_types.get(voice_name_str()) == NameTerm_str()
-    assert x_class_types.get(addin_str()) == "float"
+    assert x_class_types.get(wx.addin) == "float"
     assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
     assert x_class_types.get(reason_context_str()) == RopeTerm_str()
     assert x_class_types.get("reason_active_requisite") == "bool"
-    assert x_class_types.get(begin_str()) == "float"
+    assert x_class_types.get(wx.begin) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
-    assert x_class_types.get(close_str()) == "float"
+    assert x_class_types.get(wx.close) == "float"
     assert x_class_types.get(voice_cred_points_str()) == "float"
     assert x_class_types.get(group_cred_points_str()) == "float"
     assert x_class_types.get(credor_respect_str()) == "float"
@@ -690,7 +685,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(fact_context_str()) == RopeTerm_str()
     assert x_class_types.get(fact_upper_str()) == "float"
     assert x_class_types.get(fact_lower_str()) == "float"
-    assert x_class_types.get(fund_iota_str()) == "float"
+    assert x_class_types.get(wx.fund_iota) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
@@ -703,7 +698,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("reason_lower") == "float"
-    assert x_class_types.get(penny_str()) == "float"
+    assert x_class_types.get(wx.penny) == "float"
     assert x_class_types.get("fact_state") == RopeTerm_str()
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"

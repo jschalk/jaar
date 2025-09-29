@@ -6,7 +6,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_event_all_pack_path as all_pack_path,
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    INSERT_str,
+    Ch01Keywords as wx,
     belief_name_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -118,19 +118,19 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     blrpern_dimen = belief_voiceunit_str()
     expected_e3_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        INSERT_str(),
+        wx.INSERT,
         jkeys={voice_name_str(): bob_inx},
         jvalues={voice_cred_points_str(): credit77, voice_debt_points_str(): None},
     )
     expected_e7_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        INSERT_str(),
+        wx.INSERT,
         jkeys={voice_name_str(): bob_inx},
         jvalues={voice_cred_points_str(): credit77, voice_debt_points_str(): None},
     )
     expected_e7_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        INSERT_str(),
+        wx.INSERT,
         jkeys={voice_name_str(): sue_inx},
         jvalues={voice_cred_points_str(): credit88, voice_debt_points_str(): None},
     )

@@ -7,9 +7,9 @@ from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table, upsert_sh
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
 from src.ch20_world_logic._ref.ch20_keywords import (
+    Ch11Keywords as wx,
     belief_name_str,
     brick_agg_str,
-    bud_time_str,
     celldepth_str,
     cumulative_minute_str,
     event_int_str,
@@ -21,7 +21,6 @@ from src.ch20_world_logic._ref.ch20_keywords import (
     moment_label_str,
     moment_ote1_agg_str,
     otx_name_str,
-    quota_str,
     voice_name_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
@@ -62,8 +61,8 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        bud_time_str(),
-        quota_str(),
+        wx.bud_time,
+        wx.quota,
         celldepth_str(),
     ]
     tp37 = 37

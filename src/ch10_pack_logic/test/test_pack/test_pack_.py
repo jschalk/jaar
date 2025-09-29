@@ -5,9 +5,9 @@ from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
     belief_name_str,
     belief_voiceunit_str,
     event_int_str,
@@ -507,7 +507,7 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     # WHEN
     bob_packunit.add_beliefatom(
         dimen=belief_voiceunit_str(),
-        crud_str=INSERT_str(),
+        crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -515,7 +515,7 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     # THEN
     assert len(bob_packunit._beliefdelta.beliefatoms) == 1
     assert (
-        bob_packunit._beliefdelta.beliefatoms.get(INSERT_str())
+        bob_packunit._beliefdelta.beliefatoms.get(wx.INSERT)
         .get(belief_voiceunit_str())
         .get(bob_str)
         is not None
@@ -534,7 +534,7 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     assert before_sue_beliefunit.voice_exists(yao_str)
     assert before_sue_beliefunit.voice_exists(zia_str) is False
     dimen = belief_voiceunit_str()
-    x_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     x_beliefatom.set_jkey(voice_name_str(), zia_str)
     x_voice_cred_points = 55
     x_voice_debt_points = 66
@@ -595,7 +595,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     # WHEN
     bob_packunit.add_beliefatom(
         dimen=belief_voiceunit_str(),
-        crud_str=INSERT_str(),
+        crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )

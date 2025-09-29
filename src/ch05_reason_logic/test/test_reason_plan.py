@@ -4,8 +4,8 @@ from src.ch02_rope_logic.rope import (
     get_default_nexus_label as root_label,
 )
 from src.ch05_reason_logic._ref.ch05_keywords import (
+    Ch02Keywords as wx,
     cases_str,
-    knot_str,
     reason_active_requisite_str,
     reason_context_str,
     reason_state_str,
@@ -41,7 +41,7 @@ def test_ReasonCore_Exists():
     obj_attrs = set(wk_reason.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        knot_str(),
+        wx.knot,
         cases_str(),
         reason_active_requisite_str(),
         reason_context_str(),

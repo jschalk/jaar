@@ -2,15 +2,15 @@ from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
 from src.ch04_group_logic._ref.ch04_keywords import (
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
     fund_agenda_take_str,
     fund_give_str,
-    fund_iota_str,
     fund_take_str,
     group_title_str,
-    knot_str,
     memberships_str,
 )
 from src.ch04_group_logic.group import GroupUnit, groupunit_shop, membership_shop
@@ -41,8 +41,8 @@ def test_GroupUnit_Exists():
         fund_agenda_take_str(),
         credor_pool_str(),
         debtor_pool_str(),
-        knot_str(),
-        fund_iota_str(),
+        wx.knot,
+        wx.fund_iota,
     }
 
 

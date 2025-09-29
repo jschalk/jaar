@@ -21,9 +21,9 @@ from src.ch18_etl_toolbox.ch18_path import (
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.ch20_world_logic._ref.ch20_keywords import (
+    Ch11Keywords as wx,
     amount_str,
     belief_name_str,
-    bud_time_str,
     celldepth_str,
     creg_str,
     cumulative_minute_str,
@@ -39,9 +39,7 @@ from src.ch20_world_logic._ref.ch20_keywords import (
     moment_ote1_agg_str,
     moment_voice_nets_str,
     otx_name_str,
-    quota_str,
     time_str,
-    tran_time_str,
     voice_name_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
@@ -248,8 +246,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        bud_time_str(),
-        quota_str(),
+        wx.bud_time,
+        wx.quota,
         celldepth_str(),
     ]
     tp37 = 37
@@ -389,7 +387,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
         moment_label_str(),
         belief_name_str(),
         voice_name_str(),
-        tran_time_str(),
+        wx.tran_time,
         amount_str(),
     ]
     a23_str = "amy23"
@@ -503,8 +501,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        bud_time_str(),
-        quota_str(),
+        wx.bud_time,
+        wx.quota,
         celldepth_str(),
     ]
     amy23_str = "amy23"
@@ -598,8 +596,8 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         face_name_str(),
         moment_label_str(),
         belief_name_str(),
-        bud_time_str(),
-        quota_str(),
+        wx.bud_time,
+        wx.quota,
         celldepth_str(),
     ]
     tp37 = 37

@@ -1,8 +1,8 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     DELETE_str,
-    INSERT_str,
     belief_plan_healerunit_str,
     healer_name_str,
     plan_rope_str,
@@ -18,7 +18,7 @@ def test_create_legible_list_ReturnsObj_plan_healerunit_INSERT():
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     healer_name_value = f"{sue_belief.knot}Swimmers"
-    swim_beliefatom = beliefatom_shop(dimen, INSERT_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(healer_name_str(), healer_name_value)
     # print(f"{swim_beliefatom=}")

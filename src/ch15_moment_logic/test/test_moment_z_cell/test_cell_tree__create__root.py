@@ -7,12 +7,11 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_moment_json_path,
 )
 from src.ch15_moment_logic._ref.ch15_keywords import (
+    Ch03Keywords as wx,
+    Ch11Keywords as wx,
     ancestors_str,
-    bud_belief_name_str,
     celldepth_str,
     event_int_str,
-    penny_str,
-    quota_str,
 )
 from src.ch15_moment_logic.moment_main import (
     _get_ote1_max_past_event_int,
@@ -91,8 +90,8 @@ def test_MomentUnit_create_buds_root_cells_Scenaro1_BudExists(
     cell_dict = open_json(tp37_cell_json_path)
     print(f"{cell_dict=}")
     assert cell_dict.get(celldepth_str()) == DEFAULT_CELLDEPTH
-    assert cell_dict.get(bud_belief_name_str()) == bob_str
-    assert cell_dict.get(quota_str()) == bud1_quota
+    assert cell_dict.get(wx.bud_belief_name) == bob_str
+    assert cell_dict.get(wx.quota) == bud1_quota
     assert cell_dict.get(event_int_str()) == event3
 
 
@@ -132,8 +131,8 @@ def test_MomentUnit_create_buds_root_cells_Scenaro2_BudExistsButNoBeliefExistsIn
     assert cell_dict.get(ancestors_str()) == []
     assert not cell_dict.get(event_int_str())
     assert cell_dict.get(celldepth_str()) == DEFAULT_CELLDEPTH
-    assert cell_dict.get(bud_belief_name_str()) == bob_str
-    assert cell_dict.get(quota_str()) == bud1_quota
+    assert cell_dict.get(wx.bud_belief_name) == bob_str
+    assert cell_dict.get(wx.quota) == bud1_quota
 
 
 def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud_time_event_int(
@@ -176,6 +175,6 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     assert cell_dict.get(ancestors_str()) == []
     assert cell_dict.get(event_int_str()) == event3
     assert cell_dict.get(celldepth_str()) == bud1_celldepth
-    assert cell_dict.get(bud_belief_name_str()) == bob_str
-    assert cell_dict.get(penny_str()) == a23_penny
-    assert cell_dict.get(quota_str()) == bud1_quota
+    assert cell_dict.get(wx.bud_belief_name) == bob_str
+    assert cell_dict.get(wx.penny) == a23_penny
+    assert cell_dict.get(wx.quota) == bud1_quota

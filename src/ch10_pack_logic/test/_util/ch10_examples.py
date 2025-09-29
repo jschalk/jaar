@@ -2,9 +2,9 @@ from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic._ref.ch07_semantic_types import MomentLabel
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
+    Ch01Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    INSERT_str,
     belief_planunit_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -20,7 +20,7 @@ def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> Belief
     sports_str = "sports"
     x_dimen = belief_planunit_str()
     sports_rope = create_rope(moment_label, sports_str)
-    insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     insert_planunit_beliefatom.set_jkey(plan_rope_str(), sports_rope)
     return insert_planunit_beliefatom
 
@@ -33,7 +33,7 @@ def get_atom_example_planunit_ball(moment_label: MomentLabel = None) -> BeliefAt
     ball_str = "basketball"
     x_dimen = belief_planunit_str()
     ball_rope = create_rope(sports_rope, ball_str)
-    insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     insert_planunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
     return insert_planunit_beliefatom
 
@@ -50,7 +50,7 @@ def get_atom_example_planunit_knee(moment_label: MomentLabel = None) -> BeliefAt
     begin_str = "begin"
     close_str = "close"
     knee_rope = create_rope(sports_rope, knee_str)
-    insert_planunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
+    insert_planunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
     insert_planunit_beliefatom.set_jkey(plan_rope_str(), knee_rope)
     insert_planunit_beliefatom.set_jvalue(begin_str, knee_begin)
     insert_planunit_beliefatom.set_jvalue(close_str, knee_close)

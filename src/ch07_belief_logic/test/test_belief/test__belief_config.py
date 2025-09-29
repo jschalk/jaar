@@ -3,16 +3,17 @@ from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch07_belief_logic._ref.ch07_keywords import (
-    LabelTerm_str,
+    Ch01Keywords as wx,
+    Ch02Keywords as wx,
+    Ch03Keywords as wx,
+    Ch06Keywords as wx,
     NameTerm_str,
     RopeTerm_str,
     TitleTerm_str,
     active_str,
-    addin_str,
     all_voice_cred_str,
     all_voice_debt_str,
     awardee_title_str,
-    begin_str,
     belief_groupunit_str,
     belief_name_str,
     belief_plan_awardunit_str,
@@ -26,7 +27,6 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     belief_voiceunit_str,
     beliefunit_str,
     class_type_str,
-    close_str,
     credor_pool_str,
     credor_respect_str,
     debtor_pool_str,
@@ -43,9 +43,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     fund_agenda_take_str,
     fund_cease_str,
     fund_give_str,
-    fund_iota_str,
     fund_onset_str,
-    fund_pool_str,
     fund_ratio_str,
     fund_take_str,
     give_force_str,
@@ -62,14 +60,12 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     jvalues_str,
     keeps_buildable_str,
     keeps_justified_str,
-    knot_str,
     max_tree_traverse_str,
     moment_label_str,
     morph_str,
     numor_str,
     offtrack_fund_str,
     party_title_str,
-    penny_str,
     plan_rope_str,
     pledge_str,
     problem_bool_str,
@@ -82,7 +78,6 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     reason_state_str,
     reason_upper_str,
     respect_bit_str,
-    sqlite_datatype_str,
     star_str,
     status_str,
     stop_calc_str,
@@ -245,7 +240,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesKeysExist():
                     )
                     assert set(attr_dict.keys()) == {
                         class_type_str(),
-                        sqlite_datatype_str(),
+                        wx.sqlite_datatype,
                         "populate_by_cashout",
                     }
 
@@ -304,8 +299,8 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         morph_str(),
         denom_str(),
         pledge_str(),
-        close_str(),
-        addin_str(),
+        wx.close,
+        wx.addin,
         numor_str(),
         star_str(),
         stop_want_str(),
@@ -320,13 +315,13 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         healerunit_ratio_str(),
         tree_level_str(),
         task_str(),
-        fund_iota_str(),
+        wx.fund_iota,
         fund_ratio_str(),
         range_evaluated_str(),
         problem_bool_str(),
         gogo_want_str(),
         plan_rope_str(),
-        begin_str(),
+        wx.begin,
     }
     assert belief_groupunit_args == {
         moment_label_str(),
@@ -335,11 +330,11 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         credor_pool_str(),
         fund_give_str(),
         group_title_str(),
-        knot_str(),
+        wx.knot,
         fund_agenda_give_str(),
         fund_agenda_take_str(),
         fund_take_str(),
-        fund_iota_str(),
+        wx.fund_iota,
     }
 
 
@@ -358,7 +353,7 @@ def g_sqlitetype(
     dimen = config.get(key1)
     j_dict = dimen.get(key2)
     j_arg = j_dict.get(key3)
-    return j_arg.get(sqlite_datatype_str())
+    return j_arg.get(wx.sqlite_datatype)
 
 
 def g_popcashout(
@@ -382,7 +377,7 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     #             for level3_key, attr_dict in fm_attribute_dict.items():
     #                 dimem = attribute_dict.get("abbreviation")
     #                 x_class_type = attr_dict.get(class_type_str())
-    #                 x_sqlite_datatype = attr_dict.get(sqlite_datatype_str())
+    #                 x_sqlite_datatype = attr_dict.get(wx.sqlite_datatype)
     #                 print(
     #                     f"""    assert g_class_type(config, {dimem}, {level2_key[0:2]}, "{level3_key}") == "{x_class_type}" """
     #                 )
@@ -513,9 +508,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrgrou, jk, group_title_str()) == "TEXT"
     assert g_popcashout(cfig, blrgrou, jk, group_title_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jv, knot_str()) == "str"
-    assert g_sqlitetype(cfig, blrgrou, jv, knot_str()) == "TEXT"
-    assert g_popcashout(cfig, blrgrou, jv, knot_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, wx.knot) == "str"
+    assert g_sqlitetype(cfig, blrgrou, jv, wx.knot) == "TEXT"
+    assert g_popcashout(cfig, blrgrou, jv, wx.knot) == True
 
     assert g_class_type(cfig, blrgrou, jv, debtor_pool_str()) == "float"
     assert g_sqlitetype(cfig, blrgrou, jv, debtor_pool_str()) == "REAL"
@@ -541,9 +536,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrgrou, jv, fund_take_str()) == "REAL"
     assert g_popcashout(cfig, blrgrou, jv, fund_take_str()) == True
 
-    assert g_class_type(cfig, blrgrou, jv, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, blrgrou, jv, fund_iota_str()) == "REAL"
-    assert g_popcashout(cfig, blrgrou, jv, fund_iota_str()) == True
+    assert g_class_type(cfig, blrgrou, jv, wx.fund_iota) == "float"
+    assert g_sqlitetype(cfig, blrgrou, jv, wx.fund_iota) == "REAL"
+    assert g_popcashout(cfig, blrgrou, jv, wx.fund_iota) == True
 
     assert g_class_type(cfig, blrawar, jk, awardee_title_str()) == TitleTerm_str()
     assert g_sqlitetype(cfig, blrawar, jk, awardee_title_str()) == "TEXT"
@@ -685,9 +680,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, fund_cease_str()) == "REAL"
     assert g_popcashout(cfig, blrplan, jv, fund_cease_str()) == True
 
-    assert g_class_type(cfig, blrplan, jv, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jv, fund_iota_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jv, fund_iota_str()) == True
+    assert g_class_type(cfig, blrplan, jv, wx.fund_iota) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, wx.fund_iota) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, wx.fund_iota) == True
 
     assert g_class_type(cfig, blrplan, jv, fund_onset_str()) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, fund_onset_str()) == "REAL"
@@ -721,17 +716,17 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, task_str()) == "INTEGER"
     assert g_popcashout(cfig, blrplan, jv, task_str()) == True
 
-    assert g_class_type(cfig, blrplan, jv, addin_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jv, addin_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jv, addin_str()) == False
+    assert g_class_type(cfig, blrplan, jv, wx.addin) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, wx.addin) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, wx.addin) == False
 
-    assert g_class_type(cfig, blrplan, jv, begin_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jv, begin_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jv, begin_str()) == False
+    assert g_class_type(cfig, blrplan, jv, wx.begin) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, wx.begin) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, wx.begin) == False
 
-    assert g_class_type(cfig, blrplan, jv, close_str()) == "float"
-    assert g_sqlitetype(cfig, blrplan, jv, close_str()) == "REAL"
-    assert g_popcashout(cfig, blrplan, jv, close_str()) == False
+    assert g_class_type(cfig, blrplan, jv, wx.close) == "float"
+    assert g_sqlitetype(cfig, blrplan, jv, wx.close) == "REAL"
+    assert g_popcashout(cfig, blrplan, jv, wx.close) == False
 
     assert g_class_type(cfig, blrplan, jv, denom_str()) == "int"
     assert g_sqlitetype(cfig, blrplan, jv, denom_str()) == "INTEGER"
@@ -797,21 +792,21 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blfunit, jv, debtor_respect_str()) == "REAL"
     assert g_popcashout(cfig, blfunit, jv, debtor_respect_str()) == False
 
-    assert g_class_type(cfig, blfunit, jv, fund_iota_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, fund_iota_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, fund_iota_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.fund_iota) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.fund_iota) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.fund_iota) == False
 
-    assert g_class_type(cfig, blfunit, jv, fund_pool_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, fund_pool_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, fund_pool_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.fund_pool) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.fund_pool) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.fund_pool) == False
 
     assert g_class_type(cfig, blfunit, jv, max_tree_traverse_str()) == "int"
     assert g_sqlitetype(cfig, blfunit, jv, max_tree_traverse_str()) == "INTEGER"
     assert g_popcashout(cfig, blfunit, jv, max_tree_traverse_str()) == False
 
-    assert g_class_type(cfig, blfunit, jv, penny_str()) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, penny_str()) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, penny_str()) == False
+    assert g_class_type(cfig, blfunit, jv, wx.penny) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.penny) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.penny) == False
 
     assert g_class_type(cfig, blfunit, jv, respect_bit_str()) == "float"
     assert g_sqlitetype(cfig, blfunit, jv, respect_bit_str()) == "REAL"
@@ -851,7 +846,7 @@ def test_get_belief_config_dict_ReturnsObj_EachArgHasOne_sqlite_datatype():
         for dimen_key, args_dict in dimen_dict.items():
             if dimen_key in {"jkeys", "jvalues"}:
                 for x_arg, arg_dict in args_dict.items():
-                    arg_type = arg_dict.get(sqlite_datatype_str())
+                    arg_type = arg_dict.get(wx.sqlite_datatype)
                     if all_args.get(x_arg) is None:
                         all_args[x_arg] = set()
                     all_args.get(x_arg).add(arg_type)
@@ -908,9 +903,9 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(irrational_voice_debt_points_str()) == "float"
     assert belief_calc_args_type_dict.get(voice_cred_points_str()) == "float"
     assert belief_calc_args_type_dict.get(voice_debt_points_str()) == "float"
-    assert belief_calc_args_type_dict.get(addin_str()) == "float"
-    assert belief_calc_args_type_dict.get(begin_str()) == "float"
-    assert belief_calc_args_type_dict.get(close_str()) == "float"
+    assert belief_calc_args_type_dict.get(wx.addin) == "float"
+    assert belief_calc_args_type_dict.get(wx.begin) == "float"
+    assert belief_calc_args_type_dict.get(wx.close) == "float"
     assert belief_calc_args_type_dict.get(denom_str()) == "int"
     assert belief_calc_args_type_dict.get(gogo_want_str()) == "float"
     assert belief_calc_args_type_dict.get(star_str()) == "int"
@@ -958,10 +953,10 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(tree_traverse_count_str()) == "int"
     assert belief_calc_args_type_dict.get(credor_respect_str()) == "float"
     assert belief_calc_args_type_dict.get(debtor_respect_str()) == "float"
-    assert belief_calc_args_type_dict.get(fund_iota_str()) == "float"
-    assert belief_calc_args_type_dict.get(fund_pool_str()) == "float"
+    assert belief_calc_args_type_dict.get(wx.fund_iota) == "float"
+    assert belief_calc_args_type_dict.get(wx.fund_pool) == "float"
     assert belief_calc_args_type_dict.get(max_tree_traverse_str()) == "int"
-    assert belief_calc_args_type_dict.get(penny_str()) == "float"
+    assert belief_calc_args_type_dict.get(wx.penny) == "float"
     assert belief_calc_args_type_dict.get(respect_bit_str()) == "float"
     assert belief_calc_args_type_dict.get(tally_str()) == "int"
     assert len(belief_calc_args_type_dict) == 72

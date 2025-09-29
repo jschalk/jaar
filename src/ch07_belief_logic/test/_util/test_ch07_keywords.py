@@ -1,5 +1,6 @@
 from src.ch07_belief_logic._ref.ch07_keywords import (
     BeliefName_str,
+    Ch03Keywords as wx,
     ancestors_str,
     attributes_str,
     belief_groupunit_str,
@@ -27,7 +28,6 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     max_tree_traverse_str,
     offtrack_fund_str,
     offtrack_kids_star_set_str,
-    penny_str,
     planroot_str,
     reason_contexts_str,
     respect_bit_str,
@@ -70,7 +70,6 @@ def test_str_functions_ReturnsObj():
     assert max_tree_traverse_str() == "max_tree_traverse"
     assert offtrack_fund_str() == "offtrack_fund"
     assert offtrack_kids_star_set_str() == "offtrack_kids_star_set"
-    assert penny_str() == "penny"
     assert planroot_str() == "planroot"
     assert respect_bit_str() == "respect_bit"
     assert reason_contexts_str() == "reason_contexts"

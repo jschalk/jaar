@@ -4,7 +4,7 @@ from src.ch02_rope_logic.rope import (
     get_default_nexus_label as root_label,
 )
 from src.ch05_reason_logic._ref.ch05_keywords import (
-    knot_str,
+    Ch02Keywords as wx,
     reason_divisor_str,
     reason_lower_str,
     reason_state_str,
@@ -43,7 +43,7 @@ def test_CaseUnit_Exists():
     assert obj_attrs == {
         status_str(),
         task_str(),
-        knot_str(),
+        wx.knot,
         reason_divisor_str(),
         reason_upper_str(),
         reason_lower_str(),

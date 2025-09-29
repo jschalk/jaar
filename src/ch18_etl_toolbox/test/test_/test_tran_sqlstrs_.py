@@ -16,6 +16,7 @@ from src.ch17_idea_logic.idea_db_tool import (
     get_idea_into_dimen_raw_query,
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch11Keywords as wx,
     belief_groupunit_str,
     belief_name_str,
     belief_net_amount_str,
@@ -29,7 +30,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    bud_time_str,
     cumulative_minute_str,
     error_message_str,
     event_int_str,
@@ -48,7 +48,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     moment_timeoffi_str,
     moment_voice_nets_str,
     momentunit_str,
-    tran_time_str,
     translate_core_str,
     translate_label_str,
     translate_name_str,
@@ -341,13 +340,13 @@ def test_INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
 INSERT INTO {moment_event_time_agg_str()} ({moment_label_str()}, {event_int_str()}, agg_time)
 SELECT {moment_label_str()}, {event_int_str()}, agg_time
 FROM (
-    SELECT {moment_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    SELECT {moment_label_str()}, {event_int_str()}, {wx.tran_time} as agg_time
     FROM moment_paybook_raw
-    GROUP BY {moment_label_str()}, {event_int_str()}, {tran_time_str()}
+    GROUP BY {moment_label_str()}, {event_int_str()}, {wx.tran_time}
     UNION 
-    SELECT {moment_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
+    SELECT {moment_label_str()}, {event_int_str()}, {wx.bud_time} as agg_time
     FROM moment_budunit_raw
-    GROUP BY {moment_label_str()}, {event_int_str()}, {bud_time_str()}
+    GROUP BY {moment_label_str()}, {event_int_str()}, {wx.bud_time}
 )
 ORDER BY {moment_label_str()}, {event_int_str()}, agg_time
 ;
@@ -387,7 +386,7 @@ CREATE TABLE IF NOT EXISTS {moment_ote1_agg_str()} (
   {moment_label_str()} TEXT
 , {belief_name_str()} TEXT
 , {event_int_str()} INTEGER
-, {bud_time_str()} INTEGER
+, {wx.bud_time} INTEGER
 , error_message TEXT
 )
 ;
@@ -402,18 +401,18 @@ def test_INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR_Exists():
     # ESTABLISH
     momentbud_h_raw_tablename = create_prime_tablename(moment_budunit_str(), "h", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()})
-SELECT {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
+INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {belief_name_str()}, {event_int_str()}, {wx.bud_time})
+SELECT {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {wx.bud_time}
 FROM (
     SELECT 
       {moment_label_str()}_inx {moment_label_str()}
     , {belief_name_str()}_inx {belief_name_str()}
     , {event_int_str()}
-    , {bud_time_str()}
+    , {wx.bud_time}
     FROM {momentbud_h_raw_tablename}
-    GROUP BY {moment_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {bud_time_str()}
+    GROUP BY {moment_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {wx.bud_time}
 )
-ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
+ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {wx.bud_time}
 ;
 """
     # WHEN / THEN

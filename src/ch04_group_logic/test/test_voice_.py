@@ -2,6 +2,7 @@ from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_RespectBit_if_None
 from src.ch04_group_logic._ref.ch04_keywords import (
+    Ch02Keywords as wx,
     credor_pool_str,
     debtor_pool_str,
     fund_agenda_give_str,
@@ -12,7 +13,6 @@ from src.ch04_group_logic._ref.ch04_keywords import (
     fund_take_str,
     inallocable_voice_debt_points_str,
     irrational_voice_debt_points_str,
-    knot_str,
     memberships_str,
     respect_bit_str,
     voice_cred_points_str,
@@ -64,7 +64,7 @@ def test_VoiceUnit_Exists():
         memberships_str(),
         respect_bit_str(),
         voice_name_str(),
-        knot_str(),
+        wx.knot,
         voice_cred_points_str(),
         voice_debt_points_str(),
     }
@@ -92,7 +92,7 @@ def test_VoiceUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
         voiceunit_shop(voice_name=texas_str, knot=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {knot_str()}: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {wx.knot}: '{slash_str}'"
     )
 
 
