@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_RespectBit_if_None
-from src.ch04_group_logic._ref.ch04_keywords import (
+from src.ch04_voice_logic._ref.ch04_keywords import (
     Ch02Keywords as wx,
     credor_pool_str,
     debtor_pool_str,
@@ -19,7 +19,7 @@ from src.ch04_group_logic._ref.ch04_keywords import (
     voice_debt_points_str,
     voice_name_str,
 )
-from src.ch04_group_logic.voice import VoiceUnit, voiceunit_shop
+from src.ch04_voice_logic.voice import VoiceUnit, voiceunit_shop
 
 
 def test_VoiceUnit_Exists():

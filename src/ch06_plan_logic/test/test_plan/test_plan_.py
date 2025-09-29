@@ -1,7 +1,7 @@
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
-from src.ch04_group_logic.group import awardunit_shop
-from src.ch04_group_logic.labor import laborunit_shop
+from src.ch04_voice_logic.group import awardunit_shop
+from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch06_plan_logic._ref.ch06_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,

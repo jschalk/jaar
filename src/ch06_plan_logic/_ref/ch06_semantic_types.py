@@ -1,4 +1,4 @@
-from src.ch04_group_logic._ref.ch04_semantic_types import (
+from src.ch04_voice_logic._ref.ch04_semantic_types import (
     GroupTitle,
     LabelTerm,
     MomentLabel,

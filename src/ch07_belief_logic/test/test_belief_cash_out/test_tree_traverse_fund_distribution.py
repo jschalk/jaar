@@ -2,8 +2,8 @@ from dataclasses import dataclass
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import RopeTerm, to_rope
 from src.ch03_finance_logic.finance_config import default_fund_pool
-from src.ch04_group_logic.group import awardline_shop, awardunit_shop
-from src.ch04_group_logic.voice import voiceunit_shop
+from src.ch04_voice_logic.group import awardline_shop, awardunit_shop
+from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch07_belief_logic.test._util.ch07_examples import (

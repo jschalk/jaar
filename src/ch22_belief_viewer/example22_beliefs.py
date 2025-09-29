@@ -1,5 +1,5 @@
-from src.ch04_group_logic.group import awardunit_shop
-from src.ch04_group_logic.labor import laborunit_shop
+from src.ch04_voice_logic.group import awardunit_shop
+from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
 from src.ch07_belief_logic.belief_tool import set_case_attr
 from src.ch07_belief_logic.test._util.ch07_examples import (

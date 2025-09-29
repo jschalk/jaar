@@ -5,8 +5,8 @@ from src.ch02_rope_logic.rope import (
     is_sub_rope,
     to_rope,
 )
-from src.ch04_group_logic.group import awardunit_shop
-from src.ch04_group_logic.labor import laborunit_shop
+from src.ch04_voice_logic.group import awardunit_shop
+from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch05_reason_logic.reason import caseunit_shop, factunit_shop, reasonunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop

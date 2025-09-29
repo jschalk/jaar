@@ -1,7 +1,7 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
-from src.ch04_group_logic._ref.ch04_keywords import (
+from src.ch04_voice_logic._ref.ch04_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     credor_pool_str,
@@ -13,7 +13,7 @@ from src.ch04_group_logic._ref.ch04_keywords import (
     group_title_str,
     memberships_str,
 )
-from src.ch04_group_logic.group import GroupUnit, groupunit_shop, membership_shop
+from src.ch04_voice_logic.group import GroupUnit, groupunit_shop, membership_shop
 
 
 def test_GroupUnit_Exists():

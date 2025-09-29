@@ -1,6 +1,6 @@
 from src.ch02_rope_logic.rope import create_rope
-from src.ch04_group_logic.group import awardunit_shop
-from src.ch04_group_logic.labor import laborunit_shop
+from src.ch04_voice_logic.group import awardunit_shop
+from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch05_reason_logic.reason import (
     caseunit_shop,
     factunit_shop,

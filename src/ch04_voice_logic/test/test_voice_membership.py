@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
-from src.ch04_group_logic.group import membership_shop
-from src.ch04_group_logic.voice import voiceunit_shop
+from src.ch04_voice_logic.group import membership_shop
+from src.ch04_voice_logic.voice import voiceunit_shop
 
 
 def test_VoiceUnit_set_membership_SetsAttr_memberships():

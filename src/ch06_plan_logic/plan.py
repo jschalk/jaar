@@ -21,7 +21,7 @@ from src.ch03_finance_logic.finance_config import (
     FundNum,
     default_fund_iota_if_None,
 )
-from src.ch04_group_logic.group import (
+from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,
     AwardUnit,
@@ -30,7 +30,7 @@ from src.ch04_group_logic.group import (
     awardline_shop,
     awardunits_get_from_dict,
 )
-from src.ch04_group_logic.labor import (
+from src.ch04_voice_logic.labor import (
     LaborHeir,
     LaborUnit,
     laborheir_shop,

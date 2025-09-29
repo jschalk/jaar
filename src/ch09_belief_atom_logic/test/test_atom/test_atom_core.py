@@ -1,4 +1,4 @@
-from src.ch04_group_logic.voice import voiceunit_shop
+from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     DELETE_str,
