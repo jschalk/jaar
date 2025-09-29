@@ -9,7 +9,6 @@ from src.ch03_finance_logic._ref.ch03_keywords import (
     RespectNum_str,
     fund_iota_str,
     fund_pool_str,
-    knot_str,
     magnitude_str,
     penny_str,
 )
@@ -35,7 +34,6 @@ def test_str_functions_ReturnsObj():
     assert MoneyUnit_str() == "MoneyUnit"
     assert PennyNum_str() == "PennyNum"
     assert RespectNum_str() == "RespectNum"
-    assert knot_str() == "knot"
     assert fund_pool_str() == "fund_pool"
     assert fund_iota_str() == "fund_iota"
     assert magnitude_str() == "magnitude"

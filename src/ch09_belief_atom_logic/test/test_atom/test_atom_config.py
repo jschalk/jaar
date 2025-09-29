@@ -5,11 +5,9 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch06Keywords as wx,
+    Ch07Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    NameTerm_str,
-    RopeTerm_str,
-    TitleTerm_str,
     awardee_title_str,
     belief_groupunit_str,
     belief_plan_awardunit_str,
@@ -598,7 +596,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(belief_voiceunit_str(), voice_name_str()) == NameTerm_str()
+    assert get_class_type(belief_voiceunit_str(), voice_name_str()) == wx.NameTerm
     assert get_class_type(belief_planunit_str(), gogo_want_str()) == "float"
 
 
@@ -606,10 +604,10 @@ def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
     x_allowed_class_types = {
         "int",
-        NameTerm_str(),
-        TitleTerm_str(),
+        wx.NameTerm,
+        wx.TitleTerm,
         wx.LabelTerm,
-        RopeTerm_str(),
+        wx.RopeTerm,
         "float",
         "bool",
         "TimeLinePoint",
@@ -666,10 +664,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(voice_name_str()) == NameTerm_str()
+    assert x_class_types.get(voice_name_str()) == wx.NameTerm
     assert x_class_types.get(wx.addin) == "float"
-    assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
-    assert x_class_types.get(reason_context_str()) == RopeTerm_str()
+    assert x_class_types.get(awardee_title_str()) == wx.TitleTerm
+    assert x_class_types.get(reason_context_str()) == wx.RopeTerm
     assert x_class_types.get("reason_active_requisite") == "bool"
     assert x_class_types.get(wx.begin) == "float"
     assert x_class_types.get(respect_bit_str()) == "float"
@@ -682,31 +680,31 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("reason_divisor") == "int"
-    assert x_class_types.get(fact_context_str()) == RopeTerm_str()
+    assert x_class_types.get(fact_context_str()) == wx.RopeTerm
     assert x_class_types.get(fact_upper_str()) == "float"
     assert x_class_types.get(fact_lower_str()) == "float"
     assert x_class_types.get(wx.fund_iota) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_title_str()) == TitleTerm_str()
-    assert x_class_types.get(healer_name_str()) == NameTerm_str()
+    assert x_class_types.get(group_title_str()) == wx.TitleTerm
+    assert x_class_types.get(healer_name_str()) == wx.NameTerm
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get(reason_state_str()) == RopeTerm_str()
+    assert x_class_types.get(reason_state_str()) == wx.RopeTerm
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(numor_str()) == "int"
     assert x_class_types.get("reason_lower") == "float"
     assert x_class_types.get(wx.penny) == "float"
-    assert x_class_types.get("fact_state") == RopeTerm_str()
+    assert x_class_types.get("fact_state") == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(plan_rope_str()) == RopeTerm_str()
+    assert x_class_types.get(plan_rope_str()) == wx.RopeTerm
     assert x_class_types.get(solo_str()) == "int"
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(party_title_str()) == TitleTerm_str()
+    assert x_class_types.get(party_title_str()) == wx.TitleTerm
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

@@ -1,7 +1,7 @@
 from pandas import DataFrame
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate_logic._ref.ch16_keywords import (
-    RopeTerm_str,
+    Ch07Keywords as wx,
     reason_context_str,
     voice_name_str,
 )
@@ -79,7 +79,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = "Sue"
 #     zia_otx = "Zia"
 #     zia_inx = "Zia"
-#     x_titlemap = mapunit_shop(NameTerm_str(), face_name="Sue")
+#     x_titlemap = mapunit_shop(wx.NameTerm, face_name="Sue")
 #     x_titlemap.set_otx2inx(sue_otx, sue_inx)
 #     x_titlemap.set_otx2inx(zia_otx, zia_inx)
 #     return x_titlemap
@@ -90,7 +90,7 @@ def get_suita_namemap() -> NameMap:
 #     sue_inx = f"Sue{default_knot_if_None()}"
 #     zia_otx = "Zia"
 #     zia_inx = f"Zia{default_knot_if_None()}"
-#     x_titlemap = mapunit_shop(TitleTerm_str(), face_name="Sue")
+#     x_titlemap = mapunit_shop(wx.TitleTerm, face_name="Sue")
 #     x_titlemap.set_otx2inx(sue_otx, sue_inx)
 #     x_titlemap.set_otx2inx(zia_otx, zia_inx)
 #     return x_titlemap
@@ -161,7 +161,7 @@ def get_casa_maison_translateunit_set_by_otx2inx() -> TranslateUnit:
     sweep_inx_rope = create_rope(clean_inx_rope, sweep_str)
 
     sue_translateunit = translateunit_shop("Sue", 7)
-    rx = RopeTerm_str()
+    rx = wx.RopeTerm
     sue_translateunit.set_otx2inx(rx, otx_amy45_rope, inx_amy87_rope)
     sue_translateunit.set_otx2inx(rx, casa_otx_rope, casa_inx_rope)
     sue_translateunit.set_otx2inx(rx, clean_otx_rope, clean_inx_rope)

@@ -11,7 +11,7 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
 )
 from src.ch16_translate_logic.translate_main import translateunit_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
-    NameTerm_str,
+    Ch07Keywords as wx,
     credor_respect_str,
     group_title_str,
     moment_label_str,
@@ -195,9 +195,9 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario1_VoiceName(
     sue_inx = "Suita"
     bob_inx = "Bobita"
     yao_translateunit = translateunit_shop(yao_str)
-    yao_translateunit.set_otx2inx(NameTerm_str(), xio_otx, xio_inx)
-    yao_translateunit.set_otx2inx(NameTerm_str(), sue_otx, sue_inx)
-    yao_translateunit.set_otx2inx(NameTerm_str(), bob_otx, bob_inx)
+    yao_translateunit.set_otx2inx(wx.NameTerm, xio_otx, xio_inx)
+    yao_translateunit.set_otx2inx(wx.NameTerm, sue_otx, sue_inx)
+    yao_translateunit.set_otx2inx(wx.NameTerm, bob_otx, bob_inx)
     otx_dt = DataFrame(
         columns=[moment_label_str(), voice_name_str(), voice_cred_points_str()]
     )

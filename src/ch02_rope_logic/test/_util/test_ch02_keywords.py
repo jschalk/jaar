@@ -1,15 +1,4 @@
-from src.ch02_rope_logic._ref.ch02_keywords import (
-    Ch02Keywords,
-    KnotTerm_str,
-    LabelTerm_str,
-    MomentLabel_str,
-    NameTerm_str,
-    NexusLabel_str,
-    RopeTerm_str,
-    TitleTerm_str,
-    knot_str,
-    parent_rope_str,
-)
+from src.ch02_rope_logic._ref.ch02_keywords import Ch02Keywords
 
 
 def test_Ch02Keywords_AttributeNamesEqualValues():
@@ -25,8 +14,4 @@ def test_Ch02Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert NexusLabel_str() == "NexusLabel"
-    assert LabelTerm_str() == "LabelTerm"
-    assert KnotTerm_str() == "KnotTerm"
-    assert knot_str() == "knot"
-    assert MomentLabel_str() == "MomentLabel"
+    pass

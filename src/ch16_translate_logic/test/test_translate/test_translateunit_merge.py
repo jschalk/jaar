@@ -1,5 +1,5 @@
 from pytest import raises as pytest_raises
-from src.ch16_translate_logic._ref.ch16_keywords import NameTerm_str
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
     get_clean_ropemap,
@@ -142,7 +142,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario7_namemap_Inheri
     new_translateunit = translateunit_shop(sue_str, event1)
     bob_otx = "Bob"
     bob_inx = "Bobby"
-    new_translateunit.set_otx2inx(NameTerm_str(), bob_otx, bob_inx)
+    new_translateunit.set_otx2inx(wx.NameTerm, bob_otx, bob_inx)
     assert new_translateunit.namemap != get_suita_namemap()
     assert new_translateunit.nameterm_exists(bob_otx, bob_inx)
 
