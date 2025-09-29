@@ -12,8 +12,8 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch19Keywords as wx,
     belief_net_amount_str,
-    moment_kpi001_voice_nets_str,
     moment_label_str,
     moment_voice_nets_str,
     plan_rope_str,
@@ -42,7 +42,7 @@ VALUES
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_voice_nets_tablename = moment_kpi001_voice_nets_str()
+        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN
@@ -103,7 +103,7 @@ INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {wx.belief_name}, {pl
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)
-        moment_kpi001_voice_nets_tablename = moment_kpi001_voice_nets_str()
+        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN

@@ -1,10 +1,6 @@
 from src.ch19_kpi_toolbox._ref.ch19_keywords import *
 
 
-def WorldName_str() -> str:
-    return "WorldName"
-
-
 class Ch20Keywords(str, Enum):
     BeliefName = "BeliefName"
     BitNum = "BitNum"

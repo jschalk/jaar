@@ -1,4 +1,4 @@
-from src.ch98_docs_builder._ref.ch98_keywords import Ch98Keywords, rationale_str
+from src.ch98_docs_builder._ref.ch98_keywords import Ch98Keywords
 
 
 def test_Ch98Keywords_AttributeNamesEqualValues():
@@ -14,5 +14,4 @@ def test_Ch98Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-
-    assert rationale_str() == "rationale"
+    pass

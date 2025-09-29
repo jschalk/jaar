@@ -1,9 +1,4 @@
-from src.ch19_kpi_toolbox._ref.ch19_keywords import (
-    Ch19Keywords,
-    default_kpi_bundle_str,
-    moment_kpi001_voice_nets_str,
-    moment_kpi002_belief_pledges_str,
-)
+from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords, Ch19Keywords as wx
 
 
 def test_Ch19Keywords_AttributeNamesEqualValues():
@@ -20,6 +15,6 @@ def test_Ch19Keywords_AttributeNamesEqualValues():
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
 
-    assert default_kpi_bundle_str() == "default_kpi_bundle"
-    assert moment_kpi001_voice_nets_str() == "moment_kpi001_voice_nets"
-    assert moment_kpi002_belief_pledges_str() == "moment_kpi002_belief_pledges"
+    assert wx.default_kpi_bundle == "default_kpi_bundle"
+    assert wx.moment_kpi001_voice_nets == "moment_kpi001_voice_nets"
+    assert wx.moment_kpi002_belief_pledges == "moment_kpi002_belief_pledges"

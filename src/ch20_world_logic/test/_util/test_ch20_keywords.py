@@ -1,4 +1,4 @@
-from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords, WorldName_str
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords
 
 
 def test_Ch20Keywords_AttributeNamesEqualValues():
@@ -14,4 +14,4 @@ def test_Ch20Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert WorldName_str() == "WorldName"
+    pass

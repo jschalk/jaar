@@ -11,8 +11,8 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch19Keywords as wx,
     active_str,
-    moment_kpi002_belief_pledges_str,
     moment_label_str,
     plan_rope_str,
     pledge_str,
@@ -49,7 +49,7 @@ VALUES
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 2
-        moment_kpi002_belief_pledges_tablename = moment_kpi002_belief_pledges_str()
+        moment_kpi002_belief_pledges_tablename = wx.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
 
         # WHEN
@@ -102,7 +102,7 @@ VALUES
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, job_blrplan_tablename) == 4
-        moment_kpi002_belief_pledges_tablename = moment_kpi002_belief_pledges_str()
+        moment_kpi002_belief_pledges_tablename = wx.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
 
         # WHEN

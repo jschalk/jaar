@@ -23,6 +23,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tb
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
     Ch11Keywords as wx,
+    Ch19Keywords as wx,
     amount_str,
     celldepth_str,
     creg_str,
@@ -34,7 +35,6 @@ from src.ch20_world_logic._ref.ch20_keywords import (
     hour_label_str,
     inx_name_str,
     moment_event_time_agg_str,
-    moment_kpi001_voice_nets_str,
     moment_label_str,
     moment_ote1_agg_str,
     moment_voice_nets_str,
@@ -143,7 +143,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not db_table_exists(cursor, moment_ote1_agg_str())
         assert not db_table_exists(cursor, blrpern_job)
         assert not db_table_exists(cursor, moment_voice_nets_str())
-        assert not db_table_exists(cursor, moment_kpi001_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_kpi001_voice_nets)
         assert not os_path_exists(last_run_metrics_path)
 
         # # create beliefunits
@@ -207,7 +207,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert get_row_count(cursor, moment_voice_nets_str()) == 0
         # assert get_row_count(cursor, moment_event_time_agg_str()) == 0
         # assert get_row_count(cursor, moment_ote1_agg_tablename) == 0
-        assert get_row_count(cursor, moment_kpi001_voice_nets_str()) == 0
+        assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 0
         assert os_path_exists(last_run_metrics_path)
 
 
@@ -319,7 +319,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not db_table_exists(cursor, moment_ote1_agg_str())
         assert not os_path_exists(sue37_mandate_path)
         assert not db_table_exists(cursor, moment_voice_nets_str())
-        assert not db_table_exists(cursor, moment_kpi001_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_kpi001_voice_nets)
         # self.moment_agg_tables_to_moment_ote1_agg(cursor)
 
         # # create beliefunits
@@ -365,7 +365,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
         assert get_row_count(cursor, moment_voice_nets_str()) == 1
-        assert get_row_count(cursor, moment_kpi001_voice_nets_str()) == 1
+        assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentTranBook(

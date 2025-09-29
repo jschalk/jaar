@@ -11,12 +11,10 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch19Keywords as wx,
     active_str,
     belief_net_amount_str,
     belief_planunit_str,
-    default_kpi_bundle_str,
-    moment_kpi001_voice_nets_str,
-    moment_kpi002_belief_pledges_str,
     moment_label_str,
     moment_voice_nets_str,
     plan_rope_str,
@@ -48,13 +46,13 @@ VALUES
         cursor.execute(insert_sqlstr)
         assert db_table_exists(cursor, blrplan_job_tablename)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_tablename = moment_kpi001_voice_nets_str()
-        moment_kpi002_tablename = moment_kpi002_belief_pledges_str()
+        moment_kpi001_tablename = wx.moment_kpi001_voice_nets
+        moment_kpi002_tablename = wx.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi001_tablename)
         assert not db_table_exists(cursor, moment_kpi002_tablename)
 
         # WHEN
-        populate_kpi_bundle(cursor, default_kpi_bundle_str())
+        populate_kpi_bundle(cursor, wx.default_kpi_bundle)
 
         # THEN
         assert db_table_exists(cursor, moment_kpi001_tablename)
@@ -62,8 +60,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_tablename) == 2
         assert get_row_count(cursor, moment_kpi002_tablename) == 0
         assert set(get_db_tables(db_conn).keys()) == {
-            moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_pledges_str(),
+            wx.moment_kpi001_voice_nets,
+            wx.moment_kpi002_belief_pledges,
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }
@@ -89,7 +87,7 @@ VALUES
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_voice_nets_tablename = moment_kpi001_voice_nets_str()
+        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN
@@ -99,8 +97,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename) == 2
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
-            moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_pledges_str(),
+            wx.moment_kpi001_voice_nets,
+            wx.moment_kpi002_belief_pledges,
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }

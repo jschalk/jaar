@@ -1,11 +1,10 @@
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch19Keywords as wx,
     active_str,
     belief_net_amount_str,
     belief_planunit_str,
-    moment_kpi001_voice_nets_str,
-    moment_kpi002_belief_pledges_str,
     moment_label_str,
     moment_voice_nets_str,
     plan_rope_str,
@@ -28,7 +27,7 @@ def test_get_create_kpi001_sqlstr_ReturnsObj():
 
     # THEN
     expected_kpi001_sqlstr = f"""
-CREATE TABLE {moment_kpi001_voice_nets_str()} AS
+CREATE TABLE {wx.moment_kpi001_voice_nets} AS
 SELECT
   {moment_voice_nets_str()}.{moment_label_str()}
 , {moment_voice_nets_str()}.{wx.belief_name}
@@ -55,7 +54,7 @@ def test_get_create_kpi002_sqlstr_ReturnsObj():
 
     # THEN
     expected_kpi002_sqlstr = f"""
-CREATE TABLE {moment_kpi002_belief_pledges_str()} AS
+CREATE TABLE {wx.moment_kpi002_belief_pledges} AS
 SELECT
   {moment_label_str()}
 , {wx.belief_name}

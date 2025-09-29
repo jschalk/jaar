@@ -4,9 +4,9 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch19Keywords as wx,
     event_int_str,
     face_name_str,
-    moment_kpi001_voice_nets_str,
     moment_label_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
@@ -24,7 +24,7 @@ def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(
     output_dir = create_path(worlds_dir(), "output")
     fay_world = worldunit_shop(fay_str, worlds_dir(), output_dir)
     fay_world.sheets_input_to_clarity_mstr()
-    kpi001_csv_path = create_path(output_dir, f"{moment_kpi001_voice_nets_str()}.csv")
+    kpi001_csv_path = create_path(output_dir, f"{wx.moment_kpi001_voice_nets}.csv")
     assert not os_path_exists(kpi001_csv_path)
 
     # WHEN
@@ -55,7 +55,7 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
     upsert_sheet(input_file_path, "br00011_ex3", br00011_df)
     fay_world.sheets_input_to_clarity_mstr()
-    kpi001_csv_path = create_path(output_dir, f"{moment_kpi001_voice_nets_str()}.csv")
+    kpi001_csv_path = create_path(output_dir, f"{wx.moment_kpi001_voice_nets}.csv")
     print(f"         {kpi001_csv_path=}")
     assert not os_path_exists(kpi001_csv_path)
 
