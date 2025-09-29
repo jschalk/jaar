@@ -4,11 +4,11 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    awardee_title_str,
     belief_groupunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -31,9 +31,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     fact_lower_str,
     fact_upper_str,
     gogo_want_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
     healer_name_str,
     jkeys_str,
     jvalues_str,
@@ -42,17 +39,11 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     normal_specs_str,
     normal_table_name_str,
     numor_str,
-    party_title_str,
     plan_rope_str,
     planroot_str,
     reason_context_str,
     reason_state_str,
-    respect_bit_str,
-    solo_str,
     stop_want_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
     voice_pool_str,
 )
 from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
@@ -384,10 +375,10 @@ def unique_jkeys():
             new_jkey_keys.remove(plan_rope_str())
         if reason_context_str() in new_jkey_keys:
             new_jkey_keys.remove(reason_context_str())
-        if voice_name_str() in new_jkey_keys:
-            new_jkey_keys.remove(voice_name_str())
-        if group_title_str() in new_jkey_keys:
-            new_jkey_keys.remove(group_title_str())
+        if wx.voice_name in new_jkey_keys:
+            new_jkey_keys.remove(wx.voice_name)
+        if wx.group_title in new_jkey_keys:
+            new_jkey_keys.remove(wx.group_title)
         print(f"{atom_dimen} {new_jkey_keys=}")
         jkey_key_count += len(new_jkey_keys)
         jkey_keys.update(new_jkey_keys)
@@ -411,7 +402,7 @@ def test_get_sorted_jkey_keys_ReturnsObj_belief_voiceunit():
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [voice_name_str()]
+    assert x_sorted_jkey_keys == [wx.voice_name]
 
 
 def test_get_sorted_jkey_keys_ReturnsObj_belief_plan_reason_caseunit():
@@ -526,7 +517,7 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert beliefunit_columns.get(debtor_respect_str()) is not None
     assert beliefunit_columns.get("fund_pool") is not None
     assert beliefunit_columns.get(wx.fund_iota) is not None
-    assert beliefunit_columns.get(respect_bit_str()) is not None
+    assert beliefunit_columns.get(wx.respect_bit) is not None
     assert beliefunit_columns.get(wx.penny) is not None
     assert beliefunit_columns.get("tally") is not None
 
@@ -534,11 +525,11 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     voiceunit_columns = cat_voiceunit.get(columns_str)
     assert len(voiceunit_columns) == 4
     assert voiceunit_columns.get("uid") is not None
-    assert voiceunit_columns.get(voice_name_str()) is not None
-    assert voiceunit_columns.get(voice_cred_points_str()) is not None
-    assert voiceunit_columns.get(voice_debt_points_str()) is not None
+    assert voiceunit_columns.get(wx.voice_name) is not None
+    assert voiceunit_columns.get(wx.voice_cred_points) is not None
+    assert voiceunit_columns.get(wx.voice_debt_points) is not None
 
-    voice_name_dict = voiceunit_columns.get(voice_name_str())
+    voice_name_dict = voiceunit_columns.get(wx.voice_name)
     assert len(voice_name_dict) == 2
     assert voice_name_dict.get(wx.sqlite_datatype) == "TEXT"
     assert voice_name_dict.get("nullable") is False
@@ -596,7 +587,7 @@ def get_class_type(x_dimen: str, x_arg: str) -> str:
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(belief_voiceunit_str(), voice_name_str()) == wx.NameTerm
+    assert get_class_type(belief_voiceunit_str(), wx.voice_name) == wx.NameTerm
     assert get_class_type(belief_planunit_str(), gogo_want_str()) == "float"
 
 
@@ -664,19 +655,19 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(voice_name_str()) == wx.NameTerm
+    assert x_class_types.get(wx.voice_name) == wx.NameTerm
     assert x_class_types.get(wx.addin) == "float"
-    assert x_class_types.get(awardee_title_str()) == wx.TitleTerm
+    assert x_class_types.get(wx.awardee_title) == wx.TitleTerm
     assert x_class_types.get(reason_context_str()) == wx.RopeTerm
     assert x_class_types.get("reason_active_requisite") == "bool"
     assert x_class_types.get(wx.begin) == "float"
-    assert x_class_types.get(respect_bit_str()) == "float"
+    assert x_class_types.get(wx.respect_bit) == "float"
     assert x_class_types.get(wx.close) == "float"
-    assert x_class_types.get(voice_cred_points_str()) == "float"
-    assert x_class_types.get(group_cred_points_str()) == "float"
+    assert x_class_types.get(wx.voice_cred_points) == "float"
+    assert x_class_types.get(wx.group_cred_points) == "float"
     assert x_class_types.get(credor_respect_str()) == "float"
-    assert x_class_types.get(voice_debt_points_str()) == "float"
-    assert x_class_types.get(group_debt_points_str()) == "float"
+    assert x_class_types.get(wx.voice_debt_points) == "float"
+    assert x_class_types.get(wx.group_debt_points) == "float"
     assert x_class_types.get(debtor_respect_str()) == "float"
     assert x_class_types.get(denom_str()) == "int"
     assert x_class_types.get("reason_divisor") == "int"
@@ -687,7 +678,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
     assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_title_str()) == wx.TitleTerm
+    assert x_class_types.get(wx.group_title) == wx.TitleTerm
     assert x_class_types.get(healer_name_str()) == wx.NameTerm
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
@@ -701,10 +692,10 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
     assert x_class_types.get(plan_rope_str()) == wx.RopeTerm
-    assert x_class_types.get(solo_str()) == "int"
+    assert x_class_types.get(wx.solo) == "int"
     assert x_class_types.get(stop_want_str()) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(party_title_str()) == wx.TitleTerm
+    assert x_class_types.get(wx.party_title) == wx.TitleTerm
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

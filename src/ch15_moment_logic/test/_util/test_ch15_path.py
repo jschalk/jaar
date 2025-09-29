@@ -3,8 +3,8 @@ from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 from src.ch15_moment_logic._ref.ch15_keywords import (
+    Ch04Keywords as wx,
     Ch11Keywords as wx,
-    belief_name_str,
     moment_label_str,
 )
 from src.ch15_moment_logic.ch15_path import (
@@ -44,7 +44,7 @@ def test_create_bud_voice_mandate_ledger_path_HasDocString():
     doc_str = create_bud_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")

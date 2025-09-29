@@ -23,7 +23,7 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
 
     # THEN
     assert set(sue_belief_view_dict.keys()) == {
-        # groupunits_str,
+        # wx.groupunits,
         voices_str(),
         planroot_str(),
     }

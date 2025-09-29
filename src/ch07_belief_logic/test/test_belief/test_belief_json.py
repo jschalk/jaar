@@ -7,9 +7,9 @@ from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import (
+    Ch04Keywords as wx,
     factunits_str,
     kids_str,
-    laborunit_str,
     planroot_str,
     reasonunits_str,
     voices_str,
@@ -86,9 +86,9 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     planroot_dict = belief_dict.get(planroot_str())
 
     # THEN
-    assert planroot_dict[laborunit_str()] == x_laborunit.to_dict()
+    assert planroot_dict[wx.laborunit] == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
-    assert planroot_dict[laborunit_str()] == {
+    assert planroot_dict[wx.laborunit] == {
         "_partys": {run_str: run_partyunit.to_dict()}
     }
     assert planroot_dict.get("gogo_want") == x_gogo_want

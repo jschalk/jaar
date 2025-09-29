@@ -10,8 +10,8 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
+    Ch04Keywords as wx,
     active_str,
-    belief_name_str,
     belief_net_amount_str,
     belief_planunit_str,
     default_kpi_bundle_str,
@@ -40,7 +40,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         moment_voice_nets_tablename = moment_voice_nets_str()
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {belief_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -82,7 +82,7 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_WithNoBundleID():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {belief_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})

@@ -2,17 +2,15 @@ from pandas import DataFrame
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch11Keywords as wx,
     amount_str,
-    belief_name_str,
     c400_number_str,
     celldepth_str,
     job_listen_rotations_str,
     moment_label_str,
     monthday_distortion_str,
-    respect_bit_str,
     timeline_label_str,
-    voice_name_str,
     weekday_label_str,
     weekday_order_str,
     yr1_jan1_offset_str,
@@ -33,7 +31,7 @@ def get_ex1_br00000_df() -> DataFrame:
             wx.fund_iota,
             monthday_distortion_str(),
             wx.penny,
-            respect_bit_str(),
+            wx.respect_bit,
             wx.knot,
             timeline_label_str(),
             yr1_jan1_offset_str(),
@@ -50,7 +48,7 @@ def get_ex1_br00001_df() -> DataFrame:
     x_df = DataFrame(
         columns=[
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             wx.quota,
             wx.bud_time,
             celldepth_str(),
@@ -147,7 +145,7 @@ def get_ex2_br00000_df() -> DataFrame:
             wx.fund_iota,
             monthday_distortion_str(),
             wx.penny,
-            respect_bit_str(),
+            wx.respect_bit,
             wx.knot,
             timeline_label_str(),
             yr1_jan1_offset_str(),
@@ -165,7 +163,7 @@ def get_ex2_br00001_df() -> DataFrame:
     x_df = DataFrame(
         columns=[
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             wx.quota,
             wx.bud_time,
             celldepth_str(),
@@ -184,10 +182,10 @@ def get_ex2_br00002_df() -> DataFrame:
     voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
         columns=[
-            voice_name_str(),
+            wx.voice_name,
             amount_str(),
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             wx.tran_time,
         ]
     )

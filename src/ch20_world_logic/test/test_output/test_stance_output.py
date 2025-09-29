@@ -9,11 +9,10 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_stances_dir_path,
 )
 from src.ch20_world_logic._ref.ch20_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     event_int_str,
     face_name_str,
     moment_label_str,
-    voice_name_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -54,8 +53,8 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
         event_int_str(),
         face_name_str(),
         moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -92,8 +91,8 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
         event_int_str(),
         face_name_str(),
         moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -146,8 +145,8 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
         event_int_str(),
         face_name_str(),
         moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -190,7 +189,7 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         face_name_str(),
 #         event_int_str(),
 #         moment_label_str(),
-#         belief_name_str(),
+#         wx.belief_name,
 #         bud_time(),
 #         wx.quota,
 #         celldepth_str(),
@@ -217,8 +216,8 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #         face_name_str(),
 #         event_int_str(),
 #         moment_label_str(),
-#         belief_name_str(),
-#         voice_name_str(),
+#         wx.belief_name,
+#         wx.voice_name,
 #     ]
 #     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)

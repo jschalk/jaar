@@ -11,7 +11,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     belief_net_amount_str,
     moment_kpi001_voice_nets_str,
     moment_label_str,
@@ -35,7 +35,7 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoPledges():
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()}) 
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {belief_net_amount_str()}) 
 VALUES 
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -51,7 +51,7 @@ VALUES
         # THEN
         assert get_table_columns(cursor, moment_kpi001_voice_nets_tablename) == [
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             "funds",
             "fund_rank",
             "pledges_count",
@@ -60,7 +60,7 @@ VALUES
         select_sqlstr = f"""
         SELECT 
   {moment_label_str()}
-, {belief_name_str()}
+, {wx.belief_name}
 , funds
 , fund_rank
 , pledges_count
@@ -88,7 +88,7 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1pledge():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {wx.belief_name}, {belief_net_amount_str()})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -99,7 +99,7 @@ VALUES
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("blrplan", "job", None)
         insert_sqlstr = f"""
-INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {belief_name_str()}, {plan_rope_str()}, {pledge_str()})
+INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {wx.belief_name}, {plan_rope_str()}, {pledge_str()})
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)
@@ -111,7 +111,7 @@ VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 
         # THEN
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename)
-        select_sqlstr = f"""SELECT {moment_label_str()}, {belief_name_str()}, funds, fund_rank, pledges_count FROM {moment_kpi001_voice_nets_tablename}"""
+        select_sqlstr = f"""SELECT {moment_label_str()}, {wx.belief_name}, funds, fund_rank, pledges_count FROM {moment_kpi001_voice_nets_tablename}"""
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(rows)

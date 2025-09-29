@@ -1,8 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch04Keywords as wx,
     Ch11Keywords as wx,
-    belief_name_str,
     event_int_str,
     moment_budunit_str,
     moment_label_str,
@@ -32,7 +32,7 @@ def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():
         create_sound_and_heard_tables(cursor)
         momentbud_h_raw_table = create_prime_tablename(moment_budunit_str(), "h", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {momentbud_h_raw_table} ({event_int_str()}, {moment_label_str()}_inx, {belief_name_str()}_inx, {wx.bud_time})
+INSERT INTO {momentbud_h_raw_table} ({event_int_str()}, {moment_label_str()}_inx, {wx.belief_name}_inx, {wx.bud_time})
 VALUES
   ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})

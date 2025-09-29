@@ -27,11 +27,11 @@ from src.ch12_hub_toolbox.hub_tool import (
 from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     beliefbudhistorys_str,
     job_listen_rotations_str,
     moment_label_str,
     paybook_str,
-    respect_bit_str,
     timeline_str,
 )
 from src.ch15_moment_logic.moment_main import (
@@ -78,7 +78,7 @@ def test_MomentUnit_Exists():
         "offi_times",
         wx.knot,
         wx.fund_iota,
-        respect_bit_str(),
+        wx.respect_bit,
         wx.penny,
         job_listen_rotations_str(),
         "_moment_dir",

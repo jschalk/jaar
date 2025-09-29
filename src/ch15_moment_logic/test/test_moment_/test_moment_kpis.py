@@ -1,15 +1,12 @@
 from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
 from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
-    belief_name_str,
     denom_str,
     morph_str,
     numor_str,
     plan_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 from src.ch15_moment_logic.moment_report import (
     get_moment_guts_agenda_dataframe,
@@ -40,10 +37,10 @@ def test_get_moment_guts_voices_dataframe_ReturnsObj(
 
     # THEN
     voiceunit_colums = {
-        belief_name_str(),
-        voice_name_str(),
-        voice_cred_points_str(),
-        voice_debt_points_str(),
+        wx.belief_name,
+        wx.voice_name,
+        wx.voice_cred_points,
+        wx.voice_debt_points,
         "memberships",
         "fund_give",
         "fund_take",
@@ -84,10 +81,10 @@ def test_get_moment_jobs_voices_dataframe_ReturnsObj(
 
     # THEN
     voiceunit_colums = {
-        belief_name_str(),
-        voice_name_str(),
-        voice_cred_points_str(),
-        voice_debt_points_str(),
+        wx.belief_name,
+        wx.voice_name,
+        wx.voice_cred_points,
+        wx.voice_debt_points,
         "memberships",
         "fund_give",
         "fund_take",
@@ -129,7 +126,7 @@ def test_get_moment_guts_agenda_dataframe_ReturnsObj(
 
     # THEN
     agenda_colums = {
-        belief_name_str(),
+        wx.belief_name,
         "fund_ratio",
         plan_label_str(),
         wx.parent_rope,
@@ -170,7 +167,7 @@ def test_get_moment_jobs_agenda_dataframe_ReturnsObj(env_dir_setup_cleanup):
 
     # THEN
     agenda_colums = {
-        belief_name_str(),
+        wx.belief_name,
         "fund_ratio",
         "plan_label",
         wx.parent_rope,

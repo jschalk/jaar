@@ -10,12 +10,12 @@ from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     beliefbudhistorys_str,
     moment_label_str,
     moment_mstr_dir_str,
     offi_time_str,
     paybook_str,
-    respect_bit_str,
     timeline_str,
 )
 from src.ch15_moment_logic.moment_main import (
@@ -71,7 +71,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
     assert x_dict.get(wx.fund_iota) == default_fund_iota_if_None()
-    assert x_dict.get(respect_bit_str()) == default_RespectBit_if_None()
+    assert x_dict.get(wx.respect_bit) == default_RespectBit_if_None()
     assert x_dict.get(wx.penny) == filter_penny()
     assert (
         x_dict.get(beliefbudhistorys_str()) == amy_moment._get_beliefbudhistorys_dict()
@@ -85,7 +85,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
         beliefbudhistorys_str(),
         wx.knot,
         wx.fund_iota,
-        respect_bit_str(),
+        wx.respect_bit,
         wx.penny,
         paybook_str(),
     }
@@ -109,7 +109,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
         beliefbudhistorys_str(),
         wx.knot,
         wx.fund_iota,
-        respect_bit_str(),
+        wx.respect_bit,
         wx.penny,
     }
 

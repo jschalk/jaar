@@ -8,26 +8,21 @@ from src.ch15_moment_logic.moment_config import get_moment_args_class_types
 from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch07Keywords as wx,
-    awardee_title_str,
-    belief_name_str,
     face_name_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
-    group_title_str,
     healer_name_str,
     hour_label_str,
     moment_label_str,
     month_label_str,
-    party_title_str,
     plan_label_str,
     plan_rope_str,
     reason_context_str,
     reason_state_str,
-    respect_bit_str,
     timeline_label_str,
-    voice_name_str,
     weekday_label_str,
 )
 from src.ch16_translate_logic.map import (
@@ -134,10 +129,10 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert atom_args.issubset(translate_args)
     assert moment_args.issubset(translate_args)
     assert atom_args & (moment_args) == {
-        voice_name_str(),
+        wx.voice_name,
         wx.fund_iota,
         wx.penny,
-        respect_bit_str(),
+        wx.respect_bit,
     }
     assert atom_args.union(moment_args) != translate_args
     assert atom_args.union(moment_args).union({"face_name"}) == translate_args
@@ -199,21 +194,21 @@ def test_get_translateable_args_ReturnsObj():
 
     assert len(get_translateable_args()) == 17
     assert get_translateable_args() == {
-        voice_name_str(),
-        awardee_title_str(),
+        wx.voice_name,
+        wx.awardee_title,
         reason_context_str(),
         face_name_str(),
         fact_context_str(),
         moment_label_str(),
         fact_state_str(),
-        group_title_str(),
+        wx.group_title,
         healer_name_str(),
         hour_label_str(),
         month_label_str(),
         reason_state_str(),
-        belief_name_str(),
+        wx.belief_name,
         plan_rope_str(),
-        party_title_str(),
+        wx.party_title,
         timeline_label_str(),
         weekday_label_str(),
     }
@@ -299,10 +294,10 @@ def test_get_translate_NameTerm_args_ReturnsObj():
 
     # THEN
     assert translate_NameTerm_args == {
-        voice_name_str(),
+        wx.voice_name,
         face_name_str(),
         healer_name_str(),
-        belief_name_str(),
+        wx.belief_name,
     }
     expected_args = {
         x_arg
@@ -318,9 +313,9 @@ def test_get_translate_TitleTerm_args_ReturnsObj():
 
     # THEN
     assert translate_TitleTerm_args == {
-        awardee_title_str(),
-        group_title_str(),
-        party_title_str(),
+        wx.awardee_title,
+        wx.group_title,
+        wx.party_title,
     }
     expected_args = {
         x_arg

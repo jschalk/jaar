@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     brick_valid_str,
     event_int_str,
     face_name_str,
@@ -12,7 +12,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     otx_knot_str,
     otx_rope_str,
     unknown_str_str,
-    voice_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
@@ -46,8 +45,8 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
             event_int_str(),
             face_name_str(),
             moment_label_str(),
-            belief_name_str(),
-            voice_name_str(),
+            wx.belief_name,
+            wx.voice_name,
             otx_rope_str(),
             inx_rope_str(),
         ]
@@ -56,8 +55,8 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
   {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
+, {wx.belief_name}
+, {wx.voice_name}
 , {otx_rope_str()}
 , {inx_rope_str()}
 )"""

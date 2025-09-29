@@ -6,6 +6,7 @@ from src.ch08_timeline_logic.reason_str_func import (
 from src.ch22_belief_viewer._ref.ch22_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
     active_hx_str,
     active_str,
@@ -13,7 +14,6 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     all_voice_debt_str,
     awardheirs_str,
     awardlines_str,
-    awardunits_str,
     cases_str,
     denom_str,
     descendant_pledge_count_str,
@@ -29,8 +29,6 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     healerunit_str,
     is_expanded_str,
     kids_str,
-    laborheir_str,
-    laborunit_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -87,9 +85,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         "root",
         star_str(),
         uid_str(),
-        awardunits_str(),
+        wx.awardunits,
         reasonunits_str(),
-        laborunit_str(),
+        wx.laborunit,
         factunits_str(),
         healerunit_str(),
         wx.begin,
@@ -121,7 +119,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         range_evaluated_str(),
         reasonheirs_str(),
         task_str(),
-        laborheir_str(),
+        wx.laborheir,
         gogo_calc_str(),
         stop_calc_str(),
         fund_share_str(),
@@ -142,7 +140,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
 
     # THEN
     # laborunit
-    mop_labor_dict = mop_dict.get(laborunit_str())
+    mop_labor_dict = mop_dict.get(wx.laborunit)
     mop_partys_dict = mop_labor_dict.get("_partys")
     sue_str = "Sue"
     bob_str = "Bob"
@@ -159,7 +157,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     print(f"{mop_bob_dict=}")
 
     # laborheir
-    mop_labor_dict = mop_dict.get(laborheir_str())
+    mop_labor_dict = mop_dict.get(wx.laborheir)
     mop_partys_dict = mop_labor_dict.get("_partys")
     sue_str = "Sue"
     bob_str = "Bob"
@@ -226,7 +224,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
 
     # THEN
     # awardunits
-    awardunits_dict = casa_dict.get(awardunits_str())
+    awardunits_dict = casa_dict.get(wx.awardunits)
     assert len(awardunits_dict) == 2
     # print(f"{len(awardunits_dict)=}")
     sue_str = "Sue"

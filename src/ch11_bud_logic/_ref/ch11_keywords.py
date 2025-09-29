@@ -21,10 +21,6 @@ def boss_facts_str() -> str:
     return "boss_facts"
 
 
-def bud_belief_name_str() -> str:
-    return "bud_belief_name"
-
-
 def bud_time_str() -> str:
     return "bud_time"
 

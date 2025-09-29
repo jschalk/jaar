@@ -1,6 +1,7 @@
 from src.ch07_belief_logic._ref.ch07_keywords import (
     BeliefName_str,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch07Keywords,
     ancestors_str,
     attributes_str,
@@ -31,11 +32,8 @@ from src.ch07_belief_logic._ref.ch07_keywords import (
     offtrack_kids_star_set_str,
     planroot_str,
     reason_contexts_str,
-    respect_bit_str,
     sum_healerunit_share_str,
     tally_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
     voice_pool_str,
     voices_str,
 )
@@ -83,11 +81,11 @@ def test_str_functions_ReturnsObj():
     assert offtrack_fund_str() == "offtrack_fund"
     assert offtrack_kids_star_set_str() == "offtrack_kids_star_set"
     assert planroot_str() == "planroot"
-    assert respect_bit_str() == "respect_bit"
+    assert wx.respect_bit == "respect_bit"
     assert reason_contexts_str() == "reason_contexts"
     assert sum_healerunit_share_str() == "sum_healerunit_share"
     assert tally_str() == "tally"
     assert voice_pool_str() == "voice_pool"
-    assert voice_cred_points_str() == "voice_cred_points"
-    assert voice_debt_points_str() == "voice_debt_points"
+    assert wx.voice_cred_points == "voice_cred_points"
+    assert wx.voice_debt_points == "voice_debt_points"
     assert voices_str() == "voices"

@@ -3,12 +3,11 @@ from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch20_world_logic._ref.ch20_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     event_int_str,
     face_name_str,
     moment_kpi001_voice_nets_str,
     moment_label_str,
-    voice_name_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
@@ -49,8 +48,8 @@ def test_WorldUnit_create_kpi_csvs_Senario1_Add_CreatesFile(env_dir_setup_cleanu
         event_int_str(),
         face_name_str(),
         moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)

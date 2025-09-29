@@ -4,14 +4,7 @@ from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
 from src.ch04_voice_logic._ref.ch04_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
-    credor_pool_str,
-    debtor_pool_str,
-    fund_agenda_give_str,
-    fund_agenda_take_str,
-    fund_give_str,
-    fund_take_str,
-    group_title_str,
-    memberships_str,
+    Ch04Keywords as wx,
 )
 from src.ch04_voice_logic.group import GroupUnit, groupunit_shop, membership_shop
 
@@ -33,14 +26,14 @@ def test_GroupUnit_Exists():
     assert not x_groupunit.fund_iota
     print(f"{x_groupunit.__dict__=}")
     assert set(x_groupunit.__dict__.keys()) == {
-        group_title_str(),
-        memberships_str(),
-        fund_give_str(),
-        fund_take_str(),
-        fund_agenda_give_str(),
-        fund_agenda_take_str(),
-        credor_pool_str(),
-        debtor_pool_str(),
+        wx.group_title,
+        wx.memberships,
+        wx.fund_give,
+        wx.fund_take,
+        wx.fund_agenda_give,
+        wx.fund_agenda_take,
+        wx.credor_pool,
+        wx.debtor_pool,
         wx.knot,
         wx.fund_iota,
     }

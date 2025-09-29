@@ -5,7 +5,7 @@ from src.ch16_translate_logic.translate_main import (
     default_unknown_str_if_None,
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     belief_voiceunit_str,
     error_message_str,
     event_int_str,
@@ -27,7 +27,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     translate_rope_str,
     translate_title_str,
     unknown_str_str,
-    voice_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_TRLCORE_SOUND_AGG_SQLSTR,
@@ -1311,7 +1310,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario0_Populates
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1346,7 +1345,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario1_Populates
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1389,7 +1388,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario2_
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1424,7 +1423,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario3_
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {belief_name_str()}, {voice_name_str()})
+INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 

@@ -16,9 +16,9 @@ from src.ch17_idea_logic.idea_db_tool import (
     get_idea_into_dimen_raw_query,
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch04Keywords as wx,
     Ch11Keywords as wx,
     belief_groupunit_str,
-    belief_name_str,
     belief_net_amount_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -384,7 +384,7 @@ def test_CREATE_MOMENT_OTE1_AGG_SQLSTR_Exists():
     expected_create_table_sqlstr = f"""
 CREATE TABLE IF NOT EXISTS {moment_ote1_agg_str()} (
   {moment_label_str()} TEXT
-, {belief_name_str()} TEXT
+, {wx.belief_name} TEXT
 , {event_int_str()} INTEGER
 , {wx.bud_time} INTEGER
 , error_message TEXT
@@ -401,18 +401,18 @@ def test_INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR_Exists():
     # ESTABLISH
     momentbud_h_raw_tablename = create_prime_tablename(moment_budunit_str(), "h", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {belief_name_str()}, {event_int_str()}, {wx.bud_time})
-SELECT {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {wx.bud_time}
+INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {wx.belief_name}, {event_int_str()}, {wx.bud_time})
+SELECT {moment_label_str()}, {wx.belief_name}, {event_int_str()}, {wx.bud_time}
 FROM (
     SELECT 
       {moment_label_str()}_inx {moment_label_str()}
-    , {belief_name_str()}_inx {belief_name_str()}
+    , {wx.belief_name}_inx {wx.belief_name}
     , {event_int_str()}
     , {wx.bud_time}
     FROM {momentbud_h_raw_tablename}
-    GROUP BY {moment_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {wx.bud_time}
+    GROUP BY {moment_label_str()}_inx, {wx.belief_name}_inx, {event_int_str()}, {wx.bud_time}
 )
-ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {wx.bud_time}
+ORDER BY {moment_label_str()}, {wx.belief_name}, {event_int_str()}, {wx.bud_time}
 ;
 """
     # WHEN / THEN
@@ -427,7 +427,7 @@ def test_CREATE_MOMENT_VOICE_NETS_SQLSTR_Exists():
         tablename=moment_voice_nets_str(),
         columns_list=[
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             belief_net_amount_str(),
         ],
         column_types=sqlite_types,

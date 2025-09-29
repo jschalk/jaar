@@ -10,8 +10,8 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename,
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
+    Ch04Keywords as wx,
     active_str,
-    belief_name_str,
     moment_kpi002_belief_pledges_str,
     moment_label_str,
     plan_rope_str,
@@ -37,7 +37,7 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
         job_blrplan_tablename = create_prime_tablename("BLRPLAN", "job", None)
         insert_sqlstr = f"""INSERT INTO {job_blrplan_tablename} (
   {moment_label_str()}
-, {belief_name_str()}
+, {wx.belief_name}
 , {plan_rope_str()}
 , {pledge_str()}
 , {active_str()}
@@ -59,7 +59,7 @@ VALUES
         assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
         assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             plan_rope_str(),
             pledge_str(),
             active_str(),
@@ -88,7 +88,7 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
         job_blrplan_tablename = create_prime_tablename("BLRPLAN", "job", None)
         insert_sqlstr = f"""INSERT INTO {job_blrplan_tablename} (
   {moment_label_str()}
-, {belief_name_str()}
+, {wx.belief_name}
 , {plan_rope_str()}
 , {pledge_str()}
 , {active_str()}
@@ -112,7 +112,7 @@ VALUES
         assert db_table_exists(cursor, moment_kpi002_belief_pledges_tablename)
         assert get_table_columns(cursor, moment_kpi002_belief_pledges_tablename) == [
             moment_label_str(),
-            belief_name_str(),
+            wx.belief_name,
             plan_rope_str(),
             pledge_str(),
             active_str(),

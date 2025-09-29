@@ -5,10 +5,10 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    awardee_title_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -23,13 +23,8 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    give_force_str,
     gogo_want_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
     healer_name_str,
-    party_title_str,
     plan_rope_str,
     pledge_str,
     reason_active_requisite_str,
@@ -39,8 +34,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     reason_state_str,
     reason_upper_str,
     stop_want_str,
-    take_force_str,
-    voice_name_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.test._util.ch10_examples import get_beliefdelta_example1
@@ -132,7 +125,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_voice():
 
     dimen = belief_voiceunit_str()
     x_beliefatom = beliefatom_shop(dimen, DELETE_str())
-    x_beliefatom.set_jkey(voice_name_str(), zia_str)
+    x_beliefatom.set_jkey(wx.voice_name, zia_str)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
     # WHEN
@@ -160,7 +153,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     # WHEN
     dimen = belief_voiceunit_str()
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    x_beliefatom.set_jkey(voice_name_str(), zia_str)
+    x_beliefatom.set_jkey(wx.voice_name, zia_str)
     x_voice_cred_points = 55
     x_voice_debt_points = 66
     x_beliefatom.set_jvalue("voice_cred_points", x_voice_cred_points)
@@ -191,7 +184,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_voice():
     # WHEN
     dimen = belief_voiceunit_str()
     x_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    x_beliefatom.set_jkey(voice_name_str(), yao_str)
+    x_beliefatom.set_jkey(wx.voice_name, yao_str)
     yao_voice_cred_points = 55
     x_beliefatom.set_jvalue("voice_cred_points", yao_voice_cred_points)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
@@ -230,12 +223,12 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_membership()
 
     # WHEN
     yao_beliefatom = beliefatom_shop(belief_voice_membership_str(), DELETE_str())
-    yao_beliefatom.set_jkey(group_title_str(), run_str)
-    yao_beliefatom.set_jkey(voice_name_str(), yao_str)
+    yao_beliefatom.set_jkey(wx.group_title, run_str)
+    yao_beliefatom.set_jkey(wx.voice_name, yao_str)
     # print(f"{yao_beliefatom=}")
     zia_beliefatom = beliefatom_shop(belief_voice_membership_str(), DELETE_str())
-    zia_beliefatom.set_jkey(group_title_str(), fly_str)
-    zia_beliefatom.set_jkey(voice_name_str(), zia_str)
+    zia_beliefatom.set_jkey(wx.group_title, fly_str)
+    zia_beliefatom.set_jkey(wx.voice_name, zia_str)
     # print(f"{zia_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
@@ -266,8 +259,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_membership()
 
     # WHEN
     yao_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
-    yao_beliefatom.set_jkey(group_title_str(), run_str)
-    yao_beliefatom.set_jkey(voice_name_str(), yao_str)
+    yao_beliefatom.set_jkey(wx.group_title, run_str)
+    yao_beliefatom.set_jkey(wx.voice_name, yao_str)
     yao_run_group_cred_points = 17
     yao_beliefatom.set_jvalue("group_cred_points", yao_run_group_cred_points)
     print(f"{yao_beliefatom=}")
@@ -301,12 +294,12 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_membership()
 
     # WHEN
     yao_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.UPDATE)
-    yao_beliefatom.set_jkey(group_title_str(), run_str)
-    yao_beliefatom.set_jkey(voice_name_str(), yao_str)
+    yao_beliefatom.set_jkey(wx.group_title, run_str)
+    yao_beliefatom.set_jkey(wx.voice_name, yao_str)
     new_yao_run_group_cred_points = 7
     new_yao_run_group_debt_points = 11
-    yao_beliefatom.set_jvalue(group_cred_points_str(), new_yao_run_group_cred_points)
-    yao_beliefatom.set_jvalue(group_debt_points_str(), new_yao_run_group_debt_points)
+    yao_beliefatom.set_jvalue(wx.group_cred_points, new_yao_run_group_cred_points)
+    yao_beliefatom.set_jvalue(wx.group_debt_points, new_yao_run_group_debt_points)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(yao_beliefatom)
     after_sue_beliefunit = sue_beliefdelta.get_atom_edited_belief(before_sue_beliefunit)
@@ -482,7 +475,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_awardun
     # WHEN
     delete_disc_beliefatom = beliefatom_shop(belief_plan_awardunit_str(), DELETE_str())
     delete_disc_beliefatom.set_jkey(plan_rope_str(), disc_rope)
-    delete_disc_beliefatom.set_jkey(awardee_title_str(), fly_str)
+    delete_disc_beliefatom.set_jkey(wx.awardee_title, fly_str)
     print(f"{delete_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(delete_disc_beliefatom)
@@ -522,9 +515,9 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_update_plan_awardun
     x_take_force = 66
     update_disc_beliefatom = beliefatom_shop(belief_plan_awardunit_str(), wx.UPDATE)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey(awardee_title_str(), run_str)
-    update_disc_beliefatom.set_jvalue(give_force_str(), x_give_force)
-    update_disc_beliefatom.set_jvalue(take_force_str(), x_take_force)
+    update_disc_beliefatom.set_jkey(wx.awardee_title, run_str)
+    update_disc_beliefatom.set_jvalue(wx.give_force, x_give_force)
+    update_disc_beliefatom.set_jvalue(wx.take_force, x_take_force)
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
@@ -561,9 +554,9 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_awardun
     x_take_force = 66
     update_disc_beliefatom = beliefatom_shop(belief_plan_awardunit_str(), wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey(awardee_title_str(), run_str)
-    update_disc_beliefatom.set_jvalue(give_force_str(), x_give_force)
-    update_disc_beliefatom.set_jvalue(take_force_str(), x_take_force)
+    update_disc_beliefatom.set_jkey(wx.awardee_title, run_str)
+    update_disc_beliefatom.set_jvalue(wx.give_force, x_give_force)
+    update_disc_beliefatom.set_jvalue(wx.take_force, x_take_force)
     # print(f"{update_disc_beliefatom=}")
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
@@ -1013,7 +1006,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_insert_plan_partyun
     # WHEN
     update_disc_beliefatom = beliefatom_shop(belief_plan_partyunit_str(), wx.INSERT)
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey(party_title_str(), yao_str)
+    update_disc_beliefatom.set_jkey(wx.party_title, yao_str)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
     after_sue_au = sue_beliefdelta.get_atom_edited_belief(before_sue_au)
@@ -1043,7 +1036,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_plan_partyun
     # WHEN
     update_disc_beliefatom = beliefatom_shop(belief_plan_partyunit_str(), DELETE_str())
     update_disc_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    update_disc_beliefatom.set_jkey(party_title_str(), yao_str)
+    update_disc_beliefatom.set_jkey(wx.party_title, yao_str)
     sue_beliefdelta = beliefdelta_shop()
     sue_beliefdelta.set_beliefatom(update_disc_beliefatom)
     print(f"{before_sue_au.get_plan_obj(ball_rope).laborunit=}")

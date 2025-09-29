@@ -2,8 +2,8 @@ from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch04Keywords as wx,
     belief_voiceunit_str,
-    voice_name_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop, get_dimens_cruds_beliefdelta
 
@@ -37,6 +37,6 @@ def test_BeliefDelta_get_dimens_cruds_beliefdelta_ReturnsObjWithCorrectDimensAnd
     sue_insert_dict = new_beliefdelta.beliefatoms.get(wx.INSERT)
     sue_voiceunit_dict = sue_insert_dict.get(belief_voiceunit_str())
     bob_beliefatom = sue_voiceunit_dict.get(bob_str)
-    assert bob_beliefatom.get_value(voice_name_str()) == bob_str
+    assert bob_beliefatom.get_value(wx.voice_name) == bob_str
     assert bob_beliefatom.get_value("voice_cred_points") == bob_voice_cred_points
     assert bob_beliefatom.get_value("voice_debt_points") == bob_voice_debt_points

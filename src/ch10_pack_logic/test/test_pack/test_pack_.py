@@ -6,16 +6,13 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch04Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    belief_name_str,
     belief_voiceunit_str,
     event_int_str,
     face_name_str,
     moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
@@ -250,8 +247,8 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     # THEN
     assert x_dict.get(moment_label_str()) is not None
     assert x_dict.get(moment_label_str()) == amy45_str
-    assert x_dict.get(belief_name_str()) is not None
-    assert x_dict.get(belief_name_str()) == bob_str
+    assert x_dict.get(wx.belief_name) is not None
+    assert x_dict.get(wx.belief_name) == bob_str
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == sue_str
     assert x_dict.get(event_int_str()) is not None
@@ -329,8 +326,8 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     # THEN
     assert total_dict.get(moment_label_str()) is not None
     assert total_dict.get(moment_label_str()) == amy45_str
-    assert total_dict.get(belief_name_str()) is not None
-    assert total_dict.get(belief_name_str()) == bob_str
+    assert total_dict.get(wx.belief_name) is not None
+    assert total_dict.get(wx.belief_name) == bob_str
     assert total_dict.get(face_name_str()) is not None
     assert total_dict.get(face_name_str()) == sue_str
     assert total_dict.get(event_int_str()) is not None
@@ -447,8 +444,8 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     x_dict = bob_packunit.get_deltametric_dict()
 
     # THEN
-    assert x_dict.get(belief_name_str()) is not None
-    assert x_dict.get(belief_name_str()) == bob_str
+    assert x_dict.get(wx.belief_name) is not None
+    assert x_dict.get(wx.belief_name) == bob_str
     assert x_dict.get(face_name_str()) is not None
     assert x_dict.get(face_name_str()) == yao_str
     assert x_dict.get(event_int_str()) is not None
@@ -493,12 +490,10 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     bob_voiceunit = voiceunit_shop(
         bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
-    cw_str = voice_cred_points_str()
-    dw_str = voice_debt_points_str()
+    cw_str = wx.voice_cred_points
+    dw_str = wx.voice_debt_points
     print(f"{bob_voiceunit.to_dict()=}")
-    bob_required_dict = {
-        voice_name_str(): bob_voiceunit.to_dict().get(voice_name_str())
-    }
+    bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
@@ -535,7 +530,7 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     assert before_sue_beliefunit.voice_exists(zia_str) is False
     dimen = belief_voiceunit_str()
     x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
-    x_beliefatom.set_jkey(voice_name_str(), zia_str)
+    x_beliefatom.set_jkey(wx.voice_name, zia_str)
     x_voice_cred_points = 55
     x_voice_debt_points = 66
     x_beliefatom.set_jvalue("voice_cred_points", x_voice_cred_points)
@@ -580,12 +575,10 @@ def test_PackUnit_is_empty_ReturnsObj():
     bob_voiceunit = voiceunit_shop(
         bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
-    cw_str = voice_cred_points_str()
-    dw_str = voice_debt_points_str()
+    cw_str = wx.voice_cred_points
+    dw_str = wx.voice_debt_points
     print(f"{bob_voiceunit.to_dict()=}")
-    bob_required_dict = {
-        voice_name_str(): bob_voiceunit.to_dict().get(voice_name_str())
-    }
+    bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")

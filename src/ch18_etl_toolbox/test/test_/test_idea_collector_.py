@@ -2,7 +2,7 @@ from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     cumulative_minute_str,
     event_int_str,
     face_name_str,

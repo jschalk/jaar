@@ -1,9 +1,9 @@
 from pandas import DataFrame
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch04Keywords as wx,
     Ch07Keywords as wx,
     reason_context_str,
-    voice_name_str,
 )
 from src.ch16_translate_logic.map import (
     LabelMap,
@@ -122,11 +122,11 @@ def get_suita_voice_name_otx_dt() -> DataFrame:
     sue_otx = "Sue"
     bob_otx = "Bob"
     zia_otx = "Zia"
-    otx_dt = DataFrame(columns=[voice_name_str()])
-    otx_dt.loc[0, voice_name_str()] = zia_otx
-    otx_dt.loc[1, voice_name_str()] = sue_otx
-    otx_dt.loc[2, voice_name_str()] = bob_otx
-    otx_dt.loc[3, voice_name_str()] = xio_otx
+    otx_dt = DataFrame(columns=[wx.voice_name])
+    otx_dt.loc[0, wx.voice_name] = zia_otx
+    otx_dt.loc[1, wx.voice_name] = sue_otx
+    otx_dt.loc[2, wx.voice_name] = bob_otx
+    otx_dt.loc[3, wx.voice_name] = xio_otx
     return otx_dt
 
 
@@ -135,11 +135,11 @@ def get_suita_voice_name_inx_dt() -> DataFrame:
     sue_inx = "Suita"
     bob_inx = "Bobita"
     zia_otx = "Zia"
-    inx_dt = DataFrame(columns=[voice_name_str()])
-    inx_dt.loc[0, voice_name_str()] = xio_inx
-    inx_dt.loc[1, voice_name_str()] = sue_inx
-    inx_dt.loc[2, voice_name_str()] = bob_inx
-    inx_dt.loc[3, voice_name_str()] = zia_otx
+    inx_dt = DataFrame(columns=[wx.voice_name])
+    inx_dt.loc[0, wx.voice_name] = xio_inx
+    inx_dt.loc[1, wx.voice_name] = sue_inx
+    inx_dt.loc[2, wx.voice_name] = bob_inx
+    inx_dt.loc[3, wx.voice_name] = zia_otx
     return inx_dt
 
 

@@ -1,6 +1,6 @@
 from src.ch11_bud_logic._ref.ch11_keywords import (
+    Ch04Keywords as wx,
     Ch11Keywords as wx,
-    belief_name_str,
     bud_voice_nets_str,
     celldepth_str,
 )
@@ -208,7 +208,7 @@ def test_BeliefBudHistory_get_headers_ReturnsObj():
     sue_headers_list = sue_beliefbudhistory.get_headers()
 
     # THEN
-    assert sue_headers_list == [belief_name_str(), wx.bud_time, wx.quota]
+    assert sue_headers_list == [wx.belief_name, wx.bud_time, wx.quota]
 
 
 def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
@@ -228,7 +228,7 @@ def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
             x4_bud_time: {wx.quota: x4_quota, wx.bud_time: x4_bud_time},
             x7_bud_time: {
@@ -245,7 +245,7 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_beliefbudhistory = beliefbudhistory_shop(sue_str)
     sue_buds_dict = sue_beliefbudhistory.to_dict()
-    assert sue_buds_dict == {belief_name_str(): sue_str, "buds": {}}
+    assert sue_buds_dict == {wx.belief_name: sue_str, "buds": {}}
 
     # WHEN
     x_beliefbudhistory = get_beliefbudhistory_from_dict(sue_buds_dict)
@@ -270,7 +270,7 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario1():
     sue_beliefbudhistory.add_bud(x7_bud_time, x7_quota)
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
             x4_bud_time: {wx.bud_time: x4_bud_time, wx.quota: x4_quota},
             x7_bud_time: {wx.bud_time: x7_bud_time, wx.quota: x7_quota},
@@ -310,7 +310,7 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario2():
     )
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
             x4_bud_time: {wx.bud_time: x4_bud_time, wx.quota: x4_quota},
             x7_bud_time: {
@@ -360,7 +360,7 @@ def test_BeliefBudHistory_get_tranbook_ReturnsObj():
     )
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
             x4_bud_time: {
                 wx.bud_time: x4_bud_time,

@@ -1,7 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     belief_voiceunit_str,
     error_message_str,
     event_int_str,
@@ -14,9 +14,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     otx_rope_str,
     translate_rope_str,
     unknown_str_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_TRLROPE_SOUND_RAW_SQLSTR,
@@ -174,8 +171,8 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
 , {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}_ERASE
+, {wx.belief_name}
+, {wx.voice_name}_ERASE
 )"""
         b117 = "br00117"
         b045 = "br00045"
@@ -263,10 +260,10 @@ VALUES
 , {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 , {error_message_str()}
 )"""
         values_clause = f"""
@@ -343,8 +340,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
 , {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}_ERASE
+, {wx.belief_name}
+, {wx.voice_name}_ERASE
 )"""
         values_clause = f"""
 VALUES
@@ -431,10 +428,10 @@ VALUES
 , {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 , {error_message_str()}
 )"""
         values_clause = f"""

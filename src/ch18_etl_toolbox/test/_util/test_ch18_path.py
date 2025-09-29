@@ -1,7 +1,7 @@
 from inspect import getdoc as inspect_getdoc
 from platform import system as platform_system
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch18_etl_toolbox._ref.ch18_keywords import belief_name_str, moment_label_str
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch04Keywords as wx, moment_label_str
 from src.ch18_etl_toolbox.ch18_path import (
     create_last_run_metrics_path,
     create_moment_mstr_path,
@@ -125,7 +125,7 @@ def test_create_stances_dir_path_HasDocString():
 def test_create_stances_belief_dir_path_HasDocString():
     # ESTABLISH
     doc_str = create_stances_belief_dir_path(
-        moment_mstr_dir="moment_mstr_dir", belief_name=belief_name_str()
+        moment_mstr_dir="moment_mstr_dir", belief_name=wx.belief_name
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

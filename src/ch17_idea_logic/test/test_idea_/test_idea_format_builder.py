@@ -8,8 +8,8 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     attributes_str,
-    belief_name_str,
     belief_planunit_str,
     c400_number_str,
     dimens_str,
@@ -23,7 +23,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     monthday_distortion_str,
     otx_key_str,
     plan_rope_str,
-    respect_bit_str,
     timeline_label_str,
     yr1_jan1_offset_str,
 )
@@ -40,7 +39,7 @@ def create_dimens_idea_format_dict() -> dict:
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
         if dimen_dict.get(idea_category_str()) == "belief":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {moment_label_str(), belief_name_str()}
+            attributes_set = {moment_label_str(), wx.belief_name}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -65,7 +64,7 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
     assert belief_planunit_dict.get(attributes_str())
     belief_planunit_attributes = belief_planunit_dict.get(attributes_str())
     assert moment_label_str() in belief_planunit_attributes
-    assert belief_name_str() in belief_planunit_attributes
+    assert wx.belief_name in belief_planunit_attributes
     assert plan_rope_str() in belief_planunit_attributes
     assert gogo_want_str() in belief_planunit_attributes
 
@@ -91,7 +90,7 @@ def test_get_idea_brick_md_ReturnsObj():
             job_listen_rotations_str(): {otx_key_str(): False},
             monthday_distortion_str(): {otx_key_str(): False},
             wx.penny: {otx_key_str(): False},
-            respect_bit_str(): {otx_key_str(): False},
+            wx.respect_bit: {otx_key_str(): False},
             timeline_label_str(): {otx_key_str(): False},
             yr1_jan1_offset_str(): {otx_key_str(): False},
         },
@@ -118,7 +117,7 @@ def test_get_idea_brick_md_ReturnsObj():
 - `{monthday_distortion_str()}`
 - `{wx.fund_iota}`
 - `{wx.penny}`
-- `{respect_bit_str()}`
+- `{wx.respect_bit}`
 - `{wx.knot}`
 - `{job_listen_rotations_str()}`
 """
@@ -140,7 +139,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
             job_listen_rotations_str(): {otx_key_str(): False},
             monthday_distortion_str(): {otx_key_str(): False},
             wx.penny: {otx_key_str(): False},
-            respect_bit_str(): {otx_key_str(): False},
+            wx.respect_bit: {otx_key_str(): False},
             timeline_label_str(): {otx_key_str(): False},
             yr1_jan1_offset_str(): {otx_key_str(): False},
         },
@@ -167,7 +166,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 - `{monthday_distortion_str()}`
 - `{wx.fund_iota}`
 - `{wx.penny}`
-- `{respect_bit_str()}`
+- `{wx.respect_bit}`
 - `{wx.knot}`
 - `{job_listen_rotations_str()}`
 """

@@ -10,6 +10,7 @@ from src.ch05_reason_logic.reason import (
 from src.ch06_plan_logic._ref.ch06_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
     active_hx_str,
     active_str,
@@ -17,7 +18,6 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     all_voice_debt_str,
     awardheirs_str,
     awardlines_str,
-    awardunits_str,
     denom_str,
     descendant_pledge_count_str,
     factheirs_str,
@@ -32,7 +32,6 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     healerunit_str,
     is_expanded_str,
     kids_str,
-    laborunit_str,
     moment_label_str,
     morph_str,
     numor_str,
@@ -219,9 +218,9 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert len(casa_dict["kids"]) == 1
     assert casa_dict["kids"] == casa_plan.get_kids_dict()
     assert casa_dict[reasonunits_str()] == casa_plan.get_reasonunits_dict()
-    assert casa_dict[awardunits_str()] == casa_plan.get_awardunits_dict()
-    assert casa_dict[awardunits_str()] == x1_awardunits
-    assert casa_dict[laborunit_str()] == sue_laborunit.to_dict()
+    assert casa_dict[wx.awardunits] == casa_plan.get_awardunits_dict()
+    assert casa_dict[wx.awardunits] == x1_awardunits
+    assert casa_dict[wx.laborunit] == sue_laborunit.to_dict()
     assert casa_dict["healerunit"] == yao_healerunit.to_dict()
     assert casa_dict[star_str()] == casa_plan.star
     assert casa_dict[plan_label_str()] == casa_plan.plan_label
@@ -287,8 +286,8 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     assert casa_dict.get("is_expanded") is False
     assert casa_dict.get(pledge_str())
     assert casa_dict.get(factunits_str()) is not None
-    assert casa_dict.get(awardunits_str()) is not None
-    assert casa_dict.get(laborunit_str()) is not None
+    assert casa_dict.get(wx.awardunits) is not None
+    assert casa_dict.get(wx.laborunit) is not None
     assert casa_dict.get("kids") is not None
 
 
@@ -310,7 +309,7 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     assert casa_dict.get("is_expanded") is None
     assert casa_dict.get(pledge_str()) is None
     assert casa_dict.get(factunits_str()) is None
-    assert casa_dict.get(awardunits_str()) is None
-    assert casa_dict.get(laborunit_str()) is None
+    assert casa_dict.get(wx.awardunits) is None
+    assert casa_dict.get(wx.laborunit) is None
     assert casa_dict.get("healerunit") is None
     assert casa_dict.get("kids") is None

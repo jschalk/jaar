@@ -1,12 +1,12 @@
 from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
+    Ch04Keywords as wx,
     DELETE_str,
     belief_plan_healerunit_str,
     belief_planunit_str,
     belief_voice_membership_str,
     belief_voiceunit_str,
-    voice_name_str,
 )
 from src.ch09_belief_atom_logic.atom_config import get_atom_args_class_types
 from src.ch09_belief_atom_logic.atom_main import AtomRow, atomrow_shop, beliefatom_shop
@@ -160,7 +160,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario
     # THEN
     assert len(x_beliefatoms) == 1
     static_atom = beliefatom_shop(x_dimen, wx.INSERT)
-    static_atom.set_arg(voice_name_str(), "Bob")
+    static_atom.set_arg(wx.voice_name, "Bob")
     assert x_beliefatoms[0] == static_atom
 
 
@@ -177,7 +177,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_str_INSERT_Scenario
     # THEN
     assert len(x_beliefatoms) == 1
     static_atom = beliefatom_shop(x_dimen, wx.INSERT)
-    static_atom.set_arg(voice_name_str(), "Bob")
+    static_atom.set_arg(wx.voice_name, "Bob")
     static_atom.set_arg("voice_cred_points", 5)
     assert x_beliefatoms[0] == static_atom
 
@@ -208,7 +208,7 @@ def test_AtomRow_get_beliefatoms_ReturnsObj_belief_voiceunit_INSERT_Scenario2():
     # THEN
     assert len(x_beliefatoms) == 1
     static_atom = beliefatom_shop(x_dimen, wx.INSERT)
-    static_atom.set_arg(voice_name_str(), "Bob")
+    static_atom.set_arg(wx.voice_name, "Bob")
     four_int = 4
     static_atom.set_arg("voice_cred_points", four_int)
     assert x_beliefatoms[0] == static_atom

@@ -9,9 +9,9 @@ from src.ch07_belief_logic.belief_tool import (
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     Ch02Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch09Keywords as wx,
-    awardee_title_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -25,10 +25,7 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     denom_str,
     fact_context_str,
     fact_lower_str,
-    give_force_str,
     gogo_want_str,
-    group_debt_points_str,
-    group_title_str,
     healer_name_str,
     morph_str,
     numor_str,
@@ -40,9 +37,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     reason_state_str,
     star_str,
     stop_want_str,
-    take_force_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
 
@@ -114,8 +108,8 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     sue_belief.add_voiceunit(zia_str)
 
     zia_atom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
-    zia_atom.set_arg(voice_name_str(), zia_str)
-    zia_atom.set_arg(voice_debt_points_str(), zia_voice_debt_points)
+    zia_atom.set_arg(wx.voice_name, zia_str)
+    zia_atom.set_arg(wx.voice_debt_points, zia_voice_debt_points)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -125,7 +119,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voiceunit():
     assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {voice_debt_points_str(): 51}
+    assert zia_jvalues == {wx.voice_debt_points: 51}
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
@@ -138,9 +132,9 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     sue_belief.get_voice(zia_str).add_membership(run_str)
 
     zia_atom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
-    zia_atom.set_arg(voice_name_str(), zia_str)
-    zia_atom.set_arg(group_title_str(), run_str)
-    zia_atom.set_arg(group_debt_points_str(), zia_run_group_debt_points)
+    zia_atom.set_arg(wx.voice_name, zia_str)
+    zia_atom.set_arg(wx.group_title, run_str)
+    zia_atom.set_arg(wx.group_debt_points, zia_run_group_debt_points)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -150,7 +144,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_voice_membership():
     assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues == {group_debt_points_str(): zia_run_group_debt_points}
+    assert zia_jvalues == {wx.group_debt_points: zia_run_group_debt_points}
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_planunit():
@@ -219,9 +213,9 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_awardunit():
 
     zia_atom = beliefatom_shop(belief_plan_awardunit_str(), wx.INSERT)
     zia_atom.set_arg(plan_rope_str(), casa_rope)
-    zia_atom.set_arg(awardee_title_str(), run_str)
-    zia_atom.set_arg(give_force_str(), zia_run_give_force)
-    zia_atom.set_arg(take_force_str(), zia_run_take_force)
+    zia_atom.set_arg(wx.awardee_title, run_str)
+    zia_atom.set_arg(wx.give_force, zia_run_give_force)
+    zia_atom.set_arg(wx.take_force, zia_run_take_force)
 
     # WHEN
     new_zia_beliefatom = sift_beliefatom(sue_belief, zia_atom)
@@ -231,8 +225,8 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_awardunit():
     assert new_zia_beliefatom.crud_str == wx.UPDATE
     assert new_zia_beliefatom.get_jvalues_dict() != {}
     zia_jvalues = new_zia_beliefatom.get_jvalues_dict()
-    assert zia_jvalues.get(give_force_str()) == zia_run_give_force
-    assert zia_jvalues.get(take_force_str()) == zia_run_take_force
+    assert zia_jvalues.get(wx.give_force) == zia_run_give_force
+    assert zia_jvalues.get(wx.take_force) == zia_run_take_force
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_belief_plan_reasonunit():

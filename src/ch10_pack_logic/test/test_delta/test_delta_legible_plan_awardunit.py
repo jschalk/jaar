@@ -2,13 +2,11 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch04Keywords as wx,
     Ch09Keywords as wx,
     DELETE_str,
-    awardee_title_str,
     belief_plan_awardunit_str,
-    give_force_str,
     plan_rope_str,
-    take_force_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -25,9 +23,9 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_INSERT():
     take_force_value = 43
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
-    swim_beliefatom.set_arg(give_force_str(), give_force_value)
-    swim_beliefatom.set_arg(take_force_str(), take_force_value)
+    swim_beliefatom.set_arg(wx.awardee_title, awardee_title_value)
+    swim_beliefatom.set_arg(wx.give_force, give_force_value)
+    swim_beliefatom.set_arg(wx.take_force, take_force_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -53,9 +51,9 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_UPDATE_give_force_take_fo
     take_force_value = 43
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
-    swim_beliefatom.set_arg(give_force_str(), give_force_value)
-    swim_beliefatom.set_arg(take_force_str(), take_force_value)
+    swim_beliefatom.set_arg(wx.awardee_title, awardee_title_value)
+    swim_beliefatom.set_arg(wx.give_force, give_force_value)
+    swim_beliefatom.set_arg(wx.take_force, take_force_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -79,8 +77,8 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_UPDATE_give_force():
     give_force_value = 81
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
-    swim_beliefatom.set_arg(give_force_str(), give_force_value)
+    swim_beliefatom.set_arg(wx.awardee_title, awardee_title_value)
+    swim_beliefatom.set_arg(wx.give_force, give_force_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -105,8 +103,8 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_UPDATE_take_force():
     take_force_value = 81
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
-    swim_beliefatom.set_arg(take_force_str(), take_force_value)
+    swim_beliefatom.set_arg(wx.awardee_title, awardee_title_value)
+    swim_beliefatom.set_arg(wx.take_force, take_force_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -129,7 +127,7 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_DELETE():
     awardee_title_value = f"{sue_belief.knot}Swimmers"
     swim_beliefatom = beliefatom_shop(dimen, DELETE_str())
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(awardee_title_str(), awardee_title_value)
+    swim_beliefatom.set_arg(wx.awardee_title, awardee_title_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)

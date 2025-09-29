@@ -1,6 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     belief_voiceunit_str,
     error_message_str,
     event_int_str,
@@ -9,7 +9,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     moment_label_str,
     otx_knot_str,
     unknown_str_str,
-    voice_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_BLRPERN_SOUND_PUT_AGG_STR,
@@ -38,7 +37,7 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
         blrpern_dimen = belief_voiceunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {belief_name_str()}, {voice_name_str()})
+  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -60,7 +59,7 @@ VALUES
 
         # WHEN
         sqlstr = create_knot_exists_in_name_error_update_sqlstr(
-            blrpern_s_agg_put, voice_name_str()
+            blrpern_s_agg_put, wx.voice_name
         )
         print(f"{sqlstr=}")
         cursor.execute(sqlstr)
@@ -69,7 +68,7 @@ VALUES
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 1
         select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put}"
         cursor.execute(select_core_raw_sqlstr)
-        name_knot_str = f"Knot cannot exist in NameTerm column {voice_name_str()}"
+        name_knot_str = f"Knot cannot exist in NameTerm column {wx.voice_name}"
         assert cursor.fetchall() == [
             (event1, sue_str, a23_str, yao_str, yao_str, None, None, None),
             (event1, sue_str, a23_str, yao_str, bob_str, None, None, name_knot_str),
@@ -94,7 +93,7 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
         blrpern_dimen = belief_voiceunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {belief_name_str()}, {voice_name_str()})
+  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -153,7 +152,7 @@ def test_set_moment_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
         blrpern_dimen = belief_voiceunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {belief_name_str()}, {voice_name_str()})
+  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -179,9 +178,9 @@ VALUES
 
         # THEN
         assert cursor.execute(error_count_sqlstr).fetchone()[0] == 2
-        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put} ORDER BY {moment_label_str()}, {belief_name_str()}, {voice_name_str()}"
+        select_core_raw_sqlstr = f"SELECT * FROM {blrpern_s_agg_put} ORDER BY {moment_label_str()}, {wx.belief_name}, {wx.voice_name}"
         cursor.execute(select_core_raw_sqlstr)
-        name_knot_str = f"Knot cannot exist in NameTerm column {voice_name_str()}"
+        name_knot_str = f"Knot cannot exist in NameTerm column {wx.voice_name}"
         label_knot_str = f"Knot cannot exist in LabelTerm column {moment_label_str()}"
         rows = cursor.fetchall()
         print(f"{rows=}")

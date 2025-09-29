@@ -2,9 +2,8 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path, open_file
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch04Keywords as wx,
     credor_respect_str,
-    group_title_str,
-    voice_name_str,
     voice_pool_str,
 )
 from src.ch17_idea_logic.idea_db_tool import (
@@ -163,7 +162,7 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario3_ColumnOrderCorrect(
 
 def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect():
     # ESTABLISH
-    df1 = DataFrame([["AAA", "BBB"]], columns=[group_title_str(), voice_name_str()])
+    df1 = DataFrame([["AAA", "BBB"]], columns=[wx.group_title, wx.voice_name])
 
     # WHEN
     relevant_dataframe = get_relevant_columns_dataframe(df1)
@@ -171,8 +170,8 @@ def test_get_relevant_columns_dataframe_ReturnsObj_Scenario4_ColumnOrderCorrect(
     # THEN
     assert relevant_dataframe is not None
     print(f"{relevant_dataframe.columns=}")
-    assert relevant_dataframe.columns.to_list()[0] == voice_name_str()
+    assert relevant_dataframe.columns.to_list()[0] == wx.voice_name
     assert relevant_dataframe.columns.to_list() == [
-        voice_name_str(),
-        group_title_str(),
+        wx.voice_name,
+        wx.group_title,
     ]

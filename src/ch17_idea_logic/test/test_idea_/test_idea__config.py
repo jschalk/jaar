@@ -27,6 +27,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch01Keywords as wx,
     Ch02Keywords as wx,
     Ch03Keywords as wx,
+    Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch09Keywords as wx,
     Ch11Keywords as wx,
@@ -34,8 +35,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     allowed_crud_str,
     amount_str,
     attributes_str,
-    awardee_title_str,
-    belief_name_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -66,11 +65,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
-    give_force_str,
     gogo_want_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
     healer_name_str,
     hour_label_str,
     idea_category_str,
@@ -106,7 +101,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     otx_name_str,
     otx_rope_str,
     otx_title_str,
-    party_title_str,
     plan_rope_str,
     pledge_str,
     reason_active_requisite_str,
@@ -114,11 +108,8 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     reason_lower_str,
     reason_state_str,
     reason_upper_str,
-    respect_bit_str,
-    solo_str,
     star_str,
     stop_want_str,
-    take_force_str,
     timeline_label_str,
     translate_label_str,
     translate_name_str,
@@ -126,9 +117,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     translate_title_str,
     translateunit_str,
     unknown_str_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
     voice_pool_str,
     weekday_label_str,
     weekday_order_str,
@@ -412,15 +400,15 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get("translate_event_int") == "INTEGER"
     assert sqlite_types.get(event_int_str()) == "INTEGER"
     assert sqlite_types.get(moment_label_str()) == "TEXT"
-    assert sqlite_types.get(belief_name_str()) == "TEXT"
-    assert sqlite_types.get(voice_name_str()) == "TEXT"
-    assert sqlite_types.get(group_title_str()) == "TEXT"
+    assert sqlite_types.get(wx.belief_name) == "TEXT"
+    assert sqlite_types.get(wx.voice_name) == "TEXT"
+    assert sqlite_types.get(wx.group_title) == "TEXT"
     assert sqlite_types.get(plan_rope_str()) == "TEXT"
     assert sqlite_types.get(reason_context_str()) == "TEXT"
     assert sqlite_types.get("reason_state") == "TEXT"
     assert sqlite_types.get("fact_state") == "TEXT"
-    assert sqlite_types.get(party_title_str()) == "TEXT"
-    assert sqlite_types.get(awardee_title_str()) == "TEXT"
+    assert sqlite_types.get(wx.party_title) == "TEXT"
+    assert sqlite_types.get(wx.awardee_title) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
     assert sqlite_types.get(offi_time_str()) == "INTEGER"
     assert sqlite_types.get(wx.bud_time) == "INTEGER"
@@ -434,28 +422,28 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(gogo_want_str()) == "REAL"
     assert sqlite_types.get(stop_want_str()) == "REAL"
     assert sqlite_types.get(reason_active_requisite_str()) == "INTEGER"
-    assert sqlite_types.get(voice_cred_points_str()) == "REAL"
-    assert sqlite_types.get(voice_debt_points_str()) == "REAL"
-    assert sqlite_types.get(group_cred_points_str()) == "REAL"
-    assert sqlite_types.get(group_debt_points_str()) == "REAL"
+    assert sqlite_types.get(wx.voice_cred_points) == "REAL"
+    assert sqlite_types.get(wx.voice_debt_points) == "REAL"
+    assert sqlite_types.get(wx.group_cred_points) == "REAL"
+    assert sqlite_types.get(wx.group_debt_points) == "REAL"
     assert sqlite_types.get(credor_respect_str()) == "REAL"
     assert sqlite_types.get(debtor_respect_str()) == "REAL"
     assert sqlite_types.get(fact_lower_str()) == "REAL"
     assert sqlite_types.get(fact_upper_str()) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
-    assert sqlite_types.get(give_force_str()) == "REAL"
+    assert sqlite_types.get(wx.give_force) == "REAL"
     assert sqlite_types.get(star_str()) == "INTEGER"
     assert sqlite_types.get("max_tree_traverse") == "INTEGER"
     assert sqlite_types.get("reason_upper") == "REAL"
     assert sqlite_types.get("reason_lower") == "REAL"
     assert sqlite_types.get("reason_divisor") == "INTEGER"
     assert sqlite_types.get("problem_bool") == "INTEGER"
-    assert sqlite_types.get(take_force_str()) == "REAL"
+    assert sqlite_types.get(wx.take_force) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"
     assert sqlite_types.get(wx.fund_iota) == "REAL"
     assert sqlite_types.get(wx.penny) == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
-    assert sqlite_types.get(respect_bit_str()) == "REAL"
+    assert sqlite_types.get(wx.respect_bit) == "REAL"
     assert sqlite_types.get(amount_str()) == "REAL"
     assert sqlite_types.get(month_label_str()) == "TEXT"
     assert sqlite_types.get(hour_label_str()) == "TEXT"
@@ -474,7 +462,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_label_str()) == "TEXT"
     assert sqlite_types.get(error_message_str()) == "TEXT"
-    assert sqlite_types.get(solo_str()) == "INTEGER"
+    assert sqlite_types.get(wx.solo) == "INTEGER"
 
     # sourcery skip: no-loop-in-tests
     for x_arg, datatype in get_belief_calc_args_sqlite_datatype_dict().items():
@@ -643,7 +631,7 @@ def _validate_idea_config(x_idea_config: dict):
             assert moment_label_str() in idea_jkeys_keys
         if idea_dict.get(idea_category_str()) == "belief":
             idea_jkeys_keys.remove(moment_label_str())
-            idea_jkeys_keys.remove(belief_name_str())
+            idea_jkeys_keys.remove(wx.belief_name)
         idea_jkeys_keys.remove(face_name_str())
         idea_jkeys_keys.remove(event_int_str())
         assert sub_jkeys_keys == idea_jkeys_keys
@@ -884,7 +872,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.fund_iota,
         monthday_distortion_str(),
         wx.penny,
-        respect_bit_str(),
+        wx.respect_bit,
         wx.knot,
         timeline_label_str(),
         yr1_jan1_offset_str(),

@@ -36,31 +36,29 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_tally():
 def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_credor_respect():
     # ESTABLISH
     dimen = beliefunit_str()
-    voice_credor_pool_str = "credor_respect"
-    voice_credor_pool_int = 71
-    voice_credor_pool_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    voice_credor_pool_beliefatom.set_arg(voice_credor_pool_str, voice_credor_pool_int)
+    credor_respect_int = 71
+    credor_respect_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
+    credor_respect_beliefatom.set_arg(wx.credor_respect, credor_respect_int)
 
-    print(f"{voice_credor_pool_beliefatom=}")
+    print(f"{credor_respect_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
-    x_beliefdelta.set_beliefatom(voice_credor_pool_beliefatom)
+    x_beliefdelta.set_beliefatom(credor_respect_beliefatom)
     sue_belief = beliefunit_shop("Sue")
 
     # WHEN
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"{sue_belief.belief_name}'s credor pool is now {voice_credor_pool_int}"
+    x_str = f"{sue_belief.belief_name}'s credor pool is now {credor_respect_int}"
     assert legible_list[0] == x_str
 
 
 def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_debtor_respect():
     # ESTABLISH
     dimen = beliefunit_str()
-    voice_debtor_pool_str = "debtor_respect"
     voice_debtor_pool_int = 78
     voice_debtor_pool_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    voice_debtor_pool_beliefatom.set_arg(voice_debtor_pool_str, voice_debtor_pool_int)
+    voice_debtor_pool_beliefatom.set_arg(wx.debtor_respect, voice_debtor_pool_int)
 
     print(f"{voice_debtor_pool_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
@@ -79,12 +77,10 @@ def test_create_legible_list_ReturnsObjEstablishWithBeliefUpdate_credor_respect_
     # ESTABLISH
     x_beliefdelta = beliefdelta_shop()
     dimen = beliefunit_str()
-    voice_credor_pool_str = "credor_respect"
-    voice_debtor_pool_str = "debtor_respect"
     voice_pool_int = 83
     beliefunit_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
-    beliefunit_beliefatom.set_arg(voice_credor_pool_str, voice_pool_int)
-    beliefunit_beliefatom.set_arg(voice_debtor_pool_str, voice_pool_int)
+    beliefunit_beliefatom.set_arg(wx.credor_respect, voice_pool_int)
+    beliefunit_beliefatom.set_arg(wx.debtor_respect, voice_pool_int)
     x_beliefdelta.set_beliefatom(beliefunit_beliefatom)
     sue_belief = beliefunit_shop("Sue")
 

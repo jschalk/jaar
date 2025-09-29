@@ -1,4 +1,4 @@
-from src.ch04_voice_logic._ref.ch04_keywords import party_title_str, solo_str
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic._ref.ch04_semantic_types import GroupTitle
 from src.ch04_voice_logic.labor import (
     laborunit_get_from_dict,
@@ -19,9 +19,9 @@ def test_PartyUnit_to_dict_ReturnsObj_Scenario0_solo_IsTrue():
 
     # THEN
     assert party_dict
-    assert party_dict.get(party_title_str()) == bob_str
-    assert party_dict.get(solo_str()) == bob_solo_bool
-    assert set(party_dict.keys()) == {party_title_str(), solo_str()}
+    assert party_dict.get(wx.party_title) == bob_str
+    assert party_dict.get(wx.solo) == bob_solo_bool
+    assert set(party_dict.keys()) == {wx.party_title, wx.solo}
 
 
 def test_PartyUnit_to_dict_ReturnsObj_Scenario1_solo_IsFalse():
@@ -34,8 +34,8 @@ def test_PartyUnit_to_dict_ReturnsObj_Scenario1_solo_IsFalse():
 
     # THEN
     assert party_dict
-    assert party_dict.get(party_title_str()) == bob_str
-    assert set(party_dict.keys()) == {party_title_str()}
+    assert party_dict.get(wx.party_title) == bob_str
+    assert set(party_dict.keys()) == {wx.party_title}
 
 
 def test_partyunit_get_from_dict_ReturnsObj_Scenario0_solo_KeyExists():
@@ -58,7 +58,7 @@ def test_partyunit_get_from_dict_ReturnsObj_Scenario1_solo_KeyDoesNotExist():
     bob_solo_bool = False
     expected_bob_partyunit = partyunit_shop(bob_str, solo=bob_solo_bool)
     bob_party_dict = expected_bob_partyunit.to_dict()
-    assert set(bob_party_dict.keys()) == {party_title_str()}
+    assert set(bob_party_dict.keys()) == {wx.party_title}
 
     # WHEN
     gen_bob_party = partyunit_get_from_dict(bob_party_dict)

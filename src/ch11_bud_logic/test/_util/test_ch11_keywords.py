@@ -6,7 +6,6 @@ from src.ch11_bud_logic._ref.ch11_keywords import (
     beliefadjust_str,
     beliefevent_facts_str,
     boss_facts_str,
-    bud_belief_name_str,
     bud_time_str,
     bud_voice_nets_str,
     celldepth_str,
@@ -36,7 +35,6 @@ def test_str_functions_ReturnsObj():
     assert ancestors_str() == "ancestors"
     assert boss_facts_str() == "boss_facts"
     assert bud_voice_nets_str() == "bud_voice_nets"
-    assert bud_belief_name_str() == "bud_belief_name"
     assert bud_time_str() == "bud_time"
     assert celldepth_str() == "celldepth"
     assert found_facts_str() == "found_facts"

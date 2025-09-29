@@ -1,15 +1,12 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     belief_voiceunit_str,
     error_message_str,
     event_int_str,
     face_name_str,
     moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
@@ -46,10 +43,10 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
   {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 )"""
         values_clause = f"""
 VALUES
@@ -76,10 +73,10 @@ VALUES
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 FROM {blrawar_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -120,10 +117,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
   {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 )"""
         values_clause = f"""
 VALUES
@@ -148,10 +145,10 @@ VALUES
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -191,10 +188,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
   {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 )"""
         values_clause = f"""
 VALUES
@@ -219,10 +216,10 @@ VALUES
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -262,10 +259,10 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
   {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 , {error_message_str()}
 )"""
         values_clause = f"""
@@ -291,10 +288,10 @@ VALUES
         select_sqlstr = f"""SELECT {event_int_str()}
 , {face_name_str()}
 , {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 FROM {blrpern_h_vld_put_tablename}
 """
         cursor.execute(select_sqlstr)

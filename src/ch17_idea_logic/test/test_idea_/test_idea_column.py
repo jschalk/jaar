@@ -1,9 +1,8 @@
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch04Keywords as wx,
     belief_voiceunit_str,
-    group_title_str,
     plan_rope_str,
     reason_context_str,
-    voice_name_str,
 )
 from src.ch17_idea_logic.idea_main import IdeaRef, idearef_shop
 
@@ -63,13 +62,13 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", belief_voiceunit_str())
-    x3_idearef.set_attribute(group_title_str(), True)
+    x3_idearef.set_attribute(wx.group_title, True)
 
     # WHEN
     x_headers_list = x3_idearef.get_headers_list()
 
     # THEN
-    assert x_headers_list == [group_title_str()]
+    assert x_headers_list == [wx.group_title]
 
 
 def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
@@ -77,14 +76,14 @@ def test_IdeaRef_get_headers_list_ReturnsObj_Scenario2():
 
     x3_idearef = idearef_shop("0003", belief_voiceunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
-    x3_idearef.set_attribute(group_title_str(), False)
-    x3_idearef.set_attribute(voice_name_str(), True)
+    x3_idearef.set_attribute(wx.group_title, False)
+    x3_idearef.set_attribute(wx.voice_name, True)
 
     # WHEN
     x_headers_list = x3_idearef.get_headers_list()
 
     # THEN
-    assert x_headers_list == [voice_name_str(), group_title_str(), plan_rope_str()]
+    assert x_headers_list == [wx.voice_name, wx.group_title, plan_rope_str()]
 
 
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario0():
@@ -102,13 +101,13 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", belief_voiceunit_str())
-    x3_idearef.set_attribute(group_title_str(), True)
+    x3_idearef.set_attribute(wx.group_title, True)
 
     # WHEN
     x_otx_keys_list = x3_idearef.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [group_title_str()]
+    assert x_otx_keys_list == [wx.group_title]
 
 
 def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
@@ -116,14 +115,14 @@ def test_IdeaRef_get_otx_keys_list_ReturnsObj_Scenario2():
 
     x3_idearef = idearef_shop("0003", belief_voiceunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
-    x3_idearef.set_attribute(group_title_str(), False)
-    x3_idearef.set_attribute(voice_name_str(), True)
+    x3_idearef.set_attribute(wx.group_title, False)
+    x3_idearef.set_attribute(wx.voice_name, True)
 
     # WHEN
     x_otx_keys_list = x3_idearef.get_otx_keys_list()
 
     # THEN
-    assert x_otx_keys_list == [voice_name_str(), plan_rope_str()]
+    assert x_otx_keys_list == [wx.voice_name, plan_rope_str()]
 
 
 def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario0():
@@ -141,7 +140,7 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario1():
     # ESTABLISH
 
     x3_idearef = idearef_shop("0003", belief_voiceunit_str())
-    x3_idearef.set_attribute(group_title_str(), True)
+    x3_idearef.set_attribute(wx.group_title, True)
 
     # WHEN
     x_otx_values_list = x3_idearef.get_otx_values_list()
@@ -155,16 +154,16 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
 
     x3_idearef = idearef_shop("0003", belief_voiceunit_str())
     x3_idearef.set_attribute(plan_rope_str(), True)
-    x3_idearef.set_attribute(group_title_str(), False)
+    x3_idearef.set_attribute(wx.group_title, False)
     x3_idearef.set_attribute(reason_context_str(), False)
-    x3_idearef.set_attribute(voice_name_str(), False)
+    x3_idearef.set_attribute(wx.voice_name, False)
 
     # WHEN
     x_otx_values_list = x3_idearef.get_otx_values_list()
 
     # THEN
     assert x_otx_values_list == [
-        voice_name_str(),
-        group_title_str(),
+        wx.voice_name,
+        wx.group_title,
         reason_context_str(),
     ]

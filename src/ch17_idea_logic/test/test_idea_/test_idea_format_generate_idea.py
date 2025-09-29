@@ -4,14 +4,12 @@ from src.ch07_belief_logic.test._util.ch07_examples import beliefunit_v001
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch01Keywords as wx,
+    Ch04Keywords as wx,
     belief_planunit_str,
     belief_voiceunit_str,
     plan_rope_str,
     pledge_str,
     star_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
     voice_pool_str,
 )
 from src.ch17_idea_logic.idea_config import (
@@ -52,14 +50,14 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     # THEN
     assert sue_voice_beliefdelta
     sue_beliefatom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
-    sue_beliefatom.set_arg(voice_name_str(), sue_str)
-    sue_beliefatom.set_arg(voice_cred_points_str(), sue_voice_cred_points)
-    sue_beliefatom.set_arg(voice_debt_points_str(), sue_voice_debt_points)
+    sue_beliefatom.set_arg(wx.voice_name, sue_str)
+    sue_beliefatom.set_arg(wx.voice_cred_points, sue_voice_cred_points)
+    sue_beliefatom.set_arg(wx.voice_debt_points, sue_voice_debt_points)
     sue_beliefatom.set_atom_order()
     bob_beliefatom = beliefatom_shop(belief_voiceunit_str(), wx.INSERT)
-    bob_beliefatom.set_arg(voice_name_str(), bob_str)
-    bob_beliefatom.set_arg(voice_cred_points_str(), bob_voice_cred_points)
-    bob_beliefatom.set_arg(voice_debt_points_str(), bob_voice_debt_points)
+    bob_beliefatom.set_arg(wx.voice_name, bob_str)
+    bob_beliefatom.set_arg(wx.voice_cred_points, bob_voice_cred_points)
+    bob_beliefatom.set_arg(wx.voice_debt_points, bob_voice_debt_points)
     bob_beliefatom.set_atom_order()
     # print(f"{sue_voice_beliefdelta.get_ordered_dict()=}")
     # print(
@@ -114,22 +112,22 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
 #     bob_iowa_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
 #     yao_iowa_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
 #     yao_ohio_beliefatom = beliefatom_shop(belief_voice_membership_str(), wx.INSERT)
-#     sue_iowa_beliefatom.set_arg(group_title_str(), iowa_str)
-#     bob_iowa_beliefatom.set_arg(group_title_str(), iowa_str)
-#     yao_iowa_beliefatom.set_arg(group_title_str(), iowa_str)
-#     yao_ohio_beliefatom.set_arg(group_title_str(), ohio_str)
-#     sue_iowa_beliefatom.set_arg(voice_name_str(), sue_str)
-#     bob_iowa_beliefatom.set_arg(voice_name_str(), bob_str)
-#     yao_iowa_beliefatom.set_arg(voice_name_str(), yao_str)
-#     yao_ohio_beliefatom.set_arg(voice_name_str(), yao_str)
-#     sue_iowa_beliefatom.set_arg(group_cred_points_str(), sue_iowa_group_cred_points)
-#     bob_iowa_beliefatom.set_arg(group_cred_points_str(), bob_iowa_group_cred_points)
-#     yao_iowa_beliefatom.set_arg(group_cred_points_str(), yao_iowa_group_cred_points)
-#     yao_ohio_beliefatom.set_arg(group_cred_points_str(), yao_ohio_group_cred_points)
-#     sue_iowa_beliefatom.set_arg(group_debt_points_str(), sue_iowa_group_debt_points)
-#     bob_iowa_beliefatom.set_arg(group_debt_points_str(), bob_iowa_group_debt_points)
-#     yao_iowa_beliefatom.set_arg(group_debt_points_str(), yao_iowa_group_debt_points)
-#     yao_ohio_beliefatom.set_arg(group_debt_points_str(), yao_ohio_group_debt_points)
+#     sue_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
+#     bob_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
+#     yao_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
+#     yao_ohio_beliefatom.set_arg(wx.group_title, ohio_str)
+#     sue_iowa_beliefatom.set_arg(wx.voice_name, sue_str)
+#     bob_iowa_beliefatom.set_arg(wx.voice_name, bob_str)
+#     yao_iowa_beliefatom.set_arg(wx.voice_name, yao_str)
+#     yao_ohio_beliefatom.set_arg(wx.voice_name, yao_str)
+#     sue_iowa_beliefatom.set_arg(wx.group_cred_points, sue_iowa_group_cred_points)
+#     bob_iowa_beliefatom.set_arg(wx.group_cred_points, bob_iowa_group_cred_points)
+#     yao_iowa_beliefatom.set_arg(wx.group_cred_points, yao_iowa_group_cred_points)
+#     yao_ohio_beliefatom.set_arg(wx.group_cred_points, yao_ohio_group_cred_points)
+#     sue_iowa_beliefatom.set_arg(wx.group_debt_points, sue_iowa_group_debt_points)
+#     bob_iowa_beliefatom.set_arg(wx.group_debt_points, bob_iowa_group_debt_points)
+#     yao_iowa_beliefatom.set_arg(wx.group_debt_points, yao_iowa_group_debt_points)
+#     yao_ohio_beliefatom.set_arg(wx.group_debt_points, yao_ohio_group_debt_points)
 #     bob_iowa_beliefatom.set_atom_order()
 #     # print(f"{membership_changunit.get_ordered_beliefatoms()[2]=}")
 #     # print(f"{sue_iowa_beliefatom=}")

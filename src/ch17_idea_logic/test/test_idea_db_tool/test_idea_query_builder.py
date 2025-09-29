@@ -1,15 +1,11 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch04Keywords as wx,
     amount_str,
-    belief_name_str,
     event_int_str,
     face_name_str,
     moment_label_str,
-    party_title_str,
     plan_rope_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
 )
 from src.ch17_idea_logic.idea_config import get_idea_config_dict
 from src.ch17_idea_logic.idea_db_tool import (
@@ -28,9 +24,9 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
             face_name_str(),
             moment_label_str(),
             plan_rope_str(),
-            party_title_str(),
-            belief_name_str(),
-            voice_name_str(),
+            wx.party_title,
+            wx.belief_name,
+            wx.voice_name,
             amount_str(),
         ]
         blrlabo_cat = "belief_plan_partyunit"
@@ -80,11 +76,11 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
             face_name_str(),
             moment_label_str(),
             plan_rope_str(),
-            party_title_str(),
-            belief_name_str(),
-            voice_name_str(),
-            voice_cred_points_str(),
-            voice_debt_points_str(),
+            wx.party_title,
+            wx.belief_name,
+            wx.voice_name,
+            wx.voice_cred_points,
+            wx.voice_debt_points,
             amount_str(),
         ]
         blrpern_cat = "belief_voiceunit"
@@ -130,10 +126,10 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
             face_name_str(),
             moment_label_str(),
             plan_rope_str(),
-            party_title_str(),
-            belief_name_str(),
-            voice_name_str(),
-            voice_cred_points_str(),
+            wx.party_title,
+            wx.belief_name,
+            wx.voice_name,
+            wx.voice_cred_points,
             amount_str(),
         ]
         blrpern_cat = "belief_voiceunit"

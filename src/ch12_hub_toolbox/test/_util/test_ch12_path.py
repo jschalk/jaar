@@ -4,8 +4,8 @@ from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
+    Ch04Keywords as wx,
     Ch11Keywords as wx,
-    belief_name_str,
     event_int_str,
     gut_str,
     job_str,
@@ -805,7 +805,7 @@ def test_create_belief_dir_path_HasDocString():
     doc_str = create_belief_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -817,7 +817,7 @@ def test_create_keeps_dir_path_HasDocString():
     doc_str = create_keeps_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -830,7 +830,7 @@ def test_create_keep_rope_path_HasDocString() -> None:
     level1_rope = create_rope(planroot_str(), level1_label_str)
     doc_str = create_keep_rope_path(
         moment_mstr_dir="moment_mstr_dir",
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         moment_label=moment_label_str(),
         keep_rope=level1_rope,
         knot=None,
@@ -845,7 +845,7 @@ def test_create_keep_dutys_path_HasDocString() -> None:
     expected_doc_str = create_keep_dutys_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -861,7 +861,7 @@ def test_create_keep_duty_path_HasDocString() -> None:
     expected_doc_str = create_keep_duty_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
         duty_belief=duty_belief_str,
@@ -877,7 +877,7 @@ def test_create_keep_grades_path_HasDocString() -> None:
     doc_str = create_keep_grades_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -893,7 +893,7 @@ def test_create_keep_visions_path_HasDocString() -> None:
     doc_str = create_keep_visions_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -908,7 +908,7 @@ def test_create_treasury_db_path_HasDocString() -> None:
     doc_str = create_treasury_db_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         keep_rope="planroot;level1;leveln",
         knot=None,
     )
@@ -923,7 +923,7 @@ def test_create_atoms_dir_path_HasDocString():
     doc_str = create_atoms_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -935,7 +935,7 @@ def test_create_packs_dir_path_HasDocString():
     doc_str = create_packs_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -947,7 +947,7 @@ def test_create_buds_dir_path_HasDocString():
     doc_str = create_buds_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -959,7 +959,7 @@ def test_create_bud_dir_path_HasDocString():
     doc_str = create_bud_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -973,7 +973,7 @@ def test_create_cell_dir_path_HasDocString():
     doc_str = create_cell_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
@@ -989,7 +989,7 @@ def test_create_cell_json_path_HasDocString():
     doc_str = create_cell_json_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
@@ -1005,7 +1005,7 @@ def test_create_cell_voice_mandate_ledger_path_HasDocString():
     doc_str = create_cell_voice_mandate_ledger_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
         bud_ancestors=["ledger_belief1", "ledger_belief2", "ledger_belief3"],
     )
@@ -1021,7 +1021,7 @@ def test_create_budunit_json_path_HasDocString():
     doc_str = create_budunit_json_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -1035,7 +1035,7 @@ def test_create_beliefpoint_path_HasDocString():
     doc_str = create_beliefpoint_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         bud_time=wx.bud_time,
     )
     doc_str = doc_str.replace("buds\\bud_time", "buds\n\\bud_time")
@@ -1049,7 +1049,7 @@ def test_create_belief_event_dir_path_HasDocString():
     doc_str = create_belief_event_dir_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         event_int=event_int_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -1062,7 +1062,7 @@ def test_create_beliefevent_path_HasDocString():
     doc_str = create_beliefevent_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         event_int=event_int_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -1075,7 +1075,7 @@ def test_create_event_all_pack_path_HasDocString():
     doc_str = create_event_all_pack_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         event_int=event_int_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -1088,7 +1088,7 @@ def test_create_event_expressed_pack_path_HasDocString():
     doc_str = create_event_expressed_pack_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
         event_int=event_int_str(),
     )
     doc_str = f"Returns path: {doc_str}"
@@ -1101,7 +1101,7 @@ def test_create_gut_path_HasDocString():
     doc_str = create_gut_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -1116,7 +1116,7 @@ def test_create_job_path_HasDocString():
     doc_str = create_job_path(
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
-        belief_name=belief_name_str(),
+        belief_name=wx.belief_name,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

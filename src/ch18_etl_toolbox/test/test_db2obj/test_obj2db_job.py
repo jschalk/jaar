@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import create_insert_query
 from src.ch07_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
+    Ch04Keywords as wx,
     moment_label_str,
     plan_rope_str,
     reason_active_requisite_str,
@@ -279,7 +279,7 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
     x_status = 8
     values_dict = {
         moment_label_str(): x_moment_label,
-        belief_name_str(): x_belief_name,
+        wx.belief_name: x_belief_name,
         plan_rope_str(): x_rope,
         reason_context_str(): x_reason_context,
         reason_state_str(): x_reason_state,
