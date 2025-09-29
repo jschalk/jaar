@@ -308,20 +308,6 @@ def check_keywords_by_chapter_are_not_duplicated(
     assert not chapter_keywords_by_chapter & running_str_functions_set
 
 
-def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str):
-    for file_import in test_file_imports:
-        file_import_src = file_import[0]
-        file_import_objs = file_import[1]
-        if file_import_objs != sorted(file_import_objs):
-            print(f"{file_path=}")
-            file_import_objs_str = str(sorted(file_import_objs))
-            file_import_objs_str = file_import_objs_str.replace("'", "")
-            file_import_objs_str = file_import_objs_str.replace("[", "")
-            file_import_objs_str = file_import_objs_str.replace("]", "")
-            print(f"from {file_import_src} import ({file_import_objs_str})")
-        assert file_import_objs == sorted(file_import_objs)
-
-
 def get_docstring(file_path: str, function_name: str) -> str:
     with open(file_path, "r") as f:
         tree = ast_parse(f.read(), filename=file_path)

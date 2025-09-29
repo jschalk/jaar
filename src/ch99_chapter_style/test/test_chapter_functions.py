@@ -1,18 +1,18 @@
-from copy import copy as copy_copy
-from enum import Enum
 from importlib import import_module as importlib_import_module
-from inspect import (
-    getmembers as inspect_getmembers,
-    getsource as inspect_getsource,
-    isfunction as inspect_isfunction,
-)
+from inspect import getsource as inspect_getsource
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames, open_file
+from src.ch01_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_file_strs,
+    get_dir_filenames,
+    open_file,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
     get_chapter_num_descs,
+    get_chXX_keyword_classes,
     get_cumlative_ch_keywords_dict,
     get_keywords_by_chapter,
     get_keywords_src_config,
@@ -208,8 +208,30 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                 assert ch_class_name in file_str, enum_x
 
 
-def test_Chapters_StrEnumClassesAreCorrectlyTested():
+def test_Chapters_FirstLevelFilesDoNotImportKeywords():
     """Test that checks no str function is created before it is needed or after the term is used."""
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+
+    # ESTABLISH
+
+    # WHEN / THEN
+    # all_file_count = 0
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+
+        chapter_files = list(get_dir_file_strs(chapter_dir, include_dirs=False).keys())
+        chapter_files = sorted(chapter_files)
+        print(f"{chapter_files=}")
+        # chapter_file_count = 0
+        for filename in chapter_files:
+            file_path = create_path(chapter_dir, filename)
+            file_str = open_file(file_path)
+            print(f"{file_path=}")
+            assert "Keywords" not in file_str, f"Keywords reference in {file_path}"
+
+
+def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
+    """"""
     keywords_dict = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
@@ -246,22 +268,6 @@ def test_Chapters_StrEnumClassesAreCorrectlyTested():
 """
         assert inspect_getsource(ChKeywordsClass.__str__) == expected_dunder_str_func
         # assert ChKeywordsClass == ExpectedEnumClass
-
-        # get the class from it
-        # print(f"{chapter_num=} {len(ExpectedEnumClass.__dict__)=}")
-
-    # for str_function_name in sorted(all_str_functions.keys()):
-    #     print(f"{str_function_name=}")
-
-
-def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
-    chXX_keyword_classes = {}
-    for chapter_num in sorted(list(cumlative_ch_keywords_dict.keys())):
-        ch_keywords = cumlative_ch_keywords_dict.get(chapter_num)
-        class_name = f"Ch{chapter_num:02}Keywords"
-        ExpectedClass = Enum(class_name, {t: t for t in ch_keywords}, type=str)
-        chXX_keyword_classes[chapter_num] = ExpectedClass
-    return chXX_keyword_classes
 
 
 def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():

@@ -6,6 +6,7 @@ from ast import (
     walk as ast_walk,
 )
 from copy import copy as copy_copy
+from enum import Enum
 from src.ch01_data_toolbox.file_toolbox import (
     create_path,
     get_level1_dirs,
@@ -42,6 +43,17 @@ def get_cumlative_ch_keywords_dict(keywords_by_chapter: dict[int, set[str]]) -> 
         allowed_keywords_set.update(ch_keywords_set)
         cumlative_ch_keywords_dict[chapter_num] = copy_copy(allowed_keywords_set)
     return cumlative_ch_keywords_dict
+
+
+def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
+    chXX_keyword_classes = {}
+    word_str = "word"
+    for chapter_num in sorted(list(cumlative_ch_keywords_dict.keys())):
+        ch_keywords = cumlative_ch_keywords_dict.get(chapter_num)
+        class_name = f"Ch{chapter_num:02}Key{word_str}s"
+        ExpectedClass = Enum(class_name, {t: t for t in ch_keywords}, type=str)
+        chXX_keyword_classes[chapter_num] = ExpectedClass
+    return chXX_keyword_classes
 
 
 def get_chapter_descs() -> dict[str, str]:
@@ -109,7 +121,8 @@ def get_chapter_desc_prefix(chapter_desc: str) -> str:
 
 
 def get_keywords_by_chapter_md() -> str:
-    keywords_title_str = "Keywords by Chapter"
+    words_str = "words"
+    keywords_title_str = f"Key{words_str} by Chapter"
     func_lines = [f"## {keywords_title_str}"]
     keywords_src_config = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)

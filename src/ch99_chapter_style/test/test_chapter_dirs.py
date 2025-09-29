@@ -16,7 +16,6 @@ from src.ch98_docs_builder.doc_builder import (
 )
 from src.ch99_chapter_style.style import (
     check_if_chapter_keywords_by_chapter_is_sorted,
-    check_import_objs_are_ordered,
     check_keywords_by_chapter_are_not_duplicated,
     get_chapter_descs,
     get_function_names_from_file,
@@ -140,8 +139,6 @@ def test_Chapters_ChXXKeywords_ClassesAreTested():
             test_file_imports = get_imports_from_file(test_file_path)
             assert len(test_file_imports) <= 1
             if len(test_file_imports) == 1:
-                # TODO reactivate or get rid of  check_import_objs_are_ordered
-                # check_import_objs_are_ordered(test_file_imports, test_file_path)
                 file_funcs, class_bases = get_function_names_from_file(test_file_path)
                 class_prefix = chapter_desc_prefix[0].upper() + chapter_desc_prefix[1:]
                 chXX_test_name = (
