@@ -1,9 +1,4 @@
-from src.ch10_pack_logic._ref.ch10_keywords import (
-    Ch10Keywords,
-    FaceName_str,
-    event_int_str,
-    face_name_str,
-)
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords, Ch10Keywords as wx
 
 
 def test_Ch10Keywords_AttributeNamesEqualValues():
@@ -19,6 +14,6 @@ def test_Ch10Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert FaceName_str() == "FaceName"
-    assert event_int_str() == "event_int"
-    assert face_name_str() == "face_name"
+    assert wx.FaceName == "FaceName"
+    assert wx.event_int == "event_int"
+    assert wx.face_name == "face_name"

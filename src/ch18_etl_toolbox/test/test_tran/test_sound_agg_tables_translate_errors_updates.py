@@ -1,11 +1,10 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -35,7 +34,7 @@ def test_create_knot_exists_in_name_error_update_sqlstr_ReturnsObj_PopulatesTabl
         blrpern_dimen = belief_voiceunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
+  {wx.event_int}, {wx.face_name}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -45,7 +44,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-  {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+  {wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -91,7 +90,7 @@ def test_create_knot_exists_in_label_error_update_sqlstr_ReturnsObj_PopulatesTab
         blrpern_dimen = belief_voiceunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
+  {wx.event_int}, {wx.face_name}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -102,7 +101,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-  {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+  {wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')
@@ -150,7 +149,7 @@ def test_set_moment_belief_sound_agg_knot_errors_PopulatesTable_Scenario0():
         blrpern_dimen = belief_voiceunit_str()
         blrpern_s_agg_put = create_prime_tablename(blrpern_dimen, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""INSERT INTO {blrpern_s_agg_put} (
-  {event_int_str()}, {face_name_str()}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
+  {wx.event_int}, {wx.face_name}, {moment_label_str()}, {wx.belief_name}, {wx.voice_name})
 VALUES
   ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{yao_str}')
 , ({event1}, '{sue_str}', '{a23_str}', '{yao_str}', '{bob_str}')
@@ -161,7 +160,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-  {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+  {wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{colon}', '{colon}', '{ukx}')
 , ('{yao_str}', '{comma}', '{comma}', '{ukx}')

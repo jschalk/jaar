@@ -4,7 +4,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch06Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_planunit_str,
     denom_str,
     morph_str,
@@ -106,7 +105,7 @@ def test_create_legible_list_ReturnsObj_planunit_DELETE():
     clean_label = "clean fridge"
     casa_rope = sue_belief.make_l1_rope("casa")
     clean_rope = sue_belief.make_rope(casa_rope, clean_label)
-    clean_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    clean_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     clean_beliefatom.set_arg(plan_rope_str(), clean_rope)
 
     x_beliefdelta = beliefdelta_shop()

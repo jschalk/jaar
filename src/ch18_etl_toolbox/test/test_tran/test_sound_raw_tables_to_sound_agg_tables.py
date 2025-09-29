@@ -2,11 +2,10 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -44,8 +43,8 @@ def test_create_sound_raw_update_inconsist_error_message_sqlstr_ExecutedSqlUpdat
         trlrope_s_raw_tablename = create_prime_tablename(trlrope_str, "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -101,8 +100,8 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario0():
         trlrope_s_raw_tablename = create_prime_tablename(wx.translate_rope, "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -160,8 +159,8 @@ def test_set_sound_raw_tables_error_message_UpdatesTable_Scenario1_belief_raw_de
         )
         insert_into_clause = f"""INSERT INTO {beliefa_s_raw_del} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}_ERASE
@@ -221,8 +220,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -249,8 +248,8 @@ VALUES
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {blrpern_s_put_raw_tblname} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -329,8 +328,8 @@ def test_insert_sound_raw_selects_into_sound_agg_tables_PopulatesValidTable_Scen
         blrpern_s_del_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "del")
         insert_into_clause = f"""INSERT INTO {blrpern_s_del_raw_tblname} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}_ERASE
@@ -388,8 +387,8 @@ def test_etl_sound_raw_tables_to_sound_agg_tables_PopulatesValidTable_Scenario0(
         trlrope_s_raw_tablename = create_prime_tablename("TRLROPE", "s", "raw")
         insert_into_clause = f"""INSERT INTO {trlrope_s_raw_tablename} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -417,8 +416,8 @@ VALUES
         blrpern_s_put_raw_tblname = create_prime_tablename("BLRPERN", "s", "raw", "put")
         insert_into_clause = f"""INSERT INTO {blrpern_s_put_raw_tblname} (
   {wx.idea_number}
-, {event_int_str()}
-, {face_name_str()}
+, {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}

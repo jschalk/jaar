@@ -23,6 +23,8 @@ from src.ch17_idea_logic.idea_config import (
     get_idea_sqlite_types,
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch10Keywords as wx,
+    Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
     belief_plan_awardunit_str,
@@ -35,9 +37,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    event_int_str,
-    face_name_str,
-    moment_timeline_hour_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
@@ -104,8 +103,8 @@ BELIEF_PRIME_TABLENAMES = {
 def get_all_dimen_columns_set(x_dimen: str) -> set[str]:
     if x_dimen == wx.translate_core:
         return {
-            event_int_str(),
-            face_name_str(),
+            wx.event_int,
+            wx.face_name,
             wx.otx_knot,
             wx.inx_knot,
             wx.unknown_str,
@@ -169,7 +168,7 @@ def create_translate_sound_vld_table_sqlstr(x_dimen):
 def create_translate_core_raw_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "raw")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(event_int_str())
+    columns.remove(wx.event_int)
     columns.add("source_dimen")
     columns.add(wx.error_message)
     columns = get_default_sorted_list(columns)
@@ -179,7 +178,7 @@ def create_translate_core_raw_table_sqlstr(x_dimen):
 def create_translate_core_agg_table_sqlstr(x_dimen):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "s", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(event_int_str())
+    columns.remove(wx.event_int)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -204,8 +203,8 @@ def create_moment_heard_raw_table_sqlstr(x_dimen):
 def create_moment_heard_agg_table_sqlstr(x_dimen: str):
     tablename = prime_tbl(get_dimen_abbv7(x_dimen), "h", "agg")
     columns = get_all_dimen_columns_set(x_dimen)
-    columns.remove(event_int_str())
-    columns.remove(face_name_str())
+    columns.remove(wx.event_int)
+    columns.remove(wx.face_name)
     columns = get_default_sorted_list(columns)
     return get_create_table_sqlstr(tablename, columns, get_idea_sqlite_types())
 
@@ -641,7 +640,7 @@ WHERE inconsistency_rows.event_int = translate_title_s_raw.event_int
 def test_create_sound_raw_update_inconsist_error_message_sqlstr_ReturnsObj_Scenario1_MomentDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = moment_timeline_hour_str()
+    dimen = wx.moment_timeline_hour
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_heard_tables(cursor)
@@ -782,7 +781,7 @@ GROUP BY event_int, face_name, otx_title
 def test_create_sound_agg_insert_sqlstrs_ReturnsObj_Scenario1_MomentDimen():
     # sourcery skip: extract-method
     # ESTABLISH
-    dimen = moment_timeline_hour_str()
+    dimen = wx.moment_timeline_hour
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
         create_sound_and_heard_tables(cursor)

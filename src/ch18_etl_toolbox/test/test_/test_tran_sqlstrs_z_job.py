@@ -5,6 +5,7 @@ from src.ch17_idea_logic.idea_config import get_idea_sqlite_types
 from src.ch17_idea_logic.idea_db_tool import get_default_sorted_list
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch12Keywords as wx,
     belief_groupunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -16,7 +17,6 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    job_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -38,7 +38,7 @@ def test_get_job_create_table_sqlstrs_ReturnsObj():
         # print(f"{x_dimen} checking...")
         x_config = belief_config.get(x_dimen)
 
-        job_table = prime_table(x_dimen, job_str(), None)
+        job_table = prime_table(x_dimen, wx.job, None)
         job_cols = {moment_label_str(), wx.belief_name}
         job_cols.update(set(x_config.get("jkeys").keys()))
         job_cols.update(set(x_config.get("jvalues").keys()))
@@ -59,21 +59,17 @@ def test_create_job_tables_CreatesTables():
         cursor.execute("SELECT COUNT(*) FROM sqlite_master WHERE type = 'table'")
         assert cursor.fetchone()[0] == 0
 
-        blrmemb_job_table = prime_table(belief_voice_membership_str(), job_str(), None)
-        blrpern_job_table = prime_table(belief_voiceunit_str(), job_str(), None)
-        blrgrou_job_table = prime_table(belief_groupunit_str(), job_str(), None)
-        blrawar_job_table = prime_table(belief_plan_awardunit_str(), job_str(), None)
-        blrfact_job_table = prime_table(belief_plan_factunit_str(), job_str(), None)
-        blrheal_job_table = prime_table(belief_plan_healerunit_str(), job_str(), None)
-        blrprem_job_table = prime_table(
-            belief_plan_reason_caseunit_str(), job_str(), None
-        )
-        beliefares_job_table = prime_table(
-            belief_plan_reasonunit_str(), job_str(), None
-        )
-        blrlabo_job_table = prime_table(belief_plan_partyunit_str(), job_str(), None)
-        blrplan_job_table = prime_table(belief_planunit_str(), job_str(), None)
-        blrunit_job_table = prime_table(beliefunit_str(), job_str(), None)
+        blrmemb_job_table = prime_table(belief_voice_membership_str(), wx.job, None)
+        blrpern_job_table = prime_table(belief_voiceunit_str(), wx.job, None)
+        blrgrou_job_table = prime_table(belief_groupunit_str(), wx.job, None)
+        blrawar_job_table = prime_table(belief_plan_awardunit_str(), wx.job, None)
+        blrfact_job_table = prime_table(belief_plan_factunit_str(), wx.job, None)
+        blrheal_job_table = prime_table(belief_plan_healerunit_str(), wx.job, None)
+        blrprem_job_table = prime_table(belief_plan_reason_caseunit_str(), wx.job, None)
+        beliefares_job_table = prime_table(belief_plan_reasonunit_str(), wx.job, None)
+        blrlabo_job_table = prime_table(belief_plan_partyunit_str(), wx.job, None)
+        blrplan_job_table = prime_table(belief_planunit_str(), wx.job, None)
+        blrunit_job_table = prime_table(beliefunit_str(), wx.job, None)
         # blrmemb_job_table = f"{belief_voice_membership_str()}_job"
         # blrpern_job_table = f"{belief_voiceunit_str()}_job"
         # blrgrou_job_table = f"{belief_groupunit_str()}_job"

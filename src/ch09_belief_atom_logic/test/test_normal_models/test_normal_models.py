@@ -1,6 +1,7 @@
 from sqlalchemy import inspect
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
+    Ch09Keywords as wx,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -11,8 +12,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
-    normal_specs_str,
-    normal_table_name_str,
 )
 from src.ch09_belief_atom_logic.atom_config import get_normalized_belief_table_build
 from src.ch09_belief_atom_logic.normal_models import (
@@ -30,8 +29,8 @@ from src.ch09_belief_atom_logic.normal_models import (
 
 
 def get_config_table_name(config_dimen) -> str:
-    config_specs_dict = config_dimen.get(normal_specs_str())
-    return config_specs_dict.get(normal_table_name_str())
+    config_specs_dict = config_dimen.get(wx.normal_specs)
+    return config_specs_dict.get(wx.normal_table_name)
 
 
 def all_columns_are_as_config_requires(mapper, config_dimen):

@@ -2,9 +2,8 @@ from numpy import int64 as numpy_int64
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
-    event_int_str,
-    face_name_str,
 )
 from src.ch16_translate_logic.map import (
     NameMap,
@@ -319,8 +318,8 @@ def test_NameMap_to_dict_ReturnsObj():
         wx.inx_knot: x_namemap.inx_knot,
         wx.unknown_str: x_namemap.unknown_str,
         wx.otx2inx: {},
-        face_name_str(): x_namemap.face_name,
-        event_int_str(): x_namemap.event_int,
+        wx.face_name: x_namemap.face_name,
+        wx.event_int: x_namemap.event_int,
     }
     assert x_namemap.to_dict() == x1_rope_map_dict
 
@@ -332,8 +331,8 @@ def test_NameMap_to_dict_ReturnsObj():
         wx.inx_knot: x_namemap.inx_knot,
         wx.unknown_str: x_namemap.unknown_str,
         wx.otx2inx: {clean_otx: clean_inx},
-        face_name_str(): sue_str,
-        event_int_str(): event7,
+        wx.face_name: sue_str,
+        wx.event_int: event7,
     }
     assert x_namemap.to_dict() == x2_rope_map_dict
 
@@ -349,8 +348,8 @@ def test_NameMap_get_json_ReturnsObj():
     slash_otx_knot = "/"
     x_namemap = namemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_json = f"""{{
-  "{event_int_str()}": 0,
-  "{face_name_str()}": "{sue_str}",
+  "{wx.event_int}": 0,
+  "{wx.face_name}": "{sue_str}",
   "{wx.inx_knot}": "{x_namemap.inx_knot}",
   "{wx.otx2inx}": {{}},
   "{wx.otx_knot}": "{x_namemap.otx_knot}",
@@ -365,8 +364,8 @@ def test_NameMap_get_json_ReturnsObj():
     x_namemap.event_int = event7
     # THEN
     x2_rope_map_json = f"""{{
-  "{event_int_str()}": {event7},
-  "{face_name_str()}": "{sue_str}",
+  "{wx.event_int}": {event7},
+  "{wx.face_name}": "{sue_str}",
   "{wx.inx_knot}": "{x_namemap.inx_knot}",
   "{wx.otx2inx}": {{
     "{clean_otx}": "{clean_inx}"

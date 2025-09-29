@@ -1,11 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch03_finance_logic.finance_config import default_fund_pool
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    Ch03Keywords as wx,
-    Ch11Keywords as wx,
-    bud_voice_nets_str,
-    celldepth_str,
-)
+from src.ch11_bud_logic._ref.ch11_keywords import Ch03Keywords as wx, Ch11Keywords as wx
 from src.ch11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,
     BudUnit,
@@ -226,8 +221,8 @@ def test_BudUnit_to_dict_ReturnsObjWith_bud_voice_net():
         wx.bud_time: t4_bud_time,
         wx.quota: t4_quota,
         wx.magnitude: t4_magnitude,
-        bud_voice_nets_str(): t4_bud_voice_nets,
-        celldepth_str(): t4_celldepth,
+        wx.bud_voice_nets: t4_bud_voice_nets,
+        wx.celldepth: t4_celldepth,
     }
 
 

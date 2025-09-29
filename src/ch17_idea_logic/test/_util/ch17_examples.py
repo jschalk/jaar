@@ -4,15 +4,11 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch11Keywords as wx,
-    amount_str,
+    Ch15Keywords as wx,
     c400_number_str,
-    celldepth_str,
-    job_listen_rotations_str,
     moment_label_str,
     monthday_distortion_str,
     timeline_label_str,
-    weekday_label_str,
-    weekday_order_str,
     yr1_jan1_offset_str,
 )
 
@@ -35,7 +31,7 @@ def get_ex1_br00000_df() -> DataFrame:
             wx.knot,
             timeline_label_str(),
             yr1_jan1_offset_str(),
-            job_listen_rotations_str(),
+            wx.job_listen_rotations,
         ]
     )
     x_df.loc[0] = [7, AMY23_STR, 1, 1, 1, 1, "/", "creg", 440640, 7]
@@ -51,7 +47,7 @@ def get_ex1_br00001_df() -> DataFrame:
             wx.belief_name,
             wx.quota,
             wx.bud_time,
-            celldepth_str(),
+            wx.celldepth,
         ]
     )
     x_df.loc[0] = [AMY23_STR, "Sue", 445, 777, 5]
@@ -121,9 +117,7 @@ def get_ex1_br00004_df() -> DataFrame:
 def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_moment_timeline_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
-    x_df = DataFrame(
-        columns=[moment_label_str(), weekday_label_str(), weekday_order_str()]
-    )
+    x_df = DataFrame(columns=[moment_label_str(), wx.weekday_label, wx.weekday_order])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -149,7 +143,7 @@ def get_ex2_br00000_df() -> DataFrame:
             wx.knot,
             timeline_label_str(),
             yr1_jan1_offset_str(),
-            job_listen_rotations_str(),
+            wx.job_listen_rotations,
         ]
     )
     x_df.loc[0] = [7, AMY23_STR, 1, 1, 1, 1, "/", "creg", 440640, 4]
@@ -166,7 +160,7 @@ def get_ex2_br00001_df() -> DataFrame:
             wx.belief_name,
             wx.quota,
             wx.bud_time,
-            celldepth_str(),
+            wx.celldepth,
         ]
     )
     x_df.loc[0] = [AMY23_STR, "Bob", 332, 999, 3]
@@ -183,7 +177,7 @@ def get_ex2_br00002_df() -> DataFrame:
     x_df = DataFrame(
         columns=[
             wx.voice_name,
-            amount_str(),
+            wx.amount,
             moment_label_str(),
             wx.belief_name,
             wx.tran_time,

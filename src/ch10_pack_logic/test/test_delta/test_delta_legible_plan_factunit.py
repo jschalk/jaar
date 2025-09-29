@@ -3,7 +3,6 @@ from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_plan_factunit_str,
     fact_context_str,
     fact_lower_str,
@@ -135,7 +134,7 @@ def test_create_legible_list_ReturnsObj_plan_factunit_DELETE():
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
     reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
-    swim_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(fact_context_str(), reason_context_value)
     # print(f"{swim_beliefatom=}")

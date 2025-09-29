@@ -1,9 +1,4 @@
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    Ch04Keywords as wx,
-    Ch11Keywords as wx,
-    bud_voice_nets_str,
-    celldepth_str,
-)
+from src.ch11_bud_logic._ref.ch11_keywords import Ch04Keywords as wx, Ch11Keywords as wx
 from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt
 from src.ch11_bud_logic.bud import (
     BeliefBudHistory,
@@ -234,7 +229,7 @@ def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
             x7_bud_time: {
                 wx.quota: x7_quota,
                 wx.bud_time: x7_bud_time,
-                celldepth_str(): x7_celldepth,
+                wx.celldepth: x7_celldepth,
             },
         },
     }
@@ -316,7 +311,7 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario2():
             x7_bud_time: {
                 wx.bud_time: x7_bud_time,
                 wx.quota: x7_quota,
-                bud_voice_nets_str(): {
+                wx.bud_voice_nets: {
                     sue_str: sue_bud_voice_net,
                     zia_str: zia_bud_voice_net,
                 },
@@ -365,12 +360,12 @@ def test_BeliefBudHistory_get_tranbook_ReturnsObj():
             x4_bud_time: {
                 wx.bud_time: x4_bud_time,
                 wx.quota: x4_quota,
-                bud_voice_nets_str(): {bob_str: bob_bud_voice_net},
+                wx.bud_voice_nets: {bob_str: bob_bud_voice_net},
             },
             x7_bud_time: {
                 wx.bud_time: x7_bud_time,
                 wx.quota: x7_quota,
-                bud_voice_nets_str(): {zia_str: zia_bud_voice_net},
+                wx.bud_voice_nets: {zia_str: zia_bud_voice_net},
             },
         },
     }

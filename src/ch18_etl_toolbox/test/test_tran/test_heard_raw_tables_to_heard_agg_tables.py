@@ -7,10 +7,9 @@ from src.ch17_idea_logic.idea_config import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch17Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -46,8 +45,8 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
             raw_columns = get_table_columns(cursor, raw_tablename)
             agg_columns = get_table_columns(cursor, agg_tablename)
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
-            raw_columns.remove(f"{face_name_str()}_inx")
-            raw_columns.remove(event_int_str())
+            raw_columns.remove(f"{wx.face_name}_inx")
+            raw_columns.remove(wx.event_int)
             raw_columns.remove(wx.error_message)
             raw_columns = get_default_sorted_list(raw_columns)
 
@@ -158,8 +157,8 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
         )
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}_inx
+  {wx.event_int}
+, {wx.face_name}_inx
 , {moment_label_str()}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
@@ -188,8 +187,8 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -232,8 +231,8 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
         )
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}_inx
+  {wx.event_int}
+, {wx.face_name}_inx
 , {moment_label_str()}_inx
 , {wx.belief_name}_inx
 , {wx.voice_name}_inx
@@ -260,8 +259,8 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}

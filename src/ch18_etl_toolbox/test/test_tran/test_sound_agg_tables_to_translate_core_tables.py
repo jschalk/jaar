@@ -6,11 +6,10 @@ from src.ch16_translate_logic.translate_main import (
 )
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -67,8 +66,8 @@ def test_create_insert_into_translate_core_raw_sqlstr_ReturnsObj_PopulatesTable_
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -129,8 +128,8 @@ def test_insert_translate_sound_agg_into_translate_core_raw_table_PopulatesTable
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -152,8 +151,8 @@ VALUES
             trlname_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_name_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_name}
 , {wx.inx_name}
 , {wx.otx_knot}
@@ -219,7 +218,7 @@ def test_update_inconsistency_translate_core_raw_table_UpdatesTable_Scenario0():
         )
         insert_into_clause = f"""INSERT INTO {translate_core_s_raw_tablename} (
   source_dimen
-, {face_name_str()}
+, {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -286,7 +285,7 @@ def test_insert_translate_core_raw_to_translate_core_agg_table_PopulatesTable_Sc
         )
         insert_into_clause = f"""INSERT INTO {translate_core_s_raw_tablename} (
   source_dimen
-, {face_name_str()}
+, {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -342,7 +341,7 @@ def test_insert_translate_core_agg_to_translate_core_vld_table_PopulatesTable_Sc
             trlcore_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_core_s_agg_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -404,8 +403,8 @@ def test_create_update_translate_sound_agg_inconsist_sqlstr_PopulatesTable_Scena
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -427,7 +426,7 @@ VALUES
         print(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_into_clause = f"""INSERT INTO {translate_core_s_vld_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -486,8 +485,8 @@ def test_update_translate_sound_agg_inconsist_errors_PopulatesTable_Scenario1():
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -507,7 +506,7 @@ VALUES
         cursor.execute(f"{insert_into_clause} {values_clause}")
         translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_into_clause = f"""INSERT INTO {translate_core_s_vld_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -565,8 +564,8 @@ def test_create_update_trllabe_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trllabe_dimen = wx.translate_label
         trllabe_s_agg_tablename = create_prime_tablename(trllabe_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trllabe_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_label}
 , {wx.inx_label}
 )"""
@@ -583,7 +582,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {translate_core_s_vld_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -657,8 +656,8 @@ def test_create_update_trlrope_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trlrope_dimen = wx.translate_rope
         trlrope_s_agg_tablename = create_prime_tablename(trlrope_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trlrope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 )"""
@@ -675,7 +674,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {translate_core_s_vld_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -751,8 +750,8 @@ def test_create_update_trlname_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trlname_dimen = wx.translate_name
         trlname_s_agg_tablename = create_prime_tablename(trlname_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trlname_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_name}
 , {wx.inx_name}
 )"""
@@ -769,7 +768,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {translate_core_s_vld_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -846,8 +845,8 @@ def test_create_update_trltitl_sound_agg_knot_error_sqlstr_PopulatesTable_Scenar
         trltitl_dimen = wx.translate_title
         trltitl_s_agg_tablename = create_prime_tablename(trltitl_dimen, "s", "agg")
         insert_into_clause = f"""INSERT INTO {trltitl_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_title}
 , {wx.inx_title}
 )"""
@@ -865,7 +864,7 @@ VALUES
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         translate_core_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {translate_core_s_vld_tablename} (
-  {face_name_str()}
+  {wx.face_name}
 , {wx.otx_knot}
 , {wx.inx_knot}
 , {wx.unknown_str}
@@ -943,16 +942,16 @@ def test_update_translate_sound_agg_knot_errors_UpdatesTables_Scenario0():
         trlname_s_agg_tablename = create_prime_tablename(wx.translate_name, "s", "agg")
         trltitl_s_agg_tablename = create_prime_tablename(wx.translate_title, "s", "agg")
         insert_trllabe_sqlstr = f"""
-INSERT INTO {trllabe_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_label}, {wx.inx_label})
+INSERT INTO {trllabe_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlrope_sqlstr = f"""
-INSERT INTO {trlrope_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_rope}, {wx.inx_rope})
+INSERT INTO {trlrope_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlname_sqlstr = f"""
-INSERT INTO {trlname_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
+INSERT INTO {trlname_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trltitl_sqlstr = f"""
-INSERT INTO {trltitl_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_title}, {wx.inx_title})
+INSERT INTO {trltitl_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
 VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
         cursor.execute(insert_trllabe_sqlstr)
         cursor.execute(insert_trlrope_sqlstr)
@@ -962,7 +961,7 @@ VALUES ({event1}, '{bob_str}', '{bad_sue_otx}', '{sue_inx}');"""
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         cursor.execute(CREATE_TRLCORE_SOUND_VLD_SQLSTR)
         insert_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-{face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+{wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         trllabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {trllabe_s_agg_tablename} WHERE {wx.error_message} IS NOT NULL;"
@@ -983,7 +982,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         assert cursor.execute(trlname_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(trltitl_error_count_sqlstr).fetchone()[0] == 1
         assert get_row_count(cursor, trltitl_s_agg_tablename) == 1
-        select_core_raw_sqlstr = f"SELECT {event_int_str()}, {face_name_str()}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT {wx.event_int}, {wx.face_name}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         exp_row0 = (1, bob_str, f"{casa_str}{rdx}", casa_str)
@@ -1015,8 +1014,8 @@ def test_create_insert_translate_sound_vld_table_sqlstr_ReturnsObj_PopulatesTabl
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -1085,8 +1084,8 @@ def test_insert_translate_sound_agg_tables_to_translate_sound_vld_table_Populate
             trlrope_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_rope_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}
@@ -1152,8 +1151,8 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario0_
             trlname_dimen, "s", "agg"
         )
         insert_into_clause = f"""INSERT INTO {translate_name_s_agg_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_name}
 , {wx.inx_name}
 , {wx.otx_knot}
@@ -1227,13 +1226,13 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario1_
         trlrope_s_agg_tablename = create_prime_tablename(wx.translate_rope, "s", "agg")
         trlname_s_agg_tablename = create_prime_tablename(wx.translate_name, "s", "agg")
         insert_trllabe_sqlstr = f"""
-INSERT INTO {trllabe_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_label}, {wx.inx_label})
+INSERT INTO {trllabe_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlrope_sqlstr = f"""
-INSERT INTO {trlrope_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_rope}, {wx.inx_rope})
+INSERT INTO {trlrope_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         insert_trlname_sqlstr = f"""
-INSERT INTO {trlname_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
+INSERT INTO {trlname_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
 VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
         cursor.execute(insert_trllabe_sqlstr)
         cursor.execute(insert_trlrope_sqlstr)
@@ -1241,7 +1240,7 @@ VALUES ({event1}, '{bob_str}', '{casa_str}{rdx}', '{casa_str}');"""
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-{face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+{wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         trllabe_error_count_sqlstr = f"SELECT COUNT(*) FROM {trllabe_s_agg_tablename} WHERE {wx.error_message} IS NOT NULL;"
@@ -1258,7 +1257,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         assert cursor.execute(trllabe_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(trlrope_error_count_sqlstr).fetchone()[0] == 1
         assert cursor.execute(trlname_error_count_sqlstr).fetchone()[0] == 1
-        select_core_raw_sqlstr = f"SELECT {event_int_str()}, {face_name_str()}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
+        select_core_raw_sqlstr = f"SELECT {wx.event_int}, {wx.face_name}, {wx.otx_label}, {wx.inx_label} FROM {trllabe_s_agg_tablename}"
         cursor.execute(select_core_raw_sqlstr)
         rows = cursor.fetchall()
         exp_row0 = (1, bob_str, f"{casa_str}{rdx}", casa_str)
@@ -1281,7 +1280,7 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario0_Populates
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
+INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1293,7 +1292,7 @@ VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
 
         # THEN
         assert get_row_count(cursor, trlcore_s_vld_tablename) == 1
-        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str} FROM {trlcore_s_vld_tablename}"
+        select_core_vld_sqlstr = f"SELECT {wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str} FROM {trlcore_s_vld_tablename}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
         x_knot = default_knot_if_None()
@@ -1316,13 +1315,13 @@ def test_populate_translate_core_vld_with_missing_face_names_Scenario1_Populates
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
+INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-{face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+{wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, trlcore_s_vld_tablename) == 1
@@ -1332,7 +1331,7 @@ VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
 
         # THEN
         assert get_row_count(cursor, trlcore_s_vld_tablename) == 2
-        select_core_vld_sqlstr = f"SELECT {face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str} FROM {trlcore_s_vld_tablename} ORDER BY {face_name_str()}"
+        select_core_vld_sqlstr = f"SELECT {wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str} FROM {trlcore_s_vld_tablename} ORDER BY {wx.face_name}"
         cursor.execute(select_core_vld_sqlstr)
         rows = cursor.fetchall()
         default_knot = default_knot_if_None()
@@ -1359,7 +1358,7 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario2_
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
+INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
@@ -1394,13 +1393,13 @@ def test_etl_translate_sound_agg_tables_to_translate_sound_vld_tables_Scenario3_
         blrpern_str = belief_voiceunit_str()
         blrpern_s_agg_tablename = create_prime_tablename(blrpern_str, "s", "agg", "put")
         insert_blrpern_sqlstr = f"""
-INSERT INTO {blrpern_s_agg_tablename} ({event_int_str()}, {face_name_str()}, {wx.belief_name}, {wx.voice_name})
+INSERT INTO {blrpern_s_agg_tablename} ({wx.event_int}, {wx.face_name}, {wx.belief_name}, {wx.voice_name})
 VALUES ({event1}, '{bob_str}', '{bob_str}', '{bob_str}'), ({event1}, '{yao_str}', '{yao_str}', '{yao_str}');"""
         cursor.execute(insert_blrpern_sqlstr)
 
         trlcore_s_vld_tablename = create_prime_tablename("trlcore", "s", "vld")
         insert_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename} (
-{face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+{wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES ('{bob_str}', '{rdx}', '{rdx}', '{ukx}');"""
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, trlcore_s_vld_tablename) == 1

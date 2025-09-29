@@ -1,14 +1,6 @@
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch09Keywords,
-    CRUD_command_str,
-    DELETE_str,
-    atom_hx_str,
-    atom_str,
-    column_order_str,
-    crud_str,
-    nesting_order_str,
-    normal_specs_str,
-    normal_table_name_str,
+    Ch09Keywords as wx,
 )
 
 
@@ -25,12 +17,11 @@ def test_Ch09Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert CRUD_command_str() == "CRUD_command"
-    assert DELETE_str() == "DELETE"
-    assert atom_str() == "atom"
-    assert atom_hx_str() == "atom_hx"
-    assert column_order_str() == "column_order"
-    assert crud_str() == "crud"
-    assert nesting_order_str() == "nesting_order"
-    assert normal_specs_str() == "normal_specs"
-    assert normal_table_name_str() == "normal_table_name"
+    assert wx.CRUD_command == "CRUD_command"
+    assert wx.DELETE == "DELETE"
+    assert wx.atom_hx == "atom_hx"
+    assert wx.column_order == "column_order"
+    assert wx.crud == "crud"
+    assert wx.nesting_order == "nesting_order"
+    assert wx.normal_specs == "normal_specs"
+    assert wx.normal_table_name == "normal_table_name"

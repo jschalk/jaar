@@ -2,10 +2,9 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count, get_table_columns
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch17Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import (
@@ -40,8 +39,8 @@ def test_get_insert_into_sound_vld_sqlstrs_ReturnsObj_PopulatesTable_Scenario0()
         )
         print(f"{get_table_columns(cursor, beliefavoice_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {beliefavoice_s_agg_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -70,8 +69,8 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrawar_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -114,8 +113,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario0_AddRowsToTable():
         )
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -142,8 +141,8 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -185,8 +184,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario1_Populates_Columns():
         )
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -213,8 +212,8 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -256,8 +255,8 @@ def test_etl_sound_agg_tables_to_sound_vld_tables_Scenario2_DoesNotSelectWhere_e
         )
         print(f"{get_table_columns(cursor, blrpern_s_agg_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_s_agg_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -285,8 +284,8 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_vld_put_tablename) == 3
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}

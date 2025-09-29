@@ -3,10 +3,8 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
-    cumulative_minute_str,
-    event_int_str,
-    face_name_str,
-    hour_label_str,
+    Ch10Keywords as wx,
+    Ch15Keywords as wx,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.idea_collector import (
@@ -94,11 +92,11 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario0_TranslateSheetNames(
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
-        hour_label_str(),
+        wx.hour_label,
     ]
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
     row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
@@ -133,18 +131,18 @@ def test_get_all_idea_dataframes_ReturnsObj_Scenario1(env_dir_setup_cleanup):
     ex_filename = "Faybob.xlsx"
     ex_file_path = create_path(x_dir, ex_filename)
     idea_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
-        hour_label_str(),
+        wx.hour_label,
     ]
     row1 = [event1, sue_str, minute_360, amy23_str, hour6am]
     row2 = [event1, sue_str, minute_420, amy23_str, hour7am]
     incomplete_idea_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, amy23_str]

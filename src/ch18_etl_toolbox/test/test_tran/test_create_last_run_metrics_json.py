@@ -2,7 +2,7 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.file_toolbox import open_json
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx, event_int_str
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.ch18_path import create_last_run_metrics_path
 from src.ch18_etl_toolbox.test._util.ch18_env import get_chapter_temp_dir
 from src.ch18_etl_toolbox.tran_sqlstrs import create_sound_and_heard_tables
@@ -20,18 +20,18 @@ def test_create_last_run_metrics_json_CreatesFile():
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         agg_br00003_tablename = f"br00003_{wx.brick_agg}"
-        agg_br00003_columns = [event_int_str()]
+        agg_br00003_columns = [wx.event_int]
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         agg_br00003_insert_sqlstr = f"""
-INSERT INTO {agg_br00003_tablename} ({event_int_str()})
+INSERT INTO {agg_br00003_tablename} ({wx.event_int})
 VALUES ('{event1}'), ('{event1}'), ('{event9}');"""
         cursor.execute(agg_br00003_insert_sqlstr)
 
         agg_br00044_tablename = f"br00044_{wx.brick_agg}"
-        agg_br00044_columns = [event_int_str()]
+        agg_br00044_columns = [wx.event_int]
         create_idea_sorted_table(cursor, agg_br00044_tablename, agg_br00044_columns)
         agg_br00044_insert_sqlstr = f"""
-INSERT INTO {agg_br00044_tablename} ({event_int_str()})
+INSERT INTO {agg_br00044_tablename} ({wx.event_int})
 VALUES ('{event3}');"""
         cursor.execute(agg_br00044_insert_sqlstr)
         assert not os_path_exists(last_run_metrics_path)

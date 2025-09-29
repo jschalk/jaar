@@ -4,7 +4,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_plan_awardunit_str,
     plan_rope_str,
 )
@@ -125,7 +124,7 @@ def test_create_legible_list_ReturnsObj_plan_awardunit_DELETE():
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     awardee_title_value = f"{sue_belief.knot}Swimmers"
-    swim_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     swim_beliefatom.set_arg(plan_rope_str(), rope_value)
     swim_beliefatom.set_arg(wx.awardee_title, awardee_title_value)
     # print(f"{swim_beliefatom=}")

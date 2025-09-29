@@ -1,9 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
-    amount_str,
-    event_int_str,
-    face_name_str,
+    Ch10Keywords as wx,
+    Ch11Keywords as wx,
     moment_label_str,
     plan_rope_str,
 )
@@ -20,14 +19,14 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            event_int_str(),
-            face_name_str(),
+            wx.event_int,
+            wx.face_name,
             moment_label_str(),
             plan_rope_str(),
             wx.party_title,
             wx.belief_name,
             wx.voice_name,
-            amount_str(),
+            wx.amount,
         ]
         blrlabo_cat = "belief_plan_partyunit"
         src_table = f"{idea_number}_raw"
@@ -72,8 +71,8 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            event_int_str(),
-            face_name_str(),
+            wx.event_int,
+            wx.face_name,
             moment_label_str(),
             plan_rope_str(),
             wx.party_title,
@@ -81,7 +80,7 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
             wx.voice_name,
             wx.voice_cred_points,
             wx.voice_debt_points,
-            amount_str(),
+            wx.amount,
         ]
         blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
@@ -122,15 +121,15 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            event_int_str(),
-            face_name_str(),
+            wx.event_int,
+            wx.face_name,
             moment_label_str(),
             plan_rope_str(),
             wx.party_title,
             wx.belief_name,
             wx.voice_name,
             wx.voice_cred_points,
-            amount_str(),
+            wx.amount,
         ]
         blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"

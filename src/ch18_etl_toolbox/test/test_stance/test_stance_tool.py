@@ -17,9 +17,8 @@ from src.ch17_idea_logic.idea_csv_tool import (
 )
 from src.ch17_idea_logic.idea_db_tool import get_sheet_names
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
-    event_int_str,
-    face_name_str,
 )
 from src.ch18_etl_toolbox.ch18_path import (
     create_moment_mstr_path,
@@ -130,7 +129,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
+        ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -140,7 +139,7 @@ def test_collect_stance_csv_strs_ReturnsObj_Scenario2_TranslateRowsInDB(
 
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
-        ({face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+        ({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')
@@ -234,7 +233,7 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         print(f"{trlname_s_vld_tablename=}")
         insert_trlname_sqlstr = f"""INSERT INTO {trlname_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {wx.otx_name}, {wx.inx_name})
+        ({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -244,7 +243,7 @@ def test_create_stance0001_file_CreatesFile_Scenario1_TranslateRowsInDB(
 
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
-        ({face_name_str()}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
+        ({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
         VALUES
           ('{sue_otx}', '{slash_str}', '{colon_str}', '{sue_unknown_str}')
         , ('{bob_otx}', '{slash_str}', '{colon_str}', '{bob_unknown_str}')

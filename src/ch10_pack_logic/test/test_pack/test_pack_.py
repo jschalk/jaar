@@ -8,10 +8,8 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
+    Ch10Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
@@ -249,10 +247,10 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     assert x_dict.get(moment_label_str()) == amy45_str
     assert x_dict.get(wx.belief_name) is not None
     assert x_dict.get(wx.belief_name) == bob_str
-    assert x_dict.get(face_name_str()) is not None
-    assert x_dict.get(face_name_str()) == sue_str
-    assert x_dict.get(event_int_str()) is not None
-    assert x_dict.get(event_int_str()) == amy45_e5_int
+    assert x_dict.get(wx.face_name) is not None
+    assert x_dict.get(wx.face_name) == sue_str
+    assert x_dict.get(wx.event_int) is not None
+    assert x_dict.get(wx.event_int) == amy45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -328,10 +326,10 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     assert total_dict.get(moment_label_str()) == amy45_str
     assert total_dict.get(wx.belief_name) is not None
     assert total_dict.get(wx.belief_name) == bob_str
-    assert total_dict.get(face_name_str()) is not None
-    assert total_dict.get(face_name_str()) == sue_str
-    assert total_dict.get(event_int_str()) is not None
-    assert total_dict.get(event_int_str()) == amy45_e5_int
+    assert total_dict.get(wx.face_name) is not None
+    assert total_dict.get(wx.face_name) == sue_str
+    assert total_dict.get(wx.event_int) is not None
+    assert total_dict.get(wx.event_int) == amy45_e5_int
     delta_str = "delta"
     assert total_dict.get(delta_str) == {}
 
@@ -446,10 +444,10 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     # THEN
     assert x_dict.get(wx.belief_name) is not None
     assert x_dict.get(wx.belief_name) == bob_str
-    assert x_dict.get(face_name_str()) is not None
-    assert x_dict.get(face_name_str()) == yao_str
-    assert x_dict.get(event_int_str()) is not None
-    assert x_dict.get(event_int_str()) == event5_int
+    assert x_dict.get(wx.face_name) is not None
+    assert x_dict.get(wx.face_name) == yao_str
+    assert x_dict.get(wx.event_int) is not None
+    assert x_dict.get(wx.event_int) == event5_int
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None
@@ -618,7 +616,7 @@ def test_PackUnit_is_empty_ReturnsObj():
     bob_packunit_delete = packunit_shop(bob_str)
     bob_packunit_delete.add_beliefatom(
         dimen=belief_voiceunit_str(),
-        crud_str=DELETE_str(),
+        crud_str=wx.DELETE,
         jkeys=bob_required_dict,
         jvalues={},
     )

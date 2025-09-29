@@ -11,11 +11,10 @@ from src.ch15_moment_logic._ref.ch15_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
-    beliefbudhistorys_str,
+    Ch11Keywords as wx,
+    Ch12Keywords as wx,
+    Ch15Keywords as wx,
     moment_label_str,
-    moment_mstr_dir_str,
-    offi_time_str,
-    paybook_str,
     timeline_str,
 )
 from src.ch15_moment_logic.moment_main import (
@@ -62,32 +61,30 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     x_dict = amy_moment.to_dict()
 
     # THEN
-    offi_times_str = f"{offi_time_str()}s"
+    offi_times_str = f"{wx.offi_time}s"
     print(f"{ amy_moment._get_beliefbudhistorys_dict()=}")
     print(f"{ amy_moment.paybook.to_dict()=}")
     assert x_dict.get(moment_label_str()) == a45_str
-    assert x_dict.get(moment_mstr_dir_str()) == moment_mstr_dir
+    assert x_dict.get(wx.moment_mstr_dir) == moment_mstr_dir
     assert x_dict.get(timeline_str()) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
     assert x_dict.get(wx.fund_iota) == default_fund_iota_if_None()
     assert x_dict.get(wx.respect_bit) == default_RespectBit_if_None()
     assert x_dict.get(wx.penny) == filter_penny()
-    assert (
-        x_dict.get(beliefbudhistorys_str()) == amy_moment._get_beliefbudhistorys_dict()
-    )
-    assert x_dict.get(paybook_str()) == amy_moment.paybook.to_dict()
+    assert x_dict.get(wx.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
+    assert x_dict.get(wx.paybook) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
         moment_label_str(),
-        moment_mstr_dir_str(),
+        wx.moment_mstr_dir,
         timeline_str(),
         offi_times_str,
-        beliefbudhistorys_str(),
+        wx.beliefbudhistorys,
         wx.knot,
         wx.fund_iota,
         wx.respect_bit,
         wx.penny,
-        paybook_str(),
+        wx.paybook,
     }
 
 
@@ -100,13 +97,13 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
     x_dict = amy_moment.to_dict(include_paybook=False)
 
     # THEN
-    assert not x_dict.get(paybook_str())
+    assert not x_dict.get(wx.paybook)
     assert set(x_dict.keys()) == {
         moment_label_str(),
-        moment_mstr_dir_str(),
+        wx.moment_mstr_dir,
         timeline_str(),
-        f"{offi_time_str()}s",
-        beliefbudhistorys_str(),
+        f"{wx.offi_time}s",
+        wx.beliefbudhistorys,
         wx.knot,
         wx.fund_iota,
         wx.respect_bit,

@@ -30,11 +30,11 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch09Keywords as wx,
+    Ch10Keywords as wx,
     Ch11Keywords as wx,
+    Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    DELETE_str,
-    amount_str,
     attributes_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -47,40 +47,23 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     belief_voiceunit_str,
     beliefunit_str,
     c400_number_str,
-    celldepth_str,
-    column_order_str,
     credor_respect_str,
     cumulative_day_str,
-    cumulative_minute_str,
     debtor_respect_str,
     denom_str,
     dimens_str,
-    event_int_str,
-    face_name_str,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     fact_upper_str,
     gogo_want_str,
     healer_name_str,
-    hour_label_str,
     jkeys_str,
-    job_listen_rotations_str,
     jvalues_str,
-    moment_budunit_str,
     moment_label_str,
-    moment_paybook_str,
-    moment_timeline_hour_str,
-    moment_timeline_month_str,
-    moment_timeline_weekday_str,
-    moment_timeoffi_str,
-    momentunit_str,
-    month_label_str,
     monthday_distortion_str,
     morph_str,
-    normal_specs_str,
     numor_str,
-    offi_time_str,
     plan_rope_str,
     pledge_str,
     reason_active_requisite_str,
@@ -92,8 +75,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     stop_want_str,
     timeline_label_str,
     voice_pool_str,
-    weekday_label_str,
-    weekday_order_str,
     yr1_jan1_offset_str,
 )
 from src.ch17_idea_logic.idea_config import (
@@ -291,7 +272,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[139] == "unknown_str"
     assert table_sorting_priority[140] == "quota"
     assert table_sorting_priority[141] == "celldepth"
-    assert table_sorting_priority[142] == job_listen_rotations_str()
+    assert table_sorting_priority[142] == wx.job_listen_rotations
     assert table_sorting_priority[143] == wx.error_message
     assert table_sorting_priority[144] == "_belief_name_is_labor"
     assert table_sorting_priority[145] == "active"
@@ -340,8 +321,8 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     all_args.update(translateable_delete_otx_cols)
     all_args.update(translateable_delete_inx_cols)
     all_args.add(wx.idea_number)
-    all_args.add(event_int_str())
-    all_args.add(face_name_str())
+    all_args.add(wx.event_int)
+    all_args.add(wx.face_name)
     all_args.add("source_dimen")
     all_args.add("translate_event_int")
     all_args.add(wx.error_message)
@@ -369,9 +350,9 @@ def test_get_idea_sqlite_types_ReturnsObj():
     # THEN
     assert set(sqlite_types.keys()) == set(get_idea_elements_sort_order())
     assert sqlite_types.get(wx.idea_number) == "TEXT"
-    assert sqlite_types.get(face_name_str()) == "TEXT"
+    assert sqlite_types.get(wx.face_name) == "TEXT"
     assert sqlite_types.get("translate_event_int") == "INTEGER"
-    assert sqlite_types.get(event_int_str()) == "INTEGER"
+    assert sqlite_types.get(wx.event_int) == "INTEGER"
     assert sqlite_types.get(moment_label_str()) == "TEXT"
     assert sqlite_types.get(wx.belief_name) == "TEXT"
     assert sqlite_types.get(wx.voice_name) == "TEXT"
@@ -383,7 +364,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.party_title) == "TEXT"
     assert sqlite_types.get(wx.awardee_title) == "TEXT"
     assert sqlite_types.get(healer_name_str()) == "TEXT"
-    assert sqlite_types.get(offi_time_str()) == "INTEGER"
+    assert sqlite_types.get(wx.offi_time) == "INTEGER"
     assert sqlite_types.get(wx.bud_time) == "INTEGER"
     assert sqlite_types.get(wx.tran_time) == "INTEGER"
     assert sqlite_types.get(wx.begin) == "REAL"
@@ -417,13 +398,13 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.penny) == "REAL"
     assert sqlite_types.get(pledge_str()) == "INTEGER"
     assert sqlite_types.get(wx.respect_bit) == "REAL"
-    assert sqlite_types.get(amount_str()) == "REAL"
-    assert sqlite_types.get(month_label_str()) == "TEXT"
-    assert sqlite_types.get(hour_label_str()) == "TEXT"
-    assert sqlite_types.get(cumulative_minute_str()) == "INTEGER"
+    assert sqlite_types.get(wx.amount) == "REAL"
+    assert sqlite_types.get(wx.month_label) == "TEXT"
+    assert sqlite_types.get(wx.hour_label) == "TEXT"
+    assert sqlite_types.get(wx.cumulative_minute) == "INTEGER"
     assert sqlite_types.get(cumulative_day_str()) == "INTEGER"
-    assert sqlite_types.get(weekday_label_str()) == "TEXT"
-    assert sqlite_types.get(weekday_order_str()) == "INTEGER"
+    assert sqlite_types.get(wx.weekday_label) == "TEXT"
+    assert sqlite_types.get(wx.weekday_order) == "INTEGER"
     assert sqlite_types.get(wx.otx_knot) == "TEXT"
     assert sqlite_types.get(wx.inx_knot) == "TEXT"
     assert sqlite_types.get(wx.unknown_str) == "TEXT"
@@ -431,7 +412,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(c400_number_str()) == "INTEGER"
     assert sqlite_types.get(yr1_jan1_offset_str()) == "INTEGER"
     assert sqlite_types.get(wx.quota) == "REAL"
-    assert sqlite_types.get(celldepth_str()) == "INTEGER"
+    assert sqlite_types.get(wx.celldepth) == "INTEGER"
     assert sqlite_types.get(monthday_distortion_str()) == "INTEGER"
     assert sqlite_types.get(timeline_label_str()) == "TEXT"
     assert sqlite_types.get(wx.error_message) == "TEXT"
@@ -455,7 +436,7 @@ def test_get_allowed_curds_ReturnsObj():
         wx.delete_insert,
         wx.delete_update,
         wx.INSERT,
-        DELETE_str(),
+        wx.DELETE,
         wx.UPDATE,
     }
 
@@ -474,13 +455,13 @@ def test_get_idea_config_dict_ReturnsObj():
     # THEN
     assert x_idea_config
     idea_config_dimens = set(x_idea_config.keys())
-    assert momentunit_str() in idea_config_dimens
-    assert moment_budunit_str() in idea_config_dimens
-    assert moment_paybook_str() in idea_config_dimens
-    assert moment_timeline_hour_str() in idea_config_dimens
-    assert moment_timeline_month_str() in idea_config_dimens
-    assert moment_timeline_weekday_str() in idea_config_dimens
-    assert moment_timeoffi_str() in idea_config_dimens
+    assert wx.momentunit in idea_config_dimens
+    assert wx.moment_budunit in idea_config_dimens
+    assert wx.moment_paybook in idea_config_dimens
+    assert wx.moment_timeline_hour in idea_config_dimens
+    assert wx.moment_timeline_month in idea_config_dimens
+    assert wx.moment_timeline_weekday in idea_config_dimens
+    assert wx.moment_timeoffi in idea_config_dimens
     assert belief_voice_membership_str() in idea_config_dimens
     assert belief_voiceunit_str() in idea_config_dimens
     assert belief_plan_awardunit_str() in idea_config_dimens
@@ -519,8 +500,8 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(wx.allowed_crud) is not None
         assert idea_dict.get(wx.UPDATE) is None
         assert idea_dict.get(wx.INSERT) is None
-        assert idea_dict.get(DELETE_str()) is None
-        assert idea_dict.get(normal_specs_str()) is None
+        assert idea_dict.get(wx.DELETE) is None
+        assert idea_dict.get(wx.normal_specs) is None
         if idea_dict.get(wx.idea_category) == "belief":
             sub_dimen = atom_config_dict.get(idea_dimen)
         elif idea_dict.get(wx.idea_category) == "moment":
@@ -531,10 +512,10 @@ def _validate_idea_config(x_idea_config: dict):
         assert idea_dict.get(wx.allowed_crud) in get_allowed_curds()
 
         if idea_dimen in {
-            moment_timeline_hour_str(),
-            moment_timeline_month_str(),
-            moment_timeline_weekday_str(),
-            momentunit_str(),
+            wx.moment_timeline_hour,
+            wx.moment_timeline_month,
+            wx.moment_timeline_weekday,
+            wx.momentunit,
             "map_otx2inx",
             wx.translate_title,
             wx.translate_name,
@@ -543,53 +524,53 @@ def _validate_idea_config(x_idea_config: dict):
         }:
             assert idea_dict.get(wx.allowed_crud) == wx.insert_one_time
         elif idea_dimen in {
-            moment_budunit_str(),
-            moment_paybook_str(),
-            moment_timeoffi_str(),
+            wx.moment_budunit,
+            wx.moment_paybook,
+            wx.moment_timeoffi,
         }:
             assert idea_dict.get(wx.allowed_crud) == wx.insert_multiple
         elif (
             sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(wx.INSERT) != None
-            and sub_dimen.get(DELETE_str()) != None
+            and sub_dimen.get(wx.DELETE) != None
         ):
             assert idea_dict.get(wx.allowed_crud) == wx.delete_insert_update
         elif (
             sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(wx.INSERT) != None
-            and sub_dimen.get(DELETE_str()) is None
+            and sub_dimen.get(wx.DELETE) is None
         ):
             assert idea_dict.get(wx.allowed_crud) == wx.insert_update
         elif (
             sub_dimen.get(wx.UPDATE) is None
             and sub_dimen.get(wx.INSERT) != None
-            and sub_dimen.get(DELETE_str()) != None
+            and sub_dimen.get(wx.DELETE) != None
         ):
             assert idea_dict.get(wx.allowed_crud) == wx.delete_insert
         elif (
             sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(wx.INSERT) is None
-            and sub_dimen.get(DELETE_str()) != None
+            and sub_dimen.get(wx.DELETE) != None
         ):
             assert idea_dict.get(wx.allowed_crud) == wx.delete_update
         elif (
             sub_dimen.get(wx.UPDATE) != None
             and sub_dimen.get(wx.INSERT) is None
-            and sub_dimen.get(DELETE_str()) is None
+            and sub_dimen.get(wx.DELETE) is None
         ):
             assert idea_dict.get(wx.allowed_crud) == wx.UPDATE
         elif (
             sub_dimen.get(wx.UPDATE) is None
             and sub_dimen.get(wx.INSERT) != None
-            and sub_dimen.get(DELETE_str()) is None
+            and sub_dimen.get(wx.DELETE) is None
         ):
             assert idea_dict.get(wx.allowed_crud) == wx.INSERT
         elif (
             sub_dimen.get(wx.UPDATE) is None
             and sub_dimen.get(wx.INSERT) is None
-            and sub_dimen.get(DELETE_str()) != None
+            and sub_dimen.get(wx.DELETE) != None
         ):
-            assert idea_dict.get(wx.allowed_crud) == DELETE_str()
+            assert idea_dict.get(wx.allowed_crud) == wx.DELETE
         else:
             test_str = f"{wx.allowed_crud} not checked by test"
             assert idea_dict.get(wx.allowed_crud) == test_str
@@ -598,15 +579,15 @@ def _validate_idea_config(x_idea_config: dict):
         idea_jkeys_keys = set(idea_dict.get(jkeys_str()).keys())
         # print(f"    {sub_jkeys_keys=}")
         # print(f"  {idea_jkeys_keys=}")
-        assert face_name_str() in idea_jkeys_keys
-        assert event_int_str() in idea_jkeys_keys
+        assert wx.face_name in idea_jkeys_keys
+        assert wx.event_int in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) != "translate":
             assert moment_label_str() in idea_jkeys_keys
         if idea_dict.get(wx.idea_category) == "belief":
             idea_jkeys_keys.remove(moment_label_str())
             idea_jkeys_keys.remove(wx.belief_name)
-        idea_jkeys_keys.remove(face_name_str())
-        idea_jkeys_keys.remove(event_int_str())
+        idea_jkeys_keys.remove(wx.face_name)
+        idea_jkeys_keys.remove(wx.event_int)
         assert sub_jkeys_keys == idea_jkeys_keys
 
         sub_jvalues_keys = set(sub_dimen.get(jvalues_str()).keys())
@@ -633,7 +614,7 @@ def _validate_idea_config(x_idea_config: dict):
         # for jvalue in idea_jvalues_keys:
         #     print(f"{jvalue=} {idea_jvalues_dict=}")
         #     jvalue_dict = idea_jvalues_dict.get(jvalue)
-        #     jvalue_column_order = jvalue_dict.get(column_order_str())
+        #     jvalue_column_order = jvalue_dict.get(wx.column_order)
         #     assert jvalue_column_order != None
         #     list_ref_arg = sort_list[jvalue_column_order]
         #     assert list_ref_arg != None
@@ -642,7 +623,7 @@ def _validate_idea_config(x_idea_config: dict):
         # # for jkey in idea_jkeys_keys:
         #     print(f"{jkey=} {idea_jkeys_dict=}")
         #     jkey_dict = idea_jkeys_dict.get(jkey)
-        #     jkey_column_order = jkey_dict.get(column_order_str())
+        #     jkey_column_order = jkey_dict.get(wx.column_order)
         #     assert jkey_column_order != None
         #     list_ref_arg = sort_list[jkey_column_order]
         #     assert list_ref_arg != None
@@ -744,8 +725,8 @@ def _validate_idea_format_files(idea_filenames: set[str]):
                     # )
                 assert x_dimen not in format_dimens
 
-    # assert face_name_str() in idea_format_attributes
-    # assert event_int_str() in idea_format_attributes
+    # assert wx.face_name in idea_format_attributes
+    # assert wx.event_int in idea_format_attributes
 
     # confirm every ideanumber is unique
     assert len(idea_numbers_set) == len(idea_filenames)
@@ -789,10 +770,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(wx.translate_title, 1)
     # set_idea_config_json(wx.translate_label, 2)
     # set_idea_config_json(wx.translate_rope, 3)
-    # set_idea_config_json(momentunit_str(), 5)
-    # set_idea_config_json(moment_timeline_hour_str(), 6)
-    # set_idea_config_json(moment_timeline_month_str(), 7)
-    # set_idea_config_json(moment_timeline_weekday_str(), 8)
+    # set_idea_config_json(wx.momentunit, 5)
+    # set_idea_config_json(wx.moment_timeline_hour, 6)
+    # set_idea_config_json(wx.moment_timeline_month, 7)
+    # set_idea_config_json(wx.moment_timeline_weekday, 8)
     # set_idea_config_json(belief_voice_membership_str(), 9)
     # set_idea_config_json(belief_voiceunit_str(), 10)
     # set_idea_config_json(belief_plan_awardunit_str(), 11)
@@ -803,8 +784,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     # set_idea_config_json(belief_plan_reasonunit_str(), 17)
     # set_idea_config_json(belief_planunit_str(), 18)
     # set_idea_config_json(beliefunit_str(), 19)
-    # set_idea_config_json(moment_budunit_str(), 20)
-    # set_idea_config_json(moment_paybook_str(), 21)
+    # set_idea_config_json(wx.moment_budunit, 20)
+    # set_idea_config_json(wx.moment_paybook, 21)
 
     x_idea_config = get_idea_config_dict()
 
@@ -813,10 +794,10 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(wx.translate_title).get(bo) == 1
     assert x_idea_config.get(wx.translate_label).get(bo) == 2
     assert x_idea_config.get(wx.translate_rope).get(bo) == 3
-    assert x_idea_config.get(momentunit_str()).get(bo) == 5
-    assert x_idea_config.get(moment_timeline_hour_str()).get(bo) == 6
-    assert x_idea_config.get(moment_timeline_month_str()).get(bo) == 7
-    assert x_idea_config.get(moment_timeline_weekday_str()).get(bo) == 8
+    assert x_idea_config.get(wx.momentunit).get(bo) == 5
+    assert x_idea_config.get(wx.moment_timeline_hour).get(bo) == 6
+    assert x_idea_config.get(wx.moment_timeline_month).get(bo) == 7
+    assert x_idea_config.get(wx.moment_timeline_weekday).get(bo) == 8
     assert x_idea_config.get(belief_voice_membership_str()).get(bo) == 9
     assert x_idea_config.get(belief_voiceunit_str()).get(bo) == 10
     assert x_idea_config.get(belief_plan_awardunit_str()).get(bo) == 11
@@ -827,8 +808,8 @@ def test_get_idea_config_dict_ReturnsObj_build_order():
     assert x_idea_config.get(belief_plan_reasonunit_str()).get(bo) == 17
     assert x_idea_config.get(belief_planunit_str()).get(bo) == 18
     assert x_idea_config.get(beliefunit_str()).get(bo) == 19
-    assert x_idea_config.get(moment_budunit_str()).get(bo) == 20
-    assert x_idea_config.get(moment_paybook_str()).get(bo) == 21
+    assert x_idea_config.get(wx.moment_budunit).get(bo) == 20
+    assert x_idea_config.get(wx.moment_paybook).get(bo) == 21
 
 
 def test_get_quick_ideas_column_ref_ReturnsObj():
@@ -838,8 +819,8 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
     # THEN
     assert len(x_idea_quick_column_ref) == len(get_idea_numbers())
     assert x_idea_quick_column_ref.get("br00000") == {
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         c400_number_str(),
         moment_label_str(),
         wx.fund_iota,
@@ -849,7 +830,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.knot,
         timeline_label_str(),
         yr1_jan1_offset_str(),
-        job_listen_rotations_str(),
+        wx.job_listen_rotations,
     }
 
 

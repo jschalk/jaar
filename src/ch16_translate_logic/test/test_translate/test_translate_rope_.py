@@ -1,9 +1,8 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
-    event_int_str,
-    face_name_str,
 )
 from src.ch16_translate_logic.map import (
     RopeMap,
@@ -467,8 +466,8 @@ def test_RopeMap_get_json_ReturnsObj():
     slash_otx_knot = "/"
     x_ropemap = ropemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_json = f"""{{
-  "{event_int_str()}": 0,
-  "{face_name_str()}": "{sue_str}",
+  "{wx.event_int}": 0,
+  "{wx.face_name}": "{sue_str}",
   "{wx.inx_knot}": "{x_ropemap.inx_knot}",
   "{wx.otx2inx}": {{}},
   "{wx.otx_knot}": "{x_ropemap.otx_knot}",
@@ -484,8 +483,8 @@ def test_RopeMap_get_json_ReturnsObj():
     x_ropemap.event_int = event7
     # THEN
     x2_rope_map_json = f"""{{
-  "{event_int_str()}": {event7},
-  "{face_name_str()}": "{sue_str}",
+  "{wx.event_int}": {event7},
+  "{wx.face_name}": "{sue_str}",
   "{wx.inx_knot}": "{x_ropemap.inx_knot}",
   "{wx.otx2inx}": {{
     "{clean_otx}": "{clean_inx}"

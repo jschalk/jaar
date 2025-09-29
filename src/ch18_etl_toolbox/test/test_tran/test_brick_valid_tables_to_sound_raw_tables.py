@@ -3,10 +3,9 @@ from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
     Ch18Keywords as wx,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
@@ -38,8 +37,8 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
 
         br00117_valid_tablename = f"br00117_{wx.brick_valid}"
         br00117_columns = [
-            event_int_str(),
-            face_name_str(),
+            wx.event_int,
+            wx.face_name,
             moment_label_str(),
             wx.belief_name,
             wx.voice_name,
@@ -48,8 +47,8 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
         ]
         create_idea_sorted_table(cursor, br00117_valid_tablename, set(br00117_columns))
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
 , {wx.belief_name}
 , {wx.voice_name}
@@ -66,8 +65,8 @@ VALUES
 
         br00045_valid_tablename = f"br00045_{wx.brick_valid}"
         br00045_columns = [
-            event_int_str(),
-            face_name_str(),
+            wx.event_int,
+            wx.face_name,
             wx.otx_rope,
             wx.inx_rope,
             wx.otx_knot,
@@ -76,8 +75,8 @@ VALUES
         ]
         create_idea_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {wx.otx_rope}
 , {wx.inx_rope}
 , {wx.otx_knot}

@@ -4,9 +4,8 @@ from src.ch01_data_toolbox.file_toolbox import create_path, open_file
 from src.ch12_hub_toolbox.ch12_path import create_belief_event_dir_path
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
@@ -50,7 +49,7 @@ def test_etl_heard_agg_to_event_belief_csvs_PopulatesBeliefPulabelTables(
         cursor = belief_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
         insert_raw_sqlstr = f"""
-INSERT INTO {put_agg_tablename} ({event_int_str()},{face_name_str()},{moment_label_str()},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points})
+INSERT INTO {put_agg_tablename} ({wx.event_int},{wx.face_name},{moment_label_str()},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points})
 VALUES
   ({event3},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_voice_cred_points5})
 , ({event7},'{sue_inx}','{amy23_str}','{bob_inx}','{yao_inx}',{yao_voice_cred_points5})

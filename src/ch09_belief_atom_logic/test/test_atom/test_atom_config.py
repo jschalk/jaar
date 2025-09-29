@@ -8,7 +8,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_groupunit_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
@@ -21,9 +20,7 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     belief_voiceunit_str,
     beliefunit_str,
     class_type_str,
-    column_order_str,
     credor_respect_str,
-    crud_str,
     debtor_respect_str,
     denom_str,
     dimen_str,
@@ -35,9 +32,6 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     jkeys_str,
     jvalues_str,
     morph_str,
-    nesting_order_str,
-    normal_specs_str,
-    normal_table_name_str,
     numor_str,
     plan_rope_str,
     planroot_str,
@@ -68,7 +62,7 @@ from src.ch09_belief_atom_logic.atom_config import (
 def test_CRUD_command_Exists():
     # ESTABLISH / WHEN / THEN
     assert CRUD_command(wx.UPDATE) == str(wx.UPDATE)
-    assert CRUD_command(DELETE_str()) == str(DELETE_str())
+    assert CRUD_command(wx.DELETE) == str(wx.DELETE)
     assert CRUD_command(wx.INSERT) == str(wx.INSERT)
 
 
@@ -165,15 +159,15 @@ def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
                 print(x_str)
                 return False
 
-        if dimen_dict.get(DELETE_str()) is not None:
-            dimen_delete = dimen_dict.get(DELETE_str())
+        if dimen_dict.get(wx.DELETE) is not None:
+            dimen_delete = dimen_dict.get(wx.DELETE)
             if dimen_delete.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {DELETE_str()} {dimen_delete.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {wx.DELETE} {dimen_delete.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if dimen_dict.get(normal_specs_str()) is None:
-            print(f"{dimen=} {normal_specs_str()} is missing")
+        if dimen_dict.get(wx.normal_specs) is None:
+            print(f"{dimen=} {wx.normal_specs} is missing")
             return False
     return True
 
@@ -202,15 +196,15 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     # set_mog(wx.UPDATE, belief_plan_factunit_str(), 13)
     # set_mog(wx.UPDATE, belief_plan_reason_caseunit_str(), 14)
     # set_mog(wx.UPDATE, belief_plan_reasonunit_str(), 15)
-    # set_mog(DELETE_str(), belief_plan_reason_caseunit_str(), 16)
-    # set_mog(DELETE_str(), belief_plan_reasonunit_str(), 17)
-    # set_mog(DELETE_str(), belief_plan_factunit_str(), 18)
-    # set_mog(DELETE_str(), belief_plan_partyunit_str(), 19)
-    # set_mog(DELETE_str(), belief_plan_healerunit_str(), 20)
-    # set_mog(DELETE_str(), belief_plan_awardunit_str(), 21)
-    # set_mog(DELETE_str(), belief_planunit_str(), 22)
-    # set_mog(DELETE_str(), belief_voice_membership_str(), 23)
-    # set_mog(DELETE_str(), belief_voiceunit_str(), 24)
+    # set_mog(wx.DELETE, belief_plan_reason_caseunit_str(), 16)
+    # set_mog(wx.DELETE, belief_plan_reasonunit_str(), 17)
+    # set_mog(wx.DELETE, belief_plan_factunit_str(), 18)
+    # set_mog(wx.DELETE, belief_plan_partyunit_str(), 19)
+    # set_mog(wx.DELETE, belief_plan_healerunit_str(), 20)
+    # set_mog(wx.DELETE, belief_plan_awardunit_str(), 21)
+    # set_mog(wx.DELETE, belief_planunit_str(), 22)
+    # set_mog(wx.DELETE, belief_voice_membership_str(), 23)
+    # set_mog(wx.DELETE, belief_voiceunit_str(), 24)
     # set_mog(wx.UPDATE, beliefunit_str(), 25)
 
     assert 0 == q_order(wx.INSERT, belief_voiceunit_str())
@@ -229,15 +223,15 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     assert 13 == q_order(wx.UPDATE, belief_plan_factunit_str())
     assert 14 == q_order(wx.UPDATE, belief_plan_reason_caseunit_str())
     assert 15 == q_order(wx.UPDATE, belief_plan_reasonunit_str())
-    assert 16 == q_order(DELETE_str(), belief_plan_reason_caseunit_str())
-    assert 17 == q_order(DELETE_str(), belief_plan_reasonunit_str())
-    assert 18 == q_order(DELETE_str(), belief_plan_factunit_str())
-    assert 19 == q_order(DELETE_str(), belief_plan_partyunit_str())
-    assert 20 == q_order(DELETE_str(), belief_plan_healerunit_str())
-    assert 21 == q_order(DELETE_str(), belief_plan_awardunit_str())
-    assert 22 == q_order(DELETE_str(), belief_planunit_str())
-    assert 23 == q_order(DELETE_str(), belief_voice_membership_str())
-    assert 24 == q_order(DELETE_str(), belief_voiceunit_str())
+    assert 16 == q_order(wx.DELETE, belief_plan_reason_caseunit_str())
+    assert 17 == q_order(wx.DELETE, belief_plan_reasonunit_str())
+    assert 18 == q_order(wx.DELETE, belief_plan_factunit_str())
+    assert 19 == q_order(wx.DELETE, belief_plan_partyunit_str())
+    assert 20 == q_order(wx.DELETE, belief_plan_healerunit_str())
+    assert 21 == q_order(wx.DELETE, belief_plan_awardunit_str())
+    assert 22 == q_order(wx.DELETE, belief_planunit_str())
+    assert 23 == q_order(wx.DELETE, belief_voice_membership_str())
+    assert 24 == q_order(wx.DELETE, belief_voiceunit_str())
     assert 25 == q_order(wx.UPDATE, beliefunit_str())
 
 
@@ -277,7 +271,7 @@ def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {class_type_str(), wx.sqlite_datatype, column_order_str()}
+    arg_elements = {class_type_str(), wx.sqlite_datatype, wx.column_order}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -318,7 +312,7 @@ def check_necessary_nesting_order_exists() -> bool:
     # print(f"{multi_jkey_dict.keys()=}")
     for atom_key, jkeys in multi_jkey_dict.items():
         for jkey_key, jkeys_dict in jkeys.items():
-            jkey_nesting_order = jkeys_dict.get(nesting_order_str())
+            jkey_nesting_order = jkeys_dict.get(wx.nesting_order)
             print(f"{atom_key=} {jkey_key=} {jkey_nesting_order=}")
             if jkey_nesting_order is None:
                 return False
@@ -459,20 +453,20 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert cat_healerunit is not None
     assert cat_fact is not None
 
-    normal_specs_beliefunit = cat_beliefunit.get(normal_specs_str())
-    normal_specs_voiceunit = cat_voiceunit.get(normal_specs_str())
-    normal_specs_membership = cat_membership.get(normal_specs_str())
-    normal_specs_plan = cat_plan.get(normal_specs_str())
-    normal_specs_awardunit = cat_awardunit.get(normal_specs_str())
-    normal_specs_reason = cat_reason.get(normal_specs_str())
-    normal_specs_case = cat_case.get(normal_specs_str())
-    normal_specs_partyunit = cat_partyunit.get(normal_specs_str())
-    normal_specs_healerunit = cat_healerunit.get(normal_specs_str())
-    normal_specs_fact = cat_fact.get(normal_specs_str())
+    normal_specs_beliefunit = cat_beliefunit.get(wx.normal_specs)
+    normal_specs_voiceunit = cat_voiceunit.get(wx.normal_specs)
+    normal_specs_membership = cat_membership.get(wx.normal_specs)
+    normal_specs_plan = cat_plan.get(wx.normal_specs)
+    normal_specs_awardunit = cat_awardunit.get(wx.normal_specs)
+    normal_specs_reason = cat_reason.get(wx.normal_specs)
+    normal_specs_case = cat_case.get(wx.normal_specs)
+    normal_specs_partyunit = cat_partyunit.get(wx.normal_specs)
+    normal_specs_healerunit = cat_healerunit.get(wx.normal_specs)
+    normal_specs_fact = cat_fact.get(wx.normal_specs)
 
     columns_str = "columns"
     print(f"{cat_beliefunit.keys()=}")
-    print(f"{normal_specs_str()=}")
+    print(f"{wx.normal_specs=}")
     assert normal_specs_beliefunit is not None
     assert normal_specs_voiceunit is not None
     assert normal_specs_membership is not None
@@ -484,16 +478,16 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert normal_specs_healerunit is not None
     assert normal_specs_fact is not None
 
-    table_name_beliefunit = normal_specs_beliefunit.get(normal_table_name_str())
-    table_name_voiceunit = normal_specs_voiceunit.get(normal_table_name_str())
-    table_name_membership = normal_specs_membership.get(normal_table_name_str())
-    table_name_plan = normal_specs_plan.get(normal_table_name_str())
-    table_name_awardunit = normal_specs_awardunit.get(normal_table_name_str())
-    table_name_reason = normal_specs_reason.get(normal_table_name_str())
-    table_name_case = normal_specs_case.get(normal_table_name_str())
-    table_name_partyunit = normal_specs_partyunit.get(normal_table_name_str())
-    table_name_healerunit = normal_specs_healerunit.get(normal_table_name_str())
-    table_name_fact = normal_specs_fact.get(normal_table_name_str())
+    table_name_beliefunit = normal_specs_beliefunit.get(wx.normal_table_name)
+    table_name_voiceunit = normal_specs_voiceunit.get(wx.normal_table_name)
+    table_name_membership = normal_specs_membership.get(wx.normal_table_name)
+    table_name_plan = normal_specs_plan.get(wx.normal_table_name)
+    table_name_awardunit = normal_specs_awardunit.get(wx.normal_table_name)
+    table_name_reason = normal_specs_reason.get(wx.normal_table_name)
+    table_name_case = normal_specs_case.get(wx.normal_table_name)
+    table_name_partyunit = normal_specs_partyunit.get(wx.normal_table_name)
+    table_name_healerunit = normal_specs_healerunit.get(wx.normal_table_name)
+    table_name_fact = normal_specs_fact.get(wx.normal_table_name)
 
     assert table_name_beliefunit == "belief"
     assert table_name_voiceunit == "voiceunit"

@@ -1,9 +1,4 @@
-from src.ch12_hub_toolbox._ref.ch12_keywords import (
-    Ch12Keywords,
-    gut_str,
-    job_str,
-    moment_mstr_dir_str,
-)
+from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords, Ch12Keywords as wx
 
 
 def test_Ch12Keywords_AttributeNamesEqualValues():
@@ -19,6 +14,6 @@ def test_Ch12Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert gut_str() == "gut"
-    assert job_str() == "job"
-    assert moment_mstr_dir_str() == "moment_mstr_dir"
+    assert wx.gut == "gut"
+    assert wx.job == "job"
+    assert wx.moment_mstr_dir == "moment_mstr_dir"

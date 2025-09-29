@@ -2,8 +2,8 @@ from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
+    Ch09Keywords as wx,
     belief_plan_factunit_str,
-    crud_str,
     dimen_str,
     fact_context_str,
     fact_lower_str,
@@ -41,7 +41,7 @@ def test_BeliefAtom_to_dict_ReturnsObj():
     # THEN
     assert atom_dict == {
         dimen_str(): x_dimen,
-        crud_str(): wx.INSERT,
+        wx.crud: wx.INSERT,
         jkeys_str(): {plan_rope_str(): ball_rope, fact_context_str(): knee_rope},
         jvalues_str(): {
             fact_lower_str(): knee_reason_lower,

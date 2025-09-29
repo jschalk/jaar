@@ -1,8 +1,7 @@
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch10Keywords as wx,
     Ch16Keywords as wx,
-    event_int_str,
-    face_name_str,
 )
 from src.ch16_translate_logic.test._util.ch16_examples import (
     get_clean_labelmap,
@@ -23,8 +22,8 @@ from src.ch16_translate_logic.translate_main import (
 
 
 def _get_rid_of_translate_core_keys(map_dict: dict) -> dict:
-    map_dict.pop(event_int_str())
-    map_dict.pop(face_name_str())
+    map_dict.pop(wx.event_int)
+    map_dict.pop(wx.face_name)
     map_dict.pop(wx.otx_knot)
     map_dict.pop(wx.inx_knot)
     map_dict.pop(wx.unknown_str)
@@ -42,8 +41,8 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario0():
     # THEN
     print(sue_dict)
     assert sue_dict
-    assert sue_dict.get(face_name_str()) == sue_str
-    assert sue_dict.get(event_int_str()) == sue_translateunit.event_int
+    assert sue_dict.get(wx.face_name) == sue_str
+    assert sue_dict.get(wx.event_int) == sue_translateunit.event_int
     assert sue_dict.get(wx.otx_knot) == default_knot_if_None()
     assert sue_dict.get(wx.inx_knot) == default_knot_if_None()
     assert sue_dict.get(wx.unknown_str) == default_unknown_str_if_None()
@@ -75,7 +74,7 @@ def test_TranslateUnit_to_dict_ReturnsObj_Scenario1():
     sue_dict = sue_translateunit.to_dict()
 
     # THEN
-    assert sue_dict.get(face_name_str()) == sue_str
+    assert sue_dict.get(wx.face_name) == sue_str
     assert sue_dict.get(wx.otx_knot) == slash_otx_knot
     assert sue_dict.get(wx.inx_knot) == colon_inx_knot
     assert sue_dict.get(wx.unknown_str) == x_unknown_str

@@ -5,7 +5,6 @@ from src.ch02_rope_logic.rope import create_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     Ch09Keywords as wx,
-    atom_hx_str,
     belief_plan_factunit_str,
     beliefunit_str,
     fact_context_str,
@@ -80,7 +79,7 @@ def test_BeliefAtom_get_insert_sqlstr_ReturnsObj_plan_factunit():
 
     # THEN
     example_sqlstr = f"""
-INSERT INTO {atom_hx_str()} (
+INSERT INTO {wx.atom_hx} (
   {x_dimen}_{wx.INSERT}_{plan_rope_str()}
 , {x_dimen}_{wx.INSERT}_{fact_context_str()}
 , {x_dimen}_{wx.INSERT}_{fact_lower_str()}
@@ -111,7 +110,7 @@ def test_get_beliefatom_from_rowdata_ReturnsObj_plan_factunit():
 , {knee_fact_lower} as {x_dimen}_{wx.INSERT}_{fact_lower_str()}
 """
     with sqlite3_connect(":memory:") as x_conn:
-        x_rowdata = get_rowdata(atom_hx_str(), x_conn, x_sqlstr)
+        x_rowdata = get_rowdata(wx.atom_hx, x_conn, x_sqlstr)
 
     # WHEN
     x_beliefatom = get_beliefatom_from_rowdata(x_rowdata)

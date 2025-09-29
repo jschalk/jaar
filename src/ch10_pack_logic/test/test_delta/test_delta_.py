@@ -9,7 +9,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_plan_awardunit_str,
     belief_planunit_str,
     belief_voice_membership_str,
@@ -205,7 +204,7 @@ def test_BeliefDelta_get_crud_beliefatoms_list_ReturnsObj():
     ex1_beliefdelta = get_beliefdelta_example1()
     assert len(ex1_beliefdelta.beliefatoms.get(wx.UPDATE).keys()) == 1
     assert ex1_beliefdelta.beliefatoms.get(wx.INSERT) is None
-    assert len(ex1_beliefdelta.beliefatoms.get(DELETE_str()).keys()) == 1
+    assert len(ex1_beliefdelta.beliefatoms.get(wx.DELETE).keys()) == 1
 
     # WHEN
     sue_atom_order_dict = ex1_beliefdelta._get_crud_beliefatoms_list()
@@ -215,7 +214,7 @@ def test_BeliefDelta_get_crud_beliefatoms_list_ReturnsObj():
     print(f"{sue_atom_order_dict.keys()=}")
     # print(f"{sue_atom_order_dict.get(wx.UPDATE)=}")
     assert len(sue_atom_order_dict.get(wx.UPDATE)) == 1
-    assert len(sue_atom_order_dict.get(DELETE_str())) == 1
+    assert len(sue_atom_order_dict.get(wx.DELETE)) == 1
     # for crud_str, atom_list in sue_atom_order_dict.items():
     #     print(f"{crud_str=}")
     #     print(f"{len(atom_list)=}")
@@ -230,7 +229,7 @@ def test_BeliefDelta_get_dimen_sorted_beliefatoms_list_ReturnsObj_Scenario0_rope
     assert len(update_dict.keys()) == 1
     print(f"{update_dict.keys()=}")
     assert ex1_beliefdelta.beliefatoms.get(wx.INSERT) is None
-    delete_dict = ex1_beliefdelta.beliefatoms.get(DELETE_str())
+    delete_dict = ex1_beliefdelta.beliefatoms.get(wx.DELETE)
     assert len(delete_dict.keys()) == 1
 
     # WHEN
@@ -305,10 +304,10 @@ def test_BeliefDelta_get_sorted_beliefatoms_ReturnsObj():
     assert len(update_dict.keys()) == 1
     assert update_dict.get(beliefunit_str()) is not None
     print(f"atom_order 28 {ex1_beliefdelta.beliefatoms.get(wx.UPDATE).keys()=}")
-    delete_dict = ex1_beliefdelta.beliefatoms.get(DELETE_str())
+    delete_dict = ex1_beliefdelta.beliefatoms.get(wx.DELETE)
     assert len(delete_dict.keys()) == 1
     assert delete_dict.get(belief_voiceunit_str()) is not None
-    print(f"atom_order 26 {ex1_beliefdelta.beliefatoms.get(DELETE_str()).keys()=}")
+    print(f"atom_order 26 {ex1_beliefdelta.beliefatoms.get(wx.DELETE).keys()=}")
 
     # WHEN
     sue_atom_order_list = ex1_beliefdelta.get_sorted_beliefatoms()

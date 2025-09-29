@@ -10,20 +10,18 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch03Keywords as wx,
     Ch04Keywords as wx,
     Ch07Keywords as wx,
-    face_name_str,
+    Ch10Keywords as wx,
+    Ch15Keywords as wx,
     fact_context_str,
     fact_lower_str,
     fact_state_str,
     healer_name_str,
-    hour_label_str,
     moment_label_str,
-    month_label_str,
     plan_label_str,
     plan_rope_str,
     reason_context_str,
     reason_state_str,
     timeline_label_str,
-    weekday_label_str,
 )
 from src.ch16_translate_logic.map import (
     labelmap_shop,
@@ -197,20 +195,20 @@ def test_get_translateable_args_ReturnsObj():
         wx.voice_name,
         wx.awardee_title,
         reason_context_str(),
-        face_name_str(),
+        wx.face_name,
         fact_context_str(),
         moment_label_str(),
         fact_state_str(),
         wx.group_title,
         healer_name_str(),
-        hour_label_str(),
-        month_label_str(),
+        wx.hour_label,
+        wx.month_label,
         reason_state_str(),
         wx.belief_name,
         plan_rope_str(),
         wx.party_title,
         timeline_label_str(),
-        weekday_label_str(),
+        wx.weekday_label,
     }
 
 
@@ -295,7 +293,7 @@ def test_get_translate_NameTerm_args_ReturnsObj():
     # THEN
     assert translate_NameTerm_args == {
         wx.voice_name,
-        face_name_str(),
+        wx.face_name,
         healer_name_str(),
         wx.belief_name,
     }
@@ -332,10 +330,10 @@ def test_get_translate_LabelTerm_args_ReturnsObj():
     # THEN
     assert translate_LabelTerm_args == {
         moment_label_str(),
-        hour_label_str(),
-        month_label_str(),
+        wx.hour_label,
+        wx.month_label,
         timeline_label_str(),
-        weekday_label_str(),
+        wx.weekday_label,
     }
     expected_args = {
         x_arg

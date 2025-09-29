@@ -14,7 +14,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch04Keywords as wx,
     Ch06Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_plan_awardunit_str,
     belief_plan_factunit_str,
     belief_plan_healerunit_str,
@@ -56,7 +55,7 @@ def print_beliefatom_keys(x_beliefdelta: BeliefDelta):
 
 def get_delete_beliefatom_list(x_beliefdelta: BeliefDelta) -> list:
     return get_empty_list_if_None(
-        x_beliefdelta._get_crud_beliefatoms_list().get(DELETE_str())
+        x_beliefdelta._get_crud_beliefatoms_list().get(wx.DELETE)
     )
 
 
@@ -145,7 +144,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voiceunit_
     # THEN
     xio_beliefatom = get_from_nested_dict(
         sue_beliefdelta.beliefatoms,
-        [DELETE_str(), belief_voiceunit_str(), xio_str],
+        [wx.DELETE, belief_voiceunit_str(), xio_str],
     )
     assert xio_beliefatom.get_value(wx.voice_name) == xio_str
 
@@ -357,7 +356,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_voice_memb
     sue_beliefdelta.add_all_different_beliefatoms(before_sue_belief, after_sue_belief)
 
     # THEN
-    x_keylist = [DELETE_str(), belief_voice_membership_str(), bob_str, fly_str]
+    x_keylist = [wx.DELETE, belief_voice_membership_str(), bob_str, fly_str]
     xio_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert xio_beliefatom.get_value(wx.voice_name) == bob_str
     assert xio_beliefatom.get_value(wx.group_title) == fly_str
@@ -397,13 +396,13 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_delet
 
     # THEN
     x_dimen = belief_planunit_str()
-    print(f"{sue_beliefdelta.beliefatoms.get(DELETE_str()).get(x_dimen).keys()=}")
+    print(f"{sue_beliefdelta.beliefatoms.get(wx.DELETE).get(x_dimen).keys()=}")
 
-    x_keylist = [DELETE_str(), belief_planunit_str(), street_rope]
+    x_keylist = [wx.DELETE, belief_planunit_str(), street_rope]
     street_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert street_beliefatom.get_value(plan_rope_str()) == street_rope
 
-    x_keylist = [DELETE_str(), belief_planunit_str(), ball_rope]
+    x_keylist = [wx.DELETE, belief_planunit_str(), ball_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
 
@@ -564,7 +563,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_award
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
 
-    x_keylist = [DELETE_str(), belief_plan_awardunit_str(), disc_rope, run_str]
+    x_keylist = [wx.DELETE, belief_plan_awardunit_str(), disc_rope, run_str]
     run_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert run_beliefatom.get_value(plan_rope_str()) == disc_rope
     assert run_beliefatom.get_value(wx.awardee_title) == run_str
@@ -798,7 +797,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
 
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
-    x_keylist = [DELETE_str(), belief_plan_factunit_str(), ball_rope, knee_rope]
+    x_keylist = [wx.DELETE, belief_plan_factunit_str(), ball_rope, knee_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(plan_rope_str()) == ball_rope
     assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
@@ -909,7 +908,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
     x_keylist = [
-        DELETE_str(),
+        wx.DELETE,
         belief_plan_reason_caseunit_str(),
         ball_rope,
         knee_rope,
@@ -1125,7 +1124,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
     x_keylist = [
-        DELETE_str(),
+        wx.DELETE,
         belief_plan_reasonunit_str(),
         ball_rope,
         medical_rope,
@@ -1195,7 +1194,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_party
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
     x_keylist = [
-        DELETE_str(),
+        wx.DELETE,
         belief_plan_partyunit_str(),
         ball_rope,
         xio_str,
@@ -1300,7 +1299,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
     x_keylist = [
-        DELETE_str(),
+        wx.DELETE,
         belief_plan_healerunit_str(),
         ball_rope,
         xio_str,
@@ -1338,7 +1337,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_heale
     # THEN
     print(f"{print_beliefatom_keys(sue_beliefdelta)=}")
     x_keylist = [
-        DELETE_str(),
+        wx.DELETE,
         belief_plan_healerunit_str(),
         ball_rope,
         xio_str,

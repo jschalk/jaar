@@ -8,12 +8,10 @@ from src.ch01_data_toolbox.db_toolbox import (
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch10Keywords as wx,
+    Ch15Keywords as wx,
     Ch17Keywords as wx,
     Ch18Keywords as wx,
-    cumulative_minute_str,
-    event_int_str,
-    face_name_str,
-    hour_label_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.test._util.ch18_env import (
@@ -39,11 +37,11 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     br3_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
-        hour_label_str(),
+        wx.hour_label,
     ]
     a23_str = "amy23"
     row0 = [event1, sue_str, minute_360, a23_str, hour6am]
@@ -77,7 +75,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario0(
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
+ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -90,8 +88,10 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
         m_360 = minute_360
         m_420 = minute_420
         br3_ex1_str = br00003_ex1_str
-        err4 = f"Conversion errors: {cumulative_minute_str()}: num55"
-        err0 = f"Conversion errors: {event_int_str()}: event3, {cumulative_minute_str()}: num55"
+        err4 = f"Conversion errors: {wx.cumulative_minute}: num55"
+        err0 = (
+            f"Conversion errors: {wx.event_int}: event3, {wx.cumulative_minute}: num55"
+        )
         row0 = (s_dir, file, br3_ex1_str, None, sue_str, a23_str, None, hour7am, err0)
         row1 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_360, hour6am, None)
         row2 = (s_dir, file, br3_ex1_str, e1, sue_str, a23_str, m_420, hour7am, None)
@@ -121,20 +121,20 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
     input_dir = create_path(get_chapter_temp_dir(), "input")
     input_file_path = create_path(input_dir, ex_filename)
     idea_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
-        hour_label_str(),
+        wx.hour_label,
     ]
     a23_str = "amy23"
     row1 = [event1, sue_str, minute_360, a23_str, hour6am]
     row2 = [event1, sue_str, minute_420, a23_str, hour7am]
     row3 = [event2, sue_str, minute_420, a23_str, hour7am]
     incomplete_idea_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
     ]
     incom_row1 = [event1, sue_str, minute_360, a23_str]
@@ -171,7 +171,7 @@ def test_etl_input_dfs_to_brick_raw_tables_PopulatesTables_Scenario1(
         select_agg_sqlstr = f"""
 SELECT * 
 FROM {br00003_tablename} 
-ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
+ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
         cursor.execute(select_agg_sqlstr)
 
         rows = cursor.fetchall()
@@ -213,11 +213,11 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #     input_dir = create_path(get_chapter_temp_dir(), "input")
 #     input_file_path = create_path(input_dir, ex_filename)
 #     idea_columns = [
-#         event_int_str(),
-#         face_name_str(),
-#         cumulative_minute_str(),
+#         wx.event_int,
+#         wx.face_name,
+#         wx.cumulative_minute,
 #         moment_label_str(),
-#         hour_label_str(),
+#         wx.hour_label,
 #     ]
 #     a23_str = "amy23"
 #     df_row0 = [event1, sue_str, minute_360, a23_str, hour6am]
@@ -249,7 +249,7 @@ ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
 #         select_agg_sqlstr = f"""
 # SELECT *
 # FROM {br00003_tablename}
-# ORDER BY sheet_name, {event_int_str()}, {cumulative_minute_str()};"""
+# ORDER BY sheet_name, {wx.event_int}, {wx.cumulative_minute};"""
 #         cursor.execute(select_agg_sqlstr)
 
 #         br3rows = cursor.fetchall()

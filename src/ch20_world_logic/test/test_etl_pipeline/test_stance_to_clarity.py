@@ -8,14 +8,11 @@ from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch11Keywords as wx,
+    Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch18Keywords as wx,
-    celldepth_str,
-    cumulative_minute_str,
-    event_int_str,
-    face_name_str,
-    hour_label_str,
     moment_label_str,
 )
 from src.ch20_world_logic.test._util.ch20_env import (
@@ -37,7 +34,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     ex_filename = "stance_Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
@@ -53,12 +50,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        face_name_str(),
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.bud_time,
         wx.quota,
-        celldepth_str(),
+        wx.celldepth,
     ]
     tp37 = 37
     sue_quota = 235
@@ -133,21 +130,21 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
     hour6am = "6am"
     agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
-        cumulative_minute_str(),
-        hour_label_str(),
+        wx.cumulative_minute,
+        wx.hour_label,
     ]
     with sqlite3_connect(world.get_world_db_path()) as db_conn:
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {event_int_str()}
-, {face_name_str()}
+  {wx.event_int}
+, {wx.face_name}
 , {moment_label_str()}
-, {cumulative_minute_str()}
-, {hour_label_str()}
+, {wx.cumulative_minute}
+, {wx.hour_label}
 )"""
         values_clause = f"""VALUES ('{event_int}', '{sue_str}', '{world.world_name}', '{minute_360}', '{hour6am}');"""
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -169,7 +166,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     ex_filename = "stance_Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,

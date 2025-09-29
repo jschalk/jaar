@@ -2,7 +2,7 @@ from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
-    DELETE_str,
+    Ch09Keywords as wx,
     belief_plan_healerunit_str,
     belief_planunit_str,
     belief_voice_membership_str,

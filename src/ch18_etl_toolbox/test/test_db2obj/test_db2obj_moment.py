@@ -1,9 +1,8 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    beliefbudhistorys_str,
+    Ch15Keywords as wx,
     moment_label_str,
-    paybook_str,
     timeline_str,
 )
 from src.ch18_etl_toolbox.db_obj_moment_tool import get_moment_dict_from_heard_tables
@@ -98,8 +97,8 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
         moment_label_str(),
         "offi_times",
         timeline_str(),
-        paybook_str(),
-        beliefbudhistorys_str(),
+        wx.paybook,
+        wx.beliefbudhistorys,
     }
 
 

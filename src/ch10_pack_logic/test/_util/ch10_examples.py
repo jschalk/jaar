@@ -5,7 +5,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_planunit_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -67,7 +66,7 @@ def get_beliefdelta_sue_example() -> BeliefDelta:
 
     dimen = belief_voiceunit_str()
     sue_str = "Sue"
-    sue_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    sue_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     sue_beliefatom.set_jkey(wx.voice_name, sue_str)
     sue_beliefdelta.set_beliefatom(sue_beliefatom)
     return sue_beliefdelta
@@ -89,7 +88,7 @@ def get_beliefdelta_example1() -> BeliefDelta:
 
     dimen = belief_voiceunit_str()
     zia_str = "Zia"
-    x_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    x_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     x_beliefatom.set_jkey(wx.voice_name, zia_str)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     return sue_beliefdelta

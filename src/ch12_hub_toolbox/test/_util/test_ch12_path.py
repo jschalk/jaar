@@ -5,10 +5,9 @@ from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
 from src.ch12_hub_toolbox._ref.ch12_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch11Keywords as wx,
-    event_int_str,
-    gut_str,
-    job_str,
+    Ch12Keywords as wx,
     moment_label_str,
     planroot_str,
 )
@@ -741,7 +740,7 @@ def test_create_gut_path_ReturnsObj():
     a23_dir = create_path(x_moments_dir, a23_str)
     a23_beliefs_dir = create_path(a23_dir, "beliefs")
     a23_bob_dir = create_path(a23_beliefs_dir, bob_str)
-    a23_bob_gut_dir = create_path(a23_bob_dir, gut_str())
+    a23_bob_gut_dir = create_path(a23_bob_dir, wx.gut)
     expected_a23_bob_gut_json_path = create_path(a23_bob_gut_dir, f"{bob_str}.json")
     # belief_filename = "belief.json"
     # expected_a23_e3_belief_path = create_path(a23_bob_e3_dir, belief_filename)
@@ -762,7 +761,7 @@ def test_create_job_path_ReturnsObj():
     a23_dir = create_path(x_moments_dir, a23_str)
     a23_beliefs_dir = create_path(a23_dir, "beliefs")
     a23_bob_dir = create_path(a23_beliefs_dir, bob_str)
-    a23_bob_job_dir = create_path(a23_bob_dir, job_str())
+    a23_bob_job_dir = create_path(a23_bob_dir, wx.job)
     expected_a23_bob_job_json_path = create_path(a23_bob_job_dir, f"{bob_str}.json")
     # belief_filename = "belief.json"
     # expected_a23_e3_belief_path = create_path(a23_bob_e3_dir, belief_filename)
@@ -1050,7 +1049,7 @@ def test_create_belief_event_dir_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=wx.belief_name,
-        event_int=event_int_str(),
+        event_int=wx.event_int,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -1063,7 +1062,7 @@ def test_create_beliefevent_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=wx.belief_name,
-        event_int=event_int_str(),
+        event_int=wx.event_int,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -1076,7 +1075,7 @@ def test_create_event_all_pack_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=wx.belief_name,
-        event_int=event_int_str(),
+        event_int=wx.event_int,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN
@@ -1089,7 +1088,7 @@ def test_create_event_expressed_pack_path_HasDocString():
         moment_mstr_dir="moment_mstr_dir",
         moment_label=moment_label_str(),
         belief_name=wx.belief_name,
-        event_int=event_int_str(),
+        event_int=wx.event_int,
     )
     doc_str = f"Returns path: {doc_str}"
     # WHEN / THEN

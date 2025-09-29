@@ -4,7 +4,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_voiceunit_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
@@ -131,7 +130,7 @@ def test_create_legible_list_ReturnsObj_voiceunit_DELETE():
     # ESTABLISH
     dimen = belief_voiceunit_str()
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
     # print(f"{yao_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()

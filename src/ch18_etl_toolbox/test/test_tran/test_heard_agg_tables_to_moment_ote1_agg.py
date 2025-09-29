@@ -2,10 +2,10 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch11Keywords as wx,
+    Ch15Keywords as wx,
     Ch18Keywords as wx,
-    event_int_str,
-    moment_budunit_str,
     moment_label_str,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
@@ -30,9 +30,9 @@ def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        momentbud_h_raw_table = create_prime_tablename(moment_budunit_str(), "h", "raw")
+        momentbud_h_raw_table = create_prime_tablename(wx.moment_budunit, "h", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {momentbud_h_raw_table} ({event_int_str()}, {moment_label_str()}_inx, {wx.belief_name}_inx, {wx.bud_time})
+INSERT INTO {momentbud_h_raw_table} ({wx.event_int}, {moment_label_str()}_inx, {wx.belief_name}_inx, {wx.bud_time})
 VALUES
   ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})

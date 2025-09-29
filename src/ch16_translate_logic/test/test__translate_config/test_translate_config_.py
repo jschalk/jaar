@@ -5,10 +5,8 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch04Keywords as wx,
     Ch09Keywords as wx,
     Ch16Keywords as wx,
-    DELETE_str,
     jkeys_str,
     jvalues_str,
-    normal_specs_str,
     reason_context_str,
 )
 from src.ch16_translate_logic.translate_config import (
@@ -87,8 +85,8 @@ def _validate_translate_config(translate_config: dict):
         assert dimen_dict.get(jvalues_str()) is not None
         assert dimen_dict.get(wx.UPDATE) is None
         assert dimen_dict.get(wx.INSERT) is None
-        assert dimen_dict.get(DELETE_str()) is None
-        assert dimen_dict.get(normal_specs_str()) is None
+        assert dimen_dict.get(wx.DELETE) is None
+        assert dimen_dict.get(wx.normal_specs) is None
 
         translate_jkeys_keys = set(dimen_dict.get(jkeys_str()).keys())
         for jkey_key in translate_jkeys_keys:

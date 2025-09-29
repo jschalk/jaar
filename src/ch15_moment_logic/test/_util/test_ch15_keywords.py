@@ -1,21 +1,4 @@
-from src.ch15_moment_logic._ref.ch15_keywords import (
-    Ch15Keywords,
-    beliefbudhistorys_str,
-    cumulative_minute_str,
-    hour_label_str,
-    job_listen_rotations_str,
-    moment_budunit_str,
-    moment_paybook_str,
-    moment_timeline_hour_str,
-    moment_timeline_month_str,
-    moment_timeline_weekday_str,
-    moment_timeoffi_str,
-    momentunit_str,
-    month_label_str,
-    paybook_str,
-    weekday_label_str,
-    weekday_order_str,
-)
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords, Ch15Keywords as wx
 
 
 def test_Ch15Keywords_AttributeNamesEqualValues():
@@ -31,18 +14,18 @@ def test_Ch15Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert momentunit_str() == "momentunit"
-    assert moment_budunit_str() == "moment_budunit"
-    assert moment_paybook_str() == "moment_paybook"
-    assert moment_timeline_hour_str() == "moment_timeline_hour"
-    assert moment_timeline_month_str() == "moment_timeline_month"
-    assert moment_timeline_weekday_str() == "moment_timeline_weekday"
-    assert moment_timeoffi_str() == "moment_timeoffi"
-    assert beliefbudhistorys_str() == "beliefbudhistorys"
-    assert cumulative_minute_str() == "cumulative_minute"
-    assert hour_label_str() == "hour_label"
-    assert paybook_str() == "paybook"
-    assert month_label_str() == "month_label"
-    assert job_listen_rotations_str() == "job_listen_rotations"
-    assert weekday_label_str() == "weekday_label"
-    assert weekday_order_str() == "weekday_order"
+    assert wx.momentunit == "momentunit"
+    assert wx.moment_budunit == "moment_budunit"
+    assert wx.moment_paybook == "moment_paybook"
+    assert wx.moment_timeline_hour == "moment_timeline_hour"
+    assert wx.moment_timeline_month == "moment_timeline_month"
+    assert wx.moment_timeline_weekday == "moment_timeline_weekday"
+    assert wx.moment_timeoffi == "moment_timeoffi"
+    assert wx.beliefbudhistorys == "beliefbudhistorys"
+    assert wx.cumulative_minute == "cumulative_minute"
+    assert wx.hour_label == "hour_label"
+    assert wx.paybook == "paybook"
+    assert wx.month_label == "month_label"
+    assert wx.job_listen_rotations == "job_listen_rotations"
+    assert wx.weekday_label == "weekday_label"
+    assert wx.weekday_order == "weekday_order"

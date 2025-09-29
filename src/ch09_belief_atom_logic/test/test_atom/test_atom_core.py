@@ -2,7 +2,7 @@ from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
-    DELETE_str,
+    Ch09Keywords as wx,
     belief_voice_membership_str,
     belief_voiceunit_str,
     beliefunit_str,
@@ -207,7 +207,7 @@ def test_BeliefAtom_is_valid_ReturnsBoolean_VoiceUnit_DELETE():
     # ESTABLISH
     bob_str = "Bob"
     voiceunit_str = belief_voiceunit_str()
-    delete_str = DELETE_str()
+    delete_str = wx.DELETE
 
     # WHEN
     bob_delete_beliefatom = beliefatom_shop(voiceunit_str, crud_str=delete_str)

@@ -4,7 +4,6 @@ from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
     Ch09Keywords as wx,
-    DELETE_str,
     belief_voice_membership_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
@@ -121,7 +120,7 @@ def test_create_legible_list_ReturnsObj_voice_membership_DELETE():
     dimen = belief_voice_membership_str()
     swim_str = f"{sue_belief.knot}Swimmers"
     yao_str = "Yao"
-    yao_beliefatom = beliefatom_shop(dimen, DELETE_str())
+    yao_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     yao_beliefatom.set_arg(wx.group_title, swim_str)
     yao_beliefatom.set_arg(wx.voice_name, yao_str)
     # print(f"{yao_beliefatom=}")

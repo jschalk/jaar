@@ -22,17 +22,13 @@ from src.ch18_etl_toolbox.ch18_path import (
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
 from src.ch20_world_logic._ref.ch20_keywords import (
     Ch04Keywords as wx,
+    Ch10Keywords as wx,
     Ch11Keywords as wx,
+    Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch18Keywords as wx,
     Ch19Keywords as wx,
-    amount_str,
-    celldepth_str,
     creg_str,
-    cumulative_minute_str,
-    event_int_str,
-    face_name_str,
-    hour_label_str,
     moment_label_str,
     time_str,
 )
@@ -56,8 +52,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        event_int_str(),
+        wx.face_name,
+        wx.event_int,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
@@ -219,8 +215,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        event_int_str(),
+        wx.face_name,
+        wx.event_int,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
@@ -236,13 +232,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.bud_time,
         wx.quota,
-        celldepth_str(),
+        wx.celldepth,
     ]
     tp37 = 37
     sue_quota = 235
@@ -376,13 +372,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00002_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
         wx.tran_time,
-        amount_str(),
+        wx.amount,
     ]
     a23_str = "amy23"
     br00002_str = "br00002"
@@ -416,8 +412,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
@@ -484,20 +480,20 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00003_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
         moment_label_str(),
-        hour_label_str(),
+        wx.hour_label,
     ]
     br00001_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.bud_time,
         wx.quota,
-        celldepth_str(),
+        wx.celldepth,
     ]
     amy23_str = "amy23"
     tp37 = 37
@@ -518,8 +514,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
@@ -569,8 +565,8 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        event_int_str(),
+        wx.face_name,
+        wx.event_int,
         moment_label_str(),
         wx.belief_name,
         wx.voice_name,
@@ -586,13 +582,13 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        event_int_str(),
-        face_name_str(),
+        wx.event_int,
+        wx.face_name,
         moment_label_str(),
         wx.belief_name,
         wx.bud_time,
         wx.quota,
-        celldepth_str(),
+        wx.celldepth,
     ]
     tp37 = 37
     sue_quota = 235
