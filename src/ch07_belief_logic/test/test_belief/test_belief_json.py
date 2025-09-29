@@ -1,19 +1,12 @@
 from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.dict_toolbox import get_dict_from_json, x_is_json
 from src.ch02_rope_logic.rope import default_knot_if_None, to_rope
-from src.ch04_group_logic.group import awardunit_shop
-from src.ch04_group_logic.labor import laborunit_shop, partyunit_shop
+from src.ch04_voice_logic.group import awardunit_shop
+from src.ch04_voice_logic.labor import laborunit_shop, partyunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic._ref.ch07_keywords import (
-    factunits_str,
-    kids_str,
-    laborunit_str,
-    planroot_str,
-    reasonunits_str,
-    voices_str,
-)
+from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_beliefunit_from_json,
@@ -56,15 +49,15 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():
     assert belief_dict["credor_respect"] == yao_belief.credor_respect
     assert belief_dict["debtor_respect"] == yao_belief.debtor_respect
     assert belief_dict["last_pack_id"] == yao_belief.last_pack_id
-    assert len(belief_dict[voices_str()]) == len(yao_belief.voices)
-    assert len(belief_dict[voices_str()]) != 12
+    assert len(belief_dict[wx.voices]) == len(yao_belief.voices)
+    assert len(belief_dict[wx.voices]) != 12
 
     x_planroot = yao_belief.planroot
-    planroot_dict = belief_dict[planroot_str()]
+    planroot_dict = belief_dict[wx.planroot]
     assert x_planroot.plan_label == yao_belief.moment_label
     assert planroot_dict["plan_label"] == x_planroot.plan_label
     assert planroot_dict["star"] == x_planroot.star
-    assert len(planroot_dict[kids_str()]) == len(x_planroot.kids)
+    assert len(planroot_dict[wx.kids]) == len(x_planroot.kids)
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
@@ -83,12 +76,12 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
 
     # WHEN
     belief_dict = sue_belief.to_dict()
-    planroot_dict = belief_dict.get(planroot_str())
+    planroot_dict = belief_dict.get(wx.planroot)
 
     # THEN
-    assert planroot_dict[laborunit_str()] == x_laborunit.to_dict()
+    assert planroot_dict[wx.laborunit] == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
-    assert planroot_dict[laborunit_str()] == {
+    assert planroot_dict[wx.laborunit] == {
         "_partys": {run_str: run_partyunit.to_dict()}
     }
     assert planroot_dict.get("gogo_want") == x_gogo_want
@@ -110,7 +103,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
 
     # WHEN
     belief_dict = sue_belief.to_dict()
-    planroot_dict = belief_dict.get(planroot_str())
+    planroot_dict = belief_dict.get(wx.planroot)
 
     # THEN
     assert planroot_dict["healerunit"] == run_healerunit.to_dict()
@@ -134,12 +127,12 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario3_plankid_LaborUnit():
 
     # WHEN
     belief_dict = sue_belief.to_dict()
-    planroot_dict = belief_dict.get(planroot_str())
+    planroot_dict = belief_dict.get(wx.planroot)
 
     # THEN
     laborunit = "laborunit"
 
-    labor_dict_x = planroot_dict[kids_str()][morn_str][laborunit]
+    labor_dict_x = planroot_dict[wx.kids][morn_str][laborunit]
     assert labor_dict_x == x_laborunit.to_dict()
     run_partyunit = partyunit_shop(run_str)
     assert labor_dict_x == {"_partys": {run_str: run_partyunit.to_dict()}}
@@ -195,13 +188,13 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
         belief_dict["last_pack_id"]
 
     x_planroot = zia_belief.planroot
-    planroot_dict = belief_dict.get(planroot_str())
+    planroot_dict = belief_dict.get(wx.planroot)
 
-    assert len(planroot_dict[kids_str()]) == len(x_planroot.kids)
+    assert len(planroot_dict[wx.kids]) == len(x_planroot.kids)
 
     shave_str = "shave"
-    shave_dict = planroot_dict[kids_str()][shave_str]
-    shave_factunits = shave_dict[factunits_str()]
+    shave_dict = planroot_dict[wx.kids][shave_str]
+    shave_factunits = shave_dict[wx.factunits]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_planroot.kids[shave_str].factunits)
@@ -248,12 +241,12 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     assert belief_dict["knot"] == yao_belief.knot
 
     x_planroot = yao_belief.planroot
-    planroot_dict = belief_dict.get(planroot_str())
-    assert len(planroot_dict[kids_str()]) == len(x_planroot.kids)
+    planroot_dict = belief_dict.get(wx.planroot)
+    assert len(planroot_dict[wx.kids]) == len(x_planroot.kids)
 
-    kids_dict = planroot_dict[kids_str()]
+    kids_dict = planroot_dict[wx.kids]
     jour_min_dict = kids_dict[jour_min_str]
-    jour_min_factunits_dict = jour_min_dict[factunits_str()]
+    jour_min_factunits_dict = jour_min_dict[wx.factunits]
     jour_min_plan_x = yao_belief.get_plan_obj(jour_min_rope)
     print(f"{jour_min_factunits_dict=}")
     assert len(jour_min_factunits_dict) == 1
@@ -265,8 +258,8 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     ulti_rope = yao_belief.make_l1_rope(ulti_str)
     cont_plan = yao_belief.get_plan_obj(cont_rope)
     ulti_plan = yao_belief.get_plan_obj(ulti_rope)
-    cont_reasonunits_dict = planroot_dict[kids_str()][cont_str][reasonunits_str()]
-    ulti_reasonunits_dict = planroot_dict[kids_str()][ulti_str][reasonunits_str()]
+    cont_reasonunits_dict = planroot_dict[wx.kids][cont_str][wx.reasonunits]
+    ulti_reasonunits_dict = planroot_dict[wx.kids][ulti_str][wx.reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_plan.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 

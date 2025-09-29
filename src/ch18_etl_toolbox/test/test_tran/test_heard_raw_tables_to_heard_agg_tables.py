@@ -5,18 +5,7 @@ from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
-    belief_voiceunit_str,
-    error_message_str,
-    event_int_str,
-    face_name_str,
-    idea_category_str,
-    moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
@@ -37,7 +26,7 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "moment"
+        if dimen_config.get(wx.idea_category) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
@@ -50,9 +39,9 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():
             raw_columns = get_table_columns(cursor, raw_tablename)
             agg_columns = get_table_columns(cursor, agg_tablename)
             raw_columns = {raw_col for raw_col in raw_columns if raw_col[-3:] != "otx"}
-            raw_columns.remove(f"{face_name_str()}_inx")
-            raw_columns.remove(event_int_str())
-            raw_columns.remove(error_message_str())
+            raw_columns.remove(f"{wx.face_name}_inx")
+            raw_columns.remove(wx.event_int)
+            raw_columns.remove(wx.error_message)
             raw_columns = get_default_sorted_list(raw_columns)
 
             raw_columns_str = ", ".join(raw_columns)
@@ -81,7 +70,7 @@ def test_get_insert_into_heard_raw_sqlstrs_ReturnsObj_BeliefDimensNeeded():
     belief_dimens_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) == "belief"
+        if dimen_config.get(wx.idea_category) == "belief"
     }
 
     # WHEN
@@ -157,18 +146,16 @@ def test_get_insert_heard_agg_sqlstrs_ReturnsObj_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}_inx
-, {moment_label_str()}_inx
-, {belief_name_str()}_inx
-, {voice_name_str()}_inx
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+  {wx.event_int}
+, {wx.face_name}_inx
+, {wx.moment_label}_inx
+, {wx.belief_name}_inx
+, {wx.voice_name}_inx
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -180,9 +167,7 @@ VALUES
 """
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 5
-        blrpern_h_agg_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "agg", "put"
-        )
+        blrpern_h_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "agg", "put")
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 0
 
         # WHEN
@@ -192,13 +177,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
-, {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
+, {wx.moment_label}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 FROM {blrpern_h_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)
@@ -231,18 +216,16 @@ def test_etl_heard_raw_tables_to_heard_agg_tables_PopulatesTable_Scenario0():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blrpern_h_raw_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "raw", "put"
-        )
+        blrpern_h_raw_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "raw", "put")
         print(f"{get_table_columns(cursor, blrpern_h_raw_put_tablename)=}")
         insert_into_clause = f"""INSERT INTO {blrpern_h_raw_put_tablename} (
-  {event_int_str()}
-, {face_name_str()}_inx
-, {moment_label_str()}_inx
-, {belief_name_str()}_inx
-, {voice_name_str()}_inx
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+  {wx.event_int}
+, {wx.face_name}_inx
+, {wx.moment_label}_inx
+, {wx.belief_name}_inx
+, {wx.voice_name}_inx
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 )
 VALUES
   ({event1}, '{sue_str}', '{a23_str}','{yao_str}', '{yao_inx}', {x44_credit}, {x22_debt})
@@ -254,9 +237,7 @@ VALUES
 """
         cursor.execute(insert_into_clause)
         assert get_row_count(cursor, blrpern_h_raw_put_tablename) == 5
-        blrpern_h_agg_put_tablename = prime_tbl(
-            belief_voiceunit_str(), "h", "agg", "put"
-        )
+        blrpern_h_agg_put_tablename = prime_tbl(wx.belief_voiceunit, "h", "agg", "put")
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 0
 
         # WHEN
@@ -264,13 +245,13 @@ VALUES
 
         # THEN
         assert get_row_count(cursor, blrpern_h_agg_put_tablename) == 4
-        select_sqlstr = f"""SELECT {event_int_str()}
-, {face_name_str()}
-, {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {voice_cred_points_str()}
-, {voice_debt_points_str()}
+        select_sqlstr = f"""SELECT {wx.event_int}
+, {wx.face_name}
+, {wx.moment_label}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.voice_cred_points}
+, {wx.voice_debt_points}
 FROM {blrpern_h_agg_put_tablename}
 """
         cursor.execute(select_sqlstr)

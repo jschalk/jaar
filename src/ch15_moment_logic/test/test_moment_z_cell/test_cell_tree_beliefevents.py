@@ -8,7 +8,7 @@ from src.ch12_hub_toolbox.hub_tool import (
     cellunit_add_json_file,
     save_arbitrary_beliefevent,
 )
-from src.ch15_moment_logic._ref.ch15_keywords import beliefevent_facts_str
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_cell import load_cells_beliefevent
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
@@ -35,14 +35,14 @@ def test_load_cells_beliefevent_SetsFiles_Scenario0_NoFacts(
     print(f"{bob3_beliefevent_path=}")
     cellunit_add_json_file(moment_mstr_dir, a23_str, bob_str, time5, event300, [])
     bob5_cell_path = create_cell_json_path(moment_mstr_dir, a23_str, bob_str, time5)
-    assert open_json(bob5_cell_path).get(beliefevent_facts_str()) == {}
+    assert open_json(bob5_cell_path).get(wx.beliefevent_facts) == {}
 
     # WHEN
     load_cells_beliefevent(moment_mstr_dir, a23_str)
 
     # THEN
     assert os_path_exists(bob5_cell_path)
-    assert open_json(bob5_cell_path).get(beliefevent_facts_str()) == {}
+    assert open_json(bob5_cell_path).get(wx.beliefevent_facts) == {}
 
 
 def test_load_cells_beliefevent_SetsFiles_Scenario1_WithFacts(
@@ -65,7 +65,7 @@ def test_load_cells_beliefevent_SetsFiles_Scenario1_WithFacts(
     print(f"{bob3_beliefevent_path=}")
     cellunit_add_json_file(moment_mstr_dir, a23_str, bob_str, time5, event300, [])
     bob5_cell_path = create_cell_json_path(moment_mstr_dir, a23_str, bob_str, time5)
-    assert open_json(bob5_cell_path).get(beliefevent_facts_str()) == {}
+    assert open_json(bob5_cell_path).get(wx.beliefevent_facts) == {}
 
     # WHEN
     load_cells_beliefevent(moment_mstr_dir, a23_str)
@@ -73,7 +73,7 @@ def test_load_cells_beliefevent_SetsFiles_Scenario1_WithFacts(
     # THEN
     expected_beliefevent_facts = {clean_fact.fact_context: clean_fact.to_dict()}
     assert (
-        open_json(bob5_cell_path).get(beliefevent_facts_str())
+        open_json(bob5_cell_path).get(wx.beliefevent_facts)
         == expected_beliefevent_facts
     )
 
@@ -98,7 +98,7 @@ def test_load_cells_beliefevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     bob5_cell_path = create_cell_json_path(
         moment_mstr_dir, a23_str, bob_str, time5, das
     )
-    assert open_json(bob5_cell_path).get(beliefevent_facts_str()) == {}
+    assert open_json(bob5_cell_path).get(wx.beliefevent_facts) == {}
 
     # WHEN
     load_cells_beliefevent(moment_mstr_dir, a23_str)
@@ -106,6 +106,6 @@ def test_load_cells_beliefevent_SetsFiles_Scenario2_WithFacts_NotAtRoot(
     # THEN
     expected_beliefevent_facts = {clean_fact.fact_context: clean_fact.to_dict()}
     assert (
-        open_json(bob5_cell_path).get(beliefevent_facts_str())
+        open_json(bob5_cell_path).get(wx.beliefevent_facts)
         == expected_beliefevent_facts
     )

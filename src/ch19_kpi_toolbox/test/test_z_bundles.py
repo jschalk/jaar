@@ -9,20 +9,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.ch19_kpi_toolbox._ref.ch19_keywords import (
-    active_str,
-    belief_name_str,
-    belief_net_amount_str,
-    belief_planunit_str,
-    default_kpi_bundle_str,
-    moment_kpi001_voice_nets_str,
-    moment_kpi002_belief_pledges_str,
-    moment_label_str,
-    moment_voice_nets_str,
-    plan_rope_str,
-    pledge_str,
-    task_str,
-)
+from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords as wx
 from src.ch19_kpi_toolbox.kpi_mstr import populate_kpi_bundle
 
 
@@ -38,9 +25,9 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario0_WithDefaultBundleID():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = moment_voice_nets_str()
+        moment_voice_nets_tablename = wx.moment_voice_nets
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -48,13 +35,13 @@ VALUES
         cursor.execute(insert_sqlstr)
         assert db_table_exists(cursor, blrplan_job_tablename)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_tablename = moment_kpi001_voice_nets_str()
-        moment_kpi002_tablename = moment_kpi002_belief_pledges_str()
+        moment_kpi001_tablename = wx.moment_kpi001_voice_nets
+        moment_kpi002_tablename = wx.moment_kpi002_belief_pledges
         assert not db_table_exists(cursor, moment_kpi001_tablename)
         assert not db_table_exists(cursor, moment_kpi002_tablename)
 
         # WHEN
-        populate_kpi_bundle(cursor, default_kpi_bundle_str())
+        populate_kpi_bundle(cursor, wx.default_kpi_bundle)
 
         # THEN
         assert db_table_exists(cursor, moment_kpi001_tablename)
@@ -62,8 +49,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_tablename) == 2
         assert get_row_count(cursor, moment_kpi002_tablename) == 0
         assert set(get_db_tables(db_conn).keys()) == {
-            moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_pledges_str(),
+            wx.moment_kpi001_voice_nets,
+            wx.moment_kpi002_belief_pledges,
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }
@@ -81,15 +68,15 @@ def test_populate_kpi_bundle_PopulatesTable_Scenario1_WithNoBundleID():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        moment_voice_nets_tablename = wx.moment_voice_nets
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_voice_nets_tablename = moment_kpi001_voice_nets_str()
+        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN
@@ -99,8 +86,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename) == 2
         blrplan_job_tablename = create_prime_tablename("BLRPLAN", "job", None)
         assert set(get_db_tables(db_conn).keys()) == {
-            moment_kpi001_voice_nets_str(),
-            moment_kpi002_belief_pledges_str(),
+            wx.moment_kpi001_voice_nets,
+            wx.moment_kpi002_belief_pledges,
             moment_voice_nets_tablename,
             blrplan_job_tablename,
         }

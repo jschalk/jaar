@@ -1,11 +1,11 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic.test._util.ch08_examples import five_str, get_five_config
+from src.ch08_timeline_logic.test._util.ch08_examples import get_five_config
 from src.ch08_timeline_logic.timeline_main import (
     get_default_timeline_config_dict,
     timelineunit_shop,
 )
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.ch15_moment_logic._ref.ch15_keywords import time_str
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
@@ -52,8 +52,8 @@ def test_MomentUnit_add_timeline_to_gut_SetsFile_Scenario0(env_dir_setup_cleanup
     a23_moment.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
     init_sue_gut = beliefunit_shop(sue_str, a23_str)
-    time_rope = init_sue_gut.make_l1_rope(time_str())
-    five_rope = init_sue_gut.make_rope(time_rope, five_str())
+    time_rope = init_sue_gut.make_l1_rope(wx.time)
+    five_rope = init_sue_gut.make_rope(time_rope, wx.five)
     save_gut_file(moment_mstr_dir, init_sue_gut)
     assert not init_sue_gut.plan_exists(five_rope)
 
@@ -73,8 +73,8 @@ def test_MomentUnit_add_timeline_to_guts_SetsFiles_Scenario0(env_dir_setup_clean
     a23_moment.timeline = timelineunit_shop(get_five_config())
     sue_str = "Sue"
     init_sue_gut = beliefunit_shop(sue_str, a23_str)
-    time_rope = init_sue_gut.make_l1_rope(time_str())
-    five_rope = init_sue_gut.make_rope(time_rope, five_str())
+    time_rope = init_sue_gut.make_l1_rope(wx.time)
+    five_rope = init_sue_gut.make_rope(time_rope, wx.five)
     save_gut_file(moment_mstr_dir, init_sue_gut)
     assert not init_sue_gut.plan_exists(five_rope)
 

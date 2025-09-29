@@ -1,17 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    ancestors_str,
-    beliefadjust_str,
-    beliefevent_facts_str,
-    boss_facts_str,
-    bud_belief_name_str,
-    celldepth_str,
-    event_int_str,
-    found_facts_str,
-    mandate_str,
-    penny_str,
-    quota_str,
-)
+from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords as wx
 from src.ch11_bud_logic.cell import cellunit_get_from_dict, cellunit_shop
 from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_clean_factunit as clean_factunit,
@@ -47,30 +35,30 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        ancestors_str(),
-        event_int_str(),
-        celldepth_str(),
-        bud_belief_name_str(),
-        penny_str(),
-        quota_str(),
-        mandate_str(),
-        beliefadjust_str(),
-        beliefevent_facts_str(),
-        found_facts_str(),
-        boss_facts_str(),
+        wx.ancestors,
+        wx.event_int,
+        wx.celldepth,
+        wx.bud_belief_name,
+        wx.penny,
+        wx.quota,
+        wx.mandate,
+        wx.beliefadjust,
+        wx.beliefevent_facts,
+        wx.found_facts,
+        wx.boss_facts,
     ]
-    assert x_cell_dict.get(ancestors_str()) == bob_sue_ancestors
-    assert x_cell_dict.get(event_int_str()) == bob_sue_event7
-    assert x_cell_dict.get(celldepth_str()) == bob_sue_celldepth3
-    assert x_cell_dict.get(bud_belief_name_str()) == bob_sue_bud_belief
-    assert x_cell_dict.get(penny_str()) == bob_sue_penny2
-    assert x_cell_dict.get(quota_str()) == bob_sue_quota300
-    assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
+    assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
+    assert x_cell_dict.get(wx.event_int) == bob_sue_event7
+    assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
+    assert x_cell_dict.get(wx.bud_belief_name) == bob_sue_bud_belief
+    assert x_cell_dict.get(wx.penny) == bob_sue_penny2
+    assert x_cell_dict.get(wx.quota) == bob_sue_quota300
+    assert x_cell_dict.get(wx.mandate) == bob_sue_mandate444
     bob_sue_belief = beliefunit_shop(bob_sue_bud_belief)
-    assert x_cell_dict.get(beliefadjust_str()) == bob_sue_belief.to_dict()
-    assert x_cell_dict.get(beliefevent_facts_str()) == {}
-    assert x_cell_dict.get(found_facts_str()) == {}
-    assert x_cell_dict.get(boss_facts_str()) == {}
+    assert x_cell_dict.get(wx.beliefadjust) == bob_sue_belief.to_dict()
+    assert x_cell_dict.get(wx.beliefevent_facts) == {}
+    assert x_cell_dict.get(wx.found_facts) == {}
+    assert x_cell_dict.get(wx.boss_facts) == {}
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
@@ -100,30 +88,30 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_EmptyBeliefAdjust():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        ancestors_str(),
-        event_int_str(),
-        celldepth_str(),
-        bud_belief_name_str(),
-        penny_str(),
-        quota_str(),
-        mandate_str(),
-        beliefadjust_str(),
-        beliefevent_facts_str(),
-        found_facts_str(),
-        boss_facts_str(),
+        wx.ancestors,
+        wx.event_int,
+        wx.celldepth,
+        wx.bud_belief_name,
+        wx.penny,
+        wx.quota,
+        wx.mandate,
+        wx.beliefadjust,
+        wx.beliefevent_facts,
+        wx.found_facts,
+        wx.boss_facts,
     ]
-    assert x_cell_dict.get(ancestors_str()) == bob_sue_ancestors
-    assert x_cell_dict.get(event_int_str()) == bob_sue_event7
-    assert x_cell_dict.get(celldepth_str()) == bob_sue_celldepth3
-    assert x_cell_dict.get(bud_belief_name_str()) == yao_str
-    assert x_cell_dict.get(penny_str()) == bob_sue_penny2
-    assert x_cell_dict.get(quota_str()) == bob_sue_quota300
-    assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
+    assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
+    assert x_cell_dict.get(wx.event_int) == bob_sue_event7
+    assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
+    assert x_cell_dict.get(wx.bud_belief_name) == yao_str
+    assert x_cell_dict.get(wx.penny) == bob_sue_penny2
+    assert x_cell_dict.get(wx.quota) == bob_sue_quota300
+    assert x_cell_dict.get(wx.mandate) == bob_sue_mandate444
     bob_sue_belief = beliefunit_shop(sue_str)
-    assert x_cell_dict.get(beliefadjust_str()) == bob_sue_belief.to_dict()
-    assert x_cell_dict.get(beliefevent_facts_str()) == {}
-    assert x_cell_dict.get(found_facts_str()) == {}
-    assert x_cell_dict.get(boss_facts_str()) == {}
+    assert x_cell_dict.get(wx.beliefadjust) == bob_sue_belief.to_dict()
+    assert x_cell_dict.get(wx.beliefevent_facts) == {}
+    assert x_cell_dict.get(wx.found_facts) == {}
+    assert x_cell_dict.get(wx.boss_facts) == {}
 
 
 def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
@@ -163,35 +151,35 @@ def test_CellUnit_to_dict_ReturnsObj_Scenario1_WithMoreParameters():
 
     # THEN
     assert list(x_cell_dict.keys()) == [
-        ancestors_str(),
-        event_int_str(),
-        celldepth_str(),
-        bud_belief_name_str(),
-        penny_str(),
-        quota_str(),
-        mandate_str(),
-        beliefadjust_str(),
-        beliefevent_facts_str(),
-        found_facts_str(),
-        boss_facts_str(),
+        wx.ancestors,
+        wx.event_int,
+        wx.celldepth,
+        wx.bud_belief_name,
+        wx.penny,
+        wx.quota,
+        wx.mandate,
+        wx.beliefadjust,
+        wx.beliefevent_facts,
+        wx.found_facts,
+        wx.boss_facts,
     ]
-    assert x_cell_dict.get(ancestors_str()) == bob_sue_ancestors
-    assert x_cell_dict.get(event_int_str()) == bob_sue_event7
-    assert x_cell_dict.get(celldepth_str()) == bob_sue_celldepth3
-    assert x_cell_dict.get(bud_belief_name_str()) == bob_sue_bud_belief
-    assert x_cell_dict.get(penny_str()) == bob_sue_penny2
-    assert x_cell_dict.get(quota_str()) == bob_sue_quota300
-    assert x_cell_dict.get(mandate_str()) == bob_sue_mandate444
+    assert x_cell_dict.get(wx.ancestors) == bob_sue_ancestors
+    assert x_cell_dict.get(wx.event_int) == bob_sue_event7
+    assert x_cell_dict.get(wx.celldepth) == bob_sue_celldepth3
+    assert x_cell_dict.get(wx.bud_belief_name) == bob_sue_bud_belief
+    assert x_cell_dict.get(wx.penny) == bob_sue_penny2
+    assert x_cell_dict.get(wx.quota) == bob_sue_quota300
+    assert x_cell_dict.get(wx.mandate) == bob_sue_mandate444
     assert (
-        x_cell_dict.get(beliefadjust_str())
+        x_cell_dict.get(wx.beliefadjust)
         == beliefunit_shop(bob_sue_bud_belief).to_dict()
     )
     bob_sue_beliefevent_fact_dicts = {clean_fact.fact_context: clean_fact.to_dict()}
     bob_sue_found_fact_dicts = {dirty_fact.fact_context: dirty_fact.to_dict()}
     bob_sue_boss_fact_dicts = {sky_blue_fact.fact_context: sky_blue_fact.to_dict()}
-    assert x_cell_dict.get(beliefevent_facts_str()) == bob_sue_beliefevent_fact_dicts
-    assert x_cell_dict.get(found_facts_str()) == bob_sue_found_fact_dicts
-    assert x_cell_dict.get(boss_facts_str()) == bob_sue_boss_fact_dicts
+    assert x_cell_dict.get(wx.beliefevent_facts) == bob_sue_beliefevent_fact_dicts
+    assert x_cell_dict.get(wx.found_facts) == bob_sue_found_fact_dicts
+    assert x_cell_dict.get(wx.boss_facts) == bob_sue_boss_fact_dicts
     assert len(x_cell_dict) == 11
 
 
@@ -237,7 +225,7 @@ def test_CellUnit_get_json_ReturnsObj():
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():
     # ESTABLISH
     yao_str = "Yao"
-    x_dict = {bud_belief_name_str(): yao_str}
+    x_dict = {wx.bud_belief_name: yao_str}
 
     # WHEN
     gen_cellunit = cellunit_get_from_dict(x_dict)

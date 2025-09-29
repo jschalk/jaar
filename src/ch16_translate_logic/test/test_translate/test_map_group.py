@@ -1,13 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    event_int_str,
-    face_name_str,
-    inx_knot_str,
-    otx2inx_str,
-    otx_knot_str,
-    unknown_str_str,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     TitleMap,
     get_titlemap_from_dict,
@@ -313,12 +306,12 @@ def test_TitleMap_to_dict_ReturnsObj():
         face_name=sue_str,
     )
     x1_rope_map_dict = {
-        otx_knot_str(): x_titlemap.otx_knot,
-        inx_knot_str(): x_titlemap.inx_knot,
-        unknown_str_str(): x_titlemap.unknown_str,
-        otx2inx_str(): {},
-        event_int_str(): x_titlemap.event_int,
-        face_name_str(): x_titlemap.face_name,
+        wx.otx_knot: x_titlemap.otx_knot,
+        wx.inx_knot: x_titlemap.inx_knot,
+        wx.unknown_str: x_titlemap.unknown_str,
+        wx.otx2inx: {},
+        wx.event_int: x_titlemap.event_int,
+        wx.face_name: x_titlemap.face_name,
     }
     assert x_titlemap.to_dict() == x1_rope_map_dict
 
@@ -326,12 +319,12 @@ def test_TitleMap_to_dict_ReturnsObj():
     x_titlemap.set_otx2inx(clean_otx, clean_inx)
     # THEN
     x2_rope_map_dict = {
-        otx_knot_str(): x_titlemap.otx_knot,
-        inx_knot_str(): x_titlemap.inx_knot,
-        unknown_str_str(): x_titlemap.unknown_str,
-        otx2inx_str(): {clean_otx: clean_inx},
-        event_int_str(): x_titlemap.event_int,
-        face_name_str(): sue_str,
+        wx.otx_knot: x_titlemap.otx_knot,
+        wx.inx_knot: x_titlemap.inx_knot,
+        wx.unknown_str: x_titlemap.unknown_str,
+        wx.otx2inx: {clean_otx: clean_inx},
+        wx.event_int: x_titlemap.event_int,
+        wx.face_name: sue_str,
     }
     assert x_titlemap.to_dict() == x2_rope_map_dict
 
@@ -347,12 +340,12 @@ def test_TitleMap_get_json_ReturnsObj():
     slash_otx_knot = "/"
     x_titlemap = titlemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_json = f"""{{
-  "{event_int_str()}": 0,
-  "{face_name_str()}": "{sue_str}",
-  "{inx_knot_str()}": "{x_titlemap.inx_knot}",
-  "{otx2inx_str()}": {{}},
-  "{otx_knot_str()}": "{x_titlemap.otx_knot}",
-  "{unknown_str_str()}": "{x_titlemap.unknown_str}"
+  "{wx.event_int}": 0,
+  "{wx.face_name}": "{sue_str}",
+  "{wx.inx_knot}": "{x_titlemap.inx_knot}",
+  "{wx.otx2inx}": {{}},
+  "{wx.otx_knot}": "{x_titlemap.otx_knot}",
+  "{wx.unknown_str}": "{x_titlemap.unknown_str}"
 }}"""
     print(f"           {x1_rope_map_json=}")
     print(f"{x_titlemap.get_json()=}")
@@ -363,14 +356,14 @@ def test_TitleMap_get_json_ReturnsObj():
     x_titlemap.event_int = event7
     # THEN
     x2_rope_map_json = f"""{{
-  "{event_int_str()}": {event7},
-  "{face_name_str()}": "{sue_str}",
-  "{inx_knot_str()}": "{x_titlemap.inx_knot}",
-  "{otx2inx_str()}": {{
+  "{wx.event_int}": {event7},
+  "{wx.face_name}": "{sue_str}",
+  "{wx.inx_knot}": "{x_titlemap.inx_knot}",
+  "{wx.otx2inx}": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "{otx_knot_str()}": "{x_titlemap.otx_knot}",
-  "{unknown_str_str()}": "{x_titlemap.unknown_str}"
+  "{wx.otx_knot}": "{x_titlemap.otx_knot}",
+  "{wx.unknown_str}": "{x_titlemap.unknown_str}"
 }}"""
     print(f"           {x2_rope_map_json=}")
     print(f"{x_titlemap.get_json()=}")

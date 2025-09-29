@@ -13,14 +13,7 @@ from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ch12_hub_toolbox._ref.ch12_keywords import (
-    ancestors_str,
-    bud_belief_name_str,
-    celldepth_str,
-    event_int_str,
-    penny_str,
-    quota_str,
-)
+from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords as wx
 from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
@@ -521,12 +514,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     print(f"{sue7_cell_path=}")
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
-    assert generated_cell_dict.get(ancestors_str()) == das
-    assert generated_cell_dict.get(event_int_str()) == event3
-    assert generated_cell_dict.get(celldepth_str()) == celldepth4
-    assert generated_cell_dict.get(bud_belief_name_str()) == sue_str
-    assert generated_cell_dict.get(penny_str()) == penny6
-    assert generated_cell_dict.get(quota_str()) == quota500
+    assert generated_cell_dict.get(wx.ancestors) == das
+    assert generated_cell_dict.get(wx.event_int) == event3
+    assert generated_cell_dict.get(wx.celldepth) == celldepth4
+    assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
+    assert generated_cell_dict.get(wx.penny) == penny6
+    assert generated_cell_dict.get(wx.quota) == quota500
 
 
 def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
@@ -552,12 +545,12 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     print(f"{sue7_cell_path=}")
     assert os_path_exists(sue7_cell_path)
     generated_cell_dict = open_json(sue7_cell_path)
-    assert generated_cell_dict.get(ancestors_str()) == das
-    assert generated_cell_dict.get(event_int_str()) == event3
-    assert generated_cell_dict.get(celldepth_str()) == 0
-    assert generated_cell_dict.get(bud_belief_name_str()) == sue_str
-    assert generated_cell_dict.get(penny_str()) == 1
-    assert generated_cell_dict.get(quota_str()) == CELLNODE_QUOTA_DEFAULT
+    assert generated_cell_dict.get(wx.ancestors) == das
+    assert generated_cell_dict.get(wx.event_int) == event3
+    assert generated_cell_dict.get(wx.celldepth) == 0
+    assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
+    assert generated_cell_dict.get(wx.penny) == 1
+    assert generated_cell_dict.get(wx.quota) == CELLNODE_QUOTA_DEFAULT
 
 
 def test_cellunit_get_from_dir_ReturnsObj_Scenario0_NoFileExists(env_dir_setup_cleanup):

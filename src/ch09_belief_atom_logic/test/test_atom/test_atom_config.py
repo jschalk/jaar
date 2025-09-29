@@ -1,67 +1,6 @@
 from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
-from src.ch09_belief_atom_logic._ref.ch09_keywords import (
-    DELETE_str,
-    INSERT_str,
-    LabelTerm_str,
-    NameTerm_str,
-    RopeTerm_str,
-    TitleTerm_str,
-    UPDATE_str,
-    addin_str,
-    awardee_title_str,
-    begin_str,
-    belief_groupunit_str,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    class_type_str,
-    close_str,
-    column_order_str,
-    credor_respect_str,
-    crud_str,
-    debtor_respect_str,
-    denom_str,
-    dimen_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_upper_str,
-    fund_iota_str,
-    gogo_want_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    healer_name_str,
-    jkeys_str,
-    jvalues_str,
-    morph_str,
-    nesting_order_str,
-    normal_specs_str,
-    normal_table_name_str,
-    numor_str,
-    parent_rope_str,
-    party_title_str,
-    penny_str,
-    plan_rope_str,
-    planroot_str,
-    reason_context_str,
-    reason_state_str,
-    respect_bit_str,
-    solo_str,
-    sqlite_datatype_str,
-    stop_want_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-    voice_pool_str,
-)
+from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 from src.ch09_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
@@ -83,16 +22,16 @@ from src.ch09_belief_atom_logic.atom_config import (
 
 def test_CRUD_command_Exists():
     # ESTABLISH / WHEN / THEN
-    assert CRUD_command(UPDATE_str()) == UPDATE_str()
-    assert CRUD_command(DELETE_str()) == DELETE_str()
-    assert CRUD_command(INSERT_str()) == INSERT_str()
+    assert CRUD_command(wx.UPDATE) == str(wx.UPDATE)
+    assert CRUD_command(wx.DELETE) == str(wx.DELETE)
+    assert CRUD_command(wx.INSERT) == str(wx.INSERT)
 
 
 def test_get_belief_dimens_ReturnsObj():
     # ESTABLISH / WHEN / THEN
     assert get_belief_dimens() == set(get_atom_config_dict().keys())
-    assert belief_voiceunit_str() in get_belief_dimens()
-    assert is_belief_dimen(planroot_str()) is False
+    assert wx.belief_voiceunit in get_belief_dimens()
+    assert is_belief_dimen(wx.planroot) is False
 
 
 def test_get_all_belief_dimen_keys_ReturnsObj():
@@ -144,22 +83,20 @@ def test_get_atom_config_dict_ReturnsObj_Mirrors_belief_config():
     atom_config_dimens = set(atom_config_dict.keys())
     belief_config_dimens = set(belief_config_dict.keys())
     assert atom_config_dimens.issubset(belief_config_dimens)
-    assert belief_config_dimens.difference(atom_config_dimens) == {
-        belief_groupunit_str()
-    }
+    assert belief_config_dimens.difference(atom_config_dimens) == {wx.belief_groupunit}
     for atom_dimen, dimen_dict in atom_config_dict.items():
         for attr_key, atom_attr_dict in dimen_dict.items():
-            if attr_key in jkeys_str():
+            if attr_key in wx.jkeys:
                 atom_attr_keys = set(atom_attr_dict.keys())
                 print(f"{atom_dimen=} {attr_key=} {len(atom_attr_keys)=}")
-                belief_jkeys_dict = belief_config_dict.get(atom_dimen).get(jkeys_str())
+                belief_jkeys_dict = belief_config_dict.get(atom_dimen).get(wx.jkeys)
                 belief_jkeys_keys = set(belief_jkeys_dict.keys())
                 print(f"{atom_dimen=} {attr_key=} {len(belief_jkeys_keys)=}")
                 assert atom_attr_keys.issubset(belief_jkeys_keys)
-            elif attr_key in jvalues_str():
+            elif attr_key in wx.jvalues:
                 atom_attr_keys = set(atom_attr_dict.keys())
                 print(f"{atom_dimen=} {attr_key=} {len(atom_attr_keys)=}")
-                belief_dict = belief_config_dict.get(atom_dimen).get(jvalues_str())
+                belief_dict = belief_config_dict.get(atom_dimen).get(wx.jvalues)
                 belief_keys = set(belief_dict.keys())
                 print(f"{atom_dimen=} {attr_key=} {len(belief_keys)=}")
                 assert atom_attr_keys.issubset(belief_keys)
@@ -167,29 +104,29 @@ def test_get_atom_config_dict_ReturnsObj_Mirrors_belief_config():
 
 def _check_every_crud_dict_has_element(atom_config_dict, atom_order_str):
     for dimen, dimen_dict in atom_config_dict.items():
-        if dimen_dict.get(INSERT_str()) is not None:
-            dimen_insert = dimen_dict.get(INSERT_str())
+        if dimen_dict.get(wx.INSERT) is not None:
+            dimen_insert = dimen_dict.get(wx.INSERT)
             if dimen_insert.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {INSERT_str()} {dimen_insert.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {wx.INSERT} {dimen_insert.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if dimen_dict.get(UPDATE_str()) is not None:
-            dimen_update = dimen_dict.get(UPDATE_str())
+        if dimen_dict.get(wx.UPDATE) is not None:
+            dimen_update = dimen_dict.get(wx.UPDATE)
             if dimen_update.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {UPDATE_str()} {dimen_update.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {wx.UPDATE} {dimen_update.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if dimen_dict.get(DELETE_str()) is not None:
-            dimen_delete = dimen_dict.get(DELETE_str())
+        if dimen_dict.get(wx.DELETE) is not None:
+            dimen_delete = dimen_dict.get(wx.DELETE)
             if dimen_delete.get(atom_order_str) is None:
-                x_str = f"Missing from {dimen} {DELETE_str()} {dimen_delete.get(atom_order_str)=}"
+                x_str = f"Missing from {dimen} {wx.DELETE} {dimen_delete.get(atom_order_str)=}"
                 print(x_str)
                 return False
 
-        if dimen_dict.get(normal_specs_str()) is None:
-            print(f"{dimen=} {normal_specs_str()} is missing")
+        if dimen_dict.get(wx.normal_specs) is None:
+            print(f"{dimen=} {wx.normal_specs} is missing")
             return False
     return True
 
@@ -202,98 +139,98 @@ def test_get_atom_config_dict_EveryCrudOperationHasBeliefDeltaOrderGroup():
     # WHEN / THEN
     assert _check_every_crud_dict_has_element(get_atom_config_dict(), atom_order_str)
     # # Simple script for editing atom_config.json
-    # set_mog(INSERT_str(), belief_voiceunit_str(), 0)
-    # set_mog(INSERT_str(), belief_voice_membership_str(), 1)
-    # set_mog(INSERT_str(), belief_planunit_str(), 2)
-    # set_mog(INSERT_str(), belief_plan_awardunit_str(), 3)
-    # set_mog(INSERT_str(), belief_plan_partyunit_str(), 4)
-    # set_mog(INSERT_str(), belief_plan_healerunit_str(), 5)
-    # set_mog(INSERT_str(), belief_plan_factunit_str(), 6)
-    # set_mog(INSERT_str(), belief_plan_reasonunit_str(), 7)
-    # set_mog(INSERT_str(), belief_plan_reason_caseunit_str(), 8)
-    # set_mog(UPDATE_str(), belief_voiceunit_str(), 9)
-    # set_mog(UPDATE_str(), belief_voice_membership_str(), 10)
-    # set_mog(UPDATE_str(), belief_planunit_str(), 11)
-    # set_mog(UPDATE_str(), belief_plan_awardunit_str(), 12)
-    # set_mog(UPDATE_str(), belief_plan_factunit_str(), 13)
-    # set_mog(UPDATE_str(), belief_plan_reason_caseunit_str(), 14)
-    # set_mog(UPDATE_str(), belief_plan_reasonunit_str(), 15)
-    # set_mog(DELETE_str(), belief_plan_reason_caseunit_str(), 16)
-    # set_mog(DELETE_str(), belief_plan_reasonunit_str(), 17)
-    # set_mog(DELETE_str(), belief_plan_factunit_str(), 18)
-    # set_mog(DELETE_str(), belief_plan_partyunit_str(), 19)
-    # set_mog(DELETE_str(), belief_plan_healerunit_str(), 20)
-    # set_mog(DELETE_str(), belief_plan_awardunit_str(), 21)
-    # set_mog(DELETE_str(), belief_planunit_str(), 22)
-    # set_mog(DELETE_str(), belief_voice_membership_str(), 23)
-    # set_mog(DELETE_str(), belief_voiceunit_str(), 24)
-    # set_mog(UPDATE_str(), beliefunit_str(), 25)
+    # set_mog(wx.INSERT, wx.belief_voiceunit, 0)
+    # set_mog(wx.INSERT, wx.belief_voice_membership, 1)
+    # set_mog(wx.INSERT, wx.belief_planunit, 2)
+    # set_mog(wx.INSERT, wx.belief_plan_awardunit, 3)
+    # set_mog(wx.INSERT, wx.belief_plan_partyunit, 4)
+    # set_mog(wx.INSERT, wx.belief_plan_healerunit, 5)
+    # set_mog(wx.INSERT, wx.belief_plan_factunit, 6)
+    # set_mog(wx.INSERT, wx.belief_plan_reasonunit, 7)
+    # set_mog(wx.INSERT, wx.belief_plan_reason_caseunit, 8)
+    # set_mog(wx.UPDATE, wx.belief_voiceunit, 9)
+    # set_mog(wx.UPDATE, wx.belief_voice_membership, 10)
+    # set_mog(wx.UPDATE, wx.belief_planunit, 11)
+    # set_mog(wx.UPDATE, wx.belief_plan_awardunit, 12)
+    # set_mog(wx.UPDATE, wx.belief_plan_factunit, 13)
+    # set_mog(wx.UPDATE, wx.belief_plan_reason_caseunit, 14)
+    # set_mog(wx.UPDATE, wx.belief_plan_reasonunit, 15)
+    # set_mog(wx.DELETE, wx.belief_plan_reason_caseunit, 16)
+    # set_mog(wx.DELETE, wx.belief_plan_reasonunit, 17)
+    # set_mog(wx.DELETE, wx.belief_plan_factunit, 18)
+    # set_mog(wx.DELETE, wx.belief_plan_partyunit, 19)
+    # set_mog(wx.DELETE, wx.belief_plan_healerunit, 20)
+    # set_mog(wx.DELETE, wx.belief_plan_awardunit, 21)
+    # set_mog(wx.DELETE, wx.belief_planunit, 22)
+    # set_mog(wx.DELETE, wx.belief_voice_membership, 23)
+    # set_mog(wx.DELETE, wx.belief_voiceunit, 24)
+    # set_mog(wx.UPDATE, wx.beliefunit, 25)
 
-    assert 0 == q_order(INSERT_str(), belief_voiceunit_str())
-    assert 1 == q_order(INSERT_str(), belief_voice_membership_str())
-    assert 2 == q_order(INSERT_str(), belief_planunit_str())
-    assert 3 == q_order(INSERT_str(), belief_plan_awardunit_str())
-    assert 4 == q_order(INSERT_str(), belief_plan_partyunit_str())
-    assert 5 == q_order(INSERT_str(), belief_plan_healerunit_str())
-    assert 6 == q_order(INSERT_str(), belief_plan_factunit_str())
-    assert 7 == q_order(INSERT_str(), belief_plan_reasonunit_str())
-    assert 8 == q_order(INSERT_str(), belief_plan_reason_caseunit_str())
-    assert 9 == q_order(UPDATE_str(), belief_voiceunit_str())
-    assert 10 == q_order(UPDATE_str(), belief_voice_membership_str())
-    assert 11 == q_order(UPDATE_str(), belief_planunit_str())
-    assert 12 == q_order(UPDATE_str(), belief_plan_awardunit_str())
-    assert 13 == q_order(UPDATE_str(), belief_plan_factunit_str())
-    assert 14 == q_order(UPDATE_str(), belief_plan_reason_caseunit_str())
-    assert 15 == q_order(UPDATE_str(), belief_plan_reasonunit_str())
-    assert 16 == q_order(DELETE_str(), belief_plan_reason_caseunit_str())
-    assert 17 == q_order(DELETE_str(), belief_plan_reasonunit_str())
-    assert 18 == q_order(DELETE_str(), belief_plan_factunit_str())
-    assert 19 == q_order(DELETE_str(), belief_plan_partyunit_str())
-    assert 20 == q_order(DELETE_str(), belief_plan_healerunit_str())
-    assert 21 == q_order(DELETE_str(), belief_plan_awardunit_str())
-    assert 22 == q_order(DELETE_str(), belief_planunit_str())
-    assert 23 == q_order(DELETE_str(), belief_voice_membership_str())
-    assert 24 == q_order(DELETE_str(), belief_voiceunit_str())
-    assert 25 == q_order(UPDATE_str(), beliefunit_str())
+    assert 0 == q_order(wx.INSERT, wx.belief_voiceunit)
+    assert 1 == q_order(wx.INSERT, wx.belief_voice_membership)
+    assert 2 == q_order(wx.INSERT, wx.belief_planunit)
+    assert 3 == q_order(wx.INSERT, wx.belief_plan_awardunit)
+    assert 4 == q_order(wx.INSERT, wx.belief_plan_partyunit)
+    assert 5 == q_order(wx.INSERT, wx.belief_plan_healerunit)
+    assert 6 == q_order(wx.INSERT, wx.belief_plan_factunit)
+    assert 7 == q_order(wx.INSERT, wx.belief_plan_reasonunit)
+    assert 8 == q_order(wx.INSERT, wx.belief_plan_reason_caseunit)
+    assert 9 == q_order(wx.UPDATE, wx.belief_voiceunit)
+    assert 10 == q_order(wx.UPDATE, wx.belief_voice_membership)
+    assert 11 == q_order(wx.UPDATE, wx.belief_planunit)
+    assert 12 == q_order(wx.UPDATE, wx.belief_plan_awardunit)
+    assert 13 == q_order(wx.UPDATE, wx.belief_plan_factunit)
+    assert 14 == q_order(wx.UPDATE, wx.belief_plan_reason_caseunit)
+    assert 15 == q_order(wx.UPDATE, wx.belief_plan_reasonunit)
+    assert 16 == q_order(wx.DELETE, wx.belief_plan_reason_caseunit)
+    assert 17 == q_order(wx.DELETE, wx.belief_plan_reasonunit)
+    assert 18 == q_order(wx.DELETE, wx.belief_plan_factunit)
+    assert 19 == q_order(wx.DELETE, wx.belief_plan_partyunit)
+    assert 20 == q_order(wx.DELETE, wx.belief_plan_healerunit)
+    assert 21 == q_order(wx.DELETE, wx.belief_plan_awardunit)
+    assert 22 == q_order(wx.DELETE, wx.belief_planunit)
+    assert 23 == q_order(wx.DELETE, wx.belief_voice_membership)
+    assert 24 == q_order(wx.DELETE, wx.belief_voiceunit)
+    assert 25 == q_order(wx.UPDATE, wx.beliefunit)
 
 
 def _get_atom_config_jkeys_len(x_dimen: str) -> int:
-    jkeys_key_list = [x_dimen, jkeys_str()]
+    jkeys_key_list = [x_dimen, wx.jkeys]
     return len(get_from_nested_dict(get_atom_config_dict(), jkeys_key_list))
 
 
 def _get_atom_config_jvalues_len(x_dimen: str) -> int:
-    jvalues_key_list = [x_dimen, jvalues_str()]
+    jvalues_key_list = [x_dimen, wx.jvalues]
     return len(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list))
 
 
 def test_get_atom_config_dict_CheckEachDimenHasCorrectArgCount():
     # ESTABLISH / WHEN / THEN
-    assert _get_atom_config_jkeys_len(beliefunit_str()) == 0
-    assert _get_atom_config_jkeys_len(belief_voiceunit_str()) == 1
-    assert _get_atom_config_jkeys_len(belief_voice_membership_str()) == 2
-    assert _get_atom_config_jkeys_len(belief_planunit_str()) == 1
-    assert _get_atom_config_jkeys_len(belief_plan_awardunit_str()) == 2
-    assert _get_atom_config_jkeys_len(belief_plan_reasonunit_str()) == 2
-    assert _get_atom_config_jkeys_len(belief_plan_reason_caseunit_str()) == 3
-    assert _get_atom_config_jkeys_len(belief_plan_partyunit_str()) == 2
-    assert _get_atom_config_jkeys_len(belief_plan_healerunit_str()) == 2
-    assert _get_atom_config_jkeys_len(belief_plan_factunit_str()) == 2
+    assert _get_atom_config_jkeys_len(wx.beliefunit) == 0
+    assert _get_atom_config_jkeys_len(wx.belief_voiceunit) == 1
+    assert _get_atom_config_jkeys_len(wx.belief_voice_membership) == 2
+    assert _get_atom_config_jkeys_len(wx.belief_planunit) == 1
+    assert _get_atom_config_jkeys_len(wx.belief_plan_awardunit) == 2
+    assert _get_atom_config_jkeys_len(wx.belief_plan_reasonunit) == 2
+    assert _get_atom_config_jkeys_len(wx.belief_plan_reason_caseunit) == 3
+    assert _get_atom_config_jkeys_len(wx.belief_plan_partyunit) == 2
+    assert _get_atom_config_jkeys_len(wx.belief_plan_healerunit) == 2
+    assert _get_atom_config_jkeys_len(wx.belief_plan_factunit) == 2
 
-    assert _get_atom_config_jvalues_len(beliefunit_str()) == 8
-    assert _get_atom_config_jvalues_len(belief_voiceunit_str()) == 2
-    assert _get_atom_config_jvalues_len(belief_voice_membership_str()) == 2
-    assert _get_atom_config_jvalues_len(belief_planunit_str()) == 11
-    assert _get_atom_config_jvalues_len(belief_plan_awardunit_str()) == 2
-    assert _get_atom_config_jvalues_len(belief_plan_reasonunit_str()) == 1
-    assert _get_atom_config_jvalues_len(belief_plan_reason_caseunit_str()) == 3
-    assert _get_atom_config_jvalues_len(belief_plan_partyunit_str()) == 1
-    assert _get_atom_config_jvalues_len(belief_plan_healerunit_str()) == 0
-    assert _get_atom_config_jvalues_len(belief_plan_factunit_str()) == 3
+    assert _get_atom_config_jvalues_len(wx.beliefunit) == 8
+    assert _get_atom_config_jvalues_len(wx.belief_voiceunit) == 2
+    assert _get_atom_config_jvalues_len(wx.belief_voice_membership) == 2
+    assert _get_atom_config_jvalues_len(wx.belief_planunit) == 11
+    assert _get_atom_config_jvalues_len(wx.belief_plan_awardunit) == 2
+    assert _get_atom_config_jvalues_len(wx.belief_plan_reasonunit) == 1
+    assert _get_atom_config_jvalues_len(wx.belief_plan_reason_caseunit) == 3
+    assert _get_atom_config_jvalues_len(wx.belief_plan_partyunit) == 1
+    assert _get_atom_config_jvalues_len(wx.belief_plan_healerunit) == 0
+    assert _get_atom_config_jvalues_len(wx.belief_plan_factunit) == 3
 
 
 def _has_every_element(x_arg, x_dict) -> bool:
-    arg_elements = {class_type_str(), sqlite_datatype_str(), column_order_str()}
+    arg_elements = {wx.class_type, wx.sqlite_datatype, wx.column_order}
     for arg_element in arg_elements:
         if x_dict.get(arg_element) is None:
             print(f"{arg_element} failed for {x_arg=}")
@@ -302,11 +239,11 @@ def _has_every_element(x_arg, x_dict) -> bool:
 
 
 def _every_dimen_dict_has_arg_elements(dimen_dict: dict) -> bool:
-    for jkey, x_dict in dimen_dict.get(jkeys_str()).items():
+    for jkey, x_dict in dimen_dict.get(wx.jkeys).items():
         if not _has_every_element(jkey, x_dict):
             return False
-    if dimen_dict.get(jvalues_str()) is not None:
-        for jvalue, x_dict in dimen_dict.get(jvalues_str()).items():
+    if dimen_dict.get(wx.jvalues) is not None:
+        for jvalue, x_dict in dimen_dict.get(wx.jvalues).items():
             if not _has_every_element(jvalue, x_dict):
                 return False
     return True
@@ -328,13 +265,13 @@ def check_necessary_nesting_order_exists() -> bool:
     atom_config = get_atom_config_dict()
     multi_jkey_dict = {}
     for atom_key, atom_value in atom_config.items():
-        jkeys = atom_value.get(jkeys_str())
+        jkeys = atom_value.get(wx.jkeys)
         if len(jkeys) > 1:
             multi_jkey_dict[atom_key] = jkeys
     # print(f"{multi_jkey_dict.keys()=}")
     for atom_key, jkeys in multi_jkey_dict.items():
         for jkey_key, jkeys_dict in jkeys.items():
-            jkey_nesting_order = jkeys_dict.get(nesting_order_str())
+            jkey_nesting_order = jkeys_dict.get(wx.nesting_order)
             print(f"{atom_key=} {jkey_key=} {jkey_nesting_order=}")
             if jkey_nesting_order is None:
                 return False
@@ -353,12 +290,12 @@ def test_atom_config_NestingOrderExistsWhenNeeded():
 
 
 def _get_atom_config_jvalue_keys(x_dimen: str) -> set[str]:
-    jvalues_key_list = [x_dimen, jvalues_str()]
+    jvalues_key_list = [x_dimen, wx.jvalues]
     return set(get_from_nested_dict(get_atom_config_dict(), jvalues_key_list).keys())
 
 
 def _get_atom_config_jkey_keys(x_dimen: str) -> set[str]:
-    jkeys_key_list = [x_dimen, jkeys_str()]
+    jkeys_key_list = [x_dimen, wx.jkeys]
     return set(get_from_nested_dict(get_atom_config_dict(), jkeys_key_list).keys())
 
 
@@ -387,14 +324,14 @@ def unique_jkeys():
     jkey_key_count = 0
     for atom_dimen in get_atom_config_dict().keys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
-        if plan_rope_str() in new_jkey_keys:
-            new_jkey_keys.remove(plan_rope_str())
-        if reason_context_str() in new_jkey_keys:
-            new_jkey_keys.remove(reason_context_str())
-        if voice_name_str() in new_jkey_keys:
-            new_jkey_keys.remove(voice_name_str())
-        if group_title_str() in new_jkey_keys:
-            new_jkey_keys.remove(group_title_str())
+        if wx.plan_rope in new_jkey_keys:
+            new_jkey_keys.remove(wx.plan_rope)
+        if wx.reason_context in new_jkey_keys:
+            new_jkey_keys.remove(wx.reason_context)
+        if wx.voice_name in new_jkey_keys:
+            new_jkey_keys.remove(wx.voice_name)
+        if wx.group_title in new_jkey_keys:
+            new_jkey_keys.remove(wx.group_title)
         print(f"{atom_dimen} {new_jkey_keys=}")
         jkey_key_count += len(new_jkey_keys)
         jkey_keys.update(new_jkey_keys)
@@ -412,27 +349,27 @@ def test_get_atom_config_dict_SomeRequiredArgAreUnique():
 
 def test_get_sorted_jkey_keys_ReturnsObj_belief_voiceunit():
     # ESTABLISH
-    x_dimen = belief_voiceunit_str()
+    x_dimen = wx.belief_voiceunit
 
     # WHEN
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
-    assert x_sorted_jkey_keys == [voice_name_str()]
+    assert x_sorted_jkey_keys == [wx.voice_name]
 
 
 def test_get_sorted_jkey_keys_ReturnsObj_belief_plan_reason_caseunit():
     # ESTABLISH
-    x_dimen = belief_plan_reason_caseunit_str()
+    x_dimen = wx.belief_plan_reason_caseunit
 
     # WHEN
     x_sorted_jkey_keys = get_sorted_jkey_keys(x_dimen)
 
     # THEN
     assert x_sorted_jkey_keys == [
-        plan_rope_str(),
-        reason_context_str(),
-        reason_state_str(),
+        wx.plan_rope,
+        wx.reason_context,
+        wx.reason_state,
     ]
 
 
@@ -453,16 +390,16 @@ def test_get_normalized_belief_table_build_ReturnsObj():
 
     # THEN
     assert len(nx) == 10
-    cat_beliefunit = nx.get(beliefunit_str())
-    cat_voiceunit = nx.get(belief_voiceunit_str())
-    cat_membership = nx.get(belief_voice_membership_str())
-    cat_plan = nx.get(belief_planunit_str())
-    cat_awardunit = nx.get(belief_plan_awardunit_str())
-    cat_reason = nx.get(belief_plan_reasonunit_str())
-    cat_case = nx.get(belief_plan_reason_caseunit_str())
-    cat_partyunit = nx.get(belief_plan_partyunit_str())
-    cat_healerunit = nx.get(belief_plan_healerunit_str())
-    cat_fact = nx.get(belief_plan_factunit_str())
+    cat_beliefunit = nx.get(wx.beliefunit)
+    cat_voiceunit = nx.get(wx.belief_voiceunit)
+    cat_membership = nx.get(wx.belief_voice_membership)
+    cat_plan = nx.get(wx.belief_planunit)
+    cat_awardunit = nx.get(wx.belief_plan_awardunit)
+    cat_reason = nx.get(wx.belief_plan_reasonunit)
+    cat_case = nx.get(wx.belief_plan_reason_caseunit)
+    cat_partyunit = nx.get(wx.belief_plan_partyunit)
+    cat_healerunit = nx.get(wx.belief_plan_healerunit)
+    cat_fact = nx.get(wx.belief_plan_factunit)
 
     assert cat_beliefunit is not None
     assert cat_voiceunit is not None
@@ -475,20 +412,20 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert cat_healerunit is not None
     assert cat_fact is not None
 
-    normal_specs_beliefunit = cat_beliefunit.get(normal_specs_str())
-    normal_specs_voiceunit = cat_voiceunit.get(normal_specs_str())
-    normal_specs_membership = cat_membership.get(normal_specs_str())
-    normal_specs_plan = cat_plan.get(normal_specs_str())
-    normal_specs_awardunit = cat_awardunit.get(normal_specs_str())
-    normal_specs_reason = cat_reason.get(normal_specs_str())
-    normal_specs_case = cat_case.get(normal_specs_str())
-    normal_specs_partyunit = cat_partyunit.get(normal_specs_str())
-    normal_specs_healerunit = cat_healerunit.get(normal_specs_str())
-    normal_specs_fact = cat_fact.get(normal_specs_str())
+    normal_specs_beliefunit = cat_beliefunit.get(wx.normal_specs)
+    normal_specs_voiceunit = cat_voiceunit.get(wx.normal_specs)
+    normal_specs_membership = cat_membership.get(wx.normal_specs)
+    normal_specs_plan = cat_plan.get(wx.normal_specs)
+    normal_specs_awardunit = cat_awardunit.get(wx.normal_specs)
+    normal_specs_reason = cat_reason.get(wx.normal_specs)
+    normal_specs_case = cat_case.get(wx.normal_specs)
+    normal_specs_partyunit = cat_partyunit.get(wx.normal_specs)
+    normal_specs_healerunit = cat_healerunit.get(wx.normal_specs)
+    normal_specs_fact = cat_fact.get(wx.normal_specs)
 
     columns_str = "columns"
     print(f"{cat_beliefunit.keys()=}")
-    print(f"{normal_specs_str()=}")
+    print(f"{wx.normal_specs=}")
     assert normal_specs_beliefunit is not None
     assert normal_specs_voiceunit is not None
     assert normal_specs_membership is not None
@@ -500,16 +437,16 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert normal_specs_healerunit is not None
     assert normal_specs_fact is not None
 
-    table_name_beliefunit = normal_specs_beliefunit.get(normal_table_name_str())
-    table_name_voiceunit = normal_specs_voiceunit.get(normal_table_name_str())
-    table_name_membership = normal_specs_membership.get(normal_table_name_str())
-    table_name_plan = normal_specs_plan.get(normal_table_name_str())
-    table_name_awardunit = normal_specs_awardunit.get(normal_table_name_str())
-    table_name_reason = normal_specs_reason.get(normal_table_name_str())
-    table_name_case = normal_specs_case.get(normal_table_name_str())
-    table_name_partyunit = normal_specs_partyunit.get(normal_table_name_str())
-    table_name_healerunit = normal_specs_healerunit.get(normal_table_name_str())
-    table_name_fact = normal_specs_fact.get(normal_table_name_str())
+    table_name_beliefunit = normal_specs_beliefunit.get(wx.normal_table_name)
+    table_name_voiceunit = normal_specs_voiceunit.get(wx.normal_table_name)
+    table_name_membership = normal_specs_membership.get(wx.normal_table_name)
+    table_name_plan = normal_specs_plan.get(wx.normal_table_name)
+    table_name_awardunit = normal_specs_awardunit.get(wx.normal_table_name)
+    table_name_reason = normal_specs_reason.get(wx.normal_table_name)
+    table_name_case = normal_specs_case.get(wx.normal_table_name)
+    table_name_partyunit = normal_specs_partyunit.get(wx.normal_table_name)
+    table_name_healerunit = normal_specs_healerunit.get(wx.normal_table_name)
+    table_name_fact = normal_specs_fact.get(wx.normal_table_name)
 
     assert table_name_beliefunit == "belief"
     assert table_name_voiceunit == "voiceunit"
@@ -529,45 +466,45 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert len(beliefunit_columns) == 9
     assert beliefunit_columns.get("uid") is not None
     assert beliefunit_columns.get("max_tree_traverse") is not None
-    assert beliefunit_columns.get(credor_respect_str()) is not None
-    assert beliefunit_columns.get(debtor_respect_str()) is not None
+    assert beliefunit_columns.get(wx.credor_respect) is not None
+    assert beliefunit_columns.get(wx.debtor_respect) is not None
     assert beliefunit_columns.get("fund_pool") is not None
-    assert beliefunit_columns.get(fund_iota_str()) is not None
-    assert beliefunit_columns.get(respect_bit_str()) is not None
-    assert beliefunit_columns.get(penny_str()) is not None
+    assert beliefunit_columns.get(wx.fund_iota) is not None
+    assert beliefunit_columns.get(wx.respect_bit) is not None
+    assert beliefunit_columns.get(wx.penny) is not None
     assert beliefunit_columns.get("tally") is not None
 
     assert len(cat_voiceunit) == 2
     voiceunit_columns = cat_voiceunit.get(columns_str)
     assert len(voiceunit_columns) == 4
     assert voiceunit_columns.get("uid") is not None
-    assert voiceunit_columns.get(voice_name_str()) is not None
-    assert voiceunit_columns.get(voice_cred_points_str()) is not None
-    assert voiceunit_columns.get(voice_debt_points_str()) is not None
+    assert voiceunit_columns.get(wx.voice_name) is not None
+    assert voiceunit_columns.get(wx.voice_cred_points) is not None
+    assert voiceunit_columns.get(wx.voice_debt_points) is not None
 
-    voice_name_dict = voiceunit_columns.get(voice_name_str())
+    voice_name_dict = voiceunit_columns.get(wx.voice_name)
     assert len(voice_name_dict) == 2
-    assert voice_name_dict.get(sqlite_datatype_str()) == "TEXT"
+    assert voice_name_dict.get(wx.sqlite_datatype) == "TEXT"
     assert voice_name_dict.get("nullable") is False
     voice_debt_points_dict = voiceunit_columns.get("voice_debt_points")
     assert len(voice_name_dict) == 2
-    assert voice_debt_points_dict.get(sqlite_datatype_str()) == "REAL"
+    assert voice_debt_points_dict.get(wx.sqlite_datatype) == "REAL"
     assert voice_debt_points_dict.get("nullable") is True
 
     assert len(cat_plan) == 2
     plan_columns = cat_plan.get(columns_str)
     assert len(plan_columns) == 13
     assert plan_columns.get("uid") is not None
-    assert plan_columns.get(plan_rope_str()) is not None
-    assert plan_columns.get(begin_str()) is not None
-    assert plan_columns.get(close_str()) is not None
+    assert plan_columns.get(wx.plan_rope) is not None
+    assert plan_columns.get(wx.begin) is not None
+    assert plan_columns.get(wx.close) is not None
 
-    gogo_want_dict = plan_columns.get(gogo_want_str())
-    stop_want_dict = plan_columns.get(stop_want_str())
+    gogo_want_dict = plan_columns.get(wx.gogo_want)
+    stop_want_dict = plan_columns.get(wx.stop_want)
     assert len(gogo_want_dict) == 2
     assert len(stop_want_dict) == 2
-    assert gogo_want_dict.get(sqlite_datatype_str()) == "REAL"
-    assert stop_want_dict.get(sqlite_datatype_str()) == "REAL"
+    assert gogo_want_dict.get(wx.sqlite_datatype) == "REAL"
+    assert stop_want_dict.get(wx.sqlite_datatype) == "REAL"
     assert gogo_want_dict.get("nullable") is True
     assert stop_want_dict.get("nullable") is True
 
@@ -578,12 +515,12 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
 
     # THEN
     assert x_atom_args_dimen_mapping
-    assert x_atom_args_dimen_mapping.get(stop_want_str())
-    assert x_atom_args_dimen_mapping.get(stop_want_str()) == {belief_planunit_str()}
-    assert x_atom_args_dimen_mapping.get(plan_rope_str())
-    rope_dimens = x_atom_args_dimen_mapping.get(plan_rope_str())
-    assert belief_plan_factunit_str() in rope_dimens
-    assert belief_plan_partyunit_str() in rope_dimens
+    assert x_atom_args_dimen_mapping.get(wx.stop_want)
+    assert x_atom_args_dimen_mapping.get(wx.stop_want) == {wx.belief_planunit}
+    assert x_atom_args_dimen_mapping.get(wx.plan_rope)
+    rope_dimens = x_atom_args_dimen_mapping.get(wx.plan_rope)
+    assert wx.belief_plan_factunit in rope_dimens
+    assert wx.belief_plan_partyunit in rope_dimens
     assert len(rope_dimens) == 7
     assert len(x_atom_args_dimen_mapping) == 42
 
@@ -591,30 +528,30 @@ def test_get_atom_args_dimen_mapping_ReturnsObj():
 def get_class_type(x_dimen: str, x_arg: str) -> str:
     atom_config_dict = get_atom_config_dict()
     dimen_dict = atom_config_dict.get(x_dimen)
-    optional_dict = dimen_dict.get(jvalues_str())
-    required_dict = dimen_dict.get(jkeys_str())
+    optional_dict = dimen_dict.get(wx.jvalues)
+    required_dict = dimen_dict.get(wx.jkeys)
     arg_dict = {}
     if optional_dict.get(x_arg):
-        arg_dict = dimen_dict.get(jvalues_str()).get(x_arg)
+        arg_dict = dimen_dict.get(wx.jvalues).get(x_arg)
     if required_dict.get(x_arg):
         arg_dict = required_dict.get(x_arg)
-    return arg_dict.get(class_type_str())
+    return arg_dict.get(wx.class_type)
 
 
 def test_get_class_type_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert get_class_type(belief_voiceunit_str(), voice_name_str()) == NameTerm_str()
-    assert get_class_type(belief_planunit_str(), gogo_want_str()) == "float"
+    assert get_class_type(wx.belief_voiceunit, wx.voice_name) == wx.NameTerm
+    assert get_class_type(wx.belief_planunit, wx.gogo_want) == "float"
 
 
 def test_get_allowed_class_types_ReturnsObj():
     # ESTABLISH
     x_allowed_class_types = {
         "int",
-        NameTerm_str(),
-        TitleTerm_str(),
-        LabelTerm_str(),
-        RopeTerm_str(),
+        wx.NameTerm,
+        wx.TitleTerm,
+        wx.LabelTerm,
+        wx.RopeTerm,
         "float",
         "bool",
         "TimeLinePoint",
@@ -671,47 +608,47 @@ def test_get_atom_args_class_types_ReturnsObj():
     x_class_types = get_atom_args_class_types()
 
     # THEN
-    assert x_class_types.get(voice_name_str()) == NameTerm_str()
-    assert x_class_types.get(addin_str()) == "float"
-    assert x_class_types.get(awardee_title_str()) == TitleTerm_str()
-    assert x_class_types.get(reason_context_str()) == RopeTerm_str()
+    assert x_class_types.get(wx.voice_name) == wx.NameTerm
+    assert x_class_types.get(wx.addin) == "float"
+    assert x_class_types.get(wx.awardee_title) == wx.TitleTerm
+    assert x_class_types.get(wx.reason_context) == wx.RopeTerm
     assert x_class_types.get("reason_active_requisite") == "bool"
-    assert x_class_types.get(begin_str()) == "float"
-    assert x_class_types.get(respect_bit_str()) == "float"
-    assert x_class_types.get(close_str()) == "float"
-    assert x_class_types.get(voice_cred_points_str()) == "float"
-    assert x_class_types.get(group_cred_points_str()) == "float"
-    assert x_class_types.get(credor_respect_str()) == "float"
-    assert x_class_types.get(voice_debt_points_str()) == "float"
-    assert x_class_types.get(group_debt_points_str()) == "float"
-    assert x_class_types.get(debtor_respect_str()) == "float"
-    assert x_class_types.get(denom_str()) == "int"
+    assert x_class_types.get(wx.begin) == "float"
+    assert x_class_types.get(wx.respect_bit) == "float"
+    assert x_class_types.get(wx.close) == "float"
+    assert x_class_types.get(wx.voice_cred_points) == "float"
+    assert x_class_types.get(wx.group_cred_points) == "float"
+    assert x_class_types.get(wx.credor_respect) == "float"
+    assert x_class_types.get(wx.voice_debt_points) == "float"
+    assert x_class_types.get(wx.group_debt_points) == "float"
+    assert x_class_types.get(wx.debtor_respect) == "float"
+    assert x_class_types.get(wx.denom) == "int"
     assert x_class_types.get("reason_divisor") == "int"
-    assert x_class_types.get(fact_context_str()) == RopeTerm_str()
-    assert x_class_types.get(fact_upper_str()) == "float"
-    assert x_class_types.get(fact_lower_str()) == "float"
-    assert x_class_types.get(fund_iota_str()) == "float"
+    assert x_class_types.get(wx.fact_context) == wx.RopeTerm
+    assert x_class_types.get(wx.fact_upper) == "float"
+    assert x_class_types.get(wx.fact_lower) == "float"
+    assert x_class_types.get(wx.fund_iota) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
-    assert x_class_types.get(gogo_want_str()) == "float"
-    assert x_class_types.get(group_title_str()) == TitleTerm_str()
-    assert x_class_types.get(healer_name_str()) == NameTerm_str()
+    assert x_class_types.get(wx.gogo_want) == "float"
+    assert x_class_types.get(wx.group_title) == wx.TitleTerm
+    assert x_class_types.get(wx.healer_name) == wx.NameTerm
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
-    assert x_class_types.get(morph_str()) == "bool"
-    assert x_class_types.get(reason_state_str()) == RopeTerm_str()
+    assert x_class_types.get(wx.morph) == "bool"
+    assert x_class_types.get(wx.reason_state) == wx.RopeTerm
     assert x_class_types.get("reason_upper") == "float"
-    assert x_class_types.get(numor_str()) == "int"
+    assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"
-    assert x_class_types.get(penny_str()) == "float"
-    assert x_class_types.get("fact_state") == RopeTerm_str()
+    assert x_class_types.get(wx.penny) == "float"
+    assert x_class_types.get("fact_state") == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"
-    assert x_class_types.get(plan_rope_str()) == RopeTerm_str()
-    assert x_class_types.get(solo_str()) == "int"
-    assert x_class_types.get(stop_want_str()) == "float"
+    assert x_class_types.get(wx.plan_rope) == wx.RopeTerm
+    assert x_class_types.get(wx.solo) == "int"
+    assert x_class_types.get(wx.stop_want) == "float"
     assert x_class_types.get("take_force") == "float"
     assert x_class_types.get("tally") == "int"
-    assert x_class_types.get(party_title_str()) == TitleTerm_str()
+    assert x_class_types.get(wx.party_title) == wx.TitleTerm
     assert x_class_types.keys() == get_atom_args_dimen_mapping().keys()
     assert all_atom_args_class_types_are_correct(x_class_types)

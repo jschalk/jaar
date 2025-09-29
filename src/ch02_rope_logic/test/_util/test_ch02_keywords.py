@@ -1,24 +1,12 @@
-from src.ch02_rope_logic._ref.ch02_keywords import (
-    KnotTerm_str,
-    LabelTerm_str,
-    MomentLabel_str,
-    NameTerm_str,
-    NexusLabel_str,
-    RopeTerm_str,
-    TitleTerm_str,
-    knot_str,
-    parent_rope_str,
-)
+from src.ch02_rope_logic._ref.ch02_keywords import Ch02Keywords
 
 
-def test_str_functions_ReturnsObj():
+def test_Ch02Keywords_AttributeNamesEqualValues():
+    """Test that all Ch02Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
-    assert NexusLabel_str() == "NexusLabel"
-    assert LabelTerm_str() == "LabelTerm"
-    assert KnotTerm_str() == "KnotTerm"
-    assert knot_str() == "knot"
-    assert MomentLabel_str() == "MomentLabel"
-    assert NameTerm_str() == "NameTerm"
-    assert parent_rope_str() == "parent_rope"
-    assert RopeTerm_str() == "RopeTerm"
-    assert TitleTerm_str() == "TitleTerm"
+
+    for member in Ch02Keywords:
+        assertion_failure_str = (
+            f"Enum member name '{member.name}' does not match value '{member.value}'"
+        )
+        assert member.name == member.value, assertion_failure_str

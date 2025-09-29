@@ -1,16 +1,5 @@
 from sqlite3 import connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    amount_str,
-    belief_name_str,
-    event_int_str,
-    face_name_str,
-    moment_label_str,
-    party_title_str,
-    plan_rope_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_config_dict
 from src.ch17_idea_logic.idea_db_tool import (
     create_idea_sorted_table,
@@ -24,14 +13,14 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario0_belief_plan_partyuni
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            event_int_str(),
-            face_name_str(),
-            moment_label_str(),
-            plan_rope_str(),
-            party_title_str(),
-            belief_name_str(),
-            voice_name_str(),
-            amount_str(),
+            wx.event_int,
+            wx.face_name,
+            wx.moment_label,
+            wx.plan_rope,
+            wx.party_title,
+            wx.belief_name,
+            wx.voice_name,
+            wx.amount,
         ]
         blrlabo_cat = "belief_plan_partyunit"
         src_table = f"{idea_number}_raw"
@@ -76,16 +65,16 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario1_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            event_int_str(),
-            face_name_str(),
-            moment_label_str(),
-            plan_rope_str(),
-            party_title_str(),
-            belief_name_str(),
-            voice_name_str(),
-            voice_cred_points_str(),
-            voice_debt_points_str(),
-            amount_str(),
+            wx.event_int,
+            wx.face_name,
+            wx.moment_label,
+            wx.plan_rope,
+            wx.party_title,
+            wx.belief_name,
+            wx.voice_name,
+            wx.voice_cred_points,
+            wx.voice_debt_points,
+            wx.amount,
         ]
         blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"
@@ -126,15 +115,15 @@ def test_get_idea_into_dimen_raw_query_ReturnsObj_Scenario2_belief_voiceunit():
     with sqlite3_connect(":memory:") as conn:
         idea_number = "br000XX"
         idea_cols = [
-            event_int_str(),
-            face_name_str(),
-            moment_label_str(),
-            plan_rope_str(),
-            party_title_str(),
-            belief_name_str(),
-            voice_name_str(),
-            voice_cred_points_str(),
-            amount_str(),
+            wx.event_int,
+            wx.face_name,
+            wx.moment_label,
+            wx.plan_rope,
+            wx.party_title,
+            wx.belief_name,
+            wx.voice_name,
+            wx.voice_cred_points,
+            wx.amount,
         ]
         blrpern_cat = "belief_voiceunit"
         src_table = f"{idea_number}_raw"

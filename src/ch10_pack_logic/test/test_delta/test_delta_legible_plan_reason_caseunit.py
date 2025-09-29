@@ -1,16 +1,6 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-    belief_plan_reason_caseunit_str,
-    plan_rope_str,
-    reason_context_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
-)
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
 
@@ -18,16 +8,16 @@ from src.ch10_pack_logic.legible import create_legible_list
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
     reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
-    swim_beliefatom = beliefatom_shop(dimen, INSERT_str())
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -44,7 +34,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumbe
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -53,13 +43,13 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
     reason_divisor_value = 7
     reason_upper_value = 13
     reason_lower_value = 17
-    swim_beliefatom = beliefatom_shop(dimen, INSERT_str())
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     swim_beliefatom.set_arg("reason_divisor", reason_divisor_value)
-    swim_beliefatom.set_arg(reason_upper_str(), reason_upper_value)
-    swim_beliefatom.set_arg(reason_lower_str(), reason_lower_value)
+    swim_beliefatom.set_arg(wx.reason_upper, reason_upper_value)
+    swim_beliefatom.set_arg(wx.reason_lower, reason_lower_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -76,16 +66,16 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
     reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -102,7 +92,7 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumbe
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberArgs():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
@@ -111,13 +101,13 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
     reason_divisor_value = 7
     reason_upper_value = 13
     reason_lower_value = 17
-    swim_beliefatom = beliefatom_shop(dimen, UPDATE_str())
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     swim_beliefatom.set_arg("reason_divisor", reason_divisor_value)
-    swim_beliefatom.set_arg(reason_upper_str(), reason_upper_value)
-    swim_beliefatom.set_arg(reason_lower_str(), reason_lower_value)
+    swim_beliefatom.set_arg(wx.reason_upper, reason_upper_value)
+    swim_beliefatom.set_arg(wx.reason_lower, reason_lower_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -134,16 +124,16 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
 def test_create_legible_list_ReturnsObj_plan_reason_caseunit_DELETE():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    dimen = belief_plan_reason_caseunit_str()
+    dimen = wx.belief_plan_reason_caseunit
     casa_rope = sue_belief.make_l1_rope("casa")
     rope_value = sue_belief.make_rope(casa_rope, "clean fridge")
     casa_rope = sue_belief.make_l1_rope("casa")
     reason_context_value = sue_belief.make_rope(casa_rope, "fridge status")
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
-    swim_beliefatom = beliefatom_shop(dimen, DELETE_str())
-    swim_beliefatom.set_arg(plan_rope_str(), rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
+    swim_beliefatom.set_arg(wx.plan_rope, rope_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)

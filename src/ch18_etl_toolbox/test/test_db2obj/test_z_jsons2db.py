@@ -1,14 +1,14 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import get_row_count
 from src.ch02_rope_logic.rope import create_rope
-from src.ch04_group_logic.group import (
+from src.ch04_voice_logic.group import (
     awardheir_shop,
     awardunit_shop,
     groupunit_shop,
     membership_shop,
 )
-from src.ch04_group_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
-from src.ch04_group_logic.voice import voiceunit_shop
+from src.ch04_voice_logic.labor import laborheir_shop, laborunit_shop, partyheir_shop
+from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch05_reason_logic.reason import caseunit_shop, factheir_shop, reasonheir_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop

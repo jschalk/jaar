@@ -1,12 +1,11 @@
 from datetime import datetime
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
-    creg_str,
     display_creg_five_squirt_time_attrs,
     display_current_creg_five_time_attrs,
-    five_str,
     get_creg_min_from_dt,
     get_five_min_from_dt,
 )
@@ -68,7 +67,7 @@ def test_BeliefTimelinePoint_set_timeline_plan_SetsAttr():
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10000000)
     assert not x_timelinepoint._timeline_plan
 
@@ -85,7 +84,7 @@ def test_BeliefTimelinePoint_set_weekday_SetsAttr():
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10001440)
     x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._weekday
@@ -103,7 +102,7 @@ def test_BeliefTimelinePoint_set_month_SetsAttr():
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10060000)
     x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._month
@@ -124,7 +123,7 @@ def test_BeliefTimelinePoint_set_hour_SetsAttr():
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 10000001)
     x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._hour
@@ -145,7 +144,7 @@ def test_BeliefTimelinePoint_set_year_SetsAttr():
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief.cashout()
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 1030600100)
     x_timelinepoint._set_timeline_plan()
     assert not x_timelinepoint._c400_number
@@ -171,7 +170,7 @@ def test_BeliefTimelinePoint_calc_timeline_SetsAttrs():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 1030600102)
     assert not x_timelinepoint._timeline_plan
     assert not x_timelinepoint._weekday
@@ -199,7 +198,7 @@ def test_BeliefTimelinePoint_get_blurb_ReturnsObj():
     sue_belief = beliefunit_shop("Sue")
     sue_belief = add_time_creg_planunit(sue_belief)
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
     x_timelinepoint = belieftimelinepoint_shop(sue_belief, creg_rope, 1030600102)
     x_timelinepoint.calc_timeline()
     assert x_timelinepoint._timeline_plan
@@ -229,8 +228,8 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
     sue_belief = add_time_creg_planunit(sue_belief)
     sue_belief = add_time_five_planunit(sue_belief)
     time_rope = sue_belief.make_l1_rope("time")
-    creg_rope = sue_belief.make_rope(time_rope, creg_str())
-    five_rope = sue_belief.make_rope(time_rope, five_str())
+    creg_rope = sue_belief.make_rope(time_rope, wx.creg)
+    five_rope = sue_belief.make_rope(time_rope, wx.five)
     mar1_2000_datetime = datetime(2000, 3, 1)
     creg_min = get_creg_min_from_dt(mar1_2000_datetime)
     five_min = get_five_min_from_dt(mar1_2000_datetime)
@@ -273,7 +272,7 @@ def test_calc_timeline_SetsAttrFiveTimeLine(graphics_bool):
 
 def check_creg_timeline_attr(x_belief: BeliefUnit, x_datetime: datetime):
     time_rope = x_belief.make_l1_rope("time")
-    creg_rope = x_belief.make_rope(time_rope, creg_str())
+    creg_rope = x_belief.make_rope(time_rope, wx.creg)
     creg_min = get_creg_min_from_dt(x_datetime)
     creg_timelinepoint = belieftimelinepoint_shop(x_belief, creg_rope, creg_min)
     creg_timelinepoint.calc_timeline()

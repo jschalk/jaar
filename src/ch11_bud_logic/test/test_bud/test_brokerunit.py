@@ -1,10 +1,4 @@
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    belief_name_str,
-    bud_time_str,
-    bud_voice_nets_str,
-    celldepth_str,
-    quota_str,
-)
+from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords as wx
 from src.ch11_bud_logic._ref.ch11_semantic_types import EventInt
 from src.ch11_bud_logic.bud import (
     BeliefBudHistory,
@@ -209,7 +203,7 @@ def test_BeliefBudHistory_get_headers_ReturnsObj():
     sue_headers_list = sue_beliefbudhistory.get_headers()
 
     # THEN
-    assert sue_headers_list == [belief_name_str(), bud_time_str(), quota_str()]
+    assert sue_headers_list == [wx.belief_name, wx.bud_time, wx.quota]
 
 
 def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
@@ -229,13 +223,13 @@ def test_BeliefBudHistory_to_dict_ReturnsObj_Scenario0():
 
     # THEN
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
-            x4_bud_time: {quota_str(): x4_quota, bud_time_str(): x4_bud_time},
+            x4_bud_time: {wx.quota: x4_quota, wx.bud_time: x4_bud_time},
             x7_bud_time: {
-                quota_str(): x7_quota,
-                bud_time_str(): x7_bud_time,
-                celldepth_str(): x7_celldepth,
+                wx.quota: x7_quota,
+                wx.bud_time: x7_bud_time,
+                wx.celldepth: x7_celldepth,
             },
         },
     }
@@ -246,7 +240,7 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario0():
     sue_str = "Sue"
     sue_beliefbudhistory = beliefbudhistory_shop(sue_str)
     sue_buds_dict = sue_beliefbudhistory.to_dict()
-    assert sue_buds_dict == {belief_name_str(): sue_str, "buds": {}}
+    assert sue_buds_dict == {wx.belief_name: sue_str, "buds": {}}
 
     # WHEN
     x_beliefbudhistory = get_beliefbudhistory_from_dict(sue_buds_dict)
@@ -271,10 +265,10 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario1():
     sue_beliefbudhistory.add_bud(x7_bud_time, x7_quota)
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
-            x4_bud_time: {bud_time_str(): x4_bud_time, quota_str(): x4_quota},
-            x7_bud_time: {bud_time_str(): x7_bud_time, quota_str(): x7_quota},
+            x4_bud_time: {wx.bud_time: x4_bud_time, wx.quota: x4_quota},
+            x7_bud_time: {wx.bud_time: x7_bud_time, wx.quota: x7_quota},
         },
     }
 
@@ -311,13 +305,13 @@ def test_get_beliefbudhistory_from_dict_ReturnsObj_Scenario2():
     )
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
-            x4_bud_time: {bud_time_str(): x4_bud_time, quota_str(): x4_quota},
+            x4_bud_time: {wx.bud_time: x4_bud_time, wx.quota: x4_quota},
             x7_bud_time: {
-                bud_time_str(): x7_bud_time,
-                quota_str(): x7_quota,
-                bud_voice_nets_str(): {
+                wx.bud_time: x7_bud_time,
+                wx.quota: x7_quota,
+                wx.bud_voice_nets: {
                     sue_str: sue_bud_voice_net,
                     zia_str: zia_bud_voice_net,
                 },
@@ -361,17 +355,17 @@ def test_BeliefBudHistory_get_tranbook_ReturnsObj():
     )
     sue_buds_dict = sue_beliefbudhistory.to_dict()
     assert sue_buds_dict == {
-        belief_name_str(): sue_str,
+        wx.belief_name: sue_str,
         "buds": {
             x4_bud_time: {
-                bud_time_str(): x4_bud_time,
-                quota_str(): x4_quota,
-                bud_voice_nets_str(): {bob_str: bob_bud_voice_net},
+                wx.bud_time: x4_bud_time,
+                wx.quota: x4_quota,
+                wx.bud_voice_nets: {bob_str: bob_bud_voice_net},
             },
             x7_bud_time: {
-                bud_time_str(): x7_bud_time,
-                quota_str(): x7_quota,
-                bud_voice_nets_str(): {zia_str: zia_bud_voice_net},
+                wx.bud_time: x7_bud_time,
+                wx.quota: x7_quota,
+                wx.bud_voice_nets: {zia_str: zia_bud_voice_net},
             },
         },
     }

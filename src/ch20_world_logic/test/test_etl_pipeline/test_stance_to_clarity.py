@@ -6,24 +6,7 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
-from src.ch20_world_logic._ref.ch20_keywords import (
-    belief_name_str,
-    brick_agg_str,
-    bud_time_str,
-    celldepth_str,
-    cumulative_minute_str,
-    event_int_str,
-    events_brick_agg_str,
-    events_brick_valid_str,
-    face_name_str,
-    hour_label_str,
-    inx_name_str,
-    moment_label_str,
-    moment_ote1_agg_str,
-    otx_name_str,
-    quota_str,
-    voice_name_str,
-)
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
@@ -43,12 +26,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     ex_filename = "stance_Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
-        otx_name_str(),
-        inx_name_str(),
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy2345"
     tp37 = 37
@@ -59,12 +42,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        bud_time_str(),
-        quota_str(),
-        celldepth_str(),
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.bud_time,
+        wx.quota,
+        wx.celldepth,
     ]
     tp37 = 37
     sue_quota = 235
@@ -85,7 +68,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
-        events_brick_valid_tablename = events_brick_valid_str()
+        events_brick_valid_tablename = wx.events_brick_valid
         trlname_sound_raw = create_prime_tablename("trlname", "s", "raw")
         trlname_sound_agg = create_prime_tablename("trlname", "s", "agg")
         trlname_sound_vld = create_prime_tablename("trlname", "s", "vld")
@@ -108,7 +91,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, events_brick_agg_str()) == 2
+        assert get_row_count(cursor, wx.events_brick_agg) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
@@ -129,7 +112,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, momentunit_heard_agg) == 1
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 1
     db_conn.close()
 
 
@@ -137,23 +120,23 @@ def create_brick_agg_record(world: WorldUnit, event_int: int):
     sue_str = "Sue"
     minute_360 = 360
     hour6am = "6am"
-    agg_br00003_tablename = f"br00003_{brick_agg_str()}"
+    agg_br00003_tablename = f"br00003_{wx.brick_agg}"
     agg_br00003_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        cumulative_minute_str(),
-        hour_label_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.cumulative_minute,
+        wx.hour_label,
     ]
     with sqlite3_connect(world.get_world_db_path()) as db_conn:
         cursor = db_conn.cursor()
         create_idea_sorted_table(cursor, agg_br00003_tablename, agg_br00003_columns)
         insert_into_clause = f"""INSERT INTO {agg_br00003_tablename} (
-  {event_int_str()}
-, {face_name_str()}
-, {moment_label_str()}
-, {cumulative_minute_str()}
-, {hour_label_str()}
+  {wx.event_int}
+, {wx.face_name}
+, {wx.moment_label}
+, {wx.cumulative_minute}
+, {wx.hour_label}
 )"""
         values_clause = f"""VALUES ('{event_int}', '{sue_str}', '{world.world_name}', '{minute_360}', '{hour6am}');"""
         insert_sqlstr = f"{insert_into_clause} {values_clause}"
@@ -175,12 +158,12 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
     ex_filename = "stance_Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
-        otx_name_str(),
-        inx_name_str(),
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy2345"
     br00113_str = "br00113"
@@ -205,7 +188,7 @@ def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario1_DatabaseFileExists(
         cursor1 = db_conn1.cursor()
         assert get_max_brick_agg_event_int(cursor1) != event5
         assert get_max_brick_agg_event_int(cursor1) == event5 + 1
-        select_sqlstr = f"SELECT * FROM {events_brick_agg_str()}"
+        select_sqlstr = f"SELECT * FROM {wx.events_brick_agg}"
         cursor1.execute(select_sqlstr)
         rows = cursor1.fetchall()
         assert len(rows) == 2

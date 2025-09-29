@@ -5,34 +5,7 @@ from src.ch09_belief_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.ch15_moment_logic.moment_config import get_moment_args_class_types
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    LabelTerm_str,
-    NameTerm_str,
-    RopeTerm_str,
-    TitleTerm_str,
-    awardee_title_str,
-    belief_name_str,
-    face_name_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fund_iota_str,
-    group_title_str,
-    healer_name_str,
-    hour_label_str,
-    moment_label_str,
-    month_label_str,
-    party_title_str,
-    penny_str,
-    plan_label_str,
-    plan_rope_str,
-    reason_context_str,
-    reason_state_str,
-    respect_bit_str,
-    timeline_label_str,
-    voice_name_str,
-    weekday_label_str,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     labelmap_shop,
     namemap_shop,
@@ -67,11 +40,11 @@ def test_get_translate_args_class_types_ReturnsObj():
     translate_args_class_types = get_translate_args_class_types()
 
     # THEN
-    assert translate_args_class_types.get("voice_name") == NameTerm_str()
+    assert translate_args_class_types.get("voice_name") == wx.NameTerm
     assert translate_args_class_types.get("addin") == "float"
     assert translate_args_class_types.get("amount") == "float"
-    assert translate_args_class_types.get("awardee_title") == TitleTerm_str()
-    assert translate_args_class_types.get("reason_context") == RopeTerm_str()
+    assert translate_args_class_types.get("awardee_title") == wx.TitleTerm
+    assert translate_args_class_types.get("reason_context") == wx.RopeTerm
     assert translate_args_class_types.get("reason_active_requisite") == "bool"
     assert translate_args_class_types.get("begin") == "float"
     assert translate_args_class_types.get("c400_number") == "int"
@@ -86,45 +59,45 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("debtor_respect") == "float"
     assert translate_args_class_types.get("denom") == "int"
     assert translate_args_class_types.get("reason_divisor") == "int"
-    assert translate_args_class_types.get("face_name") == NameTerm_str()
-    assert translate_args_class_types.get("fact_context") == RopeTerm_str()
-    assert translate_args_class_types.get("moment_label") == LabelTerm_str()
+    assert translate_args_class_types.get("face_name") == wx.NameTerm
+    assert translate_args_class_types.get("fact_context") == wx.RopeTerm
+    assert translate_args_class_types.get("moment_label") == wx.LabelTerm
     assert translate_args_class_types.get("fact_upper") == "float"
     assert translate_args_class_types.get("fact_lower") == "float"
     assert translate_args_class_types.get("fund_iota") == "float"
     assert translate_args_class_types.get("fund_pool") == "float"
     assert translate_args_class_types.get("give_force") == "float"
     assert translate_args_class_types.get("gogo_want") == "float"
-    assert translate_args_class_types.get("group_title") == TitleTerm_str()
-    assert translate_args_class_types.get("healer_name") == NameTerm_str()
-    assert translate_args_class_types.get("hour_label") == LabelTerm_str()
+    assert translate_args_class_types.get("group_title") == wx.TitleTerm
+    assert translate_args_class_types.get("healer_name") == wx.NameTerm
+    assert translate_args_class_types.get("hour_label") == wx.LabelTerm
     assert translate_args_class_types.get("star") == "int"
     assert translate_args_class_types.get("max_tree_traverse") == "int"
-    assert translate_args_class_types.get("month_label") == LabelTerm_str()
+    assert translate_args_class_types.get("month_label") == wx.LabelTerm
     assert translate_args_class_types.get("monthday_distortion") == "int"
     assert translate_args_class_types.get("morph") == "bool"
-    assert translate_args_class_types.get("reason_state") == RopeTerm_str()
+    assert translate_args_class_types.get("reason_state") == wx.RopeTerm
     assert translate_args_class_types.get("reason_upper") == "float"
     assert translate_args_class_types.get("numor") == "int"
     assert translate_args_class_types.get("offi_time") == "TimeLinePoint"
-    assert translate_args_class_types.get("belief_name") == NameTerm_str()
+    assert translate_args_class_types.get("belief_name") == wx.NameTerm
     assert translate_args_class_types.get("reason_lower") == "float"
     assert translate_args_class_types.get("penny") == "float"
-    assert translate_args_class_types.get("fact_state") == RopeTerm_str()
+    assert translate_args_class_types.get("fact_state") == wx.RopeTerm
     assert translate_args_class_types.get("pledge") == "bool"
     assert translate_args_class_types.get("problem_bool") == "bool"
     assert translate_args_class_types.get("quota") == "int"
     assert translate_args_class_types.get("respect_bit") == "float"
-    assert translate_args_class_types.get("plan_rope") == RopeTerm_str()
+    assert translate_args_class_types.get("plan_rope") == wx.RopeTerm
     assert translate_args_class_types.get("celldepth") == "int"
     assert translate_args_class_types.get("stop_want") == "float"
     assert translate_args_class_types.get("take_force") == "float"
     assert translate_args_class_types.get("tally") == "int"
-    assert translate_args_class_types.get("party_title") == TitleTerm_str()
+    assert translate_args_class_types.get("party_title") == wx.TitleTerm
     assert translate_args_class_types.get("bud_time") == "TimeLinePoint"
     assert translate_args_class_types.get("tran_time") == "TimeLinePoint"
-    assert translate_args_class_types.get("timeline_label") == LabelTerm_str()
-    assert translate_args_class_types.get("weekday_label") == LabelTerm_str()
+    assert translate_args_class_types.get("timeline_label") == wx.LabelTerm
+    assert translate_args_class_types.get("weekday_label") == wx.LabelTerm
     assert translate_args_class_types.get("weekday_order") == "int"
     assert translate_args_class_types.get("knot") == "str"
     assert translate_args_class_types.get("yr1_jan1_offset") == "int"
@@ -137,10 +110,10 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert atom_args.issubset(translate_args)
     assert moment_args.issubset(translate_args)
     assert atom_args & (moment_args) == {
-        voice_name_str(),
-        fund_iota_str(),
-        penny_str(),
-        respect_bit_str(),
+        wx.voice_name,
+        wx.fund_iota,
+        wx.penny,
+        wx.respect_bit,
     }
     assert atom_args.union(moment_args) != translate_args
     assert atom_args.union(moment_args).union({"face_name"}) == translate_args
@@ -175,14 +148,14 @@ def test_translateable_class_types_ReturnsObj():
     # THEN
     assert len(x_translateable_class_types) == 4
     assert x_translateable_class_types == {
-        NameTerm_str(),
-        TitleTerm_str(),
-        LabelTerm_str(),
-        RopeTerm_str(),
+        wx.NameTerm,
+        wx.TitleTerm,
+        wx.LabelTerm,
+        wx.RopeTerm,
     }
     print(f"{set(get_atom_args_class_types().values())=}")
     all_atom_class_types = set(get_atom_args_class_types().values())
-    all_atom_class_types.add(LabelTerm_str())
+    all_atom_class_types.add(wx.LabelTerm)
     x_cL_tyep = set(all_atom_class_types) & (x_translateable_class_types)
     assert x_cL_tyep == x_translateable_class_types
 
@@ -202,23 +175,23 @@ def test_get_translateable_args_ReturnsObj():
 
     assert len(get_translateable_args()) == 17
     assert get_translateable_args() == {
-        voice_name_str(),
-        awardee_title_str(),
-        reason_context_str(),
-        face_name_str(),
-        fact_context_str(),
-        moment_label_str(),
-        fact_state_str(),
-        group_title_str(),
-        healer_name_str(),
-        hour_label_str(),
-        month_label_str(),
-        reason_state_str(),
-        belief_name_str(),
-        plan_rope_str(),
-        party_title_str(),
-        timeline_label_str(),
-        weekday_label_str(),
+        wx.voice_name,
+        wx.awardee_title,
+        wx.reason_context,
+        wx.face_name,
+        wx.fact_context,
+        wx.moment_label,
+        wx.fact_state,
+        wx.group_title,
+        wx.healer_name,
+        wx.hour_label,
+        wx.month_label,
+        wx.reason_state,
+        wx.belief_name,
+        wx.plan_rope,
+        wx.party_title,
+        wx.timeline_label,
+        wx.weekday_label,
     }
 
 
@@ -278,7 +251,7 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario2_OtherArgsAreUntouched():
 
 def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     # ESTABLISH
-    healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
+    healer_name_ERASE_str = f"{wx.healer_name}_ERASE"
     run_str = "run"
     given_belief_dimen_delete_keys = {run_str, healer_name_ERASE_str}
 
@@ -286,7 +259,7 @@ def test_find_set_otx_inx_args_ReturnsObj_Scenario3_PartialSets():
     otx_inx_args = find_set_otx_inx_args(given_belief_dimen_delete_keys)
 
     # THEN
-    healer_name_ERASE_str = f"{healer_name_str()}_ERASE"
+    healer_name_ERASE_str = f"{wx.healer_name}_ERASE"
     expected_otx_inx_args = {
         f"{healer_name_ERASE_str}_otx",
         f"{healer_name_ERASE_str}_inx",
@@ -302,15 +275,15 @@ def test_get_translate_NameTerm_args_ReturnsObj():
 
     # THEN
     assert translate_NameTerm_args == {
-        voice_name_str(),
-        face_name_str(),
-        healer_name_str(),
-        belief_name_str(),
+        wx.voice_name,
+        wx.face_name,
+        wx.healer_name,
+        wx.belief_name,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == NameTerm_str()
+        if class_type == wx.NameTerm
     }
     assert translate_NameTerm_args == expected_args
 
@@ -321,14 +294,14 @@ def test_get_translate_TitleTerm_args_ReturnsObj():
 
     # THEN
     assert translate_TitleTerm_args == {
-        awardee_title_str(),
-        group_title_str(),
-        party_title_str(),
+        wx.awardee_title,
+        wx.group_title,
+        wx.party_title,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == TitleTerm_str()
+        if class_type == wx.TitleTerm
     }
     assert translate_TitleTerm_args == expected_args
 
@@ -339,16 +312,16 @@ def test_get_translate_LabelTerm_args_ReturnsObj():
 
     # THEN
     assert translate_LabelTerm_args == {
-        moment_label_str(),
-        hour_label_str(),
-        month_label_str(),
-        timeline_label_str(),
-        weekday_label_str(),
+        wx.moment_label,
+        wx.hour_label,
+        wx.month_label,
+        wx.timeline_label,
+        wx.weekday_label,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == LabelTerm_str()
+        if class_type == wx.LabelTerm
     }
     assert translate_LabelTerm_args == expected_args
 
@@ -359,16 +332,16 @@ def test_get_translate_RopeTerm_args_ReturnsObj():
 
     # THEN
     assert translate_RopeTerm_args == {
-        fact_state_str(),
-        fact_context_str(),
-        plan_rope_str(),
-        reason_context_str(),
-        reason_state_str(),
+        wx.fact_state,
+        wx.fact_context,
+        wx.plan_rope,
+        wx.reason_context,
+        wx.reason_state,
     }
     expected_args = {
         x_arg
         for x_arg, class_type in get_translate_args_class_types().items()
-        if class_type == RopeTerm_str()
+        if class_type == wx.RopeTerm
     }
     assert translate_RopeTerm_args == expected_args
 
@@ -607,14 +580,14 @@ def test_TranslateUnit_get_mapunit_ReturnsObj():
     sue_pu.set_namemap(static_namemap)
 
     # WHEN / THEN
-    assert sue_pu.get_mapunit(NameTerm_str()) == sue_pu.namemap
-    assert sue_pu.get_mapunit(TitleTerm_str()) == sue_pu.titlemap
-    assert sue_pu.get_mapunit(LabelTerm_str()) == sue_pu.labelmap
-    assert sue_pu.get_mapunit(RopeTerm_str()) == sue_pu.ropemap
+    assert sue_pu.get_mapunit(wx.NameTerm) == sue_pu.namemap
+    assert sue_pu.get_mapunit(wx.TitleTerm) == sue_pu.titlemap
+    assert sue_pu.get_mapunit(wx.LabelTerm) == sue_pu.labelmap
+    assert sue_pu.get_mapunit(wx.RopeTerm) == sue_pu.ropemap
 
-    assert sue_pu.get_mapunit(NameTerm_str()) != sue_pu.ropemap
-    assert sue_pu.get_mapunit(TitleTerm_str()) != sue_pu.ropemap
-    assert sue_pu.get_mapunit(LabelTerm_str()) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(wx.NameTerm) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(wx.TitleTerm) != sue_pu.ropemap
+    assert sue_pu.get_mapunit(wx.LabelTerm) != sue_pu.ropemap
 
 
 def test_TranslateUnit_is_valid_ReturnsObj():
@@ -659,7 +632,7 @@ def test_TranslateUnit_is_valid_ReturnsObj():
     assert sue_translateunit.is_valid()
 
 
-def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario0_NameTerm_str():
+def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario0_NameTerm():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -669,13 +642,13 @@ def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario0_NameTerm_str():
     assert namemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(NameTerm_str(), sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(wx.NameTerm, sue_otx, sue_inx)
 
     # THEN
     assert namemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario1_RopeTerm_str():
+def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario1_RopeTerm():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -685,13 +658,13 @@ def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario1_RopeTerm_str():
     assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(RopeTerm_str(), sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(wx.RopeTerm, sue_otx, sue_inx)
 
     # THEN
     assert ropemap.otx2inx_exists(sue_otx, sue_inx)
 
 
-def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario2_LabelTerm_str():
+def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario2_LabelTerm():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"
@@ -701,7 +674,7 @@ def test_TranslateUnit_set_otx2inx_SetsAttr_Scenario2_LabelTerm_str():
     assert ropemap.otx2inx_exists(sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(LabelTerm_str(), sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(wx.LabelTerm, sue_otx, sue_inx)
 
     # THEN
     assert ropemap.otx2inx_exists(sue_otx, sue_inx)
@@ -713,11 +686,11 @@ def test_TranslateUnit_otx2inx_exists_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_translateunit = translateunit_shop(zia_str)
-    rope_type = LabelTerm_str()
+    rope_type = wx.LabelTerm
     assert zia_translateunit.otx2inx_exists(rope_type, sue_otx, sue_inx) is False
 
     # WHEN
-    zia_translateunit.set_otx2inx(LabelTerm_str(), sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(wx.LabelTerm, sue_otx, sue_inx)
 
     # THEN
     assert zia_translateunit.otx2inx_exists(rope_type, sue_otx, sue_inx)
@@ -729,13 +702,13 @@ def test_TranslateUnit_get_inx_value_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_translateunit = translateunit_shop(zia_str)
-    assert zia_translateunit._get_inx_value(NameTerm_str(), sue_otx) != sue_inx
+    assert zia_translateunit._get_inx_value(wx.NameTerm, sue_otx) != sue_inx
 
     # WHEN
-    zia_translateunit.set_otx2inx(NameTerm_str(), sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(wx.NameTerm, sue_otx, sue_inx)
 
     # THEN
-    assert zia_translateunit._get_inx_value(NameTerm_str(), sue_otx) == sue_inx
+    assert zia_translateunit._get_inx_value(wx.NameTerm, sue_otx) == sue_inx
 
 
 def test_TranslateUnit_del_otx2inx_ReturnsObj():
@@ -744,9 +717,9 @@ def test_TranslateUnit_del_otx2inx_ReturnsObj():
     sue_otx = "Sue"
     sue_inx = "Suita"
     zia_translateunit = translateunit_shop(zia_str)
-    rope_type = LabelTerm_str()
-    zia_translateunit.set_otx2inx(LabelTerm_str(), sue_otx, sue_inx)
-    zia_translateunit.set_otx2inx(LabelTerm_str(), zia_str, zia_str)
+    rope_type = wx.LabelTerm
+    zia_translateunit.set_otx2inx(wx.LabelTerm, sue_otx, sue_inx)
+    zia_translateunit.set_otx2inx(wx.LabelTerm, zia_str, zia_str)
     assert zia_translateunit.otx2inx_exists(rope_type, sue_otx, sue_inx)
     assert zia_translateunit.otx2inx_exists(rope_type, zia_str, zia_str)
 
@@ -758,7 +731,7 @@ def test_TranslateUnit_del_otx2inx_ReturnsObj():
     assert zia_translateunit.otx2inx_exists(rope_type, zia_str, zia_str)
 
 
-def test_TranslateUnit_set_label_SetsAttr_Scenario1_RopeTerm_str():
+def test_TranslateUnit_set_label_SetsAttr_Scenario1_RopeTerm():
     # ESTABLISH
     zia_str = "Zia"
     sue_otx = "Sue"

@@ -1,22 +1,10 @@
 from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.dict_toolbox import x_is_json
-from src.ch04_group_logic.voice import voiceunit_shop
+from src.ch04_voice_logic.voice import voiceunit_shop
 from src.ch06_plan_logic.plan import get_default_moment_label
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import (
-    DELETE_str,
-    INSERT_str,
-    UPDATE_str,
-    belief_name_str,
-    belief_voiceunit_str,
-    event_int_str,
-    face_name_str,
-    moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic._ref.ch10_semantic_types import FaceName, default_knot_if_None
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import (
@@ -248,14 +236,14 @@ def test_PackUnit_get_step_dict_ReturnsObj_Simple():
     x_dict = bob_packunit.get_step_dict()
 
     # THEN
-    assert x_dict.get(moment_label_str()) is not None
-    assert x_dict.get(moment_label_str()) == amy45_str
-    assert x_dict.get(belief_name_str()) is not None
-    assert x_dict.get(belief_name_str()) == bob_str
-    assert x_dict.get(face_name_str()) is not None
-    assert x_dict.get(face_name_str()) == sue_str
-    assert x_dict.get(event_int_str()) is not None
-    assert x_dict.get(event_int_str()) == amy45_e5_int
+    assert x_dict.get(wx.moment_label) is not None
+    assert x_dict.get(wx.moment_label) == amy45_str
+    assert x_dict.get(wx.belief_name) is not None
+    assert x_dict.get(wx.belief_name) == bob_str
+    assert x_dict.get(wx.face_name) is not None
+    assert x_dict.get(wx.face_name) == sue_str
+    assert x_dict.get(wx.event_int) is not None
+    assert x_dict.get(wx.event_int) == amy45_e5_int
 
     delta_str = "delta"
     assert x_dict.get(delta_str) is not None
@@ -327,14 +315,14 @@ def test_PackUnit_get_serializable_dict_ReturnsObj_Simple():
     total_dict = bob_packunit.get_serializable_dict()
 
     # THEN
-    assert total_dict.get(moment_label_str()) is not None
-    assert total_dict.get(moment_label_str()) == amy45_str
-    assert total_dict.get(belief_name_str()) is not None
-    assert total_dict.get(belief_name_str()) == bob_str
-    assert total_dict.get(face_name_str()) is not None
-    assert total_dict.get(face_name_str()) == sue_str
-    assert total_dict.get(event_int_str()) is not None
-    assert total_dict.get(event_int_str()) == amy45_e5_int
+    assert total_dict.get(wx.moment_label) is not None
+    assert total_dict.get(wx.moment_label) == amy45_str
+    assert total_dict.get(wx.belief_name) is not None
+    assert total_dict.get(wx.belief_name) == bob_str
+    assert total_dict.get(wx.face_name) is not None
+    assert total_dict.get(wx.face_name) == sue_str
+    assert total_dict.get(wx.event_int) is not None
+    assert total_dict.get(wx.event_int) == amy45_e5_int
     delta_str = "delta"
     assert total_dict.get(delta_str) == {}
 
@@ -447,12 +435,12 @@ def test_PackUnit_get_deltametric_dict_ReturnsObj():
     x_dict = bob_packunit.get_deltametric_dict()
 
     # THEN
-    assert x_dict.get(belief_name_str()) is not None
-    assert x_dict.get(belief_name_str()) == bob_str
-    assert x_dict.get(face_name_str()) is not None
-    assert x_dict.get(face_name_str()) == yao_str
-    assert x_dict.get(event_int_str()) is not None
-    assert x_dict.get(event_int_str()) == event5_int
+    assert x_dict.get(wx.belief_name) is not None
+    assert x_dict.get(wx.belief_name) == bob_str
+    assert x_dict.get(wx.face_name) is not None
+    assert x_dict.get(wx.face_name) == yao_str
+    assert x_dict.get(wx.event_int) is not None
+    assert x_dict.get(wx.event_int) == event5_int
 
     delta_atom_numbers_str = "delta_atom_numbers"
     assert x_dict.get(delta_atom_numbers_str) is not None
@@ -493,12 +481,10 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     bob_voiceunit = voiceunit_shop(
         bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
-    cw_str = voice_cred_points_str()
-    dw_str = voice_debt_points_str()
+    cw_str = wx.voice_cred_points
+    dw_str = wx.voice_debt_points
     print(f"{bob_voiceunit.to_dict()=}")
-    bob_required_dict = {
-        voice_name_str(): bob_voiceunit.to_dict().get(voice_name_str())
-    }
+    bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
@@ -506,8 +492,8 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
 
     # WHEN
     bob_packunit.add_beliefatom(
-        dimen=belief_voiceunit_str(),
-        crud_str=INSERT_str(),
+        dimen=wx.belief_voiceunit,
+        crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -515,8 +501,8 @@ def test_PackUnit_add_beliefatom_Sets_BeliefUnit_voiceunits():
     # THEN
     assert len(bob_packunit._beliefdelta.beliefatoms) == 1
     assert (
-        bob_packunit._beliefdelta.beliefatoms.get(INSERT_str())
-        .get(belief_voiceunit_str())
+        bob_packunit._beliefdelta.beliefatoms.get(wx.INSERT)
+        .get(wx.belief_voiceunit)
         .get(bob_str)
         is not None
     )
@@ -533,9 +519,9 @@ def test_PackUnit_get_edited_belief_ReturnsObj_BeliefUnit_insert_voice():
     before_sue_beliefunit.add_voiceunit(yao_str)
     assert before_sue_beliefunit.voice_exists(yao_str)
     assert before_sue_beliefunit.voice_exists(zia_str) is False
-    dimen = belief_voiceunit_str()
-    x_beliefatom = beliefatom_shop(dimen, INSERT_str())
-    x_beliefatom.set_jkey(voice_name_str(), zia_str)
+    dimen = wx.belief_voiceunit
+    x_beliefatom = beliefatom_shop(dimen, wx.INSERT)
+    x_beliefatom.set_jkey(wx.voice_name, zia_str)
     x_voice_cred_points = 55
     x_voice_debt_points = 66
     x_beliefatom.set_jvalue("voice_cred_points", x_voice_cred_points)
@@ -580,12 +566,10 @@ def test_PackUnit_is_empty_ReturnsObj():
     bob_voiceunit = voiceunit_shop(
         bob_str, bob_voice_cred_points, bob_voice_debt_points
     )
-    cw_str = voice_cred_points_str()
-    dw_str = voice_debt_points_str()
+    cw_str = wx.voice_cred_points
+    dw_str = wx.voice_debt_points
     print(f"{bob_voiceunit.to_dict()=}")
-    bob_required_dict = {
-        voice_name_str(): bob_voiceunit.to_dict().get(voice_name_str())
-    }
+    bob_required_dict = {wx.voice_name: bob_voiceunit.to_dict().get(wx.voice_name)}
     bob_optional_dict = {cw_str: bob_voiceunit.to_dict().get(cw_str)}
     bob_optional_dict[dw_str] = bob_voiceunit.to_dict().get(dw_str)
     print(f"{bob_required_dict=}")
@@ -594,8 +578,8 @@ def test_PackUnit_is_empty_ReturnsObj():
 
     # WHEN
     bob_packunit.add_beliefatom(
-        dimen=belief_voiceunit_str(),
-        crud_str=INSERT_str(),
+        dimen=wx.belief_voiceunit,
+        crud_str=wx.INSERT,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -613,8 +597,8 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for UPDATE_str operation
     bob_packunit_update = packunit_shop(bob_str)
     bob_packunit_update.add_beliefatom(
-        dimen=belief_voiceunit_str(),
-        crud_str=UPDATE_str(),
+        dimen=wx.belief_voiceunit,
+        crud_str=wx.UPDATE,
         jkeys=bob_required_dict,
         jvalues=bob_optional_dict,
     )
@@ -624,8 +608,8 @@ def test_PackUnit_is_empty_ReturnsObj():
     # Test for DELETE_str operation
     bob_packunit_delete = packunit_shop(bob_str)
     bob_packunit_delete.add_beliefatom(
-        dimen=belief_voiceunit_str(),
-        crud_str=DELETE_str(),
+        dimen=wx.belief_voiceunit,
+        crud_str=wx.DELETE,
         jkeys=bob_required_dict,
         jvalues={},
     )

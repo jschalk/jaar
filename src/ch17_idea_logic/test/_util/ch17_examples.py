@@ -1,25 +1,5 @@
 from pandas import DataFrame
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    amount_str,
-    belief_name_str,
-    bud_time_str,
-    c400_number_str,
-    celldepth_str,
-    fund_iota_str,
-    job_listen_rotations_str,
-    knot_str,
-    moment_label_str,
-    monthday_distortion_str,
-    penny_str,
-    quota_str,
-    respect_bit_str,
-    timeline_label_str,
-    tran_time_str,
-    voice_name_str,
-    weekday_label_str,
-    weekday_order_str,
-    yr1_jan1_offset_str,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 
 AMY23_STR = "amy23"
 JEFFY45_STR = "jeffy45"
@@ -31,16 +11,16 @@ def get_ex1_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            c400_number_str(),
-            moment_label_str(),
-            fund_iota_str(),
-            monthday_distortion_str(),
-            penny_str(),
-            respect_bit_str(),
-            knot_str(),
-            timeline_label_str(),
-            yr1_jan1_offset_str(),
-            job_listen_rotations_str(),
+            wx.c400_number,
+            wx.moment_label,
+            wx.fund_iota,
+            wx.monthday_distortion,
+            wx.penny,
+            wx.respect_bit,
+            wx.knot,
+            wx.timeline_label,
+            wx.yr1_jan1_offset,
+            wx.job_listen_rotations,
         ]
     )
     x_df.loc[0] = [7, AMY23_STR, 1, 1, 1, 1, "/", "creg", 440640, 7]
@@ -52,11 +32,11 @@ def get_ex1_br00001_df() -> DataFrame:
     moment_label,belief_name,quota,bud_time,celldepth"""
     x_df = DataFrame(
         columns=[
-            moment_label_str(),
-            belief_name_str(),
-            quota_str(),
-            bud_time_str(),
-            celldepth_str(),
+            wx.moment_label,
+            wx.belief_name,
+            wx.quota,
+            wx.bud_time,
+            wx.celldepth,
         ]
     )
     x_df.loc[0] = [AMY23_STR, "Sue", 445, 777, 5]
@@ -126,9 +106,7 @@ def get_ex1_br00004_df() -> DataFrame:
 def get_ex1_br00005_df() -> DataFrame:
     """idea_format_00005_moment_timeline_weekday_v0_0_0
     moment_label,weekday_label,weekday_order"""
-    x_df = DataFrame(
-        columns=[moment_label_str(), weekday_label_str(), weekday_order_str()]
-    )
+    x_df = DataFrame(columns=[wx.moment_label, wx.weekday_label, wx.weekday_order])
     x_df.loc[0] = [AMY23_STR, "Wednesday", 0]
     x_df.loc[1] = [AMY23_STR, "Thursday", 1]
     x_df.loc[2] = [AMY23_STR, "Friday", 2]
@@ -145,16 +123,16 @@ def get_ex2_br00000_df() -> DataFrame:
     """
     x_df = DataFrame(
         columns=[
-            c400_number_str(),
-            moment_label_str(),
-            fund_iota_str(),
-            monthday_distortion_str(),
-            penny_str(),
-            respect_bit_str(),
-            knot_str(),
-            timeline_label_str(),
-            yr1_jan1_offset_str(),
-            job_listen_rotations_str(),
+            wx.c400_number,
+            wx.moment_label,
+            wx.fund_iota,
+            wx.monthday_distortion,
+            wx.penny,
+            wx.respect_bit,
+            wx.knot,
+            wx.timeline_label,
+            wx.yr1_jan1_offset,
+            wx.job_listen_rotations,
         ]
     )
     x_df.loc[0] = [7, AMY23_STR, 1, 1, 1, 1, "/", "creg", 440640, 4]
@@ -167,11 +145,11 @@ def get_ex2_br00001_df() -> DataFrame:
     moment_label,belief_name,quota,bud_time"""
     x_df = DataFrame(
         columns=[
-            moment_label_str(),
-            belief_name_str(),
-            quota_str(),
-            bud_time_str(),
-            celldepth_str(),
+            wx.moment_label,
+            wx.belief_name,
+            wx.quota,
+            wx.bud_time,
+            wx.celldepth,
         ]
     )
     x_df.loc[0] = [AMY23_STR, "Bob", 332, 999, 3]
@@ -187,11 +165,11 @@ def get_ex2_br00002_df() -> DataFrame:
     voice_name,amount,moment_label,belief_name,tran_time"""
     x_df = DataFrame(
         columns=[
-            voice_name_str(),
-            amount_str(),
-            moment_label_str(),
-            belief_name_str(),
-            tran_time_str(),
+            wx.voice_name,
+            wx.amount,
+            wx.moment_label,
+            wx.belief_name,
+            wx.tran_time,
         ]
     )
     x_df.loc[0] = ["Zia", 888, AMY23_STR, "Bob", 777]

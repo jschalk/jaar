@@ -8,13 +8,7 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_stance0001_path,
     create_stances_dir_path,
 )
-from src.ch20_world_logic._ref.ch20_keywords import (
-    belief_name_str,
-    event_int_str,
-    face_name_str,
-    moment_label_str,
-    voice_name_str,
-)
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
@@ -51,11 +45,11 @@ def test_WorldUnit_create_stances_Senario1_Add_CreatesFile(env_dir_setup_cleanup
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -89,11 +83,11 @@ def test_WorldUnit_create_stances_Senario2_CreatedStanceCanBeIdeasForOtherWorldU
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -143,11 +137,11 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     a23_str = "amy23"
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, a23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -180,20 +174,20 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     ex_filename = "Faybob.xlsx"
 #     input_file_path = create_path(fay_world._input_dir, ex_filename)
 #     br00003_columns = [
-#         face_name_str(),
-#         event_int_str(),
-#         cumulative_minute_str(),
-#         moment_label_str(),
-#         hour_label_str(),
+#         wx.face_name,
+#         wx.event_int,
+#         wx.cumulative_minute,
+#         wx.moment_label,
+#         wx.hour_label,
 #     ]
 #     br00001_columns = [
-#         face_name_str(),
-#         event_int_str(),
-#         moment_label_str(),
-#         belief_name_str(),
+#         wx.face_name,
+#         wx.event_int,
+#         wx.moment_label,
+#         wx.belief_name,
 #         bud_time(),
-#         quota_str(),
-#         celldepth_str(),
+#         wx.quota,
+#         wx.celldepth,
 #     ]
 #     amy23_str = "amy23"
 #     tp37 = 37
@@ -214,11 +208,11 @@ def test_WorldUnit_create_stances_Senario3_Create_calendar_markdown(
 #     upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
 #     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
 #     br00011_columns = [
-#         face_name_str(),
-#         event_int_str(),
-#         moment_label_str(),
-#         belief_name_str(),
-#         voice_name_str(),
+#         wx.face_name,
+#         wx.event_int,
+#         wx.moment_label,
+#         wx.belief_name,
+#         wx.voice_name,
 #     ]
 #     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
 #     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)

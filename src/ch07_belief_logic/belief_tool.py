@@ -1,13 +1,8 @@
 from src.ch01_data_toolbox.dict_toolbox import create_csv
-from src.ch07_belief_logic._ref.ch07_semantic_types import (
-    MomentLabel,
-    RopeTerm,
-    VoiceName,
-)
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import FundNum, RespectNum, get_net
-from src.ch04_group_logic.group import AwardUnit, MemberShip
-from src.ch04_group_logic.voice import VoiceUnit
+from src.ch04_voice_logic.group import AwardUnit, MemberShip
+from src.ch04_voice_logic.voice import VoiceUnit
 from src.ch05_reason_logic.reason import (
     CaseUnit,
     FactUnit,
@@ -15,6 +10,11 @@ from src.ch05_reason_logic.reason import (
     factunits_get_from_dict,
 )
 from src.ch06_plan_logic.plan import PlanUnit
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
+    MomentLabel,
+    RopeTerm,
+    VoiceName,
+)
 from src.ch07_belief_logic.belief_main import BeliefUnit
 
 

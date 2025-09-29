@@ -5,29 +5,7 @@ from src.ch17_idea_logic._ref.ch17_doc_builder import (
     get_idea_brick_md,
     get_idea_brick_mds,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    attributes_str,
-    belief_name_str,
-    belief_planunit_str,
-    c400_number_str,
-    dimens_str,
-    event_int_str,
-    face_name_str,
-    fund_iota_str,
-    gogo_want_str,
-    idea_category_str,
-    idea_number_str,
-    job_listen_rotations_str,
-    knot_str,
-    moment_label_str,
-    monthday_distortion_str,
-    otx_key_str,
-    penny_str,
-    plan_rope_str,
-    respect_bit_str,
-    timeline_label_str,
-    yr1_jan1_offset_str,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_config_dict, get_idea_formats_dir
 from src.ch17_idea_logic.test._util.ch17_env import (
     env_dir_setup_cleanup,
@@ -39,9 +17,9 @@ def create_dimens_idea_format_dict() -> dict:
     idea_format_files_dict = {}
     x_count = 20
     for idea_dimen, dimen_dict in get_idea_config_dict().items():
-        if dimen_dict.get(idea_category_str()) == "belief":
+        if dimen_dict.get(wx.idea_category) == "belief":
             idea_filename = f"idea_format_{x_count:05}_{idea_dimen}_v0_0_0.json"
-            attributes_set = {moment_label_str(), belief_name_str()}
+            attributes_set = {wx.moment_label, wx.belief_name}
             args_dict = get_atom_config_args(idea_dimen)
             attributes_set.update(set(args_dict.keys()))
 
@@ -59,16 +37,16 @@ def test_create_dimens_idea_format_dict_ReturnsObj(rebuild_bool):
 
     # THEN
     assert len(dimens_idea_format_dict) == 10
-    belief_planunit_filename = f"idea_format_00026_{belief_planunit_str()}_v0_0_0.json"
+    belief_planunit_filename = f"idea_format_00026_{wx.belief_planunit}_v0_0_0.json"
     assert dimens_idea_format_dict.get(belief_planunit_filename)
     belief_planunit_dict = dimens_idea_format_dict.get(belief_planunit_filename)
-    assert belief_planunit_dict.get(dimens_str()) == [belief_planunit_str()]
-    assert belief_planunit_dict.get(attributes_str())
-    belief_planunit_attributes = belief_planunit_dict.get(attributes_str())
-    assert moment_label_str() in belief_planunit_attributes
-    assert belief_name_str() in belief_planunit_attributes
-    assert plan_rope_str() in belief_planunit_attributes
-    assert gogo_want_str() in belief_planunit_attributes
+    assert belief_planunit_dict.get(wx.dimens) == [wx.belief_planunit]
+    assert belief_planunit_dict.get(wx.attributes)
+    belief_planunit_attributes = belief_planunit_dict.get(wx.attributes)
+    assert wx.moment_label in belief_planunit_attributes
+    assert wx.belief_name in belief_planunit_attributes
+    assert wx.plan_rope in belief_planunit_attributes
+    assert wx.gogo_want in belief_planunit_attributes
 
     rebuild_format_jsons(rebuild_bool)
 
@@ -83,21 +61,21 @@ def test_get_idea_brick_md_ReturnsObj():
     # ESTABLISH
     idea_brick_config = {
         "attributes": {
-            knot_str(): {otx_key_str(): False},
-            c400_number_str(): {otx_key_str(): False},
-            event_int_str(): {otx_key_str(): True},
-            face_name_str(): {otx_key_str(): True},
-            moment_label_str(): {otx_key_str(): True},
-            fund_iota_str(): {otx_key_str(): False},
-            job_listen_rotations_str(): {otx_key_str(): False},
-            monthday_distortion_str(): {otx_key_str(): False},
-            penny_str(): {otx_key_str(): False},
-            respect_bit_str(): {otx_key_str(): False},
-            timeline_label_str(): {otx_key_str(): False},
-            yr1_jan1_offset_str(): {otx_key_str(): False},
+            wx.knot: {wx.otx_key: False},
+            wx.c400_number: {wx.otx_key: False},
+            wx.event_int: {wx.otx_key: True},
+            wx.face_name: {wx.otx_key: True},
+            wx.moment_label: {wx.otx_key: True},
+            wx.fund_iota: {wx.otx_key: False},
+            wx.job_listen_rotations: {wx.otx_key: False},
+            wx.monthday_distortion: {wx.otx_key: False},
+            wx.penny: {wx.otx_key: False},
+            wx.respect_bit: {wx.otx_key: False},
+            wx.timeline_label: {wx.otx_key: False},
+            wx.yr1_jan1_offset: {wx.otx_key: False},
         },
-        idea_number_str(): "br00000",
-        dimens_str(): ["momentunit"],
+        wx.idea_number: "br00000",
+        wx.dimens: ["momentunit"],
     }
 
     # WHEN
@@ -110,18 +88,18 @@ def test_get_idea_brick_md_ReturnsObj():
 ## Dimens `['momentunit']`
 
 ## Attributes
-- `{event_int_str()}`
-- `{face_name_str()}`
-- `{moment_label_str()}`
-- `{timeline_label_str()}`
-- `{c400_number_str()}`
-- `{yr1_jan1_offset_str()}`
-- `{monthday_distortion_str()}`
-- `{fund_iota_str()}`
-- `{penny_str()}`
-- `{respect_bit_str()}`
-- `{knot_str()}`
-- `{job_listen_rotations_str()}`
+- `{wx.event_int}`
+- `{wx.face_name}`
+- `{wx.moment_label}`
+- `{wx.timeline_label}`
+- `{wx.c400_number}`
+- `{wx.yr1_jan1_offset}`
+- `{wx.monthday_distortion}`
+- `{wx.fund_iota}`
+- `{wx.penny}`
+- `{wx.respect_bit}`
+- `{wx.knot}`
+- `{wx.job_listen_rotations}`
 """
     assert (idea_brick_md) == expected_idea_brick_md
 
@@ -132,21 +110,21 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
     br00000_str = "br00000"
     idea_brick_config = {
         "attributes": {
-            knot_str(): {otx_key_str(): False},
-            c400_number_str(): {otx_key_str(): False},
-            event_int_str(): {otx_key_str(): True},
-            face_name_str(): {otx_key_str(): True},
-            moment_label_str(): {otx_key_str(): True},
-            fund_iota_str(): {otx_key_str(): False},
-            job_listen_rotations_str(): {otx_key_str(): False},
-            monthday_distortion_str(): {otx_key_str(): False},
-            penny_str(): {otx_key_str(): False},
-            respect_bit_str(): {otx_key_str(): False},
-            timeline_label_str(): {otx_key_str(): False},
-            yr1_jan1_offset_str(): {otx_key_str(): False},
+            wx.knot: {wx.otx_key: False},
+            wx.c400_number: {wx.otx_key: False},
+            wx.event_int: {wx.otx_key: True},
+            wx.face_name: {wx.otx_key: True},
+            wx.moment_label: {wx.otx_key: True},
+            wx.fund_iota: {wx.otx_key: False},
+            wx.job_listen_rotations: {wx.otx_key: False},
+            wx.monthday_distortion: {wx.otx_key: False},
+            wx.penny: {wx.otx_key: False},
+            wx.respect_bit: {wx.otx_key: False},
+            wx.timeline_label: {wx.otx_key: False},
+            wx.yr1_jan1_offset: {wx.otx_key: False},
         },
-        idea_number_str(): br00000_str,
-        dimens_str(): ["momentunit"],
+        wx.idea_number: br00000_str,
+        wx.dimens: ["momentunit"],
     }
     save_json(temp_dir, f"{br00000_str}.json", idea_brick_config)
 
@@ -159,18 +137,18 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 ## Dimens `['momentunit']`
 
 ## Attributes
-- `{event_int_str()}`
-- `{face_name_str()}`
-- `{moment_label_str()}`
-- `{timeline_label_str()}`
-- `{c400_number_str()}`
-- `{yr1_jan1_offset_str()}`
-- `{monthday_distortion_str()}`
-- `{fund_iota_str()}`
-- `{penny_str()}`
-- `{respect_bit_str()}`
-- `{knot_str()}`
-- `{job_listen_rotations_str()}`
+- `{wx.event_int}`
+- `{wx.face_name}`
+- `{wx.moment_label}`
+- `{wx.timeline_label}`
+- `{wx.c400_number}`
+- `{wx.yr1_jan1_offset}`
+- `{wx.monthday_distortion}`
+- `{wx.fund_iota}`
+- `{wx.penny}`
+- `{wx.respect_bit}`
+- `{wx.knot}`
+- `{wx.job_listen_rotations}`
 """
     assert set(idea_brick_mds.keys()) == {br00000_str}
     assert idea_brick_mds == {br00000_str: expected_idea_brick_md}

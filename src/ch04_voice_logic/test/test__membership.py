@@ -1,19 +1,6 @@
 from src.ch01_data_toolbox.dict_toolbox import get_json_from_dict, x_is_json
-from src.ch04_group_logic._ref.ch04_keywords import (
-    credor_pool_str,
-    debtor_pool_str,
-    fund_agenda_give_str,
-    fund_agenda_ratio_give_str,
-    fund_agenda_ratio_take_str,
-    fund_agenda_take_str,
-    fund_give_str,
-    fund_take_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    voice_name_str,
-)
-from src.ch04_group_logic.group import (
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
+from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,
     AwardUnit,
@@ -63,18 +50,18 @@ def test_MemberShip_Exists():
     obj_attrs = set(swim_membership.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        voice_name_str(),
-        group_title_str(),
-        group_cred_points_str(),
-        group_debt_points_str(),
-        credor_pool_str(),
-        debtor_pool_str(),
-        fund_agenda_give_str(),
-        fund_agenda_ratio_give_str(),
-        fund_agenda_ratio_take_str(),
-        fund_agenda_take_str(),
-        fund_give_str(),
-        fund_take_str(),
+        wx.voice_name,
+        wx.group_title,
+        wx.group_cred_points,
+        wx.group_debt_points,
+        wx.credor_pool,
+        wx.debtor_pool,
+        wx.fund_agenda_give,
+        wx.fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take,
+        wx.fund_agenda_take,
+        wx.fund_give,
+        wx.fund_take,
     }
 
 

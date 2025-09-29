@@ -24,17 +24,7 @@ from src.ch12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.ch15_moment_logic._ref.ch15_keywords import (
-    beliefbudhistorys_str,
-    fund_iota_str,
-    job_listen_rotations_str,
-    knot_str,
-    moment_label_str,
-    paybook_str,
-    penny_str,
-    respect_bit_str,
-    timeline_str,
-)
+from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_main import (
     MomentUnit,
     get_default_job_listen_count,
@@ -72,16 +62,16 @@ def test_MomentUnit_Exists():
     assert not amy_moment._packs_dir
     assert not amy_moment.all_tranbook
     assert set(amy_moment.__dict__) == {
-        moment_label_str(),
-        timeline_str(),
-        beliefbudhistorys_str(),
-        paybook_str(),
+        wx.moment_label,
+        wx.timeline,
+        wx.beliefbudhistorys,
+        wx.paybook,
         "offi_times",
-        knot_str(),
-        fund_iota_str(),
-        respect_bit_str(),
-        penny_str(),
-        job_listen_rotations_str(),
+        wx.knot,
+        wx.fund_iota,
+        wx.respect_bit,
+        wx.penny,
+        wx.job_listen_rotations,
         "_moment_dir",
         "moment_mstr_dir",
         "all_tranbook",

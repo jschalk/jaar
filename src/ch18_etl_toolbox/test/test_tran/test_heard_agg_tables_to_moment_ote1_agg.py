@@ -1,13 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
-    bud_time_str,
-    event_int_str,
-    moment_budunit_str,
-    moment_label_str,
-    moment_ote1_agg_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import (
     create_sound_and_heard_tables,
@@ -30,9 +23,9 @@ def test_etl_heard_raw_tables_to_moment_ote1_agg_SetsTableAttr():
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        momentbud_h_raw_table = create_prime_tablename(moment_budunit_str(), "h", "raw")
+        momentbud_h_raw_table = create_prime_tablename(wx.moment_budunit, "h", "raw")
         insert_raw_sqlstr = f"""
-INSERT INTO {momentbud_h_raw_table} ({event_int_str()}, {moment_label_str()}_inx, {belief_name_str()}_inx, {bud_time_str()})
+INSERT INTO {momentbud_h_raw_table} ({wx.event_int}, {wx.moment_label}_inx, {wx.belief_name}_inx, {wx.bud_time})
 VALUES
   ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
 , ({event3}, '{amy23_str}', '{bob_str}', {timepoint55})
@@ -42,15 +35,15 @@ VALUES
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, momentbud_h_raw_table) == 4
-        assert db_table_exists(cursor, moment_ote1_agg_str()) is False
+        assert db_table_exists(cursor, wx.moment_ote1_agg) is False
 
         # WHEN
         etl_heard_raw_tables_to_moment_ote1_agg(cursor)
 
         # THEN
-        assert db_table_exists(cursor, moment_ote1_agg_str())
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 3
-        cursor.execute(f"SELECT * FROM {moment_ote1_agg_str()};")
+        assert db_table_exists(cursor, wx.moment_ote1_agg)
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 3
+        cursor.execute(f"SELECT * FROM {wx.moment_ote1_agg};")
         momentunit_agg_rows = cursor.fetchall()
         ex_row0 = (amy23_str, bob_str, event3, timepoint55, None)
         ex_row1 = (amy45_str, sue_str, event3, timepoint55, None)

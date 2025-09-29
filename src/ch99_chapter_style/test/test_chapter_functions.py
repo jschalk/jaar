@@ -1,12 +1,21 @@
 from importlib import import_module as importlib_import_module
-from inspect import getmembers as inspect_getmembers, isfunction as inspect_isfunction
+from inspect import getsource as inspect_getsource
 from os.path import exists as os_path_exists
-from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_filenames, open_file
+from src.ch01_data_toolbox.file_toolbox import (
+    create_path,
+    get_dir_file_strs,
+    get_dir_filenames,
+    open_file,
+)
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
     get_chapter_descs,
-    get_chapter_str_functions,
+    get_chapter_num_descs,
+    get_chXX_keyword_classes,
+    get_cumlative_ch_keywords_dict,
+    get_keywords_by_chapter,
+    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
     check_all_test_functions_are_formatted,
@@ -15,7 +24,6 @@ from src.ch99_chapter_style.style import (
     check_if_test_ReturnsObj_pytests_exist,
     find_incorrect_imports,
     get_all_semantic_types_from_ref_files,
-    get_all_str_functions,
     get_chapters_func_class_metrics,
     get_docstring,
     get_json_files,
@@ -99,7 +107,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "set_label",
         "set_membership",
         "set_otx2inx",
-        "test_str_functions_ReturnsObj",
         "to_dict",
     }
 
@@ -151,44 +158,116 @@ def test_Chapters_Semantic_Types_AreAllIn_chXX_semantic_types_ref_files():
     assert ref_files_semantic_types == expected_types
 
 
-def test_Chapters_StrFunctionsAppearWhereTheyShould():
+def test_Chapters_KeywordsAppearWhereTheyShould():
     """Test that checks no str function is created before it is needed or after the term is used."""
 
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
     # ESTABLISH
-    all_str_functions = get_all_str_functions()
-    str_first_ref = {str_function: None for str_function in all_str_functions}
     # "close" is excluded because it is used to close sqlite database connections
     excluded_strs = {"close"}
+    # new method references from keywords config file
+    keywords_dict = get_keywords_src_config()
+    keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
+    all_keywords_set = set(keywords_dict.keys())
+    cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     # WHEN / THEN
     # all_file_count = 0
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
+        allowed_chapter_keywords = cumlative_ch_keywords_dict.get(chapter_num)
+        not_allowed_keywords = all_keywords_set.difference(allowed_chapter_keywords)
+        not_allowed_keywords = not_allowed_keywords.difference(excluded_strs)
+        # print(f"{chapter_prefix} {len(not_allowed_keywords)=}")
+
         chapter_files = list(get_python_files_with_flag(chapter_dir).keys())
         chapter_files.extend(list(get_json_files(chapter_dir)))
         chapter_files = sorted(chapter_files)
-        str_funcs_set = set(get_chapter_str_functions(chapter_dir, chapter_prefix))
-        # print(f"{desc_number_str} {len(str_funcs_set)=}")
         # chapter_file_count = 0
         for file_path in chapter_files:
-            if file_path.find("_util") == -1:
-                # chapter_file_count += 1
-                # all_file_count += 1
-                # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
-                first_ref_missing_strs = {
-                    str_function[:-4]
-                    for str_function in str_first_ref
-                    if str_first_ref.get(str_function) is None
-                }
-                file_str = open(file_path).read()
-                for x_str in first_ref_missing_strs:
-                    if file_str.find(x_str) > -1 and x_str not in excluded_strs:
-                        x_str_func_name = f"{x_str}_str"
-                        str_first_ref[x_str_func_name] = file_path
-                        if x_str_func_name not in str_funcs_set:
-                            print(f"missing {x_str=} {file_path=}")
-                        assert x_str_func_name in str_funcs_set
+            # chapter_file_count += 1
+            # all_file_count += 1
+            # print(f"{all_file_count} Chapter: {chapter_file_count} {file_path}")
+            file_str = open(file_path).read()
+            for keyword in not_allowed_keywords:
+                notallowed_keyword_failure_str = f"keyword {keyword} is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
+                assert file_str.find(keyword) == -1, notallowed_keyword_failure_str
+            print(f"{file_path=}")
+            excessive_imports_str = f"{file_path} has too many Keywords class imports"
+            ch_class_name = f"Ch{chapter_num:02}Keywords"
+            is_doc_builder_file = "doc_builder.py" in file_path
+            if file_path.find(f"test_ch{chapter_num:02}_keywords.py") == -1:
+                assert file_str.count("Keywords") <= 1, excessive_imports_str
+            elif is_doc_builder_file:
+                pass
+            else:
+                assert file_str.count(ch_class_name) in {0, 4}, ""
+            enum_x = f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
+            if "Keywords" in file_str and not is_doc_builder_file:
+                assert ch_class_name in file_str, enum_x
+
+
+def test_Chapters_FirstLevelFilesDoNotImportKeywords():
+    """Test that checks no str function is created before it is needed or after the term is used."""
+    # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
+
+    # ESTABLISH
+
+    # WHEN / THEN
+    # all_file_count = 0
+    for chapter_desc, chapter_dir in get_chapter_descs().items():
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+
+        chapter_files = list(get_dir_file_strs(chapter_dir, include_dirs=False).keys())
+        chapter_files = sorted(chapter_files)
+        print(f"{chapter_files=}")
+        # chapter_file_count = 0
+        for filename in chapter_files:
+            file_path = create_path(chapter_dir, filename)
+            file_str = open_file(file_path)
+            print(f"{file_path=}")
+            assert "Keywords" not in file_str, f"Keywords reference in {file_path}"
+
+
+def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
+    """"""
+    keywords_dict = get_keywords_src_config()
+    keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
+    cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
+
+    chXX_keyword_classes = get_chXX_keyword_classes(cumlative_ch_keywords_dict)
+    chapter_num_descs = get_chapter_num_descs()
+
+    for chapter_num, ExpectedEnumClass in chXX_keyword_classes.items():
+        chapter_desc = chapter_num_descs.get(chapter_num)
+        chapter_prefix = get_chapter_desc_prefix(chapter_desc)
+        chapter_ref_keywords_path = f"src.{chapter_desc}._ref.{chapter_prefix}_keywords"
+        print(f"{chapter_ref_keywords_path=}")
+
+        # dynamically import the module
+        mod = importlib_import_module(chapter_ref_keywords_path)
+        enum_class_name = f"Ch{chapter_num:02}Keywords"
+        try:
+            getattr(mod, enum_class_name)
+        except:
+            print(f"class {enum_class_name}(str, Enum):")
+            for keyword in sorted(list(cumlative_ch_keywords_dict.get(chapter_num))):
+                print(f"    {keyword} = '{keyword}'")
+            print("def __str__(self): return self.value")
+
+        # print(f"{len(mod.__dict__)=}")
+        ChKeywordsClass = getattr(mod, enum_class_name)
+        assert ChKeywordsClass
+        expected_enum_keys = set(ExpectedEnumClass.__dict__.keys())
+        current_enum_keys = set(ChKeywordsClass.__dict__.keys())
+        # print(expected_enum_keys.difference(current_enum_keys))
+        assert expected_enum_keys.difference(current_enum_keys) == set()
+        expected_dunder_str_func = """    def __str__(self):
+        return self.value
+"""
+        assert inspect_getsource(ChKeywordsClass.__str__) == expected_dunder_str_func
+        # assert ChKeywordsClass == ExpectedEnumClass
 
 
 def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
@@ -215,31 +294,20 @@ def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
             assert not incorrect_imports, assertion_fail_str
 
 
-def test_Chapters_StrFunctionsAreAllImported():
+def test_Chapters_All_semantic_types_NamesAreKeywords():
     # ESTABLISH / WHEN
-    all_str_functions = get_all_str_functions()
+    all_keywords = set(get_keywords_src_config().keys())
 
-    # THEN confirm all str functions are imported to max chapter
-    max_chapter_import_str = get_max_chapter_import_str()
-    print(f"{max_chapter_import_str=}")
-    max_mod_obj = importlib_import_module(max_chapter_import_str)
-    mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
-    mod_str_funcs = {name for name, obj in mod_all_funcs if not name.startswith("__")}
-
-    print(f"{len(mod_all_funcs)=}")
-    assert len(all_str_functions) == len(mod_str_funcs)
-    all_str_func_set = set(all_str_functions)
-    assert all_str_func_set == mod_str_funcs
-
+    # THEN
     # make semantic_type names required keyword str functions
     semantic_types = expected_semantic_types()
-    semantic_str_funcs = set()
-    for semantic_typ in semantic_types:
-        semantic_str_funcs.add(f"{semantic_typ}_str")
+    semantic_keywords_by_chapter = set()
+    for semantic_type in semantic_types:
+        semantic_keywords_by_chapter.add(semantic_type)
     print(
-        f"semantic_types without str function: {sorted(list(semantic_str_funcs.difference(all_str_functions)))}"
+        f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_keywords)))}"
     )
-    assert semantic_str_funcs.issubset(all_str_func_set)
+    assert semantic_keywords_by_chapter.issubset(all_keywords)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():

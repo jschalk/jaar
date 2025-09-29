@@ -7,17 +7,7 @@ from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_examples import get_texas_rope
-from src.ch13_belief_listen_logic._ref.ch13_keywords import (
-    INSERT_str,
-    belief_plan_factunit_str,
-    belief_planunit_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_upper_str,
-    parent_rope_str,
-    plan_label_str,
-    plan_rope_str,
-)
+from src.ch13_belief_listen_logic._ref.ch13_keywords import Ch13Keywords as wx
 from src.ch13_belief_listen_logic.test._util.ch13_env import get_chapter_temp_dir
 
 

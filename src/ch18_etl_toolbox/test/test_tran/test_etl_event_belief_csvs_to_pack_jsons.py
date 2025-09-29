@@ -5,18 +5,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path as belief_event_dir,
     create_event_all_pack_path as all_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    INSERT_str,
-    belief_name_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    event_int_str,
-    face_name_str,
-    moment_label_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -33,14 +22,14 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario0_IgnoresCSV_be
     bob_inx = "Bobby"
     event3 = 3
     a23_str = "amy23"
-    put_agg_tablename = create_prime_tablename(beliefunit_str(), "h", "agg", "put")
+    put_agg_tablename = create_prime_tablename(wx.beliefunit, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
     # a23_bob_dir = create_path(a23_dir, bob_inx)
     # a23_bob_e3_dir = create_path(a23_bob_dir, event3)
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit
+    e3_put_csv = f"""{wx.event_int},{wx.face_name},moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_iota,penny,respect_bit
 {event3},{sue_inx},{a23_str},{bob_inx},,,,,,,,
 """
     save_file(a23_bob_e3_dir, put_agg_csv_filename, e3_put_csv)
@@ -74,7 +63,7 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     credit88 = 88
     debt_empty = ""
     a23_str = "amy23"
-    blrpern_str = belief_voiceunit_str()
+    blrpern_str = wx.belief_voiceunit
     put_agg_tablename = create_prime_tablename(blrpern_str, "h", "agg", "put")
     put_agg_csv_filename = f"{put_agg_tablename}.csv"
     moment_mstr_dir = get_chapter_temp_dir()
@@ -83,10 +72,10 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # a23_bob_e7_dir = create_path(a23_bob_dir, event7)
     a23_bob_e3_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event3)
     a23_bob_e7_dir = belief_event_dir(moment_mstr_dir, a23_str, bob_inx, event7)
-    e3_put_csv = f"""{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{voice_name_str()},{voice_cred_points_str()},{voice_debt_points_str()}
+    e3_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points},{wx.voice_debt_points}
 {event3},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 """
-    e7_put_csv = f"""{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{voice_name_str()},{voice_cred_points_str()},{voice_debt_points_str()}
+    e7_put_csv = f"""{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.voice_cred_points},{wx.voice_debt_points}
 {event7},{sue_inx},{a23_str},{bob_inx},{bob_inx},{credit77},{debt_empty}
 {event7},{sue_inx},{a23_str},{bob_inx},{sue_inx},{credit88},{debt_empty}
 """
@@ -115,24 +104,24 @@ def test_etl_event_belief_csvs_to_pack_json_CreatesFiles_Scenario1(
     # e7_pack = packunit_shop(bob_inx, sue_inx, a23_str, packs_dir, atoms_dir, event7)
     expected_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     expected_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    blrpern_dimen = belief_voiceunit_str()
+    blrpern_dimen = wx.belief_voiceunit
     expected_e3_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        INSERT_str(),
-        jkeys={voice_name_str(): bob_inx},
-        jvalues={voice_cred_points_str(): credit77, voice_debt_points_str(): None},
+        wx.INSERT,
+        jkeys={wx.voice_name: bob_inx},
+        jvalues={wx.voice_cred_points: credit77, wx.voice_debt_points: None},
     )
     expected_e7_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        INSERT_str(),
-        jkeys={voice_name_str(): bob_inx},
-        jvalues={voice_cred_points_str(): credit77, voice_debt_points_str(): None},
+        wx.INSERT,
+        jkeys={wx.voice_name: bob_inx},
+        jvalues={wx.voice_cred_points: credit77, wx.voice_debt_points: None},
     )
     expected_e7_pack._beliefdelta.add_beliefatom(
         blrpern_dimen,
-        INSERT_str(),
-        jkeys={voice_name_str(): sue_inx},
-        jvalues={voice_cred_points_str(): credit88, voice_debt_points_str(): None},
+        wx.INSERT,
+        jkeys={wx.voice_name: sue_inx},
+        jvalues={wx.voice_cred_points: credit88, wx.voice_debt_points: None},
     )
     e3_packunit = get_packunit_from_json(open_file(e3_all_pack_path))
     e7_packunit = get_packunit_from_json(open_file(e7_all_pack_path))

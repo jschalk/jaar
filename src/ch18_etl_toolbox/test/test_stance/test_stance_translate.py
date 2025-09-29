@@ -1,24 +1,6 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch17_idea_logic.idea_csv_tool import create_init_stance_idea_csv_strs
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    event_int_str,
-    face_name_str,
-    inx_knot_str,
-    inx_label_str,
-    inx_name_str,
-    inx_rope_str,
-    inx_title_str,
-    otx_knot_str,
-    otx_label_str,
-    otx_name_str,
-    otx_rope_str,
-    otx_title_str,
-    translate_label_str,
-    translate_name_str,
-    translate_rope_str,
-    translate_title_str,
-    unknown_str_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.stance_tool import (
     add_to_br00042_csv,
     add_to_br00043_csv,
@@ -52,10 +34,10 @@ def test_add_to_br00042_csv_ReturnsObj():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trltitl_dimen = translate_title_str()
+        trltitl_dimen = wx.translate_title
         trltitl_s_vld_tablename = prime_tbl(trltitl_dimen, "s", "vld")
         insert_trltitl_sqlstr = f"""INSERT INTO {trltitl_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_title_str()}, {inx_title_str()})
+        ({wx.event_int}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -65,7 +47,7 @@ def test_add_to_br00042_csv_ReturnsObj():
 
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
-        ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+        ({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
         VALUES
           ('{sue_otx}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
         , ('{bob_otx}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')
@@ -77,7 +59,7 @@ def test_add_to_br00042_csv_ReturnsObj():
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00042")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_title_str()},{inx_title_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
+        expected_header_only_csv = f"{wx.event_int},{wx.face_name},{wx.otx_title},{wx.inx_title},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -112,11 +94,11 @@ def test_add_to_br00043_csv_ReturnsObj():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trlname_dimen = translate_name_str()
+        trlname_dimen = wx.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         insert_trlname_sqlstr = f"""
 INSERT INTO {trlname_s_vld_tablename}
-({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
 VALUES
   ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
 , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -127,7 +109,7 @@ VALUES
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""
 INSERT INTO {trlcore_s_vld_tablename}
-({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_otx}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
 , ('{bob_otx}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')
@@ -139,7 +121,7 @@ VALUES
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00043")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_name_str()},{inx_name_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
+        expected_header_only_csv = f"{wx.event_int},{wx.face_name},{wx.otx_name},{wx.inx_name},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -176,11 +158,11 @@ def test_add_to_br00044_csv_ReturnsObj():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trllabe_dimen = translate_label_str()
+        trllabe_dimen = wx.translate_label
         trllabe_s_vld_tablename = prime_tbl(trllabe_dimen, "s", "vld")
         insert_trllabe_sqlstr = f"""
 INSERT INTO {trllabe_s_vld_tablename}
-({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
+({wx.event_int}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
 VALUES
   ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
 , ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
@@ -191,7 +173,7 @@ VALUES
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""
 INSERT INTO {trlcore_s_vld_tablename}
-({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
 , ('{bob_str}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')
@@ -203,7 +185,7 @@ VALUES
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00044")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_label_str()},{inx_label_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
+        expected_header_only_csv = f"{wx.event_int},{wx.face_name},{wx.otx_label},{wx.inx_label},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -240,11 +222,11 @@ def test_add_to_br00045_csv_ReturnsObj():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        trlrope_dimen = translate_rope_str()
+        trlrope_dimen = wx.translate_rope
         trlrope_s_vld_tablename = prime_tbl(trlrope_dimen, "s", "vld")
         insert_trlrope_sqlstr = f"""
 INSERT INTO {trlrope_s_vld_tablename}
-({event_int_str()}, {face_name_str()}, {otx_rope_str()}, {inx_rope_str()})
+({wx.event_int}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
 VALUES
   ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
 , ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
@@ -255,7 +237,7 @@ VALUES
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""
 INSERT INTO {trlcore_s_vld_tablename}
-({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
 VALUES
   ('{sue_str}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
 , ('{bob_str}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')
@@ -267,7 +249,7 @@ VALUES
         x_ideas = create_init_stance_idea_csv_strs()
         header_only_csv = x_ideas.get("br00045")
         print(f"{header_only_csv=}")
-        expected_header_only_csv = f"{event_int_str()},{face_name_str()},{otx_rope_str()},{inx_rope_str()},{otx_knot_str()},{inx_knot_str()},{unknown_str_str()}\n"
+        expected_header_only_csv = f"{wx.event_int},{wx.face_name},{wx.otx_rope},{wx.inx_rope},{wx.otx_knot},{wx.inx_knot},{wx.unknown_str}\n"
         assert header_only_csv == expected_header_only_csv
 
         # WHEN
@@ -304,10 +286,10 @@ def test_add_translate_rows_to_stance_csv_strs_ReturnsObj():
         create_sound_and_heard_tables(cursor)
 
         # insert translate_title records
-        trltitl_dimen = translate_title_str()
+        trltitl_dimen = wx.translate_title
         trltitl_s_vld_tablename = prime_tbl(trltitl_dimen, "s", "vld")
         insert_trltitl_sqlstr = f"""INSERT INTO {trltitl_s_vld_tablename}
-        ({event_int_str()}, {face_name_str()}, {otx_title_str()}, {inx_title_str()})
+        ({wx.event_int}, {wx.face_name}, {wx.otx_title}, {wx.inx_title})
         VALUES
           ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
         , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -316,11 +298,11 @@ def test_add_translate_rows_to_stance_csv_strs_ReturnsObj():
         cursor.execute(insert_trltitl_sqlstr)
 
         # insert translate_name records
-        trlname_dimen = translate_name_str()
+        trlname_dimen = wx.translate_name
         trlname_s_vld_tablename = prime_tbl(trlname_dimen, "s", "vld")
         insert_trlname_sqlstr = f"""
 INSERT INTO {trlname_s_vld_tablename}
-({event_int_str()}, {face_name_str()}, {otx_name_str()}, {inx_name_str()})
+({wx.event_int}, {wx.face_name}, {wx.otx_name}, {wx.inx_name})
 VALUES
   ({event1}, '{sue_otx}', '{sue_otx}', '{sue_inx}')
 , ({event7}, '{bob_otx}', '{bob_otx}', '{bob_inx}')
@@ -335,11 +317,11 @@ VALUES
         sue_clean_inx = "limpia"
         bob_clean_otx = "very clean"
         bob_clean_inx = "very limpia"
-        trllabe_dimen = translate_label_str()
+        trllabe_dimen = wx.translate_label
         trllabe_s_vld_tablename = prime_tbl(trllabe_dimen, "s", "vld")
         insert_trllabe_sqlstr = f"""
 INSERT INTO {trllabe_s_vld_tablename}
-({event_int_str()}, {face_name_str()}, {otx_label_str()}, {inx_label_str()})
+({wx.event_int}, {wx.face_name}, {wx.otx_label}, {wx.inx_label})
 VALUES
   ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
 , ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
@@ -352,11 +334,11 @@ VALUES
         sue_clean_inx = ".casa.limpia."
         bob_clean_otx = ";casa;very clean;"
         bob_clean_inx = "/casa/very limpia/"
-        trlrope_dimen = translate_rope_str()
+        trlrope_dimen = wx.translate_rope
         trlrope_s_vld_tablename = prime_tbl(trlrope_dimen, "s", "vld")
         insert_trlrope_sqlstr = f"""
 INSERT INTO {trlrope_s_vld_tablename}
-({event_int_str()}, {face_name_str()}, {otx_rope_str()}, {inx_rope_str()})
+({wx.event_int}, {wx.face_name}, {wx.otx_rope}, {wx.inx_rope})
 VALUES
   ({event1}, '{sue_str}', '{sue_clean_otx}', '{sue_clean_inx}')
 , ({event7}, '{bob_str}', '{bob_clean_otx}', '{bob_clean_inx}')
@@ -367,7 +349,7 @@ VALUES
         # insert translate_core records
         trlcore_s_vld_tablename = prime_tbl("trlcore", "s", "vld")
         insert_trlcore_sqlstr = f"""INSERT INTO {trlcore_s_vld_tablename}
-        ({face_name_str()}, {otx_knot_str()}, {inx_knot_str()}, {unknown_str_str()})
+        ({wx.face_name}, {wx.otx_knot}, {wx.inx_knot}, {wx.unknown_str})
         VALUES
           ('{sue_otx}', '{sue_otx_knot}', '{sue_inx_knot}', '{sue_unknown_str}')
         , ('{bob_otx}', '{bob_otx_knot}', '{bob_inx_knot}', '{bob_unknown_str}')

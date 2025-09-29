@@ -3,7 +3,7 @@ from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.ch22_belief_viewer._ref.ch22_keywords import planroot_str, voices_str
+from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_belief_view_dict,
@@ -23,10 +23,10 @@ def test_get_belief_view_dict_ReturnsObj_Scenario0_Empty():
 
     # THEN
     assert set(sue_belief_view_dict.keys()) == {
-        # groupunits_str,
-        voices_str(),
-        planroot_str(),
+        # wx.groupunits,
+        wx.voices,
+        wx.planroot,
     }
-    sue_plan_view_dict = sue_belief_view_dict.get(planroot_str())
+    sue_plan_view_dict = sue_belief_view_dict.get(wx.planroot)
     expected_sue_plan_view_dict = get_plan_view_dict(sue_believer.planroot)
     assert sue_plan_view_dict == expected_sue_plan_view_dict

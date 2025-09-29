@@ -3,55 +3,7 @@ from src.ch08_timeline_logic.reason_str_func import (
     get_fact_state_readable_str,
     get_reason_case_readable_str,
 )
-from src.ch22_belief_viewer._ref.ch22_keywords import (
-    active_hx_str,
-    active_str,
-    addin_str,
-    all_voice_cred_str,
-    all_voice_debt_str,
-    awardheirs_str,
-    awardlines_str,
-    awardunits_str,
-    begin_str,
-    cases_str,
-    close_str,
-    denom_str,
-    descendant_pledge_count_str,
-    factheirs_str,
-    factunits_str,
-    fund_cease_str,
-    fund_iota_str,
-    fund_onset_str,
-    fund_ratio_str,
-    fund_share_str,
-    gogo_calc_str,
-    gogo_want_str,
-    healerunit_ratio_str,
-    healerunit_str,
-    is_expanded_str,
-    kids_str,
-    knot_str,
-    laborheir_str,
-    laborunit_str,
-    moment_label_str,
-    morph_str,
-    numor_str,
-    parent_rope_str,
-    plan_label_str,
-    pledge_str,
-    problem_bool_str,
-    range_evaluated_str,
-    readable_str,
-    reason_state_str,
-    reasonheirs_str,
-    reasonunits_str,
-    star_str,
-    stop_calc_str,
-    stop_want_str,
-    task_str,
-    tree_level_str,
-    uid_str,
-)
+from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
 from src.ch22_belief_viewer.example22_beliefs import (
     best_run_str,
@@ -83,51 +35,51 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # for dict_key, value in casa_dict.items():
     #     print(f"{dict_key=} \t\t {value=}")
     assert set(casa_dict.keys()) == {
-        plan_label_str(),
-        moment_label_str(),
-        parent_rope_str(),
-        kids_str(),
+        wx.plan_label,
+        wx.moment_label,
+        wx.parent_rope,
+        wx.kids,
         "root",
-        star_str(),
-        uid_str(),
-        awardunits_str(),
-        reasonunits_str(),
-        laborunit_str(),
-        factunits_str(),
-        healerunit_str(),
-        begin_str(),
-        close_str(),
-        addin_str(),
-        denom_str(),
-        numor_str(),
-        morph_str(),
-        gogo_want_str(),
-        stop_want_str(),
-        pledge_str(),
-        problem_bool_str(),
-        knot_str(),
-        is_expanded_str(),
-        active_str(),
-        active_hx_str(),
-        all_voice_cred_str(),
-        all_voice_debt_str(),
-        awardheirs_str(),
-        awardlines_str(),
-        descendant_pledge_count_str(),
-        factheirs_str(),
-        fund_ratio_str(),
-        fund_iota_str(),
-        fund_onset_str(),
-        fund_cease_str(),
-        healerunit_ratio_str(),
-        tree_level_str(),
-        range_evaluated_str(),
-        reasonheirs_str(),
-        task_str(),
-        laborheir_str(),
-        gogo_calc_str(),
-        stop_calc_str(),
-        fund_share_str(),
+        wx.star,
+        wx.uid,
+        wx.awardunits,
+        wx.reasonunits,
+        wx.laborunit,
+        wx.factunits,
+        wx.healerunit,
+        wx.begin,
+        wx.close,
+        wx.addin,
+        wx.denom,
+        wx.numor,
+        wx.morph,
+        wx.gogo_want,
+        wx.stop_want,
+        wx.pledge,
+        wx.problem_bool,
+        wx.knot,
+        wx.is_expanded,
+        wx.active,
+        wx.active_hx,
+        wx.all_voice_cred,
+        wx.all_voice_debt,
+        wx.awardheirs,
+        wx.awardlines,
+        wx.descendant_pledge_count,
+        wx.factheirs,
+        wx.fund_ratio,
+        wx.fund_iota,
+        wx.fund_onset,
+        wx.fund_cease,
+        wx.healerunit_ratio,
+        wx.tree_level,
+        wx.range_evaluated,
+        wx.reasonheirs,
+        wx.task,
+        wx.laborheir,
+        wx.gogo_calc,
+        wx.stop_calc,
+        wx.fund_share,
     }
     assert casa_dict.get("healerunit") == {"_healer_names": []}
 
@@ -145,14 +97,14 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
 
     # THEN
     # laborunit
-    mop_labor_dict = mop_dict.get(laborunit_str())
+    mop_labor_dict = mop_dict.get(wx.laborunit)
     mop_partys_dict = mop_labor_dict.get("_partys")
     sue_str = "Sue"
     bob_str = "Bob"
     mop_sue_dict = mop_partys_dict.get(sue_str)
     mop_bob_dict = mop_partys_dict.get(bob_str)
-    mop_sue_unit_readable = mop_sue_dict.get(readable_str())
-    mop_bob_unit_readable = mop_bob_dict.get(readable_str())
+    mop_sue_unit_readable = mop_sue_dict.get(wx.readable)
+    mop_bob_unit_readable = mop_bob_dict.get(wx.readable)
     expected_mop_sue_unit_readable = add_small_dot(f"LaborUnit: {sue_str}")
     expected_mop_bob_unit_readable = add_small_dot(f"LaborUnit: {bob_str} Solo: True")
     assert mop_sue_unit_readable == expected_mop_sue_unit_readable
@@ -162,14 +114,14 @@ def test_get_plan_view_dict_ReturnsObj_Scenario1_laborunit():
     print(f"{mop_bob_dict=}")
 
     # laborheir
-    mop_labor_dict = mop_dict.get(laborheir_str())
+    mop_labor_dict = mop_dict.get(wx.laborheir)
     mop_partys_dict = mop_labor_dict.get("_partys")
     sue_str = "Sue"
     bob_str = "Bob"
     mop_sue_dict = mop_partys_dict.get(sue_str)
     mop_bob_dict = mop_partys_dict.get(bob_str)
-    mop_sue_heir_readable = mop_sue_dict.get(readable_str())
-    mop_bob_heir_readable = mop_bob_dict.get(readable_str())
+    mop_sue_heir_readable = mop_sue_dict.get(wx.readable)
+    mop_bob_heir_readable = mop_bob_dict.get(wx.readable)
     expected_mop_sue_heir_readable = add_small_dot(f"LaborHeir: {sue_str}")
     expected_mop_bob_heir_readable = add_small_dot(f"LaborHeir: {bob_str} Solo: True")
     assert mop_sue_heir_readable == expected_mop_sue_heir_readable
@@ -193,7 +145,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario2_RootPlanUnit_attrs():
     #     "_partys": {sue_str: {"party_title": sue_str, "solo": False}}
     # }
     expected_parent_rope = add_small_dot("Root Plan parent_rope is empty str")
-    assert root_plan_view_dict.get(parent_rope_str()) == expected_parent_rope
+    assert root_plan_view_dict.get(wx.parent_rope) == expected_parent_rope
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
@@ -206,16 +158,16 @@ def test_get_plan_view_dict_ReturnsObj_Scenario3_PlanUnit_base_attrs():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    assert casa_dict.get(fund_share_str()) > 0
+    assert casa_dict.get(wx.fund_share) > 0
     expected_parent_rope = add_small_dot(casa_plan.parent_rope)
-    assert casa_dict.get(parent_rope_str()) == expected_parent_rope
+    assert casa_dict.get(wx.parent_rope) == expected_parent_rope
     expected_all_voice_cred = f"all_voice_cred = {casa_plan.all_voice_cred}"
     expected_all_voice_debt = f"all_voice_debt = {casa_plan.all_voice_debt}"
     expected_all_voice_cred = add_small_dot(expected_all_voice_cred)
     expected_all_voice_debt = add_small_dot(expected_all_voice_debt)
-    assert casa_dict.get(all_voice_cred_str()) == expected_all_voice_cred
-    assert casa_dict.get(all_voice_debt_str()) == expected_all_voice_debt
-    assert casa_dict.get(fund_ratio_str()) == "38%"
+    assert casa_dict.get(wx.all_voice_cred) == expected_all_voice_cred
+    assert casa_dict.get(wx.all_voice_debt) == expected_all_voice_debt
+    assert casa_dict.get(wx.fund_ratio) == "38%"
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
@@ -229,7 +181,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
 
     # THEN
     # awardunits
-    awardunits_dict = casa_dict.get(awardunits_str())
+    awardunits_dict = casa_dict.get(wx.awardunits)
     assert len(awardunits_dict) == 2
     # print(f"{len(awardunits_dict)=}")
     sue_str = "Sue"
@@ -238,13 +190,13 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     bob_awardunit_dict = awardunits_dict.get(bob_str)
     expected_sue_readable = add_small_dot(f"{sue_str}: Take 0.8, Give 1")
     expected_bob_readable = add_small_dot(f"{bob_str}: Take 0.9, Give 0.7")
-    # print(f"{sue_awardunit_dict.get(readable_str())=}")
-    # print(f"{bob_awardunit_dict.get(readable_str())=}")
-    assert sue_awardunit_dict.get(readable_str()) == expected_sue_readable
-    assert bob_awardunit_dict.get(readable_str()) == expected_bob_readable
+    # print(f"{sue_awardunit_dict.get(wx.readable)=}")
+    # print(f"{bob_awardunit_dict.get(wx.readable)=}")
+    assert sue_awardunit_dict.get(wx.readable) == expected_sue_readable
+    assert bob_awardunit_dict.get(wx.readable) == expected_bob_readable
 
     # awardheirs
-    awardheirs_dict = casa_dict.get(awardheirs_str())
+    awardheirs_dict = casa_dict.get(wx.awardheirs)
     assert len(awardheirs_dict) == 4
     # print(f"{len(awardheirs_dict)=}")
     sue_str = "Sue"
@@ -253,17 +205,13 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     bob_awardheir_dict = awardheirs_dict.get(bob_str)
     expected_sue_readable = f"{sue_str}: Take 0.8 (150000000), Give 1 (150000000)"
     expected_bob_readable = f"{bob_str}: Take 0.9 (168750000), Give 0.7 (105000000)"
-    # print(f"{sue_awardheir_dict.get(readable_str())=}")
-    # print(f"{bob_awardheir_dict.get(readable_str())=}")
-    assert sue_awardheir_dict.get(readable_str()) == add_small_dot(
-        expected_sue_readable
-    )
-    assert bob_awardheir_dict.get(readable_str()) == add_small_dot(
-        expected_bob_readable
-    )
+    # print(f"{sue_awardheir_dict.get(wx.readable)=}")
+    # print(f"{bob_awardheir_dict.get(wx.readable)=}")
+    assert sue_awardheir_dict.get(wx.readable) == add_small_dot(expected_sue_readable)
+    assert bob_awardheir_dict.get(wx.readable) == add_small_dot(expected_bob_readable)
 
     # awardlines
-    awardlines_dict = casa_dict.get(awardlines_str())
+    awardlines_dict = casa_dict.get(wx.awardlines)
     assert len(awardlines_dict) == 4
     print(f"{len(awardlines_dict)=}")
     sue_str = "Sue"
@@ -272,14 +220,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario4_PlanUnit_AwardUnits():
     bob_awardline_dict = awardlines_dict.get(bob_str)
     expected_sue_readable = f"{sue_str}: take_fund (150000000), give_fund (150000000)"
     expected_bob_readable = f"{bob_str}: take_fund (168750000), give_fund (105000000)"
-    print(f"{sue_awardline_dict.get(readable_str())=}")
-    print(f"{bob_awardline_dict.get(readable_str())=}")
-    assert sue_awardline_dict.get(readable_str()) == add_small_dot(
-        expected_sue_readable
-    )
-    assert bob_awardline_dict.get(readable_str()) == add_small_dot(
-        expected_bob_readable
-    )
+    print(f"{sue_awardline_dict.get(wx.readable)=}")
+    print(f"{bob_awardline_dict.get(wx.readable)=}")
+    assert sue_awardline_dict.get(wx.readable) == add_small_dot(expected_sue_readable)
+    assert bob_awardline_dict.get(wx.readable) == add_small_dot(expected_bob_readable)
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
@@ -300,7 +244,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
 
     # factunits
-    root_factunits_dict = root_dict.get(factunits_str())
+    root_factunits_dict = root_dict.get(wx.factunits)
     assert len(root_factunits_dict) == 2
     # print(f"{len(factunits_dict)=}")
     tidi_factunit_dict = root_factunits_dict.get(tidi_rope)
@@ -319,8 +263,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     expected_best_factunit_str = add_small_dot(best_factunit_readable)
     # print(f"{expected_tidi_factunit_str=}")
     # print(f"{expected_best_factunit_str=}")
-    assert tidi_factunit_dict.get(readable_str()) == expected_tidi_factunit_str
-    assert best_factunit_dict.get(readable_str()) == expected_best_factunit_str
+    assert tidi_factunit_dict.get(wx.readable) == expected_tidi_factunit_str
+    assert best_factunit_dict.get(wx.readable) == expected_best_factunit_str
 
     # factheirs
     casa_factheirs_dict = root_dict.get("factheirs")
@@ -341,12 +285,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     )
     expected_casa_tidi_factheir_str = add_small_dot(casa_tidi_factheir_readable)
     expected_casa_best_factheir_str = add_small_dot(casa_best_factheir_readable)
-    assert (
-        casa_tidi_factheir_dict.get(readable_str()) == expected_casa_tidi_factheir_str
-    )
-    assert (
-        casa_best_factheir_dict.get(readable_str()) == expected_casa_best_factheir_str
-    )
+    assert casa_tidi_factheir_dict.get(wx.readable) == expected_casa_tidi_factheir_str
+    assert casa_best_factheir_dict.get(wx.readable) == expected_casa_best_factheir_str
 
 
 def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
@@ -375,26 +315,26 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
 
     # THEN
     # reasonunits
-    play_soccer_reasonunits_dict = play_soccer_dict.get(reasonunits_str())
+    play_soccer_reasonunits_dict = play_soccer_dict.get(wx.reasonunits)
     assert len(play_soccer_reasonunits_dict) == 2
     # print(f"{len(play_soccer_reasonunits_dict)=}")
     best_reasonunit_dict = play_soccer_reasonunits_dict.get(best_rope)
     tidi_reasonunit_dict = play_soccer_reasonunits_dict.get(tidi_rope)
     print(f"{best_reasonunit_dict.keys()=}")
     expected_reason_str = add_small_dot(f"ReasonUnit: context is {best_rope}")
-    assert best_reasonunit_dict.get(readable_str()) == expected_reason_str
+    assert best_reasonunit_dict.get(wx.readable) == expected_reason_str
 
-    best_cases_dict = best_reasonunit_dict.get(cases_str())
-    tidi_cases_dict = tidi_reasonunit_dict.get(cases_str())
+    best_cases_dict = best_reasonunit_dict.get(wx.cases)
+    tidi_cases_dict = tidi_reasonunit_dict.get(wx.cases)
     best_soccer_case_dict = best_cases_dict.get(best_soccer_rope)
     best_run_case_dict = best_cases_dict.get(best_run_rope)
     tidy_case_dict = tidi_cases_dict.get(tidy_rope)
-    # print(f"{best_soccer_case_dict.get(reason_state_str())=}")
-    # print(f"{best_run_case_dict.get(reason_state_str())=}")
-    # print(f"{tidy_case_dict.get(reason_state_str())=}")
-    assert best_soccer_case_dict.get(reason_state_str()) == best_soccer_rope
-    assert best_run_case_dict.get(reason_state_str()) == best_run_rope
-    assert tidy_case_dict.get(reason_state_str()) == tidy_rope
+    # print(f"{best_soccer_case_dict.get(wx.reason_state)=}")
+    # print(f"{best_run_case_dict.get(wx.reason_state)=}")
+    # print(f"{tidy_case_dict.get(wx.reason_state)=}")
+    assert best_soccer_case_dict.get(wx.reason_state) == best_soccer_rope
+    assert best_run_case_dict.get(wx.reason_state) == best_run_rope
+    assert tidy_case_dict.get(wx.reason_state) == tidy_rope
 
     play_best_reasonunit = play_soccer_plan.get_reasonunit(best_rope)
     play_tidi_reasonunit = play_soccer_plan.get_reasonunit(tidi_rope)
@@ -417,11 +357,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     expected_tidy_case_readable = f"  {add_small_dot(expected_tidy_case_readable)}"
     print(f"{best_run_caseunit=}")
     # print(f"{expected_best_reasonunit_str=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    assert best_soccer_case_dict.get(readable_str()) == expected_soccer_case_readable
-    assert best_run_case_dict.get(readable_str()) == expected_run_case_readable
-    assert tidy_case_dict.get(readable_str()) == expected_tidy_case_readable
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    assert best_soccer_case_dict.get(wx.readable) == expected_soccer_case_readable
+    assert best_run_case_dict.get(wx.readable) == expected_run_case_readable
+    assert tidy_case_dict.get(wx.readable) == expected_tidy_case_readable
     print(f"{expected_soccer_case_readable=}")
     print(f"{expected_run_case_readable=}")
     print(f"{expected_tidy_case_readable=}")
@@ -453,26 +393,26 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
 
     # THEN
     # reasonheirs
-    play_soccer_reasonheirs_dict = play_soccer_dict.get(reasonheirs_str())
+    play_soccer_reasonheirs_dict = play_soccer_dict.get(wx.reasonheirs)
     assert len(play_soccer_reasonheirs_dict) == 2
     # print(f"{len(play_soccer_reasonheirs_dict)=}")
     best_reasonheir_dict = play_soccer_reasonheirs_dict.get(best_rope)
     tidi_reasonheir_dict = play_soccer_reasonheirs_dict.get(tidi_rope)
     print(f"{best_reasonheir_dict.keys()=}")
     expected_reason_str = add_small_dot(f"ReasonHeir: context is {best_rope}")
-    assert best_reasonheir_dict.get(readable_str()) == expected_reason_str
+    assert best_reasonheir_dict.get(wx.readable) == expected_reason_str
 
-    best_cases_dict = best_reasonheir_dict.get(cases_str())
-    tidi_cases_dict = tidi_reasonheir_dict.get(cases_str())
+    best_cases_dict = best_reasonheir_dict.get(wx.cases)
+    tidi_cases_dict = tidi_reasonheir_dict.get(wx.cases)
     best_soccer_case_dict = best_cases_dict.get(best_soccer_rope)
     best_run_case_dict = best_cases_dict.get(best_run_rope)
     tidy_case_dict = tidi_cases_dict.get(tidy_rope)
-    # print(f"{best_soccer_case_dict.get(reason_state_str())=}")
-    # print(f"{best_run_case_dict.get(reason_state_str())=}")
-    # print(f"{tidy_case_dict.get(reason_state_str())=}")
-    assert best_soccer_case_dict.get(reason_state_str()) == best_soccer_rope
-    assert best_run_case_dict.get(reason_state_str()) == best_run_rope
-    assert tidy_case_dict.get(reason_state_str()) == tidy_rope
+    # print(f"{best_soccer_case_dict.get(wx.reason_state)=}")
+    # print(f"{best_run_case_dict.get(wx.reason_state)=}")
+    # print(f"{tidy_case_dict.get(wx.reason_state)=}")
+    assert best_soccer_case_dict.get(wx.reason_state) == best_soccer_rope
+    assert best_run_case_dict.get(wx.reason_state) == best_run_rope
+    assert tidy_case_dict.get(wx.reason_state) == tidy_rope
 
     play_best_reasonheir = play_soccer_plan.get_reasonheir(best_rope)
     play_tidi_reasonheir = play_soccer_plan.get_reasonheir(tidi_rope)
@@ -495,11 +435,11 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
     expected_tidy_case_readable = f"  {add_small_dot(expected_tidy_case_readable)}"
     print(f"{best_run_caseunit=}")
     # print(f"{expected_best_reasonheir_str=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    print(f"{best_soccer_case_dict.get(readable_str())=}")
-    assert best_soccer_case_dict.get(readable_str()) == expected_soccer_case_readable
-    assert best_run_case_dict.get(readable_str()) == expected_run_case_readable
-    assert tidy_case_dict.get(readable_str()) == expected_tidy_case_readable
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    print(f"{best_soccer_case_dict.get(wx.readable)=}")
+    assert best_soccer_case_dict.get(wx.readable) == expected_soccer_case_readable
+    assert best_run_case_dict.get(wx.readable) == expected_run_case_readable
+    assert tidy_case_dict.get(wx.readable) == expected_tidy_case_readable
     print(f"{expected_soccer_case_readable=}")
     print(f"{expected_run_case_readable=}")
     print(f"{expected_tidy_case_readable=}")
@@ -522,10 +462,10 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    gogo_want_readable = casa_dict.get(gogo_want_str())
-    stop_want_readable = casa_dict.get(stop_want_str())
-    gogo_calc_readable = casa_dict.get(gogo_calc_str())
-    stop_calc_readable = casa_dict.get(stop_calc_str())
+    gogo_want_readable = casa_dict.get(wx.gogo_want)
+    stop_want_readable = casa_dict.get(wx.stop_want)
+    gogo_calc_readable = casa_dict.get(wx.gogo_calc)
+    stop_calc_readable = casa_dict.get(wx.stop_calc)
     expected_gogo_want_readable = add_small_dot(f"gogo_want: {casa_plan.gogo_want}")
     expected_stop_want_readable = add_small_dot(f"stop_want: {casa_plan.stop_want}")
     expected_gogo_calc_readable = add_small_dot(f"gogo_calc: {casa_plan.gogo_calc}")
@@ -557,12 +497,12 @@ def test_get_plan_view_dict_ReturnsObj_Scenario9_numeric_range_attrs():
     casa_dict = get_plan_view_dict(casa_plan)
 
     # THEN
-    casa_addin_readable = casa_dict.get(addin_str())
-    casa_begin_readable = casa_dict.get(begin_str())
-    casa_close_readable = casa_dict.get(close_str())
-    casa_denom_readable = casa_dict.get(denom_str())
-    casa_morph_readable = casa_dict.get(morph_str())
-    casa_numor_readable = casa_dict.get(numor_str())
+    casa_addin_readable = casa_dict.get(wx.addin)
+    casa_begin_readable = casa_dict.get(wx.begin)
+    casa_close_readable = casa_dict.get(wx.close)
+    casa_denom_readable = casa_dict.get(wx.denom)
+    casa_morph_readable = casa_dict.get(wx.morph)
+    casa_numor_readable = casa_dict.get(wx.numor)
     expected_casa_addin_readable = add_small_dot(f"addin: {casa_plan.addin}")
     expected_casa_begin_readable = add_small_dot(f"begin: {casa_plan.begin}")
     expected_casa_close_readable = add_small_dot(f"close: {casa_plan.close}")
@@ -594,7 +534,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario10_active_hx():
     # THEN
     print(f"{chicken_plan.active_hx=}")
     # sports ropes
-    chicken_active_hx_str = chicken_dict.get(active_hx_str())
+    chicken_active_hx_str = chicken_dict.get(wx.active_hx)
     expected_chicken_active_hx_str = f"active_hx: {chicken_plan.active_hx}"
     expected_chicken_active_hx_str = add_small_dot(expected_chicken_active_hx_str)
     assert expected_chicken_active_hx_str == chicken_active_hx_str

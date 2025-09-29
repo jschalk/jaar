@@ -1,19 +1,7 @@
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_name_str,
-    brick_valid_str,
-    event_int_str,
-    face_name_str,
-    inx_knot_str,
-    inx_rope_str,
-    moment_label_str,
-    otx_knot_str,
-    otx_rope_str,
-    unknown_str_str,
-    voice_name_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import etl_brick_valid_tables_to_sound_raw_tables
 
@@ -41,25 +29,25 @@ def test_etl_brick_valid_tables_to_sound_raw_tables_PopulatesValidTable_Scenario
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
 
-        br00117_valid_tablename = f"br00117_{brick_valid_str()}"
+        br00117_valid_tablename = f"br00117_{wx.brick_valid}"
         br00117_columns = [
-            event_int_str(),
-            face_name_str(),
-            moment_label_str(),
-            belief_name_str(),
-            voice_name_str(),
-            otx_rope_str(),
-            inx_rope_str(),
+            wx.event_int,
+            wx.face_name,
+            wx.moment_label,
+            wx.belief_name,
+            wx.voice_name,
+            wx.otx_rope,
+            wx.inx_rope,
         ]
         create_idea_sorted_table(cursor, br00117_valid_tablename, set(br00117_columns))
         insert_into_clause = f"""INSERT INTO {br00117_valid_tablename} (
-  {event_int_str()}
-, {face_name_str()}
-, {moment_label_str()}
-, {belief_name_str()}
-, {voice_name_str()}
-, {otx_rope_str()}
-, {inx_rope_str()}
+  {wx.event_int}
+, {wx.face_name}
+, {wx.moment_label}
+, {wx.belief_name}
+, {wx.voice_name}
+, {wx.otx_rope}
+, {wx.inx_rope}
 )"""
         values_clause = f"""
 VALUES
@@ -69,25 +57,25 @@ VALUES
 """
         cursor.execute(f"{insert_into_clause} {values_clause}")
 
-        br00045_valid_tablename = f"br00045_{brick_valid_str()}"
+        br00045_valid_tablename = f"br00045_{wx.brick_valid}"
         br00045_columns = [
-            event_int_str(),
-            face_name_str(),
-            otx_rope_str(),
-            inx_rope_str(),
-            otx_knot_str(),
-            inx_knot_str(),
-            unknown_str_str(),
+            wx.event_int,
+            wx.face_name,
+            wx.otx_rope,
+            wx.inx_rope,
+            wx.otx_knot,
+            wx.inx_knot,
+            wx.unknown_str,
         ]
         create_idea_sorted_table(cursor, br00045_valid_tablename, br00045_columns)
         insert_into_clause = f"""INSERT INTO {br00045_valid_tablename} (
-  {event_int_str()}
-, {face_name_str()}
-, {otx_rope_str()}
-, {inx_rope_str()}
-, {otx_knot_str()}
-, {inx_knot_str()}
-, {unknown_str_str()}
+  {wx.event_int}
+, {wx.face_name}
+, {wx.otx_rope}
+, {wx.inx_rope}
+, {wx.otx_knot}
+, {wx.inx_knot}
+, {wx.unknown_str}
 )"""
         values_clause = f"""
 VALUES

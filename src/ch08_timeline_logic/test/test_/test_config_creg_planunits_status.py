@@ -1,13 +1,7 @@
 from datetime import datetime
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import (
-    day_str,
-    days_str,
-    time_str,
-    week_str,
-    weeks_str,
-)
+from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     creg_weekday_planunits,
@@ -22,9 +16,9 @@ from src.ch08_timeline_logic.timeline_main import get_year_rope
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_beliefunit.make_rope(creg_rope, day_str())
+    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     # creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     # day_plan = sue_beliefunit.get_plan_obj(day_rope)
@@ -46,9 +40,9 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario0():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario1():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_beliefunit.make_rope(creg_rope, day_str())
+    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     # creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     # day_plan = sue_beliefunit.get_plan_obj(day_rope)
@@ -80,9 +74,9 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario1():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario2():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    day_rope = sue_beliefunit.make_rope(creg_rope, day_str())
+    day_rope = sue_beliefunit.make_rope(creg_rope, wx.day)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     # creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     # day_plan = sue_beliefunit.get_plan_obj(day_rope)
@@ -113,9 +107,9 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_day_plan_Scenario2():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_days_plan_Scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    days_rope = sue_beliefunit.make_rope(creg_rope, days_str())
+    days_rope = sue_beliefunit.make_rope(creg_rope, wx.days)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     # creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     # days_plan = sue_beliefunit.get_plan_obj(days_rope)
@@ -149,9 +143,9 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_days_plan_Scenario0():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    week_rope = sue_beliefunit.make_rope(creg_rope, week_str())
+    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     # creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     # week_plan = sue_beliefunit.get_plan_obj(week_rope)
@@ -183,9 +177,9 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario0():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario1():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    week_rope = sue_beliefunit.make_rope(creg_rope, week_str())
+    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     # creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     # week_plan = sue_beliefunit.get_plan_obj(week_rope)
@@ -216,9 +210,9 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_week_plan_Scenario1():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_weeks_plan_Scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
-    weeks_rope = sue_beliefunit.make_rope(creg_rope, weeks_str())
+    weeks_rope = sue_beliefunit.make_rope(creg_rope, wx.weeks)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
     creg_plan = sue_beliefunit.get_plan_obj(creg_rope)
     print(f"{creg_plan.begin=} {creg_plan.close=}")
@@ -250,7 +244,7 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_weeks_plan_Scenario0():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario0():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
     year_rope = get_year_rope(sue_beliefunit, creg_rope)
     sue_beliefunit = add_time_creg_planunit(sue_beliefunit)
@@ -292,7 +286,7 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario0():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario1():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
     year_rope = get_year_rope(sue_beliefunit, creg_rope)
 
@@ -327,7 +321,7 @@ def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario1():
 def test_BeliefUnit_get_agenda_dict_ReturnsDictWith_year_plan_Scenario2():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
     year_rope = get_year_rope(sue_beliefunit, creg_rope)
 
@@ -387,10 +381,10 @@ def thu_gogo_want():
 def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_2000():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
     year_rope = get_year_rope(sue_beliefunit, creg_rope)
-    week_rope = sue_beliefunit.make_rope(creg_rope, week_str())
+    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     # sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
     # mon_rope = sue_beliefunit.make_rope(week_rope, get_mon())
     # tue_rope = sue_beliefunit.make_rope(week_rope, get_tue())
@@ -514,10 +508,10 @@ def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Wednesday_March1_
 def test_BeliefUnit_add_time_creg_planunit_SyncsWeekDayAndYear_Thursday_March2_2000():
     # ESTABLISH
     sue_beliefunit = beliefunit_shop("Sue")
-    time_rope = sue_beliefunit.make_l1_rope(time_str())
+    time_rope = sue_beliefunit.make_l1_rope(wx.time)
     creg_rope = sue_beliefunit.make_rope(time_rope, get_cregtime_str())
     year_rope = get_year_rope(sue_beliefunit, creg_rope)
-    week_rope = sue_beliefunit.make_rope(creg_rope, week_str())
+    week_rope = sue_beliefunit.make_rope(creg_rope, wx.week)
     # sun_rope = sue_beliefunit.make_rope(week_rope, get_sun())
     # mon_rope = sue_beliefunit.make_rope(week_rope, get_mon())
     # tue_rope = sue_beliefunit.make_rope(week_rope, get_tue())

@@ -9,15 +9,7 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
 )
 from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
-from src.ch12_hub_toolbox._ref.ch12_keywords import (
-    INSERT_str,
-    belief_plan_factunit_str,
-    belief_planunit_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_upper_str,
-    plan_rope_str,
-)
+from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords as wx
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 
@@ -33,12 +25,12 @@ def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAt
     knee_rope = create_rope(moment_label, knee_str)
     knee_fact_lower = 7
     knee_fact_upper = 23
-    x_dimen = belief_plan_factunit_str()
-    insert_factunit_beliefatom = beliefatom_shop(x_dimen, INSERT_str())
-    insert_factunit_beliefatom.set_jkey(plan_rope_str(), ball_rope)
-    insert_factunit_beliefatom.set_jkey(fact_context_str(), knee_rope)
-    insert_factunit_beliefatom.set_jvalue(fact_lower_str(), knee_fact_lower)
-    insert_factunit_beliefatom.set_jvalue(fact_upper_str(), knee_fact_upper)
+    x_dimen = wx.belief_plan_factunit
+    insert_factunit_beliefatom = beliefatom_shop(x_dimen, wx.INSERT)
+    insert_factunit_beliefatom.set_jkey(wx.plan_rope, ball_rope)
+    insert_factunit_beliefatom.set_jkey(wx.fact_context, knee_rope)
+    insert_factunit_beliefatom.set_jvalue(wx.fact_lower, knee_fact_lower)
+    insert_factunit_beliefatom.set_jvalue(wx.fact_upper, knee_fact_upper)
     return insert_factunit_beliefatom
 
 

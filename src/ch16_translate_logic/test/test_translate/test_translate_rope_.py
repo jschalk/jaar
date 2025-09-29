@@ -1,13 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None, to_rope
-from src.ch16_translate_logic._ref.ch16_keywords import (
-    event_int_str,
-    face_name_str,
-    inx_knot_str,
-    otx2inx_str,
-    otx_knot_str,
-    unknown_str_str,
-)
+from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     RopeMap,
     get_ropemap_from_dict,
@@ -470,12 +463,12 @@ def test_RopeMap_get_json_ReturnsObj():
     slash_otx_knot = "/"
     x_ropemap = ropemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_json = f"""{{
-  "{event_int_str()}": 0,
-  "{face_name_str()}": "{sue_str}",
-  "{inx_knot_str()}": "{x_ropemap.inx_knot}",
-  "{otx2inx_str()}": {{}},
-  "{otx_knot_str()}": "{x_ropemap.otx_knot}",
-  "{unknown_str_str()}": "{x_ropemap.unknown_str}"
+  "{wx.event_int}": 0,
+  "{wx.face_name}": "{sue_str}",
+  "{wx.inx_knot}": "{x_ropemap.inx_knot}",
+  "{wx.otx2inx}": {{}},
+  "{wx.otx_knot}": "{x_ropemap.otx_knot}",
+  "{wx.unknown_str}": "{x_ropemap.unknown_str}"
 }}"""
     print(f"           {x1_rope_map_json=}")
     print(f"{x_ropemap.get_json()=}")
@@ -487,14 +480,14 @@ def test_RopeMap_get_json_ReturnsObj():
     x_ropemap.event_int = event7
     # THEN
     x2_rope_map_json = f"""{{
-  "{event_int_str()}": {event7},
-  "{face_name_str()}": "{sue_str}",
-  "{inx_knot_str()}": "{x_ropemap.inx_knot}",
-  "{otx2inx_str()}": {{
+  "{wx.event_int}": {event7},
+  "{wx.face_name}": "{sue_str}",
+  "{wx.inx_knot}": "{x_ropemap.inx_knot}",
+  "{wx.otx2inx}": {{
     "{clean_otx}": "{clean_inx}"
   }},
-  "{otx_knot_str()}": "{x_ropemap.otx_knot}",
-  "{unknown_str_str()}": "{x_ropemap.unknown_str}"
+  "{wx.otx_knot}": "{x_ropemap.otx_knot}",
+  "{wx.unknown_str}": "{x_ropemap.unknown_str}"
 }}"""
     print(f"           {x2_rope_map_json=}")
     print(f"{x_ropemap.get_json()=}")

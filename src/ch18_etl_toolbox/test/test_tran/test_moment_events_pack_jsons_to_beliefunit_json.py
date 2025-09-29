@@ -7,13 +7,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    INSERT_str,
-    belief_voiceunit_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -45,17 +39,17 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     )
     a23_bob_e3_pack = packunit_shop(bob_inx, None, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, None, a23_str, event_int=event7)
-    blrpern_dimen = belief_voiceunit_str()
-    bob_jkeys = {voice_name_str(): bob_inx}
-    bob_jvalues = {voice_cred_points_str(): credit77, voice_debt_points_str(): None}
-    yao_jkeys = {voice_name_str(): yao_inx}
-    yao_jvalues = {voice_cred_points_str(): credit44, voice_debt_points_str(): None}
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
-    sue_jkeys = {voice_name_str(): sue_inx}
-    sue_jvalues = {voice_cred_points_str(): credit88, voice_debt_points_str(): None}
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
+    blrpern_dimen = wx.belief_voiceunit
+    bob_jkeys = {wx.voice_name: bob_inx}
+    bob_jvalues = {wx.voice_cred_points: credit77, wx.voice_debt_points: None}
+    yao_jkeys = {wx.voice_name: yao_inx}
+    yao_jvalues = {wx.voice_cred_points: credit44, wx.voice_debt_points: None}
+    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
+    sue_jkeys = {wx.voice_name: sue_inx}
+    sue_jvalues = {wx.voice_cred_points: credit88, wx.voice_debt_points: None}
+    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
     e3_all_pack_path = create_event_all_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event3
     )
@@ -111,17 +105,17 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     moment_mstr_dir = get_chapter_temp_dir()
     a23_bob_e3_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     a23_bob_e7_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
-    blrpern_dimen = belief_voiceunit_str()
-    bob_jkeys = {voice_name_str(): bob_inx}
-    bob_jvalues = {voice_cred_points_str(): credit77}
-    yao_jkeys = {voice_name_str(): yao_inx}
-    yao_jvalues = {voice_cred_points_str(): credit44}
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, INSERT_str(), yao_jkeys, yao_jvalues)
-    sue_jkeys = {voice_name_str(): sue_inx}
-    sue_jvalues = {voice_cred_points_str(): credit88}
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, INSERT_str(), sue_jkeys, sue_jvalues)
+    blrpern_dimen = wx.belief_voiceunit
+    bob_jkeys = {wx.voice_name: bob_inx}
+    bob_jvalues = {wx.voice_cred_points: credit77}
+    yao_jkeys = {wx.voice_name: yao_inx}
+    yao_jvalues = {wx.voice_cred_points: credit44}
+    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
+    sue_jkeys = {wx.voice_name: sue_inx}
+    sue_jvalues = {wx.voice_cred_points: credit88}
+    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
     a23_bob_e3_all_pack_path = create_event_all_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event3
     )
@@ -152,13 +146,13 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
     expected_e3_bob_pack.add_beliefatom(
-        blrpern_dimen, INSERT_str(), bob_jkeys, bob_jvalues
+        blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues
     )
     expected_e3_bob_pack.add_beliefatom(
-        blrpern_dimen, INSERT_str(), yao_jkeys, yao_jvalues
+        blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues
     )
     expected_e7_bob_pack.add_beliefatom(
-        blrpern_dimen, INSERT_str(), sue_jkeys, sue_jvalues
+        blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues
     )
     assert expected_e3_bob_pack == a23_bob_e3_pack
     assert expected_e7_bob_pack._beliefdelta != a23_bob_e7_pack._beliefdelta

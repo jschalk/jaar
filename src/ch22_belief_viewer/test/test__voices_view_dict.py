@@ -1,24 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch22_belief_viewer._ref.ch22_keywords import (
-    credor_pool_str,
-    debtor_pool_str,
-    fund_agenda_give_str,
-    fund_agenda_ratio_give_str,
-    fund_agenda_ratio_take_str,
-    fund_agenda_take_str,
-    fund_give_str,
-    fund_take_str,
-    group_cred_points_str,
-    group_debt_points_str,
-    group_title_str,
-    inallocable_voice_debt_points_str,
-    irrational_voice_debt_points_str,
-    memberships_str,
-    readable_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
+from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
 from src.ch22_belief_viewer.belief_viewer_tool import (
     add_small_dot,
     get_voices_view_dict,
@@ -39,7 +20,7 @@ def test_get_voices_view_dict_ReturnsObj_Scenario0_Empty():
 
 
 def add_readable(str: str) -> str:
-    return f"{str}_{readable_str()}"
+    return f"{str}_{wx.readable}"
 
 
 def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
@@ -62,39 +43,39 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     # THEN
     assert set(voices_view_dict.keys()) == {yao_str, bob_str}
     yao_voice_dict = voices_view_dict.get(yao_str)
-    voice_cred_points_readable_key = add_readable(voice_cred_points_str())
-    voice_debt_points_readable_key = add_readable(voice_debt_points_str())
-    memberships_readable_key = add_readable(memberships_str())
-    credor_pool_readable_key = add_readable(credor_pool_str())
-    debtor_pool_readable_key = add_readable(debtor_pool_str())
+    voice_cred_points_readable_key = add_readable(wx.voice_cred_points)
+    voice_debt_points_readable_key = add_readable(wx.voice_debt_points)
+    memberships_readable_key = add_readable(wx.memberships)
+    credor_pool_readable_key = add_readable(wx.credor_pool)
+    debtor_pool_readable_key = add_readable(wx.debtor_pool)
     irrational_voice_debt_points_readable_key = add_readable(
-        irrational_voice_debt_points_str()
+        wx.irrational_voice_debt_points
     )
     inallocable_voice_debt_points_readable_key = add_readable(
-        inallocable_voice_debt_points_str()
+        wx.inallocable_voice_debt_points
     )
-    fund_give_readable_key = add_readable(fund_give_str())
-    fund_take_readable_key = add_readable(fund_take_str())
-    fund_agenda_give_readable_key = add_readable(fund_agenda_give_str())
-    fund_agenda_take_readable_key = add_readable(fund_agenda_take_str())
-    fund_agenda_ratio_give_readable_key = add_readable(fund_agenda_ratio_give_str())
-    fund_agenda_ratio_take_readable_key = add_readable(fund_agenda_ratio_take_str())
+    fund_give_readable_key = add_readable(wx.fund_give)
+    fund_take_readable_key = add_readable(wx.fund_take)
+    fund_agenda_give_readable_key = add_readable(wx.fund_agenda_give)
+    fund_agenda_take_readable_key = add_readable(wx.fund_agenda_take)
+    fund_agenda_ratio_give_readable_key = add_readable(wx.fund_agenda_ratio_give)
+    fund_agenda_ratio_take_readable_key = add_readable(wx.fund_agenda_ratio_take)
 
     assert set(yao_voice_dict.keys()) == {
-        voice_name_str(),
-        voice_cred_points_str(),
-        voice_debt_points_str(),
-        memberships_str(),
-        credor_pool_str(),
-        debtor_pool_str(),
-        irrational_voice_debt_points_str(),
-        inallocable_voice_debt_points_str(),
-        fund_give_str(),
-        fund_take_str(),
-        fund_agenda_give_str(),
-        fund_agenda_take_str(),
-        fund_agenda_ratio_give_str(),
-        fund_agenda_ratio_take_str(),
+        wx.voice_name,
+        wx.voice_cred_points,
+        wx.voice_debt_points,
+        wx.memberships,
+        wx.credor_pool,
+        wx.debtor_pool,
+        wx.irrational_voice_debt_points,
+        wx.inallocable_voice_debt_points,
+        wx.fund_give,
+        wx.fund_take,
+        wx.fund_agenda_give,
+        wx.fund_agenda_take,
+        wx.fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take,
         voice_cred_points_readable_key,
         voice_debt_points_readable_key,
         memberships_readable_key,
@@ -111,23 +92,23 @@ def test_get_voices_view_dict_ReturnsObj_Scenario1_voices():
     }
     ypu = sue_believer.get_voice(yao_str)
     yp_dict = yao_voice_dict
-    assert ypu.voice_name == yp_dict.get(voice_name_str())
-    assert ypu.voice_cred_points == yp_dict.get(voice_cred_points_str())
-    assert ypu.voice_debt_points == yp_dict.get(voice_debt_points_str())
-    assert ypu.credor_pool == yp_dict.get(credor_pool_str())
-    assert ypu.debtor_pool == yp_dict.get(debtor_pool_str())
+    assert ypu.voice_name == yp_dict.get(wx.voice_name)
+    assert ypu.voice_cred_points == yp_dict.get(wx.voice_cred_points)
+    assert ypu.voice_debt_points == yp_dict.get(wx.voice_debt_points)
+    assert ypu.credor_pool == yp_dict.get(wx.credor_pool)
+    assert ypu.debtor_pool == yp_dict.get(wx.debtor_pool)
     assert ypu.irrational_voice_debt_points == yp_dict.get(
-        irrational_voice_debt_points_str()
+        wx.irrational_voice_debt_points
     )
     assert ypu.inallocable_voice_debt_points == yp_dict.get(
-        inallocable_voice_debt_points_str()
+        wx.inallocable_voice_debt_points
     )
-    assert ypu.fund_give == yp_dict.get(fund_give_str())
-    assert ypu.fund_take == yp_dict.get(fund_take_str())
-    assert ypu.fund_agenda_give == yp_dict.get(fund_agenda_give_str())
-    assert ypu.fund_agenda_take == yp_dict.get(fund_agenda_take_str())
-    assert ypu.fund_agenda_ratio_give == yp_dict.get(fund_agenda_ratio_give_str())
-    assert ypu.fund_agenda_ratio_take == yp_dict.get(fund_agenda_ratio_take_str())
+    assert ypu.fund_give == yp_dict.get(wx.fund_give)
+    assert ypu.fund_take == yp_dict.get(wx.fund_take)
+    assert ypu.fund_agenda_give == yp_dict.get(wx.fund_agenda_give)
+    assert ypu.fund_agenda_take == yp_dict.get(wx.fund_agenda_take)
+    assert ypu.fund_agenda_ratio_give == yp_dict.get(wx.fund_agenda_ratio_give)
+    assert ypu.fund_agenda_ratio_take == yp_dict.get(wx.fund_agenda_ratio_take)
 
     expected_voice_cred_points_readable = f"voice_cred_points: {ypu.voice_cred_points}"
     expected_voice_debt_points_readable = f"voice_debt_points: {ypu.voice_debt_points}"
@@ -207,35 +188,35 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     # THEN
     assert set(voices_view_dict.keys()) == {yao_str}
     yao_voice_dict = voices_view_dict.get(yao_str)
-    assert memberships_str() in set(yao_voice_dict.keys())
-    yao_memberships_dict = yao_voice_dict.get(memberships_str())
+    assert wx.memberships in set(yao_voice_dict.keys())
+    yao_memberships_dict = yao_voice_dict.get(wx.memberships)
     assert {swim_str, yao_str} == set(yao_memberships_dict.keys())
     yao_swim_dict = yao_memberships_dict.get(swim_str)
 
-    group_title_readable_key = add_readable(group_title_str())
-    group_cred_points_readable_key = add_readable(group_cred_points_str())
-    group_debt_points_readable_key = add_readable(group_debt_points_str())
-    credor_pool_readable_key = add_readable(credor_pool_str())
-    debtor_pool_readable_key = add_readable(debtor_pool_str())
-    fund_agenda_give_readable_key = add_readable(fund_agenda_give_str())
-    fund_agenda_ratio_give_readable_key = add_readable(fund_agenda_ratio_give_str())
-    fund_agenda_ratio_take_readable_key = add_readable(fund_agenda_ratio_take_str())
-    fund_agenda_take_readable_key = add_readable(fund_agenda_take_str())
-    fund_give_readable_key = add_readable(fund_give_str())
-    fund_take_readable_key = add_readable(fund_take_str())
+    group_title_readable_key = add_readable(wx.group_title)
+    group_cred_points_readable_key = add_readable(wx.group_cred_points)
+    group_debt_points_readable_key = add_readable(wx.group_debt_points)
+    credor_pool_readable_key = add_readable(wx.credor_pool)
+    debtor_pool_readable_key = add_readable(wx.debtor_pool)
+    fund_agenda_give_readable_key = add_readable(wx.fund_agenda_give)
+    fund_agenda_ratio_give_readable_key = add_readable(wx.fund_agenda_ratio_give)
+    fund_agenda_ratio_take_readable_key = add_readable(wx.fund_agenda_ratio_take)
+    fund_agenda_take_readable_key = add_readable(wx.fund_agenda_take)
+    fund_give_readable_key = add_readable(wx.fund_give)
+    fund_take_readable_key = add_readable(wx.fund_take)
     assert set(yao_swim_dict.keys()) == {
-        voice_name_str(),
-        group_title_str(),
-        group_cred_points_str(),
-        group_debt_points_str(),
-        credor_pool_str(),
-        debtor_pool_str(),
-        fund_agenda_give_str(),
-        fund_agenda_ratio_give_str(),
-        fund_agenda_ratio_take_str(),
-        fund_agenda_take_str(),
-        fund_give_str(),
-        fund_take_str(),
+        wx.voice_name,
+        wx.group_title,
+        wx.group_cred_points,
+        wx.group_debt_points,
+        wx.credor_pool,
+        wx.debtor_pool,
+        wx.fund_agenda_give,
+        wx.fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take,
+        wx.fund_agenda_take,
+        wx.fund_give,
+        wx.fund_take,
         group_title_readable_key,
         group_cred_points_readable_key,
         group_debt_points_readable_key,
@@ -250,29 +231,29 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     }
     yao_swim_mu = yao_voiceunit.get_membership(swim_str)
 
-    expected_group_title_readable = f"{group_title_str()}: {yao_swim_mu.group_title}"
+    expected_group_title_readable = f"{wx.group_title}: {yao_swim_mu.group_title}"
     expected_group_cred_points_readable = (
-        f"{group_cred_points_str()}: {yao_swim_mu.group_cred_points}"
+        f"{wx.group_cred_points}: {yao_swim_mu.group_cred_points}"
     )
     expected_group_debt_points_readable = (
-        f"{group_debt_points_str()}: {yao_swim_mu.group_debt_points}"
+        f"{wx.group_debt_points}: {yao_swim_mu.group_debt_points}"
     )
-    expected_credor_pool_readable = f"{credor_pool_str()}: {yao_swim_mu.credor_pool}"
-    expected_debtor_pool_readable = f"{debtor_pool_str()}: {yao_swim_mu.debtor_pool}"
+    expected_credor_pool_readable = f"{wx.credor_pool}: {yao_swim_mu.credor_pool}"
+    expected_debtor_pool_readable = f"{wx.debtor_pool}: {yao_swim_mu.debtor_pool}"
     expected_fund_agenda_give_readable = (
-        f"{fund_agenda_give_str()}: {yao_swim_mu.fund_agenda_give}"
+        f"{wx.fund_agenda_give}: {yao_swim_mu.fund_agenda_give}"
     )
     expected_fund_agenda_ratio_give_readable = (
-        f"{fund_agenda_ratio_give_str()}: {yao_swim_mu.fund_agenda_ratio_give}"
+        f"{wx.fund_agenda_ratio_give}: {yao_swim_mu.fund_agenda_ratio_give}"
     )
     expected_fund_agenda_ratio_take_readable = (
-        f"{fund_agenda_ratio_take_str()}: {yao_swim_mu.fund_agenda_ratio_take}"
+        f"{wx.fund_agenda_ratio_take}: {yao_swim_mu.fund_agenda_ratio_take}"
     )
     expected_fund_agenda_take_readable = (
-        f"{fund_agenda_take_str()}: {yao_swim_mu.fund_agenda_take}"
+        f"{wx.fund_agenda_take}: {yao_swim_mu.fund_agenda_take}"
     )
-    expected_fund_give_readable = f"{fund_give_str()}: {yao_swim_mu.fund_give}"
-    expected_fund_take_readable = f"{fund_take_str()}: {yao_swim_mu.fund_take}"
+    expected_fund_give_readable = f"{wx.fund_give}: {yao_swim_mu.fund_give}"
+    expected_fund_take_readable = f"{wx.fund_take}: {yao_swim_mu.fund_take}"
 
     expected_group_title_readable = add_small_dot(expected_group_title_readable)
     expected_group_cred_points_readable = add_small_dot(
@@ -298,24 +279,24 @@ def test_get_voices_view_dict_ReturnsObj_Scenario2_memberships():
     expected_fund_give_readable = add_small_dot(expected_fund_give_readable)
     expected_fund_take_readable = add_small_dot(expected_fund_take_readable)
 
-    assert yao_swim_dict.get(voice_name_str()) == yao_swim_mu.voice_name
-    assert yao_swim_dict.get(group_title_str()) == yao_swim_mu.group_title
-    assert yao_swim_dict.get(group_cred_points_str()) == yao_swim_mu.group_cred_points
-    assert yao_swim_dict.get(group_debt_points_str()) == yao_swim_mu.group_debt_points
-    assert yao_swim_dict.get(credor_pool_str()) == yao_swim_mu.credor_pool
-    assert yao_swim_dict.get(debtor_pool_str()) == yao_swim_mu.debtor_pool
-    assert yao_swim_dict.get(fund_agenda_give_str()) == yao_swim_mu.fund_agenda_give
+    assert yao_swim_dict.get(wx.voice_name) == yao_swim_mu.voice_name
+    assert yao_swim_dict.get(wx.group_title) == yao_swim_mu.group_title
+    assert yao_swim_dict.get(wx.group_cred_points) == yao_swim_mu.group_cred_points
+    assert yao_swim_dict.get(wx.group_debt_points) == yao_swim_mu.group_debt_points
+    assert yao_swim_dict.get(wx.credor_pool) == yao_swim_mu.credor_pool
+    assert yao_swim_dict.get(wx.debtor_pool) == yao_swim_mu.debtor_pool
+    assert yao_swim_dict.get(wx.fund_agenda_give) == yao_swim_mu.fund_agenda_give
     assert (
-        yao_swim_dict.get(fund_agenda_ratio_give_str())
+        yao_swim_dict.get(wx.fund_agenda_ratio_give)
         == yao_swim_mu.fund_agenda_ratio_give
     )
     assert (
-        yao_swim_dict.get(fund_agenda_ratio_take_str())
+        yao_swim_dict.get(wx.fund_agenda_ratio_take)
         == yao_swim_mu.fund_agenda_ratio_take
     )
-    assert yao_swim_dict.get(fund_agenda_take_str()) == yao_swim_mu.fund_agenda_take
-    assert yao_swim_dict.get(fund_give_str()) == yao_swim_mu.fund_give
-    assert yao_swim_dict.get(fund_take_str()) == yao_swim_mu.fund_take
+    assert yao_swim_dict.get(wx.fund_agenda_take) == yao_swim_mu.fund_agenda_take
+    assert yao_swim_dict.get(wx.fund_give) == yao_swim_mu.fund_give
+    assert yao_swim_dict.get(wx.fund_take) == yao_swim_mu.fund_take
     assert yao_swim_dict.get(group_title_readable_key) == expected_group_title_readable
     assert (
         yao_swim_dict.get(group_cred_points_readable_key)

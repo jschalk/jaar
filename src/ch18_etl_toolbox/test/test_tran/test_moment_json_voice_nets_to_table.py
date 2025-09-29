@@ -4,10 +4,7 @@ from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch11_bud_logic.bud import tranbook_shop
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_net_amount_str,
-    moment_voice_nets_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -39,7 +36,7 @@ def test_insert_tranunit_voices_net_PopulatesDatabase():
     a23_tranbook.add_tranunit(yao_str, yao_str, t77_tran_time, t77_yao_amount)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        moment_voice_nets_tablename = moment_voice_nets_str()
+        moment_voice_nets_tablename = wx.moment_voice_nets
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 0
 
@@ -48,7 +45,7 @@ def test_insert_tranunit_voices_net_PopulatesDatabase():
 
         # THEN
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        select_sqlstr = f"SELECT moment_label, belief_name, {belief_net_amount_str()} FROM {moment_voice_nets_tablename}"
+        select_sqlstr = f"SELECT moment_label, belief_name, {wx.belief_net_amount} FROM {moment_voice_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [
@@ -83,7 +80,7 @@ def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        moment_voice_nets_tablename = moment_voice_nets_str()
+        moment_voice_nets_tablename = wx.moment_voice_nets
         assert not db_table_exists(cursor, moment_voice_nets_tablename)
 
         # WHEN
@@ -91,7 +88,7 @@ def test_etl_moment_json_voice_nets_to_moment_voice_nets_table_PopulatesDatabase
 
         # THEN
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        select_sqlstr = f"SELECT moment_label, belief_name, {belief_net_amount_str()} FROM {moment_voice_nets_tablename}"
+        select_sqlstr = f"SELECT moment_label, belief_name, {wx.belief_net_amount} FROM {moment_voice_nets_tablename}"
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         assert rows == [

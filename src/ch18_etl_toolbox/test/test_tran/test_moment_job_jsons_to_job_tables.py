@@ -2,14 +2,14 @@ from os.path import exists as os_path_exists
 from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch01_data_toolbox.file_toolbox import save_file
-from src.ch04_group_logic.group import awardunit_shop
-from src.ch04_group_logic.labor import laborunit_shop
+from src.ch04_voice_logic.group import awardunit_shop
+from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch12_hub_toolbox.ch12_path import create_job_path, create_moment_json_path
 from src.ch12_hub_toolbox.hub_tool import save_job_file
 from src.ch15_moment_logic.moment_main import momentunit_shop
-from src.ch18_etl_toolbox._ref.ch18_keywords import job_str
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -54,17 +54,17 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario0(
 
     with sqlite3_connect(":memory:") as conn:
         cursor = conn.cursor()
-        blrmemb_job_table = prime_table("blrmemb", job_str(), None)
-        blrpern_job_table = prime_table("blrpern", job_str(), None)
-        blrgrou_job_table = prime_table("blrgrou", job_str(), None)
-        blrawar_job_table = prime_table("blrawar", job_str(), None)
-        blrfact_job_table = prime_table("blrfact", job_str(), None)
-        blrheal_job_table = prime_table("blrheal", job_str(), None)
-        blrprem_job_table = prime_table("blrprem", job_str(), None)
-        blrreas_job_table = prime_table("blrreas", job_str(), None)
-        blrlabo_job_table = prime_table("blrlabo", job_str(), None)
-        blrplan_job_table = prime_table("blrplan", job_str(), None)
-        blrunit_job_table = prime_table("beliefunit", job_str(), None)
+        blrmemb_job_table = prime_table("blrmemb", wx.job, None)
+        blrpern_job_table = prime_table("blrpern", wx.job, None)
+        blrgrou_job_table = prime_table("blrgrou", wx.job, None)
+        blrawar_job_table = prime_table("blrawar", wx.job, None)
+        blrfact_job_table = prime_table("blrfact", wx.job, None)
+        blrheal_job_table = prime_table("blrheal", wx.job, None)
+        blrprem_job_table = prime_table("blrprem", wx.job, None)
+        blrreas_job_table = prime_table("blrreas", wx.job, None)
+        blrlabo_job_table = prime_table("blrlabo", wx.job, None)
+        blrplan_job_table = prime_table("blrplan", wx.job, None)
+        blrunit_job_table = prime_table("beliefunit", wx.job, None)
         assert not db_table_exists(cursor, blrunit_job_table)
         assert not db_table_exists(cursor, blrplan_job_table)
         assert not db_table_exists(cursor, blrpern_job_table)
@@ -122,7 +122,7 @@ def test_etl_moment_job_jsons_to_job_tables_PopulatesTables_Scenario1(
     assert os_path_exists(a23_bob_job_path)
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        blrpern_job_tablename = prime_table("blrpern", job_str(), None)
+        blrpern_job_tablename = prime_table("blrpern", wx.job, None)
         assert not db_table_exists(cursor, blrpern_job_tablename)
 
         # WHEN

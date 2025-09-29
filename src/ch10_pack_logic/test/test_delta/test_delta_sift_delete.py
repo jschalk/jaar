@@ -1,13 +1,7 @@
 # from src.ch07_belief_logic.belief_tool import pass
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import (
-    DELETE_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    group_title_str,
-    voice_name_str,
-)
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import beliefdelta_shop, get_minimal_beliefdelta
 
 
@@ -22,12 +16,12 @@ def test_get_minimal_beliefdelta_ReturnsObjWithoutUnecessaryDELETE_belief_voiceu
     sue_belief.add_voiceunit(bob_str)
 
     voices_beliefdelta = beliefdelta_shop()
-    bob_atom = beliefatom_shop(belief_voiceunit_str(), DELETE_str())
-    bob_atom.set_arg(voice_name_str(), bob_str)
-    yao_atom = beliefatom_shop(belief_voiceunit_str(), DELETE_str())
-    yao_atom.set_arg(voice_name_str(), yao_str)
-    zia_atom = beliefatom_shop(belief_voiceunit_str(), DELETE_str())
-    zia_atom.set_arg(voice_name_str(), zia_str)
+    bob_atom = beliefatom_shop(wx.belief_voiceunit, wx.DELETE)
+    bob_atom.set_arg(wx.voice_name, bob_str)
+    yao_atom = beliefatom_shop(wx.belief_voiceunit, wx.DELETE)
+    yao_atom.set_arg(wx.voice_name, yao_str)
+    zia_atom = beliefatom_shop(wx.belief_voiceunit, wx.DELETE)
+    zia_atom.set_arg(wx.voice_name, zia_str)
     voices_beliefdelta.set_beliefatom(bob_atom)
     voices_beliefdelta.set_beliefatom(yao_atom)
     voices_beliefdelta.set_beliefatom(zia_atom)
@@ -59,15 +53,15 @@ def test_sift_ReturnsObjWithoutUnecessaryDELETE_belief_voice_membership():
     print(f"{yao_voiceunit.memberships.keys()=}")
 
     voices_beliefdelta = beliefdelta_shop()
-    bob_run_atom = beliefatom_shop(belief_voice_membership_str(), DELETE_str())
-    bob_run_atom.set_arg(voice_name_str(), bob_str)
-    bob_run_atom.set_arg(group_title_str(), run_str)
-    yao_run_atom = beliefatom_shop(belief_voice_membership_str(), DELETE_str())
-    yao_run_atom.set_arg(voice_name_str(), yao_str)
-    yao_run_atom.set_arg(group_title_str(), run_str)
-    zia_run_atom = beliefatom_shop(belief_voice_membership_str(), DELETE_str())
-    zia_run_atom.set_arg(voice_name_str(), zia_str)
-    zia_run_atom.set_arg(group_title_str(), run_str)
+    bob_run_atom = beliefatom_shop(wx.belief_voice_membership, wx.DELETE)
+    bob_run_atom.set_arg(wx.voice_name, bob_str)
+    bob_run_atom.set_arg(wx.group_title, run_str)
+    yao_run_atom = beliefatom_shop(wx.belief_voice_membership, wx.DELETE)
+    yao_run_atom.set_arg(wx.voice_name, yao_str)
+    yao_run_atom.set_arg(wx.group_title, run_str)
+    zia_run_atom = beliefatom_shop(wx.belief_voice_membership, wx.DELETE)
+    zia_run_atom.set_arg(wx.voice_name, zia_str)
+    zia_run_atom.set_arg(wx.group_title, run_str)
     voices_beliefdelta.set_beliefatom(bob_run_atom)
     voices_beliefdelta.set_beliefatom(yao_run_atom)
     voices_beliefdelta.set_beliefatom(zia_run_atom)

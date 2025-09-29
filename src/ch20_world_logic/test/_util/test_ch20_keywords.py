@@ -1,6 +1,12 @@
-from src.ch20_world_logic._ref.ch20_keywords import WorldName_str
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords
 
 
-def test_str_functions_ReturnsObj():
+def test_Ch20Keywords_AttributeNamesEqualValues():
+    """Test that all Ch20Keywords enum member names equal their values."""
     # ESTABLISH / WHEN / THEN
-    assert WorldName_str() == "WorldName"
+
+    for member in Ch20Keywords:
+        assertion_failure_str = (
+            f"Enum member name '{member.name}' does not match value '{member.value}'"
+        )
+        assert member.name == member.value, assertion_failure_str

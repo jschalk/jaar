@@ -1,20 +1,4 @@
-from src.ch06_plan_logic._ref.ch06_keywords import (
-    addin_str,
-    begin_str,
-    close_str,
-    denom_str,
-    gogo_want_str,
-    healerunit_str,
-    is_expanded_str,
-    laborunit_str,
-    morph_str,
-    numor_str,
-    pledge_str,
-    problem_bool_str,
-    star_str,
-    stop_want_str,
-    uid_str,
-)
+from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import PlanAttrHolder, planattrholder_shop
 
@@ -49,7 +33,7 @@ def test_PlanAttrHolder_Exists():
     assert new_obj.awardunit_del is None
     assert new_obj.is_expanded is None
     assert set(new_obj.__dict__.keys()) == {
-        star_str(),
+        wx.star,
         "uid",
         "reason",
         "reason_context",
@@ -60,22 +44,22 @@ def test_PlanAttrHolder_Exists():
         "reason_del_case_reason_context",
         "reason_del_case_reason_state",
         "reason_plan_active_requisite",
-        laborunit_str(),
-        healerunit_str(),
-        begin_str(),
-        close_str(),
-        addin_str(),
-        numor_str(),
-        denom_str(),
-        morph_str(),
-        pledge_str(),
+        wx.laborunit,
+        wx.healerunit,
+        wx.begin,
+        wx.close,
+        wx.addin,
+        wx.numor,
+        wx.denom,
+        wx.morph,
+        wx.pledge,
         "factunit",
         "awardunit",
         "awardunit_del",
         "is_expanded",
-        problem_bool_str(),
-        stop_want_str(),
-        gogo_want_str(),
+        wx.problem_bool,
+        wx.stop_want,
+        wx.gogo_want,
     }
 
 

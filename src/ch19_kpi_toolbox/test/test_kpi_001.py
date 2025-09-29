@@ -10,15 +10,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_MOMENT_VOICE_NETS_SQLSTR,
     create_prime_tablename,
 )
-from src.ch19_kpi_toolbox._ref.ch19_keywords import (
-    belief_name_str,
-    belief_net_amount_str,
-    moment_kpi001_voice_nets_str,
-    moment_label_str,
-    moment_voice_nets_str,
-    plan_rope_str,
-    pledge_str,
-)
+from src.ch19_kpi_toolbox._ref.ch19_keywords import Ch19Keywords as wx
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi001_table
 
 
@@ -34,15 +26,15 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario0_NoPledges():
         cursor = db_conn.cursor()
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()}) 
+        moment_voice_nets_tablename = wx.moment_voice_nets
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount}) 
 VALUES 
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
 """
         cursor.execute(insert_sqlstr)
         assert get_row_count(cursor, moment_voice_nets_tablename) == 2
-        moment_kpi001_voice_nets_tablename = moment_kpi001_voice_nets_str()
+        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN
@@ -50,8 +42,8 @@ VALUES
 
         # THEN
         assert get_table_columns(cursor, moment_kpi001_voice_nets_tablename) == [
-            moment_label_str(),
-            belief_name_str(),
+            wx.moment_label,
+            wx.belief_name,
             "funds",
             "fund_rank",
             "pledges_count",
@@ -59,8 +51,8 @@ VALUES
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename)
         select_sqlstr = f"""
         SELECT 
-  {moment_label_str()}
-, {belief_name_str()}
+  {wx.moment_label}
+, {wx.belief_name}
 , funds
 , fund_rank
 , pledges_count
@@ -87,8 +79,8 @@ def test_create_populate_kpi001_table_PopulatesTable_Scenario1_1pledge():
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
         cursor.execute(CREATE_MOMENT_VOICE_NETS_SQLSTR)
-        moment_voice_nets_tablename = moment_voice_nets_str()
-        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({moment_label_str()}, {belief_name_str()}, {belief_net_amount_str()})
+        moment_voice_nets_tablename = wx.moment_voice_nets
+        insert_sqlstr = f"""INSERT INTO {moment_voice_nets_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.belief_net_amount})
 VALUES
   ('{a23_str}', '{bob_str}', {bob_voice_net})
 , ('{a23_str}', '{yao_str}', {yao_voice_net})
@@ -99,11 +91,11 @@ VALUES
         cursor.execute(CREATE_JOB_BLRPLAN_SQLSTR)
         job_blrplan_tablename = create_prime_tablename("blrplan", "job", None)
         insert_sqlstr = f"""
-INSERT INTO {job_blrplan_tablename} ({moment_label_str()}, {belief_name_str()}, {plan_rope_str()}, {pledge_str()})
+INSERT INTO {job_blrplan_tablename} ({wx.moment_label}, {wx.belief_name}, {wx.plan_rope}, {wx.pledge})
 VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 """
         cursor.execute(insert_sqlstr)
-        moment_kpi001_voice_nets_tablename = moment_kpi001_voice_nets_str()
+        moment_kpi001_voice_nets_tablename = wx.moment_kpi001_voice_nets
         assert not db_table_exists(cursor, moment_kpi001_voice_nets_tablename)
 
         # WHEN
@@ -111,7 +103,7 @@ VALUES ('{a23_str}', '{bob_str}', '{casa_rope}', 1)
 
         # THEN
         assert get_row_count(cursor, moment_kpi001_voice_nets_tablename)
-        select_sqlstr = f"""SELECT {moment_label_str()}, {belief_name_str()}, funds, fund_rank, pledges_count FROM {moment_kpi001_voice_nets_tablename}"""
+        select_sqlstr = f"""SELECT {wx.moment_label}, {wx.belief_name}, funds, fund_rank, pledges_count FROM {moment_kpi001_voice_nets_tablename}"""
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         print(rows)

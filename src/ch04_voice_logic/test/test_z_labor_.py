@@ -1,11 +1,7 @@
-from src.ch04_group_logic._ref.ch04_keywords import (
-    parent_solo_str,
-    party_title_str,
-    solo_str,
-)
-from src.ch04_group_logic._ref.ch04_semantic_types import GroupTitle
-from src.ch04_group_logic.group import groupunit_shop, membership_shop
-from src.ch04_group_logic.labor import (
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
+from src.ch04_voice_logic._ref.ch04_semantic_types import GroupTitle
+from src.ch04_voice_logic.group import groupunit_shop, membership_shop
+from src.ch04_voice_logic.labor import (
     LaborHeir,
     LaborUnit,
     PartyHeir,
@@ -26,7 +22,7 @@ def test_PartyUnit_Exists():
     assert not x_partyunit.solo
     obj_attrs = set(x_partyunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {party_title_str(), solo_str()}
+    assert obj_attrs == {wx.party_title, wx.solo}
 
 
 def test_partyunit_shop_ReturnsObj_Scenario0_WithParameters():
@@ -64,7 +60,7 @@ def test_PartyHeir_Exists():
     assert not x_partyheir.parent_solo
     obj_attrs = set(x_partyheir.__dict__.keys())
     print(sorted(list(obj_attrs)))
-    assert obj_attrs == {party_title_str(), solo_str(), parent_solo_str()}
+    assert obj_attrs == {wx.party_title, wx.solo, wx.parent_solo}
 
 
 def test_partyheir_shop_ReturnsObj():

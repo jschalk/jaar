@@ -1,12 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch03_finance_logic.finance_config import default_fund_pool
-from src.ch11_bud_logic._ref.ch11_keywords import (
-    bud_time_str,
-    bud_voice_nets_str,
-    celldepth_str,
-    magnitude_str,
-    quota_str,
-)
+from src.ch11_bud_logic._ref.ch11_keywords import Ch11Keywords as wx
 from src.ch11_bud_logic.bud import (
     DEFAULT_CELLDEPTH,
     BudUnit,
@@ -142,7 +136,7 @@ def test_BudUnit_to_dict_ReturnsObj():
     t4_dict = t4_budunit.to_dict()
 
     # THEN
-    assert t4_dict == {bud_time_str(): t4_bud_time, quota_str(): t4_quota}
+    assert t4_dict == {wx.bud_time: t4_bud_time, wx.quota: t4_quota}
 
 
 def test_BudUnit_calc_magnitude_SetsAttr_Scenario0():
@@ -224,11 +218,11 @@ def test_BudUnit_to_dict_ReturnsObjWith_bud_voice_net():
 
     # THEN
     assert t4_dict == {
-        bud_time_str(): t4_bud_time,
-        quota_str(): t4_quota,
-        magnitude_str(): t4_magnitude,
-        bud_voice_nets_str(): t4_bud_voice_nets,
-        celldepth_str(): t4_celldepth,
+        wx.bud_time: t4_bud_time,
+        wx.quota: t4_quota,
+        wx.magnitude: t4_magnitude,
+        wx.bud_voice_nets: t4_bud_voice_nets,
+        wx.celldepth: t4_celldepth,
     }
 
 
@@ -266,7 +260,7 @@ def test_get_budunit_from_dict_ReturnsObj_Sccenario0():
     t4_quota = 55
     t4_budunit = budunit_shop(t4_bud_time, t4_quota)
     t4_dict = t4_budunit.to_dict()
-    assert t4_dict == {bud_time_str(): t4_bud_time, quota_str(): t4_quota}
+    assert t4_dict == {wx.bud_time: t4_bud_time, wx.quota: t4_quota}
 
     # WHEN
     x_budunit = get_budunit_from_dict(t4_dict)

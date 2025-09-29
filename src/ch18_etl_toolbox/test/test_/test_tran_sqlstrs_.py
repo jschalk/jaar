@@ -15,46 +15,7 @@ from src.ch17_idea_logic.idea_db_tool import (
     get_default_sorted_list,
     get_idea_into_dimen_raw_query,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    belief_groupunit_str,
-    belief_name_str,
-    belief_net_amount_str,
-    belief_plan_awardunit_str,
-    belief_plan_factunit_str,
-    belief_plan_healerunit_str,
-    belief_plan_partyunit_str,
-    belief_plan_reason_caseunit_str,
-    belief_plan_reasonunit_str,
-    belief_planunit_str,
-    belief_voice_membership_str,
-    belief_voiceunit_str,
-    beliefunit_str,
-    bud_time_str,
-    cumulative_minute_str,
-    error_message_str,
-    event_int_str,
-    face_name_str,
-    hour_label_str,
-    idea_category_str,
-    job_str,
-    moment_budunit_str,
-    moment_event_time_agg_str,
-    moment_label_str,
-    moment_ote1_agg_str,
-    moment_paybook_str,
-    moment_timeline_hour_str,
-    moment_timeline_month_str,
-    moment_timeline_weekday_str,
-    moment_timeoffi_str,
-    moment_voice_nets_str,
-    momentunit_str,
-    tran_time_str,
-    translate_core_str,
-    translate_label_str,
-    translate_name_str,
-    translate_rope_str,
-    translate_title_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     ALL_DIMEN_ABBV7,
     CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR,
@@ -80,29 +41,29 @@ def test_ALL_DIMEN_ABBV7_has_all_dimens():
 
 def test_create_prime_tablename_ReturnsObj():
     # ESTABLISH
-    blrunit_dimen = beliefunit_str()
-    blrpern_dimen = belief_voiceunit_str()
-    blrmemb_dimen = belief_voice_membership_str()
-    blrgrou_dimen = belief_groupunit_str()
-    blrplan_dimen = belief_planunit_str()
-    blrawar_dimen = belief_plan_awardunit_str()
-    blrreas_dimen = belief_plan_reasonunit_str()
-    blrprem_dimen = belief_plan_reason_caseunit_str()
-    blrlabo_dimen = belief_plan_partyunit_str()
-    blrheal_dimen = belief_plan_healerunit_str()
-    blrfact_dimen = belief_plan_factunit_str()
-    blfunit_dimen = momentunit_str()
-    blfpayy_dimen = moment_paybook_str()
-    blfbudd_dimen = moment_budunit_str()
-    blfhour_dimen = moment_timeline_hour_str()
-    blfmont_dimen = moment_timeline_month_str()
-    blfweek_dimen = moment_timeline_weekday_str()
-    blfoffi_dimen = moment_timeoffi_str()
-    trlname_dimen = translate_name_str()
-    trllabe_dimen = translate_label_str()
-    trlrope_dimen = translate_rope_str()
-    trltitl_dimen = translate_title_str()
-    trlcore_dimen = translate_core_str()
+    blrunit_dimen = wx.beliefunit
+    blrpern_dimen = wx.belief_voiceunit
+    blrmemb_dimen = wx.belief_voice_membership
+    blrgrou_dimen = wx.belief_groupunit
+    blrplan_dimen = wx.belief_planunit
+    blrawar_dimen = wx.belief_plan_awardunit
+    blrreas_dimen = wx.belief_plan_reasonunit
+    blrprem_dimen = wx.belief_plan_reason_caseunit
+    blrlabo_dimen = wx.belief_plan_partyunit
+    blrheal_dimen = wx.belief_plan_healerunit
+    blrfact_dimen = wx.belief_plan_factunit
+    blfunit_dimen = wx.momentunit
+    blfpayy_dimen = wx.moment_paybook
+    blfbudd_dimen = wx.moment_budunit
+    blfhour_dimen = wx.moment_timeline_hour
+    blfmont_dimen = wx.moment_timeline_month
+    blfweek_dimen = wx.moment_timeline_weekday
+    blfoffi_dimen = wx.moment_timeoffi
+    trlname_dimen = wx.translate_name
+    trllabe_dimen = wx.translate_label
+    trlrope_dimen = wx.translate_rope
+    trltitl_dimen = wx.translate_title
+    trlcore_dimen = wx.translate_core
     raw_str = "raw"
     agg_str = "agg"
     vld_str = "vld"
@@ -137,9 +98,9 @@ def test_create_prime_tablename_ReturnsObj():
     trltitl_s_val_table = create_prime_tablename("trltitl", "s", vld_str)
     trlcore_s_raw_table = create_prime_tablename("trlcore", "s", raw_str)
     trlcore_s_agg_table = create_prime_tablename("trlcore", "s", agg_str)
-    blrpern_job_table = create_prime_tablename("blrpern", job_str(), None)
+    blrpern_job_table = create_prime_tablename("blrpern", wx.job, None)
     x_blrpern_raw = create_prime_tablename("blrpern", "k", raw_str)
-    blrgrou_job_table = create_prime_tablename("blrgrou", job_str(), None)
+    blrgrou_job_table = create_prime_tablename("blrgrou", wx.job, None)
 
     # THEN
     assert blrunit_s_agg_table == f"{blrunit_dimen}_s_put_agg"
@@ -199,8 +160,8 @@ def test_get_idea_stageble_put_dimens_HasAll_idea_numbersForAll_dimens():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) != "translate"
-        # if dimen_config.get(idea_category_str()) == "moment"
+        if dimen_config.get(wx.idea_category) != "translate"
+        # if dimen_config.get(wx.idea_category) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
@@ -262,8 +223,8 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
     idea_config = {
         x_dimen: dimen_config
         for x_dimen, dimen_config in idea_config.items()
-        if dimen_config.get(idea_category_str()) != "translate"
-        # if dimen_config.get(idea_category_str()) == "moment"
+        if dimen_config.get(wx.idea_category) != "translate"
+        # if dimen_config.get(wx.idea_category) == "moment"
     }
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
@@ -323,11 +284,11 @@ def test_IDEA_STAGEBLE_DEL_DIMENS_HasAll_idea_numbersForAll_dimens():
 def test_CREATE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {moment_event_time_agg_str()} (
-  {moment_label_str()} TEXT
-, {event_int_str()} INTEGER
+CREATE TABLE IF NOT EXISTS {wx.moment_event_time_agg} (
+  {wx.moment_label} TEXT
+, {wx.event_int} INTEGER
 , agg_time INTEGER
-, {error_message_str()} TEXT
+, {wx.error_message} TEXT
 )
 ;
 """
@@ -338,18 +299,18 @@ CREATE TABLE IF NOT EXISTS {moment_event_time_agg_str()} (
 def test_INSERT_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_INSERT_sqlstr = f"""
-INSERT INTO {moment_event_time_agg_str()} ({moment_label_str()}, {event_int_str()}, agg_time)
-SELECT {moment_label_str()}, {event_int_str()}, agg_time
+INSERT INTO {wx.moment_event_time_agg} ({wx.moment_label}, {wx.event_int}, agg_time)
+SELECT {wx.moment_label}, {wx.event_int}, agg_time
 FROM (
-    SELECT {moment_label_str()}, {event_int_str()}, {tran_time_str()} as agg_time
+    SELECT {wx.moment_label}, {wx.event_int}, {wx.tran_time} as agg_time
     FROM moment_paybook_raw
-    GROUP BY {moment_label_str()}, {event_int_str()}, {tran_time_str()}
+    GROUP BY {wx.moment_label}, {wx.event_int}, {wx.tran_time}
     UNION 
-    SELECT {moment_label_str()}, {event_int_str()}, {bud_time_str()} as agg_time
+    SELECT {wx.moment_label}, {wx.event_int}, {wx.bud_time} as agg_time
     FROM moment_budunit_raw
-    GROUP BY {moment_label_str()}, {event_int_str()}, {bud_time_str()}
+    GROUP BY {wx.moment_label}, {wx.event_int}, {wx.bud_time}
 )
-ORDER BY {moment_label_str()}, {event_int_str()}, agg_time
+ORDER BY {wx.moment_label}, {wx.event_int}, agg_time
 ;
 """
     # WHEN / THEN
@@ -360,20 +321,20 @@ def test_UPDATE_ERROR_MESSAGE_MOMENT_EVENT_TIME_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_UPDATE_sqlstr = f"""
 WITH EventTimeOrdered AS (
-    SELECT {moment_label_str()}, {event_int_str()}, agg_time,
-           LAG(agg_time) OVER (PARTITION BY {moment_label_str()} ORDER BY {event_int_str()}) AS prev_agg_time
-    FROM {moment_event_time_agg_str()}
+    SELECT {wx.moment_label}, {wx.event_int}, agg_time,
+           LAG(agg_time) OVER (PARTITION BY {wx.moment_label} ORDER BY {wx.event_int}) AS prev_agg_time
+    FROM {wx.moment_event_time_agg}
 )
-UPDATE {moment_event_time_agg_str()}
-SET {error_message_str()} = CASE 
+UPDATE {wx.moment_event_time_agg}
+SET {wx.error_message} = CASE 
          WHEN EventTimeOrdered.prev_agg_time > EventTimeOrdered.agg_time
          THEN 'not sorted'
          ELSE 'sorted'
        END 
 FROM EventTimeOrdered
-WHERE EventTimeOrdered.{event_int_str()} = {moment_event_time_agg_str()}.{event_int_str()}
-    AND EventTimeOrdered.{moment_label_str()} = {moment_event_time_agg_str()}.{moment_label_str()}
-    AND EventTimeOrdered.agg_time = {moment_event_time_agg_str()}.agg_time
+WHERE EventTimeOrdered.{wx.event_int} = {wx.moment_event_time_agg}.{wx.event_int}
+    AND EventTimeOrdered.{wx.moment_label} = {wx.moment_event_time_agg}.{wx.moment_label}
+    AND EventTimeOrdered.agg_time = {wx.moment_event_time_agg}.agg_time
 ;
 """
     # WHEN / THEN
@@ -383,11 +344,11 @@ WHERE EventTimeOrdered.{event_int_str()} = {moment_event_time_agg_str()}.{event_
 def test_CREATE_MOMENT_OTE1_AGG_SQLSTR_Exists():
     # ESTABLISH
     expected_create_table_sqlstr = f"""
-CREATE TABLE IF NOT EXISTS {moment_ote1_agg_str()} (
-  {moment_label_str()} TEXT
-, {belief_name_str()} TEXT
-, {event_int_str()} INTEGER
-, {bud_time_str()} INTEGER
+CREATE TABLE IF NOT EXISTS {wx.moment_ote1_agg} (
+  {wx.moment_label} TEXT
+, {wx.belief_name} TEXT
+, {wx.event_int} INTEGER
+, {wx.bud_time} INTEGER
 , error_message TEXT
 )
 ;
@@ -400,20 +361,20 @@ CREATE TABLE IF NOT EXISTS {moment_ote1_agg_str()} (
 # TODO create test to prove this insert should never grab when error message is not null in source table
 def test_INSERT_MOMENT_OTE1_AGG_FROM_HEARD_SQLSTR_Exists():
     # ESTABLISH
-    momentbud_h_raw_tablename = create_prime_tablename(moment_budunit_str(), "h", "raw")
+    momentbud_h_raw_tablename = create_prime_tablename(wx.moment_budunit, "h", "raw")
     expected_INSERT_sqlstr = f"""
-INSERT INTO {moment_ote1_agg_str()} ({moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()})
-SELECT {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
+INSERT INTO {wx.moment_ote1_agg} ({wx.moment_label}, {wx.belief_name}, {wx.event_int}, {wx.bud_time})
+SELECT {wx.moment_label}, {wx.belief_name}, {wx.event_int}, {wx.bud_time}
 FROM (
     SELECT 
-      {moment_label_str()}_inx {moment_label_str()}
-    , {belief_name_str()}_inx {belief_name_str()}
-    , {event_int_str()}
-    , {bud_time_str()}
+      {wx.moment_label}_inx {wx.moment_label}
+    , {wx.belief_name}_inx {wx.belief_name}
+    , {wx.event_int}
+    , {wx.bud_time}
     FROM {momentbud_h_raw_tablename}
-    GROUP BY {moment_label_str()}_inx, {belief_name_str()}_inx, {event_int_str()}, {bud_time_str()}
+    GROUP BY {wx.moment_label}_inx, {wx.belief_name}_inx, {wx.event_int}, {wx.bud_time}
 )
-ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time_str()}
+ORDER BY {wx.moment_label}, {wx.belief_name}, {wx.event_int}, {wx.bud_time}
 ;
 """
     # WHEN / THEN
@@ -423,13 +384,13 @@ ORDER BY {moment_label_str()}, {belief_name_str()}, {event_int_str()}, {bud_time
 def test_CREATE_MOMENT_VOICE_NETS_SQLSTR_Exists():
     # ESTABLISH
     sqlite_types = get_idea_sqlite_types()
-    sqlite_types[belief_net_amount_str()] = "REAL"
+    sqlite_types[wx.belief_net_amount] = "REAL"
     expected_create_table_sqlstr = get_create_table_sqlstr(
-        tablename=moment_voice_nets_str(),
+        tablename=wx.moment_voice_nets,
         columns_list=[
-            moment_label_str(),
-            belief_name_str(),
-            belief_net_amount_str(),
+            wx.moment_label,
+            wx.belief_name,
+            wx.belief_net_amount,
         ],
         column_types=sqlite_types,
     )

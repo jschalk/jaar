@@ -10,8 +10,8 @@ from src.ch98_docs_builder.doc_builder import (
     save_brick_formats_md,
     save_chapter_blurbs_md,
     save_idea_brick_mds,
+    save_keywords_by_chapter_md,
     save_ropeterm_explanation_md,
-    save_str_funcs_md,
 )
 
 
@@ -28,7 +28,7 @@ def test_SpecialTestThatBuildsDocs():
     save_brick_formats_md(destination_dir)
     save_chapter_blurbs_md(destination_dir)
     save_ropeterm_explanation_md(destination_dir)
-    save_str_funcs_md(destination_dir)  # docs\str_funcs.md
+    save_keywords_by_chapter_md(destination_dir)  # docs\keywords_by_chapter.md
 
     # # resave json files so that they are ordered alphabetically
     # for chapter_dir in get_chapter_descs().values():

@@ -1,6 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch10_pack_logic._ref.ch10_keywords import belief_name_str, face_name_str
+from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.ch10_pack_logic.test._util.ch10_env import (
@@ -129,8 +129,8 @@ def test_PackUnit_save_pack_file_SavesCorrectFile(env_dir_setup_cleanup):
     pack_file_dict = open_json(sue_packs_dir, two_filename)
     print(f"{pack_file_dict=}")
     assert pack_file_dict.get("delta_atom_numbers") == []
-    assert pack_file_dict.get(belief_name_str()) == sue_str
-    assert pack_file_dict.get(face_name_str()) is None
+    assert pack_file_dict.get(wx.belief_name) == sue_str
+    assert pack_file_dict.get(wx.face_name) is None
     print(f"{pack_file_dict.keys()=}")
 
 

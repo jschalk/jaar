@@ -2,15 +2,7 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_keywords import (
-    belief_name_str,
-    event_int_str,
-    face_name_str,
-    gogo_want_str,
-    group_title_str,
-    moment_label_str,
-    voice_name_str,
-)
+from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_sqlite_types
 from src.ch17_idea_logic.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from src.ch17_idea_logic.test._util.ch17_env import env_dir_setup_cleanup
@@ -49,7 +41,7 @@ def setup_database_and_csv() -> tuple[sqlite3_Connection, str, str]:  # type: ig
     # Create a test CSV file
     with open(test_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{voice_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.group_title},{wx.gogo_want}\n"
         )
         csv_file.write("3,Sue,Amy43,Bob,Bob,;runners,6.5\n")
         csv_file.write("3,Sue,Amy43,Yao,Bob,;runners,7.5\n")
@@ -87,24 +79,24 @@ def test_create_idea_table_from_csv_ChangesDBState(
 
     # Expected column definitions
     expected_columns = [
-        (0, event_int_str(), "INTEGER", 0, None, 0),
-        (1, face_name_str(), "TEXT", 0, None, 0),
-        (2, moment_label_str(), "TEXT", 0, None, 0),
-        (3, belief_name_str(), "TEXT", 0, None, 0),
-        (4, voice_name_str(), "TEXT", 0, None, 0),
-        (5, group_title_str(), "TEXT", 0, None, 0),
-        (6, gogo_want_str(), "REAL", 0, None, 0),
+        (0, wx.event_int, "INTEGER", 0, None, 0),
+        (1, wx.face_name, "TEXT", 0, None, 0),
+        (2, wx.moment_label, "TEXT", 0, None, 0),
+        (3, wx.belief_name, "TEXT", 0, None, 0),
+        (4, wx.voice_name, "TEXT", 0, None, 0),
+        (5, wx.group_title, "TEXT", 0, None, 0),
+        (6, wx.gogo_want, "REAL", 0, None, 0),
     ]
     assert columns == expected_columns
     column_types = get_idea_sqlite_types()
     get_idea_sqlite_types_columns = [
-        (0, event_int_str(), column_types.get(event_int_str()), 0, None, 0),
-        (1, face_name_str(), column_types.get(face_name_str()), 0, None, 0),
-        (2, moment_label_str(), column_types.get(moment_label_str()), 0, None, 0),
-        (3, belief_name_str(), column_types.get(belief_name_str()), 0, None, 0),
-        (4, voice_name_str(), column_types.get(voice_name_str()), 0, None, 0),
-        (5, group_title_str(), column_types.get(group_title_str()), 0, None, 0),
-        (6, gogo_want_str(), column_types.get(gogo_want_str()), 0, None, 0),
+        (0, wx.event_int, column_types.get(wx.event_int), 0, None, 0),
+        (1, wx.face_name, column_types.get(wx.face_name), 0, None, 0),
+        (2, wx.moment_label, column_types.get(wx.moment_label), 0, None, 0),
+        (3, wx.belief_name, column_types.get(wx.belief_name), 0, None, 0),
+        (4, wx.voice_name, column_types.get(wx.voice_name), 0, None, 0),
+        (5, wx.group_title, column_types.get(wx.group_title), 0, None, 0),
+        (6, wx.gogo_want, column_types.get(wx.gogo_want), 0, None, 0),
     ]
     assert columns == get_idea_sqlite_types_columns
 
@@ -144,7 +136,7 @@ def test_insert_idea_csv_ChangesDBState_Inserts(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{voice_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.group_title},{wx.gogo_want}\n"
         )
         csv_file.write("7,Zia,Amy55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Amy43,Zia,Bob,;runners,11.1\n")
@@ -188,7 +180,7 @@ def test_insert_idea_csv_ChangesDBState_CanCreateTable(
     zia_csv_filepath = "zia_brXXXXX.csv"
     with open(zia_csv_filepath, "w", newline="", encoding="utf-8") as csv_file:
         csv_file.write(
-            f"{event_int_str()},{face_name_str()},{moment_label_str()},{belief_name_str()},{voice_name_str()},{group_title_str()},{gogo_want_str()}\n"
+            f"{wx.event_int},{wx.face_name},{wx.moment_label},{wx.belief_name},{wx.voice_name},{wx.group_title},{wx.gogo_want}\n"
         )
         csv_file.write("7,Zia,Amy55,Yao,Zia,;swimmers,10.2\n")
         csv_file.write("8,Zia,Amy43,Zia,Bob,;runners,11.1\n")

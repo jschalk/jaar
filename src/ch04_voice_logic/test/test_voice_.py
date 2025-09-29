@@ -1,25 +1,8 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_RespectBit_if_None
-from src.ch04_group_logic._ref.ch04_keywords import (
-    credor_pool_str,
-    debtor_pool_str,
-    fund_agenda_give_str,
-    fund_agenda_ratio_give_str,
-    fund_agenda_ratio_take_str,
-    fund_agenda_take_str,
-    fund_give_str,
-    fund_take_str,
-    inallocable_voice_debt_points_str,
-    irrational_voice_debt_points_str,
-    knot_str,
-    memberships_str,
-    respect_bit_str,
-    voice_cred_points_str,
-    voice_debt_points_str,
-    voice_name_str,
-)
-from src.ch04_group_logic.voice import VoiceUnit, voiceunit_shop
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
+from src.ch04_voice_logic.voice import VoiceUnit, voiceunit_shop
 
 
 def test_VoiceUnit_Exists():
@@ -51,22 +34,22 @@ def test_VoiceUnit_Exists():
     obj_attrs = set(bob_voiceunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        credor_pool_str(),
-        debtor_pool_str(),
-        fund_agenda_give_str(),
-        fund_agenda_ratio_give_str(),
-        fund_agenda_ratio_take_str(),
-        fund_agenda_take_str(),
-        fund_give_str(),
-        fund_take_str(),
-        inallocable_voice_debt_points_str(),
-        irrational_voice_debt_points_str(),
-        memberships_str(),
-        respect_bit_str(),
-        voice_name_str(),
-        knot_str(),
-        voice_cred_points_str(),
-        voice_debt_points_str(),
+        wx.credor_pool,
+        wx.debtor_pool,
+        wx.fund_agenda_give,
+        wx.fund_agenda_ratio_give,
+        wx.fund_agenda_ratio_take,
+        wx.fund_agenda_take,
+        wx.fund_give,
+        wx.fund_take,
+        wx.inallocable_voice_debt_points,
+        wx.irrational_voice_debt_points,
+        wx.memberships,
+        wx.respect_bit,
+        wx.voice_name,
+        wx.knot,
+        wx.voice_cred_points,
+        wx.voice_debt_points,
     }
 
 
@@ -92,7 +75,7 @@ def test_VoiceUnit_set_nameterm_RaisesErrorIfParameterContains_knot():
         voiceunit_shop(voice_name=texas_str, knot=slash_str)
     assert (
         str(excinfo.value)
-        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {knot_str()}: '{slash_str}'"
+        == f"'{texas_str}' needs to be a LabelTerm. Cannot contain {wx.knot}: '{slash_str}'"
     )
 
 

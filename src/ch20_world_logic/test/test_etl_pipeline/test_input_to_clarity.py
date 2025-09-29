@@ -20,30 +20,7 @@ from src.ch18_etl_toolbox.ch18_path import (
     create_moment_ote1_csv_path,
 )
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename as prime_tbl
-from src.ch20_world_logic._ref.ch20_keywords import (
-    amount_str,
-    belief_name_str,
-    bud_time_str,
-    celldepth_str,
-    creg_str,
-    cumulative_minute_str,
-    event_int_str,
-    events_brick_agg_str,
-    events_brick_valid_str,
-    face_name_str,
-    hour_label_str,
-    inx_name_str,
-    moment_event_time_agg_str,
-    moment_kpi001_voice_nets_str,
-    moment_label_str,
-    moment_ote1_agg_str,
-    moment_voice_nets_str,
-    otx_name_str,
-    quota_str,
-    time_str,
-    tran_time_str,
-    voice_name_str,
-)
+from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
@@ -64,13 +41,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        event_int_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
-        otx_name_str(),
-        inx_name_str(),
+        wx.face_name,
+        wx.event_int,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy23"
     br00113_str = "br00113"
@@ -81,7 +58,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
-    events_brick_valid_tablename = events_brick_valid_str()
+    events_brick_valid_tablename = wx.events_brick_valid
     trlname_sound_raw = prime_tbl("trlname", "s", "raw")
     trlname_sound_agg = prime_tbl("trlname", "s", "agg")
     trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -116,7 +93,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, br00113_raw)
         assert not db_table_exists(cursor, br00113_agg)
-        assert not db_table_exists(cursor, events_brick_agg_str())
+        assert not db_table_exists(cursor, wx.events_brick_agg)
         assert not db_table_exists(cursor, events_brick_valid_tablename)
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, trlname_sound_raw)
@@ -142,11 +119,11 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, moment_event_time_agg_str())
-        assert not db_table_exists(cursor, moment_ote1_agg_str())
+        assert not db_table_exists(cursor, wx.moment_event_time_agg)
+        assert not db_table_exists(cursor, wx.moment_ote1_agg)
         assert not db_table_exists(cursor, blrpern_job)
-        assert not db_table_exists(cursor, moment_voice_nets_str())
-        assert not db_table_exists(cursor, moment_kpi001_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_voice_nets)
+        assert not db_table_exists(cursor, wx.moment_kpi001_voice_nets)
         assert not os_path_exists(last_run_metrics_path)
 
         # # create beliefunits
@@ -172,7 +149,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
 
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, events_brick_agg_str()) == 1
+        assert get_row_count(cursor, wx.events_brick_agg) == 1
         assert get_row_count(cursor, events_brick_valid_tablename) == 1
         assert get_row_count(cursor, br00113_valid) == 1
         assert get_row_count(cursor, trlname_sound_raw) == 1
@@ -202,15 +179,15 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario0_br000113Populat
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
         sue_gut = open_gut_file(mstr_dir, a23_str, sue_inx)
-        time_rope = sue_gut.make_l1_rope(time_str())
-        creg_rope = sue_gut.make_rope(time_rope, creg_str())
+        time_rope = sue_gut.make_l1_rope(wx.time)
+        creg_rope = sue_gut.make_rope(time_rope, wx.creg)
         assert sue_gut.plan_exists(creg_rope)
         assert os_path_exists(a23_sue_job_path)
         assert get_row_count(cursor, blrpern_job) == 1
-        assert get_row_count(cursor, moment_voice_nets_str()) == 0
-        # assert get_row_count(cursor, moment_event_time_agg_str()) == 0
+        assert get_row_count(cursor, wx.moment_voice_nets) == 0
+        # assert get_row_count(cursor, wx.moment_event_time_agg) == 0
         # assert get_row_count(cursor, moment_ote1_agg_tablename) == 0
-        assert get_row_count(cursor, moment_kpi001_voice_nets_str()) == 0
+        assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 0
         assert os_path_exists(last_run_metrics_path)
 
 
@@ -227,13 +204,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        event_int_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
-        otx_name_str(),
-        inx_name_str(),
+        wx.face_name,
+        wx.event_int,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy23"
     tp37 = 37
@@ -244,13 +221,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        bud_time_str(),
-        quota_str(),
-        celldepth_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.bud_time,
+        wx.quota,
+        wx.celldepth,
     ]
     tp37 = 37
     sue_quota = 235
@@ -264,7 +241,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
     br00113_raw = f"{br00113_str}_brick_raw"
     br00113_agg = f"{br00113_str}_brick_agg"
     br00113_valid = f"{br00113_str}_brick_valid"
-    events_brick_valid_tablename = events_brick_valid_str()
+    events_brick_valid_tablename = wx.events_brick_valid
     trlname_sound_raw = prime_tbl("trlname", "s", "raw")
     trlname_sound_agg = prime_tbl("trlname", "s", "agg")
     trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -295,7 +272,7 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         cursor = db_conn.cursor()
         assert not db_table_exists(cursor, br00113_raw)
         assert not db_table_exists(cursor, br00113_agg)
-        assert not db_table_exists(cursor, events_brick_agg_str())
+        assert not db_table_exists(cursor, wx.events_brick_agg)
         assert not db_table_exists(cursor, events_brick_valid_tablename)
         assert not db_table_exists(cursor, br00113_valid)
         assert not db_table_exists(cursor, trlname_sound_raw)
@@ -319,10 +296,10 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert not os_path_exists(a23_e1_expressed_pack_path)
         assert not os_path_exists(a23_sue_gut_path)
         assert not os_path_exists(a23_sue_job_path)
-        assert not db_table_exists(cursor, moment_ote1_agg_str())
+        assert not db_table_exists(cursor, wx.moment_ote1_agg)
         assert not os_path_exists(sue37_mandate_path)
-        assert not db_table_exists(cursor, moment_voice_nets_str())
-        assert not db_table_exists(cursor, moment_kpi001_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_voice_nets)
+        assert not db_table_exists(cursor, wx.moment_kpi001_voice_nets)
         # self.moment_agg_tables_to_moment_ote1_agg(cursor)
 
         # # create beliefunits
@@ -337,8 +314,8 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         # THEN
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        print(cursor.execute(f"SELECT * FROM {events_brick_agg_str()}").fetchall())
-        assert get_row_count(cursor, events_brick_agg_str()) == 2
+        print(cursor.execute(f"SELECT * FROM {wx.events_brick_agg}").fetchall())
+        assert get_row_count(cursor, wx.events_brick_agg) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
@@ -364,11 +341,11 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario1_PopulateBudPayR
         assert os_path_exists(a23_e1_expressed_pack_path)
         assert os_path_exists(a23_sue_gut_path)
         assert os_path_exists(a23_sue_job_path)
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 1
         print(f"{sue37_mandate_path=}")
         assert os_path_exists(sue37_mandate_path)
-        assert get_row_count(cursor, moment_voice_nets_str()) == 1
-        assert get_row_count(cursor, moment_kpi001_voice_nets_str()) == 1
+        assert get_row_count(cursor, wx.moment_voice_nets) == 1
+        assert get_row_count(cursor, wx.moment_kpi001_voice_nets) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentTranBook(
@@ -384,13 +361,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00002_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
-        tran_time_str(),
-        amount_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
+        wx.tran_time,
+        wx.amount,
     ]
     a23_str = "amy23"
     br00002_str = "br00002"
@@ -403,13 +380,13 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario2_PopulateMomentT
 
     with sqlite3_connect(":memory:") as db_conn:
         cursor = db_conn.cursor()
-        assert not db_table_exists(cursor, moment_voice_nets_str())
+        assert not db_table_exists(cursor, wx.moment_voice_nets)
 
         # WHEN
         fay_world.sheets_input_to_clarity_with_cursor(cursor)
 
         # THEN
-        assert get_row_count(cursor, moment_voice_nets_str()) == 1
+        assert get_row_count(cursor, wx.moment_voice_nets) == 1
 
 
 def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIdeas_ote1_IsStillCreated(
@@ -424,11 +401,11 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario3_WhenNoMomentIde
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     amy23_str = "amy23"
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -492,20 +469,20 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00003_columns = [
-        event_int_str(),
-        face_name_str(),
-        cumulative_minute_str(),
-        moment_label_str(),
-        hour_label_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.cumulative_minute,
+        wx.moment_label,
+        wx.hour_label,
     ]
     br00001_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        bud_time_str(),
-        quota_str(),
-        celldepth_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.bud_time,
+        wx.quota,
+        wx.celldepth,
     ]
     amy23_str = "amy23"
     tp37 = 37
@@ -526,11 +503,11 @@ def test_WorldUnit_sheets_input_to_clarity_with_cursor_Scenario5_CreatesFiles(
     upsert_sheet(input_file_path, br00003_ex1_str, br00003_1df)
     upsert_sheet(input_file_path, br00003_ex3_str, br00003_3df)
     br00011_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
     ]
     br00011_rows = [[event2, sue_str, amy23_str, sue_str, sue_str]]
     br00011_df = DataFrame(br00011_rows, columns=br00011_columns)
@@ -577,13 +554,13 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     ex_filename = "Faybob.xlsx"
     input_file_path = create_path(fay_world._input_dir, ex_filename)
     br00113_columns = [
-        face_name_str(),
-        event_int_str(),
-        moment_label_str(),
-        belief_name_str(),
-        voice_name_str(),
-        otx_name_str(),
-        inx_name_str(),
+        wx.face_name,
+        wx.event_int,
+        wx.moment_label,
+        wx.belief_name,
+        wx.voice_name,
+        wx.otx_name,
+        wx.inx_name,
     ]
     a23_str = "amy23"
     tp37 = 37
@@ -594,13 +571,13 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
     upsert_sheet(input_file_path, br00113_ex0_str, br00113_df)
 
     br00001_columns = [
-        event_int_str(),
-        face_name_str(),
-        moment_label_str(),
-        belief_name_str(),
-        bud_time_str(),
-        quota_str(),
-        celldepth_str(),
+        wx.event_int,
+        wx.face_name,
+        wx.moment_label,
+        wx.belief_name,
+        wx.bud_time,
+        wx.quota,
+        wx.celldepth,
     ]
     tp37 = 37
     sue_quota = 235
@@ -621,7 +598,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         br00113_raw = f"{br00113_str}_brick_raw"
         br00113_agg = f"{br00113_str}_brick_agg"
         br00113_valid = f"{br00113_str}_brick_valid"
-        events_brick_valid_tablename = events_brick_valid_str()
+        events_brick_valid_tablename = wx.events_brick_valid
         trlname_sound_raw = prime_tbl("trlname", "s", "raw")
         trlname_sound_agg = prime_tbl("trlname", "s", "agg")
         trlname_sound_vld = prime_tbl("trlname", "s", "vld")
@@ -644,7 +621,7 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         cursor = db_conn.cursor()
         assert get_row_count(cursor, br00113_raw) == 1
         assert get_row_count(cursor, br00113_agg) == 1
-        assert get_row_count(cursor, events_brick_agg_str()) == 2
+        assert get_row_count(cursor, wx.events_brick_agg) == 2
         assert get_row_count(cursor, events_brick_valid_tablename) == 2
         assert get_row_count(cursor, br00113_valid) == 2
         assert get_row_count(cursor, trlname_sound_raw) == 2
@@ -665,5 +642,5 @@ def test_WorldUnit_sheets_input_to_clarity_mstr_Scenario0_CreatesDatabaseFile(
         assert get_row_count(cursor, momentunit_heard_agg) == 1
         assert get_row_count(cursor, blrunit_heard_put_agg) == 1
         assert get_row_count(cursor, blrpern_heard_put_agg) == 1
-        assert get_row_count(cursor, moment_ote1_agg_str()) == 1
+        assert get_row_count(cursor, wx.moment_ote1_agg) == 1
     db_conn.close()

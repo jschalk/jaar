@@ -10,14 +10,13 @@ from src.ch01_data_toolbox.file_toolbox import (
 from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_prefix,
     get_chapter_desc_str_number,
-    get_chapter_str_functions,
+    get_keywords_by_chapter,
     get_keywords_filename,
+    get_keywords_src_config,
 )
 from src.ch99_chapter_style.style import (
-    check_if_chapter_str_funcs_is_sorted,
-    check_import_objs_are_ordered,
-    check_str_func_test_file_has_needed_asserts,
-    check_str_funcs_are_not_duplicated,
+    check_if_chapter_keywords_by_chapter_is_sorted,
+    check_keywords_by_chapter_are_not_duplicated,
     get_chapter_descs,
     get_function_names_from_file,
     get_imports_from_file,
@@ -99,45 +98,53 @@ def path_contains_subpath(full_path: str, sub_path: str):
         return False
 
 
-def test_Chapters_util_AssertsExistForEverytermFunction():
+def test_Chapters_ChXXKeywords_ClassesAreTested():
     """
     Test that all string-related functions in each chapter directory are asserted and tested.
     This test performs the following checks for each chapter:
     - Retrieves all string functions and ensures they are sorted and not duplicated.
     - Verifies that if string functions exist, a corresponding test file exists in the chapter's utility directory.
     - Checks that the test file imports exactly one object and that imports are ordered.
-    - Ensures the test file contains a single test function named 'test_str_functions_ReturnsObj'.
+    - Ensures the test file contains a single test function.
     - Validates that the test file includes the necessary assertions for all string functions.
     Raises:
         AssertionError: If any of the above conditions are not met.
     """
 
     # sourcery skip: no-loop-in-tests, no-conditionals-in-tests
-    # ESTABLISH / WHEN / THEN
+    # ESTABLISH
+    keywords_src_config = get_keywords_src_config()
+    keywords_by_chapter = get_keywords_by_chapter(keywords_src_config)
+
+    # WHEN / THEN
     running_str_functions = set()
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_desc_str_number = get_chapter_desc_str_number(chapter_desc)
+        chapter_num = int(get_chapter_desc_str_number(chapter_desc))
         test_dir = create_path(chapter_dir, "test")
         util_dir = create_path(test_dir, "_util")
         print(f"{util_dir}")
-        chapter_str_funcs = get_chapter_str_functions(chapter_dir, chapter_desc_prefix)
-        check_if_chapter_str_funcs_is_sorted(chapter_str_funcs)
-        check_str_funcs_are_not_duplicated(chapter_str_funcs, running_str_functions)
-        running_str_functions.update(set(chapter_str_funcs))
+        chapter_keywords_by_chapter = keywords_by_chapter.get(chapter_num)
+        chapter_keywords_by_chapter = sorted(list(chapter_keywords_by_chapter))
+        check_if_chapter_keywords_by_chapter_is_sorted(chapter_keywords_by_chapter)
+        check_keywords_by_chapter_are_not_duplicated(
+            chapter_keywords_by_chapter, running_str_functions
+        )
+        running_str_functions.update(set(chapter_keywords_by_chapter))
 
-        if len(chapter_str_funcs) > 0:
+        if len(chapter_keywords_by_chapter) > 0:
             keywords_filename = get_keywords_filename(chapter_desc_prefix)
             test_file_path = create_path(util_dir, f"test_{keywords_filename}")
             assert os_path_exists(test_file_path)
             test_file_imports = get_imports_from_file(test_file_path)
-            assert len(test_file_imports) == 1
-            check_import_objs_are_ordered(test_file_imports, test_file_path)
-            file_funcs, class_bases = get_function_names_from_file(test_file_path)
-            assert file_funcs == ["test_str_functions_ReturnsObj"]
-            check_str_func_test_file_has_needed_asserts(
-                chapter_str_funcs, test_file_path, util_dir, chapter_desc
-            )
+            assert len(test_file_imports) <= 1
+            if len(test_file_imports) == 1:
+                file_funcs, class_bases = get_function_names_from_file(test_file_path)
+                class_prefix = chapter_desc_prefix[0].upper() + chapter_desc_prefix[1:]
+                chXX_test_name = (
+                    f"test_{class_prefix}Keywords_AttributeNamesEqualValues"
+                )
+                assert set(file_funcs) == {chXX_test_name}
 
 
 def test_Chapters_test_TestsAreInCorrectFolderStructure():

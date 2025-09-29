@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch04_group_logic._ref.ch04_keywords import knot_str
-from src.ch04_group_logic._ref.ch04_semantic_types import (
+from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
+from src.ch04_voice_logic._ref.ch04_semantic_types import (
     GroupTitle,
     HealerName,
     NameTerm,
@@ -69,7 +69,7 @@ def test_TitleTerm_Exists():
     bob_nameterm = TitleTerm(bob_str)
     # THEN
     assert bob_nameterm == bob_str
-    doc_str = f"""If a TitleTerm contains {knot_str()}s it represents a group otherwise its a single member group of an VoiceName."""
+    doc_str = f"""If a TitleTerm contains {wx.knot}s it represents a group otherwise its a single member group of an VoiceName."""
     assert inspect_getdoc(bob_nameterm) == doc_str
 
 

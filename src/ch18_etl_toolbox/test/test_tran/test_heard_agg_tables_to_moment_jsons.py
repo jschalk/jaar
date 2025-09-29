@@ -9,17 +9,7 @@ from src.ch01_data_toolbox.file_toolbox import open_file
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch15_moment_logic.moment_main import get_momentunit_from_json
-from src.ch18_etl_toolbox._ref.ch18_keywords import (
-    moment_budunit_str,
-    moment_event_time_agg_str,
-    moment_label_str,
-    moment_paybook_str,
-    moment_timeline_hour_str,
-    moment_timeline_month_str,
-    moment_timeline_weekday_str,
-    moment_timeoffi_str,
-    momentunit_str,
-)
+from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -57,23 +47,23 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
     fu2_select_sqlstrs = get_moment_heard_select1_sqlstrs(moment_label=a23_str)
 
     # THEN
-    gen_blfpayy_sqlstr = fu2_select_sqlstrs.get(moment_paybook_str())
-    gen_momentbud_sqlstr = fu2_select_sqlstrs.get(moment_budunit_str())
-    gen_blfhour_sqlstr = fu2_select_sqlstrs.get(moment_timeline_hour_str())
-    gen_blfmont_sqlstr = fu2_select_sqlstrs.get(moment_timeline_month_str())
-    gen_blfweek_sqlstr = fu2_select_sqlstrs.get(moment_timeline_weekday_str())
-    gen_blfoffi_sqlstr = fu2_select_sqlstrs.get(moment_timeoffi_str())
-    gen_momentunit_sqlstr = fu2_select_sqlstrs.get(momentunit_str())
+    gen_blfpayy_sqlstr = fu2_select_sqlstrs.get(wx.moment_paybook)
+    gen_momentbud_sqlstr = fu2_select_sqlstrs.get(wx.moment_budunit)
+    gen_blfhour_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeline_hour)
+    gen_blfmont_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeline_month)
+    gen_blfweek_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeline_weekday)
+    gen_blfoffi_sqlstr = fu2_select_sqlstrs.get(wx.moment_timeoffi)
+    gen_momentunit_sqlstr = fu2_select_sqlstrs.get(wx.momentunit)
     with sqlite3_connect(":memory:") as moment_db_conn:
         cursor = moment_db_conn.cursor()
         create_sound_and_heard_tables(cursor)
-        blfpayy_abbv7 = get_dimen_abbv7(moment_paybook_str())
-        momentbud_abbv7 = get_dimen_abbv7(moment_budunit_str())
-        blfhour_abbv7 = get_dimen_abbv7(moment_timeline_hour_str())
-        blfmont_abbv7 = get_dimen_abbv7(moment_timeline_month_str())
-        blfweek_abbv7 = get_dimen_abbv7(moment_timeline_weekday_str())
-        blfoffi_abbv7 = get_dimen_abbv7(moment_timeoffi_str())
-        momentunit_abbv7 = get_dimen_abbv7(momentunit_str())
+        blfpayy_abbv7 = get_dimen_abbv7(wx.moment_paybook)
+        momentbud_abbv7 = get_dimen_abbv7(wx.moment_budunit)
+        blfhour_abbv7 = get_dimen_abbv7(wx.moment_timeline_hour)
+        blfmont_abbv7 = get_dimen_abbv7(wx.moment_timeline_month)
+        blfweek_abbv7 = get_dimen_abbv7(wx.moment_timeline_weekday)
+        blfoffi_abbv7 = get_dimen_abbv7(wx.moment_timeoffi)
+        momentunit_abbv7 = get_dimen_abbv7(wx.momentunit)
         blfpayy_h_agg = create_prime_tablename(blfpayy_abbv7, "h", "agg")
         momentbud_h_agg = create_prime_tablename(momentbud_abbv7, "h", "agg")
         blfhour_h_agg = create_prime_tablename(blfhour_abbv7, "h", "agg")
@@ -81,7 +71,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         blfweek_h_agg = create_prime_tablename(blfweek_abbv7, "h", "agg")
         blfoffi_h_agg = create_prime_tablename(blfoffi_abbv7, "h", "agg")
         momentunit_h_agg = create_prime_tablename(momentunit_abbv7, "h", "agg")
-        where_dict = {moment_label_str(): a23_str}
+        where_dict = {wx.moment_label: a23_str}
         blfpayy_sql = create_select_query(cursor, blfpayy_h_agg, [], where_dict, True)
         momentbud_sql = create_select_query(
             cursor, momentbud_h_agg, [], where_dict, True
@@ -131,7 +121,7 @@ def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomen
     amy23_str = "amy23"
     amy45_str = "amy45"
     moment_mstr_dir = get_chapter_temp_dir()
-    momentunit_h_agg_tablename = create_prime_tablename(momentunit_str(), "h", "agg")
+    momentunit_h_agg_tablename = create_prime_tablename(wx.momentunit, "h", "agg")
     print(f"{momentunit_h_agg_tablename=}")
 
     with sqlite3_connect(":memory:") as moment_db_conn:
@@ -139,13 +129,13 @@ def test_etl_heard_agg_tables_to_moment_jsons_Scenario0_CreateFilesWithOnlyMomen
         create_sound_and_heard_tables(cursor)
 
         insert_raw_sqlstr = f"""
-INSERT INTO {momentunit_h_agg_tablename} ({moment_label_str()})
+INSERT INTO {momentunit_h_agg_tablename} ({wx.moment_label})
 VALUES ('{amy23_str}'), ('{amy45_str}')
 ;
 """
         cursor.execute(insert_raw_sqlstr)
         assert get_row_count(cursor, momentunit_h_agg_tablename) == 2
-        assert db_table_exists(cursor, moment_event_time_agg_str()) is False
+        assert db_table_exists(cursor, wx.moment_event_time_agg) is False
 
         amy23_json_path = create_moment_json_path(moment_mstr_dir, amy23_str)
         amy45_json_path = create_moment_json_path(moment_mstr_dir, amy45_str)
