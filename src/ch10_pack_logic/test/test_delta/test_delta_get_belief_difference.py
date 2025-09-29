@@ -12,19 +12,10 @@ from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fact_upper_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_divisor_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
 )
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
 
@@ -699,10 +690,10 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
     x_keylist = [wx.UPDATE, wx.belief_plan_factunit, ball_rope, knee_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
-    assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
-    assert ball_beliefatom.get_value(fact_state_str()) == damaged_rope
-    assert ball_beliefatom.get_value(fact_lower_str()) == after_fact_lower
-    assert ball_beliefatom.get_value(fact_upper_str()) == after_fact_upper
+    assert ball_beliefatom.get_value(wx.fact_context) == knee_rope
+    assert ball_beliefatom.get_value(wx.fact_state) == damaged_rope
+    assert ball_beliefatom.get_value(wx.fact_lower) == after_fact_lower
+    assert ball_beliefatom.get_value(wx.fact_upper) == after_fact_upper
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -740,10 +731,10 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     print(f"{ball_beliefatom=}")
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
-    assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
-    assert ball_beliefatom.get_value(fact_state_str()) == damaged_rope
-    assert ball_beliefatom.get_value(fact_lower_str()) == after_fact_lower
-    assert ball_beliefatom.get_value(fact_upper_str()) == after_fact_upper
+    assert ball_beliefatom.get_value(wx.fact_context) == knee_rope
+    assert ball_beliefatom.get_value(wx.fact_state) == damaged_rope
+    assert ball_beliefatom.get_value(wx.fact_lower) == after_fact_lower
+    assert ball_beliefatom.get_value(wx.fact_upper) == after_fact_upper
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -783,7 +774,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_factu
     x_keylist = [wx.DELETE, wx.belief_plan_factunit, ball_rope, knee_rope]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
-    assert ball_beliefatom.get_value(fact_context_str()) == knee_rope
+    assert ball_beliefatom.get_value(wx.fact_context) == knee_rope
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -837,11 +828,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
-    assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
-    assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
-    assert ball_beliefatom.get_value(reason_lower_str()) == damaged_reason_lower
-    assert ball_beliefatom.get_value(reason_upper_str()) == damaged_reason_upper
-    assert ball_beliefatom.get_value(reason_divisor_str()) == damaged_reason_divisor
+    assert ball_beliefatom.get_value(wx.reason_context) == knee_rope
+    assert ball_beliefatom.get_value(wx.reason_state) == damaged_rope
+    assert ball_beliefatom.get_value(wx.reason_lower) == damaged_reason_lower
+    assert ball_beliefatom.get_value(wx.reason_upper) == damaged_reason_upper
+    assert ball_beliefatom.get_value(wx.reason_divisor) == damaged_reason_divisor
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -899,8 +890,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
-    assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
-    assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
+    assert ball_beliefatom.get_value(wx.reason_context) == knee_rope
+    assert ball_beliefatom.get_value(wx.reason_state) == damaged_rope
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -965,13 +956,11 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     ]
     ball_beliefatom = get_from_nested_dict(sue_beliefdelta.beliefatoms, x_keylist)
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
-    assert ball_beliefatom.get_value(reason_context_str()) == knee_rope
-    assert ball_beliefatom.get_value(reason_state_str()) == damaged_rope
-    assert ball_beliefatom.get_value(reason_lower_str()) == after_damaged_reason_lower
-    assert ball_beliefatom.get_value(reason_upper_str()) == after_damaged_reason_upper
-    assert (
-        ball_beliefatom.get_value(reason_divisor_str()) == after_damaged_reason_divisor
-    )
+    assert ball_beliefatom.get_value(wx.reason_context) == knee_rope
+    assert ball_beliefatom.get_value(wx.reason_state) == damaged_rope
+    assert ball_beliefatom.get_value(wx.reason_lower) == after_damaged_reason_lower
+    assert ball_beliefatom.get_value(wx.reason_upper) == after_damaged_reason_upper
+    assert ball_beliefatom.get_value(wx.reason_divisor) == after_damaged_reason_divisor
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
 
 
@@ -1016,7 +1005,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert (
-        ball_beliefatom.get_value(reason_active_requisite_str())
+        ball_beliefatom.get_value(wx.reason_active_requisite)
         == after_medical_reason_active_requisite
     )
     assert get_beliefatom_total_count(sue_beliefdelta) == 1
@@ -1068,7 +1057,7 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_plan_reaso
     assert ball_beliefatom.get_value(wx.plan_rope) == ball_rope
     assert ball_beliefatom.get_value("reason_context") == medical_rope
     assert (
-        ball_beliefatom.get_value(reason_active_requisite_str())
+        ball_beliefatom.get_value(wx.reason_active_requisite)
         == after_medical_reason_active_requisite
     )
     assert get_beliefatom_total_count(sue_beliefdelta) == 1

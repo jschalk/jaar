@@ -3,11 +3,9 @@ from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import (
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
-    fact_context_str,
-    reason_context_str,
-    reason_state_str,
 )
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
@@ -160,9 +158,9 @@ def test_belief_plan_reasonunit_exists_ReturnsObj():
     root_rope = to_rope(sue_belief.moment_label)
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
-    root_jkeys = {wx.plan_rope: root_rope, reason_context_str(): wk_rope}
-    casa_jkeys = {wx.plan_rope: casa_rope, reason_context_str(): wk_rope}
-    clean_jkeys = {wx.plan_rope: clean_rope, reason_context_str(): wk_rope}
+    root_jkeys = {wx.plan_rope: root_rope, wx.reason_context: wk_rope}
+    casa_jkeys = {wx.plan_rope: casa_rope, wx.reason_context: wk_rope}
+    clean_jkeys = {wx.plan_rope: clean_rope, wx.reason_context: wk_rope}
 
     # WHEN / THEN
     assert not belief_plan_reasonunit_exists(None, {})
@@ -195,18 +193,18 @@ def test_belief_plan_reason_caseunit_exists_ReturnsObj():
     thur_rope = sue_belief.make_rope(wk_rope, "thur")
     root_jkeys = {
         wx.plan_rope: root_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
     casa_jkeys = {
         wx.plan_rope: casa_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
     clean_jkeys = {
         wx.plan_rope: clean_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
 
     # WHEN / THEN
@@ -307,9 +305,9 @@ def test_belief_plan_factunit_exists_ReturnsObj():
     root_rope = to_rope(sue_belief.moment_label)
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
-    root_jkeys = {wx.plan_rope: root_rope, fact_context_str(): wk_rope}
-    casa_jkeys = {wx.plan_rope: casa_rope, fact_context_str(): wk_rope}
-    clean_jkeys = {wx.plan_rope: clean_rope, fact_context_str(): wk_rope}
+    root_jkeys = {wx.plan_rope: root_rope, wx.fact_context: wk_rope}
+    casa_jkeys = {wx.plan_rope: casa_rope, wx.fact_context: wk_rope}
+    clean_jkeys = {wx.plan_rope: clean_rope, wx.fact_context: wk_rope}
 
     # WHEN / THEN
     assert not belief_plan_factunit_exists(None, {})
@@ -466,9 +464,9 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_reasonunit():
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     x_dimen = wx.belief_plan_reasonunit
-    root_jkeys = {wx.plan_rope: root_rope, reason_context_str(): wk_rope}
-    casa_jkeys = {wx.plan_rope: casa_rope, reason_context_str(): wk_rope}
-    clean_jkeys = {wx.plan_rope: clean_rope, reason_context_str(): wk_rope}
+    root_jkeys = {wx.plan_rope: root_rope, wx.reason_context: wk_rope}
+    casa_jkeys = {wx.plan_rope: casa_rope, wx.reason_context: wk_rope}
+    clean_jkeys = {wx.plan_rope: clean_rope, wx.reason_context: wk_rope}
 
     # WHEN / THEN
     assert not belief_attr_exists(x_dimen, None, {})
@@ -501,18 +499,18 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_reason_caseunit():
     x_dimen = wx.belief_plan_reason_caseunit
     root_jkeys = {
         wx.plan_rope: root_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
     casa_jkeys = {
         wx.plan_rope: casa_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
     clean_jkeys = {
         wx.plan_rope: clean_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
 
     # WHEN / THEN
@@ -614,9 +612,9 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_factunit():
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     x_dimen = wx.belief_plan_factunit
-    root_jkeys = {wx.plan_rope: root_rope, fact_context_str(): wk_rope}
-    casa_jkeys = {wx.plan_rope: casa_rope, fact_context_str(): wk_rope}
-    clean_jkeys = {wx.plan_rope: clean_rope, fact_context_str(): wk_rope}
+    root_jkeys = {wx.plan_rope: root_rope, wx.fact_context: wk_rope}
+    casa_jkeys = {wx.plan_rope: casa_rope, wx.fact_context: wk_rope}
+    clean_jkeys = {wx.plan_rope: clean_rope, wx.fact_context: wk_rope}
 
     # WHEN / THEN
     assert not belief_attr_exists(x_dimen, None, {})

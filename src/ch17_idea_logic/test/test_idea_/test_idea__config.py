@@ -28,6 +28,7 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch08Keywords as wx,
@@ -37,15 +38,6 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch15Keywords as wx,
     Ch16Keywords as wx,
     Ch17Keywords as wx,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fact_upper_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
 )
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
@@ -328,7 +320,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.voice_name) == "TEXT"
     assert sqlite_types.get(wx.group_title) == "TEXT"
     assert sqlite_types.get(wx.plan_rope) == "TEXT"
-    assert sqlite_types.get(reason_context_str()) == "TEXT"
+    assert sqlite_types.get(wx.reason_context) == "TEXT"
     assert sqlite_types.get("reason_state") == "TEXT"
     assert sqlite_types.get("fact_state") == "TEXT"
     assert sqlite_types.get(wx.party_title) == "TEXT"
@@ -345,15 +337,15 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.morph) == "INTEGER"
     assert sqlite_types.get(wx.gogo_want) == "REAL"
     assert sqlite_types.get(wx.stop_want) == "REAL"
-    assert sqlite_types.get(reason_active_requisite_str()) == "INTEGER"
+    assert sqlite_types.get(wx.reason_active_requisite) == "INTEGER"
     assert sqlite_types.get(wx.voice_cred_points) == "REAL"
     assert sqlite_types.get(wx.voice_debt_points) == "REAL"
     assert sqlite_types.get(wx.group_cred_points) == "REAL"
     assert sqlite_types.get(wx.group_debt_points) == "REAL"
     assert sqlite_types.get(wx.credor_respect) == "REAL"
     assert sqlite_types.get(wx.debtor_respect) == "REAL"
-    assert sqlite_types.get(fact_lower_str()) == "REAL"
-    assert sqlite_types.get(fact_upper_str()) == "REAL"
+    assert sqlite_types.get(wx.fact_lower) == "REAL"
+    assert sqlite_types.get(wx.fact_upper) == "REAL"
     assert sqlite_types.get("fund_pool") == "REAL"
     assert sqlite_types.get(wx.give_force) == "REAL"
     assert sqlite_types.get(wx.star) == "INTEGER"

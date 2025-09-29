@@ -1,23 +1,4 @@
-from src.ch05_reason_logic._ref.ch05_keywords import (
-    Ch05Keywords,
-    active_str,
-    cases_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fact_upper_str,
-    factheirs_str,
-    factunits_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_divisor_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
-    reasonunits_str,
-    status_str,
-    task_str,
-)
+from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords, Ch05Keywords as wx
 
 
 def test_Ch05Keywords_AttributeNamesEqualValues():
@@ -33,20 +14,20 @@ def test_Ch05Keywords_AttributeNamesEqualValues():
 
 def test_str_functions_ReturnsObj():
     # ESTABLISH / WHEN / THEN
-    assert active_str() == "active"
-    assert status_str() == "status"
-    assert task_str() == "task"
-    assert cases_str() == "cases"
-    assert fact_context_str() == "fact_context"
-    assert fact_upper_str() == "fact_upper"
-    assert fact_lower_str() == "fact_lower"
-    assert fact_state_str() == "fact_state"
-    assert factheirs_str() == "factheirs"
-    assert factunits_str() == "factunits"
-    assert reason_divisor_str() == "reason_divisor"
-    assert reason_upper_str() == "reason_upper"
-    assert reason_lower_str() == "reason_lower"
-    assert reason_state_str() == "reason_state"
-    assert reason_active_requisite_str() == "reason_active_requisite"
-    assert reason_context_str() == "reason_context"
-    assert reasonunits_str() == "reasonunits"
+    assert wx.active == "active"
+    assert wx.status == "status"
+    assert wx.task == "task"
+    assert wx.cases == "cases"
+    assert wx.fact_context == "fact_context"
+    assert wx.fact_upper == "fact_upper"
+    assert wx.fact_lower == "fact_lower"
+    assert wx.fact_state == "fact_state"
+    assert wx.factheirs == "factheirs"
+    assert wx.factunits == "factunits"
+    assert wx.reason_divisor == "reason_divisor"
+    assert wx.reason_upper == "reason_upper"
+    assert wx.reason_lower == "reason_lower"
+    assert wx.reason_state == "reason_state"
+    assert wx.reason_active_requisite == "reason_active_requisite"
+    assert wx.reason_context == "reason_context"
+    assert wx.reasonunits == "reasonunits"

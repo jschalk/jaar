@@ -7,15 +7,9 @@ from src.ch22_belief_viewer._ref.ch22_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch08Keywords as wx,
-    active_str,
-    cases_str,
-    factheirs_str,
-    factunits_str,
-    reason_state_str,
-    reasonunits_str,
-    task_str,
 )
 from src.ch22_belief_viewer.belief_viewer_tool import add_small_dot, get_plan_view_dict
 from src.ch22_belief_viewer.example22_beliefs import (
@@ -56,9 +50,9 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.star,
         wx.uid,
         wx.awardunits,
-        reasonunits_str(),
+        wx.reasonunits,
         wx.laborunit,
-        factunits_str(),
+        wx.factunits,
         wx.healerunit,
         wx.begin,
         wx.close,
@@ -72,14 +66,14 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.problem_bool,
         wx.knot,
         wx.is_expanded,
-        active_str(),
+        wx.active,
         wx.active_hx,
         wx.all_voice_cred,
         wx.all_voice_debt,
         wx.awardheirs,
         wx.awardlines,
         wx.descendant_pledge_count,
-        factheirs_str(),
+        wx.factheirs,
         wx.fund_ratio,
         wx.fund_iota,
         wx.fund_onset,
@@ -88,7 +82,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.tree_level,
         wx.range_evaluated,
         wx.reasonheirs,
-        task_str(),
+        wx.task,
         wx.laborheir,
         wx.gogo_calc,
         wx.stop_calc,
@@ -257,7 +251,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario5_PlanUnit_FactUnit():
     tidi_rope = sue_belief.make_rope(casa_rope, "tidiness")
 
     # factunits
-    root_factunits_dict = root_dict.get(factunits_str())
+    root_factunits_dict = root_dict.get(wx.factunits)
     assert len(root_factunits_dict) == 2
     # print(f"{len(factunits_dict)=}")
     tidi_factunit_dict = root_factunits_dict.get(tidi_rope)
@@ -328,7 +322,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
 
     # THEN
     # reasonunits
-    play_soccer_reasonunits_dict = play_soccer_dict.get(reasonunits_str())
+    play_soccer_reasonunits_dict = play_soccer_dict.get(wx.reasonunits)
     assert len(play_soccer_reasonunits_dict) == 2
     # print(f"{len(play_soccer_reasonunits_dict)=}")
     best_reasonunit_dict = play_soccer_reasonunits_dict.get(best_rope)
@@ -337,17 +331,17 @@ def test_get_plan_view_dict_ReturnsObj_Scenario6_PlanUnit_ReasonUnit():
     expected_reason_str = add_small_dot(f"ReasonUnit: context is {best_rope}")
     assert best_reasonunit_dict.get(wx.readable) == expected_reason_str
 
-    best_cases_dict = best_reasonunit_dict.get(cases_str())
-    tidi_cases_dict = tidi_reasonunit_dict.get(cases_str())
+    best_cases_dict = best_reasonunit_dict.get(wx.cases)
+    tidi_cases_dict = tidi_reasonunit_dict.get(wx.cases)
     best_soccer_case_dict = best_cases_dict.get(best_soccer_rope)
     best_run_case_dict = best_cases_dict.get(best_run_rope)
     tidy_case_dict = tidi_cases_dict.get(tidy_rope)
-    # print(f"{best_soccer_case_dict.get(reason_state_str())=}")
-    # print(f"{best_run_case_dict.get(reason_state_str())=}")
-    # print(f"{tidy_case_dict.get(reason_state_str())=}")
-    assert best_soccer_case_dict.get(reason_state_str()) == best_soccer_rope
-    assert best_run_case_dict.get(reason_state_str()) == best_run_rope
-    assert tidy_case_dict.get(reason_state_str()) == tidy_rope
+    # print(f"{best_soccer_case_dict.get(wx.reason_state)=}")
+    # print(f"{best_run_case_dict.get(wx.reason_state)=}")
+    # print(f"{tidy_case_dict.get(wx.reason_state)=}")
+    assert best_soccer_case_dict.get(wx.reason_state) == best_soccer_rope
+    assert best_run_case_dict.get(wx.reason_state) == best_run_rope
+    assert tidy_case_dict.get(wx.reason_state) == tidy_rope
 
     play_best_reasonunit = play_soccer_plan.get_reasonunit(best_rope)
     play_tidi_reasonunit = play_soccer_plan.get_reasonunit(tidi_rope)
@@ -415,17 +409,17 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
     expected_reason_str = add_small_dot(f"ReasonHeir: context is {best_rope}")
     assert best_reasonheir_dict.get(wx.readable) == expected_reason_str
 
-    best_cases_dict = best_reasonheir_dict.get(cases_str())
-    tidi_cases_dict = tidi_reasonheir_dict.get(cases_str())
+    best_cases_dict = best_reasonheir_dict.get(wx.cases)
+    tidi_cases_dict = tidi_reasonheir_dict.get(wx.cases)
     best_soccer_case_dict = best_cases_dict.get(best_soccer_rope)
     best_run_case_dict = best_cases_dict.get(best_run_rope)
     tidy_case_dict = tidi_cases_dict.get(tidy_rope)
-    # print(f"{best_soccer_case_dict.get(reason_state_str())=}")
-    # print(f"{best_run_case_dict.get(reason_state_str())=}")
-    # print(f"{tidy_case_dict.get(reason_state_str())=}")
-    assert best_soccer_case_dict.get(reason_state_str()) == best_soccer_rope
-    assert best_run_case_dict.get(reason_state_str()) == best_run_rope
-    assert tidy_case_dict.get(reason_state_str()) == tidy_rope
+    # print(f"{best_soccer_case_dict.get(wx.reason_state)=}")
+    # print(f"{best_run_case_dict.get(wx.reason_state)=}")
+    # print(f"{tidy_case_dict.get(wx.reason_state)=}")
+    assert best_soccer_case_dict.get(wx.reason_state) == best_soccer_rope
+    assert best_run_case_dict.get(wx.reason_state) == best_run_rope
+    assert tidy_case_dict.get(wx.reason_state) == tidy_rope
 
     play_best_reasonheir = play_soccer_plan.get_reasonheir(best_rope)
     play_tidi_reasonheir = play_soccer_plan.get_reasonheir(tidi_rope)

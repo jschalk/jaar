@@ -1,8 +1,8 @@
 from src.ch17_idea_logic._ref.ch17_keywords import (
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
-    reason_context_str,
 )
 from src.ch17_idea_logic.idea_main import IdeaRef, idearef_shop
 
@@ -153,7 +153,7 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
     x3_idearef = idearef_shop("0003", wx.belief_voiceunit)
     x3_idearef.set_attribute(wx.plan_rope, True)
     x3_idearef.set_attribute(wx.group_title, False)
-    x3_idearef.set_attribute(reason_context_str(), False)
+    x3_idearef.set_attribute(wx.reason_context, False)
     x3_idearef.set_attribute(wx.voice_name, False)
 
     # WHEN
@@ -163,5 +163,5 @@ def test_IdeaRef_get_otx_values_list_ReturnsObj_Scenario2():
     assert x_otx_values_list == [
         wx.voice_name,
         wx.group_title,
-        reason_context_str(),
+        wx.reason_context,
     ]

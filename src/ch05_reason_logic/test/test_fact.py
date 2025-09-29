@@ -1,10 +1,5 @@
 from src.ch02_rope_logic.rope import create_rope, get_default_nexus_label as root_label
-from src.ch05_reason_logic._ref.ch05_keywords import (
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fact_upper_str,
-)
+from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
 from src.ch05_reason_logic.reason import (
     FactCore,
     FactUnit,
@@ -27,10 +22,10 @@ def test_FactUnit_Exists():
     obj_attrs = set(x_fact.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        fact_context_str(),
-        fact_upper_str(),
-        fact_lower_str(),
-        fact_state_str(),
+        wx.fact_context,
+        wx.fact_upper,
+        wx.fact_lower,
+        wx.fact_state,
     }
 
 

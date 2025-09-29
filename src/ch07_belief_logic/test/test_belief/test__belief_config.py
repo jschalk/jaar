@@ -3,21 +3,9 @@ from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch07_belief_logic._ref.ch07_keywords import (
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
-    active_str,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    fact_upper_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_divisor_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
-    status_str,
-    task_str,
 )
 from src.ch07_belief_logic.belief_config import (
     belief_config_path,
@@ -233,7 +221,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         wx.stop_want,
         wx.gogo_calc,
         wx.stop_calc,
-        active_str(),
+        wx.active,
         wx.fund_onset,
         wx.fund_cease,
         wx.descendant_pledge_count,
@@ -241,7 +229,7 @@ def test_get_belief_calc_dimen_args_ReturnsObj():
         wx.all_voice_debt,
         wx.healerunit_ratio,
         wx.tree_level,
-        task_str(),
+        wx.task,
         wx.fund_iota,
         wx.fund_ratio,
         wx.range_evaluated,
@@ -485,25 +473,25 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrawar, jv, wx.take_force) == "REAL"
     assert g_popcashout(cfig, blrawar, jv, wx.take_force) == False
 
-    assert g_class_type(cfig, blrfact, jk, fact_context_str()) == wx.RopeTerm
-    assert g_sqlitetype(cfig, blrfact, jk, fact_context_str()) == "TEXT"
-    assert g_popcashout(cfig, blrfact, jk, fact_context_str()) == False
+    assert g_class_type(cfig, blrfact, jk, wx.fact_context) == wx.RopeTerm
+    assert g_sqlitetype(cfig, blrfact, jk, wx.fact_context) == "TEXT"
+    assert g_popcashout(cfig, blrfact, jk, wx.fact_context) == False
 
     assert g_class_type(cfig, blrfact, jk, wx.plan_rope) == wx.RopeTerm
     assert g_sqlitetype(cfig, blrfact, jk, wx.plan_rope) == "TEXT"
     assert g_popcashout(cfig, blrfact, jk, wx.plan_rope) == False
 
-    assert g_class_type(cfig, blrfact, jv, fact_upper_str()) == "float"
-    assert g_sqlitetype(cfig, blrfact, jv, fact_upper_str()) == "REAL"
-    assert g_popcashout(cfig, blrfact, jv, fact_upper_str()) == False
+    assert g_class_type(cfig, blrfact, jv, wx.fact_upper) == "float"
+    assert g_sqlitetype(cfig, blrfact, jv, wx.fact_upper) == "REAL"
+    assert g_popcashout(cfig, blrfact, jv, wx.fact_upper) == False
 
-    assert g_class_type(cfig, blrfact, jv, fact_lower_str()) == "float"
-    assert g_sqlitetype(cfig, blrfact, jv, fact_lower_str()) == "REAL"
-    assert g_popcashout(cfig, blrfact, jv, fact_lower_str()) == False
+    assert g_class_type(cfig, blrfact, jv, wx.fact_lower) == "float"
+    assert g_sqlitetype(cfig, blrfact, jv, wx.fact_lower) == "REAL"
+    assert g_popcashout(cfig, blrfact, jv, wx.fact_lower) == False
 
-    assert g_class_type(cfig, blrfact, jv, fact_state_str()) == wx.RopeTerm
-    assert g_sqlitetype(cfig, blrfact, jv, fact_state_str()) == "TEXT"
-    assert g_popcashout(cfig, blrfact, jv, fact_state_str()) == False
+    assert g_class_type(cfig, blrfact, jv, wx.fact_state) == wx.RopeTerm
+    assert g_sqlitetype(cfig, blrfact, jv, wx.fact_state) == "TEXT"
+    assert g_popcashout(cfig, blrfact, jv, wx.fact_state) == False
 
     assert g_class_type(cfig, blrheal, jk, wx.healer_name) == wx.NameTerm
     assert g_sqlitetype(cfig, blrheal, jk, wx.healer_name) == "TEXT"
@@ -513,41 +501,41 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrheal, jk, wx.plan_rope) == "TEXT"
     assert g_popcashout(cfig, blrheal, jk, wx.plan_rope) == False
 
-    assert g_class_type(cfig, blrprem, jk, reason_context_str()) == wx.RopeTerm
-    assert g_sqlitetype(cfig, blrprem, jk, reason_context_str()) == "TEXT"
-    assert g_popcashout(cfig, blrprem, jk, reason_context_str()) == False
+    assert g_class_type(cfig, blrprem, jk, wx.reason_context) == wx.RopeTerm
+    assert g_sqlitetype(cfig, blrprem, jk, wx.reason_context) == "TEXT"
+    assert g_popcashout(cfig, blrprem, jk, wx.reason_context) == False
 
-    assert g_class_type(cfig, blrprem, jk, reason_state_str()) == wx.RopeTerm
-    assert g_sqlitetype(cfig, blrprem, jk, reason_state_str()) == "TEXT"
-    assert g_popcashout(cfig, blrprem, jk, reason_state_str()) == False
+    assert g_class_type(cfig, blrprem, jk, wx.reason_state) == wx.RopeTerm
+    assert g_sqlitetype(cfig, blrprem, jk, wx.reason_state) == "TEXT"
+    assert g_popcashout(cfig, blrprem, jk, wx.reason_state) == False
 
     assert g_class_type(cfig, blrprem, jk, wx.plan_rope) == wx.RopeTerm
     assert g_sqlitetype(cfig, blrprem, jk, wx.plan_rope) == "TEXT"
     assert g_popcashout(cfig, blrprem, jk, wx.plan_rope) == False
 
-    assert g_class_type(cfig, blrprem, jv, status_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, status_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, status_str()) == True
+    assert g_class_type(cfig, blrprem, jv, wx.status) == "int"
+    assert g_sqlitetype(cfig, blrprem, jv, wx.status) == "INTEGER"
+    assert g_popcashout(cfig, blrprem, jv, wx.status) == True
 
-    assert g_class_type(cfig, blrprem, jv, task_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, task_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, task_str()) == True
+    assert g_class_type(cfig, blrprem, jv, wx.task) == "int"
+    assert g_sqlitetype(cfig, blrprem, jv, wx.task) == "INTEGER"
+    assert g_popcashout(cfig, blrprem, jv, wx.task) == True
 
-    assert g_class_type(cfig, blrprem, jv, reason_divisor_str()) == "int"
-    assert g_sqlitetype(cfig, blrprem, jv, reason_divisor_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrprem, jv, reason_divisor_str()) == False
+    assert g_class_type(cfig, blrprem, jv, wx.reason_divisor) == "int"
+    assert g_sqlitetype(cfig, blrprem, jv, wx.reason_divisor) == "INTEGER"
+    assert g_popcashout(cfig, blrprem, jv, wx.reason_divisor) == False
 
-    assert g_class_type(cfig, blrprem, jv, reason_upper_str()) == "float"
-    assert g_sqlitetype(cfig, blrprem, jv, reason_upper_str()) == "REAL"
-    assert g_popcashout(cfig, blrprem, jv, reason_upper_str()) == False
+    assert g_class_type(cfig, blrprem, jv, wx.reason_upper) == "float"
+    assert g_sqlitetype(cfig, blrprem, jv, wx.reason_upper) == "REAL"
+    assert g_popcashout(cfig, blrprem, jv, wx.reason_upper) == False
 
-    assert g_class_type(cfig, blrprem, jv, reason_lower_str()) == "float"
-    assert g_sqlitetype(cfig, blrprem, jv, reason_lower_str()) == "REAL"
-    assert g_popcashout(cfig, blrprem, jv, reason_lower_str()) == False
+    assert g_class_type(cfig, blrprem, jv, wx.reason_lower) == "float"
+    assert g_sqlitetype(cfig, blrprem, jv, wx.reason_lower) == "REAL"
+    assert g_popcashout(cfig, blrprem, jv, wx.reason_lower) == False
 
-    assert g_class_type(cfig, blrreas, jk, reason_context_str()) == wx.RopeTerm
-    assert g_sqlitetype(cfig, blrreas, jk, reason_context_str()) == "TEXT"
-    assert g_popcashout(cfig, blrreas, jk, reason_context_str()) == False
+    assert g_class_type(cfig, blrreas, jk, wx.reason_context) == wx.RopeTerm
+    assert g_sqlitetype(cfig, blrreas, jk, wx.reason_context) == "TEXT"
+    assert g_popcashout(cfig, blrreas, jk, wx.reason_context) == False
 
     assert g_class_type(cfig, blrreas, jk, wx.plan_rope) == wx.RopeTerm
     assert g_sqlitetype(cfig, blrreas, jk, wx.plan_rope) == "TEXT"
@@ -557,17 +545,17 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrreas, jv, "_reason_active_heir") == "INTEGER"
     assert g_popcashout(cfig, blrreas, jv, "_reason_active_heir") == True
 
-    assert g_class_type(cfig, blrreas, jv, status_str()) == "int"
-    assert g_sqlitetype(cfig, blrreas, jv, status_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jv, status_str()) == True
+    assert g_class_type(cfig, blrreas, jv, wx.status) == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, wx.status) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, wx.status) == True
 
-    assert g_class_type(cfig, blrreas, jv, task_str()) == "int"
-    assert g_sqlitetype(cfig, blrreas, jv, task_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jv, task_str()) == True
+    assert g_class_type(cfig, blrreas, jv, wx.task) == "int"
+    assert g_sqlitetype(cfig, blrreas, jv, wx.task) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, wx.task) == True
 
-    assert g_class_type(cfig, blrreas, jv, reason_active_requisite_str()) == "bool"
-    assert g_sqlitetype(cfig, blrreas, jv, reason_active_requisite_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrreas, jv, reason_active_requisite_str()) == False
+    assert g_class_type(cfig, blrreas, jv, wx.reason_active_requisite) == "bool"
+    assert g_sqlitetype(cfig, blrreas, jv, wx.reason_active_requisite) == "INTEGER"
+    assert g_popcashout(cfig, blrreas, jv, wx.reason_active_requisite) == False
 
     assert g_class_type(cfig, blrlabo, jk, wx.plan_rope) == wx.RopeTerm
     assert g_sqlitetype(cfig, blrlabo, jk, wx.plan_rope) == "TEXT"
@@ -633,9 +621,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blrplan, jv, wx.stop_calc) == "REAL"
     assert g_popcashout(cfig, blrplan, jv, wx.stop_calc) == True
 
-    assert g_class_type(cfig, blrplan, jv, task_str()) == "int"
-    assert g_sqlitetype(cfig, blrplan, jv, task_str()) == "INTEGER"
-    assert g_popcashout(cfig, blrplan, jv, task_str()) == True
+    assert g_class_type(cfig, blrplan, jv, wx.task) == "int"
+    assert g_sqlitetype(cfig, blrplan, jv, wx.task) == "INTEGER"
+    assert g_popcashout(cfig, blrplan, jv, wx.task) == True
 
     assert g_class_type(cfig, blrplan, jv, wx.addin) == "float"
     assert g_sqlitetype(cfig, blrplan, jv, wx.addin) == "REAL"
@@ -837,22 +825,22 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.plan_rope) == wx.RopeTerm
     assert belief_calc_args_type_dict.get(wx.give_force) == "float"
     assert belief_calc_args_type_dict.get(wx.take_force) == "float"
-    assert belief_calc_args_type_dict.get(reason_context_str()) == wx.RopeTerm
-    assert belief_calc_args_type_dict.get(fact_upper_str()) == "float"
-    assert belief_calc_args_type_dict.get(fact_lower_str()) == "float"
-    assert belief_calc_args_type_dict.get(fact_state_str()) == wx.RopeTerm
+    assert belief_calc_args_type_dict.get(wx.reason_context) == wx.RopeTerm
+    assert belief_calc_args_type_dict.get(wx.fact_upper) == "float"
+    assert belief_calc_args_type_dict.get(wx.fact_lower) == "float"
+    assert belief_calc_args_type_dict.get(wx.fact_state) == wx.RopeTerm
     assert belief_calc_args_type_dict.get(wx.healer_name) == wx.NameTerm
-    assert belief_calc_args_type_dict.get(reason_state_str()) == wx.RopeTerm
-    assert belief_calc_args_type_dict.get(status_str()) == "int"
-    assert belief_calc_args_type_dict.get(task_str()) == "int"
-    assert belief_calc_args_type_dict.get(reason_divisor_str()) == "int"
-    assert belief_calc_args_type_dict.get(reason_upper_str()) == "float"
-    assert belief_calc_args_type_dict.get(reason_lower_str()) == "float"
+    assert belief_calc_args_type_dict.get(wx.reason_state) == wx.RopeTerm
+    assert belief_calc_args_type_dict.get(wx.status) == "int"
+    assert belief_calc_args_type_dict.get(wx.task) == "int"
+    assert belief_calc_args_type_dict.get(wx.reason_divisor) == "int"
+    assert belief_calc_args_type_dict.get(wx.reason_upper) == "float"
+    assert belief_calc_args_type_dict.get(wx.reason_lower) == "float"
     assert belief_calc_args_type_dict.get("_reason_active_heir") == "int"
-    assert belief_calc_args_type_dict.get(reason_active_requisite_str()) == "bool"
+    assert belief_calc_args_type_dict.get(wx.reason_active_requisite) == "bool"
     assert belief_calc_args_type_dict.get(wx.party_title) == wx.TitleTerm
     assert belief_calc_args_type_dict.get("_belief_name_is_labor") == "int"
-    assert belief_calc_args_type_dict.get(active_str()) == "int"
+    assert belief_calc_args_type_dict.get(wx.active) == "int"
     assert belief_calc_args_type_dict.get(wx.all_voice_cred) == "int"
     assert belief_calc_args_type_dict.get(wx.all_voice_debt) == "int"
     assert belief_calc_args_type_dict.get(wx.descendant_pledge_count) == "int"

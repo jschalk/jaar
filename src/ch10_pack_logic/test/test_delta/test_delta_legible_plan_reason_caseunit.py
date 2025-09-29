@@ -2,13 +2,10 @@ from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import (
     Ch01Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    reason_context_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
 )
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.legible import create_legible_list
@@ -25,8 +22,8 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithOutNumbe
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -54,11 +51,11 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_INSERT_WithNumberAr
     reason_lower_value = 17
     swim_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     swim_beliefatom.set_arg("reason_divisor", reason_divisor_value)
-    swim_beliefatom.set_arg(reason_upper_str(), reason_upper_value)
-    swim_beliefatom.set_arg(reason_lower_str(), reason_lower_value)
+    swim_beliefatom.set_arg(wx.reason_upper, reason_upper_value)
+    swim_beliefatom.set_arg(wx.reason_lower, reason_lower_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -83,8 +80,8 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithOutNumbe
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -112,11 +109,11 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_UPDATE_WithNumberAr
     reason_lower_value = 17
     swim_beliefatom = beliefatom_shop(dimen, wx.UPDATE)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     swim_beliefatom.set_arg("reason_divisor", reason_divisor_value)
-    swim_beliefatom.set_arg(reason_upper_str(), reason_upper_value)
-    swim_beliefatom.set_arg(reason_lower_str(), reason_lower_value)
+    swim_beliefatom.set_arg(wx.reason_upper, reason_upper_value)
+    swim_beliefatom.set_arg(wx.reason_lower, reason_lower_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)
@@ -141,8 +138,8 @@ def test_create_legible_list_ReturnsObj_plan_reason_caseunit_DELETE():
     reason_state_value = sue_belief.make_rope(reason_context_value, "dirty")
     swim_beliefatom = beliefatom_shop(dimen, wx.DELETE)
     swim_beliefatom.set_arg(wx.plan_rope, rope_value)
-    swim_beliefatom.set_arg(reason_context_str(), reason_context_value)
-    swim_beliefatom.set_arg(reason_state_str(), reason_state_value)
+    swim_beliefatom.set_arg(wx.reason_context, reason_context_value)
+    swim_beliefatom.set_arg(wx.reason_state, reason_state_value)
     # print(f"{swim_beliefatom=}")
     x_beliefdelta = beliefdelta_shop()
     x_beliefdelta.set_beliefatom(swim_beliefatom)

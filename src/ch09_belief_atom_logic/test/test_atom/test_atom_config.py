@@ -5,14 +5,10 @@ from src.ch09_belief_atom_logic._ref.ch09_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch09Keywords as wx,
-    fact_context_str,
-    fact_lower_str,
-    fact_upper_str,
-    reason_context_str,
-    reason_state_str,
 )
 from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 from src.ch09_belief_atom_logic.atom_config import (
@@ -339,8 +335,8 @@ def unique_jkeys():
         new_jkey_keys = _get_atom_config_jkey_keys(atom_dimen)
         if wx.plan_rope in new_jkey_keys:
             new_jkey_keys.remove(wx.plan_rope)
-        if reason_context_str() in new_jkey_keys:
-            new_jkey_keys.remove(reason_context_str())
+        if wx.reason_context in new_jkey_keys:
+            new_jkey_keys.remove(wx.reason_context)
         if wx.voice_name in new_jkey_keys:
             new_jkey_keys.remove(wx.voice_name)
         if wx.group_title in new_jkey_keys:
@@ -381,8 +377,8 @@ def test_get_sorted_jkey_keys_ReturnsObj_belief_plan_reason_caseunit():
     # THEN
     assert x_sorted_jkey_keys == [
         wx.plan_rope,
-        reason_context_str(),
-        reason_state_str(),
+        wx.reason_context,
+        wx.reason_state,
     ]
 
 
@@ -624,7 +620,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.voice_name) == wx.NameTerm
     assert x_class_types.get(wx.addin) == "float"
     assert x_class_types.get(wx.awardee_title) == wx.TitleTerm
-    assert x_class_types.get(reason_context_str()) == wx.RopeTerm
+    assert x_class_types.get(wx.reason_context) == wx.RopeTerm
     assert x_class_types.get("reason_active_requisite") == "bool"
     assert x_class_types.get(wx.begin) == "float"
     assert x_class_types.get(wx.respect_bit) == "float"
@@ -637,9 +633,9 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get(wx.debtor_respect) == "float"
     assert x_class_types.get(wx.denom) == "int"
     assert x_class_types.get("reason_divisor") == "int"
-    assert x_class_types.get(fact_context_str()) == wx.RopeTerm
-    assert x_class_types.get(fact_upper_str()) == "float"
-    assert x_class_types.get(fact_lower_str()) == "float"
+    assert x_class_types.get(wx.fact_context) == wx.RopeTerm
+    assert x_class_types.get(wx.fact_upper) == "float"
+    assert x_class_types.get(wx.fact_lower) == "float"
     assert x_class_types.get(wx.fund_iota) == "float"
     assert x_class_types.get("fund_pool") == "float"
     assert x_class_types.get("give_force") == "float"
@@ -649,7 +645,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("star") == "int"
     assert x_class_types.get("max_tree_traverse") == "int"
     assert x_class_types.get(wx.morph) == "bool"
-    assert x_class_types.get(reason_state_str()) == wx.RopeTerm
+    assert x_class_types.get(wx.reason_state) == wx.RopeTerm
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"

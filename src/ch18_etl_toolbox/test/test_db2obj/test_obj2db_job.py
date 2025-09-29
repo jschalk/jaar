@@ -3,15 +3,8 @@ from src.ch01_data_toolbox.db_toolbox import create_insert_query
 from src.ch07_belief_logic.belief_config import get_belief_calc_dimen_args
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_divisor_str,
-    reason_lower_str,
-    reason_state_str,
-    reason_upper_str,
-    status_str,
-    task_str,
 )
 from src.ch18_etl_toolbox.db_obj_belief_tool import (
     create_beliefunit_metrics_insert_sqlstr,
@@ -215,8 +208,8 @@ def test_create_blrreas_metrics_insert_sqlstr_ReturnsObj():
         "moment_label": x_moment_label,
         "belief_name": x_belief_name,
         "plan_rope": x_rope,
-        reason_context_str(): x_reason_context,
-        reason_active_requisite_str(): x_reason_active_requisite,
+        wx.reason_context: x_reason_context,
+        wx.reason_active_requisite: x_reason_active_requisite,
         "task": x_task,
         "status": x_status,
         "_reason_active_heir": x__reason_active_heir,
@@ -280,13 +273,13 @@ def test_create_blrprem_metrics_insert_sqlstr_ReturnsObj():
         wx.moment_label: x_moment_label,
         wx.belief_name: x_belief_name,
         wx.plan_rope: x_rope,
-        reason_context_str(): x_reason_context,
-        reason_state_str(): x_reason_state,
-        reason_upper_str(): x_reason_upper,
-        reason_lower_str(): x_reason_lower,
-        reason_divisor_str(): x_reason_divisor,
-        task_str(): x_task,
-        status_str(): x_status,
+        wx.reason_context: x_reason_context,
+        wx.reason_state: x_reason_state,
+        wx.reason_upper: x_reason_upper,
+        wx.reason_lower: x_reason_lower,
+        wx.reason_divisor: x_reason_divisor,
+        wx.task: x_task,
+        wx.status: x_status,
     }
     # all args included in values dict
     assert x_args == set(values_dict.keys())

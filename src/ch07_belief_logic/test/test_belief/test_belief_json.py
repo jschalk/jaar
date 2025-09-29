@@ -8,10 +8,9 @@ from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import (
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
-    factunits_str,
-    reasonunits_str,
 )
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
@@ -200,7 +199,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
 
     shave_str = "shave"
     shave_dict = planroot_dict[wx.kids][shave_str]
-    shave_factunits = shave_dict[factunits_str()]
+    shave_factunits = shave_dict[wx.factunits]
     print(f"{shave_factunits=}")
     assert len(shave_factunits) == 1
     assert len(shave_factunits) == len(x_planroot.kids[shave_str].factunits)
@@ -252,7 +251,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
 
     kids_dict = planroot_dict[wx.kids]
     jour_min_dict = kids_dict[jour_min_str]
-    jour_min_factunits_dict = jour_min_dict[factunits_str()]
+    jour_min_factunits_dict = jour_min_dict[wx.factunits]
     jour_min_plan_x = yao_belief.get_plan_obj(jour_min_rope)
     print(f"{jour_min_factunits_dict=}")
     assert len(jour_min_factunits_dict) == 1
@@ -264,8 +263,8 @@ def test_BeliefUnit_get_json_ReturnsJSON_BigExample():
     ulti_rope = yao_belief.make_l1_rope(ulti_str)
     cont_plan = yao_belief.get_plan_obj(cont_rope)
     ulti_plan = yao_belief.get_plan_obj(ulti_rope)
-    cont_reasonunits_dict = planroot_dict[wx.kids][cont_str][reasonunits_str()]
-    ulti_reasonunits_dict = planroot_dict[wx.kids][ulti_str][reasonunits_str()]
+    cont_reasonunits_dict = planroot_dict[wx.kids][cont_str][wx.reasonunits]
+    ulti_reasonunits_dict = planroot_dict[wx.kids][ulti_str][wx.reasonunits]
     assert len(cont_reasonunits_dict) == len(cont_plan.reasonunits)
     assert len(ulti_reasonunits_dict) == len(ulti_plan.reasonunits)
 

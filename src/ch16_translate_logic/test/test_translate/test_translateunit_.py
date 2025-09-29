@@ -9,16 +9,12 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch08Keywords as wx,
     Ch10Keywords as wx,
     Ch15Keywords as wx,
-    fact_context_str,
-    fact_lower_str,
-    fact_state_str,
-    reason_context_str,
-    reason_state_str,
 )
 from src.ch16_translate_logic.map import (
     labelmap_shop,
@@ -191,16 +187,16 @@ def test_get_translateable_args_ReturnsObj():
     assert get_translateable_args() == {
         wx.voice_name,
         wx.awardee_title,
-        reason_context_str(),
+        wx.reason_context,
         wx.face_name,
-        fact_context_str(),
+        wx.fact_context,
         wx.moment_label,
-        fact_state_str(),
+        wx.fact_state,
         wx.group_title,
         wx.healer_name,
         wx.hour_label,
         wx.month_label,
-        reason_state_str(),
+        wx.reason_state,
         wx.belief_name,
         wx.plan_rope,
         wx.party_title,
@@ -346,11 +342,11 @@ def test_get_translate_RopeTerm_args_ReturnsObj():
 
     # THEN
     assert translate_RopeTerm_args == {
-        fact_state_str(),
-        fact_context_str(),
+        wx.fact_state,
+        wx.fact_context,
         wx.plan_rope,
-        reason_context_str(),
-        reason_state_str(),
+        wx.reason_context,
+        wx.reason_state,
     }
     expected_args = {
         x_arg

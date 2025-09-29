@@ -1,12 +1,9 @@
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import (
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
-    fact_context_str,
-    fact_state_str,
-    reason_context_str,
-    reason_state_str,
 )
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_tool import (
@@ -91,7 +88,7 @@ def test_belief_plan_reasonunit_get_obj_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     wk_rope = sue_belief.make_l1_rope("wk")
     sue_belief.add_plan(casa_rope)
-    jkeys = {wx.plan_rope: casa_rope, reason_context_str(): wk_rope}
+    jkeys = {wx.plan_rope: casa_rope, wx.reason_context: wk_rope}
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(wk_rope)
     sue_belief.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(wk_rope))
@@ -114,8 +111,8 @@ def test_belief_plan_reason_caseunit_get_obj_ReturnsObj():
     thur_rope = sue_belief.make_rope(wk_rope, "thur")
     casa_jkeys = {
         wx.plan_rope: casa_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(wk_rope)
@@ -138,7 +135,7 @@ def test_belief_plan_factunit_get_obj_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     wk_rope = sue_belief.make_l1_rope("wk")
     sue_belief.add_plan(casa_rope)
-    jkeys = {wx.plan_rope: casa_rope, fact_context_str(): wk_rope}
+    jkeys = {wx.plan_rope: casa_rope, wx.fact_context: wk_rope}
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(wk_rope)
     sue_belief.get_plan_obj(casa_rope).set_factunit(factunit_shop(wk_rope))
@@ -234,7 +231,7 @@ def test_belief_get_obj_ReturnsObj_belief_plan_reasonunit_get_obj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     wk_rope = sue_belief.make_l1_rope("wk")
     sue_belief.add_plan(casa_rope)
-    jkeys = {wx.plan_rope: casa_rope, reason_context_str(): wk_rope}
+    jkeys = {wx.plan_rope: casa_rope, wx.reason_context: wk_rope}
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(wk_rope)
     sue_belief.get_plan_obj(casa_rope).set_reasonunit(reasonunit_shop(wk_rope))
@@ -257,8 +254,8 @@ def test_belief_get_obj_ReturnsObj_belief_plan_reason_caseunit_get_obj():
     thur_rope = sue_belief.make_rope(wk_rope, "thur")
     casa_jkeys = {
         wx.plan_rope: casa_rope,
-        reason_context_str(): wk_rope,
-        reason_state_str(): thur_rope,
+        wx.reason_context: wk_rope,
+        wx.reason_state: thur_rope,
     }
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(wk_rope)
@@ -281,7 +278,7 @@ def test_belief_get_obj_ReturnsObj_belief_plan_factunit_get_obj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     wk_rope = sue_belief.make_l1_rope("wk")
     sue_belief.add_plan(casa_rope)
-    jkeys = {wx.plan_rope: casa_rope, fact_context_str(): wk_rope}
+    jkeys = {wx.plan_rope: casa_rope, wx.fact_context: wk_rope}
     sue_belief.add_plan(casa_rope)
     sue_belief.add_plan(wk_rope)
     sue_belief.get_plan_obj(casa_rope).set_factunit(factunit_shop(wk_rope))

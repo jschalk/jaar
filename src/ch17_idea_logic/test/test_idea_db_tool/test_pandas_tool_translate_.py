@@ -11,9 +11,9 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
 )
 from src.ch16_translate_logic.translate_main import translateunit_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
-    reason_context_str,
 )
 from src.ch17_idea_logic.idea_db_tool import (
     get_dataframe_translateable_columns,
@@ -30,12 +30,10 @@ def test_get_dataframe_translateable_columns_ReturnsObj():
     assert get_dataframe_translateable_columns(x_dt) == {wx.voice_name}
     x_dt = DataFrame(columns=[wx.voice_name, wx.voice_cred_points])
     assert get_dataframe_translateable_columns(x_dt) == {wx.voice_name}
-    x_dt = DataFrame(
-        columns=[reason_context_str(), wx.voice_name, wx.voice_cred_points]
-    )
+    x_dt = DataFrame(columns=[wx.reason_context, wx.voice_name, wx.voice_cred_points])
     assert get_dataframe_translateable_columns(x_dt) == {
         wx.voice_name,
-        reason_context_str(),
+        wx.reason_context,
     }
     x_dt = DataFrame(columns=["calc_swim", wx.voice_name, wx.voice_cred_points])
     assert get_dataframe_translateable_columns(x_dt) == {wx.voice_name}
@@ -232,20 +230,20 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario2_RodeUnit_g
     yao_translateunit = get_casa_maison_translateunit_set_by_otx2inx()
     otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][reason_context_str()] == otx_amy45_rope
-    assert otx_dt.iloc[1][reason_context_str()] == casa_otx_rope
-    assert otx_dt.iloc[2][reason_context_str()] == clean_otx_rope
-    assert otx_dt.iloc[3][reason_context_str()] == sweep_otx_rope
+    assert otx_dt.iloc[0][wx.reason_context] == otx_amy45_rope
+    assert otx_dt.iloc[1][wx.reason_context] == casa_otx_rope
+    assert otx_dt.iloc[2][wx.reason_context] == clean_otx_rope
+    assert otx_dt.iloc[3][wx.reason_context] == sweep_otx_rope
     print(f"{otx_dt=}")
 
     # WHEN
     translate_all_columns_dataframe(otx_dt, yao_translateunit)
 
     # THEN
-    assert otx_dt.iloc[0][reason_context_str()] == inx_amy87_rope
-    assert otx_dt.iloc[1][reason_context_str()] == casa_inx_rope
-    assert otx_dt.iloc[2][reason_context_str()] == clean_inx_rope
-    assert otx_dt.iloc[3][reason_context_str()] == sweep_inx_rope
+    assert otx_dt.iloc[0][wx.reason_context] == inx_amy87_rope
+    assert otx_dt.iloc[1][wx.reason_context] == casa_inx_rope
+    assert otx_dt.iloc[2][wx.reason_context] == clean_inx_rope
+    assert otx_dt.iloc[3][wx.reason_context] == sweep_inx_rope
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = get_casa_maison_rope_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")
@@ -275,10 +273,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # print(f"{yao_translateunit=}")
     otx_dt = get_casa_maison_rope_otx_dt()
     old_otx_dt = copy_deepcopy(otx_dt)
-    assert otx_dt.iloc[0][reason_context_str()] == otx_amy45_rope
-    assert otx_dt.iloc[1][reason_context_str()] == casa_otx_rope
-    assert otx_dt.iloc[2][reason_context_str()] == clean_otx_rope
-    assert otx_dt.iloc[3][reason_context_str()] == sweep_otx_rope
+    assert otx_dt.iloc[0][wx.reason_context] == otx_amy45_rope
+    assert otx_dt.iloc[1][wx.reason_context] == casa_otx_rope
+    assert otx_dt.iloc[2][wx.reason_context] == clean_otx_rope
+    assert otx_dt.iloc[3][wx.reason_context] == sweep_otx_rope
     print(f"Before {otx_dt=}")
     print("")
 
@@ -288,10 +286,10 @@ def test_translate_all_columns_dataframe_SetsParameterAttrs_Scenario3_RodeUnit_g
     # THEN
     print("")
     print(f"after  {otx_dt=}")
-    assert otx_dt.iloc[0][reason_context_str()] == inx_amy87_rope
-    assert otx_dt.iloc[1][reason_context_str()] == casa_inx_rope
-    assert otx_dt.iloc[2][reason_context_str()] == clean_inx_rope
-    assert otx_dt.iloc[3][reason_context_str()] == sweep_inx_rope
+    assert otx_dt.iloc[0][wx.reason_context] == inx_amy87_rope
+    assert otx_dt.iloc[1][wx.reason_context] == casa_inx_rope
+    assert otx_dt.iloc[2][wx.reason_context] == clean_inx_rope
+    assert otx_dt.iloc[3][wx.reason_context] == sweep_inx_rope
     assert otx_dt.to_csv() != old_otx_dt.to_csv()
     inx_dt = get_casa_maison_rope_inx_dt()
     print(f"{str(otx_dt.to_csv())=}")

@@ -6,12 +6,8 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
-    active_str,
-    factheirs_str,
-    factunits_str,
-    reasonunits_str,
-    task_str,
 )
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
@@ -73,14 +69,14 @@ def test_PlanUnit_Exists():
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
-        active_str(),
+        wx.active,
         wx.active_hx,
         wx.all_voice_cred,
         wx.all_voice_debt,
         wx.awardheirs,
         wx.awardlines,
         wx.descendant_pledge_count,
-        factheirs_str(),
+        wx.factheirs,
         wx.fund_cease,
         wx.fund_onset,
         wx.fund_ratio,
@@ -93,7 +89,7 @@ def test_PlanUnit_Exists():
         wx.range_evaluated,
         wx.reasonheirs,
         wx.stop_calc,
-        task_str(),
+        wx.task,
         wx.uid,
         wx.addin,
         wx.awardunits,
@@ -102,7 +98,7 @@ def test_PlanUnit_Exists():
         wx.close,
         wx.plan_label,
         wx.denom,
-        factunits_str(),
+        wx.factunits,
         wx.moment_label,
         wx.fund_iota,
         wx.gogo_want,
@@ -114,7 +110,7 @@ def test_PlanUnit_Exists():
         wx.parent_rope,
         wx.pledge,
         wx.problem_bool,
-        reasonunits_str(),
+        wx.reasonunits,
         "root",
         wx.stop_want,
     }

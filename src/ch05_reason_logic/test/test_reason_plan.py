@@ -5,10 +5,7 @@ from src.ch02_rope_logic.rope import (
 )
 from src.ch05_reason_logic._ref.ch05_keywords import (
     Ch02Keywords as wx,
-    cases_str,
-    reason_active_requisite_str,
-    reason_context_str,
-    reason_state_str,
+    Ch05Keywords as wx,
 )
 from src.ch05_reason_logic.reason import (
     ReasonCore,
@@ -42,9 +39,9 @@ def test_ReasonCore_Exists():
     print(sorted(list(obj_attrs)))
     assert obj_attrs == {
         wx.knot,
-        cases_str(),
-        reason_active_requisite_str(),
-        reason_context_str(),
+        wx.cases,
+        wx.reason_active_requisite,
+        wx.reason_context,
     }
 
 
@@ -268,7 +265,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWithSinglethu_caseequireds():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        cases_str(): {wed_rope: {reason_state_str(): wed_rope}},
+        wx.cases: {wed_rope: {wx.reason_state: wed_rope}},
     }
     print(wk_reason_dict)
     assert wk_reason_dict == static_wk_reason_dict
@@ -317,9 +314,9 @@ def test_ReasonUnit_to_dict_ReturnsDictWithTwoCasesReasons():
     assert wk_reason_dict is not None
     static_wk_reason_dict = {
         "reason_context": wk_rope,
-        cases_str(): {
-            wed_rope: {reason_state_str(): wed_rope},
-            thu_rope: {reason_state_str(): thu_rope},
+        wx.cases: {
+            wed_rope: {wx.reason_state: wed_rope},
+            thu_rope: {wx.reason_state: thu_rope},
         },
     }
     print(wk_reason_dict)

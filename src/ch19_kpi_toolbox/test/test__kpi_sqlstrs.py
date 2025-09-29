@@ -1,12 +1,11 @@
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch07Keywords as wx,
     Ch18Keywords as wx,
     Ch19Keywords as wx,
-    active_str,
-    task_str,
 )
 from src.ch19_kpi_toolbox.kpi_sqlstrs import (
     get_create_kpi001_sqlstr,
@@ -57,10 +56,10 @@ SELECT
 , {wx.belief_name}
 , {wx.plan_rope}
 , {wx.pledge}
-, {active_str()}
-, {task_str()}
+, {wx.active}
+, {wx.task}
 FROM {blrplan_job}
-WHERE {wx.pledge} == 1 AND {active_str()} == 1
+WHERE {wx.pledge} == 1 AND {wx.active} == 1
 ;
 """
     print(expected_kpi002_sqlstr)

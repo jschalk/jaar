@@ -11,12 +11,8 @@ from src.ch06_plan_logic._ref.ch06_keywords import (
     Ch02Keywords as wx,
     Ch03Keywords as wx,
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
-    active_str,
-    factheirs_str,
-    factunits_str,
-    reasonunits_str,
-    task_str,
 )
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import (
@@ -187,7 +183,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict is not None
     assert len(casa_dict["kids"]) == 1
     assert casa_dict["kids"] == casa_plan.get_kids_dict()
-    assert casa_dict[reasonunits_str()] == casa_plan.get_reasonunits_dict()
+    assert casa_dict[wx.reasonunits] == casa_plan.get_reasonunits_dict()
     assert casa_dict[wx.awardunits] == casa_plan.get_awardunits_dict()
     assert casa_dict[wx.awardunits] == x1_awardunits
     assert casa_dict[wx.laborunit] == sue_laborunit.to_dict()
@@ -207,7 +203,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert casa_dict[wx.problem_bool] == x_problem_bool
     assert casa_plan.is_expanded
     assert casa_dict.get("is_expanded") is None
-    assert len(casa_dict[factunits_str()]) == len(casa_plan.get_factunits_dict())
+    assert len(casa_dict[wx.factunits]) == len(casa_plan.get_factunits_dict())
 
 
 def test_PlanUnit_to_dict_ReturnsDictWithoutEmptyAttributes():
@@ -255,7 +251,7 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     # THEN
     assert casa_dict.get("is_expanded") is False
     assert casa_dict.get(wx.pledge)
-    assert casa_dict.get(factunits_str()) is not None
+    assert casa_dict.get(wx.factunits) is not None
     assert casa_dict.get(wx.awardunits) is not None
     assert casa_dict.get(wx.laborunit) is not None
     assert casa_dict.get("kids") is not None
@@ -278,7 +274,7 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     # THEN
     assert casa_dict.get("is_expanded") is None
     assert casa_dict.get(wx.pledge) is None
-    assert casa_dict.get(factunits_str()) is None
+    assert casa_dict.get(wx.factunits) is None
     assert casa_dict.get(wx.awardunits) is None
     assert casa_dict.get(wx.laborunit) is None
     assert casa_dict.get("healerunit") is None

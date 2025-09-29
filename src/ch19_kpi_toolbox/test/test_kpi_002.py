@@ -11,10 +11,9 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
 )
 from src.ch19_kpi_toolbox._ref.ch19_keywords import (
     Ch04Keywords as wx,
+    Ch05Keywords as wx,
     Ch06Keywords as wx,
     Ch19Keywords as wx,
-    active_str,
-    task_str,
 )
 from src.ch19_kpi_toolbox.kpi_mstr import create_populate_kpi002_table
 
@@ -38,8 +37,8 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario0_NoPledges():
 , {wx.belief_name}
 , {wx.plan_rope}
 , {wx.pledge}
-, {active_str()}
-, {task_str()}
+, {wx.active}
+, {wx.task}
 )
 VALUES 
   ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
@@ -60,8 +59,8 @@ VALUES
             wx.belief_name,
             wx.plan_rope,
             wx.pledge,
-            active_str(),
-            task_str(),
+            wx.active,
+            wx.task,
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 0
 
@@ -89,8 +88,8 @@ def test_create_populate_kpi002_table_PopulatesTable_Scenario1_TwoPledges():
 , {wx.belief_name}
 , {wx.plan_rope}
 , {wx.pledge}
-, {active_str()}
-, {task_str()}
+, {wx.active}
+, {wx.task}
 )
 VALUES 
   ('{a23_str}', '{bob_str}', '{casa_rope}', {casa_pledge}, {casa_active}, {casa_task})
@@ -113,7 +112,7 @@ VALUES
             wx.belief_name,
             wx.plan_rope,
             wx.pledge,
-            active_str(),
-            task_str(),
+            wx.active,
+            wx.task,
         ]
         assert get_row_count(cursor, moment_kpi002_belief_pledges_tablename) == 2

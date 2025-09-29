@@ -16,8 +16,8 @@ from src.ch16_translate_logic.test._util.ch16_examples import (
 from src.ch16_translate_logic.translate_config import get_translate_filename
 from src.ch16_translate_logic.translate_main import translateunit_shop
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch05Keywords as wx,
     Ch17Keywords as wx,
-    reason_context_str,
 )
 from src.ch17_idea_logic.idea_db_tool import (
     _get_translate_idea_format_filenames,
@@ -133,28 +133,24 @@ def test_move_otx_csvs_to_translate_inx_CreatesTranslateedFiles_Scenario1_Single
     print(f"{sue_otx_dt=} \n")
     print(f"{sue_inx_dt=} \n")
     gen_inx_dt = open_csv(inz_dir, example_filename)
-    assert gen_inx_dt.iloc[0][reason_context_str()] == inx_amy87_rope
-    assert gen_inx_dt.iloc[1][reason_context_str()] == casa_inx_rope
+    assert gen_inx_dt.iloc[0][wx.reason_context] == inx_amy87_rope
+    assert gen_inx_dt.iloc[1][wx.reason_context] == casa_inx_rope
     assert gen_inx_dt.to_csv() != sue_otx_dt.to_csv()
     assert (
-        gen_inx_dt.iloc[0][reason_context_str()]
-        == sue_inx_dt.iloc[0][reason_context_str()]
+        gen_inx_dt.iloc[0][wx.reason_context] == sue_inx_dt.iloc[0][wx.reason_context]
     )
     assert (
-        gen_inx_dt.iloc[1][reason_context_str()]
-        == sue_inx_dt.iloc[1][reason_context_str()]
+        gen_inx_dt.iloc[1][wx.reason_context] == sue_inx_dt.iloc[1][wx.reason_context]
     )
     assert (
-        gen_inx_dt.iloc[2][reason_context_str()]
-        == sue_inx_dt.iloc[2][reason_context_str()]
+        gen_inx_dt.iloc[2][wx.reason_context] == sue_inx_dt.iloc[2][wx.reason_context]
     )
     assert (
-        gen_inx_dt.iloc[3][reason_context_str()]
-        == sue_inx_dt.iloc[3][reason_context_str()]
+        gen_inx_dt.iloc[3][wx.reason_context] == sue_inx_dt.iloc[3][wx.reason_context]
     )
     print(f"{gen_inx_dt.to_csv(index=False)=}")
-    gen_csv = gen_inx_dt.sort_values(reason_context_str()).to_csv(index=False)
-    sue_inx_csv = sue_inx_dt.sort_values(reason_context_str()).to_csv(index=False)
+    gen_csv = gen_inx_dt.sort_values(wx.reason_context).to_csv(index=False)
+    sue_inx_csv = sue_inx_dt.sort_values(wx.reason_context).to_csv(index=False)
     assert gen_csv == sue_inx_csv
     assert gen_inx_dt.to_csv() == sue_inx_dt.to_csv()
 
