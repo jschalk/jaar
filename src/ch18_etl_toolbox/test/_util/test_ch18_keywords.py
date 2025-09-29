@@ -1,4 +1,5 @@
 from src.ch18_etl_toolbox._ref.ch18_keywords import (
+    Ch18Keywords,
     belief_net_amount_str,
     brick_agg_str,
     brick_raw_str,
@@ -13,6 +14,17 @@ from src.ch18_etl_toolbox._ref.ch18_keywords import (
     sound_agg_str,
     sound_raw_str,
 )
+
+
+def test_Ch18Keywords_AttributeNamesEqualValues():
+    """Test that all Ch09Keywords enum member names equal their values."""
+    # ESTABLISH / WHEN / THEN
+
+    for member in Ch18Keywords:
+        assertion_failure_str = (
+            f"Enum member name '{member.name}' does not match value '{member.value}'"
+        )
+        assert member.name == member.value, assertion_failure_str
 
 
 def test_str_functions_ReturnsObj():

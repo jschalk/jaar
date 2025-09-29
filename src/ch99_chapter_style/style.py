@@ -1,4 +1,3 @@
-# your_chapter.py
 from ast import (
     FunctionDef as ast_FunctionDef,
     Import as ast_Import,
@@ -22,7 +21,6 @@ from src.ch98_docs_builder.doc_builder import (
     get_keywords_filename,
 )
 from textwrap import dedent as textwrap_dedent
-from typing import List
 
 
 def get_imports_from_file(file_path):
@@ -338,22 +336,6 @@ def check_import_objs_are_ordered(test_file_imports: list[list], file_path: str)
             file_import_objs_str = file_import_objs_str.replace("]", "")
             print(f"from {file_import_src} import ({file_import_objs_str})")
         assert file_import_objs == sorted(file_import_objs)
-
-
-def check_str_func_test_file_has_needed_asserts(
-    chapter_keywords_by_chapter, test_file_path, util_dir, chapter_desc
-):
-    for str_function in chapter_keywords_by_chapter:
-        # print(f" {str_function=}")
-        assert str(str_function).endswith("_str")
-        str_func_assert_str = f"""assert {str_function}() == "{str_function[:-4]}"""
-        test_file_str = open(test_file_path).read()
-        if test_file_str.find(str_func_assert_str) <= 0:
-            chapter_desc_prefix = get_chapter_desc_prefix(chapter_desc)
-            keywords_filename = get_keywords_filename(chapter_desc_prefix)
-            str_util_path = create_path(util_dir, keywords_filename)
-            print(f"{str_util_path} {str_func_assert_str=}")
-        assert test_file_str.find(str_func_assert_str) > 0
 
 
 def get_docstring(file_path: str, function_name: str) -> str:

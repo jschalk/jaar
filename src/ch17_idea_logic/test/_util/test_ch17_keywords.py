@@ -1,4 +1,5 @@
 from src.ch17_idea_logic._ref.ch17_keywords import (
+    Ch17Keywords,
     allowed_crud_str,
     build_order_str,
     delete_insert_str,
@@ -12,6 +13,17 @@ from src.ch17_idea_logic._ref.ch17_keywords import (
     insert_update_str,
     world_name_str,
 )
+
+
+def test_Ch17Keywords_AttributeNamesEqualValues():
+    """Test that all Ch09Keywords enum member names equal their values."""
+    # ESTABLISH / WHEN / THEN
+
+    for member in Ch17Keywords:
+        assertion_failure_str = (
+            f"Enum member name '{member.name}' does not match value '{member.value}'"
+        )
+        assert member.name == member.value, assertion_failure_str
 
 
 def test_str_functions_ReturnsObj():

@@ -1,4 +1,5 @@
 from src.ch16_translate_logic._ref.ch16_keywords import (
+    Ch16Keywords,
     inx_knot_str,
     inx_label_str,
     inx_name_str,
@@ -19,6 +20,17 @@ from src.ch16_translate_logic._ref.ch16_keywords import (
     translateunit_str,
     unknown_str_str,
 )
+
+
+def test_Ch16Keywords_AttributeNamesEqualValues():
+    """Test that all Ch09Keywords enum member names equal their values."""
+    # ESTABLISH / WHEN / THEN
+
+    for member in Ch16Keywords:
+        assertion_failure_str = (
+            f"Enum member name '{member.name}' does not match value '{member.value}'"
+        )
+        assert member.name == member.value, assertion_failure_str
 
 
 def test_str_functions_ReturnsObj():
