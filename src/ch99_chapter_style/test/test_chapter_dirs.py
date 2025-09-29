@@ -99,14 +99,14 @@ def path_contains_subpath(full_path: str, sub_path: str):
         return False
 
 
-def test_Chapters_util_AssertsExistForEverytermFunction():
+def test_Chapters_ChXXKeywords_ClassesAreTested():
     """
     Test that all string-related functions in each chapter directory are asserted and tested.
     This test performs the following checks for each chapter:
     - Retrieves all string functions and ensures they are sorted and not duplicated.
     - Verifies that if string functions exist, a corresponding test file exists in the chapter's utility directory.
     - Checks that the test file imports exactly one object and that imports are ordered.
-    - Ensures the test file contains a single test function named 'test_str_functions_ReturnsObj'.
+    - Ensures the test file contains a single test function.
     - Validates that the test file includes the necessary assertions for all string functions.
     Raises:
         AssertionError: If any of the above conditions are not met.
@@ -147,11 +147,7 @@ def test_Chapters_util_AssertsExistForEverytermFunction():
                 chXX_test_name = (
                     f"test_{class_prefix}Keywords_AttributeNamesEqualValues"
                 )
-                # TODO get rid of all test_str_functions_ReturnsObj functions
-                assert set(file_funcs) == {
-                    chXX_test_name,
-                    "test_str_functions_ReturnsObj",
-                }
+                assert set(file_funcs) == {chXX_test_name}
 
 
 def test_Chapters_test_TestsAreInCorrectFolderStructure():

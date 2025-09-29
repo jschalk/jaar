@@ -26,13 +26,6 @@ def test_Ch21Keywords_AttributeNamesEqualValues():
         assert member.name == member.value, assertion_failure_str
 
 
-def test_str_functions_ReturnsObjs():
-    # ESTABLISH / WHEN / THEN
-    assert wx.lobbys == "lobbys"
-    assert wx.lobby_id == "lobby_id"
-    assert wx.lobby_mstr_dir == "lobby_mstr_dir"
-
-
 def test_LobbyID_Exists():
     # ESTABLISH / WHEN / THEN
     assert LobbyID("chat23") == "chat23"

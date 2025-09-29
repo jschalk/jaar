@@ -13,15 +13,3 @@ def test_Ch09Keywords_AttributeNamesEqualValues():
             f"Enum member name '{member.name}' does not match value '{member.value}'"
         )
         assert member.name == member.value, assertion_failure_str
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert wx.CRUD_command == "CRUD_command"
-    assert wx.DELETE == "DELETE"
-    assert wx.atom_hx == "atom_hx"
-    assert wx.column_order == "column_order"
-    assert wx.crud == "crud"
-    assert wx.nesting_order == "nesting_order"
-    assert wx.normal_specs == "normal_specs"
-    assert wx.normal_table_name == "normal_table_name"

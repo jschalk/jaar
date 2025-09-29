@@ -107,7 +107,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "set_label",
         "set_membership",
         "set_otx2inx",
-        "test_str_functions_ReturnsObj",
         "to_dict",
     }
 

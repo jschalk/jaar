@@ -10,10 +10,3 @@ def test_Ch10Keywords_AttributeNamesEqualValues():
             f"Enum member name '{member.name}' does not match value '{member.value}'"
         )
         assert member.name == member.value, assertion_failure_str
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert wx.FaceName == "FaceName"
-    assert wx.event_int == "event_int"
-    assert wx.face_name == "face_name"

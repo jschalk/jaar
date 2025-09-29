@@ -14,8 +14,3 @@ def test_Ch11Keywords_AttributeNamesEqualValues():
             f"Enum member name '{member.name}' does not match value '{member.value}'"
         )
         assert member.name == member.value, assertion_failure_str
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    pass

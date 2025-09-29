@@ -10,11 +10,3 @@ def test_Ch19Keywords_AttributeNamesEqualValues():
             f"Enum member name '{member.name}' does not match value '{member.value}'"
         )
         assert member.name == member.value, assertion_failure_str
-
-
-def test_str_functions_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-
-    assert wx.default_kpi_bundle == "default_kpi_bundle"
-    assert wx.moment_kpi001_voice_nets == "moment_kpi001_voice_nets"
-    assert wx.moment_kpi002_belief_pledges == "moment_kpi002_belief_pledges"
