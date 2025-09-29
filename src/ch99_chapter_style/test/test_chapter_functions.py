@@ -24,7 +24,6 @@ from src.ch99_chapter_style.style import (
     check_if_test_ReturnsObj_pytests_exist,
     find_incorrect_imports,
     get_all_semantic_types_from_ref_files,
-    get_all_str_functions,
     get_chapters_func_class_metrics,
     get_docstring,
     get_json_files,
@@ -270,35 +269,20 @@ def test_Chapters_AllImportsAreFromLibrariesInLessThanEqual_aXX():
             assert not incorrect_imports, assertion_fail_str
 
 
-def test_Chapters_StrFunctionsAreAllImported():
+def test_Chapters_All_semantic_types_NamesAreKeywords():
     # ESTABLISH / WHEN
-    all_str_functions = get_all_str_functions()
+    all_keywords = set(get_keywords_src_config().keys())
 
-    # THEN confirm all str functions are imported to max chapter
-    max_chapter_import_str = get_max_chapter_import_str()
-    print(f"{max_chapter_import_str=}")
-    max_mod_obj = importlib_import_module(max_chapter_import_str)
-    mod_all_funcs = inspect_getmembers(max_mod_obj, inspect_isfunction)
-    mod_keywords_by_chapter = {
-        name for name, obj in mod_all_funcs if not name.startswith("__")
-    }
-
-    print(f"{len(mod_all_funcs)=}")
-    all_str_func_set = set(all_str_functions)
-    print(f"{all_str_func_set.difference(mod_keywords_by_chapter)=}")
-    print(f"{mod_keywords_by_chapter.difference(all_str_func_set)=}")
-    assert len(all_str_func_set) == len(mod_keywords_by_chapter)
-    assert all_str_func_set == mod_keywords_by_chapter
-
+    # THEN
     # make semantic_type names required keyword str functions
     semantic_types = expected_semantic_types()
     semantic_keywords_by_chapter = set()
-    for semantic_typ in semantic_types:
-        semantic_keywords_by_chapter.add(f"{semantic_typ}_str")
+    for semantic_type in semantic_types:
+        semantic_keywords_by_chapter.add(semantic_type)
     print(
-        f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_str_functions)))}"
+        f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_keywords)))}"
     )
-    assert semantic_keywords_by_chapter.issubset(all_str_func_set)
+    assert semantic_keywords_by_chapter.issubset(all_keywords)
 
 
 def test_Chapters_path_FunctionStructureAndFormat():
