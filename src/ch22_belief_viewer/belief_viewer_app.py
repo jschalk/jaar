@@ -3,7 +3,7 @@ from src.ch08_timeline_logic.timeline_main import (
     add_newtimeline_planunit,
     get_default_timeline_config_dict,
 )
-from src.ch22_belief_viewer.belief_viewer_tool import get_belief_view_dict
+from src.ch22_belief_viewer.belief_viewer__tool import get_belief_view_dict
 from src.ch22_belief_viewer.example22_beliefs import (
     get_beliefunit_irrational_example,
     get_sue_belief_with_facts_and_reasons,

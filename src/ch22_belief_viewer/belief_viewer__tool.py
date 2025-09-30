@@ -260,111 +260,111 @@ def get_voices_view_dict(belief: BeliefUnit) -> dict[str,]:
 
 def get_groups_view_dict(belief: BeliefUnit) -> dict[str,]:
     groups_dict = {}
-    # for group in belief.groupunits.values():
+    for group in belief.groupunits.values():
 
-    #     group_title_readable_key = f"group_title_readable"
-    #     group_cred_points_readable_key = f"group_cred_points_readable"
-    #     group_debt_points_readable_key = f"group_debt_points_readable"
-    #     credor_pool_readable_key = f"credor_pool_readable"
-    #     debtor_pool_readable_key = f"debtor_pool_readable"
-    #     fund_agenda_give_readable_key = f"fund_agenda_give_readable"
-    #     fund_agenda_ratio_give_readable_key = f"fund_agenda_ratio_give_readable"
-    #     fund_agenda_ratio_take_readable_key = f"fund_agenda_ratio_take_readable"
-    #     fund_agenda_take_readable_key = f"fund_agenda_take_readable"
-    #     fund_give_readable_key = f"fund_give_readable"
-    #     fund_take_readable_key = f"fund_take_readable"
+        group_title_readable_key = f"group_title_readable"
+        #     group_cred_points_readable_key = f"group_cred_points_readable"
+        #     group_debt_points_readable_key = f"group_debt_points_readable"
+        #     credor_pool_readable_key = f"credor_pool_readable"
+        #     debtor_pool_readable_key = f"debtor_pool_readable"
+        #     fund_agenda_give_readable_key = f"fund_agenda_give_readable"
+        #     fund_agenda_ratio_give_readable_key = f"fund_agenda_ratio_give_readable"
+        #     fund_agenda_ratio_take_readable_key = f"fund_agenda_ratio_take_readable"
+        #     fund_agenda_take_readable_key = f"fund_agenda_take_readable"
+        #     fund_give_readable_key = f"fund_give_readable"
+        #     fund_take_readable_key = f"fund_take_readable"
 
-    #     group_group_title_readable = f"group_title_readable: {group.group_title}"
-    #     group_memberships_readable = f"memberships_readable: {group.memberships}"
-    #     group_fund_give_readable = f"fund_give_readable: {group.fund_give}"
-    #     group_fund_take_readable = f"fund_take_readable: {group.fund_take}"
-    #     group_fund_agenda_give_readable = (
-    #         f"fund_agenda_give_readable: {group.fund_agenda_give}"
-    #     )
-    #     group_fund_agenda_take_readable = (
-    #         f"fund_agenda_take_readable: {group.fund_agenda_take}"
-    #     )
-    #     group_credor_pool_readable = f"credor_pool_readable: {group.credor_pool}"
-    #     group_debtor_pool_readable = f"debtor_pool_readable: {group.debtor_pool}"
+        #     group_group_title_readable = f"group_title_readable: {group.group_title}"
+        #     group_memberships_readable = f"memberships_readable: {group.memberships}"
+        #     group_fund_give_readable = f"fund_give_readable: {group.fund_give}"
+        #     group_fund_take_readable = f"fund_take_readable: {group.fund_take}"
+        #     group_fund_agenda_give_readable = (
+        #         f"fund_agenda_give_readable: {group.fund_agenda_give}"
+        #     )
+        #     group_fund_agenda_take_readable = (
+        #         f"fund_agenda_take_readable: {group.fund_agenda_take}"
+        #     )
+        #     group_credor_pool_readable = f"credor_pool_readable: {group.credor_pool}"
+        #     group_debtor_pool_readable = f"debtor_pool_readable: {group.debtor_pool}"
 
-    #     x_members_dict = {
-    #         # x_membership.voice_name: {
-    #         #     "voice_name": x_membership.voice_name,
-    #         #     "group_title": x_membership.group_title,
-    #         #     "group_cred_points": x_membership.group_cred_points,
-    #         #     "group_debt_points": x_membership.group_debt_points,
-    #         #     "credor_pool": x_membership.credor_pool,
-    #         #     "debtor_pool": x_membership.debtor_pool,
-    #         #     "fund_agenda_give": x_membership.fund_agenda_give,
-    #         #     "fund_agenda_ratio_give": x_membership.fund_agenda_ratio_give,
-    #         #     "fund_agenda_ratio_take": x_membership.fund_agenda_ratio_take,
-    #         #     "fund_agenda_take": x_membership.fund_agenda_take,
-    #         #     "fund_give": x_membership.fund_give,
-    #         #     "fund_take": x_membership.fund_take,
-    #         #     "voice_name_readable": add_small_dot(
-    #         #         f"voice name: {x_membership.voice_name}"
-    #         #     ),
-    #         #     "group_cred_points_readable": add_small_dot(
-    #         #         f"group_cred_points: {x_membership.group_cred_points}"
-    #         #     ),
-    #         #     "group_debt_points_readable": add_small_dot(
-    #         #         f"group_debt_points: {x_membership.group_debt_points}"
-    #         #     ),
-    #         #     "credor_pool_readable": add_small_dot(
-    #         #         f"credor_pool: {x_membership.credor_pool}"
-    #         #     ),
-    #         #     "debtor_pool_readable": add_small_dot(
-    #         #         f"debtor_pool: {x_membership.debtor_pool}"
-    #         #     ),
-    #         #     "fund_agenda_give_readable": add_small_dot(
-    #         #         f"fund_agenda_give: {x_membership.fund_agenda_give}"
-    #         #     ),
-    #         #     "fund_agenda_ratio_give_readable": add_small_dot(
-    #         #         f"fund_agenda_ratio_give: {x_membership.fund_agenda_ratio_give}"
-    #         #     ),
-    #         #     "fund_agenda_ratio_take_readable": add_small_dot(
-    #         #         f"fund_agenda_ratio_take: {x_membership.fund_agenda_ratio_take}"
-    #         #     ),
-    #         #     "fund_agenda_take_readable": add_small_dot(
-    #         #         f"fund_agenda_take: {x_membership.fund_agenda_take}"
-    #         #     ),
-    #         #     "fund_give_readable": add_small_dot(
-    #         #         f"fund_give: {x_membership.fund_give}"
-    #         #     ),
-    #         #     "fund_take_readable": add_small_dot(
-    #         #         f"fund_take: {x_membership.fund_take}"
-    #         #     ),
-    #         # }
-    #         # for x_membership in group.memberships.values()
-    #     }
-    #     group_dict = {
-    #         "group_title": group.group_title,
-    #         "voice_name": 1,
-    #         "group_title": 1,
-    #         "group_cred_points": 1,
-    #         "group_debt_points": 1,
-    #         "credor_pool": 1,
-    #         "debtor_pool": 1,
-    #         "fund_agenda_give": 1,
-    #         "fund_agenda_ratio_give": 1,
-    #         "fund_agenda_ratio_take": 1,
-    #         "fund_agenda_take": 1,
-    #         "fund_give": 1,
-    #         "fund_take": 1,
-    #         group_title_readable_key: 1,
-    #         group_cred_points_readable_key: 1,
-    #         group_debt_points_readable_key: 1,
-    #         credor_pool_readable_key: 1,
-    #         debtor_pool_readable_key: 1,
-    #         fund_agenda_give_readable_key: 1,
-    #         fund_agenda_ratio_give_readable_key: 1,
-    #         fund_agenda_ratio_take_readable_key: 1,
-    #         fund_agenda_take_readable_key: 1,
-    #         fund_give_readable_key: 1,
-    #         fund_take_readable_key: 1,
-    #         # "memberships": x_members_dict,
-    #     }
-    #     groups_dict[group.group_title] = group_dict
+        #     x_members_dict = {
+        #         # x_membership.voice_name: {
+        #         #     "voice_name": x_membership.voice_name,
+        #         #     "group_title": x_membership.group_title,
+        #         #     "group_cred_points": x_membership.group_cred_points,
+        #         #     "group_debt_points": x_membership.group_debt_points,
+        #         #     "credor_pool": x_membership.credor_pool,
+        #         #     "debtor_pool": x_membership.debtor_pool,
+        #         #     "fund_agenda_give": x_membership.fund_agenda_give,
+        #         #     "fund_agenda_ratio_give": x_membership.fund_agenda_ratio_give,
+        #         #     "fund_agenda_ratio_take": x_membership.fund_agenda_ratio_take,
+        #         #     "fund_agenda_take": x_membership.fund_agenda_take,
+        #         #     "fund_give": x_membership.fund_give,
+        #         #     "fund_take": x_membership.fund_take,
+        #         #     "voice_name_readable": add_small_dot(
+        #         #         f"voice name: {x_membership.voice_name}"
+        #         #     ),
+        #         #     "group_cred_points_readable": add_small_dot(
+        #         #         f"group_cred_points: {x_membership.group_cred_points}"
+        #         #     ),
+        #         #     "group_debt_points_readable": add_small_dot(
+        #         #         f"group_debt_points: {x_membership.group_debt_points}"
+        #         #     ),
+        #         #     "credor_pool_readable": add_small_dot(
+        #         #         f"credor_pool: {x_membership.credor_pool}"
+        #         #     ),
+        #         #     "debtor_pool_readable": add_small_dot(
+        #         #         f"debtor_pool: {x_membership.debtor_pool}"
+        #         #     ),
+        #         #     "fund_agenda_give_readable": add_small_dot(
+        #         #         f"fund_agenda_give: {x_membership.fund_agenda_give}"
+        #         #     ),
+        #         #     "fund_agenda_ratio_give_readable": add_small_dot(
+        #         #         f"fund_agenda_ratio_give: {x_membership.fund_agenda_ratio_give}"
+        #         #     ),
+        #         #     "fund_agenda_ratio_take_readable": add_small_dot(
+        #         #         f"fund_agenda_ratio_take: {x_membership.fund_agenda_ratio_take}"
+        #         #     ),
+        #         #     "fund_agenda_take_readable": add_small_dot(
+        #         #         f"fund_agenda_take: {x_membership.fund_agenda_take}"
+        #         #     ),
+        #         #     "fund_give_readable": add_small_dot(
+        #         #         f"fund_give: {x_membership.fund_give}"
+        #         #     ),
+        #         #     "fund_take_readable": add_small_dot(
+        #         #         f"fund_take: {x_membership.fund_take}"
+        #         #     ),
+        #         # }
+        #         # for x_membership in group.memberships.values()
+        #     }
+        group_dict = {
+            "group_title": group.group_title,
+            #         "voice_name": 1,
+            #         "group_title": 1,
+            #         "group_cred_points": 1,
+            #         "group_debt_points": 1,
+            #         "credor_pool": 1,
+            #         "debtor_pool": 1,
+            "fund_agenda_give": 1,
+            #         "fund_agenda_ratio_give": 1,
+            #         "fund_agenda_ratio_take": 1,
+            #         "fund_agenda_take": 1,
+            #         "fund_give": 1,
+            "fund_take": 1,
+            #         group_title_readable_key: 1,
+            #         group_cred_points_readable_key: 1,
+            #         group_debt_points_readable_key: 1,
+            #         credor_pool_readable_key: 1,
+            #         debtor_pool_readable_key: 1,
+            #         fund_agenda_give_readable_key: 1,
+            #         fund_agenda_ratio_give_readable_key: 1,
+            #         fund_agenda_ratio_take_readable_key: 1,
+            #         fund_agenda_take_readable_key: 1,
+            #         fund_give_readable_key: 1,
+            #         fund_take_readable_key: 1,
+            #         # "memberships": x_members_dict,
+        }
+        groups_dict[group.group_title] = group_dict
 
     return groups_dict
 

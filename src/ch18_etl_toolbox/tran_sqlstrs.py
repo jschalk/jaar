@@ -161,11 +161,11 @@ CREATE_BLFOFFI_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_
 CREATE_BLFOFFI_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, offi_time INTEGER)"""
 CREATE_BLFOFFI_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, offi_time INTEGER, error_message TEXT)"""
 CREATE_BLFOFFI_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS moment_timeoffi_h_agg (moment_label TEXT, offi_time INTEGER)"""
-CREATE_BLFUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_BLFUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_BLFUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
-CREATE_BLFUNIT_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
-CREATE_BLFUNIT_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_h_agg (moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_distortion INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
+CREATE_BLFUNIT_SOUND_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_index INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_SOUND_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_index INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_SOUND_VLD_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_s_vld (event_int INTEGER, face_name TEXT, moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_index INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
+CREATE_BLFUNIT_HEARD_RAW_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_h_raw (event_int INTEGER, face_name_otx TEXT, face_name_inx TEXT, moment_label_otx TEXT, moment_label_inx TEXT, timeline_label_otx TEXT, timeline_label_inx TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_index INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER, error_message TEXT)"""
+CREATE_BLFUNIT_HEARD_AGG_SQLSTR = """CREATE TABLE IF NOT EXISTS momentunit_h_agg (moment_label TEXT, timeline_label TEXT, c400_number INTEGER, yr1_jan1_offset INTEGER, monthday_index INTEGER, fund_iota REAL, penny REAL, respect_bit REAL, knot TEXT, job_listen_rotations INTEGER)"""
 
 CREATE_BLRMEMB_SOUND_PUT_RAW_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_s_put_raw (idea_number TEXT, event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, error_message TEXT)"
 CREATE_BLRMEMB_SOUND_PUT_AGG_STR = "CREATE TABLE IF NOT EXISTS belief_voice_membership_s_put_agg (event_int INTEGER, face_name TEXT, moment_label TEXT, belief_name TEXT, voice_name TEXT, group_title TEXT, group_cred_points REAL, group_debt_points REAL, error_message TEXT)"
@@ -753,7 +753,7 @@ INSERT_BLFHOUR_SOUND_VLD_SQLSTR = "INSERT INTO moment_timeline_hour_s_vld (event
 INSERT_BLFMONT_SOUND_VLD_SQLSTR = "INSERT INTO moment_timeline_month_s_vld (event_int, face_name, moment_label, cumulative_day, month_label) SELECT event_int, face_name, moment_label, cumulative_day, month_label FROM moment_timeline_month_s_agg WHERE error_message IS NULL"
 INSERT_BLFWEEK_SOUND_VLD_SQLSTR = "INSERT INTO moment_timeline_weekday_s_vld (event_int, face_name, moment_label, weekday_order, weekday_label) SELECT event_int, face_name, moment_label, weekday_order, weekday_label FROM moment_timeline_weekday_s_agg WHERE error_message IS NULL"
 INSERT_BLFOFFI_SOUND_VLD_SQLSTR = "INSERT INTO moment_timeoffi_s_vld (event_int, face_name, moment_label, offi_time) SELECT event_int, face_name, moment_label, offi_time FROM moment_timeoffi_s_agg WHERE error_message IS NULL"
-INSERT_BLFUNIT_SOUND_VLD_SQLSTR = "INSERT INTO momentunit_s_vld (event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_s_agg WHERE error_message IS NULL"
+INSERT_BLFUNIT_SOUND_VLD_SQLSTR = "INSERT INTO momentunit_s_vld (event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_s_agg WHERE error_message IS NULL"
 
 
 def get_insert_into_sound_vld_sqlstrs() -> dict[str, str]:
@@ -794,7 +794,7 @@ INSERT_BLFHOUR_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeline_hour_h_raw (event
 INSERT_BLFMONT_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeline_month_h_raw (event_int, face_name_otx, moment_label_otx, cumulative_day, month_label_otx) SELECT event_int, face_name, moment_label, cumulative_day, month_label FROM moment_timeline_month_s_vld "
 INSERT_BLFWEEK_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeline_weekday_h_raw (event_int, face_name_otx, moment_label_otx, weekday_order, weekday_label_otx) SELECT event_int, face_name, moment_label, weekday_order, weekday_label FROM moment_timeline_weekday_s_vld "
 INSERT_BLFOFFI_HEARD_RAW_SQLSTR = "INSERT INTO moment_timeoffi_h_raw (event_int, face_name_otx, moment_label_otx, offi_time) SELECT event_int, face_name, moment_label, offi_time FROM moment_timeoffi_s_vld "
-INSERT_BLFUNIT_HEARD_RAW_SQLSTR = "INSERT INTO momentunit_h_raw (event_int, face_name_otx, moment_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_s_vld "
+INSERT_BLFUNIT_HEARD_RAW_SQLSTR = "INSERT INTO momentunit_h_raw (event_int, face_name_otx, moment_label_otx, timeline_label_otx, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations) SELECT event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_s_vld "
 
 INSERT_BLRMEMB_HEARD_RAW_PUT_SQLSTR = "INSERT INTO belief_voice_membership_h_put_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, voice_name_otx, group_title_otx, group_cred_points, group_debt_points) SELECT event_int, face_name, moment_label, belief_name, voice_name, group_title, group_cred_points, group_debt_points FROM belief_voice_membership_s_put_vld "
 INSERT_BLRMEMB_HEARD_RAW_DEL_SQLSTR = "INSERT INTO belief_voice_membership_h_del_raw (event_int, face_name_otx, moment_label_otx, belief_name_otx, voice_name_otx, group_title_ERASE_otx) SELECT event_int, face_name, moment_label, belief_name, voice_name, group_title_ERASE FROM belief_voice_membership_s_del_vld "
@@ -935,10 +935,10 @@ FROM moment_timeoffi_h_raw
 GROUP BY moment_label_inx, offi_time
 """
 BLFUNIT_HEARD_AGG_INSERT_SQLSTR = """
-INSERT INTO momentunit_h_agg (moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations)
-SELECT moment_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
+INSERT INTO momentunit_h_agg (moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations)
+SELECT moment_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations
 FROM momentunit_h_raw
-GROUP BY moment_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
+GROUP BY moment_label_inx, timeline_label_inx, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations
 """
 
 INSERT_BLRMEMB_HEARD_AGG_PUT_SQLSTR = """
@@ -1103,7 +1103,7 @@ BLFWEEK_FU2_SELECT_SQLSTR = "SELECT moment_label, weekday_order, weekday_label F
 BLFOFFI_FU2_SELECT_SQLSTR = (
     "SELECT moment_label, offi_time FROM moment_timeoffi_h_agg WHERE moment_label = "
 )
-BLFUNIT_FU2_SELECT_SQLSTR = "SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = "
+BLFUNIT_FU2_SELECT_SQLSTR = "SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = "
 
 
 def get_moment_heard_select1_sqlstrs(moment_label: str) -> dict[str, str]:

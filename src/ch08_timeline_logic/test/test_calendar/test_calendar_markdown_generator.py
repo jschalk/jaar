@@ -35,7 +35,7 @@ def test_MonthMarkDownUnit_Exists():
     assert not x_monthmarkdownunit.first_weekday
     assert not x_monthmarkdownunit.week_length
     assert not x_monthmarkdownunit.month_days_int
-    assert not x_monthmarkdownunit.monthday_distortion
+    assert not x_monthmarkdownunit.monthday_index
     assert not x_monthmarkdownunit.weekday_2char_abvs
     assert not x_monthmarkdownunit.max_monthday_rows
     assert not x_monthmarkdownunit.year
@@ -97,7 +97,7 @@ def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario0_Row0():
         first_weekday=0,
         week_length=7,
         month_days_int=31,
-        monthday_distortion=0,
+        monthday_index=0,
     )
 
     # WHEN
@@ -115,7 +115,7 @@ def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario1_Row1():
         first_weekday=0,
         week_length=7,
         month_days_int=31,
-        monthday_distortion=0,
+        monthday_index=0,
     )
 
     # WHEN
@@ -125,7 +125,7 @@ def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario1_Row1():
     assert markdown_day_numbers == " 7  8  9 10 11 12 13"
 
 
-def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario2_monthday_distortion():
+def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario2_monthday_index():
     # ESTABLISH
     jan_monthmarkdownunit = MonthMarkDownUnit(
         "January",
@@ -133,7 +133,7 @@ def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario2_monthday_di
         first_weekday=0,
         week_length=7,
         month_days_int=31,
-        monthday_distortion=1,
+        monthday_index=1,
     )
 
     # WHEN
@@ -151,7 +151,7 @@ def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario3_first_weekd
         first_weekday=3,
         week_length=7,
         month_days_int=31,
-        monthday_distortion=1,
+        monthday_index=1,
     )
 
     # WHEN
@@ -169,7 +169,7 @@ def test_MonthMarkDownUnit_markdown_day_numbers_ReturnsObj_Scenario4_first_weekd
         first_weekday=3,
         week_length=7,
         month_days_int=31,
-        monthday_distortion=1,
+        monthday_index=1,
     )
 
     # WHEN / THEN
@@ -189,7 +189,7 @@ def test_MonthMarkDownUnit_set_max_monthday_rows_ReturnsObj_Scenario0():
         first_weekday=3,
         week_length=7,
         month_days_int=31,
-        monthday_distortion=1,
+        monthday_index=1,
     )
     assert not jan_monthmarkdownunit.max_monthday_rows
 
@@ -372,7 +372,7 @@ def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
     assert monthmarkdownunit0.cumulative_days == 31
     assert monthmarkdownunit0.month_days_int == 31
     assert monthmarkdownunit0.week_length == 7
-    assert monthmarkdownunit0.monthday_distortion == 1
+    assert monthmarkdownunit0.monthday_index == 1
     assert monthmarkdownunit0.weekday_2char_abvs == x_weekday_2char_abvs
     assert monthmarkdownunit0.first_weekday == 1
     assert monthmarkdownunit0.year == yr1997_int
@@ -382,7 +382,7 @@ def test_CalendarMarkDown_set_monthmarkdownrows_SetsAttr():
     assert monthmarkdownunit7.cumulative_days == 214
     assert monthmarkdownunit7.month_days_int == 30
     assert monthmarkdownunit7.week_length == 7
-    assert monthmarkdownunit7.monthday_distortion == 1
+    assert monthmarkdownunit7.monthday_index == 1
     assert monthmarkdownunit7.weekday_2char_abvs == x_weekday_2char_abvs
     assert monthmarkdownunit7.first_weekday == 3
     assert monthmarkdownunit7.year == yr1997_int

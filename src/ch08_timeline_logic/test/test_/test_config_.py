@@ -131,7 +131,7 @@ def test_validate_timeline_config_ReturnsObj_CheckEachElementIsNecessary():
 
     # ESTABLISH / WHEN / THEN
     creg_config = copy_deepcopy(orig_creg_config)
-    creg_config.pop(wx.monthday_distortion)
+    creg_config.pop(wx.monthday_index)
     assert not validate_timeline_config(creg_config)
 
     # ESTABLISH / WHEN / THEN
@@ -246,7 +246,7 @@ def test_timeline_config_shop_ReturnsObj_AllParameters():
         weekday_list=five_weekday_list,
         months_list=five_months_list,
         yr1_jan1_offset=five_yr1_jan1_offset,
-        monthday_distortion=0,
+        monthday_index=0,
     )
 
     # THEN
@@ -322,7 +322,7 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
         ["January", 337],
         ["February", 365],
     ]
-    h_monthday_distortion = 1
+    h_monthday_index = 1
     h_timeline_label = "creg"
     h_weekdays_config = [
         "Wednesday",
@@ -349,7 +349,7 @@ def test_timeline_config_shop_ReturnsObj_NoParameters():
     assert generated_dict.get(wx.c400_number) == h_c400_number
     assert generated_dict.get(wx.hours_config) == h_hours_config
     assert generated_dict.get(wx.months_config) == h_months_config
-    assert generated_dict.get(wx.monthday_distortion) == h_monthday_distortion
+    assert generated_dict.get(wx.monthday_index) == h_monthday_index
     assert generated_dict.get(wx.timeline_label) == h_timeline_label
     assert generated_dict.get(wx.weekdays_config) == h_weekdays_config
     assert generated_dict.get(wx.yr1_jan1_offset) == h_yr1_jan1_offset
@@ -406,7 +406,7 @@ def test_TimeLineUnit_Exists():
     assert not x_timelineunit.c400_number
     assert not x_timelineunit.hours_config
     assert not x_timelineunit.months_config
-    assert not x_timelineunit.monthday_distortion
+    assert not x_timelineunit.monthday_index
     assert not x_timelineunit.timeline_label
     assert not x_timelineunit.weekdays_config
     assert not x_timelineunit.yr1_jan1_offset
@@ -425,14 +425,14 @@ def test_timelineunit_shop_ReturnsObj_Scenario0_Default():
     creg_months_config = creg_config.get(wx.months_config)
     creg_timeline_label = creg_config.get(wx.timeline_label)
     creg_weekdays_config = creg_config.get(wx.weekdays_config)
-    creg_monthday_distortion = creg_config.get(wx.monthday_distortion)
+    creg_monthday_index = creg_config.get(wx.monthday_index)
     creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
 
     assert x_timelineunit
     assert x_timelineunit.c400_number == creg_c400_number
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
-    assert x_timelineunit.monthday_distortion == creg_monthday_distortion
+    assert x_timelineunit.monthday_index == creg_monthday_index
     assert x_timelineunit.timeline_label == creg_timeline_label
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
@@ -444,7 +444,7 @@ def test_timelineunit_shop_ReturnsObj_Scenario1_WhenTimeLineUnitAttributesAreNon
     incomplete_creg_config.pop(wx.c400_number)
     incomplete_creg_config.pop(wx.hours_config)
     incomplete_creg_config.pop(wx.months_config)
-    incomplete_creg_config.pop(wx.monthday_distortion)
+    incomplete_creg_config.pop(wx.monthday_index)
     incomplete_creg_config.pop(wx.weekdays_config)
     incomplete_creg_config.pop(wx.yr1_jan1_offset)
     assert incomplete_creg_config
@@ -459,14 +459,14 @@ def test_timelineunit_shop_ReturnsObj_Scenario1_WhenTimeLineUnitAttributesAreNon
     creg_months_config = creg_config.get(wx.months_config)
     creg_timeline_label = creg_config.get(wx.timeline_label)
     creg_weekdays_config = creg_config.get(wx.weekdays_config)
-    creg_monthday_distortion = creg_config.get(wx.monthday_distortion)
+    creg_monthday_index = creg_config.get(wx.monthday_index)
     creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
 
     assert x_timelineunit
     assert x_timelineunit.c400_number == creg_c400_number
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
-    assert x_timelineunit.monthday_distortion == creg_monthday_distortion
+    assert x_timelineunit.monthday_index == creg_monthday_index
     assert x_timelineunit.timeline_label == creg_timeline_label
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset
@@ -489,14 +489,14 @@ def test_timelineunit_shop_ReturnsObj_Scenario2_timeline_label_Missing():
     creg_months_config = creg_config.get(wx.months_config)
     creg_timeline_label = creg_config.get(wx.timeline_label)
     creg_weekdays_config = creg_config.get(wx.weekdays_config)
-    creg_monthday_distortion = creg_config.get(wx.monthday_distortion)
+    creg_monthday_index = creg_config.get(wx.monthday_index)
     creg_yr1_jan1_offset = creg_config.get(wx.yr1_jan1_offset)
 
     assert x_timelineunit
     assert x_timelineunit.c400_number == creg_c400_number
     assert x_timelineunit.hours_config == creg_hours_config
     assert x_timelineunit.months_config == creg_months_config
-    assert x_timelineunit.monthday_distortion == creg_monthday_distortion
+    assert x_timelineunit.monthday_index == creg_monthday_index
     assert x_timelineunit.timeline_label == creg_timeline_label
     assert x_timelineunit.weekdays_config == creg_weekdays_config
     assert x_timelineunit.yr1_jan1_offset == creg_yr1_jan1_offset

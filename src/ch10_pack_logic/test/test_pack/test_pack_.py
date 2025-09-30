@@ -354,29 +354,26 @@ def test_PackUnit_get_json_ReturnsObj_WithBeliefDeltaPopulated():
 
     # THEN
     assert generated_json
-    print(f"{generated_json=}")
+    print("generated_json")
+    print(generated_json)
     expected_json = """{
-  "belief_name": "Bob",
+  "belief_name": "Bob", 
   "delta": {
     "0": {
-      "crud": "DELETE",
-      "dimen": "belief_voiceunit",
-      "jkeys": {
-        "voice_name": "Sue"
-      },
+      "crud": "DELETE", 
+      "dimen": "belief_voiceunit", 
+      "jkeys": {"voice_name": "Sue"}, 
       "jvalues": {}
-    },
+    }, 
     "1": {
-      "crud": "UPDATE",
-      "dimen": "beliefunit",
-      "jkeys": {},
-      "jvalues": {
-        "credor_respect": 77
-      }
+      "crud": "UPDATE", 
+      "dimen": "beliefunit", 
+      "jkeys": {}, 
+      "jvalues": {"credor_respect": 77}
     }
-  },
-  "event_int": null,
-  "face_name": null,
+  }, 
+  "event_int": null, 
+  "face_name": null, 
   "moment_label": "ZZ"
 }"""
     assert generated_json == expected_json

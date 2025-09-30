@@ -55,7 +55,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "offi_time",
         "c400_number",
         "yr1_jan1_offset",
-        "monthday_distortion",
+        "monthday_index",
         "cumulative_day",
         "month_label",
         "month_label_otx",
@@ -369,7 +369,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "yr1_jan1_offset": "INTEGER",
         "quota": "REAL",
         "celldepth": "INTEGER",
-        "monthday_distortion": "INTEGER",
+        "monthday_index": "INTEGER",
         "job_listen_rotations": "INTEGER",
         "timeline_label": "TEXT",
         "timeline_label_otx": "TEXT",
@@ -697,7 +697,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_distortion,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_momentunit_v0_0_0(),
+        "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_index,fund_iota,penny,respect_bit,knot,job_listen_rotations": idea_format_00000_momentunit_v0_0_0(),
         "moment_label,belief_name,bud_time,quota,celldepth": idea_format_00001_moment_budunit_v0_0_0(),
         "moment_label,belief_name,voice_name,tran_time,amount": idea_format_00002_moment_paybook_v0_0_0(),
         "moment_label,cumulative_minute,hour_label": idea_format_00003_moment_timeline_hour_v0_0_0(),

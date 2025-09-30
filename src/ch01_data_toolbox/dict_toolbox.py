@@ -1,4 +1,5 @@
 from collections import deque
+from compact_json import Formatter as compact_json_Formatter
 from copy import deepcopy as copy_deepcopy
 from csv import reader as csv_reader, writer as csv_writer
 from io import StringIO as io_StringIO
@@ -188,8 +189,16 @@ def del_in_nested_dict(x_dict: dict, x_keylist: list):
             x_dict.pop(parent_keylist[0])
 
 
+def normalize_and_compact_json(data: dict) -> str:
+    normalized = json_loads(json_dumps(data, sort_keys=True))
+    formatter = compact_json_Formatter()
+    formatter.indent_spaces = 2
+    formatter.max_inline_complexity = 10  # Adjust as needed
+    return formatter.serialize(normalized)
+
+
 def get_json_from_dict(x_dict: dict) -> str:
-    return json_dumps(obj=x_dict, indent=2, sort_keys=True)
+    return normalize_and_compact_json(x_dict)
 
 
 def get_dict_from_json(x_json: str) -> dict[str,]:

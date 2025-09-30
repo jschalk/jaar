@@ -101,7 +101,7 @@ def get_translate_args_class_types() -> dict[str, str]:
         "star": "int",
         "max_tree_traverse": "int",
         "month_label": "LabelTerm",
-        "monthday_distortion": "int",
+        "monthday_index": "int",
         "morph": "bool",
         "numor": "int",
         "offi_time": "TimeLinePoint",

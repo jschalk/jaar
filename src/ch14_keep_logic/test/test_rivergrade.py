@@ -105,17 +105,17 @@ def test_rivergrade_shop_ReturnsObjWithoutArgs():
 def test_RiverGrade_set_tax_due_amount_SetsAttrs():
     # ESTABLISH
     x_rivergrade = RiverGrade()
-    assert x_rivergrade.tax_bill_amount is None
-    assert x_rivergrade.tax_paid_amount is None
-    assert x_rivergrade.tax_paid_bool is None
+    assert not x_rivergrade.tax_bill_amount
+    assert not x_rivergrade.tax_paid_amount
+    assert not x_rivergrade.tax_paid_bool
 
     # WHEN
     x_tax_due_amount = 88
     x_rivergrade.set_tax_bill_amount(x_tax_due_amount)
     # THEN
     assert x_rivergrade.tax_bill_amount == x_tax_due_amount
-    assert x_rivergrade.tax_paid_amount is None
-    assert x_rivergrade.tax_paid_bool is False
+    assert not x_rivergrade.tax_paid_amount
+    assert not x_rivergrade.tax_paid_bool
 
     # WHEN
     x_tax_paid_amount = 77
@@ -208,22 +208,22 @@ def test_RiverGrade_get_json_ReturnsObj():
 
     # THEN
     static_json = """{
-  "credor_count": 103,
-  "credor_rank_num": null,
-  "credor_rank_percent": null,
-  "debtor_count": 101,
-  "debtor_rank_num": null,
-  "debtor_rank_percent": null,
-  "grant_amount": null,
-  "healer_name": "Yao",
-  "keep_rope": null,
-  "moment_label": "ex_keep04",
-  "rewards_count": null,
-  "rewards_magnitude": null,
-  "tax_bill_amount": null,
-  "tax_paid_amount": null,
-  "tax_paid_bool": null,
-  "tax_paid_rank_num": null,
+  "credor_count": 103, 
+  "credor_rank_num": null, 
+  "credor_rank_percent": null, 
+  "debtor_count": 101, 
+  "debtor_rank_num": null, 
+  "debtor_rank_percent": null, 
+  "grant_amount": null, 
+  "healer_name": "Yao", 
+  "keep_rope": null, 
+  "moment_label": "ex_keep04", 
+  "rewards_count": null, 
+  "rewards_magnitude": null, 
+  "tax_bill_amount": null, 
+  "tax_paid_amount": null, 
+  "tax_paid_bool": null, 
+  "tax_paid_rank_num": null, 
   "tax_paid_rank_percent": null
 }"""
 

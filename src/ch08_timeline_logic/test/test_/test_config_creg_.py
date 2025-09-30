@@ -48,8 +48,8 @@ def test_get_creg_config_ReturnsObj():
     assert five_offset == 1683478080
     c400_len = get_c400_constants().c400_leap_length
     assert five_offset == (c400_len * 8) + 440640
-    assert creg_config.get(wx.monthday_distortion) == 1
-    assert five_config.get(wx.monthday_distortion) == 0
+    assert creg_config.get(wx.monthday_index) == 1
+    assert five_config.get(wx.monthday_index) == 0
 
 
 def test_cregtime_planunit_ReturnsObj():

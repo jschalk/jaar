@@ -7,14 +7,14 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_momentunit_v0_0_0
-    c400_number,moment_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
+    c400_number,moment_label,fund_iota,monthday_index,penny,respect_bit,knot,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
             wx.c400_number,
             wx.moment_label,
             wx.fund_iota,
-            wx.monthday_distortion,
+            wx.monthday_index,
             wx.penny,
             wx.respect_bit,
             wx.knot,
@@ -119,14 +119,14 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_momentunit_v0_0_0
-    c400_number,moment_label,fund_iota,monthday_distortion,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
+    c400_number,moment_label,fund_iota,monthday_index,penny,respect_bit,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
             wx.c400_number,
             wx.moment_label,
             wx.fund_iota,
-            wx.monthday_distortion,
+            wx.monthday_index,
             wx.penny,
             wx.respect_bit,
             wx.knot,

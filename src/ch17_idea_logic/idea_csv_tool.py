@@ -96,7 +96,7 @@ def _add_momentunit_to_br00000_csv(
         x_moment.timeline.timeline_label,
         str(x_moment.timeline.c400_number),
         str(x_moment.timeline.yr1_jan1_offset),
-        str(x_moment.timeline.monthday_distortion),
+        str(x_moment.timeline.monthday_index),
         str(x_moment.fund_iota),
         str(x_moment.penny),
         str(x_moment.respect_bit),

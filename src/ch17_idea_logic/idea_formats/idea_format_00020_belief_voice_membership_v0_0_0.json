@@ -1,35 +1,14 @@
 {
   "attributes": {
-    "belief_name": {
-      "otx_key": true
-    },
-    "event_int": {
-      "otx_key": true
-    },
-    "face_name": {
-      "otx_key": true
-    },
-    "group_cred_points": {
-      "otx_key": false
-    },
-    "group_debt_points": {
-      "otx_key": false
-    },
-    "group_title": {
-      "otx_key": true
-    },
-    "moment_label": {
-      "otx_key": true
-    },
-    "voice_name": {
-      "otx_key": true
-    }
-  },
-  "dimens": [
-    "belief_voiceunit",
-    "belief_voice_membership",
-    "beliefunit",
-    "momentunit"
-  ],
+    "belief_name"      : { "otx_key": true  }, 
+    "event_int"        : { "otx_key": true  }, 
+    "face_name"        : { "otx_key": true  }, 
+    "group_cred_points": { "otx_key": false }, 
+    "group_debt_points": { "otx_key": false }, 
+    "group_title"      : { "otx_key": true  }, 
+    "moment_label"     : { "otx_key": true  }, 
+    "voice_name"       : { "otx_key": true  }
+  }, 
+  "dimens": ["belief_voiceunit", "belief_voice_membership", "beliefunit", "momentunit"], 
   "idea_number": "br00020"
 }

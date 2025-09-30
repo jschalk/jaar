@@ -851,6 +851,7 @@ def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
 
 
 def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario2():
+    # sourcery skip: extract-duplicate-method, inline-immediately-returned-variable, move-assign-in-block
     # ESTABLISH
     old_nexus_label = "El Paso"
     casa_str = "casa"

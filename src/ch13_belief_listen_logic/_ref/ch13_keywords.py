@@ -137,7 +137,7 @@ class Ch13Keywords(str, Enum):
     memberships = "memberships"
     moment_label = "moment_label"
     moment_mstr_dir = "moment_mstr_dir"
-    monthday_distortion = "monthday_distortion"
+    monthday_index = "monthday_index"
     months_config = "months_config"
     morph = "morph"
     nesting_order = "nesting_order"

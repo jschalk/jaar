@@ -18,7 +18,7 @@ class MonthMarkDownUnit:
     first_weekday: int = None
     week_length: int = None
     month_days_int: int = None
-    monthday_distortion: int = None
+    monthday_index: int = None
     weekday_2char_abvs: list[str] = None
     max_monthday_rows: int = None
     year: int = None
@@ -45,7 +45,7 @@ class MonthMarkDownUnit:
             if monthday < 0 or monthday >= self.month_days_int:
                 x_str += "   "
             else:
-                display_monthday = monthday + self.monthday_distortion
+                display_monthday = monthday + self.monthday_index
                 x_str += f"{display_monthday:2} "
         return x_str[:-1]
 
@@ -125,7 +125,7 @@ class CalendarMarkDown:
         self.monthmarkdownrows = []
         x_monthmarkdownrow = MonthMarkDownRow([])
         previous_cumulative_days = 0
-        x_monthday_distortion = self.timelineunit.monthday_distortion
+        x_monthday_index = self.timelineunit.monthday_index
         self.yr1_jan1_offset_days = self.timelineunit.yr1_jan1_offset / 1440
         x_weekday_2char_list = self.create_2char_weekday_list()
         year_init_2char = year_init_weekday[:2]
@@ -139,7 +139,7 @@ class CalendarMarkDown:
             new_monthmarkdownunit.month_days_int = (
                 cumulative_days - previous_cumulative_days
             )
-            new_monthmarkdownunit.monthday_distortion = x_monthday_distortion
+            new_monthmarkdownunit.monthday_index = x_monthday_index
             new_monthmarkdownunit.weekday_2char_abvs = x_weekday_2char_list
 
             new_monthmarkdownunit.first_weekday = month_first_weekday_index

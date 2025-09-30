@@ -192,16 +192,14 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             file_str = open(file_path).read()
             for keyword in not_allowed_keywords:
                 notallowed_keyword_failure_str = f"keyword {keyword} is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
-                assert file_str.find(keyword) == -1, notallowed_keyword_failure_str
+                assert keyword not in file_str, notallowed_keyword_failure_str
             print(f"{file_path=}")
             excessive_imports_str = f"{file_path} has too many Keywords class imports"
             ch_class_name = f"Ch{chapter_num:02}Keywords"
             is_doc_builder_file = "doc_builder.py" in file_path
             if file_path.find(f"test_ch{chapter_num:02}_keywords.py") == -1:
                 assert file_str.count("Keywords") <= 1, excessive_imports_str
-            elif is_doc_builder_file:
-                pass
-            else:
+            elif not is_doc_builder_file:
                 assert file_str.count(ch_class_name) in {0, 4}, ""
             enum_x = f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
             if "Keywords" in file_str and not is_doc_builder_file:

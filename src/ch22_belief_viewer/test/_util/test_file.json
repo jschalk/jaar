@@ -1,13 +1,4 @@
 {
-  "items": [
-    {
-      "id": 1,
-      "value": "A"
-    },
-    {
-      "id": 2,
-      "value": "B"
-    }
-  ],
+  "items": [ {"id": 1, "value": "A"}, {"id": 2, "value": "B"} ], 
   "name": "Test Object"
 }

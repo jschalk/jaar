@@ -94,7 +94,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[14] == "offi_time"
     assert table_sorting_priority[15] == "c400_number"
     assert table_sorting_priority[16] == "yr1_jan1_offset"
-    assert table_sorting_priority[17] == "monthday_distortion"
+    assert table_sorting_priority[17] == "monthday_index"
     assert table_sorting_priority[18] == "cumulative_day"
     assert table_sorting_priority[19] == "month_label"
     assert table_sorting_priority[20] == "month_label_otx"
@@ -360,7 +360,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.yr1_jan1_offset) == "INTEGER"
     assert sqlite_types.get(wx.quota) == "REAL"
     assert sqlite_types.get(wx.celldepth) == "INTEGER"
-    assert sqlite_types.get(wx.monthday_distortion) == "INTEGER"
+    assert sqlite_types.get(wx.monthday_index) == "INTEGER"
     assert sqlite_types.get(wx.timeline_label) == "TEXT"
     assert sqlite_types.get(wx.error_message) == "TEXT"
     assert sqlite_types.get(wx.solo) == "INTEGER"
@@ -771,7 +771,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.c400_number,
         wx.moment_label,
         wx.fund_iota,
-        wx.monthday_distortion,
+        wx.monthday_index,
         wx.penny,
         wx.respect_bit,
         wx.knot,

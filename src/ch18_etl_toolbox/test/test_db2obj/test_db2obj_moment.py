@@ -14,7 +14,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
     a23_timeline_label = "timeline88"
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
-    a23_monthday_distortion = 9
+    a23_monthday_index = 9
     a23_fund_iota = 13
     a23_penny = 17
     a23_respect_bit = 23
@@ -29,7 +29,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_With_momentunit_Attrs_Scen
 , timeline_label
 , c400_number
 , yr1_jan1_offset
-, monthday_distortion
+, monthday_index
 , fund_iota
 , penny
 , respect_bit
@@ -40,7 +40,7 @@ VALUES (
 , '{a23_timeline_label}'
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
-, {a23_monthday_distortion}
+, {a23_monthday_index}
 , {a23_fund_iota}
 , {a23_penny}
 , {a23_respect_bit}
@@ -60,7 +60,7 @@ VALUES (
     assert a23_timeline_dict.get("timeline_label") == a23_timeline_label
     assert a23_timeline_dict.get("c400_number") == a23_c400_number
     assert a23_timeline_dict.get("yr1_jan1_offset") == a23_yr1_jan1_offset
-    assert a23_timeline_dict.get("monthday_distortion") == a23_monthday_distortion
+    assert a23_timeline_dict.get("monthday_index") == a23_monthday_index
     assert a23_dict.get("fund_iota") == a23_fund_iota
     assert a23_dict.get("penny") == a23_penny
     assert a23_dict.get("respect_bit") == a23_respect_bit
@@ -356,7 +356,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
     a23_timeline_label = "timeline88"
     a23_c400_number = 3
     a23_yr1_jan1_offset = 7
-    a23_monthday_distortion = 9
+    a23_monthday_index = 9
     a23_fund_iota = 13
     a23_penny = 17
     a23_respect_bit = 23
@@ -371,7 +371,7 @@ def test_get_moment_dict_from_heard_tables_ReturnsObj_IsFormatted_Scenario0_mome
 , timeline_label
 , c400_number
 , yr1_jan1_offset
-, monthday_distortion
+, monthday_index
 , fund_iota
 , penny
 , respect_bit
@@ -382,7 +382,7 @@ VALUES (
 , '{a23_timeline_label}'
 , {a23_c400_number}
 , {a23_yr1_jan1_offset}
-, {a23_monthday_distortion}
+, {a23_monthday_index}
 , {a23_fund_iota}
 , {a23_penny}
 , {a23_respect_bit}
@@ -400,7 +400,7 @@ VALUES (
     assert a23_momentunit.timeline.timeline_label == a23_timeline_label
     assert a23_momentunit.timeline.c400_number == a23_c400_number
     assert a23_momentunit.timeline.yr1_jan1_offset == a23_yr1_jan1_offset
-    assert a23_momentunit.timeline.monthday_distortion == a23_monthday_distortion
+    assert a23_momentunit.timeline.monthday_index == a23_monthday_index
     assert a23_momentunit.fund_iota == a23_fund_iota
     assert a23_momentunit.penny == a23_penny
     assert a23_momentunit.respect_bit == a23_respect_bit

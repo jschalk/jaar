@@ -74,7 +74,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("star") == "int"
     assert translate_args_class_types.get("max_tree_traverse") == "int"
     assert translate_args_class_types.get("month_label") == wx.LabelTerm
-    assert translate_args_class_types.get("monthday_distortion") == "int"
+    assert translate_args_class_types.get("monthday_index") == "int"
     assert translate_args_class_types.get("morph") == "bool"
     assert translate_args_class_types.get("reason_state") == wx.RopeTerm
     assert translate_args_class_types.get("reason_upper") == "float"

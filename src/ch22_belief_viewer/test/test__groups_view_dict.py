@@ -1,6 +1,6 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch22_belief_viewer._ref.ch22_keywords import Ch22Keywords as wx
-from src.ch22_belief_viewer.belief_viewer_tool import (
+from src.ch22_belief_viewer.belief_viewer__tool import (
     add_small_dot,
     get_groups_view_dict,
 )
@@ -72,7 +72,7 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     credor_pool_readable_key = add_readable(wx.credor_pool)
 #     debtor_pool_readable_key = add_readable(wx.debtor_pool)
 #     assert set(swim_group_dict.keys()) == {
-#        wx.group_title,
+#         wx.group_title,
 #         wx.memberships,
 #         wx.fund_give,
 #         wx.fund_take,
@@ -118,12 +118,8 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
 #     assert swim_memberships_readable == sg_dict.get(memberships_readable_key)
 #     assert swim_fund_give_readable == sg_dict.get(fund_give_readable_key)
 #     assert swim_fund_take_readable == sg_dict.get(fund_take_readable_key)
-#     assert swim_fund_agenda_give_readable == sg_dict.get(
-#         fund_agenda_give_readable_key
-#     )
-#     assert swim_fund_agenda_take_readable == sg_dict.get(
-#         fund_agenda_take_readable_key
-#     )
+#     assert swim_fund_agenda_give_readable == sg_dict.get(fund_agenda_give_readable_key)
+#     assert swim_fund_agenda_take_readable == sg_dict.get(fund_agenda_take_readable_key)
 #     assert swim_credor_pool_readable == sg_dict.get(credor_pool_readable_key)
 #     assert swim_debtor_pool_readable == sg_dict.get(debtor_pool_readable_key)
 
