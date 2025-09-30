@@ -99,8 +99,8 @@ def test_TranslateUnit_get_json_ReturnsObj():
 
     # THEN
     # print(f"{sue_json=}")
-    assert sue_json.find("labelmap") == 64
-    assert sue_json.find(wx.otx_knot) == 266
+    assert sue_json.find("labelmap") == 67
+    assert sue_json.find(wx.otx_knot) == 217
 
 
 def test_get_translateunit_from_dict_ReturnsObj():

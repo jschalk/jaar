@@ -1,31 +1,13 @@
 {
   "attributes": {
-    "belief_name": {
-      "otx_key": true
-    },
-    "event_int": {
-      "otx_key": true
-    },
-    "face_name": {
-      "otx_key": true
-    },
-    "moment_label": {
-      "otx_key": true
-    },
-    "voice_cred_points": {
-      "otx_key": false
-    },
-    "voice_debt_points": {
-      "otx_key": false
-    },
-    "voice_name": {
-      "otx_key": true
-    }
-  },
-  "dimens": [
-    "momentunit",
-    "beliefunit",
-    "belief_voiceunit"
-  ],
+    "belief_name"      : { "otx_key": true  }, 
+    "event_int"        : { "otx_key": true  }, 
+    "face_name"        : { "otx_key": true  }, 
+    "moment_label"     : { "otx_key": true  }, 
+    "voice_cred_points": { "otx_key": false }, 
+    "voice_debt_points": { "otx_key": false }, 
+    "voice_name"       : { "otx_key": true  }
+  }, 
+  "dimens": ["momentunit", "beliefunit", "belief_voiceunit"], 
   "idea_number": "br00021"
 }

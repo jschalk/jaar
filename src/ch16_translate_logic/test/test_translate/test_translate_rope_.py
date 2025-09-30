@@ -463,15 +463,15 @@ def test_RopeMap_get_json_ReturnsObj():
     slash_otx_knot = "/"
     x_ropemap = ropemap_shop(sue_str, otx_knot=slash_otx_knot)
     x1_rope_map_json = f"""{{
-  "{wx.event_int}": 0,
-  "{wx.face_name}": "{sue_str}",
-  "{wx.inx_knot}": "{x_ropemap.inx_knot}",
-  "{wx.otx2inx}": {{}},
-  "{wx.otx_knot}": "{x_ropemap.otx_knot}",
+  "{wx.event_int}": 0, 
+  "{wx.face_name}": "{sue_str}", 
+  "{wx.inx_knot}": "{x_ropemap.inx_knot}", 
+  "{wx.otx2inx}": {{}}, 
+  "{wx.otx_knot}": "{x_ropemap.otx_knot}", 
   "{wx.unknown_str}": "{x_ropemap.unknown_str}"
 }}"""
-    print(f"           {x1_rope_map_json=}")
-    print(f"{x_ropemap.get_json()=}")
+    # print(f"           {x1_rope_map_json=}")
+    # print(f"{x_ropemap.get_json()=}")
     assert x_ropemap.get_json() == x1_rope_map_json
 
     # WHEN
@@ -480,13 +480,11 @@ def test_RopeMap_get_json_ReturnsObj():
     x_ropemap.event_int = event7
     # THEN
     x2_rope_map_json = f"""{{
-  "{wx.event_int}": {event7},
-  "{wx.face_name}": "{sue_str}",
-  "{wx.inx_knot}": "{x_ropemap.inx_knot}",
-  "{wx.otx2inx}": {{
-    "{clean_otx}": "{clean_inx}"
-  }},
-  "{wx.otx_knot}": "{x_ropemap.otx_knot}",
+  "{wx.event_int}": {event7}, 
+  "{wx.face_name}": "{sue_str}", 
+  "{wx.inx_knot}": "{x_ropemap.inx_knot}", 
+  "{wx.otx2inx}": {{"{clean_otx}": "{clean_inx}"}}, 
+  "{wx.otx_knot}": "{x_ropemap.otx_knot}", 
   "{wx.unknown_str}": "{x_ropemap.unknown_str}"
 }}"""
     print(f"           {x2_rope_map_json=}")

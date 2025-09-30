@@ -242,12 +242,10 @@ def test_BudUnit_get_json_ReturnsObj():
 
     # THEN
     static_t4_json = """{
-  "bud_time": 4,
-  "bud_voice_nets": {
-    "Sue": -77
-  },
-  "celldepth": 11,
-  "magnitude": 67,
+  "bud_time": 4, 
+  "bud_voice_nets": {"Sue": -77}, 
+  "celldepth": 11, 
+  "magnitude": 67, 
   "quota": 55
 }"""
     print(f"{t4_json=}")
