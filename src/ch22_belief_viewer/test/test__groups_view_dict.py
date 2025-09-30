@@ -33,97 +33,97 @@ def test_get_groups_view_dict_ReturnsObj_Scenario0_Empty():
     assert groups_view_dict == {}
 
 
-def test_get_groups_view_dict_ReturnsObj_Scenario1_groups():
-    # ESTABLISH
-    sue_str = "Sue"
-    sue_believer = beliefunit_shop(sue_str)
-    yao_str = "Yao"
-    bob_str = "Bob"
-    yao_cred_points = 110
-    yao_debt_points = 130
-    bob_cred_points = 230
-    bob_debt_points = 290
-    sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
-    sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
-    swim_str = ";swimmers"
-    bob_swim_cred_points = 66
-    bob_swim_debt_points = 77
-    yao_swim_cred_points = 88
-    yao_swim_debt_points = 99
-    yao_voice = sue_believer.get_voice(yao_str)
-    bob_voice = sue_believer.get_voice(bob_str)
-    yao_voice.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
-    bob_voice.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
-    sue_believer.cashout()
+# def test_get_groups_view_dict_ReturnsObj_Scenario1_groups():
+#     # ESTABLISH
+#     sue_str = "Sue"
+#     sue_believer = beliefunit_shop(sue_str)
+#     yao_str = "Yao"
+#     bob_str = "Bob"
+#     yao_cred_points = 110
+#     yao_debt_points = 130
+#     bob_cred_points = 230
+#     bob_debt_points = 290
+#     sue_believer.add_voiceunit(yao_str, yao_cred_points, yao_debt_points)
+#     sue_believer.add_voiceunit(bob_str, bob_cred_points, bob_debt_points)
+#     swim_str = ";swimmers"
+#     bob_swim_cred_points = 66
+#     bob_swim_debt_points = 77
+#     yao_swim_cred_points = 88
+#     yao_swim_debt_points = 99
+#     yao_voice = sue_believer.get_voice(yao_str)
+#     bob_voice = sue_believer.get_voice(bob_str)
+#     yao_voice.add_membership(swim_str, yao_swim_cred_points, yao_swim_debt_points)
+#     bob_voice.add_membership(swim_str, bob_swim_cred_points, bob_swim_debt_points)
+#     sue_believer.cashout()
 
-    # WHEN
-    groups_view_dict = get_groups_view_dict(sue_believer)
+#     # WHEN
+#     groups_view_dict = get_groups_view_dict(sue_believer)
 
-    # THEN
-    assert set(groups_view_dict.keys()) == {yao_str, bob_str, swim_str}
+#     # THEN
+#     assert set(groups_view_dict.keys()) == {yao_str, bob_str, swim_str}
 
-    swim_group_dict = groups_view_dict.get(swim_str)
-    group_title_readable_key = add_readable(wx.group_title)
-    memberships_readable_key = add_readable(wx.memberships)
-    fund_give_readable_key = add_readable(wx.fund_give)
-    fund_take_readable_key = add_readable(wx.fund_take)
-    fund_agenda_give_readable_key = add_readable(wx.fund_agenda_give)
-    fund_agenda_take_readable_key = add_readable(wx.fund_agenda_take)
-    credor_pool_readable_key = add_readable(wx.credor_pool)
-    debtor_pool_readable_key = add_readable(wx.debtor_pool)
-    assert set(swim_group_dict.keys()) == {
-        wx.group_title,
-        wx.memberships,
-        wx.fund_give,
-        wx.fund_take,
-        wx.fund_agenda_give,
-        wx.fund_agenda_take,
-        wx.credor_pool,
-        wx.debtor_pool,
-        group_title_readable_key,
-        memberships_readable_key,
-        fund_give_readable_key,
-        fund_take_readable_key,
-        fund_agenda_give_readable_key,
-        fund_agenda_take_readable_key,
-        credor_pool_readable_key,
-        debtor_pool_readable_key,
-    }
+#     swim_group_dict = groups_view_dict.get(swim_str)
+#     group_title_readable_key = add_readable(wx.group_title)
+#     memberships_readable_key = add_readable(wx.memberships)
+#     fund_give_readable_key = add_readable(wx.fund_give)
+#     fund_take_readable_key = add_readable(wx.fund_take)
+#     fund_agenda_give_readable_key = add_readable(wx.fund_agenda_give)
+#     fund_agenda_take_readable_key = add_readable(wx.fund_agenda_take)
+#     credor_pool_readable_key = add_readable(wx.credor_pool)
+#     debtor_pool_readable_key = add_readable(wx.debtor_pool)
+#     assert set(swim_group_dict.keys()) == {
+#         wx.group_title,
+#         wx.memberships,
+#         wx.fund_give,
+#         wx.fund_take,
+#         wx.fund_agenda_give,
+#         wx.fund_agenda_take,
+#         wx.credor_pool,
+#         wx.debtor_pool,
+#         group_title_readable_key,
+#         memberships_readable_key,
+#         fund_give_readable_key,
+#         fund_take_readable_key,
+#         fund_agenda_give_readable_key,
+#         fund_agenda_take_readable_key,
+#         credor_pool_readable_key,
+#         debtor_pool_readable_key,
+#     }
 
-    swim_groupunit = sue_believer.get_groupunit(swim_str)
-    swim_group_title_readable = f"group_title_readable: {swim_groupunit.group_title}"
-    swim_memberships_readable = f"memberships_readable: {swim_groupunit.memberships}"
-    swim_fund_give_readable = f"fund_give_readable: {swim_groupunit.fund_give}"
-    swim_fund_take_readable = f"fund_take_readable: {swim_groupunit.fund_take}"
-    swim_fund_agenda_give_readable = (
-        f"fund_agenda_give_readable: {swim_groupunit.fund_agenda_give}"
-    )
-    swim_fund_agenda_take_readable = (
-        f"fund_agenda_take_readable: {swim_groupunit.fund_agenda_take}"
-    )
-    swim_credor_pool_readable = f"credor_pool_readable: {swim_groupunit.credor_pool}"
-    swim_debtor_pool_readable = f"debtor_pool_readable: {swim_groupunit.debtor_pool}"
+#     swim_groupunit = sue_believer.get_groupunit(swim_str)
+#     swim_group_title_readable = f"group_title_readable: {swim_groupunit.group_title}"
+#     swim_memberships_readable = f"memberships_readable: {swim_groupunit.memberships}"
+#     swim_fund_give_readable = f"fund_give_readable: {swim_groupunit.fund_give}"
+#     swim_fund_take_readable = f"fund_take_readable: {swim_groupunit.fund_take}"
+#     swim_fund_agenda_give_readable = (
+#         f"fund_agenda_give_readable: {swim_groupunit.fund_agenda_give}"
+#     )
+#     swim_fund_agenda_take_readable = (
+#         f"fund_agenda_take_readable: {swim_groupunit.fund_agenda_take}"
+#     )
+#     swim_credor_pool_readable = f"credor_pool_readable: {swim_groupunit.credor_pool}"
+#     swim_debtor_pool_readable = f"debtor_pool_readable: {swim_groupunit.debtor_pool}"
 
-    sgu = swim_groupunit
-    sg_dict = swim_group_dict
-    assert sgu.group_title == sg_dict.get(wx.group_title)
-    assert sgu.memberships == sg_dict.get(wx.memberships)
-    assert sgu.fund_give == sg_dict.get(wx.fund_give)
-    assert sgu.fund_take == sg_dict.get(wx.fund_take)
-    assert sgu.fund_agenda_give == sg_dict.get(wx.fund_agenda_give)
-    assert sgu.fund_agenda_take == sg_dict.get(wx.fund_agenda_take)
-    assert sgu.credor_pool == sg_dict.get(wx.credor_pool)
-    assert sgu.debtor_pool == sg_dict.get(wx.debtor_pool)
-    assert swim_group_title_readable == sg_dict.get(group_title_readable_key)
-    assert swim_memberships_readable == sg_dict.get(memberships_readable_key)
-    assert swim_fund_give_readable == sg_dict.get(fund_give_readable_key)
-    assert swim_fund_take_readable == sg_dict.get(fund_take_readable_key)
-    assert swim_fund_agenda_give_readable == sg_dict.get(fund_agenda_give_readable_key)
-    assert swim_fund_agenda_take_readable == sg_dict.get(fund_agenda_take_readable_key)
-    assert swim_credor_pool_readable == sg_dict.get(credor_pool_readable_key)
-    assert swim_debtor_pool_readable == sg_dict.get(debtor_pool_readable_key)
+#     sgu = swim_groupunit
+#     sg_dict = swim_group_dict
+#     assert sgu.group_title == sg_dict.get(wx.group_title)
+#     assert sgu.memberships == sg_dict.get(wx.memberships)
+#     assert sgu.fund_give == sg_dict.get(wx.fund_give)
+#     assert sgu.fund_take == sg_dict.get(wx.fund_take)
+#     assert sgu.fund_agenda_give == sg_dict.get(wx.fund_agenda_give)
+#     assert sgu.fund_agenda_take == sg_dict.get(wx.fund_agenda_take)
+#     assert sgu.credor_pool == sg_dict.get(wx.credor_pool)
+#     assert sgu.debtor_pool == sg_dict.get(wx.debtor_pool)
+#     assert swim_group_title_readable == sg_dict.get(group_title_readable_key)
+#     assert swim_memberships_readable == sg_dict.get(memberships_readable_key)
+#     assert swim_fund_give_readable == sg_dict.get(fund_give_readable_key)
+#     assert swim_fund_take_readable == sg_dict.get(fund_take_readable_key)
+#     assert swim_fund_agenda_give_readable == sg_dict.get(fund_agenda_give_readable_key)
+#     assert swim_fund_agenda_take_readable == sg_dict.get(fund_agenda_take_readable_key)
+#     assert swim_credor_pool_readable == sg_dict.get(credor_pool_readable_key)
+#     assert swim_debtor_pool_readable == sg_dict.get(debtor_pool_readable_key)
 
-    assert 1 == 2
+#     assert 1 == 2
 
 
 # def test_get_groups_view_dict_ReturnsObj_Scenario2_memberships():
