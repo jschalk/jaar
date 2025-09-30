@@ -1,14 +1,15 @@
 [project]
 authors = [{name = "Emmanuel Schalk", email = "emmanuelschalk@gmail.com"}]
 dependencies = [
+  "compact_json",
+  "flask",
+  "flask_cors",
+  "importlib",
   "pandas",
   "plotly",
   "openpyxl",
   "sqlalchemy",
   "xlsxwriter",
-  "flask",
-  "flask_cors",
-  "importlib",
 ]
 description = ""
 license = {text = "MIT"}
