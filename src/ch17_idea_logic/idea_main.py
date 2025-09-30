@@ -229,7 +229,7 @@ def moment_build_from_df(
             "c400_number": row["c400_number"],
             "hours_config": moment_hours_dict.get(x_moment_label),
             "months_config": moment_months_dict.get(x_moment_label),
-            "monthday_distortion": row["monthday_distortion"],
+            "monthday_index": row["monthday_index"],
             "timeline_label": row["timeline_label"],
             "weekdays_config": moment_weekdays_dict.get(x_moment_label),
             "yr1_jan1_offset": row["yr1_jan1_offset"],

@@ -22,14 +22,14 @@ def get_moment_dict_from_sqlstrs(
     timeline_label = momentunit_row[1]
     c400_number = momentunit_row[2]
     yr1_jan1_offset = momentunit_row[3]
-    monthday_distortion = momentunit_row[4]
+    monthday_index = momentunit_row[4]
 
     moment_dict: dict[str, any] = {"moment_label": momentunit_row[0], "timeline": {}}
     if (
         timeline_label is not None
         and c400_number is not None
         and yr1_jan1_offset is not None
-        and monthday_distortion is not None
+        and monthday_index is not None
     ):
         if timeline_label:
             moment_dict["timeline"]["timeline_label"] = timeline_label
@@ -37,8 +37,8 @@ def get_moment_dict_from_sqlstrs(
             moment_dict["timeline"]["c400_number"] = c400_number
         if yr1_jan1_offset:
             moment_dict["timeline"]["yr1_jan1_offset"] = yr1_jan1_offset
-        if monthday_distortion:
-            moment_dict["timeline"]["monthday_distortion"] = monthday_distortion
+        if monthday_index:
+            moment_dict["timeline"]["monthday_index"] = monthday_index
 
     if fund_iota := momentunit_row[5]:
         moment_dict["fund_iota"] = fund_iota

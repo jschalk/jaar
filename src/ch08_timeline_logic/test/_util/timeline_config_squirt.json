@@ -146,7 +146,7 @@
       1440
     ]
   ],
-  "monthday_distortion": 0,
+  "monthday_index": 0,
   "months_config": [
     [
       "meow",

@@ -165,7 +165,7 @@ class Ch17Keywords(str, Enum):
     moment_timeoffi = "moment_timeoffi"
     momentunit = "momentunit"
     month_label = "month_label"
-    monthday_distortion = "monthday_distortion"
+    monthday_index = "monthday_index"
     months_config = "months_config"
     morph = "morph"
     nesting_order = "nesting_order"

@@ -21,7 +21,7 @@
     "moment_label": {
       "otx_key": true
     },
-    "monthday_distortion": {
+    "monthday_index": {
       "otx_key": false
     },
     "penny": {

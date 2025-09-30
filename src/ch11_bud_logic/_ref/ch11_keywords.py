@@ -134,7 +134,7 @@ class Ch11Keywords(str, Enum):
     max_tree_traverse = "max_tree_traverse"
     memberships = "memberships"
     moment_label = "moment_label"
-    monthday_distortion = "monthday_distortion"
+    monthday_index = "monthday_index"
     months_config = "months_config"
     morph = "morph"
     nesting_order = "nesting_order"

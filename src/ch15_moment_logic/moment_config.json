@@ -122,7 +122,7 @@
       "knot": {
         "class_type": "str"
       },
-      "monthday_distortion": {
+      "monthday_index": {
         "class_type": "int"
       },
       "penny": {

@@ -53,7 +53,7 @@ def test_get_moment_config_dict_ReturnsObj():
     x_momentunit_jvalues = {
         wx.c400_number,
         wx.fund_iota,
-        wx.monthday_distortion,
+        wx.monthday_index,
         wx.penny,
         wx.respect_bit,
         wx.knot,
@@ -198,7 +198,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.moment_label,
         wx.fund_iota,
         wx.month_label,
-        wx.monthday_distortion,
+        wx.monthday_index,
         # wx.job_listen_rotations,
         "job_listen_rotations",
         wx.penny,

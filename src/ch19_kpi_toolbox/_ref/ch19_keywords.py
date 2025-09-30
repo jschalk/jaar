@@ -180,7 +180,7 @@ class Ch19Keywords(str, Enum):
     moment_voice_nets = "moment_voice_nets"
     momentunit = "momentunit"
     month_label = "month_label"
-    monthday_distortion = "monthday_distortion"
+    monthday_index = "monthday_index"
     months_config = "months_config"
     morph = "morph"
     nesting_order = "nesting_order"

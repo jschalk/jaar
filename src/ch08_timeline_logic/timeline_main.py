@@ -105,7 +105,7 @@ def create_weekday_planunits(x_weekdays: list[str]) -> dict[str, PlanUnit]:
 
 
 def create_month_planunits(
-    x_months_list: list[list[str, int]], monthday_distortion: int
+    x_months_list: list[list[str, int]], monthday_index: int
 ) -> dict[str, PlanUnit]:
     x_dict = {}
     current_day = 0
@@ -114,7 +114,7 @@ def create_month_planunits(
         x_month_days = x_month_list[1]
         x_gogo = current_day * day_length()
         x_stop = x_month_days * day_length()
-        x_addin = monthday_distortion * day_length()
+        x_addin = monthday_index * day_length()
         x_plan = planunit_shop(
             x_month_str, gogo_want=x_gogo, stop_want=x_stop, addin=x_addin
         )
@@ -159,7 +159,7 @@ def add_newtimeline_planunit(x_beliefunit: BeliefUnit, timeline_config: dict):
     x_plan_label = timeline_config.get("timeline_label")
     x_c400_number = timeline_config.get("c400_number")
     x_months = timeline_config.get("months_config")
-    x_mday = timeline_config.get("monthday_distortion")
+    x_mday = timeline_config.get("monthday_index")
     x_hours_list = timeline_config.get("hours_config")
     x_weekdays_list = timeline_config.get("weekdays_config")
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
@@ -261,7 +261,7 @@ def validate_timeline_config(config_dict: dict) -> bool:
         "hours_config",
         "weekdays_config",
         "months_config",
-        "monthday_distortion",
+        "monthday_index",
         "timeline_label",
         "c400_number",
         "yr1_jan1_offset",
@@ -356,7 +356,7 @@ def timeline_config_shop(
     month_length: int = None,
     weekday_list: list[str] = None,
     months_list: list[str] = None,
-    monthday_distortion: int = None,
+    monthday_index: int = None,
     yr1_jan1_offset: int = None,
 ) -> dict:
     if timeline_label is None:
@@ -387,7 +387,7 @@ def timeline_config_shop(
         "months_config": month_config,
         "timeline_label": timeline_label,
         "c400_number": c400_number,
-        "monthday_distortion": get_1_if_None(monthday_distortion),
+        "monthday_index": get_1_if_None(monthday_index),
         "yr1_jan1_offset": yr1_jan1_offset,
     }
 
@@ -582,7 +582,7 @@ class TimeLineUnit:
     c400_number: int = None
     hours_config: list[list[str, int]] = None
     months_config: list[list[str, int]] = None
-    monthday_distortion: int = None
+    monthday_index: int = None
     timeline_label: TimeLineLabel = None
     weekdays_config: list[str] = None
     yr1_jan1_offset: int = None
@@ -592,7 +592,7 @@ class TimeLineUnit:
             "c400_number": self.c400_number,
             "hours_config": self.hours_config,
             "months_config": self.months_config,
-            "monthday_distortion": self.monthday_distortion,
+            "monthday_index": self.monthday_index,
             "timeline_label": self.timeline_label,
             "weekdays_config": self.weekdays_config,
             "yr1_jan1_offset": self.yr1_jan1_offset,
@@ -607,9 +607,9 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
         timeline_config["timeline_label"] = default_timeline.get("timeline_label")
     if timeline_config.get("c400_number") is None:
         timeline_config["c400_number"] = default_timeline.get("c400_number")
-    if timeline_config.get("monthday_distortion") is None:
-        x_monthday_distortion = default_timeline.get("monthday_distortion")
-        timeline_config["monthday_distortion"] = x_monthday_distortion
+    if timeline_config.get("monthday_index") is None:
+        x_monthday_index = default_timeline.get("monthday_index")
+        timeline_config["monthday_index"] = x_monthday_index
     if timeline_config.get("hours_config") is None:
         timeline_config["hours_config"] = default_timeline.get("hours_config")
     if timeline_config.get("months_config") is None:
@@ -622,7 +622,7 @@ def timelineunit_shop(timeline_config: dict = None) -> TimeLineUnit:
         c400_number=timeline_config.get("c400_number"),
         hours_config=timeline_config.get("hours_config"),
         months_config=timeline_config.get("months_config"),
-        monthday_distortion=timeline_config.get("monthday_distortion"),
+        monthday_index=timeline_config.get("monthday_index"),
         timeline_label=timeline_config.get("timeline_label"),
         weekdays_config=timeline_config.get("weekdays_config"),
         yr1_jan1_offset=timeline_config.get("yr1_jan1_offset"),

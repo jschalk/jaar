@@ -1,6 +1,6 @@
 # Idea Manifest
 
-- [`br00000`](ideas/br00000.md): event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_distortion, fund_iota, penny, respect_bit, knot, job_listen_rotations
+- [`br00000`](ideas/br00000.md): event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations
 - [`br00001`](ideas/br00001.md): event_int, face_name, moment_label, belief_name, bud_time, quota, celldepth
 - [`br00002`](ideas/br00002.md): event_int, face_name, moment_label, belief_name, voice_name, tran_time, amount
 - [`br00003`](ideas/br00003.md): event_int, face_name, moment_label, cumulative_minute, hour_label
