@@ -24,6 +24,7 @@ jobs:
           python -m pip install xlsxwriter
           python -m pip install flask
           python -m pip install flask_cors
+          python -m pip install compact_json
       - name: Execute tests and generate report
         id: pytest
         run: |
