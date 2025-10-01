@@ -5,7 +5,6 @@ class Ch02Keywords(str, Enum):
     INSERT = "INSERT"
     KnotTerm = "KnotTerm"
     LabelTerm = "LabelTerm"
-    MomentLabel = "MomentLabel"
     NameTerm = "NameTerm"
     NexusLabel = "NexusLabel"
     RopeTerm = "RopeTerm"

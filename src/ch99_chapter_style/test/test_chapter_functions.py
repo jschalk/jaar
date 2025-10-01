@@ -265,7 +265,7 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
         expected_enum_keys = set(ExpectedEnumClass.__dict__.keys())
         current_enum_keys = set(ChKeywordsClass.__dict__.keys())
         # print(expected_enum_keys.difference(current_enum_keys))
-        assert expected_enum_keys.difference(current_enum_keys) == set()
+        assert not expected_enum_keys.difference(current_enum_keys)
         expected_dunder_str_func = """    def __str__(self):
         return self.value
 """
@@ -304,9 +304,7 @@ def test_Chapters_All_semantic_types_NamesAreKeywords():
     # THEN
     # make semantic_type names required keyword str functions
     semantic_types = expected_semantic_types()
-    semantic_keywords_by_chapter = set()
-    for semantic_type in semantic_types:
-        semantic_keywords_by_chapter.add(semantic_type)
+    semantic_keywords_by_chapter = set(semantic_types)
     print(
         f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_keywords)))}"
     )

@@ -24,12 +24,6 @@ class NexusLabel(LabelTerm):
     pass
 
 
-class MomentLabel(NexusLabel):  # Created to help track the object class relations
-    """A NexusLabel for a Moment. Cannot contain knot."""
-
-    pass
-
-
 class RopeTerm(str):
     """A string representation of a tree path. LabelTerms are seperated by knots."""
 

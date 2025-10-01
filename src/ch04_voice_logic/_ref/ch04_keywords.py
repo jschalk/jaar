@@ -11,7 +11,6 @@ class Ch04Keywords(str, Enum):
     INSERT = "INSERT"
     KnotTerm = "KnotTerm"
     LabelTerm = "LabelTerm"
-    MomentLabel = "MomentLabel"
     MoneyUnit = "MoneyUnit"
     NameTerm = "NameTerm"
     NexusLabel = "NexusLabel"

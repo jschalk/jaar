@@ -3,7 +3,6 @@ from src.ch02_rope_logic._ref.ch02_keywords import Ch02Keywords as wx
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
     KnotTerm,
     LabelTerm,
-    MomentLabel,
     NexusLabel,
     RopeTerm,
     default_knot_if_None,
@@ -90,14 +89,3 @@ def test_RopeTerm_Exists():
     assert x_rope == empty_str
     doc_str = f"A string representation of a tree path. LabelTerms are seperated by {wx.knot}s."
     assert inspect_getdoc(x_rope) == doc_str
-
-
-def test_MomentLabel_Exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_moment = MomentLabel(empty_str)
-    # THEN
-    assert x_moment == empty_str
-    doc_str = f"A NexusLabel for a Moment. Cannot contain {wx.knot}."
-    assert inspect_getdoc(x_moment) == doc_str

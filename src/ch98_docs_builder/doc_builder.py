@@ -98,10 +98,6 @@ def get_function_names_from_file(
     return file_funcs, class_bases
 
 
-def get_keywords_filename(chapter_desc_prefix: str) -> str:
-    return f"{chapter_desc_prefix}_keywords.py"
-
-
 def get_chapter_desc_str_number(chapter_desc: str) -> str:
     """Returns chapter number in 2 character string."""
     if chapter_desc.startswith("a"):
