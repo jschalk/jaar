@@ -1,4 +1,4 @@
-from src.ch01_data_toolbox._ref.ch01_keywords import *
+from enum import Enum
 
 
 class Ch02Keywords(str, Enum):

@@ -1,4 +1,4 @@
-from src.ch16_translate_logic._ref.ch16_keywords import *
+from enum import Enum
 
 
 class Ch17Keywords(str, Enum):

@@ -1,4 +1,4 @@
-from src.ch09_belief_atom_logic._ref.ch09_keywords import *
+from enum import Enum
 
 
 class Ch10Keywords(str, Enum):

@@ -1,4 +1,4 @@
-from src.ch02_rope_logic._ref.ch02_keywords import *
+from enum import Enum
 
 
 class Ch03Keywords(str, Enum):

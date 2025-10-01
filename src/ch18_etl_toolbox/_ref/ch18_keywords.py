@@ -1,4 +1,4 @@
-from src.ch17_idea_logic._ref.ch17_keywords import *
+from enum import Enum
 
 
 class Ch18Keywords(str, Enum):

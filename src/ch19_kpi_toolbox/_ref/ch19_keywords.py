@@ -1,5 +1,4 @@
-from src.ch18_etl_toolbox._ref.ch18_keywords import *
-from typing import Literal
+from enum import Enum
 
 
 class Ch19Keywords(str, Enum):
