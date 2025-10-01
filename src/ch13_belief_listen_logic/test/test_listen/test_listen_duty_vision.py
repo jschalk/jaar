@@ -1,6 +1,10 @@
 from src.ch02_rope_logic.rope import LabelTerm, RopeTerm, create_rope
-from src.ch06_plan_logic.plan import get_default_moment_label, planunit_shop
-from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import (
+    BeliefUnit,
+    beliefunit_shop,
+    get_default_moment_label,
+    planunit_shop,
+)
 from src.ch12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,

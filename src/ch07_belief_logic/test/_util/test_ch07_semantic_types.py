@@ -1,5 +1,5 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch07_belief_logic._ref.ch07_semantic_types import BeliefName
+from src.ch07_belief_logic._ref.ch07_semantic_types import BeliefName, MomentLabel
 
 
 def test_BeliefName_Exists():
@@ -11,3 +11,14 @@ def test_BeliefName_Exists():
     assert bob_BeliefName_str == bob_str
     doc_str = "A NameTerm used to identify a BeliefUnit's belief"
     assert inspect_getdoc(bob_BeliefName_str) == doc_str
+
+
+def test_MomentLabel_Exists():
+    # ESTABLISH
+    bob_str = "Bob"
+    # WHEN
+    bob_MomentLabel_str = MomentLabel(bob_str)
+    # THEN
+    assert bob_MomentLabel_str == bob_str
+    doc_str = "A NexusLabel for a Moment. Cannot contain knot."
+    assert inspect_getdoc(bob_MomentLabel_str) == doc_str

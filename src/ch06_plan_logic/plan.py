@@ -56,7 +56,6 @@ from src.ch05_reason_logic.reason import (
 from src.ch06_plan_logic._ref.ch06_semantic_types import (
     GroupTitle,
     LabelTerm,
-    MomentLabel,
     RopeTerm,
     VoiceName,
     default_knot_if_None,
@@ -77,11 +76,7 @@ class PlanGetDescendantsException(Exception):
     pass
 
 
-def get_default_moment_label() -> MomentLabel:
-    return "ZZ"
-
-
-class Plan_root_LabelNotEmptyException(Exception):
+class plan_label_NotEmptyException(Exception):
     pass
 
 
@@ -212,8 +207,6 @@ class PlanUnit:
     ----------
     plan_label : LabelTerm of plan.
     parent_rope : RopeTerm that this plan stems from. Empty string for root plans.
-    root : bool at Indicates whether this is a root plan.
-    moment_label : MomentLabel that is root plan LabelTerm.
     knot : str Identifier or label for bridging plans.
     optional:
     star : int weight that is arbitrary used by parent plan to calculated relative importance.
@@ -236,7 +229,7 @@ class PlanUnit:
     problem_bool : bool that describes if the plan is a problem.
     is_expanded : bool flag for whether the plan is expanded.
 
-    active : bool that describes if the plan pledge is active, calculated by MomentUnit.
+    active : bool that describes if the plan pledge is active, calculated by BeliefUnit.
     active_hx : dict[int, bool] Historical record of active state, used to calcualte if changes have occured
     all_voice_cred : bool Flag indicating there are not explicitley defined awardunits
     all_voice_debt : bool Flag indicating there are not explicitley defined awardunits
@@ -246,8 +239,8 @@ class PlanUnit:
     factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
     fund_iota : FundIota Smallest indivisible funding component.
-    fund_onset : FundNum Point at which funding onsets inside MomentUnit funding range
-    fund_cease : FundNum Point at which funding ceases inside MomentUnit funding range
+    fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
+    fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
     healerunit_ratio : float
     tree_level : int that describes Depth tree_level in plan hierarchy.
     range_evaluated : bool Flag indicating whether range has been evaluated.
@@ -259,10 +252,9 @@ class PlanUnit:
     """
 
     plan_label: LabelTerm = None
-    moment_label: MomentLabel = None
     parent_rope: RopeTerm = None
+    knot: str = None
     kids: dict[LabelTerm,] = None
-    root: bool = None
     star: int = None
     uid: int = None  # Calculated field?
     awardunits: dict[GroupTitle, AwardUnit] = None
@@ -280,7 +272,6 @@ class PlanUnit:
     stop_want: float = None
     pledge: bool = None
     problem_bool: bool = None
-    knot: str = None
     is_expanded: bool = None
     # Calculated fields
     active: bool = None
@@ -546,15 +537,9 @@ class PlanUnit:
         self.awardlines = {}
 
     def set_plan_label(self, plan_label: str):
-        if (
-            self.root
-            and plan_label is not None
-            and plan_label != self.moment_label
-            and self.moment_label is not None
-        ):
-            raise Plan_root_LabelNotEmptyException(
-                f"Cannot set a root Plan to string different than '{self.moment_label}'"
-            )
+        if plan_label in {None, ""}:
+            exception_str = "Cannot set Plan's Label empty or None"
+            raise plan_label_NotEmptyException(exception_str)
         else:
             self.plan_label = plan_label
 
@@ -1020,7 +1005,7 @@ class PlanUnit:
 
 
 def planunit_shop(
-    plan_label: LabelTerm = None,
+    plan_label: LabelTerm,
     uid: int = None,  # Calculated field?
     parent_rope: RopeTerm = None,
     kids: dict = None,
@@ -1044,8 +1029,6 @@ def planunit_shop(
     numor: int = None,
     morph: bool = None,
     pledge: bool = None,
-    root: bool = None,
-    moment_label: MomentLabel = None,
     problem_bool: bool = None,
     # Calculated fields
     tree_level: int = None,
@@ -1063,7 +1046,6 @@ def planunit_shop(
     knot: str = None,
     healerunit_ratio: float = None,
 ) -> PlanUnit:
-    moment_label = get_default_moment_label() if moment_label is None else moment_label
     x_healerunit = healerunit_shop() if healerunit is None else healerunit
 
     x_plankid = PlanUnit(
@@ -1092,8 +1074,6 @@ def planunit_shop(
         morph=morph,
         pledge=get_False_if_None(pledge),
         problem_bool=get_False_if_None(problem_bool),
-        root=get_False_if_None(root),
-        moment_label=moment_label,
         # Calculated fields
         tree_level=tree_level,
         fund_ratio=fund_ratio,
@@ -1110,10 +1090,7 @@ def planunit_shop(
         knot=default_knot_if_None(knot),
         healerunit_ratio=get_0_if_None(healerunit_ratio),
     )
-    if x_plankid.root:
-        x_plankid.set_plan_label(plan_label=moment_label)
-    else:
-        x_plankid.set_plan_label(plan_label=plan_label)
+    x_plankid.set_plan_label(plan_label=plan_label)
     x_plankid.set_laborunit_empty_if_None()
     return x_plankid
 

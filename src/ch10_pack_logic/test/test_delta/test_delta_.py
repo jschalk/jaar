@@ -2,8 +2,10 @@ from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.dict_toolbox import x_is_json
 from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch04_voice_logic.voice import voiceunit_shop
-from src.ch06_plan_logic.plan import get_default_moment_label as root_label
-from src.ch07_belief_logic.belief_main import beliefunit_shop
+from src.ch07_belief_logic.belief_main import (
+    beliefunit_shop,
+    get_default_moment_label as root_label,
+)
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
 from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import (

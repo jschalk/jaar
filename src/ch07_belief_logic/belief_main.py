@@ -55,7 +55,6 @@ from src.ch06_plan_logic.healer import HealerUnit
 from src.ch06_plan_logic.plan import (
     PlanAttrHolder,
     PlanUnit,
-    get_default_moment_label,
     get_obj_from_plan_dict,
     planattrholder_shop,
     planunit_shop,
@@ -115,6 +114,10 @@ class healerunit_group_title_Exception(Exception):
 
 class gogo_calc_stop_calc_Exception(Exception):
     pass
+
+
+def get_default_moment_label() -> str:
+    return "ZZ"
 
 
 @dataclass
@@ -212,8 +215,6 @@ class BeliefUnit:
     def set_moment_label(self, moment_label: str):
         old_moment_label = copy_deepcopy(self.moment_label)
         self.cashout()
-        for plan_obj in self._plan_dict.values():
-            plan_obj.moment_label = moment_label
         self.moment_label = moment_label
         self.edit_plan_label(
             old_rope=to_rope(old_moment_label), new_plan_label=self.moment_label
@@ -629,8 +630,6 @@ class BeliefUnit:
             raise InvalidBeliefException(exception_str)
 
         plan_kid.knot = self.knot
-        if plan_kid.moment_label != self.moment_label:
-            plan_kid.moment_label = self.moment_label
         if plan_kid.fund_iota != self.fund_iota:
             plan_kid.fund_iota = self.fund_iota
         if not get_rid_of_missing_awardunits_awardee_titles:
@@ -642,8 +641,6 @@ class BeliefUnit:
             x_str = f"set_plan failed because '{parent_rope}' plan does not exist."
             raise InvalidBeliefException(x_str)
         parent_rope_plan = self.get_plan_obj(parent_rope, create_missing_ancestors)
-        if parent_rope_plan.root is False:
-            parent_rope_plan
         parent_rope_plan.add_kid(plan_kid)
 
         kid_rope = self.make_rope(parent_rope, plan_kid.plan_label)
@@ -1226,7 +1223,7 @@ reason_case:    {reason_case}"""
 
     def _set_plantree_factheirs_laborheir_awardheirs(self):
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
-            if x_plan.root:
+            if x_plan == self.planroot:
                 x_plan.set_factheirs(x_plan.factunits)
                 x_plan.set_root_plan_reasonheirs()
                 x_plan.set_laborheir(None, self.groupunits)
@@ -1260,7 +1257,7 @@ reason_case:    {reason_case}"""
 
     def _set_plantree_active_status_attrs(self):
         for x_plan in get_sorted_plan_list(list(self._plan_dict.values())):
-            if x_plan.root:
+            if x_plan == self.planroot:
                 tt_count = self.tree_traverse_count
                 root_plan = self.planroot
                 root_plan.set_active_attrs(tt_count, self.groupunits, self.belief_name)
@@ -1469,10 +1466,9 @@ def beliefunit_shop(
         _range_inheritors={},
     )
     x_belief.planroot = planunit_shop(
-        root=True,
+        plan_label=x_belief.moment_label,
         uid=1,
         tree_level=0,
-        moment_label=x_belief.moment_label,
         knot=x_belief.knot,
         fund_iota=x_belief.fund_iota,
         parent_rope="",
@@ -1521,7 +1517,6 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
 def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
     planroot_dict = belief_dict.get("planroot")
     x_belief.planroot = planunit_shop(
-        root=True,
         plan_label=x_belief.moment_label,
         parent_rope="",
         tree_level=0,
@@ -1542,7 +1537,6 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
         is_expanded=get_obj_from_plan_dict(planroot_dict, "is_expanded"),
         knot=x_belief.knot,
-        moment_label=x_belief.moment_label,
         fund_iota=default_fund_iota_if_None(x_belief.fund_iota),
     )
     create_planroot_kids_from_dict(x_belief, planroot_dict)

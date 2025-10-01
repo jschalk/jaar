@@ -1,7 +1,11 @@
 from src.ch02_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
 from src.ch05_reason_logic.reason import FactUnit, factunit_shop
-from src.ch06_plan_logic.plan import get_default_moment_label, planunit_shop
-from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import (
+    BeliefUnit,
+    beliefunit_shop,
+    get_default_moment_label,
+    planunit_shop,
+)
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
