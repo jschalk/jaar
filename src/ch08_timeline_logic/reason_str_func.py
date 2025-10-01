@@ -2,7 +2,7 @@ from src.ch02_rope_logic.rope import (
     LabelTerm,
     RopeTerm,
     create_rope,
-    get_root_label_from_rope,
+    get_first_label_from_rope,
     get_tail_label,
 )
 from src.ch05_reason_logic.reason import CaseUnit, FactUnit
@@ -18,7 +18,7 @@ def get_reason_case_readable_str(
 ) -> str:
     """Returns a string describing reason case in readable language. Will have special cases for time."""
 
-    nexus_label = get_root_label_from_rope(reason_context)
+    nexus_label = get_first_label_from_rope(reason_context)
     time_rope = create_rope(nexus_label, "time")
     timeline_rope = create_rope(time_rope, timeline_label)
     week_rope = create_rope(timeline_rope, "week")
@@ -53,7 +53,7 @@ def get_fact_state_readable_str(
     context_tail = get_tail_label(context_rope)
     state_trailing = state_rope.replace(context_rope, "", 1)
     x_str = f"({context_tail}) fact: {state_trailing}"
-    nexus_label = get_root_label_from_rope(context_rope)
+    nexus_label = get_first_label_from_rope(context_rope)
     time_rope = create_rope(nexus_label, "time")
     timeline_rope = create_rope(time_rope, timeline_label)
     if factunit.fact_context == timeline_rope:

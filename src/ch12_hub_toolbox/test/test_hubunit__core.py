@@ -7,17 +7,10 @@ from src.ch03_finance_logic.finance_config import (
     filter_penny,
     validate_fund_pool,
 )
-from src.ch07_belief_logic.belief_main import get_default_moment_label as root_label
-from src.ch12_hub_toolbox.ch12_path import (
-    create_belief_dir_path,
-    create_keep_rope_path,
-    create_treasury_db_path,
-)
+from src.ch12_hub_toolbox.ch12_path import create_belief_dir_path, create_keep_rope_path
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
-from src.ch12_hub_toolbox.test._util.ch12_env import (
-    env_dir_setup_cleanup,
-    get_chapter_temp_dir,
-)
+from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
+from src.ch12_hub_toolbox.test._util.ch12_examples import get_ch12_example_moment_label
 
 
 def test_HubUnit_Exists():
@@ -86,7 +79,7 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"

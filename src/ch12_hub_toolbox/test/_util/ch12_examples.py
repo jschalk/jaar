@@ -1,5 +1,4 @@
 from src.ch02_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.ch07_belief_logic.belief_main import get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
 from src.ch10_pack_logic.pack import PackUnit, packunit_shop
 from src.ch10_pack_logic.test._util.ch10_examples import (
@@ -7,22 +6,24 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
-from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
+from src.ch11_bud_logic._ref.ch11_semantic_types import LabelTerm
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
 from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords as wx
-from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
-from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
 
 
-def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAtom:
-    if not moment_label:
-        moment_label = "amy23"
+def get_ch12_example_moment_label() -> str:
+    return "FizzBuzz2"
+
+
+def get_atom_example_factunit_knee(first_label: LabelTerm = None) -> BeliefAtom:
+    if not first_label:
+        first_label = "amy23"
     sports_str = "sports"
-    sports_rope = create_rope(moment_label, sports_str)
+    sports_rope = create_rope(first_label, sports_str)
     ball_str = "basketball"
     ball_rope = create_rope(sports_rope, ball_str)
     knee_str = "knee"
-    knee_rope = create_rope(moment_label, knee_str)
+    knee_rope = create_rope(first_label, knee_str)
     knee_fact_lower = 7
     knee_fact_upper = 23
     x_dimen = wx.belief_plan_factunit
@@ -35,7 +36,7 @@ def get_atom_example_factunit_knee(moment_label: MomentLabel = None) -> BeliefAt
 
 
 def get_texas_rope() -> RopeTerm:
-    moment_label = get_default_moment_label()
+    moment_label = get_ch12_example_moment_label()
     nation_str = "nation"
     usa_str = "USA"
     texas_str = "Texas"

@@ -14,9 +14,9 @@ from src.ch02_rope_logic.rope import (
     find_replace_rope_key_dict,
     get_all_rope_labels,
     get_ancestor_ropes,
+    get_first_label_from_rope,
     get_forefather_ropes,
     get_parent_rope,
-    get_root_label_from_rope,
     get_tail_label,
     is_heir_rope,
     is_labelterm,
@@ -259,7 +259,7 @@ def test_rope_get_tail_label_ReturnsLabelTermWhenNonDefaultknot():
     assert get_tail_label(slash_roses_rope, slash_str) == roses_str
 
 
-def test_rope_get_root_label_from_rope_ReturnsLabelTerm():
+def test_rope_get_first_label_from_rope_ReturnsLabelTerm():
     # ESTABLISH
     casa_str = "casa"
     casa_rope = create_rope(root_rope(), casa_str)
@@ -269,10 +269,10 @@ def test_rope_get_root_label_from_rope_ReturnsLabelTerm():
     roses_rope = create_rope(casa_str, roses_str)
 
     # WHEN / THENs
-    assert get_root_label_from_rope(root_rope()) == get_default_first_label()
-    assert get_root_label_from_rope(casa_rope) == get_default_first_label()
-    assert get_root_label_from_rope(bloomers_rope) == get_default_first_label()
-    assert get_root_label_from_rope(roses_rope) == casa_str
+    assert get_first_label_from_rope(root_rope()) == get_default_first_label()
+    assert get_first_label_from_rope(casa_rope) == get_default_first_label()
+    assert get_first_label_from_rope(bloomers_rope) == get_default_first_label()
+    assert get_first_label_from_rope(roses_rope) == casa_str
 
 
 def test_rope_get_parent_rope_ReturnsObj_Scenario0():
@@ -487,11 +487,11 @@ def test_is_heir_rope_IdentifiesHeirs():
 def test_replace_knot_ReturnsNewObj():
     # ESTABLISH
     casa_str = "casa"
-    root_label = get_default_first_label()
-    gen_casa_rope = create_rope(root_label, casa_str)
+    first_label = get_default_first_label()
+    gen_casa_rope = create_rope(first_label, casa_str)
     semicolon_knot = default_knot_if_None()
     semicolon_knot_casa_rope = (
-        f"{semicolon_knot}{root_label}{semicolon_knot}{casa_str}{semicolon_knot}"
+        f"{semicolon_knot}{first_label}{semicolon_knot}{casa_str}{semicolon_knot}"
     )
     assert semicolon_knot == ";"
     assert gen_casa_rope == semicolon_knot_casa_rope
@@ -503,7 +503,9 @@ def test_replace_knot_ReturnsNewObj():
     )
 
     # THEN
-    slash_knot_casa_rope = f"{slash_knot}{root_label}{slash_knot}{casa_str}{slash_knot}"
+    slash_knot_casa_rope = (
+        f"{slash_knot}{first_label}{slash_knot}{casa_str}{slash_knot}"
+    )
     assert gen_casa_rope == slash_knot_casa_rope
 
 

@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.dict_toolbox import get_1_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch02_rope_logic.rope import create_rope, get_root_label_from_rope
+from src.ch02_rope_logic.rope import create_rope, get_first_label_from_rope
 from src.ch06_plan_logic.plan import (
     PlanUnit,
     all_plans_between,
@@ -164,7 +164,7 @@ def add_newtimeline_planunit(x_beliefunit: BeliefUnit, timeline_config: dict):
     x_weekdays_list = timeline_config.get("weekdays_config")
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
-    planroot_label = get_root_label_from_rope(
+    planroot_label = get_first_label_from_rope(
         rope=x_beliefunit.planroot.get_plan_rope(), knot=x_beliefunit.knot
     )
     timeline_rope = get_timeline_rope(
@@ -201,7 +201,7 @@ def add_stan_planunits(
     timeline_c400_number: int,
 ):
     time_rope = x_beliefunit.make_l1_rope("time")
-    planroot_label = get_root_label_from_rope(
+    planroot_label = get_first_label_from_rope(
         rope=x_beliefunit.planroot.get_plan_rope(), knot=x_beliefunit.knot
     )
     timeline_rope = get_timeline_rope(

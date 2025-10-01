@@ -14,9 +14,9 @@ from src.ch02_rope_logic.rope import (
     default_knot_if_None,
     get_all_rope_labels,
     get_ancestor_ropes,
+    get_first_label_from_rope,
     get_forefather_ropes,
     get_parent_rope,
-    get_root_label_from_rope,
     get_tail_label,
     is_string_in_rope,
     is_sub_rope,
@@ -153,7 +153,7 @@ class BeliefUnit:
     # cashout Calculated field end
 
     def get_nexus_label(self) -> LabelTerm:
-        return get_root_label_from_rope(
+        return get_first_label_from_rope(
             rope=self.planroot.get_plan_rope(), knot=self.knot
         )
 
@@ -629,8 +629,8 @@ class BeliefUnit:
             )
             raise InvalidBeliefException(x_str)
 
-        x_root_label = get_root_label_from_rope(parent_rope, self.knot)
-        if self.planroot.plan_label != x_root_label:
+        x_first_label = get_first_label_from_rope(parent_rope, self.knot)
+        if self.planroot.plan_label != x_first_label:
             exception_str = f"set_plan failed because parent_rope '{parent_rope}' has an invalid root label. Should be {self.planroot.plan_label}."
             raise InvalidBeliefException(exception_str)
 
@@ -1009,7 +1009,7 @@ reason_case:    {reason_case}"""
     def plan_exists(self, rope: RopeTerm) -> bool:
         if rope in {"", None}:
             return False
-        root_rope_plan_label = get_root_label_from_rope(rope, self.knot)
+        root_rope_plan_label = get_first_label_from_rope(rope, self.knot)
         if root_rope_plan_label != self.planroot.plan_label:
             return False
 

@@ -1,18 +1,13 @@
 from src.ch02_rope_logic.rope import RopeTerm, create_rope, create_rope_from_labels
-from src.ch05_reason_logic.reason import FactUnit, factunit_shop
-from src.ch07_belief_logic.belief_main import (
-    BeliefUnit,
-    beliefunit_shop,
-    get_default_moment_label,
-    planunit_shop,
-)
-from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic.pack import PackUnit, packunit_shop
-from src.ch11_bud_logic._ref.ch11_semantic_types import MomentLabel
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_examples import get_texas_rope
 from src.ch13_belief_listen_logic._ref.ch13_keywords import Ch13Keywords as wx
 from src.ch13_belief_listen_logic.test._util.ch13_env import get_chapter_temp_dir
+
+
+def ch13_example_moment_label() -> str:
+    return "Buzz"
 
 
 def casa_str() -> str:
@@ -132,7 +127,7 @@ def get_example_yao_speaker() -> BeliefUnit:
 
 
 def get_texas_hubunit() -> HubUnit:
-    moment_label = get_default_moment_label()
+    moment_label = ch13_example_moment_label()
     return hubunit_shop(
         get_chapter_temp_dir(),
         moment_label,
@@ -143,7 +138,7 @@ def get_texas_hubunit() -> HubUnit:
 
 
 def get_dakota_rope() -> RopeTerm:
-    moment_label = get_default_moment_label()
+    moment_label = ch13_example_moment_label()
     nation_str = "nation"
     usa_str = "USA"
     dakota_str = "Dakota"
@@ -151,7 +146,7 @@ def get_dakota_rope() -> RopeTerm:
 
 
 def get_dakota_hubunit() -> HubUnit:
-    moment_label = get_default_moment_label()
+    moment_label = ch13_example_moment_label()
     return hubunit_shop(
         get_chapter_temp_dir(),
         moment_label,

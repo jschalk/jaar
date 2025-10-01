@@ -2,10 +2,7 @@ from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import create_rope, to_rope
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic.belief_main import (
-    beliefunit_shop,
-    get_default_moment_label as root_label,
-)
+from src.ch07_belief_logic.belief_main import beliefunit_shop, get_default_moment_label
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 
 
@@ -14,7 +11,7 @@ def test_BeliefUnit_set_moment_label_SetsAttr():
     x_moment_label = "amy45"
     sue_str = "Sue"
     sue_belief = beliefunit_shop(sue_str)
-    assert sue_belief.moment_label == root_label()
+    assert sue_belief.moment_label == get_default_moment_label()
 
     # WHEN
     sue_belief.set_moment_label(moment_label=x_moment_label)

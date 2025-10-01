@@ -1,7 +1,6 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import delete_dir, open_file, save_file
 from src.ch02_rope_logic.rope import create_rope
-from src.ch07_belief_logic.belief_main import get_default_moment_label as root_label
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_hub_toolbox.ch12_path import create_keep_rope_path
 from src.ch12_hub_toolbox.keep_tool import (
@@ -17,6 +16,7 @@ from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ch12_hub_toolbox.test._util.ch12_examples import get_ch12_example_moment_label
 
 
 def test_create_keep_path_dir_if_missing_CreatesDirectory(
@@ -25,7 +25,7 @@ def test_create_keep_path_dir_if_missing_CreatesDirectory(
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -49,7 +49,7 @@ def test_treasury_db_file_exists_ReturnsObj(env_dir_setup_cleanup):
     sue_str = "Sue"
     a23_str = "amy23"
     moment_mstr_dir = get_chapter_temp_dir()
-    texas_rope = create_rope(root_label(), "Texas")
+    texas_rope = create_rope(get_ch12_example_moment_label(), "Texas")
     treasury_db_path = create_treasury_db_path(
         moment_mstr_dir,
         belief_name=sue_str,
@@ -162,7 +162,7 @@ def test_save_duty_belief_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -200,7 +200,7 @@ def test_get_duty_belief_reason_lowersFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"

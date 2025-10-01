@@ -1,18 +1,18 @@
 from src.ch02_rope_logic.rope import create_rope
-from src.ch07_belief_logic.belief_main import get_default_moment_label as root_label
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
+from src.ch12_hub_toolbox.test._util.ch12_examples import get_ch12_example_moment_label
 
 
 def test_HubUnit_save_vision_belief_SavesFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -35,7 +35,7 @@ def test_HubUnit_vision_file_exists_ReturnsBool(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -58,7 +58,7 @@ def test_HubUnit_get_vision_belief_reason_lowersFile(env_dir_setup_cleanup):
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"
@@ -80,7 +80,7 @@ def test_HubUnit_get_vision_belief_ReturnsNoneIfFileDoesNotExist(
     # ESTABLISH
     sue_str = "Sue"
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(get_ch12_example_moment_label(), nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
     texas_str = "Texas"

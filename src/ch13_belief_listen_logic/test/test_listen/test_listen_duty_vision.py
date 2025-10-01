@@ -1,10 +1,5 @@
 from src.ch02_rope_logic.rope import LabelTerm, RopeTerm, create_rope
-from src.ch07_belief_logic.belief_main import (
-    BeliefUnit,
-    beliefunit_shop,
-    get_default_moment_label,
-    planunit_shop,
-)
+from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop, planunit_shop
 from src.ch12_hub_toolbox.hub_tool import (
     gut_file_exists,
     job_file_exists,
@@ -24,6 +19,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_env import (
 )
 from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     casa_str,
+    ch13_example_moment_label,
     clean_str,
     cook_str,
     eat_str,
@@ -47,7 +43,7 @@ def sweep_str() -> str:
 
 
 def casa_rope() -> RopeTerm:
-    return create_rope(get_default_moment_label(), casa_str())
+    return create_rope(ch13_example_moment_label(), casa_str())
 
 
 def cook_rope() -> RopeTerm:
@@ -90,7 +86,7 @@ def get_example_yao_belief() -> BeliefUnit:
     yao_str = "Yao"
     zia_str = "Zia"
     bob_str = "Bob"
-    yao_speaker = beliefunit_shop(yao_str, get_default_moment_label())
+    yao_speaker = beliefunit_shop(yao_str, ch13_example_moment_label())
     yao_speaker.set_plan(planunit_shop(run_str()), casa_rope())
     yao_speaker.add_voiceunit(yao_str, voice_debt_points=10)
     yao_speaker.add_voiceunit(zia_str, voice_debt_points=30)
@@ -148,7 +144,7 @@ def get_example_yao_vision3_speaker() -> BeliefUnit:
 
 
 def get_usa_rope() -> RopeTerm:
-    return create_rope(get_default_moment_label(), "USA")
+    return create_rope(ch13_example_moment_label(), "USA")
 
 
 def get_iowa_str() -> LabelTerm:
@@ -192,11 +188,11 @@ def get_utah_rope() -> RopeTerm:
 
 
 def get_swim_rope() -> RopeTerm:
-    return create_rope(get_default_moment_label(), get_swim_str())
+    return create_rope(ch13_example_moment_label(), get_swim_str())
 
 
 def get_location_rope() -> RopeTerm:
-    return create_rope(get_default_moment_label(), get_location_str())
+    return create_rope(ch13_example_moment_label(), get_location_str())
 
 
 def get_in_mer_rope() -> RopeTerm:
@@ -268,7 +264,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     # yao_vision2 with 2 tasks, one is equal fact that makes task active
     # yao_vision3 with 1 new task, fact stays with it
     moment_mstr_dir = env_dir()
-    moment_label = get_default_moment_label()
+    moment_label = ch13_example_moment_label()
     yao_gut0 = get_example_yao_gut_with_3_healers()
     yao_gut0.set_l1_plan(planunit_shop(get_location_str()))
     yao_gut0.set_plan(planunit_shop(get_in_mer_str()), get_location_rope())

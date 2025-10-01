@@ -12,7 +12,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
-    get_default_moment_label as root_label,
+    get_default_moment_label,
 )
 
 
@@ -179,7 +179,7 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
 
     # THEN
     assert x_belief.belief_name == ""
-    assert x_belief.moment_label == root_label()
+    assert x_belief.moment_label == get_default_moment_label()
     assert x_belief.knot == default_knot_if_None()
     assert x_belief.fund_pool == validate_fund_pool()
     assert x_belief.fund_iota == default_fund_iota_if_None()

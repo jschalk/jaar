@@ -1,6 +1,6 @@
 from copy import deepcopy as copy_deepcopy
 from dataclasses import dataclass
-from src.ch02_rope_logic.rope import get_ancestor_ropes, get_root_label_from_rope
+from src.ch02_rope_logic.rope import get_ancestor_ropes, get_first_label_from_rope
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
@@ -94,7 +94,7 @@ def _create_star_data(listener: BeliefUnit, x_rope: RopeTerm) -> list:
     star_data.add_to_star_list = []
     star_data.replace_star_list = []
     ancestor_ropes = get_ancestor_ropes(x_rope, listener.knot)
-    root_rope = get_root_label_from_rope(x_rope, listener.knot)
+    root_rope = get_first_label_from_rope(x_rope, listener.knot)
     for ancestor_rope in ancestor_ropes:
         if ancestor_rope != root_rope:
             if listener.plan_exists(ancestor_rope):

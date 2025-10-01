@@ -1,6 +1,7 @@
 from pathlib import Path as pathlib_Path
 from src.ch01_data_toolbox.file_toolbox import is_path_valid
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    FirstLabel,
     LabelTerm,
     RopeTerm,
     default_knot_if_None,
@@ -121,7 +122,7 @@ def get_parent_rope(
     return create_rope_from_labels(parent_labels, knot=knot)
 
 
-def get_root_label_from_rope(rope: RopeTerm, knot: str = None) -> LabelTerm:
+def get_first_label_from_rope(rope: RopeTerm, knot: str = None) -> FirstLabel:
     return get_all_rope_labels(rope=rope, knot=knot)[0]
 
 

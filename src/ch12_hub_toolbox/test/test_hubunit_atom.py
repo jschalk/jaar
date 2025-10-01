@@ -1,6 +1,5 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.ch07_belief_logic.belief_main import get_default_moment_label as moment_label
 from src.ch12_hub_toolbox.hubunit import hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
@@ -11,6 +10,7 @@ from src.ch12_hub_toolbox.test._util.ch12_examples import (
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
+    get_ch12_example_moment_label as moment_label,
 )
 
 
