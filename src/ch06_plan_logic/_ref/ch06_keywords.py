@@ -1,4 +1,4 @@
-from src.ch05_reason_logic._ref.ch05_keywords import *
+from enum import Enum
 
 
 class Ch06Keywords(str, Enum):

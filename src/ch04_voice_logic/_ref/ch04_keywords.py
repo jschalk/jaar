@@ -1,4 +1,4 @@
-from src.ch03_finance_logic._ref.ch03_keywords import *
+from enum import Enum
 
 
 class Ch04Keywords(str, Enum):

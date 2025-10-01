@@ -76,7 +76,7 @@ def test_NexusLabel_Exists():
     # THEN
     assert x_nexus == empty_str
     doc_str = (
-        f"A string representation of a tree root node. Node cannot contain {wx.knot}"
+        f"A string representation of a tree root node. Node cannot contain {wx.knot}."
     )
     assert inspect_getdoc(x_nexus) == doc_str
 
@@ -88,7 +88,7 @@ def test_RopeTerm_Exists():
     x_rope = RopeTerm(empty_str)
     # THEN
     assert x_rope == empty_str
-    doc_str = f"A string representation of a tree path. LabelTerms are seperated by rope {wx.knot}"
+    doc_str = f"A string representation of a tree path. LabelTerms are seperated by {wx.knot}s."
     assert inspect_getdoc(x_rope) == doc_str
 
 

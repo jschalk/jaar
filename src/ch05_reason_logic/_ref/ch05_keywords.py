@@ -1,4 +1,4 @@
-from src.ch04_voice_logic._ref.ch04_keywords import *
+from enum import Enum
 
 
 class Ch05Keywords(str, Enum):

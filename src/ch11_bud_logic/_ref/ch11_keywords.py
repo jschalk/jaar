@@ -1,4 +1,4 @@
-from src.ch10_pack_logic._ref.ch10_keywords import *
+from enum import Enum
 
 
 class Ch11Keywords(str, Enum):

@@ -1,4 +1,4 @@
-from src.ch20_world_logic._ref.ch20_keywords import *
+from enum import Enum
 
 
 class Ch21Keywords(str, Enum):

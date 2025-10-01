@@ -193,7 +193,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             for keyword in not_allowed_keywords:
                 notallowed_keyword_failure_str = f"keyword {keyword} is not allowed in chapter {chapter_prefix}. It is in {file_path=}"
                 assert keyword not in file_str, notallowed_keyword_failure_str
-            print(f"{file_path=}")
+            # print(f"{file_path=}")
             excessive_imports_str = f"{file_path} has too many Keywords class imports"
             ch_class_name = f"Ch{chapter_num:02}Keywords"
             is_doc_builder_file = "doc_builder.py" in file_path
@@ -204,6 +204,11 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             enum_x = f"{file_path} Keywords Class Import is wrong, it should be {ch_class_name}"
             if "Keywords" in file_str and not is_doc_builder_file:
                 assert ch_class_name in file_str, enum_x
+
+            if file_path.find(f"\\ch{chapter_num:02}_keywords.py") > -1:
+                print(f"{file_path=}")
+                assert file_str.count("keywords import") == 0, "No imports"
+                assert file_str.count("from enum import Enum") == 1, "import Enum"
 
 
 def test_Chapters_FirstLevelFilesDoNotImportKeywords():

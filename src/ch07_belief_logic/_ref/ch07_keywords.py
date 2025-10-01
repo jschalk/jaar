@@ -1,4 +1,4 @@
-from src.ch06_plan_logic._ref.ch06_keywords import *
+from enum import Enum
 
 
 class Ch07Keywords(str, Enum):

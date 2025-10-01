@@ -1,7 +1,11 @@
 from dataclasses import dataclass
 from platform import system as platform_system
 from pytest import raises as pytest_raises
-from src.ch02_rope_logic._ref.ch02_semantic_types import default_knot_if_None
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    LabelTerm,
+    NexusLabel,
+    default_knot_if_None,
+)
 from src.ch02_rope_logic.rope import (
     RopeTerm,
     all_ropes_between,
@@ -10,9 +14,6 @@ from src.ch02_rope_logic.rope import (
     find_replace_rope_key_dict,
     get_all_rope_labels,
     get_ancestor_ropes,
-    get_default_nexus_rope,
-    get_default_nexus_rope as root_rope,
-    get_default_nexus_label,
     get_forefather_ropes,
     get_parent_rope,
     get_root_label_from_rope,
@@ -26,6 +27,14 @@ from src.ch02_rope_logic.rope import (
     to_rope,
     validate_labelterm,
 )
+
+
+def get_default_nexus_label() -> NexusLabel:
+    return LabelTerm("YY")
+
+
+def root_rope() -> str:
+    return create_rope(get_default_nexus_label())
 
 
 def test_to_rope_ReturnsObj_WithDefault_knot():
@@ -57,23 +66,6 @@ def test_to_rope_ReturnsObj_WithParameter_knot():
     )
     assert to_rope(s_knot, s_knot) == s_knot
     assert to_rope(None, s_knot) == s_knot
-
-
-def test_get_default_nexus_label_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_default_nexus_label() == "YY"
-    assert get_default_nexus_label().is_label(default_knot_if_None())
-
-
-def test_get_default_nexus_rope_ReturnsObj():
-    # ESTABLISH
-    default_knot = default_knot_if_None()
-    default_root_label = get_default_nexus_label()
-    slash_knot = "/"
-
-    # WHEN / THEN
-    assert get_default_nexus_rope() == to_rope(default_root_label)
-    assert get_default_nexus_rope(slash_knot) == to_rope(default_root_label, slash_knot)
 
 
 def test_create_rope_Scenario0_RaisesErrorIfKnotNotAtPostionZeroOf_parent_rope():
@@ -431,11 +423,6 @@ def test_rope_get_forefather_ropes_ReturnsAncestorRopeTermsWithoutClean():
         root_rope(): None,
     }
     assert x_ropes == texas_forefather_ropes
-
-
-def test_rope_get_default_nexus_label_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_default_nexus_label() == "YY"
 
 
 def test_rope_create_rope_from_labels_ReturnsObj():

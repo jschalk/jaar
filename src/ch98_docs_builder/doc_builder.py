@@ -25,9 +25,7 @@ def get_keywords_src_config() -> dict[str, dict]:
 
 
 def get_keywords_by_chapter(keywords_dict: dict[str, dict[str]]) -> dict:
-    chapters_keywords = {}
-    for chapter_num in get_chapter_num_descs().keys():
-        chapters_keywords[chapter_num] = set()
+    chapters_keywords = {ch_num: set() for ch_num in get_chapter_num_descs().keys()}
     for x_keyword, ref_dict in keywords_dict.items():
         keyworld_init_chapter_num = ref_dict.get("chapter_num")
         chapter_set = chapters_keywords.get(keyworld_init_chapter_num)
@@ -130,8 +128,7 @@ def get_keywords_by_chapter_md() -> str:
         chapter_num = int(get_chapter_desc_str_number(chapter_desc))
         chapter_keywords = keywords_by_chapter.get(chapter_num)
         chapter_keywords = sorted(list(chapter_keywords))
-        x_list = [str_func for str_func in chapter_keywords]
-        _line = f"- {chapter_desc}: " + ", ".join(x_list)
+        _line = f"- {chapter_desc}: " + ", ".join(chapter_keywords)
         func_lines.append(_line)
     return f"# {keywords_title_str}\n\n" + "\n".join(func_lines)
 

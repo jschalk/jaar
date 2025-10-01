@@ -1,4 +1,4 @@
-from src.ch07_belief_logic._ref.ch07_keywords import *
+from enum import Enum
 
 
 class Ch08Keywords(str, Enum):
