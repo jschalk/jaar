@@ -2,7 +2,6 @@ from pathlib import Path as pathlib_Path
 from src.ch01_data_toolbox.file_toolbox import is_path_valid
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
     LabelTerm,
-    NexusLabel,
     RopeTerm,
     default_knot_if_None,
 )
@@ -12,20 +11,12 @@ class knot_not_in_parent_rope_Exception(Exception):
     pass
 
 
-def get_default_nexus_label() -> NexusLabel:
-    return LabelTerm("YY")
-
-
 def to_rope(label: LabelTerm, knot: str = None) -> LabelTerm:
     x_knot = default_knot_if_None(knot)
     if label is None:
         return x_knot
     label = label if label.find(x_knot) == 0 else f"{x_knot}{label}"
     return label if label.endswith(x_knot) else LabelTerm(f"{label}{x_knot}")
-
-
-def get_default_nexus_rope(knot: str = None) -> str:
-    return to_rope(get_default_nexus_label(), knot)
 
 
 class init_knot_not_presentException(Exception):

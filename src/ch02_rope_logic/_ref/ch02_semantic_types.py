@@ -19,7 +19,7 @@ class LabelTerm(str):
 
 
 class NexusLabel(LabelTerm):
-    """A string representation of a tree root node. Node cannot contain knot"""
+    """A string representation of a tree root node. Node cannot contain knot."""
 
     pass
 
@@ -31,6 +31,6 @@ class MomentLabel(NexusLabel):  # Created to help track the object class relatio
 
 
 class RopeTerm(str):
-    """A string representation of a tree path. LabelTerms are seperated by rope knot"""
+    """A string representation of a tree path. LabelTerms are seperated by knots."""
 
     pass

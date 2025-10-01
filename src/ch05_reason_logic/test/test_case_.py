@@ -1,8 +1,4 @@
-from src.ch02_rope_logic.rope import (
-    create_rope,
-    find_replace_rope_key_dict,
-    get_default_nexus_label as root_label,
-)
+from src.ch02_rope_logic.rope import create_rope, find_replace_rope_key_dict
 from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
 from src.ch05_reason_logic.reason import (
     CaseUnit,
@@ -15,7 +11,7 @@ from src.ch05_reason_logic.reason import (
 def test_CaseUnit_Exists():
     # ESTABLISH
     casa_str = "casa"
-    casa_rope = create_rope(root_label(), casa_str)
+    casa_rope = create_rope("Amy23", casa_str)
     email_str = "check email"
     email_rope = create_rope(casa_rope, email_str)
 
@@ -46,7 +42,7 @@ def test_CaseUnit_Exists():
 def test_caseunit_shop_ReturnsObj():
     # ESTABLISH
     casa_str = "casa"
-    casa_rope = create_rope(root_label(), casa_str)
+    casa_rope = create_rope("Amy23", casa_str)
     email_str = "check email"
     email_rope = create_rope(casa_rope, email_str)
 
@@ -60,7 +56,7 @@ def test_caseunit_shop_ReturnsObj():
 def test_CaseUnit_clear_case_status_SetsAttrs():
     # WHEN
     casa_str = "casa"
-    casa_rope = create_rope(root_label(), casa_str)
+    casa_rope = create_rope("Amy23", casa_str)
     casa_case = caseunit_shop(reason_state=casa_rope)
     # THEN
     assert casa_case.status is None
@@ -79,7 +75,7 @@ def test_CaseUnit_clear_case_status_SetsAttrs():
 def test_CaseUnit_is_range_IdentifiesStatus():
     # ESTABLISH
     casa_str = "casa"
-    casa_rope = create_rope(root_label(), casa_str)
+    casa_rope = create_rope("Amy23", casa_str)
 
     # WHEN
     casa_case = caseunit_shop(reason_state=casa_rope, reason_lower=1, reason_upper=3)
@@ -102,7 +98,7 @@ def test_CaseUnit_is_range_IdentifiesStatus():
 def test_CaseUnit_is_segregate_IdentifiesSegregateStatus():
     # ESTABLISH
     casa_str = "casa"
-    casa_rope = create_rope(root_label(), casa_str)
+    casa_rope = create_rope("Amy23", casa_str)
 
     # WHEN
     casa_case = caseunit_shop(reason_state=casa_rope, reason_lower=1, reason_upper=3)
@@ -124,7 +120,7 @@ def test_CaseUnit_is_segregate_IdentifiesSegregateStatus():
 
 def test_CaseUnit_is_in_lineage_IdentifiesLineage():
     # ESTABLISH
-    nation_rope = create_rope(root_label(), "Nation-States")
+    nation_rope = create_rope("Amy23", "Nation-States")
     usa_rope = create_rope(nation_rope, "USA")
     texas_rope = create_rope(usa_rope, "Texas")
     idaho_rope = create_rope(usa_rope, "Idaho")
@@ -158,7 +154,7 @@ def test_CaseUnit_is_in_lineage_IdentifiesLineage():
 def test_CaseUnit_is_in_lineage_IdentifiesLineageWithNonDefaultKnot():
     # ESTABLISH
     slash_str = "/"
-    nation_rope = create_rope(root_label(), "Nation-States", knot=slash_str)
+    nation_rope = create_rope("Amy23", "Nation-States", knot=slash_str)
     usa_rope = create_rope(nation_rope, "USA", knot=slash_str)
     texas_rope = create_rope(usa_rope, "Texas", knot=slash_str)
     idaho_rope = create_rope(usa_rope, "Idaho", knot=slash_str)
@@ -199,7 +195,7 @@ def test_CaseUnit_is_in_lineage_IdentifiesLineageWithNonDefaultKnot():
 def test_CaseUnit_get_range_segregate_status_ReturnsStatusBoolFor_is_rangeCase():
     # ESTABLISH
     yr_str = "ced_yr"
-    yr_rope = create_rope(root_label(), yr_str)
+    yr_rope = create_rope("Amy23", yr_str)
     yr_case = caseunit_shop(reason_state=yr_rope, reason_lower=3, reason_upper=13)
 
     # WHEN / THEN
@@ -244,7 +240,7 @@ def test_CaseUnit_get_range_segregate_status_ReturnsStatusBoolFor_is_rangeCase()
 def test_CaseUnit_get_range_segregate_status_ReturnsStatusBoolForSegregateCase():
     # ESTABLISH
     yr_str = "ced_yr"
-    yr_rope = create_rope(root_label(), yr_str)
+    yr_rope = create_rope("Amy23", yr_str)
     yr_case = caseunit_shop(
         reason_state=yr_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
@@ -281,7 +277,7 @@ def test_CaseUnit_get_range_segregate_status_ReturnsStatusBoolForSegregateCase()
 def test_CaseUnitUnit_is_range_or_segregate_ReturnsBool():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
 
     # WHEN / THEN
     wk_case = caseunit_shop(reason_state=wk_rope)
@@ -299,7 +295,7 @@ def test_CaseUnitUnit_is_range_or_segregate_ReturnsBool():
 def test_CaseUnitUnit_get_case_status_Returns_active_Boolean():
     # ESTABLISH / WHEN assumes fact is in lineage
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wk_case = caseunit_shop(reason_state=wk_rope)
 
     # WHEN / THEN
@@ -313,7 +309,7 @@ def test_CaseUnitUnit_get_case_status_Returns_active_Boolean():
 def test_CaseUnitUnit_get_active_Returns_is_range_active_Boolean():
     # ESTABLISH assumes fact is in lineage
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wk_case = caseunit_shop(reason_state=wk_rope, reason_lower=3, reason_upper=7)
 
     # WHEN / THEN
@@ -326,7 +322,7 @@ def test_CaseUnitUnit_get_active_Returns_is_range_active_Boolean():
 def test_CaseUnitUnit_set_case_status_SetsAttr_status_WhenFactUnitIsNull():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     after_str = "afternoon"
     after_rope = create_rope(wk_rope, after_str)
     case_2 = caseunit_shop(reason_state=after_rope)
@@ -343,7 +339,7 @@ def test_CaseUnitUnit_set_case_status_SetsAttr_status_WhenFactUnitIsNull():
 def test_CaseUnitUnit_set_case_status_SetsAttr_status_OfSimple():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
@@ -360,7 +356,7 @@ def test_CaseUnitUnit_set_case_status_SetsAttr_status_OfSimple():
 def test_CaseUnit_set_case_status_SetsAttr_status_Scenario2():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_after_str = "afternoon"
@@ -379,7 +375,7 @@ def test_CaseUnit_set_case_status_SetsAttr_status_Scenario2():
 def test_CaseUnit_set_case_status_SetsAttr_status_Scenario3():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_noon_str = "noon"
@@ -398,7 +394,7 @@ def test_CaseUnit_set_case_status_SetsAttr_status_Scenario3():
 def test_CaseUnit_set_case_status_SetsAttr_status_Scenario4():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     thu_str = "thur"
@@ -420,7 +416,7 @@ def test_CaseUnit_set_case_status_SetsAttr_status_Scenario4():
 def test_CaseUnit_set_case_status_SetsAttr_status_Scenario5():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_cloudy_str = "cloudy"
@@ -441,7 +437,7 @@ def test_CaseUnit_set_case_status_SetsAttr_status_Scenario5():
 def test_CaseUnit_set_case_status_SetsStatus_status_ScenarioClock():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     hr24_str = "24hr"
     hr24_rope = create_rope(clock_rope, hr24_str)
     hr24_case = caseunit_shop(reason_state=hr24_rope, reason_lower=7, reason_upper=7)
@@ -458,7 +454,7 @@ def test_CaseUnit_set_case_status_SetsStatus_status_ScenarioClock():
 def test_CaseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     no_range_case = caseunit_shop(reason_state=hr24_rope)
     no_range_case.status = False
 
@@ -470,7 +466,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhen_status_IsFalse():
 def test_CaseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     range_5_to_31_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=5, reason_upper=31
     )
@@ -486,7 +482,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhenBool_is_range_True():
 def test_CaseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     range_5_to_31_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=5, reason_upper=31
     )
@@ -502,7 +498,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhenBool_is_range_False():
 def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
@@ -516,7 +512,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_01():
 def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
@@ -530,7 +526,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateFalse_02():
 def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
@@ -544,7 +540,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_01():
 def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     o0_n0_d5_case = caseunit_shop(
         reason_state=hr24_rope, reason_divisor=5, reason_lower=0, reason_upper=0
     )
@@ -558,7 +554,7 @@ def test_CaseUnit_get_task_status_ReturnsObjWhenBoolSegregateTrue_02():
 def test_CaseUnit_get_task_status_ReturnsObjNotNull():
     # ESTABLISH
     wk_str = "wks"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     wed_str = "wed"
     wed_rope = create_rope(wk_rope, wed_str)
     wed_case = caseunit_shop(reason_state=wed_rope)
@@ -574,7 +570,7 @@ def test_CaseUnit_get_task_status_ReturnsObjNotNull():
 def test_CaseUnit_set_case_status_SetsAttrs_Scenario01():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     range_2_to_7_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
@@ -593,7 +589,7 @@ def test_CaseUnit_set_case_status_SetsAttrs_Scenario01():
 def test_CaseUnit_set_case_status_SetsAttrs_Scenario02():
     # ESTABLISH
     hr24_str = "24hr"
-    hr24_rope = create_rope(root_label(), hr24_str)
+    hr24_rope = create_rope("Amy23", hr24_str)
     range_2_to_7_case = caseunit_shop(
         reason_state=hr24_rope, reason_lower=2, reason_upper=7
     )
@@ -625,7 +621,7 @@ def test_CaseUnit_set_case_status_SetsAttrs_Scenario02():
 def test_CaseUnit_set_case_status_SetsAttrs_Scenario03():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     hr24_str = "24hr"
     hr24_rope = create_rope(clock_rope, hr24_str)
     hr24_case = caseunit_shop(reason_state=hr24_rope, reason_lower=7, reason_upper=7)
@@ -644,7 +640,7 @@ def test_CaseUnit_set_case_status_SetsAttrs_Scenario03():
 def test_CaseUnit_set_case_status_SetCEDWeekStatusFalse():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     wk_str = "ced_wk"
     wk_rope = create_rope(clock_rope, wk_str)
     o1_n1_d6_case = caseunit_shop(
@@ -663,7 +659,7 @@ def test_CaseUnit_set_case_status_SetCEDWeekStatusFalse():
 def test_CaseUnit_set_case_status_SetCEDWeekStatusTrue():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     wk_str = "ced_wk"
     wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(
@@ -682,7 +678,7 @@ def test_CaseUnit_set_case_status_SetCEDWeekStatusTrue():
 def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     wk_str = "ced_wk"
     wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(
@@ -706,7 +702,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithDvisiorAndreason_lower_reason_upper():
 def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     wk_str = "ced_wk"
     wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(reason_state=wk_rope, reason_lower=1, reason_upper=4)
@@ -723,7 +719,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithreason_lowerAndreason_upper():
 def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     wk_str = "ced_wk"
     wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(reason_state=wk_rope)
@@ -740,7 +736,7 @@ def test_CaseUnit_to_dict_ReturnsDictWithOnlyRopeTerm():
 def test_CaseUnit_get_obj_key():
     # ESTABLISH
     clock_str = "clock"
-    clock_rope = create_rope(root_label(), clock_str)
+    clock_rope = create_rope("Amy23", clock_str)
     wk_str = "ced_wk"
     wk_rope = create_rope(clock_rope, wk_str)
     wk_case = caseunit_shop(reason_state=wk_rope)
@@ -773,7 +769,7 @@ def test_CaseUnit_find_replace_rope_casas():
 def test_cases_get_from_dict_ReturnsCompleteObj():
     # ESTABLISH
     wk_str = "wks"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     static_dict = {
         wk_rope: {
             wx.reason_state: wk_rope,
@@ -795,7 +791,7 @@ def test_cases_get_from_dict_ReturnsCompleteObj():
 def test_cases_get_from_dict_BuildsObjFromIncompleteDict():
     # ESTABLISH
     wk_str = "wks"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope("Amy23", wk_str)
     static_dict = {wk_rope: {wx.reason_state: wk_rope}}
 
     # WHEN
@@ -812,7 +808,7 @@ def test_CaseUnitsUnit_set_knot_SetsAttrs():
     wk_str = "wk"
     sun_str = "Sun"
     slash_str = "/"
-    slash_wk_rope = create_rope(root_label(), wk_str, knot=slash_str)
+    slash_wk_rope = create_rope("Amy23", wk_str, knot=slash_str)
     slash_sun_rope = create_rope(slash_wk_rope, sun_str, knot=slash_str)
     sun_caseunit = caseunit_shop(slash_sun_rope, knot=slash_str)
     assert sun_caseunit.knot == slash_str
@@ -824,14 +820,14 @@ def test_CaseUnitsUnit_set_knot_SetsAttrs():
 
     # THEN
     assert sun_caseunit.knot == colon_str
-    colon_wk_rope = create_rope(root_label(), wk_str, knot=colon_str)
+    colon_wk_rope = create_rope("Amy23", wk_str, knot=colon_str)
     colon_sun_rope = create_rope(colon_wk_rope, sun_str, knot=colon_str)
     assert sun_caseunit.reason_state == colon_sun_rope
 
 
 def test_rope_find_replace_rope_key_dict_ReturnsCasesUnit_Scenario1():
     # ESTABLISH
-    casa_rope = create_rope(root_label(), "casa")
+    casa_rope = create_rope("Amy23", "casa")
     old_seasons_rope = create_rope(casa_rope, "seasons")
     old_case_x = caseunit_shop(reason_state=old_seasons_rope)
     old_cases_x = {old_case_x.reason_state: old_case_x}

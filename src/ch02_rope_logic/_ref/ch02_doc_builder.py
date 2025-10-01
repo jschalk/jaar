@@ -106,7 +106,7 @@ usa_texas_rope = "{un_usa_texas_rope}"
 un_texas_rope = "{un_texas_rope}"
 - **NexusLabel**: The first label in a RopeTerm. Example "UN" in "{un_usa_texas_rope}"
 
-# Moments
+# Ropes that have the same Nexus can create meaning
 Consider these 3 ropes: 
 1. {un_usa_texas_rope} 
 2. {usa_texas_rope}
@@ -114,7 +114,7 @@ Consider these 3 ropes:
 
 Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN nexus :
 
-"UN" has the nexus moment
+Here each Rope has the Nexus "UN"
 1. {un_france_paris_rope}
 2. {un_germany_berlin_rope}
 3. {un_usa_texas_dallas_rope}
@@ -122,8 +122,11 @@ Each rope arrives at the concept of Texas in a different way and connotes someth
 
 vs 
 
-"USA" has the nexus moment
+Here each Rope has the Nexus "USA"
 1. {usa_un_france_paris_rope}
 2. {usa_un_germany_berlin_rope}
 3. {usa_texas_dallas_rope}
-4. {usa_texas_paris_rope}"""
+4. {usa_texas_paris_rope}
+
+The ropes give different meaning to the concepts of Dallas and Paris
+"""
