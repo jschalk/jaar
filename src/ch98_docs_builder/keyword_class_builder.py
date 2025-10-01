@@ -12,11 +12,15 @@ def create_keywords_enum_class_file_str(chapter_num: int, keywords_set: set) -> 
 
     chXX_str = f"{chapter_num:02}"
     key_str = "Key"
+    dunder_str_func_str = """
+    def __str__(self):
+        return self.value
+"""
     return f"""from enum import Enum
 
 
 class Ch{chXX_str}{key_str}words(str, Enum):{keywords_str}
-"""
+{dunder_str_func_str}"""
 
 
 def save_keywords_enum_class_file(

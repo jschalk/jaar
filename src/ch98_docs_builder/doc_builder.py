@@ -55,9 +55,10 @@ def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
 
 
 def get_chapter_descs() -> dict[str, str]:
+    """Returns chapter_desc, chapter_dir for all Chapters"""
     src_dir = "src"
-    """ch99_chapter_style is a new game for me"""
     chapter_descs = get_level1_dirs(src_dir)
+    """ch99_chapter_style is not evaluated"""
     chapter_descs.remove("ch99_chapter_style")
     return {
         chapter_desc: create_path(src_dir, chapter_desc)

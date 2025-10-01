@@ -27,6 +27,9 @@ def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario0_Empty_keyword_
 
 class Ch04{key_str}words(str, Enum):
     pass
+
+    def __str__(self):
+        return self.value
 """
     print(file_str)
     print(expected_file_str)
@@ -61,6 +64,9 @@ class Ch04{key_str}words(str, Enum):
     HealerName = "HealerName"
     INSERT = "INSERT"
     fund_pool = "fund_pool"
+
+    def __str__(self):
+        return self.value
 """
     print(file_str)
     print(expected_file_str)
