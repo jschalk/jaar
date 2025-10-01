@@ -700,7 +700,7 @@ def test_BeliefUnit_set_awardunit_CalculatesInheritedAwardUnitBeliefFund():
 
     # THEN
     print(f"{plan_dict.keys()=}")
-    plan_bob = plan_dict.get(to_rope(sue_belief.moment_label))
+    plan_bob = plan_dict.get(sue_belief.planroot.get_plan_rope())
     assert len(plan_bob.awardheirs) == 3
 
     bheir_yao = plan_bob.awardheirs.get(yao_str)

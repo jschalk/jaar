@@ -166,7 +166,7 @@ def test_BeliefUnit_cashout_NLevelSetsDescendantAttributes_1():
     sue_belief.set_plan(email_plan, parent_rope=casa_rope)
 
     # test root status:
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     x_planroot = sue_belief.get_plan_obj(root_rope)
     assert x_planroot.descendant_pledge_count is None
     assert x_planroot.all_voice_cred is None
@@ -377,7 +377,7 @@ def test_BeliefUnit_get_plan_tree_ordered_rope_list_ReturnsObj():
     # THEN
     assert len(ordered_label_list) == 17
     x_1st_rope_in_ordered_list = sue_belief.get_plan_tree_ordered_rope_list()[0]
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     assert x_1st_rope_in_ordered_list == root_rope
     x_8th_rope_in_ordered_list = sue_belief.get_plan_tree_ordered_rope_list()[9]
     assert x_8th_rope_in_ordered_list == sue_belief.make_l1_rope(wk_str)

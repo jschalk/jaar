@@ -3,6 +3,7 @@ from enum import Enum
 
 class Ch03Keywords(str, Enum):
     BitNum = "BitNum"
+    FirstLabel = "FirstLabel"
     FundIota = "FundIota"
     FundNum = "FundNum"
     GrainFloat = "GrainFloat"
@@ -11,7 +12,6 @@ class Ch03Keywords(str, Enum):
     LabelTerm = "LabelTerm"
     MoneyUnit = "MoneyUnit"
     NameTerm = "NameTerm"
-    NexusLabel = "NexusLabel"
     PennyNum = "PennyNum"
     RespectNum = "RespectNum"
     RopeTerm = "RopeTerm"

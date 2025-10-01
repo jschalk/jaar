@@ -62,7 +62,7 @@ def get_ropeterm_explanation_md() -> str:
     fb_demps_rope = create_rope(fb_like_things_rope, "tell stories about Quetin Demps")
     # football_ ;Football;my favorite;tell players to play there;
 
-    return f"""# Ropes and Moments
+    return f"""# Ropes
 
 
 # Introduction
@@ -104,17 +104,17 @@ vacuum_rope = "{vacuum_rope}"
 dirty_rope = "{dirty_rope}"
 usa_texas_rope = "{un_usa_texas_rope}"
 un_texas_rope = "{un_texas_rope}"
-- **NexusLabel**: The first label in a RopeTerm. Example "UN" in "{un_usa_texas_rope}"
+- **FirstLabel**: The first label in a RopeTerm. Example "UN" in "{un_usa_texas_rope}"
 
-# Ropes that have the same Nexus can create meaning
+# Ropes that have the same FirstLabel can create meaning
 Consider these 3 ropes: 
 1. {un_usa_texas_rope} 
 2. {usa_texas_rope}
 3. {usa_south_texas_rope}
 
-Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN nexus :
+Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN FirstLabel :
 
-Here each Rope has the Nexus "UN"
+Here each Rope has the FirstLabel "UN"
 1. {un_france_paris_rope}
 2. {un_germany_berlin_rope}
 3. {un_usa_texas_dallas_rope}
@@ -122,7 +122,7 @@ Here each Rope has the Nexus "UN"
 
 vs 
 
-Here each Rope has the Nexus "USA"
+Here each Rope has the FirstLabel "USA"
 1. {usa_un_france_paris_rope}
 2. {usa_un_germany_berlin_rope}
 3. {usa_texas_dallas_rope}

@@ -61,7 +61,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_DELETE_belief_voice_membership():
 def test_sift_atom_ReturnsObj_BeliefAtom_DELETE_belief_planunit():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
@@ -102,7 +102,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_DELETE_belief_planunit():
 def test_sift_atom_SetsBeliefDeltaBeliefAtom_belief_planunit():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue")
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     casa_str = "casa"
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"

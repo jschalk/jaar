@@ -122,18 +122,18 @@ def get_default_moment_label() -> str:
 
 @dataclass
 class BeliefUnit:
-    moment_label: MomentLabel = None
     belief_name: BeliefName = None
-    voices: dict[VoiceName, VoiceUnit] = None
-    planroot: PlanUnit = None
-    tally: float = None
+    moment_label: MomentLabel = None
+    knot: str = None
     fund_pool: FundNum = None
     fund_iota: FundIota = None
+    respect_bit: BitNum = None
     penny: PennyNum = None
+    tally: float = None
+    voices: dict[VoiceName, VoiceUnit] = None
+    planroot: PlanUnit = None
     credor_respect: RespectNum = None
     debtor_respect: RespectNum = None
-    respect_bit: BitNum = None
-    knot: str = None
     max_tree_traverse: int = None
     last_pack_id: int = None
     # cashout Calculated field begin
@@ -151,6 +151,11 @@ class BeliefUnit:
     reason_contexts: set[RopeTerm] = None
     _range_inheritors: dict[RopeTerm, RopeTerm] = None
     # cashout Calculated field end
+
+    def get_nexus_label(self) -> LabelTerm:
+        return get_root_label_from_rope(
+            rope=self.planroot.get_plan_rope(), knot=self.knot
+        )
 
     def del_last_pack_id(self):
         self.last_pack_id = None

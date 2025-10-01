@@ -1,9 +1,9 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic._ref.ch02_keywords import Ch02Keywords as wx
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    FirstLabel,
     KnotTerm,
     LabelTerm,
-    NexusLabel,
     RopeTerm,
     default_knot_if_None,
 )
@@ -67,17 +67,15 @@ def test_LabelTerm_is_label_ReturnsObj_Scenario1():
     assert x_labelterm.is_label(slash_str) is False
 
 
-def test_NexusLabel_Exists():
+def test_FirstLabel_Exists():
     # ESTABLISH
     empty_str = ""
     # WHEN
-    x_nexus = NexusLabel(empty_str)
+    x_first = FirstLabel(empty_str)
     # THEN
-    assert x_nexus == empty_str
-    doc_str = (
-        f"A string representation of a tree root node. Node cannot contain {wx.knot}."
-    )
-    assert inspect_getdoc(x_nexus) == doc_str
+    assert x_first == empty_str
+    doc_str = f"The first LabelTerm in a RopeTerm. FirstLabel cannot contain {wx.knot}."
+    assert inspect_getdoc(x_first) == doc_str
 
 
 def test_RopeTerm_Exists():

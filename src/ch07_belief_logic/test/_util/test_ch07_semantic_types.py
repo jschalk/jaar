@@ -1,5 +1,10 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch07_belief_logic._ref.ch07_semantic_types import BeliefName, MomentLabel
+from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
+from src.ch07_belief_logic._ref.ch07_semantic_types import (
+    BeliefName,
+    MomentLabel,
+    NexusLabel,
+)
 
 
 def test_BeliefName_Exists():
@@ -11,6 +16,17 @@ def test_BeliefName_Exists():
     assert bob_BeliefName_str == bob_str
     doc_str = "A NameTerm used to identify a BeliefUnit's belief"
     assert inspect_getdoc(bob_BeliefName_str) == doc_str
+
+
+def test_NexusLabel_Exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_nexus = NexusLabel(empty_str)
+    # THEN
+    assert x_nexus == empty_str
+    doc_str = f"The Nexus is the FirstLabel of all RopeTerms in a BeliefUnit. NexusLabel cannot contain a {wx.knot}."
+    assert inspect_getdoc(x_nexus) == doc_str
 
 
 def test_MomentLabel_Exists():

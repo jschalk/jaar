@@ -18,13 +18,13 @@ class LabelTerm(str):
         return self.find(default_knot_if_None(knot)) == -1
 
 
-class NexusLabel(LabelTerm):
-    """A string representation of a tree root node. Node cannot contain knot."""
+class RopeTerm(str):
+    """A string representation of a tree path. LabelTerms are seperated by knots."""
 
     pass
 
 
-class RopeTerm(str):
-    """A string representation of a tree path. LabelTerms are seperated by knots."""
+class FirstLabel(LabelTerm):
+    """The first LabelTerm in a RopeTerm. FirstLabel cannot contain knot."""
 
     pass

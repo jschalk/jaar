@@ -1,11 +1,9 @@
-from src.ch02_rope_logic.rope import create_rope
-from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch08_timeline_logic.timeline_main import (
     BeliefTimelinePoint,
     add_newtimeline_planunit,
     belieftimelinepoint_shop,
     get_timeline_rope,
-    timeline_config_shop,
 )
 from src.ch15_moment_logic.moment_main import MomentUnit
 
@@ -23,7 +21,7 @@ def get_moment_belieftimelinepoint(momentunit: MomentUnit) -> BeliefTimelinePoin
         penny=momentunit.penny,
     )
     timeline_rope = get_timeline_rope(
-        moment_label=momentunit.moment_label,
+        nexus_label=momentunit.moment_label,
         timeline_label=momentunit.timeline.timeline_label,
         knot=momentunit.knot,
     )

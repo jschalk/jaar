@@ -1,4 +1,4 @@
-# Ropes and Moments
+# Ropes
 
 
 # Introduction
@@ -40,17 +40,17 @@ vacuum_rope = ";amy;casa;clean;vacuum;"
 dirty_rope = ";amy;casa;appearance;dirty;"
 usa_texas_rope = ";UN;USA;Texas;"
 un_texas_rope = ";UN;Texas;"
-- **NexusLabel**: The first label in a RopeTerm. Example "UN" in ";UN;USA;Texas;"
+- **FirstLabel**: The first label in a RopeTerm. Example "UN" in ";UN;USA;Texas;"
 
-# Ropes that have the same Nexus can create meaning
+# Ropes that have the same FirstLabel can create meaning
 Consider these 3 ropes: 
 1. ;UN;USA;Texas; 
 2. ;USA;Texas;
 3. ;USA;The South;Texas;
 
-Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN nexus :
+Each rope arrives at the concept of Texas in a different way and connotes something different. Now consider these UN FirstLabel :
 
-Here each Rope has the Nexus "UN"
+Here each Rope has the FirstLabel "UN"
 1. ;UN;France;Paris;
 2. ;UN;Germany;Berlin;
 3. ;UN;USA;Texas;Dallas;
@@ -58,7 +58,7 @@ Here each Rope has the Nexus "UN"
 
 vs 
 
-Here each Rope has the Nexus "USA"
+Here each Rope has the FirstLabel "USA"
 1. ;USA;UN;France;Paris;
 2. ;USA;UN;Germany;Berlin;
 3. ;USA;Texas;Dallas;

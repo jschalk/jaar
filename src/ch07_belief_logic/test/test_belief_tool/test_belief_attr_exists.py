@@ -79,7 +79,7 @@ def test_belief_planunit_exists_ReturnsObj():
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     root_jkeys = {wx.plan_rope: root_rope}
     casa_jkeys = {wx.plan_rope: casa_rope}
     clean_jkeys = {wx.plan_rope: clean_rope}
@@ -119,9 +119,9 @@ def test_belief_plan_awardunit_exists_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     swim_str = "Swim"
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     root_jkeys = {wx.plan_rope: root_rope, wx.awardee_title: swim_str}
     casa_jkeys = {wx.plan_rope: casa_rope, wx.awardee_title: swim_str}
     clean_jkeys = {wx.plan_rope: clean_rope, wx.awardee_title: swim_str}
@@ -150,7 +150,7 @@ def test_belief_plan_reasonunit_exists_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     root_jkeys = {wx.plan_rope: root_rope, wx.reason_context: wk_rope}
@@ -182,7 +182,7 @@ def test_belief_plan_reason_caseunit_exists_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     thur_rope = sue_belief.make_rope(wk_rope, "thur")
@@ -237,7 +237,7 @@ def test_belief_plan_partyunit_exists_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     swim_str = "Swim"
     root_jkeys = {wx.plan_rope: root_rope, wx.party_title: swim_str}
     casa_jkeys = {wx.plan_rope: casa_rope, wx.party_title: swim_str}
@@ -267,7 +267,7 @@ def test_belief_plan_healerunit_exists_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     swim_str = "Swim"
     root_jkeys = {wx.plan_rope: root_rope, wx.healer_name: swim_str}
     casa_jkeys = {wx.plan_rope: casa_rope, wx.healer_name: swim_str}
@@ -297,7 +297,7 @@ def test_belief_plan_factunit_exists_ReturnsObj():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     root_jkeys = {wx.plan_rope: root_rope, wx.fact_context: wk_rope}
@@ -383,7 +383,7 @@ def test_belief_attr_exists_ReturnsObj_belief_planunit():
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
     sweep_rope = sue_belief.make_rope(clean_rope, "sweep")
-    x_parent_rope = to_rope(sue_belief.moment_label)
+    x_parent_rope = sue_belief.planroot.get_plan_rope()
     root_jkeys = {wx.plan_rope: x_parent_rope}
     casa_jkeys = {wx.plan_rope: casa_rope}
     clean_jkeys = {wx.plan_rope: clean_rope}
@@ -424,7 +424,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_awardunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     swim_str = "Swim"
     x_dimen = wx.belief_plan_awardunit
     root_jkeys = {wx.plan_rope: root_rope, wx.awardee_title: swim_str}
@@ -455,7 +455,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_reasonunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     x_dimen = wx.belief_plan_reasonunit
@@ -487,7 +487,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_reason_caseunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     thur_rope = sue_belief.make_rope(wk_rope, "thur")
@@ -541,7 +541,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_partyunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     swim_str = "Swim"
     x_dimen = wx.belief_plan_partyunit
     root_jkeys = {wx.plan_rope: root_rope, wx.party_title: swim_str}
@@ -572,7 +572,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_healerunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     swim_str = "Swim"
     x_dimen = wx.belief_plan_healerunit
     root_jkeys = {wx.plan_rope: root_rope, wx.healer_name: swim_str}
@@ -603,7 +603,7 @@ def test_belief_attr_exists_ReturnsObj_belief_plan_factunit():
     casa_rope = sue_belief.make_l1_rope(casa_str)
     clean_str = "clean"
     clean_rope = sue_belief.make_rope(casa_rope, clean_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     wk_str = "wk"
     wk_rope = sue_belief.make_l1_rope(wk_str)
     x_dimen = wx.belief_plan_factunit

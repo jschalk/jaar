@@ -208,7 +208,7 @@ def test_BeliefUnit_set_plan_CanCreateMissingPlanUnits():
 def test_BeliefUnit_del_plan_obj_Level0CannotBeDeleted():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
@@ -258,7 +258,7 @@ def test_BeliefUnit_del_plan_obj_Level1CanBeDeleted_ChildrenInherited():
     new_sun_rope = sue_belief.make_l1_rope(sun_str)
     assert sue_belief.get_plan_obj(new_sun_rope)
     new_sun_plan = sue_belief.get_plan_obj(new_sun_rope)
-    assert new_sun_plan.parent_rope == to_rope(sue_belief.moment_label)
+    assert new_sun_plan.parent_rope == sue_belief.planroot.get_plan_rope()
 
 
 def test_BeliefUnit_del_plan_obj_LevelNCanBeDeleted_ChildrenInherited():
@@ -1011,7 +1011,7 @@ def test_BeliefUnit_get_plan_obj_ReturnsPlan():
     assert wk_plan.plan_label == wk_str
 
     # WHEN
-    root_plan = sue_belief.get_plan_obj(to_rope(sue_belief.moment_label))
+    root_plan = sue_belief.get_plan_obj(sue_belief.planroot.get_plan_rope())
 
     # THEN
     assert root_plan is not None
@@ -1053,7 +1053,7 @@ def test_BeliefUnit_plan_exists_ReturnsBool():
     # WHEN / THEN
     assert sue_belief.plan_exists("") is False
     assert sue_belief.plan_exists(None) is False
-    assert sue_belief.plan_exists(to_rope(sue_belief.moment_label))
+    assert sue_belief.plan_exists(sue_belief.planroot.get_plan_rope())
     assert sue_belief.plan_exists(cat_rope)
     assert sue_belief.plan_exists(wk_rope)
     assert sue_belief.plan_exists(casa_rope)
