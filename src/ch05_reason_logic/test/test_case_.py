@@ -1,24 +1,11 @@
-from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, find_replace_rope_key_dict
 from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
-from src.ch05_reason_logic._ref.ch05_semantic_types import MomentLabel
 from src.ch05_reason_logic.reason import (
     CaseUnit,
     cases_get_from_dict,
     caseunit_shop,
     factheir_shop,
 )
-
-
-def test_MomentLabel_Exists():
-    # ESTABLISH
-    empty_str = ""
-    # WHEN
-    x_moment = MomentLabel(empty_str)
-    # THEN
-    assert x_moment == empty_str
-    doc_str = f"A NexusLabel for a Moment. Cannot contain {wx.knot}."
-    assert inspect_getdoc(x_moment) == doc_str
 
 
 def test_CaseUnit_Exists():

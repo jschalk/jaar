@@ -1,10 +1,23 @@
+from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
+from src.ch06_plan_logic._ref.ch06_semantic_types import MomentLabel
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
+
+
+def test_MomentLabel_Exists():
+    # ESTABLISH
+    empty_str = ""
+    # WHEN
+    x_moment = MomentLabel(empty_str)
+    # THEN
+    assert x_moment == empty_str
+    doc_str = f"A NexusLabel for a Moment. Cannot contain {wx.knot}."
+    assert inspect_getdoc(x_moment) == doc_str
 
 
 def test_get_default_moment_label_ReturnsObj():

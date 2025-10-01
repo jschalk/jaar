@@ -261,7 +261,7 @@ class PlanUnit:
     plan_label: LabelTerm = None
     moment_label: MomentLabel = None
     parent_rope: RopeTerm = None
-    kids: dict[RopeTerm,] = None
+    kids: dict[LabelTerm,] = None
     root: bool = None
     star: int = None
     uid: int = None  # Calculated field?
