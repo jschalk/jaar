@@ -190,20 +190,13 @@ def get_chapters_func_class_metrics(excluded_functions) -> dict:
             file_path = create_path(file_dir, filenames[1])
             file_functions, class_bases = get_function_names_from_file(file_path)
             for x_class, x_bases in class_bases.items():
-                if len(x_bases) > 1:
-                    all_classes[x_class] = (
-                        f"A class with more than one inheritance. {filenames[1]} {x_bases}"
-                    )
-                elif len(x_bases) == 0:
-                    no_bases_str = f"A class with no inheritance. {filenames[1]}"
-                    all_classes[x_class] = no_bases_str
-                elif x_bases == ["Exception"]:
-                    exception_base_str = f"An Exception inheritance. {filenames[1]}"
-                    all_classes[x_class] = exception_base_str
-                elif len(x_bases) == 1:
-                    one_base_str = f"A single inheritance {filenames[1]} {x_bases}"
-                    all_classes[x_class] = one_base_str
-                    semantic_type_candidates[x_class] = x_bases
+                add_classes_where_needed(
+                    x_bases,
+                    filenames[1],
+                    all_classes,
+                    x_class,
+                    semantic_type_candidates,
+                )
             for function_name in file_functions:
                 add_or_count_function_name_occurance(all_functions, function_name)
                 x_count += 1
@@ -217,6 +210,40 @@ def get_chapters_func_class_metrics(excluded_functions) -> dict:
     # print(f"{duplicate_functions=}")
     # print(f"{len(non_excluded_functions)=}")
     # print(f"{len(all_functions)=}")
+    unnecessarily_excluded_funcs = get_unnecessarily_excluded_funcs(
+        all_functions, excluded_functions
+    )
+    semantic_types = get_semantic_types(semantic_type_candidates)
+    return {
+        "all_functions": all_functions,
+        "duplicate_functions": duplicate_functions,
+        "unnecessarily_excluded_funcs": unnecessarily_excluded_funcs,
+        "semantic_types": semantic_types,
+    }
+
+
+def add_classes_where_needed(
+    x_bases, filename, all_classes: dict, x_class, semantic_type_candidates: dict
+):
+    if len(x_bases) > 1:
+        all_classes[x_class] = (
+            f"A class with more than one inheritance. {filename} {x_bases}"
+        )
+    elif len(x_bases) == 0:
+        no_bases_str = f"A class with no inheritance. {filename}"
+        all_classes[x_class] = no_bases_str
+    elif x_bases == ["Exception"]:
+        exception_base_str = f"An Exception inheritance. {filename}"
+        all_classes[x_class] = exception_base_str
+    elif len(x_bases) == 1:
+        one_base_str = f"A single inheritance {filename} {x_bases}"
+        all_classes[x_class] = one_base_str
+        semantic_type_candidates[x_class] = x_bases
+
+
+def get_unnecessarily_excluded_funcs(
+    all_functions: dict, excluded_functions: set[str]
+) -> dict[str, str]:
     unnecessarily_excluded_funcs = {
         function_name: f"{func_count=}. '{function_name}' does not need to be in excluded_functions set"
         for function_name, func_count in all_functions.items()
@@ -231,14 +258,7 @@ def get_chapters_func_class_metrics(excluded_functions) -> dict:
     # if func_count > 1:
     #     print(f"{func_name} {func_count=}")
     print(f"{len(excluded_functions)=}")
-
-    semantic_types = get_semantic_types(semantic_type_candidates)
-    return {
-        "all_functions": all_functions,
-        "duplicate_functions": duplicate_functions,
-        "unnecessarily_excluded_funcs": unnecessarily_excluded_funcs,
-        "semantic_types": semantic_types,
-    }
+    return unnecessarily_excluded_funcs
 
 
 def get_semantic_types(semantic_type_candidates) -> set:

@@ -241,13 +241,13 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
         # dynamically import the module
         mod = importlib_import_module(chapter_ref_keywords_path)
         enum_class_name = f"Ch{chapter_num:02}Keywords"
-        try:
-            getattr(mod, enum_class_name)
-        except:
-            print(f"class {enum_class_name}(str, Enum):")
-            for keyword in sorted(list(cumlative_ch_keywords_dict.get(chapter_num))):
-                print(f"    {keyword} = '{keyword}'")
-            print("def __str__(self): return self.value")
+        # try:
+        #     getattr(mod, enum_class_name)
+        # except Exception:
+        #     print(f"class {enum_class_name}(str, Enum):")
+        #     for keyword in sorted(list(cumlative_ch_keywords_dict.get(chapter_num))):
+        #         print(f"    {keyword} = '{keyword}'")
+        #     print("def __str__(self): return self.value")
 
         # print(f"{len(mod.__dict__)=}")
         ChKeywordsClass = getattr(mod, enum_class_name)

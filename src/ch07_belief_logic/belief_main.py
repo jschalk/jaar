@@ -96,7 +96,7 @@ class VoiceMissingException(Exception):
     pass
 
 
-class Exception_keeps_justified(Exception):
+class keeps_justException(Exception):
     pass
 
 
@@ -511,7 +511,7 @@ class BeliefUnit:
             return self._plan_dict
         if self.keeps_justified is False:
             exception_str = f"Cannot return problem set because keeps_justified={self.keeps_justified}."
-            raise Exception_keeps_justified(exception_str)
+            raise keeps_justException(exception_str)
 
         x_plans = self._plan_dict.values()
         return {
@@ -1167,7 +1167,7 @@ reason_case:    {reason_case}"""
         if keep_justified_by_problem is False or healerunit_count > 1:
             if keep_exceptions:
                 exception_str = f"PlanUnit '{rope}' cannot sponsor ancestor keeps."
-                raise Exception_keeps_justified(exception_str)
+                raise keeps_justException(exception_str)
             self.keeps_justified = False
 
     def _clear_plantree_fund_and_active_status_attrs(self):

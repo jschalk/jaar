@@ -20,31 +20,20 @@ from src.ch04_voice_logic.group import (
 )
 
 
-class InvalidVoiceException(Exception):
-    pass
-
-
 class Bad_voice_nameMemberShipException(Exception):
     pass
 
 
 @dataclass
-class VoiceCore:
-    voice_name: VoiceName = None
-    knot: str = None
-    respect_bit: float = None
-
-    def set_name(self, x_voice_name: VoiceName):
-        self.voice_name = validate_labelterm(x_voice_name, self.knot)
-
-
-@dataclass
-class VoiceUnit(VoiceCore):
+class VoiceUnit:
     """This represents the belief_name's opinion of the VoiceUnit.voice_name
     VoiceUnit.voice_cred_points represents how much voice_cred_points the _belief_name projects to the voice_name
     VoiceUnit.voice_debt_points represents how much voice_debt_points the _belief_name projects to the voice_name
     """
 
+    voice_name: VoiceName = None
+    knot: str = None
+    respect_bit: float = None
     voice_cred_points: int = None
     voice_debt_points: int = None
     # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
@@ -61,6 +50,9 @@ class VoiceUnit(VoiceCore):
     fund_agenda_take: float = None
     fund_agenda_ratio_give: float = None
     fund_agenda_ratio_take: float = None
+
+    def set_name(self, x_voice_name: VoiceName):
+        self.voice_name = validate_labelterm(x_voice_name, self.knot)
 
     def set_respect_bit(self, x_respect_bit: float):
         self.respect_bit = x_respect_bit
