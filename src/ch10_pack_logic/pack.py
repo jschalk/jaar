@@ -140,7 +140,7 @@ class PackUnit:
             x_beliefdelta.set_beliefatom(x_beliefatom)
         self._beliefdelta = x_beliefdelta
 
-    def add_beliefatom(
+    def add_p_beliefatom(
         self,
         dimen: str,
         crud_str: str,

@@ -100,8 +100,8 @@ def test_GroupUnit_set_membership_SetsAttr():
     swimmers_groupunit = groupunit_shop(swim_str)
 
     # WHEN
-    swimmers_groupunit.set_membership(yao_swim_membership)
-    swimmers_groupunit.set_membership(sue_swim_membership)
+    swimmers_groupunit.set_g_membership(yao_swim_membership)
+    swimmers_groupunit.set_g_membership(sue_swim_membership)
 
     # THEN
     swimmers_memberships = {
@@ -131,13 +131,13 @@ def test_GroupUnit_set_membership_SetsAttr_credor_pool_debtor_pool():
     assert ohio_groupunit.debtor_pool == 0
 
     # WHEN
-    ohio_groupunit.set_membership(yao_ohio_membership)
+    ohio_groupunit.set_g_membership(yao_ohio_membership)
     # THEN
     assert ohio_groupunit.credor_pool == 66
     assert ohio_groupunit.debtor_pool == 6600
 
     # WHEN
-    ohio_groupunit.set_membership(sue_ohio_membership)
+    ohio_groupunit.set_g_membership(sue_ohio_membership)
     # THEN
     assert ohio_groupunit.credor_pool == 88
     assert ohio_groupunit.debtor_pool == 8800
@@ -157,7 +157,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_membership_group_title_IsWrong()
 
     # WHEN / THEN
     with pytest_raises(Exception) as excinfo:
-        iowa_groupunit.set_membership(yao_ohio_membership)
+        iowa_groupunit.set_g_membership(yao_ohio_membership)
     exception_str = (
         f"GroupUnit.group_title={iowa_str} cannot set membership.group_title={ohio_str}"
     )
@@ -173,7 +173,7 @@ def test_GroupUnit_set_membership_RaisesErrorIf_voice_name_IsNone():
 
     # WHEN
     with pytest_raises(Exception) as excinfo:
-        ohio_groupunit.set_membership(yao_ohio_membership)
+        ohio_groupunit.set_g_membership(yao_ohio_membership)
 
     # THEN
     exception_str = (

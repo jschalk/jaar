@@ -226,7 +226,7 @@ def get_belief_agenda_plotly_fig(x_belief: BeliefUnit) -> plotly_Figure:
     return fig
 
 
-def add_rect_str(fig, x, y, text):
+def add_ch07_rect(fig, x, y, text):
     fig.add_annotation(
         xref="paper",
         yref="paper",
@@ -272,7 +272,7 @@ def create_plan_rect(
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text=display_str)
+    add_ch07_rect(fig, x=text_x, y=text_y, text=display_str)
 
 
 def add_group_rect(
@@ -311,7 +311,7 @@ def add_group_rect(
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text=display_str)
+    add_ch07_rect(fig, x=text_x, y=text_y, text=display_str)
 
 
 def add_people_rect(
@@ -347,7 +347,7 @@ def add_people_rect(
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text=display_str)
+    add_ch07_rect(fig, x=text_x, y=text_y, text=display_str)
 
 
 def get_beliefunit_base_fig() -> plotly_Figure:

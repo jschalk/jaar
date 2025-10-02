@@ -66,6 +66,7 @@ def expected_semantic_types() -> set:
 
 
 def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     excluded_functions = {
         "_get_inx_label",
@@ -74,18 +75,7 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "_is_inx_knot_inclusion_correct",
         "_is_otx_knot_inclusion_correct",
         "_unknown_str_in_otx2inx",
-        "add_column_rect",
-        "add_cycle_to_tax_arrows",
         "add_fund_give_take",
-        "add_grants_top",
-        "add_keep__rect",
-        "add_beliefatom",
-        "add_rect_arrow",
-        "add_rect_str",
-        "add_river_row",
-        "add_rivercycle",
-        "add_taxs_bottom",
-        "add_taxs_column",
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
@@ -102,7 +92,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "set_all_otx2inx",
         "set_knot",
         "set_label",
-        "set_membership",
         "set_otx2inx",
         "to_dict",
     }

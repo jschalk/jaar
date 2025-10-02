@@ -84,12 +84,12 @@ def add_keep_river_rect(
         x_color = LightSeaGreen_str()
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_str(fig, x0, y1, display_str)
+    add_ch14rect(fig, x0, y1, display_str)
     if point_supply is not None:
         point_percent = f"{int(((x1 - x0) * 12.5))}%"
-        add_rect_str(fig, x0, y1 - 0.2, str(point_percent))
+        add_ch14rect(fig, x0, y1 - 0.2, str(point_percent))
         point_amt = round((((x1 - x0) * 12.5) / 100) * point_supply)
-        add_rect_str(fig, x0, y1 - 0.4, str(point_amt))
+        add_ch14rect(fig, x0, y1 - 0.4, str(point_amt))
 
 
 def add_column_rect(
@@ -100,12 +100,12 @@ def add_column_rect(
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
     if point_supply is None:
-        add_rect_str(fig, x0, y0, display_str)
+        add_ch14rect(fig, x0, y0, display_str)
     if point_supply is not None:
         point_percent = f"{display_str} {int(((y0 - y1) * 12.5))}%"
-        add_rect_str(fig, x0, y0, str(point_percent))
+        add_ch14rect(fig, x0, y0, str(point_percent))
         point_amt = round((((y0 - y1) * 12.5) / 100) * point_supply)
-        add_rect_str(fig, x0, y0 - 0.2, str(point_amt))
+        add_ch14rect(fig, x0, y0 - 0.2, str(point_amt))
 
 
 def add_river_row(fig, grants_dict: dict, point_amt, row_x0, row_x1, y0, color=None):
@@ -144,7 +144,7 @@ def add_grants_top(fig, grants_dict: dict, t_y0: int, healer_name, point_amt):
     add_river_row(fig, grants_dict, point_amt, 1, 9, t_y0 - 4)
     add_2_curve(fig, path=f"M 1.75,{dy0} C 2,{dy1} 7.4,{dy2} 9,{dy3}", color=blue_str())
     add_2_curve(fig, path=f"M 1.75,{dy0} C 2,{dy1} 1.2,{dy2} 1,{dy3}", color=blue_str())
-    add_rect_arrow(fig, 1.75, ey1, 1.5, ey0, blue_str())
+    add_rect2_arrow(fig, 1.75, ey1, 1.5, ey0, blue_str())
 
 
 def add_taxs_bottom(fig, taxs_dict, b_y0: int, healer_name: str, point_amt: int):
@@ -159,7 +159,7 @@ def add_taxs_bottom(fig, taxs_dict, b_y0: int, healer_name: str, point_amt: int)
     add_river_row(fig, taxs_dict, point_amt, 1, 9, y0=b_y0 + 3, color=purple_str())
     add_2_curve(fig, path=f"M 1.75,{cy0} C 2,{cy1} 7.4,{cy2} 9,{cy3}", color=red_str())
     add_2_curve(fig, path=f"M 1.75,{cy0} C 2,{cy1} 1.2,{cy2} 1,{cy3}", color=red_str())
-    add_rect_arrow(fig, 1.5, ay0, 1.75, ay1, red_str())
+    add_rect2_arrow(fig, 1.5, ay0, 1.75, ay1, red_str())
 
 
 def add_taxs_column(
@@ -190,16 +190,16 @@ def add_taxs_column(
     ax0 = b_x0 + 0.05
     ax1 = b_x0 - 0.2
     ay0 = b_y0 - 0.7
-    add_rect_arrow(fig, ax0, ay0, ax1, cy4, red_str())
+    add_rect2_arrow(fig, ax0, ay0, ax1, cy4, red_str())
 
 
 def add_rivercycle(fig: plotly_Figure, x0, y0, x1, y1, display_str):
     line_dict = dict(color=LightSeaGreen_str(), width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_str(fig, x0, y1, display_str)
+    add_ch14rect(fig, x0, y1, display_str)
 
 
-def add_keep__rect(
+def add_keep2_rect(
     fig: plotly_Figure,
     x0,
     y0,
@@ -228,14 +228,14 @@ def add_keep_str(fig, x0, y0, text):
     fig.add_annotation(x=x0, y=y0, text=text, showarrow=False, align="left")
 
 
-def add_rect_str(fig, x0, y0, text):
+def add_ch14rect(fig, x0, y0, text):
     x_margin = 0.3
     fig.add_annotation(
         x=x0 + x_margin, y=y0 - x_margin, text=text, showarrow=False, align="left"
     )
 
 
-def add_rect_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None, width=None):
+def add_rect2_arrow(fig: plotly_Figure, x0, y0, ax0, ay0, color=None, width=None):
     if color is None:
         color = black_str()
     if width is None:
@@ -334,7 +334,7 @@ def add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict):
         x2 = coor_value.get("x2")
         z_path = f"M {cx0},{y0} C {cx1},{cy1} {x2},{cy2} {x2+1},{cy3}"
         add_2_curve(fig, path=z_path, color=red_str())
-        add_rect_arrow(fig, cx_src, y0, cx0, y0, red_str(), 2)
+        add_rect2_arrow(fig, cx_src, y0, cx0, y0, red_str(), 2)
 
 
 def get_protect_structures0_fig(graphics_bool: bool) -> plotly_Figure:
@@ -353,7 +353,7 @@ def get_protect_structures0_fig(graphics_bool: bool) -> plotly_Figure:
             fig, grants1_dict(), t_y0=m_y0, healer_name=sue_str(), point_amt=mm
         )
         add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_name=sue_str(), point_amt=mm)
-        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep2_rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
         fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.add_trace(
             plotly_Scatter(
@@ -389,11 +389,11 @@ def get_protect_structures1_fig(graphics_bool: bool) -> plotly_Figure:
         add_taxs_bottom(fig, taxs1_dict(), m_y1, healer_name=sue_str(), point_amt=mm)
 
         y_mid = m_y1 + (m_y0 - m_y1) / 2
-        add_rect_arrow(fig, 2, y_mid - 1.5, 2, y_mid + 1.5, green_str())
-        add_rect_arrow(fig, 5, y_mid - 1.5, 5, y_mid + 1.5, green_str())
-        add_rect_arrow(fig, 8, y_mid - 1.5, 8, y_mid + 1.5, green_str())
+        add_rect2_arrow(fig, 2, y_mid - 1.5, 2, y_mid + 1.5, green_str())
+        add_rect2_arrow(fig, 5, y_mid - 1.5, 5, y_mid + 1.5, green_str())
+        add_rect2_arrow(fig, 8, y_mid - 1.5, 8, y_mid + 1.5, green_str())
 
-        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep2_rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
         fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.add_trace(
             plotly_Scatter(
@@ -448,31 +448,31 @@ def get_protect_structures2_fig(graphics_bool: bool) -> plotly_Figure:
         xio_dst = 6.7
         yao_dst = 7.3
         zia_dst = 8.5
-        add_rect_arrow(fig, bob_dst, ay1, bob_src, ay0, green_str(), 2)
-        add_rect_arrow(fig, luc_dst, ay1, bob_src, ay0, green_str(), 2)
-        add_rect_arrow(fig, sue_dst, ay1, bob_src, ay0, green_str(), 2)
-        add_rect_arrow(fig, joc_dst, ay1, buz_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, luc_dst, ay1, buz_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, joc_dst, ay1, car_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, mar_dst, ay1, car_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, luc_dst, ay1, car_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, luc_dst, ay1, sue_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, joc_dst, ay1, sue_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, yao_dst, ay1, sue_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, zia_dst, ay1, sue_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, luc_dst, ay1, xio_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, joc_dst, ay1, xio_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, xio_dst, ay1, yao_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, joc_dst, ay1, yao_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, xio_dst, ay1, zia_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, joc_dst, ay1, zia_src, ay0, green_str(), 1)
-        add_rect_arrow(fig, zia_src, ay1, zia_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, bob_dst, ay1, bob_src, ay0, green_str(), 2)
+        add_rect2_arrow(fig, luc_dst, ay1, bob_src, ay0, green_str(), 2)
+        add_rect2_arrow(fig, sue_dst, ay1, bob_src, ay0, green_str(), 2)
+        add_rect2_arrow(fig, joc_dst, ay1, buz_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, luc_dst, ay1, buz_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, joc_dst, ay1, car_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, mar_dst, ay1, car_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, luc_dst, ay1, car_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, mar_dst, ay1, ric_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, luc_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, joc_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, yao_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, zia_dst, ay1, sue_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, luc_dst, ay1, xio_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, joc_dst, ay1, xio_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, xio_dst, ay1, yao_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, joc_dst, ay1, yao_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, xio_dst, ay1, zia_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, joc_dst, ay1, zia_src, ay0, green_str(), 1)
+        add_rect2_arrow(fig, zia_src, ay1, zia_src, ay0, green_str(), 1)
 
-        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_keep__rect(fig, -1.9, m_y1, 0.3, m_y0, "", "", "", "")
-        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep2_rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep2_rect(fig, -1.9, m_y1, 0.3, m_y0, "", "", "", "")
+        add_keep2_rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
         fig.add_trace(
@@ -513,9 +513,9 @@ def get_protect_structures3_fig(graphics_bool: bool) -> plotly_Figure:
 
         ry1 = m_y0 - 4
         y_mid = ry0 + (ry1 - ry0 + 1) / 2
-        add_rect_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
-        add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
-        add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
+        add_rect2_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
+        add_rect2_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
+        add_rect2_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
 
         cx_src = 0
         cx0 = cx_src + 0.3
@@ -549,8 +549,8 @@ def get_protect_structures3_fig(graphics_bool: bool) -> plotly_Figure:
 
         add_cycle_to_tax_arrows(fig, cx_src, cx0, cx1, cy1, cy2, cy3, coor_dict)
 
-        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep2_rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep2_rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
@@ -590,19 +590,19 @@ def get_protect_structures4_fig(graphics_bool: bool) -> plotly_Figure:
         add_taxs_column(fig, taxs1_dict(), tax_x0, 8, sue_str(), mm, col_y0, col_len)
         ry0 = 0
         add_river_row(fig, rivercycle1_dict(), mm, 1, 9, ry0, black_str())
-        add_rect_arrow(
+        add_rect2_arrow(
             fig, tax_x0 + 1.1, ry0 + 0.5, tax_x0 + 2, ry0 + 0.5, red_str(), 5
         )
         add_river_row(fig, rivercycle2_dict(), mm, 1, 4, ry0 - 3, LightSeaGreen_str())
 
         ry1 = m_y0 - 4
         y_mid = ry0 + (ry1 - ry0 + 1) / 2
-        add_rect_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
-        add_rect_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
-        add_rect_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
+        add_rect2_arrow(fig, 2, y_mid - 1, 2, y_mid + 1, green_str())
+        add_rect2_arrow(fig, 5, y_mid - 1, 5, y_mid + 1, green_str())
+        add_rect2_arrow(fig, 8, y_mid - 1, 8, y_mid + 1, green_str())
 
-        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep2_rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep2_rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])
@@ -643,12 +643,12 @@ def get_protect_structures5_fig(graphics_bool: bool) -> plotly_Figure:
         cycle1_y0 = 2
         ry1 = m_y0 - 4
         y_mid = cycle1_y0 + (ry1 - cycle1_y0 + 1) / 2
-        add_rect_arrow(fig, 2, y_mid - 0.5, 2, y_mid + 0.5, green_str())
-        add_rect_arrow(fig, 5, y_mid - 0.5, 5, y_mid + 0.5, green_str())
-        add_rect_arrow(fig, 8, y_mid - 0.5, 8, y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 2, y_mid - 0.5, 2, y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 5, y_mid - 0.5, 5, y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 8, y_mid - 0.5, 8, y_mid + 0.5, green_str())
         add_river_row(fig, rivercycle1_dict(), mm, 1, 9, cycle1_y0, black_str())
         red_a1_x0 = cycle1_y0 + 0.5
-        add_rect_arrow(
+        add_rect2_arrow(
             fig, tax_x0 + 1.1, red_a1_x0, tax_x0 + 2, red_a1_x0, red_str(), 3
         )
         tax1_y0 = cycle1_y0 - 1
@@ -657,12 +657,12 @@ def get_protect_structures5_fig(graphics_bool: bool) -> plotly_Figure:
         cycle2_y0 = cycle1_y0 - 3
         add_river_row(fig, rivercycle3_dict(), mm, 1, 4, cycle2_y0, black_str())
         a2y_mid = cycle2_y0 + (cycle1_y0 - cycle2_y0) / 2
-        add_rect_arrow(fig, 1.3, a2y_mid - 0.5, 1.3, a2y_mid + 0.5, green_str())
-        add_rect_arrow(fig, 2.5, a2y_mid - 0.5, 2.5, a2y_mid + 0.5, green_str())
-        add_rect_arrow(fig, 3.7, a2y_mid - 0.5, 3.7, a2y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 1.3, a2y_mid - 0.5, 1.3, a2y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 2.5, a2y_mid - 0.5, 2.5, a2y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 3.7, a2y_mid - 0.5, 3.7, a2y_mid + 0.5, green_str())
         red_a2_y0 = cycle2_y0 + 0.5
         taxy0 = cycle2_y0 - 1
-        add_rect_arrow(
+        add_rect2_arrow(
             fig, tax_x0 + 1.1, red_a2_y0, tax_x0 + 2, red_a2_y0, red_str(), 3
         )
         add_river_row(fig, rivercycle4_dict(), mm, 1, 2, taxy0, LightSeaGreen_str())
@@ -670,16 +670,16 @@ def get_protect_structures5_fig(graphics_bool: bool) -> plotly_Figure:
         cycle3_y0 = cycle2_y0 - 3
         add_river_row(fig, rivercycle4_dict(), mm, 1, 2, cycle3_y0, black_str())
         a3y_mid = cycle3_y0 + (cycle2_y0 - cycle3_y0) / 2
-        add_rect_arrow(fig, 1.2, a3y_mid - 0.5, 1.2, a3y_mid + 0.5, green_str())
-        add_rect_arrow(fig, 1.8, a3y_mid - 0.5, 1.8, a3y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 1.2, a3y_mid - 0.5, 1.2, a3y_mid + 0.5, green_str())
+        add_rect2_arrow(fig, 1.8, a3y_mid - 0.5, 1.8, a3y_mid + 0.5, green_str())
         red_a3_y0 = cycle3_y0 + 0.5
-        add_rect_arrow(
+        add_rect2_arrow(
             fig, tax_x0 + 1.1, red_a3_y0, tax_x0 + 2, red_a3_y0, red_str(), 3
         )
 
         m_y1 = -7
-        add_keep__rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
-        add_keep__rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
+        add_keep2_rect(fig, 0.7, m_y1, 9.3, m_y0, sue1_p1, sue1_p2, sue1_p3, sue1_p4)
+        add_keep2_rect(fig, -1.2, 7, 2.2, 8.7, sue_str(), "", "", "", color=black_str())
         # fig.update_yaxes(range=[m_y1 - 1, m_y0 + 3])
         fig.update_yaxes(range=[-8, 10])
         fig.update_xaxes(range=[-3, 10])

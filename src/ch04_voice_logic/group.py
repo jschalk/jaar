@@ -194,7 +194,7 @@ class GroupUnit(GroupCore):
     debtor_pool: float = None
     fund_iota: FundIota = None
 
-    def set_membership(self, x_membership: MemberShip):
+    def set_g_membership(self, x_membership: MemberShip):
         if x_membership.group_title != self.group_title:
             raise membership_group_title_Exception(
                 f"GroupUnit.group_title={self.group_title} cannot set membership.group_title={x_membership.group_title}"

@@ -44,12 +44,12 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_jso
     bob_jvalues = {wx.voice_cred_points: credit77, wx.voice_debt_points: None}
     yao_jkeys = {wx.voice_name: yao_inx}
     yao_jvalues = {wx.voice_cred_points: credit44, wx.voice_debt_points: None}
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
+    a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
     sue_jkeys = {wx.voice_name: sue_inx}
     sue_jvalues = {wx.voice_cred_points: credit88, wx.voice_debt_points: None}
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
+    a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
     e3_all_pack_path = create_event_all_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event3
     )
@@ -110,12 +110,12 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     bob_jvalues = {wx.voice_cred_points: credit77}
     yao_jkeys = {wx.voice_name: yao_inx}
     yao_jvalues = {wx.voice_cred_points: credit44}
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e3_pack.add_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
+    a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e3_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues)
     sue_jkeys = {wx.voice_name: sue_inx}
     sue_jvalues = {wx.voice_cred_points: credit88}
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
-    a23_bob_e7_pack.add_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
+    a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues)
+    a23_bob_e7_pack.add_p_beliefatom(blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues)
     a23_bob_e3_all_pack_path = create_event_all_pack_path(
         moment_mstr_dir, a23_str, bob_inx, event3
     )
@@ -145,23 +145,23 @@ def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_expressed_
     gen_e7_express_pack = get_packunit_from_json(open_file(e7_expressed_pack_path))
     expected_e3_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event3)
     expected_e7_bob_pack = packunit_shop(bob_inx, xia_inx, a23_str, event_int=event7)
-    expected_e3_bob_pack.add_beliefatom(
+    expected_e3_bob_pack.add_p_beliefatom(
         blrpern_dimen, wx.INSERT, bob_jkeys, bob_jvalues
     )
-    expected_e3_bob_pack.add_beliefatom(
+    expected_e3_bob_pack.add_p_beliefatom(
         blrpern_dimen, wx.INSERT, yao_jkeys, yao_jvalues
     )
-    expected_e7_bob_pack.add_beliefatom(
+    expected_e7_bob_pack.add_p_beliefatom(
         blrpern_dimen, wx.INSERT, sue_jkeys, sue_jvalues
     )
     assert expected_e3_bob_pack == a23_bob_e3_pack
     assert expected_e7_bob_pack._beliefdelta != a23_bob_e7_pack._beliefdelta
     assert expected_e7_bob_pack != a23_bob_e7_pack
-    # expected_e3_bob_pack.add_beliefatom()
-    # expected_e3_bob_pack.add_beliefatom()
-    # expected_e7_bob_pack.add_beliefatom()
-    # expected_e7_bob_pack.add_beliefatom()
-    # expected_e7_bob_pack.add_beliefatom()
+    # expected_e3_bob_pack.add_p_beliefatom()
+    # expected_e3_bob_pack.add_p_beliefatom()
+    # expected_e7_bob_pack.add_p_beliefatom()
+    # expected_e7_bob_pack.add_p_beliefatom()
+    # expected_e7_bob_pack.add_p_beliefatom()
     assert gen_e3_express_pack == expected_e3_bob_pack
     gen_e7_express_delta = gen_e7_express_pack._beliefdelta
     expected_e7_delta = expected_e7_bob_pack._beliefdelta

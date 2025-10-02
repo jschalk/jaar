@@ -418,7 +418,7 @@ class BeliefUnit:
                 group_debt_points=x_voiceunit.voice_debt_points,
                 voice_name=x_voiceunit.voice_name,
             )
-            x_groupunit.set_membership(x_membership)
+            x_groupunit.set_g_membership(x_membership)
         return x_groupunit
 
     def get_tree_traverse_generated_groupunits(self) -> set[GroupTitle]:
@@ -1197,7 +1197,7 @@ reason_case:    {reason_case}"""
             x_groupunit = groupunit_shop(group_title, knot=self.knot)
             for x_voice_name in voice_name_set:
                 x_membership = self.get_voice(x_voice_name).get_membership(group_title)
-                x_groupunit.set_membership(x_membership)
+                x_groupunit.set_g_membership(x_membership)
                 self.set_groupunit(x_groupunit)
 
     def _set_voiceunit_groupunit_respect_ledgers(self):
