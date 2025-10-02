@@ -66,7 +66,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario1_planroot_laborunit():
     sue_belief = beliefunit_shop("Sue")
     x_laborunit = laborunit_shop()
     x_laborunit.add_party(party_title=run_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     sue_belief.edit_plan_attr(root_rope, laborunit=x_laborunit)
     root_plan = sue_belief.get_plan_obj(root_rope)
     x_gogo_want = 5
@@ -98,7 +98,7 @@ def test_BeliefUnit_to_dict_ReturnsObj_Scenario2_With_planroot_healerunit():
     yao_voiceunit.add_membership(run_str)
     run_healerunit = healerunit_shop()
     run_healerunit.set_healer_name(x_healer_name=run_str)
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     sue_belief.edit_plan_attr(root_rope, healerunit=run_healerunit)
 
     # WHEN

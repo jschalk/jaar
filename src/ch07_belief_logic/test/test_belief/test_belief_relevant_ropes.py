@@ -24,7 +24,7 @@ def test_BeliefUnit_get_relevant_ropes_EmptyRopeTermReturnsEmpty():
 def test_BeliefUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
 
     # WHEN
     root_dict = {root_rope: -1}
@@ -39,7 +39,7 @@ def test_BeliefUnit_get_relevant_ropes_RootRopeTermReturnsOnlyItself():
 def test_BeliefUnit_get_relevant_ropes_SimpleReturnsOnlyAncestors():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
 
     # WHEN
     wk_str = "sem_jours"
@@ -85,7 +85,7 @@ def test_BeliefUnit_get_relevant_ropes_ReturnsSimpleReasonUnitreason_context():
     # THEN
     print(f"{relevant_ropes=}")
     assert len(relevant_ropes) == 4
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     assert relevant_ropes == {root_rope, casa_rope, status_rope, floor_rope}
     assert unim_rope not in relevant_ropes
 

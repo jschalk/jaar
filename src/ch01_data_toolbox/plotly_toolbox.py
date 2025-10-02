@@ -11,16 +11,16 @@ def add_simp_rect(fig: plotly_Figure, x0, y0, x1, y1, display_str, x_color=None)
         x_color = "LightSeaGreen"
     line_dict = dict(color=x_color, width=4)
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_str(fig, x0, y1, display_str)
+    add_01rect(fig, x0, y1, display_str)
 
 
 def add_direc_rect(fig: plotly_Figure, x0, y0, x1, y1, display_str):
     line_dict = dict(color="LightSeaGreen", width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_str(fig, x0, y1, display_str)
+    add_01rect(fig, x0, y1, display_str)
 
 
-def add_rect_str(fig, x0, y0, text):
+def add_01rect(fig, x0, y0, text):
     x_margin = 0.2
     fig.add_annotation(
         x=x0 + x_margin, y=y0 - x_margin, text=text, showarrow=False, align="left"
@@ -32,10 +32,10 @@ def add_keep__rect(
 ):
     line_dict = dict(color="LightSeaGreen", width=2, dash="dot")
     fig.add_shape(type="rect", x0=x0, y0=y0, x1=x1, y1=y1, line=line_dict)
-    add_rect_str(fig, x0 + 0.5, y1, text1)
-    add_rect_str(fig, x0 + 0.5, y1 - 0.2, text2)
-    add_rect_str(fig, x0 + 0.5, y1 - 0.4, text3)
-    add_rect_str(fig, x0 + 0.5, y1 - 0.6, text4)
+    add_01rect(fig, x0 + 0.5, y1, text1)
+    add_01rect(fig, x0 + 0.5, y1 - 0.2, text2)
+    add_01rect(fig, x0 + 0.5, y1 - 0.4, text3)
+    add_01rect(fig, x0 + 0.5, y1 - 0.6, text4)
 
 
 def add_2_curve(fig: plotly_Figure, path: str, color: str):

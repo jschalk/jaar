@@ -9,11 +9,7 @@ from src.ch05_reason_logic.reason import (
 )
 from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
-from src.ch06_plan_logic.plan import (
-    get_default_moment_label as root_label,
-    get_obj_from_plan_dict,
-    planunit_shop,
-)
+from src.ch06_plan_logic.plan import get_obj_from_plan_dict, planunit_shop
 
 
 def test_get_obj_from_plan_dict_ReturnsObj():
@@ -67,12 +63,13 @@ def test_get_obj_from_plan_dict_Returns_HealerUnit():
 
 def test_PlanUnit_to_dict_ReturnsCompleteDict():
     # ESTABLISH
+    amy_str = "Amy23"
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    wk_rope = create_rope(amy_str, wk_str)
     wed_str = "Wed"
     wed_rope = create_rope(wk_rope, wed_str)
     nation_str = "nation"
-    nation_rope = create_rope(root_label(), nation_str)
+    nation_rope = create_rope(amy_str, nation_str)
     usa_str = "USA"
     usa_rope = create_rope(nation_rope, usa_str)
 
@@ -130,7 +127,7 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     sue_laborunit.add_party(yao_str)
     yao_healerunit = healerunit_shop({yao_str})
     casa_str = "casa"
-    casa_rope = create_rope(root_label(), casa_str)
+    casa_rope = create_rope(amy_str, casa_str)
     x_problem_bool = True
     casa_plan = planunit_shop(
         parent_rope=casa_rope,
@@ -200,27 +197,30 @@ def test_PlanUnit_to_dict_ReturnsCompleteDict():
     assert len(casa_dict[wx.factunits]) == len(casa_plan.get_factunits_dict())
 
 
-def test_PlanUnit_to_dict_ReturnsDictWithoutEmptyAttributes():
+def test_PlanUnit_to_dict_ReturnsObj_WithoutEmptyAttributes():
     # ESTABLISH
-    casa_plan = planunit_shop()
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
 
     # WHEN
     casa_dict = casa_plan.to_dict()
 
     # THEN
     assert casa_dict is not None
-    assert casa_dict == {"star": 1}
+    assert casa_dict == {wx.plan_label: casa_str, wx.star: 1}
 
 
-def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
+def test_PlanUnit_to_dict_ReturnsObj_DictWith_attrs_SetToTrue():
     # ESTABLISH
-    casa_plan = planunit_shop()
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
     casa_plan.is_expanded = False
     casa_plan.pledge = True
     ignore_str = "ignore"
 
+    amy_str = "Amy23"
     a_str = "a"
-    a_rope = create_rope(root_label(), a_str)
+    a_rope = create_rope(amy_str, a_str)
     casa_plan.set_factunit(factunit_shop(a_rope, a_rope))
 
     yao_str = "Yao"
@@ -243,17 +243,18 @@ def test_PlanUnit_to_dict_ReturnsDictWith_attrs_SetToTrue():
     casa_dict = casa_plan.to_dict()
 
     # THEN
-    assert casa_dict.get("is_expanded") is False
+    assert casa_dict.get(wx.is_expanded) is False
     assert casa_dict.get(wx.pledge)
     assert casa_dict.get(wx.factunits) is not None
     assert casa_dict.get(wx.awardunits) is not None
     assert casa_dict.get(wx.laborunit) is not None
-    assert casa_dict.get("kids") is not None
+    assert casa_dict.get(wx.kids) is not None
 
 
 def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     # ESTABLISH
-    casa_plan = planunit_shop()
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
     assert casa_plan.is_expanded
     assert casa_plan.pledge is False
     assert casa_plan.factunits == {}
@@ -266,10 +267,10 @@ def test_PlanUnit_to_dict_ReturnsDictWithAttrsEmpty():
     casa_dict = casa_plan.to_dict()
 
     # THEN
-    assert casa_dict.get("is_expanded") is None
+    assert casa_dict.get(wx.is_expanded) is None
     assert casa_dict.get(wx.pledge) is None
     assert casa_dict.get(wx.factunits) is None
     assert casa_dict.get(wx.awardunits) is None
     assert casa_dict.get(wx.laborunit) is None
-    assert casa_dict.get("healerunit") is None
-    assert casa_dict.get("kids") is None
+    assert casa_dict.get(wx.healerunit) is None
+    assert casa_dict.get(wx.kids) is None

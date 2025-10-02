@@ -51,7 +51,6 @@ def test_get_belief_viewer_template_ReturnsObj():
         wx.planroot,
         # wx.problem_bool,
         wx.reasonunits,
-        "root",
         wx.star,
         wx.stop_want,
         wx.pledge,

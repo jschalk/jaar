@@ -18,7 +18,6 @@ from src.ch98_docs_builder.doc_builder import (
     get_chapter_desc_str_number,
     get_chapter_descs,
     get_function_names_from_file,
-    get_keywords_filename,
 )
 from textwrap import dedent as textwrap_dedent
 
@@ -256,13 +255,10 @@ def get_semantic_types(semantic_type_candidates) -> set:
             semantic_type_confirmed.add(x_class)
         else:
             x_base = bases[0]
-            new_bases = semantic_type_candidates.get(x_base)
-            if new_bases:
+            if new_bases := semantic_type_candidates.get(x_base):
                 # if x_base exists in semantic_type_candidates change classes bases reference to parent class
                 semantic_type_candidates[x_class] = new_bases
                 candidates_list.append(x_class)
-                # print(f"{x_class} popped {x_base=} {new_bases=}")
-
     # print(f"{sorted(list(semantic_type_confirmed))=}")
     return semantic_type_confirmed
 
@@ -271,10 +267,9 @@ def check_if_chapter_keywords_by_chapter_is_sorted(
     chapter_keywords_by_chapter: list[str],
 ):
     filtered_ch_str_func = []
-    for str_func in chapter_keywords_by_chapter:
-        if str_func != "__str__":
-            filtered_ch_str_func.append(str_func)
-
+    filtered_ch_str_func.extend(
+        str_func for str_func in chapter_keywords_by_chapter if str_func != "__str__"
+    )
     if filtered_ch_str_func != sorted(filtered_ch_str_func):
         for chapter_str_func in sorted(filtered_ch_str_func):
             chapter_str_func = chapter_str_func.replace("'", "")

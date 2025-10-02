@@ -284,7 +284,6 @@ function renderPlanUnit(planUnit, level) {
     const taskIndicator = planUnit.task && show_task ? '-task' : '';
     const starIndicator = show_star ? ` star${planUnit.star}` : '';
     const fund_shareIndicator = show_fund_share ? ` [${planUnit.fund_share}]` : '';
-    const root_booleanIndicator = planUnit.root && show_root_boolean ? '(ROOT)' : '';
     const uidIndicator = planUnit.uid && show_uid ? ` uid${planUnit.uid}` : '';
 
     const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit.fund_onset}` : '';

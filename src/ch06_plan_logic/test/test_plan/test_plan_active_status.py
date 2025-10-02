@@ -8,10 +8,7 @@ from src.ch05_reason_logic.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
-from src.ch06_plan_logic.plan import (
-    get_default_moment_label as root_label,
-    planunit_shop,
-)
+from src.ch06_plan_logic.plan import planunit_shop
 
 
 def test_PlanUnit_clear_all_voice_cred_debt_ClearsAttrs():
@@ -32,7 +29,7 @@ def test_PlanUnit_clear_all_voice_cred_debt_ClearsAttrs():
 def test_PlanUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"
-    texas_plan = planunit_shop(texas_str, root_label())
+    texas_plan = planunit_shop(texas_str)
 
     # WHEN / THEN
     assert texas_plan.get_fund_share() == 0
@@ -211,18 +208,19 @@ def test_PlanUnit_set_range_factheirs_SetsAttrNoParameters():
 def test_PlanUnit_set_range_factheirs_SetsAttrNewFactHeir():
     # ESTABLISH
     wk_str = "wk"
-    wk_rope = create_rope(root_label(), wk_str)
+    amy_str = "Amy23"
+    wk_rope = create_rope(amy_str, wk_str)
     wk_reason_lower = 3
     wk_reason_upper = 7
     wk_addin = 10
-    wk_plan = planunit_shop(wk_str, parent_rope=root_label(), addin=wk_addin)
+    wk_plan = planunit_shop(wk_str, parent_rope=amy_str, addin=wk_addin)
     wk_factheir = factheir_shop(wk_rope, wk_rope, wk_reason_lower, wk_reason_upper)
     tue_str = "Tue"
     tue_rope = create_rope(wk_rope, tue_str)
     tue_addin = 100
     tue_plan = planunit_shop(tue_str, parent_rope=wk_rope, addin=tue_addin)
     ball_str = "ball"
-    ball_rope = create_rope(root_label(), ball_str)
+    ball_rope = create_rope(amy_str, ball_str)
     ball_plan = planunit_shop(ball_str)
     ball_plan._set_factheir(wk_factheir)
     tue_reasonheirs = {tue_rope: reasonheir_shop(tue_rope, None, False)}

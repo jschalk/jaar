@@ -95,7 +95,7 @@ def test_BeliefUnit_set_plan_dict_Scenario1():
 def test_BeliefUnit_set_plan_dict_Clears_gogo_calc_stop_calc():
     # ESTABLISH
     sue_belief = get_beliefunit_with_4_levels()
-    root_rope = to_rope(sue_belief.moment_label)
+    root_rope = sue_belief.planroot.get_plan_rope()
     root_plan = sue_belief.get_plan_obj(root_rope)
     nation_str = "nation"
     nation_rope = sue_belief.make_l1_rope(nation_str)

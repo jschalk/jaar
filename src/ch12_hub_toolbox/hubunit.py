@@ -136,7 +136,7 @@ class HubUnit:
         x_atom_filename = self._get_next_atom_file_number()
         return self._save_valid_atom_file(x_atom, x_atom_filename)
 
-    def atom_file_exists(self, atom_number: int) -> bool:
+    def h_atom_file_exists(self, atom_number: int) -> bool:
         return os_path_exists(self.atom_file_path(atom_number))
 
     def delete_atom_file(self, atom_number: int):
@@ -144,7 +144,7 @@ class HubUnit:
 
     def _get_belief_from_atom_files(self) -> BeliefUnit:
         x_belief = beliefunit_shop(self.belief_name, self.moment_label)
-        if self.atom_file_exists(self.get_max_atom_file_number()):
+        if self.h_atom_file_exists(self.get_max_atom_file_number()):
             x_atom_files = get_dir_file_strs(self._atoms_dir, delete_extensions=True)
             sorted_atom_filenames = sorted(list(x_atom_files.keys()))
 

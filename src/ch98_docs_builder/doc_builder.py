@@ -55,9 +55,10 @@ def get_chXX_keyword_classes(cumlative_ch_keywords_dict: dict) -> dict[int,]:
 
 
 def get_chapter_descs() -> dict[str, str]:
+    """Returns chapter_desc, chapter_dir for all Chapters"""
     src_dir = "src"
-    """ch99_chapter_style is a new game for me"""
     chapter_descs = get_level1_dirs(src_dir)
+    """ch99_chapter_style is not evaluated"""
     chapter_descs.remove("ch99_chapter_style")
     return {
         chapter_desc: create_path(src_dir, chapter_desc)
@@ -96,10 +97,6 @@ def get_function_names_from_file(
             bases = [b.id for b in n.bases if isinstance(b, ast_Name)]
             class_bases[n.name] = bases
     return file_funcs, class_bases
-
-
-def get_keywords_filename(chapter_desc_prefix: str) -> str:
-    return f"{chapter_desc_prefix}_keywords.py"
 
 
 def get_chapter_desc_str_number(chapter_desc: str) -> str:

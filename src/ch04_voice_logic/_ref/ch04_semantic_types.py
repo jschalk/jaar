@@ -1,6 +1,6 @@
 from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    FirstLabel,
     LabelTerm,
-    MomentLabel,
     RopeTerm,
     default_knot_if_None,
 )

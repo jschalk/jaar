@@ -268,7 +268,7 @@ def get_listen_structures3_fig(graphics_bool: bool = False) -> plotly_Figure:
         conditional_fig_show(fig, graphics_bool)
 
 
-def fund_graph0(
+def fund_graph13(
     x_belief: BeliefUnit, mode: str = None, graphics_bool: bool = False
 ) -> plotly_Figure:
     fig = display_plantree(x_belief, mode, False)

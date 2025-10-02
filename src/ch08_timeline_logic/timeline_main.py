@@ -3,7 +3,7 @@ from datetime import datetime
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.dict_toolbox import get_1_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch02_rope_logic.rope import create_rope
+from src.ch02_rope_logic.rope import create_rope, get_first_label_from_rope
 from src.ch06_plan_logic.plan import (
     PlanUnit,
     all_plans_between,
@@ -150,8 +150,8 @@ def new_timeline_planunit(timeline_label: TimeLineLabel, c400_number: int) -> Pl
     return planunit_shop(timeline_label, begin=0, close=timeline_length)
 
 
-def get_timeline_rope(moment_label: str, timeline_label: str, knot: str) -> RopeTerm:
-    time_rope = create_rope(moment_label, "time", knot)
+def get_timeline_rope(nexus_label: str, timeline_label: str, knot: str) -> RopeTerm:
+    time_rope = create_rope(nexus_label, "time", knot)
     return create_rope(time_rope, timeline_label, knot)
 
 
@@ -164,8 +164,11 @@ def add_newtimeline_planunit(x_beliefunit: BeliefUnit, timeline_config: dict):
     x_weekdays_list = timeline_config.get("weekdays_config")
     x_yr1_jan1_offset = timeline_config.get("yr1_jan1_offset")
 
+    planroot_label = get_first_label_from_rope(
+        rope=x_beliefunit.planroot.get_plan_rope(), knot=x_beliefunit.knot
+    )
     timeline_rope = get_timeline_rope(
-        moment_label=x_beliefunit.moment_label,
+        nexus_label=planroot_label,
         timeline_label=x_plan_label,
         knot=x_beliefunit.knot,
     )
@@ -198,8 +201,11 @@ def add_stan_planunits(
     timeline_c400_number: int,
 ):
     time_rope = x_beliefunit.make_l1_rope("time")
+    planroot_label = get_first_label_from_rope(
+        rope=x_beliefunit.planroot.get_plan_rope(), knot=x_beliefunit.knot
+    )
     timeline_rope = get_timeline_rope(
-        moment_label=x_beliefunit.moment_label,
+        nexus_label=planroot_label,
         timeline_label=timeline_label,
         knot=x_beliefunit.knot,
     )

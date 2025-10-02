@@ -2,12 +2,11 @@ from enum import Enum
 
 
 class Ch02Keywords(str, Enum):
+    FirstLabel = "FirstLabel"
     INSERT = "INSERT"
     KnotTerm = "KnotTerm"
     LabelTerm = "LabelTerm"
-    MomentLabel = "MomentLabel"
     NameTerm = "NameTerm"
-    NexusLabel = "NexusLabel"
     RopeTerm = "RopeTerm"
     TitleTerm = "TitleTerm"
     UPDATE = "UPDATE"

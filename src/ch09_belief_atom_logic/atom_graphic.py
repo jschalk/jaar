@@ -54,7 +54,7 @@ def get_delete_rect(dimen: str) -> AtomPlotlyShape:
     return atom_rect
 
 
-def add_rect_str(fig, x, y, text):
+def add_ch09rect(fig, x, y, text):
     fig.add_annotation(
         xref="paper",
         yref="paper",
@@ -91,7 +91,7 @@ def add_atom_rect(fig: plotly_Figure, atomplotyshape: AtomPlotlyShape):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text=atomplotyshape.display_str)
+    add_ch09rect(fig, x=text_x, y=text_y, text=atomplotyshape.display_str)
 
 
 def add_groupunits_circle(fig: plotly_Figure):
@@ -119,7 +119,7 @@ def add_groupunits_circle(fig: plotly_Figure):
     )
     text_y = (shape_y0 + shape_y1) / 2
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text="GroupUnits")
+    add_ch09rect(fig, x=text_x, y=text_y, text="GroupUnits")
 
 
 def add_different_plans_circle(fig: plotly_Figure):
@@ -147,7 +147,7 @@ def add_different_plans_circle(fig: plotly_Figure):
     )
     text_y = shape_y1 - 0.01
     text_x = (shape_x0 + shape_x1) / 2
-    add_rect_str(fig, x=text_x, y=text_y, text="Different Plans")
+    add_ch09rect(fig, x=text_x, y=text_y, text="Different Plans")
 
 
 def get_beliefatom_base_fig() -> plotly_Figure:

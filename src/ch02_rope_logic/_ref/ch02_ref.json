@@ -1,6 +1,6 @@
 {
-  "chapter_blurb": "Defines Term Classes: Knots, Labels, RopeTerms, NexusLabels",
-  "chapter_content": "Defines what a Rope is and required format for groups names and individual names.",
-  "chapter_description": "ch02_rope_logic",
+  "chapter_blurb": "Defines Term Classes: Knots, Labels, RopeTerms, FirstLabels", 
+  "chapter_content": "Defines what a Rope is and required format for groups names and individual names.", 
+  "chapter_description": "ch02_rope_logic", 
   "chapter_number": 2
 }

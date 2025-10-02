@@ -278,7 +278,7 @@ def get_credit_ledger(x_belief: BeliefUnit) -> dict[VoiceUnit, RespectNum]:
 def get_belief_root_facts_dict(
     x_belief: BeliefUnit,
 ) -> dict[RopeTerm, dict[str,]]:
-    return x_belief.get_factunits_dict()
+    return x_belief.get_planroot_factunits_dict()
 
 
 def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, dict]):
@@ -286,7 +286,9 @@ def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, d
     missing_fact_reason_contexts = set(
         x_belief.get_missing_fact_reason_contexts().keys()
     )
-    not_missing_fact_reason_contexts = set(x_belief.get_factunits_dict().keys())
+    not_missing_fact_reason_contexts = set(
+        x_belief.get_planroot_factunits_dict().keys()
+    )
     belief_fact_reason_contexts = not_missing_fact_reason_contexts.union(
         missing_fact_reason_contexts
     )

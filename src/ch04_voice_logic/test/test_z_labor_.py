@@ -219,8 +219,8 @@ def test_LaborHeir_set_belief_name_is_labor_SetsAttribute_NonEmptyx_partys_v1():
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, voice_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, voice_name=sue_str))
+    yao_groupunit.set_g_membership(membership_shop(yao_str, voice_name=yao_str))
+    sue_groupunit.set_g_membership(membership_shop(sue_str, voice_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     belief_name = yao_str
 
@@ -241,8 +241,8 @@ def test_LaborHeir_set_belief_name_is_labor_SetsAttribute_NonEmptyx_partys_v2():
     sue_str = "Sue"
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, voice_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, voice_name=sue_str))
+    yao_groupunit.set_g_membership(membership_shop(yao_str, voice_name=yao_str))
+    sue_groupunit.set_g_membership(membership_shop(sue_str, voice_name=sue_str))
     x_groupunits = {yao_str: yao_groupunit, sue_str: sue_groupunit}
     x_partys = {sue_str}
     x_laborheir = laborheir_shop(_partys=x_partys)
@@ -264,13 +264,13 @@ def test_LaborHeir_set_belief_name_is_labor_SetsAttribute_NonEmptyx_partys_v3():
     yao_groupunit = groupunit_shop(yao_str)
     sue_groupunit = groupunit_shop(sue_str)
     bob_groupunit = groupunit_shop(bob_str)
-    yao_groupunit.set_membership(membership_shop(yao_str, voice_name=yao_str))
-    sue_groupunit.set_membership(membership_shop(sue_str, voice_name=sue_str))
+    yao_groupunit.set_g_membership(membership_shop(yao_str, voice_name=yao_str))
+    sue_groupunit.set_g_membership(membership_shop(sue_str, voice_name=sue_str))
 
     swim_str = ",swim"
     swim_groupunit = groupunit_shop(group_title=swim_str)
-    swim_groupunit.set_membership(membership_shop(swim_str, voice_name=yao_str))
-    swim_groupunit.set_membership(membership_shop(swim_str, voice_name=sue_str))
+    swim_groupunit.set_g_membership(membership_shop(swim_str, voice_name=yao_str))
+    swim_groupunit.set_g_membership(membership_shop(swim_str, voice_name=sue_str))
     x_groupunits = {
         yao_str: yao_groupunit,
         sue_str: sue_groupunit,
@@ -433,19 +433,19 @@ def test_LaborHeir_set_partys_Scenario4_LaborUnitEqualParentLaborHeir_NonEmpty()
 #     sue_groupunit = groupunit_shop(sue_str)
 #     bob_groupunit = groupunit_shop(bob_str)
 #     bob_groupunit = groupunit_shop(zia_str)
-#     yao_groupunit.set_membership(membership_shop(yao_str, voice_name=yao_str))
-#     sue_groupunit.set_membership(membership_shop(sue_str, voice_name=sue_str))
+#     yao_groupunit.set_g_membership(membership_shop(yao_str, voice_name=yao_str))
+#     sue_groupunit.set_g_membership(membership_shop(sue_str, voice_name=sue_str))
 
 #     swim2_str = ",swim2"
 #     swim2_groupunit = groupunit_shop(group_title=swim2_str)
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, voice_name=yao_str))
-#     swim2_groupunit.set_membership(membership_shop(swim2_str, voice_name=sue_str))
+#     swim2_groupunit.set_g_membership(membership_shop(swim2_str, voice_name=yao_str))
+#     swim2_groupunit.set_g_membership(membership_shop(swim2_str, voice_name=sue_str))
 
 #     swim3_str = ",swim3"
 #     swim3_groupunit = groupunit_shop(group_title=swim3_str)
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, voice_name=yao_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, voice_name=sue_str))
-#     swim3_groupunit.set_membership(membership_shop(swim3_str, voice_name=zia_str))
+#     swim3_groupunit.set_g_membership(membership_shop(swim3_str, voice_name=yao_str))
+#     swim3_groupunit.set_g_membership(membership_shop(swim3_str, voice_name=sue_str))
+#     swim3_groupunit.set_g_membership(membership_shop(swim3_str, voice_name=zia_str))
 
 #     x_groupunits = {
 #         yao_str: yao_groupunit,

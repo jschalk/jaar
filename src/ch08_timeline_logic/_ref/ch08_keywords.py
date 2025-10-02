@@ -4,6 +4,7 @@ from enum import Enum
 class Ch08Keywords(str, Enum):
     BeliefName = "BeliefName"
     BitNum = "BitNum"
+    FirstLabel = "FirstLabel"
     FundIota = "FundIota"
     FundNum = "FundNum"
     GrainFloat = "GrainFloat"
@@ -118,6 +119,7 @@ class Ch08Keywords(str, Enum):
     monthday_index = "monthday_index"
     months_config = "months_config"
     morph = "morph"
+    nexus = "nexus"
     numor = "numor"
     offtrack_fund = "offtrack_fund"
     offtrack_kids_star_set = "offtrack_kids_star_set"

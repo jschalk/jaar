@@ -6,8 +6,8 @@ from src.ch06_plan_logic.plan import planunit_shop
 def test_PlanUnit_find_replace_rope_Modifies_parent_rope():
     # ESTABLISH Plan with _parent_rope that will be different
     old_casa_str = "casa1"
-    old_root_label = "ZZ"
-    old_casa_rope = create_rope(old_root_label, old_casa_str)
+    old_first_label = "ZZ"
+    old_casa_rope = create_rope(old_first_label, old_casa_str)
     bloomers_str = "bloomers"
     old_bloomers_rope = create_rope(old_casa_rope, bloomers_str)
     roses_str = "roses"
@@ -18,7 +18,7 @@ def test_PlanUnit_find_replace_rope_Modifies_parent_rope():
 
     # WHEN
     new_casa = "casa2"
-    new_casa_rope = create_rope(old_root_label, new_casa)
+    new_casa_rope = create_rope(old_first_label, new_casa)
     x_plan.find_replace_rope(old_rope=old_casa_rope, new_rope=new_casa_rope)
 
     # THEN
@@ -31,15 +31,15 @@ def test_PlanUnit_find_replace_rope_Modifies_parent_rope():
 def test_PlanUnit_find_replace_rope_Modifies_reasonunits():
     # ESTABLISH Plan with reason that will be different
     casa_str = "casa1"
-    old_root_label = "ZZ"
-    casa_rope = create_rope(old_root_label, casa_str)
+    old_first_label = "ZZ"
+    casa_rope = create_rope(old_first_label, casa_str)
     bloomers_str = "bloomers"
     bloomers_rope = create_rope(casa_rope, bloomers_str)
     roses_str = "roses"
     roses_rope = create_rope(bloomers_rope, roses_str)
     # reason ropes
     old_water_str = "water"
-    old_water_rope = create_rope(old_root_label, old_water_str)
+    old_water_rope = create_rope(old_first_label, old_water_str)
     rain_str = "rain"
     old_rain_rope = create_rope(old_water_rope, rain_str)
     # create reasonunit
@@ -58,7 +58,7 @@ def test_PlanUnit_find_replace_rope_Modifies_reasonunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_rope = create_rope(old_root_label, new_water_str)
+    new_water_rope = create_rope(old_first_label, new_water_str)
     assert x_plan.reasonunits.get(new_water_rope) is None
     x_plan.find_replace_rope(old_rope=old_water_rope, new_rope=new_water_rope)
 
@@ -87,8 +87,8 @@ def test_PlanUnit_find_replace_rope_Modifies_factunits():
     # ESTABLISH Plan with factunit that will be different
     roses_str = "roses"
     old_water_str = "water"
-    old_root_label = "ZZ"
-    old_water_rope = create_rope(old_root_label, old_water_str)
+    old_first_label = "ZZ"
+    old_water_rope = create_rope(old_first_label, old_water_str)
     rain_str = "rain"
     old_rain_rope = create_rope(old_water_rope, rain_str)
 
@@ -102,7 +102,7 @@ def test_PlanUnit_find_replace_rope_Modifies_factunits():
 
     # WHEN
     new_water_str = "h2o"
-    new_water_rope = create_rope(old_root_label, new_water_str)
+    new_water_rope = create_rope(old_first_label, new_water_str)
     assert x_plan.factunits.get(new_water_rope) is None
     x_plan.find_replace_rope(old_rope=old_water_rope, new_rope=new_water_rope)
 

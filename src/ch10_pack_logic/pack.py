@@ -8,8 +8,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     open_json,
     save_file,
 )
-from src.ch06_plan_logic.plan import get_default_moment_label
-from src.ch07_belief_logic.belief_main import BeliefUnit
+from src.ch07_belief_logic.belief_main import BeliefUnit, get_default_moment_label
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, get_beliefatom_from_json
 from src.ch10_pack_logic._ref.ch10_semantic_types import (
     BeliefName,
@@ -64,7 +63,7 @@ class PackUnit:
         self._delta_start = get_init_pack_id_if_None(x_delta_start)
 
     def beliefatom_exists(self, x_beliefatom: BeliefAtom):
-        return self._beliefdelta.beliefatom_exists(x_beliefatom)
+        return self._beliefdelta.c_beliefatom_exists(x_beliefatom)
 
     def get_step_dict(self) -> dict[str, any]:
         return {
@@ -141,7 +140,7 @@ class PackUnit:
             x_beliefdelta.set_beliefatom(x_beliefatom)
         self._beliefdelta = x_beliefdelta
 
-    def add_beliefatom(
+    def add_p_beliefatom(
         self,
         dimen: str,
         crud_str: str,

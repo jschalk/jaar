@@ -8,11 +8,11 @@ def test_BeliefAtom_Exists():
     x_beliefatom = BeliefAtom()
 
     # THEN
-    assert x_beliefatom.dimen is None
-    assert x_beliefatom.crud_str is None
-    assert x_beliefatom.jkeys is None
-    assert x_beliefatom.jvalues is None
-    assert x_beliefatom.atom_order is None
+    assert not x_beliefatom.dimen
+    assert not x_beliefatom.crud_str
+    assert not x_beliefatom.jkeys
+    assert not x_beliefatom.jvalues
+    assert not x_beliefatom.atom_order
 
 
 def test_beliefatom_shop_ReturnsObj():

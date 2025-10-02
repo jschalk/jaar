@@ -164,8 +164,8 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
     x_healerunit_ratio = 27.0
     x_all_voice_cred = 28
     x_all_voice_debt = 29
-    x_plan = planunit_shop()
-    x_plan.moment_label = x_moment_label
+    casa_str = "casa"
+    x_plan = planunit_shop(casa_str)
     x_plan.parent_rope = x_parent_rope
     x_plan.plan_label = x_plan_label
     x_plan.begin = x_begin
@@ -236,7 +236,7 @@ def test_insert_job_blrplan_CreatesTableRowsFor_blrplan_job():
         cursor.execute(select_sqlstr)
         rows = cursor.fetchall()
         expected_row1 = (
-            x_moment_label,
+            None,
             str(x_belief_name),
             clean_rope,
             x_begin,

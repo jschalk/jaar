@@ -1,14 +1,26 @@
-from src.ch04_voice_logic._ref.ch04_semantic_types import (
+from src.ch06_plan_logic._ref.ch06_semantic_types import (
+    FirstLabel,
     GroupTitle,
     HealerName,
     LabelTerm,
-    MomentLabel,
     NameTerm,
     RopeTerm,
     TitleTerm,
     VoiceName,
     default_knot_if_None,
 )
+
+
+class NexusLabel(FirstLabel):
+    """The Nexus is the FirstLabel of all RopeTerms in a BeliefUnit. NexusLabel cannot contain a knot."""
+
+    pass
+
+
+class MomentLabel(NexusLabel):  # Created to help track the object class relations
+    """A NexusLabel for a Moment. Cannot contain knot."""
+
+    pass
 
 
 class BeliefName(NameTerm):

@@ -3,16 +3,15 @@ from enum import Enum
 
 class Ch03Keywords(str, Enum):
     BitNum = "BitNum"
+    FirstLabel = "FirstLabel"
     FundIota = "FundIota"
     FundNum = "FundNum"
     GrainFloat = "GrainFloat"
     INSERT = "INSERT"
     KnotTerm = "KnotTerm"
     LabelTerm = "LabelTerm"
-    MomentLabel = "MomentLabel"
     MoneyUnit = "MoneyUnit"
     NameTerm = "NameTerm"
-    NexusLabel = "NexusLabel"
     PennyNum = "PennyNum"
     RespectNum = "RespectNum"
     RopeTerm = "RopeTerm"

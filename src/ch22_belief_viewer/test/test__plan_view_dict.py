@@ -22,7 +22,7 @@ from src.ch22_belief_viewer.example22_beliefs import (
 
 def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     # ESTABLISH
-    casa_plan = planunit_shop()
+    casa_plan = planunit_shop("casa")
     casa_plan.fund_ratio = 1
     assert casa_plan.kids == {}
     print(f"{type(casa_plan)=}")
@@ -36,10 +36,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
     #     print(f"{dict_key=} \t\t {value=}")
     assert set(casa_dict.keys()) == {
         wx.plan_label,
-        wx.moment_label,
         wx.parent_rope,
         wx.kids,
-        "root",
         wx.star,
         wx.uid,
         wx.awardunits,
@@ -447,7 +445,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario7_PlanUnit_ReasonHeirs():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
     # ESTABLISH
-    casa_plan = planunit_shop()
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
     casa_gogo_want = 13
     casa_stop_want = 17
     casa_gogo_calc = 53
@@ -478,7 +477,8 @@ def test_get_plan_view_dict_ReturnsObj_Scenario8_gogo_stop():
 
 def test_get_plan_view_dict_ReturnsObj_Scenario9_numeric_range_attrs():
     # ESTABLISH
-    casa_plan = planunit_shop()
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
     casa_addin = 11
     casa_begin = 17
     casa_close = 23

@@ -7,9 +7,13 @@ from src.ch03_finance_logic.finance_config import (
     validate_fund_pool,
     validate_respect_num,
 )
-from src.ch06_plan_logic.plan import get_default_moment_label as root_label
+from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
-from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
+from src.ch07_belief_logic.belief_main import (
+    BeliefUnit,
+    beliefunit_shop,
+    get_default_moment_label,
+)
 
 
 def test_BeliefUnit_Exists():
@@ -79,6 +83,42 @@ def test_BeliefUnit_Exists():
     }
 
 
+def test_BeliefUnit_get_nexus_label_Scenario0_Default_knot():
+    # ESTABLISH
+    casa_str = "casa"
+    casa_planroot = planunit_shop(casa_str)
+    amy_str = "Amy23"
+    print(f"{casa_planroot.get_plan_rope()=}")
+    x_belief = BeliefUnit(
+        belief_name=amy_str, knot=casa_planroot.knot, planroot=casa_planroot
+    )
+
+    # WHEN
+    nexus_label = x_belief.get_nexus_label()
+
+    # THEN
+    assert nexus_label == casa_str
+
+
+def test_BeliefUnit_get_nexus_label_Scenario1_NonDefault_knot():
+    # ESTABLISH
+    casa_str = "casa"
+    slash_str = "/"
+    assert slash_str != default_knot_if_None()
+    casa_planroot = planunit_shop(casa_str, knot=slash_str)
+    amy_str = "Amy23"
+    print(f"{casa_planroot.get_plan_rope()=}")
+    x_belief = BeliefUnit(
+        belief_name=amy_str, knot=casa_planroot.knot, planroot=casa_planroot
+    )
+
+    # WHEN
+    nexus_label = x_belief.get_nexus_label()
+
+    # THEN
+    assert nexus_label == casa_str
+
+
 def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     # ESTABLISH
     sue_str = "Sue"
@@ -139,7 +179,7 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
 
     # THEN
     assert x_belief.belief_name == ""
-    assert x_belief.moment_label == root_label()
+    assert x_belief.moment_label == get_default_moment_label()
     assert x_belief.knot == default_knot_if_None()
     assert x_belief.fund_pool == validate_fund_pool()
     assert x_belief.fund_iota == default_fund_iota_if_None()
@@ -147,10 +187,8 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.penny == filter_penny()
     assert x_belief.planroot.fund_iota == x_belief.fund_iota
     assert x_belief.planroot.knot == x_belief.knot
-    assert x_belief.planroot.root
     assert x_belief.planroot.uid == 1
     assert x_belief.planroot.tree_level == 0
-    assert x_belief.planroot.moment_label == x_belief.moment_label
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.parent_rope == ""
 

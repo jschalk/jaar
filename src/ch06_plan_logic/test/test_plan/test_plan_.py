@@ -1,15 +1,11 @@
+from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch03_finance_logic.finance_config import default_fund_iota_if_None
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
-from src.ch06_plan_logic.plan import PlanUnit, get_default_moment_label, planunit_shop
-
-
-def test_get_default_moment_label_ReturnsObj():
-    # ESTABLISH / WHEN / THEN
-    assert get_default_moment_label() == "ZZ"
+from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
 
 
 def test_PlanUnit_Exists():
@@ -57,8 +53,6 @@ def test_PlanUnit_Exists():
     assert x_planunit.fund_iota is None
     assert x_planunit.fund_onset is None
     assert x_planunit.fund_cease is None
-    assert x_planunit.root is None
-    assert x_planunit.moment_label is None
     assert x_planunit.healerunit_ratio is None
     obj_attrs = set(x_planunit.__dict__.keys())
     print(sorted(list(obj_attrs)))
@@ -93,7 +87,6 @@ def test_PlanUnit_Exists():
         wx.plan_label,
         wx.denom,
         wx.factunits,
-        wx.moment_label,
         wx.fund_iota,
         wx.gogo_want,
         wx.healerunit,
@@ -105,28 +98,58 @@ def test_PlanUnit_Exists():
         wx.pledge,
         wx.problem_bool,
         wx.reasonunits,
-        "root",
         wx.stop_want,
     }
 
 
-def test_planunit_shop_WithNoParametersReturnsObj():
-    # ESTABLISH / WHEN
-    x_planunit = planunit_shop()
+from pytest import raises as pytest_raises
+from src.ch06_plan_logic.plan import planunit_shop
+
+
+def test_PlanUnit_set_plan_label_Scenario0_SetsAttr():
+    # ESTABLISH
+    el_paso_str = "El Paso"
+    el_paso_plan = planunit_shop(el_paso_str)
+    casa_str = "casa"
+    assert el_paso_plan.plan_label != casa_str
+
+    # WHEN
+    el_paso_plan.set_plan_label(casa_str)
+
+    # THEN
+    assert el_paso_plan.plan_label == casa_str
+
+
+def test_PlanUnit_set_plan_label_Scenario1_RaisesErrorWhen_plan_label_IsNone():
+    # ESTABLISH
+    casa_str = "casa"
+    casa_plan = planunit_shop(casa_str)
+
+    # WHEN / THEN
+    with pytest_raises(Exception) as excinfo:
+        casa_plan.set_plan_label(plan_label=None)
+    assert str(excinfo.value) == "Cannot set Plan's Label empty or None"
+
+
+def test_planunit_shop_ReturnsObj_WithOneParameter():
+    # ESTABLISH
+    casa_str = "casa"
+
+    # WHEN
+    x_planunit = planunit_shop(casa_str)
 
     # THEN
     assert x_planunit
     assert x_planunit.kids == {}
     assert x_planunit.star == 1
-    assert x_planunit.plan_label is None
-    assert x_planunit.moment_label == get_default_moment_label()
-    assert x_planunit.uid is None
-    assert x_planunit.begin is None
-    assert x_planunit.close is None
-    assert x_planunit.addin is None
-    assert x_planunit.numor is None
-    assert x_planunit.denom is None
-    assert x_planunit.morph is None
+    assert x_planunit.plan_label == casa_str
+    assert not x_planunit.uid
+    assert not x_planunit.begin
+    assert not x_planunit.close
+    assert not x_planunit.addin
+    assert not x_planunit.numor
+    assert not x_planunit.denom
+    assert not x_planunit.morph
     assert x_planunit.pledge is False
     assert x_planunit.problem_bool is False
     assert x_planunit.descendant_pledge_count is None
@@ -150,7 +173,6 @@ def test_planunit_shop_WithNoParametersReturnsObj():
     assert x_planunit.laborunit == laborunit_shop()
     assert x_planunit.laborheir is None
     assert x_planunit.knot == default_knot_if_None()
-    assert x_planunit.root is False
     assert x_planunit.all_voice_cred is None
     assert x_planunit.all_voice_debt is None
     assert x_planunit.healerunit_ratio == 0
@@ -175,15 +197,19 @@ def test_planunit_shop_Allows_doesNotAllow_starToBeNegative():
     assert x_planunit.star == zero_int
 
 
-def test_planunit_shop_NonNoneParametersReturnsObj():
+def test_planunit_shop_ReturnsObj_Given_healerunit_Parameter():
     # ESTABLISH
+    clean_str = "clean"
     x_healerunit = healerunit_shop({"Sue", "Yao"})
     x_problem_bool = True
     x_fund_iota = 88
 
     # WHEN
     x_planunit = planunit_shop(
-        healerunit=x_healerunit, problem_bool=x_problem_bool, fund_iota=x_fund_iota
+        clean_str,
+        healerunit=x_healerunit,
+        problem_bool=x_problem_bool,
+        fund_iota=x_fund_iota,
     )
 
     # THEN
@@ -259,7 +285,7 @@ def test_PlanUnit_set_knot_SetsAttr():
 def test_PlanUnit_get_obj_key_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
-    round_rope = create_rope(get_default_moment_label(), round_str)
+    round_rope = create_rope("Amy23", round_str)
     ball_str = "ball"
 
     # WHEN
@@ -273,7 +299,7 @@ def test_PlanUnit_get_rope_ReturnsObj():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_rope = create_rope(get_default_moment_label(), round_str, knot=slash_str)
+    round_rope = create_rope("Amy23", round_str, knot=slash_str)
     ball_str = "ball"
 
     # WHEN
@@ -288,13 +314,13 @@ def test_PlanUnit_set_parent_rope_SetsAttr():
     # ESTABLISH
     round_str = "round_stuff"
     slash_str = "/"
-    round_rope = create_rope(get_default_moment_label(), round_str, knot=slash_str)
+    round_rope = create_rope("Amy23", round_str, knot=slash_str)
     ball_str = "ball"
     ball_plan = planunit_shop(ball_str, parent_rope=round_rope, knot=slash_str)
     assert ball_plan.parent_rope == round_rope
 
     # WHEN
-    sports_rope = create_rope(get_default_moment_label(), "sports", knot=slash_str)
+    sports_rope = create_rope("Amy23", "sports", knot=slash_str)
     ball_plan.set_parent_rope(parent_rope=sports_rope)
 
     # THEN

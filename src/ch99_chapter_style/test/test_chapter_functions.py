@@ -39,6 +39,7 @@ def expected_semantic_types() -> set:
         "BeliefName",
         "BitNum",
         "CRUD_command",
+        "FirstLabel",
         "NexusLabel",
         "EventInt",
         "FaceName",
@@ -65,6 +66,7 @@ def expected_semantic_types() -> set:
 
 
 def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
+    # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     excluded_functions = {
         "_get_inx_label",
@@ -73,25 +75,11 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "_is_inx_knot_inclusion_correct",
         "_is_otx_knot_inclusion_correct",
         "_unknown_str_in_otx2inx",
-        "add_column_rect",
-        "add_cycle_to_tax_arrows",
         "add_fund_give_take",
-        "add_grants_top",
-        "add_keep__rect",
-        "add_beliefatom",
-        "add_rect_arrow",
-        "add_rect_str",
-        "add_river_row",
-        "add_rivercycle",
-        "add_taxs_bottom",
-        "add_taxs_column",
-        "atom_file_exists",
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
         "find_replace_rope",
-        "fund_graph0",
-        "get_factunits_dict",
         "get_json",
         "get_chapter_temp_dir",
         "get_obj_key",
@@ -100,12 +88,10 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "label_exists",
         "otx_exists",
         "otx2inx_exists",
-        "beliefatom_exists",
         "reveal_inx",
         "set_all_otx2inx",
         "set_knot",
         "set_label",
-        "set_membership",
         "set_otx2inx",
         "to_dict",
     }
@@ -120,6 +106,10 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     all_functions = chapters_func_class_metrics.get("all_functions")
 
     # THEN
+    for function_name in sorted(all_functions.keys()):
+        func_metrics = all_functions.get(function_name)
+        if func_metrics > 1:
+            print(f"{function_name} {func_metrics=}")
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
     assert not duplicated_functions, assertion_fail_str
     # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
@@ -128,7 +118,7 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     print(f"{len(all_functions)=}")
     for semantic_type in sorted(list(semantic_types)):
         expected_semantic_type_exists_test_str = f"test_{semantic_type}_Exists"
-        print(expected_semantic_type_exists_test_str)
+        # print(expected_semantic_type_exists_test_str)
         assert expected_semantic_type_exists_test_str in all_functions
 
 
@@ -265,7 +255,7 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
         expected_enum_keys = set(ExpectedEnumClass.__dict__.keys())
         current_enum_keys = set(ChKeywordsClass.__dict__.keys())
         # print(expected_enum_keys.difference(current_enum_keys))
-        assert expected_enum_keys.difference(current_enum_keys) == set()
+        assert not expected_enum_keys.difference(current_enum_keys)
         expected_dunder_str_func = """    def __str__(self):
         return self.value
 """
@@ -304,9 +294,7 @@ def test_Chapters_All_semantic_types_NamesAreKeywords():
     # THEN
     # make semantic_type names required keyword str functions
     semantic_types = expected_semantic_types()
-    semantic_keywords_by_chapter = set()
-    for semantic_type in semantic_types:
-        semantic_keywords_by_chapter.add(semantic_type)
+    semantic_keywords_by_chapter = set(semantic_types)
     print(
         f"semantic_types without str function: {sorted(list(semantic_keywords_by_chapter.difference(all_keywords)))}"
     )
