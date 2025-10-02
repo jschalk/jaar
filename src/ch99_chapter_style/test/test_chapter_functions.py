@@ -86,13 +86,10 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "add_rivercycle",
         "add_taxs_bottom",
         "add_taxs_column",
-        "atom_file_exists",
         "del_label",
         "del_otx2inx",
         "env_dir_setup_cleanup",
         "find_replace_rope",
-        "fund_graph0",
-        "get_factunits_dict",
         "get_json",
         "get_chapter_temp_dir",
         "get_obj_key",
@@ -101,7 +98,6 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
         "label_exists",
         "otx_exists",
         "otx2inx_exists",
-        "beliefatom_exists",
         "reveal_inx",
         "set_all_otx2inx",
         "set_knot",
@@ -121,6 +117,10 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     all_functions = chapters_func_class_metrics.get("all_functions")
 
     # THEN
+    for function_name in sorted(all_functions.keys()):
+        func_metrics = all_functions.get(function_name)
+        if func_metrics > 1:
+            print(f"{function_name} {func_metrics=}")
     assertion_fail_str = f"Duplicated functions found: {duplicated_functions}"
     assert not duplicated_functions, assertion_fail_str
     # print(f"{sorted(unnecessarily_excluded_funcs.keys())=}")
@@ -129,7 +129,7 @@ def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
     print(f"{len(all_functions)=}")
     for semantic_type in sorted(list(semantic_types)):
         expected_semantic_type_exists_test_str = f"test_{semantic_type}_Exists"
-        print(expected_semantic_type_exists_test_str)
+        # print(expected_semantic_type_exists_test_str)
         assert expected_semantic_type_exists_test_str in all_functions
 
 

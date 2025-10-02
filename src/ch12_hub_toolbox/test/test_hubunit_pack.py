@@ -379,21 +379,21 @@ def test_HubUnit_del_pack_file_DeletespackjsonAndNotBeliefAtomjsons(
     sue_packunit._beliefdelta.set_beliefatom(get_atom_example_planunit_knee())
     zero_int = 0
     assert sue_hubunit.hub_pack_file_exists(six_int) is False
-    assert sue_hubunit.atom_file_exists(zero_int) is False
+    assert sue_hubunit.h_atom_file_exists(zero_int) is False
 
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
     sue_hubunit.save_pack_file(sue_packunit, correct_invalid_attrs=False)
 
     print(f"{get_dir_file_strs(sue_hubunit._atoms_dir)}")
     assert sue_hubunit.hub_pack_file_exists(six_int)
-    assert sue_hubunit.atom_file_exists(zero_int)
+    assert sue_hubunit.h_atom_file_exists(zero_int)
 
     # WHEN
     sue_hubunit._del_pack_file(sue_packunit._pack_id)
 
     # THEN
     assert sue_hubunit.hub_pack_file_exists(six_int) is False
-    assert sue_hubunit.atom_file_exists(zero_int)
+    assert sue_hubunit.h_atom_file_exists(zero_int)
 
 
 def test_HubUnit_save_pack_file_CanCreateAndModify3packunits(

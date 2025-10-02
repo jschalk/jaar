@@ -63,7 +63,7 @@ class PackUnit:
         self._delta_start = get_init_pack_id_if_None(x_delta_start)
 
     def beliefatom_exists(self, x_beliefatom: BeliefAtom):
-        return self._beliefdelta.beliefatom_exists(x_beliefatom)
+        return self._beliefdelta.c_beliefatom_exists(x_beliefatom)
 
     def get_step_dict(self) -> dict[str, any]:
         return {

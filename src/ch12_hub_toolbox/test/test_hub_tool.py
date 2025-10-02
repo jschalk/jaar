@@ -270,7 +270,8 @@ def test_save_arbitrary_beliefevent_SetsFile_Scenario1_includes_facts(
     )
     gen_sue_belief = open_belief_file(beliefevent_path)
     assert (
-        gen_sue_belief.get_factunits_dict() == expected_sue_belief.get_factunits_dict()
+        gen_sue_belief.get_planroot_factunits_dict()
+        == expected_sue_belief.get_planroot_factunits_dict()
     )
     assert gen_sue_belief.to_dict() == expected_sue_belief.to_dict()
 

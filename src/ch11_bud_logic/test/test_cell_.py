@@ -145,13 +145,13 @@ def test_cellunit_shop_ReturnsObj_Scenario3_clear_facts():
     sue_belief.add_plan(mop_rope, pledge=True)
     sue_belief.edit_reason(mop_rope, clean_fact.fact_context, clean_fact.fact_state)
     sue_belief.add_fact(clean_fact.fact_context, clean_fact.fact_state)
-    assert len(sue_belief.get_factunits_dict()) == 1
+    assert len(sue_belief.get_planroot_factunits_dict()) == 1
 
     # WHEN
     x_cellunit = cellunit_shop(sue_str, beliefadjust=sue_belief)
 
     # THEN
-    assert len(x_cellunit.beliefadjust.get_factunits_dict()) == 0
+    assert len(x_cellunit.beliefadjust.get_planroot_factunits_dict()) == 0
     assert x_cellunit.beliefadjust != sue_belief
 
 
@@ -609,13 +609,13 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario0():
         sue_quota300,
         beliefadjust=sue_belief,
     )
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
 
     # WHEN
     sue_cell.set_beliefadjust_facts()
 
     # THEN
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
 
 
 def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
@@ -642,14 +642,14 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario1():
         beliefadjust=sue_belief,
         beliefevent_facts=clean_facts,
     )
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
 
     # WHEN
     sue_cell.set_beliefadjust_facts()
 
     # THEN
-    assert sue_cell.beliefadjust.get_factunits_dict() != {}
-    sue_belief_facts = sue_cell.beliefadjust.get_factunits_dict()
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
+    sue_belief_facts = sue_cell.beliefadjust.get_planroot_factunits_dict()
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
@@ -684,14 +684,14 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario2():
         beliefevent_facts=clean_facts,
         found_facts=dirty_facts,
     )
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
 
     # WHEN
     sue_cell.set_beliefadjust_facts()
 
     # THEN
-    assert sue_cell.beliefadjust.get_factunits_dict() != {}
-    sue_belief_facts = sue_cell.beliefadjust.get_factunits_dict()
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
+    sue_belief_facts = sue_cell.beliefadjust.get_planroot_factunits_dict()
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
@@ -730,14 +730,14 @@ def test_CellUnit_set_beliefadjust_facts_ReturnsObj_Scenario3():
         found_facts=dirty_facts,
         boss_facts=grimy_facts,
     )
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
 
     # WHEN
     sue_cell.set_beliefadjust_facts()
 
     # THEN
-    assert sue_cell.beliefadjust.get_factunits_dict() != {}
-    sue_belief_facts = sue_cell.beliefadjust.get_factunits_dict()
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
+    sue_belief_facts = sue_cell.beliefadjust.get_planroot_factunits_dict()
     a23_str = "amy23"
     casa_rope = create_rope(a23_str, "casa")
     sue_belief_casa_fact_dict = sue_belief_facts.get(casa_rope)
@@ -859,7 +859,7 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     sue_cell.reason_contexts = set()
     assert not sue_cell.reason_contexts
     assert sue_cell.boss_facts == {sky_blue_fact.fact_context: sky_blue_fact}
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
     assert sue_cell._voice_mandate_ledger == {}
 
     # WHEN
@@ -868,8 +868,8 @@ def test_CellUnit_calc_voice_mandate_ledger_ReturnsObj_Scenario0():
     # THEN
     assert sue_cell.reason_contexts == {clean_fact.fact_context}
     assert sue_cell.boss_facts == {}
-    assert sue_cell.beliefadjust.get_factunits_dict() != {}
-    assert set(sue_cell.beliefadjust.get_factunits_dict().keys()) == {
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
+    assert set(sue_cell.beliefadjust.get_planroot_factunits_dict().keys()) == {
         clean_fact.fact_context
     }
     # plan_dict = sue_cell.beliefadjust.get_plan_dict()
@@ -1053,7 +1053,7 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     sue_cell.reason_contexts = set()
     assert not sue_cell.reason_contexts
     assert sue_cell.boss_facts == {sky_blue_fact.fact_context: sky_blue_fact}
-    assert sue_cell.beliefadjust.get_factunits_dict() == {}
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() == {}
     assert sue_cell._voice_mandate_ledger == {}
 
     # WHEN
@@ -1065,8 +1065,8 @@ def test_create_child_cellunits_ReturnsObj_Scenario3_StateOfCellAdjustIsReset():
     # # THEN
     assert sue_cell.reason_contexts == {dirty_fact.fact_context}
     assert sue_cell.boss_facts == {}
-    assert sue_cell.beliefadjust.get_factunits_dict() != {}
-    assert set(sue_cell.beliefadjust.get_factunits_dict().keys()) == {
+    assert sue_cell.beliefadjust.get_planroot_factunits_dict() != {}
+    assert set(sue_cell.beliefadjust.get_planroot_factunits_dict().keys()) == {
         dirty_fact.fact_context
     }
     # plan_dict = sue_cell.beliefadjust.get_plan_dict()

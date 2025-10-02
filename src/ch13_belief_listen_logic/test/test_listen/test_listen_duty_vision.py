@@ -325,7 +325,7 @@ def test_listen_to_belief_visions_Pipeline_Scenario1_yao_gut_CanOnlyReferenceIts
     assert len(yao_job.to_dict().get(wx.voices)) == 3
     assert len(yao_job._plan_dict) == 4
     print(f"{yao_job._plan_dict.keys()=}")
-    print(f"{yao_job.get_factunits_dict().keys()=}")
+    print(f"{yao_job.get_planroot_factunits_dict().keys()=}")
     assert yao_job.plan_exists(cook_rope()) is False
     assert yao_job.plan_exists(clean_rope()) is False
     assert yao_job.plan_exists(run_rope()) is False

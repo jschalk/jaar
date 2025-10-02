@@ -1379,7 +1379,7 @@ reason_case:    {reason_case}"""
 
         return list_x
 
-    def get_factunits_dict(self) -> dict[str, str]:
+    def get_planroot_factunits_dict(self) -> dict[str, str]:
         x_dict = {}
         if self.planroot.factunits is not None:
             for fact_rope, fact_obj in self.planroot.factunits.items():

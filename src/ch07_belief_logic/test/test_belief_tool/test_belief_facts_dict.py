@@ -14,7 +14,10 @@ def test_get_belief_root_facts_dict_ReturnsObj_Scenario0_No_factunits():
     sue_belief = beliefunit_shop(sue_str)
     # WHEN / THEN
     assert get_belief_root_facts_dict(sue_belief) == {}
-    assert get_belief_root_facts_dict(sue_belief) == sue_belief.get_factunits_dict()
+    assert (
+        get_belief_root_facts_dict(sue_belief)
+        == sue_belief.get_planroot_factunits_dict()
+    )
 
 
 def test_get_belief_root_facts_dict_ReturnsObj_Scenario1_factunits_Exist():
@@ -116,8 +119,8 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario1_Belief1FactsChanged():
         floor_rope: {"fact_context": floor_rope, "fact_state": dirty_rope}
     }
     before_bob_belief = copy_deepcopy(bob_belief)
-    assert bob_belief.get_factunits_dict() != dirty_facts_dict
-    assert bob_belief.get_factunits_dict() == {}
+    assert bob_belief.get_planroot_factunits_dict() != dirty_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() == {}
     assert bob_belief.to_dict() == before_bob_belief.to_dict()
 
     # WHEN
@@ -125,7 +128,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario1_Belief1FactsChanged():
 
     # THEN
     assert bob_belief.to_dict() != before_bob_belief.to_dict()
-    assert bob_belief.get_factunits_dict() == dirty_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() == dirty_facts_dict
 
 
 def test_set_factunits_to_belief_ReturnsObj_Scenario2_FactUnit_reason_context_DoesNotExistInBelief():
@@ -152,8 +155,8 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario2_FactUnit_reason_context_Do
         floor_rope: {"fact_context": floor_rope, "fact_state": clean_rope}
     }
     before_bob_belief = copy_deepcopy(bob_belief)
-    assert bob_belief.get_factunits_dict() != clean_facts_dict
-    assert bob_belief.get_factunits_dict() == {}
+    assert bob_belief.get_planroot_factunits_dict() != clean_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() == {}
     assert bob_belief.to_dict() == before_bob_belief.to_dict()
 
     # WHEN
@@ -161,7 +164,7 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario2_FactUnit_reason_context_Do
 
     # THEN
     assert bob_belief.to_dict() != before_bob_belief.to_dict()
-    assert bob_belief.get_factunits_dict() == clean_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() == clean_facts_dict
     assert bob_belief.get_plan_obj(clean_rope)
 
 
@@ -196,16 +199,16 @@ def test_set_factunits_to_belief_ReturnsObj_Scenario3_FactUnit_reason_context_Wi
         weather_rope: {"fact_context": weather_rope, "fact_state": rain_rope},
     }
     before_bob_belief = copy_deepcopy(bob_belief)
-    assert bob_belief.get_factunits_dict() != two_facts_dict
-    assert bob_belief.get_factunits_dict() == {}
+    assert bob_belief.get_planroot_factunits_dict() != two_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() == {}
     assert bob_belief.to_dict() == before_bob_belief.to_dict()
 
     # WHEN
     set_factunits_to_belief(bob_belief, two_facts_dict)
 
     # THEN
-    assert floor_rope in set(bob_belief.get_factunits_dict().keys())
-    assert weather_rope not in set(bob_belief.get_factunits_dict().keys())
+    assert floor_rope in set(bob_belief.get_planroot_factunits_dict().keys())
+    assert weather_rope not in set(bob_belief.get_planroot_factunits_dict().keys())
     assert bob_belief.to_dict() != before_bob_belief.to_dict()
 
 
@@ -233,12 +236,12 @@ def test_clear_factunits_from_belief_ReturnsObj_Scenario1_FactUnit_Exist():
     floor_facts_dict = {
         floor_rope: {"fact_context": floor_rope, "fact_state": dirty_rope}
     }
-    assert bob_belief.get_factunits_dict() == floor_facts_dict
-    assert bob_belief.get_factunits_dict() != {}
+    assert bob_belief.get_planroot_factunits_dict() == floor_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() != {}
 
     # WHEN
     clear_factunits_from_belief(bob_belief)
 
     # THEN
-    assert bob_belief.get_factunits_dict() != floor_facts_dict
-    assert bob_belief.get_factunits_dict() == {}
+    assert bob_belief.get_planroot_factunits_dict() != floor_facts_dict
+    assert bob_belief.get_planroot_factunits_dict() == {}

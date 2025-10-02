@@ -64,14 +64,14 @@ def test_HubUnit_atom_file_exists_ReturnsObj(env_dir_setup_cleanup):
     yao_hubunit = hubunit_shop(moment_mstr_dir(), moment_label(), yao_str)
     four_int = 4
     assert os_path_exists(yao_hubunit.atom_file_path(four_int)) is False
-    assert yao_hubunit.atom_file_exists(four_int) is False
+    assert yao_hubunit.h_atom_file_exists(four_int) is False
 
     # WHEN
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), four_int)
 
     # THEN
     assert os_path_exists(yao_hubunit.atom_file_path(four_int))
-    assert yao_hubunit.atom_file_exists(four_int)
+    assert yao_hubunit.h_atom_file_exists(four_int)
 
 
 def test_HubUnit_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
@@ -80,13 +80,13 @@ def test_HubUnit_delete_atom_file_DeletesFile(env_dir_setup_cleanup):
     yao_hubunit = hubunit_shop(moment_mstr_dir(), moment_label(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
-    assert yao_hubunit.atom_file_exists(ten_int)
+    assert yao_hubunit.h_atom_file_exists(ten_int)
 
     # WHEN
     yao_hubunit.delete_atom_file(ten_int)
 
     # THEN
-    assert yao_hubunit.atom_file_exists(ten_int) is False
+    assert yao_hubunit.h_atom_file_exists(ten_int) is False
 
 
 def test_HubUnit_get_max_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
@@ -95,7 +95,7 @@ def test_HubUnit_get_max_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
     yao_hubunit = hubunit_shop(moment_mstr_dir(), moment_label(), yao_str)
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
-    assert yao_hubunit.atom_file_exists(ten_int)
+    assert yao_hubunit.h_atom_file_exists(ten_int)
 
     # WHEN / THEN
     assert yao_hubunit.get_max_atom_file_number() == ten_int
@@ -121,7 +121,7 @@ def test_HubUnit_get_next_atom_file_number_ReturnsObj(env_dir_setup_cleanup):
 
     ten_int = 10
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
-    assert yao_hubunit.atom_file_exists(ten_int)
+    assert yao_hubunit.h_atom_file_exists(ten_int)
 
     # WHEN / THEN
     assert yao_hubunit._get_next_atom_file_number() == 11
@@ -135,7 +135,7 @@ def test_HubUnit_save_atom_file_SavesFile(env_dir_setup_cleanup):
     yao_hubunit._save_valid_atom_file(get_atom_example_factunit_knee(), ten_int)
     assert yao_hubunit.get_max_atom_file_number() == ten_int
     eleven_int = ten_int + 1
-    assert yao_hubunit.atom_file_exists(eleven_int) is False
+    assert yao_hubunit.h_atom_file_exists(eleven_int) is False
 
     # WHEN
     atom_num1 = yao_hubunit.save_atom_file(get_atom_example_factunit_knee())
@@ -143,7 +143,7 @@ def test_HubUnit_save_atom_file_SavesFile(env_dir_setup_cleanup):
     # THEN
     assert yao_hubunit.get_max_atom_file_number() != ten_int
     assert yao_hubunit.get_max_atom_file_number() == eleven_int
-    assert yao_hubunit.atom_file_exists(eleven_int)
+    assert yao_hubunit.h_atom_file_exists(eleven_int)
     assert atom_num1 == eleven_int
     atom_num2 = yao_hubunit.save_atom_file(get_atom_example_factunit_knee())
     assert atom_num2 == 12

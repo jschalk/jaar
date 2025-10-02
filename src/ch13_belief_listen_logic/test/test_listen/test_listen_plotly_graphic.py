@@ -1,5 +1,5 @@
 from src.ch13_belief_listen_logic.listen_graphic import (
-    fund_graph0,
+    fund_graph13,
     get_listen_structures0_fig,
     get_listen_structures1_fig,
     get_listen_structures2_fig,
@@ -23,4 +23,4 @@ def test_fund_graph_ShowsGraph(graphics_bool):
     x_beliefunit = get_fund_breakdown_belief()
 
     # THEN
-    fund_graph0(x_beliefunit, "task", graphics_bool)
+    fund_graph13(x_beliefunit, "task", graphics_bool)

@@ -19,7 +19,7 @@ def pytest_generate_tests(metafunc):
     # This is called for every test. Only get/set command line arguments
     # if the argument is specified in the list of test "fixturenames".
     graphics_bool_value = metafunc.config.option.graphics_bool
-    graphics_bool_value = graphics_bool_value == "True"
+    graphics_bool_value = str(graphics_bool_value).lower() == "true"
     if "graphics_bool" in metafunc.fixturenames and graphics_bool_value is not None:
         metafunc.parametrize("graphics_bool", [graphics_bool_value])
     run_big_tests_value = metafunc.config.option.run_big_tests

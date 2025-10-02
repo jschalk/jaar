@@ -80,7 +80,7 @@ class BeliefDelta:
         ]
         set_in_nested_dict(self.beliefatoms, x_keylist, x_beliefatom)
 
-    def beliefatom_exists(self, x_beliefatom: BeliefAtom) -> bool:
+    def c_beliefatom_exists(self, x_beliefatom: BeliefAtom) -> bool:
         if x_beliefatom.is_valid() is False:
             raise InvalidBeliefAtomException(
                 f"""'{x_beliefatom.dimen}' {x_beliefatom.crud_str} BeliefAtom is invalid

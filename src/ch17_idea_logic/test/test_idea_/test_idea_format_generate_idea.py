@@ -55,8 +55,8 @@ def test_make_beliefdelta_Arg_idea_format_00021_belief_voiceunit_v0_0_0():
     #     f"{sue_voice_beliefdelta.beliefatoms.get(wx.INSERT).get(wx.belief_voiceunit).get(sue_str)=}"
     # )
     print(f"{sue_beliefatom=}")
-    assert sue_voice_beliefdelta.beliefatom_exists(sue_beliefatom)
-    assert sue_voice_beliefdelta.beliefatom_exists(bob_beliefatom)
+    assert sue_voice_beliefdelta.c_beliefatom_exists(sue_beliefatom)
+    assert sue_voice_beliefdelta.c_beliefatom_exists(bob_beliefatom)
     assert len(sue_voice_beliefdelta.get_ordered_beliefatoms()) == 3
 
 
@@ -162,8 +162,8 @@ def test_make_beliefdelta_Arg_idea_format_00013_planunit_v0_0_0():
     clean_beliefatom.set_arg(wx.plan_rope, clean_rope)
     clean_beliefatom.set_arg(wx.pledge, True)
     clean_beliefatom.set_arg(wx.star, 1)
-    assert planunit_changunit.beliefatom_exists(casa_beliefatom)
-    assert planunit_changunit.beliefatom_exists(clean_beliefatom)
+    assert planunit_changunit.c_beliefatom_exists(casa_beliefatom)
+    assert planunit_changunit.c_beliefatom_exists(clean_beliefatom)
     assert len(planunit_changunit.get_ordered_beliefatoms()) == 2
 
 

@@ -79,22 +79,22 @@ def test_BeliefDelta_set_beliefatom_RaisesErrorWhen_is_valid_IsFalse():
     assert str(excinfo.value) == exception_str
 
 
-def test_ChangUnit_beliefatom_exists_ReturnsObj_belief_voiceunit_str():
+def test_ChangUnit_c_beliefatom_exists_ReturnsObj_belief_voiceunit_str():
     # ESTABLISH
     bob_str = "Bob"
     x_beliefdelta = beliefdelta_shop()
     bob_beliefatom = beliefatom_shop(wx.belief_voiceunit, wx.INSERT)
     bob_beliefatom.set_arg(wx.voice_name, bob_str)
-    assert not x_beliefdelta.beliefatom_exists(bob_beliefatom)
+    assert not x_beliefdelta.c_beliefatom_exists(bob_beliefatom)
 
     # WHEN
     x_beliefdelta.set_beliefatom(bob_beliefatom)
 
     # THEN
-    assert x_beliefdelta.beliefatom_exists(bob_beliefatom)
+    assert x_beliefdelta.c_beliefatom_exists(bob_beliefatom)
 
 
-def test_ChangUnit_beliefatom_exists_ReturnsObj_belief_voice_membership_str():
+def test_ChangUnit_c_beliefatom_exists_ReturnsObj_belief_voice_membership_str():
     # ESTABLISH
     bob_str = "Bob"
     iowa_str = ";Iowa"
@@ -102,13 +102,13 @@ def test_ChangUnit_beliefatom_exists_ReturnsObj_belief_voice_membership_str():
     bob_iowa_beliefatom = beliefatom_shop(wx.belief_voice_membership, wx.INSERT)
     bob_iowa_beliefatom.set_arg(wx.group_title, iowa_str)
     bob_iowa_beliefatom.set_arg(wx.voice_name, bob_str)
-    assert not x_beliefdelta.beliefatom_exists(bob_iowa_beliefatom)
+    assert not x_beliefdelta.c_beliefatom_exists(bob_iowa_beliefatom)
 
     # WHEN
     x_beliefdelta.set_beliefatom(bob_iowa_beliefatom)
 
     # THEN
-    assert x_beliefdelta.beliefatom_exists(bob_iowa_beliefatom)
+    assert x_beliefdelta.c_beliefatom_exists(bob_iowa_beliefatom)
 
 
 def test_BeliefDelta_get_atom_ReturnsObj():
@@ -619,7 +619,7 @@ def test_BeliefDelta_get_json_ReturnsObj():
     assert x_is_json(beliefdelta_json)
 
 
-def test_BeliefDelta_beliefatom_exists_ReturnsObj():
+def test_BeliefDelta_c_beliefatom_exists_ReturnsObj():
     # ESTABLISH
     x_beliefdelta = beliefdelta_shop()
 
@@ -629,13 +629,13 @@ def test_BeliefDelta_beliefatom_exists_ReturnsObj():
     zia_beliefatom = beliefatom_shop(dimen, wx.INSERT)
     zia_beliefatom.set_arg(wx.voice_name, zia_str)
     zia_beliefatom.set_arg(wx.voice_cred_points, 70)
-    assert x_beliefdelta.beliefatom_exists(zia_beliefatom) is False
+    assert x_beliefdelta.c_beliefatom_exists(zia_beliefatom) is False
 
     # WHEN
     x_beliefdelta.set_beliefatom(zia_beliefatom)
 
     # THEN
-    assert x_beliefdelta.beliefatom_exists(zia_beliefatom)
+    assert x_beliefdelta.c_beliefatom_exists(zia_beliefatom)
 
 
 def test_BeliefDelta_is_empty_ReturnsObj():
