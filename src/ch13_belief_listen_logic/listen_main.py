@@ -6,7 +6,7 @@ from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, RopeTerm
 from src.ch12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
-from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
+from src.ch12_hub_toolbox.hubunit import HubUnit, get_perspective_belief
 from src.ch12_hub_toolbox.keep_tool import get_duty_belief
 from src.ch13_belief_listen_logic.basis_beliefs import (
     create_empty_belief_from_belief,
@@ -51,11 +51,6 @@ def _allocate_inallocable_voice_debt_points(
         speaker_voiceunit.voice_debt_points
     )
     return listener
-
-
-def get_speaker_perspective(speaker: BeliefUnit, listener_belief_name: BeliefName):
-    listener_hubunit = hubunit_shop("", "", listener_belief_name)
-    return listener_hubunit.get_perspective_belief(speaker)
 
 
 def generate_ingest_list(
@@ -170,7 +165,7 @@ def listen_to_speaker_agenda(listener: BeliefUnit, speaker: BeliefUnit) -> Belie
         raise Missing_debtor_respectException(
             f"listener '{listener.belief_name}' belief is assumed to have {speaker.belief_name} voiceunit."
         )
-    perspective_belief = get_speaker_perspective(speaker, listener.belief_name)
+    perspective_belief = get_perspective_belief(speaker, listener.belief_name)
     if perspective_belief.rational is False:
         return _allocate_irrational_voice_debt_points(listener, speaker.belief_name)
     if listener.debtor_respect is None:

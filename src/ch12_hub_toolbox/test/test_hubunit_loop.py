@@ -1,25 +1,23 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic.test._util.ch07_examples import get_beliefunit_with_4_levels
 from src.ch12_hub_toolbox.hub_tool import save_job_file
-from src.ch12_hub_toolbox.hubunit import hubunit_shop
+from src.ch12_hub_toolbox.hubunit import get_perspective_belief, hubunit_shop
 from src.ch12_hub_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
 
 
-def test_HubUnit_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_name():
+def test_get_perspective_belief_ReturnsBeliefWith_belief_nameSetToHubUnit_belief_name():
     # ESTABLISH
     bob_str = "Bob"
     bob_beliefunit = get_beliefunit_with_4_levels()
     bob_beliefunit.set_belief_name(bob_str)
-    a23_str = "amy23"
 
     sue_str = "Sue"
-    sue_hubunit = hubunit_shop(env_dir(), a23_str, sue_str)
 
     # WHEN
-    perspective_beliefunit = sue_hubunit.get_perspective_belief(bob_beliefunit)
+    perspective_beliefunit = get_perspective_belief(bob_beliefunit, sue_str)
 
     # THEN
     assert perspective_beliefunit.to_dict() != bob_beliefunit.to_dict()

@@ -109,11 +109,8 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     bob_str = "Bob"
     assert sue_hubunit.visions_path() == x_visions_path
     assert sue_hubunit.grades_path() == x_grades_path
-    sue_visions_path = sue_hubunit.visions_path()
     sue_grades_path = sue_hubunit.grades_path()
-    x_vision_path = create_path(sue_visions_path, f"{bob_str}.json")
     x_grade_path = create_path(sue_grades_path, f"{bob_str}.json")
-    assert sue_hubunit.vision_path(bob_str) == x_vision_path
     assert sue_hubunit.grade_path(bob_str) == x_grade_path
 
 

@@ -342,6 +342,7 @@ def test_HubUnit_get_packunit_ReturnsObjWhenFilesDoesExist(
 def test_HubUnit_get_packunit_RaisesExceptionWhenFileDoesNotExist(
     env_dir_setup_cleanup,
 ):
+    # sourcery skip: extract-duplicate-method, inline-variable, move-assign-in-block
     # ESTABLISH
     sue_str = "Sue"
     sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str)
@@ -358,9 +359,8 @@ def test_HubUnit_get_packunit_RaisesExceptionWhenFileDoesNotExist(
     six_file_number = 6
     with pytest_raises(Exception) as excinfo:
         sue_hubunit.get_packunit(six_file_number)
-    assert (
-        str(excinfo.value) == f"PackUnit file_number {six_file_number} does not exist."
-    )
+    assertion_failure_str = f"PackUnit file_number {six_file_number} does not exist."
+    assert str(excinfo.value) == assertion_failure_str
 
 
 def test_HubUnit_del_pack_file_DeletespackjsonAndNotBeliefAtomjsons(
