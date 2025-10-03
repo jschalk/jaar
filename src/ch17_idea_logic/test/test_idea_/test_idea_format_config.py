@@ -1,5 +1,4 @@
 from src.ch01_data_toolbox.file_toolbox import get_dir_file_strs
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_elements_sort_order,
@@ -18,6 +17,7 @@ from src.ch17_idea_logic.idea_main import (
     get_idearef_obj,
 )
 from src.ch17_idea_logic.test._util.ch17_env import src_chapter_dir
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_config_str_functions_ReturnsObjs():

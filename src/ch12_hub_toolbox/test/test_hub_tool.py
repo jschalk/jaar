@@ -13,7 +13,6 @@ from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords as wx
 from src.ch12_hub_toolbox.ch12_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
@@ -58,6 +57,7 @@ from src.ch12_hub_toolbox.test._util.ch12_examples import (
     get_budunit_55_example,
     get_budunit_invalid_example,
 )
+from src.ref.ch12_keywords import Ch12Keywords as wx
 
 
 def test_save_belief_file_SetsFile(env_dir_setup_cleanup):

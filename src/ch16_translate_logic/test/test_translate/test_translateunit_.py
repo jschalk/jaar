@@ -5,7 +5,6 @@ from src.ch09_belief_atom_logic.atom_config import (
     get_atom_args_class_types,
 )
 from src.ch15_moment_logic.moment_config import get_moment_args_class_types
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     labelmap_shop,
     namemap_shop,
@@ -33,6 +32,7 @@ from src.ch16_translate_logic.translate_config import (
     translateable_class_types,
 )
 from src.ch16_translate_logic.translate_main import TranslateUnit, translateunit_shop
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def test_get_translate_args_class_types_ReturnsObj():

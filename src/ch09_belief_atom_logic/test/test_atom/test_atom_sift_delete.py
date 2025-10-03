@@ -2,8 +2,8 @@ from src.ch02_rope_logic.rope import to_rope
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch05_reason_logic.reason import factunit_shop, reasonunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop, sift_beliefatom
+from src.ref.ch09_keywords import Ch09Keywords as wx
 
 
 def test_sift_atom_ReturnsObj_BeliefAtom_DELETE_belief_voiceunit():

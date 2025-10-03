@@ -2,7 +2,6 @@
 from os import getcwd as os_getcwd
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path
-from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_config import (
     belief_config_path,
     get_all_belief_calc_args,
@@ -13,6 +12,7 @@ from src.ch07_belief_logic.belief_config import (
     get_belief_config_dict,
     max_tree_traverse_default,
 )
+from src.ref.ch07_keywords import Ch07Keywords as wx
 
 
 def test_max_tree_traverse_default_ReturnsObj() -> str:

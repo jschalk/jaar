@@ -1,4 +1,3 @@
-from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch07_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
@@ -7,6 +6,7 @@ from src.ch07_belief_logic.belief_report import (
 from src.ch07_belief_logic.test._util.ch07_examples import (
     beliefunit_v001_with_large_agenda,
 )
+from src.ref.ch07_keywords import Ch07Keywords as wx
 
 
 def test_get_belief_voiceunits_dataframe_ReturnsDataFrame():

@@ -1,6 +1,5 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch16_translate_logic._ref.ch16_keywords import Ch16Keywords as wx
 from src.ch16_translate_logic.map import (
     TitleMap,
     get_titlemap_from_dict,
@@ -9,6 +8,7 @@ from src.ch16_translate_logic.map import (
     titlemap_shop,
 )
 from src.ch16_translate_logic.translate_config import default_unknown_str_if_None
+from src.ref.ch16_keywords import Ch16Keywords as wx
 
 
 def test_TitleMap_Exists():

@@ -6,7 +6,6 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_moment_beliefs_dir_path,
     create_moment_json_path,
 )
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_main import (
     _get_ote1_max_past_event_int,
     momentunit_shop,
@@ -15,6 +14,7 @@ from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_get_ote1_max_past_event_int_ReturnsObj_Scenaro0(

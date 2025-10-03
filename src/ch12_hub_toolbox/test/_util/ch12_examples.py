@@ -8,7 +8,7 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
 )
 from src.ch11_bud_logic._ref.ch11_semantic_types import LabelTerm
 from src.ch11_bud_logic.bud import BudUnit, budunit_shop
-from src.ch12_hub_toolbox._ref.ch12_keywords import Ch12Keywords as wx
+from src.ref.ch12_keywords import Ch12Keywords as wx
 
 
 def get_ch12_example_moment_label() -> str:

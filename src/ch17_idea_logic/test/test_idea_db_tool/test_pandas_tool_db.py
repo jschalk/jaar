@@ -2,10 +2,10 @@ from os import remove as os_remove
 from os.path import exists as os_path_exists
 from pytest import fixture as pytest_fixture
 from sqlite3 import Connection as sqlite3_Connection, connect as sqlite3_connect
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import get_idea_sqlite_types
 from src.ch17_idea_logic.idea_db_tool import create_idea_table_from_csv, insert_idea_csv
 from src.ch17_idea_logic.test._util.ch17_env import env_dir_setup_cleanup
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 @pytest_fixture

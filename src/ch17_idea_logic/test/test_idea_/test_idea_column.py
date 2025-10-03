@@ -1,5 +1,5 @@
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_main import IdeaRef, idearef_shop
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_IdeaRef_Exists():

@@ -1,4 +1,3 @@
-from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic._ref.ch04_semantic_types import GroupTitle
 from src.ch04_voice_logic.group import groupunit_shop, membership_shop
 from src.ch04_voice_logic.labor import (
@@ -11,6 +10,7 @@ from src.ch04_voice_logic.labor import (
     partyheir_shop,
     partyunit_shop,
 )
+from src.ref.ch04_keywords import Ch04Keywords as wx
 
 
 def test_PartyUnit_Exists():

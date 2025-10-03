@@ -7,7 +7,6 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_event_all_pack_path,
     create_event_expressed_pack_path,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -15,6 +14,7 @@ from src.ch18_etl_toolbox.test._util.ch18_env import (
 from src.ch18_etl_toolbox.transformers import (
     etl_event_pack_json_to_event_inherited_beliefunits,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_etl_event_pack_json_to_event_inherited_beliefunits_SetsFiles_belief_json(

@@ -37,14 +37,15 @@ def rewrite_files_before_tests():
     # This runs before any tests
     print("Rewriting keyword enum class defintions...")
     save_all_keyword_enum_class_python_files()
+    print("Rewriting keyword enum class successful...")
     # No yield needed if you don't need teardown
 
 
 def save_all_keyword_enum_class_python_files():
     keywords_by_chapter = get_keywords_by_chapter(get_keywords_src_config())
     cumlative_keywords = get_cumlative_ch_keywords_dict(keywords_by_chapter)
-
+    dest_dir = "src/ref"
     for chapter_desc, chapter_dir in get_chapter_descs().items():
         chapter_num = int(get_chapter_desc_str_number(chapter_desc))
         chapter_keywords = cumlative_keywords.get(chapter_num)
-        save_keywords_enum_class_file(chapter_dir, chapter_num, chapter_keywords)
+        save_keywords_enum_class_file(dest_dir, chapter_num, chapter_keywords)

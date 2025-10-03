@@ -20,7 +20,6 @@ from src.ch12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_main import (
     MomentUnit,
     get_default_job_listen_count,
@@ -30,6 +29,7 @@ from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_get_default_job_listen_count_ReturnsObj():

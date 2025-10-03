@@ -1,5 +1,4 @@
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
-from src.ch05_reason_logic._ref.ch05_keywords import Ch05Keywords as wx
 from src.ch05_reason_logic.reason import (
     ReasonCore,
     caseunit_shop,
@@ -9,6 +8,7 @@ from src.ch05_reason_logic.reason import (
     reasonheir_shop,
     reasonunit_shop,
 )
+from src.ref.ch05_keywords import Ch05Keywords as wx
 
 
 def test_ReasonCore_Exists():

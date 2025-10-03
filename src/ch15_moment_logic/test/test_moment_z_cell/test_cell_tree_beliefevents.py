@@ -8,7 +8,6 @@ from src.ch12_hub_toolbox.hub_tool import (
     cellunit_add_json_file,
     save_arbitrary_beliefevent,
 )
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_cell import load_cells_beliefevent
 from src.ch15_moment_logic.test._util.ch15_env import (
     env_dir_setup_cleanup,
@@ -17,6 +16,7 @@ from src.ch15_moment_logic.test._util.ch15_env import (
 from src.ch15_moment_logic.test._util.ch15_examples import (
     example_casa_floor_clean_factunit,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_load_cells_beliefevent_SetsFiles_Scenario0_NoFacts(

@@ -1,6 +1,5 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json
-from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.pack import create_packunit_from_files, packunit_shop
 from src.ch10_pack_logic.test._util.ch10_env import (
@@ -12,6 +11,7 @@ from src.ch10_pack_logic.test._util.ch10_examples import (
     get_atom_example_planunit_knee,
     get_atom_example_planunit_sports,
 )
+from src.ref.ch10_keywords import Ch10Keywords as wx
 
 
 def test_PackUnit_save_atom_file_SavesCorrectFile(env_dir_setup_cleanup):

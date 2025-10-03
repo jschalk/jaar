@@ -3,9 +3,9 @@ from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch09_belief_atom_logic.atom_main import beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import beliefdelta_shop
 from src.ch10_pack_logic.test._util.ch10_examples import get_beliefdelta_example1
+from src.ref.ch10_keywords import Ch10Keywords as wx
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_SimplestScenario():

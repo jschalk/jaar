@@ -1,5 +1,4 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     get_cregtime_str,
@@ -11,6 +10,7 @@ from src.ch08_timeline_logic.test._util.ch08_examples import (
     get_tue,
     get_wed,
 )
+from src.ref.ch08_keywords import Ch08Keywords as wx
 
 
 def test_BeliefUnit_set_plan_dict_SetsAll_range_inheritors():

@@ -6,7 +6,6 @@ from src.ch04_voice_logic.labor import laborunit_shop, partyunit_shop
 from src.ch05_reason_logic.reason import factunit_shop
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
-from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic.belief_main import (
     beliefunit_shop,
     get_beliefunit_from_json,
@@ -18,6 +17,7 @@ from src.ch07_belief_logic.test._util.ch07_examples import (
     get_beliefunit_reason_context_ziet_example,
     get_beliefunit_x1_3levels_1reason_1facts,
 )
+from src.ref.ch07_keywords import Ch07Keywords as wx
 
 
 def test_BeliefUnit_to_dict_ReturnsObj_Scenario0():

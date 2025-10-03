@@ -6,12 +6,12 @@ from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import create_idea_sorted_table, upsert_sheet
 from src.ch18_etl_toolbox.tran_sqlstrs import create_prime_tablename
 from src.ch18_etl_toolbox.transformers import get_max_brick_agg_event_int
-from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.world import WorldUnit, worldunit_shop
+from src.ref.ch20_keywords import Ch20Keywords as wx
 
 
 def test_WorldUnit_stance_sheets_to_clarity_mstr_Scenario0_CreatesDatabaseFile(

@@ -3,9 +3,9 @@ from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch03_allot_toolbox.allot import default_grain_num_if_None
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.labor import laborunit_shop
-from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import PlanUnit, planunit_shop
+from src.ref.ch06_keywords import Ch06Keywords as wx
 
 
 def test_PlanUnit_Exists():

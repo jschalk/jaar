@@ -4,7 +4,6 @@ from src.ch16_translate_logic.translate_main import (
     default_knot_if_None,
     default_unknown_str_if_None,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     CREATE_TRLCORE_SOUND_AGG_SQLSTR,
     CREATE_TRLCORE_SOUND_RAW_SQLSTR,
@@ -34,6 +33,7 @@ from src.ch18_etl_toolbox.transformers import (
     update_translate_sound_agg_inconsist_errors,
     update_translate_sound_agg_knot_errors,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_create_insert_into_translate_core_raw_sqlstr_ReturnsObj_PopulatesTable_Scenario0():

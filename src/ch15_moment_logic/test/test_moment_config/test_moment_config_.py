@@ -1,7 +1,6 @@
 from os import getcwd as os_getcwd
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch09_belief_atom_logic.atom_config import get_allowed_class_types
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_config import (
     get_moment_args_class_types,
     get_moment_args_dimen_mapping,
@@ -10,6 +9,7 @@ from src.ch15_moment_logic.moment_config import (
     get_moment_dimens,
     moment_config_path,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_moment_config_path_ReturnsObj_Moment() -> str:

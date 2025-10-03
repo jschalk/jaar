@@ -4,7 +4,6 @@ from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch11_bud_logic.bud import tranbook_shop
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -14,6 +13,7 @@ from src.ch18_etl_toolbox.transformers import (
     etl_moment_json_voice_nets_to_moment_voice_nets_table,
     insert_tranunit_voices_net,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_insert_tranunit_voices_net_PopulatesDatabase():

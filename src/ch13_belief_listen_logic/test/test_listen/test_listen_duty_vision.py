@@ -8,7 +8,6 @@ from src.ch12_hub_toolbox.hub_tool import (
 )
 from src.ch12_hub_toolbox.hubunit import HubUnit, hubunit_shop
 from src.ch12_hub_toolbox.keep_tool import save_duty_belief
-from src.ch13_belief_listen_logic._ref.ch13_keywords import Ch13Keywords as wx
 from src.ch13_belief_listen_logic.listen_main import (
     create_vision_file_from_duty_file,
     listen_to_belief_visions,
@@ -28,6 +27,7 @@ from src.ch13_belief_listen_logic.test._util.ch13_examples import (
     hungry_str,
     run_str,
 )
+from src.ref.ch13_keywords import Ch13Keywords as wx
 
 
 def sanitation_str() -> str:

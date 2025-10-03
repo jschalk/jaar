@@ -1,5 +1,4 @@
 from src.ch01_data_toolbox.plotly_toolbox import conditional_fig_show
-from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
 from src.ch15_moment_logic.moment_report import (
     get_moment_guts_agenda_dataframe,
     get_moment_guts_agenda_plotly_fig,
@@ -16,6 +15,7 @@ from src.ch15_moment_logic.test._util.ch15_examples import (
     create_example_moment3,
     create_example_moment4,
 )
+from src.ref.ch15_keywords import Ch15Keywords as wx
 
 
 def test_get_moment_guts_voices_dataframe_ReturnsObj(

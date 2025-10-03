@@ -9,7 +9,6 @@ from src.ch01_data_toolbox.file_toolbox import open_file
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_config import get_moment_dimens
 from src.ch15_moment_logic.moment_main import get_momentunit_from_json
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
@@ -23,6 +22,7 @@ from src.ch18_etl_toolbox.transformers import (
     create_sound_and_heard_tables,
     etl_heard_agg_tables_to_moment_jsons,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_get_moment_heard_select1_sqlstrs_ReturnsObj_HasAllNeededKeys():

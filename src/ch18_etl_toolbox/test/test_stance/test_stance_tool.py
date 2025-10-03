@@ -16,7 +16,6 @@ from src.ch17_idea_logic.idea_csv_tool import (
     create_init_stance_idea_csv_strs,
 )
 from src.ch17_idea_logic.idea_db_tool import get_sheet_names
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.ch18_path import (
     create_moment_mstr_path,
     create_stance0001_path,
@@ -34,6 +33,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
 )
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_collect_stance_csv_strs_ReturnsObj_Scenario0_NoMomentUnits(

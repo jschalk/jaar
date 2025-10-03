@@ -1,11 +1,11 @@
 from inspect import getdoc as inspect_getdoc
-from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
     MomentLabel,
     MoneyGrain,
     NexusLabel,
 )
+from src.ref.ch07_keywords import Ch07Keywords as wx
 
 
 def test_BeliefName_Exists():

@@ -218,7 +218,7 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
         min_chapter_count = chapters_dict.get(min_chapter_prefix)
         if min_chapter_count <= 2:
             print(f"{keyword=} {min_chapter_prefix} {min_chapter_count=}")
-        assert min_chapter_count != 2
+        assert min_chapter_count != 1
 
 
 def add_ch_keyword_count(keywords_ch_counts: dict, keyword: str, chapter_prefix: str):
@@ -262,7 +262,7 @@ def test_Chapters_KeywordEnumClassesAreCorrectlyTested():
     for chapter_num, ExpectedEnumClass in chXX_keyword_classes.items():
         chapter_desc = chapter_num_descs.get(chapter_num)
         chapter_prefix = get_chapter_desc_prefix(chapter_desc)
-        chapter_ref_keywords_path = f"src.{chapter_desc}._ref.{chapter_prefix}_keywords"
+        chapter_ref_keywords_path = f"src.ref.{chapter_prefix}_keywords"
         print(f"{chapter_ref_keywords_path=}")
 
         # dynamically import the module

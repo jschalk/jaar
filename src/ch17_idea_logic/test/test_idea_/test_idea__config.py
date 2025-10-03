@@ -23,7 +23,6 @@ from src.ch16_translate_logic.translate_config import (
     get_translate_dimens,
     get_translateable_args,
 )
-from src.ch17_idea_logic._ref.ch17_keywords import Ch17Keywords as wx
 from src.ch17_idea_logic.idea_config import (
     get_allowed_curds,
     get_default_sorted_list,
@@ -41,6 +40,7 @@ from src.ch17_idea_logic.idea_config import (
     idea_format_00020_belief_voice_membership_v0_0_0,
     idea_format_00021_belief_voiceunit_v0_0_0,
 )
+from src.ref.ch17_keywords import Ch17Keywords as wx
 
 
 def test_get_idea_elements_sort_order_ReturnsObj():

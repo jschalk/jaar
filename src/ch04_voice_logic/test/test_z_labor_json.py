@@ -1,4 +1,3 @@
-from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic._ref.ch04_semantic_types import GroupTitle
 from src.ch04_voice_logic.labor import (
     get_laborunit_from_dict,
@@ -6,6 +5,7 @@ from src.ch04_voice_logic.labor import (
     partyunit_get_from_dict,
     partyunit_shop,
 )
+from src.ref.ch04_keywords import Ch04Keywords as wx
 
 
 def test_PartyUnit_to_dict_ReturnsObj_Scenario0_solo_IsTrue():

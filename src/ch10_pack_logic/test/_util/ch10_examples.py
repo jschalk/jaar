@@ -1,8 +1,8 @@
 from src.ch02_rope_logic.rope import create_rope
 from src.ch07_belief_logic._ref.ch07_semantic_types import MomentLabel
 from src.ch09_belief_atom_logic.atom_main import BeliefAtom, beliefatom_shop
-from src.ch10_pack_logic._ref.ch10_keywords import Ch10Keywords as wx
 from src.ch10_pack_logic.delta import BeliefDelta, beliefdelta_shop
+from src.ref.ch10_keywords import Ch10Keywords as wx
 
 
 def get_atom_example_planunit_sports(moment_label: MomentLabel = None) -> BeliefAtom:

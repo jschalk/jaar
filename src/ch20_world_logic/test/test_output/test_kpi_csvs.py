@@ -2,12 +2,12 @@ from os.path import exists as os_path_exists
 from pandas import DataFrame
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch17_idea_logic.idea_db_tool import upsert_sheet
-from src.ch20_world_logic._ref.ch20_keywords import Ch20Keywords as wx
 from src.ch20_world_logic.test._util.ch20_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as worlds_dir,
 )
 from src.ch20_world_logic.world import worldunit_shop
+from src.ref.ch20_keywords import Ch20Keywords as wx
 
 
 def test_WorldUnit_create_kpi_csvs_Senario0_EmptyWorld_CreatesFile(

@@ -1,6 +1,5 @@
 from src.ch01_data_toolbox.dict_toolbox import get_from_nested_dict
 from src.ch07_belief_logic.belief_config import get_belief_config_dict
-from src.ch09_belief_atom_logic._ref.ch09_keywords import Ch09Keywords as wx
 from src.ch09_belief_atom_logic._ref.ch09_semantic_types import CRUD_command
 from src.ch09_belief_atom_logic.atom_config import (
     get_all_belief_dimen_delete_keys,
@@ -18,6 +17,7 @@ from src.ch09_belief_atom_logic.atom_config import (
     is_belief_dimen,
     set_mog,
 )
+from src.ref.ch09_keywords import Ch09Keywords as wx
 
 
 def test_CRUD_command_Exists():

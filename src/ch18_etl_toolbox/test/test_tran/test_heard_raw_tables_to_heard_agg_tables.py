@@ -5,7 +5,6 @@ from src.ch17_idea_logic.idea_config import (
     get_default_sorted_list,
     get_idea_config_dict,
 )
-from src.ch18_etl_toolbox._ref.ch18_keywords import Ch18Keywords as wx
 from src.ch18_etl_toolbox.tran_sqlstrs import (
     create_prime_tablename as prime_tbl,
     create_sound_and_heard_tables,
@@ -13,6 +12,7 @@ from src.ch18_etl_toolbox.tran_sqlstrs import (
     get_insert_heard_agg_sqlstrs,
 )
 from src.ch18_etl_toolbox.transformers import etl_heard_raw_tables_to_heard_agg_tables
+from src.ref.ch18_keywords import Ch18Keywords as wx
 
 
 def test_get_insert_heard_agg_sqlstrs_ReturnsObj_CheckMomentDimen():

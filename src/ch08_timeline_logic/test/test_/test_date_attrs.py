@@ -1,6 +1,5 @@
 from datetime import datetime
 from src.ch07_belief_logic.belief_main import BeliefUnit, beliefunit_shop
-from src.ch08_timeline_logic._ref.ch08_keywords import Ch08Keywords as wx
 from src.ch08_timeline_logic.test._util.ch08_examples import (
     add_time_creg_planunit,
     add_time_five_planunit,
@@ -14,6 +13,7 @@ from src.ch08_timeline_logic.timeline_main import (
     TimeLinePoint,
     belieftimelinepoint_shop,
 )
+from src.ref.ch08_keywords import Ch08Keywords as wx
 
 
 def test_TimeLinePoint_Exists():
