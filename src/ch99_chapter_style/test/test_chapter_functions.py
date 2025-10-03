@@ -208,13 +208,14 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
                 if keyword in file_str:
                     add_ch_keyword_count(keywords_in_ch_count, keyword, chapter_prefix)
 
+    # Check that keyword is not introduced before it is used.
     for keyword, chapters_dict in keywords_in_ch_count.items():
         # for chapter_prefix in sorted(chapters_dict.keys()):
         #     chapter_count = chapters_dict.get(chapter_prefix)
         #     # print(f"{keyword=} {chapter_prefix} {chapter_count=}")
         min_chapter_prefix = min(chapters_dict.keys())
         min_chapter_count = chapters_dict.get(min_chapter_prefix)
-        if min_chapter_count < 4:
+        if min_chapter_count <= 2:
             print(f"{keyword=} {min_chapter_prefix} {min_chapter_count=}")
         assert min_chapter_count != 2
 
