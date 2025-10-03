@@ -471,7 +471,7 @@ def test_get_normalized_belief_table_build_ReturnsObj():
     assert beliefunit_columns.get("fund_pool") is not None
     assert beliefunit_columns.get(wx.fund_grain) is not None
     assert beliefunit_columns.get(wx.respect_grain) is not None
-    assert beliefunit_columns.get(wx.penny) is not None
+    assert beliefunit_columns.get(wx.money_grain) is not None
     assert beliefunit_columns.get("tally") is not None
 
     assert len(cat_voiceunit) == 2
@@ -640,7 +640,7 @@ def test_get_atom_args_class_types_ReturnsObj():
     assert x_class_types.get("reason_upper") == "float"
     assert x_class_types.get(wx.numor) == "int"
     assert x_class_types.get("reason_lower") == "float"
-    assert x_class_types.get(wx.penny) == "float"
+    assert x_class_types.get(wx.money_grain) == "float"
     assert x_class_types.get("fact_state") == wx.RopeTerm
     assert x_class_types.get("pledge") == "bool"
     assert x_class_types.get("problem_bool") == "bool"

@@ -90,7 +90,7 @@ def get_atom_args_class_types() -> dict[str, str]:
         "reason_upper": "float",
         "numor": "int",
         "reason_lower": "float",
-        "penny": "float",
+        "money_grain": "float",
         "fact_state": "RopeTerm",
         "pledge": "bool",
         "problem_bool": "bool",

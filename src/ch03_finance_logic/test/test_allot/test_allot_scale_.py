@@ -1,23 +1,10 @@
-from inspect import getdoc as inspect_getdoc
 from pytest import raises as pytest_raises
 from src.ch03_finance_logic.allot import (
-    GrainFloat,
     _allot_missing_scale,
     _create_allot_dict,
     _get_missing_scale_list,
     allot_scale,
 )
-
-
-def test_GrainFloat_Exists():
-    # ESTABLISH
-    x_float = 2.45
-    # WHEN
-    x_grainfloat = GrainFloat(x_float)
-    # THEN
-    assert x_float == x_grainfloat
-    doc_str = "float Class that is supposed to be divisable by a float"
-    assert inspect_getdoc(x_grainfloat) == doc_str
 
 
 def test_create_missing_distribution_list_ReturnsObjScenario00():

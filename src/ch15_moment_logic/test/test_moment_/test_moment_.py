@@ -1,11 +1,7 @@
 from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename, set_dir
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import (
-    default_fund_grain_if_None,
-    default_RespectGrain_if_None,
-    filter_penny,
-)
+from src.ch03_finance_logic.allot import default_grain_num_if_None
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
@@ -53,7 +49,7 @@ def test_MomentUnit_Exists():
     assert not amy_moment.knot
     assert not amy_moment.fund_grain
     assert not amy_moment.respect_grain
-    assert not amy_moment.penny
+    assert not amy_moment.money_grain
     assert not amy_moment.job_listen_rotations
     assert not amy_moment.moment_mstr_dir
     # Calculated fields
@@ -70,7 +66,7 @@ def test_MomentUnit_Exists():
         wx.knot,
         wx.fund_grain,
         wx.respect_grain,
-        wx.penny,
+        wx.money_grain,
         wx.job_listen_rotations,
         "_moment_dir",
         "moment_mstr_dir",
@@ -95,9 +91,9 @@ def test_momentunit_shop_ReturnsMomentUnit():
     assert a23_moment.paybook == tranbook_shop(a23_str)
     assert a23_moment.offi_times == set()
     assert a23_moment.knot == default_knot_if_None()
-    assert a23_moment.fund_grain == default_fund_grain_if_None()
-    assert a23_moment.respect_grain == default_RespectGrain_if_None()
-    assert a23_moment.penny == filter_penny()
+    assert a23_moment.fund_grain == default_grain_num_if_None()
+    assert a23_moment.respect_grain == default_grain_num_if_None()
+    assert a23_moment.money_grain == default_grain_num_if_None()
     assert a23_moment.moment_mstr_dir == get_chapter_temp_dir()
     assert a23_moment.job_listen_rotations == get_default_job_listen_count()
     # Calculated fields
@@ -126,7 +122,7 @@ def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
     slash_str = "/"
     x_fund_grain = 7.0
     x_respect_grain = 9
-    x_penny = 3
+    x_money_grain = 3
     a45_offi_times = {12, 15}
     x_job_listen_rotations = 888
 
@@ -138,7 +134,7 @@ def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
         knot=slash_str,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        penny=x_penny,
+        money_grain=x_money_grain,
         job_listen_rotations=x_job_listen_rotations,
     )
 
@@ -146,7 +142,7 @@ def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
     assert a23_moment.knot == slash_str
     assert a23_moment.fund_grain == x_fund_grain
     assert a23_moment.respect_grain == x_respect_grain
-    assert a23_moment.penny == x_penny
+    assert a23_moment.money_grain == x_money_grain
     assert a23_moment.offi_times == a45_offi_times
     assert a23_moment.job_listen_rotations == x_job_listen_rotations
 
@@ -204,14 +200,14 @@ def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(
     slash_str = "/"
     x_fund_grain = 4
     x_respect_grain = 5
-    x_penny = 6
+    x_money_grain = 6
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        penny=x_penny,
+        money_grain=x_money_grain,
     )
     sue_str = "Sue"
 
@@ -222,7 +218,7 @@ def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(
     assert generated_belief.knot == slash_str
     assert generated_belief.fund_grain == x_fund_grain
     assert generated_belief.respect_grain == x_respect_grain
-    assert generated_belief.penny == x_penny
+    assert generated_belief.money_grain == x_money_grain
 
 
 def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario1_belief_dir_ExistsNoFile(
@@ -256,14 +252,14 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir
     slash_str = "/"
     x_fund_grain = 4
     x_respect_grain = 5
-    x_penny = 6
+    x_money_grain = 6
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        penny=x_penny,
+        money_grain=x_money_grain,
     )
     sue_str = "Sue"
     sue_belief_dir = create_belief_dir_path(moment_mstr_dir, a23_str, sue_str)
@@ -281,7 +277,7 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir
     assert generated_gut.knot == slash_str
     assert generated_gut.fund_grain == x_fund_grain
     assert generated_gut.respect_grain == x_respect_grain
-    assert generated_gut.penny == x_penny
+    assert generated_gut.money_grain == x_money_grain
 
 
 def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario3_FileExistsIsNotReplaced(

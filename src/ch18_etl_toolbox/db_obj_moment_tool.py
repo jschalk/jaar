@@ -42,8 +42,8 @@ def get_moment_dict_from_sqlstrs(
 
     if fund_grain := momentunit_row[5]:
         moment_dict["fund_grain"] = fund_grain
-    if penny := momentunit_row[6]:
-        moment_dict["penny"] = penny
+    if money_grain := momentunit_row[6]:
+        moment_dict["money_grain"] = money_grain
     if respect_grain := momentunit_row[7]:
         moment_dict["respect_grain"] = respect_grain
     if knot := momentunit_row[8]:

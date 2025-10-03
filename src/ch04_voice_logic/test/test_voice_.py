@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import default_RespectGrain_if_None
+from src.ch03_finance_logic.allot import default_grain_num_if_None
 from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic.voice import VoiceUnit, voiceunit_shop
 
@@ -103,7 +103,7 @@ def test_voiceunit_shop_SetsAttributes():
     assert yao_voiceunit.fund_agenda_ratio_give == 0
     assert yao_voiceunit.fund_agenda_ratio_take == 0
     assert yao_voiceunit.knot == default_knot_if_None()
-    assert yao_voiceunit.respect_grain == default_RespectGrain_if_None()
+    assert yao_voiceunit.respect_grain == default_grain_num_if_None()
 
 
 def test_voiceunit_shop_SetsAttributes_knot():
@@ -125,7 +125,7 @@ def test_voiceunit_shop_SetsAttributes_respect_grain():
     yao_voiceunit = voiceunit_shop("Yao", respect_grain=respect_grain_float)
 
     # THEN
-    assert yao_voiceunit.respect_grain == 1
+    assert yao_voiceunit.respect_grain == respect_grain_float
 
 
 def test_VoiceUnit_set_respect_grain_SetsAttribute():

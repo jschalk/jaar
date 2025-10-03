@@ -1,11 +1,25 @@
-class MoneyUnit(float):
-    """MoneyUnit inherits from float class"""
+from src.ch02_rope_logic._ref.ch02_semantic_types import (
+    FirstLabel,
+    LabelTerm,
+    RopeTerm,
+    default_knot_if_None,
+)
+
+
+class GrainNum(float):
+    """GrainNum represents the smallest fraction allowed"""
 
     pass
 
 
-class PennyNum(float):
-    """Smallest Unit of Money"""
+class PoolNum(float):
+    """PoolNum represents the sum of all numbers in play."""
+
+    pass
+
+
+class MoneyNum(float):
+    """MoneyNum inherits from float class"""
 
     pass
 
@@ -18,23 +32,5 @@ class RespectNum(float):
 
 class RespectGrain(float):
     """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
-
-    pass
-
-
-class FundNum(float):
-    """FundNum inherits from float class"""
-
-    pass
-
-
-class FundGrain(float):
-    """Smallest Unit of fund_num"""
-
-    pass
-
-
-class GrainFloat(float):
-    """float Class that is supposed to be divisable by a float"""
 
     pass

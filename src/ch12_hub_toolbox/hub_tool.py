@@ -191,13 +191,13 @@ def cellunit_add_json_file(
     bud_ancestors: list[BeliefName] = None,
     quota: int = None,
     celldepth: int = None,
-    penny: int = None,
+    money_grain: int = None,
 ):
     cell_dir = create_cell_dir_path(
         moment_mstr_dir, moment_label, time_belief_name, bud_time, bud_ancestors
     )
     x_cell = cellunit_shop(
-        time_belief_name, bud_ancestors, event_int, celldepth, penny, quota
+        time_belief_name, bud_ancestors, event_int, celldepth, money_grain, quota
     )
     cellunit_save_to_dir(cell_dir, x_cell)
 

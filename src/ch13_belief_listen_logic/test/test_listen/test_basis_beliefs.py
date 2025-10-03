@@ -1,7 +1,5 @@
-from src.ch03_finance_logic.finance_config import (
-    default_respect_num,
-    validate_respect_num,
-)
+from src.ch03_finance_logic.allot import default_pool_num, validate_pool_num
+from src.ch04_voice_logic.voice import RespectNum
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_main import beliefunit_shop
 from src.ch13_belief_listen_logic.basis_beliefs import (
@@ -15,8 +13,8 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     # ESTABLISH
     yao_str = "Yao"
     slash_str = "/"
-    penny_float = 0.7
-    yao_gut = beliefunit_shop(yao_str, knot=slash_str, penny=penny_float)
+    money_grain_float = 0.7
+    yao_gut = beliefunit_shop(yao_str, knot=slash_str, money_grain=money_grain_float)
     yao_gut.set_l1_plan(planunit_shop("Iowa"))
     zia_str = "Zia"
     zia_voice_cred_points = 47
@@ -51,11 +49,11 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
     assert yao_empty_vision.fund_grain == yao_gut.fund_grain
     assert yao_empty_vision.respect_grain == yao_gut.respect_grain
-    assert yao_empty_vision.penny == yao_gut.penny
+    assert yao_empty_vision.money_grain == yao_gut.money_grain
     assert yao_empty_vision.credor_respect != yao_gut.credor_respect
-    assert yao_empty_vision.credor_respect == validate_respect_num()
+    assert yao_empty_vision.credor_respect == RespectNum(validate_pool_num())
     assert yao_empty_vision.debtor_respect != yao_gut.debtor_respect
-    assert yao_empty_vision.debtor_respect == validate_respect_num()
+    assert yao_empty_vision.debtor_respect == RespectNum(validate_pool_num())
     yao_empty_vision.cashout()
     assert yao_empty_vision.voices == {}
 
@@ -149,8 +147,8 @@ def test_get_default_job_ReturnsObj():
     assert default_job.fund_pool == sue_voice_pool
     assert default_job.fund_grain == x_fund_grain
     assert default_job.respect_grain == x_respect_grain
-    assert default_job.credor_respect == default_respect_num()
-    assert default_job.debtor_respect == default_respect_num()
+    assert default_job.credor_respect == RespectNum(default_pool_num())
+    assert default_job.debtor_respect == RespectNum(default_pool_num())
     assert default_job.max_tree_traverse == sue_max_tree_traverse
     assert len(default_job.get_voiceunits_dict()) == 1
     assert len(default_job._plan_dict) == 1

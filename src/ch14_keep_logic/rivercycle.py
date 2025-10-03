@@ -49,7 +49,7 @@ def create_riverbook(
     x_riverbook._rivergrants = allot_scale(
         ledger=keep_credorledger,
         scale_number=book_point_amount,
-        grain_unit=x_riverbook.hubunit.penny,
+        grain_unit=x_riverbook.hubunit.money_grain,
     )
     return x_riverbook
 

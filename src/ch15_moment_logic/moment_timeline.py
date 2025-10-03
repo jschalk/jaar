@@ -18,7 +18,7 @@ def get_moment_belieftimelinepoint(momentunit: MomentUnit) -> BeliefTimelinePoin
         knot=momentunit.knot,
         fund_grain=momentunit.fund_grain,
         respect_grain=momentunit.respect_grain,
-        penny=momentunit.penny,
+        money_grain=momentunit.money_grain,
     )
     timeline_rope = get_timeline_rope(
         nexus_label=momentunit.moment_label,

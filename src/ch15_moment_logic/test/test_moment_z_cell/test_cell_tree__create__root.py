@@ -135,11 +135,11 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     # ESTABLISH
     mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
-    a23_penny = 2
+    a23_money_grain = 2
 
     # Create MomentUnit with bob bud at time 37
-    amy23_moment = momentunit_shop(a23_str, mstr_dir, penny=a23_penny)
-    print(f"{amy23_moment.penny=}")
+    amy23_moment = momentunit_shop(a23_str, mstr_dir, money_grain=a23_money_grain)
+    print(f"{amy23_moment.money_grain=}")
     bob_str = "Bob"
     timepoint37 = 37
     bud1_quota = 450
@@ -170,5 +170,5 @@ def test_MomentUnit_create_buds_root_cells_Scenaro3_BudExistsNotPerfectMatch_bud
     assert cell_dict.get(wx.event_int) == event3
     assert cell_dict.get(wx.celldepth) == bud1_celldepth
     assert cell_dict.get(wx.bud_belief_name) == bob_str
-    assert cell_dict.get(wx.penny) == a23_penny
+    assert cell_dict.get(wx.money_grain) == a23_money_grain
     assert cell_dict.get(wx.quota) == bud1_quota

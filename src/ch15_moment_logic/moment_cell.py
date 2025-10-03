@@ -9,7 +9,6 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_json,
 )
 from src.ch03_finance_logic.allot import allot_nested_scale
-from src.ch03_finance_logic.finance_config import FundNum
 from src.ch05_reason_logic.reason import get_dict_from_factunits
 from src.ch08_timeline_logic.timeline_main import TimeLinePoint
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, LabelTerm
@@ -34,6 +33,7 @@ from src.ch12_hub_toolbox.hub_tool import (
     get_beliefs_downhill_event_ints,
     open_belief_file,
 )
+from src.ch15_moment_logic._ref.ch15_semantic_types import FundNum
 from src.ch15_moment_logic.ch15_path import BUD_MANDATE_FILENAME
 from src.ch15_moment_logic.moment_main import get_momentunit_from_dict
 
@@ -98,7 +98,7 @@ def _exists_create_cell_tree(moment_mstr_dir, moment_label, bud_belief_name, bud
                             event_int=downhill_event_int,
                             celldepth=child_celldepth,
                             bud_belief_name=bud_belief_name,
-                            penny=parent_cell.penny,
+                            money_grain=parent_cell.money_grain,
                             quota=quota_amount,
                         )
                         cells_to_evaluate.append(child_cellunit)
@@ -305,7 +305,7 @@ def generate_cell_from_decree(
             ancestors=x_decree.get_child_cell_ancestors(cell_belief_name),
             event_int=downhill_event_int,
             celldepth=x_decree.cell_celldepth,
-            penny=beliefevent.penny,
+            money_grain=beliefevent.money_grain,
             quota=None,
             mandate=x_decree.cell_mandate,
         )
@@ -342,7 +342,7 @@ def create_bud_mandate_ledgers(moment_mstr_dir: str, moment_label: str):
                 bud_root_dir,
                 src_filename=CELL_MANDATE_FILENAME,
                 scale_number=budunit.quota,
-                grain_unit=momentunit.penny,
+                grain_unit=momentunit.money_grain,
                 depth=budunit.celldepth,
                 dst_filename=BUD_MANDATE_FILENAME,
             )

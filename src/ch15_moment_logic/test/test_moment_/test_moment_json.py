@@ -1,10 +1,6 @@
 from src.ch01_data_toolbox.file_toolbox import create_path, save_file
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import (
-    default_fund_grain_if_None,
-    default_RespectGrain_if_None,
-    filter_penny,
-)
+from src.ch03_finance_logic.allot import default_grain_num_if_None
 from src.ch08_timeline_logic.timeline_main import get_default_timeline_config_dict
 from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic._ref.ch15_keywords import Ch15Keywords as wx
@@ -60,9 +56,9 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
     assert x_dict.get(wx.timeline) == get_default_timeline_config_dict()
     assert x_dict.get(offi_times_str) == list(a45_offi_times)
     assert x_dict.get(wx.knot) == default_knot_if_None()
-    assert x_dict.get(wx.fund_grain) == default_fund_grain_if_None()
-    assert x_dict.get(wx.respect_grain) == default_RespectGrain_if_None()
-    assert x_dict.get(wx.penny) == filter_penny()
+    assert x_dict.get(wx.fund_grain) == default_grain_num_if_None()
+    assert x_dict.get(wx.respect_grain) == default_grain_num_if_None()
+    assert x_dict.get(wx.money_grain) == default_grain_num_if_None()
     assert x_dict.get(wx.beliefbudhistorys) == amy_moment._get_beliefbudhistorys_dict()
     assert x_dict.get(wx.paybook) == amy_moment.paybook.to_dict()
     assert set(x_dict.keys()) == {
@@ -74,7 +70,7 @@ def test_MomentUnit_to_dict_ReturnsObjWith_paybook():
         wx.knot,
         wx.fund_grain,
         wx.respect_grain,
-        wx.penny,
+        wx.money_grain,
         wx.paybook,
     }
 
@@ -98,7 +94,7 @@ def test_MomentUnit_to_dict_ReturnsObjWithOut_paybook():
         wx.knot,
         wx.fund_grain,
         wx.respect_grain,
-        wx.penny,
+        wx.money_grain,
     }
 
 
@@ -138,7 +134,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     sue_knot = "/"
     sue_fund_grain = 0.3
     sue_respect_grain = 2
-    sue_penny = 3
+    sue_money_grain = 3
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -155,7 +151,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     amy_moment.knot = sue_knot
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
-    amy_moment.penny = sue_penny
+    amy_moment.money_grain = sue_money_grain
     amy_moment.add_paypurchase(
         belief_name=bob_str,
         voice_name=sue_str,
@@ -175,7 +171,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario0_WithParameters():
     assert x_moment.knot == sue_knot
     assert x_moment.fund_grain == sue_fund_grain
     assert x_moment.respect_grain == sue_respect_grain
-    assert x_moment.penny == sue_penny
+    assert x_moment.money_grain == sue_money_grain
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.paybook == amy_moment.paybook
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
@@ -193,7 +189,7 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     x_dict.pop("knot")
     x_dict.pop("fund_grain")
     x_dict.pop("respect_grain")
-    x_dict.pop("penny")
+    x_dict.pop("money_grain")
 
     # WHEN
     generated_moment = get_momentunit_from_dict(x_dict)
@@ -205,9 +201,9 @@ def test_get_momentunit_from_dict_ReturnsMomentUnit_Scenario1_WithOutParameters(
     assert generated_moment.timeline == amy_moment.timeline
     assert generated_moment.offi_times == set()
     assert generated_moment.knot == default_knot_if_None()
-    assert generated_moment.fund_grain == default_fund_grain_if_None()
-    assert generated_moment.respect_grain == default_RespectGrain_if_None()
-    assert generated_moment.penny == 1
+    assert generated_moment.fund_grain == default_grain_num_if_None()
+    assert generated_moment.respect_grain == default_grain_num_if_None()
+    assert generated_moment.money_grain == 1
     assert generated_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert generated_moment.paybook == amy_moment.paybook
     assert generated_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
@@ -225,7 +221,7 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     sue_knot = "/"
     sue_fund_grain = 0.3
     sue_respect_grain = 2
-    sue_penny = 3
+    sue_money_grain = 3
     bob_str = "Bob"
     bob_x0_bud_time = 702
     bob_x0_quota = 33
@@ -240,7 +236,7 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     amy_moment.knot = sue_knot
     amy_moment.fund_grain = sue_fund_grain
     amy_moment.respect_grain = sue_respect_grain
-    amy_moment.penny = sue_penny
+    amy_moment.money_grain = sue_money_grain
     amy_json = amy_moment.get_json()
 
     # WHEN
@@ -253,7 +249,7 @@ def test_get_momentunit_from_json_ReturnsMomentUnit():
     assert x_moment.knot == sue_knot
     assert x_moment.fund_grain == sue_fund_grain
     assert x_moment.respect_grain == sue_respect_grain
-    assert x_moment.penny == sue_penny
+    assert x_moment.money_grain == sue_money_grain
     assert x_moment.beliefbudhistorys == amy_moment.beliefbudhistorys
     assert x_moment.moment_mstr_dir == amy_moment.moment_mstr_dir
     assert x_moment != amy_moment

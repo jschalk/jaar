@@ -106,7 +106,7 @@ def get_translate_args_class_types() -> dict[str, str]:
         "numor": "int",
         "offi_time": "TimeLinePoint",
         "belief_name": "NameTerm",
-        "penny": "float",
+        "money_grain": "float",
         "job_listen_rotations": "int",
         "pledge": "bool",
         "problem_bool": "bool",

@@ -82,7 +82,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert translate_args_class_types.get("offi_time") == "TimeLinePoint"
     assert translate_args_class_types.get("belief_name") == wx.NameTerm
     assert translate_args_class_types.get("reason_lower") == "float"
-    assert translate_args_class_types.get("penny") == "float"
+    assert translate_args_class_types.get("money_grain") == "float"
     assert translate_args_class_types.get("fact_state") == wx.RopeTerm
     assert translate_args_class_types.get("pledge") == "bool"
     assert translate_args_class_types.get("problem_bool") == "bool"
@@ -112,7 +112,7 @@ def test_get_translate_args_class_types_ReturnsObj():
     assert atom_args & (moment_args) == {
         wx.voice_name,
         wx.fund_grain,
-        wx.penny,
+        wx.money_grain,
         wx.respect_grain,
     }
     assert atom_args.union(moment_args) != translate_args

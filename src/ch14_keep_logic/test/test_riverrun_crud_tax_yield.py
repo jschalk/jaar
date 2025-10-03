@@ -59,9 +59,13 @@ def test_RiverRun_reset_tax_yields_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
-    bob_penny = 1
+    bob_money_grain = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
+        None,
+        None,
+        bob_str,
+        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_money_amount,
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -85,9 +89,13 @@ def test_RiverRun_voice_has_tax_yield_ReturnsBool():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
-    bob_penny = 1
+    bob_money_grain = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
+        None,
+        None,
+        bob_str,
+        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_money_amount,
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
@@ -118,9 +126,13 @@ def test_RiverRun_delete_tax_yield_SetsAttr():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 88
-    bob_penny = 11
+    bob_money_grain = 11
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
+        None,
+        None,
+        bob_str,
+        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_money_amount,
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     yao_str = "Yao"
@@ -138,9 +150,13 @@ def test_RiverRun_get_voice_tax_yield_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
-    bob_penny = 1
+    bob_money_grain = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
+        None,
+        None,
+        bob_str,
+        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_money_amount,
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -171,9 +187,13 @@ def test_RiverRun_add_voice_tax_yield_ReturnsObj():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
-    bob_penny = 1
+    bob_money_grain = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
+        None,
+        None,
+        bob_str,
+        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_money_amount,
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"
@@ -203,9 +223,13 @@ def test_RiverRun_levy_tax_due_SetsAttr_ScenarioY():
     # ESTABLISH
     bob_str = "Bob"
     bob_money_amount = 1000
-    bob_penny = 1
+    bob_money_grain = 1
     bob_hubunit = hubunit_shop(
-        None, None, bob_str, penny=bob_penny, keep_point_magnitude=bob_money_amount
+        None,
+        None,
+        bob_str,
+        money_grain=bob_money_grain,
+        keep_point_magnitude=bob_money_amount,
     )
     bob_riverrun = riverrun_shop(bob_hubunit)
     sue_str = "Sue"

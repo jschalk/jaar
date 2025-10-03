@@ -163,7 +163,7 @@ def get_idea_elements_sort_order() -> list[str]:
         "take_force",
         "tally",
         "fund_grain",
-        "penny",
+        "money_grain",
         "respect_grain",
         "amount",
         "otx_label",
@@ -338,7 +338,7 @@ def get_idea_sqlite_types() -> dict[str, str]:
         "problem_bool": "INTEGER",
         "take_force": "REAL",
         "tally": "INTEGER",
-        "penny": "REAL",
+        "money_grain": "REAL",
         "respect_grain": "REAL",
         "amount": "REAL",
         "month_label": "TEXT",
@@ -697,7 +697,7 @@ def get_idea_format_filename(idea_number: str) -> str:
 
 def get_idea_format_headers() -> dict[str, list[str]]:
     return {
-        "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,penny,respect_grain,knot,job_listen_rotations": idea_format_00000_momentunit_v0_0_0(),
+        "moment_label,timeline_label,c400_number,yr1_jan1_offset,monthday_index,fund_grain,money_grain,respect_grain,knot,job_listen_rotations": idea_format_00000_momentunit_v0_0_0(),
         "moment_label,belief_name,bud_time,quota,celldepth": idea_format_00001_moment_budunit_v0_0_0(),
         "moment_label,belief_name,voice_name,tran_time,amount": idea_format_00002_moment_paybook_v0_0_0(),
         "moment_label,cumulative_minute,hour_label": idea_format_00003_moment_timeline_hour_v0_0_0(),
@@ -717,7 +717,7 @@ def get_idea_format_headers() -> dict[str, list[str]]:
         "moment_label,belief_name,plan_rope,reason_context,reason_state,reason_upper,reason_lower,reason_divisor": idea_format_00026_belief_plan_reason_caseunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,reason_context,reason_active_requisite": idea_format_00027_belief_plan_reasonunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,begin,close,addin,numor,denom,morph,gogo_want,stop_want,star,pledge,problem_bool": idea_format_00028_belief_planunit_v0_0_0(),
-        "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,penny,respect_grain": idea_format_00029_beliefunit_v0_0_0(),
+        "moment_label,belief_name,credor_respect,debtor_respect,fund_pool,max_tree_traverse,tally,fund_grain,money_grain,respect_grain": idea_format_00029_beliefunit_v0_0_0(),
         "moment_label,belief_name,plan_rope,healer_name,problem_bool": idea_format_00036_problem_healer_v0_0_0(),
         "otx_title,inx_title,otx_knot,inx_knot,unknown_str": idea_format_00042_translate_title_v0_0_0(),
         "otx_name,inx_name,otx_knot,inx_knot,unknown_str": idea_format_00043_translate_name_v0_0_0(),

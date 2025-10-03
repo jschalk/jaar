@@ -16,7 +16,7 @@ class BeliefTable(Base):
     fund_pool = Column(Float)
     fund_grain = Column(Float)
     respect_grain = Column(Float)
-    penny = Column(Float)
+    money_grain = Column(Float)
     tally = Column(Integer)
 
 

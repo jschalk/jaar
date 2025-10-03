@@ -495,7 +495,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     das = []
     quota500 = 500
     celldepth4 = 4
-    penny6 = 6
+    money_grain6 = 6
     assert os_path_exists(sue7_cell_path) is False
 
     # WHEN
@@ -507,7 +507,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
         quota=quota500,
         event_int=event3,
         celldepth=celldepth4,
-        penny=penny6,
+        money_grain=money_grain6,
         bud_ancestors=das,
     )
 
@@ -519,7 +519,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario0(env_dir_setup_cleanup):
     assert generated_cell_dict.get(wx.event_int) == event3
     assert generated_cell_dict.get(wx.celldepth) == celldepth4
     assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
-    assert generated_cell_dict.get(wx.penny) == penny6
+    assert generated_cell_dict.get(wx.money_grain) == money_grain6
     assert generated_cell_dict.get(wx.quota) == quota500
 
 
@@ -550,7 +550,7 @@ def test_cellunit_add_json_file_SetsFile_Scenario1_ManyParametersEmpty(
     assert generated_cell_dict.get(wx.event_int) == event3
     assert generated_cell_dict.get(wx.celldepth) == 0
     assert generated_cell_dict.get(wx.bud_belief_name) == sue_str
-    assert generated_cell_dict.get(wx.penny) == 1
+    assert generated_cell_dict.get(wx.money_grain) == 1
     assert generated_cell_dict.get(wx.quota) == CELLNODE_QUOTA_DEFAULT
 
 
@@ -654,7 +654,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
     sue_ancestors = [sue_str]
     sue_event7 = 7
     sue_celldepth3 = 3
-    sue_penny2 = 2
+    sue_money_grain2 = 2
     sue_quota300 = 300
     sue_mandate = 444
     a23_str = "amy23"
@@ -681,7 +681,7 @@ def test_create_cell_voice_mandate_ledger_json_CreatesFile_Scenario1(
         ancestors=sue_ancestors,
         event_int=sue_event7,
         celldepth=sue_celldepth3,
-        penny=sue_penny2,
+        money_grain=sue_money_grain2,
         quota=sue_quota300,
         beliefadjust=sue_belief,
         beliefevent_facts=sue_beliefevent_factunits,

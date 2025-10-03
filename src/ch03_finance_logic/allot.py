@@ -1,9 +1,27 @@
 from copy import copy as copy_copy
 from os.path import exists as os_path_exists
 from pathlib import Path
-from src.ch01_data_toolbox.dict_toolbox import get_0_if_None
+from src.ch01_data_toolbox.dict_toolbox import get_0_if_None, get_1_if_None
 from src.ch01_data_toolbox.file_toolbox import create_path, open_json, save_json
-from src.ch03_finance_logic._ref.ch03_semantic_types import GrainFloat
+from src.ch03_finance_logic._ref.ch03_semantic_types import GrainNum, PoolNum
+
+
+def default_grain_num_if_None(grain_num: GrainNum = None) -> GrainNum:
+    return get_1_if_None(grain_num)
+
+
+def default_pool_num() -> PoolNum:
+    return PoolNum(1000000000.0)
+
+
+def validate_pool_num(x_pool_num: PoolNum = None) -> PoolNum:
+    x_pool_num = default_pool_num() if x_pool_num is None else x_pool_num
+    return max(get_1_if_None(x_pool_num), default_grain_num_if_None())
+
+
+def valid_allotment_ratio(big_number: float, grain_num: float) -> bool:
+    """Checks that big_number is wholly divisible by grain_num"""
+    return (big_number % grain_num) == 0
 
 
 class missing_base_residual_Exception(Exception):
@@ -11,8 +29,8 @@ class missing_base_residual_Exception(Exception):
 
 
 def _get_missing_scale_list(
-    missing_scale: GrainFloat, grain_unit: float, list_length: int
-) -> list[GrainFloat]:
+    missing_scale: GrainNum, grain_unit: float, list_length: int
+) -> list[GrainNum]:
     if list_length == 0 or missing_scale == 0:
         return []
     missing_avg = missing_scale / list_length
@@ -47,11 +65,11 @@ def _get_missing_scale_list(
 
 
 def _allot_missing_scale(
-    ledger: dict[str, GrainFloat],
-    scale_number: GrainFloat,
+    ledger: dict[str, GrainNum],
+    scale_number: GrainNum,
     grain_unit: float,
     missing_scale: float,
-) -> dict[str, GrainFloat]:
+) -> dict[str, GrainNum]:
     missing_scale_list = _get_missing_scale_list(missing_scale, grain_unit, len(ledger))
     changes_ledger_list = []
     if missing_scale != 0:
@@ -76,7 +94,7 @@ def _allot_missing_scale(
 
 
 def _calc_allot_value(
-    obj, ledger_value_total, scale_number: GrainFloat, grain_unit: float
+    obj, ledger_value_total, scale_number: GrainNum, grain_unit: float
 ):
     if ledger_value_total == 0:
         return 0
@@ -87,8 +105,8 @@ def _calc_allot_value(
 
 
 def _create_allot_dict(
-    ledger: dict[str, float], scale_number: GrainFloat, grain_unit: float
-) -> dict[str, GrainFloat]:
+    ledger: dict[str, float], scale_number: GrainNum, grain_unit: float
+) -> dict[str, GrainNum]:
     # Calculate the total sum of ledger allots
     ledger_value_total = sum(ledger.values())
     return {
@@ -98,8 +116,8 @@ def _create_allot_dict(
 
 
 def allot_scale(
-    ledger: dict[str, float], scale_number: GrainFloat, grain_unit: float
-) -> dict[str, GrainFloat]:
+    ledger: dict[str, float], scale_number: GrainNum, grain_unit: float
+) -> dict[str, GrainNum]:
     """
     allots the scale_number among ledger with float values with a resolution of the grain unit.
 
@@ -132,11 +150,11 @@ def allot_scale(
 def allot_nested_scale(
     x_dir: str,
     src_filename: str,
-    scale_number: GrainFloat,
+    scale_number: GrainNum,
     grain_unit: float,
     depth: int,
     dst_filename: str = None,
-) -> dict[str, GrainFloat]:
+) -> dict[str, GrainNum]:
     root_file_path = create_path(x_dir, src_filename)
     root_ledger = open_json(root_file_path)
     root_allot = allot_scale(root_ledger, scale_number, grain_unit)

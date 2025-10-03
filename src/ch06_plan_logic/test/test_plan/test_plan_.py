@@ -1,6 +1,6 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
-from src.ch03_finance_logic.finance_config import default_fund_grain_if_None
+from src.ch03_finance_logic.allot import default_grain_num_if_None
 from src.ch04_voice_logic.group import awardunit_shop
 from src.ch04_voice_logic.labor import laborunit_shop
 from src.ch06_plan_logic._ref.ch06_keywords import Ch06Keywords as wx
@@ -165,7 +165,7 @@ def test_planunit_shop_ReturnsObj_WithOneParameter():
     assert x_planunit.tree_level is None
     assert x_planunit.active_hx == {}
     assert x_planunit.fund_ratio is None
-    assert x_planunit.fund_grain == default_fund_grain_if_None()
+    assert x_planunit.fund_grain == default_grain_num_if_None()
     assert x_planunit.fund_onset is None
     assert x_planunit.fund_cease is None
     assert x_planunit.reasonunits == {}

@@ -1,9 +1,13 @@
 from src.ch05_reason_logic._ref.ch05_semantic_types import (
     FirstLabel,
+    FundGrain,
+    FundNum,
     GroupTitle,
     HealerName,
     LabelTerm,
     NameTerm,
+    RespectGrain,
+    RespectNum,
     RopeTerm,
     TitleTerm,
     VoiceName,

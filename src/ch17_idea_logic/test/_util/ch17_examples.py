@@ -7,7 +7,7 @@ JEFFY45_STR = "jeffy45"
 
 def get_ex1_br00000_df() -> DataFrame:
     """idea_format_00000_momentunit_v0_0_0
-    c400_number,moment_label,fund_grain,monthday_index,penny,respect_grain,knot,timeline_label,yr1_jan1_offset
+    c400_number,moment_label,fund_grain,monthday_index,money_grain,respect_grain,knot,timeline_label,yr1_jan1_offset
     """
     x_df = DataFrame(
         columns=[
@@ -15,7 +15,7 @@ def get_ex1_br00000_df() -> DataFrame:
             wx.moment_label,
             wx.fund_grain,
             wx.monthday_index,
-            wx.penny,
+            wx.money_grain,
             wx.respect_grain,
             wx.knot,
             wx.timeline_label,
@@ -119,7 +119,7 @@ def get_ex1_br00005_df() -> DataFrame:
 
 def get_ex2_br00000_df() -> DataFrame:
     """idea_format_00000_momentunit_v0_0_0
-    c400_number,moment_label,fund_grain,monthday_index,penny,respect_grain,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
+    c400_number,moment_label,fund_grain,monthday_index,money_grain,respect_grain,knot,timeline_label,yr1_jan1_offset,job_listen_rotations
     """
     x_df = DataFrame(
         columns=[
@@ -127,7 +127,7 @@ def get_ex2_br00000_df() -> DataFrame:
             wx.moment_label,
             wx.fund_grain,
             wx.monthday_index,
-            wx.penny,
+            wx.money_grain,
             wx.respect_grain,
             wx.knot,
             wx.timeline_label,

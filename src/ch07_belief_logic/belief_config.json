@@ -398,7 +398,7 @@
         "sqlite_datatype": "INTEGER"
       }, 
       "offtrack_fund": {"class_type": "float", "populate_by_cashout": true, "sqlite_datatype": "REAL"}, 
-      "penny": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
+      "money_grain": {"class_type": "float", "populate_by_cashout": false, "sqlite_datatype": "REAL"}, 
       "rational": {
         "class_type": "bool", 
         "populate_by_cashout": true, 

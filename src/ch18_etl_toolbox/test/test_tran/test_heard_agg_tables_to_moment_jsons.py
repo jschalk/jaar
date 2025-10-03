@@ -110,7 +110,7 @@ def test_get_moment_heard_select1_sqlstrs_ReturnsObj():
         assert gen_blfweek_sqlstr == blfweek_sql
         assert gen_blfoffi_sqlstr == blfoffi_sql
         assert gen_momentunit_sqlstr == momentunit_sql
-        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, penny, respect_grain, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
+        static_example_sqlstr = f"SELECT moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, money_grain, respect_grain, knot, job_listen_rotations FROM momentunit_h_agg WHERE moment_label = '{a23_str}'"
         assert gen_momentunit_sqlstr == static_example_sqlstr
 
 

@@ -45,16 +45,17 @@ def expected_semantic_types() -> set:
         "FaceName",
         "FundGrain",
         "FundNum",
-        "GrainFloat",
+        "GrainNum",
         "GroupTitle",
         "HealerName",
         "KnotTerm",
         "LabelTerm",
         "LobbyID",
         "MomentLabel",
-        "MoneyUnit",
+        "MoneyNum",
         "NameTerm",
-        "PennyNum",
+        "MoneyGrain",
+        "PoolNum",
         "RespectNum",
         "RopeTerm",
         "TimeLineLabel",
@@ -65,7 +66,7 @@ def expected_semantic_types() -> set:
     }
 
 
-def test_Chapters_MostFunctionsAreUniquelyNamedAnd_semantic_types_AreKnown():
+def test_Chapters_CheckStringMetricsFromEveryFile():
     # sourcery skip: no-conditionals-in-tests
     # ESTABLISH
     excluded_functions = {

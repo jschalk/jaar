@@ -9,12 +9,13 @@ from src.ch02_rope_logic.rope import (
     is_labelterm,
     validate_labelterm,
 )
-from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import (
+from src.ch03_finance_logic.allot import allot_scale, default_grain_num_if_None
+from src.ch04_voice_logic._ref.ch04_semantic_types import (
+    FundNum,
+    RespectGrain,
     RespectNum,
-    default_RespectGrain_if_None,
+    VoiceName,
 )
-from src.ch04_voice_logic._ref.ch04_semantic_types import VoiceName
 from src.ch04_voice_logic.group import (
     GroupTitle,
     MemberShip,
@@ -36,7 +37,7 @@ class VoiceUnit:
 
     voice_name: VoiceName = None
     knot: str = None
-    respect_grain: float = None
+    respect_grain: RespectGrain = None
     voice_cred_points: int = None
     voice_debt_points: int = None
     # special attribute: static in belief json, in memory it is deleted after loading and recalculated during saving.
@@ -47,12 +48,12 @@ class VoiceUnit:
     irrational_voice_debt_points: int = None  # set by listening process
     inallocable_voice_debt_points: int = None  # set by listening process
     # set by Belief.cashout()
-    fund_give: float = None
-    fund_take: float = None
-    fund_agenda_give: float = None
-    fund_agenda_take: float = None
-    fund_agenda_ratio_give: float = None
-    fund_agenda_ratio_take: float = None
+    fund_give: FundNum = None
+    fund_take: FundNum = None
+    fund_agenda_give: FundNum = None
+    fund_agenda_take: FundNum = None
+    fund_agenda_ratio_give: FundNum = None
+    fund_agenda_ratio_take: FundNum = None
 
     def set_name(self, x_voice_name: VoiceName):
         self.voice_name = validate_labelterm(x_voice_name, self.knot)
@@ -295,7 +296,26 @@ def voiceunit_shop(
         fund_agenda_ratio_give=0,
         fund_agenda_ratio_take=0,
         knot=default_knot_if_None(knot),
-        respect_grain=default_RespectGrain_if_None(respect_grain),
+        respect_grain=default_grain_num_if_None(respect_grain),
     )
     x_voiceunit.set_name(x_voice_name=voice_name)
     return x_voiceunit
+
+
+class calc_give_take_net_Exception(Exception):
+    pass
+
+
+def calc_give_take_net(x_give: float, x_take: float) -> float:
+    x_give = get_0_if_None(x_give)
+    x_take = get_0_if_None(x_take)
+    if x_give < 0 or x_take < 0:
+        if x_give < 0 and x_take >= 0:
+            parameters_str = f"calc_give_take_net x_give={x_give}."
+        elif x_give >= 0:
+            parameters_str = f"calc_give_take_net x_take={x_take}."
+        else:
+            parameters_str = f"calc_give_take_net x_give={x_give} and x_take={x_take}."
+        exception_str = f"{parameters_str} Only non-negative numbers allowed."
+        raise calc_give_take_net_Exception(exception_str)
+    return x_give - x_take

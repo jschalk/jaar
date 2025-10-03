@@ -31,7 +31,7 @@ def test_HubUnit_default_gut_belief_ReturnsObj():
         fund_pool=x_fund_pool,
         fund_grain=pnine_float,
         respect_grain=pnine_float,
-        penny=pfour_float,
+        money_grain=pfour_float,
     )
 
     # WHEN
@@ -44,7 +44,7 @@ def test_HubUnit_default_gut_belief_ReturnsObj():
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
     assert sue_default_gut.fund_grain == sue_hubunit.fund_grain
     assert sue_default_gut.respect_grain == sue_hubunit.respect_grain
-    assert sue_default_gut.penny == sue_hubunit.penny
+    assert sue_default_gut.money_grain == sue_hubunit.money_grain
     assert sue_default_gut.last_pack_id == init_pack_id()
 
 

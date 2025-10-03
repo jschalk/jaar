@@ -15,12 +15,7 @@ from src.ch02_rope_logic.rope import (
     rebuild_rope,
     replace_knot,
 )
-from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import (
-    FundGrain,
-    FundNum,
-    default_fund_grain_if_None,
-)
+from src.ch03_finance_logic.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic.group import (
     AwardHeir,
     AwardLine,
@@ -54,6 +49,8 @@ from src.ch05_reason_logic.reason import (
     reasonunit_shop,
 )
 from src.ch06_plan_logic._ref.ch06_semantic_types import (
+    FundGrain,
+    FundNum,
     GroupTitle,
     LabelTerm,
     RopeTerm,
@@ -1077,7 +1074,7 @@ def planunit_shop(
         # Calculated fields
         tree_level=tree_level,
         fund_ratio=fund_ratio,
-        fund_grain=default_fund_grain_if_None(fund_grain),
+        fund_grain=default_grain_num_if_None(fund_grain),
         fund_onset=fund_onset,
         fund_cease=fund_cease,
         task=task,

@@ -13,12 +13,7 @@ from src.ch01_data_toolbox.file_toolbox import (
     save_file,
 )
 from src.ch02_rope_logic.rope import validate_labelterm
-from src.ch03_finance_logic.finance_config import (
-    default_fund_grain_if_None,
-    default_RespectGrain_if_None,
-    filter_penny,
-    validate_fund_pool,
-)
+from src.ch03_finance_logic.allot import default_grain_num_if_None, validate_pool_num
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
@@ -80,7 +75,7 @@ class HubUnit:
     fund_pool: float = None
     fund_grain: float = None
     respect_grain: float = None
-    penny: float = None
+    money_grain: float = None
     keep_point_magnitude: float = None
     keeps_dir: str = None
     _atoms_dir: str = None
@@ -102,7 +97,7 @@ class HubUnit:
             fund_pool=self.fund_pool,
             fund_grain=self.fund_grain,
             respect_grain=self.respect_grain,
-            penny=self.penny,
+            money_grain=self.money_grain,
         )
         x_beliefunit.last_pack_id = init_pack_id()
         return x_beliefunit
@@ -426,7 +421,7 @@ def hubunit_shop(
     fund_pool: float = None,
     fund_grain: float = None,
     respect_grain: float = None,
-    penny: float = None,
+    money_grain: float = None,
     keep_point_magnitude: float = None,
 ) -> HubUnit:
     x_hubunit = HubUnit(
@@ -435,11 +430,11 @@ def hubunit_shop(
         belief_name=validate_labelterm(belief_name, knot),
         keep_rope=keep_rope,
         knot=default_knot_if_None(knot),
-        fund_pool=validate_fund_pool(fund_pool),
-        fund_grain=default_fund_grain_if_None(fund_grain),
-        respect_grain=default_RespectGrain_if_None(respect_grain),
-        penny=filter_penny(penny),
-        keep_point_magnitude=validate_fund_pool(keep_point_magnitude),
+        fund_pool=validate_pool_num(fund_pool),
+        fund_grain=default_grain_num_if_None(fund_grain),
+        respect_grain=default_grain_num_if_None(respect_grain),
+        money_grain=default_grain_num_if_None(money_grain),
+        keep_point_magnitude=validate_pool_num(keep_point_magnitude),
     )
     x_hubunit.set_dir_attrs()
     return x_hubunit

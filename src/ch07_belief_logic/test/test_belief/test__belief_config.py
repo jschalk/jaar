@@ -709,9 +709,9 @@ def test_get_belief_config_dict_ReturnsObj_CheckArgDataTypesCorrect():
     assert g_sqlitetype(cfig, blfunit, jv, wx.max_tree_traverse) == "INTEGER"
     assert g_popcashout(cfig, blfunit, jv, wx.max_tree_traverse) == False
 
-    assert g_class_type(cfig, blfunit, jv, wx.penny) == "float"
-    assert g_sqlitetype(cfig, blfunit, jv, wx.penny) == "REAL"
-    assert g_popcashout(cfig, blfunit, jv, wx.penny) == False
+    assert g_class_type(cfig, blfunit, jv, wx.money_grain) == "float"
+    assert g_sqlitetype(cfig, blfunit, jv, wx.money_grain) == "REAL"
+    assert g_popcashout(cfig, blfunit, jv, wx.money_grain) == False
 
     assert g_class_type(cfig, blfunit, jv, wx.respect_grain) == "float"
     assert g_sqlitetype(cfig, blfunit, jv, wx.respect_grain) == "REAL"
@@ -859,7 +859,7 @@ def test_get_belief_calc_args_type_dict_ReturnsObj():
     assert belief_calc_args_type_dict.get(wx.fund_grain) == "float"
     assert belief_calc_args_type_dict.get(wx.fund_pool) == "float"
     assert belief_calc_args_type_dict.get(wx.max_tree_traverse) == "int"
-    assert belief_calc_args_type_dict.get(wx.penny) == "float"
+    assert belief_calc_args_type_dict.get(wx.money_grain) == "float"
     assert belief_calc_args_type_dict.get(wx.respect_grain) == "float"
     assert belief_calc_args_type_dict.get(wx.tally) == "int"
     assert len(belief_calc_args_type_dict) == 72

@@ -26,6 +26,42 @@ def test_PlanUnit_clear_all_voice_cred_debt_ClearsAttrs():
     assert ball_plan.all_voice_debt is None
 
 
+def test_PlanUnit_set_fund_attr_ReturnsObj():
+    # ESTABLISH
+    texas_str = "texas"
+    texas_plan = planunit_shop(texas_str)
+    swim_str = ";swimmers"
+    run_str = ";runners"
+    texas_plan.awardheirs[swim_str] = awardheir_shop(swim_str, 2, 3)
+    texas_plan.awardheirs[run_str] = awardheir_shop(run_str, 1, 5)
+    assert not texas_plan.fund_onset
+    assert not texas_plan.fund_cease
+    assert not texas_plan.fund_ratio
+    swim_awardheir = texas_plan.awardheirs.get(swim_str)
+    run_awardheir = texas_plan.awardheirs.get(run_str)
+    assert not swim_awardheir.fund_give
+    assert not swim_awardheir.fund_take
+    assert not run_awardheir.fund_give
+    assert not run_awardheir.fund_take
+    x_onset = 70
+    x_cease = 100
+    x_fund_pool = 120
+
+    # WHEN
+    texas_plan.set_fund_attr(x_onset, x_cease, x_fund_pool)
+
+    # THEN
+    assert texas_plan.fund_onset == x_onset
+    assert texas_plan.fund_cease == x_cease
+    assert texas_plan.fund_ratio >= 0.25
+    swim_awardheir = texas_plan.awardheirs.get(swim_str)
+    run_awardheir = texas_plan.awardheirs.get(run_str)
+    assert swim_awardheir.fund_give == 20
+    assert swim_awardheir.fund_take == 11
+    assert run_awardheir.fund_give == 10
+    assert run_awardheir.fund_take == 19
+
+
 def test_PlanUnit_get_fund_share_ReturnsObj():
     # ESTABLISH
     texas_str = "texas"

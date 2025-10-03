@@ -5,7 +5,7 @@
   "knot": ";", 
   "max_tree_traverse": 20, 
   "moment_label": "A", 
-  "penny": 1, 
+  "money_grain": 1, 
   "planroot": {
     "factunits": {
       "A;Aaron Donald objects effected by him;": {

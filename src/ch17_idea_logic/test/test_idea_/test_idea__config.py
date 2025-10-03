@@ -202,7 +202,7 @@ def test_get_idea_elements_sort_order_ReturnsObj():
     assert table_sorting_priority[122] == "take_force"
     assert table_sorting_priority[123] == "tally"
     assert table_sorting_priority[124] == "fund_grain"
-    assert table_sorting_priority[125] == "penny"
+    assert table_sorting_priority[125] == "money_grain"
     assert table_sorting_priority[126] == "respect_grain"
     assert table_sorting_priority[127] == "amount"
     assert table_sorting_priority[128] == "otx_label"
@@ -342,7 +342,7 @@ def test_get_idea_sqlite_types_ReturnsObj():
     assert sqlite_types.get(wx.take_force) == "REAL"
     assert sqlite_types.get("tally") == "INTEGER"
     assert sqlite_types.get(wx.fund_grain) == "REAL"
-    assert sqlite_types.get(wx.penny) == "REAL"
+    assert sqlite_types.get(wx.money_grain) == "REAL"
     assert sqlite_types.get(wx.pledge) == "INTEGER"
     assert sqlite_types.get(wx.respect_grain) == "REAL"
     assert sqlite_types.get(wx.amount) == "REAL"
@@ -772,7 +772,7 @@ def test_get_quick_ideas_column_ref_ReturnsObj():
         wx.moment_label,
         wx.fund_grain,
         wx.monthday_index,
-        wx.penny,
+        wx.money_grain,
         wx.respect_grain,
         wx.knot,
         wx.timeline_label,

@@ -1,6 +1,6 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import default_fund_grain_if_None
+from src.ch03_finance_logic.allot import default_grain_num_if_None
 from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic.group import GroupUnit, groupunit_shop, membership_shop
 
@@ -55,7 +55,7 @@ def test_groupunit_shop_ReturnsObj():
     assert swim_groupunit.credor_pool == 0
     assert swim_groupunit.debtor_pool == 0
     assert swim_groupunit.knot == default_knot_if_None()
-    assert swim_groupunit.fund_grain == default_fund_grain_if_None()
+    assert swim_groupunit.fund_grain == default_grain_num_if_None()
 
 
 def test_groupunit_shop_ReturnsObj_knot():

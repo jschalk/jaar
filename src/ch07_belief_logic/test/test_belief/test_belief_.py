@@ -1,14 +1,9 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
-from src.ch03_finance_logic.finance_config import (
-    default_fund_grain_if_None,
-    default_RespectGrain_if_None,
-    filter_penny,
-    validate_fund_pool,
-    validate_respect_num,
-)
+from src.ch03_finance_logic.allot import default_grain_num_if_None, validate_pool_num
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
+from src.ch07_belief_logic._ref.ch07_semantic_types import RespectNum
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
     beliefunit_shop,
@@ -34,7 +29,7 @@ def test_BeliefUnit_Exists():
     assert x_belief.fund_pool is None
     assert x_belief.fund_grain is None
     assert x_belief.respect_grain is None
-    assert x_belief.penny is None
+    assert x_belief.money_grain is None
     assert x_belief.last_pack_id is None
     # calculated attr
     assert x_belief._plan_dict is None
@@ -77,7 +72,7 @@ def test_BeliefUnit_Exists():
         wx.last_pack_id,
         wx.max_tree_traverse,
         wx.belief_name,
-        wx.penny,
+        wx.money_grain,
         wx.respect_grain,
         wx.tally,
     }
@@ -127,7 +122,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     x_fund_pool = 555
     x_fund_grain = 7
     x_respect_grain = 5
-    x_penny = 1
+    x_money_grain = 1
 
     # WHEN
     x_belief = beliefunit_shop(
@@ -137,7 +132,7 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
         fund_pool=x_fund_pool,
         fund_grain=x_fund_grain,
         respect_grain=x_respect_grain,
-        penny=x_penny,
+        money_grain=x_money_grain,
     )
 
     # THEN
@@ -152,9 +147,9 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.fund_pool == x_fund_pool
     assert x_belief.fund_grain == x_fund_grain
     assert x_belief.respect_grain == x_respect_grain
-    assert x_belief.penny == x_penny
-    assert x_belief.credor_respect == validate_respect_num()
-    assert x_belief.debtor_respect == validate_respect_num()
+    assert x_belief.money_grain == x_money_grain
+    assert x_belief.credor_respect == RespectNum(validate_pool_num())
+    assert x_belief.debtor_respect == RespectNum(validate_pool_num())
     assert not x_belief.last_pack_id
     # calculated attr
     assert x_belief._plan_dict == {}
@@ -181,10 +176,10 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.belief_name == ""
     assert x_belief.moment_label == get_default_moment_label()
     assert x_belief.knot == default_knot_if_None()
-    assert x_belief.fund_pool == validate_fund_pool()
-    assert x_belief.fund_grain == default_fund_grain_if_None()
-    assert x_belief.respect_grain == default_RespectGrain_if_None()
-    assert x_belief.penny == filter_penny()
+    assert x_belief.fund_pool == validate_pool_num()
+    assert x_belief.fund_grain == default_grain_num_if_None()
+    assert x_belief.respect_grain == default_grain_num_if_None()
+    assert x_belief.money_grain == default_grain_num_if_None()
     assert x_belief.planroot.fund_grain == x_belief.fund_grain
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.uid == 1
@@ -302,7 +297,7 @@ def test_BeliefUnit_set_fund_pool_SetsAttr():
     # ESTABLISH
     sue_belief = beliefunit_shop("Sue", "Texas")
     sue_fund_pool = 99000
-    assert sue_belief.fund_pool == validate_fund_pool()
+    assert sue_belief.fund_pool == validate_pool_num()
 
     # WHEN
     sue_belief.set_fund_pool(sue_fund_pool)

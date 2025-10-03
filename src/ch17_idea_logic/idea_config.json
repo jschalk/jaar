@@ -147,7 +147,7 @@
       "fund_grain": {}, 
       "fund_pool": {}, 
       "max_tree_traverse": {}, 
-      "penny": {}, 
+      "money_grain": {}, 
       "respect_grain": {}, 
       "tally": {}
     }
@@ -218,7 +218,7 @@
       "job_listen_rotations": {}, 
       "knot": {}, 
       "monthday_index": {}, 
-      "penny": {}, 
+      "money_grain": {}, 
       "respect_grain": {}, 
       "timeline_label": {}, 
       "yr1_jan1_offset": {}

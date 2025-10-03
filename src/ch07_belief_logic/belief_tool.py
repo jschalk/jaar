@@ -1,8 +1,7 @@
 from src.ch01_data_toolbox.dict_toolbox import create_csv
 from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import FundNum, RespectNum, get_net
 from src.ch04_voice_logic.group import AwardUnit, MemberShip
-from src.ch04_voice_logic.voice import VoiceUnit
+from src.ch04_voice_logic.voice import VoiceUnit, calc_give_take_net
 from src.ch05_reason_logic.reason import (
     CaseUnit,
     FactUnit,
@@ -11,7 +10,8 @@ from src.ch05_reason_logic.reason import (
 )
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic._ref.ch07_semantic_types import (
-    MomentLabel,
+    FundNum,
+    RespectNum,
     RopeTerm,
     VoiceName,
 )
@@ -239,20 +239,20 @@ def get_voice_mandate_ledger(
     }
     mandate_sum = sum(mandates.values())
     if mandate_sum == 0:
-        mandates = reset_mandates_to_minimum(mandates, x_belief.penny)
+        mandates = reset_mandates_to_minimum(mandates, x_belief.money_grain)
     if mandate_sum != x_belief.fund_pool:
         mandates = allot_scale(mandates, x_belief.fund_pool, x_belief.fund_grain)
     return mandates
 
 
 def reset_mandates_to_minimum(
-    mandates: dict[VoiceName, FundNum], penny: FundNum
+    mandates: dict[VoiceName, FundNum], money_grain: FundNum
 ) -> dict[VoiceName, FundNum]:
-    """Reset all mandates to the minimum value (penny)."""
+    """Reset all mandates to the minimum value (money_grain)."""
 
     voice_names = set(mandates.keys())
     for voice_name in voice_names:
-        mandates[voice_name] = penny
+        mandates[voice_name] = money_grain
     return mandates
 
 
@@ -264,7 +264,9 @@ def get_voice_agenda_net_ledger(
 
     x_dict = {}
     for x_voice in x_belief.voices.values():
-        settle_net = get_net(x_voice.fund_agenda_give, x_voice.fund_agenda_take)
+        settle_net = calc_give_take_net(
+            x_voice.fund_agenda_give, x_voice.fund_agenda_take
+        )
         if settle_net != 0:
             x_dict[x_voice.voice_name] = settle_net
     return x_dict

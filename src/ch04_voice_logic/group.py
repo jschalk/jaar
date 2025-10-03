@@ -1,8 +1,8 @@
 from dataclasses import dataclass
 from src.ch01_data_toolbox.dict_toolbox import get_1_if_None, get_dict_from_json
-from src.ch03_finance_logic.allot import allot_scale
-from src.ch03_finance_logic.finance_config import FundGrain, default_fund_grain_if_None
+from src.ch03_finance_logic.allot import allot_scale, default_grain_num_if_None
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
+    FundGrain,
     GroupTitle,
     VoiceName,
     default_knot_if_None,
@@ -264,7 +264,7 @@ def groupunit_shop(
         credor_pool=0,
         debtor_pool=0,
         knot=default_knot_if_None(knot),
-        fund_grain=default_fund_grain_if_None(fund_grain),
+        fund_grain=default_grain_num_if_None(fund_grain),
     )
     # x_groupunit.set_group_title(group_title=group_title)
     # return x_groupunit

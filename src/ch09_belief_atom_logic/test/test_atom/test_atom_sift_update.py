@@ -37,7 +37,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     sue_fund_grain = 66
     sue_fund_pool = 69
     sue_max_tree_traverse = 72
-    sue_penny = 2
+    sue_money_grain = 2
     sue_tally = 100
     zia_atom = beliefatom_shop(wx.beliefunit, wx.INSERT)
     zia_atom.set_arg("respect_grain", sue_bit)
@@ -46,7 +46,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
     zia_atom.set_arg("fund_grain", sue_fund_grain)
     zia_atom.set_arg("fund_pool", sue_fund_pool)
     zia_atom.set_arg("max_tree_traverse", sue_max_tree_traverse)
-    zia_atom.set_arg("penny", sue_penny)
+    zia_atom.set_arg("money_grain", sue_money_grain)
     zia_atom.set_arg("tally", sue_tally)
 
     # WHEN
@@ -64,7 +64,7 @@ def test_sift_atom_ReturnsObj_BeliefAtom_UPDATE_beliefunit():
         "fund_grain": sue_fund_grain,
         "fund_pool": sue_fund_pool,
         "max_tree_traverse": sue_max_tree_traverse,
-        "penny": sue_penny,
+        "money_grain": sue_money_grain,
         "tally": sue_tally,
     }
 

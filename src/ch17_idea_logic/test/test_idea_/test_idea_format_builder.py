@@ -69,7 +69,7 @@ def test_get_idea_brick_md_ReturnsObj():
             wx.fund_grain: {wx.otx_key: False},
             wx.job_listen_rotations: {wx.otx_key: False},
             wx.monthday_index: {wx.otx_key: False},
-            wx.penny: {wx.otx_key: False},
+            wx.money_grain: {wx.otx_key: False},
             wx.respect_grain: {wx.otx_key: False},
             wx.timeline_label: {wx.otx_key: False},
             wx.yr1_jan1_offset: {wx.otx_key: False},
@@ -96,7 +96,7 @@ def test_get_idea_brick_md_ReturnsObj():
 - `{wx.yr1_jan1_offset}`
 - `{wx.monthday_index}`
 - `{wx.fund_grain}`
-- `{wx.penny}`
+- `{wx.money_grain}`
 - `{wx.respect_grain}`
 - `{wx.knot}`
 - `{wx.job_listen_rotations}`
@@ -118,7 +118,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
             wx.fund_grain: {wx.otx_key: False},
             wx.job_listen_rotations: {wx.otx_key: False},
             wx.monthday_index: {wx.otx_key: False},
-            wx.penny: {wx.otx_key: False},
+            wx.money_grain: {wx.otx_key: False},
             wx.respect_grain: {wx.otx_key: False},
             wx.timeline_label: {wx.otx_key: False},
             wx.yr1_jan1_offset: {wx.otx_key: False},
@@ -145,7 +145,7 @@ def test_get_idea_brick_mds_ReturnsObj(env_dir_setup_cleanup):
 - `{wx.yr1_jan1_offset}`
 - `{wx.monthday_index}`
 - `{wx.fund_grain}`
-- `{wx.penny}`
+- `{wx.money_grain}`
 - `{wx.respect_grain}`
 - `{wx.knot}`
 - `{wx.job_listen_rotations}`

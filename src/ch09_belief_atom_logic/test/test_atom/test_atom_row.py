@@ -43,7 +43,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.reason_upper is None
     assert x_atomrow.numor is None
     assert x_atomrow.reason_lower is None
-    assert x_atomrow.penny is None
+    assert x_atomrow.money_grain is None
     assert x_atomrow.fact_state is None
     assert x_atomrow.pledge is None
     assert x_atomrow.problem_bool is None

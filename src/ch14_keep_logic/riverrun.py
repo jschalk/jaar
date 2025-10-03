@@ -90,7 +90,7 @@ class RiverRun:
 
     def set_tax_dues(self, debtorledger: dict[VoiceName, float]):
         x_amount = self.hubunit.keep_point_magnitude
-        self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.penny)
+        self.tax_dues = allot_scale(debtorledger, x_amount, self.hubunit.money_grain)
 
     def voice_has_tax_due(self, x_voice_name: VoiceName) -> bool:
         return self.tax_dues.get(x_voice_name) is not None
@@ -209,7 +209,7 @@ class RiverRun:
         self._grants = allot_scale(
             ledger=grant_credorledger,
             scale_number=self.hubunit.keep_point_magnitude,
-            grain_unit=self.hubunit.penny,
+            grain_unit=self.hubunit.money_grain,
         )
 
     def _save_rivergrade_file(self, voice_name: VoiceName):

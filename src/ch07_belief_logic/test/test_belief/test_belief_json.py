@@ -148,8 +148,8 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     zia_belief.fund_grain = x_fund_grain
     x_respect_grain = 7
     zia_belief.respect_grain = x_respect_grain
-    x_penny = 0.3
-    zia_belief.penny = x_penny
+    x_money_grain = 0.3
+    zia_belief.money_grain = x_money_grain
     override_str = "override"
     yao_str = "Yao"
     run_str = ";runners"
@@ -175,7 +175,7 @@ def test_BeliefUnit_get_json_ReturnsJSON_SimpleExample():
     assert belief_dict["fund_pool"] == zia_belief.fund_pool
     assert belief_dict["fund_grain"] == zia_belief.fund_grain
     assert belief_dict["respect_grain"] == zia_belief.respect_grain
-    assert belief_dict["penny"] == zia_belief.penny
+    assert belief_dict["money_grain"] == zia_belief.money_grain
     assert belief_dict["credor_respect"] == zia_belief.credor_respect
     assert belief_dict["debtor_respect"] == zia_belief.debtor_respect
     # with pytest_raises(Exception) as excinfo:
@@ -282,8 +282,8 @@ def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
     zia_belief.fund_grain = zia_fund_grain
     zia_resepect_bit = 5
     zia_belief.respect_grain = zia_resepect_bit
-    zia_penny = 2
-    zia_belief.penny = zia_penny
+    zia_money_grain = 2
+    zia_belief.money_grain = zia_money_grain
     zia_credor_respect = 200
     zia_debtor_respect = 200
     zia_belief.set_credor_respect(zia_credor_respect)
@@ -346,8 +346,8 @@ def test_get_beliefunit_from_json_ReturnsObjSimpleExample():
     assert json_belief.fund_grain == zia_belief.fund_grain
     assert json_belief.respect_grain == zia_resepect_bit
     assert json_belief.respect_grain == zia_belief.respect_grain
-    assert json_belief.penny == zia_penny
-    assert json_belief.penny == zia_belief.penny
+    assert json_belief.money_grain == zia_money_grain
+    assert json_belief.money_grain == zia_belief.money_grain
     assert json_belief.max_tree_traverse == 23
     assert json_belief.max_tree_traverse == zia_belief.max_tree_traverse
     assert json_belief.knot == zia_belief.knot

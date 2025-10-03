@@ -57,7 +57,7 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     x_beliefatom.set_jvalue(new6_arg, new6_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new7_value = 0.025
-    new7_arg = "penny"
+    new7_arg = "money_grain"
     x_beliefatom.set_jvalue(new7_arg, new7_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
 
@@ -77,8 +77,8 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     assert after_sue_beliefunit.fund_grain != before_sue_beliefunit.fund_grain
     assert after_sue_beliefunit.respect_grain == new6_value
     assert after_sue_beliefunit.respect_grain != before_sue_beliefunit.respect_grain
-    assert after_sue_beliefunit.penny == new7_value
-    assert after_sue_beliefunit.penny != before_sue_beliefunit.penny
+    assert after_sue_beliefunit.money_grain == new7_value
+    assert after_sue_beliefunit.money_grain != before_sue_beliefunit.money_grain
 
 
 def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnit_delete_voice():

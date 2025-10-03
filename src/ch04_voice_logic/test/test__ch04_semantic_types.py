@@ -1,6 +1,8 @@
 from inspect import getdoc as inspect_getdoc
 from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic._ref.ch04_semantic_types import (
+    FundGrain,
+    FundNum,
     GroupTitle,
     HealerName,
     NameTerm,
@@ -79,3 +81,25 @@ def test_GroupTitle_Exists():
 
     # THEN
     assert bikers_GroupTitle is not None
+
+
+def test_FundNum_Exists():
+    # ESTABLISH
+    x_float = 0.045
+    # WHEN
+    y_fund_num = FundNum(x_float)
+    # THEN
+    assert y_fund_num == x_float
+    inspect_str = "FundNum inherits from float class"
+    assert inspect_getdoc(y_fund_num) == inspect_str
+
+
+def test_FundGrain_Exists():
+    # ESTABLISH
+    x_float = 0.045
+    # WHEN
+    y_fund_grainnum = FundGrain(x_float)
+    # THEN
+    assert y_fund_grainnum == x_float
+    inspect_str = "Smallest Unit of fund_num"
+    assert inspect_getdoc(y_fund_grainnum) == inspect_str

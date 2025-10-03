@@ -3,6 +3,7 @@ from src.ch07_belief_logic._ref.ch07_keywords import Ch07Keywords as wx
 from src.ch07_belief_logic._ref.ch07_semantic_types import (
     BeliefName,
     MomentLabel,
+    MoneyGrain,
     NexusLabel,
 )
 
@@ -38,3 +39,13 @@ def test_MomentLabel_Exists():
     assert bob_MomentLabel_str == bob_str
     doc_str = "A NexusLabel for a Moment. Cannot contain knot."
     assert inspect_getdoc(bob_MomentLabel_str) == doc_str
+
+
+def test_MoneyGrain_Exists():
+    # ESTABLISH
+    x_float = 0.045
+    # WHEN
+    y_money_grain = MoneyGrain(x_float)
+    # THEN
+    assert y_money_grain == x_float
+    assert inspect_getdoc(y_money_grain) == "Smallest Unit of MoneyNum"
