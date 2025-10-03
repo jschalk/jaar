@@ -2,8 +2,8 @@ from os.path import exists as os_path_exists, isdir as os_path_isdir
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename, set_dir
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import (
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
+    default_fund_grain_if_None,
+    default_RespectGrain_if_None,
     filter_penny,
 )
 from src.ch06_plan_logic.healer import healerunit_shop
@@ -51,8 +51,8 @@ def test_MomentUnit_Exists():
     assert not amy_moment.paybook
     assert not amy_moment.offi_times
     assert not amy_moment.knot
-    assert not amy_moment.fund_iota
-    assert not amy_moment.respect_bit
+    assert not amy_moment.fund_grain
+    assert not amy_moment.respect_grain
     assert not amy_moment.penny
     assert not amy_moment.job_listen_rotations
     assert not amy_moment.moment_mstr_dir
@@ -68,8 +68,8 @@ def test_MomentUnit_Exists():
         wx.paybook,
         "offi_times",
         wx.knot,
-        wx.fund_iota,
-        wx.respect_bit,
+        wx.fund_grain,
+        wx.respect_grain,
         wx.penny,
         wx.job_listen_rotations,
         "_moment_dir",
@@ -95,8 +95,8 @@ def test_momentunit_shop_ReturnsMomentUnit():
     assert a23_moment.paybook == tranbook_shop(a23_str)
     assert a23_moment.offi_times == set()
     assert a23_moment.knot == default_knot_if_None()
-    assert a23_moment.fund_iota == default_fund_iota_if_None()
-    assert a23_moment.respect_bit == default_RespectBit_if_None()
+    assert a23_moment.fund_grain == default_fund_grain_if_None()
+    assert a23_moment.respect_grain == default_RespectGrain_if_None()
     assert a23_moment.penny == filter_penny()
     assert a23_moment.moment_mstr_dir == get_chapter_temp_dir()
     assert a23_moment.job_listen_rotations == get_default_job_listen_count()
@@ -124,8 +124,8 @@ def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
     # ESTABLISH
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 7.0
-    x_respect_bit = 9
+    x_fund_grain = 7.0
+    x_respect_grain = 9
     x_penny = 3
     a45_offi_times = {12, 15}
     x_job_listen_rotations = 888
@@ -136,16 +136,16 @@ def test_momentunit_shop_ReturnsMomentUnitWith_knot(env_dir_setup_cleanup):
         moment_mstr_dir=get_chapter_temp_dir(),
         offi_times=a45_offi_times,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
         penny=x_penny,
         job_listen_rotations=x_job_listen_rotations,
     )
 
     # THEN
     assert a23_moment.knot == slash_str
-    assert a23_moment.fund_iota == x_fund_iota
-    assert a23_moment.respect_bit == x_respect_bit
+    assert a23_moment.fund_grain == x_fund_grain
+    assert a23_moment.respect_grain == x_respect_grain
     assert a23_moment.penny == x_penny
     assert a23_moment.offi_times == a45_offi_times
     assert a23_moment.job_listen_rotations == x_job_listen_rotations
@@ -202,15 +202,15 @@ def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 4
-    x_respect_bit = 5
+    x_fund_grain = 4
+    x_respect_grain = 5
     x_penny = 6
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
         penny=x_penny,
     )
     sue_str = "Sue"
@@ -220,8 +220,8 @@ def test_MomentUnit_create_empty_belief_from_moment_ReturnsObj_Scenario0(
 
     # THEN
     assert generated_belief.knot == slash_str
-    assert generated_belief.fund_iota == x_fund_iota
-    assert generated_belief.respect_bit == x_respect_bit
+    assert generated_belief.fund_grain == x_fund_grain
+    assert generated_belief.respect_grain == x_respect_grain
     assert generated_belief.penny == x_penny
 
 
@@ -254,15 +254,15 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 4
-    x_respect_bit = 5
+    x_fund_grain = 4
+    x_respect_grain = 5
     x_penny = 6
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
         penny=x_penny,
     )
     sue_str = "Sue"
@@ -279,8 +279,8 @@ def test_MomentUnit_create_gut_file_if_none_SetsDirAndFiles_Scenario2_belief_dir
     assert gut_file_exists(moment_mstr_dir, a23_str, sue_str)
     generated_gut = open_gut_file(moment_mstr_dir, a23_str, sue_str)
     assert generated_gut.knot == slash_str
-    assert generated_gut.fund_iota == x_fund_iota
-    assert generated_gut.respect_bit == x_respect_bit
+    assert generated_gut.fund_grain == x_fund_grain
+    assert generated_gut.respect_grain == x_respect_grain
     assert generated_gut.penny == x_penny
 
 
@@ -316,14 +316,14 @@ def test_MomentUnit_create_init_job_from_guts_Scenario0_CreatesFile(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 4
-    x_respect_bit = 5
+    x_fund_grain = 4
+    x_respect_grain = 5
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
     )
     sue_str = "Sue"
     assert not job_file_exists(moment_mstr_dir, a23_str, sue_str)
@@ -343,14 +343,14 @@ def test_MomentUnit_create_init_job_from_guts_Scenario1_ReplacesFile(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 4
-    x_respect_bit = 5
+    x_fund_grain = 4
+    x_respect_grain = 5
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
     )
     bob_str = "Bob"
     sue_str = "Sue"
@@ -373,14 +373,14 @@ def test_MomentUnit_create_init_job_from_guts_Scenario2_job_Has_gut_Voices(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 4
-    x_respect_bit = 5
+    x_fund_grain = 4
+    x_respect_grain = 5
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
     )
     bob_str = "Bob"
     sue_str = "Sue"
@@ -404,14 +404,14 @@ def test_MomentUnit_create_init_job_from_guts_Scenario3_gut_FilesAreListenedTo(
     moment_mstr_dir = get_chapter_temp_dir()
     a23_str = "amy23"
     slash_str = "/"
-    x_fund_iota = 4
-    x_respect_bit = 5
+    x_fund_grain = 4
+    x_respect_grain = 5
     a23_moment = momentunit_shop(
         a23_str,
         moment_mstr_dir,
         knot=slash_str,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
     )
     sue_str = "Sue"
     a23_moment.create_init_job_from_guts(sue_str)

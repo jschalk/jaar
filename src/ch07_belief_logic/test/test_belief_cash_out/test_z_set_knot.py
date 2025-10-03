@@ -20,11 +20,11 @@ def test_BeliefUnit_set_moment_label_SetsAttr():
     assert sue_belief.moment_label == x_moment_label
 
 
-def test_BeliefUnit_set_plan_Setsmoment_label_AND_fund_iota():
+def test_BeliefUnit_set_plan_Setsmoment_label_AND_fund_grain():
     # ESTABLISH'
-    x_fund_iota = 500
+    x_fund_grain = 500
     sue_belief = get_beliefunit_with_4_levels()
-    sue_belief.fund_iota = x_fund_iota
+    sue_belief.fund_grain = x_fund_grain
     belief_moment_label = "Texas"
     sue_belief.set_moment_label(belief_moment_label)
     assert sue_belief.moment_label == belief_moment_label
@@ -39,7 +39,7 @@ def test_BeliefUnit_set_plan_Setsmoment_label_AND_fund_iota():
 
     # THEN
     cookery_plan = sue_belief.get_plan_obj(cookery_rope)
-    assert cookery_plan.fund_iota == x_fund_iota
+    assert cookery_plan.fund_grain == x_fund_grain
 
 
 def test_belief_set_moment_label_SetsAttr():

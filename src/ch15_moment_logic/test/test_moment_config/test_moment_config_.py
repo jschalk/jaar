@@ -52,10 +52,10 @@ def test_get_moment_config_dict_ReturnsObj():
 
     x_momentunit_jvalues = {
         wx.c400_number,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.monthday_index,
         wx.penny,
-        wx.respect_bit,
+        wx.respect_grain,
         wx.knot,
         wx.timeline_label,
         wx.yr1_jan1_offset,
@@ -130,7 +130,7 @@ def test_get_moment_args_dimen_mapping_ReturnsObj():
     assert x_moment_args_dimen_mapping
     x_hour = {wx.moment_timeline_hour}
     assert x_moment_args_dimen_mapping.get(wx.cumulative_minute) == x_hour
-    assert x_moment_args_dimen_mapping.get(wx.fund_iota)
+    assert x_moment_args_dimen_mapping.get(wx.fund_grain)
     moment_label_dimens = x_moment_args_dimen_mapping.get(wx.moment_label)
     assert wx.moment_timeline_hour in moment_label_dimens
     assert wx.momentunit in moment_label_dimens
@@ -196,7 +196,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.cumulative_minute,
         wx.hour_label,
         wx.moment_label,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.month_label,
         wx.monthday_index,
         # wx.job_listen_rotations,
@@ -205,7 +205,7 @@ def test_get_moment_args_set_ReturnsObj():
         wx.belief_name,
         wx.quota,
         wx.celldepth,
-        wx.respect_bit,
+        wx.respect_grain,
         wx.bud_time,
         wx.tran_time,
         wx.offi_time,

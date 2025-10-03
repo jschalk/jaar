@@ -37,13 +37,13 @@ from src.ch99_chapter_style.style import (
 def expected_semantic_types() -> set:
     return {
         "BeliefName",
-        "BitNum",
+        "RespectGrain",
         "CRUD_command",
         "FirstLabel",
         "NexusLabel",
         "EventInt",
         "FaceName",
-        "FundIota",
+        "FundGrain",
         "FundNum",
         "GrainFloat",
         "GroupTitle",

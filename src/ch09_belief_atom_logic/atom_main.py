@@ -195,15 +195,15 @@ def _modify_belief_update_beliefunit(x_belief: BeliefUnit, x_atom: BeliefAtom):
     x_arg = "fund_pool"
     if x_atom.get_value(x_arg) is not None:
         x_belief.fund_pool = x_atom.get_value(x_arg)
-    x_arg = "fund_iota"
+    x_arg = "fund_grain"
     if x_atom.get_value(x_arg) is not None:
-        x_belief.fund_iota = x_atom.get_value(x_arg)
+        x_belief.fund_grain = x_atom.get_value(x_arg)
     x_arg = "tally"
     if x_atom.get_value(x_arg) is not None:
         x_belief.tally = x_atom.get_value(x_arg)
-    x_arg = "respect_bit"
+    x_arg = "respect_grain"
     if x_atom.get_value(x_arg) is not None:
-        x_belief.respect_bit = x_atom.get_value(x_arg)
+        x_belief.respect_grain = x_atom.get_value(x_arg)
     x_arg = "penny"
     if x_atom.get_value(x_arg) is not None:
         x_belief.penny = x_atom.get_value(x_arg)
@@ -546,9 +546,9 @@ def jvalues_different(dimen: str, x_obj: any, y_obj: any) -> bool:
             or x_obj.max_tree_traverse != y_obj.max_tree_traverse
             or x_obj.credor_respect != y_obj.credor_respect
             or x_obj.debtor_respect != y_obj.debtor_respect
-            or x_obj.respect_bit != y_obj.respect_bit
+            or x_obj.respect_grain != y_obj.respect_grain
             or x_obj.fund_pool != y_obj.fund_pool
-            or x_obj.fund_iota != y_obj.fund_iota
+            or x_obj.fund_grain != y_obj.fund_grain
         )
     elif dimen in {"belief_voice_membership"}:
         return (x_obj.group_cred_points != y_obj.group_cred_points) or (
@@ -613,7 +613,7 @@ class AtomRow:
     reason_context: RopeTerm = None
     reason_active_requisite: bool = None
     begin: float = None
-    respect_bit: float = None
+    respect_grain: float = None
     close: float = None
     voice_cred_points: int = None
     group_cred_points: int = None
@@ -626,7 +626,7 @@ class AtomRow:
     fact_context: RopeTerm = None
     fact_upper: float = None
     fact_lower: float = None
-    fund_iota: float = None
+    fund_grain: float = None
     fund_pool: float = None
     give_force: float = None
     gogo_want: float = None

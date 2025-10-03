@@ -28,7 +28,7 @@ def _ingest_perspective_agenda(
     listener: BeliefUnit, agenda: list[PlanUnit]
 ) -> BeliefUnit:
     debtor_amount = listener.debtor_respect
-    ingest_list = generate_ingest_list(agenda, debtor_amount, listener.respect_bit)
+    ingest_list = generate_ingest_list(agenda, debtor_amount, listener.respect_grain)
     for ingest_planunit in ingest_list:
         _ingest_single_planunit(listener, ingest_planunit)
     return listener
@@ -54,10 +54,10 @@ def _allocate_inallocable_voice_debt_points(
 
 
 def generate_ingest_list(
-    plan_list: list[PlanUnit], debtor_amount: float, respect_bit: float
+    plan_list: list[PlanUnit], debtor_amount: float, respect_grain: float
 ) -> list[PlanUnit]:
     plan_ledger = {x_plan.get_plan_rope(): x_plan.star for x_plan in plan_list}
-    star_allot = allot_scale(plan_ledger, debtor_amount, respect_bit)
+    star_allot = allot_scale(plan_ledger, debtor_amount, respect_grain)
     for x_planunit in plan_list:
         x_planunit.star = star_allot.get(x_planunit.get_plan_rope())
     return plan_list

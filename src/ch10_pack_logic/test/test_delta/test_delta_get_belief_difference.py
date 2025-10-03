@@ -155,15 +155,15 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_BeliefUnit
     after_sue_belief = copy_deepcopy(before_sue_belief)
     x_beliefunit_tally = 55
     x_fund_pool = 8000000
-    x_fund_iota = 8
-    x_respect_bit = 5
+    x_fund_grain = 8
+    x_respect_grain = 5
     x_max_tree_traverse = 66
     x_credor_respect = 770
     x_debtor_respect = 880
     after_sue_belief.tally = x_beliefunit_tally
     after_sue_belief.fund_pool = x_fund_pool
-    after_sue_belief.fund_iota = x_fund_iota
-    after_sue_belief.respect_bit = x_respect_bit
+    after_sue_belief.fund_grain = x_fund_grain
+    after_sue_belief.respect_grain = x_respect_grain
     after_sue_belief.set_max_tree_traverse(x_max_tree_traverse)
     after_sue_belief.set_credor_respect(x_credor_respect)
     after_sue_belief.set_debtor_respect(x_debtor_respect)
@@ -180,8 +180,8 @@ def test_BeliefDelta_add_all_different_beliefatoms_Creates_BeliefAtom_BeliefUnit
     assert xio_beliefatom.get_value("debtor_respect") == x_debtor_respect
     assert xio_beliefatom.get_value("tally") == x_beliefunit_tally
     assert xio_beliefatom.get_value("fund_pool") == x_fund_pool
-    assert xio_beliefatom.get_value("fund_iota") == x_fund_iota
-    assert xio_beliefatom.get_value("respect_bit") == x_respect_bit
+    assert xio_beliefatom.get_value("fund_grain") == x_fund_grain
+    assert xio_beliefatom.get_value("respect_grain") == x_respect_grain
 
     print(f"{get_beliefatom_total_count(sue_beliefdelta)=}")
     assert get_beliefatom_total_count(sue_beliefdelta) == 1

@@ -2,8 +2,8 @@ from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.file_toolbox import create_path
 from src.ch02_rope_logic.rope import create_rope, default_knot_if_None
 from src.ch03_finance_logic.finance_config import (
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
+    default_fund_grain_if_None,
+    default_RespectGrain_if_None,
     filter_penny,
     validate_fund_pool,
 )
@@ -24,8 +24,8 @@ def test_HubUnit_Exists():
     assert not x_hubunit.keep_rope
     assert not x_hubunit.knot
     assert not x_hubunit.fund_pool
-    assert not x_hubunit.fund_iota
-    assert not x_hubunit.respect_bit
+    assert not x_hubunit.fund_grain
+    assert not x_hubunit.respect_grain
     assert not x_hubunit.penny
     assert not x_hubunit.keep_point_magnitude
     assert not x_hubunit.keeps_dir
@@ -40,8 +40,8 @@ def test_hubunit_shop_ReturnsObj():
     sue_str = "Sue"
     x_knot = "/"
     x_fund_pool = 13000
-    x_fund_iota = 13
-    x_respect_bit = 9
+    x_fund_grain = 13
+    x_respect_grain = 9
     x_penny = 3
     x_money_magnitude = 900
 
@@ -53,8 +53,8 @@ def test_hubunit_shop_ReturnsObj():
         keep_rope=None,
         knot=x_knot,
         fund_pool=x_fund_pool,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
         penny=x_penny,
         keep_point_magnitude=x_money_magnitude,
     )
@@ -65,8 +65,8 @@ def test_hubunit_shop_ReturnsObj():
     assert x_hubunit.belief_name == sue_str
     assert x_hubunit.knot == x_knot
     assert x_hubunit.fund_pool == x_fund_pool
-    assert x_hubunit.fund_iota == x_fund_iota
-    assert x_hubunit.respect_bit == x_respect_bit
+    assert x_hubunit.fund_grain == x_fund_grain
+    assert x_hubunit.respect_grain == x_respect_grain
     assert x_hubunit.penny == x_penny
     assert x_hubunit.keep_point_magnitude == x_money_magnitude
     sue_dir = create_belief_dir_path(x_moment_mstr_dir, x_moment_label, sue_str)
@@ -102,8 +102,8 @@ def test_hubunit_shop_ReturnsObjWhenEmpty():
     assert sue_hubunit.belief_name == sue_str
     assert sue_hubunit.knot == default_knot_if_None()
     assert sue_hubunit.fund_pool == validate_fund_pool()
-    assert sue_hubunit.fund_iota == default_fund_iota_if_None()
-    assert sue_hubunit.respect_bit == default_RespectBit_if_None()
+    assert sue_hubunit.fund_grain == default_fund_grain_if_None()
+    assert sue_hubunit.respect_grain == default_RespectGrain_if_None()
     assert sue_hubunit.penny == filter_penny()
     assert sue_hubunit.keep_rope == texas_rope
     bob_str = "Bob"

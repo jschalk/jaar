@@ -47,10 +47,10 @@ def test_BeliefUnit_set_groupunit_SetsAttr_Scenario0():
     assert bob_belief.groupunits.get(run_str)
 
 
-def test_BeliefUnit_set_groupunit_Sets_rope_fund_iota():
+def test_BeliefUnit_set_groupunit_Sets_rope_fund_grain():
     # ESTABLISH
-    x_fund_iota = 5
-    bob_belief = beliefunit_shop("Bob", fund_iota=x_fund_iota)
+    x_fund_grain = 5
+    bob_belief = beliefunit_shop("Bob", fund_grain=x_fund_grain)
     run_str = ";Run"
     assert not bob_belief.groupunits.get(run_str)
 
@@ -58,7 +58,7 @@ def test_BeliefUnit_set_groupunit_Sets_rope_fund_iota():
     bob_belief.set_groupunit(groupunit_shop(run_str))
 
     # THEN
-    assert bob_belief.groupunits.get(run_str).fund_iota == x_fund_iota
+    assert bob_belief.groupunits.get(run_str).fund_grain == x_fund_grain
 
 
 def test_BeliefUnit_groupunit_exists_ReturnsObj():

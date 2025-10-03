@@ -101,7 +101,7 @@ def test_PlanUnit_set_awardheirs_fund_give_fund_take_SetsAttr_WithValues():
     }
     sport_str = "sport"
     sport_plan = planunit_shop(sport_str, awardheirs=x_awardheirs)
-    assert sport_plan.fund_iota == 1
+    assert sport_plan.fund_grain == 1
     assert len(sport_plan.awardheirs) == 2
     swim_awardheir = sport_plan.awardheirs.get(swim_str)
     assert not swim_awardheir.fund_give

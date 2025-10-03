@@ -17,9 +17,9 @@ from src.ch02_rope_logic.rope import (
 )
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import (
-    FundIota,
+    FundGrain,
     FundNum,
-    default_fund_iota_if_None,
+    default_fund_grain_if_None,
 )
 from src.ch04_voice_logic.group import (
     AwardHeir,
@@ -238,7 +238,7 @@ class PlanUnit:
     descendant_pledge_count : int Count of descendant plans marked as pledges.
     factheirs : dict[RopeTerm, FactHeir] parent plan provided facts.
     fund_ratio : float
-    fund_iota : FundIota Smallest indivisible funding component.
+    fund_grain : FundGrain Smallest indivisible funding component.
     fund_onset : FundNum Point at which funding onsets inside BeliefUnit funding range
     fund_cease : FundNum Point at which funding ceases inside BeliefUnit funding range
     healerunit_ratio : float
@@ -283,7 +283,7 @@ class PlanUnit:
     descendant_pledge_count: int = None
     factheirs: dict[RopeTerm, FactHeir] = None
     fund_ratio: float = None
-    fund_iota: FundIota = None
+    fund_grain: FundGrain = None
     fund_onset: FundNum = None
     fund_cease: FundNum = None
     healerunit_ratio: float = None
@@ -527,8 +527,8 @@ class PlanUnit:
             give_ledger[x_awardee_title] = x_awardheir.give_force
             take_ledger[x_awardee_title] = x_awardheir.take_force
         x_fund_share = self.get_fund_share()
-        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_iota)
-        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_iota)
+        give_allot = allot_scale(give_ledger, x_fund_share, self.fund_grain)
+        take_allot = allot_scale(take_ledger, x_fund_share, self.fund_grain)
         for x_awardee_title, x_awardheir in self.awardheirs.items():
             x_awardheir.fund_give = give_allot.get(x_awardee_title)
             x_awardheir.fund_take = take_allot.get(x_awardee_title)
@@ -1033,7 +1033,7 @@ def planunit_shop(
     # Calculated fields
     tree_level: int = None,
     fund_ratio: float = None,
-    fund_iota: FundIota = None,
+    fund_grain: FundGrain = None,
     fund_onset: FundNum = None,
     fund_cease: FundNum = None,
     task: bool = None,
@@ -1077,7 +1077,7 @@ def planunit_shop(
         # Calculated fields
         tree_level=tree_level,
         fund_ratio=fund_ratio,
-        fund_iota=default_fund_iota_if_None(fund_iota),
+        fund_grain=default_fund_grain_if_None(fund_grain),
         fund_onset=fund_onset,
         fund_cease=fund_cease,
         task=task,

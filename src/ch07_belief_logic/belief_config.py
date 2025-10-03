@@ -106,11 +106,11 @@ def get_belief_calc_args_type_dict() -> dict[str, str]:
         "tree_traverse_count": "int",
         "credor_respect": "float",
         "debtor_respect": "float",
-        "fund_iota": "float",
+        "fund_grain": "float",
         "fund_pool": "float",
         "max_tree_traverse": "int",
         "penny": "float",
-        "respect_bit": "float",
+        "respect_grain": "float",
         "tally": "int",
     }
 
@@ -187,11 +187,11 @@ def get_belief_calc_args_sqlite_datatype_dict() -> dict[str, str]:
         "tree_traverse_count": "INTEGER",
         "credor_respect": "REAL",
         "debtor_respect": "REAL",
-        "fund_iota": "REAL",
+        "fund_grain": "REAL",
         "fund_pool": "REAL",
         "max_tree_traverse": "INTEGER",
         "penny": "REAL",
-        "respect_bit": "REAL",
+        "respect_grain": "REAL",
         "solo": "INTEGER",
         "tally": "INTEGER",
     }

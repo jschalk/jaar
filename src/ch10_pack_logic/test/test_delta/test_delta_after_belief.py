@@ -49,11 +49,11 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     new9_arg = "fund_pool"
     x_beliefatom.set_jvalue(new9_arg, new9_value)
     new8_value = 0.5555
-    new8_arg = "fund_iota"
+    new8_arg = "fund_grain"
     x_beliefatom.set_jvalue(new8_arg, new8_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new6_value = 0.5
-    new6_arg = "respect_bit"
+    new6_arg = "respect_grain"
     x_beliefatom.set_jvalue(new6_arg, new6_value)
     sue_beliefdelta.set_beliefatom(x_beliefatom)
     new7_value = 0.025
@@ -73,10 +73,10 @@ def test_BeliefDelta_get_edited_belief_ReturnsObj_BeliefUnitSimpleAttrs():
     assert after_sue_beliefunit.tally != before_sue_beliefunit.tally
     assert after_sue_beliefunit.fund_pool == new9_value
     assert after_sue_beliefunit.fund_pool != before_sue_beliefunit.fund_pool
-    assert after_sue_beliefunit.fund_iota == new8_value
-    assert after_sue_beliefunit.fund_iota != before_sue_beliefunit.fund_iota
-    assert after_sue_beliefunit.respect_bit == new6_value
-    assert after_sue_beliefunit.respect_bit != before_sue_beliefunit.respect_bit
+    assert after_sue_beliefunit.fund_grain == new8_value
+    assert after_sue_beliefunit.fund_grain != before_sue_beliefunit.fund_grain
+    assert after_sue_beliefunit.respect_grain == new6_value
+    assert after_sue_beliefunit.respect_grain != before_sue_beliefunit.respect_grain
     assert after_sue_beliefunit.penny == new7_value
     assert after_sue_beliefunit.penny != before_sue_beliefunit.penny
 

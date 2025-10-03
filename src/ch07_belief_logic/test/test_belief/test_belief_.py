@@ -1,8 +1,8 @@
 from pytest import raises as pytest_raises
 from src.ch02_rope_logic.rope import default_knot_if_None
 from src.ch03_finance_logic.finance_config import (
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
+    default_fund_grain_if_None,
+    default_RespectGrain_if_None,
     filter_penny,
     validate_fund_pool,
     validate_respect_num,
@@ -32,8 +32,8 @@ def test_BeliefUnit_Exists():
     assert x_belief.max_tree_traverse is None
     assert x_belief.knot is None
     assert x_belief.fund_pool is None
-    assert x_belief.fund_iota is None
-    assert x_belief.respect_bit is None
+    assert x_belief.fund_grain is None
+    assert x_belief.respect_grain is None
     assert x_belief.penny is None
     assert x_belief.last_pack_id is None
     # calculated attr
@@ -72,13 +72,13 @@ def test_BeliefUnit_Exists():
         wx.debtor_respect,
         wx.groupunits,
         wx.moment_label,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.fund_pool,
         wx.last_pack_id,
         wx.max_tree_traverse,
         wx.belief_name,
         wx.penny,
-        wx.respect_bit,
+        wx.respect_grain,
         wx.tally,
     }
 
@@ -125,8 +125,8 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     iowa_moment_label = "Iowa"
     slash_knot = "/"
     x_fund_pool = 555
-    x_fund_iota = 7
-    x_respect_bit = 5
+    x_fund_grain = 7
+    x_respect_grain = 5
     x_penny = 1
 
     # WHEN
@@ -135,8 +135,8 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
         moment_label=iowa_moment_label,
         knot=slash_knot,
         fund_pool=x_fund_pool,
-        fund_iota=x_fund_iota,
-        respect_bit=x_respect_bit,
+        fund_grain=x_fund_grain,
+        respect_grain=x_respect_grain,
         penny=x_penny,
     )
 
@@ -150,8 +150,8 @@ def test_beliefunit_shop_ReturnsObjectWithFilledFields():
     assert x_belief.max_tree_traverse == 3
     assert x_belief.knot == slash_knot
     assert x_belief.fund_pool == x_fund_pool
-    assert x_belief.fund_iota == x_fund_iota
-    assert x_belief.respect_bit == x_respect_bit
+    assert x_belief.fund_grain == x_fund_grain
+    assert x_belief.respect_grain == x_respect_grain
     assert x_belief.penny == x_penny
     assert x_belief.credor_respect == validate_respect_num()
     assert x_belief.debtor_respect == validate_respect_num()
@@ -182,10 +182,10 @@ def test_beliefunit_shop_ReturnsObjectWithCorrectEmptyField():
     assert x_belief.moment_label == get_default_moment_label()
     assert x_belief.knot == default_knot_if_None()
     assert x_belief.fund_pool == validate_fund_pool()
-    assert x_belief.fund_iota == default_fund_iota_if_None()
-    assert x_belief.respect_bit == default_RespectBit_if_None()
+    assert x_belief.fund_grain == default_fund_grain_if_None()
+    assert x_belief.respect_grain == default_RespectGrain_if_None()
     assert x_belief.penny == filter_penny()
-    assert x_belief.planroot.fund_iota == x_belief.fund_iota
+    assert x_belief.planroot.fund_grain == x_belief.fund_grain
     assert x_belief.planroot.knot == x_belief.knot
     assert x_belief.planroot.uid == 1
     assert x_belief.planroot.tree_level == 0
@@ -317,7 +317,7 @@ def test_BeliefUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
     zia_belief = beliefunit_shop(zia_str)
     x_fund_pool = 23
     zia_belief.set_fund_pool(x_fund_pool)
-    assert zia_belief.fund_iota == 1
+    assert zia_belief.fund_grain == 1
     assert zia_belief.fund_pool == x_fund_pool
 
     # WHEN
@@ -328,5 +328,5 @@ def test_BeliefUnit_set_fund_pool_RaisesErrorWhenArgIsNotMultiple():
     # THEN
     assert (
         str(excinfo.value)
-        == f"Belief '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_iota '{zia_belief.fund_iota}'"
+        == f"Belief '{zia_str}' cannot set fund_pool='{new_fund_pool}'. It is not divisible by fund_grain '{zia_belief.fund_grain}'"
     )

@@ -164,8 +164,8 @@ def test_HubUnit_get_belief_from_atom_files_ReturnsFileWithZeroAtoms(
     assert yao_belief.moment_label == yao_hubunit.moment_label
     assert yao_belief.knot == yao_hubunit.knot
     assert yao_belief.fund_pool == yao_hubunit.fund_pool
-    assert yao_belief.fund_iota == yao_hubunit.fund_iota
-    assert yao_belief.respect_bit == yao_hubunit.respect_bit
+    assert yao_belief.fund_grain == yao_hubunit.fund_grain
+    assert yao_belief.respect_grain == yao_hubunit.respect_grain
 
 
 def test_HubUnit_get_belief_from_atom_files_ReturnsFile_SimplePlan(

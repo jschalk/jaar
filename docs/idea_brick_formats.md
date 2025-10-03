@@ -1,6 +1,6 @@
 # Idea Manifest
 
-- [`br00000`](ideas/br00000.md): event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_iota, penny, respect_bit, knot, job_listen_rotations
+- [`br00000`](ideas/br00000.md): event_int, face_name, moment_label, timeline_label, c400_number, yr1_jan1_offset, monthday_index, fund_grain, penny, respect_grain, knot, job_listen_rotations
 - [`br00001`](ideas/br00001.md): event_int, face_name, moment_label, belief_name, bud_time, quota, celldepth
 - [`br00002`](ideas/br00002.md): event_int, face_name, moment_label, belief_name, voice_name, tran_time, amount
 - [`br00003`](ideas/br00003.md): event_int, face_name, moment_label, cumulative_minute, hour_label
@@ -20,7 +20,7 @@
 - [`br00026`](ideas/br00026.md): event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_state, reason_upper, reason_lower, reason_divisor
 - [`br00027`](ideas/br00027.md): event_int, face_name, moment_label, belief_name, plan_rope, reason_context, reason_active_requisite
 - [`br00028`](ideas/br00028.md): event_int, face_name, moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool
-- [`br00029`](ideas/br00029.md): event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit
+- [`br00029`](ideas/br00029.md): event_int, face_name, moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, penny, respect_grain
 - [`br00036`](ideas/br00036.md): event_int, face_name, moment_label, belief_name, plan_rope, healer_name, problem_bool
 - [`br00042`](ideas/br00042.md): event_int, face_name, otx_title, inx_title, otx_knot, inx_knot, unknown_str
 - [`br00043`](ideas/br00043.md): event_int, face_name, otx_name, inx_name, otx_knot, inx_knot, unknown_str

@@ -49,8 +49,8 @@ def test_create_empty_belief_from_belief_ReturnsObj():
     assert yao_empty_vision.get_voiceunits_dict() == {}
     assert yao_empty_vision.knot == yao_gut.knot
     assert yao_empty_vision.fund_pool == yao_gut.fund_pool
-    assert yao_empty_vision.fund_iota == yao_gut.fund_iota
-    assert yao_empty_vision.respect_bit == yao_gut.respect_bit
+    assert yao_empty_vision.fund_grain == yao_gut.fund_grain
+    assert yao_empty_vision.respect_grain == yao_gut.respect_grain
     assert yao_empty_vision.penny == yao_gut.penny
     assert yao_empty_vision.credor_respect != yao_gut.credor_respect
     assert yao_empty_vision.credor_respect == validate_respect_num()
@@ -96,8 +96,8 @@ def test_create_listen_basis_ReturnsObj():
     assert yao_basis_vision.get_voiceunits_dict() == yao_duty.get_voiceunits_dict()
     assert yao_basis_vision.knot == yao_duty.knot
     assert yao_basis_vision.fund_pool == yao_duty.fund_pool
-    assert yao_basis_vision.fund_iota == yao_duty.fund_iota
-    assert yao_basis_vision.respect_bit == yao_duty.respect_bit
+    assert yao_basis_vision.fund_grain == yao_duty.fund_grain
+    assert yao_basis_vision.respect_grain == yao_duty.respect_grain
     assert yao_basis_vision.credor_respect == yao_duty.credor_respect
     assert yao_basis_vision.debtor_respect == yao_duty.debtor_respect
     yao_basis_vision.cashout()
@@ -118,15 +118,15 @@ def test_get_default_job_ReturnsObj():
     blue_str = "blue"
     slash_str = "/"
     x_fund_pool = 99000
-    x_fund_iota = 80
-    x_respect_bit = 5
+    x_fund_grain = 80
+    x_respect_grain = 5
     sue_voice_pool = 800
     casa_str = "casa"
     bob_str = "Bob"
     last_pack_id = 7
     sue_max_tree_traverse = 9
     sue_beliefunit = beliefunit_shop(
-        sue_str, blue_str, slash_str, x_fund_pool, x_fund_iota, x_respect_bit
+        sue_str, blue_str, slash_str, x_fund_pool, x_fund_grain, x_respect_grain
     )
     sue_beliefunit.set_last_pack_id(last_pack_id)
     sue_beliefunit.add_voiceunit(bob_str, 3, 4)
@@ -147,8 +147,8 @@ def test_get_default_job_ReturnsObj():
     assert default_job.moment_label == blue_str
     assert default_job.knot == slash_str
     assert default_job.fund_pool == sue_voice_pool
-    assert default_job.fund_iota == x_fund_iota
-    assert default_job.respect_bit == x_respect_bit
+    assert default_job.fund_grain == x_fund_grain
+    assert default_job.respect_grain == x_respect_grain
     assert default_job.credor_respect == default_respect_num()
     assert default_job.debtor_respect == default_respect_num()
     assert default_job.max_tree_traverse == sue_max_tree_traverse

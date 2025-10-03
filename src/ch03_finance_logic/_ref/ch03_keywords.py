@@ -2,9 +2,8 @@ from enum import Enum
 
 
 class Ch03Keywords(str, Enum):
-    BitNum = "BitNum"
     FirstLabel = "FirstLabel"
-    FundIota = "FundIota"
+    FundGrain = "FundGrain"
     FundNum = "FundNum"
     GrainFloat = "GrainFloat"
     INSERT = "INSERT"
@@ -12,14 +11,16 @@ class Ch03Keywords(str, Enum):
     LabelTerm = "LabelTerm"
     MoneyUnit = "MoneyUnit"
     PennyNum = "PennyNum"
+    RespectGrain = "RespectGrain"
     RespectNum = "RespectNum"
     RopeTerm = "RopeTerm"
     UPDATE = "UPDATE"
-    fund_iota = "fund_iota"
+    fund_grain = "fund_grain"
     fund_pool = "fund_pool"
     knot = "knot"
     parent_rope = "parent_rope"
     penny = "penny"
+    respect_grain = "respect_grain"
     sqlite_datatype = "sqlite_datatype"
 
     def __str__(self):

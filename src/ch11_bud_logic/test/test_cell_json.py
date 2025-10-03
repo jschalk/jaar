@@ -219,7 +219,8 @@ def test_CellUnit_get_json_ReturnsObj():
     x_cell_json = x_cellunit.get_json()
 
     # THEN
-    assert len(x_cell_json) == 1148
+    # sanity check with brittle test that is changed often.
+    assert len(x_cell_json) == 1151
 
 
 def test_cellunit_get_from_dict_ReturnsObj_Scenario0_NoParameters():

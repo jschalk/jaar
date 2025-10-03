@@ -1,6 +1,6 @@
 {
   "belief_name": "Yao", 
-  "fund_iota": 1, 
+  "fund_grain": 1, 
   "fund_pool": 1000000000.0, 
   "knot": ";", 
   "max_tree_traverse": 2, 
@@ -3263,7 +3263,7 @@
     "star": 1, 
     "uid": 1
   }, 
-  "respect_bit": 1, 
+  "respect_grain": 1, 
   "tally": null, 
   "voices": {
     "A a ron Jones": {

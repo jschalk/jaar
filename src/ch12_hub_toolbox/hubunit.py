@@ -14,8 +14,8 @@ from src.ch01_data_toolbox.file_toolbox import (
 )
 from src.ch02_rope_logic.rope import validate_labelterm
 from src.ch03_finance_logic.finance_config import (
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
+    default_fund_grain_if_None,
+    default_RespectGrain_if_None,
     filter_penny,
     validate_fund_pool,
 )
@@ -78,8 +78,8 @@ class HubUnit:
     keep_rope: RopeTerm = None
     knot: str = None
     fund_pool: float = None
-    fund_iota: float = None
-    respect_bit: float = None
+    fund_grain: float = None
+    respect_grain: float = None
     penny: float = None
     keep_point_magnitude: float = None
     keeps_dir: str = None
@@ -100,8 +100,8 @@ class HubUnit:
             moment_label=self.moment_label,
             knot=self.knot,
             fund_pool=self.fund_pool,
-            fund_iota=self.fund_iota,
-            respect_bit=self.respect_bit,
+            fund_grain=self.fund_grain,
+            respect_grain=self.respect_grain,
             penny=self.penny,
         )
         x_beliefunit.last_pack_id = init_pack_id()
@@ -361,7 +361,7 @@ class HubUnit:
             belief_name=healer_name,
             keep_rope=self.keep_rope,
             knot=self.knot,
-            respect_bit=self.respect_bit,
+            respect_grain=self.respect_grain,
         )
         return speaker_hubunit.get_vision_belief(speaker_id)
 
@@ -424,8 +424,8 @@ def hubunit_shop(
     keep_rope: RopeTerm = None,
     knot: str = None,
     fund_pool: float = None,
-    fund_iota: float = None,
-    respect_bit: float = None,
+    fund_grain: float = None,
+    respect_grain: float = None,
     penny: float = None,
     keep_point_magnitude: float = None,
 ) -> HubUnit:
@@ -436,8 +436,8 @@ def hubunit_shop(
         keep_rope=keep_rope,
         knot=default_knot_if_None(knot),
         fund_pool=validate_fund_pool(fund_pool),
-        fund_iota=default_fund_iota_if_None(fund_iota),
-        respect_bit=default_RespectBit_if_None(respect_bit),
+        fund_grain=default_fund_grain_if_None(fund_grain),
+        respect_grain=default_RespectGrain_if_None(respect_grain),
         penny=filter_penny(penny),
         keep_point_magnitude=validate_fund_pool(keep_point_magnitude),
     )

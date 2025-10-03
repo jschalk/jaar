@@ -20,7 +20,7 @@ def test_BeliefUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     zia_belief = beliefunit_shop(zia_str)
     x_credor_respect = 23
     zia_belief.set_credor_respect(x_credor_respect)
-    assert zia_belief.respect_bit == 1
+    assert zia_belief.respect_grain == 1
     assert zia_belief.credor_respect == x_credor_respect
 
     # WHEN
@@ -31,7 +31,7 @@ def test_BeliefUnit_set_credor_respect_RaisesErrorWhenArgIsNotMultiple():
     # THEN
     assert (
         str(excinfo.value)
-        == f"Belief '{zia_str}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{zia_belief.respect_bit}'"
+        == f"Belief '{zia_str}' cannot set credor_respect='{new_credor_respect}'. It is not divisible byrespect_grain'{zia_belief.respect_grain}'"
     )
 
 
@@ -54,7 +54,7 @@ def test_BeliefUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     zia_belief = beliefunit_shop(zia_str)
     x_debtor_respect = 23
     zia_belief.set_debtor_respect(x_debtor_respect)
-    assert zia_belief.respect_bit == 1
+    assert zia_belief.respect_grain == 1
     assert zia_belief.debtor_respect == x_debtor_respect
 
     # WHEN
@@ -65,7 +65,7 @@ def test_BeliefUnit_set_debtor_respect_RaisesErrorWhenArgIsNotMultiple():
     # THEN
     assert (
         str(excinfo.value)
-        == f"Belief '{zia_str}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{zia_belief.respect_bit}'"
+        == f"Belief '{zia_str}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible byrespect_grain'{zia_belief.respect_grain}'"
     )
 
 

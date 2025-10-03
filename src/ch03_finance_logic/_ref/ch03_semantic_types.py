@@ -16,7 +16,7 @@ class RespectNum(float):
     pass
 
 
-class BitNum(float):
+class RespectGrain(float):
     """Smallest Unit of score (RespectNum) ala 'the slightest bit of respect!'"""
 
     pass
@@ -28,7 +28,7 @@ class FundNum(float):
     pass
 
 
-class FundIota(float):
+class FundGrain(float):
     """Smallest Unit of fund_num"""
 
     pass

@@ -525,8 +525,8 @@ def fund_graph0(
     add_keep__rect(fig, -0.5, -4.5, 10, 2.3, d_sue1_label, "", "", "")
     d_sue1_p0 = "Fund Source is PlanRoot. Each Plan fund range calculated by star "
     d_sue1_p1 = "PlanRoot Fund ranges: Black arrows. Sum of childless Plan's funds equal planroot's fund "
-    d_sue1_p2 = "Regular Fund: Green arrows, all fund_iotas end up at VoiceUnits"
-    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_iotas from active tasks"
+    d_sue1_p2 = "Regular Fund: Green arrows, all fund_grains end up at VoiceUnits"
+    d_sue1_p3 = "Agenda Fund: Blue arrows, fund_grains from active tasks"
     d_sue1_p4 = f"fund_pool = {x_belief.fund_pool} "
     fig.add_trace(
         plotly_Scatter(

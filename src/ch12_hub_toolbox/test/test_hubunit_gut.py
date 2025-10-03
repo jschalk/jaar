@@ -29,8 +29,8 @@ def test_HubUnit_default_gut_belief_ReturnsObj():
         keep_rope=None,
         knot=slash_str,
         fund_pool=x_fund_pool,
-        fund_iota=pnine_float,
-        respect_bit=pnine_float,
+        fund_grain=pnine_float,
+        respect_grain=pnine_float,
         penny=pfour_float,
     )
 
@@ -42,8 +42,8 @@ def test_HubUnit_default_gut_belief_ReturnsObj():
     assert sue_default_gut.belief_name == sue_hubunit.belief_name
     assert sue_default_gut.knot == sue_hubunit.knot
     assert sue_default_gut.fund_pool == sue_hubunit.fund_pool
-    assert sue_default_gut.fund_iota == sue_hubunit.fund_iota
-    assert sue_default_gut.respect_bit == sue_hubunit.respect_bit
+    assert sue_default_gut.fund_grain == sue_hubunit.fund_grain
+    assert sue_default_gut.respect_grain == sue_hubunit.respect_grain
     assert sue_default_gut.penny == sue_hubunit.penny
     assert sue_default_gut.last_pack_id == init_pack_id()
 
@@ -139,7 +139,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesgutFileAndPackFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_grain=seven_int)
     assert gut_file_exists(env_dir(), "amy23", sue_str) is False
     init_pack_file_path = create_path(sue_hubunit._packs_dir, f"{init_pack_id()}.json")
     delete_dir(sue_hubunit._packs_dir)
@@ -152,7 +152,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesgutFileAndPackFile(
     gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
     assert gut_belief.moment_label == "amy23"
     assert gut_belief.belief_name == sue_str
-    assert gut_belief.respect_bit == seven_int
+    assert gut_belief.respect_grain == seven_int
     assert os_path_exists(init_pack_file_path)
 
 
@@ -162,7 +162,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlygutFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_grain=seven_int)
     sue_hubunit.initialize_pack_gut_files()
     assert gut_file_exists(env_dir(), "amy23", sue_str)
     gut_path = create_gut_path(env_dir(), "amy23", sue_str)
@@ -178,7 +178,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlygutFile(
     gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
     assert gut_belief.moment_label == "amy23"
     assert gut_belief.belief_name == sue_str
-    assert gut_belief.respect_bit == seven_int
+    assert gut_belief.respect_grain == seven_int
     assert os_path_exists(init_pack_file_path)
 
 
@@ -188,7 +188,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlyPackFile(
     # ESTABLISH
     sue_str = "Sue"
     seven_int = 25
-    sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_bit=seven_int)
+    sue_hubunit = hubunit_shop(env_dir(), "amy23", sue_str, respect_grain=seven_int)
     sue_hubunit.initialize_pack_gut_files()
     sue_gut_belief = open_gut_file(env_dir(), "amy23", sue_str)
     bob_str = "Bob"
@@ -205,7 +205,7 @@ def test_HubUnit_initialize_pack_gut_files_SavesOnlyPackFile(
     # THEN
     assert sue_gut_belief.moment_label == "amy23"
     assert sue_gut_belief.belief_name == sue_str
-    assert sue_gut_belief.respect_bit == seven_int
+    assert sue_gut_belief.respect_grain == seven_int
     assert sue_gut_belief.voice_exists(bob_str)
     assert os_path_exists(init_pack_file_path)
 

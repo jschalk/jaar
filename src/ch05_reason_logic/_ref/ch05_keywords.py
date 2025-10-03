@@ -2,9 +2,8 @@ from enum import Enum
 
 
 class Ch05Keywords(str, Enum):
-    BitNum = "BitNum"
     FirstLabel = "FirstLabel"
-    FundIota = "FundIota"
+    FundGrain = "FundGrain"
     FundNum = "FundNum"
     GrainFloat = "GrainFloat"
     GroupTitle = "GroupTitle"
@@ -15,6 +14,7 @@ class Ch05Keywords(str, Enum):
     MoneyUnit = "MoneyUnit"
     NameTerm = "NameTerm"
     PennyNum = "PennyNum"
+    RespectGrain = "RespectGrain"
     RespectNum = "RespectNum"
     RopeTerm = "RopeTerm"
     TitleTerm = "TitleTerm"
@@ -38,7 +38,7 @@ class Ch05Keywords(str, Enum):
     fund_agenda_ratio_take = "fund_agenda_ratio_take"
     fund_agenda_take = "fund_agenda_take"
     fund_give = "fund_give"
-    fund_iota = "fund_iota"
+    fund_grain = "fund_grain"
     fund_pool = "fund_pool"
     fund_take = "fund_take"
     give_force = "give_force"
@@ -64,7 +64,7 @@ class Ch05Keywords(str, Enum):
     reason_state = "reason_state"
     reason_upper = "reason_upper"
     reasonunits = "reasonunits"
-    respect_bit = "respect_bit"
+    respect_grain = "respect_grain"
     solo = "solo"
     sqlite_datatype = "sqlite_datatype"
     status = "status"

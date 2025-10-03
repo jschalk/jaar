@@ -66,7 +66,7 @@ def test_get_plan_view_dict_ReturnsObj_Scenario0_EmptyPlan():
         wx.descendant_pledge_count,
         wx.factheirs,
         wx.fund_ratio,
-        wx.fund_iota,
+        wx.fund_grain,
         wx.fund_onset,
         wx.fund_cease,
         wx.healerunit_ratio,

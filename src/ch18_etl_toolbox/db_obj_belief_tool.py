@@ -99,19 +99,19 @@ def create_blrgrou_metrics_insert_sqlstr(values_dict: dict[str,]):
     group_title = values_dict.get("group_title")
     credor_pool = values_dict.get("credor_pool")
     debtor_pool = values_dict.get("debtor_pool")
-    fund_iota = values_dict.get("fund_iota")
+    fund_grain = values_dict.get("fund_grain")
     fund_give = values_dict.get("fund_give")
     fund_take = values_dict.get("fund_take")
     fund_agenda_give = values_dict.get("fund_agenda_give")
     fund_agenda_take = values_dict.get("fund_agenda_take")
     knot = values_dict.get("knot")
     real_str = "REAL"
-    return f"""INSERT INTO belief_groupunit_job (moment_label, belief_name, group_title, fund_iota, knot, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take)
+    return f"""INSERT INTO belief_groupunit_job (moment_label, belief_name, group_title, fund_grain, knot, credor_pool, debtor_pool, fund_give, fund_take, fund_agenda_give, fund_agenda_take)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
 , {sqlite_obj_str(group_title, "TEXT")}
-, {sqlite_obj_str(fund_iota, real_str)}
+, {sqlite_obj_str(fund_grain, real_str)}
 , {sqlite_obj_str(knot, "TEXT")}
 , {sqlite_obj_str(credor_pool, real_str)}
 , {sqlite_obj_str(debtor_pool, real_str)}
@@ -275,7 +275,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     problem_bool = values_dict.get("problem_bool")
     active = values_dict.get("active")
     task = values_dict.get("task")
-    fund_iota = values_dict.get("fund_iota")
+    fund_grain = values_dict.get("fund_grain")
     fund_onset = values_dict.get("fund_onset")
     fund_cease = values_dict.get("fund_cease")
     fund_ratio = values_dict.get("fund_ratio")
@@ -290,7 +290,7 @@ def create_blrplan_metrics_insert_sqlstr(values_dict: dict[str,]):
     integer_str = "INTEGER"
     real_str = "REAL"
 
-    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_iota, active, task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_voice_cred, all_voice_debt)
+    return f"""INSERT INTO belief_planunit_job (moment_label, belief_name, plan_rope, begin, close, addin, numor, denom, morph, gogo_want, stop_want, star, pledge, problem_bool, fund_grain, active, task, fund_onset, fund_cease, fund_ratio, gogo_calc, stop_calc, tree_level, range_evaluated, descendant_pledge_count, healerunit_ratio, all_voice_cred, all_voice_debt)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -306,7 +306,7 @@ VALUES (
 , {sqlite_obj_str(star, real_str)}
 , {sqlite_obj_str(pledge, real_str)}
 , {sqlite_obj_str(problem_bool, "INTEGER")}
-, {sqlite_obj_str(fund_iota, real_str)}
+, {sqlite_obj_str(fund_grain, real_str)}
 , {sqlite_obj_str(active, "INTEGER")}
 , {sqlite_obj_str(task, "INTEGER")}
 , {sqlite_obj_str(fund_onset, real_str)}
@@ -338,14 +338,14 @@ def create_beliefunit_metrics_insert_sqlstr(values_dict: dict[str,]):
     tree_traverse_count = values_dict.get("tree_traverse_count")
     credor_respect = values_dict.get("credor_respect")
     debtor_respect = values_dict.get("debtor_respect")
-    fund_iota = values_dict.get("fund_iota")
+    fund_grain = values_dict.get("fund_grain")
     fund_pool = values_dict.get("fund_pool")
     max_tree_traverse = values_dict.get("max_tree_traverse")
     penny = values_dict.get("penny")
-    respect_bit = values_dict.get("respect_bit")
+    respect_grain = values_dict.get("respect_grain")
     tally = values_dict.get("tally")
 
-    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_iota, penny, respect_bit, rational, keeps_justified, offtrack_fund, sum_healerunit_share, keeps_buildable, tree_traverse_count)
+    return f"""INSERT INTO beliefunit_job (moment_label, belief_name, credor_respect, debtor_respect, fund_pool, max_tree_traverse, tally, fund_grain, penny, respect_grain, rational, keeps_justified, offtrack_fund, sum_healerunit_share, keeps_buildable, tree_traverse_count)
 VALUES (
   {sqlite_obj_str(moment_label, "TEXT")}
 , {sqlite_obj_str(belief_name, "TEXT")}
@@ -354,9 +354,9 @@ VALUES (
 , {sqlite_obj_str(fund_pool, real_str)}
 , {sqlite_obj_str(max_tree_traverse, integer_str)}
 , {sqlite_obj_str(tally, real_str)}
-, {sqlite_obj_str(fund_iota, real_str)}
+, {sqlite_obj_str(fund_grain, real_str)}
 , {sqlite_obj_str(penny, real_str)}
-, {sqlite_obj_str(respect_bit, real_str)}
+, {sqlite_obj_str(respect_grain, real_str)}
 , {sqlite_obj_str(rational, integer_str)}
 , {sqlite_obj_str(keeps_justified, integer_str)}
 , {sqlite_obj_str(offtrack_fund, real_str)}

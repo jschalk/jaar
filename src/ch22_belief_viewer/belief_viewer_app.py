@@ -66,7 +66,7 @@ def get_belief_viewer_template() -> str:
             <input type="checkbox" id="show_fund_share"><label for="show_fund_share">fund_share</label>
             <input type="checkbox" id="show_fund_onset"><label for="show_fund_onset">fund_onset</label>
             <input type="checkbox" id="show_fund_cease"><label for="show_fund_cease">fund_cease</label>
-            <input type="checkbox" id="show_fund_iota"><label for="show_fund_iota">fund_iota</label>
+            <input type="checkbox" id="show_fund_grain"><label for="show_fund_grain">fund_grain</label>
             <input type="checkbox" id="show_fund_ratio"><label for="show_fund_ratio">fund_ratio</label>
             <input type="checkbox" id="show_parent_rope"><label for="show_parent_rope">parent_rope</label>
             <input type="checkbox" id="show_root_boolean"><label for="show_root_boolean">root_boolean</label>

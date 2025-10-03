@@ -241,7 +241,7 @@ def get_voice_mandate_ledger(
     if mandate_sum == 0:
         mandates = reset_mandates_to_minimum(mandates, x_belief.penny)
     if mandate_sum != x_belief.fund_pool:
-        mandates = allot_scale(mandates, x_belief.fund_pool, x_belief.fund_iota)
+        mandates = allot_scale(mandates, x_belief.fund_pool, x_belief.fund_grain)
     return mandates
 
 

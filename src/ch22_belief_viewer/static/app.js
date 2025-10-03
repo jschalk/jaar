@@ -44,7 +44,7 @@ let show_factheirs = false;
 let show_fund_share = false;
 let show_fund_onset = false;
 let show_fund_cease = false;
-let show_fund_iota = false;
+let show_fund_grain = false;
 let show_fund_ratio = false;
 let show_all_voice_cred = false;
 let show_all_voice_debt = false;
@@ -109,7 +109,7 @@ document.addEventListener('DOMContentLoaded', function () {
     const show_fund_shareCheckbox = document.getElementById('show_fund_share');
     const show_fund_onsetCheckbox = document.getElementById('show_fund_onset');
     const show_fund_ceaseCheckbox = document.getElementById('show_fund_cease');
-    const show_fund_iotaCheckbox = document.getElementById('show_fund_iota');
+    const show_fund_grainCheckbox = document.getElementById('show_fund_grain');
     const show_fund_ratioCheckbox = document.getElementById('show_fund_ratio');
     const show_all_voice_credCheckbox = document.getElementById('show_all_voice_cred');
     const show_all_voice_debtCheckbox = document.getElementById('show_all_voice_debt');
@@ -173,7 +173,7 @@ document.addEventListener('DOMContentLoaded', function () {
     show_fund_shareCheckbox.addEventListener('change', function () { show_fund_share = this.checked; renderPlanTree(); });
     show_fund_onsetCheckbox.addEventListener('change', function () { show_fund_onset = this.checked; renderPlanTree(); });
     show_fund_ceaseCheckbox.addEventListener('change', function () { show_fund_cease = this.checked; renderPlanTree(); });
-    show_fund_iotaCheckbox.addEventListener('change', function () { show_fund_iota = this.checked; renderPlanTree(); });
+    show_fund_grainCheckbox.addEventListener('change', function () { show_fund_grain = this.checked; renderPlanTree(); });
     show_fund_ratioCheckbox.addEventListener('change', function () { show_fund_ratio = this.checked; renderPlanTree(); });
     show_all_voice_credCheckbox.addEventListener('change', function () { show_all_voice_cred = this.checked; renderPlanTree(); });
     show_all_voice_debtCheckbox.addEventListener('change', function () { show_all_voice_debt = this.checked; renderPlanTree(); });
@@ -288,7 +288,7 @@ function renderPlanUnit(planUnit, level) {
 
     const fund_onsetIndicator = show_fund_onset ? ` onset-${planUnit.fund_onset}` : '';
     const fund_ceaseIndicator = show_fund_cease ? ` cease-${planUnit.fund_cease}` : '';
-    const fund_iotaIndicator = show_fund_iota ? ` (iota: ${planUnit.fund_iota})` : '';
+    const fund_grainIndicator = show_fund_grain ? ` (iota: ${planUnit.fund_grain})` : '';
     const fund_ratioIndicator = show_fund_ratio ? ` ratio-${planUnit.fund_ratio}` : '';
 
 
@@ -309,7 +309,7 @@ function renderPlanUnit(planUnit, level) {
     ${fund_shareIndicator}
     ${fund_onsetIndicator}
     ${fund_ceaseIndicator}
-    ${fund_iotaIndicator}
+    ${fund_grainIndicator}
     ${fund_ratioIndicator}
     ${activeIndicator}
     ${taskIndicator}

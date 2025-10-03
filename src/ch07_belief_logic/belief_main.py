@@ -26,13 +26,13 @@ from src.ch02_rope_logic.rope import (
 )
 from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import (
-    BitNum,
-    FundIota,
+    FundGrain,
     FundNum,
     PennyNum,
+    RespectGrain,
     RespectNum,
-    default_fund_iota_if_None,
-    default_RespectBit_if_None,
+    default_fund_grain_if_None,
+    default_RespectGrain_if_None,
     filter_penny,
     valid_finance_ratio,
     validate_fund_pool,
@@ -126,8 +126,8 @@ class BeliefUnit:
     moment_label: MomentLabel = None
     knot: str = None
     fund_pool: FundNum = None
-    fund_iota: FundIota = None
-    respect_bit: BitNum = None
+    fund_grain: FundGrain = None
+    respect_grain: RespectGrain = None
     penny: PennyNum = None
     tally: float = None
     voices: dict[VoiceName, VoiceUnit] = None
@@ -167,8 +167,8 @@ class BeliefUnit:
         self.last_pack_id = x_last_pack_id
 
     def set_fund_pool(self, x_fund_pool):
-        if valid_finance_ratio(x_fund_pool, self.fund_iota) is False:
-            exception_str = f"Belief '{self.belief_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_iota '{self.fund_iota}'"
+        if valid_finance_ratio(x_fund_pool, self.fund_grain) is False:
+            exception_str = f"Belief '{self.belief_name}' cannot set fund_pool='{x_fund_pool}'. It is not divisible by fund_grain '{self.fund_grain}'"
             raise _bit_RatioException(exception_str)
 
         self.fund_pool = validate_fund_pool(x_fund_pool)
@@ -179,14 +179,14 @@ class BeliefUnit:
         self.set_fund_pool(x_voice_pool)
 
     def set_credor_respect(self, new_credor_respect: int):
-        if valid_finance_ratio(new_credor_respect, self.respect_bit) is False:
-            exception_str = f"Belief '{self.belief_name}' cannot set credor_respect='{new_credor_respect}'. It is not divisible by bit '{self.respect_bit}'"
+        if valid_finance_ratio(new_credor_respect, self.respect_grain) is False:
+            exception_str = f"Belief '{self.belief_name}' cannot set credor_respect='{new_credor_respect}'. It is not divisible byrespect_grain'{self.respect_grain}'"
             raise _bit_RatioException(exception_str)
         self.credor_respect = new_credor_respect
 
     def set_debtor_respect(self, new_debtor_respect: int):
-        if valid_finance_ratio(new_debtor_respect, self.respect_bit) is False:
-            exception_str = f"Belief '{self.belief_name}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible by bit '{self.respect_bit}'"
+        if valid_finance_ratio(new_debtor_respect, self.respect_grain) is False:
+            exception_str = f"Belief '{self.belief_name}' cannot set debtor_respect='{new_debtor_respect}'. It is not divisible byrespect_grain'{self.respect_grain}'"
             raise _bit_RatioException(exception_str)
         self.debtor_respect = new_debtor_respect
 
@@ -356,8 +356,8 @@ class BeliefUnit:
     def set_voiceunit(self, x_voiceunit: VoiceUnit, auto_set_membership: bool = True):
         if x_voiceunit.knot != self.knot:
             x_voiceunit.knot = self.knot
-        if x_voiceunit.respect_bit != self.respect_bit:
-            x_voiceunit.respect_bit = self.respect_bit
+        if x_voiceunit.respect_grain != self.respect_grain:
+            x_voiceunit.respect_grain = self.respect_grain
         if auto_set_membership and x_voiceunit.memberships_exist() is False:
             x_voiceunit.add_membership(x_voiceunit.voice_name)
         self.voices[x_voiceunit.voice_name] = x_voiceunit
@@ -400,7 +400,7 @@ class BeliefUnit:
         return x_dict
 
     def set_groupunit(self, x_groupunit: GroupUnit):
-        x_groupunit.fund_iota = self.fund_iota
+        x_groupunit.fund_grain = self.fund_grain
         self.groupunits[x_groupunit.group_title] = x_groupunit
 
     def groupunit_exists(self, group_title: GroupTitle) -> bool:
@@ -635,8 +635,8 @@ class BeliefUnit:
             raise InvalidBeliefException(exception_str)
 
         plan_kid.knot = self.knot
-        if plan_kid.fund_iota != self.fund_iota:
-            plan_kid.fund_iota = self.fund_iota
+        if plan_kid.fund_grain != self.fund_grain:
+            plan_kid.fund_grain = self.fund_grain
         if not get_rid_of_missing_awardunits_awardee_titles:
             plan_kid = self._get_filtered_awardunits_plan(plan_kid)
         plan_kid.set_parent_rope(parent_rope=parent_rope)
@@ -919,8 +919,8 @@ reason_case:    {reason_case}"""
 
     def _add_to_voiceunits_fund_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
-        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
+        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_grain)
+        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_grain)
         for x_voice_name, voice_fund_give in fund_give_allot.items():
             self.get_voice(x_voice_name).add_fund_give(voice_fund_give)
             # if there is no differentiated agenda (what factunits exist do not change agenda)
@@ -934,8 +934,8 @@ reason_case:    {reason_case}"""
 
     def _add_to_voiceunits_fund_agenda_give_take(self, plan_fund_share: float):
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_iota)
-        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_iota)
+        fund_give_allot = allot_scale(credor_ledger, plan_fund_share, self.fund_grain)
+        fund_take_allot = allot_scale(debtor_ledger, plan_fund_share, self.fund_grain)
         for x_voice_name, voice_fund_give in fund_give_allot.items():
             self.get_voice(x_voice_name).add_fund_agenda_give(voice_fund_give)
         for x_voice_name, voice_fund_take in fund_take_allot.items():
@@ -1204,8 +1204,12 @@ reason_case:    {reason_case}"""
         self.credor_respect = validate_respect_num(self.credor_respect)
         self.debtor_respect = validate_respect_num(self.debtor_respect)
         credor_ledger, debtor_ledger = self.get_credit_ledger_debt_ledger()
-        credor_allot = allot_scale(credor_ledger, self.credor_respect, self.respect_bit)
-        debtor_allot = allot_scale(debtor_ledger, self.debtor_respect, self.respect_bit)
+        credor_allot = allot_scale(
+            credor_ledger, self.credor_respect, self.respect_grain
+        )
+        debtor_allot = allot_scale(
+            debtor_ledger, self.debtor_respect, self.respect_grain
+        )
         for x_voice_name, voice_credor_pool in credor_allot.items():
             self.get_voice(x_voice_name).set_credor_pool(voice_credor_pool)
         for x_voice_name, voice_debtor_pool in debtor_allot.items():
@@ -1279,7 +1283,7 @@ reason_case:    {reason_case}"""
             kids_plans = parent_plan.kids.items()
             x_ledger = {x_rope: plan_kid.star for x_rope, plan_kid in kids_plans}
             parent_fund_num = parent_plan.fund_cease - parent_plan.fund_onset
-            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_iota)
+            alloted_fund_num = allot_scale(x_ledger, parent_fund_num, self.fund_grain)
 
             fund_onset = None
             fund_cease = None
@@ -1398,8 +1402,8 @@ reason_case:    {reason_case}"""
             "voices": self.get_voiceunits_dict(),
             "tally": self.tally,
             "fund_pool": self.fund_pool,
-            "fund_iota": self.fund_iota,
-            "respect_bit": self.respect_bit,
+            "fund_grain": self.fund_grain,
+            "respect_grain": self.respect_grain,
             "penny": self.penny,
             "belief_name": self.belief_name,
             "moment_label": self.moment_label,
@@ -1440,8 +1444,8 @@ def beliefunit_shop(
     moment_label: MomentLabel = None,
     knot: str = None,
     fund_pool: FundNum = None,
-    fund_iota: FundIota = None,
-    respect_bit: BitNum = None,
+    fund_grain: FundGrain = None,
+    respect_grain: RespectGrain = None,
     penny: PennyNum = None,
     tally: float = None,
 ) -> BeliefUnit:
@@ -1457,8 +1461,8 @@ def beliefunit_shop(
         credor_respect=validate_respect_num(),
         debtor_respect=validate_respect_num(),
         fund_pool=validate_fund_pool(fund_pool),
-        fund_iota=default_fund_iota_if_None(fund_iota),
-        respect_bit=default_RespectBit_if_None(respect_bit),
+        fund_grain=default_fund_grain_if_None(fund_grain),
+        respect_grain=default_RespectGrain_if_None(respect_grain),
         penny=filter_penny(penny),
         _plan_dict=get_empty_dict_if_None(),
         _keep_dict=get_empty_dict_if_None(),
@@ -1475,7 +1479,7 @@ def beliefunit_shop(
         uid=1,
         tree_level=0,
         knot=x_belief.knot,
-        fund_iota=x_belief.fund_iota,
+        fund_grain=x_belief.fund_grain,
         parent_rope="",
     )
     x_belief.set_max_tree_traverse(3)
@@ -1501,11 +1505,11 @@ def get_beliefunit_from_dict(belief_dict: dict) -> BeliefUnit:
     x_belief.fund_pool = validate_fund_pool(
         obj_from_belief_dict(belief_dict, "fund_pool")
     )
-    x_belief.fund_iota = default_fund_iota_if_None(
-        obj_from_belief_dict(belief_dict, "fund_iota")
+    x_belief.fund_grain = default_fund_grain_if_None(
+        obj_from_belief_dict(belief_dict, "fund_grain")
     )
-    x_belief.respect_bit = default_RespectBit_if_None(
-        obj_from_belief_dict(belief_dict, "respect_bit")
+    x_belief.respect_grain = default_RespectGrain_if_None(
+        obj_from_belief_dict(belief_dict, "respect_grain")
     )
     x_belief.penny = filter_penny(obj_from_belief_dict(belief_dict, "penny"))
     x_belief.credor_respect = obj_from_belief_dict(belief_dict, "credor_respect")
@@ -1542,7 +1546,7 @@ def create_planroot_from_belief_dict(x_belief: BeliefUnit, belief_dict: dict):
         awardunits=get_obj_from_plan_dict(planroot_dict, "awardunits"),
         is_expanded=get_obj_from_plan_dict(planroot_dict, "is_expanded"),
         knot=x_belief.knot,
-        fund_iota=default_fund_iota_if_None(x_belief.fund_iota),
+        fund_grain=default_fund_grain_if_None(x_belief.fund_grain),
     )
     create_planroot_kids_from_dict(x_belief, planroot_dict)
 

@@ -14,8 +14,8 @@ class BeliefTable(Base):
     credor_respect = Column(Float)
     debtor_respect = Column(Float)
     fund_pool = Column(Float)
-    fund_iota = Column(Float)
-    respect_bit = Column(Float)
+    fund_grain = Column(Float)
+    respect_grain = Column(Float)
     penny = Column(Float)
     tally = Column(Integer)
 

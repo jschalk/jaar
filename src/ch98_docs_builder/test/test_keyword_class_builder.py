@@ -40,12 +40,12 @@ def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario1_NonEmpty_keywo
     # ESTABLISH
     ch04_int = 4
     ch04_keywords = {
-        "BitNum",
-        "FundIota",
+        "FundGrain",
         "INSERT",
         "fund_pool",
         "GroupTitle",
         "HealerName",
+        "RespectGrain",
     }
 
     # WHEN
@@ -58,11 +58,11 @@ def test_create_keywords_enum_class_file_str_ReturnsObj_Scenario1_NonEmpty_keywo
 
 
 class Ch04{key_str}words(str, Enum):
-    BitNum = "BitNum"
-    FundIota = "FundIota"
+    FundGrain = "FundGrain"
     GroupTitle = "GroupTitle"
     HealerName = "HealerName"
     INSERT = "INSERT"
+    RespectGrain = "RespectGrain"
     fund_pool = "fund_pool"
 
     def __str__(self):
@@ -76,7 +76,7 @@ class Ch04{key_str}words(str, Enum):
 def test_save_keywords_enum_class_file_SetsFile(env_dir_setup_cleanup):
     # ESTABLISH
     ch04_int = 4
-    ch04_keywords = {"BitNum", "FundIota"}
+    ch04_keywords = {"RespectGrain", "FundGrain"}
     ch04_dir = get_chapter_temp_dir()
     expected_file_path = create_keywords_class_file_path(ch04_dir, 4)
     assert not os_path_exists(expected_file_path)

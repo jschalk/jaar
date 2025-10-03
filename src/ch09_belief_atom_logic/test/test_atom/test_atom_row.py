@@ -16,7 +16,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.reason_context is None
     assert x_atomrow.reason_active_requisite is None
     assert x_atomrow.begin is None
-    assert x_atomrow.respect_bit is None
+    assert x_atomrow.respect_grain is None
     assert x_atomrow.close is None
     assert x_atomrow.voice_cred_points is None
     assert x_atomrow.group_cred_points is None
@@ -29,7 +29,7 @@ def test_AtomRow_Exists():
     assert x_atomrow.fact_context is None
     assert x_atomrow.fact_upper is None
     assert x_atomrow.fact_lower is None
-    assert x_atomrow.fund_iota is None
+    assert x_atomrow.fund_grain is None
     assert x_atomrow.fund_pool is None
     assert x_atomrow.give_force is None
     assert x_atomrow.gogo_want is None

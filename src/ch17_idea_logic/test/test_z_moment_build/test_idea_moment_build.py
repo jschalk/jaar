@@ -37,8 +37,8 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
     br00003_df = get_ex1_br00003_df()
     br00004_df = get_ex1_br00004_df()
     br00005_df = get_ex1_br00005_df()
-    x_fund_iota = 55
-    x_respect_bit = 66
+    x_fund_grain = 55
+    x_respect_grain = 66
     x_penny = 77
     x_job_listen_rotations = 7
     x_moments_dir = create_path(idea_moments_dir(), "Fay")
@@ -53,8 +53,8 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
         br00003_df,
         br00004_df,
         br00005_df,
-        x_fund_iota,
-        x_respect_bit,
+        x_fund_grain,
+        x_respect_grain,
         x_penny,
         x_moments_dir,
     )
@@ -66,9 +66,9 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
     expected_amy23_momentunit = momentunit_shop(
         moment_label=amy23_str,
         moment_mstr_dir=x_moments_dir,
-        fund_iota=x_fund_iota,
+        fund_grain=x_fund_grain,
         penny=x_penny,
-        respect_bit=x_respect_bit,
+        respect_grain=x_respect_grain,
         knot=slash_str,
         timeline=creg_timelineunit,
         job_listen_rotations=x_job_listen_rotations,
@@ -87,8 +87,8 @@ def test_moment_build_from_df_ReturnsObj_Scenario0_OneMomentLabel(
         amount=888,
     )
     gen_momentunit = x_momentunits.get(amy23_str)
-    assert gen_momentunit.fund_iota == x_fund_iota
-    assert gen_momentunit.respect_bit == x_respect_bit
+    assert gen_momentunit.fund_grain == x_fund_grain
+    assert gen_momentunit.respect_grain == x_respect_grain
     assert gen_momentunit.penny == x_penny
     assert gen_momentunit.moment_label == amy23_str
     assert gen_momentunit.moment_mstr_dir == x_moments_dir
@@ -115,8 +115,8 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     br00003_df = get_ex2_br00003_df()
     br00004_df = get_ex2_br00004_df()
     br00005_df = get_ex2_br00005_df()
-    x_fund_iota = 55
-    x_respect_bit = 66
+    x_fund_grain = 55
+    x_respect_grain = 66
     x_penny = 77
     x_moments_dir = create_path(idea_moments_dir(), "Fay")
     amy23_str = "amy23"
@@ -130,8 +130,8 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
         br00003_df,
         br00004_df,
         br00005_df,
-        x_fund_iota,
-        x_respect_bit,
+        x_fund_grain,
+        x_respect_grain,
         x_penny,
         x_moments_dir,
     )
@@ -141,9 +141,9 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     amy23_momentunit = momentunit_shop(
         moment_label=amy23_str,
         moment_mstr_dir=x_moments_dir,
-        fund_iota=x_fund_iota,
+        fund_grain=x_fund_grain,
         penny=x_penny,
-        respect_bit=x_respect_bit,
+        respect_grain=x_respect_grain,
         knot=slash_str,
         timeline=creg_timelineunit,
     )
@@ -151,17 +151,17 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     jeffy45_momentunit = momentunit_shop(
         moment_label="jeffy45",
         moment_mstr_dir=x_moments_dir,
-        fund_iota=x_fund_iota,
+        fund_grain=x_fund_grain,
         penny=x_penny,
-        respect_bit=x_respect_bit,
+        respect_grain=x_respect_grain,
         knot=",",
         timeline=five_timelineunit,
     )
     assert x_momentunits
     assert x_momentunits.get(amy23_str) != None
     creg_momentunit = x_momentunits.get(amy23_str)
-    assert creg_momentunit.fund_iota == x_fund_iota
-    assert creg_momentunit.respect_bit == x_respect_bit
+    assert creg_momentunit.fund_grain == x_fund_grain
+    assert creg_momentunit.respect_grain == x_respect_grain
     assert creg_momentunit.penny == x_penny
     assert creg_momentunit.moment_label == amy23_str
     assert creg_momentunit.moment_mstr_dir == x_moments_dir
@@ -171,8 +171,8 @@ def test_moment_build_from_df_ReturnsObj_Scenario1_TwoMomentLabels(
     # assert creg_momentunit == amy23_momentunit
 
     five_momentunit = x_momentunits.get("jeffy45")
-    assert five_momentunit.fund_iota == x_fund_iota
-    assert five_momentunit.respect_bit == x_respect_bit
+    assert five_momentunit.fund_grain == x_fund_grain
+    assert five_momentunit.respect_grain == x_respect_grain
     assert five_momentunit.penny == x_penny
     assert five_momentunit.moment_label == "jeffy45"
     assert five_momentunit.moment_mstr_dir == x_moments_dir
