@@ -12,7 +12,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
     LabelTerm,
     MomentLabel,
 )
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     create_keep_duty_path,
     create_keep_rope_path,
     create_treasury_db_path,

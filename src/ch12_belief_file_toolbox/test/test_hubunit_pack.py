@@ -10,13 +10,13 @@ from src.ch01_data_toolbox.file_toolbox import (
     set_dir,
 )
 from src.ch10_pack_logic.pack import init_pack_id, packunit_shop
-from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.ch12_hub_toolbox.hubunit import hubunit_shop
-from src.ch12_hub_toolbox.test._util.ch12_env import (
+from src.ch12_belief_file_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
+from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch12_hub_toolbox.test._util.ch12_examples import (
+from src.ch12_belief_file_toolbox.test._util.ch12_examples import (
     get_atom_example_planunit_knee,
     get_sue_packunit,
     sue_1beliefatoms_packunit,

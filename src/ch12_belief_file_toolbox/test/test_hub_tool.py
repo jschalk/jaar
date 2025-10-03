@@ -13,7 +13,7 @@ from src.ch11_bud_logic.test._util.ch11_examples import (
     example_casa_dirty_factunit as dirty_factunit,
     example_sky_blue_factunit as sky_blue_factunit,
 )
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     create_belief_event_dir_path,
     create_beliefevent_path,
     create_beliefpoint_path,
@@ -24,7 +24,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_gut_path,
     create_job_path,
 )
-from src.ch12_hub_toolbox.hub_tool import (
+from src.ch12_belief_file_toolbox.hub_tool import (
     beliefpoint_file_exists,
     bud_file_exists,
     cellunit_add_json_file,
@@ -49,11 +49,11 @@ from src.ch12_hub_toolbox.hub_tool import (
     save_gut_file,
     save_job_file,
 )
-from src.ch12_hub_toolbox.test._util.ch12_env import (
+from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir,
 )
-from src.ch12_hub_toolbox.test._util.ch12_examples import (
+from src.ch12_belief_file_toolbox.test._util.ch12_examples import (
     get_budunit_55_example,
     get_budunit_invalid_example,
 )

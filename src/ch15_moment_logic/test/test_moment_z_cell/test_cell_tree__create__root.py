@@ -1,7 +1,7 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import count_dirs_files, open_json, save_file
 from src.ch11_bud_logic.bud import DEFAULT_CELLDEPTH
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     create_cell_json_path,
     create_moment_beliefs_dir_path,
     create_moment_json_path,

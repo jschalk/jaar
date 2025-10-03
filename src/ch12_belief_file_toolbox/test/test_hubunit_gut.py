@@ -1,18 +1,20 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, delete_dir
 from src.ch10_pack_logic.pack import init_pack_id
-from src.ch12_hub_toolbox.hub_tool import (
+from src.ch12_belief_file_toolbox.hub_tool import (
     create_gut_path,
     gut_file_exists,
     open_gut_file,
     save_gut_file,
 )
-from src.ch12_hub_toolbox.hubunit import hubunit_shop
-from src.ch12_hub_toolbox.test._util.ch12_env import (
+from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
+from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )
-from src.ch12_hub_toolbox.test._util.ch12_examples import sue_2beliefatoms_packunit
+from src.ch12_belief_file_toolbox.test._util.ch12_examples import (
+    sue_2beliefatoms_packunit,
+)
 
 
 def test_HubUnit_default_gut_belief_ReturnsObj():

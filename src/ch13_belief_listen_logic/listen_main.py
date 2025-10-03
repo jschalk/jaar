@@ -5,9 +5,13 @@ from src.ch03_allot_toolbox.allot import allot_scale
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic.belief_main import BeliefUnit, VoiceUnit
 from src.ch11_bud_logic._ref.ch11_semantic_types import BeliefName, RopeTerm
-from src.ch12_hub_toolbox.hub_tool import open_gut_file, open_job_file, save_job_file
-from src.ch12_hub_toolbox.hubunit import HubUnit, get_perspective_belief
-from src.ch12_hub_toolbox.keep_tool import get_duty_belief
+from src.ch12_belief_file_toolbox.hub_tool import (
+    open_gut_file,
+    open_job_file,
+    save_job_file,
+)
+from src.ch12_belief_file_toolbox.hubunit import HubUnit, get_perspective_belief
+from src.ch12_belief_file_toolbox.keep_tool import get_duty_belief
 from src.ch13_belief_listen_logic.basis_beliefs import (
     create_empty_belief_from_belief,
     create_listen_basis,

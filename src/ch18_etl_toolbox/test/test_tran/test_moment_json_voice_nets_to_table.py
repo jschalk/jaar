@@ -2,7 +2,7 @@ from sqlite3 import connect as sqlite3_connect
 from src.ch01_data_toolbox.db_toolbox import db_table_exists, get_row_count
 from src.ch01_data_toolbox.file_toolbox import save_json
 from src.ch11_bud_logic.bud import tranbook_shop
-from src.ch12_hub_toolbox.ch12_path import create_moment_json_path
+from src.ch12_belief_file_toolbox.ch12_path import create_moment_json_path
 from src.ch15_moment_logic.moment_main import momentunit_shop
 from src.ch18_etl_toolbox.test._util.ch18_env import (
     env_dir_setup_cleanup,

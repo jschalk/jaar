@@ -1,5 +1,5 @@
 from src.ch07_belief_logic.belief_main import beliefunit_shop
-from src.ch12_hub_toolbox.hubunit import hubunit_shop
+from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
 from src.ch14_keep_logic.rivercycle import (
     RiverBook,
     create_riverbook,

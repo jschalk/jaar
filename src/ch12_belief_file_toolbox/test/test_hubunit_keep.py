@@ -3,14 +3,14 @@ from pytest import raises as pytest_raises
 from src.ch06_plan_logic.healer import healerunit_shop
 from src.ch06_plan_logic.plan import planunit_shop
 from src.ch07_belief_logic.belief_graphics import display_plantree
-from src.ch12_hub_toolbox.ch12_path import create_keep_duty_path
-from src.ch12_hub_toolbox.hub_tool import open_gut_file, save_gut_file
-from src.ch12_hub_toolbox.hubunit import (
+from src.ch12_belief_file_toolbox.ch12_path import create_keep_duty_path
+from src.ch12_belief_file_toolbox.hub_tool import open_gut_file, save_gut_file
+from src.ch12_belief_file_toolbox.hubunit import (
     get_keep_ropes,
     hubunit_shop,
     save_all_gut_dutys,
 )
-from src.ch12_hub_toolbox.test._util.ch12_env import (
+from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as env_dir,
 )

@@ -4,7 +4,7 @@ from src.ch07_belief_logic.belief_report import (
     get_belief_agenda_dataframe,
     get_belief_voiceunits_dataframe,
 )
-from src.ch12_hub_toolbox.hub_tool import open_gut_file, open_job_file
+from src.ch12_belief_file_toolbox.hub_tool import open_gut_file, open_job_file
 from src.ch15_moment_logic.moment_main import MomentUnit
 
 

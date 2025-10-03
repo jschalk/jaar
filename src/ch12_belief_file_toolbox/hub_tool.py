@@ -23,7 +23,7 @@ from src.ch11_bud_logic._ref.ch11_semantic_types import (
 )
 from src.ch11_bud_logic.bud import BudUnit, TimeLinePoint, get_budunit_from_dict
 from src.ch11_bud_logic.cell import CellUnit, cellunit_get_from_dict, cellunit_shop
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     CELLNODE_FILENAME,
     create_beliefevent_path,
     create_beliefpoint_path,

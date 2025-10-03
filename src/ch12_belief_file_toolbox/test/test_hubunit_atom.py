@@ -1,11 +1,11 @@
 from os.path import exists as os_path_exists
 from src.ch01_data_toolbox.file_toolbox import create_path, get_dir_file_strs
-from src.ch12_hub_toolbox.hubunit import hubunit_shop
-from src.ch12_hub_toolbox.test._util.ch12_env import (
+from src.ch12_belief_file_toolbox.hubunit import hubunit_shop
+from src.ch12_belief_file_toolbox.test._util.ch12_env import (
     env_dir_setup_cleanup,
     get_chapter_temp_dir as moment_mstr_dir,
 )
-from src.ch12_hub_toolbox.test._util.ch12_examples import (
+from src.ch12_belief_file_toolbox.test._util.ch12_examples import (
     get_atom_example_factunit_knee,
     get_atom_example_planunit_ball,
     get_atom_example_planunit_knee,

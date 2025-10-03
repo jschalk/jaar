@@ -3,7 +3,7 @@ from platform import system as platform_system
 from pytest import raises as pytest_raises
 from src.ch01_data_toolbox.file_toolbox import create_path, get_json_filename
 from src.ch02_rope_logic.rope import create_rope, create_rope_from_labels
-from src.ch12_hub_toolbox.ch12_path import (
+from src.ch12_belief_file_toolbox.ch12_path import (
     BELIEFEVENT_FILENAME,
     BELIEFPOINT_FILENAME,
     BUDUNIT_FILENAME,
@@ -40,7 +40,7 @@ from src.ch12_hub_toolbox.ch12_path import (
     create_treasury_db_path,
     treasury_filename,
 )
-from src.ch12_hub_toolbox.test._util.ch12_env import get_chapter_temp_dir
+from src.ch12_belief_file_toolbox.test._util.ch12_env import get_chapter_temp_dir
 from src.ref.ch12_keywords import Ch12Keywords as wx
 
 

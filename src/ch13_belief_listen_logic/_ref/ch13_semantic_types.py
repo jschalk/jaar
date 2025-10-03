@@ -1,4 +1,4 @@
-from src.ch12_hub_toolbox._ref.ch12_semantic_types import (
+from src.ch12_belief_file_toolbox._ref.ch12_semantic_types import (
     FirstLabel,
     FundGrain,
     FundNum,
