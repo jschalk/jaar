@@ -11,8 +11,8 @@ from src.ch03_finance_logic.allot import allot_scale
 from src.ch03_finance_logic.finance_config import FundNum, PennyNum
 from src.ch05_reason_logic.reason import (
     FactUnit,
-    factunits_get_from_dict,
     get_dict_from_factunits,
+    get_factunits_from_dict,
 )
 from src.ch07_belief_logic.belief_main import (
     BeliefUnit,
@@ -59,7 +59,7 @@ class CellUnit:
 
     def _load_existing_beliefevent(self, x_belief: BeliefUnit):
         self.reason_contexts = x_belief.get_reason_contexts()
-        self.beliefevent_facts = factunits_get_from_dict(get_facts_dict(x_belief))
+        self.beliefevent_facts = get_factunits_from_dict(get_facts_dict(x_belief))
         y_belief = copy_deepcopy(x_belief)
         clear_factunits_from_belief(y_belief)
         y_belief.cashout()
@@ -75,10 +75,10 @@ class CellUnit:
         return allot_scale(credit_ledger, self.quota, self.penny)
 
     def set_beliefevent_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
-        self.beliefevent_facts = factunits_get_from_dict(fact_dict)
+        self.beliefevent_facts = get_factunits_from_dict(fact_dict)
 
     def set_found_facts_from_dict(self, fact_dict: dict[RopeTerm, dict]):
-        self.found_facts = factunits_get_from_dict(fact_dict)
+        self.found_facts = get_factunits_from_dict(fact_dict)
 
     def set_boss_facts_from_other_facts(self):
         self.boss_facts = copy_deepcopy(self.beliefevent_facts)
@@ -221,9 +221,9 @@ def cellunit_get_from_dict(x_dict: dict) -> CellUnit:
     beliefevent_fact_dict = get_empty_dict_if_None(x_dict.get("beliefevent_facts"))
     found_fact_dict = get_empty_dict_if_None(x_dict.get("found_facts"))
     boss_fact_dict = get_empty_dict_if_None(x_dict.get("boss_facts"))
-    beliefevent_facts = factunits_get_from_dict(beliefevent_fact_dict)
-    found_facts = factunits_get_from_dict(found_fact_dict)
-    boss_facts = factunits_get_from_dict(boss_fact_dict)
+    beliefevent_facts = get_factunits_from_dict(beliefevent_fact_dict)
+    found_facts = get_factunits_from_dict(found_fact_dict)
+    boss_facts = get_factunits_from_dict(boss_fact_dict)
     return cellunit_shop(
         bud_belief_name=bud_belief_name,
         ancestors=ancestors,
@@ -247,7 +247,7 @@ def create_child_cellunits(parent_cell: CellUnit) -> list[CellUnit]:
         if child_mandate > 0 and parent_cell.celldepth > 0:
             child_ancestors = copy_deepcopy(parent_cell.ancestors)
             child_ancestors.append(child_belief_name)
-            boss_facts = factunits_get_from_dict(
+            boss_facts = get_factunits_from_dict(
                 get_facts_dict(parent_cell.beliefadjust)
             )
             child_cell = cellunit_shop(

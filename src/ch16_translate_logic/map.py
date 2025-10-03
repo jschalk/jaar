@@ -477,23 +477,23 @@ class MapCoreAttrConflictException(Exception):
     pass
 
 
-def _check_core_attributes(new_obj, old_obj):
+def _check_core_attrs_match(new_obj: MapCore, old_obj: MapCore):
     if (
         old_obj.face_name != new_obj.face_name
         or old_obj.otx_knot != new_obj.otx_knot
         or old_obj.inx_knot != new_obj.inx_knot
         or old_obj.unknown_str != new_obj.unknown_str
     ):
-        raise MapCoreAttrConflictException("Core attributes in conflict")
+        raise MapCoreAttrConflictException("Core attrs in conflict")
     if old_obj.event_int >= new_obj.event_int:
         raise MapCoreAttrConflictException("older mapunit is not older")
 
 
-def _inherit_mapunit(new, old):
-    _check_core_attributes(new, old)
-    for otx_key, old_inx in old.otx2inx.items():
-        if new.otx_exists(otx_key) is False:
-            new.set_otx2inx(otx_key, old_inx)
+def _inherit_mapunit(new: MapCore, old: MapCore):
+    _check_core_attrs_match(new, old)
+    for otx2inx_key, old_inx in old.otx2inx.items():
+        if new.otx_exists(otx2inx_key) is False:
+            new.set_otx2inx(otx2inx_key, old_inx)
     return new
 
 

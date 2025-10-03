@@ -72,7 +72,6 @@ class Ch06Keywords(str, Enum):
     knot = "knot"
     laborheir = "laborheir"
     laborunit = "laborunit"
-    magnitude = "magnitude"
     memberships = "memberships"
     morph = "morph"
     numor = "numor"

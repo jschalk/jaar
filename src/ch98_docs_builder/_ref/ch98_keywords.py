@@ -216,7 +216,6 @@ class Ch98Keywords(str, Enum):
     quota = "quota"
     range_evaluated = "range_evaluated"
     rational = "rational"
-    rationale = "rationale"
     readable = "readable"
     reason_active_requisite = "reason_active_requisite"
     reason_context = "reason_context"

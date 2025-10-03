@@ -212,7 +212,7 @@ class BeliefUnit:
                     exception_str = f"Cannot modify knot to '{new_knot}' because it exists an plan plan_label '{x_plan_rope}'"
                     raise NewKnotException(exception_str)
 
-            # modify all rope attributes in planunits
+            # modify all rope attrs in planunits
             self.knot = default_knot_if_None(new_knot)
             for x_plan in self._plan_dict.values():
                 x_plan.set_knot(self.knot)
@@ -1072,7 +1072,7 @@ reason_case:    {reason_case}"""
                 self.reason_contexts.add(x_reason_context)
 
     def _raise_gogo_calc_stop_calc_exception(self, plan_rope: RopeTerm):
-        exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and stop_calc attributes set twice"
+        exception_str = f"Error has occurred, Plan '{plan_rope}' is having gogo_calc and stop_calc set twice"
         raise gogo_calc_stop_calc_Exception(exception_str)
 
     def _distribute_math_attrs(self, math_plan: PlanUnit):

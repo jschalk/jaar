@@ -38,7 +38,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario1_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
@@ -53,7 +53,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario2_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
@@ -68,7 +68,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario3_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
@@ -83,7 +83,7 @@ def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario4_RaiseErrorWhen
         inherit_translateunit(old_translateunit, new_translateunit)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_TranslateUnit_inherit_translateunit_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():

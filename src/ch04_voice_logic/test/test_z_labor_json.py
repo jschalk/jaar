@@ -1,7 +1,7 @@
 from src.ch04_voice_logic._ref.ch04_keywords import Ch04Keywords as wx
 from src.ch04_voice_logic._ref.ch04_semantic_types import GroupTitle
 from src.ch04_voice_logic.labor import (
-    laborunit_get_from_dict,
+    get_laborunit_from_dict,
     laborunit_shop,
     partyunit_get_from_dict,
     partyunit_shop,
@@ -85,7 +85,7 @@ def test_LaborUnit_to_dict_ReturnsDictWithSingle_partyunit():
     assert obj_dict == example_dict
 
 
-def test_laborunit_get_from_dict_ReturnsObj_Scenario0():
+def test_get_laborunit_from_dict_ReturnsObj_Scenario0():
     # ESTABLISH
     xio_str = "Xio"
     run_str = ";runners"
@@ -102,7 +102,7 @@ def test_laborunit_get_from_dict_ReturnsObj_Scenario0():
     }
 
     # WHEN
-    gen_laborunit = laborunit_get_from_dict(src_laborunit_dict)
+    gen_laborunit = get_laborunit_from_dict(src_laborunit_dict)
 
     # THEN
     assert gen_laborunit == expected_laborunit

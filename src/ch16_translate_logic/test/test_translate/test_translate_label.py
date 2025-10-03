@@ -501,7 +501,7 @@ def test_inherit_labelmap_ReturnsObj_Scenario1_RaiseErrorWhenDifferent_otx_knot(
         inherit_labelmap(new_labelmap, old_labelmap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_labelmap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot():
@@ -516,7 +516,7 @@ def test_inherit_labelmap_ReturnsObj_Scenario2_RaiseErrorWhenDifferent_inx_knot(
         inherit_labelmap(new_labelmap, old_labelmap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_labelmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown_str():
@@ -531,7 +531,7 @@ def test_inherit_labelmap_ReturnsObj_Scenario3_RaiseErrorWhenDifferent_x_unknown
         inherit_labelmap(new_labelmap, old_labelmap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_labelmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_name():
@@ -546,7 +546,7 @@ def test_inherit_labelmap_ReturnsObj_Scenario4_RaiseErrorWhenDifferent_x_face_na
         inherit_labelmap(new_labelmap, old_labelmap)
 
     # THEN
-    assert str(excinfo.value) == "Core attributes in conflict"
+    assert str(excinfo.value) == "Core attrs in conflict"
 
 
 def test_inherit_labelmap_ReturnsObj_Scenario5_RaiseErrorWhenEventIntsOutOfOrder():

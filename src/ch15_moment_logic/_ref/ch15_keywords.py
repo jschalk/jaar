@@ -38,7 +38,6 @@ class Ch15Keywords(str, Enum):
     ancestors = "ancestors"
     atom = "atom"
     atom_hx = "atom_hx"
-    attributes = "attributes"
     awardee_title = "awardee_title"
     awardheirs = "awardheirs"
     awardlines = "awardlines"

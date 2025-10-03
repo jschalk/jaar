@@ -159,6 +159,9 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
     keywords_dict = get_keywords_src_config()
     keywords_by_chapter = get_keywords_by_chapter(keywords_dict)
     all_keywords_set = set(keywords_dict.keys())
+    keywords_in_ch_count = {}
+    for keyword in keywords_dict.keys():
+        keywords_in_ch_count[keyword] = {}
     cumlative_ch_keywords_dict = get_cumlative_ch_keywords_dict(keywords_by_chapter)
 
     # WHEN / THEN
@@ -195,10 +198,32 @@ def test_Chapters_KeywordsAppearWhereTheyShould():
             if "Keywords" in file_str and not is_doc_builder_file:
                 assert ch_class_name in file_str, enum_x
 
-            if file_path.find(f"\\ch{chapter_num:02}_keywords.py") > -1:
-                print(f"{file_path=}")
+            is_ref_keywords_file = f"\\ch{chapter_num:02}_keywords.py" in file_path
+            if is_ref_keywords_file:
+                # print(f"{file_path=}")
                 assert file_str.count("keywords import") == 0, "No imports"
                 assert file_str.count("from enum import Enum") == 1, "import Enum"
+
+            for keyword in allowed_chapter_keywords:
+                if keyword in file_str:
+                    add_ch_keyword_count(keywords_in_ch_count, keyword, chapter_prefix)
+
+    for keyword, chapters_dict in keywords_in_ch_count.items():
+        # for chapter_prefix in sorted(chapters_dict.keys()):
+        #     chapter_count = chapters_dict.get(chapter_prefix)
+        #     # print(f"{keyword=} {chapter_prefix} {chapter_count=}")
+        min_chapter_prefix = min(chapters_dict.keys())
+        min_chapter_count = chapters_dict.get(min_chapter_prefix)
+        if min_chapter_count < 4:
+            print(f"{keyword=} {min_chapter_prefix} {min_chapter_count=}")
+        assert min_chapter_count != 2
+
+
+def add_ch_keyword_count(keywords_ch_counts: dict, keyword: str, chapter_prefix: str):
+    keyword_ch_counts = keywords_ch_counts.get(keyword)
+    if keyword_ch_counts.get(chapter_prefix) is None:
+        keyword_ch_counts[chapter_prefix] = 0
+    keyword_ch_counts[chapter_prefix] += 1
 
 
 def test_Chapters_FirstLevelFilesDoNotImportKeywords():

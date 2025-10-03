@@ -82,7 +82,7 @@ def test_create_legible_list_ReturnsObj_planunit_UPDATE():
     legible_list = create_legible_list(x_beliefdelta, sue_belief)
 
     # THEN
-    x_str = f"Plan '{clean_rope}' set these attributes: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.star={star_value}.pledge={pledge_value}."
+    x_str = f"Plan '{clean_rope}' set these attrs: addin={addin_value}.begin={begin_value}.close={close_value}.denom={denom_value}.numor={numor_value}.problem_bool={problem_bool_value}.morph={morph_value}.star={star_value}.pledge={pledge_value}."
     print(f"{x_str=}")
     assert legible_list[0] == x_str
 

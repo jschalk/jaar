@@ -7,7 +7,7 @@ from src.ch05_reason_logic.reason import (
     CaseUnit,
     FactUnit,
     ReasonUnit,
-    factunits_get_from_dict,
+    get_factunits_from_dict,
 )
 from src.ch06_plan_logic.plan import PlanUnit
 from src.ch07_belief_logic._ref.ch07_semantic_types import (
@@ -282,7 +282,7 @@ def get_belief_root_facts_dict(
 
 
 def set_factunits_to_belief(x_belief: BeliefUnit, x_facts_dict: dict[RopeTerm, dict]):
-    factunits_dict = factunits_get_from_dict(x_facts_dict)
+    factunits_dict = get_factunits_from_dict(x_facts_dict)
     missing_fact_reason_contexts = set(
         x_belief.get_missing_fact_reason_contexts().keys()
     )

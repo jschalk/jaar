@@ -4,9 +4,9 @@ from src.ch05_reason_logic.reason import (
     ReasonCore,
     caseunit_shop,
     factheir_shop,
+    get_reasonunits_from_dict,
     reasoncore_shop,
     reasonheir_shop,
-    reasons_get_from_dict,
     reasonunit_shop,
 )
 
@@ -316,7 +316,7 @@ def test_ReasonUnit_to_dict_ReturnsDictWithTwoCasesReasons():
     assert wk_reason_dict == static_wk_reason_dict
 
 
-def test_reasons_get_from_dict_ReturnsObj():
+def test_get_reasonunits_from_dict_ReturnsObj():
     # ESTABLISH
     wk_str = "wk"
     wk_rope = create_rope("Amy23", wk_str)
@@ -336,7 +336,7 @@ def test_reasons_get_from_dict_ReturnsObj():
     assert x_wk_reasonunits_dict == static_wk_reason_dict
 
     # WHEN
-    reasonunits_dict = reasons_get_from_dict(x_wk_reasonunits_dict)
+    reasonunits_dict = get_reasonunits_from_dict(x_wk_reasonunits_dict)
 
     # THEN
     assert len(reasonunits_dict) == 1

@@ -43,7 +43,6 @@ class Ch04Keywords(str, Enum):
     knot = "knot"
     laborheir = "laborheir"
     laborunit = "laborunit"
-    magnitude = "magnitude"
     memberships = "memberships"
     parent_rope = "parent_rope"
     parent_solo = "parent_solo"

@@ -9,7 +9,7 @@ from src.ch15_moment_logic.moment_main import MomentUnit
 
 
 def get_moment_belieftimelinepoint(momentunit: MomentUnit) -> BeliefTimelinePoint:
-    """Returns BeliefTimelinePoint from MomentUnit attributes."""
+    """Returns BeliefTimelinePoint from MomentUnit attrs."""
     momentunit.set_offi_time_max(0)
     # create empty beliefunit
     x_beliefunit = beliefunit_shop(

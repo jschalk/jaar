@@ -115,10 +115,10 @@ class AwardUnit(AwardCore):
 
 def awardunits_get_from_json(awardunits_json: str) -> dict[GroupTitle, AwardUnit]:
     awardunits_dict = get_dict_from_json(awardunits_json)
-    return awardunits_get_from_dict(awardunits_dict)
+    return get_awardunits_from_dict(awardunits_dict)
 
 
-def awardunits_get_from_dict(x_dict: dict) -> dict[GroupTitle, AwardUnit]:
+def get_awardunits_from_dict(x_dict: dict) -> dict[GroupTitle, AwardUnit]:
     awardunits = {}
     for awardunits_dict in x_dict.values():
         x_group = awardunit_shop(

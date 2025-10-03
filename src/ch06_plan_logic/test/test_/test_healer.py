@@ -1,6 +1,6 @@
 from src.ch06_plan_logic.healer import (
     HealerUnit,
-    healerunit_get_from_dict,
+    get_healerunit_from_dict,
     healerunit_shop,
 )
 
@@ -127,12 +127,12 @@ def test_HealerUnit_any_healer_name_exists_ReturnsObj():
     assert x_healerunit.any_healer_name_exists() is False
 
 
-def test_healerunit_get_from_dict_ReturnsObj():
+def test_get_healerunit_from_dict_ReturnsObj():
     # ESTABLISH
     empty_dict = {}
 
     # WHEN / THEN
-    assert healerunit_get_from_dict(empty_dict) == healerunit_shop()
+    assert get_healerunit_from_dict(empty_dict) == healerunit_shop()
 
     # WHEN / THEN
     sue_str = "Sue"
@@ -142,4 +142,4 @@ def test_healerunit_get_from_dict_ReturnsObj():
     static_healerunit.set_healer_name(x_healer_name=yao_str)
 
     sue_dict = {"healerunit_healer_names": [sue_str, yao_str]}
-    assert healerunit_get_from_dict(sue_dict) == static_healerunit
+    assert get_healerunit_from_dict(sue_dict) == static_healerunit

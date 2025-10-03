@@ -28,13 +28,13 @@ from src.ch04_voice_logic.group import (
     GroupUnit,
     awardheir_shop,
     awardline_shop,
-    awardunits_get_from_dict,
+    get_awardunits_from_dict,
 )
 from src.ch04_voice_logic.labor import (
     LaborHeir,
     LaborUnit,
+    get_laborunit_from_dict,
     laborheir_shop,
-    laborunit_get_from_dict,
     laborunit_shop,
 )
 from src.ch05_reason_logic.reason import (
@@ -47,10 +47,10 @@ from src.ch05_reason_logic.reason import (
     RopeTerm,
     factheir_shop,
     factunit_shop,
-    factunits_get_from_dict,
     get_dict_from_factunits,
+    get_factunits_from_dict,
+    get_reasonunits_from_dict,
     reasonheir_shop,
-    reasons_get_from_dict,
     reasonunit_shop,
 )
 from src.ch06_plan_logic._ref.ch06_semantic_types import (
@@ -62,7 +62,7 @@ from src.ch06_plan_logic._ref.ch06_semantic_types import (
 )
 from src.ch06_plan_logic.healer import (
     HealerUnit,
-    healerunit_get_from_dict,
+    get_healerunit_from_dict,
     healerunit_shop,
 )
 from src.ch06_plan_logic.range_toolbox import RangeUnit, get_morphed_rangeunit
@@ -1098,30 +1098,30 @@ def planunit_shop(
 def get_obj_from_plan_dict(x_dict: dict[str, dict], dict_key: str) -> any:
     if dict_key == "reasonunits":
         return (
-            reasons_get_from_dict(x_dict[dict_key])
+            get_reasonunits_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else None
         )
     elif dict_key == "laborunit":
         return (
-            laborunit_get_from_dict(x_dict[dict_key])
+            get_laborunit_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else laborunit_shop()
         )
     elif dict_key == "healerunit":
         return (
-            healerunit_get_from_dict(x_dict[dict_key])
+            get_healerunit_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
             else healerunit_shop()
         )
     elif dict_key == "factunits":
         facts_dict = get_empty_dict_if_None(x_dict.get(dict_key))
-        return factunits_get_from_dict(facts_dict)
+        return get_factunits_from_dict(facts_dict)
     elif dict_key == "awardunits":
         return (
-            awardunits_get_from_dict(x_dict[dict_key])
+            get_awardunits_from_dict(x_dict[dict_key])
             if x_dict.get(dict_key) is not None
-            else awardunits_get_from_dict({})
+            else get_awardunits_from_dict({})
         )
     elif dict_key in {"kids"}:
         return x_dict[dict_key] if x_dict.get(dict_key) is not None else {}
